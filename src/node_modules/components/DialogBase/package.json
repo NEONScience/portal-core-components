@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "name": "dialog-base",
+  "main": "./DialogBase.jsx",
+  "module": "./DialogBase.js"
+}

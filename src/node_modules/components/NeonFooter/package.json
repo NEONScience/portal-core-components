@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "name": "neon-footer",
+  "main": "./NeonFooter.jsx",
+  "module": "./NeonFooter.js"
+}

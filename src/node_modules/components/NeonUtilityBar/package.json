@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "name": "neon-utility-bar",
+  "main": "./NeonUtilityBar.jsx",
+  "module": "./NeonUtilityBar.js"
+}

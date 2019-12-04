@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "name": "neon-header",
+  "main": "./NeonHeader.jsx",
+  "module": "./NeonHeader.js"
+}

@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "name": "download-data-context",
+  "main": "./DownloadDataContext.jsx",
+  "module": "./DownloadDataContext.js"
+}

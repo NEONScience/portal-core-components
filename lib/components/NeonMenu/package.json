@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "name": "neon-menu",
+  "main": "./NeonMenu.jsx",
+  "module": "./NeonMenu.js"
+}
+  

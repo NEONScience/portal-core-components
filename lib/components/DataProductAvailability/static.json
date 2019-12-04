@@ -1,0 +1,710 @@
+{
+  "sites": {
+    "ABBY": {
+      "name": "Abby Road Site, RELOCATABLE",
+      "description": "Abby Road",
+      "type": "RELOCATABLE",
+      "stateCode": "WA",
+      "domainCode": "D16"
+    },
+    "ARIK": {
+      "name": "Arikaree River Site, CORE",
+      "description": "Arikaree River",
+      "type": "CORE",
+      "stateCode": "CO",
+      "domainCode": "D10"
+    },
+    "BARC": {
+      "name": "Barco Lake Site, CORE",
+      "description": "Barco Lake",
+      "type": "CORE",
+      "stateCode": "FL",
+      "domainCode": "D03"
+    },
+    "BARR": {
+      "name": "Barrow Environmental Observatory Site, RELOCATABLE",
+      "description": "Barrow Environmental Observatory",
+      "type": "RELOCATABLE",
+      "stateCode": "AK",
+      "domainCode": "D18"
+    },
+    "BART": {
+      "name": "Bartlett Experimental Forest Site, RELOCATABLE",
+      "description": "Bartlett Experimental Forest",
+      "type": "RELOCATABLE",
+      "stateCode": "NH",
+      "domainCode": "D01"
+    },
+    "BIGC": {
+      "name": "Upper Big Creek Site, RELOCATABLE",
+      "description": "Upper Big Creek",
+      "type": "RELOCATABLE",
+      "stateCode": "CA",
+      "domainCode": "D17"
+    },
+    "BLAN": {
+      "name": "Blandy Experimental Farm Site, RELOCATABLE",
+      "description": "Blandy Experimental Farm",
+      "type": "RELOCATABLE",
+      "stateCode": "VA",
+      "domainCode": "D02"
+    },
+    "BLDE": {
+      "name": "Blacktail Deer Creek Site, CORE",
+      "description": "Blacktail Deer Creek",
+      "type": "CORE",
+      "stateCode": "WY",
+      "domainCode": "D12"
+    },
+    "BLUE": {
+      "name": "Blue River Site, RELOCATABLE",
+      "description": "Blue River",
+      "type": "RELOCATABLE",
+      "stateCode": "OK",
+      "domainCode": "D11"
+    },
+    "BLWA": {
+      "name": "Black Warrior River Site, RELOCATABLE",
+      "description": "Black Warrior River",
+      "type": "RELOCATABLE",
+      "stateCode": "AL",
+      "domainCode": "D08"
+    },
+    "BONA": {
+      "name": "Caribou-Poker Creeks Research Watershed Site, CORE",
+      "description": "Caribou-Poker Creeks Research Watershed",
+      "type": "CORE",
+      "stateCode": "AK",
+      "domainCode": "D19"
+    },
+    "CARI": {
+      "name": "Caribou Creek at Caribou-Poker Creeks Research Watershed Site, CORE",
+      "description": "Caribou Creek at Caribou-Poker Creeks Research Watershed",
+      "type": "CORE",
+      "stateCode": "AK",
+      "domainCode": "D19"
+    },
+    "CLBJ": {
+      "name": "LBJ National Grassland Site, CORE",
+      "description": "LBJ National Grassland",
+      "type": "CORE",
+      "stateCode": "TX",
+      "domainCode": "D11"
+    },
+    "COMO": {
+      "name": "Como Creek Site, CORE",
+      "description": "Como Creek",
+      "type": "CORE",
+      "stateCode": "CO",
+      "domainCode": "D13"
+    },
+    "CPER": {
+      "name": "Central Plains Experimental Range Site, CORE",
+      "description": "Central Plains Experimental Range",
+      "type": "CORE",
+      "stateCode": "CO",
+      "domainCode": "D10"
+    },
+    "CRAM": {
+      "name": "Crampton Lake Site, CORE",
+      "description": "Crampton Lake",
+      "type": "CORE",
+      "stateCode": "WI",
+      "domainCode": "D05"
+    },
+    "CUPE": {
+      "name": "Rio Cupeyes Site, CORE",
+      "description": "Rio Cupeyes",
+      "type": "CORE",
+      "stateCode": "PR",
+      "domainCode": "D04"
+    },
+    "DCFS": {
+      "name": "Dakota Coteau Field School Site, RELOCATABLE",
+      "description": "Dakota Coteau Field School",
+      "type": "RELOCATABLE",
+      "stateCode": "ND",
+      "domainCode": "D09"
+    },
+    "DEJU": {
+      "name": "Delta Junction Site, RELOCATABLE",
+      "description": "Delta Junction",
+      "type": "RELOCATABLE",
+      "stateCode": "AK",
+      "domainCode": "D19"
+    },
+    "DELA": {
+      "name": "Dead Lake Site, RELOCATABLE",
+      "description": "Dead Lake",
+      "type": "RELOCATABLE",
+      "stateCode": "AL",
+      "domainCode": "D08"
+    },
+    "DSNY": {
+      "name": "Disney Wilderness Preserve Site, RELOCATABLE",
+      "description": "Disney Wilderness Preserve",
+      "type": "RELOCATABLE",
+      "stateCode": "FL",
+      "domainCode": "D03"
+    },
+    "FLNT": {
+      "name": "Flint River Site, RELOCATABLE",
+      "description": "Flint River",
+      "type": "RELOCATABLE",
+      "stateCode": "GA",
+      "domainCode": "D03"
+    },
+    "GRSM": {
+      "name": "Great Smoky Mountains National Park Site, RELOCATABLE",
+      "description": "Great Smoky Mountains National Park",
+      "type": "RELOCATABLE",
+      "stateCode": "TN",
+      "domainCode": "D07"
+    },
+    "GUAN": {
+      "name": "Guanica Forest Site, CORE",
+      "description": "Guanica Forest",
+      "type": "CORE",
+      "stateCode": "PR",
+      "domainCode": "D04"
+    },
+    "GUIL": {
+      "name": "Rio Guilarte Site, RELOCATABLE",
+      "description": "Rio Guilarte",
+      "type": "RELOCATABLE",
+      "stateCode": "PR",
+      "domainCode": "D04"
+    },
+    "HARV": {
+      "name": "Harvard Forest Site, CORE",
+      "description": "Harvard Forest",
+      "type": "CORE",
+      "stateCode": "MA",
+      "domainCode": "D01"
+    },
+    "HEAL": {
+      "name": "Healy Site, RELOCATABLE",
+      "description": "Healy",
+      "type": "RELOCATABLE",
+      "stateCode": "AK",
+      "domainCode": "D19"
+    },
+    "HOPB": {
+      "name": "Hop Brook Site, CORE",
+      "description": "Hop Brook",
+      "type": "CORE",
+      "stateCode": "MA",
+      "domainCode": "D01"
+    },
+    "JERC": {
+      "name": "Jones Ecological Research Center Site, RELOCATABLE",
+      "description": "Jones Ecological Research Center",
+      "type": "RELOCATABLE",
+      "stateCode": "GA",
+      "domainCode": "D03"
+    },
+    "JORN": {
+      "name": "Jornada LTER Site, RELOCATABLE",
+      "description": "Jornada LTER",
+      "type": "RELOCATABLE",
+      "stateCode": "NM",
+      "domainCode": "D14"
+    },
+    "KING": {
+      "name": "Kings Creek Site, CORE",
+      "description": "Kings Creek",
+      "type": "CORE",
+      "stateCode": "KS",
+      "domainCode": "D06"
+    },
+    "KONA": {
+      "name": "Konza Prairie Biological Station - Relocatable, RELOCATABLE",
+      "description": "Konza Prairie Biological Station - Relocatable",
+      "type": "RELOCATABLE",
+      "stateCode": "KS",
+      "domainCode": "D06"
+    },
+    "KONZ": {
+      "name": "Konza Prairie Biological Station Site, CORE",
+      "description": "Konza Prairie Biological Station",
+      "type": "CORE",
+      "stateCode": "KS",
+      "domainCode": "D06"
+    },
+    "LAJA": {
+      "name": "Lajas Experimental Station Site, RELOCATABLE",
+      "description": "Lajas Experimental Station",
+      "type": "RELOCATABLE",
+      "stateCode": "PR",
+      "domainCode": "D04"
+    },
+    "LECO": {
+      "name": "LeConte Creek Site, RELOCATABLE",
+      "description": "LeConte Creek",
+      "type": "RELOCATABLE",
+      "stateCode": "TN",
+      "domainCode": "D07"
+    },
+    "LENO": {
+      "name": "Lenoir Landing Site, RELOCATABLE",
+      "description": "Lenoir Landing",
+      "type": "RELOCATABLE",
+      "stateCode": "AL",
+      "domainCode": "D08"
+    },
+    "LEWI": {
+      "name": "Lewis Run Site, RELOCATABLE",
+      "description": "Lewis Run",
+      "type": "RELOCATABLE",
+      "stateCode": "VA",
+      "domainCode": "D02"
+    },
+    "LIRO": {
+      "name": "Little Rock Lake Site, RELOCATABLE",
+      "description": "Little Rock Lake",
+      "type": "RELOCATABLE",
+      "stateCode": "WI",
+      "domainCode": "D05"
+    },
+    "MART": {
+      "name": "Martha Creek Site, CORE",
+      "description": "Martha Creek",
+      "type": "CORE",
+      "stateCode": "WA",
+      "domainCode": "D16"
+    },
+    "MAYF": {
+      "name": "Mayfield Creek Site, CORE",
+      "description": "Mayfield Creek",
+      "type": "CORE",
+      "stateCode": "AL",
+      "domainCode": "D08"
+    },
+    "MCDI": {
+      "name": "McDiffett Creek Site, RELOCATABLE",
+      "description": "McDiffett Creek",
+      "type": "RELOCATABLE",
+      "stateCode": "KS",
+      "domainCode": "D06"
+    },
+    "MCRA": {
+      "name": "McRae Creek Site, RELOCATABLE",
+      "description": "McRae Creek",
+      "type": "RELOCATABLE",
+      "stateCode": "OR",
+      "domainCode": "D16"
+    },
+    "MLBS": {
+      "name": "Mountain Lake Biological Station Site, RELOCATABLE",
+      "description": "Mountain Lake Biological Station",
+      "type": "RELOCATABLE",
+      "stateCode": "VA",
+      "domainCode": "D07"
+    },
+    "MOAB": {
+      "name": "Moab Site, RELOCATABLE",
+      "description": "Moab",
+      "type": "RELOCATABLE",
+      "stateCode": "UT",
+      "domainCode": "D13"
+    },
+    "NIWO": {
+      "name": "Niwot Ridge Mountain Research Station Site, CORE",
+      "description": "Niwot Ridge Mountain Research Station",
+      "type": "CORE",
+      "stateCode": "CO",
+      "domainCode": "D13"
+    },
+    "NOGP": {
+      "name": "Northern Great Plains Research Laboratory Site, RELOCATABLE",
+      "description": "Northern Great Plains Research Laboratory",
+      "type": "RELOCATABLE",
+      "stateCode": "ND",
+      "domainCode": "D09"
+    },
+    "OAES": {
+      "name": "Klemme Range Research Station Site, RELOCATABLE",
+      "description": "Klemme Range Research Station",
+      "type": "RELOCATABLE",
+      "stateCode": "OK",
+      "domainCode": "D11"
+    },
+    "OKSR": {
+      "name": "Oksrukuyik Creek Site, CORE",
+      "description": "Oksrukuyik Creek",
+      "type": "CORE",
+      "stateCode": "AK",
+      "domainCode": "D18"
+    },
+    "ONAQ": {
+      "name": "Onaqui Site, CORE",
+      "description": "Onaqui",
+      "type": "CORE",
+      "stateCode": "UT",
+      "domainCode": "D15"
+    },
+    "ORNL": {
+      "name": "Oak Ridge Site, CORE",
+      "description": "Oak Ridge",
+      "type": "CORE",
+      "stateCode": "TN",
+      "domainCode": "D07"
+    },
+    "OSBS": {
+      "name": "Ordway-Swisher Biological Station Site, CORE",
+      "description": "Ordway-Swisher Biological Station",
+      "type": "CORE",
+      "stateCode": "FL",
+      "domainCode": "D03"
+    },
+    "POSE": {
+      "name": "Posey Creek Site, CORE",
+      "description": "Posey Creek",
+      "type": "CORE",
+      "stateCode": "VA",
+      "domainCode": "D02"
+    },
+    "PRIN": {
+      "name": "Pringle Creek Site, CORE",
+      "description": "Pringle Creek",
+      "type": "CORE",
+      "stateCode": "TX",
+      "domainCode": "D11"
+    },
+    "PRLA": {
+      "name": "Prairie Lake at Dakota Coteau Field School Site, RELOCATABLE",
+      "description": "Prairie Lake at Dakota Coteau Field School",
+      "type": "RELOCATABLE",
+      "stateCode": "ND",
+      "domainCode": "D09"
+    },
+    "PRPO": {
+      "name": "Prairie Pothole Site, CORE",
+      "description": "Prairie Pothole",
+      "type": "CORE",
+      "stateCode": "ND",
+      "domainCode": "D09"
+    },
+    "PUUM": {
+      "name": "Pu-u Maka-ala Natural Area Reserve Site, CORE",
+      "description": "Pu-u Maka-ala Natural Area Reserve",
+      "type": "CORE",
+      "stateCode": "HI",
+      "domainCode": "D20"
+    },
+    "REDB": {
+      "name": "Red Butte Creek Site, CORE",
+      "description": "Red Butte Creek",
+      "type": "CORE",
+      "stateCode": "UT",
+      "domainCode": "D15"
+    },
+    "RMNP": {
+      "name": "Rocky Mountain National Park Site, RELOCATABLE",
+      "description": "Rocky Mountain National Park",
+      "type": "RELOCATABLE",
+      "stateCode": "CO",
+      "domainCode": "D10"
+    },
+    "SCBI": {
+      "name": "Smithsonian Conservation Biology Institute Site, CORE",
+      "description": "Smithsonian Conservation Biology Institute",
+      "type": "CORE",
+      "stateCode": "VA",
+      "domainCode": "D02"
+    },
+    "SERC": {
+      "name": "Smithsonian Environmental Research Center Site, RELOCATABLE",
+      "description": "Smithsonian Environmental Research Center",
+      "type": "RELOCATABLE",
+      "stateCode": "MD",
+      "domainCode": "D02"
+    },
+    "SJER": {
+      "name": "San Joaquin Site, CORE",
+      "description": "San Joaquin",
+      "type": "CORE",
+      "stateCode": "CA",
+      "domainCode": "D17"
+    },
+    "SOAP": {
+      "name": "Soaproot Saddle Site, RELOCATABLE",
+      "description": "Soaproot Saddle",
+      "type": "RELOCATABLE",
+      "stateCode": "CA",
+      "domainCode": "D17"
+    },
+    "SRER": {
+      "name": "Santa Rita Experimental Range Site, CORE",
+      "description": "Santa Rita Experimental Range",
+      "type": "CORE",
+      "stateCode": "AZ",
+      "domainCode": "D14"
+    },
+    "STEI": {
+      "name": "Steigerwaldt Land Services Site, RELOCATABLE",
+      "description": "Steigerwaldt Land Services",
+      "type": "RELOCATABLE",
+      "stateCode": "WI",
+      "domainCode": "D05"
+    },
+    "STER": {
+      "name": "Sterling Site, RELOCATABLE",
+      "description": "Sterling",
+      "type": "RELOCATABLE",
+      "stateCode": "CO",
+      "domainCode": "D10"
+    },
+    "SUGG": {
+      "name": "Suggs Lake Site, CORE",
+      "description": "Suggs Lake",
+      "type": "CORE",
+      "stateCode": "FL",
+      "domainCode": "D03"
+    },
+    "SYCA": {
+      "name": "Sycamore Creek Site, CORE",
+      "description": "Sycamore Creek",
+      "type": "CORE",
+      "stateCode": "AZ",
+      "domainCode": "D14"
+    },
+    "TALL": {
+      "name": "Talladega National Forest Site, CORE",
+      "description": "Talladega National Forest",
+      "type": "CORE",
+      "stateCode": "AL",
+      "domainCode": "D08"
+    },
+    "TEAK": {
+      "name": "Lower Teakettle Site, RELOCATABLE",
+      "description": "Lower Teakettle",
+      "type": "RELOCATABLE",
+      "stateCode": "CA",
+      "domainCode": "D17"
+    },
+    "TECR": {
+      "name": "Teakettle 2 Creek, CORE",
+      "description": "Teakettle 2 Creek",
+      "type": "CORE",
+      "stateCode": "CA",
+      "domainCode": "D17"
+    },
+    "TOMB": {
+      "name": "Tombigbee River Site, RELOCATABLE",
+      "description": "Tombigbee River",
+      "type": "RELOCATABLE",
+      "stateCode": "AL",
+      "domainCode": "D08"
+    },
+    "TOOK": {
+      "name": "Toolik Lake Site, RELOCATABLE",
+      "description": "Toolik Lake",
+      "type": "RELOCATABLE",
+      "stateCode": "AK",
+      "domainCode": "D18"
+    },
+    "TOOL": {
+      "name": "Toolik Site, CORE",
+      "description": "Toolik",
+      "type": "CORE",
+      "stateCode": "AK",
+      "domainCode": "D18"
+    },
+    "TREE": {
+      "name": "Treehaven Site, RELOCATABLE",
+      "description": "Treehaven",
+      "type": "RELOCATABLE",
+      "stateCode": "WI",
+      "domainCode": "D05"
+    },
+    "UKFS": {
+      "name": "The University of Kansas Field Station Site, RELOCATABLE",
+      "description": "The University of Kansas Field Station",
+      "type": "RELOCATABLE",
+      "stateCode": "KS",
+      "domainCode": "D06"
+    },
+    "UNDE": {
+      "name": "UNDERC Site, CORE",
+      "description": "UNDERC",
+      "type": "CORE",
+      "stateCode": "MI",
+      "domainCode": "D05"
+    },
+    "WALK": {
+      "name": "Walker Branch Site, CORE",
+      "description": "Walker Branch",
+      "type": "CORE",
+      "stateCode": "TN",
+      "domainCode": "D07"
+    },
+    "WLOU": {
+      "name": "West St Louis Creek Site, RELOCATABLE",
+      "description": "West St Louis Creek",
+      "type": "RELOCATABLE",
+      "stateCode": "CO",
+      "domainCode": "D13"
+    },
+    "WOOD": {
+      "name": "Woodworth Site, CORE",
+      "description": "Woodworth",
+      "type": "CORE",
+      "stateCode": "ND",
+      "domainCode": "D09"
+    },
+    "WREF": {
+      "name": "Wind River Experimental Forest Site, CORE",
+      "description": "Wind River Experimental Forest",
+      "type": "CORE",
+      "stateCode": "WA",
+      "domainCode": "D16"
+    },
+    "YELL": {
+      "name": "Yellowstone National Park Site, CORE",
+      "description": "Yellowstone National Park",
+      "type": "CORE",
+      "stateCode": "WY",
+      "domainCode": "D12"
+    }
+  },
+  "domains": {
+    "D16": {
+      "name": "Pacific Northwest"
+    },
+    "D10": {
+      "name": "Central Plains"
+    },
+    "D03": {
+      "name": "Southeast"
+    },
+    "D18": {
+      "name": "Tundra"
+    },
+    "D01": {
+      "name": "Northeast"
+    },
+    "D17": {
+      "name": "Pacific Southwest"
+    },
+    "D02": {
+      "name": "Mid-Atlantic"
+    },
+    "D12": {
+      "name": "Northern Rockies"
+    },
+    "D11": {
+      "name": "Southern Plains"
+    },
+    "D08": {
+      "name": "Ozarks Complex"
+    },
+    "D19": {
+      "name": "Taiga"
+    },
+    "D13": {
+      "name": "Southern Rockies and Colorado Plateau"
+    },
+    "D05": {
+      "name": "Great Lakes"
+    },
+    "D04": {
+      "name": "Atlantic Neotropical"
+    },
+    "D09": {
+      "name": "Northern Plains"
+    },
+    "D07": {
+      "name": "Appalachians and Cumberland Plateau"
+    },
+    "D14": {
+      "name": "Desert Southwest"
+    },
+    "D06": {
+      "name": "Prairie Peninsula"
+    },
+    "D15": {
+      "name": "Great Basin"
+    },
+    "D20": {
+      "name": "Pacific Tropical"
+    }
+  },
+  "states": {
+    "WA": {
+      "name": "Washington"
+    },
+    "CO": {
+      "name": "Colorado"
+    },
+    "FL": {
+      "name": "Florida"
+    },
+    "AK": {
+      "name": "Alaska"
+    },
+    "NH": {
+      "name": "New Hampshire"
+    },
+    "CA": {
+      "name": "California"
+    },
+    "VA": {
+      "name": "Virginia"
+    },
+    "WY": {
+      "name": "Wyoming"
+    },
+    "OK": {
+      "name": "Oklahoma"
+    },
+    "AL": {
+      "name": "Alabama"
+    },
+    "TX": {
+      "name": "Texas"
+    },
+    "WI": {
+      "name": "Wisconsin"
+    },
+    "PR": {
+      "name": "Puerto Rico"
+    },
+    "ND": {
+      "name": "North Dakota"
+    },
+    "GA": {
+      "name": "Georgia"
+    },
+    "TN": {
+      "name": "Tennessee"
+    },
+    "MA": {
+      "name": "Massachusetts"
+    },
+    "NM": {
+      "name": "New Mexico"
+    },
+    "KS": {
+      "name": "Kansas"
+    },
+    "OR": {
+      "name": "Oregon"
+    },
+    "UT": {
+      "name": "Utah"
+    },
+    "HI": {
+      "name": "Hawaii"
+    },
+    "MD": {
+      "name": "Maryland"
+    },
+    "AZ": {
+      "name": "Arizona"
+    },
+    "MI": {
+      "name": "Michigan"
+    }
+  }
+}

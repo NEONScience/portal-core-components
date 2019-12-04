@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "name": "states-json",
+  "main": "./states.json",
+  "module": "./states.json"
+}

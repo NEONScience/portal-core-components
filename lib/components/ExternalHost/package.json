@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "name": "external-host",
+  "main": "./ExternalHost.jsx",
+  "module": "./ExternalHost.js"
+}

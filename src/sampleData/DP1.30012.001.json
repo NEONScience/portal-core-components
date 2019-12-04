@@ -1,0 +1,58 @@
+{
+  "data": {
+    "productCodeLong": "NEON.DOM.SITE.DP1.30012.001",
+    "productCode": "DP1.30012.001",
+    "productCodePresentation": "NEON.DP1.30012",
+    "productName": "Field spectral data",
+    "productDescription": "Reflectance of collected sample(s) using leaf clip and hand-held field Spectrometer; opportunistic product, provided when collected.",
+    "productStatus": "ACTIVE",
+    "productCategory": "Level 1 Data Product",
+    "productHasExpanded": true,
+    "productScienceTeamAbbr": "AOP",
+    "productScienceTeam": "Airborne Observation Platform (AOP)",
+    "productPublicationFormatType": "OS-structured Data Product Type",
+    "productAbstract": "NEON AOP Field Spectral Data are collected using a field-spectrometer and leaf clip to observe leaf-level reflectance spectra within two-weeks of AOP overpass. Some field spectral observations will be collected from samples that are also used to develop the foliar chemistry data product. The Field Spectral Data are collected and distributed as an opportunistic activity and as such are not collected for every flight or site. Typical collection rates will be one or two sites annually.\n \n\nLatency:\n\nField spectral data will be available 90 days after the final collection day at a site. Field spectra legacy data (those collected in 2013 through 2016) currently has no availability, and will be completely available by April of 2020.",
+    "productDesignDescription": "NEON AOP Field Spectral Data are collected using a field-spectrometer and leaf clip to observe leaf-level reflectance spectra within two-weeks of AOP overpass. Some field spectral observations will be collected from samples that are also used to develop the foliar chemistry data product. The Field Spectral Data are collected and distributed as an opportunistic activity and as such are not collected for every flight or site. Typical collection rates will be one or two sites annually.",
+    "productStudyDescription": "All NEON terrestrial sites are candidates for sampling; sampling is opportunistic.",
+    "productBasicDescription": "The basic package includes leaf-level metadata describing the samples observed.",
+    "productExpandedDescription": "The expanded package includes the basic package as well as field spectral measurements observed with the field spectrometer.",
+    "productSensor": "ASD field spectrometer",
+    "productRemarks": "Full documentation (ATBD and DPUG) for this data product is currently underway; documentation should be available on the data portal in spring 2020.",
+    "themes": [
+      "Biogeochemistry",
+      "Organisms, Populations, and Communities",
+      "Land Use, Land Cover, and Land Processes"
+    ],
+    "changeLogs": null,
+    "specs": [
+      {
+        "specId": 2797,
+        "specNumber": "NEON.DOC.001292vA"
+      }
+    ],
+    "keywords": [
+      "reflectance",
+      "airborne",
+      "aerial",
+      "remote sensing",
+      "spectrometer",
+      "hyperspectral",
+      "field spectra",
+      "calibration",
+      "validation",
+      "ground truth",
+      "spectral"
+    ],
+    "siteCodes": [
+      {
+        "siteCode": "WREF",
+        "availableMonths": [
+          "2019-07"
+        ],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP1.30012.001/WREF/2019.07"
+        ]
+      }
+    ]
+  }
+}

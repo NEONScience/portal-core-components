@@ -1,0 +1,5 @@
+{
+  "private": true,
+  "name": "popup-base",
+  "main": "./PopupBase.js"
+}

@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "name": "neon-environment",
+  "main": "./NeonEnvironment.jsx",
+  "module": "./NeonEnvironment.js"
+}

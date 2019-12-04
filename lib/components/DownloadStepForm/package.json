@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "name": "download-step-form",
+  "main": "./DownloadStepForm.jsx",
+  "module": "./DownloadStepForm.js"
+}

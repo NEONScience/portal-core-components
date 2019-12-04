@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "name": "data-theme-icon",
+  "main": "./DataThemeIcon.jsx",
+  "module": "./DataThemeIcon.js"
+}

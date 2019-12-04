@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "name": "site-chip",
+  "main": "./SiteChip.jsx",
+  "module": "./SiteChip.js"
+}

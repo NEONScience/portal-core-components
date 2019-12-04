@@ -1,0 +1,5 @@
+{
+  "private": true,
+  "name": "neon-auth-root",
+  "main": "./NeonAuthRoot.js"
+}

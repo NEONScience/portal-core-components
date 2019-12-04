@@ -1,0 +1,62 @@
+{
+  "D01": {
+    "name": "Northeast"
+  },
+  "D02": {
+    "name": "Mid-Atlantic"
+  },
+  "D03": {
+    "name": "Southeast"
+  },
+  "D04": {
+    "name": "Atlantic Neotropical"
+  },
+  "D05": {
+    "name": "Great Lakes"
+  },
+  "D06": {
+    "name": "Prairie Peninsula"
+  },
+  "D07": {
+    "name": "Appalachians and Cumberland Plateau"
+  },
+  "D08": {
+    "name": "Ozarks Complex"
+  },
+  "D09": {
+    "name": "Northern Plains"
+  },
+  "D10": {
+    "name": "Central Plains"
+  },
+  "D11": {
+    "name": "Southern Plains"
+  },
+  "D12": {
+    "name": "Northern Rockies"
+  },
+  "D13": {
+    "name": "Southern Rockies and Colorado Plateau"
+  },
+  "D14": {
+    "name": "Desert Southwest"
+  },
+  "D15": {
+    "name": "Great Basin"
+  },
+  "D16": {
+    "name": "Pacific Northwest"
+  },
+  "D17": {
+    "name": "Pacific Southwest"
+  },
+  "D18": {
+    "name": "Tundra"
+  },
+  "D19": {
+    "name": "Taiga"
+  },
+  "D20": {
+    "name": "Pacific Tropical"
+  }
+}
