@@ -158,7 +158,7 @@ export default function App() {
   );
 
   return (
-    <NeonPage title="Portal Shared Components">
+    <NeonPage title="Portal Core Components">
       <Hidden smDown>
         <Grid container spacing={2}>
           <Grid item sm={9}>{renderCurrentComponent()}</Grid>

@@ -1,9 +1,9 @@
 {
-  "name": "portal-shared",
-  "version": "0.1.6",
+  "name": "portal-core-components",
+  "version": "1.0.0",
   "main": "./lib/index.js",
   "private": true,
-  "homepage": "http://localhost:3010/apps/shared",
+  "homepage": "http://localhost:3010/core-components",
   "dependencies": {
     "@date-io/moment": "^1.3.9",
     "@material-ui/core": "^4.2.0",
