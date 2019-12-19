@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "name": "bundles-json",
+  "main": "./bundles.json",
+  "module": "./bundles.json"
+}
