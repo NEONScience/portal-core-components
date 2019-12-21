@@ -1,5 +1,7 @@
 /* eslint react/jsx-one-expression-per-line: 0 */
 
+import { map, catchError } from 'rxjs/operators';
+
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -12,6 +14,8 @@ import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 // import ExampleBlock from '../../../components/ExampleBlock';
 
+import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
+
 import Theme from './Theme';
 
 const useStyles = makeStyles(theme => ({
@@ -21,6 +25,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function StyleGuide(props) {
+  NeonGraphQL.getAllDataProducts().pipe(
+    map((response) => { console.log('SUCCESS', response); }),
+    catchError((error) => { console.log('ERROR', error); }),
+  ).subscribe();
+
   const classes = useStyles(Theme);
   const { onClickHash } = props;
   const styleGuideUrl = 'https://raw.githubusercontent.com/NEONScience/portal-core-components/master/reference/NSF-NEON-BRAND.GUIDELINES.pdf';
