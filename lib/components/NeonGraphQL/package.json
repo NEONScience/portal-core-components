@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "name": "neon-graphql",
+  "main": "./NeonGraphQL.js",
+  "module": "./NeonGraphQL.js"
+}
