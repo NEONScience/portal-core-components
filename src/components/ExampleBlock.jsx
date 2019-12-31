@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import Container from '@material-ui/core/Container';
 
-import Theme from '../node_modules/components/Theme/Theme';
+import Theme from '../lib_components/components/Theme/Theme';
 
 const useStyles = makeStyles(theme => ({
   root: {

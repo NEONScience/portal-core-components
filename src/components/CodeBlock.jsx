@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Highlight from 'react-highlight.js';
 import '../../node_modules/highlight.js/styles/zenburn.css';
 
-import Theme from '../node_modules/components/Theme/Theme';
+import Theme from '../lib_components/components/Theme/Theme';
 
 const useStyles = makeStyles(theme => ({
   root: {

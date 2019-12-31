@@ -12,19 +12,19 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
-import NeonPage from './node_modules/components/NeonPage/NeonPage';
-import Theme from './node_modules/components/Theme/Theme';
+import NeonPage from './lib_components/components/NeonPage/NeonPage';
+import Theme from './lib_components/components/Theme/Theme';
 
-import AopDataViewerStyleGuide from './node_modules/components/AopDataViewer/StyleGuide';
-import DataProductAvailabilityStyleGuide from './node_modules/components/DataProductAvailability/StyleGuide';
-import DataThemeIconStyleGuide from './node_modules/components/DataThemeIcon/StyleGuide';
-import DownloadDataButtonStyleGuide from './node_modules/components/DownloadDataButton/StyleGuide';
-import DownloadDataContextStyleGuide from './node_modules/components/DownloadDataContext/StyleGuide';
-import FullWidthVisualizationStyleGuide from './node_modules/components/FullWidthVisualization/StyleGuide';
-import NeonEnvironmentStyleGuide from './node_modules/components/NeonEnvironment/StyleGuide';
-import NeonPageStyleGuide from './node_modules/components/NeonPage/StyleGuide';
-import SiteChipStyleGuide from './node_modules/components/SiteChip/StyleGuide';
-import ThemeStyleGuide from './node_modules/components/Theme/StyleGuide';
+import AopDataViewerStyleGuide from './lib_components/components/AopDataViewer/StyleGuide';
+import DataProductAvailabilityStyleGuide from './lib_components/components/DataProductAvailability/StyleGuide';
+import DataThemeIconStyleGuide from './lib_components/components/DataThemeIcon/StyleGuide';
+import DownloadDataButtonStyleGuide from './lib_components/components/DownloadDataButton/StyleGuide';
+import DownloadDataContextStyleGuide from './lib_components/components/DownloadDataContext/StyleGuide';
+import FullWidthVisualizationStyleGuide from './lib_components/components/FullWidthVisualization/StyleGuide';
+import NeonEnvironmentStyleGuide from './lib_components/components/NeonEnvironment/StyleGuide';
+import NeonPageStyleGuide from './lib_components/components/NeonPage/StyleGuide';
+import SiteChipStyleGuide from './lib_components/components/SiteChip/StyleGuide';
+import ThemeStyleGuide from './lib_components/components/Theme/StyleGuide';
 
 const components = [
   {

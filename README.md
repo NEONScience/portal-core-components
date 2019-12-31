@@ -12,22 +12,22 @@ You don't need a copy of this project to use it!
 
 In the target project directory, install this package with:
 
-    npm install git+https://github.com/NEONScience/portal-shared#<branch>
+    npm install git+https://github.com/NEONScience/portal-core-components#<branch>
 
 So, develop would be:
 
-    npm install git+https://github.com/NEONScience/portal-shared#develop
+    npm install git+https://github.com/NEONScience/portal-core-components#develop
 
 Once installed, components should be imported in code with:
 
-    import { <component name> } from "portal-shared"
+    import { <component name> } from "portal-core-components"
 
 And used like any other component in the containing render() method.  See https://github.battelleecology.org/Portal/portal-page-template for an example.
 
 
 ## Adding a New Component
 
-1. Create a new directory in `src/node_modules/components`
+1. Create a new directory in `src/lib_components/components`
 2. Build your component in this directory (e.g. `Component.js`, `Component.jsx`, etc.)
 3. Add any other necessary assets (including additional components) in this directory as needed
 4. Create a `package.json` file in this directory containing the following:
@@ -44,14 +44,14 @@ And used like any other component in the containing render() method.  See https:
     * If the entry point is the _same pre- and post-compile_ then use only `main` to point to the common entry point
     * Use kebab-case for `name`
     * Use CamelCase for files
-5. Add the new component to `src/node_modules/index.js`
+5. Add the new component to `src/lib_components/index.js`
 6. Run `npm run lib` to have the new component picked up and exported with the library
 
 ### NOTE: Verify new dependencies!
 
 If you have added or modified third-party dependencies then it is important to verify they work from a fresh install before committing changes upstream.
 
-Run `rm -rf node_modules && npm install` and re-run the app to validate a fresh install. This mimics how other apps importing `portal-shared` will see your changes.
+Run `rm -rf node_modules && npm install` and re-run the app to validate a fresh install. This mimics how other apps importing `portal-core-components` will see your changes.
 
 ## Modifying Existing Components
 
@@ -108,13 +108,13 @@ This package was configured with advice from [this article](https://medium.com/@
 
 In summary, it began as a create-react-app app that was ejected. A `.babelrc` was added with minor configuration and a script to invoke babel to run a library build was added.
 
-Components are then created in `src/node_modules/components`, each with its own `package.json` to "publish itself" within the library. Babel generates a `lib` directory with each component and a single `index.js` entry point that exports each individual component's entry point.
+Components are then created in `src/lib_components/components`, each with its own `package.json` to "publish itself" within the library. Babel generates a `lib` directory with each component and a single `index.js` entry point that exports each individual component's entry point.
 
 
 ## Scripts Overview
 
 * **`npm run start`**
-    Compile a dev (non-optimized) build and start the portal-shared app with it running on `http://localhost:3010/`
+    Compile a dev (non-optimized) build and start the portal-core-components app with it running on `http://localhost:3010/`
 
 * **`npm run build`**
     Compile a production (optimized) build
@@ -131,4 +131,4 @@ Components are then created in `src/node_modules/components`, each with its own 
     NOTE: This script always exits 0, even when there are lint errors, to prevent a confusing NPM error from appearing at the end of the output
 
 * **`npm run lib`**
-    Generate a library build (what other apps importing components from portal-shared as a library will use)
+    Generate a library build (what other apps importing components from portal-core-components as a library will use)

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import NeonAuthRoot from './node_modules/components/NeonAuthRoot/NeonAuthRoot';
+import NeonAuthRoot from './lib_components/components/NeonAuthRoot/NeonAuthRoot';
 import App from './App';
 
 const Root = () => (

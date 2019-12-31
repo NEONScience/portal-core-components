@@ -54,7 +54,7 @@
     "test": "react-app-rewired test - env=jsdom",
     "lint": "(eslint src/ --ext .js,.jsx || true) && exit 0",
     "lint:fix": "(eslint --fix src/ --ext .js,.jsx || true) && exit 0",
-    "lib": "babel src/node_modules --out-dir lib --copy-files --ignore \"src/**/StyleGuide.jsx\" && sh ./applyLibExports.sh"
+    "lib": "babel src/lib_components --out-dir lib --copy-files --ignore \"src/**/StyleGuide.jsx\" && sh ./applyLibExports.sh"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -75,7 +75,7 @@
       "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
     },
     "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+      "[/\\\\]lib_components[/\\\\].+\\.(js|jsx)$"
     ],
     "moduleNameMapper": {
       "^react-native$": "react-native-web"
