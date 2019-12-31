@@ -1,7 +1,6 @@
 import { of } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 import { map, catchError, takeUntil } from 'rxjs/operators';
-import { exists } from './typeUtil';
 
 /**
  * Convenience method for utiliizing RxJS ajax.getJSON
@@ -14,14 +13,14 @@ import { exists } from './typeUtil';
 export const getJson = (url, callback, errorCallback, cancellationSubject$) => {
   const rxObs$ = ajax.getJSON(url).pipe(
     map((response) => {
-      if (exists(callback)) {
+      if (typeof callback === 'function') {
         return of(callback(response));
       }
       return of(response);
     }),
     catchError((error) => {
       console.error(error); // eslint-disable-line no-console
-      if (exists(errorCallback)) {
+      if (typeof errorCallback === 'function') {
         return of(errorCallback(error));
       }
       return of(error);

@@ -2,7 +2,6 @@ import { Subject } from 'rxjs';
 import { getJson } from '../util/rxUtil';
 import { getHomeRoute, getFullRoute } from '../routing/routes';
 import NeonEnvironment from '../components/NeonEnvironment/NeonEnvironment';
-import { exists } from '../util/typeUtil';
 
 const REDIRECT_URI = 'redirectUri';
 
@@ -53,12 +52,12 @@ export default class Authenticate {
    * @return True if the user is authenticated
    */
   checkAuthResponse(response) {
-    return exists(response)
-      && exists(response.data)
-      && exists(response.data.user)
-      && exists(response.data.user.user_id)
+    return response
+      && response.data
+      && response.data.user
+      && typeof response.data.user.user_id === 'string'
       && (response.data.user.user_id.length > 0)
-      && exists(response.data.user.email)
+      && typeof response.data.user.email === 'string'
       && (response.data.user.email.length > 0);
   }
 

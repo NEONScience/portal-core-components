@@ -26,3 +26,5 @@ export const cleanPath = (history) => {
  * Gets the history
  */
 export const getHistory = () => history;
+
+export default getHistory;

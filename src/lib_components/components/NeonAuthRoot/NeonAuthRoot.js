@@ -6,7 +6,6 @@ import {
 import Authenticate from '../../auth/authenticate';
 import { ROUTES } from '../../routing/routes';
 import { getHistory, cleanPath } from '../../routing/history';
-import { exists } from '../../util/typeUtil';
 
 import NeonAuthLogin from '../NeonAuthLogin/NeonAuthLogin';
 import NeonAuthLogout from '../NeonAuthLogout/NeonAuthLogout';
@@ -17,7 +16,7 @@ class NeonAuthRoot extends Component {
     this.auth = new Authenticate();
 
     // Prettify the path
-    if (!exists(props.cleanPath) || props.cleanPath) {
+    if (props.cleanPath !== false) {
       cleanPath(getHistory());
     }
   }

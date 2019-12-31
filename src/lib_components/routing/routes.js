@@ -30,3 +30,5 @@ export const buildRouteFromHost = route => `${NeonEnvironment.getHost()}${getFul
  * Builds the account route from the current host definition
  */
 export const buildAccountRoute = () => `${NeonEnvironment.getHost()}${ROUTES.ACCOUNT}`;
+
+export default ROUTES;
