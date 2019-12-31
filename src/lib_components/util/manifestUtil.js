@@ -1,5 +1,3 @@
-import moment from 'moment';
-
 import NeonEnvironment from '../components/NeonEnvironment/NeonEnvironment';
 
 const buildSiteCodesParams = (sites = [], camelCase = false) => {
@@ -40,13 +38,13 @@ export const buildS3FilesRequestUrl = (productCode, site, yearMonth) => {
 };
 
 export const downloadManifest = (manifest = {}) => {
-  const form = document.createElement("form");
-  form.style.display = "none";
+  const form = document.createElement('form');
+  form.style.display = 'none';
   form.action = `${NeonEnvironment.getFullApiPath('download')}/dpDownload`;
-  form.method = "POST";
+  form.method = 'POST';
 
-  const input = document.createElement("input");
-  input.name = "manifest";
+  const input = document.createElement('input');
+  input.name = 'manifest';
   input.value = JSON.stringify(manifest);
   form.appendChild(input);
 
@@ -55,7 +53,7 @@ export const downloadManifest = (manifest = {}) => {
   document.body.removeChild(form);
 
   return submit;
-}
+};
 
 export const downloadAopManifest = (productData, s3Files, documentation = 'include') => {
   const { productCode, productName } = productData;
@@ -82,7 +80,7 @@ export const downloadAopManifest = (productData, s3Files, documentation = 'inclu
   };
 
   return downloadManifest(manifest);
-}
+};
 
 export const AOP_THRESHOLD_POST_BODY_SIZE = 2097152; // 2MB
 export const AOP_THRESHOLD_HARD_DRIVE_WARN = 42949672960; // 40GB

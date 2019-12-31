@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types, react/jsx-filename-extension, react/destructuring-assignment */
 import React, { Component } from 'react';
 import { getHomeRoute } from '../../routing/routes';
 import { getHistory } from '../../routing/history';

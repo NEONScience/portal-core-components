@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types, react/jsx-filename-extension, react/destructuring-assignment, react/prefer-stateless-function, max-len */
 import React, { Component } from 'react';
 import PopupBase from '../PopupBase/PopupBase';
 

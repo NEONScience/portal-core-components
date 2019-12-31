@@ -7,7 +7,9 @@
  *
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/startsWith#Polyfill
  */
-export const startsWithPolyfill = (baseString, searchString, position) => baseString.substr(position || 0, searchString.length) === searchString;
+export const startsWithPolyfill = (baseString, searchString, position) => (
+  baseString.substr(position || 0, searchString.length) === searchString
+);
 
 /**
  * Determines if the base string ends with the search string
@@ -18,8 +20,9 @@ export const startsWithPolyfill = (baseString, searchString, position) => baseSt
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/endsWith#Polyfill
  */
 export const endsWithPolyfill = (baseString, searchString, thisLen) => {
+  let len = thisLen;
   if (thisLen === undefined || thisLen > this.length) {
-    thisLen = baseString.length;
+    len = baseString.length;
   }
-  return baseString.substring(thisLen - searchString.length, thisLen) === searchString;
+  return baseString.substring(len - searchString.length, len) === searchString;
 };

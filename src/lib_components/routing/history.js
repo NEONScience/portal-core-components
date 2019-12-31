@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import { createBrowserHistory } from 'history';
 import { ROUTES } from './routes';
 

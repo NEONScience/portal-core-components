@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import { Subject } from 'rxjs';
 import { getJson } from '../util/rxUtil';
 import { getHomeRoute, getFullRoute } from '../routing/routes';

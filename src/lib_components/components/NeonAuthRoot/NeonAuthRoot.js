@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types, react/jsx-filename-extension, react/destructuring-assignment */
 import React, { Component } from 'react';
 import {
   Router, Route, Switch, Redirect,
@@ -40,11 +41,10 @@ class NeonAuthRoot extends Component {
           />
           <Route
             render={(props) => {
-              if (!exists(this.props.disableRedirect) || !this.props.disableRedirect) {
-                return <Redirect to={ROUTES.HOME} />;
-              } else {
+              if (this.props.disableRedirect) {
                 return this.props.app.apply(this.props.app, [props]);
               }
+              return <Redirect to={ROUTES.HOME} />;
             }}
           />
         </Switch>
