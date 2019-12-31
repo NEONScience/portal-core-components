@@ -20,7 +20,7 @@ export const getJson = (url, callback, errorCallback, cancellationSubject$) => {
       return of(response);
     }),
     catchError((error) => {
-      console.error(error);
+      console.error(error); // eslint-disable-line no-console
       if (exists(errorCallback)) {
         return of(errorCallback(error));
       }
@@ -36,3 +36,5 @@ export const getJson = (url, callback, errorCallback, cancellationSubject$) => {
     complete => complete,
   );
 };
+
+export default getJson;
