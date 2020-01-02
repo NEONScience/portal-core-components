@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
 import Paper from '@material-ui/core/Paper';
@@ -11,10 +12,14 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+
+import HomeIcon from '@material-ui/icons/Home';
 
 import NeonPage from './lib_components/components/NeonPage/NeonPage';
 import Theme from './lib_components/components/Theme/Theme';
 
+import Home from './components/Home';
 import AopDataViewerStyleGuide from './lib_components/components/AopDataViewer/StyleGuide';
 import DataProductAvailabilityStyleGuide from './lib_components/components/DataProductAvailability/StyleGuide';
 import DataThemeIconStyleGuide from './lib_components/components/DataThemeIcon/StyleGuide';
@@ -79,10 +84,7 @@ const components = [
   },
 ];
 
-const getHashIndex = hash => Math.max(
-  components.findIndex(component => component.hash === hash),
-  0,
-);
+const getHashIndex = hash => components.findIndex(component => component.hash === hash);
 
 const intialSelectedIndex = getHashIndex(document.location.hash);
 
@@ -97,7 +99,9 @@ export default function App() {
   };
 
   useEffect(() => {
-    if (document.location.hash !== components[selectedIndex].hash) {
+    if (selectedIndex === -1) {
+      document.location.hash = '';
+    } else if (document.location.hash !== components[selectedIndex].hash) {
       document.location.hash = components[selectedIndex].hash;
     }
   });
@@ -107,30 +111,56 @@ export default function App() {
     setCollapsibleNavExpanded(newExpanded);
   };
 
-  const CurrentComponent = components[selectedIndex].component;
+  const CurrentComponent = selectedIndex === -1 ? null : components[selectedIndex].component;
 
   const renderCurrentComponent = () => (
-    <Paper style={{ padding: Theme.spacing(3) }}>
-      <Typography variant="h4" component="h2" gutterBottom>
-        {components[selectedIndex].name}
-      </Typography>
-      <CurrentComponent onClickHash={onClickHash} />
-    </Paper>
+    selectedIndex === -1
+      ? (
+        <Paper style={{ padding: Theme.spacing(3) }}>
+          <Typography variant="h4" component="h2" gutterBottom>
+            Welcome
+          </Typography>
+          <Home onClickHash={onClickHash} />
+        </Paper>
+      ) : (
+        <Paper style={{ padding: Theme.spacing(3) }}>
+          <Typography variant="h4" component="h2" gutterBottom>
+            {components[selectedIndex].name}
+          </Typography>
+          <CurrentComponent onClickHash={onClickHash} />
+        </Paper>
+      )
   );
 
   const renderNavList = () => (
-    <List component="nav" style={{ padding: '0' }}>
-      {components.map((component, index) => (
+    <React.Fragment>
+      <List component="nav" style={{ padding: '0' }}>
         <ListItem
           button
-          key={component.name}
-          selected={selectedIndex === index}
-          onClick={event => handleListItemClick(event, index)}
+          key="home"
+          selected={selectedIndex === -1}
+          onClick={event => handleListItemClick(event, -1)}
         >
-          <ListItemText primary={component.name} />
+          <ListItemIcon style={{ minWidth: '36px' }}>
+            <HomeIcon />
+          </ListItemIcon>
+          <ListItemText primary="Home" />
         </ListItem>
-      ))}
-    </List>
+      </List>
+      <Divider />
+      <List component="nav" style={{ padding: '0' }}>
+        {components.map((component, index) => (
+          <ListItem
+            button
+            key={component.name}
+            selected={selectedIndex === index}
+            onClick={event => handleListItemClick(event, index)}
+          >
+            <ListItemText primary={component.name} />
+          </ListItem>
+        ))}
+      </List>
+    </React.Fragment>
   );
 
   const renderStandardNav = () => (
