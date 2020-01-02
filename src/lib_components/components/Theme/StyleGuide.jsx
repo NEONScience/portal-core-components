@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
 export default function StyleGuide(props) {
   const classes = useStyles(Theme);
   const { onClickHash } = props;
-  const styleGuideUrl = 'https://github.battelleecology.org/Portal/portal-core-components/files/2/NSF-NEON-BRAND.GUIDELINES.pdf';
+  const styleGuideUrl = 'https://raw.githubusercontent.com/NEONScience/portal-core-components/master/reference/NSF-NEON-BRAND.GUIDELINES.pdf';
 
   return (
     <React.Fragment>

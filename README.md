@@ -1,8 +1,6 @@
-# Portal Shared
+# Portal Core Components
 
-This is a library of shareable components for the Neon Portal.
-
-It is a continuing work in progress with a lot of refinement available.  If you have modifications that will make it a better build, go for it!
+This is a library of react components to be used on pages for the NEON Data Portal.
 
 
 ## Using Components
@@ -22,7 +20,7 @@ Once installed, components should be imported in code with:
 
     import { <component name> } from "portal-core-components"
 
-And used like any other component in the containing render() method.  See https://github.battelleecology.org/Portal/portal-page-template for an example.
+And used like any other component in the containing render() method.
 
 
 ## Adding a New Component

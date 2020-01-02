@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { debounce } from 'lodash';
+
 import { makeStyles } from '@material-ui/core/styles';
 
 import Box from '@material-ui/core/Box';
@@ -362,7 +364,7 @@ export default function DownloadStepForm(props) {
         {
           title: 'Name',
           field: 'name',
-          filtering: false,
+          defaultFilter: filters.name || '',
           hidden: !visibleColumns.includes('name'),
         },
         {
@@ -385,6 +387,9 @@ export default function DownloadStepForm(props) {
         'AOP Data to Hard Drive Request',
         'NEON',
       );
+      const debouncedFilterDispatch = debounce((filter, value) => {
+        dispatch({ type: 'setS3FilesFilterValue', filter, value });
+      }, 200);
       const noFiltersApplied = Object.keys(filters).every(col => !filters[col].length);
       /* eslint-disable react/jsx-one-expression-per-line */
       const postSizeError = (estimatedPostSize >= AOP_THRESHOLD_POST_BODY_SIZE) ? (
@@ -534,6 +539,10 @@ export default function DownloadStepForm(props) {
               filterRowProps.onFilterChanged(columnId, value);
               const filter = columns[columnId].field;
               const current = filters[filter];
+              if (filter === 'name' && value !== current) {
+                debouncedFilterDispatch(filter, value);
+                return;
+              }
               if (
                 current
                 && (value.length !== current.length || value.some(v => !current.includes(v)))

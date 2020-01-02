@@ -494,9 +494,12 @@ const getManifestURLConfig = (state) => {
 };
 
 const getS3FilesFilteredFileCount = state => state.s3Files.validValues.filter(row => (
-  Object.keys(state.s3Files.filters).every(col => (
-    !state.s3Files.filters[col].length || state.s3Files.filters[col].includes(row[col])
-  ))
+  Object.keys(state.s3Files.filters).every((col) => {
+    if (col === 'name') {
+      return (!state.s3Files.filters.name.length || row.name.includes(state.s3Files.filters.name));
+    }
+    return (!state.s3Files.filters[col].length || state.s3Files.filters[col].includes(row[col]));
+  })
 )).length;
 
 // Generate a new full state object with a new value and isValid boolean for the
@@ -544,9 +547,12 @@ const getAndValidateNewS3FilesState = (previousState, action, broadcast = false)
 
     case 'setS3FilesValueSelectFiltered':
       newState.s3Files.value = newState.s3Files.validValues
-        .filter(row => Object.keys(newState.s3Files.filters).every(col => (
-          !newState.s3Files.filters[col].length || newState.s3Files.filters[col].includes(row[col])
-        )))
+        .filter(row => Object.keys(newState.s3Files.filters).every((col) => {
+          if (col === 'name') {
+            return (!newState.s3Files.filters.name.length || row.name.includes(newState.s3Files.filters.name)); // eslint-disable-line max-len
+          }
+          return (!newState.s3Files.filters[col].length || newState.s3Files.filters[col].includes(row[col])); // eslint-disable-line max-len
+        }))
         .map(file => file.id);
       newState.s3Files.validValues.forEach((file, idx) => {
         newState.s3Files.validValues[idx].tableData.checked = newState.s3Files.value.includes(file.id); // eslint-disable-line max-len
@@ -849,7 +855,7 @@ const reducer = (state, action) => {
     case 'clearS3FilesFilterValues':
       newState = { ...state };
       Object.keys(newState.s3Files.filters).forEach((filter) => {
-        newState.s3Files.filters[filter] = [];
+        newState.s3Files.filters[filter] = (filter === 'name' ? '' : []);
       });
       newState.s3Files.filteredFileCount = 0;
       return newState;
