@@ -26,7 +26,8 @@ export default function StyleGuide() {
     <React.Fragment>
 
       <DocBlock>
-        A Map
+        A general purpose component for displaying an interactive world map with
+        markers for NEON field sites.
       </DocBlock>
       <CodeBlock>
         {`
@@ -37,21 +38,39 @@ import { SiteMap } from 'portal-core-components';
       <Typography variant="h5" component="h3" gutterBottom>Usage</Typography>
 
       <DocBlock>
-        ...
+        A Site Map can be rendered with no props at all for ease of use. When no props
+        are present, a Site Map will assume the following:
       </DocBlock>
+      <ul>
+        <li>Load site data from the API</li>
+        <li>Use a 4:3 (letterbox) aspect ratio at 100% of the width of the containing element</li>
+        <li>Start at a zoom level of 3 centered on North America</li>
+        <li>Include a button to Explore Data Products in site popups</li>
+        <li>Have all site popup links open in a new window</li>
+      </ul>
 
-      <Divider className={classes.divider} />
-      <Typography variant="h6" component="h4" gutterBottom>...</Typography>
-
-      <DocBlock>
-        ...
-      </DocBlock>
       <ExampleBlock>
         <SiteMap />
       </ExampleBlock>
       <CodeBlock>
         {`
 <SiteMap />
+        `}
+      </CodeBlock>
+
+      <Divider className={classes.divider} />
+      <Typography variant="h6" component="h4" gutterBottom>Props</Typography>
+
+      <DocBlock>
+        (props table)
+      </DocBlock>
+
+      <ExampleBlock>
+        <SiteMap aspectRatio={0.5625} zoom={6} center={[33.5, -110.5]} />
+      </ExampleBlock>
+      <CodeBlock>
+        {`
+<SiteMap aspectRatio={0.5625} zoom={6} center={[33.5, -110.5]} />
         `}
       </CodeBlock>
 
