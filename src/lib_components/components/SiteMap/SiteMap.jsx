@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import React, { useReducer, useEffect } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import PropTypes from 'prop-types';
@@ -6,6 +5,11 @@ import PropTypes from 'prop-types';
 import { map, catchError } from 'rxjs/operators';
 
 import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import SiteDetailsIcon from '@material-ui/icons/InfoOutlined';
+import ExploreDataProductsIcon from '@material-ui/icons/InsertChartOutlined';
 
 import L from 'leaflet';
 
@@ -22,17 +26,23 @@ import {
 
 import Theme from '../Theme/Theme';
 import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
-import sitesJSON from '../../static/sites/sites.json';
 
-import iconTerrestrialSVG from './icon-terrestrial.svg';
-import iconAquaticSVG from './icon-aquatic.svg';
+import sitesJSON from '../../static/sites/sites.json';
+import statesJSON from '../../static/states/states.json';
+import domainsJSON from '../../static/domains/domains.json';
+
 import iconShadowSVG from './icon-shadow.svg';
+import iconAquaticSVG from './icon-aquatic.svg';
+import iconTerrestrialSVG from './icon-terrestrial.svg';
 
 const ICON_SVGS = {
   AQUATIC: iconAquaticSVG,
   TERRESTRIAL: iconTerrestrialSVG,
   SHADOW: iconShadowSVG,
 };
+
+const SITE_DETAILS_URL_BASE = 'https://www.neonscience.org/field-sites/field-sites-map/';
+const EXPLORE_DATA_PRODUCTS_URL_BASE = 'https://data.neonscience.org/data-products/explore?site=';
 
 const TILE_LAYERS = {
   NatGeo_World_Map: {
@@ -79,6 +89,34 @@ const useStyles = makeStyles(theme => ({
     cursor: 'help',
     display: 'inline',
   },
+  popup: {
+    minWidth: '320px',
+    '& a': {
+      color: theme.palette.secondary.main,
+    },
+    '& p': {
+      margin: 'unset',
+    },
+    '& a.leaflet-popup-close-button': {
+      top: theme.spacing(0.5),
+      right: theme.spacing(0.5),
+    },
+  },
+  popupButton: {
+    width: '100%',
+    whiteSpace: 'nowrap',
+    marginBottom: theme.spacing(1),
+    color: `${Theme.palette.primary.main} !important`,
+    borderColor: Theme.palette.primary.main,
+    '& span': {
+      pointerEvents: 'none',
+    },
+  },
+  startFlex: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
 }));
 
 const SiteMap = (props) => {
@@ -88,6 +126,8 @@ const SiteMap = (props) => {
     tileLayer: tileLayerProp,
     zoom: initialZoom,
     sites: sitesProp,
+    popupHrefNew,
+    popupExploreDataProductsButton,
   } = props;
   const classes = useStyles(Theme);
 
@@ -96,6 +136,7 @@ const SiteMap = (props) => {
     const sites = {};
     sitesArray.forEach((site) => {
       sites[site.siteCode] = {
+        siteCode: site.siteCode || site.code,
         description: site.siteDescription || site.description,
         type: site.siteType || site.type,
         stateCode: site.stateCode,
@@ -236,6 +277,80 @@ const SiteMap = (props) => {
     });
   };
 
+  const renderSitePopup = (site) => {
+    let terrainTitle = 'Terrestrial';
+    let terrainSubtitle = '(land-based)';
+    if (site.terrain === 'AQUATIC') {
+      terrainTitle = 'Aquatic';
+      terrainSubtitle = '(water-based)';
+    }
+    const terrainIcon = (
+      <img
+        src={ICON_SVGS[site.terrain]}
+        alt={site.terrain}
+        title={`${terrainTitle} ${terrainSubtitle}`}
+        width={Theme.spacing(5)}
+        height={Theme.spacing(5)}
+        style={{ marginRight: Theme.spacing(1) }}
+      />
+    );
+    const target = popupHrefNew ? { target: '_blank' } : {};
+    const siteDetailsButton = (
+      <Button
+        className={classes.popupButton}
+        variant="outlined"
+        color="primary"
+        endIcon={<SiteDetailsIcon />}
+        href={`${SITE_DETAILS_URL_BASE}${site.siteCode}`}
+        {...target}
+      >
+        Site Details
+      </Button>
+    );
+    const exploreDataProductsButton = popupExploreDataProductsButton ? (
+      <Button
+        className={classes.popupButton}
+        variant="outlined"
+        color="primary"
+        endIcon={<ExploreDataProductsIcon />}
+        href={`${EXPLORE_DATA_PRODUCTS_URL_BASE}${site.siteCode}`}
+        {...target}
+      >
+        Explore Data Products
+      </Button>
+    ) : null;
+    const renderField = (title, value, marginBottom = 2) => (
+      <div style={{ marginBottom: Theme.spacing(marginBottom) }}>
+        <Typography variant="subtitle2">{title}</Typography>
+        <Typography variant="body2">{value}</Typography>
+      </div>
+    );
+    const stateFieldTitle = (site.stateCode === 'PR' ? 'Territory' : 'State');
+    return (
+      <Popup className={classes.popup}>
+        <Typography variant="h5" gutterBottom>
+          {`${site.description} (${site.siteCode})`}
+        </Typography>
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <div className={classes.startFlex} style={{ marginBottom: Theme.spacing(2) }}>
+              {terrainIcon}
+              {renderField(terrainTitle, terrainSubtitle, 0)}
+            </div>
+            {renderField('Latitude/Longitude', `${site.latitude}, ${site.longitude}`)}
+          </Grid>
+          <Grid item xs={6}>
+            {renderField(stateFieldTitle, statesJSON[site.stateCode].name)}
+            {renderField('Domain', `${site.domainCode} - ${domainsJSON[site.domainCode].name}`)}
+          </Grid>
+        </Grid>
+        {siteDetailsButton}
+        <br />
+        {exploreDataProductsButton}
+      </Popup>
+    );
+  };
+
   const renderSiteMarkers = () => {
     const zoomedIcons = {
       AQUATIC: getZoomedIcon('AQUATIC'),
@@ -250,7 +365,7 @@ const SiteMap = (props) => {
           position={[site.latitude, site.longitude]}
           icon={zoomedIcons[site.terrain]}
         >
-          <Popup>{siteCode}</Popup>
+          {renderSitePopup(site)}
         </Marker>
       );
     });
@@ -278,6 +393,8 @@ SiteMap.propTypes = {
   center: PropTypes.arrayOf(PropTypes.number),
   zoom: PropTypes.number,
   tileLayer: PropTypes.oneOf(Object.keys(TILE_LAYERS)),
+  popupHrefNew: PropTypes.bool,
+  popupExploreDataProductsButton: PropTypes.bool,
   sites: PropTypes.oneOf([
     PropTypes.arrayOf(
       PropTypes.shape({
@@ -310,6 +427,8 @@ SiteMap.defaultProps = {
   center: [44.967, -103.767],
   tileLayer: 'NatGeo_World_Map',
   zoom: 3,
+  popupHrefNew: true,
+  popupExploreDataProductsButton: true,
   sites: null,
 };
 
