@@ -6,9 +6,12 @@ import { map, catchError } from 'rxjs/operators';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import SiteDetailsIcon from '@material-ui/icons/InfoOutlined';
+import ErrorIcon from '@material-ui/icons/Warning';
 import ExploreDataProductsIcon from '@material-ui/icons/InsertChartOutlined';
 
 import L from 'leaflet';
@@ -24,7 +27,7 @@ import {
   Popup,
 } from 'react-leaflet';
 
-import Theme from '../Theme/Theme';
+import Theme, { COLORS } from '../Theme/Theme';
 import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
 
 import sitesJSON from '../../static/sites/sites.json';
@@ -44,7 +47,7 @@ const ICON_SVGS = {
 const SITE_DETAILS_URL_BASE = 'https://www.neonscience.org/field-sites/field-sites-map/';
 const EXPLORE_DATA_PRODUCTS_URL_BASE = 'https://data.neonscience.org/data-products/explore?site=';
 
-const TILE_LAYERS = {
+export const TILE_LAYERS = {
   NatGeo_World_Map: {
     name: 'National Geographic',
     shortAttribution: '© Natl. Geographic et al.',
@@ -72,6 +75,25 @@ const TILE_LAYERS = {
 };
 
 const useStyles = makeStyles(theme => ({
+  notFetchedContainer: {
+    width: '100%',
+    height: '0px', // Necessary to set a fixed aspect ratio from props (using paddingBottom)
+    position: 'relative',
+    backgroundColor: COLORS.BLUE[200],
+    overflow: 'hidden',
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  notFetchedPaper: {
+    position: 'absolute',
+    width: '70%',
+    top: '50%',
+    transform: 'translate(0%, -50%)',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: theme.spacing(3),
+  },
   map: {
     width: '100%',
     height: '0px', // Necessary to set a fixed aspect ratio from props (using paddingBottom)
@@ -233,9 +255,32 @@ const SiteMap = (props) => {
   });
 
   if (state.fetchSitesStatus !== 'fetched') {
+    let notFetchedContents = (
+      <React.Fragment>
+        <Typography variant="h6" component="h3" gutterBottom>
+          Loading Sites...
+        </Typography>
+        <CircularProgress />
+      </React.Fragment>
+    );
+    if (state.fetchSitesStatus === 'error') {
+      notFetchedContents = (
+        <React.Fragment>
+          <ErrorIcon fontSize="large" color="error" />
+          <Typography variant="h6" component="h3" style={{ marginTop: Theme.spacing(1) }}>
+            {`Unable to load sites: ${state.fetchSitesError}`}
+          </Typography>
+        </React.Fragment>
+      );
+    }
     return (
-      <div>
-        {state.fetchSitesStatus}
+      <div
+        className={classes.notFetchedContainer}
+        style={{ paddingBottom: `${aspectRatio * 100}%` }}
+      >
+        <Paper className={classes.notFetchedPaper}>
+          {notFetchedContents}
+        </Paper>
       </div>
     );
   }
@@ -424,7 +469,7 @@ SiteMap.propTypes = {
 
 SiteMap.defaultProps = {
   aspectRatio: 0.75,
-  center: [44.967, -103.767],
+  center: [52.28, -110.75],
   tileLayer: 'NatGeo_World_Map',
   zoom: 3,
   popupHrefNew: true,

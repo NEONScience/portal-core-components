@@ -8,6 +8,7 @@ import { NeonEnvironment } from './components/NeonEnvironment';
 import { NeonGraphQL } from './components/NeonGraphQL';
 import { NeonPage } from './components/NeonPage';
 import { SiteChip } from './components/SiteChip';
+import { SiteMap } from './components/SiteMap';
 import { Theme } from './components/Theme';
 
 // Secondary lib exports (everything else, including legacy stuff that may
@@ -48,6 +49,7 @@ export {
   NeonEnvironment,
   NeonPage,
   SiteChip,
+  SiteMap,
   Theme,
   // Secondaries
   DownloadStepForm,
