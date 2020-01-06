@@ -5,8 +5,10 @@ import { DataThemeIcon } from './components/DataThemeIcon';
 import { DownloadDataButton } from './components/DownloadDataButton';
 import { DownloadDataContext } from './components/DownloadDataContext';
 import { NeonEnvironment } from './components/NeonEnvironment';
+import { NeonGraphQL } from './components/NeonGraphQL';
 import { NeonPage } from './components/NeonPage';
 import { SiteChip } from './components/SiteChip';
+import { SiteMap } from './components/SiteMap';
 import { Theme } from './components/Theme';
 
 // Secondary lib exports (everything else, including legacy stuff that may
@@ -45,8 +47,10 @@ export {
   DownloadDataContext,
   FullWidthVisualization,
   NeonEnvironment,
+  NeonGraphQL,
   NeonPage,
   SiteChip,
+  SiteMap,
   Theme,
   // Secondaries
   DownloadStepForm,
