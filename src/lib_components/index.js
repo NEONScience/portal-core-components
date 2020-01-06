@@ -47,6 +47,7 @@ export {
   DownloadDataContext,
   FullWidthVisualization,
   NeonEnvironment,
+  NeonGraphQL,
   NeonPage,
   SiteChip,
   SiteMap,
