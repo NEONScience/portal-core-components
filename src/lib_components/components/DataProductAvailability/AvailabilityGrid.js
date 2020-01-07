@@ -257,8 +257,9 @@ export function AvailabilityGrid(config) {
   };
   const getYearMonthsInView = (totalSvgWidth, dragOffset) => yearMonths.filter((yearMonth) => {
     const tX = getYearMonthStartX(yearMonth) + dragOffset;
-    const lower = 0;
-    const upper = (totalSvgWidth - getLabelWidth()) + (8 * yearMonthWidth);
+    const margin = yearMonthWidth * 4;
+    const lower = Math.max(0, getLabelWidth() - margin);
+    const upper = totalSvgWidth + margin;
     return (tX > lower && tX + yearMonthWidth < upper);
   });
   const getYearsInView = (totalSvgWidth, dragOffset) => years.filter((year) => {
@@ -267,6 +268,38 @@ export function AvailabilityGrid(config) {
     const upper = (totalSvgWidth - getLabelWidth()) + (2 * yearWidth);
     return (tX > lower && tX + yearWidth < upper);
   });
+
+  /**
+     Function to generate the "initial" time offset for first load. By default we may extend the
+     viewable time range well beyond available data (e.g. if there is no data this year the chart
+     should still show dates for this year so it's not ambiguous). This function aims to generate
+     an ideal time offset that will put the latest month with availability in view and close to the
+     right edge, but also keeping full year labels in view (why we target 8 months of the latest
+     year... the right number of months so the year label is not cut off even if the year is empty)
+  */
+  const getInitialTimeOffset = () => {
+    const minTimeOffset = getMinTimeOffset();
+    if (!data || !data.rows) { return minTimeOffset; }
+    let availableMonths = [];
+    if (data.rows.summary) {
+      availableMonths = Object.keys(data.rows.summary);
+    } else {
+      const availableMonthsSet = new Set();
+      Object.keys(data.rows).forEach((rowKey) => {
+        Object.keys(data.rows[rowKey]).forEach(availableMonthsSet.add, availableMonthsSet);
+      });
+      availableMonths = Array.from(availableMonthsSet.values());
+    }
+    if (!availableMonths.length) { return minTimeOffset; }
+    availableMonths.sort();
+    const latestAvailableYearMonth = availableMonths[availableMonths.length - 1];
+    const latestAvailableYearInt = parseInt(latestAvailableYearMonth.substr(0, 4), 10);
+    const latestAvailableMonthInt = parseInt(latestAvailableYearMonth.substr(5, 2), 10);
+    const finalMonth = latestAvailableMonthInt <= 6
+      ? `${latestAvailableYearInt}-08`
+      : `${latestAvailableYearInt + 1}-08`;
+    return 0 - getYearMonthStartX(finalMonth) - yearMonthWidth + svgWidth;
+  };
 
   /**
      Functions to get a translate() string for a data row by index
@@ -309,14 +342,14 @@ export function AvailabilityGrid(config) {
      has changed, prefer it stays at the minimum). Also keep the offset
      bounded within where there's actually data to show.
   */
-  let prevMinTimeOffset = getMinTimeOffset(svgWidth);
+  let prevMinTimeOffset = getMinTimeOffset();
   if (svg.attr('data-prevMinTimeOffset') === null) {
-    svg.attr('data-prevMinTimeOffset', getMinTimeOffset(svgWidth));
+    svg.attr('data-prevMinTimeOffset', getMinTimeOffset());
   } else {
     prevMinTimeOffset = parseFloat(svg.attr('data-prevMinTimeOffset'));
   }
   const getTimeOffset = () => {
-    const minTimeOffset = getMinTimeOffset(svgWidth);
+    const minTimeOffset = getMinTimeOffset();
     let currentTimeOffset = parseFloat(svg.attr('data-timeOffset')) || 0;
     if (currentTimeOffset === prevMinTimeOffset && prevMinTimeOffset !== minTimeOffset) {
       currentTimeOffset = minTimeOffset;
@@ -326,14 +359,14 @@ export function AvailabilityGrid(config) {
     return currentTimeOffset;
   };
   const setTimeOffset = (timeOffset) => {
-    const boundedTimeOffset = Math.min(Math.max(getMinTimeOffset(svgWidth), timeOffset), 0);
+    const boundedTimeOffset = Math.min(Math.max(getMinTimeOffset(), timeOffset), 0);
     dragG.attr('transform', `translate(${boundedTimeOffset},0)`);
     svg.attr('data-timeOffset', boundedTimeOffset);
   };
   // Set timeOffset the first time. It's preserved through state updates
   // but we still send its value through the setter to stay within bounds.
   if (svg.attr('data-timeOffset') === null) {
-    setTimeOffset(getMinTimeOffset(svgWidth));
+    setTimeOffset(getInitialTimeOffset());
   } else {
     setTimeOffset(svg.attr('data-timeOffset'));
   }

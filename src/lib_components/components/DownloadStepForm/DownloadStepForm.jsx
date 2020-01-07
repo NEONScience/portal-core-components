@@ -225,9 +225,9 @@ export default function DownloadStepForm(props) {
               <div>
                 <Typography variant="body1" component="div">
                   <ul style={{ margin: 0, paddingLeft: Theme.spacing(2.5) }}>
-                    <li>Click on rows in the grid above to select individual sites or states</li>
-                    <li>Click and drag the grid to pan across time</li>
-                    <li>Click and drag the sides of the selection to change the date range</li>
+                    <li>Drag the grid above to pan across time</li>
+                    <li>Click rows in the grid above to select sites or states</li>
+                    <li>Drag the sides of the selection to adjust the date range</li>
                   </ul>
                 </Typography>
               </div>
