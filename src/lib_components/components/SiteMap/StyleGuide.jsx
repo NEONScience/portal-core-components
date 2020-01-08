@@ -189,7 +189,7 @@ import { SiteMap } from 'portal-core-components';
       <ul>
         <li>Load site data from the API</li>
         <li>Use a 4:3 (letterbox) aspect ratio at 100% of the width of the containing element</li>
-        <li>Start at a zoom level of 3 centered on North America</li>
+        <li>Start centered and zoomed such that all sites are visibile at any map dimensions</li>
         <li>Include a button to Explore Data Products in site popups</li>
         <li>Have all site popup links open in a new window</li>
       </ul>

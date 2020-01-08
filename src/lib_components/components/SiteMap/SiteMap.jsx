@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useRef, useReducer, useEffect } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import PropTypes from 'prop-types';
 
@@ -146,12 +146,13 @@ const SiteMap = (props) => {
     aspectRatio,
     center,
     tileLayer: tileLayerProp,
-    zoom: initialZoom,
+    zoom: zoomProp,
     sites: sitesProp,
     popupHrefNew,
     popupExploreDataProductsButton,
   } = props;
   const classes = useStyles(Theme);
+  const mapRef = useRef(null);
 
   const sitesArrayToKeyedObject = (sitesArray = []) => {
     if (!Array.isArray(sitesArray)) { return {}; }
@@ -224,7 +225,7 @@ const SiteMap = (props) => {
   };
 
   const initialState = {
-    zoom: initialZoom,
+    zoom: zoomProp,
     tileLayer: tileLayerProp,
     sites,
     fetchSitesStatus,
@@ -232,6 +233,18 @@ const SiteMap = (props) => {
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  // If zoom was not set as a prop then attemp to set the initial zoom such that
+  // all sites are visible. This depends on the client dimenaions of the map itself,
+  // and whether height or width is the deciding factor depends on the aspect ratio.
+  useEffect(() => {
+    if (state.zoom === null && mapRef && mapRef.current && mapRef.current.container) {
+      const mapCont = mapRef.current.container;
+      const minorDim = Math.min(mapCont.clientWidth / 136, mapCont.clientHeight / 128);
+      const derivedZoom = [1, 2, 4, 6, 11].findIndex(m => m > minorDim);
+      dispatch({ type: 'setZoom', zoom: derivedZoom === -1 ? 5 : derivedZoom });
+    }
+  });
 
   const fetchAllSites$ = NeonGraphQL.getAllSites().pipe(
     map((response) => {
@@ -418,12 +431,13 @@ const SiteMap = (props) => {
 
   return (
     <Map
+      ref={mapRef}
       className={classes.map}
       style={{ paddingBottom: `${aspectRatio * 100}%` }}
       center={center}
       zoom={state.zoom}
       maxZoom={17}
-      minZoom={2}
+      minZoom={1}
       onZoomEnd={(event) => { dispatch({ type: 'setZoom', zoom: event.target.getZoom() }); }}
     >
       {renderLayersControl()}
@@ -469,9 +483,9 @@ SiteMap.propTypes = {
 
 SiteMap.defaultProps = {
   aspectRatio: 0.75,
-  center: [52.28, -110.75],
+  center: [52.68, -110.75],
   tileLayer: 'NatGeo_World_Map',
-  zoom: 3,
+  zoom: null,
   popupHrefNew: true,
   popupExploreDataProductsButton: true,
   sites: null,
