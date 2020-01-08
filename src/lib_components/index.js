@@ -35,6 +35,7 @@ import { PopupLoading } from './components/PopupLoading';
 // Static JSON exports
 import sitesJSON from './static/sites/sites.json';
 import statesJSON from './static/states/states.json';
+import statesShapesJSON from './static/statesShapes/statesShapes.json';
 import domainsJSON from './static/domains/domains.json';
 import bundlesJSON from './static/bundles/bundles.json';
 
@@ -70,6 +71,7 @@ export {
   // Static JSON
   sitesJSON,
   statesJSON,
+  statesShapesJSON,
   domainsJSON,
   bundlesJSON,
 };

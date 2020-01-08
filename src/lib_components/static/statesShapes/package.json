@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "name": "states-shapes-json",
+  "main": "./statesShapes.json",
+  "module": "./statesShapes.json"
+}

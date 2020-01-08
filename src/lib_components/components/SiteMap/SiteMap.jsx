@@ -19,13 +19,14 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
 import {
-  Map,
-  TileLayer,
-  ScaleControl,
-  LayersControl,
   FeatureGroup,
+  LayersControl,
+  Map,
   Marker,
+  Polygon,
   Popup,
+  ScaleControl,
+  TileLayer,
 } from 'react-leaflet';
 
 import Theme, { COLORS } from '../Theme/Theme';
@@ -33,6 +34,7 @@ import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
 
 import sitesJSON from '../../static/sites/sites.json';
 import statesJSON from '../../static/states/states.json';
+import statesShapesJSON from '../../static/statesShapes/statesShapes.json';
 import domainsJSON from '../../static/domains/domains.json';
 
 import iconShadowSVG from './icon-shadow.svg';
@@ -56,26 +58,34 @@ export const TILE_LAYERS = {
     shortAttribution: '© Natl. Geographic et al.',
     fullAttribution: '© National Geographic, Esri, Garmin, HERE, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC',
     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}',
+    overlayColor: Theme.palette.primary.main,
   },
   World_Imagery: {
     name: 'Satellite Imagery',
     shortAttribution: '© Esri et al.',
     fullAttribution: '© Esri, DigitalGlobe, GeoEye, Earthstar Geographics, CNES/Airbus DS, USDA, USGS, AeroGRID, IGN, GIS Community',
     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    overlayColor: COLORS.ORANGE[500],
   },
   World_Street_Map: {
     name: 'Streets',
     shortAttribution: '© Esri et al.',
     fullAttribution: '© Esri, HERE, Garmin, USGS, Intermap, INCREMENT P, NRCan, Esri Japan, METI, Esri China (Hong Kong), Esri Korea, Esri (Thailand), NGCC, OSM contributors, GIS Community',
     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
+    overlayColor: Theme.palette.primary.main,
   },
   World_Topo_Map: {
     name: 'Topographic',
     shortAttribution: '© Esri et al.',
     fullAttribution: '© Esri, HERE, Garmin, Intermap, iPC, GEBCO, USGS, FAO, NPS, NRCAN, GeoBase, IGN, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), OSM contributors, GIS Community',
     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
+    overlayColor: Theme.palette.primary.main,
   },
 };
+const TILE_LAYERS_BY_NAME = {};
+Object.keys(TILE_LAYERS).forEach((key) => {
+  TILE_LAYERS_BY_NAME[TILE_LAYERS[key].name] = key;
+});
 
 const useStyles = makeStyles(theme => ({
   notFetchedContainer: {
@@ -225,6 +235,10 @@ const SiteMap = (props) => {
       case 'setTileLayer':
         if (!TILE_LAYERS[action.tileLayer]) { return state; }
         return { ...state, tileLayer: action.tileLayer };
+      case 'setSitesOverlay':
+        return { ...state, sitesOverlay: action.visible };
+      case 'setStatesOverlay':
+        return { ...state, statesOverlay: action.visible };
       case 'setZoom':
         return { ...state, zoom: action.zoom };
       default:
@@ -238,6 +252,8 @@ const SiteMap = (props) => {
     sites,
     fetchSitesStatus,
     fetchSitesError: null,
+    sitesOverlay: true,
+    statesOverlay: false,
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -395,14 +411,14 @@ const SiteMap = (props) => {
     );
   };
 
-  const renderSiteMarkersOverlay = () => {
+  const renderSitesOverlay = () => {
     // Get new icons scaled to the current zoom level every render
     const zoomedIcons = {
       AQUATIC: getZoomedIcon('AQUATIC'),
       TERRESTRIAL: getZoomedIcon('TERRESTRIAL'),
     };
     return (
-      <Overlay name="Site Markers" checked>
+      <Overlay name="Site Markers" checked={state.sitesOverlay}>
         <FeatureGroup>
           {Object.keys(state.sites).map((siteCode) => {
             const site = state.sites[siteCode];
@@ -422,6 +438,34 @@ const SiteMap = (props) => {
     );
   };
 
+  const renderStatePopup = (stateCode) => {
+    if (!statesJSON[stateCode]) { return null; }
+    const stateName = statesJSON[stateCode].name;
+    return (
+      <Popup className={classes.popup}>
+        <Typography variant="h6" gutterBottom>
+          {`${stateName} (${stateCode})`}
+        </Typography>
+      </Popup>
+    );
+  };
+
+  const renderStatesOverlay = () => (
+    <Overlay name="US States" checked={state.statesOverlay}>
+      <FeatureGroup>
+        {statesShapesJSON.features.map(usState => (
+          <Polygon
+            key={usState.properties.stateCode}
+            color={TILE_LAYERS[state.tileLayer].overlayColor}
+            positions={usState.geometry.coordinates}
+          >
+            {renderStatePopup(usState.properties.stateCode)}
+          </Polygon>
+        ))}
+      </FeatureGroup>
+    </Overlay>
+  );
+
   const renderTileLayer = (key) => {
     const tileLayer = TILE_LAYERS[key];
     const attributionNode = (
@@ -431,10 +475,19 @@ const SiteMap = (props) => {
     );
     const attributionString = ReactDOMServer.renderToStaticMarkup(attributionNode);
     return (
-      <BaseLayer key={key} name={tileLayer.name} checked={key === state.tileLayer}>
-        <TileLayer url={tileLayer.url} attribution={attributionString} />
+      <BaseLayer
+        key={key}
+        name={tileLayer.name}
+        checked={key === state.tileLayer}
+      >
+        <TileLayer key={key} url={tileLayer.url} attribution={attributionString} />
       </BaseLayer>
     );
+  };
+
+  const handleBaseLayerChange = (event) => {
+    if (!event.name || !TILE_LAYERS_BY_NAME[event.name]) { return; }
+    dispatch({ type: 'setTileLayer', tileLayer: TILE_LAYERS_BY_NAME[event.name] });
   };
 
   return (
@@ -447,11 +500,13 @@ const SiteMap = (props) => {
       maxZoom={16}
       minZoom={1}
       onZoomEnd={(event) => { dispatch({ type: 'setZoom', zoom: event.target.getZoom() }); }}
+      onBaseLayerChange={handleBaseLayerChange}
     >
       <ScaleControl imperial metric updateWhenIdle />
       <LayersControl position="topright">
         {Object.keys(TILE_LAYERS).map(renderTileLayer)}
-        {renderSiteMarkersOverlay()}
+        {renderStatesOverlay()}
+        {renderSitesOverlay()}
       </LayersControl>
     </Map>
   );
