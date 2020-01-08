@@ -282,8 +282,8 @@ const externalHosts = {
     projectTitle: 'Barcode of Life Datasystem (BOLD) Project',
     url: 'http://www.barcodinglife.com/',
     hostType: HOST_TYPES.ADDITIONAL_DATA,
-    additionalDataType: 'Raw sequence data',
     linkType: LINK_TYPES.BY_PRODUCT,
+    hostDataVariety: 'Raw sequence data',
     getProductLinks: (productCode = '') => {
       if (!externalProducts[productCode]) { return []; }
       return externalProducts[productCode].searches.map(search => ({
@@ -302,7 +302,7 @@ const externalHosts = {
     projectTitle: 'MG-RAST (Metagenomics Rapid Annotation using Subsystem Technology) Project',
     url: 'https://mg-rast.org',
     hostType: HOST_TYPES.ADDITIONAL_DATA,
-    additionalDataType: 'Raw sequence data',
+    hostDataVariety: 'Raw sequence data',
     linkType: LINK_TYPES.BY_PRODUCT,
     getProductLinks: (productCode = '') => {
       if (!externalProducts[productCode]) { return []; }

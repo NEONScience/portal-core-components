@@ -67,6 +67,7 @@ const ExternalHostInfo = (props) => {
     .forEach((key) => { rootProps[key] = otherProps[key]; });
 
   let blurb = null;
+  let dataVariety = externalHost.hostDataVariety || 'Data';
   const blurbLink = hasSpecificLinks ? externalGeneralShortLink : (
     <React.Fragment>
       the&nbsp;
@@ -76,7 +77,8 @@ const ExternalHostInfo = (props) => {
   if (externalHost.hostType === ExternalHost.HOST_TYPES.REFORMATTED_DATA) {
     blurb = (
       <React.Fragment>
-        Data for this product are available in other formats from&nbsp;
+        {`${dataVariety} for this product are available in other formats from`}
+        &nbsp;
         {blurbLink}
       </React.Fragment>
     );
@@ -84,18 +86,19 @@ const ExternalHostInfo = (props) => {
   if (externalHost.hostType === ExternalHost.HOST_TYPES.EXCLUSIVE_DATA) {
     blurb = (
       <React.Fragment>
-        Data for this product are only available from&nbsp;
+        {`${dataVariety} for this product are only available from`}
+        &nbsp;
         {blurbLink}
       </React.Fragment>
     );
   }
   // Default: ExternalHost.HOST_TYPES.ADDITIONAL_DATA:
   if (!blurb) {
-    const data = externalHost.additionalDataType || 'Additional data';
+    dataVariety = externalHost.hostDataVariety || 'Additional data';
     const are = hasSpecificLinks ? 'are' : 'may be';
     blurb = (
       <React.Fragment>
-        {`${data} associated with this product ${are} available from`}
+        {`${dataVariety} associated with this product ${are} available from`}
         &nbsp;
         {blurbLink}
       </React.Fragment>

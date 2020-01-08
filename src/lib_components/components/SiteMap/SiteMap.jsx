@@ -23,6 +23,7 @@ import {
   TileLayer,
   ScaleControl,
   LayersControl,
+  FeatureGroup,
   Marker,
   Popup,
 } from 'react-leaflet';
@@ -37,6 +38,8 @@ import domainsJSON from '../../static/domains/domains.json';
 import iconShadowSVG from './icon-shadow.svg';
 import iconAquaticSVG from './icon-aquatic.svg';
 import iconTerrestrialSVG from './icon-terrestrial.svg';
+
+const { BaseLayer, Overlay } = LayersControl;
 
 const ICON_SVGS = {
   AQUATIC: iconAquaticSVG,
@@ -83,6 +86,7 @@ const useStyles = makeStyles(theme => ({
     overflow: 'hidden',
     display: 'flex',
     justifyContent: 'center',
+    borderRadius: theme.spacing(1),
   },
   notFetchedPaper: {
     position: 'absolute',
@@ -98,6 +102,10 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     height: '0px', // Necessary to set a fixed aspect ratio from props (using paddingBottom)
     overflow: 'hidden',
+    borderRadius: theme.spacing(1),
+    '& div.leaflet-control-attribution': {
+      borderTopLeftRadius: theme.spacing(0.5),
+    },
     '& div.leaflet-control-attribution a': {
       color: theme.palette.secondary.main,
     },
@@ -298,28 +306,6 @@ const SiteMap = (props) => {
     );
   }
 
-  const renderLayersControl = () => {
-    const { BaseLayer } = LayersControl;
-    return (
-      <LayersControl position="topright">
-        {Object.keys(TILE_LAYERS).map((key) => {
-          const tileLayer = TILE_LAYERS[key];
-          const attributionNode = (
-            <div title={tileLayer.fullAttribution} className={classes.attribution}>
-              {tileLayer.shortAttribution}
-            </div>
-          );
-          const attributionString = ReactDOMServer.renderToStaticMarkup(attributionNode);
-          return (
-            <BaseLayer key={key} checked={key === state.tileLayer} name={tileLayer.name}>
-              <TileLayer url={tileLayer.url} attribution={attributionString} />
-            </BaseLayer>
-          );
-        })}
-      </LayersControl>
-    );
-  };
-
   const getZoomedIcon = (terrain = 'TERRESTRIAL') => {
     if (!ICON_SVGS[terrain] || !ICON_SVGS.SHADOW) { return null; }
     const iconScale = 0.2 + (Math.floor((state.zoom - 2) / 3) / 10);
@@ -409,24 +395,46 @@ const SiteMap = (props) => {
     );
   };
 
-  const renderSiteMarkers = () => {
+  const renderSiteMarkersOverlay = () => {
+    // Get new icons scaled to the current zoom level every render
     const zoomedIcons = {
       AQUATIC: getZoomedIcon('AQUATIC'),
       TERRESTRIAL: getZoomedIcon('TERRESTRIAL'),
     };
-    return Object.keys(state.sites).map((siteCode) => {
-      const site = state.sites[siteCode];
-      if (!site.latitude || !site.longitude || !zoomedIcons[site.terrain]) { return null; }
-      return (
-        <Marker
-          key={siteCode}
-          position={[site.latitude, site.longitude]}
-          icon={zoomedIcons[site.terrain]}
-        >
-          {renderSitePopup(site)}
-        </Marker>
-      );
-    });
+    return (
+      <Overlay name="Site Markers" checked>
+        <FeatureGroup>
+          {Object.keys(state.sites).map((siteCode) => {
+            const site = state.sites[siteCode];
+            if (!site.latitude || !site.longitude || !zoomedIcons[site.terrain]) { return null; }
+            return (
+              <Marker
+                key={siteCode}
+                position={[site.latitude, site.longitude]}
+                icon={zoomedIcons[site.terrain]}
+              >
+                {renderSitePopup(site)}
+              </Marker>
+            );
+          })}
+        </FeatureGroup>
+      </Overlay>
+    );
+  };
+
+  const renderTileLayer = (key) => {
+    const tileLayer = TILE_LAYERS[key];
+    const attributionNode = (
+      <div title={tileLayer.fullAttribution} className={classes.attribution}>
+        {tileLayer.shortAttribution}
+      </div>
+    );
+    const attributionString = ReactDOMServer.renderToStaticMarkup(attributionNode);
+    return (
+      <BaseLayer key={key} name={tileLayer.name} checked={key === state.tileLayer}>
+        <TileLayer url={tileLayer.url} attribution={attributionString} />
+      </BaseLayer>
+    );
   };
 
   return (
@@ -436,13 +444,15 @@ const SiteMap = (props) => {
       style={{ paddingBottom: `${aspectRatio * 100}%` }}
       center={center}
       zoom={state.zoom}
-      maxZoom={17}
+      maxZoom={16}
       minZoom={1}
       onZoomEnd={(event) => { dispatch({ type: 'setZoom', zoom: event.target.getZoom() }); }}
     >
-      {renderLayersControl()}
-      {renderSiteMarkers()}
       <ScaleControl imperial metric updateWhenIdle />
+      <LayersControl position="topright">
+        {Object.keys(TILE_LAYERS).map(renderTileLayer)}
+        {renderSiteMarkersOverlay()}
+      </LayersControl>
     </Map>
   );
 };
