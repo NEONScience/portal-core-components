@@ -370,22 +370,35 @@ export default function DownloadDataDialog() {
     if (requiredSteps.length < 2) { return null; }
     if (belowSm) {
       const maxSteps = requiredSteps.length;
+      const buttonProps = {
+        size: 'small',
+        color: 'primary',
+        variant: 'contained',
+      };
       const handleBack = () => changeToStep(activeStepIndex - 1);
       const handleNext = () => changeToStep(activeStepIndex + 1);
       return (
         <React.Fragment>
           <MobileStepper
             steps={maxSteps}
-            variant="text"
+            variant="dots"
             activeStep={activeStepIndex}
             backButton={(
-              <Button size="small" onClick={handleBack} disabled={activeStepIndex === 0}>
+              <Button
+                {...buttonProps}
+                onClick={handleBack}
+                disabled={activeStepIndex === 0}
+              >
                 {Theme.direction === 'rtl' ? <RightIcon /> : <LeftIcon />}
                 Back
               </Button>
             )}
             nextButton={(
-              <Button size="small" onClick={handleNext} disabled={activeStepIndex === maxSteps - 1}>
+              <Button
+                {...buttonProps}
+                onClick={handleNext}
+                disabled={activeStepIndex === maxSteps - 1}
+              >
                 Next
                 {Theme.direction === 'rtl' ? <LeftIcon /> : <RightIcon />}
               </Button>
