@@ -20,15 +20,19 @@ const useStyles = makeStyles(theme => ({
 
 export default function ExampleBlock(props) {
   const classes = useStyles(Theme);
-  const { children } = props;
+  const { column, children } = props;
   return (
-    <Container className={classes.root}>
+    <Container
+      className={classes.root}
+      style={{ flexDirection: column ? 'column' : 'row' }}
+    >
       {children}
     </Container>
   );
 }
 
 ExampleBlock.propTypes = {
+  column: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.oneOfType([
       PropTypes.node,
@@ -37,4 +41,8 @@ ExampleBlock.propTypes = {
     PropTypes.node,
     PropTypes.string,
   ]).isRequired,
+};
+
+ExampleBlock.defaultProps = {
+  column: false,
 };

@@ -50,39 +50,71 @@ const ExternalHostInfo = (props) => {
   const externalHost = ExternalHost.getByProductCode(productCode);
   if (!externalHost) { return null; }
 
-  const hasSpecificLinks = Object.keys(ExternalHost.LINK_TYPES).includes(externalHost.linkType);
+  // Not only _should_ the info have specific links (links in addition to the top-level
+  // one for the host), but _does_ it?
+  const hasSpecificLinks = (
+    externalHost.linkType === ExternalHost.LINK_TYPES.BY_PRODUCT
+      && externalHost.getProductLinks(productCode).length
+  ) || externalHost.linkType === ExternalHost.LINK_TYPES.BY_SITE;
 
   // Remaining setup
   const externalGeneralLink = externalHost.renderLink();
+  const externalGeneralShortLink = externalHost.renderShortLink();
   const expandTitle = `${expanded ? 'hide' : 'show'} external host links to data`;
   const rootProps = {};
   Object.keys(otherProps)
     .filter(key => ['data-selenium', 'style', 'className'].includes(key))
     .forEach((key) => { rootProps[key] = otherProps[key]; });
 
-  const blurbs = {
-    ADDITIONAL_DATA: 'Additional data associated with this product are available from an external host.',
-    REFORMATTED_DATA: 'Data for this product are available in other formats from an external host.',
-    EXCLUSIVE_DATA: 'Data for this product are only available from an external host.',
-  };
+  let blurb = null;
+  const blurbLink = hasSpecificLinks ? externalGeneralShortLink : (
+    <React.Fragment>
+      the&nbsp;
+      {externalGeneralLink}
+    </React.Fragment>
+  );
+  if (externalHost.hostType === ExternalHost.HOST_TYPES.REFORMATTED_DATA) {
+    blurb = (
+      <React.Fragment>
+        Data for this product are available in other formats from&nbsp;
+        {blurbLink}
+      </React.Fragment>
+    );
+  }
+  if (externalHost.hostType === ExternalHost.HOST_TYPES.EXCLUSIVE_DATA) {
+    blurb = (
+      <React.Fragment>
+        Data for this product are only available from&nbsp;
+        {blurbLink}
+      </React.Fragment>
+    );
+  }
+  // Default: ExternalHost.HOST_TYPES.ADDITIONAL_DATA:
+  if (!blurb) {
+    const data = externalHost.additionalDataType || 'Additional data';
+    const are = hasSpecificLinks ? 'are' : 'may be';
+    blurb = (
+      <React.Fragment>
+        {`${data} associated with this product ${are} available from`}
+        &nbsp;
+        {blurbLink}
+      </React.Fragment>
+    );
+  }
 
   const content = (
     <React.Fragment>
       <div className={classes.startFlex} style={{ width: '100%' }}>
         <InfoIcon fontSize="large" className={classes.infoSnackbarIcon} />
         <Typography variant="subtitle2" style={{ flexGrow: 1 }}>
-          {/* eslint-disable react/jsx-one-expression-per-line */}
-          {blurbs[externalHost.hostType] || blurbs.ADDITIONAL_DATA}
-          {hasSpecificLinks ? null : (
-            <span>&nbsp;Visit the {externalGeneralLink} for details.</span>
-          )}
-          {/* eslint-enable react/jsx-one-expression-per-line */}
+          {blurb}
         </Typography>
         {hasSpecificLinks && expandable ? (
           <IconButton
             title={expandTitle}
             aria-label={expandTitle}
             onClick={() => setExpanded(!expanded)}
+            style={{ marginLeft: Theme.spacing(2) }}
           >
             {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
           </IconButton>
@@ -95,7 +127,7 @@ const ExternalHostInfo = (props) => {
           Use the links below to access data from the {externalGeneralLink}.
           {/* eslint-enable react/jsx-one-expression-per-line */}
         </Typography>
-        {hasSpecificLinks ? <ExternalHostProductSepcificLinks productCode={productCode} /> : null}
+        <ExternalHostProductSepcificLinks productCode={productCode} />
       </div>
     </React.Fragment>
   );

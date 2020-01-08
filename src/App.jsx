@@ -25,6 +25,7 @@ import DataProductAvailabilityStyleGuide from './lib_components/components/DataP
 import DataThemeIconStyleGuide from './lib_components/components/DataThemeIcon/StyleGuide';
 import DownloadDataButtonStyleGuide from './lib_components/components/DownloadDataButton/StyleGuide';
 import DownloadDataContextStyleGuide from './lib_components/components/DownloadDataContext/StyleGuide';
+import ExternalHostInfoStyleGuide from './lib_components/components/ExternalHostInfo/StyleGuide';
 import FullWidthVisualizationStyleGuide from './lib_components/components/FullWidthVisualization/StyleGuide';
 import NeonEnvironmentStyleGuide from './lib_components/components/NeonEnvironment/StyleGuide';
 import NeonGraphQLStyleGuide from './lib_components/components/NeonGraphQL/StyleGuide';
@@ -58,6 +59,11 @@ const components = [
     name: 'Download Data Context',
     hash: '#DownloadDataContext',
     component: DownloadDataContextStyleGuide,
+  },
+  {
+    name: 'External Host Info',
+    hash: '#ExternalHostInfo',
+    component: ExternalHostInfoStyleGuide,
   },
   {
     name: 'Full Width Visualization',
@@ -102,13 +108,7 @@ const intialSelectedIndex = getHashIndex(document.location.hash);
 
 export default function App() {
   const [selectedIndex, setSelectedIndex] = useState(intialSelectedIndex);
-  const handleListItemClick = (event, index) => {
-    setSelectedIndex(index);
-  };
-
-  const onClickHash = (hash) => {
-    setSelectedIndex(getHashIndex(hash));
-  };
+  const [collapsibleNavExpanded, setCollapsibleNavExpanded] = useState(false);
 
   useEffect(() => {
     if (selectedIndex === -1) {
@@ -118,9 +118,18 @@ export default function App() {
     }
   });
 
-  const [collapsibleNavExpanded, setCollapsibleNavExpanded] = useState(false);
   const handleToggleExpand = (event, newExpanded) => {
     setCollapsibleNavExpanded(newExpanded);
+  };
+
+  const handleListItemClick = (event, index) => {
+    if (collapsibleNavExpanded) { handleToggleExpand({}, false); }
+    setSelectedIndex(index);
+  };
+
+  const onClickHash = (hash) => {
+    if (collapsibleNavExpanded) { handleToggleExpand({}, false); }
+    setSelectedIndex(getHashIndex(hash));
   };
 
   const CurrentComponent = selectedIndex === -1 ? null : components[selectedIndex].component;
@@ -193,7 +202,7 @@ export default function App() {
       >
         <Typography variant="h5">Contents</Typography>
       </ExpansionPanelSummary>
-      <ExpansionPanelDetails>
+      <ExpansionPanelDetails style={{ display: 'inherit', marginTop: Theme.spacing(-2) }}>
         {renderNavList()}
       </ExpansionPanelDetails>
     </ExpansionPanel>

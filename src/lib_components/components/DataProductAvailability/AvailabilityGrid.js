@@ -298,7 +298,10 @@ export function AvailabilityGrid(config) {
     const finalMonth = latestAvailableMonthInt <= 6
       ? `${latestAvailableYearInt}-08`
       : `${latestAvailableYearInt + 1}-08`;
-    return 0 - getYearMonthStartX(finalMonth) - yearMonthWidth + svgWidth;
+    return Math.max(
+      0 - getYearMonthStartX(finalMonth) - yearMonthWidth + svgWidth,
+      minTimeOffset,
+    );
   };
 
   /**
