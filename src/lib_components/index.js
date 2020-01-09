@@ -37,6 +37,7 @@ import sitesJSON from './static/sites/sites.json';
 import statesJSON from './static/states/states.json';
 import statesShapesJSON from './static/statesShapes/statesShapes.json';
 import domainsJSON from './static/domains/domains.json';
+import domainsShapesJSON from './static/domainsShapes/domainsShapes.json';
 import bundlesJSON from './static/bundles/bundles.json';
 
 export {
@@ -73,6 +74,7 @@ export {
   statesJSON,
   statesShapesJSON,
   domainsJSON,
+  domainsShapesJSON,
   bundlesJSON,
 };
 

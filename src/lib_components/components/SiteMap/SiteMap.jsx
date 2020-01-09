@@ -36,6 +36,7 @@ import sitesJSON from '../../static/sites/sites.json';
 import statesJSON from '../../static/states/states.json';
 import statesShapesJSON from '../../static/statesShapes/statesShapes.json';
 import domainsJSON from '../../static/domains/domains.json';
+import domainsShapesJSON from '../../static/domainsShapes/domainsShapes.json';
 
 import iconShadowSVG from './icon-shadow.svg';
 import iconAquaticSVG from './icon-aquatic.svg';
@@ -235,10 +236,15 @@ const SiteMap = (props) => {
       case 'setTileLayer':
         if (!TILE_LAYERS[action.tileLayer]) { return state; }
         return { ...state, tileLayer: action.tileLayer };
+      /*
       case 'setSitesOverlay':
         return { ...state, sitesOverlay: action.visible };
-      case 'setStatesOverlay':
-        return { ...state, statesOverlay: action.visible };
+      case 'setExclusiveOverlay':
+        return {
+          ...state,
+          statesOverlay: (action.eventName === 'US States' && action.eventType === 'overlayadd'),
+        };
+      */
       case 'setZoom':
         return { ...state, zoom: action.zoom };
       default:
@@ -254,6 +260,7 @@ const SiteMap = (props) => {
     fetchSitesError: null,
     sitesOverlay: true,
     statesOverlay: false,
+    domainsOverlay: false,
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -418,7 +425,7 @@ const SiteMap = (props) => {
       TERRESTRIAL: getZoomedIcon('TERRESTRIAL'),
     };
     return (
-      <Overlay name="Site Markers" checked={state.sitesOverlay}>
+      <Overlay name="NEON Sites" checked={state.sitesOverlay}>
         <FeatureGroup>
           {Object.keys(state.sites).map((siteCode) => {
             const site = state.sites[siteCode];
@@ -466,6 +473,34 @@ const SiteMap = (props) => {
     </Overlay>
   );
 
+  const renderDomainPopup = (domainCode) => {
+    if (!domainsJSON[domainCode]) { return null; }
+    const domainName = domainsJSON[domainCode].name;
+    return (
+      <Popup className={classes.popup}>
+        <Typography variant="h6" gutterBottom>
+          {`${domainName} (${domainCode})`}
+        </Typography>
+      </Popup>
+    );
+  };
+
+  const renderDomainsOverlay = () => (
+    <Overlay name="NEON Domains" checked={state.domainsOverlay}>
+      <FeatureGroup>
+        {domainsShapesJSON.features.map(domain => (
+          <Polygon
+            key={domain.properties.domainCode}
+            color={TILE_LAYERS[state.tileLayer].overlayColor}
+            positions={domain.geometry.coordinates}
+          >
+            {renderDomainPopup(domain.properties.domainCode)}
+          </Polygon>
+        ))}
+      </FeatureGroup>
+    </Overlay>
+  );
+
   const renderTileLayer = (key) => {
     const tileLayer = TILE_LAYERS[key];
     const attributionNode = (
@@ -485,11 +520,20 @@ const SiteMap = (props) => {
     );
   };
 
+  /**
+     Map event handlers
+  */
+  const handleZoomEnd = (event) => {
+    dispatch({ type: 'setZoom', zoom: event.target.getZoom() });
+  };
   const handleBaseLayerChange = (event) => {
     if (!event.name || !TILE_LAYERS_BY_NAME[event.name]) { return; }
     dispatch({ type: 'setTileLayer', tileLayer: TILE_LAYERS_BY_NAME[event.name] });
   };
 
+  /**
+     Render the Map
+  */
   return (
     <Map
       ref={mapRef}
@@ -499,12 +543,13 @@ const SiteMap = (props) => {
       zoom={state.zoom}
       maxZoom={16}
       minZoom={1}
-      onZoomEnd={(event) => { dispatch({ type: 'setZoom', zoom: event.target.getZoom() }); }}
+      onZoomEnd={handleZoomEnd}
       onBaseLayerChange={handleBaseLayerChange}
     >
       <ScaleControl imperial metric updateWhenIdle />
       <LayersControl position="topright">
         {Object.keys(TILE_LAYERS).map(renderTileLayer)}
+        {renderDomainsOverlay()}
         {renderStatesOverlay()}
         {renderSitesOverlay()}
       </LayersControl>
