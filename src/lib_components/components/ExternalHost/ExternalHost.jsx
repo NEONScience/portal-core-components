@@ -194,8 +194,8 @@ const renderExternalLink = (href = '', text = '', annotation = '') => (
 const externalHosts = {
   AERONET: {
     id: 'AERONET',
-    name: 'AeroNet',
-    projectTitle: 'AERONET (The AErosol RObotic NETwork) Project',
+    name: 'AERONET',
+    projectTitle: 'AERONET (the AErosol RObotic NETwork)',
     url: 'https://aeronet.gsfc.nasa.gov',
     hostType: HOST_TYPES.EXCLUSIVE_DATA,
     linkType: LINK_TYPES.BY_SITE,
@@ -217,7 +217,7 @@ const externalHosts = {
   AMERIFLUX: {
     id: 'AMERIFLUX',
     name: 'AmeriFlux',
-    projectTitle: 'AmeriFlux Project',
+    projectTitle: 'AmeriFlux',
     url: 'https://ameriflux.lbl.gov',
     hostType: HOST_TYPES.REFORMATTED_DATA,
     linkType: LINK_TYPES.BY_SITE,
@@ -279,7 +279,7 @@ const externalHosts = {
   BOLD: {
     id: 'BOLD',
     name: 'BOLD',
-    projectTitle: 'Barcode of Life Datasystem (BOLD) Project',
+    projectTitle: 'BOLD (Barcode of Life Datasystem)',
     url: 'http://www.barcodinglife.com/',
     hostType: HOST_TYPES.ADDITIONAL_DATA,
     linkType: LINK_TYPES.BY_PRODUCT,
@@ -299,7 +299,7 @@ const externalHosts = {
   MGRAST: {
     id: 'MGRAST',
     name: 'MG-RAST',
-    projectTitle: 'MG-RAST (Metagenomics Rapid Annotation using Subsystem Technology) Project',
+    projectTitle: 'MG-RAST (Metagenomics Rapid Annotation using Subsystem Technology)',
     url: 'https://mg-rast.org',
     hostType: HOST_TYPES.ADDITIONAL_DATA,
     hostDataVariety: 'Raw sequence data',
@@ -318,7 +318,7 @@ const externalHosts = {
   },
   NPN: {
     id: 'NPN',
-    name: 'NPN',
+    name: 'USA-NPN',
     projectTitle: 'USA National Phenology Network (USA-NPN)',
     url: 'https://www.usanpn.org/usa-national-phenology-network',
     hostType: HOST_TYPES.REFORMATTED_DATA,
@@ -327,7 +327,7 @@ const externalHosts = {
   PHENOCAM: {
     id: 'PHENOCAM',
     name: 'PhenoCam',
-    projectTitle: 'PhenoCam Project',
+    projectTitle: 'The PhenoCam Network',
     url: 'https://phenocam.sr.unh.edu/webcam/about/',
     hostType: HOST_TYPES.EXCLUSIVE_DATA,
     linkType: LINK_TYPES.BY_SITE,

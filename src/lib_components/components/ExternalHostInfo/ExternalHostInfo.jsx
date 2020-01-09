@@ -59,7 +59,6 @@ const ExternalHostInfo = (props) => {
 
   // Remaining setup
   const externalGeneralLink = externalHost.renderLink();
-  const externalGeneralShortLink = externalHost.renderShortLink();
   const expandTitle = `${expanded ? 'hide' : 'show'} external host links to data`;
   const rootProps = {};
   Object.keys(otherProps)
@@ -68,18 +67,12 @@ const ExternalHostInfo = (props) => {
 
   let blurb = null;
   let dataVariety = externalHost.hostDataVariety || 'Data';
-  const blurbLink = hasSpecificLinks ? externalGeneralShortLink : (
-    <React.Fragment>
-      the&nbsp;
-      {externalGeneralLink}
-    </React.Fragment>
-  );
   if (externalHost.hostType === ExternalHost.HOST_TYPES.REFORMATTED_DATA) {
     blurb = (
       <React.Fragment>
         {`${dataVariety} for this product are available in other formats from`}
         &nbsp;
-        {blurbLink}
+        {externalGeneralLink}
       </React.Fragment>
     );
   }
@@ -88,7 +81,7 @@ const ExternalHostInfo = (props) => {
       <React.Fragment>
         {`${dataVariety} for this product are only available from`}
         &nbsp;
-        {blurbLink}
+        {externalGeneralLink}
       </React.Fragment>
     );
   }
@@ -100,7 +93,7 @@ const ExternalHostInfo = (props) => {
       <React.Fragment>
         {`${dataVariety} associated with this product ${are} available from`}
         &nbsp;
-        {blurbLink}
+        {externalGeneralLink}
       </React.Fragment>
     );
   }
@@ -125,11 +118,6 @@ const ExternalHostInfo = (props) => {
       </div>
       <div style={{ width: '100%', display: hasSpecificLinks && expanded ? 'block' : 'none' }}>
         <Divider style={{ margin: Theme.spacing(1.5, 0) }} />
-        <Typography variant="subtitle2" gutterBottom>
-          {/* eslint-disable react/jsx-one-expression-per-line */}
-          Use the links below to access data from the {externalGeneralLink}.
-          {/* eslint-enable react/jsx-one-expression-per-line */}
-        </Typography>
         <ExternalHostProductSepcificLinks productCode={productCode} />
       </div>
     </React.Fragment>
