@@ -14,6 +14,7 @@ import Divider from '@material-ui/core/Divider';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
+import Link from '@material-ui/core/Link';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
@@ -144,10 +145,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const dataUsageAndCitationPoliciesLink = ExternalHost.renderExternalLink(
-  'https://www.neonscience.org/data/about-data/data-policies',
-  'Data Usage and Citation Policies',
-  'NEON',
+const dataUsageAndCitationPoliciesLink = (
+  <Link
+    target="_blank"
+    href="https://www.neonscience.org/data/about-data/data-policies"
+    data-gtm="download-data-dialog.policies-link"
+  >
+    Data Usage and Citation Policies
+  </Link>
 );
 
 export default function DownloadStepForm(props) {
@@ -241,15 +246,14 @@ export default function DownloadStepForm(props) {
        DOCUMENTATION
     */
     documentation: () => {
-      const neonFaqLink = ExternalHost.renderExternalLink(
-        'http://data.neonscience.org/faq',
-        'NEON FAQ',
-        'NEON',
+      const neonFaqLink = (
+        <Link target="_blank" href="http://data.neonscience.org/faq">NEON FAQ</Link>
       );
-      const knbLink = ExternalHost.renderExternalLink(
-        'https://eml.ecoinformatics.org/',
+      const knbLink = ExternalHost.renderExternalHostLink(
+        'https://eml.ecoinformatics.org',
         'KNB',
         'KNB',
+        state.productData.productCode,
       );
       const { value, validValues } = state.documentation;
       return (
@@ -382,10 +386,13 @@ export default function DownloadStepForm(props) {
           render: row => formatBytes(row.size),
         },
       ];
-      const aopHardDriveLink = ExternalHost.renderExternalLink(
-        'https://www.neonscience.org/data-collection/airborne-remote-sensing/aop-data-hard-drive-request',
-        'AOP Data to Hard Drive Request',
-        'NEON',
+      const aopHardDriveLink = (
+        <Link
+          target="_blank"
+          href="https://www.neonscience.org/data-collection/airborne-remote-sensing/aop-data-hard-drive-request"
+        >
+          AOP Data to Hard Drive Request
+        </Link>
       );
       const debouncedFilterDispatch = debounce((filter, value) => {
         dispatch({ type: 'setS3FilesFilterValue', filter, value });
@@ -669,6 +676,7 @@ export default function DownloadStepForm(props) {
     externalExclusive: () => {
       const externalHost = ExternalHost.getByProductCode(state.productData.productCode);
       if (!externalHost) { return null; }
+      const hostLink = externalHost.renderLink(state.productData.productCode);
       return (
         <div data-selenium={`download-data-dialog.step-form.external-links.${externalHost.id.toLowerCase()}`}>
           <SnackbarContent
@@ -682,7 +690,7 @@ export default function DownloadStepForm(props) {
                     {/* eslint-disable react/jsx-one-expression-per-line */}
                     Data for this product is not currently available for download through
                     the NEON Data Portal. Please use the links below to access data for
-                    this product for a particular site from the {externalHost.renderLink()}.
+                    this product for a particular site from the {hostLink}.
                     {/* eslint-enable react/jsx-one-expression-per-line */}
                   </Typography>
                 </div>
@@ -770,10 +778,10 @@ export default function DownloadStepForm(props) {
           </div>
         </div>
       );
-      const downloadAndExploreLink = ExternalHost.renderExternalLink(
-        'https://www.neonscience.org/download-explore-neon-data',
-        'Download and Explore NEON Data',
-        'NEON',
+      const downloadAndExploreLink = (
+        <Link target="_blank" href="https://www.neonscience.org/download-explore-neon-data">
+          Download and Explore NEON Data
+        </Link>
       );
       const downloadAndExploreSnackbar = (
         <div data-selenium="download-data-dialog.step-form.summary.file-naming">
@@ -795,10 +803,10 @@ export default function DownloadStepForm(props) {
           />
         </div>
       );
-      const fileNamingConventionsLink = ExternalHost.renderExternalLink(
-        'https://data.neonscience.org/file-naming-conventions',
-        'NEON File Naming Conventions',
-        'NEON',
+      const fileNamingConventionsLink = (
+        <Link target="_blank" href="https://data.neonscience.org/file-naming-conventions">
+          NEON File Naming Conventions
+        </Link>
       );
       const fileNamingSnackbar = (
         <div data-selenium="download-data-dialog.step-form.summary.file-naming">

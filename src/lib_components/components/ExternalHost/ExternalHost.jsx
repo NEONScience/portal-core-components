@@ -180,11 +180,12 @@ const externalProducts = {
   },
 };
 
-const renderExternalLink = (href = '', text = '', annotation = '') => (
+const renderExternalHostLink = (href = '', text = '', host = '', productCode = 'n/a') => (
   <Link
     href={href}
     target="_blank"
-    data-external={annotation}
+    data-gtm-external-host={host}
+    data-gtm-product-code={productCode}
     rel="noopener noreferrer"
   >
     {text}
@@ -199,7 +200,7 @@ const externalHosts = {
     url: 'https://aeronet.gsfc.nasa.gov',
     hostType: HOST_TYPES.EXCLUSIVE_DATA,
     linkType: LINK_TYPES.BY_SITE,
-    getSiteLink: (siteCode = '') => {
+    getSiteLink: (siteCode = '', productCode = 'n/a') => {
       const hrefBase = 'http://aeronet.gsfc.nasa.gov/cgi-bin/webtool_inv_v3?stage=3&site=';
       const nonStandardSites = {
         BART: 'NEON_Bartlett',
@@ -211,7 +212,8 @@ const externalHosts = {
       const hrefSite = Object.keys(nonStandardSites).includes(siteCode)
         ? nonStandardSites[siteCode]
         : `NEON_${siteCode}`;
-      return renderExternalLink(`${hrefBase}${hrefSite}`, `${siteCode} - ${allSites[siteCode].description}`, 'AERONET');
+      const text = `${siteCode} - ${allSites[siteCode].description}`;
+      return renderExternalHostLink(`${hrefBase}${hrefSite}`, text, 'AERONET', productCode);
     },
   },
   AMERIFLUX: {
@@ -221,7 +223,7 @@ const externalHosts = {
     url: 'https://ameriflux.lbl.gov',
     hostType: HOST_TYPES.REFORMATTED_DATA,
     linkType: LINK_TYPES.BY_SITE,
-    getSiteLink: (siteCode = '') => {
+    getSiteLink: (siteCode = '', productCode = 'n/a') => {
       const siteCodeMapping = {
         GUAN: 'PR-xGU',
         LAJA: 'PR-xLA',
@@ -273,7 +275,8 @@ const externalHosts = {
       if (!siteCodeMapping[siteCode]) { return null; }
       const hrefBase = 'https://ameriflux.lbl.gov/sites/siteinfo';
       const hrefSite = siteCodeMapping[siteCode];
-      return renderExternalLink(`${hrefBase}/${hrefSite}/`, `${siteCode} - ${allSites[siteCode].description}`, 'AMERIFLUX');
+      const text = `${siteCode} - ${allSites[siteCode].description}`;
+      return renderExternalHostLink(`${hrefBase}/${hrefSite}/`, text, 'AMERIFLUX', productCode);
     },
   },
   BOLD: {
@@ -288,10 +291,11 @@ const externalHosts = {
       if (!externalProducts[productCode]) { return []; }
       return externalProducts[productCode].searches.map(search => ({
         key: search.query,
-        node: renderExternalLink(
+        node: renderExternalHostLink(
           `http://www.boldsystems.org/index.php/Public_SearchTerms?query=${search.query}`,
           search.title,
           'BOLD',
+          productCode,
         ),
       }));
     },
@@ -308,10 +312,11 @@ const externalHosts = {
       if (!externalProducts[productCode]) { return []; }
       return externalProducts[productCode].projects.map(project => ({
         key: project.id,
-        node: renderExternalLink(
+        node: renderExternalHostLink(
           `https://www.mg-rast.org/mgmain.html?mgpage=project&project=${project.id}`,
           project.title,
           'MGRAST',
+          productCode,
         ),
       }));
     },
@@ -334,20 +339,23 @@ const externalHosts = {
     getSiteLink: (siteCode = '', productCode = '') => {
       const hrefBase = 'https://phenocam.sr.unh.edu/webcam/sites';
       const hrefSite = `${allSites[siteCode].domainCode}.${siteCode}.${productCode.split('.').slice(0, 2).join('.')}`;
-      return renderExternalLink(`${hrefBase}/NEON.${hrefSite}/`, `${siteCode} - ${allSites[siteCode].description}`, 'PHENOCAM');
+      const text = `${siteCode} - ${allSites[siteCode].description}`;
+      return renderExternalHostLink(`${hrefBase}/NEON.${hrefSite}/`, text, 'PHENOCAM', productCode);
     },
   },
 };
 Object.keys(externalHosts).forEach((hostId) => {
-  externalHosts[hostId].renderLink = () => renderExternalLink(
+  externalHosts[hostId].renderLink = (productCode = 'n/a') => renderExternalHostLink(
     externalHosts[hostId].url,
     externalHosts[hostId].projectTitle,
     hostId,
+    productCode,
   );
-  externalHosts[hostId].renderShortLink = () => renderExternalLink(
+  externalHosts[hostId].renderShortLink = (productCode = 'n/a') => renderExternalHostLink(
     externalHosts[hostId].url,
     externalHosts[hostId].name,
     hostId,
+    productCode,
   );
 });
 
@@ -364,7 +372,7 @@ const ExternalHost = {
   LINK_TYPES,
   getByHostId,
   getByProductCode,
-  renderExternalLink,
+  renderExternalHostLink,
 };
 
 export default ExternalHost;

@@ -88,6 +88,7 @@ Object.keys(TILE_LAYERS).forEach((key) => {
   TILE_LAYERS_BY_NAME[TILE_LAYERS[key].name] = key;
 });
 
+const boxShadow = '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)';
 const useStyles = makeStyles(theme => ({
   notFetchedContainer: {
     width: '100%',
@@ -98,6 +99,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center',
     borderRadius: theme.spacing(1),
+    boxShadow,
   },
   notFetchedPaper: {
     position: 'absolute',
@@ -114,6 +116,7 @@ const useStyles = makeStyles(theme => ({
     height: '0px', // Necessary to set a fixed aspect ratio from props (using paddingBottom)
     overflow: 'hidden',
     borderRadius: theme.spacing(1),
+    boxShadow,
     '& div.leaflet-control-attribution': {
       borderTopLeftRadius: theme.spacing(0.5),
     },

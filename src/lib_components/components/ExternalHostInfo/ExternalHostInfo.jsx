@@ -58,7 +58,7 @@ const ExternalHostInfo = (props) => {
   ) || externalHost.linkType === ExternalHost.LINK_TYPES.BY_SITE;
 
   // Remaining setup
-  const externalGeneralLink = externalHost.renderLink();
+  const externalGeneralLink = externalHost.renderLink(productCode);
   const expandTitle = `${expanded ? 'hide' : 'show'} external host links to data`;
   const rootProps = {};
   Object.keys(otherProps)
