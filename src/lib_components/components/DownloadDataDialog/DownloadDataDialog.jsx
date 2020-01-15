@@ -10,7 +10,9 @@ import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import Link from '@material-ui/core/Link';
 import MobileStepper from '@material-ui/core/MobileStepper';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepButton from '@material-ui/core/StepButton';
@@ -21,6 +23,7 @@ import DownloadIcon from '@material-ui/icons/CloudDownload';
 import ErrorIcon from '@material-ui/icons/ErrorOutline';
 import LeftIcon from '@material-ui/icons/ChevronLeft';
 import RightIcon from '@material-ui/icons/ChevronRight';
+import WarningIcon from '@material-ui/icons/Warning';
 
 import DialogBase from '../DialogBase/DialogBase';
 import DownloadStepForm from '../DownloadStepForm/DownloadStepForm';
@@ -28,9 +31,14 @@ import DownloadDataContext from '../DownloadDataContext/DownloadDataContext';
 import DataThemeIcon from '../DataThemeIcon/DataThemeIcon';
 import ExternalHost from '../ExternalHost/ExternalHost';
 import ExternalHostInfo from '../ExternalHostInfo/ExternalHostInfo';
-import Theme from '../Theme/Theme';
+import Theme, { COLORS } from '../Theme/Theme';
 
-import { downloadManifest, downloadAopManifest, formatBytes } from '../../util/manifestUtil';
+import {
+  downloadManifest,
+  downloadAopManifest,
+  formatBytes,
+  DOWNLOAD_SIZE_WARN,
+} from '../../util/manifestUtil';
 
 const useStyles = makeStyles(theme => ({
   stepChip: {
@@ -62,18 +70,18 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.primary.main,
     margin: '-2px 6px -2px -4px',
   },
-  infoSnackbar: {
-    backgroundColor: theme.palette.grey[50],
+  warningSnackbar: {
+    backgroundColor: COLORS.ORANGE[100],
     color: '#000',
     border: `1px solid ${theme.palette.primary.main}80`,
-    margin: Theme.spacing(0.5, 0, 3, 0),
+    margin: Theme.spacing(0.5, 0, 2, 0),
     padding: Theme.spacing(0, 2),
     '& div': {
       width: '100%',
     },
   },
-  infoSnackbarIcon: {
-    color: theme.palette.grey[300],
+  warningSnackbarIcon: {
+    color: COLORS.ORANGE[800],
     marginRight: theme.spacing(2),
   },
   gtmCaptureButton: {
@@ -219,16 +227,21 @@ export default function DownloadDataDialog() {
     ) {
       const bytes = getSizeEstimateBytes();
       const uncompressed = fromAOPManifest ? ' (uncompressed)' : '';
+      let estimateColor = bytes > DOWNLOAD_SIZE_WARN ? COLORS.ORANGE[300] : 'inherit';
       /* eslint-disable react/jsx-one-expression-per-line */
-      return belowSm ? (
-        <Typography variant="body2">
-          Estimated size{uncompressed}:&nbsp;
-          <b>{formatBytes(bytes)}</b>
-        </Typography>
-      ) : (
+      if (belowSm) {
+        estimateColor = bytes > DOWNLOAD_SIZE_WARN ? COLORS.ORANGE[500] : 'inherit';
+        return (
+          <Typography variant="body2">
+            Estimated size{uncompressed}:&nbsp;
+            <span style={{ fontWeight: 700, color: estimateColor }}>{formatBytes(bytes)}</span>
+          </Typography>
+        );
+      }
+      return (
         <div {...alignRight}>
           <Typography variant="subtitle1" {...subtitleStyle}>Estimated size{uncompressed}</Typography>
-          <Typography variant="h5">{formatBytes(bytes)}</Typography>
+          <Typography variant="h5" style={{ color: estimateColor }}>{formatBytes(bytes)}</Typography>
         </div>
       );
       /* eslint-enable react/jsx-one-expression-per-line */
@@ -237,6 +250,50 @@ export default function DownloadDataDialog() {
       <Typography variant="body2" color="error">
         Unable to estimate size
       </Typography>
+    );
+  };
+
+  const renderDownloadSizeWarning = () => {
+    const bytes = getSizeEstimateBytes();
+    if (bytes < DOWNLOAD_SIZE_WARN) { return null; }
+    const formattedBytes = formatBytes(bytes);
+    const aopHardDriveLink = (
+      <Link
+        target="_blank"
+        href="https://www.neonscience.org/data-collection/airborne-remote-sensing/aop-data-hard-drive-request"
+      >
+        AOP Data to Hard Drive Request
+      </Link>
+    );
+    const aopBlurb = (
+      <React.Fragment>
+        {/* eslint-disable react/jsx-one-expression-per-line */}
+        An alternate way to obtain lots of AOP data is to submit an {aopHardDriveLink}.
+        {/* eslint-enable react/jsx-one-expression-per-line */}
+      </React.Fragment>
+    );
+    return (
+      <SnackbarContent
+        className={classes.warningSnackbar}
+        message={(
+          <div className={classes.startFlex}>
+            <WarningIcon fontSize="large" className={classes.warningSnackbarIcon} />
+            <div>
+              <Typography variant="subtitle1">
+                {/* eslint-disable react/jsx-one-expression-per-line */}
+                <b>
+                  Be sure you have at least {formattedBytes} of free disk space
+                  for this download!
+                </b>
+                <br />
+                If needed, you can reduce the download size by selecting fewer sites
+                or a more restrictive date range. {fromAOPManifest ? aopBlurb : null}
+                {/* eslint-enable react/jsx-one-expression-per-line */}
+              </Typography>
+            </div>
+          </div>
+        )}
+      />
     );
   };
 
@@ -570,7 +627,8 @@ export default function DownloadDataDialog() {
         </Grid>
       </Grid>
       {renderExternalHostInfo()}
-      <Divider />
+      {renderDownloadSizeWarning()}
+      {getSizeEstimateBytes() < DOWNLOAD_SIZE_WARN ? <Divider /> : null}
       {renderStepper()}
       {renderActiveStep()}
     </DialogBase>

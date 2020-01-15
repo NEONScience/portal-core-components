@@ -34,7 +34,7 @@ import {
   buildS3FilesRequestUrl,
   buildManifestRequestUrl,
   getSizeEstimateFromManifestResponse,
-  AOP_THRESHOLD_POST_BODY_SIZE,
+  MAX_POST_BODY_SIZE,
 } from '../../util/manifestUtil';
 import allSites from '../../static/sites/sites.json';
 
@@ -590,7 +590,7 @@ const getAndValidateNewS3FilesState = (previousState, action, broadcast = false)
   newState.s3Files.estimatedPostSize = estimatePostSize(newState.s3Files, newState.sites);
   newState.s3Files.isValid = (
     newState.s3Files.value.length > 0
-      && newState.s3Files.estimatedPostSize < AOP_THRESHOLD_POST_BODY_SIZE
+      && newState.s3Files.estimatedPostSize < MAX_POST_BODY_SIZE
   );
   if (s3FilesIdx !== -1) {
     newState.requiredSteps[s3FilesIdx].isComplete = newState.s3Files.isValid;

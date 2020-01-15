@@ -47,11 +47,7 @@ import ExternalHostProductSpecificLinks from '../ExternalHostProductSpecificLink
 import SiteChip from '../SiteChip/SiteChip';
 import Theme, { COLORS } from '../Theme/Theme';
 
-import {
-  formatBytes,
-  AOP_THRESHOLD_POST_BODY_SIZE,
-  AOP_THRESHOLD_HARD_DRIVE_WARN,
-} from '../../util/manifestUtil';
+import { formatBytes, MAX_POST_BODY_SIZE } from '../../util/manifestUtil';
 
 const useStyles = makeStyles(theme => ({
   copyButton: {
@@ -386,20 +382,12 @@ export default function DownloadStepForm(props) {
           render: row => formatBytes(row.size),
         },
       ];
-      const aopHardDriveLink = (
-        <Link
-          target="_blank"
-          href="https://www.neonscience.org/data-collection/airborne-remote-sensing/aop-data-hard-drive-request"
-        >
-          AOP Data to Hard Drive Request
-        </Link>
-      );
       const debouncedFilterDispatch = debounce((filter, value) => {
         dispatch({ type: 'setS3FilesFilterValue', filter, value });
       }, 200);
       const noFiltersApplied = Object.keys(filters).every(col => !filters[col].length);
       /* eslint-disable react/jsx-one-expression-per-line */
-      const postSizeError = (estimatedPostSize >= AOP_THRESHOLD_POST_BODY_SIZE) ? (
+      const postSizeError = (estimatedPostSize >= MAX_POST_BODY_SIZE) ? (
         <Grid item xs={12}>
           <SnackbarContent
             className={classes.infoSnackbar}
@@ -415,27 +403,8 @@ export default function DownloadStepForm(props) {
                   <Typography variant="body1">
                     Too many files requested! Current selection will make an
                     estimated <b>{formatBytes(estimatedPostSize)}</b> request; max
-                    size is <b>{formatBytes(AOP_THRESHOLD_POST_BODY_SIZE)}</b>.
+                    size is <b>{formatBytes(MAX_POST_BODY_SIZE)}</b>.
                     Please select fewer files in order to proceed.
-                  </Typography>
-                </div>
-              </div>
-            )}
-          />
-        </Grid>
-      ) : null;
-      const downloadSizeWarning = (!postSizeError && totalSize > AOP_THRESHOLD_HARD_DRIVE_WARN) ? (
-        <Grid item xs={12}>
-          <SnackbarContent
-            className={classes.infoSnackbar}
-            style={{ marginBottom: Theme.spacing(2) }}
-            message={(
-              <div className={classes.startFlex}>
-                <InfoIcon fontSize="small" className={classes.infoSnackbarIcon} />
-                <div>
-                  <Typography variant="body2">
-                    This will be a large download. An alternate way to obtain
-                    lots of data is to submit an {aopHardDriveLink}.
                   </Typography>
                 </div>
               </div>
@@ -536,7 +505,6 @@ export default function DownloadStepForm(props) {
               <MTableToolbar {...toolbarProps} style={{ borderRadius: Theme.spacing(0.5) }} />
             </Grid>
             {postSizeError}
-            {downloadSizeWarning}
           </Grid>
         ),
         FilterRow: filterRowProps => (
@@ -601,7 +569,7 @@ export default function DownloadStepForm(props) {
           />
           <div className={classes.loadingOverlay} style={{ display: isLoading ? 'block' : 'none' }}>
             <Typography variant="h6" style={{ marginBottom: Theme.spacing(4) }}>
-              {`Loading files (${(s3FileFetchProgress || 0).toFixed(1)}%)...`}
+              {`Loading files (${Math.floor(s3FileFetchProgress || 0)}%)...`}
             </Typography>
             <CircularProgress variant="static" value={s3FileFetchProgress} />
           </div>

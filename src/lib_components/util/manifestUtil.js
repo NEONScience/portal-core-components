@@ -82,8 +82,8 @@ export const downloadAopManifest = (productData, s3Files, documentation = 'inclu
   return downloadManifest(manifest);
 };
 
-export const AOP_THRESHOLD_POST_BODY_SIZE = 2097152; // 2MB
-export const AOP_THRESHOLD_HARD_DRIVE_WARN = 42949672960; // 40GB
+export const MAX_POST_BODY_SIZE = 2097152; // 2MB
+export const DOWNLOAD_SIZE_WARN = 42949672960; // 40GB
 
 export const formatBytes = (bytes) => {
   if (!Number.isInteger(bytes) || bytes < 0) {
