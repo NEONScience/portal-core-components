@@ -1,3 +1,5 @@
+/* eslint-disable import/no-unresolved, import/extensions */
+
 import { Nullable } from '../types/coreTypes';
 
 const exists = (o: any): boolean => (typeof o !== 'undefined') && (o !== null);
