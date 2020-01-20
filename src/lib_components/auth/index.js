@@ -1,1 +1,1 @@
-export { default as Authenticate } from './authenticate';
+export { default } from './authenticate';

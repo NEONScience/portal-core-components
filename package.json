@@ -37,11 +37,13 @@
     "universal-cookie": "^4.0.2"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-react-app": "^9.0.0",
-    "babel-preset-stage-0": "^6.24.1",
+    "@babel/cli": "^7.8.3",
+    "@babel/core": "^7.8.3",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.8.3",
+    "@babel/plugin-transform-object-assign": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "@babel/preset-react": "^7.8.3",
     "customize-cra": "^0.2.14",
     "eslint": "^6.1.0",
     "eslint-config-airbnb": "^17.1.0",
@@ -57,7 +59,7 @@
     "test": "react-app-rewired test - env=jsdom",
     "lint": "(eslint src/ --ext .js,.jsx || true) && exit 0",
     "lint:fix": "(eslint --fix src/ --ext .js,.jsx || true) && exit 0",
-    "lib": "babel src/lib_components --out-dir lib --copy-files --ignore \"src/**/StyleGuide.jsx\" && sh ./applyLibExports.sh"
+    "lib": "NODE_ENV=production babel ./src/lib_components --out-dir lib --copy-files --ignore \"src/**/StyleGuide.jsx\""
   },
   "jest": {
     "collectCoverageFrom": [

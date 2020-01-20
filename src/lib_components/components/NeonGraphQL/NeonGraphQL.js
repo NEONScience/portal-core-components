@@ -13,7 +13,7 @@ export const DIMENSIONALITIES = {
   MANY: 'MANY',
 };
 
-const getQueryBody = (type = '', dimensionality = '', id: null) => {
+const getQueryBody = (type = '', dimensionality = '', id = null) => {
   let query = '';
   switch (type) {
     case TYPES.DATA_PRODUCTS:

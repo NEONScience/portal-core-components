@@ -1,81 +1,41 @@
 // Primary lib exports (those documented with a StyleGuide)
-import { AopDataViewer } from './components/AopDataViewer';
-import { DataProductAvailability } from './components/DataProductAvailability';
-import { DataThemeIcon } from './components/DataThemeIcon';
-import { DownloadDataButton } from './components/DownloadDataButton';
-import { DownloadDataContext } from './components/DownloadDataContext';
-import { NeonEnvironment } from './components/NeonEnvironment';
-import { NeonGraphQL } from './components/NeonGraphQL';
-import { NeonPage } from './components/NeonPage';
-import { SiteChip } from './components/SiteChip';
-import { SiteMap } from './components/SiteMap';
-import { Theme } from './components/Theme';
+export { default as AopDataViewer } from './components/AopDataViewer';
+export { default as DataThemeIcon } from './components/DataThemeIcon';
+export { default as DataProductAvailability } from './components/DataProductAvailability';
+export { default as DownloadDataButton } from './components/DownloadDataButton';
+export { default as DownloadDataContext } from './components/DownloadDataContext';
+export { default as NeonEnvironment } from './components/NeonEnvironment';
+export { default as NeonGraphQL } from './components/NeonGraphQL';
+export { default as NeonPage } from './components/NeonPage';
+export { default as SiteChip } from './components/SiteChip';
+export { default as SiteMap } from './components/SiteMap';
+export { default as Theme } from './components/Theme';
 
 // Secondary lib exports (everything else, including legacy stuff that may
 // not need to be exported anymore)
-import { DownloadStepForm } from './components/DownloadStepForm';
-import { ExternalHost } from './components/ExternalHost';
-import { ExternalHostInfo } from './components/ExternalHostInfo';
-import { ExternalHostProductSpecificLinks } from './components/ExternalHostProductSpecificLinks';
-import { FullWidthVisualization } from './components/FullWidthVisualization';
+export { default as DownloadStepForm } from './components/DownloadStepForm';
+export { default as ExternalHost } from './components/ExternalHost';
+export { default as ExternalHostInfo } from './components/ExternalHostInfo';
+export { default as ExternalHostProductSpecificLinks } from './components/ExternalHostProductSpecificLinks';
+export { default as FullWidthVisualization } from './components/FullWidthVisualization';
 
-import { NeonAuthLogin } from './components/NeonAuthLogin';
-import { NeonAuthLogout } from './components/NeonAuthLogout';
-import { NeonAuthRoot } from './components/NeonAuthRoot';
+export { default as NeonAuthLogin } from './components/NeonAuthLogin';
+export { default as NeonAuthLogout } from './components/NeonAuthLogout';
+export { default as NeonAuthRoot } from './components/NeonAuthRoot';
 
-import { NeonFooter } from './components/NeonFooter';
-import { NeonHeader } from './components/NeonHeader';
-import { NeonMenu } from './components/NeonMenu';
-import { NeonUtilityBar } from './components/NeonUtilityBar';
+export { default as NeonFooter } from './components/NeonFooter';
+export { default as NeonHeader } from './components/NeonHeader';
+export { default as NeonMenu } from './components/NeonMenu';
+export { default as NeonUtilityBar } from './components/NeonUtilityBar';
 
-import { DialogBase } from './components/DialogBase';
-import { PopupBase } from './components/PopupBase';
-import { PopupLoading } from './components/PopupLoading';
+export { default as DialogBase } from './components/DialogBase';
+export { default as PopupBase } from './components/PopupBase';
+export { default as PopupLoading } from './components/PopupLoading';
 
 // Static JSON exports
-import sitesJSON from './static/sites/sites.json';
-import statesJSON from './static/states/states.json';
-import statesShapesJSON from './static/statesShapes/statesShapes.json';
-import domainsJSON from './static/domains/domains.json';
-import domainsShapesJSON from './static/domainsShapes/domainsShapes.json';
-import bundlesJSON from './static/bundles/bundles.json';
-
-export {
-  // Primaries
-  AopDataViewer,
-  DataProductAvailability,
-  DataThemeIcon,
-  DownloadDataButton,
-  DownloadDataContext,
-  FullWidthVisualization,
-  NeonEnvironment,
-  NeonGraphQL,
-  NeonPage,
-  SiteChip,
-  SiteMap,
-  Theme,
-  // Secondaries
-  DownloadStepForm,
-  ExternalHost,
-  ExternalHostInfo,
-  ExternalHostProductSpecificLinks,
-  NeonAuthLogin,
-  NeonAuthLogout,
-  NeonAuthRoot,
-  NeonFooter,
-  NeonHeader,
-  NeonMenu,
-  NeonUtilityBar,
-  PopupBase,
-  DialogBase,
-  PopupLoading,
-  // Static JSON
-  sitesJSON,
-  statesJSON,
-  statesShapesJSON,
-  domainsJSON,
-  domainsShapesJSON,
-  bundlesJSON,
-};
-
-export default NeonPage;
+export { default as sitesJSON } from './static/sites/sites.json';
+export { default as statesJSON } from './static/states/states.json';
+export { default as statesShapesJSON } from './static/statesShapes/statesShapes.json';
+export { default as domainsJSON } from './static/domains/domains.json';
+export { default as domainsShapesJSON } from './static/domainsShapes/domainsShapes.json';
+export { default as bundlesJSON } from './static/bundles/bundles.json';
