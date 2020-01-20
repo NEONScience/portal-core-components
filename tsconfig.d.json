@@ -1,0 +1,31 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "./src/lib_components",
+    "outDir": "./lib",
+    "noEmit": false,
+    "emitDeclarationOnly": true
+  },
+  "include": [
+    "./src/lib_components/auth/**/*",
+    "./src/lib_components/components/**/*",
+    "./src/lib_components/flow/**/*",
+    "./src/lib_components/routing/**/*",
+    "./src/lib_components/types/**/*",
+    "./src/lib_components/util/**/*",
+    "./src/lib_components/*.js",
+    "./src/lib_components/*.jsx",
+    "./src/lib_components/*.ts",
+    "./src/lib_components/*.tsx",
+  ],
+  "exclude": [
+    "./src/**/StyleGuide.jsx",
+    "./src/components/*",
+    "./src/favicon/*",
+    "./src/sampleData/*",
+    "./src/*.js",
+    "./src/*.jsx",
+    "./src/*.ts",
+    "./src/*.tsx"
+  ]
+}

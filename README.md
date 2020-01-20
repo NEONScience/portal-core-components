@@ -8,17 +8,32 @@ This is a library of react components to be used on pages for the NEON Data Port
 You don't need a copy of this project to use it!
 (You _will_ need your git credentials to be up to date from the "git" command line, but they should be anyway.)
 
-In the target project directory, install this package with:
+In the target project directory, preferentially install this package with a versioned release tag:
 
-    npm install git+https://github.com/NEONScience/portal-core-components#<branch>
+    npm install github:NEONScience/portal-core-components#tag
+
+So, v1.0.0 would be:
+
+    npm install github:NEONScience/portal-core-components#v1.0.0
+
+In the target project directory, install this package for a particular branch:
+
+    npm install github:NEONScience/portal-core-components#branch
 
 So, develop would be:
 
-    npm install git+https://github.com/NEONScience/portal-core-components#develop
+    npm install github:NEONScience/portal-core-components#develop
 
-Once installed, components should be imported in code with:
+For more information on GitHub URL's, see NPM documentation: https://docs.npmjs.com/files/package.json#github-urls
 
-    import { <component name> } from "portal-core-components"
+Once installed, components should be imported in code with one of:
+
+```javascript
+// Preferentially import specific components by default export
+import ComponentName from "portal-core-components/lib/components/ComponentName";
+// Import component from top level exports
+import { <component name> } from "portal-core-components"
+```
 
 And used like any other component in the containing render() method.
 
@@ -26,9 +41,13 @@ And used like any other component in the containing render() method.
 ## Adding a New Component
 
 1. Create a new directory in `src/lib_components/components`
-2. Build your component in this directory (e.g. `Component.js`, `Component.jsx`, etc.)
+2. Build your component in this directory (e.g. `Component.js`, `Component.jsx`, etc.), ensure default export
 3. Add any other necessary assets (including additional components) in this directory as needed
-4. Create a `package.json` file in this directory containing the following:
+4. Create `index.js`, `index.d.ts` files in this directory containing the following:
+    ```
+    export { default } from './YourComponent';
+    ```
+5. Create a `package.json` file in this directory containing the following:
     ```
     {
       "private": true,
@@ -42,8 +61,8 @@ And used like any other component in the containing render() method.
     * If the entry point is the _same pre- and post-compile_ then use only `main` to point to the common entry point
     * Use kebab-case for `name`
     * Use CamelCase for files
-5. Add the new component to `src/lib_components/index.js`
-6. Run `npm run lib` to have the new component picked up and exported with the library
+6. Add the new component to `src/lib_components/index.ts`
+7. Run `npm run lib` to have the new component picked up and exported with the library
 
 ### NOTE: Verify new dependencies!
 
@@ -69,42 +88,18 @@ to run a local instance.  Modify and deliver as normal.
 
 For local development without needing to send things to git, you may want to check out the npm link command at https://docs.npmjs.com/cli/link.  This can cause some unexpected behaviors, so do some research before you try.
 
-Once modified, rebuild the library like so:
+Once modified, rebuild the library and generate TypeScript declaration files like so:
 
     npm run lib
 
 which will place the components in /lib.  These built components should be checked into git.
-
-**NOTE: a Babel bug with a (now automated) workaround**
-
-After running `npm run lib` there is a generated file a `/lib/index.js` containing exports. Note that the export lines should all look like this:
-
-    exports.<component name> = _<component name>.default;
-
-A bug from a translation that Babel makes during the build process originally generates these lines to look like this:
-
-    exports.<component name> = _<component name>.<component name>;
-
-Previously this had to be manually fixed after running  `npm run lib`. Currently this is no longer necessary as the run script includes a `sed` call to immediately edit the output file.
-
-Keep an eye on this issue with Babel. Eventually it may get fixed upstream so that we can simplify the `lib` script to not include the ugly `sed` command.
-
-**Note for macOS and sed, will need to install the gnu version of sed as the syntax is slightly different as well as regex handling**
-
-- Install Homebrew
-- Install gnu-sed package
-  - `brew install gnu-sed`
-
-Should now have the `gsed` executable installed for utilization.
-
-See https://stackoverflow.com/questions/47059929/looking-for-errors-in-a-react-component-export-import.
 
 
 ## Library Composition
 
 This package was configured with advice from [this article](https://medium.com/@lokhmakov/best-way-to-create-npm-packages-with-create-react-app-b24dd449c354).
 
-In summary, it began as a create-react-app app that was ejected. A `.babelrc` was added with minor configuration and a script to invoke babel to run a library build was added.
+In summary, it began as a create-react-app app that was ejected. A `babel.config.json` was added with minor configuration and a script to invoke babel to run a library build was added.
 
 Components are then created in `src/lib_components/components`, each with its own `package.json` to "publish itself" within the library. Babel generates a `lib` directory with each component and a single `index.js` entry point that exports each individual component's entry point.
 
@@ -129,4 +124,10 @@ Components are then created in `src/lib_components/components`, each with its ow
     NOTE: This script always exits 0, even when there are lint errors, to prevent a confusing NPM error from appearing at the end of the output
 
 * **`npm run lib`**
-    Generate a library build (what other apps importing components from portal-core-components as a library will use)
+    Generate a library build and TypeScript delcaration files (what other apps importing components from portal-core-components as a library will use)
+
+* **`npm run lib:babel-build`**
+    Generate a library build using Babel, sans TypeScript delcaration files
+
+* **`npm run lib:types`**
+    Utilize TypeScript compiler to generate delcaration files
