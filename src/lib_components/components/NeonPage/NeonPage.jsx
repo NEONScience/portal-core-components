@@ -110,6 +110,7 @@ const NeonPage = (props) => {
     loading,
     progress,
     error,
+    notification,
   } = props;
 
   /**
@@ -118,8 +119,20 @@ const NeonPage = (props) => {
   const cancellationSubject$ = new Subject();
   const notificationDismissals = cookies.get('dismissed-notifications') || [];
 
-  const [fetchNotificationsStatus, setFetchNotificationsStatus] = useState(null);
-  const [notifications, setNotifications] = useState([]);
+  let initialFetchStatus = null;
+  let initialNotifications = [];
+  if (notification !== null && notification.length) {
+    const notificationPropId = generateNotificationId(notification);
+    initialFetchStatus = 'success';
+    initialNotifications = [{
+      id: notificationPropId,
+      message: notification,
+      dismissed: notificationDismissals.includes(notificationPropId),
+    }];
+  }
+
+  const [fetchNotificationsStatus, setFetchNotificationsStatus] = useState(initialFetchStatus);
+  const [notifications, setNotifications] = useState(initialNotifications);
 
   const handleFetchNotificationsSuccess = (response) => {
     setFetchNotificationsStatus('success');
@@ -272,6 +285,7 @@ NeonPage.propTypes = {
   loading: PropTypes.string,
   progress: PropTypes.number,
   error: PropTypes.string,
+  notification: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.oneOfType([
       PropTypes.node,
@@ -288,6 +302,7 @@ NeonPage.defaultProps = {
   loading: null,
   progress: null,
   error: null,
+  notification: null,
 };
 
 export default NeonPage;

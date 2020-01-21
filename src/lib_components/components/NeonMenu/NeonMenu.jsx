@@ -388,6 +388,7 @@ class NeonMenu extends Component {
       <IconButton
         key="show-notifications"
         aria-label="show-notifications"
+        title="Show Notifications"
         onClick={onShowNotifications}
         style={{ marginRight: '12px' }}
         disabled={notificationsDisabled}

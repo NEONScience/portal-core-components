@@ -11,6 +11,9 @@ import CloseIcon from '@material-ui/icons/Close';
 import Theme, { COLORS } from '../Theme/Theme';
 
 const useStyles = makeStyles(theme => ({
+  notificationRoot: {
+    zIndex: 11000,
+  },
   notification: {
     backgroundColor: COLORS.YELLOW[700],
     '& a': {
@@ -40,6 +43,7 @@ const LiferayNotifications = (props) => {
   return (
     <Snackbar
       open
+      className={classes.notificationRoot}
       anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       ContentProps={{ 'aria-describedby': 'neon-data-portal-notifications' }}
     >
