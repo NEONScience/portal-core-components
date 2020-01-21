@@ -19,7 +19,7 @@ import Typography from '@material-ui/core/Typography';
 import ErrorIcon from '@material-ui/icons/Warning';
 import Skeleton from '@material-ui/lab/Skeleton';
 
-import Theme from '../Theme/Theme';
+import Theme, { COLORS } from '../Theme/Theme';
 import NeonHeader from '../NeonHeader/NeonHeader';
 import NeonFooter from '../NeonFooter/NeonFooter';
 import BrowserWarning from './BrowserWarning';
@@ -53,7 +53,7 @@ const createUseStyles = props => (makeStyles(theme => ({
     // component, to appear the same as the <Link> component. This is especially
     // useful for rendered markdown where injecting Mui Links isn't possible.
     '& a:not([class]), a[class=""]': {
-      color: theme.palette.secondary.main,
+      color: COLORS.SECONDARY_BLUE[500], // MUST come from COLORS, not palette
       textDecoration: 'none',
     },
     '& a:hover:not([class]), a:hover[class=""]': {
