@@ -17,11 +17,13 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import HomeIcon from '@material-ui/icons/Home';
+import NotificationsIcon from '@material-ui/icons/Notifications';
 
 import NeonDrawerMenu from './NeonDrawerMenu';
 import Authenticate from '../../auth/authenticate';
 
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
+import { COLORS } from '../Theme/Theme';
 import { getJson } from '../../util/rxUtil';
 
 import './NeonMenu.css';
@@ -368,6 +370,8 @@ class NeonMenu extends Component {
       loginPath,
       logoutPath,
       accountPath,
+      notifications,
+      onShowNotifications,
     } = this.props;
 
     const {
@@ -377,6 +381,20 @@ class NeonMenu extends Component {
       menuItems,
       drawerIsOpen,
     } = this.state;
+
+    const notificationsDisabled = notifications.some(n => !n.dismissed);
+    const notificationsColor = notificationsDisabled ? COLORS.GREY[200] : COLORS.YELLOW[700];
+    const notificationsContent = notifications.length ? (
+      <IconButton
+        key="show-notifications"
+        aria-label="show-notifications"
+        onClick={onShowNotifications}
+        style={{ marginRight: '12px' }}
+        disabled={notificationsDisabled}
+      >
+        <NotificationsIcon style={{ color: notificationsColor, fontSize: '1.65rem !important' }} />
+      </IconButton>
+    ) : null;
 
     let authContent = (
       <Button href={loginPath} size="small" variant="outlined" data-selenium="neon-menu.sign-in-button">
@@ -402,6 +420,7 @@ class NeonMenu extends Component {
     }
     const authContainer = (
       <div className="neon-menu__auth">
+        {notificationsContent}
         {authContent}
       </div>
     );
@@ -497,12 +516,22 @@ NeonMenu.propTypes = {
   loginPath: PropTypes.string,
   logoutPath: PropTypes.string,
   accountPath: PropTypes.string,
+  notifications: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      message: PropTypes.string.isRequired,
+      dismissed: PropTypes.bool.isRequired,
+    }),
+  ),
+  onShowNotifications: PropTypes.func,
 };
 
 NeonMenu.defaultProps = {
   loginPath: '',
   logoutPath: '',
   accountPath: '',
+  notifications: [],
+  onShowNotifications: null,
 };
 
 export default NeonMenu;

@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
+import Cookies from 'universal-cookie';
+
 import uniq from 'lodash/uniq';
+
+import { Subject } from 'rxjs';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
@@ -15,10 +19,19 @@ import Typography from '@material-ui/core/Typography';
 import ErrorIcon from '@material-ui/icons/Warning';
 import Skeleton from '@material-ui/lab/Skeleton';
 
-import Theme, { COLORS } from '../Theme/Theme';
+import Theme from '../Theme/Theme';
 import NeonHeader from '../NeonHeader/NeonHeader';
 import NeonFooter from '../NeonFooter/NeonFooter';
 import BrowserWarning from './BrowserWarning';
+import LiferayNotifications from './LiferayNotifications';
+
+import { getJson } from '../../util/rxUtil';
+import {
+  generateNotificationId,
+  getLiferayNotificationsApiPath,
+} from '../../util/liferayNotificationsUtil';
+
+const cookies = new Cookies();
 
 const useStyles = makeStyles(theme => ({
   outerPageContainer: {
@@ -40,7 +53,7 @@ const useStyles = makeStyles(theme => ({
     // component, to appear the same as the <Link> component. This is especially
     // useful for rendered markdown where injecting Mui Links isn't possible.
     '& a:not([class]), a[class=""]': {
-      color: COLORS.SECONDARY_BLUE[500],
+      color: theme.palette.secondary.main,
       textDecoration: 'none',
     },
     '& a:hover:not([class]), a:hover[class=""]': {
@@ -99,6 +112,58 @@ const NeonPage = (props) => {
     error,
   } = props;
 
+  /**
+     Liferay Notifications
+   */
+  const cancellationSubject$ = new Subject();
+  const notificationDismissals = cookies.get('dismissed-notifications') || [];
+
+  const [fetchNotificationsStatus, setFetchNotificationsStatus] = useState(null);
+  const [notifications, setNotifications] = useState([]);
+
+  const handleFetchNotificationsSuccess = (response) => {
+    setFetchNotificationsStatus('success');
+    if (!Array.isArray(response.notifications)) { return; }
+    setNotifications(
+      response.notifications.map((message) => {
+        const id = generateNotificationId(message);
+        const dismissed = notificationDismissals.includes(id);
+        return { id, message, dismissed };
+      }),
+    );
+  };
+
+  // If the endpoint fails don't bother with any visible error. Just let it go.
+  const handleFetchNotificationsError = () => {
+    setFetchNotificationsStatus('error');
+    setNotifications([]);
+  };
+
+  const handleHideNotifications = () => {
+    const updatedDismissals = notifications.map(n => n.id);
+    cookies.set('dismissed-notifications', updatedDismissals, { path: '/', maxAge: 86400 });
+    setNotifications(notifications.map(n => ({ ...n, dismissed: true })));
+  };
+
+  const handleShowNotifications = () => {
+    cookies.remove('dismissed-notifications');
+    setNotifications(notifications.map(n => ({ ...n, dismissed: false })));
+  };
+
+  useEffect(() => {
+    if (fetchNotificationsStatus !== null) { return; }
+    setFetchNotificationsStatus('fetching');
+    getJson(
+      getLiferayNotificationsApiPath(),
+      handleFetchNotificationsSuccess,
+      handleFetchNotificationsError,
+      cancellationSubject$,
+    );
+  }, [fetchNotificationsStatus]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  /**
+     Render functions
+   */
   const renderTitle = () => {
     if ((loading || error) && !title) {
       return (
@@ -172,7 +237,10 @@ const NeonPage = (props) => {
     <React.Fragment>
       <ThemeProvider theme={Theme}>
         <CssBaseline />
-        <NeonHeader />
+        <NeonHeader
+          notifications={notifications}
+          onShowNotifications={handleShowNotifications}
+        />
         <Container className={classes.outerPageContainer}>
           <Container className={classes.pageContainer} data-selenium="neon-page.content">
             {renderBreadcrumbs()}
@@ -181,6 +249,10 @@ const NeonPage = (props) => {
           </Container>
           {renderLoading()}
           {renderError()}
+          <LiferayNotifications
+            notifications={notifications}
+            onHideNotifications={handleHideNotifications}
+          />
           <BrowserWarning />
         </Container>
         <NeonFooter />
