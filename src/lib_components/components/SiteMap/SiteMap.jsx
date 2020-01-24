@@ -2,6 +2,7 @@ import React, { useRef, useReducer, useEffect } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import PropTypes from 'prop-types';
 
+import { of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -38,16 +39,26 @@ import statesShapesJSON from '../../static/statesShapes/statesShapes.json';
 import domainsJSON from '../../static/domains/domains.json';
 import domainsShapesJSON from '../../static/domainsShapes/domainsShapes.json';
 
-import iconShadowSVG from './icon-shadow.svg';
-import iconAquaticSVG from './icon-aquatic.svg';
-import iconTerrestrialSVG from './icon-terrestrial.svg';
+import iconCoreTerrestrialSVG from './icon-core-terrestrial.svg';
+import iconCoreAquaticSVG from './icon-core-aquatic.svg';
+import iconCoreShadowSVG from './icon-core-shadow.svg';
+import iconRelocatableTerrestrialSVG from './icon-relocatable-terrestrial.svg';
+import iconRelocatableAquaticSVG from './icon-relocatable-aquatic.svg';
+import iconRelocatableShadowSVG from './icon-relocatable-shadow.svg';
 
 const { BaseLayer, Overlay } = LayersControl;
 
 const ICON_SVGS = {
-  AQUATIC: iconAquaticSVG,
-  TERRESTRIAL: iconTerrestrialSVG,
-  SHADOW: iconShadowSVG,
+  CORE: {
+    AQUATIC: iconCoreAquaticSVG,
+    TERRESTRIAL: iconCoreTerrestrialSVG,
+    SHADOW: iconCoreShadowSVG,
+  },
+  RELOCATABLE: {
+    AQUATIC: iconRelocatableAquaticSVG,
+    TERRESTRIAL: iconRelocatableTerrestrialSVG,
+    SHADOW: iconRelocatableShadowSVG,
+  },
 };
 
 const SITE_DETAILS_URL_BASE = 'https://www.neonscience.org/field-sites/field-sites-map/';
@@ -220,9 +231,8 @@ const SiteMap = (props) => {
     } else if (typeof sitesProp === 'object' && Object.keys(sitesProp).length > 0) {
       sites = { ...sitesProp };
       Object.keys(sites).forEach((siteCode) => {
-        if (!sites[siteCode].terrain) {
-          sites[siteCode].terrain = sitesJSON[siteCode].terrain;
-        }
+        if (!sites[siteCode].siteCode) { sites[siteCode].siteCode = siteCode; }
+        if (!sites[siteCode].terrain) { sites[siteCode].terrain = sitesJSON[siteCode].terrain; }
       });
       fetchSitesStatus = 'fetched';
     }
@@ -285,12 +295,14 @@ const SiteMap = (props) => {
       if (response.response && response.response.data && response.response.data.sites) {
         const sitesResponse = sitesArrayToKeyedObject(response.response.data.sites);
         dispatch({ type: 'fetchSitesSucceeded', sites: sitesResponse });
-      } else {
-        dispatch({ type: 'fetchSitesFailed', error: 'malformed response' });
+        return of(true);
       }
+      dispatch({ type: 'fetchSitesFailed', error: 'malformed response' });
+      return of(false);
     }),
     catchError((error) => {
-      dispatch({ type: 'fetchSitesFailed', error });
+      dispatch({ type: 'fetchSitesFailed', error: error.message });
+      return of(false);
     }),
   );
 
@@ -332,15 +344,15 @@ const SiteMap = (props) => {
     );
   }
 
-  const getZoomedIcon = (terrain = 'TERRESTRIAL') => {
-    if (!ICON_SVGS[terrain] || !ICON_SVGS.SHADOW) { return null; }
+  const getZoomedIcon = (type, terrain) => {
+    if (!ICON_SVGS[type] || !ICON_SVGS[type][terrain] || !ICON_SVGS[type].SHADOW) { return null; }
     const iconScale = 0.2 + (Math.floor((state.zoom - 2) / 3) / 10);
     return new L.Icon({
-      iconUrl: ICON_SVGS[terrain],
-      iconRetinaUrl: ICON_SVGS[terrain],
+      iconUrl: ICON_SVGS[type][terrain],
+      iconRetinaUrl: ICON_SVGS[type][terrain],
       iconSize: [100, 100].map(x => x * iconScale),
       iconAnchor: [50, 100].map(x => x * iconScale),
-      shadowUrl: ICON_SVGS.SHADOW,
+      shadowUrl: ICON_SVGS[type].SHADOW,
       shadowSize: [156, 93].map(x => x * iconScale),
       shadowAnchor: [50, 95].map(x => x * iconScale),
       popupAnchor: [0, -100].map(x => x * iconScale),
@@ -348,15 +360,23 @@ const SiteMap = (props) => {
   };
 
   const renderSitePopup = (site) => {
+    let typeTitle = 'Core';
+    let typeSubtitle = 'fixed location';
+    if (site.type === 'RELOCATABLE') {
+      typeTitle = 'Relocatable';
+      typeSubtitle = 'location changes';
+    }
     let terrainTitle = 'Terrestrial';
-    let terrainSubtitle = '(land-based)';
+    let terrainSubtitle = 'land-based';
     if (site.terrain === 'AQUATIC') {
       terrainTitle = 'Aquatic';
-      terrainSubtitle = '(water-based)';
+      terrainSubtitle = 'water-based';
     }
+    const terrainTypeTitle = `${terrainTitle} ${typeTitle}`;
+    const terrainTypeSubtitle = `(${terrainSubtitle}, ${typeSubtitle})`;
     const terrainIcon = (
       <img
-        src={ICON_SVGS[site.terrain]}
+        src={ICON_SVGS[site.type][site.terrain]}
         alt={site.terrain}
         title={`${terrainTitle} ${terrainSubtitle}`}
         width={Theme.spacing(5)}
@@ -389,8 +409,8 @@ const SiteMap = (props) => {
         Explore Data Products
       </Button>
     ) : null;
-    const renderField = (title, value, marginBottom = 2) => (
-      <div style={{ marginBottom: Theme.spacing(marginBottom) }}>
+    const renderField = (title, value) => (
+      <div>
         <Typography variant="subtitle2">{title}</Typography>
         <Typography variant="body2">{value}</Typography>
       </div>
@@ -401,17 +421,19 @@ const SiteMap = (props) => {
         <Typography variant="h5" gutterBottom>
           {`${site.description} (${site.siteCode})`}
         </Typography>
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <div className={classes.startFlex} style={{ marginBottom: Theme.spacing(2) }}>
-              {terrainIcon}
-              {renderField(terrainTitle, terrainSubtitle, 0)}
-            </div>
-            {renderField('Latitude/Longitude', `${site.latitude}, ${site.longitude}`)}
-          </Grid>
-          <Grid item xs={6}>
+        <div className={classes.startFlex} style={{ marginBottom: Theme.spacing(1.5) }}>
+          {terrainIcon}
+          {renderField(terrainTypeTitle, terrainTypeSubtitle)}
+        </div>
+        <Grid container spacing={2} style={{ marginBottom: Theme.spacing(1) }}>
+          <Grid item xs={4}>
             {renderField(stateFieldTitle, statesJSON[site.stateCode].name)}
+          </Grid>
+          <Grid item xs={4}>
             {renderField('Domain', `${site.domainCode} - ${domainsJSON[site.domainCode].name}`)}
+          </Grid>
+          <Grid item xs={4}>
+            {renderField('Lat./Lon.', `${site.latitude}, ${site.longitude}`)}
           </Grid>
         </Grid>
         {siteDetailsButton}
@@ -424,20 +446,29 @@ const SiteMap = (props) => {
   const renderSitesOverlay = () => {
     // Get new icons scaled to the current zoom level every render
     const zoomedIcons = {
-      AQUATIC: getZoomedIcon('AQUATIC'),
-      TERRESTRIAL: getZoomedIcon('TERRESTRIAL'),
+      CORE: {
+        AQUATIC: getZoomedIcon('CORE', 'AQUATIC'),
+        TERRESTRIAL: getZoomedIcon('CORE', 'TERRESTRIAL'),
+      },
+      RELOCATABLE: {
+        AQUATIC: getZoomedIcon('RELOCATABLE', 'AQUATIC'),
+        TERRESTRIAL: getZoomedIcon('RELOCATABLE', 'TERRESTRIAL'),
+      },
     };
     return (
       <Overlay name="NEON Sites" checked={state.sitesOverlay}>
         <FeatureGroup>
           {Object.keys(state.sites).map((siteCode) => {
             const site = state.sites[siteCode];
-            if (!site.latitude || !site.longitude || !zoomedIcons[site.terrain]) { return null; }
+            if (!zoomedIcons[site.type] || !zoomedIcons[site.type][site.terrain]
+                || !site.latitude || !site.longitude) {
+              return null;
+            }
             return (
               <Marker
                 key={siteCode}
                 position={[site.latitude, site.longitude]}
-                icon={zoomedIcons[site.terrain]}
+                icon={zoomedIcons[site.type][site.terrain]}
               >
                 {renderSitePopup(site)}
               </Marker>

@@ -13,8 +13,6 @@ export const DIMENSIONALITIES = {
   MANY: 'MANY',
 };
 
-const transformQuery = query => JSON.stringify({ query });
-
 const getQueryBody = (type = '', dimensionality = '', id = null) => {
   let query = '';
   switch (type) {
@@ -91,53 +89,42 @@ const getQueryBody = (type = '', dimensionality = '', id = null) => {
     default:
       break;
   }
-  return transformQuery(query);
+  return JSON.stringify({ query });
 };
 
-/* eslint-disable-next-line arrow-body-style */
-const getAjaxRequest = (body) => {
-  return {
+const getObservable = (type = null, dimensionality = null, id = null) => {
+  if (!TYPES[type] || !DIMENSIONALITIES[dimensionality]) { return of(null); }
+  if (dimensionality === DIMENSIONALITIES.ONE && !id) { return of(null); }
+  const query = getQueryBody(type, dimensionality, id);
+  if (!query.length) { return of(null); }
+  return ajax({
     method: 'POST',
     crossDomain: true,
     url: NeonEnvironment.getFullGraphqlPath(),
     headers: { 'Content-Type': 'application/json' },
+    body: query,
     responseType: 'json',
-    body,
-  };
+  });
 };
 
-const getObservable = (query) => {
-  if (!query.length) { return of(null); }
-  return ajax(getAjaxRequest(query));
-};
+const NeonGraphQL = {};
 
-const getObservableWith = (type = null, dimensionality = null, id = null) => {
-  if (!TYPES[type] || !DIMENSIONALITIES[dimensionality]) { return null; }
-  if (dimensionality === DIMENSIONALITIES.ONE && !id) { return null; }
-  const query = getQueryBody(type, dimensionality, id);
-  return getObservable(query);
-};
+NeonGraphQL.getDataProductByCode = code => (
+  getObservable(TYPES.DATA_PRODUCTS, DIMENSIONALITIES.ONE, code)
+);
 
-const NeonGraphQL = {
-  getDataProductByCode: code => getObservableWith(TYPES.DATA_PRODUCTS, DIMENSIONALITIES.ONE, code),
-  getAllDataProducts: () => getObservableWith(TYPES.DATA_PRODUCTS, DIMENSIONALITIES.MANY),
-  getSiteByCode: code => getObservableWith(TYPES.SITES, DIMENSIONALITIES.ONE, code),
-  getAllSites: () => getObservableWith(TYPES.SITES, DIMENSIONALITIES.MANY),
+NeonGraphQL.getAllDataProducts = () => (
+  getObservable(TYPES.DATA_PRODUCTS, DIMENSIONALITIES.MANY)
+);
 
-  /**
-   * Builds a custom GraphQL query
-   * @param {string} query - The raw GraphQL query
-   * @return The resulting RxJS Observable from the specified query
-   */
-  getGraphqlQuery: query => getObservable(transformQuery(query)),
-  /**
-   * Builds a custom GraphQL AjaxRequest
-   * @param {string} query - The raw GraphQL query
-   * @return The resulting RxJS AjaxRequest
-   */
-  getGraphqlAjaxRequest: query => getAjaxRequest(transformQuery(query)),
-};
+NeonGraphQL.getSiteByCode = code => (
+  getObservable(TYPES.SITES, DIMENSIONALITIES.ONE, code)
+);
 
-Object.freeze(NeonGraphQL);
+NeonGraphQL.getAllSites = () => (
+  getObservable(TYPES.SITES, DIMENSIONALITIES.MANY)
+);
+
+Object.freeze(NeonEnvironment);
 
 export default NeonGraphQL;
