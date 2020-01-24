@@ -70,28 +70,24 @@ export const TILE_LAYERS = {
     shortAttribution: '© Natl. Geographic et al.',
     fullAttribution: '© National Geographic, Esri, Garmin, HERE, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC',
     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}',
-    overlayColor: Theme.palette.primary.main,
   },
   World_Imagery: {
     name: 'Satellite Imagery',
     shortAttribution: '© Esri et al.',
     fullAttribution: '© Esri, DigitalGlobe, GeoEye, Earthstar Geographics, CNES/Airbus DS, USDA, USGS, AeroGRID, IGN, GIS Community',
     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-    overlayColor: COLORS.ORANGE[500],
   },
   World_Street_Map: {
     name: 'Streets',
     shortAttribution: '© Esri et al.',
     fullAttribution: '© Esri, HERE, Garmin, USGS, Intermap, INCREMENT P, NRCan, Esri Japan, METI, Esri China (Hong Kong), Esri Korea, Esri (Thailand), NGCC, OSM contributors, GIS Community',
     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
-    overlayColor: Theme.palette.primary.main,
   },
   World_Topo_Map: {
     name: 'Topographic',
     shortAttribution: '© Esri et al.',
     fullAttribution: '© Esri, HERE, Garmin, Intermap, iPC, GEBCO, USGS, FAO, NPS, NRCAN, GeoBase, IGN, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), OSM contributors, GIS Community',
     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
-    overlayColor: Theme.palette.primary.main,
   },
 };
 const TILE_LAYERS_BY_NAME = {};
@@ -497,7 +493,7 @@ const SiteMap = (props) => {
         {statesShapesJSON.features.map(usState => (
           <Polygon
             key={usState.properties.stateCode}
-            color={TILE_LAYERS[state.tileLayer].overlayColor}
+            color={COLORS.RED[500]}
             positions={usState.geometry.coordinates}
           >
             {renderStatePopup(usState.properties.stateCode)}
@@ -525,7 +521,7 @@ const SiteMap = (props) => {
         {domainsShapesJSON.features.map(domain => (
           <Polygon
             key={domain.properties.domainCode}
-            color={TILE_LAYERS[state.tileLayer].overlayColor}
+            color={COLORS.SECONDARY_BLUE[500]}
             positions={domain.geometry.coordinates}
           >
             {renderDomainPopup(domain.properties.domainCode)}
