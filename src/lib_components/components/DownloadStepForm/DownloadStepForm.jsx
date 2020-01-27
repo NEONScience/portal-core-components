@@ -253,7 +253,13 @@ export default function DownloadStepForm(props) {
     */
     documentation: () => {
       const neonFaqLink = (
-        <Link target="_blank" href="http://data.neonscience.org/faq">NEON FAQ</Link>
+        <Link
+          target="_blank"
+          href="http://data.neonscience.org/faq"
+          data-gtm="download-data-dialog.neon-faq-link"
+        >
+          NEON FAQ
+        </Link>
       );
       const knbLink = ExternalHost.renderExternalHostLink(
         'https://eml.ecoinformatics.org',
@@ -757,7 +763,11 @@ export default function DownloadStepForm(props) {
         </div>
       );
       const downloadAndExploreLink = (
-        <Link target="_blank" href="https://www.neonscience.org/download-explore-neon-data">
+        <Link
+          target="_blank"
+          href="https://www.neonscience.org/download-explore-neon-data"
+          data-gtm="download-data-dialog.download-and-explore-link"
+        >
           Download and Explore NEON Data
         </Link>
       );
@@ -782,7 +792,11 @@ export default function DownloadStepForm(props) {
         </div>
       );
       const fileNamingConventionsLink = (
-        <Link target="_blank" href="https://data.neonscience.org/file-naming-conventions">
+        <Link
+          target="_blank"
+          href="https://data.neonscience.org/file-naming-conventions"
+          data-gtm="download-data-dialog.file-naming-conventions-link"
+        >
           NEON File Naming Conventions
         </Link>
       );

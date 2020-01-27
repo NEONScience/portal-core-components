@@ -365,7 +365,7 @@ const SiteMap = (props) => {
     let typeSubtitle = 'fixed location';
     if (site.type === 'RELOCATABLE') {
       typeTitle = 'Relocatable';
-      typeSubtitle = 'location changes';
+      typeSubtitle = 'location may change';
     }
     let terrainTitle = 'Terrestrial';
     let terrainSubtitle = 'land-based';
