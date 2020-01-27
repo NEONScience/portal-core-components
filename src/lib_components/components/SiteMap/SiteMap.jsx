@@ -168,6 +168,11 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
+  startFlexInline: {
+    display: 'inline-flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
 }));
 
 const SiteMap = (props) => {
@@ -451,8 +456,30 @@ const SiteMap = (props) => {
         TERRESTRIAL: getZoomedIcon('RELOCATABLE', 'TERRESTRIAL'),
       },
     };
+    const imgStyle = { width: '20px', height: '20px', marginRight: '4px' };
+    const overlayName = ReactDOMServer.renderToStaticMarkup(
+      <div style={{ display: 'inline-flex', flexDirection: 'column' }}>
+        <div>NEON Sites</div>
+        <div className={classes.startFlex}>
+          <img src={ICON_SVGS.CORE.TERRESTRIAL} alt="Terrestrial Core" style={imgStyle} />
+          <div>Terrestrial Core</div>
+        </div>
+        <div className={classes.startFlex}>
+          <img src={ICON_SVGS.RELOCATABLE.TERRESTRIAL} alt="Terrestrial Relocatable" style={imgStyle} />
+          <div>Terrestrial Relocatable</div>
+        </div>
+        <div className={classes.startFlex}>
+          <img src={ICON_SVGS.CORE.AQUATIC} alt="Aquatic Core" style={imgStyle} />
+          <div>Aquatic Core</div>
+        </div>
+        <div className={classes.startFlex}>
+          <img src={ICON_SVGS.RELOCATABLE.AQUATIC} alt="Aquatic Relocatable" style={imgStyle} />
+          <div>Aquatic Relocatable</div>
+        </div>
+      </div>,
+    );
     return (
-      <Overlay name="NEON Sites" checked={state.sitesOverlay}>
+      <Overlay name={overlayName} checked={state.sitesOverlay}>
         <FeatureGroup>
           {Object.keys(state.sites).map((siteCode) => {
             const site = state.sites[siteCode];
@@ -475,61 +502,128 @@ const SiteMap = (props) => {
     );
   };
 
+  const renderPopupSitesList = (sitesList) => {
+    if (!sitesList || !sitesList.length) {
+      return (
+        <Typography variant="subtitle2" gutterBottom>
+          <i>No NEON Sites</i>
+        </Typography>
+      );
+    }
+    const imgStyle = { width: '20px', height: '20px', margin: '0px 4px 4px 0px' };
+    return (
+      <React.Fragment>
+        <Typography variant="subtitle2" gutterBottom>
+          {`NEON Sites (${sitesList.length}):`}
+        </Typography>
+        <div>
+          {sitesList.map((siteCode) => {
+            const site = state.sites[siteCode];
+            const alt = `${site.terrain} ${site.type}`;
+            const src = ICON_SVGS[site.type][site.terrain];
+            return (
+              <div key={siteCode} style={{ display: 'flex' }}>
+                <img src={src} alt={alt} style={imgStyle} />
+                <div>{`${site.description} (${siteCode})`}</div>
+              </div>
+            );
+          })}
+        </div>
+      </React.Fragment>
+    );
+  };
+
   const renderStatePopup = (stateCode) => {
     if (!statesJSON[stateCode]) { return null; }
     const stateName = statesJSON[stateCode].name;
+    const sitesList = Object.keys(state.sites)
+      .filter(siteCode => state.sites[siteCode].stateCode === stateCode);
     return (
       <Popup className={classes.popup}>
         <Typography variant="h6" gutterBottom>
           {`${stateName} (${stateCode})`}
         </Typography>
+        {renderPopupSitesList(sitesList)}
       </Popup>
     );
   };
 
-  const renderStatesOverlay = () => (
-    <Overlay name="US States" checked={state.statesOverlay}>
-      <FeatureGroup>
-        {statesShapesJSON.features.map(usState => (
-          <Polygon
-            key={usState.properties.stateCode}
-            color={COLORS.RED[500]}
-            positions={usState.geometry.coordinates}
-          >
-            {renderStatePopup(usState.properties.stateCode)}
-          </Polygon>
-        ))}
-      </FeatureGroup>
-    </Overlay>
-  );
+  const renderStatesOverlay = () => {
+    const keyStyle = {
+      border: `2px solid ${COLORS.RED[500]}`,
+      backgroundColor: `${COLORS.RED[500]}88`,
+      width: Theme.spacing(3),
+      height: Theme.spacing(1),
+      margin: Theme.spacing(0, 0.5, 0.25, 0),
+    };
+    const overlayName = ReactDOMServer.renderToStaticMarkup(
+      <div className={classes.startFlexInline}>
+        <div style={keyStyle} />
+        <div>US States</div>
+      </div>,
+    );
+    return (
+      <Overlay name={overlayName} checked={state.statesOverlay}>
+        <FeatureGroup>
+          {statesShapesJSON.features.map(usState => (
+            <Polygon
+              key={usState.properties.stateCode}
+              color={COLORS.RED[500]}
+              positions={usState.geometry.coordinates}
+            >
+              {renderStatePopup(usState.properties.stateCode)}
+            </Polygon>
+          ))}
+        </FeatureGroup>
+      </Overlay>
+    );
+  };
 
   const renderDomainPopup = (domainCode) => {
     if (!domainsJSON[domainCode]) { return null; }
     const domainName = domainsJSON[domainCode].name;
+    const sitesList = Object.keys(state.sites)
+      .filter(siteCode => state.sites[siteCode].domainCode === domainCode);
     return (
       <Popup className={classes.popup}>
         <Typography variant="h6" gutterBottom>
           {`${domainName} (${domainCode})`}
         </Typography>
+        {renderPopupSitesList(sitesList)}
       </Popup>
     );
   };
 
-  const renderDomainsOverlay = () => (
-    <Overlay name="NEON Domains" checked={state.domainsOverlay}>
-      <FeatureGroup>
-        {domainsShapesJSON.features.map(domain => (
-          <Polygon
-            key={domain.properties.domainCode}
-            color={COLORS.SECONDARY_BLUE[500]}
-            positions={domain.geometry.coordinates}
-          >
-            {renderDomainPopup(domain.properties.domainCode)}
-          </Polygon>
-        ))}
-      </FeatureGroup>
-    </Overlay>
-  );
+  const renderDomainsOverlay = () => {
+    const keyStyle = {
+      border: `2px solid ${COLORS.SECONDARY_BLUE[500]}`,
+      backgroundColor: `${COLORS.SECONDARY_BLUE[500]}88`,
+      width: Theme.spacing(3),
+      height: Theme.spacing(1),
+      margin: Theme.spacing(0, 0.5, 0.25, 0),
+    };
+    const overlayName = ReactDOMServer.renderToStaticMarkup(
+      <div className={classes.startFlexInline}>
+        <div style={keyStyle} />
+        <div>Neon Domains</div>
+      </div>,
+    );
+    return (
+      <Overlay name={overlayName} checked={state.domainsOverlay}>
+        <FeatureGroup>
+          {domainsShapesJSON.features.map(domain => (
+            <Polygon
+              key={domain.properties.domainCode}
+              color={COLORS.SECONDARY_BLUE[500]}
+              positions={domain.geometry.coordinates}
+            >
+              {renderDomainPopup(domain.properties.domainCode)}
+            </Polygon>
+          ))}
+        </FeatureGroup>
+      </Overlay>
+    );
+  };
 
   const renderTileLayer = (key) => {
     const tileLayer = TILE_LAYERS[key];
