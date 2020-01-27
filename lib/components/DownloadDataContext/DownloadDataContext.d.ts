@@ -77,6 +77,7 @@ declare function useDownloadDataState(): {
         totalSize: number;
         estimatedPostSize: number;
         filteredFileCount: number;
+        lastFilterChanged: null;
         filters: {
             site: never[];
             type: never[];
@@ -147,6 +148,7 @@ declare function useDownloadDataState(): {
         totalSize: number;
         estimatedPostSize: number;
         filteredFileCount: number;
+        lastFilterChanged: null;
         filters: {
             site: never[];
             type: never[];
@@ -223,6 +225,7 @@ declare namespace DEFAULT_STATE {
         export const totalSize: number;
         export const estimatedPostSize: number;
         export const filteredFileCount: number;
+        export const lastFilterChanged: null;
         export const filters: {
             site: never[];
             type: never[];

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { debounce } from 'lodash';
@@ -161,6 +161,16 @@ export default function DownloadStepForm(props) {
     renderDownloadButton,
   } = props;
   const [state, dispatch] = DownloadDataContext.useDownloadDataState();
+
+  // Effect to keep focus on the file name search field if it was the last filter updated
+  useEffect(() => {
+    if (state.s3Files.lastFilterChanged !== 'name') { return; }
+    const mTable = document.querySelector('#s3Files-selection-table-container');
+    if (!mTable) { return; }
+    const nameSearch = mTable.querySelector('input[type="search"]');
+    if (!nameSearch) { return; }
+    nameSearch.focus();
+  });
 
   const setState = (stateKey, newValue) => dispatch({
     type: 'setValidatableValue',
@@ -541,7 +551,7 @@ export default function DownloadStepForm(props) {
         },
       };
       return (validValues.length || isLoading) ? (
-        <div className={classes.fileTable}>
+        <div className={classes.fileTable} id="s3Files-selection-table-container">
           <MaterialTable
             components={components}
             columns={columns}
