@@ -137,7 +137,7 @@ export default function StyleGuide(props) {
       </DocBlock>
       <CodeBlock>
         {`
-import { NeonGraphQL } from 'portal-core-components';
+import NeonGraphQL from 'portal-core-components/lib/components/NeonGraphQL';
         `}
       </CodeBlock>
 
@@ -194,7 +194,7 @@ import { NeonGraphQL } from 'portal-core-components';
         {`
 import { map, catchError } from 'rxjs/operators';
 import React, { useState } from 'react';
-import { NeonGraphQL } from 'portal-core-components';
+import NeonGraphQL from 'portal-core-components/lib/components/NeonGraphQL';
 
 const myComponent = () => {
   const classes = useStyles();
@@ -283,7 +283,7 @@ const myComponent = () => {
 import { of } from 'rxjs';
 import { map, switchMap, catchError } from 'rxjs/operators';
 import React, { useState } from 'react';
-import { NeonGraphQL } from 'portal-core-components';
+import NeonGraphQL from 'portal-core-components/lib/components/NeonGraphQL';
 
 const myComponent = () => {
   const classes = useStyles();
@@ -379,7 +379,7 @@ const myComponent = () => {
         {`
 import { map, catchError } from 'rxjs/operators';
 import React, { useState } from 'react';
-import { NeonGraphQL } from 'portal-core-components';
+import NeonGraphQL from 'portal-core-components/lib/components/NeonGraphQL';
 
 const myComponent = () => {
   const classes = useStyles();
@@ -466,7 +466,7 @@ const myComponent = () => {
 import { of } from 'rxjs';
 import { map, switchMap, catchError } from 'rxjs/operators';
 import React, { useState } from 'react';
-import { NeonGraphQL } from 'portal-core-components';
+import NeonGraphQL from 'portal-core-components/lib/components/NeonGraphQL';
 
 const myComponent = () => {
   const classes = useStyles();

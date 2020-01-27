@@ -35,7 +35,7 @@ export default function StyleGuide() {
       </DocBlock>
       <CodeBlock>
         {`
-import { ExternalHostInfo } from 'portal-core-components';
+import ExternalHostInfo from 'portal-core-components/lib/components/ExternalHostInfo';
         `}
       </CodeBlock>
 

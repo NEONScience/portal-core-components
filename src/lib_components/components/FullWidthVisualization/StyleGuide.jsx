@@ -68,7 +68,7 @@ export default function StyleGuide() {
       </DocBlock>
       <CodeBlock>
         {`
-import { FullWidthVisualization } from 'portal-core-components';
+import FullWidthVisualization from 'portal-core-components/lib/components/FullWidthVisualization';
         `}
       </CodeBlock>
 

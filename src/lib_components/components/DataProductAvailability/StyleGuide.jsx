@@ -45,7 +45,7 @@ export default function StyleGuide(props) {
       </DocBlock>
       <CodeBlock>
         {`
-import { DataProductAvailability } from 'portal-core-components';
+import DataProductAvailability from 'portal-core-components/lib/components/DataProductAvailability';
         `}
       </CodeBlock>
 
@@ -63,7 +63,7 @@ import { DataProductAvailability } from 'portal-core-components';
       </ExampleBlock>
       <CodeBlock>
         {`
-import { DataProductAvailability } from 'portal-core-components';
+import DataProductAvailability from 'portal-core-components/lib/components/DataProductAvailability';
 
 const siteCodes = [
   {
@@ -112,7 +112,7 @@ const siteCodes = [
       </ExampleBlock>
       <CodeBlock>
         {`
-import { DataProductAvailability } from 'portal-core-components';
+import DataProductAvailability from 'portal-core-components/lib/components/DataProductAvailability';
 
 const siteCodes = [...];
 
@@ -152,7 +152,7 @@ const siteCodes = [...];
       </ExampleBlock>
       <CodeBlock>
         {`
-import { DataProductAvailability } from 'portal-core-components';
+import DataProductAvailability from 'portal-core-components/lib/components/DataProductAvailability';
 
 const siteCodes = [...];
 
@@ -187,7 +187,8 @@ const siteCodes = [...];
       </ExampleBlock>
       <CodeBlock>
         {`
-import { DownloadDataContext, DataProductAvailability } from 'portal-core-components';
+import DownloadDataContext from 'portal-core-components/lib/components/DownloadDataContext';
+import DataProductAvailability from 'portal-core-components/lib/components/DataProductAvailability';
 
 const productData = {
   productCode: 'DPX.0000X.00X',
@@ -238,7 +239,8 @@ const productData = {
       </ExampleBlock>
       <CodeBlock>
         {`
-import { DownloadDataContext, DataProductAvailability } from 'portal-core-components';
+import DownloadDataContext from 'portal-core-components/lib/components/DownloadDataContext';
+import DataProductAvailability from 'portal-core-components/lib/components/DataProductAvailability';
 
 const productData = {...};
 
@@ -270,7 +272,8 @@ const productData = {...};
       </ExampleBlock>
       <CodeBlock>
         {`
-import { DownloadDataContext, DataProductAvailability } from 'portal-core-components';
+import DownloadDataContext from 'portal-core-components/lib/components/DownloadDataContext';
+import DataProductAvailability from 'portal-core-components/lib/components/DataProductAvailability';
 
 const productData = {...};
 const sites: ['ARIK', 'COMO', 'CPER', 'NIWO', 'RMNP', 'STER', 'UNDE', 'WLOU'];
@@ -302,7 +305,8 @@ const dateRange: ['2018-01', '2018-12'];
       </ExampleBlock>
       <CodeBlock>
         {`
-import { DownloadDataContext, DataProductAvailability } from 'portal-core-components';
+import DownloadDataContext from 'portal-core-components/lib/components/DownloadDataContext';
+import DataProductAvailability from 'portal-core-components/lib/components/DataProductAvailability';
 
 const productData = {...};
 

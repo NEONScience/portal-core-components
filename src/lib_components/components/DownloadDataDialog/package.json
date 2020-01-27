@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "name": "download-data-dialog",
+  "main": "./DownloadDataDialog.jsx",
+  "module": "./DownloadDataDialog.js"
+}

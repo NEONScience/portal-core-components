@@ -78,40 +78,40 @@ const NeonEnvironment = {
   getRouterBasePath: () => process.env.REACT_APP_NEON_ROUTER_BASE,
   getRouterBaseHomePath: () => process.env.REACT_APP_NEON_ROUTER_BASE_HOME,
   getHostOverride: () => process.env.REACT_APP_NEON_HOST_OVERRIDE,
-};
 
-NeonEnvironment.getHost = () => (
-  NeonEnvironment.isDevEnv && NeonEnvironment.getHostOverride()
-    ? NeonEnvironment.getHostOverride()
-    : `${window.location.protocol}//${window.location.host}`
-);
+  getHost: () => (
+    NeonEnvironment.isDevEnv && NeonEnvironment.getHostOverride()
+      ? NeonEnvironment.getHostOverride()
+      : `${window.location.protocol}//${window.location.host}`
+  ),
 
-NeonEnvironment.getFullApiPath = (path = '') => {
-  const host = NeonEnvironment.getHost();
-  // Root path (e.g. '/api/v0') doesn't apply to legacy download/manifest-related paths.
-  const root = ['aopDownload', 'download', 'manifest'].includes(path) ? '' : NeonEnvironment.getRootApiPath();
-  return NeonEnvironment.getApiPath[path]
-    ? `${host}${root}${NeonEnvironment.getApiPath[path]()}`
-    : `${host}${root}`;
-};
+  getFullApiPath: (path = '') => {
+    const host = NeonEnvironment.getHost();
+    // Root path (e.g. '/api/v0') doesn't apply to legacy download/manifest-related paths.
+    const root = ['aopDownload', 'download', 'manifest'].includes(path) ? '' : NeonEnvironment.getRootApiPath();
+    return NeonEnvironment.getApiPath[path]
+      ? `${host}${root}${NeonEnvironment.getApiPath[path]()}`
+      : `${host}${root}`;
+  },
 
-NeonEnvironment.getFullPagePath = (path = '') => {
-  const host = NeonEnvironment.getHost();
-  return NeonEnvironment.getPagePath[path]
-    ? `${host}${NeonEnvironment.getPagePath[path]()}`
-    : `${host}`;
-};
+  getFullPagePath: (path = '') => {
+    const host = NeonEnvironment.getHost();
+    return NeonEnvironment.getPagePath[path]
+      ? `${host}${NeonEnvironment.getPagePath[path]()}`
+      : `${host}`;
+  },
 
-NeonEnvironment.getFullAuthPath = (path = '') => {
-  const host = NeonEnvironment.getHost();
-  return NeonEnvironment.getAuthPath[path]
-    ? `${host}${NeonEnvironment.getAuthPath[path]()}`
-    : `${host}`;
-};
+  getFullAuthPath: (path = '') => {
+    const host = NeonEnvironment.getHost();
+    return NeonEnvironment.getAuthPath[path]
+      ? `${host}${NeonEnvironment.getAuthPath[path]()}`
+      : `${host}`;
+  },
 
-NeonEnvironment.getFullGraphqlPath = () => {
-  const host = NeonEnvironment.getHost();
-  return `${host}${NeonEnvironment.getRootGraphqlPath()}`;
+  getFullGraphqlPath: () => {
+    const host = NeonEnvironment.getHost();
+    return `${host}${NeonEnvironment.getRootGraphqlPath()}`;
+  },
 };
 
 Object.freeze(NeonEnvironment);
