@@ -48,6 +48,8 @@ export default function StyleGuide(props) {
     return () => clearInterval(interval);
   });
 
+  const notification = 'Here is a sample NeonPage notification with a <a href="https://github.com/NEONScience/portal-core-components/">link</a>.';
+
   const skeletionGrid = (
     <Grid item xs={4}>
       <Skeleton variant="rect" width="100%" height={100} />
@@ -100,6 +102,9 @@ import NeonPage from 'portal-core-components/lib/components/NeonPage';
 <NeonPage>
   <Typography>Content</Typography>
   <Typography>More content</Typography>
+  <a href="#">Link (a tag)</a>
+  <br />
+  <Link href="#">Link (component)</Link>
 </NeonPage>
         `}
       </CodeBlock>
@@ -298,6 +303,38 @@ export default function MyNeonPage() {
     </NeonPage>
   );
 }
+        `}
+      </CodeBlock>
+
+      <Divider className={classes.divider} />
+      <Typography variant="h6" component="h4" gutterBottom>Notifications</Typography>
+
+      <DocBlock>
+        Any NeonPage instance will, upon loading, query the notifications endpoint for any
+        site-wide notifications. These will be displayed together in a single element at the lower
+        right corner of the page. An active notification can be closed, and closed notifications
+        can be reshown using the bell icon in the menu (which only appears when notifications are
+        present).
+      </DocBlock>
+      <DocBlock>
+        Notifications can also be injected directly using the <tt>notification</tt> prop.
+        If this prop is set then the fetch for site-wide notifications will not fire.
+        A notification can contain HTML but should be a string, not JSX.
+      </DocBlock>
+      <ExampleBlock>
+        <div className={classes.example}>
+          <NeonPage notification={notification}>
+            <Typography>Content</Typography>
+          </NeonPage>
+        </div>
+      </ExampleBlock>
+      <CodeBlock>
+        {`
+const notification = 'Here is a sample NeonPage notification with a <a href="https://github.com/NEONScience/portal-core-components/">link</a>.';
+
+<NeonPage notification={notification}>
+  <Typography>Content</Typography>
+</NeonPage>
         `}
       </CodeBlock>
 
