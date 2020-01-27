@@ -29,7 +29,7 @@ export default function StyleGuide() {
       </DocBlock>
       <CodeBlock>
         {`
-import { DataThemeIcon } from 'portal-core-components';
+import DataThemeIcon from 'portal-core-components/lib/components/DataThemeIcon';
         `}
       </CodeBlock>
 

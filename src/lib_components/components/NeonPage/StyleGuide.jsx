@@ -74,7 +74,7 @@ export default function StyleGuide(props) {
       </DocBlock>
       <CodeBlock>
         {`
-import { NeonPage } from 'portal-core-components';
+import NeonPage from 'portal-core-components/lib/components/NeonPage';
         `}
       </CodeBlock>
 

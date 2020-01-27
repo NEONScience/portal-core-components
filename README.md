@@ -88,11 +88,19 @@ to run a local instance.  Modify and deliver as normal.
 
 For local development without needing to send things to git, you may want to check out the npm link command at https://docs.npmjs.com/cli/link.  This can cause some unexpected behaviors, so do some research before you try.
 
-Once modified, rebuild the library and generate TypeScript declaration files like so:
+## Building the Library
+
+After any additions or modifications to source the library must be rebuilt in order for the changes to be importable by other applications. Rebuild the library and generate TypeScript declaration files like so:
 
     npm run lib
 
-which will place the components in /lib.  These built components should be checked into git.
+This places all built asses in /lib.  These built components should be checked into git, so make sure to `git add` any appropriate new files in /lib.
+
+### Windows Users: NODE_ENV fix
+
+For Windows users the `npm run lib` command may fail with complaint about 'NODE_ENV' not being a recognized command. This is due to the Linux-based syntax of one of the node scripts for portal-core-components. This can be resolved by globally installing [win-node-env](https://www.npmjs.com/package/win-node-env):
+
+    npm install -g win-node-env
 
 
 ## Library Composition

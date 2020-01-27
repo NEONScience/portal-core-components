@@ -31,7 +31,7 @@ export default function StyleGuide() {
       </DocBlock>
       <CodeBlock>
         {`
-import { AopDataViewer } from 'portal-core-components';
+import AopDataViewer from 'portal-core-components/lib/components/AopDataViewer';
         `}
       </CodeBlock>
 

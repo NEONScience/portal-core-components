@@ -176,7 +176,7 @@ export default function StyleGuide() {
       </DocBlock>
       <CodeBlock>
         {`
-import { SiteMap } from 'portal-core-components';
+import SiteMap from 'portal-core-components/lib/components/SiteMap';
         `}
       </CodeBlock>
 

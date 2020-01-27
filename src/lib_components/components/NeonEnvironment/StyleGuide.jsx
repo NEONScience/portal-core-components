@@ -39,7 +39,7 @@ export default function StyleGuide() {
       </DocBlock>
       <CodeBlock>
         {`
-import { NeonEnvironment } from 'portal-core-components';
+import NeonEnvironment from 'portal-core-components/lib/components/NeonEnvironment';
         `}
       </CodeBlock>
 

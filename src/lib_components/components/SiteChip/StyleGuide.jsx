@@ -34,7 +34,7 @@ export default function StyleGuide() {
       </DocBlock>
       <CodeBlock>
         {`
-import { SiteChip } from 'portal-core-components';
+import SiteChip from 'portal-core-components/lib/components/SiteChip';
         `}
       </CodeBlock>
 

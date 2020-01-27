@@ -33,7 +33,7 @@ export default function StyleGuide(props) {
       </DocBlock>
       <CodeBlock>
         {`
-import { Theme } from 'portal-core-components';
+import Theme from 'portal-core-components/lib/components/Theme';
         `}
       </CodeBlock>
 
@@ -71,7 +71,7 @@ import { Theme } from 'portal-core-components';
       <CodeBlock>
         {`
 import { makeStyles } from '@material-ui/core/styles';
-import { Theme } from 'portal-core-components';
+import Theme from 'portal-core-components/lib/components/Theme';
 
 const useStyles = makeStyles(theme => ({
   myCssClass: {
@@ -110,7 +110,7 @@ ${JSON.stringify(Theme.palette, null, 2)}
       <CodeBlock>
         {`
 import { makeStyles } from '@material-ui/core/styles';
-import { Theme } from 'portal-core-components';
+import Theme from 'portal-core-components/lib/components/Theme';
 
 const useStyles = makeStyles(theme => ({
   myCssClass: {

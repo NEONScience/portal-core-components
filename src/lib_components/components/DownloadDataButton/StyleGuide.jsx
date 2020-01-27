@@ -52,7 +52,7 @@ export default function StyleGuide(props) {
       </DocBlock>
       <CodeBlock>
         {`
-import { DownloadDataButton } from 'portal-core-components';
+import DownloadDataButton from 'portal-core-components/lib/components/DownloadDataButton';
         `}
       </CodeBlock>
 
@@ -71,7 +71,8 @@ import { DownloadDataButton } from 'portal-core-components';
       </ExampleBlock>
       <CodeBlock>
         {`
-import { DownloadDataContext, DownloadDataButton } from 'portal-core-components';
+import DownloadDataButton from 'portal-core-components/lib/components/DownloadDataButton';
+import DownloadDataContext from 'portal-core-components/lib/components/DownloadDataContext';
 
 const productData = {
   productCode: 'DPX.00001.001',
@@ -109,7 +110,8 @@ const productData = {
       </ExampleBlock>
       <CodeBlock>
         {`
-import { DownloadDataContext, DownloadDataButton } from 'portal-core-components';
+import DownloadDataButton from 'portal-core-components/lib/components/DownloadDataButton';
+import DownloadDataContext from 'portal-core-components/lib/components/DownloadDataContext';
 
 const productData = {...};
 

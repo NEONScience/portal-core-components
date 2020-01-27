@@ -229,7 +229,7 @@ export default function StyleGuide(props) {
       </DocBlock>
       <CodeBlock>
         {`
-import { DownloadDataContext } from 'portal-core-components';
+import DownloadDataContext from 'portal-core-components/lib/components/DownloadDataContext';
         `}
       </CodeBlock>
 
@@ -255,7 +255,8 @@ import { DownloadDataContext } from 'portal-core-components';
       </ExampleBlock>
       <CodeBlock>
         {`
-import { DownloadDataContext, DownloadDataButton } from 'portal-core-components';
+import DownloadDataButton from 'portal-core-components/lib/components/DownloadDataButton';
+import DownloadDataContext from 'portal-core-components/lib/components/DownloadDataContext';
 
 const productData = {
   productCode: 'DPX.00001.001',
@@ -334,7 +335,8 @@ const productData = {
       </ExampleBlock>
       <CodeBlock>
         {`
-import { DownloadDataContext, DownloadDataButton } from 'portal-core-components';
+import DownloadDataButton from 'portal-core-components/lib/components/DownloadDataButton';
+import DownloadDataContext from 'portal-core-components/lib/components/DownloadDataContext';
 
 const productData = {...};
 const selectedSites = ['ARIK', 'COMO', 'CPER', 'NIWO', 'RMNP', 'STER', 'UNDE', 'WLOU'];
@@ -379,7 +381,8 @@ const selectedSites = ['ARIK', 'COMO', 'CPER', 'NIWO', 'RMNP', 'STER', 'UNDE', '
       </ExampleBlock>
       <CodeBlock>
         {`
-import { DownloadDataContext, DataProductAvailability } from 'portal-core-components';
+import DownloadDataContext from 'portal-core-components/lib/components/DownloadDataContext';
+import DataProductAvailability from 'portal-core-components/lib/components/DataProductAvailability';
 
 const productData = {...};
 const selectedSites = ['ARIK', 'COMO', 'CPER', 'NIWO', 'RMNP', 'STER', 'UNDE', 'WLOU'];
@@ -430,7 +433,8 @@ const ListSitesComponent = () => {
       </ExampleBlock>
       <CodeBlock>
         {`
-import { DownloadDataContext, DataProductAvailability } from 'portal-core-components';
+import DownloadDataContext from 'portal-core-components/lib/components/DownloadDataContext';
+import DataProductAvailability from 'portal-core-components/lib/components/DataProductAvailability';
 
 const productData = {...};
 const selectedSites = ['ARIK', 'COMO', 'CPER', 'NIWO', 'RMNP', 'STER', 'UNDE', 'WLOU'];
@@ -551,7 +555,8 @@ const AlphaSitesComponent = () => {
         {`
 import React, { useReducer, useEffect } from 'react';
 import { ReplaySubject } from 'rxjs';
-import { DownloadDataContext } from 'portal-core-components';
+
+import DownloadDataContext from 'portal-core-components/lib/components/DownloadDataContext';
 
 const MyAppComponent = () => {
   const products = [
