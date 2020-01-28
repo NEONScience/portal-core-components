@@ -37,6 +37,12 @@ export default function StyleGuide(props) {
     </Link>
   );
 
+  const DownloadDataButtonLink = (
+    <Link href="#DownloadDataButton" onClick={() => onClickHash('#DownloadDataButton')}>
+      DownloadDataButton
+    </Link>
+  );
+
   return (
     <React.Fragment>
 
@@ -312,6 +318,35 @@ const productData = {...};
 
 <DownloadDataContext.Provider productData={productData}>
   <DataProductAvailability disableSelectionCollapse />
+</DownloadDataContext.Provider>
+        `}
+      </CodeBlock>
+
+      <Divider className={classes.divider} />
+      <Typography variant="h6" component="h4" gutterBottom>
+        Disabling Selection Inside a Download Context
+      </Typography>
+
+      <DocBlock>
+        Sometimes a Data Product Availability chart needs to be displayed inside
+        a {DownloadDataContextLink} but selection should not be afforded. A typical use case might
+        be where the chart is presented as read-only with an adjacent {DownloadDataButtonLink}.
+        This can be achieved with the <tt>disableSelection</tt> boolean prop.
+      </DocBlock>
+      <ExampleBlock>
+        <DownloadDataContext.Provider productData={sampleProductData.data}>
+          <DataProductAvailability disableSelection />
+        </DownloadDataContext.Provider>
+      </ExampleBlock>
+      <CodeBlock>
+        {`
+import DownloadDataContext from 'portal-core-components/lib/components/DownloadDataContext';
+import DataProductAvailability from 'portal-core-components/lib/components/DataProductAvailability';
+
+const productData = {...};
+
+<DownloadDataContext.Provider productData={productData}>
+  <DataProductAvailability disableSelection />
 </DownloadDataContext.Provider>
         `}
       </CodeBlock>

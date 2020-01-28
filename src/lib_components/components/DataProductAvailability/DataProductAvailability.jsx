@@ -240,7 +240,9 @@ export default function DataProductAvailability(props) {
     dispatchSelection,
   ] = DownloadDataContext.useDownloadDataState();
 
-  const selectionEnabled = requiredSteps.some(step => step.key === 'sitesAndDateRange');
+  const { disableSelection } = props;
+  const selectionEnabled = !disableSelection
+    && requiredSteps.some(step => step.key === 'sitesAndDateRange');
 
   /**
      State: Current View
@@ -367,17 +369,19 @@ export default function DataProductAvailability(props) {
 
   /**
      Product Data: Map to Views
-     Statically loaded in via props or pulled from context.
+     Statically loaded in via props or pulled from context. If both, props wins.
      Should not change in render lifecycle.
      Create mappings of the shape row => year-month => status for
      all aggregation views.
      TODO: Add other statuses. Currently the only status is "available".
   */
-  let siteCodes;
-  if (selectionEnabled) {
-    ({ siteCodes } = productData);
-  } else {
-    ({ siteCodes } = props);
+  let siteCodes = [];
+  const { siteCodes: propsSiteCodes } = props;
+  const { siteCodes: contextSiteCodes } = productData;
+  if (propsSiteCodes && propsSiteCodes.length) {
+    siteCodes = propsSiteCodes;
+  } else if (contextSiteCodes && contextSiteCodes.length) {
+    siteCodes = contextSiteCodes;
   }
   siteCodes.forEach((site) => {
     const { siteCode, availableMonths } = site;
@@ -773,6 +777,7 @@ DataProductAvailability.propTypes = {
   view: PropTypes.oneOf(['summary', 'sites', 'states', 'domains', 'ungrouped']),
   sortMethod: PropTypes.oneOf(['sites', 'states', 'domains']),
   sortDirection: PropTypes.oneOf(['ASC', 'DESC']),
+  disableSelection: PropTypes.bool,
   disableSelectionCollapse: PropTypes.bool,
 };
 
@@ -781,5 +786,6 @@ DataProductAvailability.defaultProps = {
   view: 'summary',
   sortMethod: null,
   sortDirection: 'ASC',
+  disableSelection: false,
   disableSelectionCollapse: false,
 };
