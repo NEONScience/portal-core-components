@@ -33,11 +33,11 @@ import {
 
 const cookies = new Cookies();
 
-const createUseStyles = props => (makeStyles(theme => ({
+const useStyles = makeStyles(theme => ({
   outerPageContainer: {
     position: 'relative',
     minHeight: theme.spacing(30),
-    maxWidth: props.outerPageContainerMaxWidth,
+    maxWidth: '2000px',
     paddingBottom: theme.spacing(3),
     [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(2.5),
@@ -99,9 +99,10 @@ const createUseStyles = props => (makeStyles(theme => ({
       margin: theme.spacing(1, 0, 3, -0.5),
     },
   },
-})));
+}));
 
 const NeonPage = (props) => {
+  const classes = useStyles(Theme);
   const {
     breadcrumbs,
     title,
@@ -111,12 +112,6 @@ const NeonPage = (props) => {
     error,
     notification,
   } = props;
-  const useStylesProps = {
-    theme: Theme,
-    outerPageContainerMaxWidth,
-  };
-  const useStyles = createUseStyles(props);
-  const classes = useStyles(useStylesProps);
 
   /**
      Liferay Notifications
