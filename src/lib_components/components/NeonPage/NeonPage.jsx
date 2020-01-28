@@ -33,6 +33,13 @@ import {
 
 const cookies = new Cookies();
 
+// Google Tag Manager Data Layer
+// Define if not already defined. This must be set in the public/index.html for any apps/pages that
+// would seek top use it. More info: https://developers.google.com/tag-manager/devguide
+if (!window.gtmDataLayer) {
+  window.gtmDataLayer = [];
+}
+
 const useStyles = makeStyles(theme => ({
   outerPageContainer: {
     position: 'relative',
