@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid */
+/* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid, max-len */
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -97,7 +97,7 @@ const siteCodes = [
         be specified with the <tt>view</tt> prop.
       </DocBlock>
       <DocBlock>
-        Valid views: <tt>summary</tt>, <tt>sites</tt>, <tt>states</tt>, <tt>domains</tt>
+        Valid views: <tt>summary</tt>, <tt>sites</tt>, <tt>states</tt>, <tt>domains</tt>, <tt>ungrouped</tt>
       </DocBlock>
       <DocBlock>
         Default view: <tt>summary</tt>
@@ -230,7 +230,12 @@ const productData = {
         the {DownloadDataContextLink}.
       </DocBlock>
       <DocBlock>
-        Valid views: <tt>summary</tt>, <tt>sites</tt>, <tt>states</tt>, <tt>domains</tt>
+        This creates a scenario where view can be defined in more than one place--on the context
+        and on the availability chart within the context. If both are set then the most local prop
+        will win (so the chart prop with override the context prop).
+      </DocBlock>
+      <DocBlock>
+        Valid views: <tt>summary</tt>, <tt>sites</tt>, <tt>states</tt>, <tt>domains</tt>, <tt>ungrouped</tt>
       </DocBlock>
       <DocBlock>
         Default view: <tt>summary</tt>

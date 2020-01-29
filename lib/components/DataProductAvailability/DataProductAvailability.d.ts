@@ -17,7 +17,7 @@ declare namespace DataProductAvailability {
     export namespace defaultProps {
         const siteCodes_1: never[];
         export { siteCodes_1 as siteCodes };
-        const view_1: string;
+        const view_1: null;
         export { view_1 as view };
         const sortMethod_1: null;
         export { sortMethod_1 as sortMethod };

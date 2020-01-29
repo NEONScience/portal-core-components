@@ -246,14 +246,13 @@ export default function DataProductAvailability(props) {
 
   /**
      State: Current View
-     Track the current view as local state and feed its initial value from the
-     initialView prop. This covers the use case when the availability chart does
-     NOT appear inside a Download Data Context. When in a context, however, the
-     context overrides the current view as it is keeping track of the broader
-     download workflow state.
+     View mode can be set from the view prop or pulled from a download context.
+     Prop overrides context. If neither are set then default to 'summary'.
   */
   const { view: propsView } = props;
-  const initialView = downloadContextIsActive ? contextView : propsView;
+  let initialView = propsView;
+  if (!initialView) { initialView = contextView; }
+  if (!initialView) { initialView = 'summary'; }
   const [currentView, setCurrentView] = useState(initialView);
 
   /**
@@ -783,7 +782,7 @@ DataProductAvailability.propTypes = {
 
 DataProductAvailability.defaultProps = {
   siteCodes: [],
-  view: 'summary',
+  view: null,
   sortMethod: null,
   sortDirection: 'ASC',
   disableSelection: false,
