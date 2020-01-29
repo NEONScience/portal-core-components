@@ -27,7 +27,6 @@ import SelectAllIcon from '@material-ui/icons/DoneAll';
 import SelectNoneIcon from '@material-ui/icons/Clear';
 import SelectFilteredIcon from '@material-ui/icons/FilterList';
 import ClearFiltersIcon from '@material-ui/icons/DeleteSweep';
-import ClickIcon from '@material-ui/icons/TouchApp';
 import ErrorIcon from '@material-ui/icons/ReportProblem';
 import ExploreIcon from '@material-ui/icons/Explore';
 
@@ -221,31 +220,9 @@ export default function DownloadStepForm(props) {
        SITES AND DATE RANGE
     */
     sitesAndDateRange: () => (
-      <div>
-        <DataProductAvailability
-          data-selenium="download-data-dialog.step-form.sites-and-date-range"
-          view="states"
-          disableSelectionCollapse
-        />
-        <SnackbarContent
-          className={classes.infoSnackbar}
-          style={{ marginTop: Theme.spacing(2), marginBottom: Theme.spacing(1), justifyContent: 'center' }}
-          message={(
-            <div className={classes.startFlex}>
-              <ClickIcon fontSize="large" className={classes.infoSnackbarIcon} />
-              <div>
-                <Typography variant="body1" component="div">
-                  <ul style={{ margin: 0, paddingLeft: Theme.spacing(2.5) }}>
-                    <li>Drag the grid above to pan across time</li>
-                    <li>Click rows in the grid above to select sites or states</li>
-                    <li>Drag the sides of the selection to adjust the date range</li>
-                  </ul>
-                </Typography>
-              </div>
-            </div>
-          )}
-        />
-      </div>
+      <DataProductAvailability
+        data-selenium="download-data-dialog.step-form.sites-and-date-range"
+      />
     ),
 
     /**

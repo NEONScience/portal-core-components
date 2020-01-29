@@ -301,33 +301,6 @@ const dateRange: ['2018-01', '2018-12'];
       </CodeBlock>
 
       <Divider className={classes.divider} />
-      <Typography variant="h6" component="h4" gutterBottom>Disabling Selection Collapse</Typography>
-
-      <DocBlock>
-      If selection is enabled it may make sense to disable selection collapse entirely.
-      Apply the <tt>disableSelectionCollapse</tt> boolean prop to make that happen.
-      When true this will override the value of <tt>availabilitySelectionExpanded</tt> in
-      the {DownloadDataContextLink} such that selection will always be expanded.
-      </DocBlock>
-      <ExampleBlock>
-        <DownloadDataContext.Provider productData={sampleProductData.data}>
-          <DataProductAvailability disableSelectionCollapse />
-        </DownloadDataContext.Provider>
-      </ExampleBlock>
-      <CodeBlock>
-        {`
-import DownloadDataContext from 'portal-core-components/lib/components/DownloadDataContext';
-import DataProductAvailability from 'portal-core-components/lib/components/DataProductAvailability';
-
-const productData = {...};
-
-<DownloadDataContext.Provider productData={productData}>
-  <DataProductAvailability disableSelectionCollapse />
-</DownloadDataContext.Provider>
-        `}
-      </CodeBlock>
-
-      <Divider className={classes.divider} />
       <Typography variant="h6" component="h4" gutterBottom>
         Disabling Selection Inside a Download Context
       </Typography>

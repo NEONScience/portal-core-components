@@ -115,8 +115,7 @@ const DEFAULT_STATE = {
     value: null,
     error: null,
   },
-  availabilityView: 'summary',
-  availabilitySelectionExpanded: false,
+  availabilityView: null,
   s3FileFetches: {}, // Where we keep individual fetch status for each site+yearMonth
   s3FileFetchProgress: 0, // Number to track progress of batch fetches for s3 files
   s3Files: {
@@ -361,20 +360,17 @@ const getInitialStateFromProps = (props) => {
   const {
     productData,
     availabilityView,
-    availabilitySelectionExpanded,
   } = props;
   if (!productDataIsValid(productData)) {
     return {
       ...DEFAULT_STATE,
       availabilityView,
-      availabilitySelectionExpanded,
       requiredSteps: [],
     };
   }
   const initialState = {
     ...DEFAULT_STATE,
     availabilityView,
-    availabilitySelectionExpanded,
     productData,
   };
 
@@ -939,11 +935,6 @@ const reducer = (state, action) => {
       newState.availabilityView = action.value;
       return newState;
 
-    case 'setAvailabilitySelectionExpanded':
-      newState = { ...state };
-      newState.availabilitySelectionExpanded = !!action.value;
-      return newState;
-
     // Fallback
     default:
       return state;
@@ -1153,7 +1144,6 @@ Provider.propTypes = {
   }),
   /* eslint-disable react/no-unused-prop-types */
   availabilityView: PropTypes.oneOf(AVAILABILITY_VIEW_MODES),
-  availabilitySelectionExpanded: PropTypes.bool,
   sites: PropTypes.arrayOf(PropTypes.oneOf(ALL_POSSIBLE_VALID_SITES)),
   dateRange: PropTypes.arrayOf(PropTypes.string),
   documentation: PropTypes.oneOf(ALL_POSSIBLE_VALID_DOCUMENTATION),
@@ -1173,7 +1163,6 @@ Provider.defaultProps = {
   stateObservable: null,
   productData: {},
   availabilityView: DEFAULT_STATE.availabilityView,
-  availabilitySelectionExpanded: DEFAULT_STATE.availabilitySelectionExpanded,
   sites: DEFAULT_STATE.sites.value,
   dateRange: DEFAULT_STATE.dateRange.value,
   documentation: DEFAULT_STATE.documentation.value,
