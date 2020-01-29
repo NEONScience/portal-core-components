@@ -147,7 +147,7 @@ const siteCodes = [...];
       </DocBlock>
       <ExampleBlock>
         <div style={{ width: '100%' }}>
-          <h4>Ungrouped, initial sort by state, descending:</h4>
+          <h4>Ungrouped, initial sort by domain, descending:</h4>
           <DataProductAvailability
             siteCodes={sampleProductData.data.siteCodes}
             view="ungrouped"
@@ -162,7 +162,7 @@ import DataProductAvailability from 'portal-core-components/lib/components/DataP
 
 const siteCodes = [...];
 
-<h4>Ungrouped, initial sort by state, descending:</h4>
+<h4>Ungrouped, initial sort by domain, descending:</h4>
 <DataProductAvailability
   siteCodes={siteCodes}
   view="ungrouped"

@@ -279,15 +279,14 @@ export default function DataProductAvailability(props) {
      State: Current Sort Method and Sort Direction
      Only applies for "ungrouped" view mode.
   */
-  const { sortMethod: propsSortMethod } = props;
-  const initialSortMethod = (
-    downloadContextIsActive ? contextSortMethod : propsSortMethod
-  ) || 'states';
+  const { sortMethod: propsSortMethod, sortDirection: propsSortDirection } = props;
+  let initialSortMethod = propsSortMethod;
+  if (!initialSortMethod) { initialSortMethod = contextSortMethod; }
+  if (!initialSortMethod) { initialSortMethod = 'states'; }
+  let initialSortDirection = propsSortDirection;
+  if (!initialSortDirection) { initialSortDirection = contextSortDirection; }
+  if (!initialSortDirection) { initialSortDirection = 'ASC'; }
   const [currentSortMethod, setCurrentSortMethod] = useState(initialSortMethod);
-  const { sortDirection: propsSortDirection } = props;
-  const initialSortDirection = (
-    downloadContextIsActive ? contextSortDirection : propsSortDirection
-  ) || 'ASC';
   const [currentSortDirection, setCurrentSortDirection] = useState(initialSortDirection);
 
   const setSitesValue = useCallback(sitesValue => dispatchSelection({
@@ -345,9 +344,11 @@ export default function DataProductAvailability(props) {
   let sortedSites = [];
   const applySort = () => {
     if (currentView !== 'ungrouped') { return; }
+    // NOTE - these returns are backwards because the rendering in the chart is bottom-up
+    // (though of course a user will read it top-down).
     const sortReturns = [
-      currentSortDirection === 'ASC' ? -1 : 1,
       currentSortDirection === 'ASC' ? 1 : -1,
+      currentSortDirection === 'ASC' ? -1 : 1,
     ];
     sortedSites = Object.keys(views.ungrouped.rows);
     sortedSites.sort(SORT_METHODS[currentSortMethod].getSortFunction(sortReturns));
@@ -567,7 +568,8 @@ export default function DataProductAvailability(props) {
             key={SORT_DIRECTIONS[0]}
             value={SORT_DIRECTIONS[0]}
             className={`${classes.optionButton} ${currentSortDirection === SORT_DIRECTIONS[0] ? classes.optionButtonSelected : ''}`}
-            aria-label="Sort Ascending"
+            title="Sort Ascending (A-Z)"
+            aria-label="Sort Ascending (A-Z)"
           >
             <AscIcon />
           </ToggleButton>
@@ -576,7 +578,8 @@ export default function DataProductAvailability(props) {
             key={SORT_DIRECTIONS[1]}
             value={SORT_DIRECTIONS[1]}
             className={`${classes.optionButton} ${currentSortDirection === SORT_DIRECTIONS[1] ? classes.optionButtonSelected : ''}`}
-            aria-label="Sort Descending"
+            title="Sort Descending (Z-A)"
+            aria-label="Sort Descending (Z-A)"
           >
             <DescIcon />
           </ToggleButton>
