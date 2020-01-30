@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid */
+/* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid, max-len */
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -34,6 +34,12 @@ export default function StyleGuide(props) {
   const DownloadDataContextLink = (
     <Link href="#DownloadDataContext" onClick={() => onClickHash('#DownloadDataContext')}>
       DownloadDataContext
+    </Link>
+  );
+
+  const DownloadDataButtonLink = (
+    <Link href="#DownloadDataButton" onClick={() => onClickHash('#DownloadDataButton')}>
+      DownloadDataButton
     </Link>
   );
 
@@ -91,7 +97,7 @@ const siteCodes = [
         be specified with the <tt>view</tt> prop.
       </DocBlock>
       <DocBlock>
-        Valid views: <tt>summary</tt>, <tt>sites</tt>, <tt>states</tt>, <tt>domains</tt>
+        Valid views: <tt>summary</tt>, <tt>sites</tt>, <tt>states</tt>, <tt>domains</tt>, <tt>ungrouped</tt>
       </DocBlock>
       <DocBlock>
         Default view: <tt>summary</tt>
@@ -141,7 +147,7 @@ const siteCodes = [...];
       </DocBlock>
       <ExampleBlock>
         <div style={{ width: '100%' }}>
-          <h4>Ungrouped, initial sort by state, descending:</h4>
+          <h4>Ungrouped, initial sort by domain, descending:</h4>
           <DataProductAvailability
             siteCodes={sampleProductData.data.siteCodes}
             view="ungrouped"
@@ -156,7 +162,7 @@ import DataProductAvailability from 'portal-core-components/lib/components/DataP
 
 const siteCodes = [...];
 
-<h4>Ungrouped, initial sort by state, descending:</h4>
+<h4>Ungrouped, initial sort by domain, descending:</h4>
 <DataProductAvailability
   siteCodes={siteCodes}
   view="ungrouped"
@@ -224,7 +230,12 @@ const productData = {
         the {DownloadDataContextLink}.
       </DocBlock>
       <DocBlock>
-        Valid views: <tt>summary</tt>, <tt>sites</tt>, <tt>states</tt>, <tt>domains</tt>
+        This creates a scenario where view can be defined in more than one place--on the context
+        and on the availability chart within the context. If both are set then the most local prop
+        will win (so the chart prop with override the context prop).
+      </DocBlock>
+      <DocBlock>
+        Valid views: <tt>summary</tt>, <tt>sites</tt>, <tt>states</tt>, <tt>domains</tt>, <tt>ungrouped</tt>
       </DocBlock>
       <DocBlock>
         Default view: <tt>summary</tt>
@@ -290,17 +301,19 @@ const dateRange: ['2018-01', '2018-12'];
       </CodeBlock>
 
       <Divider className={classes.divider} />
-      <Typography variant="h6" component="h4" gutterBottom>Disabling Selection Collapse</Typography>
+      <Typography variant="h6" component="h4" gutterBottom>
+        Disabling Selection Inside a Download Context
+      </Typography>
 
       <DocBlock>
-      If selection is enabled it may make sense to disable selection collapse entirely.
-      Apply the <tt>disableSelectionCollapse</tt> boolean prop to make that happen.
-      When true this will override the value of <tt>availabilitySelectionExpanded</tt> in
-      the {DownloadDataContextLink} such that selection will always be expanded.
+        Sometimes a Data Product Availability chart needs to be displayed inside
+        a {DownloadDataContextLink} but selection should not be afforded. A typical use case might
+        be where the chart is presented as read-only with an adjacent {DownloadDataButtonLink}.
+        This can be achieved with the <tt>disableSelection</tt> boolean prop.
       </DocBlock>
       <ExampleBlock>
         <DownloadDataContext.Provider productData={sampleProductData.data}>
-          <DataProductAvailability disableSelectionCollapse />
+          <DataProductAvailability disableSelection />
         </DownloadDataContext.Provider>
       </ExampleBlock>
       <CodeBlock>
@@ -311,7 +324,7 @@ import DataProductAvailability from 'portal-core-components/lib/components/DataP
 const productData = {...};
 
 <DownloadDataContext.Provider productData={productData}>
-  <DataProductAvailability disableSelectionCollapse />
+  <DataProductAvailability disableSelection />
 </DownloadDataContext.Provider>
         `}
       </CodeBlock>

@@ -15,7 +15,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
-   sodipodi:docname="icon-aquatic.svg">
+   sodipodi:docname="icon-relocatable-aquatic.svg">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="3.959798"
-     inkscape:cx="-38.288603"
-     inkscape:cy="48.954024"
+     inkscape:cx="-56.305776"
+     inkscape:cy="63.883446"
      inkscape:document-units="mm"
      inkscape:current-layer="layer2"
      showgrid="false"
@@ -62,17 +62,17 @@
        height="26.458334"
        x="0"
        y="-6.357829e-07"
-       rx="3.4490328"
-       ry="3.4490328" />
+       rx="13.229167"
+       ry="13.229167" />
     <rect
-       style="opacity:1;fill:#545b97;fill-opacity:1;stroke:none;stroke-width:0.2332253;stroke-opacity:1"
+       style="opacity:1;fill:#757bb3;fill-opacity:1;stroke:none;stroke-width:0.2332253;stroke-opacity:1"
        id="rect4518-8-4"
        width="22.489584"
        height="22.489584"
        x="1.984375"
        y="1.9843744"
-       rx="2.9316778"
-       ry="2.9316778" />
+       rx="11.244792"
+       ry="11.244792" />
     <path
        style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.32982379;stroke-opacity:1"
        d="m 17.197917,14.323666 c 0,2.318035 -1.776872,4.197167 -3.96875,4.197167 -2.191877,0 -3.9687503,-1.879132 -3.9687503,-4.197167 0,-2.318035 2.7893063,-7.7090827 3.9687503,-7.7090827 1.179444,0 3.96875,5.3910477 3.96875,7.7090827 z"

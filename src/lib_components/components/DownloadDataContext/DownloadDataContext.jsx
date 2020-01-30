@@ -115,8 +115,7 @@ const DEFAULT_STATE = {
     value: null,
     error: null,
   },
-  availabilityView: 'summary',
-  availabilitySelectionExpanded: false,
+  availabilityView: null,
   s3FileFetches: {}, // Where we keep individual fetch status for each site+yearMonth
   s3FileFetchProgress: 0, // Number to track progress of batch fetches for s3 files
   s3Files: {
@@ -129,6 +128,7 @@ const DEFAULT_STATE = {
     totalSize: 0,
     estimatedPostSize: 0, // For disabling download button above a threshold per POST API limitation
     filteredFileCount: 0, // A cached count of files present when current filters are applied
+    lastFilterChanged: null, // Used to refocus on field after state update if needed (file name)
     filters: { // Where we cache material table filter state for reinjection on full rerender
       site: [],
       type: [],
@@ -360,20 +360,17 @@ const getInitialStateFromProps = (props) => {
   const {
     productData,
     availabilityView,
-    availabilitySelectionExpanded,
   } = props;
   if (!productDataIsValid(productData)) {
     return {
       ...DEFAULT_STATE,
       availabilityView,
-      availabilitySelectionExpanded,
       requiredSteps: [],
     };
   }
   const initialState = {
     ...DEFAULT_STATE,
     availabilityView,
-    availabilitySelectionExpanded,
     productData,
   };
 
@@ -849,6 +846,7 @@ const reducer = (state, action) => {
         newState.s3Files.filters[action.filter] = action.value;
       }
       newState.s3Files.filteredFileCount = getS3FilesFilteredFileCount(newState);
+      newState.s3Files.lastFilterChanged = action.filter;
       return newState;
 
     // Action for clearing all filter values for the presentation of s3 files
@@ -935,11 +933,6 @@ const reducer = (state, action) => {
       newState = { ...state };
       if (!AVAILABILITY_VIEW_MODES.includes(action.value)) { return newState; }
       newState.availabilityView = action.value;
-      return newState;
-
-    case 'setAvailabilitySelectionExpanded':
-      newState = { ...state };
-      newState.availabilitySelectionExpanded = !!action.value;
       return newState;
 
     // Fallback
@@ -1151,7 +1144,6 @@ Provider.propTypes = {
   }),
   /* eslint-disable react/no-unused-prop-types */
   availabilityView: PropTypes.oneOf(AVAILABILITY_VIEW_MODES),
-  availabilitySelectionExpanded: PropTypes.bool,
   sites: PropTypes.arrayOf(PropTypes.oneOf(ALL_POSSIBLE_VALID_SITES)),
   dateRange: PropTypes.arrayOf(PropTypes.string),
   documentation: PropTypes.oneOf(ALL_POSSIBLE_VALID_DOCUMENTATION),
@@ -1171,7 +1163,6 @@ Provider.defaultProps = {
   stateObservable: null,
   productData: {},
   availabilityView: DEFAULT_STATE.availabilityView,
-  availabilitySelectionExpanded: DEFAULT_STATE.availabilitySelectionExpanded,
   sites: DEFAULT_STATE.sites.value,
   dateRange: DEFAULT_STATE.dateRange.value,
   documentation: DEFAULT_STATE.documentation.value,

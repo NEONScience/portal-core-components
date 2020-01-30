@@ -11,19 +11,19 @@ declare namespace DataProductAvailability {
         export const view: PropTypes.Requireable<string>;
         export const sortMethod: PropTypes.Requireable<string>;
         export const sortDirection: PropTypes.Requireable<string>;
-        export const disableSelectionCollapse: PropTypes.Requireable<boolean>;
+        export const disableSelection: PropTypes.Requireable<boolean>;
     }
     export namespace defaultProps {
         const siteCodes_1: never[];
         export { siteCodes_1 as siteCodes };
-        const view_1: string;
+        const view_1: null;
         export { view_1 as view };
         const sortMethod_1: null;
         export { sortMethod_1 as sortMethod };
         const sortDirection_1: string;
         export { sortDirection_1 as sortDirection };
-        const disableSelectionCollapse_1: boolean;
-        export { disableSelectionCollapse_1 as disableSelectionCollapse };
+        const disableSelection_1: boolean;
+        export { disableSelection_1 as disableSelection };
     }
 }
 export default DataProductAvailability;

@@ -2,6 +2,7 @@ import React, { useRef, useReducer, useEffect } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import PropTypes from 'prop-types';
 
+import { of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -38,16 +39,26 @@ import statesShapesJSON from '../../static/statesShapes/statesShapes.json';
 import domainsJSON from '../../static/domains/domains.json';
 import domainsShapesJSON from '../../static/domainsShapes/domainsShapes.json';
 
-import iconShadowSVG from './icon-shadow.svg';
-import iconAquaticSVG from './icon-aquatic.svg';
-import iconTerrestrialSVG from './icon-terrestrial.svg';
+import iconCoreTerrestrialSVG from './icon-core-terrestrial.svg';
+import iconCoreAquaticSVG from './icon-core-aquatic.svg';
+import iconCoreShadowSVG from './icon-core-shadow.svg';
+import iconRelocatableTerrestrialSVG from './icon-relocatable-terrestrial.svg';
+import iconRelocatableAquaticSVG from './icon-relocatable-aquatic.svg';
+import iconRelocatableShadowSVG from './icon-relocatable-shadow.svg';
 
 const { BaseLayer, Overlay } = LayersControl;
 
 const ICON_SVGS = {
-  AQUATIC: iconAquaticSVG,
-  TERRESTRIAL: iconTerrestrialSVG,
-  SHADOW: iconShadowSVG,
+  CORE: {
+    AQUATIC: iconCoreAquaticSVG,
+    TERRESTRIAL: iconCoreTerrestrialSVG,
+    SHADOW: iconCoreShadowSVG,
+  },
+  RELOCATABLE: {
+    AQUATIC: iconRelocatableAquaticSVG,
+    TERRESTRIAL: iconRelocatableTerrestrialSVG,
+    SHADOW: iconRelocatableShadowSVG,
+  },
 };
 
 const SITE_DETAILS_URL_BASE = 'https://www.neonscience.org/field-sites/field-sites-map/';
@@ -59,28 +70,24 @@ export const TILE_LAYERS = {
     shortAttribution: '© Natl. Geographic et al.',
     fullAttribution: '© National Geographic, Esri, Garmin, HERE, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC',
     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}',
-    overlayColor: Theme.palette.primary.main,
   },
   World_Imagery: {
     name: 'Satellite Imagery',
     shortAttribution: '© Esri et al.',
     fullAttribution: '© Esri, DigitalGlobe, GeoEye, Earthstar Geographics, CNES/Airbus DS, USDA, USGS, AeroGRID, IGN, GIS Community',
     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-    overlayColor: COLORS.ORANGE[500],
   },
   World_Street_Map: {
     name: 'Streets',
     shortAttribution: '© Esri et al.',
     fullAttribution: '© Esri, HERE, Garmin, USGS, Intermap, INCREMENT P, NRCan, Esri Japan, METI, Esri China (Hong Kong), Esri Korea, Esri (Thailand), NGCC, OSM contributors, GIS Community',
     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
-    overlayColor: Theme.palette.primary.main,
   },
   World_Topo_Map: {
     name: 'Topographic',
     shortAttribution: '© Esri et al.',
     fullAttribution: '© Esri, HERE, Garmin, Intermap, iPC, GEBCO, USGS, FAO, NPS, NRCAN, GeoBase, IGN, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), OSM contributors, GIS Community',
     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
-    overlayColor: Theme.palette.primary.main,
   },
 };
 const TILE_LAYERS_BY_NAME = {};
@@ -161,6 +168,11 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
+  startFlexInline: {
+    display: 'inline-flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
 }));
 
 const SiteMap = (props) => {
@@ -220,9 +232,8 @@ const SiteMap = (props) => {
     } else if (typeof sitesProp === 'object' && Object.keys(sitesProp).length > 0) {
       sites = { ...sitesProp };
       Object.keys(sites).forEach((siteCode) => {
-        if (!sites[siteCode].terrain) {
-          sites[siteCode].terrain = sitesJSON[siteCode].terrain;
-        }
+        if (!sites[siteCode].siteCode) { sites[siteCode].siteCode = siteCode; }
+        if (!sites[siteCode].terrain) { sites[siteCode].terrain = sitesJSON[siteCode].terrain; }
       });
       fetchSitesStatus = 'fetched';
     }
@@ -285,12 +296,14 @@ const SiteMap = (props) => {
       if (response.response && response.response.data && response.response.data.sites) {
         const sitesResponse = sitesArrayToKeyedObject(response.response.data.sites);
         dispatch({ type: 'fetchSitesSucceeded', sites: sitesResponse });
-      } else {
-        dispatch({ type: 'fetchSitesFailed', error: 'malformed response' });
+        return of(true);
       }
+      dispatch({ type: 'fetchSitesFailed', error: 'malformed response' });
+      return of(false);
     }),
     catchError((error) => {
-      dispatch({ type: 'fetchSitesFailed', error });
+      dispatch({ type: 'fetchSitesFailed', error: error.message });
+      return of(false);
     }),
   );
 
@@ -332,15 +345,15 @@ const SiteMap = (props) => {
     );
   }
 
-  const getZoomedIcon = (terrain = 'TERRESTRIAL') => {
-    if (!ICON_SVGS[terrain] || !ICON_SVGS.SHADOW) { return null; }
+  const getZoomedIcon = (type, terrain) => {
+    if (!ICON_SVGS[type] || !ICON_SVGS[type][terrain] || !ICON_SVGS[type].SHADOW) { return null; }
     const iconScale = 0.2 + (Math.floor((state.zoom - 2) / 3) / 10);
     return new L.Icon({
-      iconUrl: ICON_SVGS[terrain],
-      iconRetinaUrl: ICON_SVGS[terrain],
+      iconUrl: ICON_SVGS[type][terrain],
+      iconRetinaUrl: ICON_SVGS[type][terrain],
       iconSize: [100, 100].map(x => x * iconScale),
       iconAnchor: [50, 100].map(x => x * iconScale),
-      shadowUrl: ICON_SVGS.SHADOW,
+      shadowUrl: ICON_SVGS[type].SHADOW,
       shadowSize: [156, 93].map(x => x * iconScale),
       shadowAnchor: [50, 95].map(x => x * iconScale),
       popupAnchor: [0, -100].map(x => x * iconScale),
@@ -348,15 +361,23 @@ const SiteMap = (props) => {
   };
 
   const renderSitePopup = (site) => {
+    let typeTitle = 'Core';
+    let typeSubtitle = 'fixed location';
+    if (site.type === 'RELOCATABLE') {
+      typeTitle = 'Relocatable';
+      typeSubtitle = 'location may change';
+    }
     let terrainTitle = 'Terrestrial';
-    let terrainSubtitle = '(land-based)';
+    let terrainSubtitle = 'land-based';
     if (site.terrain === 'AQUATIC') {
       terrainTitle = 'Aquatic';
-      terrainSubtitle = '(water-based)';
+      terrainSubtitle = 'water-based';
     }
+    const terrainTypeTitle = `${terrainTitle} ${typeTitle}`;
+    const terrainTypeSubtitle = `(${terrainSubtitle}, ${typeSubtitle})`;
     const terrainIcon = (
       <img
-        src={ICON_SVGS[site.terrain]}
+        src={ICON_SVGS[site.type][site.terrain]}
         alt={site.terrain}
         title={`${terrainTitle} ${terrainSubtitle}`}
         width={Theme.spacing(5)}
@@ -389,8 +410,8 @@ const SiteMap = (props) => {
         Explore Data Products
       </Button>
     ) : null;
-    const renderField = (title, value, marginBottom = 2) => (
-      <div style={{ marginBottom: Theme.spacing(marginBottom) }}>
+    const renderField = (title, value) => (
+      <div>
         <Typography variant="subtitle2">{title}</Typography>
         <Typography variant="body2">{value}</Typography>
       </div>
@@ -401,17 +422,19 @@ const SiteMap = (props) => {
         <Typography variant="h5" gutterBottom>
           {`${site.description} (${site.siteCode})`}
         </Typography>
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <div className={classes.startFlex} style={{ marginBottom: Theme.spacing(2) }}>
-              {terrainIcon}
-              {renderField(terrainTitle, terrainSubtitle, 0)}
-            </div>
-            {renderField('Latitude/Longitude', `${site.latitude}, ${site.longitude}`)}
-          </Grid>
-          <Grid item xs={6}>
+        <div className={classes.startFlex} style={{ marginBottom: Theme.spacing(1.5) }}>
+          {terrainIcon}
+          {renderField(terrainTypeTitle, terrainTypeSubtitle)}
+        </div>
+        <Grid container spacing={2} style={{ marginBottom: Theme.spacing(1) }}>
+          <Grid item xs={4}>
             {renderField(stateFieldTitle, statesJSON[site.stateCode].name)}
+          </Grid>
+          <Grid item xs={4}>
             {renderField('Domain', `${site.domainCode} - ${domainsJSON[site.domainCode].name}`)}
+          </Grid>
+          <Grid item xs={4}>
+            {renderField('Lat./Lon.', `${site.latitude}, ${site.longitude}`)}
           </Grid>
         </Grid>
         {siteDetailsButton}
@@ -424,20 +447,51 @@ const SiteMap = (props) => {
   const renderSitesOverlay = () => {
     // Get new icons scaled to the current zoom level every render
     const zoomedIcons = {
-      AQUATIC: getZoomedIcon('AQUATIC'),
-      TERRESTRIAL: getZoomedIcon('TERRESTRIAL'),
+      CORE: {
+        AQUATIC: getZoomedIcon('CORE', 'AQUATIC'),
+        TERRESTRIAL: getZoomedIcon('CORE', 'TERRESTRIAL'),
+      },
+      RELOCATABLE: {
+        AQUATIC: getZoomedIcon('RELOCATABLE', 'AQUATIC'),
+        TERRESTRIAL: getZoomedIcon('RELOCATABLE', 'TERRESTRIAL'),
+      },
     };
+    const imgStyle = { width: '20px', height: '20px', marginRight: '4px' };
+    const overlayName = ReactDOMServer.renderToStaticMarkup(
+      <div style={{ display: 'inline-flex', flexDirection: 'column' }}>
+        <div>NEON Sites</div>
+        <div className={classes.startFlex}>
+          <img src={ICON_SVGS.CORE.TERRESTRIAL} alt="Terrestrial Core" style={imgStyle} />
+          <div>Terrestrial Core</div>
+        </div>
+        <div className={classes.startFlex}>
+          <img src={ICON_SVGS.RELOCATABLE.TERRESTRIAL} alt="Terrestrial Relocatable" style={imgStyle} />
+          <div>Terrestrial Relocatable</div>
+        </div>
+        <div className={classes.startFlex}>
+          <img src={ICON_SVGS.CORE.AQUATIC} alt="Aquatic Core" style={imgStyle} />
+          <div>Aquatic Core</div>
+        </div>
+        <div className={classes.startFlex}>
+          <img src={ICON_SVGS.RELOCATABLE.AQUATIC} alt="Aquatic Relocatable" style={imgStyle} />
+          <div>Aquatic Relocatable</div>
+        </div>
+      </div>,
+    );
     return (
-      <Overlay name="NEON Sites" checked={state.sitesOverlay}>
+      <Overlay name={overlayName} checked={state.sitesOverlay}>
         <FeatureGroup>
           {Object.keys(state.sites).map((siteCode) => {
             const site = state.sites[siteCode];
-            if (!site.latitude || !site.longitude || !zoomedIcons[site.terrain]) { return null; }
+            if (!zoomedIcons[site.type] || !zoomedIcons[site.type][site.terrain]
+                || !site.latitude || !site.longitude) {
+              return null;
+            }
             return (
               <Marker
                 key={siteCode}
                 position={[site.latitude, site.longitude]}
-                icon={zoomedIcons[site.terrain]}
+                icon={zoomedIcons[site.type][site.terrain]}
               >
                 {renderSitePopup(site)}
               </Marker>
@@ -448,61 +502,128 @@ const SiteMap = (props) => {
     );
   };
 
+  const renderPopupSitesList = (sitesList) => {
+    if (!sitesList || !sitesList.length) {
+      return (
+        <Typography variant="subtitle2" gutterBottom>
+          <i>No NEON Sites</i>
+        </Typography>
+      );
+    }
+    const imgStyle = { width: '20px', height: '20px', margin: '0px 4px 4px 0px' };
+    return (
+      <React.Fragment>
+        <Typography variant="subtitle2" gutterBottom>
+          {`NEON Sites (${sitesList.length}):`}
+        </Typography>
+        <div>
+          {sitesList.map((siteCode) => {
+            const site = state.sites[siteCode];
+            const alt = `${site.terrain} ${site.type}`;
+            const src = ICON_SVGS[site.type][site.terrain];
+            return (
+              <div key={siteCode} style={{ display: 'flex' }}>
+                <img src={src} alt={alt} style={imgStyle} />
+                <div>{`${site.description} (${siteCode})`}</div>
+              </div>
+            );
+          })}
+        </div>
+      </React.Fragment>
+    );
+  };
+
   const renderStatePopup = (stateCode) => {
     if (!statesJSON[stateCode]) { return null; }
     const stateName = statesJSON[stateCode].name;
+    const sitesList = Object.keys(state.sites)
+      .filter(siteCode => state.sites[siteCode].stateCode === stateCode);
     return (
       <Popup className={classes.popup}>
         <Typography variant="h6" gutterBottom>
           {`${stateName} (${stateCode})`}
         </Typography>
+        {renderPopupSitesList(sitesList)}
       </Popup>
     );
   };
 
-  const renderStatesOverlay = () => (
-    <Overlay name="US States" checked={state.statesOverlay}>
-      <FeatureGroup>
-        {statesShapesJSON.features.map(usState => (
-          <Polygon
-            key={usState.properties.stateCode}
-            color={TILE_LAYERS[state.tileLayer].overlayColor}
-            positions={usState.geometry.coordinates}
-          >
-            {renderStatePopup(usState.properties.stateCode)}
-          </Polygon>
-        ))}
-      </FeatureGroup>
-    </Overlay>
-  );
+  const renderStatesOverlay = () => {
+    const keyStyle = {
+      border: `2px solid ${COLORS.RED[500]}`,
+      backgroundColor: `${COLORS.RED[500]}88`,
+      width: Theme.spacing(3),
+      height: Theme.spacing(1),
+      margin: Theme.spacing(0, 0.5, 0.25, 0),
+    };
+    const overlayName = ReactDOMServer.renderToStaticMarkup(
+      <div className={classes.startFlexInline}>
+        <div style={keyStyle} />
+        <div>US States</div>
+      </div>,
+    );
+    return (
+      <Overlay name={overlayName} checked={state.statesOverlay}>
+        <FeatureGroup>
+          {statesShapesJSON.features.map(usState => (
+            <Polygon
+              key={usState.properties.stateCode}
+              color={COLORS.RED[500]}
+              positions={usState.geometry.coordinates}
+            >
+              {renderStatePopup(usState.properties.stateCode)}
+            </Polygon>
+          ))}
+        </FeatureGroup>
+      </Overlay>
+    );
+  };
 
   const renderDomainPopup = (domainCode) => {
     if (!domainsJSON[domainCode]) { return null; }
     const domainName = domainsJSON[domainCode].name;
+    const sitesList = Object.keys(state.sites)
+      .filter(siteCode => state.sites[siteCode].domainCode === domainCode);
     return (
       <Popup className={classes.popup}>
         <Typography variant="h6" gutterBottom>
           {`${domainName} (${domainCode})`}
         </Typography>
+        {renderPopupSitesList(sitesList)}
       </Popup>
     );
   };
 
-  const renderDomainsOverlay = () => (
-    <Overlay name="NEON Domains" checked={state.domainsOverlay}>
-      <FeatureGroup>
-        {domainsShapesJSON.features.map(domain => (
-          <Polygon
-            key={domain.properties.domainCode}
-            color={TILE_LAYERS[state.tileLayer].overlayColor}
-            positions={domain.geometry.coordinates}
-          >
-            {renderDomainPopup(domain.properties.domainCode)}
-          </Polygon>
-        ))}
-      </FeatureGroup>
-    </Overlay>
-  );
+  const renderDomainsOverlay = () => {
+    const keyStyle = {
+      border: `2px solid ${COLORS.SECONDARY_BLUE[500]}`,
+      backgroundColor: `${COLORS.SECONDARY_BLUE[500]}88`,
+      width: Theme.spacing(3),
+      height: Theme.spacing(1),
+      margin: Theme.spacing(0, 0.5, 0.25, 0),
+    };
+    const overlayName = ReactDOMServer.renderToStaticMarkup(
+      <div className={classes.startFlexInline}>
+        <div style={keyStyle} />
+        <div>Neon Domains</div>
+      </div>,
+    );
+    return (
+      <Overlay name={overlayName} checked={state.domainsOverlay}>
+        <FeatureGroup>
+          {domainsShapesJSON.features.map(domain => (
+            <Polygon
+              key={domain.properties.domainCode}
+              color={COLORS.SECONDARY_BLUE[500]}
+              positions={domain.geometry.coordinates}
+            >
+              {renderDomainPopup(domain.properties.domainCode)}
+            </Polygon>
+          ))}
+        </FeatureGroup>
+      </Overlay>
+    );
+  };
 
   const renderTileLayer = (key) => {
     const tileLayer = TILE_LAYERS[key];

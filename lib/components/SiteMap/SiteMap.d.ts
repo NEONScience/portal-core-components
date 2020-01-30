@@ -4,7 +4,6 @@ export namespace TILE_LAYERS {
         export const shortAttribution: string;
         export const fullAttribution: string;
         export const url: string;
-        export const overlayColor: string;
     }
     export namespace World_Imagery {
         const name_1: string;
@@ -15,8 +14,6 @@ export namespace TILE_LAYERS {
         export { fullAttribution_1 as fullAttribution };
         const url_1: string;
         export { url_1 as url };
-        const overlayColor_1: string;
-        export { overlayColor_1 as overlayColor };
     }
     export namespace World_Street_Map {
         const name_2: string;
@@ -27,8 +24,6 @@ export namespace TILE_LAYERS {
         export { fullAttribution_2 as fullAttribution };
         const url_2: string;
         export { url_2 as url };
-        const overlayColor_2: string;
-        export { overlayColor_2 as overlayColor };
     }
     export namespace World_Topo_Map {
         const name_3: string;
@@ -39,8 +34,6 @@ export namespace TILE_LAYERS {
         export { fullAttribution_3 as fullAttribution };
         const url_3: string;
         export { url_3 as url };
-        const overlayColor_3: string;
-        export { overlayColor_3 as overlayColor };
     }
 }
 export default SiteMap;

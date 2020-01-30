@@ -484,6 +484,7 @@ export function AvailabilityGrid(config) {
           : 'partial';
         break;
       case 'sites':
+      case 'ungrouped':
         sites.value.forEach((site) => {
           viewSelections[site] = 'full';
         });
@@ -508,6 +509,7 @@ export function AvailabilityGrid(config) {
         allSitesForKey = new Set(sites.validValues);
         break;
       case 'sites':
+      case 'ungrouped':
         allSitesForKey = new Set([key]);
         break;
       default: // domains, states

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import lzw from 'node-lzw';
+
 import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
@@ -109,6 +111,9 @@ export default function DownloadDataDialog() {
       fromAOPManifest,
       documentation,
       s3Files,
+      sites,
+      dateRange,
+      packageType,
     },
     dispatch,
   ] = DownloadDataContext.useDownloadDataState();
@@ -557,6 +562,25 @@ export default function DownloadDataDialog() {
     const total = completed.length + notCompleted.length;
     return total ? (completed.length / total) * 100 : 0;
   };
+  const getLZWCompressedConfig = () => {
+    if (!allStepsComplete) { return ''; }
+    // The subset of possible steps we actually want to persist in the GA event
+    const eventSteps = ['sites', 'dateRange'];
+    if (requiredSteps.some(step => step.key === 'documentation')) {
+      eventSteps.push('documentation');
+    }
+    if (requiredSteps.some(step => step.key === 'packageType')) {
+      eventSteps.push('packageType');
+    }
+    // Build the config for reporting
+    const eventValues = {
+      sites, dateRange, documentation, packageType,
+    };
+    const eventConfig = { productCode: productData.productCode };
+    eventSteps.forEach((step) => { eventConfig[step] = eventValues[step].value; });
+    // Stringify, compress, and return
+    return lzw.encode(JSON.stringify(eventConfig));
+  };
   const renderGtmTags = () => (
     <React.Fragment>
       {/* Google Tag Manager elements to track download progress */}
@@ -566,6 +590,7 @@ export default function DownloadDataDialog() {
       <input type="hidden" data-gtm="download-data-dialog.steps-not-completed" value={getStepsNotCompleted().join(', ')} />
       <input type="hidden" data-gtm="download-data-dialog.step-completion-percentage" value={getStepCompletionPercentage()} />
       <input type="hidden" data-gtm="download-data-dialog.download-executed" value={downloadExecuted ? 1 : 0} />
+      <input type="hidden" data-gtm="download-data-dialog.lzw-compressed-config" value={getLZWCompressedConfig()} />
       {/* end Google Tag Manager elements */}
     </React.Fragment>
   );

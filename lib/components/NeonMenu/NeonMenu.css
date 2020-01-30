@@ -44,7 +44,9 @@
 }
 
 .neon-menu__auth {
-  text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
   padding: 0.5em 2em;
 }
 

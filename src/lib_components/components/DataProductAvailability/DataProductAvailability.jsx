@@ -18,15 +18,16 @@ import Hidden from '@material-ui/core/Hidden';
 import MenuItem from '@material-ui/core/MenuItem';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import Select from '@material-ui/core/Select';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import Typography from '@material-ui/core/Typography';
 
-import IconButton from '@material-ui/core/IconButton';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import AscIcon from '@material-ui/icons/ArrowDownward';
-import DescIcon from '@material-ui/icons/ArrowUpward';
+import AscIcon from '@material-ui/icons/KeyboardArrowDown';
+import DescIcon from '@material-ui/icons/KeyboardArrowUp';
+import ClickIcon from '@material-ui/icons/TouchApp';
+import DragIcon from '@material-ui/icons/VerticalAlignCenter';
+import PanIcon from '@material-ui/icons/PanTool';
 
 import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
@@ -61,27 +62,19 @@ const svgMinWidth = (SVG.CELL_WIDTH + SVG.CELL_PADDING) * SVG.MIN_CELLS
   + Math.floor(SVG.MIN_CELLS / 12) * SVG.YEAR_PADDING;
 const svgMinHeight = (SVG.CELL_HEIGHT + SVG.CELL_PADDING) * (SVG.MIN_ROWS + 1);
 const useStyles = makeStyles(theme => ({
-  viewButtonGroup: {
+  optionButtonGroup: {
     height: theme.spacing(4),
   },
-  viewButtonGroupXsmall: {
-    height: theme.spacing(3),
-  },
-  viewButton: {
+  optionButton: {
     height: theme.spacing(4),
-    fontWeight: 700,
+    fontWeight: 600,
     color: theme.palette.primary.main,
     borderColor: theme.palette.primary.main,
-    padding: theme.spacing(0, 2),
+    padding: theme.spacing(0, 1.5),
     whiteSpace: 'nowrap',
   },
-  viewButtonXsmall: {
-    height: theme.spacing(3),
-    fontWeight: 600,
-    padding: theme.spacing(0, 1.5),
-  },
   // Use !important here to override the Mui-selected class with higher priority
-  viewButtonSelected: {
+  optionButtonSelected: {
     color: '#fff !important',
     backgroundColor: `${theme.palette.primary.main} !important`,
   },
@@ -100,18 +93,44 @@ const useStyles = makeStyles(theme => ({
     fontSize: '0.95rem',
   },
   xsSelect: {
+    height: theme.spacing(4),
     '& div': {
       padding: Theme.spacing(1, 3, 1, 1.5),
     },
   },
   sortSelect: {
-    height: theme.spacing(6),
+    height: theme.spacing(4),
     '& div': {
       paddingRight: Theme.spacing(4.5),
     },
+    marginRight: theme.spacing(2),
   },
-  sortToggleButtonGroup: {
-    marginLeft: theme.spacing(2),
+  helpSnackbar: {
+    backgroundColor: theme.palette.grey[50],
+    color: '#000',
+    border: `1px solid ${theme.palette.primary.main}80`,
+    '& div.MuiSnackbarContent-message': {
+      width: '100%',
+    },
+  },
+  helpIcon: {
+    color: theme.palette.grey[300],
+    marginRight: theme.spacing(1),
+  },
+  helpGridContainer: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'space-around',
+    flexWrap: 'wrap',
+    marginBottom: theme.spacing(-1),
+    marginRight: theme.spacing(-1),
+  },
+  helpGrid: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    marginBottom: theme.spacing(1),
+    marginRight: theme.spacing(1),
   },
 }));
 
@@ -152,9 +171,10 @@ const SORT_DIRECTIONS = ['ASC', 'DESC'];
 */
 export default function DataProductAvailability(props) {
   const classes = useStyles(Theme);
+  const atXs = useMediaQuery(Theme.breakpoints.only('xs'));
+  const atSm = useMediaQuery(Theme.breakpoints.only('sm'));
   const siteChipClasses = useSiteChipStyles(Theme);
   const { ...other } = props;
-  const belowSm = useMediaQuery(Theme.breakpoints.down('sm'));
 
   /**
      State: Views
@@ -235,38 +255,38 @@ export default function DataProductAvailability(props) {
       availabilityView: contextView,
       availabilitySortMethod: contextSortMethod,
       availabilitySortDirection: contextSortDirection,
-      availabilitySelectionExpanded: selectionExpanded,
     },
     dispatchSelection,
   ] = DownloadDataContext.useDownloadDataState();
 
-  const selectionEnabled = requiredSteps.some(step => step.key === 'sitesAndDateRange');
+  const { disableSelection } = props;
+  const selectionEnabled = !disableSelection
+    && requiredSteps.some(step => step.key === 'sitesAndDateRange');
 
   /**
      State: Current View
-     Track the current view as local state and feed its initial value from the
-     initialView prop. This covers the use case when the availability chart does
-     NOT appear inside a Download Data Context. When in a context, however, the
-     context overrides the current view as it is keeping track of the broader
-     download workflow state.
+     View mode can be set from the view prop or pulled from a download context.
+     Prop overrides context. If neither are set then default to 'sites' if selection
+     is currently enabled and 'summary' if not.
   */
   const { view: propsView } = props;
-  const initialView = downloadContextIsActive ? contextView : propsView;
+  let initialView = propsView;
+  if (!initialView) { initialView = contextView; }
+  if (!initialView) { initialView = selectionEnabled ? 'sites' : 'summary'; }
   const [currentView, setCurrentView] = useState(initialView);
 
   /**
      State: Current Sort Method and Sort Direction
      Only applies for "ungrouped" view mode.
   */
-  const { sortMethod: propsSortMethod } = props;
-  const initialSortMethod = (
-    downloadContextIsActive ? contextSortMethod : propsSortMethod
-  ) || 'states';
+  const { sortMethod: propsSortMethod, sortDirection: propsSortDirection } = props;
+  let initialSortMethod = propsSortMethod;
+  if (!initialSortMethod) { initialSortMethod = contextSortMethod; }
+  if (!initialSortMethod) { initialSortMethod = 'states'; }
+  let initialSortDirection = propsSortDirection;
+  if (!initialSortDirection) { initialSortDirection = contextSortDirection; }
+  if (!initialSortDirection) { initialSortDirection = 'ASC'; }
   const [currentSortMethod, setCurrentSortMethod] = useState(initialSortMethod);
-  const { sortDirection: propsSortDirection } = props;
-  const initialSortDirection = (
-    downloadContextIsActive ? contextSortDirection : propsSortDirection
-  ) || 'ASC';
   const [currentSortDirection, setCurrentSortDirection] = useState(initialSortDirection);
 
   const setSitesValue = useCallback(sitesValue => dispatchSelection({
@@ -307,10 +327,6 @@ export default function DataProductAvailability(props) {
       newEndDate.format('YYYY-MM'),
     ]);
   };
-  const handleToggleSelectionExpanded = currentSelectionExpanded => dispatchSelection({
-    type: 'setAvailabilitySelectionExpanded',
-    value: !currentSelectionExpanded,
-  });
   const handleChangeView = (event, newView) => {
     if (
       !selectableViewKeys.includes(newView)
@@ -328,9 +344,11 @@ export default function DataProductAvailability(props) {
   let sortedSites = [];
   const applySort = () => {
     if (currentView !== 'ungrouped') { return; }
+    // NOTE - these returns are backwards because the rendering in the chart is bottom-up
+    // (though of course a user will read it top-down).
     const sortReturns = [
-      currentSortDirection === 'ASC' ? -1 : 1,
       currentSortDirection === 'ASC' ? 1 : -1,
+      currentSortDirection === 'ASC' ? -1 : 1,
     ];
     sortedSites = Object.keys(views.ungrouped.rows);
     sortedSites.sort(SORT_METHODS[currentSortMethod].getSortFunction(sortReturns));
@@ -367,17 +385,19 @@ export default function DataProductAvailability(props) {
 
   /**
      Product Data: Map to Views
-     Statically loaded in via props or pulled from context.
+     Statically loaded in via props or pulled from context. If both, props wins.
      Should not change in render lifecycle.
      Create mappings of the shape row => year-month => status for
      all aggregation views.
      TODO: Add other statuses. Currently the only status is "available".
   */
-  let siteCodes;
-  if (selectionEnabled) {
-    ({ siteCodes } = productData);
-  } else {
-    ({ siteCodes } = props);
+  let siteCodes = [];
+  const { siteCodes: propsSiteCodes } = props;
+  const { siteCodes: contextSiteCodes } = productData;
+  if (propsSiteCodes && propsSiteCodes.length) {
+    siteCodes = propsSiteCodes;
+  } else if (contextSiteCodes && contextSiteCodes.length) {
+    siteCodes = contextSiteCodes;
   }
   siteCodes.forEach((site) => {
     const { siteCode, availableMonths } = site;
@@ -398,12 +418,6 @@ export default function DataProductAvailability(props) {
     dateRange.validValues[0] = summaryMonths[0]; // eslint-disable-line prefer-destructuring
     dateRange.validValues[1] = summaryMonths.pop();
   }
-
-  /**
-     Selection Collapse
-  */
-  const { disableSelectionCollapse } = props;
-  const absoluteSelectionExpanded = selectionExpanded || disableSelectionCollapse;
 
   /**
      Redraw setup
@@ -438,42 +452,26 @@ export default function DataProductAvailability(props) {
     handleSvgRedraw();
   });
 
-  const getOptionsContainerStyle = () => (
-    selectionEnabled ? {
-      textAlign: (!absoluteSelectionExpanded && !belowSm ? 'right' : 'left'),
-    } : {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'flex-end',
-    }
-  );
-
-  const getOptionsTitle = (variant = 'View') => {
-    if (!['View', 'Sort'].includes(variant)) { return null; }
-    return selectionEnabled ? (
-      <div style={{ height: '30px' }}>
-        <Typography variant="h5" className={classes.h5Small}>
-          {`${variant} Availability By`}
-        </Typography>
-      </div>
-    ) : (
-      <Typography variant="subtitle1" style={{ marginRight: Theme.spacing(1.5) }}>
-        {`${variant} Availability By:`}
-      </Typography>
-    );
+  let justify = 'end';
+  if (currentView === 'ungrouped') {
+    justify = atXs || atSm ? 'start' : 'end';
+  } else {
+    justify = atXs ? 'start' : 'end';
+  }
+  const optionDivStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: `flex-${justify}`,
   };
 
   /**
-     Render: View Input
+     Render: View Options
   */
   const renderViewOptions = () => {
     const renderToggleButton = (key) => {
-      let className = classes.viewButton;
-      if (!selectionEnabled) {
-        className = `${className} ${classes.viewButtonXsmall}`;
-      }
+      let className = classes.optionButton;
       if (key === currentView) {
-        className = `${className} ${classes.viewButtonSelected}`;
+        className = `${className} ${classes.optionButtonSelected}`;
       }
       return (
         <ToggleButton key={key} value={key} size="small" className={className}>
@@ -483,24 +481,30 @@ export default function DataProductAvailability(props) {
     };
     return (
       <div
-        style={getOptionsContainerStyle()}
+        style={optionDivStyle}
         data-selenium="data-product-availability.view-options"
       >
-        {getOptionsTitle('View')}
-        <Hidden xsDown key="viewSmUp">
+        <Typography
+          variant="h6"
+          className={classes.h6Small}
+          style={{ marginRight: Theme.spacing(1.5), whiteSpace: 'nowrap' }}
+        >
+          View By:
+        </Typography>
+        <Hidden smDown key="viewMdUp">
           <ToggleButtonGroup
             exclusive
             color="primary"
             variant="outlined"
             size="small"
-            className={selectionEnabled ? classes.viewButtonGroup : classes.viewButtonGroupXsmall}
+            className={classes.optionButtonGroup}
             value={currentView}
             onChange={handleChangeView}
           >
             {selectableViewKeys.map(key => renderToggleButton(key))}
           </ToggleButtonGroup>
         </Hidden>
-        <Hidden smUp key="viewXs">
+        <Hidden mdUp key="viewSmDown">
           <FormControl variant="filled">
             <Select
               value={currentView}
@@ -523,10 +527,16 @@ export default function DataProductAvailability(props) {
   */
   const renderSortOptions = () => (
     <div
-      style={getOptionsContainerStyle()}
+      style={optionDivStyle}
       data-selenium="data-product-availability.sort-options"
     >
-      {getOptionsTitle('Sort')}
+      <Typography
+        variant="h6"
+        className={classes.h6Small}
+        style={{ marginRight: Theme.spacing(1.5), whiteSpace: 'nowrap' }}
+      >
+        Sort By:
+      </Typography>
       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
         <FormControl variant="outlined">
           <Select
@@ -549,19 +559,27 @@ export default function DataProductAvailability(props) {
         <ToggleButtonGroup
           exclusive
           value={currentSortDirection}
-          className={classes.sortToggleButtonGroup}
+          className={classes.optionButtonGroup}
           onChange={handleChangeSortDirection}
           data-selenium="data-product-availability.sort-options.direction"
         >
           <ToggleButton
+            size="small"
+            key={SORT_DIRECTIONS[0]}
             value={SORT_DIRECTIONS[0]}
-            aria-label="Sort Ascending"
+            className={`${classes.optionButton} ${currentSortDirection === SORT_DIRECTIONS[0] ? classes.optionButtonSelected : ''}`}
+            title="Sort Ascending (A-Z)"
+            aria-label="Sort Ascending (A-Z)"
           >
             <AscIcon />
           </ToggleButton>
           <ToggleButton
+            size="small"
+            key={SORT_DIRECTIONS[1]}
             value={SORT_DIRECTIONS[1]}
-            aria-label="Sort Descending"
+            className={`${classes.optionButton} ${currentSortDirection === SORT_DIRECTIONS[1] ? classes.optionButtonSelected : ''}`}
+            title="Sort Descending (Z-A)"
+            aria-label="Sort Descending (Z-A)"
           >
             <DescIcon />
           </ToggleButton>
@@ -575,154 +593,122 @@ export default function DataProductAvailability(props) {
   */
   const renderSelection = () => {
     if (!selectionEnabled) { return null; }
-
-    const selectionButtonLabel = absoluteSelectionExpanded
-      ? 'hide selection details'
-      : 'show seleciton details';
-
     const sitesPlural = sites.value.length > 1 ? 's' : '';
-    const humanDateRange = `${getYearMonthMoment(dateRange.value[0]).format('MMM YYYY')} - ${getYearMonthMoment(dateRange.value[1]).format('MMM YYYY')}`;
-    const siteChipLabel = absoluteSelectionExpanded
-      ? `${sites.value.length} site${sitesPlural}`
-      : `${sites.value.length} site${sitesPlural} — ${humanDateRange}`;
-    const divCollapsedStyle = {
-      marginBottom: Theme.spacing(1),
+    const siteChipLabel = `${sites.value.length} site${sitesPlural}`;
+    const siteChipProps = {
+      size: 'large',
+      classes: siteChipClasses,
+      label: sites.value.length ? siteChipLabel : 'no sites selected',
+      variant: sites.value.length ? 'default' : 'outlined',
+      onDelete: sites.value.length ? handleSelectNoneSites : null,
     };
-    const divExpandedStyle = {
-      marginTop: Theme.spacing(1),
-      marginBottom: Theme.spacing(1.5),
+    const selectionButtonProps = { size: 'small', color: 'primary', variant: 'outlined' };
+    const datePickerProps = {
+      inputVariant: 'outlined',
+      margin: 'dense',
+      views: ['month', 'year'],
+      openTo: 'month',
     };
-    const clickProps = disableSelectionCollapse ? {} : {
-      onClick: () => handleToggleSelectionExpanded(selectionExpanded),
-    };
-    const siteChip = (
-      <div style={absoluteSelectionExpanded ? divExpandedStyle : divCollapsedStyle}>
-        <SiteChip
-          size={absoluteSelectionExpanded ? 'large' : 'medium'}
-          classes={siteChipClasses}
-          label={sites.value.length ? siteChipLabel : 'no sites selected'}
-          variant={sites.value.length ? 'default' : 'outlined'}
-          onDelete={sites.value.length ? handleSelectNoneSites : null}
-          {...clickProps}
-        />
-      </div>
-    );
-
     return (
-      <React.Fragment>
-        <div
-          className={classes.topFormHeader}
-          style={{ display: absoluteSelectionExpanded ? 'none' : 'flex' }}
-          data-selenium="data-product-availability.selection-options"
-        >
-          <Typography variant="h5" className={classes.h5Small}>Selection</Typography>
-          <IconButton
-            size="small"
-            style={{ marginLeft: Theme.spacing(1) }}
-            title={selectionButtonLabel}
-            aria-label={selectionButtonLabel}
-            onClick={() => handleToggleSelectionExpanded(selectionExpanded)}
-          >
-            <ExpandMoreIcon />
-          </IconButton>
-        </div>
-        {!absoluteSelectionExpanded ? siteChip : (
-          <Grid container spacing={3}>
-            <Grid item xs={12} sm={6} style={{ marginBottom: Theme.spacing(1) }}>
-              <div className={classes.topFormHeader}>
-                <Typography variant="h6" className={classes.h6Small}>Sites</Typography>
-                {disableSelectionCollapse ? null : (
-                  <IconButton
-                    size="small"
-                    style={{ marginLeft: Theme.spacing(1), paddingBottom: 0 }}
-                    title={selectionButtonLabel}
-                    aria-label={selectionButtonLabel}
-                    onClick={() => handleToggleSelectionExpanded(selectionExpanded)}
-                  >
-                    <ExpandLessIcon />
-                  </IconButton>
-                )}
-              </div>
-              {siteChip}
-              <div style={{ display: 'flex' }}>
-                <Button
-                  data-selenium="data-product-availability.select-all-sites-button"
-                  size="small"
-                  color="primary"
-                  variant="outlined"
-                  onClick={handleSelectAllSites}
-                >
-                  Select All Sites
-                </Button>
-                {/* Show/enable when site selection widget exists and cab be used here */}
-                <Button
-                  data-selenium="data-product-availability.browse-sites-button"
-                  size="small"
-                  color="primary"
-                  variant="outlined"
-                  style={{ marginLeft: Theme.spacing(1), display: 'none' }}
-                  disabled
-                >
-                  Browse Sites…
-                </Button>
-              </div>
-            </Grid>
-            <Grid item xs={12} sm={6} style={{ marginBottom: Theme.spacing(1) }}>
-              <Typography variant="h6" className={classes.h6Small}>Date Range</Typography>
-              <MuiPickersUtilsProvider utils={MomentUtils}>
-                <div style={{ display: 'flex', flexWrap: 'nowrap' }}>
-                  <DatePicker
-                    data-selenium="data-product-availability.date-range-start"
-                    inputVariant="outlined"
-                    margin="dense"
-                    value={getYearMonthMoment(dateRange.value[0])}
-                    onChange={newDate => handleChangeStartDate(newDate)}
-                    views={['month', 'year']}
-                    label="Start"
-                    openTo="month"
-                    minDate={getYearMonthMoment(dateRange.validValues[0])}
-                    maxDate={getYearMonthMoment(dateRange.value[1])}
-                    style={{ marginRight: Theme.spacing(1.5) }}
-                  />
-                  <DatePicker
-                    data-selenium="data-product-availability.date-range-end"
-                    inputVariant="outlined"
-                    margin="dense"
-                    value={getYearMonthMoment(dateRange.value[1])}
-                    onChange={newDate => handleChangeEndDate(newDate)}
-                    views={['month', 'year']}
-                    label="End"
-                    openTo="month"
-                    minDate={getYearMonthMoment(dateRange.value[0])}
-                    maxDate={getYearMonthMoment(dateRange.validValues[1])}
-                  />
+      <Grid container spacing={3}>
+        <Grid item xs={12} sm={5} md={6}>
+          <div className={classes.topFormHeader}>
+            <Typography variant="h6" className={classes.h6Small}>Sites</Typography>
+          </div>
+          <div style={{ marginTop: Theme.spacing(1), marginBottom: Theme.spacing(1.5) }}>
+            <SiteChip {...siteChipProps} />
+          </div>
+          <div style={{ display: 'flex' }}>
+            <Button
+              {...selectionButtonProps}
+              data-selenium="data-product-availability.select-all-sites-button"
+              onClick={handleSelectAllSites}
+            >
+              Select All Sites
+            </Button>
+            {/* Show/enable when site selection widget exists and cab be used here */}
+            <Button
+              {...selectionButtonProps}
+              data-selenium="data-product-availability.browse-sites-button"
+              style={{ marginLeft: Theme.spacing(1), display: 'none' }}
+              disabled
+            >
+              Browse Sites…
+            </Button>
+          </div>
+        </Grid>
+        <Grid item xs={12} sm={7} md={6}>
+          <Typography variant="h6" className={classes.h6Small}>Date Range</Typography>
+          <MuiPickersUtilsProvider utils={MomentUtils}>
+            <div style={{ display: 'flex', flexWrap: 'nowrap' }}>
+              <DatePicker
+                {...datePickerProps}
+                label="Start"
+                data-selenium="data-product-availability.date-range-start"
+                value={getYearMonthMoment(dateRange.value[0])}
+                onChange={newDate => handleChangeStartDate(newDate)}
+                minDate={getYearMonthMoment(dateRange.validValues[0])}
+                maxDate={getYearMonthMoment(dateRange.value[1])}
+                style={{ marginRight: Theme.spacing(1.5) }}
+              />
+              <DatePicker
+                {...datePickerProps}
+                label="End"
+                data-selenium="data-product-availability.date-range-end"
+                value={getYearMonthMoment(dateRange.value[1])}
+                onChange={newDate => handleChangeEndDate(newDate)}
+                minDate={getYearMonthMoment(dateRange.value[0])}
+                maxDate={getYearMonthMoment(dateRange.validValues[1])}
+              />
+            </div>
+          </MuiPickersUtilsProvider>
+          <div style={{ display: 'flex', marginTop: Theme.spacing(1) }}>
+            <Button
+              {...selectionButtonProps}
+              data-selenium="data-product-availability.all-years-button"
+              onClick={handleSelectAllDateRange}
+            >
+              Select All Years
+            </Button>
+            <Button
+              {...selectionButtonProps}
+              data-selenium="data-product-availability.latest-year-button"
+              onClick={handleSelectLatestYearDateRange}
+              style={{ marginLeft: Theme.spacing(1) }}
+            >
+              Select Latest Year
+            </Button>
+          </div>
+        </Grid>
+        <Grid item xs={12} style={{ marginBottom: Theme.spacing(1) }}>
+          <SnackbarContent
+            className={classes.helpSnackbar}
+            style={{ justifyContent: 'center' }}
+            message={(
+              <div className={classes.helpGridContainer}>
+                <div className={classes.helpGrid}>
+                  <PanIcon className={classes.helpIcon} />
+                  <Typography variant="body1" component="div" style={{ flexGrow: 1 }}>
+                    Drag the grid to pan across time
+                  </Typography>
                 </div>
-              </MuiPickersUtilsProvider>
-              <div style={{ display: 'flex', marginTop: Theme.spacing(1) }}>
-                <Button
-                  data-selenium="data-product-availability.all-years-button"
-                  size="small"
-                  color="primary"
-                  variant="outlined"
-                  onClick={handleSelectAllDateRange}
-                >
-                  Select All Years
-                </Button>
-                <Button
-                  data-selenium="data-product-availability.latest-year-button"
-                  size="small"
-                  color="primary"
-                  variant="outlined"
-                  onClick={handleSelectLatestYearDateRange}
-                  style={{ marginLeft: Theme.spacing(1) }}
-                >
-                  Select Latest Year
-                </Button>
+                <div className={classes.helpGrid}>
+                  <ClickIcon className={classes.helpIcon} />
+                  <Typography variant="body1" component="div" style={{ flexGrow: 1 }}>
+                    Click rows to select sites
+                  </Typography>
+                </div>
+                <div className={classes.helpGrid}>
+                  <DragIcon className={classes.helpIcon} style={{ transform: 'rotate(90deg)' }} />
+                  <Typography variant="body1" component="div" style={{ flexGrow: 1 }}>
+                    Drag selection sides to adjust dates
+                  </Typography>
+                </div>
               </div>
-            </Grid>
-          </Grid>
-        )}
-      </React.Fragment>
+            )}
+          />
+        </Grid>
+      </Grid>
     );
   };
 
@@ -733,7 +719,6 @@ export default function DataProductAvailability(props) {
   const currentRowCount = Object.keys(currentRows).length;
   const svgHeight = SVG.CELL_PADDING
     + (SVG.CELL_HEIGHT + SVG.CELL_PADDING) * (currentRowCount + 1);
-  const selectionSm = absoluteSelectionExpanded ? 12 : 6;
   return (
     <FullWidthVisualization
       vizRef={svgRef}
@@ -742,14 +727,35 @@ export default function DataProductAvailability(props) {
       data-selenium="data-product-availability"
       {...other}
     >
-      <Grid container spacing={2} style={{ marginBottom: Theme.spacing(1) }}>
+      <Grid
+        container
+        spacing={2}
+        direction="row-reverse"
+        style={{ marginBottom: Theme.spacing(1) }}
+      >
         {selectionEnabled ? (
-          <Grid item xs={12} sm={selectionSm}>
+          <Grid item xs={12} sm={12}>
             {renderSelection()}
           </Grid>
         ) : null}
-        <Grid item xs={12} sm={selectionEnabled ? selectionSm : 12}>
+        <Grid item xs={12} sm={currentView === 'ungrouped' ? 12 : 5} md={6}>
           {currentView === 'ungrouped' ? renderSortOptions() : renderViewOptions()}
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          sm={currentView === 'ungrouped' ? 12 : 7}
+          md={6}
+          style={{ display: 'flex', alignItems: 'center' }}
+        >
+          <Typography
+            variant="h6"
+            className={classes.h6Small}
+            style={{ marginRight: Theme.spacing(1.5) }}
+          >
+            Key:
+          </Typography>
+          <AvailabilityLegend selectionEnabled={selectionEnabled} style={{ flexGrow: 1 }} />
         </Grid>
       </Grid>
       <svg
@@ -758,7 +764,6 @@ export default function DataProductAvailability(props) {
         height={svgHeight}
         className={classes.svg}
       />
-      <AvailabilityLegend selectionEnabled={selectionEnabled} />
     </FullWidthVisualization>
   );
 }
@@ -773,13 +778,13 @@ DataProductAvailability.propTypes = {
   view: PropTypes.oneOf(['summary', 'sites', 'states', 'domains', 'ungrouped']),
   sortMethod: PropTypes.oneOf(['sites', 'states', 'domains']),
   sortDirection: PropTypes.oneOf(['ASC', 'DESC']),
-  disableSelectionCollapse: PropTypes.bool,
+  disableSelection: PropTypes.bool,
 };
 
 DataProductAvailability.defaultProps = {
   siteCodes: [],
-  view: 'summary',
+  view: null,
   sortMethod: null,
   sortDirection: 'ASC',
-  disableSelectionCollapse: false,
+  disableSelection: false,
 };

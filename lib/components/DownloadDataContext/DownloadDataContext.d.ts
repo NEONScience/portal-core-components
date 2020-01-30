@@ -20,7 +20,6 @@ declare namespace Provider {
             }> | null | undefined)[]>;
         }>>;
         export const availabilityView: PropTypes.Requireable<string>;
-        export const availabilitySelectionExpanded: PropTypes.Requireable<boolean>;
         export const sites: PropTypes.Requireable<import("../../types/coreTypes").Nullable<string>[]>;
         export const dateRange: PropTypes.Requireable<import("../../types/coreTypes").Nullable<string>[]>;
         export const documentation: PropTypes.Requireable<string>;
@@ -34,8 +33,6 @@ declare namespace Provider {
         export { productData_1 as productData };
         import availabilityView_1 = availabilityView;
         export { availabilityView_1 as availabilityView };
-        import availabilitySelectionExpanded_1 = availabilitySelectionExpanded;
-        export { availabilitySelectionExpanded_1 as availabilitySelectionExpanded };
         import sites_1 = value;
         export { sites_1 as sites };
         import dateRange_1 = value;
@@ -63,8 +60,7 @@ declare function useDownloadDataState(): {
         value: null;
         error: null;
     };
-    availabilityView: string;
-    availabilitySelectionExpanded: boolean;
+    availabilityView: null;
     s3FileFetches: {};
     s3FileFetchProgress: number;
     s3Files: {
@@ -77,6 +73,7 @@ declare function useDownloadDataState(): {
         totalSize: number;
         estimatedPostSize: number;
         filteredFileCount: number;
+        lastFilterChanged: null;
         filters: {
             site: never[];
             type: never[];
@@ -133,8 +130,7 @@ declare function useDownloadDataState(): {
         value: null;
         error: null;
     };
-    availabilityView: string;
-    availabilitySelectionExpanded: boolean;
+    availabilityView: null;
     s3FileFetches: {};
     s3FileFetchProgress: number;
     s3Files: {
@@ -147,6 +143,7 @@ declare function useDownloadDataState(): {
         totalSize: number;
         estimatedPostSize: number;
         filteredFileCount: number;
+        lastFilterChanged: null;
         filters: {
             site: never[];
             type: never[];
@@ -206,10 +203,8 @@ declare namespace DEFAULT_STATE {
         export const value: null;
         export const error: null;
     }
-    const availabilityView_2: string;
+    const availabilityView_2: null;
     export { availabilityView_2 as availabilityView };
-    const availabilitySelectionExpanded_2: boolean;
-    export { availabilitySelectionExpanded_2 as availabilitySelectionExpanded };
     export const s3FileFetches: {};
     export const s3FileFetchProgress: number;
     export namespace s3Files {
@@ -223,6 +218,7 @@ declare namespace DEFAULT_STATE {
         export const totalSize: number;
         export const estimatedPostSize: number;
         export const filteredFileCount: number;
+        export const lastFilterChanged: null;
         export const filters: {
             site: never[];
             type: never[];

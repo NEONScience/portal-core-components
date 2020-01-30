@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { debounce } from 'lodash';
@@ -27,7 +27,6 @@ import SelectAllIcon from '@material-ui/icons/DoneAll';
 import SelectNoneIcon from '@material-ui/icons/Clear';
 import SelectFilteredIcon from '@material-ui/icons/FilterList';
 import ClearFiltersIcon from '@material-ui/icons/DeleteSweep';
-import ClickIcon from '@material-ui/icons/TouchApp';
 import ErrorIcon from '@material-ui/icons/ReportProblem';
 import ExploreIcon from '@material-ui/icons/Explore';
 
@@ -162,6 +161,16 @@ export default function DownloadStepForm(props) {
   } = props;
   const [state, dispatch] = DownloadDataContext.useDownloadDataState();
 
+  // Effect to keep focus on the file name search field if it was the last filter updated
+  useEffect(() => {
+    if (state.s3Files.lastFilterChanged !== 'name') { return; }
+    const mTable = document.querySelector('#s3Files-selection-table-container');
+    if (!mTable) { return; }
+    const nameSearch = mTable.querySelector('input[type="search"]');
+    if (!nameSearch) { return; }
+    nameSearch.focus();
+  });
+
   const setState = (stateKey, newValue) => dispatch({
     type: 'setValidatableValue',
     key: stateKey,
@@ -211,31 +220,9 @@ export default function DownloadStepForm(props) {
        SITES AND DATE RANGE
     */
     sitesAndDateRange: () => (
-      <div>
-        <DataProductAvailability
-          data-selenium="download-data-dialog.step-form.sites-and-date-range"
-          view="states"
-          disableSelectionCollapse
-        />
-        <SnackbarContent
-          className={classes.infoSnackbar}
-          style={{ marginTop: Theme.spacing(2), marginBottom: Theme.spacing(1), justifyContent: 'center' }}
-          message={(
-            <div className={classes.startFlex}>
-              <ClickIcon fontSize="large" className={classes.infoSnackbarIcon} />
-              <div>
-                <Typography variant="body1" component="div">
-                  <ul style={{ margin: 0, paddingLeft: Theme.spacing(2.5) }}>
-                    <li>Drag the grid above to pan across time</li>
-                    <li>Click rows in the grid above to select sites or states</li>
-                    <li>Drag the sides of the selection to adjust the date range</li>
-                  </ul>
-                </Typography>
-              </div>
-            </div>
-          )}
-        />
-      </div>
+      <DataProductAvailability
+        data-selenium="download-data-dialog.step-form.sites-and-date-range"
+      />
     ),
 
     /**
@@ -243,7 +230,13 @@ export default function DownloadStepForm(props) {
     */
     documentation: () => {
       const neonFaqLink = (
-        <Link target="_blank" href="http://data.neonscience.org/faq">NEON FAQ</Link>
+        <Link
+          target="_blank"
+          href="http://data.neonscience.org/faq"
+          data-gtm="download-data-dialog.neon-faq-link"
+        >
+          NEON FAQ
+        </Link>
       );
       const knbLink = ExternalHost.renderExternalHostLink(
         'https://eml.ecoinformatics.org',
@@ -541,7 +534,7 @@ export default function DownloadStepForm(props) {
         },
       };
       return (validValues.length || isLoading) ? (
-        <div className={classes.fileTable}>
+        <div className={classes.fileTable} id="s3Files-selection-table-container">
           <MaterialTable
             components={components}
             columns={columns}
@@ -747,7 +740,11 @@ export default function DownloadStepForm(props) {
         </div>
       );
       const downloadAndExploreLink = (
-        <Link target="_blank" href="https://www.neonscience.org/download-explore-neon-data">
+        <Link
+          target="_blank"
+          href="https://www.neonscience.org/download-explore-neon-data"
+          data-gtm="download-data-dialog.download-and-explore-link"
+        >
           Download and Explore NEON Data
         </Link>
       );
@@ -772,7 +769,11 @@ export default function DownloadStepForm(props) {
         </div>
       );
       const fileNamingConventionsLink = (
-        <Link target="_blank" href="https://data.neonscience.org/file-naming-conventions">
+        <Link
+          target="_blank"
+          href="https://data.neonscience.org/file-naming-conventions"
+          data-gtm="download-data-dialog.file-naming-conventions-link"
+        >
           NEON File Naming Conventions
         </Link>
       );
