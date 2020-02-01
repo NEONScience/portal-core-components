@@ -40,26 +40,52 @@ import domainsJSON from '../../static/domains/domains.json';
 import domainsShapesJSON from '../../static/domainsShapes/domainsShapes.json';
 
 import iconCoreTerrestrialSVG from './icon-core-terrestrial.svg';
+import iconCoreTerrestrialSelectedSVG from './icon-core-terrestrial-selected.svg';
 import iconCoreAquaticSVG from './icon-core-aquatic.svg';
+import iconCoreAquaticSelectedSVG from './icon-core-aquatic-selected.svg';
 import iconCoreShadowSVG from './icon-core-shadow.svg';
+import iconCoreShadowSelectedSVG from './icon-core-shadow-selected.svg';
 import iconRelocatableTerrestrialSVG from './icon-relocatable-terrestrial.svg';
+import iconRelocatableTerrestrialSelectedSVG from './icon-relocatable-terrestrial-selected.svg';
 import iconRelocatableAquaticSVG from './icon-relocatable-aquatic.svg';
+import iconRelocatableAquaticSelectedSVG from './icon-relocatable-aquatic-selected.svg';
 import iconRelocatableShadowSVG from './icon-relocatable-shadow.svg';
+import iconRelocatableShadowSelectedSVG from './icon-relocatable-shadow-selected.svg';
 
 const { BaseLayer, Overlay } = LayersControl;
 
 const ICON_SVGS = {
   CORE: {
-    AQUATIC: iconCoreAquaticSVG,
-    TERRESTRIAL: iconCoreTerrestrialSVG,
-    SHADOW: iconCoreShadowSVG,
+    AQUATIC: {
+      BASE: iconCoreAquaticSVG,
+      SELECTED: iconCoreAquaticSelectedSVG,
+    },
+    TERRESTRIAL: {
+      BASE: iconCoreTerrestrialSVG,
+      SELECTED: iconCoreTerrestrialSelectedSVG,
+    },
+    SHADOW: {
+      BASE: iconCoreShadowSVG,
+      SELECTED: iconCoreShadowSelectedSVG,
+    },
   },
   RELOCATABLE: {
-    AQUATIC: iconRelocatableAquaticSVG,
-    TERRESTRIAL: iconRelocatableTerrestrialSVG,
-    SHADOW: iconRelocatableShadowSVG,
+    AQUATIC: {
+      BASE: iconRelocatableAquaticSVG,
+      SELECTED: iconRelocatableAquaticSelectedSVG,
+    },
+    TERRESTRIAL: {
+      BASE: iconRelocatableTerrestrialSVG,
+      SELECTED: iconRelocatableTerrestrialSelectedSVG,
+    },
+    SHADOW: {
+      BASE: iconRelocatableShadowSVG,
+      SELECTED: iconRelocatableShadowSelectedSVG,
+    },
   },
 };
+
+const selectedSites = ['ABBY', 'MOAB', 'PUUM', 'ORNL', 'TREE', 'STEI', 'LIRO', 'UNDE', 'CRAM'];
 
 const SITE_DETAILS_URL_BASE = 'https://www.neonscience.org/field-sites/field-sites-map/';
 const EXPLORE_DATA_PRODUCTS_URL_BASE = 'https://data.neonscience.org/data-products/explore?site=';
@@ -96,6 +122,10 @@ Object.keys(TILE_LAYERS).forEach((key) => {
 });
 
 const boxShadow = '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)';
+const baseOverlayColors = {
+  states: COLORS.RED[300],
+  domains: COLORS.GREY[300],
+};
 const useStyles = makeStyles(theme => ({
   notFetchedContainer: {
     width: '100%',
@@ -163,6 +193,11 @@ const useStyles = makeStyles(theme => ({
       pointerEvents: 'none',
     },
   },
+  popupSiteIcon: {
+    width: '20px',
+    height: '20px',
+    margin: '0px 4px 4px 0px',
+  },
   startFlex: {
     display: 'flex',
     justifyContent: 'flex-start',
@@ -172,6 +207,25 @@ const useStyles = makeStyles(theme => ({
     display: 'inline-flex',
     justifyContent: 'flex-start',
     alignItems: 'center',
+  },
+  keySwatchStates: {
+    border: `2px solid ${baseOverlayColors.states}`,
+    backgroundColor: `${baseOverlayColors.states}88`,
+    width: Theme.spacing(3),
+    height: Theme.spacing(1),
+    margin: Theme.spacing(0, 0.5, 0.25, 0),
+  },
+  keySwatchDomains: {
+    border: `2px solid ${baseOverlayColors.domains}`,
+    backgroundColor: `${baseOverlayColors.domains}88`,
+    width: Theme.spacing(3),
+    height: Theme.spacing(1),
+    margin: Theme.spacing(0, 0.5, 0.25, 0),
+  },
+  keySiteIcon: {
+    width: '20px',
+    height: '20px',
+    marginRight: '4px',
   },
 }));
 
@@ -345,17 +399,29 @@ const SiteMap = (props) => {
     );
   }
 
-  const getZoomedIcon = (type, terrain) => {
+  const getZoomedIcon = (type, terrain, isSelected = false) => {
     if (!ICON_SVGS[type] || !ICON_SVGS[type][terrain] || !ICON_SVGS[type].SHADOW) { return null; }
     const iconScale = 0.2 + (Math.floor((state.zoom - 2) / 3) / 10);
+    let selected = 'BASE';
+    let iconSize = [100, 100];
+    let iconAnchor = [50, 100];
+    let shadowSize = [156, 93];
+    let shadowAnchor = [50, 83];
+    if (isSelected) {
+      selected = 'SELECTED';
+      iconSize = [150, 150];
+      iconAnchor = [75, 150];
+      shadowSize = [234, 160];
+      shadowAnchor = [80, 145];
+    }
     return new L.Icon({
-      iconUrl: ICON_SVGS[type][terrain],
-      iconRetinaUrl: ICON_SVGS[type][terrain],
-      iconSize: [100, 100].map(x => x * iconScale),
-      iconAnchor: [50, 100].map(x => x * iconScale),
-      shadowUrl: ICON_SVGS[type].SHADOW,
-      shadowSize: [156, 93].map(x => x * iconScale),
-      shadowAnchor: [50, 95].map(x => x * iconScale),
+      iconUrl: ICON_SVGS[type][terrain][selected],
+      iconRetinaUrl: ICON_SVGS[type][terrain][selected],
+      iconSize: iconSize.map(x => x * iconScale),
+      iconAnchor: iconAnchor.map(x => x * iconScale),
+      shadowUrl: ICON_SVGS[type].SHADOW[selected],
+      shadowSize: shadowSize.map(x => x * iconScale),
+      shadowAnchor: shadowAnchor.map(x => x * iconScale),
       popupAnchor: [0, -100].map(x => x * iconScale),
     });
   };
@@ -445,35 +511,63 @@ const SiteMap = (props) => {
   };
 
   const renderSitesOverlay = () => {
-    // Get new icons scaled to the current zoom level every render
+    // Get new icons scaled to the current zoom level every render. Do this here so we only create
+    // a maximum of eight distinct icon instances (instead of one for every site).
     const zoomedIcons = {
       CORE: {
-        AQUATIC: getZoomedIcon('CORE', 'AQUATIC'),
-        TERRESTRIAL: getZoomedIcon('CORE', 'TERRESTRIAL'),
+        AQUATIC: {
+          BASE: getZoomedIcon('CORE', 'AQUATIC'),
+          SELECTED: getZoomedIcon('CORE', 'AQUATIC', true),
+        },
+        TERRESTRIAL: {
+          BASE: getZoomedIcon('CORE', 'TERRESTRIAL'),
+          SELECTED: getZoomedIcon('CORE', 'TERRESTRIAL', true),
+        },
       },
       RELOCATABLE: {
-        AQUATIC: getZoomedIcon('RELOCATABLE', 'AQUATIC'),
-        TERRESTRIAL: getZoomedIcon('RELOCATABLE', 'TERRESTRIAL'),
+        AQUATIC: {
+          BASE: getZoomedIcon('RELOCATABLE', 'AQUATIC'),
+          SELECTED: getZoomedIcon('RELOCATABLE', 'AQUATIC', true),
+        },
+        TERRESTRIAL: {
+          BASE: getZoomedIcon('RELOCATABLE', 'TERRESTRIAL'),
+          SELECTED: getZoomedIcon('RELOCATABLE', 'TERRESTRIAL', true),
+        },
       },
     };
-    const imgStyle = { width: '20px', height: '20px', marginRight: '4px' };
     const overlayName = ReactDOMServer.renderToStaticMarkup(
       <div style={{ display: 'inline-flex', flexDirection: 'column' }}>
         <div>NEON Sites</div>
         <div className={classes.startFlex}>
-          <img src={ICON_SVGS.CORE.TERRESTRIAL} alt="Terrestrial Core" style={imgStyle} />
+          <img
+            alt="Terrestrial Core"
+            src={ICON_SVGS.CORE.TERRESTRIAL.BASE}
+            className={classes.keySiteIcon}
+          />
           <div>Terrestrial Core</div>
         </div>
         <div className={classes.startFlex}>
-          <img src={ICON_SVGS.RELOCATABLE.TERRESTRIAL} alt="Terrestrial Relocatable" style={imgStyle} />
+          <img
+            alt="Terrestrial Relocatable"
+            src={ICON_SVGS.RELOCATABLE.TERRESTRIAL.BASE}
+            className={classes.keySiteIcon}
+          />
           <div>Terrestrial Relocatable</div>
         </div>
         <div className={classes.startFlex}>
-          <img src={ICON_SVGS.CORE.AQUATIC} alt="Aquatic Core" style={imgStyle} />
+          <img
+            alt="Aquatic Core"
+            src={ICON_SVGS.CORE.AQUATIC.BASE}
+            className={classes.keySiteIcon}
+          />
           <div>Aquatic Core</div>
         </div>
         <div className={classes.startFlex}>
-          <img src={ICON_SVGS.RELOCATABLE.AQUATIC} alt="Aquatic Relocatable" style={imgStyle} />
+          <img
+            alt="Aquatic Relocatable"
+            src={ICON_SVGS.RELOCATABLE.AQUATIC.BASE}
+            className={classes.keySiteIcon}
+          />
           <div>Aquatic Relocatable</div>
         </div>
       </div>,
@@ -483,6 +577,7 @@ const SiteMap = (props) => {
         <FeatureGroup>
           {Object.keys(state.sites).map((siteCode) => {
             const site = state.sites[siteCode];
+            const selected = selectedSites.includes(siteCode) ? 'SELECTED' : 'BASE';
             if (!zoomedIcons[site.type] || !zoomedIcons[site.type][site.terrain]
                 || !site.latitude || !site.longitude) {
               return null;
@@ -491,7 +586,7 @@ const SiteMap = (props) => {
               <Marker
                 key={siteCode}
                 position={[site.latitude, site.longitude]}
-                icon={zoomedIcons[site.type][site.terrain]}
+                icon={zoomedIcons[site.type][site.terrain][selected]}
               >
                 {renderSitePopup(site)}
               </Marker>
@@ -510,7 +605,6 @@ const SiteMap = (props) => {
         </Typography>
       );
     }
-    const imgStyle = { width: '20px', height: '20px', margin: '0px 4px 4px 0px' };
     return (
       <React.Fragment>
         <Typography variant="subtitle2" gutterBottom>
@@ -523,7 +617,7 @@ const SiteMap = (props) => {
             const src = ICON_SVGS[site.type][site.terrain];
             return (
               <div key={siteCode} style={{ display: 'flex' }}>
-                <img src={src} alt={alt} style={imgStyle} />
+                <img src={src} alt={alt} className={classes.popupSiteIcon} />
                 <div>{`${site.description} (${siteCode})`}</div>
               </div>
             );
@@ -549,16 +643,9 @@ const SiteMap = (props) => {
   };
 
   const renderStatesOverlay = () => {
-    const keyStyle = {
-      border: `2px solid ${COLORS.RED[500]}`,
-      backgroundColor: `${COLORS.RED[500]}88`,
-      width: Theme.spacing(3),
-      height: Theme.spacing(1),
-      margin: Theme.spacing(0, 0.5, 0.25, 0),
-    };
     const overlayName = ReactDOMServer.renderToStaticMarkup(
       <div className={classes.startFlexInline}>
-        <div style={keyStyle} />
+        <div className={classes.keySwatchStates} />
         <div>US States</div>
       </div>,
     );
@@ -568,7 +655,7 @@ const SiteMap = (props) => {
           {statesShapesJSON.features.map(usState => (
             <Polygon
               key={usState.properties.stateCode}
-              color={COLORS.RED[500]}
+              color={baseOverlayColors.states}
               positions={usState.geometry.coordinates}
             >
               {renderStatePopup(usState.properties.stateCode)}
@@ -595,16 +682,9 @@ const SiteMap = (props) => {
   };
 
   const renderDomainsOverlay = () => {
-    const keyStyle = {
-      border: `2px solid ${COLORS.SECONDARY_BLUE[500]}`,
-      backgroundColor: `${COLORS.SECONDARY_BLUE[500]}88`,
-      width: Theme.spacing(3),
-      height: Theme.spacing(1),
-      margin: Theme.spacing(0, 0.5, 0.25, 0),
-    };
     const overlayName = ReactDOMServer.renderToStaticMarkup(
       <div className={classes.startFlexInline}>
-        <div style={keyStyle} />
+        <div className={classes.keySwatchDomains} />
         <div>Neon Domains</div>
       </div>,
     );
@@ -614,7 +694,7 @@ const SiteMap = (props) => {
           {domainsShapesJSON.features.map(domain => (
             <Polygon
               key={domain.properties.domainCode}
-              color={COLORS.SECONDARY_BLUE[500]}
+              color={baseOverlayColors.domains}
               positions={domain.geometry.coordinates}
             >
               {renderDomainPopup(domain.properties.domainCode)}
