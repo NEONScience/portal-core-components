@@ -11,6 +11,7 @@ declare namespace NeonPage {
         export const progress: PropTypes.Requireable<number>;
         export const error: PropTypes.Requireable<string>;
         export const notification: PropTypes.Requireable<string>;
+        export const outerPageContainerMaxWidth: PropTypes.Requireable<string>;
         export const children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
     }
     export namespace defaultProps {
@@ -26,6 +27,8 @@ declare namespace NeonPage {
         export { error_1 as error };
         const notification_1: null;
         export { notification_1 as notification };
+        const outerPageContainerMaxWidth_1: string;
+        export { outerPageContainerMaxWidth_1 as outerPageContainerMaxWidth };
     }
 }
 import PropTypes from "prop-types";
