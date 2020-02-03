@@ -94,9 +94,8 @@ const getQueryBody = (type = '', dimensionality = '', id = null) => {
   return transformQuery(query);
 };
 
-/* eslint-disable-next-line arrow-body-style */
 const getAjaxRequest = (body) => {
-  return {
+  let request = {
     method: 'POST',
     crossDomain: true,
     url: NeonEnvironment.getFullGraphqlPath(),
@@ -104,6 +103,19 @@ const getAjaxRequest = (body) => {
     responseType: 'json',
     body,
   };
+  const apiTokenHeader = NeonEnvironment.getApiTokenHeader();
+  const apiToken = NeonEnvironment.getApiToken();
+  if (apiTokenHeader && (apiTokenHeader.length > 0)
+      && apiToken && (apiToken.length > 0)) {
+    request = {
+      ...request,
+      headers: {
+        ...request.headers,
+        [apiTokenHeader]: apiToken,
+      },
+    };
+  }
+  return request;
 };
 
 const getObservable = (query) => {
