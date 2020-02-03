@@ -6,16 +6,10 @@ import { of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import SiteDetailsIcon from '@material-ui/icons/InfoOutlined';
 import ErrorIcon from '@material-ui/icons/Warning';
-import ExploreDataProductsIcon from '@material-ui/icons/InsertChartOutlined';
-
-import L from 'leaflet';
 
 import 'leaflet/dist/leaflet.css';
 
@@ -23,7 +17,6 @@ import {
   FeatureGroup,
   LayersControl,
   Map,
-  Marker,
   Polygon,
   Popup,
   ScaleControl,
@@ -39,80 +32,36 @@ import statesShapesJSON from '../../static/statesShapes/statesShapes.json';
 import domainsJSON from '../../static/domains/domains.json';
 import domainsShapesJSON from '../../static/domainsShapes/domainsShapes.json';
 
-import iconCoreTerrestrialSVG from './icon-core-terrestrial.svg';
-import iconCoreTerrestrialSelectedSVG from './icon-core-terrestrial-selected.svg';
-import iconCoreAquaticSVG from './icon-core-aquatic.svg';
-import iconCoreAquaticSelectedSVG from './icon-core-aquatic-selected.svg';
-import iconCoreShadowSVG from './icon-core-shadow.svg';
-import iconCoreShadowSelectedSVG from './icon-core-shadow-selected.svg';
-import iconRelocatableTerrestrialSVG from './icon-relocatable-terrestrial.svg';
-import iconRelocatableTerrestrialSelectedSVG from './icon-relocatable-terrestrial-selected.svg';
-import iconRelocatableAquaticSVG from './icon-relocatable-aquatic.svg';
-import iconRelocatableAquaticSelectedSVG from './icon-relocatable-aquatic-selected.svg';
-import iconRelocatableShadowSVG from './icon-relocatable-shadow.svg';
-import iconRelocatableShadowSelectedSVG from './icon-relocatable-shadow-selected.svg';
+import SiteIcon from './SiteIcon';
+import SiteMarker from './SiteMarker';
 
 const { BaseLayer, Overlay } = LayersControl;
 
-const ICON_SVGS = {
-  CORE: {
-    AQUATIC: {
-      BASE: iconCoreAquaticSVG,
-      SELECTED: iconCoreAquaticSelectedSVG,
-    },
-    TERRESTRIAL: {
-      BASE: iconCoreTerrestrialSVG,
-      SELECTED: iconCoreTerrestrialSelectedSVG,
-    },
-    SHADOW: {
-      BASE: iconCoreShadowSVG,
-      SELECTED: iconCoreShadowSelectedSVG,
-    },
-  },
-  RELOCATABLE: {
-    AQUATIC: {
-      BASE: iconRelocatableAquaticSVG,
-      SELECTED: iconRelocatableAquaticSelectedSVG,
-    },
-    TERRESTRIAL: {
-      BASE: iconRelocatableTerrestrialSVG,
-      SELECTED: iconRelocatableTerrestrialSelectedSVG,
-    },
-    SHADOW: {
-      BASE: iconRelocatableShadowSVG,
-      SELECTED: iconRelocatableShadowSelectedSVG,
-    },
-  },
-};
-
 const selectedSites = ['ABBY', 'MOAB', 'PUUM', 'ORNL', 'TREE', 'STEI', 'LIRO', 'UNDE', 'CRAM'];
-
-const SITE_DETAILS_URL_BASE = 'https://www.neonscience.org/field-sites/field-sites-map/';
-const EXPLORE_DATA_PRODUCTS_URL_BASE = 'https://data.neonscience.org/data-products/explore?site=';
 
 export const TILE_LAYERS = {
   NatGeo_World_Map: {
     name: 'National Geographic',
-    shortAttribution: '© Natl. Geographic et al.',
-    fullAttribution: '© National Geographic, Esri, Garmin, HERE, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC',
+    shortAttribution: 'Â© Natl. Geographic et al.',
+    fullAttribution: 'Â© National Geographic, Esri, Garmin, HERE, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC',
     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}',
   },
   World_Imagery: {
     name: 'Satellite Imagery',
-    shortAttribution: '© Esri et al.',
-    fullAttribution: '© Esri, DigitalGlobe, GeoEye, Earthstar Geographics, CNES/Airbus DS, USDA, USGS, AeroGRID, IGN, GIS Community',
+    shortAttribution: 'Â© Esri et al.',
+    fullAttribution: 'Â© Esri, DigitalGlobe, GeoEye, Earthstar Geographics, CNES/Airbus DS, USDA, USGS, AeroGRID, IGN, GIS Community',
     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
   },
   World_Street_Map: {
     name: 'Streets',
-    shortAttribution: '© Esri et al.',
-    fullAttribution: '© Esri, HERE, Garmin, USGS, Intermap, INCREMENT P, NRCan, Esri Japan, METI, Esri China (Hong Kong), Esri Korea, Esri (Thailand), NGCC, OSM contributors, GIS Community',
+    shortAttribution: 'Â© Esri et al.',
+    fullAttribution: 'Â© Esri, HERE, Garmin, USGS, Intermap, INCREMENT P, NRCan, Esri Japan, METI, Esri China (Hong Kong), Esri Korea, Esri (Thailand), NGCC, OSM contributors, GIS Community',
     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
   },
   World_Topo_Map: {
     name: 'Topographic',
-    shortAttribution: '© Esri et al.',
-    fullAttribution: '© Esri, HERE, Garmin, Intermap, iPC, GEBCO, USGS, FAO, NPS, NRCAN, GeoBase, IGN, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), OSM contributors, GIS Community',
+    shortAttribution: 'Â© Esri et al.',
+    fullAttribution: 'Â© Esri, HERE, Garmin, Intermap, iPC, GEBCO, USGS, FAO, NPS, NRCAN, GeoBase, IGN, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), OSM contributors, GIS Community',
     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
   },
 };
@@ -192,11 +141,6 @@ const useStyles = makeStyles(theme => ({
     '& span': {
       pointerEvents: 'none',
     },
-  },
-  popupSiteIcon: {
-    width: '20px',
-    height: '20px',
-    margin: '0px 4px 4px 0px',
   },
   startFlex: {
     display: 'flex',
@@ -399,175 +343,25 @@ const SiteMap = (props) => {
     );
   }
 
-  const getZoomedIcon = (type, terrain, isSelected = false) => {
-    if (!ICON_SVGS[type] || !ICON_SVGS[type][terrain] || !ICON_SVGS[type].SHADOW) { return null; }
-    const iconScale = 0.2 + (Math.floor((state.zoom - 2) / 3) / 10);
-    let selected = 'BASE';
-    let iconSize = [100, 100];
-    let iconAnchor = [50, 100];
-    let shadowSize = [156, 93];
-    let shadowAnchor = [50, 83];
-    if (isSelected) {
-      selected = 'SELECTED';
-      iconSize = [150, 150];
-      iconAnchor = [75, 150];
-      shadowSize = [234, 160];
-      shadowAnchor = [80, 145];
-    }
-    return new L.Icon({
-      iconUrl: ICON_SVGS[type][terrain][selected],
-      iconRetinaUrl: ICON_SVGS[type][terrain][selected],
-      iconSize: iconSize.map(x => x * iconScale),
-      iconAnchor: iconAnchor.map(x => x * iconScale),
-      shadowUrl: ICON_SVGS[type].SHADOW[selected],
-      shadowSize: shadowSize.map(x => x * iconScale),
-      shadowAnchor: shadowAnchor.map(x => x * iconScale),
-      popupAnchor: [0, -100].map(x => x * iconScale),
-    });
-  };
-
-  const renderSitePopup = (site) => {
-    let typeTitle = 'Core';
-    let typeSubtitle = 'fixed location';
-    if (site.type === 'RELOCATABLE') {
-      typeTitle = 'Relocatable';
-      typeSubtitle = 'location may change';
-    }
-    let terrainTitle = 'Terrestrial';
-    let terrainSubtitle = 'land-based';
-    if (site.terrain === 'AQUATIC') {
-      terrainTitle = 'Aquatic';
-      terrainSubtitle = 'water-based';
-    }
-    const terrainTypeTitle = `${terrainTitle} ${typeTitle}`;
-    const terrainTypeSubtitle = `(${terrainSubtitle}, ${typeSubtitle})`;
-    const terrainIcon = (
-      <img
-        src={ICON_SVGS[site.type][site.terrain]}
-        alt={site.terrain}
-        title={`${terrainTitle} ${terrainSubtitle}`}
-        width={Theme.spacing(5)}
-        height={Theme.spacing(5)}
-        style={{ marginRight: Theme.spacing(1) }}
-      />
-    );
-    const target = popupHrefNew ? { target: '_blank' } : {};
-    const siteDetailsButton = (
-      <Button
-        className={classes.popupButton}
-        variant="outlined"
-        color="primary"
-        endIcon={<SiteDetailsIcon />}
-        href={`${SITE_DETAILS_URL_BASE}${site.siteCode}`}
-        {...target}
-      >
-        Site Details
-      </Button>
-    );
-    const exploreDataProductsButton = popupExploreDataProductsButton ? (
-      <Button
-        className={classes.popupButton}
-        variant="outlined"
-        color="primary"
-        endIcon={<ExploreDataProductsIcon />}
-        href={`${EXPLORE_DATA_PRODUCTS_URL_BASE}${site.siteCode}`}
-        {...target}
-      >
-        Explore Data Products
-      </Button>
-    ) : null;
-    const renderField = (title, value) => (
-      <div>
-        <Typography variant="subtitle2">{title}</Typography>
-        <Typography variant="body2">{value}</Typography>
-      </div>
-    );
-    const stateFieldTitle = (site.stateCode === 'PR' ? 'Territory' : 'State');
-    return (
-      <Popup className={classes.popup}>
-        <Typography variant="h5" gutterBottom>
-          {`${site.description} (${site.siteCode})`}
-        </Typography>
-        <div className={classes.startFlex} style={{ marginBottom: Theme.spacing(1.5) }}>
-          {terrainIcon}
-          {renderField(terrainTypeTitle, terrainTypeSubtitle)}
-        </div>
-        <Grid container spacing={2} style={{ marginBottom: Theme.spacing(1) }}>
-          <Grid item xs={4}>
-            {renderField(stateFieldTitle, statesJSON[site.stateCode].name)}
-          </Grid>
-          <Grid item xs={4}>
-            {renderField('Domain', `${site.domainCode} - ${domainsJSON[site.domainCode].name}`)}
-          </Grid>
-          <Grid item xs={4}>
-            {renderField('Lat./Lon.', `${site.latitude}, ${site.longitude}`)}
-          </Grid>
-        </Grid>
-        {siteDetailsButton}
-        <br />
-        {exploreDataProductsButton}
-      </Popup>
-    );
-  };
-
   const renderSitesOverlay = () => {
-    // Get new icons scaled to the current zoom level every render. Do this here so we only create
-    // a maximum of eight distinct icon instances (instead of one for every site).
-    const zoomedIcons = {
-      CORE: {
-        AQUATIC: {
-          BASE: getZoomedIcon('CORE', 'AQUATIC'),
-          SELECTED: getZoomedIcon('CORE', 'AQUATIC', true),
-        },
-        TERRESTRIAL: {
-          BASE: getZoomedIcon('CORE', 'TERRESTRIAL'),
-          SELECTED: getZoomedIcon('CORE', 'TERRESTRIAL', true),
-        },
-      },
-      RELOCATABLE: {
-        AQUATIC: {
-          BASE: getZoomedIcon('RELOCATABLE', 'AQUATIC'),
-          SELECTED: getZoomedIcon('RELOCATABLE', 'AQUATIC', true),
-        },
-        TERRESTRIAL: {
-          BASE: getZoomedIcon('RELOCATABLE', 'TERRESTRIAL'),
-          SELECTED: getZoomedIcon('RELOCATABLE', 'TERRESTRIAL', true),
-        },
-      },
-    };
+    if (!state.sites) { return null; }
     const overlayName = ReactDOMServer.renderToStaticMarkup(
       <div style={{ display: 'inline-flex', flexDirection: 'column' }}>
         <div>NEON Sites</div>
         <div className={classes.startFlex}>
-          <img
-            alt="Terrestrial Core"
-            src={ICON_SVGS.CORE.TERRESTRIAL.BASE}
-            className={classes.keySiteIcon}
-          />
+          <SiteIcon type="CORE" terrain="TERRESTRIAL" className={classes.keySiteIcon} />
           <div>Terrestrial Core</div>
         </div>
         <div className={classes.startFlex}>
-          <img
-            alt="Terrestrial Relocatable"
-            src={ICON_SVGS.RELOCATABLE.TERRESTRIAL.BASE}
-            className={classes.keySiteIcon}
-          />
+          <SiteIcon type="RELOCATABLE" terrain="TERRESTRIAL" className={classes.keySiteIcon} />
           <div>Terrestrial Relocatable</div>
         </div>
         <div className={classes.startFlex}>
-          <img
-            alt="Aquatic Core"
-            src={ICON_SVGS.CORE.AQUATIC.BASE}
-            className={classes.keySiteIcon}
-          />
+          <SiteIcon type="CORE" terrain="AQUATIC" className={classes.keySiteIcon} />
           <div>Aquatic Core</div>
         </div>
         <div className={classes.startFlex}>
-          <img
-            alt="Aquatic Relocatable"
-            src={ICON_SVGS.RELOCATABLE.AQUATIC.BASE}
-            className={classes.keySiteIcon}
-          />
+          <SiteIcon type="RELOCATABLE" terrain="AQUATIC" className={classes.keySiteIcon} />
           <div>Aquatic Relocatable</div>
         </div>
       </div>,
@@ -575,23 +369,16 @@ const SiteMap = (props) => {
     return (
       <Overlay name={overlayName} checked={state.sitesOverlay}>
         <FeatureGroup>
-          {Object.keys(state.sites).map((siteCode) => {
-            const site = state.sites[siteCode];
-            const selected = selectedSites.includes(siteCode) ? 'SELECTED' : 'BASE';
-            if (!zoomedIcons[site.type] || !zoomedIcons[site.type][site.terrain]
-                || !site.latitude || !site.longitude) {
-              return null;
-            }
-            return (
-              <Marker
-                key={siteCode}
-                position={[site.latitude, site.longitude]}
-                icon={zoomedIcons[site.type][site.terrain][selected]}
-              >
-                {renderSitePopup(site)}
-              </Marker>
-            );
-          })}
+          {Object.keys(state.sites).map(siteCode => (
+            <SiteMarker
+              key={siteCode}
+              zoom={state.zoom}
+              site={state.sites[siteCode]}
+              isSelected={selectedSites.includes(siteCode)}
+              popupHrefNew={popupHrefNew}
+              popupExploreDataProductsButton={popupExploreDataProductsButton}
+            />
+          ))}
         </FeatureGroup>
       </Overlay>
     );
@@ -611,17 +398,17 @@ const SiteMap = (props) => {
           {`NEON Sites (${sitesList.length}):`}
         </Typography>
         <div>
-          {sitesList.map((siteCode) => {
-            const site = state.sites[siteCode];
-            const alt = `${site.terrain} ${site.type}`;
-            const src = ICON_SVGS[site.type][site.terrain];
-            return (
-              <div key={siteCode} style={{ display: 'flex' }}>
-                <img src={src} alt={alt} className={classes.popupSiteIcon} />
-                <div>{`${site.description} (${siteCode})`}</div>
-              </div>
-            );
-          })}
+          {sitesList.map(siteCode => (
+            <div key={siteCode} style={{ display: 'flex' }}>
+              <SiteIcon
+                siteCode={siteCode}
+                type={state.sites[siteCode].type}
+                terrain={state.sites[siteCode].terrain}
+                className={classes.popupSiteIcon}
+              />
+              <div>{`${state.sites[siteCode].description} (${siteCode})`}</div>
+            </div>
+          ))}
         </div>
       </React.Fragment>
     );
