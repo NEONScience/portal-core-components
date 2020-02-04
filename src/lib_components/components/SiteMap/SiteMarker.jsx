@@ -59,11 +59,11 @@ const useStyles = makeStyles(theme => ({
 const SiteMarker = (props) => {
   const classes = useStyles(Theme);
   const {
+    mode,
     zoom,
     site,
     isSelected,
-    popupHrefNew,
-    popupExploreDataProductsButton,
+    onToggleSelected,
   } = props;
 
   const {
@@ -102,7 +102,6 @@ const SiteMarker = (props) => {
         style={{ marginRight: Theme.spacing(1) }}
       />
     );
-    const target = popupHrefNew ? { target: '_blank' } : {};
     const siteDetailsButton = (
       <Button
         className={classes.popupButton}
@@ -110,23 +109,23 @@ const SiteMarker = (props) => {
         color="primary"
         endIcon={<SiteDetailsIcon />}
         href={`${SITE_DETAILS_URL_BASE}${siteCode}`}
-        {...target}
+        target="_blank"
       >
         Site Details
       </Button>
     );
-    const exploreDataProductsButton = popupExploreDataProductsButton ? (
+    const exploreDataProductsButton = (
       <Button
         className={classes.popupButton}
         variant="outlined"
         color="primary"
         endIcon={<ExploreDataProductsIcon />}
         href={`${EXPLORE_DATA_PRODUCTS_URL_BASE}${siteCode}`}
-        {...target}
+        target="_blank"
       >
         Explore Data Products
       </Button>
-    ) : null;
+    );
     const renderField = (title, value) => (
       <div>
         <Typography variant="subtitle2">{title}</Typography>
@@ -134,6 +133,11 @@ const SiteMarker = (props) => {
       </div>
     );
     const stateFieldTitle = (stateCode === 'PR' ? 'Territory' : 'State');
+    const selectActionBlurb = (
+      <Typography variant="subtitle1">
+        {`Click to ${isSelected ? 'deselect' : 'select'} site`}
+      </Typography>
+    );
     return (
       <Popup className={classes.popup}>
         <Typography variant="h5" gutterBottom>
@@ -154,9 +158,13 @@ const SiteMarker = (props) => {
             {renderField('Lat./Lon.', `${latitude}, ${longitude}`)}
           </Grid>
         </Grid>
-        {siteDetailsButton}
-        <br />
-        {exploreDataProductsButton}
+        {(mode === 'SELECT' ? selectActionBlurb : (
+          <div>
+            {siteDetailsButton}
+            <br />
+            {exploreDataProductsButton}
+          </div>
+        ))}
       </Popup>
     );
   };
@@ -168,11 +176,21 @@ const SiteMarker = (props) => {
     isSelected,
   });
 
+  let interactionProps = {};
+  if (mode === 'SELECT') {
+    interactionProps = {
+      onMouseOver: (e) => { e.target.openPopup(); },
+      onMouseOut: (e) => { e.target.closePopup(); },
+      onClick: onToggleSelected,
+    };
+  }
+
   return siteLeafletIcon ? (
     <Marker
       key={siteCode}
       position={[latitude, longitude]}
       icon={siteLeafletIcon}
+      {...interactionProps}
     >
       {renderPopup(site)}
     </Marker>
@@ -180,10 +198,10 @@ const SiteMarker = (props) => {
 };
 
 SiteMarker.propTypes = {
+  mode: PropTypes.oneOf(['EXPLORE', 'SELECT']),
   zoom: PropTypes.number,
   isSelected: PropTypes.bool,
-  popupHrefNew: PropTypes.bool,
-  popupExploreDataProductsButton: PropTypes.bool,
+  onToggleSelected: PropTypes.func,
   site: PropTypes.shape({
     siteCode: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
@@ -198,9 +216,9 @@ SiteMarker.propTypes = {
 
 SiteMarker.defaultProps = {
   zoom: null,
+  mode: 'SELECT',
   isSelected: false,
-  popupHrefNew: true,
-  popupExploreDataProductsButton: true,
+  onToggleSelected: () => {},
 };
 
 export default SiteMarker;

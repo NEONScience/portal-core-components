@@ -37,31 +37,29 @@ import SiteMarker from './SiteMarker';
 
 const { BaseLayer, Overlay } = LayersControl;
 
-const selectedSites = ['ABBY', 'MOAB', 'PUUM', 'ORNL', 'TREE', 'STEI', 'LIRO', 'UNDE', 'CRAM'];
-
 export const TILE_LAYERS = {
   NatGeo_World_Map: {
     name: 'National Geographic',
-    shortAttribution: 'Â© Natl. Geographic et al.',
-    fullAttribution: 'Â© National Geographic, Esri, Garmin, HERE, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC',
+    shortAttribution: '© Natl. Geographic et al.',
+    fullAttribution: '© National Geographic, Esri, Garmin, HERE, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC',
     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}',
   },
   World_Imagery: {
     name: 'Satellite Imagery',
-    shortAttribution: 'Â© Esri et al.',
-    fullAttribution: 'Â© Esri, DigitalGlobe, GeoEye, Earthstar Geographics, CNES/Airbus DS, USDA, USGS, AeroGRID, IGN, GIS Community',
+    shortAttribution: '© Esri et al.',
+    fullAttribution: '© Esri, DigitalGlobe, GeoEye, Earthstar Geographics, CNES/Airbus DS, USDA, USGS, AeroGRID, IGN, GIS Community',
     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
   },
   World_Street_Map: {
     name: 'Streets',
-    shortAttribution: 'Â© Esri et al.',
-    fullAttribution: 'Â© Esri, HERE, Garmin, USGS, Intermap, INCREMENT P, NRCan, Esri Japan, METI, Esri China (Hong Kong), Esri Korea, Esri (Thailand), NGCC, OSM contributors, GIS Community',
+    shortAttribution: '© Esri et al.',
+    fullAttribution: '© Esri, HERE, Garmin, USGS, Intermap, INCREMENT P, NRCan, Esri Japan, METI, Esri China (Hong Kong), Esri Korea, Esri (Thailand), NGCC, OSM contributors, GIS Community',
     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
   },
   World_Topo_Map: {
     name: 'Topographic',
-    shortAttribution: 'Â© Esri et al.',
-    fullAttribution: 'Â© Esri, HERE, Garmin, Intermap, iPC, GEBCO, USGS, FAO, NPS, NRCAN, GeoBase, IGN, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), OSM contributors, GIS Community',
+    shortAttribution: '© Esri et al.',
+    fullAttribution: '© Esri, HERE, Garmin, Intermap, iPC, GEBCO, USGS, FAO, NPS, NRCAN, GeoBase, IGN, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), OSM contributors, GIS Community',
     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
   },
 };
@@ -180,8 +178,6 @@ const SiteMap = (props) => {
     tileLayer: tileLayerProp,
     zoom: zoomProp,
     sites: sitesProp,
-    popupHrefNew,
-    popupExploreDataProductsButton,
   } = props;
   const classes = useStyles(Theme);
   const mapRef = useRef(null);
@@ -238,6 +234,7 @@ const SiteMap = (props) => {
   }
 
   const reducer = (state, action) => {
+    const newSelectedSites = new Set(state.selectedSites);
     switch (action.type) {
       case 'fetchSitesCalled':
         return { ...state, fetchSitesStatus: 'fetching' };
@@ -259,6 +256,13 @@ const SiteMap = (props) => {
       */
       case 'setZoom':
         return { ...state, zoom: action.zoom };
+      case 'toggleSiteSelected':
+        if (newSelectedSites.has(action.site)) {
+          newSelectedSites.delete(action.site);
+        } else {
+          newSelectedSites.add(action.site);
+        }
+        return { ...state, selectedSites: Array.from(newSelectedSites) };
       default:
         return state;
     }
@@ -273,6 +277,7 @@ const SiteMap = (props) => {
     sitesOverlay: true,
     statesOverlay: false,
     domainsOverlay: false,
+    selectedSites: [],
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -374,9 +379,8 @@ const SiteMap = (props) => {
               key={siteCode}
               zoom={state.zoom}
               site={state.sites[siteCode]}
-              isSelected={selectedSites.includes(siteCode)}
-              popupHrefNew={popupHrefNew}
-              popupExploreDataProductsButton={popupExploreDataProductsButton}
+              isSelected={state.selectedSites.includes(siteCode)}
+              onToggleSelected={() => { dispatch({ type: 'toggleSiteSelected', site: siteCode }); }}
             />
           ))}
         </FeatureGroup>
@@ -553,8 +557,6 @@ SiteMap.propTypes = {
   center: PropTypes.arrayOf(PropTypes.number),
   zoom: PropTypes.number,
   tileLayer: PropTypes.oneOf(Object.keys(TILE_LAYERS)),
-  popupHrefNew: PropTypes.bool,
-  popupExploreDataProductsButton: PropTypes.bool,
   sites: PropTypes.oneOf([
     PropTypes.arrayOf(
       PropTypes.shape({
@@ -587,8 +589,6 @@ SiteMap.defaultProps = {
   center: [52.68, -110.75],
   tileLayer: 'NatGeo_World_Map',
   zoom: null,
-  popupHrefNew: true,
-  popupExploreDataProductsButton: true,
   sites: null,
 };
 

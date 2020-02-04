@@ -100,9 +100,9 @@ export const getSiteLeafletIcon = (config) => {
   const selected = isSelected ? 'SELECTED' : 'BASE';
   const iconScale = 0.2 + (Math.floor(((zoom || 2) - 2) / 3) / 10);
   const iconSize = isSelected ? [150, 150] : [100, 100];
-  const iconAnchor = isSelected ? [75, 150] : [50, 100];
+  const iconAnchor = isSelected ? [75, 125] : [50, 100];
   const shadowSize = isSelected ? [234, 160] : [156, 93];
-  const shadowAnchor = isSelected ? [80, 145] : [50, 83];
+  const shadowAnchor = isSelected ? [80, 120] : [50, 83];
 
   return new L.Icon({
     iconUrl: ICON_SVGS[type][terrain][selected],
