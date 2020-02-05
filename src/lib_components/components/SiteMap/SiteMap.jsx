@@ -128,9 +128,12 @@ Object.keys(TILE_LAYERS).forEach((key) => {
 });
 
 const boxShadow = '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)';
-const baseOverlayColors = {
+const rootOverlayColors = {
   states: COLORS.RED[300],
   domains: COLORS.GREY[300],
+  partialSelected: COLORS.SECONDARY_BLUE[300],
+  totalSelected: COLORS.SECONDARY_BLUE[500],
+  hover: COLORS.SECONDARY_BLUE[100],
 };
 const useStyles = makeStyles(theme => ({
   notFetchedContainer: {
@@ -242,15 +245,15 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
   },
   keySwatchStates: {
-    border: `2px solid ${baseOverlayColors.states}`,
-    backgroundColor: `${baseOverlayColors.states}88`,
+    border: `2px solid ${rootOverlayColors.states}`,
+    backgroundColor: `${rootOverlayColors.states}88`,
     width: Theme.spacing(3),
     height: Theme.spacing(1),
     margin: Theme.spacing(0, 0.5, 0.25, 0),
   },
   keySwatchDomains: {
-    border: `2px solid ${baseOverlayColors.domains}`,
-    backgroundColor: `${baseOverlayColors.domains}88`,
+    border: `2px solid ${rootOverlayColors.domains}`,
+    backgroundColor: `${rootOverlayColors.domains}88`,
     width: Theme.spacing(3),
     height: Theme.spacing(1),
     margin: Theme.spacing(0, 0.5, 0.25, 0),
@@ -397,13 +400,57 @@ const SiteMap = (props) => {
   /**
      State and Reducer Setup
   */
+
+  // Derive values for stateSites and domainSites in state. This is a one-time mapping we
+  // generate when sites are loaded into state containing lists of site codes for each
+  // state code / domain code.
+  const deriveRegionSites = (state) => {
+    const stateSites = {};
+    const domainSites = {};
+    Object.keys(state.sites).forEach((siteCode) => {
+      const { stateCode, domainCode } = state.sites[siteCode];
+      if (!stateSites[stateCode]) { stateSites[stateCode] = new Set(); }
+      if (!domainSites[domainCode]) { domainSites[domainCode] = new Set(); }
+      stateSites[stateCode].add(siteCode);
+      domainSites[domainCode].add(siteCode);
+    });
+    // Fill in empty sets for any states that had no NEON sites
+    Object.keys(statesJSON).forEach((stateCode) => {
+      if (!stateSites[stateCode]) { stateSites[stateCode] = new Set(); }
+    });
+    return { ...state, stateSites, domainSites };
+  };
+
+  // Derive the selected status of a given region (US state or NEON domain). This should run
+  // every time the list of selected sites changes. It regenerates selectedStates and
+  // selectedDomains in state to each contain a key/value lookup where the key is the region code
+  // (state code or domain code) and the value is either 'total' (all sites selected) or 'partial'
+  // (some sites selected). If no sites are selected for the region it is omitted from the map.
+  const deriveRegionSelections = (state) => {
+    const derive = (regionType) => {
+      const regionKey = regionType === 'states' ? 'stateSites' : 'domainSites';
+      const selectedRegions = {};
+      Object.keys(state[regionKey]).forEach((regionCode) => {
+        const regionSitesSet = new Set(state[regionKey][regionCode]);
+        const intersection = [...regionSitesSet].filter(x => state.selectedSites.has(x));
+        if (!intersection.length) { return; }
+        selectedRegions[regionCode] = (
+          intersection.length === regionSitesSet.size ? 'total' : 'partial'
+        );
+      });
+      return selectedRegions;
+    };
+    return { ...state, selectedStates: derive('states'), selectedDomains: derive('domains') };
+  };
+
   const reducer = (state, action) => {
-    const newSelectedSites = new Set(state.selectedSites);
+    const selectedSites = new Set(state.selectedSites);
+    let setMethod = null;
     switch (action.type) {
       case 'fetchSitesCalled':
         return { ...state, fetchSitesStatus: 'fetching' };
       case 'fetchSitesSucceeded':
-        return { ...state, fetchSitesStatus: 'fetched', sites: action.sites };
+        return deriveRegionSites({ ...state, fetchSitesStatus: 'fetched', sites: action.sites });
       case 'fetchSitesFailed':
         return { ...state, fetchSitesStatus: 'error', fetchSitesError: action.error };
       case 'setTileLayer':
@@ -412,12 +459,24 @@ const SiteMap = (props) => {
       case 'setZoom':
         return { ...state, zoom: action.zoom, zoomedIcons: getZoomedIcons(action.zoom) };
       case 'toggleSiteSelected':
-        if (newSelectedSites.has(action.site)) {
-          newSelectedSites.delete(action.site);
+        if (selectedSites.has(action.site)) {
+          selectedSites.delete(action.site);
         } else {
-          newSelectedSites.add(action.site);
+          selectedSites.add(action.site);
         }
-        return { ...state, selectedSites: Array.from(newSelectedSites) };
+        return deriveRegionSelections({ ...state, selectedSites });
+      case 'toggleStateSelected':
+        setMethod = state.selectedStates[action.stateCode] === 'total' ? 'delete' : 'add';
+        state.stateSites[action.stateCode].forEach((siteCode) => {
+          selectedSites[setMethod](siteCode);
+        });
+        return deriveRegionSelections({ ...state, selectedSites });
+      case 'toggleDomainSelected':
+        setMethod = state.selectedDomains[action.domainCode] === 'total' ? 'delete' : 'add';
+        state.domainSites[action.domainCode].forEach((siteCode) => {
+          selectedSites[setMethod](siteCode);
+        });
+        return deriveRegionSelections({ ...state, selectedSites });
       default:
         return state;
     }
@@ -427,12 +486,16 @@ const SiteMap = (props) => {
     zoom: zoomProp,
     tileLayer: tileLayerProp,
     sites,
+    stateSites: {}, // derived once from sites
+    domainSites: {}, // derived once from sites
     fetchSitesStatus,
     fetchSitesError: null,
     sitesOverlay: true,
     statesOverlay: false,
     domainsOverlay: false,
-    selectedSites: [],
+    selectedSites: new Set(),
+    selectedStates: {}, // derived from selectedSites when changed
+    selectedDomains: {}, // derived from selectedSites when changed
   };
   initialState.zoomedIcons = getZoomedIcons(zoomProp);
 
@@ -548,7 +611,7 @@ const SiteMap = (props) => {
     );
     const renderActions = () => {
       if (mode === 'SELECT') {
-        const isSelected = state.selectedSites.includes(site.siteCode);
+        const isSelected = state.selectedSites.has(site.siteCode);
         const verb = isSelected ? 'remove' : 'add';
         const preposition = isSelected ? 'from' : 'to';
         return (
@@ -561,7 +624,7 @@ const SiteMap = (props) => {
                   className={classes.infoSnackbarIcon}
                 />
                 <div>
-                  <Typography variant="subtitle1">
+                  <Typography variant="body1">
                     {/* eslint-disable react/jsx-one-expression-per-line */}
                     Click to <b>{verb}</b> {preposition} selection
                     {/* eslint-enable react/jsx-one-expression-per-line */}
@@ -666,29 +729,22 @@ const SiteMap = (props) => {
         <FeatureGroup>
           {Object.keys(state.sites).map((siteCode) => {
             const site = state.sites[siteCode];
-            const isSelected = state.selectedSites.includes(siteCode);
+            const isSelected = state.selectedSites.has(siteCode);
             if (!state.zoomedIcons[site.type] || !state.zoomedIcons[site.type][site.terrain]
                 || !site.latitude || !site.longitude) {
               return null;
             }
-            let interactionProps = {};
-            if (mode === 'SELECT') {
-              /* eslint-disable no-underscore-dangle */
-              interactionProps = {
-                onMouseOver: (e) => {
-                  e.target.openPopup();
-                },
-                onMouseOut: (e) => {
-                  e.target.closePopup();
-                },
-                onClick: (e) => {
-                  e.target._icon.className = getIconClassName(site.type, !isSelected);
-                  e.target._icon.blur();
-                  dispatch({ type: 'toggleSiteSelected', site: siteCode });
-                },
-              };
-              /* eslint-enable no-underscore-dangle */
-            }
+            const interactionProps = (mode === 'SELECT') ? {
+              onMouseOver: (e) => { e.target.openPopup(); },
+              onMouseOut: (e) => { e.target.closePopup(); },
+              onClick: (e) => {
+                /* eslint-disable no-underscore-dangle */
+                e.target._icon.className = getIconClassName(site.type, !isSelected);
+                e.target._icon.blur();
+                dispatch({ type: 'toggleSiteSelected', site: siteCode });
+                /* eslint-enable no-underscore-dangle */
+              },
+            } : {};
             return (
               <Marker
                 key={siteCode}
@@ -706,7 +762,7 @@ const SiteMap = (props) => {
   };
 
   const renderPopupSitesList = (sitesList) => {
-    if (!sitesList || !sitesList.length) {
+    if (!sitesList || !sitesList.size) {
       return (
         <Typography variant="subtitle2" gutterBottom>
           <i>No NEON Sites</i>
@@ -716,13 +772,14 @@ const SiteMap = (props) => {
     return (
       <React.Fragment>
         <Typography variant="subtitle2" gutterBottom>
-          {`NEON Sites (${sitesList.length}):`}
+          {`NEON Sites (${sitesList.size}):`}
         </Typography>
         <div>
-          {sitesList.map((siteCode) => {
+          {[...sitesList].map((siteCode) => {
             const site = state.sites[siteCode];
             const alt = `${site.terrain} ${site.type}`;
-            const src = ICON_SVGS[site.type][site.terrain];
+            const selected = state.selectedSites.has(siteCode) ? 'SELECTED' : 'BASE';
+            const src = ICON_SVGS[site.type][site.terrain][selected];
             return (
               <div key={siteCode} style={{ display: 'flex' }}>
                 <img src={src} alt={alt} className={classes.popupSiteIcon} />
@@ -737,15 +794,43 @@ const SiteMap = (props) => {
 
   const renderStatePopup = (stateCode) => {
     if (!statesJSON[stateCode]) { return null; }
-    const stateName = statesJSON[stateCode].name;
-    const sitesList = Object.keys(state.sites)
-      .filter(siteCode => state.sites[siteCode].stateCode === stateCode);
+    const renderActions = () => {
+      const count = state.stateSites[stateCode].size;
+      if (mode !== 'SELECT' || !count) { return null; }
+      const isTotalSelected = state.selectedStates[stateCode] === 'total';
+      const verb = isTotalSelected ? 'remove' : 'add';
+      const preposition = isTotalSelected ? 'from' : 'to';
+      const all = count === 1 ? '' : 'all ';
+      const plural = count === 1 ? '' : 's';
+      return (
+        <SnackbarContent
+          className={classes.infoSnackbar}
+          style={{ marginTop: Theme.spacing(1) }}
+          message={(
+            <div className={classes.startFlex}>
+              <ClickIcon
+                fontSize="large"
+                className={classes.infoSnackbarIcon}
+              />
+              <div>
+                <Typography variant="body1">
+                  {/* eslint-disable react/jsx-one-expression-per-line */}
+                  Click to <b>{verb} {all}{count} site{plural}</b> {preposition} selection
+                  {/* eslint-enable react/jsx-one-expression-per-line */}
+                </Typography>
+              </div>
+            </div>
+          )}
+        />
+      );
+    };
     return (
       <Popup className={classes.popup}>
         <Typography variant="h6" gutterBottom>
-          {`${stateName} (${stateCode})`}
+          {`${statesJSON[stateCode].name} (${stateCode})`}
         </Typography>
-        {renderPopupSitesList(sitesList)}
+        {renderPopupSitesList(state.stateSites[stateCode])}
+        {renderActions()}
       </Popup>
     );
   };
@@ -760,15 +845,32 @@ const SiteMap = (props) => {
     return (
       <Overlay name={overlayName} checked={state.statesOverlay}>
         <FeatureGroup>
-          {statesShapesJSON.features.map(usState => (
-            <Polygon
-              key={usState.properties.stateCode}
-              color={baseOverlayColors.states}
-              positions={usState.geometry.coordinates}
-            >
-              {renderStatePopup(usState.properties.stateCode)}
-            </Polygon>
-          ))}
+          {statesShapesJSON.features.map((usState) => {
+            const { stateCode } = usState.properties;
+            const overlayColor = state.selectedStates[stateCode]
+              ? `${state.selectedStates[stateCode]}Selected`
+              : 'states';
+            const interactionProps = (mode === 'SELECT') ? {
+              onMouseOver: (e) => { e.target.openPopup(); },
+              onMouseOut: (e) => { e.target.closePopup(); },
+              onClick: (e) => {
+                e.target._path.blur(); // eslint-disable-line no-underscore-dangle
+                if (state.stateSites[stateCode].size) {
+                  dispatch({ type: 'toggleStateSelected', stateCode });
+                }
+              },
+            } : {};
+            return (
+              <Polygon
+                key={usState.properties.stateCode}
+                color={rootOverlayColors[overlayColor]}
+                positions={usState.geometry.coordinates}
+                {...interactionProps}
+              >
+                {renderStatePopup(usState.properties.stateCode)}
+              </Polygon>
+            );
+          })}
         </FeatureGroup>
       </Overlay>
     );
@@ -776,15 +878,43 @@ const SiteMap = (props) => {
 
   const renderDomainPopup = (domainCode) => {
     if (!domainsJSON[domainCode]) { return null; }
-    const domainName = domainsJSON[domainCode].name;
-    const sitesList = Object.keys(state.sites)
-      .filter(siteCode => state.sites[siteCode].domainCode === domainCode);
+    const renderActions = () => {
+      const count = state.domainSites[domainCode].size;
+      if (mode !== 'SELECT' || !count) { return null; }
+      const isTotalSelected = state.selectedDomains[domainCode] === 'total';
+      const verb = isTotalSelected ? 'remove' : 'add';
+      const preposition = isTotalSelected ? 'from' : 'to';
+      const all = count === 1 ? '' : 'all ';
+      const plural = count === 1 ? '' : 's';
+      return (
+        <SnackbarContent
+          className={classes.infoSnackbar}
+          style={{ marginTop: Theme.spacing(1) }}
+          message={(
+            <div className={classes.startFlex}>
+              <ClickIcon
+                fontSize="large"
+                className={classes.infoSnackbarIcon}
+              />
+              <div>
+                <Typography variant="body1">
+                  {/* eslint-disable react/jsx-one-expression-per-line */}
+                  Click to <b>{verb} {all}{count} site{plural}</b> {preposition} selection
+                  {/* eslint-enable react/jsx-one-expression-per-line */}
+                </Typography>
+              </div>
+            </div>
+          )}
+        />
+      );
+    };
     return (
       <Popup className={classes.popup}>
         <Typography variant="h6" gutterBottom>
-          {`${domainName} (${domainCode})`}
+          {`${domainsJSON[domainCode].name} (${domainCode})`}
         </Typography>
-        {renderPopupSitesList(sitesList)}
+        {renderPopupSitesList(state.domainSites[domainCode])}
+        {renderActions()}
       </Popup>
     );
   };
@@ -799,15 +929,30 @@ const SiteMap = (props) => {
     return (
       <Overlay name={overlayName} checked={state.domainsOverlay}>
         <FeatureGroup>
-          {domainsShapesJSON.features.map(domain => (
-            <Polygon
-              key={domain.properties.domainCode}
-              color={baseOverlayColors.domains}
-              positions={domain.geometry.coordinates}
-            >
-              {renderDomainPopup(domain.properties.domainCode)}
-            </Polygon>
-          ))}
+          {domainsShapesJSON.features.map((domain) => {
+            const { domainCode } = domain.properties;
+            const overlayColor = state.selectedDomains[domainCode]
+              ? `${state.selectedDomains[domainCode]}Selected`
+              : 'domains';
+            const interactionProps = (mode === 'SELECT') ? {
+              onMouseOver: (e) => { e.target.openPopup(); },
+              onMouseOut: (e) => { e.target.closePopup(); },
+              onClick: (e) => {
+                e.target._path.blur(); // eslint-disable-line no-underscore-dangle
+                dispatch({ type: 'toggleDomainSelected', domainCode });
+              },
+            } : {};
+            return (
+              <Polygon
+                key={domain.properties.domainCode}
+                color={rootOverlayColors[overlayColor]}
+                positions={domain.geometry.coordinates}
+                {...interactionProps}
+              >
+                {renderDomainPopup(domain.properties.domainCode)}
+              </Polygon>
+            );
+          })}
         </FeatureGroup>
       </Overlay>
     );
