@@ -17,7 +17,7 @@ import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 
-import SiteMap, { TILE_LAYERS } from './SiteMap';
+import SiteMap, { SITE_MAP_MODES, TILE_LAYERS } from './SiteMap';
 import Theme from '../Theme/Theme';
 
 const useStyles = makeStyles(theme => ({
@@ -73,34 +73,32 @@ const propRows = [
     ),
   },
   {
-    prop: 'popupExploreDataProductsButton',
-    type: 'boolean',
-    default: 'true',
-    description: (
+    prop: 'mode',
+    type: (
       <div>
-        Whether to show an <i>Explore Data Products</i> button in the popup
-        (info section that appears when a site is clicked) for a given site. When
-        enabled the rendered button will link to the Explore Data Products page with
-        only the individual site set in the sites filter.
+        string, one of:
+        <br />
+        <tt>
+          {Object.keys(SITE_MAP_MODES).map(k => <div key={k}>{`"${k}"`}</div>)}
+        </tt>
       </div>
     ),
-  },
-  {
-    prop: 'popupHrefNew',
-    type: 'boolean',
-    default: 'true',
+    default: 'EXPLORE',
     description: (
       <div>
-        <p>
-          Whether buttons in popups that behave as links (such
-          as <i>Explore Data Products</i>, <i>Site Details</i>, etc.) open their targets
-          in a new window.
-        </p>
-        <p>
-          Being <tt>true</tt> by default said buttons will open in a new window with a
-          blank target. Set to <tt>false</tt> to stay in the same window where the map
-          is displayed when such buttons are clicked.
-        </p>
+        <div>
+          Interaction mode for the map.
+        </div>
+        <div>
+          <tt>EXPLORE</tt> - Click site icons to open and persist an exclusive popup containing site
+          info and navigation buttons to access the Field Site page of the Explore Data Products
+          page with an appropriate filter setting.
+        </div>
+        <div>
+          <tt>SELECT</tt> - Mouse over site icons to open an exclusive popup containing only site
+          info (no navigation buttons or other interactive elements). Click sites to toggle their
+          selected state.
+        </div>
       </div>
     ),
   },
@@ -190,8 +188,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
         <li>Load site data from the API</li>
         <li>Use a 4:3 (letterbox) aspect ratio at 100% of the width of the containing element</li>
         <li>Start centered and zoomed such that all sites are visible at any map dimensions</li>
-        <li>Include a button to Explore Data Products in site popups</li>
-        <li>Have all site popup links open in a new window</li>
+        <li><tt>EXPLORE</tt> mode (no selection enabled; popups include links to other pages)</li>
       </ul>
 
       <ExampleBlock>
@@ -200,6 +197,15 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
       <CodeBlock>
         {`
 <SiteMap />
+        `}
+      </CodeBlock>
+
+      <ExampleBlock>
+        <SiteMap mode="SELECT" />
+      </ExampleBlock>
+      <CodeBlock>
+        {`
+<SiteMap mode="SELECT" />
         `}
       </CodeBlock>
 
