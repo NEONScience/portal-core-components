@@ -4,14 +4,21 @@ import { map, catchError, takeUntil } from 'rxjs/operators';
 
 /**
  * Convenience method for utiliizing RxJS ajax.getJSON
- * @param {url} url
- * @param {callback} callback
- * @param {errorCallback} errorCallback
- * @param {cancellationSubject} cancellationSubject$
+ * @param {string} url
+ * @param {any} callback
+ * @param {any} errorCallback
+ * @param {any} cancellationSubject$
+ * @param {Object|undefined} headers
  * @return RxJS subscription
  */
-export const getJson = (url, callback, errorCallback, cancellationSubject$) => {
-  const rxObs$ = ajax.getJSON(url).pipe(
+export const getJson = (
+  url,
+  callback,
+  errorCallback,
+  cancellationSubject$,
+  headers = undefined,
+) => {
+  const rxObs$ = ajax.getJSON(url, headers).pipe(
     map((response) => {
       if (typeof callback === 'function') {
         return of(callback(response));

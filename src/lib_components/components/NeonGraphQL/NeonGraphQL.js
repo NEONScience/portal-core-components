@@ -2,6 +2,7 @@ import { of } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
+import NeonApi from '../NeonApi/NeonApi';
 
 export const TYPES = {
   DATA_PRODUCTS: 'DATA_PRODUCTS',
@@ -94,8 +95,8 @@ const getQueryBody = (type = '', dimensionality = '', id = null) => {
   return transformQuery(query);
 };
 
-const getAjaxRequest = (body) => {
-  let request = {
+const getAjaxRequest = (body, includeToken = true) => {
+  const request = {
     method: 'POST',
     crossDomain: true,
     url: NeonEnvironment.getFullGraphqlPath(),
@@ -103,16 +104,10 @@ const getAjaxRequest = (body) => {
     responseType: 'json',
     body,
   };
-  const apiTokenHeader = NeonEnvironment.getApiTokenHeader();
-  const apiToken = NeonEnvironment.getApiToken();
-  if (apiTokenHeader && (apiTokenHeader.length > 0)
-      && apiToken && (apiToken.length > 0)) {
-    request = {
-      ...request,
-      headers: {
-        ...request.headers,
-        [apiTokenHeader]: apiToken,
-      },
+  if (includeToken) {
+    request.headers = {
+      ...request.headers,
+      ...NeonApi.getApiTokenHeader(request.headers),
     };
   }
   return request;

@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "name": "neon-api",
+  "main": "./NeonApi.js",
+  "module": "./NeonApi.js"
+}

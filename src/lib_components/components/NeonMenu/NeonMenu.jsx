@@ -23,8 +23,8 @@ import NeonDrawerMenu from './NeonDrawerMenu';
 import Authenticate from '../../auth/authenticate';
 
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
+import NeonApi from '../NeonApi/NeonApi';
 import { COLORS } from '../Theme/Theme';
-import { getJson } from '../../util/rxUtil';
 
 import './NeonMenu.css';
 
@@ -299,7 +299,7 @@ class NeonMenu extends Component {
   }
 
   componentDidMount() {
-    getJson(
+    NeonApi.getJson(
       NeonEnvironment.getFullApiPath('menu'),
       this.menuFromResponse,
       this.menuErrorCallback,
