@@ -29,6 +29,7 @@ import {
   takeUntil,
 } from 'rxjs/operators';
 
+import NeonApi from '../NeonApi/NeonApi';
 import ExternalHost from '../ExternalHost/ExternalHost';
 import {
   buildS3FilesRequestUrl,
@@ -1039,8 +1040,8 @@ const Provider = (props) => {
       keys.map((key) => {
         const site = key.substr(0, 4);
         const yearMonth = key.substr(5, 7);
-        return ajax
-          .getJSON(buildS3FilesRequestUrl(productCode, site, yearMonth))
+        return NeonApi
+          .getJsonObservable(buildS3FilesRequestUrl(productCode, site, yearMonth))
           .pipe(
             map(response => ({
               status: 'fetched',

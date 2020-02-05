@@ -40,11 +40,11 @@ if (!window.gtmDataLayer) {
   window.gtmDataLayer = [];
 }
 
-const useStyles = makeStyles(theme => ({
+const createUseStyles = props => (makeStyles(theme => ({
   outerPageContainer: {
     position: 'relative',
     minHeight: theme.spacing(30),
-    maxWidth: '2000px',
+    maxWidth: props.outerPageContainerMaxWidth,
     paddingBottom: theme.spacing(3),
     [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(2.5),
@@ -106,10 +106,9 @@ const useStyles = makeStyles(theme => ({
       margin: theme.spacing(1, 0, 3, -0.5),
     },
   },
-}));
+})));
 
 const NeonPage = (props) => {
-  const classes = useStyles(Theme);
   const {
     breadcrumbs,
     title,
@@ -118,7 +117,14 @@ const NeonPage = (props) => {
     progress,
     error,
     notification,
+    outerPageContainerMaxWidth,
   } = props;
+  const useStylesProps = {
+    theme: Theme,
+    outerPageContainerMaxWidth,
+  };
+  const useStyles = createUseStyles(props);
+  const classes = useStyles(useStylesProps);
 
   /**
      Liferay Notifications
@@ -293,6 +299,7 @@ NeonPage.propTypes = {
   progress: PropTypes.number,
   error: PropTypes.string,
   notification: PropTypes.string,
+  outerPageContainerMaxWidth: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.oneOfType([
       PropTypes.node,
@@ -310,6 +317,7 @@ NeonPage.defaultProps = {
   progress: null,
   error: null,
   notification: null,
+  outerPageContainerMaxWidth: '2000px',
 };
 
 export default NeonPage;

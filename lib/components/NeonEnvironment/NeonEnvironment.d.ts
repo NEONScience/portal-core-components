@@ -34,7 +34,10 @@ declare namespace NeonEnvironment {
     export function getRouterBasePath(): string | undefined;
     export function getRouterBaseHomePath(): string | undefined;
     export function getHostOverride(): string | undefined;
+    export function getNeonServerData(): Object;
     export function getHost(): string | undefined;
+    export function getApiTokenHeader(): string;
+    export function getApiToken(): string;
     export function getFullApiPath(path?: string): string;
     export function getFullPagePath(path?: string): string;
     export function getFullAuthPath(path?: string): string;

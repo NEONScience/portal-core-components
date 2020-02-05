@@ -79,11 +79,45 @@ const NeonEnvironment = {
   getRouterBaseHomePath: () => process.env.REACT_APP_NEON_ROUTER_BASE_HOME,
   getHostOverride: () => process.env.REACT_APP_NEON_HOST_OVERRIDE,
 
+  /**
+   * Gets the window.NEON_SERVER_DATA injected from the server environment.
+   * @return {Object} The structured server data object
+   */
+  getNeonServerData: () => (
+    window.NEON_SERVER_DATA
+      ? window.NEON_SERVER_DATA
+      : null
+  ),
+
   getHost: () => (
     NeonEnvironment.isDevEnv && NeonEnvironment.getHostOverride()
       ? NeonEnvironment.getHostOverride()
       : `${window.location.protocol}//${window.location.host}`
   ),
+
+  /**
+   * Gets the API token header name
+   * @return {string} The API token header name
+   */
+  getApiTokenHeader: () => {
+    const serverData = NeonEnvironment.getNeonServerData();
+    if (serverData && (typeof serverData.NeonPublicAPITokenHeader === 'string')) {
+      return serverData.NeonPublicAPITokenHeader;
+    }
+    return '';
+  },
+
+  /**
+   * Gets the API token value
+   * @return {string} The API token value
+   */
+  getApiToken: () => {
+    const serverData = NeonEnvironment.getNeonServerData();
+    if (serverData && (typeof serverData.NeonPublicAPIToken === 'string')) {
+      return serverData.NeonPublicAPIToken;
+    }
+    return '';
+  },
 
   getFullApiPath: (path = '') => {
     const host = NeonEnvironment.getHost();
