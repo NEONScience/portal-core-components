@@ -5,17 +5,22 @@ import PropTypes from 'prop-types';
 import { of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
+import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
 import ClickIcon from '@material-ui/icons/TouchApp';
 import ErrorIcon from '@material-ui/icons/Warning';
 import ExploreDataProductsIcon from '@material-ui/icons/InsertChartOutlined';
+import LocationIcon from '@material-ui/icons/MyLocation';
 import SiteDetailsIcon from '@material-ui/icons/InfoOutlined';
 
 import L from 'leaflet';
@@ -129,8 +134,8 @@ Object.keys(TILE_LAYERS).forEach((key) => {
 
 const boxShadow = '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)';
 const rootOverlayColors = {
-  states: COLORS.RED[300],
-  domains: COLORS.GREY[300],
+  states: '#3cdd85', // COLORS.RED[300],
+  domains: '#a36ce5', // COLORS.GREY[300],
   partialSelected: COLORS.SECONDARY_BLUE[300],
   totalSelected: COLORS.SECONDARY_BLUE[500],
   hover: COLORS.SECONDARY_BLUE[100],
@@ -268,7 +273,7 @@ const useStyles = makeStyles(theme => ({
     color: '#000',
     border: `1px solid ${theme.palette.primary.main}80`,
     justifyContent: 'center',
-    padding: theme.spacing(0.5, 1),
+    padding: theme.spacing(0, 1),
   },
   infoSnackbarIcon: {
     color: theme.palette.grey[300],
@@ -591,7 +596,7 @@ const SiteMap = (props) => {
       terrainSubtitle = 'water-based';
     }
     const terrainTypeTitle = `${terrainTitle} ${typeTitle}`;
-    const terrainTypeSubtitle = `(${terrainSubtitle}, ${typeSubtitle})`;
+    const terrainTypeSubtitle = `${terrainSubtitle}; ${typeSubtitle}`;
     const terrainIcon = (
       <img
         src={ICON_SVGS[site.type][site.terrain].BASE}
@@ -603,12 +608,6 @@ const SiteMap = (props) => {
       />
     );
     const stateFieldTitle = (site.stateCode === 'PR' ? 'Territory' : 'State');
-    const renderField = (title, value) => (
-      <div>
-        <Typography variant="subtitle2">{title}</Typography>
-        <Typography variant="body2">{value}</Typography>
-      </div>
-    );
     const renderActions = () => {
       if (mode === 'SELECT') {
         const isSelected = state.selectedSites.has(site.siteCode);
@@ -619,12 +618,9 @@ const SiteMap = (props) => {
             className={classes.infoSnackbar}
             message={(
               <div className={classes.startFlex}>
-                <ClickIcon
-                  fontSize="large"
-                  className={classes.infoSnackbarIcon}
-                />
+                <ClickIcon className={classes.infoSnackbarIcon} />
                 <div>
-                  <Typography variant="body1">
+                  <Typography variant="body2">
                     {/* eslint-disable react/jsx-one-expression-per-line */}
                     Click to <b>{verb}</b> {preposition} selection
                     {/* eslint-enable react/jsx-one-expression-per-line */}
@@ -642,43 +638,78 @@ const SiteMap = (props) => {
         target: '_blank',
       };
       return (
-        <div>
-          <Button
-            endIcon={<SiteDetailsIcon />}
-            href={`${SITE_DETAILS_URL_BASE}${site.siteCode}`}
-            {...actionButtonProps}
-          >
-            Site Details
-          </Button>
-          <br />
-          <Button
-            endIcon={<ExploreDataProductsIcon />}
-            href={`${EXPLORE_DATA_PRODUCTS_URL_BASE}${site.siteCode}`}
-            {...actionButtonProps}
-          >
-            Explore Data Products
-          </Button>
-        </div>
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <Button
+              endIcon={<SiteDetailsIcon />}
+              href={`${SITE_DETAILS_URL_BASE}${site.siteCode}`}
+              {...actionButtonProps}
+            >
+              Site Details
+            </Button>
+          </Grid>
+          <Grid item xs={6}>
+            <Button
+              endIcon={<ExploreDataProductsIcon />}
+              href={`${EXPLORE_DATA_PRODUCTS_URL_BASE}${site.siteCode}`}
+              {...actionButtonProps}
+            >
+              Explore Data
+            </Button>
+          </Grid>
+        </Grid>
       );
     };
     return (
       <Popup className={classes.popup}>
-        <Typography variant="h5" gutterBottom>
-          {`${site.description} (${site.siteCode})`}
-        </Typography>
         <div className={classes.startFlex} style={{ marginBottom: Theme.spacing(1.5) }}>
           {terrainIcon}
-          {renderField(terrainTypeTitle, terrainTypeSubtitle)}
+          <Typography variant="h6" style={{ lineHeight: '1.4rem' }}>
+            {`${site.description} (${site.siteCode})`}
+          </Typography>
         </div>
-        <Grid container spacing={2} style={{ marginBottom: Theme.spacing(1) }}>
-          <Grid item xs={4}>
-            {renderField(stateFieldTitle, statesJSON[site.stateCode].name)}
+        <Grid container spacing={1} style={{ marginBottom: Theme.spacing(1) }}>
+          {/* Terrain and Type */}
+          <Grid item xs={8}>
+            <Typography variant="subtitle2">{terrainTypeTitle}</Typography>
+            <Typography variant="caption"><i>{terrainTypeSubtitle}</i></Typography>
           </Grid>
-          <Grid item xs={4}>
-            {renderField('Domain', `${site.domainCode} - ${domainsJSON[site.domainCode].name}`)}
+          {/* State/Territory */}
+          <Grid item xs={4} style={{ textAlign: 'right' }}>
+            <Typography variant="subtitle2">{stateFieldTitle}</Typography>
+            <Typography variant="body2">{statesJSON[site.stateCode].name}</Typography>
           </Grid>
-          <Grid item xs={4}>
-            {renderField('Lat./Lon.', `${site.latitude}, ${site.longitude}`)}
+          {/* Latitude/Longitude */}
+          <Grid item xs={5} style={{ display: 'flex', alignItems: 'flex-end' }}>
+            <div className={classes.startFlex}>
+              <CopyToClipboard text={`${site.latitude} ${site.longitude}`}>
+                <Tooltip title="Latitude / Longitude (click to copy)">
+                  <IconButton
+                    size="small"
+                    style={{ marginRight: Theme.spacing(0.5) }}
+                    aria-label="Latitude / Longitude (click to copy)"
+                  >
+                    <LocationIcon />
+                  </IconButton>
+                </Tooltip>
+              </CopyToClipboard>
+              <Typography
+                variant="caption"
+                aria-label="Latitude / Longitude"
+                style={{ fontFamily: 'monospace', textAlign: 'right' }}
+              >
+                {site.latitude}
+                <br />
+                {site.longitude}
+              </Typography>
+            </div>
+          </Grid>
+          {/* Domain */}
+          <Grid item xs={7} style={{ textAlign: 'right' }}>
+            <Typography variant="subtitle2">Domain</Typography>
+            <Typography variant="body2">
+              {`${site.domainCode} - ${domainsJSON[site.domainCode].name}`}
+            </Typography>
           </Grid>
         </Grid>
         {renderActions()}
@@ -808,12 +839,9 @@ const SiteMap = (props) => {
           style={{ marginTop: Theme.spacing(1) }}
           message={(
             <div className={classes.startFlex}>
-              <ClickIcon
-                fontSize="large"
-                className={classes.infoSnackbarIcon}
-              />
+              <ClickIcon className={classes.infoSnackbarIcon} />
               <div>
-                <Typography variant="body1">
+                <Typography variant="body2">
                   {/* eslint-disable react/jsx-one-expression-per-line */}
                   Click to <b>{verb} {all}{count} site{plural}</b> {preposition} selection
                   {/* eslint-enable react/jsx-one-expression-per-line */}
@@ -850,16 +878,35 @@ const SiteMap = (props) => {
             const overlayColor = state.selectedStates[stateCode]
               ? `${state.selectedStates[stateCode]}Selected`
               : 'states';
+            /* eslint-disable no-underscore-dangle */
             const interactionProps = (mode === 'SELECT') ? {
-              onMouseOver: (e) => { e.target.openPopup(); },
-              onMouseOut: (e) => { e.target.closePopup(); },
+              onMouseOver: (e) => {
+                e.target._path.setAttribute('stroke', rootOverlayColors.hover);
+                e.target._path.setAttribute('fill', rootOverlayColors.hover);
+                e.target.openPopup();
+              },
+              onMouseOut: (e) => {
+                e.target._path.setAttribute('stroke', rootOverlayColors[overlayColor]);
+                e.target._path.setAttribute('fill', rootOverlayColors[overlayColor]);
+                e.target.closePopup();
+              },
               onClick: (e) => {
                 e.target._path.blur(); // eslint-disable-line no-underscore-dangle
                 if (state.stateSites[stateCode].size) {
                   dispatch({ type: 'toggleStateSelected', stateCode });
                 }
               },
-            } : {};
+            } : {
+              onMouseOver: (e) => {
+                e.target._path.setAttribute('stroke', rootOverlayColors.hover);
+                e.target._path.setAttribute('fill', rootOverlayColors.hover);
+              },
+              onMouseOut: (e) => {
+                e.target._path.setAttribute('stroke', rootOverlayColors[overlayColor]);
+                e.target._path.setAttribute('fill', rootOverlayColors[overlayColor]);
+              },
+            };
+            /* eslint-enable no-underscore-dangle */
             return (
               <Polygon
                 key={usState.properties.stateCode}
@@ -892,12 +939,9 @@ const SiteMap = (props) => {
           style={{ marginTop: Theme.spacing(1) }}
           message={(
             <div className={classes.startFlex}>
-              <ClickIcon
-                fontSize="large"
-                className={classes.infoSnackbarIcon}
-              />
+              <ClickIcon className={classes.infoSnackbarIcon} />
               <div>
-                <Typography variant="body1">
+                <Typography variant="body2">
                   {/* eslint-disable react/jsx-one-expression-per-line */}
                   Click to <b>{verb} {all}{count} site{plural}</b> {preposition} selection
                   {/* eslint-enable react/jsx-one-expression-per-line */}
@@ -923,7 +967,7 @@ const SiteMap = (props) => {
     const overlayName = ReactDOMServer.renderToStaticMarkup(
       <div className={classes.startFlexInline}>
         <div className={classes.keySwatchDomains} />
-        <div>Neon Domains</div>
+        <div>NEON Domains</div>
       </div>,
     );
     return (
@@ -934,14 +978,33 @@ const SiteMap = (props) => {
             const overlayColor = state.selectedDomains[domainCode]
               ? `${state.selectedDomains[domainCode]}Selected`
               : 'domains';
+            /* eslint-disable no-underscore-dangle */
             const interactionProps = (mode === 'SELECT') ? {
-              onMouseOver: (e) => { e.target.openPopup(); },
-              onMouseOut: (e) => { e.target.closePopup(); },
+              onMouseOver: (e) => {
+                e.target._path.setAttribute('stroke', rootOverlayColors.hover);
+                e.target._path.setAttribute('fill', rootOverlayColors.hover);
+                e.target.openPopup();
+              },
+              onMouseOut: (e) => {
+                e.target._path.setAttribute('stroke', rootOverlayColors[overlayColor]);
+                e.target._path.setAttribute('fill', rootOverlayColors[overlayColor]);
+                e.target.closePopup();
+              },
               onClick: (e) => {
                 e.target._path.blur(); // eslint-disable-line no-underscore-dangle
                 dispatch({ type: 'toggleDomainSelected', domainCode });
               },
-            } : {};
+            } : {
+              onMouseOver: (e) => {
+                e.target._path.setAttribute('stroke', rootOverlayColors.hover);
+                e.target._path.setAttribute('fill', rootOverlayColors.hover);
+              },
+              onMouseOut: (e) => {
+                e.target._path.setAttribute('stroke', rootOverlayColors[overlayColor]);
+                e.target._path.setAttribute('fill', rootOverlayColors[overlayColor]);
+              },
+            };
+            /* eslint-enable no-underscore-dangle */
             return (
               <Polygon
                 key={domain.properties.domainCode}

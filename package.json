@@ -27,7 +27,7 @@
     "prop-types": "^15.7.2",
     "rc-menu": "5.1.4",
     "react": "^16.9.0",
-    "react-copy-to-clipboard": "^5.0.1",
+    "react-copy-to-clipboard": "^5.0.2",
     "react-dom": "^16.8.6",
     "react-highlight.js": "^1.0.7",
     "react-inlinesvg": "^1.2.0",
