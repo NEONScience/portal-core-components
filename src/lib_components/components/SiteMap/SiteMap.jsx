@@ -917,8 +917,7 @@ const SiteMap = (props) => {
                 e.target._path.setAttribute('fill', rootOverlayColors[overlayColor]);
                 e.target.closePopup();
               },
-              onClick: (e) => {
-                e.target._path.blur(); // eslint-disable-line no-underscore-dangle
+              onClick: () => {
                 if (state.stateSites[stateCode].size) {
                   dispatch({ type: 'toggleStateSelected', stateCode });
                 }
@@ -1022,8 +1021,7 @@ const SiteMap = (props) => {
                 e.target._path.setAttribute('fill', rootOverlayColors[overlayColor]);
                 e.target.closePopup();
               },
-              onClick: (e) => {
-                e.target._path.blur(); // eslint-disable-line no-underscore-dangle
+              onClick: () => {
                 dispatch({ type: 'toggleDomainSelected', domainCode });
               },
             } : {
