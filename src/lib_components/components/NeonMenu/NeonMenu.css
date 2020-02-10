@@ -63,6 +63,13 @@
   background-color: #f3f5f5;
 }
 
+li.rc-menu-item a {
+  text-decoration-line: none !important;
+  display: block;
+  white-space: nowrap;
+  padding: 8px 9px;
+}
+
 li.rc-menu-item a,
 li.rc-menu-item a:hover {
   color: black !important;
@@ -74,22 +81,29 @@ li.rc-menu-item-active a:hover {
   color: white !important;
 }
 
-li.rc-menu-item a {
-  text-decoration-line: none !important;
-}
-
 .rc-menu li.rc-menu-submenu ul.rc-menu-sub li.rc-menu-submenu a {
   text-decoration: none !important;
   color: #000 !important;
+  display: block;
+  white-space: nowrap;
+  padding: 12px 30px 12px 24px;
 }
 .rc-menu li.rc-menu-submenu ul.rc-menu-sub li.rc-menu-submenu a:hover {
   color: #fff !important;
 }
 .rc-menu li.rc-menu-submenu-active ul.rc-menu-sub li.rc-menu-submenu-active .rc-menu-submenu-title a {
   color: #fff !important;
+  display: block;
+  white-space: nowrap;
+  padding: 12px 30px 12px 24px;
 }
 .rc-menu li.rc-menu-submenu-active ul.rc-menu-sub li.rc-menu-submenu-active ul.rc-menu-sub li.rc-menu-item-active a {
   color: #fff !important;
+}
+
+.rc-menu-sub li.rc-menu-item a,
+.rc-menu-sub li.rc-menu-submenu div {
+  padding: 12px 30px 12px 24px;
 }
 
 /*imported from rc-menu*/
@@ -171,9 +185,6 @@ li.rc-menu-item a {
 .rc-menu-submenu-title {
   margin: 0;
   position: relative;
-  display: block;
-  padding: 8px 9px 8px 9px;
-  white-space: nowrap;
 }
 .rc-menu-item.rc-menu-item-disabled,
 .rc-menu-submenu-title.rc-menu-item-disabled,
@@ -208,6 +219,7 @@ li.rc-menu-item a {
 }
 .rc-menu-submenu-title {
   cursor: default;
+  padding: 8px 9px;
 }
 .rc-menu-horizontal > .rc-menu-submenu,
 .rc-menu-horizontal > .rc-menu-item {
@@ -223,12 +235,6 @@ li.rc-menu-item a {
 .rc-menu-inline {
   padding: 12px 0;
   z-index: 99999;
-}
-.rc-menu-vertical > .rc-menu-item,
-.rc-menu-inline > .rc-menu-item,
-.rc-menu-vertical > .rc-menu-submenu > .rc-menu-submenu-title,
-.rc-menu-inline > .rc-menu-submenu > .rc-menu-submenu-title {
-  padding: 12px 30px 12px 24px;
 }
 .rc-menu-vertical .rc-menu-submenu-arrow,
 .rc-menu-inline .rc-menu-submenu-arrow {
