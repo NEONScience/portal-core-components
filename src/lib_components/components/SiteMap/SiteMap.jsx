@@ -545,6 +545,29 @@ const SiteMap = (props) => {
   });
 
   /**
+     Utils
+  */
+  // Used only in SELECT mode, or more specifically, only when popups are on mouse over only and
+  // do not persist.
+  const positionPopup = (e) => {
+    /* eslint-disable no-underscore-dangle */
+    const TIP_HEIGHT = 47;
+    e.target._popup.setLatLng(e.latlng);
+    // Leaflet popups always open above; open below if mouse event is in the top half of the map
+    if (e.containerPoint.y < (mapRef.current.container.clientHeight / 2)) {
+      const popupHeight = e.target._popup._contentNode.clientHeight;
+      const tipY = popupHeight + TIP_HEIGHT;
+      e.target._popup._container.style.bottom = `${(popupHeight + (TIP_HEIGHT * 1.75)) * -1}px`;
+      e.target._popup._tipContainer.style.transform = `rotate(0.5turn) translate(0px, ${tipY}px)`;
+    } else {
+      e.target._popup._container.style.bottom = '0px';
+      e.target._popup._tipContainer.style.transform = null;
+    }
+    e.target._popup._closeButton.style.display = 'none';
+    /* eslint-enable no-underscore-dangle */
+  };
+
+  /**
      Secondary Render - Loading and Error states
   */
   if (state.fetchSitesStatus !== 'fetched') {
@@ -579,9 +602,8 @@ const SiteMap = (props) => {
   }
 
   /**
-     Primary Render
+     Render Sites
   */
-
   const renderSitePopup = (site) => {
     let typeTitle = 'Core';
     let typeSubtitle = 'fixed location';
@@ -661,7 +683,7 @@ const SiteMap = (props) => {
       );
     };
     return (
-      <Popup className={classes.popup}>
+      <Popup className={classes.popup} autoPan={mode !== 'SELECT'}>
         <div className={classes.startFlex} style={{ marginBottom: Theme.spacing(1.5) }}>
           {terrainIcon}
           <Typography variant="h6" style={{ lineHeight: '1.4rem' }}>
@@ -766,7 +788,7 @@ const SiteMap = (props) => {
               return null;
             }
             const interactionProps = (mode === 'SELECT') ? {
-              onMouseOver: (e) => { e.target.openPopup(); },
+              onMouseOver: (e) => { e.target.openPopup(); positionPopup(e); },
               onMouseOut: (e) => { e.target.closePopup(); },
               onClick: (e) => {
                 /* eslint-disable no-underscore-dangle */
@@ -823,6 +845,9 @@ const SiteMap = (props) => {
     );
   };
 
+  /**
+     Render US States
+  */
   const renderStatePopup = (stateCode) => {
     if (!statesJSON[stateCode]) { return null; }
     const renderActions = () => {
@@ -853,7 +878,7 @@ const SiteMap = (props) => {
       );
     };
     return (
-      <Popup className={classes.popup}>
+      <Popup className={classes.popup} autoPan={mode !== 'SELECT'}>
         <Typography variant="h6" gutterBottom>
           {`${statesJSON[stateCode].name} (${stateCode})`}
         </Typography>
@@ -884,7 +909,9 @@ const SiteMap = (props) => {
                 e.target._path.setAttribute('stroke', rootOverlayColors.hover);
                 e.target._path.setAttribute('fill', rootOverlayColors.hover);
                 e.target.openPopup();
+                positionPopup(e);
               },
+              onMouseMove: (e) => { positionPopup(e); },
               onMouseOut: (e) => {
                 e.target._path.setAttribute('stroke', rootOverlayColors[overlayColor]);
                 e.target._path.setAttribute('fill', rootOverlayColors[overlayColor]);
@@ -923,6 +950,9 @@ const SiteMap = (props) => {
     );
   };
 
+  /**
+     Render Domains
+  */
   const renderDomainPopup = (domainCode) => {
     if (!domainsJSON[domainCode]) { return null; }
     const renderActions = () => {
@@ -953,7 +983,7 @@ const SiteMap = (props) => {
       );
     };
     return (
-      <Popup className={classes.popup}>
+      <Popup className={classes.popup} autoPan={mode !== 'SELECT'}>
         <Typography variant="h6" gutterBottom>
           {`${domainsJSON[domainCode].name} (${domainCode})`}
         </Typography>
@@ -984,7 +1014,9 @@ const SiteMap = (props) => {
                 e.target._path.setAttribute('stroke', rootOverlayColors.hover);
                 e.target._path.setAttribute('fill', rootOverlayColors.hover);
                 e.target.openPopup();
+                positionPopup(e);
               },
+              onMouseMove: (e) => { positionPopup(e); },
               onMouseOut: (e) => {
                 e.target._path.setAttribute('stroke', rootOverlayColors[overlayColor]);
                 e.target._path.setAttribute('fill', rootOverlayColors[overlayColor]);
@@ -1021,6 +1053,9 @@ const SiteMap = (props) => {
     );
   };
 
+  /**
+     Render Tile Layers
+  */
   const renderTileLayer = (key) => {
     const tileLayer = TILE_LAYERS[key];
     const attributionNode = (
@@ -1041,7 +1076,7 @@ const SiteMap = (props) => {
   };
 
   /**
-     Map event handlers
+     Render the Map
   */
   const handleZoomEnd = (event) => {
     dispatch({ type: 'setZoom', zoom: event.target.getZoom() });
@@ -1051,9 +1086,6 @@ const SiteMap = (props) => {
     dispatch({ type: 'setTileLayer', tileLayer: TILE_LAYERS_BY_NAME[event.name] });
   };
 
-  /**
-     Render the Map
-  */
   return (
     <Map
       ref={mapRef}

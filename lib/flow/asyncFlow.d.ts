@@ -49,7 +49,7 @@ export interface CoreAsyncFlowActionTypes {
     reset: Nullable<string>;
 }
 /**
- * Async flow action type wrapper
+ * Async flow action type wrappe
  */
 export interface AsyncFlowActionTypes extends CoreAsyncFlowActionTypes {
     fetch: string;
