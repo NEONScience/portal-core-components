@@ -1,3 +1,7 @@
+export namespace SITE_MAP_MODES {
+    export const EXPLORE: string;
+    export const SELECT: string;
+}
 export namespace TILE_LAYERS {
     export namespace NatGeo_World_Map {
         export const name: string;
@@ -42,10 +46,9 @@ declare namespace SiteMap {
     export namespace propTypes {
         export const aspectRatio: PropTypes.Requireable<number>;
         export const center: PropTypes.Requireable<(number | null | undefined)[]>;
+        export const mode: PropTypes.Requireable<string>;
         export const zoom: PropTypes.Requireable<number>;
         export const tileLayer: PropTypes.Requireable<string>;
-        export const popupHrefNew: PropTypes.Requireable<boolean>;
-        export const popupExploreDataProductsButton: PropTypes.Requireable<boolean>;
         export const sites: PropTypes.Requireable<PropTypes.Requireable<(PropTypes.InferProps<{
             siteCode: PropTypes.Validator<string>;
             siteDescription: PropTypes.Validator<string>;
@@ -72,14 +75,12 @@ declare namespace SiteMap {
         export { aspectRatio_1 as aspectRatio };
         const center_1: number[];
         export { center_1 as center };
+        const mode_1: string;
+        export { mode_1 as mode };
         const tileLayer_1: string;
         export { tileLayer_1 as tileLayer };
         const zoom_1: null;
         export { zoom_1 as zoom };
-        const popupHrefNew_1: boolean;
-        export { popupHrefNew_1 as popupHrefNew };
-        const popupExploreDataProductsButton_1: boolean;
-        export { popupExploreDataProductsButton_1 as popupExploreDataProductsButton };
         const sites_1: null;
         export { sites_1 as sites };
     }
