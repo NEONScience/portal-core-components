@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 import moment from 'moment';
 
+import { parse } from 'papaparse';
+
 import { of } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 import { map, catchError } from 'rxjs/operators';
@@ -38,9 +40,6 @@ DATA_TYPES: {
   SIGNED_INTEGER: "signed integer",
   UNSIGNED_INTEGER: "unsigned integer",
 }
-SITE: https://data.neonscience.org/api/v0/data/DP1.20264.001/BARC/2020-01
--> VARIABLES: NEON.D03.BARC.DP1.20264.001.variables.20200207T003031Z.csv
--> POSITIONS: NEON.D03.BARC.DP1.20264.001.sensor_positions.20200207T003031Z.csv
 */
 
 // Observables and getters for making and canceling manifest requests
@@ -51,6 +50,42 @@ const getCSV = url => ajax({
   responseType: 'text',
   url,
 });
+
+const TIME_SCALES = {
+  '1min': { id: '1min', seconds: 60 },
+  '2min': { id: '2min', seconds: 120 },
+  '5min': { id: '5min', seconds: 300 },
+  '30min': { id: '30min', seconds: 1800 },
+};
+const getTimeScale = (input) => {
+  let cleaned = input;
+  if (input.includes('_')) {
+    cleaned = input.split('_').slice(1).join('');
+  }
+  if (TIME_SCALES[cleaned]) { return cleaned; }
+  const mapping = {
+    '001': '1min',
+    '002': '2min',
+    '005': '5min',
+    '030': '30min',
+  };
+  if (mapping[cleaned]) { return mapping[cleaned]; }
+  return input;
+};
+
+const getSeriesVariables = (variables, forDefault = false) => (
+  Object.keys(variables).filter((v) => {
+    if (
+      ['startDateTime', 'endDateTime'].includes(v)
+        || variables[v].units === 'NA'
+        || /QF$/.test(v)
+    ) { return false; }
+    if (forDefault && (
+      variables[v].downloadPkg === 'expanded' || /QM$/.test(v)
+    )) { return false; }
+    return true;
+  })
+);
 
 /**
  * Generate a continuous list of "YYYY-MM" strings given an input date range
@@ -101,7 +136,7 @@ const parseProductData = (productData = {}) => {
         positions: { status: FETCH_STATUS.AWAITING_CALL, error: null, url: null },
       },
       availableMonths: site.availableMonths,
-      variables: [],
+      variables: new Set(),
       positions: {},
     };
     const start = site.availableMonths[0];
@@ -125,31 +160,63 @@ const parseSiteMonthData = (site, files) => {
     const position = `${parts[DATA_FILE_PARTS.POSITION_H]}.${parts[DATA_FILE_PARTS.POSITION_V]}`;
     const month = parts[DATA_FILE_PARTS.MONTH];
     const packageType = parts[DATA_FILE_PARTS.PACKAGE_TYPE];
-    const timeScale = parts[DATA_FILE_PARTS.TIME_SCALE];
-    if (!newSite.positions[position]) { newSite.positions[position] = {}; }
-    if (!newSite.positions[position][month]) { newSite.positions[position][month] = {}; }
-    if (!newSite.positions[position][month][packageType]) {
-      newSite.positions[position][month][packageType] = {};
+    const timeScale = getTimeScale(parts[DATA_FILE_PARTS.TIME_SCALE]);
+    if (!newSite.positions[position]) { newSite.positions[position] = { data: {} }; }
+    if (!newSite.positions[position].data[month]) { newSite.positions[position].data[month] = {}; }
+    if (!newSite.positions[position].data[month][packageType]) {
+      newSite.positions[position].data[month][packageType] = {};
     }
-    newSite.positions[position][month][packageType][timeScale] = url;
+    newSite.positions[position].data[month][packageType][timeScale] = url;
   });
   return newSite;
 };
 
-const parseSiteVariables = (state, siteCode, csv) => {
-  const newState = { ...state };
-  console.log('PARSE', siteCode, csv);
-  return newState;
+const CSV_CONFIG = { header: true, skipEmptyLines: 'greedy' };
+
+const parseSiteVariables = (stateVariables, siteCode, csv) => {
+  const newStateVariables = { ...stateVariables };
+  const variables = parse(csv, CSV_CONFIG);
+  const variablesSet = new Set();
+  variables.data.forEach((variable) => {
+    const {
+      dataType,
+      description,
+      downloadPkg,
+      fieldName,
+      table,
+      units,
+    } = variable;
+    const timeScale = getTimeScale(table);
+    variablesSet.add(fieldName);
+    if (!newStateVariables[fieldName]) {
+      newStateVariables[fieldName] = {
+        dataType,
+        description,
+        downloadPkg,
+        units,
+        timeScales: new Set(),
+        sites: new Set(),
+      };
+    }
+    newStateVariables[fieldName].timeScales.add(timeScale);
+    newStateVariables[fieldName].sites.add(siteCode);
+  });
+  return { variablesObject: newStateVariables, variablesSet };
 };
 
-const parseSitePositions = (state, siteCode, csv) => {
-  const newState = { ...state };
-  console.log('PARSE', siteCode, csv);
-  return newState;
+const parseSitePositions = (site, csv) => {
+  const newSite = { ...site };
+  const positions = parse(csv, CSV_CONFIG);
+  positions.data.forEach((position) => {
+    const posId = position['HOR.VER'];
+    if (!newSite.positions[posId]) { newSite.positions[posId] = { data: {} }; }
+    newSite.positions[posId] = { ...position, data: newSite.positions[posId].data };
+  });
+  return newSite;
 };
 
 const applyDefaultsToSelection = (state) => {
-  const { product } = state;
+  const { product, variables } = state;
   const selection = state.selection || { dateRange: [null, null], variables: [], sites: [] };
   if (!Object.keys(product.sites).length) { return selection; }
   // Selection must have at least one site (default to first in list)
@@ -173,6 +240,11 @@ const applyDefaultsToSelection = (state) => {
     positions.sort();
     selection.sites[idx].positions.push(positions[0]);
   });
+  // If the selection has no variables attempt to add one
+  if (!selection.variables.length && Object.keys(variables).length) {
+    const seriesVars = getSeriesVariables(variables, true);
+    if (seriesVars.length) { selection.variables.push(seriesVars[0]); }
+  }
   // Generate a new digest for effect comparison
   selection.digest = JSON.stringify({
     sites: selection.sites,
@@ -183,7 +255,11 @@ const applyDefaultsToSelection = (state) => {
 };
 
 const reducer = (state, action) => {
-  let newState = { ...state };
+  const newState = { ...state };
+  const calcStatus = fetches => (
+    Object.keys(fetches).length ? COMP_STATUS.LOADING : COMP_STATUS.READY
+  );
+  let parsedContent = null;
   switch (action.type) {
     // Fetch Product Actions
     case 'initFetchProductCalled':
@@ -199,56 +275,74 @@ const reducer = (state, action) => {
       newState.product = parseProductData(action.productData);
       newState.selection = applyDefaultsToSelection(newState);
       newState.status = COMP_STATUS.LOADING;
-      console.log(action, newState);
       return newState;
+
     // Fetch Site Month Actions
     case 'fetchSiteMonth':
+      newState.fetches[`fetchSiteMonth.${action.siteCode}.${action.month}`] = true;
       newState.product.sites[action.siteCode].fetches[action.month] = {
         status: FETCH_STATUS.FETCHING, error: null,
       };
       return newState;
     case 'fetchSiteMonthFailed':
+      delete newState.fetches[`fetchSiteMonth.${action.siteCode}.${action.month}`];
       newState.product.sites[action.siteCode].fetches[action.month].status = FETCH_STATUS.ERROR;
       newState.product.sites[action.siteCode].fetches[action.month].error = action.error;
+      newState.status = calcStatus(newState.fetches);
       return newState;
     case 'fetchSiteMonthSucceeded':
+      delete newState.fetches[`fetchSiteMonth.${action.siteCode}.${action.month}`];
       newState.product.sites[action.siteCode].fetches[action.month].status = FETCH_STATUS.SUCCESS;
       newState.product.sites[action.siteCode] = parseSiteMonthData(
         newState.product.sites[action.siteCode], action.files,
       );
       newState.selection = applyDefaultsToSelection(newState);
-      console.log(action, newState);
+      newState.status = calcStatus(newState.fetches);
       return newState;
+
     // Fetch Site Variables Actions
     case 'fetchSiteVariables':
+      newState.fetches[`fetchSiteVariables.${action.siteCode}`] = true;
       newState.product.sites[action.siteCode].fetches.variables.status = FETCH_STATUS.FETCHING;
-      console.log(action, newState);
       return newState;
     case 'fetchSiteVariablesFailed':
+      delete newState.fetches[`fetchSiteVariables.${action.siteCode}`];
       newState.product.sites[action.siteCode].fetches.variables.status = FETCH_STATUS.ERROR;
       newState.product.sites[action.siteCode].fetches.variables.error = action.error;
+      newState.status = calcStatus(newState.fetches);
       return newState;
     case 'fetchSiteVariablesSucceeded':
+      delete newState.fetches[`fetchSiteVariables.${action.siteCode}`];
       newState.product.sites[action.siteCode].fetches.variables.status = FETCH_STATUS.SUCCESS;
-      newState = parseSiteVariables(newState, action.siteCode, action.csv);
+      parsedContent = parseSiteVariables(newState.variables, action.siteCode, action.csv);
+      newState.variables = parsedContent.variablesObject;
+      newState.product.sites[action.siteCode].variables = parsedContent.variablesSet;
       newState.selection = applyDefaultsToSelection(newState);
-      console.log(action, newState);
+      newState.status = calcStatus(newState.fetches);
       return newState;
+
     // Fetch Site Positions Actions
     case 'fetchSitePositions':
+      newState.fetches[`fetchSitePositions.${action.siteCode}`] = true;
       newState.product.sites[action.siteCode].fetches.positions.status = FETCH_STATUS.FETCHING;
-      console.log(action, newState);
       return newState;
     case 'fetchSitePositionsFailed':
+      delete newState.fetches[`fetchSitePositions.${action.siteCode}`];
       newState.product.sites[action.siteCode].fetches.positions.status = FETCH_STATUS.ERROR;
       newState.product.sites[action.siteCode].fetches.positions.error = action.error;
+      newState.status = calcStatus(newState.fetches);
       return newState;
     case 'fetchSitePositionsSucceeded':
+      delete newState.fetches[`fetchSitePositions.${action.siteCode}`];
       newState.product.sites[action.siteCode].fetches.positions.status = FETCH_STATUS.SUCCESS;
-      newState = parseSitePositions(newState, action.siteCode, action.csv);
+      newState.product.sites[action.siteCode] = parseSitePositions(
+        newState.product.sites[action.siteCode], action.csv,
+      );
       newState.selection = applyDefaultsToSelection(newState);
-      console.log(action, newState);
+      newState.status = calcStatus(newState.fetches);
       return newState;
+
+    // Default
     default:
       return state;
   }
@@ -268,7 +362,8 @@ export default function TimeSeriesViewer(props) {
   const initialState = {
     status: productDataProp ? COMP_STATUS.LOADING : COMP_STATUS.INIT_PRODUCT,
     fetchProduct: { status: productFetchStatus, error: null },
-    fetches: [],
+    fetches: {},
+    variables: [],
     product: productDataProp ? parseProductData(productDataProp) : {
       productCode,
       productName: null,
@@ -407,14 +502,18 @@ state = {
         variables: [],
         positions: {
           '000.000': {
-            '2019-01': {
-              'BASIC': {
-                '001': 'https://...',
-                '030': 'https://...',
-              },
-              'EXPANDED': {
-                '001': 'https://...',
-                '030': 'https://...',
+            xOffset: '...',
+            yOffset: '...',
+            data: {
+              '2019-01': {
+                'BASIC': {
+                  '001': 'https://...',
+                  '030': 'https://...',
+                },
+                'EXPANDED': {
+                  '001': 'https://...',
+                  '030': 'https://...',
+                },
               },
             },
           },
