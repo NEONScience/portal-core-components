@@ -42,6 +42,7 @@ import TimeSeriesViewer from 'portal-core-components/lib/components/TimeSeriesVi
         ...
       </DocBlock>
 
+      {/*
       <ExampleBlock>
         <TimeSeriesViewer productCode="DP1.00001.001" />
       </ExampleBlock>
@@ -50,6 +51,7 @@ import TimeSeriesViewer from 'portal-core-components/lib/components/TimeSeriesVi
 <TimeSeriesViewer productCode="DP1.00001.001" />
         `}
       </CodeBlock>
+      */}
 
       <ExampleBlock>
         <TimeSeriesViewer productData={sampleProductData.data} />
