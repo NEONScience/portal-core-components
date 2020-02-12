@@ -34,6 +34,7 @@ declare function useTimeSeriesViewerState(): {
         productDescription: null;
         productSensor: null;
         dateRange: null[];
+        continuousDateRange: never[];
         variables: {};
         sites: {};
     };
@@ -56,6 +57,7 @@ declare function useTimeSeriesViewerState(): {
         productDescription: null;
         productSensor: null;
         dateRange: null[];
+        continuousDateRange: never[];
         variables: {};
         sites: {};
     };

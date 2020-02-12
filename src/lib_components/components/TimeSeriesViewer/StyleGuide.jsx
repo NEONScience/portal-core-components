@@ -13,7 +13,7 @@ import ExampleBlock from '../../../components/ExampleBlock';
 import TimeSeriesViewer from './TimeSeriesViewer';
 import Theme from '../Theme/Theme';
 
-import sampleProductData from '../../../sampleData/DP1.00001.001.json';
+// import sampleProductData from '../../../sampleData/DP1.00001.001.json';
 
 const useStyles = makeStyles(theme => ({
   divider: {
@@ -42,7 +42,7 @@ import TimeSeriesViewer from 'portal-core-components/lib/components/TimeSeriesVi
         ...
       </DocBlock>
 
-      {/*
+
       <ExampleBlock>
         <TimeSeriesViewer productCode="DP1.00001.001" />
       </ExampleBlock>
@@ -51,8 +51,8 @@ import TimeSeriesViewer from 'portal-core-components/lib/components/TimeSeriesVi
 <TimeSeriesViewer productCode="DP1.00001.001" />
         `}
       </CodeBlock>
-      */}
 
+      {/*
       <ExampleBlock>
         <TimeSeriesViewer productData={sampleProductData.data} />
       </ExampleBlock>
@@ -69,6 +69,7 @@ return (
 );
         `}
       </CodeBlock>
+      */}
 
       <Divider className={classes.divider} />
       <Typography variant="h6" component="h4" gutterBottom>...</Typography>

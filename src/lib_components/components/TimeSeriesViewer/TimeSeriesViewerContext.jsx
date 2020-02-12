@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import React, {
   createContext,
   useContext,
@@ -61,6 +60,7 @@ const DEFAULT_STATE = {
     productDescription: null,
     productSensor: null,
     dateRange: [null, null],
+    continuousDateRange: [],
     variables: {},
     sites: {},
   },
@@ -136,21 +136,21 @@ const getContinuousDatesArray = (dateRange, roundToYears = false) => {
     return [];
   }
   if (dateRange[0] === dateRange[1]) { return dateRange; }
-  let startMoment = moment(`${dateRange[0]}-10`);
-  let endMoment = moment(`${dateRange[1]}-20`).add(1, 'months');
+  let startMoment = moment(`${dateRange[0]}-20`);
+  let endMoment = moment(`${dateRange[1]}-10`).add(1, 'months');
   if (roundToYears) {
-    startMoment = moment(`${dateRange[0]}-10`).startOf('year');
-    endMoment = moment(`${dateRange[1]}-20`).endOf('year').add(1, 'months');
+    startMoment = moment(`${dateRange[0]}-20`).startOf('year');
+    endMoment = moment(`${dateRange[1]}-10`).endOf('year').add(1, 'months');
   }
-  const contionuousRange = [];
+  const continuousRange = [];
   let months = 0;
   const MAX_MONTHS = 960; // If we're going more than 80 years then maybe something is wrong?
   while (startMoment.isBefore(endMoment) && months < MAX_MONTHS) {
-    contionuousRange.push(startMoment.format('YYYY-MM'));
+    continuousRange.push(startMoment.format('YYYY-MM'));
     startMoment.add(1, 'months');
     months += 1;
   }
-  return contionuousRange;
+  return continuousRange;
 };
 
 const parseProductData = (productData = {}) => {
@@ -181,6 +181,7 @@ const parseProductData = (productData = {}) => {
       acc[1] === null || acc[1] < end ? end : acc[1],
     ];
   }, [null, null]);
+  product.continuousDateRange = getContinuousDatesArray(product.dateRange, true);
   return product;
 };
 
@@ -357,7 +358,6 @@ const reducer = (state, action) => {
       newState.product.sites[action.siteCode].variables = parsedContent.variablesSet;
       newState.selection = applyDefaultsToSelection(newState);
       newState.status = calcStatus(newState.fetches);
-      console.log('NEWSTATE', newState);
       return newState;
 
     // Fetch Site Positions Actions
@@ -377,6 +377,13 @@ const reducer = (state, action) => {
       newState.product.sites[action.siteCode] = parseSitePositions(
         newState.product.sites[action.siteCode], action.csv,
       );
+      newState.selection = applyDefaultsToSelection(newState);
+      newState.status = calcStatus(newState.fetches);
+      return newState;
+
+    // Selection Actions
+    case 'selectDateRange':
+      newState.selection.dateRange = action.dateRange;
       newState.selection = applyDefaultsToSelection(newState);
       newState.status = calcStatus(newState.fetches);
       return newState;
@@ -413,11 +420,6 @@ const Provider = (props) => {
   initialState.selection = applyDefaultsToSelection(initialState);
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const getSiteMonthDataURL = (siteCode, month) => {
-    const root = NeonEnvironment.getFullApiPath('data');
-    return `${root}/${state.product.productCode}/${siteCode}/${month}?presign=false`;
-  };
-
   /**
      Effect - Fetch product data if only a product code was provided in props
      COMP_STATUS: INIT_PRODUCT
@@ -449,6 +451,10 @@ const Provider = (props) => {
      Effect - Handle changes to selection
   */
   useEffect(() => {
+    const getSiteMonthDataURL = (siteCode, month) => {
+      const root = NeonEnvironment.getFullApiPath('data');
+      return `${root}/${state.product.productCode}/${siteCode}/${month}?presign=false`;
+    };
     const continuousDateRange = getContinuousDatesArray(state.selection.dateRange);
     state.selection.sites.forEach((site) => {
       const { siteCode } = site;
@@ -462,7 +468,7 @@ const Provider = (props) => {
             return of(true);
           }),
           catchError((error) => {
-            dispatch({ type: 'fetchSiteVariablesFailed', error: error.message });
+            dispatch({ type: 'fetchSiteVariablesFailed', error: error.message, siteCode });
             return of(false);
           }),
         ).subscribe();
@@ -476,7 +482,7 @@ const Provider = (props) => {
             return of(true);
           }),
           catchError((error) => {
-            dispatch({ type: 'fetchSitePositionsFailed', error: error.message });
+            dispatch({ type: 'fetchSitePositionsFailed', error: error.message, siteCode });
             return of(false);
           }),
         ).subscribe();
@@ -495,17 +501,27 @@ const Provider = (props) => {
               });
               return of(true);
             }
-            dispatch({ type: 'fetchSiteMonthFailed', error: 'malformed response' });
+            dispatch({
+              type: 'fetchSiteMonthFailed',
+              error: 'malformed response',
+              siteCode,
+              month,
+            });
             return of(false);
           }),
           catchError((error) => {
-            dispatch({ type: 'fetchSiteMonthFailed', error: error.message });
+            dispatch({
+              type: 'fetchSiteMonthFailed',
+              error: error.message,
+              siteCode,
+              month,
+            });
             return of(false);
           }),
         ).subscribe();
       });
     });
-  }, [state.selection, state.selection.digest, state.product.sites]);
+  }, [state.selection, state.selection.digest, state.product.sites, state.product.productCode]);
 
   /**
      Render
