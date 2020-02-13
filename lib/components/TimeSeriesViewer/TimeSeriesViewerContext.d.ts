@@ -28,6 +28,7 @@ declare function useTimeSeriesViewerState(): {
     };
     fetches: {};
     variables: {};
+    selectableVariables: never[];
     product: {
         productCode: null;
         productName: null;
@@ -51,6 +52,7 @@ declare function useTimeSeriesViewerState(): {
     };
     fetches: {};
     variables: {};
+    selectableVariables: never[];
     product: {
         productCode: null;
         productName: null;

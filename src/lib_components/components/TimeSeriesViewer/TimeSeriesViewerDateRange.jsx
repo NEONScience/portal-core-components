@@ -92,11 +92,6 @@ const TimeSeriesViewerDateRange = (props) => {
   const sliderMin = displayRange.indexOf(selectableRange[0]);
   const sliderMax = displayRange.indexOf(selectableRange[1]);
 
-  const getBoundedRange = values => [
-    Math.max(values[0], sliderMin),
-    Math.min(values[1], sliderMax),
-  ];
-
   // Function to apply changes to the slider's DOM as if it was controlled by state.
   // We can't control in state because doing so makes drag experience jerky and frustrating.
   // By not controlling the slider with state we can maintain a fluid experience and need
@@ -108,7 +103,7 @@ const TimeSeriesViewerDateRange = (props) => {
         || values[0] > values[1]) {
       return;
     }
-    const limited = getBoundedRange(values);
+    const limited = [Math.max(values[0], sliderMin), Math.min(values[1], sliderMax)];
 
     // Derive new percentage values for left and width styles of slider DOM elements
     const newLefts = [
@@ -138,7 +133,7 @@ const TimeSeriesViewerDateRange = (props) => {
     dateRangeSliderRef.current.querySelector('.MuiSlider-track').style.width = newTrackWidth;
     // eslint-disable-next-line prefer-destructuring
     dateRangeSliderRef.current.querySelector('.MuiSlider-track').style.left = newLefts[0];
-  }, [dateRangeSliderRef, displayRange, displayMax]);
+  }, [dateRangeSliderRef, displayRange, displayMax, sliderMin, sliderMax]);
 
   useEffect(() => {
     if (!dateRangeSliderRef.current) { return; }
@@ -216,7 +211,10 @@ const TimeSeriesViewerDateRange = (props) => {
         onChangeCommitted={(event, values) => {
           dispatch({
             type: 'selectDateRange',
-            dateRange: getBoundedRange(values).map(x => displayRange[x]),
+            dateRange: [
+              Math.max(values[0], sliderMin),
+              Math.min(values[1], sliderMax),
+            ].map(x => displayRange[x]),
           });
         }}
       />

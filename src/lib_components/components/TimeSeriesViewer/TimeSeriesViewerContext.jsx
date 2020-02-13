@@ -54,6 +54,7 @@ const DEFAULT_STATE = {
   fetchProduct: { status: FETCH_STATUS.AWAITING_CALL, error: null },
   fetches: {},
   variables: {},
+  selectableVariables: [],
   product: {
     productCode: null,
     productName: null,
@@ -78,13 +79,17 @@ const useTimeSeriesViewerState = () => {
   return hookResponse;
 };
 
+/**
+   CSV Fetch/Parse Functions
+*/
 // const siteMonthCancelation$ = new Subject();
-const getCSV = url => ajax({
+const fetchCSV = url => ajax({
   method: 'GET',
   crossDomain: true,
   responseType: 'text',
   url,
 });
+const parseCSV = csv => parse(csv, { header: true, skipEmptyLines: 'greedy' });
 
 const TIME_SCALES = {
   '1min': { id: '1min', seconds: 60 },
@@ -107,20 +112,6 @@ const getTimeScale = (input) => {
   if (mapping[cleaned]) { return mapping[cleaned]; }
   return input;
 };
-
-const getSeriesVariables = (variables, forDefault = false) => (
-  Object.keys(variables).filter((v) => {
-    if (
-      ['startDateTime', 'endDateTime'].includes(v)
-        || variables[v].units === 'NA'
-        || /QF$/.test(v)
-    ) { return false; }
-    if (forDefault && (
-      variables[v].downloadPkg === 'expanded' || /QM$/.test(v)
-    )) { return false; }
-    return true;
-  })
-);
 
 /**
  * Generate a continuous list of "YYYY-MM" strings given an input date range
@@ -207,11 +198,9 @@ const parseSiteMonthData = (site, files) => {
   return newSite;
 };
 
-const CSV_CONFIG = { header: true, skipEmptyLines: 'greedy' };
-
 const parseSiteVariables = (stateVariables, siteCode, csv) => {
   const newStateVariables = { ...stateVariables };
-  const variables = parse(csv, CSV_CONFIG);
+  const variables = parseCSV(csv);
   const variablesSet = new Set();
   variables.data.forEach((variable) => {
     const {
@@ -223,6 +212,12 @@ const parseSiteVariables = (stateVariables, siteCode, csv) => {
       units,
     } = variable;
     const timeScale = getTimeScale(table);
+    const isSelectable = variable.dataType !== 'dateTime'
+      && variable.units !== 'NA'
+      && !/QF/.test(fieldName);
+    const canBeDefault = isSelectable
+      && variable.downloadPkg !== 'expanded'
+      && !/QM/.test(fieldName);
     variablesSet.add(fieldName);
     if (!newStateVariables[fieldName]) {
       newStateVariables[fieldName] = {
@@ -232,17 +227,19 @@ const parseSiteVariables = (stateVariables, siteCode, csv) => {
         units,
         timeScales: new Set(),
         sites: new Set(),
+        isSelectable,
+        canBeDefault,
       };
     }
     newStateVariables[fieldName].timeScales.add(timeScale);
     newStateVariables[fieldName].sites.add(siteCode);
   });
-  return { variablesObject: newStateVariables, variablesSet };
+  return { variablesSet, variablesObject: newStateVariables };
 };
 
 const parseSitePositions = (site, csv) => {
   const newSite = { ...site };
-  const positions = parse(csv, CSV_CONFIG);
+  const positions = parseCSV(csv);
   positions.data.forEach((position) => {
     const posId = position['HOR.VER'];
     if (!newSite.positions[posId]) { newSite.positions[posId] = { data: {} }; }
@@ -278,8 +275,8 @@ const applyDefaultsToSelection = (state) => {
   });
   // If the selection has no variables attempt to add one
   if (!selection.variables.length && Object.keys(variables).length) {
-    const seriesVars = getSeriesVariables(variables, true);
-    if (seriesVars.length) { selection.variables.push(seriesVars[0]); }
+    const defaultVar = Object.keys(variables).find(variable => variables[variable].canBeDefault);
+    if (defaultVar) { selection.variables.push(defaultVar); }
   }
   // Generate a new digest for effect comparison
   selection.digest = JSON.stringify({
@@ -387,6 +384,11 @@ const reducer = (state, action) => {
       newState.selection = applyDefaultsToSelection(newState);
       newState.status = calcStatus(newState.fetches);
       return newState;
+    case 'selectVariables':
+      newState.selection.variables = action.variables;
+      newState.selection = applyDefaultsToSelection(newState);
+      newState.status = calcStatus(newState.fetches);
+      return newState;
 
     // Default
     default:
@@ -462,7 +464,7 @@ const Provider = (props) => {
       // Fetch variables for any sites in seleciton that haven't had variables fetched
       if (fetches.variables.status === FETCH_STATUS.AWAITING_CALL && fetches.variables.url) {
         dispatch({ type: 'fetchSiteVariables', siteCode });
-        getCSV(fetches.variables.url).pipe(
+        fetchCSV(fetches.variables.url).pipe(
           map((response) => {
             dispatch({ type: 'fetchSiteVariablesSucceeded', csv: response.response, siteCode });
             return of(true);
@@ -476,7 +478,7 @@ const Provider = (props) => {
       // Fetch positions for any sites in seleciton that haven't had positions fetched
       if (fetches.positions.status === FETCH_STATUS.AWAITING_CALL && fetches.positions.url) {
         dispatch({ type: 'fetchSitePositions', siteCode });
-        getCSV(fetches.positions.url).pipe(
+        fetchCSV(fetches.positions.url).pipe(
           map((response) => {
             dispatch({ type: 'fetchSitePositionsSucceeded', csv: response.response, siteCode });
             return of(true);
