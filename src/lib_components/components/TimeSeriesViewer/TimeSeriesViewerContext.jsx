@@ -7,15 +7,23 @@ import React, {
 import PropTypes from 'prop-types';
 
 import moment from 'moment';
+import uniqueId from 'lodash/uniqueId';
 
 import { parse } from 'papaparse';
 
-import { of } from 'rxjs';
+import { of, merge } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
-import { map, catchError } from 'rxjs/operators';
+import {
+  map,
+  tap,
+  mergeMap,
+  catchError,
+  ignoreElements,
+} from 'rxjs/operators';
 
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
+import { forkJoinWithProgress } from '../../util/rxUtil';
 
 const FETCH_STATUS = {
   AWAITING_CALL: 'AWAITING_CALL',
@@ -25,7 +33,9 @@ const FETCH_STATUS = {
 };
 const COMP_STATUS = {
   INIT_PRODUCT: 'INIT_PRODUCT', // Handling props; fetching product data if needed
-  LOADING: 'LOADING', // Actively loading site and/or series data
+  LOADING_META: 'LOADING_META', // Actively loading meta data (sites, variables, and positions)
+  READY_FOR_DATA: 'READY_FOR_DATA', // Ready to trigger fetches for data
+  LOADING_DATA: 'LOADING_DATA', // Actively loading plottable series data
   ERROR: 'ERROR', // Stop everything because problem
   READY: 'READY', // Ready for user input
 };
@@ -37,22 +47,15 @@ const DATA_FILE_PARTS = {
   PACKAGE_TYPE: 11,
 };
 
-/*
-DATA_TYPES: {
-  DATE_TIME: "dateTime",
-  REAL: "real",
-  SIGNED_INTEGER: "signed integer",
-  UNSIGNED_INTEGER: "unsigned integer",
-}
-*/
-
 /**
    Context and Hook Setup
 */
 const DEFAULT_STATE = {
   status: COMP_STATUS.INIT_PRODUCT,
   fetchProduct: { status: FETCH_STATUS.AWAITING_CALL, error: null },
-  fetches: {},
+  metaFetches: {},
+  dataFetches: {},
+  dataFetchProgress: 0,
   variables: {},
   selectableVariables: [],
   product: {
@@ -66,6 +69,9 @@ const DEFAULT_STATE = {
     sites: {},
   },
   selection: { dateRange: [null, null], variables: [], sites: [] },
+  options: {
+    timeScale: '30min',
+  },
 };
 const Context = createContext(DEFAULT_STATE);
 const useTimeSeriesViewerState = () => {
@@ -91,6 +97,9 @@ const fetchCSV = url => ajax({
 });
 const parseCSV = csv => parse(csv, { header: true, skipEmptyLines: 'greedy' });
 
+/**
+   Time Scale Definitions and Functions
+*/
 const TIME_SCALES = {
   '1min': { id: '1min', seconds: 60 },
   '2min': { id: '2min', seconds: 120 },
@@ -141,8 +150,12 @@ const getContinuousDatesArray = (dateRange, roundToYears = false) => {
     startMoment.add(1, 'months');
     months += 1;
   }
+  if (continuousRange.length === 2 && continuousRange[0] === continuousRange[1]) {
+    return [continuousRange[0]];
+  }
   return continuousRange;
 };
+console.log(getContinuousDatesArray);
 
 const parseProductData = (productData = {}) => {
   const product = {
@@ -193,7 +206,12 @@ const parseSiteMonthData = (site, files) => {
     if (!newSite.positions[position].data[month][packageType]) {
       newSite.positions[position].data[month][packageType] = {};
     }
-    newSite.positions[position].data[month][packageType][timeScale] = url;
+    newSite.positions[position].data[month][packageType][timeScale] = {
+      url,
+      status: FETCH_STATUS.AWAITING_CALL,
+      error: null,
+      series: {},
+    };
   });
   return newSite;
 };
@@ -248,6 +266,18 @@ const parseSitePositions = (site, csv) => {
   return newSite;
 };
 
+const parseSeriesData = (csv) => {
+  const series = parseCSV(csv);
+  /*
+    GOAL: go from this:
+      [ { var1: 'A', var2: 'B', var3: 'C' }, { var1: 'D', var2: 'E', var3: 'F' } ]
+    ...to this:
+      { var1: ['A', 'D'], var2: ['B', 'E'], var3: ['C', 'F'] }
+  */
+  console.log(series);
+  return series;
+};
+
 const applyDefaultsToSelection = (state) => {
   const { product, variables } = state;
   const selection = state.selection || { dateRange: [null, null], variables: [], sites: [] };
@@ -292,9 +322,44 @@ const applyDefaultsToSelection = (state) => {
 */
 const reducer = (state, action) => {
   const newState = { ...state };
-  const calcStatus = fetches => (
-    Object.keys(fetches).length ? COMP_STATUS.LOADING : COMP_STATUS.READY
-  );
+  const calcSelection = () => {
+    newState.selection = applyDefaultsToSelection(newState);
+  };
+  const calcStatus = () => {
+    if (Object.keys(newState.metaFetches).length) {
+      newState.status = COMP_STATUS.LOADING_META;
+    } else if (Object.keys(newState.dataFetches).length) {
+      newState.status = COMP_STATUS.LOADING_DATA;
+    } else {
+      newState.status = COMP_STATUS.READY_FOR_DATA;
+    }
+  };
+  const limitVariablesToTwoUnits = (variables) => {
+    const selectedUnits = state.selection.variables.reduce((units, variable) => {
+      units.add(state.variables[variable].units);
+      return units;
+    }, new Set());
+    if (selectedUnits.size < 2) {
+      return variables;
+    }
+    return variables.filter(variable => selectedUnits.has(state.variables[variable].units));
+  };
+  const setDataFileFetchStatuses = (fetches) => {
+    fetches.forEach((fetch) => {
+      const {
+        siteCode,
+        position,
+        month,
+        downloadPkg,
+        timeScale,
+      } = fetch;
+      newState.product
+        .sites[siteCode]
+        .positions[position]
+        .data[month][downloadPkg][timeScale]
+        .status = FETCH_STATUS.FETCHING;
+    });
+  };
   let parsedContent = null;
   switch (action.type) {
     // Fetch Product Actions
@@ -309,85 +374,132 @@ const reducer = (state, action) => {
     case 'initFetchProductSucceeded':
       newState.fetchProduct.status = FETCH_STATUS.SUCCESS;
       newState.product = parseProductData(action.productData);
-      newState.selection = applyDefaultsToSelection(newState);
-      newState.status = COMP_STATUS.LOADING;
+      calcSelection();
+      newState.status = COMP_STATUS.LOADING_META;
       return newState;
 
     // Fetch Site Month Actions
     case 'fetchSiteMonth':
-      newState.fetches[`fetchSiteMonth.${action.siteCode}.${action.month}`] = true;
+      newState.metaFetches[`fetchSiteMonth.${action.siteCode}.${action.month}`] = true;
       newState.product.sites[action.siteCode].fetches[action.month] = {
         status: FETCH_STATUS.FETCHING, error: null,
       };
+      newState.status = COMP_STATUS.LOADING_META;
       return newState;
     case 'fetchSiteMonthFailed':
-      delete newState.fetches[`fetchSiteMonth.${action.siteCode}.${action.month}`];
+      delete newState.metaFetches[`fetchSiteMonth.${action.siteCode}.${action.month}`];
       newState.product.sites[action.siteCode].fetches[action.month].status = FETCH_STATUS.ERROR;
       newState.product.sites[action.siteCode].fetches[action.month].error = action.error;
-      newState.status = calcStatus(newState.fetches);
+      calcStatus();
       return newState;
     case 'fetchSiteMonthSucceeded':
-      delete newState.fetches[`fetchSiteMonth.${action.siteCode}.${action.month}`];
+      delete newState.metaFetches[`fetchSiteMonth.${action.siteCode}.${action.month}`];
       newState.product.sites[action.siteCode].fetches[action.month].status = FETCH_STATUS.SUCCESS;
       newState.product.sites[action.siteCode] = parseSiteMonthData(
         newState.product.sites[action.siteCode], action.files,
       );
-      newState.selection = applyDefaultsToSelection(newState);
-      newState.status = calcStatus(newState.fetches);
+      calcSelection();
+      calcStatus();
       return newState;
 
     // Fetch Site Variables Actions
     case 'fetchSiteVariables':
-      newState.fetches[`fetchSiteVariables.${action.siteCode}`] = true;
+      newState.metaFetches[`fetchSiteVariables.${action.siteCode}`] = true;
       newState.product.sites[action.siteCode].fetches.variables.status = FETCH_STATUS.FETCHING;
+      newState.status = COMP_STATUS.LOADING_META;
       return newState;
     case 'fetchSiteVariablesFailed':
-      delete newState.fetches[`fetchSiteVariables.${action.siteCode}`];
+      delete newState.metaFetches[`fetchSiteVariables.${action.siteCode}`];
       newState.product.sites[action.siteCode].fetches.variables.status = FETCH_STATUS.ERROR;
       newState.product.sites[action.siteCode].fetches.variables.error = action.error;
-      newState.status = calcStatus(newState.fetches);
+      calcStatus();
       return newState;
     case 'fetchSiteVariablesSucceeded':
-      delete newState.fetches[`fetchSiteVariables.${action.siteCode}`];
+      delete newState.metaFetches[`fetchSiteVariables.${action.siteCode}`];
       newState.product.sites[action.siteCode].fetches.variables.status = FETCH_STATUS.SUCCESS;
       parsedContent = parseSiteVariables(newState.variables, action.siteCode, action.csv);
       newState.variables = parsedContent.variablesObject;
       newState.product.sites[action.siteCode].variables = parsedContent.variablesSet;
-      newState.selection = applyDefaultsToSelection(newState);
-      newState.status = calcStatus(newState.fetches);
+      calcSelection();
+      calcStatus();
       return newState;
 
     // Fetch Site Positions Actions
     case 'fetchSitePositions':
-      newState.fetches[`fetchSitePositions.${action.siteCode}`] = true;
+      newState.metaFetches[`fetchSitePositions.${action.siteCode}`] = true;
       newState.product.sites[action.siteCode].fetches.positions.status = FETCH_STATUS.FETCHING;
+      newState.status = COMP_STATUS.LOADING_META;
       return newState;
     case 'fetchSitePositionsFailed':
-      delete newState.fetches[`fetchSitePositions.${action.siteCode}`];
+      delete newState.metaFetches[`fetchSitePositions.${action.siteCode}`];
       newState.product.sites[action.siteCode].fetches.positions.status = FETCH_STATUS.ERROR;
       newState.product.sites[action.siteCode].fetches.positions.error = action.error;
-      newState.status = calcStatus(newState.fetches);
+      calcStatus();
       return newState;
     case 'fetchSitePositionsSucceeded':
-      delete newState.fetches[`fetchSitePositions.${action.siteCode}`];
+      delete newState.metaFetches[`fetchSitePositions.${action.siteCode}`];
       newState.product.sites[action.siteCode].fetches.positions.status = FETCH_STATUS.SUCCESS;
       newState.product.sites[action.siteCode] = parseSitePositions(
         newState.product.sites[action.siteCode], action.csv,
       );
-      newState.selection = applyDefaultsToSelection(newState);
-      newState.status = calcStatus(newState.fetches);
+      calcSelection();
+      calcStatus();
+      return newState;
+
+    // Fetch Data Actions (Many Files)
+    case 'fetchDataFiles':
+      newState.dataFetches[action.token] = true;
+      setDataFileFetchStatuses(action.fetches);
+      newState.dataFetchProgress = 0;
+      newState.status = COMP_STATUS.LOADING_DATA;
+      return newState;
+    case 'fetchDataFilesProgress':
+      newState.dataFetchProgress = action.value;
+      return newState;
+    case 'fetchDataFilesCompleted':
+      delete newState.dataFetches[action.token];
+      newState.status = COMP_STATUS.READY;
+      return newState;
+    case 'noDataFilesFetchNecessary':
+      newState.status = COMP_STATUS.READY;
+      return newState;
+
+    // Fetch Data Actions (Single File)
+    case 'fetchDataFileFailed':
+      newState.product
+        .sites[action.siteCode]
+        .positions[action.position]
+        .data[action.month][action.downloadPkg][action.timeScale]
+        .status = FETCH_STATUS.ERROR;
+      newState.product
+        .sites[action.siteCode]
+        .positions[action.position]
+        .data[action.month][action.downloadPkg][action.timeScale]
+        .error = action.error;
+      return newState;
+    case 'fetchDataFileSucceeded':
+      newState.product
+        .sites[action.siteCode]
+        .positions[action.position]
+        .data[action.month][action.downloadPkg][action.timeScale]
+        .status = FETCH_STATUS.SUCCESS;
+      newState.product
+        .sites[action.siteCode]
+        .positions[action.position]
+        .data[action.month][action.downloadPkg][action.timeScale]
+        .series = parseSeriesData(action.csv);
       return newState;
 
     // Selection Actions
     case 'selectDateRange':
       newState.selection.dateRange = action.dateRange;
-      newState.selection = applyDefaultsToSelection(newState);
-      newState.status = calcStatus(newState.fetches);
+      calcSelection();
+      calcStatus();
       return newState;
     case 'selectVariables':
-      newState.selection.variables = action.variables;
-      newState.selection = applyDefaultsToSelection(newState);
-      newState.status = calcStatus(newState.fetches);
+      newState.selection.variables = limitVariablesToTwoUnits(action.variables);
+      calcSelection();
+      calcStatus();
       return newState;
 
     // Default
@@ -411,7 +523,7 @@ const Provider = (props) => {
   */
   const initialState = {
     ...DEFAULT_STATE,
-    status: productDataProp ? COMP_STATUS.LOADING : COMP_STATUS.INIT_PRODUCT,
+    status: productDataProp ? COMP_STATUS.LOADING_META : COMP_STATUS.INIT_PRODUCT,
   };
   if (productDataProp) {
     initialState.fetchProduct.status = FETCH_STATUS.SUCCESS;
@@ -457,39 +569,41 @@ const Provider = (props) => {
       const root = NeonEnvironment.getFullApiPath('data');
       return `${root}/${state.product.productCode}/${siteCode}/${month}?presign=false`;
     };
+    const { timeScale } = state.options;
     const continuousDateRange = getContinuousDatesArray(state.selection.dateRange);
-    state.selection.sites.forEach((site) => {
-      const { siteCode } = site;
-      const { fetches } = state.product.sites[siteCode];
-      // Fetch variables for any sites in seleciton that haven't had variables fetched
-      if (fetches.variables.status === FETCH_STATUS.AWAITING_CALL && fetches.variables.url) {
-        dispatch({ type: 'fetchSiteVariables', siteCode });
-        fetchCSV(fetches.variables.url).pipe(
-          map((response) => {
-            dispatch({ type: 'fetchSiteVariablesSucceeded', csv: response.response, siteCode });
-            return of(true);
-          }),
-          catchError((error) => {
-            dispatch({ type: 'fetchSiteVariablesFailed', error: error.message, siteCode });
-            return of(false);
-          }),
-        ).subscribe();
-      }
-      // Fetch positions for any sites in seleciton that haven't had positions fetched
-      if (fetches.positions.status === FETCH_STATUS.AWAITING_CALL && fetches.positions.url) {
-        dispatch({ type: 'fetchSitePositions', siteCode });
-        fetchCSV(fetches.positions.url).pipe(
-          map((response) => {
-            dispatch({ type: 'fetchSitePositionsSucceeded', csv: response.response, siteCode });
-            return of(true);
-          }),
-          catchError((error) => {
-            dispatch({ type: 'fetchSitePositionsFailed', error: error.message, siteCode });
-            return of(false);
-          }),
-        ).subscribe();
-      }
-      // Fetch any site months in selection that have not been fetched
+    const dataFetchTokens = new Set();
+    const dataFetches = [];
+    const dataActions = [];
+
+    const fetchSiteVariables = (siteCode, fetches) => {
+      dispatch({ type: 'fetchSiteVariables', siteCode });
+      fetchCSV(fetches.variables.url).pipe(
+        map((response) => {
+          dispatch({ type: 'fetchSiteVariablesSucceeded', csv: response.response, siteCode });
+          return of(true);
+        }),
+        catchError((error) => {
+          dispatch({ type: 'fetchSiteVariablesFailed', error: error.message, siteCode });
+          return of(false);
+        }),
+      ).subscribe();
+    };
+
+    const fetchSitePositions = (siteCode, fetches) => {
+      dispatch({ type: 'fetchSitePositions', siteCode });
+      fetchCSV(fetches.positions.url).pipe(
+        map((response) => {
+          dispatch({ type: 'fetchSitePositionsSucceeded', csv: response.response, siteCode });
+          return of(true);
+        }),
+        catchError((error) => {
+          dispatch({ type: 'fetchSitePositionsFailed', error: error.message, siteCode });
+          return of(false);
+        }),
+      ).subscribe();
+    };
+
+    const fetchNeededSiteMonths = (siteCode, fetches) => {
       continuousDateRange.filter(month => !fetches[month]).forEach((month) => {
         dispatch({ type: 'fetchSiteMonth', siteCode, month });
         ajax.getJSON(getSiteMonthDataURL(siteCode, month)).pipe(
@@ -522,8 +636,117 @@ const Provider = (props) => {
           }),
         ).subscribe();
       });
+    };
+
+    const prepareDataFetches = (site) => {
+      const { siteCode, positions } = site;
+      state.selection.variables.forEach((variable) => {
+        const { downloadPkg } = state.variables[variable];
+        positions.forEach((position) => {
+          continuousDateRange.forEach((month) => {
+            const actionProps = {
+              siteCode,
+              position,
+              month,
+              downloadPkg,
+              timeScale,
+            };
+            const { url, status } = state.product
+              .sites[siteCode]
+              .positions[position]
+              .data[month][downloadPkg][timeScale];
+            // If the file isn't awaiting a fetch call then don't fetch it
+            if (status !== FETCH_STATUS.AWAITING_CALL) { return; }
+            // Use the dataFetchTokens set to make sure we don't somehow add the same fetch twice
+            const previousSize = dataFetchTokens.size;
+            const token = `${siteCode};${position};${month};${downloadPkg};${timeScale}`;
+            dataFetchTokens.add(token);
+            if (dataFetchTokens.size === previousSize) {
+              console.log('B2', previousSize, token, dataFetchTokens, actionProps);
+              return;
+            }
+            // Save the action props to pass to the fetchDataFiles action to set all fetch statuses
+            dataActions.push(actionProps);
+            // Add a file fetch observable to the main list
+            dataFetches.push(
+              fetchCSV(url).pipe(
+                map((response) => {
+                  dispatch({
+                    type: 'fetchDataFileSucceeded',
+                    csv: response.response,
+                    ...actionProps,
+                  });
+                  return of(true);
+                }),
+                catchError((error) => {
+                  dispatch({ type: 'fetchDataFileFailed', error: error.message, ...actionProps });
+                  return of(false);
+                }),
+              ),
+            );
+          });
+        });
+      });
+    };
+
+    // MAIN LOOP - Trigger fetches as needed for all selected sites
+    state.selection.sites.forEach((site) => {
+      const { siteCode } = site;
+      const { fetches } = state.product.sites[siteCode];
+
+      // Fetch variables for any sites in seleciton that haven't had variables fetched
+      if (fetches.variables.status === FETCH_STATUS.AWAITING_CALL && fetches.variables.url) {
+        fetchSiteVariables(siteCode, fetches);
+      }
+
+      // Fetch positions for any sites in seleciton that haven't had positions fetched
+      if (fetches.positions.status === FETCH_STATUS.AWAITING_CALL && fetches.positions.url) {
+        fetchSitePositions(siteCode, fetches);
+      }
+
+      // Fetch any site months in selection that have not been fetched
+      fetchNeededSiteMonths(siteCode, fetches);
+
+      // Add any fetch observables for needed data to dataFetches and dataFetchTokens
+      if (state.status === COMP_STATUS.READY_FOR_DATA) {
+        prepareDataFetches(site);
+      }
     });
-  }, [state.selection, state.selection.digest, state.product.sites, state.product.productCode]);
+
+    // Trigger all data fetches
+    if (state.status === COMP_STATUS.READY_FOR_DATA) {
+      if (!dataFetches.length) {
+        dispatch({ type: 'noDataFilesFetchNecessary' });
+      } else {
+        const masterFetchToken = `fetchDataFiles.${uniqueId()}`;
+        dispatch({ type: 'fetchDataFiles', token: masterFetchToken, fetches: dataActions });
+        forkJoinWithProgress(dataFetches).pipe(
+          mergeMap(([finalResult, progress]) => merge(
+            progress.pipe(
+              tap(value => dispatch({
+                type: 'fetchDataFilesProgress',
+                token: masterFetchToken,
+                value,
+              })),
+              ignoreElements(),
+            ),
+            finalResult,
+          )),
+        ).subscribe(value => dispatch({
+          type: 'fetchDataFilesCompleted',
+          token: masterFetchToken,
+          value,
+        }));
+      }
+    }
+  }, [
+    state.status,
+    state.selection,
+    state.selection.digest,
+    state.variables,
+    state.product,
+    state.options,
+  ]);
 
   /**
      Render

@@ -26,7 +26,9 @@ declare function useTimeSeriesViewerState(): {
         status: string;
         error: null;
     };
-    fetches: {};
+    metaFetches: {};
+    dataFetches: {};
+    dataFetchProgress: number;
     variables: {};
     selectableVariables: never[];
     product: {
@@ -43,6 +45,9 @@ declare function useTimeSeriesViewerState(): {
         dateRange: null[];
         variables: never[];
         sites: never[];
+    };
+    options: {
+        timeScale: string;
     };
 } | ((() => void) | {
     status: string;
@@ -50,7 +55,9 @@ declare function useTimeSeriesViewerState(): {
         status: string;
         error: null;
     };
-    fetches: {};
+    metaFetches: {};
+    dataFetches: {};
+    dataFetchProgress: number;
     variables: {};
     selectableVariables: never[];
     product: {
@@ -67,6 +74,9 @@ declare function useTimeSeriesViewerState(): {
         dateRange: null[];
         variables: never[];
         sites: never[];
+    };
+    options: {
+        timeScale: string;
     };
 })[];
 declare namespace TimeSeriesViewerPropTypes {

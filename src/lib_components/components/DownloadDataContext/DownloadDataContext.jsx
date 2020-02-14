@@ -10,13 +10,7 @@ import PropTypes from 'prop-types';
 
 import moment from 'moment';
 
-import {
-  of,
-  merge,
-  forkJoin,
-  Subject,
-  defer,
-} from 'rxjs';
+import { of, merge, Subject } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 import {
   map,
@@ -24,7 +18,6 @@ import {
   switchMap,
   catchError,
   tap,
-  finalize,
   ignoreElements,
   takeUntil,
 } from 'rxjs/operators';
@@ -37,6 +30,8 @@ import {
   getSizeEstimateFromManifestResponse,
   MAX_POST_BODY_SIZE,
 } from '../../util/manifestUtil';
+
+import { forkJoinWithProgress } from '../../util/rxUtil';
 
 const ALL_POSSIBLE_VALID_DATE_RANGE = [
   '2010-01',
@@ -1003,26 +998,6 @@ const Provider = (props) => {
   ));
 
   const handleFetchS3Files = (currentState) => {
-    const forkJoinWithProgress = arrayOfObservables => defer(() => {
-      let counter = 0;
-      const percent$ = new Subject();
-      const modilefiedObservablesList = arrayOfObservables.map(
-        item => item.pipe(
-          finalize(() => {
-            counter += 1;
-            const percentValue = (counter * 100) / arrayOfObservables.length;
-            percent$.next(percentValue);
-          }),
-        ),
-      );
-      const finalResult$ = forkJoin(modilefiedObservablesList).pipe(
-        tap(() => {
-          percent$.next(100);
-          percent$.complete();
-        }),
-      );
-      return of([finalResult$, percent$.asObservable()]);
-    });
     const { productCode } = currentState.productData;
     const keys = Object.keys(currentState.s3FileFetches)
       .filter(key => currentState.s3FileFetches[key] === 'awaitingFetchCall');

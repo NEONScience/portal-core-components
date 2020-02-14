@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import TimeSeriesViewerContext from './TimeSeriesViewerContext';
 import TimeSeriesViewerDateRange from './TimeSeriesViewerDateRange';
 import TimeSeriesViewerVariables from './TimeSeriesViewerVariables';
+import TimeSeriesViewerGraph from './TimeSeriesViewerGraph';
 
 const preStyle = {
   whiteSpace: 'pre-wrap',
@@ -41,6 +42,8 @@ export default function TimeSeriesViewerContainer() {
           <TimeSeriesViewerDateRange dateRangeSliderRef={dateRangeSliderRef} />
         </Grid>
       </Grid>
+      <br />
+      <TimeSeriesViewerGraph />
       <br />
       <pre style={{ ...preStyle, height: '25vh' }}>
         {JSON.stringify(state.selection, null, 2)}

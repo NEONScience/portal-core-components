@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
   },
   input: {
     display: 'flex',
-    padding: 0,
+    padding: '2px',
     height: 'auto',
   },
   valueContainer: {
@@ -94,6 +94,7 @@ function Control(props) {
   return (
     <TextField
       fullWidth
+      variant="outlined"
       InputProps={{
         inputComponent,
         inputProps: {
@@ -247,7 +248,7 @@ function MultiValue(props) {
       tabIndex={-1}
       label={children}
       className={clsx(chip, { [chipFocused]: isFocused })}
-      onDelete={onClick}
+      onDelete={data.count > 1 ? onClick : null}
       deleteIcon={<CancelIcon {...removeProps} />}
     />
   );
@@ -302,6 +303,7 @@ export default function TimeSeriesViewerVariables() {
     value: variable,
     label: variable,
     key: variable,
+    count: state.selection.variables.length,
   }));
   const selectedUnits = Array.from(
     state.selection.variables.reduce((units, variable) => {
@@ -359,6 +361,7 @@ export default function TimeSeriesViewerVariables() {
       <NoSsr>
         <Select
           isMulti
+          clearable={false}
           classes={classes}
           styles={selectStyles}
           aria-label="Variables"

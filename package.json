@@ -17,6 +17,7 @@
     "d3-selection": "^1.4.0",
     "d3-transition": "^1.2.0",
     "dateformat": "^3.0.3",
+    "dygraphs": "^2.1.0",
     "font-awesome": "4.7.0",
     "highlight.js": "^9.15.8",
     "history": "^4.10.1",
