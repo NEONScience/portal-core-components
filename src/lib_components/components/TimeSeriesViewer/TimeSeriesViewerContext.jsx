@@ -7,6 +7,7 @@ import React, {
 import PropTypes from 'prop-types';
 
 import moment from 'moment';
+import get from 'lodash/get';
 import uniqueId from 'lodash/uniqueId';
 
 import { parse } from 'papaparse';
@@ -25,12 +26,14 @@ import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
 import { forkJoinWithProgress } from '../../util/rxUtil';
 
+// Every possible status a single fetch request can have
 const FETCH_STATUS = {
   AWAITING_CALL: 'AWAITING_CALL',
   FETCHING: 'FETCHING',
   ERROR: 'ERROR',
   SUCCESS: 'SUCCESS',
 };
+// Every possible top-level status the TimeSeriesViewer component can have
 const COMP_STATUS = {
   INIT_PRODUCT: 'INIT_PRODUCT', // Handling props; fetching product data if needed
   LOADING_META: 'LOADING_META', // Actively loading meta data (sites, variables, and positions)
@@ -39,12 +42,20 @@ const COMP_STATUS = {
   ERROR: 'ERROR', // Stop everything because problem
   READY: 'READY', // Ready for user input
 };
+// Array offsets for use when splitting a data file URL
 const DATA_FILE_PARTS = {
   POSITION_H: 6,
   POSITION_V: 7,
   TIME_SCALE: 8,
   MONTH: 10,
   PACKAGE_TYPE: 11,
+};
+// Functions to convert a value to the proper JS data type given a NEON variable dataType
+const DATA_TYPE_SETTERS = {
+  dateTime: v => v.replace(/"/g, ''),
+  real: v => parseFloat(v, 10),
+  'signed integer': v => parseInt(v, 10),
+  'unsigned integer': v => parseInt(v, 10),
 };
 
 /**
@@ -95,7 +106,11 @@ const fetchCSV = url => ajax({
   responseType: 'text',
   url,
 });
-const parseCSV = csv => parse(csv, { header: true, skipEmptyLines: 'greedy' });
+const parseCSV = csv => parse(csv, {
+  header: true,
+  skipEmptyLines: 'greedy',
+  // dynamicTyping: true,
+});
 
 /**
    Time Scale Definitions and Functions
@@ -126,7 +141,7 @@ const getTimeScale = (input) => {
  * Generate a continuous list of "YYYY-MM" strings given an input date range
  * Will extend beginning and end of date range to encompass whole years
  * (e.g. ['2012-06', '2017-08'] => ['2012-01', '2012-02', ..., '2017-12', '2018-01']
- * @param {array} dateRange - array of exactly two "YYYY-MM" strings
+ * @param {Array} dateRange - array of exactly two "YYYY-MM" strings
  * @param {boolean} roundToYears - if true then extend each side of the range to whole years
  */
 const getContinuousDatesArray = (dateRange, roundToYears = false) => {
@@ -155,8 +170,12 @@ const getContinuousDatesArray = (dateRange, roundToYears = false) => {
   }
   return continuousRange;
 };
-console.log(getContinuousDatesArray);
 
+/**
+ * Build an object for state.product from a product data fetch response
+ * @param {Object} productDate - JSON parse response from product data endpoint
+ * @return {Object} new product object to be applied at state.product
+ */
 const parseProductData = (productData = {}) => {
   const product = {
     productCode: productData.productCode,
@@ -189,6 +208,12 @@ const parseProductData = (productData = {}) => {
   return product;
 };
 
+/**
+ * Build an object for state.product.sites[{site}] from a product/site/month fetch response
+ * @param {Object} site - single site object from previous state.product.sites
+ * @param {Array} files - list of file objects parsed from product/site/month fetch response
+ * @return {Object} updated site object to be applied at state.product.sites[{site}]
+ */
 const parseSiteMonthData = (site, files) => {
   const newSite = { ...site };
   files.forEach((file) => {
@@ -216,8 +241,22 @@ const parseSiteMonthData = (site, files) => {
   return newSite;
 };
 
-const parseSiteVariables = (stateVariables, siteCode, csv) => {
-  const newStateVariables = { ...stateVariables };
+/**
+ * Build a set of data to update various parts of state from a product/site variables fetch response
+ * Goal 1: Expand state.variables to include anything new from this variables fetch
+ * Goal 2: Store a list of these variable names on the site in state (differentiate global/local)
+ * @param {Object} previousVariables - previous state.variables object
+ * @param {string} siteCode - 4-letter site code identifying the response (e.g. 'ABBY')
+ * @param {string} csv - unparsed CSV string from a product/site variables fetch response
+ *
+ * @typedef {Object} ParseSiteVariablesReturn
+ * @property {Set} variablesSet - set of all variable names to be stored in state at the site level
+ * @property {Object} variablesObject - updated object to be applied at state.variables
+ *
+ * @return {ParseSiteVariablesReturn}
+ */
+const parseSiteVariables = (previousVariables, siteCode, csv) => {
+  const newStateVariables = { ...previousVariables };
   const variables = parseCSV(csv);
   const variablesSet = new Set();
   variables.data.forEach((variable) => {
@@ -255,6 +294,14 @@ const parseSiteVariables = (stateVariables, siteCode, csv) => {
   return { variablesSet, variablesObject: newStateVariables };
 };
 
+/**
+ * Build an object for state.product.sites[{site}] from a product/site positions fetch response
+ * The site object should already have site position ids from the product/site/month fetch, so the
+ * main goal here is to fill in all the other position metadata that comes from the positions fetch
+ * @param {Object} site - single site object from previous state.product.sites
+ * @param {string} csv - unparsed CSV string from a product/site positions fetch response
+ * @return {Object} updated site object to be applied at state.product.sites[{site}]
+ */
 const parseSitePositions = (site, csv) => {
   const newSite = { ...site };
   const positions = parseCSV(csv);
@@ -266,18 +313,50 @@ const parseSitePositions = (site, csv) => {
   return newSite;
 };
 
-const parseSeriesData = (csv) => {
-  const series = parseCSV(csv);
-  /*
-    GOAL: go from this:
-      [ { var1: 'A', var2: 'B', var3: 'C' }, { var1: 'D', var2: 'E', var3: 'F' } ]
-    ...to this:
-      { var1: ['A', 'D'], var2: ['B', 'E'], var3: ['C', 'F'] }
-  */
-  console.log(series);
+/**
+ * Build an object containing series of data, indexed by fieldName, from a data fetch response
+ * We don't use the same CSV parse method as with variables/positions because we don't want rows:
+ *   [ { varX: 1, varY: 2, varZ: 3 }, { varX: 10, varY: 20, varZ: 30 }, ... ]
+ * ...we want columns to individually stitch together with other months into continuous series:
+ *   { varX: [1, 10, ...], varY: [2. 20, ...], varZ: [3, 30,...] }
+ * @param {string} csv - unparsed CSV string from a data fetch response
+ * @param {Object} variables - current state.variables object
+ * @return {Object} series object to be applied to state (product/site/position/month/downloadPkg)
+ */
+const parseSeriesData = (csv, variables) => {
+  const series = {};
+  const fields = [];
+  const rows = csv.split('\n');
+  if (!rows.length) { return series; }
+  rows[0].split(',').forEach((fieldName) => {
+    const { dataType } = variables[fieldName];
+    const field = {
+      fieldName,
+      setType: DATA_TYPE_SETTERS[dataType] ? DATA_TYPE_SETTERS[dataType] : v => v,
+    };
+    fields.push(field);
+    series[fieldName] = [];
+  });
+  rows.slice(1).forEach((row) => {
+    const values = row.split(',');
+    values.forEach((value, idx) => {
+      series[fields[idx].fieldName].push(fields[idx].setType(value));
+    });
+  });
   return series;
 };
 
+/**
+ * Build an updated state.selection object to fill in sane defaults from current state.
+ * The goal is to have the selection always be valid and as complete as possible. For example,
+ * as soon as the first variables request has completed and been parsed into state, select a
+ * basic package variable if no variables have been selected (i.e. on first load).
+ * This function should only ever fill in gaps in selection from what's currently available in
+ * state, and therefore should be idempotent. It also generates a new digest (stringified portion
+ * of selection) to ensure the selection change effect is triggered on every meainingful change.
+ * @param {Object} state - current state object
+ * @return {Object} updated object to apply to state.selection
+ */
 const applyDefaultsToSelection = (state) => {
   const { product, variables } = state;
   const selection = state.selection || { dateRange: [null, null], variables: [], sites: [] };
@@ -487,7 +566,7 @@ const reducer = (state, action) => {
         .sites[action.siteCode]
         .positions[action.position]
         .data[action.month][action.downloadPkg][action.timeScale]
-        .series = parseSeriesData(action.csv);
+        .series = parseSeriesData(action.csv, newState.variables);
       return newState;
 
     // Selection Actions
@@ -509,7 +588,7 @@ const reducer = (state, action) => {
 };
 
 /**
-   Provider
+   Context Provider
 */
 const Provider = (props) => {
   const {
@@ -536,7 +615,6 @@ const Provider = (props) => {
 
   /**
      Effect - Fetch product data if only a product code was provided in props
-     COMP_STATUS: INIT_PRODUCT
   */
   useEffect(() => {
     if (state.status !== COMP_STATUS.INIT_PRODUCT) { return; }
@@ -563,6 +641,7 @@ const Provider = (props) => {
 
   /**
      Effect - Handle changes to selection
+     Triggers all necessary fetches for meta data and series data
   */
   useEffect(() => {
     const getSiteMonthDataURL = (siteCode, month) => {
@@ -651,20 +730,16 @@ const Provider = (props) => {
               downloadPkg,
               timeScale,
             };
-            const { url, status } = state.product
-              .sites[siteCode]
-              .positions[position]
-              .data[month][downloadPkg][timeScale];
+            // eslint-disable-next-line max-len
+            const path = `sites['${siteCode}'].positions['${position}'].data['${month}']['${downloadPkg}']['${timeScale}']`;
+            const { url, status } = get(state.product, path, {});
             // If the file isn't awaiting a fetch call then don't fetch it
-            if (status !== FETCH_STATUS.AWAITING_CALL) { return; }
+            if (!url || status !== FETCH_STATUS.AWAITING_CALL) { return; }
             // Use the dataFetchTokens set to make sure we don't somehow add the same fetch twice
             const previousSize = dataFetchTokens.size;
             const token = `${siteCode};${position};${month};${downloadPkg};${timeScale}`;
             dataFetchTokens.add(token);
-            if (dataFetchTokens.size === previousSize) {
-              console.log('B2', previousSize, token, dataFetchTokens, actionProps);
-              return;
-            }
+            if (dataFetchTokens.size === previousSize) { return; }
             // Save the action props to pass to the fetchDataFiles action to set all fetch statuses
             dataActions.push(actionProps);
             // Add a file fetch observable to the main list

@@ -45,12 +45,14 @@ export default function TimeSeriesViewerContainer() {
       <br />
       <TimeSeriesViewerGraph />
       <br />
-      <pre style={{ ...preStyle, height: '25vh' }}>
+      <pre style={{ ...preStyle, height: '45vh' }}>
         {JSON.stringify(state.selection, null, 2)}
       </pre>
+      {/*
       <pre style={{ ...preStyle, height: '55vh' }}>
         {JSON.stringify(state, null, 2)}
       </pre>
+      */}
     </div>
   );
 }

@@ -1,4 +1,19 @@
 export default TimeSeriesViewerContext;
+/**
+ * Build a set of data to update various parts of state from a product/site variables fetch response
+ * Goal 1: Expand state.variables to include anything new from this variables fetch
+ * Goal 2: Store a list of these variable names on the site in state (differentiate global/local)
+ */
+export type ParseSiteVariablesReturn = {
+    /**
+     * - set of all variable names to be stored in state at the site level
+     */
+    variablesSet: Set<any>;
+    /**
+     * - updated object to be applied at state.variables
+     */
+    variablesObject: Object;
+};
 declare namespace TimeSeriesViewerContext {
     export { Provider };
     export { useTimeSeriesViewerState };
