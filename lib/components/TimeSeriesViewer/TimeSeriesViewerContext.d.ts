@@ -1,3 +1,11 @@
+export namespace TIME_SERIES_VIEWER_STATUS {
+    export const INIT_PRODUCT: string;
+    export const LOADING_META: string;
+    export const READY_FOR_DATA: string;
+    export const LOADING_DATA: string;
+    export const ERROR: string;
+    export const READY: string;
+}
 export default TimeSeriesViewerContext;
 /**
  * Build a set of data to update various parts of state from a product/site variables fetch response
@@ -45,7 +53,6 @@ declare function useTimeSeriesViewerState(): {
     dataFetches: {};
     dataFetchProgress: number;
     variables: {};
-    selectableVariables: never[];
     product: {
         productCode: null;
         productName: null;
@@ -53,11 +60,11 @@ declare function useTimeSeriesViewerState(): {
         productSensor: null;
         dateRange: null[];
         continuousDateRange: never[];
-        variables: {};
         sites: {};
     };
     selection: {
         dateRange: null[];
+        continuousDateRange: never[];
         variables: never[];
         sites: never[];
     };
@@ -74,7 +81,6 @@ declare function useTimeSeriesViewerState(): {
     dataFetches: {};
     dataFetchProgress: number;
     variables: {};
-    selectableVariables: never[];
     product: {
         productCode: null;
         productName: null;
@@ -82,11 +88,11 @@ declare function useTimeSeriesViewerState(): {
         productSensor: null;
         dateRange: null[];
         continuousDateRange: never[];
-        variables: {};
         sites: {};
     };
     selection: {
         dateRange: null[];
+        continuousDateRange: never[];
         variables: never[];
         sites: never[];
     };

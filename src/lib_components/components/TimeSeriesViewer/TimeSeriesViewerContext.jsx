@@ -34,7 +34,7 @@ const FETCH_STATUS = {
   SUCCESS: 'SUCCESS',
 };
 // Every possible top-level status the TimeSeriesViewer component can have
-const COMP_STATUS = {
+export const TIME_SERIES_VIEWER_STATUS = {
   INIT_PRODUCT: 'INIT_PRODUCT', // Handling props; fetching product data if needed
   LOADING_META: 'LOADING_META', // Actively loading meta data (sites, variables, and positions)
   READY_FOR_DATA: 'READY_FOR_DATA', // Ready to trigger fetches for data
@@ -52,7 +52,7 @@ const DATA_FILE_PARTS = {
 };
 // Functions to convert a value to the proper JS data type given a NEON variable dataType
 const DATA_TYPE_SETTERS = {
-  dateTime: v => v.replace(/"/g, ''),
+  dateTime: v => new Date(v.replace(/"/g, '')),
   real: v => parseFloat(v, 10),
   'signed integer': v => parseInt(v, 10),
   'unsigned integer': v => parseInt(v, 10),
@@ -62,13 +62,12 @@ const DATA_TYPE_SETTERS = {
    Context and Hook Setup
 */
 const DEFAULT_STATE = {
-  status: COMP_STATUS.INIT_PRODUCT,
+  status: TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT,
   fetchProduct: { status: FETCH_STATUS.AWAITING_CALL, error: null },
   metaFetches: {},
   dataFetches: {},
   dataFetchProgress: 0,
   variables: {},
-  selectableVariables: [],
   product: {
     productCode: null,
     productName: null,
@@ -76,10 +75,14 @@ const DEFAULT_STATE = {
     productSensor: null,
     dateRange: [null, null],
     continuousDateRange: [],
-    variables: {},
     sites: {},
   },
-  selection: { dateRange: [null, null], variables: [], sites: [] },
+  selection: {
+    dateRange: [null, null],
+    continuousDateRange: [],
+    variables: [],
+    sites: [],
+  },
   options: {
     timeScale: '30min',
   },
@@ -150,7 +153,7 @@ const getContinuousDatesArray = (dateRange, roundToYears = false) => {
       || !dateRegex.test(dateRange[0]) || !dateRegex.test(dateRange[1])) {
     return [];
   }
-  if (dateRange[0] === dateRange[1]) { return dateRange; }
+  if (dateRange.length === 2 && dateRange[0] === dateRange[1]) { return [dateRange[0]]; }
   let startMoment = moment(`${dateRange[0]}-20`);
   let endMoment = moment(`${dateRange[1]}-10`).add(1, 'months');
   if (roundToYears) {
@@ -164,9 +167,6 @@ const getContinuousDatesArray = (dateRange, roundToYears = false) => {
     continuousRange.push(startMoment.format('YYYY-MM'));
     startMoment.add(1, 'months');
     months += 1;
-  }
-  if (continuousRange.length === 2 && continuousRange[0] === continuousRange[1]) {
-    return [continuousRange[0]];
   }
   return continuousRange;
 };
@@ -338,6 +338,7 @@ const parseSeriesData = (csv, variables) => {
     series[fieldName] = [];
   });
   rows.slice(1).forEach((row) => {
+    if (!row.length) { return; }
     const values = row.split(',');
     values.forEach((value, idx) => {
       series[fields[idx].fieldName].push(fields[idx].setType(value));
@@ -387,6 +388,8 @@ const applyDefaultsToSelection = (state) => {
     const defaultVar = Object.keys(variables).find(variable => variables[variable].canBeDefault);
     if (defaultVar) { selection.variables.push(defaultVar); }
   }
+  // Generate a new continuous date range from the dateRange (which only contains bounds)
+  selection.continuousDateRange = getContinuousDatesArray(selection.dateRange);
   // Generate a new digest for effect comparison
   selection.digest = JSON.stringify({
     sites: selection.sites,
@@ -406,11 +409,11 @@ const reducer = (state, action) => {
   };
   const calcStatus = () => {
     if (Object.keys(newState.metaFetches).length) {
-      newState.status = COMP_STATUS.LOADING_META;
+      newState.status = TIME_SERIES_VIEWER_STATUS.LOADING_META;
     } else if (Object.keys(newState.dataFetches).length) {
-      newState.status = COMP_STATUS.LOADING_DATA;
+      newState.status = TIME_SERIES_VIEWER_STATUS.LOADING_DATA;
     } else {
-      newState.status = COMP_STATUS.READY_FOR_DATA;
+      newState.status = TIME_SERIES_VIEWER_STATUS.READY_FOR_DATA;
     }
   };
   const limitVariablesToTwoUnits = (variables) => {
@@ -448,13 +451,13 @@ const reducer = (state, action) => {
     case 'initFetchProductFailed':
       newState.fetchProduct.status = FETCH_STATUS.ERROR;
       newState.fetchProduct.error = action.error;
-      newState.status = COMP_STATUS.ERROR;
+      newState.status = TIME_SERIES_VIEWER_STATUS.ERROR;
       return newState;
     case 'initFetchProductSucceeded':
       newState.fetchProduct.status = FETCH_STATUS.SUCCESS;
       newState.product = parseProductData(action.productData);
       calcSelection();
-      newState.status = COMP_STATUS.LOADING_META;
+      newState.status = TIME_SERIES_VIEWER_STATUS.LOADING_META;
       return newState;
 
     // Fetch Site Month Actions
@@ -463,7 +466,7 @@ const reducer = (state, action) => {
       newState.product.sites[action.siteCode].fetches[action.month] = {
         status: FETCH_STATUS.FETCHING, error: null,
       };
-      newState.status = COMP_STATUS.LOADING_META;
+      newState.status = TIME_SERIES_VIEWER_STATUS.LOADING_META;
       return newState;
     case 'fetchSiteMonthFailed':
       delete newState.metaFetches[`fetchSiteMonth.${action.siteCode}.${action.month}`];
@@ -478,14 +481,19 @@ const reducer = (state, action) => {
         newState.product.sites[action.siteCode], action.files,
       );
       calcSelection();
-      calcStatus();
+      if (
+        newState.product.sites[action.siteCode].fetches.variables.status !== FETCH_STATUS.SUCCESS
+          || newState.product.sites[action.siteCode].fetches.positions.status !== FETCH_STATUS.SUCCESS // eslint-disable-line max-len
+      ) {
+        newState.status = TIME_SERIES_VIEWER_STATUS.LOADING_META;
+      } else { calcStatus(); }
       return newState;
 
     // Fetch Site Variables Actions
     case 'fetchSiteVariables':
       newState.metaFetches[`fetchSiteVariables.${action.siteCode}`] = true;
       newState.product.sites[action.siteCode].fetches.variables.status = FETCH_STATUS.FETCHING;
-      newState.status = COMP_STATUS.LOADING_META;
+      newState.status = TIME_SERIES_VIEWER_STATUS.LOADING_META;
       return newState;
     case 'fetchSiteVariablesFailed':
       delete newState.metaFetches[`fetchSiteVariables.${action.siteCode}`];
@@ -507,7 +515,7 @@ const reducer = (state, action) => {
     case 'fetchSitePositions':
       newState.metaFetches[`fetchSitePositions.${action.siteCode}`] = true;
       newState.product.sites[action.siteCode].fetches.positions.status = FETCH_STATUS.FETCHING;
-      newState.status = COMP_STATUS.LOADING_META;
+      newState.status = TIME_SERIES_VIEWER_STATUS.LOADING_META;
       return newState;
     case 'fetchSitePositionsFailed':
       delete newState.metaFetches[`fetchSitePositions.${action.siteCode}`];
@@ -530,17 +538,17 @@ const reducer = (state, action) => {
       newState.dataFetches[action.token] = true;
       setDataFileFetchStatuses(action.fetches);
       newState.dataFetchProgress = 0;
-      newState.status = COMP_STATUS.LOADING_DATA;
+      newState.status = TIME_SERIES_VIEWER_STATUS.LOADING_DATA;
       return newState;
     case 'fetchDataFilesProgress':
       newState.dataFetchProgress = action.value;
       return newState;
     case 'fetchDataFilesCompleted':
       delete newState.dataFetches[action.token];
-      newState.status = COMP_STATUS.READY;
+      newState.status = TIME_SERIES_VIEWER_STATUS.READY;
       return newState;
     case 'noDataFilesFetchNecessary':
-      newState.status = COMP_STATUS.READY;
+      newState.status = TIME_SERIES_VIEWER_STATUS.READY;
       return newState;
 
     // Fetch Data Actions (Single File)
@@ -602,7 +610,9 @@ const Provider = (props) => {
   */
   const initialState = {
     ...DEFAULT_STATE,
-    status: productDataProp ? COMP_STATUS.LOADING_META : COMP_STATUS.INIT_PRODUCT,
+    status: productDataProp
+      ? TIME_SERIES_VIEWER_STATUS.LOADING_META
+      : TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT,
   };
   if (productDataProp) {
     initialState.fetchProduct.status = FETCH_STATUS.SUCCESS;
@@ -617,7 +627,7 @@ const Provider = (props) => {
      Effect - Fetch product data if only a product code was provided in props
   */
   useEffect(() => {
-    if (state.status !== COMP_STATUS.INIT_PRODUCT) { return; }
+    if (state.status !== TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT) { return; }
     if (state.fetchProduct.status !== FETCH_STATUS.AWAITING_CALL) { return; }
     dispatch({ type: 'initFetchProductCalled' });
     NeonGraphQL.getDataProductByCode(state.product.productCode).pipe(
@@ -654,6 +664,11 @@ const Provider = (props) => {
     const dataFetches = [];
     const dataActions = [];
 
+    // Track in local scope if we're going to be fetching metadata so we can hold off on
+    // declaring there was no series data to fetch (not because we already loaded it but because
+    // we haven't even initialized the loading of it).
+    let metaFetchTriggered = false;
+
     const fetchSiteVariables = (siteCode, fetches) => {
       dispatch({ type: 'fetchSiteVariables', siteCode });
       fetchCSV(fetches.variables.url).pipe(
@@ -684,6 +699,7 @@ const Provider = (props) => {
 
     const fetchNeededSiteMonths = (siteCode, fetches) => {
       continuousDateRange.filter(month => !fetches[month]).forEach((month) => {
+        metaFetchTriggered = true;
         dispatch({ type: 'fetchSiteMonth', siteCode, month });
         ajax.getJSON(getSiteMonthDataURL(siteCode, month)).pipe(
           map((response) => {
@@ -772,24 +788,26 @@ const Provider = (props) => {
       // Fetch variables for any sites in seleciton that haven't had variables fetched
       if (fetches.variables.status === FETCH_STATUS.AWAITING_CALL && fetches.variables.url) {
         fetchSiteVariables(siteCode, fetches);
+        metaFetchTriggered = true;
       }
 
       // Fetch positions for any sites in seleciton that haven't had positions fetched
       if (fetches.positions.status === FETCH_STATUS.AWAITING_CALL && fetches.positions.url) {
         fetchSitePositions(siteCode, fetches);
+        metaFetchTriggered = true;
       }
 
       // Fetch any site months in selection that have not been fetched
       fetchNeededSiteMonths(siteCode, fetches);
 
       // Add any fetch observables for needed data to dataFetches and dataFetchTokens
-      if (state.status === COMP_STATUS.READY_FOR_DATA) {
+      if (state.status === TIME_SERIES_VIEWER_STATUS.READY_FOR_DATA && !metaFetchTriggered) {
         prepareDataFetches(site);
       }
     });
 
     // Trigger all data fetches
-    if (state.status === COMP_STATUS.READY_FOR_DATA) {
+    if (state.status === TIME_SERIES_VIEWER_STATUS.READY_FOR_DATA && !metaFetchTriggered) {
       if (!dataFetches.length) {
         dispatch({ type: 'noDataFilesFetchNecessary' });
       } else {
