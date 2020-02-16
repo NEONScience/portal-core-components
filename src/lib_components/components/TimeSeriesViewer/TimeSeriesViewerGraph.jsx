@@ -5,12 +5,14 @@ import 'dygraphs/dist/dygraph.min.css';
 import TimeSeriesViewerContext, { TIME_SERIES_VIEWER_STATUS } from './TimeSeriesViewerContext';
 import Theme from '../Theme/Theme';
 
+/*
 const preStyle = {
   whiteSpace: 'pre-wrap',
   border: '1px solid black',
   padding: '2px',
   overflowY: 'scroll',
 };
+*/
 
 const BASE_GRAPH_OPTIONS = {
   includeZero: true,
@@ -174,15 +176,16 @@ export default function TimeSeriesViewerGraph() {
   /**
      RENDER
   */
+  /*
   const renderPre = () => (state.status === TIME_SERIES_VIEWER_STATUS.READY ? (
     <pre style={{ ...preStyle, height: '45vh' }}>
       {JSON.stringify({ graphOptions, data }, null, 2)}
     </pre>
   ) : null);
+  */
   return (
     <React.Fragment>
       <div ref={dygraphDomRef} style={{ width: '100%' }} />
-      {renderPre()}
     </React.Fragment>
   );
 }

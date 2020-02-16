@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
 import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
+import Grid from '@material-ui/core/Grid';
 import Slider from '@material-ui/core/Slider';
 
 import MomentUtils from '@date-io/moment';
@@ -195,7 +196,7 @@ const TimeSeriesViewerDateRange = (props) => {
     Object.freeze(sliderDefault);
   }
   return (
-    <div>
+    <div style={{ width: '100%' }}>
       <DateRangeSlider
         data-selenium="time-series-viewer.date-range.slider"
         ref={dateRangeSliderRef}
@@ -219,32 +220,36 @@ const TimeSeriesViewerDateRange = (props) => {
         }}
       />
       <MuiPickersUtilsProvider utils={MomentUtils}>
-        <DatePicker
-          data-selenium="time-series-viewer.date-range.start-input"
-          inputVariant="outlined"
-          margin="dense"
-          value={getYearMonthMoment(currentRange[0] || displayRange[sliderMin])}
-          onChange={value => handleChangeDatePicker(0, value)}
-          views={['month', 'year']}
-          label="Start"
-          openTo="month"
-          minDate={getYearMonthMoment(displayRange[sliderMin], 10)}
-          maxDate={getYearMonthMoment(currentRange[1] || displayRange[sliderMax], 20)}
-          style={{ width: '100%', marginBottom: Theme.spacing(2) }}
-        />
-        <DatePicker
-          data-selenium="time-series-viewer.date-range.end-input"
-          inputVariant="outlined"
-          margin="dense"
-          value={getYearMonthMoment(currentRange[1] || displayRange[sliderMax])}
-          onChange={value => handleChangeDatePicker(1, value)}
-          views={['month', 'year']}
-          label="End"
-          openTo="month"
-          minDate={getYearMonthMoment(currentRange[0] || displayRange[sliderMin], 10)}
-          maxDate={getYearMonthMoment(displayRange[sliderMax], 20)}
-          style={{ width: '100%' }}
-        />
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6} style={{ display: 'flex', justifyContent: 'center' }}>
+            <DatePicker
+              data-selenium="time-series-viewer.date-range.start-input"
+              inputVariant="outlined"
+              margin="dense"
+              value={getYearMonthMoment(currentRange[0] || displayRange[sliderMin])}
+              onChange={value => handleChangeDatePicker(0, value)}
+              views={['month', 'year']}
+              label="Start"
+              openTo="month"
+              minDate={getYearMonthMoment(displayRange[sliderMin], 10)}
+              maxDate={getYearMonthMoment(currentRange[1] || displayRange[sliderMax], 20)}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} style={{ display: 'flex', justifyContent: 'center' }}>
+            <DatePicker
+              data-selenium="time-series-viewer.date-range.end-input"
+              inputVariant="outlined"
+              margin="dense"
+              value={getYearMonthMoment(currentRange[1] || displayRange[sliderMax])}
+              onChange={value => handleChangeDatePicker(1, value)}
+              views={['month', 'year']}
+              label="End"
+              openTo="month"
+              minDate={getYearMonthMoment(currentRange[0] || displayRange[sliderMin], 10)}
+              maxDate={getYearMonthMoment(displayRange[sliderMax], 20)}
+            />
+          </Grid>
+        </Grid>
       </MuiPickersUtilsProvider>
     </div>
   );
