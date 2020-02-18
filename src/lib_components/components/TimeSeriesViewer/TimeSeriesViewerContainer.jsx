@@ -72,7 +72,6 @@ const ExpansionPanelSummary = withStyles({
     backgroundColor: 'rgba(0, 0, 0, .03)',
     borderBottom: '1px solid rgba(0, 0, 0, .125)',
     marginBottom: -1,
-    minHeight: 56,
     '&$expanded': {
       minHeight: 56,
     },
@@ -116,13 +115,13 @@ const PANELS = {
     Component: null,
   },
 };
-const DEFAULT_PANEL = 'SITES';
 
 export default function TimeSeriesViewerContainer() {
   const classes = useStyles(Theme);
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
 
-  const [expandedPanel, setExpandedPanel] = useState(DEFAULT_PANEL);
+  const initialPanel = 'VARIABLES';
+  const [expandedPanel, setExpandedPanel] = useState(initialPanel);
 
   // Slider position is not controlled in state because doing so kills mouse drag performance.
   // Use a ref to deterministiaclly set slider position when range is changed from date pickers.
@@ -140,6 +139,18 @@ export default function TimeSeriesViewerContainer() {
     }
   };
 
+  const getSitesSummary = () => {
+    const { sites } = state.selection;
+    return sites.map((site) => {
+      const { siteCode, positions } = site;
+      return (
+        <div key={siteCode}>
+          {`${siteCode} - ${positions.join(', ')}`}
+        </div>
+      );
+    });
+  };
+
   const getDateRangeSummary = () => {
     const pluralize = (val, unit) => (val === 1 ? `${val} ${unit}` : `${val} ${unit}s`);
     const startMoment = moment(`${state.selection.dateRange[0]}-15`);
@@ -155,10 +166,20 @@ export default function TimeSeriesViewerContainer() {
     return `${startMoment.format('MMM YYYY')} - ${endMoment.format('MMM YYYY')} (${diff})`;
   };
 
+  const getVariablesSummary = () => state.selection.variables.join(', ');
+
+  const getOptionsSummary = () => null;
+
   const renderPanelContentSummary = (panelId) => {
     switch (panelId) {
+      case 'SITES':
+        return getSitesSummary();
       case 'DATE_RANGE':
         return getDateRangeSummary();
+      case 'VARIABLES':
+        return getVariablesSummary();
+      case 'OPTIONS':
+        return getOptionsSummary();
       default:
         return <i>...</i>;
     }
@@ -180,7 +201,7 @@ export default function TimeSeriesViewerContainer() {
             square
             key={panelId}
             expanded={isExpanded}
-            onChange={() => { setExpandedPanel(panelId); }}
+            onChange={() => { setExpandedPanel(isExpanded ? null : panelId); }}
           >
             <ExpansionPanelSummary
               id={`${panelId}-header`}

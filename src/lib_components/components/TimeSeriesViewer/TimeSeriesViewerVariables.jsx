@@ -2,17 +2,19 @@
 import React from 'react';
 
 import PropTypes from 'prop-types';
-import clsx from 'clsx';
+// import clsx from 'clsx';
 import Select from 'react-select';
 
-import { emphasize, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
+import IconButton from '@material-ui/core/IconButton';
+import InputAdornment from '@material-ui/core/InputAdornment';
 import Typography from '@material-ui/core/Typography';
 import NoSsr from '@material-ui/core/NoSsr';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
-import Chip from '@material-ui/core/Chip';
 import MenuItem from '@material-ui/core/MenuItem';
-import CancelIcon from '@material-ui/icons/Cancel';
+import ClearIcon from '@material-ui/icons/Clear';
+import SearchIcon from '@material-ui/icons/Search';
 
 import Theme from '../Theme/Theme';
 import TimeSeriesViewerContext from './TimeSeriesViewerContext';
@@ -33,20 +35,8 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     overflow: 'hidden',
   },
-  chip: {
-    margin: theme.spacing(0.5, 0.25),
-  },
-  chipFocused: {
-    backgroundColor: emphasize(
-      theme.palette.type === 'light' ? theme.palette.grey[300] : theme.palette.grey[700],
-      0.08,
-    ),
-  },
   noOptionsMessage: {
     padding: theme.spacing(1, 2),
-  },
-  singleValue: {
-    fontSize: 16,
   },
   placeholder: {
     position: 'absolute',
@@ -68,6 +58,20 @@ const useStyles = makeStyles(theme => ({
     fontSize: '0.75rem',
     color: Theme.palette.grey[400],
   },
+  variablePaper: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    padding: theme.spacing(1, 3, 1, 1),
+    borderRadius: theme.spacing(2),
+    width: 'fit-content',
+    backgroundColor: theme.palette.grey[50],
+    marginRight: theme.spacing(2),
+  },
+  variablePaperContainer: {
+    lineHeight: '5em',
+    marginTop: theme.spacing(2.5),
+  },
 }));
 
 function inputComponent({ inputRef, ...props }) {
@@ -88,21 +92,26 @@ function Control(props) {
     children,
     innerProps,
     innerRef,
-    selectProps: { classes, TextFieldProps },
+    selectProps: { TextFieldProps },
   } = props;
 
   return (
     <TextField
       fullWidth
+      label="Search Variables"
       variant="outlined"
       InputProps={{
         inputComponent,
         inputProps: {
-          className: classes.input,
           ref: innerRef,
           children,
           ...innerProps,
         },
+        endAdornment: (
+          <InputAdornment position="end">
+            <SearchIcon color="disabled" />
+          </InputAdornment>
+        ),
       }}
       {...TextFieldProps}
     />
@@ -232,6 +241,7 @@ ValueContainer.propTypes = {
   selectProps: PropTypes.object.isRequired,
 };
 
+/*
 function MultiValue(props) {
   const {
     selectProps,
@@ -268,6 +278,7 @@ MultiValue.propTypes = {
 MultiValue.defaultProps = {
   children: null,
 };
+*/
 
 function Menu(props) {
   const { selectProps, innerProps, children } = props;
@@ -288,10 +299,11 @@ Menu.propTypes = {
 const components = {
   Control,
   Menu,
-  MultiValue,
+  MultiValue: () => null,
   Option,
   Placeholder,
   ValueContainer,
+  IndicatorsContainer: () => null,
 };
 
 export default function TimeSeriesViewerVariables() {
@@ -361,20 +373,69 @@ export default function TimeSeriesViewerVariables() {
       <NoSsr>
         <Select
           isMulti
+          isSearchable
           clearable={false}
           classes={classes}
           styles={selectStyles}
-          aria-label="Variables"
+          placeholder={null}
+          aria-label="Search Variables"
           data-gtm="time-series-viewer.variables"
-          placeholder="Select multiple variables"
           options={selectableVariables}
           components={components}
           value={selectedVariables}
+          controlShouldRenderValue={false}
           onChange={(value) => {
+            if (!value) { return; }
             dispatch({ type: 'selectVariables', variables: value.map(v => v.value) });
           }}
         />
       </NoSsr>
+      {/*
+      <TextField
+        label="Search Variables"
+        variant="outlined"
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <SearchIcon color="disabled" />
+            </InputAdornment>
+          ),
+        }}
+        style={{ width: '100%', marginBottom: Theme.spacing(2) }}
+      />
+      */}
+      <div className={classes.variablePaperContainer}>
+        {state.selection.variables.map((variable) => {
+          const { units, description } = state.variables[variable];
+          return (
+            <Paper key={variable} className={classes.variablePaper}>
+              <IconButton
+                aria-label={`remove variable ${variable}`}
+                style={{ marginRight: Theme.spacing(1) }}
+                onClick={() => {
+                  dispatch({
+                    type: 'selectVariables',
+                    variables: state.selection.variables.filter(v => v !== variable),
+                  });
+                }}
+              >
+                <ClearIcon fontSize="small" />
+              </IconButton>
+              <div style={{ flexGrow: 1 }}>
+                <Typography variant="body1">
+                  {variable}
+                  <span className={classes.optionSubtitle} style={{ marginLeft: '8px' }}>
+                    {`(${units})`}
+                  </span>
+                </Typography>
+                <Typography variant="body2" className={classes.optionSubtitle} gutterBottom>
+                  {description}
+                </Typography>
+              </div>
+            </Paper>
+          );
+        })}
+      </div>
     </div>
   );
 }
