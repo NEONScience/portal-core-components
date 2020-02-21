@@ -13,8 +13,10 @@ import VariablesIcon from '@material-ui/icons/ShowChart';
 import OptionsIcon from '@material-ui/icons/Settings';
 
 import TimeSeriesViewerContext from './TimeSeriesViewerContext';
+import TimeSeriesViewerSites from './TimeSeriesViewerSites';
 import TimeSeriesViewerDateRange from './TimeSeriesViewerDateRange';
 import TimeSeriesViewerVariables from './TimeSeriesViewerVariables';
+import TimeSeriesViewerOptions from './TimeSeriesViewerOptions';
 import TimeSeriesViewerGraph from './TimeSeriesViewerGraph';
 import Theme from '../Theme/Theme';
 
@@ -97,7 +99,7 @@ const PANELS = {
   SITES: {
     title: 'Sites',
     Icon: SitesIcon,
-    Component: null,
+    Component: TimeSeriesViewerSites,
   },
   DATE_RANGE: {
     title: 'Date Range',
@@ -112,7 +114,7 @@ const PANELS = {
   OPTIONS: {
     title: 'Options',
     Icon: OptionsIcon,
-    Component: null,
+    Component: TimeSeriesViewerOptions,
   },
 };
 
@@ -120,23 +122,19 @@ export default function TimeSeriesViewerContainer() {
   const classes = useStyles(Theme);
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
 
-  const initialPanel = 'VARIABLES';
+  const initialPanel = 'OPTIONS';
   const [expandedPanel, setExpandedPanel] = useState(initialPanel);
 
   // Slider position is not controlled in state because doing so kills mouse drag performance.
-  // Use a ref to deterministiaclly set slider position when range is changed from date pickers.
+  // Use a ref to deterministically set slider position for all slider-based features.
   const dateRangeSliderRef = useRef(null);
 
   const renderPanelComponent = (panelId) => {
     if (!Object.keys(PANELS).includes(panelId)) { return null; }
-    if (!PANELS[panelId].Component) { return (<div>(...)</div>); }
     const { Component: PanelComponent } = PANELS[panelId];
-    switch (panelId) {
-      case 'DATE_RANGE':
-        return <PanelComponent dateRangeSliderRef={dateRangeSliderRef} />;
-      default:
-        return <PanelComponent />;
-    }
+    let panelComponentProps = {};
+    if (panelId === 'DATE_RANGE') { panelComponentProps = { dateRangeSliderRef }; }
+    return <PanelComponent {...panelComponentProps} />;
   };
 
   const getSitesSummary = () => {

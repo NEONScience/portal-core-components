@@ -18,6 +18,10 @@ import SearchIcon from '@material-ui/icons/Search';
 import Theme from '../Theme/Theme';
 import TimeSeriesViewerContext from './TimeSeriesViewerContext';
 
+// import sitesJSON from '../../static/sites/sites.json';
+// import statesJSON from '../../static/states/states.json';
+// import domainsJSON from '../../static/domains/domains.json';
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -57,7 +61,7 @@ const useStyles = makeStyles(theme => ({
     fontSize: '0.75rem',
     color: Theme.palette.grey[400],
   },
-  variablePaper: {
+  sitePaper: {
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
@@ -67,7 +71,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.grey[50],
     marginRight: theme.spacing(2),
   },
-  variablePaperContainer: {
+  sitePaperContainer: {
     lineHeight: '5em',
     marginTop: theme.spacing(2.5),
   },
@@ -97,7 +101,7 @@ function Control(props) {
   return (
     <TextField
       fullWidth
-      label="Search Variables"
+      label="Search Sites"
       variant="outlined"
       InputProps={{
         inputComponent,
@@ -142,16 +146,23 @@ function Option(props) {
     data,
   } = props;
   const {
-    value,
-    units,
+    siteCode,
     description,
+    /*
+      type,
+      terrain,
+      stateCode,
+      domainCode,
+      latitude,
+      longitude,
+    */
   } = data;
   const textStyle = isDisabled ? {
     color: Theme.palette.grey[200],
   } : {};
   return (
     <MenuItem
-      key={value}
+      key={siteCode}
       ref={innerRef}
       selected={isFocused && !isDisabled}
       component="div"
@@ -164,13 +175,7 @@ function Option(props) {
       {...innerProps}
     >
       <Typography variant="body1" style={{ ...textStyle }}>
-        {value}
-        <span
-          className={classes.optionSubtitle}
-          style={{ ...textStyle, marginLeft: '8px' }}
-        >
-          {`(${units})`}
-        </span>
+        {siteCode}
       </Typography>
       <Typography
         variant="body2"
@@ -269,41 +274,21 @@ const selectStyles = {
   }),
 };
 
-export default function TimeSeriesViewerVariables() {
+export default function TimeSeriesViewerSites() {
   const classes = useStyles(Theme);
-  const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
+  const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
+  // console.log(state.product.sites);
 
-  const selectedVariables = state.selection.variables.map(variable => ({
-    ...state.variables[variable],
-    value: variable,
+  const selectableSites = Object.keys(state.product.sites).map(siteCode => ({
+    ...state.product.sites[siteCode],
+    value: siteCode,
+    siteCode,
   }));
-  const selectedUnits = Array.from(
-    state.selection.variables.reduce((units, variable) => {
-      units.add(state.variables[variable].units);
-      return units;
-    }, new Set()),
-  );
-  const selectableVariables = [
-    { label: 'Basic Variables', options: [] },
-    { label: 'Expanded Variables', options: [] },
-  ];
-  let selectableVariablesCount = 0;
-  Object.keys(state.variables)
-    .filter(variable => state.variables[variable].isSelectable)
-    .forEach((variable) => {
-      const groupIdx = state.variables[variable].downloadPkg === 'basic' ? 0 : 1;
-      const isDisabled = selectedUnits.length === 2
-        && !selectedUnits.includes(state.variables[variable].units);
-      selectableVariables[groupIdx].options.push({
-        ...state.variables[variable],
-        value: variable,
-        isDisabled,
-      });
-      selectableVariablesCount += 1;
-    });
+  const selectedSiteCodes = state.selection.sites.map(site => site.siteCode);
+  const selectedSites = selectableSites.filter(site => selectedSiteCodes.includes(site.siteCode));
 
   // TODO: skeleton
-  if (!selectableVariablesCount) {
+  if (!selectableSites.length) {
     return null;
   }
 
@@ -316,46 +301,56 @@ export default function TimeSeriesViewerVariables() {
           clearable={false}
           classes={classes}
           styles={selectStyles}
-          aria-label="Search Variables"
-          data-gtm="time-series-viewer.search-variables"
-          options={selectableVariables}
+          aria-label="Search Sites"
+          data-gtm="time-series-viewer.search-sites"
+          options={selectableSites}
           components={components}
-          value={selectedVariables}
+          value={selectedSites}
           controlShouldRenderValue={false}
           filterOption={(option, searchText) => (
             option.data.value.toLowerCase().includes(searchText.toLowerCase())
-              || option.data.units.toLowerCase().includes(searchText.toLowerCase())
-              || option.data.description.toLowerCase().includes(searchText.toLowerCase())
           )}
           onChange={(value) => {
             if (!value) { return; }
-            dispatch({ type: 'selectVariables', variables: value.map(v => v.value) });
+            console.log('selectSites', value);
+            // dispatch({ type: 'selectVariables', variables: value.map(v => v.value) });
           }}
         />
       </NoSsr>
-      <div className={classes.variablePaperContainer}>
-        {state.selection.variables.map((variable) => {
-          const { units, description } = state.variables[variable];
+      <div className={classes.sitePaperContainer}>
+        {state.selection.sites.map((site) => {
+          const { siteCode } = site;
+          const {
+            description,
+            /*
+            type,
+            terrain,
+            stateCode,
+            domainCode,
+            latitude,
+            longitude,
+            */
+          } = state.product.sites[siteCode];
           return (
-            <Paper key={variable} className={classes.variablePaper}>
+            <Paper key={siteCode} className={classes.sitePaper}>
               <IconButton
-                aria-label={`remove variable ${variable}`}
+                aria-label={`remove site ${siteCode} and all its positions`}
                 style={{ marginRight: Theme.spacing(1) }}
                 onClick={() => {
+                  console.log('removeSite');
+                  /*
                   dispatch({
-                    type: 'selectVariables',
+                    type: 'selectSites',
                     variables: state.selection.variables.filter(v => v !== variable),
                   });
+                  */
                 }}
               >
                 <ClearIcon fontSize="small" />
               </IconButton>
               <div style={{ flexGrow: 1 }}>
                 <Typography variant="body1">
-                  {variable}
-                  <span className={classes.optionSubtitle} style={{ marginLeft: '8px' }}>
-                    {`(${units})`}
-                  </span>
+                  {siteCode}
                 </Typography>
                 <Typography variant="body2" className={classes.optionSubtitle} gutterBottom>
                   {description}

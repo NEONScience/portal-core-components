@@ -6,6 +6,27 @@ export namespace TIME_SERIES_VIEWER_STATUS {
     export const ERROR: string;
     export const READY: string;
 }
+/**
+   Time Step Definitions and Functions
+*/
+export const TIME_STEPS: {
+    '1min': {
+        key: string;
+        seconds: number;
+    };
+    '2min': {
+        key: string;
+        seconds: number;
+    };
+    '5min': {
+        key: string;
+        seconds: number;
+    };
+    '30min': {
+        key: string;
+        seconds: number;
+    };
+};
 export default TimeSeriesViewerContext;
 /**
  * Build a set of data to update various parts of state from a product/site variables fetch response
@@ -67,9 +88,15 @@ declare function useTimeSeriesViewerState(): {
         continuousDateRange: never[];
         variables: never[];
         sites: never[];
-    };
-    options: {
-        timeScale: string;
+        options: {
+            timeStep: null;
+            qualityFlags: never[];
+            logScale: {
+                y1: boolean;
+                y2: boolean;
+            };
+            rollPeriod: number;
+        };
     };
 } | ((() => void) | {
     status: string;
@@ -95,9 +122,15 @@ declare function useTimeSeriesViewerState(): {
         continuousDateRange: never[];
         variables: never[];
         sites: never[];
-    };
-    options: {
-        timeScale: string;
+        options: {
+            timeStep: null;
+            qualityFlags: never[];
+            logScale: {
+                y1: boolean;
+                y2: boolean;
+            };
+            rollPeriod: number;
+        };
     };
 })[];
 declare namespace TimeSeriesViewerPropTypes {

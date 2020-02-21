@@ -42,13 +42,14 @@ export default function TimeSeriesViewerGraph() {
   const dygraphDomRef = useRef(null);
   const axisCountRef = useRef(1);
   const axisCountChangedRef = useRef(false);
-  const { timeScale } = state.options;
   const {
     selectionDigest,
     continuousDateRange,
     variables,
     sites,
+    options,
   } = state.selection;
+  const { timeStep, rollPeriod } = options;
 
   const data = [];
   const monthOffsets = [];
@@ -61,7 +62,7 @@ export default function TimeSeriesViewerGraph() {
     continuousDateRange.forEach((month, idx) => {
       monthOffsets[idx] = data.length;
       state.product.sites[sites[0].siteCode].positions[sites[0].positions[0]]
-        .data[month].basic[timeScale].series.startDateTime.forEach((d) => {
+        .data[month].basic[timeStep].series.startDateTime.forEach((d) => {
           data.push([d]);
         });
     });
@@ -88,7 +89,7 @@ export default function TimeSeriesViewerGraph() {
             const columnIdx = labels.indexOf(label);
             const { downloadPkg } = state.variables[variable];
             state.product.sites[siteCode].positions[position]
-              .data[month][downloadPkg][timeScale].series[variable].forEach((d, datumIdx) => {
+              .data[month][downloadPkg][timeStep].series[variable].forEach((d, datumIdx) => {
                 data[datumIdx + monthOffsets[monthIdx]][columnIdx] = d;
               });
           });
@@ -150,6 +151,7 @@ export default function TimeSeriesViewerGraph() {
       labels,
       axes: buildAxesOption(axes),
       series: buildSeriesOption(axes),
+      rollPeriod,
     };
     // Apply axis labels to graphOptions
     axes.forEach((axis) => {

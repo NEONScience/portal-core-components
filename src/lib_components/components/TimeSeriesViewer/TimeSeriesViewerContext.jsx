@@ -46,7 +46,7 @@ export const TIME_SERIES_VIEWER_STATUS = {
 const DATA_FILE_PARTS = {
   POSITION_H: 6,
   POSITION_V: 7,
-  TIME_SCALE: 8,
+  TIME_STEP: 8,
   MONTH: 10,
   PACKAGE_TYPE: 11,
 };
@@ -82,9 +82,12 @@ const DEFAULT_STATE = {
     continuousDateRange: [],
     variables: [],
     sites: [],
-  },
-  options: {
-    timeScale: '30min',
+    options: {
+      timeStep: null,
+      qualityFlags: [],
+      logScale: { y1: false, y2: false },
+      rollPeriod: 1,
+    },
   },
 };
 const Context = createContext(DEFAULT_STATE);
@@ -116,20 +119,20 @@ const parseCSV = csv => parse(csv, {
 });
 
 /**
-   Time Scale Definitions and Functions
+   Time Step Definitions and Functions
 */
-const TIME_SCALES = {
-  '1min': { id: '1min', seconds: 60 },
-  '2min': { id: '2min', seconds: 120 },
-  '5min': { id: '5min', seconds: 300 },
-  '30min': { id: '30min', seconds: 1800 },
+export const TIME_STEPS = {
+  '1min': { key: '1min', seconds: 60 },
+  '2min': { key: '2min', seconds: 120 },
+  '5min': { key: '5min', seconds: 300 },
+  '30min': { key: '30min', seconds: 1800 },
 };
-const getTimeScale = (input) => {
+const getTimeStep = (input) => {
   let cleaned = input;
   if (input.includes('_')) {
     cleaned = input.split('_').slice(1).join('');
   }
-  if (TIME_SCALES[cleaned]) { return cleaned; }
+  if (TIME_STEPS[cleaned]) { return cleaned; }
   const mapping = {
     '001': '1min',
     '002': '2min',
@@ -225,13 +228,13 @@ const parseSiteMonthData = (site, files) => {
     const position = `${parts[DATA_FILE_PARTS.POSITION_H]}.${parts[DATA_FILE_PARTS.POSITION_V]}`;
     const month = parts[DATA_FILE_PARTS.MONTH];
     const packageType = parts[DATA_FILE_PARTS.PACKAGE_TYPE];
-    const timeScale = getTimeScale(parts[DATA_FILE_PARTS.TIME_SCALE]);
+    const timeStep = getTimeStep(parts[DATA_FILE_PARTS.TIME_STEP]);
     if (!newSite.positions[position]) { newSite.positions[position] = { data: {} }; }
     if (!newSite.positions[position].data[month]) { newSite.positions[position].data[month] = {}; }
     if (!newSite.positions[position].data[month][packageType]) {
       newSite.positions[position].data[month][packageType] = {};
     }
-    newSite.positions[position].data[month][packageType][timeScale] = {
+    newSite.positions[position].data[month][packageType][timeStep] = {
       url,
       status: FETCH_STATUS.AWAITING_CALL,
       error: null,
@@ -268,7 +271,7 @@ const parseSiteVariables = (previousVariables, siteCode, csv) => {
       table,
       units,
     } = variable;
-    const timeScale = getTimeScale(table);
+    const timeStep = getTimeStep(table);
     const isSelectable = variable.dataType !== 'dateTime'
       && variable.units !== 'NA'
       && !/QF/.test(fieldName);
@@ -282,13 +285,13 @@ const parseSiteVariables = (previousVariables, siteCode, csv) => {
         description,
         downloadPkg,
         units,
-        timeScales: new Set(),
+        timeSteps: new Set(),
         sites: new Set(),
         isSelectable,
         canBeDefault,
       };
     }
-    newStateVariables[fieldName].timeScales.add(timeScale);
+    newStateVariables[fieldName].timeSteps.add(timeStep);
     newStateVariables[fieldName].sites.add(siteCode);
   });
   return { variablesSet, variablesObject: newStateVariables };
@@ -362,19 +365,19 @@ const applyDefaultsToSelection = (state) => {
   const { product, variables } = state;
   const selection = state.selection || { dateRange: [null, null], variables: [], sites: [] };
   if (!Object.keys(product.sites).length) { return selection; }
-  // Selection must have at least one site (default to first in list)
+  // Ensure the selection has at least one site (default to first in list)
   if (!selection.sites.length) {
     const siteCodes = Object.keys(product.sites);
     siteCodes.sort();
     selection.sites.push({ siteCode: siteCodes[0], positions: [] });
   }
-  // Selection must have a date range (default to latest month)
+  // Ensure the selection has a date range (default to latest month)
   if (selection.dateRange[0] === null || selection.dateRange[1] === null) {
     const { availableMonths } = product.sites[selection.sites[0].siteCode];
     const initialMonth = availableMonths[availableMonths.length - 1];
     selection.dateRange = [initialMonth, initialMonth];
   }
-  // If any selected sites don't have selected positions attempt to add one
+  // Ensure every selected site has at least one selected position
   selection.sites.forEach((site, idx) => {
     if (site.positions.length > 0) { return; }
     const { siteCode } = site;
@@ -383,10 +386,16 @@ const applyDefaultsToSelection = (state) => {
     positions.sort();
     selection.sites[idx].positions.push(positions[0]);
   });
-  // If the selection has no variables attempt to add one
+  // Ensure the selection has at least one variable
   if (!selection.variables.length && Object.keys(variables).length) {
     const defaultVar = Object.keys(variables).find(variable => variables[variable].canBeDefault);
     if (defaultVar) { selection.variables.push(defaultVar); }
+  }
+  // Ensure the selection has a time step
+  if (!selection.options.timeStep && selection.variables.length) {
+    selection.options.timeStep = '30min';
+    // TODO: get from available
+    // state.variables[selection.variables[0]].timeSteps[0]
   }
   // Generate a new continuous date range from the dateRange (which only contains bounds)
   selection.continuousDateRange = getContinuousDatesArray(selection.dateRange);
@@ -433,12 +442,12 @@ const reducer = (state, action) => {
         position,
         month,
         downloadPkg,
-        timeScale,
+        timeStep,
       } = fetch;
       newState.product
         .sites[siteCode]
         .positions[position]
-        .data[month][downloadPkg][timeScale]
+        .data[month][downloadPkg][timeStep]
         .status = FETCH_STATUS.FETCHING;
     });
   };
@@ -546,6 +555,7 @@ const reducer = (state, action) => {
     case 'fetchDataFilesCompleted':
       delete newState.dataFetches[action.token];
       newState.status = TIME_SERIES_VIEWER_STATUS.READY;
+      console.log('READY', newState);
       return newState;
     case 'noDataFilesFetchNecessary':
       newState.status = TIME_SERIES_VIEWER_STATUS.READY;
@@ -556,28 +566,28 @@ const reducer = (state, action) => {
       newState.product
         .sites[action.siteCode]
         .positions[action.position]
-        .data[action.month][action.downloadPkg][action.timeScale]
+        .data[action.month][action.downloadPkg][action.timeStep]
         .status = FETCH_STATUS.ERROR;
       newState.product
         .sites[action.siteCode]
         .positions[action.position]
-        .data[action.month][action.downloadPkg][action.timeScale]
+        .data[action.month][action.downloadPkg][action.timeStep]
         .error = action.error;
       return newState;
     case 'fetchDataFileSucceeded':
       newState.product
         .sites[action.siteCode]
         .positions[action.position]
-        .data[action.month][action.downloadPkg][action.timeScale]
+        .data[action.month][action.downloadPkg][action.timeStep]
         .status = FETCH_STATUS.SUCCESS;
       newState.product
         .sites[action.siteCode]
         .positions[action.position]
-        .data[action.month][action.downloadPkg][action.timeScale]
+        .data[action.month][action.downloadPkg][action.timeStep]
         .series = parseSeriesData(action.csv, newState.variables);
       return newState;
 
-    // Selection Actions
+    // Core Selection Actions
     case 'selectDateRange':
       newState.selection.dateRange = action.dateRange;
       calcSelection();
@@ -587,6 +597,12 @@ const reducer = (state, action) => {
       newState.selection.variables = limitVariablesToTwoUnits(action.variables);
       calcSelection();
       calcStatus();
+      return newState;
+
+    // Option Actions
+    case 'setRollPeriod':
+      newState.selection.options.rollPeriod = action.rollPeriod;
+      console.log('setRollPeriod', newState);
       return newState;
 
     // Default
@@ -658,7 +674,7 @@ const Provider = (props) => {
       const root = NeonEnvironment.getFullApiPath('data');
       return `${root}/${state.product.productCode}/${siteCode}/${month}?presign=false`;
     };
-    const { timeScale } = state.options;
+    const { timeStep } = state.selection.options;
     const continuousDateRange = getContinuousDatesArray(state.selection.dateRange);
     const dataFetchTokens = new Set();
     const dataFetches = [];
@@ -744,16 +760,16 @@ const Provider = (props) => {
               position,
               month,
               downloadPkg,
-              timeScale,
+              timeStep,
             };
             // eslint-disable-next-line max-len
-            const path = `sites['${siteCode}'].positions['${position}'].data['${month}']['${downloadPkg}']['${timeScale}']`;
+            const path = `sites['${siteCode}'].positions['${position}'].data['${month}']['${downloadPkg}']['${timeStep}']`;
             const { url, status } = get(state.product, path, {});
             // If the file isn't awaiting a fetch call then don't fetch it
             if (!url || status !== FETCH_STATUS.AWAITING_CALL) { return; }
             // Use the dataFetchTokens set to make sure we don't somehow add the same fetch twice
             const previousSize = dataFetchTokens.size;
-            const token = `${siteCode};${position};${month};${downloadPkg};${timeScale}`;
+            const token = `${siteCode};${position};${month};${downloadPkg};${timeStep}`;
             dataFetchTokens.add(token);
             if (dataFetchTokens.size === previousSize) { return; }
             // Save the action props to pass to the fetchDataFiles action to set all fetch statuses
@@ -838,7 +854,6 @@ const Provider = (props) => {
     state.selection.digest,
     state.variables,
     state.product,
-    state.options,
   ]);
 
   /**
