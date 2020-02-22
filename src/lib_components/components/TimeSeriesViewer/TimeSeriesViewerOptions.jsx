@@ -1,11 +1,55 @@
 import React, { useRef, useCallback, useEffect } from 'react';
 
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
+// import ToggleButton from '@material-ui/lab/ToggleButton';
+// import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import NoneIcon from '@material-ui/icons/NotInterested';
+import SelectAllIcon from '@material-ui/icons/DoneAll';
+import SelectNoneIcon from '@material-ui/icons/Clear';
 
 import Theme from '../Theme/Theme';
 import TimeSeriesViewerContext, { TIME_STEPS } from './TimeSeriesViewerContext';
+
+const useStyles = makeStyles(theme => ({
+  optionContainer: {
+    width: '100%',
+    marginBottom: theme.spacing(2),
+  },
+  noneContainer: {
+    color: theme.palette.grey[400],
+    display: 'flex',
+    alignItems: 'flex-start',
+  },
+  noneIcon: {
+    color: theme.palette.grey[400],
+    margin: theme.spacing(0.375, 0.5, 0, 0),
+    fontSize: '1rem',
+  },
+  noneLabel: {
+    fontSize: '0.95rem',
+  },
+  qualityFlagsButtons: {
+    flexGrow: 0,
+    marginRight: theme.spacing(2),
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  smallButton: {
+    fontSize: '0.8rem',
+    padding: theme.spacing(0.125, 0.75),
+    whiteSpace: 'nowrap',
+  },
+  smallButtonIcon: {
+    marginRight: theme.spacing(0.5),
+    fontSize: '0.8rem',
+  },
+}));
 
 const boxShadow = alpha => `0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,${alpha}),0 0 0 1px rgba(0,0,0,0.02)`;
 const RollPeriodSlider = withStyles({
@@ -160,13 +204,108 @@ const RollPeriodOption = () => {
 };
 
 /**
+   Y-Axis Scale Option
+*/
+const YAxisScaleOption = () => {
+  const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
+  const { logScale } = state.selection.options;
+  return (
+    <div>
+      {JSON.stringify(logScale)}
+    </div>
+  );
+};
+
+/**
+   Quality Flags Option
+*/
+const QualityFlagsOption = () => {
+  const classes = useStyles(Theme);
+  const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
+  const { qualityFlags: selectedQualityFlags } = state.selection.options;
+  const availableQualityFlags = Object.keys(state.variables).filter(v => /QF$/.test(v));
+  return !availableQualityFlags.length ? (
+    <div className={classes.noneContainer}>
+      <NoneIcon className={classes.noneIcon} />
+      <Typography variant="body1" className={classes.noneLabel}>
+        No Quality Flags Available
+      </Typography>
+    </div>
+  ) : (
+    <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+      {availableQualityFlags.length > 1 ? (
+        <div className={classes.qualityFlagsButtons}>
+          <Button
+            color="primary"
+            variant="outlined"
+            onClick={() => { dispatch({ type: 'selectAllQualityFlags' }); }}
+            className={classes.smallButton}
+            style={{ marginBottom: Theme.spacing(1) }}
+          >
+            <SelectAllIcon className={classes.smallButtonIcon} />
+            {`Select All (${availableQualityFlags.length})`}
+          </Button>
+          <Button
+            color="primary"
+            variant="outlined"
+            onClick={() => { dispatch({ type: 'selectNoneQualityFlags' }); }}
+            className={classes.smallButton}
+          >
+            <SelectNoneIcon className={classes.smallButtonIcon} />
+            Select None
+          </Button>
+        </div>
+      ) : null}
+      <div style={{ flexGrow: 1, marginTop: Theme.spacing(-0.5) }}>
+        <FormGroup>
+          {availableQualityFlags.map((qf) => {
+            const checked = selectedQualityFlags.includes(qf);
+            const captionStyle = { display: 'block', color: Theme.palette.grey[400] };
+            return (
+              <FormControlLabel
+                key={qf}
+                style={{ alignItems: 'flex-start', marginBottom: Theme.spacing(1) }}
+                control={<Checkbox value={qf} checked={checked} />}
+                label={(
+                  <div style={{ paddingTop: Theme.spacing(0.5) }}>
+                    <Typography variant="body2">
+                      {qf}
+                      <Typography variant="caption" style={captionStyle}>
+                        {state.variables[qf].description}
+                      </Typography>
+                    </Typography>
+                  </div>
+                )}
+              />
+            );
+          })}
+        </FormGroup>
+      </div>
+    </div>
+  );
+};
+
+/**
+   Time Step Option
+*/
+const TimeStepOption = () => {
+  const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
+  const { timeStep: selectedTimeStep } = state.selection.options;
+  return (
+    <div>
+      {selectedTimeStep}
+    </div>
+  );
+};
+
+/**
    Option Titles and Descriptions
 */
 const OPTIONS = {
   Y_AXIS_SCALE: {
     title: 'Y-Axis Scale',
     description: 'foo bar qux',
-    Component: () => null,
+    Component: YAxisScaleOption,
   },
 
   ROLL_PERIOD: {
@@ -178,13 +317,13 @@ const OPTIONS = {
   QUALITY_FLAGS: {
     title: 'Quality Flags',
     description: 'foo bar qux',
-    Component: () => null,
+    Component: QualityFlagsOption,
   },
 
   TIME_STEP: {
     title: 'Time Step',
     description: 'foo bar qux',
-    Component: () => null,
+    Component: TimeStepOption,
   },
 };
 
@@ -192,17 +331,20 @@ const OPTIONS = {
    Main Component
 */
 export default function TimeSeriesViewerOptions() {
+  const classes = useStyles(Theme);
   return (
     <div style={{ width: '100%' }}>
       {Object.keys(OPTIONS).map((optionKey) => {
         const { title, description, Component } = OPTIONS[optionKey];
         return (
-          <div key={optionKey} style={{ width: '100%', marginBottom: Theme.spacing(2) }}>
+          <div key={optionKey} className={classes.optionContainer}>
             <Typography variant="subtitle2">{title}</Typography>
             <Typography variant="caption" style={{ color: Theme.palette.grey[400] }}>
               {description}
             </Typography>
-            <Component />
+            <div style={{ width: '100%', marginTop: Theme.spacing(1) }}>
+              <Component />
+            </div>
           </div>
         );
       })}
