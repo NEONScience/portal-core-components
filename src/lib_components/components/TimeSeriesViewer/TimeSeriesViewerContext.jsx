@@ -83,12 +83,15 @@ const DEFAULT_STATE = {
     variables: [],
     sites: [],
     options: {
-      timeStep: null,
+      timeStep: 'auto', // The visible selected timeStep, as per what's available, or 'auto'
+      autoTimeStep: null, // The functional timeStep if the selection is 'auto'
       qualityFlags: [],
       logScale: { y1: false, y2: false },
       rollPeriod: 1,
     },
   },
+  availableQualityFlags: new Set(),
+  availableTimeSteps: new Set(['auto']),
 };
 const Context = createContext(DEFAULT_STATE);
 const useTimeSeriesViewerState = () => {
@@ -219,6 +222,7 @@ const parseProductData = (productData = {}) => {
  */
 const parseSiteMonthData = (site, files) => {
   const newSite = { ...site };
+  const availableTimeSteps = new Set();
   files.forEach((file) => {
     const { name, url } = file;
     if (!/\.csv$/.test(name)) { return; }
@@ -229,6 +233,7 @@ const parseSiteMonthData = (site, files) => {
     const month = parts[DATA_FILE_PARTS.MONTH];
     const packageType = parts[DATA_FILE_PARTS.PACKAGE_TYPE];
     const timeStep = getTimeStep(parts[DATA_FILE_PARTS.TIME_STEP]);
+    availableTimeSteps.add(timeStep);
     if (!newSite.positions[position]) { newSite.positions[position] = { data: {} }; }
     if (!newSite.positions[position].data[month]) { newSite.positions[position].data[month] = {}; }
     if (!newSite.positions[position].data[month][packageType]) {
@@ -241,7 +246,7 @@ const parseSiteMonthData = (site, files) => {
       series: {},
     };
   });
-  return newSite;
+  return { siteObject: newSite, availableTimeSteps };
 };
 
 /**
@@ -391,12 +396,6 @@ const applyDefaultsToSelection = (state) => {
     const defaultVar = Object.keys(variables).find(variable => variables[variable].canBeDefault);
     if (defaultVar) { selection.variables.push(defaultVar); }
   }
-  // Ensure the selection has a time step
-  if (!selection.options.timeStep && selection.variables.length) {
-    selection.options.timeStep = '30min';
-    // TODO: get from available
-    // state.variables[selection.variables[0]].timeSteps[0]
-  }
   // Generate a new continuous date range from the dateRange (which only contains bounds)
   selection.continuousDateRange = getContinuousDatesArray(selection.dateRange);
   // Generate a new digest for effect comparison
@@ -486,9 +485,19 @@ const reducer = (state, action) => {
     case 'fetchSiteMonthSucceeded':
       delete newState.metaFetches[`fetchSiteMonth.${action.siteCode}.${action.month}`];
       newState.product.sites[action.siteCode].fetches[action.month].status = FETCH_STATUS.SUCCESS;
-      newState.product.sites[action.siteCode] = parseSiteMonthData(
-        newState.product.sites[action.siteCode], action.files,
-      );
+      parsedContent = parseSiteMonthData(newState.product.sites[action.siteCode], action.files);
+      newState.product.sites[action.siteCode] = parsedContent.siteObject;
+      newState.availableTimeSteps = new Set([
+        ...state.availableTimeSteps,
+        ...parsedContent.availableTimeSteps,
+      ]);
+      if (state.selection.options.autoTimeStep === null && newState.availableTimeSteps.size > 1) {
+        newState.selection.options.autoTimeStep = Array.from(newState.availableTimeSteps)
+          .reduce((acc, cur) => {
+            if (cur === 'auto') { return acc; }
+            return (acc === null || TIME_STEPS[cur].seconds > TIME_STEPS[acc].seconds) ? cur : acc;
+          }, null);
+      }
       calcSelection();
       if (
         newState.product.sites[action.siteCode].fetches.variables.status !== FETCH_STATUS.SUCCESS
@@ -514,8 +523,18 @@ const reducer = (state, action) => {
       delete newState.metaFetches[`fetchSiteVariables.${action.siteCode}`];
       newState.product.sites[action.siteCode].fetches.variables.status = FETCH_STATUS.SUCCESS;
       parsedContent = parseSiteVariables(newState.variables, action.siteCode, action.csv);
-      newState.variables = parsedContent.variablesObject;
-      newState.product.sites[action.siteCode].variables = parsedContent.variablesSet;
+      newState.variables = {
+        ...state.variables,
+        ...parsedContent.variablesObject,
+      };
+      newState.product.sites[action.siteCode].variables = new Set([
+        ...state.product.sites[action.siteCode].variables,
+        ...parsedContent.variablesSet,
+      ]);
+      newState.availableQualityFlags = new Set([
+        ...state.availableQualityFlags,
+        ...Object.keys(newState.variables).filter(v => /QF$/.test(v)),
+      ]);
       calcSelection();
       calcStatus();
       return newState;
@@ -602,7 +621,27 @@ const reducer = (state, action) => {
     // Option Actions
     case 'setRollPeriod':
       newState.selection.options.rollPeriod = action.rollPeriod;
-      console.log('setRollPeriod', newState);
+      return newState;
+    case 'selectAllQualityFlags':
+      newState.selection.options.qualityFlags = Array.from(state.availableQualityFlags);
+      calcStatus();
+      return newState;
+    case 'selectNoneQualityFlags':
+      newState.selection.options.qualityFlags = [];
+      return newState;
+    case 'selectToggleQualityFlag':
+      if (action.selected && !state.selection.options.qualityFlags.includes(action.qualityFlag)) {
+        newState.selection.options.qualityFlags.push(action.qualityFlag);
+      } else if (!action.selected) {
+        newState.selection.options.qualityFlags = newState.selection.options.qualityFlags
+          .filter(v => v !== action.qualityFlag);
+      }
+      calcStatus();
+      return newState;
+    case 'selectTimeStep':
+      if (!state.availableTimeSteps.has(action.timeStep)) { return state; }
+      newState.selection.options.timeStep = action.timeStep;
+      calcStatus();
       return newState;
 
     // Default
@@ -674,7 +713,8 @@ const Provider = (props) => {
       const root = NeonEnvironment.getFullApiPath('data');
       return `${root}/${state.product.productCode}/${siteCode}/${month}?presign=false`;
     };
-    const { timeStep } = state.selection.options;
+    const { timeStep: selectedTimeStep, autoTimeStep } = state.selection.options;
+    const timeStep = selectedTimeStep === 'auto' ? autoTimeStep : selectedTimeStep;
     const continuousDateRange = getContinuousDatesArray(state.selection.dateRange);
     const dataFetchTokens = new Set();
     const dataFetches = [];

@@ -49,7 +49,8 @@ export default function TimeSeriesViewerGraph() {
     sites,
     options,
   } = state.selection;
-  const { timeStep, rollPeriod } = options;
+  const { timeStep: selectedTimeStep, autoTimeStep, rollPeriod } = options;
+  const timeStep = selectedTimeStep === 'auto' ? autoTimeStep : selectedTimeStep;
 
   const data = [];
   const monthOffsets = [];

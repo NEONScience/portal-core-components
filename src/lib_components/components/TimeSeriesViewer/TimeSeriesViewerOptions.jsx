@@ -7,8 +7,8 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
-// import ToggleButton from '@material-ui/lab/ToggleButton';
-// import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import NoneIcon from '@material-ui/icons/NotInterested';
 import SelectAllIcon from '@material-ui/icons/DoneAll';
 import SelectNoneIcon from '@material-ui/icons/Clear';
@@ -48,6 +48,22 @@ const useStyles = makeStyles(theme => ({
   smallButtonIcon: {
     marginRight: theme.spacing(0.5),
     fontSize: '0.8rem',
+  },
+  optionButtonGroup: {
+    height: theme.spacing(4),
+  },
+  optionButton: {
+    height: theme.spacing(4),
+    fontWeight: 600,
+    color: theme.palette.primary.main,
+    borderColor: theme.palette.primary.main,
+    padding: theme.spacing(0, 1.5),
+    whiteSpace: 'nowrap',
+  },
+  // Use !important here to override the Mui-selected class with higher priority
+  optionButtonSelected: {
+    color: '#fff !important',
+    backgroundColor: `${theme.palette.primary.main} !important`,
   },
 }));
 
@@ -123,7 +139,12 @@ const RollPeriodOption = () => {
   const rollPeriodSliderRef = useRef(null);
 
   const { selection } = state;
-  const { rollPeriod: currentRollPeriod, timeStep: currentTimeStep } = selection.options;
+  const {
+    rollPeriod: currentRollPeriod,
+    timeStep: selectedTimeStep,
+    autoTimeStep,
+  } = selection.options;
+  const currentTimeStep = selectedTimeStep === 'auto' ? autoTimeStep : selectedTimeStep;
 
   const dateRangeMonths = selection.continuousDateRange.length;
   const timeStepSeconds = currentTimeStep ? TIME_STEPS[currentTimeStep].seconds : 1800;
@@ -222,9 +243,12 @@ const YAxisScaleOption = () => {
 const QualityFlagsOption = () => {
   const classes = useStyles(Theme);
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
+  const { availableQualityFlags } = state;
   const { qualityFlags: selectedQualityFlags } = state.selection.options;
-  const availableQualityFlags = Object.keys(state.variables).filter(v => /QF$/.test(v));
-  return !availableQualityFlags.length ? (
+  const toggleFlag = qualityFlag => (event) => {
+    dispatch({ type: 'selectToggleQualityFlag', qualityFlag, selected: event.target.checked });
+  };
+  return !availableQualityFlags.size ? (
     <div className={classes.noneContainer}>
       <NoneIcon className={classes.noneIcon} />
       <Typography variant="body1" className={classes.noneLabel}>
@@ -233,7 +257,7 @@ const QualityFlagsOption = () => {
     </div>
   ) : (
     <div style={{ display: 'flex', alignItems: 'flex-start' }}>
-      {availableQualityFlags.length > 1 ? (
+      {availableQualityFlags.size > 1 ? (
         <div className={classes.qualityFlagsButtons}>
           <Button
             color="primary"
@@ -243,7 +267,7 @@ const QualityFlagsOption = () => {
             style={{ marginBottom: Theme.spacing(1) }}
           >
             <SelectAllIcon className={classes.smallButtonIcon} />
-            {`Select All (${availableQualityFlags.length})`}
+            {`Select All (${availableQualityFlags.size})`}
           </Button>
           <Button
             color="primary"
@@ -258,14 +282,21 @@ const QualityFlagsOption = () => {
       ) : null}
       <div style={{ flexGrow: 1, marginTop: Theme.spacing(-0.5) }}>
         <FormGroup>
-          {availableQualityFlags.map((qf) => {
+          {Array.from(availableQualityFlags).map((qf) => {
             const checked = selectedQualityFlags.includes(qf);
             const captionStyle = { display: 'block', color: Theme.palette.grey[400] };
             return (
               <FormControlLabel
                 key={qf}
                 style={{ alignItems: 'flex-start', marginBottom: Theme.spacing(1) }}
-                control={<Checkbox value={qf} checked={checked} />}
+                control={(
+                  <Checkbox
+                    value={qf}
+                    color="primary"
+                    checked={checked}
+                    onChange={toggleFlag(qf)}
+                  />
+                )}
                 label={(
                   <div style={{ paddingTop: Theme.spacing(0.5) }}>
                     <Typography variant="body2">
@@ -289,11 +320,35 @@ const QualityFlagsOption = () => {
    Time Step Option
 */
 const TimeStepOption = () => {
-  const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
+  const classes = useStyles(Theme);
+  const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
+  const { availableTimeSteps } = state;
   const { timeStep: selectedTimeStep } = state.selection.options;
+  const handleChangeTimeStep = (event, timeStep) => {
+    dispatch({ type: 'selectTimeStep', timeStep });
+  };
   return (
     <div>
-      {selectedTimeStep}
+      <ToggleButtonGroup
+        exclusive
+        color="primary"
+        variant="outlined"
+        size="small"
+        className={classes.optionButtonGroup}
+        value={selectedTimeStep}
+        onChange={handleChangeTimeStep}
+      >
+        {Array.from(availableTimeSteps).map((timeStep) => {
+          const className = timeStep === selectedTimeStep
+            ? `${classes.optionButton} ${classes.optionButtonSelected}`
+            : classes.optionButton;
+          return (
+            <ToggleButton key={timeStep} value={timeStep} size="small" className={className}>
+              {timeStep}
+            </ToggleButton>
+          );
+        })}
+      </ToggleButtonGroup>
     </div>
   );
 };

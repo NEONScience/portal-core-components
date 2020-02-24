@@ -89,7 +89,8 @@ declare function useTimeSeriesViewerState(): {
         variables: never[];
         sites: never[];
         options: {
-            timeStep: null;
+            timeStep: string;
+            autoTimeStep: null;
             qualityFlags: never[];
             logScale: {
                 y1: boolean;
@@ -98,6 +99,8 @@ declare function useTimeSeriesViewerState(): {
             rollPeriod: number;
         };
     };
+    availableQualityFlags: Set<any>;
+    availableTimeSteps: Set<string>;
 } | ((() => void) | {
     status: string;
     fetchProduct: {
@@ -123,7 +126,8 @@ declare function useTimeSeriesViewerState(): {
         variables: never[];
         sites: never[];
         options: {
-            timeStep: null;
+            timeStep: string;
+            autoTimeStep: null;
             qualityFlags: never[];
             logScale: {
                 y1: boolean;
@@ -132,6 +136,8 @@ declare function useTimeSeriesViewerState(): {
             rollPeriod: number;
         };
     };
+    availableQualityFlags: Set<any>;
+    availableTimeSteps: Set<string>;
 })[];
 declare namespace TimeSeriesViewerPropTypes {
     export function productCode_2(props: any, propName: any, componentName: any): Error | null;
