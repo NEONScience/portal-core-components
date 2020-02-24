@@ -12,6 +12,7 @@ declare namespace NeonEnvironment {
     export function getApiVersion(): string | undefined;
     export function getRootApiPath(): string;
     export function getRootGraphqlPath(): string | undefined;
+    export function getRootJsonLdPath(): string;
     export namespace getApiPath {
         export function aopDownload(): string | undefined;
         export function data(): string | undefined;
@@ -40,6 +41,7 @@ declare namespace NeonEnvironment {
     export function getApiTokenHeader(): string;
     export function getApiToken(): string;
     export function getFullApiPath(path?: string): string;
+    export function getFullJsonLdApiPath(path?: string): string;
     export function getFullPagePath(path?: string): string;
     export function getFullAuthPath(path?: string): string;
     export function getFullGraphqlPath(): string;

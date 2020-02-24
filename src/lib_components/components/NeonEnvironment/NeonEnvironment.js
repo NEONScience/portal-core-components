@@ -20,6 +20,7 @@ export const requiredEnvironmentVars = [
 // required list this makes a complete set of all environment variables
 // this module will ever reference.
 export const optionalEnvironmentVars = [
+  'REACT_APP_NEON_HOST_OVERRIDE',
   'REACT_APP_NEON_PATH_AOP_DOWNLOAD_API',
   'REACT_APP_NEON_PATH_DATA_API',
   'REACT_APP_NEON_PATH_DOCUMENTS_API',
@@ -33,6 +34,7 @@ export const optionalEnvironmentVars = [
   'REACT_APP_NEON_VISUS_IFRAME_BASE_URL',
   'REACT_APP_NEON_HOST_OVERRIDE',
   'REACT_APP_FOREIGN_LOCATION',
+  'REACT_APP_NEON_PATH_LD_API',
 ];
 
 const EnvType = {
@@ -52,6 +54,7 @@ const NeonEnvironment = {
   getApiVersion: () => process.env.REACT_APP_NEON_API_VERSION,
   getRootApiPath: () => `/${process.env.REACT_APP_NEON_API_NAME}/${process.env.REACT_APP_NEON_API_VERSION}`,
   getRootGraphqlPath: () => process.env.REACT_APP_NEON_PATH_PUBLIC_GRAPHQL,
+  getRootJsonLdPath: () => `${NeonEnvironment.getRootApiPath()}${process.env.REACT_APP_NEON_PATH_LD_API}`,
 
   getApiPath: {
     aopDownload: () => process.env.REACT_APP_NEON_PATH_AOP_DOWNLOAD_API,
@@ -128,6 +131,14 @@ const NeonEnvironment = {
     const host = NeonEnvironment.getHost();
     // Root path (e.g. '/api/v0') doesn't apply to legacy download/manifest-related paths.
     const root = ['aopDownload', 'download', 'manifest'].includes(path) ? '' : NeonEnvironment.getRootApiPath();
+    return NeonEnvironment.getApiPath[path]
+      ? `${host}${root}${NeonEnvironment.getApiPath[path]()}`
+      : `${host}${root}`;
+  },
+
+  getFullJsonLdApiPath: (path = '') => {
+    const host = NeonEnvironment.getHost();
+    const root = NeonEnvironment.getRootJsonLdPath();
     return NeonEnvironment.getApiPath[path]
       ? `${host}${root}${NeonEnvironment.getApiPath[path]()}`
       : `${host}${root}`;
