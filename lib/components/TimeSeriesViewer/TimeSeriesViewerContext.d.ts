@@ -27,6 +27,7 @@ export const TIME_STEPS: {
         seconds: number;
     };
 };
+export function summarizeTimeSteps(steps: any, timeStep?: any, pluralize?: boolean): string;
 export default TimeSeriesViewerContext;
 /**
  * Build a set of data to update various parts of state from a product/site variables fetch response
@@ -88,15 +89,20 @@ declare function useTimeSeriesViewerState(): {
         continuousDateRange: never[];
         variables: never[];
         sites: never[];
-        options: {
-            timeStep: string;
-            autoTimeStep: null;
-            qualityFlags: never[];
-            logScale: {
-                y1: boolean;
-                y2: boolean;
+        timeStep: string;
+        autoTimeStep: null;
+        qualityFlags: never[];
+        rollPeriod: number;
+        logscale: boolean;
+        yAxes: {
+            y1: {
+                units: null;
+                logscale: boolean;
             };
-            rollPeriod: number;
+            y2: {
+                units: null;
+                logscale: boolean;
+            };
         };
     };
     availableQualityFlags: Set<any>;
@@ -125,15 +131,20 @@ declare function useTimeSeriesViewerState(): {
         continuousDateRange: never[];
         variables: never[];
         sites: never[];
-        options: {
-            timeStep: string;
-            autoTimeStep: null;
-            qualityFlags: never[];
-            logScale: {
-                y1: boolean;
-                y2: boolean;
+        timeStep: string;
+        autoTimeStep: null;
+        qualityFlags: never[];
+        rollPeriod: number;
+        logscale: boolean;
+        yAxes: {
+            y1: {
+                units: null;
+                logscale: boolean;
             };
-            rollPeriod: number;
+            y2: {
+                units: null;
+                logscale: boolean;
+            };
         };
     };
     availableQualityFlags: Set<any>;

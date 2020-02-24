@@ -12,7 +12,7 @@ import DateRangeIcon from '@material-ui/icons/DateRange';
 import VariablesIcon from '@material-ui/icons/ShowChart';
 import OptionsIcon from '@material-ui/icons/Settings';
 
-import TimeSeriesViewerContext from './TimeSeriesViewerContext';
+import TimeSeriesViewerContext, { summarizeTimeSteps } from './TimeSeriesViewerContext';
 import TimeSeriesViewerSites from './TimeSeriesViewerSites';
 import TimeSeriesViewerDateRange from './TimeSeriesViewerDateRange';
 import TimeSeriesViewerVariables from './TimeSeriesViewerVariables';
@@ -20,14 +20,6 @@ import TimeSeriesViewerOptions from './TimeSeriesViewerOptions';
 import TimeSeriesViewerGraph from './TimeSeriesViewerGraph';
 import Theme from '../Theme/Theme';
 
-/*
-const preStyle = {
-  whiteSpace: 'pre-wrap',
-  border: '1px solid black',
-  padding: '2px',
-  overflowY: 'scroll',
-};
-*/
 const useStyles = makeStyles(theme => ({
   panelSummary: {
     display: 'flex',
@@ -38,13 +30,11 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 0,
     display: 'flex',
     alignItems: 'center',
-    paddingRight: theme.spacing(1),
+    paddingRight: theme.spacing(3),
   },
   panelSummarySummaryContainer: {
     flexGrow: 1,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
+    textAlign: 'right',
     color: Theme.palette.grey[400],
   },
 }));
@@ -122,7 +112,7 @@ export default function TimeSeriesViewerContainer() {
   const classes = useStyles(Theme);
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
 
-  const initialPanel = 'OPTIONS';
+  const initialPanel = null;
   const [expandedPanel, setExpandedPanel] = useState(initialPanel);
 
   // Slider position is not controlled in state because doing so kills mouse drag performance.
@@ -166,7 +156,35 @@ export default function TimeSeriesViewerContainer() {
 
   const getVariablesSummary = () => state.selection.variables.join(', ');
 
-  const getOptionsSummary = () => null;
+  const getOptionsSummary = () => {
+    const {
+      timeStep,
+      autoTimeStep,
+      logscale,
+      qualityFlags,
+      rollPeriod,
+    } = state.selection;
+    const currentTimeStep = timeStep === 'auto' ? autoTimeStep : timeStep;
+    const autoTimeStepDisplay = timeStep === 'auto' ? ` (${currentTimeStep})` : '';
+    const options = [
+      `${logscale ? 'Logarithmic' : 'Linear'} scale`,
+      `${timeStep === 'auto' ? 'Auto' : timeStep} time step${autoTimeStepDisplay}`,
+    ];
+    if (rollPeriod > 1) {
+      options.push(`${summarizeTimeSteps(rollPeriod, currentTimeStep, false)} roll period`);
+    }
+    return (
+      <React.Fragment>
+        {options.join(' · ')}
+        {qualityFlags.length > 0 ? (
+          <React.Fragment>
+            <br />
+            {`Quality flags: ${qualityFlags.join(', ')}`}
+          </React.Fragment>
+        ) : null}
+      </React.Fragment>
+    );
+  };
 
   const renderPanelContentSummary = (panelId) => {
     switch (panelId) {
@@ -230,14 +248,6 @@ export default function TimeSeriesViewerContainer() {
           </ExpansionPanel>
         );
       })}
-      {/*
-      <pre style={{ ...preStyle, height: '25vh' }}>
-        {JSON.stringify(state.selection, null, 2)}
-      </pre>
-      <pre style={{ ...preStyle, height: '55vh' }}>
-        {JSON.stringify(state, null, 2)}
-      </pre>
-      */}
     </div>
   );
 }

@@ -47,9 +47,12 @@ export default function TimeSeriesViewerGraph() {
     continuousDateRange,
     variables,
     sites,
-    options,
+    timeStep: selectedTimeStep,
+    autoTimeStep,
+    rollPeriod,
+    logscale,
+    yAxes,
   } = state.selection;
-  const { timeStep: selectedTimeStep, autoTimeStep, rollPeriod } = options;
   const timeStep = selectedTimeStep === 'auto' ? autoTimeStep : selectedTimeStep;
 
   const data = [];
@@ -134,15 +137,11 @@ export default function TimeSeriesViewerGraph() {
     buildSeriesData();
     // Determine the set of axes and their units
     const previousAxisCount = axisCountRef.current;
-    const axes = [{ axis: 'y', units: state.variables[variables[0]].units }];
-    if (variables.length > 1) {
-      const otherUnitVariable = variables.find(variable => (
-        state.variables[variable].units !== axes[0].units
-      ));
-      if (otherUnitVariable) {
-        axes.push({ axis: 'y2', units: state.variables[otherUnitVariable].units });
-      }
-    }
+    const axes = Object.keys(yAxes).map(axis => ({
+      axis: axis === 'y1' ? 'y' : 'y2',
+      units: yAxes[axis].units,
+      // logscale: yAxes[axis].logscale,
+    })).slice(0, yAxes.y2.units === null ? 1 : 2);
     axisCountChangedRef.current = axes.length !== previousAxisCount;
     axisCountRef.current = axes.length;
 
@@ -153,6 +152,7 @@ export default function TimeSeriesViewerGraph() {
       axes: buildAxesOption(axes),
       series: buildSeriesOption(axes),
       rollPeriod,
+      logscale,
     };
     // Apply axis labels to graphOptions
     axes.forEach((axis) => {

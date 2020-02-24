@@ -82,12 +82,14 @@ const DEFAULT_STATE = {
     continuousDateRange: [],
     variables: [],
     sites: [],
-    options: {
-      timeStep: 'auto', // The visible selected timeStep, as per what's available, or 'auto'
-      autoTimeStep: null, // The functional timeStep if the selection is 'auto'
-      qualityFlags: [],
-      logScale: { y1: false, y2: false },
-      rollPeriod: 1,
+    timeStep: 'auto', // The visible selected timeStep, as per what's available, or 'auto'
+    autoTimeStep: null, // The functional timeStep if the selection is 'auto'
+    qualityFlags: [],
+    rollPeriod: 1,
+    logscale: false, // Per-axis logscale is not supported in dygraphs. It's stubbed here in state.
+    yAxes: {
+      y1: { units: null, logscale: false },
+      y2: { units: null, logscale: false },
     },
   },
   availableQualityFlags: new Set(),
@@ -144,6 +146,19 @@ const getTimeStep = (input) => {
   };
   if (mapping[cleaned]) { return mapping[cleaned]; }
   return input;
+};
+export const summarizeTimeSteps = (steps, timeStep = null, pluralize = true) => {
+  if (steps === 1) { return 'none'; }
+  const timeStepSeconds = timeStep && TIME_STEPS[timeStep] ? TIME_STEPS[timeStep].seconds : 1800;
+  const seconds = steps * timeStepSeconds;
+  const breaks = [3600, 86400, 2592000, 31536000];
+  const intervals = ['hour', 'day', 'month', 'year'];
+  const breakIdx = breaks.reduce((acc, cur, idx) => ((seconds > cur) ? idx : acc), 0);
+  let value = (seconds / breaks[breakIdx]).toFixed(1);
+  if (value.slice(value.length - 1) === '0') { value = value.slice(0, value.length - 2); }
+  let plural = '';
+  if (pluralize) { plural = value === '1' ? '' : 's'; }
+  return `${value} ${intervals[breakIdx]}${plural}`;
 };
 
 /**
@@ -394,7 +409,10 @@ const applyDefaultsToSelection = (state) => {
   // Ensure the selection has at least one variable
   if (!selection.variables.length && Object.keys(variables).length) {
     const defaultVar = Object.keys(variables).find(variable => variables[variable].canBeDefault);
-    if (defaultVar) { selection.variables.push(defaultVar); }
+    if (defaultVar) {
+      selection.variables.push(defaultVar);
+      selection.yAxes.y1.units = variables[defaultVar].units;
+    }
   }
   // Generate a new continuous date range from the dateRange (which only contains bounds)
   selection.continuousDateRange = getContinuousDatesArray(selection.dateRange);
@@ -425,14 +443,17 @@ const reducer = (state, action) => {
     }
   };
   const limitVariablesToTwoUnits = (variables) => {
-    const selectedUnits = state.selection.variables.reduce((units, variable) => {
+    const selectedUnits = variables.reduce((units, variable) => {
       units.add(state.variables[variable].units);
       return units;
     }, new Set());
     if (selectedUnits.size < 2) {
-      return variables;
+      return { selectedUnits: Array.from(selectedUnits), variables };
     }
-    return variables.filter(variable => selectedUnits.has(state.variables[variable].units));
+    return {
+      selectedUnits: Array.from(selectedUnits),
+      variables: variables.filter(variable => selectedUnits.has(state.variables[variable].units)),
+    };
   };
   const setDataFileFetchStatuses = (fetches) => {
     fetches.forEach((fetch) => {
@@ -491,8 +512,8 @@ const reducer = (state, action) => {
         ...state.availableTimeSteps,
         ...parsedContent.availableTimeSteps,
       ]);
-      if (state.selection.options.autoTimeStep === null && newState.availableTimeSteps.size > 1) {
-        newState.selection.options.autoTimeStep = Array.from(newState.availableTimeSteps)
+      if (state.selection.autoTimeStep === null && newState.availableTimeSteps.size > 1) {
+        newState.selection.autoTimeStep = Array.from(newState.availableTimeSteps)
           .reduce((acc, cur) => {
             if (cur === 'auto') { return acc; }
             return (acc === null || TIME_STEPS[cur].seconds > TIME_STEPS[acc].seconds) ? cur : acc;
@@ -613,34 +634,71 @@ const reducer = (state, action) => {
       calcStatus();
       return newState;
     case 'selectVariables':
-      newState.selection.variables = limitVariablesToTwoUnits(action.variables);
+      parsedContent = limitVariablesToTwoUnits(action.variables);
+      newState.selection.variables = parsedContent.variables;
+      if (parsedContent.selectedUnits.length === 1) {
+        // eslint-disable-next-line prefer-destructuring
+        newState.selection.yAxes.y1.units = parsedContent.selectedUnits[0];
+        if (newState.selection.yAxes.y2.units === parsedContent.selectedUnits[0]) {
+          newState.selection.yAxes.y1.logscale = newState.selection.yAxes.y2.logscale;
+        }
+        newState.selection.yAxes.y2 = { units: false, logscale: false };
+      } else {
+        if (!newState.selection.yAxes.y1.units) {
+          newState.selection.yAxes.y1 = {
+            units: parsedContent.selectedUnits[0], logscale: false,
+          };
+        }
+        if (!newState.selection.yAxes.y2.units) {
+          newState.selection.yAxes.y2 = {
+            units: parsedContent.selectedUnits[1], logscale: false,
+          };
+        }
+      }
       calcSelection();
       calcStatus();
       return newState;
 
-    // Option Actions
+    /*
+    // This action works in state but dygraphs does not currently support per-axis logscale. =(
+    case 'selectYAxisScale':
+      if (!['y1', 'y2'].includes(action.axis)) { return state; }
+      newState.selection.yAxes[action.axis].logscale = !!action.logscale;
+      console.log(action, newState);
+      return newState;
+    */
+    // Option Selection Actions
+    case 'selectLogScale':
+      newState.selection.logscale = !!action.logscale;
+      return newState;
+    case 'selectSwapYAxes':
+      if (state.selection.yAxes.y2.units === null) { return state; }
+      parsedContent = { ...state.selection.yAxes.y1 };
+      newState.selection.yAxes.y1 = { ...newState.selection.yAxes.y2 };
+      newState.selection.yAxes.y2 = { ...parsedContent };
+      return newState;
     case 'setRollPeriod':
-      newState.selection.options.rollPeriod = action.rollPeriod;
+      newState.selection.rollPeriod = action.rollPeriod;
       return newState;
     case 'selectAllQualityFlags':
-      newState.selection.options.qualityFlags = Array.from(state.availableQualityFlags);
+      newState.selection.qualityFlags = Array.from(state.availableQualityFlags);
       calcStatus();
       return newState;
     case 'selectNoneQualityFlags':
-      newState.selection.options.qualityFlags = [];
+      newState.selection.qualityFlags = [];
       return newState;
     case 'selectToggleQualityFlag':
-      if (action.selected && !state.selection.options.qualityFlags.includes(action.qualityFlag)) {
-        newState.selection.options.qualityFlags.push(action.qualityFlag);
+      if (action.selected && !state.selection.qualityFlags.includes(action.qualityFlag)) {
+        newState.selection.qualityFlags.push(action.qualityFlag);
       } else if (!action.selected) {
-        newState.selection.options.qualityFlags = newState.selection.options.qualityFlags
+        newState.selection.qualityFlags = newState.selection.qualityFlags
           .filter(v => v !== action.qualityFlag);
       }
       calcStatus();
       return newState;
     case 'selectTimeStep':
       if (!state.availableTimeSteps.has(action.timeStep)) { return state; }
-      newState.selection.options.timeStep = action.timeStep;
+      newState.selection.timeStep = action.timeStep;
       calcStatus();
       return newState;
 
@@ -713,7 +771,7 @@ const Provider = (props) => {
       const root = NeonEnvironment.getFullApiPath('data');
       return `${root}/${state.product.productCode}/${siteCode}/${month}?presign=false`;
     };
-    const { timeStep: selectedTimeStep, autoTimeStep } = state.selection.options;
+    const { timeStep: selectedTimeStep, autoTimeStep } = state.selection;
     const timeStep = selectedTimeStep === 'auto' ? autoTimeStep : selectedTimeStep;
     const continuousDateRange = getContinuousDatesArray(state.selection.dateRange);
     const dataFetchTokens = new Set();

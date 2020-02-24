@@ -340,6 +340,7 @@ export default function TimeSeriesViewerVariables() {
             <Paper key={variable} className={classes.variablePaper}>
               <IconButton
                 aria-label={`remove variable ${variable}`}
+                disabled={state.selection.variables.length < 2}
                 style={{ marginRight: Theme.spacing(1) }}
                 onClick={() => {
                   dispatch({

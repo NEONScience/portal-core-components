@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Grid from '@material-ui/core/Grid';
 import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
 import ToggleButton from '@material-ui/lab/ToggleButton';
@@ -12,15 +13,12 @@ import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import NoneIcon from '@material-ui/icons/NotInterested';
 import SelectAllIcon from '@material-ui/icons/DoneAll';
 import SelectNoneIcon from '@material-ui/icons/Clear';
+import SwapIcon from '@material-ui/icons/SwapHoriz';
 
 import Theme from '../Theme/Theme';
-import TimeSeriesViewerContext, { TIME_STEPS } from './TimeSeriesViewerContext';
+import TimeSeriesViewerContext, { TIME_STEPS, summarizeTimeSteps } from './TimeSeriesViewerContext';
 
 const useStyles = makeStyles(theme => ({
-  optionContainer: {
-    width: '100%',
-    marginBottom: theme.spacing(2),
-  },
   noneContainer: {
     color: theme.palette.grey[400],
     display: 'flex',
@@ -51,6 +49,7 @@ const useStyles = makeStyles(theme => ({
   },
   optionButtonGroup: {
     height: theme.spacing(4),
+    display: 'block',
   },
   optionButton: {
     height: theme.spacing(4),
@@ -143,7 +142,7 @@ const RollPeriodOption = () => {
     rollPeriod: currentRollPeriod,
     timeStep: selectedTimeStep,
     autoTimeStep,
-  } = selection.options;
+  } = selection;
   const currentTimeStep = selectedTimeStep === 'auto' ? autoTimeStep : selectedTimeStep;
 
   const dateRangeMonths = selection.continuousDateRange.length;
@@ -153,23 +152,13 @@ const RollPeriodOption = () => {
   const rollMax = Math.max(dateRangeMonths * rollStepsPerMonth, currentRollPeriod);
 
   // Determine slider marks
-  const getMarkLabel = (val) => {
-    if (val === 1) { return 'none'; }
-    const seconds = val * timeStepSeconds;
-    const breaks = [3600, 86400, 2592000, 31536000];
-    const intervals = ['hour', 'day', 'month', 'year'];
-    const breakIdx = breaks.reduce((acc, cur, idx) => ((seconds > cur) ? idx : acc), 0);
-    let value = (seconds / breaks[breakIdx]).toFixed(1);
-    if (value.slice(value.length - 1) === '0') { value = value.slice(0, value.length - 2); }
-    return `${value} ${intervals[breakIdx]}${value === '1' ? '' : 's'}`;
-  };
   const interimMarks = 3;
   const markValues = [1];
   for (let m = 1; m <= interimMarks; m += 1) {
     markValues.push(Math.floor(rollMax * (m / (interimMarks + 1))));
   }
   markValues.push(rollMax);
-  const marks = markValues.map(m => ({ value: m, label: getMarkLabel(m) }));
+  const marks = markValues.map(m => ({ value: m, label: summarizeTimeSteps(m, currentTimeStep) }));
 
   // Function to apply changes to the slider's DOM as if it was controlled by state.
   // We can't control in state because doing so makes drag experience jerky and frustrating.
@@ -207,7 +196,7 @@ const RollPeriodOption = () => {
         ref={rollPeriodSliderRef}
         defaultValue={sliderDefault.value}
         valueLabelDisplay="auto"
-        valueLabelFormat={x => getMarkLabel(x)}
+        valueLabelFormat={x => summarizeTimeSteps(x, currentTimeStep)}
         min={rollMin}
         max={rollMax}
         onChange={(event, value) => {
@@ -227,13 +216,57 @@ const RollPeriodOption = () => {
 /**
    Y-Axis Scale Option
 */
-const YAxisScaleOption = () => {
-  const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
-  const { logScale } = state.selection.options;
+const YAxesOption = () => {
+  const classes = useStyles(Theme);
+  const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
+  const { yAxes, logscale } = state.selection;
+  const classNames = {
+    selected: `${classes.optionButton} ${classes.optionButtonSelected}`,
+    deselected: classes.optionButton,
+  };
   return (
-    <div>
-      {JSON.stringify(logScale)}
-    </div>
+    <React.Fragment>
+      <ToggleButtonGroup
+        exclusive
+        color="primary"
+        variant="outlined"
+        size="small"
+        className={classes.optionButtonGroup}
+        value={logscale ? 'log' : 'lin'}
+        onChange={(event, value) => {
+          dispatch({ type: 'selectLogScale', logscale: value === 'log' });
+        }}
+      >
+        <ToggleButton
+          key="lin"
+          value="lin"
+          size="small"
+          className={classNames[logscale ? 'deselected' : 'selected']}
+        >
+          Linear
+        </ToggleButton>
+        <ToggleButton
+          key="log"
+          value="log"
+          size="small"
+          className={classNames[logscale ? 'selected' : 'deselected']}
+        >
+          Logarithmic
+        </ToggleButton>
+      </ToggleButtonGroup>
+      {yAxes.y2.units === null ? null : (
+        <Button
+          color="primary"
+          variant="outlined"
+          onClick={() => { dispatch({ type: 'selectSwapYAxes' }); }}
+          className={classes.smallButton}
+          style={{ marginTop: Theme.spacing(1) }}
+        >
+          <SwapIcon className={classes.smallButtonIcon} />
+          Swap Y Axes
+        </Button>
+      )}
+    </React.Fragment>
   );
 };
 
@@ -244,7 +277,7 @@ const QualityFlagsOption = () => {
   const classes = useStyles(Theme);
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const { availableQualityFlags } = state;
-  const { qualityFlags: selectedQualityFlags } = state.selection.options;
+  const { qualityFlags: selectedQualityFlags } = state.selection;
   const toggleFlag = qualityFlag => (event) => {
     dispatch({ type: 'selectToggleQualityFlag', qualityFlag, selected: event.target.checked });
   };
@@ -323,33 +356,31 @@ const TimeStepOption = () => {
   const classes = useStyles(Theme);
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const { availableTimeSteps } = state;
-  const { timeStep: selectedTimeStep } = state.selection.options;
+  const { timeStep: selectedTimeStep } = state.selection;
   const handleChangeTimeStep = (event, timeStep) => {
     dispatch({ type: 'selectTimeStep', timeStep });
   };
   return (
-    <div>
-      <ToggleButtonGroup
-        exclusive
-        color="primary"
-        variant="outlined"
-        size="small"
-        className={classes.optionButtonGroup}
-        value={selectedTimeStep}
-        onChange={handleChangeTimeStep}
-      >
-        {Array.from(availableTimeSteps).map((timeStep) => {
-          const className = timeStep === selectedTimeStep
-            ? `${classes.optionButton} ${classes.optionButtonSelected}`
-            : classes.optionButton;
-          return (
-            <ToggleButton key={timeStep} value={timeStep} size="small" className={className}>
-              {timeStep}
-            </ToggleButton>
-          );
-        })}
-      </ToggleButtonGroup>
-    </div>
+    <ToggleButtonGroup
+      exclusive
+      color="primary"
+      variant="outlined"
+      size="small"
+      className={classes.optionButtonGroup}
+      value={selectedTimeStep}
+      onChange={handleChangeTimeStep}
+    >
+      {Array.from(availableTimeSteps).map((timeStep) => {
+        const className = timeStep === selectedTimeStep
+          ? `${classes.optionButton} ${classes.optionButtonSelected}`
+          : classes.optionButton;
+        return (
+          <ToggleButton key={timeStep} value={timeStep} size="small" className={className}>
+            {timeStep}
+          </ToggleButton>
+        );
+      })}
+    </ToggleButtonGroup>
   );
 };
 
@@ -358,26 +389,26 @@ const TimeStepOption = () => {
 */
 const OPTIONS = {
   Y_AXIS_SCALE: {
-    title: 'Y-Axis Scale',
-    description: 'foo bar qux',
-    Component: YAxisScaleOption,
+    title: 'Y-Axes',
+    description: 'Toggle between linear and logarithmic scales on all y axes.',
+    Component: YAxesOption,
   },
 
   ROLL_PERIOD: {
     title: 'Roll Period',
-    description: 'foo bar qux',
+    description: 'Set a rolling window to smooth out noisy data.',
     Component: RollPeriodOption,
   },
 
   QUALITY_FLAGS: {
     title: 'Quality Flags',
-    description: 'foo bar qux',
+    description: 'Enabling one or more quality flags will highlight regions on the chart to illiustrate the results of data quality tests.',
     Component: QualityFlagsOption,
   },
 
   TIME_STEP: {
     title: 'Time Step',
-    description: 'foo bar qux',
+    description: 'Set a smaller time step to see NEON data aggregated with finer granularity.',
     Component: TimeStepOption,
   },
 };
@@ -386,23 +417,26 @@ const OPTIONS = {
    Main Component
 */
 export default function TimeSeriesViewerOptions() {
-  const classes = useStyles(Theme);
+  const renderOption = (key) => {
+    const { title, description, Component } = OPTIONS[key];
+    return (
+      <React.Fragment>
+        <Typography variant="subtitle2">{title}</Typography>
+        <Typography variant="caption" style={{ color: Theme.palette.grey[400] }}>
+          {description}
+        </Typography>
+        <div style={{ width: '100%', marginTop: Theme.spacing(1) }}>
+          <Component />
+        </div>
+      </React.Fragment>
+    );
+  };
   return (
-    <div style={{ width: '100%' }}>
-      {Object.keys(OPTIONS).map((optionKey) => {
-        const { title, description, Component } = OPTIONS[optionKey];
-        return (
-          <div key={optionKey} className={classes.optionContainer}>
-            <Typography variant="subtitle2">{title}</Typography>
-            <Typography variant="caption" style={{ color: Theme.palette.grey[400] }}>
-              {description}
-            </Typography>
-            <div style={{ width: '100%', marginTop: Theme.spacing(1) }}>
-              <Component />
-            </div>
-          </div>
-        );
-      })}
-    </div>
+    <Grid container spacing={2}>
+      <Grid item xs={12} sm={6}>{renderOption('Y_AXIS_SCALE')}</Grid>
+      <Grid item xs={12} sm={6}>{renderOption('TIME_STEP')}</Grid>
+      <Grid item xs={12}>{renderOption('ROLL_PERIOD')}</Grid>
+      <Grid item xs={12}>{renderOption('QUALITY_FLAGS')}</Grid>
+    </Grid>
   );
 }
