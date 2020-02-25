@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid */
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -28,6 +28,36 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const NeonContextStateComponent = () => {
+  const [{ data, fetches }] = NeonPage.useNeonContextState();
+  const {
+    sites,
+    states,
+    domains,
+    bundles,
+  } = data;
+  const preStyle = {
+    height: '15vh',
+    overflow: 'scroll',
+    border: '1px solid black',
+    padding: '2px',
+  };
+  return (
+    <div style={{ width: '100%' }}>
+      <div>Sites</div>
+      <pre style={preStyle}>
+        {fetches.sites.status === 'SUCCESS' ? JSON.stringify(sites, null, 2) : fetches.sites.status}
+      </pre>
+      <div>States</div>
+      <pre style={preStyle}>{JSON.stringify(states, null, 2)}</pre>
+      <div>Domains</div>
+      <pre style={preStyle}>{JSON.stringify(domains, null, 2)}</pre>
+      <div>Bundles</div>
+      <pre style={preStyle}>{JSON.stringify(bundles, null, 2)}</pre>
+    </div>
+  );
+};
+
 export default function StyleGuide(props) {
   const classes = useStyles(Theme);
   const { onClickHash } = props;
@@ -37,16 +67,6 @@ export default function StyleGuide(props) {
     { name: 'Breadcrumb 2', href: '/bc2' },
     { name: 'My Neon Page' },
   ];
-
-  const [progress, setProgress] = useState(0);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      let newProgress = progress + (Math.random() * 10);
-      if (newProgress > 100) { newProgress = 0; }
-      setProgress(newProgress);
-    }, 200);
-    return () => clearInterval(interval);
-  });
 
   const notification = 'Here is a sample NeonPage notification with a <a href="https://github.com/NEONScience/portal-core-components/">link</a>.';
 
@@ -88,7 +108,7 @@ import NeonPage from 'portal-core-components/lib/components/NeonPage';
       </DocBlock>
       <ExampleBlock>
         <div className={classes.example}>
-          <NeonPage>
+          <NeonPage noNeonContext>
             <Typography>Content</Typography>
             <Typography>More content</Typography>
             <a href="#">Link (a tag)</a>
@@ -118,7 +138,7 @@ import NeonPage from 'portal-core-components/lib/components/NeonPage';
       </DocBlock>
       <ExampleBlock>
         <div className={classes.example}>
-          <NeonPage title="My Neon Page">
+          <NeonPage noNeonContext title="My Neon Page">
             <Typography>Content</Typography>
           </NeonPage>
         </div>
@@ -147,7 +167,7 @@ import NeonPage from 'portal-core-components/lib/components/NeonPage';
       </DocBlock>
       <ExampleBlock>
         <div className={classes.example}>
-          <NeonPage title="My Neon Page" breadcrumbs={breadcrumbs}>
+          <NeonPage noNeonContext title="My Neon Page" breadcrumbs={breadcrumbs}>
             <Typography>Content</Typography>
           </NeonPage>
         </div>
@@ -186,6 +206,7 @@ export default function MyNeonPage() {
             title="My Neon Page"
             breadcrumbs={breadcrumbs}
             loading="Loading My Neon Page..."
+            noNeonContext
           >
             <Typography>Content</Typography>
           </NeonPage>
@@ -220,48 +241,6 @@ export default function MyNeonPage() {
         on the Matrial UI CircularProgress component, and therefore should be a
         number ranging from 0 to 100.
       </DocBlock>
-      <ExampleBlock>
-        <div className={classes.example}>
-          <NeonPage
-            title="My Neon Page"
-            breadcrumbs={breadcrumbs}
-            loading="Loading My Neon Page..."
-            progress={progress}
-          >
-            <Typography>Content</Typography>
-          </NeonPage>
-        </div>
-      </ExampleBlock>
-      <CodeBlock>
-        {`
-const breadcrumbs = [...];
-
-// Simulate a progress value advancing in random steps from 0 to 100.
-// Reset when surpassing 100.
-const [progress, setProgress] = useState(0);
-useEffect(() => {
-  const interval = setInterval(() => {
-    let newProgress = progress + (Math.random() * 10);
-    if (newProgress > 100) { newProgress = 0; }
-    setProgress(newProgress);
-  }, 200);
-  return () => clearInterval(interval);
-});
-
-export default function MyNeonPage() {
-  return (
-    <NeonPage
-      title="My Neon Page"
-      breadcrumbs={breadcrumbs}
-      loading="Loading My Neon Page..."
-      progress={progress}
-    >
-      <Typography>Content</Typography>
-    </NeonPage>
-  );
-}
-        `}
-      </CodeBlock>
 
       <Divider className={classes.divider} />
       <Typography variant="h6" component="h4" gutterBottom>Error</Typography>
@@ -279,6 +258,7 @@ export default function MyNeonPage() {
             title="My Neon Page"
             breadcrumbs={breadcrumbs}
             error="Page failed to load"
+            noNeonContext
           >
             <Typography>Content</Typography>
           </NeonPage>
@@ -323,7 +303,7 @@ export default function MyNeonPage() {
       </DocBlock>
       <ExampleBlock>
         <div className={classes.example}>
-          <NeonPage notification={notification}>
+          <NeonPage noNeonContext notification={notification}>
             <Typography>Content</Typography>
           </NeonPage>
         </div>
@@ -357,6 +337,7 @@ const notification = 'Here is a sample NeonPage notification with a <a href="htt
           <NeonPage
             breadcrumbs={breadcrumbs}
             loading="Loading My Neon Page..."
+            noNeonContext
           >
             <Grid container spacing={3}>
               {skeletionGrid}
@@ -410,6 +391,52 @@ export default function MyNeonPage() {
     </NeonPage>
   );
 }
+        `}
+      </CodeBlock>
+
+      <Divider className={classes.divider} />
+      <Typography variant="h6" component="h4" gutterBottom>Using NeonContext for Common Data</Typography>
+
+      <DocBlock>
+        Many (if not most) applications using NeonPage tend to also need a few common data
+        structures such as meta data about NEON Sites, US States, NEON Domains, etc. Some of this
+        information is hard-coded in Portal Core Components as JSON files, but other information
+        (notably NEON Sites) should primarily come from the server.
+      </DocBlock>
+      <DocBlock>
+        NeonPage employs a context to fetch and import this common information. The context state
+        can then be accessed using a hook, providing a single source of truth that loads once
+        when the page loads. This can be especially useful for deeply nested components that need
+        things like a list of all NEON Sites but should not have to manage a fetch to get it.
+      </DocBlock>
+      <ExampleBlock>
+        <NeonContextStateComponent />
+      </ExampleBlock>
+      <CodeBlock>
+        {`
+import NeonPage from 'portal-core-components/lib/components/NeonPage';
+
+const NeonContextStateComponent = () => {
+  const [{ data, fetches }] = NeonPage.useNeonContextState();
+  const { sites, states, domains, bundles } = data;
+  const preStyle = { height: '15vh', overflow: 'scroll', border: '1px solid black', padding: '2px' };
+  return (
+    <div style={{ width: '100%' }}>
+      <div>Sites</div>
+      <pre style={preStyle}>
+        {fetches.sites.status === 'SUCCESS' ? JSON.stringify(sites, null, 2) : fetches.sites.status}
+      </pre>
+      <div>States</div>
+      <pre style={preStyle}>{JSON.stringify(states, null, 2)}</pre>
+      <div>Domains</div>
+      <pre style={preStyle}>{JSON.stringify(domains, null, 2)}</pre>
+      <div>Bundles</div>
+      <pre style={preStyle}>{JSON.stringify(bundles, null, 2)}</pre>
+    </div>
+  );
+};
+
+export default NeonContextStateComponent;
         `}
       </CodeBlock>
 

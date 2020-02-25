@@ -22,6 +22,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import Theme, { COLORS } from '../Theme/Theme';
 import NeonHeader from '../NeonHeader/NeonHeader';
 import NeonFooter from '../NeonFooter/NeonFooter';
+import NeonContext from './NeonContext';
 import BrowserWarning from './BrowserWarning';
 import LiferayNotifications from './LiferayNotifications';
 
@@ -118,6 +119,7 @@ const NeonPage = (props) => {
     error,
     notification,
     outerPageContainerMaxWidth,
+    noNeonContext,
   } = props;
   const useStylesProps = {
     theme: Theme,
@@ -259,31 +261,35 @@ const NeonPage = (props) => {
     </React.Fragment>,
   ));
 
-  return (
-    <React.Fragment>
-      <ThemeProvider theme={Theme}>
-        <CssBaseline />
-        <NeonHeader
-          notifications={notifications}
-          onShowNotifications={handleShowNotifications}
-        />
-        <Container className={classes.outerPageContainer}>
-          <Container className={classes.pageContainer} data-selenium="neon-page.content">
-            {renderBreadcrumbs()}
-            {renderTitle()}
-            {children}
-          </Container>
-          {renderLoading()}
-          {renderError()}
-          <LiferayNotifications
-            notifications={notifications}
-            onHideNotifications={handleHideNotifications}
-          />
-          <BrowserWarning />
+  const renderNeonPage = () => (
+    <ThemeProvider theme={Theme}>
+      <CssBaseline />
+      <NeonHeader
+        notifications={notifications}
+        onShowNotifications={handleShowNotifications}
+      />
+      <Container className={classes.outerPageContainer}>
+        <Container className={classes.pageContainer} data-selenium="neon-page.content">
+          {renderBreadcrumbs()}
+          {renderTitle()}
+          {children}
         </Container>
-        <NeonFooter />
-      </ThemeProvider>
-    </React.Fragment>
+        {renderLoading()}
+        {renderError()}
+        <LiferayNotifications
+          notifications={notifications}
+          onHideNotifications={handleHideNotifications}
+        />
+        <BrowserWarning />
+      </Container>
+      <NeonFooter />
+    </ThemeProvider>
+  );
+
+  return noNeonContext ? renderNeonPage() : (
+    <NeonContext.Provider>
+      {renderNeonPage()}
+    </NeonContext.Provider>
   );
 };
 
@@ -300,6 +306,7 @@ NeonPage.propTypes = {
   error: PropTypes.string,
   notification: PropTypes.string,
   outerPageContainerMaxWidth: PropTypes.string,
+  noNeonContext: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.oneOfType([
       PropTypes.node,
@@ -318,6 +325,11 @@ NeonPage.defaultProps = {
   error: null,
   notification: null,
   outerPageContainerMaxWidth: '2000px',
+  noNeonContext: false,
 };
+
+// Also provide an export at this level for the useNeonContextState hook
+const { useNeonContextState } = NeonContext;
+NeonPage.useNeonContextState = useNeonContextState;
 
 export default NeonPage;

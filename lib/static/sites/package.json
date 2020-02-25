@@ -1,6 +1,0 @@
-{
-  "private": true,
-  "name": "sites-json",
-  "main": "./sites.json",
-  "module": "./sites.json"
-}
