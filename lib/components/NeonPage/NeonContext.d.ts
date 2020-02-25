@@ -83,6 +83,9 @@ declare function useNeonContextState(): {
                 "name": string;
             };
             "MN": {
+                /**
+                   HOOK
+                */
                 "name": string;
             };
             "MS": {
@@ -228,6 +231,9 @@ declare function useNeonContextState(): {
             "D19": {
                 "name": string;
             };
+            /**
+               HOOK
+            */
             "D20": {
                 "name": string;
             };
@@ -337,6 +343,9 @@ declare function useNeonContextState(): {
                 "name": string;
             };
             "MN": {
+                /**
+                   HOOK
+                */
                 "name": string;
             };
             "MS": {
@@ -482,6 +491,9 @@ declare function useNeonContextState(): {
             "D19": {
                 "name": string;
             };
+            /**
+               HOOK
+            */
             "D20": {
                 "name": string;
             };

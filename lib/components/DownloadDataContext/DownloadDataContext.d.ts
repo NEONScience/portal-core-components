@@ -90,7 +90,7 @@ declare function useDownloadDataState(): {
     };
     sites: {
         value: never[];
-        validValues: string[];
+        validValues: never[];
         isValid: boolean;
     };
     dateRange: {
@@ -160,7 +160,7 @@ declare function useDownloadDataState(): {
     };
     sites: {
         value: never[];
-        validValues: string[];
+        validValues: never[];
         isValid: boolean;
     };
     dateRange: {
@@ -236,7 +236,7 @@ declare namespace DEFAULT_STATE {
     export namespace sites_2 {
         const value_2: never[];
         export { value_2 as value };
-        const validValues_1: string[];
+        const validValues_1: never[];
         export { validValues_1 as validValues };
         const isValid_1: boolean;
         export { isValid_1 as isValid };

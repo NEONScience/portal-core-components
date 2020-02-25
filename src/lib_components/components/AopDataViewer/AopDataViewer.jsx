@@ -16,7 +16,6 @@ import { withStyles, makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import Divider from '@material-ui/core/Divider';
-import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import Link from '@material-ui/core/Link';
@@ -44,7 +43,7 @@ const MIN_IFRAME_WIDTH = 240;
    Setup: CSS classes
 */
 const useStyles = makeStyles(theme => ({
-  formControl: {
+  selectionForm: {
     width: '100%',
     marginBottom: theme.spacing(2),
   },
@@ -522,59 +521,56 @@ export default function AopDataViewer(props) {
       Visus Project at the Univeristy of Utah
     </Link>
   );
-  const renderTopForm = () => (
-    <form className={classes.root} autoComplete="off">
-      <FormControl className={classes.formControl}>
-        {showTitle ? (
-          <Typography variant="h5" gutterBottom>
-            AOP Data Viewer
-          </Typography>
-        ) : null}
-        <Typography variant="caption" gutterBottom>
-          {/* eslint-disable react/jsx-one-expression-per-line */}
-          This viewer allows for interactive exploration of remotely sensed data
-          from the Airborne Observation Platform (AOP). Change the field site and
-          flight for this data product using the tools below to stream different
-          data into view. Pan and zoom in the view to stream higher resolution
-          imagery. This pilot data viewer is provided through a collaboration with
-          the {visusLink} and more updates are planned for the future.
-          {/* eslint-enable react/jsx-one-expression-per-line */}
+  const renderSelectionForm = () => (
+    <form className={classes.selectionForm} autoComplete="off">
+      {showTitle ? (
+        <Typography variant="h5" gutterBottom>
+          AOP Data Viewer
         </Typography>
-        <Divider className={classes.divider} />
-        {belowSm
-          ? (
-            <React.Fragment>
-              <Grid container spacing={2} justify="center" style={{ marginBottom: Theme.spacing(1) }}>
-                <Grid item xs={2}>{renderInputLabel('site', tooltips.site)}</Grid>
-                <Grid item xs={10}>{renderSiteSelect()}</Grid>
-              </Grid>
-              <Grid container spacing={2} justify="center" style={{ marginBottom: Theme.spacing(1) }}>
-                <Grid item xs={2}>{renderInputLabel('year', tooltips.year)}</Grid>
-                <Grid item xs={10}>{renderYearSlider()}</Grid>
-              </Grid>
-              <Grid container spacing={2} justify="center" style={{ marginBottom: Theme.spacing(1) }}>
-                <Grid item xs={2}>{renderInputLabel('flight', tooltips.flight)}</Grid>
-                <Grid item xs={10}>{renderFlightSelect()}</Grid>
-              </Grid>
-            </React.Fragment>
-          )
-          : (
-            <div style={{ width: '100%', display: 'flex' }}>
-              <div style={{ flexGrow: 0 }}>
-                {renderInputLabel('site', tooltips.site)}
-                {renderSiteSelect()}
-              </div>
-              <div style={{ flexGrow: 1, margin: Theme.spacing(0, 2) }}>
-                {renderInputLabel('year', tooltips.year)}
-                {renderYearSlider()}
-              </div>
-              <div style={{ flexGrow: 0 }}>
-                {renderInputLabel('flight', tooltips.flight)}
-                {renderFlightSelect()}
-              </div>
+      ) : null}
+      <Typography variant="caption" gutterBottom>
+        {/* eslint-disable react/jsx-one-expression-per-line */}
+        This viewer allows for interactive exploration of remotely sensed data
+        from the Airborne Observation Platform (AOP). Change the field site and
+        flight for this data product using the tools below to stream different
+        data into view. Pan and zoom in the view to stream higher resolution
+        imagery. This pilot data viewer is provided through a collaboration with
+        the {visusLink} and more updates are planned for the future.
+        {/* eslint-enable react/jsx-one-expression-per-line */}
+      </Typography>
+      <Divider className={classes.divider} />
+      {belowSm
+        ? (
+          <React.Fragment>
+            <Grid container spacing={2} justify="center" style={{ marginBottom: Theme.spacing(1) }}>
+              <Grid item xs={2}>{renderInputLabel('site', tooltips.site)}</Grid>
+              <Grid item xs={10}>{renderSiteSelect()}</Grid>
+            </Grid>
+            <Grid container spacing={2} justify="center" style={{ marginBottom: Theme.spacing(1) }}>
+              <Grid item xs={2}>{renderInputLabel('year', tooltips.year)}</Grid>
+              <Grid item xs={10}>{renderYearSlider()}</Grid>
+            </Grid>
+            <Grid container spacing={2} justify="center" style={{ marginBottom: Theme.spacing(1) }}>
+              <Grid item xs={2}>{renderInputLabel('flight', tooltips.flight)}</Grid>
+              <Grid item xs={10}>{renderFlightSelect()}</Grid>
+            </Grid>
+          </React.Fragment>
+        ) : (
+          <div style={{ width: '100%', display: 'flex' }}>
+            <div style={{ flexGrow: 0 }}>
+              {renderInputLabel('site', tooltips.site)}
+              {renderSiteSelect()}
             </div>
-          )}
-      </FormControl>
+            <div style={{ flexGrow: 1, margin: Theme.spacing(0, 2) }}>
+              {renderInputLabel('year', tooltips.year)}
+              {renderYearSlider()}
+            </div>
+            <div style={{ flexGrow: 0 }}>
+              {renderInputLabel('flight', tooltips.flight)}
+              {renderFlightSelect()}
+            </div>
+          </div>
+        )}
     </form>
   );
 
@@ -601,7 +597,7 @@ export default function AopDataViewer(props) {
       deriveHeightFromWidth={getIframeHeight}
       data-selenium="aop-data-viewer"
     >
-      {renderTopForm()}
+      {renderSelectionForm()}
       <iframe
         src={getCurrentIframeSrc()}
         title={getDataSetTitle(currentSelection)}

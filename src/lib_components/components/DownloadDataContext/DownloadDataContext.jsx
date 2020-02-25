@@ -37,9 +37,6 @@ import {
   getSizeEstimateFromManifestResponse,
   MAX_POST_BODY_SIZE,
 } from '../../util/manifestUtil';
-import allSites from '../../static/sites/sites.json';
-
-const ALL_POSSIBLE_VALID_SITES = Object.keys(allSites);
 
 const ALL_POSSIBLE_VALID_DATE_RANGE = [
   '2010-01',
@@ -146,7 +143,7 @@ const DEFAULT_STATE = {
   },
   sites: {
     value: [],
-    validValues: [...ALL_POSSIBLE_VALID_SITES],
+    validValues: [],
     isValid: false,
   },
   dateRange: {
@@ -221,7 +218,7 @@ const newStateIsAllowable = (key, value) => {
     case 'sites':
       return (
         Array.isArray(value)
-        && value.every(site => ALL_POSSIBLE_VALID_SITES.includes(site))
+          && value.every(site => (typeof site === 'string' && /^[A-Z]{4}$/.test(site)))
       );
     case 'dateRange':
       return (
@@ -1145,7 +1142,7 @@ Provider.propTypes = {
   }),
   /* eslint-disable react/no-unused-prop-types */
   availabilityView: PropTypes.oneOf(AVAILABILITY_VIEW_MODES),
-  sites: PropTypes.arrayOf(PropTypes.oneOf(ALL_POSSIBLE_VALID_SITES)),
+  sites: PropTypes.arrayOf(PropTypes.string),
   dateRange: PropTypes.arrayOf(PropTypes.string),
   documentation: PropTypes.oneOf(ALL_POSSIBLE_VALID_DOCUMENTATION),
   packageType: PropTypes.oneOf(ALL_POSSIBLE_VALID_PACKAGE_TYPE),

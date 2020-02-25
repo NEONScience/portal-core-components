@@ -10,10 +10,10 @@ import { of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
-import sitesJSON from '../../static/sites/sites.json';
-import statesJSON from '../../static/states/states.json';
-import domainsJSON from '../../static/domains/domains.json';
-import bundlesJSON from '../../static/bundles/bundles.json';
+import sitesJSON from '../../staticJSON/sites.json';
+import statesJSON from '../../staticJSON/states.json';
+import domainsJSON from '../../staticJSON/domains.json';
+import bundlesJSON from '../../staticJSON/bundles.json';
 
 const FETCH_STATUS = {
   AWAITING_CALL: 'AWAITING_CALL',

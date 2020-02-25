@@ -49,26 +49,6 @@ declare namespace SiteMap {
         export const mode: PropTypes.Requireable<string>;
         export const zoom: PropTypes.Requireable<number>;
         export const tileLayer: PropTypes.Requireable<string>;
-        export const sites: PropTypes.Requireable<PropTypes.Requireable<(PropTypes.InferProps<{
-            siteCode: PropTypes.Validator<string>;
-            siteDescription: PropTypes.Validator<string>;
-            siteLatitude: PropTypes.Validator<number>;
-            siteLongitude: PropTypes.Validator<number>;
-            siteType: PropTypes.Requireable<string>;
-            domainCode: PropTypes.Requireable<string>;
-            stateCode: PropTypes.Requireable<string>;
-            terrain: PropTypes.Requireable<string>;
-        }> | null | undefined)[]> | PropTypes.Requireable<{
-            [x: string]: PropTypes.InferProps<{
-                description: PropTypes.Validator<string>;
-                latitude: PropTypes.Validator<number>;
-                longitude: PropTypes.Validator<number>;
-                type: PropTypes.Validator<string>;
-                terrain: PropTypes.Validator<string>;
-                domainCode: PropTypes.Validator<string>;
-                stateCode: PropTypes.Validator<string>;
-            }> | null | undefined;
-        }>>;
     }
     export namespace defaultProps {
         const aspectRatio_1: number;
@@ -81,8 +61,6 @@ declare namespace SiteMap {
         export { tileLayer_1 as tileLayer };
         const zoom_1: null;
         export { zoom_1 as zoom };
-        const sites_1: null;
-        export { sites_1 as sites };
     }
 }
 import PropTypes from "prop-types";
