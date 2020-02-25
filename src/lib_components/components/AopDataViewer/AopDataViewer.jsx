@@ -34,11 +34,9 @@ import InfoIcon from '@material-ui/icons/InfoOutlined';
 import WarningIcon from '@material-ui/icons/Warning';
 
 import Theme from '../Theme/Theme';
+import NeonPage from '../NeonPage/NeonPage';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import FullWidthVisualization from '../FullWidthVisualization/FullWidthVisualization';
-
-import sites from '../../static/sites/sites.json';
-import states from '../../static/states/states.json';
 
 const MIN_IFRAME_WIDTH = 240;
 
@@ -209,28 +207,6 @@ const getCurrentSliderBounds = (currentYears) => {
   };
 };
 
-const getSiteDescription = (site, includeState = true) => {
-  if (sites[site]) {
-    const state = includeState ? `, ${sites[site].stateCode}` : '';
-    return `${sites[site].description}${state}`;
-  }
-  return null;
-};
-
-const getDataSetTitle = (selection, data) => {
-  if (!selection || !data) { return ''; }
-  const { site, year, flight } = selection;
-  if (!site || !year || !flight) { return ''; }
-  const flightIdx = flight - 1;
-  if (!data[site] || !data[site][year] || !data[site][year][flightIdx]) { return ''; }
-  const parts = {
-    site: getSiteDescription(site),
-    date: dateFormat(new Date(`${year}-${data[site][year][flightIdx].month}-02`), 'mmmm yyyy'),
-    flight: `Flight ${flight}/${data[site][year].length}`,
-  };
-  return `${parts.site} -- ${parts.date} -- ${parts.flight}`;
-};
-
 /**
    Main Function
 */
@@ -238,7 +214,35 @@ export default function AopDataViewer(props) {
   const classes = useStyles(Theme);
   const { productCode, showTitle } = props;
 
+  const [{ data: neonContextData }] = NeonPage.useNeonContextState();
+  const { sites, states } = neonContextData;
+
   const belowSm = useMediaQuery(Theme.breakpoints.only('xs'));
+
+  /**
+     Getters for site description and data set title
+  */
+  const getSiteDescription = (site, includeState = true) => {
+    if (sites[site]) {
+      const state = includeState ? `, ${sites[site].stateCode}` : '';
+      return `${sites[site].description}${state}`;
+    }
+    return null;
+  };
+
+  const getDataSetTitle = (selection, data) => {
+    if (!selection || !data) { return ''; }
+    const { site, year, flight } = selection;
+    if (!site || !year || !flight) { return ''; }
+    const flightIdx = flight - 1;
+    if (!data[site] || !data[site][year] || !data[site][year][flightIdx]) { return ''; }
+    const parts = {
+      site: getSiteDescription(site),
+      date: dateFormat(new Date(`${year}-${data[site][year][flightIdx].month}-02`), 'mmmm yyyy'),
+      flight: `Flight ${flight}/${data[site][year].length}`,
+    };
+    return `${parts.site} -- ${parts.date} -- ${parts.flight}`;
+  };
 
   /**
      State: data
@@ -367,6 +371,7 @@ export default function AopDataViewer(props) {
   const renderSiteSelect = () => {
     const sitesByStateName = {};
     Object.keys(data).forEach((site) => {
+      if (!sites[site]) { return; }
       const stateName = states[sites[site].stateCode].name;
       if (!sitesByStateName[stateName]) { sitesByStateName[stateName] = []; }
       sitesByStateName[stateName].push(site);

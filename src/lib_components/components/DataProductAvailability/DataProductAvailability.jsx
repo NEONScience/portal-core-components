@@ -37,21 +37,10 @@ import { AvailabilityGrid, SVG } from './AvailabilityGrid';
 import AvailabilityLegend from './AvailabilityLegend';
 
 import Theme from '../Theme/Theme';
+import NeonPage from '../NeonPage/NeonPage';
 import SiteChip from '../SiteChip/SiteChip';
 import FullWidthVisualization from '../FullWidthVisualization/FullWidthVisualization';
 import DownloadDataContext from '../DownloadDataContext/DownloadDataContext';
-
-/**
-   Setup: Chart y-range values
-   All possible sites, states, and domains, independent of product
-   **
-   Currently loaded from static JSON since API response is
-   enormous, containing lots of data we don't need.
-   TODO: get this lean data from a GraphQL request
-*/
-import allSites from '../../static/sites/sites.json';
-import allStates from '../../static/states/states.json';
-import allDomains from '../../static/domains/domains.json';
 
 const getYearMonthMoment = yearMonth => moment(`${yearMonth}-01`);
 
@@ -140,32 +129,6 @@ const useSiteChipStyles = makeStyles(theme => ({
   },
 }));
 
-const SORT_METHODS = {
-  states: {
-    label: 'by State',
-    getSortFunction: ret => (a, b) => {
-      const aState = allStates[allSites[a].stateCode].name;
-      const bState = allStates[allSites[b].stateCode].name;
-      if (aState === bState) { return (a < b ? ret[0] : ret[1]); }
-      return aState < bState ? ret[0] : ret[1];
-    },
-  },
-  domains: {
-    label: 'by Domain',
-    getSortFunction: ret => (a, b) => {
-      const aDomain = allSites[a].domainCode;
-      const bDomain = allSites[b].domainCode;
-      if (aDomain === bDomain) { return (a < b ? ret[0] : ret[1]); }
-      return aDomain < bDomain ? ret[0] : ret[1];
-    },
-  },
-  sites: {
-    label: 'by Site',
-    getSortFunction: ret => (a, b) => (a < b ? ret[0] : ret[1]),
-  },
-};
-const SORT_DIRECTIONS = ['ASC', 'DESC'];
-
 /**
    Main Function
 */
@@ -175,6 +138,38 @@ export default function DataProductAvailability(props) {
   const atSm = useMediaQuery(Theme.breakpoints.only('sm'));
   const siteChipClasses = useSiteChipStyles(Theme);
   const { ...other } = props;
+
+  const [{ data: neonContextData }] = NeonPage.useNeonContextState();
+  const { sites: allSites, states: allStates, domains: allDomains } = neonContextData;
+
+  /**
+     Sort methods and directions
+  */
+  const SORT_METHODS = {
+    states: {
+      label: 'by State',
+      getSortFunction: ret => (a, b) => {
+        const aState = allStates[allSites[a].stateCode].name;
+        const bState = allStates[allSites[b].stateCode].name;
+        if (aState === bState) { return (a < b ? ret[0] : ret[1]); }
+        return aState < bState ? ret[0] : ret[1];
+      },
+    },
+    domains: {
+      label: 'by Domain',
+      getSortFunction: ret => (a, b) => {
+        const aDomain = allSites[a].domainCode;
+        const bDomain = allSites[b].domainCode;
+        if (aDomain === bDomain) { return (a < b ? ret[0] : ret[1]); }
+        return aDomain < bDomain ? ret[0] : ret[1];
+      },
+    },
+    sites: {
+      label: 'by Site',
+      getSortFunction: ret => (a, b) => (a < b ? ret[0] : ret[1]),
+    },
+  };
+  const SORT_DIRECTIONS = ['ASC', 'DESC'];
 
   /**
      State: Views
@@ -401,6 +396,7 @@ export default function DataProductAvailability(props) {
   }
   siteCodes.forEach((site) => {
     const { siteCode, availableMonths } = site;
+    if (!allSites[siteCode]) { return; }
     const { stateCode, domainCode } = allSites[siteCode];
     if (!selectionEnabled) { sites.validValues.push(siteCode); }
     views.sites.rows[siteCode] = {};
@@ -428,6 +424,7 @@ export default function DataProductAvailability(props) {
     AvailabilityGrid({
       data: views[currentView],
       svgRef,
+      allSites,
       sites,
       sortedSites,
       setSitesValue,
@@ -439,6 +436,7 @@ export default function DataProductAvailability(props) {
     svgRef,
     views,
     currentView,
+    allSites,
     sites,
     sortedSites,
     setSitesValue,

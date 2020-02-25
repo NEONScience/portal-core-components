@@ -6,10 +6,8 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Typography from '@material-ui/core/Typography';
 
 import Theme from '../Theme/Theme';
+import NeonPage from '../NeonPage/NeonPage';
 import ExternalHost from '../ExternalHost/ExternalHost';
-
-import allSites from '../../static/sites/sites.json';
-import allStates from '../../static/states/states.json';
 
 const useStyles = makeStyles(theme => ({
   ulLinkList: {
@@ -21,10 +19,13 @@ const useStyles = makeStyles(theme => ({
 export default function ExternalHostProductSpecificLinks(props) {
   const classes = useStyles(Theme);
 
+  const { productCode } = props;
+
+  const [{ data: neonContextData }] = NeonPage.useNeonContextState();
+  const { sites: allSites, states: allStates } = neonContextData;
+
   const belowSm = useMediaQuery(Theme.breakpoints.only('xs'));
   const belowMd = useMediaQuery(Theme.breakpoints.down('sm'));
-
-  const { productCode } = props;
 
   const externalHost = ExternalHost.getByProductCode(productCode);
   if (!externalHost || !Object.keys(ExternalHost.LINK_TYPES).includes(externalHost.linkType)) {
@@ -64,7 +65,7 @@ export default function ExternalHostProductSpecificLinks(props) {
           .map((stateName) => {
             const links = sitesByStateName[stateName]
               .map(siteCode => (
-                { siteCode, link: externalHost.getSiteLink(siteCode, productCode) }
+                { siteCode, link: externalHost.getSiteLink(allSites, siteCode, productCode) }
               ))
               .filter(entry => entry.link !== null);
             if (!links.length) { return null; }
