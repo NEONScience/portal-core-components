@@ -20,7 +20,8 @@ export const requiredEnvironmentVars = [
 // required list this makes a complete set of all environment variables
 // this module will ever reference.
 export const optionalEnvironmentVars = [
-  'REACT_APP_NEON_HOST_OVERRIDE',
+  'REACT_APP_NEON_PATH_LD_API',
+  'REACT_APP_NEON_PATH_LD_REPO_API',
   'REACT_APP_NEON_PATH_AOP_DOWNLOAD_API',
   'REACT_APP_NEON_PATH_DATA_API',
   'REACT_APP_NEON_PATH_DOCUMENTS_API',
@@ -34,7 +35,6 @@ export const optionalEnvironmentVars = [
   'REACT_APP_NEON_VISUS_IFRAME_BASE_URL',
   'REACT_APP_NEON_HOST_OVERRIDE',
   'REACT_APP_FOREIGN_LOCATION',
-  'REACT_APP_NEON_PATH_LD_API',
 ];
 
 const EnvType = {
@@ -65,6 +65,10 @@ const NeonEnvironment = {
     menu: () => process.env.REACT_APP_NEON_PATH_MENU_API,
     products: () => process.env.REACT_APP_NEON_PATH_PRODUCTS_API,
     sites: () => process.env.REACT_APP_NEON_PATH_SITES_API,
+  },
+
+  getApiLdPath: {
+    repo: () => process.env.REACT_APP_NEON_PATH_LD_REPO_API,
   },
 
   getPagePath: {
@@ -139,8 +143,11 @@ const NeonEnvironment = {
   getFullJsonLdApiPath: (path = '') => {
     const host = NeonEnvironment.getHost();
     const root = NeonEnvironment.getRootJsonLdPath();
-    return NeonEnvironment.getApiPath[path]
-      ? `${host}${root}${NeonEnvironment.getApiPath[path]()}`
+    const appliedPath = ['products'].includes(path)
+      ? NeonEnvironment.getApiPath[path]()
+      : NeonEnvironment.getApiLdPath[path]();
+    return appliedPath
+      ? `${host}${root}${appliedPath}`
       : `${host}${root}`;
   },
 

@@ -1,3 +1,4 @@
+import { of } from 'rxjs';
 import {
   map,
   catchError,
@@ -16,6 +17,14 @@ const NeonJsonLd = {
    * @return The RxJS AJAX Observable.
    */
   getJsonLdObservable: url => NeonApi.getJsonObservable(url),
+
+  /**
+   * Gets the repository JSON-LD endpoint observable.
+   * @return The RxJS AJAX Observable.
+   */
+  getRepoJsonLdObservable: () => (
+    NeonJsonLd.getJsonLdObservable(NeonEnvironment.getFullJsonLdApiPath('repo'))
+  ),
 
   /**
    * Gets the product JSON-LD endpoint observable.
@@ -50,10 +59,20 @@ const NeonJsonLd = {
     const observable = NeonApi.getJsonObservable(url)
       .pipe(
         map(response => NeonJsonLd.inject(response)),
-        catchError(err => console.error(err)), // eslint-disable-line no-console
+        catchError((err) => {
+          console.error(err); // eslint-disable-line no-console
+          return of('JSON-LD not found');
+        }),
       );
     observable.subscribe();
   },
+
+  /**
+   * Fetches and injects the repository JSON-LD.
+   */
+  injectRepo: () => (
+    NeonJsonLd.getJsonLdWithInjection(NeonEnvironment.getFullJsonLdApiPath('repo'))
+  ),
 
   /**
    * Fetches and injects the product JSON-LD based on the specified product code.
