@@ -87,6 +87,13 @@ const externalProducts = {
   'DP1.00100.001': {
     host: 'AMERIFLUX',
   },
+  'DP1.10020.001': {
+    host: 'BOLD',
+    searches: [
+      { query: 'BETN', title: 'Ground beetle sequences DNA barcode' },
+      { query: 'BETP', title: 'Ground beetle sequences DNA barcode (Prototype Data)' },
+    ],
+  },
   'DP1.10038.001': {
     host: 'BOLD',
     searches: [
@@ -123,10 +130,6 @@ const externalProducts = {
     searches: [
       { query: 'FSHN', title: 'Fish sequences DNA barcode' },
     ],
-  },
-  'DP1.20212.001': {
-    host: 'BOLD',
-    searches: [], // unable to find associated search(es)
   },
   'DP1.20126.001': {
     host: 'MGRAST',
