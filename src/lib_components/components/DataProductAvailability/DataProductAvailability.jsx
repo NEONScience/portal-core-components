@@ -398,7 +398,7 @@ export default function DataProductAvailability(props) {
     const { siteCode, availableMonths } = site;
     if (!allSites[siteCode]) { return; }
     const { stateCode, domainCode } = allSites[siteCode];
-    if (!selectionEnabled) { sites.validValues.push(siteCode); }
+    if (!downloadContextIsActive) { sites.validValues.push(siteCode); }
     views.sites.rows[siteCode] = {};
     views.states.rows[stateCode] = views.states.rows[stateCode] || {};
     views.domains.rows[domainCode] = views.domains.rows[domainCode] || {};
@@ -409,7 +409,7 @@ export default function DataProductAvailability(props) {
       views.domains.rows[domainCode][month] = 'available';
     });
   });
-  if (!selectionEnabled) {
+  if (!downloadContextIsActive) {
     const summaryMonths = Object.keys(views.summary.rows.summary).sort();
     dateRange.validValues[0] = summaryMonths[0]; // eslint-disable-line prefer-destructuring
     dateRange.validValues[1] = summaryMonths.pop();
@@ -699,7 +699,7 @@ export default function DataProductAvailability(props) {
                 <div className={classes.helpGrid}>
                   <DragIcon className={classes.helpIcon} style={{ transform: 'rotate(90deg)' }} />
                   <Typography variant="body1" component="div" style={{ flexGrow: 1 }}>
-                    Drag selection sides to adjust dates
+                    Drag selection edges to adjust dates
                   </Typography>
                 </div>
               </div>

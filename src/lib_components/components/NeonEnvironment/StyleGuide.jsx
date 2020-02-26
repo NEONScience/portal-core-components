@@ -91,8 +91,8 @@ ${optionalEnvironmentVars.join('\n')}
         ever reference.
       </DocBlock>
       <DocBlock>
-        Environment variables should be defined in the <tt>.end.development</tt> and
-        <tt>.end.production</tt> files in the root directory of a given application.
+        Environment variables should be defined in the <tt>.env.development</tt> and
+        <tt>.env.production</tt> files in the root directory of a given application.
       </DocBlock>
 
     </React.Fragment>

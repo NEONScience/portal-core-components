@@ -1018,6 +1018,7 @@ const SiteMap = (props) => {
       minZoom={1}
       onZoomEnd={handleZoomEnd}
       onBaseLayerChange={handleBaseLayerChange}
+      worldCopyJump
     >
       <ScaleControl imperial metric updateWhenIdle />
       <LayersControl position="topright">
