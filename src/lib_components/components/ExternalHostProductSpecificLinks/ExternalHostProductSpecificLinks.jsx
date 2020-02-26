@@ -6,7 +6,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Typography from '@material-ui/core/Typography';
 
 import Theme from '../Theme/Theme';
-import NeonPage from '../NeonPage/NeonPage';
+import NeonContext from '../NeonContext/NeonContext';
 import ExternalHost from '../ExternalHost/ExternalHost';
 
 const useStyles = makeStyles(theme => ({
@@ -21,7 +21,7 @@ export default function ExternalHostProductSpecificLinks(props) {
 
   const { productCode } = props;
 
-  const [{ data: neonContextData }] = NeonPage.useNeonContextState();
+  const [{ data: neonContextData }] = NeonContext.useNeonContextState();
   const { sites: allSites, states: allStates } = neonContextData;
 
   const belowSm = useMediaQuery(Theme.breakpoints.only('xs'));

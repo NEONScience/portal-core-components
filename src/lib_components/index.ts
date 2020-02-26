@@ -4,6 +4,7 @@ export { default as DataThemeIcon } from './components/DataThemeIcon';
 export { default as DataProductAvailability } from './components/DataProductAvailability';
 export { default as DownloadDataButton } from './components/DownloadDataButton';
 export { default as DownloadDataContext } from './components/DownloadDataContext';
+export { default as NeonContext } from './components/NeonContext';
 export { default as NeonEnvironment } from './components/NeonEnvironment';
 export { default as NeonGraphQL } from './components/NeonGraphQL';
 export { default as NeonPage } from './components/NeonPage';

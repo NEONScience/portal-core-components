@@ -36,7 +36,7 @@ import {
 } from 'react-leaflet';
 
 import Theme, { COLORS } from '../Theme/Theme';
-import NeonPage from '../NeonPage/NeonPage';
+import NeonContext from '../NeonContext/NeonContext';
 
 import statesShapesJSON from '../../staticJSON/statesShapes.json';
 import domainsShapesJSON from '../../staticJSON/domainsShapes.json';
@@ -275,7 +275,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const SiteMap = (props) => {
+const SiteMapComponent = (props) => {
   const {
     aspectRatio,
     center,
@@ -286,7 +286,10 @@ const SiteMap = (props) => {
   const classes = useStyles(Theme);
   const mapRef = useRef(null);
 
-  const [{ data: neonContextData, fetches: neonContextFetches }] = NeonPage.useNeonContextState();
+  const [{
+    data: neonContextData,
+    fetches: neonContextFetches,
+  }] = NeonContext.useNeonContextState();
   const { sites: allSites, states: allStates, domains: allDomains } = neonContextData;
 
   /**
@@ -494,6 +497,11 @@ const SiteMap = (props) => {
      Secondary Render - Loading and Error states
   */
   if (neonContextFetches.sites.status !== 'SUCCESS') {
+    /*
+    if (mode === 'SELECT') {
+      debugger; // eslint-disable-line no-debugger
+    }
+    */
     let notFetchedContents = (
       <React.Fragment>
         <Typography variant="h6" component="h3" gutterBottom>
@@ -1031,7 +1039,17 @@ const SiteMap = (props) => {
   );
 };
 
-SiteMap.propTypes = {
+// Actual "SiteMap" component. This is a wrapper for the true component and its only purpose
+// is to make sure the component always renders inside an active NeonContext Provider.
+const SiteMap = (props) => {
+  const [{ isActive }] = NeonContext.useNeonContextState();
+  if (!isActive) {
+    return <NeonContext.Provider><SiteMapComponent {...props} /></NeonContext.Provider>;
+  }
+  return <SiteMapComponent {...props} />;
+};
+
+const SiteMapPropTypes = {
   aspectRatio: PropTypes.number,
   center: PropTypes.arrayOf(PropTypes.number),
   mode: PropTypes.oneOf(Object.keys(SITE_MAP_MODES)),
@@ -1039,12 +1057,17 @@ SiteMap.propTypes = {
   tileLayer: PropTypes.oneOf(Object.keys(TILE_LAYERS)),
 };
 
-SiteMap.defaultProps = {
+const SiteMapDefaultProps = {
   aspectRatio: 0.75,
   center: [52.68, -110.75],
   mode: 'EXPLORE',
   tileLayer: 'NatGeo_World_Map',
   zoom: null,
 };
+
+SiteMapComponent.propTypes = SiteMapPropTypes;
+SiteMapComponent.defaultProps = SiteMapDefaultProps;
+SiteMap.propTypes = SiteMapPropTypes;
+SiteMap.defaultProps = SiteMapDefaultProps;
 
 export default SiteMap;

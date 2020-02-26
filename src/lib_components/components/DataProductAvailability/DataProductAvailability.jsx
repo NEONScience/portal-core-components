@@ -37,7 +37,7 @@ import { AvailabilityGrid, SVG } from './AvailabilityGrid';
 import AvailabilityLegend from './AvailabilityLegend';
 
 import Theme from '../Theme/Theme';
-import NeonPage from '../NeonPage/NeonPage';
+import NeonContext from '../NeonContext/NeonContext';
 import SiteChip from '../SiteChip/SiteChip';
 import FullWidthVisualization from '../FullWidthVisualization/FullWidthVisualization';
 import DownloadDataContext from '../DownloadDataContext/DownloadDataContext';
@@ -139,7 +139,7 @@ export default function DataProductAvailability(props) {
   const siteChipClasses = useSiteChipStyles(Theme);
   const { ...other } = props;
 
-  const [{ data: neonContextData }] = NeonPage.useNeonContextState();
+  const [{ data: neonContextData }] = NeonContext.useNeonContextState();
   const { sites: allSites, states: allStates, domains: allDomains } = neonContextData;
 
   /**

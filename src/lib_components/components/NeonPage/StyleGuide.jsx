@@ -28,36 +28,6 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const NeonContextStateComponent = () => {
-  const [{ data, fetches }] = NeonPage.useNeonContextState();
-  const {
-    sites,
-    states,
-    domains,
-    bundles,
-  } = data;
-  const preStyle = {
-    height: '15vh',
-    overflow: 'scroll',
-    border: '1px solid black',
-    padding: '2px',
-  };
-  return (
-    <div style={{ width: '100%' }}>
-      <div>Sites</div>
-      <pre style={preStyle}>
-        {fetches.sites.status === 'SUCCESS' ? JSON.stringify(sites, null, 2) : fetches.sites.status}
-      </pre>
-      <div>States</div>
-      <pre style={preStyle}>{JSON.stringify(states, null, 2)}</pre>
-      <div>Domains</div>
-      <pre style={preStyle}>{JSON.stringify(domains, null, 2)}</pre>
-      <div>Bundles</div>
-      <pre style={preStyle}>{JSON.stringify(bundles, null, 2)}</pre>
-    </div>
-  );
-};
-
 export default function StyleGuide(props) {
   const classes = useStyles(Theme);
   const { onClickHash } = props;
@@ -391,52 +361,6 @@ export default function MyNeonPage() {
     </NeonPage>
   );
 }
-        `}
-      </CodeBlock>
-
-      <Divider className={classes.divider} />
-      <Typography variant="h6" component="h4" gutterBottom>Using NeonContext for Common Data</Typography>
-
-      <DocBlock>
-        Many (if not most) applications using NeonPage tend to also need a few common data
-        structures such as meta data about NEON Sites, US States, NEON Domains, etc. Some of this
-        information is hard-coded in Portal Core Components as JSON files, but other information
-        (notably NEON Sites) should primarily come from the server.
-      </DocBlock>
-      <DocBlock>
-        NeonPage employs a context to fetch and import this common information. The context state
-        can then be accessed using a hook, providing a single source of truth that loads once
-        when the page loads. This can be especially useful for deeply nested components that need
-        things like a list of all NEON Sites but should not have to manage a fetch to get it.
-      </DocBlock>
-      <ExampleBlock>
-        <NeonContextStateComponent />
-      </ExampleBlock>
-      <CodeBlock>
-        {`
-import NeonPage from 'portal-core-components/lib/components/NeonPage';
-
-const NeonContextStateComponent = () => {
-  const [{ data, fetches }] = NeonPage.useNeonContextState();
-  const { sites, states, domains, bundles } = data;
-  const preStyle = { height: '15vh', overflow: 'scroll', border: '1px solid black', padding: '2px' };
-  return (
-    <div style={{ width: '100%' }}>
-      <div>Sites</div>
-      <pre style={preStyle}>
-        {fetches.sites.status === 'SUCCESS' ? JSON.stringify(sites, null, 2) : fetches.sites.status}
-      </pre>
-      <div>States</div>
-      <pre style={preStyle}>{JSON.stringify(states, null, 2)}</pre>
-      <div>Domains</div>
-      <pre style={preStyle}>{JSON.stringify(domains, null, 2)}</pre>
-      <div>Bundles</div>
-      <pre style={preStyle}>{JSON.stringify(bundles, null, 2)}</pre>
-    </div>
-  );
-};
-
-export default NeonContextStateComponent;
         `}
       </CodeBlock>
 

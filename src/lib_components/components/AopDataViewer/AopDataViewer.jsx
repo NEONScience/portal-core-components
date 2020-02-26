@@ -33,7 +33,7 @@ import InfoIcon from '@material-ui/icons/InfoOutlined';
 import WarningIcon from '@material-ui/icons/Warning';
 
 import Theme from '../Theme/Theme';
-import NeonPage from '../NeonPage/NeonPage';
+import NeonContext from '../NeonContext/NeonContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import FullWidthVisualization from '../FullWidthVisualization/FullWidthVisualization';
 
@@ -213,7 +213,7 @@ export default function AopDataViewer(props) {
   const classes = useStyles(Theme);
   const { productCode, showTitle } = props;
 
-  const [{ data: neonContextData }] = NeonPage.useNeonContextState();
+  const [{ data: neonContextData }] = NeonContext.useNeonContextState();
   const { sites, states } = neonContextData;
 
   const belowSm = useMediaQuery(Theme.breakpoints.only('xs'));

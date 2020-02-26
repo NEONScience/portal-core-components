@@ -22,7 +22,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import Theme, { COLORS } from '../Theme/Theme';
 import NeonHeader from '../NeonHeader/NeonHeader';
 import NeonFooter from '../NeonFooter/NeonFooter';
-import NeonContext from './NeonContext';
+import NeonContext from '../NeonContext/NeonContext';
 import BrowserWarning from './BrowserWarning';
 import LiferayNotifications from './LiferayNotifications';
 
@@ -327,9 +327,5 @@ NeonPage.defaultProps = {
   outerPageContainerMaxWidth: '2000px',
   noNeonContext: false,
 };
-
-// Also provide an export at this level for the useNeonContextState hook
-const { useNeonContextState } = NeonContext;
-NeonPage.useNeonContextState = useNeonContextState;
 
 export default NeonPage;

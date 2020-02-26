@@ -32,6 +32,7 @@ const DEFAULT_STATE = {
   fetches: {
     sites: { status: FETCH_STATUS.AWAITING_CALL, error: null },
   },
+  isActive: false,
 };
 
 /**
@@ -101,7 +102,7 @@ const parseSitesFetchResponse = (sitesArray = []) => {
 */
 const Provider = (props) => {
   const { children } = props;
-  const [state, dispatch] = useReducer(reducer, { ...DEFAULT_STATE });
+  const [state, dispatch] = useReducer(reducer, { ...DEFAULT_STATE, isActive: true });
 
   // Subject and effect to perform and manage the sites GraphQL fetch
   const fetchAllSites$ = NeonGraphQL.getAllSites().pipe(
