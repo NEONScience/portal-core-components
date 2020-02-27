@@ -78,7 +78,7 @@ import NeonPage from 'portal-core-components/lib/components/NeonPage';
       </DocBlock>
       <ExampleBlock>
         <div className={classes.example}>
-          <NeonPage noNeonContext>
+          <NeonPage>
             <Typography>Content</Typography>
             <Typography>More content</Typography>
             <a href="#">Link (a tag)</a>
@@ -108,7 +108,7 @@ import NeonPage from 'portal-core-components/lib/components/NeonPage';
       </DocBlock>
       <ExampleBlock>
         <div className={classes.example}>
-          <NeonPage noNeonContext title="My Neon Page">
+          <NeonPage title="My Neon Page">
             <Typography>Content</Typography>
           </NeonPage>
         </div>
@@ -137,7 +137,7 @@ import NeonPage from 'portal-core-components/lib/components/NeonPage';
       </DocBlock>
       <ExampleBlock>
         <div className={classes.example}>
-          <NeonPage noNeonContext title="My Neon Page" breadcrumbs={breadcrumbs}>
+          <NeonPage title="My Neon Page" breadcrumbs={breadcrumbs}>
             <Typography>Content</Typography>
           </NeonPage>
         </div>
@@ -176,7 +176,6 @@ export default function MyNeonPage() {
             title="My Neon Page"
             breadcrumbs={breadcrumbs}
             loading="Loading My Neon Page..."
-            noNeonContext
           >
             <Typography>Content</Typography>
           </NeonPage>
@@ -228,7 +227,6 @@ export default function MyNeonPage() {
             title="My Neon Page"
             breadcrumbs={breadcrumbs}
             error="Page failed to load"
-            noNeonContext
           >
             <Typography>Content</Typography>
           </NeonPage>
@@ -273,7 +271,7 @@ export default function MyNeonPage() {
       </DocBlock>
       <ExampleBlock>
         <div className={classes.example}>
-          <NeonPage noNeonContext notification={notification}>
+          <NeonPage notification={notification}>
             <Typography>Content</Typography>
           </NeonPage>
         </div>
@@ -307,7 +305,6 @@ const notification = 'Here is a sample NeonPage notification with a <a href="htt
           <NeonPage
             breadcrumbs={breadcrumbs}
             loading="Loading My Neon Page..."
-            noNeonContext
           >
             <Grid container spacing={3}>
               {skeletionGrid}

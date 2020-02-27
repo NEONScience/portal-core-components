@@ -6,6 +6,8 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 
+import cloneDeep from 'lodash/cloneDeep';
+
 import { of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
@@ -45,7 +47,10 @@ const Context = createContext(DEFAULT_STATE);
 */
 const useNeonContextState = () => {
   const hookResponse = useContext(Context);
-  if (hookResponse.length !== 2) {
+  // If called by a component that's not inside a NeonContext the hookResponse will be
+  // DEFAULT_STATE. Otherwise it will return an array of length one containing the current state.
+  // Thus we double-check here that we got an active state before returning it.
+  if (!Array.isArray(hookResponse) || !hookResponse[0].isActive) {
     return [
       { ...DEFAULT_STATE },
       () => {},
@@ -58,7 +63,9 @@ const useNeonContextState = () => {
    Reducer
 */
 const reducer = (state, action) => {
-  const newState = { ...state };
+  // Always deep clone fetches as that's the main thing we care about
+  // changing to trigger re-renders in the consumer.
+  const newState = { ...state, fetches: cloneDeep(state.fetches) };
   switch (action.type) {
     case 'fetchSitesCalled':
       newState.fetches.sites.status = FETCH_STATUS.FETCHING;

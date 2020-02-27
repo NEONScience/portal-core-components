@@ -10,7 +10,7 @@ declare namespace Provider {
         export const children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
     }
 }
-declare function useNeonContextState(): {
+declare function useNeonContextState(): ({
     data: {
         sites: {};
         states: {
@@ -129,6 +129,9 @@ declare function useNeonContextState(): {
                 "name": string;
             };
             "PA": {
+                /**
+                   Reduce
+                */
                 "name": string;
             };
             "PR": {
@@ -228,7 +231,9 @@ declare function useNeonContextState(): {
             };
             "D19": {
                 "name": string;
-            };
+            }; /**
+               CONTEXT
+            */
             "D20": {
                 "name": string;
             };
@@ -265,7 +270,7 @@ declare function useNeonContextState(): {
         };
     };
     isActive: boolean;
-} | ((() => void) | {
+} & any[]) | ((() => void) | {
     data: {
         sites: {};
         states: {
@@ -384,6 +389,9 @@ declare function useNeonContextState(): {
                 "name": string;
             };
             "PA": {
+                /**
+                   Reduce
+                */
                 "name": string;
             };
             "PR": {
@@ -483,7 +491,9 @@ declare function useNeonContextState(): {
             };
             "D19": {
                 "name": string;
-            };
+            }; /**
+               CONTEXT
+            */
             "D20": {
                 "name": string;
             };

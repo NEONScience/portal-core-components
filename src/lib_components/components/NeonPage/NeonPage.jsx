@@ -119,7 +119,6 @@ const NeonPage = (props) => {
     error,
     notification,
     outerPageContainerMaxWidth,
-    noNeonContext,
   } = props;
   const useStylesProps = {
     theme: Theme,
@@ -127,6 +126,7 @@ const NeonPage = (props) => {
   };
   const useStyles = createUseStyles(props);
   const classes = useStyles(useStylesProps);
+  const [{ isActive: neonContextIsActive }] = NeonContext.useNeonContextState();
 
   /**
      Liferay Notifications
@@ -286,7 +286,7 @@ const NeonPage = (props) => {
     </ThemeProvider>
   );
 
-  return noNeonContext ? renderNeonPage() : (
+  return neonContextIsActive || true ? renderNeonPage() : (
     <NeonContext.Provider>
       {renderNeonPage()}
     </NeonContext.Provider>
@@ -306,7 +306,6 @@ NeonPage.propTypes = {
   error: PropTypes.string,
   notification: PropTypes.string,
   outerPageContainerMaxWidth: PropTypes.string,
-  noNeonContext: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.oneOfType([
       PropTypes.node,
@@ -325,7 +324,6 @@ NeonPage.defaultProps = {
   error: null,
   notification: null,
   outerPageContainerMaxWidth: '2000px',
-  noNeonContext: false,
 };
 
 export default NeonPage;
