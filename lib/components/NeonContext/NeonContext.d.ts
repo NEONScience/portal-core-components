@@ -2,6 +2,7 @@ export default NeonContext;
 declare namespace NeonContext {
     export { Provider };
     export { useNeonContextState };
+    export { DEFAULT_STATE };
 }
 declare function Provider(props: any): JSX.Element;
 declare namespace Provider {
@@ -520,4 +521,30 @@ declare function useNeonContextState(): {
     };
     isActive: boolean;
 })[];
+declare namespace DEFAULT_STATE {
+    export namespace data {
+        export const sites: {};
+        export { statesJSON as states };
+        export { domainsJSON as domains };
+        export { bundlesJSON as bundles };
+    }
+    export namespace fetches {
+        export namespace sites_1 {
+            import status = AWAITING_CALL;
+            export { status };
+            export const error: null;
+        }
+        export { sites_1 as sites };
+    }
+    export const isActive: boolean;
+}
 import PropTypes from "prop-types";
+import statesJSON from "../../staticJSON/states.json";
+import domainsJSON from "../../staticJSON/domains.json";
+import bundlesJSON from "../../staticJSON/bundles.json";
+declare namespace FETCH_STATUS {
+    export const AWAITING_CALL: string;
+    export const FETCHING: string;
+    export const ERROR: string;
+    export const SUCCESS: string;
+}

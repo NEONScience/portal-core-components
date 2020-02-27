@@ -151,5 +151,5 @@ Provider.propTypes = {
 /**
    Export
 */
-const NeonContext = { Provider, useNeonContextState };
+const NeonContext = { Provider, useNeonContextState, DEFAULT_STATE };
 export default NeonContext;
