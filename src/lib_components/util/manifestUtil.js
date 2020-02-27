@@ -60,9 +60,9 @@ export const downloadAopManifest = (productData, s3Files, documentation = 'inclu
   const zipFileName = (productName || '').toLowerCase().replace(/\W/g, '-')
     || productCode.replace(/\W/g, '-');
 
-  const manifestS3Files = s3Files.value.map(id => ({
-    path: s3Files.urlsById[id],
-    fileName: s3Files.urlsById[id].split('/').pop() || '',
+  const manifestS3Files = s3Files.value.map(url => ({
+    path: url,
+    fileName: url.split('/').pop() || '',
     presign: true,
   }));
 
