@@ -68,8 +68,7 @@ declare function useDownloadDataState(): {
         cachedValues: never[];
         validValues: never[];
         isValid: boolean;
-        bytesById: {};
-        urlsById: {};
+        bytesByUrl: {};
         totalSize: number;
         estimatedPostSize: number;
         filteredFileCount: number;
@@ -138,8 +137,7 @@ declare function useDownloadDataState(): {
         cachedValues: never[];
         validValues: never[];
         isValid: boolean;
-        bytesById: {};
-        urlsById: {};
+        bytesByUrl: {};
         totalSize: number;
         estimatedPostSize: number;
         filteredFileCount: number;
@@ -213,8 +211,7 @@ declare namespace DEFAULT_STATE {
         export const cachedValues: never[];
         export const validValues: never[];
         export const isValid: boolean;
-        export const bytesById: {};
-        export const urlsById: {};
+        export const bytesByUrl: {};
         export const totalSize: number;
         export const estimatedPostSize: number;
         export const filteredFileCount: number;

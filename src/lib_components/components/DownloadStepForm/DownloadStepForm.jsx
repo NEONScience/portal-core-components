@@ -555,7 +555,7 @@ export default function DownloadStepForm(props) {
             onSelectionChange={(rows, file) => {
               dispatch({
                 type: 'setIndividualS3FileSelected',
-                id: file.id,
+                url: file.url,
                 selected: file.tableData.checked,
               });
             }}
