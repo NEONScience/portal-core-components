@@ -554,7 +554,7 @@ export function AvailabilityGrid(config) {
     const transform = getRowTranslation(rowKey, rowIdx);
     const labelX = getLabelWidth() - SVG.CELL_PADDING;
     const rowLabelG = rowLabelsG.append('g').attr('transform', transform);
-    const fill = viewSelections[rowKey]
+    const fill = selectionEnabled && viewSelections[rowKey]
       ? Theme.palette.secondary.contrastText
       : Theme.palette.grey[700];
     const text = rowLabelG.append('text')
