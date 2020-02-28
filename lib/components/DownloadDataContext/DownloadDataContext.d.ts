@@ -68,8 +68,7 @@ declare function useDownloadDataState(): {
         cachedValues: never[];
         validValues: never[];
         isValid: boolean;
-        bytesById: {};
-        urlsById: {};
+        bytesByUrl: {};
         totalSize: number;
         estimatedPostSize: number;
         filteredFileCount: number;
@@ -90,7 +89,7 @@ declare function useDownloadDataState(): {
     };
     sites: {
         value: never[];
-        validValues: string[];
+        validValues: never[];
         isValid: boolean;
     };
     dateRange: {
@@ -138,8 +137,7 @@ declare function useDownloadDataState(): {
         cachedValues: never[];
         validValues: never[];
         isValid: boolean;
-        bytesById: {};
-        urlsById: {};
+        bytesByUrl: {};
         totalSize: number;
         estimatedPostSize: number;
         filteredFileCount: number;
@@ -160,7 +158,7 @@ declare function useDownloadDataState(): {
     };
     sites: {
         value: never[];
-        validValues: string[];
+        validValues: never[];
         isValid: boolean;
     };
     dateRange: {
@@ -213,8 +211,7 @@ declare namespace DEFAULT_STATE {
         export const cachedValues: never[];
         export const validValues: never[];
         export const isValid: boolean;
-        export const bytesById: {};
-        export const urlsById: {};
+        export const bytesByUrl: {};
         export const totalSize: number;
         export const estimatedPostSize: number;
         export const filteredFileCount: number;
@@ -236,7 +233,7 @@ declare namespace DEFAULT_STATE {
     export namespace sites_2 {
         const value_2: never[];
         export { value_2 as value };
-        const validValues_1: string[];
+        const validValues_1: never[];
         export { validValues_1 as validValues };
         const isValid_1: boolean;
         export { isValid_1 as isValid };

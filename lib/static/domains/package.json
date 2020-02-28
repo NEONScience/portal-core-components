@@ -1,6 +1,0 @@
-{
-  "private": true,
-  "name": "domains-json",
-  "main": "./domains.json",
-  "module": "./domains.json"
-}

@@ -37,9 +37,6 @@ import {
   getSizeEstimateFromManifestResponse,
   MAX_POST_BODY_SIZE,
 } from '../../util/manifestUtil';
-import allSites from '../../static/sites/sites.json';
-
-const ALL_POSSIBLE_VALID_SITES = Object.keys(allSites);
 
 const ALL_POSSIBLE_VALID_DATE_RANGE = [
   '2010-01',
@@ -124,8 +121,7 @@ const DEFAULT_STATE = {
     cachedValues: [], // Where all fetched file records are cached
     validValues: [], // Subset of cached values in scope of current sites and date range values
     isValid: false,
-    bytesById: {}, // A mapping of id to file size for fast summing of total download size
-    urlsById: {}, // A mapping of id to url for building the final file list download request
+    bytesByUrl: {}, // A mapping of id to file size for fast summing of total download size
     totalSize: 0,
     estimatedPostSize: 0, // For disabling download button above a threshold per POST API limitation
     filteredFileCount: 0, // A cached count of files present when current filters are applied
@@ -146,7 +142,7 @@ const DEFAULT_STATE = {
   },
   sites: {
     value: [],
-    validValues: [...ALL_POSSIBLE_VALID_SITES],
+    validValues: [],
     isValid: false,
   },
   dateRange: {
@@ -221,7 +217,7 @@ const newStateIsAllowable = (key, value) => {
     case 'sites':
       return (
         Array.isArray(value)
-        && value.every(site => ALL_POSSIBLE_VALID_SITES.includes(site))
+          && value.every(site => (typeof site === 'string' && /^[A-Z]{4}$/.test(site)))
       );
     case 'dateRange':
       return (
@@ -276,7 +272,7 @@ const newStateIsValid = (key, value, validValues = []) => {
         && value[0] >= validValues[0] && value[1] <= validValues[1]
       );
     case 's3Files':
-      idList = validValues.map(fileObj => fileObj.id);
+      idList = validValues.map(fileObj => fileObj.url);
       return (
         Array.isArray(value) && value.length > 0
         && value.every(id => idList.includes(id))
@@ -317,7 +313,6 @@ const estimatePostSize = (s3FilesState, sitesState) => {
   const baseLength = 300;
   const sitesLength = sitesState.value.length * 62;
   const filesLength = s3FilesState.value
-    .map(id => s3FilesState.urlsById[id])
     .reduce((a, b) => a + encodeURIComponent(b).length + 58, 0);
   return baseLength + sitesLength + filesLength;
 };
@@ -525,12 +520,12 @@ const getAndValidateNewS3FilesState = (previousState, action, broadcast = false)
       }
       newState.s3Files.value = action.value;
       newState.s3Files.validValues.forEach((file, idx) => {
-        newState.s3Files.validValues[idx].tableData.checked = newState.s3Files.value.includes(file.id);
+        newState.s3Files.validValues[idx].tableData.checked = newState.s3Files.value.includes(file.url);
       });
       break;
 
     case 'setS3FilesValueSelectAll':
-      newState.s3Files.value = newState.s3Files.validValues.map(file => file.id);
+      newState.s3Files.value = newState.s3Files.validValues.map(file => file.url);
       newState.s3Files.validValues.forEach((file, idx) => {
         newState.s3Files.validValues[idx].tableData.checked = true;
       });
@@ -551,25 +546,25 @@ const getAndValidateNewS3FilesState = (previousState, action, broadcast = false)
           }
           return (!newState.s3Files.filters[col].length || newState.s3Files.filters[col].includes(row[col])); // eslint-disable-line max-len
         }))
-        .map(file => file.id);
+        .map(file => file.url);
       newState.s3Files.validValues.forEach((file, idx) => {
-        newState.s3Files.validValues[idx].tableData.checked = newState.s3Files.value.includes(file.id); // eslint-disable-line max-len
+        newState.s3Files.validValues[idx].tableData.checked = newState.s3Files.value.includes(file.url); // eslint-disable-line max-len
       });
       break;
 
     case 'setIndividualS3FileSelected':
-      fileIdx = newState.s3Files.validValues.findIndex(file => file.id === action.id);
+      fileIdx = newState.s3Files.validValues.findIndex(file => file.url === action.url);
       if (fileIdx === -1) { return newState; }
       newState.s3Files.validValues[fileIdx].tableData.checked = action.selected;
       // When doing one file at a time we don't have to recalculate the total size,
       // just add/subtract the size of the file specified
       if (action.selected) {
-        newState.s3Files.value.push(action.id);
-        newState.s3Files.totalSize += newState.s3Files.bytesById[action.id];
+        newState.s3Files.value.push(action.url);
+        newState.s3Files.totalSize += newState.s3Files.bytesByUrl[action.url];
       } else {
-        if (newState.s3Files.value.indexOf(action.id) === -1) { return newState; }
-        newState.s3Files.value.splice(newState.s3Files.value.indexOf(action.id), 1);
-        newState.s3Files.totalSize -= newState.s3Files.bytesById[action.id];
+        if (newState.s3Files.value.indexOf(action.url) === -1) { return newState; }
+        newState.s3Files.value.splice(newState.s3Files.value.indexOf(action.url), 1);
+        newState.s3Files.totalSize -= newState.s3Files.bytesByUrl[action.url];
       }
       break;
 
@@ -580,7 +575,7 @@ const getAndValidateNewS3FilesState = (previousState, action, broadcast = false)
   // If we didn't already update the total size then recalculate it
   if (action.type !== 'setIndividualS3FileSelected') {
     newState.s3Files.totalSize = newState.s3Files.value
-      .map(id => newState.s3Files.bytesById[id])
+      .map(id => newState.s3Files.bytesByUrl[id])
       .reduce((a, b) => a + b, 0);
   }
 
@@ -639,7 +634,7 @@ const regenerateS3FilesFiltersAndValidValues = (state) => {
     ))
     .map(file => ({
       ...file,
-      tableData: { checked: updated.s3Files.value.includes(file.id) },
+      tableData: { checked: updated.s3Files.value.includes(file.url) },
     }));
   // If cachedValues and validValues differ in size then rebuild valueLookups for
   // filters, adjust filter selections to suit, and regenerate filtered file count.
@@ -666,7 +661,7 @@ const regenerateS3FilesFiltersAndValidValues = (state) => {
     type: 'setValueFromUpdatedValidValues',
     value: updated.s3Files.validValues
       .filter(file => file.tableData.checked)
-      .map(file => file.id),
+      .map(file => file.url),
   };
   return getAndValidateNewS3FilesState(updated, action, updated.broadcast);
 };
@@ -874,15 +869,13 @@ const reducer = (state, action) => {
 
     // Action for handling the response from an s3 files fetch:
     // 1. Append to cachedValues
-    // 2. Regenerate validValues from cachedValues and sites / date range values
-    // 3. Regenerate fil
+    // 2. Regenerate filter and validValues from cachedValues and sites / date range values
     case 'setS3FileFetchesCompleted':
       newState = { ...state, s3FileFetchProgress: 0 };
       action.value.forEach((response) => {
         newState.s3FileFetches[`${response.site}.${response.yearMonth}`] = 'fetched';
         const files = response.files.map((fileObj) => {
           const file = {
-            id: fileObj.crc32,
             name: fileObj.name,
             size: parseInt(fileObj.size, 10),
             url: fileObj.url,
@@ -899,10 +892,9 @@ const reducer = (state, action) => {
               });
             }
           });
-          // Cache file attributes by id:
+          // Cache file attributes by url:
           // file size fast summing, url for building final download request
-          newState.s3Files.bytesById[file.id] = file.size;
-          newState.s3Files.urlsById[file.id] = file.url;
+          newState.s3Files.bytesByUrl[file.url] = file.size;
           // If new unique values are present add them to the s3File value lookups
           Object.keys(newState.s3Files.valueLookups).forEach((lookup) => {
             if (typeof file[lookup] === 'undefined') { return; }
@@ -1145,7 +1137,7 @@ Provider.propTypes = {
   }),
   /* eslint-disable react/no-unused-prop-types */
   availabilityView: PropTypes.oneOf(AVAILABILITY_VIEW_MODES),
-  sites: PropTypes.arrayOf(PropTypes.oneOf(ALL_POSSIBLE_VALID_SITES)),
+  sites: PropTypes.arrayOf(PropTypes.string),
   dateRange: PropTypes.arrayOf(PropTypes.string),
   documentation: PropTypes.oneOf(ALL_POSSIBLE_VALID_DOCUMENTATION),
   packageType: PropTypes.oneOf(ALL_POSSIBLE_VALID_PACKAGE_TYPE),

@@ -2,6 +2,10 @@
 
 This is a library of react components to be used on pages for the NEON Data Portal.
 
+Functional documentation can be found here:
+
+https://data.neonscience.org/core-components
+
 
 ## Using Components
 

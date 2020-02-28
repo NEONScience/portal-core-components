@@ -16,7 +16,6 @@ import { withStyles, makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import Divider from '@material-ui/core/Divider';
-import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import Link from '@material-ui/core/Link';
@@ -34,11 +33,9 @@ import InfoIcon from '@material-ui/icons/InfoOutlined';
 import WarningIcon from '@material-ui/icons/Warning';
 
 import Theme from '../Theme/Theme';
+import NeonContext from '../NeonContext/NeonContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import FullWidthVisualization from '../FullWidthVisualization/FullWidthVisualization';
-
-import sites from '../../static/sites/sites.json';
-import states from '../../static/states/states.json';
 
 const MIN_IFRAME_WIDTH = 240;
 
@@ -46,7 +43,7 @@ const MIN_IFRAME_WIDTH = 240;
    Setup: CSS classes
 */
 const useStyles = makeStyles(theme => ({
-  formControl: {
+  selectionForm: {
     width: '100%',
     marginBottom: theme.spacing(2),
   },
@@ -209,36 +206,42 @@ const getCurrentSliderBounds = (currentYears) => {
   };
 };
 
-const getSiteDescription = (site, includeState = true) => {
-  if (sites[site]) {
-    const state = includeState ? `, ${sites[site].stateCode}` : '';
-    return `${sites[site].description}${state}`;
-  }
-  return null;
-};
-
-const getDataSetTitle = (selection, data) => {
-  if (!selection || !data) { return ''; }
-  const { site, year, flight } = selection;
-  if (!site || !year || !flight) { return ''; }
-  const flightIdx = flight - 1;
-  if (!data[site] || !data[site][year] || !data[site][year][flightIdx]) { return ''; }
-  const parts = {
-    site: getSiteDescription(site),
-    date: dateFormat(new Date(`${year}-${data[site][year][flightIdx].month}-02`), 'mmmm yyyy'),
-    flight: `Flight ${flight}/${data[site][year].length}`,
-  };
-  return `${parts.site} -- ${parts.date} -- ${parts.flight}`;
-};
-
 /**
    Main Function
 */
-export default function AopDataViewer(props) {
+const AopDataViewer = (props) => {
   const classes = useStyles(Theme);
   const { productCode, showTitle } = props;
 
+  const [{ data: neonContextData }] = NeonContext.useNeonContextState();
+  const { sites, states } = neonContextData;
+
   const belowSm = useMediaQuery(Theme.breakpoints.only('xs'));
+
+  /**
+     Getters for site description and data set title
+  */
+  const getSiteDescription = (site, includeState = true) => {
+    if (sites[site]) {
+      const state = includeState ? `, ${sites[site].stateCode}` : '';
+      return `${sites[site].description}${state}`;
+    }
+    return null;
+  };
+
+  const getDataSetTitle = (selection, data) => {
+    if (!selection || !data) { return ''; }
+    const { site, year, flight } = selection;
+    if (!site || !year || !flight) { return ''; }
+    const flightIdx = flight - 1;
+    if (!data[site] || !data[site][year] || !data[site][year][flightIdx]) { return ''; }
+    const parts = {
+      site: getSiteDescription(site),
+      date: dateFormat(new Date(`${year}-${data[site][year][flightIdx].month}-02`), 'mmmm yyyy'),
+      flight: `Flight ${flight}/${data[site][year].length}`,
+    };
+    return `${parts.site} -- ${parts.date} -- ${parts.flight}`;
+  };
 
   /**
      State: data
@@ -367,6 +370,7 @@ export default function AopDataViewer(props) {
   const renderSiteSelect = () => {
     const sitesByStateName = {};
     Object.keys(data).forEach((site) => {
+      if (!sites[site]) { return; }
       const stateName = states[sites[site].stateCode].name;
       if (!sitesByStateName[stateName]) { sitesByStateName[stateName] = []; }
       sitesByStateName[stateName].push(site);
@@ -517,59 +521,56 @@ export default function AopDataViewer(props) {
       Visus Project at the Univeristy of Utah
     </Link>
   );
-  const renderTopForm = () => (
-    <form className={classes.root} autoComplete="off">
-      <FormControl className={classes.formControl}>
-        {showTitle ? (
-          <Typography variant="h5" gutterBottom>
-            AOP Data Viewer
-          </Typography>
-        ) : null}
-        <Typography variant="caption" gutterBottom>
-          {/* eslint-disable react/jsx-one-expression-per-line */}
-          This viewer allows for interactive exploration of remotely sensed data
-          from the Airborne Observation Platform (AOP). Change the field site and
-          flight for this data product using the tools below to stream different
-          data into view. Pan and zoom in the view to stream higher resolution
-          imagery. This pilot data viewer is provided through a collaboration with
-          the {visusLink} and more updates are planned for the future.
-          {/* eslint-enable react/jsx-one-expression-per-line */}
+  const renderSelectionForm = () => (
+    <form className={classes.selectionForm} autoComplete="off">
+      {showTitle ? (
+        <Typography variant="h5" gutterBottom>
+          AOP Data Viewer
         </Typography>
-        <Divider className={classes.divider} />
-        {belowSm
-          ? (
-            <React.Fragment>
-              <Grid container spacing={2} justify="center" style={{ marginBottom: Theme.spacing(1) }}>
-                <Grid item xs={2}>{renderInputLabel('site', tooltips.site)}</Grid>
-                <Grid item xs={10}>{renderSiteSelect()}</Grid>
-              </Grid>
-              <Grid container spacing={2} justify="center" style={{ marginBottom: Theme.spacing(1) }}>
-                <Grid item xs={2}>{renderInputLabel('year', tooltips.year)}</Grid>
-                <Grid item xs={10}>{renderYearSlider()}</Grid>
-              </Grid>
-              <Grid container spacing={2} justify="center" style={{ marginBottom: Theme.spacing(1) }}>
-                <Grid item xs={2}>{renderInputLabel('flight', tooltips.flight)}</Grid>
-                <Grid item xs={10}>{renderFlightSelect()}</Grid>
-              </Grid>
-            </React.Fragment>
-          )
-          : (
-            <div style={{ width: '100%', display: 'flex' }}>
-              <div style={{ flexGrow: 0 }}>
-                {renderInputLabel('site', tooltips.site)}
-                {renderSiteSelect()}
-              </div>
-              <div style={{ flexGrow: 1, margin: Theme.spacing(0, 2) }}>
-                {renderInputLabel('year', tooltips.year)}
-                {renderYearSlider()}
-              </div>
-              <div style={{ flexGrow: 0 }}>
-                {renderInputLabel('flight', tooltips.flight)}
-                {renderFlightSelect()}
-              </div>
+      ) : null}
+      <Typography variant="caption" gutterBottom>
+        {/* eslint-disable react/jsx-one-expression-per-line */}
+        This viewer allows for interactive exploration of remotely sensed data
+        from the Airborne Observation Platform (AOP). Change the field site and
+        flight for this data product using the tools below to stream different
+        data into view. Pan and zoom in the view to stream higher resolution
+        imagery. This pilot data viewer is provided through a collaboration with
+        the {visusLink} and more updates are planned for the future.
+        {/* eslint-enable react/jsx-one-expression-per-line */}
+      </Typography>
+      <Divider className={classes.divider} />
+      {belowSm
+        ? (
+          <React.Fragment>
+            <Grid container spacing={2} justify="center" style={{ marginBottom: Theme.spacing(1) }}>
+              <Grid item xs={2}>{renderInputLabel('site', tooltips.site)}</Grid>
+              <Grid item xs={10}>{renderSiteSelect()}</Grid>
+            </Grid>
+            <Grid container spacing={2} justify="center" style={{ marginBottom: Theme.spacing(1) }}>
+              <Grid item xs={2}>{renderInputLabel('year', tooltips.year)}</Grid>
+              <Grid item xs={10}>{renderYearSlider()}</Grid>
+            </Grid>
+            <Grid container spacing={2} justify="center" style={{ marginBottom: Theme.spacing(1) }}>
+              <Grid item xs={2}>{renderInputLabel('flight', tooltips.flight)}</Grid>
+              <Grid item xs={10}>{renderFlightSelect()}</Grid>
+            </Grid>
+          </React.Fragment>
+        ) : (
+          <div style={{ width: '100%', display: 'flex' }}>
+            <div style={{ flexGrow: 0 }}>
+              {renderInputLabel('site', tooltips.site)}
+              {renderSiteSelect()}
             </div>
-          )}
-      </FormControl>
+            <div style={{ flexGrow: 1, margin: Theme.spacing(0, 2) }}>
+              {renderInputLabel('year', tooltips.year)}
+              {renderYearSlider()}
+            </div>
+            <div style={{ flexGrow: 0 }}>
+              {renderInputLabel('flight', tooltips.flight)}
+              {renderFlightSelect()}
+            </div>
+          </div>
+        )}
     </form>
   );
 
@@ -596,7 +597,7 @@ export default function AopDataViewer(props) {
       deriveHeightFromWidth={getIframeHeight}
       data-selenium="aop-data-viewer"
     >
-      {renderTopForm()}
+      {renderSelectionForm()}
       <iframe
         src={getCurrentIframeSrc()}
         title={getDataSetTitle(currentSelection)}
@@ -606,7 +607,7 @@ export default function AopDataViewer(props) {
       />
     </FullWidthVisualization>
   );
-}
+};
 
 AopDataViewer.propTypes = {
   productCode: PropTypes.string.isRequired,
@@ -622,3 +623,7 @@ AopDataViewer.defaultProps = {
   initialYear: null,
   initialFlight: null,
 };
+
+const WrappedAopDataViewer = NeonContext.getWrappedComponent(AopDataViewer);
+
+export default WrappedAopDataViewer;

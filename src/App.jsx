@@ -27,6 +27,7 @@ import DownloadDataButtonStyleGuide from './lib_components/components/DownloadDa
 import DownloadDataContextStyleGuide from './lib_components/components/DownloadDataContext/StyleGuide';
 import ExternalHostInfoStyleGuide from './lib_components/components/ExternalHostInfo/StyleGuide';
 import FullWidthVisualizationStyleGuide from './lib_components/components/FullWidthVisualization/StyleGuide';
+import NeonContextStyleGuide from './lib_components/components/NeonContext/StyleGuide';
 import NeonEnvironmentStyleGuide from './lib_components/components/NeonEnvironment/StyleGuide';
 import NeonGraphQLStyleGuide from './lib_components/components/NeonGraphQL/StyleGuide';
 import NeonPageStyleGuide from './lib_components/components/NeonPage/StyleGuide';
@@ -69,6 +70,11 @@ const components = [
     name: 'Full Width Visualization',
     hash: '#FullWidthVisualization',
     component: FullWidthVisualizationStyleGuide,
+  },
+  {
+    name: 'Neon Context',
+    hash: '#NeonContext',
+    component: NeonContextStyleGuide,
   },
   {
     name: 'Neon GraphQL',

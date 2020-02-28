@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid */
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -37,16 +37,6 @@ export default function StyleGuide(props) {
     { name: 'Breadcrumb 2', href: '/bc2' },
     { name: 'My Neon Page' },
   ];
-
-  const [progress, setProgress] = useState(0);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      let newProgress = progress + (Math.random() * 10);
-      if (newProgress > 100) { newProgress = 0; }
-      setProgress(newProgress);
-    }, 200);
-    return () => clearInterval(interval);
-  });
 
   const notification = 'Here is a sample NeonPage notification with a <a href="https://github.com/NEONScience/portal-core-components/">link</a>.';
 
@@ -220,48 +210,6 @@ export default function MyNeonPage() {
         on the Matrial UI CircularProgress component, and therefore should be a
         number ranging from 0 to 100.
       </DocBlock>
-      <ExampleBlock>
-        <div className={classes.example}>
-          <NeonPage
-            title="My Neon Page"
-            breadcrumbs={breadcrumbs}
-            loading="Loading My Neon Page..."
-            progress={progress}
-          >
-            <Typography>Content</Typography>
-          </NeonPage>
-        </div>
-      </ExampleBlock>
-      <CodeBlock>
-        {`
-const breadcrumbs = [...];
-
-// Simulate a progress value advancing in random steps from 0 to 100.
-// Reset when surpassing 100.
-const [progress, setProgress] = useState(0);
-useEffect(() => {
-  const interval = setInterval(() => {
-    let newProgress = progress + (Math.random() * 10);
-    if (newProgress > 100) { newProgress = 0; }
-    setProgress(newProgress);
-  }, 200);
-  return () => clearInterval(interval);
-});
-
-export default function MyNeonPage() {
-  return (
-    <NeonPage
-      title="My Neon Page"
-      breadcrumbs={breadcrumbs}
-      loading="Loading My Neon Page..."
-      progress={progress}
-    >
-      <Typography>Content</Typography>
-    </NeonPage>
-  );
-}
-        `}
-      </CodeBlock>
 
       <Divider className={classes.divider} />
       <Typography variant="h6" component="h4" gutterBottom>Error</Typography>

@@ -1,6 +1,0 @@
-{
-  "private": true,
-  "name": "domains-shapes-json",
-  "main": "./domainsShapes.json",
-  "module": "./domainsShapes.json"
-}

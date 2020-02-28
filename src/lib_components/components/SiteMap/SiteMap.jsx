@@ -2,9 +2,6 @@ import React, { useRef, useReducer, useEffect } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import PropTypes from 'prop-types';
 
-import { of } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
-
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -39,13 +36,10 @@ import {
 } from 'react-leaflet';
 
 import Theme, { COLORS } from '../Theme/Theme';
-import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
+import NeonContext from '../NeonContext/NeonContext';
 
-import sitesJSON from '../../static/sites/sites.json';
-import statesJSON from '../../static/states/states.json';
-import statesShapesJSON from '../../static/statesShapes/statesShapes.json';
-import domainsJSON from '../../static/domains/domains.json';
-import domainsShapesJSON from '../../static/domainsShapes/domainsShapes.json';
+import statesShapesJSON from '../../staticJSON/statesShapes.json';
+import domainsShapesJSON from '../../staticJSON/domainsShapes.json';
 
 import iconCoreTerrestrialSVG from './icon-core-terrestrial.svg';
 import iconCoreTerrestrialSelectedSVG from './icon-core-terrestrial-selected.svg';
@@ -288,10 +282,15 @@ const SiteMap = (props) => {
     mode,
     tileLayer: tileLayerProp,
     zoom: zoomProp,
-    sites: sitesProp,
   } = props;
   const classes = useStyles(Theme);
   const mapRef = useRef(null);
+
+  const [{
+    data: neonContextData,
+    fetches: neonContextFetches,
+  }] = NeonContext.useNeonContextState();
+  const { sites: allSites, states: allStates, domains: allDomains } = neonContextData;
 
   /**
      Icon Setup
@@ -351,58 +350,6 @@ const SiteMap = (props) => {
   });
 
   /**
-     Prepare sites object. Our preferred shape looks like this:
-     {
-       ABBY: {
-         description: 'Abby Road',
-         type: 'RELOCATABLE',
-         stateCode: 'WA',
-         domainCode: 'D16',
-         terrain: 'TERRESTRIAL',
-         latitude: 45.762439,
-         longitude: -122.330317,
-       },
-       ...
-     }
-     We may be passed something from props that is either this or the API response
-     shape, so massage whatever we have into something we can use.
-  */
-  let sites = {};
-  let fetchSitesStatus = 'awaitingFetchCall';
-
-  const sitesArrayToKeyedObject = (sitesArray = []) => {
-    if (!Array.isArray(sitesArray)) { return {}; }
-    const sitesObj = {};
-    sitesArray.forEach((site) => {
-      sitesObj[site.siteCode] = {
-        siteCode: site.siteCode || site.code,
-        description: site.siteDescription || site.description,
-        type: site.siteType || site.type,
-        stateCode: site.stateCode,
-        domainCode: site.domainCode,
-        latitude: site.siteLatitude || site.latitude,
-        longitude: site.siteLongitude || site.longitude,
-        terrain: site.terrain || sitesJSON[site.siteCode].terrain,
-      };
-    });
-    return sitesObj;
-  };
-
-  if (sitesProp) {
-    if (Array.isArray(sitesProp)) {
-      sites = sitesArrayToKeyedObject(sitesProp);
-      fetchSitesStatus = 'fetched';
-    } else if (typeof sitesProp === 'object' && Object.keys(sitesProp).length > 0) {
-      sites = { ...sitesProp };
-      Object.keys(sites).forEach((siteCode) => {
-        if (!sites[siteCode].siteCode) { sites[siteCode].siteCode = siteCode; }
-        if (!sites[siteCode].terrain) { sites[siteCode].terrain = sitesJSON[siteCode].terrain; }
-      });
-      fetchSitesStatus = 'fetched';
-    }
-  }
-
-  /**
      State and Reducer Setup
   */
 
@@ -412,15 +359,15 @@ const SiteMap = (props) => {
   const deriveRegionSites = (state) => {
     const stateSites = {};
     const domainSites = {};
-    Object.keys(state.sites).forEach((siteCode) => {
-      const { stateCode, domainCode } = state.sites[siteCode];
+    Object.keys(allSites).forEach((siteCode) => {
+      const { stateCode, domainCode } = allSites[siteCode];
       if (!stateSites[stateCode]) { stateSites[stateCode] = new Set(); }
       if (!domainSites[domainCode]) { domainSites[domainCode] = new Set(); }
       stateSites[stateCode].add(siteCode);
       domainSites[domainCode].add(siteCode);
     });
     // Fill in empty sets for any states that had no NEON sites
-    Object.keys(statesJSON).forEach((stateCode) => {
+    Object.keys(allStates).forEach((stateCode) => {
       if (!stateSites[stateCode]) { stateSites[stateCode] = new Set(); }
     });
     return { ...state, stateSites, domainSites };
@@ -452,12 +399,8 @@ const SiteMap = (props) => {
     const selectedSites = new Set(state.selectedSites);
     let setMethod = null;
     switch (action.type) {
-      case 'fetchSitesCalled':
-        return { ...state, fetchSitesStatus: 'fetching' };
-      case 'fetchSitesSucceeded':
-        return deriveRegionSites({ ...state, fetchSitesStatus: 'fetched', sites: action.sites });
-      case 'fetchSitesFailed':
-        return { ...state, fetchSitesStatus: 'error', fetchSitesError: action.error };
+      case 'setDerivedRegionSites':
+        return deriveRegionSites({ ...state, regionSitesDerived: true });
       case 'setTileLayer':
         if (!TILE_LAYERS[action.tileLayer]) { return state; }
         return { ...state, tileLayer: action.tileLayer };
@@ -487,14 +430,12 @@ const SiteMap = (props) => {
     }
   };
 
-  const initialState = {
+  let initialState = {
     zoom: zoomProp,
     tileLayer: tileLayerProp,
-    sites,
+    regionSitesDerived: false,
     stateSites: {}, // derived once from sites
     domainSites: {}, // derived once from sites
-    fetchSitesStatus,
-    fetchSitesError: null,
     sitesOverlay: true,
     statesOverlay: false,
     domainsOverlay: false,
@@ -503,12 +444,20 @@ const SiteMap = (props) => {
     selectedDomains: {}, // derived from selectedSites when changed
   };
   initialState.zoomedIcons = getZoomedIcons(zoomProp);
-
+  if (neonContextFetches.sites.status === 'SUCCESS') {
+    initialState = deriveRegionSites({ ...initialState, regionSitesDerived: true });
+  }
   const [state, dispatch] = useReducer(reducer, initialState);
 
   /**
      Effects
   */
+  // Derive region/site lists in local state if the NeonContext state has finished loading
+  useEffect(() => {
+    if (state.regionSitesDerived || neonContextFetches.sites.status !== 'SUCCESS') { return; }
+    dispatch({ type: 'setDerivedRegionSites' });
+  }, [state.regionSitesDerived, neonContextFetches.sites.status]);
+
   // If zoom was not set as a prop then attemp to set the initial zoom such that
   // all sites are visible. This depends on the client dimenaions of the map itself,
   // and whether height or width is the deciding factor depends on the aspect ratio.
@@ -518,29 +467,6 @@ const SiteMap = (props) => {
       const minorDim = Math.min(mapCont.clientWidth / 136, mapCont.clientHeight / 128);
       const derivedZoom = [1, 2, 4, 6, 11].findIndex(m => m > minorDim);
       dispatch({ type: 'setZoom', zoom: derivedZoom === -1 ? 5 : derivedZoom });
-    }
-  });
-
-  // Subject and effect to perform and manage the sites GraphQL fetch
-  const fetchAllSites$ = NeonGraphQL.getAllSites().pipe(
-    map((response) => {
-      if (response.response && response.response.data && response.response.data.sites) {
-        const sitesResponse = sitesArrayToKeyedObject(response.response.data.sites);
-        dispatch({ type: 'fetchSitesSucceeded', sites: sitesResponse });
-        return of(true);
-      }
-      dispatch({ type: 'fetchSitesFailed', error: 'malformed response' });
-      return of(false);
-    }),
-    catchError((error) => {
-      dispatch({ type: 'fetchSitesFailed', error: error.message });
-      return of(false);
-    }),
-  );
-  useEffect(() => {
-    if (state.fetchSitesStatus === 'awaitingFetchCall') {
-      dispatch({ type: 'fetchSitesCalled' });
-      fetchAllSites$.subscribe();
     }
   });
 
@@ -570,7 +496,12 @@ const SiteMap = (props) => {
   /**
      Secondary Render - Loading and Error states
   */
-  if (state.fetchSitesStatus !== 'fetched') {
+  if (neonContextFetches.sites.status !== 'SUCCESS') {
+    /*
+    if (mode === 'SELECT') {
+      debugger; // eslint-disable-line no-debugger
+    }
+    */
     let notFetchedContents = (
       <React.Fragment>
         <Typography variant="h6" component="h3" gutterBottom>
@@ -579,12 +510,12 @@ const SiteMap = (props) => {
         <CircularProgress />
       </React.Fragment>
     );
-    if (state.fetchSitesStatus === 'error') {
+    if (neonContextFetches.sites.status === 'ERROR') {
       notFetchedContents = (
         <React.Fragment>
           <ErrorIcon fontSize="large" color="error" />
           <Typography variant="h6" component="h3" style={{ marginTop: Theme.spacing(1) }}>
-            {`Unable to load sites: ${state.fetchSitesError}`}
+            {`Unable to load sites: ${neonContextFetches.sites.error}`}
           </Typography>
         </React.Fragment>
       );
@@ -699,7 +630,7 @@ const SiteMap = (props) => {
           {/* State/Territory */}
           <Grid item xs={4} style={{ textAlign: 'right' }}>
             <Typography variant="subtitle2">{stateFieldTitle}</Typography>
-            <Typography variant="body2">{statesJSON[site.stateCode].name}</Typography>
+            <Typography variant="body2">{allStates[site.stateCode].name}</Typography>
           </Grid>
           {/* Latitude/Longitude */}
           <Grid item xs={5} style={{ display: 'flex', alignItems: 'flex-end' }}>
@@ -730,7 +661,7 @@ const SiteMap = (props) => {
           <Grid item xs={7} style={{ textAlign: 'right' }}>
             <Typography variant="subtitle2">Domain</Typography>
             <Typography variant="body2">
-              {`${site.domainCode} - ${domainsJSON[site.domainCode].name}`}
+              {`${site.domainCode} - ${allDomains[site.domainCode].name}`}
             </Typography>
           </Grid>
         </Grid>
@@ -780,8 +711,8 @@ const SiteMap = (props) => {
     return (
       <Overlay name={overlayName} checked={state.sitesOverlay}>
         <FeatureGroup>
-          {Object.keys(state.sites).map((siteCode) => {
-            const site = state.sites[siteCode];
+          {Object.keys(allSites).map((siteCode) => {
+            const site = allSites[siteCode];
             const isSelected = state.selectedSites.has(siteCode);
             if (!state.zoomedIcons[site.type] || !state.zoomedIcons[site.type][site.terrain]
                 || !site.latitude || !site.longitude) {
@@ -829,7 +760,7 @@ const SiteMap = (props) => {
         </Typography>
         <div>
           {[...sitesList].map((siteCode) => {
-            const site = state.sites[siteCode];
+            const site = allSites[siteCode];
             const alt = `${site.terrain} ${site.type}`;
             const selected = state.selectedSites.has(siteCode) ? 'SELECTED' : 'BASE';
             const src = ICON_SVGS[site.type][site.terrain][selected];
@@ -849,7 +780,7 @@ const SiteMap = (props) => {
      Render US States
   */
   const renderStatePopup = (stateCode) => {
-    if (!statesJSON[stateCode]) { return null; }
+    if (!allStates[stateCode] || !state.regionSitesDerived) { return null; }
     const renderActions = () => {
       const count = state.stateSites[stateCode].size;
       if (mode !== 'SELECT' || !count) { return null; }
@@ -880,7 +811,7 @@ const SiteMap = (props) => {
     return (
       <Popup className={classes.popup} autoPan={mode !== 'SELECT'}>
         <Typography variant="h6" gutterBottom>
-          {`${statesJSON[stateCode].name} (${stateCode})`}
+          {`${allStates[stateCode].name} (${stateCode})`}
         </Typography>
         {renderPopupSitesList(state.stateSites[stateCode])}
         {renderActions()}
@@ -953,7 +884,7 @@ const SiteMap = (props) => {
      Render Domains
   */
   const renderDomainPopup = (domainCode) => {
-    if (!domainsJSON[domainCode]) { return null; }
+    if (!allDomains[domainCode] || !state.regionSitesDerived) { return null; }
     const renderActions = () => {
       const count = state.domainSites[domainCode].size;
       if (mode !== 'SELECT' || !count) { return null; }
@@ -984,7 +915,7 @@ const SiteMap = (props) => {
     return (
       <Popup className={classes.popup} autoPan={mode !== 'SELECT'}>
         <Typography variant="h6" gutterBottom>
-          {`${domainsJSON[domainCode].name} (${domainCode})`}
+          {`${allDomains[domainCode].name} (${domainCode})`}
         </Typography>
         {renderPopupSitesList(state.domainSites[domainCode])}
         {renderActions()}
@@ -1095,6 +1026,7 @@ const SiteMap = (props) => {
       minZoom={1}
       onZoomEnd={handleZoomEnd}
       onBaseLayerChange={handleBaseLayerChange}
+      worldCopyJump
     >
       <ScaleControl imperial metric updateWhenIdle />
       <LayersControl position="topright">
@@ -1113,31 +1045,6 @@ SiteMap.propTypes = {
   mode: PropTypes.oneOf(Object.keys(SITE_MAP_MODES)),
   zoom: PropTypes.number,
   tileLayer: PropTypes.oneOf(Object.keys(TILE_LAYERS)),
-  sites: PropTypes.oneOf([
-    PropTypes.arrayOf(
-      PropTypes.shape({
-        siteCode: PropTypes.string.isRequired,
-        siteDescription: PropTypes.string.isRequired,
-        siteLatitude: PropTypes.number.isRequired,
-        siteLongitude: PropTypes.number.isRequired,
-        siteType: PropTypes.string,
-        domainCode: PropTypes.string,
-        stateCode: PropTypes.string,
-        terrain: PropTypes.string,
-      }),
-    ),
-    PropTypes.objectOf(
-      PropTypes.shape({
-        description: PropTypes.string.isRequired,
-        latitude: PropTypes.number.isRequired,
-        longitude: PropTypes.number.isRequired,
-        type: PropTypes.string.isRequired,
-        terrain: PropTypes.string.isRequired,
-        domainCode: PropTypes.string.isRequired,
-        stateCode: PropTypes.string.isRequired,
-      }),
-    ),
-  ]),
 };
 
 SiteMap.defaultProps = {
@@ -1146,7 +1053,8 @@ SiteMap.defaultProps = {
   mode: 'EXPLORE',
   tileLayer: 'NatGeo_World_Map',
   zoom: null,
-  sites: null,
 };
 
-export default SiteMap;
+const WrappedSiteMap = NeonContext.getWrappedComponent(SiteMap);
+
+export default WrappedSiteMap;

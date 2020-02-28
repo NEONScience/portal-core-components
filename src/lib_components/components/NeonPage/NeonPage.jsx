@@ -22,6 +22,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import Theme, { COLORS } from '../Theme/Theme';
 import NeonHeader from '../NeonHeader/NeonHeader';
 import NeonFooter from '../NeonFooter/NeonFooter';
+import NeonContext from '../NeonContext/NeonContext';
 import BrowserWarning from './BrowserWarning';
 import LiferayNotifications from './LiferayNotifications';
 
@@ -125,6 +126,7 @@ const NeonPage = (props) => {
   };
   const useStyles = createUseStyles(props);
   const classes = useStyles(useStylesProps);
+  const [{ isActive: neonContextIsActive }] = NeonContext.useNeonContextState();
 
   /**
      Liferay Notifications
@@ -259,31 +261,35 @@ const NeonPage = (props) => {
     </React.Fragment>,
   ));
 
-  return (
-    <React.Fragment>
-      <ThemeProvider theme={Theme}>
-        <CssBaseline />
-        <NeonHeader
-          notifications={notifications}
-          onShowNotifications={handleShowNotifications}
-        />
-        <Container className={classes.outerPageContainer}>
-          <Container className={classes.pageContainer} data-selenium="neon-page.content">
-            {renderBreadcrumbs()}
-            {renderTitle()}
-            {children}
-          </Container>
-          {renderLoading()}
-          {renderError()}
-          <LiferayNotifications
-            notifications={notifications}
-            onHideNotifications={handleHideNotifications}
-          />
-          <BrowserWarning />
+  const renderNeonPage = () => (
+    <ThemeProvider theme={Theme}>
+      <CssBaseline />
+      <NeonHeader
+        notifications={notifications}
+        onShowNotifications={handleShowNotifications}
+      />
+      <Container className={classes.outerPageContainer}>
+        <Container className={classes.pageContainer} data-selenium="neon-page.content">
+          {renderBreadcrumbs()}
+          {renderTitle()}
+          {children}
         </Container>
-        <NeonFooter />
-      </ThemeProvider>
-    </React.Fragment>
+        {renderLoading()}
+        {renderError()}
+        <LiferayNotifications
+          notifications={notifications}
+          onHideNotifications={handleHideNotifications}
+        />
+        <BrowserWarning />
+      </Container>
+      <NeonFooter />
+    </ThemeProvider>
+  );
+
+  return neonContextIsActive ? renderNeonPage() : (
+    <NeonContext.Provider>
+      {renderNeonPage()}
+    </NeonContext.Provider>
   );
 };
 

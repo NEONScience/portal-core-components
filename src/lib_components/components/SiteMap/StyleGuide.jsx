@@ -103,26 +103,6 @@ const propRows = [
     ),
   },
   {
-    prop: 'sites',
-    type: 'array or object',
-    default: 'null',
-    description: (
-      <div>
-        <p>
-          Data structure containing all sites to show in the map. This prop is provided as a means
-          to prevent unnecessary API calls or to show a subset of all sites.
-        </p>
-        <p>
-          By default, when <tt>sites</tt> is <tt>null</tt>, the Site Map will fetch all sites data
-          from the API. If the Site Map instance is the only one on the page this is usually
-          desired, but if there are several potential Site Map instances dynamically rendered in
-          the course of a page session it may make sense to perform the sites API fetch at the page
-          level and pass the value in using this prop for every newly generated Site Map instance.
-        </p>
-      </div>
-    ),
-  },
-  {
     prop: 'tileLayer',
     type: (
       <div>

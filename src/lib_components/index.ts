@@ -4,6 +4,7 @@ export { default as DataThemeIcon } from './components/DataThemeIcon';
 export { default as DataProductAvailability } from './components/DataProductAvailability';
 export { default as DownloadDataButton } from './components/DownloadDataButton';
 export { default as DownloadDataContext } from './components/DownloadDataContext';
+export { default as NeonContext } from './components/NeonContext';
 export { default as NeonEnvironment } from './components/NeonEnvironment';
 export { default as NeonGraphQL } from './components/NeonGraphQL';
 export { default as NeonPage } from './components/NeonPage';
@@ -31,11 +32,3 @@ export { default as NeonUtilityBar } from './components/NeonUtilityBar';
 export { default as DialogBase } from './components/DialogBase';
 export { default as PopupBase } from './components/PopupBase';
 export { default as PopupLoading } from './components/PopupLoading';
-
-// Static JSON exports
-export { default as sitesJSON } from './static/sites/sites.json';
-export { default as statesJSON } from './static/states/states.json';
-export { default as statesShapesJSON } from './static/statesShapes/statesShapes.json';
-export { default as domainsJSON } from './static/domains/domains.json';
-export { default as domainsShapesJSON } from './static/domainsShapes/domainsShapes.json';
-export { default as bundlesJSON } from './static/bundles/bundles.json';

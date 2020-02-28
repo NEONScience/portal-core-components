@@ -2,8 +2,6 @@ import React from 'react';
 
 import Link from '@material-ui/core/Link';
 
-import allSites from '../../static/sites/sites.json';
-
 const HOST_TYPES = {
   ADDITIONAL_DATA: 'ADDITIONAL_DATA', // NEON and host offer different / complementary data
   REFORMATTED_DATA: 'REFORMATTED_DATA', // NEON and host offer same data in different formats
@@ -89,6 +87,13 @@ const externalProducts = {
   'DP1.00100.001': {
     host: 'AMERIFLUX',
   },
+  'DP1.10020.001': {
+    host: 'BOLD',
+    searches: [
+      { query: 'BETN', title: 'Ground beetle sequences DNA barcode' },
+      { query: 'BETP', title: 'Ground beetle sequences DNA barcode (Prototype Data)' },
+    ],
+  },
   'DP1.10038.001': {
     host: 'BOLD',
     searches: [
@@ -125,10 +130,6 @@ const externalProducts = {
     searches: [
       { query: 'FSHN', title: 'Fish sequences DNA barcode' },
     ],
-  },
-  'DP1.20212.001': {
-    host: 'BOLD',
-    searches: [], // unable to find associated search(es)
   },
   'DP1.20126.001': {
     host: 'MGRAST',
@@ -200,7 +201,7 @@ const externalHosts = {
     url: 'https://aeronet.gsfc.nasa.gov',
     hostType: HOST_TYPES.EXCLUSIVE_DATA,
     linkType: LINK_TYPES.BY_SITE,
-    getSiteLink: (siteCode = '', productCode = 'n/a') => {
+    getSiteLink: (allSites = {}, siteCode = '', productCode = 'n/a') => {
       const hrefBase = 'http://aeronet.gsfc.nasa.gov/cgi-bin/webtool_inv_v3?stage=3&site=';
       const nonStandardSites = {
         BART: 'NEON_Bartlett',
@@ -212,7 +213,10 @@ const externalHosts = {
       const hrefSite = Object.keys(nonStandardSites).includes(siteCode)
         ? nonStandardSites[siteCode]
         : `NEON_${siteCode}`;
-      const text = `${siteCode} - ${allSites[siteCode].description}`;
+      const description = Object.keys(allSites).length
+        ? ` - ${allSites[siteCode].description}`
+        : '';
+      const text = `${siteCode}${description}`;
       return renderExternalHostLink(`${hrefBase}${hrefSite}`, text, 'AERONET', productCode);
     },
   },
@@ -223,7 +227,7 @@ const externalHosts = {
     url: 'https://ameriflux.lbl.gov',
     hostType: HOST_TYPES.REFORMATTED_DATA,
     linkType: LINK_TYPES.BY_SITE,
-    getSiteLink: (siteCode = '', productCode = 'n/a') => {
+    getSiteLink: (allSites = {}, siteCode = '', productCode = 'n/a') => {
       const siteCodeMapping = {
         GUAN: 'PR-xGU',
         LAJA: 'PR-xLA',
@@ -275,7 +279,10 @@ const externalHosts = {
       if (!siteCodeMapping[siteCode]) { return null; }
       const hrefBase = 'https://ameriflux.lbl.gov/sites/siteinfo';
       const hrefSite = siteCodeMapping[siteCode];
-      const text = `${siteCode} - ${allSites[siteCode].description}`;
+      const description = Object.keys(allSites).length
+        ? ` - ${allSites[siteCode].description}`
+        : '';
+      const text = `${siteCode} - ${description}`;
       return renderExternalHostLink(`${hrefBase}/${hrefSite}/`, text, 'AMERIFLUX', productCode);
     },
   },
@@ -336,7 +343,8 @@ const externalHosts = {
     url: 'https://phenocam.sr.unh.edu/webcam/about/',
     hostType: HOST_TYPES.EXCLUSIVE_DATA,
     linkType: LINK_TYPES.BY_SITE,
-    getSiteLink: (siteCode = '', productCode = '') => {
+    getSiteLink: (allSites = {}, siteCode = '', productCode = '') => {
+      if (!allSites[siteCode]) { return null; }
       const hrefBase = 'https://phenocam.sr.unh.edu/webcam/sites';
       const hrefSite = `${allSites[siteCode].domainCode}.${siteCode}.${productCode.split('.').slice(0, 2).join('.')}`;
       const text = `${siteCode} - ${allSites[siteCode].description}`;

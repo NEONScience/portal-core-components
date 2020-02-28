@@ -5,25 +5,6 @@ import { transition } from 'd3-transition';
 import { drag } from 'd3-drag';
 
 import Theme, { COLORS } from '../Theme/Theme';
-import allSites from '../../static/sites/sites.json';
-
-/**
-   Setup: Static site/domain/state data
-   Create mappings of all sites for given state or domain
-   to aid in showing partial vs. full selections
-*/
-const siteViewMaps = {
-  domains: {},
-  states: {},
-};
-Object.keys(allSites).forEach((site) => {
-  const domain = allSites[site].domainCode;
-  if (!siteViewMaps.domains[domain]) { siteViewMaps.domains[domain] = []; }
-  siteViewMaps.domains[domain].push(site);
-  const state = allSites[site].stateCode;
-  if (!siteViewMaps.states[state]) { siteViewMaps.states[state] = []; }
-  siteViewMaps.states[state].push(site);
-});
 
 /**
    Setup: SVG display constants
@@ -184,6 +165,7 @@ export function AvailabilityGrid(config) {
     svgRef,
     data,
     sites = { value: [], validValues: [] },
+    allSites = {},
     sortedSites = [],
     setSitesValue = () => {},
     dateRange = { value: [], validValues: [minYearMonth, maxYearMonth] },
@@ -216,6 +198,24 @@ export function AvailabilityGrid(config) {
     ? sortedSites
     : Object.keys(data.rows).sort().reverse();
   const rowCount = rowKeys.length;
+
+  /**
+     Setup: Static site/domain/state data
+     Create mappings of all sites for given state or domain
+     to aid in showing partial vs. full selections
+  */
+  const siteViewMaps = {
+    domains: {},
+    states: {},
+  };
+  Object.keys(allSites).forEach((site) => {
+    const domain = allSites[site].domainCode;
+    if (!siteViewMaps.domains[domain]) { siteViewMaps.domains[domain] = []; }
+    siteViewMaps.domains[domain].push(site);
+    const state = allSites[site].stateCode;
+    if (!siteViewMaps.states[state]) { siteViewMaps.states[state] = []; }
+    siteViewMaps.states[state].push(site);
+  });
 
   /**
      Setup: Interaction state vars (local vars is all we need here)
@@ -362,6 +362,8 @@ export function AvailabilityGrid(config) {
     return currentTimeOffset;
   };
   const setTimeOffset = (timeOffset) => {
+    // Only set the timeOffset is sites are loaded
+    if (!Object.keys(allSites).length) { return; }
     const boundedTimeOffset = Math.min(Math.max(getMinTimeOffset(), timeOffset), 0);
     dragG.attr('transform', `translate(${boundedTimeOffset},0)`);
     svg.attr('data-timeOffset', boundedTimeOffset);
@@ -552,7 +554,7 @@ export function AvailabilityGrid(config) {
     const transform = getRowTranslation(rowKey, rowIdx);
     const labelX = getLabelWidth() - SVG.CELL_PADDING;
     const rowLabelG = rowLabelsG.append('g').attr('transform', transform);
-    const fill = viewSelections[rowKey]
+    const fill = selectionEnabled && viewSelections[rowKey]
       ? Theme.palette.secondary.contrastText
       : Theme.palette.grey[700];
     const text = rowLabelG.append('text')
