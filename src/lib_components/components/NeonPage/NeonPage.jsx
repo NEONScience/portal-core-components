@@ -286,7 +286,7 @@ const NeonPage = (props) => {
     </ThemeProvider>
   );
 
-  return neonContextIsActive || true ? renderNeonPage() : (
+  return neonContextIsActive ? renderNeonPage() : (
     <NeonContext.Provider>
       {renderNeonPage()}
     </NeonContext.Provider>

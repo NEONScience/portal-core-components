@@ -275,7 +275,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const SiteMapComponent = (props) => {
+const SiteMap = (props) => {
   const {
     aspectRatio,
     center,
@@ -1039,17 +1039,7 @@ const SiteMapComponent = (props) => {
   );
 };
 
-// Actual "SiteMap" component. This is a wrapper for the true component and its only purpose
-// is to make sure the component always renders inside an active NeonContext Provider.
-const SiteMap = (props) => {
-  const [{ isActive }] = NeonContext.useNeonContextState();
-  if (!isActive) {
-    return <NeonContext.Provider><SiteMapComponent {...props} /></NeonContext.Provider>;
-  }
-  return <SiteMapComponent {...props} />;
-};
-
-const SiteMapPropTypes = {
+SiteMap.propTypes = {
   aspectRatio: PropTypes.number,
   center: PropTypes.arrayOf(PropTypes.number),
   mode: PropTypes.oneOf(Object.keys(SITE_MAP_MODES)),
@@ -1057,7 +1047,7 @@ const SiteMapPropTypes = {
   tileLayer: PropTypes.oneOf(Object.keys(TILE_LAYERS)),
 };
 
-const SiteMapDefaultProps = {
+SiteMap.defaultProps = {
   aspectRatio: 0.75,
   center: [52.68, -110.75],
   mode: 'EXPLORE',
@@ -1065,9 +1055,6 @@ const SiteMapDefaultProps = {
   zoom: null,
 };
 
-SiteMapComponent.propTypes = SiteMapPropTypes;
-SiteMapComponent.defaultProps = SiteMapDefaultProps;
-SiteMap.propTypes = SiteMapPropTypes;
-SiteMap.defaultProps = SiteMapDefaultProps;
+const WrappedSiteMap = NeonContext.getWrappedComponent(SiteMap);
 
-export default SiteMap;
+export default WrappedSiteMap;

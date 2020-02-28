@@ -209,7 +209,7 @@ const getCurrentSliderBounds = (currentYears) => {
 /**
    Main Function
 */
-export default function AopDataViewer(props) {
+const AopDataViewer = (props) => {
   const classes = useStyles(Theme);
   const { productCode, showTitle } = props;
 
@@ -607,7 +607,7 @@ export default function AopDataViewer(props) {
       />
     </FullWidthVisualization>
   );
-}
+};
 
 AopDataViewer.propTypes = {
   productCode: PropTypes.string.isRequired,
@@ -623,3 +623,7 @@ AopDataViewer.defaultProps = {
   initialYear: null,
   initialFlight: null,
 };
+
+const WrappedAopDataViewer = NeonContext.getWrappedComponent(AopDataViewer);
+
+export default WrappedAopDataViewer;

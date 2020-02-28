@@ -132,7 +132,7 @@ const useSiteChipStyles = makeStyles(theme => ({
 /**
    Main Function
 */
-export default function DataProductAvailability(props) {
+const DataProductAvailability = (props) => {
   const classes = useStyles(Theme);
   const atXs = useMediaQuery(Theme.breakpoints.only('xs'));
   const atSm = useMediaQuery(Theme.breakpoints.only('sm'));
@@ -764,7 +764,7 @@ export default function DataProductAvailability(props) {
       />
     </FullWidthVisualization>
   );
-}
+};
 
 DataProductAvailability.propTypes = {
   siteCodes: PropTypes.arrayOf( // eslint-disable-line react/no-unused-prop-types
@@ -786,3 +786,7 @@ DataProductAvailability.defaultProps = {
   sortDirection: 'ASC',
   disableSelection: false,
 };
+
+const WrappedDataProductAvailability = NeonContext.getWrappedComponent(DataProductAvailability);
+
+export default WrappedDataProductAvailability;

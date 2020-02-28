@@ -84,7 +84,8 @@ import NeonContext from 'portal-core-components/lib/components/NeonContext';
         `}
       </CodeBlock>
 
-      <Typography variant="h5" component="h3" gutterBottom>Usage</Typography>
+      <Divider className={classes.divider} />
+      <Typography variant="h6" component="h4" gutterBottom>Provider</Typography>
 
       <DocBlock>
         The NeonContext Provider should be used a the highest order necessary to capture all
@@ -106,16 +107,17 @@ const MyComponent = () => {
         `}
       </CodeBlock>
 
-      <DocBlock style={{ fontWeight: 600 }}>
-        IMPORTANT NOTE: {NeonPageLink} wraps its childen in a NeonContext Provider. As such
-        any apps using NeonPage as its base page should never need to invoke the Provider.
-        <br />
-        Use the Provider only when embedding a Core Component that requires NeonContext into an
-        app that does not otherwise invoke the Provider.
+      <DocBlock>
+        <span style={{ fontWeight: 600 }}>
+          IMPORTANT NOTE: {NeonPageLink} wraps its childen in a NeonContext Provider. Also any core
+          components that require an active context will wrap themselves in one if there is not one
+          available. Only use the Provider when wrapping new components that will need to access
+          the NeonContext state.
+        </span>
       </DocBlock>
 
       <Divider className={classes.divider} />
-      <Typography variant="h6" component="h4" gutterBottom>Accessing State</Typography>
+      <Typography variant="h6" component="h4" gutterBottom>Accessing State with useNeonContextState()</Typography>
 
       <DocBlock>
         NeonContext state can be accessed using the <tt>useNeonContextState()</tt> hook. Note that
@@ -175,6 +177,46 @@ const NeonContextStateComponent = () => {
 export default NeonContextStateComponent;
         `}
       </CodeBlock>
+
+      <Divider className={classes.divider} />
+      <Typography variant="h6" component="h4" gutterBottom>Self-Wrapping Components</Typography>
+
+      <DocBlock>
+        Several components in this library require an active NeonContext for the information it
+        provides. However these components are also designed to function outside of a NeonPage if
+        need be. NeonContext provides <tt>getWrappedComponent()</tt>, a function intended to
+        dynamically ensure a NeonContext is there in either use case.
+      </DocBlock>
+      <CodeBlock>
+        {`
+import NeonContext from 'portal-core-components/lib/components/NeonContext';
+
+const Foo = (props) => {
+  const [{ data: neonContextData }] = NeonContext.useNeonContextState();
+  ...
+  return (...);
+}
+
+Foo.propTypes = { ... };
+Foo.defaultProps = { ... };
+
+const WrappedFoo = NeonContext.getWrappedComponent(Foo);
+
+export default WrappedFoo;
+        `}
+      </CodeBlock>
+      <DocBlock>
+        The example above shows how a component might look when it both consumes NeonContext state
+        and self-wraps to make sure such state is always available. The WrappedFoo component,
+        exported as default, can still be imported as Foo. Its only purpose is to check if there is
+        an active NeonContext and, if not, wrap the component in a Provider.
+      </DocBlock>
+      <DocBlock>
+        Note that since NeonContext generates fetches if two or more self-wrapped components appear
+        on a page that does not have a higher-order NeonContext then duplicate siloed fetches will
+        happen. This is not very DRY (Don&apos;t Repeat Yourself), so it is incumbent on the
+        developer to make add a higher order NeonContext Provider if the situation calls for it.
+      </DocBlock>
 
     </React.Fragment>
   );

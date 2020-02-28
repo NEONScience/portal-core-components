@@ -3,6 +3,7 @@ declare namespace NeonContext {
     export { Provider };
     export { useNeonContextState };
     export { DEFAULT_STATE };
+    export { getWrappedComponent };
 }
 declare function Provider(props: any): JSX.Element;
 declare namespace Provider {
@@ -548,6 +549,7 @@ declare namespace DEFAULT_STATE {
     }
     export const isActive: boolean;
 }
+declare function getWrappedComponent(Component: any): (props: any) => JSX.Element;
 import PropTypes from "prop-types";
 import statesJSON from "../../staticJSON/states.json";
 import domainsJSON from "../../staticJSON/domains.json";

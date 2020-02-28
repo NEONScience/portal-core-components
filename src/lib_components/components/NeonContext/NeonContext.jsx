@@ -156,7 +156,27 @@ Provider.propTypes = {
 };
 
 /**
+   getWrappedComponent
+*/
+const getWrappedComponent = Component => (props) => {
+  const [{ isActive }] = useNeonContextState();
+  if (!isActive) {
+    return (
+      <Provider>
+        <Component {...props} />
+      </Provider>
+    );
+  }
+  return <Component {...props} />;
+};
+
+/**
    Export
 */
-const NeonContext = { Provider, useNeonContextState, DEFAULT_STATE };
+const NeonContext = {
+  Provider,
+  useNeonContextState,
+  DEFAULT_STATE,
+  getWrappedComponent,
+};
 export default NeonContext;
