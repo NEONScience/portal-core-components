@@ -279,7 +279,7 @@ export default function TimeSeriesViewerVariables() {
   }));
   const selectedUnits = Array.from(
     state.selection.variables.reduce((units, variable) => {
-      units.add(state.variables[variable].units);
+      if (state.variables[variable]) { units.add(state.variables[variable].units); }
       return units;
     }, new Set()),
   );
