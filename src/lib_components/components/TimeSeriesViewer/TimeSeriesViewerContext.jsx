@@ -472,6 +472,7 @@ const reducer = (state, action) => {
     });
   };
   let parsedContent = null;
+  let selectedSiteIdx = null;
   switch (action.type) {
     // Fetch Product Actions
     case 'initFetchProductCalled':
@@ -699,6 +700,28 @@ const reducer = (state, action) => {
     case 'selectTimeStep':
       if (!state.availableTimeSteps.has(action.timeStep)) { return state; }
       newState.selection.timeStep = action.timeStep;
+      calcStatus();
+      return newState;
+    case 'selectAddSite':
+      if (!state.product.sites[action.siteCode]) { return state; }
+      newState.selection.sites.push({ siteCode: action.siteCode, positions: [] });
+      calcSelection();
+      calcStatus();
+      return newState;
+    case 'selectRemoveSite':
+      if (state.selection.sites.length < 2) { return state; }
+      newState.selection.sites = newState.selection.sites
+        .filter(site => site.siteCode !== action.siteCode);
+      calcStatus();
+      return newState;
+    case 'selectSitePositions':
+      selectedSiteIdx = state.selection.sites.findIndex(site => site.siteCode === action.siteCode);
+      if (selectedSiteIdx === -1) { return state; }
+      if (!state.product.sites[action.siteCode] || !action.positions.length) { return state; }
+      if (!action.positions.every(p => (
+        Object.keys(state.product.sites[action.siteCode].positions).includes(p)
+      ))) { return state; }
+      newState.selection.sites[selectedSiteIdx].positions = [...action.positions];
       calcStatus();
       return newState;
 
