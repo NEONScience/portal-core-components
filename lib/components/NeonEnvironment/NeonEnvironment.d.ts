@@ -5,6 +5,7 @@ declare namespace NeonEnvironment {
     export const isValid: boolean;
     export const isDevEnv: boolean;
     export const isProdEnv: boolean;
+    export const isForeignEnv: boolean;
     export const useGraphql: boolean;
     export const showAopViewer: boolean;
     export function getApiName(): string | undefined;
