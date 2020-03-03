@@ -372,7 +372,9 @@ function SelectPositionsButton(props) {
   const { selectedSite } = props;
   const { siteCode, positions: selectedPositions } = selectedSite;
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
-  const availablePositions = Object.keys(state.product.sites[siteCode].positions);
+  const availablePositions = state.product.sites[siteCode]
+    ? Object.keys(state.product.sites[siteCode].positions)
+    : [];
   availablePositions.sort();
   const [dialogOpen, setDialogOpen] = useState(false);
   // Local state for position selections so that no fetches are fired until the dialog is submitted

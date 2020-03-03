@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import get from 'lodash/get';
 import uniqueId from 'lodash/uniqueId';
+import cloneDeep from 'lodash/cloneDeep';
 
 import { parse } from 'papaparse';
 
@@ -744,12 +745,10 @@ const Provider = (props) => {
   /**
      Initial State and Reducer Setup
   */
-  const initialState = {
-    ...DEFAULT_STATE,
-    status: productDataProp
-      ? TIME_SERIES_VIEWER_STATUS.LOADING_META
-      : TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT,
-  };
+  const initialState = cloneDeep(DEFAULT_STATE);
+  initialState.status = productDataProp
+    ? TIME_SERIES_VIEWER_STATUS.LOADING_META
+    : TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT;
   if (productDataProp) {
     initialState.fetchProduct.status = FETCH_STATUS.SUCCESS;
     initialState.product = parseProductData(productDataProp);
@@ -920,6 +919,7 @@ const Provider = (props) => {
     // MAIN LOOP - Trigger fetches as needed for all selected sites
     state.selection.sites.forEach((site) => {
       const { siteCode } = site;
+      if (!state.product.sites[siteCode]) { return; }
       const { fetches } = state.product.sites[siteCode];
 
       // Fetch variables for any sites in seleciton that haven't had variables fetched
