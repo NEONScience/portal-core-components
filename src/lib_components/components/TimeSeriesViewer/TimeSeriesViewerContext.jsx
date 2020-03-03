@@ -43,6 +43,16 @@ export const TIME_SERIES_VIEWER_STATUS = {
   ERROR: 'ERROR', // Stop everything because problem
   READY: 'READY', // Ready for user input
 };
+
+export const TIME_SERIES_VIEWER_STATUS_TITLES = {
+  INIT_PRODUCT: 'Loading data product…',
+  LOADING_META: 'Loading site positions, variables, and data paths…',
+  READY_FOR_DATA: 'Loading series data…',
+  LOADING_DATA: 'Loading series data…',
+  ERROR: null,
+  READY: null,
+};
+
 // Array offsets for use when splitting a data file URL
 const DATA_FILE_PARTS = {
   POSITION_H: 6,

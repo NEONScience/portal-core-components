@@ -11,6 +11,9 @@ import Typography from '@material-ui/core/Typography';
 import NoSsr from '@material-ui/core/NoSsr';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
+
+import Skeleton from '@material-ui/lab/Skeleton';
+
 import MenuItem from '@material-ui/core/MenuItem';
 import ClearIcon from '@material-ui/icons/Clear';
 import SearchIcon from '@material-ui/icons/Search';
@@ -302,9 +305,10 @@ export default function TimeSeriesViewerVariables() {
       selectableVariablesCount += 1;
     });
 
-  // TODO: skeleton
   if (!selectableVariablesCount) {
-    return null;
+    return (
+      <Skeleton variant="rect" width="100%" height={56} />
+    );
   }
 
   return (

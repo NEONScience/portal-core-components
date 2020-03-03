@@ -6,6 +6,20 @@ export namespace TIME_SERIES_VIEWER_STATUS {
     export const ERROR: string;
     export const READY: string;
 }
+export namespace TIME_SERIES_VIEWER_STATUS_TITLES {
+    const INIT_PRODUCT_1: string;
+    export { INIT_PRODUCT_1 as INIT_PRODUCT };
+    const LOADING_META_1: string;
+    export { LOADING_META_1 as LOADING_META };
+    const READY_FOR_DATA_1: string;
+    export { READY_FOR_DATA_1 as READY_FOR_DATA };
+    const LOADING_DATA_1: string;
+    export { LOADING_DATA_1 as LOADING_DATA };
+    const ERROR_1: null;
+    export { ERROR_1 as ERROR };
+    const READY_1: null;
+    export { READY_1 as READY };
+}
 /**
    Time Step Definitions and Functions
 */

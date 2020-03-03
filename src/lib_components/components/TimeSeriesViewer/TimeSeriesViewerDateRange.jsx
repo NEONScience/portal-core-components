@@ -6,6 +6,8 @@ import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
 import Grid from '@material-ui/core/Grid';
 import Slider from '@material-ui/core/Slider';
 
+import Skeleton from '@material-ui/lab/Skeleton';
+
 import MomentUtils from '@date-io/moment';
 import moment from 'moment';
 
@@ -151,7 +153,17 @@ const TimeSeriesViewerDateRange = (props) => {
   // Render nothing if no selectable range is available
   // TODO: probably render a skeleton
   if (!displayRange.length) {
-    return null;
+    return (
+      <div>
+        <Skeleton variant="rect" width="100%" height={56} />
+        <br />
+        <div style={{ display: 'flex' }}>
+          <Skeleton variant="rect" width="100%" height={40} />
+          <div style={{ width: '40px' }} />
+          <Skeleton variant="rect" width="100%" height={40} />
+        </div>
+      </div>
+    );
   }
 
   const marks = [{

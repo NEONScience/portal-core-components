@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
 
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -22,10 +24,14 @@ import MenuItem from '@material-ui/core/MenuItem';
 import NoSsr from '@material-ui/core/NoSsr';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
+import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
+
+import Skeleton from '@material-ui/lab/Skeleton';
 
 import ClearIcon from '@material-ui/icons/Clear';
 import ElevationIcon from '@material-ui/icons/Terrain';
+import LocationIcon from '@material-ui/icons/MyLocation';
 import SearchIcon from '@material-ui/icons/Search';
 import SelectIcon from '@material-ui/icons/TouchApp';
 
@@ -96,18 +102,33 @@ const useStyles = makeStyles(theme => ({
     color: Theme.palette.grey[500],
   },
   sitePaper: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    padding: theme.spacing(1.5, 3, 1.5, 1),
+    padding: theme.spacing(1.5, 2, 1.5, 2),
     borderRadius: theme.spacing(2),
     width: '100%',
     backgroundColor: theme.palette.grey[50],
-    marginBottom: theme.spacing(2),
+    marginTop: theme.spacing(3),
   },
-  sitePaperContainer: {
-    lineHeight: '5em',
-    marginTop: theme.spacing(2.5),
+  siteTitleContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: Theme.spacing(1.5),
+  },
+  siteDetailsContainer: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    flexWrap: 'wrap',
+    marginBottom: Theme.spacing(0.5),
+  },
+  siteDetail: {
+    marginBottom: Theme.spacing(1),
+    marginRight: Theme.spacing(4),
+  },
+  positionsTitleContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItmes: 'center',
   },
   positionPaper: {
     display: 'flex',
@@ -117,16 +138,21 @@ const useStyles = makeStyles(theme => ({
     borderRadius: theme.spacing(2),
     width: '100%',
     backgroundColor: theme.palette.grey[100],
-    marginBottom: theme.spacing(1.5),
+    marginTop: theme.spacing(1.5),
   },
   startFlex: {
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
   },
+  smallButton: {
+    fontSize: '0.8rem',
+    padding: theme.spacing(0.125, 0.75),
+    whiteSpace: 'nowrap',
+  },
   smallButtonIcon: {
-    marginRight: theme.spacing(1),
-    fontSize: '1.2rem',
+    marginRight: theme.spacing(0.5),
+    fontSize: '0.8rem',
   },
 }));
 
@@ -601,11 +627,33 @@ SiteOption.defaultProps = OptionDefaultProps;
 function SelectedSite(props) {
   const classes = useStyles(Theme);
   const { site, disabled } = props;
-  const { siteCode } = site;
+  const { siteCode, positions } = site;
   const [{ data: neonContextData }] = NeonContext.useNeonContextState();
-  const { sites: allSites, domains: allDomains } = neonContextData;
+  const { sites: allSites, states: allStates, domains: allDomains } = neonContextData;
   const [, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
-  let selectedSiteContent = <Typography variant="body1">{siteCode}</Typography>;
+  const removeSiteButton = (
+    <Button
+      color="primary"
+      variant="outlined"
+      onClick={() => {
+        if (disabled) { return; }
+        dispatch({ type: 'selectRemoveSite', siteCode });
+      }}
+      className={classes.smallButton}
+      disabled={disabled}
+    >
+      <ClearIcon className={classes.smallButtonIcon} />
+      Remove Site
+    </Button>
+  );
+  let selectedSiteContent = (
+    <div>
+      <Typography variant="body1" gutterBottom>
+        {`${siteCode} (loading site details…)`}
+      </Typography>
+      {removeSiteButton}
+    </div>
+  );
   if (allSites[siteCode]) {
     const {
       description,
@@ -616,67 +664,110 @@ function SelectedSite(props) {
       latitude,
       longitude,
     } = allSites[siteCode];
-    const terrainTypeTitle = `${ucWord(terrain)} ${ucWord(type)}`;
+    let typeTitle = 'Core';
+    let typeSubtitle = 'fixed location';
+    if (type === 'RELOCATABLE') {
+      typeTitle = 'Relocatable';
+      typeSubtitle = 'location may change';
+    }
+    let terrainTitle = 'Terrestrial';
+    let terrainSubtitle = 'land-based';
+    if (terrain === 'AQUATIC') {
+      terrainTitle = 'Aquatic';
+      terrainSubtitle = 'water-based';
+    }
+    const terrainTypeTitle = `${terrainTitle} ${typeTitle}`;
+    const terrainTypeSubtitle = `${terrainSubtitle}; ${typeSubtitle}`;
     const domainName = allDomains[domainCode] ? allDomains[domainCode].name : null;
+    const stateName = allStates[stateCode] ? allStates[stateCode].name : null;
+    const stateFieldTitle = (stateCode === 'PR' ? 'Territory' : 'State');
     const iconSvg = ICON_SVGS[type] && ICON_SVGS[type][terrain] ? ICON_SVGS[type][terrain] : null;
+    const terrainIcon = iconSvg ? (
+      <img
+        src={iconSvg}
+        alt={terrainTypeTitle}
+        title={terrainTypeTitle}
+        width={Theme.spacing(4)}
+        height={Theme.spacing(4)}
+        style={{ marginRight: Theme.spacing(1), flexGrow: 0 }}
+      />
+    ) : null;
     selectedSiteContent = (
-      <div className={classes.startFlex} style={{ flexBasis: '50%' }}>
-        {iconSvg ? (
-          <img
-            src={iconSvg}
-            alt={terrainTypeTitle}
-            title={terrainTypeTitle}
-            width={Theme.spacing(4)}
-            height={Theme.spacing(4)}
-            style={{ marginRight: Theme.spacing(1.5), marginTop: Theme.spacing(0.5), flexGrow: 0 }}
-          />
-        ) : null}
-        <div style={{ flexGrow: 1 }}>
-          <Typography variant="body1">
-            {`${siteCode} - ${description}, ${stateCode}`}
+      <div>
+        <div className={classes.siteTitleContainer}>
+          {terrainIcon}
+          <Typography variant="h6" style={{ lineHeight: '1.4rem', flexGrow: 1 }}>
+            {`${description} (${siteCode})`}
           </Typography>
-          <Typography variant="body2" className={classes.optionSubtitle}>
-            {terrainTypeTitle}
-            <br />
-            {`Domain ${domainCode} (${domainName})`}
-            <br />
-            {`Lat/Lon: ${latitude}, ${longitude}`}
-          </Typography>
-          <SelectPositionsButton selectedSite={site} />
+          {removeSiteButton}
+        </div>
+        <div className={classes.siteDetailsContainer}>
+          {/* Terrain and Type */}
+          <div className={classes.siteDetail}>
+            <Typography variant="subtitle2">{terrainTypeTitle}</Typography>
+            <Typography variant="body2" style={{ fontSize: '0.8rem' }}>
+              <i>{terrainTypeSubtitle}</i>
+            </Typography>
+          </div>
+          {/* State/Territory */}
+          <div className={classes.siteDetail}>
+            <Typography variant="subtitle2">{stateFieldTitle}</Typography>
+            <Typography variant="body2">{stateName}</Typography>
+          </div>
+          {/* Domain */}
+          <div className={classes.siteDetail}>
+            <Typography variant="subtitle2">Domain</Typography>
+            <Typography variant="body2">
+              {`${domainCode} - ${domainName}`}
+            </Typography>
+          </div>
+          {/* Latitude/Longitude */}
+          <div className={classes.siteDetail}>
+            <div className={classes.startFlex} style={{ alignItems: 'center' }}>
+              <CopyToClipboard text={`${latitude} ${longitude}`}>
+                <Tooltip title="Latitude / Longitude (click to copy)">
+                  <IconButton
+                    size="small"
+                    style={{ marginRight: Theme.spacing(0.5) }}
+                    aria-label="Latitude / Longitude (click to copy)"
+                  >
+                    <LocationIcon />
+                  </IconButton>
+                </Tooltip>
+              </CopyToClipboard>
+              <Typography
+                variant="caption"
+                aria-label="Latitude / Longitude"
+                style={{ fontFamily: 'monospace', textAlign: 'right' }}
+              >
+                {latitude}
+                <br />
+                {longitude}
+              </Typography>
+            </div>
+          </div>
         </div>
       </div>
     );
   }
   return (
     <Paper key={siteCode} className={classes.sitePaper}>
-      <IconButton
-        aria-label={`remove site ${siteCode} and all its positions`}
-        disabled={disabled}
-        style={{ marginRight: Theme.spacing(1) }}
-        onClick={() => {
-          if (disabled) { return; }
-          dispatch({ type: 'selectRemoveSite', siteCode });
-        }}
-      >
-        <ClearIcon fontSize="small" />
-      </IconButton>
-      <div style={{ flexGrow: 1 }}>
-        <div className={classes.startFlex}>
-          {selectedSiteContent}
-          <div className={classes.root} style={{ flexBasis: '50%' }}>
-            <Typography variant="body1" style={{ fontWeight: 600 }} gutterBottom>
-              Position(s):
-            </Typography>
-            {site.positions.map(position => (
-              <SelectedPosition
-                key={position}
-                siteCode={siteCode}
-                position={position}
-                disabled={site.positions.length < 2}
-              />
-            ))}
-          </div>
+      {selectedSiteContent}
+      <div>
+        <div className={classes.positionsTitleContainer}>
+          <Typography variant="subtitle2">
+            Position(s):
+          </Typography>
+          <SelectPositionsButton selectedSite={site} />
         </div>
+        {positions.map(position => (
+          <SelectedPosition
+            key={position}
+            siteCode={siteCode}
+            position={position}
+            disabled={positions.length < 2}
+          />
+        ))}
       </div>
     </Paper>
   );
@@ -748,10 +839,7 @@ const SitesSelect = () => {
     .map(site => site.siteCode)
     .filter(siteCode => selectableSiteCodes.includes(siteCode));
 
-  // TODO: skeleton
-  if (!selectableSitesCount) {
-    return null;
-  }
+  if (!selectableSitesCount) { return null; }
 
   return (
     <NoSsr>
@@ -791,21 +879,21 @@ export default function TimeSeriesViewerSites() {
 
   // TODO: skeleton
   if (!state.selection.sites.length || !Object.keys(allSites).length) {
-    return null;
+    return (
+      <Skeleton variant="rect" width="100%" height={56} />
+    );
   }
 
   return (
     <div className={classes.root}>
       <SitesSelect />
-      <div className={classes.sitePaperContainer}>
-        {state.selection.sites.map(site => (
-          <SelectedSite
-            key={site.siteCode}
-            site={site}
-            disabled={state.selection.sites.length < 2}
-          />
-        ))}
-      </div>
+      {state.selection.sites.map(site => (
+        <SelectedSite
+          key={site.siteCode}
+          site={site}
+          disabled={state.selection.sites.length < 2}
+        />
+      ))}
     </div>
   );
 }

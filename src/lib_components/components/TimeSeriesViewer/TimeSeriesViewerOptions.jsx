@@ -8,8 +8,11 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
 import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
+
+import Skeleton from '@material-ui/lab/Skeleton';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+
 import NoneIcon from '@material-ui/icons/NotInterested';
 import SelectAllIcon from '@material-ui/icons/DoneAll';
 import SelectNoneIcon from '@material-ui/icons/Clear';
@@ -188,7 +191,9 @@ const RollPeriodOption = () => {
     sliderDefault = { value: currentRollPeriod };
     Object.freeze(sliderDefault);
   }
-  return !currentTimeStep ? null : (
+  return !currentTimeStep ? (
+    <Skeleton variant="rect" width="100%" height={56} />
+  ) : (
     <div style={{ width: '100%' }}>
       <RollPeriodSlider
         marks={marks}

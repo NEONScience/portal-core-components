@@ -2,17 +2,10 @@ import React, { useRef, useEffect } from 'react';
 import Dygraph from 'dygraphs';
 import 'dygraphs/dist/dygraph.min.css';
 
+import { makeStyles } from '@material-ui/core/styles';
+
 import TimeSeriesViewerContext, { TIME_SERIES_VIEWER_STATUS } from './TimeSeriesViewerContext';
 import Theme from '../Theme/Theme';
-
-/*
-const preStyle = {
-  whiteSpace: 'pre-wrap',
-  border: '1px solid black',
-  padding: '2px',
-  overflowY: 'scroll',
-};
-*/
 
 const BASE_GRAPH_OPTIONS = {
   includeZero: true,
@@ -36,7 +29,18 @@ const BASE_GRAPH_OPTIONS = {
   */
 };
 
+const useStyles = makeStyles(theme => ({
+  graphContainer: {
+    padding: theme.spacing(2),
+  },
+  graphDiv: {
+    width: '100%',
+    height: '320px',
+  },
+}));
+
 export default function TimeSeriesViewerGraph() {
+  const classes = useStyles(Theme);
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const dygraphRef = useRef(null);
   const dygraphDomRef = useRef(null);
@@ -187,8 +191,8 @@ export default function TimeSeriesViewerGraph() {
   ) : null);
   */
   return (
-    <React.Fragment>
-      <div ref={dygraphDomRef} style={{ width: '100%' }} />
-    </React.Fragment>
+    <div className={classes.graphContainer}>
+      <div ref={dygraphDomRef} className={classes.graphDiv} />
+    </div>
   );
 }
