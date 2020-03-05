@@ -28,7 +28,7 @@ import { COLORS } from '../Theme/Theme';
 
 import './NeonMenu.css';
 
-import NeonLogo from './images/logo--blue-neon-data.png';
+import NeonLogo from '../../images/NSF-NEON-logo.png';
 
 const defaultStaticMenuItems = [
   {

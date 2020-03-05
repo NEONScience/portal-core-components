@@ -7,12 +7,15 @@ import 'dygraphs/dist/dygraph.min.css';
 import moment from 'moment';
 
 import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 
 import TimeSeriesViewerContext, {
   TIME_SERIES_VIEWER_STATUS,
   TIME_STEPS,
 } from './TimeSeriesViewerContext';
 import Theme from '../Theme/Theme';
+
+import NeonLogo from '../../images/NSF-NEON-logo.png';
 
 const COLORS = [
   '#4e79a7',
@@ -44,14 +47,33 @@ const BASE_GRAPH_OPTIONS = {
 
 const boxShadow = '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)';
 const useStyles = makeStyles(theme => ({
-  graphContainer: {
+  graphOuterContainer: {
     padding: theme.spacing(2),
+  },
+  graphInnerContainer: {
     display: 'flex',
     alignItems: 'flex-start',
   },
   graphDiv: {
     height: '320px',
     flexGrow: 1,
+  },
+  citationContainer: {
+    marginTop: Theme.spacing(2),
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+  },
+  citation: {
+    color: Theme.palette.grey[400],
+  },
+  title: {
+    textAlign: 'center',
+    marginBottom: theme.spacing(1.5),
+  },
+  neonLogo: {
+    maxHeight: theme.spacing(5),
+    marginRight: theme.spacing(2),
   },
   legendDiv: {
     flexShrink: 0,
@@ -319,9 +341,29 @@ export default function TimeSeriesViewerGraph() {
      RENDER
   */
   return (
-    <div className={classes.graphContainer}>
-      <div ref={dygraphDomRef} className={classes.graphDiv} style={{ width: '50% !important' }} />
-      <div ref={legendRef} className={classes.legendDiv} />
+    <div className={classes.graphOuterContainer}>
+      <Typography variant="h6" className={classes.title}>
+        {`${state.product.productName} (${state.product.productCode})`}
+      </Typography>
+      <div className={classes.graphInnerContainer}>
+        <div ref={dygraphDomRef} className={classes.graphDiv} style={{ width: '50% !important' }} />
+        <div ref={legendRef} className={classes.legendDiv} />
+      </div>
+      <div className={classes.citationContainer}>
+        <img
+          title="NEON"
+          alt="NEON Logo"
+          className={classes.neonLogo}
+          src={NeonLogo}
+        />
+        <Typography variant="caption" className={classes.citation}>
+          {/* eslint-disable react/jsx-one-expression-per-line */}
+          National Ecological Observatory Network. {(new Date()).getFullYear()}.
+          Data Product: {state.product.productCode}, {state.product.productName}.
+          Battelle, Boulder, CO, USA NEON.
+          {/* eslint-enable react/jsx-one-expression-per-line */}
+        </Typography>
+      </div>
     </div>
   );
 }

@@ -1,8 +1,12 @@
 import React, { useRef, useState } from 'react';
 import moment from 'moment';
 
+import domtoimage from 'dom-to-image';
+import { saveAs } from 'file-saver';
+
 import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Paper from '@material-ui/core/Paper';
 import Tab from '@material-ui/core/Tab';
@@ -271,6 +275,9 @@ export default function TimeSeriesViewerContainer() {
   // Use a ref to deterministically set slider position for all slider-based features.
   const dateRangeSliderRef = useRef(null);
 
+  // We use a ref to the graph container as the base DOM element for image export
+  const graphRef = useRef(null);
+
   const renderTabs = () => (
     <Tabs
       orientation={belowMd ? 'horizontal' : 'vertical'}
@@ -352,10 +359,28 @@ export default function TimeSeriesViewerContainer() {
     return null;
   };
 
+  const exportGraphImage = () => {
+    if (graphRef.current === null) { return; }
+    domtoimage.toBlob(graphRef.current)
+      .then((blob) => {
+        const siteCodes = state.selection.sites.map(site => site.siteCode).join(' ');
+        const fileName = `NEON Time Series - ${state.product.productCode} - ${state.product.productName} - ${siteCodes}.png`;
+        saveAs(blob, fileName);
+      })
+      .catch((error) => {
+        console.error('Unable to export graph image', error);
+      });
+  };
+
   return (
     <div style={{ width: '100%' }}>
+      <Button variant="outlined" onClick={exportGraphImage} disabled={graphRef.current === null}>
+        Export Graph Image
+      </Button>
       <Paper className={classes.graphContainer}>
-        <TimeSeriesViewerGraph />
+        <div ref={graphRef} style={{ backgroundColor: '#ffffff' }}>
+          <TimeSeriesViewerGraph ref={graphRef} />
+        </div>
         {renderGraphOverlay()}
       </Paper>
       <Paper className={classes.tabsContainer}>
