@@ -152,7 +152,7 @@ const RollPeriodOption = () => {
   const timeStepSeconds = currentTimeStep ? TIME_STEPS[currentTimeStep].seconds : 1800;
   const rollStepsPerMonth = (30 * 24 * 60 * 60) / timeStepSeconds;
   const rollMin = 1;
-  const rollMax = Math.max(dateRangeMonths * rollStepsPerMonth, currentRollPeriod);
+  const rollMax = Math.floor(Math.max(dateRangeMonths * rollStepsPerMonth, currentRollPeriod) / 4);
 
   // Determine slider marks
   const interimMarks = 3;

@@ -32,6 +32,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import ClearIcon from '@material-ui/icons/Clear';
 import ElevationIcon from '@material-ui/icons/Terrain';
 import LocationIcon from '@material-ui/icons/MyLocation';
+import NoneIcon from '@material-ui/icons/NotInterested';
 import SearchIcon from '@material-ui/icons/Search';
 import SelectIcon from '@material-ui/icons/TouchApp';
 
@@ -43,7 +44,7 @@ import iconCoreAquaticSVG from '../SiteMap/icon-core-aquatic.svg';
 import iconRelocatableTerrestrialSVG from '../SiteMap/icon-relocatable-terrestrial.svg';
 import iconRelocatableAquaticSVG from '../SiteMap/icon-relocatable-aquatic.svg';
 
-import TimeSeriesViewerContext from './TimeSeriesViewerContext';
+import TimeSeriesViewerContext, { TabComponentPropTypes } from './TimeSeriesViewerContext';
 
 const ucWord = word => `${word.slice(0, 1)}${word.slice(1).toLowerCase()}`;
 
@@ -57,6 +58,7 @@ const ICON_SVGS = {
     TERRESTRIAL: iconRelocatableTerrestrialSVG,
   },
 };
+
 
 /**
    Classes and Styles
@@ -125,6 +127,14 @@ const useStyles = makeStyles(theme => ({
     marginBottom: Theme.spacing(1),
     marginRight: Theme.spacing(4),
   },
+  noneIcon: {
+    color: theme.palette.grey[400],
+    marginRight: theme.spacing(0.5),
+    fontSize: '1rem',
+  },
+  noneLabel: {
+    color: theme.palette.grey[400],
+  },
   positionsTitleContainer: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -140,11 +150,6 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.grey[100],
     marginTop: theme.spacing(1.5),
   },
-  startFlex: {
-    display: 'flex',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-  },
   smallButton: {
     fontSize: '0.8rem',
     padding: theme.spacing(0.125, 0.75),
@@ -153,6 +158,11 @@ const useStyles = makeStyles(theme => ({
   smallButtonIcon: {
     marginRight: theme.spacing(0.5),
     fontSize: '0.8rem',
+  },
+  startFlex: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
   },
 }));
 
@@ -626,11 +636,27 @@ SiteOption.defaultProps = OptionDefaultProps;
 */
 function SelectedSite(props) {
   const classes = useStyles(Theme);
-  const { site, disabled } = props;
+  const {
+    site,
+    disabled,
+    setSelectedTab,
+    TAB_IDS,
+  } = props;
   const { siteCode, positions } = site;
   const [{ data: neonContextData }] = NeonContext.useNeonContextState();
   const { sites: allSites, states: allStates, domains: allDomains } = neonContextData;
   const [, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
+  // style={{ fontSize: '0.8rem', fontWeight: 600 }}
+  const dateRangeTabButton = (
+    <Button
+      size="small"
+      color="secondary"
+      onClick={() => { setSelectedTab(TAB_IDS.DATE_RANGE); }}
+      style={{ padding: '0px 2px', marginTop: '-4px', fontStyle: 'italic' }}
+    >
+      Date Range
+    </Button>
+  );
   const removeSiteButton = (
     <Button
       color="primary"
@@ -753,22 +779,41 @@ function SelectedSite(props) {
   return (
     <Paper key={siteCode} className={classes.sitePaper}>
       {selectedSiteContent}
-      <div>
-        <div className={classes.positionsTitleContainer}>
-          <Typography variant="subtitle2">
-            Position(s):
-          </Typography>
-          <SelectPositionsButton selectedSite={site} />
+      {positions.length ? (
+        <div>
+          <div className={classes.positionsTitleContainer}>
+            <Typography variant="subtitle2">
+              Position(s):
+            </Typography>
+            <SelectPositionsButton selectedSite={site} />
+          </div>
+          {positions.map(position => (
+            <SelectedPosition
+              key={position}
+              siteCode={siteCode}
+              position={position}
+              disabled={positions.length < 2}
+            />
+          ))}
         </div>
-        {positions.map(position => (
-          <SelectedPosition
-            key={position}
-            siteCode={siteCode}
-            position={position}
-            disabled={positions.length < 2}
-          />
-        ))}
-      </div>
+      ) : (
+        <div>
+          <div className={classes.startFlex} style={{ alignItems: 'center' }}>
+            <NoneIcon className={classes.noneIcon} />
+            <Typography variant="body1" className={classes.noneLabel} style={{ fontWeight: 600 }}>
+              No Positions Available.
+            </Typography>
+          </div>
+          <Typography variant="body2" className={classes.noneLabel} style={{ fontSize: '0.8rem' }}>
+            <i>
+              {/* eslint-disable react/jsx-one-expression-per-line */}
+              This site has no available data for the current selected date range, and thus
+              no positions. See {dateRangeTabButton} to compare selection with availability.
+              {/* eslint-enable react/jsx-one-expression-per-line */}
+            </i>
+          </Typography>
+        </div>
+      )}
     </Paper>
   );
 }
@@ -779,6 +824,7 @@ SelectedSite.propTypes = {
     positions: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,
   disabled: PropTypes.bool,
+  ...TabComponentPropTypes,
 };
 SelectedSite.defaultProps = { disabled: false };
 
@@ -870,7 +916,7 @@ const SitesSelect = () => {
 /**
    Primary Component
 */
-export default function TimeSeriesViewerSites() {
+export default function TimeSeriesViewerSites(props) {
   const classes = useStyles(Theme);
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
 
@@ -892,8 +938,11 @@ export default function TimeSeriesViewerSites() {
           key={site.siteCode}
           site={site}
           disabled={state.selection.sites.length < 2}
+          {...props}
         />
       ))}
     </div>
   );
 }
+
+TimeSeriesViewerSites.propTypes = TabComponentPropTypes;

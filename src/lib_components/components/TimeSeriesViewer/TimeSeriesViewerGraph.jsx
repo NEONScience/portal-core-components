@@ -4,9 +4,14 @@ import ReactDOMServer from 'react-dom/server';
 import Dygraph from 'dygraphs';
 import 'dygraphs/dist/dygraph.min.css';
 
+import moment from 'moment';
+
 import { makeStyles } from '@material-ui/core/styles';
 
-import TimeSeriesViewerContext, { TIME_SERIES_VIEWER_STATUS } from './TimeSeriesViewerContext';
+import TimeSeriesViewerContext, {
+  TIME_SERIES_VIEWER_STATUS,
+  TIME_STEPS,
+} from './TimeSeriesViewerContext';
 import Theme from '../Theme/Theme';
 
 const COLORS = [
@@ -85,6 +90,10 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+// Get the next year/month string after a given year/month string
+// Example: getNextMonth('2012-12') => '2013-01'
+const getNextMonth = month => moment.utc(`${month}-01T00:00:00Z`).add(1, 'month').format('YYYY-MM');
+
 export default function TimeSeriesViewerGraph() {
   const classes = useStyles(Theme);
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
@@ -95,6 +104,7 @@ export default function TimeSeriesViewerGraph() {
   const axisCountChangedRef = useRef(false);
   const {
     selectionDigest,
+    dateRange,
     continuousDateRange,
     variables,
     sites,
@@ -107,35 +117,47 @@ export default function TimeSeriesViewerGraph() {
   const timeStep = selectedTimeStep === 'auto' ? autoTimeStep : selectedTimeStep;
 
   const data = [];
-  const monthOffsets = [];
+  const monthOffsets = {};
   const labels = ['x'];
   const series = [];
   let graphOptions = BASE_GRAPH_OPTIONS;
 
-  // Build the first column (dateTime) and keep track of where the month breaks are
+  // Initialize data set with timestep-based times and monthOffsets for registering actual data
   const buildTimeData = () => {
-    const downloadPkg = 'basic';
-    const source = state.product.sites[sites[0].siteCode].positions[sites[0].positions[0]];
-    continuousDateRange.forEach((month, idx) => {
-      monthOffsets[idx] = data.length;
-      if (
-        !source.data[month]
-          || !source.data[month][downloadPkg]
-          || !source.data[month][downloadPkg][timeStep]
-      ) { return; }
-      source.data[month][downloadPkg][timeStep].series.startDateTime.forEach((d) => {
-        data.push([d]);
-      });
-    });
+    const { seconds } = TIME_STEPS[timeStep];
+    const startMonth = dateRange[0];
+    const ticker = moment.utc(`${startMonth}-01T00:00:00Z`);
+    const endMonth = dateRange[0] === dateRange[1] ? getNextMonth(startMonth) : dateRange[1];
+    let currentMonth = ticker.format('YYYY-MM');
+    let previousMonth = null;
+    let offset = null;
+    while (currentMonth < endMonth) {
+      data.push([ticker.toDate()]);
+      offset = data.length - 1;
+      if (currentMonth !== previousMonth) {
+        monthOffsets[currentMonth] = offset;
+        previousMonth = currentMonth;
+      }
+      ticker.add(seconds, 'seconds');
+      currentMonth = ticker.format('YYYY-MM');
+    }
   };
 
   // Build the rest of the data structure and labels using selection values
   const buildSeriesData = () => {
+    // Loop through each site...
     sites.forEach((site) => {
       const { siteCode, positions } = site;
+      // Loop through each site position...
       positions.forEach((position) => {
-        continuousDateRange.forEach((month, monthIdx) => {
+        // For each site position loop through every month in the continuous date range (no gaps)
+        continuousDateRange.forEach((month) => {
+          // Use monthOffsets to determine where in the entire data set this month belongs
+          if (!Object.keys(monthOffsets).includes(month)) { return; }
+          const monthIdx = monthOffsets[month];
+          // For each site/position/month loop through all selected variables...
           variables.forEach((variable) => {
+            // Generate series label and add to the list of labels if this is the first we see it
             const label = `${siteCode} - ${position} - ${variable}`;
             if (!labels.includes(label)) {
               labels.push(label);
@@ -149,14 +171,25 @@ export default function TimeSeriesViewerGraph() {
             }
             const columnIdx = labels.indexOf(label);
             const { downloadPkg } = state.variables[variable];
-            const source = state.product.sites[siteCode].positions[position];
+            const positionData = state.product.sites[siteCode].positions[position].data;
+            // If this site/position/month/variable has no series data then fill with nulls
             if (
-              !source.data[month]
-                || !source.data[month][downloadPkg]
-                || !source.data[month][downloadPkg][timeStep]
-            ) { return; }
-            source.data[month][downloadPkg][timeStep].series[variable].forEach((d, datumIdx) => {
-              data[datumIdx + monthOffsets[monthIdx]][columnIdx] = d;
+              !positionData[month]
+                || !positionData[month][downloadPkg]
+                || !positionData[month][downloadPkg][timeStep]
+            ) {
+              const nextMonth = getNextMonth(month);
+              const monthStepCount = Object.keys(monthOffsets).includes(nextMonth)
+                ? monthOffsets[nextMonth] - monthIdx
+                : data.length - monthIdx;
+              for (let d = monthIdx; d < monthStepCount; d += 1) {
+                data[d][columnIdx] = null;
+              }
+              return;
+            }
+            // This site/position/month/variable series exists, so add it into the data set
+            positionData[month][downloadPkg][timeStep].series[variable].forEach((d, datumIdx) => {
+              data[datumIdx + monthIdx][columnIdx] = d;
             });
           });
         });
@@ -223,7 +256,7 @@ export default function TimeSeriesViewerGraph() {
       })}
       {graphData.x ? (
         <div className={classes.legendSeriesX}>
-          {graphData.xHTML}
+          {moment.utc(graphData.x).format('YYYY-MM-DD HH:mm:ss')}
         </div>
       ) : null}
     </React.Fragment>,

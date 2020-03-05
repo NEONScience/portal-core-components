@@ -1,4 +1,9 @@
 /**
    Primary Component
 */
-export default function TimeSeriesViewerSites(): JSX.Element;
+declare function TimeSeriesViewerSites(props: any): JSX.Element;
+declare namespace TimeSeriesViewerSites {
+    export { TabComponentPropTypes as propTypes };
+}
+export default TimeSeriesViewerSites;
+import { TabComponentPropTypes } from "./TimeSeriesViewerContext";

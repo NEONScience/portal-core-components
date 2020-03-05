@@ -222,28 +222,35 @@ function TimeSeriesViewerSummary() {
 /**
    Define Tabs
 */
+const TAB_IDS = {
+  SUMMARY: 'SUMMARY',
+  SITES: 'SITES',
+  DATE_RANGE: 'DATE_RANGE',
+  VARIABLES: 'VARIABLES',
+  OPTIONS: 'OPTIONS',
+};
 const TABS = {
-  SUMMARY: {
+  [TAB_IDS.SUMMARY]: {
     label: 'Summary',
     Icon: SummaryIcon,
     Component: TimeSeriesViewerSummary,
   },
-  SITES: {
+  [TAB_IDS.SITES]: {
     label: 'Sites',
     Icon: SitesIcon,
     Component: TimeSeriesViewerSites,
   },
-  DATE_RANGE: {
+  [TAB_IDS.DATE_RANGE]: {
     label: 'Date Range',
     Icon: DateRangeIcon,
     Component: TimeSeriesViewerDateRange,
   },
-  VARIABLES: {
+  [TAB_IDS.VARIABLES]: {
     label: 'Variables',
     Icon: VariablesIcon,
     Component: TimeSeriesViewerVariables,
   },
-  OPTIONS: {
+  [TAB_IDS.OPTIONS]: {
     label: 'Options',
     Icon: OptionsIcon,
     Component: TimeSeriesViewerOptions,
@@ -279,7 +286,7 @@ export default function TimeSeriesViewerContainer() {
       {Object.keys(TABS).map((tabId) => {
         const { label, Icon: TabIcon } = TABS[tabId];
         const style = {};
-        if (tabId === 'SUMMARY' && !belowMd) { style.borderTopLeftRadius = Theme.spacing(1); }
+        if (tabId === TAB_IDS.SUMMARY && !belowMd) { style.borderTopLeftRadius = Theme.spacing(1); }
         return (
           <Tab
             key={tabId}
@@ -300,8 +307,8 @@ export default function TimeSeriesViewerContainer() {
     <div style={{ flexGrow: 1 }}>
       {Object.keys(TABS).map((tabId) => {
         const { Component: TabComponent } = TABS[tabId];
-        let tabComponentProps = {};
-        if (tabId === 'DATE_RANGE') { tabComponentProps = { dateRangeSliderRef }; }
+        let tabComponentProps = { setSelectedTab, TAB_IDS };
+        if (tabId === TAB_IDS.DATE_RANGE) { tabComponentProps = { dateRangeSliderRef }; }
         return (
           <div
             key={tabId}

@@ -34,6 +34,7 @@ const FETCH_STATUS = {
   ERROR: 'ERROR',
   SUCCESS: 'SUCCESS',
 };
+
 // Every possible top-level status the TimeSeriesViewer component can have
 export const TIME_SERIES_VIEWER_STATUS = {
   INIT_PRODUCT: 'INIT_PRODUCT', // Handling props; fetching product data if needed
@@ -61,12 +62,20 @@ const DATA_FILE_PARTS = {
   MONTH: 10,
   PACKAGE_TYPE: 11,
 };
+
 // Functions to convert a value to the proper JS data type given a NEON variable dataType
 const DATA_TYPE_SETTERS = {
-  dateTime: v => new Date(v.replace(/"/g, '')),
-  real: v => parseFloat(v, 10),
-  'signed integer': v => parseInt(v, 10),
-  'unsigned integer': v => parseInt(v, 10),
+  real: v => (parseFloat(v, 10) || null),
+  'signed integer': v => (parseInt(v, 10) || null),
+  'unsigned integer': v => (parseInt(v, 10) || null),
+};
+
+// PropTypes for any Tab Component (or component within a tab) for gettingsetSelectedTab
+// and TAB_IDS as props. This is used by anything in a tab wanting to afford the ability to
+// route the user to another tab.
+export const TabComponentPropTypes = {
+  setSelectedTab: PropTypes.func.isRequired,
+  TAB_IDS: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 /**
@@ -845,6 +854,8 @@ const Provider = (props) => {
 
     const fetchNeededSiteMonths = (siteCode, fetches) => {
       continuousDateRange.filter(month => !fetches[month]).forEach((month) => {
+        // Don't attempt to fetch any months that are known to be unavailable for a given site
+        if (!state.product.sites[siteCode].availableMonths.includes(month)) { return; }
         metaFetchTriggered = true;
         dispatch({ type: 'fetchSiteMonth', siteCode, month });
         ajax.getJSON(getSiteMonthDataURL(siteCode, month)).pipe(
@@ -952,6 +963,8 @@ const Provider = (props) => {
         prepareDataFetches(site);
       }
     });
+
+    // debugger; // eslint-disable-line no-debugger
 
     // Trigger all data fetches
     if (state.status === TIME_SERIES_VIEWER_STATUS.READY_FOR_DATA && !metaFetchTriggered) {

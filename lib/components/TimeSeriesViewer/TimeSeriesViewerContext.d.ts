@@ -20,6 +20,12 @@ export namespace TIME_SERIES_VIEWER_STATUS_TITLES {
     const READY_1: null;
     export { READY_1 as READY };
 }
+export namespace TabComponentPropTypes {
+    export const setSelectedTab: PropTypes.Validator<(...args: any[]) => any>;
+    export const TAB_IDS: PropTypes.Validator<{
+        [x: string]: import("../../types/coreTypes").Nullable<string>;
+    }>;
+}
 /**
    Time Step Definitions and Functions
 */
@@ -58,6 +64,7 @@ export type ParseSiteVariablesReturn = {
      */
     variablesObject: Object;
 };
+import PropTypes from "prop-types";
 declare namespace TimeSeriesViewerContext {
     export { Provider };
     export { useTimeSeriesViewerState };
@@ -170,4 +177,3 @@ declare namespace TimeSeriesViewerPropTypes {
     export function productData_2(props: any, propName: any, componentName: any): Error | null;
     export { productData_2 as productData };
 }
-import PropTypes from "prop-types";
