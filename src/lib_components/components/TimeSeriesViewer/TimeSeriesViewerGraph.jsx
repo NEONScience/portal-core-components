@@ -55,13 +55,13 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'flex-start',
   },
   graphDiv: {
-    height: '320px',
+    minHeight: '320px',
     flexGrow: 1,
   },
   citationContainer: {
     marginTop: Theme.spacing(2),
     display: 'flex',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     justifyContent: 'flex-start',
   },
   citation: {
@@ -254,7 +254,7 @@ export default function TimeSeriesViewerGraph() {
       {graphData.series.map((s, idx) => {
         const { units } = series[idx];
         let yUnits = units;
-        if (typeof s.y !== 'undefined') {
+        if (typeof s.y === 'number' && !Number.isNaN(s.y)) {
           let yStr = s.y.toString();
           if (yStr.indexOf('.') !== -1 && yStr.length - yStr.indexOf('.') > 3) {
             yStr = s.y.toFixed(2).toString();
@@ -317,13 +317,8 @@ export default function TimeSeriesViewerGraph() {
 
   useEffect(() => {
     if (state.status !== TIME_SERIES_VIEWER_STATUS.READY) { return; }
-    const redrawWidth = () => {
-      dygraphRef.current.graphDiv.style.width = null;
-      dygraphRef.current.resizeHandler_();
-    };
     if (dygraphRef.current === null) {
       dygraphRef.current = new Dygraph(dygraphDomRef.current, data, graphOptions);
-      redrawWidth();
     } else {
       dygraphRef.current.updateOptions({ file: data, ...graphOptions });
       // Dygraphs has a bug where the canvas isn't cleared properly when dynamically changing
@@ -333,8 +328,19 @@ export default function TimeSeriesViewerGraph() {
         dygraphRef.current.updateOptions({ showRangeSelector: false });
         dygraphRef.current.updateOptions({ showRangeSelector: true });
       }
-      redrawWidth();
     }
+    // Refresh graph dimensions
+    const LEGEND_SERIES_HEIGHT = 56;
+    const LEGEND_DATE_HEIGHT = 40;
+    const MIN_GRAPH_HEIGHT = 320;
+    const MAX_GRAPH_HEIGHT = 560;
+    const graphHeight = Math.min(Math.max(
+      Object.keys(graphOptions.series).length * LEGEND_SERIES_HEIGHT + LEGEND_DATE_HEIGHT,
+      MIN_GRAPH_HEIGHT,
+    ), MAX_GRAPH_HEIGHT);
+    dygraphRef.current.graphDiv.style.width = null;
+    dygraphRef.current.graphDiv.style.height = `${graphHeight}px`;
+    dygraphRef.current.resizeHandler_();
   }, [selectionDigest, state.status, data, graphOptions, dygraphRef, axisCountChangedRef]);
 
   /**
@@ -343,7 +349,9 @@ export default function TimeSeriesViewerGraph() {
   return (
     <div className={classes.graphOuterContainer}>
       <Typography variant="h6" className={classes.title}>
-        {`${state.product.productName} (${state.product.productCode})`}
+        {state.product.productName
+          ? `${state.product.productName} (${state.product.productCode})`
+          : state.product.productCode}
       </Typography>
       <div className={classes.graphInnerContainer}>
         <div ref={dygraphDomRef} className={classes.graphDiv} style={{ width: '50% !important' }} />
