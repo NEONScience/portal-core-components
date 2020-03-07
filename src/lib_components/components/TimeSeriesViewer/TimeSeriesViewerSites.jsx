@@ -116,7 +116,12 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     marginBottom: Theme.spacing(1.5),
   },
-  siteDetailsContainer: {
+  siteDetailsRow: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'space-between',
+  },
+  siteDetailsColumn: {
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
@@ -138,7 +143,7 @@ const useStyles = makeStyles(theme => ({
   positionsTitleContainer: {
     display: 'flex',
     justifyContent: 'space-between',
-    alignItmes: 'center',
+    alignItems: 'center',
   },
   positionPaper: {
     display: 'flex',
@@ -727,48 +732,52 @@ function SelectedSite(props) {
           </Typography>
           {removeSiteButton}
         </div>
-        <div className={classes.siteDetailsContainer}>
-          {/* Terrain and Type */}
-          <div className={classes.siteDetail}>
-            <Typography variant="subtitle2">{terrainTypeTitle}</Typography>
-            <Typography variant="body2" style={{ fontSize: '0.8rem' }}>
-              <i>{terrainTypeSubtitle}</i>
-            </Typography>
+        <div className={classes.siteDetailsRow}>
+          <div className={classes.siteDetailsColumn}>
+            {/* Terrain and Type */}
+            <div className={classes.siteDetail}>
+              <Typography variant="subtitle2">{terrainTypeTitle}</Typography>
+              <Typography variant="body2" style={{ fontSize: '0.8rem' }}>
+                <i>{terrainTypeSubtitle}</i>
+              </Typography>
+            </div>
+            {/* Latitude/Longitude */}
+            <div className={classes.siteDetail}>
+              <div className={classes.startFlex} style={{ alignItems: 'center' }}>
+                <CopyToClipboard text={`${latitude} ${longitude}`}>
+                  <Tooltip title="Latitude / Longitude (click to copy)">
+                    <IconButton
+                      size="small"
+                      style={{ marginRight: Theme.spacing(0.5) }}
+                      aria-label="Latitude / Longitude (click to copy)"
+                    >
+                      <LocationIcon />
+                    </IconButton>
+                  </Tooltip>
+                </CopyToClipboard>
+                <Typography
+                  variant="caption"
+                  aria-label="Latitude / Longitude"
+                  style={{ fontFamily: 'monospace', textAlign: 'right', fontSize: '0.85rem' }}
+                >
+                  {latitude}
+                  <br />
+                  {longitude}
+                </Typography>
+              </div>
+            </div>
           </div>
-          {/* State/Territory */}
-          <div className={classes.siteDetail}>
-            <Typography variant="subtitle2">{stateFieldTitle}</Typography>
-            <Typography variant="body2">{stateName}</Typography>
-          </div>
-          {/* Domain */}
-          <div className={classes.siteDetail}>
-            <Typography variant="subtitle2">Domain</Typography>
-            <Typography variant="body2">
-              {`${domainCode} - ${domainName}`}
-            </Typography>
-          </div>
-          {/* Latitude/Longitude */}
-          <div className={classes.siteDetail}>
-            <div className={classes.startFlex} style={{ alignItems: 'center' }}>
-              <CopyToClipboard text={`${latitude} ${longitude}`}>
-                <Tooltip title="Latitude / Longitude (click to copy)">
-                  <IconButton
-                    size="small"
-                    style={{ marginRight: Theme.spacing(0.5) }}
-                    aria-label="Latitude / Longitude (click to copy)"
-                  >
-                    <LocationIcon />
-                  </IconButton>
-                </Tooltip>
-              </CopyToClipboard>
-              <Typography
-                variant="caption"
-                aria-label="Latitude / Longitude"
-                style={{ fontFamily: 'monospace', textAlign: 'right' }}
-              >
-                {latitude}
-                <br />
-                {longitude}
+          <div className={classes.siteDetailsColumn}>
+            {/* State/Territory */}
+            <div className={classes.siteDetail}>
+              <Typography variant="subtitle2">{stateFieldTitle}</Typography>
+              <Typography variant="body2">{stateName}</Typography>
+            </div>
+            {/* Domain */}
+            <div className={classes.siteDetail}>
+              <Typography variant="subtitle2">Domain</Typography>
+              <Typography variant="body2">
+                {`${domainCode} - ${domainName}`}
               </Typography>
             </div>
           </div>
@@ -782,7 +791,7 @@ function SelectedSite(props) {
       {positions.length ? (
         <div>
           <div className={classes.positionsTitleContainer}>
-            <Typography variant="subtitle2">
+            <Typography variant="h6">
               Position(s):
             </Typography>
             <SelectPositionsButton selectedSite={site} />
@@ -923,7 +932,6 @@ export default function TimeSeriesViewerSites(props) {
   const [{ data: neonContextData }] = NeonContext.useNeonContextState();
   const { sites: allSites } = neonContextData;
 
-  // TODO: skeleton
   if (!state.selection.sites.length || !Object.keys(allSites).length) {
     return (
       <Skeleton variant="rect" width="100%" height={56} />

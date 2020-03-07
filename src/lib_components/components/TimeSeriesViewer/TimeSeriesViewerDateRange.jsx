@@ -1,22 +1,38 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
 import Grid from '@material-ui/core/Grid';
 import Slider from '@material-ui/core/Slider';
+import Typography from '@material-ui/core/Typography';
 
 import Skeleton from '@material-ui/lab/Skeleton';
 
 import MomentUtils from '@date-io/moment';
 import moment from 'moment';
 
+import { AvailabilityGrid, SVG } from '../DataProductAvailability/AvailabilityGrid';
+import AvailabilityLegend from '../DataProductAvailability/AvailabilityLegend';
+import FullWidthVisualization from '../FullWidthVisualization/FullWidthVisualization';
+import NeonContext from '../NeonContext/NeonContext';
 import Theme from '../Theme/Theme';
+
 import TimeSeriesViewerContext from './TimeSeriesViewerContext';
 
 const getYearMonthMoment = (yearMonth, day = 15) => (
   moment(`${yearMonth}-${day.toString().padStart(2, '0')}`)
 );
+
+const svgMinWidth = (SVG.CELL_WIDTH + SVG.CELL_PADDING) * SVG.MIN_CELLS
+  + Math.floor(SVG.MIN_CELLS / 12) * SVG.YEAR_PADDING;
+const svgMinHeight = (SVG.CELL_HEIGHT + SVG.CELL_PADDING) * (SVG.MIN_ROWS + 1);
+const useStyles = makeStyles(() => ({
+  svg: {
+    minWidth: `${svgMinWidth}px`,
+    minHeight: `${svgMinHeight}px`,
+  },
+}));
 
 const boxShadow = alpha => `0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,${alpha}),0 0 0 1px rgba(0,0,0,0.02)`;
 const DateRangeSlider = withStyles({
@@ -84,7 +100,10 @@ const DateRangeSlider = withStyles({
 let sliderDefault = [];
 
 const TimeSeriesViewerDateRange = (props) => {
+  const classes = useStyles(Theme);
   const { dateRangeSliderRef } = props;
+  const [{ data: neonContextData }] = NeonContext.useNeonContextState();
+  const { sites: allSites } = neonContextData;
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
 
   const currentRange = state.selection.dateRange;
@@ -94,6 +113,29 @@ const TimeSeriesViewerDateRange = (props) => {
   const displayMax = displayRange.length - 1;
   const sliderMin = displayRange.indexOf(selectableRange[0]);
   const sliderMax = displayRange.indexOf(selectableRange[1]);
+
+  // Derive site and availability values for the AvailabilityGrid
+  const availabilityDateRange = { value: currentRange, validValues: selectableRange };
+  const selectedSites = state.selection.sites.map(site => site.siteCode);
+  const availabilitySites = { value: selectedSites, validValues: selectedSites };
+  const availabilityData = {
+    view: 'sites',
+    name: 'Site',
+    selectable: true,
+    rows: {},
+    getLabel: {
+      text: key => key,
+      title: key => (allSites[key] ? allSites[key].description : key),
+    },
+  };
+  selectedSites.forEach((siteCode) => {
+    availabilityData.rows[siteCode] = {};
+    state.product.sites[siteCode].availableMonths.forEach((month) => {
+      availabilityData.rows[siteCode][month] = 'available';
+    });
+  });
+  const svgHeight = SVG.CELL_PADDING
+    + (SVG.CELL_HEIGHT + SVG.CELL_PADDING) * (selectedSites.length + 1);
 
   // Function to apply changes to the slider's DOM as if it was controlled by state.
   // We can't control in state because doing so makes drag experience jerky and frustrating.
@@ -150,18 +192,47 @@ const TimeSeriesViewerDateRange = (props) => {
     }
   }, [dateRangeSliderRef, currentRange, displayRange, sliderMin, sliderMax, applySliderValues]);
 
+  // Set up AvailabilityGrid
+  const setDateRangeValue = useCallback(dateRange => dispatch({
+    type: 'selectDateRange',
+    dateRange,
+  }), [dispatch]);
+  const svgRef = useRef(null);
+  const handleSvgRedraw = useCallback(() => {
+    AvailabilityGrid({
+      data: availabilityData,
+      svgRef,
+      allSites,
+      sites: availabilitySites,
+      dateRange: availabilityDateRange,
+      setDateRangeValue,
+    });
+  }, [
+    svgRef,
+    allSites,
+    availabilityData,
+    availabilitySites,
+    availabilityDateRange,
+    setDateRangeValue,
+  ]);
+  useEffect(() => {
+    handleSvgRedraw();
+  });
+
   // Render nothing if no selectable range is available
-  // TODO: probably render a skeleton
   if (!displayRange.length) {
     return (
       <div>
         <Skeleton variant="rect" width="100%" height={56} />
         <br />
-        <div style={{ display: 'flex' }}>
+        <div style={{ display: 'flex', marginBottom: Theme.spacing(3) }}>
           <Skeleton variant="rect" width="100%" height={40} />
           <div style={{ width: '40px' }} />
           <Skeleton variant="rect" width="100%" height={40} />
         </div>
+        <Skeleton variant="rect" width={300} height={28} />
+        <br />
+        <Skeleton variant="rect" width="100%" height={80} />
       </div>
     );
   }
@@ -199,7 +270,7 @@ const TimeSeriesViewerDateRange = (props) => {
     dispatch({ type: 'selectDateRange', dateRange });
   };
 
-  // Render active date range filter with slider and date picker inputs
+  // Only set slider defaults on the initial render
   if (!Object.isFrozen(sliderDefault)) {
     sliderDefault = [
       displayRange.indexOf(currentRange[0]),
@@ -207,62 +278,81 @@ const TimeSeriesViewerDateRange = (props) => {
     ];
     Object.freeze(sliderDefault);
   }
+
   return (
     <div style={{ width: '100%' }}>
-      <DateRangeSlider
-        data-selenium="time-series-viewer.date-range.slider"
-        ref={dateRangeSliderRef}
-        defaultValue={[...sliderDefault]}
-        valueLabelDisplay="auto"
-        min={displayMin}
-        max={displayMax}
-        marks={marks}
-        valueLabelFormat={x => displayRange[x]}
-        onChange={(event, values) => {
-          applySliderValues(values);
-        }}
-        onChangeCommitted={(event, values) => {
-          dispatch({
-            type: 'selectDateRange',
-            dateRange: [
-              Math.max(values[0], sliderMin),
-              Math.min(values[1], sliderMax),
-            ].map(x => displayRange[x]),
-          });
-        }}
-      />
-      <MuiPickersUtilsProvider utils={MomentUtils}>
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={6} style={{ display: 'flex', justifyContent: 'center' }}>
-            <DatePicker
-              data-selenium="time-series-viewer.date-range.start-input"
-              inputVariant="outlined"
-              margin="dense"
-              value={getYearMonthMoment(currentRange[0] || displayRange[sliderMin])}
-              onChange={value => handleChangeDatePicker(0, value)}
-              views={['month', 'year']}
-              label="Start"
-              openTo="month"
-              minDate={getYearMonthMoment(displayRange[sliderMin], 10)}
-              maxDate={getYearMonthMoment(currentRange[1] || displayRange[sliderMax], 20)}
-            />
+      <div style={{ marginBottom: Theme.spacing(2) }}>
+        <MuiPickersUtilsProvider utils={MomentUtils}>
+          <Grid container spacing={2} style={{ marginBottom: Theme.spacing(1) }}>
+            <Grid item xs={12} sm={6} style={{ display: 'flex', justifyContent: 'center' }}>
+              <DatePicker
+                data-selenium="time-series-viewer.date-range.start-input"
+                inputVariant="outlined"
+                margin="dense"
+                value={getYearMonthMoment(currentRange[0] || displayRange[sliderMin])}
+                onChange={value => handleChangeDatePicker(0, value)}
+                views={['month', 'year']}
+                label="Start"
+                openTo="month"
+                minDate={getYearMonthMoment(displayRange[sliderMin], 10)}
+                maxDate={getYearMonthMoment(currentRange[1] || displayRange[sliderMax], 20)}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} style={{ display: 'flex', justifyContent: 'center' }}>
+              <DatePicker
+                data-selenium="time-series-viewer.date-range.end-input"
+                inputVariant="outlined"
+                margin="dense"
+                value={getYearMonthMoment(currentRange[1] || displayRange[sliderMax])}
+                onChange={value => handleChangeDatePicker(1, value)}
+                views={['month', 'year']}
+                label="End"
+                openTo="month"
+                minDate={getYearMonthMoment(currentRange[0] || displayRange[sliderMin], 10)}
+                maxDate={getYearMonthMoment(displayRange[sliderMax], 20)}
+              />
+            </Grid>
           </Grid>
-          <Grid item xs={12} sm={6} style={{ display: 'flex', justifyContent: 'center' }}>
-            <DatePicker
-              data-selenium="time-series-viewer.date-range.end-input"
-              inputVariant="outlined"
-              margin="dense"
-              value={getYearMonthMoment(currentRange[1] || displayRange[sliderMax])}
-              onChange={value => handleChangeDatePicker(1, value)}
-              views={['month', 'year']}
-              label="End"
-              openTo="month"
-              minDate={getYearMonthMoment(currentRange[0] || displayRange[sliderMin], 10)}
-              maxDate={getYearMonthMoment(displayRange[sliderMax], 20)}
-            />
-          </Grid>
-        </Grid>
-      </MuiPickersUtilsProvider>
+        </MuiPickersUtilsProvider>
+        <DateRangeSlider
+          data-selenium="time-series-viewer.date-range.slider"
+          ref={dateRangeSliderRef}
+          defaultValue={[...sliderDefault]}
+          valueLabelDisplay="auto"
+          min={displayMin}
+          max={displayMax}
+          marks={marks}
+          valueLabelFormat={x => displayRange[x]}
+          onChange={(event, values) => {
+            applySliderValues(values);
+          }}
+          onChangeCommitted={(event, values) => {
+            dispatch({
+              type: 'selectDateRange',
+              dateRange: [
+                Math.max(values[0], sliderMin),
+                Math.min(values[1], sliderMax),
+              ].map(x => displayRange[x]),
+            });
+          }}
+        />
+      </div>
+      <div>
+        <Typography variant="subtitle1" style={{ fontWeight: 600, marginBottom: Theme.spacing(1) }}>
+          Select by Data Product Availability
+        </Typography>
+        <FullWidthVisualization
+          vizRef={svgRef}
+          handleRedraw={handleSvgRedraw}
+        >
+          <svg
+            ref={svgRef}
+            height={svgHeight}
+            className={classes.svg}
+          />
+        </FullWidthVisualization>
+        <AvailabilityLegend style={{ flexGrow: 1 }} />
+      </div>
     </div>
   );
 };

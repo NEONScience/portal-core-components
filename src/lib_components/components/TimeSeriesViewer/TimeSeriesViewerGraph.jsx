@@ -114,7 +114,7 @@ const useStyles = makeStyles(theme => ({
 
 // Get the next year/month string after a given year/month string
 // Example: getNextMonth('2012-12') => '2013-01'
-const getNextMonth = month => moment.utc(`${month}-01T00:00:00Z`).add(1, 'month').format('YYYY-MM');
+const getNextMonth = month => moment.utc(`${month}-15T00:00:00Z`).add(1, 'month').format('YYYY-MM');
 
 export default function TimeSeriesViewerGraph() {
   const classes = useStyles(Theme);
@@ -149,7 +149,7 @@ export default function TimeSeriesViewerGraph() {
     const { seconds } = TIME_STEPS[timeStep];
     const startMonth = dateRange[0];
     const ticker = moment.utc(`${startMonth}-01T00:00:00Z`);
-    const endMonth = dateRange[0] === dateRange[1] ? getNextMonth(startMonth) : dateRange[1];
+    const endMonth = getNextMonth(dateRange[1]);
     let currentMonth = ticker.format('YYYY-MM');
     let previousMonth = null;
     let offset = null;
