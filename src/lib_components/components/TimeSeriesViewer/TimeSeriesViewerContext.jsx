@@ -64,10 +64,18 @@ const DATA_FILE_PARTS = {
 };
 
 // Functions to convert a value to the proper JS data type given a NEON variable dataType
+const castFloat = (v) => {
+  const cast = parseFloat(v, 10);
+  return Number.isNaN(cast) ? null : cast;
+};
+const castInt = (v) => {
+  const cast = parseInt(v, 10);
+  return Number.isNaN(cast) ? null : cast;
+};
 const DATA_TYPE_SETTERS = {
-  real: v => (parseFloat(v, 10) || null),
-  'signed integer': v => (parseInt(v, 10) || null),
-  'unsigned integer': v => (parseInt(v, 10) || null),
+  real: castFloat,
+  'signed integer': castInt,
+  'unsigned integer': castInt,
 };
 
 // PropTypes for any Tab Component (or component within a tab) for gettingsetSelectedTab
@@ -892,7 +900,8 @@ const Provider = (props) => {
 
     const prepareDataFetches = (site) => {
       const { siteCode, positions } = site;
-      state.selection.variables.forEach((variable) => {
+      const fetchVariables = state.selection.variables.concat(state.selection.qualityFlags);
+      fetchVariables.forEach((variable) => {
         const { downloadPkg } = state.variables[variable];
         positions.forEach((position) => {
           continuousDateRange.forEach((month) => {

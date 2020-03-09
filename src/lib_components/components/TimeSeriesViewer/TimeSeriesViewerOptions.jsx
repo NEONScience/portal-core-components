@@ -36,10 +36,10 @@ const useStyles = makeStyles(theme => ({
     fontSize: '0.95rem',
   },
   qualityFlagsButtons: {
-    flexGrow: 0,
-    marginRight: theme.spacing(2),
+    marginBottom: theme.spacing(2),
     display: 'flex',
-    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
   },
   smallButton: {
     fontSize: '0.8rem',
@@ -131,6 +131,8 @@ const RollPeriodSlider = withStyles({
     },
   },
 })(Slider);
+
+const ucWord = word => `${word.slice(0, 1).toUpperCase()}${word.slice(1).toLowerCase()}`;
 
 /**
    Roll Period Option
@@ -286,71 +288,94 @@ const QualityFlagsOption = () => {
   const toggleFlag = qualityFlag => (event) => {
     dispatch({ type: 'selectToggleQualityFlag', qualityFlag, selected: event.target.checked });
   };
-  return !availableQualityFlags.size ? (
-    <div className={classes.noneContainer}>
-      <NoneIcon className={classes.noneIcon} />
-      <Typography variant="body1" className={classes.noneLabel}>
-        No Quality Flags Available
-      </Typography>
-    </div>
-  ) : (
-    <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+  if (!availableQualityFlags.size) {
+    return (
+      <div className={classes.noneContainer}>
+        <NoneIcon className={classes.noneIcon} />
+        <Typography variant="body1" className={classes.noneLabel}>
+          No Quality Flags Available
+        </Typography>
+      </div>
+    );
+  }
+  const organizedQualityFlags = { basic: [], expanded: [] };
+  Array.from(availableQualityFlags).forEach((qf) => {
+    if (!state.variables[qf]) { return; }
+    const { downloadPkg } = state.variables[qf];
+    organizedQualityFlags[downloadPkg].push(qf);
+  });
+  organizedQualityFlags.basic.sort();
+  organizedQualityFlags.expanded.sort();
+  const downloadPkgs = ['basic', 'expanded'];
+  return (
+    <React.Fragment>
       {availableQualityFlags.size > 1 ? (
         <div className={classes.qualityFlagsButtons}>
           <Button
             color="primary"
             variant="outlined"
-            onClick={() => { dispatch({ type: 'selectAllQualityFlags' }); }}
-            className={classes.smallButton}
-            style={{ marginBottom: Theme.spacing(1) }}
-          >
-            <SelectAllIcon className={classes.smallButtonIcon} />
-            {`Select All (${availableQualityFlags.size})`}
-          </Button>
-          <Button
-            color="primary"
-            variant="outlined"
             onClick={() => { dispatch({ type: 'selectNoneQualityFlags' }); }}
             className={classes.smallButton}
+            style={{ marginRight: Theme.spacing(2) }}
           >
             <SelectNoneIcon className={classes.smallButtonIcon} />
             Select None
           </Button>
+          <Button
+            color="primary"
+            variant="outlined"
+            onClick={() => { dispatch({ type: 'selectAllQualityFlags' }); }}
+            className={classes.smallButton}
+          >
+            <SelectAllIcon className={classes.smallButtonIcon} />
+            {`Select All (${availableQualityFlags.size})`}
+          </Button>
         </div>
       ) : null}
-      <div style={{ flexGrow: 1, marginTop: Theme.spacing(-0.5) }}>
-        <FormGroup>
-          {Array.from(availableQualityFlags).map((qf) => {
-            const checked = selectedQualityFlags.includes(qf);
-            const captionStyle = { display: 'block', color: Theme.palette.grey[400] };
-            return (
-              <FormControlLabel
-                key={qf}
-                style={{ alignItems: 'flex-start', marginBottom: Theme.spacing(1) }}
-                control={(
-                  <Checkbox
-                    value={qf}
-                    color="primary"
-                    checked={checked}
-                    onChange={toggleFlag(qf)}
-                  />
-                )}
-                label={(
-                  <div style={{ paddingTop: Theme.spacing(0.5) }}>
-                    <Typography variant="body2">
-                      {qf}
-                      <Typography variant="caption" style={captionStyle}>
-                        {state.variables[qf].description}
-                      </Typography>
-                    </Typography>
-                  </div>
-                )}
-              />
-            );
-          })}
-        </FormGroup>
-      </div>
-    </div>
+      <FormGroup>
+        {downloadPkgs.map(downloadPkg => (
+          <div key={downloadPkg}>
+            <Typography variant="subtitle2">{ucWord(downloadPkg)}</Typography>
+            {!organizedQualityFlags[downloadPkg].length ? (
+              <Typography variant="body2" className={classes.noneLabel}>
+                {`No ${downloadPkg} quality flags available`}
+              </Typography>
+            ) : (
+              <React.Fragment>
+                {organizedQualityFlags[downloadPkg].map((qf) => {
+                  const checked = selectedQualityFlags.includes(qf);
+                  const captionStyle = { display: 'block', color: Theme.palette.grey[400] };
+                  return (
+                    <FormControlLabel
+                      key={qf}
+                      style={{ alignItems: 'flex-start', marginBottom: Theme.spacing(1) }}
+                      control={(
+                        <Checkbox
+                          value={qf}
+                          color="primary"
+                          checked={checked}
+                          onChange={toggleFlag(qf)}
+                        />
+                      )}
+                      label={(
+                        <div style={{ paddingTop: Theme.spacing(0.5) }}>
+                          <Typography variant="body2">
+                            {qf}
+                            <Typography variant="caption" style={captionStyle}>
+                              {state.variables[qf].description}
+                            </Typography>
+                          </Typography>
+                        </div>
+                      )}
+                    />
+                  );
+                })}
+              </React.Fragment>
+            )}
+          </div>
+        ))}
+      </FormGroup>
+    </React.Fragment>
   );
 };
 
@@ -407,7 +432,7 @@ const OPTIONS = {
 
   QUALITY_FLAGS: {
     title: 'Quality Flags',
-    description: 'Enabling one or more quality flags will highlight regions on the chart to illiustrate the results of data quality tests.',
+    description: 'Enabling one or more quality flags will highlight regions on the chart to illustrate the results of data quality tests.',
     Component: QualityFlagsOption,
   },
 

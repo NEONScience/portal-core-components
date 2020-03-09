@@ -219,8 +219,8 @@ const TimeSeriesViewerDateRange = (props) => {
     handleSvgRedraw();
   });
 
-  // Render nothing if no selectable range is available
-  if (!displayRange.length) {
+  // Render nothing if no selectable range is available or no sites are yet selected
+  if (!displayRange.length || !selectedSites.length) {
     return (
       <div>
         <Skeleton variant="rect" width="100%" height={56} />

@@ -6,6 +6,8 @@ import { drag } from 'd3-drag';
 
 import moment from 'moment';
 
+import uniqueId from 'lodash/uniqueId';
+
 import Theme, { COLORS } from '../Theme/Theme';
 
 /**
@@ -198,6 +200,7 @@ export function AvailabilityGrid(config) {
      Setup: Inputs and Base Values
   */
   const svg = select(svgRef.current);
+  if (svg.attr('id') === null) { svg.attr('id', `availability-${uniqueId()}`); }
   const svgId = svg.attr('id');
   const svgWidth = parseFloat(svg.attr('width'));
   const svgHeight = parseFloat(svg.attr('height'));
@@ -205,6 +208,13 @@ export function AvailabilityGrid(config) {
     ? sortedSites
     : Object.keys(data.rows).sort().reverse();
   const rowCount = rowKeys.length;
+
+  /**
+     Sanity Check: svg must have discrete numeric dimensions
+  */
+  if (Number.isNaN(svgWidth) || Number.isNaN(svgHeight)) {
+    return null;
+  }
 
   /**
      Setup: Static site/domain/state data

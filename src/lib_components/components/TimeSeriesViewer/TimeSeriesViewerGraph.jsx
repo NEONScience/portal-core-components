@@ -17,7 +17,7 @@ import Theme from '../Theme/Theme';
 
 import NeonLogo from '../../images/NSF-NEON-logo.png';
 
-const COLORS = [
+const SERIES_COLORS = [
   '#4e79a7',
   '#f28e2c',
   '#e15759',
@@ -30,6 +30,21 @@ const COLORS = [
   '#bab0ab',
 ];
 
+const QUALITY_COLORS = [
+  '#8dd3c7',
+  '#ffffb3',
+  '#bebada',
+  '#fb8072',
+  '#80b1d3',
+  '#fdb462',
+  '#b3de69',
+  '#fccde5',
+  '#d9d9d9',
+  '#bc80bd',
+  '#ccebc5',
+  '#ffed6f',
+];
+
 const BASE_GRAPH_OPTIONS = {
   includeZero: true,
   labelsUTC: true,
@@ -39,7 +54,7 @@ const BASE_GRAPH_OPTIONS = {
   connectSeparatedPoints: false,
   rangeSelectorPlotFillColor: Theme.palette.primary.light,
   animatedZooms: true,
-  colors: COLORS,
+  colors: SERIES_COLORS,
   highlightSeriesOpts: {
     strokeWidth: 1.5,
   },
@@ -135,12 +150,16 @@ export default function TimeSeriesViewerGraph() {
     rollPeriod,
     logscale,
     yAxes,
+    qualityFlags,
   } = state.selection;
   const timeStep = selectedTimeStep === 'auto' ? autoTimeStep : selectedTimeStep;
 
   const data = [];
-  const monthOffsets = {};
   const labels = ['x'];
+  const qualityData = [];
+  const qualityLabels = ['start', 'end'];
+  const monthOffsets = {};
+  const timestampMap = {};
   const series = [];
   let graphOptions = BASE_GRAPH_OPTIONS;
 
@@ -153,9 +172,13 @@ export default function TimeSeriesViewerGraph() {
     let currentMonth = ticker.format('YYYY-MM');
     let previousMonth = null;
     let offset = null;
+    let endStep = null;
     while (currentMonth < endMonth) {
       data.push([ticker.toDate()]);
+      endStep = moment.utc(ticker).add(seconds, 'seconds');
+      qualityData.push([ticker.toDate(), endStep.toDate()]);
       offset = data.length - 1;
+      timestampMap[ticker.valueOf()] = offset;
       if (currentMonth !== previousMonth) {
         monthOffsets[currentMonth] = offset;
         previousMonth = currentMonth;
@@ -172,11 +195,18 @@ export default function TimeSeriesViewerGraph() {
       const { siteCode, positions } = site;
       // Loop through each site position...
       positions.forEach((position) => {
+        // Generate quality flag label and add to the list of quality labels
+        const qualityLabel = `${siteCode} - ${position}`;
+        if (!qualityLabels.includes(qualityLabel)) {
+          qualityLabels.push(qualityLabel);
+        }
+
         // For each site position loop through every month in the continuous date range (no gaps)
         continuousDateRange.forEach((month) => {
           // Use monthOffsets to determine where in the entire data set this month belongs
           if (!Object.keys(monthOffsets).includes(month)) { return; }
           const monthIdx = monthOffsets[month];
+
           // For each site/position/month loop through all selected variables...
           variables.forEach((variable) => {
             // Generate series label and add to the list of labels if this is the first we see it
@@ -192,6 +222,7 @@ export default function TimeSeriesViewerGraph() {
               });
             }
             const columnIdx = labels.indexOf(label);
+            if (!columnIdx) { return; } // 0 is x, so this should always be 1 or greater
             const { downloadPkg } = state.variables[variable];
             const positionData = state.product.sites[siteCode].positions[position].data;
             // If this site/position/month/variable has no series data then fill with nulls
@@ -212,6 +243,37 @@ export default function TimeSeriesViewerGraph() {
             // This site/position/month/variable series exists, so add it into the data set
             positionData[month][downloadPkg][timeStep].series[variable].forEach((d, datumIdx) => {
               data[datumIdx + monthIdx][columnIdx] = d;
+            });
+          });
+
+          // Also for each site/position/month loop through all selected quality flags...
+          qualityFlags.forEach((qf, qfIdx) => {
+            const columnIdx = qualityLabels.indexOf(qualityLabel);
+            if (columnIdx < 2) { return; } // 0 is start and 1 is end
+            const { downloadPkg } = state.variables[qf];
+            const positionData = state.product.sites[siteCode].positions[position].data;
+            // If this site/position/month/variable has no series data then fill with nulls
+            if (
+              !positionData[month]
+                || !positionData[month][downloadPkg]
+                || !positionData[month][downloadPkg][timeStep]
+            ) {
+              const nextMonth = getNextMonth(month);
+              const monthStepCount = Object.keys(monthOffsets).includes(nextMonth)
+                ? monthOffsets[nextMonth] - monthIdx
+                : qualityData.length - monthIdx;
+              for (let d = monthIdx; d < monthStepCount; d += 1) {
+                qualityData[d][columnIdx] = null;
+              }
+              return;
+            }
+            // This site/position/month/qf series exists, so add it into the quality data set
+            positionData[month][downloadPkg][timeStep].series[qf].forEach((d, datumIdx) => {
+              if (!qfIdx) {
+                qualityData[datumIdx + monthIdx][columnIdx] = [d];
+              } else {
+                qualityData[datumIdx + monthIdx][columnIdx].push(d);
+              }
             });
           });
         });
@@ -249,40 +311,83 @@ export default function TimeSeriesViewerGraph() {
     return seriesOption;
   };
 
-  const legendFormatter = graphData => ReactDOMServer.renderToString(
-    <React.Fragment>
-      {graphData.series.map((s, idx) => {
-        const { units } = series[idx];
-        let yUnits = units;
-        if (typeof s.y === 'number' && !Number.isNaN(s.y)) {
-          let yStr = s.y.toString();
-          if (yStr.indexOf('.') !== -1 && yStr.length - yStr.indexOf('.') > 3) {
-            yStr = s.y.toFixed(2).toString();
-          }
-          const yUnitsStr = `${yStr} ${units}`;
-          yUnits = s.isHighlighted ? <b>{yUnitsStr}</b> : yUnitsStr;
+  const legendFormatter = (graphData) => {
+    // Series
+    const seriesLegend = graphData.series.map((s, idx) => {
+      const { units } = series[idx];
+      let yUnits = units;
+      if (typeof s.y === 'number' && !Number.isNaN(s.y)) {
+        let yStr = s.y.toString();
+        if (yStr.indexOf('.') !== -1 && yStr.length - yStr.indexOf('.') > 3) {
+          yStr = s.y.toFixed(2).toString();
         }
-        const seriesStyle = s.isHighlighted ? { backgroundColor: Theme.palette.grey[100] } : {};
-        const colorStyle = { backgroundColor: s.color };
-        if (s.isHighlighted) { colorStyle.height = '6px'; }
-        return (
-          <div key={s.label} className={classes.legendSeries} style={seriesStyle}>
-            <div className={classes.legendSeriesColor} style={colorStyle} />
-            <div className={classes.legendSeriesLabel}>
-              {s.label}
-              <br />
-              {yUnits}
-            </div>
+        const yUnitsStr = `${yStr} ${units}`;
+        yUnits = s.isHighlighted ? <b>{yUnitsStr}</b> : yUnitsStr;
+      }
+      const seriesStyle = s.isHighlighted ? { backgroundColor: Theme.palette.grey[100] } : {};
+      const colorStyle = { backgroundColor: s.color };
+      if (s.isHighlighted) { colorStyle.height = '6px'; }
+      return (
+        <div key={s.label} className={classes.legendSeries} style={seriesStyle}>
+          <div className={classes.legendSeriesColor} style={colorStyle} />
+          <div className={classes.legendSeriesLabel}>
+            {s.label}
+            <br />
+            {yUnits}
           </div>
-        );
-      })}
-      {graphData.x ? (
+        </div>
+      );
+    });
+    // Quality Flags
+    let qualityFlagsLegend = null;
+    if (qualityFlags.length) {
+      const qfOffset = timestampMap[graphData.x];
+      const qfData = qualityData[qfOffset] ? qualityData[qfOffset].slice(2) : null;
+      qualityFlagsLegend = (
+        <div className={classes.legendSeries}>
+          {JSON.stringify(qfData)}
+        </div>
+      );
+    }
+    // Date
+    let dateLegend = null;
+    if (graphData.x) {
+      dateLegend = (
         <div className={classes.legendSeriesX}>
           {moment.utc(graphData.x).format('YYYY-MM-DD HH:mm:ss')}
         </div>
-      ) : null}
-    </React.Fragment>,
-  );
+      );
+    }
+    // Render
+    return ReactDOMServer.renderToString(
+      <React.Fragment>
+        {seriesLegend}
+        {qualityFlagsLegend}
+        {dateLegend}
+      </React.Fragment>,
+    );
+  };
+
+  const getQualityFlagsRenderFunction = () => {
+    if (!qualityFlags.length) { return () => {}; }
+    console.log('RENDER QUALITY FLAGS', qualityData);
+    const qualitySeriesCount = qualityLabels.length - 2;
+    return (canvas, area, g) => {
+      qualityData.forEach((row) => {
+        const startX = g.toDomXCoord(row[0]);
+        const endX = g.toDomXCoord(row[1]);
+        let { y, h } = area;
+        h /= qualitySeriesCount;
+        for (let c = 2; c < row.length; c += 1) {
+          if (row[c] && row[c].some(v => v !== 0)) {
+            canvas.fillStyle = QUALITY_COLORS[(c - 2) % 12]; // eslint-disable-line no-param-reassign, max-len
+            canvas.fillRect(startX, y, endX - startX, h);
+          }
+          y += h;
+        }
+      });
+    };
+  };
 
   if (state.status === TIME_SERIES_VIEWER_STATUS.READY) {
     buildTimeData();
@@ -308,6 +413,7 @@ export default function TimeSeriesViewerGraph() {
       labelsDiv: legendRef.current,
       legend: 'always',
       legendFormatter,
+      underlayCallback: getQualityFlagsRenderFunction(),
     };
     // Apply axis labels to graphOptions
     axes.forEach((axis) => {
