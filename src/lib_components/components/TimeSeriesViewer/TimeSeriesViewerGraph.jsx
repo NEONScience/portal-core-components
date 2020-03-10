@@ -55,6 +55,8 @@ const BASE_GRAPH_OPTIONS = {
   rangeSelectorPlotFillColor: Theme.palette.primary.light,
   animatedZooms: true,
   colors: SERIES_COLORS,
+  highlightCircleSize: 6,
+  highlightSeriesBackgroundAlpha: 1,
   highlightSeriesOpts: {
     strokeWidth: 1.5,
   },
@@ -422,24 +424,25 @@ export default function TimeSeriesViewerGraph() {
     );
   };
 
-  const getQualityFlagsRenderFunction = () => {
-    if (!qualityFlags.length) { return () => {}; }
+  const renderQualityFlags = (canvas, area, g) => {
+    if (!qualityFlags.length) { return; }
     const qualitySeriesCount = qualityLabels.length - 2;
-    return (canvas, area, g) => {
-      qualityData.forEach((row) => {
-        const startX = g.toDomXCoord(row[0]);
-        const endX = g.toDomXCoord(row[1]);
-        let { y, h } = area;
-        h /= qualitySeriesCount;
-        for (let c = 2; c < row.length; c += 1) {
-          if (row[c] && row[c].some(v => v !== 0)) {
-            canvas.fillStyle = QUALITY_COLORS[(c - 2) % 12]; // eslint-disable-line no-param-reassign, max-len
-            canvas.fillRect(startX, y, endX - startX, h);
-          }
-          y += h;
+    qualityData.forEach((row) => {
+      const startX = g.toDomXCoord(row[0]);
+      const endX = g.toDomXCoord(row[1]);
+      let { y, h } = area;
+      h /= qualitySeriesCount;
+      for (let c = 2; c < row.length; c += 1) {
+        if (row[c] && row[c].some(v => v !== 0)) {
+          canvas.fillStyle = QUALITY_COLORS[(c - 2) % 12]; // eslint-disable-line no-param-reassign, max-len
+          canvas.fillRect(startX, y, endX - startX, h);
         }
-      });
-    };
+        y += h;
+      }
+    });
+  };
+  const getUnderlayCallback = () => (canvas, area, g) => {
+    renderQualityFlags(canvas, area, g);
   };
 
   if (state.status === TIME_SERIES_VIEWER_STATUS.READY) {
@@ -466,7 +469,7 @@ export default function TimeSeriesViewerGraph() {
       labelsDiv: legendRef.current,
       legend: 'always',
       legendFormatter,
-      underlayCallback: getQualityFlagsRenderFunction(),
+      underlayCallback: getUnderlayCallback(),
     };
     // Apply axis labels to graphOptions
     axes.forEach((axis) => {
@@ -496,6 +499,8 @@ export default function TimeSeriesViewerGraph() {
     dygraphRef.current.graphDiv.style.width = null;
     dygraphRef.current.graphDiv.style.height = `${graphHeight}px`;
     dygraphRef.current.resizeHandler_();
+    dygraphRef.current.canvas_.style.cursor = 'crosshair';
+    console.log(Dygraph, dygraphRef.current);
   }, [
     selectionDigest,
     state.status,
