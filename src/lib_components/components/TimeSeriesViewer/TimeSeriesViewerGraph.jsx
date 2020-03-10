@@ -32,7 +32,7 @@ const SERIES_COLORS = [
 
 const QUALITY_COLORS = [
   '#8dd3c7',
-  '#ffffb3',
+  '#f9f986',
   '#bebada',
   '#fb8072',
   '#80b1d3',
@@ -125,6 +125,11 @@ const useStyles = makeStyles(theme => ({
     fontSize: '0.8rem',
     marginLeft: theme.spacing(1),
   },
+  legendQualityColor: {
+    width: '4px',
+    height: theme.spacing(3),
+    margin: theme.spacing(0, 1.25, 0, 1.25),
+  },
 }));
 
 // Get the next year/month string after a given year/month string
@@ -161,6 +166,7 @@ export default function TimeSeriesViewerGraph() {
   const monthOffsets = {};
   const timestampMap = {};
   const series = [];
+  const qfNullFill = qualityFlags.map(() => null);
   let graphOptions = BASE_GRAPH_OPTIONS;
 
   // Initialize data set with timestep-based times and monthOffsets for registering actual data
@@ -206,6 +212,10 @@ export default function TimeSeriesViewerGraph() {
           // Use monthOffsets to determine where in the entire data set this month belongs
           if (!Object.keys(monthOffsets).includes(month)) { return; }
           const monthIdx = monthOffsets[month];
+          const nextMonth = getNextMonth(month);
+          const monthStepCount = Object.keys(monthOffsets).includes(nextMonth)
+            ? monthOffsets[nextMonth] - monthIdx
+            : data.length - monthIdx;
 
           // For each site/position/month loop through all selected variables...
           variables.forEach((variable) => {
@@ -223,25 +233,36 @@ export default function TimeSeriesViewerGraph() {
             }
             const columnIdx = labels.indexOf(label);
             if (!columnIdx) { return; } // 0 is x, so this should always be 1 or greater
-            const { downloadPkg } = state.variables[variable];
-            const positionData = state.product.sites[siteCode].positions[position].data;
+            const { downloadPkg: pkg } = state.variables[variable];
+            const posData = state.product.sites[siteCode].positions[position].data;
             // If this site/position/month/variable has no series data then fill with nulls
-            if (
-              !positionData[month]
-                || !positionData[month][downloadPkg]
-                || !positionData[month][downloadPkg][timeStep]
-            ) {
-              const nextMonth = getNextMonth(month);
-              const monthStepCount = Object.keys(monthOffsets).includes(nextMonth)
-                ? monthOffsets[nextMonth] - monthIdx
-                : data.length - monthIdx;
-              for (let d = monthIdx; d < monthStepCount; d += 1) {
-                data[d][columnIdx] = null;
+            if (!posData[month] || !posData[month][pkg] || !posData[month][pkg][timeStep]) {
+              for (let t = monthIdx; t < monthStepCount; t += 1) {
+                data[t][columnIdx] = null;
               }
               return;
             }
             // This site/position/month/variable series exists, so add it into the data set
-            positionData[month][downloadPkg][timeStep].series[variable].forEach((d, datumIdx) => {
+            const seriesStepCount = posData[month][pkg][timeStep].series[variable].length;
+            if (seriesStepCount !== monthStepCount) {
+              // The series data length does not match the expected month length so
+              // loop through by month steps pulling in series values through timestamp matching
+              const setSeriesValueByTimestamp = (t) => {
+                const timestamp = moment.utc(qualityData[t][0]).format('YYYY-MM-DD[T]HH:mm:ss[Z]');
+                const dataIdx = posData[month][pkg][timeStep].series.startDateTime
+                  .findIndex(startDateTime => startDateTime === timestamp);
+                data[t][columnIdx] = dataIdx !== -1
+                  ? posData[month][pkg][timeStep].series[variable][dataIdx]
+                  : null;
+              };
+              for (let t = monthIdx; t < monthStepCount; t += 1) {
+                setSeriesValueByTimestamp(t);
+              }
+              return;
+            }
+            // Series and month data lengths are identical as expected so we can stream
+            // values directly in without matching timestamps
+            posData[month][pkg][timeStep].series[variable].forEach((d, datumIdx) => {
               data[datumIdx + monthIdx][columnIdx] = d;
             });
           });
@@ -250,30 +271,41 @@ export default function TimeSeriesViewerGraph() {
           qualityFlags.forEach((qf, qfIdx) => {
             const columnIdx = qualityLabels.indexOf(qualityLabel);
             if (columnIdx < 2) { return; } // 0 is start and 1 is end
-            const { downloadPkg } = state.variables[qf];
-            const positionData = state.product.sites[siteCode].positions[position].data;
+            const { downloadPkg: pkg } = state.variables[qf];
+            const posData = state.product.sites[siteCode].positions[position].data;
             // If this site/position/month/variable has no series data then fill with nulls
-            if (
-              !positionData[month]
-                || !positionData[month][downloadPkg]
-                || !positionData[month][downloadPkg][timeStep]
-            ) {
-              const nextMonth = getNextMonth(month);
-              const monthStepCount = Object.keys(monthOffsets).includes(nextMonth)
-                ? monthOffsets[nextMonth] - monthIdx
-                : qualityData.length - monthIdx;
-              for (let d = monthIdx; d < monthStepCount; d += 1) {
-                qualityData[d][columnIdx] = null;
+            if (!posData[month] || !posData[month][pkg] || !posData[month][pkg][timeStep]) {
+              for (let t = monthIdx; t < monthStepCount; t += 1) {
+                qualityData[t][columnIdx] = [...qfNullFill];
               }
               return;
             }
             // This site/position/month/qf series exists, so add it into the quality data set
-            positionData[month][downloadPkg][timeStep].series[qf].forEach((d, datumIdx) => {
-              if (!qfIdx) {
-                qualityData[datumIdx + monthIdx][columnIdx] = [d];
-              } else {
-                qualityData[datumIdx + monthIdx][columnIdx].push(d);
+            const seriesStepCount = posData[month][pkg][timeStep].series[qf].length;
+            if (seriesStepCount !== monthStepCount) {
+              // The series data length does not match the expected month length so
+              // loop through by month steps pulling in series values through timestamp matching
+              const setQualityValueByTimestamp = (t) => {
+                const timestamp = moment.utc(qualityData[t][0]).format('YYYY-MM-DD[T]HH:mm:ss[Z]');
+                const dataIdx = posData[month][pkg][timeStep].series.startDateTime
+                  .findIndex(startDateTime => startDateTime === timestamp);
+                if (dataIdx === -1) {
+                  qualityData[t][columnIdx] = [...qfNullFill];
+                  return;
+                }
+                const d = posData[month][pkg][timeStep].series[qf][dataIdx];
+                qualityData[t][columnIdx] = qfIdx ? [...qualityData[t][columnIdx], d] : [d];
+              };
+              for (let t = monthIdx; t < monthStepCount; t += 1) {
+                setQualityValueByTimestamp(t);
               }
+              return;
+            }
+            // Series and month data lengths are identical as expected so we can stream
+            // values directly in without matching timestamps
+            posData[month][pkg][timeStep].series[qf].forEach((d, datumIdx) => {
+              const t = datumIdx + monthIdx;
+              qualityData[t][columnIdx] = qfIdx ? [...qualityData[t][columnIdx], d] : [d];
             });
           });
         });
@@ -343,11 +375,33 @@ export default function TimeSeriesViewerGraph() {
     if (qualityFlags.length) {
       const qfOffset = timestampMap[graphData.x];
       const qfData = qualityData[qfOffset] ? qualityData[qfOffset].slice(2) : null;
-      qualityFlagsLegend = (
-        <div className={classes.legendSeries}>
-          {JSON.stringify(qfData)}
-        </div>
-      );
+      qualityFlagsLegend = qualityLabels.slice(2).map((qualityLabel, qlIdx) => {
+        const isHighlighted = graphData.series.some(s => (
+          s.isHighlighted && s.label.includes(qualityLabel)
+        ));
+        const qualityStyle = isHighlighted ? { backgroundColor: Theme.palette.grey[100] } : {};
+        const colorStyle = { backgroundColor: QUALITY_COLORS[qlIdx % 12] };
+        return (
+          <div key={qualityLabel} className={classes.legendSeries} style={qualityStyle}>
+            <div className={classes.legendQualityColor} style={colorStyle} />
+            <div className={classes.legendSeriesLabel}>
+              {`${qualityLabel} - Quality Flags`}
+              <br />
+              {qualityFlags.map((qf, qfIdx) => (
+                qfData === null ? (
+                  <div key={qf}>
+                    {qf}
+                  </div>
+                ) : (
+                  <div key={qf} style={isHighlighted ? { fontWeight: 600 } : {}}>
+                    {`${qfData[qlIdx][qfIdx]} - ${qf}`}
+                  </div>
+                )
+              ))}
+            </div>
+          </div>
+        );
+      });
     }
     // Date
     let dateLegend = null;
@@ -370,7 +424,6 @@ export default function TimeSeriesViewerGraph() {
 
   const getQualityFlagsRenderFunction = () => {
     if (!qualityFlags.length) { return () => {}; }
-    console.log('RENDER QUALITY FLAGS', qualityData);
     const qualitySeriesCount = qualityLabels.length - 2;
     return (canvas, area, g) => {
       qualityData.forEach((row) => {
@@ -436,18 +489,22 @@ export default function TimeSeriesViewerGraph() {
       }
     }
     // Refresh graph dimensions
-    const LEGEND_SERIES_HEIGHT = 56;
-    const LEGEND_DATE_HEIGHT = 40;
     const MIN_GRAPH_HEIGHT = 320;
     const MAX_GRAPH_HEIGHT = 560;
-    const graphHeight = Math.min(Math.max(
-      Object.keys(graphOptions.series).length * LEGEND_SERIES_HEIGHT + LEGEND_DATE_HEIGHT,
-      MIN_GRAPH_HEIGHT,
-    ), MAX_GRAPH_HEIGHT);
+    const legendHeight = legendRef.current ? legendRef.current.clientHeight + 40 : 0;
+    const graphHeight = Math.min(Math.max(legendHeight, MIN_GRAPH_HEIGHT), MAX_GRAPH_HEIGHT);
     dygraphRef.current.graphDiv.style.width = null;
     dygraphRef.current.graphDiv.style.height = `${graphHeight}px`;
     dygraphRef.current.resizeHandler_();
-  }, [selectionDigest, state.status, data, graphOptions, dygraphRef, axisCountChangedRef]);
+  }, [
+    selectionDigest,
+    state.status,
+    data,
+    graphOptions,
+    dygraphRef,
+    legendRef,
+    axisCountChangedRef,
+  ]);
 
   /**
      RENDER

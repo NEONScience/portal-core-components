@@ -73,6 +73,7 @@ const castInt = (v) => {
   return Number.isNaN(cast) ? null : cast;
 };
 const DATA_TYPE_SETTERS = {
+  dateTime: v => ((typeof v === 'string') ? v.replace(/"/g, '') : v),
   real: castFloat,
   'signed integer': castInt,
   'unsigned integer': castInt,

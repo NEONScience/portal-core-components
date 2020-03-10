@@ -165,7 +165,7 @@ function TimeSeriesViewerSummary(props) {
         saveAs(blob, fileName);
       })
       .catch((error) => {
-        console.error('Unable to export graph image', error);
+        console.error('Unable to export graph image', error); // eslint-disable-line no-console
       });
   };
   const downloadImageButton = (
@@ -303,7 +303,7 @@ function TimeSeriesViewerSummary(props) {
         {productSummaryDescription}
       </div>
       <div className={classes.summaryDiv}>
-        <Typography variant="h6">Sites</Typography>
+        <Typography variant="h6">Sites and Positions</Typography>
         {sitesSummary}
       </div>
       <div className={classes.summaryDiv}>
