@@ -177,7 +177,7 @@ function TimeSeriesViewerSummary(props) {
       disabled={graphRef.current === null}
     >
       <ImageIcon style={{ fontSize: '1.2rem', marginRight: Theme.spacing(0.5) }} />
-      Download Image
+      Download Image (png)
     </Button>
   );
 

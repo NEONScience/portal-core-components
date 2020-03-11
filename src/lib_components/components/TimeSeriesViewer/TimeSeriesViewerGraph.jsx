@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useReducer } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import Dygraph from 'dygraphs';
 import 'dygraphs/dist/dygraph.min.css';
@@ -16,6 +16,11 @@ import TimeSeriesViewerContext, {
 import Theme from '../Theme/Theme';
 
 import NeonLogo from '../../images/NSF-NEON-logo.png';
+
+// Load Dygraph plugins. These are not built as modules and require a global Dyrgaph instance. =(
+if (!window.Dygraph) { window.Dygraph = Dygraph; }
+require('./../../../../node_modules/dygraphs/src/extras/shapes.js');
+require('./../../../../node_modules/dygraphs/src/extras/crosshair.js');
 
 const SERIES_COLORS = [
   '#4e79a7',
@@ -55,14 +60,22 @@ const BASE_GRAPH_OPTIONS = {
   rangeSelectorPlotFillColor: Theme.palette.primary.light,
   animatedZooms: true,
   colors: SERIES_COLORS,
-  highlightCircleSize: 6,
+  highlightCircleSize: 3,
   highlightSeriesBackgroundAlpha: 1,
   highlightSeriesOpts: {
     strokeWidth: 1.5,
+    drawHighlightPointCallback: (g, name, ctx, cx, cy, color) => {
+      ctx.lineWidth = 2;
+      return Dygraph.Circles.SQUARE(g, name, ctx, cx, cy, color, 6);
+    },
   },
+  plugins: [
+    new Dygraph.Plugins.Crosshair({ direction: 'both' }),
+  ],
 };
 
 const boxShadow = '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)';
+const boxShadowHeavy = '0px 4px 2px -2px rgba(0,0,0,0.4), 0px 2px 2px 0px rgba(0,0,0,0.28), 0px 2px 6px 0px rgba(0,0,0,0.24)';
 const useStyles = makeStyles(theme => ({
   graphOuterContainer: {
     padding: theme.spacing(2),
@@ -105,7 +118,11 @@ const useStyles = makeStyles(theme => ({
     borderRadius: theme.spacing(1),
     marginBottom: theme.spacing(1),
     backgroundColor: theme.palette.grey[50],
+    cursor: 'pointer',
     boxShadow,
+    '&:hover': {
+      boxShadow: boxShadowHeavy,
+    },
   },
   legendSeriesX: {
     whiteSpace: 'nowrap',
@@ -120,17 +137,20 @@ const useStyles = makeStyles(theme => ({
     width: theme.spacing(3),
     height: '4px',
     borderRadius: '2px',
+    pointerEvents: 'none',
   },
   legendSeriesLabel: {
     whiteSpace: 'nowrap',
     lineHeight: '1rem',
     fontSize: '0.8rem',
     marginLeft: theme.spacing(1),
+    pointerEvents: 'none',
   },
   legendQualityColor: {
     width: '4px',
     height: theme.spacing(3),
     margin: theme.spacing(0, 1.25, 0, 1.25),
+    pointerEvents: 'none',
   },
 }));
 
@@ -138,9 +158,40 @@ const useStyles = makeStyles(theme => ({
 // Example: getNextMonth('2012-12') => '2013-01'
 const getNextMonth = month => moment.utc(`${month}-15T00:00:00Z`).add(1, 'month').format('YYYY-MM');
 
+const INITIAL_GRAPH_STATE = {
+  hiddenSeries: new Set(),
+  hiddenQualityFlags: new Set(),
+};
+const graphReducer = (state, action) => {
+  const newState = { ...state };
+  let key = null;
+  switch (action.type) {
+    case 'toggleLegendVisibility':
+      if (!['series', 'qualityFlag'].includes(action.kind)) { return state; }
+      key = action.kind === 'series' ? 'hiddenSeries' : 'hiddenQualityFlags';
+      if (newState[key].has(action.label)) {
+        newState[key].delete(action.label);
+      } else {
+        newState[key].add(action.label);
+      }
+      return newState;
+    case 'purgeRemovedHiddenLabels':
+      Array.from(state.hiddenSeries).forEach((label) => {
+        if (!action.seriesLabels.includes(label)) { newState.hiddenSeries.delete(label); }
+      });
+      Array.from(state.hiddenQualityFlags).forEach((label) => {
+        if (!action.qualityLabels.includes(label)) { newState.hiddenQualityFlags.delete(label); }
+      });
+      return newState;
+    default:
+      return state;
+  }
+};
+
 export default function TimeSeriesViewerGraph() {
   const classes = useStyles(Theme);
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
+  const [graphState, graphDispatch] = useReducer(graphReducer, INITIAL_GRAPH_STATE);
   const dygraphRef = useRef(null);
   const dygraphDomRef = useRef(null);
   const legendRef = useRef(null);
@@ -205,7 +256,7 @@ export default function TimeSeriesViewerGraph() {
       positions.forEach((position) => {
         // Generate quality flag label and add to the list of quality labels
         const qualityLabel = `${siteCode} - ${position}`;
-        if (!qualityLabels.includes(qualityLabel)) {
+        if (qualityFlags.length && !qualityLabels.includes(qualityLabel)) {
           qualityLabels.push(qualityLabel);
         }
 
@@ -313,6 +364,18 @@ export default function TimeSeriesViewerGraph() {
         });
       });
     });
+    // With series and qualityLabels built out purge any hidden labels that are no longer present
+    const seriesLabels = series.map(s => s.label);
+    if (
+      Array.from(graphState.hiddenQualityFlags).some(label => !qualityLabels.includes(label))
+        || Array.from(graphState.hiddenSeries).some(label => !seriesLabels.includes(label))
+    ) {
+      graphDispatch({
+        type: 'purgeRemovedHiddenLabels',
+        qualityLabels: qualityLabels.slice(2),
+        seriesLabels,
+      });
+    }
   };
 
   // Build the axes option
@@ -348,6 +411,7 @@ export default function TimeSeriesViewerGraph() {
   const legendFormatter = (graphData) => {
     // Series
     const seriesLegend = graphData.series.map((s, idx) => {
+      const isHidden = graphState.hiddenSeries.has(s.label);
       const { units } = series[idx];
       let yUnits = units;
       if (typeof s.y === 'number' && !Number.isNaN(s.y)) {
@@ -359,10 +423,17 @@ export default function TimeSeriesViewerGraph() {
         yUnits = s.isHighlighted ? <b>{yUnitsStr}</b> : yUnitsStr;
       }
       const seriesStyle = s.isHighlighted ? { backgroundColor: Theme.palette.grey[100] } : {};
-      const colorStyle = { backgroundColor: s.color };
+      if (isHidden) { seriesStyle.opacity = 0.5; }
+      const colorStyle = { backgroundColor: s.color || Theme.palette.grey[200] };
       if (s.isHighlighted) { colorStyle.height = '6px'; }
       return (
-        <div key={s.label} className={classes.legendSeries} style={seriesStyle}>
+        <div
+          key={s.label}
+          className={classes.legendSeries}
+          style={seriesStyle}
+          data-label={s.label}
+          data-kind="series"
+        >
           <div className={classes.legendSeriesColor} style={colorStyle} />
           <div className={classes.legendSeriesLabel}>
             {s.label}
@@ -378,13 +449,21 @@ export default function TimeSeriesViewerGraph() {
       const qfOffset = timestampMap[graphData.x];
       const qfData = qualityData[qfOffset] ? qualityData[qfOffset].slice(2) : null;
       qualityFlagsLegend = qualityLabels.slice(2).map((qualityLabel, qlIdx) => {
+        const isHidden = graphState.hiddenQualityFlags.has(qualityLabel);
         const isHighlighted = graphData.series.some(s => (
           s.isHighlighted && s.label.includes(qualityLabel)
         ));
         const qualityStyle = isHighlighted ? { backgroundColor: Theme.palette.grey[100] } : {};
+        if (isHidden) { qualityStyle.opacity = 0.5; }
         const colorStyle = { backgroundColor: QUALITY_COLORS[qlIdx % 12] };
         return (
-          <div key={qualityLabel} className={classes.legendSeries} style={qualityStyle}>
+          <div
+            key={qualityLabel}
+            className={classes.legendSeries}
+            style={qualityStyle}
+            data-label={qualityLabel}
+            data-kind="qualityFlag"
+          >
             <div className={classes.legendQualityColor} style={colorStyle} />
             <div className={classes.legendSeriesLabel}>
               {`${qualityLabel} - Quality Flags`}
@@ -425,19 +504,21 @@ export default function TimeSeriesViewerGraph() {
   };
 
   const renderQualityFlags = (canvas, area, g) => {
-    if (!qualityFlags.length) { return; }
-    const qualitySeriesCount = qualityLabels.length - 2;
+    const qualitySeriesCount = qualityLabels.length - 2 - graphState.hiddenQualityFlags.size;
+    if (qualitySeriesCount < 1) { return; }
     qualityData.forEach((row) => {
       const startX = g.toDomXCoord(row[0]);
       const endX = g.toDomXCoord(row[1]);
       let { y, h } = area;
       h /= qualitySeriesCount;
       for (let c = 2; c < row.length; c += 1) {
-        if (row[c] && row[c].some(v => v !== 0)) {
-          canvas.fillStyle = QUALITY_COLORS[(c - 2) % 12]; // eslint-disable-line no-param-reassign, max-len
-          canvas.fillRect(startX, y, endX - startX, h);
+        if (!graphState.hiddenQualityFlags.has(qualityLabels[c])) {
+          if (row[c] && row[c].some(v => v !== 0)) {
+            canvas.fillStyle = QUALITY_COLORS[(c - 2) % 12]; // eslint-disable-line no-param-reassign, max-len
+            canvas.fillRect(startX, y, endX - startX, h);
+          }
+          y += h;
         }
-        y += h;
       }
     });
   };
@@ -470,6 +551,7 @@ export default function TimeSeriesViewerGraph() {
       legend: 'always',
       legendFormatter,
       underlayCallback: getUnderlayCallback(),
+      visibility: series.map(s => !graphState.hiddenSeries.has(s.label)),
     };
     // Apply axis labels to graphOptions
     axes.forEach((axis) => {
@@ -477,6 +559,7 @@ export default function TimeSeriesViewerGraph() {
     });
   }
 
+  // Effect to apply latest options/data to the graph and force a resize
   useEffect(() => {
     if (state.status !== TIME_SERIES_VIEWER_STATUS.READY) { return; }
     if (dygraphRef.current === null) {
@@ -500,7 +583,6 @@ export default function TimeSeriesViewerGraph() {
     dygraphRef.current.graphDiv.style.height = `${graphHeight}px`;
     dygraphRef.current.resizeHandler_();
     dygraphRef.current.canvas_.style.cursor = 'crosshair';
-    console.log(Dygraph, dygraphRef.current);
   }, [
     selectionDigest,
     state.status,
@@ -510,6 +592,21 @@ export default function TimeSeriesViewerGraph() {
     legendRef,
     axisCountChangedRef,
   ]);
+
+  // Effect to register a click handler to the legend for sereis visibility toggling
+  useEffect(() => {
+    if (!legendRef.current) { return () => {}; }
+    const legendClickHandler = ({ target }) => {
+      const container = legendRef.current;
+      if (!container.contains(target)) { return; }
+      const label = target.getAttribute('data-label');
+      const kind = target.getAttribute('data-kind');
+      if (!label || !kind) { return; }
+      graphDispatch({ type: 'toggleLegendVisibility', label, kind });
+    };
+    document.addEventListener('click', legendClickHandler);
+    return () => { document.removeEventListener('click', legendClickHandler); };
+  }, [legendRef, graphDispatch]);
 
   /**
      RENDER
