@@ -86,7 +86,7 @@ declare namespace Provider {
         export { productData_1 as productData };
     }
 }
-declare function useTimeSeriesViewerState(): {
+declare function useTimeSeriesViewerState(): any[] | {
     status: string;
     fetchProduct: {
         status: string;
@@ -128,49 +128,7 @@ declare function useTimeSeriesViewerState(): {
     };
     availableQualityFlags: Set<any>;
     availableTimeSteps: Set<string>;
-} | ((() => void) | {
-    status: string;
-    fetchProduct: {
-        status: string;
-        error: null;
-    };
-    metaFetches: {};
-    dataFetches: {};
-    dataFetchProgress: number;
-    variables: {};
-    product: {
-        productCode: null;
-        productName: null;
-        productDescription: null;
-        productSensor: null;
-        dateRange: null[];
-        continuousDateRange: never[];
-        sites: {};
-    };
-    selection: {
-        dateRange: null[];
-        continuousDateRange: never[];
-        variables: never[];
-        sites: never[];
-        timeStep: string;
-        autoTimeStep: null;
-        qualityFlags: never[];
-        rollPeriod: number;
-        logscale: boolean;
-        yAxes: {
-            y1: {
-                units: null;
-                logscale: boolean;
-            };
-            y2: {
-                units: null;
-                logscale: boolean;
-            };
-        };
-    };
-    availableQualityFlags: Set<any>;
-    availableTimeSteps: Set<string>;
-})[];
+};
 declare namespace TimeSeriesViewerPropTypes {
     export function productCode_2(props: any, propName: any, componentName: any): Error | null;
     export { productCode_2 as productCode };

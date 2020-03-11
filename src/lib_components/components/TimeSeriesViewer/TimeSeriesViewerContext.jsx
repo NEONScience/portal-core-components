@@ -128,10 +128,7 @@ const Context = createContext(DEFAULT_STATE);
 const useTimeSeriesViewerState = () => {
   const hookResponse = useContext(Context);
   if (hookResponse.length !== 2) {
-    return [
-      { ...DEFAULT_STATE },
-      () => {},
-    ];
+    return [cloneDeep(DEFAULT_STATE), () => {}];
   }
   return hookResponse;
 };
@@ -458,7 +455,7 @@ const applyDefaultsToSelection = (state) => {
    Reducer
 */
 const reducer = (state, action) => {
-  const newState = { ...state };
+  let newState = { ...state };
   const calcSelection = () => {
     newState.selection = applyDefaultsToSelection(newState);
   };
@@ -503,6 +500,11 @@ const reducer = (state, action) => {
   let parsedContent = null;
   let selectedSiteIdx = null;
   switch (action.type) {
+    // Reinitialize
+    case 'reinitialize':
+      newState = cloneDeep(DEFAULT_STATE);
+      newState.product.productCode = action.productCode;
+      return newState;
     // Fetch Product Actions
     case 'initFetchProductCalled':
       newState.fetchProduct.status = FETCH_STATUS.FETCHING;
@@ -785,6 +787,15 @@ const Provider = (props) => {
   }
   initialState.selection = applyDefaultsToSelection(initialState);
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  /**
+     Effect - Reinitialize state if the product code prop changed
+  */
+  useEffect(() => {
+    if (productCodeProp !== state.product.productCode) {
+      dispatch({ type: 'reinitialize', productCode: productCodeProp });
+    }
+  }, [productCodeProp, state.product.productCode, dispatch]);
 
   /**
      Effect - Fetch product data if only a product code was provided in props

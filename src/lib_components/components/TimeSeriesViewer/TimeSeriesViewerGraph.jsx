@@ -6,6 +6,8 @@ import 'dygraphs/dist/dygraph.min.css';
 
 import moment from 'moment';
 
+import cloneDeep from 'lodash/cloneDeep';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
@@ -191,7 +193,7 @@ const graphReducer = (state, action) => {
 export default function TimeSeriesViewerGraph() {
   const classes = useStyles(Theme);
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
-  const [graphState, graphDispatch] = useReducer(graphReducer, INITIAL_GRAPH_STATE);
+  const [graphState, graphDispatch] = useReducer(graphReducer, cloneDeep(INITIAL_GRAPH_STATE));
   const dygraphRef = useRef(null);
   const dygraphDomRef = useRef(null);
   const legendRef = useRef(null);
@@ -289,7 +291,12 @@ export default function TimeSeriesViewerGraph() {
             const { downloadPkg: pkg } = state.variables[variable];
             const posData = state.product.sites[siteCode].positions[position].data;
             // If this site/position/month/variable has no series data then fill with nulls
-            if (!posData[month] || !posData[month][pkg] || !posData[month][pkg][timeStep]) {
+            if (
+              !posData[month]
+                || !posData[month][pkg]
+                || !posData[month][pkg][timeStep]
+                || !posData[month][pkg][timeStep].series[variable]
+            ) {
               for (let t = monthIdx; t < monthStepCount; t += 1) {
                 data[t][columnIdx] = null;
               }
@@ -327,7 +334,12 @@ export default function TimeSeriesViewerGraph() {
             const { downloadPkg: pkg } = state.variables[qf];
             const posData = state.product.sites[siteCode].positions[position].data;
             // If this site/position/month/variable has no series data then fill with nulls
-            if (!posData[month] || !posData[month][pkg] || !posData[month][pkg][timeStep]) {
+            if (
+              !posData[month]
+                || !posData[month][pkg]
+                || !posData[month][pkg][timeStep]
+                || !posData[month][pkg][timeStep].series[qf]
+            ) {
               for (let t = monthIdx; t < monthStepCount; t += 1) {
                 qualityData[t][columnIdx] = [...qfNullFill];
               }
@@ -469,7 +481,7 @@ export default function TimeSeriesViewerGraph() {
               {`${qualityLabel} - Quality Flags`}
               <br />
               {qualityFlags.map((qf, qfIdx) => (
-                qfData === null ? (
+                qfData === null || !qfData[qlIdx] ? (
                   <div key={qf}>
                     {qf}
                   </div>
