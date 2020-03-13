@@ -54,7 +54,6 @@ const allProductsReducer = (state, action) => {
         return state;
       }
       newState.selectedProduct = action.productCode;
-      console.log(action, newState);
       return newState;
     default:
       return state;
@@ -145,7 +144,10 @@ export default function StyleGuide() {
     <React.Fragment>
 
       <DocBlock>
-        ...
+        The Time Series Viewer is a component designed to compose arbitrary NEON data into an
+        interactive line chart visualization. It comes fully contained with all necessary internals
+        for querying NEON APIs for product, position, and variable information as well as pulling
+        data files from their globally accessible locations.
       </DocBlock>
       <CodeBlock>
         {`
@@ -155,35 +157,30 @@ import TimeSeriesViewer from 'portal-core-components/lib/components/TimeSeriesVi
 
       <Typography variant="h5" component="h3" gutterBottom>Usage</Typography>
 
-      <DocBlock>
-        ...
-      </DocBlock>
-
-
-      <ExampleBlock>
-        <TimeSeriesViewer productCode="DP1.00001.001" />
-      </ExampleBlock>
       <CodeBlock>
         {`
 <TimeSeriesViewer productCode="DP1.00001.001" />
         `}
       </CodeBlock>
-
+      <DocBlock>
+        Initializing a TimeSeriesViewer requires only a valid <tt>productCode</tt> prop. The example
+        below wraps a TimeSeriesViewer instance with a data product selector to demonstrate how
+        different products perform.
+      </DocBlock>
       <ExampleBlock>
         <AllProductsTimeSeries />
       </ExampleBlock>
-      <CodeBlock>
-        {`
-<TimeSeriesViewer />
-        `}
-      </CodeBlock>
 
+      <Divider className={classes.divider} />
+      {/*
+      TODO: Example showing preloading selection
       <Divider className={classes.divider} />
       <Typography variant="h6" component="h4" gutterBottom>...</Typography>
 
       <DocBlock>
         ...
       </DocBlock>
+      */}
 
     </React.Fragment>
   );

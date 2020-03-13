@@ -32,18 +32,32 @@ export namespace TabComponentPropTypes {
 export const TIME_STEPS: {
     '1min': {
         key: string;
+        tmi: string;
         seconds: number;
     };
     '2min': {
         key: string;
+        tmi: string;
         seconds: number;
     };
     '5min': {
         key: string;
+        tmi: string;
+        seconds: number;
+    };
+    '15min': {
+        key: string;
+        tmi: string;
         seconds: number;
     };
     '30min': {
         key: string;
+        tmi: string;
+        seconds: number;
+    };
+    '60min': {
+        key: string;
+        tmi: string;
         seconds: number;
     };
 };
@@ -88,6 +102,7 @@ declare namespace Provider {
 }
 declare function useTimeSeriesViewerState(): any[] | {
     status: string;
+    displayError: null;
     fetchProduct: {
         status: string;
         error: null;
@@ -109,6 +124,7 @@ declare function useTimeSeriesViewerState(): any[] | {
         dateRange: null[];
         continuousDateRange: never[];
         variables: never[];
+        dateTimeVariable: null;
         sites: never[];
         timeStep: string;
         autoTimeStep: null;

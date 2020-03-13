@@ -54,13 +54,32 @@ export const TIME_SERIES_VIEWER_STATUS_TITLES = {
   READY: null,
 };
 
-// Array offsets for use when splitting a data file URL
+// Array offsets and validators for use when splitting a data file URL
 const DATA_FILE_PARTS = {
-  POSITION_H: 6,
-  POSITION_V: 7,
-  TIME_STEP: 8,
-  MONTH: 10,
-  PACKAGE_TYPE: 11,
+  POSITION_H: {
+    offset: 6,
+    isValid: p => /^[\d]{3}$/.test(p),
+  },
+  POSITION_V: {
+    offset: 7,
+    isValid: p => /^[\d]{3}$/.test(p),
+  },
+  TIME_STEP: {
+    offset: 8,
+    isValid: p => /^[\d]{3}$/.test(p),
+  },
+  MONTH: {
+    offset: 10,
+    isValid: p => /^[\d]{4}-[\d]{2}$/.test(p),
+  },
+  PACKAGE_TYPE: {
+    offset: 11,
+    isValid: p => ['basic', 'expanded'].includes(p),
+  },
+  EXTENSION: {
+    offset: 13,
+    isValid: p => p === 'csv',
+  },
 };
 
 // Functions to convert a value to the proper JS data type given a NEON variable dataType
@@ -92,6 +111,7 @@ export const TabComponentPropTypes = {
 */
 const DEFAULT_STATE = {
   status: TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT,
+  displayError: null,
   fetchProduct: { status: FETCH_STATUS.AWAITING_CALL, error: null },
   metaFetches: {},
   dataFetches: {},
@@ -110,6 +130,7 @@ const DEFAULT_STATE = {
     dateRange: [null, null],
     continuousDateRange: [],
     variables: [],
+    dateTimeVariable: null,
     sites: [],
     timeStep: 'auto', // The visible selected timeStep, as per what's available, or 'auto'
     autoTimeStep: null, // The functional timeStep if the selection is 'auto'
@@ -133,6 +154,35 @@ const useTimeSeriesViewerState = () => {
   return hookResponse;
 };
 
+
+/**
+   Time Step Definitions and Functions
+*/
+export const TIME_STEPS = {
+  '1min': { key: '1min', tmi: '001', seconds: 60 },
+  '2min': { key: '2min', tmi: '002', seconds: 120 },
+  '5min': { key: '5min', tmi: '005', seconds: 300 },
+  '15min': { key: '15min', tmi: '015', seconds: 900 },
+  '30min': { key: '30min', tmi: '030', seconds: 1800 },
+  '60min': { key: '1hr', tmi: '060', seconds: 1800 },
+};
+const getTimeStep = input => (
+  Object.keys(TIME_STEPS).find(key => TIME_STEPS[key].tmi === input) || null
+);
+export const summarizeTimeSteps = (steps, timeStep = null, pluralize = true) => {
+  if (steps === 1) { return 'none'; }
+  const timeStepSeconds = timeStep && TIME_STEPS[timeStep] ? TIME_STEPS[timeStep].seconds : 1800;
+  const seconds = steps * timeStepSeconds;
+  const breaks = [3600, 86400, 2592000, 31536000];
+  const intervals = ['hour', 'day', 'month', 'year'];
+  const breakIdx = breaks.reduce((acc, cur, idx) => ((seconds > cur) ? idx : acc), 0);
+  let value = (seconds / breaks[breakIdx]).toFixed(1);
+  if (value.slice(value.length - 1) === '0') { value = value.slice(0, value.length - 2); }
+  let plural = '';
+  if (pluralize) { plural = value === '1' ? '' : 's'; }
+  return `${value} ${intervals[breakIdx]}${plural}`;
+};
+
 /**
    CSV Fetch/Parse Functions
 */
@@ -148,44 +198,6 @@ const parseCSV = csv => parse(csv, {
   skipEmptyLines: 'greedy',
   // dynamicTyping: true,
 });
-
-/**
-   Time Step Definitions and Functions
-*/
-export const TIME_STEPS = {
-  '1min': { key: '1min', seconds: 60 },
-  '2min': { key: '2min', seconds: 120 },
-  '5min': { key: '5min', seconds: 300 },
-  '30min': { key: '30min', seconds: 1800 },
-};
-const getTimeStep = (input) => {
-  let cleaned = input;
-  if (input.includes('_')) {
-    cleaned = input.split('_').slice(1).join('');
-  }
-  if (TIME_STEPS[cleaned]) { return cleaned; }
-  const mapping = {
-    '001': '1min',
-    '002': '2min',
-    '005': '5min',
-    '030': '30min',
-  };
-  if (mapping[cleaned]) { return mapping[cleaned]; }
-  return input;
-};
-export const summarizeTimeSteps = (steps, timeStep = null, pluralize = true) => {
-  if (steps === 1) { return 'none'; }
-  const timeStepSeconds = timeStep && TIME_STEPS[timeStep] ? TIME_STEPS[timeStep].seconds : 1800;
-  const seconds = steps * timeStepSeconds;
-  const breaks = [3600, 86400, 2592000, 31536000];
-  const intervals = ['hour', 'day', 'month', 'year'];
-  const breakIdx = breaks.reduce((acc, cur, idx) => ((seconds > cur) ? idx : acc), 0);
-  let value = (seconds / breaks[breakIdx]).toFixed(1);
-  if (value.slice(value.length - 1) === '0') { value = value.slice(0, value.length - 2); }
-  let plural = '';
-  if (pluralize) { plural = value === '1' ? '' : 's'; }
-  return `${value} ${intervals[breakIdx]}${plural}`;
-};
 
 /**
  * Generate a continuous list of "YYYY-MM" strings given an input date range
@@ -266,14 +278,25 @@ const parseSiteMonthData = (site, files) => {
   const availableTimeSteps = new Set();
   files.forEach((file) => {
     const { name, url } = file;
+    // Must be a CSV file
     if (!/\.csv$/.test(name)) { return; }
+    // Must not be a variables or positions file
     if (name.includes('variables')) { newSite.fetches.variables.url = url; return; }
     if (name.includes('sensor_positions')) { newSite.fetches.positions.url = url; return; }
+    // Split file name by (.); all DATA_FILE_PARTS validators must point to a valid part
     const parts = name.split('.');
-    const position = `${parts[DATA_FILE_PARTS.POSITION_H]}.${parts[DATA_FILE_PARTS.POSITION_V]}`;
-    const month = parts[DATA_FILE_PARTS.MONTH];
-    const packageType = parts[DATA_FILE_PARTS.PACKAGE_TYPE];
-    const timeStep = getTimeStep(parts[DATA_FILE_PARTS.TIME_STEP]);
+    if (Object.keys(DATA_FILE_PARTS).some((part) => {
+      const { offset, isValid } = DATA_FILE_PARTS[part];
+      return !isValid(parts[offset]);
+    })) { return; }
+    // Extract parts
+    const position = `${parts[DATA_FILE_PARTS.POSITION_H.offset]}.${parts[DATA_FILE_PARTS.POSITION_V.offset]}`;
+    const month = parts[DATA_FILE_PARTS.MONTH.offset];
+    const packageType = parts[DATA_FILE_PARTS.PACKAGE_TYPE.offset];
+    const timeStep = getTimeStep(parts[DATA_FILE_PARTS.TIME_STEP.offset]);
+    // Timestep must be valid
+    if (timeStep === null) { return; }
+    // All is good, add the timestep and add file information to the site object
     availableTimeSteps.add(timeStep);
     if (!newSite.positions[position]) { newSite.positions[position] = { data: {} }; }
     if (!newSite.positions[position].data[month]) { newSite.positions[position].data[month] = {}; }
@@ -335,6 +358,7 @@ const parseSiteVariables = (previousVariables, siteCode, csv) => {
         sites: new Set(),
         isSelectable,
         canBeDefault,
+        isDateTime: variable.dataType === 'dateTime',
       };
     }
     newStateVariables[fieldName].timeSteps.add(timeStep);
@@ -411,19 +435,19 @@ const applyDefaultsToSelection = (state) => {
   const { product, variables } = state;
   const selection = state.selection || { dateRange: [null, null], variables: [], sites: [] };
   if (!Object.keys(product.sites).length) { return selection; }
-  // Ensure the selection has at least one site (default to first in list)
+  // Sites - Ensure the selection has at least one site (default to first in list)
   if (!selection.sites.length) {
     const siteCodes = Object.keys(product.sites);
     siteCodes.sort();
     selection.sites.push({ siteCode: siteCodes[0], positions: [] });
   }
-  // Ensure the selection has a date range (default to latest month)
+  // Date Range - Ensure the selection has a date range (default to latest month)
   if (selection.dateRange[0] === null || selection.dateRange[1] === null) {
     const { availableMonths } = product.sites[selection.sites[0].siteCode];
     const initialMonth = availableMonths[availableMonths.length - 1];
     selection.dateRange = [initialMonth, initialMonth];
   }
-  // Ensure every selected site has at least one selected position
+  // Positions - Ensure every selected site has at least one selected position
   selection.sites.forEach((site, idx) => {
     if (site.positions.length > 0) { return; }
     const { siteCode } = site;
@@ -432,12 +456,22 @@ const applyDefaultsToSelection = (state) => {
     positions.sort();
     selection.sites[idx].positions.push(positions[0]);
   });
-  // Ensure the selection has at least one variable
-  if (!selection.variables.length && Object.keys(variables).length) {
-    const defaultVar = Object.keys(variables).find(variable => variables[variable].canBeDefault);
-    if (defaultVar) {
-      selection.variables.push(defaultVar);
-      selection.yAxes.y1.units = variables[defaultVar].units;
+  // Variables
+  if (Object.keys(variables).length) {
+    // Ensure the selection has at least one variable
+    if (!selection.variables.length) {
+      const defaultVar = Object.keys(variables).find(v => variables[v].canBeDefault);
+      if (defaultVar) {
+        selection.variables.push(defaultVar);
+        selection.yAxes.y1.units = variables[defaultVar].units;
+      }
+    }
+    // Ensure the selection has at least one dateTime variable
+    if (!selection.dateTimeVariable) {
+      const defaultDateTimeVar = Object.keys(variables).find(v => variables[v].isDateTime);
+      if (defaultDateTimeVar) {
+        selection.dateTimeVariable = defaultDateTimeVar;
+      }
     }
   }
   // Generate a new continuous date range from the dateRange (which only contains bounds)
@@ -460,6 +494,7 @@ const reducer = (state, action) => {
     newState.selection = applyDefaultsToSelection(newState);
   };
   const calcStatus = () => {
+    if (newState.status === TIME_SERIES_VIEWER_STATUS.ERROR) { return; }
     if (Object.keys(newState.metaFetches).length) {
       newState.status = TIME_SERIES_VIEWER_STATUS.LOADING_META;
     } else if (Object.keys(newState.dataFetches).length) {
@@ -467,6 +502,11 @@ const reducer = (state, action) => {
     } else {
       newState.status = TIME_SERIES_VIEWER_STATUS.READY_FOR_DATA;
     }
+  };
+  const fail = (error) => {
+    newState.status = TIME_SERIES_VIEWER_STATUS.ERROR;
+    newState.displayError = error;
+    return newState;
   };
   const limitVariablesToTwoUnits = (variables) => {
     const selectedUnits = variables.reduce((units, variable) => {
@@ -513,6 +553,7 @@ const reducer = (state, action) => {
       newState.fetchProduct.status = FETCH_STATUS.ERROR;
       newState.fetchProduct.error = action.error;
       newState.status = TIME_SERIES_VIEWER_STATUS.ERROR;
+      newState.displayError = `Unable to load product: ${action.error}`;
       return newState;
     case 'initFetchProductSucceeded':
       newState.fetchProduct.status = FETCH_STATUS.SUCCESS;
@@ -544,7 +585,10 @@ const reducer = (state, action) => {
         ...state.availableTimeSteps,
         ...parsedContent.availableTimeSteps,
       ]);
-      if (state.selection.autoTimeStep === null && newState.availableTimeSteps.size > 1) {
+      if (newState.availableTimeSteps.size === 1) { // Need more than just 'auto'
+        return fail('This data product is not compatible with the Time Series Viewer (no valid time step found)');
+      }
+      if (state.selection.autoTimeStep === null) {
         newState.selection.autoTimeStep = Array.from(newState.availableTimeSteps)
           .reduce((acc, cur) => {
             if (cur === 'auto') { return acc; }
@@ -564,7 +608,7 @@ const reducer = (state, action) => {
     case 'fetchSiteVariables':
       newState.metaFetches[`fetchSiteVariables.${action.siteCode}`] = true;
       newState.product.sites[action.siteCode].fetches.variables.status = FETCH_STATUS.FETCHING;
-      newState.status = TIME_SERIES_VIEWER_STATUS.LOADING_META;
+      calcStatus();
       return newState;
     case 'fetchSiteVariablesFailed':
       delete newState.metaFetches[`fetchSiteVariables.${action.siteCode}`];
@@ -588,6 +632,10 @@ const reducer = (state, action) => {
         ...state.availableQualityFlags,
         ...Object.keys(newState.variables).filter(v => /QF$/.test(v)),
       ]);
+      // A valid dateTime variable must be present otherwise we have no x-axis
+      if (Object.keys(newState.variables).every(v => !newState.variables[v].isDateTime)) {
+        return fail('This data product is not compatible with the Time Series Viewer (no dateTime data found)');
+      }
       calcSelection();
       calcStatus();
       return newState;
@@ -596,7 +644,7 @@ const reducer = (state, action) => {
     case 'fetchSitePositions':
       newState.metaFetches[`fetchSitePositions.${action.siteCode}`] = true;
       newState.product.sites[action.siteCode].fetches.positions.status = FETCH_STATUS.FETCHING;
-      newState.status = TIME_SERIES_VIEWER_STATUS.LOADING_META;
+      calcStatus();
       return newState;
     case 'fetchSitePositionsFailed':
       delete newState.metaFetches[`fetchSitePositions.${action.siteCode}`];

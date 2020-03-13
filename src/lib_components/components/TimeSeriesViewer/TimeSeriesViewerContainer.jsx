@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
@@ -17,6 +17,7 @@ import Typography from '@material-ui/core/Typography';
 
 import Skeleton from '@material-ui/lab/Skeleton';
 
+import ErrorIcon from '@material-ui/icons/Error';
 import ImageIcon from '@material-ui/icons/Image';
 import SummaryIcon from '@material-ui/icons/Toc';
 import SitesIcon from '@material-ui/icons/Place';
@@ -175,6 +176,7 @@ function TimeSeriesViewerSummary(props) {
       variant="outlined"
       onClick={exportGraphImage}
       disabled={graphRef.current === null}
+      style={{ whiteSpace: 'nowrap' }}
     >
       <ImageIcon style={{ fontSize: '1.2rem', marginRight: Theme.spacing(0.5) }} />
       Download Image (png)
@@ -374,6 +376,16 @@ export default function TimeSeriesViewerContainer() {
 
   const initialTab = 'SUMMARY';
   const [selectedTab, setSelectedTab] = useState(initialTab);
+  const [loadedProductCode, setLoadedProductCode] = useState(state.product.productCode);
+
+  // Effect to handle a reinitialize event from the context. We track the loaded product code
+  // separate from the context product code so when the latter changes we know to reset the
+  // tab to SUMMARY and completely unmount and remount the TimeSeriesGraph.
+  useEffect(() => {
+    if (state.product.productCode === loadedProductCode) { return; }
+    setLoadedProductCode(state.product.productCode);
+    setSelectedTab('SUMMARY');
+  }, [state.product.productCode, loadedProductCode, setSelectedTab]);
 
   // Slider position is not controlled in state because doing so kills mouse drag performance.
   // Use a ref to deterministically set slider position for all slider-based features.
@@ -439,8 +451,16 @@ export default function TimeSeriesViewerContainer() {
   const renderGraphOverlay = () => {
     const isError = state.status === TIME_SERIES_VIEWER_STATUS.ERROR;
     const isLoading = !isError && state.status !== TIME_SERIES_VIEWER_STATUS.READY;
-    if (isError) { return null; }
-    // const isLoadingMeta = isLoading && state.status !== TIME_SERIES_VIEWER_STATUS.LOADING_META;
+    if (isError) {
+      return (
+        <div className={classes.graphOverlay}>
+          <Typography variant="h6" style={{ marginBottom: Theme.spacing(4) }}>
+            {state.displayError || 'An unknown error occurred; unable to visualize data product'}
+          </Typography>
+          <ErrorIcon fontSize="large" color="error" />
+        </div>
+      );
+    }
     const isLoadingData = isLoading && state.status === TIME_SERIES_VIEWER_STATUS.LOADING_DATA;
     if (isLoading) {
       let title = TIME_SERIES_VIEWER_STATUS_TITLES[state.status] || 'Loading…';
@@ -467,7 +487,9 @@ export default function TimeSeriesViewerContainer() {
     <div style={{ width: '100%' }}>
       <Paper className={classes.graphContainer}>
         <div ref={graphRef} style={{ backgroundColor: '#ffffff' }}>
-          <TimeSeriesViewerGraph />
+          {state.product.productCode === loadedProductCode ? (
+            <TimeSeriesViewerGraph />
+          ) : null}
         </div>
         {renderGraphOverlay()}
       </Paper>

@@ -1,5 +1,11 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useRef, useEffect, useReducer } from 'react';
+import React, {
+  useRef,
+  useEffect,
+  useReducer,
+  useCallback,
+  useLayoutEffect,
+} from 'react';
 import ReactDOMServer from 'react-dom/server';
 import Dygraph from 'dygraphs';
 import 'dygraphs/dist/dygraph.min.css';
@@ -72,9 +78,11 @@ const BASE_GRAPH_OPTIONS = {
     },
   },
   plugins: [
-    new Dygraph.Plugins.Crosshair({ direction: 'both' }),
+    new Dygraph.Plugins.Crosshair({ direction: 'vertical' }),
   ],
 };
+
+const NULL_DATA = [[0, 0]];
 
 const boxShadow = '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)';
 const boxShadowHeavy = '0px 4px 2px -2px rgba(0,0,0,0.4), 0px 2px 2px 0px rgba(0,0,0,0.28), 0px 2px 6px 0px rgba(0,0,0,0.24)';
@@ -168,6 +176,8 @@ const graphReducer = (state, action) => {
   const newState = { ...state };
   let key = null;
   switch (action.type) {
+    case 'reinitialize':
+      return cloneDeep(INITIAL_GRAPH_STATE);
     case 'toggleLegendVisibility':
       if (!['series', 'qualityFlag'].includes(action.kind)) { return state; }
       key = action.kind === 'series' ? 'hiddenSeries' : 'hiddenQualityFlags';
@@ -196,6 +206,7 @@ export default function TimeSeriesViewerGraph() {
   const [graphState, graphDispatch] = useReducer(graphReducer, cloneDeep(INITIAL_GRAPH_STATE));
   const dygraphRef = useRef(null);
   const dygraphDomRef = useRef(null);
+  const graphInnerContainerRef = useRef(null);
   const legendRef = useRef(null);
   const axisCountRef = useRef(1);
   const axisCountChangedRef = useRef(false);
@@ -204,6 +215,7 @@ export default function TimeSeriesViewerGraph() {
     dateRange,
     continuousDateRange,
     variables,
+    dateTimeVariable,
     sites,
     timeStep: selectedTimeStep,
     autoTimeStep,
@@ -214,18 +226,26 @@ export default function TimeSeriesViewerGraph() {
   } = state.selection;
   const timeStep = selectedTimeStep === 'auto' ? autoTimeStep : selectedTimeStep;
 
-  const data = [];
-  const labels = ['x'];
-  const qualityData = [];
-  const qualityLabels = ['start', 'end'];
-  const monthOffsets = {};
-  const timestampMap = {};
-  const series = [];
+  let data = cloneDeep(NULL_DATA);
+  let qualityData = [];
+  let labels = ['x'];
+  let qualityLabels = ['start', 'end'];
+  let series = [];
+  let monthOffsets = {};
+  let timestampMap = {};
   const qfNullFill = qualityFlags.map(() => null);
-  let graphOptions = BASE_GRAPH_OPTIONS;
+  let graphOptions = cloneDeep(BASE_GRAPH_OPTIONS);
 
   // Initialize data set with timestep-based times and monthOffsets for registering actual data
   const buildTimeData = () => {
+    // Reinitialize
+    data = [];
+    qualityData = [];
+    monthOffsets = {};
+    timestampMap = {};
+    // Sanity check: must have a valid time step
+    if (!TIME_STEPS[timeStep]) { data = cloneDeep(NULL_DATA); return; }
+    // Tick through date range one time step at a time building data, qualityData, and timeStampMap
     const { seconds } = TIME_STEPS[timeStep];
     const startMonth = dateRange[0];
     const ticker = moment.utc(`${startMonth}-01T00:00:00Z`);
@@ -247,10 +267,18 @@ export default function TimeSeriesViewerGraph() {
       ticker.add(seconds, 'seconds');
       currentMonth = ticker.format('YYYY-MM');
     }
+    // everything is hidden  everything render the minimum, which is NOT an empty array
+    if (data.length === 0) { data = cloneDeep(NULL_DATA); }
   };
 
   // Build the rest of the data structure and labels using selection values
   const buildSeriesData = () => {
+    // Reinitialize
+    series = [];
+    labels = ['x'];
+    qualityLabels = ['start', 'end'];
+    // Sanity check: must have a valid dateTimeVariable
+    if (!dateTimeVariable) { return; }
     // Loop through each site...
     sites.forEach((site) => {
       const { siteCode, positions } = site;
@@ -290,12 +318,13 @@ export default function TimeSeriesViewerGraph() {
             if (!columnIdx) { return; } // 0 is x, so this should always be 1 or greater
             const { downloadPkg: pkg } = state.variables[variable];
             const posData = state.product.sites[siteCode].positions[position].data;
-            // If this site/position/month/variable has no series data then fill with nulls
+            // Null-fill if this site/position/month/variable has no series data or no dateTime data
             if (
               !posData[month]
                 || !posData[month][pkg]
                 || !posData[month][pkg][timeStep]
                 || !posData[month][pkg][timeStep].series[variable]
+                || !posData[month][pkg][timeStep].series[dateTimeVariable]
             ) {
               for (let t = monthIdx; t < monthStepCount; t += 1) {
                 data[t][columnIdx] = null;
@@ -308,9 +337,9 @@ export default function TimeSeriesViewerGraph() {
               // The series data length does not match the expected month length so
               // loop through by month steps pulling in series values through timestamp matching
               const setSeriesValueByTimestamp = (t) => {
-                const timestamp = moment.utc(qualityData[t][0]).format('YYYY-MM-DD[T]HH:mm:ss[Z]');
-                const dataIdx = posData[month][pkg][timeStep].series.startDateTime
-                  .findIndex(startDateTime => startDateTime === timestamp);
+                const isodate = moment.utc(qualityData[t][0]).format('YYYY-MM-DD[T]HH:mm:ss[Z]');
+                const dataIdx = posData[month][pkg][timeStep].series[dateTimeVariable]
+                  .findIndex(dateTimeVal => dateTimeVal === isodate);
                 data[t][columnIdx] = dataIdx !== -1
                   ? posData[month][pkg][timeStep].series[variable][dataIdx]
                   : null;
@@ -351,9 +380,9 @@ export default function TimeSeriesViewerGraph() {
               // The series data length does not match the expected month length so
               // loop through by month steps pulling in series values through timestamp matching
               const setQualityValueByTimestamp = (t) => {
-                const timestamp = moment.utc(qualityData[t][0]).format('YYYY-MM-DD[T]HH:mm:ss[Z]');
-                const dataIdx = posData[month][pkg][timeStep].series.startDateTime
-                  .findIndex(startDateTime => startDateTime === timestamp);
+                const isodate = moment.utc(qualityData[t][0]).format('YYYY-MM-DD[T]HH:mm:ss[Z]');
+                const dataIdx = posData[month][pkg][timeStep].series[dateTimeVariable]
+                  .findIndex(dateTimeVal => dateTimeVal === isodate);
                 if (dataIdx === -1) {
                   qualityData[t][columnIdx] = [...qfNullFill];
                   return;
@@ -553,7 +582,7 @@ export default function TimeSeriesViewerGraph() {
 
     // Build graphOptions
     graphOptions = {
-      ...BASE_GRAPH_OPTIONS,
+      ...cloneDeep(BASE_GRAPH_OPTIONS),
       labels,
       axes: buildAxesOption(axes),
       series: buildSeriesOption(axes),
@@ -571,6 +600,42 @@ export default function TimeSeriesViewerGraph() {
     });
   }
 
+  // Callback to refresh graph dimensions for current DOM
+  const handleResize = useCallback(() => {
+    if (!dygraphRef.current || !legendRef.current || !graphInnerContainerRef.current) { return; }
+    // Resize the graph relative to the legend width now that the legend is properly rendered
+    const MIN_GRAPH_HEIGHT = 320;
+    const MAX_GRAPH_HEIGHT = 560;
+    const legendHeight = legendRef.current ? legendRef.current.clientHeight + 40 : 0;
+    const graphHeight = Math.min(Math.max(legendHeight, MIN_GRAPH_HEIGHT), MAX_GRAPH_HEIGHT);
+    const legendWidth = legendRef.current.clientWidth + 8;
+    const graphInnerContainerWidth = graphInnerContainerRef.current.clientWidth;
+    const graphWidth = graphInnerContainerWidth - legendWidth;
+    dygraphRef.current.graphDiv.style.width = `${graphWidth}px`;
+    dygraphRef.current.graphDiv.style.height = `${graphHeight}px`;
+    dygraphRef.current.resizeHandler_();
+    dygraphRef.current.canvas_.style.cursor = 'crosshair';
+  }, [dygraphRef, legendRef, graphInnerContainerRef]);
+
+  // Layout effect to keep the graph dimensions in-line with resize events
+  useLayoutEffect(() => {
+    if (graphInnerContainerRef.current === null) { return () => {}; }
+    // Ensure resize observer is in place
+    if (typeof ResizeObserver !== 'function') {
+      window.addEventListener('resize', handleResize);
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }
+    let resizeObserver = new ResizeObserver(handleResize);
+    resizeObserver.observe(graphInnerContainerRef.current);
+    return () => {
+      if (!resizeObserver) { return; }
+      resizeObserver.disconnect();
+      resizeObserver = null;
+    };
+  }, [graphInnerContainerRef, handleResize]);
+
   // Effect to apply latest options/data to the graph and force a resize
   useEffect(() => {
     if (state.status !== TIME_SERIES_VIEWER_STATUS.READY) { return; }
@@ -586,22 +651,14 @@ export default function TimeSeriesViewerGraph() {
         dygraphRef.current.updateOptions({ showRangeSelector: true });
       }
     }
-    // Refresh graph dimensions
-    const MIN_GRAPH_HEIGHT = 320;
-    const MAX_GRAPH_HEIGHT = 560;
-    const legendHeight = legendRef.current ? legendRef.current.clientHeight + 40 : 0;
-    const graphHeight = Math.min(Math.max(legendHeight, MIN_GRAPH_HEIGHT), MAX_GRAPH_HEIGHT);
-    dygraphRef.current.graphDiv.style.width = null;
-    dygraphRef.current.graphDiv.style.height = `${graphHeight}px`;
-    dygraphRef.current.resizeHandler_();
-    dygraphRef.current.canvas_.style.cursor = 'crosshair';
+    handleResize();
   }, [
     selectionDigest,
     state.status,
     data,
     graphOptions,
     dygraphRef,
-    legendRef,
+    handleResize,
     axisCountChangedRef,
   ]);
 
@@ -630,7 +687,7 @@ export default function TimeSeriesViewerGraph() {
           ? `${state.product.productName} (${state.product.productCode})`
           : state.product.productCode}
       </Typography>
-      <div className={classes.graphInnerContainer}>
+      <div className={classes.graphInnerContainer} ref={graphInnerContainerRef}>
         <div ref={dygraphDomRef} className={classes.graphDiv} style={{ width: '50% !important' }} />
         <div ref={legendRef} className={classes.legendDiv} />
       </div>
