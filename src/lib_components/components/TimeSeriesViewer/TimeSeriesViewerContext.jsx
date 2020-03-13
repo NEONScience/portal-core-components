@@ -249,8 +249,9 @@ const parseProductData = (productData = {}) => {
     if (!Array.isArray(site.availableMonths) || !site.availableMonths.length) { return acc; }
     product.sites[site.siteCode] = {
       fetches: {
+        siteMonths: {},
+        positions: {},
         variables: { status: FETCH_STATUS.AWAITING_CALL, error: null, url: null },
-        positions: { status: FETCH_STATUS.AWAITING_CALL, error: null, url: null },
       },
       availableMonths: site.availableMonths,
       variables: new Set(),
@@ -271,27 +272,44 @@ const parseProductData = (productData = {}) => {
  * Build an object for state.product.sites[{site}] from a product/site/month fetch response
  * @param {Object} site - single site object from previous state.product.sites
  * @param {Array} files - list of file objects parsed from product/site/month fetch response
- * @return {Object} updated site object to be applied at state.product.sites[{site}]
+ * @return {Object}
+ * @return {Object} siteObject - updated site object to be applied at state.product.sites[{site}]
+ * @return {Set} availableTimeSteps - set containing time steps available for this site month
+ * @return {Boolean} metaFetchQueued - whether any meta fetches (variables or positions) were queued
  */
-const parseSiteMonthData = (site, files) => {
+const parseSiteMonthData = (site, month, files) => {
   const newSite = { ...site };
   const availableTimeSteps = new Set();
+  let metaFetchQueued = false;
   files.forEach((file) => {
     const { name, url } = file;
     // Must be a CSV file
     if (!/\.csv$/.test(name)) { return; }
     // Must not be a variables or positions file
-    if (name.includes('variables')) { newSite.fetches.variables.url = url; return; }
-    if (name.includes('sensor_positions')) { newSite.fetches.positions.url = url; return; }
+    if (name.includes('variables') && !newSite.fetches.variables.url) {
+      newSite.fetches.variables.url = url;
+      metaFetchQueued = false;
+      return;
+    }
+    if (name.includes('sensor_positions') && !newSite.fetches.positions[month]) {
+      newSite.fetches.positions[month] = {
+        status: FETCH_STATUS.AWAITING_CALL,
+        error: null,
+        url,
+      };
+      metaFetchQueued = false;
+      return;
+    }
     // Split file name by (.); all DATA_FILE_PARTS validators must point to a valid part
     const parts = name.split('.');
     if (Object.keys(DATA_FILE_PARTS).some((part) => {
       const { offset, isValid } = DATA_FILE_PARTS[part];
       return !isValid(parts[offset]);
     })) { return; }
+    // Month for the file must match the month for this entire iteration of parseSiteMonthData
+    if (parts[DATA_FILE_PARTS.MONTH.offset] !== month) { return; }
     // Extract parts
     const position = `${parts[DATA_FILE_PARTS.POSITION_H.offset]}.${parts[DATA_FILE_PARTS.POSITION_V.offset]}`;
-    const month = parts[DATA_FILE_PARTS.MONTH.offset];
     const packageType = parts[DATA_FILE_PARTS.PACKAGE_TYPE.offset];
     const timeStep = getTimeStep(parts[DATA_FILE_PARTS.TIME_STEP.offset]);
     // Timestep must be valid
@@ -310,7 +328,7 @@ const parseSiteMonthData = (site, files) => {
       series: {},
     };
   });
-  return { siteObject: newSite, availableTimeSteps };
+  return { siteObject: newSite, availableTimeSteps, metaFetchQueued };
 };
 
 /**
@@ -375,7 +393,7 @@ const parseSiteVariables = (previousVariables, siteCode, csv) => {
  * @param {string} csv - unparsed CSV string from a product/site positions fetch response
  * @return {Object} updated site object to be applied at state.product.sites[{site}]
  */
-const parseSitePositions = (site, csv) => {
+const parseSitePositions = (site, month, csv) => {
   const newSite = { ...site };
   const positions = parseCSV(csv);
   positions.data.forEach((position) => {
@@ -493,9 +511,9 @@ const reducer = (state, action) => {
   const calcSelection = () => {
     newState.selection = applyDefaultsToSelection(newState);
   };
-  const calcStatus = () => {
+  const calcStatus = (metaFetchQueued = false) => {
     if (newState.status === TIME_SERIES_VIEWER_STATUS.ERROR) { return; }
-    if (Object.keys(newState.metaFetches).length) {
+    if (Object.keys(newState.metaFetches).length || metaFetchQueued) {
       newState.status = TIME_SERIES_VIEWER_STATUS.LOADING_META;
     } else if (Object.keys(newState.dataFetches).length) {
       newState.status = TIME_SERIES_VIEWER_STATUS.LOADING_DATA;
@@ -565,21 +583,28 @@ const reducer = (state, action) => {
     // Fetch Site Month Actions
     case 'fetchSiteMonth':
       newState.metaFetches[`fetchSiteMonth.${action.siteCode}.${action.month}`] = true;
-      newState.product.sites[action.siteCode].fetches[action.month] = {
+      newState.product.sites[action.siteCode].fetches.siteMonths[action.month] = {
         status: FETCH_STATUS.FETCHING, error: null,
       };
       newState.status = TIME_SERIES_VIEWER_STATUS.LOADING_META;
       return newState;
     case 'fetchSiteMonthFailed':
       delete newState.metaFetches[`fetchSiteMonth.${action.siteCode}.${action.month}`];
-      newState.product.sites[action.siteCode].fetches[action.month].status = FETCH_STATUS.ERROR;
-      newState.product.sites[action.siteCode].fetches[action.month].error = action.error;
+      newState.product.sites[action.siteCode]
+        .fetches.siteMonths[action.month].status = FETCH_STATUS.ERROR;
+      newState.product.sites[action.siteCode]
+        .fetches.siteMonths[action.month].error = action.error;
       calcStatus();
       return newState;
     case 'fetchSiteMonthSucceeded':
       delete newState.metaFetches[`fetchSiteMonth.${action.siteCode}.${action.month}`];
-      newState.product.sites[action.siteCode].fetches[action.month].status = FETCH_STATUS.SUCCESS;
-      parsedContent = parseSiteMonthData(newState.product.sites[action.siteCode], action.files);
+      newState.product.sites[action.siteCode]
+        .fetches.siteMonths[action.month].status = FETCH_STATUS.SUCCESS;
+      parsedContent = parseSiteMonthData(
+        newState.product.sites[action.siteCode],
+        action.month,
+        action.files,
+      );
       newState.product.sites[action.siteCode] = parsedContent.siteObject;
       newState.availableTimeSteps = new Set([
         ...state.availableTimeSteps,
@@ -596,12 +621,10 @@ const reducer = (state, action) => {
           }, null);
       }
       calcSelection();
-      if (
-        newState.product.sites[action.siteCode].fetches.variables.status !== FETCH_STATUS.SUCCESS
-          || newState.product.sites[action.siteCode].fetches.positions.status !== FETCH_STATUS.SUCCESS // eslint-disable-line max-len
-      ) {
-        newState.status = TIME_SERIES_VIEWER_STATUS.LOADING_META;
-      } else { calcStatus(); }
+      // parseSiteMonthData will "queue" fetches for meta files like positions and variables but
+      // only the actual fetch trigger will register them with the metaFetches object. We pass this
+      // boolean to calcStatus() to essentially say "meta fetches are queued to be triggered"
+      calcStatus(parsedContent.metaFetchQueued);
       return newState;
 
     // Fetch Site Variables Actions
@@ -642,21 +665,24 @@ const reducer = (state, action) => {
 
     // Fetch Site Positions Actions
     case 'fetchSitePositions':
-      newState.metaFetches[`fetchSitePositions.${action.siteCode}`] = true;
-      newState.product.sites[action.siteCode].fetches.positions.status = FETCH_STATUS.FETCHING;
+      newState.metaFetches[`fetchSitePositions.${action.siteCode}.${action.month}`] = true;
+      newState.product.sites[action.siteCode]
+        .fetches.positions[action.month].status = FETCH_STATUS.FETCHING;
       calcStatus();
       return newState;
     case 'fetchSitePositionsFailed':
-      delete newState.metaFetches[`fetchSitePositions.${action.siteCode}`];
-      newState.product.sites[action.siteCode].fetches.positions.status = FETCH_STATUS.ERROR;
-      newState.product.sites[action.siteCode].fetches.positions.error = action.error;
+      delete newState.metaFetches[`fetchSitePositions.${action.siteCode}.${action.month}`];
+      newState.product.sites[action.siteCode]
+        .fetches.positions[action.month].status = FETCH_STATUS.ERROR;
+      newState.product.sites[action.siteCode].fetches.positions[action.month].error = action.error;
       calcStatus();
       return newState;
     case 'fetchSitePositionsSucceeded':
-      delete newState.metaFetches[`fetchSitePositions.${action.siteCode}`];
-      newState.product.sites[action.siteCode].fetches.positions.status = FETCH_STATUS.SUCCESS;
+      delete newState.metaFetches[`fetchSitePositions.${action.siteCode}.${action.month}`];
+      newState.product.sites[action.siteCode]
+        .fetches.positions[action.month].status = FETCH_STATUS.SUCCESS;
       newState.product.sites[action.siteCode] = parseSitePositions(
-        newState.product.sites[action.siteCode], action.csv,
+        newState.product.sites[action.siteCode], action.month, action.csv,
       );
       calcSelection();
       calcStatus();
@@ -892,9 +918,9 @@ const Provider = (props) => {
     // we haven't even initialized the loading of it).
     let metaFetchTriggered = false;
 
-    const fetchSiteVariables = (siteCode, fetches) => {
+    const fetchSiteVariables = (siteCode, url) => {
       dispatch({ type: 'fetchSiteVariables', siteCode });
-      fetchCSV(fetches.variables.url).pipe(
+      fetchCSV(url).pipe(
         map((response) => {
           dispatch({ type: 'fetchSiteVariablesSucceeded', csv: response.response, siteCode });
           return of(true);
@@ -906,22 +932,32 @@ const Provider = (props) => {
       ).subscribe();
     };
 
-    const fetchSitePositions = (siteCode, fetches) => {
-      dispatch({ type: 'fetchSitePositions', siteCode });
-      fetchCSV(fetches.positions.url).pipe(
+    const fetchSitePositions = (siteCode, month, url) => {
+      dispatch({ type: 'fetchSitePositions', siteCode, month });
+      fetchCSV(url).pipe(
         map((response) => {
-          dispatch({ type: 'fetchSitePositionsSucceeded', csv: response.response, siteCode });
+          dispatch({
+            type: 'fetchSitePositionsSucceeded',
+            csv: response.response,
+            siteCode,
+            month,
+          });
           return of(true);
         }),
         catchError((error) => {
-          dispatch({ type: 'fetchSitePositionsFailed', error: error.message, siteCode });
+          dispatch({
+            type: 'fetchSitePositionsFailed',
+            error: error.message,
+            siteCode,
+            month,
+          });
           return of(false);
         }),
       ).subscribe();
     };
 
     const fetchNeededSiteMonths = (siteCode, fetches) => {
-      continuousDateRange.filter(month => !fetches[month]).forEach((month) => {
+      continuousDateRange.filter(month => !fetches.siteMonths[month]).forEach((month) => {
         // Don't attempt to fetch any months that are known to be unavailable for a given site
         if (!state.product.sites[siteCode].availableMonths.includes(month)) { return; }
         metaFetchTriggered = true;
@@ -1014,15 +1050,21 @@ const Provider = (props) => {
 
       // Fetch variables for any sites in seleciton that haven't had variables fetched
       if (fetches.variables.status === FETCH_STATUS.AWAITING_CALL && fetches.variables.url) {
-        fetchSiteVariables(siteCode, fetches);
+        fetchSiteVariables(siteCode, fetches.variables.url);
         metaFetchTriggered = true;
       }
 
-      // Fetch positions for any sites in seleciton that haven't had positions fetched
-      if (fetches.positions.status === FETCH_STATUS.AWAITING_CALL && fetches.positions.url) {
-        fetchSitePositions(siteCode, fetches);
-        metaFetchTriggered = true;
-      }
+      // Fetch positions for any site months in seleciton that haven't had positions fetched
+      continuousDateRange
+        .filter(month => (
+          Object.keys(fetches.positions).includes(month)
+            && fetches.positions[month].status === FETCH_STATUS.AWAITING_CALL
+            && fetches.positions[month].url
+        ))
+        .forEach((month) => {
+          fetchSitePositions(siteCode, month, fetches.positions[month].url);
+          metaFetchTriggered = true;
+        });
 
       // Fetch any site months in selection that have not been fetched
       fetchNeededSiteMonths(siteCode, fetches);
@@ -1032,8 +1074,6 @@ const Provider = (props) => {
         prepareDataFetches(site);
       }
     });
-
-    // debugger; // eslint-disable-line no-debugger
 
     // Trigger all data fetches
     if (state.status === TIME_SERIES_VIEWER_STATUS.READY_FOR_DATA && !metaFetchTriggered) {
