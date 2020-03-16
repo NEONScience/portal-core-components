@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -280,7 +280,7 @@ const TimeSeriesViewerDateRange = (props) => {
   }
 
   return (
-    <div style={{ width: '100%' }}>
+    <React.Fragment>
       <div style={{ marginBottom: Theme.spacing(2) }}>
         <MuiPickersUtilsProvider utils={MomentUtils}>
           <Grid container spacing={2} style={{ marginBottom: Theme.spacing(1) }}>
@@ -337,7 +337,7 @@ const TimeSeriesViewerDateRange = (props) => {
           }}
         />
       </div>
-      <div>
+      <div style={{ position: 'relative' }}>
         <Typography variant="subtitle1" style={{ fontWeight: 600, marginBottom: Theme.spacing(1) }}>
           Select by Data Product Availability
         </Typography>
@@ -353,7 +353,7 @@ const TimeSeriesViewerDateRange = (props) => {
         </FullWidthVisualization>
         <AvailabilityLegend style={{ flexGrow: 1 }} />
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 

@@ -39,6 +39,9 @@ import TimeSeriesViewerVariables from './TimeSeriesViewerVariables';
 import TimeSeriesViewerOptions from './TimeSeriesViewerOptions';
 import TimeSeriesViewerGraph from './TimeSeriesViewerGraph';
 
+// We can't rely on flex-sizing to work during resize events as some components within tabs
+// won't be able to shrink correctly on resize (notably: Data Product Availability charts).
+const VERTICAL_TABS_WIDTH = 150;
 const useStyles = makeStyles(theme => ({
   tabsContainer: {
     display: 'flex',
@@ -49,8 +52,7 @@ const useStyles = makeStyles(theme => ({
   },
   tabsVertical: {
     borderRight: `1px solid ${theme.palette.divider}`,
-    minWidth: '128px',
-    flexShrink: 0,
+    width: `${VERTICAL_TABS_WIDTH}px`,
     '& :not(:first-child)': {
       borderTop: `1px solid ${theme.palette.divider}`,
       marginTop: '-1px',
@@ -62,6 +64,12 @@ const useStyles = makeStyles(theme => ({
     '& :not(:first-child)': {
       borderLeft: `1px solid ${theme.palette.divider}`,
       marginLeft: '-1px',
+    },
+  },
+  tabPanels: {
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: `calc(100% - ${VERTICAL_TABS_WIDTH}px)`,
     },
   },
   tabPanelContainer: {
@@ -427,7 +435,7 @@ export default function TimeSeriesViewerContainer() {
   );
 
   const renderTabPanels = () => (
-    <div style={{ flexGrow: 1 }}>
+    <div className={classes.tabPanels}>
       {Object.keys(TABS).map((tabId) => {
         const { Component: TabComponent } = TABS[tabId];
         let tabComponentProps = { setSelectedTab, TAB_IDS, graphRef };

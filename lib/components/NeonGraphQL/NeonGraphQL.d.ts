@@ -8,10 +8,10 @@ export namespace DIMENSIONALITIES {
 }
 export default NeonGraphQL;
 declare namespace NeonGraphQL {
-    export function getDataProductByCode(code: any): import("rxjs").Observable<null> | import("rxjs").Observable<import("rxjs/ajax").AjaxResponse> | null;
-    export function getAllDataProducts(): import("rxjs").Observable<null> | import("rxjs").Observable<import("rxjs/ajax").AjaxResponse> | null;
-    export function getSiteByCode(code: any): import("rxjs").Observable<null> | import("rxjs").Observable<import("rxjs/ajax").AjaxResponse> | null;
-    export function getAllSites(): import("rxjs").Observable<null> | import("rxjs").Observable<import("rxjs/ajax").AjaxResponse> | null;
+    export function getDataProductByCode(code: any): import("rxjs").Observable<null> | import("rxjs").Observable<import("rxjs/ajax").AjaxResponse>;
+    export function getAllDataProducts(): import("rxjs").Observable<null> | import("rxjs").Observable<import("rxjs/ajax").AjaxResponse>;
+    export function getSiteByCode(code: any): import("rxjs").Observable<null> | import("rxjs").Observable<import("rxjs/ajax").AjaxResponse>;
+    export function getAllSites(): import("rxjs").Observable<null> | import("rxjs").Observable<import("rxjs/ajax").AjaxResponse>;
     export function getGraphqlQuery(query: string): import("rxjs").Observable<null> | import("rxjs").Observable<import("rxjs/ajax").AjaxResponse>;
     export function getGraphqlAjaxRequest(query: string): {
         method: string;

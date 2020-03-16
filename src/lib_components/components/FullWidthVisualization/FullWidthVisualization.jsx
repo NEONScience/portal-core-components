@@ -81,7 +81,7 @@ export default function FullWidthVisualization(props) {
       resizeObserver.disconnect();
       resizeObserver = null;
     };
-  }, [vizRef, handleResize, handleRedraw]);
+  }, [vizRef, handleResize]);
 
   const divProps = {
     ref: containerRef,

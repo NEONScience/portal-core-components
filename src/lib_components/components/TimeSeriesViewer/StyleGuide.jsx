@@ -5,6 +5,8 @@ import React, { useEffect, useReducer } from 'react';
 import { of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
+import cloneDeep from 'lodash/cloneDeep';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -60,7 +62,7 @@ const allProductsReducer = (state, action) => {
   }
 };
 const AllProductsTimeSeries = () => {
-  const [state, dispatch] = useReducer(allProductsReducer, allProductsInitialState);
+  const [state, dispatch] = useReducer(allProductsReducer, cloneDeep(allProductsInitialState));
   const [{ data: neonContextData }] = NeonContext.useNeonContextState();
   const { bundles } = neonContextData;
   const productIsIS = product => (
