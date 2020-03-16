@@ -292,13 +292,13 @@ function PositionDetail(props) {
     return <Typography variant="body1">{position}</Typography>;
   }
   const {
-    referenceElevation,
-    xOffset,
-    yOffset,
-    zOffset,
-  } = state.product.sites[siteCode].positions[position];
-  const elevation = (parseFloat(referenceElevation, 10) + parseFloat(zOffset, 10))
-    .toFixed(2).toString();
+    referenceElevation = '--',
+    xOffset = '--',
+    yOffset = '--',
+    zOffset = '--',
+  } = state.product.sites[siteCode].positions[position].history[0] || {};
+  const elevation = referenceElevation === '--' ? '--'
+    : (parseFloat(referenceElevation, 10) + parseFloat(zOffset, 10)).toFixed(2).toString();
   const fadeStyle = { color: Theme.palette.grey[500] };
   const axisStyle = { marginRight: Theme.spacing(1), fontWeight: 600 };
   return wide ? (

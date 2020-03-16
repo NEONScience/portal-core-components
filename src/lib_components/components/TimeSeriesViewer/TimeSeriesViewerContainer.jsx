@@ -375,6 +375,8 @@ const TABS = {
   },
 };
 
+const DEFAULT_TAB = 'SITES'; // 'SUMMARY';
+
 export default function TimeSeriesViewerContainer() {
   const classes = useStyles(Theme);
   const tabClasses = useTabStyles(Theme);
@@ -382,7 +384,7 @@ export default function TimeSeriesViewerContainer() {
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const belowMd = useMediaQuery(Theme.breakpoints.down('sm'));
 
-  const initialTab = 'SUMMARY';
+  const initialTab = DEFAULT_TAB;
   const [selectedTab, setSelectedTab] = useState(initialTab);
   const [loadedProductCode, setLoadedProductCode] = useState(state.product.productCode);
 
@@ -392,7 +394,7 @@ export default function TimeSeriesViewerContainer() {
   useEffect(() => {
     if (state.product.productCode === loadedProductCode) { return; }
     setLoadedProductCode(state.product.productCode);
-    setSelectedTab('SUMMARY');
+    setSelectedTab(DEFAULT_TAB);
   }, [state.product.productCode, loadedProductCode, setSelectedTab]);
 
   // Slider position is not controlled in state because doing so kills mouse drag performance.
