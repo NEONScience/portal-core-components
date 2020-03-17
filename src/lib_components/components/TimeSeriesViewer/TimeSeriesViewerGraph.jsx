@@ -770,7 +770,7 @@ export default function TimeSeriesViewerGraph() {
 
   // Toggle Quality Flag Visibility Button
   const toggleQualityFlagsVisibility = () => {
-    graphDispatch({ type: 'toggleQualityFlagsVisibility', qualityFlags });
+    graphDispatch({ type: 'toggleQualityFlagsVisibility', qualityFlags: qualityLabels.slice(2) });
   };
   const toggleQualityFlagsVisibilityButton = (
     <Button
