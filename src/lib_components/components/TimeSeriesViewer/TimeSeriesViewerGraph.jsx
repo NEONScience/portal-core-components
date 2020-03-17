@@ -18,6 +18,7 @@ import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
 
 import { makeStyles } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
@@ -107,9 +108,23 @@ const useStyles = makeStyles(theme => ({
     minHeight: '320px',
     flexGrow: 1,
   },
-  buttonsContainer: {
-    margin: theme.spacing(0, 2, 1, 2),
+  buttonIcon: {
+    fontSize: '1.2rem',
+    marginRight: Theme.spacing(0.5),
+  },
+  buttonsOuterContainer: {
+    margin: theme.spacing(0, -0.5, 0, -0.5),
+    borderTop: '1px solid rgba(0, 0, 0, 0.12)',
+    borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
+    backgroundColor: theme.palette.grey[50],
+    padding: theme.spacing(2),
+    [theme.breakpoints.up('md')]: {
+      padding: theme.spacing(1.5),
+    },
+  },
+  buttonsInnerContainer: {
     display: 'flex',
+    marginTop: theme.spacing(-1.5),
     alignItems: 'center',
     justifyContent: 'space-between',
     flexWrap: 'wrap',
@@ -178,10 +193,6 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(0, 1.25, 0, 1.25),
     pointerEvents: 'none',
   },
-  buttonIcon: {
-    fontSize: '1.2rem',
-    marginRight: Theme.spacing(0.5),
-  },
 }));
 
 // Get the next year/month string after a given year/month string
@@ -245,6 +256,7 @@ export default function TimeSeriesViewerGraph() {
   const legendRef = useRef(null);
   const axisCountRef = useRef(1);
   const axisCountChangedRef = useRef(false);
+  const belowMd = useMediaQuery(Theme.breakpoints.down('sm'));
   const {
     selectionDigest,
     dateRange,
@@ -733,7 +745,7 @@ export default function TimeSeriesViewerGraph() {
       variant="outlined"
       onClick={exportGraphImage}
       disabled={downloadRef.current === null}
-      style={{ whiteSpace: 'nowrap' }}
+      style={{ whiteSpace: 'nowrap', marginRight: Theme.spacing(1.5) }}
     >
       <ImageIcon className={classes.buttonIcon} />
       Download Image (png)
@@ -750,19 +762,20 @@ export default function TimeSeriesViewerGraph() {
       size="small"
       color="primary"
       variant="outlined"
+      title="Toggle Visibility for All Series"
       onClick={toggleSeriesVisibility}
       disabled={series.length === 0}
-      style={{ whiteSpace: 'nowrap', marginLeft: Theme.spacing(1) }}
+      style={{ whiteSpace: 'nowrap', marginLeft: Theme.spacing(1.5) }}
     >
       {graphState.hiddenSeries.size ? (
         <React.Fragment>
           <ShowIcon className={classes.buttonIcon} />
-          Show All Series
+          {`${belowMd ? '' : 'Show All'} Series`}
         </React.Fragment>
       ) : (
         <React.Fragment>
           <HideIcon className={classes.buttonIcon} />
-          Hide All Series
+          {`${belowMd ? '' : 'Hide All'} Series`}
         </React.Fragment>
       )}
     </Button>
@@ -777,6 +790,7 @@ export default function TimeSeriesViewerGraph() {
       size="small"
       color="primary"
       variant="outlined"
+      title="Toggle Visibility for All Quality Flags"
       onClick={toggleQualityFlagsVisibility}
       disabled={qualityFlags.length === 0}
       style={{ whiteSpace: 'nowrap' }}
@@ -784,12 +798,12 @@ export default function TimeSeriesViewerGraph() {
       {graphState.hiddenQualityFlags.size ? (
         <React.Fragment>
           <ShowIcon className={classes.buttonIcon} />
-          Show All Quality Flags
+          {`${belowMd ? '' : 'Show All'} Quality Flags`}
         </React.Fragment>
       ) : (
         <React.Fragment>
           <HideIcon className={classes.buttonIcon} />
-          Hide All Quality Flags
+          {`${belowMd ? '' : 'Hide All'} Quality Flags`}
         </React.Fragment>
       )}
     </Button>
@@ -826,13 +840,15 @@ export default function TimeSeriesViewerGraph() {
           </Typography>
         </div>
       </div>
-      <div className={classes.buttonsContainer}>
-        <div>
-          {downloadImageButton}
-        </div>
-        <div style={{ textAlign: 'right' }}>
-          {toggleQualityFlagsVisibilityButton}
-          {toggleSeriesVisibilityButton}
+      <div className={classes.buttonsOuterContainer}>
+        <div className={classes.buttonsInnerContainer}>
+          <div style={{ marginTop: Theme.spacing(1.5) }}>
+            {downloadImageButton}
+          </div>
+          <div style={{ marginTop: Theme.spacing(1.5), textAlign: 'right' }}>
+            {toggleQualityFlagsVisibilityButton}
+            {toggleSeriesVisibilityButton}
+          </div>
         </div>
       </div>
     </React.Fragment>

@@ -39,7 +39,8 @@ const VERTICAL_TABS_WIDTH = 150;
 const useStyles = makeStyles(theme => ({
   tabsContainer: {
     display: 'flex',
-    borderRadius: theme.spacing(1),
+    borderRadius: theme.spacing(0, 0, 1),
+    margin: theme.spacing(0, -0.5, -0.5, -0.5),
     [theme.breakpoints.down('sm')]: {
       flexDirection: 'column',
     },
@@ -374,7 +375,8 @@ export default function TimeSeriesViewerContainer() {
       {Object.keys(TABS).map((tabId) => {
         const { label, Icon: TabIcon } = TABS[tabId];
         const style = {};
-        if (tabId === TAB_IDS.SUMMARY && !belowMd) { style.borderTopLeftRadius = Theme.spacing(1); }
+        // if (tabId === TAB_IDS.SUMMARY && !belowMd) {
+        // style.borderTopLeftRadius = Theme.spacing(1); }
         return (
           <Tab
             key={tabId}
@@ -450,15 +452,17 @@ export default function TimeSeriesViewerContainer() {
 
   return (
     <div style={{ width: '100%' }}>
-      <Paper className={classes.graphContainer}>
-        {state.product.productCode === loadedProductCode ? (
-          <TimeSeriesViewerGraph />
-        ) : null}
-        {renderGraphOverlay()}
-      </Paper>
-      <Paper className={classes.tabsContainer}>
-        {renderTabs()}
-        {renderTabPanels()}
+      <Paper className={classes.graphContainer} elevation={4}>
+        <div>
+          {state.product.productCode === loadedProductCode ? (
+            <TimeSeriesViewerGraph />
+          ) : null}
+          {renderGraphOverlay()}
+        </div>
+        <div className={classes.tabsContainer}>
+          {renderTabs()}
+          {renderTabPanels()}
+        </div>
       </Paper>
     </div>
   );
