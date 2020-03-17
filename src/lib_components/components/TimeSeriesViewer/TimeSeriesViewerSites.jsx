@@ -23,6 +23,12 @@ import ListItemText from '@material-ui/core/ListItemText';
 import MenuItem from '@material-ui/core/MenuItem';
 import NoSsr from '@material-ui/core/NoSsr';
 import Paper from '@material-ui/core/Paper';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
@@ -31,6 +37,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 
 import ClearIcon from '@material-ui/icons/Clear';
 import ElevationIcon from '@material-ui/icons/Terrain';
+import HistoryIcon from '@material-ui/icons/History';
 import LocationIcon from '@material-ui/icons/MyLocation';
 import NoneIcon from '@material-ui/icons/NotInterested';
 import SearchIcon from '@material-ui/icons/Search';
@@ -282,6 +289,131 @@ const OptionDefaultProps = {
 };
 
 /**
+   PositionHistoryButton - button that opens a dialog to show all history for a given position
+*/
+function PositionHistoryButton(props) {
+  const classes = useStyles(Theme);
+  const { siteCode, position, history } = props;
+  const disabled = history.length < 2;
+  const [historyDialogOpen, setHistoryDialogOpen] = useState(false);
+  if (disabled) {
+    return (
+      <Button
+        variant="outlined"
+        className={classes.smallButton}
+        title="This position has had no changes to physical locations since its creation"
+        disabled
+      >
+        <HistoryIcon className={classes.smallButtonIcon} />
+        No History
+      </Button>
+    );
+  }
+  return (
+    <React.Fragment>
+      <Button
+        color="primary"
+        variant="outlined"
+        onClick={() => { setHistoryDialogOpen(true); }}
+        className={classes.smallButton}
+        title="Click to show all changes to physical locations for this position over time"
+      >
+        <HistoryIcon className={classes.smallButtonIcon} />
+        {`History (${history.length})`}
+      </Button>
+      <Dialog
+        open={historyDialogOpen}
+        onClose={() => { setHistoryDialogOpen(false); }}
+        scroll="paper"
+        aria-labelledby="position-history-dialog-title"
+        aria-describedby="position-history-dialog-description"
+      >
+        <DialogTitle id="position-history-dialog-title" disableTypography>
+          <Typography variant="h6" id="position-history-dialog-title">
+            {`Position History: ${siteCode} - ${position}`}
+          </Typography>
+        </DialogTitle>
+        <DialogContent dividers>
+          <DialogContentText id="position-history-dialog-description" tabIndex={-1} variant="body2">
+            Positions are distinct physical sensor locations at a given site. The x, y, and z
+            coordinates describe where the sensor is located relative to the ground-level
+            reference point for the site. Positions may change over time. The table below shows
+            changes to the physical location of this position since its creation.
+          </DialogContentText>
+          <TableContainer>
+            <Table className={classes.table} aria-label="simple table">
+              <TableHead>
+                <TableRow style={{ backgroundColor: Theme.palette.grey[50] }}>
+                  <TableCell>Start Date</TableCell>
+                  <TableCell>End Date</TableCell>
+                  <TableCell align="right">x</TableCell>
+                  <TableCell align="right">y</TableCell>
+                  <TableCell align="right">z</TableCell>
+                  <TableCell align="right">Elevation</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {history.map((row, idx) => {
+                  const {
+                    start,
+                    end: rawEnd,
+                    xOffset,
+                    yOffset,
+                    zOffset,
+                    referenceElevation,
+                  } = row;
+                  const elevation = (parseFloat(referenceElevation, 10) + parseFloat(zOffset, 10))
+                    .toFixed(2).toString();
+                  const end = rawEnd === '' ? 'Current' : rawEnd;
+                  const cellStyle = idx !== history.length - 1 ? {}
+                    : { fontWeight: '600', borderBottom: 'none' };
+                  return (
+                    <TableRow key={row.start}>
+                      <TableCell component="th" scope="row" style={cellStyle}>{start}</TableCell>
+                      <TableCell component="th" scope="row" style={cellStyle}>{end}</TableCell>
+                      <TableCell align="right" style={cellStyle}>{`${xOffset}m`}</TableCell>
+                      <TableCell align="right" style={cellStyle}>{`${yOffset}m`}</TableCell>
+                      <TableCell align="right" style={cellStyle}>{`${zOffset}m`}</TableCell>
+                      <TableCell align="right" style={cellStyle}>{`${elevation}m`}</TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => { setHistoryDialogOpen(false); }} color="primary" variant="outlined">
+            Return
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </React.Fragment>
+  );
+}
+
+PositionHistoryButton.propTypes = {
+  siteCode: PropTypes.string.isRequired,
+  position: PropTypes.string.isRequired,
+  history: PropTypes.arrayOf(PropTypes.shape({
+    'HOR.VER': PropTypes.string.isRequired,
+    azimuth: PropTypes.string.isRequired,
+    pitch: PropTypes.string.isRequired,
+    roll: PropTypes.string.isRequired,
+    start: PropTypes.string.isRequired,
+    end: PropTypes.string.isRequired,
+    xOffset: PropTypes.string.isRequired,
+    yOffset: PropTypes.string.isRequired,
+    zOffset: PropTypes.string.isRequired,
+    referenceStart: PropTypes.string.isRequired,
+    referenceEnd: PropTypes.string.isRequired,
+    referenceLatitude: PropTypes.string.isRequired,
+    referenceLongitude: PropTypes.string.isRequired,
+    referenceElevation: PropTypes.string.isRequired,
+  })).isRequired,
+};
+
+/**
    PositionDetail - Component to display neatly-formatted position content
 */
 function PositionDetail(props) {
@@ -291,12 +423,14 @@ function PositionDetail(props) {
   if (!state.product.sites[siteCode] || !state.product.sites[siteCode].positions[position]) {
     return <Typography variant="body1">{position}</Typography>;
   }
+  const { history } = state.product.sites[siteCode].positions[position];
+  const current = history.length - 1 || 0;
   const {
     referenceElevation = '--',
     xOffset = '--',
     yOffset = '--',
     zOffset = '--',
-  } = state.product.sites[siteCode].positions[position].history[0] || {};
+  } = history[current] || {};
   const elevation = referenceElevation === '--' ? '--'
     : (parseFloat(referenceElevation, 10) + parseFloat(zOffset, 10)).toFixed(2).toString();
   const fadeStyle = { color: Theme.palette.grey[500] };
@@ -305,7 +439,7 @@ function PositionDetail(props) {
     <div>
       <div className={classes.startFlex} style={{ alignItems: 'flex-end' }}>
         <Typography variant="body1" style={{ fontWeight: 600, marginRight: Theme.spacing(3) }}>
-          {`ID: ${position}`}
+          {position}
         </Typography>
         <div className={classes.startFlex} style={{ alignItems: 'center', ...fadeStyle }}>
           <Typography variant="body2">Elevation:</Typography>
@@ -324,7 +458,7 @@ function PositionDetail(props) {
     <div className={classes.startFlex} style={{ alignItems: 'center' }}>
       <div style={{ marginRight: Theme.spacing(3) }}>
         <Typography variant="body1" style={{ fontWeight: 600 }}>
-          {`ID: ${position}`}
+          {position}
         </Typography>
         <Typography variant="body2" style={{ ...fadeStyle }}>
           Elevation:
@@ -350,6 +484,9 @@ function PositionDetail(props) {
           <span style={{ ...axisStyle }}>z:</span>
           {`${zOffset}m`}
         </Typography>
+      </div>
+      <div style={{ flexGrow: 1, textAlign: 'right' }}>
+        <PositionHistoryButton siteCode={siteCode} position={position} history={history} />
       </div>
     </div>
   );
@@ -407,7 +544,6 @@ SelectedPosition.defaultProps = { disabled: false };
 /**
    SelectPositionsButton - button that opens a dialog for position selection
 */
-
 function SelectPositionsButton(props) {
   const classes = useStyles(Theme);
   const { selectedSite } = props;
@@ -417,7 +553,7 @@ function SelectPositionsButton(props) {
     ? Object.keys(state.product.sites[siteCode].positions)
     : [];
   availablePositions.sort();
-  const [dialogOpen, setDialogOpen] = useState(false);
+  const [selectDialogOpen, setSelectDialogOpen] = useState(false);
   // Local state for position selections so that no fetches are fired until the dialog is submitted
   const [localSelectedPositions, setLocalSelectedPositions] = useState(selectedPositions);
   const togglePosition = (position) => {
@@ -429,7 +565,7 @@ function SelectPositionsButton(props) {
   };
   const handleApply = () => {
     if (!localSelectedPositions.length) { return; }
-    setDialogOpen(false);
+    setSelectDialogOpen(false);
     dispatch({ type: 'selectSitePositions', siteCode, positions: localSelectedPositions });
   };
   return (
@@ -437,15 +573,15 @@ function SelectPositionsButton(props) {
       <Button
         color="primary"
         variant="outlined"
-        onClick={() => { setDialogOpen(true); }}
+        onClick={() => { setSelectDialogOpen(true); }}
         className={classes.smallButton}
       >
         <SelectIcon className={classes.smallButtonIcon} />
         Select Positions…
       </Button>
       <Dialog
-        open={dialogOpen}
-        onClose={() => { setDialogOpen(false); }}
+        open={selectDialogOpen}
+        onClose={() => { setSelectDialogOpen(false); }}
         scroll="paper"
         aria-labelledby="add-positions-dialog-title"
         aria-describedby="add-positions-dialog-description"
@@ -505,7 +641,7 @@ function SelectPositionsButton(props) {
           </List>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => { setDialogOpen(false); }} color="primary" variant="outlined">
+          <Button onClick={() => { setSelectDialogOpen(false); }} color="primary" variant="outlined">
             Cancel
           </Button>
           <Button

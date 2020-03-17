@@ -45,7 +45,7 @@ const allProductsReducer = (state, action) => {
     case 'fetchSucceeded':
       newState.fetch.status = 'SUCCESS';
       newState.products = action.products;
-      newState.selectedProduct = 'DP1.20033.001'; // action.products[0].productCode;
+      newState.selectedProduct = action.products[0].productCode;
       return newState;
     case 'fetchFailed':
       newState.fetch.status = 'ERROR';

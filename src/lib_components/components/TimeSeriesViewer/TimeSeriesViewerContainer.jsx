@@ -375,7 +375,7 @@ const TABS = {
   },
 };
 
-const DEFAULT_TAB = 'SITES'; // 'SUMMARY';
+const DEFAULT_TAB = 'SUMMARY';
 
 export default function TimeSeriesViewerContainer() {
   const classes = useStyles(Theme);

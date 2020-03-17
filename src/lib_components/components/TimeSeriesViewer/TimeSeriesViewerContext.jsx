@@ -399,8 +399,8 @@ const parseSitePositions = (site, csv) => {
   // Sort position history by start/end time descending
   Object.keys(newSite.positions).forEach((posId) => {
     newSite.positions[posId].history.sort((a, b) => {
-      if (!a.end) { return -1; }
-      return (a.end < b.start) ? 1 : -1;
+      if (!a.end) { return 1; }
+      return (a.end < b.start) ? -1 : 1;
     });
   });
   return newSite;
@@ -459,7 +459,7 @@ const applyDefaultsToSelection = (state) => {
   if (!selection.sites.length) {
     const siteCodes = Object.keys(product.sites);
     siteCodes.sort();
-    selection.sites.push({ siteCode: 'SYCA', /* siteCodes[0], */ positions: [] });
+    selection.sites.push({ siteCode: siteCodes[0], positions: [] });
   }
   // Date Range - Ensure the selection has a date range (default to latest month)
   if (selection.dateRange[0] === null || selection.dateRange[1] === null) {
