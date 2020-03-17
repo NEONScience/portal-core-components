@@ -809,12 +809,14 @@ const reducer = (state, action) => {
       return newState;
     case 'selectAddSite':
       if (!state.product.sites[action.siteCode]) { return state; }
+      if (state.selection.sites.some(site => site.siteCode === action.siteCode)) { return state; }
       newState.selection.sites.push({ siteCode: action.siteCode, positions: [] });
       calcSelection();
       calcStatus();
       return newState;
     case 'selectRemoveSite':
       if (state.selection.sites.length < 2) { return state; }
+      if (!state.selection.sites.some(site => site.siteCode === action.siteCode)) { return state; }
       newState.selection.sites = newState.selection.sites
         .filter(site => site.siteCode !== action.siteCode);
       calcStatus();

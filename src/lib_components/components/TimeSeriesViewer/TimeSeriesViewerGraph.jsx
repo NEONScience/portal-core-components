@@ -74,7 +74,7 @@ const BASE_GRAPH_OPTIONS = {
   interactionModel: Dygraph.defaultInteractionModel,
   connectSeparatedPoints: false,
   rangeSelectorPlotFillColor: Theme.palette.primary.light,
-  animatedZooms: true,
+  animatedZooms: false,
   colors: SERIES_COLORS,
   highlightCircleSize: 3,
   highlightSeriesBackgroundAlpha: 1,
