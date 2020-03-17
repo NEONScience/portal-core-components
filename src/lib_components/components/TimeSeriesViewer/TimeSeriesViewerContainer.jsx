@@ -1,13 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import moment from 'moment';
-
-import domtoimage from 'dom-to-image';
-import { saveAs } from 'file-saver';
 
 import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
@@ -18,7 +13,6 @@ import Typography from '@material-ui/core/Typography';
 import Skeleton from '@material-ui/lab/Skeleton';
 
 import ErrorIcon from '@material-ui/icons/Error';
-import ImageIcon from '@material-ui/icons/Image';
 import SummaryIcon from '@material-ui/icons/Toc';
 import SitesIcon from '@material-ui/icons/Place';
 import DateRangeIcon from '@material-ui/icons/DateRange';
@@ -142,9 +136,8 @@ const useTabStyles = makeStyles(theme => ({
 /**
    Summary Component
 */
-function TimeSeriesViewerSummary(props) {
+function TimeSeriesViewerSummary() {
   const classes = useStyles(Theme);
-  const { graphRef } = props;
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
 
   const {
@@ -163,33 +156,6 @@ function TimeSeriesViewerSummary(props) {
     height: 10,
     style: { marginTop: '4px', marginBottom: '12px' },
   };
-
-  // Download Image Button
-  const exportGraphImage = () => {
-    if (graphRef.current === null) { return; }
-    domtoimage.toBlob(graphRef.current)
-      .then((blob) => {
-        const siteCodes = state.selection.sites.map(site => site.siteCode).join(' ');
-        const fileName = `NEON Time Series - ${state.product.productCode} - ${state.product.productName} - ${siteCodes}.png`;
-        saveAs(blob, fileName);
-      })
-      .catch((error) => {
-        console.error('Unable to export graph image', error); // eslint-disable-line no-console
-      });
-  };
-  const downloadImageButton = (
-    <Button
-      size="small"
-      color="primary"
-      variant="outlined"
-      onClick={exportGraphImage}
-      disabled={graphRef.current === null}
-      style={{ whiteSpace: 'nowrap' }}
-    >
-      <ImageIcon style={{ fontSize: '1.2rem', marginRight: Theme.spacing(0.5) }} />
-      Download Image (png)
-    </Button>
-  );
 
   // Product
   const productHref = `${NeonEnvironment.getHost()}/data-products/${state.product.productCode}`;
@@ -306,10 +272,7 @@ function TimeSeriesViewerSummary(props) {
   return (
     <div>
       <div className={classes.summaryDiv}>
-        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
-          {productSummaryTitle}
-          {downloadImageButton}
-        </div>
+        {productSummaryTitle}
         {productSummaryDescription}
       </div>
       <div className={classes.summaryDiv}>
@@ -331,11 +294,6 @@ function TimeSeriesViewerSummary(props) {
     </div>
   );
 }
-TimeSeriesViewerSummary.propTypes = {
-  graphRef: PropTypes.shape({
-    current: PropTypes.instanceOf(Element),
-  }).isRequired,
-};
 
 /**
    Define Tabs
@@ -401,9 +359,6 @@ export default function TimeSeriesViewerContainer() {
   // Use a ref to deterministically set slider position for all slider-based features.
   const dateRangeSliderRef = useRef(null);
 
-  // We use a ref to the graph container as the base DOM element for image export
-  const graphRef = useRef(null);
-
   const renderTabs = () => (
     <Tabs
       orientation={belowMd ? 'horizontal' : 'vertical'}
@@ -440,7 +395,7 @@ export default function TimeSeriesViewerContainer() {
     <div className={classes.tabPanels}>
       {Object.keys(TABS).map((tabId) => {
         const { Component: TabComponent } = TABS[tabId];
-        let tabComponentProps = { setSelectedTab, TAB_IDS, graphRef };
+        let tabComponentProps = { setSelectedTab, TAB_IDS };
         if (tabId === TAB_IDS.DATE_RANGE) { tabComponentProps = { dateRangeSliderRef }; }
         return (
           <div
@@ -496,11 +451,9 @@ export default function TimeSeriesViewerContainer() {
   return (
     <div style={{ width: '100%' }}>
       <Paper className={classes.graphContainer}>
-        <div ref={graphRef} style={{ backgroundColor: '#ffffff' }}>
-          {state.product.productCode === loadedProductCode ? (
-            <TimeSeriesViewerGraph />
-          ) : null}
-        </div>
+        {state.product.productCode === loadedProductCode ? (
+          <TimeSeriesViewerGraph />
+        ) : null}
         {renderGraphOverlay()}
       </Paper>
       <Paper className={classes.tabsContainer}>

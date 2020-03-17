@@ -14,8 +14,16 @@ import moment from 'moment';
 
 import cloneDeep from 'lodash/cloneDeep';
 
+import domtoimage from 'dom-to-image';
+import { saveAs } from 'file-saver';
+
 import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+
+import ImageIcon from '@material-ui/icons/Image';
+import ShowIcon from '@material-ui/icons/Visibility';
+import HideIcon from '@material-ui/icons/VisibilityOff';
 
 import TimeSeriesViewerContext, {
   TIME_SERIES_VIEWER_STATUS,
@@ -88,6 +96,7 @@ const boxShadow = '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,
 const boxShadowHeavy = '0px 4px 2px -2px rgba(0,0,0,0.4), 0px 2px 2px 0px rgba(0,0,0,0.28), 0px 2px 6px 0px rgba(0,0,0,0.24)';
 const useStyles = makeStyles(theme => ({
   graphOuterContainer: {
+    backgroundColor: '#ffffff',
     padding: theme.spacing(2),
   },
   graphInnerContainer: {
@@ -97,6 +106,13 @@ const useStyles = makeStyles(theme => ({
   graphDiv: {
     minHeight: '320px',
     flexGrow: 1,
+  },
+  buttonsContainer: {
+    margin: theme.spacing(0, 2, 1, 2),
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
   },
   citationContainer: {
     marginTop: Theme.spacing(2),
@@ -162,6 +178,10 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(0, 1.25, 0, 1.25),
     pointerEvents: 'none',
   },
+  buttonIcon: {
+    fontSize: '1.2rem',
+    marginRight: Theme.spacing(0.5),
+  },
 }));
 
 // Get the next year/month string after a given year/month string
@@ -187,6 +207,20 @@ const graphReducer = (state, action) => {
         newState[key].add(action.label);
       }
       return newState;
+    case 'toggleSeriesVisibility':
+      if (newState.hiddenSeries.size) {
+        newState.hiddenSeries = new Set();
+      } else {
+        newState.hiddenSeries = new Set(action.series);
+      }
+      return newState;
+    case 'toggleQualityFlagsVisibility':
+      if (newState.hiddenQualityFlags.size) {
+        newState.hiddenQualityFlags = new Set();
+      } else {
+        newState.hiddenQualityFlags = new Set(action.qualityFlags);
+      }
+      return newState;
     case 'purgeRemovedHiddenLabels':
       Array.from(state.hiddenSeries).forEach((label) => {
         if (!action.seriesLabels.includes(label)) { newState.hiddenSeries.delete(label); }
@@ -204,6 +238,7 @@ export default function TimeSeriesViewerGraph() {
   const classes = useStyles(Theme);
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const [graphState, graphDispatch] = useReducer(graphReducer, cloneDeep(INITIAL_GRAPH_STATE));
+  const downloadRef = useRef(null);
   const dygraphRef = useRef(null);
   const dygraphDomRef = useRef(null);
   const graphInnerContainerRef = useRef(null);
@@ -544,6 +579,7 @@ export default function TimeSeriesViewerGraph() {
     );
   };
 
+  // Function to draw quality flags on the graph
   const renderQualityFlags = (canvas, area, g) => {
     const qualitySeriesCount = qualityLabels.length - 2 - graphState.hiddenQualityFlags.size;
     if (qualitySeriesCount < 1) { return; }
@@ -677,35 +713,128 @@ export default function TimeSeriesViewerGraph() {
     return () => { document.removeEventListener('click', legendClickHandler); };
   }, [legendRef, graphDispatch]);
 
+  // Download Image Button
+  const exportGraphImage = () => {
+    if (downloadRef.current === null) { return; }
+    domtoimage.toBlob(downloadRef.current)
+      .then((blob) => {
+        const siteCodes = state.selection.sites.map(site => site.siteCode).join(' ');
+        const fileName = `NEON Time Series - ${state.product.productCode} - ${state.product.productName} - ${siteCodes}.png`;
+        saveAs(blob, fileName);
+      })
+      .catch((error) => {
+        console.error('Unable to export graph image', error); // eslint-disable-line no-console
+      });
+  };
+  const downloadImageButton = (
+    <Button
+      size="small"
+      color="primary"
+      variant="outlined"
+      onClick={exportGraphImage}
+      disabled={downloadRef.current === null}
+      style={{ whiteSpace: 'nowrap' }}
+    >
+      <ImageIcon className={classes.buttonIcon} />
+      Download Image (png)
+    </Button>
+  );
+
+  // Toggle Series Visibility Button
+  const toggleSeriesVisibility = () => {
+    const allSeries = series.map(s => s.label);
+    graphDispatch({ type: 'toggleSeriesVisibility', series: allSeries });
+  };
+  const toggleSeriesVisibilityButton = (
+    <Button
+      size="small"
+      color="primary"
+      variant="outlined"
+      onClick={toggleSeriesVisibility}
+      disabled={series.length === 0}
+      style={{ whiteSpace: 'nowrap', marginLeft: Theme.spacing(1) }}
+    >
+      {graphState.hiddenSeries.size ? (
+        <React.Fragment>
+          <ShowIcon className={classes.buttonIcon} />
+          Show All Series
+        </React.Fragment>
+      ) : (
+        <React.Fragment>
+          <HideIcon className={classes.buttonIcon} />
+          Hide All Series
+        </React.Fragment>
+      )}
+    </Button>
+  );
+
+  // Toggle Quality Flag Visibility Button
+  const toggleQualityFlagsVisibility = () => {
+    graphDispatch({ type: 'toggleQualityFlagsVisibility', qualityFlags });
+  };
+  const toggleQualityFlagsVisibilityButton = (
+    <Button
+      size="small"
+      color="primary"
+      variant="outlined"
+      onClick={toggleQualityFlagsVisibility}
+      disabled={qualityFlags.length === 0}
+      style={{ whiteSpace: 'nowrap' }}
+    >
+      {graphState.hiddenQualityFlags.size ? (
+        <React.Fragment>
+          <ShowIcon className={classes.buttonIcon} />
+          Show All Quality Flags
+        </React.Fragment>
+      ) : (
+        <React.Fragment>
+          <HideIcon className={classes.buttonIcon} />
+          Hide All Quality Flags
+        </React.Fragment>
+      )}
+    </Button>
+  );
+
   /**
      RENDER
   */
   return (
-    <div className={classes.graphOuterContainer}>
-      <Typography variant="h6" className={classes.title}>
-        {state.product.productName
-          ? `${state.product.productName} (${state.product.productCode})`
-          : state.product.productCode}
-      </Typography>
-      <div className={classes.graphInnerContainer} ref={graphInnerContainerRef}>
-        <div ref={dygraphDomRef} className={classes.graphDiv} style={{ width: '50% !important' }} />
-        <div ref={legendRef} className={classes.legendDiv} />
-      </div>
-      <div className={classes.citationContainer}>
-        <img
-          title="NEON"
-          alt="NEON Logo"
-          className={classes.neonLogo}
-          src={NeonLogo}
-        />
-        <Typography variant="caption" className={classes.citation}>
-          {/* eslint-disable react/jsx-one-expression-per-line */}
-          National Ecological Observatory Network. {(new Date()).getFullYear()}.
-          Data Product: {state.product.productCode}, {state.product.productName}.
-          Battelle, Boulder, CO, USA NEON.
-          {/* eslint-enable react/jsx-one-expression-per-line */}
+    <React.Fragment>
+      <div ref={downloadRef} className={classes.graphOuterContainer}>
+        <Typography variant="h6" className={classes.title}>
+          {state.product.productName
+            ? `${state.product.productName} (${state.product.productCode})`
+            : state.product.productCode}
         </Typography>
+        <div className={classes.graphInnerContainer} ref={graphInnerContainerRef}>
+          <div ref={dygraphDomRef} className={classes.graphDiv} style={{ width: '50% !important' }} />
+          <div ref={legendRef} className={classes.legendDiv} />
+        </div>
+        <div className={classes.citationContainer}>
+          <img
+            title="NEON"
+            alt="NEON Logo"
+            className={classes.neonLogo}
+            src={NeonLogo}
+          />
+          <Typography variant="caption" className={classes.citation}>
+            {/* eslint-disable react/jsx-one-expression-per-line */}
+            National Ecological Observatory Network. {(new Date()).getFullYear()}.
+            Data Product: {state.product.productCode}, {state.product.productName}.
+            Battelle, Boulder, CO, USA NEON.
+            {/* eslint-enable react/jsx-one-expression-per-line */}
+          </Typography>
+        </div>
       </div>
-    </div>
+      <div className={classes.buttonsContainer}>
+        <div>
+          {downloadImageButton}
+        </div>
+        <div style={{ textAlign: 'right' }}>
+          {toggleQualityFlagsVisibilityButton}
+          {toggleSeriesVisibilityButton}
+        </div>
+      </div>
+    </React.Fragment>
   );
 }
