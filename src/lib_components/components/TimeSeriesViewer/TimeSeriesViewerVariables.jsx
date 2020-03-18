@@ -100,7 +100,7 @@ function Control(props) {
   return (
     <TextField
       fullWidth
-      label="Search Variables"
+      label="Add Variables"
       variant="outlined"
       InputProps={{
         inputComponent,
@@ -320,8 +320,8 @@ export default function TimeSeriesViewerVariables() {
           clearable={false}
           classes={classes}
           styles={selectStyles}
-          aria-label="Search Variables"
-          data-gtm="time-series-viewer.search-variables"
+          aria-label="Add Variables"
+          data-gtm="time-series-viewer.add-variables"
           options={selectableVariables}
           components={components}
           value={selectedVariables}

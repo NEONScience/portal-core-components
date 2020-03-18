@@ -34,10 +34,10 @@ import Theme from '../Theme/Theme';
 
 import NeonLogo from '../../images/NSF-NEON-logo.png';
 
-// Load Dygraph plugins. These are not built as modules and require a global Dyrgaph instance. =(
+// Load Dygraph plugins. These are not built as modules and require a global Dygraph instance. =(
 if (!window.Dygraph) { window.Dygraph = Dygraph; }
-require('./../../../../node_modules/dygraphs/src/extras/shapes.js');
-require('./../../../../node_modules/dygraphs/src/extras/crosshair.js');
+require('dygraphs/src/extras/shapes.js');
+require('dygraphs/src/extras/crosshair.js');
 
 const SERIES_COLORS = [
   '#4e79a7',

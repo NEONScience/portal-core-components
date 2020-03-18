@@ -678,7 +678,7 @@ function SitesControl(props) {
   return (
     <TextField
       fullWidth
-      label="Search Sites"
+      label="Add Sites"
       variant="outlined"
       InputProps={{
         inputComponent,
@@ -1040,8 +1040,8 @@ const SitesSelect = () => {
         clearable={false}
         classes={classes}
         styles={selectStyles}
-        aria-label="Search Sites"
-        data-gtm="time-series-viewer.search-sites"
+        aria-label="Add Sites"
+        data-gtm="time-series-viewer.add-sites"
         options={selectableSites}
         components={SitesSelectComponents}
         value={selectedSites}

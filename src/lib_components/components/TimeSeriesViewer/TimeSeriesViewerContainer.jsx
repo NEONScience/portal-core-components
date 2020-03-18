@@ -48,18 +48,10 @@ const useStyles = makeStyles(theme => ({
   tabsVertical: {
     borderRight: `1px solid ${theme.palette.divider}`,
     width: `${VERTICAL_TABS_WIDTH}px`,
-    '& :not(:first-child)': {
-      borderTop: `1px solid ${theme.palette.divider}`,
-      marginTop: '-1px',
-    },
   },
   tabsHorizontal: {
     borderBottom: `1px solid ${theme.palette.divider}`,
     flexShrink: 0,
-    '& :not(:first-child)': {
-      borderLeft: `1px solid ${theme.palette.divider}`,
-      marginLeft: '-1px',
-    },
   },
   tabPanels: {
     width: '100%',
@@ -109,6 +101,17 @@ const useTabsStyles = makeStyles(theme => ({
 }));
 
 const useTabStyles = makeStyles(theme => ({
+  root: {
+    [theme.breakpoints.up('md')]: {
+      borderTop: `1px solid ${theme.palette.divider}`,
+      marginTop: '-1px',
+    },
+    [theme.breakpoints.down('sm')]: {
+      borderLeft: `1px solid ${theme.palette.divider}`,
+      marginLeft: '-1px',
+      paddingRight: theme.spacing(2.5),
+    },
+  },
   labelIcon: {
     minHeight: theme.spacing(8),
     minWidth: theme.spacing(15),
@@ -314,7 +317,9 @@ const TABS = {
     Component: TimeSeriesViewerSummary,
   },
   [TAB_IDS.SITES]: {
-    label: 'Sites',
+    // eslint-disable-next-line react/jsx-one-expression-per-line
+    label: <span>Sites &<br />Positions</span>,
+    ariaLabel: 'Sites and Positions',
     Icon: SitesIcon,
     Component: TimeSeriesViewerSites,
   },
@@ -374,7 +379,7 @@ export default function TimeSeriesViewerContainer() {
       TabIndicatorProps={{ style: { display: 'none' } }}
     >
       {Object.keys(TABS).map((tabId) => {
-        const { label, Icon: TabIcon } = TABS[tabId];
+        const { label, ariaLabel, Icon: TabIcon } = TABS[tabId];
         const style = {};
         // if (tabId === TAB_IDS.SUMMARY && !belowMd) {
         // style.borderTopLeftRadius = Theme.spacing(1); }
@@ -383,6 +388,7 @@ export default function TimeSeriesViewerContainer() {
             key={tabId}
             value={tabId}
             label={label}
+            aria-label={ariaLabel || label}
             icon={<TabIcon />}
             classes={tabClasses}
             style={style}
