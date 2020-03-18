@@ -80,15 +80,16 @@ const useStyles = makeStyles(theme => ({
   graphOverlay: {
     display: 'block',
     position: 'absolute',
-    width: '100%',
-    height: '100%',
+    width: 'calc(100% + 8px)',
+    height: 'calc(100% + 2px)',
     textAlign: 'center',
     top: 0,
     left: 0,
     zIndex: 10,
-    paddingTop: theme.spacing(20),
+    margin: theme.spacing(-0.5, -0.5, 0, -0.5),
+    padding: theme.spacing(20, 4, 4, 4),
     backgroundColor: 'rgba(255, 255, 255, 0.75)',
-    borderRadius: theme.spacing(1),
+    borderRadius: theme.spacing(1, 1, 0, 0),
   },
   titleContainer: {
     marginBottom: theme.spacing(2),
@@ -453,7 +454,7 @@ export default function TimeSeriesViewerContainer() {
   return (
     <div style={{ width: '100%' }}>
       <Paper className={classes.graphContainer} elevation={4}>
-        <div>
+        <div style={{ position: 'relative' }}>
           {state.product.productCode === loadedProductCode ? (
             <TimeSeriesViewerGraph />
           ) : null}
