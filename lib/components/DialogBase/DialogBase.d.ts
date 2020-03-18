@@ -10,6 +10,7 @@ declare namespace DialogBase {
         export const closeButtonProps: PropTypes.Requireable<{
             [x: string]: string | number | null | undefined;
         }>;
+        export const noPaper: PropTypes.Requireable<boolean>;
     }
     export namespace defaultProps {
         const open_1: boolean;
@@ -18,6 +19,8 @@ declare namespace DialogBase {
         export { toolbarChildren_1 as toolbarChildren };
         const closeButtonProps_1: {};
         export { closeButtonProps_1 as closeButtonProps };
+        const noPaper_1: boolean;
+        export { noPaper_1 as noPaper };
     }
 }
 import PropTypes from "prop-types";
