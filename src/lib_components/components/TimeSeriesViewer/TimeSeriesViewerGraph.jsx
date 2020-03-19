@@ -478,6 +478,7 @@ export default function TimeSeriesViewerGraph() {
     axes.forEach((axis) => {
       axesOption[axis.axis] = {
         independentTicks: true,
+        /* valueRange: [low, high], */
       };
     });
     return axesOption;

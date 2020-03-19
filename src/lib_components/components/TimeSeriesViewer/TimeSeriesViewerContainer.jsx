@@ -381,8 +381,9 @@ export default function TimeSeriesViewerContainer() {
       {Object.keys(TABS).map((tabId) => {
         const { label, ariaLabel, Icon: TabIcon } = TABS[tabId];
         const style = {};
-        // if (tabId === TAB_IDS.SUMMARY && !belowMd) {
-        // style.borderTopLeftRadius = Theme.spacing(1); }
+        if (tabId === TAB_IDS.OPTIONS && !belowMd) {
+          style.borderBottomLeftRadius = Theme.spacing(1);
+        }
         return (
           <Tab
             key={tabId}

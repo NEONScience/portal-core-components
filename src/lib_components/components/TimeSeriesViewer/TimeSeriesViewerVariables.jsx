@@ -5,6 +5,10 @@ import PropTypes from 'prop-types';
 import Select from 'react-select';
 
 import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormGroup from '@material-ui/core/FormGroup';
 import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Typography from '@material-ui/core/Typography';
@@ -14,9 +18,11 @@ import Paper from '@material-ui/core/Paper';
 
 import Skeleton from '@material-ui/lab/Skeleton';
 
-import MenuItem from '@material-ui/core/MenuItem';
 import ClearIcon from '@material-ui/icons/Clear';
+import MenuItem from '@material-ui/core/MenuItem';
+import NoneIcon from '@material-ui/icons/NotInterested';
 import SearchIcon from '@material-ui/icons/Search';
+import SelectAllIcon from '@material-ui/icons/DoneAll';
 
 import Theme from '../Theme/Theme';
 import TimeSeriesViewerContext from './TimeSeriesViewerContext';
@@ -74,7 +80,44 @@ const useStyles = makeStyles(theme => ({
     lineHeight: '5em',
     marginTop: theme.spacing(2.5),
   },
+  noneContainer: {
+    color: theme.palette.grey[400],
+    display: 'flex',
+    alignItems: 'flex-start',
+  },
+  noneIcon: {
+    color: theme.palette.grey[400],
+    margin: theme.spacing(0.375, 0.5, 0, 0),
+    fontSize: '1rem',
+  },
+  noneLabel: {
+    fontSize: '0.95rem',
+  },
+  qualityFlagsContainer: {
+    marginTop: theme.spacing(2),
+  },
+  qualityFlagsHeading: {
+    fontWeight: 600,
+    marginBottom: Theme.spacing(0.5),
+  },
+  qualityFlagsButtons: {
+    marginBottom: theme.spacing(2),
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
+  smallButton: {
+    fontSize: '0.8rem',
+    padding: theme.spacing(0.125, 0.75),
+    whiteSpace: 'nowrap',
+  },
+  smallButtonIcon: {
+    marginRight: theme.spacing(0.5),
+    fontSize: '0.8rem',
+  },
 }));
+
+const ucWord = word => `${word.slice(0, 1).toUpperCase()}${word.slice(1).toLowerCase()}`;
 
 function inputComponent({ inputRef, ...props }) {
   return <div ref={inputRef} {...props} />;
@@ -272,6 +315,108 @@ const selectStyles = {
   }),
 };
 
+/**
+   Quality Flags
+*/
+const QualityFlags = () => {
+  const classes = useStyles(Theme);
+  const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
+  const { availableQualityFlags } = state;
+  const { qualityFlags: selectedQualityFlags } = state.selection;
+  const toggleFlag = qualityFlag => (event) => {
+    dispatch({ type: 'selectToggleQualityFlag', qualityFlag, selected: event.target.checked });
+  };
+  if (!availableQualityFlags.size) {
+    return (
+      <div className={classes.noneContainer}>
+        <NoneIcon className={classes.noneIcon} />
+        <Typography variant="body1" className={classes.noneLabel}>
+          No Quality Flags Available
+        </Typography>
+      </div>
+    );
+  }
+  const organizedQualityFlags = { basic: [], expanded: [] };
+  Array.from(availableQualityFlags).forEach((qf) => {
+    if (!state.variables[qf]) { return; }
+    const { downloadPkg } = state.variables[qf];
+    organizedQualityFlags[downloadPkg].push(qf);
+  });
+  organizedQualityFlags.basic.sort();
+  organizedQualityFlags.expanded.sort();
+  const downloadPkgs = ['basic', 'expanded'];
+  return (
+    <React.Fragment>
+      {availableQualityFlags.size > 1 ? (
+        <div className={classes.qualityFlagsButtons}>
+          <Button
+            color="primary"
+            variant="outlined"
+            onClick={() => { dispatch({ type: 'selectNoneQualityFlags' }); }}
+            className={classes.smallButton}
+            style={{ marginRight: Theme.spacing(2) }}
+          >
+            <ClearIcon className={classes.smallButtonIcon} />
+            Select None
+          </Button>
+          <Button
+            color="primary"
+            variant="outlined"
+            onClick={() => { dispatch({ type: 'selectAllQualityFlags' }); }}
+            className={classes.smallButton}
+          >
+            <SelectAllIcon className={classes.smallButtonIcon} />
+            {`Select All (${availableQualityFlags.size})`}
+          </Button>
+        </div>
+      ) : null}
+      <FormGroup>
+        {downloadPkgs.map(downloadPkg => (
+          <div key={downloadPkg}>
+            <Typography variant="subtitle2">{ucWord(downloadPkg)}</Typography>
+            {!organizedQualityFlags[downloadPkg].length ? (
+              <Typography variant="body2" className={classes.noneLabel}>
+                {`No ${downloadPkg} quality flags available`}
+              </Typography>
+            ) : (
+              <React.Fragment>
+                {organizedQualityFlags[downloadPkg].map((qf) => {
+                  const checked = selectedQualityFlags.includes(qf);
+                  const captionStyle = { display: 'block', color: Theme.palette.grey[400] };
+                  return (
+                    <FormControlLabel
+                      key={qf}
+                      style={{ alignItems: 'flex-start', marginBottom: Theme.spacing(1) }}
+                      control={(
+                        <Checkbox
+                          value={qf}
+                          color="primary"
+                          checked={checked}
+                          onChange={toggleFlag(qf)}
+                        />
+                      )}
+                      label={(
+                        <div style={{ paddingTop: Theme.spacing(0.5) }}>
+                          <Typography variant="body2">
+                            {qf}
+                            <Typography variant="caption" style={captionStyle}>
+                              {state.variables[qf].description}
+                            </Typography>
+                          </Typography>
+                        </div>
+                      )}
+                    />
+                  );
+                })}
+              </React.Fragment>
+            )}
+          </div>
+        ))}
+      </FormGroup>
+    </React.Fragment>
+  );
+};
+
 export default function TimeSeriesViewerVariables() {
   const classes = useStyles(Theme);
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
@@ -369,6 +514,18 @@ export default function TimeSeriesViewerVariables() {
             </Paper>
           );
         })}
+      </div>
+      <div className={classes.qualityFlagsContainer}>
+        <Typography variant="subtitle1" className={classes.qualityFlagsHeading}>
+          Quality Flags
+        </Typography>
+        <Typography variant="caption" style={{ color: Theme.palette.grey[400] }}>
+          Enabling one or more quality flags will highlight regions on the chart
+          to illustrate the results of data quality tests.
+        </Typography>
+        <div style={{ width: '100%', marginTop: Theme.spacing(1) }}>
+          <QualityFlags />
+        </div>
       </div>
     </div>
   );

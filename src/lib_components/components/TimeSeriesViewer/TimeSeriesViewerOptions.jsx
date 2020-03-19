@@ -2,9 +2,6 @@ import React, { useRef, useCallback, useEffect } from 'react';
 
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
 import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
@@ -13,34 +10,12 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 
-import NoneIcon from '@material-ui/icons/NotInterested';
-import SelectAllIcon from '@material-ui/icons/DoneAll';
-import SelectNoneIcon from '@material-ui/icons/Clear';
 import SwapIcon from '@material-ui/icons/SwapHoriz';
 
 import Theme from '../Theme/Theme';
 import TimeSeriesViewerContext, { TIME_STEPS, summarizeTimeSteps } from './TimeSeriesViewerContext';
 
 const useStyles = makeStyles(theme => ({
-  noneContainer: {
-    color: theme.palette.grey[400],
-    display: 'flex',
-    alignItems: 'flex-start',
-  },
-  noneIcon: {
-    color: theme.palette.grey[400],
-    margin: theme.spacing(0.375, 0.5, 0, 0),
-    fontSize: '1rem',
-  },
-  noneLabel: {
-    fontSize: '0.95rem',
-  },
-  qualityFlagsButtons: {
-    marginBottom: theme.spacing(2),
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-  },
   smallButton: {
     fontSize: '0.8rem',
     padding: theme.spacing(0.125, 0.75),
@@ -131,8 +106,6 @@ const RollPeriodSlider = withStyles({
     },
   },
 })(Slider);
-
-const ucWord = word => `${word.slice(0, 1).toUpperCase()}${word.slice(1).toLowerCase()}`;
 
 /**
    Roll Period Option
@@ -278,108 +251,6 @@ const YAxesOption = () => {
 };
 
 /**
-   Quality Flags Option
-*/
-const QualityFlagsOption = () => {
-  const classes = useStyles(Theme);
-  const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
-  const { availableQualityFlags } = state;
-  const { qualityFlags: selectedQualityFlags } = state.selection;
-  const toggleFlag = qualityFlag => (event) => {
-    dispatch({ type: 'selectToggleQualityFlag', qualityFlag, selected: event.target.checked });
-  };
-  if (!availableQualityFlags.size) {
-    return (
-      <div className={classes.noneContainer}>
-        <NoneIcon className={classes.noneIcon} />
-        <Typography variant="body1" className={classes.noneLabel}>
-          No Quality Flags Available
-        </Typography>
-      </div>
-    );
-  }
-  const organizedQualityFlags = { basic: [], expanded: [] };
-  Array.from(availableQualityFlags).forEach((qf) => {
-    if (!state.variables[qf]) { return; }
-    const { downloadPkg } = state.variables[qf];
-    organizedQualityFlags[downloadPkg].push(qf);
-  });
-  organizedQualityFlags.basic.sort();
-  organizedQualityFlags.expanded.sort();
-  const downloadPkgs = ['basic', 'expanded'];
-  return (
-    <React.Fragment>
-      {availableQualityFlags.size > 1 ? (
-        <div className={classes.qualityFlagsButtons}>
-          <Button
-            color="primary"
-            variant="outlined"
-            onClick={() => { dispatch({ type: 'selectNoneQualityFlags' }); }}
-            className={classes.smallButton}
-            style={{ marginRight: Theme.spacing(2) }}
-          >
-            <SelectNoneIcon className={classes.smallButtonIcon} />
-            Select None
-          </Button>
-          <Button
-            color="primary"
-            variant="outlined"
-            onClick={() => { dispatch({ type: 'selectAllQualityFlags' }); }}
-            className={classes.smallButton}
-          >
-            <SelectAllIcon className={classes.smallButtonIcon} />
-            {`Select All (${availableQualityFlags.size})`}
-          </Button>
-        </div>
-      ) : null}
-      <FormGroup>
-        {downloadPkgs.map(downloadPkg => (
-          <div key={downloadPkg}>
-            <Typography variant="subtitle2">{ucWord(downloadPkg)}</Typography>
-            {!organizedQualityFlags[downloadPkg].length ? (
-              <Typography variant="body2" className={classes.noneLabel}>
-                {`No ${downloadPkg} quality flags available`}
-              </Typography>
-            ) : (
-              <React.Fragment>
-                {organizedQualityFlags[downloadPkg].map((qf) => {
-                  const checked = selectedQualityFlags.includes(qf);
-                  const captionStyle = { display: 'block', color: Theme.palette.grey[400] };
-                  return (
-                    <FormControlLabel
-                      key={qf}
-                      style={{ alignItems: 'flex-start', marginBottom: Theme.spacing(1) }}
-                      control={(
-                        <Checkbox
-                          value={qf}
-                          color="primary"
-                          checked={checked}
-                          onChange={toggleFlag(qf)}
-                        />
-                      )}
-                      label={(
-                        <div style={{ paddingTop: Theme.spacing(0.5) }}>
-                          <Typography variant="body2">
-                            {qf}
-                            <Typography variant="caption" style={captionStyle}>
-                              {state.variables[qf].description}
-                            </Typography>
-                          </Typography>
-                        </div>
-                      )}
-                    />
-                  );
-                })}
-              </React.Fragment>
-            )}
-          </div>
-        ))}
-      </FormGroup>
-    </React.Fragment>
-  );
-};
-
-/**
    Time Step Option
 */
 const TimeStepOption = () => {
@@ -430,12 +301,6 @@ const OPTIONS = {
     Component: RollPeriodOption,
   },
 
-  QUALITY_FLAGS: {
-    title: 'Quality Flags',
-    description: 'Enabling one or more quality flags will highlight regions on the chart to illustrate the results of data quality tests.',
-    Component: QualityFlagsOption,
-  },
-
   TIME_STEP: {
     title: 'Time Step',
     description: 'Set a smaller time step to see NEON data aggregated with finer granularity.',
@@ -466,7 +331,6 @@ export default function TimeSeriesViewerOptions() {
       <Grid item xs={12} sm={6}>{renderOption('Y_AXIS_SCALE')}</Grid>
       <Grid item xs={12} sm={6}>{renderOption('TIME_STEP')}</Grid>
       <Grid item xs={12}>{renderOption('ROLL_PERIOD')}</Grid>
-      <Grid item xs={12}>{renderOption('QUALITY_FLAGS')}</Grid>
     </Grid>
   );
 }

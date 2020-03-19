@@ -49,7 +49,7 @@ const DialogBase = (props) => {
     toolbarChildren,
     children,
     closeButtonProps,
-    noPaper,
+    nopaper,
     ...other
   } = props;
 
@@ -86,7 +86,7 @@ const DialogBase = (props) => {
           {toolbarChildren}
         </Toolbar>
       </AppBar>
-      {noPaper ? (
+      {nopaper ? (
         <div className={classes.noPaper}>
           {children}
         </div>
@@ -125,14 +125,14 @@ DialogBase.propTypes = {
       PropTypes.number,
     ]),
   ),
-  noPaper: PropTypes.bool,
+  nopaper: PropTypes.bool,
 };
 
 DialogBase.defaultProps = {
   open: true,
   toolbarChildren: null,
   closeButtonProps: {},
-  noPaper: false,
+  nopaper: false,
 };
 
 export default DialogBase;
