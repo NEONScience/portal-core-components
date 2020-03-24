@@ -83,6 +83,7 @@ declare namespace TimeSeriesViewerContext {
     export { Provider };
     export { useTimeSeriesViewerState };
     export { TimeSeriesViewerPropTypes };
+    export { getUpdatedValueRange };
 }
 declare function Provider(props: any): JSX.Element;
 declare namespace Provider {
@@ -132,14 +133,8 @@ declare function useTimeSeriesViewerState(): any[] | {
         rollPeriod: number;
         logscale: boolean;
         yAxes: {
-            y1: {
-                units: null;
-                logscale: boolean;
-            };
-            y2: {
-                units: null;
-                logscale: boolean;
-            };
+            y1: any;
+            y2: any;
         };
     };
     availableQualityFlags: Set<any>;
@@ -151,3 +146,4 @@ declare namespace TimeSeriesViewerPropTypes {
     export function productData_2(props: any, propName: any, componentName: any): Error | null;
     export { productData_2 as productData };
 }
+declare function getUpdatedValueRange(existingRange: any, newValue: any): any;

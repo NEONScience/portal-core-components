@@ -27,6 +27,9 @@ import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
 import { forkJoinWithProgress } from '../../util/rxUtil';
 
+// 'get' is a reserved word so can't be imported with import
+const lodashGet = require('lodash/get.js');
+
 // Every possible status a single fetch request can have
 const FETCH_STATUS = {
   AWAITING_CALL: 'AWAITING_CALL',
@@ -109,6 +112,13 @@ export const TabComponentPropTypes = {
 /**
    Context and Hook Setup
 */
+const DEFAULT_AXIS_STATE = {
+  units: null,
+  logscale: false,
+  dataRange: [null, null],
+  standardDeviation: 0,
+  selectedRange: 'auto',
+};
 const DEFAULT_STATE = {
   status: TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT,
   displayError: null,
@@ -138,8 +148,8 @@ const DEFAULT_STATE = {
     rollPeriod: 1,
     logscale: false, // Per-axis logscale is not supported in dygraphs. It's stubbed here in state.
     yAxes: {
-      y1: { units: null, logscale: false },
-      y2: { units: null, logscale: false },
+      y1: cloneDeep(DEFAULT_AXIS_STATE),
+      y2: cloneDeep(DEFAULT_AXIS_STATE),
     },
   },
   availableQualityFlags: new Set(),
@@ -200,6 +210,24 @@ const parseCSV = (rawCsv, dedupeLines = false) => {
     skipEmptyLines: 'greedy',
     // dynamicTyping: true,
   });
+};
+
+/**
+  Value Range Function
+  This function takes an existing value range (array of exactly two numbers or nulls) and a new
+  value. If the value is a number or an array of numbers (e.g. another value range) it'll be
+  compared against the low and high ends of the existing range so as to expand the range to
+  accomodate it.
+*/
+const getUpdatedValueRange = (existingRange, newValue) => {
+  const arrayVal = Array.isArray(newValue) ? newValue : [newValue];
+  if (arrayVal.some(v => typeof v !== 'number')) { return existingRange; }
+  const newRange = [...existingRange];
+  arrayVal.forEach((v) => {
+    if (newRange[0] === null || newRange[0] > v) { newRange[0] = v; }
+    if (newRange[1] === null || newRange[1] < v) { newRange[1] = v; }
+  });
+  return newRange;
 };
 
 /**
@@ -356,10 +384,10 @@ const parseSiteVariables = (previousVariables, siteCode, csv) => {
     const timeStep = getTimeStep(table);
     const isSelectable = variable.dataType !== 'dateTime'
       && variable.units !== 'NA'
-      && !/QF/.test(fieldName);
+      && !/QF$/.test(fieldName);
     const canBeDefault = isSelectable
       && variable.downloadPkg !== 'expanded'
-      && !/QM/.test(fieldName);
+      && !/QM$/.test(fieldName);
     variablesSet.add(fieldName);
     if (!newStateVariables[fieldName]) {
       newStateVariables[fieldName] = {
@@ -428,15 +456,47 @@ const parseSeriesData = (csv, variables) => {
       setType: DATA_TYPE_SETTERS[dataType] ? DATA_TYPE_SETTERS[dataType] : v => v,
     };
     fields.push(field);
-    series[fieldName] = [];
+    series[fieldName] = {
+      data: [],
+      range: [null, null],
+      sum: 0,
+      count: 0,
+      variance: 0,
+    };
   });
   rows.slice(1).forEach((row) => {
     if (!row.length) { return; }
     const values = row.split(',');
     values.forEach((value, idx) => {
-      series[fields[idx].fieldName].push(fields[idx].setType(value));
+      const typedValue = fields[idx].setType(value);
+      series[fields[idx].fieldName].data.push(typedValue);
+      // Don't bother updating the range for non-numerical series and quality flags
+      if (typeof typedValue === 'number' && !/QF$/.test(fields[idx].fieldName)) {
+        series[fields[idx].fieldName].range = getUpdatedValueRange(
+          series[fields[idx].fieldName].range,
+          typedValue,
+        );
+        series[fields[idx].fieldName].sum += typedValue;
+        series[fields[idx].fieldName].count += 1;
+      }
     });
   });
+  // Loop across all numeric non-quality-flag series again to calculate series variance
+  Object.keys(series)
+    .filter(fieldName => !/QF$/.test(fieldName) && series[fieldName].count > 0)
+    .forEach((fieldName) => {
+      const { dataType } = variables[fieldName];
+      const setType = DATA_TYPE_SETTERS[dataType] ? DATA_TYPE_SETTERS[dataType] : v => v;
+      if (!['real', 'signed integer', 'unsigned integer'].includes(dataType)) { return; }
+      const mean = series[fieldName].sum / series[fieldName].count;
+      let sumOfSquares = 0;
+      series[fieldName].data.forEach((value) => {
+        if (value === null) { return; }
+        const typedValue = setType(value);
+        sumOfSquares += (typedValue - mean) ** 2;
+      });
+      series[fieldName].variance = sumOfSquares / series[fieldName].count;
+    });
   return series;
 };
 
@@ -452,8 +512,11 @@ const parseSeriesData = (csv, variables) => {
  * @return {Object} updated object to apply to state.selection
  */
 const applyDefaultsToSelection = (state) => {
-  const { product, variables } = state;
-  const selection = state.selection || { dateRange: [null, null], variables: [], sites: [] };
+  const {
+    product,
+    variables,
+    selection,
+  } = state;
   if (!Object.keys(product.sites).length) { return selection; }
   // Sites - Ensure the selection has at least one site (default to first in list)
   if (!selection.sites.length) {
@@ -496,6 +559,53 @@ const applyDefaultsToSelection = (state) => {
   }
   // Generate a new continuous date range from the dateRange (which only contains bounds)
   selection.continuousDateRange = getContinuousDatesArray(selection.dateRange);
+  // Generate new cumulative data ranges and standard deviations for all applicable y axes.
+  const { timeStep, autoTimeStep } = selection;
+  const dataTimeStep = timeStep === 'auto' ? autoTimeStep : timeStep;
+  Object.keys(selection.yAxes).forEach((yAxis) => {
+    if (selection.yAxes[yAxis].units === null) { return; }
+    let combinedSum = 0;
+    let combinedCount = 0;
+    const monthCounts = [];
+    const monthMeans = [];
+    const monthVariances = [];
+    selection.yAxes[yAxis].dataRange = [null, null];
+    selection.yAxes[yAxis].standardDeviation = 0;
+    selection.variables.filter(variable => (
+      variables[variable].units === selection.yAxes[yAxis].units
+    )).forEach((variable) => {
+      const { downloadPkg: pkg } = variables[variable];
+      selection.sites.forEach((site) => {
+        const { siteCode, positions } = site;
+        positions.forEach((position) => {
+          selection.continuousDateRange.forEach((month) => {
+            const series = lodashGet(
+              product.sites[siteCode].positions[position],
+              `data['${month}']['${pkg}']['${dataTimeStep}'].series['${variable}']`,
+            );
+            if (!series || !series.count) { return; }
+            combinedSum += series.sum;
+            combinedCount += series.count;
+            monthCounts.push(series.count);
+            monthMeans.push(series.sum / series.count);
+            monthVariances.push(series.variance);
+            selection.yAxes[yAxis].dataRange = getUpdatedValueRange(
+              selection.yAxes[yAxis].dataRange, series.range,
+            );
+          });
+        });
+      });
+    });
+    if (combinedCount > 0) {
+      const combinedMean = combinedSum / combinedCount;
+      const deviations = monthMeans.map(mean => mean - combinedMean);
+      selection.yAxes[yAxis].standardDeviation = (
+        monthVariances.reduce((sum, variance, idx) => (
+          monthCounts[idx] * (variance + (deviations[idx] ** 2))
+        ), 0) / combinedCount
+      ) ** 0.5;
+    }
+  });
   // Generate a new digest for effect comparison
   selection.digest = JSON.stringify({
     sites: selection.sites,
@@ -701,6 +811,7 @@ const reducer = (state, action) => {
     case 'fetchDataFilesCompleted':
       delete newState.dataFetches[action.token];
       newState.status = TIME_SERIES_VIEWER_STATUS.READY;
+      calcSelection();
       console.log('READY', newState);
       return newState;
     case 'noDataFilesFetchNecessary':
@@ -748,17 +859,17 @@ const reducer = (state, action) => {
         if (newState.selection.yAxes.y2.units === parsedContent.selectedUnits[0]) {
           newState.selection.yAxes.y1.logscale = newState.selection.yAxes.y2.logscale;
         }
-        newState.selection.yAxes.y2 = { units: false, logscale: false };
+        newState.selection.yAxes.y2 = cloneDeep(DEFAULT_AXIS_STATE);
       } else {
         if (!newState.selection.yAxes.y1.units) {
-          newState.selection.yAxes.y1 = {
-            units: parsedContent.selectedUnits[0], logscale: false,
-          };
+          newState.selection.yAxes.y1 = cloneDeep(DEFAULT_AXIS_STATE);
+          // eslint-disable-next-line prefer-destructuring
+          newState.selection.yAxes.y1.units = parsedContent.selectedUnits[0];
         }
         if (!newState.selection.yAxes.y2.units) {
-          newState.selection.yAxes.y2 = {
-            units: parsedContent.selectedUnits[1], logscale: false,
-          };
+          newState.selection.yAxes.y2 = cloneDeep(DEFAULT_AXIS_STATE);
+          // eslint-disable-next-line prefer-destructuring
+          newState.selection.yAxes.y2.units = parsedContent.selectedUnits[1];
         }
       }
       calcSelection();
@@ -779,9 +890,11 @@ const reducer = (state, action) => {
       return newState;
     case 'selectSwapYAxes':
       if (state.selection.yAxes.y2.units === null) { return state; }
-      parsedContent = { ...state.selection.yAxes.y1 };
-      newState.selection.yAxes.y1 = { ...newState.selection.yAxes.y2 };
-      newState.selection.yAxes.y2 = { ...parsedContent };
+      parsedContent = {
+        y1: cloneDeep(state.selection.yAxes.y2),
+        y2: cloneDeep(state.selection.yAxes.y1),
+      };
+      newState.selection.yAxes = parsedContent;
       return newState;
     case 'setRollPeriod':
       newState.selection.rollPeriod = action.rollPeriod;
@@ -830,6 +943,18 @@ const reducer = (state, action) => {
       ))) { return state; }
       newState.selection.sites[selectedSiteIdx].positions = [...action.positions];
       calcStatus();
+      return newState;
+
+    case 'selectYAxisRange':
+      if (!state.selection.yAxes[action.axis]) { return state; }
+      if (
+        action.range !== 'auto'
+          && !(
+            Array.isArray(action.range) && action.range.length === 2
+              && action.range.every(v => typeof v === 'number')
+          )
+      ) { return state; }
+      newState.selection.yAxes[action.axis].selectedRange = action.range;
       return newState;
 
     // Default
@@ -1185,6 +1310,7 @@ const TimeSeriesViewerContext = {
   Provider,
   useTimeSeriesViewerState,
   TimeSeriesViewerPropTypes,
+  getUpdatedValueRange,
 };
 
 export default TimeSeriesViewerContext;

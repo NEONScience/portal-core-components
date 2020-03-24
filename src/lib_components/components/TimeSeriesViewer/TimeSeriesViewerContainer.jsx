@@ -8,6 +8,10 @@ import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 
 import Skeleton from '@material-ui/lab/Skeleton';
@@ -16,8 +20,8 @@ import ErrorIcon from '@material-ui/icons/Error';
 import SummaryIcon from '@material-ui/icons/Toc';
 import SitesIcon from '@material-ui/icons/Place';
 import DateRangeIcon from '@material-ui/icons/DateRange';
-import VariablesIcon from '@material-ui/icons/ShowChart';
-import OptionsIcon from '@material-ui/icons/Settings';
+import VariablesIcon from '@material-ui/icons/Timeline';
+import AxesIcon from '@material-ui/icons/BorderInner';
 
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import Theme from '../Theme/Theme';
@@ -30,7 +34,7 @@ import TimeSeriesViewerContext, {
 import TimeSeriesViewerSites from './TimeSeriesViewerSites';
 import TimeSeriesViewerDateRange from './TimeSeriesViewerDateRange';
 import TimeSeriesViewerVariables from './TimeSeriesViewerVariables';
-import TimeSeriesViewerOptions from './TimeSeriesViewerOptions';
+import TimeSeriesViewerAxes from './TimeSeriesViewerAxes';
 import TimeSeriesViewerGraph from './TimeSeriesViewerGraph';
 
 // We can't rely on flex-sizing to work during resize events as some components within tabs
@@ -88,7 +92,24 @@ const useStyles = makeStyles(theme => ({
     borderRadius: theme.spacing(1),
   },
   summaryDiv: {
-    marginBottom: Theme.spacing(1),
+    marginBottom: theme.spacing(1),
+  },
+  axisTitle: {
+    fontWeight: 600,
+    paddingLeft: '0px',
+    paddingRight: theme.spacing(1),
+  },
+  axisSettings: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    flexWrap: 'wrap',
+  },
+  axisSettingTitle: {
+    textTransform: 'uppercase',
+    color: theme.palette.grey[300],
+    fontWeight: 700,
+    fontSize: '85%',
+    marginRight: Theme.spacing(1),
   },
 }));
 
@@ -98,6 +119,12 @@ const useTabsStyles = makeStyles(theme => ({
       backgroundColor: theme.palette.grey[50],
     },
   },
+  scroller: {
+    [theme.breakpoints.up('md')]: {
+      backgroundColor: theme.palette.grey[50],
+      borderBottomLeftRadius: theme.spacing(1),
+    },
+  },
 }));
 
 const useTabStyles = makeStyles(theme => ({
@@ -105,12 +132,15 @@ const useTabStyles = makeStyles(theme => ({
     [theme.breakpoints.up('md')]: {
       borderTop: `1px solid ${theme.palette.divider}`,
       marginTop: '-1px',
+      backgroundColor: '#ffffff',
     },
     [theme.breakpoints.down('sm')]: {
       borderLeft: `1px solid ${theme.palette.divider}`,
       marginLeft: '-1px',
       paddingRight: theme.spacing(2.5),
     },
+    textTransform: 'none',
+    opacity: 1,
   },
   labelIcon: {
     minHeight: theme.spacing(8),
@@ -131,10 +161,14 @@ const useTabStyles = makeStyles(theme => ({
     '& svg': {
       margin: `${theme.spacing(0, 1, 0, 0)} !important`,
     },
+    opacity: 0.7,
   },
   selected: {
     color: 'white',
     backgroundColor: `${theme.palette.primary.main} !important`,
+    '& > span.MuiTab-wrapper': {
+      opacity: 1,
+    },
   },
 }));
 
@@ -154,6 +188,7 @@ function TimeSeriesViewerSummary() {
     logscale,
     qualityFlags,
     rollPeriod,
+    yAxes,
   } = state.selection;
 
   const skeletonProps = {
@@ -245,26 +280,9 @@ function TimeSeriesViewerSummary() {
   const variablesSummary = !variables.length ? (
     <Skeleton {...skeletonProps} width={250} />
   ) : (
-    <Typography variant="body2">
-      {variables.join(', ')}
-    </Typography>
-  );
-
-  // Options
-  const currentTimeStep = timeStep === 'auto' ? autoTimeStep : timeStep;
-  const autoTimeStepDisplay = timeStep === 'auto' && currentTimeStep !== null
-    ? ` (${currentTimeStep})` : '';
-  const options = [
-    `${logscale ? 'Logarithmic' : 'Linear'} scale`,
-    `${timeStep === 'auto' ? 'Auto' : timeStep} time step${autoTimeStepDisplay}`,
-  ];
-  if (rollPeriod > 1 && currentTimeStep !== null) {
-    options.push(`${summarizeTimeSteps(rollPeriod, currentTimeStep, false)} roll period`);
-  }
-  const optionsSummary = (
     <React.Fragment>
       <Typography variant="body2">
-        {options.join(' · ')}
+        {variables.join(', ')}
       </Typography>
       {qualityFlags.length > 0 ? (
         <Typography variant="body2">
@@ -274,6 +292,57 @@ function TimeSeriesViewerSummary() {
     </React.Fragment>
   );
 
+  // Axes
+  const axes = { x: [], y1: [], y2: [] };
+  const currentTimeStep = timeStep === 'auto' ? `Auto (${autoTimeStep})` : timeStep;
+  axes.x.push({ title: 'Time step', value: currentTimeStep });
+  if (rollPeriod > 1 && currentTimeStep !== null) {
+    axes.x.push({
+      title: 'Roll period',
+      value: summarizeTimeSteps(rollPeriod, currentTimeStep, false),
+    });
+  }
+  Object.keys(yAxes).forEach((yAxis) => {
+    if (yAxes[yAxis].units !== null) {
+      axes[yAxis].push({ title: 'Scale', value: logscale ? 'Logarithmic' : 'Linear' });
+      axes[yAxis].push({ title: 'Units', value: yAxes[yAxis].units });
+      const range = yAxes[yAxis].selectedRange === 'auto' ? 'Auto' : (
+        `${yAxes[yAxis].selectedRange[0].toString()} – ${yAxes[yAxis].selectedRange[1].toString()} ${yAxes[yAxis].units}`
+      );
+      axes[yAxis].push({ title: 'Range', value: range });
+    }
+  });
+  const renderAxisSetting = setting => (
+    <div key={setting.title} style={{ marginRight: Theme.spacing(2), whiteSpace: 'nowrap' }}>
+      <span className={classes.axisSettingTitle}>
+        {`${setting.title}:`}
+      </span>
+      {setting.value}
+    </div>
+  );
+  const axesSummary = (
+    <Table size="small">
+      <TableBody>
+        <TableRow>
+          <TableCell className={classes.axisTitle}>x</TableCell>
+          <TableCell className={classes.axisSettings}>{axes.x.map(renderAxisSetting)}</TableCell>
+        </TableRow>
+        {!axes.y1.length ? null : (
+          <TableRow>
+            <TableCell className={classes.axisTitle}>y1</TableCell>
+            <TableCell className={classes.axisSettings}>{axes.y1.map(renderAxisSetting)}</TableCell>
+          </TableRow>
+        )}
+        {!axes.y2.length ? null : (
+          <TableRow>
+            <TableCell className={classes.axisTitle}>y2</TableCell>
+            <TableCell className={classes.axisSettings}>{axes.y2.map(renderAxisSetting)}</TableCell>
+          </TableRow>
+        )}
+      </TableBody>
+    </Table>
+  );
+
   return (
     <div>
       <div className={classes.summaryDiv}>
@@ -281,7 +350,7 @@ function TimeSeriesViewerSummary() {
         {productSummaryDescription}
       </div>
       <div className={classes.summaryDiv}>
-        <Typography variant="h6">Sites and Positions</Typography>
+        <Typography variant="h6">Sites & Positions</Typography>
         {sitesSummary}
       </div>
       <div className={classes.summaryDiv}>
@@ -293,8 +362,8 @@ function TimeSeriesViewerSummary() {
         {variablesSummary}
       </div>
       <div className={classes.summaryDiv}>
-        <Typography variant="h6">Options</Typography>
-        {optionsSummary}
+        <Typography variant="h6">x/y Axes</Typography>
+        {axesSummary}
       </div>
     </div>
   );
@@ -308,39 +377,43 @@ const TAB_IDS = {
   SITES: 'SITES',
   DATE_RANGE: 'DATE_RANGE',
   VARIABLES: 'VARIABLES',
-  OPTIONS: 'OPTIONS',
+  AXES: 'AXES',
 };
 const TABS = {
   [TAB_IDS.SUMMARY]: {
-    label: 'Summary',
+    label: 'SUMMARY',
+    ariaLabel: 'Summary',
     Icon: SummaryIcon,
     Component: TimeSeriesViewerSummary,
   },
   [TAB_IDS.SITES]: {
     // eslint-disable-next-line react/jsx-one-expression-per-line
-    label: <span>Sites &<br />Positions</span>,
+    label: <span>SITES &<br />POSITIONS</span>,
     ariaLabel: 'Sites and Positions',
     Icon: SitesIcon,
     Component: TimeSeriesViewerSites,
   },
   [TAB_IDS.DATE_RANGE]: {
-    label: 'Date Range',
+    label: 'DATE RANGE',
+    ariaLabel: 'Date Range',
     Icon: DateRangeIcon,
     Component: TimeSeriesViewerDateRange,
   },
   [TAB_IDS.VARIABLES]: {
-    label: 'Variables',
+    label: 'VARIABLES',
+    ariaLabel: 'Variables',
     Icon: VariablesIcon,
     Component: TimeSeriesViewerVariables,
   },
-  [TAB_IDS.OPTIONS]: {
-    label: 'Options',
-    Icon: OptionsIcon,
-    Component: TimeSeriesViewerOptions,
+  [TAB_IDS.AXES]: {
+    label: 'x/y AXES',
+    ariaLabel: 'x/y Axes',
+    Icon: AxesIcon,
+    Component: TimeSeriesViewerAxes,
   },
 };
 
-const DEFAULT_TAB = 'SUMMARY';
+const DEFAULT_TAB = 'AXES'; // 'SUMMARY';
 
 export default function TimeSeriesViewerContainer() {
   const classes = useStyles(Theme);
@@ -381,7 +454,7 @@ export default function TimeSeriesViewerContainer() {
       {Object.keys(TABS).map((tabId) => {
         const { label, ariaLabel, Icon: TabIcon } = TABS[tabId];
         const style = {};
-        if (tabId === TAB_IDS.OPTIONS && !belowMd) {
+        if (tabId === TAB_IDS.AXES && !belowMd) {
           style.borderBottomLeftRadius = Theme.spacing(1);
         }
         return (

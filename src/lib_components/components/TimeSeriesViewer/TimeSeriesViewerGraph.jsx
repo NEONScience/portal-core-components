@@ -379,16 +379,16 @@ export default function TimeSeriesViewerGraph() {
               return;
             }
             // This site/position/month/variable series exists, so add it into the data set
-            const seriesStepCount = posData[month][pkg][timeStep].series[variable].length;
+            const seriesStepCount = posData[month][pkg][timeStep].series[variable].data.length;
             if (seriesStepCount !== monthStepCount) {
               // The series data length does not match the expected month length so
               // loop through by month steps pulling in series values through timestamp matching
               const setSeriesValueByTimestamp = (t) => {
                 const isodate = moment.utc(qualityData[t][0]).format('YYYY-MM-DD[T]HH:mm:ss[Z]');
-                const dataIdx = posData[month][pkg][timeStep].series[dateTimeVariable]
+                const dataIdx = posData[month][pkg][timeStep].series[dateTimeVariable].data
                   .findIndex(dateTimeVal => dateTimeVal === isodate);
                 data[t][columnIdx] = dataIdx !== -1
-                  ? posData[month][pkg][timeStep].series[variable][dataIdx]
+                  ? posData[month][pkg][timeStep].series[variable].data[dataIdx]
                   : null;
               };
               for (let t = monthIdx; t < monthStepCount; t += 1) {
@@ -398,7 +398,7 @@ export default function TimeSeriesViewerGraph() {
             }
             // Series and month data lengths are identical as expected so we can stream
             // values directly in without matching timestamps
-            posData[month][pkg][timeStep].series[variable].forEach((d, datumIdx) => {
+            posData[month][pkg][timeStep].series[variable].data.forEach((d, datumIdx) => {
               data[datumIdx + monthIdx][columnIdx] = d;
             });
           });
@@ -422,19 +422,19 @@ export default function TimeSeriesViewerGraph() {
               return;
             }
             // This site/position/month/qf series exists, so add it into the quality data set
-            const seriesStepCount = posData[month][pkg][timeStep].series[qf].length;
+            const seriesStepCount = posData[month][pkg][timeStep].series[qf].data.length;
             if (seriesStepCount !== monthStepCount) {
               // The series data length does not match the expected month length so
               // loop through by month steps pulling in series values through timestamp matching
               const setQualityValueByTimestamp = (t) => {
                 const isodate = moment.utc(qualityData[t][0]).format('YYYY-MM-DD[T]HH:mm:ss[Z]');
-                const dataIdx = posData[month][pkg][timeStep].series[dateTimeVariable]
+                const dataIdx = posData[month][pkg][timeStep].series[dateTimeVariable].data
                   .findIndex(dateTimeVal => dateTimeVal === isodate);
                 if (dataIdx === -1) {
                   qualityData[t][columnIdx] = [...qfNullFill];
                   return;
                 }
-                const d = posData[month][pkg][timeStep].series[qf][dataIdx];
+                const d = posData[month][pkg][timeStep].series[qf].data[dataIdx];
                 qualityData[t][columnIdx] = qfIdx ? [...qualityData[t][columnIdx], d] : [d];
               };
               for (let t = monthIdx; t < monthStepCount; t += 1) {
@@ -444,7 +444,7 @@ export default function TimeSeriesViewerGraph() {
             }
             // Series and month data lengths are identical as expected so we can stream
             // values directly in without matching timestamps
-            posData[month][pkg][timeStep].series[qf].forEach((d, datumIdx) => {
+            posData[month][pkg][timeStep].series[qf].data.forEach((d, datumIdx) => {
               const t = datumIdx + monthIdx;
               qualityData[t][columnIdx] = qfIdx ? [...qualityData[t][columnIdx], d] : [d];
             });
@@ -476,10 +476,13 @@ export default function TimeSeriesViewerGraph() {
       },
     };
     axes.forEach((axis) => {
+      const stateAxis = axis.axis === 'y' ? 'y1' : 'y2';
       axesOption[axis.axis] = {
         independentTicks: true,
-        /* valueRange: [low, high], */
       };
+      if (state.selection.yAxes[stateAxis].selectedRange !== 'auto') {
+        axesOption[axis.axis].valueRange = state.selection.yAxes[stateAxis].selectedRange;
+      }
     });
     return axesOption;
   };
