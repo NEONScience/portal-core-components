@@ -386,7 +386,19 @@ const YAxisRangeOption = (props) => {
     [false]: { color: Theme.palette.grey[400] },
   };
   return !render ? (
-    <Skeleton variant="rect" width={56} height={Theme.spacing(20)} />
+    <div className={classes.yAxisRangeOuterContainer}>
+      <div className={classes.yAxisRangeOptions}>
+        <Skeleton variant="rect" width={200} height={26} style={{ margin: Theme.spacing(1, 0) }} />
+      </div>
+      <div className={classes.yAxisRangeInnerContainer}>
+        <div className={classes.yAxisRangeTextfieldContainer}>
+          <Skeleton variant="rect" width={96} height={40} style={{ margin: Theme.spacing(1, 0) }} />
+          <Skeleton variant="rect" width={96} height={40} style={{ margin: Theme.spacing(1, 0) }} />
+          <Skeleton variant="rect" width={76} height={26} style={{ margin: Theme.spacing(1, 0) }} />
+        </div>
+        <Skeleton variant="rect" width={56} height={Theme.spacing(20)} />
+      </div>
+    </div>
   ) : (
     <div className={classes.yAxisRangeOuterContainer}>
       <div className={classes.yAxisRangeOptions}>

@@ -127,12 +127,13 @@ const useTabsStyles = makeStyles(theme => ({
   },
 }));
 
+const boxShadow = alpha => `0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,${alpha}),0 0 0 1px rgba(0,0,0,0.02)`;
 const useTabStyles = makeStyles(theme => ({
   root: {
     [theme.breakpoints.up('md')]: {
-      borderTop: `1px solid ${theme.palette.divider}`,
-      marginTop: '-1px',
+      borderBottom: `1px solid ${theme.palette.divider}`,
       backgroundColor: '#ffffff',
+      boxShadow: boxShadow(0.06),
     },
     [theme.breakpoints.down('sm')]: {
       borderLeft: `1px solid ${theme.palette.divider}`,
@@ -413,7 +414,7 @@ const TABS = {
   },
 };
 
-const DEFAULT_TAB = 'AXES'; // 'SUMMARY';
+const DEFAULT_TAB = 'SUMMARY';
 
 export default function TimeSeriesViewerContainer() {
   const classes = useStyles(Theme);
