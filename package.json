@@ -63,7 +63,8 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
-    "test": "react-app-rewired test - env=jsdom",
+    "test": "react-app-rewired test --watchAll=false - env=jsdom",
+    "test:watch": "react-app-rewired test - env=jsdom",
     "lint": "(eslint src/ --ext .js,.jsx || true) && exit 0",
     "lint:fix": "(eslint --fix src/ --ext .js,.jsx || true) && exit 0",
     "lib": "npm run lib:babel-build && npm run lib:types && npm run lib:post-cleanup",
