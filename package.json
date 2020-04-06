@@ -66,12 +66,12 @@
     "test": "react-app-rewired test - env=jsdom",
     "lint": "(eslint src/ --ext .js,.jsx || true) && exit 0",
     "lint:fix": "(eslint --fix src/ --ext .js,.jsx || true) && exit 0",
-    "lib": "npm run lib:babel-build && npm run lib:types && npm run lib:styleguide-purge",
+    "lib": "npm run lib:babel-build && npm run lib:types && npm run lib:post-cleanup",
     "lib:babel-build": "NODE_ENV=production babel ./src/lib_components --out-dir lib --extensions \".js,.jsx,.ts,.tsx\" --copy-files",
     "lib:clean": "rm -r ./lib || true",
     "lib:clean-build": "(rm -r ./lib || true) && npm run lib",
     "lib:types": "tsc --project tsconfig.d.json",
-    "lib:styleguide-purge": "rm ./lib/components/**/StyleGuide.*"
+    "lib:post-cleanup": "rm ./lib/components/**/StyleGuide.* && rm -rf ./lib/**/__tests__"
   },
   "jest": {
     "collectCoverageFrom": [

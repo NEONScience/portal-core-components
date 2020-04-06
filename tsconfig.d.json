@@ -4,7 +4,8 @@
     "rootDir": "./src/lib_components",
     "outDir": "./lib",
     "noEmit": false,
-    "emitDeclarationOnly": true
+    "emitDeclarationOnly": true,
+    "newLine": "lf"
   },
   "include": [
     "./src/lib_components/auth/**/*",
@@ -26,6 +27,7 @@
     "./src/*.js",
     "./src/*.jsx",
     "./src/*.ts",
-    "./src/*.tsx"
+    "./src/*.tsx",
+    "./**/__tests__/*"
   ]
 }
