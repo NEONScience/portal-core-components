@@ -66,11 +66,12 @@
     "test": "react-app-rewired test - env=jsdom",
     "lint": "(eslint src/ --ext .js,.jsx || true) && exit 0",
     "lint:fix": "(eslint --fix src/ --ext .js,.jsx || true) && exit 0",
-    "lib": "npm run lib:babel-build && npm run lib:types",
-    "lib:babel-build": "NODE_ENV=production babel ./src/lib_components --out-dir lib --extensions \".js,.jsx,.ts,.tsx\" --copy-files --ignore \"src/**/StyleGuide.jsx\"",
+    "lib": "npm run lib:babel-build && npm run lib:types && npm run lib:styleguide-purge",
+    "lib:babel-build": "NODE_ENV=production babel ./src/lib_components --out-dir lib --extensions \".js,.jsx,.ts,.tsx\" --copy-files",
     "lib:clean": "rm -r ./lib || true",
     "lib:clean-build": "(rm -r ./lib || true) && npm run lib",
-    "lib:types": "tsc --project tsconfig.d.json"
+    "lib:types": "tsc --project tsconfig.d.json",
+    "lib:styleguide-purge": "rm ./lib/components/**/StyleGuide.*"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -90,9 +91,6 @@
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
       "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
     },
-    "transformIgnorePatterns": [
-      "[/\\\\]lib_components[/\\\\].+\\.(js|jsx)$"
-    ],
     "moduleNameMapper": {
       "^react-native$": "react-native-web"
     },
