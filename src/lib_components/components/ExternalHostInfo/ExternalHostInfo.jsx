@@ -142,4 +142,6 @@ ExternalHostInfo.defaultProps = {
   expandable: false,
 };
 
-export default ExternalHostInfo;
+const WrappedExternalHostInfo = Theme.getWrappedComponent(ExternalHostInfo);
+
+export default WrappedExternalHostInfo;

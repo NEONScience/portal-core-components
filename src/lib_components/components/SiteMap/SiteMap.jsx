@@ -1055,6 +1055,8 @@ SiteMap.defaultProps = {
   zoom: null,
 };
 
-const WrappedSiteMap = Theme.getWrappedComponent(NeonContext.getWrappedComponent(SiteMap));
+const WrappedSiteMap = Theme.getWrappedComponent(
+  NeonContext.getWrappedComponent(SiteMap),
+);
 
 export default WrappedSiteMap;

@@ -167,12 +167,13 @@ theme.isNeonTheme = true;
 
 /**
    getWrappedComponent
-   Function used to automatically wrap functional components
-   in a ThemeProvider if not already present
+   Function used to automatically wrap functional components in a ThemeProvider if not already
+   present. Will not wrap in theme if running in jsdom so as not to inject themes into snapshots.
 */
 theme.getWrappedComponent = Component => (props) => {
   const currentTheme = useTheme();
-  if (!currentTheme.isNeonTheme) {
+  const isJsdom = navigator.userAgent.includes('Node.js') || navigator.userAgent.includes('jsdom');
+  if (!currentTheme.isNeonTheme && !isJsdom) {
     return (
       <ThemeProvider theme={theme}>
         <Component {...props} />

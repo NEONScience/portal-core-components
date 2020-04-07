@@ -607,6 +607,8 @@ AopDataViewer.defaultProps = {
   initialFlight: null,
 };
 
-const WrappedAopDataViewer = NeonContext.getWrappedComponent(AopDataViewer);
+const WrappedAopDataViewer = Theme.getWrappedComponent(
+  NeonContext.getWrappedComponent(AopDataViewer),
+);
 
 export default WrappedAopDataViewer;

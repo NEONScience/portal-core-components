@@ -787,6 +787,8 @@ DataProductAvailability.defaultProps = {
   disableSelection: false,
 };
 
-const WrappedDataProductAvailability = NeonContext.getWrappedComponent(DataProductAvailability);
+const WrappedDataProductAvailability = Theme.getWrappedComponent(
+  NeonContext.getWrappedComponent(DataProductAvailability),
+);
 
 export default WrappedDataProductAvailability;
