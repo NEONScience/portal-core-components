@@ -1,7 +1,9 @@
 /* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
+import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 
 import DocBlock from '../../../components/DocBlock';
@@ -10,7 +12,15 @@ import ExampleBlock from '../../../components/ExampleBlock';
 
 import StoryMap from './StoryMap';
 
-export default function StyleGuide() {
+export default function StyleGuide(props) {
+  const { onClickHash } = props;
+
+  const FullWidthVisualizationLink = (
+    <Link href="#FullWidthVisualization" onClick={() => onClickHash('#FullWidthVisualization')}>
+      FullWidthVisualization
+    </Link>
+  );
+
   return (
     <React.Fragment>
 
@@ -31,6 +41,12 @@ import StoryMap from 'portal-core-components/lib/components/StoryMap';
         more than one StoryMap components on the same page it is best to explicitly define a unique
         title for each of them.
       </DocBlock>
+      <DocBlock>
+        The StoryMap component uses the {FullWidthVisualizationLink} component as a container with
+        automatic derived height. This means a StoryMap component will always fill the full width of
+        its container and automatically derive its height from the viewport size; mimicking the
+        aspect ratio of the viewport at several set break points.
+      </DocBlock>
 
       <ExampleBlock>
         <StoryMap
@@ -50,3 +66,7 @@ import StoryMap from 'portal-core-components/lib/components/StoryMap';
     </React.Fragment>
   );
 }
+
+StyleGuide.propTypes = {
+  onClickHash: PropTypes.func.isRequired,
+};

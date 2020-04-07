@@ -174,6 +174,17 @@ const myVizRef = useRef(null);
         a function that takes width as its only argument to also take control of height as
         the width changes.
       </DocBlock>
+      <DocBlock>
+        The <tt>deriveHeightFromWidth</tt> prop can also be set to <tt>&quot;auto&quot;</tt> to hand
+        off height calculation to internal logic. This logic will maintain an aspect ratio matching
+        the viewport size at discrete breakpoints. For example a small viewport size (mobile screen)
+        will see a 1:1 (square) aspect ratio whereas a large viewport size will see a 16:9
+        (widescreen) aspect ratio.
+      </DocBlock>
+      <DocBlock>
+        If the <tt>deriveHeightFromWidth</tt> prop is omitted the height must be defined in the
+        styles/classes on the component.
+      </DocBlock>
       <ExampleBlock>
         <FullWidthVisualization
           vizRef={myVizRefs[3]}
