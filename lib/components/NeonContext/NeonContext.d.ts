@@ -131,7 +131,7 @@ declare function useNeonContextState(): ({
             };
             PA: {
                 /**
-                   Reduce
+                   Reducer
                 */
                 name: string;
             };
@@ -391,7 +391,7 @@ declare function useNeonContextState(): ({
             };
             PA: {
                 /**
-                   Reduce
+                   Reducer
                 */
                 name: string;
             };

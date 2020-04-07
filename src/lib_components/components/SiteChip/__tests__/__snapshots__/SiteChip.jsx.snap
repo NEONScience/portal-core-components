@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SiteChip Renders correctly 1`] = `
+<div
+  className="MuiChip-root MuiChip-colorSecondary MuiChip-outlined makeStyles-outlined-2 MuiChip-outlinedSecondary makeStyles-outlinedSecondary-4 MuiChip-sizeSmall"
+  data-selenium="site-chip"
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  style={Object {}}
+>
+  <div
+    className="MuiAvatar-root MuiAvatar-circle MuiChip-avatar MuiChip-avatarSmall MuiChip-avatarColorSecondary MuiAvatar-colorDefault"
+    style={
+      Object {
+        "backgroundColor": "#0073cf",
+        "height": "24px",
+        "marginLeft": "0px",
+        "width": "24px",
+      }
+    }
+  >
+    <svg
+      aria-hidden="true"
+      className="MuiSvgIcon-root"
+      focusable="false"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+      />
+    </svg>
+  </div>
+  <span
+    className="MuiChip-label MuiChip-labelSmall"
+  >
+    foo
+  </span>
+</div>
+`;
