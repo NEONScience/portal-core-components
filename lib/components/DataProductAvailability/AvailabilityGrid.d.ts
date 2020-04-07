@@ -20,7 +20,7 @@
  * * @param {boolean} selectionEnabled Whether to hook up interactions to allow
  *       user selection of sites
  */
-export function AvailabilityGrid(config: any): null | undefined;
+export function AvailabilityGrid(config: object): null | undefined;
 export namespace SVG {
     export const MIN_ROWS: number;
     export const MIN_CELLS: number;

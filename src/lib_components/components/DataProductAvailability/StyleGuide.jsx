@@ -268,9 +268,9 @@ const productData = {...};
       <Typography variant="h6" component="h4" gutterBottom>Setting Initial Selection</Typography>
 
       <DocBlock>
-      Pass a <tt>sites</tt> and/or a <tt>dateRange</tt> prop to a DataProductAvailability
-      rendered inside a {DownloadDataContextLink} where site/dateRange selection is
-      required in order to initialize the chart with a selection already in place.
+        Pass a <tt>sites</tt> and/or a <tt>dateRange</tt> prop to a DataProductAvailability
+        rendered inside a {DownloadDataContextLink} where site/dateRange selection is
+        required in order to initialize the chart with a selection already in place.
       </DocBlock>
       <ExampleBlock>
         <DownloadDataContext.Provider

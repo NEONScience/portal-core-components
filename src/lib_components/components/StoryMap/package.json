@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "name": "story-map",
+  "main": "./StoryMap.jsx",
+  "module": "./StoryMap.js"
+}

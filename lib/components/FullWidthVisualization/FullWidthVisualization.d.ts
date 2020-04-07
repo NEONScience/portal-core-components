@@ -6,7 +6,7 @@ declare namespace FullWidthVisualization {
         }>>;
         export const minWidth: PropTypes.Requireable<number>;
         export const handleRedraw: PropTypes.Requireable<(...args: any[]) => any>;
-        export const deriveHeightFromWidth: PropTypes.Requireable<(...args: any[]) => any>;
+        export const deriveHeightFromWidth: PropTypes.Requireable<string | ((...args: any[]) => any)>;
         export const children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
     }
     export namespace defaultProps {
