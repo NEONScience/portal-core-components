@@ -63,4 +63,6 @@ StoryMap.defaultProps = {
   title: null,
 };
 
-export default StoryMap;
+const WrappedStoryMap = Theme.getWrappedComponent(StoryMap);
+
+export default WrappedStoryMap;

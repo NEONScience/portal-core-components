@@ -1,2 +1,2 @@
 export default WrappedDataProductAvailability;
-declare const WrappedDataProductAvailability: (props: any) => JSX.Element;
+declare const WrappedDataProductAvailability: any;

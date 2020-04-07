@@ -18,7 +18,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function DownloadDataButton(props) {
+const DownloadDataButton = (props) => {
   const {
     label,
     ...other
@@ -54,7 +54,7 @@ export default function DownloadDataButton(props) {
       <DownloadDataDialog />
     </React.Fragment>
   );
-}
+};
 
 DownloadDataButton.propTypes = {
   label: PropTypes.string,
@@ -63,3 +63,7 @@ DownloadDataButton.propTypes = {
 DownloadDataButton.defaultProps = {
   label: 'Download Data',
 };
+
+const WrappedDownloadDataButton = Theme.getWrappedComponent(DownloadDataButton);
+
+export default WrappedDownloadDataButton;

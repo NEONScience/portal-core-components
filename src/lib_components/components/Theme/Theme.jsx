@@ -1,6 +1,8 @@
+import React from 'react';
 import 'typeface-source-sans-pro';
 
-import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import { useTheme, createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 
 // Values defined here are based on the NEON Style Guide,
 // expanded out through color scale generators.
@@ -161,5 +163,24 @@ const baseTheme = createMuiTheme({
 });
 
 const theme = responsiveFontSizes(baseTheme);
+theme.isNeonTheme = true;
+
+/**
+   getWrappedComponent
+   Function used to automatically wrap functional components in a ThemeProvider if not already
+   present. Will not wrap in theme if running in jsdom so as not to inject themes into snapshots.
+*/
+theme.getWrappedComponent = Component => (props) => {
+  const currentTheme = useTheme();
+  const isJsdom = navigator.userAgent.includes('Node.js') || navigator.userAgent.includes('jsdom');
+  if (!currentTheme.isNeonTheme && !isJsdom) {
+    return (
+      <ThemeProvider theme={theme}>
+        <Component {...props} />
+      </ThemeProvider>
+    );
+  }
+  return <Component {...props} />;
+};
 
 export default theme;

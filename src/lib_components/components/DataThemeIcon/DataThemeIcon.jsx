@@ -98,4 +98,6 @@ DataThemeIcon.defaultProps = {
   className: null,
 };
 
-export default DataThemeIcon;
+const WrappedDataThemeIcon = Theme.getWrappedComponent(DataThemeIcon);
+
+export default WrappedDataThemeIcon;

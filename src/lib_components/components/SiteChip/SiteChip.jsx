@@ -99,4 +99,6 @@ SiteChip.propTypes = {
   label: PropTypes.string.isRequired,
 };
 
-export default SiteChip;
+const WrappedSiteChip = Theme.getWrappedComponent(SiteChip);
+
+export default WrappedSiteChip;

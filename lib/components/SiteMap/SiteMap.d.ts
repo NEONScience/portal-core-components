@@ -41,4 +41,4 @@ export namespace TILE_LAYERS {
     }
 }
 export default WrappedSiteMap;
-declare const WrappedSiteMap: (props: any) => JSX.Element;
+declare const WrappedSiteMap: any;
