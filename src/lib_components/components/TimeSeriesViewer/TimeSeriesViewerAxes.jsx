@@ -463,7 +463,7 @@ const YAxisRangeOption = (props) => {
             Center
           </Button>
           <div className={classes.centerButtonDescription}>
-           Fit around data by one standard deviation
+            Fit around data by one standard deviation
           </div>
         </div>
         <NeonVerticalSlider
