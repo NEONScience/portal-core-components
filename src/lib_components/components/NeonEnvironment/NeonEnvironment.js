@@ -40,7 +40,6 @@ const EnvType = {
   PROD: 'production',
 };
 
-console.log(process.env);
 const NeonEnvironment = {
   isValid: requiredEnvironmentVars.every(envVar => typeof process.env[envVar] !== 'undefined'),
   isDevEnv: process.env.NODE_ENV === EnvType.DEV,
