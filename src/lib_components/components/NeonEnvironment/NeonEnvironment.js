@@ -20,7 +20,6 @@ export const requiredEnvironmentVars = [
 // required list this makes a complete set of all environment variables
 // this module will ever reference.
 export const optionalEnvironmentVars = [
-  'REACT_APP_NEON_HOST_OVERRIDE',
   'REACT_APP_NEON_PATH_AOP_DOWNLOAD_API',
   'REACT_APP_NEON_PATH_DATA_API',
   'REACT_APP_NEON_PATH_DOCUMENTS_API',
@@ -32,6 +31,8 @@ export const optionalEnvironmentVars = [
   'REACT_APP_NEON_SHOW_AOP_VIEWER',
   'REACT_APP_NEON_VISUS_PRODUCTS_BASE_URL',
   'REACT_APP_NEON_VISUS_IFRAME_BASE_URL',
+  'REACT_APP_NEON_HOST_OVERRIDE',
+  'REACT_APP_FOREIGN_LOCATION',
 ];
 
 const EnvType = {
@@ -42,7 +43,8 @@ const EnvType = {
 const NeonEnvironment = {
   isValid: requiredEnvironmentVars.every(envVar => typeof process.env[envVar] !== 'undefined'),
   isDevEnv: process.env.NODE_ENV === EnvType.DEV,
-  isProdEnv: process.env.NODE_ENV === EnvType.DEV,
+  isProdEnv: process.env.NODE_ENV === EnvType.PROD,
+  isForeignEnv: process.env.REACT_APP_FOREIGN_LOCATION === 'true',
   useGraphql: process.env.REACT_APP_NEON_USE_GRAPHQL === 'true',
   showAopViewer: process.env.REACT_APP_NEON_SHOW_AOP_VIEWER === 'true',
 
@@ -89,11 +91,14 @@ const NeonEnvironment = {
       : null
   ),
 
-  getHost: () => (
-    NeonEnvironment.isDevEnv && NeonEnvironment.getHostOverride()
-      ? NeonEnvironment.getHostOverride()
-      : `${window.location.protocol}//${window.location.host}`
-  ),
+  getHost: () => {
+    if (
+      (NeonEnvironment.isDevEnv || NeonEnvironment.isForeignEnv)
+        && NeonEnvironment.getHostOverride()) {
+      return NeonEnvironment.getHostOverride();
+    }
+    return `${window.location.protocol}//${window.location.host}`;
+  },
 
   /**
    * Gets the API token header name

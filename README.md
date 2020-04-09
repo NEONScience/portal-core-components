@@ -41,6 +41,33 @@ import { <component name> } from "portal-core-components"
 
 And used like any other component in the containing render() method.
 
+### Using Components Outside of a NEON Domain
+
+Portal Core Components are designed to be used throughout the NEON web application platform as well
+as on any third party platform. However, in order to work properly outside of NEON, two environment
+variable must be set so that components that generate links do so properly.
+
+**`REACT_APP_NEON_HOST_OVERRIDE`**
+
+Set this environment variable to your host without a trailing slash (e.g. "https://myhost.org").
+
+**`REACT_APP_FOREIGN_LOCATION`**
+
+Set this environment variable to `true`.
+
+The host envvar above is typically reserved for development purposes and will be ignored in
+production *unless* the foreign location env var is true.
+
+#### Theming and Contexts Outside of a NEON Domain
+
+All components rely on a customized Material UI Theme for styles and many components make use of
+custom React contexts to pre-load commonly used data asychronously. By design, all Portal Core
+Components are built to be as atomic as possible. As such, any components that require being wrapped
+in the NEON Theme or in one or more Portal Core Components Contexts will automatically detect if
+those resourcesare present and, if not, self-wrap.
+
+Put another way, Portal Core Components *are* atomic and can be used without having to worry about
+wrapping them in additional resources unless the documentation specifically states otherwise.
 
 ## Adding a New Component
 
