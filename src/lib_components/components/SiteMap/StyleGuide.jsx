@@ -17,8 +17,8 @@ import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 
-import SiteMap, { SITE_MAP_MODES, TILE_LAYERS } from './SiteMap';
 import Theme from '../Theme/Theme';
+import SiteMap from './SiteMap';
 
 const useStyles = makeStyles(theme => ({
   divider: {
@@ -72,6 +72,7 @@ const propRows = [
       </div>
     ),
   },
+  /*
   {
     prop: 'mode',
     type: (
@@ -102,6 +103,8 @@ const propRows = [
       </div>
     ),
   },
+  */
+  /*
   {
     prop: 'tileLayer',
     type: (
@@ -123,6 +126,7 @@ const propRows = [
       </div>
     ),
   },
+  */
   {
     prop: 'zoom',
     type: 'integer',
@@ -177,15 +181,6 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
       <CodeBlock>
         {`
 <SiteMap />
-        `}
-      </CodeBlock>
-
-      <ExampleBlock>
-        <SiteMap mode="SELECT" />
-      </ExampleBlock>
-      <CodeBlock>
-        {`
-<SiteMap mode="SELECT" />
         `}
       </CodeBlock>
 

@@ -33,6 +33,8 @@ const DEFAULT_STATE = {
     domains: domainsJSON,
     bundles: bundlesJSON,
     timeSeriesDataProducts: timeSeriesDataProductsJSON,
+    stateSites: {}, // derived when sites is fetched
+    domainSites: {}, // derived when sites is fetched
   },
   fetches: {
     sites: { status: FETCH_STATUS.AWAITING_CALL, error: null },
@@ -42,6 +44,31 @@ const DEFAULT_STATE = {
     fetchStatus: FETCH_STATUS.AWAITING_CALL,
   },
   isActive: false,
+  isFinal: false,
+  hasError: false,
+};
+
+// Derive values for stateSites and domainSites in state. This is a one-time mapping we
+// generate when sites are loaded into state containing lists of site codes for each
+// state code / domain code.
+const deriveRegionSites = (state) => {
+  const stateSites = {};
+  const domainSites = {};
+  Object.keys(state.data.sites).forEach((siteCode) => {
+    const { stateCode, domainCode } = state.data.sites[siteCode];
+    if (!stateSites[stateCode]) { stateSites[stateCode] = new Set(); }
+    if (!domainSites[domainCode]) { domainSites[domainCode] = new Set(); }
+    stateSites[stateCode].add(siteCode);
+    domainSites[domainCode].add(siteCode);
+  });
+  // Fill in empty sets for any states that had no NEON sites
+  Object.keys(state.data.states).forEach((stateCode) => {
+    if (!stateSites[stateCode]) { stateSites[stateCode] = new Set(); }
+  });
+  return {
+    data: { stateSites, domainSites, ...state.data },
+    ...state,
+  };
 };
 
 /**
@@ -81,10 +108,13 @@ const reducer = (state, action) => {
     case 'fetchSitesSucceeded':
       newState.fetches.sites.status = FETCH_STATUS.SUCCESS;
       newState.data.sites = action.sites;
-      return newState;
+      newState.isFinal = true;
+      return deriveRegionSites(newState);
     case 'fetchSitesFailed':
       newState.fetches.sites.status = FETCH_STATUS.ERROR;
       newState.fetches.sites.error = action.error;
+      newState.isFinal = true;
+      newState.hasError = true;
       return newState;
 
     // Actions for handling auth fetch
