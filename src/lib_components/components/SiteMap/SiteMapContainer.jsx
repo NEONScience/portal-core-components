@@ -1,7 +1,6 @@
 import React, { useLayoutEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
-// import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -18,6 +17,9 @@ import { VIEWS, getDynamicAspectRatio } from './SiteMapUtils';
 
 const boxShadow = '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)';
 const useStyles = makeStyles(theme => ({
+  outerContainer: {
+    width: '100%',
+  },
   contentContainer: {
     width: '100%',
     height: '0px', // Necessary to set a fixed aspect ratio from props (using paddingBottom)
@@ -47,6 +49,7 @@ const SiteMapContainer = () => {
   const [neonContextState] = NeonContext.useNeonContextState();
 
   const [state, dispatch] = SiteMapContext.useSiteMapContext();
+  console.log('CONTAINER STATE:', state);
 
   const { view, aspectRatio } = state;
   const contentDivProps = {
@@ -76,13 +79,15 @@ const SiteMapContainer = () => {
   */
   if (!neonContextState.isFinal) {
     return (
-      <div {...contentDivProps}>
-        <Paper className={classes.contentPaper}>
-          <Typography variant="h6" component="h3" gutterBottom>
-            Loading Sites...
-          </Typography>
-          <CircularProgress />
-        </Paper>
+      <div className={classes.outerContainer}>
+        <div {...contentDivProps}>
+          <Paper className={classes.contentPaper}>
+            <Typography variant="h6" component="h3" gutterBottom>
+              Loading Sites...
+            </Typography>
+            <CircularProgress />
+          </Paper>
+        </div>
       </div>
     );
   }
@@ -92,7 +97,7 @@ const SiteMapContainer = () => {
   */
   if (neonContextState.hasError) {
     return (
-      <div>
+      <div className={classes.outerContainer}>
         <div {...contentDivProps}>
           <Paper className={classes.contentPaper}>
             <ErrorIcon fontSize="large" color="error" />
@@ -109,7 +114,7 @@ const SiteMapContainer = () => {
      Render - Functioning Component
   */
   return (
-    <div>
+    <div className={classes.outerContainer}>
       <SiteMapFilters />
       <div {...contentDivProps}>
         {view === VIEWS.MAP ? (

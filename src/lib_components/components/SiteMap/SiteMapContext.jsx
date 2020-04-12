@@ -9,7 +9,6 @@ import {
   DEFAULT_STATE,
   SORT_DIRECTIONS,
   TILE_LAYERS,
-  OVERLAY_KEYS,
   VIEWS,
   MAP_ZOOM_RANGE,
   SITE_MAP_PROP_TYPES,
@@ -19,7 +18,14 @@ import {
 /**
    Reducer
 */
-const innerReducer = (state, action) => {
+const reducer = (state, action) => {
+  console.log('REDUCER', action);
+  const zoomIsValid = zoom => (
+    Number.isInteger(zoom) && zoom >= MAP_ZOOM_RANGE[0] && zoom <= MAP_ZOOM_RANGE[1]
+  );
+  const centerIsValid = center => (
+    Array.isArray(center) && center.length === 2 && center.every(v => typeof v === 'number')
+  );
   const newState = { ...state };
   switch (action.type) {
     case 'setView':
@@ -33,11 +39,14 @@ const innerReducer = (state, action) => {
       return newState;
 
     case 'setMapZoom':
-      if (
-        !Number.isInteger(action.zoom)
-          || action.zoom < MAP_ZOOM_RANGE[0] || action.zoom > MAP_ZOOM_RANGE[1]
-      ) { return state; }
+      if (!zoomIsValid(action.zoom)) { return state; }
       newState.map.zoom = action.zoom;
+      if (centerIsValid(action.center)) { newState.map.center = action.center; }
+      return newState;
+
+    case 'setMapCenter':
+      if (!centerIsValid(action.center)) { return state; }
+      newState.map.center = [...action.center];
       return newState;
 
     case 'setMapTileLayer':
@@ -45,24 +54,10 @@ const innerReducer = (state, action) => {
       newState.map.tileLayer = action.tileLayer;
       return newState;
 
-    case 'addMapTileLayer':
-      if (!Object.keys(OVERLAY_KEYS).includes(action.overlay)) { return state; }
-      newState.map.overlays.add(action.overlay);
-      return newState;
-
-    case 'removeMapTileLayer':
-      if (!Object.keys(OVERLAY_KEYS).includes(action.overlay)) { return state; }
-      newState.map.overlays.delete(action.overlay);
-      return newState;
-
     // Default
     default:
       return state;
   }
-};
-const reducer = (state, action) => {
-  const newState = innerReducer(state, action);
-  console.log('REDUCER', 'ACTION:', action, 'NEW STATE:', newState);
 };
 
 /**
@@ -85,8 +80,8 @@ const Provider = (props) => {
     view,
     aspectRatio,
     mapZoom,
+    mapCenter,
     mapTileLayer,
-    mapOverlays,
     selection,
     maxSelectable,
     children,
@@ -100,10 +95,10 @@ const Provider = (props) => {
   const initialState = cloneDeep(DEFAULT_STATE);
   initialState.view = Object.keys(VIEWS).includes(view) ? view : VIEWS.MAP;
   initialState.map = {
-    zoom: initialMapZoom,
-    tileLayer: mapTileLayer,
-    overlays: new Set(mapOverlays),
     ...initialState.map,
+    zoom: initialMapZoom,
+    center: mapCenter,
+    tileLayer: mapTileLayer,
   };
   if (typeof aspectRatio === 'number' && aspectRatio > 0) {
     initialState.aspectRatio.isDynamic = false;
@@ -116,7 +111,6 @@ const Provider = (props) => {
       ...initialState.selection[selection],
     };
   }
-  console.log('INITIAL STATE:', initialState);
   const [state, dispatch] = useReducer(reducer, initialState);
 
   /**

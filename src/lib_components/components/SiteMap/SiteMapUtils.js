@@ -61,9 +61,23 @@ export const ICON_SVGS = {
   },
 };
 
-// All possible map overlays - NEON-data-driven layers above the base layer containing points,
-// boundaries, and/or other overlays
-export const OVERLAYS = {
+/**
+   FEATURES
+   A data structure describing all descrete boundaries or sets of icons that can be shown on the map
+*/
+/*
+const FEATURE_ATTRIBUTES = {
+  SITE: {
+    type: ['core', 'relocatable'],
+    terrain: ['aquatic', 'terrestrial'],
+  },
+  PLOT: {
+    type: ['base', 'phenology', 'bird', 'mammal', 'tick', 'mosquito'],
+    location: ['tower', 'distributed'],
+  },
+};
+*/
+export const FEATURES = {
   TOWER_LOCATION: {
     name: 'Tower Location',
     minZoom: 13,
@@ -76,45 +90,64 @@ export const OVERLAYS = {
   },
   TOWER_PLOTS: {
     name: 'Tower Plots',
+    isParent: true,
     minZoom: 13,
     description: 'Tower plots provide a direct link between NEON’s Terrestrial Observation System and Terrestrial Instrument System. Tower Plots are located in and around the NEON tower primary and secondary airsheds.',
-    OVERLAYS: {
-      TOWER_BASE_PLOTS: {
-        name: 'Tower Base Plot',
-        description: 'Tower plots support a variety of plant productivity, plant diversity, soil, biogeochemistry and microbe sampling. The number and size of Tower Base Plots is determined by the vegetation of the tower airshed. In forested sites, twenty 40m x 40m plots are established. In herbaceous sites, thirty 20m x 20m plots are established.  Of these thirty tower plots, four have additional space to support soil sampling.',
-      },
-      TOWER_PHENOLOGY_PLOTS: {
-        name: 'Tower Phenology Plot',
-        description: 'Plant phenology observations are made along a transect loop or plot in or around the primary airshed. When possible, one plot is established north of the tower to calibrate phenology camera images captured from sensors on the tower. If there is insufficient space north of the tower for a 200m x 200m plot or if the vegetation does not match the primary airshed an additional plot is established.',
-      },
-    },
+  },
+  TOWER_BASE_PLOT: {
+    name: 'Tower Base Plot',
+    description: 'Tower plots support a variety of plant productivity, plant diversity, soil, biogeochemistry and microbe sampling. The number and size of Tower Base Plots is determined by the vegetation of the tower airshed. In forested sites, twenty 40m x 40m plots are established. In herbaceous sites, thirty 20m x 20m plots are established.  Of these thirty tower plots, four have additional space to support soil sampling.',
+    parent: 'TOWER_PLOTS',
+    hasAttributes: 'PLOT',
+    attributes: { type: 'base', location: 'tower' },
+  },
+  TOWER_PHENOLOGY_PLOT: {
+    name: 'Tower Phenology Plot',
+    description: 'Plant phenology observations are made along a transect loop or plot in or around the primary airshed. When possible, one plot is established north of the tower to calibrate phenology camera images captured from sensors on the tower. If there is insufficient space north of the tower for a 200m x 200m plot or if the vegetation does not match the primary airshed an additional plot is established.',
+    parent: 'TOWER_PLOTS',
+    hasAttributes: 'PLOT',
+    attributes: { type: 'phenology', location: 'tower' },
   },
   DISTRIBUTED_PLOTS: {
     name: 'Distributed Plots',
+    isParent: true,
     minZoom: 10,
     description: 'Distributed Plots are located throughout the TOS Sampling boundary in an effort to describe organisms and process with plot, point, and grid sampling. Plots were established according to a stratified-random and spatially balanced design.',
-    OVERLAYS: {
-      DISTRIBUTED_BASE_PLOTS: {
-        name: 'Distributed Base Plots',
-        description: 'Distributed Base Plots support a variety of plant productivity, plant diversity, soil, biogeochemistry, microbe and beetle sampling. Distributed Base Plots are 40m x 40m.',
-      },
-      DISTRIBUTED_BIRD_GRIDS: {
-        name: 'Distributed Bird Grids',
-        description: 'Bird Grids consist of 9 sampling points within a 500m x 500m square. Each point is 250m apart. Where possible, Bird Grids are colocated with Distributed Base Plots by placing the Bird Grid center (B2) in close proximity to the center of the Base Plot. At smaller sites, a single point count is done at the south-west corner (point 21) of the Distributed Base Plot.',
-      },
-      DISTRIBUTED_MAMMAL_GRIDS: {
-        name: 'Distributed Mammal Grids',
-        description: 'Mammal Grids are 90m x 90m and include 100 trapping locations at 10m spacing. Where possible, these grids are colocated with Distributed Base Plots by placing them a specified distance (150m +/- 50m) and random direction from the center of the Base Plot.',
-      },
-      DISTRIBUTED_MOSQUITO_PLOTS: {
-        name: 'Distributed Mosquito Plots',
-        description: 'At each Mosquito Point, one CO2 trap is established. Due to the frequency of sampling and temporal sampling constraints, Mosquito Points are located within 45m of roads.',
-      },
-      DISTRIBUTED_TICK_PLOTS: {
-        name: 'Distributed Tick Plots',
-        description: 'Tick Plots are sampled by conducting cloth dragging or flagging around the perimeter of a 40m x 40m plot. Tick plots are colocated with Distributed Base Plots by placing them a specified distance (150m +/- 15m) and random direction from the center of the Base Plot.',
-      },
-    },
+  },
+  DISTRIBUTED_BASE_PLOTS: {
+    name: 'Distributed Base Plots',
+    description: 'Distributed Base Plots support a variety of plant productivity, plant diversity, soil, biogeochemistry, microbe and beetle sampling. Distributed Base Plots are 40m x 40m.',
+    parent: 'DISTRIBUTED_PLOTS',
+    hasAttributes: 'PLOT',
+    attributes: { type: 'base', location: 'distributed' },
+  },
+  DISTRIBUTED_BIRD_GRIDS: {
+    name: 'Distributed Bird Grids',
+    description: 'Bird Grids consist of 9 sampling points within a 500m x 500m square. Each point is 250m apart. Where possible, Bird Grids are colocated with Distributed Base Plots by placing the Bird Grid center (B2) in close proximity to the center of the Base Plot. At smaller sites, a single point count is done at the south-west corner (point 21) of the Distributed Base Plot.',
+    parent: 'DISTRIBUTED_PLOTS',
+    hasAttributes: 'PLOT',
+    attributes: { type: 'bird', location: 'distributed' },
+  },
+  DISTRIBUTED_MAMMAL_GRIDS: {
+    name: 'Distributed Mammal Grids',
+    description: 'Mammal Grids are 90m x 90m and include 100 trapping locations at 10m spacing. Where possible, these grids are colocated with Distributed Base Plots by placing them a specified distance (150m +/- 50m) and random direction from the center of the Base Plot.',
+    parent: 'DISTRIBUTED_PLOTS',
+    hasAttributes: 'PLOT',
+    attributes: { type: 'mammal', location: 'distributed' },
+  },
+  DISTRIBUTED_MOSQUITO_PLOTS: {
+    name: 'Distributed Mosquito Plots',
+    description: 'At each Mosquito Point, one CO2 trap is established. Due to the frequency of sampling and temporal sampling constraints, Mosquito Points are located within 45m of roads.',
+    parent: 'DISTRIBUTED_PLOTS',
+    hasAttributes: 'PLOT',
+    attributes: { type: 'mosquito', location: 'distributed' },
+  },
+  DISTRIBUTED_TICK_PLOTS: {
+    name: 'Distributed Tick Plots',
+    description: 'Tick Plots are sampled by conducting cloth dragging or flagging around the perimeter of a 40m x 40m plot. Tick plots are colocated with Distributed Base Plots by placing them a specified distance (150m +/- 15m) and random direction from the center of the Base Plot.',
+    parent: 'DISTRIBUTED_PLOTS',
+    hasAttributes: 'PLOT',
+    attributes: { type: 'tick', location: 'distributed' },
   },
   SITE_SAMPLING_BOUNDARIES: {
     name: 'Site Sampling Boundaries',
@@ -123,48 +156,53 @@ export const OVERLAYS = {
   },
   SITE_MARKERS: {
     name: 'NEON Site Markers',
+    isParent: true,
     maxZoom: 9,
     description: '',
-    OVERLAYS: {
-      TERRESTRIAL_CORE: {
-        name: 'Terrestrial Core',
-        description: 'Land-based; fixed location',
-        iconSvg: ICON_SVGS.SITE_MARKERS.CORE.TERRESTRIAL,
-      },
-      TERRESTRIAL_RELOCATABLE: {
-        name: 'Terrestrial Relocatable',
-        description: 'Land-based; location may change',
-        iconSvg: ICON_SVGS.SITE_MARKERS.RELOCATABLE.TERRESTRIAL,
-      },
-      AQUATIC_CORE: {
-        name: 'Aquatic Core',
-        description: 'Water-based; fixed location',
-        iconSvg: ICON_SVGS.SITE_MARKERS.CORE.AQUATIC,
-      },
-      AQUATIC_RELOCATABLE: {
-        name: 'Aquatic Relocatable',
-        description: 'Water-based; location may change',
-        iconSvg: ICON_SVGS.SITE_MARKERS.RELOCATABLE.AQUATIC,
-      },
-    },
+  },
+  TERRESTRIAL_CORE_SITES: {
+    name: 'Terrestrial Core Sites',
+    description: 'Land-based; fixed location',
+    iconSvg: ICON_SVGS.SITE_MARKERS.CORE.TERRESTRIAL,
+    parent: 'SITE_MARKERS',
+    hasAttributes: 'SITE',
+    attributes: { type: 'core', terrain: 'terrestrial' },
+  },
+  TERRESTRIAL_RELOCATABLE_SITES: {
+    name: 'Terrestrial Relocatable Sites',
+    description: 'Land-based; location may change',
+    iconSvg: ICON_SVGS.SITE_MARKERS.RELOCATABLE.TERRESTRIAL,
+    parent: 'SITE_MARKERS',
+    hasAttributes: 'SITE',
+    attributes: { type: 'relocatable', terrain: 'terrestrial' },
+  },
+  AQUATIC_CORE_SITES: {
+    name: 'Aquatic Core Sites',
+    description: 'Water-based; fixed location',
+    iconSvg: ICON_SVGS.SITE_MARKERS.CORE.AQUATIC,
+    parent: 'SITE_MARKERS',
+    hasAttributes: 'SITE',
+    attributes: { type: 'core', terrain: 'aquatic' },
+  },
+  AQUATIC_RELOCATABLE_SITES: {
+    name: 'Aquatic Relocatable Sites',
+    description: 'Water-based; location may change',
+    iconSvg: ICON_SVGS.SITE_MARKERS.RELOCATABLE.AQUATIC,
+    parent: 'SITE_MARKERS',
+    hasAttributes: 'SITE',
+    attributes: { type: 'relocatable', terrain: 'aquatic' },
   },
   NEON_DOMAINS: {
     name: 'NEON Domains',
     description: '',
+    hideByDefault: true,
   },
   US_STATES: {
     name: 'US States',
     description: '',
+    hideByDefault: true,
   },
 };
-
-export const OVERLAY_KEYS = Object.keys(OVERLAYS).reduce((acc, cur) => {
-  let keys = [...acc, cur];
-  if (OVERLAYS[cur].OVERLAYS) {
-    keys = keys.concat(Object.keys(OVERLAYS[cur].OVERLAYS));
-  }
-  return keys;
-}, []);
 
 // Where the map should go when it links out to other pages
 export const SITE_DETAILS_URL_BASE = 'https://www.neonscience.org/field-sites/field-sites-map/';
@@ -216,7 +254,6 @@ export const DEFAULT_STATE = {
   map: { // Settings that ONLY apply to the map
     zoom: null,
     tileLayer: null,
-    overlays: new Set(),
   },
   selection: {
     sites: {
@@ -232,15 +269,13 @@ export const DEFAULT_STATE = {
       plots: new Set(),
     },
   },
-  /* TODO: Add filter support; determine how/if filters change with zoom level (site detail)
+  filterOptions: {
+    features: new Set(), // All features visible at the current zoom level
+  },
   filters: {
     search: null,
-    states: new Set(),
-    domains: new Set(),
-    siteTypes: new Set(),
-    siteTerrains: new Set(),
+    hiddenFeatures: new Set(Object.keys(FEATURES).filter(f => f.hideByDefault)),
   },
-  */
 };
 
 export const SITE_MAP_PROP_TYPES = {
@@ -251,7 +286,7 @@ export const SITE_MAP_PROP_TYPES = {
   mapCenter: PropTypes.arrayOf(PropTypes.number),
   mapZoom: PropTypes.number,
   mapTileLayer: PropTypes.oneOf(Object.keys(TILE_LAYERS)),
-  mapOverlays: PropTypes.arrayOf(PropTypes.oneOf(OVERLAY_KEYS)),
+  mapOverlays: PropTypes.arrayOf(PropTypes.oneOf(Object.keys(FEATURES))),
   // Selection Props
   selection: PropTypes.oneOf(Object.keys(SELECTIONS)),
   maxSelectable: PropTypes.number,
@@ -263,7 +298,6 @@ export const SITE_MAP_DEFAULT_PROPS = {
   mapCenter: [52.68, -110.75],
   mapTileLayer: Object.keys(TILE_LAYERS)[0],
   mapZoom: null,
-  mapOverlays: null,
   selection: null,
   maxSelectable: null,
 };
