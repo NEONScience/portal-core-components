@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import cloneDeep from 'lodash/cloneDeep';
 
+import L from 'leaflet';
+
 // import NeonContext from '../NeonContext/NeonContext';
 
 import {
@@ -11,10 +13,73 @@ import {
   TILE_LAYERS,
   VIEWS,
   FEATURES,
+  ICON_SVGS,
   MAP_ZOOM_RANGE,
   SITE_MAP_PROP_TYPES,
   SITE_MAP_DEFAULT_PROPS,
 } from './SiteMapUtils';
+
+/**
+   Map Icon Functions
+   These appear here because of how Leaflet handles icons. Each icon must be a L.Icon instance,
+   but many of our icons repeat. We also want to scale our icons with the zoom level. As such,
+   we generate a stat structure containing only one instance of each distinct icon type scaled
+   to the current zoom level and keep that in state. It is regenerated any time the zoom changes.
+*/
+const getIconClassName = (classes, type, isSelected) => ([
+  classes.mapIcon,
+  classes[`mapIcon${type}`],
+  classes[`mapIcon${isSelected ? 'Selected' : 'Unselected'}`],
+].join(' '));
+// Site Markers: Get a leaflet icon instance scaled to the current zoom level.
+const getZoomedSiteMarkerIcon = (zoom = 3, classes, type, terrain, isSelected = false) => {
+  const svgs = ICON_SVGS.SITE_MARKERS;
+  if (!svgs[type] || !svgs[type][terrain] || !svgs[type].SHADOW) { return null; }
+  const selected = isSelected ? 'SELECTED' : 'BASE';
+  const iconScale = 0.2 + (Math.floor(((zoom || 2) - 2) / 3) / 10);
+  const iconSize = isSelected ? [150, 150] : [100, 100];
+  const iconAnchor = isSelected ? [75, 125] : [50, 100];
+  const shadowSize = isSelected ? [234, 160] : [156, 93];
+  const shadowAnchor = isSelected ? [80, 120] : [50, 83];
+  return new L.Icon({
+    iconUrl: svgs[type][terrain][selected],
+    iconRetinaUrl: svgs[type][terrain][selected],
+    iconSize: iconSize.map(x => x * iconScale),
+    iconAnchor: iconAnchor.map(x => x * iconScale),
+    shadowUrl: svgs[type].SHADOW[selected],
+    shadowSize: shadowSize.map(x => x * iconScale),
+    shadowAnchor: shadowAnchor.map(x => x * iconScale),
+    popupAnchor: [0, -100].map(x => x * iconScale),
+    className: getIconClassName(classes, type, isSelected),
+  });
+};
+// Get a structure containing all zoomed leaflet icon instances. These are stored in
+// state and regenerated any time the zoom level changes. This makes for a maximum of
+// eight distinct icon instances in memory instead of one for every site.
+const getZoomedIcons = (zoom, classes) => ({
+  SITE_MARKERS: {
+    CORE: {
+      AQUATIC: {
+        BASE: getZoomedSiteMarkerIcon(zoom, classes, 'CORE', 'AQUATIC'),
+        SELECTED: getZoomedSiteMarkerIcon(zoom, classes, 'CORE', 'AQUATIC', true),
+      },
+      TERRESTRIAL: {
+        BASE: getZoomedSiteMarkerIcon(zoom, classes, 'CORE', 'TERRESTRIAL'),
+        SELECTED: getZoomedSiteMarkerIcon(zoom, classes, 'CORE', 'TERRESTRIAL', true),
+      },
+    },
+    RELOCATABLE: {
+      AQUATIC: {
+        BASE: getZoomedSiteMarkerIcon(zoom, classes, 'RELOCATABLE', 'AQUATIC'),
+        SELECTED: getZoomedSiteMarkerIcon(zoom, classes, 'RELOCATABLE', 'AQUATIC', true),
+      },
+      TERRESTRIAL: {
+        BASE: getZoomedSiteMarkerIcon(zoom, classes, 'RELOCATABLE', 'TERRESTRIAL'),
+        SELECTED: getZoomedSiteMarkerIcon(zoom, classes, 'RELOCATABLE', 'TERRESTRIAL', true),
+      },
+    },
+  },
+});
 
 /**
    Reducer
@@ -62,6 +127,9 @@ const reducer = (state, action) => {
       if (!zoomIsValid(action.zoom)) { return state; }
       newState.map.zoom = action.zoom;
       if (centerIsValid(action.center)) { newState.map.center = action.center; }
+      if (action.classes) {
+        newState.map.zoomedIcons = getZoomedIcons(newState.map.zoom, action.classes);
+      }
       return calculateFeatureAvailability(newState);
 
     case 'setMapCenter':
@@ -187,6 +255,7 @@ Provider.defaultProps = SITE_MAP_DEFAULT_PROPS;
 const SiteMapContext = {
   Provider,
   useSiteMapContext,
+  getIconClassName,
   SORT_DIRECTIONS,
   VIEWS,
 };

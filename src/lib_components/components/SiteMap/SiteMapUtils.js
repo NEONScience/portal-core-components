@@ -165,7 +165,7 @@ export const FEATURES = {
     iconSvg: ICON_SVGS.SITE_MARKERS.CORE.TERRESTRIAL.BASE,
     parent: 'SITE_MARKERS',
     hasAttributes: 'SITE',
-    attributes: { type: 'core', terrain: 'terrestrial' },
+    attributes: { type: 'CORE', terrain: 'TERRESTRIAL' },
   },
   TERRESTRIAL_RELOCATABLE_SITES: {
     name: 'Terrestrial Relocatable Sites',
@@ -173,7 +173,7 @@ export const FEATURES = {
     iconSvg: ICON_SVGS.SITE_MARKERS.RELOCATABLE.TERRESTRIAL.BASE,
     parent: 'SITE_MARKERS',
     hasAttributes: 'SITE',
-    attributes: { type: 'relocatable', terrain: 'terrestrial' },
+    attributes: { type: 'RELOCATABLE', terrain: 'TERRESTRIAL' },
   },
   AQUATIC_CORE_SITES: {
     name: 'Aquatic Core Sites',
@@ -181,7 +181,7 @@ export const FEATURES = {
     iconSvg: ICON_SVGS.SITE_MARKERS.CORE.AQUATIC.BASE,
     parent: 'SITE_MARKERS',
     hasAttributes: 'SITE',
-    attributes: { type: 'core', terrain: 'aquatic' },
+    attributes: { type: 'CORE', terrain: 'AQUATIC' },
   },
   AQUATIC_RELOCATABLE_SITES: {
     name: 'Aquatic Relocatable Sites',
@@ -189,7 +189,7 @@ export const FEATURES = {
     iconSvg: ICON_SVGS.SITE_MARKERS.RELOCATABLE.AQUATIC.BASE,
     parent: 'SITE_MARKERS',
     hasAttributes: 'SITE',
-    attributes: { type: 'relocatable', terrain: 'aquatic' },
+    attributes: { type: 'RELOCATABLE', terrain: 'AQUATIC' },
   },
   NEON_DOMAINS: {
     name: 'NEON Domains',
@@ -253,12 +253,13 @@ export const DEFAULT_STATE = {
   map: { // Settings that ONLY apply to the map
     zoom: null,
     tileLayer: null,
+    zoomedIcons: {},
   },
   selection: {
     sites: {
       enabled: false,
       maxSelectable: 0, // 0 is interpreted as unlimited, all other values are discrete limits
-      sites: new Set(),
+      siteCodes: new Set(),
       states: {}, // Mapping of stateCodes to a SELECTION_PORTIONS key; derived when sites changes
       domains: {}, // Mapping of domainCodes to a SELECTION_PORTIONS key; derived when sites changes
     },
@@ -271,7 +272,7 @@ export const DEFAULT_STATE = {
   filters: {
     search: null,
     features: {
-      open: true, // whether the features pane is open/visible
+      open: false, // whether the features pane is open/visible
       available: {}, // key/bool map of which features are available per the zoom level
       visible: Object.fromEntries( // key/bool map of which available features are visible
         Object.entries(FEATURES).map(entry => [entry[0], !entry[1].hideByDefault]),
@@ -288,20 +289,28 @@ export const SITE_MAP_PROP_TYPES = {
   mapCenter: PropTypes.arrayOf(PropTypes.number),
   mapZoom: PropTypes.number,
   mapTileLayer: PropTypes.oneOf(Object.keys(TILE_LAYERS)),
-  mapOverlays: PropTypes.arrayOf(PropTypes.oneOf(Object.keys(FEATURES))),
   // Selection Props
   selection: PropTypes.oneOf(Object.keys(SELECTIONS)),
   maxSelectable: PropTypes.number,
+  // Filter Props
+  search: PropTypes.string,
+  features: PropTypes.arrayOf(PropTypes.oneOf(Object.keys(FEATURES))),
 };
 
 export const SITE_MAP_DEFAULT_PROPS = {
+  // Top-level Props
   view: VIEWS.MAP,
   aspectRatio: null,
+  // Map Props
   mapCenter: [52.68, -110.75],
-  mapTileLayer: Object.keys(TILE_LAYERS)[0],
   mapZoom: null,
+  mapTileLayer: Object.keys(TILE_LAYERS)[0],
+  // Selection Props
   selection: null,
   maxSelectable: null,
+  // Filter Props
+  search: null,
+  features: null,
 };
 
 const dynamicAspectRatios = [

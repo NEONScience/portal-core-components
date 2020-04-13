@@ -55,7 +55,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    // overflowY: 'scroll',
+    overflowY: 'auto',
   },
   featureIcon: {
     width: '28px',
