@@ -10,6 +10,7 @@ import {
   SORT_DIRECTIONS,
   TILE_LAYERS,
   VIEWS,
+  FEATURES,
   MAP_ZOOM_RANGE,
   SITE_MAP_PROP_TYPES,
   SITE_MAP_DEFAULT_PROPS,
@@ -26,6 +27,25 @@ const reducer = (state, action) => {
   const centerIsValid = center => (
     Array.isArray(center) && center.length === 2 && center.every(v => typeof v === 'number')
   );
+  const calculateFeatureAvailability = (newState) => {
+    const featureIsAvailable = feature => (!(
+      (typeof feature.minZoom === 'number' && newState.map.zoom < feature.minZoom)
+        || (typeof feature.maxZoom === 'number' && newState.map.zoom > feature.maxZoom)
+        || (typeof feature.parent === 'string' && !featureIsAvailable(FEATURES[feature.parent]))
+    ));
+    return {
+      ...newState,
+      filters: {
+        ...newState.filters,
+        features: {
+          ...newState.filters.features,
+          available: Object.fromEntries(
+            Object.entries(FEATURES).map(entry => [entry[0], featureIsAvailable(entry[1])]),
+          ),
+        },
+      },
+    };
+  };
   const newState = { ...state };
   switch (action.type) {
     case 'setView':
@@ -42,7 +62,7 @@ const reducer = (state, action) => {
       if (!zoomIsValid(action.zoom)) { return state; }
       newState.map.zoom = action.zoom;
       if (centerIsValid(action.center)) { newState.map.center = action.center; }
-      return newState;
+      return calculateFeatureAvailability(newState);
 
     case 'setMapCenter':
       if (!centerIsValid(action.center)) { return state; }
@@ -52,6 +72,31 @@ const reducer = (state, action) => {
     case 'setMapTileLayer':
       if (!Object.keys(TILE_LAYERS).includes(action.tileLayer)) { return state; }
       newState.map.tileLayer = action.tileLayer;
+      return newState;
+
+    case 'setFilterFeaturesOpen':
+      newState.filters.features.open = !!action.open;
+      return newState;
+
+    case 'setFilterFeatureVisibility':
+      if (
+        !Object.keys(FEATURES).includes(action.feature) || typeof action.visible !== 'boolean'
+      ) { return state; }
+      newState.filters.features.visible[action.feature] = action.visible;
+      // Parents: ensure children are set/unset accordingly
+      if (FEATURES[action.feature].isParent) {
+        Object.keys(FEATURES)
+          .filter(f => FEATURES[f].parent === action.feature)
+          .forEach((f) => {
+            newState.filters.features.visible[f] = action.visible;
+          });
+      }
+      // Children: ensure parent is set/unset accordingly (visible if one child is visible)
+      if (FEATURES[action.feature].parent) {
+        newState.filters.features.visible[FEATURES[action.feature].parent] = Object.keys(FEATURES)
+          .filter(f => FEATURES[f].parent === FEATURES[action.feature].parent) // Of all children...
+          .some(f => newState.filters.features.visible[f]); // ...some child is visible
+      }
       return newState;
 
     // Default

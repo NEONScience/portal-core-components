@@ -1,13 +1,26 @@
 import React from 'react';
 
+import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+
+import Theme from '../Theme/Theme';
 
 import SiteMapContext from './SiteMapContext';
 import { VIEWS } from './SiteMapUtils';
 
+const useStyles = makeStyles(theme => ({
+  row: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: theme.spacing(1),
+  },
+}));
+
 const SiteMapFilters = () => {
+  const classes = useStyles(Theme);
   const [state, dispatch] = SiteMapContext.useSiteMapContext();
-  const { view } = state;
+  const { view, filters } = state;
 
   const toggleView = () => {
     dispatch({
@@ -16,10 +29,20 @@ const SiteMapFilters = () => {
     });
   };
 
+  const toggleFeatures = () => {
+    dispatch({
+      type: 'setFilterFeaturesOpen',
+      open: !filters.features.open,
+    });
+  };
+
   return (
-    <div>
-      <Button color="primary" onClick={toggleView}>
+    <div className={classes.row}>
+      <Button color="primary" variant="contained" onClick={toggleView}>
         {`View ${view === VIEWS.MAP ? 'Table' : 'Map'}`}
+      </Button>
+      <Button color="primary" variant="contained" onClick={toggleFeatures}>
+        Features
       </Button>
     </div>
   );

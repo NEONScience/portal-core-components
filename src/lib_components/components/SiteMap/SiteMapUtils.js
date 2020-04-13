@@ -80,7 +80,7 @@ const FEATURE_ATTRIBUTES = {
 export const FEATURES = {
   TOWER_LOCATION: {
     name: 'Tower Location',
-    minZoom: 13,
+    minZoom: 10,
     description: '',
   },
   TOWER_AIRSHED_BOUNDARY: {
@@ -157,13 +157,12 @@ export const FEATURES = {
   SITE_MARKERS: {
     name: 'NEON Site Markers',
     isParent: true,
-    maxZoom: 9,
     description: '',
   },
   TERRESTRIAL_CORE_SITES: {
     name: 'Terrestrial Core Sites',
     description: 'Land-based; fixed location',
-    iconSvg: ICON_SVGS.SITE_MARKERS.CORE.TERRESTRIAL,
+    iconSvg: ICON_SVGS.SITE_MARKERS.CORE.TERRESTRIAL.BASE,
     parent: 'SITE_MARKERS',
     hasAttributes: 'SITE',
     attributes: { type: 'core', terrain: 'terrestrial' },
@@ -171,7 +170,7 @@ export const FEATURES = {
   TERRESTRIAL_RELOCATABLE_SITES: {
     name: 'Terrestrial Relocatable Sites',
     description: 'Land-based; location may change',
-    iconSvg: ICON_SVGS.SITE_MARKERS.RELOCATABLE.TERRESTRIAL,
+    iconSvg: ICON_SVGS.SITE_MARKERS.RELOCATABLE.TERRESTRIAL.BASE,
     parent: 'SITE_MARKERS',
     hasAttributes: 'SITE',
     attributes: { type: 'relocatable', terrain: 'terrestrial' },
@@ -179,7 +178,7 @@ export const FEATURES = {
   AQUATIC_CORE_SITES: {
     name: 'Aquatic Core Sites',
     description: 'Water-based; fixed location',
-    iconSvg: ICON_SVGS.SITE_MARKERS.CORE.AQUATIC,
+    iconSvg: ICON_SVGS.SITE_MARKERS.CORE.AQUATIC.BASE,
     parent: 'SITE_MARKERS',
     hasAttributes: 'SITE',
     attributes: { type: 'core', terrain: 'aquatic' },
@@ -187,7 +186,7 @@ export const FEATURES = {
   AQUATIC_RELOCATABLE_SITES: {
     name: 'Aquatic Relocatable Sites',
     description: 'Water-based; location may change',
-    iconSvg: ICON_SVGS.SITE_MARKERS.RELOCATABLE.AQUATIC,
+    iconSvg: ICON_SVGS.SITE_MARKERS.RELOCATABLE.AQUATIC.BASE,
     parent: 'SITE_MARKERS',
     hasAttributes: 'SITE',
     attributes: { type: 'relocatable', terrain: 'aquatic' },
@@ -269,12 +268,15 @@ export const DEFAULT_STATE = {
       plots: new Set(),
     },
   },
-  filterOptions: {
-    features: new Set(), // All features visible at the current zoom level
-  },
   filters: {
     search: null,
-    hiddenFeatures: new Set(Object.keys(FEATURES).filter(f => f.hideByDefault)),
+    features: {
+      open: true, // whether the features pane is open/visible
+      available: {}, // key/bool map of which features are available per the zoom level
+      visible: Object.fromEntries( // key/bool map of which available features are visible
+        Object.entries(FEATURES).map(entry => [entry[0], !entry[1].hideByDefault]),
+      ),
+    },
   },
 };
 
