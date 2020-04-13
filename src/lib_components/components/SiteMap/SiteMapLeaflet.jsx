@@ -214,7 +214,7 @@ const SiteMapLeaflet = () => {
     });
   }, [
     state.map.zoom,
-    mapRef.current,
+    mapRef,
     classes,
     dispatch,
   ]);

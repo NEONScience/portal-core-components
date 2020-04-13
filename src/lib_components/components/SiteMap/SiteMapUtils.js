@@ -65,19 +65,17 @@ export const ICON_SVGS = {
    FEATURES
    A data structure describing all descrete boundaries or sets of icons that can be shown on the map
 */
-/*
-const FEATURE_ATTRIBUTES = {
-  SITE: {
-    type: ['core', 'relocatable'],
-    terrain: ['aquatic', 'terrestrial'],
-  },
-  PLOT: {
-    type: ['base', 'phenology', 'bird', 'mammal', 'tick', 'mosquito'],
-    location: ['tower', 'distributed'],
-  },
-};
-*/
 export const FEATURES = {
+  SITE_WATERSHED_BOUNDARY: {
+    name: 'Site Watershed Boundary',
+    minZoom: 7,
+    description: '',
+  },
+  SITE_FLIGHT_BOX_BOUNDARY: {
+    name: 'Site Flight Box Boundary',
+    minZoom: 7,
+    description: '',
+  },
   TOWER_LOCATION: {
     name: 'Tower Location',
     minZoom: 10,
@@ -247,6 +245,7 @@ export const DEFAULT_STATE = {
     isDynamic: true, // Whether currentValue should set itself dynamically from viewport size
   },
   table: { // Settings that ONLY apply to the table
+    focus: 'SITE',
     sortColumn: 'siteName',
     sortDirection: SORT_DIRECTIONS.ASC,
   },
@@ -273,7 +272,16 @@ export const DEFAULT_STATE = {
     search: null,
     features: {
       open: false, // whether the features pane is open/visible
-      available: {}, // key/bool map of which features are available per the zoom level
+      available: Object.fromEntries( // key/bool map of which features are available per the zoom
+        Object.entries(FEATURES).map(entry => [
+          entry[0],
+          !entry[1].minZoom && !entry[1].maxZoom && (
+            !entry[1].parent || (
+              !FEATURES[entry[1].parent].minZoom && !FEATURES[entry[1].parent].maxZoom
+            )
+          ),
+        ]),
+      ),
       visible: Object.fromEntries( // key/bool map of which available features are visible
         Object.entries(FEATURES).map(entry => [entry[0], !entry[1].hideByDefault]),
       ),
@@ -299,7 +307,7 @@ export const SITE_MAP_PROP_TYPES = {
 
 export const SITE_MAP_DEFAULT_PROPS = {
   // Top-level Props
-  view: VIEWS.MAP,
+  view: VIEWS.TABLE,
   aspectRatio: null,
   // Map Props
   mapCenter: [52.68, -110.75],

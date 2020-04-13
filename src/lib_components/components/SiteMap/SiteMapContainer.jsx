@@ -30,7 +30,6 @@ const useStyles = makeStyles(theme => ({
     overflow: 'hidden',
     display: 'flex',
     justifyContent: 'center',
-    borderRadius: theme.spacing(1),
     boxShadow,
   },
   contentPaper: {
