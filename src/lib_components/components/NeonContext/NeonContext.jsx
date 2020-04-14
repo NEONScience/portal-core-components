@@ -66,8 +66,8 @@ const deriveRegionSites = (state) => {
     if (!stateSites[stateCode]) { stateSites[stateCode] = new Set(); }
   });
   return {
-    data: { stateSites, domainSites, ...state.data },
     ...state,
+    data: { ...state.data, stateSites, domainSites },
   };
 };
 

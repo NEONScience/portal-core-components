@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 
+import { COLORS } from '../Theme/Theme';
+
 import iconCoreTerrestrialSVG from './icon-core-terrestrial.svg';
 import iconCoreTerrestrialSelectedSVG from './icon-core-terrestrial-selected.svg';
 import iconCoreAquaticSVG from './icon-core-aquatic.svg';
@@ -201,6 +203,14 @@ export const FEATURES = {
   },
 };
 
+export const ROOT_FEATURE_COLORS = {
+  states: '#3cdd85',
+  domains: '#a36ce5',
+  partialSelected: COLORS.SECONDARY_BLUE[300],
+  totalSelected: COLORS.SECONDARY_BLUE[500],
+  hover: COLORS.SECONDARY_BLUE[100],
+};
+
 // Where the map should go when it links out to other pages
 export const SITE_DETAILS_URL_BASE = 'https://www.neonscience.org/field-sites/field-sites-map/';
 export const EXPLORE_DATA_PRODUCTS_URL_BASE = 'https://data.neonscience.org/data-products/explore?site=';
@@ -255,15 +265,14 @@ export const DEFAULT_STATE = {
     zoomedIcons: {},
   },
   selection: {
+    active: null, // Set to either 'sites' or 'plots'
     sites: {
-      enabled: false,
       maxSelectable: 0, // 0 is interpreted as unlimited, all other values are discrete limits
       siteCodes: new Set(),
       states: {}, // Mapping of stateCodes to a SELECTION_PORTIONS key; derived when sites changes
       domains: {}, // Mapping of domainCodes to a SELECTION_PORTIONS key; derived when sites changes
     },
     plots: {
-      enabled: false,
       maxSelectable: 0, // 0 is interpreted as unlimited, all other values are discrete limits
       plots: new Set(),
     },
@@ -307,7 +316,7 @@ export const SITE_MAP_PROP_TYPES = {
 
 export const SITE_MAP_DEFAULT_PROPS = {
   // Top-level Props
-  view: VIEWS.TABLE,
+  view: VIEWS.MAP,
   aspectRatio: null,
   // Map Props
   mapCenter: [52.68, -110.75],

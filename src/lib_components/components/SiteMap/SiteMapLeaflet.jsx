@@ -31,7 +31,7 @@ import {
 } from 'react-leaflet';
 
 import NeonContext from '../NeonContext/NeonContext';
-import Theme, { COLORS } from '../Theme/Theme';
+import Theme from '../Theme/Theme';
 
 import SiteMapContext from './SiteMapContext';
 import {
@@ -40,9 +40,13 @@ import {
   MAP_ZOOM_RANGE,
   ICON_SVGS,
   FEATURES,
+  ROOT_FEATURE_COLORS,
   SITE_DETAILS_URL_BASE,
   EXPLORE_DATA_PRODUCTS_URL_BASE,
 } from './SiteMapUtils';
+
+import DomainsFeature from './Features/Domains';
+import StatesFeature from './Features/States';
 
 import statesShapesJSON from '../../staticJSON/statesShapes.json';
 import domainsShapesJSON from '../../staticJSON/domainsShapes.json';
@@ -50,14 +54,6 @@ import domainsShapesJSON from '../../staticJSON/domainsShapes.json';
 const { BaseLayer, Overlay } = LayersControl;
 
 const boxShadow = '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)';
-const rootOverlayColors = {
-  states: '#3cdd85', // COLORS.RED[300],
-  domains: '#a36ce5', // COLORS.GREY[300],
-  partialSelected: COLORS.SECONDARY_BLUE[300],
-  totalSelected: COLORS.SECONDARY_BLUE[500],
-  hover: COLORS.SECONDARY_BLUE[100],
-};
-
 const useStyles = makeStyles(theme => ({
   map: {
     width: '100%',
@@ -147,15 +143,15 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
   },
   keySwatchStates: {
-    border: `2px solid ${rootOverlayColors.states}`,
-    backgroundColor: `${rootOverlayColors.states}88`,
+    border: `2px solid ${ROOT_FEATURE_COLORS.states}`,
+    backgroundColor: `${ROOT_FEATURE_COLORS.states}88`,
     width: Theme.spacing(3),
     height: Theme.spacing(1),
     margin: Theme.spacing(0, 0.5, 0.25, 0),
   },
   keySwatchDomains: {
-    border: `2px solid ${rootOverlayColors.domains}`,
-    backgroundColor: `${rootOverlayColors.domains}88`,
+    border: `2px solid ${ROOT_FEATURE_COLORS.domains}`,
+    backgroundColor: `${ROOT_FEATURE_COLORS.domains}88`,
     width: Theme.spacing(3),
     height: Theme.spacing(1),
     margin: Theme.spacing(0, 0.5, 0.25, 0),
@@ -189,7 +185,13 @@ const SiteMapLeaflet = () => {
   const [
     { data: neonContextData, isFinal: neonContextIsFinal, hasError: neonContextHasError },
   ] = NeonContext.useNeonContextState();
-  const { sites: allSites, states: allStates, domains: allDomains } = neonContextData;
+  const {
+    sites: allSites,
+    states: allStates,
+    domains: allDomains,
+    stateSites,
+    domainSites,
+  } = neonContextData;
   const canRender = neonContextIsFinal && !neonContextHasError;
 
   // State, Dispatch, and other stuff from SiteMapContext
@@ -223,8 +225,8 @@ const SiteMapLeaflet = () => {
 
   /**
      Util: Position Popup
-     Used only in SELECT mode, or more specifically, only when popups are on mouse over only and
-     do not persist.
+     Used only when selection is active, or more specifically, only when popups are on mouse
+     over only and do not persist.
   */
   const positionPopup = (e) => {
     /* eslint-disable no-underscore-dangle */
@@ -242,6 +244,40 @@ const SiteMapLeaflet = () => {
     }
     e.target._popup._closeButton.style.display = 'none';
     /* eslint-enable no-underscore-dangle */
+  };
+
+  /**
+     Render Method: List of Sites inside a Popup
+  */
+  const renderPopupSitesList = (sitesList) => {
+    if (!sitesList || !sitesList.size) {
+      return (
+        <Typography variant="subtitle2" gutterBottom>
+          <i>No NEON Sites</i>
+        </Typography>
+      );
+    }
+    return (
+      <React.Fragment>
+        <Typography variant="subtitle2" gutterBottom>
+          {`NEON Sites (${sitesList.size}):`}
+        </Typography>
+        <div>
+          {[...sitesList].map((siteCode) => {
+            const site = allSites[siteCode];
+            const alt = `${site.terrain} ${site.type}`;
+            const selected = state.selection.sites.siteCodes.has(siteCode) ? 'SELECTED' : 'BASE';
+            const src = ICON_SVGS.SITE_MARKERS[site.type][site.terrain][selected];
+            return (
+              <div key={siteCode} style={{ display: 'flex' }}>
+                <img src={src} alt={alt} className={classes.popupSiteIcon} />
+                <div>{`${site.description} (${siteCode})`}</div>
+              </div>
+            );
+          })}
+        </div>
+      </React.Fragment>
+    );
   };
 
   /**
@@ -265,6 +301,11 @@ const SiteMapLeaflet = () => {
       </BaseLayer>
     );
   };
+
+  /**
+     Render Method: Plots Feature
+  */
+  const renderPlotsFeature = () => null;
 
   /**
      Render Method: Sites Popup
@@ -434,7 +475,7 @@ const SiteMapLeaflet = () => {
           const site = allSites[siteCode];
           const isSelected = state.selection.sites.siteCodes.has(siteCode);
           if (
-            !state.map.zoomedIcons.SITE_MARKERS[site.type]
+            !state.map.zoomedIcons.SITE_MARKERS || !state.map.zoomedIcons.SITE_MARKERS[site.type]
               || !state.map.zoomedIcons.SITE_MARKERS[site.type][site.terrain]
               || !site.latitude || !site.longitude
           ) { return null; }
@@ -455,21 +496,6 @@ const SiteMapLeaflet = () => {
   };
 
   /**
-     Render Method: Plots Feature
-  */
-  const renderPlotsFeature = () => null;
-
-  /**
-     Render Method: NEON Domains
-  */
-  const renderNeonDomainsFeature = () => null;
-
-  /**
-     Render Method: US States
-  */
-  const renderUsStatesFeature = () => null;
-
-  /**
      Render Method: All Features
   */
   const renderFeature = (key) => {
@@ -482,9 +508,23 @@ const SiteMapLeaflet = () => {
     if (feature.hasAttributes === 'PLOT') { return renderPlotsFeature(key); }
     switch (key) {
       case 'NEON_DOMAINS':
-        return renderNeonDomainsFeature();
+        return (
+          <DomainsFeature
+            key={key}
+            classes={classes}
+            positionPopup={positionPopup}
+            renderPopupSitesList={renderPopupSitesList}
+          />
+        );
       case 'US_STATES':
-        return renderUsStatesFeature();
+        return (
+          <StatesFeature
+            key={key}
+            classes={classes}
+            positionPopup={positionPopup}
+            renderPopupSitesList={renderPopupSitesList}
+          />
+        );
       default:
         return null;
     }
