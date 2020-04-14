@@ -47,6 +47,7 @@ import {
 
 import DomainsFeature from './Features/Domains';
 import StatesFeature from './Features/States';
+import SitesFeature from './Features/Sites';
 
 import statesShapesJSON from '../../staticJSON/statesShapes.json';
 import domainsShapesJSON from '../../staticJSON/domainsShapes.json';
@@ -303,228 +304,28 @@ const SiteMapLeaflet = () => {
   };
 
   /**
-     Render Method: Plots Feature
-  */
-  const renderPlotsFeature = () => null;
-
-  /**
-     Render Method: Sites Popup
-  */
-  const renderSitePopup = (site) => {
-    const selectionEnabled = state.selection.sites.enabled;
-    let typeTitle = 'Core';
-    let typeSubtitle = 'fixed location';
-    if (site.type === 'RELOCATABLE') {
-      typeTitle = 'Relocatable';
-      typeSubtitle = 'location may change';
-    }
-    let terrainTitle = 'Terrestrial';
-    let terrainSubtitle = 'land-based';
-    if (site.terrain === 'AQUATIC') {
-      terrainTitle = 'Aquatic';
-      terrainSubtitle = 'water-based';
-    }
-    const terrainTypeTitle = `${terrainTitle} ${typeTitle}`;
-    const terrainTypeSubtitle = `${terrainSubtitle}; ${typeSubtitle}`;
-    const terrainIcon = (
-      <img
-        src={ICON_SVGS.SITE_MARKERS[site.type][site.terrain].BASE}
-        alt={site.terrain}
-        title={`${terrainTitle} ${terrainSubtitle}`}
-        width={Theme.spacing(5)}
-        height={Theme.spacing(5)}
-        style={{ marginRight: Theme.spacing(1) }}
-      />
-    );
-    const stateFieldTitle = (site.stateCode === 'PR' ? 'Territory' : 'State');
-    const renderActions = () => {
-      if (selectionEnabled) {
-        const isSelected = state.selection.sites.siteCodes.has(site.siteCode);
-        const verb = isSelected ? 'remove' : 'add';
-        const preposition = isSelected ? 'from' : 'to';
-        return (
-          <SnackbarContent
-            className={classes.infoSnackbar}
-            message={(
-              <div className={classes.startFlex}>
-                <ClickIcon className={classes.infoSnackbarIcon} />
-                <div>
-                  <Typography variant="body2">
-                    {/* eslint-disable react/jsx-one-expression-per-line */}
-                    Click to <b>{verb}</b> {preposition} selection
-                    {/* eslint-enable react/jsx-one-expression-per-line */}
-                  </Typography>
-                </div>
-              </div>
-            )}
-          />
-        );
-      }
-      const actionButtonProps = {
-        className: classes.popupButton,
-        variant: 'outlined',
-        color: 'primary',
-        target: '_blank',
-      };
-      return (
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <Button
-              endIcon={<SiteDetailsIcon />}
-              href={`${SITE_DETAILS_URL_BASE}${site.siteCode}`}
-              {...actionButtonProps}
-            >
-              Site Details
-            </Button>
-          </Grid>
-          <Grid item xs={6}>
-            <Button
-              endIcon={<ExploreDataProductsIcon />}
-              href={`${EXPLORE_DATA_PRODUCTS_URL_BASE}${site.siteCode}`}
-              {...actionButtonProps}
-            >
-              Explore Data
-            </Button>
-          </Grid>
-        </Grid>
-      );
-    };
-    return (
-      <Popup className={classes.popup} autoPan={selectionEnabled}>
-        <div className={classes.startFlex} style={{ marginBottom: Theme.spacing(1.5) }}>
-          {terrainIcon}
-          <Typography variant="h6" style={{ lineHeight: '1.4rem' }}>
-            {`${site.description} (${site.siteCode})`}
-          </Typography>
-        </div>
-        <Grid container spacing={1} style={{ marginBottom: Theme.spacing(1) }}>
-          {/* Terrain and Type */}
-          <Grid item xs={8}>
-            <Typography variant="subtitle2">{terrainTypeTitle}</Typography>
-            <Typography variant="caption"><i>{terrainTypeSubtitle}</i></Typography>
-          </Grid>
-          {/* State/Territory */}
-          <Grid item xs={4} style={{ textAlign: 'right' }}>
-            <Typography variant="subtitle2">{stateFieldTitle}</Typography>
-            <Typography variant="body2">{allStates[site.stateCode].name}</Typography>
-          </Grid>
-          {/* Latitude/Longitude */}
-          <Grid item xs={5} style={{ display: 'flex', alignItems: 'flex-end' }}>
-            <div className={classes.startFlex}>
-              <CopyToClipboard text={`${site.latitude} ${site.longitude}`}>
-                <Tooltip title="Latitude / Longitude (click to copy)">
-                  <IconButton
-                    size="small"
-                    style={{ marginRight: Theme.spacing(0.5) }}
-                    aria-label="Latitude / Longitude (click to copy)"
-                  >
-                    <LocationIcon />
-                  </IconButton>
-                </Tooltip>
-              </CopyToClipboard>
-              <Typography
-                variant="caption"
-                aria-label="Latitude / Longitude"
-                style={{ fontFamily: 'monospace', textAlign: 'right' }}
-              >
-                {site.latitude}
-                <br />
-                {site.longitude}
-              </Typography>
-            </div>
-          </Grid>
-          {/* Domain */}
-          <Grid item xs={7} style={{ textAlign: 'right' }}>
-            <Typography variant="subtitle2">Domain</Typography>
-            <Typography variant="body2">
-              {`${site.domainCode} - ${allDomains[site.domainCode].name}`}
-            </Typography>
-          </Grid>
-        </Grid>
-        {renderActions()}
-      </Popup>
-    );
-  };
-
-  /**
-     Render Method: Sites Feature
-  */
-  const renderSitesFeature = (key) => {
-    if (!FEATURES[key]) { return null; }
-    const feature = FEATURES[key];
-    const siteCodes = Object.keys(allSites).filter(siteCode => (
-      allSites[siteCode].type === feature.attributes.type
-        && allSites[siteCode].terrain === feature.attributes.terrain
-    ));
-    const getInteractionProps = (site, isSelected) => (
-      state.selection.sites.enabled ? {
-        onMouseOver: (e) => { e.target.openPopup(); positionPopup(e); },
-        onMouseOut: (e) => { e.target.closePopup(); },
-        onClick: (e) => {
-          /* eslint-disable no-underscore-dangle */
-          e.target._icon.className = getIconClassName(classes, site.type, !isSelected);
-          e.target._icon.blur();
-          dispatch({ type: 'toggleSiteSelected', site: site.siteCode });
-          /* eslint-enable no-underscore-dangle */
-        },
-      } : {}
-    );
-    return (
-      <FeatureGroup key={key}>
-        {siteCodes.map((siteCode) => {
-          const site = allSites[siteCode];
-          const isSelected = state.selection.sites.siteCodes.has(siteCode);
-          if (
-            !state.map.zoomedIcons.SITE_MARKERS || !state.map.zoomedIcons.SITE_MARKERS[site.type]
-              || !state.map.zoomedIcons.SITE_MARKERS[site.type][site.terrain]
-              || !site.latitude || !site.longitude
-          ) { return null; }
-          const rootIcon = state.map.zoomedIcons.SITE_MARKERS[site.type][site.terrain];
-          return (
-            <Marker
-              key={siteCode}
-              position={[site.latitude, site.longitude]}
-              icon={rootIcon[isSelected ? 'SELECTED' : 'BASE']}
-              {...getInteractionProps(site, isSelected)}
-            >
-              {renderSitePopup(site)}
-            </Marker>
-          );
-        })}
-      </FeatureGroup>
-    );
-  };
-
-  /**
-     Render Method: All Features
+     Render Method: Feature
   */
   const renderFeature = (key) => {
     if (!FEATURES[key]) { return null; }
     const feature = FEATURES[key];
     // Parents are groups only and don't render anything
     if (feature.isParent) { return null; }
-    // SITE and PLOT attributed features have common render functions
-    if (feature.hasAttributes === 'SITE') { return renderSitesFeature(key); }
-    if (feature.hasAttributes === 'PLOT') { return renderPlotsFeature(key); }
+    const featureProps = { key, classes, positionPopup };
+    // SITE and PLOT attributed features have common render components for many feature keys
+    if (feature.hasAttributes === 'SITE') {
+      return <SitesFeature featureKey={key} {...featureProps} />;
+    }
+    /*
+      if (feature.hasAttributes === 'PLOT') {
+        return <PlotsFeature featureKey={key} {...featureProps} />;
+      }
+    */
     switch (key) {
       case 'NEON_DOMAINS':
-        return (
-          <DomainsFeature
-            key={key}
-            classes={classes}
-            positionPopup={positionPopup}
-            renderPopupSitesList={renderPopupSitesList}
-          />
-        );
+        return <DomainsFeature {...featureProps} renderPopupSitesList={renderPopupSitesList} />;
       case 'US_STATES':
-        return (
-          <StatesFeature
-            key={key}
-            classes={classes}
-            positionPopup={positionPopup}
-            renderPopupSitesList={renderPopupSitesList}
-          />
-        );
+        return <StatesFeature {...featureProps} renderPopupSitesList={renderPopupSitesList} />;
       default:
         return null;
     }
