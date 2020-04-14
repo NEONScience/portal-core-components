@@ -37,8 +37,7 @@ const States = (props) => {
   if (!canRender) { return null; }
 
   // Extract selection data
-  const { active: selectionActive } = state.selection;
-  const selection = selectionActive ? state.selection[selectionActive] : {};
+  const { derived: { states: selectedStates }, active: selectionActive } = state.selection;
 
   /**
      Render Method: Popup
@@ -48,7 +47,7 @@ const States = (props) => {
     const renderActions = () => {
       const count = stateSites[stateCode].size;
       if (!selectionActive || !count) { return null; }
-      const isTotalSelected = selection.states[stateCode] === 'total';
+      const isTotalSelected = selectedStates[stateCode] === 'total';
       const verb = isTotalSelected ? 'remove' : 'add';
       const preposition = isTotalSelected ? 'from' : 'to';
       const all = count === 1 ? '' : 'all ';
@@ -90,8 +89,8 @@ const States = (props) => {
     <FeatureGroup>
       {statesShapesJSON.features.map((usState) => {
         const { stateCode } = usState.properties;
-        const overlayColor = selectionActive && selection.states[stateCode]
-          ? `${selection.states[stateCode]}Selected`
+        const overlayColor = selectionActive && selectedStates[stateCode]
+          ? `${selectedStates[stateCode]}Selected`
           : 'states';
         /* eslint-disable no-underscore-dangle */
         const interactionProps = selectionActive ? {
@@ -108,7 +107,7 @@ const States = (props) => {
             e.target.closePopup();
           },
           onClick: () => {
-            if (state.stateSites[stateCode].size) {
+            if (stateSites[stateCode].size) {
               dispatch({ type: 'toggleStateSelected', stateCode });
             }
           },

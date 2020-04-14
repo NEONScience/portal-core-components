@@ -176,11 +176,11 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
       </ul>
 
       <ExampleBlock>
-        <SiteMap />
+        <SiteMap selection="SITES" />
       </ExampleBlock>
       <CodeBlock>
         {`
-<SiteMap />
+<SiteMap selection="SITES" />
         `}
       </CodeBlock>
 

@@ -37,8 +37,7 @@ const Domains = (props) => {
   if (!canRender) { return null; }
 
   // Extract selection data
-  const { active: selectionActive } = state.selection;
-  const selection = selectionActive ? state.selection[selectionActive] : {};
+  const { derived: { domains: selectedDomains }, active: selectionActive } = state.selection;
 
   /**
      Render Method: Popup
@@ -48,7 +47,7 @@ const Domains = (props) => {
     const renderActions = () => {
       const count = domainSites[domainCode].size;
       if (!selectionActive || !count) { return null; }
-      const isTotalSelected = selection.domains[domainCode] === 'total';
+      const isTotalSelected = selectedDomains[domainCode] === 'total';
       const verb = isTotalSelected ? 'remove' : 'add';
       const preposition = isTotalSelected ? 'from' : 'to';
       const all = count === 1 ? '' : 'all ';
@@ -90,8 +89,8 @@ const Domains = (props) => {
     <FeatureGroup>
       {domainsShapesJSON.features.map((domain) => {
         const { domainCode } = domain.properties;
-        const overlayColor = selectionActive && selection.domains[domainCode]
-          ? `${selection.domains[domainCode]}Selected`
+        const overlayColor = selectionActive && selectedDomains[domainCode]
+          ? `${selectedDomains[domainCode]}Selected`
           : 'domains';
         /* eslint-disable no-underscore-dangle */
         const interactionProps = selectionActive ? {

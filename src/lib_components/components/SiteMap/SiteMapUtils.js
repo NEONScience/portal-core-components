@@ -17,6 +17,10 @@ import iconRelocatableShadowSelectedSVG from './icon-relocatable-shadow-selected
 
 export const MAP_ZOOM_RANGE = [1, 16];
 
+/**
+   Key Sets
+   Used to limit the use of "magic strings" that need to be consistent across many files
+*/
 // For consistency in expressing the sort direction for the table
 export const SORT_DIRECTIONS = { ASC: 'ASC', DESC: 'DESC' };
 
@@ -29,7 +33,10 @@ export const SELECTION_PORTIONS = { PARTIAL: 'PARTIAL', TOTAL: 'TOTAL' };
 // For consistency in denoting which dinstinct user interfaces are available and which is visible
 export const VIEWS = { MAP: 'MAP', TABLE: 'TABLE' };
 
-// Importable data structure containing all imported SVGs for map and legend icons
+/**
+   Icon SVGs
+   An importable data structure containing all imported SVGs for map and legend icons
+*/
 export const ICON_SVGS = {
   SITE_MARKERS: {
     CORE: {
@@ -203,6 +210,7 @@ export const FEATURES = {
   },
 };
 
+// TODO: INTERACTION_FEATURE_COLORS, morve states/domains into feature components
 export const ROOT_FEATURE_COLORS = {
   states: '#3cdd85',
   domains: '#a36ce5',
@@ -211,12 +219,18 @@ export const ROOT_FEATURE_COLORS = {
   hover: COLORS.SECONDARY_BLUE[100],
 };
 
-// Where the map should go when it links out to other pages
+/**
+   URL Bases
+   Used in construction of URLs when linking out to other pages
+*/
 export const SITE_DETAILS_URL_BASE = 'https://www.neonscience.org/field-sites/field-sites-map/';
 export const EXPLORE_DATA_PRODUCTS_URL_BASE = 'https://data.neonscience.org/data-products/explore?site=';
 
-// Available tile layers - third party services providing tiles for different earth views
-// (topographic, satellite, etc.) with attributions.
+/**
+ Tile Layers
+ Third party services providing tiles for different earth views (topographic, satellite, etc.)
+ with attributions
+*/
 export const TILE_LAYERS = {
   NATGEO_WORLD_MAP: {
     name: 'National Geographic',
@@ -248,6 +262,13 @@ Object.keys(TILE_LAYERS).forEach((key) => {
   TILE_LAYERS_BY_NAME[TILE_LAYERS[key].name] = key;
 });
 
+/**
+   Filters
+*/
+
+/**
+   Default State
+*/
 export const DEFAULT_STATE = {
   view: null,
   aspectRatio: {
@@ -264,17 +285,14 @@ export const DEFAULT_STATE = {
     tileLayer: null,
     zoomedIcons: {},
   },
+  regionSites: {}, // Populated when NeonContext is done loading, in state so dispatch can access
+  regionSitesLoaded: false,
   selection: {
-    active: null, // Set to either 'sites' or 'plots'
-    sites: {
-      maxSelectable: 0, // 0 is interpreted as unlimited, all other values are discrete limits
-      siteCodes: new Set(),
-      states: {}, // Mapping of stateCodes to a SELECTION_PORTIONS key; derived when sites changes
-      domains: {}, // Mapping of domainCodes to a SELECTION_PORTIONS key; derived when sites changes
-    },
-    plots: {
-      maxSelectable: 0, // 0 is interpreted as unlimited, all other values are discrete limits
-      plots: new Set(),
+    active: null, // Set to any key in SELECTIONS
+    maxSelectable: 0, // 0 is interpreted as unlimited, all other values are discrete limits
+    derived: { // Derived feature-specific mappings of selectable item IDs to SELECTION_PORTIONS
+      states: {}, // { stateCode: SELECTION_PORTIONS.KEY }
+      domains: {}, // { domainCode: SELECTION_PORTIONS.KEY }
     },
   },
   filters: {
@@ -297,7 +315,13 @@ export const DEFAULT_STATE = {
     },
   },
 };
+Object.keys(SELECTIONS).forEach((selection) => {
+  DEFAULT_STATE.selection[selection] = new Set();
+});
 
+/**
+   PropTypes and defaultProps
+*/
 export const SITE_MAP_PROP_TYPES = {
   // Top-level Props
   view: PropTypes.oneOf(Object.keys(VIEWS)),
@@ -330,6 +354,9 @@ export const SITE_MAP_DEFAULT_PROPS = {
   features: null,
 };
 
+/**
+   Aspect Ratio
+*/
 const dynamicAspectRatios = [
   '1:2', '9:16', '2:3', '5:7', '4:5', '1:1', '5:4', '7:5', '3:2', '16:9', '2:1', '2.5:1', '3:1',
 ].map((ratio) => {

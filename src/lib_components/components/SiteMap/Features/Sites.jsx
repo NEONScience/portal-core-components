@@ -25,6 +25,7 @@ import SiteMapContext from '../SiteMapContext';
 import {
   FEATURES,
   ICON_SVGS,
+  SELECTIONS,
   SITE_DETAILS_URL_BASE,
   EXPLORE_DATA_PRODUCTS_URL_BASE,
 } from '../SiteMapUtils';
@@ -50,8 +51,8 @@ const Sites = (props) => {
   if (!canRender) { return null; }
 
   // Extract selection data
-  const selectionActive = state.selection === 'sites';
-  const { sites: selection } = state.selection;
+  const selectionActive = state.selection.active === SELECTIONS.SITES;
+  const { [SELECTIONS.SITES]: selectedSites } = state.selection;
 
   // Generate the list of siteCodes based on the feature
   const feature = FEATURES[featureKey];
@@ -108,7 +109,7 @@ const Sites = (props) => {
     const stateFieldTitle = (site.stateCode === 'PR' ? 'Territory' : 'State');
     const renderActions = () => {
       if (selectionActive) {
-        const isSelected = selection.siteCodes.has(site.siteCode);
+        const isSelected = selectedSites.has(site.siteCode);
         const verb = isSelected ? 'remove' : 'add';
         const preposition = isSelected ? 'from' : 'to';
         return (
@@ -222,7 +223,7 @@ const Sites = (props) => {
     <FeatureGroup>
       {siteCodes.map((siteCode) => {
         const site = allSites[siteCode];
-        const isSelected = selectionActive && selection.siteCodes.has(siteCode);
+        const isSelected = selectionActive && selectedSites.has(siteCode);
         if (
           !state.map.zoomedIcons.SITE_MARKERS || !state.map.zoomedIcons.SITE_MARKERS[site.type]
             || !state.map.zoomedIcons.SITE_MARKERS[site.type][site.terrain]

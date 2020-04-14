@@ -5,7 +5,7 @@ import cloneDeep from 'lodash/cloneDeep';
 
 import L from 'leaflet';
 
-// import NeonContext from '../NeonContext/NeonContext';
+import NeonContext from '../NeonContext/NeonContext';
 
 import {
   DEFAULT_STATE,
@@ -14,6 +14,7 @@ import {
   VIEWS,
   FEATURES,
   ICON_SVGS,
+  SELECTIONS,
   MAP_ZOOM_RANGE,
   SITE_MAP_PROP_TYPES,
   SITE_MAP_DEFAULT_PROPS,
@@ -81,6 +82,38 @@ const getZoomedIcons = (zoom, classes) => ({
   },
 });
 
+// Derive the selected status of a given region (US state or NEON domain). This should run
+// every time the list of selected sites changes. It regenerates selectedStates and
+// selectedDomains in state to each contain a key/value lookup where the key is the region code
+// (state code or domain code) and the value is either 'total' (all sites selected) or 'partial'
+// (some sites selected). If no sites are selected for the region it is omitted from the map.
+const deriveRegionSelections = (state) => {
+  const derive = (regionSitesKey) => {
+    if (!Object.keys(state.regionSites).includes(regionSitesKey)) { return {}; }
+    const selectedRegions = {};
+    Object.keys(state.regionSites[regionSitesKey]).forEach((regionCode) => {
+      const regionSitesSet = new Set(state.regionSites[regionSitesKey][regionCode]);
+      const intersection = [...regionSitesSet]
+        .filter(x => state.selection[SELECTIONS.SITES].has(x));
+      if (!intersection.length) { return; }
+      selectedRegions[regionCode] = (
+        intersection.length === regionSitesSet.size ? 'total' : 'partial'
+      );
+    });
+    return selectedRegions;
+  };
+  return {
+    ...state,
+    selection: {
+      ...state.selection,
+      derived: {
+        states: derive('stateSites'),
+        domains: derive('domainSites'),
+      },
+    },
+  };
+};
+
 /**
    Reducer
 */
@@ -111,6 +144,7 @@ const reducer = (state, action) => {
       },
     };
   };
+  let setMethod = null;
   const newState = { ...state };
   switch (action.type) {
     case 'setView':
@@ -123,6 +157,14 @@ const reducer = (state, action) => {
       newState.aspectRatio.currentValue = action.aspectRatio;
       return newState;
 
+    case 'setRegionSites':
+      return {
+        ...newState,
+        regionSites: action.regionSites || {},
+        regionSitesLoaded: true,
+      };
+
+    // Map
     case 'setMapZoom':
       if (!zoomIsValid(action.zoom)) { return state; }
       newState.map.zoom = action.zoom;
@@ -142,6 +184,7 @@ const reducer = (state, action) => {
       newState.map.tileLayer = action.tileLayer;
       return newState;
 
+    // Features
     case 'setFilterFeaturesOpen':
       newState.filters.features.open = !!action.open;
       return newState;
@@ -166,6 +209,31 @@ const reducer = (state, action) => {
           .some(f => newState.filters.features.visible[f]); // ...some child is visible
       }
       return newState;
+
+    // Selection
+    case 'toggleSiteSelected':
+      if (newState.selection[SELECTIONS.SITES].has(action.site)) {
+        newState.selection[SELECTIONS.SITES].delete(action.site);
+      } else {
+        newState.selection[SELECTIONS.SITES].add(action.site);
+      }
+      return deriveRegionSelections(newState);
+
+    case 'toggleStateSelected':
+      if (!action.stateCode) { return state; }
+      setMethod = state.selection.derived.states[action.stateCode] === 'total' ? 'delete' : 'add';
+      newState.regionSites.stateSites[action.stateCode].forEach((siteCode) => {
+        newState.selection[SELECTIONS.SITES][setMethod](siteCode);
+      });
+      return deriveRegionSelections(newState);
+
+    case 'toggleDomainSelected':
+      if (!action.domainCode) { return state; }
+      setMethod = state.selection.derived.domains[action.domainCode] === 'total' ? 'delete' : 'add';
+      newState.regionSites.domainSites[action.domainCode].forEach((siteCode) => {
+        newState.selection[SELECTIONS.SITES][setMethod](siteCode);
+      });
+      return deriveRegionSelections(newState);
 
     // Default
     default:
@@ -200,6 +268,12 @@ const Provider = (props) => {
     children,
   } = props;
 
+  // Neon Context State
+  const [
+    { data: neonContextData, isFinal: neonContextIsFinal, hasError: neonContextHasError },
+  ] = NeonContext.useNeonContextState();
+  const { domainSites, stateSites } = neonContextData;
+
   /**
      Initial State and Reducer Setup
   */
@@ -217,12 +291,13 @@ const Provider = (props) => {
     initialState.aspectRatio.isDynamic = false;
     initialState.aspectRatio.currentValue = aspectRatio;
   }
-  if (selection) {
-    initialState.selection[selection] = {
-      enabled: true,
-      maxSelectable,
-      ...initialState.selection[selection],
-    };
+  if (Object.keys(SELECTIONS).includes(selection)) {
+    initialState.selection.active = selection;
+    initialState.selection.maxSelectable = maxSelectable;
+  }
+  if (neonContextIsFinal && !neonContextHasError) {
+    initialState.regionSites = { domainSites, stateSites };
+    initialState.regionSitesLoaded = true;
   }
   const [state, dispatch] = useReducer(reducer, initialState);
 

@@ -40,6 +40,7 @@ import {
   MAP_ZOOM_RANGE,
   ICON_SVGS,
   FEATURES,
+  SELECTIONS,
   ROOT_FEATURE_COLORS,
   SITE_DETAILS_URL_BASE,
   EXPLORE_DATA_PRODUCTS_URL_BASE,
@@ -258,6 +259,7 @@ const SiteMapLeaflet = () => {
         </Typography>
       );
     }
+    const { [SELECTIONS.SITES]: selectedSites } = state.selection;
     return (
       <React.Fragment>
         <Typography variant="subtitle2" gutterBottom>
@@ -267,7 +269,7 @@ const SiteMapLeaflet = () => {
           {[...sitesList].map((siteCode) => {
             const site = allSites[siteCode];
             const alt = `${site.terrain} ${site.type}`;
-            const selected = state.selection.sites.siteCodes.has(siteCode) ? 'SELECTED' : 'BASE';
+            const selected = selectedSites.has(siteCode) ? 'SELECTED' : 'BASE';
             const src = ICON_SVGS.SITE_MARKERS[site.type][site.terrain][selected];
             return (
               <div key={siteCode} style={{ display: 'flex' }}>

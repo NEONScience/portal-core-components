@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useRef, useEffect, useLayoutEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -78,6 +78,8 @@ const SiteMapContainer = () => {
     style: { paddingBottom: `${aspectRatio.currentValue * 100}%` },
   };
 
+  const featuresRef = useRef(null);
+
   /**
      Effect - Dynamically adjust aspect ratio of content area from viewport dimensions
   */
@@ -94,6 +96,44 @@ const SiteMapContainer = () => {
       window.removeEventListener('resize', handleResize);
     };
   }, [aspectRatio, dispatch]);
+
+  /**
+     Effect - Monitor all click events and close the features pane if open and clicked outside
+  */
+  useEffect(() => {
+    if (!state.filters.features.open || !featuresRef.current) { return () => {}; }
+    const handleClick = (event) => {
+      if (featuresRef.current && !featuresRef.current.contains(event.target)) {
+        dispatch({ type: 'setFilterFeaturesOpen', open: false });
+      }
+    };
+    document.addEventListener('click', handleClick);
+    return () => {
+      document.removeEventListener('click', handleClick);
+    };
+  }, [state.filters.features.open, featuresRef, dispatch]);
+
+  /**
+     Effect - Copy "regionSites" (mappings of regions e.g. states or domains to sites) to state
+     only once after NeonContext loads. We do this because the main reducer needs access to them
+     to derive selections for regions, but cannot load NeonContext because it's a pure function.
+  */
+  useEffect(() => {
+    if (state.regionSitesLoaded || !(neonContextState.isFinal && !neonContextState.hasError)) {
+      return;
+    }
+    const { stateSites, domainSites } = neonContextState.data;
+    dispatch({
+      type: 'setRegionSites',
+      regionSites: { stateSites, domainSites },
+    });
+  }, [
+    state.regionSitesLoaded,
+    neonContextState.isFinal,
+    neonContextState.hasError,
+    neonContextState,
+    dispatch,
+  ]);
 
   /**
      Render - Loading Sites
@@ -190,7 +230,7 @@ const SiteMapContainer = () => {
           <SiteMapTable />
         )}
         {!state.filters.features.open ? null : (
-          <div className={classes.featuresContainer}>
+          <div ref={featuresRef} className={classes.featuresContainer}>
             {Object.keys(FEATURES)
               .filter(f => state.filters.features.available[f])
               .map(renderFeatureOption)}
