@@ -9,7 +9,6 @@ import ClickIcon from '@material-ui/icons/TouchApp';
 import 'leaflet/dist/leaflet.css';
 import { FeatureGroup, Polygon, Popup } from 'react-leaflet';
 
-import NeonContext from '../../NeonContext/NeonContext';
 import Theme from '../../Theme/Theme';
 
 import SiteMapContext from '../SiteMapContext';
@@ -21,20 +20,15 @@ import { FEATURE_TYPES, ROOT_FEATURE_COLORS } from '../SiteMapUtils';
 const Domains = (props) => {
   const { classes, renderPopupSitesList, positionPopup } = props;
 
-  // Neon Context State
-  const [
-    { isFinal: neonContextIsFinal, hasError: neonContextHasError },
-  ] = NeonContext.useNeonContextState();
-  const canRender = neonContextIsFinal && !neonContextHasError;
-
   // State and Dispatch from SiteMapContext
   const [state, dispatch] = SiteMapContext.useSiteMapContext();
+  const { neonContextHydrated } = state;
 
   // Don't render if not all loaded
-  if (!canRender) { return null; }
+  if (!neonContextHydrated) { return null; }
 
   // Extract featrure and selection data
-  const { [FEATURE_TYPES.STATE]: featureData } = state.featureData;
+  const { [FEATURE_TYPES.DOMAINS]: featureData } = state.featureData;
   const { derived: { domains: selectedDomains }, active: selectionActive } = state.selection;
 
   /**
@@ -123,7 +117,7 @@ const Domains = (props) => {
           <Polygon
             key={domainCode}
             color={ROOT_FEATURE_COLORS[overlayColor]}
-            positions={domain.geometry.coordinates}
+            positions={domain.feature.geometry.coordinates}
             {...interactionProps}
           >
             {renderPopup(domainCode)}

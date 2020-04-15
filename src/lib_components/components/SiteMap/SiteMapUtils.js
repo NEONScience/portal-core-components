@@ -85,16 +85,6 @@ export const ICON_SVGS = {
    A data structure describing all descrete boundaries or sets of icons that can be shown on the map
 */
 export const FEATURES = {
-  SITE_WATERSHED_BOUNDARY: {
-    name: 'Site Watershed Boundary',
-    minZoom: 7,
-    description: '',
-  },
-  SITE_FLIGHT_BOX_BOUNDARY: {
-    name: 'Site Flight Box Boundary',
-    minZoom: 7,
-    description: '',
-  },
   TOWER_LOCATION: {
     name: 'Tower Location',
     minZoom: 10,
@@ -162,6 +152,16 @@ export const FEATURES = {
   SITE_SAMPLING_BOUNDARIES: {
     name: 'Site Sampling Boundaries',
     minZoom: 7,
+    description: '',
+  },
+  SITE_WATERSHED_BOUNDARY: {
+    name: 'Site Watershed Boundary',
+    minZoom: 6,
+    description: '',
+  },
+  SITE_FLIGHT_BOX_BOUNDARY: {
+    name: 'Site Flight Box Boundary',
+    minZoom: 6,
     description: '',
   },
   SITE_MARKERS: {

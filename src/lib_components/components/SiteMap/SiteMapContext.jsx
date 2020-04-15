@@ -221,7 +221,7 @@ const reducer = (state, action) => {
     case 'toggleStateSelected':
       if (!action.stateCode) { return state; }
       setMethod = state.selection.derived.states[action.stateCode] === 'total' ? 'delete' : 'add';
-      newState.regionSites.stateSites[action.stateCode].forEach((siteCode) => {
+      newState.featureData[FEATURE_TYPES.STATES][action.stateCode].sites.forEach((siteCode) => {
         newState.selection[SELECTABLE_FEATURE_TYPES.SITES][setMethod](siteCode);
       });
       return deriveRegionSelections(newState);
@@ -229,7 +229,7 @@ const reducer = (state, action) => {
     case 'toggleDomainSelected':
       if (!action.domainCode) { return state; }
       setMethod = state.selection.derived.domains[action.domainCode] === 'total' ? 'delete' : 'add';
-      newState.regionSites.domainSites[action.domainCode].forEach((siteCode) => {
+      newState.featureData[FEATURE_TYPES.DOMAINS][action.domainCode].sites.forEach((siteCode) => {
         newState.selection[SELECTABLE_FEATURE_TYPES.SITES][setMethod](siteCode);
       });
       return deriveRegionSelections(newState);

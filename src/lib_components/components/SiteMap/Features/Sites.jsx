@@ -18,13 +18,13 @@ import SiteDetailsIcon from '@material-ui/icons/InfoOutlined';
 import 'leaflet/dist/leaflet.css';
 import { FeatureGroup, Marker, Popup } from 'react-leaflet';
 
-import NeonContext from '../../NeonContext/NeonContext';
 import Theme from '../../Theme/Theme';
 
 import SiteMapContext from '../SiteMapContext';
 import {
   FEATURES,
   ICON_SVGS,
+  FEATURE_TYPES,
   SELECTABLE_FEATURE_TYPES,
   SITE_DETAILS_URL_BASE,
   EXPLORE_DATA_PRODUCTS_URL_BASE,
@@ -36,19 +36,13 @@ import {
 const Sites = (props) => {
   const { featureKey, classes, positionPopup } = props;
 
-  // Neon Context State
-  const [
-    { data: neonContextData, isFinal: neonContextIsFinal, hasError: neonContextHasError },
-  ] = NeonContext.useNeonContextState();
-  const { sites: allSites, states: allStates, domains: allDomains } = neonContextData;
-  const canRender = neonContextIsFinal && !neonContextHasError;
-
   // State, Dispatch, et al. from SiteMapContext
   const [state, dispatch] = SiteMapContext.useSiteMapContext();
+  const { neonContextHydrated } = state;
   const { getIconClassName } = SiteMapContext;
 
   // Don't render if not all loaded
-  if (!canRender) { return null; }
+  if (!neonContextHydrated) { return null; }
 
   // Extract selection data
   const selectionActive = state.selection.active === SELECTABLE_FEATURE_TYPES.SITES;
@@ -56,9 +50,10 @@ const Sites = (props) => {
 
   // Generate the list of siteCodes based on the feature
   const feature = FEATURES[featureKey];
-  const siteCodes = Object.keys(allSites).filter(siteCode => (
-    allSites[siteCode].type === feature.attributes.type
-      && allSites[siteCode].terrain === feature.attributes.terrain
+  const sitesData = state.featureData[FEATURE_TYPES.SITES];
+  const siteCodes = Object.keys(sitesData).filter(siteCode => (
+    sitesData[siteCode].type === feature.attributes.type
+      && sitesData[siteCode].terrain === feature.attributes.terrain
   ));
 
   // Filters?
@@ -82,6 +77,8 @@ const Sites = (props) => {
      Render Method: Popup
   */
   const renderPopup = (site) => {
+    const usState = state.featureData[FEATURE_TYPES.STATES][site.stateCode] || {};
+    const domain = state.featureData[FEATURE_TYPES.DOMAINS][site.domainCode] || {};
     let typeTitle = 'Core';
     let typeSubtitle = 'fixed location';
     if (site.type === 'RELOCATABLE') {
@@ -176,7 +173,7 @@ const Sites = (props) => {
           {/* State/Territory */}
           <Grid item xs={4} style={{ textAlign: 'right' }}>
             <Typography variant="subtitle2">{stateFieldTitle}</Typography>
-            <Typography variant="body2">{allStates[site.stateCode].name}</Typography>
+            <Typography variant="body2">{usState.name}</Typography>
           </Grid>
           {/* Latitude/Longitude */}
           <Grid item xs={5} style={{ display: 'flex', alignItems: 'flex-end' }}>
@@ -207,7 +204,7 @@ const Sites = (props) => {
           <Grid item xs={7} style={{ textAlign: 'right' }}>
             <Typography variant="subtitle2">Domain</Typography>
             <Typography variant="body2">
-              {`${site.domainCode} - ${allDomains[site.domainCode].name}`}
+              {`${site.domainCode} - ${domain.name}`}
             </Typography>
           </Grid>
         </Grid>
@@ -222,7 +219,7 @@ const Sites = (props) => {
   return (
     <FeatureGroup>
       {siteCodes.map((siteCode) => {
-        const site = allSites[siteCode];
+        const site = sitesData[siteCode];
         const isSelected = selectionActive && selectedSites.has(siteCode);
         if (
           !state.map.zoomedIcons.SITE_MARKERS || !state.map.zoomedIcons.SITE_MARKERS[site.type]
