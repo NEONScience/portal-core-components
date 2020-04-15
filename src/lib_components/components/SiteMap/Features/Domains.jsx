@@ -12,10 +12,8 @@ import { FeatureGroup, Polygon, Popup } from 'react-leaflet';
 import NeonContext from '../../NeonContext/NeonContext';
 import Theme from '../../Theme/Theme';
 
-import domainsShapesJSON from '../../../staticJSON/domainsShapes.json';
-
 import SiteMapContext from '../SiteMapContext';
-import { ROOT_FEATURE_COLORS } from '../SiteMapUtils';
+import { FEATURE_TYPES, ROOT_FEATURE_COLORS } from '../SiteMapUtils';
 
 /**
    Main Component
@@ -25,9 +23,8 @@ const Domains = (props) => {
 
   // Neon Context State
   const [
-    { data: neonContextData, isFinal: neonContextIsFinal, hasError: neonContextHasError },
+    { isFinal: neonContextIsFinal, hasError: neonContextHasError },
   ] = NeonContext.useNeonContextState();
-  const { domains: allDomains, domainSites } = neonContextData;
   const canRender = neonContextIsFinal && !neonContextHasError;
 
   // State and Dispatch from SiteMapContext
@@ -36,16 +33,18 @@ const Domains = (props) => {
   // Don't render if not all loaded
   if (!canRender) { return null; }
 
-  // Extract selection data
+  // Extract featrure and selection data
+  const { [FEATURE_TYPES.STATE]: featureData } = state.featureData;
   const { derived: { domains: selectedDomains }, active: selectionActive } = state.selection;
 
   /**
      Render Method: Popup
   */
   const renderPopup = (domainCode) => {
-    if (!allDomains[domainCode]) { return null; }
+    if (!featureData[domainCode]) { return null; }
+    const domain = featureData[domainCode];
     const renderActions = () => {
-      const count = domainSites[domainCode].size;
+      const count = domain.sites.size;
       if (!selectionActive || !count) { return null; }
       const isTotalSelected = selectedDomains[domainCode] === 'total';
       const verb = isTotalSelected ? 'remove' : 'add';
@@ -74,9 +73,9 @@ const Domains = (props) => {
     return (
       <Popup className={classes.popup} autoPan={!selectionActive}>
         <Typography variant="h6" gutterBottom>
-          {`${allDomains[domainCode].name} (${domainCode})`}
+          {`${domain.name} (${domainCode})`}
         </Typography>
-        {renderPopupSitesList(domainSites[domainCode])}
+        {renderPopupSitesList(domain.sites)}
         {renderActions()}
       </Popup>
     );
@@ -87,8 +86,8 @@ const Domains = (props) => {
   */
   return (
     <FeatureGroup>
-      {domainsShapesJSON.features.map((domain) => {
-        const { domainCode } = domain.properties;
+      {Object.keys(featureData).map((domainCode) => {
+        const domain = featureData[domainCode];
         const overlayColor = selectionActive && selectedDomains[domainCode]
           ? `${selectedDomains[domainCode]}Selected`
           : 'domains';
@@ -122,12 +121,12 @@ const Domains = (props) => {
         /* eslint-enable no-underscore-dangle */
         return (
           <Polygon
-            key={domain.properties.domainCode}
+            key={domainCode}
             color={ROOT_FEATURE_COLORS[overlayColor]}
             positions={domain.geometry.coordinates}
             {...interactionProps}
           >
-            {renderPopup(domain.properties.domainCode)}
+            {renderPopup(domainCode)}
           </Polygon>
         );
       })}

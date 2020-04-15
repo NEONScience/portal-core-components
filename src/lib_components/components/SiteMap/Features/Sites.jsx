@@ -25,7 +25,7 @@ import SiteMapContext from '../SiteMapContext';
 import {
   FEATURES,
   ICON_SVGS,
-  SELECTIONS,
+  SELECTABLE_FEATURE_TYPES,
   SITE_DETAILS_URL_BASE,
   EXPLORE_DATA_PRODUCTS_URL_BASE,
 } from '../SiteMapUtils';
@@ -51,8 +51,8 @@ const Sites = (props) => {
   if (!canRender) { return null; }
 
   // Extract selection data
-  const selectionActive = state.selection.active === SELECTIONS.SITES;
-  const { [SELECTIONS.SITES]: selectedSites } = state.selection;
+  const selectionActive = state.selection.active === SELECTABLE_FEATURE_TYPES.SITES;
+  const { [SELECTABLE_FEATURE_TYPES.SITES]: selectedSites } = state.selection;
 
   // Generate the list of siteCodes based on the feature
   const feature = FEATURES[featureKey];

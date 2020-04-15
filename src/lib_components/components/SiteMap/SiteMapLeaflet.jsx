@@ -40,7 +40,8 @@ import {
   MAP_ZOOM_RANGE,
   ICON_SVGS,
   FEATURES,
-  SELECTIONS,
+  FEATURE_TYPES,
+  SELECTABLE_FEATURE_TYPES,
   ROOT_FEATURE_COLORS,
   SITE_DETAILS_URL_BASE,
   EXPLORE_DATA_PRODUCTS_URL_BASE,
@@ -61,7 +62,6 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     height: '0px', // Necessary to set a fixed aspect ratio from props (using paddingBottom)
     overflow: 'hidden',
-    borderRadius: theme.spacing(1),
     boxShadow,
     '& div.leaflet-control-attribution': {
       borderTopLeftRadius: theme.spacing(0.5),
@@ -259,7 +259,7 @@ const SiteMapLeaflet = () => {
         </Typography>
       );
     }
-    const { [SELECTIONS.SITES]: selectedSites } = state.selection;
+    const { [SELECTABLE_FEATURE_TYPES.SITES]: selectedSites } = state.selection;
     return (
       <React.Fragment>
         <Typography variant="subtitle2" gutterBottom>
@@ -315,11 +315,11 @@ const SiteMapLeaflet = () => {
     if (feature.isParent) { return null; }
     const featureProps = { key, classes, positionPopup };
     // SITE and PLOT attributed features have common render components for many feature keys
-    if (feature.hasAttributes === 'SITE') {
+    if (feature.type === FEATURE_TYPES.SITES) {
       return <SitesFeature featureKey={key} {...featureProps} />;
     }
     /*
-      if (feature.hasAttributes === 'PLOT') {
+      if (feature.type === FEATURE_TYPES.PLOTS) {
         return <PlotsFeature featureKey={key} {...featureProps} />;
       }
     */

@@ -4,6 +4,7 @@ import React from 'react';
 import { isEqual } from 'lodash';
 
 import { makeStyles } from '@material-ui/core/styles';
+import Checkbox from '@material-ui/core/Checkbox';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -22,6 +23,7 @@ import {
   MAP_ZOOM_RANGE,
   ICON_SVGS,
   FEATURES,
+  SELECTABLE_FEATURE_TYPES,
   SITE_DETAILS_URL_BASE,
   EXPLORE_DATA_PRODUCTS_URL_BASE,
 } from './SiteMapUtils';
@@ -39,6 +41,10 @@ const useStyles = makeStyles(theme => ({
     marginRight: '4px',
     marginBottom: '-6px',
   },
+  row: {},
+  rowSelected: {
+    backgroundColor: `${Theme.palette.secondary.main}20`,
+  },
 }));
 
 const SiteMapTable = () => {
@@ -51,18 +57,26 @@ const SiteMapTable = () => {
   const { sites: allSites, states: allStates, domains: allDomains } = neonContextData;
   const canRender = neonContextIsFinal && !neonContextHasError;
 
+  // Site Map State
   const [state, dispatch] = SiteMapContext.useSiteMapContext();
   const { focus, sortColumn, sortDirection } = state.table;
+  const selectionActive = state.selection.active === focus;
+  const selection = selectionActive ? state.selection[state.selection.active] : new Set();
 
   if (!canRender) { return null; }
 
   const visibleAttributeCombos = [];
   Object.keys(FEATURES).filter(f => (
-    FEATURES[f].hasAttributes === focus
+    FEATURES[f].type === focus
       && state.filters.features.available[f] && state.filters.features.visible[f]
   )).forEach((f) => {
     visibleAttributeCombos.push(FEATURES[f].attributes);
   });
+
+  // Formatted as such so that adding selection for plots is straightforward
+  const isSelected = row => (
+    (focus === SELECTABLE_FEATURE_TYPES.SITES && selection.has(row.siteCode))
+  );
 
   // Columns that are always visible (on the left
   const permaColumns = [
@@ -96,6 +110,25 @@ const SiteMapTable = () => {
     },
   ];
 
+  // Selected Column
+  let handleCheck = () => {};
+  if (focus === SELECTABLE_FEATURE_TYPES.SITES) {
+    handleCheck = (row) => { dispatch({ type: 'toggleSiteSelected', site: row.siteCode }); };
+  }
+  if (selectionActive) {
+    permaColumns.unshift({
+      key: 'selected',
+      label: '',
+      render: row => (
+        <Checkbox
+          checked={isSelected(row)}
+          onChange={() => handleCheck(row)}
+          color="secondary"
+        />
+      ),
+    });
+  }
+
   // Used for any single point location (sites and plots)
   const renderCoords = row => (
     <Typography
@@ -112,7 +145,7 @@ const SiteMapTable = () => {
   // Calculate Columns and Rows
   let columns = [];
   let rows = [];
-  if (focus === 'SITE') {
+  if (focus === SELECTABLE_FEATURE_TYPES.SITES) {
     columns = [
       ...permaColumns,
       {
@@ -156,7 +189,7 @@ const SiteMapTable = () => {
         </TableHead>
         <TableBody>
           {rows.map(row => (
-            <TableRow key={row.key}>
+            <TableRow key={row.key} className={classes[isSelected(row) ? 'rowSelected' : 'row']}>
               {columns.map(column => (
                 <TableCell key={column.key}>
                   {column.render(row)}

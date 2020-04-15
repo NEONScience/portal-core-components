@@ -12,10 +12,8 @@ import { FeatureGroup, Polygon, Popup } from 'react-leaflet';
 import NeonContext from '../../NeonContext/NeonContext';
 import Theme from '../../Theme/Theme';
 
-import statesShapesJSON from '../../../staticJSON/statesShapes.json';
-
 import SiteMapContext from '../SiteMapContext';
-import { ROOT_FEATURE_COLORS } from '../SiteMapUtils';
+import { FEATURE_TYPES, ROOT_FEATURE_COLORS } from '../SiteMapUtils';
 
 /**
    Main Component
@@ -25,9 +23,8 @@ const States = (props) => {
 
   // Neon Context State
   const [
-    { data: neonContextData, isFinal: neonContextIsFinal, hasError: neonContextHasError },
+    { isFinal: neonContextIsFinal, hasError: neonContextHasError },
   ] = NeonContext.useNeonContextState();
-  const { states: allStates, stateSites } = neonContextData;
   const canRender = neonContextIsFinal && !neonContextHasError;
 
   // State and Dispatch from SiteMapContext
@@ -36,16 +33,18 @@ const States = (props) => {
   // Don't render if not all loaded
   if (!canRender) { return null; }
 
-  // Extract selection data
+  // Extract featrure and selection data
+  const { [FEATURE_TYPES.STATE]: featureData } = state.featureData;
   const { derived: { states: selectedStates }, active: selectionActive } = state.selection;
 
   /**
      Render Method: Popup
   */
   const renderPopup = (stateCode) => {
-    if (!allStates[stateCode]) { return null; }
+    if (!featureData[stateCode]) { return null; }
+    const usState = featureData[stateCode];
     const renderActions = () => {
-      const count = stateSites[stateCode].size;
+      const count = usState.sites.size;
       if (!selectionActive || !count) { return null; }
       const isTotalSelected = selectedStates[stateCode] === 'total';
       const verb = isTotalSelected ? 'remove' : 'add';
@@ -74,9 +73,9 @@ const States = (props) => {
     return (
       <Popup className={classes.popup} autoPan={!selectionActive}>
         <Typography variant="h6" gutterBottom>
-          {`${allStates[stateCode].name} (${stateCode})`}
+          {`${usState.name} (${stateCode})`}
         </Typography>
-        {renderPopupSitesList(stateSites[stateCode])}
+        {renderPopupSitesList(usState.sites)}
         {renderActions()}
       </Popup>
     );
@@ -87,8 +86,8 @@ const States = (props) => {
   */
   return (
     <FeatureGroup>
-      {statesShapesJSON.features.map((usState) => {
-        const { stateCode } = usState.properties;
+      {Object.keys(featureData).map((stateCode) => {
+        const usState = featureData[stateCode];
         const overlayColor = selectionActive && selectedStates[stateCode]
           ? `${selectedStates[stateCode]}Selected`
           : 'states';
@@ -107,7 +106,7 @@ const States = (props) => {
             e.target.closePopup();
           },
           onClick: () => {
-            if (stateSites[stateCode].size) {
+            if (usState.sites.size) { // Not all states has NEON sites
               dispatch({ type: 'toggleStateSelected', stateCode });
             }
           },
@@ -124,12 +123,12 @@ const States = (props) => {
         /* eslint-enable no-underscore-dangle */
         return (
           <Polygon
-            key={usState.properties.stateCode}
+            key={stateCode}
             color={ROOT_FEATURE_COLORS[overlayColor]}
             positions={usState.geometry.coordinates}
             {...interactionProps}
           >
-            {renderPopup(usState.properties.stateCode)}
+            {renderPopup(stateCode)}
           </Polygon>
         );
       })}

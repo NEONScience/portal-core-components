@@ -114,24 +114,21 @@ const SiteMapContainer = () => {
   }, [state.filters.features.open, featuresRef, dispatch]);
 
   /**
-     Effect - Copy "regionSites" (mappings of regions e.g. states or domains to sites) to state
-     only once after NeonContext loads. We do this because the main reducer needs access to them
-     to derive selections for regions, but cannot load NeonContext because it's a pure function.
+     Effect - If NeonContext Data is now available and has not been hydrated into state then do so.
   */
   useEffect(() => {
-    if (state.regionSitesLoaded || !(neonContextState.isFinal && !neonContextState.hasError)) {
+    if (state.neonContextHydrated || !(neonContextState.isFinal && !neonContextState.hasError)) {
       return;
     }
-    const { stateSites, domainSites } = neonContextState.data;
     dispatch({
-      type: 'setRegionSites',
-      regionSites: { stateSites, domainSites },
+      type: 'hydrateNeonContextData',
+      neonContextData: neonContextState.data,
     });
   }, [
-    state.regionSitesLoaded,
+    state.neonContextHydrated,
     neonContextState.isFinal,
     neonContextState.hasError,
-    neonContextState,
+    neonContextState.data,
     dispatch,
   ]);
 

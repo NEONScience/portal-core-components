@@ -15,6 +15,9 @@ import iconRelocatableAquaticSelectedSVG from './icon-relocatable-aquatic-select
 import iconRelocatableShadowSVG from './icon-relocatable-shadow.svg';
 import iconRelocatableShadowSelectedSVG from './icon-relocatable-shadow-selected.svg';
 
+import statesShapesJSON from '../../staticJSON/statesShapes.json';
+import domainsShapesJSON from '../../staticJSON/domainsShapes.json';
+
 export const MAP_ZOOM_RANGE = [1, 16];
 
 /**
@@ -24,8 +27,15 @@ export const MAP_ZOOM_RANGE = [1, 16];
 // For consistency in expressing the sort direction for the table
 export const SORT_DIRECTIONS = { ASC: 'ASC', DESC: 'DESC' };
 
-// For consistency in denoting distinct selection modes (what "things" a user can select, if any)
-export const SELECTIONS = { SITES: 'SITES' }; // TODO: add 'PLOTS'
+// For consistency in differentiating discrete sets of data.
+export const FEATURE_TYPES = {
+  SITES: 'SITES',
+  STATES: 'STATES',
+  DOMAINS: 'DOMAINS',
+};
+
+// Subset of FEATURE_TYPES describing all features that are directly selectable
+export const SELECTABLE_FEATURE_TYPES = (({ SITES }) => ({ SITES }))(FEATURE_TYPES);
 
 // For consistency in denoting whether all or some of a region's selectable children are selected
 export const SELECTION_PORTIONS = { PARTIAL: 'PARTIAL', TOTAL: 'TOTAL' };
@@ -105,14 +115,12 @@ export const FEATURES = {
     name: 'Tower Base Plot',
     description: 'Tower plots support a variety of plant productivity, plant diversity, soil, biogeochemistry and microbe sampling. The number and size of Tower Base Plots is determined by the vegetation of the tower airshed. In forested sites, twenty 40m x 40m plots are established. In herbaceous sites, thirty 20m x 20m plots are established.  Of these thirty tower plots, four have additional space to support soil sampling.',
     parent: 'TOWER_PLOTS',
-    hasAttributes: 'PLOT',
     attributes: { type: 'base', location: 'tower' },
   },
   TOWER_PHENOLOGY_PLOT: {
     name: 'Tower Phenology Plot',
     description: 'Plant phenology observations are made along a transect loop or plot in or around the primary airshed. When possible, one plot is established north of the tower to calibrate phenology camera images captured from sensors on the tower. If there is insufficient space north of the tower for a 200m x 200m plot or if the vegetation does not match the primary airshed an additional plot is established.',
     parent: 'TOWER_PLOTS',
-    hasAttributes: 'PLOT',
     attributes: { type: 'phenology', location: 'tower' },
   },
   DISTRIBUTED_PLOTS: {
@@ -125,35 +133,30 @@ export const FEATURES = {
     name: 'Distributed Base Plots',
     description: 'Distributed Base Plots support a variety of plant productivity, plant diversity, soil, biogeochemistry, microbe and beetle sampling. Distributed Base Plots are 40m x 40m.',
     parent: 'DISTRIBUTED_PLOTS',
-    hasAttributes: 'PLOT',
     attributes: { type: 'base', location: 'distributed' },
   },
   DISTRIBUTED_BIRD_GRIDS: {
     name: 'Distributed Bird Grids',
     description: 'Bird Grids consist of 9 sampling points within a 500m x 500m square. Each point is 250m apart. Where possible, Bird Grids are colocated with Distributed Base Plots by placing the Bird Grid center (B2) in close proximity to the center of the Base Plot. At smaller sites, a single point count is done at the south-west corner (point 21) of the Distributed Base Plot.',
     parent: 'DISTRIBUTED_PLOTS',
-    hasAttributes: 'PLOT',
     attributes: { type: 'bird', location: 'distributed' },
   },
   DISTRIBUTED_MAMMAL_GRIDS: {
     name: 'Distributed Mammal Grids',
     description: 'Mammal Grids are 90m x 90m and include 100 trapping locations at 10m spacing. Where possible, these grids are colocated with Distributed Base Plots by placing them a specified distance (150m +/- 50m) and random direction from the center of the Base Plot.',
     parent: 'DISTRIBUTED_PLOTS',
-    hasAttributes: 'PLOT',
     attributes: { type: 'mammal', location: 'distributed' },
   },
   DISTRIBUTED_MOSQUITO_PLOTS: {
     name: 'Distributed Mosquito Plots',
     description: 'At each Mosquito Point, one CO2 trap is established. Due to the frequency of sampling and temporal sampling constraints, Mosquito Points are located within 45m of roads.',
     parent: 'DISTRIBUTED_PLOTS',
-    hasAttributes: 'PLOT',
     attributes: { type: 'mosquito', location: 'distributed' },
   },
   DISTRIBUTED_TICK_PLOTS: {
     name: 'Distributed Tick Plots',
     description: 'Tick Plots are sampled by conducting cloth dragging or flagging around the perimeter of a 40m x 40m plot. Tick plots are colocated with Distributed Base Plots by placing them a specified distance (150m +/- 15m) and random direction from the center of the Base Plot.',
     parent: 'DISTRIBUTED_PLOTS',
-    hasAttributes: 'PLOT',
     attributes: { type: 'tick', location: 'distributed' },
   },
   SITE_SAMPLING_BOUNDARIES: {
@@ -168,43 +171,45 @@ export const FEATURES = {
   },
   TERRESTRIAL_CORE_SITES: {
     name: 'Terrestrial Core Sites',
+    type: FEATURE_TYPES.SITES,
     description: 'Land-based; fixed location',
     iconSvg: ICON_SVGS.SITE_MARKERS.CORE.TERRESTRIAL.BASE,
     parent: 'SITE_MARKERS',
-    hasAttributes: 'SITE',
     attributes: { type: 'CORE', terrain: 'TERRESTRIAL' },
   },
   TERRESTRIAL_RELOCATABLE_SITES: {
     name: 'Terrestrial Relocatable Sites',
+    type: FEATURE_TYPES.SITES,
     description: 'Land-based; location may change',
     iconSvg: ICON_SVGS.SITE_MARKERS.RELOCATABLE.TERRESTRIAL.BASE,
     parent: 'SITE_MARKERS',
-    hasAttributes: 'SITE',
     attributes: { type: 'RELOCATABLE', terrain: 'TERRESTRIAL' },
   },
   AQUATIC_CORE_SITES: {
     name: 'Aquatic Core Sites',
+    type: FEATURE_TYPES.SITES,
     description: 'Water-based; fixed location',
     iconSvg: ICON_SVGS.SITE_MARKERS.CORE.AQUATIC.BASE,
     parent: 'SITE_MARKERS',
-    hasAttributes: 'SITE',
     attributes: { type: 'CORE', terrain: 'AQUATIC' },
   },
   AQUATIC_RELOCATABLE_SITES: {
     name: 'Aquatic Relocatable Sites',
+    type: FEATURE_TYPES.SITES,
     description: 'Water-based; location may change',
     iconSvg: ICON_SVGS.SITE_MARKERS.RELOCATABLE.AQUATIC.BASE,
     parent: 'SITE_MARKERS',
-    hasAttributes: 'SITE',
     attributes: { type: 'RELOCATABLE', terrain: 'AQUATIC' },
   },
   NEON_DOMAINS: {
     name: 'NEON Domains',
+    type: FEATURE_TYPES.DOMAINS,
     description: '',
     hideByDefault: true,
   },
   US_STATES: {
     name: 'US States',
+    type: FEATURE_TYPES.STATES,
     description: '',
     hideByDefault: true,
   },
@@ -271,12 +276,13 @@ Object.keys(TILE_LAYERS).forEach((key) => {
 */
 export const DEFAULT_STATE = {
   view: null,
+  neonContextHydrated: false, // Whether NeonContext data has been one-time hydrated into state
   aspectRatio: {
     currentValue: 0.75, // Aspect ratio of the Site Map component content area (table and/or map)
     isDynamic: true, // Whether currentValue should set itself dynamically from viewport size
   },
   table: { // Settings that ONLY apply to the table
-    focus: 'SITE',
+    focus: SELECTABLE_FEATURE_TYPES.SITES,
     sortColumn: 'siteName',
     sortDirection: SORT_DIRECTIONS.ASC,
   },
@@ -285,16 +291,15 @@ export const DEFAULT_STATE = {
     tileLayer: null,
     zoomedIcons: {},
   },
-  regionSites: {}, // Populated when NeonContext is done loading, in state so dispatch can access
-  regionSitesLoaded: false,
   selection: {
-    active: null, // Set to any key in SELECTIONS
+    active: null, // Set to any key in SELECTABLE_FEATURE_TYPES
     maxSelectable: 0, // 0 is interpreted as unlimited, all other values are discrete limits
     derived: { // Derived feature-specific mappings of selectable item IDs to SELECTION_PORTIONS
       states: {}, // { stateCode: SELECTION_PORTIONS.KEY }
       domains: {}, // { domainCode: SELECTION_PORTIONS.KEY }
     },
   },
+  featureData: Object.fromEntries(Object.keys(FEATURE_TYPES).map(featureType => [featureType, {}])),
   filters: {
     search: null,
     features: {
@@ -315,9 +320,55 @@ export const DEFAULT_STATE = {
     },
   },
 };
-Object.keys(SELECTIONS).forEach((selection) => {
+Object.keys(SELECTABLE_FEATURE_TYPES).forEach((selection) => {
   DEFAULT_STATE.selection[selection] = new Set();
 });
+// Populate static JSON featureData
+if (statesShapesJSON) {
+  statesShapesJSON.features.forEach((feature) => {
+    if (!feature.properties || !feature.properties.stateCode) { return; }
+    const { stateCode } = feature.properties;
+    DEFAULT_STATE.featureData[FEATURE_TYPES.STATES][stateCode] = {
+      feature,
+      sites: new Set(),
+    };
+  });
+}
+if (domainsShapesJSON) {
+  domainsShapesJSON.features.forEach((feature) => {
+    if (!feature.properties || !feature.properties.domainCode) { return; }
+    const { domainCode } = feature.properties;
+    DEFAULT_STATE.featureData[FEATURE_TYPES.DOMAINS][domainCode] = {
+      feature,
+      sites: new Set(),
+    };
+  });
+}
+
+export const hydrateNeonContextData = (state, neonContextData) => {
+  const newState = { ...state, neonContextHydrated: true };
+  // Sites
+  Object.keys(neonContextData.sites).forEach((siteCode) => {
+    newState.featureData[FEATURE_TYPES.SITES][siteCode] = { ...neonContextData.sites[siteCode] };
+  });
+  // States
+  Object.keys(neonContextData.states).forEach((stateCode) => {
+    newState.featureData[FEATURE_TYPES.STATES][stateCode] = {
+      ...newState.featureData[FEATURE_TYPES.STATES][stateCode],
+      ...neonContextData.states[stateCode],
+      sites: neonContextData.stateSites[stateCode],
+    };
+  });
+  // Domains
+  Object.keys(neonContextData.domains).forEach((domainCode) => {
+    newState.featureData[FEATURE_TYPES.DOMAINS][domainCode] = {
+      ...newState.featureData[FEATURE_TYPES.DOMAINS][domainCode],
+      ...neonContextData.domains[domainCode],
+      sites: neonContextData.domainSites[domainCode],
+    };
+  });
+  return newState;
+};
 
 /**
    PropTypes and defaultProps
@@ -331,7 +382,7 @@ export const SITE_MAP_PROP_TYPES = {
   mapZoom: PropTypes.number,
   mapTileLayer: PropTypes.oneOf(Object.keys(TILE_LAYERS)),
   // Selection Props
-  selection: PropTypes.oneOf(Object.keys(SELECTIONS)),
+  selection: PropTypes.oneOf(Object.keys(SELECTABLE_FEATURE_TYPES)),
   maxSelectable: PropTypes.number,
   // Filter Props
   search: PropTypes.string,
