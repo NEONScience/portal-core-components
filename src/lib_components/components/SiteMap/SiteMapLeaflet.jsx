@@ -42,14 +42,15 @@ import {
   FEATURES,
   FEATURE_TYPES,
   SELECTABLE_FEATURE_TYPES,
-  ROOT_FEATURE_COLORS,
+  BOUNDARY_COLORS,
   SITE_DETAILS_URL_BASE,
   EXPLORE_DATA_PRODUCTS_URL_BASE,
 } from './SiteMapUtils';
 
-import DomainsFeature from './Features/Domains';
-import StatesFeature from './Features/States';
 import SitesFeature from './Features/Sites';
+import StatesFeature from './Features/States';
+import DomainsFeature from './Features/Domains';
+import SamplingBoundariesFeature from './Features/SamplingBoundaries';
 
 import statesShapesJSON from '../../staticJSON/statesShapes.json';
 import domainsShapesJSON from '../../staticJSON/domainsShapes.json';
@@ -145,15 +146,15 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
   },
   keySwatchStates: {
-    border: `2px solid ${ROOT_FEATURE_COLORS.states}`,
-    backgroundColor: `${ROOT_FEATURE_COLORS.states}88`,
+    border: `2px solid ${BOUNDARY_COLORS[FEATURES.STATES.KEY]}`,
+    backgroundColor: `${BOUNDARY_COLORS[FEATURES.STATES.KEY]}88`,
     width: Theme.spacing(3),
     height: Theme.spacing(1),
     margin: Theme.spacing(0, 0.5, 0.25, 0),
   },
   keySwatchDomains: {
-    border: `2px solid ${ROOT_FEATURE_COLORS.domains}`,
-    backgroundColor: `${ROOT_FEATURE_COLORS.domains}88`,
+    border: `2px solid ${BOUNDARY_COLORS[FEATURES.DOMAINS.KEY]}`,
+    backgroundColor: `${BOUNDARY_COLORS[FEATURES.DOMAINS.KEY]}88`,
     width: Theme.spacing(3),
     height: Theme.spacing(1),
     margin: Theme.spacing(0, 0.5, 0.25, 0),
@@ -324,10 +325,12 @@ const SiteMapLeaflet = () => {
       }
     */
     switch (key) {
-      case 'NEON_DOMAINS':
+      case FEATURES.DOMAINS.KEY:
         return <DomainsFeature {...featureProps} renderPopupSitesList={renderPopupSitesList} />;
-      case 'US_STATES':
+      case FEATURES.STATES.KEY:
         return <StatesFeature {...featureProps} renderPopupSitesList={renderPopupSitesList} />;
+      case FEATURES.SAMPLING_BOUNDARIES.KEY:
+        return <SamplingBoundariesFeature {...featureProps} />;
       default:
         return null;
     }

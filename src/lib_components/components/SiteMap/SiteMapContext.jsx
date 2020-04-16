@@ -84,33 +84,37 @@ const getZoomedIcons = (zoom, classes) => ({
   },
 });
 
-// Derive the selected status of a given region (US state or NEON domain). This should run
+// Derive the selected status of a given boundary (US state or NEON domain). This should run
 // every time the list of selected sites changes. It regenerates selectedStates and
-// selectedDomains in state to each contain a key/value lookup where the key is the region code
+// selectedDomains in state to each contain a key/value lookup where the key is the boundary code
 // (state code or domain code) and the value is either 'total' (all sites selected) or 'partial'
-// (some sites selected). If no sites are selected for the region it is omitted from the map.
-const deriveRegionSelections = (state) => {
-  const derive = (featureType) => {
-    if (!state.neonContextHydrated || !state.featureData[featureType]) { return {}; }
-    const selectedRegions = {};
-    Object.keys(state.featureData[featureType]).forEach((regionCode) => {
-      const regionSitesSet = state.featureData[featureType][regionCode].sites || new Set();
-      const intersection = [...regionSitesSet]
+// (some sites selected). If no sites are selected for the boundary it is omitted from the map.
+const deriveBoundarySelections = (state) => {
+  const derive = (featureKey) => {
+    if (!state.neonContextHydrated || !state.featureData[FEATURE_TYPES.BOUNDARIES][featureKey]) {
+      return {};
+    }
+    const selectedBoundarys = {};
+    Object.keys(state.featureData[FEATURE_TYPES.BOUNDARIES][featureKey]).forEach((boundaryCode) => {
+      const boundarySitesSet = (
+        state.featureData[FEATURE_TYPES.BOUNDARIES][featureKey][boundaryCode].sites || new Set()
+      );
+      const intersection = [...boundarySitesSet]
         .filter(x => state.selection[SELECTABLE_FEATURE_TYPES.SITES].has(x));
       if (!intersection.length) { return; }
-      selectedRegions[regionCode] = (
-        intersection.length === regionSitesSet.size ? 'total' : 'partial'
+      selectedBoundarys[boundaryCode] = (
+        intersection.length === boundarySitesSet.size ? 'total' : 'partial'
       );
     });
-    return selectedRegions;
+    return selectedBoundarys;
   };
   return {
     ...state,
     selection: {
       ...state.selection,
       derived: {
-        states: derive(FEATURE_TYPES.STATES),
-        domains: derive(FEATURE_TYPES.DOMAINS),
+        [FEATURES.STATES.KEY]: derive(FEATURES.STATES.KEY),
+        [FEATURES.DOMAINS.KEY]: derive(FEATURES.DOMAINS.KEY),
       },
     },
   };
@@ -216,23 +220,31 @@ const reducer = (state, action) => {
       } else {
         newState.selection[SELECTABLE_FEATURE_TYPES.SITES].add(action.site);
       }
-      return deriveRegionSelections(newState);
+      return deriveBoundarySelections(newState);
 
     case 'toggleStateSelected':
       if (!action.stateCode) { return state; }
-      setMethod = state.selection.derived.states[action.stateCode] === 'total' ? 'delete' : 'add';
-      newState.featureData[FEATURE_TYPES.STATES][action.stateCode].sites.forEach((siteCode) => {
-        newState.selection[SELECTABLE_FEATURE_TYPES.SITES][setMethod](siteCode);
-      });
-      return deriveRegionSelections(newState);
+      setMethod = (
+        state.selection.derived[FEATURES.STATES.KEY][action.stateCode] === 'total'
+          ? 'delete' : 'add'
+      );
+      newState.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.STATES.KEY][action.stateCode].sites
+        .forEach((siteCode) => {
+          newState.selection[SELECTABLE_FEATURE_TYPES.SITES][setMethod](siteCode);
+        });
+      return deriveBoundarySelections(newState);
 
     case 'toggleDomainSelected':
       if (!action.domainCode) { return state; }
-      setMethod = state.selection.derived.domains[action.domainCode] === 'total' ? 'delete' : 'add';
-      newState.featureData[FEATURE_TYPES.DOMAINS][action.domainCode].sites.forEach((siteCode) => {
-        newState.selection[SELECTABLE_FEATURE_TYPES.SITES][setMethod](siteCode);
-      });
-      return deriveRegionSelections(newState);
+      setMethod = (
+        state.selection.derived[FEATURES.DOMAINS.KEY][action.domainCode] === 'total'
+          ? 'delete' : 'add'
+      );
+      newState.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.DOMAINS.KEY][action.domainCode].sites
+        .forEach((siteCode) => {
+          newState.selection[SELECTABLE_FEATURE_TYPES.SITES][setMethod](siteCode);
+        });
+      return deriveBoundarySelections(newState);
 
     // Default
     default:

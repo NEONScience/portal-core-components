@@ -77,8 +77,10 @@ const Sites = (props) => {
      Render Method: Popup
   */
   const renderPopup = (site) => {
-    const usState = state.featureData[FEATURE_TYPES.STATES][site.stateCode] || {};
-    const domain = state.featureData[FEATURE_TYPES.DOMAINS][site.domainCode] || {};
+    const { [site.stateCode]: usState = {} } = state
+      .featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.STATES.KEY];
+    const { [site.domainCode]: domain = {} } = state
+      .featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.DOMAINS.KEY];
     let typeTitle = 'Core';
     let typeSubtitle = 'fixed location';
     if (site.type === 'RELOCATABLE') {

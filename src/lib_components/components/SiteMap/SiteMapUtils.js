@@ -31,9 +31,8 @@ export const SORT_DIRECTIONS = { ASC: 'ASC', DESC: 'DESC' };
 // For consistency in differentiating discrete sets of data.
 export const FEATURE_TYPES = {
   SITES: 'SITES',
-  STATES: 'STATES',
-  DOMAINS: 'DOMAINS',
-  SITE_SAMPLING_BOUNDARIES: 'SITE_SAMPLING_BOUNDARIES',
+  PLOTS: 'PLOTS',
+  BOUNDARIES: 'BOUNDARIES',
 };
 
 // Subset of FEATURE_TYPES describing all features that are directly selectable
@@ -85,15 +84,18 @@ export const ICON_SVGS = {
 /**
    FEATURES
    A data structure describing all descrete boundaries or sets of icons that can be shown on the map
+   Convention: all keys are consistently plural
 */
 export const FEATURES = {
-  TOWER_LOCATION: {
+  TOWER_LOCATIONS: {
     name: 'Tower Location',
+    type: FEATURE_TYPES.PLOTS,
     minZoom: 10,
     description: '',
   },
-  TOWER_AIRSHED_BOUNDARY: {
+  TOWER_AIRSHED_BOUNDARIES: {
     name: 'Tower Airshed Boundary',
+    type: FEATURE_TYPES.BOUNDARIES,
     minZoom: 13,
     description: '',
   },
@@ -103,14 +105,16 @@ export const FEATURES = {
     minZoom: 13,
     description: 'Tower plots provide a direct link between NEON’s Terrestrial Observation System and Terrestrial Instrument System. Tower Plots are located in and around the NEON tower primary and secondary airsheds.',
   },
-  TOWER_BASE_PLOT: {
+  TOWER_BASE_PLOTS: {
     name: 'Tower Base Plot',
+    type: FEATURE_TYPES.PLOTS,
     description: 'Tower plots support a variety of plant productivity, plant diversity, soil, biogeochemistry and microbe sampling. The number and size of Tower Base Plots is determined by the vegetation of the tower airshed. In forested sites, twenty 40m x 40m plots are established. In herbaceous sites, thirty 20m x 20m plots are established.  Of these thirty tower plots, four have additional space to support soil sampling.',
     parent: 'TOWER_PLOTS',
     attributes: { type: 'base', location: 'tower' },
   },
-  TOWER_PHENOLOGY_PLOT: {
+  TOWER_PHENOLOGY_PLOTS: {
     name: 'Tower Phenology Plot',
+    type: FEATURE_TYPES.PLOTS,
     description: 'Plant phenology observations are made along a transect loop or plot in or around the primary airshed. When possible, one plot is established north of the tower to calibrate phenology camera images captured from sensors on the tower. If there is insufficient space north of the tower for a 200m x 200m plot or if the vegetation does not match the primary airshed an additional plot is established.',
     parent: 'TOWER_PLOTS',
     attributes: { type: 'phenology', location: 'tower' },
@@ -123,47 +127,54 @@ export const FEATURES = {
   },
   DISTRIBUTED_BASE_PLOTS: {
     name: 'Distributed Base Plots',
+    type: FEATURE_TYPES.PLOTS,
     description: 'Distributed Base Plots support a variety of plant productivity, plant diversity, soil, biogeochemistry, microbe and beetle sampling. Distributed Base Plots are 40m x 40m.',
     parent: 'DISTRIBUTED_PLOTS',
     attributes: { type: 'base', location: 'distributed' },
   },
   DISTRIBUTED_BIRD_GRIDS: {
     name: 'Distributed Bird Grids',
+    type: FEATURE_TYPES.PLOTS,
     description: 'Bird Grids consist of 9 sampling points within a 500m x 500m square. Each point is 250m apart. Where possible, Bird Grids are colocated with Distributed Base Plots by placing the Bird Grid center (B2) in close proximity to the center of the Base Plot. At smaller sites, a single point count is done at the south-west corner (point 21) of the Distributed Base Plot.',
     parent: 'DISTRIBUTED_PLOTS',
     attributes: { type: 'bird', location: 'distributed' },
   },
   DISTRIBUTED_MAMMAL_GRIDS: {
     name: 'Distributed Mammal Grids',
+    type: FEATURE_TYPES.PLOTS,
     description: 'Mammal Grids are 90m x 90m and include 100 trapping locations at 10m spacing. Where possible, these grids are colocated with Distributed Base Plots by placing them a specified distance (150m +/- 50m) and random direction from the center of the Base Plot.',
     parent: 'DISTRIBUTED_PLOTS',
     attributes: { type: 'mammal', location: 'distributed' },
   },
   DISTRIBUTED_MOSQUITO_PLOTS: {
     name: 'Distributed Mosquito Plots',
+    type: FEATURE_TYPES.PLOTS,
     description: 'At each Mosquito Point, one CO2 trap is established. Due to the frequency of sampling and temporal sampling constraints, Mosquito Points are located within 45m of roads.',
     parent: 'DISTRIBUTED_PLOTS',
     attributes: { type: 'mosquito', location: 'distributed' },
   },
   DISTRIBUTED_TICK_PLOTS: {
     name: 'Distributed Tick Plots',
+    type: FEATURE_TYPES.PLOTS,
     description: 'Tick Plots are sampled by conducting cloth dragging or flagging around the perimeter of a 40m x 40m plot. Tick plots are colocated with Distributed Base Plots by placing them a specified distance (150m +/- 15m) and random direction from the center of the Base Plot.',
     parent: 'DISTRIBUTED_PLOTS',
     attributes: { type: 'tick', location: 'distributed' },
   },
-  SITE_SAMPLING_BOUNDARIES: {
-    name: 'Site Sampling Boundaries',
-    type: FEATURE_TYPES.SITE_SAMPLING_BOUNDARIES,
+  SAMPLING_BOUNDARIES: {
+    name: 'Site Sampling Boundary / Reach',
+    type: FEATURE_TYPES.BOUNDARIES,
     minZoom: 7,
     description: '',
   },
-  SITE_WATERSHED_BOUNDARY: {
+  WATERSHED_BOUNDARIES: {
     name: 'Site Watershed Boundary',
+    type: FEATURE_TYPES.BOUNDARIES,
     minZoom: 6,
     description: '',
   },
-  SITE_FLIGHT_BOX_BOUNDARY: {
-    name: 'Site Flight Box Boundary',
+  FLIGHT_BOX_BOUNDARIES: {
+    name: 'Site AOP Flight Box Boundary',
+    type: FEATURE_TYPES.BOUNDARIES,
     minZoom: 6,
     description: '',
   },
@@ -204,24 +215,26 @@ export const FEATURES = {
     parent: 'SITE_MARKERS',
     attributes: { type: 'RELOCATABLE', terrain: 'AQUATIC' },
   },
-  NEON_DOMAINS: {
+  DOMAINS: {
     name: 'NEON Domains',
-    type: FEATURE_TYPES.DOMAINS,
+    type: FEATURE_TYPES.BOUNDARIES,
     description: '',
     hideByDefault: true,
   },
-  US_STATES: {
+  STATES: {
     name: 'US States',
-    type: FEATURE_TYPES.STATES,
+    type: FEATURE_TYPES.BOUNDARIES,
     description: '',
     hideByDefault: true,
   },
 };
+// Replicate keys as attributes to completely eliminate the need to write a feature key string
+Object.keys(FEATURES).forEach((key) => { FEATURES[key].KEY = key; });
 
-// TODO: INTERACTION_FEATURE_COLORS, morve states/domains into feature components
-export const ROOT_FEATURE_COLORS = {
-  states: '#3cdd85',
-  domains: '#a36ce5',
+export const BOUNDARY_COLORS = {
+  [FEATURES.STATES.KEY]: '#3cdd85',
+  [FEATURES.DOMAINS.KEY]: '#a36ce5',
+  [FEATURES.SAMPLING_BOUNDARIES.KEY]: '#ff0000',
   partialSelected: COLORS.SECONDARY_BLUE[300],
   totalSelected: COLORS.SECONDARY_BLUE[500],
   hover: COLORS.SECONDARY_BLUE[100],
@@ -298,8 +311,8 @@ export const DEFAULT_STATE = {
     active: null, // Set to any key in SELECTABLE_FEATURE_TYPES
     maxSelectable: 0, // 0 is interpreted as unlimited, all other values are discrete limits
     derived: { // Derived feature-specific mappings of selectable item IDs to SELECTION_PORTIONS
-      states: {}, // { stateCode: SELECTION_PORTIONS.KEY }
-      domains: {}, // { domainCode: SELECTION_PORTIONS.KEY }
+      [FEATURES.STATES.KEY]: {}, // { stateCode: SELECTION_PORTIONS.KEY }
+      [FEATURES.DOMAINS.KEY]: {}, // { domainCode: SELECTION_PORTIONS.KEY }
     },
   },
   featureData: Object.fromEntries(Object.keys(FEATURE_TYPES).map(featureType => [featureType, {}])),
@@ -323,35 +336,50 @@ export const DEFAULT_STATE = {
     },
   },
 };
+// Initialize all boundary-type features in featureData state
+Object.keys(FEATURES)
+  .filter(featureKey => FEATURES[featureKey].type === FEATURE_TYPES.BOUNDARIES)
+  .forEach((featureKey) => {
+    DEFAULT_STATE.featureData[FEATURE_TYPES.BOUNDARIES][featureKey] = {};
+  });
+// Initialize all selectable features in selection state
 Object.keys(SELECTABLE_FEATURE_TYPES).forEach((selection) => {
   DEFAULT_STATE.selection[selection] = new Set();
 });
+
 // Populate static JSON featureData
+// States
 if (statesShapesJSON) {
   statesShapesJSON.features.forEach((feature) => {
     if (!feature.properties || !feature.properties.stateCode) { return; }
     const { stateCode } = feature.properties;
-    DEFAULT_STATE.featureData[FEATURE_TYPES.STATES][stateCode] = {
-      feature,
+    DEFAULT_STATE.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.STATES.KEY][stateCode] = {
+      geometry: feature.geometry,
       sites: new Set(),
     };
   });
 }
+// Domains
 if (domainsShapesJSON) {
   domainsShapesJSON.features.forEach((feature) => {
     if (!feature.properties || !feature.properties.domainCode) { return; }
     const { domainCode } = feature.properties;
-    DEFAULT_STATE.featureData[FEATURE_TYPES.DOMAINS][domainCode] = {
-      feature,
+    DEFAULT_STATE.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.DOMAINS.KEY][domainCode] = {
+      geometry: feature.geometry,
       sites: new Set(),
     };
   });
 }
+// Sampling Boundaries
 if (siteSamplingBoundariesJSON) {
   siteSamplingBoundariesJSON.features.forEach((feature) => {
     if (!feature.properties || !feature.properties.siteCode) { return; }
     const { siteCode } = feature.properties;
-    DEFAULT_STATE.featureData[FEATURE_TYPES.SITE_SAMPLING_BOUNDARIES][siteCode] = { feature };
+    DEFAULT_STATE
+      .featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.SAMPLING_BOUNDARIES.KEY][siteCode] = {
+        geometry: feature.geometry,
+        ...feature.properties,
+      };
   });
 }
 
@@ -363,16 +391,16 @@ export const hydrateNeonContextData = (state, neonContextData) => {
   });
   // States
   Object.keys(neonContextData.states).forEach((stateCode) => {
-    newState.featureData[FEATURE_TYPES.STATES][stateCode] = {
-      ...newState.featureData[FEATURE_TYPES.STATES][stateCode],
+    newState.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.STATES.KEY][stateCode] = {
+      ...newState.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.STATES.KEY][stateCode],
       ...neonContextData.states[stateCode],
       sites: neonContextData.stateSites[stateCode],
     };
   });
   // Domains
   Object.keys(neonContextData.domains).forEach((domainCode) => {
-    newState.featureData[FEATURE_TYPES.DOMAINS][domainCode] = {
-      ...newState.featureData[FEATURE_TYPES.DOMAINS][domainCode],
+    newState.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.DOMAINS.KEY][domainCode] = {
+      ...newState.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.DOMAINS.KEY][domainCode],
       ...neonContextData.domains[domainCode],
       sites: neonContextData.domainSites[domainCode],
     };

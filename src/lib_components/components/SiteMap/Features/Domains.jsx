@@ -12,7 +12,7 @@ import { FeatureGroup, Polygon, Popup } from 'react-leaflet';
 import Theme from '../../Theme/Theme';
 
 import SiteMapContext from '../SiteMapContext';
-import { FEATURE_TYPES, ROOT_FEATURE_COLORS } from '../SiteMapUtils';
+import { FEATURES, FEATURE_TYPES, BOUNDARY_COLORS } from '../SiteMapUtils';
 
 /**
    Main Component
@@ -28,8 +28,11 @@ const Domains = (props) => {
   if (!neonContextHydrated) { return null; }
 
   // Extract featrure and selection data
-  const { [FEATURE_TYPES.DOMAINS]: featureData } = state.featureData;
-  const { derived: { domains: selectedDomains }, active: selectionActive } = state.selection;
+  const { [FEATURES.DOMAINS.KEY]: featureData } = state.featureData[FEATURE_TYPES.BOUNDARIES];
+  const {
+    derived: { [FEATURES.DOMAINS.KEY]: selectedDomains },
+    active: selectionActive,
+  } = state.selection;
 
   /**
      Render Method: Popup
@@ -84,19 +87,19 @@ const Domains = (props) => {
         const domain = featureData[domainCode];
         const overlayColor = selectionActive && selectedDomains[domainCode]
           ? `${selectedDomains[domainCode]}Selected`
-          : 'domains';
+          : FEATURES.DOMAINS.KEY;
         /* eslint-disable no-underscore-dangle */
         const interactionProps = selectionActive ? {
           onMouseOver: (e) => {
-            e.target._path.setAttribute('stroke', ROOT_FEATURE_COLORS.hover);
-            e.target._path.setAttribute('fill', ROOT_FEATURE_COLORS.hover);
+            e.target._path.setAttribute('stroke', BOUNDARY_COLORS.hover);
+            e.target._path.setAttribute('fill', BOUNDARY_COLORS.hover);
             e.target.openPopup();
             positionPopup(e);
           },
           onMouseMove: (e) => { positionPopup(e); },
           onMouseOut: (e) => {
-            e.target._path.setAttribute('stroke', ROOT_FEATURE_COLORS[overlayColor]);
-            e.target._path.setAttribute('fill', ROOT_FEATURE_COLORS[overlayColor]);
+            e.target._path.setAttribute('stroke', BOUNDARY_COLORS[overlayColor]);
+            e.target._path.setAttribute('fill', BOUNDARY_COLORS[overlayColor]);
             e.target.closePopup();
           },
           onClick: () => {
@@ -104,20 +107,20 @@ const Domains = (props) => {
           },
         } : {
           onMouseOver: (e) => {
-            e.target._path.setAttribute('stroke', ROOT_FEATURE_COLORS.hover);
-            e.target._path.setAttribute('fill', ROOT_FEATURE_COLORS.hover);
+            e.target._path.setAttribute('stroke', BOUNDARY_COLORS.hover);
+            e.target._path.setAttribute('fill', BOUNDARY_COLORS.hover);
           },
           onMouseOut: (e) => {
-            e.target._path.setAttribute('stroke', ROOT_FEATURE_COLORS[overlayColor]);
-            e.target._path.setAttribute('fill', ROOT_FEATURE_COLORS[overlayColor]);
+            e.target._path.setAttribute('stroke', BOUNDARY_COLORS[overlayColor]);
+            e.target._path.setAttribute('fill', BOUNDARY_COLORS[overlayColor]);
           },
         };
         /* eslint-enable no-underscore-dangle */
         return (
           <Polygon
             key={domainCode}
-            color={ROOT_FEATURE_COLORS[overlayColor]}
-            positions={domain.feature.geometry.coordinates}
+            color={BOUNDARY_COLORS[overlayColor]}
+            positions={domain.geometry.coordinates}
             {...interactionProps}
           >
             {renderPopup(domainCode)}
