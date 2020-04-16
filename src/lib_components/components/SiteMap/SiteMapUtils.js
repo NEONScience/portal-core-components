@@ -17,6 +17,7 @@ import iconRelocatableShadowSelectedSVG from './icon-relocatable-shadow-selected
 
 import statesShapesJSON from '../../staticJSON/statesShapes.json';
 import domainsShapesJSON from '../../staticJSON/domainsShapes.json';
+import siteSamplingBoundariesJSON from '../../staticJSON/siteSamplingBoundaries.json';
 
 export const MAP_ZOOM_RANGE = [1, 16];
 
@@ -32,6 +33,7 @@ export const FEATURE_TYPES = {
   SITES: 'SITES',
   STATES: 'STATES',
   DOMAINS: 'DOMAINS',
+  SITE_SAMPLING_BOUNDARIES: 'SITE_SAMPLING_BOUNDARIES',
 };
 
 // Subset of FEATURE_TYPES describing all features that are directly selectable
@@ -151,6 +153,7 @@ export const FEATURES = {
   },
   SITE_SAMPLING_BOUNDARIES: {
     name: 'Site Sampling Boundaries',
+    type: FEATURE_TYPES.SITE_SAMPLING_BOUNDARIES,
     minZoom: 7,
     description: '',
   },
@@ -342,6 +345,13 @@ if (domainsShapesJSON) {
       feature,
       sites: new Set(),
     };
+  });
+}
+if (siteSamplingBoundariesJSON) {
+  siteSamplingBoundariesJSON.features.forEach((feature) => {
+    if (!feature.properties || !feature.properties.siteCode) { return; }
+    const { siteCode } = feature.properties;
+    DEFAULT_STATE.featureData[FEATURE_TYPES.SITE_SAMPLING_BOUNDARIES][siteCode] = { feature };
   });
 }
 
