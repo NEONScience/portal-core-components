@@ -19,7 +19,7 @@ import {
 /**
    Main Component
 */
-const SamplingBoundaries = (props) => {
+const AquaticReaches = (props) => {
   const { classes } = props;
 
   // State and Dispatch from SiteMapContext
@@ -31,7 +31,7 @@ const SamplingBoundaries = (props) => {
 
   // Extract feature data
   const {
-    [FEATURES.SAMPLING_BOUNDARIES.KEY]: featureData,
+    [FEATURES.AQUATIC_REACHES.KEY]: featureData,
   } = state.featureData[FEATURE_TYPES.BOUNDARIES];
 
   /**
@@ -39,15 +39,15 @@ const SamplingBoundaries = (props) => {
   */
   const renderPopup = (siteCode) => {
     if (!featureData[siteCode]) { return null; }
-    const samplingBoundary = featureData[siteCode];
-    const acres = (KM2_TO_ACRES * samplingBoundary.areaKm2).toFixed(2);
+    const aquaticReach = featureData[siteCode];
+    const acres = (KM2_TO_ACRES * aquaticReach.areaKm2).toFixed(2);
     return (
       <Popup className={classes.popup} autoPan>
         <Typography variant="h6" gutterBottom>
-          {`${siteCode} Sampling Boundary`}
+          {`${siteCode} Aquatic Reach`}
         </Typography>
         <Typography variant="body1">
-          {`Area: ${samplingBoundary.areaKm2.toFixed(2)} km2 (${acres} acres)`}
+          {`Area: ${aquaticReach.areaKm2.toFixed(2)} km2 (${acres} acres)`}
         </Typography>
       </Popup>
     );
@@ -59,8 +59,8 @@ const SamplingBoundaries = (props) => {
   return (
     <FeatureGroup>
       {Object.keys(featureData).map((siteCode) => {
-        const samplingBoundary = featureData[siteCode];
-        const featureColor = BOUNDARY_COLORS[FEATURES.SAMPLING_BOUNDARIES.KEY];
+        const aquaticReach = featureData[siteCode];
+        const featureColor = BOUNDARY_COLORS[FEATURES.AQUATIC_REACHES.KEY];
         const hoverColor = `#${tinycolor(featureColor).lighten(10).toHex()}`;
         /* eslint-disable no-underscore-dangle */
         const interactionProps = {
@@ -73,12 +73,15 @@ const SamplingBoundaries = (props) => {
             e.target._path.setAttribute('fill', featureColor);
           },
         };
+        if (siteCode === 'COMO') {
+          console.log('COMO', featureColor, aquaticReach.geometry.coordinates);
+        }
         /* eslint-enable no-underscore-dangle */
         return (
           <Polygon
             key={siteCode}
             color={featureColor}
-            positions={samplingBoundary.geometry.coordinates}
+            positions={aquaticReach.geometry.coordinates}
             {...interactionProps}
           >
             {renderPopup(siteCode)}
@@ -89,8 +92,8 @@ const SamplingBoundaries = (props) => {
   );
 };
 
-SamplingBoundaries.propTypes = {
+AquaticReaches.propTypes = {
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
-export default SamplingBoundaries;
+export default AquaticReaches;

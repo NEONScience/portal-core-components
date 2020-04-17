@@ -18,8 +18,11 @@ import iconRelocatableShadowSelectedSVG from './icon-relocatable-shadow-selected
 import statesShapesJSON from '../../staticJSON/statesShapes.json';
 import domainsShapesJSON from '../../staticJSON/domainsShapes.json';
 import siteSamplingBoundariesJSON from '../../staticJSON/siteSamplingBoundaries.json';
+import aquaticSiteReachesJSON from '../../staticJSON/aquaticSiteReaches.json';
 
 export const MAP_ZOOM_RANGE = [1, 16];
+
+export const KM2_TO_ACRES = 247.10538146717;
 
 /**
    Key Sets
@@ -161,9 +164,15 @@ export const FEATURES = {
     attributes: { type: 'tick', location: 'distributed' },
   },
   SAMPLING_BOUNDARIES: {
-    name: 'Site Sampling Boundary / Reach',
+    name: 'Site Sampling Boundary',
     type: FEATURE_TYPES.BOUNDARIES,
-    minZoom: 7,
+    minZoom: 8,
+    description: 'Terrestrial and Colocated Aquatic Sites',
+  },
+  AQUATIC_REACHES: {
+    name: 'Aquatic Site Reach',
+    type: FEATURE_TYPES.BOUNDARIES,
+    minZoom: 9,
     description: '',
   },
   WATERSHED_BOUNDARIES: {
@@ -231,10 +240,15 @@ export const FEATURES = {
 // Replicate keys as attributes to completely eliminate the need to write a feature key string
 Object.keys(FEATURES).forEach((key) => { FEATURES[key].KEY = key; });
 
+// Base colors for Boundary features. Also includes hover / selection colors.
 export const BOUNDARY_COLORS = {
-  [FEATURES.STATES.KEY]: '#3cdd85',
-  [FEATURES.DOMAINS.KEY]: '#a36ce5',
-  [FEATURES.SAMPLING_BOUNDARIES.KEY]: '#ff0000',
+  [FEATURES.STATES.KEY]: '#3cdd84',
+  [FEATURES.DOMAINS.KEY]: '#9252e0',
+  [FEATURES.SAMPLING_BOUNDARIES.KEY]: '#e8847d',
+  [FEATURES.AQUATIC_REACHES.KEY]: '#ad85a0',
+  [FEATURES.TOWER_AIRSHED_BOUNDARIES]: '#749966',
+  [FEATURES.WATERSHED_BOUNDARIES]: '#52747a',
+  [FEATURES.FLIGHT_BOX_BOUNDARIES]: '#f0ee75',
   partialSelected: COLORS.SECONDARY_BLUE[300],
   totalSelected: COLORS.SECONDARY_BLUE[500],
   hover: COLORS.SECONDARY_BLUE[100],
@@ -370,13 +384,25 @@ if (domainsShapesJSON) {
     };
   });
 }
-// Sampling Boundaries
+// Site Sampling Boundaries
 if (siteSamplingBoundariesJSON) {
   siteSamplingBoundariesJSON.features.forEach((feature) => {
     if (!feature.properties || !feature.properties.siteCode) { return; }
     const { siteCode } = feature.properties;
     DEFAULT_STATE
       .featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.SAMPLING_BOUNDARIES.KEY][siteCode] = {
+        geometry: feature.geometry,
+        ...feature.properties,
+      };
+  });
+}
+// Aquatic Site Reaches
+if (aquaticSiteReachesJSON) {
+  aquaticSiteReachesJSON.features.forEach((feature) => {
+    if (!feature.properties || !feature.properties.siteCode) { return; }
+    const { siteCode } = feature.properties;
+    DEFAULT_STATE
+      .featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.AQUATIC_REACHES.KEY][siteCode] = {
         geometry: feature.geometry,
         ...feature.properties,
       };

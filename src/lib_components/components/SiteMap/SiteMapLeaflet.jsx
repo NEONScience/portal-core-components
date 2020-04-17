@@ -51,6 +51,9 @@ import SitesFeature from './Features/Sites';
 import StatesFeature from './Features/States';
 import DomainsFeature from './Features/Domains';
 import SamplingBoundariesFeature from './Features/SamplingBoundaries';
+import AquaticReachesFeature from './Features/AquaticReaches';
+// import FlightBoxBoundariesFeature from './Features/FlightBoxBoundaries';
+// import WatershedBoundariesFeature from './Features/WatershedBoundaries';
 
 import statesShapesJSON from '../../staticJSON/statesShapes.json';
 import domainsShapesJSON from '../../staticJSON/domainsShapes.json';
@@ -315,22 +318,26 @@ const SiteMapLeaflet = () => {
     // Parents are groups only and don't render anything
     if (feature.isParent) { return null; }
     const featureProps = { key, classes, positionPopup };
-    // SITE and PLOT attributed features have common render components for many feature keys
-    if (feature.type === FEATURE_TYPES.SITES) {
-      return <SitesFeature featureKey={key} {...featureProps} />;
-    }
-    /*
-      if (feature.type === FEATURE_TYPES.PLOTS) {
+    switch (feature.type) {
+      case FEATURE_TYPES.SITES:
+        return <SitesFeature featureKey={key} {...featureProps} />;
+      /*
+      case FEATURE_TYPES.PLOTS:
         return <PlotsFeature featureKey={key} {...featureProps} />;
-      }
-    */
-    switch (key) {
-      case FEATURES.DOMAINS.KEY:
-        return <DomainsFeature {...featureProps} renderPopupSitesList={renderPopupSitesList} />;
-      case FEATURES.STATES.KEY:
-        return <StatesFeature {...featureProps} renderPopupSitesList={renderPopupSitesList} />;
-      case FEATURES.SAMPLING_BOUNDARIES.KEY:
-        return <SamplingBoundariesFeature {...featureProps} />;
+      */
+      case FEATURE_TYPES.BOUNDARIES:
+        switch (key) {
+          case FEATURES.DOMAINS.KEY:
+            return <DomainsFeature {...featureProps} renderPopupSitesList={renderPopupSitesList} />;
+          case FEATURES.STATES.KEY:
+            return <StatesFeature {...featureProps} renderPopupSitesList={renderPopupSitesList} />;
+          case FEATURES.SAMPLING_BOUNDARIES.KEY:
+            return <SamplingBoundariesFeature {...featureProps} />;
+          case FEATURES.AQUATIC_REACHES.KEY:
+            return <AquaticReachesFeature {...featureProps} />;
+          default:
+            return null;
+        }
       default:
         return null;
     }
