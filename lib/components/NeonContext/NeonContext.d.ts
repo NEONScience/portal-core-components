@@ -130,9 +130,6 @@ declare function useNeonContextState(): ({
                 name: string;
             };
             PA: {
-                /**
-                   Reducer
-                */
                 name: string;
             };
             PR: {
@@ -232,9 +229,7 @@ declare function useNeonContextState(): ({
             };
             D19: {
                 name: string;
-            }; /**
-               CONTEXT
-            */
+            };
             D20: {
                 name: string;
             };
@@ -262,6 +257,9 @@ declare function useNeonContextState(): ({
                 "DP4.00201.001": string;
             };
             parents: string[];
+        };
+        timeSeriesDataProducts: {
+            productCodes: string[];
         };
     };
     fetches: {
@@ -390,9 +388,6 @@ declare function useNeonContextState(): ({
                 name: string;
             };
             PA: {
-                /**
-                   Reducer
-                */
                 name: string;
             };
             PR: {
@@ -492,9 +487,7 @@ declare function useNeonContextState(): ({
             };
             D19: {
                 name: string;
-            }; /**
-               CONTEXT
-            */
+            };
             D20: {
                 name: string;
             };
@@ -523,6 +516,9 @@ declare function useNeonContextState(): ({
             };
             parents: string[];
         };
+        timeSeriesDataProducts: {
+            productCodes: string[];
+        };
     };
     fetches: {
         sites: {
@@ -538,6 +534,7 @@ declare namespace DEFAULT_STATE {
         export { statesJSON as states };
         export { domainsJSON as domains };
         export { bundlesJSON as bundles };
+        export { timeSeriesDataProductsJSON as timeSeriesDataProducts };
     }
     export namespace fetches {
         export namespace sites_1 {
@@ -554,6 +551,7 @@ import PropTypes from "prop-types";
 import statesJSON from "../../staticJSON/states.json";
 import domainsJSON from "../../staticJSON/domains.json";
 import bundlesJSON from "../../staticJSON/bundles.json";
+import timeSeriesDataProductsJSON from "../../staticJSON/timeSeriesDataProducts.json";
 declare namespace FETCH_STATUS {
     export const AWAITING_CALL: string;
     export const FETCHING: string;

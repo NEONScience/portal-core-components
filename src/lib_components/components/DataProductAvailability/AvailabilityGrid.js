@@ -4,6 +4,10 @@ import { select, event } from 'd3-selection';
 import { transition } from 'd3-transition';
 import { drag } from 'd3-drag';
 
+import moment from 'moment';
+
+import uniqueId from 'lodash/uniqueId';
+
 import Theme, { COLORS } from '../Theme/Theme';
 
 /**
@@ -27,6 +31,11 @@ export const SVG = {
 
 // This gets used a lot!
 const halfCellPad = SVG.CELL_PADDING / 2;
+
+const getNextMonth = month => moment.utc(`${month}-15T00:00:00Z`)
+  .add(1, 'month').format('YYYY-MM');
+const getPreviousMonth = month => moment.utc(`${month}-15T00:00:00Z`)
+  .subtract(1, 'month').format('YYYY-MM');
 
 /**
    Setup: Chart x-range values
@@ -167,7 +176,7 @@ export function AvailabilityGrid(config) {
     sites = { value: [], validValues: [] },
     allSites = {},
     sortedSites = [],
-    setSitesValue = () => {},
+    setSitesValue = null,
     dateRange = { value: [], validValues: [minYearMonth, maxYearMonth] },
     setDateRangeValue = () => {},
     selectionEnabled = true,
@@ -191,6 +200,7 @@ export function AvailabilityGrid(config) {
      Setup: Inputs and Base Values
   */
   const svg = select(svgRef.current);
+  if (svg.attr('id') === null) { svg.attr('id', `availability-${uniqueId()}`); }
   const svgId = svg.attr('id');
   const svgWidth = parseFloat(svg.attr('width'));
   const svgHeight = parseFloat(svg.attr('height'));
@@ -198,6 +208,13 @@ export function AvailabilityGrid(config) {
     ? sortedSites
     : Object.keys(data.rows).sort().reverse();
   const rowCount = rowKeys.length;
+
+  /**
+     Sanity Check: svg must have discrete numeric dimensions
+  */
+  if (Number.isNaN(svgWidth) || Number.isNaN(svgHeight)) {
+    return null;
+  }
 
   /**
      Setup: Static site/domain/state data
@@ -505,6 +522,7 @@ export function AvailabilityGrid(config) {
   }
 
   const toggleSelection = (key) => {
+    if (!setSitesValue) { return; }
     let allSitesForKey = new Set();
     switch (data.view) {
       case 'summary':
@@ -554,7 +572,7 @@ export function AvailabilityGrid(config) {
     const transform = getRowTranslation(rowKey, rowIdx);
     const labelX = getLabelWidth() - SVG.CELL_PADDING;
     const rowLabelG = rowLabelsG.append('g').attr('transform', transform);
-    const fill = selectionEnabled && viewSelections[rowKey]
+    const fill = selectionEnabled && setSitesValue && viewSelections[rowKey]
       ? Theme.palette.secondary.contrastText
       : Theme.palette.grey[700];
     const text = rowLabelG.append('text')
@@ -575,7 +593,7 @@ export function AvailabilityGrid(config) {
     applyStyles(mask, 'rowLabelMask');
     // Fill the mask and delay the selection to emulate a touch ripple.
     // Re-render to show the selection will reset the style.
-    const maskClick = selectionEnabled ? () => {
+    const maskClick = selectionEnabled && setSitesValue ? () => {
       touchRipple(mask, 15);
       setTimeout(() => toggleSelection(rowKey), 15);
     } : () => {};
@@ -648,13 +666,13 @@ export function AvailabilityGrid(config) {
       .attr('width', svgWidth - getLabelWidth())
       .attr('height', SVG.CELL_HEIGHT + SVG.CELL_PADDING)
       .attr('fill', 'transparent')
-      .style('cursor', selectionEnabled ? 'pointer' : 'grab')
+      .style('cursor', selectionEnabled && setSitesValue ? 'pointer' : 'grab')
       .style('outline', 'none')
       .on('mouseover', rowHighlightHover)
       .on('focus', rowHighlightHover)
       .on('mouseout', rowHighlightReset)
       .on('blur', rowHighlightReset)
-      .on('click', selectionEnabled ? (rowKey, idx, nodes) => {
+      .on('click', selectionEnabled && setSitesValue ? (rowKey, idx, nodes) => {
         touchRipple(select(nodes[idx]), 15);
         setTimeout(() => toggleSelection(rowKey), 15);
       } : () => {});
@@ -787,8 +805,13 @@ export function AvailabilityGrid(config) {
         ? Theme.palette.secondary.main
         : COLORS.SECONDARY_BLUE[200]
     );
-    const startX = getYearMonthGutterX(dateRange.value[0], 'left');
-    const endX = getYearMonthGutterX(dateRange.value[1], 'right');
+    let startX = getYearMonthGutterX(dateRange.value[0], 'left');
+    let endX = getYearMonthGutterX(dateRange.value[1], 'right');
+    if (startX > endX) {
+      const swapX = startX;
+      startX = endX;
+      endX = swapX;
+    }
     rowSelectionsG.selectAll('rect')
       .data(Object.keys(viewSelections))
       .join('rect')
@@ -797,14 +820,16 @@ export function AvailabilityGrid(config) {
       .attr('width', endX - startX)
       .attr('height', SVG.CELL_HEIGHT + SVG.CELL_PADDING)
       .attr('fill', fill);
-    labelSelectionsG.selectAll('rect')
-      .data(Object.keys(viewSelections))
-      .join('rect')
-      .attr('x', 0)
-      .attr('y', y)
-      .attr('width', getLabelWidth())
-      .attr('height', SVG.CELL_HEIGHT + SVG.CELL_PADDING)
-      .attr('fill', fill);
+    if (setSitesValue) {
+      labelSelectionsG.selectAll('rect')
+        .data(Object.keys(viewSelections))
+        .join('rect')
+        .attr('x', 0)
+        .attr('y', y)
+        .attr('width', getLabelWidth())
+        .attr('height', SVG.CELL_HEIGHT + SVG.CELL_PADDING)
+        .attr('fill', fill);
+    }
 
     // Date range handles
     redrawDateRangeHandles();
@@ -868,7 +893,7 @@ export function AvailabilityGrid(config) {
       // If the drag was less than 1/10 of a second long assume it's a sloppy click.
       // Perform a select action if selection is enabled to keep the end user happy. =)
       cellDragTime = (new Date()).getTime() - cellDragTime;
-      if (selectionEnabled && cellDragTime < 100) {
+      if (selectionEnabled && setSitesValue && cellDragTime < 100) {
         touchRipple(dataMasksG.selectAll('rect').filter(d => d === rowHoverKey), 15);
         setTimeout(() => toggleSelection(rowHoverKey), 15);
       }
@@ -899,6 +924,22 @@ export function AvailabilityGrid(config) {
     const dateRangeHandleHover = (key) => {
       dateRangeHoverKey = key;
       redrawDateRangeHandles();
+    };
+
+    // Function to flip date range handles, masks, and values if a drag event puts start after end
+    // Shift values by one month on each side if flipping as start looks ahead and end looks back
+    const flipDateRangeSelectionIfNeeded = () => {
+      if (dateRange.value[1] < dateRange.value[0]) {
+        dateRange.value = [
+          getNextMonth(dateRange.value[1]),
+          getPreviousMonth(dateRange.value[0]),
+        ];
+        // Only if the handles are atop each other will this still be true after the last flip.
+        // In this case hard set to the same value (so one month selected).
+        if (dateRange.value[1] < dateRange.value[0]) {
+          dateRange.value[0] = dateRange.value[1]; // eslint-disable-line prefer-destructuring
+        }
+      }
     };
 
     // Interactions for Date Range START Handle
@@ -936,6 +977,7 @@ export function AvailabilityGrid(config) {
           + (SVG.DATE_RANGE_MASK_WIDTH / 2)
           + getTimeOffset();
         dateRangeMasksG.select('.dateRangeStartMaskRect').attr('x', maskX);
+        flipDateRangeSelectionIfNeeded();
         setDateRangeValue([...dateRange.value]);
         redrawSelections();
       });
@@ -976,6 +1018,7 @@ export function AvailabilityGrid(config) {
           - (SVG.DATE_RANGE_MASK_WIDTH / 2)
           + getTimeOffset();
         dateRangeMasksG.select('.dateRangeEndMaskRect').attr('x', maskX);
+        flipDateRangeSelectionIfNeeded();
         setDateRangeValue([...dateRange.value]);
         redrawSelections();
       });

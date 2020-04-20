@@ -7,7 +7,7 @@ import uniq from 'lodash/uniq';
 
 import { Subject } from 'rxjs';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Container from '@material-ui/core/Container';
@@ -33,6 +33,18 @@ import {
 } from '../../util/liferayNotificationsUtil';
 
 const cookies = new Cookies();
+
+// Global CSS
+const GlobalCss = withStyles({
+  '@global': {
+    code: {
+      fontSize: '115%',
+      padding: Theme.spacing(0.25, 0.5),
+      backgroundColor: 'rgba(0, 0, 0, 0.11)',
+      borderRadius: Theme.spacing(0.5),
+    },
+  },
+})(() => null);
 
 // Google Tag Manager Data Layer
 // Define if not already defined. This must be set in the public/index.html for any apps/pages that
@@ -264,6 +276,7 @@ const NeonPage = (props) => {
   const renderNeonPage = () => (
     <ThemeProvider theme={Theme}>
       <CssBaseline />
+      <GlobalCss />
       <NeonHeader
         notifications={notifications}
         onShowNotifications={handleShowNotifications}

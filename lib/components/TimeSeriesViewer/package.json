@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "name": "time-series-viewer",
+  "main": "./TimeSeriesViewer.jsx",
+  "module": "./TimeSeriesViewer.js"
+}

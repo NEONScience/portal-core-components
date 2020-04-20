@@ -35,6 +35,7 @@ import SiteChipStyleGuide from './lib_components/components/SiteChip/StyleGuide'
 import SiteMapStyleGuide from './lib_components/components/SiteMap/StyleGuide';
 import StoryMapStyleGuide from './lib_components/components/StoryMap/StyleGuide';
 import ThemeStyleGuide from './lib_components/components/Theme/StyleGuide';
+import TimeSeriesViewerStyleGuide from './lib_components/components/TimeSeriesViewer/StyleGuide';
 
 const components = [
   {
@@ -111,6 +112,11 @@ const components = [
     name: 'Theme',
     hash: '#Theme',
     component: ThemeStyleGuide,
+  },
+  {
+    name: 'TimeSeriesViewer',
+    hash: '#TimeSeriesViewer',
+    component: TimeSeriesViewerStyleGuide,
   },
 ];
 

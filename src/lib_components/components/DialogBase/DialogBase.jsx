@@ -29,6 +29,9 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.grey[200],
     position: 'relative',
   },
+  noPaper: {
+    margin: theme.spacing(2),
+  },
   contentPaper: {
     margin: theme.spacing(2),
     padding: theme.spacing(3),
@@ -46,6 +49,7 @@ const DialogBase = (props) => {
     toolbarChildren,
     children,
     closeButtonProps,
+    nopaper,
     ...other
   } = props;
 
@@ -82,9 +86,15 @@ const DialogBase = (props) => {
           {toolbarChildren}
         </Toolbar>
       </AppBar>
-      <Paper className={classes.contentPaper}>
-        {children}
-      </Paper>
+      {nopaper ? (
+        <div className={classes.noPaper}>
+          {children}
+        </div>
+      ) : (
+        <Paper className={classes.contentPaper}>
+          {children}
+        </Paper>
+      )}
     </Dialog>
   );
 };
@@ -115,12 +125,14 @@ DialogBase.propTypes = {
       PropTypes.number,
     ]),
   ),
+  nopaper: PropTypes.bool,
 };
 
 DialogBase.defaultProps = {
   open: true,
   toolbarChildren: null,
   closeButtonProps: {},
+  nopaper: false,
 };
 
 export default DialogBase;

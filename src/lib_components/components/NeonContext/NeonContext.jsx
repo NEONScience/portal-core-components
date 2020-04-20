@@ -16,6 +16,7 @@ import sitesJSON from '../../staticJSON/sites.json';
 import statesJSON from '../../staticJSON/states.json';
 import domainsJSON from '../../staticJSON/domains.json';
 import bundlesJSON from '../../staticJSON/bundles.json';
+import timeSeriesDataProductsJSON from '../../staticJSON/timeSeriesDataProducts.json';
 
 const FETCH_STATUS = {
   AWAITING_CALL: 'AWAITING_CALL',
@@ -30,6 +31,7 @@ const DEFAULT_STATE = {
     states: statesJSON,
     domains: domainsJSON,
     bundles: bundlesJSON,
+    timeSeriesDataProducts: timeSeriesDataProductsJSON,
   },
   fetches: {
     sites: { status: FETCH_STATUS.AWAITING_CALL, error: null },

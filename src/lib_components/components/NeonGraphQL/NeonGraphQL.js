@@ -119,8 +119,8 @@ const getObservable = (query) => {
 };
 
 const getObservableWith = (type = null, dimensionality = null, id = null) => {
-  if (!TYPES[type] || !DIMENSIONALITIES[dimensionality]) { return null; }
-  if (dimensionality === DIMENSIONALITIES.ONE && !id) { return null; }
+  if (!TYPES[type] || !DIMENSIONALITIES[dimensionality]) { return of(null); }
+  if (dimensionality === DIMENSIONALITIES.ONE && !id) { return of(null); }
   const query = getQueryBody(type, dimensionality, id);
   return getObservable(query);
 };
