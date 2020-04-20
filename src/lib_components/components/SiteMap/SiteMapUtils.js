@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 
 import { COLORS } from '../Theme/Theme';
 
+// SVGs for all map icons
 import iconCoreTerrestrialSVG from './icon-core-terrestrial.svg';
 import iconCoreTerrestrialSelectedSVG from './icon-core-terrestrial-selected.svg';
 import iconCoreAquaticSVG from './icon-core-aquatic.svg';
@@ -15,10 +16,9 @@ import iconRelocatableAquaticSelectedSVG from './icon-relocatable-aquatic-select
 import iconRelocatableShadowSVG from './icon-relocatable-shadow.svg';
 import iconRelocatableShadowSelectedSVG from './icon-relocatable-shadow-selected.svg';
 
+// Static JSON for Boundary features
 import statesShapesJSON from '../../staticJSON/statesShapes.json';
 import domainsShapesJSON from '../../staticJSON/domainsShapes.json';
-import siteSamplingBoundariesJSON from '../../staticJSON/siteSamplingBoundaries.json';
-import aquaticSiteReachesJSON from '../../staticJSON/aquaticSiteReaches.json';
 
 export const MAP_ZOOM_RANGE = [1, 16];
 
@@ -38,6 +38,9 @@ export const FEATURE_TYPES = {
   BOUNDARIES: 'BOUNDARIES',
 };
 
+// For consistency in differentiating how feature data are loaded (e.g. by fetch or deferred import)
+export const FEATURE_DATA_LOAD_TYPES = { FETCH: 'FETCH', IMPORT: 'IMPORT' };
+
 // Subset of FEATURE_TYPES describing all features that are directly selectable
 export const SELECTABLE_FEATURE_TYPES = (({ SITES }) => ({ SITES }))(FEATURE_TYPES);
 
@@ -46,6 +49,14 @@ export const SELECTION_PORTIONS = { PARTIAL: 'PARTIAL', TOTAL: 'TOTAL' };
 
 // For consistency in denoting which dinstinct user interfaces are available and which is visible
 export const VIEWS = { MAP: 'MAP', TABLE: 'TABLE' };
+
+// For consistency in tracking the current status of a fetch or import
+export const FETCH_STATUS = {
+  AWAITING_CALL: 'AWAITING_CALL',
+  FETCHING: 'FETCHING',
+  ERROR: 'ERROR',
+  SUCCESS: 'SUCCESS',
+};
 
 /**
    Icon SVGs
@@ -94,18 +105,21 @@ export const FEATURES = {
     name: 'Tower Location',
     type: FEATURE_TYPES.PLOTS,
     minZoom: 10,
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     description: '',
   },
-  TOWER_AIRSHED_BOUNDARIES: {
+  TOWER_AIRSHEDS: {
     name: 'Tower Airshed Boundary',
     type: FEATURE_TYPES.BOUNDARIES,
     minZoom: 13,
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: '',
   },
   TOWER_PLOTS: {
     name: 'Tower Plots',
     isParent: true,
     minZoom: 13,
+    dataLoadType: null,
     description: 'Tower plots provide a direct link between NEON’s Terrestrial Observation System and Terrestrial Instrument System. Tower Plots are located in and around the NEON tower primary and secondary airsheds.',
   },
   TOWER_BASE_PLOTS: {
@@ -113,6 +127,7 @@ export const FEATURES = {
     type: FEATURE_TYPES.PLOTS,
     description: 'Tower plots support a variety of plant productivity, plant diversity, soil, biogeochemistry and microbe sampling. The number and size of Tower Base Plots is determined by the vegetation of the tower airshed. In forested sites, twenty 40m x 40m plots are established. In herbaceous sites, thirty 20m x 20m plots are established.  Of these thirty tower plots, four have additional space to support soil sampling.',
     parent: 'TOWER_PLOTS',
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     attributes: { type: 'base', location: 'tower' },
   },
   TOWER_PHENOLOGY_PLOTS: {
@@ -120,12 +135,14 @@ export const FEATURES = {
     type: FEATURE_TYPES.PLOTS,
     description: 'Plant phenology observations are made along a transect loop or plot in or around the primary airshed. When possible, one plot is established north of the tower to calibrate phenology camera images captured from sensors on the tower. If there is insufficient space north of the tower for a 200m x 200m plot or if the vegetation does not match the primary airshed an additional plot is established.',
     parent: 'TOWER_PLOTS',
+    dataLoadType: null,
     attributes: { type: 'phenology', location: 'tower' },
   },
   DISTRIBUTED_PLOTS: {
     name: 'Distributed Plots',
     isParent: true,
     minZoom: 10,
+    dataLoadType: null,
     description: 'Distributed Plots are located throughout the TOS Sampling boundary in an effort to describe organisms and process with plot, point, and grid sampling. Plots were established according to a stratified-random and spatially balanced design.',
   },
   DISTRIBUTED_BASE_PLOTS: {
@@ -133,6 +150,7 @@ export const FEATURES = {
     type: FEATURE_TYPES.PLOTS,
     description: 'Distributed Base Plots support a variety of plant productivity, plant diversity, soil, biogeochemistry, microbe and beetle sampling. Distributed Base Plots are 40m x 40m.',
     parent: 'DISTRIBUTED_PLOTS',
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     attributes: { type: 'base', location: 'distributed' },
   },
   DISTRIBUTED_BIRD_GRIDS: {
@@ -140,6 +158,7 @@ export const FEATURES = {
     type: FEATURE_TYPES.PLOTS,
     description: 'Bird Grids consist of 9 sampling points within a 500m x 500m square. Each point is 250m apart. Where possible, Bird Grids are colocated with Distributed Base Plots by placing the Bird Grid center (B2) in close proximity to the center of the Base Plot. At smaller sites, a single point count is done at the south-west corner (point 21) of the Distributed Base Plot.',
     parent: 'DISTRIBUTED_PLOTS',
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     attributes: { type: 'bird', location: 'distributed' },
   },
   DISTRIBUTED_MAMMAL_GRIDS: {
@@ -147,6 +166,7 @@ export const FEATURES = {
     type: FEATURE_TYPES.PLOTS,
     description: 'Mammal Grids are 90m x 90m and include 100 trapping locations at 10m spacing. Where possible, these grids are colocated with Distributed Base Plots by placing them a specified distance (150m +/- 50m) and random direction from the center of the Base Plot.',
     parent: 'DISTRIBUTED_PLOTS',
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     attributes: { type: 'mammal', location: 'distributed' },
   },
   DISTRIBUTED_MOSQUITO_PLOTS: {
@@ -154,6 +174,7 @@ export const FEATURES = {
     type: FEATURE_TYPES.PLOTS,
     description: 'At each Mosquito Point, one CO2 trap is established. Due to the frequency of sampling and temporal sampling constraints, Mosquito Points are located within 45m of roads.',
     parent: 'DISTRIBUTED_PLOTS',
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     attributes: { type: 'mosquito', location: 'distributed' },
   },
   DISTRIBUTED_TICK_PLOTS: {
@@ -161,35 +182,41 @@ export const FEATURES = {
     type: FEATURE_TYPES.PLOTS,
     description: 'Tick Plots are sampled by conducting cloth dragging or flagging around the perimeter of a 40m x 40m plot. Tick plots are colocated with Distributed Base Plots by placing them a specified distance (150m +/- 15m) and random direction from the center of the Base Plot.',
     parent: 'DISTRIBUTED_PLOTS',
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     attributes: { type: 'tick', location: 'distributed' },
   },
   SAMPLING_BOUNDARIES: {
     name: 'Site Sampling Boundary',
     type: FEATURE_TYPES.BOUNDARIES,
     minZoom: 8,
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: 'Terrestrial and Colocated Aquatic Sites',
   },
   AQUATIC_REACHES: {
     name: 'Aquatic Site Reach',
     type: FEATURE_TYPES.BOUNDARIES,
     minZoom: 9,
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: '',
   },
   WATERSHED_BOUNDARIES: {
     name: 'Site Watershed Boundary',
     type: FEATURE_TYPES.BOUNDARIES,
     minZoom: 6,
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: '',
   },
   FLIGHT_BOX_BOUNDARIES: {
     name: 'Site AOP Flight Box Boundary',
     type: FEATURE_TYPES.BOUNDARIES,
     minZoom: 6,
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: '',
   },
   SITE_MARKERS: {
     name: 'NEON Site Markers',
     isParent: true,
+    dataLoadType: null,
     description: '',
   },
   TERRESTRIAL_CORE_SITES: {
@@ -198,6 +225,7 @@ export const FEATURES = {
     description: 'Land-based; fixed location',
     iconSvg: ICON_SVGS.SITE_MARKERS.CORE.TERRESTRIAL.BASE,
     parent: 'SITE_MARKERS',
+    dataLoadType: null,
     attributes: { type: 'CORE', terrain: 'TERRESTRIAL' },
   },
   TERRESTRIAL_RELOCATABLE_SITES: {
@@ -206,6 +234,7 @@ export const FEATURES = {
     description: 'Land-based; location may change',
     iconSvg: ICON_SVGS.SITE_MARKERS.RELOCATABLE.TERRESTRIAL.BASE,
     parent: 'SITE_MARKERS',
+    dataLoadType: null,
     attributes: { type: 'RELOCATABLE', terrain: 'TERRESTRIAL' },
   },
   AQUATIC_CORE_SITES: {
@@ -214,6 +243,7 @@ export const FEATURES = {
     description: 'Water-based; fixed location',
     iconSvg: ICON_SVGS.SITE_MARKERS.CORE.AQUATIC.BASE,
     parent: 'SITE_MARKERS',
+    dataLoadType: null,
     attributes: { type: 'CORE', terrain: 'AQUATIC' },
   },
   AQUATIC_RELOCATABLE_SITES: {
@@ -222,18 +252,21 @@ export const FEATURES = {
     description: 'Water-based; location may change',
     iconSvg: ICON_SVGS.SITE_MARKERS.RELOCATABLE.AQUATIC.BASE,
     parent: 'SITE_MARKERS',
+    dataLoadType: null,
     attributes: { type: 'RELOCATABLE', terrain: 'AQUATIC' },
   },
   DOMAINS: {
     name: 'NEON Domains',
     type: FEATURE_TYPES.BOUNDARIES,
     description: '',
+    dataLoadType: null,
     hideByDefault: true,
   },
   STATES: {
     name: 'US States',
     type: FEATURE_TYPES.BOUNDARIES,
     description: '',
+    dataLoadType: null,
     hideByDefault: true,
   },
 };
@@ -318,6 +351,8 @@ export const DEFAULT_STATE = {
   },
   map: { // Settings that ONLY apply to the map
     zoom: null,
+    center: [],
+    bounds: null,
     tileLayer: null,
     zoomedIcons: {},
   },
@@ -329,7 +364,12 @@ export const DEFAULT_STATE = {
       [FEATURES.DOMAINS.KEY]: {}, // { domainCode: SELECTION_PORTIONS.KEY }
     },
   },
-  featureData: Object.fromEntries(Object.keys(FEATURE_TYPES).map(featureType => [featureType, {}])),
+  featureDataFetches: Object.fromEntries(
+    Object.keys(FEATURE_TYPES).map(featureType => [featureType, {}]),
+  ),
+  featureData: Object.fromEntries(
+    Object.keys(FEATURE_TYPES).map(featureType => [featureType, {}]),
+  ),
   filters: {
     search: null,
     features: {
@@ -360,6 +400,13 @@ Object.keys(FEATURES)
 Object.keys(SELECTABLE_FEATURE_TYPES).forEach((selection) => {
   DEFAULT_STATE.selection[selection] = new Set();
 });
+// Initialize feature fetch status objects
+Object.keys(FEATURES)
+  .filter(featureKey => FEATURES[featureKey].dataLoadType !== null)
+  .forEach((featureKey) => {
+    const { type: featureType } = FEATURES[featureKey];
+    DEFAULT_STATE.featureDataFetches[featureType][featureKey] = {};
+  });
 
 // Populate static JSON featureData
 // States
@@ -384,6 +431,8 @@ if (domainsShapesJSON) {
     };
   });
 }
+
+/*
 // Site Sampling Boundaries
 if (siteSamplingBoundariesJSON) {
   siteSamplingBoundariesJSON.features.forEach((feature) => {
@@ -408,6 +457,7 @@ if (aquaticSiteReachesJSON) {
       };
   });
 }
+*/
 
 export const hydrateNeonContextData = (state, neonContextData) => {
   const newState = { ...state, neonContextHydrated: true };

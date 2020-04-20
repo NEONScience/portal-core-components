@@ -123,33 +123,50 @@ const deriveBoundarySelections = (state) => {
 /**
    Reducer
 */
+const zoomIsValid = zoom => (
+  Number.isInteger(zoom) && zoom >= MAP_ZOOM_RANGE[0] && zoom <= MAP_ZOOM_RANGE[1]
+);
+const centerIsValid = center => (
+  Array.isArray(center) && center.length === 2 && center.every(v => typeof v === 'number')
+);
+const boundsAreValid = bounds => (
+  typeof bounds === 'object' && bounds !== null
+    && Object.keys(bounds).every(key => (
+      ['lat', 'lng'].includes(key) && Array.isArray(bounds[key]) && bounds[key].length === 2
+        && bounds[key].every(v => typeof v === 'number') && bounds[key][1] > bounds[key][0]
+    ))
+);
+const calculateFeatureAvailability = (state) => {
+  const featureIsAvailable = feature => (!(
+    (typeof feature.minZoom === 'number' && state.map.zoom < feature.minZoom)
+      || (typeof feature.maxZoom === 'number' && state.map.zoom > feature.maxZoom)
+      || (typeof feature.parent === 'string' && !featureIsAvailable(FEATURES[feature.parent]))
+  ));
+  return {
+    ...state,
+    filters: {
+      ...state.filters,
+      features: {
+        ...state.filters.features,
+        available: Object.fromEntries(
+          Object.entries(FEATURES).map(entry => [entry[0], featureIsAvailable(entry[1])]),
+        ),
+      },
+    },
+  };
+};
+/*
+const calculateSitesInMap = (state) => {
+  return [];
+};
+*/
+const calculateFeatureDataFetches = (state) => {
+  // const sitesInMap = calculateSitesInMap(state);
+  console.log('calculateFeatureDataFetches');
+  return state;
+};
 const reducer = (state, action) => {
   console.log('REDUCER', action);
-  const zoomIsValid = zoom => (
-    Number.isInteger(zoom) && zoom >= MAP_ZOOM_RANGE[0] && zoom <= MAP_ZOOM_RANGE[1]
-  );
-  const centerIsValid = center => (
-    Array.isArray(center) && center.length === 2 && center.every(v => typeof v === 'number')
-  );
-  const calculateFeatureAvailability = (newState) => {
-    const featureIsAvailable = feature => (!(
-      (typeof feature.minZoom === 'number' && newState.map.zoom < feature.minZoom)
-        || (typeof feature.maxZoom === 'number' && newState.map.zoom > feature.maxZoom)
-        || (typeof feature.parent === 'string' && !featureIsAvailable(FEATURES[feature.parent]))
-    ));
-    return {
-      ...newState,
-      filters: {
-        ...newState.filters,
-        features: {
-          ...newState.filters.features,
-          available: Object.fromEntries(
-            Object.entries(FEATURES).map(entry => [entry[0], featureIsAvailable(entry[1])]),
-          ),
-        },
-      },
-    };
-  };
   let setMethod = null;
   const newState = { ...state };
   switch (action.type) {
@@ -172,15 +189,19 @@ const reducer = (state, action) => {
       if (!zoomIsValid(action.zoom)) { return state; }
       newState.map.zoom = action.zoom;
       if (centerIsValid(action.center)) { newState.map.center = action.center; }
+      if (boundsAreValid(action.bounds)) { newState.map.bounds = action.bounds; }
       if (action.classes) {
         newState.map.zoomedIcons = getZoomedIcons(newState.map.zoom, action.classes);
       }
-      return calculateFeatureAvailability(newState);
+      return calculateFeatureDataFetches(
+        calculateFeatureAvailability(newState),
+      );
 
     case 'setMapCenter':
       if (!centerIsValid(action.center)) { return state; }
+      if (boundsAreValid(action.bounds)) { newState.map.bounds = action.bounds; }
       newState.map.center = [...action.center];
-      return newState;
+      return calculateFeatureDataFetches(newState);
 
     case 'setMapTileLayer':
       if (!Object.keys(TILE_LAYERS).includes(action.tileLayer)) { return state; }

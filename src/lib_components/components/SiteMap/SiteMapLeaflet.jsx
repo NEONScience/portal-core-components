@@ -54,6 +54,7 @@ import SamplingBoundariesFeature from './Features/SamplingBoundaries';
 import AquaticReachesFeature from './Features/AquaticReaches';
 // import FlightBoxBoundariesFeature from './Features/FlightBoxBoundaries';
 // import WatershedBoundariesFeature from './Features/WatershedBoundaries';
+// import TowerAirshedBoundariesFeature from './Features/TowerAirshedBoundaries';
 
 import statesShapesJSON from '../../staticJSON/statesShapes.json';
 import domainsShapesJSON from '../../staticJSON/domainsShapes.json';
@@ -335,6 +336,14 @@ const SiteMapLeaflet = () => {
             return <SamplingBoundariesFeature {...featureProps} />;
           case FEATURES.AQUATIC_REACHES.KEY:
             return <AquaticReachesFeature {...featureProps} />;
+          /*
+          case FEATURES.WATERSHED_BOUNDARIES.KEY:
+            return <WatershedBoundariesFeature {...featureProps} />;
+          case FEATURES.FLIGHT_BOX_BOUNDARIES.KEY:
+            return <FlightBoxBoundariesFeature {...featureProps} />;
+          case FEATURES.TOWER_AIRSHED_BOUNDARIES.KEY:
+            return <TowerAirshedBoundariesFeature {...featureProps} />;
+          */
           default:
             return null;
         }
@@ -348,19 +357,33 @@ const SiteMapLeaflet = () => {
   */
   const handleMoveEnd = (event) => {
     const center = event.target.getCenter();
+    const bounds = event.target.getBounds();
+    /* eslint-disable no-underscore-dangle */
     dispatch({
       type: 'setMapCenter',
       center: [center.lat, center.lng],
+      bounds: {
+        lat: [bounds._southWest.lat, bounds._northEast.lat],
+        lng: [bounds._southWest.lng, bounds._northEast.lng],
+      },
     });
+    /* eslint-enable no-underscore-dangle */
   };
   const handleZoomEnd = (event) => {
     const center = event.target.getCenter();
+    const bounds = event.target.getBounds();
+    /* eslint-disable no-underscore-dangle */
     dispatch({
       type: 'setMapZoom',
       zoom: event.target.getZoom(),
       center: [center.lat, center.lng],
+      bounds: {
+        lat: [bounds._southWest.lat, bounds._northEast.lat],
+        lng: [bounds._southWest.lng, bounds._northEast.lng],
+      },
       classes,
     });
+    /* eslint-enable no-underscore-dangle */
   };
   const handleBaseLayerChange = (event) => {
     if (!event.name || !TILE_LAYERS_BY_NAME[event.name]) { return; }
