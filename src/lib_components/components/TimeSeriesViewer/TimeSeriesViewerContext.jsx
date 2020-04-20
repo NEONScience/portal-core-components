@@ -23,8 +23,9 @@ import {
   ignoreElements,
 } from 'rxjs/operators';
 
-import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
+import NeonApi from '../NeonApi/NeonApi';
 import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
+import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import { forkJoinWithProgress } from '../../util/rxUtil';
 
 // 'get' is a reserved word so can't be imported with import
@@ -202,6 +203,7 @@ const fetchCSV = url => ajax({
   crossDomain: true,
   responseType: 'text',
   url,
+  headers: NeonApi.getApiTokenHeader(),
 });
 const parseCSV = (rawCsv, dedupeLines = false) => {
   const csv = !dedupeLines ? rawCsv : [...new Set(rawCsv.split('\n'))].join('\n');
@@ -1087,7 +1089,7 @@ const Provider = (props) => {
         if (!state.product.sites[siteCode].availableMonths.includes(month)) { return; }
         metaFetchTriggered = true;
         dispatch({ type: 'fetchSiteMonth', siteCode, month });
-        ajax.getJSON(getSiteMonthDataURL(siteCode, month)).pipe(
+        ajax.getJSON(getSiteMonthDataURL(siteCode, month), NeonApi.getApiTokenHeader()).pipe(
           map((response) => {
             if (response && response.data && response.data.files) {
               dispatch({
