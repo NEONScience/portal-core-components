@@ -814,7 +814,6 @@ const reducer = (state, action) => {
       delete newState.dataFetches[action.token];
       newState.status = TIME_SERIES_VIEWER_STATUS.READY;
       calcSelection();
-      console.log('READY', newState);
       return newState;
     case 'noDataFilesFetchNecessary':
       newState.status = TIME_SERIES_VIEWER_STATUS.READY;

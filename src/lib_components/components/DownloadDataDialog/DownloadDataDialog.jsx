@@ -27,6 +27,7 @@ import LeftIcon from '@material-ui/icons/ChevronLeft';
 import RightIcon from '@material-ui/icons/ChevronRight';
 import WarningIcon from '@material-ui/icons/Warning';
 
+import { ROUTES, getFullRoute } from '../../routing/routes';
 import DialogBase from '../DialogBase/DialogBase';
 import DownloadStepForm from '../DownloadStepForm/DownloadStepForm';
 import DownloadDataContext from '../DownloadDataContext/DownloadDataContext';
@@ -114,6 +115,7 @@ export default function DownloadDataDialog() {
       sites,
       dateRange,
       packageType,
+      auth: { isAuthenticated },
     },
     dispatch,
   ] = DownloadDataContext.useDownloadDataState();
@@ -369,6 +371,32 @@ export default function DownloadDataDialog() {
     );
   };
 
+  const renderAuthSuggestion = () => {
+    if (isAuthenticated) { return null; }
+    const signInLink = (
+      <Link
+        target="_new"
+        href={getFullRoute(ROUTES.LOGIN)}
+      >
+        signing in
+      </Link>
+    );
+    /* eslint-disable react/jsx-one-expression-per-line */
+    return (
+      <Typography
+        variant="body2"
+        style={{
+          marginTop: Theme.spacing(1),
+          fontWeight: 600,
+          color: COLORS.YELLOW[600],
+        }}
+      >
+        Have an account? Consider {signInLink} before you proceed.
+      </Typography>
+    );
+    /* eslint-enable react/jsx-one-expression-per-line */
+  };
+
   const renderActions = () => {
     const divClass = belowSm ? classes.startFlex : classes.endFlex;
     const showDownloadButton = fromManifest || fromAOPManifest;
@@ -394,6 +422,7 @@ export default function DownloadDataDialog() {
             Complete all steps to enable download
           </Typography>
         ) : null}
+        {renderAuthSuggestion()}
       </div>
     );
   };
