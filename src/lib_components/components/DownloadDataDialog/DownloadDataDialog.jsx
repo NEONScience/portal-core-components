@@ -386,18 +386,39 @@ export default function DownloadDataDialog() {
         signing in
       </Link>
     );
-    /* eslint-disable react/jsx-one-expression-per-line */
-    return (
-      <Typography
-        variant="body2"
-        style={{
-          marginTop: Theme.spacing(1),
-          fontWeight: 600,
-          color: COLORS.YELLOW[600],
-        }}
+    const benefitsLink = (
+      <Link
+        target="_new"
+        href="https://www.neonscience.org/data/about-data/data-portal-user-accounts"
       >
-        Have an account? Consider {signInLink} before you proceed.
-      </Typography>
+        here
+      </Link>
+    );
+    /* eslint-disable react/jsx-one-expression-per-line */
+    const authStyles = { color: COLORS.YELLOW[600], textAlign: 'right', whiteSpace: 'nowrap' };
+    return (
+      <React.Fragment>
+        <Typography
+          variant="body2"
+          style={{
+            ...authStyles,
+            marginTop: Theme.spacing(1),
+            fontWeight: 600,
+          }}
+        >
+          Have an account? Consider {signInLink} before proceeding.
+        </Typography>
+        <Typography
+          variant="body2"
+          style={{
+            ...authStyles,
+            fontStyle: 'italic',
+            fontSize: '0.8rem',
+          }}
+        >
+          Learn more about the benefits of signing in {benefitsLink}.
+        </Typography>
+      </React.Fragment>
     );
     /* eslint-enable react/jsx-one-expression-per-line */
   };
@@ -648,7 +669,7 @@ export default function DownloadDataDialog() {
       ) : null}
     >
       {renderGtmTags()}
-      <Grid container spacing={2} alignItems="center" style={{ marginBottom: Theme.spacing(2) }}>
+      <Grid container spacing={2} alignItems="flex-start" style={{ marginBottom: Theme.spacing(2) }}>
         <Grid item xs={12} sm={6} md={8} data-selenium="download-data-dialog.product-info">
           <Typography variant="h5" style={{ marginBottom: Theme.spacing(1) }}>
             {productData.productName}

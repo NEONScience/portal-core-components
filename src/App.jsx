@@ -114,7 +114,7 @@ const components = [
     component: ThemeStyleGuide,
   },
   {
-    name: 'TimeSeriesViewer',
+    name: 'Time Series Viewer',
     hash: '#TimeSeriesViewer',
     component: TimeSeriesViewerStyleGuide,
   },
