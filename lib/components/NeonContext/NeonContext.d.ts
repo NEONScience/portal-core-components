@@ -268,6 +268,10 @@ declare function useNeonContextState(): ({
             error: null;
         };
     };
+    auth: {
+        isAuthenticated: boolean;
+        fetchStatus: string;
+    };
     isActive: boolean;
 } & any[]) | ((() => void) | {
     data: {
@@ -526,6 +530,10 @@ declare function useNeonContextState(): ({
             error: null;
         };
     };
+    auth: {
+        isAuthenticated: boolean;
+        fetchStatus: string;
+    };
     isActive: boolean;
 })[];
 declare namespace DEFAULT_STATE {
@@ -543,6 +551,11 @@ declare namespace DEFAULT_STATE {
             export const error: null;
         }
         export { sites_1 as sites };
+    }
+    export namespace auth {
+        export const isAuthenticated: boolean;
+        import fetchStatus = AWAITING_CALL;
+        export { fetchStatus };
     }
     export const isActive: boolean;
 }

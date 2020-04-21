@@ -11,6 +11,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import { of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
+import Authenticate from '../../auth/authenticate';
 import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
 import sitesJSON from '../../staticJSON/sites.json';
 import statesJSON from '../../staticJSON/states.json';
@@ -35,6 +36,10 @@ const DEFAULT_STATE = {
   },
   fetches: {
     sites: { status: FETCH_STATUS.AWAITING_CALL, error: null },
+  },
+  auth: {
+    isAuthenticated: false,
+    fetchStatus: FETCH_STATUS.AWAITING_CALL,
   },
   isActive: false,
 };
@@ -69,6 +74,7 @@ const reducer = (state, action) => {
   // changing to trigger re-renders in the consumer.
   const newState = { ...state, fetches: cloneDeep(state.fetches) };
   switch (action.type) {
+    // Actions for handling sites fetch
     case 'fetchSitesCalled':
       newState.fetches.sites.status = FETCH_STATUS.FETCHING;
       return newState;
@@ -80,6 +86,16 @@ const reducer = (state, action) => {
       newState.fetches.sites.status = FETCH_STATUS.ERROR;
       newState.fetches.sites.error = action.error;
       return newState;
+
+    // Actions for handling auth fetch
+    case 'setIsAuthenticated':
+      newState.auth.isAuthenticated = !!action.isAuthenticated;
+      newState.auth.fetchStatus = FETCH_STATUS.SUCCESS;
+      return newState;
+    case 'setAuthFetching':
+      newState.auth.fetchStatus = FETCH_STATUS.FETCHING;
+      return newState;
+
     default:
       return state;
   }
@@ -129,12 +145,29 @@ const Provider = (props) => {
       return of(false);
     }),
   );
+
+  // Effect: fetch sites data
   useEffect(() => {
     if (state.fetches.sites.status === FETCH_STATUS.AWAITING_CALL) {
       dispatch({ type: 'fetchSitesCalled' });
       fetchAllSites$.subscribe();
     }
   });
+
+  // Effect: set the authentication status
+  useEffect(() => {
+    if (state.auth.fetchStatus !== FETCH_STATUS.AWAITING_CALL) { return; }
+    dispatch({ type: 'setAuthFetching' });
+    const auth = new Authenticate();
+    auth.isAuthenticated(
+      (response) => {
+        dispatch({ type: 'setIsAuthenticated', isAuthenticated: auth.checkAuthResponse(response) });
+      },
+      () => {
+        dispatch({ type: 'setIsAuthenticated', isAuthenticated: false });
+      },
+    );
+  }, [state.auth.fetchStatus]);
 
   /**
      Render

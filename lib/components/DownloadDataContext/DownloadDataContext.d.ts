@@ -49,10 +49,6 @@ declare function useDownloadDataState(): {
     dialogOpen: boolean;
     awaitingHigherOrderUpdateWhenDialogOpens: boolean;
     cachedHigherOrderState: {};
-    auth: {
-        isAuthenticated: boolean;
-        fetchStatus: string;
-    };
     productData: {};
     requiredSteps: never[];
     allStepsComplete: boolean;
@@ -123,10 +119,6 @@ declare function useDownloadDataState(): {
     dialogOpen: boolean;
     awaitingHigherOrderUpdateWhenDialogOpens: boolean;
     cachedHigherOrderState: {};
-    auth: {
-        isAuthenticated: boolean;
-        fetchStatus: string;
-    };
     productData: {};
     allStepsComplete: boolean;
     fromManifest: boolean;
@@ -197,10 +189,6 @@ declare namespace DEFAULT_STATE {
     export const dialogOpen: boolean;
     export const awaitingHigherOrderUpdateWhenDialogOpens: boolean;
     export const cachedHigherOrderState: {};
-    export namespace auth {
-        export const isAuthenticated: boolean;
-        export const fetchStatus: string;
-    }
     const productData_2: {};
     export { productData_2 as productData };
     export const requiredSteps: never[];

@@ -22,7 +22,6 @@ import {
   takeUntil,
 } from 'rxjs/operators';
 
-import Authenticate from '../../auth/authenticate';
 import NeonApi from '../NeonApi/NeonApi';
 import ExternalHost from '../ExternalHost/ExternalHost';
 import {
@@ -98,10 +97,6 @@ const DEFAULT_STATE = {
   dialogOpen: false,
   awaitingHigherOrderUpdateWhenDialogOpens: false,
   cachedHigherOrderState: {},
-  auth: {
-    isAuthenticated: false,
-    fetchStatus: 'awaitingFetchCall',
-  },
   productData: {},
   requiredSteps: [],
   allStepsComplete: false,
@@ -782,16 +777,6 @@ const reducer = (state, action) => {
     case 'setBroadcastDone':
       return { ...state, broadcast: false };
 
-    // Action for setting isAuthenticated status
-    case 'setIsAuthenticated':
-      return {
-        ...state,
-        auth: {
-          isAuthenticated: !!action.isAuthenticated,
-          fetchStatus: 'fetched',
-        },
-      };
-
     // Action for setting productData. Applies new valid values to all selection keys.
     case 'setProductData':
       return getInitialStateFromProps({ productData: action.productData });
@@ -1068,20 +1053,6 @@ const Provider = (props) => {
       });
     });
   }, [stateObservable]);
-
-  // Set the authentication status exactly once
-  useEffect(() => {
-    if (state.auth.fetchStatus !== 'awaitingFetchCall') { return; }
-    const auth = new Authenticate();
-    auth.isAuthenticated(
-      (response) => {
-        dispatch({ type: 'setIsAuthenticated', isAuthenticated: auth.checkAuthResponse(response) });
-      },
-      () => {
-        dispatch({ type: 'setIsAuthenticated', isAuthenticated: false });
-      },
-    );
-  }, [state.auth.fetchStatus]);
 
   // When the state has changed such that it needs to broadcast itself to anything
   // listening: do the broadcast.

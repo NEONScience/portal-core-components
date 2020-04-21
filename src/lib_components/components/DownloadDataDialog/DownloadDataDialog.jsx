@@ -34,6 +34,7 @@ import DownloadDataContext from '../DownloadDataContext/DownloadDataContext';
 import DataThemeIcon from '../DataThemeIcon/DataThemeIcon';
 import ExternalHost from '../ExternalHost/ExternalHost';
 import ExternalHostInfo from '../ExternalHostInfo/ExternalHostInfo';
+import NeonContext from '../NeonContext/NeonContext';
 import Theme, { COLORS } from '../Theme/Theme';
 
 import {
@@ -99,7 +100,7 @@ export default function DownloadDataDialog() {
   const belowSm = useMediaQuery(Theme.breakpoints.only('xs'));
 
   /**
-     State (from Context)
+     State (from DownloadDataContext)
   */
   const [
     {
@@ -115,10 +116,14 @@ export default function DownloadDataDialog() {
       sites,
       dateRange,
       packageType,
-      auth: { isAuthenticated },
     },
     dispatch,
   ] = DownloadDataContext.useDownloadDataState();
+
+  /**
+     State (from NeonContext)
+  */
+  const [{ auth: { isAuthenticated } }] = NeonContext.useNeonContextState();
 
   /**
      State (local)
