@@ -202,14 +202,14 @@ export const FEATURES = {
   WATERSHED_BOUNDARIES: {
     name: 'Site Watershed Boundary',
     type: FEATURE_TYPES.BOUNDARIES,
-    minZoom: 6,
+    minZoom: 7,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: '',
   },
   FLIGHT_BOX_BOUNDARIES: {
     name: 'Site AOP Flight Box Boundary',
     type: FEATURE_TYPES.BOUNDARIES,
-    minZoom: 6,
+    minZoom: 7,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: '',
   },
@@ -364,6 +364,7 @@ export const DEFAULT_STATE = {
       [FEATURES.DOMAINS.KEY]: {}, // { domainCode: SELECTION_PORTIONS.KEY }
     },
   },
+  featureDataFetchesHasAwaiting: false, // Boolean: track whether any data fetches are awaiting call
   featureDataFetches: Object.fromEntries(
     Object.keys(FEATURE_TYPES).map(featureType => [featureType, {}]),
   ),

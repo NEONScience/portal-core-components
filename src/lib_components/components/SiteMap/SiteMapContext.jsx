@@ -1,4 +1,9 @@
-import React, { createContext, useContext, useReducer } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useReducer,
+  useEffect,
+} from 'react';
 import PropTypes from 'prop-types';
 
 import cloneDeep from 'lodash/cloneDeep';
@@ -14,7 +19,9 @@ import {
   VIEWS,
   FEATURES,
   ICON_SVGS,
+  FETCH_STATUS,
   FEATURE_TYPES,
+  FEATURE_DATA_LOAD_TYPES,
   SELECTABLE_FEATURE_TYPES,
   MAP_ZOOM_RANGE,
   SITE_MAP_PROP_TYPES,
@@ -155,15 +162,43 @@ const calculateFeatureAvailability = (state) => {
     },
   };
 };
-/*
 const calculateSitesInMap = (state) => {
-  return [];
+  const { map: { bounds } } = state;
+  if (!bounds) { return []; }
+  const extendedBounds = Object.fromEntries(
+    Object.keys(bounds)
+      .map((dir) => {
+        const buffer = (bounds[dir][1] - bounds[dir][0]) / 2;
+        return [
+          dir,
+          [bounds[dir][0] - buffer, bounds[dir][1] + buffer],
+        ];
+      }),
+  );
+  const siteIsInBounds = site => (
+    Number.isFinite(site.latitude) && Number.isFinite(site.longitude)
+      && site.latitude >= extendedBounds.lat[0] && site.latitude <= extendedBounds.lat[1]
+      && site.longitude >= extendedBounds.lng[0] && site.longitude <= extendedBounds.lng[1]
+  );
+  return Object.keys(state.featureData[FEATURE_TYPES.SITES])
+    .filter(siteCode => siteIsInBounds(state.featureData[FEATURE_TYPES.SITES][siteCode]));
 };
-*/
 const calculateFeatureDataFetches = (state) => {
-  // const sitesInMap = calculateSitesInMap(state);
-  console.log('calculateFeatureDataFetches');
-  return state;
+  const sitesInMap = calculateSitesInMap(state);
+  if (!sitesInMap) { return state; }
+  const newState = { ...state };
+  Object.keys(FEATURES)
+    .filter(key => FEATURE_DATA_LOAD_TYPES[FEATURES[key].dataLoadType])
+    .filter(key => state.filters.features.available[key] && state.filters.features.visible[key])
+    .forEach((key) => {
+      const { type: featureType } = FEATURES[key];
+      sitesInMap.forEach((siteCode) => {
+        if (newState.featureDataFetches[featureType][key][siteCode]) { return; }
+        newState.featureDataFetches[featureType][key][siteCode] = FETCH_STATUS.AWAITING_CALL;
+        newState.featureDataFetchesHasAwaiting = true;
+      });
+    });
+  return newState;
 };
 const reducer = (state, action) => {
   console.log('REDUCER', action);
@@ -233,6 +268,10 @@ const reducer = (state, action) => {
           .some(f => newState.filters.features.visible[f]); // ...some child is visible
       }
       return newState;
+
+    // Fetch and Import
+    case 'awaitingFeatureDataFetchesTriggered':
+      return { ...state, featureDataFetchesHasAwaiting: false };
 
     // Selection
     case 'toggleSiteSelected':
@@ -330,6 +369,30 @@ const Provider = (props) => {
     initialState = hydrateNeonContextData(initialState, neonContextData);
   }
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  /**
+     Effect - trigger all data fetches and imports
+  */
+  useEffect(() => {
+    if (!state.featureDataFetchesHasAwaiting) { return; }
+    Object.keys(state.featureDataFetches).forEach((type) => {
+      Object.keys(state.featureDataFetches[type]).forEach((key) => {
+        const { dataLoadType } = FEATURES[key];
+        Object.keys(state.featureDataFetches[type][key]).forEach((siteCode) => {
+          if (state.featureDataFetches[type][key][siteCode] !== FETCH_STATUS.AWAITING_CALL) {
+            return;
+          }
+          if (dataLoadType === FEATURE_DATA_LOAD_TYPES.IMPORT) {
+            console.log('IMPORT', type, key, siteCode);
+          }
+          if (dataLoadType === FEATURE_DATA_LOAD_TYPES.FETCH) {
+            // do a fetch, not yet implemented
+          }
+        });
+      });
+    });
+    dispatch({ type: 'awaitingFeatureDataFetchesTriggered' });
+  }, [state.featureDataFetchesHasAwaiting, state.featureDataFetches]);
 
   /**
      Render
