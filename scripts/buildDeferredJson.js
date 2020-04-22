@@ -21,6 +21,45 @@ const shp = require('shpjs');
 const TMP_DEFERRED_JSON_PATH = './tmp_deferredJSON';
 const OUT_DEFERRED_JSON_PATH = './src/lib_components/components/SiteMap/deferredJSON';
 
+const sources = {
+  TOWER_AIRSHEDS: {
+    zipFile: '90percentfootprint.zip',
+    getProperties: (properties) => {
+      const { SiteID: siteCode } = properties;
+      return { siteCode };
+    },
+  },
+  AQUATIC_REACHES: {
+    zipFile: 'AquaticReach.zip',
+    getProperties: (properties) => {
+      const { SiteID: siteCode, HUC12, UTM_Zone, AreaKm2: areaKm2 } = properties;
+      return { siteCode, HUC12, UTM_Zone, areaKm2 };
+    },
+  },
+  WATERSHED_BOUNDARIES: {
+    zipFile: 'NEONAquaticWatershed.zip',
+    getProperties: (properties) => {
+      const { SiteID: siteCode, UTM_Zone, WSAreaKm2 } = properties;
+      const areaKm2 = parseFloat(WSAreaKm2, 10);
+      return { siteCode, UTM_Zone, areaKm2: areaKm2 || null };
+    }
+  },
+  FLIGHT_BOX_BOUNDARIES: {
+    zipFile: 'AOP_Flightboxes.zip',
+    getProperties: (properties) => {
+      const { siteID: siteCode, priority, version, flightbxID: flightBoxId } = properties;
+      return { siteCode, priority, version, flightBoxId };
+    },
+  },
+  SAMPLING_BOUNDARIES: {
+    zipFile: 'Field_Sampling_Boundaries.zip',
+    getProperties: (properties) => {
+      const { siteID: siteCode, areaKm2 } = properties;
+      return { siteCode, areaKm2 };
+    },
+  },
+};
+
 const sanitizeGeometry = (geometry) => {
   if (!geometry.coordinates) { return geometry; }
   geometry.coordinates.forEach((a, aidx) => {
@@ -83,45 +122,6 @@ const generateFeatureSiteFilesDirectory = (featureKey, sitesData) => {
   console.log(chalk.green(`${featureKey} Complete (${count} sites)`));
   const alphaSites = Object.keys(sitesData).sort();
   console.log(chalk.green(JSON.stringify(alphaSites)));
-};
-
-const sources = {
-  TOWER_AIRSHEDS: {
-    zipFile: null,
-    getProperties: (properties) => {
-      console.log(properties);
-      return properties;
-    },
-  },
-  AQUATIC_REACHES: {
-    zipFile: 'AquaticReach.zip',
-    getProperties: (properties) => {
-      const { SiteID: siteCode, HUC12, UTM_Zone, AreaKm2: areaKm2 } = properties;
-      return { siteCode, HUC12, UTM_Zone, areaKm2 };
-    },
-  },
-  WATERSHED_BOUNDARIES: {
-    zipFile: 'NEONAquaticWatershed.zip',
-    getProperties: (properties) => {
-      const { SiteID: siteCode, UTM_Zone, WSAreaKm2 } = properties;
-      const areaKm2 = parseFloat(WSAreaKm2, 10);
-      return { siteCode, UTM_Zone, areaKm2: areaKm2 || null };
-    }
-  },
-  FLIGHT_BOX_BOUNDARIES: {
-    zipFile: 'AOP_Flightboxes.zip',
-    getProperties: (properties) => {
-      const { siteID: siteCode, priority, version, flightbxID: flightBoxId } = properties;
-      return { siteCode, priority, version, flightBoxId };
-    },
-  },
-  SAMPLING_BOUNDARIES: {
-    zipFile: 'Field_Sampling_Boundaries.zip',
-    getProperties: (properties) => {
-      const { siteID: siteCode, areaKm2 } = properties;
-      return { siteCode, areaKm2 };
-    },
-  },
 };
 
 console.log(chalk.underline('Building Deferred JSON Artifacts...'));

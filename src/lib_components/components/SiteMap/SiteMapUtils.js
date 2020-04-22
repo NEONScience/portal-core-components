@@ -147,7 +147,7 @@ export const FEATURES = {
   TOWER_AIRSHEDS: {
     name: 'Tower Airshed Boundary',
     type: FEATURE_TYPES.BOUNDARIES,
-    minZoom: 13,
+    minZoom: 10,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: '',
   },

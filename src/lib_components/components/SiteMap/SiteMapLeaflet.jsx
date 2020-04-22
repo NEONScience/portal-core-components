@@ -54,7 +54,7 @@ import SamplingBoundariesFeature from './Features/SamplingBoundaries';
 import AquaticReachesFeature from './Features/AquaticReaches';
 import FlightBoxBoundariesFeature from './Features/FlightBoxBoundaries';
 import WatershedBoundariesFeature from './Features/WatershedBoundaries';
-// import TowerAirshedBoundariesFeature from './Features/TowerAirshedBoundaries';
+import TowerAirshedsFeature from './Features/TowerAirsheds';
 
 import statesShapesJSON from '../../staticJSON/statesShapes.json';
 import domainsShapesJSON from '../../staticJSON/domainsShapes.json';
@@ -340,10 +340,8 @@ const SiteMapLeaflet = () => {
             return <FlightBoxBoundariesFeature {...featureProps} />;
           case FEATURES.WATERSHED_BOUNDARIES.KEY:
             return <WatershedBoundariesFeature {...featureProps} />;
-          /*
-          case FEATURES.TOWER_AIRSHED_BOUNDARIES.KEY:
-            return <TowerAirshedBoundariesFeature {...featureProps} />;
-          */
+          case FEATURES.TOWER_AIRSHEDS.KEY:
+            return <TowerAirshedsFeature {...featureProps} />;
           default:
             return null;
         }
