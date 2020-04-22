@@ -40,14 +40,15 @@ const AquaticReaches = (props) => {
   const renderPopup = (siteCode) => {
     if (!featureData[siteCode]) { return null; }
     const aquaticReach = featureData[siteCode];
-    const acres = (KM2_TO_ACRES * aquaticReach.areaKm2).toFixed(2);
+    const { areaKm2 } = aquaticReach.properties;
+    const areaAcres = KM2_TO_ACRES * areaKm2;
     return (
       <Popup className={classes.popup} autoPan>
         <Typography variant="h6" gutterBottom>
           {`${siteCode} Aquatic Reach`}
         </Typography>
         <Typography variant="body1">
-          {`Area: ${aquaticReach.areaKm2.toFixed(2)} km2 (${acres} acres)`}
+          {`Area: ${areaKm2.toFixed(2)} km2 (${areaAcres.toFixed(2)} acres)`}
         </Typography>
       </Popup>
     );

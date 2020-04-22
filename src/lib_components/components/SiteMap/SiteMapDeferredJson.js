@@ -32,9 +32,9 @@ const deferredJSON = {
     WALK: () => import('./deferredJSON/AQUATIC_REACHES/WALK.json'),
     WLOU: () => import('./deferredJSON/AQUATIC_REACHES/WLOU.json'),
   },
-  [FLIGHT_BOX_BOUNDARIES]: {
+  [FEATURES.FLIGHT_BOX_BOUNDARIES.KEY]: {
   },
-  [SAMPLING_BOUNDARIES]: {
+  [FEATURES.SAMPLING_BOUNDARIES.KEY]: {
     ABBY: () => import('./deferredJSON/SAMPLING_BOUNDARIES/ABBY.json'),
     BARR: () => import('./deferredJSON/SAMPLING_BOUNDARIES/BARR.json'),
     BART: () => import('./deferredJSON/SAMPLING_BOUNDARIES/BART.json'),
@@ -83,7 +83,7 @@ const deferredJSON = {
     WREF: () => import('./deferredJSON/SAMPLING_BOUNDARIES/WREF.json'),
     YELL: () => import('./deferredJSON/SAMPLING_BOUNDARIES/YELL.json'),
   },
-  [WATERSHED_BOUNDARIES]: {
+  [FEATURES.WATERSHED_BOUNDARIES.KEY]: {
   },
 };
 
@@ -95,24 +95,26 @@ const deferredJSON = {
      (err) => { console.log('DYNAMIC JSON FAILED:', err); },
   );
 */
-const importMapJSON = (
-  dataSet = '',
+const SiteMapDeferredJson = (
+  featureKey = '',
   siteCode = '',
   onSuccess = () => {},
   onError = () => {},
 ) => {
   if (!(typeof onSuccess === 'function' && typeof onError === 'function')) {
-    throw 'importMapJSON requires functions for success and error handlers';
+    throw new Error('SiteMapDeferredJson requires functions for success and error handlers');
   }
-  if (!deferredJSON[dataSet]) {
-    onError(new Error(`Invalid deferred dataSet: ${dataSet}`));
+  if (!deferredJSON[featureKey]) {
+    onError(new Error(`Feature key not supported for deferred import: ${featureKey}`));
+    return;
   }
-  if (!deferredJSON[dataSet][siteCode]) {
-    onError(new Error(`Site code is not valid for defrred dataSet ${dataSet}: ${dataSet}`));
+  if (typeof deferredJSON[featureKey][siteCode] !== 'function') {
+    onError(new Error(`Site code: ${siteCode} is not valid for deferred feature: ${featureKey}`));
+    return;
   }
-  deferredJSON[dataSet][siteCode]()
+  deferredJSON[featureKey][siteCode]()
     .then((module) => { onSuccess(module.default); })
     .catch(onError);
 };
 
-export default importMapJSON;
+export default SiteMapDeferredJson;

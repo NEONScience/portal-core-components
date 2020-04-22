@@ -76,14 +76,9 @@ const sources = {
       geojson.features.forEach((feature) => {
         const { SiteID: siteCode, HUC12, UTM_Zone, AreaKm2: areaKm2 } = feature.properties;
         sites[siteCode] = {
-          type: 'FeatureCollection',
-          features: [
-            {
-              type: 'Feature',
-              properties: { siteCode, HUC12, UTM_Zone, areaKm2 },
-              geometry: sanitizeGeometry(feature.geometry),
-            },
-          ],
+          type: 'Feature',
+          properties: { siteCode, HUC12, UTM_Zone, areaKm2 },
+          geometry: sanitizeGeometry(feature.geometry),
         };
       });
       return sites;
@@ -102,25 +97,17 @@ const sources = {
     process: (geojson) => {
       const sites = {};
       geojson.features.forEach((feature) => {
-        const { siteID: siteCode, areaKm2 } = feature.properties;
         const geometry = sanitizeGeometry(feature.geometry);
+        const { siteID: siteCode, areaKm2 } = feature.properties;
         if (!sites[siteCode]) {
           sites[siteCode] = {
-            type: 'FeatureCollection',
-            features: [
-              {
-                type: 'Feature',
-                properties: { siteCode, areaKm2 },
-                geometry: {
-                  type: 'MultiPolygon',
-                  coordinates: [geometry.coordinates],
-                },
-              },
-            ],
+            type: 'Feature',
+            properties: { siteCode, areaKm2 },
+            geometry,
           };
         } else {
-          sites[siteCode].features[0].properties.areaKm2 += areaKm2;
-          sites[siteCode].features[0].geometry.coordinates.push(geometry.coordinates);
+          sites[siteCode].properties.areaKm2 += areaKm2;
+          sites[siteCode].geometry.coordinates.push(geometry.coordinates);
         }
       });
       return sites;

@@ -12,6 +12,7 @@ import L from 'leaflet';
 
 import NeonContext from '../NeonContext/NeonContext';
 
+import SiteMapDeferredJson from './SiteMapDeferredJson';
 import {
   DEFAULT_STATE,
   SORT_DIRECTIONS,
@@ -204,6 +205,26 @@ const reducer = (state, action) => {
   console.log('REDUCER', action);
   let setMethod = null;
   const newState = { ...state };
+  // Returns a boolean describing whether a fetch status was updated
+  const setFetchStatusFromAction = (status) => {
+    if (!Object.keys(FETCH_STATUS).includes(status) || status === FETCH_STATUS.AWAITING_CALL) {
+      return false;
+    }
+    const { feature: featureKey, siteCode } = action;
+    if (!FEATURES[featureKey]) { return false; }
+    const { type: featureType } = FEATURES[featureKey];
+    if (
+      !newState.featureDataFetches[featureType]
+        || !newState.featureDataFetches[featureType][featureKey]
+        || !newState.featureDataFetches[featureType][featureKey][siteCode]
+    ) { return false; }
+    newState.featureDataFetches[featureType][featureKey][siteCode] = status;
+    // If the status is SUCCESS and the action has data, also commit the data
+    if (status === FETCH_STATUS.SUCCESS && action.data) {
+      newState.featureData[featureType][featureKey][siteCode] = action.data;
+    }
+    return true;
+  };
   switch (action.type) {
     case 'setView':
       if (!Object.keys(VIEWS).includes(action.view)) { return state; }
@@ -272,6 +293,18 @@ const reducer = (state, action) => {
     // Fetch and Import
     case 'awaitingFeatureDataFetchesTriggered':
       return { ...state, featureDataFetchesHasAwaiting: false };
+
+    case 'setFeatureDataFetchStarted':
+      setFetchStatusFromAction(FETCH_STATUS.FETCHING);
+      return newState;
+
+    case 'setFeatureDataFetchSucceeded':
+      setFetchStatusFromAction(FETCH_STATUS.SUCCESS);
+      return newState;
+
+    case 'setFeatureDataFetchFailed':
+      setFetchStatusFromAction(FETCH_STATUS.ERROR);
+      return newState;
 
     // Selection
     case 'toggleSiteSelected':
@@ -376,14 +409,27 @@ const Provider = (props) => {
   useEffect(() => {
     if (!state.featureDataFetchesHasAwaiting) { return; }
     Object.keys(state.featureDataFetches).forEach((type) => {
-      Object.keys(state.featureDataFetches[type]).forEach((key) => {
-        const { dataLoadType } = FEATURES[key];
-        Object.keys(state.featureDataFetches[type][key]).forEach((siteCode) => {
-          if (state.featureDataFetches[type][key][siteCode] !== FETCH_STATUS.AWAITING_CALL) {
+      Object.keys(state.featureDataFetches[type]).forEach((feature) => {
+        const { dataLoadType } = FEATURES[feature];
+        Object.keys(state.featureDataFetches[type][feature]).forEach((siteCode) => {
+          if (state.featureDataFetches[type][feature][siteCode] !== FETCH_STATUS.AWAITING_CALL) {
             return;
           }
           if (dataLoadType === FEATURE_DATA_LOAD_TYPES.IMPORT) {
-            console.log('IMPORT', type, key, siteCode);
+            dispatch({ type: 'setFeatureDataFetchStarted', feature, siteCode });
+            const onSuccess = data => dispatch({
+              type: 'setFeatureDataFetchSucceeded',
+              feature,
+              siteCode,
+              data,
+            });
+            const onError = error => dispatch({
+              type: 'setFeatureDataFetchFailed',
+              feature,
+              siteCode,
+              error,
+            });
+            SiteMapDeferredJson(feature, siteCode, onSuccess, onError);
           }
           if (dataLoadType === FEATURE_DATA_LOAD_TYPES.FETCH) {
             // do a fetch, not yet implemented
