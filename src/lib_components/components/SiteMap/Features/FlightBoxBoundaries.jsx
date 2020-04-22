@@ -13,16 +13,15 @@ import {
   FEATURES,
   FEATURE_TYPES,
   BOUNDARY_COLORS,
-  KM2_TO_ACRES,
 } from '../SiteMapUtils';
 
 /**
    Main Component
 */
-const AquaticReaches = (props) => {
+const FlightBoxBoundaries = (props) => {
   const { classes } = props;
 
-  const { KEY: featureKey } = FEATURES.AQUATIC_REACHES;
+  const { KEY: featureKey } = FEATURES.FLIGHT_BOX_BOUNDARIES;
 
   // Extract feature data from SiteMapContext State
   const [state] = SiteMapContext.useSiteMapContext();
@@ -41,16 +40,10 @@ const AquaticReaches = (props) => {
   */
   const renderPopup = (siteCode) => {
     if (!featureData[siteCode]) { return null; }
-    const aquaticReach = featureData[siteCode];
-    const { areaKm2 } = aquaticReach.properties;
-    const areaAcres = KM2_TO_ACRES * areaKm2;
     return (
       <Popup className={classes.popup} autoPan>
         <Typography variant="h6" gutterBottom>
-          {`${siteCode} Aquatic Reach`}
-        </Typography>
-        <Typography variant="body1">
-          {`Area: ${areaKm2.toFixed(2)} km2 (${areaAcres.toFixed(2)} acres)`}
+          {`${siteCode} AOP Flight Box`}
         </Typography>
       </Popup>
     );
@@ -62,7 +55,7 @@ const AquaticReaches = (props) => {
   return (
     <FeatureGroup>
       {Object.keys(featureData).map((siteCode) => {
-        const aquaticReach = featureData[siteCode];
+        const flightBoxBoundary = featureData[siteCode];
         const featureColor = BOUNDARY_COLORS[featureKey];
         const hoverColor = `#${tinycolor(featureColor).lighten(10).toHex()}`;
         /* eslint-disable no-underscore-dangle */
@@ -81,7 +74,7 @@ const AquaticReaches = (props) => {
           <Polygon
             key={siteCode}
             color={featureColor}
-            positions={aquaticReach.geometry.coordinates}
+            positions={flightBoxBoundary.geometry.coordinates}
             {...interactionProps}
           >
             {renderPopup(siteCode)}
@@ -92,8 +85,8 @@ const AquaticReaches = (props) => {
   );
 };
 
-AquaticReaches.propTypes = {
+FlightBoxBoundaries.propTypes = {
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
-export default AquaticReaches;
+export default FlightBoxBoundaries;

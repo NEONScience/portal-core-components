@@ -22,17 +22,19 @@ import {
 const SamplingBoundaries = (props) => {
   const { classes } = props;
 
-  // State and Dispatch from SiteMapContext
+  const { KEY: featureKey } = FEATURES.SAMPLING_BOUNDARIES;
+
+  // Extract feature data from SiteMapContext State
   const [state] = SiteMapContext.useSiteMapContext();
-  const { neonContextHydrated } = state;
-
-  // Don't render if not all loaded
-  if (!neonContextHydrated) { return null; }
-
-  // Extract feature data
   const {
-    [FEATURES.SAMPLING_BOUNDARIES.KEY]: featureData,
-  } = state.featureData[FEATURE_TYPES.BOUNDARIES];
+    neonContextHydrated,
+    featureData: {
+      [FEATURE_TYPES.BOUNDARIES]: {
+        [featureKey]: featureData,
+      },
+    },
+  } = state;
+  if (!neonContextHydrated || !Object.keys(featureData)) { return null; }
 
   /**
      Render Method: Popup
@@ -61,7 +63,7 @@ const SamplingBoundaries = (props) => {
     <FeatureGroup>
       {Object.keys(featureData).map((siteCode) => {
         const samplingBoundary = featureData[siteCode];
-        const featureColor = BOUNDARY_COLORS[FEATURES.SAMPLING_BOUNDARIES.KEY];
+        const featureColor = BOUNDARY_COLORS[featureKey];
         const hoverColor = `#${tinycolor(featureColor).lighten(10).toHex()}`;
         /* eslint-disable no-underscore-dangle */
         const interactionProps = {

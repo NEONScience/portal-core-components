@@ -99,13 +99,49 @@ export const ICON_SVGS = {
    FEATURES
    A data structure describing all descrete boundaries or sets of icons that can be shown on the map
    Convention: all keys are consistently plural
+   Order is draw order on map (so largest boundary features should be first)
 */
 export const FEATURES = {
-  TOWER_LOCATIONS: {
-    name: 'Tower Location',
-    type: FEATURE_TYPES.PLOTS,
-    minZoom: 10,
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+  DOMAINS: {
+    name: 'NEON Domains',
+    type: FEATURE_TYPES.BOUNDARIES,
+    description: '',
+    dataLoadType: null,
+    hideByDefault: true,
+  },
+  STATES: {
+    name: 'US States',
+    type: FEATURE_TYPES.BOUNDARIES,
+    description: '',
+    dataLoadType: null,
+    hideByDefault: true,
+  },
+  WATERSHED_BOUNDARIES: {
+    name: 'Site Watershed Boundary',
+    type: FEATURE_TYPES.BOUNDARIES,
+    minZoom: 7,
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
+    description: '',
+  },
+  FLIGHT_BOX_BOUNDARIES: {
+    name: 'Site AOP Flight Box Boundary',
+    type: FEATURE_TYPES.BOUNDARIES,
+    minZoom: 8,
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
+    description: '',
+  },
+  SAMPLING_BOUNDARIES: {
+    name: 'Site Sampling Boundary',
+    type: FEATURE_TYPES.BOUNDARIES,
+    minZoom: 8,
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
+    description: 'Terrestrial and Colocated Aquatic Sites',
+  },
+  AQUATIC_REACHES: {
+    name: 'Aquatic Site Reach',
+    type: FEATURE_TYPES.BOUNDARIES,
+    minZoom: 9,
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: '',
   },
   TOWER_AIRSHEDS: {
@@ -113,6 +149,13 @@ export const FEATURES = {
     type: FEATURE_TYPES.BOUNDARIES,
     minZoom: 13,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
+    description: '',
+  },
+  TOWER_LOCATIONS: {
+    name: 'Tower Location',
+    type: FEATURE_TYPES.PLOTS,
+    minZoom: 10,
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     description: '',
   },
   TOWER_PLOTS: {
@@ -185,34 +228,6 @@ export const FEATURES = {
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     attributes: { type: 'tick', location: 'distributed' },
   },
-  SAMPLING_BOUNDARIES: {
-    name: 'Site Sampling Boundary',
-    type: FEATURE_TYPES.BOUNDARIES,
-    minZoom: 8,
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
-    description: 'Terrestrial and Colocated Aquatic Sites',
-  },
-  AQUATIC_REACHES: {
-    name: 'Aquatic Site Reach',
-    type: FEATURE_TYPES.BOUNDARIES,
-    minZoom: 9,
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
-    description: '',
-  },
-  WATERSHED_BOUNDARIES: {
-    name: 'Site Watershed Boundary',
-    type: FEATURE_TYPES.BOUNDARIES,
-    minZoom: 7,
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
-    description: '',
-  },
-  FLIGHT_BOX_BOUNDARIES: {
-    name: 'Site AOP Flight Box Boundary',
-    type: FEATURE_TYPES.BOUNDARIES,
-    minZoom: 7,
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
-    description: '',
-  },
   SITE_MARKERS: {
     name: 'NEON Site Markers',
     isParent: true,
@@ -255,20 +270,6 @@ export const FEATURES = {
     dataLoadType: null,
     attributes: { type: 'RELOCATABLE', terrain: 'AQUATIC' },
   },
-  DOMAINS: {
-    name: 'NEON Domains',
-    type: FEATURE_TYPES.BOUNDARIES,
-    description: '',
-    dataLoadType: null,
-    hideByDefault: true,
-  },
-  STATES: {
-    name: 'US States',
-    type: FEATURE_TYPES.BOUNDARIES,
-    description: '',
-    dataLoadType: null,
-    hideByDefault: true,
-  },
 };
 // Replicate keys as attributes to completely eliminate the need to write a feature key string
 Object.keys(FEATURES).forEach((key) => { FEATURES[key].KEY = key; });
@@ -279,9 +280,9 @@ export const BOUNDARY_COLORS = {
   [FEATURES.DOMAINS.KEY]: '#9252e0',
   [FEATURES.SAMPLING_BOUNDARIES.KEY]: '#e8847d',
   [FEATURES.AQUATIC_REACHES.KEY]: '#ad85a0',
-  [FEATURES.TOWER_AIRSHED_BOUNDARIES]: '#749966',
-  [FEATURES.WATERSHED_BOUNDARIES]: '#52747a',
-  [FEATURES.FLIGHT_BOX_BOUNDARIES]: '#f0ee75',
+  [FEATURES.TOWER_AIRSHEDS.KEY]: '#749966',
+  [FEATURES.WATERSHED_BOUNDARIES.KEY]: '#52747a',
+  [FEATURES.FLIGHT_BOX_BOUNDARIES.KEY]: '#f0ee75',
   partialSelected: COLORS.SECONDARY_BLUE[300],
   totalSelected: COLORS.SECONDARY_BLUE[500],
   hover: COLORS.SECONDARY_BLUE[100],

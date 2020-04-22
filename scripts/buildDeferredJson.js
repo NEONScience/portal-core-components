@@ -47,7 +47,7 @@ const sanitizeGeometry = (geometry) => {
 
 const generateFeatureSiteFilesDirectory = (featureKey, sitesData) => {
   if (!Object.keys(sources).includes(featureKey)) { return; }
-  let count = 1;
+  let count = 0;
   try {
     const outDir = path.join(OUT_DEFERRED_JSON_PATH, featureKey);
     fs.mkdirSync(outDir);
@@ -64,53 +64,55 @@ const generateFeatureSiteFilesDirectory = (featureKey, sitesData) => {
   console.log(chalk.green(JSON.stringify(alphaSites)));
 };
 
+const geojsonToSites = (geojson = {}, getProperties = (p) => p) => {
+  const sites = {};
+  if (!geojson.features) { return sites; }
+  geojson.features.forEach((feature) => {
+    if (!feature.geometry) { return; }
+    const geometry = sanitizeGeometry(feature.geometry);
+    const properties = getProperties(feature.properties);
+    const { siteCode, areaKm2 } = properties;
+    if (!siteCode) { return; }
+    if (!sites[siteCode]) {
+      sites[siteCode] = { type: 'Feature', properties, geometry };
+    } else {
+      if (areaKm2 && sites[siteCode].properties.areaKm2) {
+        sites[siteCode].properties.areaKm2 += areaKm2;
+      }
+      sites[siteCode].geometry.coordinates.push(geometry.coordinates);
+    }
+  });
+  return sites;
+};
+
 const sources = {
   TOWER_AIRSHEDS: {
     zipFile: null,
-    process: () => {},
+    getProperties: (properties) => properties,
   },
   AQUATIC_REACHES: {
     zipFile: 'AquaticReach.zip',
-    process: (geojson) => {
-      const sites = {};
-      geojson.features.forEach((feature) => {
-        const { SiteID: siteCode, HUC12, UTM_Zone, AreaKm2: areaKm2 } = feature.properties;
-        sites[siteCode] = {
-          type: 'Feature',
-          properties: { siteCode, HUC12, UTM_Zone, areaKm2 },
-          geometry: sanitizeGeometry(feature.geometry),
-        };
-      });
-      return sites;
+    getProperties: (properties) => {
+      const { SiteID: siteCode, HUC12, UTM_Zone, AreaKm2: areaKm2 } = properties;
+      return { siteCode, HUC12, UTM_Zone, areaKm2 };
     },
   },
   WATERSHED_BOUNDARIES: {
     zipFile: null,
-    process: () => {},
+    getProperties: (properties) => properties,
   },
   FLIGHT_BOX_BOUNDARIES: {
-    zipFile: null,
-    process: () => {},
+    zipFile: 'AOP_Flightboxes.zip',
+    getProperties: (properties) => {
+      const { siteID: siteCode, priority, version, flightbxID: flightBoxId } = properties;
+      return { siteCode, priority, version, flightBoxId };
+    },
   },
   SAMPLING_BOUNDARIES: {
     zipFile: 'Field_Sampling_Boundaries.zip',
-    process: (geojson) => {
-      const sites = {};
-      geojson.features.forEach((feature) => {
-        const geometry = sanitizeGeometry(feature.geometry);
-        const { siteID: siteCode, areaKm2 } = feature.properties;
-        if (!sites[siteCode]) {
-          sites[siteCode] = {
-            type: 'Feature',
-            properties: { siteCode, areaKm2 },
-            geometry,
-          };
-        } else {
-          sites[siteCode].properties.areaKm2 += areaKm2;
-          sites[siteCode].geometry.coordinates.push(geometry.coordinates);
-        }
-      });
-      return sites;
+    getProperties: (properties) => {
+      const { siteID: siteCode, areaKm2 } = properties;
+      return { siteCode, areaKm2 };
     },
   },
 };
@@ -127,7 +129,7 @@ fs.readdir(TMP_DEFERRED_JSON_PATH, (err, files) => {
     fs.readFile(path.join(TMP_DEFERRED_JSON_PATH, zipFile), (err, data) => {
       console.log(chalk.yellow('Zip file read; converting shapes'));
       shp(data).then((geojson) => {
-        const sites = source.process(geojson);
+        const sites = geojsonToSites(geojson, source.getProperties);
         generateFeatureSiteFilesDirectory(key, sites);
 	    });
     });

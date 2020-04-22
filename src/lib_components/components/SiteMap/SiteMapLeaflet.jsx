@@ -52,7 +52,7 @@ import StatesFeature from './Features/States';
 import DomainsFeature from './Features/Domains';
 import SamplingBoundariesFeature from './Features/SamplingBoundaries';
 import AquaticReachesFeature from './Features/AquaticReaches';
-// import FlightBoxBoundariesFeature from './Features/FlightBoxBoundaries';
+import FlightBoxBoundariesFeature from './Features/FlightBoxBoundaries';
 // import WatershedBoundariesFeature from './Features/WatershedBoundaries';
 // import TowerAirshedBoundariesFeature from './Features/TowerAirshedBoundaries';
 
@@ -336,11 +336,11 @@ const SiteMapLeaflet = () => {
             return <SamplingBoundariesFeature {...featureProps} />;
           case FEATURES.AQUATIC_REACHES.KEY:
             return <AquaticReachesFeature {...featureProps} />;
+          case FEATURES.FLIGHT_BOX_BOUNDARIES.KEY:
+            return <FlightBoxBoundariesFeature {...featureProps} />;
           /*
           case FEATURES.WATERSHED_BOUNDARIES.KEY:
             return <WatershedBoundariesFeature {...featureProps} />;
-          case FEATURES.FLIGHT_BOX_BOUNDARIES.KEY:
-            return <FlightBoxBoundariesFeature {...featureProps} />;
           case FEATURES.TOWER_AIRSHED_BOUNDARIES.KEY:
             return <TowerAirshedBoundariesFeature {...featureProps} />;
           */
