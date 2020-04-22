@@ -45,25 +45,6 @@ const sanitizeGeometry = (geometry) => {
   return geometry;
 };
 
-const generateFeatureSiteFilesDirectory = (featureKey, sitesData) => {
-  if (!Object.keys(sources).includes(featureKey)) { return; }
-  let count = 0;
-  try {
-    const outDir = path.join(OUT_DEFERRED_JSON_PATH, featureKey);
-    fs.mkdirSync(outDir);
-    Object.keys(sitesData).forEach((siteCode) => {
-      const outFile = path.join(outDir, `${siteCode}.json`);
-      fs.writeFileSync(outFile, JSON.stringify(sitesData[siteCode]));
-      count += 1;
-    });
-  } catch (err) {
-    console.error(err);
-  }
-  console.log(chalk.green(`${featureKey} Complete (${count} sites)`));
-  const alphaSites = Object.keys(sitesData).sort();
-  console.log(chalk.green(JSON.stringify(alphaSites)));
-};
-
 const geojsonToSites = (geojson = {}, getProperties = (p) => p) => {
   const sites = {};
   if (!geojson.features) { return sites; }
@@ -85,10 +66,32 @@ const geojsonToSites = (geojson = {}, getProperties = (p) => p) => {
   return sites;
 };
 
+const generateFeatureSiteFilesDirectory = (featureKey, sitesData) => {
+  if (!Object.keys(sources).includes(featureKey)) { return; }
+  let count = 0;
+  try {
+    const outDir = path.join(OUT_DEFERRED_JSON_PATH, featureKey);
+    fs.mkdirSync(outDir);
+    Object.keys(sitesData).forEach((siteCode) => {
+      const outFile = path.join(outDir, `${siteCode}.json`);
+      fs.writeFileSync(outFile, JSON.stringify(sitesData[siteCode]));
+      count += 1;
+    });
+  } catch (err) {
+    console.error(err);
+  }
+  console.log(chalk.green(`${featureKey} Complete (${count} sites)`));
+  const alphaSites = Object.keys(sitesData).sort();
+  console.log(chalk.green(JSON.stringify(alphaSites)));
+};
+
 const sources = {
   TOWER_AIRSHEDS: {
     zipFile: null,
-    getProperties: (properties) => properties,
+    getProperties: (properties) => {
+      console.log(properties);
+      return properties;
+    },
   },
   AQUATIC_REACHES: {
     zipFile: 'AquaticReach.zip',
@@ -98,8 +101,12 @@ const sources = {
     },
   },
   WATERSHED_BOUNDARIES: {
-    zipFile: null,
-    getProperties: (properties) => properties,
+    zipFile: 'NEONAquaticWatershed.zip',
+    getProperties: (properties) => {
+      const { SiteID: siteCode, UTM_Zone, WSAreaKm2 } = properties;
+      const areaKm2 = parseFloat(WSAreaKm2, 10);
+      return { siteCode, UTM_Zone, areaKm2: areaKm2 || null };
+    }
   },
   FLIGHT_BOX_BOUNDARIES: {
     zipFile: 'AOP_Flightboxes.zip',
@@ -129,7 +136,14 @@ fs.readdir(TMP_DEFERRED_JSON_PATH, (err, files) => {
     fs.readFile(path.join(TMP_DEFERRED_JSON_PATH, zipFile), (err, data) => {
       console.log(chalk.yellow('Zip file read; converting shapes'));
       shp(data).then((geojson) => {
-        const sites = geojsonToSites(geojson, source.getProperties);
+        let sites = {};
+        if (key === 'WATERSHED_BOUNDARIES') {
+          // TODO: add support for drainage lines and pour points?
+          const featureCollection = geojson.find(fc => fc.fileName === 'NEON_Aquatic_Watershed') || {};
+          sites = geojsonToSites(featureCollection, source.getProperties);
+        } else {
+          sites = geojsonToSites(geojson, source.getProperties);
+        }
         generateFeatureSiteFilesDirectory(key, sites);
 	    });
     });

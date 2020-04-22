@@ -119,7 +119,7 @@ export const FEATURES = {
   WATERSHED_BOUNDARIES: {
     name: 'Site Watershed Boundary',
     type: FEATURE_TYPES.BOUNDARIES,
-    minZoom: 7,
+    minZoom: 6,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: '',
   },
