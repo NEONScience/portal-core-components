@@ -23,6 +23,7 @@
     "font-awesome": "4.7.0",
     "highlight.js": "^9.15.8",
     "history": "^4.10.1",
+    "html-react-parser": "^0.10.3",
     "leaflet": "^1.6.0",
     "lodash": "^4.17.15",
     "material-table": "^1.50.0",

@@ -19,7 +19,10 @@ import domainsJSON from '../../staticJSON/domains.json';
 import bundlesJSON from '../../staticJSON/bundles.json';
 import timeSeriesDataProductsJSON from '../../staticJSON/timeSeriesDataProducts.json';
 
-const FETCH_STATUS = {
+// import fallbackHeader from './fallbackHeader.html';
+// import fallbackFooter from './fallbackFooter.html';
+
+export const FETCH_STATUS = {
   AWAITING_CALL: 'AWAITING_CALL',
   FETCHING: 'FETCHING',
   ERROR: 'ERROR',
@@ -114,7 +117,6 @@ const reducer = (state, action) => {
     case 'fetchCalled':
       if (!action.key || !state.fetches[action.key]) { return state; }
       newState.fetches[action.key].status = FETCH_STATUS.FETCHING;
-      console.log(action, newState);
       return newState;
 
     // Actions for handling sites fetch
@@ -145,13 +147,11 @@ const reducer = (state, action) => {
       if (!Object.keys(HTML_URLS).includes(action.part)) { return state; }
       newState.fetches[action.part].status = FETCH_STATUS.SUCCESS;
       newState.html[action.part] = action.html;
-      console.log(action, newState);
       return newState;
     case 'fetchHtmlFailed':
       if (!Object.keys(HTML_URLS).includes(action.part)) { return state; }
       newState.fetches[action.part].status = FETCH_STATUS.ERROR;
       newState.fetches[action.part].error = action.error;
-      console.log(action, newState);
       return newState;
 
     default:
@@ -198,7 +198,7 @@ const Provider = (props) => {
     window.fetch(HTML_URLS[part], { method: 'GET', headers: { Accept: 'text/html' } })
       .then(response => response.text())
       .then((html) => {
-        dispatch({ type: 'fetchHtmlSucceded', part, html });
+        dispatch({ type: 'fetchHtmlSucceeded', part, html });
         return of(true);
       })
       .catch((error) => {

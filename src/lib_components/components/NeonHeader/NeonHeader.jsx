@@ -1,56 +1,39 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import HTMLReactParser from 'html-react-parser';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Divider from '@material-ui/core/Divider';
+import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
 
-import NeonUtilityBar from '../NeonUtilityBar/NeonUtilityBar';
-import NeonMenu from '../NeonMenu/NeonMenu';
+import NeonLegacyHeader from './NeonLegacyHeader';
 
-import { ROUTES, getFullRoute, buildAccountRoute } from '../../routing/routes';
+export default function NeonHeader(props) {
+  const [{
+    isActive,
+    fetches: { header: headerFetch },
+    html: { header: headerHTML },
+  }] = NeonContext.useNeonContextState();
 
-const useStyles = makeStyles(() => ({
-  root: {
-    flexGrow: 1,
-  },
-}));
+  let renderMode = 'legacy';
+  if (isActive) {
+    if (headerFetch.status === FETCH_STATUS.SUCCESS && headerHTML) {
+      renderMode = 'drupal';
+    }
+    if ([FETCH_STATUS.AWAITING_CALL, FETCH_STATUS.FETCHING].includes(headerFetch.status)) {
+      renderMode = 'loading';
+    }
+  }
 
-const NeonHeader = (props) => {
-  const classes = useStyles();
-  const { notifications, onShowNotifications } = props;
+  switch (renderMode) {
+    case 'loading':
+      return <div>LOADING HEADER</div>;
 
-  const notificationsProps = (typeof onShowNotifications === 'function' ? {
-    notifications, onShowNotifications,
-  } : {});
+    case 'drupal':
+      return (
+        <header id="footer">
+          {HTMLReactParser(headerHTML)}
+        </header>
+      );
 
-  return (
-    <div className={classes.root} data-selenium="neon-header">
-      <NeonUtilityBar />
-      <NeonMenu
-        loginPath={getFullRoute(ROUTES.LOGIN)}
-        logoutPath={getFullRoute(ROUTES.LOGOUT)}
-        accountPath={buildAccountRoute()}
-        {...notificationsProps}
-      />
-      <Divider />
-    </div>
-  );
-};
-
-NeonHeader.propTypes = {
-  notifications: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      message: PropTypes.string.isRequired,
-      dismissed: PropTypes.bool.isRequired,
-    }),
-  ),
-  onShowNotifications: PropTypes.func,
-};
-
-NeonHeader.defaultProps = {
-  notifications: [],
-  onShowNotifications: null,
-};
-
-export default NeonHeader;
+    default:
+      return <NeonLegacyHeader {...props} />;
+  }
+}

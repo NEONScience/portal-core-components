@@ -32,8 +32,6 @@ import {
   getLiferayNotificationsApiPath,
 } from '../../util/liferayNotificationsUtil';
 
-import './NeonPageHeaderFooter.css';
-
 const cookies = new Cookies();
 
 // Global CSS
