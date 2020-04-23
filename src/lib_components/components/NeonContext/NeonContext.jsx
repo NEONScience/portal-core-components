@@ -42,13 +42,11 @@ const DEFAULT_STATE = {
   },
   fetches: {
     sites: { status: FETCH_STATUS.AWAITING_CALL, error: null },
+    auth: { status: FETCH_STATUS.AWAITING_CALL, error: null },
     header: { status: FETCH_STATUS.AWAITING_CALL, error: null },
     footer: { status: FETCH_STATUS.AWAITING_CALL, error: null },
   },
-  auth: {
-    isAuthenticated: false,
-    fetchStatus: null,
-  },
+  isAuthenticated: false,
   isActive: false,
   isFinal: false,
   hasError: false,
@@ -116,9 +114,6 @@ const reducer = (state, action) => {
     case 'fetchCalled':
       if (!action.key || !state.fetches[action.key]) { return state; }
       newState.fetches[action.key].status = FETCH_STATUS.FETCHING;
-      if (action.key === 'auth') {
-        newState.auth.fetchStatus = FETCH_STATUS.FETCHING;
-      }
       console.log(action, newState);
       return newState;
 
@@ -138,13 +133,11 @@ const reducer = (state, action) => {
     // Actions for handling auth fetch
     case 'fetchAuthSucceeded':
       newState.fetches.auth.status = FETCH_STATUS.SUCCESS;
-      newState.auth.isAuthenticated = !!action.isAuthenticated;
-      newState.auth.fetchStatus = FETCH_STATUS.SUCCESS;
+      newState.isAuthenticated = !!action.isAuthenticated;
       return newState;
     case 'fetchAuthFailed':
       newState.fetches.auth.status = FETCH_STATUS.ERROR;
-      newState.auth.isAuthenticated = false;
-      newState.auth.fetchStatus = FETCH_STATUS.ERROR;
+      newState.isAuthenticated = false;
       return newState;
 
     // Actions for handling HTML fetches

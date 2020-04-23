@@ -123,7 +123,7 @@ export default function DownloadDataDialog() {
   /**
      State (from NeonContext)
   */
-  const [{ auth: { isAuthenticated } }] = NeonContext.useNeonContextState();
+  const [{ isAuthenticated }] = NeonContext.useNeonContextState();
 
   /**
      State (local)
