@@ -19,9 +19,6 @@ import domainsJSON from '../../staticJSON/domains.json';
 import bundlesJSON from '../../staticJSON/bundles.json';
 import timeSeriesDataProductsJSON from '../../staticJSON/timeSeriesDataProducts.json';
 
-// import fallbackHeader from './fallbackHeader.html';
-// import fallbackFooter from './fallbackFooter.html';
-
 export const FETCH_STATUS = {
   AWAITING_CALL: 'AWAITING_CALL',
   FETCHING: 'FETCHING',

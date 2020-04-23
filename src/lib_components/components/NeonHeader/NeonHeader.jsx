@@ -1,6 +1,8 @@
 import React from 'react';
 import HTMLReactParser from 'html-react-parser';
 
+import Skeleton from '@material-ui/lab/Skeleton';
+
 import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
 
 import NeonLegacyHeader from './NeonLegacyHeader';
@@ -24,7 +26,11 @@ export default function NeonHeader(props) {
 
   switch (renderMode) {
     case 'loading':
-      return <div>LOADING HEADER</div>;
+      return (
+        <header id="footer">
+          <Skeleton variant="rect" height="125px" width="100%" />
+        </header>
+      );
 
     case 'drupal':
       return (
