@@ -53,8 +53,9 @@ import DomainsFeature from './Features/Domains';
 import SamplingBoundariesFeature from './Features/SamplingBoundaries';
 import AquaticReachesFeature from './Features/AquaticReaches';
 import FlightBoxBoundariesFeature from './Features/FlightBoxBoundaries';
-import WatershedBoundariesFeature from './Features/WatershedBoundaries';
 import TowerAirshedsFeature from './Features/TowerAirsheds';
+import WatershedBoundariesFeature from './Features/WatershedBoundaries';
+import DrainageLinesFeature from './Features/DrainageLines';
 
 import statesShapesJSON from '../../staticJSON/statesShapes.json';
 import domainsShapesJSON from '../../staticJSON/domainsShapes.json';
@@ -345,12 +346,13 @@ const SiteMapLeaflet = () => {
           default:
             return null;
         }
-      /*
       case FEATURE_TYPES.OTHER:
         switch (key) {
           case FEATURES.DRAINAGE_LINES.KEY:
             return <DrainageLinesFeature {...featureProps} />;
-      */
+          default:
+            return null;
+        }
       default:
         return null;
     }
