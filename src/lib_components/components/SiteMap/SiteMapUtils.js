@@ -31,11 +31,16 @@ export const KM2_TO_ACRES = 247.10538146717;
 // For consistency in expressing the sort direction for the table
 export const SORT_DIRECTIONS = { ASC: 'ASC', DESC: 'DESC' };
 
-// For consistency in differentiating discrete sets of data.
+// For consistency in differentiating discrete sets of data that can be tabulated together.
+// e.g. all PLOTS type feature data can coexist in a single table view with a
+// single column definition. But PLOTS and SITES couldn't, as each set has
+// different common attributes that should map to table columns.
 export const FEATURE_TYPES = {
   SITES: 'SITES',
   PLOTS: 'PLOTS',
   BOUNDARIES: 'BOUNDARIES',
+  GROUPS: 'GROUPS',
+  OTHER: 'OTHER', // All features require a type. This catch-all type will not show in the table.
 };
 
 // For consistency in differentiating how feature data are loaded (e.g. by fetch or deferred import)
@@ -102,36 +107,60 @@ export const ICON_SVGS = {
    Order is draw order on map (so largest boundary features should be first)
 */
 export const FEATURES = {
+  // States and Domains
   DOMAINS: {
     name: 'NEON Domains',
     type: FEATURE_TYPES.BOUNDARIES,
     description: '',
-    dataLoadType: null,
     hideByDefault: true,
   },
   STATES: {
     name: 'US States',
     type: FEATURE_TYPES.BOUNDARIES,
     description: '',
-    dataLoadType: null,
     hideByDefault: true,
   },
+  // AQUATIC_WATERSHEDS Group
+  AQUATIC_WATERSHEDS: {
+    name: 'Aquatic Watersheds',
+    type: FEATURE_TYPES.GROUP,
+    minZoom: 6,
+    description: '',
+  },
   WATERSHED_BOUNDARIES: {
-    name: 'Site Watershed Boundary',
+    name: 'Watershed Boundaries',
     type: FEATURE_TYPES.BOUNDARIES,
     minZoom: 6,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: '',
+    parent: 'AQUATIC_WATERSHEDS',
   },
+  DRAINAGE_LINES: {
+    name: 'Drainage Lines',
+    type: FEATURE_TYPES.OTHER,
+    minZoom: 6,
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
+    description: '',
+    parent: 'AQUATIC_WATERSHEDS',
+  },
+  POUR_POINTS: {
+    name: 'Pour Points',
+    type: FEATURE_TYPES.OTHER,
+    minZoom: 6,
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
+    description: '',
+    parent: 'AQUATIC_WATERSHEDS',
+  },
+  // Ungrouped Boundary Types
   FLIGHT_BOX_BOUNDARIES: {
-    name: 'Site AOP Flight Box Boundary',
+    name: 'Site AOP Flight Box Boundaries',
     type: FEATURE_TYPES.BOUNDARIES,
     minZoom: 8,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: '',
   },
   SAMPLING_BOUNDARIES: {
-    name: 'Site Sampling Boundary',
+    name: 'Site Sampling Boundaries',
     type: FEATURE_TYPES.BOUNDARIES,
     minZoom: 8,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
@@ -145,24 +174,25 @@ export const FEATURES = {
     description: '',
   },
   TOWER_AIRSHEDS: {
-    name: 'Tower Airshed Boundary',
+    name: 'Tower Airshed Boundaries',
     type: FEATURE_TYPES.BOUNDARIES,
     minZoom: 10,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: '',
   },
+  // TOWER_LOCATIONS - TODO: put in group with other non-plot tower feaures?
   TOWER_LOCATIONS: {
-    name: 'Tower Location',
-    type: FEATURE_TYPES.PLOTS,
+    name: 'Tower Locations',
+    type: FEATURE_TYPES.OTHER,
     minZoom: 10,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     description: '',
   },
+  // TOWER_PLOTS Group
   TOWER_PLOTS: {
     name: 'Tower Plots',
-    isParent: true,
+    type: FEATURE_TYPES.GROUP,
     minZoom: 13,
-    dataLoadType: null,
     description: 'Tower plots provide a direct link between NEON’s Terrestrial Observation System and Terrestrial Instrument System. Tower Plots are located in and around the NEON tower primary and secondary airsheds.',
   },
   TOWER_BASE_PLOTS: {
@@ -178,14 +208,13 @@ export const FEATURES = {
     type: FEATURE_TYPES.PLOTS,
     description: 'Plant phenology observations are made along a transect loop or plot in or around the primary airshed. When possible, one plot is established north of the tower to calibrate phenology camera images captured from sensors on the tower. If there is insufficient space north of the tower for a 200m x 200m plot or if the vegetation does not match the primary airshed an additional plot is established.',
     parent: 'TOWER_PLOTS',
-    dataLoadType: null,
     attributes: { type: 'phenology', location: 'tower' },
   },
+  // DISTRIBUTED_PLOTS Group
   DISTRIBUTED_PLOTS: {
     name: 'Distributed Plots',
-    isParent: true,
+    type: FEATURE_TYPES.GROUP,
     minZoom: 10,
-    dataLoadType: null,
     description: 'Distributed Plots are located throughout the TOS Sampling boundary in an effort to describe organisms and process with plot, point, and grid sampling. Plots were established according to a stratified-random and spatially balanced design.',
   },
   DISTRIBUTED_BASE_PLOTS: {
@@ -228,10 +257,10 @@ export const FEATURES = {
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     attributes: { type: 'tick', location: 'distributed' },
   },
+  // SITE_MARKERS Group
   SITE_MARKERS: {
     name: 'NEON Site Markers',
-    isParent: true,
-    dataLoadType: null,
+    type: FEATURE_TYPES.GROUP,
     description: '',
   },
   TERRESTRIAL_CORE_SITES: {
@@ -240,7 +269,6 @@ export const FEATURES = {
     description: 'Land-based; fixed location',
     iconSvg: ICON_SVGS.SITE_MARKERS.CORE.TERRESTRIAL.BASE,
     parent: 'SITE_MARKERS',
-    dataLoadType: null,
     attributes: { type: 'CORE', terrain: 'TERRESTRIAL' },
   },
   TERRESTRIAL_RELOCATABLE_SITES: {
@@ -249,7 +277,6 @@ export const FEATURES = {
     description: 'Land-based; location may change',
     iconSvg: ICON_SVGS.SITE_MARKERS.RELOCATABLE.TERRESTRIAL.BASE,
     parent: 'SITE_MARKERS',
-    dataLoadType: null,
     attributes: { type: 'RELOCATABLE', terrain: 'TERRESTRIAL' },
   },
   AQUATIC_CORE_SITES: {
@@ -258,7 +285,6 @@ export const FEATURES = {
     description: 'Water-based; fixed location',
     iconSvg: ICON_SVGS.SITE_MARKERS.CORE.AQUATIC.BASE,
     parent: 'SITE_MARKERS',
-    dataLoadType: null,
     attributes: { type: 'CORE', terrain: 'AQUATIC' },
   },
   AQUATIC_RELOCATABLE_SITES: {
@@ -267,7 +293,6 @@ export const FEATURES = {
     description: 'Water-based; location may change',
     iconSvg: ICON_SVGS.SITE_MARKERS.RELOCATABLE.AQUATIC.BASE,
     parent: 'SITE_MARKERS',
-    dataLoadType: null,
     attributes: { type: 'RELOCATABLE', terrain: 'AQUATIC' },
   },
 };
@@ -392,11 +417,14 @@ export const DEFAULT_STATE = {
     },
   },
 };
-// Initialize all boundary-type features in featureData state
+// Initialize all boundary and other type features in featureData state
 Object.keys(FEATURES)
-  .filter(featureKey => FEATURES[featureKey].type === FEATURE_TYPES.BOUNDARIES)
+  .filter(featureKey => (
+    [FEATURE_TYPES.BOUNDARIES, FEATURE_TYPES.OTHER].includes(FEATURES[featureKey].type)
+  ))
   .forEach((featureKey) => {
-    DEFAULT_STATE.featureData[FEATURE_TYPES.BOUNDARIES][featureKey] = {};
+    const { type: featureType } = FEATURES[featureKey];
+    DEFAULT_STATE.featureData[featureType][featureKey] = {};
   });
 // Initialize all selectable features in selection state
 Object.keys(SELECTABLE_FEATURE_TYPES).forEach((selection) => {
@@ -404,7 +432,7 @@ Object.keys(SELECTABLE_FEATURE_TYPES).forEach((selection) => {
 });
 // Initialize feature fetch status objects
 Object.keys(FEATURES)
-  .filter(featureKey => FEATURES[featureKey].dataLoadType !== null)
+  .filter(featureKey => !!FEATURE_DATA_LOAD_TYPES[FEATURES[featureKey].dataLoadType])
   .forEach((featureKey) => {
     const { type: featureType } = FEATURES[featureKey];
     DEFAULT_STATE.featureDataFetches[featureType][featureKey] = {};
@@ -433,33 +461,6 @@ if (domainsShapesJSON) {
     };
   });
 }
-
-/*
-// Site Sampling Boundaries
-if (siteSamplingBoundariesJSON) {
-  siteSamplingBoundariesJSON.features.forEach((feature) => {
-    if (!feature.properties || !feature.properties.siteCode) { return; }
-    const { siteCode } = feature.properties;
-    DEFAULT_STATE
-      .featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.SAMPLING_BOUNDARIES.KEY][siteCode] = {
-        geometry: feature.geometry,
-        ...feature.properties,
-      };
-  });
-}
-// Aquatic Site Reaches
-if (aquaticSiteReachesJSON) {
-  aquaticSiteReachesJSON.features.forEach((feature) => {
-    if (!feature.properties || !feature.properties.siteCode) { return; }
-    const { siteCode } = feature.properties;
-    DEFAULT_STATE
-      .featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.AQUATIC_REACHES.KEY][siteCode] = {
-        geometry: feature.geometry,
-        ...feature.properties,
-      };
-  });
-}
-*/
 
 export const hydrateNeonContextData = (state, neonContextData) => {
   const newState = { ...state, neonContextHydrated: true };

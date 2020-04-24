@@ -15,7 +15,12 @@ import SiteMapContext from './SiteMapContext';
 import SiteMapFilters from './SiteMapFilters';
 import SiteMapLeaflet from './SiteMapLeaflet';
 import SiteMapTable from './SiteMapTable';
-import { VIEWS, FEATURES, getDynamicAspectRatio } from './SiteMapUtils';
+import {
+  VIEWS,
+  FEATURES,
+  FEATURE_TYPES,
+  getDynamicAspectRatio,
+} from './SiteMapUtils';
 
 const boxShadow = '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)';
 const useStyles = makeStyles(theme => ({
@@ -192,7 +197,7 @@ const SiteMapContainer = () => {
     );
     const style = { marginLeft: feature.parent ? Theme.spacing(3) : 0 };
     let indeterminate = false;
-    if (feature.isParent) {
+    if (feature.type === FEATURE_TYPES.GROUP) {
       const allChildren = Object.keys(FEATURES).filter(f => FEATURES[f].parent === key);
       const visibleChildren = allChildren.filter(f => state.filters.features.visible[f]);
       indeterminate = visibleChildren.length > 0 && visibleChildren.length < allChildren.length;

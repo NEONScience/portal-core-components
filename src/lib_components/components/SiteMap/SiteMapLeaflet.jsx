@@ -316,8 +316,8 @@ const SiteMapLeaflet = () => {
   const renderFeature = (key) => {
     if (!FEATURES[key]) { return null; }
     const feature = FEATURES[key];
-    // Parents are groups only and don't render anything
-    if (feature.isParent) { return null; }
+    // Groups don't directly render anything
+    if (feature.type === FEATURE_TYPES.GROUP) { return null; }
     const featureProps = { key, classes, positionPopup };
     switch (feature.type) {
       case FEATURE_TYPES.SITES:
@@ -345,6 +345,12 @@ const SiteMapLeaflet = () => {
           default:
             return null;
         }
+      /*
+      case FEATURE_TYPES.OTHER:
+        switch (key) {
+          case FEATURES.DRAINAGE_LINES.KEY:
+            return <DrainageLinesFeature {...featureProps} />;
+      */
       default:
         return null;
     }

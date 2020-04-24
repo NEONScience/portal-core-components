@@ -275,7 +275,7 @@ const reducer = (state, action) => {
       ) { return state; }
       newState.filters.features.visible[action.feature] = action.visible;
       // Parents: ensure children are set/unset accordingly
-      if (FEATURES[action.feature].isParent) {
+      if (FEATURES[action.feature].type === FEATURE_TYPES.GROUP) {
         Object.keys(FEATURES)
           .filter(f => FEATURES[f].parent === action.feature)
           .forEach((f) => {
