@@ -1032,7 +1032,7 @@ const Provider = (props) => {
   useEffect(() => {
     const getSiteMonthDataURL = (siteCode, month) => {
       const root = NeonEnvironment.getFullApiPath('data');
-      return `${root}/${state.product.productCode}/${siteCode}/${month}?presign=false`;
+      return `${root}/${state.product.productCode}/${siteCode}/${month}`;
     };
     const { timeStep: selectedTimeStep, autoTimeStep } = state.selection;
     const timeStep = selectedTimeStep === 'auto' ? autoTimeStep : selectedTimeStep;
