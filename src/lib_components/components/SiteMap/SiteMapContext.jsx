@@ -10,6 +10,10 @@ import cloneDeep from 'lodash/cloneDeep';
 
 import L from 'leaflet';
 
+import { of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
+
+import NeonApi from '../NeonApi/NeonApi';
 import NeonContext from '../NeonContext/NeonContext';
 
 import SiteMapDeferredJson from './SiteMapDeferredJson';
@@ -24,10 +28,13 @@ import {
   FEATURE_TYPES,
   FEATURE_DATA_LOAD_TYPES,
   SELECTABLE_FEATURE_TYPES,
+  SITE_LOCATION_HIERARCHIES_MIN_ZOOM,
   MAP_ZOOM_RANGE,
   SITE_MAP_PROP_TYPES,
   SITE_MAP_DEFAULT_PROPS,
   hydrateNeonContextData,
+  parseLocationHierarchy,
+  // parseLocationProperties,
 } from './SiteMapUtils';
 
 /**
@@ -188,6 +195,15 @@ const calculateFeatureDataFetches = (state) => {
   const sitesInMap = calculateSitesInMap(state);
   if (!sitesInMap) { return state; }
   const newState = { ...state };
+  // Site-location hierarchy fetches for individual sites
+  if (state.map.zoom >= SITE_LOCATION_HIERARCHIES_MIN_ZOOM) {
+    sitesInMap.forEach((siteCode) => {
+      if (newState.featureDataFetches.SITE_LOCATION_HIERARCHIES[siteCode]) { return; }
+      newState.featureDataFetches.SITE_LOCATION_HIERARCHIES[siteCode] = FETCH_STATUS.AWAITING_CALL;
+      newState.featureDataFetchesHasAwaiting = true;
+    });
+  }
+  // Feature fetches
   Object.keys(FEATURES)
     .filter(key => FEATURE_DATA_LOAD_TYPES[FEATURES[key].dataLoadType])
     .filter(key => state.filters.features.available[key] && state.filters.features.visible[key])
@@ -306,6 +322,22 @@ const reducer = (state, action) => {
       setFetchStatusFromAction(FETCH_STATUS.ERROR);
       return newState;
 
+    case 'setSiteLocationHierarchyFetchStarted':
+      if (!newState.featureDataFetches.SITE_LOCATION_HIERARCHIES[action.siteCode]) { return state; }
+      newState.featureDataFetches.SITE_LOCATION_HIERARCHIES[action.siteCode] = FETCH_STATUS.FETCHING; // eslint-disable-line max-len
+      return newState;
+
+    case 'setSiteLocationHierarchyFetchSucceeded':
+      if (!newState.featureDataFetches.SITE_LOCATION_HIERARCHIES[action.siteCode]) { return state; }
+      newState.featureDataFetches.SITE_LOCATION_HIERARCHIES[action.siteCode] = FETCH_STATUS.SUCCESS;
+      newState.featureData.SITE_LOCATION_HIERARCHIES[action.siteCode] = parseLocationHierarchy(action.data); // eslint-disable-line max-len
+      return newState;
+
+    case 'setSiteLocationHierarchyFetchFailed':
+      if (!newState.featureDataFetches.SITE_LOCATION_HIERARCHIES[action.siteCode]) { return state; }
+      newState.featureDataFetches.SITE_LOCATION_HIERARCHIES[action.siteCode] = FETCH_STATUS.ERROR;
+      return newState;
+
     // Selection
     case 'toggleSiteSelected':
       if (newState.selection[SELECTABLE_FEATURE_TYPES.SITES].has(action.site)) {
@@ -408,35 +440,72 @@ const Provider = (props) => {
   */
   useEffect(() => {
     if (!state.featureDataFetchesHasAwaiting) { return; }
-    Object.keys(state.featureDataFetches).forEach((type) => {
-      Object.keys(state.featureDataFetches[type]).forEach((feature) => {
-        const { dataLoadType } = FEATURES[feature];
-        Object.keys(state.featureDataFetches[type][feature]).forEach((siteCode) => {
-          if (state.featureDataFetches[type][feature][siteCode] !== FETCH_STATUS.AWAITING_CALL) {
-            return;
-          }
-          if (dataLoadType === FEATURE_DATA_LOAD_TYPES.IMPORT) {
-            dispatch({ type: 'setFeatureDataFetchStarted', feature, siteCode });
-            const onSuccess = data => dispatch({
-              type: 'setFeatureDataFetchSucceeded',
-              feature,
+    // Special case: fetch site-location hierarchies. These are not features themselves
+    // but constitute critical data in order to generate feature fetches within sites
+    Object.keys(state.featureDataFetches.SITE_LOCATION_HIERARCHIES).forEach((siteCode) => {
+      if (
+        state.featureDataFetches.SITE_LOCATION_HIERARCHIES[siteCode] !== FETCH_STATUS.AWAITING_CALL
+      ) { return; }
+      dispatch({ type: 'setSiteLocationHierarchyFetchStarted', siteCode });
+      NeonApi.getSiteLocationHierarchyObservable(siteCode).pipe(
+        map((response) => {
+          if (response && response.data && response.data) {
+            dispatch({
+              type: 'setSiteLocationHierarchyFetchSucceeded',
+              data: response.data,
               siteCode,
-              data,
             });
-            const onError = error => dispatch({
-              type: 'setFeatureDataFetchFailed',
-              feature,
-              siteCode,
-              error,
-            });
-            SiteMapDeferredJson(feature, siteCode, onSuccess, onError);
+            return of(true);
           }
-          if (dataLoadType === FEATURE_DATA_LOAD_TYPES.FETCH) {
-            // do a fetch, not yet implemented
-          }
+          dispatch({
+            type: 'setSiteLocationHierarchyFetchFailed',
+            error: 'malformed response',
+            siteCode,
+          });
+          return of(false);
+        }),
+        catchError((error) => {
+          dispatch({
+            type: 'setSiteLocationHierarchyFetchFailed',
+            error: error.message,
+            siteCode,
+          });
+          return of(false);
+        }),
+      ).subscribe();
+    });
+    // All other feature-based fetches
+    Object.keys(state.featureDataFetches)
+      .filter(type => type !== FEATURE_TYPES.SITE_LOCATION_HIERARCHIES)
+      .forEach((type) => {
+        Object.keys(state.featureDataFetches[type]).forEach((feature) => {
+          const { dataLoadType } = FEATURES[feature];
+          Object.keys(state.featureDataFetches[type][feature]).forEach((siteCode) => {
+            if (state.featureDataFetches[type][feature][siteCode] !== FETCH_STATUS.AWAITING_CALL) {
+              return;
+            }
+            if (dataLoadType === FEATURE_DATA_LOAD_TYPES.IMPORT) {
+              dispatch({ type: 'setFeatureDataFetchStarted', feature, siteCode });
+              const onSuccess = data => dispatch({
+                type: 'setFeatureDataFetchSucceeded',
+                feature,
+                siteCode,
+                data,
+              });
+              const onError = error => dispatch({
+                type: 'setFeatureDataFetchFailed',
+                feature,
+                siteCode,
+                error,
+              });
+              SiteMapDeferredJson(feature, siteCode, onSuccess, onError);
+            }
+            if (dataLoadType === FEATURE_DATA_LOAD_TYPES.FETCH) {
+              // do a fetch, not yet implemented
+            }
+          });
         });
       });
-    });
     dispatch({ type: 'awaitingFeatureDataFetchesTriggered' });
   }, [state.featureDataFetchesHasAwaiting, state.featureDataFetches]);
 

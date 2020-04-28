@@ -24,6 +24,9 @@ export const MAP_ZOOM_RANGE = [1, 16];
 
 export const KM2_TO_ACRES = 247.10538146717;
 
+// Minimum zoom level at which location hierarchy fetches are done on a per-site basis
+export const SITE_LOCATION_HIERARCHIES_MIN_ZOOM = 9;
+
 /**
    Key Sets
    Used to limit the use of "magic strings" that need to be consistent across many files
@@ -32,12 +35,14 @@ export const KM2_TO_ACRES = 247.10538146717;
 export const SORT_DIRECTIONS = { ASC: 'ASC', DESC: 'DESC' };
 
 // For consistency in differentiating discrete sets of data that can be tabulated together.
-// e.g. all PLOTS type feature data can coexist in a single table view with a
-// single column definition. But PLOTS and SITES couldn't, as each set has
-// different common attributes that should map to table columns.
+// e.g. all LOCATIONS type feature data can coexist in a single table view with a
+// single column definition. But LOCATIONS and SITES shouldn't, as each set has
+// different common attributes that should map to table columns (yes, sites are locations too,
+// but we represent and interact with them differently... I think? Maybe?)
 export const FEATURE_TYPES = {
   SITES: 'SITES',
-  PLOTS: 'PLOTS',
+  SITE_LOCATION_HIERARCHIES: 'SITE_LOCATION_HIERARCHIES',
+  LOCATIONS: 'LOCATIONS',
   BOUNDARIES: 'BOUNDARIES',
   GROUPS: 'GROUPS',
   OTHER: 'OTHER', // All features require a type. This catch-all type will not show in the table.
@@ -138,7 +143,7 @@ export const FEATURES = {
   DRAINAGE_LINES: {
     name: 'Drainage Lines',
     type: FEATURE_TYPES.OTHER,
-    minZoom: 6,
+    minZoom: 7,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: '',
     parent: 'AQUATIC_WATERSHEDS',
@@ -146,7 +151,7 @@ export const FEATURES = {
   POUR_POINTS: {
     name: 'Pour Points',
     type: FEATURE_TYPES.OTHER,
-    minZoom: 6,
+    minZoom: 7,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: '',
     parent: 'AQUATIC_WATERSHEDS',
@@ -197,7 +202,7 @@ export const FEATURES = {
   },
   TOWER_BASE_PLOTS: {
     name: 'Tower Base Plot',
-    type: FEATURE_TYPES.PLOTS,
+    type: FEATURE_TYPES.LOCATIONS,
     description: 'Tower plots support a variety of plant productivity, plant diversity, soil, biogeochemistry and microbe sampling. The number and size of Tower Base Plots is determined by the vegetation of the tower airshed. In forested sites, twenty 40m x 40m plots are established. In herbaceous sites, thirty 20m x 20m plots are established.  Of these thirty tower plots, four have additional space to support soil sampling.',
     parent: 'TOWER_PLOTS',
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
@@ -205,7 +210,7 @@ export const FEATURES = {
   },
   TOWER_PHENOLOGY_PLOTS: {
     name: 'Tower Phenology Plot',
-    type: FEATURE_TYPES.PLOTS,
+    type: FEATURE_TYPES.LOCATIONS,
     description: 'Plant phenology observations are made along a transect loop or plot in or around the primary airshed. When possible, one plot is established north of the tower to calibrate phenology camera images captured from sensors on the tower. If there is insufficient space north of the tower for a 200m x 200m plot or if the vegetation does not match the primary airshed an additional plot is established.',
     parent: 'TOWER_PLOTS',
     attributes: { type: 'phenology', location: 'tower' },
@@ -219,7 +224,7 @@ export const FEATURES = {
   },
   DISTRIBUTED_BASE_PLOTS: {
     name: 'Distributed Base Plots',
-    type: FEATURE_TYPES.PLOTS,
+    type: FEATURE_TYPES.LOCATIONS,
     description: 'Distributed Base Plots support a variety of plant productivity, plant diversity, soil, biogeochemistry, microbe and beetle sampling. Distributed Base Plots are 40m x 40m.',
     parent: 'DISTRIBUTED_PLOTS',
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
@@ -227,7 +232,7 @@ export const FEATURES = {
   },
   DISTRIBUTED_BIRD_GRIDS: {
     name: 'Distributed Bird Grids',
-    type: FEATURE_TYPES.PLOTS,
+    type: FEATURE_TYPES.LOCATIONS,
     description: 'Bird Grids consist of 9 sampling points within a 500m x 500m square. Each point is 250m apart. Where possible, Bird Grids are colocated with Distributed Base Plots by placing the Bird Grid center (B2) in close proximity to the center of the Base Plot. At smaller sites, a single point count is done at the south-west corner (point 21) of the Distributed Base Plot.',
     parent: 'DISTRIBUTED_PLOTS',
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
@@ -235,7 +240,7 @@ export const FEATURES = {
   },
   DISTRIBUTED_MAMMAL_GRIDS: {
     name: 'Distributed Mammal Grids',
-    type: FEATURE_TYPES.PLOTS,
+    type: FEATURE_TYPES.LOCATIONS,
     description: 'Mammal Grids are 90m x 90m and include 100 trapping locations at 10m spacing. Where possible, these grids are colocated with Distributed Base Plots by placing them a specified distance (150m +/- 50m) and random direction from the center of the Base Plot.',
     parent: 'DISTRIBUTED_PLOTS',
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
@@ -243,7 +248,7 @@ export const FEATURES = {
   },
   DISTRIBUTED_MOSQUITO_PLOTS: {
     name: 'Distributed Mosquito Plots',
-    type: FEATURE_TYPES.PLOTS,
+    type: FEATURE_TYPES.LOCATIONS,
     description: 'At each Mosquito Point, one CO2 trap is established. Due to the frequency of sampling and temporal sampling constraints, Mosquito Points are located within 45m of roads.',
     parent: 'DISTRIBUTED_PLOTS',
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
@@ -251,7 +256,7 @@ export const FEATURES = {
   },
   DISTRIBUTED_TICK_PLOTS: {
     name: 'Distributed Tick Plots',
-    type: FEATURE_TYPES.PLOTS,
+    type: FEATURE_TYPES.LOCATIONS,
     description: 'Tick Plots are sampled by conducting cloth dragging or flagging around the perimeter of a 40m x 40m plot. Tick plots are colocated with Distributed Base Plots by placing them a specified distance (150m +/- 15m) and random direction from the center of the Base Plot.',
     parent: 'DISTRIBUTED_PLOTS',
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
@@ -539,4 +544,60 @@ export const getDynamicAspectRatio = () => {
   return arIdx === -1
     ? dynamicAspectRatios[dynamicAspectRatios.length - 1]
     : dynamicAspectRatios[arIdx];
+};
+
+/**
+ Function to parse a locationProperties value from a locations API response into an object with
+ only white-listed keys present. For example:
+   locationProperties": [
+     {
+       "locationPropertyName": "Value for Foo Bar",
+       "locationPropertyValue": 123
+     }
+   ]
+  becomes:
+   { fooBar: 123 }
+*/
+export const parseLocationProperties = (inProps = [], whiteList = []) => {
+  const outProps = {};
+  const cleanPropKey = (inKey = '') => {
+    const words = inKey.substr(10)
+      .replace(/[^A-Za-z0-9_ -]/g, '')
+      .replace(/[_-]/g, ' ')
+      .toLowerCase()
+      .split(' ');
+    return words.map((word, idx) => (
+      idx === 0 ? word : `${word.substr(0, 1).toUpperCase()}${word.substr(1)}`
+    )).join('');
+  };
+  if (!Array.isArray(inProps) || !inProps.length) { return outProps; }
+  inProps.forEach((prop) => {
+    const inPropKeys = Object.keys(prop);
+    if (
+      inPropKeys.length !== 2
+        || !inPropKeys.includes('locationPropertyName')
+        || !inPropKeys.includes('locationPropertyValue')
+        || !(typeof prop.locationPropertyName === 'string')
+    ) { return; }
+    const propKey = cleanPropKey(prop.locationPropertyName);
+    if (propKey.length && (!whiteList.length || whiteList.includes(propKey))) {
+      outProps[propKey] = prop.locationPropertyValue;
+    }
+  });
+  return outProps;
+};
+
+export const parseLocationHierarchy = (inHierarchy, parent = null) => {
+  let outHierarchy = {};
+  const name = inHierarchy.locationParentHierarchy ? null : inHierarchy.locationName;
+  const description = inHierarchy.locationDescription;
+  if (description.includes('Not Used')) { return outHierarchy; }
+  if (name !== null) { outHierarchy[name] = { description, parent }; }
+  inHierarchy.locationChildHierarchy.forEach((subLocation) => {
+    outHierarchy = {
+      ...outHierarchy,
+      ...parseLocationHierarchy(subLocation, name),
+    };
+  });
+  return outHierarchy;
 };
