@@ -27,9 +27,9 @@ export default function NeonFooter() {
   switch (renderMode) {
     case 'loading':
       return (
-        <header id="footer">
+        <footer id="footer">
           <Skeleton variant="rect" height="300px" width="100%" />
-        </header>
+        </footer>
       );
 
     case 'drupal':

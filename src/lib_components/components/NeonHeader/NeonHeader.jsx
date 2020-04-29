@@ -27,14 +27,14 @@ export default function NeonHeader(props) {
   switch (renderMode) {
     case 'loading':
       return (
-        <header id="footer">
+        <header id="header">
           <Skeleton variant="rect" height="125px" width="100%" />
         </header>
       );
 
     case 'drupal':
       return (
-        <header id="footer">
+        <header id="header">
           {HTMLReactParser(headerHTML)}
         </header>
       );
