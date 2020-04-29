@@ -203,7 +203,6 @@ const fetchCSV = url => ajax({
   crossDomain: true,
   responseType: 'text',
   url,
-  headers: NeonApi.getApiTokenHeader(),
 });
 const parseCSV = (rawCsv, dedupeLines = false) => {
   const csv = !dedupeLines ? rawCsv : [...new Set(rawCsv.split('\n'))].join('\n');
