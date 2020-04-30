@@ -1,3 +1,9 @@
+export namespace FETCH_STATUS {
+    export const AWAITING_CALL: string;
+    export const FETCHING: string;
+    export const ERROR: string;
+    export const SUCCESS: string;
+}
 export default NeonContext;
 declare namespace NeonContext {
     export { Provider };
@@ -168,6 +174,9 @@ declare function useNeonContextState(): ({
             NH: {
                 name: string;
                 center: number[];
+                /**
+                   HOOK
+                */
                 zoom: number;
             };
             NJ: {
@@ -372,9 +381,6 @@ declare function useNeonContextState(): ({
                 center: number[];
                 zoom: number;
             };
-            /**
-               CONTEXT
-            */
             D16: {
                 name: string;
                 areaKm2: number;
@@ -436,16 +442,29 @@ declare function useNeonContextState(): ({
         stateSites: {};
         domainSites: {};
     };
+    html: {
+        header: null;
+        footer: null;
+    };
     fetches: {
         sites: {
             status: string;
             error: null;
         };
+        auth: {
+            status: string;
+            error: null;
+        };
+        header: {
+            status: string;
+            error: null;
+        };
+        footer: {
+            status: string;
+            error: null;
+        };
     };
-    auth: {
-        isAuthenticated: boolean;
-        fetchStatus: null;
-    };
+    isAuthenticated: boolean;
     isActive: boolean;
     isFinal: boolean;
     hasError: boolean;
@@ -601,6 +620,9 @@ declare function useNeonContextState(): ({
             NH: {
                 name: string;
                 center: number[];
+                /**
+                   HOOK
+                */
                 zoom: number;
             };
             NJ: {
@@ -805,9 +827,6 @@ declare function useNeonContextState(): ({
                 center: number[];
                 zoom: number;
             };
-            /**
-               CONTEXT
-            */
             D16: {
                 name: string;
                 areaKm2: number;
@@ -869,16 +888,29 @@ declare function useNeonContextState(): ({
         stateSites: {};
         domainSites: {};
     };
+    html: {
+        header: null;
+        footer: null;
+    };
     fetches: {
         sites: {
             status: string;
             error: null;
         };
+        auth: {
+            status: string;
+            error: null;
+        };
+        header: {
+            status: string;
+            error: null;
+        };
+        footer: {
+            status: string;
+            error: null;
+        };
     };
-    auth: {
-        isAuthenticated: boolean;
-        fetchStatus: null;
-    };
+    isAuthenticated: boolean;
     isActive: boolean;
     isFinal: boolean;
     hasError: boolean;
@@ -893,6 +925,10 @@ declare namespace DEFAULT_STATE {
         export const stateSites: {};
         export const domainSites: {};
     }
+    export namespace html {
+        export const header: null;
+        export const footer: null;
+    }
     export namespace fetches {
         export namespace sites_1 {
             import status = AWAITING_CALL;
@@ -900,11 +936,28 @@ declare namespace DEFAULT_STATE {
             export const error: null;
         }
         export { sites_1 as sites };
+        export namespace auth {
+            import status_1 = AWAITING_CALL;
+            export { status_1 as status };
+            const error_1: null;
+            export { error_1 as error };
+        }
+        export namespace header_1 {
+            import status_2 = AWAITING_CALL;
+            export { status_2 as status };
+            const error_2: null;
+            export { error_2 as error };
+        }
+        export { header_1 as header };
+        export namespace footer_1 {
+            import status_3 = AWAITING_CALL;
+            export { status_3 as status };
+            const error_3: null;
+            export { error_3 as error };
+        }
+        export { footer_1 as footer };
     }
-    export namespace auth {
-        export const isAuthenticated: boolean;
-        export const fetchStatus: null;
-    }
+    export const isAuthenticated: boolean;
     export const isActive: boolean;
     export const isFinal: boolean;
     export const hasError: boolean;
@@ -915,9 +968,3 @@ import statesJSON from "../../staticJSON/states.json";
 import domainsJSON from "../../staticJSON/domains.json";
 import bundlesJSON from "../../staticJSON/bundles.json";
 import timeSeriesDataProductsJSON from "../../staticJSON/timeSeriesDataProducts.json";
-declare namespace FETCH_STATUS {
-    export const AWAITING_CALL: string;
-    export const FETCHING: string;
-    export const ERROR: string;
-    export const SUCCESS: string;
-}

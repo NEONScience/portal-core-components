@@ -121,6 +121,8 @@ const createUseStyles = props => (makeStyles(theme => ({
   },
 })));
 
+const DRUPAL_CSS_URL = 'https://master-7rqtwti-di4alr4iwbwyg.us-2.platformsh.site/themes/custom/neon/build/components/theme/theme.css';
+
 const NeonPage = (props) => {
   const {
     breadcrumbs,
@@ -139,6 +141,19 @@ const NeonPage = (props) => {
   const useStyles = createUseStyles(props);
   const classes = useStyles(useStylesProps);
   const [{ isActive: neonContextIsActive }] = NeonContext.useNeonContextState();
+
+  /**
+     Drupal CSS Loading
+  */
+  const [drupalCssLoaded, setDrupalCssLoaded] = useState(false);
+  useEffect(() => {
+    if (drupalCssLoaded) { return; }
+    setDrupalCssLoaded(true);
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = DRUPAL_CSS_URL;
+    document.body.appendChild(link);
+  }, [drupalCssLoaded, setDrupalCssLoaded]);
 
   /**
      Liferay Notifications
