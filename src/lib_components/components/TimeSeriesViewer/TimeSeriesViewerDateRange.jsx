@@ -166,10 +166,10 @@ const TimeSeriesViewerDateRange = (props) => {
         .querySelector(`span[data-index="${idx}"]`)
         .setAttribute('aria-valuenow', limited[idx].toString());
       dateRangeSliderRef.current
-        .querySelector(`span[data-index="${idx}"]`)
+        .querySelector(`span[role="slider"][data-index="${idx}"]`)
         .style.left = newLefts[idx];
       dateRangeSliderRef.current
-        .querySelector(`span[data-index="${idx}"] > span > span > span`)
+        .querySelector(`span[role="slider"][data-index="${idx}"] > span > span > span`)
         .innerText = displayRange[limited[idx]];
     });
 
