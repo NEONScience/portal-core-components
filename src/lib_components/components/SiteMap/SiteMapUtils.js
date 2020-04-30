@@ -590,9 +590,10 @@ export const parseLocationProperties = (inProps = [], whiteList = []) => {
 export const parseLocationHierarchy = (inHierarchy, parent = null) => {
   let outHierarchy = {};
   const name = inHierarchy.locationParentHierarchy ? null : inHierarchy.locationName;
-  const description = inHierarchy.locationDescription;
+  const description = inHierarchy.locationDescription || null;
+  const type = inHierarchy.locationType || null;
   if (description.includes('Not Used')) { return outHierarchy; }
-  if (name !== null) { outHierarchy[name] = { description, parent }; }
+  if (name !== null) { outHierarchy[name] = { type, description, parent }; }
   inHierarchy.locationChildHierarchy.forEach((subLocation) => {
     outHierarchy = {
       ...outHierarchy,
