@@ -176,6 +176,7 @@ export const TIME_STEPS = {
   '15min': { key: '15min', tmi: '015', seconds: 900 },
   '30min': { key: '30min', tmi: '030', seconds: 1800 },
   '60min': { key: '1hr', tmi: '060', seconds: 1800 },
+  '0AQ': { key: '0AQ', tmi: '100', seconds: 60 },
 };
 const getTimeStep = input => (
   Object.keys(TIME_STEPS).find(key => TIME_STEPS[key].tmi === input) || null

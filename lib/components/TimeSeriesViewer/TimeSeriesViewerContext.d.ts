@@ -60,6 +60,11 @@ export const TIME_STEPS: {
         tmi: string;
         seconds: number;
     };
+    '0AQ': {
+        key: string;
+        tmi: string;
+        seconds: number;
+    };
 };
 export function summarizeTimeSteps(steps: any, timeStep?: any, pluralize?: boolean): string;
 export default TimeSeriesViewerContext;

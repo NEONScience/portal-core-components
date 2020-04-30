@@ -693,7 +693,9 @@ export default function TimeSeriesViewerAxes() {
       </Grid>
       <Typography variant="h6" gutterBottom>x Axis (Time)</Typography>
       <Grid container spacing={2}>
-        <Grid item xs={12} lg={4} xl={3}>{renderOption('TIME_STEP')}</Grid>
+        {!state.availableTimeSteps.size < 3 ? null : (
+          <Grid item xs={12} lg={4} xl={3}>{renderOption('TIME_STEP')}</Grid>
+        )}
         <Grid item xs={12} lg={8} xl={9}>{renderOption('ROLL_PERIOD')}</Grid>
       </Grid>
     </React.Fragment>
