@@ -163,7 +163,7 @@ const TimeSeriesViewerDateRange = (props) => {
     // Apply values to slider drag handles
     [0, 1].forEach((idx) => {
       dateRangeSliderRef.current
-        .querySelector(`span[data-index="${idx}"]`)
+        .querySelector(`span[role="slider"][data-index="${idx}"]`)
         .setAttribute('aria-valuenow', limited[idx].toString());
       dateRangeSliderRef.current
         .querySelector(`span[role="slider"][data-index="${idx}"]`)

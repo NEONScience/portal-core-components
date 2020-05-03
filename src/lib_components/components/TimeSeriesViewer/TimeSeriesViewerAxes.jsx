@@ -340,13 +340,13 @@ const YAxisRangeOption = (props) => {
     // Apply values to slider drag handles
     [0, 1].forEach((idx) => {
       yAxisRangeSliderRef.current
-        .querySelector(`span[data-index="${idx}"]`)
+        .querySelector(`span[role="slider"][data-index="${idx}"]`)
         .setAttribute('aria-valuenow', limited[idx].toString());
       yAxisRangeSliderRef.current
-        .querySelector(`span[data-index="${idx}"]`)
+        .querySelector(`span[role="slider"][data-index="${idx}"]`)
         .style.bottom = newBottoms[idx];
       yAxisRangeSliderRef.current
-        .querySelector(`span[data-index="${idx}"] > span > span > span`)
+        .querySelector(`span[role="slider"][data-index="${idx}"] > span > span > span`)
         .innerText = limited[idx];
     });
 
@@ -520,7 +520,7 @@ const RollPeriodOption = () => {
   const rollMax = Math.floor(Math.max(dateRangeMonths * rollStepsPerMonth, currentRollPeriod) / 4);
 
   // Determine slider marks
-  const interimMarks = 3;
+  const interimMarks = (rollMax - rollMin) < 8 ? 2 : 3;
   const markValues = [1];
   for (let m = 1; m <= interimMarks; m += 1) {
     markValues.push(Math.floor(rollMax * (m / (interimMarks + 1))));
