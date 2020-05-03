@@ -23,8 +23,6 @@ import Theme from '../Theme/Theme';
 
 import TimeSeriesViewer from './TimeSeriesViewer';
 
-// import sampleProductData from '../../../sampleData/DP1.00001.001.json';
-
 const useStyles = makeStyles(theme => ({
   divider: {
     margin: theme.spacing(3, 0),

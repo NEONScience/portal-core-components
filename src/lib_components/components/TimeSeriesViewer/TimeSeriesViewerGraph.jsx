@@ -380,27 +380,36 @@ export default function TimeSeriesViewerGraph() {
             }
             // This site/position/month/variable series exists, so add it into the data set
             const seriesStepCount = posData[month][pkg][timeStep].series[variable].data.length;
-            if (seriesStepCount !== monthStepCount) {
-              // The series data length does not match the expected month length so
-              // loop through by month steps pulling in series values through timestamp matching
-              const setSeriesValueByTimestamp = (t) => {
-                const isodate = moment.utc(qualityData[t][0]).format('YYYY-MM-DD[T]HH:mm:ss[Z]');
-                const dataIdx = posData[month][pkg][timeStep].series[dateTimeVariable].data
-                  .findIndex(dateTimeVal => dateTimeVal === isodate);
-                data[t][columnIdx] = dataIdx !== -1
-                  ? posData[month][pkg][timeStep].series[variable].data[dataIdx]
-                  : null;
-              };
-              for (let t = monthIdx; t < monthStepCount; t += 1) {
-                setSeriesValueByTimestamp(t);
-              }
+            // Series and month data lengths are either identical (as expected) then we can stream
+            // values directly in without matching timestamps
+            if (seriesStepCount === monthStepCount) {
+              posData[month][pkg][timeStep].series[variable].data.forEach((d, datumIdx) => {
+                data[datumIdx + monthIdx][columnIdx] = d;
+              });
               return;
             }
-            // Series and month data lengths are identical as expected so we can stream
-            // values directly in without matching timestamps
-            posData[month][pkg][timeStep].series[variable].data.forEach((d, datumIdx) => {
-              data[datumIdx + monthIdx][columnIdx] = d;
-            });
+            // More series data than month data - for now, stream values directly in
+            // without matching timestamps, being careful to not go over the month step count
+            if (seriesStepCount >= monthStepCount) {
+              posData[month][pkg][timeStep].series[variable].data.forEach((d, datumIdx) => {
+                if (datumIdx >= monthStepCount) { return; }
+                data[datumIdx + monthIdx][columnIdx] = d;
+              });
+              return;
+            }
+            // The series data length does not match the expected month length so
+            // loop through by month steps pulling in series values through timestamp matching
+            const setSeriesValueByTimestamp = (t) => {
+              const isodate = moment.utc(qualityData[t][0]).format('YYYY-MM-DD[T]HH:mm:ss[Z]');
+              const dataIdx = posData[month][pkg][timeStep].series[dateTimeVariable].data
+                .findIndex(dateTimeVal => dateTimeVal === isodate);
+              data[t][columnIdx] = dataIdx !== -1
+                ? posData[month][pkg][timeStep].series[variable].data[dataIdx]
+                : null;
+            };
+            for (let t = monthIdx; t < monthStepCount; t += 1) {
+              setSeriesValueByTimestamp(t);
+            }
           });
 
           // Also for each site/position/month loop through all selected quality flags...

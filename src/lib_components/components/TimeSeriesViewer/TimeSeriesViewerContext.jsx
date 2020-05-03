@@ -58,34 +58,6 @@ export const TIME_SERIES_VIEWER_STATUS_TITLES = {
   READY: null,
 };
 
-// Array offsets and validators for use when splitting a data file URL
-const DATA_FILE_PARTS = {
-  POSITION_H: {
-    offset: 6,
-    isValid: p => /^[\d]{3}$/.test(p),
-  },
-  POSITION_V: {
-    offset: 7,
-    isValid: p => /^[\d]{3}$/.test(p),
-  },
-  TIME_STEP: {
-    offset: 8,
-    isValid: p => /^[\d]{3}$/.test(p),
-  },
-  MONTH: {
-    offset: 10,
-    isValid: p => /^[\d]{4}-[\d]{2}$/.test(p),
-  },
-  PACKAGE_TYPE: {
-    offset: 11,
-    isValid: p => ['basic', 'expanded'].includes(p),
-  },
-  EXTENSION: {
-    offset: 13,
-    isValid: p => p === 'csv',
-  },
-};
-
 // Functions to convert a value to the proper JS data type given a NEON variable dataType
 const castFloat = (v) => {
   const cast = parseFloat(v, 10);
@@ -176,6 +148,8 @@ export const TIME_STEPS = {
   '15min': { key: '15min', tmi: '015', seconds: 900 },
   '30min': { key: '30min', tmi: '030', seconds: 1800 },
   '60min': { key: '1hr', tmi: '060', seconds: 1800 },
+  '0AQ': { key: '0AQ', tmi: '100', seconds: 60 },
+  '1day': { key: '1day', tmi: '01D', seconds: 86400 },
 };
 const getTimeStep = input => (
   Object.keys(TIME_STEPS).find(key => TIME_STEPS[key].tmi === input) || null
@@ -192,6 +166,34 @@ export const summarizeTimeSteps = (steps, timeStep = null, pluralize = true) => 
   let plural = '';
   if (pluralize) { plural = value === '1' ? '' : 's'; }
   return `${value} ${intervals[breakIdx]}${plural}`;
+};
+
+// Array offsets and validators for use when splitting a data file URL
+const DATA_FILE_PARTS = {
+  POSITION_H: {
+    offset: 6,
+    isValid: p => /^[\d]{3}$/.test(p),
+  },
+  POSITION_V: {
+    offset: 7,
+    isValid: p => /^[\d]{3}$/.test(p),
+  },
+  TIME_STEP: {
+    offset: 8,
+    isValid: p => Object.keys(TIME_STEPS).some(t => TIME_STEPS[t].tmi === p),
+  },
+  MONTH: {
+    offset: 10,
+    isValid: p => /^[\d]{4}-[\d]{2}$/.test(p),
+  },
+  PACKAGE_TYPE: {
+    offset: 11,
+    isValid: p => ['basic', 'expanded'].includes(p),
+  },
+  EXTENSION: {
+    offset: 13,
+    isValid: p => p === 'csv',
+  },
 };
 
 /**
