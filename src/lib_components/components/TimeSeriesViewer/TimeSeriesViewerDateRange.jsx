@@ -174,7 +174,7 @@ const TimeSeriesViewerDateRange = (props) => {
     });
 
     // Apply values to slider track between drag handles
-    const newTrackWidth = `${((limited[1] - limited[0] + 1) / (displayMax + 1)) * 100}%`;
+    const newTrackWidth = `${((limited[1] - limited[0]) / (displayMax)) * 100}%`;
     dateRangeSliderRef.current.querySelector('.MuiSlider-track').style.width = newTrackWidth;
     // eslint-disable-next-line prefer-destructuring
     dateRangeSliderRef.current.querySelector('.MuiSlider-track').style.left = newLefts[0];
