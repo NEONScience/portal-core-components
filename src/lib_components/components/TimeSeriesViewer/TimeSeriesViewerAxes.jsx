@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useEffect } from 'react';
+import React, { useRef, useCallback, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -304,7 +304,7 @@ const YAxisRangeOption = (props) => {
   const rangeMin = 0;
   let rangeMax = dataRange[1] ? dataRange[1] * 1.20 : 0.01;
   const precision = Math.abs(Math.floor(Math.min(Math.log10(rangeMax), 0)))
-    + (Math.log10(rangeMax) >= 2 ? 0 : 1);
+    + (Math.log10(rangeMax) >= 2 ? 0 : 2);
   rangeMax = parseFloat(rangeMax.toFixed(precision), 10);
   const fixedStandardDeviation = parseFloat(standardDeviation.toFixed(precision), 10);
 
@@ -325,7 +325,10 @@ const YAxisRangeOption = (props) => {
   // DOM in sync as if it was controlled directly.
   const applySliderValues = useCallback((values) => {
     if (!Array.isArray(values) || values.length !== 2 || values[0] > values[1]) { return; }
-    const limited = [Math.max(values[0], rangeMin), Math.min(values[1], rangeMax)];
+    const limited = [
+      Math.max(values[0], rangeMin),
+      Math.min(values[1], rangeMax),
+    ].map(r => parseFloat(r.toFixed(precision), 10));
 
     // Derive new percentage values for bottom and height styles of slider DOM elements
     const newBottoms = [
@@ -335,7 +338,7 @@ const YAxisRangeOption = (props) => {
 
     // Apply values to Slider DOM hidden input
     yAxisRangeSliderRef.current
-      .querySelector('input[type="hidden"]').value = limited.join(',');
+      .querySelector('input[type="hidden"]').setAttribute('value', limited.join(','));
 
     // Apply values to slider drag handles
     [0, 1].forEach((idx) => {
@@ -355,9 +358,9 @@ const YAxisRangeOption = (props) => {
     yAxisRangeSliderRef.current.querySelector('.MuiSlider-track').style.height = newTrackHeight;
     // eslint-disable-next-line prefer-destructuring
     yAxisRangeSliderRef.current.querySelector('.MuiSlider-track').style.bottom = newBottoms[0];
-  }, [yAxisRangeSliderRef, rangeMin, rangeMax]);
+  }, [yAxisRangeSliderRef, rangeMin, rangeMax, precision]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!yAxisRangeSliderRef.current || !render || isAuto) { return; }
     const sliderValues = yAxisRangeSliderRef.current.querySelector('input[type="hidden"]').value;
     if (sliderValues !== selectedRange.join(',')) {
@@ -455,7 +458,7 @@ const YAxisRangeOption = (props) => {
               const range = [
                 Math.max(dataRange[0] - fixedStandardDeviation, 0),
                 dataRange[1] + fixedStandardDeviation,
-              ];
+              ].map(r => parseFloat(r.toFixed(precision), 10));
               dispatch({ type: 'selectYAxisRange', axis, range });
             }}
           >
@@ -537,7 +540,8 @@ const RollPeriodOption = () => {
     if (!parseInt(value, 10)) { return; }
     const currentValue = Math.min(Math.max(value, rollMin), rollMax);
     // Apply value to Slider DOM hidden input
-    rollPeriodSliderRef.current.querySelector('input[type="hidden"]').value = currentValue;
+    rollPeriodSliderRef.current
+      .querySelector('input[type="hidden"]').setAttribute('value', currentValue);
     // Apply value to slider drag handle
     rollPeriodSliderRef.current.querySelector('span[role="slider"]')
       .setAttribute('aria-valuenow', currentValue.toString());
@@ -546,7 +550,7 @@ const RollPeriodOption = () => {
     rollPeriodSliderRef.current.querySelector('.MuiSlider-track').style.width = newTrackWidth;
   }, [rollPeriodSliderRef, rollMin, rollMax]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!rollPeriodSliderRef.current) { return; }
     const sliderValue = rollPeriodSliderRef.current.querySelector('input[type="hidden"]').value;
     if (sliderValue !== currentRollPeriod) { applySliderValue(currentRollPeriod); }

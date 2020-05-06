@@ -151,14 +151,14 @@ const TimeSeriesViewerDateRange = (props) => {
     const limited = [Math.max(values[0], sliderMin), Math.min(values[1], sliderMax)];
 
     // Derive new percentage values for left and width styles of slider DOM elements
-    const newLefts = [
-      `${(limited[0] / (displayMax + 1)) * 100}%`,
-      `${(limited[1] / (displayMax + 1)) * 100}%`,
-    ];
+    const newLefts = displayMax ? [
+      `${(limited[0] / displayMax) * 100}%`,
+      `${(limited[1] / displayMax) * 100}%`,
+    ] : ['0%', '100%'];
 
     // Apply values to Slider DOM hidden input
     dateRangeSliderRef.current
-      .querySelector('input[type="hidden"]').value = limited.join(',');
+      .querySelector('input[type="hidden"]').setAttribute('value', limited.join(','));
 
     // Apply values to slider drag handles
     [0, 1].forEach((idx) => {

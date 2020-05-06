@@ -573,7 +573,10 @@ function SelectPositionsButton(props) {
       <Button
         color="primary"
         variant="outlined"
-        onClick={() => { setSelectDialogOpen(true); }}
+        onClick={() => {
+          setLocalSelectedPositions(selectedPositions);
+          setSelectDialogOpen(true);
+        }}
         className={classes.smallButton}
       >
         <SelectIcon className={classes.smallButtonIcon} />
