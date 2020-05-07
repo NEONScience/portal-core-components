@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
 import Slider from '@material-ui/core/Slider';
 import TextField from '@material-ui/core/TextField';
@@ -15,10 +13,14 @@ import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 
 import SwapIcon from '@material-ui/icons/SwapHoriz';
-import CenterIcon from '@material-ui/icons/VerticalAlignCenter';
 
 import Theme from '../Theme/Theme';
-import TimeSeriesViewerContext, { TIME_STEPS, summarizeTimeSteps } from './TimeSeriesViewerContext';
+import TimeSeriesViewerContext, {
+  TIME_STEPS,
+  Y_AXIS_RANGE_MODES,
+  Y_AXIS_RANGE_MODE_DETAILS,
+  summarizeTimeSteps,
+} from './TimeSeriesViewerContext';
 
 const useStyles = makeStyles(theme => ({
   smallButton: {
@@ -49,13 +51,13 @@ const useStyles = makeStyles(theme => ({
   },
   yAxisRangeOuterContainer: {
     width: '100%',
-    marginTop: theme.spacing(-1),
+    marginTop: theme.spacing(1),
   },
   yAxisRangeInnerContainer: {
-    height: theme.spacing(22),
+    height: theme.spacing(15),
     display: 'flex',
     alignItems: 'flex-start',
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(2.5),
   },
   yAxisRangeOptions: {
     display: 'flex',
@@ -78,7 +80,7 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.grey[400],
     fontSize: '0.75rem',
   },
-  centerButtonDescription: {
+  standardDeviation: {
     marginTop: theme.spacing(0.5),
     marginBottom: theme.spacing(2),
     color: theme.palette.grey[400],
@@ -151,7 +153,7 @@ const NeonSlider = withStyles({
 
 const NeonVerticalSlider = withStyles({
   root: {
-    margin: '0px 56px 32px 16px !important',
+    margin: '4px 56px 32px 16px !important',
   },
   disabled: {
     '& .MuiSlider-track': {
@@ -283,140 +285,82 @@ const YAxisScaleOption = () => {
 /**
    y Axis - Range Option
 */
-const yAxisRangeSliderDefaults = {
-  y1: { value: [0, 0.01] },
-  y2: { value: [0, 0.01] },
-};
 const YAxisRangeOption = (props) => {
   const { axis } = props;
   const classes = useStyles(Theme);
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
-  const yAxisRangeSliderRef = useRef(null);
+  const classNames = {
+    selected: `${classes.optionButton} ${classes.optionButtonSelected}`,
+    deselected: classes.optionButton,
+  };
 
-  const { selection } = state;
-  const { yAxes } = selection;
-  const { dataRange, selectedRange: rawSelectedRange, standardDeviation } = yAxes[axis];
-  const isAuto = rawSelectedRange === 'auto';
-  const selectedRange = isAuto ? [null, null] : rawSelectedRange;
+  const {
+    selection: {
+      yAxes: {
+        [axis]: {
+          units, dataRange, rangeMode, axisRange, precision, standardDeviation,
+        },
+      },
+    },
+  } = state;
 
-  const render = yAxes[axis].units && dataRange[0] !== null && dataRange[1] !== null;
+  const render = units && dataRange[0] !== null && dataRange[1] !== null;
 
-  const rangeMin = 0;
-  let rangeMax = dataRange[1] ? dataRange[1] * 1.20 : 0.01;
-  const precision = Math.abs(Math.floor(Math.min(Math.log10(rangeMax), 0)))
-    + (Math.log10(rangeMax) >= 2 ? 0 : 2);
-  rangeMax = parseFloat(rangeMax.toFixed(precision), 10);
-  const fixedStandardDeviation = parseFloat(standardDeviation.toFixed(precision), 10);
+  const isCustom = rangeMode === Y_AXIS_RANGE_MODES.CUSTOM;
+  const customPad = Math.max((dataRange[1] || 0) * 0.25, standardDeviation * 2);
+  const customMin = 0;
+  const customMax = parseFloat(
+    Math.max(axisRange[1], (dataRange[1] || 0) + customPad).toFixed(precision),
+    10,
+  );
 
   // Determine slider marks
   const marks = [
-    rangeMin,
-    (rangeMax - rangeMin) * 0.25,
-    (rangeMax - rangeMin) * 0.5,
-    (rangeMax - rangeMin) * 0.75,
-    rangeMax,
+    customMin,
+    (customMax - customMin) * 0.25,
+    (customMax - customMin) * 0.5,
+    (customMax - customMin) * 0.75,
+    customMax,
   ].map(m => ({ value: m, label: m.toFixed(precision) }));
   const step = 10 ** (-1 * precision);
 
-  // Function to apply changes to the slider's DOM as if it was controlled by state.
-  // We can't control in state because doing so makes drag experience jerky and frustrating.
-  // By not controlling the slider with state we can maintain a fluid experience and need
-  // only this bit of logic (with a ref to the slider's DOM node) to keep the slider
-  // DOM in sync as if it was controlled directly.
-  const applySliderValues = useCallback((values) => {
-    if (!Array.isArray(values) || values.length !== 2 || values[0] > values[1]) { return; }
-    const limited = [
-      Math.max(values[0], rangeMin),
-      Math.min(values[1], rangeMax),
-    ].map(r => parseFloat(r.toFixed(precision), 10));
-
-    // Derive new percentage values for bottom and height styles of slider DOM elements
-    const newBottoms = [
-      `${(limited[0] / (rangeMax - rangeMin)) * 100}%`,
-      `${(limited[1] / (rangeMax - rangeMin)) * 100}%`,
-    ];
-
-    // Apply values to Slider DOM hidden input
-    yAxisRangeSliderRef.current
-      .querySelector('input[type="hidden"]').setAttribute('value', limited.join(','));
-
-    // Apply values to slider drag handles
-    [0, 1].forEach((idx) => {
-      yAxisRangeSliderRef.current
-        .querySelector(`span[role="slider"][data-index="${idx}"]`)
-        .setAttribute('aria-valuenow', limited[idx].toString());
-      yAxisRangeSliderRef.current
-        .querySelector(`span[role="slider"][data-index="${idx}"]`)
-        .style.bottom = newBottoms[idx];
-      yAxisRangeSliderRef.current
-        .querySelector(`span[role="slider"][data-index="${idx}"] > span > span > span`)
-        .innerText = limited[idx];
-    });
-
-    // Apply values to slider track between drag handles
-    const newTrackHeight = `${((limited[1] - limited[0]) / (rangeMax - rangeMin)) * 100}%`;
-    yAxisRangeSliderRef.current.querySelector('.MuiSlider-track').style.height = newTrackHeight;
-    // eslint-disable-next-line prefer-destructuring
-    yAxisRangeSliderRef.current.querySelector('.MuiSlider-track').style.bottom = newBottoms[0];
-  }, [yAxisRangeSliderRef, rangeMin, rangeMax, precision]);
-
-  useLayoutEffect(() => {
-    if (!yAxisRangeSliderRef.current || !render || isAuto) { return; }
-    const sliderValues = yAxisRangeSliderRef.current.querySelector('input[type="hidden"]').value;
-    if (sliderValues !== selectedRange.join(',')) {
-      applySliderValues(selectedRange);
-    }
-  }, [yAxisRangeSliderRef, selectedRange, applySliderValues, render, isAuto]);
-
-  if (!Object.isFrozen(yAxisRangeSliderDefaults[axis])) {
-    yAxisRangeSliderDefaults[axis] = {
-      value: [
-        selectedRange[0] === null ? rangeMin : selectedRange[0],
-        selectedRange[1] === null ? rangeMax : selectedRange[1],
-      ],
-    };
-    Object.freeze(yAxisRangeSliderDefaults[axis]);
-  }
-  const handleToggleCheckbox = () => {
-    dispatch({
-      type: 'selectYAxisRange',
-      axis,
-      range: isAuto ? [rangeMin, rangeMax] : 'auto',
-    });
-  };
-  const autoLabelStyles = {
-    [true]: { fontWeight: 600 },
-    [false]: { color: Theme.palette.grey[400] },
-  };
   return !render ? (
     <div className={classes.yAxisRangeOuterContainer}>
       <div className={classes.yAxisRangeOptions}>
-        <Skeleton variant="rect" width={200} height={26} style={{ margin: Theme.spacing(1, 0) }} />
+        <Skeleton variant="rect" width={200} height={30} style={{ margin: Theme.spacing(0.5, 0) }} />
       </div>
       <div className={classes.yAxisRangeInnerContainer}>
         <div className={classes.yAxisRangeTextfieldContainer}>
-          <Skeleton variant="rect" width={96} height={40} style={{ margin: Theme.spacing(1, 0) }} />
-          <Skeleton variant="rect" width={96} height={40} style={{ margin: Theme.spacing(1, 0) }} />
-          <Skeleton variant="rect" width={76} height={26} style={{ margin: Theme.spacing(1, 0) }} />
+          <Skeleton variant="rect" width={96} height={36} style={{ margin: Theme.spacing(1, 0) }} />
+          <Skeleton variant="rect" width={96} height={36} style={{ margin: Theme.spacing(1, 0) }} />
         </div>
-        <Skeleton variant="rect" width={56} height={Theme.spacing(20)} />
       </div>
     </div>
   ) : (
     <div className={classes.yAxisRangeOuterContainer}>
-      <div className={classes.yAxisRangeOptions}>
-        <FormControlLabel
-          label={(
-            <div>
-              <span style={autoLabelStyles[isAuto]}>Auto</span>
-              <span className={classes.autoLabelDescription}>(fit to data; start at zero)</span>
-            </div>
-          )}
-          control={
-            <Checkbox checked={isAuto} onChange={handleToggleCheckbox} color="primary" />
-          }
-        />
-      </div>
+      <ToggleButtonGroup
+        exclusive
+        color="primary"
+        variant="outlined"
+        size="small"
+        className={classes.optionButtonGroup}
+        value={rangeMode}
+        onChange={(event, value) => {
+          dispatch({ type: 'selectYAxisRangeMode', axis, mode: value });
+        }}
+      >
+        {Object.keys(Y_AXIS_RANGE_MODES).map(key => (
+          <ToggleButton
+            key={key}
+            value={key}
+            size="small"
+            className={classNames[rangeMode !== key ? 'deselected' : 'selected']}
+            title={Y_AXIS_RANGE_MODE_DETAILS[key].name}
+          >
+            {Y_AXIS_RANGE_MODE_DETAILS[key].name}
+          </ToggleButton>
+        ))}
+      </ToggleButtonGroup>
       <div className={classes.yAxisRangeInnerContainer}>
         <div className={classes.yAxisRangeTextfieldContainer}>
           <TextField
@@ -426,12 +370,12 @@ const YAxisRangeOption = (props) => {
             inputProps={{ step }}
             InputLabelProps={{ shrink: true }}
             variant="outlined"
-            disabled={isAuto}
-            value={isAuto ? '' : selectedRange[1]}
+            disabled={!isCustom}
+            value={axisRange[1]}
             className={classes.yAxisRangeTextField}
             onChange={(event) => {
-              const range = [selectedRange[0], Math.min(event.target.value, rangeMax)];
-              dispatch({ type: 'selectYAxisRange', axis, range });
+              const range = [axisRange[0], Math.min(event.target.value, customMax)];
+              dispatch({ type: 'selectYAxisCustomRange', axis, range });
             }}
           />
           <TextField
@@ -441,55 +385,38 @@ const YAxisRangeOption = (props) => {
             inputProps={{ step }}
             InputLabelProps={{ shrink: true }}
             variant="outlined"
-            disabled={isAuto}
-            value={isAuto ? '' : selectedRange[0]}
+            disabled={!isCustom}
+            value={axisRange[0]}
             className={classes.yAxisRangeTextField}
             onChange={(event) => {
-              const range = [Math.max(event.target.value, rangeMin), selectedRange[1]];
-              dispatch({ type: 'selectYAxisRange', axis, range });
+              const range = [Math.max(event.target.value, customMin), axisRange[1]];
+              dispatch({ type: 'selectYAxisCustomRange', axis, range });
             }}
           />
-          <Button
-            color="primary"
-            variant="outlined"
-            className={classes.smallButton}
-            style={{ marginTop: Theme.spacing(1.5) }}
-            onClick={() => {
-              const range = [
-                Math.max(dataRange[0] - fixedStandardDeviation, 0),
-                dataRange[1] + fixedStandardDeviation,
-              ].map(r => parseFloat(r.toFixed(precision), 10));
-              dispatch({ type: 'selectYAxisRange', axis, range });
-            }}
-          >
-            <CenterIcon className={classes.smallButtonIcon} />
-            Center
-          </Button>
-          <div className={classes.centerButtonDescription}>
-            Fit around data by one standard deviation
+          {/* eslint-disable react/jsx-one-expression-per-line */}
+          <div className={classes.standardDeviation} title="Standard Deviation">
+            <i>{`${String.fromCharCode(963)}`}</i> = {`${standardDeviation}`}
           </div>
+          {/* eslint-enable react/jsx-one-expression-per-line */}
         </div>
         <NeonVerticalSlider
-          disabled={isAuto}
+          disabled={!isCustom}
+          style={{ display: isCustom ? 'inline-block' : 'none' }}
           step={step}
           marks={marks}
           orientation="vertical"
-          data-selenium="time-series-viewer.options.roll-period-slider"
-          ref={yAxisRangeSliderRef}
-          defaultValue={[...yAxisRangeSliderDefaults[axis].value]}
+          data-selenium={`time-series-viewer.options.${axis}-axis.range-slider`}
           valueLabelDisplay="auto"
-          min={rangeMin}
-          max={rangeMax}
+          min={customMin}
+          max={customMax}
+          value={[...axisRange]}
           onChange={(event, values) => {
-            applySliderValues(values);
-          }}
-          onChangeCommitted={(event, values) => {
             dispatch({
-              type: 'selectYAxisRange',
+              type: 'selectYAxisCustomRange',
               axis,
               range: [
-                Math.min(Math.max(values[0], rangeMin), rangeMax),
-                Math.min(Math.max(values[1], rangeMin), rangeMax),
+                Math.min(Math.max(values[0], customMin), customMax),
+                Math.min(Math.max(values[1], customMin), customMax),
               ],
             });
           }}

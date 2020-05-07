@@ -488,10 +488,8 @@ export default function TimeSeriesViewerGraph() {
       const stateAxis = axis.axis === 'y' ? 'y1' : 'y2';
       axesOption[axis.axis] = {
         independentTicks: true,
+        valueRange: state.selection.yAxes[stateAxis].axisRange,
       };
-      if (state.selection.yAxes[stateAxis].selectedRange !== 'auto') {
-        axesOption[axis.axis].valueRange = state.selection.yAxes[stateAxis].selectedRange;
-      }
     });
     return axesOption;
   };

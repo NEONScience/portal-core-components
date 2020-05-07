@@ -20,6 +20,32 @@ export namespace TIME_SERIES_VIEWER_STATUS_TITLES {
     const READY_1: null;
     export { READY_1 as READY };
 }
+export namespace Y_AXIS_RANGE_MODES {
+    export const FROM_ZERO: string;
+    export const CENTERED: string;
+    export const CUSTOM: string;
+}
+export namespace Y_AXIS_RANGE_MODE_DETAILS {
+    export namespace FROM_ZERO_1 {
+        export const name: string;
+        export const description: string;
+    }
+    export { FROM_ZERO_1 as FROM_ZERO };
+    export namespace CENTERED_1 {
+        const name_1: string;
+        export { name_1 as name };
+        const description_1: string;
+        export { description_1 as description };
+    }
+    export { CENTERED_1 as CENTERED };
+    export namespace CUSTOM_1 {
+        const name_2: string;
+        export { name_2 as name };
+        const description_2: string;
+        export { description_2 as description };
+    }
+    export { CUSTOM_1 as CUSTOM };
+}
 export namespace TabComponentPropTypes {
     export const setSelectedTab: PropTypes.Validator<(...args: any[]) => any>;
     export const TAB_IDS: PropTypes.Validator<{

@@ -810,6 +810,7 @@ function SelectedSite(props) {
         dispatch({ type: 'selectRemoveSite', siteCode });
       }}
       className={classes.smallButton}
+      style={{ minWidth: Theme.spacing(13) }}
       disabled={disabled}
     >
       <ClearIcon className={classes.smallButtonIcon} />

@@ -1,4 +1,9 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useState,
+  useRef,
+} from 'react';
 import PropTypes from 'prop-types';
 
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -97,8 +102,6 @@ const DateRangeSlider = withStyles({
   },
 })(Slider);
 
-let sliderDefault = [];
-
 const TimeSeriesViewerDateRange = (props) => {
   const classes = useStyles(Theme);
   const { dateRangeSliderRef } = props;
@@ -106,13 +109,32 @@ const TimeSeriesViewerDateRange = (props) => {
   const { sites: allSites } = neonContextData;
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
 
-  const currentRange = state.selection.dateRange;
+  const { dateRange: currentRange } = state.selection;
   const selectableRange = state.product.dateRange;
   const displayRange = state.product.continuousDateRange;
   const displayMin = 0;
   const displayMax = displayRange.length - 1;
   const sliderMin = displayRange.indexOf(selectableRange[0]);
   const sliderMax = displayRange.indexOf(selectableRange[1]);
+
+  const [activelySelectingDateRange, setActivelySelectingDateRange] = useState([...currentRange]);
+  const [activelySelecting, setActivelySelecting] = useState(false);
+  const sliderValue = activelySelectingDateRange.map((v, i) => (
+    displayRange.indexOf(activelySelectingDateRange[i] || currentRange[i])
+  ));
+  useEffect(() => {
+    if ((
+      currentRange[0] !== activelySelectingDateRange[0]
+        || currentRange[1] !== activelySelectingDateRange[1]
+    ) && !activelySelecting) {
+      setActivelySelectingDateRange([...currentRange]);
+    }
+  }, [
+    activelySelecting,
+    activelySelectingDateRange,
+    setActivelySelectingDateRange,
+    currentRange,
+  ]);
 
   // Derive site and availability values for the AvailabilityGrid
   const availabilityDateRange = { value: currentRange, validValues: selectableRange };
@@ -136,61 +158,6 @@ const TimeSeriesViewerDateRange = (props) => {
   });
   const svgHeight = SVG.CELL_PADDING
     + (SVG.CELL_HEIGHT + SVG.CELL_PADDING) * (selectedSites.length + 1);
-
-  // Function to apply changes to the slider's DOM as if it was controlled by state.
-  // We can't control in state because doing so makes drag experience jerky and frustrating.
-  // By not controlling the slider with state we can maintain a fluid experience and need
-  // only this bit of logic (with a ref to the slider's DOM node) to keep the slider
-  // DOM in sync as if it was controlled directly.
-  const applySliderValues = useCallback((values) => {
-    if (!Array.isArray(values) || values.length !== 2
-        || !displayRange[values[0]] || !displayRange[values[1]]
-        || values[0] > values[1]) {
-      return;
-    }
-    const limited = [Math.max(values[0], sliderMin), Math.min(values[1], sliderMax)];
-
-    // Derive new percentage values for left and width styles of slider DOM elements
-    const newLefts = displayMax ? [
-      `${(limited[0] / displayMax) * 100}%`,
-      `${(limited[1] / displayMax) * 100}%`,
-    ] : ['0%', '100%'];
-
-    // Apply values to Slider DOM hidden input
-    dateRangeSliderRef.current
-      .querySelector('input[type="hidden"]').setAttribute('value', limited.join(','));
-
-    // Apply values to slider drag handles
-    [0, 1].forEach((idx) => {
-      dateRangeSliderRef.current
-        .querySelector(`span[role="slider"][data-index="${idx}"]`)
-        .setAttribute('aria-valuenow', limited[idx].toString());
-      dateRangeSliderRef.current
-        .querySelector(`span[role="slider"][data-index="${idx}"]`)
-        .style.left = newLefts[idx];
-      dateRangeSliderRef.current
-        .querySelector(`span[role="slider"][data-index="${idx}"] > span > span > span`)
-        .innerText = displayRange[limited[idx]];
-    });
-
-    // Apply values to slider track between drag handles
-    const newTrackWidth = `${((limited[1] - limited[0]) / (displayMax)) * 100}%`;
-    dateRangeSliderRef.current.querySelector('.MuiSlider-track').style.width = newTrackWidth;
-    // eslint-disable-next-line prefer-destructuring
-    dateRangeSliderRef.current.querySelector('.MuiSlider-track').style.left = newLefts[0];
-  }, [dateRangeSliderRef, displayRange, displayMax, sliderMin, sliderMax]);
-
-  useEffect(() => {
-    if (!dateRangeSliderRef.current) { return; }
-    const sliderValues = dateRangeSliderRef.current.querySelector('input[type="hidden"]').value;
-    const compareValues = [
-      currentRange[0] === null ? sliderMin : displayRange.indexOf(currentRange[0]),
-      currentRange[1] === null ? sliderMax : displayRange.indexOf(currentRange[1]),
-    ];
-    if (sliderValues !== compareValues.join(',')) {
-      applySliderValues(compareValues);
-    }
-  }, [dateRangeSliderRef, currentRange, displayRange, sliderMin, sliderMax, applySliderValues]);
 
   // Set up AvailabilityGrid
   const setDateRangeValue = useCallback(dateRange => dispatch({
@@ -270,15 +237,6 @@ const TimeSeriesViewerDateRange = (props) => {
     dispatch({ type: 'selectDateRange', dateRange });
   };
 
-  // Only set slider defaults on the initial render
-  if (!Object.isFrozen(sliderDefault)) {
-    sliderDefault = [
-      displayRange.indexOf(currentRange[0]),
-      displayRange.indexOf(currentRange[1]),
-    ];
-    Object.freeze(sliderDefault);
-  }
-
   return (
     <React.Fragment>
       <div style={{ marginBottom: Theme.spacing(2) }}>
@@ -317,16 +275,21 @@ const TimeSeriesViewerDateRange = (props) => {
         <DateRangeSlider
           data-selenium="time-series-viewer.date-range.slider"
           ref={dateRangeSliderRef}
-          defaultValue={[...sliderDefault]}
+          value={sliderValue}
           valueLabelDisplay="auto"
           min={displayMin}
           max={displayMax}
           marks={marks}
           valueLabelFormat={x => displayRange[x]}
+          onMouseDown={() => { setActivelySelecting(true); }}
           onChange={(event, values) => {
-            applySliderValues(values);
+            setActivelySelectingDateRange([
+              Math.max(values[0], sliderMin),
+              Math.min(values[1], sliderMax),
+            ].map(x => displayRange[x]));
           }}
           onChangeCommitted={(event, values) => {
+            setActivelySelecting(false);
             dispatch({
               type: 'selectDateRange',
               dateRange: [

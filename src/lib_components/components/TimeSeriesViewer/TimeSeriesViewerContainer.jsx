@@ -30,6 +30,7 @@ import TimeSeriesViewerContext, {
   summarizeTimeSteps,
   TIME_SERIES_VIEWER_STATUS,
   TIME_SERIES_VIEWER_STATUS_TITLES,
+  Y_AXIS_RANGE_MODE_DETAILS,
 } from './TimeSeriesViewerContext';
 import TimeSeriesViewerSites from './TimeSeriesViewerSites';
 import TimeSeriesViewerDateRange from './TimeSeriesViewerDateRange';
@@ -307,9 +308,8 @@ function TimeSeriesViewerSummary() {
     if (yAxes[yAxis].units !== null) {
       axes[yAxis].push({ title: 'Scale', value: logscale ? 'Logarithmic' : 'Linear' });
       axes[yAxis].push({ title: 'Units', value: yAxes[yAxis].units });
-      const range = yAxes[yAxis].selectedRange === 'auto' ? 'Auto' : (
-        `${yAxes[yAxis].selectedRange[0].toString()} – ${yAxes[yAxis].selectedRange[1].toString()} ${yAxes[yAxis].units}`
-      );
+      const rangeMode = Y_AXIS_RANGE_MODE_DETAILS[yAxes[yAxis].rangeMode].name;
+      const range = `${rangeMode} (${yAxes[yAxis].axisRange[0].toString()} – ${yAxes[yAxis].axisRange[1].toString()} ${yAxes[yAxis].units})`;
       axes[yAxis].push({ title: 'Range', value: range });
     }
   });

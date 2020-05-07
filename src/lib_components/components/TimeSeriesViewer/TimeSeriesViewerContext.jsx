@@ -58,6 +58,45 @@ export const TIME_SERIES_VIEWER_STATUS_TITLES = {
   READY: null,
 };
 
+// Keys, details, and supporting functions for all possible Y-axis range modes
+export const Y_AXIS_RANGE_MODES = {
+  FROM_ZERO: 'FROM_ZERO',
+  CENTERED: 'CENTERED',
+  CUSTOM: 'CUSTOM',
+};
+export const Y_AXIS_RANGE_MODE_DETAILS = {
+  FROM_ZERO: {
+    name: 'From Zero',
+    description: 'Range from zero to one standard deviation above data',
+  },
+  CENTERED: {
+    name: 'Centered',
+    description: 'Center data by one standard deviation above and below',
+  },
+  CUSTOM: {
+    name: 'Custom',
+    description: 'Manually define a minimum and maximum axis range',
+  },
+};
+const generateYAxisRange = (axis = {}) => {
+  const {
+    rangeMode,
+    dataRange = [0, 0],
+    standardDeviation = 0,
+    precision = 0,
+    axisRange,
+  } = axis;
+  if (
+    !Object.keys(Y_AXIS_RANGE_MODES).includes(rangeMode)
+      || !Number.isFinite(standardDeviation)
+      || !Number.isFinite(precision)) { return axisRange; }
+  const low = Math.max((dataRange[0] || 0) - standardDeviation, 0);
+  const high = (dataRange[1] || 0) + standardDeviation;
+  if (rangeMode === Y_AXIS_RANGE_MODES.FROM_ZERO) { return [0, high]; }
+  if (rangeMode === Y_AXIS_RANGE_MODES.CENTERED) { return [low, high]; }
+  return axisRange;
+};
+
 // Functions to convert a value to the proper JS data type given a NEON variable dataType
 const castFloat = (v) => {
   const cast = parseFloat(v, 10);
@@ -89,8 +128,10 @@ const DEFAULT_AXIS_STATE = {
   units: null,
   logscale: false,
   dataRange: [null, null],
+  precision: 0,
   standardDeviation: 0,
-  selectedRange: 'auto',
+  rangeMode: Y_AXIS_RANGE_MODES.FROM_ZERO,
+  axisRange: [0, 0],
 };
 const DEFAULT_STATE = {
   status: TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT,
@@ -452,7 +493,15 @@ const parseSeriesData = (csv, variables) => {
   const fields = [];
   const rows = csv.split('\n');
   if (!rows.length) { return series; }
-  rows[0].split(',').forEach((fieldName) => {
+  // Our variables list is from the most recent month. Sometimes older months have variables that
+  // are no longer around. Ultimately it would be best to proactively pull and display these, but
+  // for now we ignore any series that we don't already have variable info on.
+  const skipIndexes = [];
+  rows[0].split(',').forEach((fieldName, idx) => {
+    if (!variables[fieldName]) {
+      skipIndexes.push(idx);
+      return;
+    }
     const { dataType } = variables[fieldName];
     const field = {
       fieldName,
@@ -470,19 +519,21 @@ const parseSeriesData = (csv, variables) => {
   rows.slice(1).forEach((row) => {
     if (!row.length) { return; }
     const values = row.split(',');
-    values.forEach((value, idx) => {
-      const typedValue = fields[idx].setType(value);
-      series[fields[idx].fieldName].data.push(typedValue);
-      // Don't bother updating the range for non-numerical series and quality flags
-      if (typeof typedValue === 'number' && !/QF$/.test(fields[idx].fieldName)) {
-        series[fields[idx].fieldName].range = getUpdatedValueRange(
-          series[fields[idx].fieldName].range,
-          typedValue,
-        );
-        series[fields[idx].fieldName].sum += typedValue;
-        series[fields[idx].fieldName].count += 1;
-      }
-    });
+    values
+      .filter((value, idx) => !skipIndexes.includes(idx))
+      .forEach((value, idx) => {
+        const typedValue = fields[idx].setType(value);
+        series[fields[idx].fieldName].data.push(typedValue);
+        // Don't bother updating the range for non-numerical series and quality flags
+        if (typeof typedValue === 'number' && !/QF$/.test(fields[idx].fieldName)) {
+          series[fields[idx].fieldName].range = getUpdatedValueRange(
+            series[fields[idx].fieldName].range,
+            typedValue,
+          );
+          series[fields[idx].fieldName].sum += typedValue;
+          series[fields[idx].fieldName].count += 1;
+        }
+      });
   });
   // Loop across all numeric non-quality-flag series again to calculate series variance
   Object.keys(series)
@@ -600,13 +651,20 @@ const applyDefaultsToSelection = (state) => {
       });
     });
     if (combinedCount > 0) {
+      const dataRangeMax = selection.yAxes[yAxis].dataRange[1];
+      const precision = Math.abs(Math.floor(Math.min(Math.log10(dataRangeMax), 0)))
+        + (Math.log10(dataRangeMax) >= 2 ? 0 : 2);
       const combinedMean = combinedSum / combinedCount;
       const deviations = monthMeans.map(mean => mean - combinedMean);
-      selection.yAxes[yAxis].standardDeviation = (
+      const standardDeviation = (
         monthVariances.reduce((sum, variance, idx) => (
           monthCounts[idx] * (variance + (deviations[idx] ** 2))
         ), 0) / combinedCount
       ) ** 0.5;
+      const fixedStandardDeviation = parseFloat(standardDeviation.toFixed(precision), 10);
+      selection.yAxes[yAxis].precision = precision;
+      selection.yAxes[yAxis].standardDeviation = fixedStandardDeviation;
+      selection.yAxes[yAxis].axisRange = generateYAxisRange(selection.yAxes[yAxis]);
     }
   });
   // Generate a new digest for effect comparison
@@ -849,6 +907,7 @@ const reducer = (state, action) => {
     // Core Selection Actions
     case 'selectDateRange':
       newState.selection.dateRange = action.dateRange;
+      newState.selection.activelySelectingDateRange = action.dateRange;
       calcSelection();
       calcStatus();
       return newState;
@@ -878,6 +937,27 @@ const reducer = (state, action) => {
       calcStatus();
       return newState;
 
+    case 'selectYAxisRangeMode':
+      if (
+        !state.selection.yAxes[action.axis]
+          || !Object.keys(Y_AXIS_RANGE_MODES).includes(action.mode)
+      ) { return state; }
+      newState.selection.yAxes[action.axis].rangeMode = action.mode;
+      if (action.mode !== Y_AXIS_RANGE_MODES.CUSTOM) {
+        newState.selection.yAxes[action.axis].axisRange = generateYAxisRange(
+          newState.selection.yAxes[action.axis],
+        );
+      }
+      return newState;
+    case 'selectYAxisCustomRange':
+      if (!state.selection.yAxes[action.axis]) { return state; }
+      if (!(
+        Array.isArray(action.range) && action.range.length === 2
+          && action.range.every(v => typeof v === 'number')
+          && action.range[0] < action.range[1]
+      )) { return state; }
+      newState.selection.yAxes[action.axis].axisRange = action.range;
+      return newState;
     /*
     // This action works in state but dygraphs does not currently support per-axis logscale. =(
     case 'selectYAxisScale':
@@ -934,6 +1014,7 @@ const reducer = (state, action) => {
       if (!state.selection.sites.some(site => site.siteCode === action.siteCode)) { return state; }
       newState.selection.sites = newState.selection.sites
         .filter(site => site.siteCode !== action.siteCode);
+      calcSelection();
       calcStatus();
       return newState;
     case 'selectSitePositions':
@@ -944,19 +1025,8 @@ const reducer = (state, action) => {
         Object.keys(state.product.sites[action.siteCode].positions).includes(p)
       ))) { return state; }
       newState.selection.sites[selectedSiteIdx].positions = [...action.positions];
+      calcSelection();
       calcStatus();
-      return newState;
-
-    case 'selectYAxisRange':
-      if (!state.selection.yAxes[action.axis]) { return state; }
-      if (
-        action.range !== 'auto'
-          && !(
-            Array.isArray(action.range) && action.range.length === 2
-              && action.range.every(v => typeof v === 'number')
-          )
-      ) { return state; }
-      newState.selection.yAxes[action.axis].selectedRange = action.range;
       return newState;
 
     // Default
