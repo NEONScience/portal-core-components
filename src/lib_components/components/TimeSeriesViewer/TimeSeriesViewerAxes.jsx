@@ -1,5 +1,7 @@
-import React, { useRef, useCallback, useLayoutEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+
+import { debounce } from 'lodash';
 
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -49,9 +51,16 @@ const useStyles = makeStyles(theme => ({
     color: '#fff !important',
     backgroundColor: `${theme.palette.primary.main} !important`,
   },
+  yAxesRangesContainer: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    flexWrap: 'wrap',
+  },
   yAxisRangeOuterContainer: {
     width: '100%',
     marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(4),
   },
   yAxisRangeInnerContainer: {
     height: theme.spacing(15),
@@ -304,6 +313,23 @@ const YAxisRangeOption = (props) => {
     },
   } = state;
 
+  // Local state for the range min/max as we change it. This lets us change the range with
+  // controlled components without having to send all updates through the main context reducer,
+  // which would otherwise result in poor performance in some places and inability to make changes
+  // we'd expect to be able to make in others.
+  const [activeRange, setActiveRange] = useState([...axisRange]);
+  const [isActivelySetting, setIsActivelySetting] = useState(false);
+  useEffect(() => {
+    if (
+      (axisRange[0] !== activeRange[0] || axisRange[1] !== activeRange[1]) && !isActivelySetting
+    ) { setActiveRange([...axisRange]); }
+  }, [
+    axisRange,
+    activeRange,
+    isActivelySetting,
+    setActiveRange,
+  ]);
+
   const render = units && dataRange[0] !== null && dataRange[1] !== null;
 
   const isCustom = rangeMode === Y_AXIS_RANGE_MODES.CUSTOM;
@@ -323,6 +349,19 @@ const YAxisRangeOption = (props) => {
     customMax,
   ].map(m => ({ value: m, label: m.toFixed(precision) }));
   const step = 10 ** (-1 * precision);
+
+  // Debounce onchange functions for the text inputs so that we can type incomplete numbers
+  // without immediately being corrected by the main context recuder.
+  const setMax = (value) => {
+    const range = [axisRange[0], Math.min(value, customMax)];
+    dispatch({ type: 'selectYAxisCustomRange', axis, range });
+  };
+  const setMin = (value) => {
+    const range = [Math.max(value, customMin), axisRange[1]];
+    dispatch({ type: 'selectYAxisCustomRange', axis, range });
+  };
+  const debounceSetMax = debounce((value) => { setMax(value); }, 200);
+  const debounceSetMin = debounce((value) => { setMin(value); }, 200);
 
   return !render ? (
     <div className={classes.yAxisRangeOuterContainer}>
@@ -355,7 +394,7 @@ const YAxisRangeOption = (props) => {
             value={key}
             size="small"
             className={classNames[rangeMode !== key ? 'deselected' : 'selected']}
-            title={Y_AXIS_RANGE_MODE_DETAILS[key].name}
+            title={Y_AXIS_RANGE_MODE_DETAILS[key].description}
           >
             {Y_AXIS_RANGE_MODE_DETAILS[key].name}
           </ToggleButton>
@@ -371,11 +410,16 @@ const YAxisRangeOption = (props) => {
             InputLabelProps={{ shrink: true }}
             variant="outlined"
             disabled={!isCustom}
-            value={axisRange[1]}
+            value={activeRange[1]}
             className={classes.yAxisRangeTextField}
+            onFocus={() => { setIsActivelySetting(true); }}
+            onBlur={(event) => {
+              setMax(event.target.value);
+              setIsActivelySetting(false);
+            }}
             onChange={(event) => {
-              const range = [axisRange[0], Math.min(event.target.value, customMax)];
-              dispatch({ type: 'selectYAxisCustomRange', axis, range });
+              setActiveRange([activeRange[0], event.target.value]);
+              debounceSetMax(event.target.value);
             }}
           />
           <TextField
@@ -386,11 +430,16 @@ const YAxisRangeOption = (props) => {
             InputLabelProps={{ shrink: true }}
             variant="outlined"
             disabled={!isCustom}
-            value={axisRange[0]}
+            value={activeRange[0]}
             className={classes.yAxisRangeTextField}
+            onFocus={() => { setIsActivelySetting(true); }}
+            onBlur={(event) => {
+              setMin(event.target.value);
+              setIsActivelySetting(false);
+            }}
             onChange={(event) => {
-              const range = [Math.max(event.target.value, customMin), axisRange[1]];
-              dispatch({ type: 'selectYAxisCustomRange', axis, range });
+              setActiveRange([event.target.value, activeRange[1]]);
+              debounceSetMin(event.target.value);
             }}
           />
           {/* eslint-disable react/jsx-one-expression-per-line */}
@@ -430,10 +479,8 @@ YAxisRangeOption.propTypes = PropTypes.oneOf(['y1', 'y2']).isRequired;
 /**
    x Axis - Roll Period Option
 */
-let rollPeriodSliderDefault = { value: 1 };
 const RollPeriodOption = () => {
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
-  const rollPeriodSliderRef = useRef(null);
 
   const { selection } = state;
   const {
@@ -449,6 +496,21 @@ const RollPeriodOption = () => {
   const rollMin = 1;
   const rollMax = Math.floor(Math.max(dateRangeMonths * rollStepsPerMonth, currentRollPeriod) / 4);
 
+  // Local state for the slider value as we change it. This lets us change the value with a
+  // controlled slider component without having to send all updates through the main context reducer
+  const [activeRollPeriod, setActiveRollPeriod] = useState(currentRollPeriod);
+  const [isActivelySetting, setIsActivelySetting] = useState(false);
+  useEffect(() => {
+    if (activeRollPeriod !== currentRollPeriod && !isActivelySetting) {
+      setActiveRollPeriod(currentRollPeriod);
+    }
+  }, [
+    activeRollPeriod,
+    currentRollPeriod,
+    isActivelySetting,
+    setActiveRollPeriod,
+  ]);
+
   // Determine slider marks
   const interimMarks = (rollMax - rollMin) < 8 ? 2 : 3;
   const markValues = [1];
@@ -458,35 +520,6 @@ const RollPeriodOption = () => {
   markValues.push(rollMax);
   const marks = markValues.map(m => ({ value: m, label: summarizeTimeSteps(m, currentTimeStep) }));
 
-  // Function to apply changes to the slider's DOM as if it was controlled by state.
-  // We can't control in state because doing so makes drag experience jerky and frustrating.
-  // By not controlling the slider with state we can maintain a fluid experience and need
-  // only this bit of logic (with a ref to the slider's DOM node) to keep the slider
-  // DOM in sync as if it was controlled directly.
-  const applySliderValue = useCallback((value) => {
-    if (!parseInt(value, 10)) { return; }
-    const currentValue = Math.min(Math.max(value, rollMin), rollMax);
-    // Apply value to Slider DOM hidden input
-    rollPeriodSliderRef.current
-      .querySelector('input[type="hidden"]').setAttribute('value', currentValue);
-    // Apply value to slider drag handle
-    rollPeriodSliderRef.current.querySelector('span[role="slider"]')
-      .setAttribute('aria-valuenow', currentValue.toString());
-    // Apply value to slider track up to drag handle
-    const newTrackWidth = `${(currentValue - 1) / (rollMax - 1) * 100}%`;
-    rollPeriodSliderRef.current.querySelector('.MuiSlider-track').style.width = newTrackWidth;
-  }, [rollPeriodSliderRef, rollMin, rollMax]);
-
-  useLayoutEffect(() => {
-    if (!rollPeriodSliderRef.current) { return; }
-    const sliderValue = rollPeriodSliderRef.current.querySelector('input[type="hidden"]').value;
-    if (sliderValue !== currentRollPeriod) { applySliderValue(currentRollPeriod); }
-  }, [rollPeriodSliderRef, currentRollPeriod, rollMin, rollMax, applySliderValue]);
-
-  if (!Object.isFrozen(rollPeriodSliderDefault)) {
-    rollPeriodSliderDefault = { value: currentRollPeriod };
-    Object.freeze(rollPeriodSliderDefault);
-  }
   return !currentTimeStep ? (
     <Skeleton variant="rect" width="100%" height={56} />
   ) : (
@@ -494,16 +527,17 @@ const RollPeriodOption = () => {
       <NeonSlider
         marks={marks}
         data-selenium="time-series-viewer.options.roll-period-slider"
-        ref={rollPeriodSliderRef}
-        defaultValue={rollPeriodSliderDefault.value}
+        value={activeRollPeriod}
         valueLabelDisplay="auto"
         valueLabelFormat={x => summarizeTimeSteps(x, currentTimeStep)}
         min={rollMin}
         max={rollMax}
+        onMouseDown={() => { setIsActivelySetting(true); }}
         onChange={(event, value) => {
-          applySliderValue(value);
+          setActiveRollPeriod(Math.min(Math.max(value, rollMin), rollMax));
         }}
         onChangeCommitted={(event, value) => {
+          setIsActivelySetting(false);
           dispatch({
             type: 'setRollPeriod',
             rollPeriod: Math.min(Math.max(value, rollMin), rollMax),
@@ -586,6 +620,7 @@ const OPTIONS = {
    Main Component
 */
 export default function TimeSeriesViewerAxes() {
+  const classes = useStyles(Theme);
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const { selection } = state;
   const renderOption = (key) => {
@@ -600,7 +635,7 @@ export default function TimeSeriesViewerAxes() {
       description = rawDescription.replace('{units}', selection.yAxes[axis].units);
     }
     return (
-      <React.Fragment>
+      <div>
         <Typography variant="subtitle2">{title}</Typography>
         <Typography variant="caption" style={{ color: Theme.palette.grey[400] }}>
           {description}
@@ -608,20 +643,22 @@ export default function TimeSeriesViewerAxes() {
         <div style={{ width: '100%', marginTop: Theme.spacing(1) }}>
           <Component />
         </div>
-      </React.Fragment>
+      </div>
     );
   };
   const hasY2Axis = selection.yAxes.y2.units !== null;
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>y Axes</Typography>
-      <Grid container spacing={2} style={{ marginBottom: Theme.spacing(3) }}>
-        <Grid item xs={12}>{renderOption('Y_AXIS_SCALE')}</Grid>
-        <Grid item xs={12} md={hasY2Axis ? 6 : 12}>{renderOption('Y1_AXIS_RANGE')}</Grid>
-        {!hasY2Axis ? null : (
-          <Grid item xs={12} md={6}>{renderOption('Y2_AXIS_RANGE')}</Grid>
-        )}
-      </Grid>
+      <div style={{ marginBottom: Theme.spacing(3) }}>
+        {renderOption('Y_AXIS_SCALE')}
+      </div>
+      <div className={classes.yAxesRangesContainer}>
+        <div style={!hasY2Axis ? null : { marginRight: Theme.spacing(3) }}>
+          {renderOption('Y1_AXIS_RANGE')}
+        </div>
+        {!hasY2Axis ? null : renderOption('Y2_AXIS_RANGE')}
+      </div>
       <Typography variant="h6" gutterBottom>x Axis (Time)</Typography>
       <Grid container spacing={2}>
         {!state.availableTimeSteps.size < 3 ? null : (

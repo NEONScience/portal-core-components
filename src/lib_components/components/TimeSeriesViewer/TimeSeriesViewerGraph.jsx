@@ -486,10 +486,12 @@ export default function TimeSeriesViewerGraph() {
     };
     axes.forEach((axis) => {
       const stateAxis = axis.axis === 'y' ? 'y1' : 'y2';
-      axesOption[axis.axis] = {
-        independentTicks: true,
-        valueRange: state.selection.yAxes[stateAxis].axisRange,
-      };
+      const { axisRange, precision } = state.selection.yAxes[stateAxis];
+      const nonZeroFloor = parseFloat((10 ** (-1 * (precision + 1))).toFixed(precision + 1), 10);
+      const valueRange = state.selection.logscale
+        ? [axisRange[0] === 0 ? nonZeroFloor : axisRange[0], axisRange[1]]
+        : [...axisRange];
+      axesOption[axis.axis] = { independentTicks: true, valueRange };
     });
     return axesOption;
   };
