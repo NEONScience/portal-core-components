@@ -652,8 +652,10 @@ const applyDefaultsToSelection = (state) => {
     });
     if (combinedCount > 0) {
       const dataRangeMax = selection.yAxes[yAxis].dataRange[1];
-      const precision = Math.abs(Math.floor(Math.min(Math.log10(dataRangeMax), 0)))
-        + (Math.log10(dataRangeMax) >= 2 ? 0 : 2);
+      const precision = dataRangeMax === null || dataRangeMax <= 0 ? 0 : (
+        Math.abs(Math.floor(Math.min(Math.log10(dataRangeMax), 0)))
+          + (Math.log10(dataRangeMax) >= 2 ? 0 : 2)
+      );
       const combinedMean = combinedSum / combinedCount;
       const deviations = monthMeans.map(mean => mean - combinedMean);
       const standardDeviation = (

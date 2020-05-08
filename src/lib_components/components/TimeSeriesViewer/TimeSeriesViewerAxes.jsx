@@ -5,7 +5,6 @@ import { debounce } from 'lodash';
 
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
 import Slider from '@material-ui/core/Slider';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
@@ -25,6 +24,12 @@ import TimeSeriesViewerContext, {
 } from './TimeSeriesViewerContext';
 
 const useStyles = makeStyles(theme => ({
+  optionsContainer: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    flexWrap: 'wrap',
+  },
   smallButton: {
     fontSize: '0.8rem',
     padding: theme.spacing(0.125, 0.75),
@@ -61,6 +66,7 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(4),
+    minWidth: theme.spacing(33), // to accomodate button group
   },
   yAxisRangeInnerContainer: {
     height: theme.spacing(15),
@@ -246,7 +252,7 @@ const YAxisScaleOption = () => {
     deselected: classes.optionButton,
   };
   return (
-    <React.Fragment>
+    <div style={{ minWidth: Theme.spacing(21.5) }}>
       <ToggleButtonGroup
         exclusive
         color="primary"
@@ -287,7 +293,7 @@ const YAxisScaleOption = () => {
           Swap Y Axes
         </Button>
       )}
-    </React.Fragment>
+    </div>
   );
 };
 
@@ -341,7 +347,7 @@ const YAxisRangeOption = (props) => {
   );
 
   // Determine slider marks
-  const marks = [
+  const marks = customMin === customMax ? [] : [
     customMin,
     (customMax - customMin) * 0.25,
     (customMax - customMin) * 0.5,
@@ -523,7 +529,7 @@ const RollPeriodOption = () => {
   return !currentTimeStep ? (
     <Skeleton variant="rect" width="100%" height={56} />
   ) : (
-    <div style={{ width: '100%' }}>
+    <div style={{ width: '100%', minWidth: Theme.spacing(40) }}>
       <NeonSlider
         marks={marks}
         data-selenium="time-series-viewer.options.roll-period-slider"
@@ -648,24 +654,30 @@ export default function TimeSeriesViewerAxes() {
   };
   const hasY2Axis = selection.yAxes.y2.units !== null;
   return (
-    <React.Fragment>
-      <Typography variant="h6" gutterBottom>y Axes</Typography>
-      <div style={{ marginBottom: Theme.spacing(3) }}>
-        {renderOption('Y_AXIS_SCALE')}
-      </div>
-      <div className={classes.yAxesRangesContainer}>
-        <div style={!hasY2Axis ? null : { marginRight: Theme.spacing(3) }}>
-          {renderOption('Y1_AXIS_RANGE')}
+    <div className={classes.optionsContainer}>
+      <div style={{ marginRight: Theme.spacing(5) }}>
+        <Typography variant="h6" gutterBottom>y Axes</Typography>
+        <div className={classes.optionsContainer}>
+          <div style={{ marginBottom: Theme.spacing(3), marginRight: Theme.spacing(3) }}>
+            {renderOption('Y_AXIS_SCALE')}
+          </div>
+          <div className={classes.yAxesRangesContainer}>
+            <div style={!hasY2Axis ? null : { marginRight: Theme.spacing(3) }}>
+              {renderOption('Y1_AXIS_RANGE')}
+            </div>
+            {!hasY2Axis ? null : renderOption('Y2_AXIS_RANGE')}
+          </div>
         </div>
-        {!hasY2Axis ? null : renderOption('Y2_AXIS_RANGE')}
       </div>
-      <Typography variant="h6" gutterBottom>x Axis (Time)</Typography>
-      <Grid container spacing={2}>
-        {!state.availableTimeSteps.size < 3 ? null : (
-          <Grid item xs={12} lg={4} xl={3}>{renderOption('TIME_STEP')}</Grid>
-        )}
-        <Grid item xs={12} lg={8} xl={9}>{renderOption('ROLL_PERIOD')}</Grid>
-      </Grid>
-    </React.Fragment>
+      <div>
+        <Typography variant="h6" gutterBottom>x Axis (Time)</Typography>
+        <div className={classes.optionsContainer}>
+          {state.availableTimeSteps.size < 3 ? null : (
+            <div style={{ marginRight: Theme.spacing(3) }}>{renderOption('TIME_STEP')}</div>
+          )}
+          {renderOption('ROLL_PERIOD')}
+        </div>
+      </div>
+    </div>
   );
 }

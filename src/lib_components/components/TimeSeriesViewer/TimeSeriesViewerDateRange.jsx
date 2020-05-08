@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
 
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
-import Grid from '@material-ui/core/Grid';
 import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
 
@@ -36,6 +35,17 @@ const useStyles = makeStyles(() => ({
   svg: {
     minWidth: `${svgMinWidth}px`,
     minHeight: `${svgMinHeight}px`,
+  },
+  optionsContainer: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    flexWrap: 'wrap',
+  },
+  optionContainer: {
+    marginRight: Theme.spacing(5),
+    flexGrow: 1,
+    flexBasis: 0.5,
   },
 }));
 
@@ -237,73 +247,76 @@ const TimeSeriesViewerDateRange = (props) => {
     dispatch({ type: 'selectDateRange', dateRange });
   };
 
+  // style={{ display: 'flex', justifyContent: 'center' }}
   return (
-    <React.Fragment>
-      <div style={{ marginBottom: Theme.spacing(2) }}>
-        <MuiPickersUtilsProvider utils={MomentUtils}>
-          <Grid container spacing={2} style={{ marginBottom: Theme.spacing(1) }}>
-            <Grid item xs={12} sm={6} style={{ display: 'flex', justifyContent: 'center' }}>
-              <DatePicker
-                data-selenium="time-series-viewer.date-range.start-input"
-                inputVariant="outlined"
-                margin="dense"
-                value={getYearMonthMoment(currentRange[0] || displayRange[sliderMin])}
-                onChange={value => handleChangeDatePicker(0, value)}
-                views={['month', 'year']}
-                label="Start"
-                openTo="month"
-                minDate={getYearMonthMoment(displayRange[sliderMin], 10)}
-                maxDate={getYearMonthMoment(currentRange[1] || displayRange[sliderMax], 20)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6} style={{ display: 'flex', justifyContent: 'center' }}>
-              <DatePicker
-                data-selenium="time-series-viewer.date-range.end-input"
-                inputVariant="outlined"
-                margin="dense"
-                value={getYearMonthMoment(currentRange[1] || displayRange[sliderMax])}
-                onChange={value => handleChangeDatePicker(1, value)}
-                views={['month', 'year']}
-                label="End"
-                openTo="month"
-                minDate={getYearMonthMoment(currentRange[0] || displayRange[sliderMin], 10)}
-                maxDate={getYearMonthMoment(displayRange[sliderMax], 20)}
-              />
-            </Grid>
-          </Grid>
-        </MuiPickersUtilsProvider>
-        <DateRangeSlider
-          data-selenium="time-series-viewer.date-range.slider"
-          ref={dateRangeSliderRef}
-          value={sliderValue}
-          valueLabelDisplay="auto"
-          min={displayMin}
-          max={displayMax}
-          marks={marks}
-          valueLabelFormat={x => displayRange[x]}
-          onMouseDown={() => { setActivelySelecting(true); }}
-          onChange={(event, values) => {
-            setActivelySelectingDateRange([
-              Math.max(values[0], sliderMin),
-              Math.min(values[1], sliderMax),
-            ].map(x => displayRange[x]));
-          }}
-          onChangeCommitted={(event, values) => {
-            setActivelySelecting(false);
-            dispatch({
-              type: 'selectDateRange',
-              dateRange: [
+    <div className={classes.optionsContainer}>
+      <div className={classes.optionContainer}>
+        <Typography variant="h6" gutterBottom>Select by Date</Typography>
+        <div style={{ marginBottom: Theme.spacing(2) }}>
+          <MuiPickersUtilsProvider utils={MomentUtils}>
+            <div className={classes.optionsContainer} style={{ marginBottom: Theme.spacing(1) }}>
+              <div style={{ marginRight: Theme.spacing(3) }}>
+                <DatePicker
+                  data-selenium="time-series-viewer.date-range.start-input"
+                  inputVariant="outlined"
+                  margin="dense"
+                  value={getYearMonthMoment(currentRange[0] || displayRange[sliderMin])}
+                  onChange={value => handleChangeDatePicker(0, value)}
+                  views={['month', 'year']}
+                  label="Start"
+                  openTo="month"
+                  minDate={getYearMonthMoment(displayRange[sliderMin], 10)}
+                  maxDate={getYearMonthMoment(currentRange[1] || displayRange[sliderMax], 20)}
+                />
+              </div>
+              <div>
+                <DatePicker
+                  data-selenium="time-series-viewer.date-range.end-input"
+                  inputVariant="outlined"
+                  margin="dense"
+                  value={getYearMonthMoment(currentRange[1] || displayRange[sliderMax])}
+                  onChange={value => handleChangeDatePicker(1, value)}
+                  views={['month', 'year']}
+                  label="End"
+                  openTo="month"
+                  minDate={getYearMonthMoment(currentRange[0] || displayRange[sliderMin], 10)}
+                  maxDate={getYearMonthMoment(displayRange[sliderMax], 20)}
+                />
+              </div>
+            </div>
+          </MuiPickersUtilsProvider>
+          <DateRangeSlider
+            data-selenium="time-series-viewer.date-range.slider"
+            ref={dateRangeSliderRef}
+            value={sliderValue}
+            valueLabelDisplay="auto"
+            min={displayMin}
+            max={displayMax}
+            marks={marks}
+            valueLabelFormat={x => displayRange[x]}
+            style={{ minWidth: Theme.spacing(40) }}
+            onMouseDown={() => { setActivelySelecting(true); }}
+            onChange={(event, values) => {
+              setActivelySelectingDateRange([
                 Math.max(values[0], sliderMin),
                 Math.min(values[1], sliderMax),
-              ].map(x => displayRange[x]),
-            });
-          }}
-        />
+              ].map(x => displayRange[x]));
+            }}
+            onChangeCommitted={(event, values) => {
+              setActivelySelecting(false);
+              dispatch({
+                type: 'selectDateRange',
+                dateRange: [
+                  Math.max(values[0], sliderMin),
+                  Math.min(values[1], sliderMax),
+                ].map(x => displayRange[x]),
+              });
+            }}
+          />
+        </div>
       </div>
-      <div style={{ position: 'relative' }}>
-        <Typography variant="subtitle1" style={{ fontWeight: 600, marginBottom: Theme.spacing(1) }}>
-          Select by Data Product Availability
-        </Typography>
+      <div className={classes.optionContainer} style={{ minWidth: Theme.spacing(50) }}>
+        <Typography variant="h6" gutterBottom>Select by Data Product Availability</Typography>
         <FullWidthVisualization
           vizRef={svgRef}
           handleRedraw={handleSvgRedraw}
@@ -316,7 +329,7 @@ const TimeSeriesViewerDateRange = (props) => {
         </FullWidthVisualization>
         <AvailabilityLegend style={{ flexGrow: 1 }} />
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 

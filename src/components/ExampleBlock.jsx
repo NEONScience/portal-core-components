@@ -8,6 +8,7 @@ import Theme from '../lib_components/components/Theme/Theme';
 
 const useStyles = makeStyles(theme => ({
   root: {
+    maxWidth: 'unset !important',
     margin: theme.spacing(2, 0),
     padding: theme.spacing(3),
     backgroundColor: theme.palette.grey[50],

@@ -110,12 +110,17 @@ const useStyles = makeStyles(theme => ({
     fontSize: '0.75rem',
     color: Theme.palette.grey[500],
   },
+  sitesContainer: {
+    display: 'flex',
+    alignContent: 'flex-start',
+    flexFlow: 'row wrap',
+  },
   sitePaper: {
     padding: theme.spacing(1.5, 2, 1.5, 2),
     borderRadius: theme.spacing(2),
-    width: '100%',
     backgroundColor: theme.palette.grey[50],
     marginTop: theme.spacing(3),
+    marginRight: theme.spacing(3),
   },
   siteTitleContainer: {
     display: 'flex',
@@ -1081,14 +1086,16 @@ export default function TimeSeriesViewerSites(props) {
   return (
     <div className={classes.root}>
       <SitesSelect />
-      {state.selection.sites.map(site => (
-        <SelectedSite
-          key={site.siteCode}
-          site={site}
-          disabled={state.selection.sites.length < 2}
-          {...props}
-        />
-      ))}
+      <div className={classes.sitesContainer}>
+        {state.selection.sites.map(site => (
+          <SelectedSite
+            key={site.siteCode}
+            site={site}
+            disabled={state.selection.sites.length < 2}
+            {...props}
+          />
+        ))}
+      </div>
     </div>
   );
 }
