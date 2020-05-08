@@ -88,7 +88,7 @@ const useStyles = makeStyles(theme => ({
   yAxisRangeTextField: {
     marginTop: theme.spacing(0.5),
     marginBottom: theme.spacing(1.5),
-    width: theme.spacing(12),
+    width: theme.spacing(15),
   },
   autoLabelDescription: {
     marginLeft: theme.spacing(1),
@@ -465,15 +465,12 @@ const YAxisRangeOption = (props) => {
           min={customMin}
           max={customMax}
           value={[...axisRange]}
+          valueLabelFormat={x => x.toFixed(precision)}
           onChange={(event, values) => {
-            dispatch({
-              type: 'selectYAxisCustomRange',
-              axis,
-              range: [
-                Math.min(Math.max(values[0], customMin), customMax),
-                Math.min(Math.max(values[1], customMin), customMax),
-              ],
-            });
+            const range = values.map(v => (
+              parseFloat(Math.min(Math.max(v, customMin), customMax).toFixed(precision), 10)
+            ));
+            dispatch({ type: 'selectYAxisCustomRange', axis, range });
           }}
         />
       </div>
@@ -574,6 +571,7 @@ const TimeStepOption = () => {
       className={classes.optionButtonGroup}
       value={selectedTimeStep}
       onChange={handleChangeTimeStep}
+      style={{ marginBottom: Theme.spacing(3) }}
     >
       {Array.from(availableTimeSteps).map((timeStep) => {
         const className = timeStep === selectedTimeStep
@@ -656,7 +654,7 @@ export default function TimeSeriesViewerAxes() {
   return (
     <div className={classes.optionsContainer}>
       <div style={{ marginRight: Theme.spacing(5) }}>
-        <Typography variant="h6" gutterBottom>y Axes</Typography>
+        <Typography variant="h6" style={{ marginBottom: Theme.spacing(2) }}>y Axes</Typography>
         <div className={classes.optionsContainer}>
           <div style={{ marginBottom: Theme.spacing(3), marginRight: Theme.spacing(3) }}>
             {renderOption('Y_AXIS_SCALE')}
@@ -670,7 +668,7 @@ export default function TimeSeriesViewerAxes() {
         </div>
       </div>
       <div>
-        <Typography variant="h6" gutterBottom>x Axis (Time)</Typography>
+        <Typography variant="h6" style={{ marginBottom: Theme.spacing(2) }}>x Axis (Time)</Typography>
         <div className={classes.optionsContainer}>
           {state.availableTimeSteps.size < 3 ? null : (
             <div style={{ marginRight: Theme.spacing(3) }}>{renderOption('TIME_STEP')}</div>

@@ -9,6 +9,7 @@ import React, {
 import ReactDOMServer from 'react-dom/server';
 import Dygraph from 'dygraphs';
 import 'dygraphs/dist/dygraph.min.css';
+import './dygraphs-overrides.css';
 
 import moment from 'moment';
 
@@ -202,6 +203,7 @@ const getNextMonth = month => moment.utc(`${month}-15T00:00:00Z`).add(1, 'month'
 const INITIAL_GRAPH_STATE = {
   hiddenSeries: new Set(),
   hiddenQualityFlags: new Set(),
+  pngDimensions: [0, 0],
 };
 const graphReducer = (state, action) => {
   const newState = { ...state };
@@ -239,6 +241,13 @@ const graphReducer = (state, action) => {
       Array.from(state.hiddenQualityFlags).forEach((label) => {
         if (!action.qualityLabels.includes(label)) { newState.hiddenQualityFlags.delete(label); }
       });
+      return newState;
+    case 'setPngDimensions':
+      if (!(
+        Array.isArray(action.dimensions) && action.dimensions.length === 2
+          && action.dimensions.every(v => typeof v === 'number' && v >= 0)
+      )) { return state; }
+      newState.pngDimensions = action.dimensions;
       return newState;
     default:
       return state;
@@ -482,16 +491,23 @@ export default function TimeSeriesViewerGraph() {
         valueFormatter: Dygraph.dateString_,
         ticker: Dygraph.dateTicker,
         axisLabelFormatter: Dygraph.dateAxisLabelFormatter,
+        axisLineWidth: 1.5,
       },
     };
     axes.forEach((axis) => {
       const stateAxis = axis.axis === 'y' ? 'y1' : 'y2';
       const { axisRange, precision } = state.selection.yAxes[stateAxis];
+      const axisLabelWidth = precision > 3 ? 75 : 50;
       const nonZeroFloor = parseFloat((10 ** (-1 * (precision + 1))).toFixed(precision + 1), 10);
       const valueRange = state.selection.logscale
         ? [axisRange[0] === 0 ? nonZeroFloor : axisRange[0], axisRange[1]]
         : [...axisRange];
-      axesOption[axis.axis] = { independentTicks: true, valueRange };
+      axesOption[axis.axis] = {
+        independentTicks: true,
+        axisLineWidth: 1.5,
+        axisLabelWidth,
+        valueRange,
+      };
     });
     return axesOption;
   };
@@ -534,6 +550,7 @@ export default function TimeSeriesViewerGraph() {
           style={seriesStyle}
           data-label={s.label}
           data-kind="series"
+          title={`Click to ${isHidden ? 'show' : 'hide'} this series`}
         >
           <div className={classes.legendSeriesColor} style={colorStyle} />
           <div className={classes.legendSeriesLabel}>
@@ -564,6 +581,7 @@ export default function TimeSeriesViewerGraph() {
             style={qualityStyle}
             data-label={qualityLabel}
             data-kind="qualityFlag"
+            title={`Click to ${isHidden ? 'show' : 'hide'} this quality flag series`}
           >
             <div className={classes.legendQualityColor} style={colorStyle} />
             <div className={classes.legendSeriesLabel}>
@@ -676,7 +694,27 @@ export default function TimeSeriesViewerGraph() {
     dygraphRef.current.graphDiv.style.height = `${graphHeight}px`;
     dygraphRef.current.resizeHandler_();
     dygraphRef.current.canvas_.style.cursor = 'crosshair';
-  }, [dygraphRef, legendRef, graphInnerContainerRef]);
+    // Store the updated download PNG dimensions in state so we can display them for the user
+    if (downloadRef.current !== null) {
+      const dimensions = [
+        Math.ceil(downloadRef.current.clientWidth || 0),
+        Math.ceil(downloadRef.current.clientHeight || 0),
+      ];
+      if (!(
+        dimensions[0] === graphState.pngDimensions[0]
+          && dimensions[1] === graphState.pngDimensions[1]
+      )) {
+        graphDispatch({ type: 'setPngDimensions', dimensions });
+      }
+    }
+  }, [
+    dygraphRef,
+    legendRef,
+    graphInnerContainerRef,
+    downloadRef,
+    graphState.pngDimensions,
+    graphDispatch,
+  ]);
 
   // Layout effect to keep the graph dimensions in-line with resize events
   useLayoutEffect(() => {
@@ -751,6 +789,9 @@ export default function TimeSeriesViewerGraph() {
         console.error('Unable to export graph image', error); // eslint-disable-line no-console
       });
   };
+  const getPngDimensions = () => (
+    `${graphState.pngDimensions[0] || '?'}px x ${graphState.pngDimensions[1] || '?'}px`
+  );
   const downloadImageButton = (
     <Button
       size="small"
@@ -758,6 +799,7 @@ export default function TimeSeriesViewerGraph() {
       variant="outlined"
       onClick={exportGraphImage}
       disabled={downloadRef.current === null}
+      title={`Download current graph as a PNG (${getPngDimensions()})`}
       style={{ whiteSpace: 'nowrap', marginRight: Theme.spacing(1.5) }}
     >
       <ImageIcon className={classes.buttonIcon} />
