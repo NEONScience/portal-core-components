@@ -367,8 +367,9 @@ function PositionHistoryButton(props) {
                     zOffset,
                     referenceElevation,
                   } = row;
-                  const elevation = (parseFloat(referenceElevation, 10) + parseFloat(zOffset, 10))
-                    .toFixed(2).toString();
+                  const elevation = referenceElevation === null || zOffset === null
+                    ? 'unknown'
+                    : `${(parseFloat(referenceElevation, 10) + parseFloat(zOffset, 10)).toFixed(2).toString()}m`; // eslint-disable-line max-len
                   const end = rawEnd === '' ? 'Current' : rawEnd;
                   const cellStyle = idx !== history.length - 1 ? {}
                     : { fontWeight: '600', borderBottom: 'none' };
@@ -752,7 +753,7 @@ function SiteOption(props) {
             {`${siteCode} - ${description}, ${stateCode}`}
           </Typography>
           <Typography variant="body2" className={classes.optionSubtitle} gutterBottom>
-            {`${terrainTypeTitle} - Domain ${domainCode} (${domainName}) - Lat/Lon: ${latitude}, ${longitude}`}
+            {`${terrainTypeTitle} - Domain ${domainCode} (${domainName}) - Lat/Lon: ${latitude.toFixed(6)}, ${longitude.toFixed(6)}`}
           </Typography>
         </div>
       </div>

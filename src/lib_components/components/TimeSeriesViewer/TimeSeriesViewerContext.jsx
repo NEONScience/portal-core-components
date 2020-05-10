@@ -90,7 +90,7 @@ const generateYAxisRange = (axis = {}) => {
     !Object.keys(Y_AXIS_RANGE_MODES).includes(rangeMode)
       || !Number.isFinite(standardDeviation)
       || !Number.isFinite(precision)) { return axisRange; }
-  const low = Math.max((dataRange[0] || 0) - standardDeviation, 0);
+  const low = (dataRange[0] || 0) - standardDeviation;
   const high = (dataRange[1] || 0) + standardDeviation;
   if (rangeMode === Y_AXIS_RANGE_MODES.FROM_ZERO) { return [0, high]; }
   if (rangeMode === Y_AXIS_RANGE_MODES.CENTERED) { return [low, high]; }

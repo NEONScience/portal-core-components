@@ -56,6 +56,12 @@ const useStyles = makeStyles(theme => ({
     color: '#fff !important',
     backgroundColor: `${theme.palette.primary.main} !important`,
   },
+  optionExtraDescription: {
+    display: 'block',
+    marginTop: theme.spacing(-1),
+    marginBottom: theme.spacing(1),
+    color: theme.palette.grey[400],
+  },
   yAxesRangesContainer: {
     display: 'flex',
     alignItems: 'flex-start',
@@ -302,15 +308,17 @@ const YAxisScaleOption = () => {
 */
 const YAxisRangeOption = (props) => {
   const { axis } = props;
+
   const classes = useStyles(Theme);
-  const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const classNames = {
     selected: `${classes.optionButton} ${classes.optionButtonSelected}`,
     deselected: classes.optionButton,
   };
 
+  const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const {
     selection: {
+      logscale,
       yAxes: {
         [axis]: {
           units, dataRange, rangeMode, axisRange, precision, standardDeviation,
@@ -339,21 +347,35 @@ const YAxisRangeOption = (props) => {
   const render = units && dataRange[0] !== null && dataRange[1] !== null;
 
   const isCustom = rangeMode === Y_AXIS_RANGE_MODES.CUSTOM;
-  const customPad = Math.max((dataRange[1] || 0) * 0.25, standardDeviation * 2);
-  const customMin = 0;
-  const customMax = parseFloat(
-    Math.max(axisRange[1], (dataRange[1] || 0) + customPad).toFixed(precision),
+  const customPad = Math.max((dataRange[1] - dataRange[0]) * 0.3, standardDeviation * 3);
+  const customMin = dataRange[0] >= 0 || logscale ? 0 : parseFloat(
+    Math.min(axisRange[0], (dataRange[0] || 0) - customPad).toFixed(precision),
     10,
   );
+  const customMax = Math.max(parseFloat(
+    Math.max(axisRange[1], (dataRange[1] || 0) + customPad).toFixed(precision),
+    10,
+  ), 0);
 
   // Determine slider marks
-  const marks = customMin === customMax ? [] : [
-    customMin,
-    (customMax - customMin) * 0.25,
-    (customMax - customMin) * 0.5,
-    (customMax - customMin) * 0.75,
-    customMax,
-  ].map(m => ({ value: m, label: m.toFixed(precision) }));
+  // There's probably a slick mathematical way to do this, but essentially the goal here is always
+  // 5 marks roughly evenly spaced. If the min is negative then we want a guaranteed mark at zero
+  let marks = [];
+  if (customMin !== customMax) {
+    const spread = customMax - customMin;
+    if (customMin >= 0) {
+      marks = [customMin, spread * 0.25, spread * 0.5, spread * 0.75, customMax];
+    } else if (customMax === 0) {
+      marks = [customMin, customMin * 0.75, customMin * 0.5, customMin * 0.25, 0];
+    } else if ((customMax / spread) >= (2 / 3)) {
+      marks = [customMin, 0, customMax * (1 / 3), customMax * (2 / 3), customMax];
+    } else if ((customMax / spread) >= (1 / 3)) {
+      marks = [customMin, customMin * 0.5, 0, customMax * 0.5, customMax];
+    } else {
+      marks = [customMin, customMin * (2 / 3), customMin * (1 / 3), 0, customMax];
+    }
+    marks = marks.map(m => ({ value: m, label: m.toFixed(precision) }));
+  }
   const step = 10 ** (-1 * precision);
 
   // Debounce onchange functions for the text inputs so that we can type incomplete numbers
@@ -383,6 +405,11 @@ const YAxisRangeOption = (props) => {
     </div>
   ) : (
     <div className={classes.yAxisRangeOuterContainer}>
+      {!logscale || dataRange[0] >= 0 ? null : (
+        <Typography variant="caption" className={classes.optionExtraDescription}>
+          Negative values are clipped while in logarithmic scale
+        </Typography>
+      )}
       <ToggleButtonGroup
         exclusive
         color="primary"
@@ -593,7 +620,7 @@ const TimeStepOption = () => {
 const OPTIONS = {
   Y_AXIS_SCALE: {
     title: 'Scale',
-    description: 'Toggle between linear and logarithmic scales on all y axes.',
+    description: 'Toggle between linear and logarithmic scales on all y axes',
     Component: YAxisScaleOption,
   },
   Y1_AXIS_RANGE: {
@@ -610,12 +637,12 @@ const OPTIONS = {
   },
   ROLL_PERIOD: {
     title: 'Roll Period',
-    description: 'Set a rolling window to smooth out noisy data.',
+    description: 'Set a rolling window to smooth out noisy data',
     Component: RollPeriodOption,
   },
   TIME_STEP: {
     title: 'Time Step',
-    description: 'Set a smaller time step to see NEON data aggregated with finer granularity.',
+    description: 'Set a smaller time step to see NEON data aggregated with finer granularity',
     Component: TimeStepOption,
   },
 };

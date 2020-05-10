@@ -500,7 +500,7 @@ export default function TimeSeriesViewerGraph() {
       const axisLabelWidth = precision > 3 ? 75 : 50;
       const nonZeroFloor = parseFloat((10 ** (-1 * (precision + 1))).toFixed(precision + 1), 10);
       const valueRange = state.selection.logscale
-        ? [axisRange[0] === 0 ? nonZeroFloor : axisRange[0], axisRange[1]]
+        ? [axisRange[0] <= 0 ? nonZeroFloor : axisRange[0], axisRange[1]]
         : [...axisRange];
       axesOption[axis.axis] = {
         independentTicks: true,
