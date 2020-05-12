@@ -3,18 +3,19 @@ import PropTypes from 'prop-types';
 import { COLORS } from '../Theme/Theme';
 
 // SVGs for all map icons
-import iconCoreTerrestrialSVG from './icon-core-terrestrial.svg';
-import iconCoreTerrestrialSelectedSVG from './icon-core-terrestrial-selected.svg';
-import iconCoreAquaticSVG from './icon-core-aquatic.svg';
-import iconCoreAquaticSelectedSVG from './icon-core-aquatic-selected.svg';
-import iconCoreShadowSVG from './icon-core-shadow.svg';
-import iconCoreShadowSelectedSVG from './icon-core-shadow-selected.svg';
-import iconRelocatableTerrestrialSVG from './icon-relocatable-terrestrial.svg';
-import iconRelocatableTerrestrialSelectedSVG from './icon-relocatable-terrestrial-selected.svg';
-import iconRelocatableAquaticSVG from './icon-relocatable-aquatic.svg';
-import iconRelocatableAquaticSelectedSVG from './icon-relocatable-aquatic-selected.svg';
-import iconRelocatableShadowSVG from './icon-relocatable-shadow.svg';
-import iconRelocatableShadowSelectedSVG from './icon-relocatable-shadow-selected.svg';
+import iconCoreTerrestrialSVG from './svg/icon-core-terrestrial.svg';
+import iconCoreTerrestrialSelectedSVG from './svg/icon-core-terrestrial-selected.svg';
+import iconCoreAquaticSVG from './svg/icon-core-aquatic.svg';
+import iconCoreAquaticSelectedSVG from './svg/icon-core-aquatic-selected.svg';
+import iconCoreShadowSVG from './svg/icon-core-shadow.svg';
+import iconCoreShadowSelectedSVG from './svg/icon-core-shadow-selected.svg';
+import iconRelocatableTerrestrialSVG from './svg/icon-relocatable-terrestrial.svg';
+import iconRelocatableTerrestrialSelectedSVG from './svg/icon-relocatable-terrestrial-selected.svg';
+import iconRelocatableAquaticSVG from './svg/icon-relocatable-aquatic.svg';
+import iconRelocatableAquaticSelectedSVG from './svg/icon-relocatable-aquatic-selected.svg';
+import iconRelocatableShadowSVG from './svg/icon-relocatable-shadow.svg';
+import iconRelocatableShadowSelectedSVG from './svg/icon-relocatable-shadow-selected.svg';
+import iconPlaceholderSVG from './svg/icon-placeholder.svg';
 
 // Static JSON for Boundary features
 import statesShapesJSON from '../../staticJSON/statesShapes.json';
@@ -103,6 +104,7 @@ export const ICON_SVGS = {
       },
     },
   },
+  PLACEHOLDER: iconPlaceholderSVG,
 };
 
 /**
@@ -128,7 +130,7 @@ export const FEATURES = {
   // AQUATIC_WATERSHEDS Group
   AQUATIC_WATERSHEDS: {
     name: 'Aquatic Watersheds',
-    type: FEATURE_TYPES.GROUP,
+    type: FEATURE_TYPES.GROUPS,
     minZoom: 6,
     description: '',
   },
@@ -185,27 +187,56 @@ export const FEATURES = {
     dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: '',
   },
-  // TOWER_LOCATIONS - TODO: put in group with other non-plot tower feaures?
-  TOWER_LOCATIONS: {
+  // Terrestrial Site Features
+  TERRESTRIAL_SITE_FEATURES: {
+    name: 'Terrestrial Site Features',
+    type: FEATURE_TYPES.GROUPS,
+    minZoom: 10,
+    description: '',
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    matchLocationType: 'OS Plot - all',
+  },
+  TOWERS: {
     name: 'Tower Locations',
-    type: FEATURE_TYPES.OTHER,
+    type: FEATURE_TYPES.LOCATIONS,
+    minZoom: 10,
+    matchLocationType: 'TOWER',
+    description: '',
+    parent: 'TERRESTRIAL_SITE_FEATURES',
+  },
+  HUTS: {
+    name: 'Huts',
+    type: FEATURE_TYPES.LOCATIONS,
     minZoom: 10,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    matchLocationType: 'HUT',
     description: '',
+    parent: 'TERRESTRIAL_SITE_FEATURES',
+  },
+  MEGAPITS: {
+    name: 'Megapits',
+    type: FEATURE_TYPES.LOCATIONS,
+    minZoom: 10,
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    matchLocationType: 'MEGAPIT',
+    description: '',
+    parent: 'TERRESTRIAL_SITE_FEATURES',
   },
   // TOWER_PLOTS Group
   TOWER_PLOTS: {
     name: 'Tower Plots',
-    type: FEATURE_TYPES.GROUP,
+    type: FEATURE_TYPES.GROUPS,
     minZoom: 13,
     description: 'Tower plots provide a direct link between NEON’s Terrestrial Observation System and Terrestrial Instrument System. Tower Plots are located in and around the NEON tower primary and secondary airsheds.',
+    parent: 'TERRESTRIAL_SITE_FEATURES',
   },
   TOWER_BASE_PLOTS: {
     name: 'Tower Base Plot',
     type: FEATURE_TYPES.LOCATIONS,
     description: 'Tower plots support a variety of plant productivity, plant diversity, soil, biogeochemistry and microbe sampling. The number and size of Tower Base Plots is determined by the vegetation of the tower airshed. In forested sites, twenty 40m x 40m plots are established. In herbaceous sites, thirty 20m x 20m plots are established.  Of these thirty tower plots, four have additional space to support soil sampling.',
     parent: 'TOWER_PLOTS',
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    matchLocationType: 'OS Plot - all', // Fethed by parent since distributed base plots share type
+    matchLocationPlotType: 'tower',
     attributes: { type: 'base', location: 'tower' },
   },
   TOWER_PHENOLOGY_PLOTS: {
@@ -213,21 +244,25 @@ export const FEATURES = {
     type: FEATURE_TYPES.LOCATIONS,
     description: 'Plant phenology observations are made along a transect loop or plot in or around the primary airshed. When possible, one plot is established north of the tower to calibrate phenology camera images captured from sensors on the tower. If there is insufficient space north of the tower for a 200m x 200m plot or if the vegetation does not match the primary airshed an additional plot is established.',
     parent: 'TOWER_PLOTS',
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    matchLocationType: 'OS Plot - phe',
     attributes: { type: 'phenology', location: 'tower' },
   },
   // DISTRIBUTED_PLOTS Group
   DISTRIBUTED_PLOTS: {
     name: 'Distributed Plots',
-    type: FEATURE_TYPES.GROUP,
+    type: FEATURE_TYPES.GROUPS,
     minZoom: 10,
     description: 'Distributed Plots are located throughout the TOS Sampling boundary in an effort to describe organisms and process with plot, point, and grid sampling. Plots were established according to a stratified-random and spatially balanced design.',
+    parent: 'TERRESTRIAL_SITE_FEATURES',
   },
   DISTRIBUTED_BASE_PLOTS: {
     name: 'Distributed Base Plots',
     type: FEATURE_TYPES.LOCATIONS,
     description: 'Distributed Base Plots support a variety of plant productivity, plant diversity, soil, biogeochemistry, microbe and beetle sampling. Distributed Base Plots are 40m x 40m.',
     parent: 'DISTRIBUTED_PLOTS',
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    matchLocationType: 'OS Plot - all', // Fethed by parent since tower base plots share type
+    matchLocationPlotType: 'distributed',
     attributes: { type: 'base', location: 'distributed' },
   },
   DISTRIBUTED_BIRD_GRIDS: {
@@ -236,6 +271,7 @@ export const FEATURES = {
     description: 'Bird Grids consist of 9 sampling points within a 500m x 500m square. Each point is 250m apart. Where possible, Bird Grids are colocated with Distributed Base Plots by placing the Bird Grid center (B2) in close proximity to the center of the Base Plot. At smaller sites, a single point count is done at the south-west corner (point 21) of the Distributed Base Plot.',
     parent: 'DISTRIBUTED_PLOTS',
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    matchLocationType: 'OS Plot - brd',
     attributes: { type: 'bird', location: 'distributed' },
   },
   DISTRIBUTED_MAMMAL_GRIDS: {
@@ -244,6 +280,7 @@ export const FEATURES = {
     description: 'Mammal Grids are 90m x 90m and include 100 trapping locations at 10m spacing. Where possible, these grids are colocated with Distributed Base Plots by placing them a specified distance (150m +/- 50m) and random direction from the center of the Base Plot.',
     parent: 'DISTRIBUTED_PLOTS',
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    matchLocationType: 'OS Plot - mam',
     attributes: { type: 'mammal', location: 'distributed' },
   },
   DISTRIBUTED_MOSQUITO_PLOTS: {
@@ -252,6 +289,7 @@ export const FEATURES = {
     description: 'At each Mosquito Point, one CO2 trap is established. Due to the frequency of sampling and temporal sampling constraints, Mosquito Points are located within 45m of roads.',
     parent: 'DISTRIBUTED_PLOTS',
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    matchLocationType: 'OS Plot - mos',
     attributes: { type: 'mosquito', location: 'distributed' },
   },
   DISTRIBUTED_TICK_PLOTS: {
@@ -260,12 +298,13 @@ export const FEATURES = {
     description: 'Tick Plots are sampled by conducting cloth dragging or flagging around the perimeter of a 40m x 40m plot. Tick plots are colocated with Distributed Base Plots by placing them a specified distance (150m +/- 15m) and random direction from the center of the Base Plot.',
     parent: 'DISTRIBUTED_PLOTS',
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    matchLocationType: 'OS Plot - tck',
     attributes: { type: 'tick', location: 'distributed' },
   },
   // SITE_MARKERS Group
   SITE_MARKERS: {
     name: 'NEON Site Markers',
-    type: FEATURE_TYPES.GROUP,
+    type: FEATURE_TYPES.GROUPS,
     description: '',
   },
   TERRESTRIAL_CORE_SITES: {
@@ -438,7 +477,7 @@ Object.keys(SELECTABLE_FEATURE_TYPES).forEach((selection) => {
 });
 // Initialize feature fetch status objects
 Object.keys(FEATURES)
-  .filter(featureKey => !!FEATURE_DATA_LOAD_TYPES[FEATURES[featureKey].dataLoadType])
+  .filter(featureKey => FEATURES[featureKey].dataLoadType === FEATURE_DATA_LOAD_TYPES.FETCH)
   .forEach((featureKey) => {
     const { type: featureType } = FEATURES[featureKey];
     DEFAULT_STATE.featureDataFetches[featureType][featureKey] = {};

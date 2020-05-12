@@ -14,7 +14,7 @@ import {
 /**
    Main Component
 */
-const DrainageLines = (props) => {
+const PourPoints = (props) => {
   const { classes } = props;
 
   const { KEY: featureKey, type: featureType } = FEATURES.POUR_POINTS;
@@ -56,11 +56,7 @@ const DrainageLines = (props) => {
           <Marker
             key={siteCode}
             position={pourPoint.geometry.coordinates}
-            icon={(
-              <svg width="24" height="24" viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="12" stroke="black" strokeWidth="2" fill="red" />
-              </svg>
-            )}
+            icon={state.map.zoomedIcons.PLACEHOLDER}
           >
             {renderPopup(siteCode)}
           </Marker>
@@ -70,8 +66,8 @@ const DrainageLines = (props) => {
   );
 };
 
-DrainageLines.propTypes = {
+PourPoints.propTypes = {
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
-export default DrainageLines;
+export default PourPoints;

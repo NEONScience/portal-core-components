@@ -46,10 +46,10 @@ import SelectIcon from '@material-ui/icons/TouchApp';
 import Theme from '../Theme/Theme';
 import NeonContext from '../NeonContext/NeonContext';
 
-import iconCoreTerrestrialSVG from '../SiteMap/icon-core-terrestrial.svg';
-import iconCoreAquaticSVG from '../SiteMap/icon-core-aquatic.svg';
-import iconRelocatableTerrestrialSVG from '../SiteMap/icon-relocatable-terrestrial.svg';
-import iconRelocatableAquaticSVG from '../SiteMap/icon-relocatable-aquatic.svg';
+import iconCoreTerrestrialSVG from '../SiteMap/svg/icon-core-terrestrial.svg';
+import iconCoreAquaticSVG from '../SiteMap/svg/icon-core-aquatic.svg';
+import iconRelocatableTerrestrialSVG from '../SiteMap/svg/icon-relocatable-terrestrial.svg';
+import iconRelocatableAquaticSVG from '../SiteMap/svg/icon-relocatable-aquatic.svg';
 
 import TimeSeriesViewerContext, { TabComponentPropTypes } from './TimeSeriesViewerContext';
 

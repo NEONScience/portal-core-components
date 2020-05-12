@@ -83,6 +83,9 @@ const useStyles = makeStyles(theme => ({
   mapIcon: {
     boxSizing: 'content-box',
   },
+  mapIconPLACEHOLDER: {
+    borderRadius: '20%',
+  },
   mapIconCORE: {
     borderRadius: '20%',
   },

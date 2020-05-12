@@ -44,7 +44,7 @@ import {
    we generate a stat structure containing only one instance of each distinct icon type scaled
    to the current zoom level and keep that in state. It is regenerated any time the zoom changes.
 */
-const getIconClassName = (classes, type, isSelected) => ([
+const getIconClassName = (classes, type = 'TYPE', isSelected = false) => ([
   classes.mapIcon,
   classes[`mapIcon${type}`],
   classes[`mapIcon${isSelected ? 'Selected' : 'Unselected'}`],
@@ -69,6 +69,24 @@ const getZoomedSiteMarkerIcon = (zoom = 3, classes, type, terrain, isSelected = 
     shadowAnchor: shadowAnchor.map(x => x * iconScale),
     popupAnchor: [0, -100].map(x => x * iconScale),
     className: getIconClassName(classes, type, isSelected),
+  });
+};
+const getZoomedPlaceholderIcon = (zoom = 3, classes) => {
+  const iconScale = 0.2 + (Math.floor(((zoom || 2) - 2) / 3) / 10);
+  const iconSize = [100, 100];
+  const iconAnchor = [50, 100];
+  const shadowSize = [156, 93];
+  const shadowAnchor = [50, 83];
+  return new L.Icon({
+    iconUrl: ICON_SVGS.PLACEHOLDER,
+    iconRetinaUrl: ICON_SVGS.PLACEHOLDER,
+    iconSize: iconSize.map(x => x * iconScale),
+    iconAnchor: iconAnchor.map(x => x * iconScale),
+    shadowUrl: ICON_SVGS.SITE_MARKERS.CORE.SHADOW.BASE,
+    shadowSize: shadowSize.map(x => x * iconScale),
+    shadowAnchor: shadowAnchor.map(x => x * iconScale),
+    popupAnchor: [0, -100].map(x => x * iconScale),
+    className: getIconClassName(classes, 'PLACEHOLDER'),
   });
 };
 // Get a structure containing all zoomed leaflet icon instances. These are stored in
@@ -97,6 +115,7 @@ const getZoomedIcons = (zoom, classes) => ({
       },
     },
   },
+  PLACEHOLDER: getZoomedPlaceholderIcon(zoom, classes),
 });
 
 // Derive the selected status of a given boundary (US state or NEON domain). This should run
@@ -205,15 +224,38 @@ const calculateFeatureDataFetches = (state) => {
   }
   // Feature fetches
   Object.keys(FEATURES)
-    .filter(key => FEATURE_DATA_LOAD_TYPES[FEATURES[key].dataLoadType])
-    .filter(key => state.filters.features.available[key] && state.filters.features.visible[key])
-    .forEach((key) => {
-      const { type: featureType } = FEATURES[key];
-      sitesInMap.forEach((siteCode) => {
-        if (newState.featureDataFetches[featureType][key][siteCode]) { return; }
-        newState.featureDataFetches[featureType][key][siteCode] = FETCH_STATUS.AWAITING_CALL;
-        newState.featureDataFetchesHasAwaiting = true;
-      });
+    // Only look at available+visible features that get fetched and have a location type match
+    .filter(featureKey => (
+      FEATURES[featureKey].dataLoadType === FEATURE_DATA_LOAD_TYPES.FETCH
+        && FEATURES[featureKey].matchLocationType
+        && state.filters.features.available[featureKey]
+        && state.filters.features.visible[featureKey]
+    ))
+    .forEach((featureKey) => {
+      const { type: featureType, matchLocationType } = FEATURES[featureKey];
+      // For each feature that warrants fetching; loop through the sites in the map
+      sitesInMap
+        // Site hierarchy must be completed in order to generate subsequent fetches
+        .filter(siteCode => (
+          state.featureDataFetches.SITE_LOCATION_HIERARCHIES[siteCode] === FETCH_STATUS.SUCCESS
+            && state.featureData.SITE_LOCATION_HIERARCHIES[siteCode]
+        ))
+        .forEach((siteCode) => {
+          if (!newState.featureDataFetches[featureType][featureKey][siteCode]) {
+            newState.featureDataFetches[featureType][featureKey][siteCode] = {};
+          }
+          // Extract matching location IDs from the hierarchy and set them as fetches awaiting call
+          const hierarchy = state.featureData.SITE_LOCATION_HIERARCHIES[siteCode];
+          Object.keys(hierarchy)
+            .filter(locationKey => hierarchy[locationKey].type === matchLocationType)
+            .forEach((locationKey) => {
+              if (newState.featureDataFetches[featureType][featureKey][siteCode][locationKey]) {
+                return;
+              }
+              newState.featureDataFetches[featureType][featureKey][siteCode][locationKey] = FETCH_STATUS.AWAITING_CALL; // eslint-disable-line max-len
+              newState.featureDataFetchesHasAwaiting = true;
+            });
+        });
     });
   return newState;
 };
