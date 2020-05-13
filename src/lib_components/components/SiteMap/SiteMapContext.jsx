@@ -71,12 +71,12 @@ const getZoomedSiteMarkerIcon = (zoom = 3, classes, type, terrain, isSelected = 
     className: getIconClassName(classes, type, isSelected),
   });
 };
-const getZoomedPlaceholderIcon = (zoom = 3, classes) => {
+const getZoomedLocationIcon = (zoom = 3, classes) => {
   const iconScale = 0.2 + (Math.floor(((zoom || 2) - 2) / 3) / 10);
-  const iconSize = [100, 100];
-  const iconAnchor = [50, 100];
-  const shadowSize = [156, 93];
-  const shadowAnchor = [50, 83];
+  const iconSize = [50, 50];
+  const iconAnchor = [25, 50];
+  const shadowSize = [78, 46.5];
+  const shadowAnchor = [25, 41.5];
   return new L.Icon({
     iconUrl: ICON_SVGS.PLACEHOLDER,
     iconRetinaUrl: ICON_SVGS.PLACEHOLDER,
@@ -85,7 +85,7 @@ const getZoomedPlaceholderIcon = (zoom = 3, classes) => {
     shadowUrl: ICON_SVGS.SITE_MARKERS.CORE.SHADOW.BASE,
     shadowSize: shadowSize.map(x => x * iconScale),
     shadowAnchor: shadowAnchor.map(x => x * iconScale),
-    popupAnchor: [0, -100].map(x => x * iconScale),
+    popupAnchor: [0, -50].map(x => x * iconScale),
     className: getIconClassName(classes, 'PLACEHOLDER'),
   });
 };
@@ -115,7 +115,7 @@ const getZoomedIcons = (zoom, classes) => ({
       },
     },
   },
-  PLACEHOLDER: getZoomedPlaceholderIcon(zoom, classes),
+  PLACEHOLDER: getZoomedLocationIcon(zoom, classes),
 });
 
 // Derive the selected status of a given boundary (US state or NEON domain). This should run
@@ -409,7 +409,7 @@ const reducer = (state, action) => {
       if (!newState.featureDataFetches.SITE_LOCATION_HIERARCHIES[action.siteCode]) { return state; }
       newState.featureDataFetches.SITE_LOCATION_HIERARCHIES[action.siteCode] = FETCH_STATUS.SUCCESS;
       newState.featureData.SITE_LOCATION_HIERARCHIES[action.siteCode] = parseLocationHierarchy(action.data); // eslint-disable-line max-len
-      return newState;
+      return calculateFeatureDataFetches(newState);
 
     case 'setSiteLocationHierarchyFetchFailed':
       if (!newState.featureDataFetches.SITE_LOCATION_HIERARCHIES[action.siteCode]) { return state; }

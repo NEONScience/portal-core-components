@@ -190,19 +190,27 @@ const SiteMapContainer = () => {
     if (feature.iconSvg) {
       icon = <img alt={feature.name} src={feature.iconSvg} className={classes.featureIcon} />;
     }
-    if (feature.polygonStyle) {
-      const rectStyle = {
-        fill: feature.polygonStyle.color,
-        stroke: feature.polygonStyle.color,
-        strokeWidth: 2.5,
-        fillOpacity: 0.2,
-        strokeOpacity: 0.85,
-        strokeLinecap: 'round',
-        strokeDasharray: feature.polygonStyle.dashArray || null,
+    if (feature.polygonStyle || feature.rectStyle) {
+      const featureStyle = (feature.polygonStyle || feature.rectStyle);
+      const rectProps = {
+        width: feature.rectStyle ? 20 : 25,
+        height: feature.rectStyle ? 20 : 15,
+        x: feature.rectStyle ? 4 : 1.5,
+        y: feature.rectStyle ? 4 : 6.5,
+        rx: feature.rectStyle ? 0 : 3,
+        style: {
+          fill: featureStyle.color,
+          stroke: featureStyle.color,
+          strokeWidth: 2.5,
+          fillOpacity: 0.2,
+          strokeOpacity: 0.85,
+          strokeLinecap: 'round',
+          strokeDasharray: featureStyle.dashArray || null,
+        },
       };
       icon = (
-        <svg width="24" height="18" style={{ margin: Theme.spacing(0, 0.75, -0.5, 0) }}>
-          <rect width="21" height="15" x="1.5" y="1.5" rx="3" style={rectStyle} />
+        <svg width="28" height="28" className={classes.featureIcon}>
+          <rect {...rectProps} />
         </svg>
       );
     }
@@ -215,16 +223,19 @@ const SiteMapContainer = () => {
     let allChildren = [];
     let visibleChildren = [];
     let indeterminate = false;
+    const formControlLabelStyle = {};
     if (feature.type === FEATURE_TYPES.GROUP) {
       allChildren = Object.keys(FEATURES).filter(f => FEATURES[f].parent === key);
       visibleChildren = allChildren.filter(f => state.filters.features.visible[f]);
       indeterminate = visibleChildren.length > 0 && visibleChildren.length < allChildren.length;
+      formControlLabelStyle.fontWeight = 600;
     }
     return (
       <div key={key}>
         <FormControlLabel
           key={key}
           label={label}
+          style={formControlLabelStyle}
           control={(
             <Checkbox
               checked={state.filters.features.visible[key]}

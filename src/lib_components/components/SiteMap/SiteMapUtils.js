@@ -117,6 +117,7 @@ export const ICON_SVGS = {
    Convention: all keys are consistently plural
    Order is draw order on map (so largest boundary features should be first)
 */
+const PLACEHOLDER_RECT_STYLE = { color: '#666666' };
 export const FEATURES = {
   // States and Domains
   DOMAINS: {
@@ -184,7 +185,7 @@ export const FEATURES = {
     minZoom: 8,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: 'Terrestrial and Colocated Aquatic Sites',
-    polygonStyle: { color: '#e8847d', dashArray: '2, 4' },
+    polygonStyle: { color: '#e8847d', dashArray: '5, 10, 2.5, 10' },
   },
   AQUATIC_REACHES: {
     name: 'Aquatic Site Reach',
@@ -192,7 +193,7 @@ export const FEATURES = {
     minZoom: 9,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: '',
-    polygonStyle: { color: '#ad85a0', dashArray: '2, 4' },
+    polygonStyle: { color: '#ad85a0', dashArray: '5, 10, 2.5, 10' },
   },
   TOWER_AIRSHEDS: {
     name: 'Tower Airshed Boundaries',
@@ -200,7 +201,7 @@ export const FEATURES = {
     minZoom: 10,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: '',
-    polygonStyle: { color: '#749966', dashArray: '2, 4' },
+    polygonStyle: { color: '#749966', dashArray: '5, 10, 2.5, 10' },
   },
   // Terrestrial Site Features
   TERRESTRIAL_SITE_FEATURES: {
@@ -215,6 +216,7 @@ export const FEATURES = {
     name: 'Tower Locations',
     type: FEATURE_TYPES.LOCATIONS,
     minZoom: 10,
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'TOWER',
     description: '',
     parent: 'TERRESTRIAL_SITE_FEATURES',
@@ -256,6 +258,7 @@ export const FEATURES = {
     matchLocationType: 'OS Plot - all', // Fethed by parent since distributed base plots share type
     matchLocationPlotType: 'tower',
     attributes: { type: 'base', location: 'tower' },
+    rectStyle: PLACEHOLDER_RECT_STYLE,
   },
   TOWER_PHENOLOGY_PLOTS: {
     name: 'Tower Phenology Plot',
@@ -265,6 +268,7 @@ export const FEATURES = {
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'OS Plot - phe',
     attributes: { type: 'phenology', location: 'tower' },
+    rectStyle: PLACEHOLDER_RECT_STYLE,
   },
   // DISTRIBUTED_PLOTS Group
   DISTRIBUTED_PLOTS: {
@@ -282,6 +286,7 @@ export const FEATURES = {
     matchLocationType: 'OS Plot - all', // Fethed by parent since tower base plots share type
     matchLocationPlotType: 'distributed',
     attributes: { type: 'base', location: 'distributed' },
+    rectStyle: PLACEHOLDER_RECT_STYLE,
   },
   DISTRIBUTED_BIRD_GRIDS: {
     name: 'Distributed Bird Grids',
@@ -291,6 +296,7 @@ export const FEATURES = {
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'OS Plot - brd',
     attributes: { type: 'bird', location: 'distributed' },
+    rectStyle: PLACEHOLDER_RECT_STYLE,
   },
   DISTRIBUTED_MAMMAL_GRIDS: {
     name: 'Distributed Mammal Grids',
@@ -300,6 +306,7 @@ export const FEATURES = {
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'OS Plot - mam',
     attributes: { type: 'mammal', location: 'distributed' },
+    rectStyle: PLACEHOLDER_RECT_STYLE,
   },
   DISTRIBUTED_MOSQUITO_POINTS: {
     name: 'Distributed Mosquito Plots',
@@ -319,6 +326,7 @@ export const FEATURES = {
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'OS Plot - tck',
     attributes: { type: 'tick', location: 'distributed' },
+    rectStyle: PLACEHOLDER_RECT_STYLE,
   },
   // SITE_MARKERS Group
   SITE_MARKERS: {
