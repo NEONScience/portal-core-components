@@ -34,7 +34,7 @@ import {
   SITE_MAP_DEFAULT_PROPS,
   hydrateNeonContextData,
   parseLocationHierarchy,
-  // parseLocationProperties,
+  parseLocationData,
 } from './SiteMapUtils';
 
 /**
@@ -222,7 +222,22 @@ const calculateFeatureDataFetches = (state) => {
       newState.featureDataFetchesHasAwaiting = true;
     });
   }
-  // Feature fetches
+  // Feature fetches - IMPORT (deferredJson)
+  Object.keys(FEATURES)
+    .filter(featureKey => (
+      FEATURES[featureKey].dataLoadType === FEATURE_DATA_LOAD_TYPES.IMPORT
+        && state.filters.features.available[featureKey]
+        && state.filters.features.visible[featureKey]
+    ))
+    .forEach((featureKey) => {
+      const { type: featureType } = FEATURES[featureKey];
+      sitesInMap.forEach((siteCode) => {
+        if (newState.featureDataFetches[featureType][featureKey][siteCode]) { return; }
+        newState.featureDataFetches[featureType][featureKey][siteCode] = FETCH_STATUS.AWAITING_CALL;
+        newState.featureDataFetchesHasAwaiting = true;
+      });
+    });
+  // Feature fetches - FETCH (Locations API)
   Object.keys(FEATURES)
     // Only look at available+visible features that get fetched and have a location type match
     .filter(featureKey => (
@@ -268,7 +283,12 @@ const reducer = (state, action) => {
     if (!Object.keys(FETCH_STATUS).includes(status) || status === FETCH_STATUS.AWAITING_CALL) {
       return false;
     }
-    const { feature: featureKey, siteCode } = action;
+    const {
+      data,
+      feature: featureKey,
+      siteCode,
+      location = null,
+    } = action;
     if (!FEATURES[featureKey]) { return false; }
     const { type: featureType } = FEATURES[featureKey];
     if (
@@ -276,10 +296,27 @@ const reducer = (state, action) => {
         || !newState.featureDataFetches[featureType][featureKey]
         || !newState.featureDataFetches[featureType][featureKey][siteCode]
     ) { return false; }
-    newState.featureDataFetches[featureType][featureKey][siteCode] = status;
+    // No location present in action: just siteCode deep
+    if (
+      !location
+        && typeof newState.featureDataFetches[featureType][featureKey][siteCode] === 'string'
+    ) {
+      newState.featureDataFetches[featureType][featureKey][siteCode] = status;
+      // If the status is SUCCESS and the action has data, also commit the data
+      if (status === FETCH_STATUS.SUCCESS && data) {
+        newState.featureData[featureType][featureKey][siteCode] = data;
+      }
+      return true;
+    }
+    // Location present: go one level deeper
+    if (!newState.featureDataFetches[featureType][featureKey][siteCode][location]) { return false; }
+    newState.featureDataFetches[featureType][featureKey][siteCode][location] = status;
     // If the status is SUCCESS and the action has data, also commit the data
-    if (status === FETCH_STATUS.SUCCESS && action.data) {
-      newState.featureData[featureType][featureKey][siteCode] = action.data;
+    if (status === FETCH_STATUS.SUCCESS && data) {
+      if (!newState.featureData[featureType][featureKey][siteCode]) {
+        newState.featureData[featureType][featureKey][siteCode] = {};
+      }
+      newState.featureData[featureType][featureKey][siteCode][location] = parseLocationData(data);
     }
     return true;
   };
@@ -523,10 +560,10 @@ const Provider = (props) => {
         Object.keys(state.featureDataFetches[type]).forEach((feature) => {
           const { dataLoadType } = FEATURES[feature];
           Object.keys(state.featureDataFetches[type][feature]).forEach((siteCode) => {
-            if (state.featureDataFetches[type][feature][siteCode] !== FETCH_STATUS.AWAITING_CALL) {
-              return;
-            }
+            const featureSite = state.featureDataFetches[type][feature][siteCode];
+            // IMPORT - Fetch via SiteMapDeferredJson
             if (dataLoadType === FEATURE_DATA_LOAD_TYPES.IMPORT) {
+              if (featureSite !== FETCH_STATUS.AWAITING_CALL) { return; }
               dispatch({ type: 'setFeatureDataFetchStarted', feature, siteCode });
               const onSuccess = data => dispatch({
                 type: 'setFeatureDataFetchSucceeded',
@@ -542,8 +579,50 @@ const Provider = (props) => {
               });
               SiteMapDeferredJson(feature, siteCode, onSuccess, onError);
             }
+            // FETCH - Fetch via the Locations API
             if (dataLoadType === FEATURE_DATA_LOAD_TYPES.FETCH) {
-              // do a fetch, not yet implemented
+              if (typeof featureSite !== 'object') { return; }
+              Object.keys(featureSite).forEach((location) => {
+                if (featureSite[location] !== FETCH_STATUS.AWAITING_CALL) { return; }
+                dispatch({
+                  type: 'setFeatureDataFetchStarted',
+                  feature,
+                  siteCode,
+                  location,
+                });
+                NeonApi.getLocationObservable(location).pipe(
+                  map((response) => {
+                    if (response && response.data && response.data) {
+                      dispatch({
+                        type: 'setFeatureDataFetchSucceeded',
+                        data: response.data,
+                        feature,
+                        siteCode,
+                        location,
+                      });
+                      return of(true);
+                    }
+                    dispatch({
+                      type: 'setFeatureDataFetchFailed',
+                      error: 'malformed response',
+                      feature,
+                      siteCode,
+                      location,
+                    });
+                    return of(false);
+                  }),
+                  catchError((error) => {
+                    dispatch({
+                      type: 'setFeatureDataFetchFailed',
+                      error: error.message,
+                      feature,
+                      siteCode,
+                      location,
+                    });
+                    return of(false);
+                  }),
+                ).subscribe();
+              });
             }
           });
         });

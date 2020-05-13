@@ -45,12 +45,16 @@ export const FEATURE_TYPES = {
   SITE_LOCATION_HIERARCHIES: 'SITE_LOCATION_HIERARCHIES',
   LOCATIONS: 'LOCATIONS',
   BOUNDARIES: 'BOUNDARIES',
-  GROUPS: 'GROUPS',
+  GROUP: 'GROUP',
   OTHER: 'OTHER', // All features require a type. This catch-all type will not show in the table.
 };
 
 // For consistency in differentiating how feature data are loaded (e.g. by fetch or deferred import)
-export const FEATURE_DATA_LOAD_TYPES = { FETCH: 'FETCH', IMPORT: 'IMPORT' };
+export const FEATURE_DATA_LOAD_TYPES = {
+  FETCH: 'FETCH',
+  IMPORT: 'IMPORT',
+  NEON_CONTEXT: 'NEON_CONTEXT',
+};
 
 // Subset of FEATURE_TYPES describing all features that are directly selectable
 export const SELECTABLE_FEATURE_TYPES = (({ SITES }) => ({ SITES }))(FEATURE_TYPES);
@@ -120,17 +124,19 @@ export const FEATURES = {
     type: FEATURE_TYPES.BOUNDARIES,
     description: '',
     hideByDefault: true,
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
   },
   STATES: {
     name: 'US States',
     type: FEATURE_TYPES.BOUNDARIES,
     description: '',
     hideByDefault: true,
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
   },
   // AQUATIC_WATERSHEDS Group
   AQUATIC_WATERSHEDS: {
     name: 'Aquatic Watersheds',
-    type: FEATURE_TYPES.GROUPS,
+    type: FEATURE_TYPES.GROUP,
     minZoom: 6,
     description: '',
   },
@@ -190,7 +196,7 @@ export const FEATURES = {
   // Terrestrial Site Features
   TERRESTRIAL_SITE_FEATURES: {
     name: 'Terrestrial Site Features',
-    type: FEATURE_TYPES.GROUPS,
+    type: FEATURE_TYPES.GROUP,
     minZoom: 10,
     description: '',
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
@@ -225,7 +231,7 @@ export const FEATURES = {
   // TOWER_PLOTS Group
   TOWER_PLOTS: {
     name: 'Tower Plots',
-    type: FEATURE_TYPES.GROUPS,
+    type: FEATURE_TYPES.GROUP,
     minZoom: 13,
     description: 'Tower plots provide a direct link between NEON’s Terrestrial Observation System and Terrestrial Instrument System. Tower Plots are located in and around the NEON tower primary and secondary airsheds.',
     parent: 'TERRESTRIAL_SITE_FEATURES',
@@ -251,7 +257,7 @@ export const FEATURES = {
   // DISTRIBUTED_PLOTS Group
   DISTRIBUTED_PLOTS: {
     name: 'Distributed Plots',
-    type: FEATURE_TYPES.GROUPS,
+    type: FEATURE_TYPES.GROUP,
     minZoom: 10,
     description: 'Distributed Plots are located throughout the TOS Sampling boundary in an effort to describe organisms and process with plot, point, and grid sampling. Plots were established according to a stratified-random and spatially balanced design.',
     parent: 'TERRESTRIAL_SITE_FEATURES',
@@ -304,7 +310,7 @@ export const FEATURES = {
   // SITE_MARKERS Group
   SITE_MARKERS: {
     name: 'NEON Site Markers',
-    type: FEATURE_TYPES.GROUPS,
+    type: FEATURE_TYPES.GROUP,
     description: '',
   },
   TERRESTRIAL_CORE_SITES: {
@@ -314,6 +320,7 @@ export const FEATURES = {
     iconSvg: ICON_SVGS.SITE_MARKERS.CORE.TERRESTRIAL.BASE,
     parent: 'SITE_MARKERS',
     attributes: { type: 'CORE', terrain: 'TERRESTRIAL' },
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
   },
   TERRESTRIAL_RELOCATABLE_SITES: {
     name: 'Terrestrial Relocatable Sites',
@@ -322,6 +329,7 @@ export const FEATURES = {
     iconSvg: ICON_SVGS.SITE_MARKERS.RELOCATABLE.TERRESTRIAL.BASE,
     parent: 'SITE_MARKERS',
     attributes: { type: 'RELOCATABLE', terrain: 'TERRESTRIAL' },
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
   },
   AQUATIC_CORE_SITES: {
     name: 'Aquatic Core Sites',
@@ -330,6 +338,7 @@ export const FEATURES = {
     iconSvg: ICON_SVGS.SITE_MARKERS.CORE.AQUATIC.BASE,
     parent: 'SITE_MARKERS',
     attributes: { type: 'CORE', terrain: 'AQUATIC' },
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
   },
   AQUATIC_RELOCATABLE_SITES: {
     name: 'Aquatic Relocatable Sites',
@@ -338,6 +347,7 @@ export const FEATURES = {
     iconSvg: ICON_SVGS.SITE_MARKERS.RELOCATABLE.AQUATIC.BASE,
     parent: 'SITE_MARKERS',
     attributes: { type: 'RELOCATABLE', terrain: 'AQUATIC' },
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
   },
 };
 // Replicate keys as attributes to completely eliminate the need to write a feature key string
@@ -462,26 +472,20 @@ export const DEFAULT_STATE = {
     },
   },
 };
-// Initialize all boundary and other type features in featureData state
+// Initialize featureData and featureDataFetches objects for all features that have a dataLoadType
 Object.keys(FEATURES)
   .filter(featureKey => (
-    [FEATURE_TYPES.BOUNDARIES, FEATURE_TYPES.OTHER].includes(FEATURES[featureKey].type)
+    Object.keys(FEATURE_DATA_LOAD_TYPES).includes(FEATURES[featureKey].dataLoadType)
   ))
   .forEach((featureKey) => {
     const { type: featureType } = FEATURES[featureKey];
     DEFAULT_STATE.featureData[featureType][featureKey] = {};
+    DEFAULT_STATE.featureDataFetches[featureType][featureKey] = {};
   });
 // Initialize all selectable features in selection state
 Object.keys(SELECTABLE_FEATURE_TYPES).forEach((selection) => {
   DEFAULT_STATE.selection[selection] = new Set();
 });
-// Initialize feature fetch status objects
-Object.keys(FEATURES)
-  .filter(featureKey => FEATURES[featureKey].dataLoadType === FEATURE_DATA_LOAD_TYPES.FETCH)
-  .forEach((featureKey) => {
-    const { type: featureType } = FEATURES[featureKey];
-    DEFAULT_STATE.featureDataFetches[featureType][featureKey] = {};
-  });
 
 // Populate static JSON featureData
 // States
@@ -597,7 +601,7 @@ export const getDynamicAspectRatio = () => {
   becomes:
    { fooBar: 123 }
 */
-export const parseLocationProperties = (inProps = [], whiteList = []) => {
+const parseLocationProperties = (inProps = [], whiteList = []) => {
   const outProps = {};
   const cleanPropKey = (inKey = '') => {
     const words = inKey.substr(10)
@@ -624,6 +628,39 @@ export const parseLocationProperties = (inProps = [], whiteList = []) => {
     }
   });
   return outProps;
+};
+
+const DEFAULT_LOCATION_PROPERTIES_WHITELIST = [
+  'maximumElevation',
+  'minimumElevation',
+  'nationalLandCoverDatabase2001',
+  'plotDimensions',
+  'plotId',
+  'plotSize',
+  'plotSubtype',
+  'plotType',
+  'slopeAspect',
+  'slopeGradient',
+  'soilTypeOrder,',
+];
+
+export const parseLocationData = (data = {}) => {
+  const {
+    locationType: type = null,
+    locationDescription: description = null,
+    locationDecimalLatitude: latitude = null,
+    locationDecimalLongitude: longitude = null,
+    locationElevation: elevation = null,
+    locationProperties = {},
+  } = data;
+  return {
+    type,
+    description,
+    latitude,
+    longitude,
+    elevation,
+    ...parseLocationProperties(locationProperties, DEFAULT_LOCATION_PROPERTIES_WHITELIST),
+  };
 };
 
 export const parseLocationHierarchy = (inHierarchy, parent = null) => {

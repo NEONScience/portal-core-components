@@ -195,27 +195,36 @@ const SiteMapContainer = () => {
         {feature.name}
       </React.Fragment>
     );
-    const style = { marginLeft: feature.parent ? Theme.spacing(3) : 0 };
+    let allChildren = [];
+    let visibleChildren = [];
     let indeterminate = false;
     if (feature.type === FEATURE_TYPES.GROUP) {
-      const allChildren = Object.keys(FEATURES).filter(f => FEATURES[f].parent === key);
-      const visibleChildren = allChildren.filter(f => state.filters.features.visible[f]);
+      allChildren = Object.keys(FEATURES).filter(f => FEATURES[f].parent === key);
+      visibleChildren = allChildren.filter(f => state.filters.features.visible[f]);
       indeterminate = visibleChildren.length > 0 && visibleChildren.length < allChildren.length;
     }
     return (
-      <FormControlLabel
-        key={key}
-        label={label}
-        style={style}
-        control={(
-          <Checkbox
-            checked={state.filters.features.visible[key]}
-            onChange={handleChange}
-            color="secondary"
-            indeterminate={indeterminate}
-          />
+      <div key={key}>
+        <FormControlLabel
+          key={key}
+          label={label}
+          control={(
+            <Checkbox
+              checked={state.filters.features.visible[key]}
+              onChange={handleChange}
+              color="secondary"
+              indeterminate={indeterminate}
+            />
+          )}
+        />
+        {!allChildren.length ? null : (
+          <div style={{ marginLeft: Theme.spacing(3) }}>
+            {allChildren
+              .filter(f => state.filters.features.available[f])
+              .map(renderFeatureOption)}
+          </div>
         )}
-      />
+      </div>
     );
   };
 
@@ -234,7 +243,7 @@ const SiteMapContainer = () => {
         {!state.filters.features.open ? null : (
           <div ref={featuresRef} className={classes.featuresContainer}>
             {Object.keys(FEATURES)
-              .filter(f => state.filters.features.available[f])
+              .filter(f => state.filters.features.available[f] && !FEATURES[f].parent)
               .map(renderFeatureOption)}
           </div>
         )}
