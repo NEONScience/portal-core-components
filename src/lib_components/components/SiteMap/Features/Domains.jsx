@@ -86,8 +86,8 @@ const Domains = (props) => {
       {Object.keys(featureData).map((domainCode) => {
         const domain = featureData[domainCode];
         const overlayColor = selectionActive && selectedDomains[domainCode]
-          ? `${selectedDomains[domainCode]}Selected`
-          : FEATURES.DOMAINS.KEY;
+          ? BOUNDARY_COLORS[`${selectedDomains[domainCode]}Selected`]
+          : FEATURES.DOMAINS.polygonStyle.color;
         /* eslint-disable no-underscore-dangle */
         const interactionProps = selectionActive ? {
           onMouseOver: (e) => {
@@ -98,8 +98,8 @@ const Domains = (props) => {
           },
           onMouseMove: (e) => { positionPopup(e); },
           onMouseOut: (e) => {
-            e.target._path.setAttribute('stroke', BOUNDARY_COLORS[overlayColor]);
-            e.target._path.setAttribute('fill', BOUNDARY_COLORS[overlayColor]);
+            e.target._path.setAttribute('stroke', overlayColor);
+            e.target._path.setAttribute('fill', overlayColor);
             e.target.closePopup();
           },
           onClick: () => {
@@ -111,15 +111,15 @@ const Domains = (props) => {
             e.target._path.setAttribute('fill', BOUNDARY_COLORS.hover);
           },
           onMouseOut: (e) => {
-            e.target._path.setAttribute('stroke', BOUNDARY_COLORS[overlayColor]);
-            e.target._path.setAttribute('fill', BOUNDARY_COLORS[overlayColor]);
+            e.target._path.setAttribute('stroke', overlayColor);
+            e.target._path.setAttribute('fill', overlayColor);
           },
         };
         /* eslint-enable no-underscore-dangle */
         return (
           <Polygon
             key={domainCode}
-            color={BOUNDARY_COLORS[overlayColor]}
+            color={overlayColor}
             positions={domain.geometry.coordinates}
             {...interactionProps}
           >

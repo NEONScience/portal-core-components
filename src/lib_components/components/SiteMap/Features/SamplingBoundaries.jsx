@@ -1,20 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import tinycolor from 'tinycolor2';
-
 import Typography from '@material-ui/core/Typography';
 
 import 'leaflet/dist/leaflet.css';
-import { FeatureGroup, Polygon, Popup } from 'react-leaflet';
+import { Popup } from 'react-leaflet';
 
 import SiteMapContext from '../SiteMapContext';
-import {
-  FEATURES,
-  FEATURE_TYPES,
-  BOUNDARY_COLORS,
-  KM2_TO_ACRES,
-} from '../SiteMapUtils';
+import SiteMapPolygonFeatureGroup from '../SiteMapPolygonFeatureGroup';
+import { FEATURES, KM2_TO_ACRES } from '../SiteMapUtils';
 
 /**
    Main Component
@@ -22,14 +16,14 @@ import {
 const SamplingBoundaries = (props) => {
   const { classes } = props;
 
-  const { KEY: featureKey } = FEATURES.SAMPLING_BOUNDARIES;
+  const { KEY: featureKey, type: featureType } = FEATURES.SAMPLING_BOUNDARIES;
 
   // Extract feature data from SiteMapContext State
   const [state] = SiteMapContext.useSiteMapContext();
   const {
     neonContextHydrated,
     featureData: {
-      [FEATURE_TYPES.BOUNDARIES]: {
+      [featureType]: {
         [featureKey]: featureData,
       },
     },
@@ -41,8 +35,7 @@ const SamplingBoundaries = (props) => {
   */
   const renderPopup = (siteCode) => {
     if (!featureData[siteCode]) { return null; }
-    const samplingBoundary = featureData[siteCode];
-    const { areaKm2 } = samplingBoundary.properties;
+    const { areaKm2 } = featureData[siteCode].properties;
     const areaAcres = KM2_TO_ACRES * areaKm2;
     return (
       <Popup className={classes.popup} autoPan>
@@ -60,35 +53,10 @@ const SamplingBoundaries = (props) => {
      Main Render
   */
   return (
-    <FeatureGroup>
-      {Object.keys(featureData).map((siteCode) => {
-        const samplingBoundary = featureData[siteCode];
-        const featureColor = BOUNDARY_COLORS[featureKey];
-        const hoverColor = `#${tinycolor(featureColor).lighten(10).toHex()}`;
-        /* eslint-disable no-underscore-dangle */
-        const interactionProps = {
-          onMouseOver: (e) => {
-            e.target._path.setAttribute('stroke', hoverColor);
-            e.target._path.setAttribute('fill', hoverColor);
-          },
-          onMouseOut: (e) => {
-            e.target._path.setAttribute('stroke', featureColor);
-            e.target._path.setAttribute('fill', featureColor);
-          },
-        };
-        /* eslint-enable no-underscore-dangle */
-        return (
-          <Polygon
-            key={siteCode}
-            color={featureColor}
-            positions={samplingBoundary.geometry.coordinates}
-            {...interactionProps}
-          >
-            {renderPopup(siteCode)}
-          </Polygon>
-        );
-      })}
-    </FeatureGroup>
+    <SiteMapPolygonFeatureGroup
+      featureKey={featureKey}
+      renderPopup={renderPopup}
+    />
   );
 };
 

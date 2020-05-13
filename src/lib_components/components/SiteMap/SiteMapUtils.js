@@ -125,6 +125,7 @@ export const FEATURES = {
     description: '',
     hideByDefault: true,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
+    polygonStyle: { color: '#9252e0' },
   },
   STATES: {
     name: 'US States',
@@ -132,6 +133,7 @@ export const FEATURES = {
     description: '',
     hideByDefault: true,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
+    polygonStyle: { color: '#3cdd84' },
   },
   // AQUATIC_WATERSHEDS Group
   AQUATIC_WATERSHEDS: {
@@ -147,6 +149,7 @@ export const FEATURES = {
     dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: '',
     parent: 'AQUATIC_WATERSHEDS',
+    polygonStyle: { color: '#669199', dashArray: '5, 10' },
   },
   DRAINAGE_LINES: {
     name: 'Drainage Lines',
@@ -155,6 +158,7 @@ export const FEATURES = {
     dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: '',
     parent: 'AQUATIC_WATERSHEDS',
+    polylineStyle: { color: '#365d63' },
   },
   POUR_POINTS: {
     name: 'Pour Points',
@@ -163,6 +167,7 @@ export const FEATURES = {
     dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: '',
     parent: 'AQUATIC_WATERSHEDS',
+    iconSvg: ICON_SVGS.PLACEHOLDER,
   },
   // Ungrouped Boundary Types
   FLIGHT_BOX_BOUNDARIES: {
@@ -171,6 +176,7 @@ export const FEATURES = {
     minZoom: 8,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: '',
+    polygonStyle: { color: '#f0ee75', dashArray: '5, 10' },
   },
   SAMPLING_BOUNDARIES: {
     name: 'Site Sampling Boundaries',
@@ -178,6 +184,7 @@ export const FEATURES = {
     minZoom: 8,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: 'Terrestrial and Colocated Aquatic Sites',
+    polygonStyle: { color: '#e8847d', dashArray: '2, 4' },
   },
   AQUATIC_REACHES: {
     name: 'Aquatic Site Reach',
@@ -185,6 +192,7 @@ export const FEATURES = {
     minZoom: 9,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: '',
+    polygonStyle: { color: '#ad85a0', dashArray: '2, 4' },
   },
   TOWER_AIRSHEDS: {
     name: 'Tower Airshed Boundaries',
@@ -192,6 +200,7 @@ export const FEATURES = {
     minZoom: 10,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: '',
+    polygonStyle: { color: '#749966', dashArray: '2, 4' },
   },
   // Terrestrial Site Features
   TERRESTRIAL_SITE_FEATURES: {
@@ -209,6 +218,7 @@ export const FEATURES = {
     matchLocationType: 'TOWER',
     description: '',
     parent: 'TERRESTRIAL_SITE_FEATURES',
+    iconSvg: ICON_SVGS.PLACEHOLDER,
   },
   HUTS: {
     name: 'Huts',
@@ -218,6 +228,7 @@ export const FEATURES = {
     matchLocationType: 'HUT',
     description: '',
     parent: 'TERRESTRIAL_SITE_FEATURES',
+    iconSvg: ICON_SVGS.PLACEHOLDER,
   },
   MEGAPITS: {
     name: 'Megapits',
@@ -227,6 +238,7 @@ export const FEATURES = {
     matchLocationType: 'MEGAPIT',
     description: '',
     parent: 'TERRESTRIAL_SITE_FEATURES',
+    iconSvg: ICON_SVGS.PLACEHOLDER,
   },
   // TOWER_PLOTS Group
   TOWER_PLOTS: {
@@ -289,7 +301,7 @@ export const FEATURES = {
     matchLocationType: 'OS Plot - mam',
     attributes: { type: 'mammal', location: 'distributed' },
   },
-  DISTRIBUTED_MOSQUITO_PLOTS: {
+  DISTRIBUTED_MOSQUITO_POINTS: {
     name: 'Distributed Mosquito Plots',
     type: FEATURE_TYPES.LOCATIONS,
     description: 'At each Mosquito Point, one CO2 trap is established. Due to the frequency of sampling and temporal sampling constraints, Mosquito Points are located within 45m of roads.',
@@ -297,6 +309,7 @@ export const FEATURES = {
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'OS Plot - mos',
     attributes: { type: 'mosquito', location: 'distributed' },
+    iconSvg: ICON_SVGS.PLACEHOLDER,
   },
   DISTRIBUTED_TICK_PLOTS: {
     name: 'Distributed Tick Plots',
@@ -353,16 +366,8 @@ export const FEATURES = {
 // Replicate keys as attributes to completely eliminate the need to write a feature key string
 Object.keys(FEATURES).forEach((key) => { FEATURES[key].KEY = key; });
 
-// Base colors for Boundary features. Also includes hover / selection colors.
+// Common colors for selecatble boundary features
 export const BOUNDARY_COLORS = {
-  [FEATURES.STATES.KEY]: '#3cdd84',
-  [FEATURES.DOMAINS.KEY]: '#9252e0',
-  [FEATURES.SAMPLING_BOUNDARIES.KEY]: '#e8847d',
-  [FEATURES.AQUATIC_REACHES.KEY]: '#ad85a0',
-  [FEATURES.TOWER_AIRSHEDS.KEY]: '#749966',
-  [FEATURES.FLIGHT_BOX_BOUNDARIES.KEY]: '#f0ee75',
-  [FEATURES.WATERSHED_BOUNDARIES.KEY]: '#669199', // #52747a
-  [FEATURES.DRAINAGE_LINES.KEY]: '#365d63',
   partialSelected: COLORS.SECONDARY_BLUE[300],
   totalSelected: COLORS.SECONDARY_BLUE[500],
   hover: COLORS.SECONDARY_BLUE[100],

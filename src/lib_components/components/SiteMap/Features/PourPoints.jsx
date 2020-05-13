@@ -7,9 +7,7 @@ import 'leaflet/dist/leaflet.css';
 import { FeatureGroup, Marker, Popup } from 'react-leaflet';
 
 import SiteMapContext from '../SiteMapContext';
-import {
-  FEATURES,
-} from '../SiteMapUtils';
+import { FEATURES } from '../SiteMapUtils';
 
 /**
    Main Component

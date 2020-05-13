@@ -9,10 +9,7 @@ import 'leaflet/dist/leaflet.css';
 import { FeatureGroup, Polyline, Popup } from 'react-leaflet';
 
 import SiteMapContext from '../SiteMapContext';
-import {
-  FEATURES,
-  BOUNDARY_COLORS,
-} from '../SiteMapUtils';
+import { FEATURES } from '../SiteMapUtils';
 
 /**
    Main Component
@@ -20,7 +17,7 @@ import {
 const DrainageLines = (props) => {
   const { classes } = props;
 
-  const { KEY: featureKey, type: featureType } = FEATURES.DRAINAGE_LINES;
+  const { KEY: featureKey, type: featureType, polylineStyle } = FEATURES.DRAINAGE_LINES;
 
   // Extract feature data from SiteMapContext State
   const [state] = SiteMapContext.useSiteMapContext();
@@ -55,22 +52,21 @@ const DrainageLines = (props) => {
     <FeatureGroup>
       {Object.keys(featureData).map((siteCode) => {
         const drainageLine = featureData[siteCode];
-        const featureColor = BOUNDARY_COLORS[featureKey];
-        const hoverColor = `#${tinycolor(featureColor).lighten(10).toHex()}`;
+        const hoverColor = `#${tinycolor(polylineStyle.color).lighten(10).toHex()}`;
         /* eslint-disable no-underscore-dangle */
         const interactionProps = {
           onMouseOver: (e) => {
             e.target._path.setAttribute('stroke', hoverColor);
           },
           onMouseOut: (e) => {
-            e.target._path.setAttribute('stroke', featureColor);
+            e.target._path.setAttribute('stroke', polylineStyle.color);
           },
         };
         /* eslint-enable no-underscore-dangle */
         return (
           <Polyline
             key={siteCode}
-            color={featureColor}
+            color={polylineStyle.color}
             positions={drainageLine.geometry.coordinates}
             {...interactionProps}
           >

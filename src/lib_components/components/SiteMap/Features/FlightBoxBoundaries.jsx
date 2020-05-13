@@ -1,19 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import tinycolor from 'tinycolor2';
-
 import Typography from '@material-ui/core/Typography';
 
 import 'leaflet/dist/leaflet.css';
-import { FeatureGroup, Polygon, Popup } from 'react-leaflet';
+import { Popup } from 'react-leaflet';
 
 import SiteMapContext from '../SiteMapContext';
-import {
-  FEATURES,
-  FEATURE_TYPES,
-  BOUNDARY_COLORS,
-} from '../SiteMapUtils';
+import SiteMapPolygonFeatureGroup from '../SiteMapPolygonFeatureGroup';
+import { FEATURES } from '../SiteMapUtils';
 
 /**
    Main Component
@@ -21,14 +16,14 @@ import {
 const FlightBoxBoundaries = (props) => {
   const { classes } = props;
 
-  const { KEY: featureKey } = FEATURES.FLIGHT_BOX_BOUNDARIES;
+  const { KEY: featureKey, type: featureType } = FEATURES.FLIGHT_BOX_BOUNDARIES;
 
   // Extract feature data from SiteMapContext State
   const [state] = SiteMapContext.useSiteMapContext();
   const {
     neonContextHydrated,
     featureData: {
-      [FEATURE_TYPES.BOUNDARIES]: {
+      [featureType]: {
         [featureKey]: featureData,
       },
     },
@@ -53,35 +48,10 @@ const FlightBoxBoundaries = (props) => {
      Main Render
   */
   return (
-    <FeatureGroup>
-      {Object.keys(featureData).map((siteCode) => {
-        const flightBoxBoundary = featureData[siteCode];
-        const featureColor = BOUNDARY_COLORS[featureKey];
-        const hoverColor = `#${tinycolor(featureColor).lighten(10).toHex()}`;
-        /* eslint-disable no-underscore-dangle */
-        const interactionProps = {
-          onMouseOver: (e) => {
-            e.target._path.setAttribute('stroke', hoverColor);
-            e.target._path.setAttribute('fill', hoverColor);
-          },
-          onMouseOut: (e) => {
-            e.target._path.setAttribute('stroke', featureColor);
-            e.target._path.setAttribute('fill', featureColor);
-          },
-        };
-        /* eslint-enable no-underscore-dangle */
-        return (
-          <Polygon
-            key={siteCode}
-            color={featureColor}
-            positions={flightBoxBoundary.geometry.coordinates}
-            {...interactionProps}
-          >
-            {renderPopup(siteCode)}
-          </Polygon>
-        );
-      })}
-    </FeatureGroup>
+    <SiteMapPolygonFeatureGroup
+      featureKey={featureKey}
+      renderPopup={renderPopup}
+    />
   );
 };
 

@@ -275,7 +275,6 @@ const calculateFeatureDataFetches = (state) => {
   return newState;
 };
 const reducer = (state, action) => {
-  console.log('REDUCER', action);
   let setMethod = null;
   const newState = { ...state };
   // Returns a boolean describing whether a fetch status was updated

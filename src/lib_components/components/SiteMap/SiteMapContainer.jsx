@@ -186,9 +186,26 @@ const SiteMapContainer = () => {
         visible: event.target.checked,
       });
     };
-    const icon = !feature.iconSvg ? null : (
-      <img alt={feature.name} src={feature.iconSvg} className={classes.featureIcon} />
-    );
+    let icon = null;
+    if (feature.iconSvg) {
+      icon = <img alt={feature.name} src={feature.iconSvg} className={classes.featureIcon} />;
+    }
+    if (feature.polygonStyle) {
+      const rectStyle = {
+        fill: feature.polygonStyle.color,
+        stroke: feature.polygonStyle.color,
+        strokeWidth: 2.5,
+        fillOpacity: 0.2,
+        strokeOpacity: 0.85,
+        strokeLinecap: 'round',
+        strokeDasharray: feature.polygonStyle.dashArray || null,
+      };
+      icon = (
+        <svg width="24" height="18" style={{ margin: Theme.spacing(0, 0.75, -0.5, 0) }}>
+          <rect width="21" height="15" x="1.5" y="1.5" rx="3" style={rectStyle} />
+        </svg>
+      );
+    }
     const label = (
       <React.Fragment>
         {icon}
