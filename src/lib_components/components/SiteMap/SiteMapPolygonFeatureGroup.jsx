@@ -77,11 +77,6 @@ const SiteMapPolygonFeatureGroup = (props) => {
       : featureData[siteCode];
     const key = location ? `${siteCode} - ${location}` : siteCode;
     const renderedPopup = location ? renderPopup(siteCode, location) : renderPopup(siteCode);
-    if (location) {
-      console.log('RENDER_SHAPE', siteCode, location, shapeData);
-      console.log(['latitude', 'longitude', 'plotSize'].every(k => Object.keys(shapeData).includes(k))); // eslint-disable-line max-len
-      console.log(getBounds(shapeData.latitude, shapeData.longitude, shapeData.plotSize));
-    }
     return ['latitude', 'longitude', 'plotSize'].every(k => Object.keys(shapeData).includes(k))
       ? (
         <Rectangle

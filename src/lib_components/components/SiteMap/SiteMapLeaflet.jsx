@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-vars, no-underscore-dangle */
 import React, { useRef, useEffect } from 'react';
 import ReactDOMServer from 'react-dom/server';
 
@@ -18,6 +18,7 @@ import LocationIcon from '@material-ui/icons/MyLocation';
 import SiteDetailsIcon from '@material-ui/icons/InfoOutlined';
 
 import 'leaflet/dist/leaflet.css';
+import './SiteMap.css';
 
 import {
   FeatureGroup,
@@ -40,6 +41,7 @@ import {
   MAP_ZOOM_RANGE,
   ICON_SVGS,
   FEATURES,
+  FETCH_STATUS,
   FEATURE_TYPES,
   SELECTABLE_FEATURE_TYPES,
   BOUNDARY_COLORS,
@@ -80,36 +82,6 @@ const useStyles = makeStyles(theme => ({
     },
     '& input[type="radio"]': {
       cursor: 'pointer',
-    },
-  },
-  mapIcon: {
-    boxSizing: 'content-box',
-  },
-  mapIconPLACEHOLDER: {
-    borderRadius: '20%',
-  },
-  mapIconCORE: {
-    borderRadius: '20%',
-  },
-  mapIconRELOCATABLE: {
-    borderRadius: '50%',
-  },
-  mapIconUnselected: {
-    boxShadow: 'none',
-    '&:hover, &:focus': {
-      boxShadow: `0px 0px 5px 5px ${Theme.palette.secondary.main}`,
-    },
-    '&:active': {
-      boxShadow: `0px 0px 8px 8px ${Theme.palette.secondary.main}`,
-    },
-  },
-  mapIconSelected: {
-    boxShadow: 'none',
-    '&:hover, &:focus': {
-      boxShadow: '0px 0px 3px 3px #ffffff',
-    },
-    '&:active': {
-      boxShadow: '0px 0px 6px 6px #ffffff',
     },
   },
   attribution: {
@@ -196,9 +168,7 @@ const SiteMapLeaflet = () => {
   const mapRef = useRef(null);
 
   // Neon Context State
-  const [
-    { data: neonContextData, isFinal: neonContextIsFinal, hasError: neonContextHasError },
-  ] = NeonContext.useNeonContextState();
+  const [{ data: neonContextData }] = NeonContext.useNeonContextState();
   const {
     sites: allSites,
     states: allStates,
@@ -206,10 +176,14 @@ const SiteMapLeaflet = () => {
     stateSites,
     domainSites,
   } = neonContextData;
-  const canRender = neonContextIsFinal && !neonContextHasError;
 
   // State, Dispatch, and other stuff from SiteMapContext
   const [state, dispatch] = SiteMapContext.useSiteMapContext();
+  let canRender = state.neonContextHydrated;
+  if (
+    state.focusLocation.current
+      && state.focusLocation.fetch.status !== FETCH_STATUS.SUCCESS
+  ) { canRender = false; }
   const { getIconClassName } = SiteMapContext;
 
   // Effect
@@ -217,23 +191,38 @@ const SiteMapLeaflet = () => {
   // all sites are visible. This depends on the client dimensions of the map
   // and whether height or width is the deciding factor depends on the aspect ratio.
   useEffect(() => {
-    if (state.map.zoom !== null || !mapRef || !mapRef.current || !mapRef.current.container) {
-      return;
-    }
+    if (
+      !canRender || state.map.zoom !== null
+        || !mapRef || !mapRef.current || !mapRef.current.container
+    ) { return; }
     const mapCont = mapRef.current.container;
     const minorDim = Math.min(mapCont.clientWidth / 136, mapCont.clientHeight / 128);
     const derivedZoom = [1, 2, 4, 6, 11].findIndex(m => m > minorDim);
     dispatch({
       type: 'setMapZoom',
       zoom: derivedZoom === -1 ? 5 : derivedZoom,
-      classes,
     });
   }, [
+    canRender,
     state.map.zoom,
     mapRef,
-    classes,
     dispatch,
   ]);
+
+  // Effect
+  // If map bounds are null (as they will be when setting a focus location) then fill them in
+  // We have to do it this way as only the Leaflet Map instance can give us bounds
+  useEffect(() => {
+    if (state.map.bounds !== null || mapRef.current === null) { return; }
+    const bounds = mapRef.current.leafletElement.getBounds();
+    dispatch({
+      type: 'setMapBounds',
+      bounds: {
+        lat: [bounds._southWest.lat, bounds._northEast.lat],
+        lng: [bounds._southWest.lng, bounds._northEast.lng],
+      },
+    });
+  }, [state.map.bounds, mapRef.current]);
 
   if (!canRender) { return null; }
 
@@ -243,7 +232,6 @@ const SiteMapLeaflet = () => {
      over only and do not persist.
   */
   const positionPopup = (e) => {
-    /* eslint-disable no-underscore-dangle */
     const TIP_HEIGHT = 47;
     e.target._popup.setLatLng(e.latlng);
     // Leaflet popups always open above; open below if mouse event is in the top half of the map
@@ -257,7 +245,6 @@ const SiteMapLeaflet = () => {
       e.target._popup._tipContainer.style.transform = null;
     }
     e.target._popup._closeButton.style.display = 'none';
-    /* eslint-enable no-underscore-dangle */
   };
 
   /**
@@ -377,7 +364,6 @@ const SiteMapLeaflet = () => {
   const handleMoveEnd = (event) => {
     const center = event.target.getCenter();
     const bounds = event.target.getBounds();
-    /* eslint-disable no-underscore-dangle */
     dispatch({
       type: 'setMapCenter',
       center: [center.lat, center.lng],
@@ -386,12 +372,10 @@ const SiteMapLeaflet = () => {
         lng: [bounds._southWest.lng, bounds._northEast.lng],
       },
     });
-    /* eslint-enable no-underscore-dangle */
   };
   const handleZoomEnd = (event) => {
     const center = event.target.getCenter();
     const bounds = event.target.getBounds();
-    /* eslint-disable no-underscore-dangle */
     dispatch({
       type: 'setMapZoom',
       zoom: event.target.getZoom(),
@@ -400,9 +384,7 @@ const SiteMapLeaflet = () => {
         lat: [bounds._southWest.lat, bounds._northEast.lat],
         lng: [bounds._southWest.lng, bounds._northEast.lng],
       },
-      classes,
     });
-    /* eslint-enable no-underscore-dangle */
   };
   const handleBaseLayerChange = (event) => {
     if (!event.name || !TILE_LAYERS_BY_NAME[event.name]) { return; }
@@ -428,6 +410,7 @@ const SiteMapLeaflet = () => {
       onZoomEnd={handleZoomEnd}
       onBaseLayerChange={handleBaseLayerChange}
       worldCopyJump
+      data-component="SiteMap"
     >
       <ScaleControl imperial metric updateWhenIdle />
       <LayersControl position="topright">

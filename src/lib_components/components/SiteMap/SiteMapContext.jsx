@@ -8,8 +8,6 @@ import PropTypes from 'prop-types';
 
 import cloneDeep from 'lodash/cloneDeep';
 
-import L from 'leaflet';
-
 import { of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
@@ -23,7 +21,6 @@ import {
   TILE_LAYERS,
   VIEWS,
   FEATURES,
-  ICON_SVGS,
   FETCH_STATUS,
   FEATURE_TYPES,
   FEATURE_DATA_LOAD_TYPES,
@@ -35,88 +32,9 @@ import {
   hydrateNeonContextData,
   parseLocationHierarchy,
   parseLocationData,
+  getZoomedIcons,
+  getMapStateForFoucusLocation,
 } from './SiteMapUtils';
-
-/**
-   Map Icon Functions
-   These appear here because of how Leaflet handles icons. Each icon must be a L.Icon instance,
-   but many of our icons repeat. We also want to scale our icons with the zoom level. As such,
-   we generate a stat structure containing only one instance of each distinct icon type scaled
-   to the current zoom level and keep that in state. It is regenerated any time the zoom changes.
-*/
-const getIconClassName = (classes, type = 'TYPE', isSelected = false) => ([
-  classes.mapIcon,
-  classes[`mapIcon${type}`],
-  classes[`mapIcon${isSelected ? 'Selected' : 'Unselected'}`],
-].join(' '));
-// Site Markers: Get a leaflet icon instance scaled to the current zoom level.
-const getZoomedSiteMarkerIcon = (zoom = 3, classes, type, terrain, isSelected = false) => {
-  const svgs = ICON_SVGS.SITE_MARKERS;
-  if (!svgs[type] || !svgs[type][terrain] || !svgs[type].SHADOW) { return null; }
-  const selected = isSelected ? 'SELECTED' : 'BASE';
-  const iconScale = 0.2 + (Math.floor(((zoom || 2) - 2) / 3) / 10);
-  const iconSize = isSelected ? [150, 150] : [100, 100];
-  const iconAnchor = isSelected ? [75, 125] : [50, 100];
-  const shadowSize = isSelected ? [234, 160] : [156, 93];
-  const shadowAnchor = isSelected ? [80, 120] : [50, 83];
-  return new L.Icon({
-    iconUrl: svgs[type][terrain][selected],
-    iconRetinaUrl: svgs[type][terrain][selected],
-    iconSize: iconSize.map(x => x * iconScale),
-    iconAnchor: iconAnchor.map(x => x * iconScale),
-    shadowUrl: svgs[type].SHADOW[selected],
-    shadowSize: shadowSize.map(x => x * iconScale),
-    shadowAnchor: shadowAnchor.map(x => x * iconScale),
-    popupAnchor: [0, -100].map(x => x * iconScale),
-    className: getIconClassName(classes, type, isSelected),
-  });
-};
-const getZoomedLocationIcon = (zoom = 3, classes) => {
-  const iconScale = 0.2 + (Math.floor(((zoom || 2) - 2) / 3) / 10);
-  const iconSize = [50, 50];
-  const iconAnchor = [25, 50];
-  const shadowSize = [78, 46.5];
-  const shadowAnchor = [25, 41.5];
-  return new L.Icon({
-    iconUrl: ICON_SVGS.PLACEHOLDER,
-    iconRetinaUrl: ICON_SVGS.PLACEHOLDER,
-    iconSize: iconSize.map(x => x * iconScale),
-    iconAnchor: iconAnchor.map(x => x * iconScale),
-    shadowUrl: ICON_SVGS.SITE_MARKERS.CORE.SHADOW.BASE,
-    shadowSize: shadowSize.map(x => x * iconScale),
-    shadowAnchor: shadowAnchor.map(x => x * iconScale),
-    popupAnchor: [0, -50].map(x => x * iconScale),
-    className: getIconClassName(classes, 'PLACEHOLDER'),
-  });
-};
-// Get a structure containing all zoomed leaflet icon instances. These are stored in
-// state and regenerated any time the zoom level changes. This makes for a maximum of
-// eight distinct icon instances in memory instead of one for every site.
-const getZoomedIcons = (zoom, classes) => ({
-  SITE_MARKERS: {
-    CORE: {
-      AQUATIC: {
-        BASE: getZoomedSiteMarkerIcon(zoom, classes, 'CORE', 'AQUATIC'),
-        SELECTED: getZoomedSiteMarkerIcon(zoom, classes, 'CORE', 'AQUATIC', true),
-      },
-      TERRESTRIAL: {
-        BASE: getZoomedSiteMarkerIcon(zoom, classes, 'CORE', 'TERRESTRIAL'),
-        SELECTED: getZoomedSiteMarkerIcon(zoom, classes, 'CORE', 'TERRESTRIAL', true),
-      },
-    },
-    RELOCATABLE: {
-      AQUATIC: {
-        BASE: getZoomedSiteMarkerIcon(zoom, classes, 'RELOCATABLE', 'AQUATIC'),
-        SELECTED: getZoomedSiteMarkerIcon(zoom, classes, 'RELOCATABLE', 'AQUATIC', true),
-      },
-      TERRESTRIAL: {
-        BASE: getZoomedSiteMarkerIcon(zoom, classes, 'RELOCATABLE', 'TERRESTRIAL'),
-        SELECTED: getZoomedSiteMarkerIcon(zoom, classes, 'RELOCATABLE', 'TERRESTRIAL', true),
-      },
-    },
-  },
-  PLACEHOLDER: getZoomedLocationIcon(zoom, classes),
-});
 
 // Derive the selected status of a given boundary (US state or NEON domain). This should run
 // every time the list of selected sites changes. It regenerates selectedStates and
@@ -340,12 +258,14 @@ const reducer = (state, action) => {
       newState.map.zoom = action.zoom;
       if (centerIsValid(action.center)) { newState.map.center = action.center; }
       if (boundsAreValid(action.bounds)) { newState.map.bounds = action.bounds; }
-      if (action.classes) {
-        newState.map.zoomedIcons = getZoomedIcons(newState.map.zoom, action.classes);
-      }
+      newState.map.zoomedIcons = getZoomedIcons(newState.map.zoom);
       return calculateFeatureDataFetches(
         calculateFeatureAvailability(newState),
       );
+
+    case 'setMapBounds':
+      if (boundsAreValid(action.bounds)) { newState.map.bounds = action.bounds; }
+      return calculateFeatureDataFetches(newState);
 
     case 'setMapCenter':
       if (!centerIsValid(action.center)) { return state; }
@@ -385,6 +305,22 @@ const reducer = (state, action) => {
       return newState;
 
     // Fetch and Import
+    case 'setFocusLocationFetchStarted':
+      newState.focusLocation.fetch = { status: FETCH_STATUS.FETCHING, error: null };
+      newState.focusLocation.current = action.current;
+      newState.focusLocation.data = null;
+      return newState;
+
+    case 'setFocusLocationFetchFailed':
+      newState.focusLocation.fetch = { status: FETCH_STATUS.ERROR, error: action.error };
+      newState.focusLocation.data = null;
+      return newState;
+
+    case 'setFocusLocationFetchSucceeded':
+      newState.focusLocation.fetch = { status: FETCH_STATUS.SUCCESS, error: null };
+      newState.focusLocation.data = action.skipParse ? action.data : parseLocationData(action.data);
+      return calculateFeatureAvailability(getMapStateForFoucusLocation(newState));
+
     case 'awaitingFeatureDataFetchesTriggered':
       return { ...state, featureDataFetchesHasAwaiting: false };
 
@@ -477,6 +413,7 @@ const Provider = (props) => {
     mapZoom,
     mapCenter,
     mapTileLayer,
+    location: locationProp,
     selection,
     maxSelectable,
     children,
@@ -500,6 +437,10 @@ const Provider = (props) => {
     center: mapCenter,
     tileLayer: mapTileLayer,
   };
+  if (typeof locationProp === 'string') {
+    initialState.focusLocation.current = locationProp;
+    initialState.focusLocation.fetch.status = FETCH_STATUS.AWAITING_CALL;
+  }
   if (typeof aspectRatio === 'number' && aspectRatio > 0) {
     initialState.aspectRatio.isDynamic = false;
     initialState.aspectRatio.currentValue = aspectRatio;
@@ -513,11 +454,66 @@ const Provider = (props) => {
   }
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  const canFetchFeatureData = (
+    state.neonContextHydrated
+      && !(state.focusLocation.current && state.focusLocation.fetch.status !== FETCH_STATUS.SUCCESS)
+  );
+
+  /**
+     Effect - trigger focusLocation fetch or short circuit if found in NeonContext data
+  */
+  useEffect(() => {
+    const { current, fetch: { status } } = state.focusLocation;
+    if (!current || status !== FETCH_STATUS.AWAITING_CALL || !state.neonContextHydrated) { return; }
+    // If the location is a known Domain or State then pull from NeonContext
+    const {
+      [FEATURES.STATES.KEY]: statesData = {},
+      [FEATURES.DOMAINS.KEY]: domainsData = {},
+    } = state.featureData[FEATURE_TYPES.BOUNDARIES];
+    if (Object.keys(statesData).includes(current)) {
+      const { 0: latitude, 1: longitude } = statesData[current].center;
+      dispatch({
+        type: 'setFocusLocationFetchSucceeded',
+        data: { type: 'STATE', latitude, longitude },
+        skipParse: true,
+      });
+      return;
+    }
+    if (Object.keys(domainsData).includes(current)) {
+      const { 0: latitude, 1: longitude } = domainsData[current].center;
+      dispatch({
+        type: 'setFocusLocationFetchSucceeded',
+        data: { type: 'DOMAIN', latitude, longitude },
+        skipParse: true,
+      });
+      return;
+    }
+    const {
+      [FEATURE_TYPES.SITES]: sitesData = {},
+    } = state.featureData;
+    if (Object.keys(sitesData).includes(current)) {
+      const { latitude, longitude } = sitesData[current];
+      dispatch({
+        type: 'setFocusLocationFetchSucceeded',
+        data: { type: 'SITE', latitude, longitude },
+        skipParse: true,
+      });
+      return;
+    }
+    // Trigger focus location fetch
+    console.log('FOCUS LOCATION FETCH');
+  }, [
+    state.focusLocation.current,
+    state.focusLocation.fetch.status,
+    state.neonContextHydrated,
+    state.featureData,
+  ]);
+
   /**
      Effect - trigger all data fetches and imports
   */
   useEffect(() => {
-    if (!state.featureDataFetchesHasAwaiting) { return; }
+    if (!canFetchFeatureData || !state.featureDataFetchesHasAwaiting) { return; }
     // Special case: fetch site-location hierarchies. These are not features themselves
     // but constitute critical data in order to generate feature fetches within sites
     Object.keys(state.featureDataFetches.SITE_LOCATION_HIERARCHIES).forEach((siteCode) => {
@@ -627,7 +623,7 @@ const Provider = (props) => {
         });
       });
     dispatch({ type: 'awaitingFeatureDataFetchesTriggered' });
-  }, [state.featureDataFetchesHasAwaiting, state.featureDataFetches]);
+  }, [canFetchFeatureData, state.featureDataFetchesHasAwaiting, state.featureDataFetches]);
 
   /**
      Render
@@ -658,7 +654,6 @@ Provider.defaultProps = SITE_MAP_DEFAULT_PROPS;
 const SiteMapContext = {
   Provider,
   useSiteMapContext,
-  getIconClassName,
   SORT_DIRECTIONS,
   VIEWS,
 };

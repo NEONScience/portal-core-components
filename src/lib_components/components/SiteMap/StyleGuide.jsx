@@ -176,7 +176,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
       </ul>
 
       <ExampleBlock>
-        <SiteMap />
+        <SiteMap location="CO" />
       </ExampleBlock>
       <CodeBlock>
         {`
@@ -184,6 +184,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
         `}
       </CodeBlock>
 
+      {/*
       <ExampleBlock>
         <SiteMap selection="SITES" />
       </ExampleBlock>
@@ -192,6 +193,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
 <SiteMap selection="SITES" />
         `}
       </CodeBlock>
+      */}
 
       <Divider className={classes.divider} />
       <Typography variant="h6" component="h4" gutterBottom>Props</Typography>

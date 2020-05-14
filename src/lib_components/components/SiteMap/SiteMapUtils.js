@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 
+import L from 'leaflet';
+
 import { COLORS } from '../Theme/Theme';
 
 // SVGs for all map icons
@@ -434,6 +436,11 @@ Object.keys(TILE_LAYERS).forEach((key) => {
 export const DEFAULT_STATE = {
   view: null,
   neonContextHydrated: false, // Whether NeonContext data has been one-time hydrated into state
+  focusLocation: {
+    current: null,
+    data: null,
+    fetch: { status: null, error: null },
+  },
   aspectRatio: {
     currentValue: 0.75, // Aspect ratio of the Site Map component content area (table and/or map)
     isDynamic: true, // Whether currentValue should set itself dynamically from viewport size
@@ -488,7 +495,8 @@ export const DEFAULT_STATE = {
 // Initialize featureData and featureDataFetches objects for all features that have a dataLoadType
 Object.keys(FEATURES)
   .filter(featureKey => (
-    Object.keys(FEATURE_DATA_LOAD_TYPES).includes(FEATURES[featureKey].dataLoadType)
+    FEATURES[featureKey].type !== FEATURE_TYPES.SITES
+      && Object.keys(FEATURE_DATA_LOAD_TYPES).includes(FEATURES[featureKey].dataLoadType)
   ))
   .forEach((featureKey) => {
     const { type: featureType } = FEATURES[featureKey];
@@ -560,6 +568,8 @@ export const SITE_MAP_PROP_TYPES = {
   mapCenter: PropTypes.arrayOf(PropTypes.number),
   mapZoom: PropTypes.number,
   mapTileLayer: PropTypes.oneOf(Object.keys(TILE_LAYERS)),
+  // Initial map focus (overrides mapCenter and mapZoom)
+  location: PropTypes.string,
   // Selection Props
   selection: PropTypes.oneOf(Object.keys(SELECTABLE_FEATURE_TYPES)),
   maxSelectable: PropTypes.number,
@@ -576,6 +586,8 @@ export const SITE_MAP_DEFAULT_PROPS = {
   mapCenter: [52.68, -110.75],
   mapZoom: null,
   mapTileLayer: Object.keys(TILE_LAYERS)[0],
+  // Initial map focus (overrides mapCenter and mapZoom)
+  location: null,
   // Selection Props
   selection: null,
   maxSelectable: null,
@@ -690,4 +702,125 @@ export const parseLocationHierarchy = (inHierarchy, parent = null) => {
     };
   });
   return outHierarchy;
+};
+
+/**
+   Map Icon Functions
+   These appear here because of how Leaflet handles icons. Each icon must be a L.Icon instance,
+   but many of our icons repeat. We also want to scale our icons with the zoom level. As such,
+   we generate a stat structure containing only one instance of each distinct icon type scaled
+   to the current zoom level and keep that in state. It is regenerated any time the zoom changes.
+*/
+export const getIconClassName = (type = 'TYPE', isSelected = false) => ([
+  'mapIcon', `mapIcon${type}`, `mapIcon${isSelected ? 'Selected' : 'Unselected'}`,
+].join(' '));
+
+// Site Markers: Get a leaflet icon instance scaled to the current zoom level.
+const getZoomedSiteMarkerIcon = (zoom = 3, type, terrain, isSelected = false) => {
+  const svgs = ICON_SVGS.SITE_MARKERS;
+  if (!svgs[type] || !svgs[type][terrain] || !svgs[type].SHADOW) { return null; }
+  const selected = isSelected ? 'SELECTED' : 'BASE';
+  const iconScale = 0.2 + (Math.floor(((zoom || 2) - 2) / 3) / 10);
+  const iconSize = isSelected ? [150, 150] : [100, 100];
+  const iconAnchor = isSelected ? [75, 125] : [50, 100];
+  const shadowSize = isSelected ? [234, 160] : [156, 93];
+  const shadowAnchor = isSelected ? [80, 120] : [50, 83];
+  return new L.Icon({
+    iconUrl: svgs[type][terrain][selected],
+    iconRetinaUrl: svgs[type][terrain][selected],
+    iconSize: iconSize.map(x => x * iconScale),
+    iconAnchor: iconAnchor.map(x => x * iconScale),
+    shadowUrl: svgs[type].SHADOW[selected],
+    shadowSize: shadowSize.map(x => x * iconScale),
+    shadowAnchor: shadowAnchor.map(x => x * iconScale),
+    popupAnchor: [0, -100].map(x => x * iconScale),
+    className: getIconClassName(type, isSelected),
+  });
+};
+const getZoomedLocationIcon = (zoom = 3) => {
+  const iconScale = 0.2 + (Math.floor(((zoom || 2) - 2) / 3) / 10);
+  const iconSize = [50, 50];
+  const iconAnchor = [25, 50];
+  const shadowSize = [78, 46.5];
+  const shadowAnchor = [25, 41.5];
+  return new L.Icon({
+    iconUrl: ICON_SVGS.PLACEHOLDER,
+    iconRetinaUrl: ICON_SVGS.PLACEHOLDER,
+    iconSize: iconSize.map(x => x * iconScale),
+    iconAnchor: iconAnchor.map(x => x * iconScale),
+    shadowUrl: ICON_SVGS.SITE_MARKERS.CORE.SHADOW.BASE,
+    shadowSize: shadowSize.map(x => x * iconScale),
+    shadowAnchor: shadowAnchor.map(x => x * iconScale),
+    popupAnchor: [0, -50].map(x => x * iconScale),
+    className: getIconClassName('PLACEHOLDER'),
+  });
+};
+// Get a structure containing all zoomed leaflet icon instances. These are stored in
+// state and regenerated any time the zoom level changes. This makes for a maximum of
+// eight distinct icon instances in memory instead of one for every site.
+export const getZoomedIcons = zoom => ({
+  SITE_MARKERS: {
+    CORE: {
+      AQUATIC: {
+        BASE: getZoomedSiteMarkerIcon(zoom, 'CORE', 'AQUATIC'),
+        SELECTED: getZoomedSiteMarkerIcon(zoom, 'CORE', 'AQUATIC', true),
+      },
+      TERRESTRIAL: {
+        BASE: getZoomedSiteMarkerIcon(zoom, 'CORE', 'TERRESTRIAL'),
+        SELECTED: getZoomedSiteMarkerIcon(zoom, 'CORE', 'TERRESTRIAL', true),
+      },
+    },
+    RELOCATABLE: {
+      AQUATIC: {
+        BASE: getZoomedSiteMarkerIcon(zoom, 'RELOCATABLE', 'AQUATIC'),
+        SELECTED: getZoomedSiteMarkerIcon(zoom, 'RELOCATABLE', 'AQUATIC', true),
+      },
+      TERRESTRIAL: {
+        BASE: getZoomedSiteMarkerIcon(zoom, 'RELOCATABLE', 'TERRESTRIAL'),
+        SELECTED: getZoomedSiteMarkerIcon(zoom, 'RELOCATABLE', 'TERRESTRIAL', true),
+      },
+    },
+  },
+  PLACEHOLDER: getZoomedLocationIcon(zoom),
+});
+
+export const getMapStateForFoucusLocation = (state = {}) => {
+  const { focusLocation } = state;
+  if (!focusLocation || !focusLocation.current) { return state; }
+  const { current } = focusLocation;
+  const { type = '', latitude, longitude } = focusLocation.data || {};
+
+  const newState = { ...state };
+  newState.map.bounds = null;
+  newState.map.zoom = null;
+
+  // No latitude/longitude: return all defaults
+  if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
+    newState.map.center = SITE_MAP_DEFAULT_PROPS.mapCenter;
+    return newState;
+  }
+
+  // Everything else (valid location with a center)
+  newState.map.center = [latitude, longitude];
+  newState.map.bounds = null;
+  newState.map.zoom = null;
+  const pointTypes = [
+    'TOWER', 'HUT', 'MEGAPIT', 'GROUNDWATER_WELL', 'MET_STATION', 'STAFF_GAUGE', 'S1_LOC', 'S2_LOC',
+  ];
+  if (pointTypes.includes(type) || type.includes('OS Plot') || type.includes('AOS')) {
+    newState.map.zoom = 16;
+  }
+  if (type === 'SITE') { newState.map.zoom = 12; }
+  if (type === 'DOMAIN') {
+    const { [FEATURES.DOMAINS.KEY]: domainsData } = state.featureData[FEATURE_TYPES.BOUNDARIES];
+    newState.map.zoom = (domainsData[current] || {}).zoom || null;
+  }
+  if (type === 'STATE') {
+    const { [FEATURES.STATES.KEY]: statesData } = state.featureData[FEATURE_TYPES.BOUNDARIES];
+    newState.map.zoom = (statesData[current] || {}).zoom || null;
+  }
+  if (newState.map.zoom !== null) {
+    newState.map.zoomedIcons = getZoomedIcons(newState.map.zoom);
+  }
+  return newState;
 };
