@@ -1,5 +1,8 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import PropTypes from 'prop-types';
+
+import tinycolor from 'tinycolor2';
 
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import Typography from '@material-ui/core/Typography';
@@ -81,14 +84,22 @@ const States = (props) => {
   /**
      Main Render
   */
+  // If a state is the current focus location put it at the end of the states list so
+  // that it renders last. This makes it so no other state lines will overlap on top of it
+  // and the focus highlight will be complete.
+  const sortedStates = Object.keys(featureData).sort(
+    a => (a === state.focusLocation.current ? 1 : -1),
+  );
   return (
     <FeatureGroup>
-      {Object.keys(featureData).map((stateCode) => {
+      {sortedStates.map((stateCode) => {
         const usState = featureData[stateCode];
+        const baseColor = state.focusLocation.current === stateCode
+          ? `#${tinycolor(FEATURES.STATES.polygonStyle.color).darken(20).toHex()}`
+          : FEATURES.STATES.polygonStyle.color;
         const overlayColor = selectionActive && selectedStates[stateCode]
           ? BOUNDARY_COLORS[`${selectedStates[stateCode]}Selected`]
-          : FEATURES.STATES.polygonStyle.color;
-        /* eslint-disable no-underscore-dangle */
+          : baseColor;
         const interactionProps = selectionActive ? {
           onMouseOver: (e) => {
             e.target._path.setAttribute('stroke', BOUNDARY_COLORS.hover);
@@ -117,7 +128,6 @@ const States = (props) => {
             e.target._path.setAttribute('fill', overlayColor);
           },
         };
-        /* eslint-enable no-underscore-dangle */
         return (
           <Polygon
             key={stateCode}

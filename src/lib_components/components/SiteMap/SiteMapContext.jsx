@@ -131,12 +131,20 @@ const calculateSitesInMap = (state) => {
 const calculateFeatureDataFetches = (state) => {
   const sitesInMap = calculateSitesInMap(state);
   if (!sitesInMap) { return state; }
+  const domainsInMap = new Set();
+  sitesInMap
+    .filter(siteCode => state.featureData.SITES[siteCode])
+    .forEach((siteCode) => {
+      domainsInMap.add(state.featureData.SITES[siteCode].domainCode);
+    });
   const newState = { ...state };
-  // Site-location hierarchy fetches for individual sites
+  // Domain-location hierarchy fetches for individual domains
   if (state.map.zoom >= SITE_LOCATION_HIERARCHIES_MIN_ZOOM) {
-    sitesInMap.forEach((siteCode) => {
-      if (newState.featureDataFetches.SITE_LOCATION_HIERARCHIES[siteCode]) { return; }
-      newState.featureDataFetches.SITE_LOCATION_HIERARCHIES[siteCode] = FETCH_STATUS.AWAITING_CALL;
+    Array.from(domainsInMap).forEach((domainCode) => {
+      if (newState.featureDataFetches.SITE_LOCATION_HIERARCHIES[domainCode]) { return; }
+      newState.featureDataFetches.SITE_LOCATION_HIERARCHIES[domainCode] = FETCH_STATUS.AWAITING_CALL; // eslint-disable-line max-len
+      newState.overallFetch.expected += 1;
+      newState.overallFetch.pendingHierarchy += 1;
       newState.featureDataFetchesHasAwaiting = true;
     });
   }
@@ -152,6 +160,7 @@ const calculateFeatureDataFetches = (state) => {
       sitesInMap.forEach((siteCode) => {
         if (newState.featureDataFetches[featureType][featureKey][siteCode]) { return; }
         newState.featureDataFetches[featureType][featureKey][siteCode] = FETCH_STATUS.AWAITING_CALL;
+        newState.overallFetch.expected += 1;
         newState.featureDataFetchesHasAwaiting = true;
       });
     });
@@ -168,11 +177,9 @@ const calculateFeatureDataFetches = (state) => {
       const { type: featureType, matchLocationType } = FEATURES[featureKey];
       // For each feature that warrants fetching; loop through the sites in the map
       sitesInMap
-        // Site hierarchy must be completed in order to generate subsequent fetches
-        .filter(siteCode => (
-          state.featureDataFetches.SITE_LOCATION_HIERARCHIES[siteCode] === FETCH_STATUS.SUCCESS
-            && state.featureData.SITE_LOCATION_HIERARCHIES[siteCode]
-        ))
+        // Domain hierarchy must be completed in order to generate subsequent fetches
+        // (only true if site location hierarchy feature data is there)
+        .filter(siteCode => state.featureData.SITE_LOCATION_HIERARCHIES[siteCode])
         .forEach((siteCode) => {
           if (!newState.featureDataFetches[featureType][featureKey][siteCode]) {
             newState.featureDataFetches[featureType][featureKey][siteCode] = {};
@@ -186,6 +193,7 @@ const calculateFeatureDataFetches = (state) => {
                 return;
               }
               newState.featureDataFetches[featureType][featureKey][siteCode][locationKey] = FETCH_STATUS.AWAITING_CALL; // eslint-disable-line max-len
+              newState.overallFetch.expected += 1;
               newState.featureDataFetchesHasAwaiting = true;
             });
         });
@@ -195,6 +203,16 @@ const calculateFeatureDataFetches = (state) => {
 const reducer = (state, action) => {
   let setMethod = null;
   const newState = { ...state };
+  // Increment the completed count for overall fetch and, if completed and expected are now equal,
+  // reset both (so that subsequent batches of fetches can give an accurate progress metric).
+  const completeOverallFetch = () => {
+    newState.overallFetch.completed += 1;
+    if (newState.overallFetch.expected === newState.overallFetch.completed) {
+      newState.overallFetch.expected = 0;
+      newState.overallFetch.completed = 0;
+      newState.overallFetch.pendingHierarchy = 0;
+    }
+  };
   // Returns a boolean describing whether a fetch status was updated
   const setFetchStatusFromAction = (status) => {
     if (!Object.keys(FETCH_STATUS).includes(status) || status === FETCH_STATUS.AWAITING_CALL) {
@@ -305,21 +323,38 @@ const reducer = (state, action) => {
       return newState;
 
     // Fetch and Import
+    case 'setNewFocusLocation':
+      newState.focusLocation.fetch = { status: FETCH_STATUS.AWAITING_CALL, error: null };
+      newState.focusLocation.current = action.location;
+      newState.focusLocation.data = null;
+      newState.overallFetch.expected += 1;
+      return newState;
+
     case 'setFocusLocationFetchStarted':
       newState.focusLocation.fetch = { status: FETCH_STATUS.FETCHING, error: null };
-      newState.focusLocation.current = action.current;
       newState.focusLocation.data = null;
       return newState;
 
     case 'setFocusLocationFetchFailed':
       newState.focusLocation.fetch = { status: FETCH_STATUS.ERROR, error: action.error };
       newState.focusLocation.data = null;
+      completeOverallFetch();
       return newState;
 
     case 'setFocusLocationFetchSucceeded':
       newState.focusLocation.fetch = { status: FETCH_STATUS.SUCCESS, error: null };
       newState.focusLocation.data = action.skipParse ? action.data : parseLocationData(action.data);
-      return calculateFeatureAvailability(getMapStateForFoucusLocation(newState));
+      // For STATE and DOMAIN types: ensure corresponding feature is visible
+      if (newState.focusLocation.data.type === 'STATE') {
+        newState.filters.features.visible[FEATURES.STATES.KEY] = true;
+      }
+      if (newState.focusLocation.data.type === 'DOMAIN') {
+        newState.filters.features.visible[FEATURES.DOMAINS.KEY] = true;
+      }
+      completeOverallFetch();
+      return calculateFeatureDataFetches(
+        calculateFeatureAvailability(getMapStateForFoucusLocation(newState)),
+      );
 
     case 'awaitingFeatureDataFetchesTriggered':
       return { ...state, featureDataFetchesHasAwaiting: false };
@@ -330,26 +365,44 @@ const reducer = (state, action) => {
 
     case 'setFeatureDataFetchSucceeded':
       setFetchStatusFromAction(FETCH_STATUS.SUCCESS);
+      completeOverallFetch();
       return newState;
 
     case 'setFeatureDataFetchFailed':
       setFetchStatusFromAction(FETCH_STATUS.ERROR);
+      completeOverallFetch();
       return newState;
 
-    case 'setSiteLocationHierarchyFetchStarted':
-      if (!newState.featureDataFetches.SITE_LOCATION_HIERARCHIES[action.siteCode]) { return state; }
-      newState.featureDataFetches.SITE_LOCATION_HIERARCHIES[action.siteCode] = FETCH_STATUS.FETCHING; // eslint-disable-line max-len
+    case 'setDomainLocationHierarchyFetchStarted':
+      /* eslint-disable max-len */
+      if (!newState.featureDataFetches.SITE_LOCATION_HIERARCHIES[action.domainCode]) { return state; }
+      newState.featureDataFetches.SITE_LOCATION_HIERARCHIES[action.domainCode] = FETCH_STATUS.FETCHING;
+      /* eslint-enable max-len */
       return newState;
 
-    case 'setSiteLocationHierarchyFetchSucceeded':
-      if (!newState.featureDataFetches.SITE_LOCATION_HIERARCHIES[action.siteCode]) { return state; }
-      newState.featureDataFetches.SITE_LOCATION_HIERARCHIES[action.siteCode] = FETCH_STATUS.SUCCESS;
-      newState.featureData.SITE_LOCATION_HIERARCHIES[action.siteCode] = parseLocationHierarchy(action.data); // eslint-disable-line max-len
+    case 'setDomainLocationHierarchyFetchSucceeded':
+      if (
+        !newState.featureDataFetches.SITE_LOCATION_HIERARCHIES[action.domainCode]
+          || !Array.isArray(action.data.locationChildHierarchy)
+      ) { return state; }
+      /* eslint-disable max-len */
+      newState.featureDataFetches.SITE_LOCATION_HIERARCHIES[action.domainCode] = FETCH_STATUS.SUCCESS;
+      action.data.locationChildHierarchy.forEach((child) => {
+        if (child.locationType !== 'SITE' || child.locationName === 'HQTW') { return; }
+        newState.featureData.SITE_LOCATION_HIERARCHIES[child.locationName] = parseLocationHierarchy(child);
+      });
+      /* eslint-enable max-len */
+      newState.overallFetch.pendingHierarchy -= 1;
+      completeOverallFetch();
       return calculateFeatureDataFetches(newState);
 
-    case 'setSiteLocationHierarchyFetchFailed':
-      if (!newState.featureDataFetches.SITE_LOCATION_HIERARCHIES[action.siteCode]) { return state; }
-      newState.featureDataFetches.SITE_LOCATION_HIERARCHIES[action.siteCode] = FETCH_STATUS.ERROR;
+    case 'setDomainLocationHierarchyFetchFailed':
+      /* eslint-disable max-len */
+      if (!newState.featureDataFetches.SITE_LOCATION_HIERARCHIES[action.domainCode]) { return state; }
+      newState.featureDataFetches.SITE_LOCATION_HIERARCHIES[action.domainCode] = FETCH_STATUS.ERROR;
+      /* eslint-enable max-len */
+      newState.overallFetch.pendingHierarchy -= 1;
+      completeOverallFetch();
       return newState;
 
     // Selection
@@ -440,6 +493,7 @@ const Provider = (props) => {
   if (typeof locationProp === 'string') {
     initialState.focusLocation.current = locationProp;
     initialState.focusLocation.fetch.status = FETCH_STATUS.AWAITING_CALL;
+    initialState.overallFetch.expected += 1;
   }
   if (typeof aspectRatio === 'number' && aspectRatio > 0) {
     initialState.aspectRatio.isDynamic = false;
@@ -501,9 +555,23 @@ const Provider = (props) => {
       return;
     }
     // Trigger focus location fetch
-    console.log('FOCUS LOCATION FETCH');
+    dispatch({ type: 'setFocusLocationFetchStarted' });
+    NeonApi.getLocationObservable(current).pipe(
+      map((response) => {
+        if (response && response.data && response.data) {
+          dispatch({ type: 'setFocusLocationFetchSucceeded', data: response.data });
+          return of(true);
+        }
+        dispatch({ type: 'setFocusLocationFetchFailed', error: 'malformed response' });
+        return of(false);
+      }),
+      catchError((error) => {
+        dispatch({ type: 'setFocusLocationDataFetchFailed', error: error.message });
+        return of(false);
+      }),
+    ).subscribe();
   }, [
-    state.focusLocation.current,
+    state.focusLocation,
     state.focusLocation.fetch.status,
     state.neonContextHydrated,
     state.featureData,
@@ -516,33 +584,31 @@ const Provider = (props) => {
     if (!canFetchFeatureData || !state.featureDataFetchesHasAwaiting) { return; }
     // Special case: fetch site-location hierarchies. These are not features themselves
     // but constitute critical data in order to generate feature fetches within sites
-    Object.keys(state.featureDataFetches.SITE_LOCATION_HIERARCHIES).forEach((siteCode) => {
-      if (
-        state.featureDataFetches.SITE_LOCATION_HIERARCHIES[siteCode] !== FETCH_STATUS.AWAITING_CALL
-      ) { return; }
-      dispatch({ type: 'setSiteLocationHierarchyFetchStarted', siteCode });
-      NeonApi.getSiteLocationHierarchyObservable(siteCode).pipe(
+    Object.keys(state.featureDataFetches.SITE_LOCATION_HIERARCHIES).forEach((domainCode) => {
+      if (state.featureDataFetches.SITE_LOCATION_HIERARCHIES[domainCode] !== FETCH_STATUS.AWAITING_CALL) { return; } // eslint-disable-line max-len
+      dispatch({ type: 'setDomainLocationHierarchyFetchStarted', domainCode });
+      NeonApi.getSiteLocationHierarchyObservable(domainCode).pipe(
         map((response) => {
           if (response && response.data && response.data) {
             dispatch({
-              type: 'setSiteLocationHierarchyFetchSucceeded',
+              type: 'setDomainLocationHierarchyFetchSucceeded',
               data: response.data,
-              siteCode,
+              domainCode,
             });
             return of(true);
           }
           dispatch({
-            type: 'setSiteLocationHierarchyFetchFailed',
+            type: 'setDomainLocationHierarchyFetchFailed',
             error: 'malformed response',
-            siteCode,
+            domainCode,
           });
           return of(false);
         }),
         catchError((error) => {
           dispatch({
-            type: 'setSiteLocationHierarchyFetchFailed',
+            type: 'setDomainLocationHierarchyFetchFailed',
             error: error.message,
-            siteCode,
+            domainCode,
           });
           return of(false);
         }),

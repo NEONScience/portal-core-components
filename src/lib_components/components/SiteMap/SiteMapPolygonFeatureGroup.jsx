@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -55,7 +56,6 @@ const SiteMapPolygonFeatureGroup = (props) => {
   */
   const featureStyle = polygonStyle || rectStyle || { color: '#666666' };
   const hoverColor = `#${tinycolor(featureStyle.color).lighten(10).toHex()}`;
-  /* eslint-disable no-underscore-dangle */
   const interactionProps = {
     onMouseOver: (e) => {
       e.target._path.setAttribute('stroke', hoverColor);
@@ -66,7 +66,6 @@ const SiteMapPolygonFeatureGroup = (props) => {
       e.target._path.setAttribute('fill', featureStyle.color);
     },
   };
-  /* eslint-enable no-underscore-dangle */
 
   /**
      Render a single shape

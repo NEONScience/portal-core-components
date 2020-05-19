@@ -222,7 +222,7 @@ const SiteMapLeaflet = () => {
         lng: [bounds._southWest.lng, bounds._northEast.lng],
       },
     });
-  }, [state.map.bounds, mapRef.current]);
+  }, [state.map.bounds, dispatch]);
 
   if (!canRender) { return null; }
 

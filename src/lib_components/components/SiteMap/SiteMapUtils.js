@@ -27,7 +27,11 @@ export const MAP_ZOOM_RANGE = [1, 16];
 
 export const KM2_TO_ACRES = 247.10538146717;
 
-// Minimum zoom level at which location hierarchy fetches are done on a per-site basis
+// Minimum zoom level at which location hierarchy fetches are done on a per-domain basis
+// We don't do per-site because hierarchy query performance is a function of number of immediate
+// children. Domains top out at 8 or so sites, while sites may have over a hundred children (plots)
+// Note that while we FETCH at the domain level we parse down to the site level as that's what's
+// most useful for generating subsequent fetches
 export const SITE_LOCATION_HIERARCHIES_MIN_ZOOM = 9;
 
 /**
@@ -128,7 +132,7 @@ export const FEATURES = {
     description: '',
     hideByDefault: true,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
-    polygonStyle: { color: '#9252e0' },
+    polygonStyle: { color: '#a067e4' },
   },
   STATES: {
     name: 'US States',
@@ -258,7 +262,6 @@ export const FEATURES = {
     description: 'Tower plots support a variety of plant productivity, plant diversity, soil, biogeochemistry and microbe sampling. The number and size of Tower Base Plots is determined by the vegetation of the tower airshed. In forested sites, twenty 40m x 40m plots are established. In herbaceous sites, thirty 20m x 20m plots are established.  Of these thirty tower plots, four have additional space to support soil sampling.',
     parent: 'TOWER_PLOTS',
     matchLocationType: 'OS Plot - all', // Fethed by parent since distributed base plots share type
-    matchLocationPlotType: 'tower',
     attributes: { type: 'base', location: 'tower' },
     rectStyle: PLACEHOLDER_RECT_STYLE,
   },
@@ -286,7 +289,6 @@ export const FEATURES = {
     description: 'Distributed Base Plots support a variety of plant productivity, plant diversity, soil, biogeochemistry, microbe and beetle sampling. Distributed Base Plots are 40m x 40m.',
     parent: 'DISTRIBUTED_PLOTS',
     matchLocationType: 'OS Plot - all', // Fethed by parent since tower base plots share type
-    matchLocationPlotType: 'distributed',
     attributes: { type: 'base', location: 'distributed' },
     rectStyle: PLACEHOLDER_RECT_STYLE,
   },
@@ -436,6 +438,11 @@ Object.keys(TILE_LAYERS).forEach((key) => {
 export const DEFAULT_STATE = {
   view: null,
   neonContextHydrated: false, // Whether NeonContext data has been one-time hydrated into state
+  overallFetch: { // Aggregation of all current fetch statuses for the SiteMap component
+    expected: 0,
+    completed: 0,
+    pendingHierarchy: 0, // In-progress hierarchy fetches (ones that will spawn more fetches)
+  },
   focusLocation: {
     current: null,
     data: null,

@@ -1,8 +1,11 @@
 import React, { useRef, useEffect, useLayoutEffect } from 'react';
 
+import uniq from 'lodash/uniq';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Checkbox from '@material-ui/core/Checkbox';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -21,6 +24,8 @@ import {
   FEATURE_TYPES,
   getDynamicAspectRatio,
 } from './SiteMapUtils';
+
+const progressId = `sitemap-progress-${uniq()}`;
 
 const boxShadow = '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)';
 const useStyles = makeStyles(theme => ({
@@ -76,6 +81,7 @@ const SiteMapContainer = () => {
 
   const [state, dispatch] = SiteMapContext.useSiteMapContext();
   console.log('CONTAINER STATE:', state);
+  const isLoading = state.overallFetch.expected !== state.overallFetch.completed;
 
   const { view, aspectRatio } = state;
   const contentDivProps = {
@@ -174,7 +180,7 @@ const SiteMapContainer = () => {
   }
 
   /**
-     Render Method - Single Feature Option
+     Render - Single Feature Option
   */
   const renderFeatureOption = (key) => {
     if (!FEATURES[key]) { return null; }
@@ -256,11 +262,32 @@ const SiteMapContainer = () => {
     );
   };
 
+  // TODO: hook this up to a UI element somewhere
+  window.jumpTo = location => dispatch({ type: 'setNewFocusLocation', location });
+
   /**
-     Render - Functioning Component
+     Render - Progress Indicator
+  */
+  const renderProgress = () => {
+    const progress = !isLoading || state.overallFetch.expected === 0 ? 0
+      : (state.overallFetch.completed / state.overallFetch.expected) * 100;
+    const style = isLoading ? {} : { opacity: 0 };
+    let variant = 'determinate';
+    if (isLoading && state.overallFetch.pendingHierarchy > 0) {
+      variant = 'query';
+    }
+    return <LinearProgress id={progressId} variant={variant} value={progress} style={style} />;
+  };
+
+  /**
+     Render - Full Component
   */
   return (
-    <div className={classes.outerContainer}>
+    <div
+      className={classes.outerContainer}
+      aria-describedby={progressId}
+      aria-busy={isLoading ? 'true' : 'false'}
+    >
       <SiteMapFilters />
       <div {...contentDivProps}>
         {view === VIEWS.MAP ? (
@@ -276,6 +303,7 @@ const SiteMapContainer = () => {
           </div>
         )}
       </div>
+      {renderProgress()}
     </div>
   );
 };
