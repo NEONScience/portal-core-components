@@ -337,6 +337,123 @@ export const FEATURES = {
     iconSvg: ICON_SVGS.PLACEHOLDER,
     minPolygonZoom: 17,
   },
+  // Aquatic Site Features
+  AQUATIC_SITE_FEATURES: {
+    name: 'Aquatic Site Features',
+    type: FEATURE_TYPES.GROUP,
+    minZoom: 14,
+    description: '',
+  },
+  AQUATIC_BENCHMARKS: {
+    name: 'Benchmarks',
+    type: FEATURE_TYPES.LOCATIONS,
+    minZoom: 14,
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    matchLocationType: 'AOS benchmark named location type',
+    description: '',
+    parent: 'AQUATIC_SITE_FEATURES',
+    iconSvg: ICON_SVGS.PLACEHOLDER,
+  },
+  AQUATIC_RIPARIAN_ASSESSMENTS: {
+    name: 'Ripariant Assessments',
+    type: FEATURE_TYPES.LOCATIONS,
+    minZoom: 14,
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    matchLocationType: 'AOS riparian named location type',
+    description: '',
+    parent: 'AQUATIC_SITE_FEATURES',
+    iconSvg: ICON_SVGS.PLACEHOLDER,
+  },
+  AQUATIC_WET_DEPOSITION_POINTS: {
+    name: 'Wet Deposition Points',
+    type: FEATURE_TYPES.LOCATIONS,
+    minZoom: 14,
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    matchLocationType: 'AOS wet deposition named location type',
+    description: '',
+    parent: 'AQUATIC_SITE_FEATURES',
+    iconSvg: ICON_SVGS.PLACEHOLDER,
+  },
+  AQUATIC_GROUNDWATER_WELLS: {
+    name: 'Groundwater Wells',
+    type: FEATURE_TYPES.LOCATIONS,
+    minZoom: 14,
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    matchLocationType: 'GROUNDWATER_WELL',
+    description: '',
+    parent: 'AQUATIC_SITE_FEATURES',
+    iconSvg: ICON_SVGS.PLACEHOLDER,
+  },
+  AQUATIC_METEOROLOGICAL_STATIONS: {
+    name: 'Meteorological Stations',
+    type: FEATURE_TYPES.LOCATIONS,
+    minZoom: 14,
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    matchLocationType: 'MET_STATION',
+    description: '',
+    parent: 'AQUATIC_SITE_FEATURES',
+    iconSvg: ICON_SVGS.PLACEHOLDER,
+  },
+  AQUATIC_DISCHARGE_POINTS: {
+    name: 'Discharge Points',
+    type: FEATURE_TYPES.LOCATIONS,
+    minZoom: 14,
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    matchLocationType: 'AOS discharge named location type',
+    description: '',
+    parent: 'AQUATIC_SITE_FEATURES',
+    iconSvg: ICON_SVGS.PLACEHOLDER,
+  },
+  AQUATIC_FISH_POINTS: {
+    name: 'Fish Points',
+    type: FEATURE_TYPES.LOCATIONS,
+    minZoom: 14,
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    matchLocationType: 'AOS fish named location type',
+    description: '',
+    parent: 'AQUATIC_SITE_FEATURES',
+    iconSvg: ICON_SVGS.PLACEHOLDER,
+  },
+  AQUATIC_PLANT_TRANSECTS: {
+    name: 'Plant Transects',
+    type: FEATURE_TYPES.LOCATIONS,
+    minZoom: 14,
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    matchLocationType: 'AOS plant named location type',
+    description: '',
+    parent: 'AQUATIC_SITE_FEATURES',
+    iconSvg: ICON_SVGS.PLACEHOLDER,
+  },
+  AQUATIC_SEDIMENT_POINTS: {
+    name: 'Sediment Points',
+    type: FEATURE_TYPES.LOCATIONS,
+    minZoom: 14,
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    matchLocationType: 'AOS sediment named location type',
+    description: '',
+    parent: 'AQUATIC_SITE_FEATURES',
+    iconSvg: ICON_SVGS.PLACEHOLDER,
+  },
+  AQUATIC_STAFF_GAUGES: {
+    name: 'Staff Gauge',
+    type: FEATURE_TYPES.LOCATIONS,
+    minZoom: 14,
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    matchLocationType: 'STAFF_GAUGE',
+    description: '',
+    parent: 'AQUATIC_SITE_FEATURES',
+    iconSvg: ICON_SVGS.PLACEHOLDER,
+  },
+  AQUATIC_SENSOR_STATIONS: {
+    name: 'Sensor Stations',
+    type: FEATURE_TYPES.LOCATIONS,
+    minZoom: 14,
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    matchLocationType: /^S(1|2)_LOC$/,
+    description: '',
+    parent: 'AQUATIC_SITE_FEATURES',
+    iconSvg: ICON_SVGS.PLACEHOLDER,
+  },
   // SITE_MARKERS Group
   SITE_MARKERS: {
     name: 'NEON Site Markers',
@@ -822,7 +939,13 @@ export const getMapStateForFoucusLocation = (state = {}) => {
   if (pointTypes.includes(type) || type.includes('OS Plot') || type.includes('AOS')) {
     newState.map.zoom = 16;
   }
-  if (type === 'SITE') { newState.map.zoom = 12; }
+  if (type === 'SITE') {
+    newState.map.zoom = 12;
+    // Aquatic sites are usually much smaller than terrestrial so do a tighter zoom for those
+    if (
+      state.featureData.SITES[current] && state.featureData.SITES[current].terrain === 'AQUATIC'
+    ) { newState.map.zoom = 15; }
+  }
   if (type === 'DOMAIN') {
     const { [FEATURES.DOMAINS.KEY]: domainsData } = state.featureData[FEATURE_TYPES.BOUNDARIES];
     newState.map.zoom = (domainsData[current] || {}).zoom || null;

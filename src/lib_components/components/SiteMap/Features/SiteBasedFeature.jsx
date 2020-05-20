@@ -63,8 +63,51 @@ const SiteBasedFeature = (props) => {
 
   /**
      Render - Popups
+     Convention is alphabetical listing of keys since order here doesn't matter
   */
   const renderPopupFunctions = {
+    AQUATIC_BENCHMARKS: (siteCode, location) => (
+      <Popup className={classes.popup} autoPan>
+        <Typography variant="h6" gutterBottom>
+          {`${siteCode} Aquatic Benchmark ${location}`}
+        </Typography>
+      </Popup>
+    ),
+    AQUATIC_GROUNDWATER_WELLS: (siteCode, location) => (
+      <Popup className={classes.popup} autoPan>
+        <Typography variant="h6" gutterBottom>
+          {`${siteCode} Groundwater Well ${location}`}
+        </Typography>
+      </Popup>
+    ),
+    AQUATIC_DISCHARGE_POINTS: (siteCode, location) => (
+      <Popup className={classes.popup} autoPan>
+        <Typography variant="h6" gutterBottom>
+          {`${siteCode} Discharge Point ${location}`}
+        </Typography>
+      </Popup>
+    ),
+    AQUATIC_FISH_POINTS: (siteCode, location) => (
+      <Popup className={classes.popup} autoPan>
+        <Typography variant="h6" gutterBottom>
+          {`${siteCode} Fish Point ${location}`}
+        </Typography>
+      </Popup>
+    ),
+    AQUATIC_METEOROLOGICAL_STATIONS: (siteCode, location) => (
+      <Popup className={classes.popup} autoPan>
+        <Typography variant="h6" gutterBottom>
+          {`${siteCode} Meteorological Station ${location}`}
+        </Typography>
+      </Popup>
+    ),
+    AQUATIC_PLANT_TRANSECTS: (siteCode, location) => (
+      <Popup className={classes.popup} autoPan>
+        <Typography variant="h6" gutterBottom>
+          {`${siteCode} Plant Transect ${location}`}
+        </Typography>
+      </Popup>
+    ),
     AQUATIC_REACHES: (siteCode) => {
       const { areaKm2 } = featureData[siteCode].properties;
       const areaAcres = KM2_TO_ACRES * areaKm2;
@@ -79,6 +122,41 @@ const SiteBasedFeature = (props) => {
         </Popup>
       );
     },
+    AQUATIC_RIPARIAN_ASSESSMENTS: (siteCode, location) => (
+      <Popup className={classes.popup} autoPan>
+        <Typography variant="h6" gutterBottom>
+          {`${siteCode} Riparian Assessment ${location}`}
+        </Typography>
+      </Popup>
+    ),
+    AQUATIC_SEDIMENT_POINTS: (siteCode, location) => (
+      <Popup className={classes.popup} autoPan>
+        <Typography variant="h6" gutterBottom>
+          {`${siteCode} Sediment Point ${location}`}
+        </Typography>
+      </Popup>
+    ),
+    AQUATIC_SENSOR_STATIONS: (siteCode, location) => (
+      <Popup className={classes.popup} autoPan>
+        <Typography variant="h6" gutterBottom>
+          {`${siteCode} Sensor Station ${location}`}
+        </Typography>
+      </Popup>
+    ),
+    AQUATIC_STAFF_GAUGES: (siteCode, location) => (
+      <Popup className={classes.popup} autoPan>
+        <Typography variant="h6" gutterBottom>
+          {`${siteCode} Staff Gauge ${location}`}
+        </Typography>
+      </Popup>
+    ),
+    AQUATIC_WET_DEPOSITION_POINTS: (siteCode, location) => (
+      <Popup className={classes.popup} autoPan>
+        <Typography variant="h6" gutterBottom>
+          {`${siteCode} Wet Deposition Point ${location}`}
+        </Typography>
+      </Popup>
+    ),
     DISTRIBUTED_BASE_PLOTS: (siteCode, location) => (
       <Popup className={classes.popup} autoPan>
         <Typography variant="h6" gutterBottom>

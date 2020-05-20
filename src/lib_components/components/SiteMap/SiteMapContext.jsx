@@ -186,8 +186,11 @@ const calculateFeatureDataFetches = (state) => {
           }
           // Extract matching location IDs from the hierarchy and set them as fetches awaiting call
           const hierarchy = state.featureData.SITE_LOCATION_HIERARCHIES[siteCode];
+          const locationIsMatch = matchLocationType instanceof RegExp
+            ? (locationKey => matchLocationType.test(hierarchy[locationKey].type))
+            : (locationKey => hierarchy[locationKey].type === matchLocationType);
           Object.keys(hierarchy)
-            .filter(locationKey => hierarchy[locationKey].type === matchLocationType)
+            .filter(locationIsMatch)
             .forEach((locationKey) => {
               if (newState.featureDataFetches[featureType][featureKey][siteCode][locationKey]) {
                 return;
