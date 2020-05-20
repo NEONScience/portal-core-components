@@ -52,15 +52,16 @@ import {
 import SitesFeature from './Features/Sites';
 import StatesFeature from './Features/States';
 import DomainsFeature from './Features/Domains';
-import SamplingBoundariesFeature from './Features/SamplingBoundaries';
-import AquaticReachesFeature from './Features/AquaticReaches';
-import FlightBoxBoundariesFeature from './Features/FlightBoxBoundaries';
-import TowerAirshedsFeature from './Features/TowerAirsheds';
-import WatershedBoundariesFeature from './Features/WatershedBoundaries';
+// import SamplingBoundariesFeature from './Features/SamplingBoundaries';
+// import AquaticReachesFeature from './Features/AquaticReaches';
+// import FlightBoxBoundariesFeature from './Features/FlightBoxBoundaries';
+// import TowerAirshedsFeature from './Features/TowerAirsheds';
+// import WatershedBoundariesFeature from './Features/WatershedBoundaries';
 import DrainageLinesFeature from './Features/DrainageLines';
 import PourPointsFeature from './Features/PourPoints';
-import TowersFeature from './Features/Towers';
-import DistributedTickPlotsFeature from './Features/DistributedTickPlots';
+// import TowersFeature from './Features/Towers';
+// import DistributedTickPlotsFeature from './Features/DistributedTickPlots';
+import SiteBasedFeature from './Features/SiteBasedFeature';
 
 import statesShapesJSON from '../../staticJSON/statesShapes.json';
 import domainsShapesJSON from '../../staticJSON/domainsShapes.json';
@@ -312,16 +313,21 @@ const SiteMapLeaflet = () => {
     const feature = FEATURES[key];
     // Groups don't directly render anything
     if (feature.type === FEATURE_TYPES.GROUP) { return null; }
-    const featureProps = { key, classes, positionPopup };
+    const featureProps = {
+      key,
+      featureKey: key,
+      classes,
+      positionPopup,
+    };
     switch (feature.type) {
       case FEATURE_TYPES.SITES:
-        return <SitesFeature featureKey={key} {...featureProps} />;
+        return <SitesFeature {...featureProps} />;
       case FEATURE_TYPES.LOCATIONS:
         switch (key) {
           case FEATURES.TOWERS.KEY:
-            return <TowersFeature {...featureProps} />;
+          case FEATURES.DISTRIBUTED_MAMMAL_GRIDS.KEY:
           case FEATURES.DISTRIBUTED_TICK_PLOTS.KEY:
-            return <DistributedTickPlotsFeature {...featureProps} />;
+            return <SiteBasedFeature {...featureProps} />;
           default:
             return null;
         }
@@ -332,15 +338,11 @@ const SiteMapLeaflet = () => {
           case FEATURES.STATES.KEY:
             return <StatesFeature {...featureProps} renderPopupSitesList={renderPopupSitesList} />;
           case FEATURES.SAMPLING_BOUNDARIES.KEY:
-            return <SamplingBoundariesFeature {...featureProps} />;
           case FEATURES.AQUATIC_REACHES.KEY:
-            return <AquaticReachesFeature {...featureProps} />;
           case FEATURES.FLIGHT_BOX_BOUNDARIES.KEY:
-            return <FlightBoxBoundariesFeature {...featureProps} />;
           case FEATURES.WATERSHED_BOUNDARIES.KEY:
-            return <WatershedBoundariesFeature {...featureProps} />;
           case FEATURES.TOWER_AIRSHEDS.KEY:
-            return <TowerAirshedsFeature {...featureProps} />;
+            return <SiteBasedFeature {...featureProps} />;
           default:
             return null;
         }

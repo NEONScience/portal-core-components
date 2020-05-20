@@ -95,8 +95,8 @@ const Domains = (props) => {
       {sortedDomains.map((domainCode) => {
         const domain = featureData[domainCode];
         const baseColor = state.focusLocation.current === domainCode
-          ? `#${tinycolor(FEATURES.DOMAINS.polygonStyle.color).darken(20).toHex()}`
-          : FEATURES.DOMAINS.polygonStyle.color;
+          ? `#${tinycolor(FEATURES.DOMAINS.style.color).darken(20).toHex()}`
+          : FEATURES.DOMAINS.style.color;
         const overlayColor = selectionActive && selectedDomains[domainCode]
           ? BOUNDARY_COLORS[`${selectedDomains[domainCode]}Selected`]
           : baseColor;

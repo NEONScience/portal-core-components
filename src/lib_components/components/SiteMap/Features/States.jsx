@@ -95,8 +95,8 @@ const States = (props) => {
       {sortedStates.map((stateCode) => {
         const usState = featureData[stateCode];
         const baseColor = state.focusLocation.current === stateCode
-          ? `#${tinycolor(FEATURES.STATES.polygonStyle.color).darken(20).toHex()}`
-          : FEATURES.STATES.polygonStyle.color;
+          ? `#${tinycolor(FEATURES.STATES.style.color).darken(20).toHex()}`
+          : FEATURES.STATES.style.color;
         const overlayColor = selectionActive && selectedStates[stateCode]
           ? BOUNDARY_COLORS[`${selectedStates[stateCode]}Selected`]
           : baseColor;

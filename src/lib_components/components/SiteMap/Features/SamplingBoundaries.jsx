@@ -7,7 +7,7 @@ import 'leaflet/dist/leaflet.css';
 import { Popup } from 'react-leaflet';
 
 import SiteMapContext from '../SiteMapContext';
-import SiteMapPolygonFeatureGroup from '../SiteMapPolygonFeatureGroup';
+import CommonFeatureGroup from './CommonFeatureGroup';
 import { FEATURES, KM2_TO_ACRES } from '../SiteMapUtils';
 
 /**
@@ -53,7 +53,7 @@ const SamplingBoundaries = (props) => {
      Main Render
   */
   return (
-    <SiteMapPolygonFeatureGroup
+    <CommonFeatureGroup
       featureKey={featureKey}
       renderPopup={renderPopup}
     />

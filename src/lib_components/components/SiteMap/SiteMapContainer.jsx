@@ -270,7 +270,7 @@ const SiteMapContainer = () => {
   */
   const renderProgress = () => {
     const progress = !isLoading || state.overallFetch.expected === 0 ? 0
-      : (state.overallFetch.completed / state.overallFetch.expected) * 100;
+      : Math.floor((state.overallFetch.completed / state.overallFetch.expected) * 10) * 10;
     const style = isLoading ? {} : { opacity: 0 };
     let variant = 'determinate';
     if (isLoading && state.overallFetch.pendingHierarchy > 0) {

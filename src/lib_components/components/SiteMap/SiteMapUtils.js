@@ -23,7 +23,7 @@ import iconPlaceholderSVG from './svg/icon-placeholder.svg';
 import statesShapesJSON from '../../staticJSON/statesShapes.json';
 import domainsShapesJSON from '../../staticJSON/domainsShapes.json';
 
-export const MAP_ZOOM_RANGE = [1, 16];
+export const MAP_ZOOM_RANGE = [1, 20];
 
 export const KM2_TO_ACRES = 247.10538146717;
 
@@ -132,7 +132,7 @@ export const FEATURES = {
     description: '',
     hideByDefault: true,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
-    polygonStyle: { color: '#a067e4' },
+    style: { color: '#a067e4' },
   },
   STATES: {
     name: 'US States',
@@ -140,7 +140,7 @@ export const FEATURES = {
     description: '',
     hideByDefault: true,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
-    polygonStyle: { color: '#3cdd84' },
+    style: { color: '#3cdd84' },
   },
   // AQUATIC_WATERSHEDS Group
   AQUATIC_WATERSHEDS: {
@@ -156,7 +156,7 @@ export const FEATURES = {
     dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: '',
     parent: 'AQUATIC_WATERSHEDS',
-    polygonStyle: { color: '#669199', dashArray: '5, 10' },
+    style: { color: '#669199', dashArray: '5, 10' },
   },
   DRAINAGE_LINES: {
     name: 'Drainage Lines',
@@ -183,7 +183,7 @@ export const FEATURES = {
     minZoom: 8,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: '',
-    polygonStyle: { color: '#f0ee75', dashArray: '5, 10' },
+    style: { color: '#f0ee75', dashArray: '5, 10' },
   },
   SAMPLING_BOUNDARIES: {
     name: 'Site Sampling Boundaries',
@@ -191,7 +191,7 @@ export const FEATURES = {
     minZoom: 8,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: 'Terrestrial and Colocated Aquatic Sites',
-    polygonStyle: { color: '#e8847d', dashArray: '5, 10, 2.5, 10' },
+    style: { color: '#e8847d', dashArray: '5, 10, 2.5, 10' },
   },
   AQUATIC_REACHES: {
     name: 'Aquatic Site Reach',
@@ -199,7 +199,7 @@ export const FEATURES = {
     minZoom: 9,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: '',
-    polygonStyle: { color: '#ad85a0', dashArray: '5, 10, 2.5, 10' },
+    style: { color: '#ad85a0', dashArray: '5, 10, 2.5, 10' },
   },
   TOWER_AIRSHEDS: {
     name: 'Tower Airshed Boundaries',
@@ -207,7 +207,7 @@ export const FEATURES = {
     minZoom: 10,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: '',
-    polygonStyle: { color: '#749966', dashArray: '5, 10, 2.5, 10' },
+    style: { color: '#749966', dashArray: '5, 10, 2.5, 10' },
   },
   // Terrestrial Site Features
   TERRESTRIAL_SITE_FEATURES: {
@@ -263,7 +263,7 @@ export const FEATURES = {
     parent: 'TOWER_PLOTS',
     matchLocationType: 'OS Plot - all', // Fethed by parent since distributed base plots share type
     attributes: { type: 'base', location: 'tower' },
-    rectStyle: PLACEHOLDER_RECT_STYLE,
+    style: PLACEHOLDER_RECT_STYLE,
   },
   TOWER_PHENOLOGY_PLOTS: {
     name: 'Tower Phenology Plot',
@@ -273,7 +273,7 @@ export const FEATURES = {
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'OS Plot - phe',
     attributes: { type: 'phenology', location: 'tower' },
-    rectStyle: PLACEHOLDER_RECT_STYLE,
+    style: PLACEHOLDER_RECT_STYLE,
   },
   // DISTRIBUTED_PLOTS Group
   DISTRIBUTED_PLOTS: {
@@ -290,7 +290,7 @@ export const FEATURES = {
     parent: 'DISTRIBUTED_PLOTS',
     matchLocationType: 'OS Plot - all', // Fethed by parent since tower base plots share type
     attributes: { type: 'base', location: 'distributed' },
-    rectStyle: PLACEHOLDER_RECT_STYLE,
+    style: PLACEHOLDER_RECT_STYLE,
   },
   DISTRIBUTED_BIRD_GRIDS: {
     name: 'Distributed Bird Grids',
@@ -300,7 +300,7 @@ export const FEATURES = {
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'OS Plot - brd',
     attributes: { type: 'bird', location: 'distributed' },
-    rectStyle: PLACEHOLDER_RECT_STYLE,
+    style: PLACEHOLDER_RECT_STYLE,
   },
   DISTRIBUTED_MAMMAL_GRIDS: {
     name: 'Distributed Mammal Grids',
@@ -310,7 +310,9 @@ export const FEATURES = {
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'OS Plot - mam',
     attributes: { type: 'mammal', location: 'distributed' },
-    rectStyle: PLACEHOLDER_RECT_STYLE,
+    style: PLACEHOLDER_RECT_STYLE,
+    iconSvg: ICON_SVGS.PLACEHOLDER,
+    minPolygonZoom: 17,
   },
   DISTRIBUTED_MOSQUITO_POINTS: {
     name: 'Distributed Mosquito Plots',
@@ -330,7 +332,9 @@ export const FEATURES = {
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'OS Plot - tck',
     attributes: { type: 'tick', location: 'distributed' },
-    rectStyle: PLACEHOLDER_RECT_STYLE,
+    style: PLACEHOLDER_RECT_STYLE,
+    iconSvg: ICON_SVGS.PLACEHOLDER,
+    minPolygonZoom: 17,
   },
   // SITE_MARKERS Group
   SITE_MARKERS: {

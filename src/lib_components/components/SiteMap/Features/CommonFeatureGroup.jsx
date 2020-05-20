@@ -5,10 +5,15 @@ import PropTypes from 'prop-types';
 import tinycolor from 'tinycolor2';
 
 import 'leaflet/dist/leaflet.css';
-import { FeatureGroup, Polygon, Rectangle } from 'react-leaflet';
+import {
+  FeatureGroup,
+  Marker,
+  Polygon,
+  Rectangle,
+} from 'react-leaflet';
 
-import SiteMapContext from './SiteMapContext';
-import { FEATURES, FEATURE_TYPES } from './SiteMapUtils';
+import SiteMapContext from '../SiteMapContext';
+import { FEATURES, FEATURE_TYPES } from '../SiteMapUtils';
 
 // Convert latitude, longitude, and plotSize (in square meters) to an array of two points
 // representing diagonally opposite corners of a rectangle. Use a fixed earth radius in meters
@@ -25,7 +30,7 @@ const getBounds = (lat, lon, area) => {
   ];
 };
 
-const SiteMapPolygonFeatureGroup = (props) => {
+const CommonFeatureGroup = (props) => {
   const {
     featureKey,
     renderPopup,
@@ -35,6 +40,8 @@ const SiteMapPolygonFeatureGroup = (props) => {
     type: featureType,
     polygonStyle,
     rectStyle,
+    iconSvg,
+    minPolygonZoom,
   } = FEATURES[featureKey];
 
   /**
@@ -43,6 +50,7 @@ const SiteMapPolygonFeatureGroup = (props) => {
   const [state] = SiteMapContext.useSiteMapContext();
   const {
     neonContextHydrated,
+    map: { zoom },
     featureData: {
       [featureType]: {
         [featureKey]: featureData,
@@ -76,8 +84,18 @@ const SiteMapPolygonFeatureGroup = (props) => {
       : featureData[siteCode];
     const key = location ? `${siteCode} - ${location}` : siteCode;
     const renderedPopup = location ? renderPopup(siteCode, location) : renderPopup(siteCode);
-    return ['latitude', 'longitude', 'plotSize'].every(k => Object.keys(shapeData).includes(k))
-      ? (
+    // Point-based with plot size: render a rectangle
+    if (['latitude', 'longitude', 'plotSize'].every(k => Object.keys(shapeData).includes(k))) {
+      // Some features prefer to render as a marker icon until a high enough zoom level
+      return (iconSvg && minPolygonZoom && minPolygonZoom >= zoom) ? (
+        <Marker
+          key={key}
+          position={[shapeData.latitude, shapeData.longitude]}
+          icon={state.map.zoomedIcons.PLACEHOLDER}
+        >
+          {renderedPopup}
+        </Marker>
+      ) : (
         <Rectangle
           key={key}
           bounds={getBounds(shapeData.latitude, shapeData.longitude, shapeData.plotSize)}
@@ -86,16 +104,19 @@ const SiteMapPolygonFeatureGroup = (props) => {
         >
           {renderedPopup}
         </Rectangle>
-      ) : (
-        <Polygon
-          key={key}
-          positions={shapeData.geometry.coordinates || []}
-          {...featureStyle}
-          {...interactionProps}
-        >
-          {renderedPopup}
-        </Polygon>
       );
+    }
+    // Geometry-based: render a polygon
+    return (
+      <Polygon
+        key={key}
+        positions={shapeData.geometry.coordinates || []}
+        {...featureStyle}
+        {...interactionProps}
+      >
+        {renderedPopup}
+      </Polygon>
+    );
   };
 
   /**
@@ -113,9 +134,9 @@ const SiteMapPolygonFeatureGroup = (props) => {
   );
 };
 
-SiteMapPolygonFeatureGroup.propTypes = {
+CommonFeatureGroup.propTypes = {
   featureKey: PropTypes.oneOf(Object.keys(FEATURES)).isRequired,
   renderPopup: PropTypes.func.isRequired,
 };
 
-export default SiteMapPolygonFeatureGroup;
+export default CommonFeatureGroup;
