@@ -59,7 +59,7 @@ const SiteBasedFeature = (props) => {
       },
     },
   } = state;
-  if (!neonContextHydrated || !Object.keys(featureData)) { return null; }
+  if (!neonContextHydrated || !featureData || !Object.keys(featureData)) { return null; }
 
   /**
      Render - Popups
@@ -79,6 +79,20 @@ const SiteBasedFeature = (props) => {
         </Popup>
       );
     },
+    DISTRIBUTED_BASE_PLOTS: (siteCode, location) => (
+      <Popup className={classes.popup} autoPan>
+        <Typography variant="h6" gutterBottom>
+          {`${siteCode} Distributed Base Plot ${location}`}
+        </Typography>
+      </Popup>
+    ),
+    DISTRIBUTED_BIRD_GRIDS: (siteCode, location) => (
+      <Popup className={classes.popup} autoPan>
+        <Typography variant="h6" gutterBottom>
+          {`${siteCode} Distributed Bird Grid ${location}`}
+        </Typography>
+      </Popup>
+    ),
     DISTRIBUTED_MAMMAL_GRIDS: (siteCode, location) => (
       <Popup className={classes.popup} autoPan>
         <Typography variant="h6" gutterBottom>
@@ -100,6 +114,13 @@ const SiteBasedFeature = (props) => {
         </Typography>
       </Popup>
     ),
+    POUR_POINTS: siteCode => (
+      <Popup className={classes.popup} autoPan>
+        <Typography variant="h6" gutterBottom>
+          {`${siteCode} Aquatic Watershed Pour Point`}
+        </Typography>
+      </Popup>
+    ),
     SAMPLING_BOUNDARIES: (siteCode) => {
       const { areaKm2 } = featureData[siteCode].properties;
       const areaAcres = KM2_TO_ACRES * areaKm2;
@@ -118,6 +139,20 @@ const SiteBasedFeature = (props) => {
       <Popup className={classes.popup} autoPan>
         <Typography variant="h6" gutterBottom>
           {`${siteCode} Tower Airshed Boundary`}
+        </Typography>
+      </Popup>
+    ),
+    TOWER_BASE_PLOTS: (siteCode, location) => (
+      <Popup className={classes.popup} autoPan>
+        <Typography variant="h6" gutterBottom>
+          {`${siteCode} Tower Base Plot ${location}`}
+        </Typography>
+      </Popup>
+    ),
+    TOWER_PHENOLOGY_PLOTS: (siteCode, location) => (
+      <Popup className={classes.popup} autoPan>
+        <Typography variant="h6" gutterBottom>
+          {`${siteCode} Tower Phenology Plot ${location}`}
         </Typography>
       </Popup>
     ),
@@ -173,6 +208,19 @@ const SiteBasedFeature = (props) => {
       e.target._path.setAttribute('fill', featureStyle.color);
     },
   };
+  const isPoint = (shapeData) => {
+    const shapeKeys = Object.keys(shapeData);
+    return (
+      (
+        shapeKeys.includes('geometry') && Object.keys(shapeData.geometry).includes('coordinates')
+          && Array.isArray(shapeData.geometry.coordinates)
+          && shapeData.geometry.coordinates.length === 2
+          && shapeData.geometry.coordinates.every(x => Number.isFinite(x))
+      ) || (
+        shapeKeys.includes('latitude') && shapeKeys.includes('longitude')
+      )
+    );
+  };
   const renderShape = (siteCode, location = null) => {
     const shapeData = location && featureData[siteCode][location]
       ? featureData[siteCode][location]
@@ -181,43 +229,42 @@ const SiteBasedFeature = (props) => {
     const renderedPopup = location ? renderPopup(siteCode, location) : renderPopup(siteCode);
     const shapeKeys = Object.keys(shapeData);
     let shape = null;
-    if (shapeKeys.includes('geometry')) {
+    let position = [];
+    let positions = [];
+    let bounds = null;
+    let icon = null;
+    if (shapeData.geometry && shapeData.geometry.coordinates) {
       shape = 'Polygon';
-    } else if (shapeKeys.includes('latitude') && shapeKeys.includes('longitude')) {
+      positions = shapeData.geometry.coordinates;
+    }
+    if (isPoint(shapeData)) {
       shape = 'Marker';
+      position = ['latitude', 'longitude'].every(k => shapeKeys.includes(k))
+        ? [shapeData.latitude, shapeData.longitude]
+        : shapeData.geometry.coordinates;
+      icon = state.map.zoomedIcons.PLACEHOLDER;
       // Some features prefer to render as a marker icon until a high enough zoom level
       if (shapeKeys.includes('plotSize') && iconSvg && minPolygonZoom && minPolygonZoom >= zoom) {
         shape = 'Rectangle';
+        bounds = getBounds(shapeData.latitude, shapeData.longitude, shapeData.plotSize);
       }
     }
     switch (shape) {
       case 'Marker':
         return (
-          <Marker
-            key={key}
-            position={[shapeData.latitude, shapeData.longitude]}
-            icon={state.map.zoomedIcons.PLACEHOLDER}
-          >
+          <Marker key={key} position={position} icon={icon}>
             {renderedPopup}
           </Marker>
         );
       case 'Rectangle':
         return (
-          <Rectangle
-            key={key}
-            bounds={getBounds(shapeData.latitude, shapeData.longitude, shapeData.plotSize)}
-            {...polygonProps}
-          >
+          <Rectangle key={key} bounds={bounds} {...polygonProps}>
             {renderedPopup}
           </Rectangle>
         );
       case 'Polygon':
         return (
-          <Polygon
-            key={key}
-            positions={shapeData.geometry.coordinates || []}
-            {...polygonProps}
-          >
+          <Polygon key={key} positions={positions} {...polygonProps}>
             {renderedPopup}
           </Polygon>
         );

@@ -288,6 +288,7 @@ export const FEATURES = {
     type: FEATURE_TYPES.LOCATIONS,
     description: 'Distributed Base Plots support a variety of plant productivity, plant diversity, soil, biogeochemistry, microbe and beetle sampling. Distributed Base Plots are 40m x 40m.',
     parent: 'DISTRIBUTED_PLOTS',
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'OS Plot - all', // Fethed by parent since tower base plots share type
     attributes: { type: 'base', location: 'distributed' },
     style: PLACEHOLDER_RECT_STYLE,

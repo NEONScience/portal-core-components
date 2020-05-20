@@ -52,15 +52,7 @@ import {
 import SitesFeature from './Features/Sites';
 import StatesFeature from './Features/States';
 import DomainsFeature from './Features/Domains';
-// import SamplingBoundariesFeature from './Features/SamplingBoundaries';
-// import AquaticReachesFeature from './Features/AquaticReaches';
-// import FlightBoxBoundariesFeature from './Features/FlightBoxBoundaries';
-// import TowerAirshedsFeature from './Features/TowerAirsheds';
-// import WatershedBoundariesFeature from './Features/WatershedBoundaries';
 import DrainageLinesFeature from './Features/DrainageLines';
-import PourPointsFeature from './Features/PourPoints';
-// import TowersFeature from './Features/Towers';
-// import DistributedTickPlotsFeature from './Features/DistributedTickPlots';
 import SiteBasedFeature from './Features/SiteBasedFeature';
 
 import statesShapesJSON from '../../staticJSON/statesShapes.json';
@@ -323,14 +315,8 @@ const SiteMapLeaflet = () => {
       case FEATURE_TYPES.SITES:
         return <SitesFeature {...featureProps} />;
       case FEATURE_TYPES.LOCATIONS:
-        switch (key) {
-          case FEATURES.TOWERS.KEY:
-          case FEATURES.DISTRIBUTED_MAMMAL_GRIDS.KEY:
-          case FEATURES.DISTRIBUTED_TICK_PLOTS.KEY:
-            return <SiteBasedFeature {...featureProps} />;
-          default:
-            return null;
-        }
+        return <SiteBasedFeature {...featureProps} />;
+
       case FEATURE_TYPES.BOUNDARIES:
         switch (key) {
           case FEATURES.DOMAINS.KEY:
@@ -351,7 +337,7 @@ const SiteMapLeaflet = () => {
           case FEATURES.DRAINAGE_LINES.KEY:
             return <DrainageLinesFeature {...featureProps} />;
           case FEATURES.POUR_POINTS.KEY:
-            return <PourPointsFeature {...featureProps} />;
+            return <SiteBasedFeature {...featureProps} />;
           default:
             return null;
         }
