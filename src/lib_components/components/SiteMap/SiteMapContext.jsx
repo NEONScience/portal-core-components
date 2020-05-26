@@ -251,10 +251,23 @@ const reducer = (state, action) => {
     newState.featureDataFetches[featureType][featureKey][siteCode][location] = status;
     // If the status is SUCCESS and the action has data, also commit the data
     if (status === FETCH_STATUS.SUCCESS && data) {
-      if (!newState.featureData[featureType][featureKey][siteCode]) {
-        newState.featureData[featureType][featureKey][siteCode] = {};
+      const parsedData = parseLocationData(data);
+      let dataFeatureKey = featureKey;
+      let dataFeatureType = featureType;
+      // Tower and Distributed base plots share a type so both fetched as TERRESTRIAL_SITE_FEATURES
+      if (featureKey === FEATURES.TERRESTRIAL_SITE_FEATURES.KEY) {
+        dataFeatureKey = parsedData.plotType === 'tower'
+          ? FEATURES.TOWER_BASE_PLOTS.KEY
+          : FEATURES.DISTRIBUTED_BASE_PLOTS.KEY;
+        dataFeatureType = FEATURES[dataFeatureKey].type;
       }
-      newState.featureData[featureType][featureKey][siteCode][location] = parseLocationData(data);
+      if (!newState.featureData[dataFeatureType][dataFeatureKey]) {
+        newState.featureData[dataFeatureType][dataFeatureKey] = {};
+      }
+      if (!newState.featureData[dataFeatureType][dataFeatureKey][siteCode]) {
+        newState.featureData[dataFeatureType][dataFeatureKey][siteCode] = {};
+      }
+      newState.featureData[dataFeatureType][dataFeatureKey][siteCode][location] = parsedData;
     }
     return true;
   };
@@ -280,6 +293,17 @@ const reducer = (state, action) => {
       if (centerIsValid(action.center)) { newState.map.center = action.center; }
       if (boundsAreValid(action.bounds)) { newState.map.bounds = action.bounds; }
       newState.map.zoomedIcons = getZoomedIcons(newState.map.zoom);
+      // NATGEO_WORLD_MAP has no data at zoom 17 or higher so go to WORLD_IMAGERY (satellite)
+      if (
+        action.zoom <= 17 && state.map.tileLayer !== TILE_LAYERS.NATGEO_WORLD_MAP.KEY
+          && state.map.tileLayerAutoChangedAbove17) {
+        newState.map.tileLayer = TILE_LAYERS.NATGEO_WORLD_MAP.KEY;
+        newState.map.tileLayerAutoChangedAbove17 = false;
+      }
+      if (action.zoom >= 17 && state.map.tileLayer === TILE_LAYERS.NATGEO_WORLD_MAP.KEY) {
+        newState.map.tileLayer = TILE_LAYERS.WORLD_IMAGERY.KEY;
+        newState.map.tileLayerAutoChangedAbove17 = true;
+      }
       return calculateFeatureDataFetches(
         calculateFeatureAvailability(newState),
       );

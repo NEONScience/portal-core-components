@@ -234,6 +234,13 @@ const SiteBasedFeature = (props) => {
         </Typography>
       </Popup>
     ),
+    TOWER_SOIL_PLOTS: (siteCode, location) => (
+      <Popup className={classes.popup} autoPan>
+        <Typography variant="h6" gutterBottom>
+          {`${siteCode} Soil Plot ${location}`}
+        </Typography>
+      </Popup>
+    ),
     TOWERS: siteCode => (
       <Popup className={classes.popup} autoPan>
         <Typography variant="h6" gutterBottom>
@@ -320,11 +327,17 @@ const SiteBasedFeature = (props) => {
       position = ['latitude', 'longitude'].every(k => shapeKeys.includes(k))
         ? [shapeData.latitude, shapeData.longitude]
         : shapeData.geometry.coordinates;
-      icon = state.map.zoomedIcons.PLACEHOLDER;
+      icon = state.map.zoomedIcons[featureKey] !== null
+        ? state.map.zoomedIcons[featureKey]
+        : state.map.zoomedIcons.PLACEHOLDER;
       // Some features prefer to render as a marker icon until a high enough zoom level
-      if (shapeKeys.includes('plotSize') && iconSvg && minPolygonZoom && minPolygonZoom >= zoom) {
+      if (shapeKeys.includes('plotSize') && iconSvg && minPolygonZoom && minPolygonZoom <= zoom) {
         shape = 'Rectangle';
-        bounds = getBounds(shapeData.latitude, shapeData.longitude, shapeData.plotSize);
+        const latitude = shapeKeys.includes('latitude')
+          ? shapeData.latitude : shapeData.geometry.coordinates[0];
+        const longitude = shapeKeys.includes('longitude')
+          ? shapeData.longitude : shapeData.geometry.coordinates[1];
+        bounds = getBounds(latitude, longitude, shapeData.plotSize);
       }
     }
     switch (shape) {
