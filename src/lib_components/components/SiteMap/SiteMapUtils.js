@@ -295,7 +295,7 @@ export const FEATURES = {
     matchLocationType: 'TOWER',
     description: '',
     parent: 'TERRESTRIAL_SITE_FEATURES',
-    iconScale: 1.25,
+    iconScale: 1.8,
     iconSvg: iconTowerSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.DIAMOND.KEY,
   },
@@ -307,7 +307,7 @@ export const FEATURES = {
     matchLocationType: 'HUT',
     description: '',
     parent: 'TERRESTRIAL_SITE_FEATURES',
-    iconScale: 1.25,
+    iconScale: 1.4,
     iconSvg: iconHutSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.DIAMOND.KEY,
   },
@@ -319,7 +319,7 @@ export const FEATURES = {
     matchLocationType: 'MEGAPIT',
     description: '',
     parent: 'TERRESTRIAL_SITE_FEATURES',
-    iconScale: 1.25,
+    iconScale: 1.8,
     iconSvg: iconMegapitSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.DIAMOND.KEY,
   },
@@ -330,6 +330,20 @@ export const FEATURES = {
     minZoom: 13,
     description: 'Tower plots provide a direct link between NEON’s Terrestrial Observation System and Terrestrial Instrument System. Tower Plots are located in and around the NEON tower primary and secondary airsheds.',
     parent: 'TERRESTRIAL_SITE_FEATURES',
+  },
+  TOWER_PHENOLOGY_PLOTS: {
+    name: 'Tower Phenology Plots',
+    type: FEATURE_TYPES.LOCATIONS,
+    description: 'Plant phenology observations are made along a transect loop or plot in or around the primary airshed. When possible, one plot is established north of the tower to calibrate phenology camera images captured from sensors on the tower. If there is insufficient space north of the tower for a 200m x 200m plot or if the vegetation does not match the primary airshed an additional plot is established.',
+    parent: 'TOWER_PLOTS',
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    matchLocationType: 'OS Plot - phe',
+    attributes: { type: 'phenology', location: 'tower' },
+    style: PLACEHOLDER_RECT_STYLE,
+    minPolygonZoom: 18,
+    iconScale: 1.5,
+    iconSvg: iconTowerPhenologyPlotSVG,
+    iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
   },
   TOWER_BASE_PLOTS: { // Fetched by parent since tower base plots share type
     name: 'Tower Base Plot',
@@ -356,19 +370,6 @@ export const FEATURES = {
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
     minPolygonZoom: 18,
   },
-  TOWER_PHENOLOGY_PLOTS: {
-    name: 'Tower Phenology Plots',
-    type: FEATURE_TYPES.LOCATIONS,
-    description: 'Plant phenology observations are made along a transect loop or plot in or around the primary airshed. When possible, one plot is established north of the tower to calibrate phenology camera images captured from sensors on the tower. If there is insufficient space north of the tower for a 200m x 200m plot or if the vegetation does not match the primary airshed an additional plot is established.',
-    parent: 'TOWER_PLOTS',
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
-    matchLocationType: 'OS Plot - phe',
-    attributes: { type: 'phenology', location: 'tower' },
-    style: PLACEHOLDER_RECT_STYLE,
-    minPolygonZoom: 18,
-    iconSvg: iconTowerPhenologyPlotSVG,
-    iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
-  },
   // DISTRIBUTED_PLOTS Group
   DISTRIBUTED_PLOTS: {
     name: 'Distributed Plots',
@@ -376,18 +377,6 @@ export const FEATURES = {
     minZoom: 10,
     description: 'Distributed Plots are located throughout the TOS Sampling boundary in an effort to describe organisms and process with plot, point, and grid sampling. Plots were established according to a stratified-random and spatially balanced design.',
     parent: 'TERRESTRIAL_SITE_FEATURES',
-  },
-  DISTRIBUTED_BASE_PLOTS: { // Fetched by parent since tower base plots share type
-    name: 'Distributed Base Plots',
-    type: FEATURE_TYPES.LOCATIONS,
-    description: 'Distributed Base Plots support a variety of plant productivity, plant diversity, soil, biogeochemistry, microbe and beetle sampling. Distributed Base Plots are 40m x 40m.',
-    parent: 'DISTRIBUTED_PLOTS',
-    attributes: { type: 'base', location: 'distributed' },
-    style: PLACEHOLDER_RECT_STYLE,
-    minPolygonZoom: 17,
-    iconScale: 1.1,
-    iconSvg: iconDistributedBasePlotSVG,
-    iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
   },
   DISTRIBUTED_BIRD_GRIDS: {
     name: 'Distributed Bird Grids',
@@ -399,7 +388,7 @@ export const FEATURES = {
     attributes: { type: 'bird', location: 'distributed' },
     style: PLACEHOLDER_RECT_STYLE,
     minPolygonZoom: 17,
-    iconScale: 1.5,
+    iconScale: 1.8,
     iconSvg: iconDistributedBirdGridSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
   },
@@ -413,19 +402,20 @@ export const FEATURES = {
     attributes: { type: 'mammal', location: 'distributed' },
     style: PLACEHOLDER_RECT_STYLE,
     minPolygonZoom: 17,
-    iconScale: 1.3,
+    iconScale: 1.4,
     iconSvg: iconDistributedMammalGridSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
   },
-  DISTRIBUTED_MOSQUITO_POINTS: {
-    name: 'Distributed Mosquito Points',
+  DISTRIBUTED_BASE_PLOTS: { // Fetched by parent since tower base plots share type
+    name: 'Distributed Base Plots',
     type: FEATURE_TYPES.LOCATIONS,
-    description: 'At each Mosquito Point, one CO2 trap is established. Due to the frequency of sampling and temporal sampling constraints, Mosquito Points are located within 45m of roads.',
+    description: 'Distributed Base Plots support a variety of plant productivity, plant diversity, soil, biogeochemistry, microbe and beetle sampling. Distributed Base Plots are 40m x 40m.',
     parent: 'DISTRIBUTED_PLOTS',
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
-    matchLocationType: 'OS Plot - mos',
-    attributes: { type: 'mosquito', location: 'distributed' },
-    iconSvg: iconDistributedMosquitoPointSVG,
+    attributes: { type: 'base', location: 'distributed' },
+    style: PLACEHOLDER_RECT_STYLE,
+    minPolygonZoom: 17,
+    iconScale: 1.2,
+    iconSvg: iconDistributedBasePlotSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
   },
   DISTRIBUTED_TICK_PLOTS: {
@@ -438,8 +428,19 @@ export const FEATURES = {
     attributes: { type: 'tick', location: 'distributed' },
     style: PLACEHOLDER_RECT_STYLE,
     minPolygonZoom: 17,
-    iconScale: 1.1,
+    iconScale: 1.2,
     iconSvg: iconDistributedTickPlotSVG,
+    iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
+  },
+  DISTRIBUTED_MOSQUITO_POINTS: {
+    name: 'Distributed Mosquito Points',
+    type: FEATURE_TYPES.LOCATIONS,
+    description: 'At each Mosquito Point, one CO2 trap is established. Due to the frequency of sampling and temporal sampling constraints, Mosquito Points are located within 45m of roads.',
+    parent: 'DISTRIBUTED_PLOTS',
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    matchLocationType: 'OS Plot - mos',
+    attributes: { type: 'mosquito', location: 'distributed' },
+    iconSvg: iconDistributedMosquitoPointSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
   },
   // Aquatic Site Features
@@ -589,6 +590,7 @@ export const FEATURES = {
     name: 'NEON Site Markers',
     type: FEATURE_TYPES.GROUP,
     description: '',
+    maxZoom: 9,
   },
   TERRESTRIAL_CORE_SITES: {
     name: 'Terrestrial Core Sites',
@@ -958,6 +960,19 @@ export const parseLocationData = (data = {}) => {
       coordinates: polygon.coordinates.map(c => [c.latitude, c.longitude]),
     };
   }
+  // Have geometry but no lat/lon - calculate a basic lat/lon center for icon positioning
+  if (
+    !['latitude', 'longitude'].every(k => Object.keys(parsed).includes(k))
+      && parsed.geometry && parsed.geometry.coordinates
+  ) {
+    [parsed.latitude, parsed.longitude] = parsed.geometry.coordinates
+      .reduce((acc, cur) => [acc[0] + cur[0], acc[1] + cur[1]], [0, 0])
+      .map(c => c / parsed.geometry.coordinates.length);
+  }
+  // Special case: set plotType TOWER_SOIL_PLOTS (not present in locations API)
+  if (parsed.type === FEATURES.TOWER_SOIL_PLOTS.matchLocationType) {
+    parsed.plotType = 'tower';
+  }
   return parsed;
 };
 
@@ -1021,7 +1036,7 @@ const getZoomedLocationIcon = (featureKey = null, zoom = 3, isSelected = false) 
   const iconShape = featureHasIcon ? feature.iconShape : LOCATION_ICON_SVG_SHAPES.SQUARE.KEY;
   const iconScale = featureHasIcon ? feature.iconScale || 1 : 1;
   const minZoom = feature.minZoom || (FEATURES[feature.parent] || {}).minZoom || MAP_ZOOM_RANGE[0];
-  const maxZoom = feature.minPolygonZoom || feature.maxZoom || MAP_ZOOM_RANGE[1];
+  const maxZoom = feature.maxZoom || (FEATURES[feature.parent] || {}).maxZoom || MAP_ZOOM_RANGE[1];
   const {
     iconSize,
     iconAnchor,

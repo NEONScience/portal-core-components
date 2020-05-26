@@ -363,7 +363,11 @@ const reducer = (state, action) => {
       return newState;
 
     case 'setFocusLocationFetchFailed':
-      newState.focusLocation.fetch = { status: FETCH_STATUS.ERROR, error: action.error };
+      newState.focusLocation.fetch = {
+        status: FETCH_STATUS.ERROR,
+        error: `Invalid location: ${state.focusLocation.current.toString()}`,
+      };
+      newState.focusLocation.current = null;
       newState.focusLocation.data = null;
       completeOverallFetch();
       return newState;
@@ -593,7 +597,7 @@ const Provider = (props) => {
         return of(false);
       }),
       catchError((error) => {
-        dispatch({ type: 'setFocusLocationDataFetchFailed', error: error.message });
+        dispatch({ type: 'setFocusLocationFetchFailed', error: error.message });
         return of(false);
       }),
     ).subscribe();

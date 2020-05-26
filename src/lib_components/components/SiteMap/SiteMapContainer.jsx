@@ -262,9 +262,6 @@ const SiteMapContainer = () => {
     );
   };
 
-  // TODO: hook this up to a UI element somewhere
-  window.jumpTo = location => dispatch({ type: 'setNewFocusLocation', location });
-
   /**
      Render - Progress Indicator
   */

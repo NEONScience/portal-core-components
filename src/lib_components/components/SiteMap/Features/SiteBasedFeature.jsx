@@ -23,7 +23,8 @@ import { FEATURES, FEATURE_TYPES, KM2_TO_ACRES } from '../SiteMapUtils';
 // because our centers are all far enough from the poles and our distances small enough that
 // the error is negligible (max plot size used for this is 500m x 500m)
 const EARTH_RADIUS = 6378000;
-const getBounds = (lat, lon, area) => {
+const getBounds = (lat = null, lon = null, area = null) => {
+  if (Number.isNaN(lat) || Number.isNaN(lon) || Number.isNaN(area)) { return null; }
   const offsetMeters = (area ** 0.5) / 2;
   const dLat = (offsetMeters / EARTH_RADIUS) * (180 / Math.PI);
   const dLon = (offsetMeters / EARTH_RADIUS) * (180 / Math.PI) / Math.cos(lat * Math.PI / 180);
@@ -318,6 +319,7 @@ const SiteBasedFeature = (props) => {
     let positions = [];
     let bounds = null;
     let icon = null;
+    let marker = null;
     if (shapeData.geometry && shapeData.geometry.coordinates) {
       shape = 'Polygon';
       positions = shapeData.geometry.coordinates;
@@ -330,34 +332,44 @@ const SiteBasedFeature = (props) => {
       icon = state.map.zoomedIcons[featureKey] !== null
         ? state.map.zoomedIcons[featureKey]
         : state.map.zoomedIcons.PLACEHOLDER;
+      marker = (
+        <Marker key={`${key}-marker`} position={position} icon={icon}>
+          {renderedPopup}
+        </Marker>
+      );
       // Some features prefer to render as a marker icon until a high enough zoom level
       if (shapeKeys.includes('plotSize') && iconSvg && minPolygonZoom && minPolygonZoom <= zoom) {
+        /* DISABLED UNTIL WE HAVE RELIABLE LOCATION DATA FOR THESE POINTS
         shape = 'Rectangle';
         const latitude = shapeKeys.includes('latitude')
           ? shapeData.latitude : shapeData.geometry.coordinates[0];
         const longitude = shapeKeys.includes('longitude')
           ? shapeData.longitude : shapeData.geometry.coordinates[1];
         bounds = getBounds(latitude, longitude, shapeData.plotSize);
+        */
+        bounds = getBounds(); // null
       }
     }
     switch (shape) {
       case 'Marker':
-        return (
-          <Marker key={key} position={position} icon={icon}>
-            {renderedPopup}
-          </Marker>
-        );
+        return marker;
       case 'Rectangle':
         return (
-          <Rectangle key={key} bounds={bounds} {...polygonProps}>
-            {renderedPopup}
-          </Rectangle>
+          <React.Fragment key={key}>
+            <Rectangle key={`${key}-rectangle`} bounds={bounds} {...polygonProps}>
+              {renderedPopup}
+            </Rectangle>
+            {marker}
+          </React.Fragment>
         );
       case 'Polygon':
         return (
-          <Polygon key={key} positions={positions} {...polygonProps}>
-            {renderedPopup}
-          </Polygon>
+          <React.Fragment key={key}>
+            <Polygon key={`${key}-polygon`} positions={positions} {...polygonProps}>
+              {renderedPopup}
+            </Polygon>
+            {marker}
+          </React.Fragment>
         );
       default:
         return null;
