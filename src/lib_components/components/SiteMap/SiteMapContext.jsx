@@ -271,6 +271,25 @@ const reducer = (state, action) => {
     }
     return true;
   };
+  // Recursively applies a feature visibility change to parents and chilren up/down the tree
+  const applyFeatureVisibilityToChildren = (feature, visible) => {
+    if (newState.filters.features.visible[feature] === visible) { return; }
+    newState.filters.features.visible[feature] = visible;
+    if (FEATURES[feature].type === FEATURE_TYPES.GROUP) {
+      Object.keys(FEATURES)
+        .filter(f => FEATURES[f].parent === feature)
+        .forEach((f) => { applyFeatureVisibilityToChildren(f, visible); });
+    }
+  };
+  const applyFeatureVisibilityToParents = (feature) => {
+    if (FEATURES[feature].parent) {
+      const parentVisible = Object.keys(FEATURES)
+        .filter(f => FEATURES[f].parent === FEATURES[feature].parent) // Of all children...
+        .some(f => newState.filters.features.visible[f]); // ...some child is visible
+      newState.filters.features.visible[FEATURES[feature].parent] = parentVisible;
+      applyFeatureVisibilityToParents(FEATURES[feature].parent, parentVisible);
+    }
+  };
   switch (action.type) {
     case 'setView':
       if (!Object.keys(VIEWS).includes(action.view)) { return state; }
@@ -332,21 +351,18 @@ const reducer = (state, action) => {
       if (
         !Object.keys(FEATURES).includes(action.feature) || typeof action.visible !== 'boolean'
       ) { return state; }
-      newState.filters.features.visible[action.feature] = action.visible;
-      // Parents: ensure children are set/unset accordingly
-      if (FEATURES[action.feature].type === FEATURE_TYPES.GROUP) {
-        Object.keys(FEATURES)
-          .filter(f => FEATURES[f].parent === action.feature)
-          .forEach((f) => {
-            newState.filters.features.visible[f] = action.visible;
-          });
-      }
-      // Children: ensure parent is set/unset accordingly (visible if one child is visible)
-      if (FEATURES[action.feature].parent) {
-        newState.filters.features.visible[FEATURES[action.feature].parent] = Object.keys(FEATURES)
-          .filter(f => FEATURES[f].parent === FEATURES[action.feature].parent) // Of all children...
-          .some(f => newState.filters.features.visible[f]); // ...some child is visible
-      }
+      applyFeatureVisibilityToChildren(action.feature, action.visible);
+      applyFeatureVisibilityToParents(action.feature);
+      return newState;
+
+    case 'setFilterFeatureCollapsed':
+      if (!Object.keys(FEATURES).includes(action.feature)) { return state; }
+      newState.filters.features.collapsed.add(action.feature);
+      return newState;
+
+    case 'setFilterFeatureExpanded':
+      if (!Object.keys(FEATURES).includes(action.feature)) { return state; }
+      newState.filters.features.collapsed.delete(action.feature);
       return newState;
 
     // Fetch and Import

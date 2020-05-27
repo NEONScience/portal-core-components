@@ -5,6 +5,7 @@ import ReactDOMServer from 'react-dom/server';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import { makeStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
@@ -152,7 +153,7 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.grey[300],
     marginRight: theme.spacing(2),
   },
-  circularProgress: {
+  progress: {
     zIndex: 900,
     position: 'absolute',
     top: theme.spacing(1.5),
@@ -390,9 +391,51 @@ const SiteMapLeaflet = () => {
   };
 
   /**
+     Render: Loading / Progress
+  */
+  const renderProgress = () => {
+    if (state.overallFetch.expected === state.overallFetch.completed) { return null; }
+    const hasProgress = state.overallFetch.pendingHierarchy === 0;
+    if (state.overallFetch.pendingHierarchy !== 0) {
+      return (
+        <Box className={classes.progress}>
+          <CircularProgress size={32} />
+        </Box>
+      );
+    }
+    const progress = state.overallFetch.expected === 0 ? 0
+      : Math.floor((state.overallFetch.completed / state.overallFetch.expected) * 10) * 10;
+    const progressProps = progress < 60 ? {
+      size: 32,
+    } : {
+      size: 32,
+      variant: 'static',
+      value: progress,
+    };
+    return (
+      <Box className={classes.progress}>
+        <CircularProgress {...progressProps} />
+        <Box
+          top={0}
+          left={0}
+          bottom={8}
+          right={0}
+          position="absolute"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Typography variant="caption" component="div">
+            {`${Math.round(progress)}%`}
+          </Typography>
+        </Box>
+      </Box>
+    );
+  };
+
+  /**
      Render: Map
   */
-  const isLoading = state.overallFetch.expected !== state.overallFetch.completed;
   return (
     <React.Fragment>
       <Map
@@ -418,11 +461,7 @@ const SiteMapLeaflet = () => {
           .filter(key => state.filters.features.visible[key])
           .map(renderFeature)}
       </Map>
-      <CircularProgress
-        size={32}
-        className={classes.circularProgress}
-        style={{ display: isLoading ? 'block' : 'none' }}
-      />
+      {renderProgress()}
     </React.Fragment>
   );
 };

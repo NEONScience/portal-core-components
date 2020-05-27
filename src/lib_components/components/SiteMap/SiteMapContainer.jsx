@@ -5,12 +5,15 @@ import uniq from 'lodash/uniq';
 import { makeStyles } from '@material-ui/core/styles';
 import Checkbox from '@material-ui/core/Checkbox';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import LinearProgress from '@material-ui/core/LinearProgress';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import IconButton from '@material-ui/core/IconButton';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import Paper from '@material-ui/core/Paper';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import ErrorIcon from '@material-ui/icons/Warning';
+import DownArrowIcon from '@material-ui/icons/ArrowDropDown';
+import LeftArrowIcon from '@material-ui/icons/ArrowLeft';
 
 import NeonContext from '../NeonContext/NeonContext';
 import Theme, { COLORS } from '../Theme/Theme';
@@ -61,7 +64,7 @@ const useStyles = makeStyles(theme => ({
     top: '0px',
     right: '0px',
     boxShadow: '-3px 0 5px 0px rgba(0,0,0,0.5)',
-    padding: theme.spacing(2),
+    padding: theme.spacing(1),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
@@ -75,6 +78,10 @@ const useStyles = makeStyles(theme => ({
   featureOptionFormControlLabel: {
     width: '100%',
     paddingRight: theme.spacing(1),
+    margin: 0,
+    '& > span:nth-child(2)': {
+      width: '100%',
+    },
     '&:hover, &:focus': {
       backgroundColor: theme.palette.grey[100],
     },
@@ -142,6 +149,7 @@ const SiteMapContainer = () => {
     if (!state.filters.features.open || !featuresRef.current) { return () => {}; }
     const handleClick = (event) => {
       if (featuresRef.current && !featuresRef.current.contains(event.target)) {
+        debugger; // eslint-disable-line no-debugger
         dispatch({ type: 'setFilterFeaturesOpen', open: false });
       }
     };
@@ -263,8 +271,12 @@ const SiteMapContainer = () => {
     let allChildren = [];
     let visibleChildren = [];
     let indeterminate = false;
-    const formControlLabelStyle = {};
+    let collapsed = false;
+    let label = null;
+    const tooltip = feature.description || null;
     if (feature.type === FEATURE_TYPES.GROUP) {
+      collapsed = state.filters.features.collapsed.has(key);
+      const collapseTitle = `${collapsed ? 'Expand' : 'Collapse'} ${feature.name}`;
       allChildren = Object.keys(FEATURES).filter(f => FEATURES[f].parent === key);
       allChildren.sort((a, b) => {
         const { type: aType, name: aName } = FEATURES[a];
@@ -276,41 +288,76 @@ const SiteMapContainer = () => {
       });
       visibleChildren = allChildren.filter(f => state.filters.features.visible[f]);
       indeterminate = visibleChildren.length > 0 && visibleChildren.length < allChildren.length;
-      formControlLabelStyle.fontWeight = 600;
+      label = (
+        <div className={classes.featureOptionLabel} style={{ justifyContent: 'space-between' }}>
+          <span style={{ fontWeight: 600 }}>
+            {feature.name}
+          </span>
+          <IconButton
+            size="small"
+            title={collapseTitle}
+            aria-label={collapseTitle}
+            onClick={(event) => {
+              event.preventDefault();
+              // We use a setTimeout here so the icon doesn't change before the click event bubbles
+              // Without it the target of the click event is an SVG that no longer exists in the
+              // DOM tree, and is thus not contained in the features container, and is thus seen as
+              // a click outside that will close the features container, when we know it's not.
+              window.setTimeout(() => {
+                dispatch({
+                  type: `setFilterFeature${collapsed ? 'Expanded' : 'Collapsed'}`,
+                  feature: key,
+                });
+              }, 0);
+            }}
+          >
+            {collapsed ? (
+              <LeftArrowIcon fontSize="inherit" />
+            ) : (
+              <DownArrowIcon fontSize="inherit" />
+            )}
+          </IconButton>
+        </div>
+      );
+    } else {
+      label = (
+        <div className={classes.featureOptionLabel}>
+          {icon}
+          <span>
+            {feature.name}
+          </span>
+        </div>
+      );
     }
-    const tooltip = feature.description || '...';
-    const label = (
-      <div className={classes.featureOptionLabel}>
-        {icon}
-        <span style={formControlLabelStyle}>
-          {feature.name}
-        </span>
-      </div>
+    const formControl = (
+      <FormControlLabel
+        key={key}
+        label={label}
+        aria-label={tooltip}
+        className={classes.featureOptionFormControlLabel}
+        control={(
+          <Checkbox
+            checked={state.filters.features.visible[key]}
+            onChange={handleChange}
+            color="secondary"
+            indeterminate={indeterminate}
+          />
+        )}
+      />
     );
     return (
-      <div key={key}>
-        <Tooltip
-          title={tooltip}
-          placement="bottom-start"
-          PopperProps={{ className: classes.popper }}
-          TransitionComponent={({ children }) => children} // no transition, must use mock component
-        >
-          <FormControlLabel
-            key={key}
-            label={label}
-            aria-label={tooltip}
-            className={classes.featureOptionFormControlLabel}
-            control={(
-              <Checkbox
-                checked={state.filters.features.visible[key]}
-                onChange={handleChange}
-                color="secondary"
-                indeterminate={indeterminate}
-              />
-            )}
-          />
-        </Tooltip>
-        {!allChildren.length ? null : (
+      <div key={key} style={{ width: '100%' }}>
+        {tooltip ? (
+          <Tooltip
+            title={tooltip}
+            placement="bottom-start"
+            PopperProps={{ className: classes.popper }}
+            TransitionComponent={({ children }) => children} // set no transition by mock component
+          >
+            {formControl}
+          </Tooltip>
+        ) : formControl}
+        {!allChildren.length || collapsed ? null : (
           <div style={{ marginLeft: Theme.spacing(3) }}>
             {allChildren
               .filter(f => state.filters.features.available[f])

@@ -16,6 +16,9 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'space-between',
     marginBottom: theme.spacing(1),
   },
+  toggleButton: {
+    whiteSpace: 'nowrap',
+  },
 }));
 
 const SiteMapFilters = () => {
@@ -53,10 +56,15 @@ const SiteMapFilters = () => {
 
   return (
     <div className={classes.row}>
-      <Button color="primary" variant="contained" onClick={toggleView}>
+      <Button
+        color="primary"
+        variant="contained"
+        onClick={toggleView}
+        className={classes.toggleButton}
+      >
         {`View ${view === VIEWS.MAP ? 'Table' : 'Map'}`}
       </Button>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div style={{ display: 'flex', alignItems: 'center', margin: Theme.spacing(0, 2) }}>
         <form onSubmit={jumpToLocation}>
           <TextField
             margin="dense"

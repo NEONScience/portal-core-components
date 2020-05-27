@@ -764,6 +764,7 @@ export const DEFAULT_STATE = {
       visible: Object.fromEntries( // key/bool map of which available features are visible
         Object.entries(FEATURES).map(entry => [entry[0], !entry[1].hideByDefault]),
       ),
+      collapsed: new Set(),
     },
   },
 };
@@ -882,7 +883,7 @@ const dynamicAspectRatios = [
 });
 
 export const getDynamicAspectRatio = () => {
-  const windowAspectRatio = Math.max(window.innerHeight, 0) / (window.innerWidth || 1);
+  const windowAspectRatio = Math.max(window.innerHeight + 100, 0) / (window.innerWidth || 1);
   const arIdx = dynamicAspectRatios.findIndex(ar => ar < windowAspectRatio);
   return arIdx === -1
     ? dynamicAspectRatios[dynamicAspectRatios.length - 1]
