@@ -6,6 +6,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
@@ -150,6 +151,12 @@ const useStyles = makeStyles(theme => ({
   infoSnackbarIcon: {
     color: theme.palette.grey[300],
     marginRight: theme.spacing(2),
+  },
+  circularProgress: {
+    zIndex: 900,
+    position: 'absolute',
+    top: theme.spacing(1.5),
+    right: theme.spacing(7),
   },
 }));
 
@@ -385,30 +392,38 @@ const SiteMapLeaflet = () => {
   /**
      Render: Map
   */
+  const isLoading = state.overallFetch.expected !== state.overallFetch.completed;
   return (
-    <Map
-      ref={mapRef}
-      className={classes.map}
-      style={{ paddingBottom: `${state.aspectRatio.currentValue * 100}%` }}
-      center={state.map.center}
-      zoom={state.map.zoom}
-      minZoom={MAP_ZOOM_RANGE[0]}
-      maxZoom={MAP_ZOOM_RANGE[1]}
-      onMoveEnd={handleMoveEnd}
-      onZoomEnd={handleZoomEnd}
-      onBaseLayerChange={handleBaseLayerChange}
-      worldCopyJump
-      data-component="SiteMap"
-    >
-      <ScaleControl imperial metric updateWhenIdle />
-      <LayersControl position="topright">
-        {Object.keys(TILE_LAYERS).map(renderTileLayer)}
-      </LayersControl>
-      {Object.keys(FEATURES)
-        .filter(key => state.filters.features.available[key])
-        .filter(key => state.filters.features.visible[key])
-        .map(renderFeature)}
-    </Map>
+    <React.Fragment>
+      <Map
+        ref={mapRef}
+        className={classes.map}
+        style={{ paddingBottom: `${state.aspectRatio.currentValue * 100}%` }}
+        center={state.map.center}
+        zoom={state.map.zoom}
+        minZoom={MAP_ZOOM_RANGE[0]}
+        maxZoom={MAP_ZOOM_RANGE[1]}
+        onMoveEnd={handleMoveEnd}
+        onZoomEnd={handleZoomEnd}
+        onBaseLayerChange={handleBaseLayerChange}
+        worldCopyJump
+        data-component="SiteMap"
+      >
+        <ScaleControl imperial metric updateWhenIdle />
+        <LayersControl position="topright">
+          {Object.keys(TILE_LAYERS).map(renderTileLayer)}
+        </LayersControl>
+        {Object.keys(FEATURES)
+          .filter(key => state.filters.features.available[key])
+          .filter(key => state.filters.features.visible[key])
+          .map(renderFeature)}
+      </Map>
+      <CircularProgress
+        size={32}
+        className={classes.circularProgress}
+        style={{ display: isLoading ? 'block' : 'none' }}
+      />
+    </React.Fragment>
   );
 };
 

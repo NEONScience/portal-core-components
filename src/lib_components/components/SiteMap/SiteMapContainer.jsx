@@ -8,6 +8,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Paper from '@material-ui/core/Paper';
+import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import ErrorIcon from '@material-ui/icons/Warning';
 
@@ -53,7 +54,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(3),
   },
   featuresContainer: {
-    backgroundColor: theme.palette.grey[100],
+    backgroundColor: theme.palette.grey[75],
     height: '100%',
     position: 'absolute',
     zIndex: 1000,
@@ -69,8 +70,33 @@ const useStyles = makeStyles(theme => ({
   featureIcon: {
     width: '28px',
     height: '28px',
-    marginRight: '4px',
-    marginBottom: '-6px',
+    marginRight: theme.spacing(1),
+  },
+  featureOptionFormControlLabel: {
+    width: '100%',
+    paddingRight: theme.spacing(1),
+    '&:hover, &:focus': {
+      backgroundColor: theme.palette.grey[100],
+    },
+  },
+  featureOptionLabel: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  popper: {
+    marginLeft: theme.spacing(5),
+    marginTop: theme.spacing(0.5),
+    zIndex: 1001,
+    '& > div': {
+      margin: 0,
+      padding: theme.spacing(1, 1.5),
+      fontSize: '0.85rem',
+      fontWeight: 300,
+      backgroundColor: theme.palette.grey[800],
+    },
+    '& a': {
+      color: theme.palette.grey[100],
+    },
   },
 }));
 
@@ -195,23 +221,36 @@ const SiteMapContainer = () => {
     let icon = null;
     if (feature.iconSvg) {
       icon = <img alt={feature.name} src={feature.iconSvg} className={classes.featureIcon} />;
-    }
-    if (feature.polygonStyle || feature.rectStyle) {
-      const featureStyle = (feature.polygonStyle || feature.rectStyle);
-      const rectProps = {
-        width: feature.rectStyle ? 20 : 25,
-        height: feature.rectStyle ? 20 : 15,
-        x: feature.rectStyle ? 4 : 1.5,
-        y: feature.rectStyle ? 4 : 6.5,
-        rx: feature.rectStyle ? 0 : 3,
+    } else if (feature.polylineStyle) {
+      const polylineProps = {
+        points: '1.5,21.5 15,18.5 13,9.5 26.5,6.5',
         style: {
-          fill: featureStyle.color,
-          stroke: featureStyle.color,
+          fill: 'none',
+          stroke: feature.polylineStyle.color || null,
+          strokeWidth: 3,
+          strokeLinejoin: 'bevel',
+        },
+      };
+      icon = (
+        <svg width="28" height="28" className={classes.featureIcon}>
+          <polyline {...polylineProps} />
+        </svg>
+      );
+    } else if (feature.style) {
+      const rectProps = {
+        width: 25,
+        height: 15,
+        x: 1.5,
+        y: 6.5,
+        rx: 3,
+        style: {
+          fill: feature.style.color || null,
+          stroke: feature.style.color || null,
           strokeWidth: 2.5,
           fillOpacity: 0.2,
           strokeOpacity: 0.85,
           strokeLinecap: 'round',
-          strokeDasharray: featureStyle.dashArray || null,
+          strokeDasharray: feature.style.dashArray || null,
         },
       };
       icon = (
@@ -220,37 +259,56 @@ const SiteMapContainer = () => {
         </svg>
       );
     }
-    const label = (
-      <React.Fragment>
-        {icon}
-        {feature.name}
-      </React.Fragment>
-    );
     let allChildren = [];
     let visibleChildren = [];
     let indeterminate = false;
     const formControlLabelStyle = {};
     if (feature.type === FEATURE_TYPES.GROUP) {
       allChildren = Object.keys(FEATURES).filter(f => FEATURES[f].parent === key);
+      allChildren.sort((a, b) => {
+        const { type: aType, name: aName } = FEATURES[a];
+        const { type: bType, name: bName } = FEATURES[b];
+        if (aType !== bType && (aType === FEATURE_TYPES.GROUP || bType === FEATURE_TYPES.GROUP)) {
+          return (bType === FEATURE_TYPES.GROUP ? -1 : 1);
+        }
+        return (aName < bName ? -1 : 1);
+      });
       visibleChildren = allChildren.filter(f => state.filters.features.visible[f]);
       indeterminate = visibleChildren.length > 0 && visibleChildren.length < allChildren.length;
       formControlLabelStyle.fontWeight = 600;
     }
+    const tooltip = feature.description || '...';
+    const label = (
+      <div className={classes.featureOptionLabel}>
+        {icon}
+        <span style={formControlLabelStyle}>
+          {feature.name}
+        </span>
+      </div>
+    );
     return (
       <div key={key}>
-        <FormControlLabel
-          key={key}
-          label={label}
-          style={formControlLabelStyle}
-          control={(
-            <Checkbox
-              checked={state.filters.features.visible[key]}
-              onChange={handleChange}
-              color="secondary"
-              indeterminate={indeterminate}
-            />
-          )}
-        />
+        <Tooltip
+          title={tooltip}
+          placement="bottom-start"
+          PopperProps={{ className: classes.popper }}
+          TransitionComponent={({ children }) => children} // no transition, must use mock component
+        >
+          <FormControlLabel
+            key={key}
+            label={label}
+            aria-label={tooltip}
+            className={classes.featureOptionFormControlLabel}
+            control={(
+              <Checkbox
+                checked={state.filters.features.visible[key]}
+                onChange={handleChange}
+                color="secondary"
+                indeterminate={indeterminate}
+              />
+            )}
+          />
+        </Tooltip>
         {!allChildren.length ? null : (
           <div style={{ marginLeft: Theme.spacing(3) }}>
             {allChildren

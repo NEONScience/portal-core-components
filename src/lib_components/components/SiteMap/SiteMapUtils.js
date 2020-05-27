@@ -212,10 +212,11 @@ export const FEATURES = {
   },
   // AQUATIC_WATERSHEDS Group
   AQUATIC_WATERSHEDS: {
-    name: 'Aquatic Watersheds',
+    name: 'Watersheds',
     type: FEATURE_TYPES.GROUP,
     minZoom: 6,
     description: '',
+    parent: 'AQUATIC_SITE_FEATURES',
   },
   WATERSHED_BOUNDARIES: {
     name: 'Watershed Boundaries',
@@ -247,7 +248,7 @@ export const FEATURES = {
   },
   // Ungrouped Boundary Types
   FLIGHT_BOX_BOUNDARIES: {
-    name: 'Site AOP Flight Box Boundaries',
+    name: 'AOP Flight Box Boundaries',
     type: FEATURE_TYPES.BOUNDARIES,
     minZoom: 8,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
@@ -260,6 +261,7 @@ export const FEATURES = {
     minZoom: 8,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: 'Terrestrial and Colocated Aquatic Sites',
+    parent: 'TERRESTRIAL_SITE_FEATURES',
     style: { color: '#e8847d', dashArray: '5, 10, 2.5, 10' },
   },
   AQUATIC_REACHES: {
@@ -268,6 +270,7 @@ export const FEATURES = {
     minZoom: 9,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: '',
+    parent: 'AQUATIC_SITE_FEATURES',
     style: { color: '#ad85a0', dashArray: '5, 10, 2.5, 10' },
   },
   TOWER_AIRSHEDS: {
@@ -276,6 +279,7 @@ export const FEATURES = {
     minZoom: 10,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: '',
+    parent: 'TERRESTRIAL_SITE_FEATURES',
     style: { color: '#749966', dashArray: '5, 10, 2.5, 10' },
   },
   // Terrestrial Site Features
@@ -447,38 +451,39 @@ export const FEATURES = {
   AQUATIC_SITE_FEATURES: {
     name: 'Aquatic Site Features',
     type: FEATURE_TYPES.GROUP,
-    minZoom: 14,
+    minZoom: 10,
     description: '',
+  },
+  AQUATIC_BENCHMARKS: {
+    name: 'Benchmarks',
+    type: FEATURE_TYPES.LOCATIONS,
+    minZoom: 10,
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    matchLocationType: 'AOS benchmark named location type',
+    description: '',
+    parent: 'AQUATIC_SITE_FEATURES',
+    iconScale: 1.3,
+    iconSvg: iconBenchmarkSVG,
+    iconShape: LOCATION_ICON_SVG_SHAPES.DIAMOND.KEY,
   },
   AQUATIC_AUTOMATED_INSTRUMENTS: {
     name: 'Automated Instuments',
     type: FEATURE_TYPES.GROUP,
-    minZoom: 14,
+    minZoom: 10,
     description: '',
     parent: 'AQUATIC_SITE_FEATURES',
   },
   AQUATIC_OBSERVATIONAL_SAMPLING: {
     name: 'Observational Sampling',
     type: FEATURE_TYPES.GROUP,
-    minZoom: 14,
+    minZoom: 11,
     description: '',
     parent: 'AQUATIC_SITE_FEATURES',
-  },
-  AQUATIC_BENCHMARKS: {
-    name: 'Benchmarks',
-    type: FEATURE_TYPES.LOCATIONS,
-    minZoom: 14,
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
-    matchLocationType: 'AOS benchmark named location type',
-    description: '',
-    parent: 'AQUATIC_SITE_FEATURES',
-    iconSvg: iconBenchmarkSVG,
-    iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
   },
   AQUATIC_RIPARIAN_ASSESSMENTS: {
     name: 'Riparian Assessments',
     type: FEATURE_TYPES.LOCATIONS,
-    minZoom: 14,
+    minZoom: 11,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'AOS riparian named location type',
     description: 'Number of locations for assessment of riparian vegetation composition and physical structure vary by site type. Lakes and non-wadeable rivers have ten locations. Wadeable streams have 20 locations and also include assessment of riparian vegetation percent cover in wadeable streams.',
@@ -489,7 +494,7 @@ export const FEATURES = {
   AQUATIC_WET_DEPOSITION_POINTS: {
     name: 'Wet Deposition Points',
     type: FEATURE_TYPES.LOCATIONS,
-    minZoom: 14,
+    minZoom: 11,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'AOS wet deposition named location type',
     description: '',
@@ -500,40 +505,42 @@ export const FEATURES = {
   AQUATIC_GROUNDWATER_WELLS: {
     name: 'Groundwater Wells',
     type: FEATURE_TYPES.LOCATIONS,
-    minZoom: 14,
+    minZoom: 11,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'GROUNDWATER_WELL',
     description: 'Each site has up to eight groundwater wells outfitted with sensors that measure high temporal resolution groundwater elevation (pressure transducer-based), temperature, and specific conductance.',
     parent: 'AQUATIC_AUTOMATED_INSTRUMENTS',
+    iconScale: 1.2,
     iconSvg: iconGroundwaterWellSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
   },
   AQUATIC_METEOROLOGICAL_STATIONS: {
     name: 'Meteorological Stations',
     type: FEATURE_TYPES.LOCATIONS,
-    minZoom: 14,
+    minZoom: 10,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'MET_STATION',
     description: 'A meteorological station is located on the shore of most aquatic sites and collects data comparable with flux tower measurements at terrestrial sites. Lake and wadeable rivers also have an above water met. station on buoy. These data are unique with different sensors and data frequencies due to power and data storage constraints.',
     parent: 'AQUATIC_AUTOMATED_INSTRUMENTS',
+    iconScale: 1.5,
     iconSvg: iconMeteorologicalStationSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
   },
   AQUATIC_DISCHARGE_POINTS: {
     name: 'Discharge Points',
     type: FEATURE_TYPES.LOCATIONS,
-    minZoom: 14,
+    minZoom: 11,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'AOS discharge named location type',
     description: '',
-    parent: 'AQUATIC_SITE_FEATURES',
+    parent: 'AQUATIC_OBSERVATIONAL_SAMPLING',
     iconSvg: iconDischargePointSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
   },
   AQUATIC_FISH_POINTS: {
     name: 'Fish Points',
     type: FEATURE_TYPES.LOCATIONS,
-    minZoom: 14,
+    minZoom: 11,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'AOS fish named location type',
     description: '',
@@ -544,18 +551,19 @@ export const FEATURES = {
   AQUATIC_PLANT_TRANSECTS: {
     name: 'Plant Transects',
     type: FEATURE_TYPES.LOCATIONS,
-    minZoom: 14,
+    minZoom: 11,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'AOS plant named location type',
     description: '',
     parent: 'AQUATIC_OBSERVATIONAL_SAMPLING',
+    iconScale: 1.3,
     iconSvg: iconPlantTransectSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
   },
   AQUATIC_SEDIMENT_POINTS: {
     name: 'Sediment Points',
     type: FEATURE_TYPES.LOCATIONS,
-    minZoom: 14,
+    minZoom: 11,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'AOS sediment named location type',
     description: '',
@@ -566,7 +574,7 @@ export const FEATURES = {
   AQUATIC_STAFF_GAUGES: {
     name: 'Staff Gauge',
     type: FEATURE_TYPES.LOCATIONS,
-    minZoom: 14,
+    minZoom: 11,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'STAFF_GAUGE',
     description: 'The staff gauge measures gauge height, in meters, measured at lakes, wadeable rivers and non-wadeable streams. A phenocam is installed near most gauges. It collects RGB and IR images of the lake, river, or stream vegetation, stream surface, and stream gauge every 15 minutes.',
@@ -577,11 +585,12 @@ export const FEATURES = {
   AQUATIC_SENSOR_STATIONS: {
     name: 'Sensor Stations',
     type: FEATURE_TYPES.LOCATIONS,
-    minZoom: 14,
+    minZoom: 10,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: /^S(1|2)_LOC$/,
     description: 'Wadeable streams have a sensor station near the top of the reach and the bottom of the reach; non-wadeable rivers have a sensor station on a buoy and one near the bank; Lakes have an inlet sensor station, an outlet sensor station and a sensor station on a buoy. Data collection varies by type of sensor station.',
     parent: 'AQUATIC_AUTOMATED_INSTRUMENTS',
+    iconScale: 1.3,
     iconSvg: iconSensorStationSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
   },
@@ -1136,12 +1145,13 @@ export const getMapStateForFoucusLocation = (state = {}) => {
   const pointTypes = [
     'TOWER', 'HUT', 'MEGAPIT', 'GROUNDWATER_WELL', 'MET_STATION', 'STAFF_GAUGE', 'S1_LOC', 'S2_LOC',
   ];
+  // const lakeSites = ['BARC', 'CRAM', 'LIRO', 'PRLA', 'SUGG', 'TOOK'];
   if (pointTypes.includes(type) || type.includes('OS Plot') || type.includes('AOS')) {
     newState.map.zoom = 16;
   }
   if (type === 'SITE') {
     newState.map.zoom = 12;
-    // Aquatic sites are usually much smaller than terrestrial so do a tighter zoom for those
+    // Aquatic river sites are usually much smaller than terrestrial so do a tighter zoom for those
     if (
       state.featureData.SITES[current] && state.featureData.SITES[current].terrain === 'AQUATIC'
     ) { newState.map.zoom = 15; }

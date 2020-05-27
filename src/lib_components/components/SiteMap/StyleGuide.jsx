@@ -1,9 +1,10 @@
-/* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid */
+/* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid, no-unused-vars, max-len */
 
 import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
+import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -26,6 +27,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+/*
 const propRows = [
   {
     prop: 'aspectRatio',
@@ -72,7 +74,6 @@ const propRows = [
       </div>
     ),
   },
-  /*
   {
     prop: 'mode',
     type: (
@@ -103,8 +104,6 @@ const propRows = [
       </div>
     ),
   },
-  */
-  /*
   {
     prop: 'tileLayer',
     type: (
@@ -126,7 +125,6 @@ const propRows = [
       </div>
     ),
   },
-  */
   {
     prop: 'zoom',
     type: 'integer',
@@ -145,16 +143,22 @@ const propRows = [
     ),
   },
 ];
+*/
 
 export default function StyleGuide() {
   const classes = useStyles(Theme);
+  const slackLink = (
+    <Link href="https://neonscience.slack.com/archives/CQ6J40S85" target="_blank">
+      #portal-feedback Slack channel
+    </Link>
+  );
 
   return (
     <React.Fragment>
 
       <DocBlock>
-        A general purpose component for displaying an interactive world map with
-        markers for NEON field sites.
+        An all-inclusive interactive map for geographically visualizing the NEON observatory at
+        any scale.
       </DocBlock>
       <CodeBlock>
         {`
@@ -162,18 +166,12 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
         `}
       </CodeBlock>
 
-      <Typography variant="h5" component="h3" gutterBottom>Usage</Typography>
+      <Typography variant="h5" component="h3" gutterBottom>Testing and Feedback</Typography>
 
       <DocBlock>
-        A Site Map can be rendered with no props at all for ease of use. When no props
-        are present, a Site Map will assume the following:
+        This new Site Map is a work in progress. Please enjoy testing it and as you find bugs or
+        otherwise have feedback please report using the {slackLink}.
       </DocBlock>
-      <ul>
-        <li>Load site data from the API</li>
-        <li>Use a 4:3 (letterbox) aspect ratio at 100% of the width of the containing element</li>
-        <li>Start centered and zoomed such that all sites are visible at any map dimensions</li>
-        <li><tt>EXPLORE</tt> mode (no selection enabled; popups include links to other pages)</li>
-      </ul>
 
       <ExampleBlock>
         <SiteMap />
@@ -183,6 +181,20 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
 <SiteMap />
         `}
       </CodeBlock>
+
+      <Divider className={classes.divider} />
+      <Typography variant="h6" component="h5" gutterBottom>
+        Current Development Notes
+      </Typography>
+      <DocBlock>
+        <ul>
+          <li>All map features required for production are currently loading and rendering on the map dynamically as the zoom and bounds change</li>
+          <li>Tooltips for most features are placeholders that do not contain relevant feature information yet.</li>
+          <li>The <i>View Table</i> UI is incomplete - only shows sites with no filtering or sorting. This will ultimately show anything the map can show.</li>
+          <li>Surrounding UI (<i>View Table</i>, <i>Jump to Location</i>, and <i>Features</i>) is all tentative. Will likely be presented differently prior to production release.</li>
+          <li>Selection of sites (e.g. for use in building a download package) is not yet supported.</li>
+        </ul>
+      </DocBlock>
 
       {/*
       <ExampleBlock>
@@ -195,6 +207,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
       </CodeBlock>
       */}
 
+      {/*
       <Divider className={classes.divider} />
       <Typography variant="h6" component="h4" gutterBottom>Props</Typography>
 
@@ -229,6 +242,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
           </Table>
         </TableContainer>
       </DocBlock>
+      */}
 
     </React.Fragment>
   );
