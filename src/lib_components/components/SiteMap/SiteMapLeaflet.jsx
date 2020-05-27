@@ -398,7 +398,7 @@ const SiteMapLeaflet = () => {
       <Map
         ref={mapRef}
         className={classes.map}
-        style={{ paddingBottom: `${state.aspectRatio.currentValue * 100}%` }}
+        style={{ paddingBottom: `${(state.aspectRatio.currentValue || 0.75) * 100}%` }}
         center={state.map.center}
         zoom={state.map.zoom}
         minZoom={MAP_ZOOM_RANGE[0]}

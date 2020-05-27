@@ -716,7 +716,7 @@ export const DEFAULT_STATE = {
     fetch: { status: null, error: null },
   },
   aspectRatio: {
-    currentValue: 0.75, // Aspect ratio of the Site Map component content area (table and/or map)
+    currentValue: null, // Aspect ratio of the Site Map component content area (table and/or map)
     isDynamic: true, // Whether currentValue should set itself dynamically from viewport size
   },
   table: { // Settings that ONLY apply to the table
@@ -882,7 +882,7 @@ const dynamicAspectRatios = [
 });
 
 export const getDynamicAspectRatio = () => {
-  const windowAspectRatio = Math.max(window.innerHeight - 40, 0) / window.innerWidth;
+  const windowAspectRatio = Math.max(window.innerHeight, 0) / (window.innerWidth || 1);
   const arIdx = dynamicAspectRatios.findIndex(ar => ar < windowAspectRatio);
   return arIdx === -1
     ? dynamicAspectRatios[dynamicAspectRatios.length - 1]

@@ -112,7 +112,7 @@ const SiteMapContainer = () => {
   const { view, aspectRatio } = state;
   const contentDivProps = {
     className: classes.contentContainer,
-    style: { paddingBottom: `${aspectRatio.currentValue * 100}%` },
+    style: { paddingBottom: `${(aspectRatio.currentValue || 0.75) * 100}%` },
   };
 
   const featuresRef = useRef(null);
@@ -128,6 +128,7 @@ const SiteMapContainer = () => {
         dispatch({ type: 'setAspectRatio', aspectRatio: newAspectRatio });
       }
     };
+    if (aspectRatio.currentValue === null) { handleResize(); }
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
