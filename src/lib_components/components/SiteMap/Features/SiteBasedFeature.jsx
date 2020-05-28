@@ -330,8 +330,8 @@ const SiteBasedFeature = (props) => {
         ? [shapeData.latitude, shapeData.longitude]
         : shapeData.geometry.coordinates;
       icon = state.map.zoomedIcons[featureKey] !== null
-        ? state.map.zoomedIcons[featureKey]
-        : state.map.zoomedIcons.PLACEHOLDER;
+        ? state.map.zoomedIcons[featureKey].UNSELECTED
+        : state.map.zoomedIcons.PLACEHOLDER.UNSELECTED;
       marker = (
         <Marker key={`${key}-marker`} position={position} icon={icon}>
           {renderedPopup}

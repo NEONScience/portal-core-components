@@ -41,7 +41,6 @@ import {
   TILE_LAYERS,
   TILE_LAYERS_BY_NAME,
   MAP_ZOOM_RANGE,
-  ICON_SVGS,
   FEATURES,
   FETCH_STATUS,
   FEATURE_TYPES,
@@ -269,8 +268,11 @@ const SiteMapLeaflet = () => {
           {[...sitesList].map((siteCode) => {
             const site = allSites[siteCode];
             const alt = `${site.terrain} ${site.type}`;
-            const selected = selectedSites.has(siteCode) ? 'SELECTED' : 'BASE';
-            const src = ICON_SVGS.SITE_MARKERS[site.type][site.terrain][selected];
+            const featureKey = `${site.terrain.toUpperCase}_${site.type_toUpperCase}_SITES`;
+            if (!FEATURES[featureKey]) { return null; }
+            const src = selectedSites.has(siteCode)
+              ? FEATURES[featureKey].iconSelectedSvg
+              : FEATURES[featureKey].iconSvg;
             return (
               <div key={siteCode} style={{ display: 'flex' }}>
                 <img src={src} alt={alt} className={classes.popupSiteIcon} />

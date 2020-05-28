@@ -23,7 +23,6 @@ import Theme from '../../Theme/Theme';
 import SiteMapContext from '../SiteMapContext';
 import {
   FEATURES,
-  ICON_SVGS,
   FEATURE_TYPES,
   SELECTABLE_FEATURE_TYPES,
   SITE_DETAILS_URL_BASE,
@@ -97,7 +96,7 @@ const Sites = (props) => {
     const terrainTypeSubtitle = `${terrainSubtitle}; ${typeSubtitle}`;
     const terrainIcon = (
       <img
-        src={ICON_SVGS.SITE_MARKERS[site.type][site.terrain].BASE}
+        src={feature.iconSvg}
         alt={site.terrain}
         title={`${terrainTitle} ${terrainSubtitle}`}
         width={Theme.spacing(5)}
@@ -223,17 +222,15 @@ const Sites = (props) => {
       {siteCodes.map((siteCode) => {
         const site = sitesData[siteCode];
         const isSelected = selectionActive && selectedSites.has(siteCode);
-        if (
-          !state.map.zoomedIcons.SITE_MARKERS || !state.map.zoomedIcons.SITE_MARKERS[site.type]
-            || !state.map.zoomedIcons.SITE_MARKERS[site.type][site.terrain]
-            || !site.latitude || !site.longitude
-        ) { return null; }
-        const rootIcon = state.map.zoomedIcons.SITE_MARKERS[site.type][site.terrain];
+        if (!state.map.zoomedIcons[featureKey] || !site.latitude || !site.longitude) {
+          return null;
+        }
+        const icon = state.map.zoomedIcons[featureKey][isSelected ? 'SELECTED' : 'UNSELECTED'];
         return (
           <Marker
             key={siteCode}
             position={[site.latitude, site.longitude]}
-            icon={rootIcon[isSelected ? 'SELECTED' : 'BASE']}
+            icon={icon}
             {...getInteractionProps(site, isSelected)}
           >
             {renderPopup(site)}

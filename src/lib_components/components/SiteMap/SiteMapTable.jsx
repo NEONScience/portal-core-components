@@ -21,7 +21,6 @@ import {
   TILE_LAYERS,
   TILE_LAYERS_BY_NAME,
   MAP_ZOOM_RANGE,
-  ICON_SVGS,
   FEATURES,
   SELECTABLE_FEATURE_TYPES,
   SITE_DETAILS_URL_BASE,
@@ -78,7 +77,7 @@ const SiteMapTable = () => {
     (focus === SELECTABLE_FEATURE_TYPES.SITES && selection.has(row.siteCode))
   );
 
-  // Columns that are always visible (on the left
+  // Columns that are always visible (on the left)
   const permaColumns = [
     {
       key: 'domain',
@@ -94,9 +93,8 @@ const SiteMapTable = () => {
       key: 'site',
       label: 'Site',
       render: (row) => {
-        const svg = (
-          ICON_SVGS.SITE_MARKERS[row.type] && ICON_SVGS.SITE_MARKERS[row.type][row.terrain]
-        ) ? ICON_SVGS.SITE_MARKERS[row.type][row.terrain].BASE : null;
+        const featureKey = `${row.terrain.toUpperCase}_${row.type_toUpperCase}_SITES`;
+        const svg = FEATURES[featureKey] ? FEATURES[featureKey].iconSvg : null;
         const icon = !svg ? null : (
           <img alt={`${row.type} ${row.terrain} Site`} src={svg} className={classes.featureIcon} />
         );

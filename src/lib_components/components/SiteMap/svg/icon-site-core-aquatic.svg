@@ -9,15 +9,23 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="100"
-   height="100"
-   viewBox="0 0 26.458333 26.458334"
+   width="75"
+   height="75"
+   viewBox="0 0 19.84375 19.84375"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
-   sodipodi:docname="icon-relocatable-aquatic.svg">
+   sodipodi:docname="icon-core-aquatic.svg">
   <defs
-     id="defs2" />
+     id="defs2">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 9.921875 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="19.84375 : 9.921875 : 1"
+       inkscape:persp3d-origin="9.921875 : 6.6145833 : 1"
+       id="perspective6266" />
+  </defs>
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -26,17 +34,17 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="3.959798"
-     inkscape:cx="-56.305776"
-     inkscape:cy="63.883446"
-     inkscape:document-units="mm"
+     inkscape:cx="-38.288603"
+     inkscape:cy="48.954024"
+     inkscape:document-units="px"
      inkscape:current-layer="layer2"
      showgrid="false"
      units="px"
      inkscape:pagecheckerboard="true"
-     inkscape:window-width="1920"
-     inkscape:window-height="1013"
-     inkscape:window-x="-9"
-     inkscape:window-y="846"
+     inkscape:window-width="2400"
+     inkscape:window-height="1434"
+     inkscape:window-x="2391"
+     inkscape:window-y="-9"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata5">
@@ -46,7 +54,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -54,28 +62,25 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Aquatic"
-     style="display:inline">
+     style="display:inline"
+     transform="translate(0,-6.6145833)">
     <rect
-       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.27438271;stroke-opacity:1"
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.20578703;stroke-opacity:1"
        id="rect4518-85"
-       width="26.458334"
-       height="26.458334"
+       width="19.84375"
+       height="19.84375"
        x="0"
-       y="-6.357829e-07"
-       rx="13.229167"
-       ry="13.229167" />
+       y="6.6145835" />
     <rect
-       style="opacity:1;fill:#757bb3;fill-opacity:1;stroke:none;stroke-width:0.2332253;stroke-opacity:1"
+       style="opacity:1;fill:#2e4762;fill-opacity:1;stroke:none;stroke-width:0.17834875;stroke-opacity:1"
        id="rect4518-8-4"
-       width="22.489584"
-       height="22.489584"
-       x="1.984375"
-       y="1.9843744"
-       rx="11.244792"
-       ry="11.244792" />
+       width="17.197916"
+       height="17.197916"
+       x="1.3229166"
+       y="7.9375005" />
     <path
-       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.32982379;stroke-opacity:1"
-       d="m 17.197917,14.323666 c 0,2.318035 -1.776872,4.197167 -3.96875,4.197167 -2.191877,0 -3.9687503,-1.879132 -3.9687503,-4.197167 0,-2.318035 2.7893063,-7.7090827 3.9687503,-7.7090827 1.179444,0 3.96875,5.3910477 3.96875,7.7090827 z"
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.24736783;stroke-opacity:1"
+       d="m 12.898437,17.357333 c 0,1.738526 -1.332654,3.147875 -2.976562,3.147875 -1.6439077,0 -2.9765626,-1.409349 -2.9765626,-3.147875 0,-1.738526 2.0919796,-5.781812 2.9765626,-5.781812 0.884583,0 2.976562,4.043286 2.976562,5.781812 z"
        id="path4678-5"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="csczc" />

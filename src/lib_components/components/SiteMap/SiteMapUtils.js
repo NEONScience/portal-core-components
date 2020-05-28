@@ -5,24 +5,21 @@ import L from 'leaflet';
 import { COLORS } from '../Theme/Theme';
 
 // SVGs for all map icons
-import iconCoreTerrestrialSVG from './svg/icon-core-terrestrial.svg';
-import iconCoreTerrestrialSelectedSVG from './svg/icon-core-terrestrial-selected.svg';
-import iconCoreAquaticSVG from './svg/icon-core-aquatic.svg';
-import iconCoreAquaticSelectedSVG from './svg/icon-core-aquatic-selected.svg';
-import iconCoreShadowSVG from './svg/icon-core-shadow.svg';
-import iconCoreShadowSelectedSVG from './svg/icon-core-shadow-selected.svg';
-import iconRelocatableTerrestrialSVG from './svg/icon-relocatable-terrestrial.svg';
-import iconRelocatableTerrestrialSelectedSVG from './svg/icon-relocatable-terrestrial-selected.svg';
-import iconRelocatableAquaticSVG from './svg/icon-relocatable-aquatic.svg';
-import iconRelocatableAquaticSelectedSVG from './svg/icon-relocatable-aquatic-selected.svg';
-import iconRelocatableShadowSVG from './svg/icon-relocatable-shadow.svg';
-import iconRelocatableShadowSelectedSVG from './svg/icon-relocatable-shadow-selected.svg';
 import iconPlaceholderSVG from './svg/icon-placeholder.svg';
 
 import iconShadowCircleSVG from './svg/icon-shadow-circle.svg';
 import iconShadowSquareSVG from './svg/icon-shadow-square.svg';
 import iconShadowDiamondSVG from './svg/icon-shadow-diamond.svg';
 import iconShadowHomeplateSVG from './svg/icon-shadow-homeplate.svg';
+
+import iconSiteCoreTerrestrialSVG from './svg/icon-site-core-terrestrial.svg';
+import iconSiteCoreTerrestrialSelectedSVG from './svg/icon-site-core-terrestrial-selected.svg';
+import iconSiteCoreAquaticSVG from './svg/icon-site-core-aquatic.svg';
+import iconSiteCoreAquaticSelectedSVG from './svg/icon-site-core-aquatic-selected.svg';
+import iconSiteRelocatableTerrestrialSVG from './svg/icon-site-relocatable-terrestrial.svg';
+import iconSiteRelocatableTerrestrialSelectedSVG from './svg/icon-site-relocatable-terrestrial-selected.svg';
+import iconSiteRelocatableAquaticSVG from './svg/icon-site-relocatable-aquatic.svg';
+import iconSiteRelocatableAquaticSelectedSVG from './svg/icon-site-relocatable-aquatic-selected.svg';
 
 import iconBenchmarkSVG from './svg/icon-benchmark.svg';
 import iconDischargePointSVG from './svg/icon-discharge-point.svg';
@@ -112,77 +109,44 @@ export const FETCH_STATUS = {
    Icon SVGs
    An importable data structure containing all imported SVGs for map and legend icons
 */
+const SELECTED_ICON_OFFSET = 30; // Number of pixels bigger in one dimension for selected icons
 const LOCATION_ICON_SVG_SHAPES = {
   SQUARE: {
     KEY: 'SQUARE',
+    shadowSvg: iconShadowSquareSVG,
     iconSize: [75, 75],
     iconAnchor: [37.5, 37.5],
     popupAnchor: [0, -37.5],
     shadowSize: [90, 90],
     shadowAnchor: [45, 45],
-    shadowSvg: iconShadowSquareSVG,
   },
   DIAMOND: {
     KEY: 'DIAMOND',
+    shadowSvg: iconShadowDiamondSVG,
     iconSize: [100, 100],
     iconAnchor: [50, 50],
     popupAnchor: [0, -50],
     shadowSize: [120, 120],
     shadowAnchor: [60, 60],
-    shadowSvg: iconShadowDiamondSVG,
   },
   CIRCLE: {
     KEY: 'CIRCLE',
+    shadowSvg: iconShadowCircleSVG,
     iconSize: [80, 80],
     iconAnchor: [40, 40],
     popupAnchor: [0, -40],
     shadowSize: [96, 96],
     shadowAnchor: [48, 48],
-    shadowSvg: iconShadowCircleSVG,
   },
   HOMEPLATE: {
     KEY: 'HOMEPLATE',
+    shadowSvg: iconShadowHomeplateSVG,
     iconSize: [80, 90],
     iconAnchor: [40, 45],
     popupAnchor: [0, -45],
     shadowSize: [97, 107],
     shadowAnchor: [48.5, 53.5],
-    shadowSvg: iconShadowHomeplateSVG,
   },
-};
-
-export const ICON_SVGS = {
-  SITE_MARKERS: {
-    CORE: {
-      AQUATIC: {
-        BASE: iconCoreAquaticSVG,
-        SELECTED: iconCoreAquaticSelectedSVG,
-      },
-      TERRESTRIAL: {
-        BASE: iconCoreTerrestrialSVG,
-        SELECTED: iconCoreTerrestrialSelectedSVG,
-      },
-      SHADOW: {
-        BASE: iconCoreShadowSVG,
-        SELECTED: iconCoreShadowSelectedSVG,
-      },
-    },
-    RELOCATABLE: {
-      AQUATIC: {
-        BASE: iconRelocatableAquaticSVG,
-        SELECTED: iconRelocatableAquaticSelectedSVG,
-      },
-      TERRESTRIAL: {
-        BASE: iconRelocatableTerrestrialSVG,
-        SELECTED: iconRelocatableTerrestrialSelectedSVG,
-      },
-      SHADOW: {
-        BASE: iconRelocatableShadowSVG,
-        SELECTED: iconRelocatableShadowSelectedSVG,
-      },
-    },
-  },
-  PLACEHOLDER: iconPlaceholderSVG,
 };
 
 /**
@@ -605,37 +569,49 @@ export const FEATURES = {
     name: 'Terrestrial Core Sites',
     type: FEATURE_TYPES.SITES,
     description: 'Land-based; fixed location',
-    iconSvg: ICON_SVGS.SITE_MARKERS.CORE.TERRESTRIAL.BASE,
     parent: 'SITE_MARKERS',
     attributes: { type: 'CORE', terrain: 'TERRESTRIAL' },
     dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
+    iconScale: 1,
+    iconSvg: iconSiteCoreTerrestrialSVG,
+    iconSelectedSvg: iconSiteCoreTerrestrialSelectedSVG,
+    iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
   },
   TERRESTRIAL_RELOCATABLE_SITES: {
     name: 'Terrestrial Relocatable Sites',
     type: FEATURE_TYPES.SITES,
     description: 'Land-based; location may change',
-    iconSvg: ICON_SVGS.SITE_MARKERS.RELOCATABLE.TERRESTRIAL.BASE,
     parent: 'SITE_MARKERS',
     attributes: { type: 'RELOCATABLE', terrain: 'TERRESTRIAL' },
     dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
+    iconScale: 1,
+    iconSvg: iconSiteRelocatableTerrestrialSVG,
+    iconSelectedSvg: iconSiteRelocatableTerrestrialSelectedSVG,
+    iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
   },
   AQUATIC_CORE_SITES: {
     name: 'Aquatic Core Sites',
     type: FEATURE_TYPES.SITES,
     description: 'Water-based; fixed location',
-    iconSvg: ICON_SVGS.SITE_MARKERS.CORE.AQUATIC.BASE,
     parent: 'SITE_MARKERS',
     attributes: { type: 'CORE', terrain: 'AQUATIC' },
     dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
+    iconScale: 1,
+    iconSvg: iconSiteCoreAquaticSVG,
+    iconSelectedSvg: iconSiteCoreAquaticSelectedSVG,
+    iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
   },
   AQUATIC_RELOCATABLE_SITES: {
     name: 'Aquatic Relocatable Sites',
     type: FEATURE_TYPES.SITES,
     description: 'Water-based; location may change',
-    iconSvg: ICON_SVGS.SITE_MARKERS.RELOCATABLE.AQUATIC.BASE,
     parent: 'SITE_MARKERS',
     attributes: { type: 'RELOCATABLE', terrain: 'AQUATIC' },
     dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
+    iconScale: 1,
+    iconSvg: iconSiteRelocatableAquaticSVG,
+    iconSelectedSvg: iconSiteRelocatableAquaticSelectedSVG,
+    iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
   },
 };
 // Replicate keys as attributes to completely eliminate the need to write a feature key string
@@ -1013,48 +989,33 @@ export const getIconClassName = (type = 'TYPE', isSelected = false) => ([
   'mapIcon', `mapIcon${type}`, `mapIcon${isSelected ? 'Selected' : 'Unselected'}`,
 ].join(' '));
 
-// Site Markers: Get a leaflet icon instance scaled to the current zoom level.
-const getZoomedSiteMarkerIcon = (zoom = 3, type, terrain, isSelected = false) => {
-  const svgs = ICON_SVGS.SITE_MARKERS;
-  if (!svgs[type] || !svgs[type][terrain] || !svgs[type].SHADOW) { return null; }
-  const selected = isSelected ? 'SELECTED' : 'BASE';
-  const iconScale = 0.2 + (Math.floor(((zoom || 2) - 2) / 3) / 10);
-  const iconSize = isSelected ? [150, 150] : [100, 100];
-  const iconAnchor = isSelected ? [75, 125] : [50, 100];
-  const shadowSize = isSelected ? [234, 160] : [156, 93];
-  const shadowAnchor = isSelected ? [80, 120] : [50, 83];
-  return new L.Icon({
-    iconUrl: svgs[type][terrain][selected],
-    iconRetinaUrl: svgs[type][terrain][selected],
-    iconSize: iconSize.map(x => x * iconScale),
-    iconAnchor: iconAnchor.map(x => x * iconScale),
-    shadowUrl: svgs[type].SHADOW[selected],
-    shadowSize: shadowSize.map(x => x * iconScale),
-    shadowAnchor: shadowAnchor.map(x => x * iconScale),
-    popupAnchor: [0, -100].map(x => x * iconScale),
-    className: getIconClassName(type, isSelected),
-  });
-};
-
-const getZoomedLocationIcon = (featureKey = null, zoom = 3, isSelected = false) => {
+const getZoomedIcon = (featureKey = null, zoom = 3, isSelected = false) => {
   const feature = FEATURES[featureKey] || {};
   const featureHasIcon = (
     feature && feature.iconSvg
       && feature.iconShape && LOCATION_ICON_SVG_SHAPES[feature.iconShape]
   );
-  const iconUrl = featureHasIcon ? feature.iconSvg : ICON_SVGS.PLACEHOLDER;
+  let iconUrl = featureHasIcon ? feature.iconSvg : iconPlaceholderSVG;
   const iconShape = featureHasIcon ? feature.iconShape : LOCATION_ICON_SVG_SHAPES.SQUARE.KEY;
   const iconScale = featureHasIcon ? feature.iconScale || 1 : 1;
   const minZoom = feature.minZoom || (FEATURES[feature.parent] || {}).minZoom || MAP_ZOOM_RANGE[0];
   const maxZoom = feature.maxZoom || (FEATURES[feature.parent] || {}).maxZoom || MAP_ZOOM_RANGE[1];
-  const {
+  const { popupAnchor, shadowSvg: shadowUrl } = LOCATION_ICON_SVG_SHAPES[iconShape];
+  let {
     iconSize,
     iconAnchor,
-    popupAnchor,
     shadowSize,
     shadowAnchor,
-    shadowSvg: shadowUrl,
   } = LOCATION_ICON_SVG_SHAPES[iconShape];
+  // Adjust icon, size, and anchor if selected (and a different "selected" icon is available)
+  if (featureHasIcon && isSelected && feature.iconSelectedSvg) {
+    iconUrl = feature.iconSelectedSvg;
+    iconSize = iconSize.map(d => d + SELECTED_ICON_OFFSET);
+    iconAnchor = iconSize.map(d => d + (SELECTED_ICON_OFFSET / 2));
+    shadowSize = shadowUrl ? shadowSize.map(d => d + SELECTED_ICON_OFFSET) : null;
+    shadowAnchor = shadowUrl ? shadowSize.map(d => d + (SELECTED_ICON_OFFSET / 2)) : null;
+    popupAnchor[1] += (SELECTED_ICON_OFFSET / 2);
+  }
   // Determine Icon Scale
   // Normalize the scale to a range of at least 0.2 to 0.5 (but as big as 0.2 to 1) based on
   // current zoom and feature zoom bounds, then multiply by any feature icon scale
@@ -1082,44 +1043,23 @@ const getZoomedLocationIcon = (featureKey = null, zoom = 3, isSelected = false) 
 };
 
 // Get a structure containing all zoomed leaflet icon instances. These are stored in
-// state and regenerated any time the zoom level changes. This makes for a maximum of
-// eight distinct icon instances in memory instead of one for every site.
+// state and regenerated any time the zoom level changes. We do this so that we're not generating
+// a new icon instance for every discrete location in view when several share the same icon.
 export const getZoomedIcons = (zoom) => {
-  const featureTypes = [FEATURE_TYPES.LOCATIONS, FEATURE_TYPES.OTHER];
-  const zoomed = {
-    SITE_MARKERS: {
-      CORE: {
-        AQUATIC: {
-          BASE: getZoomedSiteMarkerIcon(zoom, 'CORE', 'AQUATIC'),
-          SELECTED: getZoomedSiteMarkerIcon(zoom, 'CORE', 'AQUATIC', true),
-        },
-        TERRESTRIAL: {
-          BASE: getZoomedSiteMarkerIcon(zoom, 'CORE', 'TERRESTRIAL'),
-          SELECTED: getZoomedSiteMarkerIcon(zoom, 'CORE', 'TERRESTRIAL', true),
-        },
-      },
-      RELOCATABLE: {
-        AQUATIC: {
-          BASE: getZoomedSiteMarkerIcon(zoom, 'RELOCATABLE', 'AQUATIC'),
-          SELECTED: getZoomedSiteMarkerIcon(zoom, 'RELOCATABLE', 'AQUATIC', true),
-        },
-        TERRESTRIAL: {
-          BASE: getZoomedSiteMarkerIcon(zoom, 'RELOCATABLE', 'TERRESTRIAL'),
-          SELECTED: getZoomedSiteMarkerIcon(zoom, 'RELOCATABLE', 'TERRESTRIAL', true),
-        },
-      },
-    },
-    PLACEHOLDER: getZoomedLocationIcon(null, zoom),
-  };
+  const featureTypes = [FEATURE_TYPES.LOCATIONS, FEATURE_TYPES.SITES, FEATURE_TYPES.OTHER];
+  const icons = {};
   Object.keys(FEATURES)
     .filter(key => (
       featureTypes.includes(FEATURES[key].type) && FEATURES[key].iconSvg
         && FEATURES[key].iconShape && LOCATION_ICON_SVG_SHAPES[FEATURES[key].iconShape]
     ))
     .forEach((key) => {
-      zoomed[key] = getZoomedLocationIcon(key, zoom);
+      icons[key] = { UNSELECTED: getZoomedIcon(key, zoom) };
+      if (Object.keys(SELECTABLE_FEATURE_TYPES).includes(key)) {
+        icons[key].SELECTED = getZoomedIcon(key, zoom, true);
+      }
     });
-  return zoomed;
+  return icons;
 };
 
 export const getMapStateForFoucusLocation = (state = {}) => {
