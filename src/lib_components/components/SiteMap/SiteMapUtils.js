@@ -22,6 +22,7 @@ import iconSiteRelocatableAquaticSVG from './svg/icon-site-relocatable-aquatic.s
 import iconSiteRelocatableAquaticSelectedSVG from './svg/icon-site-relocatable-aquatic-selected.svg';
 
 import iconBenchmarkSVG from './svg/icon-benchmark.svg';
+import iconBuoySVG from './svg/icon-buoy.svg';
 import iconDischargePointSVG from './svg/icon-discharge-point.svg';
 import iconDistributedBasePlotSVG from './svg/icon-distributed-base-plot.svg';
 import iconDistributedBirdGridSVG from './svg/icon-distributed-bird-grid.svg';
@@ -551,11 +552,23 @@ export const FEATURES = {
     type: FEATURE_TYPES.LOCATIONS,
     minZoom: 10,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
-    matchLocationType: /^S(1|2)_LOC$/,
+    matchLocationType: /^(S1|S2|INLET|OUTLET)_LOC$/,
     description: 'Wadeable streams have a sensor station near the top of the reach and the bottom of the reach; non-wadeable rivers have a sensor station on a buoy and one near the bank; Lakes have an inlet sensor station, an outlet sensor station and a sensor station on a buoy. Data collection varies by type of sensor station.',
     parent: 'AQUATIC_AUTOMATED_INSTRUMENTS',
-    iconScale: 1.3,
+    iconScale: 1.1,
     iconSvg: iconSensorStationSVG,
+    iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
+  },
+  AQUATIC_BUOYS: {
+    name: 'Buoys',
+    type: FEATURE_TYPES.LOCATIONS,
+    minZoom: 10,
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    matchLocationType: 'BUOY',
+    description: '',
+    parent: 'AQUATIC_AUTOMATED_INSTRUMENTS',
+    iconScale: 1.2,
+    iconSvg: iconBuoySVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
   },
   // SITE_MARKERS Group

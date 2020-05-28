@@ -70,7 +70,14 @@ const SiteBasedFeature = (props) => {
     AQUATIC_BENCHMARKS: (siteCode, location) => (
       <Popup className={classes.popup} autoPan>
         <Typography variant="h6" gutterBottom>
-          {`${siteCode} Aquatic Benchmark ${location}`}
+          {`${siteCode} Benchmark ${location}`}
+        </Typography>
+      </Popup>
+    ),
+    AQUATIC_BUOYS: (siteCode, location) => (
+      <Popup className={classes.popup} autoPan>
+        <Typography variant="h6" gutterBottom>
+          {`${siteCode} Buoy ${location}`}
         </Typography>
       </Popup>
     ),
