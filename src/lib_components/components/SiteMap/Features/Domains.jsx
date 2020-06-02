@@ -71,7 +71,7 @@ const Domains = (props) => {
       );
     };
     return (
-      <Popup className={classes.popup} autoPan={!selectionActive}>
+      <Popup className={classes.popup} autoPan={false}>
         <Typography variant="h6" gutterBottom>
           {`${domain.name} (${domainCode})`}
         </Typography>

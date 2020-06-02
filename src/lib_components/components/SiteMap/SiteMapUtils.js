@@ -7,10 +7,18 @@ import { COLORS } from '../Theme/Theme';
 // SVGs for all map icons
 import iconPlaceholderSVG from './svg/icon-placeholder.svg';
 
-import iconShadowCircleSVG from './svg/icon-shadow-circle.svg';
-import iconShadowSquareSVG from './svg/icon-shadow-square.svg';
-import iconShadowDiamondSVG from './svg/icon-shadow-diamond.svg';
-import iconShadowHomeplateSVG from './svg/icon-shadow-homeplate.svg';
+import iconShapeCircleShadowSVG from './svg/icon-shape-circle-shadow.svg';
+import iconShapeCircleSelectSVG from './svg/icon-shape-circle-select.svg';
+import iconShapeCircleHighlightSVG from './svg/icon-shape-circle-highlight.svg';
+import iconShapeDiamondShadowSVG from './svg/icon-shape-diamond-shadow.svg';
+import iconShapeDiamondSelectSVG from './svg/icon-shape-diamond-select.svg';
+import iconShapeDiamondHighlightSVG from './svg/icon-shape-diamond-highlight.svg';
+import iconShapeHomeplateShadowSVG from './svg/icon-shape-homeplate-shadow.svg';
+import iconShapeHomeplateSelectSVG from './svg/icon-shape-homeplate-select.svg';
+import iconShapeHomeplateHighlightSVG from './svg/icon-shape-homeplate-highlight.svg';
+import iconShapeSquareShadowSVG from './svg/icon-shape-square-shadow.svg';
+import iconShapeSquareSelectSVG from './svg/icon-shape-square-select.svg';
+import iconShapeSquareHighlightSVG from './svg/icon-shape-square-highlight.svg';
 
 import iconSiteCoreTerrestrialSVG from './svg/icon-site-core-terrestrial.svg';
 import iconSiteCoreTerrestrialSelectedSVG from './svg/icon-site-core-terrestrial-selected.svg';
@@ -95,6 +103,12 @@ export const SELECTABLE_FEATURE_TYPES = (({ SITES }) => ({ SITES }))(FEATURE_TYP
 // For consistency in denoting whether all or some of a region's selectable children are selected
 export const SELECTION_PORTIONS = { PARTIAL: 'PARTIAL', TOTAL: 'TOTAL' };
 
+// For consistency in denoting the selection status of any selectable thing
+export const SELECTION_STATUS = { SELECTED: 'SELECTED', UNSELECTED: 'UNSELECTED' };
+
+// For consistency in denoting the highlight status of a marker
+export const HIGHLIGHT_STATUS = { NONE: 'NONE', HIGHLIGHT: 'HIGHLIGHT', SELECT: 'SELECT' };
+
 // For consistency in denoting which dinstinct user interfaces are available and which is visible
 export const VIEWS = { MAP: 'MAP', TABLE: 'TABLE' };
 
@@ -112,41 +126,97 @@ export const FETCH_STATUS = {
 */
 const SELECTED_ICON_OFFSET = 30; // Number of pixels bigger in one dimension for selected icons
 const LOCATION_ICON_SVG_SHAPES = {
-  SQUARE: {
-    KEY: 'SQUARE',
-    shadowSvg: iconShadowSquareSVG,
-    iconSize: [75, 75],
-    iconAnchor: [37.5, 37.5],
-    popupAnchor: [0, -37.5],
-    shadowSize: [90, 90],
-    shadowAnchor: [45, 45],
-  },
-  DIAMOND: {
-    KEY: 'DIAMOND',
-    shadowSvg: iconShadowDiamondSVG,
-    iconSize: [100, 100],
-    iconAnchor: [50, 50],
-    popupAnchor: [0, -50],
-    shadowSize: [120, 120],
-    shadowAnchor: [60, 60],
-  },
   CIRCLE: {
     KEY: 'CIRCLE',
-    shadowSvg: iconShadowCircleSVG,
     iconSize: [80, 80],
     iconAnchor: [40, 40],
     popupAnchor: [0, -40],
-    shadowSize: [96, 96],
-    shadowAnchor: [48, 48],
+    shadow: {
+      [HIGHLIGHT_STATUS.NONE]: {
+        svg: iconShapeCircleShadowSVG,
+        size: [100, 100],
+        anchor: [50, 50],
+      },
+      [HIGHLIGHT_STATUS.HIGHLIGHT]: {
+        svg: iconShapeCircleHighlightSVG,
+        size: [120, 120],
+        anchor: [60, 60],
+      },
+      [HIGHLIGHT_STATUS.SELECT]: {
+        svg: iconShapeCircleSelectSVG,
+        size: [120, 120],
+        anchor: [60, 60],
+      },
+    },
+  },
+  DIAMOND: {
+    KEY: 'DIAMOND',
+    iconSize: [100, 100],
+    iconAnchor: [50, 50],
+    popupAnchor: [0, -50],
+    shadow: {
+      [HIGHLIGHT_STATUS.NONE]: {
+        svg: iconShapeDiamondShadowSVG,
+        size: [124, 124],
+        anchor: [62, 62],
+      },
+      [HIGHLIGHT_STATUS.HIGHLIGHT]: {
+        svg: iconShapeDiamondHighlightSVG,
+        size: [144, 144],
+        anchor: [72, 72],
+      },
+      [HIGHLIGHT_STATUS.SELECT]: {
+        svg: iconShapeDiamondSelectSVG,
+        size: [144, 144],
+        anchor: [72, 72],
+      },
+    },
   },
   HOMEPLATE: {
     KEY: 'HOMEPLATE',
-    shadowSvg: iconShadowHomeplateSVG,
     iconSize: [80, 90],
     iconAnchor: [40, 45],
     popupAnchor: [0, -45],
-    shadowSize: [97, 107],
-    shadowAnchor: [48.5, 53.5],
+    shadow: {
+      [HIGHLIGHT_STATUS.NONE]: {
+        svg: iconShapeHomeplateShadowSVG,
+        size: [101, 111],
+        anchor: [50.5, 55.5],
+      },
+      [HIGHLIGHT_STATUS.HIGHLIGHT]: {
+        svg: iconShapeHomeplateHighlightSVG,
+        size: [121, 131],
+        anchor: [60.5, 65.5],
+      },
+      [HIGHLIGHT_STATUS.SELECT]: {
+        svg: iconShapeHomeplateSelectSVG,
+        size: [121, 131],
+        anchor: [60.5, 65.5],
+      },
+    },
+  },
+  SQUARE: {
+    KEY: 'SQUARE',
+    iconSize: [75, 75],
+    iconAnchor: [37.5, 37.5],
+    popupAnchor: [0, -37.5],
+    shadow: {
+      [HIGHLIGHT_STATUS.NONE]: {
+        svg: iconShapeSquareShadowSVG,
+        size: [94, 94],
+        anchor: [47, 47],
+      },
+      [HIGHLIGHT_STATUS.HIGHLIGHT]: {
+        svg: iconShapeSquareHighlightSVG,
+        size: [114, 114],
+        anchor: [57, 57],
+      },
+      [HIGHLIGHT_STATUS.SELECT]: {
+        svg: iconShapeSquareSelectSVG,
+        size: [114, 114],
+        anchor: [57, 57],
+      },
+    },
   },
 };
 
@@ -720,6 +790,7 @@ export const DEFAULT_STATE = {
     tileLayer: null,
     tileLayerAutoChangedAbove17: false,
     zoomedIcons: {},
+    repositionOpenPopupFunc: null,
   },
   selection: {
     active: null, // Set to any key in SELECTABLE_FEATURE_TYPES
@@ -736,6 +807,7 @@ export const DEFAULT_STATE = {
   featureData: Object.fromEntries(
     Object.keys(FEATURE_TYPES).map(featureType => [featureType, {}]),
   ),
+  sites: {}, // Sites data is split into 4 features making it hard to look up, so extra refs here
   filters: {
     search: null,
     features: {
@@ -760,13 +832,14 @@ export const DEFAULT_STATE = {
 // Initialize featureData and featureDataFetches objects for all features that have a dataLoadType
 Object.keys(FEATURES)
   .filter(featureKey => (
-    FEATURES[featureKey].type !== FEATURE_TYPES.SITES
-      && Object.keys(FEATURE_DATA_LOAD_TYPES).includes(FEATURES[featureKey].dataLoadType)
+    Object.keys(FEATURE_DATA_LOAD_TYPES).includes(FEATURES[featureKey].dataLoadType)
   ))
   .forEach((featureKey) => {
-    const { type: featureType } = FEATURES[featureKey];
+    const { type: featureType, dataLoadType } = FEATURES[featureKey];
     DEFAULT_STATE.featureData[featureType][featureKey] = {};
-    DEFAULT_STATE.featureDataFetches[featureType][featureKey] = {};
+    if (dataLoadType !== FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT) {
+      DEFAULT_STATE.featureDataFetches[featureType][featureKey] = {};
+    }
   });
 // Initialize all selectable features in selection state
 Object.keys(SELECTABLE_FEATURE_TYPES).forEach((selection) => {
@@ -801,7 +874,16 @@ export const hydrateNeonContextData = (state, neonContextData) => {
   const newState = { ...state, neonContextHydrated: true };
   // Sites
   Object.keys(neonContextData.sites).forEach((siteCode) => {
-    newState.featureData[FEATURE_TYPES.SITES][siteCode] = { ...neonContextData.sites[siteCode] };
+    newState.sites[siteCode] = { ...neonContextData.sites[siteCode] };
+    const featureKey = Object.keys(FEATURES)
+      .filter(key => FEATURES[key].type === FEATURE_TYPES.SITES)
+      .find(key => (
+        FEATURES[key].attributes.type === neonContextData.sites[siteCode].type
+          && FEATURES[key].attributes.terrain === neonContextData.sites[siteCode].terrain
+      )) || null;
+    if (featureKey !== null) {
+      newState.featureData[FEATURE_TYPES.SITES][featureKey][siteCode] = newState.sites[siteCode];
+    }
   });
   // States
   Object.keys(neonContextData.states).forEach((stateCode) => {
@@ -998,11 +1080,12 @@ export const parseLocationHierarchy = (inHierarchy, parent = null) => {
    we generate a stat structure containing only one instance of each distinct icon type scaled
    to the current zoom level and keep that in state. It is regenerated any time the zoom changes.
 */
-export const getIconClassName = (type = 'TYPE', isSelected = false) => ([
-  'mapIcon', `mapIcon${type}`, `mapIcon${isSelected ? 'Selected' : 'Unselected'}`,
-].join(' '));
-
-const getZoomedIcon = (featureKey = null, zoom = 3, isSelected = false) => {
+const getZoomedIcon = (
+  featureKey = null,
+  zoom = 3,
+  highlight = HIGHLIGHT_STATUS.NONE,
+  selection = SELECTION_STATUS.UNSELECTED,
+) => {
   const feature = FEATURES[featureKey] || {};
   const featureHasIcon = (
     feature && feature.iconSvg
@@ -1013,15 +1096,12 @@ const getZoomedIcon = (featureKey = null, zoom = 3, isSelected = false) => {
   const iconScale = featureHasIcon ? feature.iconScale || 1 : 1;
   const minZoom = feature.minZoom || (FEATURES[feature.parent] || {}).minZoom || MAP_ZOOM_RANGE[0];
   const maxZoom = feature.maxZoom || (FEATURES[feature.parent] || {}).maxZoom || MAP_ZOOM_RANGE[1];
-  const { popupAnchor, shadowSvg: shadowUrl } = LOCATION_ICON_SVG_SHAPES[iconShape];
-  let {
-    iconSize,
-    iconAnchor,
-    shadowSize,
-    shadowAnchor,
-  } = LOCATION_ICON_SVG_SHAPES[iconShape];
+  const { popupAnchor, shadow } = LOCATION_ICON_SVG_SHAPES[iconShape];
+  let { iconSize, iconAnchor } = LOCATION_ICON_SVG_SHAPES[iconShape];
+  const { svg: shadowUrl } = shadow[highlight] || {};
+  let { size: shadowSize, anchor: shadowAnchor } = shadow[highlight] || {};
   // Adjust icon, size, and anchor if selected (and a different "selected" icon is available)
-  if (featureHasIcon && isSelected && feature.iconSelectedSvg) {
+  if (featureHasIcon && selection === SELECTION_STATUS.SELECTED && feature.iconSelectedSvg) {
     iconUrl = feature.iconSelectedSvg;
     iconSize = iconSize.map(d => d + SELECTED_ICON_OFFSET);
     iconAnchor = iconSize.map(d => d + (SELECTED_ICON_OFFSET / 2));
@@ -1036,16 +1116,12 @@ const getZoomedIcon = (featureKey = null, zoom = 3, isSelected = false) => {
   const maxScale = Math.max((maxZoom - minZoom) / (MAP_ZOOM_RANGE[1] - MAP_ZOOM_RANGE[0]), 0.5);
   const baseScale = ((zoom || minZoom) - minZoom) / (maxZoom - minZoom);
   const scale = (minScale + (baseScale * (maxScale - minScale))) * iconScale;
-  const className = [
-    'mapIcon', `mapIcon${iconShape}`, `mapIcon${isSelected ? 'Selected' : 'Unselected'}`,
-  ].join(' ');
   const iconProps = {
     iconUrl,
     iconRetinaUrl: iconUrl,
     iconSize: iconSize.map(x => x * scale),
     iconAnchor: iconAnchor.map(x => x * scale),
     popupAnchor: popupAnchor.map(x => x * scale),
-    className,
   };
   if (shadowUrl && shadowSize && shadowAnchor) {
     iconProps.shadowUrl = shadowUrl;
@@ -1067,10 +1143,17 @@ export const getZoomedIcons = (zoom) => {
         && FEATURES[key].iconShape && LOCATION_ICON_SVG_SHAPES[FEATURES[key].iconShape]
     ))
     .forEach((key) => {
-      icons[key] = { UNSELECTED: getZoomedIcon(key, zoom) };
-      if (Object.keys(SELECTABLE_FEATURE_TYPES).includes(key)) {
-        icons[key].SELECTED = getZoomedIcon(key, zoom, true);
-      }
+      icons[key] = {};
+      Object.keys(SELECTION_STATUS).forEach((selection) => {
+        if (
+          selection === SELECTION_STATUS.SELECTED
+            && !Object.keys(SELECTABLE_FEATURE_TYPES).includes(key)
+        ) { return; }
+        icons[key][selection] = {};
+        Object.keys(HIGHLIGHT_STATUS).forEach((highlight) => {
+          icons[key][selection][highlight] = getZoomedIcon(key, zoom, highlight, selection);
+        });
+      });
     });
   return icons;
 };

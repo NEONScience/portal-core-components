@@ -27,18 +27,19 @@ import {
   SELECTABLE_FEATURE_TYPES,
   SITE_DETAILS_URL_BASE,
   EXPLORE_DATA_PRODUCTS_URL_BASE,
+  SELECTION_STATUS,
+  HIGHLIGHT_STATUS,
 } from '../SiteMapUtils';
 
 /**
    Main Component
 */
 const Sites = (props) => {
-  const { featureKey, classes, positionPopup } = props;
+  const { featureKey, classes } = props; // , positionPopup
 
   // State, Dispatch, et al. from SiteMapContext
-  const [state, dispatch] = SiteMapContext.useSiteMapContext();
+  const [state] = SiteMapContext.useSiteMapContext(); // , dispatch
   const { neonContextHydrated } = state;
-  const { getIconClassName } = SiteMapContext;
 
   // Don't render if not all loaded
   if (!neonContextHydrated) { return null; }
@@ -58,19 +59,19 @@ const Sites = (props) => {
   // Filters?
   if (!siteCodes.length) { return null; }
 
+  /*
   const getInteractionProps = (site, isSelected) => (
     selectionActive ? {
       onMouseOver: (e) => { e.target.openPopup(); positionPopup(e); },
       onMouseOut: (e) => { e.target.closePopup(); },
       onClick: (e) => {
-        /* eslint-disable no-underscore-dangle */
         e.target._icon.className = getIconClassName(classes, site.type, !isSelected);
         e.target._icon.blur();
         dispatch({ type: 'toggleSiteSelected', site: site.siteCode });
-        /* eslint-enable no-underscore-dangle */
       },
     } : {}
   );
+  */
 
   /**
      Render Method: Popup
@@ -158,7 +159,7 @@ const Sites = (props) => {
       );
     };
     return (
-      <Popup className={classes.popup} autoPan={!selectionActive}>
+      <Popup className={classes.popup} autoPan={false}>
         <div className={classes.startFlex} style={{ marginBottom: Theme.spacing(1.5) }}>
           {terrainIcon}
           <Typography variant="h6" style={{ lineHeight: '1.4rem' }}>
@@ -225,13 +226,23 @@ const Sites = (props) => {
         if (!state.map.zoomedIcons[featureKey] || !site.latitude || !site.longitude) {
           return null;
         }
-        const icon = state.map.zoomedIcons[featureKey][isSelected ? 'SELECTED' : 'UNSELECTED'];
+        const baseIcon = state.map.zoomedIcons[featureKey];
+        const selection = isSelected ? SELECTION_STATUS.SELECTED : SELECTION_STATUS.UNSELECTED;
+        const icon = baseIcon[selection][HIGHLIGHT_STATUS.NONE];
+        const interaction = {
+          onMouseOver: (e) => {
+            e.target.setIcon(baseIcon[selection][HIGHLIGHT_STATUS.HIGHLIGHT]);
+          },
+          onMouseOut: (e) => {
+            e.target.setIcon(baseIcon[selection][HIGHLIGHT_STATUS.NONE]);
+          },
+        };
         return (
           <Marker
             key={siteCode}
             position={[site.latitude, site.longitude]}
             icon={icon}
-            {...getInteractionProps(site, isSelected)}
+            {...interaction}
           >
             {renderPopup(site)}
           </Marker>

@@ -71,7 +71,7 @@ const States = (props) => {
       );
     };
     return (
-      <Popup className={classes.popup} autoPan={!selectionActive}>
+      <Popup className={classes.popup} autoPan={false}>
         <Typography variant="h6" gutterBottom>
           {`${usState.name} (${stateCode})`}
         </Typography>

@@ -184,7 +184,6 @@ const SiteMapLeaflet = () => {
     state.focusLocation.current
       && state.focusLocation.fetch.status !== FETCH_STATUS.SUCCESS
   ) { canRender = false; }
-  const { getIconClassName } = SiteMapContext;
 
   // Effect
   // If zoom was not set as a prop then attempt to set the initial zoom such that
@@ -228,23 +227,62 @@ const SiteMapLeaflet = () => {
 
   /**
      Util: Position Popup
-     Used only when selection is active, or more specifically, only when popups are on mouse
-     over only and do not persist.
+     Leaflet's AutoPan for popups does a "transition" of map center to ensure a new popup renders
+     in view. This poses a problem when the center is in the main context state - every micro-step
+     of the AutoPan transition is a state update. The transition appears to run recursively as it
+     causes a max update depth crash. We get around this by solving the same root problem (want
+     popups to render in view) in a different way... specifically by positioning them around their
+     parent element dynamcally based on which direction has the most room to render.
   */
-  const positionPopup = (e) => {
-    const TIP_HEIGHT = 47;
-    e.target._popup.setLatLng(e.latlng);
+  const positionPopup = (target = null, latlng = null, hideCloseButton = false) => {
+    if (!target || !latlng) { return; }
+    const { map: { bounds } } = state;
+    const { _popup: popup, _icon: icon } = target;
+    popup.setLatLng(latlng);
+    const containerPoint = mapRef.current.leafletElement.latLngToContainerPoint(latlng);
+    const iconHeight = icon ? icon.height : 0;
+    const {
+      _container: containerNode,
+      _containerLeft: containerLeft,
+      _containerBottom: containerBottom,
+      _tipContainer: tipNode,
+    } = popup;
+    containerNode.style.marginBottom = '0px';
     // Leaflet popups always open above; open below if mouse event is in the top half of the map
-    if (e.containerPoint.y < (mapRef.current.container.clientHeight / 2)) {
-      const popupHeight = e.target._popup._contentNode.clientHeight;
-      const tipY = popupHeight + TIP_HEIGHT;
-      e.target._popup._container.style.bottom = `${(popupHeight + (TIP_HEIGHT * 1.75)) * -1}px`;
-      e.target._popup._tipContainer.style.transform = `rotate(0.5turn) translate(0px, ${tipY}px)`;
+    if (containerPoint.y < (mapRef.current.container.clientHeight / 2)) {
+      const contentHeight = containerNode.clientHeight;
+      const tipHeight = tipNode.clientHeight;
+      const contentBottom = 0 - iconHeight - contentHeight - tipHeight - (1.5 * containerBottom);
+      const tipBottom = contentHeight + tipHeight;
+      containerNode.style.bottom = `${contentBottom}px`;
+      tipNode.style.transform = `rotate(0.5turn) translate(0px, ${tipBottom}px)`;
     } else {
-      e.target._popup._container.style.bottom = '0px';
-      e.target._popup._tipContainer.style.transform = null;
+      containerNode.style.bottom = `${-1.5 * containerBottom}px`;
+      popup._tipContainer.style.transform = null;
     }
-    e.target._popup._closeButton.style.display = 'none';
+    // For left/right we move the popup horizontally as needed while keeping the tip stationary
+    const contentWidth = containerNode.clientWidth;
+    const mapWidth = mapRef.current.container.parentNode.clientWidth || 0;
+    const nudgeBuffer = 40;
+    const nudgeLimit = (contentWidth / 2) - (nudgeBuffer / 2);
+    let overlap = 0;
+    if (mapWidth > (contentWidth + (nudgeBuffer * 3))) {
+      let nudge = 0;
+      if (containerPoint.x - (contentWidth / 2) < 0) {
+        overlap = containerPoint.x - (contentWidth / 2);
+        nudge = Math.min((0 - overlap) + nudgeBuffer, nudgeLimit);
+      } else if (containerPoint.x + (contentWidth / 2) > mapWidth) {
+        overlap = mapWidth - containerPoint.x - (contentWidth / 2);
+        nudge = Math.min(overlap - nudgeBuffer, nudgeLimit);
+      }
+      if (nudge !== 0) {
+        containerNode.style.left = `${containerLeft + nudge}px`;
+      }
+      tipNode.style.left = `${(0 - containerLeft) - nudge}px`;
+    }
+    if (hideCloseButton) {
+      popup._closeButton.style.display = 'none';
+    }
   };
 
   /**
@@ -323,7 +361,6 @@ const SiteMapLeaflet = () => {
     };
     switch (feature.type) {
       case FEATURE_TYPES.SITES:
-        return <SitesFeature {...featureProps} />;
       case FEATURE_TYPES.LOCATIONS:
         return <SiteBasedFeature {...featureProps} />;
 
@@ -370,6 +407,9 @@ const SiteMapLeaflet = () => {
         lng: [bounds._southWest.lng, bounds._northEast.lng],
       },
     });
+    if (typeof state.map.repositionOpenPopupFunc === 'function') {
+      state.map.repositionOpenPopupFunc();
+    }
   };
   const handleZoomEnd = (event) => {
     const center = event.target.getCenter();
@@ -383,6 +423,9 @@ const SiteMapLeaflet = () => {
         lng: [bounds._southWest.lng, bounds._northEast.lng],
       },
     });
+    if (typeof state.map.repositionOpenPopupFunc === 'function') {
+      state.map.repositionOpenPopupFunc();
+    }
   };
   const handleBaseLayerChange = (event) => {
     if (!event.name || !TILE_LAYERS_BY_NAME[event.name]) { return; }

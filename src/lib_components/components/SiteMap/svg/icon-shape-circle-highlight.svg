@@ -9,12 +9,12 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="96"
-   height="96"
-   viewBox="0 0 25.399999 25.4"
+   width="120"
+   height="120"
+   viewBox="0 0 31.749998 31.75"
    version="1.1"
    id="svg19093"
-   sodipodi:docname="icon-location-shadow-circle.svg"
+   sodipodi:docname="icon-circle-highlight.svg"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
   <defs
      id="defs19087">
@@ -40,18 +40,18 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
-     inkscape:cx="48.483243"
+     inkscape:cx="-37.632261"
      inkscape:cy="67.832589"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      units="px"
      inkscape:pagecheckerboard="true"
-     inkscape:window-width="972"
-     inkscape:window-height="686"
-     inkscape:window-x="198"
-     inkscape:window-y="323"
-     inkscape:window-maximized="0" />
+     inkscape:window-width="1920"
+     inkscape:window-height="1147"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
   <metadata
      id="metadata19090">
     <rdf:RDF>
@@ -68,10 +68,10 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-271.59999)"
+     transform="translate(0,-265.24999)"
      style="display:inline">
     <rect
-       style="display:inline;opacity:0.5;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.21950617;stroke-opacity:1;filter:url(#filter23540)"
+       style="display:inline;opacity:0.7;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.21950617;stroke-opacity:1;filter:url(#filter23540)"
        id="rect4518-85-4-79-8"
        width="21.166666"
        height="21.166666"
@@ -79,6 +79,6 @@
        y="275.83331"
        rx="10.583333"
        ry="10.583333"
-       transform="matrix(1.0067126,0,0,1.006716,2.04564,-4.0402889)" />
+       transform="matrix(1.2583892,0,0,1.2583892,2.5570496,-79.29864)" />
   </g>
 </svg>

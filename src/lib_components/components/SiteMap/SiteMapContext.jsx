@@ -125,17 +125,16 @@ const calculateSitesInMap = (state) => {
       && site.latitude >= extendedBounds.lat[0] && site.latitude <= extendedBounds.lat[1]
       && site.longitude >= extendedBounds.lng[0] && site.longitude <= extendedBounds.lng[1]
   );
-  return Object.keys(state.featureData[FEATURE_TYPES.SITES])
-    .filter(siteCode => siteIsInBounds(state.featureData[FEATURE_TYPES.SITES][siteCode]));
+  return Object.keys(state.sites).filter(siteCode => siteIsInBounds(state.sites[siteCode]));
 };
 const calculateFeatureDataFetches = (state) => {
   const sitesInMap = calculateSitesInMap(state);
-  if (!sitesInMap) { return state; }
+  if (!sitesInMap.length) { return state; }
   const domainsInMap = new Set();
   sitesInMap
-    .filter(siteCode => state.featureData.SITES[siteCode])
+    .filter(siteCode => state.sites[siteCode])
     .forEach((siteCode) => {
-      domainsInMap.add(state.featureData.SITES[siteCode].domainCode);
+      domainsInMap.add(state.sites[siteCode].domainCode);
     });
   const newState = { ...state };
   // Domain-location hierarchy fetches for individual domains
@@ -340,6 +339,10 @@ const reducer = (state, action) => {
     case 'setMapTileLayer':
       if (!Object.keys(TILE_LAYERS).includes(action.tileLayer)) { return state; }
       newState.map.tileLayer = action.tileLayer;
+      return newState;
+
+    case 'setMapRepositionOpenPopupFunc':
+      newState.map.repositionOpenPopupFunc = typeof action.func === 'function' ? action.func : null;
       return newState;
 
     // Features
@@ -589,11 +592,9 @@ const Provider = (props) => {
       });
       return;
     }
-    const {
-      [FEATURE_TYPES.SITES]: sitesData = {},
-    } = state.featureData;
-    if (Object.keys(sitesData).includes(current)) {
-      const { latitude, longitude } = sitesData[current];
+    const { sites } = state;
+    if (Object.keys(sites).includes(current)) {
+      const { latitude, longitude } = sites[current];
       dispatch({
         type: 'setFocusLocationFetchSucceeded',
         data: { type: 'SITE', latitude, longitude },
