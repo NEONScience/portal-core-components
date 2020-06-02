@@ -6,7 +6,8 @@
     "domainCode": "D16",
     "terrain": "TERRESTRIAL",
     "latitude": 45.762439,
-    "longitude": -122.330317
+    "longitude": -122.330317,
+    "zoom": 12
   },
   "ARIK": {
     "description": "Arikaree River",
@@ -15,7 +16,8 @@
     "domainCode": "D10",
     "terrain": "AQUATIC",
     "latitude": 39.758206,
-    "longitude": -102.447148
+    "longitude": -102.447148,
+    "zoom": 15
   },
   "BARC": {
     "description": "Barco Lake",
@@ -24,7 +26,8 @@
     "domainCode": "D03",
     "terrain": "AQUATIC",
     "latitude": 29.675982,
-    "longitude": -82.008414
+    "longitude": -82.008414,
+    "zoom": 16
   },
   "BARR": {
     "description": "Utqiaġvik Environmental Observatory",
@@ -33,7 +36,8 @@
     "domainCode": "D18",
     "terrain": "TERRESTRIAL",
     "latitude": 71.28241,
-    "longitude": -156.61936
+    "longitude": -156.61936,
+    "zoom": 10
   },
   "BART": {
     "description": "Bartlett Experimental Forest",
@@ -42,7 +46,8 @@
     "domainCode": "D01",
     "terrain": "TERRESTRIAL",
     "latitude": 44.063889,
-    "longitude": -71.287375
+    "longitude": -71.287375,
+    "zoom": 13
   },
   "BIGC": {
     "description": "Upper Big Creek",
@@ -51,7 +56,8 @@
     "domainCode": "D17",
     "terrain": "AQUATIC",
     "latitude": 37.059719,
-    "longitude": -119.257549
+    "longitude": -119.257549,
+    "zoom": 15
   },
   "BLAN": {
     "description": "Blandy Experimental Farm",
@@ -60,7 +66,8 @@
     "domainCode": "D02",
     "terrain": "TERRESTRIAL",
     "latitude": 39.033698,
-    "longitude": -78.041788
+    "longitude": -78.041788,
+    "zoom": 12
   },
   "BLDE": {
     "description": "Blacktail Deer Creek",
@@ -69,7 +76,8 @@
     "domainCode": "D12",
     "terrain": "AQUATIC",
     "latitude": 44.95011,
-    "longitude": -110.58715
+    "longitude": -110.58715,
+    "zoom": 15
   },
   "BLUE": {
     "description": "Blue River",
@@ -78,7 +86,8 @@
     "domainCode": "D11",
     "terrain": "AQUATIC",
     "latitude": 34.444218,
-    "longitude": -96.624201
+    "longitude": -96.624201,
+    "zoom": 15
   },
   "BLWA": {
     "description": "Black Warrior River",
@@ -87,7 +96,8 @@
     "domainCode": "D08",
     "terrain": "AQUATIC",
     "latitude": 32.541529,
-    "longitude": -87.798151
+    "longitude": -87.798151,
+    "zoom": 15
   },
   "BONA": {
     "description": "Caribou-Poker Creeks Research Watershed",
@@ -96,7 +106,8 @@
     "domainCode": "D19",
     "terrain": "TERRESTRIAL",
     "latitude": 65.15401,
-    "longitude": -147.50258
+    "longitude": -147.50258,
+    "zoom": 15
   },
   "CARI": {
     "description": "Caribou Creek at Caribou-Poker Creeks Research Watershed",
@@ -105,7 +116,8 @@
     "domainCode": "D19",
     "terrain": "AQUATIC",
     "latitude": 65.153224,
-    "longitude": -147.503973
+    "longitude": -147.503973,
+    "zoom": 15
   },
   "CLBJ": {
     "description": "LBJ National Grassland",
@@ -114,7 +126,8 @@
     "domainCode": "D11",
     "terrain": "TERRESTRIAL",
     "latitude": 33.40123,
-    "longitude": -97.57
+    "longitude": -97.57,
+    "zoom": 12
   },
   "COMO": {
     "description": "Como Creek",
@@ -123,7 +136,8 @@
     "domainCode": "D13",
     "terrain": "AQUATIC",
     "latitude": 40.034962,
-    "longitude": -105.544164
+    "longitude": -105.544164,
+    "zoom": 15
   },
   "CPER": {
     "description": "Central Plains Experimental Range",
@@ -132,7 +146,8 @@
     "domainCode": "D10",
     "terrain": "TERRESTRIAL",
     "latitude": 40.815536,
-    "longitude": -104.745591
+    "longitude": -104.745591,
+    "zoom": 12
   },
   "CRAM": {
     "description": "Crampton Lake",
@@ -141,7 +156,8 @@
     "domainCode": "D05",
     "terrain": "AQUATIC",
     "latitude": 46.209675,
-    "longitude": -89.473688
+    "longitude": -89.473688,
+    "zoom": 15
   },
   "CUPE": {
     "description": "Rio Cupeyes",
@@ -150,7 +166,8 @@
     "domainCode": "D04",
     "terrain": "AQUATIC",
     "latitude": 18.11352,
-    "longitude": -66.98676
+    "longitude": -66.98676,
+    "zoom": 15
   },
   "DCFS": {
     "description": "Dakota Coteau Field School",
@@ -159,7 +176,8 @@
     "domainCode": "D09",
     "terrain": "TERRESTRIAL",
     "latitude": 47.16165,
-    "longitude": -99.10656
+    "longitude": -99.10656,
+    "zoom": 12
   },
   "DEJU": {
     "description": "Delta Junction",
@@ -168,7 +186,8 @@
     "domainCode": "D19",
     "terrain": "TERRESTRIAL",
     "latitude": 63.88112,
-    "longitude": -145.75136
+    "longitude": -145.75136,
+    "zoom": 12
   },
   "DELA": {
     "description": "Dead Lake",
@@ -177,7 +196,8 @@
     "domainCode": "D08",
     "terrain": "TERRESTRIAL",
     "latitude": 32.541727,
-    "longitude": -87.803877
+    "longitude": -87.803877,
+    "zoom": 12
   },
   "DSNY": {
     "description": "Disney Wilderness Preserve",
@@ -186,7 +206,8 @@
     "domainCode": "D03",
     "terrain": "TERRESTRIAL",
     "latitude": 28.12505,
-    "longitude": -81.43619
+    "longitude": -81.43619,
+    "zoom": 12
   },
   "FLNT": {
     "description": "Flint River",
@@ -195,7 +216,8 @@
     "domainCode": "D03",
     "terrain": "AQUATIC",
     "latitude": 31.185424,
-    "longitude": -84.437403
+    "longitude": -84.437403,
+    "zoom": 15
   },
   "GRSM": {
     "description": "Great Smoky Mountains National Park",
@@ -204,7 +226,8 @@
     "domainCode": "D07",
     "terrain": "TERRESTRIAL",
     "latitude": 35.68896,
-    "longitude": -83.50195
+    "longitude": -83.50195,
+    "zoom": 12
   },
   "GUAN": {
     "description": "Guanica Forest",
@@ -213,7 +236,8 @@
     "domainCode": "D04",
     "terrain": "TERRESTRIAL",
     "latitude": 17.96955,
-    "longitude": -66.8687
+    "longitude": -66.8687,
+    "zoom": 13
   },
   "GUIL": {
     "description": "Rio Guilarte",
@@ -222,7 +246,8 @@
     "domainCode": "D04",
     "terrain": "AQUATIC",
     "latitude": 18.17406,
-    "longitude": -66.79868
+    "longitude": -66.79868,
+    "zoom": 16
   },
   "HARV": {
     "description": "Harvard Forest",
@@ -231,7 +256,8 @@
     "domainCode": "D01",
     "terrain": "TERRESTRIAL",
     "latitude": 42.53691,
-    "longitude": -72.17265
+    "longitude": -72.17265,
+    "zoom": 12
   },
   "HEAL": {
     "description": "Healy",
@@ -240,7 +266,8 @@
     "domainCode": "D19",
     "terrain": "TERRESTRIAL",
     "latitude": 63.875798,
-    "longitude": -149.213347
+    "longitude": -149.213347,
+    "zoom": 12
   },
   "HOPB": {
     "description": "Hop Brook",
@@ -249,7 +276,8 @@
     "domainCode": "D01",
     "terrain": "AQUATIC",
     "latitude": 42.471941,
-    "longitude": -72.329526
+    "longitude": -72.329526,
+    "zoom": 15
   },
   "JERC": {
     "description": "Jones Ecological Research Center",
@@ -258,7 +286,8 @@
     "domainCode": "D03",
     "terrain": "TERRESTRIAL",
     "latitude": 31.194839,
-    "longitude": -84.468623
+    "longitude": -84.468623,
+    "zoom": 15
   },
   "JORN": {
     "description": "Jornada LTER",
@@ -267,7 +296,8 @@
     "domainCode": "D14",
     "terrain": "TERRESTRIAL",
     "latitude": 32.590694,
-    "longitude": -106.842542
+    "longitude": -106.842542,
+    "zoom": 12
   },
   "KING": {
     "description": "Kings Creek",
@@ -276,7 +306,8 @@
     "domainCode": "D06",
     "terrain": "AQUATIC",
     "latitude": 39.105061,
-    "longitude": -96.603829
+    "longitude": -96.603829,
+    "zoom": 15
   },
   "KONA": {
     "description": "Konza Prairie Biological Station",
@@ -285,7 +316,8 @@
     "domainCode": "D06",
     "terrain": "TERRESTRIAL",
     "latitude": 39.110446,
-    "longitude": -96.612935
+    "longitude": -96.612935,
+    "zoom": 12
   },
   "KONZ": {
     "description": "Konza Prairie Biological Station",
@@ -294,7 +326,8 @@
     "domainCode": "D06",
     "terrain": "TERRESTRIAL",
     "latitude": 39.100774,
-    "longitude": -96.563075
+    "longitude": -96.563075,
+    "zoom": 12
   },
   "LAJA": {
     "description": "Lajas Experimental Station",
@@ -303,7 +336,8 @@
     "domainCode": "D04",
     "terrain": "TERRESTRIAL",
     "latitude": 18.021261,
-    "longitude": -67.076889
+    "longitude": -67.076889,
+    "zoom": 14
   },
   "LECO": {
     "description": "LeConte Creek",
@@ -312,7 +346,8 @@
     "domainCode": "D07",
     "terrain": "AQUATIC",
     "latitude": 35.690428,
-    "longitude": -83.50379
+    "longitude": -83.50379,
+    "zoom": 15
   },
   "LENO": {
     "description": "Lenoir Landing",
@@ -321,7 +356,8 @@
     "domainCode": "D08",
     "terrain": "TERRESTRIAL",
     "latitude": 31.853861,
-    "longitude": -88.161181
+    "longitude": -88.161181,
+    "zoom": 12
   },
   "LEWI": {
     "description": "Lewis Run",
@@ -330,7 +366,8 @@
     "domainCode": "D02",
     "terrain": "AQUATIC",
     "latitude": 39.095637,
-    "longitude": -77.983216
+    "longitude": -77.983216,
+    "zoom": 15
   },
   "LIRO": {
     "description": "Little Rock Lake",
@@ -339,7 +376,8 @@
     "domainCode": "D05",
     "terrain": "AQUATIC",
     "latitude": 45.998269,
-    "longitude": -89.704767
+    "longitude": -89.704767,
+    "zoom": 15
   },
   "MART": {
     "description": "Martha Creek",
@@ -348,7 +386,8 @@
     "domainCode": "D16",
     "terrain": "AQUATIC",
     "latitude": 45.790835,
-    "longitude": -121.933788
+    "longitude": -121.933788,
+    "zoom": 15
   },
   "MAYF": {
     "description": "Mayfield Creek",
@@ -357,7 +396,8 @@
     "domainCode": "D08",
     "terrain": "AQUATIC",
     "latitude": 32.960365,
-    "longitude": -87.407688
+    "longitude": -87.407688,
+    "zoom": 15
   },
   "MCDI": {
     "description": "McDiffett Creek",
@@ -366,7 +406,8 @@
     "domainCode": "D06",
     "terrain": "AQUATIC",
     "latitude": 38.945861,
-    "longitude": -96.443022
+    "longitude": -96.443022,
+    "zoom": 15
   },
   "MCRA": {
     "description": "McRae Creek",
@@ -375,7 +416,8 @@
     "domainCode": "D16",
     "terrain": "AQUATIC",
     "latitude": 44.259598,
-    "longitude": -122.165554
+    "longitude": -122.165554,
+    "zoom": 15
   },
   "MLBS": {
     "description": "Mountain Lake Biological Station",
@@ -384,7 +426,8 @@
     "domainCode": "D07",
     "terrain": "TERRESTRIAL",
     "latitude": 37.378314,
-    "longitude": -80.524847
+    "longitude": -80.524847,
+    "zoom": 12
   },
   "MOAB": {
     "description": "Moab",
@@ -393,7 +436,8 @@
     "domainCode": "D13",
     "terrain": "TERRESTRIAL",
     "latitude": 38.248283,
-    "longitude": -109.388273
+    "longitude": -109.388273,
+    "zoom": 12
   },
   "NIWO": {
     "description": "Niwot Ridge Mountain Research Station",
@@ -402,7 +446,8 @@
     "domainCode": "D13",
     "terrain": "TERRESTRIAL",
     "latitude": 40.05425,
-    "longitude": -105.58237
+    "longitude": -105.58237,
+    "zoom": 12
   },
   "NOGP": {
     "description": "Northern Great Plains Research Laboratory",
@@ -411,7 +456,8 @@
     "domainCode": "D09",
     "terrain": "TERRESTRIAL",
     "latitude": 46.76972,
-    "longitude": -100.91535
+    "longitude": -100.91535,
+    "zoom": 12
   },
   "OAES": {
     "description": "Klemme Range Research Station",
@@ -420,7 +466,8 @@
     "domainCode": "D11",
     "terrain": "TERRESTRIAL",
     "latitude": 35.410599,
-    "longitude": -99.058779
+    "longitude": -99.058779,
+    "zoom": 12
   },
   "OKSR": {
     "description": "Oksrukuyik Creek",
@@ -429,7 +476,8 @@
     "domainCode": "D18",
     "terrain": "AQUATIC",
     "latitude": 68.669753,
-    "longitude": -149.143018
+    "longitude": -149.143018,
+    "zoom": 15
   },
   "ONAQ": {
     "description": "Onaqui",
@@ -438,7 +486,8 @@
     "domainCode": "D15",
     "terrain": "TERRESTRIAL",
     "latitude": 40.177599,
-    "longitude": -112.452452
+    "longitude": -112.452452,
+    "zoom": 12
   },
   "ORNL": {
     "description": "Oak Ridge",
@@ -447,7 +496,8 @@
     "domainCode": "D07",
     "terrain": "TERRESTRIAL",
     "latitude": 35.964128,
-    "longitude": -84.282588
+    "longitude": -84.282588,
+    "zoom": 12
   },
   "OSBS": {
     "description": "Ordway-Swisher Biological Station",
@@ -456,7 +506,8 @@
     "domainCode": "D03",
     "terrain": "TERRESTRIAL",
     "latitude": 29.689282,
-    "longitude": -81.993431
+    "longitude": -81.993431,
+    "zoom": 12
   },
   "POSE": {
     "description": "Posey Creek",
@@ -465,7 +516,8 @@
     "domainCode": "D02",
     "terrain": "AQUATIC",
     "latitude": 38.89431,
-    "longitude": -78.147258
+    "longitude": -78.147258,
+    "zoom": 15
   },
   "PRIN": {
     "description": "Pringle Creek",
@@ -474,7 +526,8 @@
     "domainCode": "D11",
     "terrain": "AQUATIC",
     "latitude": 33.378517,
-    "longitude": -97.782312
+    "longitude": -97.782312,
+    "zoom": 15
   },
   "PRLA": {
     "description": "Prairie Lake at Dakota Coteau Field School",
@@ -483,7 +536,8 @@
     "domainCode": "D09",
     "terrain": "AQUATIC",
     "latitude": 47.15909,
-    "longitude": -99.11388
+    "longitude": -99.11388,
+    "zoom": 15
   },
   "PRPO": {
     "description": "Prairie Pothole",
@@ -492,7 +546,8 @@
     "domainCode": "D09",
     "terrain": "AQUATIC",
     "latitude": 47.129839,
-    "longitude": -99.253147
+    "longitude": -99.253147,
+    "zoom": 15
   },
   "PUUM": {
     "description": "Pu-u Maka-ala Natural Area Reserve",
@@ -501,7 +556,8 @@
     "domainCode": "D20",
     "terrain": "TERRESTRIAL",
     "latitude": 19.55309,
-    "longitude": -155.31731
+    "longitude": -155.31731,
+    "zoom": 12
   },
   "REDB": {
     "description": "Red Butte Creek",
@@ -510,7 +566,8 @@
     "domainCode": "D15",
     "terrain": "AQUATIC",
     "latitude": 40.783934,
-    "longitude": -111.797887
+    "longitude": -111.797887,
+    "zoom": 15
   },
   "RMNP": {
     "description": "Rocky Mountain National Park",
@@ -519,7 +576,8 @@
     "domainCode": "D10",
     "terrain": "TERRESTRIAL",
     "latitude": 40.275903,
-    "longitude": -105.545955
+    "longitude": -105.545955,
+    "zoom": 12
   },
   "SCBI": {
     "description": "Smithsonian Conservation Biology Institute",
@@ -528,7 +586,8 @@
     "domainCode": "D02",
     "terrain": "TERRESTRIAL",
     "latitude": 38.892925,
-    "longitude": -78.139494
+    "longitude": -78.139494,
+    "zoom": 12
   },
   "SERC": {
     "description": "Smithsonian Environmental Research Center",
@@ -537,7 +596,8 @@
     "domainCode": "D02",
     "terrain": "TERRESTRIAL",
     "latitude": 38.890131,
-    "longitude": -76.560014
+    "longitude": -76.560014,
+    "zoom": 12
   },
   "SJER": {
     "description": "San Joaquin",
@@ -546,7 +606,8 @@
     "domainCode": "D17",
     "terrain": "TERRESTRIAL",
     "latitude": 37.10878,
-    "longitude": -119.73228
+    "longitude": -119.73228,
+    "zoom": 13
   },
   "SOAP": {
     "description": "Soaproot Saddle",
@@ -555,7 +616,8 @@
     "domainCode": "D17",
     "terrain": "TERRESTRIAL",
     "latitude": 37.03337,
-    "longitude": -119.26219
+    "longitude": -119.26219,
+    "zoom": 14
   },
   "SRER": {
     "description": "Santa Rita Experimental Range",
@@ -564,7 +626,8 @@
     "domainCode": "D14",
     "terrain": "TERRESTRIAL",
     "latitude": 31.91068,
-    "longitude": -110.83549
+    "longitude": -110.83549,
+    "zoom": 12
   },
   "STEI": {
     "description": "Steigerwaldt Land Services",
@@ -573,7 +636,8 @@
     "domainCode": "D05",
     "terrain": "TERRESTRIAL",
     "latitude": 45.50894,
-    "longitude": -89.58637
+    "longitude": -89.58637,
+    "zoom": 12
   },
   "STER": {
     "description": "Sterling",
@@ -582,7 +646,8 @@
     "domainCode": "D10",
     "terrain": "TERRESTRIAL",
     "latitude": 40.461894,
-    "longitude": -103.02929
+    "longitude": -103.02929,
+    "zoom": 12
   },
   "SUGG": {
     "description": "Suggs Lake",
@@ -591,7 +656,8 @@
     "domainCode": "D03",
     "terrain": "AQUATIC",
     "latitude": 29.68778,
-    "longitude": -82.017745
+    "longitude": -82.017745,
+    "zoom": 15
   },
   "SYCA": {
     "description": "Sycamore Creek",
@@ -600,7 +666,8 @@
     "domainCode": "D14",
     "terrain": "AQUATIC",
     "latitude": 33.750993,
-    "longitude": -111.508091
+    "longitude": -111.508091,
+    "zoom": 15
   },
   "TALL": {
     "description": "Talladega National Forest",
@@ -609,7 +676,8 @@
     "domainCode": "D08",
     "terrain": "TERRESTRIAL",
     "latitude": 32.95047,
-    "longitude": -87.393259
+    "longitude": -87.393259,
+    "zoom": 12
   },
   "TEAK": {
     "description": "Lower Teakettle",
@@ -618,7 +686,8 @@
     "domainCode": "D17",
     "terrain": "TERRESTRIAL",
     "latitude": 37.00583,
-    "longitude": -119.00602
+    "longitude": -119.00602,
+    "zoom": 12
   },
   "TECR": {
     "description": "Teakettle 2 Creek",
@@ -627,7 +696,8 @@
     "domainCode": "D17",
     "terrain": "AQUATIC",
     "latitude": 36.955931,
-    "longitude": -119.027363
+    "longitude": -119.027363,
+    "zoom": 16
   },
   "TOMB": {
     "description": "Tombigbee River",
@@ -636,7 +706,8 @@
     "domainCode": "D08",
     "terrain": "AQUATIC",
     "latitude": 31.853431,
-    "longitude": -88.158872
+    "longitude": -88.158872,
+    "zoom": 15
   },
   "TOOK": {
     "description": "Toolik Lake",
@@ -645,7 +716,8 @@
     "domainCode": "D18",
     "terrain": "AQUATIC",
     "latitude": 68.630692,
-    "longitude": -149.610636
+    "longitude": -149.610636,
+    "zoom": 15
   },
   "TOOL": {
     "description": "Toolik",
@@ -654,7 +726,8 @@
     "domainCode": "D18",
     "terrain": "TERRESTRIAL",
     "latitude": 68.66109,
-    "longitude": -149.37047
+    "longitude": -149.37047,
+    "zoom": 12
   },
   "TREE": {
     "description": "Treehaven",
@@ -663,7 +736,8 @@
     "domainCode": "D05",
     "terrain": "TERRESTRIAL",
     "latitude": 45.49369,
-    "longitude": -89.58571
+    "longitude": -89.58571,
+    "zoom": 12
   },
   "UKFS": {
     "description": "The University of Kansas Field Station",
@@ -672,7 +746,8 @@
     "domainCode": "D06",
     "terrain": "TERRESTRIAL",
     "latitude": 39.040431,
-    "longitude": -95.19215
+    "longitude": -95.19215,
+    "zoom": 12
   },
   "UNDE": {
     "description": "UNDERC",
@@ -681,7 +756,8 @@
     "domainCode": "D05",
     "terrain": "TERRESTRIAL",
     "latitude": 46.23391,
-    "longitude": -89.537254
+    "longitude": -89.537254,
+    "zoom": 12
   },
   "WALK": {
     "description": "Walker Branch",
@@ -690,7 +766,8 @@
     "domainCode": "D07",
     "terrain": "AQUATIC",
     "latitude": 35.957378,
-    "longitude": -84.279251
+    "longitude": -84.279251,
+    "zoom": 15
   },
   "WLOU": {
     "description": "West St Louis Creek",
@@ -699,7 +776,8 @@
     "domainCode": "D13",
     "terrain": "AQUATIC",
     "latitude": 39.891366,
-    "longitude": -105.915395
+    "longitude": -105.915395,
+    "zoom": 12
   },
   "WOOD": {
     "description": "Woodworth",
@@ -708,7 +786,8 @@
     "domainCode": "D09",
     "terrain": "TERRESTRIAL",
     "latitude": 47.1282,
-    "longitude": -99.241334
+    "longitude": -99.241334,
+    "zoom": 12
   },
   "WREF": {
     "description": "Wind River Experimental Forest",
@@ -717,7 +796,8 @@
     "domainCode": "D16",
     "terrain": "TERRESTRIAL",
     "latitude": 45.82049,
-    "longitude": -121.95191
+    "longitude": -121.95191,
+    "zoom": 12
   },
   "YELL": {
     "description": "Yellowstone National Park",
@@ -726,6 +806,7 @@
     "domainCode": "D12",
     "terrain": "TERRESTRIAL",
     "latitude": 44.95348,
-    "longitude": -110.53914
+    "longitude": -110.53914,
+    "zoom": 12
   }
 }

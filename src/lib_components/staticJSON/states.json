@@ -7,7 +7,7 @@
   "AK": {
     "name": "Alaska",
     "center": [64.731667, -152.47],
-    "zoom": 6
+    "zoom": 4
   },
   "AZ": {
     "name": "Arizona",
@@ -32,17 +32,17 @@
   "CT": {
     "name": "Connecticut",
     "center": [41.599998, -72.699997],
-    "zoom": 6
+    "zoom": 7
   },
   "DC": {
     "name": "District of Columbia",
     "center": [38.904167, -77.016111],
-    "zoom": 6
+    "zoom": 8
   },
   "DE": {
     "name": "Deleware",
     "center": [38.98, -75.511667],
-    "zoom": 6
+    "zoom": 7
   },
   "FL": {
     "name": "Florida",
@@ -107,7 +107,7 @@
   "MA": {
     "name": "Massachusetts",
     "center": [42.377117, -71.925258],
-    "zoom": 6
+    "zoom": 7
   },
   "MI": {
     "name": "Michigan",
@@ -147,12 +147,12 @@
   "NH": {
     "name": "New Hampshire",
     "center": [43.641667, -71.571667],
-    "zoom": 6
+    "zoom": 7
   },
   "NJ": {
     "name": "New Jersey",
     "center": [40.07, -74.558333],
-    "zoom": 6
+    "zoom": 7
   },
   "NM": {
     "name": "New Mexico",
@@ -197,12 +197,12 @@
   "PR": {
     "name": "Puerto Rico",
     "center": [18.222264, -66.430278],
-    "zoom": 6
+    "zoom": 8
   },
   "RI": {
     "name": "Rhode Island",
     "center": [41.671667, -71.576667],
-    "zoom": 6
+    "zoom": 8
   },
   "SC": {
     "name": "South Carolina",
@@ -222,7 +222,7 @@
   "TX": {
     "name": "Texas",
     "center": [31.391533, -99.17065],
-    "zoom": 6
+    "zoom": 5
   },
   "UT": {
     "name": "Utah",

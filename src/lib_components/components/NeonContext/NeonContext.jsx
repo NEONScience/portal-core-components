@@ -147,6 +147,7 @@ const parseSitesFetchResponse = (sitesArray = []) => {
       latitude: site.siteLatitude || site.latitude,
       longitude: site.siteLongitude || site.longitude,
       terrain: site.terrain || sitesJSON[site.siteCode].terrain,
+      zoom: site.zoom || sitesJSON[site.siteCode].zoom,
     };
   });
   return sitesObj;

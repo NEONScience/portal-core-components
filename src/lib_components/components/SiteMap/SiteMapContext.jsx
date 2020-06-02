@@ -266,7 +266,10 @@ const reducer = (state, action) => {
       if (!newState.featureData[dataFeatureType][dataFeatureKey][siteCode]) {
         newState.featureData[dataFeatureType][dataFeatureKey][siteCode] = {};
       }
-      newState.featureData[dataFeatureType][dataFeatureKey][siteCode][location] = parsedData;
+      newState.featureData[dataFeatureType][dataFeatureKey][siteCode][location] = {
+        siteCode,
+        ...parsedData,
+      };
     }
     return true;
   };
@@ -374,6 +377,7 @@ const reducer = (state, action) => {
       newState.focusLocation.current = action.location;
       newState.focusLocation.data = null;
       newState.overallFetch.expected += 1;
+      if (newState.view !== VIEWS.MAP) { newState.view = VIEWS.MAP; }
       return newState;
 
     case 'setFocusLocationFetchStarted':
@@ -592,9 +596,8 @@ const Provider = (props) => {
       });
       return;
     }
-    const { sites } = state;
-    if (Object.keys(sites).includes(current)) {
-      const { latitude, longitude } = sites[current];
+    if (Object.keys(state.sites).includes(current)) {
+      const { latitude, longitude } = state.sites[current];
       dispatch({
         type: 'setFocusLocationFetchSucceeded',
         data: { type: 'SITE', latitude, longitude },
@@ -619,6 +622,7 @@ const Provider = (props) => {
       }),
     ).subscribe();
   }, [
+    state.sites,
     state.focusLocation,
     state.focusLocation.fetch.status,
     state.neonContextHydrated,

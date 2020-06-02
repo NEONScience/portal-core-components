@@ -1187,11 +1187,7 @@ export const getMapStateForFoucusLocation = (state = {}) => {
     newState.map.zoom = 16;
   }
   if (type === 'SITE') {
-    newState.map.zoom = 12;
-    // Aquatic river sites are usually much smaller than terrestrial so do a tighter zoom for those
-    if (
-      state.featureData.SITES[current] && state.featureData.SITES[current].terrain === 'AQUATIC'
-    ) { newState.map.zoom = 15; }
+    newState.map.zoom = (state.sites[current] || {}).zoom || 12;
   }
   if (type === 'DOMAIN') {
     const { [FEATURES.DOMAINS.KEY]: domainsData } = state.featureData[FEATURE_TYPES.BOUNDARIES];

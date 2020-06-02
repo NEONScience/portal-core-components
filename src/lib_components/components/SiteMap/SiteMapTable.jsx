@@ -1,10 +1,11 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable jsx-a11y/anchor-is-valid, no-unused-vars */
 import React from 'react';
 
 import { isEqual } from 'lodash';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Checkbox from '@material-ui/core/Checkbox';
+import Link from '@material-ui/core/Link';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -22,10 +23,13 @@ import {
   TILE_LAYERS_BY_NAME,
   MAP_ZOOM_RANGE,
   FEATURES,
+  FEATURE_TYPES,
   SELECTABLE_FEATURE_TYPES,
   SITE_DETAILS_URL_BASE,
   EXPLORE_DATA_PRODUCTS_URL_BASE,
 } from './SiteMapUtils';
+
+const ucWord = word => `${word.slice(0, 1).toUpperCase()}${word.slice(1).toLowerCase()}`;
 
 const useStyles = makeStyles(theme => ({
   tableContainer: {
@@ -35,14 +39,21 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: 'white',
   },
   featureIcon: {
-    width: '22px',
-    height: '22px',
-    marginRight: '4px',
-    marginBottom: '-6px',
+    width: theme.spacing(3),
+    height: theme.spacing(3),
+    marginRight: theme.spacing(1),
+  },
+  linkButton: {
+    textAlign: 'left',
   },
   row: {},
   rowSelected: {
     backgroundColor: `${Theme.palette.secondary.main}20`,
+  },
+  startFlex: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
   },
 }));
 
@@ -50,11 +61,8 @@ const SiteMapTable = () => {
   const classes = useStyles(Theme);
 
   // Neon Context State
-  const [
-    { data: neonContextData, isFinal: neonContextIsFinal, hasError: neonContextHasError },
-  ] = NeonContext.useNeonContextState();
-  const { sites: allSites, states: allStates, domains: allDomains } = neonContextData;
-  const canRender = neonContextIsFinal && !neonContextHasError;
+  const [{ isFinal, hasError }] = NeonContext.useNeonContextState();
+  const canRender = isFinal && !hasError;
 
   // Site Map State
   const [state, dispatch] = SiteMapContext.useSiteMapContext();
@@ -72,102 +80,169 @@ const SiteMapTable = () => {
     visibleAttributeCombos.push(FEATURES[f].attributes);
   });
 
-  // Formatted as such so that adding selection for plots is straightforward
-  const isSelected = row => (
-    (focus === SELECTABLE_FEATURE_TYPES.SITES && selection.has(row.siteCode))
-  );
+  // Selection functions
+  let rowIsSelected = () => false;
+  let selectRow = () => {};
+  switch (focus) {
+    case FEATURE_TYPES.SITES:
+      rowIsSelected = row => selection.has(row.siteCode);
+      selectRow = row => dispatch({ type: 'toggleSiteSelected', site: row.siteCode });
+      break;
+    default:
+      break;
+  }
 
-  // Columns that are always visible (on the left)
-  const permaColumns = [
-    {
-      key: 'domain',
-      label: 'Domain',
-      render: row => row.domainCode,
-    },
-    {
-      key: 'state',
-      label: 'State',
-      render: row => `${allStates[row.stateCode].name} (${row.stateCode})`,
-    },
-    {
+  // Jump-To function to turn location names in the table to map navigation
+  const jumpTo = (locationCode = '') => {
+    dispatch({ type: 'setNewFocusLocation', location: locationCode });
+  };
+
+  // While sites keep a state and domain code locations only keep a site code.
+  // These helper functions will connect the dots to to get site/state/domain/etc. for a location.
+  const getParent = (type, location) => {
+    let source = null;
+    if (type === 'SITE') {
+      source = { code: 'siteCode', data: state.sites };
+    } else if (type === 'STATE') {
+      source = { code: 'stateCode', data: state.featureData.BOUNDARIES.STATES };
+    } else if (type === 'DOMAIN') {
+      source = { code: 'domainCode', data: state.featureData.BOUNDARIES.DOMAINS };
+    }
+    if (!source) { return null; }
+    let code = null;
+    if (location[source.code]) {
+      code = location[source.code];
+    } else if (location.siteCode) {
+      code = state.sites[location.siteCode] ? state.sites[location.siteCode][source.code] : null;
+    }
+    return source.data[code] ? { [source.code]: code, ...source.data[code] } : null;
+  };
+  const getSite = location => getParent('SITE', location);
+  const getState = location => getParent('STATE', location);
+  const getDomain = location => getParent('DOMAIN', location);
+
+  // Columns that are visible for more than one feature type
+  const commonColumns = {
+    site: {
       key: 'site',
       label: 'Site',
       render: (row) => {
-        const featureKey = `${row.terrain.toUpperCase}_${row.type_toUpperCase}_SITES`;
+        const site = getSite(row);
+        if (!site) { return null; }
+        const featureKey = `${site.terrain.toUpperCase()}_${site.type.toUpperCase()}_SITES`;
         const svg = FEATURES[featureKey] ? FEATURES[featureKey].iconSvg : null;
         const icon = !svg ? null : (
-          <img alt={`${row.type} ${row.terrain} Site`} src={svg} className={classes.featureIcon} />
+          <img alt={`${site.type} ${site.terrain} Site`} src={svg} className={classes.featureIcon} />
         );
         return (
-          <React.Fragment>
+          <Link
+            component="button"
+            className={`${classes.linkButton} ${classes.startFlex}`}
+            onClick={() => jumpTo(site.siteCode)}
+          >
             {icon}
-            {`${row.description} (${row.siteCode})`}
-          </React.Fragment>
+            <span>{`${site.description} (${site.siteCode})`}</span>
+          </Link>
         );
       },
     },
-  ];
-
-  // Selected Column
-  let handleCheck = () => {};
-  if (focus === SELECTABLE_FEATURE_TYPES.SITES) {
-    handleCheck = (row) => { dispatch({ type: 'toggleSiteSelected', site: row.siteCode }); };
-  }
-  if (selectionActive) {
-    permaColumns.unshift({
+    domain: {
+      key: 'domain',
+      label: 'Domain',
+      render: (row) => {
+        const domain = getDomain(row);
+        return !domain ? null : (
+          <Link
+            component="button"
+            className={classes.linkButton}
+            onClick={() => jumpTo(domain.domainCode)}
+          >
+            {domain.domainCode}
+          </Link>
+        );
+      },
+    },
+    state: {
+      key: 'state',
+      label: 'State',
+      render: (row) => {
+        const usstate = getState(row);
+        return !usstate ? null : (
+          <Link
+            component="button"
+            className={classes.linkButton}
+            onClick={() => jumpTo(usstate.stateCode)}
+          >
+            {`${usstate.name} (${usstate.stateCode})`}
+          </Link>
+        );
+      },
+    },
+    selected: {
       key: 'selected',
       label: '',
       render: row => (
         <Checkbox
-          checked={isSelected(row)}
-          onChange={() => handleCheck(row)}
+          checked={rowIsSelected(row)}
+          onChange={selectRow}
           color="secondary"
         />
       ),
-    });
-  }
+    },
+    latlng: {
+      key: 'latlng',
+      label: 'Lat./Lng.',
+      render: row => (
+        <Typography
+          variant="caption"
+          aria-label="Latitude / Longitude"
+          style={{ fontFamily: 'monospace', fontSize: '1.05em' }}
+        >
+          {row.latitude.toFixed(5)}
+          <br />
+          {row.longitude.toFixed(5)}
+        </Typography>
+      ),
+    },
+  };
 
-  // Used for any single point location (sites and plots)
-  const renderCoords = row => (
-    <Typography
-      variant="caption"
-      aria-label="Latitude / Longitude"
-      style={{ fontFamily: 'monospace', fontSize: '1.05em' }}
-    >
-      {row.latitude}
-      <br />
-      {row.longitude}
-    </Typography>
-  );
-
-  // Calculate Columns and Rows
+  /**
+     Calculate columns and rows from current focus feature type
+  */
   let columns = [];
   let rows = [];
-  if (focus === SELECTABLE_FEATURE_TYPES.SITES) {
+
+  // SITES
+  if (focus === FEATURE_TYPES.SITES) {
     columns = [
-      ...permaColumns,
-      {
-        key: 'coords',
-        label: 'Site Lat./Lng.',
-        render: renderCoords,
-      },
+      commonColumns.site,
+      commonColumns.latlng,
       {
         key: 'siteType',
-        label: 'Site Type',
-        render: row => row.type,
+        label: 'Type',
+        render: row => ucWord(row.type),
       },
       {
         key: 'siteTerrain',
-        label: 'Site Terrain',
-        render: row => row.terrain,
+        label: 'Terrain',
+        render: row => ucWord(row.terrain),
       },
+      commonColumns.domain,
+      commonColumns.state,
     ];
-    rows = Object.keys(allSites)
+    if (selectionActive) { columns.unshift(commonColumns.selected); }
+    rows = Object.keys(state.sites)
       .filter((siteCode) => {
-        const siteAttributes = (({ type, terrain }) => ({ type, terrain }))(allSites[siteCode]);
+        const siteAttributes = (({ type, terrain }) => ({ type, terrain }))(state.sites[siteCode]);
         return visibleAttributeCombos.some(attributes => isEqual(attributes, siteAttributes));
       })
-      .map(siteCode => ({ ...allSites[siteCode], key: siteCode }));
+      .map(siteCode => ({ ...state.sites[siteCode], key: siteCode }));
+  }
+
+  // LOCATIONS
+  if (focus === FEATURE_TYPES.LOCATIONS) {
+    columns = [];
+    if (selectionActive) { columns.unshift(commonColumns.selected); }
   }
 
   /**
@@ -187,7 +262,7 @@ const SiteMapTable = () => {
         </TableHead>
         <TableBody>
           {rows.map(row => (
-            <TableRow key={row.key} className={classes[isSelected(row) ? 'rowSelected' : 'row']}>
+            <TableRow key={row.key} className={classes[rowIsSelected(row) ? 'rowSelected' : 'row']}>
               {columns.map(column => (
                 <TableCell key={column.key}>
                   {column.render(row)}
