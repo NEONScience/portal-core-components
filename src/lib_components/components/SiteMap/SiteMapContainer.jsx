@@ -23,7 +23,6 @@ import SiteMapFilters from './SiteMapFilters';
 import SiteMapLeaflet from './SiteMapLeaflet';
 import SiteMapTable from './SiteMapTable';
 import {
-  VIEWS,
   FEATURES,
   FEATURE_TYPES,
   getDynamicAspectRatio,
@@ -116,7 +115,7 @@ const SiteMapContainer = () => {
   console.log('CONTAINER STATE:', state);
   const isLoading = state.overallFetch.expected !== state.overallFetch.completed;
 
-  const { view, aspectRatio } = state;
+  const { aspectRatio } = state;
   const contentDivProps = {
     className: classes.contentContainer,
     style: { paddingBottom: `${(aspectRatio.currentValue || 0.75) * 100}%` },
@@ -149,7 +148,6 @@ const SiteMapContainer = () => {
     if (!state.filters.features.open || !featuresRef.current) { return () => {}; }
     const handleClick = (event) => {
       if (featuresRef.current && !featuresRef.current.contains(event.target)) {
-        debugger; // eslint-disable-line no-debugger
         dispatch({ type: 'setFilterFeaturesOpen', open: false });
       }
     };
@@ -391,13 +389,9 @@ const SiteMapContainer = () => {
       aria-describedby={progressId}
       aria-busy={isLoading ? 'true' : 'false'}
     >
-      <SiteMapFilters />
       <div {...contentDivProps}>
-        {view === VIEWS.MAP ? (
-          <SiteMapLeaflet />
-        ) : (
-          <SiteMapTable />
-        )}
+        <SiteMapLeaflet />
+        <SiteMapTable />
         {!state.filters.features.open ? null : (
           <div ref={featuresRef} className={classes.featuresContainer}>
             {Object.keys(FEATURES)
@@ -407,6 +401,7 @@ const SiteMapContainer = () => {
         )}
       </div>
       {renderProgress()}
+      <SiteMapFilters />
     </div>
   );
 };

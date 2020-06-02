@@ -38,6 +38,7 @@ import Theme from '../Theme/Theme';
 
 import SiteMapContext from './SiteMapContext';
 import {
+  VIEWS,
   TILE_LAYERS,
   TILE_LAYERS_BY_NAME,
   MAP_ZOOM_RANGE,
@@ -481,12 +482,13 @@ const SiteMapLeaflet = () => {
   /**
      Render: Map
   */
+  const display = state.view === VIEWS.MAP ? null : 'none';
   return (
     <React.Fragment>
       <Map
         ref={mapRef}
         className={classes.map}
-        style={{ paddingBottom: `${(state.aspectRatio.currentValue || 0.75) * 100}%` }}
+        style={{ display, paddingBottom: `${(state.aspectRatio.currentValue || 0.75) * 100}%` }}
         center={state.map.center}
         zoom={state.map.zoom}
         minZoom={MAP_ZOOM_RANGE[0]}

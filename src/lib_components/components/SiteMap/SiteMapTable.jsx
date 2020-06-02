@@ -4,21 +4,27 @@ import React from 'react';
 import { isEqual } from 'lodash';
 
 import { makeStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
+/*
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+*/
 import Typography from '@material-ui/core/Typography';
+
+import MaterialTable, { MTableToolbar, MTableFilterRow } from 'material-table';
 
 import NeonContext from '../NeonContext/NeonContext';
 import Theme from '../Theme/Theme';
 
 import SiteMapContext from './SiteMapContext';
 import {
+  VIEWS,
   TILE_LAYERS,
   TILE_LAYERS_BY_NAME,
   MAP_ZOOM_RANGE,
@@ -124,8 +130,18 @@ const SiteMapTable = () => {
   // Columns that are visible for more than one feature type
   const commonColumns = {
     site: {
-      key: 'site',
-      label: 'Site',
+      field: 'siteCode',
+      title: 'Site',
+      sorting: true,
+      defaultSort: 'desc',
+      lookup: Object.fromEntries(
+        Object.keys(state.sites).map(k => [k, k]),
+      ),
+      customSort: (rowA, rowB) => {
+        const siteA = getSite(rowA);
+        const siteB = getSite(rowB);
+        return siteA.description > siteB.description ? -1 : 1;
+      },
       render: (row) => {
         const site = getSite(row);
         if (!site) { return null; }
@@ -147,8 +163,18 @@ const SiteMapTable = () => {
       },
     },
     domain: {
-      key: 'domain',
-      label: 'Domain',
+      field: 'domainCode',
+      title: 'Domain',
+      sorting: true,
+      defaultSort: 'desc',
+      lookup: Object.fromEntries(
+        Object.keys(state.featureData.BOUNDARIES.DOMAINS).map(k => [k, k]),
+      ),
+      customSort: (rowA, rowB) => {
+        const domainA = getDomain(rowA);
+        const domainB = getDomain(rowB);
+        return domainA.domainCode > domainB.domainCode ? -1 : 1;
+      },
       render: (row) => {
         const domain = getDomain(row);
         return !domain ? null : (
@@ -163,8 +189,20 @@ const SiteMapTable = () => {
       },
     },
     state: {
-      key: 'state',
-      label: 'State',
+      field: 'stateCode',
+      title: 'State',
+      sorting: true,
+      defaultSort: 'desc',
+      lookup: Object.fromEntries(
+        Object
+          .keys(state.featureData.BOUNDARIES.STATES)
+          .map(k => [k, state.featureData.BOUNDARIES.STATES[k].name]),
+      ),
+      customSort: (rowA, rowB) => {
+        const stateA = getState(rowA);
+        const stateB = getState(rowB);
+        return stateA.name > stateB.name ? -1 : 1;
+      },
       render: (row) => {
         const usstate = getState(row);
         return !usstate ? null : (
@@ -179,8 +217,8 @@ const SiteMapTable = () => {
       },
     },
     selected: {
-      key: 'selected',
-      label: '',
+      field: 'selected',
+      title: '',
       render: row => (
         <Checkbox
           checked={rowIsSelected(row)}
@@ -190,8 +228,10 @@ const SiteMapTable = () => {
       ),
     },
     latlng: {
-      key: 'latlng',
-      label: 'Lat./Lng.',
+      field: 'latlng',
+      title: 'Lat./Lng.',
+      sorting: false,
+      filtering: false,
       render: row => (
         <Typography
           variant="caption"
@@ -209,34 +249,48 @@ const SiteMapTable = () => {
   /**
      Calculate columns and rows from current focus feature type
   */
-  let columns = [];
   let rows = [];
+  let columns = [];
 
   // SITES
   if (focus === FEATURE_TYPES.SITES) {
+    rows = Object.keys(state.sites)
+      .filter((siteCode) => {
+        const siteAttributes = (({ type, terrain }) => ({ type, terrain }))(state.sites[siteCode]);
+        return visibleAttributeCombos.some(attributes => isEqual(attributes, siteAttributes));
+      })
+      .map(siteCode => ({ ...state.sites[siteCode] }));
     columns = [
       commonColumns.site,
       commonColumns.latlng,
       {
-        key: 'siteType',
-        label: 'Type',
+        field: 'type',
+        title: 'Type',
+        sorting: true,
+        defaultSort: 'desc',
+        lookup: Object.fromEntries(
+          Array.from(
+            new Set(Object.keys(state.sites).map(siteCode => state.sites[siteCode].type)),
+          ).map(k => [k, ucWord(k)]),
+        ),
         render: row => ucWord(row.type),
       },
       {
-        key: 'siteTerrain',
-        label: 'Terrain',
+        field: 'terrain',
+        title: 'Terrain',
+        sorting: true,
+        defaultSort: 'desc',
+        lookup: Object.fromEntries(
+          Array.from(
+            new Set(Object.keys(state.sites).map(siteCode => state.sites[siteCode].terrain)),
+          ).map(k => [k, ucWord(k)]),
+        ),
         render: row => ucWord(row.terrain),
       },
       commonColumns.domain,
       commonColumns.state,
     ];
     if (selectionActive) { columns.unshift(commonColumns.selected); }
-    rows = Object.keys(state.sites)
-      .filter((siteCode) => {
-        const siteAttributes = (({ type, terrain }) => ({ type, terrain }))(state.sites[siteCode]);
-        return visibleAttributeCombos.some(attributes => isEqual(attributes, siteAttributes));
-      })
-      .map(siteCode => ({ ...state.sites[siteCode], key: siteCode }));
   }
 
   // LOCATIONS
@@ -245,11 +299,64 @@ const SiteMapTable = () => {
     if (selectionActive) { columns.unshift(commonColumns.selected); }
   }
 
+  const components = {
+    Container: Box,
+    Toolbar: props => (
+      <div style={{ marginLeft: '-24px' }}>
+        <MTableToolbar {...props} />
+      </div>
+    ),
+    FilterRow: filterRowProps => (
+      <MTableFilterRow
+        {...filterRowProps}
+        /*
+        onFilterChanged={(columnId, value) => {
+          filterRowProps.onFilterChanged(columnId, value);
+          const filter = columns[columnId].field;
+          const current = filters[filter];
+          if (filter === 'name' && value !== current) {
+            debouncedFilterDispatch(filter, value);
+            return;
+          }
+          if (
+            current
+              && (value.length !== current.length || value.some(v => !current.includes(v)))
+          ) {
+            dispatch({ type: 'setS3FilesFilterValue', filter, value });
+          }
+        }}
+        */
+      />
+    ),
+  };
+  const localization = {
+    toolbar: {
+      searchPlaceholder: `Search ${ucWord(focus)}`,
+    },
+    body: {
+      emptyDataSourceMessage: `No ${focus.toLowerCase()}s match the current filters.`,
+    },
+  };
+
   /**
      Render Table
   */
+  const display = state.view === VIEWS.TABLE ? null : 'none';
   return (
-    <TableContainer className={classes.tableContainer}>
+    <div className={classes.tableContainer} style={{ display }}>
+      <MaterialTable
+        components={components}
+        columns={columns}
+        data={rows}
+        localization={localization}
+        options={{
+          padding: 'dense',
+          filtering: true,
+          columnsButton: false,
+          showTitle: false,
+        }}
+      />
+      {/*
       <Table stickyHeader>
         <TableHead>
           <TableRow>
@@ -272,7 +379,8 @@ const SiteMapTable = () => {
           ))}
         </TableBody>
       </Table>
-    </TableContainer>
+      */}
+    </div>
   );
 };
 
