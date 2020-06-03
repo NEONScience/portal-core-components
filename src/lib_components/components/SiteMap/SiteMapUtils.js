@@ -60,6 +60,10 @@ import domainsShapesJSON from '../../staticJSON/domainsShapes.json';
 
 export const MAP_ZOOM_RANGE = [1, 19];
 
+export const MIN_TABLE_MAX_BODY_HEIGHT = 100;
+
+// export const MINIMUM_MAP_DIMENSIONS = { width: 300, height: 200 };
+
 export const KM2_TO_ACRES = 247.10538146717;
 
 // Minimum zoom level at which location hierarchy fetches are done on a per-domain basis
@@ -707,6 +711,36 @@ export const BOUNDARY_COLORS = {
   hover: COLORS.SECONDARY_BLUE[100],
 };
 
+export const calculateFeatureAvailability = (state) => {
+  const featureIsAvailable = (feature) => {
+    // Parent must be available (if the feature has a parent)
+    if (typeof feature.parent === 'string' && !featureIsAvailable(FEATURES[feature.parent])) {
+      return false;
+    }
+    const hasMinZoom = typeof feature.minZoom === 'number';
+    const hasMaxZoom = typeof feature.maxZoom === 'number';
+    // If zoom is not set then show all features that don't have a min zoom
+    // We don't care about a maxZoom here because null zoom effectively means zoomed all the way out
+    if (state.map.zoom === null) { return !hasMinZoom; }
+    return (
+      (!hasMinZoom || state.map.zoom >= feature.minZoom)
+        && (!hasMaxZoom || state.map.zoom <= feature.maxZoom)
+    );
+  };
+  return {
+    ...state,
+    filters: {
+      ...state.filters,
+      features: {
+        ...state.filters.features,
+        available: Object.fromEntries(
+          Object.entries(FEATURES).map(entry => [entry[0], featureIsAvailable(entry[1])]),
+        ),
+      },
+    },
+  };
+};
+
 /**
    URL Bases
    Used in construction of URLs when linking out to other pages
@@ -762,7 +796,12 @@ Object.keys(TILE_LAYERS).forEach((key) => {
    Default State
 */
 export const DEFAULT_STATE = {
-  view: null,
+  view: {
+    current: null,
+    initialized: Object.fromEntries(
+      Object.keys(VIEWS).map(view => [view, false]),
+    ),
+  },
   neonContextHydrated: false, // Whether NeonContext data has been one-time hydrated into state
   overallFetch: { // Aggregation of all current fetch statuses for the SiteMap component
     expected: 0,
@@ -777,11 +816,13 @@ export const DEFAULT_STATE = {
   aspectRatio: {
     currentValue: null, // Aspect ratio of the Site Map component content area (table and/or map)
     isDynamic: true, // Whether currentValue should set itself dynamically from viewport size
+    resizeEventListenerInitialized: false,
   },
   table: { // Settings that ONLY apply to the table
     focus: SELECTABLE_FEATURE_TYPES.SITES,
-    sortColumn: 'siteName',
-    sortDirection: SORT_DIRECTIONS.ASC,
+    maxBodyHeight: null,
+    // A way for the SiteMapContainer resizeHandler to inform the SiteMapTable to recalc body height
+    maxBodyHeightUpdateFromAspectRatio: false,
   },
   map: { // Settings that ONLY apply to the map
     zoom: null,
@@ -812,16 +853,7 @@ export const DEFAULT_STATE = {
     search: null,
     features: {
       open: false, // whether the features pane is open/visible
-      available: Object.fromEntries( // key/bool map of which features are available per the zoom
-        Object.entries(FEATURES).map(entry => [
-          entry[0],
-          !entry[1].minZoom && !entry[1].maxZoom && (
-            !entry[1].parent || (
-              !FEATURES[entry[1].parent].minZoom && !FEATURES[entry[1].parent].maxZoom
-            )
-          ),
-        ]),
-      ),
+      available: {},
       visible: Object.fromEntries( // key/bool map of which available features are visible
         Object.entries(FEATURES).map(entry => [entry[0], !entry[1].hideByDefault]),
       ),
@@ -845,6 +877,9 @@ Object.keys(FEATURES)
 Object.keys(SELECTABLE_FEATURE_TYPES).forEach((selection) => {
   DEFAULT_STATE.selection[selection] = new Set();
 });
+// Initialize feature availability
+const availabilityState = calculateFeatureAvailability(DEFAULT_STATE);
+DEFAULT_STATE.filters.features.available = { ...availabilityState.filters.features.available };
 
 // Populate static JSON featureData
 // States

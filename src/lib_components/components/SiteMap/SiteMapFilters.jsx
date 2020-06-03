@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
 const SiteMapFilters = () => {
   const classes = useStyles(Theme);
   const [state, dispatch] = SiteMapContext.useSiteMapContext();
-  const { view, filters } = state;
+  const { view: { current: view }, filters } = state;
 
   const handleChangeView = (event, newView) => {
     dispatch({

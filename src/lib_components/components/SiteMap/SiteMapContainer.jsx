@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useLayoutEffect } from 'react';
 
-import uniq from 'lodash/uniq';
+import uniqueId from 'lodash/uniqueId';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -23,12 +23,13 @@ import SiteMapFilters from './SiteMapFilters';
 import SiteMapLeaflet from './SiteMapLeaflet';
 import SiteMapTable from './SiteMapTable';
 import {
+  VIEWS,
   FEATURES,
   FEATURE_TYPES,
   getDynamicAspectRatio,
 } from './SiteMapUtils';
 
-const progressId = `sitemap-progress-${uniq()}`;
+const progressId = `sitemap-progress-${uniqueId()}`;
 
 const boxShadow = '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)';
 const useStyles = makeStyles(theme => ({
@@ -115,7 +116,7 @@ const SiteMapContainer = () => {
   console.log('CONTAINER STATE:', state);
   const isLoading = state.overallFetch.expected !== state.overallFetch.completed;
 
-  const { aspectRatio } = state;
+  const { aspectRatio, view: { current: view } } = state;
   const contentDivProps = {
     className: classes.contentContainer,
     style: { paddingBottom: `${(aspectRatio.currentValue || 0.75) * 100}%` },
@@ -124,22 +125,24 @@ const SiteMapContainer = () => {
   const featuresRef = useRef(null);
 
   /**
-     Effect - Dynamically adjust aspect ratio of content area from viewport dimensions
+     Effect - Register event listener to dynamically adjust aspect ratio from viewport dimensions
   */
   useLayoutEffect(() => {
-    if (!aspectRatio.isDynamic) { return () => {}; }
     const handleResize = () => {
-      const newAspectRatio = getDynamicAspectRatio();
-      if (newAspectRatio !== aspectRatio.currentValue) {
-        dispatch({ type: 'setAspectRatio', aspectRatio: newAspectRatio });
-      }
+      const newAspectRatio = aspectRatio.isDynamic
+        ? getDynamicAspectRatio()
+        : aspectRatio.currentValue;
+      dispatch({ type: 'setAspectRatio', aspectRatio: newAspectRatio });
     };
-    if (aspectRatio.currentValue === null) { handleResize(); }
+    if (!aspectRatio.isDynamic || aspectRatio.currentValue !== null) { return () => {}; }
+    handleResize();
+    if (!aspectRatio.isDynamic || aspectRatio.resizeEventListenerInitialized) { return () => {}; }
     window.addEventListener('resize', handleResize);
+    dispatch({ type: 'setAspectRatioResizeEventListenerInitialized' });
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [aspectRatio, dispatch]);
+  }, [aspectRatio, getDynamicAspectRatio, dispatch]);
 
   /**
      Effect - Monitor all click events and close the features pane if open and clicked outside
@@ -390,8 +393,8 @@ const SiteMapContainer = () => {
       aria-busy={isLoading ? 'true' : 'false'}
     >
       <div {...contentDivProps}>
-        <SiteMapLeaflet />
-        <SiteMapTable />
+        {view === VIEWS.MAP ? <SiteMapLeaflet /> : null }
+        {view === VIEWS.TABLE ? <SiteMapTable /> : null }
         {!state.filters.features.open ? null : (
           <div ref={featuresRef} className={classes.featuresContainer}>
             {Object.keys(FEATURES)

@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid, no-unused-vars */
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 
 import { isEqual } from 'lodash';
 
@@ -7,14 +7,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
-/*
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-*/
 import Typography from '@material-ui/core/Typography';
 
 import MaterialTable, { MTableToolbar, MTableFilterRow } from 'material-table';
@@ -33,6 +25,7 @@ import {
   SELECTABLE_FEATURE_TYPES,
   SITE_DETAILS_URL_BASE,
   EXPLORE_DATA_PRODUCTS_URL_BASE,
+  MIN_TABLE_MAX_BODY_HEIGHT,
 } from './SiteMapUtils';
 
 const ucWord = word => `${word.slice(0, 1).toUpperCase()}${word.slice(1).toLowerCase()}`;
@@ -54,17 +47,33 @@ const useStyles = makeStyles(theme => ({
   },
   row: {},
   rowSelected: {
-    backgroundColor: `${Theme.palette.secondary.main}20`,
+    backgroundColor: `${theme.palette.secondary.main}20`,
   },
   startFlex: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
+  toolbarContainer: {
+    backgroundColor: theme.palette.grey[50],
+    borderBottom: `1px dotted ${theme.palette.grey[300]}`,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
 }));
+
+const calculateMaxBodyHeight = (tableRef) => {
+  if (!tableRef || !tableRef.current) { return MIN_TABLE_MAX_BODY_HEIGHT; }
+  const containerHeight = tableRef.current.clientHeight || 0;
+  const toolbarHeight = tableRef.current.children[0].children[0].clientHeight || 0;
+  const pagerHeight = tableRef.current.children[0].children[2].clientHeight || 0;
+  return Math.max(containerHeight - toolbarHeight - pagerHeight, MIN_TABLE_MAX_BODY_HEIGHT);
+};
 
 const SiteMapTable = () => {
   const classes = useStyles(Theme);
+  const tableRef = useRef(null);
 
   // Neon Context State
   const [{ isFinal, hasError }] = NeonContext.useNeonContextState();
@@ -72,9 +81,46 @@ const SiteMapTable = () => {
 
   // Site Map State
   const [state, dispatch] = SiteMapContext.useSiteMapContext();
-  const { focus, sortColumn, sortDirection } = state.table;
+  const { focus, maxBodyHeight, maxBodyHeightUpdateFromAspectRatio } = state.table;
   const selectionActive = state.selection.active === focus;
   const selection = selectionActive ? state.selection[state.selection.active] : new Set();
+
+  /**
+    Effect - Initialize table if this is the first time we're seeing it
+  */
+  useEffect(() => {
+    if (
+      !tableRef || !tableRef.current
+        || state.view.current !== VIEWS.TABLE || state.view.initialized[VIEWS.TABLE]
+    ) { return; }
+    dispatch({ type: 'setViewInitialized' });
+    dispatch({ type: 'setTableMaxBodyHeight', height: calculateMaxBodyHeight(tableRef) });
+  }, [
+    tableRef,
+    VIEWS,
+    state.view,
+    dispatch,
+    calculateMaxBodyHeight,
+  ]);
+
+  /**
+    Effect - Recalculate the max body height the aspect ratio changed (e.g. page resize)
+  */
+  useEffect(() => {
+    if (
+      state.view.current === VIEWS.TABLE && state.view.initialized[VIEWS.TABLE]
+        && maxBodyHeightUpdateFromAspectRatio
+    ) {
+      dispatch({ type: 'setTableMaxBodyHeight', height: calculateMaxBodyHeight(tableRef) });
+    }
+  }, [
+    tableRef,
+    VIEWS,
+    state.view,
+    dispatch,
+    calculateMaxBodyHeight,
+    maxBodyHeightUpdateFromAspectRatio,
+  ]);
 
   if (!canRender) { return null; }
 
@@ -302,30 +348,14 @@ const SiteMapTable = () => {
   const components = {
     Container: Box,
     Toolbar: props => (
-      <div style={{ marginLeft: '-24px' }}>
+      <div className={classes.toolbarContainer}>
         <MTableToolbar {...props} />
       </div>
     ),
     FilterRow: filterRowProps => (
       <MTableFilterRow
         {...filterRowProps}
-        /*
-        onFilterChanged={(columnId, value) => {
-          filterRowProps.onFilterChanged(columnId, value);
-          const filter = columns[columnId].field;
-          const current = filters[filter];
-          if (filter === 'name' && value !== current) {
-            debouncedFilterDispatch(filter, value);
-            return;
-          }
-          if (
-            current
-              && (value.length !== current.length || value.some(v => !current.includes(v)))
-          ) {
-            dispatch({ type: 'setS3FilesFilterValue', filter, value });
-          }
-        }}
-        */
+        filterCellStyle={{ padding: '8px', backgroundColor: Theme.palette.grey[50] }}
       />
     ),
   };
@@ -341,9 +371,8 @@ const SiteMapTable = () => {
   /**
      Render Table
   */
-  const display = state.view === VIEWS.TABLE ? null : 'none';
   return (
-    <div className={classes.tableContainer} style={{ display }}>
+    <div ref={tableRef} className={classes.tableContainer}>
       <MaterialTable
         components={components}
         columns={columns}
@@ -354,32 +383,14 @@ const SiteMapTable = () => {
           filtering: true,
           columnsButton: false,
           showTitle: false,
+          headerStyle: {
+            position: 'sticky',
+            top: 0,
+            backgroundColor: Theme.palette.grey[50],
+          },
+          maxBodyHeight: `${maxBodyHeight || MIN_TABLE_MAX_BODY_HEIGHT}px`,
         }}
       />
-      {/*
-      <Table stickyHeader>
-        <TableHead>
-          <TableRow>
-            {columns.map(column => (
-              <TableCell key={column.key}>
-                {column.label}
-              </TableCell>
-            ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map(row => (
-            <TableRow key={row.key} className={classes[rowIsSelected(row) ? 'rowSelected' : 'row']}>
-              {columns.map(column => (
-                <TableCell key={column.key}>
-                  {column.render(row)}
-                </TableCell>
-              ))}
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      */}
     </div>
   );
 };

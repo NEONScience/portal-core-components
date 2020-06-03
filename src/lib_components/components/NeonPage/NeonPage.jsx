@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Cookies from 'universal-cookie';
 
-import uniq from 'lodash/uniq';
+import uniqueId from 'lodash/uniqueId';
 
 import { Subject } from 'rxjs';
 
@@ -232,12 +232,12 @@ const NeonPage = (props) => {
       variant="overline"
       data-selenium="neon-page.breadcrumbs"
     >
-      <Link color="inherit" key={uniq()} href="/">
+      <Link color="inherit" key={uniqueId()} href="/">
         Home
       </Link>
       {breadcrumbs.map(
         (breadcrumb, idx) => (idx !== breadcrumbs.length - 1
-          ? (<Link key={uniq()} color="inherit" href={breadcrumb.href}>{breadcrumb.name}</Link>)
+          ? (<Link key={uniqueId()} color="inherit" href={breadcrumb.href}>{breadcrumb.name}</Link>)
           : (<Typography key="{idx}" color="textPrimary">{breadcrumb.name}</Typography>)),
       )}
     </Breadcrumbs>

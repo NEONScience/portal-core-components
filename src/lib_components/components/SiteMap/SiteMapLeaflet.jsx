@@ -167,6 +167,7 @@ const useStyles = makeStyles(theme => ({
 const SiteMapLeaflet = () => {
   const classes = useStyles(Theme);
   const mapRef = useRef(null);
+  window.mapRef = mapRef;
 
   // Neon Context State
   const [{ data: neonContextData }] = NeonContext.useNeonContextState();
@@ -186,17 +187,19 @@ const SiteMapLeaflet = () => {
       && state.focusLocation.fetch.status !== FETCH_STATUS.SUCCESS
   ) { canRender = false; }
 
-  // Effect
-  // If zoom was not set as a prop then attempt to set the initial zoom such that
-  // all sites are visible. This depends on the client dimensions of the map
-  // and whether height or width is the deciding factor depends on the aspect ratio.
+  /**
+     Effect
+     If zoom was not set as a prop then attempt to set the initial zoom such that
+     all sites are visible. This depends on the client dimensions of the map
+     and whether height or width is the deciding factor depends on the aspect ratio.
+  */
   useEffect(() => {
     if (
       !canRender || state.map.zoom !== null
         || !mapRef || !mapRef.current || !mapRef.current.container
     ) { return; }
-    const mapCont = mapRef.current.container;
-    const minorDim = Math.min(mapCont.clientWidth / 136, mapCont.clientHeight / 128);
+    const container = mapRef.current.container.parentElement;
+    const minorDim = Math.min(container.clientWidth / 136, container.clientHeight / 128);
     const derivedZoom = [1, 2, 4, 6, 11].findIndex(m => m > minorDim);
     dispatch({
       type: 'setMapZoom',
@@ -209,9 +212,11 @@ const SiteMapLeaflet = () => {
     dispatch,
   ]);
 
-  // Effect
-  // If map bounds are null (as they will be when setting a focus location) then fill them in
-  // We have to do it this way as only the Leaflet Map instance can give us bounds
+  /**
+    Effect
+    If map bounds are null (as they will be when setting a focus location) then fill them in
+    We have to do it this way as only the Leaflet Map instance can give us bounds
+  */
   useEffect(() => {
     if (state.map.bounds !== null || mapRef.current === null) { return; }
     const bounds = mapRef.current.leafletElement.getBounds();
@@ -223,6 +228,24 @@ const SiteMapLeaflet = () => {
       },
     });
   }, [state.map.bounds, dispatch]);
+
+  /**
+    Effect
+    Force a redraw when switching to the map for the first time from another view
+  */
+  useEffect(() => {
+    if (
+      !mapRef || !mapRef.current || !mapRef.current.leafletElement
+        || state.view.current !== VIEWS.MAP || state.view.initialized[VIEWS.MAP]
+    ) { return; }
+    mapRef.current.leafletElement.invalidateSize();
+    dispatch({ type: 'setViewInitialized' });
+  }, [
+    mapRef,
+    VIEWS,
+    state.view,
+    dispatch,
+  ]);
 
   if (!canRender) { return null; }
 
@@ -482,13 +505,12 @@ const SiteMapLeaflet = () => {
   /**
      Render: Map
   */
-  const display = state.view === VIEWS.MAP ? null : 'none';
   return (
     <React.Fragment>
       <Map
         ref={mapRef}
         className={classes.map}
-        style={{ display, paddingBottom: `${(state.aspectRatio.currentValue || 0.75) * 100}%` }}
+        style={{ paddingBottom: `${(state.aspectRatio.currentValue || 0.75) * 100}%` }}
         center={state.map.center}
         zoom={state.map.zoom}
         minZoom={MAP_ZOOM_RANGE[0]}

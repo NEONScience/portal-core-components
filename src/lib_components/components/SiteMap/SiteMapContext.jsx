@@ -29,11 +29,13 @@ import {
   MAP_ZOOM_RANGE,
   SITE_MAP_PROP_TYPES,
   SITE_MAP_DEFAULT_PROPS,
+  MIN_TABLE_MAX_BODY_HEIGHT,
   hydrateNeonContextData,
   parseLocationHierarchy,
   parseLocationData,
   getZoomedIcons,
   getMapStateForFoucusLocation,
+  calculateFeatureAvailability,
 } from './SiteMapUtils';
 
 // Derive the selected status of a given boundary (US state or NEON domain). This should run
@@ -88,25 +90,6 @@ const boundsAreValid = bounds => (
         && bounds[key].every(v => typeof v === 'number') && bounds[key][1] > bounds[key][0]
     ))
 );
-const calculateFeatureAvailability = (state) => {
-  const featureIsAvailable = feature => (!(
-    (typeof feature.minZoom === 'number' && state.map.zoom < feature.minZoom)
-      || (typeof feature.maxZoom === 'number' && state.map.zoom > feature.maxZoom)
-      || (typeof feature.parent === 'string' && !featureIsAvailable(FEATURES[feature.parent]))
-  ));
-  return {
-    ...state,
-    filters: {
-      ...state.filters,
-      features: {
-        ...state.filters.features,
-        available: Object.fromEntries(
-          Object.entries(FEATURES).map(entry => [entry[0], featureIsAvailable(entry[1])]),
-        ),
-      },
-    },
-  };
-};
 const calculateSitesInMap = (state) => {
   const { map: { bounds } } = state;
   if (!bounds) { return []; }
@@ -295,17 +278,33 @@ const reducer = (state, action) => {
   switch (action.type) {
     case 'setView':
       if (!Object.keys(VIEWS).includes(action.view)) { return state; }
-      newState.view = action.view;
+      newState.view.current = action.view;
+      return newState;
+
+    case 'setViewInitialized':
+      if (!Object.keys(VIEWS).includes(state.view.current)) { return state; }
+      newState.view.initialized[state.view.current] = true;
       return newState;
 
     case 'setAspectRatio':
       if (typeof action.aspectRatio !== 'number' || action.aspectRatio <= 0) { return state; }
       newState.aspectRatio.currentValue = action.aspectRatio;
+      newState.table.maxBodyHeightUpdateFromAspectRatio = true;
+      return newState;
+
+    case 'setAspectRatioResizeEventListenerInitialized':
+      newState.aspectRatio.resizeEventListenerInitialized = true;
       return newState;
 
     case 'hydrateNeonContextData':
       if (!action.neonContextData) { return state; }
       return hydrateNeonContextData(newState, action.neonContextData);
+
+    // Table
+    case 'setTableMaxBodyHeight':
+      newState.table.maxBodyHeight = Math.max(action.height || 0, MIN_TABLE_MAX_BODY_HEIGHT);
+      newState.table.maxBodyHeightUpdateFromAspectRatio = false;
+      return newState;
 
     // Map
     case 'setMapZoom':
@@ -377,7 +376,7 @@ const reducer = (state, action) => {
       newState.focusLocation.current = action.location;
       newState.focusLocation.data = null;
       newState.overallFetch.expected += 1;
-      if (newState.view !== VIEWS.MAP) { newState.view = VIEWS.MAP; }
+      if (newState.view.current !== VIEWS.MAP) { newState.view.current = VIEWS.MAP; }
       return newState;
 
     case 'setFocusLocationFetchStarted':
@@ -537,7 +536,7 @@ const Provider = (props) => {
   const initialMapZoom = mapZoom === null ? null
     : Math.max(Math.min(mapZoom, MAP_ZOOM_RANGE[1]), MAP_ZOOM_RANGE[0]);
   let initialState = cloneDeep(DEFAULT_STATE);
-  initialState.view = Object.keys(VIEWS).includes(view) ? view : VIEWS.MAP;
+  initialState.view.current = Object.keys(VIEWS).includes(view) ? view : VIEWS.MAP;
   initialState.map = {
     ...initialState.map,
     zoom: initialMapZoom,
