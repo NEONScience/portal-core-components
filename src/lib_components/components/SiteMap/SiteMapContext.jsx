@@ -34,8 +34,10 @@ import {
   parseLocationHierarchy,
   parseLocationData,
   getZoomedIcons,
-  getMapStateForFoucusLocation,
+  getMapStateForFocusLocation,
   calculateFeatureAvailability,
+  boundsAreValid,
+  calculateLocationsInMap,
 } from './SiteMapUtils';
 
 // Derive the selected status of a given boundary (US state or NEON domain). This should run
@@ -83,35 +85,8 @@ const zoomIsValid = zoom => (
 const centerIsValid = center => (
   Array.isArray(center) && center.length === 2 && center.every(v => typeof v === 'number')
 );
-const boundsAreValid = bounds => (
-  typeof bounds === 'object' && bounds !== null
-    && Object.keys(bounds).every(key => (
-      ['lat', 'lng'].includes(key) && Array.isArray(bounds[key]) && bounds[key].length === 2
-        && bounds[key].every(v => typeof v === 'number') && bounds[key][1] > bounds[key][0]
-    ))
-);
-const calculateSitesInMap = (state) => {
-  const { map: { bounds } } = state;
-  if (!bounds) { return []; }
-  const extendedBounds = Object.fromEntries(
-    Object.keys(bounds)
-      .map((dir) => {
-        const buffer = (bounds[dir][1] - bounds[dir][0]) / 2;
-        return [
-          dir,
-          [bounds[dir][0] - buffer, bounds[dir][1] + buffer],
-        ];
-      }),
-  );
-  const siteIsInBounds = site => (
-    Number.isFinite(site.latitude) && Number.isFinite(site.longitude)
-      && site.latitude >= extendedBounds.lat[0] && site.latitude <= extendedBounds.lat[1]
-      && site.longitude >= extendedBounds.lng[0] && site.longitude <= extendedBounds.lng[1]
-  );
-  return Object.keys(state.sites).filter(siteCode => siteIsInBounds(state.sites[siteCode]));
-};
 const calculateFeatureDataFetches = (state) => {
-  const sitesInMap = calculateSitesInMap(state);
+  const sitesInMap = calculateLocationsInMap(state.sites, state.map.bounds, true);
   if (!sitesInMap.length) { return state; }
   const domainsInMap = new Set();
   sitesInMap
@@ -121,7 +96,8 @@ const calculateFeatureDataFetches = (state) => {
     });
   const newState = { ...state };
   // Domain-location hierarchy fetches for individual domains
-  if (state.map.zoom >= SITE_LOCATION_HIERARCHIES_MIN_ZOOM) {
+  // Only fetch if bounds are not null as that way we can trust sitesInMap is not all the sites
+  if (state.map.zoom >= SITE_LOCATION_HIERARCHIES_MIN_ZOOM && state.map.bounds) {
     Array.from(domainsInMap).forEach((domainCode) => {
       if (newState.featureDataFetches.SITE_LOCATION_HIERARCHIES[domainCode]) { return; }
       newState.featureDataFetches.SITE_LOCATION_HIERARCHIES[domainCode] = FETCH_STATUS.AWAITING_CALL; // eslint-disable-line max-len
@@ -149,12 +125,20 @@ const calculateFeatureDataFetches = (state) => {
   // Feature fetches - FETCH (Locations API)
   Object.keys(FEATURES)
     // Only look at available+visible features that get fetched and have a location type match
-    .filter(featureKey => (
-      FEATURES[featureKey].dataLoadType === FEATURE_DATA_LOAD_TYPES.FETCH
+    // If fetching for other child features then at least one of them must be available+visible
+    .filter((featureKey) => {
+      let doFetch = FEATURES[featureKey].dataLoadType === FEATURE_DATA_LOAD_TYPES.FETCH
         && FEATURES[featureKey].matchLocationType
         && state.filters.features.available[featureKey]
-        && state.filters.features.visible[featureKey]
-    ))
+        && state.filters.features.visible[featureKey];
+      if (doFetch && FEATURES[featureKey].fetchingForFeatures) {
+        doFetch = FEATURES[featureKey].fetchingForFeatures.some(fetchingForKey => (
+          state.filters.features.available[fetchingForKey]
+            && state.filters.features.visible[fetchingForKey]
+        ));
+      }
+      return doFetch;
+    })
     .forEach((featureKey) => {
       const { type: featureType, matchLocationType } = FEATURES[featureKey];
       // For each feature that warrants fetching; loop through the sites in the map
@@ -250,8 +234,12 @@ const reducer = (state, action) => {
         newState.featureData[dataFeatureType][dataFeatureKey][siteCode] = {};
       }
       newState.featureData[dataFeatureType][dataFeatureKey][siteCode][location] = {
-        siteCode,
         ...parsedData,
+        siteCode,
+        name: location,
+        featureKey: dataFeatureKey,
+        domainCode: state.sites[siteCode].domainCode,
+        stateCode: state.sites[siteCode].stateCode,
       };
     }
     return true;
@@ -275,6 +263,19 @@ const reducer = (state, action) => {
       applyFeatureVisibilityToParents(FEATURES[feature].parent, parentVisible);
     }
   };
+  // NATGEO_WORLD_MAP has no data at zoom 17 or higher so go to WORLD_IMAGERY (satellite)
+  const updateMapTileWithZoom = () => {
+    if (
+      newState.map.zoom <= 17 && state.map.tileLayer !== TILE_LAYERS.NATGEO_WORLD_MAP.KEY
+        && state.map.tileLayerAutoChangedAbove17) {
+      newState.map.tileLayer = TILE_LAYERS.NATGEO_WORLD_MAP.KEY;
+      newState.map.tileLayerAutoChangedAbove17 = false;
+    }
+    if (newState.map.zoom >= 17 && state.map.tileLayer === TILE_LAYERS.NATGEO_WORLD_MAP.KEY) {
+      newState.map.tileLayer = TILE_LAYERS.WORLD_IMAGERY.KEY;
+      newState.map.tileLayerAutoChangedAbove17 = true;
+    }
+  };
   switch (action.type) {
     case 'setView':
       if (!Object.keys(VIEWS).includes(action.view)) { return state; }
@@ -289,6 +290,7 @@ const reducer = (state, action) => {
     case 'setAspectRatio':
       if (typeof action.aspectRatio !== 'number' || action.aspectRatio <= 0) { return state; }
       newState.aspectRatio.currentValue = action.aspectRatio;
+      newState.aspectRatio.widthReference = action.widthReference || 0;
       newState.table.maxBodyHeightUpdateFromAspectRatio = true;
       return newState;
 
@@ -301,6 +303,10 @@ const reducer = (state, action) => {
       return hydrateNeonContextData(newState, action.neonContextData);
 
     // Table
+    case 'setTableFocus':
+      newState.table.focus = action.focus;
+      return newState;
+
     case 'setTableMaxBodyHeight':
       newState.table.maxBodyHeight = Math.max(action.height || 0, MIN_TABLE_MAX_BODY_HEIGHT);
       newState.table.maxBodyHeightUpdateFromAspectRatio = false;
@@ -313,17 +319,7 @@ const reducer = (state, action) => {
       if (centerIsValid(action.center)) { newState.map.center = action.center; }
       if (boundsAreValid(action.bounds)) { newState.map.bounds = action.bounds; }
       newState.map.zoomedIcons = getZoomedIcons(newState.map.zoom);
-      // NATGEO_WORLD_MAP has no data at zoom 17 or higher so go to WORLD_IMAGERY (satellite)
-      if (
-        action.zoom <= 17 && state.map.tileLayer !== TILE_LAYERS.NATGEO_WORLD_MAP.KEY
-          && state.map.tileLayerAutoChangedAbove17) {
-        newState.map.tileLayer = TILE_LAYERS.NATGEO_WORLD_MAP.KEY;
-        newState.map.tileLayerAutoChangedAbove17 = false;
-      }
-      if (action.zoom >= 17 && state.map.tileLayer === TILE_LAYERS.NATGEO_WORLD_MAP.KEY) {
-        newState.map.tileLayer = TILE_LAYERS.WORLD_IMAGERY.KEY;
-        newState.map.tileLayerAutoChangedAbove17 = true;
-      }
+      updateMapTileWithZoom();
       return calculateFeatureDataFetches(
         calculateFeatureAvailability(newState),
       );
@@ -370,7 +366,7 @@ const reducer = (state, action) => {
       newState.filters.features.collapsed.delete(action.feature);
       return newState;
 
-    // Fetch and Import
+    // Focus Location
     case 'setNewFocusLocation':
       newState.focusLocation.fetch = { status: FETCH_STATUS.AWAITING_CALL, error: null };
       newState.focusLocation.current = action.location;
@@ -405,10 +401,13 @@ const reducer = (state, action) => {
         newState.filters.features.visible[FEATURES.DOMAINS.KEY] = true;
       }
       completeOverallFetch();
+      newState.map = getMapStateForFocusLocation(newState);
+      updateMapTileWithZoom();
       return calculateFeatureDataFetches(
-        calculateFeatureAvailability(getMapStateForFoucusLocation(newState)),
+        calculateFeatureAvailability(newState),
       );
 
+    // Fetch and Import
     case 'awaitingFeatureDataFetchesTriggered':
       return { ...state, featureDataFetchesHasAwaiting: false };
 

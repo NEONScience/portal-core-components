@@ -174,7 +174,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
       </DocBlock>
 
       <ExampleBlock>
-        <SiteMap view="TABLE" />
+        <SiteMap />
       </ExampleBlock>
       <CodeBlock>
         {`
@@ -190,8 +190,6 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
         <ul>
           <li>All map features required for production are currently loading and rendering on the map dynamically as the zoom and bounds change</li>
           <li>Tooltips for most features are placeholders that do not contain relevant feature information yet.</li>
-          <li>The <i>View Table</i> UI is incomplete - only shows sites with no filtering or sorting. This will ultimately show anything the map can show.</li>
-          <li>Surrounding UI (<i>View Table</i>, <i>Jump to Location</i>, and <i>Features</i>) is all tentative. Will likely be presented differently prior to production release.</li>
           <li>Selection of sites (e.g. for use in building a download package) is not yet supported.</li>
         </ul>
       </DocBlock>

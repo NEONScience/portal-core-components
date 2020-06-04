@@ -7,6 +7,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import Typography from '@material-ui/core/Typography';
 
 import MaterialTable, { MTableToolbar, MTableFilterRow } from 'material-table';
@@ -26,6 +28,8 @@ import {
   SITE_DETAILS_URL_BASE,
   EXPLORE_DATA_PRODUCTS_URL_BASE,
   MIN_TABLE_MAX_BODY_HEIGHT,
+  HIGHLIGHT_STATUS,
+  calculateLocationsInMap,
 } from './SiteMapUtils';
 
 const ucWord = word => `${word.slice(0, 1).toUpperCase()}${word.slice(1).toLowerCase()}`;
@@ -41,6 +45,7 @@ const useStyles = makeStyles(theme => ({
     width: theme.spacing(3),
     height: theme.spacing(3),
     marginRight: theme.spacing(1),
+    filter: 'drop-shadow(0px 0px 1.5px #000000bb)',
   },
   linkButton: {
     textAlign: 'left',
@@ -57,9 +62,27 @@ const useStyles = makeStyles(theme => ({
   toolbarContainer: {
     backgroundColor: theme.palette.grey[50],
     borderBottom: `1px dotted ${theme.palette.grey[300]}`,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    paddingRight: theme.spacing(1),
+    // padding: theme.spacing(0, 1, 0, 2),
+    // display: 'flex',
+    // alignItems: 'center',
+    // justifyContent: 'space-between',
+  },
+  toggleButtonGroup: {
+    height: theme.spacing(4),
+  },
+  toggleButton: {
+    height: theme.spacing(4),
+    fontWeight: 600,
+    color: theme.palette.primary.main,
+    borderColor: theme.palette.primary.main,
+    padding: theme.spacing(0, 1.5),
+    whiteSpace: 'nowrap',
+  },
+  // Use !important here to override the Mui-selected class with higher priority
+  toggleButtonSelected: {
+    color: '#fff !important',
+    backgroundColor: `${theme.palette.primary.main} !important`,
   },
 }));
 
@@ -81,7 +104,12 @@ const SiteMapTable = () => {
 
   // Site Map State
   const [state, dispatch] = SiteMapContext.useSiteMapContext();
-  const { focus, maxBodyHeight, maxBodyHeightUpdateFromAspectRatio } = state.table;
+  const {
+    focus,
+    availableFeatureTypes,
+    maxBodyHeight,
+    maxBodyHeightUpdateFromAspectRatio,
+  } = state.table;
   const selectionActive = state.selection.active === focus;
   const selection = selectionActive ? state.selection[state.selection.active] : new Set();
 
@@ -124,14 +152,6 @@ const SiteMapTable = () => {
 
   if (!canRender) { return null; }
 
-  const visibleAttributeCombos = [];
-  Object.keys(FEATURES).filter(f => (
-    FEATURES[f].type === focus
-      && state.filters.features.available[f] && state.filters.features.visible[f]
-  )).forEach((f) => {
-    visibleAttributeCombos.push(FEATURES[f].attributes);
-  });
-
   // Selection functions
   let rowIsSelected = () => false;
   let selectRow = () => {};
@@ -173,6 +193,54 @@ const SiteMapTable = () => {
   const getState = location => getParent('STATE', location);
   const getDomain = location => getParent('DOMAIN', location);
 
+  const getFeatureName = (featureKey) => {
+    if (FEATURES[featureKey]) {
+      return (FEATURES[featureKey].nameSingular || FEATURES[featureKey].name || featureKey);
+    }
+    return featureKey;
+  };
+  const renderFeatureIcon = (featureKey, alt = '') => {
+    if (!FEATURES[featureKey] || !FEATURES[featureKey].iconSvg) { return null; }
+    const { iconSvg } = FEATURES[featureKey];
+    return <img alt={getFeatureName(featureKey)} src={iconSvg} className={classes.featureIcon} />;
+  };
+
+  const sitesInMap = calculateLocationsInMap(state.sites, state.map.bounds);
+  const domainsInMap = new Set();
+  const statesInMap = new Set();
+  sitesInMap
+    .filter(siteCode => state.sites[siteCode])
+    .forEach((siteCode) => {
+      domainsInMap.add(state.sites[siteCode].domainCode);
+      statesInMap.add(state.sites[siteCode].stateCode);
+    });
+
+  const renderSite = (siteCode, link = false) => {
+    const site = state.sites[siteCode];
+    if (!site) { return null; }
+    const featureKey = `${site.terrain.toUpperCase()}_${site.type.toUpperCase()}_SITES`;
+    const internal = (
+      <React.Fragment>
+        {renderFeatureIcon(featureKey)}
+        <span>{`${site.description} (${site.siteCode})`}</span>
+      </React.Fragment>
+    );
+    return link ? (
+      <Link
+        component="button"
+        className={`${classes.linkButton} ${classes.startFlex}`}
+        onClick={() => jumpTo(site.siteCode)}
+      >
+        {renderFeatureIcon(featureKey)}
+        <span>{`${site.description} (${site.siteCode})`}</span>
+      </Link>
+    ) : (
+      <div className={classes.startFlex}>
+        {internal}
+      </div>
+    );
+  };
+
   // Columns that are visible for more than one feature type
   const commonColumns = {
     site: {
@@ -181,7 +249,7 @@ const SiteMapTable = () => {
       sorting: true,
       defaultSort: 'desc',
       lookup: Object.fromEntries(
-        Object.keys(state.sites).map(k => [k, k]),
+        Array.from(sitesInMap).map(siteCode => [siteCode, siteCode]),
       ),
       customSort: (rowA, rowB) => {
         const siteA = getSite(rowA);
@@ -192,17 +260,13 @@ const SiteMapTable = () => {
         const site = getSite(row);
         if (!site) { return null; }
         const featureKey = `${site.terrain.toUpperCase()}_${site.type.toUpperCase()}_SITES`;
-        const svg = FEATURES[featureKey] ? FEATURES[featureKey].iconSvg : null;
-        const icon = !svg ? null : (
-          <img alt={`${site.type} ${site.terrain} Site`} src={svg} className={classes.featureIcon} />
-        );
         return (
           <Link
             component="button"
             className={`${classes.linkButton} ${classes.startFlex}`}
             onClick={() => jumpTo(site.siteCode)}
           >
-            {icon}
+            {renderFeatureIcon(featureKey)}
             <span>{`${site.description} (${site.siteCode})`}</span>
           </Link>
         );
@@ -214,7 +278,7 @@ const SiteMapTable = () => {
       sorting: true,
       defaultSort: 'desc',
       lookup: Object.fromEntries(
-        Object.keys(state.featureData.BOUNDARIES.DOMAINS).map(k => [k, k]),
+        Array.from(domainsInMap).map(domainCode => [domainCode, domainCode]),
       ),
       customSort: (rowA, rowB) => {
         const domainA = getDomain(rowA);
@@ -240,9 +304,10 @@ const SiteMapTable = () => {
       sorting: true,
       defaultSort: 'desc',
       lookup: Object.fromEntries(
-        Object
-          .keys(state.featureData.BOUNDARIES.STATES)
-          .map(k => [k, state.featureData.BOUNDARIES.STATES[k].name]),
+        Array.from(statesInMap).map(stateCode => [
+          stateCode,
+          state.featureData.BOUNDARIES.STATES[stateCode].name,
+        ]),
       ),
       customSort: (rowA, rowB) => {
         const stateA = getState(rowA);
@@ -257,7 +322,7 @@ const SiteMapTable = () => {
             className={classes.linkButton}
             onClick={() => jumpTo(usstate.stateCode)}
           >
-            {`${usstate.name} (${usstate.stateCode})`}
+            {usstate.name}
           </Link>
         );
       },
@@ -293,19 +358,30 @@ const SiteMapTable = () => {
   };
 
   /**
-     Calculate columns and rows from current focus feature type
+     Calculate rows
   */
-  let rows = [];
-  let columns = [];
+  const visibleFeatureKeys = Object.keys(state.featureData[focus])
+    .filter(featureKey => state.filters.features.visible[featureKey]);
+  const locations = {};
+  visibleFeatureKeys.forEach((featureKey) => {
+    Object.keys(state.featureData[focus][featureKey]).forEach((siteCode) => {
+      if (focus === FEATURE_TYPES.SITES) {
+        locations[siteCode] = state.featureData[focus][featureKey][siteCode];
+      }
+      if (focus === FEATURE_TYPES.LOCATIONS) {
+        Object.keys(state.featureData[focus][featureKey][siteCode]).forEach((locationCode) => {
+          locations[locationCode] = state.featureData[focus][featureKey][siteCode][locationCode];
+        });
+      }
+    });
+  });
+  const rows = calculateLocationsInMap(locations, state.map.bounds).map(key => locations[key]);
 
-  // SITES
+  /**
+     Define columns from current focus feature type
+  */
+  let columns = [];
   if (focus === FEATURE_TYPES.SITES) {
-    rows = Object.keys(state.sites)
-      .filter((siteCode) => {
-        const siteAttributes = (({ type, terrain }) => ({ type, terrain }))(state.sites[siteCode]);
-        return visibleAttributeCombos.some(attributes => isEqual(attributes, siteAttributes));
-      })
-      .map(siteCode => ({ ...state.sites[siteCode] }));
     columns = [
       commonColumns.site,
       commonColumns.latlng,
@@ -316,7 +392,7 @@ const SiteMapTable = () => {
         defaultSort: 'desc',
         lookup: Object.fromEntries(
           Array.from(
-            new Set(Object.keys(state.sites).map(siteCode => state.sites[siteCode].type)),
+            new Set(rows.map(row => row.type)),
           ).map(k => [k, ucWord(k)]),
         ),
         render: row => ucWord(row.type),
@@ -328,7 +404,7 @@ const SiteMapTable = () => {
         defaultSort: 'desc',
         lookup: Object.fromEntries(
           Array.from(
-            new Set(Object.keys(state.sites).map(siteCode => state.sites[siteCode].terrain)),
+            new Set(rows.map(row => row.terrain)),
           ).map(k => [k, ucWord(k)]),
         ),
         render: row => ucWord(row.terrain),
@@ -336,14 +412,83 @@ const SiteMapTable = () => {
       commonColumns.domain,
       commonColumns.state,
     ];
-    if (selectionActive) { columns.unshift(commonColumns.selected); }
   }
-
-  // LOCATIONS
   if (focus === FEATURE_TYPES.LOCATIONS) {
-    columns = [];
-    if (selectionActive) { columns.unshift(commonColumns.selected); }
+    columns = [
+      {
+        field: 'name',
+        title: 'Name',
+        sorting: true,
+        defaultSort: 'desc',
+        render: row => (
+          <Link
+            component="button"
+            className={classes.linkButton}
+            onClick={() => jumpTo(row.name)}
+          >
+            {row.name}
+          </Link>
+        ),
+      },
+      {
+        field: 'featureKey',
+        title: 'Type',
+        sorting: true,
+        defaultSort: 'desc',
+        lookup: Object.fromEntries(
+          Array.from(
+            new Set(rows.map(row => row.featureKey)),
+          ).map(featureKey => [featureKey, getFeatureName(featureKey)]),
+        ),
+        customSort: (rowA, rowB) => {
+          const typeA = getFeatureName(rowA.featureKey);
+          const typeB = getFeatureName(rowB.featureKey);
+          if (typeA.name === typeB.name) { return 0; }
+          return typeA.name > typeB.name ? -1 : 1;
+        },
+        render: (row) => {
+          const { featureKey } = row;
+          const featureName = getFeatureName(featureKey);
+          return (
+            <Link
+              component="button"
+              className={`${classes.linkButton} ${classes.startFlex}`}
+            >
+              {renderFeatureIcon(featureKey)}
+              <span>{featureName}</span>
+            </Link>
+          );
+        },
+      },
+      commonColumns.latlng,
+      {
+        field: 'elevation',
+        title: 'Elevation',
+        sorting: true,
+        defaultSort: 'desc',
+        filtering: false,
+        render: row => (
+          <Typography
+            variant="caption"
+            aria-label="Elevation"
+            style={{ fontFamily: 'monospace', fontSize: '1.05em' }}
+          >
+            {Number.isFinite(row.elevation) ? `${row.elevation.toFixed(2)}m` : '--'}
+          </Typography>
+        ),
+      },
+      commonColumns.site,
+      commonColumns.domain,
+      commonColumns.state,
+    ];
   }
+  if (selectionActive) { columns.unshift(commonColumns.selected); }
+
+  const handleChangeFocus = (event, newFocus) => {
+    if (newFocus && newFocus !== focus) {
+      dispatch({ type: 'setTableFocus', focus: newFocus });
+    }
+  };
 
   const components = {
     Container: Box,
@@ -351,6 +496,33 @@ const SiteMapTable = () => {
       <div className={classes.toolbarContainer}>
         <MTableToolbar {...props} />
       </div>
+      /*
+      <div className={classes.toolbarContainer}>
+        <ToggleButtonGroup
+          exclusive
+          color="primary"
+          variant="outlined"
+          size="small"
+          className={classes.toggleButtonGroup}
+          value={focus}
+          onChange={handleChangeFocus}
+        >
+          {[FEATURE_TYPES.SITES, FEATURE_TYPES.LOCATIONS].map((key) => {
+            const toggleProps = {
+              key,
+              value: key,
+              size: 'small',
+              disabled: !availableFeatureTypes[key],
+              className: key === focus
+                ? `${classes.toggleButton} ${classes.toggleButtonSelected}`
+                : classes.toggleButton,
+            };
+            return <ToggleButton {...toggleProps}>{key}</ToggleButton>;
+          })}
+        </ToggleButtonGroup>
+        <MTableToolbar {...props} />
+      </div>
+      */
     ),
     FilterRow: filterRowProps => (
       <MTableFilterRow
@@ -361,10 +533,10 @@ const SiteMapTable = () => {
   };
   const localization = {
     toolbar: {
-      searchPlaceholder: `Search ${ucWord(focus)}`,
+      searchPlaceholder: `Search ${focus.toLowerCase()} in view`,
     },
     body: {
-      emptyDataSourceMessage: `No ${focus.toLowerCase()}s match the current filters.`,
+      emptyDataSourceMessage: `No ${focus.toLowerCase()} in current map view match the current filters.`,
     },
   };
 
@@ -378,11 +550,11 @@ const SiteMapTable = () => {
         columns={columns}
         data={rows}
         localization={localization}
+        title={`${ucWord(focus)} in current view`}
         options={{
           padding: 'dense',
           filtering: true,
           columnsButton: false,
-          showTitle: false,
           headerStyle: {
             position: 'sticky',
             top: 0,

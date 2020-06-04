@@ -78,6 +78,7 @@ const SiteBasedFeature = (props) => {
   const {
     neonContextHydrated,
     map: { zoom },
+    focusLocation: { current: focusLocation },
     featureData: {
       [featureType]: {
         [featureKey]: featureData,
@@ -548,20 +549,22 @@ const SiteBasedFeature = (props) => {
       if (state.map.zoomedIcons[featureKey] !== null) {
         const baseIcon = state.map.zoomedIcons[featureKey];
         const selection = isSelected ? SELECTION_STATUS.SELECTED : SELECTION_STATUS.UNSELECTED;
-        icon = baseIcon[selection][HIGHLIGHT_STATUS.NONE];
+        const initialHighlight = (location || siteCode) === focusLocation
+          ? HIGHLIGHT_STATUS.HIGHLIGHT
+          : HIGHLIGHT_STATUS.NONE;
+        icon = baseIcon[selection][initialHighlight];
         const hasPopup = typeof renderPopupFunctions[featureKey] === 'function';
         interaction = selectionActive ? {
           onMouseOver: (e) => {
             const highlight = HIGHLIGHT_STATUS[isSelected ? 'HIGHLIGHT' : 'SELECT'];
             e.target.setIcon(baseIcon[selection][highlight]);
-            e.target._bringToFront();
             if (hasPopup) {
               e.target.openPopup();
               positionPopup(e.target, e.latlng, selectionActive);
             }
           },
           onMouseOut: (e) => {
-            const highlight = HIGHLIGHT_STATUS[isSelected ? 'NONE' : 'SELECT'];
+            const highlight = HIGHLIGHT_STATUS[isSelected ? initialHighlight : 'SELECT'];
             e.target.setIcon(baseIcon[selection][highlight]);
             if (hasPopup) {
               e.target.closePopup();
@@ -573,10 +576,9 @@ const SiteBasedFeature = (props) => {
         } : {
           onMouseOver: (e) => {
             e.target.setIcon(baseIcon[selection][HIGHLIGHT_STATUS.HIGHLIGHT]);
-            e.target._bringToFront();
           },
           onMouseOut: (e) => {
-            e.target.setIcon(baseIcon[selection][HIGHLIGHT_STATUS.NONE]);
+            e.target.setIcon(baseIcon[selection][initialHighlight]);
           },
           onClick: (e) => {
             if (hasPopup) {
@@ -589,7 +591,14 @@ const SiteBasedFeature = (props) => {
         };
       }
       marker = (
-        <Marker key={`${key}-marker`} position={position} icon={icon} {...interaction}>
+        <Marker
+          key={`${key}-marker`}
+          position={position}
+          title={key}
+          icon={icon}
+          riseOnHover
+          {...interaction}
+        >
           {renderedPopup}
         </Marker>
       );

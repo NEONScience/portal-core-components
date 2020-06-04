@@ -123,6 +123,7 @@ const SiteMapContainer = () => {
   };
 
   const featuresRef = useRef(null);
+  const contentDivRef = useRef(null);
 
   /**
      Effect - Register event listener to dynamically adjust aspect ratio from viewport dimensions
@@ -132,7 +133,11 @@ const SiteMapContainer = () => {
       const newAspectRatio = aspectRatio.isDynamic
         ? getDynamicAspectRatio()
         : aspectRatio.currentValue;
-      dispatch({ type: 'setAspectRatio', aspectRatio: newAspectRatio });
+      dispatch({
+        type: 'setAspectRatio',
+        aspectRatio: newAspectRatio,
+        widthReference: contentDivRef.current ? contentDivRef.current.clientWidth : 0,
+      });
     };
     if (!aspectRatio.isDynamic || aspectRatio.currentValue !== null) { return () => {}; }
     handleResize();
@@ -185,7 +190,7 @@ const SiteMapContainer = () => {
   if (!neonContextState.isFinal) {
     return (
       <div className={classes.outerContainer}>
-        <div {...contentDivProps}>
+        <div ref={contentDivRef} {...contentDivProps}>
           <Paper className={classes.contentPaper}>
             <Typography variant="h6" component="h3" gutterBottom>
               Loading Sites...
@@ -203,7 +208,7 @@ const SiteMapContainer = () => {
   if (neonContextState.hasError) {
     return (
       <div className={classes.outerContainer}>
-        <div {...contentDivProps}>
+        <div ref={contentDivRef} {...contentDivProps}>
           <Paper className={classes.contentPaper}>
             <ErrorIcon fontSize="large" color="error" />
             <Typography variant="h6" component="h3" style={{ marginTop: Theme.spacing(1) }}>
@@ -392,7 +397,7 @@ const SiteMapContainer = () => {
       aria-describedby={progressId}
       aria-busy={isLoading ? 'true' : 'false'}
     >
-      <div {...contentDivProps}>
+      <div ref={contentDivRef} {...contentDivProps}>
         {view === VIEWS.MAP ? <SiteMapLeaflet /> : null }
         {view === VIEWS.TABLE ? <SiteMapTable /> : null }
         {!state.filters.features.open ? null : (

@@ -777,7 +777,7 @@
     "terrain": "AQUATIC",
     "latitude": 39.891366,
     "longitude": -105.915395,
-    "zoom": 12
+    "zoom": 15
   },
   "WOOD": {
     "description": "Woodworth",
@@ -807,6 +807,6 @@
     "terrain": "TERRESTRIAL",
     "latitude": 44.95348,
     "longitude": -110.53914,
-    "zoom": 12
+    "zoom": 11
   }
 }

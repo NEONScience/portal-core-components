@@ -62,6 +62,7 @@ const SiteMapFilters = () => {
      Focus Location Form
      TODO: Figure out where this goes long-term. Probably hidden until summoned
   */
+  const FOCUS_DISPLAY = 'none'; // 'flex'
   const [location, setLocation] = useState('');
   const jumpToLocation = (event) => {
     event.preventDefault();
@@ -74,7 +75,7 @@ const SiteMapFilters = () => {
     ? state.focusLocation.fetch.error
     : 'Any named location with coordinates, e.g. CPER or D12';
   const renderFocusLocationForm = () => (
-    <div style={{ display: 'flex', alignItems: 'center', marginTop: Theme.spacing(2) }}>
+    <div style={{ display: FOCUS_DISPLAY, alignItems: 'center', marginTop: Theme.spacing(2) }}>
       <form onSubmit={jumpToLocation}>
         <TextField
           margin="dense"
