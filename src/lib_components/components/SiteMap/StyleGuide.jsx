@@ -174,7 +174,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
       </DocBlock>
 
       <ExampleBlock>
-        <SiteMap location="ARIK" />
+        <SiteMap location="CPER" />
       </ExampleBlock>
       <CodeBlock>
         {`

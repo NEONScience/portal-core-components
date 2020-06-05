@@ -120,11 +120,30 @@ const SiteBasedFeature = (props) => {
   };
 
   /**
+     Render: a numerical value with units and optional label
+  */
+  const renderNumericalValue = (value, label = null, unit = '', precision = 0, aria = null, right = false) => { // eslint-disable-line max-len
+    const visibleValue = (
+      <Typography variant="caption" aria-label={aria || label} style={{ fontFamily: 'monospace' }}>
+        {Number.isFinite(value) ? `${value.toFixed(precision)}${unit}` : '--'}
+      </Typography>
+    );
+    return !label ? visibleValue : (
+      <div className={classes[right ? 'endFlex' : 'startFlex']}>
+        <Typography variant="caption" style={{ marginRight: Theme.spacing(1) }}>
+          {label}
+        </Typography>
+        {visibleValue}
+      </div>
+    );
+  };
+
+  /**
      Render: Latitude / Longitude with Copy to Clipboard
   */
-  const renderLatLon = (latitude, longitude, flexEnd = false) => (
-    Number.isFinite(latitude) && Number.isFinite(longitude) ? (
-      <div className={classes[flexEnd ? 'endFlex' : 'startFlex']}>
+  const renderLatLon = (latitude, longitude, right = false, renderSubtitle = false) => {
+    const coords = Number.isFinite(latitude) && Number.isFinite(longitude) ? (
+      <div className={classes[right ? 'endFlex' : 'startFlex']}>
         <CopyToClipboard text={`${latitude.toFixed(5)} ${longitude.toFixed(5)}`}>
           <Tooltip title="Latitude / Longitude (click to copy)">
             <IconButton
@@ -157,27 +176,149 @@ const SiteBasedFeature = (props) => {
           --
         </Typography>
       </div>
-    )
-  );
+    );
+    return !renderSubtitle ? coords : (
+      <div style={{ textAlign: right ? 'right' : 'left' }}>
+        <Typography variant="subtitle2">Coordinates</Typography>
+        {coords}
+      </div>
+    );
+  };
 
   /**
      Render: Elevation
   */
-  const renderElevation = elevation => (
-    <div>
-      <Typography variant="subtitle2">Elevation</Typography>
-      <div className={classes.startFlex}>
-        <ElevationIcon fontSize="small" style={{ marginRight: Theme.spacing(1) }} />
-        <Typography
-          variant="caption"
-          aria-label="Elevation"
-          style={{ fontFamily: 'monospace' }}
-        >
-          {Number.isFinite(elevation) ? `${elevation.toFixed(2)}m` : '--'}
-        </Typography>
+  const renderElevation = (loc = {}, right = false) => {
+    const { elevation, minimumElevation, maximumElevation } = loc;
+    const hasMinMax = Number.isFinite(minimumElevation) || Number.isFinite(maximumElevation);
+    return (
+      <div style={{ textAlign: right ? 'right' : 'left' }}>
+        <Typography variant="subtitle2">Elevation</Typography>
+        {hasMinMax ? (
+          <div>
+            {renderNumericalValue(elevation, 'Average', 'm', 2, 'Average Elevation', right)}
+            {renderNumericalValue(minimumElevation, 'Minimum', 'm', 2, 'Minimum Elevation', right)}
+            {renderNumericalValue(minimumElevation, 'Maximum', 'm', 2, 'Maximum Elevation', right)}
+          </div>
+        ) : (
+          <div className={classes[right ? 'endFlex' : 'startFlex']}>
+            <ElevationIcon fontSize="small" style={{ marginRight: Theme.spacing(1) }} />
+            {renderNumericalValue(elevation, null, 'm', 2, 'Elevation')}
+          </div>
+        )}
       </div>
+    );
+  };
+
+  /**
+     Render: Plot Size
+  */
+  const renderPlotSize = (loc = {}) => (
+    <div>
+      <Typography variant="subtitle2">Plot Size</Typography>
+      <Typography variant="caption">
+        {loc.plotDimensions}
+        {!Number.isFinite(loc.plotSize) ? null : (
+          <React.Fragment>
+            <br />
+            {`(${loc.plotSize.toFixed(0)}m²)`}
+          </React.Fragment>
+        )}
+      </Typography>
     </div>
   );
+
+  /**
+     Render: Plot Slope
+  */
+  const renderPlotSlope = (loc = {}, right = false) => (
+    <div style={{ textAlign: right ? 'right' : 'left' }}>
+      <Typography variant="subtitle2">Plot Slope</Typography>
+      {renderNumericalValue(loc.slopeAspect, 'Aspect', '°', 2, 'Slope Aspect', right)}
+      {renderNumericalValue(loc.slopeGradient, 'Gradient', '%', 2, 'Slope Gradient', right)}
+    </div>
+  );
+
+  /**
+     Render: Popup Row; Coordinates and Elevation
+  */
+  const renderCoordsAndElevation = (loc) => {
+    const renderCoordsSubtitle = (
+      Number.isFinite(loc.minimumElevation) || Number.isFinite(loc.maximumElevation)
+    );
+    return (
+      <React.Fragment key="coordsAndElevation">
+        <Grid item xs={6}>
+          {renderElevation(loc)}
+        </Grid>
+        <Grid item xs={6}>
+          {renderLatLon(loc.latitude, loc.longitude, true, renderCoordsSubtitle)}
+        </Grid>
+      </React.Fragment>
+    );
+  };
+
+  /**
+     Render: Popup Row; Plot Size and Slope
+  */
+  const renderPlotSizeAndSlope = loc => (
+    <React.Fragment key="plotSizeAndSlope">
+      <Grid item xs={6}>
+        {renderPlotSize(loc)}
+      </Grid>
+      <Grid item xs={6}>
+        {renderPlotSlope(loc, true)}
+      </Grid>
+    </React.Fragment>
+  );
+
+  /**
+     Render: Popup Row; Location Site and Domain
+  */
+  const renderLocationSiteAndDomain = (siteCode) => {
+    const site = state.sites[siteCode];
+    if (!site) { return null; }
+    const siteFeatureKey = `${site.terrain}_${site.type}_SITES`;
+    if (!FEATURES[siteFeatureKey]) { return null; }
+    const { iconSvg: siteIcon, name, nameSingular } = FEATURES[siteFeatureKey];
+    const siteType = name || nameSingular || siteFeatureKey;
+    return (
+      <React.Fragment key="locationSiteAndDomain">
+        <Grid item xs={9}>
+          <Typography variant="subtitle2">NEON Site</Typography>
+          <div className={classes.startFlex} style={{ marginTop: Theme.spacing(0.5) }}>
+            <img src={siteIcon} alt={siteType} className={classes.popupLocationSiteIcon} />
+            <Typography variant="body2">{`${site.description} (${site.siteCode})`}</Typography>
+          </div>
+        </Grid>
+        <Grid item xs={3} style={{ textAlign: 'right' }}>
+          <Typography variant="subtitle2">Domain</Typography>
+          <Typography variant="body2">{site.domainCode}</Typography>
+        </Grid>
+      </React.Fragment>
+    );
+  };
+
+  const popupProps = { className: classes.popup, autoPan: false };
+
+  /**
+     Render: Location popup
+     Standard title with icon, row with coordinates and elevation, row with parent site and domain
+     Optional additional rows will appear between coordinates/elevation and site/domain
+  */
+  const renderLocationPopup = (siteCode, location, additionalRows = []) => {
+    const loc = (featureData[siteCode] || {})[location] || {};
+    return (
+      <Popup {...popupProps}>
+        {renderPopupTitle(location)}
+        <Grid container spacing={1}>
+          {renderCoordsAndElevation(loc)}
+          {additionalRows.map(row => (typeof row === 'function' ? row(loc) : row))}
+          {renderLocationSiteAndDomain(siteCode)}
+        </Grid>
+      </Popup>
+    );
+  };
 
   /**
      Render: Site Popup
@@ -242,7 +383,7 @@ const SiteBasedFeature = (props) => {
       );
     };
     return (
-      <Popup className={classes.popup} autoPan={false}>
+      <Popup {...popupProps}>
         {renderPopupTitle(`${site.description} (${site.siteCode})`, false)}
         <Grid container spacing={1} style={{ marginBottom: Theme.spacing(1) }}>
           {/* Terrain and Type */}
@@ -273,70 +414,23 @@ const SiteBasedFeature = (props) => {
   };
 
   /**
-     Render - Popups
+     Render - All the Rest of the Popups
      Convention is alphabetical listing of keys since order here doesn't matter
   */
-  const commonProps = { className: classes.popup, autoPan: false };
-  const renderCoordsAndElevation = locationData => (
-    <React.Fragment>
-      <Grid item xs={6}>
-        {renderElevation(locationData.elevation)}
-      </Grid>
-      <Grid item xs={6}>
-        {renderLatLon(locationData.latitude, locationData.longitude, true)}
-      </Grid>
-    </React.Fragment>
-  );
-  const renderLocationSiteAndDomain = (siteCode) => {
-    const site = state.sites[siteCode];
-    if (!site) { return null; }
-    const siteFeatureKey = `${site.terrain}_${site.type}_SITES`;
-    if (!FEATURES[siteFeatureKey]) { return null; }
-    const { iconSvg: siteIcon, name, nameSingular } = FEATURES[siteFeatureKey];
-    const siteType = name || nameSingular || siteFeatureKey;
-    return (
-      <React.Fragment>
-        <Grid item xs={8}>
-          <Typography variant="subtitle2">NEON Site</Typography>
-          <div className={classes.startFlex} style={{ marginTop: Theme.spacing(0.5) }}>
-            <img src={siteIcon} alt={siteType} className={classes.popupLocationSiteIcon} />
-            <Typography variant="body2">{`${site.description} (${site.siteCode})`}</Typography>
-          </div>
-        </Grid>
-        <Grid item xs={4} style={{ textAlign: 'right' }}>
-          <Typography variant="subtitle2">Domain</Typography>
-          <Typography variant="body2">{site.domainCode}</Typography>
-        </Grid>
-      </React.Fragment>
-    );
-  };
-  // A basic location popup and has only coordinates, elevation, and parent site
-  const renderBasicLocationPopup = (siteCode, location) => {
-    const loc = (featureData[siteCode] || {})[location] || {};
-    return (
-      <Popup {...commonProps}>
-        {renderPopupTitle(location)}
-        <Grid container spacing={1}>
-          {renderCoordsAndElevation(loc)}
-          {renderLocationSiteAndDomain(siteCode)}
-        </Grid>
-      </Popup>
-    );
-  };
   const renderPopupFunctions = {
-    AQUATIC_BENCHMARKS: renderBasicLocationPopup,
-    AQUATIC_BUOYS: renderBasicLocationPopup,
+    AQUATIC_BENCHMARKS: renderLocationPopup,
+    AQUATIC_BUOYS: renderLocationPopup,
     AQUATIC_CORE_SITES: renderSitePopup,
-    AQUATIC_GROUNDWATER_WELLS: renderBasicLocationPopup,
-    AQUATIC_DISCHARGE_POINTS: renderBasicLocationPopup,
-    AQUATIC_FISH_POINTS: renderBasicLocationPopup,
-    AQUATIC_METEOROLOGICAL_STATIONS: renderBasicLocationPopup,
-    AQUATIC_PLANT_TRANSECTS: renderBasicLocationPopup,
+    AQUATIC_GROUNDWATER_WELLS: renderLocationPopup,
+    AQUATIC_DISCHARGE_POINTS: renderLocationPopup,
+    AQUATIC_FISH_POINTS: renderLocationPopup,
+    AQUATIC_METEOROLOGICAL_STATIONS: renderLocationPopup,
+    AQUATIC_PLANT_TRANSECTS: renderLocationPopup,
     AQUATIC_REACHES: (siteCode) => {
       const { areaKm2 } = featureData[siteCode].properties;
       const areaAcres = KM2_TO_ACRES * areaKm2;
       return (
-        <Popup {...commonProps}>
+        <Popup {...popupProps}>
           <Typography variant="h6" gutterBottom>
             {`${siteCode} Aquatic Reach`}
           </Typography>
@@ -347,69 +441,37 @@ const SiteBasedFeature = (props) => {
       );
     },
     AQUATIC_RELOCATABLE_SITES: renderSitePopup,
-    AQUATIC_RIPARIAN_ASSESSMENTS: renderBasicLocationPopup,
-    AQUATIC_SEDIMENT_POINTS: renderBasicLocationPopup,
-    AQUATIC_SENSOR_STATIONS: renderBasicLocationPopup,
-    AQUATIC_STAFF_GAUGES: renderBasicLocationPopup,
-    AQUATIC_WET_DEPOSITION_POINTS: renderBasicLocationPopup,
-    DISTRIBUTED_BASE_PLOTS: (siteCode, location) => (
-      <Popup {...commonProps}>
-        <Typography variant="h6" gutterBottom>
-          {`${siteCode} Distributed Base Plot ${location}`}
-        </Typography>
-      </Popup>
-    ),
-    DISTRIBUTED_BIRD_GRIDS: (siteCode, location) => (
-      <Popup {...commonProps}>
-        <Typography variant="h6" gutterBottom>
-          {`${siteCode} Distributed Bird Grid ${location}`}
-        </Typography>
-      </Popup>
-    ),
-    DISTRIBUTED_MAMMAL_GRIDS: (siteCode, location) => (
-      <Popup {...commonProps}>
-        <Typography variant="h6" gutterBottom>
-          {`${siteCode} Distributed Mammal Grid ${location}`}
-        </Typography>
-      </Popup>
-    ),
-    DISTRIBUTED_MOSQUITO_POINTS: (siteCode, location) => (
-      <Popup {...commonProps}>
-        <Typography variant="h6" gutterBottom>
-          {`${siteCode} Distributed Mosquito Point ${location}`}
-        </Typography>
-      </Popup>
-    ),
-    DISTRIBUTED_TICK_PLOTS: (siteCode, location) => (
-      <Popup {...commonProps}>
-        <Typography variant="h6" gutterBottom>
-          {`${siteCode} Distributed Tick Plot ${location}`}
-        </Typography>
-      </Popup>
-    ),
+    AQUATIC_RIPARIAN_ASSESSMENTS: renderLocationPopup,
+    AQUATIC_SEDIMENT_POINTS: renderLocationPopup,
+    AQUATIC_SENSOR_STATIONS: renderLocationPopup,
+    AQUATIC_STAFF_GAUGES: renderLocationPopup,
+    AQUATIC_WET_DEPOSITION_POINTS: renderLocationPopup,
+    DISTRIBUTED_BASE_PLOTS: (siteCode, location) => renderLocationPopup(siteCode, location, [
+      renderPlotSizeAndSlope,
+    ]),
+    DISTRIBUTED_BIRD_GRIDS: (siteCode, location) => renderLocationPopup(siteCode, location, [
+      renderPlotSizeAndSlope,
+    ]),
+    DISTRIBUTED_MAMMAL_GRIDS: (siteCode, location) => renderLocationPopup(siteCode, location, [
+      renderPlotSizeAndSlope,
+    ]),
+    DISTRIBUTED_MOSQUITO_POINTS: (siteCode, location) => renderLocationPopup(siteCode, location, [
+      renderPlotSizeAndSlope,
+    ]),
+    DISTRIBUTED_TICK_PLOTS: (siteCode, location) => renderLocationPopup(siteCode, location, [
+      renderPlotSizeAndSlope,
+    ]),
     FLIGHT_BOX_BOUNDARIES: siteCode => (
-      <Popup {...commonProps}>
+      <Popup {...popupProps}>
         <Typography variant="h6" gutterBottom>
           {`${siteCode} AOP Flight Box`}
         </Typography>
       </Popup>
     ),
-    HUTS: siteCode => (
-      <Popup {...commonProps}>
-        <Typography variant="h6" gutterBottom>
-          {`${siteCode} Hut`}
-        </Typography>
-      </Popup>
-    ),
-    MEGAPITS: siteCode => (
-      <Popup {...commonProps}>
-        <Typography variant="h6" gutterBottom>
-          {`${siteCode} Megapit`}
-        </Typography>
-      </Popup>
-    ),
+    HUTS: renderLocationPopup,
+    MEGAPITS: renderLocationPopup,
     POUR_POINTS: siteCode => (
-      <Popup {...commonProps}>
+      <Popup {...popupProps}>
         <Typography variant="h6" gutterBottom>
           {`${siteCode} Aquatic Watershed Pour Point`}
         </Typography>
@@ -419,7 +481,7 @@ const SiteBasedFeature = (props) => {
       const { areaKm2 } = featureData[siteCode].properties;
       const areaAcres = KM2_TO_ACRES * areaKm2;
       return (
-        <Popup {...commonProps}>
+        <Popup {...popupProps}>
           <Typography variant="h6" gutterBottom>
             {`${siteCode} Sampling Boundary`}
           </Typography>
@@ -432,40 +494,20 @@ const SiteBasedFeature = (props) => {
     TERRESTRIAL_CORE_SITES: renderSitePopup,
     TERRESTRIAL_RELOCATABLE_SITES: renderSitePopup,
     TOWER_AIRSHEDS: siteCode => (
-      <Popup {...commonProps}>
+      <Popup {...popupProps}>
         <Typography variant="h6" gutterBottom>
           {`${siteCode} Tower Airshed Boundary`}
         </Typography>
       </Popup>
     ),
-    TOWER_BASE_PLOTS: (siteCode, location) => (
-      <Popup {...commonProps}>
-        <Typography variant="h6" gutterBottom>
-          {`${siteCode} Tower Base Plot ${location}`}
-        </Typography>
-      </Popup>
-    ),
-    TOWER_PHENOLOGY_PLOTS: (siteCode, location) => (
-      <Popup {...commonProps}>
-        <Typography variant="h6" gutterBottom>
-          {`${siteCode} Tower Phenology Plot ${location}`}
-        </Typography>
-      </Popup>
-    ),
-    TOWER_SOIL_PLOTS: (siteCode, location) => (
-      <Popup {...commonProps}>
-        <Typography variant="h6" gutterBottom>
-          {`${siteCode} Soil Plot ${location}`}
-        </Typography>
-      </Popup>
-    ),
-    TOWERS: siteCode => (
-      <Popup {...commonProps}>
-        <Typography variant="h6" gutterBottom>
-          {`${siteCode} Tower`}
-        </Typography>
-      </Popup>
-    ),
+    TOWER_BASE_PLOTS: (siteCode, location) => renderLocationPopup(siteCode, location, [
+      renderPlotSizeAndSlope,
+    ]),
+    TOWER_PHENOLOGY_PLOTS: (siteCode, location) => renderLocationPopup(siteCode, location, [
+      renderPlotSizeAndSlope,
+    ]),
+    TOWER_SOIL_PLOTS: renderLocationPopup,
+    TOWERS: renderLocationPopup,
     WATERSHED_BOUNDARIES: (siteCode) => {
       const { areaKm2 } = featureData[siteCode].properties;
       let area = null;
@@ -478,7 +520,7 @@ const SiteBasedFeature = (props) => {
         );
       }
       return (
-        <Popup {...commonProps}>
+        <Popup {...popupProps}>
           <Typography variant="h6" gutterBottom>
             {`${siteCode} Watershed Boundary`}
           </Typography>

@@ -519,7 +519,6 @@ export const FEATURES = {
     iconShape: LOCATION_ICON_SVG_SHAPES.DIAMOND.KEY,
   },
   AQUATIC_AUTOMATED_INSTRUMENTS: {
-    hideByDefault: true,
     name: 'Automated Instuments',
     type: FEATURE_TYPES.GROUP,
     minZoom: 10,

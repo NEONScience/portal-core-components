@@ -121,8 +121,8 @@ const useStyles = makeStyles(theme => ({
     filter: 'drop-shadow(0px 0px 1.5px #000000bb)',
   },
   popupLocationSiteIcon: {
-    width: theme.spacing(2.5),
-    height: theme.spacing(2.5),
+    width: theme.spacing(3),
+    height: theme.spacing(3),
     marginRight: theme.spacing(1),
     filter: 'drop-shadow(0px 0px 1.5px #000000bb)',
   },
