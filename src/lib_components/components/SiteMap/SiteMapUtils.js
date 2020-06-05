@@ -519,6 +519,7 @@ export const FEATURES = {
     iconShape: LOCATION_ICON_SVG_SHAPES.DIAMOND.KEY,
   },
   AQUATIC_AUTOMATED_INSTRUMENTS: {
+    hideByDefault: true,
     name: 'Automated Instuments',
     type: FEATURE_TYPES.GROUP,
     minZoom: 10,
@@ -553,6 +554,7 @@ export const FEATURES = {
     matchLocationType: 'AOS wet deposition named location type',
     description: '',
     parent: 'AQUATIC_OBSERVATIONAL_SAMPLING',
+    iconScale: 1.2,
     iconSvg: iconWetDepositionPointSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
   },

@@ -108,10 +108,29 @@ const useStyles = makeStyles(theme => ({
       pointerEvents: 'none',
     },
   },
-  popupSiteIcon: {
+  popupSitesListIcon: {
     width: '20px',
     height: '20px',
     margin: '0px 4px 4px 0px',
+    filter: 'drop-shadow(0px 0px 1.5px #000000bb)',
+  },
+  popupFeatureIcon: {
+    width: theme.spacing(4.5),
+    height: theme.spacing(4.5),
+    marginRight: theme.spacing(1.5),
+    filter: 'drop-shadow(0px 0px 1.5px #000000bb)',
+  },
+  popupLocationSiteIcon: {
+    width: theme.spacing(2.5),
+    height: theme.spacing(2.5),
+    marginRight: theme.spacing(1),
+    filter: 'drop-shadow(0px 0px 1.5px #000000bb)',
+  },
+  popupTitleContainer: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    marginBottom: theme.spacing(1.5),
   },
   startFlex: {
     display: 'flex',
@@ -121,6 +140,11 @@ const useStyles = makeStyles(theme => ({
   startFlexInline: {
     display: 'inline-flex',
     justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  endFlex: {
+    display: 'flex',
+    justifyContent: 'flex-end',
     alignItems: 'center',
   },
   keySwatchStates: {
@@ -240,12 +264,7 @@ const SiteMapLeaflet = () => {
     ) { return; }
     mapRef.current.leafletElement.invalidateSize();
     dispatch({ type: 'setViewInitialized' });
-  }, [
-    mapRef,
-    VIEWS,
-    state.view,
-    dispatch,
-  ]);
+  }, [mapRef, state.view, dispatch]);
 
   if (!canRender) { return null; }
 
@@ -337,7 +356,7 @@ const SiteMapLeaflet = () => {
               : FEATURES[featureKey].iconSvg;
             return (
               <div key={siteCode} style={{ display: 'flex' }}>
-                <img src={src} alt={alt} className={classes.popupSiteIcon} />
+                <img src={src} alt={alt} className={classes.popupSitesListIcon} />
                 <div>{`${site.description} (${siteCode})`}</div>
               </div>
             );

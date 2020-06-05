@@ -14,6 +14,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
 import ClickIcon from '@material-ui/icons/TouchApp';
+import ElevationIcon from '@material-ui/icons/Terrain';
 import ExploreDataProductsIcon from '@material-ui/icons/InsertChartOutlined';
 import LocationIcon from '@material-ui/icons/MyLocation';
 import SiteDetailsIcon from '@material-ui/icons/InfoOutlined';
@@ -63,13 +64,14 @@ const SiteBasedFeature = (props) => {
     featureKey,
     positionPopup,
   } = props;
+  const feature = FEATURES[featureKey] || {};
 
   const {
     type: featureType,
     style: featureStyle = {},
     iconSvg,
     minPolygonZoom,
-  } = FEATURES[featureKey];
+  } = feature;
 
   /**
      Extract feature data from SiteMapContext state
@@ -91,30 +93,89 @@ const SiteBasedFeature = (props) => {
   const selectedItems = selectionActive ? state.selection[featureType] : new Set();
 
   /**
+     Render: Popup Title with Feature Icon
+  */
+  const renderPopupTitle = (title, withFeatureName = true) => {
+    const featureName = feature.nameSingular || feature.name || featureKey;
+    const renderedTitle = withFeatureName ? (
+      <span>
+        {feature.nameSingular}
+        <br />
+        {title}
+      </span>
+    ) : title;
+    return (
+      <div className={classes.popupTitleContainer}>
+        <img
+          src={feature.iconSvg}
+          alt={featureName}
+          title={featureName}
+          className={classes.popupFeatureIcon}
+        />
+        <Typography variant="h6" style={{ lineHeight: '1.4rem' }}>
+          {renderedTitle}
+        </Typography>
+      </div>
+    );
+  };
+
+  /**
      Render: Latitude / Longitude with Copy to Clipboard
   */
-  const renderLatLon = (latitude, longitude) => (
-    <div className={classes.startFlex}>
-      <CopyToClipboard text={`${latitude.toFixed(5)} ${longitude.toFixed(5)}`}>
-        <Tooltip title="Latitude / Longitude (click to copy)">
-          <IconButton
-            size="small"
-            style={{ marginRight: Theme.spacing(0.5) }}
-            aria-label="Latitude / Longitude (click to copy)"
-          >
-            <LocationIcon />
-          </IconButton>
-        </Tooltip>
-      </CopyToClipboard>
-      <Typography
-        variant="caption"
-        aria-label="Latitude / Longitude"
-        style={{ fontFamily: 'monospace', textAlign: 'right' }}
-      >
-        {latitude.toFixed(5)}
-        <br />
-        {longitude.toFixed(5)}
-      </Typography>
+  const renderLatLon = (latitude, longitude, flexEnd = false) => (
+    Number.isFinite(latitude) && Number.isFinite(longitude) ? (
+      <div className={classes[flexEnd ? 'endFlex' : 'startFlex']}>
+        <CopyToClipboard text={`${latitude.toFixed(5)} ${longitude.toFixed(5)}`}>
+          <Tooltip title="Latitude / Longitude (click to copy)">
+            <IconButton
+              size="small"
+              style={{ marginRight: Theme.spacing(0.5) }}
+              aria-label="Latitude / Longitude (click to copy)"
+            >
+              <LocationIcon />
+            </IconButton>
+          </Tooltip>
+        </CopyToClipboard>
+        <Typography
+          variant="caption"
+          aria-label="Latitude / Longitude"
+          style={{ fontFamily: 'monospace', textAlign: 'right' }}
+        >
+          {latitude.toFixed(5)}
+          <br />
+          {longitude.toFixed(5)}
+        </Typography>
+      </div>
+    ) : (
+      <div>
+        <Typography variant="subtitle2">Lat./Lon.</Typography>
+        <Typography
+          variant="caption"
+          aria-label="Latitude / Longitude"
+          style={{ fontFamily: 'monospace', textAlign: 'right' }}
+        >
+          --
+        </Typography>
+      </div>
+    )
+  );
+
+  /**
+     Render: Elevation
+  */
+  const renderElevation = elevation => (
+    <div>
+      <Typography variant="subtitle2">Elevation</Typography>
+      <div className={classes.startFlex}>
+        <ElevationIcon fontSize="small" style={{ marginRight: Theme.spacing(1) }} />
+        <Typography
+          variant="caption"
+          aria-label="Elevation"
+          style={{ fontFamily: 'monospace' }}
+        >
+          {Number.isFinite(elevation) ? `${elevation.toFixed(2)}m` : '--'}
+        </Typography>
+      </div>
     </div>
   );
 
@@ -122,36 +183,11 @@ const SiteBasedFeature = (props) => {
      Render: Site Popup
   */
   const renderSitePopup = (siteCode) => {
-    const site = state.featureData[featureType][featureKey][siteCode];
-    if (!site) { return null; }
+    const site = featureData[siteCode] || {};
     const { [site.stateCode]: usState = {} } = state
       .featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.STATES.KEY];
     const { [site.domainCode]: domain = {} } = state
       .featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.DOMAINS.KEY];
-    let typeTitle = 'Core';
-    let typeSubtitle = 'fixed location';
-    if (site.type === 'RELOCATABLE') {
-      typeTitle = 'Relocatable';
-      typeSubtitle = 'location may change';
-    }
-    let terrainTitle = 'Terrestrial';
-    let terrainSubtitle = 'land-based';
-    if (site.terrain === 'AQUATIC') {
-      terrainTitle = 'Aquatic';
-      terrainSubtitle = 'water-based';
-    }
-    const terrainTypeTitle = `${terrainTitle} ${typeTitle}`;
-    const terrainTypeSubtitle = `${terrainSubtitle}; ${typeSubtitle}`;
-    const terrainIcon = (
-      <img
-        src={FEATURES[featureKey].iconSvg}
-        alt={site.terrain}
-        title={`${terrainTitle} ${terrainSubtitle}`}
-        width={Theme.spacing(5)}
-        height={Theme.spacing(5)}
-        style={{ marginRight: Theme.spacing(1) }}
-      />
-    );
     const stateFieldTitle = (site.stateCode === 'PR' ? 'Territory' : 'State');
     const renderActions = () => {
       if (selectionActive) {
@@ -207,17 +243,12 @@ const SiteBasedFeature = (props) => {
     };
     return (
       <Popup className={classes.popup} autoPan={false}>
-        <div className={classes.startFlex} style={{ marginBottom: Theme.spacing(1.5) }}>
-          {terrainIcon}
-          <Typography variant="h6" style={{ lineHeight: '1.4rem' }}>
-            {`${site.description} (${site.siteCode})`}
-          </Typography>
-        </div>
+        {renderPopupTitle(`${site.description} (${site.siteCode})`, false)}
         <Grid container spacing={1} style={{ marginBottom: Theme.spacing(1) }}>
           {/* Terrain and Type */}
           <Grid item xs={8}>
-            <Typography variant="subtitle2">{terrainTypeTitle}</Typography>
-            <Typography variant="caption"><i>{terrainTypeSubtitle}</i></Typography>
+            <Typography variant="subtitle2">{feature.nameSingular}</Typography>
+            <Typography variant="caption"><i>{feature.description}</i></Typography>
           </Grid>
           {/* State/Territory */}
           <Grid item xs={4} style={{ textAlign: 'right' }}>
@@ -246,57 +277,61 @@ const SiteBasedFeature = (props) => {
      Convention is alphabetical listing of keys since order here doesn't matter
   */
   const commonProps = { className: classes.popup, autoPan: false };
+  const renderCoordsAndElevation = locationData => (
+    <React.Fragment>
+      <Grid item xs={6}>
+        {renderElevation(locationData.elevation)}
+      </Grid>
+      <Grid item xs={6}>
+        {renderLatLon(locationData.latitude, locationData.longitude, true)}
+      </Grid>
+    </React.Fragment>
+  );
+  const renderLocationSiteAndDomain = (siteCode) => {
+    const site = state.sites[siteCode];
+    if (!site) { return null; }
+    const siteFeatureKey = `${site.terrain}_${site.type}_SITES`;
+    if (!FEATURES[siteFeatureKey]) { return null; }
+    const { iconSvg: siteIcon, name, nameSingular } = FEATURES[siteFeatureKey];
+    const siteType = name || nameSingular || siteFeatureKey;
+    return (
+      <React.Fragment>
+        <Grid item xs={8}>
+          <Typography variant="subtitle2">NEON Site</Typography>
+          <div className={classes.startFlex} style={{ marginTop: Theme.spacing(0.5) }}>
+            <img src={siteIcon} alt={siteType} className={classes.popupLocationSiteIcon} />
+            <Typography variant="body2">{`${site.description} (${site.siteCode})`}</Typography>
+          </div>
+        </Grid>
+        <Grid item xs={4} style={{ textAlign: 'right' }}>
+          <Typography variant="subtitle2">Domain</Typography>
+          <Typography variant="body2">{site.domainCode}</Typography>
+        </Grid>
+      </React.Fragment>
+    );
+  };
+  // A basic location popup and has only coordinates, elevation, and parent site
+  const renderBasicLocationPopup = (siteCode, location) => {
+    const loc = (featureData[siteCode] || {})[location] || {};
+    return (
+      <Popup {...commonProps}>
+        {renderPopupTitle(location)}
+        <Grid container spacing={1}>
+          {renderCoordsAndElevation(loc)}
+          {renderLocationSiteAndDomain(siteCode)}
+        </Grid>
+      </Popup>
+    );
+  };
   const renderPopupFunctions = {
-    AQUATIC_BENCHMARKS: (siteCode, location) => (
-      <Popup {...commonProps}>
-        <Typography variant="h6" gutterBottom>
-          {`${siteCode} Benchmark ${location}`}
-        </Typography>
-      </Popup>
-    ),
-    AQUATIC_BUOYS: (siteCode, location) => (
-      <Popup {...commonProps}>
-        <Typography variant="h6" gutterBottom>
-          {`${siteCode} Buoy ${location}`}
-        </Typography>
-      </Popup>
-    ),
+    AQUATIC_BENCHMARKS: renderBasicLocationPopup,
+    AQUATIC_BUOYS: renderBasicLocationPopup,
     AQUATIC_CORE_SITES: renderSitePopup,
-    AQUATIC_GROUNDWATER_WELLS: (siteCode, location) => (
-      <Popup {...commonProps}>
-        <Typography variant="h6" gutterBottom>
-          {`${siteCode} Groundwater Well ${location}`}
-        </Typography>
-      </Popup>
-    ),
-    AQUATIC_DISCHARGE_POINTS: (siteCode, location) => (
-      <Popup {...commonProps}>
-        <Typography variant="h6" gutterBottom>
-          {`${siteCode} Discharge Point ${location}`}
-        </Typography>
-      </Popup>
-    ),
-    AQUATIC_FISH_POINTS: (siteCode, location) => (
-      <Popup {...commonProps}>
-        <Typography variant="h6" gutterBottom>
-          {`${siteCode} Fish Point ${location}`}
-        </Typography>
-      </Popup>
-    ),
-    AQUATIC_METEOROLOGICAL_STATIONS: (siteCode, location) => (
-      <Popup {...commonProps}>
-        <Typography variant="h6" gutterBottom>
-          {`${siteCode} Meteorological Station ${location}`}
-        </Typography>
-      </Popup>
-    ),
-    AQUATIC_PLANT_TRANSECTS: (siteCode, location) => (
-      <Popup {...commonProps}>
-        <Typography variant="h6" gutterBottom>
-          {`${siteCode} Plant Transect ${location}`}
-        </Typography>
-      </Popup>
-    ),
+    AQUATIC_GROUNDWATER_WELLS: renderBasicLocationPopup,
+    AQUATIC_DISCHARGE_POINTS: renderBasicLocationPopup,
+    AQUATIC_FISH_POINTS: renderBasicLocationPopup,
+    AQUATIC_METEOROLOGICAL_STATIONS: renderBasicLocationPopup,
+    AQUATIC_PLANT_TRANSECTS: renderBasicLocationPopup,
     AQUATIC_REACHES: (siteCode) => {
       const { areaKm2 } = featureData[siteCode].properties;
       const areaAcres = KM2_TO_ACRES * areaKm2;
@@ -312,41 +347,11 @@ const SiteBasedFeature = (props) => {
       );
     },
     AQUATIC_RELOCATABLE_SITES: renderSitePopup,
-    AQUATIC_RIPARIAN_ASSESSMENTS: (siteCode, location) => (
-      <Popup {...commonProps}>
-        <Typography variant="h6" gutterBottom>
-          {`${siteCode} Riparian Assessment ${location}`}
-        </Typography>
-      </Popup>
-    ),
-    AQUATIC_SEDIMENT_POINTS: (siteCode, location) => (
-      <Popup {...commonProps}>
-        <Typography variant="h6" gutterBottom>
-          {`${siteCode} Sediment Point ${location}`}
-        </Typography>
-      </Popup>
-    ),
-    AQUATIC_SENSOR_STATIONS: (siteCode, location) => (
-      <Popup {...commonProps}>
-        <Typography variant="h6" gutterBottom>
-          {`${siteCode} Sensor Station ${location}`}
-        </Typography>
-      </Popup>
-    ),
-    AQUATIC_STAFF_GAUGES: (siteCode, location) => (
-      <Popup {...commonProps}>
-        <Typography variant="h6" gutterBottom>
-          {`${siteCode} Staff Gauge ${location}`}
-        </Typography>
-      </Popup>
-    ),
-    AQUATIC_WET_DEPOSITION_POINTS: (siteCode, location) => (
-      <Popup {...commonProps}>
-        <Typography variant="h6" gutterBottom>
-          {`${siteCode} Wet Deposition Point ${location}`}
-        </Typography>
-      </Popup>
-    ),
+    AQUATIC_RIPARIAN_ASSESSMENTS: renderBasicLocationPopup,
+    AQUATIC_SEDIMENT_POINTS: renderBasicLocationPopup,
+    AQUATIC_SENSOR_STATIONS: renderBasicLocationPopup,
+    AQUATIC_STAFF_GAUGES: renderBasicLocationPopup,
+    AQUATIC_WET_DEPOSITION_POINTS: renderBasicLocationPopup,
     DISTRIBUTED_BASE_PLOTS: (siteCode, location) => (
       <Popup {...commonProps}>
         <Typography variant="h6" gutterBottom>
@@ -549,9 +554,11 @@ const SiteBasedFeature = (props) => {
       if (state.map.zoomedIcons[featureKey] !== null) {
         const baseIcon = state.map.zoomedIcons[featureKey];
         const selection = isSelected ? SELECTION_STATUS.SELECTED : SELECTION_STATUS.UNSELECTED;
-        const initialHighlight = (location || siteCode) === focusLocation
-          ? HIGHLIGHT_STATUS.HIGHLIGHT
-          : HIGHLIGHT_STATUS.NONE;
+        const initialHighlight = (
+          (location || siteCode) === focusLocation && featureKey !== FEATURES.POUR_POINTS.KEY
+            ? HIGHLIGHT_STATUS.HIGHLIGHT
+            : HIGHLIGHT_STATUS.NONE
+        );
         icon = baseIcon[selection][initialHighlight];
         const hasPopup = typeof renderPopupFunctions[featureKey] === 'function';
         interaction = selectionActive ? {

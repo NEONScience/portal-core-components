@@ -123,16 +123,10 @@ const SiteMapTable = () => {
     ) { return; }
     dispatch({ type: 'setViewInitialized' });
     dispatch({ type: 'setTableMaxBodyHeight', height: calculateMaxBodyHeight(tableRef) });
-  }, [
-    tableRef,
-    VIEWS,
-    state.view,
-    dispatch,
-    calculateMaxBodyHeight,
-  ]);
+  }, [tableRef, state.view, dispatch]);
 
   /**
-    Effect - Recalculate the max body height the aspect ratio changed (e.g. page resize)
+    Effect - Recalculate the max body height from an aspect ratio change (e.g. page resize)
   */
   useEffect(() => {
     if (
@@ -143,10 +137,8 @@ const SiteMapTable = () => {
     }
   }, [
     tableRef,
-    VIEWS,
     state.view,
     dispatch,
-    calculateMaxBodyHeight,
     maxBodyHeightUpdateFromAspectRatio,
   ]);
 

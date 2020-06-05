@@ -354,7 +354,7 @@ const reducer = (state, action) => {
       ) { return state; }
       applyFeatureVisibilityToChildren(action.feature, action.visible);
       applyFeatureVisibilityToParents(action.feature);
-      return newState;
+      return calculateFeatureDataFetches(newState);
 
     case 'setFilterFeatureCollapsed':
       if (!Object.keys(FEATURES).includes(action.feature)) { return state; }
