@@ -124,6 +124,27 @@ export const FETCH_STATUS = {
   SUCCESS: 'SUCCESS',
 };
 
+export const PLOT_SAMPLING_MODULES = {
+  bbc: 'Below Ground Biomass Coring',
+  bet: 'Beetles',
+  bgc: 'Biogeochemistry',
+  brd: 'Birds',
+  cdw: 'Coarse Downed Wood',
+  cfc: 'Canopy Foliage Chemistry',
+  dhp: 'Digital Hemispherical Photos for Leaf Area Index',
+  div: 'Plant Diversity',
+  hbp: 'Herbaceous Productivity',
+  ltr: 'Litter and Fine Woody Debris',
+  mam: 'Mammal Abundance and Diversity',
+  mfb: 'MFB', // We don't know what this is...
+  mos: 'Mosquitos',
+  mpt: 'Mosquito Pathogens',
+  phe: 'Plant Phenology',
+  sme: 'Soil Microbes',
+  tck: 'Ticks',
+  vst: 'Vegetation Structure',
+};
+
 /**
    Icon SVGs
    An importable data structure containing all imported SVGs for map and legend icons
@@ -1111,10 +1132,12 @@ export const parseLocationData = (data = {}) => {
     locationElevation: elevation = null,
     locationPolygon: polygon = null,
     locationProperties = {},
+    locationChildren: children = [],
   } = data;
   const parsed = {
     type,
     description,
+    children,
     ...parseLocationProperties(locationProperties, DEFAULT_LOCATION_PROPERTIES_WHITELIST),
   };
   if (elevation !== null) { parsed.elevation = elevation; }

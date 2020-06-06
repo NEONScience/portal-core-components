@@ -84,6 +84,11 @@ const useStyles = makeStyles(theme => ({
     color: '#fff !important',
     backgroundColor: `${theme.palette.primary.main} !important`,
   },
+  number: {
+    fontFamily: 'monospace',
+    fontSize: '1.05em',
+    whiteSpace: 'nowrap',
+  },
 }));
 
 const calculateMaxBodyHeight = (tableRef) => {
@@ -197,7 +202,39 @@ const SiteMapTable = () => {
     return <img alt={getFeatureName(featureKey)} src={iconSvg} className={classes.featureIcon} />;
   };
 
-  const sitesInMap = calculateLocationsInMap(state.sites, state.map.bounds);
+  const renderNumberString = (str = '--', ariaLabel = null) => (
+    <Typography variant="caption" aria-label={ariaLabel} className={classes.number}>
+      {str}
+    </Typography>
+  );
+
+  /**
+     Calculate rows
+  */
+  const visibleFeatureKeys = Object.keys(state.featureData[focus])
+    .filter(featureKey => state.filters.features.visible[featureKey]);
+  const locations = {};
+  visibleFeatureKeys.forEach((featureKey) => {
+    Object.keys(state.featureData[focus][featureKey]).forEach((siteCode) => {
+      if (focus === FEATURE_TYPES.SITES) {
+        locations[siteCode] = state.featureData[focus][featureKey][siteCode];
+      }
+      if (focus === FEATURE_TYPES.LOCATIONS) {
+        Object.keys(state.featureData[focus][featureKey][siteCode]).forEach((locationCode) => {
+          locations[locationCode] = state.featureData[focus][featureKey][siteCode][locationCode];
+        });
+      }
+    });
+  });
+  const rows = calculateLocationsInMap(locations, state.map.bounds).map(key => locations[key]);
+
+  /**
+     Unique sites, domains, and states off of rows
+  */
+  const sitesInMap = Array.from(rows.reduce((acc, cur) => {
+    if (cur.siteCode) { acc.add(cur.siteCode); }
+    return acc;
+  }, new Set()));
   const domainsInMap = new Set();
   const statesInMap = new Set();
   sitesInMap
@@ -206,32 +243,6 @@ const SiteMapTable = () => {
       domainsInMap.add(state.sites[siteCode].domainCode);
       statesInMap.add(state.sites[siteCode].stateCode);
     });
-
-  const renderSite = (siteCode, link = false) => {
-    const site = state.sites[siteCode];
-    if (!site) { return null; }
-    const featureKey = `${site.terrain.toUpperCase()}_${site.type.toUpperCase()}_SITES`;
-    const internal = (
-      <React.Fragment>
-        {renderFeatureIcon(featureKey)}
-        <span>{`${site.description} (${site.siteCode})`}</span>
-      </React.Fragment>
-    );
-    return link ? (
-      <Link
-        component="button"
-        className={`${classes.linkButton} ${classes.startFlex}`}
-        onClick={() => jumpTo(site.siteCode)}
-      >
-        {renderFeatureIcon(featureKey)}
-        <span>{`${site.description} (${site.siteCode})`}</span>
-      </Link>
-    ) : (
-      <div className={classes.startFlex}>
-        {internal}
-      </div>
-    );
-  };
 
   // Columns that are visible for more than one feature type
   const commonColumns = {
@@ -330,44 +341,21 @@ const SiteMapTable = () => {
         />
       ),
     },
-    latlng: {
-      field: 'latlng',
-      title: 'Lat./Lng.',
-      sorting: false,
+    latitude: {
+      field: 'latitude',
+      title: 'Latitude',
+      sorting: true,
       filtering: false,
-      render: row => (
-        <Typography
-          variant="caption"
-          aria-label="Latitude / Longitude"
-          style={{ fontFamily: 'monospace', fontSize: '1.05em' }}
-        >
-          {row.latitude.toFixed(5)}
-          <br />
-          {row.longitude.toFixed(5)}
-        </Typography>
-      ),
+      render: row => renderNumberString(row.latitude.toFixed(5), 'Latitude'),
+    },
+    longitude: {
+      field: 'longitude',
+      title: 'Longitude',
+      sorting: true,
+      filtering: false,
+      render: row => renderNumberString(row.longitude.toFixed(5), 'Longitude'),
     },
   };
-
-  /**
-     Calculate rows
-  */
-  const visibleFeatureKeys = Object.keys(state.featureData[focus])
-    .filter(featureKey => state.filters.features.visible[featureKey]);
-  const locations = {};
-  visibleFeatureKeys.forEach((featureKey) => {
-    Object.keys(state.featureData[focus][featureKey]).forEach((siteCode) => {
-      if (focus === FEATURE_TYPES.SITES) {
-        locations[siteCode] = state.featureData[focus][featureKey][siteCode];
-      }
-      if (focus === FEATURE_TYPES.LOCATIONS) {
-        Object.keys(state.featureData[focus][featureKey][siteCode]).forEach((locationCode) => {
-          locations[locationCode] = state.featureData[focus][featureKey][siteCode][locationCode];
-        });
-      }
-    });
-  });
-  const rows = calculateLocationsInMap(locations, state.map.bounds).map(key => locations[key]);
 
   /**
      Define columns from current focus feature type
@@ -376,8 +364,9 @@ const SiteMapTable = () => {
   if (focus === FEATURE_TYPES.SITES) {
     columns = [
       commonColumns.site,
-      commonColumns.latlng,
-      {
+      commonColumns.latitude,
+      commonColumns.longitude,
+      { // Site Type
         field: 'type',
         title: 'Type',
         sorting: true,
@@ -389,7 +378,7 @@ const SiteMapTable = () => {
         ),
         render: row => ucWord(row.type),
       },
-      {
+      { // Site Terrain
         field: 'terrain',
         title: 'Terrain',
         sorting: true,
@@ -407,7 +396,7 @@ const SiteMapTable = () => {
   }
   if (focus === FEATURE_TYPES.LOCATIONS) {
     columns = [
-      {
+      { // Location Name
         field: 'name',
         title: 'Name',
         sorting: true,
@@ -422,7 +411,7 @@ const SiteMapTable = () => {
           </Link>
         ),
       },
-      {
+      { // Location Type
         field: 'featureKey',
         title: 'Type',
         sorting: true,
@@ -442,31 +431,64 @@ const SiteMapTable = () => {
           const { featureKey } = row;
           const featureName = getFeatureName(featureKey);
           return (
-            <Link
-              component="button"
-              className={`${classes.linkButton} ${classes.startFlex}`}
-            >
+            <div className={classes.startFlex}>
               {renderFeatureIcon(featureKey)}
               <span>{featureName}</span>
-            </Link>
+            </div>
           );
         },
       },
-      commonColumns.latlng,
-      {
+      commonColumns.latitude,
+      commonColumns.longitude,
+      { // Elevation
         field: 'elevation',
         title: 'Elevation',
         sorting: true,
         defaultSort: 'desc',
         filtering: false,
-        render: row => (
-          <Typography
-            variant="caption"
-            aria-label="Elevation"
-            style={{ fontFamily: 'monospace', fontSize: '1.05em' }}
-          >
-            {Number.isFinite(row.elevation) ? `${row.elevation.toFixed(2)}m` : '--'}
-          </Typography>
+        render: row => renderNumberString(
+          Number.isFinite(row.elevation) ? `${row.elevation.toFixed(2)}m` : '--',
+          'Elevation',
+        ),
+      },
+      { // Plot Size
+        field: 'plotSize',
+        title: 'Plot Size',
+        sorting: true,
+        deafultSort: 'asc',
+        filtering: false,
+        render: row => (row.plotDimensions ? (
+          <React.Fragment>
+            {renderNumberString(`${row.plotDimensions}`, 'Plot Size (Dimensions)')}
+            {Number.isFinite(row.plotSize) ? (
+              <React.Fragment>
+                <br />
+                {renderNumberString(`(${row.plotSize.toFixed(0)}m²)`, 'Plot Size (Area)')}
+              </React.Fragment>
+            ) : null}
+          </React.Fragment>
+        ) : renderNumberString()),
+      },
+      { // Plot Slope Aspect
+        field: 'slopeAspect',
+        title: 'Slope Aspect',
+        sorting: true,
+        deafultSort: 'asc',
+        filtering: false,
+        render: row => renderNumberString(
+          Number.isFinite(row.slopeAspect) ? `${row.slopeAspect.toFixed(2)}°` : '--',
+          'Slope Aspect',
+        ),
+      },
+      { // Plot Slope Gradient
+        field: 'slopeGradient',
+        title: 'Slope Gradient',
+        sorting: true,
+        deafultSort: 'asc',
+        filtering: false,
+        render: row => renderNumberString(
+          Number.isFinite(row.slopeGradient) ? `${row.slopeGradient.toFixed(2)}%` : '--',
+          'Slope Gradient',
         ),
       },
       commonColumns.site,
@@ -546,7 +568,7 @@ const SiteMapTable = () => {
         options={{
           padding: 'dense',
           filtering: true,
-          columnsButton: false,
+          columnsButton: true,
           headerStyle: {
             position: 'sticky',
             top: 0,

@@ -226,6 +226,15 @@ const reducer = (state, action) => {
           ? FEATURES.TOWER_BASE_PLOTS.KEY
           : FEATURES.DISTRIBUTED_BASE_PLOTS.KEY;
         dataFeatureType = FEATURES[dataFeatureKey].type;
+        // We also want to pull sampling module data from the hierarchy just for these features
+        const hierarchy = newState.featureData[FEATURE_TYPES.SITE_LOCATION_HIERARCHIES][siteCode];
+        const basePlot = location.replace('all', '').replace('.', '\\.');
+        const basePlotRegex = new RegExp(`^${basePlot}([a-z]{3})$`);
+        parsedData.samplingModules = Object.keys(hierarchy).reduce((acc, cur) => {
+          const match = cur.match(basePlotRegex);
+          if (match) { acc.push(match[1]); }
+          return acc;
+        }, []).filter(k => k !== 'all' && k !== 'mfb');
       }
       if (!newState.featureData[dataFeatureType][dataFeatureKey]) {
         newState.featureData[dataFeatureType][dataFeatureKey] = {};

@@ -35,8 +35,9 @@ import {
   FEATURES,
   FEATURE_TYPES,
   KM2_TO_ACRES,
-  SELECTION_STATUS,
   HIGHLIGHT_STATUS,
+  SELECTION_STATUS,
+  PLOT_SAMPLING_MODULES,
   SITE_DETAILS_URL_BASE,
   // SELECTABLE_FEATURE_TYPES,
   EXPLORE_DATA_PRODUCTS_URL_BASE,
@@ -240,6 +241,24 @@ const SiteBasedFeature = (props) => {
   );
 
   /**
+     Render: Plot Sampling Modules
+  */
+  const renderPlotSamplingModules = (loc = {}) => (
+    <Grid key="plotSamplingModules" item xs={12}>
+      <Typography variant="subtitle2">
+        {`Sampling Modules${loc.samplingModules.length ? ` (${loc.samplingModules.length})` : ''}`}
+      </Typography>
+      <Typography variant="caption">
+        {!loc.samplingModules.length ? (
+          <i>none</i>
+        ) : (
+          loc.samplingModules.map(m => PLOT_SAMPLING_MODULES[m]).join(', ')
+        )}
+      </Typography>
+    </Grid>
+  );
+
+  /**
      Render: Popup Row; Coordinates and Elevation
   */
   const renderCoordsAndElevation = (loc) => {
@@ -270,6 +289,13 @@ const SiteBasedFeature = (props) => {
         {renderPlotSlope(loc, true)}
       </Grid>
     </React.Fragment>
+  );
+
+  const renderTowerDetails = loc => (
+    <Grid key="towerDetails" item xs={12}>
+      <Typography variant="subtitle2">Levels</Typography>
+      <Typography variant="caption">{(loc.children || []).length}</Typography>
+    </Grid>
   );
 
   /**
@@ -448,6 +474,7 @@ const SiteBasedFeature = (props) => {
     AQUATIC_WET_DEPOSITION_POINTS: renderLocationPopup,
     DISTRIBUTED_BASE_PLOTS: (siteCode, location) => renderLocationPopup(siteCode, location, [
       renderPlotSizeAndSlope,
+      renderPlotSamplingModules,
     ]),
     DISTRIBUTED_BIRD_GRIDS: (siteCode, location) => renderLocationPopup(siteCode, location, [
       renderPlotSizeAndSlope,
@@ -502,12 +529,15 @@ const SiteBasedFeature = (props) => {
     ),
     TOWER_BASE_PLOTS: (siteCode, location) => renderLocationPopup(siteCode, location, [
       renderPlotSizeAndSlope,
+      renderPlotSamplingModules,
     ]),
     TOWER_PHENOLOGY_PLOTS: (siteCode, location) => renderLocationPopup(siteCode, location, [
       renderPlotSizeAndSlope,
     ]),
     TOWER_SOIL_PLOTS: renderLocationPopup,
-    TOWERS: renderLocationPopup,
+    TOWERS: (siteCode, location) => renderLocationPopup(siteCode, location, [
+      renderTowerDetails,
+    ]),
     WATERSHED_BOUNDARIES: (siteCode) => {
       const { areaKm2 } = featureData[siteCode].properties;
       let area = null;
@@ -607,6 +637,7 @@ const SiteBasedFeature = (props) => {
           onMouseOver: (e) => {
             const highlight = HIGHLIGHT_STATUS[isSelected ? 'HIGHLIGHT' : 'SELECT'];
             e.target.setIcon(baseIcon[selection][highlight]);
+            e.target._bringToFront();
             if (hasPopup) {
               e.target.openPopup();
               positionPopup(e.target, e.latlng, selectionActive);
@@ -625,6 +656,7 @@ const SiteBasedFeature = (props) => {
         } : {
           onMouseOver: (e) => {
             e.target.setIcon(baseIcon[selection][HIGHLIGHT_STATUS.HIGHLIGHT]);
+            e.target._bringToFront();
           },
           onMouseOut: (e) => {
             e.target.setIcon(baseIcon[selection][initialHighlight]);
@@ -640,14 +672,7 @@ const SiteBasedFeature = (props) => {
         };
       }
       marker = (
-        <Marker
-          key={`${key}-marker`}
-          position={position}
-          title={key}
-          icon={icon}
-          riseOnHover
-          {...interaction}
-        >
+        <Marker key={`${key}-marker`} position={position} title={key} icon={icon} {...interaction}>
           {renderedPopup}
         </Marker>
       );
