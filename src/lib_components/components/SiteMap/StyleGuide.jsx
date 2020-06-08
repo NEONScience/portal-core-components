@@ -21,18 +21,26 @@ import ExampleBlock from '../../../components/ExampleBlock';
 import Theme from '../Theme/Theme';
 import SiteMap from './SiteMap';
 
+import {
+  MAP_ZOOM_RANGE,
+  TILE_LAYERS,
+  VIEWS,
+} from './SiteMapUtils';
+
 const useStyles = makeStyles(theme => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
+  propTableRowGrey: {
+    backgroundColor: theme.palette.grey[50],
+  },
 }));
 
-/*
 const propRows = [
   {
     prop: 'aspectRatio',
     type: 'number',
-    default: '0.75',
+    default: 'null',
     examples: (
       <div>
         <tt>0.5625</tt> (16:9)
@@ -41,18 +49,19 @@ const propRows = [
       </div>
     ),
     description: (
-      <div>
+      <React.Fragment>
         <p>
           Desired map height divided by desired map width. Setting discrete dimensions is not
           supported as Site Map instances will always try to expand to the full width of their
           containing element.
         </p>
         <p>
-          Use this prop to control the height indirectly by expressing the
-          ratio of height to width such that the shape of the Site Map will remain consistent
-          at any viewport size.
+          Use this prop to control the height indirectly by expressing the ratio of height to width
+          such that the shape of the Site Map will remain consistent at any viewport size. Omitting
+          this prop will set aspect ratio dynamically based on viewport size (e.g. wider for larger
+          viewports, more square for smaller viewports, taller for very small / phone viewports).
         </p>
-      </div>
+      </React.Fragment>
     ),
   },
   {
@@ -67,41 +76,51 @@ const propRows = [
       </div>
     ),
     description: (
-      <div>
+      <p>
         Array expressing latitude and longitude to set as the initial center of the map.
         Default value is a point chosen to approximately center the entire set of existing
         filed sites in a map at the appropriate zoom level.
-      </div>
+      </p>
     ),
   },
   {
-    prop: 'mode',
+    prop: 'filterPosition',
     type: (
       <div>
         string, one of:
         <br />
         <tt>
-          {Object.keys(SITE_MAP_MODES).map(k => <div key={k}>{`"${k}"`}</div>)}
+          <div>&quot;top&quot;</div>
+          <div>&quot;bottom&quot;</div>
         </tt>
       </div>
     ),
-    default: 'EXPLORE',
+    default: '"bottom"',
     description: (
-      <div>
-        <div>
-          Interaction mode for the map.
-        </div>
-        <div>
-          <tt>EXPLORE</tt> - Click site icons to open and persist an exclusive popup containing site
-          info and navigation buttons to access the Field Site page of the Explore Data Products
-          page with an appropriate filter setting.
-        </div>
-        <div>
-          <tt>SELECT</tt> - Mouse over site icons to open an exclusive popup containing only site
-          info (no navigation buttons or other interactive elements). Click sites to toggle their
-          selected state.
-        </div>
-      </div>
+      <p>
+        Whether the fitlers (map/table toggle button group and features button) should appear above
+        or below the main content area of the component.
+      </p>
+    ),
+  },
+  {
+    prop: 'location',
+    type: 'string',
+    default: 'null',
+    description: (
+      <React.Fragment>
+        <p>
+          A location code, as it would appear in the locations API, to initialize the focus of the
+          map. This can be any site code (e.g. &quot;ABBY&quot;, &quot;CPER&quot;), domain code
+          (e.g. &quot;D03&quot;, &quot;D17&quot;), state code (e.g. &quot;CO&quot;, &quot;NY&quot;),
+          or even a finer-grain location code for any site feature (e.g.
+          &quot;ARIK.AOS.benchmark.2&quot;, &quot;BARR_035.birdGrid.brd&quot;).
+        </p>
+        <p>
+          If set this will override any zoom and/or center props as the focus location will
+          determine the zoom and center for the map.
+        </p>
+      </React.Fragment>
     ),
   },
   {
@@ -115,35 +134,60 @@ const propRows = [
         </tt>
       </div>
     ),
-    default: '"NatGeo_World_Map"',
+    default: '"NATGEO_WORLD_MAP"',
     description: (
-      <div>
+      <p>
         Initial tile layer for the map (i.e. the visual appearance of the map). Valid values
         are defined in the Site Map <tt>TILE_LAYERS</tt> data structure and include a name, url,
         and attribution strings. This is only the initial layer; a user may change the tile layer
         through stock Leaflet UI once loaded.
+      </p>
+    ),
+  },
+  {
+    prop: 'view',
+    type: (
+      <div>
+        string, one of:
+        <br />
+        <tt>
+          {Object.keys(VIEWS).map(k => <div key={k}>{`"${k.toLowerCase()}"`}</div>)}
+        </tt>
       </div>
+    ),
+    default: '"map"',
+    description: (
+      <p>
+        Initial view mode for the SiteMap component.
+      </p>
     ),
   },
   {
     prop: 'zoom',
     type: 'integer',
-    default: '3',
+    default: 'null',
     examples: (
       <div>
         <tt>2</tt>, <tt>9</tt>, <tt>17</tt>
       </div>
     ),
     description: (
-      <div>
-        Initial zoom level for the map. Min and max zoom levels are hard-coded
-        to <tt>2</tt> and <tt>17</tt> respectively, so the zoom prop must be equal
-        to or between these values. A greater value is a closer zoom.
-      </div>
+      <React.Fragment>
+        <p>
+          Initial zoom level for the map. Min and max zoom levels are hard-coded
+          to <tt>{MAP_ZOOM_RANGE[0]}</tt> and <tt>{MAP_ZOOM_RANGE[1]}</tt> respectively, so the zoom
+          prop must be equal to or between these values. A greater value is a closer zoom.
+        </p>
+        <p>
+          When undefined, and if the location prop is not set, the initial zoom is dynamically
+          derived to ensure all sites are in view given the dynamically derived aspect ratio
+          and dimensions of the map component (i.e a larger viewport may have a closer initial
+          zoom as there is more pixel space to fit all sites).
+        </p>
+      </React.Fragment>
     ),
   },
 ];
-*/
 
 export default function StyleGuide() {
   const classes = useStyles(Theme);
@@ -174,7 +218,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
       </DocBlock>
 
       <ExampleBlock>
-        <SiteMap location="CPER" />
+        <SiteMap />
       </ExampleBlock>
       <CodeBlock>
         {`
@@ -183,37 +227,13 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
       </CodeBlock>
 
       <Divider className={classes.divider} />
-      <Typography variant="h6" component="h5" gutterBottom>
-        Current Development Notes
-      </Typography>
-      <DocBlock>
-        <ul>
-          <li>All map features required for production are currently loading and rendering on the map dynamically as the zoom and bounds change</li>
-          <li>Tooltips for most features are placeholders that do not contain relevant feature information yet.</li>
-          <li>Selection of sites (e.g. for use in building a download package) is not yet supported.</li>
-        </ul>
-      </DocBlock>
-
-      {/*
-      <ExampleBlock>
-        <SiteMap selection="SITES" />
-      </ExampleBlock>
-      <CodeBlock>
-        {`
-<SiteMap selection="SITES" />
-        `}
-      </CodeBlock>
-      */}
-
-      {/*
-      <Divider className={classes.divider} />
       <Typography variant="h6" component="h4" gutterBottom>Props</Typography>
 
       <DocBlock>
         <TableContainer component={Paper} style={{ maxHeight: '70vh' }}>
           <Table stickyHeader aria-label="props">
             <TableHead>
-              <TableRow style={{ backgroundColor: Theme.palette.grey[50] }}>
+              <TableRow>
                 <TableCell>Prop</TableCell>
                 <TableCell>Type</TableCell>
                 <TableCell>Default</TableCell>
@@ -221,9 +241,9 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
               </TableRow>
             </TableHead>
             <TableBody>
-              {propRows.map(row => (
+              {propRows.map((row, idx) => (
                 <React.Fragment key={row.prop}>
-                  <TableRow>
+                  <TableRow className={idx % 2 ? classes.propTableRowGrey : null}>
                     <TableCell component="th" scope="row" rowSpan={2}>
                       <tt>{row.prop}</tt>
                     </TableCell>
@@ -231,7 +251,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
                     <TableCell><tt>{row.default}</tt></TableCell>
                     <TableCell>{row.examples ? row.examples : '--'}</TableCell>
                   </TableRow>
-                  <TableRow>
+                  <TableRow className={idx % 2 ? classes.propTableRowGrey : null}>
                     <TableCell colSpan={4}>{row.description}</TableCell>
                   </TableRow>
                 </React.Fragment>
@@ -240,7 +260,6 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
           </Table>
         </TableContainer>
       </DocBlock>
-      */}
 
     </React.Fragment>
   );

@@ -27,6 +27,7 @@ import {
   SELECTABLE_FEATURE_TYPES,
   SITE_LOCATION_HIERARCHIES_MIN_ZOOM,
   MAP_ZOOM_RANGE,
+  PLOT_SAMPLING_MODULES,
   SITE_MAP_PROP_TYPES,
   SITE_MAP_DEFAULT_PROPS,
   MIN_TABLE_MAX_BODY_HEIGHT,
@@ -234,7 +235,11 @@ const reducer = (state, action) => {
           const match = cur.match(basePlotRegex);
           if (match) { acc.push(match[1]); }
           return acc;
-        }, []).filter(k => k !== 'all' && k !== 'mfb');
+        }, [])
+          .filter(k => k !== 'all' && k !== 'mfb')
+          .sort((a, b) => (
+            (PLOT_SAMPLING_MODULES[a] || null) > (PLOT_SAMPLING_MODULES[b] || null) ? 1 : -1
+          ));
       }
       if (!newState.featureData[dataFeatureType][dataFeatureKey]) {
         newState.featureData[dataFeatureType][dataFeatureKey] = {};
@@ -524,6 +529,7 @@ const Provider = (props) => {
   const {
     view,
     aspectRatio,
+    filterPosition,
     mapZoom,
     mapCenter,
     mapTileLayer,
@@ -544,7 +550,10 @@ const Provider = (props) => {
   const initialMapZoom = mapZoom === null ? null
     : Math.max(Math.min(mapZoom, MAP_ZOOM_RANGE[1]), MAP_ZOOM_RANGE[0]);
   let initialState = cloneDeep(DEFAULT_STATE);
-  initialState.view.current = Object.keys(VIEWS).includes(view) ? view : VIEWS.MAP;
+  initialState.view.current = (
+    Object.keys(VIEWS).includes(view.toUpperCase()) ? view.toUpperCase() : VIEWS.MAP
+  );
+  initialState.filters.position = filterPosition;
   initialState.map = {
     ...initialState.map,
     zoom: initialMapZoom,

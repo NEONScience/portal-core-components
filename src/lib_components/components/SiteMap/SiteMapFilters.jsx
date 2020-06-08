@@ -19,7 +19,6 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: theme.spacing(1),
   },
   toggleButtonGroup: {
     height: theme.spacing(4),
@@ -74,8 +73,13 @@ const SiteMapFilters = () => {
   const helperText = focusLocationError
     ? state.focusLocation.fetch.error
     : 'Any named location with coordinates, e.g. CPER or D12';
+  const formStyle = {
+    display: FOCUS_DISPLAY,
+    alignItems: 'center',
+    margin: filters.position === 'top' ? Theme.spacing(1, 0, 1.5, 0) : Theme.spacing(2, 0, 0, 0),
+  };
   const renderFocusLocationForm = () => (
-    <div style={{ display: FOCUS_DISPLAY, alignItems: 'center', marginTop: Theme.spacing(2) }}>
+    <div style={formStyle}>
       <form onSubmit={jumpToLocation}>
         <TextField
           margin="dense"
@@ -103,9 +107,14 @@ const SiteMapFilters = () => {
   /**
      Main Render
   */
+  const rowStyle = filters.position === 'top'
+    ? { marginBottom: Theme.spacing(1) }
+    : { marginTop: Theme.spacing(1) };
+  const openIcon = filters.position === 'top' ? <ExpandDownIcon /> : <ExpandUpIcon />;
+  const closeIcon = filters.position === 'top' ? <ExpandUpIcon /> : <ExpandDownIcon />;
   return (
     <React.Fragment>
-      <div className={classes.row}>
+      <div className={classes.row} style={rowStyle}>
         <ToggleButtonGroup
           exclusive
           color="primary"
@@ -130,7 +139,7 @@ const SiteMapFilters = () => {
           size="small"
           color="primary"
           variant={filters.features.open ? 'contained' : 'outlined'}
-          endIcon={filters.features.open ? <ExpandDownIcon /> : <ExpandUpIcon />}
+          endIcon={filters.features.open ? closeIcon : openIcon}
           onClick={toggleFeatures}
         >
           Features

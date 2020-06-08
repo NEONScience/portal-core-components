@@ -397,6 +397,7 @@ const SiteMapContainer = () => {
       aria-describedby={progressId}
       aria-busy={isLoading ? 'true' : 'false'}
     >
+      {state.filters.position === 'top' ? <SiteMapFilters /> : null}
       <div ref={contentDivRef} {...contentDivProps}>
         {view === VIEWS.MAP ? <SiteMapLeaflet /> : null }
         {view === VIEWS.TABLE ? <SiteMapTable /> : null }
@@ -409,7 +410,7 @@ const SiteMapContainer = () => {
         )}
       </div>
       {renderProgress()}
-      <SiteMapFilters />
+      {state.filters.position === 'bottom' ? <SiteMapFilters /> : null}
     </div>
   );
 };

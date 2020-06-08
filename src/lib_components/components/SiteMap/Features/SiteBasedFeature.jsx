@@ -199,7 +199,7 @@ const SiteBasedFeature = (props) => {
           <div>
             {renderNumericalValue(elevation, 'Average', 'm', 2, 'Average Elevation', right)}
             {renderNumericalValue(minimumElevation, 'Minimum', 'm', 2, 'Minimum Elevation', right)}
-            {renderNumericalValue(minimumElevation, 'Maximum', 'm', 2, 'Maximum Elevation', right)}
+            {renderNumericalValue(maximumElevation, 'Maximum', 'm', 2, 'Maximum Elevation', right)}
           </div>
         ) : (
           <div className={classes[right ? 'endFlex' : 'startFlex']}>

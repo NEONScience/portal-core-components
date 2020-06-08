@@ -7,9 +7,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
+import IconButton from '@material-ui/core/IconButton';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
+
+import InfoIcon from '@material-ui/icons/InfoOutlined';
 
 import MaterialTable, { MTableToolbar, MTableFilterRow } from 'material-table';
 
@@ -29,6 +33,7 @@ import {
   EXPLORE_DATA_PRODUCTS_URL_BASE,
   MIN_TABLE_MAX_BODY_HEIGHT,
   HIGHLIGHT_STATUS,
+  PLOT_SAMPLING_MODULES,
   calculateLocationsInMap,
 } from './SiteMapUtils';
 
@@ -88,6 +93,23 @@ const useStyles = makeStyles(theme => ({
     fontFamily: 'monospace',
     fontSize: '1.05em',
     whiteSpace: 'nowrap',
+  },
+  tooltip: {
+    marginLeft: theme.spacing(0.25),
+  },
+  popper: {
+    '& > div': {
+      padding: theme.spacing(1, 1.5),
+      fontSize: '0.85rem',
+      fontWeight: 300,
+      backgroundColor: theme.palette.grey[800],
+    },
+    '& a': {
+      color: theme.palette.grey[100],
+    },
+  },
+  iconButton: {
+    marginTop: theme.spacing(-0.25),
   },
 }));
 
@@ -212,7 +234,9 @@ const SiteMapTable = () => {
      Calculate rows
   */
   const visibleFeatureKeys = Object.keys(state.featureData[focus])
-    .filter(featureKey => state.filters.features.visible[featureKey]);
+    .filter(featureKey => (
+      state.filters.features.available[featureKey] && state.filters.features.visible[featureKey]
+    ));
   const locations = {};
   visibleFeatureKeys.forEach((featureKey) => {
     Object.keys(state.featureData[focus][featureKey]).forEach((siteCode) => {
@@ -374,7 +398,7 @@ const SiteMapTable = () => {
         lookup: Object.fromEntries(
           Array.from(
             new Set(rows.map(row => row.type)),
-          ).map(k => [k, ucWord(k)]),
+          ).sort().map(k => [k, ucWord(k)]),
         ),
         render: row => ucWord(row.type),
       },
@@ -386,7 +410,7 @@ const SiteMapTable = () => {
         lookup: Object.fromEntries(
           Array.from(
             new Set(rows.map(row => row.terrain)),
-          ).map(k => [k, ucWord(k)]),
+          ).sort().map(k => [k, ucWord(k)]),
         ),
         render: row => ucWord(row.terrain),
       },
@@ -417,9 +441,9 @@ const SiteMapTable = () => {
         sorting: true,
         defaultSort: 'desc',
         lookup: Object.fromEntries(
-          Array.from(
-            new Set(rows.map(row => row.featureKey)),
-          ).map(featureKey => [featureKey, getFeatureName(featureKey)]),
+          Array.from(new Set(rows.map(row => row.featureKey)))
+            .sort((a, b) => (getFeatureName(a) > getFeatureName(b) ? 1 : -1))
+            .map(featureKey => [featureKey, getFeatureName(featureKey)]),
         ),
         customSort: (rowA, rowB) => {
           const typeA = getFeatureName(rowA.featureKey);
@@ -489,6 +513,49 @@ const SiteMapTable = () => {
         render: row => renderNumberString(
           Number.isFinite(row.slopeGradient) ? `${row.slopeGradient.toFixed(2)}%` : '--',
           'Slope Gradient',
+        ),
+      },
+      { // Sampling Module Count
+        field: 'samplingModules',
+        title: 'Sampling Modules',
+        filtering: false,
+        sorting: true,
+        deafultSort: 'asc',
+        customSort: (rowA, rowB) => {
+          const a = Array.isArray(rowA.samplingModules) ? rowA.samplingModules.length : null;
+          const b = Array.isArray(rowB.samplingModules) ? rowB.samplingModules.length : null;
+          if (a === b) { return 0; }
+          if (a === null && b !== null) { return 1; }
+          if (a !== null && b === null) { return -1; }
+          return a > b ? 1 : -1;
+        },
+        render: row => (
+          Array.isArray(row.samplingModules) ? (
+            <Tooltip
+              placement="left"
+              title={
+                row.samplingModules.length ? (
+                  <ul style={{ marginLeft: Theme.spacing(-1) }}>
+                    {row.samplingModules.map(m => (
+                      <li key={m}>{PLOT_SAMPLING_MODULES[m]}</li>
+                    ))}
+                  </ul>
+                ) : <i>none</i>
+              }
+              className={classes.tooltip}
+              PopperProps={{ className: classes.popper }}
+              interactive
+            >
+              <div className={classes.startFlex}>
+                {renderNumberString(row.samplingModules.length, 'Sampling Modules')}
+                <IconButton size="small" className={classes.iconButton} aria-label="Sampling Modules">
+                  <InfoIcon fontSize="inherit" />
+                </IconButton>
+              </div>
+            </Tooltip>
+          ) : (
+            renderNumberString()
+          )
         ),
       },
       commonColumns.site,

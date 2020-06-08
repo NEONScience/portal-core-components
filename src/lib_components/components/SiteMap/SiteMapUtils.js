@@ -922,6 +922,7 @@ export const DEFAULT_STATE = {
   ),
   sites: {}, // Sites data is split into 4 features making it hard to look up, so extra refs here
   filters: {
+    position: null,
     search: null,
     features: {
       open: false, // whether the features pane is open/visible
@@ -1016,8 +1017,9 @@ export const hydrateNeonContextData = (state, neonContextData) => {
 */
 export const SITE_MAP_PROP_TYPES = {
   // Top-level Props
-  view: PropTypes.oneOf(Object.keys(VIEWS)),
+  view: PropTypes.oneOf(Object.keys(VIEWS).map(k => k.toLowerCase())),
   aspectRatio: PropTypes.number,
+  filterPosition: PropTypes.oneOf(['top', 'bottom']),
   // Map Props
   mapCenter: PropTypes.arrayOf(PropTypes.number),
   mapZoom: PropTypes.number,
@@ -1034,8 +1036,9 @@ export const SITE_MAP_PROP_TYPES = {
 
 export const SITE_MAP_DEFAULT_PROPS = {
   // Top-level Props
-  view: VIEWS.MAP,
+  view: VIEWS.MAP.toLowerCase(),
   aspectRatio: null,
+  filterPosition: 'bottom',
   // Map Props
   mapCenter: [52.68, -110.75],
   mapZoom: null,

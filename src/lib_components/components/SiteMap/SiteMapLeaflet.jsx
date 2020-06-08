@@ -278,7 +278,7 @@ const SiteMapLeaflet = () => {
      parent element dynamcally based on which direction has the most room to render.
   */
   const positionPopup = (target = null, latlng = null, hideCloseButton = false) => {
-    if (!target || !latlng) { return; }
+    if (!target || !latlng || !mapRef.current || !mapRef.current.leafletElement) { return; }
     const { map: { bounds } } = state;
     const { _popup: popup, _icon: icon } = target;
     popup.setLatLng(latlng);
