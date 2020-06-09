@@ -1,0 +1,38 @@
+/* This file is for defining global map icon CSS classes for the Neon Site Map */
+/* We don't do just these with makeStyles because we want consistent class names */
+div[data-component='SiteMap'] {
+  .mapIcon: {
+    box-sizing: content-box;
+  }
+  .mapIconPLACEHOLDER: {
+    border-radius: 20%;
+  }
+  .mapIconCORE: {
+    border-radius: 20%;
+  }
+  .mapIconRELOCATABLE: {
+    border-radius: 50%;
+  }
+  /* THIS DOESN'T WORK FOR NON-SQUARE ICONS! */
+  .mapIconSQUARE {
+    box-shadow: 0px 0px 5px -0.5px rgba(0,0,0,0.5);
+  }
+  .mapIconUnselected: {
+    box-shadow: none;
+    &:hover, &:focus: {
+      box-shadow: 0px 0px 5px 5px #0073cf;
+    }
+    &:active: {
+      box-shadow: 0px 0px 8px 8px #0073cf;
+    }
+  }
+  .mapIconSelected: {
+    box-shadow: none;
+    &:hover, &:focus: {
+      box-shadow: 0px 0px 3px 3px #ffffff;
+    }
+    &:active: {
+      box-shadow: 0px 0px 6px 6px #ffffff;
+    }
+  }
+}

@@ -22,6 +22,7 @@ declare namespace NeonEnvironment {
         export function menu(): string | undefined;
         export function products(): string | undefined;
         export function sites(): string | undefined;
+        export function locations(): string | undefined;
     }
     export namespace getApiLdPath {
         export function repo(): string | undefined;

@@ -1,0 +1,164 @@
+TERRESTRIAL_BASE_PLOT_EXTENSIONS
+all: 'All',
+bbc: 'Below Ground Biomass Coring',
+bet: 'Beetles',
+bgc: 'Biogeochemistry',
+brd: 'Birds',
+cdw: 'Coarse Downed Wood',
+cfc: 'Canopy Foliage Chemistry',
+dhp: 'Digital Hemispherical Photos for Leaf Area Index',
+div: 'Plant Diversity',
+hbp: 'Herbaceous Productivity',
+ltr: 'Litter and Fine Woody Debris',
+mam: 'Mammal Abundance and Diversity',
+mos: 'Mosquitos',
+mpt: 'Mosquito Pathogens',
+phe: 'Plant Phenology',
+sme: 'Soil Microbes',
+tck: 'Ticks',
+vst: 'Vegetation Structure',
+
+QUESTIONS
+1. What are the units of slope gradient?
+   https://int-data.neonscience.org/api/v0/locations/STER_003.basePlot.bgc.21
+
+STANDARD_PLOT_PROPS (locationProperties)
+  'Value for Plot subtype' - string e.g. 'basePlot'
+  'Value for Plot type' - string e.g. 'distributed' or 'tower'
+  'Value for Maximum elevation' - float in meters
+  'Value for Minimum elevation' - float in meters
+  'Value for National Land Cover Database (2001)' - string
+  'Value for Plot dimensions' - string e.g. '40m x 40m',
+  'Value for Plot size' - float in meters^2
+  'Value for Slope aspect' - float - compass degrees the slope faces
+  'Value for Slope gradient' - float - ???
+  'Value for Soil type order' - string e.g. 'Mollisols'
+
+  locationDecimalLatitude, locationDecimalLongitude, locationElevation (floats)
+  points use locationElevation, polygons use min/max elevation from props
+
+Tower
+  type: 'TOWER' (prop: locationType)
+  point
+  no props
+  count children of type 'LEVEL'
+  
+Hut
+  type: 'HUT'
+  point
+  no props
+
+Megapit
+  type: 'MEGAPIT'
+  point
+  no props
+
+Soil Plots
+  type: 'SOIL_PLOT'
+  polygon (locationPolygon)
+  Inspect children locationDescriptions (in hierarchy) to get measurements, bar 'Not Used'
+
+Terrestrial Base Plots
+  type: 'OS Plot - all'
+  Split locationName on '.', take first as PLOT_ID (e.g. STER_035.basePlot.all)
+  Inspect (do not fetch) all siblings with the same PLOT_ID and PLOT_TYPE === 'basePlot'
+    Split locationName on '.', take last as EXTENSION (e.g. STER_035.basePlot.bet)
+    Match to TERRESTRIAL_BASE_PLOT_EXTENSIONS for info (keep list of exts, whatever)
+  Fetch only .all for all STANDARD_PLOT_PROPS
+  'Value for Plot type' for is 'distributed' or 'tower'
+  Render as polygon using 'Value for Plot size'
+
+Terrestrial Tower Phenology Plots
+  type: 'OS Plot - phe'
+  Fetch, get coords and STANDARD_PLOT_PROPS
+  Render as polygon using 'Value for Plot size'
+
+Terrestrial Distributed Tick Plots
+  type: 'OS Plot - tck'
+  Fetch, get coords and STANDARD_PLOT_PROPS
+  Render as polygon using 'Value for Plot size'
+  
+Terrestrial Distributed Mammal Grids
+  type: 'OS Plot - mam'
+  Fetch, get coords and STANDARD_PLOT_PROPS
+  Render as polygon using 'Value for Plot size'
+
+Terrestrial Distributed Bird Grids
+  type: 'OS Plot - brd'
+  Fetch, get coords and STANDARD_PLOT_PROPS
+  Render as polygon using 'Value for Plot size'
+  
+Terrestiral Distributed Mosquito Points
+  type: 'OS Plot - mos'
+  Also look for presence of 'OS Plot - mpt' with same PLOT_ID to confirm if present?
+  Fetch get coords + elevation + props:
+    'Value for National Land Cover Database (2001)' - string
+    'Value for Slope aspect' - float - compass degrees the slope faces
+    'Value for Slope gradient' - float - ???
+    'Value for Soil type order' - string e.g. 'Mollisols'
+  Render as point
+
+Aquatic Benchmarks
+  type: 'AOS benchmark named location type'
+  Fetch, get coords + elevation
+  Render as point
+  
+Aquatic Riparian Assessments
+  type: 'AOS riparian named location type'
+  Fetch, get coords + elevation
+  Render as point
+
+Aquatic Wet Deposition Points
+  type: 'AOS wet deposition named location type'
+  Fetch, get coords + elevation
+  Render as point
+
+Aquatic Groundwater Wells
+  type: 'GROUNDWATER_WELL'
+  Fetch, get coords + elevation
+  Render as point
+
+Aquatic Meteorological Station
+  type: 'MET_STATION'
+  Fetch, get coords + elevation
+  Render as point
+  Inspect children locationDescriptions (in hierarchy) to get measurements, bar 'Not Used'
+
+Aquatic Discharge Points
+  type: 'AOS discharge named location type'
+  Fetch, get coords + elevation
+  Render as point
+
+Aquatic Fish Points
+  type: 'AOS fish named location type'
+  Fetch, get coords + elevation
+  Render as point
+
+Aquatic Plant Transects
+  type: 'AOS plant named location type'
+  Fetch, get coords + elevation
+  Render as point
+
+Aquatic Reaeration Stations - SKIP FOR NOW
+  type: 'AOS reaeration station named location type'
+  Fetch, get coords + elevation
+  Render as point
+
+Aquatic Sediment Points
+  type: 'AOS sediment named location type'
+  Fetch, get coords + elevation
+  Render as point
+
+Aquatic Staff Gauges
+  type: 'STAFF_GAUGE'
+  Fetch, get coords + elevation
+  Render as point
+
+Aquatic Sensor Stations
+  type: 'S1_LOC' OR 'S2_LOC'
+  Fetch, get coords + elevation
+  Render as point
+  Inspect children locationDescriptions (in hierarchy) to get measurements, bar 'Not Used'
+  
+  
+  

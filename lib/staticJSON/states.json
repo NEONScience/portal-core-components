@@ -1,158 +1,262 @@
 {
   "AL": {
-    "name": "Alabama"
+    "name": "Alabama",
+    "center": [32.834722, -86.633333],
+    "zoom": 6
   },
   "AK": {
-    "name": "Alaska"
+    "name": "Alaska",
+    "center": [64.731667, -152.47],
+    "zoom": 4
   },
   "AZ": {
-    "name": "Arizona"
+    "name": "Arizona",
+    "center": [34.048927, -111.093735],
+    "zoom": 6
   },
   "AR": {
-    "name": "Arkansas"
+    "name": "Arkansas",
+    "center": [34.799999, -92.199997],
+    "zoom": 6
   },
   "CA": {
-    "name": "California"
+    "name": "California",
+    "center": [37.166111, -119.449444],
+    "zoom": 6
   },
   "CO": {
-    "name": "Colorado"
+    "name": "Colorado",
+    "center": [38.9972, -105.5478],
+    "zoom": 6
   },
   "CT": {
-    "name": "Connecticut"
+    "name": "Connecticut",
+    "center": [41.599998, -72.699997],
+    "zoom": 7
   },
   "DC": {
-    "name": "District of Columbia"
+    "name": "District of Columbia",
+    "center": [38.904167, -77.016111],
+    "zoom": 8
   },
   "DE": {
-    "name": "Deleware"
+    "name": "Deleware",
+    "center": [38.98, -75.511667],
+    "zoom": 7
   },
   "FL": {
-    "name": "Florida"
+    "name": "Florida",
+    "center": [28.681389, -82.46],
+    "zoom": 6
   },
   "GA": {
-    "name": "Georgia"
+    "name": "Georgia",
+    "center": [32.662111, -83.438306],
+    "zoom": 6
   },
   "HI": {
-    "name": "Hawaii"
+    "name": "Hawaii",
+    "center": [19.741755, -155.844437],
+    "zoom": 6
   },
   "ID": {
-    "name": "Idaho"
+    "name": "Idaho",
+    "center": [	44.068203, -114.742043],
+    "zoom": 6
   },
   "IL": {
-    "name": "Illinois"
+    "name": "Illinois",
+    "center": [39.739306, -89.503639],
+    "zoom": 6
   },
   "IN": {
-    "name": "Indiana"
+    "name": "Indiana",
+    "center": [39.766028, -86.441278],
+    "zoom": 6
   },
   "IA": {
-    "name": "Iowa"
+    "name": "Iowa",
+    "center": [42.032974, -93.581543],
+    "zoom": 6
   },
   "KS": {
-    "name": "Kansas"
+    "name": "Kansas",
+    "center": [38.48583333, -97.31416667],
+    "zoom": 6
   },
   "KY": {
-    "name": "Kentucky"
+    "name": "Kentucky",
+    "center": [37.839333, -84.270020],
+    "zoom": 6
   },
   "LA": {
-    "name": "Louisiana"
+    "name": "Louisiana",
+    "center": [30.391830, -92.329102],
+    "zoom": 6
   },
   "ME": {
-    "name": "Maine"
+    "name": "Maine",
+    "center": [45.253333, -69.233333],
+    "zoom": 6
   },
   "MD": {
-    "name": "Maryland"
+    "name": "Maryland",
+    "center": [39.045753, -76.641273],
+    "zoom": 6
   },
   "MA": {
-    "name": "Massachusetts"
+    "name": "Massachusetts",
+    "center": [42.377117, -71.925258],
+    "zoom": 7
   },
   "MI": {
-    "name": "Michigan"
+    "name": "Michigan",
+    "center": [44.182205, -84.506836],
+    "zoom": 6
   },
   "MN": {
-    "name": "Minnesota"
+    "name": "Minnesota",
+    "center": [46.392410, -94.636230],
+    "zoom": 6
   },
   "MS": {
-    "name": "Mississippi"
+    "name": "Mississippi",
+    "center": [32.80250000, -88.28333333],
+    "zoom": 6
   },
   "MO": {
-    "name": "Missouri"
+    "name": "Missouri",
+    "center": [38.573936, -92.603760],
+    "zoom": 6
   },
   "MT": {
-    "name": "Montana"
+    "name": "Montana",
+    "center": [46.965260, -109.533691],
+    "zoom": 6
   },
   "NE": {
-    "name": "Nebraska"
+    "name": "Nebraska",
+    "center": [41.525, -99.861667],
+    "zoom": 6
   },
   "NV": {
-    "name": "Nevada"
+    "name": "Nevada",
+    "center": [39.876019, -117.224121],
+    "zoom": 6
   },
   "NH": {
-    "name": "New Hampshire"
+    "name": "New Hampshire",
+    "center": [43.641667, -71.571667],
+    "zoom": 7
   },
   "NJ": {
-    "name": "New Jersey"
+    "name": "New Jersey",
+    "center": [40.07, -74.558333],
+    "zoom": 7
   },
   "NM": {
-    "name": "New Mexico"
+    "name": "New Mexico",
+    "center": [34.307144, -106.018066],
+    "zoom": 6
   },
   "NY": {
-    "name": "New York"
+    "name": "New York",
+    "center": [42.95250000, -75.98333333],
+    "zoom": 6
   },
   "NC": {
-    "name": "North Carolina"
+    "name": "North Carolina",
+    "center": [35.782169, -80.793457],
+    "zoom": 6
   },
   "ND": {
-    "name": "North Dakota"
+    "name": "North Dakota",
+    "center": [47.650589 ,-100.437012],
+    "zoom": 6
   },
   "OH": {
-    "name": "Ohio"
+    "name": "Ohio",
+    "center": [40.367474, -82.996216],
+    "zoom": 6
   },
   "OK": {
-    "name": "Oklahoma"
+    "name": "Oklahoma",
+    "center": [36.084621, -96.921387],
+    "zoom": 6
   },
   "OR": {
-    "name": "Oregon"
+    "name": "Oregon",
+    "center": [43.86694444, -119.03138889],
+    "zoom": 6
   },
   "PA": {
-    "name": "Pennsylvania"
+    "name": "Pennsylvania",
+    "center": [41.203323, -77.194527],
+    "zoom": 6
   },
   "PR": {
-    "name": "Puerto Rico"
+    "name": "Puerto Rico",
+    "center": [18.222264, -66.430278],
+    "zoom": 8
   },
   "RI": {
-    "name": "Rhode Island"
+    "name": "Rhode Island",
+    "center": [41.671667, -71.576667],
+    "zoom": 8
   },
   "SC": {
-    "name": "South Carolina"
+    "name": "South Carolina",
+    "center": [33.836082, -81.163727],
+    "zoom": 6
   },
   "SD": {
-    "name": "South Dakota"
+    "name": "South Dakota",
+    "center": [44.40027778,-99.53138889],
+    "zoom": 6
   },
   "TN": {
-    "name": "Tennessee"
+    "name": "Tennessee",
+    "center": [35.860119, -86.660156],
+    "zoom": 6
   },
   "TX": {
-    "name": "Texas"
+    "name": "Texas",
+    "center": [31.391533, -99.17065],
+    "zoom": 5
   },
   "UT": {
-    "name": "Utah"
+    "name": "Utah",
+    "center": [39.419220, -111.950684],
+    "zoom": 6
   },
   "VT": {
-    "name": "Vermont"
+    "name": "Vermont",
+    "center": [43.926667, -72.671667],
+    "zoom": 6
   },
   "VA": {
-    "name": "Virginia"
+    "name": "Virginia",
+    "center": [37.926868, -78.024902],
+    "zoom": 6
   },
   "WA": {
-    "name": "Washington"
+    "name": "Washington",
+    "center": [47.751076, -120.740135],
+    "zoom": 6
   },
   "WV": {
-    "name": "West Virginia"
+    "name": "West Virginia",
+    "center": [38.58583333, -79.29944444],
+    "zoom": 6
   },
   "WI": {
-    "name": "Wisconsin"
+    "name": "Wisconsin",
+    "center": [44.437778, -90.130186],
+    "zoom": 6
   },
   "WY": {
-    "name": "Wyoming"
+    "name": "Wyoming",
+    "center": [42.971667, -107.671667],
+    "zoom": 6
   }
 }

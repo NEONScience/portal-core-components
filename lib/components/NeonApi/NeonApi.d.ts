@@ -7,4 +7,6 @@ declare namespace NeonApi {
     export function getProductObservable(productCode: string): import("rxjs").Observable<any>;
     export function getSitesJsonObservable(): import("rxjs").Observable<any>;
     export function getSiteJsonObservable(siteCode: string): import("rxjs").Observable<any>;
+    export function getSiteLocationHierarchyObservable(siteCode: string): import("rxjs").Observable<any>;
+    export function getLocationObservable(location: string): import("rxjs").Observable<any>;
 }

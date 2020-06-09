@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="80"
+   height="80"
+   viewBox="0 0 21.166666 21.166667"
+   version="1.1"
+   id="svg19093"
+   sodipodi:docname="icon-groundwater-well.svg"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
+  <defs
+     id="defs19087" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="3.959798"
+     inkscape:cx="41.157939"
+     inkscape:cy="37.318763"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:pagecheckerboard="true"
+     inkscape:window-width="972"
+     inkscape:window-height="686"
+     inkscape:window-x="198"
+     inkscape:window-y="323"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata19090">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-275.83332)">
+    <rect
+       style="display:inline;opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.21950617;stroke-opacity:1"
+       id="rect4518-85-4-7"
+       width="21.166666"
+       height="21.166666"
+       x="-3.5527137e-15"
+       y="275.83331"
+       rx="10.583333"
+       ry="10.583333" />
+    <path
+       inkscape:connector-curvature="0"
+       style="display:inline;opacity:1;fill:#2e4762;fill-opacity:1;stroke:none;stroke-width:0.19206792;stroke-opacity:1"
+       d="m 9.2604085,277.25029 c -4.06655,0.57716 -7.265217,3.77663 -7.842414,7.84345 h 7.842414 z m 2.6458335,0 v 7.84345 h 7.842414 c -0.577196,-4.06682 -3.775863,-7.26629 -7.842414,-7.84345 z M 1.4179945,287.73957 c 0.577197,4.06683 3.775864,7.26629 7.842414,7.84345 v -7.84345 z m 10.4882475,0 v 7.84345 c 4.066551,-0.57716 7.265218,-3.77662 7.842414,-7.84345 z"
+       id="rect4518-8-4-7-1-0" />
+  </g>
+</svg>
