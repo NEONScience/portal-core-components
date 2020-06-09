@@ -113,7 +113,7 @@ const SiteMapContainer = () => {
   const [neonContextState] = NeonContext.useNeonContextState();
 
   const [state, dispatch] = SiteMapContext.useSiteMapContext();
-  console.log('CONTAINER STATE:', state);
+  // console.log('CONTAINER STATE:', state);
   const isLoading = state.overallFetch.expected !== state.overallFetch.completed;
 
   const { aspectRatio, view: { current: view } } = state;

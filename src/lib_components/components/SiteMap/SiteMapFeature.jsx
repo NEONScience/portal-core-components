@@ -935,9 +935,11 @@ const SiteMapFeature = (props) => {
               e.target.closePopup();
             }
           },
+          /*
           onClick: (e) => {
             console.log('SELECT', e.target);
           },
+          */
         } : {
           onMouseOver: (e) => {
             e.target.setIcon(baseIcon[selection][HIGHLIGHT_STATUS.HIGHLIGHT]);

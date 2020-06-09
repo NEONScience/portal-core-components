@@ -210,19 +210,30 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
         `}
       </CodeBlock>
 
-      <Typography variant="h5" component="h3" gutterBottom>Testing and Feedback</Typography>
+      <Typography variant="h5" component="h3" gutterBottom>Usage</Typography>
 
       <DocBlock>
-        This new Site Map is a work in progress. Please enjoy testing it and as you find bugs or
-        otherwise have feedback please report using the {slackLink}.
+        Embedding a SiteMap requires no props to get the default observatory-scale view with
+        automatic sizing and aspect ratio based on the current viewport.
       </DocBlock>
 
       <ExampleBlock>
-        <SiteMap location="AL" />
+        <SiteMap />
       </ExampleBlock>
       <CodeBlock>
         {`
 <SiteMap />
+        `}
+      </CodeBlock>
+
+      <DocBlock>
+        Various props allow for customizing the initial appearance of the SiteMap.
+      </DocBlock>
+      <CodeBlock>
+        {`
+<SiteMap location="CPER" />
+<SiteMap apectRatio={1} center={[38.4373, -109.9293]} zoom={14} tileLayer="WORLD_IMAGERY" />
+<SiteMap view="table" filterPosition="top" />
         `}
       </CodeBlock>
 
