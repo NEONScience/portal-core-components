@@ -33,15 +33,42 @@ const DEFAULT_STATE = {
     domains: domainsJSON,
     bundles: bundlesJSON,
     timeSeriesDataProducts: timeSeriesDataProductsJSON,
+    stateSites: {}, // derived when sites is fetched
+    domainSites: {}, // derived when sites is fetched
   },
   fetches: {
     sites: { status: FETCH_STATUS.AWAITING_CALL, error: null },
   },
   auth: {
     isAuthenticated: false,
-    fetchStatus: FETCH_STATUS.AWAITING_CALL,
+    fetchStatus: null,
   },
   isActive: false,
+  isFinal: false,
+  hasError: false,
+};
+
+// Derive values for stateSites and domainSites in state. This is a one-time mapping we
+// generate when sites are loaded into state containing lists of site codes for each
+// state code / domain code.
+const deriveRegionSites = (state) => {
+  const stateSites = {};
+  const domainSites = {};
+  Object.keys(state.data.sites).forEach((siteCode) => {
+    const { stateCode, domainCode } = state.data.sites[siteCode];
+    if (!stateSites[stateCode]) { stateSites[stateCode] = new Set(); }
+    if (!domainSites[domainCode]) { domainSites[domainCode] = new Set(); }
+    stateSites[stateCode].add(siteCode);
+    domainSites[domainCode].add(siteCode);
+  });
+  // Fill in empty sets for any states that had no NEON sites
+  Object.keys(state.data.states).forEach((stateCode) => {
+    if (!stateSites[stateCode]) { stateSites[stateCode] = new Set(); }
+  });
+  return {
+    ...state,
+    data: { ...state.data, stateSites, domainSites },
+  };
 };
 
 /**
@@ -81,10 +108,13 @@ const reducer = (state, action) => {
     case 'fetchSitesSucceeded':
       newState.fetches.sites.status = FETCH_STATUS.SUCCESS;
       newState.data.sites = action.sites;
-      return newState;
+      newState.isFinal = true;
+      return deriveRegionSites(newState);
     case 'fetchSitesFailed':
       newState.fetches.sites.status = FETCH_STATUS.ERROR;
       newState.fetches.sites.error = action.error;
+      newState.isFinal = true;
+      newState.hasError = true;
       return newState;
 
     // Actions for handling auth fetch
@@ -117,6 +147,7 @@ const parseSitesFetchResponse = (sitesArray = []) => {
       latitude: site.siteLatitude || site.latitude,
       longitude: site.siteLongitude || site.longitude,
       terrain: site.terrain || sitesJSON[site.siteCode].terrain,
+      zoom: site.zoom || sitesJSON[site.siteCode].zoom,
     };
   });
   return sitesObj;
@@ -126,7 +157,12 @@ const parseSitesFetchResponse = (sitesArray = []) => {
    Context Provider
 */
 const Provider = (props) => {
-  const { children } = props;
+  const { useCoreAuth, children } = props;
+
+  const initialState = { ...DEFAULT_STATE, isActive: true };
+  if (useCoreAuth) {
+    initialState.auth.fetchStatus = FETCH_STATUS.AWAITING_CALL;
+  }
   const [state, dispatch] = useReducer(reducer, { ...DEFAULT_STATE, isActive: true });
 
   // Subject and effect to perform and manage the sites GraphQL fetch
@@ -154,7 +190,8 @@ const Provider = (props) => {
     }
   });
 
-  // Effect: set the authentication status
+  // Effect: set the authentication status using the core authentication method.
+  // TODO: allow third party core-components consumers to provide their own auth method.
   useEffect(() => {
     if (state.auth.fetchStatus !== FETCH_STATUS.AWAITING_CALL) { return; }
     dispatch({ type: 'setAuthFetching' });
@@ -180,6 +217,7 @@ const Provider = (props) => {
 };
 
 Provider.propTypes = {
+  useCoreAuth: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.oneOfType([
       PropTypes.node,
@@ -188,6 +226,10 @@ Provider.propTypes = {
     PropTypes.node,
     PropTypes.string,
   ]).isRequired,
+};
+
+Provider.defaultProps = {
+  useCoreAuth: false,
 };
 
 /**

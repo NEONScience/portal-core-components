@@ -73,6 +73,7 @@ export const COLORS = {
   },
   GREY: {
     50: '#f3f5f5',
+    75: '#e0e2e2',
     100: '#cccece',
     200: '#abadae',
     300: '#898c8d',
@@ -153,6 +154,9 @@ const baseTheme = createMuiTheme({
     h6: {
       fontWeight: 700,
       fontSize: '1.15rem',
+    },
+    caption: {
+      fontSize: '0.81rem',
     },
   },
   props: {

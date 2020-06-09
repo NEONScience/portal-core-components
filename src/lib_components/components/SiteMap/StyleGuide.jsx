@@ -1,9 +1,10 @@
-/* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid */
+/* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid, no-unused-vars, max-len */
 
 import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
+import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -17,12 +18,21 @@ import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 
-import SiteMap, { SITE_MAP_MODES, TILE_LAYERS } from './SiteMap';
 import Theme from '../Theme/Theme';
+import SiteMap from './SiteMap';
+
+import {
+  MAP_ZOOM_RANGE,
+  TILE_LAYERS,
+  VIEWS,
+} from './SiteMapUtils';
 
 const useStyles = makeStyles(theme => ({
   divider: {
     margin: theme.spacing(3, 0),
+  },
+  propTableRowGrey: {
+    backgroundColor: theme.palette.grey[50],
   },
 }));
 
@@ -30,7 +40,7 @@ const propRows = [
   {
     prop: 'aspectRatio',
     type: 'number',
-    default: '0.75',
+    default: 'null',
     examples: (
       <div>
         <tt>0.5625</tt> (16:9)
@@ -39,18 +49,19 @@ const propRows = [
       </div>
     ),
     description: (
-      <div>
+      <React.Fragment>
         <p>
           Desired map height divided by desired map width. Setting discrete dimensions is not
           supported as Site Map instances will always try to expand to the full width of their
           containing element.
         </p>
         <p>
-          Use this prop to control the height indirectly by expressing the
-          ratio of height to width such that the shape of the Site Map will remain consistent
-          at any viewport size.
+          Use this prop to control the height indirectly by expressing the ratio of height to width
+          such that the shape of the Site Map will remain consistent at any viewport size. Omitting
+          this prop will set aspect ratio dynamically based on viewport size (e.g. wider for larger
+          viewports, more square for smaller viewports, taller for very small / phone viewports).
         </p>
-      </div>
+      </React.Fragment>
     ),
   },
   {
@@ -65,41 +76,51 @@ const propRows = [
       </div>
     ),
     description: (
-      <div>
+      <p>
         Array expressing latitude and longitude to set as the initial center of the map.
         Default value is a point chosen to approximately center the entire set of existing
         filed sites in a map at the appropriate zoom level.
-      </div>
+      </p>
     ),
   },
   {
-    prop: 'mode',
+    prop: 'filterPosition',
     type: (
       <div>
         string, one of:
         <br />
         <tt>
-          {Object.keys(SITE_MAP_MODES).map(k => <div key={k}>{`"${k}"`}</div>)}
+          <div>&quot;top&quot;</div>
+          <div>&quot;bottom&quot;</div>
         </tt>
       </div>
     ),
-    default: 'EXPLORE',
+    default: '"bottom"',
     description: (
-      <div>
-        <div>
-          Interaction mode for the map.
-        </div>
-        <div>
-          <tt>EXPLORE</tt> - Click site icons to open and persist an exclusive popup containing site
-          info and navigation buttons to access the Field Site page of the Explore Data Products
-          page with an appropriate filter setting.
-        </div>
-        <div>
-          <tt>SELECT</tt> - Mouse over site icons to open an exclusive popup containing only site
-          info (no navigation buttons or other interactive elements). Click sites to toggle their
-          selected state.
-        </div>
-      </div>
+      <p>
+        Whether the fitlers (map/table toggle button group and features button) should appear above
+        or below the main content area of the component.
+      </p>
+    ),
+  },
+  {
+    prop: 'location',
+    type: 'string',
+    default: 'null',
+    description: (
+      <React.Fragment>
+        <p>
+          A location code, as it would appear in the locations API, to initialize the focus of the
+          map. This can be any site code (e.g. &quot;ABBY&quot;, &quot;CPER&quot;), domain code
+          (e.g. &quot;D03&quot;, &quot;D17&quot;), state code (e.g. &quot;CO&quot;, &quot;NY&quot;),
+          or even a finer-grain location code for any site feature (e.g.
+          &quot;ARIK.AOS.benchmark.2&quot;, &quot;BARR_035.birdGrid.brd&quot;).
+        </p>
+        <p>
+          If set this will override any zoom and/or center props as the focus location will
+          determine the zoom and center for the map.
+        </p>
+      </React.Fragment>
     ),
   },
   {
@@ -113,44 +134,75 @@ const propRows = [
         </tt>
       </div>
     ),
-    default: '"NatGeo_World_Map"',
+    default: '"NATGEO_WORLD_MAP"',
     description: (
-      <div>
+      <p>
         Initial tile layer for the map (i.e. the visual appearance of the map). Valid values
         are defined in the Site Map <tt>TILE_LAYERS</tt> data structure and include a name, url,
         and attribution strings. This is only the initial layer; a user may change the tile layer
         through stock Leaflet UI once loaded.
+      </p>
+    ),
+  },
+  {
+    prop: 'view',
+    type: (
+      <div>
+        string, one of:
+        <br />
+        <tt>
+          {Object.keys(VIEWS).map(k => <div key={k}>{`"${k.toLowerCase()}"`}</div>)}
+        </tt>
       </div>
+    ),
+    default: '"map"',
+    description: (
+      <p>
+        Initial view mode for the SiteMap component.
+      </p>
     ),
   },
   {
     prop: 'zoom',
     type: 'integer',
-    default: '3',
+    default: 'null',
     examples: (
       <div>
         <tt>2</tt>, <tt>9</tt>, <tt>17</tt>
       </div>
     ),
     description: (
-      <div>
-        Initial zoom level for the map. Min and max zoom levels are hard-coded
-        to <tt>2</tt> and <tt>17</tt> respectively, so the zoom prop must be equal
-        to or between these values. A greater value is a closer zoom.
-      </div>
+      <React.Fragment>
+        <p>
+          Initial zoom level for the map. Min and max zoom levels are hard-coded
+          to <tt>{MAP_ZOOM_RANGE[0]}</tt> and <tt>{MAP_ZOOM_RANGE[1]}</tt> respectively, so the zoom
+          prop must be equal to or between these values. A greater value is a closer zoom.
+        </p>
+        <p>
+          When undefined, and if the location prop is not set, the initial zoom is dynamically
+          derived to ensure all sites are in view given the dynamically derived aspect ratio
+          and dimensions of the map component (i.e a larger viewport may have a closer initial
+          zoom as there is more pixel space to fit all sites).
+        </p>
+      </React.Fragment>
     ),
   },
 ];
 
 export default function StyleGuide() {
   const classes = useStyles(Theme);
+  const slackLink = (
+    <Link href="https://neonscience.slack.com/archives/CQ6J40S85" target="_blank">
+      #portal-feedback Slack channel
+    </Link>
+  );
 
   return (
     <React.Fragment>
 
       <DocBlock>
-        A general purpose component for displaying an interactive world map with
-        markers for NEON field sites.
+        An all-inclusive interactive map for geographically visualizing the NEON observatory at
+        any scale.
       </DocBlock>
       <CodeBlock>
         {`
@@ -161,15 +213,9 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
       <Typography variant="h5" component="h3" gutterBottom>Usage</Typography>
 
       <DocBlock>
-        A Site Map can be rendered with no props at all for ease of use. When no props
-        are present, a Site Map will assume the following:
+        Embedding a SiteMap requires no props to get the default observatory-scale view with
+        automatic sizing and aspect ratio based on the current viewport.
       </DocBlock>
-      <ul>
-        <li>Load site data from the API</li>
-        <li>Use a 4:3 (letterbox) aspect ratio at 100% of the width of the containing element</li>
-        <li>Start centered and zoomed such that all sites are visible at any map dimensions</li>
-        <li><tt>EXPLORE</tt> mode (no selection enabled; popups include links to other pages)</li>
-      </ul>
 
       <ExampleBlock>
         <SiteMap />
@@ -180,12 +226,14 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
         `}
       </CodeBlock>
 
-      <ExampleBlock>
-        <SiteMap mode="SELECT" />
-      </ExampleBlock>
+      <DocBlock>
+        Various props allow for customizing the initial appearance of the SiteMap.
+      </DocBlock>
       <CodeBlock>
         {`
-<SiteMap mode="SELECT" />
+<SiteMap location="CPER" />
+<SiteMap apectRatio={1} center={[38.4373, -109.9293]} zoom={14} tileLayer="WORLD_IMAGERY" />
+<SiteMap view="table" filterPosition="top" />
         `}
       </CodeBlock>
 
@@ -196,7 +244,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
         <TableContainer component={Paper} style={{ maxHeight: '70vh' }}>
           <Table stickyHeader aria-label="props">
             <TableHead>
-              <TableRow style={{ backgroundColor: Theme.palette.grey[50] }}>
+              <TableRow>
                 <TableCell>Prop</TableCell>
                 <TableCell>Type</TableCell>
                 <TableCell>Default</TableCell>
@@ -204,9 +252,9 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
               </TableRow>
             </TableHead>
             <TableBody>
-              {propRows.map(row => (
+              {propRows.map((row, idx) => (
                 <React.Fragment key={row.prop}>
-                  <TableRow>
+                  <TableRow className={idx % 2 ? classes.propTableRowGrey : null}>
                     <TableCell component="th" scope="row" rowSpan={2}>
                       <tt>{row.prop}</tt>
                     </TableCell>
@@ -214,7 +262,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
                     <TableCell><tt>{row.default}</tt></TableCell>
                     <TableCell>{row.examples ? row.examples : '--'}</TableCell>
                   </TableRow>
-                  <TableRow>
+                  <TableRow className={idx % 2 ? classes.propTableRowGrey : null}>
                     <TableCell colSpan={4}>{row.description}</TableCell>
                   </TableRow>
                 </React.Fragment>

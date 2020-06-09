@@ -107,6 +107,24 @@ const NeonApi = {
   getSiteJsonObservable: siteCode => (
     getJsonObservable(`${NeonEnvironment.getFullApiPath('sites')}/${siteCode}`)
   ),
+
+  /**
+   * Gets the RxJS Observable for the locations endpoint for a given site hierarchy
+   * @param {string} siteCode The site code to get complete hierarchy for.
+   * @return The RxJS Ajax Observable
+   */
+  getSiteLocationHierarchyObservable: siteCode => (
+    getJsonObservable(`${NeonEnvironment.getFullApiPath('locations')}/${siteCode}?hierarchy=true`)
+  ),
+
+  /**
+   * Gets the RxJS Observable for the locations endpoint for a given named location
+   * @param {string} location The named location to fetch.
+   * @return The RxJS Ajax Observable
+   */
+  getLocationObservable: location => (
+    getJsonObservable(`${NeonEnvironment.getFullApiPath('locations')}/${location}`)
+  ),
 };
 
 Object.freeze(NeonApi);

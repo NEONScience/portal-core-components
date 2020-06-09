@@ -29,6 +29,7 @@ export const optionalEnvironmentVars = [
   'REACT_APP_NEON_PATH_MANIFEST_API',
   'REACT_APP_NEON_PATH_PRODUCTS_API',
   'REACT_APP_NEON_PATH_SITES_API',
+  'REACT_APP_NEON_PATH_LOCATIONS_API',
   'REACT_APP_NEON_PATH_FILE_NAMING_CONVENTIONS',
   'REACT_APP_NEON_SHOW_AOP_VIEWER',
   'REACT_APP_NEON_VISUS_PRODUCTS_BASE_URL',
@@ -65,6 +66,7 @@ const NeonEnvironment = {
     menu: () => process.env.REACT_APP_NEON_PATH_MENU_API,
     products: () => process.env.REACT_APP_NEON_PATH_PRODUCTS_API,
     sites: () => process.env.REACT_APP_NEON_PATH_SITES_API,
+    locations: () => process.env.REACT_APP_NEON_PATH_LOCATIONS_API,
   },
 
   getApiLdPath: {

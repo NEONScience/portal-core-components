@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="80"
+   height="80"
+   viewBox="0 0 21.166666 21.166667"
+   version="1.1"
+   id="svg19093"
+   sodipodi:docname="icon-meteorological-station.svg"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
+  <defs
+     id="defs19087" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="3.959798"
+     inkscape:cx="41.157939"
+     inkscape:cy="37.318763"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:pagecheckerboard="true"
+     inkscape:window-width="972"
+     inkscape:window-height="686"
+     inkscape:window-x="198"
+     inkscape:window-y="323"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata19090">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-275.83332)">
+    <rect
+       style="display:inline;opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.21950617;stroke-opacity:1"
+       id="rect4518-85-4-2"
+       width="21.166666"
+       height="21.166666"
+       x="0"
+       y="275.83331"
+       rx="10.583333"
+       ry="10.583333" />
+    <rect
+       style="display:inline;opacity:1;fill:#76b7b2;fill-opacity:1;stroke:none;stroke-width:0.19206792;stroke-opacity:1"
+       id="rect4518-8-4-7-1"
+       width="18.520834"
+       height="18.520834"
+       x="1.3229218"
+       y="277.15622"
+       rx="9.260417"
+       ry="9.260417" />
+    <path
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.06335201"
+       inkscape:connector-curvature="0"
+       id="path8097"
+       d="m 10.741328,280.86058 c -1.1582999,0 -2.1647499,0.73281 -2.6766499,1.81013 -0.31742,-0.18159 -0.66808,-0.27669 -1.02388,-0.27767 -1.25824,-10e-6 -2.27825,1.152 -2.2783,2.57313 10e-4,0.62543 0.2037,1.22903 0.57013,1.69796 -0.0149,0.006 -0.0322,0.0117 -0.0446,0.0171 H 16.276208 c 0.0842,-0.23108 0.1277,-0.88312 0.12798,-1.13302 4e-5,-1.06024 -0.76093,-1.91972 -1.69963,-1.91968 -0.33532,5e-4 -0.66302,0.11301 -0.94184,0.32341 -0.15028,-1.73527 -1.44552,-3.09154 -3.02147,-3.09154 z"
+       sodipodi:nodetypes="cccccccccccc" />
+    <path
+       d="m 10.328058,288.53331 -0.26551,1.33972 -1.3407499,-0.43175 -0.25514,0.43301 1.07527,0.90809 -1.07527,0.90789 0.25516,0.433 1.3408299,-0.43202 0.26545,1.33998 h 0.51041 l 0.26528,-1.33988 1.34104,0.43192 0.25515,-0.43302 -1.0749,-0.908 1.07491,-0.90797 -0.25517,-0.43299 -1.34105,0.43195 -0.26525,-1.33993 z"
+       id="path8091-5"
+       inkscape:connector-curvature="0"
+       style="display:inline;fill:#ffffff;stroke-width:0.12007096"
+       sodipodi:nodetypes="ccccccccccccccccccc" />
+  </g>
+</svg>

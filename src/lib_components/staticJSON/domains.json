@@ -1,62 +1,122 @@
 {
   "D01": {
-    "name": "Northeast"
+    "name": "Northeast",
+    "areaKm2": 435750.515444,
+    "center": [45.05674343100002, -71.50017492099994],
+    "zoom": 5
   },
   "D02": {
-    "name": "Mid-Atlantic"
+    "name": "Mid-Atlantic",
+    "areaKm2": 351647.279535,
+    "center": [37.215557575432825, -76.43260179936281],
+    "zoom": 5
   },
   "D03": {
-    "name": "Southeast"
+    "name": "Southeast",
+    "areaKm2": 402898.578845,
+    "center": [29.69066888218669, -86.37609453015348],
+    "zoom": 5
   },
   "D04": {
-    "name": "Atlantic Neotropical"
+    "name": "Atlantic Neotropical",
+    "areaKm2": 35600.0640497,
+    "center": [22.29378157428097, -74.36563701975273],
+    "zoom": 5
   },
   "D05": {
-    "name": "Great Lakes"
+    "name": "Great Lakes",
+    "areaKm2": 545054.747481,
+    "center": [46.480716014296874, -89.16947448313053],
+    "zoom": 5
   },
   "D06": {
-    "name": "Prairie Peninsula"
+    "name": "Prairie Peninsula",
+    "areaKm2": 651365.40201,
+    "center": [40.9485320550342, -92.0817242261512],
+    "zoom": 5
   },
   "D07": {
-    "name": "Appalachians and Cumberland Plateau"
+    "name": "Appalachians and Cumberland Plateau",
+    "areaKm2": 305961.509908,
+    "center": [37.68558000627364, -84.30223931517918],
+    "zoom": 6
   },
   "D08": {
-    "name": "Ozarks Complex"
+    "name": "Ozarks Complex",
+    "areaKm2": 682246.114254,
+    "center": [35.00289062332322, -90.7806820163475],
+    "zoom": 5
   },
   "D09": {
-    "name": "Northern Plains"
+    "name": "Northern Plains",
+    "areaKm2": 866826.734263,
+    "center": [46.36679971380169, -103.52496176234702],
+    "zoom": 5
   },
   "D10": {
-    "name": "Central Plains"
+    "name": "Central Plains",
+    "areaKm2": 453477.608352,
+    "center": [36.97787135445305, -101.79649012377773],
+    "zoom": 5
   },
   "D11": {
-    "name": "Southern Plains"
+    "name": "Southern Plains",
+    "areaKm2": 536254.652553,
+    "center": [28.144641360136898, -99.66550859994024],
+    "zoom": 5
   },
   "D12": {
-    "name": "Northern Rockies"
+    "name": "Northern Rockies",
+    "areaKm2": 326668.318581,
+    "center": [46.229359864228876, -113.67924954838982],
+    "zoom": 5
   },
   "D13": {
-    "name": "Southern Rockies and Colorado Plateau"
+    "name": "Southern Rockies and Colorado Plateau",
+    "areaKm2": 643095.755228,
+    "center": [36.1490356269131, -109.07544815799383],
+    "zoom": 5
   },
   "D14": {
-    "name": "Desert Southwest"
+    "name": "Desert Southwest",
+    "areaKm2": 437127.81945,
+    "center": [30.342141347367768, -105.08253575469469],
+    "zoom": 5
   },
   "D15": {
-    "name": "Great Basin"
+    "name": "Great Basin",
+    "areaKm2": 842965.486319,
+    "center": [43.162680242376375, -115.72505012780832],
+    "zoom": 5
   },
   "D16": {
-    "name": "Pacific Northwest"
+    "name": "Pacific Northwest",
+    "areaKm2": 356299.859389,
+    "center": [55.638255883573024, -138.35826236109403],
+    "zoom": 4
   },
   "D17": {
-    "name": "Pacific Southwest"
+    "name": "Pacific Southwest",
+    "areaKm2": 240942.274093,
+    "center": [35.038284995811615, -120.0207702273188],
+    "zoom": 5
   },
   "D18": {
-    "name": "Tundra"
+    "name": "Tundra",
+    "areaKm2": 571903.249274,
+    "center": [64.44521904114393, -157.54472573211228],
+    "zoom": 4
   },
   "D19": {
-    "name": "Taiga"
+    "name": "Taiga",
+    "areaKm2": 725674.02919,
+    "center": [62.55604144060861, -152.85437507467168],
+    "zoom": 4
   },
   "D20": {
-    "name": "Pacific Tropical"
+    "name": "Pacific Tropical",
+    "areaKm2": 16528.4736163,
+    "center": [20.853164356120423, -157.1738549694814],
+    "zoom": 7
   }
 }
