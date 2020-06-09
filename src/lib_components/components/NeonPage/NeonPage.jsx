@@ -300,7 +300,7 @@ const NeonPage = (props) => {
   );
 
   return neonContextIsActive ? renderNeonPage() : (
-    <NeonContext.Provider>
+    <NeonContext.Provider useCoreAuth>
       {renderNeonPage()}
     </NeonContext.Provider>
   );

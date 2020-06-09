@@ -8,7 +8,12 @@ declare namespace NeonContext {
 declare function Provider(props: any): JSX.Element;
 declare namespace Provider {
     export namespace propTypes {
+        export const useCoreAuth: PropTypes.Requireable<boolean>;
         export const children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+    }
+    export namespace defaultProps {
+        const useCoreAuth_1: boolean;
+        export { useCoreAuth_1 as useCoreAuth };
     }
 }
 declare function useNeonContextState(): ({
@@ -367,6 +372,9 @@ declare function useNeonContextState(): ({
                 center: number[];
                 zoom: number;
             };
+            /**
+               CONTEXT
+            */
             D16: {
                 name: string;
                 areaKm2: number;
@@ -436,7 +444,7 @@ declare function useNeonContextState(): ({
     };
     auth: {
         isAuthenticated: boolean;
-        fetchStatus: string;
+        fetchStatus: null;
     };
     isActive: boolean;
     isFinal: boolean;
@@ -797,6 +805,9 @@ declare function useNeonContextState(): ({
                 center: number[];
                 zoom: number;
             };
+            /**
+               CONTEXT
+            */
             D16: {
                 name: string;
                 areaKm2: number;
@@ -866,7 +877,7 @@ declare function useNeonContextState(): ({
     };
     auth: {
         isAuthenticated: boolean;
-        fetchStatus: string;
+        fetchStatus: null;
     };
     isActive: boolean;
     isFinal: boolean;
@@ -892,8 +903,7 @@ declare namespace DEFAULT_STATE {
     }
     export namespace auth {
         export const isAuthenticated: boolean;
-        import fetchStatus = AWAITING_CALL;
-        export { fetchStatus };
+        export const fetchStatus: null;
     }
     export const isActive: boolean;
     export const isFinal: boolean;

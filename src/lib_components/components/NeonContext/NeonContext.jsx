@@ -41,7 +41,7 @@ const DEFAULT_STATE = {
   },
   auth: {
     isAuthenticated: false,
-    fetchStatus: FETCH_STATUS.AWAITING_CALL,
+    fetchStatus: null,
   },
   isActive: false,
   isFinal: false,
@@ -157,7 +157,12 @@ const parseSitesFetchResponse = (sitesArray = []) => {
    Context Provider
 */
 const Provider = (props) => {
-  const { children } = props;
+  const { useCoreAuth, children } = props;
+
+  const initialState = { ...DEFAULT_STATE, isActive: true };
+  if (useCoreAuth) {
+    initialState.auth.fetchStatus = FETCH_STATUS.AWAITING_CALL;
+  }
   const [state, dispatch] = useReducer(reducer, { ...DEFAULT_STATE, isActive: true });
 
   // Subject and effect to perform and manage the sites GraphQL fetch
@@ -185,7 +190,8 @@ const Provider = (props) => {
     }
   });
 
-  // Effect: set the authentication status
+  // Effect: set the authentication status using the core authentication method.
+  // TODO: allow third party core-components consumers to provide their own auth method.
   useEffect(() => {
     if (state.auth.fetchStatus !== FETCH_STATUS.AWAITING_CALL) { return; }
     dispatch({ type: 'setAuthFetching' });
@@ -211,6 +217,7 @@ const Provider = (props) => {
 };
 
 Provider.propTypes = {
+  useCoreAuth: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.oneOfType([
       PropTypes.node,
@@ -219,6 +226,10 @@ Provider.propTypes = {
     PropTypes.node,
     PropTypes.string,
   ]).isRequired,
+};
+
+Provider.defaultProps = {
+  useCoreAuth: false,
 };
 
 /**
