@@ -1,42 +1,26 @@
-/* eslint-disable no-unused-vars, no-underscore-dangle */
+/* eslint-disable no-underscore-dangle */
 import React, { useRef, useEffect } from 'react';
 import ReactDOMServer from 'react-dom/server';
 
-import { CopyToClipboard } from 'react-copy-to-clipboard';
-
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Grid from '@material-ui/core/Grid';
-import IconButton from '@material-ui/core/IconButton';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
-import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
-
-import ClickIcon from '@material-ui/icons/TouchApp';
-import ExploreDataProductsIcon from '@material-ui/icons/InsertChartOutlined';
-import LocationIcon from '@material-ui/icons/MyLocation';
-import SiteDetailsIcon from '@material-ui/icons/InfoOutlined';
 
 import 'leaflet/dist/leaflet.css';
 import './SiteMap.css';
 
 import {
-  FeatureGroup,
   LayersControl,
   Map,
-  Marker,
-  Polygon,
-  Popup,
   ScaleControl,
   TileLayer,
 } from 'react-leaflet';
 
-import NeonContext from '../NeonContext/NeonContext';
 import Theme from '../Theme/Theme';
 
 import SiteMapContext from './SiteMapContext';
+import SiteMapFeature from './SiteMapFeature';
 import {
   VIEWS,
   TILE_LAYERS,
@@ -44,23 +28,9 @@ import {
   MAP_ZOOM_RANGE,
   FEATURES,
   FETCH_STATUS,
-  FEATURE_TYPES,
-  SELECTABLE_FEATURE_TYPES,
-  BOUNDARY_COLORS,
-  SITE_DETAILS_URL_BASE,
-  EXPLORE_DATA_PRODUCTS_URL_BASE,
 } from './SiteMapUtils';
 
-import SitesFeature from './Features/Sites';
-import StatesFeature from './Features/States';
-import DomainsFeature from './Features/Domains';
-import DrainageLinesFeature from './Features/DrainageLines';
-import SiteBasedFeature from './Features/SiteBasedFeature';
-
-import statesShapesJSON from '../../staticJSON/statesShapes.json';
-import domainsShapesJSON from '../../staticJSON/domainsShapes.json';
-
-const { BaseLayer, Overlay } = LayersControl;
+const { BaseLayer } = LayersControl;
 
 const boxShadow = '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)';
 const useStyles = makeStyles(theme => ({
@@ -85,60 +55,8 @@ const useStyles = makeStyles(theme => ({
     cursor: 'help',
     display: 'inline',
   },
-  popup: {
-    minWidth: '320px',
-    '& a': {
-      color: theme.palette.secondary.main,
-    },
-    '& p': {
-      margin: 'unset',
-    },
-    '& a.leaflet-popup-close-button': {
-      top: theme.spacing(0.5),
-      right: theme.spacing(0.5),
-    },
-  },
-  popupButton: {
-    width: '100%',
-    whiteSpace: 'nowrap',
-    marginBottom: theme.spacing(1),
-    color: `${Theme.palette.primary.main} !important`,
-    borderColor: Theme.palette.primary.main,
-    '& span': {
-      pointerEvents: 'none',
-    },
-  },
-  popupSitesListIcon: {
-    width: '20px',
-    height: '20px',
-    margin: '0px 4px 4px 0px',
-    filter: 'drop-shadow(0px 0px 1.5px #000000bb)',
-  },
-  popupFeatureIcon: {
-    width: theme.spacing(4.5),
-    height: theme.spacing(4.5),
-    marginRight: theme.spacing(1.5),
-    filter: 'drop-shadow(0px 0px 1.5px #000000bb)',
-  },
-  popupLocationSiteIcon: {
-    width: theme.spacing(3),
-    height: theme.spacing(3),
-    marginRight: theme.spacing(1),
-    filter: 'drop-shadow(0px 0px 1.5px #000000bb)',
-  },
-  popupTitleContainer: {
-    display: 'flex',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    marginBottom: theme.spacing(1.5),
-  },
   startFlex: {
     display: 'flex',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-  startFlexInline: {
-    display: 'inline-flex',
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
@@ -146,36 +64,6 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'flex-end',
     alignItems: 'center',
-  },
-  keySwatchStates: {
-    border: `2px solid ${BOUNDARY_COLORS[FEATURES.STATES.KEY]}`,
-    backgroundColor: `${BOUNDARY_COLORS[FEATURES.STATES.KEY]}88`,
-    width: Theme.spacing(3),
-    height: Theme.spacing(1),
-    margin: Theme.spacing(0, 0.5, 0.25, 0),
-  },
-  keySwatchDomains: {
-    border: `2px solid ${BOUNDARY_COLORS[FEATURES.DOMAINS.KEY]}`,
-    backgroundColor: `${BOUNDARY_COLORS[FEATURES.DOMAINS.KEY]}88`,
-    width: Theme.spacing(3),
-    height: Theme.spacing(1),
-    margin: Theme.spacing(0, 0.5, 0.25, 0),
-  },
-  keySiteIcon: {
-    width: '20px',
-    height: '20px',
-    marginRight: '4px',
-  },
-  infoSnackbar: {
-    backgroundColor: theme.palette.grey[50],
-    color: '#000',
-    border: `1px solid ${theme.palette.primary.main}80`,
-    justifyContent: 'center',
-    padding: theme.spacing(0, 1),
-  },
-  infoSnackbarIcon: {
-    color: theme.palette.grey[300],
-    marginRight: theme.spacing(2),
   },
   progress: {
     zIndex: 900,
@@ -191,17 +79,6 @@ const useStyles = makeStyles(theme => ({
 const SiteMapLeaflet = () => {
   const classes = useStyles(Theme);
   const mapRef = useRef(null);
-  window.mapRef = mapRef;
-
-  // Neon Context State
-  const [{ data: neonContextData }] = NeonContext.useNeonContextState();
-  const {
-    sites: allSites,
-    states: allStates,
-    domains: allDomains,
-    stateSites,
-    domainSites,
-  } = neonContextData;
 
   // State, Dispatch, and other stuff from SiteMapContext
   const [state, dispatch] = SiteMapContext.useSiteMapContext();
@@ -269,104 +146,6 @@ const SiteMapLeaflet = () => {
   if (!canRender) { return null; }
 
   /**
-     Util: Position Popup
-     Leaflet's AutoPan for popups does a "transition" of map center to ensure a new popup renders
-     in view. This poses a problem when the center is in the main context state - every micro-step
-     of the AutoPan transition is a state update. The transition appears to run recursively as it
-     causes a max update depth crash. We get around this by solving the same root problem (want
-     popups to render in view) in a different way... specifically by positioning them around their
-     parent element dynamcally based on which direction has the most room to render.
-  */
-  const positionPopup = (target = null, latlng = null, hideCloseButton = false) => {
-    if (!target || !latlng || !mapRef.current || !mapRef.current.leafletElement) { return; }
-    const { map: { bounds } } = state;
-    const { _popup: popup, _icon: icon } = target;
-    popup.setLatLng(latlng);
-    const containerPoint = mapRef.current.leafletElement.latLngToContainerPoint(latlng);
-    const iconHeight = icon ? icon.height : 0;
-    const {
-      _container: containerNode,
-      _containerLeft: containerLeft,
-      _containerBottom: containerBottom,
-      _tipContainer: tipNode,
-    } = popup;
-    containerNode.style.marginBottom = '0px';
-    // Leaflet popups always open above; open below if mouse event is in the top half of the map
-    if (containerPoint.y < (mapRef.current.container.clientHeight / 2)) {
-      const contentHeight = containerNode.clientHeight;
-      const tipHeight = tipNode.clientHeight;
-      const contentBottom = 0 - iconHeight - contentHeight - tipHeight - (1.5 * containerBottom);
-      const tipBottom = contentHeight + tipHeight;
-      containerNode.style.bottom = `${contentBottom}px`;
-      tipNode.style.transform = `rotate(0.5turn) translate(0px, ${tipBottom}px)`;
-    } else {
-      containerNode.style.bottom = `${-1.5 * containerBottom}px`;
-      popup._tipContainer.style.transform = null;
-    }
-    // For left/right we move the popup horizontally as needed while keeping the tip stationary
-    const contentWidth = containerNode.clientWidth;
-    const mapWidth = mapRef.current.container.parentNode.clientWidth || 0;
-    const nudgeBuffer = 40;
-    const nudgeLimit = (contentWidth / 2) - (nudgeBuffer / 2);
-    let overlap = 0;
-    if (mapWidth > (contentWidth + (nudgeBuffer * 3))) {
-      let nudge = 0;
-      if (containerPoint.x - (contentWidth / 2) < 0) {
-        overlap = containerPoint.x - (contentWidth / 2);
-        nudge = Math.min((0 - overlap) + nudgeBuffer, nudgeLimit);
-      } else if (containerPoint.x + (contentWidth / 2) > mapWidth) {
-        overlap = mapWidth - containerPoint.x - (contentWidth / 2);
-        nudge = Math.min(overlap - nudgeBuffer, nudgeLimit);
-      }
-      if (nudge !== 0) {
-        containerNode.style.left = `${containerLeft + nudge}px`;
-      }
-      tipNode.style.left = `${(0 - containerLeft) - nudge}px`;
-    }
-    if (hideCloseButton) {
-      popup._closeButton.style.display = 'none';
-    }
-  };
-
-  /**
-     Render Method: List of Sites inside a Popup
-  */
-  const renderPopupSitesList = (sitesList) => {
-    if (!sitesList || !sitesList.size) {
-      return (
-        <Typography variant="subtitle2" gutterBottom>
-          <i>No NEON Sites</i>
-        </Typography>
-      );
-    }
-    const { [SELECTABLE_FEATURE_TYPES.SITES]: selectedSites } = state.selection;
-    return (
-      <React.Fragment>
-        <Typography variant="subtitle2" gutterBottom>
-          {`NEON Sites (${sitesList.size}):`}
-        </Typography>
-        <div>
-          {[...sitesList].map((siteCode) => {
-            const site = allSites[siteCode];
-            const alt = `${site.terrain} ${site.type}`;
-            const featureKey = `${site.terrain.toUpperCase}_${site.type_toUpperCase}_SITES`;
-            if (!FEATURES[featureKey]) { return null; }
-            const src = selectedSites.has(siteCode)
-              ? FEATURES[featureKey].iconSelectedSvg
-              : FEATURES[featureKey].iconSvg;
-            return (
-              <div key={siteCode} style={{ display: 'flex' }}>
-                <img src={src} alt={alt} className={classes.popupSitesListIcon} />
-                <div>{`${site.description} (${siteCode})`}</div>
-              </div>
-            );
-          })}
-        </div>
-      </React.Fragment>
-    );
-  };
-
-  /**
      Render: Tile Layers
   */
   const renderTileLayer = (key) => {
@@ -386,54 +165,6 @@ const SiteMapLeaflet = () => {
         <TileLayer key={key} url={tileLayer.url} attribution={attributionString} />
       </BaseLayer>
     );
-  };
-
-  /**
-     Render Method: Feature
-  */
-  const renderFeature = (key) => {
-    if (!FEATURES[key]) { return null; }
-    const feature = FEATURES[key];
-    // Groups don't directly render anything
-    if (feature.type === FEATURE_TYPES.GROUP) { return null; }
-    const featureProps = {
-      key,
-      featureKey: key,
-      classes,
-      positionPopup,
-    };
-    switch (feature.type) {
-      case FEATURE_TYPES.SITES:
-      case FEATURE_TYPES.LOCATIONS:
-        return <SiteBasedFeature {...featureProps} />;
-
-      case FEATURE_TYPES.BOUNDARIES:
-        switch (key) {
-          case FEATURES.DOMAINS.KEY:
-            return <DomainsFeature {...featureProps} renderPopupSitesList={renderPopupSitesList} />;
-          case FEATURES.STATES.KEY:
-            return <StatesFeature {...featureProps} renderPopupSitesList={renderPopupSitesList} />;
-          case FEATURES.SAMPLING_BOUNDARIES.KEY:
-          case FEATURES.AQUATIC_REACHES.KEY:
-          case FEATURES.FLIGHT_BOX_BOUNDARIES.KEY:
-          case FEATURES.WATERSHED_BOUNDARIES.KEY:
-          case FEATURES.TOWER_AIRSHEDS.KEY:
-            return <SiteBasedFeature {...featureProps} />;
-          default:
-            return null;
-        }
-      case FEATURE_TYPES.OTHER:
-        switch (key) {
-          case FEATURES.DRAINAGE_LINES.KEY:
-            return <DrainageLinesFeature {...featureProps} />;
-          case FEATURES.POUR_POINTS.KEY:
-            return <SiteBasedFeature {...featureProps} />;
-          default:
-            return null;
-        }
-      default:
-        return null;
-    }
   };
 
   /**
@@ -483,7 +214,6 @@ const SiteMapLeaflet = () => {
   */
   const renderProgress = () => {
     if (state.overallFetch.expected === state.overallFetch.completed) { return null; }
-    const hasProgress = state.overallFetch.pendingHierarchy === 0;
     if (state.overallFetch.pendingHierarchy !== 0) {
       return (
         <Box className={classes.progress}>
@@ -539,6 +269,7 @@ const SiteMapLeaflet = () => {
         onBaseLayerChange={handleBaseLayerChange}
         worldCopyJump
         data-component="SiteMap"
+        data-selenium="sitemap-content-map"
       >
         <ScaleControl imperial metric updateWhenIdle />
         <LayersControl position="topright">
@@ -547,7 +278,7 @@ const SiteMapLeaflet = () => {
         {Object.keys(FEATURES)
           .filter(key => state.filters.features.available[key])
           .filter(key => state.filters.features.visible[key])
-          .map(renderFeature)}
+          .map(key => <SiteMapFeature key={key} featureKey={key} mapRef={mapRef} />)}
       </Map>
       {renderProgress()}
     </React.Fragment>

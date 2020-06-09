@@ -155,6 +155,9 @@ const baseTheme = createMuiTheme({
       fontWeight: 700,
       fontSize: '1.15rem',
     },
+    caption: {
+      fontSize: '0.81rem',
+    },
   },
   props: {
     MuiLink: {

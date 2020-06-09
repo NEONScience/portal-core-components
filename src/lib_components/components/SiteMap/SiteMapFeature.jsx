@@ -1,4 +1,4 @@
-/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-underscore-dangle, jsx-a11y/anchor-is-valid */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -6,9 +6,11 @@ import tinycolor from 'tinycolor2';
 
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
+import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
+import Link from '@material-ui/core/Link';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
@@ -21,16 +23,15 @@ import SiteDetailsIcon from '@material-ui/icons/InfoOutlined';
 
 import 'leaflet/dist/leaflet.css';
 import {
+  Map,
   FeatureGroup,
   Marker,
   Polygon,
+  Polyline,
   Popup,
-  Rectangle,
 } from 'react-leaflet';
 
-import Theme from '../../Theme/Theme';
-
-import SiteMapContext from '../SiteMapContext';
+import SiteMapContext from './SiteMapContext';
 import {
   FEATURES,
   FEATURE_TYPES,
@@ -41,38 +42,105 @@ import {
   SITE_DETAILS_URL_BASE,
   // SELECTABLE_FEATURE_TYPES,
   EXPLORE_DATA_PRODUCTS_URL_BASE,
-} from '../SiteMapUtils';
+} from './SiteMapUtils';
 
-// Convert latitude, longitude, and plotSize (in square meters) to an array of two points
-// representing diagonally opposite corners of a rectangle. Use a fixed earth radius in meters
-// because our centers are all far enough from the poles and our distances small enough that
-// the error is negligible (max plot size used for this is 500m x 500m)
-const EARTH_RADIUS = 6378000;
-const getBounds = (lat = null, lon = null, area = null) => {
-  if (Number.isNaN(lat) || Number.isNaN(lon) || Number.isNaN(area)) { return null; }
-  const offsetMeters = (area ** 0.5) / 2;
-  const dLat = (offsetMeters / EARTH_RADIUS) * (180 / Math.PI);
-  const dLon = (offsetMeters / EARTH_RADIUS) * (180 / Math.PI) / Math.cos(lat * Math.PI / 180);
-  return [
-    [lat - dLat, lon - dLon],
-    [lat + dLat, lon + dLon],
-  ];
-};
+import Theme from '../Theme/Theme';
 
-const SiteBasedFeature = (props) => {
-  const {
-    classes,
-    featureKey,
-    positionPopup,
-  } = props;
+const useStyles = makeStyles(theme => ({
+  infoSnackbar: {
+    backgroundColor: theme.palette.grey[50],
+    color: '#000',
+    border: `1px solid ${theme.palette.primary.main}80`,
+    justifyContent: 'center',
+    padding: theme.spacing(0, 1),
+  },
+  infoSnackbarIcon: {
+    color: theme.palette.grey[300],
+    marginRight: theme.spacing(2),
+  },
+  popup: {
+    minWidth: '320px',
+    '& a': {
+      color: theme.palette.secondary.main,
+    },
+    '& p': {
+      margin: 'unset',
+    },
+    '& a.leaflet-popup-close-button': {
+      top: theme.spacing(0.5),
+      right: theme.spacing(0.5),
+    },
+  },
+  popupButton: {
+    width: '100%',
+    whiteSpace: 'nowrap',
+    marginBottom: theme.spacing(1),
+    color: `${Theme.palette.primary.main} !important`,
+    borderColor: Theme.palette.primary.main,
+    '& span': {
+      pointerEvents: 'none',
+    },
+  },
+  popupSiteIcon: {
+    width: theme.spacing(2.5),
+    height: theme.spacing(2.5),
+    marginRight: theme.spacing(1),
+    filter: 'drop-shadow(0px 0px 1.5px #000000bb)',
+  },
+  popupSiteContainer: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    marginBottom: theme.spacing(1),
+  },
+  popupFeatureIcon: {
+    width: theme.spacing(4.5),
+    height: theme.spacing(4.5),
+    marginRight: theme.spacing(1.5),
+    filter: 'drop-shadow(0px 0px 1.5px #000000bb)',
+  },
+  popupFeaturePolygon: {
+    marginRight: theme.spacing(1.5),
+  },
+  popupTitleContainer: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    marginBottom: theme.spacing(1.5),
+  },
+  startFlex: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  endFlex: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+}));
+
+const SiteMapFeature = (props) => {
+  const classes = useStyles(Theme);
+  const { mapRef, featureKey } = props;
+
+  if (!FEATURES[featureKey] || !mapRef.current) { return null; }
+
   const feature = FEATURES[featureKey] || {};
 
   const {
+    name,
+    nameSingular,
     type: featureType,
-    style: featureStyle = {},
+    style: featureStyle,
+    featureShape,
     iconSvg,
-    minPolygonZoom,
+    // minPolygonZoom,
   } = feature;
+  const featureName = nameSingular || name || featureKey;
+
+  // Groups don't render anything ever!
+  if (featureType === FEATURE_TYPES.GROUP) { return null; }
 
   /**
      Extract feature data from SiteMapContext state
@@ -80,7 +148,7 @@ const SiteBasedFeature = (props) => {
   const [state, dispatch] = SiteMapContext.useSiteMapContext();
   const {
     neonContextHydrated,
-    map: { zoom },
+    // map: { zoom },
     focusLocation: { current: focusLocation },
     featureData: {
       [featureType]: {
@@ -93,26 +161,111 @@ const SiteBasedFeature = (props) => {
   const selectionActive = state.selection.active === featureType;
   const selectedItems = selectionActive ? state.selection[featureType] : new Set();
 
+  // Jump-To function to afford map navigation where appropriate
+  const jumpTo = (locationCode = '') => {
+    dispatch({ type: 'setNewFocusLocation', location: locationCode });
+  };
+
+  /**
+     Util: Position Popup
+     Leaflet's AutoPan for popups does a "transition" of map center to ensure a new popup renders
+     in view. This poses a problem when the center is in the main context state - every micro-step
+     of the AutoPan transition is a state update. The transition appears to run recursively as it
+     causes a max update depth crash. We get around this by solving the same root problem (want
+     popups to render in view) in a different way... specifically by positioning them around their
+     parent element dynamcally based on which direction has the most room to render.
+  */
+  const positionPopup = (target = null, latlng = null, hideCloseButton = false) => {
+    if (!target || !latlng || !mapRef.current || !mapRef.current.leafletElement) { return; }
+    const { _popup: popup, _icon: icon } = target;
+    popup.setLatLng(latlng);
+    const containerPoint = mapRef.current.leafletElement.latLngToContainerPoint(latlng);
+    const iconHeight = icon ? icon.height : 0;
+    const {
+      _container: containerNode,
+      _containerLeft: containerLeft,
+      _containerBottom: containerBottom,
+      _tipContainer: tipNode,
+    } = popup;
+    containerNode.style.marginBottom = '0px';
+    // Leaflet popups always open above; open below if mouse event is in the top half of the map
+    if (containerPoint.y < (mapRef.current.container.clientHeight / 2)) {
+      const contentHeight = containerNode.clientHeight;
+      const tipHeight = tipNode.clientHeight;
+      const contentBottom = 0 - iconHeight - contentHeight - tipHeight - (1.5 * containerBottom);
+      const tipBottom = contentHeight + tipHeight;
+      containerNode.style.bottom = `${contentBottom}px`;
+      tipNode.style.transform = `rotate(0.5turn) translate(0px, ${tipBottom}px)`;
+    } else {
+      containerNode.style.bottom = `${-1.5 * containerBottom}px`;
+      popup._tipContainer.style.transform = null;
+    }
+    // For left/right we move the popup horizontally as needed while keeping the tip stationary
+    const contentWidth = containerNode.clientWidth;
+    const mapWidth = mapRef.current.container.parentNode.clientWidth || 0;
+    const nudgeBuffer = 40;
+    const nudgeLimit = (contentWidth / 2) - (nudgeBuffer / 2);
+    let overlap = 0;
+    if (mapWidth > (contentWidth + (nudgeBuffer * 3))) {
+      let nudge = 0;
+      if (containerPoint.x - (contentWidth / 2) < 0) {
+        overlap = containerPoint.x - (contentWidth / 2);
+        nudge = Math.min((0 - overlap) + nudgeBuffer, nudgeLimit);
+      } else if (containerPoint.x + (contentWidth / 2) > mapWidth) {
+        overlap = mapWidth - containerPoint.x - (contentWidth / 2);
+        nudge = Math.min(overlap - nudgeBuffer, nudgeLimit);
+      }
+      if (nudge !== 0) {
+        containerNode.style.left = `${containerLeft + nudge}px`;
+      }
+      tipNode.style.left = `${(0 - containerLeft) - nudge}px`;
+    }
+    if (hideCloseButton) {
+      popup._closeButton.style.display = 'none';
+    }
+  };
+
   /**
      Render: Popup Title with Feature Icon
   */
   const renderPopupTitle = (title, withFeatureName = true) => {
-    const featureName = feature.nameSingular || feature.name || featureKey;
     const renderedTitle = withFeatureName ? (
       <span>
-        {feature.nameSingular}
+        {featureName}
         <br />
         {title}
       </span>
     ) : title;
+    let icon = null;
+    if (iconSvg) {
+      icon = <img alt={feature.name} src={feature.iconSvg} className={classes.popupFeatureIcon} />;
+    } else if (featureStyle && !['STATES', 'DOMAINS'].includes(featureKey)) {
+      // We don't show the rect for states and domains since those cover the whole map when showing.
+      const rectProps = {
+        width: 33,
+        height: 23,
+        x: 1.5,
+        y: 6.5,
+        rx: 3,
+        style: {
+          fill: feature.style.color || null,
+          stroke: feature.style.color || null,
+          strokeWidth: 2.5,
+          fillOpacity: 0.2,
+          strokeOpacity: 0.85,
+          strokeLinecap: 'round',
+          strokeDasharray: feature.style.dashArray || null,
+        },
+      };
+      icon = (
+        <svg width="36" height="36" className={classes.popupFeaturePolygon}>
+          <rect {...rectProps} />
+        </svg>
+      );
+    }
     return (
-      <div className={classes.popupTitleContainer}>
-        <img
-          src={feature.iconSvg}
-          alt={featureName}
-          title={featureName}
-          className={classes.popupFeatureIcon}
-        />
+      <div className={classes.popupTitleContainer} data-selenium="sitemap-map-popup-title">
+        {icon}
         <Typography variant="h6" style={{ lineHeight: '1.4rem' }}>
           {renderedTitle}
         </Typography>
@@ -123,10 +276,12 @@ const SiteBasedFeature = (props) => {
   /**
      Render: a numerical value with units and optional label
   */
-  const renderNumericalValue = (value, label = null, unit = '', precision = 0, aria = null, right = false) => { // eslint-disable-line max-len
+  const renderNumericalValue = (value, label = null, unit = '', precision = 0, aria = null, right = false, parens = false) => { // eslint-disable-line max-len
+    let numberString = Number.isFinite(value) ? `${value.toFixed(precision)}${unit}` : '--';
+    if (parens) { numberString = `(${numberString})`; }
     const visibleValue = (
       <Typography variant="caption" aria-label={aria || label} style={{ fontFamily: 'monospace' }}>
-        {Number.isFinite(value) ? `${value.toFixed(precision)}${unit}` : '--'}
+        {numberString}
       </Typography>
     );
     return !label ? visibleValue : (
@@ -140,11 +295,51 @@ const SiteBasedFeature = (props) => {
   };
 
   /**
+     Render: Site with Icon
+  */
+  const renderSite = (siteCode, link = false) => {
+    const site = state.sites[siteCode];
+    if (!site) { return null; }
+    const siteFeatureKey = `${site.terrain}_${site.type}_SITES`;
+    if (!FEATURES[siteFeatureKey]) { return null; }
+    const { iconSvg: siteIcon } = FEATURES[siteFeatureKey];
+    const internal = (
+      <React.Fragment>
+        <img src={siteIcon} alt={siteCode} className={classes.popupSiteIcon} />
+        <Typography variant="caption" style={{ textAlign: 'left' }}>
+          {`${site.description} (${site.siteCode})`}
+        </Typography>
+      </React.Fragment>
+    );
+    const containerProps = {
+      key: siteCode,
+      className: classes.popupSiteContainer,
+      style: { marginTop: Theme.spacing(0.5) },
+    };
+    return link ? (
+      <Link
+        variant="caption"
+        component="button"
+        onClick={() => jumpTo(site.siteCode)}
+        data-selenium="sitemap-map-popup-siteLink"
+        {...containerProps}
+      >
+        {internal}
+      </Link>
+    ) : (
+      <div {...containerProps}>{internal}</div>
+    );
+  };
+
+  /**
      Render: Latitude / Longitude with Copy to Clipboard
   */
   const renderLatLon = (latitude, longitude, right = false, renderSubtitle = false) => {
     const coords = Number.isFinite(latitude) && Number.isFinite(longitude) ? (
-      <div className={classes[right ? 'endFlex' : 'startFlex']}>
+      <div
+        className={classes[right ? 'endFlex' : 'startFlex']}
+        data-selenium="sitemap-map-popup-coordinates"
+      >
         <CopyToClipboard text={`${latitude.toFixed(5)} ${longitude.toFixed(5)}`}>
           <Tooltip title="Latitude / Longitude (click to copy)">
             <IconButton
@@ -193,7 +388,10 @@ const SiteBasedFeature = (props) => {
     const { elevation, minimumElevation, maximumElevation } = loc;
     const hasMinMax = Number.isFinite(minimumElevation) || Number.isFinite(maximumElevation);
     return (
-      <div style={{ textAlign: right ? 'right' : 'left' }}>
+      <div
+        style={{ textAlign: right ? 'right' : 'left' }}
+        data-selenium="sitemap-map-popup-elevation"
+      >
         <Typography variant="subtitle2">Elevation</Typography>
         {hasMinMax ? (
           <div>
@@ -215,7 +413,7 @@ const SiteBasedFeature = (props) => {
      Render: Plot Size
   */
   const renderPlotSize = (loc = {}) => (
-    <div>
+    <div data-selenium="sitemap-map-popup-plotSize">
       <Typography variant="subtitle2">Plot Size</Typography>
       <Typography variant="caption">
         {loc.plotDimensions}
@@ -233,7 +431,10 @@ const SiteBasedFeature = (props) => {
      Render: Plot Slope
   */
   const renderPlotSlope = (loc = {}, right = false) => (
-    <div style={{ textAlign: right ? 'right' : 'left' }}>
+    <div
+      style={{ textAlign: right ? 'right' : 'left' }}
+      data-selenium="sitemap-map-popup-plotSlope"
+    >
       <Typography variant="subtitle2">Plot Slope</Typography>
       {renderNumericalValue(loc.slopeAspect, 'Aspect', '°', 2, 'Slope Aspect', right)}
       {renderNumericalValue(loc.slopeGradient, 'Gradient', '%', 2, 'Slope Gradient', right)}
@@ -243,20 +444,76 @@ const SiteBasedFeature = (props) => {
   /**
      Render: Plot Sampling Modules
   */
-  const renderPlotSamplingModules = (loc = {}) => (
-    <Grid key="plotSamplingModules" item xs={12}>
-      <Typography variant="subtitle2">
-        {`Sampling Modules${loc.samplingModules.length ? ` (${loc.samplingModules.length})` : ''}`}
-      </Typography>
-      <Typography variant="caption">
-        {!loc.samplingModules.length ? (
-          <i>none</i>
+  const renderPlotSamplingModules = (loc = {}) => {
+    const count = loc.samplingModules.length ? ` (${loc.samplingModules.length})` : '';
+    return (
+      <Grid
+        item
+        xs={12}
+        key="plotSamplingModules"
+        data-selenium="sitemap-map-popup-samplingModules"
+      >
+        <Typography variant="subtitle2">
+          {`Potential Sampling Modules${count}`}
+        </Typography>
+        <Typography variant="caption">
+          {!loc.samplingModules.length ? (
+            <i>none</i>
+          ) : (
+            loc.samplingModules.map(m => PLOT_SAMPLING_MODULES[m]).join(', ')
+          )}
+        </Typography>
+      </Grid>
+    );
+  };
+
+  /**
+     Render: Popup Row; Boundary Area
+  */
+  const renderBoundaryArea = (bound = {}) => {
+    const { areaKm2 } = bound.properties || {};
+    const areaAcres = Number.isFinite(areaKm2) ? KM2_TO_ACRES * areaKm2 : null;
+    return (
+      <Grid item xs={12} data-selenium="sitemap-map-popup-area">
+        <Typography variant="subtitle2">Area</Typography>
+        <div className={classes.startFlex}>
+          {renderNumericalValue(areaKm2, null, 'km²', 2, 'Area (km²)')}
+          {areaAcres === null ? null : (
+            <div style={{ marginLeft: Theme.spacing(1) }}>
+              {renderNumericalValue(areaAcres, null, ' acres', 2, 'Area (acres)', false, true)}
+            </div>
+          )}
+        </div>
+      </Grid>
+    );
+  };
+
+  /**
+     Render Method: Popup Row; Child NEON Sites (e.g. within a domain or state)
+  */
+  const renderChildSites = (boundaryKey) => {
+    // const { [SELECTABLE_FEATURE_TYPES.SITES]: selectedSites } = state.selection;
+    const { sites = new Set() } = featureData[boundaryKey];
+    return (
+      <Grid key="childSites" item xs={12} data-selenium="sitemap-map-popup-childSites">
+        {!sites.size ? (
+          <React.Fragment>
+            <Typography variant="subtitle2">NEON Sites</Typography>
+            <Typography variant="caption">
+              <i>none</i>
+            </Typography>
+          </React.Fragment>
         ) : (
-          loc.samplingModules.map(m => PLOT_SAMPLING_MODULES[m]).join(', ')
+          <React.Fragment>
+            <Typography variant="subtitle2">{`NEON Sites (${sites.size}):`}</Typography>
+            <div>
+              {[...sites].map(siteCode => renderSite(siteCode, true))}
+            </div>
+          </React.Fragment>
         )}
-      </Typography>
-    </Grid>
-  );
+      </Grid>
+    );
+  };
 
   /**
      Render: Popup Row; Coordinates and Elevation
@@ -291,8 +548,11 @@ const SiteBasedFeature = (props) => {
     </React.Fragment>
   );
 
+  /**
+     Render: Popup Row; Tower Details
+  */
   const renderTowerDetails = loc => (
-    <Grid key="towerDetails" item xs={12}>
+    <Grid key="towerDetails" item xs={12} data-selenium="sitemap-map-popup-towerDetails">
       <Typography variant="subtitle2">Levels</Typography>
       <Typography variant="caption">{(loc.children || []).length}</Typography>
     </Grid>
@@ -303,29 +563,35 @@ const SiteBasedFeature = (props) => {
   */
   const renderLocationSiteAndDomain = (siteCode) => {
     const site = state.sites[siteCode];
-    if (!site) { return null; }
-    const siteFeatureKey = `${site.terrain}_${site.type}_SITES`;
-    if (!FEATURES[siteFeatureKey]) { return null; }
-    const { iconSvg: siteIcon, name, nameSingular } = FEATURES[siteFeatureKey];
-    const siteType = name || nameSingular || siteFeatureKey;
+    if (!site || !state.featureData.BOUNDARIES.DOMAINS[site.domainCode]) { return null; }
+    const { name: domainName } = state.featureData.BOUNDARIES.DOMAINS[site.domainCode];
+    const domainTitle = `${site.domainCode} - ${domainName}`;
     return (
       <React.Fragment key="locationSiteAndDomain">
-        <Grid item xs={9}>
+        <Grid item xs={7} data-selenium="sitemap-map-popup-site">
           <Typography variant="subtitle2">NEON Site</Typography>
-          <div className={classes.startFlex} style={{ marginTop: Theme.spacing(0.5) }}>
-            <img src={siteIcon} alt={siteType} className={classes.popupLocationSiteIcon} />
-            <Typography variant="body2">{`${site.description} (${site.siteCode})`}</Typography>
-          </div>
+          {renderSite(siteCode)}
         </Grid>
-        <Grid item xs={3} style={{ textAlign: 'right' }}>
+        <Grid item xs={5} style={{ textAlign: 'right' }} data-selenium="sitemap-map-popup-domain">
           <Typography variant="subtitle2">Domain</Typography>
-          <Typography variant="body2">{site.domainCode}</Typography>
+          <Link
+            variant="caption"
+            component="button"
+            onClick={() => jumpTo(site.siteCode)}
+            data-selenium="sitemap-map-popup-domainLink"
+          >
+            {domainTitle}
+          </Link>
         </Grid>
       </React.Fragment>
     );
   };
 
-  const popupProps = { className: classes.popup, autoPan: false };
+  const popupProps = {
+    className: classes.popup,
+    autoPan: false,
+    id: 'sitemap-map-popup',
+  };
 
   /**
      Render: Location popup
@@ -341,6 +607,28 @@ const SiteBasedFeature = (props) => {
           {renderCoordsAndElevation(loc)}
           {additionalRows.map(row => (typeof row === 'function' ? row(loc) : row))}
           {renderLocationSiteAndDomain(siteCode)}
+        </Grid>
+      </Popup>
+    );
+  };
+
+  /**
+     Render: Boundary popup
+     Standard title with bound outline. Show area if present.
+  */
+  const renderBoundaryPopup = (key, title = null, additionalRows = []) => {
+    const { properties = {} } = (featureData[key] || {});
+    return (
+      <Popup {...popupProps}>
+        {renderPopupTitle(title || key, !title)}
+        <Grid container spacing={1}>
+          {properties.areaKm2 ? renderBoundaryArea(featureData[key]) : null}
+          {(
+            Array.isArray(additionalRows)
+              ? additionalRows.map(row => (typeof row === 'function' ? row(key) : row))
+              : null
+          )}
+          {renderLocationSiteAndDomain(key)}
         </Grid>
       </Popup>
     );
@@ -420,7 +708,14 @@ const SiteBasedFeature = (props) => {
           {/* State/Territory */}
           <Grid item xs={4} style={{ textAlign: 'right' }}>
             <Typography variant="subtitle2">{stateFieldTitle}</Typography>
-            <Typography variant="body2">{usState.name}</Typography>
+            <Link
+              variant="caption"
+              component="button"
+              onClick={() => jumpTo(site.stateCode)}
+              data-selenium="sitemap-map-popup-stateLink"
+            >
+              {usState.name}
+            </Link>
           </Grid>
           {/* Latitude/Longitude */}
           <Grid item xs={5} style={{ display: 'flex', alignItems: 'flex-end' }}>
@@ -429,9 +724,14 @@ const SiteBasedFeature = (props) => {
           {/* Domain */}
           <Grid item xs={7} style={{ textAlign: 'right' }}>
             <Typography variant="subtitle2">Domain</Typography>
-            <Typography variant="body2">
+            <Link
+              variant="caption"
+              component="button"
+              onClick={() => jumpTo(site.domainCode)}
+              data-selenium="sitemap-map-popup-domainLink"
+            >
               {`${site.domainCode} - ${domain.name}`}
-            </Typography>
+            </Link>
           </Grid>
         </Grid>
         {renderActions()}
@@ -452,20 +752,7 @@ const SiteBasedFeature = (props) => {
     AQUATIC_FISH_POINTS: renderLocationPopup,
     AQUATIC_METEOROLOGICAL_STATIONS: renderLocationPopup,
     AQUATIC_PLANT_TRANSECTS: renderLocationPopup,
-    AQUATIC_REACHES: (siteCode) => {
-      const { areaKm2 } = featureData[siteCode].properties;
-      const areaAcres = KM2_TO_ACRES * areaKm2;
-      return (
-        <Popup {...popupProps}>
-          <Typography variant="h6" gutterBottom>
-            {`${siteCode} Aquatic Reach`}
-          </Typography>
-          <Typography variant="body1">
-            {`Area: ${areaKm2.toFixed(2)} km2 (${areaAcres.toFixed(2)} acres)`}
-          </Typography>
-        </Popup>
-      );
-    },
+    AQUATIC_REACHES: renderBoundaryPopup,
     AQUATIC_RELOCATABLE_SITES: renderSitePopup,
     AQUATIC_RIPARIAN_ASSESSMENTS: renderLocationPopup,
     AQUATIC_SEDIMENT_POINTS: renderLocationPopup,
@@ -488,45 +775,36 @@ const SiteBasedFeature = (props) => {
     DISTRIBUTED_TICK_PLOTS: (siteCode, location) => renderLocationPopup(siteCode, location, [
       renderPlotSizeAndSlope,
     ]),
-    FLIGHT_BOX_BOUNDARIES: siteCode => (
-      <Popup {...popupProps}>
-        <Typography variant="h6" gutterBottom>
-          {`${siteCode} AOP Flight Box`}
-        </Typography>
-      </Popup>
-    ),
+    DOMAINS: (domainCode) => {
+      const title = !featureData[domainCode] ? null : (
+        <span>
+          {`NEON Domain ${domainCode.replace('D', '')}`}
+          <br />
+          {featureData[domainCode].name}
+        </span>
+      );
+      return renderBoundaryPopup(domainCode, title, [renderChildSites]);
+    },
+    FLIGHT_BOX_BOUNDARIES: renderBoundaryPopup,
     HUTS: renderLocationPopup,
     MEGAPITS: renderLocationPopup,
     POUR_POINTS: siteCode => (
       <Popup {...popupProps}>
-        <Typography variant="h6" gutterBottom>
-          {`${siteCode} Aquatic Watershed Pour Point`}
-        </Typography>
+        {renderPopupTitle(`${siteCode} Watershed Pour Point`)}
+        <Grid container spacing={1}>
+          {renderLocationSiteAndDomain(siteCode)}
+        </Grid>
       </Popup>
     ),
-    SAMPLING_BOUNDARIES: (siteCode) => {
-      const { areaKm2 } = featureData[siteCode].properties;
-      const areaAcres = KM2_TO_ACRES * areaKm2;
-      return (
-        <Popup {...popupProps}>
-          <Typography variant="h6" gutterBottom>
-            {`${siteCode} Sampling Boundary`}
-          </Typography>
-          <Typography variant="body1">
-            {`Area: ${areaKm2.toFixed(2)} km2 (${areaAcres.toFixed(2)} acres)`}
-          </Typography>
-        </Popup>
-      );
-    },
+    SAMPLING_BOUNDARIES: renderBoundaryPopup,
+    STATES: stateCode => renderBoundaryPopup(
+      stateCode,
+      featureData[stateCode] ? featureData[stateCode].name : stateCode,
+      [renderChildSites],
+    ),
     TERRESTRIAL_CORE_SITES: renderSitePopup,
     TERRESTRIAL_RELOCATABLE_SITES: renderSitePopup,
-    TOWER_AIRSHEDS: siteCode => (
-      <Popup {...popupProps}>
-        <Typography variant="h6" gutterBottom>
-          {`${siteCode} Tower Airshed Boundary`}
-        </Typography>
-      </Popup>
-    ),
+    TOWER_AIRSHEDS: renderBoundaryPopup,
     TOWER_BASE_PLOTS: (siteCode, location) => renderLocationPopup(siteCode, location, [
       renderPlotSizeAndSlope,
       renderPlotSamplingModules,
@@ -538,26 +816,7 @@ const SiteBasedFeature = (props) => {
     TOWERS: (siteCode, location) => renderLocationPopup(siteCode, location, [
       renderTowerDetails,
     ]),
-    WATERSHED_BOUNDARIES: (siteCode) => {
-      const { areaKm2 } = featureData[siteCode].properties;
-      let area = null;
-      if (areaKm2) {
-        const areaAcres = KM2_TO_ACRES * areaKm2;
-        area = (
-          <Typography variant="body1">
-            {`Area: ${areaKm2.toFixed(2)} km2 (${areaAcres.toFixed(2)} acres)`}
-          </Typography>
-        );
-      }
-      return (
-        <Popup {...popupProps}>
-          <Typography variant="h6" gutterBottom>
-            {`${siteCode} Watershed Boundary`}
-          </Typography>
-          {area}
-        </Popup>
-      );
-    },
+    WATERSHED_BOUNDARIES: renderBoundaryPopup,
   };
   const renderPopup = (siteCode, location = null) => {
     if (
@@ -571,18 +830,8 @@ const SiteBasedFeature = (props) => {
   /**
      Render a single shape (marker, rectangle, or polygon)
   */
-  const hoverColor = `#${tinycolor(featureStyle.color || '#666666').lighten(10).toHex()}`;
-  const polygonProps = {
-    ...featureStyle,
-    onMouseOver: (e) => {
-      e.target._path.setAttribute('stroke', hoverColor);
-      e.target._path.setAttribute('fill', hoverColor);
-    },
-    onMouseOut: (e) => {
-      e.target._path.setAttribute('stroke', featureStyle.color);
-      e.target._path.setAttribute('fill', featureStyle.color);
-    },
-  };
+  const baseColor = featureStyle ? featureStyle.color : '#666666';
+  const hoverColor = `#${tinycolor(baseColor).lighten(10).toHex()}`;
   const isPoint = (shapeData) => {
     const shapeKeys = Object.keys(shapeData);
     return (
@@ -610,15 +859,51 @@ const SiteBasedFeature = (props) => {
     let shape = null;
     let position = [];
     let positions = [];
-    let bounds = null;
     let icon = null;
     let marker = null;
     let interaction = {};
+    let shapeProps = {};
     if (shapeData.geometry && shapeData.geometry.coordinates) {
-      shape = 'Polygon';
       positions = shapeData.geometry.coordinates;
+      shape = featureShape;
+      if (shape === 'Polyline') {
+        shapeProps = {
+          ...featureStyle || {},
+          onMouseOver: (e) => {
+            e.target._path.setAttribute('stroke', hoverColor);
+          },
+          onMouseOut: (e) => {
+            e.target._path.setAttribute('stroke', baseColor);
+          },
+        };
+      }
+      if (shape === 'Polygon') {
+        shapeProps = {
+          ...featureStyle || {},
+          onMouseOver: (e) => {
+            e.target._path.setAttribute('stroke', hoverColor);
+            e.target._path.setAttribute('fill', hoverColor);
+          },
+          onMouseOut: (e) => {
+            e.target._path.setAttribute('stroke', featureStyle.color);
+            e.target._path.setAttribute('fill', featureStyle.color);
+          },
+        };
+        if (
+          (siteCode === state.focusLocation.current && !location)
+            || (location === state.focusLocation.current)
+        ) {
+          const darkenedBaseColor = `#${tinycolor(baseColor).darken(20).toHex()}`;
+          shapeProps.color = darkenedBaseColor;
+          shapeProps.onMouseOut = (e) => {
+            e.target._path.setAttribute('stroke', darkenedBaseColor);
+            e.target._path.setAttribute('fill', darkenedBaseColor);
+          };
+        }
+      }
     }
     if (isPoint(shapeData)) {
+      // if (minPolygonZoom && minPolygonZoom <= zoom) {
       shape = 'Marker';
       position = ['latitude', 'longitude'].every(k => shapeKeys.includes(k))
         ? [shapeData.latitude, shapeData.longitude]
@@ -676,39 +961,24 @@ const SiteBasedFeature = (props) => {
           {renderedPopup}
         </Marker>
       );
-      // Some features prefer to render as a marker icon until a high enough zoom level
-      if (shapeKeys.includes('plotSize') && iconSvg && minPolygonZoom && minPolygonZoom <= zoom) {
-        /* DISABLED UNTIL WE HAVE RELIABLE LOCATION DATA FOR THESE POINTS
-        shape = 'Rectangle';
-        const latitude = shapeKeys.includes('latitude')
-          ? shapeData.latitude : shapeData.geometry.coordinates[0];
-        const longitude = shapeKeys.includes('longitude')
-          ? shapeData.longitude : shapeData.geometry.coordinates[1];
-        bounds = getBounds(latitude, longitude, shapeData.plotSize);
-        */
-        bounds = getBounds(); // null
-      }
     }
     switch (shape) {
       case 'Marker':
         return marker;
-      case 'Rectangle':
-        return (
-          <React.Fragment key={key}>
-            <Rectangle key={`${key}-rectangle`} bounds={bounds} {...polygonProps}>
-              {renderedPopup}
-            </Rectangle>
-            {marker}
-          </React.Fragment>
-        );
       case 'Polygon':
         return (
           <React.Fragment key={key}>
-            <Polygon key={`${key}-polygon`} positions={positions} {...polygonProps}>
+            <Polygon key={`${key}-polygon`} positions={positions} {...shapeProps}>
               {renderedPopup}
             </Polygon>
             {marker}
           </React.Fragment>
+        );
+      case 'Polyline':
+        return (
+          <Polyline key={`${key}-polyline`} positions={positions} {...shapeProps}>
+            {renderedPopup}
+          </Polyline>
         );
       default:
         return null;
@@ -720,20 +990,23 @@ const SiteBasedFeature = (props) => {
   */
   return (
     <FeatureGroup>
-      {Object.keys(featureData).flatMap((siteCode) => {
-        if (featureType === FEATURE_TYPES.LOCATIONS) {
-          return Object.keys(featureData[siteCode]).map(loc => renderShape(siteCode, loc));
-        }
-        return renderShape(siteCode);
-      })}
+      {Object.keys(featureData)
+        .sort(a => (a === state.focusLocation.current ? 1 : -1))
+        .flatMap((keyA) => {
+          if (featureType === FEATURE_TYPES.LOCATIONS) {
+            return Object.keys(featureData[keyA]).map(keyB => renderShape(keyA, keyB));
+          }
+          return renderShape(keyA);
+        })}
     </FeatureGroup>
   );
 };
 
-SiteBasedFeature.propTypes = {
-  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+SiteMapFeature.propTypes = {
+  mapRef: PropTypes.shape({
+    current: PropTypes.instanceOf(Map),
+  }).isRequired,
   featureKey: PropTypes.oneOf(Object.keys(FEATURES)).isRequired,
-  positionPopup: PropTypes.func.isRequired,
 };
 
-export default SiteBasedFeature;
+export default SiteMapFeature;

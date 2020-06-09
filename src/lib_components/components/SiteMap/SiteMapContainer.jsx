@@ -184,12 +184,18 @@ const SiteMapContainer = () => {
     dispatch,
   ]);
 
+  const containerProps = {
+    className: classes.outerContainer,
+    'aria-busy': isLoading ? 'true' : 'false',
+    'data-selenium': 'siteMap-container',
+  };
+
   /**
      Render - Loading Sites
   */
   if (!neonContextState.isFinal) {
     return (
-      <div className={classes.outerContainer}>
+      <div {...containerProps}>
         <div ref={contentDivRef} {...contentDivProps}>
           <Paper className={classes.contentPaper}>
             <Typography variant="h6" component="h3" gutterBottom>
@@ -207,7 +213,7 @@ const SiteMapContainer = () => {
   */
   if (neonContextState.hasError) {
     return (
-      <div className={classes.outerContainer}>
+      <div {...containerProps}>
         <div ref={contentDivRef} {...contentDivProps}>
           <Paper className={classes.contentPaper}>
             <ErrorIcon fontSize="large" color="error" />
@@ -226,6 +232,12 @@ const SiteMapContainer = () => {
   const renderFeatureOption = (key) => {
     if (!FEATURES[key]) { return null; }
     const feature = FEATURES[key];
+    const {
+      name: featureName,
+      iconSvg,
+      featureShape,
+      style: featureStyle = {},
+    } = feature;
     const handleChange = (event) => {
       dispatch({
         type: 'setFilterFeatureVisibility',
@@ -234,14 +246,14 @@ const SiteMapContainer = () => {
       });
     };
     let icon = null;
-    if (feature.iconSvg) {
-      icon = <img alt={feature.name} src={feature.iconSvg} className={classes.featureIcon} />;
-    } else if (feature.polylineStyle) {
+    if (iconSvg) {
+      icon = <img alt={featureName} src={iconSvg} className={classes.featureIcon} />;
+    } else if (featureShape === 'Polyline') {
       const polylineProps = {
         points: '1.5,21.5 15,18.5 13,9.5 26.5,6.5',
         style: {
           fill: 'none',
-          stroke: feature.polylineStyle.color || null,
+          stroke: featureStyle.color || null,
           strokeWidth: 3,
           strokeLinejoin: 'bevel',
         },
@@ -251,7 +263,7 @@ const SiteMapContainer = () => {
           <polyline {...polylineProps} />
         </svg>
       );
-    } else if (feature.style) {
+    } else if (featureShape === 'Polygon') {
       const rectProps = {
         width: 25,
         height: 15,
@@ -259,13 +271,13 @@ const SiteMapContainer = () => {
         y: 6.5,
         rx: 3,
         style: {
-          fill: feature.style.color || null,
-          stroke: feature.style.color || null,
+          fill: featureStyle.color || null,
+          stroke: featureStyle.color || null,
           strokeWidth: 2.5,
           fillOpacity: 0.2,
           strokeOpacity: 0.85,
           strokeLinecap: 'round',
-          strokeDasharray: feature.style.dashArray || null,
+          strokeDasharray: featureStyle.dashArray || null,
         },
       };
       icon = (
@@ -392,11 +404,7 @@ const SiteMapContainer = () => {
      Render - Full Component
   */
   return (
-    <div
-      className={classes.outerContainer}
-      aria-describedby={progressId}
-      aria-busy={isLoading ? 'true' : 'false'}
-    >
+    <div {...containerProps} aria-describedby={progressId}>
       {state.filters.position === 'top' ? <SiteMapFilters /> : null}
       <div ref={contentDivRef} {...contentDivProps}>
         {view === VIEWS.MAP ? <SiteMapLeaflet /> : null }

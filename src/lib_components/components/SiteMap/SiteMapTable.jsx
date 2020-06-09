@@ -1,15 +1,11 @@
-/* eslint-disable jsx-a11y/anchor-is-valid, no-unused-vars */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useRef, useEffect } from 'react';
-
-import { isEqual } from 'lodash';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import IconButton from '@material-ui/core/IconButton';
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
@@ -23,16 +19,11 @@ import Theme from '../Theme/Theme';
 import SiteMapContext from './SiteMapContext';
 import {
   VIEWS,
-  TILE_LAYERS,
-  TILE_LAYERS_BY_NAME,
-  MAP_ZOOM_RANGE,
   FEATURES,
   FEATURE_TYPES,
-  SELECTABLE_FEATURE_TYPES,
-  SITE_DETAILS_URL_BASE,
-  EXPLORE_DATA_PRODUCTS_URL_BASE,
+  // SITE_DETAILS_URL_BASE,
+  // EXPLORE_DATA_PRODUCTS_URL_BASE,
   MIN_TABLE_MAX_BODY_HEIGHT,
-  HIGHLIGHT_STATUS,
   PLOT_SAMPLING_MODULES,
   calculateLocationsInMap,
 } from './SiteMapUtils';
@@ -133,7 +124,6 @@ const SiteMapTable = () => {
   const [state, dispatch] = SiteMapContext.useSiteMapContext();
   const {
     focus,
-    availableFeatureTypes,
     maxBodyHeight,
     maxBodyHeightUpdateFromAspectRatio,
   } = state.table;
@@ -218,7 +208,7 @@ const SiteMapTable = () => {
     }
     return featureKey;
   };
-  const renderFeatureIcon = (featureKey, alt = '') => {
+  const renderFeatureIcon = (featureKey) => {
     if (!FEATURES[featureKey] || !FEATURES[featureKey].iconSvg) { return null; }
     const { iconSvg } = FEATURES[featureKey];
     return <img alt={getFeatureName(featureKey)} src={iconSvg} className={classes.featureIcon} />;
@@ -292,6 +282,7 @@ const SiteMapTable = () => {
             component="button"
             className={`${classes.linkButton} ${classes.startFlex}`}
             onClick={() => jumpTo(site.siteCode)}
+            data-selenium="sitemap-table-siteLink"
           >
             {renderFeatureIcon(featureKey)}
             <span>{`${site.description} (${site.siteCode})`}</span>
@@ -319,6 +310,7 @@ const SiteMapTable = () => {
             component="button"
             className={classes.linkButton}
             onClick={() => jumpTo(domain.domainCode)}
+            data-selenium="sitemap-table-domainLink"
           >
             {domain.domainCode}
           </Link>
@@ -348,6 +340,7 @@ const SiteMapTable = () => {
             component="button"
             className={classes.linkButton}
             onClick={() => jumpTo(usstate.stateCode)}
+            data-selenium="sitemap-table-stateLink"
           >
             {usstate.name}
           </Link>
@@ -517,7 +510,7 @@ const SiteMapTable = () => {
       },
       { // Sampling Module Count
         field: 'samplingModules',
-        title: 'Sampling Modules',
+        title: 'Potential Sampling Modules',
         filtering: false,
         sorting: true,
         deafultSort: 'asc',
@@ -547,8 +540,12 @@ const SiteMapTable = () => {
               interactive
             >
               <div className={classes.startFlex}>
-                {renderNumberString(row.samplingModules.length, 'Sampling Modules')}
-                <IconButton size="small" className={classes.iconButton} aria-label="Sampling Modules">
+                {renderNumberString(row.samplingModules.length, 'Potential Sampling Modules')}
+                <IconButton
+                  size="small"
+                  className={classes.iconButton}
+                  aria-label="Potential Sampling Modules"
+                >
                   <InfoIcon fontSize="inherit" />
                 </IconButton>
               </div>
@@ -565,45 +562,12 @@ const SiteMapTable = () => {
   }
   if (selectionActive) { columns.unshift(commonColumns.selected); }
 
-  const handleChangeFocus = (event, newFocus) => {
-    if (newFocus && newFocus !== focus) {
-      dispatch({ type: 'setTableFocus', focus: newFocus });
-    }
-  };
-
   const components = {
     Container: Box,
     Toolbar: props => (
-      <div className={classes.toolbarContainer}>
+      <div className={classes.toolbarContainer} data-selenium="sitemap-table-toolbar">
         <MTableToolbar {...props} />
       </div>
-      /*
-      <div className={classes.toolbarContainer}>
-        <ToggleButtonGroup
-          exclusive
-          color="primary"
-          variant="outlined"
-          size="small"
-          className={classes.toggleButtonGroup}
-          value={focus}
-          onChange={handleChangeFocus}
-        >
-          {[FEATURE_TYPES.SITES, FEATURE_TYPES.LOCATIONS].map((key) => {
-            const toggleProps = {
-              key,
-              value: key,
-              size: 'small',
-              disabled: !availableFeatureTypes[key],
-              className: key === focus
-                ? `${classes.toggleButton} ${classes.toggleButtonSelected}`
-                : classes.toggleButton,
-            };
-            return <ToggleButton {...toggleProps}>{key}</ToggleButton>;
-          })}
-        </ToggleButtonGroup>
-        <MTableToolbar {...props} />
-      </div>
-      */
     ),
     FilterRow: filterRowProps => (
       <MTableFilterRow
@@ -625,7 +589,7 @@ const SiteMapTable = () => {
      Render Table
   */
   return (
-    <div ref={tableRef} className={classes.tableContainer}>
+    <div ref={tableRef} className={classes.tableContainer} data-selenium="sitemap-content-table">
       <MaterialTable
         components={components}
         columns={columns}

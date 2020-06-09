@@ -410,9 +410,11 @@ const reducer = (state, action) => {
       // For STATE and DOMAIN types: ensure corresponding feature is visible
       if (newState.focusLocation.data.type === 'STATE') {
         newState.filters.features.visible[FEATURES.STATES.KEY] = true;
+        newState.filters.features.visible[FEATURES.DOMAINS.KEY] = false;
       }
       if (newState.focusLocation.data.type === 'DOMAIN') {
         newState.filters.features.visible[FEATURES.DOMAINS.KEY] = true;
+        newState.filters.features.visible[FEATURES.STATES.KEY] = false;
       }
       completeOverallFetch();
       newState.map = getMapStateForFocusLocation(newState);

@@ -80,7 +80,7 @@ const SiteMapFilters = () => {
   };
   const renderFocusLocationForm = () => (
     <div style={formStyle}>
-      <form onSubmit={jumpToLocation}>
+      <form onSubmit={jumpToLocation} data-selenium="sitemap-focusLocationForm">
         <TextField
           margin="dense"
           variant="outlined"
@@ -129,7 +129,13 @@ const SiteMapFilters = () => {
               ? `${classes.toggleButton} ${classes.toggleButtonSelected}`
               : classes.toggleButton;
             return (
-              <ToggleButton key={key} value={key} size="small" className={className}>
+              <ToggleButton
+                key={key}
+                value={key}
+                size="small"
+                className={className}
+                data-selenium={`sitemap-viewButton-${key}`}
+              >
                 {key}
               </ToggleButton>
             );
@@ -141,6 +147,7 @@ const SiteMapFilters = () => {
           variant={filters.features.open ? 'contained' : 'outlined'}
           endIcon={filters.features.open ? closeIcon : openIcon}
           onClick={toggleFeatures}
+          data-selenium="sitemap-featuresButton"
         >
           Features
         </Button>
