@@ -1,6 +1,7 @@
 import React from 'react';
 import 'typeface-source-sans-pro';
 
+import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/styles';
 import { useTheme, createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 
@@ -180,6 +181,7 @@ theme.getWrappedComponent = Component => (props) => {
   if (!currentTheme.isNeonTheme && !isJsdom) {
     return (
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <Component {...props} />
       </ThemeProvider>
     );
