@@ -13,6 +13,7 @@ import InfoIcon from '@material-ui/icons/InfoOutlined';
 
 import MaterialTable, { MTableToolbar, MTableFilterRow } from 'material-table';
 
+import MaterialTableIcons from '../MaterialTableIcons/MaterialTableIcons';
 import NeonContext from '../NeonContext/NeonContext';
 import Theme from '../Theme/Theme';
 
@@ -591,6 +592,7 @@ const SiteMapTable = () => {
   return (
     <div ref={tableRef} className={classes.tableContainer} data-selenium="sitemap-content-table">
       <MaterialTable
+        icons={MaterialTableIcons}
         components={components}
         columns={columns}
         data={rows}

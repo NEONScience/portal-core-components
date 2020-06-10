@@ -43,6 +43,7 @@ import DownloadDataContext from '../DownloadDataContext/DownloadDataContext';
 import DataProductAvailability from '../DataProductAvailability/DataProductAvailability';
 import ExternalHost from '../ExternalHost/ExternalHost';
 import ExternalHostProductSpecificLinks from '../ExternalHostProductSpecificLinks/ExternalHostProductSpecificLinks';
+import MaterialTableIcons from '../MaterialTableIcons/MaterialTableIcons';
 import SiteChip from '../SiteChip/SiteChip';
 import Theme, { COLORS } from '../Theme/Theme';
 
@@ -536,6 +537,7 @@ export default function DownloadStepForm(props) {
       return (validValues.length || isLoading) ? (
         <div className={classes.fileTable} id="s3Files-selection-table-container">
           <MaterialTable
+            icons={MaterialTableIcons}
             components={components}
             columns={columns}
             data={validValues}
