@@ -712,6 +712,7 @@ export namespace SITE_MAP_PROP_TYPES {
     export const view: PropTypes.Requireable<string>;
     export const aspectRatio: PropTypes.Requireable<number>;
     export const filterPosition: PropTypes.Requireable<string>;
+    export const unusableVerticalSpace: PropTypes.Requireable<number>;
     export const mapCenter: PropTypes.Requireable<(number | null | undefined)[]>;
     export const mapZoom: PropTypes.Requireable<number>;
     export const mapTileLayer: PropTypes.Requireable<string>;
@@ -728,6 +729,8 @@ export namespace SITE_MAP_DEFAULT_PROPS {
     export { aspectRatio_1 as aspectRatio };
     const filterPosition_1: string;
     export { filterPosition_1 as filterPosition };
+    const unusableVerticalSpace_1: number;
+    export { unusableVerticalSpace_1 as unusableVerticalSpace };
     const mapCenter_1: number[];
     export { mapCenter_1 as mapCenter };
     const mapZoom_1: null;
@@ -745,7 +748,7 @@ export namespace SITE_MAP_DEFAULT_PROPS {
     const features_1: null;
     export { features_1 as features };
 }
-export function getDynamicAspectRatio(): number;
+export function getDynamicAspectRatio(unusableVerticalSpace?: number): number;
 export function parseLocationData(data?: {}): {
     type: any;
     description: any;

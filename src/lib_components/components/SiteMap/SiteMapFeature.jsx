@@ -832,6 +832,7 @@ const SiteMapFeature = (props) => {
   */
   const baseColor = featureStyle ? featureStyle.color : '#666666';
   const hoverColor = `#${tinycolor(baseColor).lighten(10).toHex()}`;
+  const darkenedBaseColor = `#${tinycolor(baseColor).darken(20).toHex()}`;
   const isPoint = (shapeData) => {
     const shapeKeys = Object.keys(shapeData);
     return (
@@ -853,6 +854,10 @@ const SiteMapFeature = (props) => {
     if (selectionActive) {
       isSelected = location ? selectedItems.has(location) : selectedItems.has(siteCode);
     }
+    const isHighlighted = (
+      (featureType === FEATURE_TYPES.SITES && siteCode === focusLocation && !location)
+        || (location && location === focusLocation)
+    );
     const key = location ? `${siteCode} - ${location}` : siteCode;
     const renderedPopup = location ? renderPopup(siteCode, location) : renderPopup(siteCode);
     const shapeKeys = Object.keys(shapeData);
@@ -889,11 +894,7 @@ const SiteMapFeature = (props) => {
             e.target._path.setAttribute('fill', featureStyle.color);
           },
         };
-        if (
-          (siteCode === state.focusLocation.current && !location)
-            || (location === state.focusLocation.current)
-        ) {
-          const darkenedBaseColor = `#${tinycolor(baseColor).darken(20).toHex()}`;
+        if (isHighlighted) {
           shapeProps.color = darkenedBaseColor;
           shapeProps.onMouseOut = (e) => {
             e.target._path.setAttribute('stroke', darkenedBaseColor);
@@ -911,11 +912,7 @@ const SiteMapFeature = (props) => {
       if (state.map.zoomedIcons[featureKey] !== null) {
         const baseIcon = state.map.zoomedIcons[featureKey];
         const selection = isSelected ? SELECTION_STATUS.SELECTED : SELECTION_STATUS.UNSELECTED;
-        const initialHighlight = (
-          (location || siteCode) === focusLocation && featureKey !== FEATURES.POUR_POINTS.KEY
-            ? HIGHLIGHT_STATUS.HIGHLIGHT
-            : HIGHLIGHT_STATUS.NONE
-        );
+        const initialHighlight = isHighlighted ? HIGHLIGHT_STATUS.HIGHLIGHT : HIGHLIGHT_STATUS.NONE;
         icon = baseIcon[selection][initialHighlight];
         const hasPopup = typeof renderPopupFunctions[featureKey] === 'function';
         interaction = selectionActive ? {

@@ -1035,6 +1035,7 @@ export const SITE_MAP_PROP_TYPES = {
   view: PropTypes.oneOf(Object.keys(VIEWS).map(k => k.toLowerCase())),
   aspectRatio: PropTypes.number,
   filterPosition: PropTypes.oneOf(['top', 'bottom']),
+  unusableVerticalSpace: PropTypes.number,
   // Map Props
   mapCenter: PropTypes.arrayOf(PropTypes.number),
   mapZoom: PropTypes.number,
@@ -1054,6 +1055,7 @@ export const SITE_MAP_DEFAULT_PROPS = {
   view: VIEWS.MAP.toLowerCase(),
   aspectRatio: null,
   filterPosition: 'bottom',
+  unusableVerticalSpace: 0,
   // Map Props
   mapCenter: [52.68, -110.75],
   mapZoom: null,
@@ -1078,9 +1080,12 @@ const dynamicAspectRatios = [
   return parseFloat(parts[2]) / parseFloat(parts[1]);
 });
 
-export const getDynamicAspectRatio = () => {
-  const windowAspectRatio = Math.max(window.innerHeight + 100, 0) / (window.innerWidth || 1);
+export const getDynamicAspectRatio = (unusableVerticalSpace = 0) => {
+  const buffer = 100; // Approximate height of the filters row and a bit of margin
+  const usableVericalSpace = window.innerHeight + buffer - unusableVerticalSpace;
+  const windowAspectRatio = Math.max(usableVericalSpace, 0) / (window.innerWidth || 1);
   const arIdx = dynamicAspectRatios.findIndex(ar => ar < windowAspectRatio);
+  console.log('getDynamicAspectRatio', unusableVerticalSpace, arIdx);
   return arIdx === -1
     ? dynamicAspectRatios[dynamicAspectRatios.length - 1]
     : dynamicAspectRatios[arIdx];

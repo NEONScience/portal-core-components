@@ -12,6 +12,7 @@ declare namespace Provider {
         view: PropTypes.Requireable<string>;
         aspectRatio: PropTypes.Requireable<number>;
         filterPosition: PropTypes.Requireable<string>;
+        unusableVerticalSpace: PropTypes.Requireable<number>;
         mapCenter: PropTypes.Requireable<(number | null | undefined)[]>;
         mapZoom: PropTypes.Requireable<number>;
         mapTileLayer: PropTypes.Requireable<string>;

@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useLayoutEffect } from 'react';
+import PropTypes from 'prop-types';
 
 import uniqueId from 'lodash/uniqueId';
 
@@ -107,8 +108,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const SiteMapContainer = () => {
+const SiteMapContainer = (props) => {
   const classes = useStyles(Theme);
+  const { unusableVerticalSpace = 0 } = props;
 
   const [neonContextState] = NeonContext.useNeonContextState();
 
@@ -131,7 +133,7 @@ const SiteMapContainer = () => {
   useLayoutEffect(() => {
     const handleResize = () => {
       const newAspectRatio = aspectRatio.isDynamic
-        ? getDynamicAspectRatio()
+        ? getDynamicAspectRatio(unusableVerticalSpace)
         : aspectRatio.currentValue;
       dispatch({
         type: 'setAspectRatio',
@@ -421,6 +423,14 @@ const SiteMapContainer = () => {
       {state.filters.position === 'bottom' ? <SiteMapFilters /> : null}
     </div>
   );
+};
+
+SiteMapContainer.propTypes = {
+  unusableVerticalSpace: PropTypes.number,
+};
+
+SiteMapContainer.defaultProps = {
+  unusableVerticalSpace: 0,
 };
 
 export default SiteMapContainer;
