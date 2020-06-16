@@ -351,12 +351,26 @@ export namespace FEATURES {
         iconShape: string;
         focusZoom: number;
     };
-    export const DISTRIBUTED_PLOTS_SAMPLING_POINTS: {
+    export const PLOT_DETAIL_POINTS: {
         name: string;
         type: string;
         minZoom: number;
         description: string;
         parent: string;
+    };
+    export const TOWER_PHENOLOGY_PLOT_POINTS: {
+        name: string;
+        nameSingular: string;
+        type: string;
+        description: string;
+        parent: string;
+        parentDataFeatureKey: string;
+        dataLoadType: string;
+        minZoom: number;
+        featureShape: string;
+        style: {
+            color: string;
+        };
     };
     export const DISTRIBUTED_BIRD_GRID_POINTS: {
         name: string;

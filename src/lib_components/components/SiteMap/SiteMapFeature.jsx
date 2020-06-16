@@ -828,6 +828,7 @@ const SiteMapFeature = (props) => {
       renderPlotSizeAndSlope,
       renderPlotSamplingModules,
     ]),
+    TOWER_PHENOLOGY_PLOT_POINTS: renderLocationPopup,
     TOWER_PHENOLOGY_PLOTS: (siteCode, location) => renderLocationPopup(siteCode, location, [
       renderPlotSizeAndSlope,
     ]),
@@ -866,6 +867,16 @@ const SiteMapFeature = (props) => {
     );
   };
   const renderShape = (primaryId, secondaryId = null) => {
+    const polygonInteractionProps = {
+      onMouseOver: (e) => {
+        e.target._path.setAttribute('stroke', hoverColor);
+        e.target._path.setAttribute('fill', hoverColor);
+      },
+      onMouseOut: (e) => {
+        e.target._path.setAttribute('stroke', featureStyle.color);
+        e.target._path.setAttribute('fill', featureStyle.color);
+      },
+    };
     const shapeData = secondaryId && featureData[primaryId][secondaryId]
       ? featureData[primaryId][secondaryId]
       : featureData[primaryId];
@@ -904,14 +915,7 @@ const SiteMapFeature = (props) => {
       if (shape === 'Polygon') {
         shapeProps = {
           ...featureStyle || {},
-          onMouseOver: (e) => {
-            e.target._path.setAttribute('stroke', hoverColor);
-            e.target._path.setAttribute('fill', hoverColor);
-          },
-          onMouseOut: (e) => {
-            e.target._path.setAttribute('stroke', featureStyle.color);
-            e.target._path.setAttribute('fill', featureStyle.color);
-          },
+          ...polygonInteractionProps,
         };
         if (isHighlighted) {
           shapeProps.color = darkenedBaseColor;
@@ -990,7 +994,7 @@ const SiteMapFeature = (props) => {
             center={position}
             radius={Math.max(state.map.zoom - 10, 3)}
             {...featureStyle}
-            {...interaction}
+            {...polygonInteractionProps}
           >
             {renderedPopup}
           </CircleMarker>
