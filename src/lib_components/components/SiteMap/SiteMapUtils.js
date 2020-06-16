@@ -89,6 +89,7 @@ export const FEATURE_TYPES = {
   SITES: 'SITES',
   SITE_LOCATION_HIERARCHIES: 'SITE_LOCATION_HIERARCHIES',
   LOCATIONS: 'LOCATIONS',
+  SAMPLING_POINTS: 'SAMPLING_POINTS',
   BOUNDARIES: 'BOUNDARIES',
   GROUP: 'GROUP',
   OTHER: 'OTHER', // All features require a type. This catch-all type will not show in the table.
@@ -251,7 +252,6 @@ const LOCATION_ICON_SVG_SHAPES = {
    Convention: all keys are consistently plural
    Order is draw order on map (so largest boundary features should be first)
 */
-const PLACEHOLDER_RECT_STYLE = { color: '#666666' };
 export const FEATURES = {
   // States and Domains
   DOMAINS: {
@@ -424,9 +424,7 @@ export const FEATURES = {
     parent: 'TOWER_PLOTS',
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'OS Plot - phe',
-    attributes: { type: 'phenology', location: 'tower' },
-    style: PLACEHOLDER_RECT_STYLE,
-    minPolygonZoom: 18,
+    focusZoom: 16,
     iconScale: 1.5,
     iconSvg: iconTowerPhenologyPlotSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
@@ -437,11 +435,9 @@ export const FEATURES = {
     type: FEATURE_TYPES.LOCATIONS,
     description: 'Tower plots support a variety of plant productivity, plant diversity, soil, biogeochemistry and microbe sampling. The number and size of Tower Base Plots is determined by the vegetation of the tower airshed. In forested sites, twenty 40m x 40m plots are established. In herbaceous sites, thirty 20m x 20m plots are established. Of these thirty tower plots, four have additional space to support soil sampling.',
     parent: 'TOWER_PLOTS',
-    attributes: { type: 'base', location: 'tower' },
-    style: PLACEHOLDER_RECT_STYLE,
+    focusZoom: 18,
     iconSvg: iconTowerBasePlotSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
-    minPolygonZoom: 18,
   },
   TOWER_SOIL_PLOTS: {
     name: 'Tower Soil Plots',
@@ -452,11 +448,9 @@ export const FEATURES = {
     matchLocationType: 'SOIL_PLOT',
     description: '',
     parent: 'TOWER_PLOTS',
-    attributes: { type: 'soil', location: 'tower' },
-    style: PLACEHOLDER_RECT_STYLE,
+    focusZoom: 18,
     iconSvg: iconTowerSoilPlotSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
-    minPolygonZoom: 18,
   },
   // DISTRIBUTED_PLOTS Group
   DISTRIBUTED_PLOTS: {
@@ -474,10 +468,8 @@ export const FEATURES = {
     parent: 'DISTRIBUTED_PLOTS',
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'OS Plot - brd',
-    attributes: { type: 'bird', location: 'distributed' },
-    style: PLACEHOLDER_RECT_STYLE,
-    minPolygonZoom: 17,
     iconScale: 1.8,
+    focusZoom: 16,
     iconSvg: iconDistributedBirdGridSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
   },
@@ -489,10 +481,8 @@ export const FEATURES = {
     parent: 'DISTRIBUTED_PLOTS',
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'OS Plot - mam',
-    attributes: { type: 'mammal', location: 'distributed' },
-    style: PLACEHOLDER_RECT_STYLE,
-    minPolygonZoom: 17,
     iconScale: 1.4,
+    focusZoom: 17,
     iconSvg: iconDistributedMammalGridSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
   },
@@ -502,10 +492,8 @@ export const FEATURES = {
     type: FEATURE_TYPES.LOCATIONS,
     description: 'Distributed Base Plots support a variety of plant productivity, plant diversity, soil, biogeochemistry, microbe and beetle sampling. Distributed Base Plots are 40m x 40m.',
     parent: 'DISTRIBUTED_PLOTS',
-    attributes: { type: 'base', location: 'distributed' },
-    style: PLACEHOLDER_RECT_STYLE,
-    minPolygonZoom: 17,
     iconScale: 1.2,
+    focusZoom: 17,
     iconSvg: iconDistributedBasePlotSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
   },
@@ -517,10 +505,8 @@ export const FEATURES = {
     parent: 'DISTRIBUTED_PLOTS',
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'OS Plot - tck',
-    attributes: { type: 'tick', location: 'distributed' },
-    style: PLACEHOLDER_RECT_STYLE,
-    minPolygonZoom: 17,
     iconScale: 1.2,
+    focusZoom: 17,
     iconSvg: iconDistributedTickPlotSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
   },
@@ -532,15 +518,59 @@ export const FEATURES = {
     parent: 'DISTRIBUTED_PLOTS',
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'OS Plot - mos',
-    attributes: { type: 'mosquito', location: 'distributed' },
     iconSvg: iconDistributedMosquitoPointSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
+    focusZoom: 18,
+  },
+  // Distributed Plots Sampling Points Group
+  DISTRIBUTED_PLOTS_SAMPLING_POINTS: {
+    name: 'Distributed Plot Sampling Points',
+    type: FEATURE_TYPES.GROUP,
+    minZoom: 14,
+    description: 'Distributed Plots are located throughout the TOS Sampling boundary in an effort to describe organisms and process with plot, point, and grid sampling. Plots were established according to a stratified-random and spatially balanced design.',
+    parent: 'TERRESTRIAL_SITE_FEATURES',
+  },
+  DISTRIBUTED_BIRD_GRID_POINTS: {
+    name: 'Bird Grid Sampling Points',
+    nameSingular: 'Bird Grid Sampling Point',
+    type: FEATURE_TYPES.SAMPLING_POINTS,
+    description: 'Bird Grids consist of 9 sampling points within a 500m x 500m square. Each point is 250m apart. Where possible, Bird Grids are colocated with Distributed Base Plots by placing the Bird Grid center (B2) in close proximity to the center of the Base Plot. At smaller sites, a single point count is done at the south-west corner (point 21) of the Distributed Base Plot.',
+    parent: 'DISTRIBUTED_PLOTS_SAMPLING_POINTS',
+    parentDataFeatureKey: 'DISTRIBUTED_BIRD_GRIDS',
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    minZoom: 14,
+    featureShape: 'Circle',
+    style: { color: '#f28e2c' },
+  },
+  DISTRIBUTED_MAMMAL_GRID_POINTS: {
+    name: 'Mammal Grid Sampling Points',
+    nameSingular: 'Mammal Grid Sampling Point',
+    type: FEATURE_TYPES.SAMPLING_POINTS,
+    description: 'Mammal Grids are 90m x 90m and include 100 trapping locations at 10m spacing. Where possible, these grids are colocated with Distributed Base Plots by placing them a specified distance (150m +/- 50m) and random direction from the center of the Base Plot.',
+    parent: 'DISTRIBUTED_PLOTS_SAMPLING_POINTS',
+    parentDataFeatureKey: 'DISTRIBUTED_MAMMAL_GRIDS',
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    minZoom: 16,
+    featureShape: 'Circle',
+    style: { color: '#925214' },
+  },
+  DISTRIBUTED_TICK_PLOT_POINTS: {
+    name: 'Tick Plot Sampling Points',
+    nameSingular: 'Tick Plot Sampling Point',
+    type: FEATURE_TYPES.SAMPLING_POINTS,
+    description: 'Tick Plots are sampled by conducting cloth dragging or flagging around the perimeter of a 40m x 40m plot. Tick plots are colocated with Distributed Base Plots by placing them a specified distance (150m +/- 15m) and random direction from the center of the Base Plot.',
+    parent: 'DISTRIBUTED_PLOTS_SAMPLING_POINTS',
+    parentDataFeatureKey: 'DISTRIBUTED_TICK_PLOTS',
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    minZoom: 17,
+    featureShape: 'Circle',
+    style: { color: '#6b191a' },
   },
   // Aquatic Site Features
   AQUATIC_SITE_FEATURES: {
     name: 'Aquatic Site Features',
     type: FEATURE_TYPES.GROUP,
-    minZoom: 10,
+    minZoom: 14,
     description: '',
   },
   AQUATIC_BENCHMARKS: {
@@ -1335,8 +1365,12 @@ export const getMapStateForFocusLocation = (state = {}) => {
       .filter(key => FEATURES[key].matchLocationType)
       .find(key => (new RegExp(FEATURES[key].matchLocationType)).test(type));
     if (featureKey) {
-      newState.map.zoom = FEATURES[featureKey].iconScale && FEATURES[featureKey].iconScale > 1.4
-        ? 17 : 18;
+      if (FEATURES[featureKey].focusZoom) {
+        newState.map.zoom = FEATURES[featureKey].focusZoom;
+      } else {
+        newState.map.zoom = FEATURES[featureKey].iconScale && FEATURES[featureKey].iconScale > 1.4
+          ? 17 : 18;
+      }
     }
   }
 

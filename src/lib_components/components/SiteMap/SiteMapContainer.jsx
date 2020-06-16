@@ -250,6 +250,22 @@ const SiteMapContainer = (props) => {
     let icon = null;
     if (iconSvg) {
       icon = <img alt={featureName} src={iconSvg} className={classes.featureIcon} />;
+    } else if (featureShape === 'Circle') {
+      const circleProps = {
+        cx: 14,
+        cy: 14,
+        r: 8,
+        style: {
+          fill: featureStyle.color ? `${featureStyle.color}88` : 'none',
+          stroke: featureStyle.color || null,
+          strokeWidth: 3,
+        },
+      };
+      icon = (
+        <svg width="28" height="28" className={classes.featureIcon}>
+          <circle {...circleProps} />
+        </svg>
+      );
     } else if (featureShape === 'Polyline') {
       const polylineProps = {
         points: '1.5,21.5 15,18.5 13,9.5 26.5,6.5',

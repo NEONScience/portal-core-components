@@ -23,6 +23,7 @@ import SiteDetailsIcon from '@material-ui/icons/InfoOutlined';
 
 import 'leaflet/dist/leaflet.css';
 import {
+  CircleMarker,
   Map,
   FeatureGroup,
   Marker,
@@ -136,7 +137,6 @@ const SiteMapFeature = (props) => {
     featureShape,
     iconSvg,
     primaryIdOnly = false,
-    // minPolygonZoom,
   } = feature;
   const featureName = nameSingular || name || featureKey;
 
@@ -239,6 +239,22 @@ const SiteMapFeature = (props) => {
     let icon = null;
     if (iconSvg) {
       icon = <img alt={feature.name} src={feature.iconSvg} className={classes.popupFeatureIcon} />;
+    } else if (featureShape === 'Circle') {
+      const circleProps = {
+        cx: 12,
+        cy: 12,
+        r: 8,
+        style: {
+          fill: featureStyle.color ? `${featureStyle.color}88` : 'none',
+          stroke: featureStyle.color || null,
+          strokeWidth: 3,
+        },
+      };
+      icon = (
+        <svg width="24" height="24" className={classes.popupFeaturePolygon}>
+          <circle {...circleProps} />
+        </svg>
+      );
     } else if (featureStyle && !['STATES', 'DOMAINS'].includes(featureKey)) {
       // We don't show the rect for states and domains since those cover the whole map when showing.
       const rectProps = {
@@ -763,15 +779,18 @@ const SiteMapFeature = (props) => {
       renderPlotSizeAndSlope,
       renderPlotSamplingModules,
     ]),
+    DISTRIBUTED_BIRD_GRID_POINTS: renderLocationPopup,
     DISTRIBUTED_BIRD_GRIDS: (siteCode, location) => renderLocationPopup(siteCode, location, [
       renderPlotSizeAndSlope,
     ]),
+    DISTRIBUTED_MAMMAL_GRID_POINTS: renderLocationPopup,
     DISTRIBUTED_MAMMAL_GRIDS: (siteCode, location) => renderLocationPopup(siteCode, location, [
       renderPlotSizeAndSlope,
     ]),
     DISTRIBUTED_MOSQUITO_POINTS: (siteCode, location) => renderLocationPopup(siteCode, location, [
       renderPlotSizeAndSlope,
     ]),
+    DISTRIBUTED_TICK_PLOT_POINTS: renderLocationPopup,
     DISTRIBUTED_TICK_PLOTS: (siteCode, location) => renderLocationPopup(siteCode, location, [
       renderPlotSizeAndSlope,
     ]),
@@ -904,12 +923,11 @@ const SiteMapFeature = (props) => {
       }
     }
     if (isPoint(shapeData)) {
-      // if (minPolygonZoom && minPolygonZoom <= zoom) {
-      shape = 'Marker';
+      shape = featureShape || 'Marker';
       position = ['latitude', 'longitude'].every(k => shapeKeys.includes(k))
         ? [shapeData.latitude, shapeData.longitude]
         : shapeData.geometry.coordinates;
-      if (state.map.zoomedIcons[featureKey] !== null) {
+      if (shape === 'Marker' && state.map.zoomedIcons[featureKey] !== null) {
         const baseIcon = state.map.zoomedIcons[featureKey];
         const selection = isSelected ? SELECTION_STATUS.SELECTED : SELECTION_STATUS.UNSELECTED;
         const initialHighlight = isHighlighted ? HIGHLIGHT_STATUS.HIGHLIGHT : HIGHLIGHT_STATUS.NONE;
@@ -964,6 +982,19 @@ const SiteMapFeature = (props) => {
     switch (shape) {
       case 'Marker':
         return marker;
+      case 'Circle':
+        return (
+          <CircleMarker
+            key={`${key}-circlemarker`}
+            title={key}
+            center={position}
+            radius={Math.max(state.map.zoom - 10, 3)}
+            {...featureStyle}
+            {...interaction}
+          >
+            {renderedPopup}
+          </CircleMarker>
+        );
       case 'Polygon':
         return (
           <React.Fragment key={key}>
@@ -992,7 +1023,7 @@ const SiteMapFeature = (props) => {
       {Object.keys(featureData)
         .sort(a => (a === state.focusLocation.current ? 1 : -1))
         .flatMap((keyA) => {
-          if (featureType === FEATURE_TYPES.LOCATIONS) {
+          if ([FEATURE_TYPES.LOCATIONS, FEATURE_TYPES.SAMPLING_POINTS].includes(featureType)) {
             return Object.keys(featureData[keyA]).map(keyB => renderShape(keyA, keyB));
           }
           return renderShape(keyA);
