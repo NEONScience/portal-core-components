@@ -420,7 +420,7 @@ const SiteMapFeature = (props) => {
         {!Number.isFinite(loc.plotSize) ? null : (
           <React.Fragment>
             <br />
-            {`(${loc.plotSize.toFixed(0)}mÂ²)`}
+            {`(${loc.plotSize.toFixed(0)}m²)`}
           </React.Fragment>
         )}
       </Typography>
@@ -436,7 +436,7 @@ const SiteMapFeature = (props) => {
       data-selenium="sitemap-map-popup-plotSlope"
     >
       <Typography variant="subtitle2">Plot Slope</Typography>
-      {renderNumericalValue(loc.slopeAspect, 'Aspect', 'Â°', 2, 'Slope Aspect', right)}
+      {renderNumericalValue(loc.slopeAspect, 'Aspect', '°', 2, 'Slope Aspect', right)}
       {renderNumericalValue(loc.slopeGradient, 'Gradient', '%', 2, 'Slope Gradient', right)}
     </div>
   );
@@ -477,7 +477,7 @@ const SiteMapFeature = (props) => {
       <Grid item xs={12} data-selenium="sitemap-map-popup-area">
         <Typography variant="subtitle2">Area</Typography>
         <div className={classes.startFlex}>
-          {renderNumericalValue(areaKm2, null, 'kmÂ²', 2, 'Area (kmÂ²)')}
+          {renderNumericalValue(areaKm2, null, 'km²', 2, 'Area (km²)')}
           {areaAcres === null ? null : (
             <div style={{ marginLeft: Theme.spacing(1) }}>
               {renderNumericalValue(areaAcres, null, ' acres', 2, 'Area (acres)', false, true)}

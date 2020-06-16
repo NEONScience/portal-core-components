@@ -40,6 +40,7 @@ declare function useSiteMapContext(): any[] | {
     };
     focusLocation: {
         current: null;
+        isCenteredOn: boolean;
         data: null;
         fetch: {
             status: null;

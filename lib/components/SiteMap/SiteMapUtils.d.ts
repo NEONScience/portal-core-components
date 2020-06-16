@@ -758,6 +758,7 @@ export function getDynamicAspectRatio(unusableVerticalSpace?: number): number;
 export function parseLocationData(data?: {}): {
     type: any;
     description: any;
+    siteCode: any;
     children: any;
 };
 export function parseLocationHierarchy(inHierarchy: any, parent?: any): {};

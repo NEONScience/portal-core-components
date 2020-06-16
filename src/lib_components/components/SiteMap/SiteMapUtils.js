@@ -898,6 +898,7 @@ export const DEFAULT_STATE = {
   },
   focusLocation: {
     current: null,
+    isCenteredOn: false, // Whether the map is still centered on and zoomed into focus location
     data: null,
     fetch: { status: null, error: null },
   },
@@ -1153,6 +1154,7 @@ const DEFAULT_LOCATION_PROPERTIES_WHITELIST = [
 
 export const parseLocationData = (data = {}) => {
   const {
+    siteCode = null,
     locationType: type = null,
     locationDescription: description = null,
     locationDecimalLatitude: latitude = null,
@@ -1165,6 +1167,7 @@ export const parseLocationData = (data = {}) => {
   const parsed = {
     type,
     description,
+    siteCode,
     children,
     ...parseLocationProperties(locationProperties, DEFAULT_LOCATION_PROPERTIES_WHITELIST),
   };
