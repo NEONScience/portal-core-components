@@ -149,7 +149,7 @@ const SiteMapContainer = (props) => {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [aspectRatio, dispatch]);
+  }, [unusableVerticalSpace, aspectRatio, dispatch]);
 
   /**
      Effect - Monitor all click events and close the features pane if open and clicked outside
