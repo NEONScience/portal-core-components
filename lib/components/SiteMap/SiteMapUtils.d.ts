@@ -73,6 +73,7 @@ export namespace FEATURES {
         description: string;
         hideByDefault: boolean;
         dataLoadType: string;
+        primaryIdOnly: boolean;
         featureShape: string;
         style: {
             color: string;
@@ -85,6 +86,7 @@ export namespace FEATURES {
         description: string;
         hideByDefault: boolean;
         dataLoadType: string;
+        primaryIdOnly: boolean;
         featureShape: string;
         style: {
             color: string;
@@ -588,6 +590,7 @@ export namespace FEATURES {
             terrain: string;
         };
         dataLoadType: string;
+        primaryIdOnly: boolean;
         iconScale: number;
         iconSvg: any;
         iconSelectedSvg: any;
@@ -604,6 +607,7 @@ export namespace FEATURES {
             terrain: string;
         };
         dataLoadType: string;
+        primaryIdOnly: boolean;
         iconScale: number;
         iconSvg: any;
         iconSelectedSvg: any;
@@ -620,6 +624,7 @@ export namespace FEATURES {
             terrain: string;
         };
         dataLoadType: string;
+        primaryIdOnly: boolean;
         iconScale: number;
         iconSvg: any;
         iconSelectedSvg: any;
@@ -636,6 +641,7 @@ export namespace FEATURES {
             terrain: string;
         };
         dataLoadType: string;
+        primaryIdOnly: boolean;
         iconScale: number;
         iconSvg: any;
         iconSelectedSvg: any;

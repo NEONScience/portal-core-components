@@ -135,6 +135,7 @@ const SiteMapFeature = (props) => {
     style: featureStyle,
     featureShape,
     iconSvg,
+    primaryIdOnly = false,
     // minPolygonZoom,
   } = feature;
   const featureName = nameSingular || name || featureKey;
@@ -148,7 +149,6 @@ const SiteMapFeature = (props) => {
   const [state, dispatch] = SiteMapContext.useSiteMapContext();
   const {
     neonContextHydrated,
-    // map: { zoom },
     focusLocation: { current: focusLocation },
     featureData: {
       [featureType]: {
@@ -420,7 +420,7 @@ const SiteMapFeature = (props) => {
         {!Number.isFinite(loc.plotSize) ? null : (
           <React.Fragment>
             <br />
-            {`(${loc.plotSize.toFixed(0)}m²)`}
+            {`(${loc.plotSize.toFixed(0)}mÂ²)`}
           </React.Fragment>
         )}
       </Typography>
@@ -436,7 +436,7 @@ const SiteMapFeature = (props) => {
       data-selenium="sitemap-map-popup-plotSlope"
     >
       <Typography variant="subtitle2">Plot Slope</Typography>
-      {renderNumericalValue(loc.slopeAspect, 'Aspect', '°', 2, 'Slope Aspect', right)}
+      {renderNumericalValue(loc.slopeAspect, 'Aspect', 'Â°', 2, 'Slope Aspect', right)}
       {renderNumericalValue(loc.slopeGradient, 'Gradient', '%', 2, 'Slope Gradient', right)}
     </div>
   );
@@ -477,7 +477,7 @@ const SiteMapFeature = (props) => {
       <Grid item xs={12} data-selenium="sitemap-map-popup-area">
         <Typography variant="subtitle2">Area</Typography>
         <div className={classes.startFlex}>
-          {renderNumericalValue(areaKm2, null, 'km²', 2, 'Area (km²)')}
+          {renderNumericalValue(areaKm2, null, 'kmÂ²', 2, 'Area (kmÂ²)')}
           {areaAcres === null ? null : (
             <div style={{ marginLeft: Theme.spacing(1) }}>
               {renderNumericalValue(areaAcres, null, ' acres', 2, 'Area (acres)', false, true)}
@@ -577,7 +577,7 @@ const SiteMapFeature = (props) => {
           <Link
             variant="caption"
             component="button"
-            onClick={() => jumpTo(site.siteCode)}
+            onClick={() => jumpTo(site.domainCode)}
             data-selenium="sitemap-map-popup-domainLink"
           >
             {domainTitle}
@@ -846,20 +846,20 @@ const SiteMapFeature = (props) => {
       )
     );
   };
-  const renderShape = (siteCode, location = null) => {
-    const shapeData = location && featureData[siteCode][location]
-      ? featureData[siteCode][location]
-      : featureData[siteCode];
+  const renderShape = (primaryId, secondaryId = null) => {
+    const shapeData = secondaryId && featureData[primaryId][secondaryId]
+      ? featureData[primaryId][secondaryId]
+      : featureData[primaryId];
     let isSelected = false;
     if (selectionActive) {
-      isSelected = location ? selectedItems.has(location) : selectedItems.has(siteCode);
+      isSelected = secondaryId ? selectedItems.has(secondaryId) : selectedItems.has(primaryId);
     }
     const isHighlighted = (
-      (featureType === FEATURE_TYPES.SITES && siteCode === focusLocation && !location)
-        || (location && location === focusLocation)
+      (primaryIdOnly && !secondaryId && primaryId === focusLocation)
+        || (!primaryIdOnly && secondaryId && secondaryId === focusLocation)
     );
-    const key = location ? `${siteCode} - ${location}` : siteCode;
-    const renderedPopup = location ? renderPopup(siteCode, location) : renderPopup(siteCode);
+    const key = secondaryId ? `${primaryId} - ${secondaryId}` : primaryId;
+    const renderedPopup = renderPopup(primaryId, secondaryId);
     const shapeKeys = Object.keys(shapeData);
     let shape = null;
     let position = [];

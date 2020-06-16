@@ -261,6 +261,7 @@ export const FEATURES = {
     description: '',
     hideByDefault: true,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
+    primaryIdOnly: true,
     featureShape: 'Polygon',
     style: { color: '#a067e4' },
   },
@@ -271,6 +272,7 @@ export const FEATURES = {
     description: '',
     hideByDefault: true,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
+    primaryIdOnly: true,
     featureShape: 'Polygon',
     style: { color: '#3cdd84' },
   },
@@ -721,6 +723,7 @@ export const FEATURES = {
     parent: 'SITE_MARKERS',
     attributes: { type: 'CORE', terrain: 'TERRESTRIAL' },
     dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
+    primaryIdOnly: true,
     iconScale: 1,
     iconSvg: iconSiteCoreTerrestrialSVG,
     iconSelectedSvg: iconSiteCoreTerrestrialSelectedSVG,
@@ -734,6 +737,7 @@ export const FEATURES = {
     parent: 'SITE_MARKERS',
     attributes: { type: 'RELOCATABLE', terrain: 'TERRESTRIAL' },
     dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
+    primaryIdOnly: true,
     iconScale: 1,
     iconSvg: iconSiteRelocatableTerrestrialSVG,
     iconSelectedSvg: iconSiteRelocatableTerrestrialSelectedSVG,
@@ -747,6 +751,7 @@ export const FEATURES = {
     parent: 'SITE_MARKERS',
     attributes: { type: 'CORE', terrain: 'AQUATIC' },
     dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
+    primaryIdOnly: true,
     iconScale: 1,
     iconSvg: iconSiteCoreAquaticSVG,
     iconSelectedSvg: iconSiteCoreAquaticSelectedSVG,
@@ -760,6 +765,7 @@ export const FEATURES = {
     parent: 'SITE_MARKERS',
     attributes: { type: 'RELOCATABLE', terrain: 'AQUATIC' },
     dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
+    primaryIdOnly: true,
     iconScale: 1,
     iconSvg: iconSiteRelocatableAquaticSVG,
     iconSelectedSvg: iconSiteRelocatableAquaticSelectedSVG,
@@ -1085,7 +1091,6 @@ export const getDynamicAspectRatio = (unusableVerticalSpace = 0) => {
   const usableVericalSpace = window.innerHeight + buffer - unusableVerticalSpace;
   const windowAspectRatio = Math.max(usableVericalSpace, 0) / (window.innerWidth || 1);
   const arIdx = dynamicAspectRatios.findIndex(ar => ar < windowAspectRatio);
-  console.log('getDynamicAspectRatio', unusableVerticalSpace, arIdx);
   return arIdx === -1
     ? dynamicAspectRatios[dynamicAspectRatios.length - 1]
     : dynamicAspectRatios[arIdx];
