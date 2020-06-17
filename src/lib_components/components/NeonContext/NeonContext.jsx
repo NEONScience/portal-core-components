@@ -42,7 +42,7 @@ const DEFAULT_STATE = {
   },
   fetches: {
     sites: { status: FETCH_STATUS.AWAITING_CALL, error: null },
-    auth: { status: FETCH_STATUS.AWAITING_CALL, error: null },
+    auth: { status: null, error: null },
     header: { status: FETCH_STATUS.AWAITING_CALL, error: null },
     footer: { status: FETCH_STATUS.AWAITING_CALL, error: null },
   },
@@ -186,7 +186,7 @@ const Provider = (props) => {
 
   const initialState = { ...DEFAULT_STATE, isActive: true };
   if (useCoreAuth) {
-    initialState.auth.fetchStatus = FETCH_STATUS.AWAITING_CALL;
+    initialState.fetches.auth.fetchStatus = FETCH_STATUS.AWAITING_CALL;
   }
   const [state, dispatch] = useReducer(reducer, { ...DEFAULT_STATE, isActive: true });
 

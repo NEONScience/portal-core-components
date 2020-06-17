@@ -174,9 +174,6 @@ declare function useNeonContextState(): ({
             NH: {
                 name: string;
                 center: number[];
-                /**
-                   HOOK
-                */
                 zoom: number;
             };
             NJ: {
@@ -399,6 +396,9 @@ declare function useNeonContextState(): ({
                 center: number[];
                 zoom: number;
             };
+            /**
+               CONTEXT
+            */
             D19: {
                 name: string;
                 areaKm2: number;
@@ -452,7 +452,7 @@ declare function useNeonContextState(): ({
             error: null;
         };
         auth: {
-            status: string;
+            status: null;
             error: null;
         };
         header: {
@@ -620,9 +620,6 @@ declare function useNeonContextState(): ({
             NH: {
                 name: string;
                 center: number[];
-                /**
-                   HOOK
-                */
                 zoom: number;
             };
             NJ: {
@@ -845,6 +842,9 @@ declare function useNeonContextState(): ({
                 center: number[];
                 zoom: number;
             };
+            /**
+               CONTEXT
+            */
             D19: {
                 name: string;
                 areaKm2: number;
@@ -898,7 +898,7 @@ declare function useNeonContextState(): ({
             error: null;
         };
         auth: {
-            status: string;
+            status: null;
             error: null;
         };
         header: {
@@ -937,7 +937,7 @@ declare namespace DEFAULT_STATE {
         }
         export { sites_1 as sites };
         export namespace auth {
-            import status_1 = AWAITING_CALL;
+            const status_1: null;
             export { status_1 as status };
             const error_1: null;
             export { error_1 as error };
