@@ -45,7 +45,7 @@
     "redux": "^4.0.5",
     "rxjs": "6.3.3",
     "tinycolor2": "^1.4.1",
-    "typeface-source-sans-pro": "0.0.54",
+    "typeface-inter": "^3.12.0",
     "universal-cookie": "^4.0.2"
   },
   "devDependencies": {

@@ -1,5 +1,5 @@
 import React from 'react';
-import 'typeface-source-sans-pro';
+import 'typeface-inter';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/styles';
@@ -127,7 +127,7 @@ const baseTheme = createMuiTheme({
     grey: PALETTES.GREY,
   },
   typography: {
-    fontFamily: '"Source Sans Pro",Helvetica,Arial,sans-serif',
+    fontFamily: '"Inter",Helvetica,Arial,sans-serif',
     fontWeightLight: 200,
     fontWeightRegular: 400,
     fontWeightMedium: 600,
