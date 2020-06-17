@@ -10,6 +10,7 @@ export namespace FEATURE_TYPES {
     export const SITES: string;
     export const SITE_LOCATION_HIERARCHIES: string;
     export const LOCATIONS: string;
+    export const SAMPLING_POINTS: string;
     export const BOUNDARIES: string;
     export const GROUP: string;
     export const OTHER: string;
@@ -73,6 +74,7 @@ export namespace FEATURES {
         description: string;
         hideByDefault: boolean;
         dataLoadType: string;
+        primaryIdOnly: boolean;
         featureShape: string;
         style: {
             color: string;
@@ -85,6 +87,7 @@ export namespace FEATURES {
         description: string;
         hideByDefault: boolean;
         dataLoadType: string;
+        primaryIdOnly: boolean;
         featureShape: string;
         style: {
             color: string;
@@ -251,14 +254,7 @@ export namespace FEATURES {
         parent: string;
         dataLoadType: string;
         matchLocationType: string;
-        attributes: {
-            type: string;
-            location: string;
-        };
-        style: {
-            color: string;
-        };
-        minPolygonZoom: number;
+        focusZoom: number;
         iconScale: number;
         iconSvg: any;
         iconShape: string;
@@ -269,16 +265,9 @@ export namespace FEATURES {
         type: string;
         description: string;
         parent: string;
-        attributes: {
-            type: string;
-            location: string;
-        };
-        style: {
-            color: string;
-        };
+        focusZoom: number;
         iconSvg: any;
         iconShape: string;
-        minPolygonZoom: number;
     };
     export const TOWER_SOIL_PLOTS: {
         name: string;
@@ -289,16 +278,9 @@ export namespace FEATURES {
         matchLocationType: string;
         description: string;
         parent: string;
-        attributes: {
-            type: string;
-            location: string;
-        };
-        style: {
-            color: string;
-        };
+        focusZoom: number;
         iconSvg: any;
         iconShape: string;
-        minPolygonZoom: number;
     };
     export const DISTRIBUTED_PLOTS: {
         name: string;
@@ -315,15 +297,8 @@ export namespace FEATURES {
         parent: string;
         dataLoadType: string;
         matchLocationType: string;
-        attributes: {
-            type: string;
-            location: string;
-        };
-        style: {
-            color: string;
-        };
-        minPolygonZoom: number;
         iconScale: number;
+        focusZoom: number;
         iconSvg: any;
         iconShape: string;
     };
@@ -335,15 +310,8 @@ export namespace FEATURES {
         parent: string;
         dataLoadType: string;
         matchLocationType: string;
-        attributes: {
-            type: string;
-            location: string;
-        };
-        style: {
-            color: string;
-        };
-        minPolygonZoom: number;
         iconScale: number;
+        focusZoom: number;
         iconSvg: any;
         iconShape: string;
     };
@@ -353,15 +321,8 @@ export namespace FEATURES {
         type: string;
         description: string;
         parent: string;
-        attributes: {
-            type: string;
-            location: string;
-        };
-        style: {
-            color: string;
-        };
-        minPolygonZoom: number;
         iconScale: number;
+        focusZoom: number;
         iconSvg: any;
         iconShape: string;
     };
@@ -373,15 +334,8 @@ export namespace FEATURES {
         parent: string;
         dataLoadType: string;
         matchLocationType: string;
-        attributes: {
-            type: string;
-            location: string;
-        };
-        style: {
-            color: string;
-        };
-        minPolygonZoom: number;
         iconScale: number;
+        focusZoom: number;
         iconSvg: any;
         iconShape: string;
     };
@@ -393,12 +347,72 @@ export namespace FEATURES {
         parent: string;
         dataLoadType: string;
         matchLocationType: string;
-        attributes: {
-            type: string;
-            location: string;
-        };
         iconSvg: any;
         iconShape: string;
+        focusZoom: number;
+    };
+    export const PLOT_DETAIL_POINTS: {
+        name: string;
+        type: string;
+        minZoom: number;
+        description: string;
+        parent: string;
+    };
+    export const TOWER_PHENOLOGY_PLOT_POINTS: {
+        name: string;
+        nameSingular: string;
+        type: string;
+        description: string;
+        parent: string;
+        parentDataFeatureKey: string;
+        dataLoadType: string;
+        minZoom: number;
+        featureShape: string;
+        style: {
+            color: string;
+        };
+    };
+    export const DISTRIBUTED_BIRD_GRID_POINTS: {
+        name: string;
+        nameSingular: string;
+        type: string;
+        description: string;
+        parent: string;
+        parentDataFeatureKey: string;
+        dataLoadType: string;
+        minZoom: number;
+        featureShape: string;
+        style: {
+            color: string;
+        };
+    };
+    export const DISTRIBUTED_MAMMAL_GRID_POINTS: {
+        name: string;
+        nameSingular: string;
+        type: string;
+        description: string;
+        parent: string;
+        parentDataFeatureKey: string;
+        dataLoadType: string;
+        minZoom: number;
+        featureShape: string;
+        style: {
+            color: string;
+        };
+    };
+    export const DISTRIBUTED_TICK_PLOT_POINTS: {
+        name: string;
+        nameSingular: string;
+        type: string;
+        description: string;
+        parent: string;
+        parentDataFeatureKey: string;
+        dataLoadType: string;
+        minZoom: number;
+        featureShape: string;
+        style: {
+            color: string;
+        };
     };
     export const AQUATIC_SITE_FEATURES: {
         name: string;
@@ -588,6 +602,7 @@ export namespace FEATURES {
             terrain: string;
         };
         dataLoadType: string;
+        primaryIdOnly: boolean;
         iconScale: number;
         iconSvg: any;
         iconSelectedSvg: any;
@@ -604,6 +619,7 @@ export namespace FEATURES {
             terrain: string;
         };
         dataLoadType: string;
+        primaryIdOnly: boolean;
         iconScale: number;
         iconSvg: any;
         iconSelectedSvg: any;
@@ -620,6 +636,7 @@ export namespace FEATURES {
             terrain: string;
         };
         dataLoadType: string;
+        primaryIdOnly: boolean;
         iconScale: number;
         iconSvg: any;
         iconSelectedSvg: any;
@@ -636,6 +653,7 @@ export namespace FEATURES {
             terrain: string;
         };
         dataLoadType: string;
+        primaryIdOnly: boolean;
         iconScale: number;
         iconSvg: any;
         iconSelectedSvg: any;
@@ -712,6 +730,7 @@ export namespace SITE_MAP_PROP_TYPES {
     export const view: PropTypes.Requireable<string>;
     export const aspectRatio: PropTypes.Requireable<number>;
     export const filterPosition: PropTypes.Requireable<string>;
+    export const unusableVerticalSpace: PropTypes.Requireable<number>;
     export const mapCenter: PropTypes.Requireable<(number | null | undefined)[]>;
     export const mapZoom: PropTypes.Requireable<number>;
     export const mapTileLayer: PropTypes.Requireable<string>;
@@ -728,6 +747,8 @@ export namespace SITE_MAP_DEFAULT_PROPS {
     export { aspectRatio_1 as aspectRatio };
     const filterPosition_1: string;
     export { filterPosition_1 as filterPosition };
+    const unusableVerticalSpace_1: number;
+    export { unusableVerticalSpace_1 as unusableVerticalSpace };
     const mapCenter_1: number[];
     export { mapCenter_1 as mapCenter };
     const mapZoom_1: null;
@@ -745,10 +766,11 @@ export namespace SITE_MAP_DEFAULT_PROPS {
     const features_1: null;
     export { features_1 as features };
 }
-export function getDynamicAspectRatio(): number;
+export function getDynamicAspectRatio(unusableVerticalSpace?: number): number;
 export function parseLocationData(data?: {}): {
     type: any;
     description: any;
+    siteCode: any;
     children: any;
 };
 export function parseLocationHierarchy(inHierarchy: any, parent?: any): {};

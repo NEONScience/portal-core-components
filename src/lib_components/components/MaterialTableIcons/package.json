@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "name": "material-table-icons",
+  "main": "./MaterialTableIcons.jsx",
+  "module": "./MaterialTableIcons.js"
+}

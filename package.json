@@ -82,7 +82,7 @@
     "lib:clean": "rm -r ./lib || true",
     "lib:clean-build": "(rm -r ./lib || true) && npm run lib",
     "lib:types": "tsc --project tsconfig.d.json",
-    "lib:post-cleanup": "rm ./lib/components/**/StyleGuide.* && rm -rf ./lib/**/__tests__",
+    "lib:post-cleanup": "rm ./lib/components/**/StyleGuide.* && rm -rf ./lib/*/__tests__ && rm -rf ./lib/*/*/__tests__",
     "build:deferred-json": "node scripts/buildDeferredJson.js"
   },
   "jest": {

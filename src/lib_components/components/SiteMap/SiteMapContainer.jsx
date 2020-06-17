@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useLayoutEffect } from 'react';
+import PropTypes from 'prop-types';
 
 import uniqueId from 'lodash/uniqueId';
 
@@ -107,13 +108,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const SiteMapContainer = () => {
+const SiteMapContainer = (props) => {
   const classes = useStyles(Theme);
+  const { unusableVerticalSpace = 0 } = props;
 
   const [neonContextState] = NeonContext.useNeonContextState();
 
   const [state, dispatch] = SiteMapContext.useSiteMapContext();
-  // console.log('CONTAINER STATE:', state);
+  console.log('CONTAINER STATE:', state);
   const isLoading = state.overallFetch.expected !== state.overallFetch.completed;
 
   const { aspectRatio, view: { current: view } } = state;
@@ -131,7 +133,7 @@ const SiteMapContainer = () => {
   useLayoutEffect(() => {
     const handleResize = () => {
       const newAspectRatio = aspectRatio.isDynamic
-        ? getDynamicAspectRatio()
+        ? getDynamicAspectRatio(unusableVerticalSpace)
         : aspectRatio.currentValue;
       dispatch({
         type: 'setAspectRatio',
@@ -147,7 +149,7 @@ const SiteMapContainer = () => {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [aspectRatio, dispatch]);
+  }, [unusableVerticalSpace, aspectRatio, dispatch]);
 
   /**
      Effect - Monitor all click events and close the features pane if open and clicked outside
@@ -248,6 +250,22 @@ const SiteMapContainer = () => {
     let icon = null;
     if (iconSvg) {
       icon = <img alt={featureName} src={iconSvg} className={classes.featureIcon} />;
+    } else if (featureShape === 'Circle') {
+      const circleProps = {
+        cx: 14,
+        cy: 14,
+        r: 8,
+        style: {
+          fill: featureStyle.color ? `${featureStyle.color}88` : 'none',
+          stroke: featureStyle.color || null,
+          strokeWidth: 3,
+        },
+      };
+      icon = (
+        <svg width="28" height="28" className={classes.featureIcon}>
+          <circle {...circleProps} />
+        </svg>
+      );
     } else if (featureShape === 'Polyline') {
       const polylineProps = {
         points: '1.5,21.5 15,18.5 13,9.5 26.5,6.5',
@@ -421,6 +439,14 @@ const SiteMapContainer = () => {
       {state.filters.position === 'bottom' ? <SiteMapFilters /> : null}
     </div>
   );
+};
+
+SiteMapContainer.propTypes = {
+  unusableVerticalSpace: PropTypes.number,
+};
+
+SiteMapContainer.defaultProps = {
+  unusableVerticalSpace: 0,
 };
 
 export default SiteMapContainer;

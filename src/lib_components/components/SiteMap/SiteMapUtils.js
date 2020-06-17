@@ -89,6 +89,7 @@ export const FEATURE_TYPES = {
   SITES: 'SITES',
   SITE_LOCATION_HIERARCHIES: 'SITE_LOCATION_HIERARCHIES',
   LOCATIONS: 'LOCATIONS',
+  SAMPLING_POINTS: 'SAMPLING_POINTS',
   BOUNDARIES: 'BOUNDARIES',
   GROUP: 'GROUP',
   OTHER: 'OTHER', // All features require a type. This catch-all type will not show in the table.
@@ -251,7 +252,6 @@ const LOCATION_ICON_SVG_SHAPES = {
    Convention: all keys are consistently plural
    Order is draw order on map (so largest boundary features should be first)
 */
-const PLACEHOLDER_RECT_STYLE = { color: '#666666' };
 export const FEATURES = {
   // States and Domains
   DOMAINS: {
@@ -261,6 +261,7 @@ export const FEATURES = {
     description: '',
     hideByDefault: true,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
+    primaryIdOnly: true,
     featureShape: 'Polygon',
     style: { color: '#a067e4' },
   },
@@ -271,6 +272,7 @@ export const FEATURES = {
     description: '',
     hideByDefault: true,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
+    primaryIdOnly: true,
     featureShape: 'Polygon',
     style: { color: '#3cdd84' },
   },
@@ -422,9 +424,7 @@ export const FEATURES = {
     parent: 'TOWER_PLOTS',
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'OS Plot - phe',
-    attributes: { type: 'phenology', location: 'tower' },
-    style: PLACEHOLDER_RECT_STYLE,
-    minPolygonZoom: 18,
+    focusZoom: 16,
     iconScale: 1.5,
     iconSvg: iconTowerPhenologyPlotSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
@@ -435,11 +435,9 @@ export const FEATURES = {
     type: FEATURE_TYPES.LOCATIONS,
     description: 'Tower plots support a variety of plant productivity, plant diversity, soil, biogeochemistry and microbe sampling. The number and size of Tower Base Plots is determined by the vegetation of the tower airshed. In forested sites, twenty 40m x 40m plots are established. In herbaceous sites, thirty 20m x 20m plots are established. Of these thirty tower plots, four have additional space to support soil sampling.',
     parent: 'TOWER_PLOTS',
-    attributes: { type: 'base', location: 'tower' },
-    style: PLACEHOLDER_RECT_STYLE,
+    focusZoom: 18,
     iconSvg: iconTowerBasePlotSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
-    minPolygonZoom: 18,
   },
   TOWER_SOIL_PLOTS: {
     name: 'Tower Soil Plots',
@@ -450,11 +448,9 @@ export const FEATURES = {
     matchLocationType: 'SOIL_PLOT',
     description: '',
     parent: 'TOWER_PLOTS',
-    attributes: { type: 'soil', location: 'tower' },
-    style: PLACEHOLDER_RECT_STYLE,
+    focusZoom: 18,
     iconSvg: iconTowerSoilPlotSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
-    minPolygonZoom: 18,
   },
   // DISTRIBUTED_PLOTS Group
   DISTRIBUTED_PLOTS: {
@@ -472,10 +468,8 @@ export const FEATURES = {
     parent: 'DISTRIBUTED_PLOTS',
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'OS Plot - brd',
-    attributes: { type: 'bird', location: 'distributed' },
-    style: PLACEHOLDER_RECT_STYLE,
-    minPolygonZoom: 17,
     iconScale: 1.8,
+    focusZoom: 16,
     iconSvg: iconDistributedBirdGridSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
   },
@@ -487,10 +481,8 @@ export const FEATURES = {
     parent: 'DISTRIBUTED_PLOTS',
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'OS Plot - mam',
-    attributes: { type: 'mammal', location: 'distributed' },
-    style: PLACEHOLDER_RECT_STYLE,
-    minPolygonZoom: 17,
     iconScale: 1.4,
+    focusZoom: 17,
     iconSvg: iconDistributedMammalGridSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
   },
@@ -500,10 +492,8 @@ export const FEATURES = {
     type: FEATURE_TYPES.LOCATIONS,
     description: 'Distributed Base Plots support a variety of plant productivity, plant diversity, soil, biogeochemistry, microbe and beetle sampling. Distributed Base Plots are 40m x 40m.',
     parent: 'DISTRIBUTED_PLOTS',
-    attributes: { type: 'base', location: 'distributed' },
-    style: PLACEHOLDER_RECT_STYLE,
-    minPolygonZoom: 17,
     iconScale: 1.2,
+    focusZoom: 17,
     iconSvg: iconDistributedBasePlotSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
   },
@@ -515,10 +505,8 @@ export const FEATURES = {
     parent: 'DISTRIBUTED_PLOTS',
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'OS Plot - tck',
-    attributes: { type: 'tick', location: 'distributed' },
-    style: PLACEHOLDER_RECT_STYLE,
-    minPolygonZoom: 17,
     iconScale: 1.2,
+    focusZoom: 17,
     iconSvg: iconDistributedTickPlotSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
   },
@@ -530,15 +518,71 @@ export const FEATURES = {
     parent: 'DISTRIBUTED_PLOTS',
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'OS Plot - mos',
-    attributes: { type: 'mosquito', location: 'distributed' },
     iconSvg: iconDistributedMosquitoPointSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
+    focusZoom: 18,
+  },
+  // Plots Sampling Points Group
+  PLOT_DETAIL_POINTS: {
+    name: 'Plot Detail Points',
+    type: FEATURE_TYPES.GROUP,
+    minZoom: 14,
+    description: 'Both distributed and tower plots may be composed of discrete sampling or transect loop points. When available, these points may appear on the map in addition to the plot marker icon.',
+    parent: 'TERRESTRIAL_SITE_FEATURES',
+  },
+  TOWER_PHENOLOGY_PLOT_POINTS: {
+    name: 'Phenology Plot Transect Points',
+    nameSingular: 'Phenology Plot Transect Point',
+    type: FEATURE_TYPES.SAMPLING_POINTS,
+    description: 'Plant phenology observations are made along a transect loop or plot in or around the primary airshed. When possible, one plot is established north of the tower to calibrate phenology camera images captured from sensors on the tower. If there is insufficient space north of the tower for a 200m x 200m plot or if the vegetation does not match the primary airshed an additional plot is established.',
+    parent: 'PLOT_DETAIL_POINTS',
+    parentDataFeatureKey: 'TOWER_PHENOLOGY_PLOTS',
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    minZoom: 15,
+    featureShape: 'Circle',
+    style: { color: '#59a14f' },
+  },
+  DISTRIBUTED_BIRD_GRID_POINTS: {
+    name: 'Bird Grid Sampling Points',
+    nameSingular: 'Bird Grid Sampling Point',
+    type: FEATURE_TYPES.SAMPLING_POINTS,
+    description: 'Bird Grids consist of 9 sampling points within a 500m x 500m square. Each point is 250m apart. Where possible, Bird Grids are colocated with Distributed Base Plots by placing the Bird Grid center (B2) in close proximity to the center of the Base Plot. At smaller sites, a single point count is done at the south-west corner (point 21) of the Distributed Base Plot.',
+    parent: 'PLOT_DETAIL_POINTS',
+    parentDataFeatureKey: 'DISTRIBUTED_BIRD_GRIDS',
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    minZoom: 14,
+    featureShape: 'Circle',
+    style: { color: '#f28e2c' },
+  },
+  DISTRIBUTED_MAMMAL_GRID_POINTS: {
+    name: 'Mammal Grid Sampling Points',
+    nameSingular: 'Mammal Grid Sampling Point',
+    type: FEATURE_TYPES.SAMPLING_POINTS,
+    description: 'Mammal Grids are 90m x 90m and include 100 trapping locations at 10m spacing. Where possible, these grids are colocated with Distributed Base Plots by placing them a specified distance (150m +/- 50m) and random direction from the center of the Base Plot.',
+    parent: 'PLOT_DETAIL_POINTS',
+    parentDataFeatureKey: 'DISTRIBUTED_MAMMAL_GRIDS',
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    minZoom: 16,
+    featureShape: 'Circle',
+    style: { color: '#925214' },
+  },
+  DISTRIBUTED_TICK_PLOT_POINTS: {
+    name: 'Tick Plot Sampling Points',
+    nameSingular: 'Tick Plot Sampling Point',
+    type: FEATURE_TYPES.SAMPLING_POINTS,
+    description: 'Tick Plots are sampled by conducting cloth dragging or flagging around the perimeter of a 40m x 40m plot. Tick plots are colocated with Distributed Base Plots by placing them a specified distance (150m +/- 15m) and random direction from the center of the Base Plot.',
+    parent: 'PLOT_DETAIL_POINTS',
+    parentDataFeatureKey: 'DISTRIBUTED_TICK_PLOTS',
+    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    minZoom: 17,
+    featureShape: 'Circle',
+    style: { color: '#6b191a' },
   },
   // Aquatic Site Features
   AQUATIC_SITE_FEATURES: {
     name: 'Aquatic Site Features',
     type: FEATURE_TYPES.GROUP,
-    minZoom: 10,
+    minZoom: 14,
     description: '',
   },
   AQUATIC_BENCHMARKS: {
@@ -721,6 +765,7 @@ export const FEATURES = {
     parent: 'SITE_MARKERS',
     attributes: { type: 'CORE', terrain: 'TERRESTRIAL' },
     dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
+    primaryIdOnly: true,
     iconScale: 1,
     iconSvg: iconSiteCoreTerrestrialSVG,
     iconSelectedSvg: iconSiteCoreTerrestrialSelectedSVG,
@@ -734,6 +779,7 @@ export const FEATURES = {
     parent: 'SITE_MARKERS',
     attributes: { type: 'RELOCATABLE', terrain: 'TERRESTRIAL' },
     dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
+    primaryIdOnly: true,
     iconScale: 1,
     iconSvg: iconSiteRelocatableTerrestrialSVG,
     iconSelectedSvg: iconSiteRelocatableTerrestrialSelectedSVG,
@@ -747,6 +793,7 @@ export const FEATURES = {
     parent: 'SITE_MARKERS',
     attributes: { type: 'CORE', terrain: 'AQUATIC' },
     dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
+    primaryIdOnly: true,
     iconScale: 1,
     iconSvg: iconSiteCoreAquaticSVG,
     iconSelectedSvg: iconSiteCoreAquaticSelectedSVG,
@@ -760,6 +807,7 @@ export const FEATURES = {
     parent: 'SITE_MARKERS',
     attributes: { type: 'RELOCATABLE', terrain: 'AQUATIC' },
     dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
+    primaryIdOnly: true,
     iconScale: 1,
     iconSvg: iconSiteRelocatableAquaticSVG,
     iconSelectedSvg: iconSiteRelocatableAquaticSelectedSVG,
@@ -892,6 +940,7 @@ export const DEFAULT_STATE = {
   },
   focusLocation: {
     current: null,
+    isCenteredOn: false, // Whether the map is still centered on and zoomed into focus location
     data: null,
     fetch: { status: null, error: null },
   },
@@ -1035,6 +1084,7 @@ export const SITE_MAP_PROP_TYPES = {
   view: PropTypes.oneOf(Object.keys(VIEWS).map(k => k.toLowerCase())),
   aspectRatio: PropTypes.number,
   filterPosition: PropTypes.oneOf(['top', 'bottom']),
+  unusableVerticalSpace: PropTypes.number,
   // Map Props
   mapCenter: PropTypes.arrayOf(PropTypes.number),
   mapZoom: PropTypes.number,
@@ -1054,6 +1104,7 @@ export const SITE_MAP_DEFAULT_PROPS = {
   view: VIEWS.MAP.toLowerCase(),
   aspectRatio: null,
   filterPosition: 'bottom',
+  unusableVerticalSpace: 0,
   // Map Props
   mapCenter: [52.68, -110.75],
   mapZoom: null,
@@ -1078,8 +1129,10 @@ const dynamicAspectRatios = [
   return parseFloat(parts[2]) / parseFloat(parts[1]);
 });
 
-export const getDynamicAspectRatio = () => {
-  const windowAspectRatio = Math.max(window.innerHeight + 100, 0) / (window.innerWidth || 1);
+export const getDynamicAspectRatio = (unusableVerticalSpace = 0) => {
+  const buffer = 100; // Approximate height of the filters row and a bit of margin
+  const usableVericalSpace = window.innerHeight + buffer - unusableVerticalSpace;
+  const windowAspectRatio = Math.max(usableVericalSpace, 0) / (window.innerWidth || 1);
   const arIdx = dynamicAspectRatios.findIndex(ar => ar < windowAspectRatio);
   return arIdx === -1
     ? dynamicAspectRatios[dynamicAspectRatios.length - 1]
@@ -1143,6 +1196,7 @@ const DEFAULT_LOCATION_PROPERTIES_WHITELIST = [
 
 export const parseLocationData = (data = {}) => {
   const {
+    siteCode = null,
     locationType: type = null,
     locationDescription: description = null,
     locationDecimalLatitude: latitude = null,
@@ -1155,6 +1209,7 @@ export const parseLocationData = (data = {}) => {
   const parsed = {
     type,
     description,
+    siteCode,
     children,
     ...parseLocationProperties(locationProperties, DEFAULT_LOCATION_PROPERTIES_WHITELIST),
   };
@@ -1322,8 +1377,12 @@ export const getMapStateForFocusLocation = (state = {}) => {
       .filter(key => FEATURES[key].matchLocationType)
       .find(key => (new RegExp(FEATURES[key].matchLocationType)).test(type));
     if (featureKey) {
-      newState.map.zoom = FEATURES[featureKey].iconScale && FEATURES[featureKey].iconScale > 1.4
-        ? 17 : 18;
+      if (FEATURES[featureKey].focusZoom) {
+        newState.map.zoom = FEATURES[featureKey].focusZoom;
+      } else {
+        newState.map.zoom = FEATURES[featureKey].iconScale && FEATURES[featureKey].iconScale > 1.4
+          ? 17 : 18;
+      }
     }
   }
 

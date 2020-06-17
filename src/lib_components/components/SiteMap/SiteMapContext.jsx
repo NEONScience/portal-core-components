@@ -88,6 +88,17 @@ const centerIsValid = center => (
 );
 const calculateFeatureDataFetches = (state) => {
   const sitesInMap = calculateLocationsInMap(state.sites, state.map.bounds, true);
+  // If we are still centered on our focus location and it has a corresponding siteCode then add the
+  // siteCode manually. This happens when we jump directly to a location within a site where no loc
+  // level data has yet been fetched and the zoom is close enough that the center point for the site
+  // is not in the map view.
+  // TODO: This approach helps catch site in map on a focus location, but quickly fails when panning
+  // around a site while zoomed in. Need true sitesInMap calc using sampling boundary / aq. reach
+  if (
+    state.focusLocation.isCenteredOn
+      && Object.keys(state.sites).includes(state.focusLocation.data.siteCode)
+      && !sitesInMap.includes(state.focusLocation.data.siteCode)
+  ) { sitesInMap.push(state.focusLocation.data.siteCode); }
   if (!sitesInMap.length) { return state; }
   const domainsInMap = new Set();
   sitesInMap
@@ -123,7 +134,7 @@ const calculateFeatureDataFetches = (state) => {
         newState.featureDataFetchesHasAwaiting = true;
       });
     });
-  // Feature fetches - FETCH (Locations API)
+  // Feature fetches - FETCH (Locations API, primary locations)
   Object.keys(FEATURES)
     // Only look at available+visible features that get fetched and have a location type match
     // If fetching for other child features then at least one of them must be available+visible
@@ -167,6 +178,46 @@ const calculateFeatureDataFetches = (state) => {
               newState.featureDataFetchesHasAwaiting = true;
             });
         });
+    });
+  // Feature fetches - FETCH (Locations API, sampling points)
+  Object.keys(FEATURES)
+    // Only look at available+visible features that get fetched and have a parentDataFeature
+    .filter(featureKey => (
+      FEATURES[featureKey].type === FEATURE_TYPES.SAMPLING_POINTS
+        && FEATURES[featureKey].dataLoadType === FEATURE_DATA_LOAD_TYPES.FETCH
+        && FEATURES[featureKey].parentDataFeatureKey
+        && state.filters.features.available[featureKey]
+        && state.filters.features.visible[featureKey]
+    ))
+    .forEach((featureKey) => {
+      const { type: featureType, parentDataFeatureKey } = FEATURES[featureKey];
+      const { type: parentDataFeatureType } = FEATURES[parentDataFeatureKey];
+      const parentLocations = {};
+      Object.keys(state.featureData[parentDataFeatureType][parentDataFeatureKey])
+        .forEach((siteCode) => {
+          Object.keys(state.featureData[parentDataFeatureType][parentDataFeatureKey][siteCode])
+            .forEach((locationCode) => {
+              parentLocations[locationCode] = state.featureData[parentDataFeatureType][parentDataFeatureKey][siteCode][locationCode]; // eslint-disable-line max-len
+            });
+        });
+      const locationsInMap = calculateLocationsInMap(parentLocations, state.map.bounds, true);
+      if (!locationsInMap) { return; }
+      locationsInMap.forEach((locationCode) => {
+        if (!parentLocations[locationCode].children) { return; }
+        const { siteCode = null } = parentLocations[locationCode];
+        if (!newState.featureDataFetches[featureType][featureKey][siteCode]) {
+          newState.featureDataFetches[featureType][featureKey][siteCode] = {};
+        }
+        parentLocations[locationCode].children
+          .filter(childLocation => (
+            !newState.featureDataFetches[featureType][featureKey][siteCode][childLocation]
+          ))
+          .forEach((childLocation) => {
+            newState.featureDataFetches[featureType][featureKey][siteCode][childLocation] = FETCH_STATUS.AWAITING_CALL; // eslint-disable-line max-len
+            newState.overallFetch.expected += 1;
+            newState.featureDataFetchesHasAwaiting = true;
+          });
+      });
     });
   return newState;
 };
@@ -333,6 +384,7 @@ const reducer = (state, action) => {
       if (centerIsValid(action.center)) { newState.map.center = action.center; }
       if (boundsAreValid(action.bounds)) { newState.map.bounds = action.bounds; }
       newState.map.zoomedIcons = getZoomedIcons(newState.map.zoom);
+      newState.focusLocation.isCenteredOn = false;
       updateMapTileWithZoom();
       return calculateFeatureDataFetches(
         calculateFeatureAvailability(newState),
@@ -340,12 +392,14 @@ const reducer = (state, action) => {
 
     case 'setMapBounds':
       if (boundsAreValid(action.bounds)) { newState.map.bounds = action.bounds; }
+      newState.focusLocation.isCenteredOn = false;
       return calculateFeatureDataFetches(newState);
 
     case 'setMapCenter':
       if (!centerIsValid(action.center)) { return state; }
       if (boundsAreValid(action.bounds)) { newState.map.bounds = action.bounds; }
       newState.map.center = [...action.center];
+      newState.focusLocation.isCenteredOn = false;
       return calculateFeatureDataFetches(newState);
 
     case 'setMapTileLayer':
@@ -384,6 +438,7 @@ const reducer = (state, action) => {
     case 'setNewFocusLocation':
       newState.focusLocation.fetch = { status: FETCH_STATUS.AWAITING_CALL, error: null };
       newState.focusLocation.current = action.location;
+      newState.focusLocation.isCenteredOn = false;
       newState.focusLocation.data = null;
       newState.overallFetch.expected += 1;
       if (newState.view.current !== VIEWS.MAP) { newState.view.current = VIEWS.MAP; }
@@ -418,6 +473,7 @@ const reducer = (state, action) => {
       }
       completeOverallFetch();
       newState.map = getMapStateForFocusLocation(newState);
+      newState.focusLocation.isCenteredOn = true;
       updateMapTileWithZoom();
       return calculateFeatureDataFetches(
         calculateFeatureAvailability(newState),
@@ -434,7 +490,9 @@ const reducer = (state, action) => {
     case 'setFeatureDataFetchSucceeded':
       setFetchStatusFromAction(FETCH_STATUS.SUCCESS);
       completeOverallFetch();
-      return newState;
+      return newState.overallFetch.expected === 0
+        ? calculateFeatureDataFetches(newState)
+        : newState;
 
     case 'setFeatureDataFetchFailed':
       setFetchStatusFromAction(FETCH_STATUS.ERROR);

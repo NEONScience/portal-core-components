@@ -145,6 +145,33 @@ const propRows = [
     ),
   },
   {
+    prop: 'unusableVerticalSpace',
+    type: 'integer',
+    default: '0',
+    examples: (
+      <div>
+        <tt>50</tt>, <tt>100</tt>, <tt>200</tt>
+      </div>
+    ),
+    description: (
+      <React.Fragment>
+        <p>
+          Dynamic aspect ratio is based on window innerHeight and innerWidth. In sitautions where the
+          available height or width differs this value can be used to still have a dynamic aspect
+          ratio but one that respects the actual available space on the page.
+        </p>
+        <p>
+          As an example, consider a page rendering a SiteMap that has a sticky header with a height
+          of 150 pixels. Typically the SiteMap would not know about this, so the aspect ratio tuned
+          to the total height of the page may render a SiteMap that is too tall to fit in the
+          available content area at any viewport size. Setting this prop to <tt>150</tt> would then
+          inform the aspect ratio calculation and at all viewport sizes the SiteMap should end up
+          with a height that vertically fits in the scrollable area.
+        </p>
+      </React.Fragment>
+    ),
+  },
+  {
     prop: 'view',
     type: (
       <div>
