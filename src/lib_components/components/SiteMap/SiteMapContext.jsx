@@ -87,18 +87,7 @@ const centerIsValid = center => (
   Array.isArray(center) && center.length === 2 && center.every(v => typeof v === 'number')
 );
 const calculateFeatureDataFetches = (state) => {
-  const sitesInMap = calculateLocationsInMap(state.sites, state.map.bounds, true);
-  // If we are still centered on our focus location and it has a corresponding siteCode then add the
-  // siteCode manually. This happens when we jump directly to a location within a site where no loc
-  // level data has yet been fetched and the zoom is close enough that the center point for the site
-  // is not in the map view.
-  // TODO: This approach helps catch site in map on a focus location, but quickly fails when panning
-  // around a site while zoomed in. Need true sitesInMap calc using sampling boundary / aq. reach
-  if (
-    state.focusLocation.isCenteredOn
-      && Object.keys(state.sites).includes(state.focusLocation.data.siteCode)
-      && !sitesInMap.includes(state.focusLocation.data.siteCode)
-  ) { sitesInMap.push(state.focusLocation.data.siteCode); }
+  const sitesInMap = calculateLocationsInMap(state.sites, state.map.bounds, true, 0.06);
   if (!sitesInMap.length) { return state; }
   const domainsInMap = new Set();
   sitesInMap
@@ -384,7 +373,6 @@ const reducer = (state, action) => {
       if (centerIsValid(action.center)) { newState.map.center = action.center; }
       if (boundsAreValid(action.bounds)) { newState.map.bounds = action.bounds; }
       newState.map.zoomedIcons = getZoomedIcons(newState.map.zoom);
-      newState.focusLocation.isCenteredOn = false;
       updateMapTileWithZoom();
       return calculateFeatureDataFetches(
         calculateFeatureAvailability(newState),
@@ -392,14 +380,12 @@ const reducer = (state, action) => {
 
     case 'setMapBounds':
       if (boundsAreValid(action.bounds)) { newState.map.bounds = action.bounds; }
-      newState.focusLocation.isCenteredOn = false;
       return calculateFeatureDataFetches(newState);
 
     case 'setMapCenter':
       if (!centerIsValid(action.center)) { return state; }
       if (boundsAreValid(action.bounds)) { newState.map.bounds = action.bounds; }
       newState.map.center = [...action.center];
-      newState.focusLocation.isCenteredOn = false;
       return calculateFeatureDataFetches(newState);
 
     case 'setMapTileLayer':
@@ -438,7 +424,6 @@ const reducer = (state, action) => {
     case 'setNewFocusLocation':
       newState.focusLocation.fetch = { status: FETCH_STATUS.AWAITING_CALL, error: null };
       newState.focusLocation.current = action.location;
-      newState.focusLocation.isCenteredOn = false;
       newState.focusLocation.data = null;
       newState.overallFetch.expected += 1;
       if (newState.view.current !== VIEWS.MAP) { newState.view.current = VIEWS.MAP; }
@@ -473,7 +458,6 @@ const reducer = (state, action) => {
       }
       completeOverallFetch();
       newState.map = getMapStateForFocusLocation(newState);
-      newState.focusLocation.isCenteredOn = true;
       updateMapTileWithZoom();
       return calculateFeatureDataFetches(
         calculateFeatureAvailability(newState),

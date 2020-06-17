@@ -777,5 +777,5 @@ export function parseLocationHierarchy(inHierarchy: any, parent?: any): {};
 export function getZoomedIcons(zoom: any): {};
 export function getMapStateForFocusLocation(state?: {}): any;
 export function boundsAreValid(bounds: any): boolean;
-export function calculateLocationsInMap(locations: any, bounds?: any, buffer?: boolean): string[];
+export function calculateLocationsInMap(locations: any, bounds?: any, extendMap?: boolean, extendPoints?: number): string[];
 import PropTypes from "prop-types";

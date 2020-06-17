@@ -330,7 +330,7 @@ export const FEATURES = {
     name: 'Site Sampling Boundaries',
     nameSingular: 'Site Sampling Boundary',
     type: FEATURE_TYPES.BOUNDARIES,
-    minZoom: 8,
+    minZoom: 9,
     dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: 'Terrestrial and Colocated Aquatic Sites',
     parent: 'TERRESTRIAL_SITE_FEATURES',
@@ -363,7 +363,7 @@ export const FEATURES = {
   TERRESTRIAL_SITE_FEATURES: {
     name: 'Terrestrial Site Features',
     type: FEATURE_TYPES.GROUP,
-    minZoom: 10,
+    minZoom: 9,
     description: '',
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'OS Plot - all', // Fetches for TOWER_BASE_PLOTS and DISTRIBUTED_BASE_PLOTS
@@ -940,7 +940,6 @@ export const DEFAULT_STATE = {
   },
   focusLocation: {
     current: null,
-    isCenteredOn: false, // Whether the map is still centered on and zoomed into focus location
     data: null,
     fetch: { status: null, error: null },
   },
@@ -1418,22 +1417,60 @@ export const boundsAreValid = bounds => (
     ))
 );
 
-export const calculateLocationsInMap = (locations, bounds = null, buffer = false) => {
+export const calculateLocationsInMap = (
+  locations,
+  bounds = null,
+  extendMap = false, // Boolean, whether or not to extend the map bounds by 50% on each dimension
+  extendPoints = 0, // Number, a margin to add/subtract to lat/lon for a point's hit box
+) => {
   if (!locations || typeof locations !== 'object' || !Object.keys(locations).length) { return []; }
   if (bounds === null) { return Object.keys(locations); }
   if (!boundsAreValid(bounds)) { return []; }
-  const extendedBounds = !buffer ? bounds
+  const extendedBounds = !extendMap ? bounds
     : Object.fromEntries(
       Object.keys(bounds)
         .map((dir) => {
-          const bufferValue = (bounds[dir][1] - bounds[dir][0]) / 2;
-          return [dir, [bounds[dir][0] - bufferValue, bounds[dir][1] + bufferValue]];
+          const buffer = (bounds[dir][1] - bounds[dir][0]) / 2;
+          return [dir, [bounds[dir][0] - buffer, bounds[dir][1] + buffer]];
         }),
     );
-  const isInBounds = loc => (
-    Number.isFinite(loc.latitude) && Number.isFinite(loc.longitude)
-      && loc.latitude >= extendedBounds.lat[0] && loc.latitude <= extendedBounds.lat[1]
-      && loc.longitude >= extendedBounds.lng[0] && loc.longitude <= extendedBounds.lng[1]
-  );
+  // This function flattens a geometry object to just coordinates so we can check if a boundary
+  // is in the map. NOTE: extendPoints does not work with boundaries, only solitary points.
+  const flatten = (items) => {
+    const isCoord = c => Array.isArray(c) && c.length === 2 && c.every(x => Number.isFinite(x));
+    const flat = [];
+    items.forEach((item) => {
+      if (Array.isArray(item) && !isCoord(item)) {
+        flat.push(...flatten(item));
+      } else {
+        flat.push(item);
+      }
+    });
+    return flat;
+  };
+  const isInBounds = (loc) => {
+    if (Number.isFinite(loc.latitude) && Number.isFinite(loc.longitude)) {
+      if (extendPoints > 0) {
+        const lats = [loc.latitude - extendPoints, loc.latitude + extendPoints];
+        const lngs = [loc.longitude - extendPoints, loc.longitude + extendPoints];
+        return (!(
+          lats[0] > extendedBounds.lat[1] || lats[1] < extendedBounds.lat[0]
+            || lngs[0] > extendedBounds.lng[1] || lngs[1] < extendedBounds.lng[0]
+        ));
+      }
+      return (
+        loc.latitude >= extendedBounds.lat[0] && loc.latitude <= extendedBounds.lat[1]
+          && loc.longitude >= extendedBounds.lng[0] && loc.longitude <= extendedBounds.lng[1]
+      );
+    }
+    if (loc.geometry && loc.geometry.coordinates) {
+      const flatCoords = flatten(loc.geometry.coordinates);
+      return flatCoords.some(coord => (
+        coord.latitude >= extendedBounds.lat[0] && coord.latitude <= extendedBounds.lat[1]
+          && coord.longitude >= extendedBounds.lng[0] && coord.longitude <= extendedBounds.lng[1]
+      ));
+    }
+    return false;
+  };
   return Object.keys(locations).filter(locId => isInBounds(locations[locId]));
 };
