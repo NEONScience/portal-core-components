@@ -73,12 +73,11 @@ export const COLORS = {
     900: '#38000c',
   },
   GREY: {
-    50: '#f3f5f5',
-    75: '#e0e2e2',
-    100: '#cccece',
-    200: '#abadae',
-    300: '#898c8d',
-    400: '#6f7374',
+    50: '#f5f6f7',
+    100: '#e4e6e7',
+    200: '#d7d9d9',
+    300: '#a2a4a3',
+    400: '#7c7f80',
     500: '#565a5c',
     600: '#4f5254',
     700: '#45484a',
@@ -125,6 +124,9 @@ const baseTheme = createMuiTheme({
     secondary: PALETTES.SECONDARY,
     error: PALETTES.ERROR,
     grey: PALETTES.GREY,
+  },
+  shape: {
+    borderRadius: 0,
   },
   typography: {
     fontFamily: '"Inter",Helvetica,Arial,sans-serif',

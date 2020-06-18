@@ -41,7 +41,6 @@ const GlobalCss = withStyles({
       fontSize: '115%',
       padding: Theme.spacing(0.25, 0.5),
       backgroundColor: 'rgba(0, 0, 0, 0.11)',
-      borderRadius: Theme.spacing(0.5),
     },
   },
 })(() => null);
