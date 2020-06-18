@@ -157,7 +157,6 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'flex-start',
     flexWrap: 'nowrap',
     padding: theme.spacing(1),
-    borderRadius: theme.spacing(1),
     marginBottom: theme.spacing(1),
     backgroundColor: theme.palette.grey[50],
     cursor: 'pointer',
@@ -169,7 +168,6 @@ const useStyles = makeStyles(theme => ({
   legendSeriesX: {
     whiteSpace: 'nowrap',
     padding: theme.spacing(1),
-    borderRadius: theme.spacing(1),
     backgroundColor: theme.palette.grey[100],
     textAlign: 'center',
     fontWeight: 600,
@@ -178,7 +176,6 @@ const useStyles = makeStyles(theme => ({
   legendSeriesColor: {
     width: theme.spacing(3),
     height: '4px',
-    borderRadius: '2px',
     pointerEvents: 'none',
   },
   legendSeriesLabel: {

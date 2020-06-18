@@ -44,7 +44,6 @@ const VERTICAL_TABS_WIDTH = 150;
 const useStyles = makeStyles(theme => ({
   tabsContainer: {
     display: 'flex',
-    borderRadius: theme.spacing(0, 0, 1),
     margin: theme.spacing(0, -0.5, -0.5, -0.5),
     [theme.breakpoints.down('sm')]: {
       flexDirection: 'column',
@@ -71,7 +70,6 @@ const useStyles = makeStyles(theme => ({
   graphContainer: {
     position: 'relative',
     marginBottom: theme.spacing(2),
-    borderRadius: theme.spacing(1),
     padding: theme.spacing(0.5),
   },
   graphOverlay: {
@@ -86,11 +84,9 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(-0.5, -0.5, 0, -0.5),
     padding: theme.spacing(20, 4, 4, 4),
     backgroundColor: 'rgba(255, 255, 255, 0.75)',
-    borderRadius: theme.spacing(1, 1, 0, 0),
   },
   titleContainer: {
     marginBottom: theme.spacing(2),
-    borderRadius: theme.spacing(1),
   },
   summaryDiv: {
     marginBottom: theme.spacing(1),
@@ -117,13 +113,12 @@ const useStyles = makeStyles(theme => ({
 const useTabsStyles = makeStyles(theme => ({
   scrollButtons: {
     '&:hover, &:focus': {
-      backgroundColor: theme.palette.grey[50],
+      backgroundColor: theme.palette.grey[100],
     },
   },
   scroller: {
     [theme.breakpoints.up('md')]: {
-      backgroundColor: theme.palette.grey[50],
-      borderBottomLeftRadius: theme.spacing(1),
+      backgroundColor: theme.palette.grey[100],
     },
   },
 }));
@@ -148,7 +143,7 @@ const useTabStyles = makeStyles(theme => ({
     minHeight: theme.spacing(8),
     minWidth: theme.spacing(15),
     '&:hover, &:focus': {
-      backgroundColor: theme.palette.grey[50],
+      backgroundColor: theme.palette.grey[100],
     },
     [theme.breakpoints.down('sm')]: {
       minHeight: theme.spacing(6),
@@ -454,10 +449,6 @@ export default function TimeSeriesViewerContainer() {
     >
       {Object.keys(TABS).map((tabId) => {
         const { label, ariaLabel, Icon: TabIcon } = TABS[tabId];
-        const style = {};
-        if (tabId === TAB_IDS.AXES && !belowMd) {
-          style.borderBottomLeftRadius = Theme.spacing(1);
-        }
         return (
           <Tab
             key={tabId}
@@ -466,7 +457,6 @@ export default function TimeSeriesViewerContainer() {
             aria-label={ariaLabel || label}
             icon={<TabIcon />}
             classes={tabClasses}
-            style={style}
             id={`time-series-viewer-tab-${tabId}`}
             aria-controls={`time-series-viewer-tabpanel-${tabId}`}
           />

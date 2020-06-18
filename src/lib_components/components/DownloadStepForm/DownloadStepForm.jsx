@@ -496,7 +496,7 @@ export default function DownloadStepForm(props) {
               </div>
             </Grid>
             <Grid item xs={12} md={6}>
-              <MTableToolbar {...toolbarProps} style={{ borderRadius: Theme.spacing(0.5) }} />
+              <MTableToolbar {...toolbarProps} />
             </Grid>
             {postSizeError}
           </Grid>

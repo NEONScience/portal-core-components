@@ -51,7 +51,6 @@ const useStyles = makeStyles(theme => ({
     minWidth: `${MIN_IFRAME_WIDTH}`,
     minHeight: `${MIN_IFRAME_WIDTH}`,
     border: `1px solid ${theme.palette.grey[700]}`,
-    borderRadius: theme.spacing(0.5),
   },
   divider: {
     margin: theme.spacing(2, 0),
@@ -90,7 +89,7 @@ const YearSlider = withStyles({
   },
   rail: {
     height: 5,
-    borderRadius: 2,
+    borderRadius: 0,
   },
   track: {
     display: 'none',
@@ -98,7 +97,7 @@ const YearSlider = withStyles({
   mark: {
     height: 16,
     width: 5,
-    borderRadius: 2,
+    borderRadius: 0,
     marginTop: -5,
     marginLeft: -2,
     backgroundColor: Theme.palette.primary.main,
@@ -112,7 +111,7 @@ const YearSlider = withStyles({
     backgroundColor: Theme.palette.grey[50],
     boxShadow: boxShadow(0.13),
     border: `2px solid ${Theme.palette.primary.main}`,
-    borderRadius: Theme.spacing(0.5),
+    borderRadius: 0,
     marginTop: Theme.spacing(-1.5),
     marginLeft: Theme.spacing(-0.75),
     '&:focus,&:hover,&active': {
@@ -132,7 +131,7 @@ const YearSlider = withStyles({
       width: 'auto',
       height: 'auto',
       padding: Theme.spacing(0.5, 1),
-      borderRadius: Theme.spacing(0.5),
+      borderRadius: 0,
       transform: 'none',
       '& span': {
         transform: 'none',

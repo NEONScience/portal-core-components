@@ -141,7 +141,7 @@ const NeonSlider = withStyles({
     backgroundColor: Theme.palette.grey[50],
     boxShadow: boxShadow(0.13),
     border: `2px solid ${Theme.palette.primary.main}`,
-    borderRadius: Theme.spacing(0.5),
+    borderRadius: 0,
     marginTop: Theme.spacing(-1.75),
     marginLeft: Theme.spacing(-0.75),
     '&:focus,&:hover,&active': {
@@ -160,9 +160,9 @@ const NeonSlider = withStyles({
     '& span': {
       width: 'auto',
       height: 'auto',
-      padding: Theme.spacing(0.5, 1),
-      borderRadius: Theme.spacing(0.5),
       transform: 'none',
+      padding: Theme.spacing(0.5, 1),
+      borderRadius: 0,
       '& span': {
         transform: 'none',
         padding: 0,
@@ -215,7 +215,6 @@ const NeonVerticalSlider = withStyles({
     backgroundColor: Theme.palette.grey[50],
     boxShadow: boxShadow(0.13),
     border: `2px solid ${Theme.palette.primary.main}`,
-    borderRadius: Theme.spacing(0.5),
     marginTop: Theme.spacing(-0.75),
     marginLeft: `${Theme.spacing(-1.75)}px !important`,
     '&:focus,&:hover,&active': {
@@ -235,12 +234,10 @@ const NeonVerticalSlider = withStyles({
       width: 'auto',
       height: 'auto',
       padding: Theme.spacing(0.5, 1),
-      borderRadius: Theme.spacing(0.5),
       transform: 'none',
       '& span': {
         transform: 'none',
         padding: 0,
-        borderRadius: 0,
       },
     },
   },
