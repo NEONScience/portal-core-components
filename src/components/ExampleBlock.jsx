@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
     maxWidth: 'unset !important',
     margin: theme.spacing(2, 0),
     padding: theme.spacing(3),
-    backgroundColor: theme.palette.grey[100],
+    backgroundColor: theme.palette.grey[50],
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center',

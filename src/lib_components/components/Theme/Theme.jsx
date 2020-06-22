@@ -129,34 +129,35 @@ const baseTheme = createMuiTheme({
     borderRadius: 0,
   },
   typography: {
+    fontSize: 14,
     fontFamily: '"Inter",Helvetica,Arial,sans-serif',
     fontWeightLight: 200,
     fontWeightRegular: 400,
     fontWeightMedium: 600,
     fontWeightBold: 700,
     h1: {
-      fontWeight: 200,
-      fontSize: '4.125rem',
-    },
-    h2: {
-      fontWeight: 200,
+      fontWeight: 500,
       fontSize: '3.5rem',
     },
-    h3: {
+    h2: {
       fontWeight: 400,
-      fontSize: '2.75rem',
+      fontSize: '3rem',
+    },
+    h3: {
+      fontWeight: 300,
+      fontSize: '2.5rem',
     },
     h4: {
-      fontWeight: 400,
-      fontSize: '2.125rem',
+      fontWeight: 300,
+      fontSize: '2rem',
     },
     h5: {
-      fontWeight: 600,
+      fontWeight: 200,
       fontSize: '1.5rem',
     },
     h6: {
-      fontWeight: 700,
-      fontSize: '1.15rem',
+      fontWeight: 200,
+      fontSize: '1.25rem',
     },
     caption: {
       fontSize: '0.81rem',
@@ -165,6 +166,38 @@ const baseTheme = createMuiTheme({
   props: {
     MuiLink: {
       color: 'secondary',
+    },
+  },
+  overrides: {
+    MuiTypography: {
+      gutterBottom: {
+        marginBottom: '0.65em',
+      },
+    },
+    MuiInputBase: {
+      root: {
+        fontSize: '0.9rem',
+      },
+    },
+    MuiButton: {
+      root: {
+        fontWeight: 700,
+        fontSize: '0.8rem',
+      },
+      contained: {
+        padding: '8px 16px',
+      },
+      outlined: {
+        padding: '8px 16px',
+      },
+      containedSizeSmall: {
+        fontSize: '0.7rem',
+        padding: '6px 12px',
+      },
+      outlinedSizeSmall: {
+        fontSize: '0.7rem',
+        padding: '6px 12px',
+      },
     },
   },
 });

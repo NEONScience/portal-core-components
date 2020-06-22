@@ -660,7 +660,7 @@ const DataProductAvailability = (props) => {
               />
             </div>
           </MuiPickersUtilsProvider>
-          <div style={{ display: 'flex', marginTop: Theme.spacing(1) }}>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: Theme.spacing(1) }}>
             <Button
               {...selectionButtonProps}
               data-selenium="data-product-availability.all-years-button"

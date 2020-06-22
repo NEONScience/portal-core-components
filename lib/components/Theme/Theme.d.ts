@@ -61,7 +61,6 @@ export namespace COLORS {
     };
     export const GREY: {
         50: string;
-        75: string;
         100: string;
         200: string;
         300: string;

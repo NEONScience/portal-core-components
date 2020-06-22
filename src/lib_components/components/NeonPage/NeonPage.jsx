@@ -230,7 +230,7 @@ const NeonPage = (props) => {
     return (
       <Typography
         data-selenium="neon-page.title"
-        variant="h3"
+        variant="h2"
         component="h1"
         className={classes.pageTitle}
       >
