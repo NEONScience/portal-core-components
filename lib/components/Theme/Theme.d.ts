@@ -1,5 +1,5 @@
 export namespace COLORS {
-    export const BLUE: {
+    export const NEON_BLUE: {
         50: string;
         100: string;
         200: string;
@@ -11,7 +11,7 @@ export namespace COLORS {
         800: string;
         900: string;
     };
-    export const SECONDARY_BLUE: {
+    export const LIGHT_BLUE: {
         50: string;
         100: string;
         200: string;

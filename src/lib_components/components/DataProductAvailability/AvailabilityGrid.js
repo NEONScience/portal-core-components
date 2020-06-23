@@ -461,7 +461,7 @@ export function AvailabilityGrid(config) {
     .attr('width', svgWidth - 1)
     .attr('height', SVG.CELL_HEIGHT + SVG.CELL_PADDING)
     .attr('fill', 'none')
-    .attr('stroke', COLORS.SECONDARY_BLUE[700])
+    .attr('stroke', COLORS.LIGHT_BLUE[700])
     .attr('stroke-width', '1.5px')
     .style('opacity', 0);
 
@@ -756,7 +756,7 @@ export function AvailabilityGrid(config) {
         return yBounds[1] - yBounds[0];
       })
       .attr('fill', d => (
-        isHighlighted(d) ? COLORS.SECONDARY_BLUE[100] : COLORS.SECONDARY_BLUE[300]
+        isHighlighted(d) ? COLORS.LIGHT_BLUE[100] : COLORS.LIGHT_BLUE[300]
       ))
       .attr('stroke', Theme.palette.secondary.main)
       .style('stroke-width', '1.5px')
@@ -803,7 +803,7 @@ export function AvailabilityGrid(config) {
     const fill = d => (
       viewSelections[d] === 'full'
         ? Theme.palette.secondary.main
-        : COLORS.SECONDARY_BLUE[200]
+        : COLORS.LIGHT_BLUE[200]
     );
     let startX = getYearMonthGutterX(dateRange.value[0], 'left');
     let endX = getYearMonthGutterX(dateRange.value[1], 'right');

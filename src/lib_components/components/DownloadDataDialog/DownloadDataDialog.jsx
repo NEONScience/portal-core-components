@@ -457,28 +457,24 @@ export default function DownloadDataDialog() {
     <div style={{ whiteSpace: 'nowrap' }}>
       <Button
         data-selenium="download-data-dialog.step-nav-button.previous"
-        size="small"
-        color="primary"
         variant="outlined"
         aria-label="Previous"
         disabled={activeStepIndex === 0}
         onClick={() => changeToStep(activeStepIndex - 1)}
+        startIcon={<LeftIcon />}
       >
-        <LeftIcon style={{ marginLeft: (belowSm ? 0 : Theme.spacing(-1)) }} />
         {belowSm ? null : 'Back'}
       </Button>
       <Button
         data-selenium="download-data-dialog.step-nav-button.next"
-        size="small"
-        color="primary"
         variant="outlined"
         aria-label="Next"
         disabled={activeStepIndex === requiredSteps.length - 1}
         style={{ marginLeft: Theme.spacing(1) }}
         onClick={() => changeToStep(activeStepIndex + 1)}
+        endIcon={<RightIcon />}
       >
         {belowSm ? null : 'Next'}
-        <RightIcon style={{ marginRight: (belowSm ? 0 : Theme.spacing(-1)) }} />
       </Button>
     </div>
   );

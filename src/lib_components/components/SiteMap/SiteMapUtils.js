@@ -819,9 +819,9 @@ Object.keys(FEATURES).forEach((key) => { FEATURES[key].KEY = key; });
 
 // Common colors for selecatble boundary features
 export const BOUNDARY_COLORS = {
-  partialSelected: COLORS.SECONDARY_BLUE[300],
-  totalSelected: COLORS.SECONDARY_BLUE[500],
-  hover: COLORS.SECONDARY_BLUE[100],
+  partialSelected: COLORS.LIGHT_BLUE[300],
+  totalSelected: COLORS.LIGHT_BLUE[500],
+  hover: COLORS.LIGHT_BLUE[100],
 };
 
 export const calculateFeatureAvailability = (state) => {

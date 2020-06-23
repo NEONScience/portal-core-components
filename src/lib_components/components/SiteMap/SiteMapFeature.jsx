@@ -60,22 +60,31 @@ const useStyles = makeStyles(theme => ({
   popup: {
     minWidth: '320px',
     '& a': {
-      color: theme.palette.secondary.main,
+      color: theme.palette.primary.main,
     },
     '& p': {
       margin: 'unset',
+    },
+    '& div.leaflet-popup-content-wrapper': {
+      borderRadius: '0px !important',
     },
     '& a.leaflet-popup-close-button': {
       top: theme.spacing(0.5),
       right: theme.spacing(0.5),
     },
   },
+  popupButtonRow: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    marginTop: theme.spacing(2),
+    '& > :not(:last-child)': {
+      marginRight: theme.spacing(1),
+    },
+  },
   popupButton: {
-    width: '100%',
     whiteSpace: 'nowrap',
     marginBottom: theme.spacing(1),
-    color: `${Theme.palette.primary.main} !important`,
-    borderColor: Theme.palette.primary.main,
     '& span': {
       pointerEvents: 'none',
     },
@@ -686,28 +695,25 @@ const SiteMapFeature = (props) => {
         variant: 'outlined',
         color: 'primary',
         target: '_blank',
+        size: 'small',
       };
       return (
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <Button
-              endIcon={<SiteDetailsIcon />}
-              href={getHref('SITE_DETAILS', site.siteCode)}
-              {...actionButtonProps}
-            >
-              Site Details
-            </Button>
-          </Grid>
-          <Grid item xs={6}>
-            <Button
-              endIcon={<ExploreDataProductsIcon />}
-              href={getHref('EXPLORE_DATA_PRODUCTS_BY_SITE', site.siteCode)}
-              {...actionButtonProps}
-            >
-              Explore Data
-            </Button>
-          </Grid>
-        </Grid>
+        <div className={classes.popupButtonRow}>
+          <Button
+            endIcon={<SiteDetailsIcon />}
+            href={getHref('SITE_DETAILS', site.siteCode)}
+            {...actionButtonProps}
+          >
+            Site Details
+          </Button>
+          <Button
+            endIcon={<ExploreDataProductsIcon />}
+            href={getHref('EXPLORE_DATA_PRODUCTS_BY_SITE', site.siteCode)}
+            {...actionButtonProps}
+          >
+            Explore Data
+          </Button>
+        </div>
       );
     };
     return (

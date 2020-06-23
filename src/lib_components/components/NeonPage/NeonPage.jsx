@@ -71,7 +71,7 @@ const useStyles = makeStyles(theme => ({
     // component, to appear the same as the <Link> component. This is especially
     // useful for rendered markdown where injecting Mui Links isn't possible.
     '& a:not([class]), a[class=""]': {
-      color: COLORS.SECONDARY_BLUE[500], // MUST come from COLORS, not palette
+      color: COLORS.LIGHT_BLUE[500], // MUST come from COLORS, not palette
       textDecoration: 'none',
     },
     '& a:hover:not([class]), a:hover[class=""]': {

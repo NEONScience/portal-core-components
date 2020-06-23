@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     height: '0px', // Necessary to set a fixed aspect ratio from props (using paddingBottom)
     position: 'relative',
-    backgroundColor: COLORS.BLUE[200],
+    backgroundColor: COLORS.NEON_BLUE[200],
     overflow: 'hidden',
     display: 'flex',
     justifyContent: 'center',

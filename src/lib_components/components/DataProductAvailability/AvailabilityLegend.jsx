@@ -104,7 +104,7 @@ export default function AvailabilityLegend(props) {
     const handleAttribs = {
       width: SVG.DATE_RANGE_HANDLE_WIDTH,
       height: SVG.CELL_HEIGHT,
-      fill: COLORS.SECONDARY_BLUE[300],
+      fill: COLORS.LIGHT_BLUE[300],
       stroke: Theme.palette.secondary.main,
       strokeWidth: 1.5,
     };
@@ -117,7 +117,7 @@ export default function AvailabilityLegend(props) {
         <text className={classes.legendText} x={selectionLabelOffset} y={rowLabelY(0)}>
           All sites selected
         </text>
-        <rect x={0.5} y={rowY(1) + 1.5} width={selectionWidth} height={SVG.CELL_HEIGHT - 2} fill={COLORS.SECONDARY_BLUE[200]} />
+        <rect x={0.5} y={rowY(1) + 1.5} width={selectionWidth} height={SVG.CELL_HEIGHT - 2} fill={COLORS.LIGHT_BLUE[200]} />
         <rect x={0.5} y={rowY(1) + 0.5} {...handleAttribs} />
         <rect x={selectionWidth - SVG.DATE_RANGE_HANDLE_WIDTH} y={rowY(1) + 0.5} {...handleAttribs} />
         <text className={classes.legendText} x={selectionLabelOffset} y={rowLabelY(1)}>

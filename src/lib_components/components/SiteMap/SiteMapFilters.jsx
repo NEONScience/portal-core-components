@@ -14,27 +14,11 @@ import Theme from '../Theme/Theme';
 import SiteMapContext from './SiteMapContext';
 import { VIEWS, FETCH_STATUS } from './SiteMapUtils';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   row: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-  },
-  toggleButtonGroup: {
-    height: theme.spacing(4),
-  },
-  toggleButton: {
-    height: theme.spacing(4),
-    fontWeight: 600,
-    color: theme.palette.primary.main,
-    borderColor: theme.palette.primary.main,
-    padding: theme.spacing(0, 1.5),
-    whiteSpace: 'nowrap',
-  },
-  // Use !important here to override the Mui-selected class with higher priority
-  toggleButtonSelected: {
-    color: '#fff !important',
-    backgroundColor: `${theme.palette.primary.main} !important`,
   },
 }));
 
@@ -92,7 +76,6 @@ const SiteMapFilters = () => {
           error={focusLocationError}
         />
         <Button
-          size="small"
           type="submit"
           color="primary"
           variant="contained"
@@ -119,30 +102,16 @@ const SiteMapFilters = () => {
           exclusive
           color="primary"
           variant="outlined"
-          size="small"
-          className={classes.toggleButtonGroup}
           value={view}
           onChange={handleChangeView}
         >
-          {Object.keys(VIEWS).map((key) => {
-            const className = key === view
-              ? `${classes.toggleButton} ${classes.toggleButtonSelected}`
-              : classes.toggleButton;
-            return (
-              <ToggleButton
-                key={key}
-                value={key}
-                size="small"
-                className={className}
-                data-selenium={`sitemap-viewButton-${key}`}
-              >
-                {key}
-              </ToggleButton>
-            );
-          })}
+          {Object.keys(VIEWS).map(key => (
+            <ToggleButton key={key} value={key} data-selenium={`sitemap-viewButton-${key}`}>
+              {key}
+            </ToggleButton>
+          ))}
         </ToggleButtonGroup>
         <Button
-          size="small"
           color="primary"
           variant={filters.features.open ? 'contained' : 'outlined'}
           endIcon={filters.features.open ? closeIcon : openIcon}

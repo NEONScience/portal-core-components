@@ -14,9 +14,9 @@ const svgPatternsSrc = {
     dim: 8,
     node: (
       <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8">
-        <rect x="0" y="0" width="8" height="8" fill={COLORS.SECONDARY_BLUE[100]} />
-        <rect x="0" y="0" width="8" height="2" fill={COLORS.SECONDARY_BLUE[300]} />
-        <rect x="0" y="4" width="8" height="2" fill={COLORS.SECONDARY_BLUE[300]} />
+        <rect x="0" y="0" width="8" height="8" fill={COLORS.LIGHT_BLUE[100]} />
+        <rect x="0" y="0" width="8" height="2" fill={COLORS.LIGHT_BLUE[300]} />
+        <rect x="0" y="4" width="8" height="2" fill={COLORS.LIGHT_BLUE[300]} />
       </svg>
     ),
   },
@@ -24,7 +24,7 @@ const svgPatternsSrc = {
     dim: 10,
     node: (
       <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10">
-        <rect x="0" y="0" width="10" height="10" fill={COLORS.SECONDARY_BLUE[100]} />
+        <rect x="0" y="0" width="10" height="10" fill={COLORS.LIGHT_BLUE[100]} />
         <path
           d="M-1,1 l2,-2 M0,10 l10,-10 M9,11 l2,-2"
           stroke={Theme.palette.secondary.main}

@@ -51,22 +51,6 @@ const svgMinWidth = (SVG.CELL_WIDTH + SVG.CELL_PADDING) * SVG.MIN_CELLS
   + Math.floor(SVG.MIN_CELLS / 12) * SVG.YEAR_PADDING;
 const svgMinHeight = (SVG.CELL_HEIGHT + SVG.CELL_PADDING) * (SVG.MIN_ROWS + 1);
 const useStyles = makeStyles(theme => ({
-  optionButtonGroup: {
-    height: theme.spacing(4),
-  },
-  optionButton: {
-    height: theme.spacing(4),
-    fontWeight: 600,
-    color: theme.palette.primary.main,
-    borderColor: theme.palette.primary.main,
-    padding: theme.spacing(0, 1.5),
-    whiteSpace: 'nowrap',
-  },
-  // Use !important here to override the Mui-selected class with higher priority
-  optionButtonSelected: {
-    color: '#fff !important',
-    backgroundColor: `${theme.palette.primary.main} !important`,
-  },
   svg: {
     minWidth: `${svgMinWidth}px`,
     minHeight: `${svgMinHeight}px`,
@@ -466,17 +450,11 @@ const DataProductAvailability = (props) => {
      Render: View Options
   */
   const renderViewOptions = () => {
-    const renderToggleButton = (key) => {
-      let className = classes.optionButton;
-      if (key === currentView) {
-        className = `${className} ${classes.optionButtonSelected}`;
-      }
-      return (
-        <ToggleButton key={key} value={key} size="small" className={className}>
-          {views[key].name}
-        </ToggleButton>
-      );
-    };
+    const renderToggleButton = key => (
+      <ToggleButton key={key} value={key} size="small">
+        {views[key].name}
+      </ToggleButton>
+    );
     return (
       <div
         style={optionDivStyle}
@@ -495,7 +473,6 @@ const DataProductAvailability = (props) => {
             color="primary"
             variant="outlined"
             size="small"
-            className={classes.optionButtonGroup}
             value={currentView}
             onChange={handleChangeView}
           >
@@ -557,7 +534,6 @@ const DataProductAvailability = (props) => {
         <ToggleButtonGroup
           exclusive
           value={currentSortDirection}
-          className={classes.optionButtonGroup}
           onChange={handleChangeSortDirection}
           data-selenium="data-product-availability.sort-options.direction"
         >
@@ -565,7 +541,6 @@ const DataProductAvailability = (props) => {
             size="small"
             key={SORT_DIRECTIONS[0]}
             value={SORT_DIRECTIONS[0]}
-            className={`${classes.optionButton} ${currentSortDirection === SORT_DIRECTIONS[0] ? classes.optionButtonSelected : ''}`}
             title="Sort Ascending (A-Z)"
             aria-label="Sort Ascending (A-Z)"
           >
@@ -575,7 +550,6 @@ const DataProductAvailability = (props) => {
             size="small"
             key={SORT_DIRECTIONS[1]}
             value={SORT_DIRECTIONS[1]}
-            className={`${classes.optionButton} ${currentSortDirection === SORT_DIRECTIONS[1] ? classes.optionButtonSelected : ''}`}
             title="Sort Descending (Z-A)"
             aria-label="Sort Descending (Z-A)"
           >
