@@ -167,6 +167,9 @@ const baseTheme = createMuiTheme({
     MuiButton: {
       color: 'primary',
     },
+    MuiCard: {
+      variant: 'outlined',
+    },
     MuiLink: {
       color: 'primary',
       underline: 'always',
@@ -208,6 +211,18 @@ const baseTheme = createMuiTheme({
           textDecoration: 'underline',
         },
       },
+      text: {
+        '&$disabled': {
+          color: COLORS.GREY[300],
+        },
+      },
+      textPrimary: {
+        padding: '8px 16px',
+        '&:hover, &:active': {
+          color: COLORS.LIGHT_BLUE[400],
+          textDecoration: 'underline',
+        },
+      },
       sizeSmall: {
         fontSize: '0.55rem',
         padding: '5px 10px',
@@ -230,6 +245,22 @@ const baseTheme = createMuiTheme({
         letterSpacing: '0.06em',
         fontSize: '0.7rem',
         padding: '8px 16px',
+      },
+    },
+    MuiCard: {
+      root: {
+        borderRadius: '4px',
+        border: `1px solid ${COLORS.GREY[200]}`,
+      },
+    },
+    MuiCardContent: {
+      root: {
+        padding: '24px',
+      },
+    },
+    MuiCardActions: {
+      root: {
+        padding: '0px 24px 24px 24px',
       },
     },
     MuiDialog: {

@@ -15,11 +15,13 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 
 import HomeIcon from '@material-ui/icons/Home';
+import ComponentIcon from '@material-ui/icons/ViewModule';
 
 import NeonPage from './lib_components/components/NeonPage/NeonPage';
 import Theme from './lib_components/components/Theme/Theme';
 
 import Home from './components/Home';
+import BasicComponents from './components/BasicComponents';
 import AopDataViewerStyleGuide from './lib_components/components/AopDataViewer/StyleGuide';
 import DataProductAvailabilityStyleGuide from './lib_components/components/DataProductAvailability/StyleGuide';
 import DataThemeIconStyleGuide from './lib_components/components/DataThemeIcon/StyleGuide';
@@ -120,7 +122,11 @@ const components = [
   },
 ];
 
-const getHashIndex = hash => components.findIndex(component => component.hash === hash);
+const getHashIndex = hash => (
+  hash === '#BasicComponents'
+    ? -2
+    : components.findIndex(component => component.hash === hash)
+);
 
 const intialSelectedIndex = getHashIndex(document.location.hash);
 
@@ -131,6 +137,8 @@ export default function App() {
   useEffect(() => {
     if (selectedIndex === -1) {
       document.location.hash = '';
+    } else if (selectedIndex === -2) {
+      document.location.hash = 'BasicComponents';
     } else if (document.location.hash !== components[selectedIndex].hash) {
       document.location.hash = components[selectedIndex].hash;
     }
@@ -150,26 +158,38 @@ export default function App() {
     setSelectedIndex(getHashIndex(hash));
   };
 
-  const CurrentComponent = selectedIndex === -1 ? null : components[selectedIndex].component;
+  const CurrentComponent = selectedIndex < 0 ? null : components[selectedIndex].component;
 
-  const renderCurrentComponent = () => (
-    selectedIndex === -1
-      ? (
+  const renderCurrentComponent = () => {
+    if (selectedIndex === -1) {
+      return (
         <Paper style={{ padding: Theme.spacing(3) }}>
           <Typography variant="h4" component="h2" gutterBottom>
             Welcome
           </Typography>
           <Home onClickHash={onClickHash} />
         </Paper>
-      ) : (
+      );
+    }
+    if (selectedIndex === -2) {
+      return (
         <Paper style={{ padding: Theme.spacing(3) }}>
           <Typography variant="h4" component="h2" gutterBottom>
-            {components[selectedIndex].name}
+            Basic Components
           </Typography>
-          <CurrentComponent onClickHash={onClickHash} />
+          <BasicComponents onClickHash={onClickHash} />
         </Paper>
-      )
-  );
+      );
+    }
+    return (
+      <Paper style={{ padding: Theme.spacing(3) }}>
+        <Typography variant="h4" component="h2" gutterBottom>
+          {components[selectedIndex].name}
+        </Typography>
+        <CurrentComponent onClickHash={onClickHash} />
+      </Paper>
+    );
+  };
 
   const renderNavList = () => (
     <React.Fragment>
@@ -184,6 +204,19 @@ export default function App() {
             <HomeIcon />
           </ListItemIcon>
           <ListItemText primary="Home" />
+        </ListItem>
+      </List>
+      <List component="nav" style={{ padding: '0' }}>
+        <ListItem
+          button
+          key="basicComponents"
+          selected={selectedIndex === -2}
+          onClick={event => handleListItemClick(event, -2)}
+        >
+          <ListItemIcon style={{ minWidth: '36px' }}>
+            <ComponentIcon />
+          </ListItemIcon>
+          <ListItemText primary="Basic Components" />
         </ListItem>
       </List>
       <Divider />
