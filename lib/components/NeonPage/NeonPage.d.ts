@@ -7,6 +7,7 @@ declare namespace NeonPage {
             href: PropTypes.Requireable<string>;
         }> | null | undefined)[]>;
         export const title: PropTypes.Requireable<string>;
+        export const subtitle: PropTypes.Requireable<string>;
         export const loading: PropTypes.Requireable<string>;
         export const progress: PropTypes.Requireable<number>;
         export const error: PropTypes.Requireable<string>;
@@ -19,6 +20,8 @@ declare namespace NeonPage {
         export { breadcrumbs_1 as breadcrumbs };
         const title_1: null;
         export { title_1 as title };
+        const subtitle_1: null;
+        export { subtitle_1 as subtitle };
         const loading_1: null;
         export { loading_1 as loading };
         const progress_1: null;

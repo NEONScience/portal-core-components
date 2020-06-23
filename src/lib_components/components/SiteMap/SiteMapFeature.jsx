@@ -34,15 +34,13 @@ import {
 
 import SiteMapContext from './SiteMapContext';
 import {
+  getHref,
   FEATURES,
   FEATURE_TYPES,
   KM2_TO_ACRES,
   HIGHLIGHT_STATUS,
   SELECTION_STATUS,
   PLOT_SAMPLING_MODULES,
-  SITE_DETAILS_URL_BASE,
-  // SELECTABLE_FEATURE_TYPES,
-  EXPLORE_DATA_PRODUCTS_URL_BASE,
 } from './SiteMapUtils';
 
 import Theme from '../Theme/Theme';
@@ -694,7 +692,7 @@ const SiteMapFeature = (props) => {
           <Grid item xs={6}>
             <Button
               endIcon={<SiteDetailsIcon />}
-              href={`${SITE_DETAILS_URL_BASE}${site.siteCode}`}
+              href={getHref('SITE_DETAILS', site.siteCode)}
               {...actionButtonProps}
             >
               Site Details
@@ -703,7 +701,7 @@ const SiteMapFeature = (props) => {
           <Grid item xs={6}>
             <Button
               endIcon={<ExploreDataProductsIcon />}
-              href={`${EXPLORE_DATA_PRODUCTS_URL_BASE}${site.siteCode}`}
+              href={getHref('EXPLORE_DATA_PRODUCTS_BY_SITE', site.siteCode)}
               {...actionButtonProps}
             >
               Explore Data

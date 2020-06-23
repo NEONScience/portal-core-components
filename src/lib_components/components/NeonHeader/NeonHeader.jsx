@@ -48,7 +48,7 @@ export default function NeonHeader(props) {
     case 'drupal':
       return (
         <header id="header">
-          {HTMLReactParser(headerHTML)}
+          {HTMLReactParser(headerHTML.replace(' value=""', ' initialValue=""'))}
         </header>
       );
 

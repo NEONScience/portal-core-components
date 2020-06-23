@@ -52,11 +52,10 @@ if (!window.gtmDataLayer) {
   window.gtmDataLayer = [];
 }
 
-const createUseStyles = props => (makeStyles(theme => ({
+const useStyles = makeStyles(theme => ({
   outerPageContainer: {
     position: 'relative',
     minHeight: theme.spacing(30),
-    maxWidth: props.outerPageContainerMaxWidth,
     paddingBottom: theme.spacing(3),
     [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(2.5),
@@ -113,12 +112,20 @@ const createUseStyles = props => (makeStyles(theme => ({
   pageTitle: {
     // The font size at larger breakpoints introduces noticeable letter spacing before
     // the first letter in the title. The negative left margins nudge it back into alignment.
-    margin: theme.spacing(1, 0, 3, -0.25),
+    margin: theme.spacing(3, 0, 4, -0.25),
     [theme.breakpoints.up('sm')]: {
-      margin: theme.spacing(1, 0, 3, -0.5),
+      margin: theme.spacing(3, 0, 4, -0.5),
     },
   },
-})));
+  pageSubtitle: {
+    maxWidth: '660px',
+    color: COLORS.GREY[500],
+    lineHeight: '1.5',
+    fontSize: '1.1rem',
+    marginTop: theme.spacing(-1),
+    marginBottom: theme.spacing(4),
+  },
+}));
 
 const DRUPAL_CSS_URL = 'https://master-7rqtwti-di4alr4iwbwyg.us-2.platformsh.site/themes/custom/neon/build/components/theme/theme.css';
 
@@ -126,6 +133,7 @@ const NeonPage = (props) => {
   const {
     breadcrumbs,
     title,
+    subtitle,
     children,
     loading,
     progress,
@@ -133,12 +141,7 @@ const NeonPage = (props) => {
     notification,
     outerPageContainerMaxWidth,
   } = props;
-  const useStylesProps = {
-    theme: Theme,
-    outerPageContainerMaxWidth,
-  };
-  const useStyles = createUseStyles(props);
-  const classes = useStyles(useStylesProps);
+  const classes = useStyles(Theme);
   const [{ isActive: neonContextIsActive }] = NeonContext.useNeonContextState();
 
   /**
@@ -228,14 +231,26 @@ const NeonPage = (props) => {
       return null;
     }
     return (
-      <Typography
-        data-selenium="neon-page.title"
-        variant="h2"
-        component="h1"
-        className={classes.pageTitle}
-      >
-        {title}
-      </Typography>
+      <React.Fragment>
+        <Typography
+          data-selenium="neon-page.title"
+          variant="h3"
+          component="h1"
+          className={classes.pageTitle}
+        >
+          {title}
+        </Typography>
+        {subtitle ? (
+          <Typography
+            data-selenium="neon-page.subtitle"
+            variant="subtitle1"
+            component="p"
+            className={classes.pageSubtitle}
+          >
+            {subtitle}
+          </Typography>
+        ) : null}
+      </React.Fragment>
     );
   };
 
@@ -287,31 +302,36 @@ const NeonPage = (props) => {
     </React.Fragment>,
   ));
 
-  const renderNeonPage = () => (
-    <ThemeProvider theme={Theme}>
-      <CssBaseline />
-      <GlobalCss />
-      <NeonHeader
-        notifications={notifications}
-        onShowNotifications={handleShowNotifications}
-      />
-      <Container className={classes.outerPageContainer}>
-        <Container className={classes.pageContainer} data-selenium="neon-page.content">
-          {renderBreadcrumbs()}
-          {renderTitle()}
-          {children}
-        </Container>
-        {renderLoading()}
-        {renderError()}
-        <LiferayNotifications
+  const renderNeonPage = () => {
+    const outerPageContainerStyles = outerPageContainerMaxWidth ? {
+      maxWidth: outerPageContainerMaxWidth,
+    } : null;
+    return (
+      <ThemeProvider theme={Theme}>
+        <CssBaseline />
+        <GlobalCss />
+        <NeonHeader
           notifications={notifications}
-          onHideNotifications={handleHideNotifications}
+          onShowNotifications={handleShowNotifications}
         />
-        <BrowserWarning />
-      </Container>
-      <NeonFooter />
-    </ThemeProvider>
-  );
+        <Container className={classes.outerPageContainer} styles={outerPageContainerStyles}>
+          <Container className={classes.pageContainer} data-selenium="neon-page.content">
+            {renderBreadcrumbs()}
+            {renderTitle()}
+            {children}
+          </Container>
+          {renderLoading()}
+          {renderError()}
+          <LiferayNotifications
+            notifications={notifications}
+            onHideNotifications={handleHideNotifications}
+          />
+          <BrowserWarning />
+        </Container>
+        <NeonFooter />
+      </ThemeProvider>
+    );
+  };
 
   return neonContextIsActive ? renderNeonPage() : (
     <NeonContext.Provider useCoreAuth>
@@ -328,6 +348,7 @@ NeonPage.propTypes = {
     }),
   ),
   title: PropTypes.string,
+  subtitle: PropTypes.string,
   loading: PropTypes.string,
   progress: PropTypes.number,
   error: PropTypes.string,
@@ -346,6 +367,7 @@ NeonPage.propTypes = {
 NeonPage.defaultProps = {
   breadcrumbs: [],
   title: null,
+  subtitle: null,
   loading: null,
   progress: null,
   error: null,

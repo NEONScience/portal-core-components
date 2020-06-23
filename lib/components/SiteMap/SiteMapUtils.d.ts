@@ -666,12 +666,7 @@ export namespace BOUNDARY_COLORS {
     export const hover: string;
 }
 export function calculateFeatureAvailability(state: any): any;
-/**
-   URL Bases
-   Used in construction of URLs when linking out to other pages
-*/
-export const SITE_DETAILS_URL_BASE: "https://www.neonscience.org/field-sites/field-sites-map/";
-export const EXPLORE_DATA_PRODUCTS_URL_BASE: "https://data.neonscience.org/data-products/explore?site=";
+export function getHref(key: any, arg?: any): string;
 export namespace TILE_LAYERS {
     export namespace NATGEO_WORLD_MAP {
         export const KEY: string;

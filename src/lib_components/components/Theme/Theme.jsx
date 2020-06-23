@@ -120,8 +120,8 @@ const baseTheme = createMuiTheme({
     background: {
       default: PALETTES.GREY[50],
     },
-    primary: PALETTES.PRIMARY,
-    secondary: PALETTES.SECONDARY,
+    primary: PALETTES.SECONDARY, // PALETTES.PRIMARY,
+    secondary: PALETTES.PRIMARY, // PALETTES.SECONDARY,
     error: PALETTES.ERROR,
     grey: PALETTES.GREY,
   },
@@ -136,28 +136,28 @@ const baseTheme = createMuiTheme({
     fontWeightMedium: 600,
     fontWeightBold: 700,
     h1: {
-      fontWeight: 500,
-      fontSize: '3.5rem',
+      fontWeight: 400,
+      fontSize: '4.5rem',
     },
     h2: {
       fontWeight: 400,
-      fontSize: '3rem',
+      fontSize: '3.5rem',
     },
     h3: {
-      fontWeight: 300,
-      fontSize: '2.5rem',
+      fontWeight: 400,
+      fontSize: '2.6rem',
     },
     h4: {
-      fontWeight: 300,
-      fontSize: '2rem',
+      fontWeight: 400,
+      fontSize: '1.75rem',
     },
     h5: {
-      fontWeight: 200,
-      fontSize: '1.5rem',
+      fontWeight: 400,
+      fontSize: '1.25rem',
     },
     h6: {
-      fontWeight: 200,
-      fontSize: '1.25rem',
+      fontWeight: 400,
+      fontSize: '1rem',
     },
     caption: {
       fontSize: '0.81rem',
@@ -169,16 +169,6 @@ const baseTheme = createMuiTheme({
     },
   },
   overrides: {
-    MuiTypography: {
-      gutterBottom: {
-        marginBottom: '0.65em',
-      },
-    },
-    MuiInputBase: {
-      root: {
-        fontSize: '0.9rem',
-      },
-    },
     MuiButton: {
       root: {
         fontWeight: 700,
@@ -197,6 +187,22 @@ const baseTheme = createMuiTheme({
       outlinedSizeSmall: {
         fontSize: '0.7rem',
         padding: '6px 12px',
+      },
+    },
+    MuiInputBase: {
+      root: {
+        fontSize: '0.9rem',
+      },
+    },
+    MuiTableCell: {
+      root: {
+        fontSize: '0.8rem',
+      },
+    },
+    MuiTypography: {
+      gutterBottom: {
+        marginTop: '0.5em',
+        marginBottom: '1em',
       },
     },
   },

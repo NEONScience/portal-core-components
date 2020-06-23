@@ -867,11 +867,26 @@ export const calculateFeatureAvailability = (state) => {
 };
 
 /**
-   URL Bases
-   Used in construction of URLs when linking out to other pages
+   getHref
+   Used to construction URLs when linking out to other pages
 */
-export const SITE_DETAILS_URL_BASE = 'https://www.neonscience.org/field-sites/field-sites-map/';
-export const EXPLORE_DATA_PRODUCTS_URL_BASE = 'https://data.neonscience.org/data-products/explore?site=';
+export const getHref = (key, arg = null) => {
+  const EXPLORE_DATA_PRODUCTS_BASE = 'https://data.neonscience.org/data-products/explore';
+  switch (key) {
+    case 'EXPLORE_DATA_PRODUCTS_BY_SITE':
+      return `${EXPLORE_DATA_PRODUCTS_BASE}?site=${arg}`;
+    case 'EXPLORE_DATA_PRODUCTS_BY_STATE':
+      return `${EXPLORE_DATA_PRODUCTS_BASE}?state=${arg}`;
+    case 'EXPLORE_DATA_PRODUCTS_BY_DOMAIN':
+      return `${EXPLORE_DATA_PRODUCTS_BASE}?domain=${arg}`;
+    case 'SITE_DETAILS':
+      return `https://www.neonscience.org/field-sites/field-sites-map/${arg}`;
+    case 'DOMAIN_DETAILS':
+      return `https://www.neonscience.org/domains/${arg}`;
+    default:
+      return '#';
+  }
+};
 
 /**
  Tile Layers
