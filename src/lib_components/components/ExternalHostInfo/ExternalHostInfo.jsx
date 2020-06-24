@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
 import Typography from '@material-ui/core/Typography';
 
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
@@ -13,7 +14,7 @@ import InfoIcon from '@material-ui/icons/Info';
 
 import Theme from '../Theme/Theme';
 import ExternalHost from '../ExternalHost/ExternalHost';
-import ExternalHostProductSepcificLinks from '../ExternalHostProductSpecificLinks/ExternalHostProductSpecificLinks';
+import ExternalHostProductSpecificLinks from '../ExternalHostProductSpecificLinks/ExternalHostProductSpecificLinks';
 
 const useStyles = makeStyles(theme => ({
   startFlex: {
@@ -21,19 +22,15 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
-  infoSnackbar: {
-    backgroundColor: theme.palette.grey[50],
-    color: '#000',
-    border: `1px solid ${theme.palette.primary.main}80`,
+  callout: {
     margin: Theme.spacing(0.5, 0, 3, 0),
-    padding: Theme.spacing(0, 2),
-    '& div': {
-      width: '100%',
-    },
   },
-  infoSnackbarIcon: {
+  calloutIcon: {
     color: theme.palette.grey[300],
     marginRight: theme.spacing(2),
+  },
+  specificLinksContainer: {
+    padding: theme.spacing(0, 3, 3, 3),
   },
 }));
 
@@ -100,8 +97,8 @@ const ExternalHostInfo = (props) => {
 
   const content = (
     <React.Fragment>
-      <div className={classes.startFlex} style={{ width: '100%' }}>
-        <InfoIcon fontSize="large" className={classes.infoSnackbarIcon} />
+      <CardContent className={classes.startFlex}>
+        <InfoIcon fontSize="large" className={classes.calloutIcon} />
         <Typography variant="subtitle2" style={{ flexGrow: 1 }}>
           {blurb}
         </Typography>
@@ -115,20 +112,22 @@ const ExternalHostInfo = (props) => {
             {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
           </IconButton>
         ) : null}
-      </div>
-      <div style={{ width: '100%', display: hasSpecificLinks && expanded ? 'block' : 'none' }}>
-        <Divider style={{ margin: Theme.spacing(1.5, 0) }} />
-        <ExternalHostProductSepcificLinks productCode={productCode} />
+      </CardContent>
+      <div
+        className={classes.specificLinksContainer}
+        style={{ display: hasSpecificLinks && expanded ? 'block' : 'none' }}
+      >
+        <Divider />
+        <ExternalHostProductSpecificLinks productCode={productCode} />
       </div>
     </React.Fragment>
   );
 
   return (
     <div {...rootProps}>
-      <SnackbarContent
-        className={classes.infoSnackbar}
-        message={content}
-      />
+      <Card className={classes.callout}>
+        {content}
+      </Card>
     </div>
   );
 };

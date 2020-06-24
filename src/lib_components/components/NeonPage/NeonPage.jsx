@@ -97,6 +97,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+    borderRadius: '4px',
     padding: theme.spacing(3),
     position: 'sticky',
     top: theme.spacing(12),

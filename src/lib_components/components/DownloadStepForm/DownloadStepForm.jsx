@@ -7,6 +7,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 import Checkbox from '@material-ui/core/Checkbox';
 import Chip from '@material-ui/core/Chip';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -15,7 +17,6 @@ import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
-import Paper from '@material-ui/core/Paper';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Typography from '@material-ui/core/Typography';
@@ -78,16 +79,7 @@ const useStyles = makeStyles(theme => ({
     paddingTop: theme.spacing(14),
     backgroundColor: 'rgba(255, 255, 255, 0.75)',
   },
-  infoPaper: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    border: `1px solid ${theme.palette.grey[200]}`,
-    borderRadius: theme.spacing(0.5),
-    boxShadow: 'none',
-    padding: theme.spacing(2),
-  },
-  infoPaperIcon: {
+  calloutIcon: {
     color: theme.palette.grey[300],
     marginRight: theme.spacing(2),
   },
@@ -296,17 +288,17 @@ export default function DownloadStepForm(props) {
             </FormControl>
           </Grid>
           <Grid item xs={12} md={6}>
-            <Paper className={classes.infoPaper} style={{ marginTop: Theme.spacing(1.5) }}>
-              <InfoIcon fontSize="large" className={classes.infoPaperIcon} />
-              <div>
+            <Card style={{ marginTop: Theme.spacing(1.5) }}>
+              <CardContent className={classes.startFlex}>
+                <InfoIcon fontSize="large" className={classes.calloutIcon} />
                 <Typography variant="body1">
                   {/* eslint-disable react/jsx-one-expression-per-line */}
                   EML files for this Data Product are included in all downloads.
                   Learn more about EML files in the {neonFaqLink} and at {knbLink}.
                   {/* eslint-enable react/jsx-one-expression-per-line */}
                 </Typography>
-              </div>
-            </Paper>
+              </CardContent>
+            </Card>
           </Grid>
         </Grid>
       );
@@ -379,22 +371,21 @@ export default function DownloadStepForm(props) {
       /* eslint-disable react/jsx-one-expression-per-line */
       const postSizeError = (estimatedPostSize >= MAX_POST_BODY_SIZE) ? (
         <Grid item xs={12}>
-          <Paper
-            className={classes.infoPaper}
-            style={{ marginBottom: Theme.spacing(2), backgroundColor: COLORS.ORANGE[100], justifyContent: 'center' }}
-          >
-            <ErrorIcon
-              fontSize="large"
-              className={classes.infoPaperIcon}
-              style={{ color: COLORS.ORANGE[800] }}
-            />
-            <Typography variant="body1">
-              Too many files requested! Current selection will make an
-              estimated <b>{formatBytes(estimatedPostSize)}</b> request; max
-              size is <b>{formatBytes(MAX_POST_BODY_SIZE)}</b>.
-              Please select fewer files in order to proceed.
-            </Typography>
-          </Paper>
+          <Card style={{ marginBottom: Theme.spacing(2), backgroundColor: COLORS.GOLD[300] }}>
+            <CardContent className={classes.startFlex} style={{ justifyContent: 'center' }}>
+              <ErrorIcon
+                fontSize="large"
+                className={classes.calloutIcon}
+                style={{ color: COLORS.GOLD[800] }}
+              />
+              <Typography variant="body1">
+                Too many files requested! Current selection will make an
+                estimated <b>{formatBytes(estimatedPostSize)}</b> request; max
+                size is <b>{formatBytes(MAX_POST_BODY_SIZE)}</b>.
+                Please select fewer files in order to proceed.
+              </Typography>
+            </CardContent>
+          </Card>
         </Grid>
       ) : null;
       const components = {
@@ -633,19 +624,18 @@ export default function DownloadStepForm(props) {
       const hostLink = externalHost.renderLink(state.productData.productCode);
       return (
         <div data-selenium={`download-data-dialog.step-form.external-links.${externalHost.id.toLowerCase()}`}>
-          <Paper
-            className={classes.infoPaper}
-            style={{ marginBottom: Theme.spacing(3) }}
-          >
-            <InfoIcon fontSize="large" className={classes.infoPaperIcon} />
-            <Typography variant="subtitle2">
-              {/* eslint-disable react/jsx-one-expression-per-line */}
-              Data for this product is not currently available for download through
-              the NEON Data Portal. Please use the links below to access data for
-              this product for a particular site from the {hostLink}.
-              {/* eslint-enable react/jsx-one-expression-per-line */}
-            </Typography>
-          </Paper>
+          <Card style={{ marginBottom: Theme.spacing(3) }}>
+            <CardContent className={classes.startFlex}>
+              <InfoIcon fontSize="large" className={classes.calloutIcon} />
+              <Typography variant="subtitle2">
+                {/* eslint-disable react/jsx-one-expression-per-line */}
+                Data for this product is not currently available for download through
+                the NEON Data Portal. Please use the links below to access data for
+                this product for a particular site from the {hostLink}.
+                {/* eslint-enable react/jsx-one-expression-per-line */}
+              </Typography>
+            </CardContent>
+          </Card>
           <ExternalHostProductSpecificLinks productCode={state.productData.productCode} />
         </div>
       );
@@ -737,20 +727,21 @@ export default function DownloadStepForm(props) {
         </Link>
       );
       const downloadAndExploreCallout = (
-        <Paper
-          className={classes.infoPaper}
+        <Card
           style={{ margin: Theme.spacing(0.5, 0, 3, 0) }}
           data-selenium="download-data-dialog.step-form.summary.download-and-explore"
         >
-          <ExploreIcon fontSize="large" className={classes.infoPaperIcon} />
-          {/* eslint-disable react/jsx-one-expression-per-line */}
-          <Typography variant="subtitle2">
-            Tip: Check out our {downloadAndExploreLink} tutorial.
-            This tutorial will explain how our neonUtilities package can
-            be used to unzip and join data tables with just a few lines of code.
-          </Typography>
-          {/* eslint-enable react/jsx-one-expression-per-line */}
-        </Paper>
+          <CardContent className={classes.startFlex}>
+            <ExploreIcon fontSize="large" className={classes.calloutIcon} />
+            {/* eslint-disable react/jsx-one-expression-per-line */}
+            <Typography variant="subtitle2">
+              Tip: Check out our {downloadAndExploreLink} tutorial.
+              This tutorial will explain how our neonUtilities package can
+              be used to unzip and join data tables with just a few lines of code.
+            </Typography>
+            {/* eslint-enable react/jsx-one-expression-per-line */}
+          </CardContent>
+        </Card>
       );
       const fileNamingConventionsLink = (
         <Link
@@ -762,18 +753,19 @@ export default function DownloadStepForm(props) {
         </Link>
       );
       const fileNamingCallout = (
-        <Paper
-          className={classes.infoPaper}
+        <Card
           style={{ margin: Theme.spacing(0.5, 0, 3, 0) }}
           data-selenium="download-data-dialog.step-form.summary.file-naming"
         >
-          <FileIcon fontSize="large" className={classes.infoPaperIcon} />
-          {/* eslint-disable react/jsx-one-expression-per-line */}
-          <Typography variant="subtitle2">
-            Files in this download will follow {fileNamingConventionsLink}.
-          </Typography>
-          {/* eslint-enable react/jsx-one-expression-per-line */}
-        </Paper>
+          <CardContent className={classes.startFlex}>
+            <FileIcon fontSize="large" className={classes.calloutIcon} />
+            {/* eslint-disable react/jsx-one-expression-per-line */}
+            <Typography variant="subtitle2">
+              Files in this download will follow {fileNamingConventionsLink}.
+            </Typography>
+            {/* eslint-enable react/jsx-one-expression-per-line */}
+          </CardContent>
+        </Card>
       );
       const { productCode, productName } = state.productData;
       const year = moment().format('YYYY');
@@ -782,14 +774,13 @@ export default function DownloadStepForm(props) {
       const url = 'http://data.neonscience.org';
       const citationText = `National Ecological Observatory Network. ${year}. Data Product ${productCode}, ${productName}. ${maturity} data downloaded from ${url} on ${today}. Battelle, Boulder, CO, USA NEON. ${year}.`;
       const citationCallout = (
-        <Paper
-          className={classes.infoPaper}
+        <Card
           style={{ margin: Theme.spacing(0.5, 0, 3, 0) }}
           data-selenium="download-data-dialog.step-form.summary.citation"
         >
-          <div>
+          <CardContent>
             <div className={classes.startFlex}>
-              <QuoteIcon fontSize="large" className={classes.infoPaperIcon} />
+              <QuoteIcon fontSize="large" className={classes.calloutIcon} />
               {/* eslint-disable react/jsx-one-expression-per-line */}
               <Typography variant="subtitle2" style={{ flexGrow: 1 }}>
                 Please use this citation in your publications.
@@ -815,8 +806,8 @@ export default function DownloadStepForm(props) {
             >
               {citationText}
             </Typography>
-          </div>
-        </Paper>
+          </CardContent>
+        </Card>
       );
       return (
         <Grid

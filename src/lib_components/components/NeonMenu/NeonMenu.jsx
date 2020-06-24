@@ -383,7 +383,7 @@ class NeonMenu extends Component {
     } = this.state;
 
     const notificationsDisabled = notifications.some(n => !n.dismissed);
-    const notificationsColor = notificationsDisabled ? COLORS.GREY[200] : COLORS.YELLOW[700];
+    const notificationsColor = notificationsDisabled ? COLORS.GREY[200] : COLORS.GOLD[500];
     const notificationsContent = notifications.length ? (
       <IconButton
         key="show-notifications"

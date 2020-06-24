@@ -68,7 +68,7 @@ const DialogBase = (props) => {
       }}
       {...other}
     >
-      <AppBar>
+      <AppBar color="secondary">
         <Toolbar>
           <IconButton
             data-selenium="dialog-close-button"

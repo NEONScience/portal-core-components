@@ -15,7 +15,8 @@ const useStyles = makeStyles(theme => ({
     zIndex: 11000,
   },
   notification: {
-    backgroundColor: COLORS.YELLOW[700],
+    backgroundColor: COLORS.GOLD[800],
+    borderRadius: '4px',
     '& a': {
       color: `${theme.palette.secondary.light} !important`,
     },

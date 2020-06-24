@@ -6,6 +6,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 import Chip from '@material-ui/core/Chip';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Divider from '@material-ui/core/Divider';
@@ -14,7 +16,6 @@ import Hidden from '@material-ui/core/Hidden';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Link from '@material-ui/core/Link';
 import MobileStepper from '@material-ui/core/MobileStepper';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepButton from '@material-ui/core/StepButton';
@@ -74,18 +75,12 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.primary.main,
     margin: '-2px 6px -2px -4px',
   },
-  warningSnackbar: {
-    backgroundColor: COLORS.ORANGE[100],
-    color: '#000',
-    border: `1px solid ${theme.palette.primary.main}80`,
+  callout: {
+    backgroundColor: COLORS.GOLD[300],
     margin: Theme.spacing(0.5, 0, 2, 0),
-    padding: Theme.spacing(0, 2),
-    '& div': {
-      width: '100%',
-    },
   },
-  warningSnackbarIcon: {
-    color: COLORS.ORANGE[800],
+  calloutIcon: {
+    color: COLORS.GOLD[800],
     marginRight: theme.spacing(2),
   },
   gtmCaptureButton: {
@@ -239,10 +234,10 @@ export default function DownloadDataDialog() {
     ) {
       const bytes = getSizeEstimateBytes();
       const uncompressed = fromAOPManifest ? ' (uncompressed)' : '';
-      let estimateColor = bytes > DOWNLOAD_SIZE_WARN ? COLORS.ORANGE[300] : 'inherit';
+      let estimateColor = bytes > DOWNLOAD_SIZE_WARN ? COLORS.GOLD[300] : 'inherit';
       /* eslint-disable react/jsx-one-expression-per-line */
       if (belowSm) {
-        estimateColor = bytes > DOWNLOAD_SIZE_WARN ? COLORS.ORANGE[500] : 'inherit';
+        estimateColor = bytes > DOWNLOAD_SIZE_WARN ? COLORS.GOLD[500] : 'inherit';
         return (
           <Typography variant="body2">
             Estimated size{uncompressed}:&nbsp;
@@ -285,27 +280,23 @@ export default function DownloadDataDialog() {
       </React.Fragment>
     );
     return (
-      <SnackbarContent
-        className={classes.warningSnackbar}
-        message={(
-          <div className={classes.startFlex}>
-            <WarningIcon fontSize="large" className={classes.warningSnackbarIcon} />
-            <div>
-              <Typography variant="subtitle1">
-                {/* eslint-disable react/jsx-one-expression-per-line */}
-                <b>
-                  Be sure you have at least {formattedBytes} of free disk space
-                  for this download!
-                </b>
-                <br />
-                If needed, you can reduce the download size by selecting fewer sites
-                or a more restrictive date range. {fromAOPManifest ? aopBlurb : null}
-                {/* eslint-enable react/jsx-one-expression-per-line */}
-              </Typography>
-            </div>
+      <Card className={classes.callout}>
+        <CardContent className={classes.startFlex}>
+          <WarningIcon fontSize="large" className={classes.calloutIcon} />
+          <div>
+            {/* eslint-disable react/jsx-one-expression-per-line */}
+            <Typography variant="subtitle1" style={{ fontWeight: 600 }}>
+              Be sure you have at least {formattedBytes} of free disk space
+              for this download!
+            </Typography>
+            <Typography variant="body1">
+              If needed, you can reduce the download size by selecting fewer sites
+              or a more restrictive date range. {fromAOPManifest ? aopBlurb : null}
+            </Typography>
+            {/* eslint-enable react/jsx-one-expression-per-line */}
           </div>
-        )}
-      />
+        </CardContent>
+      </Card>
     );
   };
 
@@ -395,7 +386,7 @@ export default function DownloadDataDialog() {
       </Link>
     );
     /* eslint-disable react/jsx-one-expression-per-line */
-    const authStyles = { color: COLORS.YELLOW[600], textAlign: 'right', whiteSpace: 'nowrap' };
+    const authStyles = { color: COLORS.GOLD[800], textAlign: 'right', whiteSpace: 'nowrap' };
     return (
       <React.Fragment>
         <Typography

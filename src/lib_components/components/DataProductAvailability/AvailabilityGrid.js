@@ -99,8 +99,8 @@ const styles = {
     fontSize: `${SVG.LABEL_FONT_SIZE}px`,
   },
   timeHighlight: {
-    fill: COLORS.ORANGE[400],
-    stroke: COLORS.ORANGE[700],
+    fill: COLORS.GOLD[300],
+    stroke: COLORS.GOLD[500],
     strokeWidth: '1px',
     opacity: 0,
   },
@@ -139,9 +139,9 @@ const applyStyles = (node, styleName) => {
 */
 const touchRipple = (selection, duration = 15) => {
   selection
-    .style('fill', 'rgba(199, 110, 0, 0.75)')
+    .style('fill', `${COLORS.LIGHT_BLUE[300]}30`)
     .transition(transition().duration(duration))
-    .style('fill', 'rgba(199, 110, 0, 0.25)');
+    .style('fill', `${COLORS.LIGHT_BLUE[300]}c0`);
 };
 
 /**
@@ -573,7 +573,7 @@ export function AvailabilityGrid(config) {
     const labelX = getLabelWidth() - SVG.CELL_PADDING;
     const rowLabelG = rowLabelsG.append('g').attr('transform', transform);
     const fill = selectionEnabled && setSitesValue && viewSelections[rowKey]
-      ? Theme.palette.secondary.contrastText
+      ? Theme.palette.primary.contrastText
       : Theme.palette.grey[700];
     const text = rowLabelG.append('text')
       .attr('x', labelX)
@@ -696,7 +696,7 @@ export function AvailabilityGrid(config) {
           .attr('fill', (d) => {
             switch (rowData[d]) {
               case 'available':
-                return Theme.palette.primary.main;
+                return COLORS.NEON_BLUE[700];
               default:
                 return Theme.palette.grey[100];
             }
@@ -758,7 +758,7 @@ export function AvailabilityGrid(config) {
       .attr('fill', d => (
         isHighlighted(d) ? COLORS.LIGHT_BLUE[100] : COLORS.LIGHT_BLUE[300]
       ))
-      .attr('stroke', Theme.palette.secondary.main)
+      .attr('stroke', COLORS.LIGHT_BLUE[500])
       .style('stroke-width', '1.5px')
       .style('display', sites.value.length ? null : 'none');
   };
@@ -802,7 +802,7 @@ export function AvailabilityGrid(config) {
     const y = d => yOffset + (rowCount - rowKeys.indexOf(d)) * yMultiplier;
     const fill = d => (
       viewSelections[d] === 'full'
-        ? Theme.palette.secondary.main
+        ? COLORS.LIGHT_BLUE[500]
         : COLORS.LIGHT_BLUE[200]
     );
     let startX = getYearMonthGutterX(dateRange.value[0], 'left');

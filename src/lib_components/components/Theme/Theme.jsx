@@ -20,7 +20,7 @@ export const COLORS = {
     400: '#7174a8',
     500: '#545b97',
     600: '#354287',
-    700: '#002c77',
+    700: '#002c77', // Guide color
     800: '#001960',
     900: '#00034a',
   },
@@ -30,35 +30,47 @@ export const COLORS = {
     200: '#8abfec',
     300: '#5ca6e3',
     400: '#0092e2',
-    500: '#0073cf',
+    500: '#0073cf', // Guide color
     600: '#005eab',
     700: '#004986',
     800: '#003460',
     900: '#001e39',
   },
-  ORANGE: {
-    50: '#fff3e6',
-    100: '#fcd7ac',
-    200: '#f8bb73',
-    300: '#f29f39',
-    400: '#e98300',
-    500: '#c76e00',
-    600: '#a35a00',
-    700: '#7e4500',
-    800: '#593000',
-    900: '#321b00',
+  GOLD: {
+    50: '#fff4db',
+    100: '#ffe7b1',
+    200: '#ffd984',
+    300: '#ffcb4f', // Guide color
+    400: '#f8bb32',
+    500: '#f0ab00', // Guide color
+    600: '#d39600',
+    700: '#b68200',
+    800: '#9b6e00',
+    900: '#805b00',
   },
-  YELLOW: {
-    50: '#ffeec7',
-    100: '#ffdd90',
-    200: '#ffcb4f',
-    300: '#e0b244',
-    400: '#c29a3a',
-    500: '#a58330',
-    600: '#896c26',
-    700: '#6e561d',
-    800: '#544114',
-    900: '#3b2d0b',
+  BROWN: {
+    50: '#f8f2ec',
+    100: '#e2d0c3',
+    200: '#cbb09c',
+    300: '#b39076',
+    400: '#9b7152',
+    500: '#82542f', // Guide color
+    600: '#66452f',
+    700: '#4b372e', // Guide color
+    800: '#352723', // Guide color
+    900: '#2b201d',
+  },
+  GREEN: {
+    50: '#f4f8ed',
+    100: '#e4eed3',
+    200: '#d4e4ba',
+    300: '#c4daa1', // Guide color
+    400: '#acc37e', // Guide color
+    500: '#81a54a',
+    600: '#558807', // Guide color
+    700: '#3f660a',
+    800: '#2a4509',
+    900: '#182702',
   },
   RED: {
     50: '#fbe5ea',
@@ -104,9 +116,9 @@ const PALETTES = {
     contrastText: '#fff',
   },
   ERROR: {
-    light: COLORS.ORANGE[400],
-    main: COLORS.ORANGE[600],
-    dark: COLORS.ORANGE[800],
+    light: COLORS.GOLD[300],
+    main: COLORS.GOLD[500],
+    dark: COLORS.GOLD[800],
     contrastText: '#000',
   },
   GREY: COLORS.GREY,
@@ -158,6 +170,12 @@ const baseTheme = createMuiTheme({
     h6: {
       fontWeight: 400,
       fontSize: '1rem',
+    },
+    body1: {
+      fontSize: '0.9rem',
+    },
+    body2: {
+      fontSize: '0.8rem',
     },
     caption: {
       fontSize: '0.81rem',
@@ -277,6 +295,42 @@ const baseTheme = createMuiTheme({
       root: {
         '&:hover, &:active': {
           color: COLORS.LIGHT_BLUE[400],
+        },
+      },
+    },
+    MuiTab: {
+      root: {
+        color: COLORS.LIGHT_BLUE[500],
+        backgroundColor: COLORS.GREY[50],
+        border: `1.5px solid ${COLORS.GREY[200]}`,
+        borderRadius: '0px',
+        fontSize: '0.75rem',
+        '&$selected': {
+          zIndex: 1,
+          backgroundColor: '#fff',
+          borderColor: COLORS.LIGHT_BLUE[500],
+        },
+        '&:hover, &:active': {
+          backgroundColor: '#fff',
+        },
+      },
+      textColorInherit: {
+        color: COLORS.LIGHT_BLUE[500],
+      },
+      textColorPrimary: {
+        color: COLORS.LIGHT_BLUE[500],
+      },
+    },
+    MuiTabScrollButton: {
+      root: {
+        color: COLORS.LIGHT_BLUE[500],
+        backgroundColor: COLORS.GREY[50],
+        border: `1.5px solid ${COLORS.GREY[200]}`,
+        borderRadius: '0px',
+        '&:hover, &:active': {
+          zIndex: 1,
+          backgroundColor: '#fff',
+          borderColor: COLORS.LIGHT_BLUE[500],
         },
       },
     },

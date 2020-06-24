@@ -12,13 +12,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
 import MenuItem from '@material-ui/core/MenuItem';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import Select from '@material-ui/core/Select';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import Typography from '@material-ui/core/Typography';
@@ -78,15 +79,7 @@ const useStyles = makeStyles(theme => ({
     },
     marginRight: theme.spacing(2),
   },
-  helpSnackbar: {
-    backgroundColor: theme.palette.grey[50],
-    color: '#000',
-    border: `1px solid ${theme.palette.primary.main}80`,
-    '& div.MuiSnackbarContent-message': {
-      width: '100%',
-    },
-  },
-  helpIcon: {
+  calloutIcon: {
     color: theme.palette.grey[300],
     marginRight: theme.spacing(1),
   },
@@ -95,8 +88,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'flex-start',
     justifyContent: 'space-around',
     flexWrap: 'wrap',
-    marginBottom: theme.spacing(-1),
-    marginRight: theme.spacing(-1),
+    padding: '16px 16px 8px 16px !important',
   },
   helpGrid: {
     display: 'flex',
@@ -470,8 +462,6 @@ const DataProductAvailability = (props) => {
         <Hidden smDown key="viewMdUp">
           <ToggleButtonGroup
             exclusive
-            color="primary"
-            variant="outlined"
             size="small"
             value={currentView}
             onChange={handleChangeView}
@@ -568,6 +558,7 @@ const DataProductAvailability = (props) => {
     const sitesPlural = sites.value.length > 1 ? 's' : '';
     const siteChipLabel = `${sites.value.length} site${sitesPlural}`;
     const siteChipProps = {
+      color: 'primary',
       size: 'large',
       classes: siteChipClasses,
       label: sites.value.length ? siteChipLabel : 'no sites selected',
@@ -653,32 +644,28 @@ const DataProductAvailability = (props) => {
           </div>
         </Grid>
         <Grid item xs={12} style={{ marginBottom: Theme.spacing(1) }}>
-          <SnackbarContent
-            className={classes.helpSnackbar}
-            style={{ justifyContent: 'center' }}
-            message={(
-              <div className={classes.helpGridContainer}>
-                <div className={classes.helpGrid}>
-                  <PanIcon className={classes.helpIcon} />
-                  <Typography variant="body1" component="div" style={{ flexGrow: 1 }}>
-                    Drag the grid to pan across time
-                  </Typography>
-                </div>
-                <div className={classes.helpGrid}>
-                  <ClickIcon className={classes.helpIcon} />
-                  <Typography variant="body1" component="div" style={{ flexGrow: 1 }}>
-                    Click rows to select sites
-                  </Typography>
-                </div>
-                <div className={classes.helpGrid}>
-                  <DragIcon className={classes.helpIcon} style={{ transform: 'rotate(90deg)' }} />
-                  <Typography variant="body1" component="div" style={{ flexGrow: 1 }}>
-                    Drag selection edges to adjust dates
-                  </Typography>
-                </div>
+          <Card>
+            <CardContent className={classes.helpGridContainer}>
+              <div className={classes.helpGrid}>
+                <PanIcon className={classes.calloutIcon} />
+                <Typography variant="body1" component="div" style={{ flexGrow: 1 }}>
+                  Drag the grid to pan across time
+                </Typography>
               </div>
-            )}
-          />
+              <div className={classes.helpGrid}>
+                <ClickIcon className={classes.calloutIcon} />
+                <Typography variant="body1" component="div" style={{ flexGrow: 1 }}>
+                  Click rows to select sites
+                </Typography>
+              </div>
+              <div className={classes.helpGrid}>
+                <DragIcon className={classes.calloutIcon} style={{ transform: 'rotate(90deg)' }} />
+                <Typography variant="body1" component="div" style={{ flexGrow: 1 }}>
+                  Drag selection edges to adjust dates
+                </Typography>
+              </div>
+            </CardContent>
+          </Card>
         </Grid>
       </Grid>
     );

@@ -31,7 +31,7 @@ import TimeSeriesViewerContext, {
   TIME_SERIES_VIEWER_STATUS,
   TIME_STEPS,
 } from './TimeSeriesViewerContext';
-import Theme from '../Theme/Theme';
+import Theme, { COLORS } from '../Theme/Theme';
 
 import NeonLogo from '../../images/NSF-NEON-logo.png';
 
@@ -109,14 +109,9 @@ const useStyles = makeStyles(theme => ({
     minHeight: '320px',
     flexGrow: 1,
   },
-  buttonIcon: {
-    fontSize: '1.2rem',
-    marginRight: Theme.spacing(0.5),
-  },
   buttonsOuterContainer: {
     margin: theme.spacing(0, -0.5, 0, -0.5),
-    borderTop: '1px solid rgba(0, 0, 0, 0.12)',
-    borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
+    borderTop: `1.5px solid ${COLORS.GREY[200]}`,
     backgroundColor: theme.palette.grey[50],
     padding: theme.spacing(2),
     [theme.breakpoints.up('md')]: {
@@ -181,7 +176,7 @@ const useStyles = makeStyles(theme => ({
   legendSeriesLabel: {
     whiteSpace: 'nowrap',
     lineHeight: '1rem',
-    fontSize: '0.8rem',
+    fontSize: '0.7rem',
     marginLeft: theme.spacing(1),
     pointerEvents: 'none',
   },
@@ -798,8 +793,8 @@ export default function TimeSeriesViewerGraph() {
       disabled={downloadRef.current === null}
       title={`Download current graph as a PNG (${getPngDimensions()})`}
       style={{ whiteSpace: 'nowrap', marginRight: Theme.spacing(1.5) }}
+      startIcon={<ImageIcon />}
     >
-      <ImageIcon className={classes.buttonIcon} />
       Download Image (png)
     </Button>
   );
@@ -818,17 +813,12 @@ export default function TimeSeriesViewerGraph() {
       onClick={toggleSeriesVisibility}
       disabled={series.length === 0}
       style={{ whiteSpace: 'nowrap', marginLeft: Theme.spacing(1.5) }}
+      startIcon={graphState.hiddenSeries.size ? <ShowIcon /> : <HideIcon />}
     >
       {graphState.hiddenSeries.size ? (
-        <React.Fragment>
-          <ShowIcon className={classes.buttonIcon} />
-          {`${belowMd ? '' : 'Show All'} Series`}
-        </React.Fragment>
+        `${belowMd ? '' : 'Show All'} Series`
       ) : (
-        <React.Fragment>
-          <HideIcon className={classes.buttonIcon} />
-          {`${belowMd ? '' : 'Hide All'} Series`}
-        </React.Fragment>
+        `${belowMd ? '' : 'Hide All'} Series`
       )}
     </Button>
   );
@@ -846,17 +836,12 @@ export default function TimeSeriesViewerGraph() {
       onClick={toggleQualityFlagsVisibility}
       disabled={qualityFlags.length === 0}
       style={{ whiteSpace: 'nowrap' }}
+      startIcon={graphState.hiddenQualityFlags.size ? <ShowIcon /> : <HideIcon />}
     >
       {graphState.hiddenQualityFlags.size ? (
-        <React.Fragment>
-          <ShowIcon className={classes.buttonIcon} />
-          {`${belowMd ? '' : 'Show All'} Quality Flags`}
-        </React.Fragment>
+        `${belowMd ? '' : 'Show All'} Quality Flags`
       ) : (
-        <React.Fragment>
-          <HideIcon className={classes.buttonIcon} />
-          {`${belowMd ? '' : 'Hide All'} Quality Flags`}
-        </React.Fragment>
+        `${belowMd ? '' : 'Hide All'} Quality Flags`
       )}
     </Button>
   );

@@ -24,7 +24,7 @@ import VariablesIcon from '@material-ui/icons/Timeline';
 import AxesIcon from '@material-ui/icons/BorderInner';
 
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
-import Theme from '../Theme/Theme';
+import Theme, { COLORS } from '../Theme/Theme';
 
 import TimeSeriesViewerContext, {
   summarizeTimeSteps,
@@ -50,17 +50,16 @@ const useStyles = makeStyles(theme => ({
     },
   },
   tabsVertical: {
-    borderRight: `1px solid ${theme.palette.divider}`,
     width: `${VERTICAL_TABS_WIDTH}px`,
   },
   tabsHorizontal: {
-    borderBottom: `1px solid ${theme.palette.divider}`,
     flexShrink: 0,
   },
   tabPanels: {
     width: '100%',
     [theme.breakpoints.up('md')]: {
       width: `calc(100% - ${VERTICAL_TABS_WIDTH}px)`,
+      borderTop: `1.5px solid ${COLORS.GREY[200]}`,
     },
   },
   tabPanelContainer: {
@@ -111,40 +110,32 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const useTabsStyles = makeStyles(theme => ({
-  scrollButtons: {
-    '&:hover, &:focus': {
-      backgroundColor: theme.palette.grey[100],
-    },
-  },
   scroller: {
     [theme.breakpoints.up('md')]: {
-      backgroundColor: theme.palette.grey[100],
+      backgroundColor: theme.palette.grey[200],
     },
   },
 }));
 
-const boxShadow = alpha => `0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,${alpha}),0 0 0 1px rgba(0,0,0,0.02)`;
 const useTabStyles = makeStyles(theme => ({
   root: {
-    [theme.breakpoints.up('md')]: {
-      borderBottom: `1px solid ${theme.palette.divider}`,
-      backgroundColor: '#ffffff',
-      boxShadow: boxShadow(0.06),
-    },
     [theme.breakpoints.down('sm')]: {
-      borderLeft: `1px solid ${theme.palette.divider}`,
-      marginLeft: '-1px',
       paddingRight: theme.spacing(2.5),
     },
     textTransform: 'none',
     opacity: 1,
+    '&:not(:first-child)': {
+      [theme.breakpoints.down('sm')]: {
+        marginLeft: '-1.5px',
+      },
+      [theme.breakpoints.up('md')]: {
+        marginTop: '-1.5px',
+      },
+    },
   },
   labelIcon: {
     minHeight: theme.spacing(8),
     minWidth: theme.spacing(15),
-    '&:hover, &:focus': {
-      backgroundColor: theme.palette.grey[100],
-    },
     [theme.breakpoints.down('sm')]: {
       minHeight: theme.spacing(6),
       minWidth: theme.spacing(17),
@@ -158,13 +149,13 @@ const useTabStyles = makeStyles(theme => ({
     '& svg': {
       margin: `${theme.spacing(0, 1, 0, 0)} !important`,
     },
-    opacity: 0.7,
   },
   selected: {
-    color: 'white',
-    backgroundColor: `${theme.palette.primary.main} !important`,
-    '& > span.MuiTab-wrapper': {
-      opacity: 1,
+    [theme.breakpoints.down('sm')]: {
+      borderBottom: 'none',
+    },
+    [theme.breakpoints.up('md')]: {
+      borderRight: 'none',
     },
   },
 }));
@@ -213,7 +204,7 @@ function TimeSeriesViewerSummary() {
   if (state.product.productName) {
     productSummaryTitle = (
       <div style={{ marginRight: Theme.spacing(1) }}>
-        <Typography variant="h6">Data Product</Typography>
+        <Typography variant="subtitle2">Data Product</Typography>
         <Typography variant="body2">
           <Link href={productHref} target="_blank" style={{ fontWeight: 600 }}>
             {`${state.product.productName} - (${state.product.productCode})`}
@@ -346,19 +337,19 @@ function TimeSeriesViewerSummary() {
         {productSummaryDescription}
       </div>
       <div className={classes.summaryDiv}>
-        <Typography variant="h6">Sites & Positions</Typography>
+        <Typography variant="subtitle2">Sites & Positions</Typography>
         {sitesSummary}
       </div>
       <div className={classes.summaryDiv}>
-        <Typography variant="h6">Date Range</Typography>
+        <Typography variant="subtitle2">Date Range</Typography>
         {dateRangeSummary}
       </div>
       <div className={classes.summaryDiv}>
-        <Typography variant="h6">Variables</Typography>
+        <Typography variant="subtitle2">Variables</Typography>
         {variablesSummary}
       </div>
       <div className={classes.summaryDiv}>
-        <Typography variant="h6">x/y Axes</Typography>
+        <Typography variant="subtitle2">x/y Axes</Typography>
         {axesSummary}
       </div>
     </div>
@@ -493,7 +484,7 @@ export default function TimeSeriesViewerContainer() {
     if (isError) {
       return (
         <div className={classes.graphOverlay}>
-          <Typography variant="h6" style={{ marginBottom: Theme.spacing(4) }}>
+          <Typography variant="subtitle2" style={{ marginBottom: Theme.spacing(4) }}>
             {state.displayError || 'An unknown error occurred; unable to visualize data product'}
           </Typography>
           <ErrorIcon fontSize="large" color="error" />
@@ -512,7 +503,7 @@ export default function TimeSeriesViewerContainer() {
       }
       return (
         <div className={classes.graphOverlay}>
-          <Typography variant="h6" style={{ marginBottom: Theme.spacing(4) }}>
+          <Typography variant="subtitle2" style={{ marginBottom: Theme.spacing(4) }}>
             {title}
           </Typography>
           <CircularProgress {...progressProps} />
