@@ -178,7 +178,7 @@ const baseTheme = createMuiTheme({
       fontSize: '0.8rem',
     },
     caption: {
-      fontSize: '0.81rem',
+      fontSize: '0.65rem',
     },
   },
   props: {
@@ -288,7 +288,7 @@ const baseTheme = createMuiTheme({
     },
     MuiInputBase: {
       root: {
-        fontSize: '0.9rem',
+        fontSize: '0.85rem',
       },
     },
     MuiLink: {

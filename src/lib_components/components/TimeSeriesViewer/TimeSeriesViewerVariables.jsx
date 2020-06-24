@@ -6,6 +6,7 @@ import Select from 'react-select';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -66,7 +67,7 @@ const useStyles = makeStyles(theme => ({
     fontSize: '0.75rem',
     color: Theme.palette.grey[400],
   },
-  variablePaper: {
+  variableCard: {
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
@@ -75,9 +76,9 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.grey[50],
     marginRight: theme.spacing(2),
   },
-  variablePaperContainer: {
-    lineHeight: '5em',
-    marginTop: theme.spacing(2.5),
+  variableCardContainer: {
+    lineHeight: '7em',
+    marginTop: theme.spacing(2),
   },
   noneContainer: {
     color: theme.palette.grey[400],
@@ -104,15 +105,6 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
-  },
-  smallButton: {
-    fontSize: '0.8rem',
-    padding: theme.spacing(0.125, 0.75),
-    whiteSpace: 'nowrap',
-  },
-  smallButtonIcon: {
-    marginRight: theme.spacing(0.5),
-    fontSize: '0.8rem',
   },
 }));
 
@@ -221,7 +213,6 @@ function Option(props) {
         variant="body2"
         className={classes.optionSubtitle}
         style={{ ...textStyle }}
-        gutterBottom
       >
         {description}
       </Typography>
@@ -349,22 +340,20 @@ const QualityFlags = () => {
       {availableQualityFlags.size > 1 ? (
         <div className={classes.qualityFlagsButtons}>
           <Button
-            color="primary"
+            size="small"
             variant="outlined"
             onClick={() => { dispatch({ type: 'selectNoneQualityFlags' }); }}
-            className={classes.smallButton}
+            startIcon={<ClearIcon />}
             style={{ marginRight: Theme.spacing(2) }}
           >
-            <ClearIcon className={classes.smallButtonIcon} />
             Select None
           </Button>
           <Button
-            color="primary"
+            size="small"
             variant="outlined"
             onClick={() => { dispatch({ type: 'selectAllQualityFlags' }); }}
-            className={classes.smallButton}
+            startIcon={<SelectAllIcon />}
           >
-            <SelectAllIcon className={classes.smallButtonIcon} />
             {`Select All (${availableQualityFlags.size})`}
           </Button>
         </div>
@@ -481,11 +470,11 @@ export default function TimeSeriesViewerVariables() {
           }}
         />
       </NoSsr>
-      <div className={classes.variablePaperContainer}>
+      <div className={classes.variableCardContainer}>
         {state.selection.variables.map((variable) => {
           const { units, description } = state.variables[variable];
           return (
-            <Paper key={variable} className={classes.variablePaper}>
+            <Card key={variable} variant="outlined" className={classes.variableCard}>
               <IconButton
                 aria-label={`remove variable ${variable}`}
                 disabled={state.selection.variables.length < 2}
@@ -510,7 +499,7 @@ export default function TimeSeriesViewerVariables() {
                   {description}
                 </Typography>
               </div>
-            </Paper>
+            </Card>
           );
         })}
       </div>

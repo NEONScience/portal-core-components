@@ -21,6 +21,7 @@ import { saveAs } from 'file-saver';
 import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 
 import ImageIcon from '@material-ui/icons/Image';
@@ -75,7 +76,7 @@ const BASE_GRAPH_OPTIONS = {
   showRangeSelector: true,
   interactionModel: Dygraph.defaultInteractionModel,
   connectSeparatedPoints: false,
-  rangeSelectorPlotFillColor: Theme.palette.primary.light,
+  rangeSelectorPlotFillColor: Theme.palette.secondary.light,
   animatedZooms: false,
   colors: SERIES_COLORS,
   highlightCircleSize: 3,
@@ -94,8 +95,6 @@ const BASE_GRAPH_OPTIONS = {
 
 const NULL_DATA = [[0, 0]];
 
-const boxShadow = '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)';
-const boxShadowHeavy = '0px 4px 2px -2px rgba(0,0,0,0.4), 0px 2px 2px 0px rgba(0,0,0,0.28), 0px 2px 6px 0px rgba(0,0,0,0.24)';
 const useStyles = makeStyles(theme => ({
   graphOuterContainer: {
     backgroundColor: '#ffffff',
@@ -155,18 +154,22 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(1),
     backgroundColor: theme.palette.grey[50],
     cursor: 'pointer',
-    boxShadow,
     '&:hover': {
-      boxShadow: boxShadowHeavy,
+      backgroundColor: '#fff',
+      borderColor: theme.palette.primary.main,
     },
+  },
+  legendSeriesActive: {
+    backgroundColor: '#fff',
+    borderColor: theme.palette.primary.main,
   },
   legendSeriesX: {
     whiteSpace: 'nowrap',
-    padding: theme.spacing(1),
-    backgroundColor: theme.palette.grey[100],
     textAlign: 'center',
     fontWeight: 600,
-    boxShadow,
+    padding: theme.spacing(1),
+    backgroundColor: '#fff',
+    borderColor: theme.palette.primary.main,
   },
   legendSeriesColor: {
     width: theme.spacing(3),
@@ -531,14 +534,18 @@ export default function TimeSeriesViewerGraph() {
         const yUnitsStr = `${yStr} ${units}`;
         yUnits = s.isHighlighted ? <b>{yUnitsStr}</b> : yUnitsStr;
       }
-      const seriesStyle = s.isHighlighted ? { backgroundColor: Theme.palette.grey[100] } : {};
+      const className = s.isHighlighted
+        ? `${classes.legendSeries} ${classes.legendSeriesActive}`
+        : classes.legendSeries;
+      const seriesStyle = {};
       if (isHidden) { seriesStyle.opacity = 0.5; }
       const colorStyle = { backgroundColor: s.color || Theme.palette.grey[200] };
       if (s.isHighlighted) { colorStyle.height = '6px'; }
       return (
-        <div
+        <Card
+          variant="outlined"
+          className={className}
           key={s.label}
-          className={classes.legendSeries}
           style={seriesStyle}
           data-label={s.label}
           data-kind="series"
@@ -550,7 +557,7 @@ export default function TimeSeriesViewerGraph() {
             <br />
             {yUnits}
           </div>
-        </div>
+        </Card>
       );
     });
     // Quality Flags
@@ -599,9 +606,9 @@ export default function TimeSeriesViewerGraph() {
     let dateLegend = null;
     if (graphData.x) {
       dateLegend = (
-        <div className={classes.legendSeriesX}>
+        <Card variant="outlined" className={classes.legendSeriesX}>
           {moment.utc(graphData.x).format('YYYY-MM-DD HH:mm:ss')}
-        </div>
+        </Card>
       );
     }
     // Render

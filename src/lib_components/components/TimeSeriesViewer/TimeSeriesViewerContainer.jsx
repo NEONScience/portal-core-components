@@ -3,9 +3,9 @@ import moment from 'moment';
 
 import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import Card from '@material-ui/core/Card';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Link from '@material-ui/core/Link';
-import Paper from '@material-ui/core/Paper';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import Table from '@material-ui/core/Table';
@@ -70,6 +70,7 @@ const useStyles = makeStyles(theme => ({
     position: 'relative',
     marginBottom: theme.spacing(2),
     padding: theme.spacing(0.5),
+    borderWidth: '1.5px',
   },
   graphOverlay: {
     display: 'block',
@@ -119,19 +120,23 @@ const useTabsStyles = makeStyles(theme => ({
 
 const useTabStyles = makeStyles(theme => ({
   root: {
-    [theme.breakpoints.down('sm')]: {
-      paddingRight: theme.spacing(2.5),
-    },
-    textTransform: 'none',
-    opacity: 1,
-    '&:not(:first-child)': {
-      [theme.breakpoints.down('sm')]: {
-        marginLeft: '-1.5px',
+    [theme.breakpoints.up('md')]: {
+      marginLeft: '-1.5px',
+      '&:first-child': {
+        marginBottom: '-0.5px',
       },
-      [theme.breakpoints.up('md')]: {
+      '&:not(:first-child)': {
         marginTop: '-1.5px',
       },
     },
+    [theme.breakpoints.down('sm')]: {
+      paddingRight: theme.spacing(2.5),
+      '&:not(:first-child)': {
+        marginLeft: '-1.5px',
+      },
+    },
+    textTransform: 'none',
+    opacity: 1,
   },
   labelIcon: {
     minHeight: theme.spacing(8),
@@ -156,6 +161,7 @@ const useTabStyles = makeStyles(theme => ({
     },
     [theme.breakpoints.up('md')]: {
       borderRight: 'none',
+      marginLeft: '0px',
     },
   },
 }));
@@ -515,7 +521,7 @@ export default function TimeSeriesViewerContainer() {
 
   return (
     <div style={{ width: '100%' }}>
-      <Paper className={classes.graphContainer} elevation={4}>
+      <Card className={classes.graphContainer}>
         <div style={{ position: 'relative' }}>
           {state.product.productCode === loadedProductCode ? (
             <TimeSeriesViewerGraph />
@@ -526,7 +532,7 @@ export default function TimeSeriesViewerContainer() {
           {renderTabs()}
           {renderTabPanels()}
         </div>
-      </Paper>
+      </Card>
     </div>
   );
 }
