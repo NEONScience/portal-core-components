@@ -4,6 +4,7 @@ export namespace TIME_SERIES_VIEWER_STATUS {
     export const READY_FOR_DATA: string;
     export const LOADING_DATA: string;
     export const ERROR: string;
+    export const READY_FOR_SERIES: string;
     export const READY: string;
 }
 export namespace TIME_SERIES_VIEWER_STATUS_TITLES {
@@ -15,6 +16,8 @@ export namespace TIME_SERIES_VIEWER_STATUS_TITLES {
     export { READY_FOR_DATA_1 as READY_FOR_DATA };
     const LOADING_DATA_1: string;
     export { LOADING_DATA_1 as LOADING_DATA };
+    const READY_FOR_SERIES_1: string;
+    export { READY_FOR_SERIES_1 as READY_FOR_SERIES };
     const ERROR_1: null;
     export { ERROR_1 as ERROR };
     const READY_1: null;
@@ -156,6 +159,15 @@ declare function useTimeSeriesViewerState(): any[] | {
         dateRange: null[];
         continuousDateRange: never[];
         sites: {};
+    };
+    graphData: {
+        data: never[];
+        qualityData: never[];
+        monthOffsets: {};
+        timestampMap: {};
+        series: never[];
+        labels: string[];
+        qualityLabels: string[];
     };
     selection: {
         dateRange: null[];

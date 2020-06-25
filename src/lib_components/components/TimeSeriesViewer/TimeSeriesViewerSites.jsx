@@ -120,7 +120,12 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(1.5, 2, 1.5, 2),
     backgroundColor: theme.palette.grey[50],
     marginTop: theme.spacing(3),
-    marginRight: theme.spacing(3),
+    [theme.breakpoints.up('lg')]: {
+      marginRight: theme.spacing(3),
+    },
+    [theme.breakpoints.down('md')]: {
+      width: '100%',
+    },
   },
   siteTitleContainer: {
     display: 'flex',

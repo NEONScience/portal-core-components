@@ -76,7 +76,7 @@ export default function AvailabilityLegend(props) {
     /* eslint-disable max-len */
     return (
       <svg width={totalWidth} height={totalHeight} className={classes.legendSvg}>
-        <rect x={columnX(0)} y={0} width={SVG.CELL_WIDTH} height={SVG.CELL_HEIGHT} rx={SVG.CELL_RX} fill={COLORS.LIGHT_BLUE[200]} />
+        <rect x={columnX(0)} y={0} width={SVG.CELL_WIDTH} height={SVG.CELL_HEIGHT} rx={SVG.CELL_RX} fill={COLORS.NEON_BLUE[700]} />
         <text className={classes.legendText} x={columnX(0) + cellOffset} y={rowLabelY}>
           Available
         </text>

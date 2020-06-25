@@ -46,6 +46,7 @@ export const TIME_SERIES_VIEWER_STATUS = {
   READY_FOR_DATA: 'READY_FOR_DATA', // Ready to trigger fetches for data
   LOADING_DATA: 'LOADING_DATA', // Actively loading plottable series data
   ERROR: 'ERROR', // Stop everything because problem
+  READY_FOR_SERIES: 'READY_FOR_SERIES', // Ready to re-calculate series data for the graph
   READY: 'READY', // Ready for user input
 };
 
@@ -54,6 +55,7 @@ export const TIME_SERIES_VIEWER_STATUS_TITLES = {
   LOADING_META: 'Loading site positions, variables, and data paths…',
   READY_FOR_DATA: 'Loading series data…',
   LOADING_DATA: 'Loading series data…',
+  READY_FOR_SERIES: 'Parsing series data…',
   ERROR: null,
   READY: null,
 };
@@ -149,6 +151,15 @@ const DEFAULT_STATE = {
     dateRange: [null, null],
     continuousDateRange: [],
     sites: {},
+  },
+  graphData: {
+    data: [],
+    qualityData: [],
+    monthOffsets: {},
+    timestampMap: {},
+    series: [],
+    labels: ['x'],
+    qualityLabels: ['start', 'end'],
   },
   selection: {
     dateRange: [null, null],
@@ -839,6 +850,12 @@ const reducer = (state, action) => {
       calcStatus();
       return newState;
 
+    // Regenerate Graph Data Actions
+    case 'regenerateGraphData':
+      newState.graphData = action.graphData;
+      newState.status = TIME_SERIES_VIEWER_STATUS.READY;
+      return newState;
+
     // Fetch Site Positions Actions
     case 'fetchSitePositions':
       newState.metaFetches[`fetchSitePositions.${action.siteCode}`] = true;
@@ -873,11 +890,11 @@ const reducer = (state, action) => {
       return newState;
     case 'fetchDataFilesCompleted':
       delete newState.dataFetches[action.token];
-      newState.status = TIME_SERIES_VIEWER_STATUS.READY;
+      newState.status = TIME_SERIES_VIEWER_STATUS.READY_FOR_SERIES;
       calcSelection();
       return newState;
     case 'noDataFilesFetchNecessary':
-      newState.status = TIME_SERIES_VIEWER_STATUS.READY;
+      newState.status = TIME_SERIES_VIEWER_STATUS.READY_FOR_SERIES;
       return newState;
 
     // Fetch Data Actions (Single File)
