@@ -141,6 +141,7 @@ const NeonPage = (props) => {
     error,
     notification,
     outerPageContainerMaxWidth,
+    useCoreHeader,
   } = props;
   const classes = useStyles(Theme);
   const [{ isActive: neonContextIsActive }] = NeonContext.useNeonContextState();
@@ -150,7 +151,7 @@ const NeonPage = (props) => {
   */
   const [drupalCssLoaded, setDrupalCssLoaded] = useState(false);
   useEffect(() => {
-    if (drupalCssLoaded) { return; }
+    if (useCoreHeader || drupalCssLoaded) { return; }
     setDrupalCssLoaded(true);
     const link = document.createElement('link');
     link.rel = 'stylesheet';
@@ -312,6 +313,7 @@ const NeonPage = (props) => {
         <CssBaseline />
         <GlobalCss />
         <NeonHeader
+          useCoreHeader
           notifications={notifications}
           onShowNotifications={handleShowNotifications}
         />
@@ -355,6 +357,7 @@ NeonPage.propTypes = {
   error: PropTypes.string,
   notification: PropTypes.string,
   outerPageContainerMaxWidth: PropTypes.string,
+  useCoreHeader: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.oneOfType([
       PropTypes.node,
@@ -374,6 +377,7 @@ NeonPage.defaultProps = {
   error: null,
   notification: null,
   outerPageContainerMaxWidth: '2000px',
+  useCoreHeader: false,
 };
 
 export default NeonPage;

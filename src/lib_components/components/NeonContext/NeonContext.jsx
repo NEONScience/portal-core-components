@@ -43,8 +43,8 @@ const DEFAULT_STATE = {
   fetches: {
     sites: { status: FETCH_STATUS.AWAITING_CALL, error: null },
     auth: { status: null, error: null },
-    header: { status: FETCH_STATUS.AWAITING_CALL, error: null },
-    footer: { status: FETCH_STATUS.AWAITING_CALL, error: null },
+    header: { status: null, error: null },
+    footer: { status: null, error: null },
   },
   isAuthenticated: false,
   isActive: false,
@@ -182,13 +182,18 @@ const parseSitesFetchResponse = (sitesArray = []) => {
    Context Provider
 */
 const Provider = (props) => {
-  const { useCoreAuth, children } = props;
+  const { useCoreAuth, useCoreHeader, children } = props;
 
-  const initialState = { ...DEFAULT_STATE, isActive: true };
+  const initialState = cloneDeep(DEFAULT_STATE);
+  initialState.isActive = true;
   if (useCoreAuth) {
-    initialState.fetches.auth.fetchStatus = FETCH_STATUS.AWAITING_CALL;
+    initialState.fetches.auth.status = FETCH_STATUS.AWAITING_CALL;
   }
-  const [state, dispatch] = useReducer(reducer, { ...DEFAULT_STATE, isActive: true });
+  if (!useCoreHeader) {
+    initialState.fetches.header.status = FETCH_STATUS.AWAITING_CALL;
+    initialState.fetches.footer.status = FETCH_STATUS.AWAITING_CALL;
+  }
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const fetchHTML = (part) => {
     if (!Object.keys(HTML_URLS).includes(part)) { return; }
@@ -262,6 +267,7 @@ const Provider = (props) => {
 
 Provider.propTypes = {
   useCoreAuth: PropTypes.bool,
+  useCoreHeader: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.oneOfType([
       PropTypes.node,
@@ -274,6 +280,7 @@ Provider.propTypes = {
 
 Provider.defaultProps = {
   useCoreAuth: false,
+  useCoreHeader: false,
 };
 
 /**

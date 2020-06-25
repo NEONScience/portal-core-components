@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import HTMLReactParser from 'html-react-parser';
 
 import Skeleton from '@material-ui/lab/Skeleton';
@@ -9,7 +10,7 @@ import NeonLegacyHeader from './NeonLegacyHeader';
 
 const HEADER_JS_URL = 'https://master-7rqtwti-di4alr4iwbwyg.us-2.platformsh.site/themes/custom/neon/build/components/header/header.js';
 
-export default function NeonHeader(props) {
+const NeonHeader = (props) => {
   const [{
     isActive,
     fetches: { header: headerFetch },
@@ -55,4 +56,16 @@ export default function NeonHeader(props) {
     default:
       return <NeonLegacyHeader {...props} />;
   }
-}
+};
+
+NeonHeader.propTypes = {
+  ...NeonLegacyHeader.propTypes,
+  useCoreHeader: PropTypes.bool,
+};
+
+NeonHeader.defaultProps = {
+  ...NeonLegacyHeader.defaultProps,
+  useCoreHeader: false,
+};
+
+export default NeonHeader;

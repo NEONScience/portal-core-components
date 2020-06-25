@@ -15,11 +15,14 @@ declare function Provider(props: any): JSX.Element;
 declare namespace Provider {
     export namespace propTypes {
         export const useCoreAuth: PropTypes.Requireable<boolean>;
+        export const useCoreHeader: PropTypes.Requireable<boolean>;
         export const children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
     }
     export namespace defaultProps {
         const useCoreAuth_1: boolean;
         export { useCoreAuth_1 as useCoreAuth };
+        const useCoreHeader_1: boolean;
+        export { useCoreHeader_1 as useCoreHeader };
     }
 }
 declare function useNeonContextState(): ({
@@ -396,9 +399,6 @@ declare function useNeonContextState(): ({
                 center: number[];
                 zoom: number;
             };
-            /**
-               CONTEXT
-            */
             D19: {
                 name: string;
                 areaKm2: number;
@@ -456,11 +456,11 @@ declare function useNeonContextState(): ({
             error: null;
         };
         header: {
-            status: string;
+            status: null;
             error: null;
         };
         footer: {
-            status: string;
+            status: null;
             error: null;
         };
     };
@@ -842,9 +842,6 @@ declare function useNeonContextState(): ({
                 center: number[];
                 zoom: number;
             };
-            /**
-               CONTEXT
-            */
             D19: {
                 name: string;
                 areaKm2: number;
@@ -902,11 +899,11 @@ declare function useNeonContextState(): ({
             error: null;
         };
         header: {
-            status: string;
+            status: null;
             error: null;
         };
         footer: {
-            status: string;
+            status: null;
             error: null;
         };
     };
@@ -943,14 +940,14 @@ declare namespace DEFAULT_STATE {
             export { error_1 as error };
         }
         export namespace header_1 {
-            import status_2 = AWAITING_CALL;
+            const status_2: null;
             export { status_2 as status };
             const error_2: null;
             export { error_2 as error };
         }
         export { header_1 as header };
         export namespace footer_1 {
-            import status_3 = AWAITING_CALL;
+            const status_3: null;
             export { status_3 as status };
             const error_3: null;
             export { error_3 as error };
