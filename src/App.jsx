@@ -260,7 +260,7 @@ export default function App() {
   );
 
   return (
-    <NeonPage title="Portal Core Components">
+    <NeonPage title="Portal Core Components" useCoreAuth>
       <Hidden smDown>
         <Grid container spacing={2}>
           <Grid item sm={9}>{renderCurrentComponent()}</Grid>

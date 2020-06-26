@@ -178,11 +178,14 @@ const baseTheme = createMuiTheme({
       fontSize: '0.8rem',
     },
     caption: {
-      fontSize: '0.65rem',
+      fontSize: '0.7rem',
     },
   },
   props: {
     MuiButton: {
+      color: 'primary',
+    },
+    MuiIconButton: {
       color: 'primary',
     },
     MuiCard: {
@@ -284,6 +287,28 @@ const baseTheme = createMuiTheme({
     MuiDialog: {
       root: {
         zIndex: '2100 !important',
+      },
+    },
+    MuiIconButton: {
+      root: {
+        padding: '12px',
+        '& svg': {
+          fontSize: '1.6rem',
+        },
+      },
+      sizeSmall: {
+        padding: '6px',
+        '& svg': {
+          fontSize: '1.2rem !important',
+        },
+      },
+      colorPrimary: {
+        backgroundColor: `${COLORS.LIGHT_BLUE[500]}00`,
+        border: `1px solid ${COLORS.LIGHT_BLUE[500]}00`,
+        '&:hover, &:active': {
+          backgroundColor: `${COLORS.LIGHT_BLUE[500]}14`,
+          border: `1px solid ${COLORS.LIGHT_BLUE[500]}ff`,
+        },
       },
     },
     MuiInputBase: {

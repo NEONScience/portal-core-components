@@ -157,7 +157,7 @@ const NeonPage = (props) => {
     link.rel = 'stylesheet';
     link.href = DRUPAL_CSS_URL;
     document.body.appendChild(link);
-  }, [drupalCssLoaded, setDrupalCssLoaded]);
+  }, [useCoreHeader, drupalCssLoaded, setDrupalCssLoaded]);
 
   /**
      Liferay Notifications
@@ -313,7 +313,7 @@ const NeonPage = (props) => {
         <CssBaseline />
         <GlobalCss />
         <NeonHeader
-          useCoreHeader
+          useCoreHeader={useCoreHeader}
           notifications={notifications}
           onShowNotifications={handleShowNotifications}
         />
@@ -337,7 +337,7 @@ const NeonPage = (props) => {
   };
 
   return neonContextIsActive ? renderNeonPage() : (
-    <NeonContext.Provider useCoreAuth>
+    <NeonContext.Provider useCoreAuth useCoreHeader={useCoreHeader}>
       {renderNeonPage()}
     </NeonContext.Provider>
   );

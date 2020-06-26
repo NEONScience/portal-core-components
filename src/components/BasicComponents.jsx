@@ -7,13 +7,15 @@ import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Link from '@material-ui/core/Link';
 import Divider from '@material-ui/core/Divider';
+import Link from '@material-ui/core/Link';
+import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 
+import CloseIcon from '@material-ui/icons/Close';
 import InfoIcon from '@material-ui/icons/Info';
 import LeftIcon from '@material-ui/icons/ChevronLeft';
 import RightIcon from '@material-ui/icons/ChevronRight';
@@ -112,6 +114,20 @@ export default function BasicComponents() {
         <Button variant="contained" size="large" disabled>
           Contained
         </Button>
+      </div>
+      <div className={classes.row}>
+        <IconButton size="small">
+          <InfoIcon />
+        </IconButton>
+        <IconButton size="small" disabled>
+          <CloseIcon />
+        </IconButton>
+        <IconButton>
+          <InfoIcon />
+        </IconButton>
+        <IconButton disabled>
+          <CloseIcon />
+        </IconButton>
       </div>
 
       {/* Card */}
