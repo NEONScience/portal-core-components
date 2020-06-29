@@ -11,15 +11,11 @@ import CloseIcon from '@material-ui/icons/Close';
 import Theme, { COLORS } from '../Theme/Theme';
 
 const useStyles = makeStyles(theme => ({
-  notificationRoot: {
-    zIndex: 11000,
-  },
   notification: {
-    backgroundColor: COLORS.GOLD[800],
+    color: theme.palette.text.primary,
+    backgroundColor: COLORS.GOLD[50],
+    border: `1px solid ${COLORS.GOLD[300]}`,
     borderRadius: '4px',
-    '& a': {
-      color: `${theme.palette.secondary.light} !important`,
-    },
   },
 }));
 
@@ -44,7 +40,6 @@ const LiferayNotifications = (props) => {
   return (
     <Snackbar
       open
-      className={classes.notificationRoot}
       anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       ContentProps={{ 'aria-describedby': 'neon-data-portal-notifications' }}
     >
@@ -53,9 +48,10 @@ const LiferayNotifications = (props) => {
         message={renderNotificationContent()}
         action={(typeof onHideNotifications === 'function' ? (
           <IconButton
+            color="default"
+            size="small"
             key="close"
             aria-label="close"
-            color="inherit"
             onClick={onHideNotifications}
           >
             <CloseIcon />

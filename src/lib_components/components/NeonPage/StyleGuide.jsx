@@ -1,9 +1,10 @@
 /* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid */
 
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
@@ -32,6 +33,9 @@ export default function StyleGuide(props) {
   const classes = useStyles(Theme);
   const { onClickHash } = props;
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
   const breadcrumbs = [
     { name: 'Breadcrumb 1', href: '/bc1' },
     { name: 'Breadcrumb 2', href: '/bc2' },
@@ -49,6 +53,11 @@ export default function StyleGuide(props) {
       <Skeleton variant="rect" width="60%" height={16} />
     </Grid>
   );
+
+  const buttonProps = {
+    variant: 'contained',
+    style: { zIndex: 10000 },
+  };
 
   return (
     <React.Fragment>
@@ -171,14 +180,20 @@ export default function MyNeonPage() {
         however, if defined.
       </DocBlock>
       <ExampleBlock>
-        <div className={classes.example}>
-          <NeonPage
-            title="My Neon Page"
-            breadcrumbs={breadcrumbs}
-            loading="Loading My Neon Page..."
-          >
-            <Typography>Content</Typography>
-          </NeonPage>
+        <div>
+          <Button {...buttonProps} onClick={() => setIsLoading(!isLoading)}>
+            {`${isLoading ? 'Hide' : 'Show'} Loading`}
+          </Button>
+          <br />
+          <div className={classes.example}>
+            <NeonPage
+              title="My Neon Page"
+              breadcrumbs={breadcrumbs}
+              loading={isLoading ? 'Loading My Neon Page...' : null}
+            >
+              <Typography>Content</Typography>
+            </NeonPage>
+          </div>
         </div>
       </ExampleBlock>
       <CodeBlock>
@@ -222,14 +237,20 @@ export default function MyNeonPage() {
         however, if defined.
       </DocBlock>
       <ExampleBlock>
-        <div className={classes.example}>
-          <NeonPage
-            title="My Neon Page"
-            breadcrumbs={breadcrumbs}
-            error="Page failed to load"
-          >
-            <Typography>Content</Typography>
-          </NeonPage>
+        <div>
+          <Button {...buttonProps} onClick={() => setIsError(!isError)}>
+            {`${isError ? 'Hide' : 'Show'} Error`}
+          </Button>
+          <br />
+          <div className={classes.example}>
+            <NeonPage
+              title="My Neon Page"
+              breadcrumbs={breadcrumbs}
+              error={isError ? 'Page failed to load' : null}
+            >
+              <Typography>Content</Typography>
+            </NeonPage>
+          </div>
         </div>
       </ExampleBlock>
       <CodeBlock>
@@ -304,7 +325,6 @@ const notification = 'Here is a sample NeonPage notification with a <a href="htt
         <div className={classes.example} style={{ maxHeight: '600px', overflowY: 'scroll' }}>
           <NeonPage
             breadcrumbs={breadcrumbs}
-            loading="Loading My Neon Page..."
           >
             <Grid container spacing={3}>
               {skeletionGrid}
@@ -342,7 +362,6 @@ export default function MyNeonPage() {
   return (
     <NeonPage
       breadcrumbs={breadcrumbs}
-      loading="Loading My Neon Page..."
     >
       <Grid container spacing={3}>
         {skeletionGrid}

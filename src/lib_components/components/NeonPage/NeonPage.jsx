@@ -9,6 +9,7 @@ import { Subject } from 'rxjs';
 
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
+import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -78,27 +79,13 @@ const useStyles = makeStyles(theme => ({
       textDecoration: 'underline',
     },
   },
-  pageOverlay: {
-    // display: 'flex',
-    // alignItems: 'center',
-    // justifyContent: 'center',
-    position: 'absolute',
-    minHeight: theme.spacing(30),
-    top: '0px',
-    left: '0px',
-    height: '100%',
-    width: '100%',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    padding: theme.spacing(12, 3, 3, 3),
-    zIndex: 10000,
-  },
-  pageOverlayPaper: {
+  backdropPaper: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: '4px',
-    padding: theme.spacing(3),
+    padding: theme.spacing(3, 3, 4, 3),
     position: 'sticky',
     top: theme.spacing(12),
     left: 0,
@@ -275,16 +262,16 @@ const NeonPage = (props) => {
   ));
 
   const renderOverlay = overlayChildren => (
-    <div className={classes.pageOverlay}>
-      <Paper className={classes.pageOverlayPaper}>
+    <Backdrop open>
+      <Paper className={classes.backdropPaper}>
         {overlayChildren}
       </Paper>
-    </div>
+    </Backdrop>
   );
 
   const renderLoading = () => (!loading || error ? null : renderOverlay(
     <React.Fragment>
-      <Typography variant="h6" component="h3" gutterBottom>
+      <Typography variant="h5" component="h3" gutterBottom>
         {loading}
       </Typography>
       {progress === null ? (
@@ -298,7 +285,7 @@ const NeonPage = (props) => {
   const renderError = () => (!error ? null : renderOverlay(
     <React.Fragment>
       <ErrorIcon fontSize="large" color="error" />
-      <Typography variant="h6" component="h3" style={{ marginTop: Theme.spacing(1) }}>
+      <Typography variant="h5" component="h3" style={{ marginTop: Theme.spacing(1) }}>
         {error}
       </Typography>
     </React.Fragment>,

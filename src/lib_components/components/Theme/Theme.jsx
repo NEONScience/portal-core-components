@@ -37,7 +37,7 @@ export const COLORS = {
     900: '#001e39',
   },
   GOLD: {
-    50: '#fff4db',
+    50: '#fff5dc',
     100: '#ffe7b1',
     200: '#ffd984',
     300: '#ffcb4f', // Guide color
@@ -136,6 +136,9 @@ const baseTheme = createMuiTheme({
     secondary: PALETTES.SECONDARY,
     error: PALETTES.ERROR,
     grey: PALETTES.GREY,
+    text: {
+      primary: 'rgba(0, 0, 0, 0.9)',
+    },
   },
   shape: {
     borderRadius: 0,
@@ -196,8 +199,16 @@ const baseTheme = createMuiTheme({
       underline: 'always',
     },
   },
+  zIndex: {
+    drawer: 2100,
+  },
   overrides: {
     // We have lots of overrides. Please keep them alphabetized for easier maintenance!
+    MuiBackdrop: {
+      root: {
+        zIndex: '2200 !important',
+      },
+    },
     MuiButton: {
       root: {
         borderRadius: '2px',
@@ -321,6 +332,11 @@ const baseTheme = createMuiTheme({
         '&:hover, &:active': {
           color: COLORS.LIGHT_BLUE[400],
         },
+      },
+    },
+    MuiSnackbar: {
+      root: {
+        borderRadius: '4px',
       },
     },
     MuiTab: {
