@@ -8,8 +8,9 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Divider from '@material-ui/core/Divider';
-import Link from '@material-ui/core/Link';
 import IconButton from '@material-ui/core/IconButton';
+import Link from '@material-ui/core/Link';
+import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
 
 import ToggleButton from '@material-ui/lab/ToggleButton';
@@ -38,6 +39,20 @@ const useStyles = makeStyles(theme => ({
     },
   },
 }));
+
+const marks = [
+  { value: 10, label: '10' },
+  { value: 20 },
+  { value: 30 },
+  { value: 40, label: '40' },
+  { value: 50 },
+  { value: 60 },
+  { value: 70, label: '70' },
+  { value: 80 },
+  { value: 90 },
+  { value: 100, label: '100' },
+  { value: 110 },
+];
 
 export default function BasicComponents() {
   const classes = useStyles(Theme);
@@ -166,6 +181,73 @@ export default function BasicComponents() {
             </Typography>
           </CardContent>
         </Card>
+      </div>
+
+      {/* Slider */}
+      <Divider className={classes.divider} />
+      <Typography variant="h4" component="h2" gutterBottom>Slider</Typography>
+
+      <div className={classes.row}>
+        <div style={{ width: 300, marginRight: '48px' }}>
+          <Slider
+            defaultValue={30}
+            getAriaValueText={value => `${value} units`}
+            valueLabelDisplay="auto"
+            marks={marks}
+            min={10}
+            max={110}
+            style={{ marginBottom: '48px' }}
+          />
+          <Slider
+            defaultValue={[50, 90]}
+            getAriaValueText={value => `${value} units`}
+            valueLabelDisplay="auto"
+            marks={marks}
+            min={10}
+            max={110}
+            style={{ marginBottom: '48px' }}
+          />
+          <Slider
+            defaultValue={[70, 100]}
+            getAriaValueText={value => `${value} units`}
+            valueLabelDisplay="auto"
+            marks={marks}
+            min={10}
+            max={110}
+            disabled
+          />
+        </div>
+        <Slider
+          defaultValue={30}
+          getAriaValueText={value => `${value} units`}
+          valueLabelDisplay="auto"
+          marks={marks}
+          min={10}
+          max={110}
+          orientation="vertical"
+          style={{ height: 300, marginRight: '48px' }}
+        />
+        <Slider
+          defaultValue={[50, 90]}
+          getAriaValueText={value => `${value} units`}
+          valueLabelDisplay="auto"
+          marks={marks}
+          min={10}
+          max={110}
+          orientation="vertical"
+          style={{ height: 300, marginRight: '48px' }}
+        />
+        <Slider
+          defaultValue={[70, 100]}
+          getAriaValueText={value => `${value} units`}
+          valueLabelDisplay="auto"
+          marks={marks}
+          min={10}
+          max={110}
+          orientation="vertical"
+          style={{ height: 300 }}
+          disabled
+        />
       </div>
 
       {/* ToggleButton */}

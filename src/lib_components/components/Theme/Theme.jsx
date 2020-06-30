@@ -205,6 +205,11 @@ const baseTheme = createMuiTheme({
   },
   overrides: {
     // We have lots of overrides. Please keep them alphabetized for easier maintenance!
+    MuiBackdrop: {
+      root: {
+        zIndex: 1900,
+      },
+    },
     MuiButton: {
       root: {
         borderRadius: '2px',
@@ -328,6 +333,136 @@ const baseTheme = createMuiTheme({
     MuiPopover: {
       root: {
         zIndex: '2100 !important',
+      },
+    },
+    MuiSlider: {
+      root: {
+        '&$disabled': {
+          '& $rail': {
+            backgroundColor: COLORS.GREY[300],
+          },
+          '& $track': {
+            backgroundColor: COLORS.GREY[300],
+          },
+          '& $mark': {
+            backgroundColor: COLORS.GREY[300],
+          },
+          '& $markLabel': {
+            color: `${COLORS.GREY[300]} !important`,
+          },
+          '& $markLabelActive': {
+            color: `${COLORS.GREY[300]} !important`,
+          },
+        },
+      },
+      rail: {
+        height: 2,
+        opacity: 1,
+        backgroundColor: COLORS.LIGHT_BLUE[300],
+        '&$disabled': {
+          backgroundColor: COLORS.GREY[300],
+        },
+      },
+      track: {
+        height: 7,
+        marginTop: -2.5,
+        '&$disabled': {
+          backgroundColor: COLORS.GREY[300],
+        },
+      },
+      marked: {
+        marginBottom: 26,
+      },
+      mark: {
+        width: 2,
+        height: 12,
+        marginTop: -5,
+        backgroundColor: COLORS.LIGHT_BLUE[300],
+      },
+      markActive: {
+        width: 3,
+        height: 12,
+        marginTop: -5,
+        marginLeft: -1,
+        backgroundColor: COLORS.LIGHT_BLUE[500],
+      },
+      markLabel: {
+        marginTop: 12,
+      },
+      thumb: {
+        height: 28,
+        width: 12,
+        marginTop: -13,
+        marginLeft: -6,
+        borderRadius: 2,
+        backgroundColor: COLORS.GREY[50],
+        border: `2px solid ${COLORS.LIGHT_BLUE[500]}`,
+        '&$disabled': {
+          height: 28,
+          width: 12,
+          marginTop: -13,
+          marginLeft: -6,
+          border: `2px solid ${COLORS.GREY[300]}`,
+        },
+      },
+      valueLabel: {
+        left: 'initial',
+        fontWeight: 600,
+        top: -28,
+        whiteSpace: 'nowrap',
+        '& span': {
+          width: 'auto',
+          height: 'auto',
+          padding: '4px 8px',
+          borderRadius: 2,
+          transform: 'none',
+          '& span': {
+            transform: 'none',
+            padding: 0,
+            borderRadius: 0,
+          },
+        },
+      },
+      vertical: {
+        '& $track': {
+          width: '7px !important',
+          marginLeft: -2,
+          left: 20,
+        },
+        '& $marked': {
+          marginRight: 34,
+        },
+        '& $mark': {
+          height: 2,
+          width: 12,
+          marginLeft: 2,
+        },
+        '& $markActive': {
+          height: 3,
+          width: 12,
+          marginLeft: 2,
+          marginTop: -1,
+        },
+        '& $markLabel': {
+          marginTop: 0,
+          left: '46px !important',
+        },
+        '& $rail': {
+          width: '2px !important',
+          left: 20,
+        },
+        '& $thumb': {
+          height: 12,
+          width: 27,
+          marginTop: -6,
+          marginLeft: -14,
+          '&$disabled': {
+            height: 12,
+            width: 27,
+            marginTop: -6,
+            marginLeft: '-5px !important',
+          },
+        },
       },
     },
     MuiSnackbar: {

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { debounce } from 'lodash';
 
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Slider from '@material-ui/core/Slider';
 import TextField from '@material-ui/core/TextField';
@@ -107,141 +107,15 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.grey[400],
     fontSize: '0.75rem',
   },
-}));
-
-const boxShadow = alpha => `0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,${alpha}),0 0 0 1px rgba(0,0,0,0.02)`;
-const NeonSlider = withStyles({
-  root: {
-    width: `calc(100% - ${Theme.spacing(6)}px)`,
-    marginLeft: Theme.spacing(3),
+  horizSlider: {
+    width: `calc(100% - ${theme.spacing(6)}px)`,
+    marginLeft: theme.spacing(3),
     marginBottom: '24px !important',
   },
-  rail: {
-    height: 3,
-  },
-  track: {
-    height: 7,
-    marginTop: -2,
-  },
-  mark: {
-    height: 12,
-    marginTop: -5,
-  },
-  markActive: {
-    height: 12,
-    marginTop: -5,
-    backgroundColor: Theme.palette.primary.main,
-  },
-  markLabel: {
-    marginTop: Theme.spacing(1),
-  },
-  thumb: {
-    height: Theme.spacing(3.5),
-    width: Theme.spacing(1.5),
-    backgroundColor: Theme.palette.grey[50],
-    boxShadow: boxShadow(0.13),
-    border: `2px solid ${Theme.palette.primary.main}`,
-    borderRadius: 0,
-    marginTop: Theme.spacing(-1.75),
-    marginLeft: Theme.spacing(-0.75),
-    '&:focus,&:hover,&active': {
-      boxShadow: boxShadow(0.3),
-      // Reset on touch devices, it doesn't add specificity
-      '@media (hover: none)': {
-        boxShadow: boxShadow(0.13),
-      },
-    },
-  },
-  valueLabel: {
-    left: 'initial',
-    fontWeight: 600,
-    top: -20,
-    whiteSpace: 'nowrap',
-    '& span': {
-      width: 'auto',
-      height: 'auto',
-      transform: 'none',
-      padding: Theme.spacing(0.5, 1),
-      borderRadius: 0,
-      '& span': {
-        transform: 'none',
-        padding: 0,
-        borderRadius: 0,
-      },
-    },
-  },
-})(Slider);
-
-const NeonVerticalSlider = withStyles({
-  root: {
+  vertSlider: {
     margin: '4px 56px 32px 16px !important',
   },
-  disabled: {
-    '& .MuiSlider-track': {
-      display: 'none',
-    },
-    '& .MuiSlider-thumb': {
-      display: 'none',
-    },
-    '& .MuiSlider-markLabelActive': {
-      color: 'unset',
-    },
-    '& .MuiSlider-markActive': {
-      backgroundColor: 'currentColor',
-    },
-  },
-  rail: {
-    width: 3,
-  },
-  track: {
-    width: '7px !important',
-    marginLeft: -2,
-  },
-  mark: {
-    width: 12,
-    marginLeft: -5,
-  },
-  markActive: {
-    width: 12,
-    marginLeft: -5,
-    backgroundColor: Theme.palette.primary.main,
-  },
-  markLabel: {
-    marginLeft: Theme.spacing(1),
-  },
-  thumb: {
-    height: Theme.spacing(1.5),
-    width: Theme.spacing(3.5),
-    backgroundColor: Theme.palette.grey[50],
-    boxShadow: boxShadow(0.13),
-    border: `2px solid ${Theme.palette.primary.main}`,
-    marginTop: Theme.spacing(-0.75),
-    marginLeft: `${Theme.spacing(-1.75)}px !important`,
-    '&:focus,&:hover,&active': {
-      boxShadow: boxShadow(0.3),
-      // Reset on touch devices, it doesn't add specificity
-      '@media (hover: none)': {
-        boxShadow: boxShadow(0.13),
-      },
-    },
-  },
-  valueLabel: {
-    left: 'initial',
-    fontWeight: 600,
-    top: -20,
-    whiteSpace: 'nowrap',
-    '& span': {
-      width: 'auto',
-      height: 'auto',
-      padding: Theme.spacing(0.5, 1),
-      transform: 'none',
-      '& span': {
-        transform: 'none',
-        padding: 0,
-      },
-    },
-  },
-})(Slider);
+}));
 
 /**
    y Axes - Scale Option
@@ -478,8 +352,9 @@ const YAxisRangeOption = (props) => {
           </div>
           {/* eslint-enable react/jsx-one-expression-per-line */}
         </div>
-        <NeonVerticalSlider
+        <Slider
           disabled={!isCustom}
+          className={classes.vertSlider}
           style={{ display: isCustom ? 'inline-block' : 'none' }}
           step={step}
           marks={marks}
@@ -509,6 +384,7 @@ YAxisRangeOption.propTypes = PropTypes.oneOf(['y1', 'y2']).isRequired;
 const RollPeriodOption = () => {
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
 
+  const classes = useStyles(Theme);
   const { selection } = state;
   const {
     rollPeriod: currentRollPeriod,
@@ -551,7 +427,8 @@ const RollPeriodOption = () => {
     <Skeleton variant="rect" width="100%" height={56} />
   ) : (
     <div style={{ width: '100%', minWidth: Theme.spacing(40) }}>
-      <NeonSlider
+      <Slider
+        className={classes.horizSlider}
         marks={marks}
         data-selenium="time-series-viewer.options.roll-period-slider"
         value={activeRollPeriod}
