@@ -84,6 +84,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+    textAlign: 'center',
     borderRadius: '4px',
     padding: theme.spacing(3, 3, 4, 3),
     position: 'sticky',

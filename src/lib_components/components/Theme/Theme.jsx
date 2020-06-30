@@ -200,15 +200,11 @@ const baseTheme = createMuiTheme({
     },
   },
   zIndex: {
-    drawer: 2100,
+    modal: 1900, // Modal backdrops shouldn't cover the sticky header (z 2000) if not full screen
+    fullScreenBackdrop: 2100, // Not a Mui attribute; used to handle sticky header with fixed z 2000
   },
   overrides: {
     // We have lots of overrides. Please keep them alphabetized for easier maintenance!
-    MuiBackdrop: {
-      root: {
-        zIndex: '2200 !important',
-      },
-    },
     MuiButton: {
       root: {
         borderRadius: '2px',
@@ -295,11 +291,6 @@ const baseTheme = createMuiTheme({
         padding: '0px 24px 24px 24px',
       },
     },
-    MuiDialog: {
-      root: {
-        zIndex: '2100 !important',
-      },
-    },
     MuiIconButton: {
       root: {
         padding: '12px',
@@ -332,6 +323,11 @@ const baseTheme = createMuiTheme({
         '&:hover, &:active': {
           color: COLORS.LIGHT_BLUE[400],
         },
+      },
+    },
+    MuiPopover: {
+      root: {
+        zIndex: '2100 !important',
       },
     },
     MuiSnackbar: {
@@ -378,6 +374,20 @@ const baseTheme = createMuiTheme({
     MuiTableCell: {
       root: {
         fontSize: '0.8rem',
+      },
+    },
+    MuiTablePagination: {
+      toolbar: {
+        '& .MuiIconButton-root': {
+          borderRadius: '2px',
+          padding: '4px',
+          '& svg': {
+            fontSize: '1.4rem',
+          },
+        },
+        '& .MuiTypography-caption': {
+          margin: '0px 8px',
+        },
       },
     },
     MuiToggleButton: {
@@ -427,7 +437,6 @@ const baseTheme = createMuiTheme({
         fontSize: '0.95rem',
       },
       gutterBottom: {
-        marginTop: '0.5em',
         marginBottom: '1em',
       },
     },
