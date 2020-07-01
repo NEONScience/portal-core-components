@@ -8,7 +8,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Dialog from '@material-ui/core/Dialog';
 import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
-import Slide from '@material-ui/core/Slide';
+import Fade from '@material-ui/core/Fade';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
@@ -17,7 +17,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import Theme from '../Theme/Theme';
 
 const Transition = forwardRef((props, ref) => (
-  <Slide direction="up" ref={ref} {...props} />
+  <Fade ref={ref} {...props} timeout={0} />
 ));
 
 const useStyles = makeStyles(theme => ({

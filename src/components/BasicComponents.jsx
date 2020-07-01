@@ -4,6 +4,7 @@ import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -133,6 +134,40 @@ export default function BasicComponents() {
         <Button variant="contained" size="large" disabled>
           Contained
         </Button>
+      </div>
+      <div className={classes.row}>
+        <ButtonGroup size="small">
+          <Button>One</Button>
+          <Button>Two</Button>
+          <Button>Three</Button>
+        </ButtonGroup>
+        <ButtonGroup>
+          <Button>One</Button>
+          <Button>Two</Button>
+          <Button>Three</Button>
+        </ButtonGroup>
+        <ButtonGroup size="large">
+          <Button>One</Button>
+          <Button>Two</Button>
+          <Button>Three</Button>
+        </ButtonGroup>
+      </div>
+      <div className={classes.row}>
+        <ButtonGroup variant="text" size="small">
+          <Button>One</Button>
+          <Button>Two</Button>
+          <Button>Three</Button>
+        </ButtonGroup>
+        <ButtonGroup variant="text">
+          <Button>One</Button>
+          <Button>Two</Button>
+          <Button>Three</Button>
+        </ButtonGroup>
+        <ButtonGroup variant="text" size="large">
+          <Button>One</Button>
+          <Button>Two</Button>
+          <Button>Three</Button>
+        </ButtonGroup>
       </div>
       <div className={classes.row} style={{ marginBottom: 'unset' }}>
         <div className={classes.row} style={{ marginRight: Theme.spacing(8) }}>

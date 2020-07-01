@@ -186,7 +186,13 @@ const baseTheme = createMuiTheme({
     },
   },
   props: {
+    MuiBackdrop: {
+      timeout: 0,
+    },
     MuiButton: {
+      color: 'primary',
+    },
+    MuiButtonGroup: {
       color: 'primary',
     },
     MuiCard: {
@@ -298,6 +304,29 @@ const baseTheme = createMuiTheme({
         padding: '8px 16px',
       },
     },
+    MuiButtonGroup: {
+      groupedOutlinedPrimary: {
+        '&:hover, &:active': {
+          color: COLORS.LIGHT_BLUE[400],
+          borderColor: COLORS.LIGHT_BLUE[400],
+          textDecoration: 'underline',
+        },
+      },
+      groupedTextPrimary: {
+        border: '1px solid transparent !important',
+        '&:hover, &:active': {
+          color: COLORS.LIGHT_BLUE[400],
+          borderColor: `${COLORS.LIGHT_BLUE[400]} !important`,
+          textDecoration: 'underline',
+        },
+        '&:not(:last-child)': {
+          borderRightColor: `${COLORS.LIGHT_BLUE[500]} !important`,
+        },
+        '&:not(:first-child)': {
+          marginLeft: '-1px',
+        },
+      },
+    },
     MuiCard: {
       root: {
         borderRadius: '4px',
@@ -317,6 +346,14 @@ const baseTheme = createMuiTheme({
     MuiCheckbox: {
       root: {
         padding: '6px',
+      },
+    },
+    MuiDialog: {
+      scrollPaper: {
+        zIndex: 2100,
+      },
+      paperFullScreen: {
+        zIndex: 2100,
       },
     },
     MuiFormControlLabel: {
