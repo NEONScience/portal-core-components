@@ -128,6 +128,7 @@ const PALETTES = {
 // https://material-ui.com/customization/default-theme/#explore
 
 const baseTheme = createMuiTheme({
+  colors: COLORS,
   palette: {
     background: {
       default: PALETTES.GREY[50],
