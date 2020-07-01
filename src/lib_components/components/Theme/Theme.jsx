@@ -189,15 +189,27 @@ const baseTheme = createMuiTheme({
     MuiButton: {
       color: 'primary',
     },
-    MuiIconButton: {
-      color: 'primary',
-    },
     MuiCard: {
       variant: 'outlined',
+    },
+    MuiCheckbox: {
+      color: 'primary',
+      size: 'small',
+    },
+    MuiIconButton: {
+      color: 'primary',
     },
     MuiLink: {
       color: 'primary',
       underline: 'always',
+    },
+    MuiRadio: {
+      color: 'primary',
+      size: 'small',
+    },
+    MuiSwitch: {
+      color: 'primary',
+      size: 'small',
     },
   },
   zIndex: {
@@ -252,9 +264,14 @@ const baseTheme = createMuiTheme({
       },
       textPrimary: {
         padding: '8px 16px',
+        border: '1px solid transparent',
+        '&:focus': {
+          border: `1px dashed ${COLORS.GOLD[500]}ff`,
+        },
         '&:hover, &:active': {
           color: COLORS.LIGHT_BLUE[400],
           textDecoration: 'underline',
+          border: `1px solid ${COLORS.LIGHT_BLUE[400]}ff`,
         },
       },
       sizeSmall: {
@@ -297,25 +314,40 @@ const baseTheme = createMuiTheme({
         padding: '0px 24px 24px 24px',
       },
     },
+    MuiCheckbox: {
+      root: {
+        padding: '6px',
+      },
+    },
+    MuiFormControlLabel: {
+      root: {
+        marginLeft: '-8px',
+      },
+      label: {
+        marginLeft: '4px',
+        marginBottom: '-1px',
+      },
+    },
     MuiIconButton: {
       root: {
         padding: '12px',
-        '& svg': {
-          fontSize: '1.6rem',
-        },
       },
       sizeSmall: {
         padding: '6px',
         '& svg': {
-          fontSize: '1.2rem !important',
+          fontSize: '1.2rem',
         },
       },
       colorPrimary: {
         backgroundColor: `${COLORS.LIGHT_BLUE[500]}00`,
         border: `1px solid ${COLORS.LIGHT_BLUE[500]}00`,
+        '&:focus': {
+          border: `1px dashed ${COLORS.GOLD[500]}ff`,
+        },
         '&:hover, &:active': {
-          backgroundColor: `${COLORS.LIGHT_BLUE[500]}14`,
-          border: `1px solid ${COLORS.LIGHT_BLUE[500]}ff`,
+          color: COLORS.LIGHT_BLUE[400],
+          backgroundColor: `${COLORS.LIGHT_BLUE[400]}14`,
+          border: `1px solid ${COLORS.LIGHT_BLUE[400]}ff`,
         },
       },
     },
@@ -334,6 +366,11 @@ const baseTheme = createMuiTheme({
     MuiPopover: {
       root: {
         zIndex: '2100 !important',
+      },
+    },
+    MuiRadio: {
+      root: {
+        padding: '6px',
       },
     },
     MuiSlider: {
@@ -469,6 +506,12 @@ const baseTheme = createMuiTheme({
     MuiSnackbar: {
       root: {
         borderRadius: '4px',
+      },
+    },
+    MuiSwitch: {
+      sizeSmall: {
+        width: '42px',
+        height: '26px',
       },
     },
     MuiTab: {

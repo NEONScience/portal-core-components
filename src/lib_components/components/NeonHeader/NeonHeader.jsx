@@ -67,7 +67,7 @@ const NeonHeader = (props) => {
   if (renderMode === 'drupal') {
     return (
       <header id="header" className={unstickyDrupalHeader ? classes.unstickyHeader : null}>
-        {HTMLReactParser(headerHTML.replace(' value=""', ' initialValue=""'))}
+        {HTMLReactParser(headerHTML.replace(/ value=""/g, ' initialValue=""'))}
       </header>
     );
   }

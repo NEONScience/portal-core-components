@@ -7,16 +7,20 @@ import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
+import Checkbox from '@material-ui/core/Checkbox';
 import Divider from '@material-ui/core/Divider';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import IconButton from '@material-ui/core/IconButton';
 import Link from '@material-ui/core/Link';
+import Radio from '@material-ui/core/Radio';
 import Slider from '@material-ui/core/Slider';
+import Switch from '@material-ui/core/Switch';
 import Typography from '@material-ui/core/Typography';
 
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 
-import CloseIcon from '@material-ui/icons/Close';
+import DownloadIcon from '@material-ui/icons/GetApp';
 import InfoIcon from '@material-ui/icons/Info';
 import LeftIcon from '@material-ui/icons/ChevronLeft';
 import RightIcon from '@material-ui/icons/ChevronRight';
@@ -130,19 +134,35 @@ export default function BasicComponents() {
           Contained
         </Button>
       </div>
-      <div className={classes.row}>
-        <IconButton size="small">
-          <InfoIcon />
-        </IconButton>
-        <IconButton size="small" disabled>
-          <CloseIcon />
-        </IconButton>
-        <IconButton>
-          <InfoIcon />
-        </IconButton>
-        <IconButton disabled>
-          <CloseIcon />
-        </IconButton>
+      <div className={classes.row} style={{ marginBottom: 'unset' }}>
+        <div className={classes.row} style={{ marginRight: Theme.spacing(8) }}>
+          <IconButton size="small">
+            <DownloadIcon />
+          </IconButton>
+          <IconButton>
+            <DownloadIcon fontSize="small" />
+          </IconButton>
+          <IconButton>
+            <DownloadIcon />
+          </IconButton>
+          <IconButton>
+            <DownloadIcon fontSize="large" />
+          </IconButton>
+        </div>
+        <div className={classes.row}>
+          <IconButton disabled size="small">
+            <DownloadIcon />
+          </IconButton>
+          <IconButton disabled>
+            <DownloadIcon fontSize="small" />
+          </IconButton>
+          <IconButton disabled>
+            <DownloadIcon />
+          </IconButton>
+          <IconButton disabled>
+            <DownloadIcon fontSize="large" />
+          </IconButton>
+        </div>
       </div>
 
       {/* Card */}
@@ -181,6 +201,31 @@ export default function BasicComponents() {
             </Typography>
           </CardContent>
         </Card>
+      </div>
+
+      {/* Form Control */}
+      <Divider className={classes.divider} />
+      <Typography variant="h4" component="h2" gutterBottom>
+        Form Control (Checkbox, Radio, Switch)
+      </Typography>
+
+      <div className={classes.row}>
+        <FormControlLabel label="Checkbox" control={<Checkbox />} />
+        <FormControlLabel label="Checkbox" control={<Checkbox checked />} />
+        <FormControlLabel label="Checkbox" control={<Checkbox disabled />} />
+        <FormControlLabel label="Checkbox" control={<Checkbox checked disabled />} />
+      </div>
+      <div className={classes.row}>
+        <FormControlLabel label="Radio" control={<Radio />} />
+        <FormControlLabel label="Radio" control={<Radio checked />} />
+        <FormControlLabel label="Radio" control={<Radio disabled />} />
+        <FormControlLabel label="Radio" control={<Radio checked disabled />} />
+      </div>
+      <div className={classes.row}>
+        <FormControlLabel label="Switch" control={<Switch />} />
+        <FormControlLabel label="Switch" control={<Switch checked />} />
+        <FormControlLabel label="Switch" control={<Switch disabled />} />
+        <FormControlLabel label="Switch" control={<Switch checked disabled />} />
       </div>
 
       {/* Slider */}
