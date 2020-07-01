@@ -16,6 +16,16 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: COLORS.GOLD[50],
     border: `1px solid ${COLORS.GOLD[300]}`,
     borderRadius: '4px',
+    marginLeft: theme.spacing(3),
+    [theme.breakpoints.up('sm')]: {
+      maxWidth: '75%',
+    },
+    [theme.breakpoints.up('md')]: {
+      maxWidth: '50%',
+    },
+    [theme.breakpoints.up('lg')]: {
+      maxWidth: '33%',
+    },
   },
 }));
 

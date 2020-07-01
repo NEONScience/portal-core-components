@@ -130,6 +130,7 @@ const NeonPage = (props) => {
     notification,
     outerPageContainerMaxWidth,
     useCoreHeader,
+    unstickyDrupalHeader,
   } = props;
   const classes = useStyles(Theme);
   const [{ isActive: neonContextIsActive }] = NeonContext.useNeonContextState();
@@ -251,12 +252,12 @@ const NeonPage = (props) => {
       variant="overline"
       data-selenium="neon-page.breadcrumbs"
     >
-      <Link color="inherit" key={uniqueId()} href="/">
+      <Link key={uniqueId()} href="/">
         Home
       </Link>
       {breadcrumbs.map(
         (breadcrumb, idx) => (idx !== breadcrumbs.length - 1
-          ? (<Link key={uniqueId()} color="inherit" href={breadcrumb.href}>{breadcrumb.name}</Link>)
+          ? (<Link key={uniqueId()} href={breadcrumb.href}>{breadcrumb.name}</Link>)
           : (<Typography key="{idx}" color="textPrimary">{breadcrumb.name}</Typography>)),
       )}
     </Breadcrumbs>
@@ -302,10 +303,11 @@ const NeonPage = (props) => {
         <GlobalCss />
         <NeonHeader
           useCoreHeader={useCoreHeader}
+          unstickyDrupalHeader={unstickyDrupalHeader}
           notifications={notifications}
           onShowNotifications={handleShowNotifications}
         />
-        <Container className={classes.outerPageContainer} styles={outerPageContainerStyles}>
+        <Container className={classes.outerPageContainer} style={outerPageContainerStyles}>
           <Container className={classes.pageContainer} data-selenium="neon-page.content">
             {renderBreadcrumbs()}
             {renderTitle()}
@@ -346,6 +348,7 @@ NeonPage.propTypes = {
   notification: PropTypes.string,
   outerPageContainerMaxWidth: PropTypes.string,
   useCoreHeader: PropTypes.bool,
+  unstickyDrupalHeader: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.oneOfType([
       PropTypes.node,
@@ -366,6 +369,7 @@ NeonPage.defaultProps = {
   notification: null,
   outerPageContainerMaxWidth: '2000px',
   useCoreHeader: false,
+  unstickyDrupalHeader: true,
 };
 
 export default NeonPage;

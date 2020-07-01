@@ -3,6 +3,7 @@ declare function NeonHeader(props: any): JSX.Element;
 declare namespace NeonHeader {
     export const propTypes: {
         useCoreHeader: PropTypes.Requireable<boolean>;
+        unstickyDrupalHeader: PropTypes.Requireable<boolean>;
         notifications: PropTypes.Requireable<(PropTypes.InferProps<{
             id: PropTypes.Validator<string>;
             message: PropTypes.Validator<string>;
@@ -12,6 +13,7 @@ declare namespace NeonHeader {
     };
     export const defaultProps: {
         useCoreHeader: boolean;
+        unstickyDrupalHeader: boolean;
         notifications: never[];
         onShowNotifications: null;
     };
