@@ -41,6 +41,9 @@ const useStyles = makeStyles(theme => ({
     '& table': {
       margin: '0px !important',
     },
+    '& tfoot': {
+      paddingRight: '36px',
+    },
   },
   featureIcon: {
     width: theme.spacing(3),
@@ -432,7 +435,7 @@ const SiteMapTable = () => {
                 size="small"
                 color="primary"
                 className={classes.iconButton}
-                href={`${getHref('EXPLORE_DATA_PRODUCTS_BY_DOMAIN', usstate.stateCode)}`}
+                href={`${getHref('EXPLORE_DATA_PRODUCTS_BY_STATE', usstate.stateCode)}`}
                 data-selenium="sitemap-table-state-button-exploreDataProducts"
                 title={`Explore data products for ${usstate.stateCode}`}
                 aria-label="Explore data products for this state"
@@ -661,9 +664,9 @@ const SiteMapTable = () => {
 
   const components = {
     Container: Box,
-    Toolbar: props => (
+    Toolbar: toolbarProps => (
       <div className={classes.toolbarContainer} data-selenium="sitemap-table-toolbar">
-        <MTableToolbar {...props} />
+        <MTableToolbar {...toolbarProps} />
       </div>
     ),
     FilterRow: filterRowProps => (
