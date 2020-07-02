@@ -21,7 +21,7 @@ import Typography from '@material-ui/core/Typography';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 
-import DownloadIcon from '@material-ui/icons/GetApp';
+import DownloadIcon from '@material-ui/icons/SaveAlt';
 import InfoIcon from '@material-ui/icons/Info';
 import LeftIcon from '@material-ui/icons/ChevronLeft';
 import RightIcon from '@material-ui/icons/ChevronRight';
@@ -135,6 +135,10 @@ export default function BasicComponents() {
           Contained
         </Button>
       </div>
+
+      {/* ButtonGroup */}
+      <Divider className={classes.divider} />
+      <Typography variant="h4" component="h2" gutterBottom>ButtonGroup</Typography>
       <div className={classes.row}>
         <ButtonGroup size="small">
           <Button>One</Button>
@@ -168,36 +172,6 @@ export default function BasicComponents() {
           <Button>Two</Button>
           <Button>Three</Button>
         </ButtonGroup>
-      </div>
-      <div className={classes.row} style={{ marginBottom: 'unset' }}>
-        <div className={classes.row} style={{ marginRight: Theme.spacing(8) }}>
-          <IconButton size="small">
-            <DownloadIcon />
-          </IconButton>
-          <IconButton>
-            <DownloadIcon fontSize="small" />
-          </IconButton>
-          <IconButton>
-            <DownloadIcon />
-          </IconButton>
-          <IconButton>
-            <DownloadIcon fontSize="large" />
-          </IconButton>
-        </div>
-        <div className={classes.row}>
-          <IconButton disabled size="small">
-            <DownloadIcon />
-          </IconButton>
-          <IconButton disabled>
-            <DownloadIcon fontSize="small" />
-          </IconButton>
-          <IconButton disabled>
-            <DownloadIcon />
-          </IconButton>
-          <IconButton disabled>
-            <DownloadIcon fontSize="large" />
-          </IconButton>
-        </div>
       </div>
 
       {/* Card */}
@@ -261,6 +235,40 @@ export default function BasicComponents() {
         <FormControlLabel label="Switch" control={<Switch checked />} />
         <FormControlLabel label="Switch" control={<Switch disabled />} />
         <FormControlLabel label="Switch" control={<Switch checked disabled />} />
+      </div>
+
+      {/* IconButton */}
+      <Divider className={classes.divider} />
+      <Typography variant="h4" component="h2" gutterBottom>IconButton</Typography>
+      <div className={classes.row} style={{ marginBottom: 'unset' }}>
+        <div className={classes.row} style={{ marginRight: Theme.spacing(8) }}>
+          <IconButton size="small">
+            <DownloadIcon />
+          </IconButton>
+          <IconButton>
+            <DownloadIcon fontSize="small" />
+          </IconButton>
+          <IconButton>
+            <DownloadIcon />
+          </IconButton>
+          <IconButton>
+            <DownloadIcon fontSize="large" />
+          </IconButton>
+        </div>
+        <div className={classes.row}>
+          <IconButton disabled size="small">
+            <DownloadIcon />
+          </IconButton>
+          <IconButton disabled>
+            <DownloadIcon fontSize="small" />
+          </IconButton>
+          <IconButton disabled>
+            <DownloadIcon />
+          </IconButton>
+          <IconButton disabled>
+            <DownloadIcon fontSize="large" />
+          </IconButton>
+        </div>
       </div>
 
       {/* Slider */}

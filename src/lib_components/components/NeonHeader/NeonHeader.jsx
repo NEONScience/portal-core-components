@@ -9,7 +9,7 @@ import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
 
 import NeonLegacyHeader from './NeonLegacyHeader';
 
-const HEADER_JS_URL = 'https://master-7rqtwti-di4alr4iwbwyg.us-2.platformsh.site/themes/custom/neon/build/components/header/header.js';
+const HEADER_JS_URL = 'https://preview.neonscience.org/themes/custom/neon/build/components/header/header.js';
 
 const useStyles = makeStyles(() => ({
   unstickyHeader: {

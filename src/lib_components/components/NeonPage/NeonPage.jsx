@@ -116,7 +116,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const DRUPAL_CSS_URL = 'https://master-7rqtwti-di4alr4iwbwyg.us-2.platformsh.site/themes/custom/neon/build/components/theme/theme.css';
+const DRUPAL_CSS_URL = 'https://preview.neonscience.org/themes/custom/neon/build/components/theme/theme.css';
 
 const NeonPage = (props) => {
   const {

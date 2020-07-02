@@ -32,18 +32,49 @@ import {
 
 const { BaseLayer } = LayersControl;
 
-const boxShadow = '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)';
 const useStyles = makeStyles(theme => ({
   map: {
     width: '100%',
     height: '0px', // Necessary to set a fixed aspect ratio from props (using paddingBottom)
     overflow: 'hidden',
-    boxShadow,
+    '& div.leaflet-control-layers': {
+      borderRadius: '2px',
+      boxShadow: 'unset',
+      border: `1px solid ${Theme.colors.LIGHT_BLUE[500]}`,
+      '&:hover, &:active': {
+        borderColor: Theme.colors.LIGHT_BLUE[400],
+      },
+    },
+    '& div.leaflet-bar': {
+      borderRadius: '2px',
+      boxShadow: 'unset',
+      '& a': {
+        color: Theme.colors.LIGHT_BLUE[500],
+        border: `1px solid ${Theme.colors.LIGHT_BLUE[500]}`,
+        '&:hover, &:active': {
+          color: Theme.colors.LIGHT_BLUE[400],
+          borderColor: Theme.colors.LIGHT_BLUE[400],
+        },
+        '&:first-child': {
+          borderTopLeftRadius: '2px',
+          borderTopRightRadius: '2px',
+        },
+        '&:last-child': {
+          borderTop: 'none',
+          borderBottomLeftRadius: '2px',
+          borderBottomRightRadius: '2px',
+        },
+      },
+    },
     '& div.leaflet-control-attribution': {
-      borderTopLeftRadius: theme.spacing(0.5),
+      borderTopLeftRadius: '2px',
+      marginRight: '26px',
     },
     '& div.leaflet-control-attribution a': {
-      color: theme.palette.secondary.main,
+      color: theme.palette.primary.main,
+    },
+    '& .leaflet-container a': {
+      color: theme.palette.primary.main,
     },
     '& input[type="radio"]': {
       cursor: 'pointer',

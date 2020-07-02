@@ -66,7 +66,7 @@ const useStyles = makeStyles(theme => ({
       margin: 'unset',
     },
     '& div.leaflet-popup-content-wrapper': {
-      borderRadius: '0px !important',
+      borderRadius: '2px !important',
     },
     '& a.leaflet-popup-close-button': {
       top: theme.spacing(0.5),

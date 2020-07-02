@@ -11,7 +11,7 @@ import Collapse from '@material-ui/core/Collapse';
 import HomeIcon from '@material-ui/icons/HomeOutlined';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import DownloadDataIcon from '@material-ui/icons/CloudDownloadOutlined';
+import DownloadDataIcon from '@material-ui/icons/SaveAlt';
 import AboutIcon from '@material-ui/icons/InfoOutlined';
 import ContactUsIcon from '@material-ui/icons/LiveHelpOutlined';
 import ResourcesIcon from '@material-ui/icons/ListAltOutlined';

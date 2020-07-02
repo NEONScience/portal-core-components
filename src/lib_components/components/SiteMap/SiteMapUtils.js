@@ -60,6 +60,7 @@ import domainsShapesJSON from '../../staticJSON/domainsShapes.json';
 
 export const MAP_ZOOM_RANGE = [1, 19];
 
+export const MIN_CONTAINER_HEIGHT = 300;
 export const MIN_TABLE_MAX_BODY_HEIGHT = 100;
 
 // export const MINIMUM_MAP_DIMENSIONS = { width: 300, height: 200 };

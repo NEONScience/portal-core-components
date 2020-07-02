@@ -77,8 +77,8 @@ const deriveRegionSites = (state) => {
 
 // TODO: where to put this?
 const HTML_URLS = {
-  header: 'https://master-7rqtwti-di4alr4iwbwyg.us-2.platformsh.site/neon-assets/partial/header',
-  footer: 'https://master-7rqtwti-di4alr4iwbwyg.us-2.platformsh.site/neon-assets/partial/footer',
+  header: 'https://preview.neonscience.org/neon-assets/partial/header',
+  footer: 'https://preview.neonscience.org/neon-assets/partial/footer',
 };
 
 /**
