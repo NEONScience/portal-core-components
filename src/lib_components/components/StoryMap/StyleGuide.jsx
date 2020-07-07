@@ -1,7 +1,5 @@
 /* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid */
-
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
@@ -12,13 +10,9 @@ import ExampleBlock from '../../../components/ExampleBlock';
 
 import StoryMap from './StoryMap';
 
-export default function StyleGuide(props) {
-  const { onClickHash } = props;
-
+export default function StyleGuide() {
   const FullWidthVisualizationLink = (
-    <Link href="#FullWidthVisualization" onClick={() => onClickHash('#FullWidthVisualization')}>
-      FullWidthVisualization
-    </Link>
+    <Link href="#FullWidthVisualization">FullWidthVisualization</Link>
   );
 
   return (
@@ -66,7 +60,3 @@ import StoryMap from 'portal-core-components/lib/components/StoryMap';
     </React.Fragment>
   );
 }
-
-StyleGuide.propTypes = {
-  onClickHash: PropTypes.func.isRequired,
-};

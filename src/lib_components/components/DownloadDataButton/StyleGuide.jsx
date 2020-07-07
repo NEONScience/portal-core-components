@@ -1,7 +1,5 @@
 /* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid */
-
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
@@ -32,13 +30,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function StyleGuide(props) {
+export default function StyleGuide() {
   const classes = useStyles(Theme);
-  const { onClickHash } = props;
   const downloadDataContextLink = (
     <Link
       href="#DownloadDataContext"
-      onClick={() => onClickHash('#DownloadDataContext')}
     >
       Download Data Context
     </Link>
@@ -169,7 +165,3 @@ const productData = {...};
     </React.Fragment>
   );
 }
-
-StyleGuide.propTypes = {
-  onClickHash: PropTypes.func.isRequired,
-};

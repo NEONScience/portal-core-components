@@ -1,7 +1,5 @@
 /* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid */
-
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
@@ -51,11 +49,10 @@ const NeonContextStateComponent = () => {
   );
 };
 
-export default function StyleGuide(props) {
-  const { onClickHash } = props;
+export default function StyleGuide() {
   const classes = useStyles(Theme);
   const NeonPageLink = (
-    <Link href="#NeonPage" onClick={() => onClickHash('#NeonPage')}>NeonPage</Link>
+    <Link href="#NeonPage">NeonPage</Link>
   );
 
   return (
@@ -246,7 +243,3 @@ export default WrappedFoo;
     </React.Fragment>
   );
 }
-
-StyleGuide.propTypes = {
-  onClickHash: PropTypes.func.isRequired,
-};

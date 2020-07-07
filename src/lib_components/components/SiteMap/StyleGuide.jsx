@@ -17,6 +17,7 @@ import Typography from '@material-ui/core/Typography';
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
+import PropsTable from '../../../components/PropsTable';
 
 import Theme from '../Theme/Theme';
 import SiteMap from './SiteMap';
@@ -38,7 +39,7 @@ const useStyles = makeStyles(theme => ({
 
 const propRows = [
   {
-    prop: 'aspectRatio',
+    name: 'aspectRatio',
     type: 'number',
     default: 'null',
     examples: (
@@ -65,7 +66,7 @@ const propRows = [
     ),
   },
   {
-    prop: 'center',
+    name: 'center',
     type: 'array of exactly two numbers',
     default: '[52.28, -110.75]',
     examples: (
@@ -84,7 +85,7 @@ const propRows = [
     ),
   },
   {
-    prop: 'filterPosition',
+    name: 'filterPosition',
     type: (
       <div>
         string, one of:
@@ -104,7 +105,7 @@ const propRows = [
     ),
   },
   {
-    prop: 'location',
+    name: 'location',
     type: 'string',
     default: 'null',
     description: (
@@ -124,7 +125,7 @@ const propRows = [
     ),
   },
   {
-    prop: 'tileLayer',
+    name: 'tileLayer',
     type: (
       <div>
         string, one of:
@@ -145,7 +146,7 @@ const propRows = [
     ),
   },
   {
-    prop: 'unusableVerticalSpace',
+    name: 'unusableVerticalSpace',
     type: 'integer',
     default: '0',
     examples: (
@@ -172,7 +173,7 @@ const propRows = [
     ),
   },
   {
-    prop: 'view',
+    name: 'view',
     type: (
       <div>
         string, one of:
@@ -190,7 +191,7 @@ const propRows = [
     ),
   },
   {
-    prop: 'zoom',
+    name: 'zoom',
     type: 'integer',
     default: 'null',
     examples: (
@@ -237,7 +238,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
         `}
       </CodeBlock>
 
-      <Typography variant="h5" component="h3" gutterBottom>Usage</Typography>
+      <Typography variant="h4" component="h2" gutterBottom>Usage</Typography>
 
       <DocBlock>
         Embedding a SiteMap requires no props to get the default observatory-scale view with
@@ -265,38 +266,10 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
       </CodeBlock>
 
       <Divider className={classes.divider} />
-      <Typography variant="h6" component="h4" gutterBottom>Props</Typography>
+      <Typography variant="h4" component="h2" gutterBottom>Props</Typography>
 
       <DocBlock>
-        <TableContainer component={Paper} style={{ maxHeight: '70vh' }}>
-          <Table stickyHeader aria-label="props">
-            <TableHead>
-              <TableRow>
-                <TableCell>Prop</TableCell>
-                <TableCell>Type</TableCell>
-                <TableCell>Default</TableCell>
-                <TableCell>Examples</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {propRows.map((row, idx) => (
-                <React.Fragment key={row.prop}>
-                  <TableRow className={idx % 2 ? classes.propTableRowGrey : null}>
-                    <TableCell component="th" scope="row" rowSpan={2}>
-                      <tt>{row.prop}</tt>
-                    </TableCell>
-                    <TableCell>{row.type}</TableCell>
-                    <TableCell><tt>{row.default}</tt></TableCell>
-                    <TableCell>{row.examples ? row.examples : '--'}</TableCell>
-                  </TableRow>
-                  <TableRow className={idx % 2 ? classes.propTableRowGrey : null}>
-                    <TableCell colSpan={4}>{row.description}</TableCell>
-                  </TableRow>
-                </React.Fragment>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <PropsTable props={propRows} />
       </DocBlock>
 
     </React.Fragment>

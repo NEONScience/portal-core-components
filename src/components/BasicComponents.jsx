@@ -43,6 +43,11 @@ const useStyles = makeStyles(theme => ({
       marginRight: theme.spacing(4),
     },
   },
+  typographyContainer: {
+    '& > *': {
+      marginBottom: theme.spacing(3),
+    },
+  },
 }));
 
 const marks = [
@@ -358,6 +363,40 @@ export default function BasicComponents() {
           <ToggleButton value="two">Two</ToggleButton>
           <ToggleButton value="three">Three</ToggleButton>
         </ToggleButtonGroup>
+      </div>
+
+      {/* Typography */}
+      <Divider className={classes.divider} />
+      <Typography variant="h4" component="h2" gutterBottom>Typography</Typography>
+
+      <div className={classes.typographyContainer}>
+        <Typography variant="h1" gutterBottom>h1. Heading</Typography>
+        <Typography variant="h2" gutterBottom>h2. Heading</Typography>
+        <Typography variant="h3">h3. Heading</Typography>
+        <Typography variant="h4">h4. Heading</Typography>
+        <Typography variant="h5">h5. Heading</Typography>
+        <Typography variant="h6">h6. Heading</Typography>
+        <Typography variant="subtitle1">
+          subtitle1. Lorem Ipsum Dolor Sit Amet
+        </Typography>
+        <Typography variant="subtitle2">
+          subtitle2. Lorem Ipsum Dolor Sit Amet
+        </Typography>
+        <Typography variant="body1">
+          body1. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti?
+        </Typography>
+        <Typography variant="body2">
+          body2. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti?
+        </Typography>
+        <Typography variant="button" display="block" gutterBottom>
+          button text
+        </Typography>
+        <Typography variant="caption" display="block" gutterBottom>
+          caption text
+        </Typography>
+        <Typography variant="overline" display="block" gutterBottom>
+          overline text
+        </Typography>
       </div>
 
     </React.Fragment>

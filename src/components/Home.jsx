@@ -1,7 +1,5 @@
 /* eslint react/jsx-one-expression-per-line: 0, max-len: 0 */
-
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
@@ -18,9 +16,8 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Home(props) {
+export default function Home() {
   const classes = useStyles(Theme);
-  const { onClickHash } = props;
   const styleGuideUrl = 'https://raw.githubusercontent.com/NEONScience/portal-core-components/master/reference/NSF-NEON-BRAND.GUIDELINES.pdf';
 
   return (
@@ -62,14 +59,9 @@ export default function Home(props) {
       <DocBlock>
         A custom Material UI Theme is also present throught this library. The theme is based
         on guidelines laid out in the <Link href={styleGuideUrl}>NEON Style Guide</Link>.
-        See <Link href="#Theme" onClick={() => onClickHash('#Theme')}>Theme</Link> for complete
-        details.
+        See <Link href="#Theme">Theme</Link> for complete details.
       </DocBlock>
 
     </React.Fragment>
   );
 }
-
-Home.propTypes = {
-  onClickHash: PropTypes.func.isRequired,
-};

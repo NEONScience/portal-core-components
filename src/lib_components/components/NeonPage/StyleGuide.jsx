@@ -1,7 +1,5 @@
 /* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid */
-
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -14,6 +12,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
+import PropsTable from '../../../components/PropsTable';
 
 import NeonPage from './NeonPage';
 import Theme from '../Theme/Theme';
@@ -27,11 +26,216 @@ const useStyles = makeStyles(theme => ({
     overflow: 'hidden',
     border: `1px dotted ${theme.palette.primary.main}`,
   },
+  propTableRowGrey: {
+    backgroundColor: theme.palette.grey[50],
+  },
 }));
 
-export default function StyleGuide(props) {
+const propRows = [
+  // breadcrumbs
+  {
+    name: 'breadcrumbs',
+    type: 'array of objects',
+    default: 'null',
+    examples: (
+      <CodeBlock>
+        {`
+[
+  { name: 'Foo', href: '/foo' },
+  { name: 'Bar', href: '/foo/bar' },
+  { name: 'Current Page' },
+]
+        `}
+      </CodeBlock>
+    ),
+    description: (
+      <p>
+        Array of objects describing the chain of breadcrumb links to show at the top of the page,
+        above the title. Each object in the array must have a <tt>name</tt> string, and may
+        optionally have an <tt>href</tt> string. When the <tt>href</tt> is not present the
+        breadcrumb will appear as static text, not a link (this is usually intended for the last
+        crumb in the chain representing the current page).
+      </p>
+    ),
+  },
+  // error
+  {
+    name: 'error',
+    type: 'string',
+    default: 'null',
+    examples: '"Error message"',
+    description: (
+      <p>
+        An error message to be shown as a non-dismissable overlay over the page.
+      </p>
+    ),
+  },
+  // loading
+  {
+    name: 'loading',
+    type: 'string',
+    default: 'null',
+    examples: '"Loading page..."',
+    description: (
+      <p>
+        A loading message to be shown as a non-dismissable overlay with an indeterminate
+        circular progress indicator over the page. If <tt>progress</tt> prop is set then the
+        indicator will be determinate and specific.
+      </p>
+    ),
+  },
+  // notification
+  {
+    name: 'notification',
+    type: 'string',
+    default: 'null',
+    examples: '"This page has been updated!"',
+    description: (
+      <p>
+        A message to show in a dismissable notification element at the bottom right corner of the
+        page (in addition to any LifeRay notifcations that may be loaded).
+      </p>
+    ),
+  },
+  // outerPageContainerMaxWidth
+  {
+    name: 'outerPageContainerMaxWidth',
+    type: 'string',
+    default: '"2000px"',
+    description: (
+      <p>
+        CSS <tt>maxWidth</tt> setting to be applied to the outermost content container of the page.
+        By default, at 2000px, the content on any NeonPage will not exceed that width. Override with
+        a discrete pixel value or set to <tt>null</tt> to allow for arbitrarily wide content.
+      </p>
+    ),
+  },
+  // progress
+  {
+    name: 'progress',
+    type: 'number',
+    default: 'null',
+    description: (
+      <p>
+        An integer between <tt>0</tt> and <tt>100</tt> indicating the quantified progress of loading
+        the page. Must be combined with the <tt>loading</tt> prop to be visible.
+      </p>
+    ),
+  },
+  // sidebarLinks
+  {
+    name: 'sidebarLinks',
+    type: 'array of objects',
+    default: 'null',
+    examples: (
+      <CodeBlock>
+        {`
+import FooIcon from '@material-ui/icons/Foo';
+import MyComponent from './MyComponent';
+
+const sidebarLinks = [
+  { name: 'Section A' },
+  { name: 'Section B', pageTitle: 'This is B', hash: '#sectionB' },
+  { name: 'Section C', hash: '#sectionC', icon: FooIcon },
+  { name: 'Section D', hash: '#sectionD', component: MyComponent },
+];
+        `}
+      </CodeBlock>
+    ),
+    description: (
+      <React.Fragment>
+        <p>
+          Array of objects describing links to appear in the page sidebar navigation.
+        </p>
+        <p>
+          Each object requires a <tt>name</tt> string, which is what appears visually in the
+          sidebar. The optional <tt>hash</tt> string is used to route internally around the page to
+          elements by id (if not supplied then defaults to <tt>&apos;#&apos;</tt>).
+        </p>
+        <p>
+          Supply an icon component to the optional <tt>icon</tt> property to show an icon with the
+          name of the link in the sidebar. Finally, the <tt>component</tt> attribute can take an
+          arbitrary React component to override the default behavior of standard HTML named-anchor
+          linking and instead replace all page content with the associated component. This latter
+          approach is how this Portal Core Components documentation functions.
+        </p>
+        <p>
+          Finally, when <tt>sidebarLinksAsStandaloneChildren</tt> is <tt>true</tt>, the title of
+          the page can be overridden on a per-sidebar-link basis by setting a <tt>pageTitle</tt>.
+        </p>
+      </React.Fragment>
+    ),
+  },
+  // sidebarLinksAsStandaloneChildren
+  {
+    name: 'sidebarLinksAsStandaloneChildren',
+    type: 'boolean',
+    default: 'false',
+    description: (
+      <p>
+        Set to <tt>true</tt> to have the NeonPage override any children supplied to it and instead
+        render only the current component in <tt>sidebarLinks</tt> at a time. This behavior is
+        exhibited here in the Portal Core Components documentation. When using this mode it is still
+        necessary to provide the default component as a child to the NeonPage instance, in addition
+        to providing a non-empty <tt>sidebarLinks</tt> prop where every object in the array has a
+        defined <tt>component</tt>.
+      </p>
+    ),
+  },
+  // sidebarTitle
+  {
+    name: 'sidebarTitle',
+    type: 'number',
+    default: 'null',
+    examples: '"Page Links"',
+    description: (
+      <p>
+        When <tt>sidebarLinks</tt> are defined the sidebar will feature a title at the top to
+        maintain context. By default the <tt>title</tt> prop is used. Define this prop when the
+        title that should appear in the sidebar should differ from the one used for the NeonPage.
+      </p>
+    ),
+  },
+  // subtitle
+  {
+    name: 'subtitle',
+    type: 'string',
+    default: 'null',
+    description: (
+      <p>
+        Optional page-level title to appear below the main title (set by the <tt>title</tt>) prop.
+      </p>
+    ),
+  },
+  // title
+  {
+    name: 'title',
+    type: 'string',
+    default: 'null',
+    description: (
+      <p>
+        Optional page-level title to appear prominently at the top of the page.
+      </p>
+    ),
+  },
+  // useCoreHeader
+  {
+    name: 'useCoreHeader',
+    type: 'boolean',
+    default: 'false',
+    description: (
+      <p>
+        Boolean to determine the type of page header and footer to use. When false (default) will
+        attempt to fetch the Drupal header and footer, falling back to the original core-components
+        header and footer if the fetch fails. When set to true will skip the attempt to fetch the
+        Drupal assets and immediately use the fallback legacy header/footer.
+      </p>
+    ),
+  },
+];
+
+export default function StyleGuide() {
   const classes = useStyles(Theme);
-  const { onClickHash } = props;
 
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -59,19 +263,21 @@ export default function StyleGuide(props) {
     style: { zIndex: 10000 },
   };
 
+  const skeletonsLink = (
+    <Link href="https://material-ui.com/components/skeleton/">Material UI Skeletons</Link>
+  );
+
   return (
     <React.Fragment>
 
       <DocBlock>
-        The standard component for generating a page on the Data Portal with
-        a consistent header, footer, and page styles.
+        The standard component for generating a page on the Data Portal with a consistent header,
+        footer, and page styles.
       </DocBlock>
       <DocBlock>
-        NeonPage encapsulates the&nbsp;
-        <Link href="#Theme" onClick={() => onClickHash('#Theme')}>NEON Material UI Theme</Link>,
-        eliminating the need to put ThemeProvider and CssBaseline boilerplate in
-        individual pages. It also affords props for universal page features like
-        titles and breadcrumbs.
+        NeonPage encapsulates the <Link href="#Theme">NEON Material UI Theme</Link>, eliminating
+        the need to put ThemeProvider and CssBaseline boilerplate in individual pages. It also
+        affords props for universal page features like titles, breadcrumbs, and sidebar navigation.
       </DocBlock>
       <CodeBlock>
         {`
@@ -79,11 +285,10 @@ import NeonPage from 'portal-core-components/lib/components/NeonPage';
         `}
       </CodeBlock>
 
-      <Typography variant="h5" component="h3" gutterBottom>Usage</Typography>
+      <Typography variant="h4" component="h2" gutterBottom>Usage</Typography>
 
       <DocBlock>
-        A NeonPage can be invoked with no props at all, containing only child
-        node(s) for content.
+        A NeonPage can be invoked with no props at all, containing only child node(s) for content.
       </DocBlock>
       <ExampleBlock>
         <div className={classes.example}>
@@ -109,7 +314,7 @@ import NeonPage from 'portal-core-components/lib/components/NeonPage';
       </CodeBlock>
 
       <Divider className={classes.divider} />
-      <Typography variant="h6" component="h4" gutterBottom>Title</Typography>
+      <Typography variant="h5" component="h3" gutterBottom>Title</Typography>
 
       <DocBlock>
         Use the <tt>title</tt> prop to set a page title consistent with the
@@ -131,7 +336,7 @@ import NeonPage from 'portal-core-components/lib/components/NeonPage';
       </CodeBlock>
 
       <Divider className={classes.divider} />
-      <Typography variant="h6" component="h4" gutterBottom>Breadcrumbs</Typography>
+      <Typography variant="h5" component="h3" gutterBottom>Breadcrumbs</Typography>
 
       <DocBlock>
         Use the <tt>breadcrumbs</tt> prop to set a breadcrumbs nav element above
@@ -170,7 +375,7 @@ export default function MyNeonPage() {
       </CodeBlock>
 
       <Divider className={classes.divider} />
-      <Typography variant="h6" component="h4" gutterBottom>Loading</Typography>
+      <Typography variant="h5" component="h3" gutterBottom>Loading</Typography>
 
       <DocBlock>
         Use the <tt>loading</tt> prop to show a generic common full-page loading
@@ -227,7 +432,7 @@ export default function MyNeonPage() {
       </DocBlock>
 
       <Divider className={classes.divider} />
-      <Typography variant="h6" component="h4" gutterBottom>Error</Typography>
+      <Typography variant="h5" component="h3" gutterBottom>Error</Typography>
 
       <DocBlock>
         Use the <tt>error</tt> prop to show a generic common full-page error
@@ -276,7 +481,7 @@ export default function MyNeonPage() {
       </CodeBlock>
 
       <Divider className={classes.divider} />
-      <Typography variant="h6" component="h4" gutterBottom>Notifications</Typography>
+      <Typography variant="h5" component="h3" gutterBottom>Notifications</Typography>
 
       <DocBlock>
         Any NeonPage instance will, upon loading, query the notifications endpoint for any
@@ -308,14 +513,13 @@ const notification = 'Here is a sample NeonPage notification with a <a href="htt
       </CodeBlock>
 
       <Divider className={classes.divider} />
-      <Typography variant="h6" component="h4" gutterBottom>Loading With Skeletons</Typography>
+      <Typography variant="h5" component="h3" gutterBottom>Loading With Skeletons</Typography>
 
       <DocBlock>
-        The NeonPage is designed to show its content, whatever it is, regardless of
-        the loading error state. One way to take advantage of this is to provide
-        content composed of
-        <Link href="https://material-ui.com/components/skeleton/">Material UI Skeletons</Link>
-        until loaded. The example below shows what this might look like during a loading state.
+        The NeonPage is designed to show its content, whatever it is, regardless of the loading
+        or error states. One way to take advantage of this is to provide  content composed
+        of {skeletonsLink} until loaded. The example below shows what this might look like during
+        a loading state.
       </DocBlock>
       <DocBlock>
         The title will automatically render as a skeleton if either the <tt>loading</tt> or
@@ -380,10 +584,13 @@ export default function MyNeonPage() {
         `}
       </CodeBlock>
 
+      <Divider className={classes.divider} />
+      <Typography variant="h4" component="h2" gutterBottom>Props</Typography>
+
+      <DocBlock>
+        <PropsTable props={propRows} />
+      </DocBlock>
+
     </React.Fragment>
   );
 }
-
-StyleGuide.propTypes = {
-  onClickHash: PropTypes.func.isRequired,
-};

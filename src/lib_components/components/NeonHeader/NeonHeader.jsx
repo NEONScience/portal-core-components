@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { forwardRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import HTMLReactParser from 'html-react-parser';
 
@@ -12,6 +12,9 @@ import NeonLegacyHeader from './NeonLegacyHeader';
 const HEADER_JS_URL = 'https://preview.neonscience.org/themes/custom/neon/build/components/header/header.js';
 
 const useStyles = makeStyles(() => ({
+  skeletonHeader: {
+    boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.25), 0px 1px 1px rgba(0, 0, 0, 0.25)',
+  },
   unstickyHeader: {
     paddingTop: 'unset !important',
     '& > header': {
@@ -20,7 +23,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const NeonHeader = (props) => {
+const NeonHeader = forwardRef((props, ref) => {
   const {
     useCoreHeader,
     unstickyDrupalHeader,
@@ -57,7 +60,7 @@ const NeonHeader = (props) => {
   // Render Loading
   if (renderMode === 'loading') {
     return (
-      <header id="header">
+      <header ref={ref} id="header" className={classes.skeletonHeader}>
         <Skeleton variant="rect" height="125px" width="100%" />
       </header>
     );
@@ -66,15 +69,19 @@ const NeonHeader = (props) => {
   // Render Drupal
   if (renderMode === 'drupal') {
     return (
-      <header id="header" className={unstickyDrupalHeader ? classes.unstickyHeader : null}>
+      <header
+        ref={ref}
+        id="header"
+        className={unstickyDrupalHeader ? classes.unstickyHeader : null}
+      >
         {HTMLReactParser(headerHTML.replace(/ value=""/g, ' initialValue=""'))}
       </header>
     );
   }
 
   // Render Legacy
-  return <NeonLegacyHeader {...props} />;
-};
+  return <NeonLegacyHeader {...props} ref={ref} />;
+});
 
 NeonHeader.propTypes = {
   ...NeonLegacyHeader.propTypes,

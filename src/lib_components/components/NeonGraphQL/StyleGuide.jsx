@@ -1,10 +1,8 @@
 /* eslint react/jsx-one-expression-per-line: 0 */
-
 import { of } from 'rxjs';
 import { map, switchMap, catchError } from 'rxjs/operators';
 
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
@@ -34,17 +32,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function StyleGuide(props) {
+export default function StyleGuide() {
   const classes = useStyles(Theme);
-  const { onClickHash } = props;
   const rxjsObservableUrl = 'https://rxjs-dev.firebaseapp.com/guide/observable';
   const dataProductAvailabilityLink = (
-    <Link
-      href="#DataProductAvailability"
-      onClick={() => onClickHash('#DataProductAvailability')}
-    >
-      Data Product Availability Chart
-    </Link>
+    <Link href="#DataProductAvailability">Data Product Availability Chart</Link>
   );
 
   // getAllDataProducts
@@ -524,7 +516,3 @@ const myComponent = () => {
     </React.Fragment>
   );
 }
-
-StyleGuide.propTypes = {
-  onClickHash: PropTypes.func.isRequired,
-};

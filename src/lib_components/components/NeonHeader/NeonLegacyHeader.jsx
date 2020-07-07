@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -17,7 +17,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const NeonHeader = (props) => {
+const NeonHeader = forwardRef((props, ref) => {
   const classes = useStyles();
   const { notifications, onShowNotifications } = props;
 
@@ -26,7 +26,7 @@ const NeonHeader = (props) => {
   } : {});
 
   return (
-    <div className={classes.root} data-selenium="neon-header">
+    <div ref={ref} className={classes.root} data-selenium="neon-header">
       <NeonUtilityBar />
       <NeonMenu
         loginPath={getFullRoute(ROUTES.LOGIN)}
@@ -37,7 +37,7 @@ const NeonHeader = (props) => {
       <Divider />
     </div>
   );
-};
+});
 
 NeonHeader.propTypes = {
   notifications: PropTypes.arrayOf(

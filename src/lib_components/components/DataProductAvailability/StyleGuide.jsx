@@ -1,7 +1,5 @@
 /* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid, max-len */
-
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
@@ -27,20 +25,15 @@ const useStyles = makeStyles(theme => ({
 const sites = ['ARIK', 'COMO', 'CPER', 'NIWO', 'RMNP', 'STER', 'UNDE', 'WLOU'];
 const dateRange = ['2018-01', '2018-12'];
 
-export default function StyleGuide(props) {
+export default function StyleGuide() {
   const classes = useStyles(Theme);
-  const { onClickHash } = props;
 
   const DownloadDataContextLink = (
-    <Link href="#DownloadDataContext" onClick={() => onClickHash('#DownloadDataContext')}>
-      DownloadDataContext
-    </Link>
+    <Link href="#DownloadDataContext">DownloadDataContext</Link>
   );
 
   const DownloadDataButtonLink = (
-    <Link href="#DownloadDataButton" onClick={() => onClickHash('#DownloadDataButton')}>
-      DownloadDataButton
-    </Link>
+    <Link href="#DownloadDataButton">DownloadDataButton</Link>
   );
 
   return (
@@ -332,7 +325,3 @@ const productData = {...};
     </React.Fragment>
   );
 }
-
-StyleGuide.propTypes = {
-  onClickHash: PropTypes.func.isRequired,
-};

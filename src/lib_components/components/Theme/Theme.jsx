@@ -131,7 +131,7 @@ const baseTheme = createMuiTheme({
   colors: COLORS,
   palette: {
     background: {
-      default: PALETTES.GREY[50],
+      default: '#fff',
     },
     primary: PALETTES.PRIMARY,
     secondary: PALETTES.SECONDARY,
@@ -590,6 +590,22 @@ const baseTheme = createMuiTheme({
     MuiTableCell: {
       root: {
         fontSize: '0.8rem',
+        '&:not(:last-child)': {
+          borderRight: `1px solid ${COLORS.GREY[200]}`,
+        },
+      },
+      head: {
+        color: '#fff',
+        backgroundColor: COLORS.LIGHT_BLUE[500],
+        borderBottom: `1.5px solid ${COLORS.NEON_BLUE[700]}`,
+        '&:not(:last-child)': {
+          borderRight: `1px solid ${COLORS.NEON_BLUE[700]}`,
+        },
+      },
+      stickyHeader: {
+        color: '#fff',
+        backgroundColor: COLORS.LIGHT_BLUE[500],
+        borderBottom: `1.5px solid ${COLORS.NEON_BLUE[700]}`,
       },
     },
     MuiTablePagination: {
