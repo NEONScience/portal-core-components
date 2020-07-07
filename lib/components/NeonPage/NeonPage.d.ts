@@ -19,6 +19,7 @@ declare namespace NeonPage {
             component: PropTypes.Requireable<object>;
         }> | null | undefined)[]>;
         export const sidebarLinksAsStandaloneChildren: PropTypes.Requireable<boolean>;
+        export const sidebarSubtitle: PropTypes.Requireable<string>;
         export const sidebarTitle: PropTypes.Requireable<string>;
         export const subtitle: PropTypes.Requireable<string>;
         export const title: PropTypes.Requireable<string>;
@@ -43,6 +44,8 @@ declare namespace NeonPage {
         export { sidebarLinks_1 as sidebarLinks };
         const sidebarLinksAsStandaloneChildren_1: boolean;
         export { sidebarLinksAsStandaloneChildren_1 as sidebarLinksAsStandaloneChildren };
+        const sidebarSubtitle_1: null;
+        export { sidebarSubtitle_1 as sidebarSubtitle };
         const sidebarTitle_1: null;
         export { sidebarTitle_1 as sidebarTitle };
         const subtitle_1: null;

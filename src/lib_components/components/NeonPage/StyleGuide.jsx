@@ -182,6 +182,18 @@ const sidebarLinks = [
       </p>
     ),
   },
+  // sidebarSubtitle
+  {
+    name: 'sidebarSubtitle',
+    type: 'number',
+    default: 'null',
+    examples: '"Additional Info"',
+    description: (
+      <p>
+        An optional smaller title to show below the title of the of the sidebar.
+      </p>
+    ),
+  },
   // sidebarTitle
   {
     name: 'sidebarTitle',

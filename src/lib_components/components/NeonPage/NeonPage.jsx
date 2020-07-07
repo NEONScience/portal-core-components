@@ -102,7 +102,7 @@ const useStyles = makeStyles(theme => ({
   sidebarLinksContainer: {
     // overflowY: 'scroll',
     backgroundColor: COLORS.GREY[50],
-    padding: theme.spacing(5),
+    padding: theme.spacing(5, 4),
     [theme.breakpoints.up('md')]: {
       height: '100%',
       width: `${SIDEBAR_WIDTH}px`,
@@ -110,7 +110,7 @@ const useStyles = makeStyles(theme => ({
     },
     [theme.breakpoints.down('sm')]: {
       width: '100%',
-      padding: theme.spacing(2.5),
+      padding: theme.spacing(2.5, 2),
       position: 'sticky',
       top: '0px',
       boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.25), 0px 1px 1px rgba(0, 0, 0, 0.25)',
@@ -230,6 +230,7 @@ const NeonPage = (props) => {
     progress,
     sidebarLinks,
     sidebarLinksAsStandaloneChildren: sidebarLinksAsStandaloneChildrenProp,
+    sidebarSubtitle,
     sidebarTitle,
     subtitle,
     title,
@@ -300,11 +301,12 @@ const NeonPage = (props) => {
       }));
       // Determine the current scrolled-to hash. If at the max scroll always go to the last hash.
       // Otherwise choose from scroll position relative to scroll breakpoints.
+      const detectionBuffer = 80; // Extra pixels to highlight the next link when we're close enough
       const currentScrolledHash = isAtMaxScroll()
         ? scrollBreaks[scrollBreaks.length - 1].hash
         : scrollBreaks.reduce((acc, curr) => (
-          (curr.y !== -1 && window.scrollY >= curr.y) ? curr.hash : acc
-        ), '#');
+          (curr.y !== -1 && window.scrollY >= curr.y - detectionBuffer) ? curr.hash : acc
+        ), sidebarLinks[0].hash || '#');
       if (currentScrolledHash !== currentSidebarHash) {
         setCurrentSidebarHash(currentScrolledHash);
       }
@@ -493,12 +495,21 @@ const NeonPage = (props) => {
 
   const renderSidebarLinks = () => {
     if (!hasSidebar) { return null; }
+    const subtitleStyle = { color: COLORS.GREY[300], marginTop: Theme.spacing(1) };
     const sideBarTitle = !sidebarTitle && !title ? null : (
-      <Typography variant="h5" component="h3" style={{ fontWeight: 700 }}>
-        {sidebarTitle || title}
-      </Typography>
+      <div>
+        <Typography variant="h5" component="h3" style={{ fontWeight: 700 }}>
+          {sidebarTitle || title}
+        </Typography>
+        {!sidebarSubtitle ? null : (
+          <Typography variant="subtitle2" component="h4" style={subtitleStyle}>
+            {sidebarSubtitle}
+          </Typography>
+        )}
+      </div>
     );
     const renderLink = (link, standalone = false) => {
+      if (!link) { return null; }
       const { name, hash = '#', icon: IconComponent } = link;
       const icon = IconComponent ? <IconComponent className={classes.sidebarLinkIcon} /> : null;
       return (
@@ -640,6 +651,7 @@ NeonPage.propTypes = {
     }),
   ),
   sidebarLinksAsStandaloneChildren: PropTypes.bool,
+  sidebarSubtitle: PropTypes.string,
   sidebarTitle: PropTypes.string,
   subtitle: PropTypes.string,
   title: PropTypes.string,
@@ -664,6 +676,7 @@ NeonPage.defaultProps = {
   progress: null,
   sidebarLinks: null,
   sidebarLinksAsStandaloneChildren: false,
+  sidebarSubtitle: null,
   sidebarTitle: null,
   subtitle: null,
   title: null,
