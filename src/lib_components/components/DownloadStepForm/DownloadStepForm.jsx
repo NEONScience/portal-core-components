@@ -28,7 +28,7 @@ import SelectAllIcon from '@material-ui/icons/DoneAll';
 import SelectNoneIcon from '@material-ui/icons/Clear';
 import SelectFilteredIcon from '@material-ui/icons/FilterList';
 import ClearFiltersIcon from '@material-ui/icons/DeleteSweep';
-import ErrorIcon from '@material-ui/icons/ReportProblem';
+import WarningIcon from '@material-ui/icons/Warning';
 import ExploreIcon from '@material-ui/icons/Explore';
 
 import { CopyToClipboard } from 'react-copy-to-clipboard';
@@ -373,7 +373,7 @@ export default function DownloadStepForm(props) {
         <Grid item xs={12}>
           <Card style={{ marginBottom: Theme.spacing(2), backgroundColor: COLORS.GOLD[300] }}>
             <CardContent className={classes.startFlex} style={{ justifyContent: 'center' }}>
-              <ErrorIcon
+              <WarningIcon
                 fontSize="large"
                 className={classes.calloutIcon}
                 style={{ color: COLORS.GOLD[800] }}
@@ -391,7 +391,7 @@ export default function DownloadStepForm(props) {
       const components = {
         Container: Box,
         Toolbar: toolbarProps => (
-          <Grid container spacing={2} alignItems="flex-start">
+          <Grid container spacing={2} alignItems="flex-start" style={{ marginBottom: '24px' }}>
             <Grid item xs={12} md={6}>
               <div style={{ marginBottom: Theme.spacing(1) }}>
                 <ToggleButtonGroup

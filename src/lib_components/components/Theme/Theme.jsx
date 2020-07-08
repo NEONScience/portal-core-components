@@ -189,6 +189,9 @@ const baseTheme = createMuiTheme({
     MuiBackdrop: {
       timeout: 0,
     },
+    MuiBreadcrumbs: {
+      separator: '/',
+    },
     MuiButton: {
       color: 'primary',
     },
@@ -227,6 +230,16 @@ const baseTheme = createMuiTheme({
     MuiBackdrop: {
       root: {
         zIndex: 1900,
+      },
+    },
+    MuiBreadcrumbs: {
+      root: {
+        padding: '8px 0px',
+      },
+      separator: {
+        fontSize: '1.1rem',
+        fontWeight: 700,
+        color: COLORS.GREY[200],
       },
     },
     MuiButton: {
@@ -596,7 +609,7 @@ const baseTheme = createMuiTheme({
       },
       head: {
         color: '#fff',
-        backgroundColor: COLORS.LIGHT_BLUE[500],
+        backgroundColor: `${COLORS.LIGHT_BLUE[500]} !important`,
         borderBottom: `1.5px solid ${COLORS.NEON_BLUE[700]}`,
         '&:not(:last-child)': {
           borderRight: `1px solid ${COLORS.NEON_BLUE[700]}`,
@@ -606,6 +619,21 @@ const baseTheme = createMuiTheme({
         color: '#fff',
         backgroundColor: COLORS.LIGHT_BLUE[500],
         borderBottom: `1.5px solid ${COLORS.NEON_BLUE[700]}`,
+      },
+    },
+    MuiTableSortLabel: {
+      root: {
+        '&:hover, &:active': {
+          color: COLORS.LIGHT_BLUE[100],
+          textDecoration: 'underline',
+        },
+      },
+      active: {
+        color: `${COLORS.LIGHT_BLUE[100]} !important`,
+        textDecoration: 'underline',
+        '& svg': {
+          color: `${COLORS.LIGHT_BLUE[100]} !important`,
+        },
       },
     },
     MuiTablePagination: {

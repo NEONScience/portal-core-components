@@ -210,7 +210,9 @@ export default function DownloadDataDialog() {
   */
   const renderSizeEstimate = () => {
     const alignRight = { style: { textAlign: 'right' } };
-    const subtitleStyle = { style: { lineHeight: '1rem' } };
+    const subtitleStyle = {
+      style: { lineHeight: '1rem', fontSize: '0.9rem', marginBottom: '4px' },
+    };
     if (
       (fromManifest && manifest.status === 'awaitingFetchCall')
       || (fromAOPManifest && !s3Files.isValid)
@@ -235,20 +237,29 @@ export default function DownloadDataDialog() {
       const bytes = getSizeEstimateBytes();
       const uncompressed = fromAOPManifest ? ' (uncompressed)' : '';
       let estimateColor = bytes > DOWNLOAD_SIZE_WARN ? COLORS.GOLD[300] : 'inherit';
+      const estimateIcon = bytes > DOWNLOAD_SIZE_WARN
+        ? <WarningIcon style={{ marginRight: '8px', marginBottom: '-5px' }} />
+        : null;
       /* eslint-disable react/jsx-one-expression-per-line */
       if (belowSm) {
         estimateColor = bytes > DOWNLOAD_SIZE_WARN ? COLORS.GOLD[500] : 'inherit';
         return (
           <Typography variant="body2">
             Estimated size{uncompressed}:&nbsp;
-            <span style={{ fontWeight: 700, color: estimateColor }}>{formatBytes(bytes)}</span>
+            <span style={{ fontWeight: 700, color: estimateColor }}>
+              {estimateIcon}
+              {formatBytes(bytes)}
+            </span>
           </Typography>
         );
       }
       return (
         <div {...alignRight}>
           <Typography variant="subtitle1" {...subtitleStyle}>Estimated size{uncompressed}</Typography>
-          <Typography variant="h5" style={{ color: estimateColor }}>{formatBytes(bytes)}</Typography>
+          <Typography variant="h5" style={{ color: estimateColor }}>
+            {estimateIcon}
+            {formatBytes(bytes)}
+          </Typography>
         </div>
       );
       /* eslint-enable react/jsx-one-expression-per-line */

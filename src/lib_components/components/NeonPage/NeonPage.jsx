@@ -30,6 +30,8 @@ import Typography from '@material-ui/core/Typography';
 import CollapseIcon from '@material-ui/icons/ExpandLess';
 import ErrorIcon from '@material-ui/icons/Warning';
 import ExpandIcon from '@material-ui/icons/ExpandMore';
+import HomeIcon from '@material-ui/icons/Home';
+
 import Skeleton from '@material-ui/lab/Skeleton';
 
 import Theme, { COLORS } from '../Theme/Theme';
@@ -251,13 +253,14 @@ const NeonPage = (props) => {
   */
   const hasSidebar = Array.isArray(sidebarLinks) && sidebarLinks.length > 0;
   // sidebarLinksAsStandaloneChildren can only be true if all sidebar links have a defined component
-  const sidebarLinksAsStandaloneChildren = sidebarLinksAsStandaloneChildrenProp
+  const sidebarLinksAsStandaloneChildren = hasSidebar && sidebarLinksAsStandaloneChildrenProp
     ? sidebarLinks.every(link => link.component)
     : false;
   const sidebarHashMap = !hasSidebar ? {} : Object.fromEntries(
     sidebarLinks.map((link, idx) => [link.hash || '#', idx]),
   );
-  const [currentSidebarHash, setCurrentSidebarHash] = useState('#');
+  const initialCurrectSidebarHash = hasSidebar ? sidebarLinks[0].hash || '#' : '#';
+  const [currentSidebarHash, setCurrentSidebarHash] = useState(initialCurrectSidebarHash);
   const [hashInitialized, setHashInitialized] = useState(false);
   const [sidebarExpanded, setSidebarExpanded] = useState(false); // for small viewports only
 
@@ -447,13 +450,11 @@ const NeonPage = (props) => {
 
   const renderBreadcrumbs = () => (!breadcrumbs.length ? null : (
     <Breadcrumbs
-      separator="/"
       aria-label="Breadcrumbs"
-      variant="overline"
       data-selenium="neon-page.breadcrumbs"
     >
       <Link key={uniqueId()} href="/">
-        Home
+        <HomeIcon title="Home" fontSize="small" style={{ marginBottom: '-4px' }} />
       </Link>
       {breadcrumbs.map(
         (breadcrumb, idx) => (idx !== breadcrumbs.length - 1

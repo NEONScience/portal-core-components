@@ -539,9 +539,7 @@ const notification = 'Here is a sample NeonPage notification with a <a href="htt
       </DocBlock>
       <ExampleBlock>
         <div className={classes.example} style={{ maxHeight: '600px', overflowY: 'scroll' }}>
-          <NeonPage
-            breadcrumbs={breadcrumbs}
-          >
+          <NeonPage breadcrumbs={breadcrumbs}>
             <Grid container spacing={3}>
               {skeletionGrid}
               {skeletionGrid}

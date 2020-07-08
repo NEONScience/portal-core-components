@@ -120,8 +120,14 @@ const sidebarLinks = [
 ];
 
 export default function App() {
+  const breadcrumbs = [
+    { name: 'Breadcrumb 1', href: '/bc1' },
+    { name: 'Breadcrumb 2', href: '/bc2' },
+    { name: 'My Neon Page' },
+  ];
   return (
     <NeonPage
+      breadcrumbs={breadcrumbs}
       title="Portal Core Components"
       sidebarLinks={sidebarLinks}
       sidebarLinksAsStandaloneChildren
