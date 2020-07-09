@@ -11,6 +11,8 @@ declare namespace NeonPage {
         export const notification: PropTypes.Requireable<string>;
         export const outerPageContainerMaxWidth: PropTypes.Requireable<string>;
         export const progress: PropTypes.Requireable<number>;
+        export { children as sidebarContent };
+        export const sidebarContentClassName: PropTypes.Requireable<string>;
         export const sidebarLinks: PropTypes.Requireable<(PropTypes.InferProps<{
             name: PropTypes.Validator<string>;
             pageTitle: PropTypes.Requireable<string>;
@@ -21,11 +23,13 @@ declare namespace NeonPage {
         export const sidebarLinksAsStandaloneChildren: PropTypes.Requireable<boolean>;
         export const sidebarSubtitle: PropTypes.Requireable<string>;
         export const sidebarTitle: PropTypes.Requireable<string>;
+        export const sidebarWidth: PropTypes.Requireable<number>;
         export const subtitle: PropTypes.Requireable<string>;
         export const title: PropTypes.Requireable<string>;
         export const useCoreHeader: PropTypes.Requireable<boolean>;
         export const unstickyDrupalHeader: PropTypes.Requireable<boolean>;
-        export const children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+        const children_1: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+        export { children_1 as children };
     }
     export namespace defaultProps {
         const breadcrumbs_1: never[];
@@ -40,6 +44,9 @@ declare namespace NeonPage {
         export { outerPageContainerMaxWidth_1 as outerPageContainerMaxWidth };
         const progress_1: null;
         export { progress_1 as progress };
+        export const sidebarContent: null;
+        const sidebarContentClassName_1: null;
+        export { sidebarContentClassName_1 as sidebarContentClassName };
         const sidebarLinks_1: null;
         export { sidebarLinks_1 as sidebarLinks };
         const sidebarLinksAsStandaloneChildren_1: boolean;
@@ -48,6 +55,8 @@ declare namespace NeonPage {
         export { sidebarSubtitle_1 as sidebarSubtitle };
         const sidebarTitle_1: null;
         export { sidebarTitle_1 as sidebarTitle };
+        const sidebarWidth_1: number;
+        export { sidebarWidth_1 as sidebarWidth };
         const subtitle_1: null;
         export { subtitle_1 as subtitle };
         const title_1: null;
@@ -59,3 +68,4 @@ declare namespace NeonPage {
     }
 }
 import PropTypes from "prop-types";
+declare const children: PropTypes.Requireable<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;

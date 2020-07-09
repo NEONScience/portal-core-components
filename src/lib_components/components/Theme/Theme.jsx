@@ -361,6 +361,11 @@ const baseTheme = createMuiTheme({
         padding: '6px',
       },
     },
+    MuiChip: {
+      root: {
+        backgroundColor: COLORS.GREY[200],
+      },
+    },
     MuiDialog: {
       scrollPaper: {
         zIndex: 2100,
