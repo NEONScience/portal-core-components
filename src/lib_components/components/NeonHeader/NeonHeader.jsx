@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import HTMLReactParser from 'html-react-parser';
 
 import { makeStyles } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Skeleton from '@material-ui/lab/Skeleton';
 
+import Theme from '../Theme/Theme';
 import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
 
 import NeonLegacyHeader from './NeonLegacyHeader';
@@ -19,16 +21,21 @@ const useStyles = makeStyles(() => ({
     paddingTop: 'unset !important',
     '& > header': {
       position: 'unset !important',
+      '& div.header__site-navigation': {
+        zIndex: '1 !important',
+      },
     },
   },
 }));
 
 const NeonHeader = forwardRef((props, ref) => {
   const {
+    drupalCssLoaded,
     useCoreHeader,
     unstickyDrupalHeader,
   } = props;
   const classes = useStyles();
+  const belowLg = useMediaQuery(Theme.breakpoints.down('md'));
 
   const [{
     isActive,
@@ -40,7 +47,7 @@ const NeonHeader = forwardRef((props, ref) => {
 
   let renderMode = 'legacy';
   if (!useCoreHeader && isActive) {
-    if (headerFetch.status === FETCH_STATUS.SUCCESS && headerHTML) {
+    if (headerFetch.status === FETCH_STATUS.SUCCESS && headerHTML && drupalCssLoaded) {
       renderMode = 'drupal';
     }
     if ([FETCH_STATUS.AWAITING_CALL, FETCH_STATUS.FETCHING].includes(headerFetch.status)) {
@@ -61,7 +68,7 @@ const NeonHeader = forwardRef((props, ref) => {
   if (renderMode === 'loading') {
     return (
       <header ref={ref} id="header" className={classes.skeletonHeader}>
-        <Skeleton variant="rect" height="125px" width="100%" />
+        <Skeleton variant="rect" height={`${belowLg ? 60 : 125}px`} width="100%" />
       </header>
     );
   }
@@ -85,12 +92,14 @@ const NeonHeader = forwardRef((props, ref) => {
 
 NeonHeader.propTypes = {
   ...NeonLegacyHeader.propTypes,
+  drupalCssLoaded: PropTypes.bool,
   useCoreHeader: PropTypes.bool,
   unstickyDrupalHeader: PropTypes.bool,
 };
 
 NeonHeader.defaultProps = {
   ...NeonLegacyHeader.defaultProps,
+  drupalCssLoaded: false,
   useCoreHeader: false,
   unstickyDrupalHeader: true,
 };

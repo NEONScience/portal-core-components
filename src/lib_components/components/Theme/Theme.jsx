@@ -221,17 +221,8 @@ const baseTheme = createMuiTheme({
       size: 'small',
     },
   },
-  zIndex: {
-    modal: 1900, // Modal backdrops shouldn't cover the sticky header (z 2000) if not full screen
-    fullScreenBackdrop: 2100, // Not a Mui attribute; used to handle sticky header with fixed z 2000
-  },
   overrides: {
     // We have lots of overrides. Please keep them alphabetized for easier maintenance!
-    MuiBackdrop: {
-      root: {
-        zIndex: 1900,
-      },
-    },
     MuiBreadcrumbs: {
       root: {
         padding: '8px 0px',
@@ -367,11 +358,8 @@ const baseTheme = createMuiTheme({
       },
     },
     MuiDialog: {
-      scrollPaper: {
-        zIndex: 2100,
-      },
-      paperFullScreen: {
-        zIndex: 2100,
+      root: {
+        zIndex: 5,
       },
     },
     MuiFormControlLabel: {
@@ -416,11 +404,6 @@ const baseTheme = createMuiTheme({
         '&:hover, &:active': {
           color: COLORS.LIGHT_BLUE[400],
         },
-      },
-    },
-    MuiPopover: {
-      root: {
-        zIndex: '2100 !important',
       },
     },
     MuiRadio: {
@@ -621,6 +604,7 @@ const baseTheme = createMuiTheme({
         },
       },
       stickyHeader: {
+        zIndex: 'auto',
         color: '#fff',
         backgroundColor: COLORS.LIGHT_BLUE[500],
         borderBottom: `1.5px solid ${COLORS.NEON_BLUE[700]}`,

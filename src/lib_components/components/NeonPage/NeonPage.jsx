@@ -358,11 +358,11 @@ const NeonPage = (props) => {
   const [drupalCssLoaded, setDrupalCssLoaded] = useState(false);
   useEffect(() => {
     if (useCoreHeader || drupalCssLoaded) { return; }
-    setDrupalCssLoaded(true);
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = DRUPAL_CSS_URL;
     document.body.appendChild(link);
+    setDrupalCssLoaded(true);
   }, [useCoreHeader, drupalCssLoaded, setDrupalCssLoaded]);
 
   /**
@@ -625,6 +625,7 @@ const NeonPage = (props) => {
           unstickyDrupalHeader={unstickyDrupalHeader}
           notifications={notifications}
           onShowNotifications={handleShowNotifications}
+          drupalCssLoaded={drupalCssLoaded}
         />
         <Container className={classes.outerPageContainer} style={outerPageContainerStyles}>
           {renderSidebar()}
@@ -646,7 +647,7 @@ const NeonPage = (props) => {
           />
           <BrowserWarning />
         </Container>
-        <NeonFooter />
+        <NeonFooter drupalCssLoaded={drupalCssLoaded} />
       </ThemeProvider>
     );
   };

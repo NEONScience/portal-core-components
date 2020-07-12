@@ -67,6 +67,7 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
   },
   graphContainer: {
+    zIndex: 0,
     position: 'relative',
     marginBottom: theme.spacing(2),
     padding: theme.spacing(0.5),
