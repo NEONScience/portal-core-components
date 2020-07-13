@@ -517,6 +517,7 @@ const NeonPage = (props) => {
   const renderSidebar = () => {
     if (!hasSidebar) { return null; }
     const sidebarWidthStyle = belowMd ? {} : { width: `${sidebarWidth}px` };
+    // Arbitrary Content Sidebar (no automatic skeleton)
     if (hasSidebarContent) {
       const sidebarClassName = sidebarContentClassName
         ? `${classes.sidebarContainer} ${sidebarContentClassName}`
@@ -527,21 +528,47 @@ const NeonPage = (props) => {
         </div>
       );
     }
-    const sideBarTitle = !sidebarTitle && !title ? null : (
-      <div style={{ minWidth: '0px', paddingRight: '8px' }}>
-        <Typography variant="h5" component="h3" className={classes.sidebarTitle}>
-          {sidebarTitle || title}
-        </Typography>
-        {!sidebarSubtitle ? null : (
-          <Typography variant="subtitle2" component="h4" className={classes.sidebarSubtitle}>
-            {sidebarSubtitle}
-          </Typography>
-        )}
-      </div>
-    );
+    // Render Sidebar Title
+    const renderSidebarTitle = () => {
+      if (!sidebarTitle && !title) { return null; }
+      return (
+        <div style={{ minWidth: '0px', paddingRight: '8px' }}>
+          {loading || error ? (
+            <React.Fragment>
+              <Skeleton width={200} height={22} style={{ marginBottom: Theme.spacing(1) }} />
+              {!sidebarSubtitle ? null : (
+                <Skeleton width={120} height={16} style={{ marginBottom: Theme.spacing(1) }} />
+              )}
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              <Typography variant="h5" component="h3" className={classes.sidebarTitle}>
+                {sidebarTitle || title}
+              </Typography>
+              {!sidebarSubtitle ? null : (
+                <Typography variant="subtitle2" component="h4" className={classes.sidebarSubtitle}>
+                  {sidebarSubtitle}
+                </Typography>
+              )}
+            </React.Fragment>
+          )}
+        </div>
+      );
+    };
+    // Render Single Sidebar Link
     const renderLink = (link, standalone = false) => {
       if (!link) { return null; }
       const { name, hash = '#', icon: IconComponent } = link;
+      if (loading || error) {
+        return (
+          <Skeleton
+            key={name}
+            width={`${Math.floor(50 + Math.random() * 50)}%`}
+            height={16}
+            style={{ marginBottom: '16px' }}
+          />
+        );
+      }
       const icon = IconComponent ? <IconComponent className={classes.sidebarLinkIcon} /> : null;
       return (
         <Link
@@ -584,7 +611,7 @@ const NeonPage = (props) => {
       <div ref={sidebarRef} className={classes.sidebarContainer} style={sidebarWidthStyle}>
         <div className={classes.sidebarInnerContainer}>
           <div className={classes.sidebarTitleContainer}>
-            {sideBarTitle}
+            {renderSidebarTitle()}
             {!belowMd ? null : (
               <IconButton size="small" onClick={() => setSidebarExpanded(!sidebarExpanded)}>
                 {(

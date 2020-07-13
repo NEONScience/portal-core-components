@@ -246,7 +246,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
       </DocBlock>
 
       <ExampleBlock>
-        <SiteMap />
+        <SiteMap location="WREF" />
       </ExampleBlock>
       <CodeBlock>
         {`

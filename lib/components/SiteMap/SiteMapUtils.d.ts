@@ -147,6 +147,7 @@ export namespace FEATURES {
         dataLoadType: string;
         description: string;
         parent: string;
+        featureShape: string;
         iconSvg: any;
         iconShape: string;
     };
@@ -210,6 +211,7 @@ export namespace FEATURES {
         matchLocationType: string;
         description: string;
         parent: string;
+        featureShape: string;
         iconScale: number;
         iconSvg: any;
         iconShape: string;
@@ -223,6 +225,7 @@ export namespace FEATURES {
         matchLocationType: string;
         description: string;
         parent: string;
+        featureShape: string;
         iconScale: number;
         iconSvg: any;
         iconShape: string;
@@ -236,6 +239,7 @@ export namespace FEATURES {
         matchLocationType: string;
         description: string;
         parent: string;
+        featureShape: string;
         iconScale: number;
         iconSvg: any;
         iconShape: string;
@@ -255,6 +259,7 @@ export namespace FEATURES {
         parent: string;
         dataLoadType: string;
         matchLocationType: string;
+        featureShape: string;
         focusZoom: number;
         iconScale: number;
         iconSvg: any;
@@ -266,6 +271,7 @@ export namespace FEATURES {
         type: string;
         description: string;
         parent: string;
+        featureShape: string;
         focusZoom: number;
         iconSvg: any;
         iconShape: string;
@@ -279,7 +285,9 @@ export namespace FEATURES {
         matchLocationType: string;
         description: string;
         parent: string;
+        featureShape: string;
         focusZoom: number;
+        iconScale: number;
         iconSvg: any;
         iconShape: string;
     };
@@ -298,6 +306,7 @@ export namespace FEATURES {
         parent: string;
         dataLoadType: string;
         matchLocationType: string;
+        featureShape: string;
         iconScale: number;
         focusZoom: number;
         iconSvg: any;
@@ -311,6 +320,7 @@ export namespace FEATURES {
         parent: string;
         dataLoadType: string;
         matchLocationType: string;
+        featureShape: string;
         iconScale: number;
         focusZoom: number;
         iconSvg: any;
@@ -322,6 +332,7 @@ export namespace FEATURES {
         type: string;
         description: string;
         parent: string;
+        featureShape: string;
         iconScale: number;
         focusZoom: number;
         iconSvg: any;
@@ -335,6 +346,7 @@ export namespace FEATURES {
         parent: string;
         dataLoadType: string;
         matchLocationType: string;
+        featureShape: string;
         iconScale: number;
         focusZoom: number;
         iconSvg: any;
@@ -350,16 +362,17 @@ export namespace FEATURES {
         matchLocationType: string;
         iconSvg: any;
         iconShape: string;
+        featureShape: string;
         focusZoom: number;
     };
-    export const PLOT_DETAIL_POINTS: {
+    export const PLOT_BOUNDARIES: {
         name: string;
         type: string;
         minZoom: number;
         description: string;
         parent: string;
     };
-    export const TOWER_PHENOLOGY_PLOT_POINTS: {
+    export const TOWER_PHENOLOGY_PLOT_BOUNDARIES: {
         name: string;
         nameSingular: string;
         type: string;
@@ -367,27 +380,30 @@ export namespace FEATURES {
         parent: string;
         parentDataFeatureKey: string;
         dataLoadType: string;
+        matchLocationPattern: RegExp;
+        matchLocationCoordinateMap: string[];
         minZoom: number;
         featureShape: string;
         style: {
             color: string;
+            dashArray: string;
         };
     };
-    export const DISTRIBUTED_BIRD_GRID_POINTS: {
+    export const TOWER_SOIL_PLOT_BOUNDARIES: {
         name: string;
         nameSingular: string;
         type: string;
         description: string;
         parent: string;
         parentDataFeatureKey: string;
-        dataLoadType: string;
         minZoom: number;
         featureShape: string;
         style: {
             color: string;
+            dashArray: string;
         };
     };
-    export const DISTRIBUTED_MAMMAL_GRID_POINTS: {
+    export const DISTRIBUTED_BIRD_GRID_BOUNDARIES: {
         name: string;
         nameSingular: string;
         type: string;
@@ -395,13 +411,16 @@ export namespace FEATURES {
         parent: string;
         parentDataFeatureKey: string;
         dataLoadType: string;
+        matchLocationPattern: RegExp;
+        matchLocationCoordinateMap: string[];
         minZoom: number;
         featureShape: string;
         style: {
             color: string;
+            dashArray: string;
         };
     };
-    export const DISTRIBUTED_TICK_PLOT_POINTS: {
+    export const DISTRIBUTED_MAMMAL_GRID_BOUNDARIES: {
         name: string;
         nameSingular: string;
         type: string;
@@ -409,10 +428,30 @@ export namespace FEATURES {
         parent: string;
         parentDataFeatureKey: string;
         dataLoadType: string;
+        matchLocationPattern: RegExp;
+        matchLocationCoordinateMap: string[];
         minZoom: number;
         featureShape: string;
         style: {
             color: string;
+            dashArray: string;
+        };
+    };
+    export const DISTRIBUTED_TICK_PLOT_BOUNDARIES: {
+        name: string;
+        nameSingular: string;
+        type: string;
+        description: string;
+        parent: string;
+        parentDataFeatureKey: string;
+        dataLoadType: string;
+        matchLocationPattern: RegExp;
+        matchLocationCoordinateMap: string[];
+        minZoom: number;
+        featureShape: string;
+        style: {
+            color: string;
+            dashArray: string;
         };
     };
     export const AQUATIC_SITE_FEATURES: {
@@ -430,6 +469,7 @@ export namespace FEATURES {
         matchLocationType: string;
         description: string;
         parent: string;
+        featureShape: string;
         iconScale: number;
         iconSvg: any;
         iconShape: string;
@@ -457,6 +497,7 @@ export namespace FEATURES {
         matchLocationType: string;
         description: string;
         parent: string;
+        featureShape: string;
         iconSvg: any;
         iconShape: string;
     };
@@ -469,6 +510,7 @@ export namespace FEATURES {
         matchLocationType: string;
         description: string;
         parent: string;
+        featureShape: string;
         iconScale: number;
         iconSvg: any;
         iconShape: string;
@@ -482,6 +524,7 @@ export namespace FEATURES {
         matchLocationType: string;
         description: string;
         parent: string;
+        featureShape: string;
         iconScale: number;
         iconSvg: any;
         iconShape: string;
@@ -495,6 +538,7 @@ export namespace FEATURES {
         matchLocationType: string;
         description: string;
         parent: string;
+        featureShape: string;
         iconScale: number;
         iconSvg: any;
         iconShape: string;
@@ -508,6 +552,7 @@ export namespace FEATURES {
         matchLocationType: string;
         description: string;
         parent: string;
+        featureShape: string;
         iconSvg: any;
         iconShape: string;
     };
@@ -520,6 +565,7 @@ export namespace FEATURES {
         matchLocationType: string;
         description: string;
         parent: string;
+        featureShape: string;
         iconSvg: any;
         iconShape: string;
     };
@@ -532,6 +578,7 @@ export namespace FEATURES {
         matchLocationType: string;
         description: string;
         parent: string;
+        featureShape: string;
         iconScale: number;
         iconSvg: any;
         iconShape: string;
@@ -545,6 +592,7 @@ export namespace FEATURES {
         matchLocationType: string;
         description: string;
         parent: string;
+        featureShape: string;
         iconSvg: any;
         iconShape: string;
     };
@@ -557,6 +605,7 @@ export namespace FEATURES {
         matchLocationType: string;
         description: string;
         parent: string;
+        featureShape: string;
         iconSvg: any;
         iconShape: string;
     };
@@ -569,6 +618,7 @@ export namespace FEATURES {
         matchLocationType: RegExp;
         description: string;
         parent: string;
+        featureShape: string;
         iconScale: number;
         iconSvg: any;
         iconShape: string;
@@ -582,6 +632,7 @@ export namespace FEATURES {
         matchLocationType: string;
         description: string;
         parent: string;
+        featureShape: string;
         iconScale: number;
         iconSvg: any;
         iconShape: string;
@@ -604,6 +655,7 @@ export namespace FEATURES {
         };
         dataLoadType: string;
         primaryIdOnly: boolean;
+        featureShape: string;
         iconScale: number;
         iconSvg: any;
         iconSelectedSvg: any;
@@ -621,6 +673,7 @@ export namespace FEATURES {
         };
         dataLoadType: string;
         primaryIdOnly: boolean;
+        featureShape: string;
         iconScale: number;
         iconSvg: any;
         iconSelectedSvg: any;
@@ -638,6 +691,7 @@ export namespace FEATURES {
         };
         dataLoadType: string;
         primaryIdOnly: boolean;
+        featureShape: string;
         iconScale: number;
         iconSvg: any;
         iconSelectedSvg: any;
@@ -655,6 +709,7 @@ export namespace FEATURES {
         };
         dataLoadType: string;
         primaryIdOnly: boolean;
+        featureShape: string;
         iconScale: number;
         iconSvg: any;
         iconSelectedSvg: any;

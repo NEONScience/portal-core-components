@@ -223,6 +223,11 @@ const baseTheme = createMuiTheme({
   },
   overrides: {
     // We have lots of overrides. Please keep them alphabetized for easier maintenance!
+    MuiBackdrop: {
+      root: {
+        zIndex: 2,
+      },
+    },
     MuiBreadcrumbs: {
       root: {
         padding: '8px 0px',
@@ -360,6 +365,9 @@ const baseTheme = createMuiTheme({
     MuiDialog: {
       root: {
         zIndex: 5,
+      },
+      paper: {
+        zIndex: 2,
       },
     },
     MuiFormControlLabel: {
