@@ -112,7 +112,7 @@ const useStyles = makeStyles(theme => ({
       position: 'sticky',
       top: '0px',
       boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.25), 0px 1px 1px rgba(0, 0, 0, 0.25)',
-      zIndex: 100,
+      zIndex: 1,
     },
     [theme.breakpoints.down('xs')]: {
       padding: theme.spacing(1.5),

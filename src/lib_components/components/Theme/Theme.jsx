@@ -364,7 +364,7 @@ const baseTheme = createMuiTheme({
     },
     MuiDialog: {
       root: {
-        zIndex: 5,
+        zIndex: 105,
       },
       paper: {
         zIndex: 2,

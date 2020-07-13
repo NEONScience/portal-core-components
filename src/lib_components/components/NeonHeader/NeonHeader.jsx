@@ -13,16 +13,26 @@ import NeonLegacyHeader from './NeonLegacyHeader';
 
 const HEADER_JS_URL = 'https://preview.neonscience.org/themes/custom/neon/build/components/header/header.js';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
   skeletonHeader: {
     boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.25), 0px 1px 1px rgba(0, 0, 0, 0.25)',
   },
+  // These styles are gross. We need to rework the header coming from the Drupal site to make this
+  // less necessary.
   unstickyHeader: {
     paddingTop: 'unset !important',
     '& > header': {
       position: 'unset !important',
       '& div.header__site-navigation': {
-        zIndex: '1 !important',
+        zIndex: '2 !important',
+      },
+      [theme.breakpoints.down('sm')]: {
+        '& .header__site-navigation': {
+          display: 'none',
+        },
+        '& .nav-trigger:checked ~ .header__site-navigation': {
+          display: 'block',
+        },
       },
     },
   },
@@ -34,7 +44,7 @@ const NeonHeader = forwardRef((props, ref) => {
     useCoreHeader,
     unstickyDrupalHeader,
   } = props;
-  const classes = useStyles();
+  const classes = useStyles(Theme);
   const belowLg = useMediaQuery(Theme.breakpoints.down('md'));
 
   const [{
