@@ -63,22 +63,9 @@ const useStyles = makeStyles(theme => ({
   optgroup: {
     fontWeight: Theme.typography.fontWeightMedium,
   },
-  tooltip: {
-    marginLeft: theme.spacing(0.25),
-  },
   tooltipIconButton: {
-    marginTop: theme.spacing(-0.25),
-  },
-  tooltipPopper: {
-    '& > div': {
-      padding: theme.spacing(1, 1.5),
-      fontSize: '0.85rem',
-      fontWeight: 300,
-      backgroundColor: theme.palette.grey[800],
-    },
-    '& a': {
-      color: theme.palette.grey[100],
-    },
+    marginTop: theme.spacing(-0.5),
+    marginLeft: theme.spacing(0.5),
   },
 }));
 
@@ -413,13 +400,7 @@ const AopDataViewer = (props) => {
     <Typography className={classes.label} id={`${input}-label`}>
       {`${input.substr(0, 1).toUpperCase()}${input.substr(1)}`}
       {tooltip ? (
-        <Tooltip
-          placement="right"
-          title={tooltip}
-          className={classes.tooltip}
-          PopperProps={{ className: classes.tooltipPopper }}
-          interactive
-        >
+        <Tooltip placement="right" title={tooltip} interactive>
           <IconButton size="small" className={classes.tooltipIconButton} aria-label={tooltip}>
             <InfoIcon fontSize="inherit" />
           </IconButton>

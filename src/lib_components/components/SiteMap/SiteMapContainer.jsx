@@ -102,21 +102,6 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
   },
-  popper: {
-    marginLeft: theme.spacing(5),
-    marginTop: theme.spacing(0.5),
-    zIndex: 1001,
-    '& > div': {
-      margin: 0,
-      padding: theme.spacing(1, 1.5),
-      fontSize: '0.85rem',
-      fontWeight: 300,
-      backgroundColor: theme.palette.grey[800],
-    },
-    '& a': {
-      color: theme.palette.grey[100],
-    },
-  },
   resizeButton: {
     backgroundColor: '#fff',
     position: 'absolute',
@@ -328,18 +313,19 @@ const SiteMapContainer = (props) => {
      Render - Vertical resize Elements
   */
   const renderVerticalResizeButton = () => (
-    <IconButton
-      draggable
-      type="button"
-      ref={resizeButtonRef}
-      title={`Resize ${view === VIEWS.MAP ? 'map' : 'table'} vertically`}
-      className={classes.resizeButton}
-      onDragStart={resizeVerticallyDragStart}
-      onDrag={resizeVerticallyDrag}
-      onDragEnd={resizeVerticallyDragEnd}
-    >
-      <VertResizeIcon fontSize="small" />
-    </IconButton>
+    <Tooltip title={`Resize ${view === VIEWS.MAP ? 'map' : 'table'} vertically`}>
+      <IconButton
+        draggable
+        type="button"
+        ref={resizeButtonRef}
+        className={classes.resizeButton}
+        onDragStart={resizeVerticallyDragStart}
+        onDrag={resizeVerticallyDrag}
+        onDragEnd={resizeVerticallyDragEnd}
+      >
+        <VertResizeIcon fontSize="small" />
+      </IconButton>
+    </Tooltip>
   );
 
   /**
@@ -443,30 +429,32 @@ const SiteMapContainer = (props) => {
           <span style={{ fontWeight: 600 }}>
             {feature.name}
           </span>
-          <IconButton
-            size="small"
-            title={collapseTitle}
-            aria-label={collapseTitle}
-            onClick={(event) => {
-              event.preventDefault();
-              // We use a setTimeout here so the icon doesn't change before the click event bubbles
-              // Without it the target of the click event is an SVG that no longer exists in the
-              // DOM tree, and is thus not contained in the features container, and is thus seen as
-              // a click outside that will close the features container, when we know it's not.
-              window.setTimeout(() => {
-                dispatch({
-                  type: `setFilterFeature${collapsed ? 'Expanded' : 'Collapsed'}`,
-                  feature: key,
-                });
-              }, 0);
-            }}
-          >
-            {collapsed ? (
-              <LeftArrowIcon fontSize="inherit" />
-            ) : (
-              <DownArrowIcon fontSize="inherit" />
-            )}
-          </IconButton>
+          <Tooltip title={collapseTitle}>
+            <IconButton
+              size="small"
+              aria-label={collapseTitle}
+              style={{ marginLeft: Theme.spacing(1) }}
+              onClick={(event) => {
+                event.preventDefault();
+                // We use setTimeout here so the icon doesn't change before the click event bubbles.
+                // Without it the target of the click event is an SVG that no longer exists in the
+                // DOM tree (thus not contained in the features container, thus seen as a click
+                // outside that will close the features container, when we know it's not).
+                window.setTimeout(() => {
+                  dispatch({
+                    type: `setFilterFeature${collapsed ? 'Expanded' : 'Collapsed'}`,
+                    feature: key,
+                  });
+                }, 0);
+              }}
+            >
+              {collapsed ? (
+                <LeftArrowIcon fontSize="inherit" />
+              ) : (
+                <DownArrowIcon fontSize="inherit" />
+              )}
+            </IconButton>
+          </Tooltip>
         </div>
       );
     } else {
@@ -501,7 +489,6 @@ const SiteMapContainer = (props) => {
           <Tooltip
             title={tooltip}
             placement="bottom-start"
-            PopperProps={{ className: classes.popper }}
             TransitionComponent={({ children }) => children} // set no transition by mock component
           >
             {formControl}

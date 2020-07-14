@@ -124,6 +124,8 @@ const PALETTES = {
   GREY: COLORS.GREY,
 };
 
+const COLOR_TEXT_PRIMARY = 'rgba(0, 0, 0, 0.9)';
+
 // See all customizable Material UI theme keys here:
 // https://material-ui.com/customization/default-theme/#explore
 
@@ -138,7 +140,7 @@ const baseTheme = createMuiTheme({
     error: PALETTES.ERROR,
     grey: PALETTES.GREY,
     text: {
-      primary: 'rgba(0, 0, 0, 0.9)',
+      primary: COLOR_TEXT_PRIMARY,
     },
   },
   shape: {
@@ -686,6 +688,29 @@ const baseTheme = createMuiTheme({
         '&:last-child': {
           borderTopRightRadius: '2px',
           borderBottomRightRadius: '2px',
+        },
+      },
+    },
+    MuiTooltip: {
+      popper: {
+        zIndex: 2500,
+      },
+      tooltip: {
+        backgroundColor: COLORS.GREY[50],
+        border: `1px solid ${COLORS.GREY[600]}`,
+        color: COLOR_TEXT_PRIMARY,
+        borderRadius: '2px',
+        padding: '12px 16px',
+        fontSize: '0.9rem',
+        fontWeight: 400,
+        boxShadow: 'rgba(0, 0, 0, 0.2) 0px 3px 3px -2px, rgba(0, 0, 0, 0.14) 0px 3px 4px 0px, rgba(0, 0, 0, 0.12) 0px 1px 8px 0px',
+        '& a': {
+          color: COLORS.LIGHT_BLUE[500],
+          '&:hover, &:active': {
+            color: COLORS.LIGHT_BLUE[400],
+            borderColor: COLORS.LIGHT_BLUE[400],
+            textDecoration: 'underline',
+          },
         },
       },
     },

@@ -16,6 +16,7 @@ import Link from '@material-ui/core/Link';
 import Radio from '@material-ui/core/Radio';
 import Slider from '@material-ui/core/Slider';
 import Switch from '@material-ui/core/Switch';
+import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
 import ToggleButton from '@material-ui/lab/ToggleButton';
@@ -363,6 +364,54 @@ export default function BasicComponents() {
           <ToggleButton value="two">Two</ToggleButton>
           <ToggleButton value="three">Three</ToggleButton>
         </ToggleButtonGroup>
+      </div>
+
+      {/* Tooltip */}
+      <Divider className={classes.divider} />
+      <Typography variant="h4" component="h2" gutterBottom>Tooltip</Typography>
+
+      <div className={classes.row}>
+        <Tooltip
+          title="A basic short tooltip"
+        >
+          <IconButton aria-label="tooltip">
+            <InfoIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip
+          placement="right"
+          title="A longer-form tooltip with a few sentences. There is more info here but no HTML. Still there is plenty of text to read."
+        >
+          <IconButton aria-label="tooltip">
+            <InfoIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip
+          title={(
+            <React.Fragment>
+              <div>
+                An interactive tooltip that contains HTML including lists and links:
+              </div>
+              <ul>
+                <li>A bullet item</li>
+                <li>
+                  <a href="/">A link to go somewhere</a>
+                </li>
+                <li>
+                  <b>A bullet that has some emphasis</b>
+                </li>
+              </ul>
+              <div>
+                <a href="/">Another link to get more info.</a>
+              </div>
+            </React.Fragment>
+          )}
+          interactive
+        >
+          <IconButton aria-label="tooltip">
+            <InfoIcon />
+          </IconButton>
+        </Tooltip>
       </div>
 
       {/* Typography */}
