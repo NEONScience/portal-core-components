@@ -612,7 +612,7 @@ const DataProductAvailability = (props) => {
                 onChange={newDate => handleChangeStartDate(newDate)}
                 minDate={getYearMonthMoment(dateRange.validValues[0])}
                 maxDate={getYearMonthMoment(dateRange.value[1])}
-                style={{ marginRight: Theme.spacing(1.5) }}
+                style={{ marginRight: Theme.spacing(1.5), zIndex: 0 }}
               />
               <DatePicker
                 {...datePickerProps}
@@ -622,6 +622,7 @@ const DataProductAvailability = (props) => {
                 onChange={newDate => handleChangeEndDate(newDate)}
                 minDate={getYearMonthMoment(dateRange.value[0])}
                 maxDate={getYearMonthMoment(dateRange.validValues[1])}
+                style={{ zIndex: 0 }}
               />
             </div>
           </MuiPickersUtilsProvider>

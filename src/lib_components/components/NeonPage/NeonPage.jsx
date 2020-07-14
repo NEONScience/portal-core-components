@@ -102,15 +102,12 @@ const useStyles = makeStyles(theme => ({
   sidebarContainer: {
     backgroundColor: COLORS.GREY[50],
     padding: theme.spacing(5, 4),
-    [theme.breakpoints.up('md')]: {
-      height: '100%',
-      position: 'absolute',
-    },
     [theme.breakpoints.down('sm')]: {
       width: '100%',
+      maxHeight: 'calc(100vh - 84px)',
       padding: theme.spacing(2.5, 2),
       position: 'sticky',
-      top: '0px',
+      top: '-2px',
       boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.25), 0px 1px 1px rgba(0, 0, 0, 0.25)',
       zIndex: 1,
     },
@@ -118,9 +115,22 @@ const useStyles = makeStyles(theme => ({
       padding: theme.spacing(1.5),
     },
   },
-  sidebarInnerContainer: {
-    position: 'sticky',
-    top: theme.spacing(3),
+  sidebarContainerShort: {
+    [theme.breakpoints.up('md')]: {
+      height: '100%',
+      position: 'absolute',
+    },
+  },
+  sidebarContainerTall: {
+    [theme.breakpoints.up('md')]: {
+      position: 'sticky',
+      top: '12px',
+      marginBottom: '2px',
+    },
+  },
+  sidebarContainerFlexColumn: {
+    display: 'flex',
+    flexDirection: 'column',
   },
   sidebarInnernmostContainer: {
     [theme.breakpoints.down('sm')]: {
@@ -172,6 +182,11 @@ const useStyles = makeStyles(theme => ({
     marginBottom: '-5px',
     marginRight: '5px',
     fontSize: '1.3rem',
+  },
+  sidebarLinksContainer: {
+    flex: '1 1 auto',
+    overflowY: 'auto',
+    minHeight: '0px',
   },
   sidebarDivider: {
     margin: '24px 0px',
@@ -245,12 +260,13 @@ const NeonPage = (props) => {
     outerPageContainerMaxWidth,
     progress,
     sidebarContent,
-    sidebarContentClassName,
+    sidebarContainerClassName: sidebarContainerClassNameProp,
     sidebarLinks,
     sidebarLinksAsStandaloneChildren: sidebarLinksAsStandaloneChildrenProp,
     sidebarSubtitle,
     sidebarTitle,
     sidebarWidth,
+    sidebarUnsticky,
     subtitle,
     title,
     useCoreHeader,
@@ -517,15 +533,35 @@ const NeonPage = (props) => {
   const renderSidebar = () => {
     if (!hasSidebar) { return null; }
     const sidebarWidthStyle = belowMd ? {} : { width: `${sidebarWidth}px` };
+    const sidebarStyle = { ...sidebarWidthStyle };
+    if (sidebarUnsticky && !belowMd) { sidebarStyle.position = 'static'; }
+    const dividerStyle = !belowMd ? { width: `${sidebarWidth - Theme.spacing(8)}px` } : {};
+    let sidebarClassName = `${classes.sidebarContainer} ${classes.sidebarContainerTall}`;
+    if (!hasSidebarContent) {
+      sidebarClassName = `${sidebarClassName} ${classes.sidebarContainerFlexColumn}`;
+    }
+    if (sidebarContainerClassNameProp) {
+      sidebarClassName = `${sidebarClassName} ${sidebarContainerClassNameProp}`;
+    }
+    // When working with a tall sidebar the sidebar element is block level to push the footer down.
+    // Page content could still be taller than the sidebar though, leaving a noticeable gap. This
+    // element is the one that's actually absolute positioned and full height but is only a
+    // a background, allowing the content to always be block-level and affect page height.
+    const tallSidebarBackfill = (
+      <div
+        className={`${classes.sidebarContainer} ${classes.sidebarContainerShort}`}
+        style={sidebarWidthStyle}
+      />
+    );
     // Arbitrary Content Sidebar (no automatic skeleton)
     if (hasSidebarContent) {
-      const sidebarClassName = sidebarContentClassName
-        ? `${classes.sidebarContainer} ${sidebarContentClassName}`
-        : classes.sidebarContainer;
       return (
-        <div ref={sidebarRef} className={sidebarClassName} style={sidebarWidthStyle}>
-          {sidebarContent}
-        </div>
+        <React.Fragment>
+          {!belowMd ? tallSidebarBackfill : null}
+          <div ref={sidebarRef} className={sidebarClassName} style={sidebarStyle}>
+            {sidebarContent}
+          </div>
+        </React.Fragment>
       );
     }
     // Render Sidebar Title
@@ -594,22 +630,26 @@ const NeonPage = (props) => {
     };
     const fullLinks = (
       <React.Fragment>
-        <div className={classes.sidebarInnerMostContainer}>
+        <div className={classes.sidebarLinksContainer}>
           {sidebarLinks.map(link => renderLink(link))}
         </div>
         {belowMd ? null : (
-          <Divider className={classes.sidebarDivider} style={{ marginBottom: '0px' }} />
+          <Divider
+            className={classes.sidebarDivider}
+            style={{ marginBottom: '0px', ...dividerStyle }}
+          />
         )}
       </React.Fragment>
     );
     const currentLinkOnly = (
-      <div className={classes.sidebarInnerMostContainer}>
+      <div className={classes.sidebarLinksContainer}>
         {renderLink(sidebarLinks[sidebarHashMap[currentSidebarHash]], true)}
       </div>
     );
     return (
-      <div ref={sidebarRef} className={classes.sidebarContainer} style={sidebarWidthStyle}>
-        <div className={classes.sidebarInnerContainer}>
+      <React.Fragment>
+        {!belowMd ? tallSidebarBackfill : null}
+        <div ref={sidebarRef} className={sidebarClassName} style={sidebarStyle}>
           <div className={classes.sidebarTitleContainer}>
             {renderSidebarTitle()}
             {!belowMd ? null : (
@@ -622,21 +662,20 @@ const NeonPage = (props) => {
               </IconButton>
             )}
           </div>
-          <Divider className={classes.sidebarDivider} />
+          <Divider className={classes.sidebarDivider} style={{ ...dividerStyle }} />
           {belowMd && !sidebarExpanded ? currentLinkOnly : fullLinks}
         </div>
-      </div>
+      </React.Fragment>
     );
   };
 
   const renderNeonPage = () => {
-    const outerPageContainerStyles = outerPageContainerMaxWidth ? {
-      maxWidth: outerPageContainerMaxWidth,
-    } : null;
-    const pageContainerStyle = !hasSidebar || belowMd ? {} : {
-      width: `calc(100% - ${sidebarWidth + 24}px)`,
-      marginLeft: `${sidebarWidth + 24}px`,
-    };
+    const outerPageContainerStyles = {};
+    if (outerPageContainerMaxWidth) {
+      outerPageContainerStyles.maxWidth = !hasSidebar || belowMd
+        ? outerPageContainerMaxWidth
+        : `calc(${outerPageContainerMaxWidth} - ${sidebarWidth + 48}px)`;
+    }
     let content = children;
     if (hasSidebarLinks && sidebarLinksAsStandaloneChildren) {
       const CurrentComponent = sidebarLinks[sidebarHashMap[currentSidebarHash] || 0].component;
@@ -658,7 +697,6 @@ const NeonPage = (props) => {
           {renderSidebar()}
           <Container
             className={classes.pageContainer}
-            style={pageContainerStyle}
             data-selenium="neon-page.content"
             ref={contentRef}
           >
@@ -708,7 +746,7 @@ NeonPage.propTypes = {
   outerPageContainerMaxWidth: PropTypes.string,
   progress: PropTypes.number,
   sidebarContent: children,
-  sidebarContentClassName: PropTypes.string,
+  sidebarContainerClassName: PropTypes.string,
   sidebarLinks: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
@@ -728,6 +766,7 @@ NeonPage.propTypes = {
   sidebarSubtitle: PropTypes.string,
   sidebarTitle: PropTypes.string,
   sidebarWidth: PropTypes.number,
+  sidebarUnsticky: PropTypes.bool,
   subtitle: PropTypes.string,
   title: PropTypes.string,
   useCoreHeader: PropTypes.bool,
@@ -743,12 +782,13 @@ NeonPage.defaultProps = {
   outerPageContainerMaxWidth: '2000px',
   progress: null,
   sidebarContent: null,
-  sidebarContentClassName: null,
+  sidebarContainerClassName: null,
   sidebarLinks: null,
   sidebarLinksAsStandaloneChildren: false,
   sidebarSubtitle: null,
   sidebarTitle: null,
   sidebarWidth: 300,
+  sidebarUnsticky: false,
   subtitle: null,
   title: null,
   useCoreHeader: false,

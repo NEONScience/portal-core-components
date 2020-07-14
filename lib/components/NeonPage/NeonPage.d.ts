@@ -12,7 +12,7 @@ declare namespace NeonPage {
         export const outerPageContainerMaxWidth: PropTypes.Requireable<string>;
         export const progress: PropTypes.Requireable<number>;
         export { children as sidebarContent };
-        export const sidebarContentClassName: PropTypes.Requireable<string>;
+        export const sidebarContainerClassName: PropTypes.Requireable<string>;
         export const sidebarLinks: PropTypes.Requireable<(PropTypes.InferProps<{
             name: PropTypes.Validator<string>;
             pageTitle: PropTypes.Requireable<string>;
@@ -24,6 +24,7 @@ declare namespace NeonPage {
         export const sidebarSubtitle: PropTypes.Requireable<string>;
         export const sidebarTitle: PropTypes.Requireable<string>;
         export const sidebarWidth: PropTypes.Requireable<number>;
+        export const sidebarUnsticky: PropTypes.Requireable<boolean>;
         export const subtitle: PropTypes.Requireable<string>;
         export const title: PropTypes.Requireable<string>;
         export const useCoreHeader: PropTypes.Requireable<boolean>;
@@ -45,8 +46,8 @@ declare namespace NeonPage {
         const progress_1: null;
         export { progress_1 as progress };
         export const sidebarContent: null;
-        const sidebarContentClassName_1: null;
-        export { sidebarContentClassName_1 as sidebarContentClassName };
+        const sidebarContainerClassName_1: null;
+        export { sidebarContainerClassName_1 as sidebarContainerClassName };
         const sidebarLinks_1: null;
         export { sidebarLinks_1 as sidebarLinks };
         const sidebarLinksAsStandaloneChildren_1: boolean;
@@ -57,6 +58,8 @@ declare namespace NeonPage {
         export { sidebarTitle_1 as sidebarTitle };
         const sidebarWidth_1: number;
         export { sidebarWidth_1 as sidebarWidth };
+        const sidebarUnsticky_1: boolean;
+        export { sidebarUnsticky_1 as sidebarUnsticky };
         const subtitle_1: null;
         export { subtitle_1 as subtitle };
         const title_1: null;
