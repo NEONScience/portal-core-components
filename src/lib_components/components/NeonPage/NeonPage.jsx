@@ -132,12 +132,6 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
   },
-  sidebarInnernmostContainer: {
-    [theme.breakpoints.down('sm')]: {
-      overflowY: 'scroll',
-      maxHeight: '200px',
-    },
-  },
   sidebarTitleContainer: {
     display: 'flex',
     alignItems: 'center',

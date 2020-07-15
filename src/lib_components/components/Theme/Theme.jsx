@@ -347,6 +347,12 @@ const baseTheme = createMuiTheme({
     MuiCardContent: {
       root: {
         padding: '24px',
+        '@media (max-width:959.95px)': {
+          padding: '16px',
+          '&:last-child': {
+            paddingBottom: '16px',
+          },
+        },
       },
     },
     MuiCardActions: {

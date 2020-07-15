@@ -23,6 +23,9 @@ const useStyles = makeStyles(theme => ({
     paddingTop: 'unset !important',
     '& > header': {
       position: 'unset !important',
+      '& label[for="nav-trigger"]': {
+        zIndex: '3 !important',
+      },
       '& div.header__site-navigation': {
         zIndex: '2 !important',
       },

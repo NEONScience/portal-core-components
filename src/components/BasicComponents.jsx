@@ -39,9 +39,19 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
+    flexWrap: 'wrap',
     marginBottom: theme.spacing(4),
     '& > :not(:last-child)': {
       marginRight: theme.spacing(4),
+    },
+  },
+  block: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    '& > :not(:last-child)': {
+      marginRight: theme.spacing(4),
+      marginBottom: theme.spacing(2),
     },
   },
   typographyContainer: {
@@ -82,64 +92,76 @@ export default function BasicComponents() {
       <Typography variant="h4" component="h2" gutterBottom>Button</Typography>
 
       <div className={classes.row}>
-        <Button size="small">
-          Text
-        </Button>
-        <Button size="medium">
-          Text
-        </Button>
-        <Button size="large">
-          Text
-        </Button>
-        <Button size="small" disabled>
-          Text
-        </Button>
-        <Button size="medium" disabled>
-          Text
-        </Button>
-        <Button size="large" disabled>
-          Text
-        </Button>
+        <div className={classes.block}>
+          <Button size="small">
+            Text
+          </Button>
+          <Button size="medium">
+            Text
+          </Button>
+          <Button size="large">
+            Text
+          </Button>
+        </div>
+        <div className={classes.block}>
+          <Button size="small" disabled>
+            Text
+          </Button>
+          <Button size="medium" disabled>
+            Text
+          </Button>
+          <Button size="large" disabled>
+            Text
+          </Button>
+        </div>
       </div>
       <div className={classes.row}>
-        <Button variant="outlined" size="small" startIcon={<LeftIcon />}>
-          Outlined
-        </Button>
-        <Button variant="outlined" size="medium" startIcon={<LeftIcon />}>
-          Outlined
-        </Button>
-        <Button variant="outlined" size="large" startIcon={<LeftIcon />}>
-          Outlined
-        </Button>
-        <Button variant="outlined" size="small" disabled>
-          Outlined
-        </Button>
-        <Button variant="outlined" size="medium" disabled>
-          Outlined
-        </Button>
-        <Button variant="outlined" size="large" disabled>
-          Outlined
-        </Button>
+        <div className={classes.block}>
+          <Button variant="outlined" size="small" startIcon={<LeftIcon />}>
+            Outlined
+          </Button>
+          <Button variant="outlined" size="medium" startIcon={<LeftIcon />}>
+            Outlined
+          </Button>
+          <Button variant="outlined" size="large" startIcon={<LeftIcon />}>
+            Outlined
+          </Button>
+        </div>
+        <div className={classes.block}>
+          <Button variant="outlined" size="small" disabled>
+            Outlined
+          </Button>
+          <Button variant="outlined" size="medium" disabled>
+            Outlined
+          </Button>
+          <Button variant="outlined" size="large" disabled>
+            Outlined
+          </Button>
+        </div>
       </div>
       <div className={classes.row}>
-        <Button variant="contained" size="small" endIcon={<RightIcon />}>
-          Contained
-        </Button>
-        <Button variant="contained" size="medium" endIcon={<RightIcon />}>
-          Contained
-        </Button>
-        <Button variant="contained" size="large" endIcon={<RightIcon />}>
-          Contained
-        </Button>
-        <Button variant="contained" size="small" disabled>
-          Contained
-        </Button>
-        <Button variant="contained" size="medium" disabled>
-          Contained
-        </Button>
-        <Button variant="contained" size="large" disabled>
-          Contained
-        </Button>
+        <div className={classes.block}>
+          <Button variant="contained" size="small" endIcon={<RightIcon />}>
+            Contained
+          </Button>
+          <Button variant="contained" size="medium" endIcon={<RightIcon />}>
+            Contained
+          </Button>
+          <Button variant="contained" size="large" endIcon={<RightIcon />}>
+            Contained
+          </Button>
+        </div>
+        <div className={classes.block}>
+          <Button variant="contained" size="small" disabled>
+            Contained
+          </Button>
+          <Button variant="contained" size="medium" disabled>
+            Contained
+          </Button>
+          <Button variant="contained" size="large" disabled>
+            Contained
+          </Button>
+        </div>
       </div>
 
       {/* ButtonGroup */}
