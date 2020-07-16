@@ -679,8 +679,6 @@ const NeonPage = (props) => {
             {renderTitle()}
             {content}
           </div>
-          {renderLoading()}
-          {renderError()}
           <LiferayNotifications
             notifications={notifications}
             onHideNotifications={handleHideNotifications}
@@ -688,6 +686,8 @@ const NeonPage = (props) => {
           <BrowserWarning />
         </Container>
         <NeonFooter drupalCssLoaded={drupalCssLoaded} />
+        {renderLoading()}
+        {renderError()}
       </ThemeProvider>
     );
   };
