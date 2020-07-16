@@ -88,21 +88,46 @@ if (!window.gtmDataLayer) {
 // MUI default, NOT the NeonTheme. Hence why some definitions use COLORS directly.
 const useStyles = makeStyles(theme => ({
   outerPageContainer: {
-    display: 'flex',
-    alignItems: 'flex-start',
     position: 'relative',
     minHeight: theme.spacing(30),
     borderTop: '2px solid transparent',
-    paddingBottom: theme.spacing(3),
+    [theme.breakpoints.up('md')]: {
+      display: 'table',
+      tableLayout: 'fixed',
+    },
     [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(2.5),
       flexDirection: 'column',
     },
   },
+  pageContent: {
+    display: 'table-cell',
+    position: 'relative',
+    top: '12px',
+    padding: theme.spacing(4),
+    paddingBottom: theme.spacing(8),
+    [theme.breakpoints.down('sm')]: {
+      display: 'block',
+      padding: theme.spacing(3),
+      paddingBottom: theme.spacing(6),
+    },
+    // These override links created with a naked <a> tag, as opposed to a <Link>
+    // component, to appear the same as the <Link> component. This is especially
+    // useful for rendered markdown where injecting Mui Links isn't possible.
+    '& a:not([class]), a[class=""]': {
+      color: COLORS.LIGHT_BLUE[500],
+      textDecoration: 'none',
+    },
+    '& a:hover:not([class]), a:hover[class=""]': {
+      textDecoration: 'underline',
+    },
+  },
   sidebarContainer: {
+    display: 'table-cell',
     backgroundColor: COLORS.GREY[50],
     padding: theme.spacing(5, 4),
     [theme.breakpoints.down('sm')]: {
+      display: 'inline-block',
       width: '100%',
       maxHeight: 'calc(100vh - 84px)',
       padding: theme.spacing(2.5, 2),
@@ -115,22 +140,9 @@ const useStyles = makeStyles(theme => ({
       padding: theme.spacing(1.5),
     },
   },
-  sidebarContainerShort: {
-    [theme.breakpoints.up('md')]: {
-      height: '100%',
-      position: 'absolute',
-    },
-  },
-  sidebarContainerTall: {
-    [theme.breakpoints.up('md')]: {
-      position: 'sticky',
-      top: '12px',
-      marginBottom: '2px',
-    },
-  },
-  sidebarContainerFlexColumn: {
-    display: 'flex',
-    flexDirection: 'column',
+  sidebarInnerStickyContainer: {
+    position: 'sticky',
+    top: '40px',
   },
   sidebarTitleContainer: {
     display: 'flex',
@@ -189,23 +201,6 @@ const useStyles = makeStyles(theme => ({
     },
     [theme.breakpoints.down('xs')]: {
       margin: '8px 0px 12px 0px',
-    },
-  },
-  pageContainer: {
-    maxWidth: '2000px',
-    padding: theme.spacing(5, 4),
-    [theme.breakpoints.down('sm')]: {
-      padding: theme.spacing(3, 2.5),
-    },
-    // These override links created with a naked <a> tag, as opposed to a <Link>
-    // component, to appear the same as the <Link> component. This is especially
-    // useful for rendered markdown where injecting Mui Links isn't possible.
-    '& a:not([class]), a[class=""]': {
-      color: COLORS.LIGHT_BLUE[500],
-      textDecoration: 'none',
-    },
-    '& a:hover:not([class]), a:hover[class=""]': {
-      textDecoration: 'underline',
     },
   },
   backdropPaper: {
@@ -526,33 +521,16 @@ const NeonPage = (props) => {
 
   const renderSidebar = () => {
     if (!hasSidebar) { return null; }
-    const sidebarWidthStyle = belowMd ? {} : { width: `${sidebarWidth}px` };
-    const sidebarStyle = { ...sidebarWidthStyle };
-    if (sidebarUnsticky && !belowMd) { sidebarStyle.position = 'static'; }
+    const sidebarContainerStyle = belowMd ? {} : { width: `${sidebarWidth}px` };
     const dividerStyle = !belowMd ? { width: `${sidebarWidth - Theme.spacing(8)}px` } : {};
-    let sidebarClassName = `${classes.sidebarContainer} ${classes.sidebarContainerTall}`;
-    if (!hasSidebarContent) {
-      sidebarClassName = `${sidebarClassName} ${classes.sidebarContainerFlexColumn}`;
-    }
-    if (sidebarContainerClassNameProp) {
-      sidebarClassName = `${sidebarClassName} ${sidebarContainerClassNameProp}`;
-    }
-    // When working with a tall sidebar the sidebar element is block level to push the footer down.
-    // Page content could still be taller than the sidebar though, leaving a noticeable gap. This
-    // element is the one that's actually absolute positioned and full height but is only a
-    // a background, allowing the content to always be block-level and affect page height.
-    const tallSidebarBackfill = (
-      <div
-        className={`${classes.sidebarContainer} ${classes.sidebarContainerShort}`}
-        style={sidebarWidthStyle}
-      />
-    );
+    const sidebarClassName = sidebarContainerClassNameProp
+      ? `${classes.sidebarContainer} ${sidebarContainerClassNameProp}`
+      : classes.sidebarContainer;
     // Arbitrary Content Sidebar (no automatic skeleton)
     if (hasSidebarContent) {
       return (
         <React.Fragment>
-          {!belowMd ? tallSidebarBackfill : null}
-          <div ref={sidebarRef} className={sidebarClassName} style={sidebarStyle}>
+          <div ref={sidebarRef} className={sidebarClassName} style={sidebarContainerStyle}>
             {sidebarContent}
           </div>
         </React.Fragment>
@@ -641,9 +619,8 @@ const NeonPage = (props) => {
       </div>
     );
     return (
-      <React.Fragment>
-        {!belowMd ? tallSidebarBackfill : null}
-        <div ref={sidebarRef} className={sidebarClassName} style={sidebarStyle}>
+      <div ref={sidebarRef} className={sidebarClassName} style={sidebarContainerStyle}>
+        <div className={!sidebarUnsticky && !belowMd ? classes.sidebarInnerStickyContainer : null}>
           <div className={classes.sidebarTitleContainer}>
             {renderSidebarTitle()}
             {!belowMd ? null : (
@@ -659,7 +636,7 @@ const NeonPage = (props) => {
           <Divider className={classes.sidebarDivider} style={{ ...dividerStyle }} />
           {belowMd && !sidebarExpanded ? currentLinkOnly : fullLinks}
         </div>
-      </React.Fragment>
+      </div>
     );
   };
 
@@ -689,15 +666,15 @@ const NeonPage = (props) => {
         />
         <Container className={classes.outerPageContainer} style={outerPageContainerStyles}>
           {renderSidebar()}
-          <Container
-            className={classes.pageContainer}
+          <div
+            className={classes.pageContent}
             data-selenium="neon-page.content"
             ref={contentRef}
           >
             {renderBreadcrumbs()}
             {renderTitle()}
             {content}
-          </Container>
+          </div>
           {renderLoading()}
           {renderError()}
           <LiferayNotifications

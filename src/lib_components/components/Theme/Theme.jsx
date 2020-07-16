@@ -227,7 +227,7 @@ const baseTheme = createMuiTheme({
     // We have lots of overrides. Please keep them alphabetized for easier maintenance!
     MuiBackdrop: {
       root: {
-        zIndex: 2,
+        zIndex: 3,
       },
     },
     MuiBreadcrumbs: {
