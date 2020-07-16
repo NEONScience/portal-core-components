@@ -103,7 +103,6 @@ const useStyles = makeStyles(theme => ({
   pageContent: {
     display: 'table-cell',
     position: 'relative',
-    top: '12px',
     padding: theme.spacing(4),
     paddingBottom: theme.spacing(8),
     [theme.breakpoints.down('sm')]: {
@@ -202,6 +201,9 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down('xs')]: {
       margin: '8px 0px 12px 0px',
     },
+  },
+  breadcrumbs: {
+    marginTop: '24px',
   },
   backdropPaper: {
     display: 'flex',
@@ -477,6 +479,7 @@ const NeonPage = (props) => {
     <Breadcrumbs
       aria-label="Breadcrumbs"
       data-selenium="neon-page.breadcrumbs"
+      className={classes.breadcrumbs}
     >
       <Link key={uniqueId()} href="/">
         <HomeIcon title="Home" fontSize="small" style={{ marginBottom: '-4px' }} />
@@ -668,6 +671,7 @@ const NeonPage = (props) => {
           {renderSidebar()}
           <div
             className={classes.pageContent}
+            style={{ top: breadcrumbs.length ? '0px' : '12px' }}
             data-selenium="neon-page.content"
             ref={contentRef}
           >
