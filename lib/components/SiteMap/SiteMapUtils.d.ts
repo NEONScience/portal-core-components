@@ -1,4 +1,5 @@
 export const MAP_ZOOM_RANGE: number[];
+export const OBSERVATORY_CENTER: number[];
 export const MIN_CONTAINER_HEIGHT: 300;
 export const MIN_TABLE_MAX_BODY_HEIGHT: 100;
 export const KM2_TO_ACRES: 247.10538146717;
@@ -800,8 +801,7 @@ export namespace SITE_MAP_DEFAULT_PROPS {
     export { filterPosition_1 as filterPosition };
     const unusableVerticalSpace_1: number;
     export { unusableVerticalSpace_1 as unusableVerticalSpace };
-    const mapCenter_1: number[];
-    export { mapCenter_1 as mapCenter };
+    export { OBSERVATORY_CENTER as mapCenter };
     const mapZoom_1: null;
     export { mapZoom_1 as mapZoom };
     const mapTileLayer_1: string;
@@ -829,4 +829,5 @@ export function getZoomedIcons(zoom: any): {};
 export function getMapStateForFocusLocation(state?: {}): any;
 export function boundsAreValid(bounds: any): boolean;
 export function calculateLocationsInMap(locations: any, bounds?: any, extendMap?: boolean, extendPoints?: number): string[];
+export function deriveFullObservatoryZoomLevel(mapRef: any): number;
 import PropTypes from "prop-types";

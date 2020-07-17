@@ -59,6 +59,7 @@ import statesShapesJSON from '../../staticJSON/statesShapes.json';
 import domainsShapesJSON from '../../staticJSON/domainsShapes.json';
 
 export const MAP_ZOOM_RANGE = [1, 19];
+export const OBSERVATORY_CENTER = [52.68, -110.75];
 
 export const MIN_CONTAINER_HEIGHT = 300;
 export const MIN_TABLE_MAX_BODY_HEIGHT = 100;
@@ -1174,7 +1175,7 @@ export const SITE_MAP_DEFAULT_PROPS = {
   filterPosition: 'bottom',
   unusableVerticalSpace: 0,
   // Map Props
-  mapCenter: [52.68, -110.75],
+  mapCenter: OBSERVATORY_CENTER,
   mapZoom: null,
   mapTileLayer: Object.keys(TILE_LAYERS)[0],
   // Initial map focus (overrides mapCenter and mapZoom)
@@ -1542,4 +1543,13 @@ export const calculateLocationsInMap = (
     return false;
   };
   return Object.keys(locations).filter(locId => isInBounds(locations[locId]));
+};
+
+export const deriveFullObservatoryZoomLevel = (mapRef) => {
+  const FALLBACK_ZOOM = 2;
+  if (!mapRef.current) { return FALLBACK_ZOOM; }
+  const container = mapRef.current.container.parentElement;
+  const minorDim = Math.min(container.clientWidth / 136, container.clientHeight / 128);
+  const derivedZoom = [1, 2, 4, 6, 11].findIndex(m => m > minorDim);
+  return derivedZoom === -1 ? FALLBACK_ZOOM : derivedZoom;
 };

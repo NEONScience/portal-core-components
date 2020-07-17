@@ -671,7 +671,7 @@ const NeonPage = (props) => {
           {renderSidebar()}
           <div
             className={classes.pageContent}
-            style={{ top: breadcrumbs.length ? '0px' : '12px' }}
+            style={{ top: hasSidebar && !breadcrumbs.length ? '12px' : '0px' }}
             data-selenium="neon-page.content"
             ref={contentRef}
           >

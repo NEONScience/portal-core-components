@@ -27,6 +27,7 @@ import {
   SELECTABLE_FEATURE_TYPES,
   SITE_LOCATION_HIERARCHIES_MIN_ZOOM,
   MAP_ZOOM_RANGE,
+  OBSERVATORY_CENTER,
   PLOT_SAMPLING_MODULES,
   SITE_MAP_PROP_TYPES,
   SITE_MAP_DEFAULT_PROPS,
@@ -39,6 +40,7 @@ import {
   calculateFeatureAvailability,
   boundsAreValid,
   calculateLocationsInMap,
+  deriveFullObservatoryZoomLevel,
 } from './SiteMapUtils';
 
 // Derive the selected status of a given boundary (US state or NEON domain). This should run
@@ -427,6 +429,11 @@ const reducer = (state, action) => {
 
     case 'setMapRepositionOpenPopupFunc':
       newState.map.repositionOpenPopupFunc = typeof action.func === 'function' ? action.func : null;
+      return newState;
+
+    case 'showFullObservatory':
+      newState.map.center = OBSERVATORY_CENTER;
+      newState.map.zoom = deriveFullObservatoryZoomLevel(action.mapRef);
       return newState;
 
     // Features

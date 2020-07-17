@@ -5,7 +5,10 @@ import ReactDOMServer from 'react-dom/server';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
+import ObservatoryIcon from '@material-ui/icons/Public';
 
 import 'leaflet/dist/leaflet.css';
 import './SiteMap.css';
@@ -28,6 +31,7 @@ import {
   MAP_ZOOM_RANGE,
   FEATURES,
   FETCH_STATUS,
+  deriveFullObservatoryZoomLevel,
 } from './SiteMapUtils';
 
 const { BaseLayer } = LayersControl;
@@ -69,6 +73,8 @@ const useStyles = makeStyles(theme => ({
     '& div.leaflet-control-attribution': {
       borderTopLeftRadius: '2px',
       marginRight: '26px',
+      height: '26px',
+      padding: '4px 8px',
     },
     '& div.leaflet-control-attribution a': {
       color: theme.palette.primary.main,
@@ -102,6 +108,26 @@ const useStyles = makeStyles(theme => ({
     top: theme.spacing(1.5),
     right: theme.spacing(7),
   },
+  observatoryButton: {
+    backgroundColor: '#fff',
+    position: 'absolute',
+    zIndex: 999,
+    top: '72px',
+    left: '10px',
+    width: '26px',
+    height: '26px',
+    padding: 'unset',
+    borderRadius: '2px 0px 2px 0px',
+    border: `1px solid ${theme.colors.LIGHT_BLUE[500]}`,
+    '&:hover, &:active': {
+      color: theme.colors.LIGHT_BLUE[400],
+      borderColor: theme.colors.LIGHT_BLUE[400],
+      backgroundColor: theme.palette.grey[50],
+    },
+    '& svg': {
+      fontSize: '1.15rem !important',
+    },
+  },
 }));
 
 /**
@@ -130,12 +156,9 @@ const SiteMapLeaflet = () => {
       !canRender || state.map.zoom !== null
         || !mapRef || !mapRef.current || !mapRef.current.container
     ) { return; }
-    const container = mapRef.current.container.parentElement;
-    const minorDim = Math.min(container.clientWidth / 136, container.clientHeight / 128);
-    const derivedZoom = [1, 2, 4, 6, 11].findIndex(m => m > minorDim);
     dispatch({
       type: 'setMapZoom',
-      zoom: derivedZoom === -1 ? 5 : derivedZoom,
+      zoom: deriveFullObservatoryZoomLevel(mapRef),
     });
   }, [
     canRender,
@@ -160,6 +183,21 @@ const SiteMapLeaflet = () => {
       },
     });
   }, [state.map.bounds, dispatch]);
+
+  /**
+     Render - Zoom to Observatory Button
+  */
+  const renderShowFullObservatoryButton = () => (
+    <Tooltip placement="right" title="Show the full NEON Observatory">
+      <IconButton
+        type="button"
+        className={classes.observatoryButton}
+        onClick={() => { dispatch({ type: 'showFullObservatory', mapRef }); }}
+      >
+        <ObservatoryIcon fontSize="small" />
+      </IconButton>
+    </Tooltip>
+  );
 
   /**
     Effect
@@ -311,6 +349,7 @@ const SiteMapLeaflet = () => {
           .filter(key => state.filters.features.visible[key])
           .map(key => <SiteMapFeature key={key} featureKey={key} mapRef={mapRef} />)}
       </Map>
+      {renderShowFullObservatoryButton()}
       {renderProgress()}
     </React.Fragment>
   );

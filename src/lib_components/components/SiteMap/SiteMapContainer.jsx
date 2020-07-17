@@ -70,7 +70,8 @@ const useStyles = makeStyles(theme => ({
   },
   featuresContainer: {
     backgroundColor: theme.palette.grey[100],
-    height: '100%',
+    height: 'calc(100% - 26px)',
+    borderBottomLeftRadius: '4px',
     position: 'absolute',
     zIndex: 1000,
     top: '0px',
@@ -234,11 +235,15 @@ const SiteMapContainer = (props) => {
 
   /**
      Effect - Monitor all click events and close the features pane if open and clicked outside
+     and not in the content area (map or table)
   */
   useEffect(() => {
     if (!state.filters.features.open || !featuresRef.current) { return () => {}; }
     const handleClick = (event) => {
-      if (featuresRef.current && !featuresRef.current.contains(event.target)) {
+      if (
+        featuresRef.current && !featuresRef.current.contains(event.target)
+          && contentDivRef.current && !contentDivRef.current.contains(event.target)
+      ) {
         dispatch({ type: 'setFilterFeaturesOpen', open: false });
       }
     };
@@ -246,7 +251,12 @@ const SiteMapContainer = (props) => {
     return () => {
       document.removeEventListener('click', handleClick);
     };
-  }, [state.filters.features.open, featuresRef, dispatch]);
+  }, [
+    state.filters.features.open,
+    featuresRef,
+    contentDivRef,
+    dispatch,
+  ]);
 
   /**
      Effect - If NeonContext Data is now available and has not been hydrated into state then do so.
@@ -313,7 +323,7 @@ const SiteMapContainer = (props) => {
      Render - Vertical resize Elements
   */
   const renderVerticalResizeButton = () => (
-    <Tooltip title={`Resize ${view === VIEWS.MAP ? 'map' : 'table'} vertically`}>
+    <Tooltip placement="left" title={`Resize ${view === VIEWS.MAP ? 'map' : 'table'} vertically`}>
       <IconButton
         draggable
         type="button"

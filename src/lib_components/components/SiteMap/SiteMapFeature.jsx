@@ -19,6 +19,7 @@ import ClickIcon from '@material-ui/icons/TouchApp';
 import ElevationIcon from '@material-ui/icons/Terrain';
 import ExploreDataProductsIcon from '@material-ui/icons/InsertChartOutlined';
 import LocationIcon from '@material-ui/icons/MyLocation';
+import MarkerIcon from '@material-ui/icons/LocationOn';
 import SiteDetailsIcon from '@material-ui/icons/InfoOutlined';
 
 import 'leaflet/dist/leaflet.css';
@@ -125,6 +126,11 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'flex-end',
     alignItems: 'center',
+  },
+  markerIcon: {
+    marginRight: '2px',
+    marginBottom: '-3px',
+    fontSize: '0.95rem',
   },
 }));
 
@@ -250,6 +256,8 @@ const SiteMapFeature = (props) => {
       popup._closeButton.style.display = 'none';
     }
   };
+
+  const markerIcon = <MarkerIcon className={classes.markerIcon} />;
 
   /**
      Render: Popup Title with Feature Icon
@@ -619,9 +627,12 @@ const SiteMapFeature = (props) => {
           <Link
             variant="caption"
             component="button"
+            title={`Jump to ${site.domainCode} on the map`}
+            style={{ textAlign: 'right' }}
             onClick={() => jumpTo(site.domainCode)}
             data-selenium="sitemap-map-popup-domainLink"
           >
+            {markerIcon}
             {domainTitle}
           </Link>
         </Grid>
@@ -750,9 +761,12 @@ const SiteMapFeature = (props) => {
             <Link
               variant="caption"
               component="button"
+              style={{ textAlign: 'right' }}
               onClick={() => jumpTo(site.stateCode)}
+              title={`Jump to ${usState.name} on the map`}
               data-selenium="sitemap-map-popup-stateLink"
             >
+              {markerIcon}
               {usState.name}
             </Link>
           </Grid>
@@ -766,9 +780,12 @@ const SiteMapFeature = (props) => {
             <Link
               variant="caption"
               component="button"
+              style={{ textAlign: 'right' }}
               onClick={() => jumpTo(site.domainCode)}
+              title={`Jump to ${site.domainCode} on the map`}
               data-selenium="sitemap-map-popup-domainLink"
             >
+              {markerIcon}
               {`${site.domainCode} - ${domain.name}`}
             </Link>
           </Grid>
