@@ -8,6 +8,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
 import Checkbox from '@material-ui/core/Checkbox';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -115,12 +116,16 @@ const useStyles = makeStyles(theme => ({
     alignContent: 'flex-start',
     flexFlow: 'row wrap',
   },
-  sitePaper: {
+  siteCard: {
     padding: theme.spacing(1.5, 2, 1.5, 2),
-    borderRadius: theme.spacing(2),
     backgroundColor: theme.palette.grey[50],
     marginTop: theme.spacing(3),
-    marginRight: theme.spacing(3),
+    [theme.breakpoints.up('lg')]: {
+      marginRight: theme.spacing(3),
+    },
+    [theme.breakpoints.down('md')]: {
+      width: '100%',
+    },
   },
   siteTitleContainer: {
     display: 'flex',
@@ -157,24 +162,14 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  positionPaper: {
+  positionCard: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
     padding: theme.spacing(0.5, 2, 0.5, 0.5),
-    borderRadius: theme.spacing(2),
     width: '100%',
     backgroundColor: theme.palette.grey[100],
     marginTop: theme.spacing(1.5),
-  },
-  smallButton: {
-    fontSize: '0.8rem',
-    padding: theme.spacing(0.125, 0.75),
-    whiteSpace: 'nowrap',
-  },
-  smallButtonIcon: {
-    marginRight: theme.spacing(0.5),
-    fontSize: '0.8rem',
   },
   startFlex: {
     display: 'flex',
@@ -304,12 +299,12 @@ function PositionHistoryButton(props) {
   if (disabled) {
     return (
       <Button
+        size="small"
         variant="outlined"
-        className={classes.smallButton}
         title="This position has had no changes to physical locations since its creation"
+        startIcon={<HistoryIcon />}
         disabled
       >
-        <HistoryIcon className={classes.smallButtonIcon} />
         No History
       </Button>
     );
@@ -317,13 +312,12 @@ function PositionHistoryButton(props) {
   return (
     <React.Fragment>
       <Button
-        color="primary"
+        size="small"
         variant="outlined"
         onClick={() => { setHistoryDialogOpen(true); }}
-        className={classes.smallButton}
         title="Click to show all changes to physical locations for this position over time"
+        startIcon={<HistoryIcon />}
       >
-        <HistoryIcon className={classes.smallButtonIcon} />
         {`History (${history.length})`}
       </Button>
       <Dialog
@@ -514,7 +508,7 @@ function SelectedPosition(props) {
   const { siteCode, position, disabled } = props;
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   return (
-    <Paper key={position} className={classes.positionPaper}>
+    <Card key={position} variant="outlined" className={classes.positionCard}>
       <IconButton
         aria-label={`remove position ${position} from ${siteCode}`}
         disabled={disabled}
@@ -535,7 +529,7 @@ function SelectedPosition(props) {
       <div style={{ flexGrow: 1 }}>
         <PositionDetail siteCode={siteCode} position={position} />
       </div>
-    </Paper>
+    </Card>
   );
 }
 
@@ -551,7 +545,6 @@ SelectedPosition.defaultProps = { disabled: false };
    SelectPositionsButton - button that opens a dialog for position selection
 */
 function SelectPositionsButton(props) {
-  const classes = useStyles(Theme);
   const { selectedSite } = props;
   const { siteCode, positions: selectedPositions } = selectedSite;
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
@@ -577,15 +570,14 @@ function SelectPositionsButton(props) {
   return (
     <React.Fragment>
       <Button
-        color="primary"
+        size="small"
         variant="outlined"
+        startIcon={<SelectIcon />}
         onClick={() => {
           setLocalSelectedPositions(selectedPositions);
           setSelectDialogOpen(true);
         }}
-        className={classes.smallButton}
       >
-        <SelectIcon className={classes.smallButtonIcon} />
         Select Positions…
       </Button>
       <Dialog
@@ -650,12 +642,11 @@ function SelectPositionsButton(props) {
           </List>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => { setSelectDialogOpen(false); }} color="primary" variant="outlined">
+          <Button onClick={() => { setSelectDialogOpen(false); }} variant="outlined">
             Cancel
           </Button>
           <Button
             onClick={handleApply}
-            color="primary"
             variant="contained"
             disabled={!localSelectedPositions.length}
           >
@@ -809,17 +800,16 @@ function SelectedSite(props) {
   );
   const removeSiteButton = (
     <Button
-      color="primary"
+      size="small"
       variant="outlined"
       onClick={() => {
         if (disabled) { return; }
         dispatch({ type: 'selectRemoveSite', siteCode });
       }}
-      className={classes.smallButton}
       style={{ minWidth: Theme.spacing(13) }}
       disabled={disabled}
+      startIcon={<ClearIcon />}
     >
-      <ClearIcon className={classes.smallButtonIcon} />
       Remove Site
     </Button>
   );
@@ -932,7 +922,7 @@ function SelectedSite(props) {
     );
   }
   return (
-    <Paper key={siteCode} className={classes.sitePaper}>
+    <Card key={siteCode} variant="outlined" className={classes.siteCard}>
       {selectedSiteContent}
       {positions.length ? (
         <div>
@@ -969,7 +959,7 @@ function SelectedSite(props) {
           </Typography>
         </div>
       )}
-    </Paper>
+    </Card>
   );
 }
 

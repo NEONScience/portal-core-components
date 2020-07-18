@@ -1,7 +1,5 @@
 /* eslint react/jsx-one-expression-per-line: 0 */
-
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
@@ -20,9 +18,8 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function StyleGuide(props) {
+export default function StyleGuide() {
   const classes = useStyles(Theme);
-  const { onClickHash } = props;
   const styleGuideUrl = 'https://raw.githubusercontent.com/NEONScience/portal-core-components/master/reference/NSF-NEON-BRAND.GUIDELINES.pdf';
 
   return (
@@ -49,7 +46,7 @@ import Theme from 'portal-core-components/lib/components/Theme';
       </DocBlock>
       <DocBlock>
         Note when using the&nbsp;
-        <Link href="#NeonPage" onClick={() => onClickHash('#NeonPage')}>Neon Page Component</Link>
+        <Link href="#NeonPage">Neon Page Component</Link>
         &nbsp;the theme will automatically be injected into the page such that all
         components used in the page will have the them applied. When building custom
         classes and styles within a component&apos;s JSX, however, it may be helpful
@@ -131,7 +128,3 @@ const myComponent = () => {
     </React.Fragment>
   );
 }
-
-StyleGuide.propTypes = {
-  onClickHash: PropTypes.func.isRequired,
-};

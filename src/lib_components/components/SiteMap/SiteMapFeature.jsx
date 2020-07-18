@@ -19,6 +19,7 @@ import ClickIcon from '@material-ui/icons/TouchApp';
 import ElevationIcon from '@material-ui/icons/Terrain';
 import ExploreDataProductsIcon from '@material-ui/icons/InsertChartOutlined';
 import LocationIcon from '@material-ui/icons/MyLocation';
+import MarkerIcon from '@material-ui/icons/LocationOn';
 import SiteDetailsIcon from '@material-ui/icons/InfoOutlined';
 
 import 'leaflet/dist/leaflet.css';
@@ -34,15 +35,13 @@ import {
 
 import SiteMapContext from './SiteMapContext';
 import {
+  getHref,
   FEATURES,
   FEATURE_TYPES,
   KM2_TO_ACRES,
   HIGHLIGHT_STATUS,
   SELECTION_STATUS,
   PLOT_SAMPLING_MODULES,
-  SITE_DETAILS_URL_BASE,
-  // SELECTABLE_FEATURE_TYPES,
-  EXPLORE_DATA_PRODUCTS_URL_BASE,
 } from './SiteMapUtils';
 
 import Theme from '../Theme/Theme';
@@ -62,22 +61,31 @@ const useStyles = makeStyles(theme => ({
   popup: {
     minWidth: '320px',
     '& a': {
-      color: theme.palette.secondary.main,
+      color: theme.palette.primary.main,
     },
     '& p': {
       margin: 'unset',
+    },
+    '& div.leaflet-popup-content-wrapper': {
+      borderRadius: '2px !important',
     },
     '& a.leaflet-popup-close-button': {
       top: theme.spacing(0.5),
       right: theme.spacing(0.5),
     },
   },
+  popupButtonRow: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    marginTop: theme.spacing(2),
+    '& > :not(:last-child)': {
+      marginRight: theme.spacing(1),
+    },
+  },
   popupButton: {
-    width: '100%',
     whiteSpace: 'nowrap',
     marginBottom: theme.spacing(1),
-    color: `${Theme.palette.primary.main} !important`,
-    borderColor: Theme.palette.primary.main,
     '& span': {
       pointerEvents: 'none',
     },
@@ -119,7 +127,22 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
+  markerIcon: {
+    marginRight: '2px',
+    marginBottom: '-3px',
+    fontSize: '0.95rem',
+  },
 }));
+
+const positionsArrayIsValid = (positions, checkAllCoords = false) => {
+  if (!Array.isArray(positions) || positions.length === 0) { return false; }
+  if (!checkAllCoords) { return true; }
+  return positions.every(p => (
+    Array.isArray(p) && (
+      (p.length === 2 && p.every(c => Number.isFinite(c))) || positionsArrayIsValid(p)
+    )
+  ));
+};
 
 const SiteMapFeature = (props) => {
   const classes = useStyles(Theme);
@@ -133,12 +156,21 @@ const SiteMapFeature = (props) => {
     name,
     nameSingular,
     type: featureType,
+    description,
     style: featureStyle,
     featureShape,
     iconSvg,
     primaryIdOnly = false,
+    parentDataFeatureKey,
   } = feature;
   const featureName = nameSingular || name || featureKey;
+
+  let featureDescription = description;
+  let parentFeature = null;
+  if (parentDataFeatureKey && FEATURES[parentDataFeatureKey]) {
+    parentFeature = FEATURES[parentDataFeatureKey];
+    if (description === 'PARENT') { featureDescription = parentFeature.description; }
+  }
 
   // Groups don't render anything ever!
   if (featureType === FEATURE_TYPES.GROUP) { return null; }
@@ -151,8 +183,8 @@ const SiteMapFeature = (props) => {
     neonContextHydrated,
     focusLocation: { current: focusLocation },
     featureData: {
-      [featureType]: {
-        [featureKey]: featureData,
+      [parentFeature ? parentFeature.type : featureType]: {
+        [parentFeature ? parentFeature.KEY : featureKey]: featureData,
       },
     },
   } = state;
@@ -224,6 +256,8 @@ const SiteMapFeature = (props) => {
       popup._closeButton.style.display = 'none';
     }
   };
+
+  const markerIcon = <MarkerIcon className={classes.markerIcon} />;
 
   /**
      Render: Popup Title with Feature Icon
@@ -593,9 +627,12 @@ const SiteMapFeature = (props) => {
           <Link
             variant="caption"
             component="button"
+            title={`Jump to ${site.domainCode} on the map`}
+            style={{ textAlign: 'right' }}
             onClick={() => jumpTo(site.domainCode)}
             data-selenium="sitemap-map-popup-domainLink"
           >
+            {markerIcon}
             {domainTitle}
           </Link>
         </Grid>
@@ -688,28 +725,25 @@ const SiteMapFeature = (props) => {
         variant: 'outlined',
         color: 'primary',
         target: '_blank',
+        size: 'small',
       };
       return (
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <Button
-              endIcon={<SiteDetailsIcon />}
-              href={`${SITE_DETAILS_URL_BASE}${site.siteCode}`}
-              {...actionButtonProps}
-            >
-              Site Details
-            </Button>
-          </Grid>
-          <Grid item xs={6}>
-            <Button
-              endIcon={<ExploreDataProductsIcon />}
-              href={`${EXPLORE_DATA_PRODUCTS_URL_BASE}${site.siteCode}`}
-              {...actionButtonProps}
-            >
-              Explore Data
-            </Button>
-          </Grid>
-        </Grid>
+        <div className={classes.popupButtonRow}>
+          <Button
+            endIcon={<SiteDetailsIcon />}
+            href={getHref('SITE_DETAILS', site.siteCode)}
+            {...actionButtonProps}
+          >
+            Site Details
+          </Button>
+          <Button
+            endIcon={<ExploreDataProductsIcon />}
+            href={getHref('EXPLORE_DATA_PRODUCTS_BY_SITE', site.siteCode)}
+            {...actionButtonProps}
+          >
+            Explore Data
+          </Button>
+        </div>
       );
     };
     return (
@@ -719,7 +753,7 @@ const SiteMapFeature = (props) => {
           {/* Terrain and Type */}
           <Grid item xs={8}>
             <Typography variant="subtitle2">{feature.nameSingular}</Typography>
-            <Typography variant="caption"><i>{feature.description}</i></Typography>
+            <Typography variant="caption"><i>{featureDescription}</i></Typography>
           </Grid>
           {/* State/Territory */}
           <Grid item xs={4} style={{ textAlign: 'right' }}>
@@ -727,9 +761,12 @@ const SiteMapFeature = (props) => {
             <Link
               variant="caption"
               component="button"
+              style={{ textAlign: 'right' }}
               onClick={() => jumpTo(site.stateCode)}
+              title={`Jump to ${usState.name} on the map`}
               data-selenium="sitemap-map-popup-stateLink"
             >
+              {markerIcon}
               {usState.name}
             </Link>
           </Grid>
@@ -743,9 +780,12 @@ const SiteMapFeature = (props) => {
             <Link
               variant="caption"
               component="button"
+              style={{ textAlign: 'right' }}
               onClick={() => jumpTo(site.domainCode)}
+              title={`Jump to ${site.domainCode} on the map`}
               data-selenium="sitemap-map-popup-domainLink"
             >
+              {markerIcon}
               {`${site.domainCode} - ${domain.name}`}
             </Link>
           </Grid>
@@ -759,6 +799,11 @@ const SiteMapFeature = (props) => {
      Render - All the Rest of the Popups
      Convention is alphabetical listing of keys since order here doesn't matter
   */
+  const renderLocationPopupWithPlotSizeAndSlope = (siteCode, location) => renderLocationPopup(
+    siteCode,
+    location,
+    [renderPlotSizeAndSlope],
+  );
   const renderPopupFunctions = {
     AQUATIC_BENCHMARKS: renderLocationPopup,
     AQUATIC_BUOYS: renderLocationPopup,
@@ -779,21 +824,13 @@ const SiteMapFeature = (props) => {
       renderPlotSizeAndSlope,
       renderPlotSamplingModules,
     ]),
-    DISTRIBUTED_BIRD_GRID_POINTS: renderLocationPopup,
-    DISTRIBUTED_BIRD_GRIDS: (siteCode, location) => renderLocationPopup(siteCode, location, [
-      renderPlotSizeAndSlope,
-    ]),
-    DISTRIBUTED_MAMMAL_GRID_POINTS: renderLocationPopup,
-    DISTRIBUTED_MAMMAL_GRIDS: (siteCode, location) => renderLocationPopup(siteCode, location, [
-      renderPlotSizeAndSlope,
-    ]),
-    DISTRIBUTED_MOSQUITO_POINTS: (siteCode, location) => renderLocationPopup(siteCode, location, [
-      renderPlotSizeAndSlope,
-    ]),
-    DISTRIBUTED_TICK_PLOT_POINTS: renderLocationPopup,
-    DISTRIBUTED_TICK_PLOTS: (siteCode, location) => renderLocationPopup(siteCode, location, [
-      renderPlotSizeAndSlope,
-    ]),
+    DISTRIBUTED_BIRD_GRID_BOUNDARIES: renderLocationPopupWithPlotSizeAndSlope,
+    DISTRIBUTED_BIRD_GRIDS: renderLocationPopupWithPlotSizeAndSlope,
+    DISTRIBUTED_MAMMAL_GRID_BOUNDARIES: renderLocationPopupWithPlotSizeAndSlope,
+    DISTRIBUTED_MAMMAL_GRIDS: renderLocationPopupWithPlotSizeAndSlope,
+    DISTRIBUTED_MOSQUITO_POINTS: renderLocationPopupWithPlotSizeAndSlope,
+    DISTRIBUTED_TICK_PLOT_BOUNDARIES: renderLocationPopupWithPlotSizeAndSlope,
+    DISTRIBUTED_TICK_PLOTS: renderLocationPopupWithPlotSizeAndSlope,
     DOMAINS: (domainCode) => {
       const title = !featureData[domainCode] ? null : (
         <span>
@@ -828,10 +865,8 @@ const SiteMapFeature = (props) => {
       renderPlotSizeAndSlope,
       renderPlotSamplingModules,
     ]),
-    TOWER_PHENOLOGY_PLOT_POINTS: renderLocationPopup,
-    TOWER_PHENOLOGY_PLOTS: (siteCode, location) => renderLocationPopup(siteCode, location, [
-      renderPlotSizeAndSlope,
-    ]),
+    TOWER_PHENOLOGY_PLOT_BOUNDARIES: renderLocationPopupWithPlotSizeAndSlope,
+    TOWER_PHENOLOGY_PLOTS: renderLocationPopupWithPlotSizeAndSlope,
     TOWER_SOIL_PLOTS: renderLocationPopup,
     TOWERS: (siteCode, location) => renderLocationPopup(siteCode, location, [
       renderTowerDetails,
@@ -891,7 +926,6 @@ const SiteMapFeature = (props) => {
     const key = secondaryId ? `${primaryId} - ${secondaryId}` : primaryId;
     const renderedPopup = renderPopup(primaryId, secondaryId);
     const shapeKeys = Object.keys(shapeData);
-    let shape = null;
     let position = [];
     let positions = [];
     let icon = null;
@@ -900,8 +934,7 @@ const SiteMapFeature = (props) => {
     let shapeProps = {};
     if (shapeData.geometry && shapeData.geometry.coordinates) {
       positions = shapeData.geometry.coordinates;
-      shape = featureShape;
-      if (shape === 'Polyline') {
+      if (featureShape === 'Polyline') {
         shapeProps = {
           ...featureStyle || {},
           onMouseOver: (e) => {
@@ -912,7 +945,7 @@ const SiteMapFeature = (props) => {
           },
         };
       }
-      if (shape === 'Polygon') {
+      if (featureShape === 'Polygon') {
         shapeProps = {
           ...featureStyle || {},
           ...polygonInteractionProps,
@@ -926,12 +959,11 @@ const SiteMapFeature = (props) => {
         }
       }
     }
-    if (isPoint(shapeData)) {
-      shape = featureShape || 'Marker';
+    if (featureShape === 'Marker' && isPoint(shapeData)) {
       position = ['latitude', 'longitude'].every(k => shapeKeys.includes(k))
         ? [shapeData.latitude, shapeData.longitude]
         : shapeData.geometry.coordinates;
-      if (shape === 'Marker' && state.map.zoomedIcons[featureKey] !== null) {
+      if (state.map.zoomedIcons[featureKey] !== null) {
         const baseIcon = state.map.zoomedIcons[featureKey];
         const selection = isSelected ? SELECTION_STATUS.SELECTED : SELECTION_STATUS.UNSELECTED;
         const initialHighlight = isHighlighted ? HIGHLIGHT_STATUS.HIGHLIGHT : HIGHLIGHT_STATUS.NONE;
@@ -983,7 +1015,7 @@ const SiteMapFeature = (props) => {
         </Marker>
       );
     }
-    switch (shape) {
+    switch (featureShape) {
       case 'Marker':
         return marker;
       case 'Circle':
@@ -1000,14 +1032,11 @@ const SiteMapFeature = (props) => {
           </CircleMarker>
         );
       case 'Polygon':
-        return (
-          <React.Fragment key={key}>
-            <Polygon key={`${key}-polygon`} positions={positions} {...shapeProps}>
-              {renderedPopup}
-            </Polygon>
-            {marker}
-          </React.Fragment>
-        );
+        return positionsArrayIsValid(positions, featureType === FEATURE_TYPES.SAMPLING_POINTS) ? (
+          <Polygon key={`${key}-polygon`} positions={positions} {...shapeProps}>
+            {renderedPopup}
+          </Polygon>
+        ) : null;
       case 'Polyline':
         return (
           <Polyline key={`${key}-polyline`} positions={positions} {...shapeProps}>

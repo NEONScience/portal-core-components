@@ -12,13 +12,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
 import MenuItem from '@material-ui/core/MenuItem';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import Select from '@material-ui/core/Select';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import Typography from '@material-ui/core/Typography';
@@ -51,22 +52,6 @@ const svgMinWidth = (SVG.CELL_WIDTH + SVG.CELL_PADDING) * SVG.MIN_CELLS
   + Math.floor(SVG.MIN_CELLS / 12) * SVG.YEAR_PADDING;
 const svgMinHeight = (SVG.CELL_HEIGHT + SVG.CELL_PADDING) * (SVG.MIN_ROWS + 1);
 const useStyles = makeStyles(theme => ({
-  optionButtonGroup: {
-    height: theme.spacing(4),
-  },
-  optionButton: {
-    height: theme.spacing(4),
-    fontWeight: 600,
-    color: theme.palette.primary.main,
-    borderColor: theme.palette.primary.main,
-    padding: theme.spacing(0, 1.5),
-    whiteSpace: 'nowrap',
-  },
-  // Use !important here to override the Mui-selected class with higher priority
-  optionButtonSelected: {
-    color: '#fff !important',
-    backgroundColor: `${theme.palette.primary.main} !important`,
-  },
   svg: {
     minWidth: `${svgMinWidth}px`,
     minHeight: `${svgMinHeight}px`,
@@ -94,15 +79,7 @@ const useStyles = makeStyles(theme => ({
     },
     marginRight: theme.spacing(2),
   },
-  helpSnackbar: {
-    backgroundColor: theme.palette.grey[50],
-    color: '#000',
-    border: `1px solid ${theme.palette.primary.main}80`,
-    '& div.MuiSnackbarContent-message': {
-      width: '100%',
-    },
-  },
-  helpIcon: {
+  calloutIcon: {
     color: theme.palette.grey[300],
     marginRight: theme.spacing(1),
   },
@@ -111,8 +88,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'flex-start',
     justifyContent: 'space-around',
     flexWrap: 'wrap',
-    marginBottom: theme.spacing(-1),
-    marginRight: theme.spacing(-1),
+    padding: '16px 16px 8px 16px !important',
   },
   helpGrid: {
     display: 'flex',
@@ -466,17 +442,11 @@ const DataProductAvailability = (props) => {
      Render: View Options
   */
   const renderViewOptions = () => {
-    const renderToggleButton = (key) => {
-      let className = classes.optionButton;
-      if (key === currentView) {
-        className = `${className} ${classes.optionButtonSelected}`;
-      }
-      return (
-        <ToggleButton key={key} value={key} size="small" className={className}>
-          {views[key].name}
-        </ToggleButton>
-      );
-    };
+    const renderToggleButton = key => (
+      <ToggleButton key={key} value={key} size="small">
+        {views[key].name}
+      </ToggleButton>
+    );
     return (
       <div
         style={optionDivStyle}
@@ -492,10 +462,7 @@ const DataProductAvailability = (props) => {
         <Hidden smDown key="viewMdUp">
           <ToggleButtonGroup
             exclusive
-            color="primary"
-            variant="outlined"
             size="small"
-            className={classes.optionButtonGroup}
             value={currentView}
             onChange={handleChangeView}
           >
@@ -557,7 +524,6 @@ const DataProductAvailability = (props) => {
         <ToggleButtonGroup
           exclusive
           value={currentSortDirection}
-          className={classes.optionButtonGroup}
           onChange={handleChangeSortDirection}
           data-selenium="data-product-availability.sort-options.direction"
         >
@@ -565,7 +531,6 @@ const DataProductAvailability = (props) => {
             size="small"
             key={SORT_DIRECTIONS[0]}
             value={SORT_DIRECTIONS[0]}
-            className={`${classes.optionButton} ${currentSortDirection === SORT_DIRECTIONS[0] ? classes.optionButtonSelected : ''}`}
             title="Sort Ascending (A-Z)"
             aria-label="Sort Ascending (A-Z)"
           >
@@ -575,7 +540,6 @@ const DataProductAvailability = (props) => {
             size="small"
             key={SORT_DIRECTIONS[1]}
             value={SORT_DIRECTIONS[1]}
-            className={`${classes.optionButton} ${currentSortDirection === SORT_DIRECTIONS[1] ? classes.optionButtonSelected : ''}`}
             title="Sort Descending (Z-A)"
             aria-label="Sort Descending (Z-A)"
           >
@@ -594,6 +558,7 @@ const DataProductAvailability = (props) => {
     const sitesPlural = sites.value.length > 1 ? 's' : '';
     const siteChipLabel = `${sites.value.length} site${sitesPlural}`;
     const siteChipProps = {
+      color: 'primary',
       size: 'large',
       classes: siteChipClasses,
       label: sites.value.length ? siteChipLabel : 'no sites selected',
@@ -647,7 +612,7 @@ const DataProductAvailability = (props) => {
                 onChange={newDate => handleChangeStartDate(newDate)}
                 minDate={getYearMonthMoment(dateRange.validValues[0])}
                 maxDate={getYearMonthMoment(dateRange.value[1])}
-                style={{ marginRight: Theme.spacing(1.5) }}
+                style={{ marginRight: Theme.spacing(1.5), zIndex: 0 }}
               />
               <DatePicker
                 {...datePickerProps}
@@ -657,10 +622,11 @@ const DataProductAvailability = (props) => {
                 onChange={newDate => handleChangeEndDate(newDate)}
                 minDate={getYearMonthMoment(dateRange.value[0])}
                 maxDate={getYearMonthMoment(dateRange.validValues[1])}
+                style={{ zIndex: 0 }}
               />
             </div>
           </MuiPickersUtilsProvider>
-          <div style={{ display: 'flex', marginTop: Theme.spacing(1) }}>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: Theme.spacing(1) }}>
             <Button
               {...selectionButtonProps}
               data-selenium="data-product-availability.all-years-button"
@@ -679,32 +645,28 @@ const DataProductAvailability = (props) => {
           </div>
         </Grid>
         <Grid item xs={12} style={{ marginBottom: Theme.spacing(1) }}>
-          <SnackbarContent
-            className={classes.helpSnackbar}
-            style={{ justifyContent: 'center' }}
-            message={(
-              <div className={classes.helpGridContainer}>
-                <div className={classes.helpGrid}>
-                  <PanIcon className={classes.helpIcon} />
-                  <Typography variant="body1" component="div" style={{ flexGrow: 1 }}>
-                    Drag the grid to pan across time
-                  </Typography>
-                </div>
-                <div className={classes.helpGrid}>
-                  <ClickIcon className={classes.helpIcon} />
-                  <Typography variant="body1" component="div" style={{ flexGrow: 1 }}>
-                    Click rows to select sites
-                  </Typography>
-                </div>
-                <div className={classes.helpGrid}>
-                  <DragIcon className={classes.helpIcon} style={{ transform: 'rotate(90deg)' }} />
-                  <Typography variant="body1" component="div" style={{ flexGrow: 1 }}>
-                    Drag selection edges to adjust dates
-                  </Typography>
-                </div>
+          <Card>
+            <CardContent className={classes.helpGridContainer}>
+              <div className={classes.helpGrid}>
+                <PanIcon className={classes.calloutIcon} />
+                <Typography variant="body1" component="div" style={{ flexGrow: 1 }}>
+                  Drag the grid to pan across time
+                </Typography>
               </div>
-            )}
-          />
+              <div className={classes.helpGrid}>
+                <ClickIcon className={classes.calloutIcon} />
+                <Typography variant="body1" component="div" style={{ flexGrow: 1 }}>
+                  Click rows to select sites
+                </Typography>
+              </div>
+              <div className={classes.helpGrid}>
+                <DragIcon className={classes.calloutIcon} style={{ transform: 'rotate(90deg)' }} />
+                <Typography variant="body1" component="div" style={{ flexGrow: 1 }}>
+                  Drag selection edges to adjust dates
+                </Typography>
+              </div>
+            </CardContent>
+          </Card>
         </Grid>
       </Grid>
     );

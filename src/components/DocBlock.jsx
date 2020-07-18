@@ -8,7 +8,7 @@ import Theme from '../lib_components/components/Theme/Theme';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    marginBottom: theme.spacing(1.5),
+    marginBottom: theme.spacing(2.5),
     '& tt': {
       fontSize: '1.1rem',
       fontWeight: 600,

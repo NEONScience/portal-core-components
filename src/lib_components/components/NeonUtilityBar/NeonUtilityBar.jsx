@@ -38,18 +38,22 @@ const useTabsStyles = makeStyles(theme => ({
 const useTabStyles = makeStyles(theme => ({
   root: {
     color: '#fff',
+    backgroundColor: theme.palette.secondary.main,
+    border: 'none',
     minHeight: theme.spacing(3),
     '&:hover': {
       textDecoration: 'underline',
+      color: '#fff',
+      backgroundColor: theme.palette.secondary.main,
     },
     '&$selected': {
-      color: theme.palette.primary.main,
-      backgroundColor: '#fff',
+      color: `${theme.palette.secondary.main} !important`,
+      backgroundColor: '#fff !important',
     },
-    fontWeight: 700,
+    fontWeight: 600,
     letterSpacing: '1px',
     lineHeight: 1.65,
-    fontSize: '1.1rem',
+    fontSize: '1rem',
     padding: `${theme.spacing(0.25)}px ${theme.spacing(3.5)}px`,
     [theme.breakpoints.down('sm')]: {
       lineHeight: 1.8,
@@ -78,7 +82,7 @@ const NeonUtilityBar = (props) => {
   const bioUrl = 'https://biorepo.neonscience.org/portal/index.php';
 
   return (
-    <AppBar position="static" data-selenium="neon-utility-bar">
+    <AppBar position="static" data-selenium="neon-utility-bar" color="secondary" elevation={2}>
       <Tabs value={selectedTab} classes={tabsClasses}>
         <Tab classes={tabClasses} value="science" label="Neon Science" href={scienceUrl} />
         <Tab classes={tabClasses} value="data" label="Data Portal" href={dataUrl} />

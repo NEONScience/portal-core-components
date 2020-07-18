@@ -50,6 +50,7 @@ const DialogBase = (props) => {
     children,
     closeButtonProps,
     nopaper,
+    style,
     ...other
   } = props;
 
@@ -66,9 +67,10 @@ const DialogBase = (props) => {
           height: `calc(100% - ${Theme.spacing(belowSm ? 13 : 8)}px)`,
         },
       }}
+      style={{ ...style, zIndex: Theme.zIndex.fullScreenBackdrop }}
       {...other}
     >
-      <AppBar>
+      <AppBar color="secondary">
         <Toolbar>
           <IconButton
             data-selenium="dialog-close-button"
@@ -126,6 +128,7 @@ DialogBase.propTypes = {
     ]),
   ),
   nopaper: PropTypes.bool,
+  style: PropTypes.object, // eslint-disable-line react/forbid-prop-types
 };
 
 DialogBase.defaultProps = {
@@ -133,6 +136,7 @@ DialogBase.defaultProps = {
   toolbarChildren: null,
   closeButtonProps: {},
   nopaper: false,
+  style: {},
 };
 
 export default DialogBase;

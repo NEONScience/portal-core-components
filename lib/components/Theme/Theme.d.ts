@@ -1,5 +1,5 @@
 export namespace COLORS {
-    export const BLUE: {
+    export const NEON_BLUE: {
         50: string;
         100: string;
         200: string;
@@ -11,7 +11,7 @@ export namespace COLORS {
         800: string;
         900: string;
     };
-    export const SECONDARY_BLUE: {
+    export const LIGHT_BLUE: {
         50: string;
         100: string;
         200: string;
@@ -23,7 +23,7 @@ export namespace COLORS {
         800: string;
         900: string;
     };
-    export const ORANGE: {
+    export const GOLD: {
         50: string;
         100: string;
         200: string;
@@ -35,7 +35,19 @@ export namespace COLORS {
         800: string;
         900: string;
     };
-    export const YELLOW: {
+    export const BROWN: {
+        50: string;
+        100: string;
+        200: string;
+        300: string;
+        400: string;
+        500: string;
+        600: string;
+        700: string;
+        800: string;
+        900: string;
+    };
+    export const GREEN: {
         50: string;
         100: string;
         200: string;
@@ -61,7 +73,6 @@ export namespace COLORS {
     };
     export const GREY: {
         50: string;
-        75: string;
         100: string;
         200: string;
         300: string;

@@ -12,7 +12,7 @@ import { map, catchError } from 'rxjs/operators';
 
 import dateFormat from 'dateformat';
 
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import Divider from '@material-ui/core/Divider';
@@ -51,7 +51,6 @@ const useStyles = makeStyles(theme => ({
     minWidth: `${MIN_IFRAME_WIDTH}`,
     minHeight: `${MIN_IFRAME_WIDTH}`,
     border: `1px solid ${theme.palette.grey[700]}`,
-    borderRadius: theme.spacing(0.5),
   },
   divider: {
     margin: theme.spacing(2, 0),
@@ -64,84 +63,11 @@ const useStyles = makeStyles(theme => ({
   optgroup: {
     fontWeight: Theme.typography.fontWeightMedium,
   },
-  tooltip: {
-    marginLeft: theme.spacing(0.25),
-  },
   tooltipIconButton: {
-    marginTop: theme.spacing(-0.25),
-  },
-  tooltipPopper: {
-    '& > div': {
-      padding: theme.spacing(1, 1.5),
-      fontSize: '0.85rem',
-      fontWeight: 300,
-      backgroundColor: theme.palette.grey[800],
-    },
-    '& a': {
-      color: theme.palette.grey[100],
-    },
+    marginTop: theme.spacing(-0.5),
+    marginLeft: theme.spacing(0.5),
   },
 }));
-
-const boxShadow = alpha => `0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,${alpha}),0 0 0 1px rgba(0,0,0,0.02)`;
-const YearSlider = withStyles({
-  root: {
-    marginBottom: Theme.spacing(0),
-  },
-  rail: {
-    height: 5,
-    borderRadius: 2,
-  },
-  track: {
-    display: 'none',
-  },
-  mark: {
-    height: 16,
-    width: 5,
-    borderRadius: 2,
-    marginTop: -5,
-    marginLeft: -2,
-    backgroundColor: Theme.palette.primary.main,
-  },
-  markLabel: {
-    marginTop: Theme.spacing(1),
-  },
-  thumb: {
-    height: Theme.spacing(3.5),
-    width: Theme.spacing(1.5),
-    backgroundColor: Theme.palette.grey[50],
-    boxShadow: boxShadow(0.13),
-    border: `2px solid ${Theme.palette.primary.main}`,
-    borderRadius: Theme.spacing(0.5),
-    marginTop: Theme.spacing(-1.5),
-    marginLeft: Theme.spacing(-0.75),
-    '&:focus,&:hover,&active': {
-      boxShadow: boxShadow(0.3),
-      // Reset on touch devices, it doesn't add specificity
-      '@media (hover: none)': {
-        boxShadow: boxShadow(0.13),
-      },
-    },
-  },
-  valueLabel: {
-    left: 'initial',
-    fontWeight: 600,
-    top: -20,
-    whiteSpace: 'nowrap',
-    '& span': {
-      width: 'auto',
-      height: 'auto',
-      padding: Theme.spacing(0.5, 1),
-      borderRadius: Theme.spacing(0.5),
-      transform: 'none',
-      '& span': {
-        transform: 'none',
-        padding: 0,
-        borderRadius: 0,
-      },
-    },
-  },
-})(Slider);
 
 /**
    Function: Parse the response from the Visus API from its original shape
@@ -399,7 +325,7 @@ const AopDataViewer = (props) => {
   const renderYearSlider = () => {
     if (!currentSelection.year) { return null; }
     return (
-      <div style={{ width: '100%', display: 'flex', padding: Theme.spacing(0.25, 0, 2.25, 0) }}>
+      <div style={{ width: '100%', display: 'flex' }}>
         <div style={{ flexGrow: 0 }}>
           <IconButton
             data-selenium="aop-data-viewer.previous-year-button"
@@ -414,7 +340,7 @@ const AopDataViewer = (props) => {
           </IconButton>
         </div>
         <div style={{ flexGrow: 1 }}>
-          <YearSlider
+          <Slider
             data-selenium="aop-data-viewer.year-slider"
             value={currentSelection.year}
             step={null}
@@ -474,13 +400,7 @@ const AopDataViewer = (props) => {
     <Typography className={classes.label} id={`${input}-label`}>
       {`${input.substr(0, 1).toUpperCase()}${input.substr(1)}`}
       {tooltip ? (
-        <Tooltip
-          placement="right"
-          title={tooltip}
-          className={classes.tooltip}
-          PopperProps={{ className: classes.tooltipPopper }}
-          interactive
-        >
+        <Tooltip placement="right" title={tooltip} interactive>
           <IconButton size="small" className={classes.tooltipIconButton} aria-label={tooltip}>
             <InfoIcon fontSize="inherit" />
           </IconButton>

@@ -7,6 +7,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 import Checkbox from '@material-ui/core/Checkbox';
 import Chip from '@material-ui/core/Chip';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -17,7 +19,6 @@ import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
 import Typography from '@material-ui/core/Typography';
 import InfoIcon from '@material-ui/icons/Info';
 import QuoteIcon from '@material-ui/icons/FormatQuote';
@@ -27,7 +28,7 @@ import SelectAllIcon from '@material-ui/icons/DoneAll';
 import SelectNoneIcon from '@material-ui/icons/Clear';
 import SelectFilteredIcon from '@material-ui/icons/FilterList';
 import ClearFiltersIcon from '@material-ui/icons/DeleteSweep';
-import ErrorIcon from '@material-ui/icons/ReportProblem';
+import WarningIcon from '@material-ui/icons/Warning';
 import ExploreIcon from '@material-ui/icons/Explore';
 
 import { CopyToClipboard } from 'react-copy-to-clipboard';
@@ -52,8 +53,6 @@ import { formatBytes, MAX_POST_BODY_SIZE } from '../../util/manifestUtil';
 const useStyles = makeStyles(theme => ({
   copyButton: {
     marginLeft: Theme.spacing(2),
-    padding: Theme.spacing(0.5, 2),
-    backgroundColor: '#fff',
   },
   fileTable: {
     position: 'relative',
@@ -80,12 +79,7 @@ const useStyles = makeStyles(theme => ({
     paddingTop: theme.spacing(14),
     backgroundColor: 'rgba(255, 255, 255, 0.75)',
   },
-  infoSnackbar: {
-    backgroundColor: theme.palette.grey[50],
-    color: '#000',
-    border: `1px solid ${theme.palette.primary.main}80`,
-  },
-  infoSnackbarIcon: {
+  calloutIcon: {
     color: theme.palette.grey[300],
     marginRight: theme.spacing(2),
   },
@@ -294,23 +288,17 @@ export default function DownloadStepForm(props) {
             </FormControl>
           </Grid>
           <Grid item xs={12} md={6}>
-            <SnackbarContent
-              className={classes.infoSnackbar}
-              style={{ marginTop: Theme.spacing(1.5) }}
-              message={(
-                <div className={classes.startFlex}>
-                  <InfoIcon fontSize="large" className={classes.infoSnackbarIcon} />
-                  <div>
-                    <Typography variant="body1">
-                      {/* eslint-disable react/jsx-one-expression-per-line */}
-                      EML files for this Data Product are included in all downloads.
-                      Learn more about EML files in the {neonFaqLink} and at {knbLink}.
-                      {/* eslint-enable react/jsx-one-expression-per-line */}
-                    </Typography>
-                  </div>
-                </div>
-              )}
-            />
+            <Card style={{ marginTop: Theme.spacing(1.5) }}>
+              <CardContent className={classes.startFlex}>
+                <InfoIcon fontSize="large" className={classes.calloutIcon} />
+                <Typography variant="body1">
+                  {/* eslint-disable react/jsx-one-expression-per-line */}
+                  EML files for this Data Product are included in all downloads.
+                  Learn more about EML files in the {neonFaqLink} and at {knbLink}.
+                  {/* eslint-enable react/jsx-one-expression-per-line */}
+                </Typography>
+              </CardContent>
+            </Card>
           </Grid>
         </Grid>
       );
@@ -383,33 +371,27 @@ export default function DownloadStepForm(props) {
       /* eslint-disable react/jsx-one-expression-per-line */
       const postSizeError = (estimatedPostSize >= MAX_POST_BODY_SIZE) ? (
         <Grid item xs={12}>
-          <SnackbarContent
-            className={classes.infoSnackbar}
-            style={{ marginBottom: Theme.spacing(2), backgroundColor: COLORS.ORANGE[100], justifyContent: 'center' }}
-            message={(
-              <div className={classes.startFlex}>
-                <ErrorIcon
-                  fontSize="large"
-                  className={classes.infoSnackbarIcon}
-                  style={{ color: COLORS.ORANGE[800] }}
-                />
-                <div>
-                  <Typography variant="body1">
-                    Too many files requested! Current selection will make an
-                    estimated <b>{formatBytes(estimatedPostSize)}</b> request; max
-                    size is <b>{formatBytes(MAX_POST_BODY_SIZE)}</b>.
-                    Please select fewer files in order to proceed.
-                  </Typography>
-                </div>
-              </div>
-            )}
-          />
+          <Card style={{ marginBottom: Theme.spacing(2), backgroundColor: COLORS.GOLD[300] }}>
+            <CardContent className={classes.startFlex} style={{ justifyContent: 'center' }}>
+              <WarningIcon
+                fontSize="large"
+                className={classes.calloutIcon}
+                style={{ color: COLORS.GOLD[800] }}
+              />
+              <Typography variant="body1">
+                Too many files requested! Current selection will make an
+                estimated <b>{formatBytes(estimatedPostSize)}</b> request; max
+                size is <b>{formatBytes(MAX_POST_BODY_SIZE)}</b>.
+                Please select fewer files in order to proceed.
+              </Typography>
+            </CardContent>
+          </Card>
         </Grid>
       ) : null;
       const components = {
         Container: Box,
         Toolbar: toolbarProps => (
-          <Grid container spacing={2} alignItems="flex-start">
+          <Grid container spacing={2} alignItems="flex-start" style={{ marginBottom: '24px' }}>
             <Grid item xs={12} md={6}>
               <div style={{ marginBottom: Theme.spacing(1) }}>
                 <ToggleButtonGroup
@@ -496,7 +478,7 @@ export default function DownloadStepForm(props) {
               </div>
             </Grid>
             <Grid item xs={12} md={6}>
-              <MTableToolbar {...toolbarProps} style={{ borderRadius: Theme.spacing(0.5) }} />
+              <MTableToolbar {...toolbarProps} />
             </Grid>
             {postSizeError}
           </Grid>
@@ -642,24 +624,18 @@ export default function DownloadStepForm(props) {
       const hostLink = externalHost.renderLink(state.productData.productCode);
       return (
         <div data-selenium={`download-data-dialog.step-form.external-links.${externalHost.id.toLowerCase()}`}>
-          <SnackbarContent
-            className={classes.infoSnackbar}
-            style={{ marginBottom: Theme.spacing(3) }}
-            message={(
-              <div className={classes.startFlex}>
-                <InfoIcon fontSize="large" className={classes.infoSnackbarIcon} />
-                <div>
-                  <Typography variant="subtitle2">
-                    {/* eslint-disable react/jsx-one-expression-per-line */}
-                    Data for this product is not currently available for download through
-                    the NEON Data Portal. Please use the links below to access data for
-                    this product for a particular site from the {hostLink}.
-                    {/* eslint-enable react/jsx-one-expression-per-line */}
-                  </Typography>
-                </div>
-              </div>
-            )}
-          />
+          <Card style={{ marginBottom: Theme.spacing(3) }}>
+            <CardContent className={classes.startFlex}>
+              <InfoIcon fontSize="large" className={classes.calloutIcon} />
+              <Typography variant="subtitle2">
+                {/* eslint-disable react/jsx-one-expression-per-line */}
+                Data for this product is not currently available for download through
+                the NEON Data Portal. Please use the links below to access data for
+                this product for a particular site from the {hostLink}.
+                {/* eslint-enable react/jsx-one-expression-per-line */}
+              </Typography>
+            </CardContent>
+          </Card>
           <ExternalHostProductSpecificLinks productCode={state.productData.productCode} />
         </div>
       );
@@ -750,25 +726,22 @@ export default function DownloadStepForm(props) {
           Download and Explore NEON Data
         </Link>
       );
-      const downloadAndExploreSnackbar = (
-        <div data-selenium="download-data-dialog.step-form.summary.file-naming">
-          <SnackbarContent
-            className={classes.infoSnackbar}
-            style={{ margin: Theme.spacing(0.5, 0, 3, 0) }}
-            message={(
-              <div className={classes.startFlex}>
-                <ExploreIcon fontSize="large" className={classes.infoSnackbarIcon} />
-                {/* eslint-disable react/jsx-one-expression-per-line */}
-                <Typography variant="subtitle2">
-                  Tip: Check out our {downloadAndExploreLink} tutorial.
-                  This tutorial will explain how our neonUtilities package can
-                  be used to unzip and join data tables with just a few lines of code.
-                </Typography>
-                {/* eslint-enable react/jsx-one-expression-per-line */}
-              </div>
-            )}
-          />
-        </div>
+      const downloadAndExploreCallout = (
+        <Card
+          style={{ margin: Theme.spacing(0.5, 0, 3, 0) }}
+          data-selenium="download-data-dialog.step-form.summary.download-and-explore"
+        >
+          <CardContent className={classes.startFlex}>
+            <ExploreIcon fontSize="large" className={classes.calloutIcon} />
+            {/* eslint-disable react/jsx-one-expression-per-line */}
+            <Typography variant="subtitle2">
+              Tip: Check out our {downloadAndExploreLink} tutorial.
+              This tutorial will explain how our neonUtilities package can
+              be used to unzip and join data tables with just a few lines of code.
+            </Typography>
+            {/* eslint-enable react/jsx-one-expression-per-line */}
+          </CardContent>
+        </Card>
       );
       const fileNamingConventionsLink = (
         <Link
@@ -779,23 +752,20 @@ export default function DownloadStepForm(props) {
           NEON File Naming Conventions
         </Link>
       );
-      const fileNamingSnackbar = (
-        <div data-selenium="download-data-dialog.step-form.summary.file-naming">
-          <SnackbarContent
-            className={classes.infoSnackbar}
-            style={{ margin: Theme.spacing(0.5, 0, 3, 0) }}
-            message={(
-              <div className={classes.startFlex}>
-                <FileIcon fontSize="large" className={classes.infoSnackbarIcon} />
-                {/* eslint-disable react/jsx-one-expression-per-line */}
-                <Typography variant="subtitle2">
-                  Files in this download will follow {fileNamingConventionsLink}.
-                </Typography>
-                {/* eslint-enable react/jsx-one-expression-per-line */}
-              </div>
-            )}
-          />
-        </div>
+      const fileNamingCallout = (
+        <Card
+          style={{ margin: Theme.spacing(0.5, 0, 3, 0) }}
+          data-selenium="download-data-dialog.step-form.summary.file-naming"
+        >
+          <CardContent className={classes.startFlex}>
+            <FileIcon fontSize="large" className={classes.calloutIcon} />
+            {/* eslint-disable react/jsx-one-expression-per-line */}
+            <Typography variant="subtitle2">
+              Files in this download will follow {fileNamingConventionsLink}.
+            </Typography>
+            {/* eslint-enable react/jsx-one-expression-per-line */}
+          </CardContent>
+        </Card>
       );
       const { productCode, productName } = state.productData;
       const year = moment().format('YYYY');
@@ -803,39 +773,41 @@ export default function DownloadStepForm(props) {
       const maturity = 'Provisional';
       const url = 'http://data.neonscience.org';
       const citationText = `National Ecological Observatory Network. ${year}. Data Product ${productCode}, ${productName}. ${maturity} data downloaded from ${url} on ${today}. Battelle, Boulder, CO, USA NEON. ${year}.`;
-      const citationSnackbar = (
-        <div data-selenium="download-data-dialog.step-form.summary.citation">
-          <SnackbarContent
-            className={classes.infoSnackbar}
-            style={{ margin: Theme.spacing(0.5, 0, 3, 0) }}
-            message={(
-              <div>
-                <div className={classes.startFlex}>
-                  <QuoteIcon fontSize="large" className={classes.infoSnackbarIcon} />
-                  {/* eslint-disable react/jsx-one-expression-per-line */}
-                  <Typography variant="subtitle2" style={{ flexGrow: 1 }}>
-                    Please use this citation in your publications.
-                    See {dataUsageAndCitationPoliciesLink} for more info.
-                  </Typography>
-                  {/* eslint-enable react/jsx-one-expression-per-line */}
-                  <CopyToClipboard text={citationText}>
-                    <Button color="primary" variant="outlined" size="small" className={classes.copyButton}>
-                      <CopyIcon fontSize="small" style={{ marginRight: Theme.spacing(1) }} />
-                      Copy
-                    </Button>
-                  </CopyToClipboard>
-                </div>
-                <Divider style={{ margin: Theme.spacing(1.5, 0) }} />
-                <Typography
-                  variant="body2"
-                  style={{ backgroundColor: 'rgba(255, 255, 255, 0.01)' }} // For copy+paste
+      const citationCallout = (
+        <Card
+          style={{ margin: Theme.spacing(0.5, 0, 3, 0) }}
+          data-selenium="download-data-dialog.step-form.summary.citation"
+        >
+          <CardContent>
+            <div className={classes.startFlex}>
+              <QuoteIcon fontSize="large" className={classes.calloutIcon} />
+              {/* eslint-disable react/jsx-one-expression-per-line */}
+              <Typography variant="subtitle2" style={{ flexGrow: 1 }}>
+                Please use this citation in your publications.
+                See {dataUsageAndCitationPoliciesLink} for more info.
+              </Typography>
+              {/* eslint-enable react/jsx-one-expression-per-line */}
+              <CopyToClipboard text={citationText}>
+                <Button
+                  color="primary"
+                  variant="outlined"
+                  size="small"
+                  className={classes.copyButton}
+                  startIcon={<CopyIcon />}
                 >
-                  {citationText}
-                </Typography>
-              </div>
-            )}
-          />
-        </div>
+                  Copy
+                </Button>
+              </CopyToClipboard>
+            </div>
+            <Divider style={{ margin: Theme.spacing(1.5, 0) }} />
+            <Typography
+              variant="body2"
+              style={{ backgroundColor: 'rgba(255, 255, 255, 0.01)' }} // For copy+paste
+            >
+              {citationText}
+            </Typography>
+          </CardContent>
+        </Card>
       );
       return (
         <Grid
@@ -847,9 +819,9 @@ export default function DownloadStepForm(props) {
             {stepSummary}
           </Grid>
           <Grid item xs={12} md={6}>
-            {downloadAndExploreSnackbar}
-            {fileNamingSnackbar}
-            {citationSnackbar}
+            {downloadAndExploreCallout}
+            {fileNamingCallout}
+            {citationCallout}
           </Grid>
         </Grid>
       );

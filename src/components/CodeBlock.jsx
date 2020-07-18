@@ -12,7 +12,6 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(2, 0),
     '& code': {
       padding: theme.spacing(0, 2),
-      borderRadius: theme.spacing(1),
     },
   },
 }));

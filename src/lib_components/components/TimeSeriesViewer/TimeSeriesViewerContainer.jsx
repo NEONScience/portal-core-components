@@ -3,9 +3,9 @@ import moment from 'moment';
 
 import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import Card from '@material-ui/core/Card';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Link from '@material-ui/core/Link';
-import Paper from '@material-ui/core/Paper';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import Table from '@material-ui/core/Table';
@@ -24,7 +24,7 @@ import VariablesIcon from '@material-ui/icons/Timeline';
 import AxesIcon from '@material-ui/icons/BorderInner';
 
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
-import Theme from '../Theme/Theme';
+import Theme, { COLORS } from '../Theme/Theme';
 
 import TimeSeriesViewerContext, {
   summarizeTimeSteps,
@@ -44,24 +44,22 @@ const VERTICAL_TABS_WIDTH = 150;
 const useStyles = makeStyles(theme => ({
   tabsContainer: {
     display: 'flex',
-    borderRadius: theme.spacing(0, 0, 1),
     margin: theme.spacing(0, -0.5, -0.5, -0.5),
     [theme.breakpoints.down('sm')]: {
       flexDirection: 'column',
     },
   },
   tabsVertical: {
-    borderRight: `1px solid ${theme.palette.divider}`,
     width: `${VERTICAL_TABS_WIDTH}px`,
   },
   tabsHorizontal: {
-    borderBottom: `1px solid ${theme.palette.divider}`,
     flexShrink: 0,
   },
   tabPanels: {
     width: '100%',
     [theme.breakpoints.up('md')]: {
       width: `calc(100% - ${VERTICAL_TABS_WIDTH}px)`,
+      borderTop: `1.5px solid ${COLORS.GREY[200]}`,
     },
   },
   tabPanelContainer: {
@@ -69,10 +67,11 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
   },
   graphContainer: {
+    zIndex: 0,
     position: 'relative',
     marginBottom: theme.spacing(2),
-    borderRadius: theme.spacing(1),
     padding: theme.spacing(0.5),
+    borderWidth: '1.5px',
   },
   graphOverlay: {
     display: 'block',
@@ -86,11 +85,9 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(-0.5, -0.5, 0, -0.5),
     padding: theme.spacing(20, 4, 4, 4),
     backgroundColor: 'rgba(255, 255, 255, 0.75)',
-    borderRadius: theme.spacing(1, 1, 0, 0),
   },
   titleContainer: {
     marginBottom: theme.spacing(2),
-    borderRadius: theme.spacing(1),
   },
   summaryDiv: {
     marginBottom: theme.spacing(1),
@@ -115,31 +112,29 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const useTabsStyles = makeStyles(theme => ({
-  scrollButtons: {
-    '&:hover, &:focus': {
-      backgroundColor: theme.palette.grey[50],
-    },
-  },
   scroller: {
     [theme.breakpoints.up('md')]: {
-      backgroundColor: theme.palette.grey[50],
-      borderBottomLeftRadius: theme.spacing(1),
+      backgroundColor: theme.palette.grey[200],
     },
   },
 }));
 
-const boxShadow = alpha => `0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,${alpha}),0 0 0 1px rgba(0,0,0,0.02)`;
 const useTabStyles = makeStyles(theme => ({
   root: {
     [theme.breakpoints.up('md')]: {
-      borderBottom: `1px solid ${theme.palette.divider}`,
-      backgroundColor: '#ffffff',
-      boxShadow: boxShadow(0.06),
+      marginLeft: '-1.5px',
+      '&:first-child': {
+        marginBottom: '-0.5px',
+      },
+      '&:not(:first-child)': {
+        marginTop: '-1.5px',
+      },
     },
     [theme.breakpoints.down('sm')]: {
-      borderLeft: `1px solid ${theme.palette.divider}`,
-      marginLeft: '-1px',
       paddingRight: theme.spacing(2.5),
+      '&:not(:first-child)': {
+        marginLeft: '-1.5px',
+      },
     },
     textTransform: 'none',
     opacity: 1,
@@ -147,9 +142,6 @@ const useTabStyles = makeStyles(theme => ({
   labelIcon: {
     minHeight: theme.spacing(8),
     minWidth: theme.spacing(15),
-    '&:hover, &:focus': {
-      backgroundColor: theme.palette.grey[50],
-    },
     [theme.breakpoints.down('sm')]: {
       minHeight: theme.spacing(6),
       minWidth: theme.spacing(17),
@@ -163,13 +155,14 @@ const useTabStyles = makeStyles(theme => ({
     '& svg': {
       margin: `${theme.spacing(0, 1, 0, 0)} !important`,
     },
-    opacity: 0.7,
   },
   selected: {
-    color: 'white',
-    backgroundColor: `${theme.palette.primary.main} !important`,
-    '& > span.MuiTab-wrapper': {
-      opacity: 1,
+    [theme.breakpoints.down('sm')]: {
+      borderBottom: 'none',
+    },
+    [theme.breakpoints.up('md')]: {
+      borderRight: 'none',
+      marginLeft: '0px',
     },
   },
 }));
@@ -218,7 +211,7 @@ function TimeSeriesViewerSummary() {
   if (state.product.productName) {
     productSummaryTitle = (
       <div style={{ marginRight: Theme.spacing(1) }}>
-        <Typography variant="h6">Data Product</Typography>
+        <Typography variant="subtitle2">Data Product</Typography>
         <Typography variant="body2">
           <Link href={productHref} target="_blank" style={{ fontWeight: 600 }}>
             {`${state.product.productName} - (${state.product.productCode})`}
@@ -351,19 +344,19 @@ function TimeSeriesViewerSummary() {
         {productSummaryDescription}
       </div>
       <div className={classes.summaryDiv}>
-        <Typography variant="h6">Sites & Positions</Typography>
+        <Typography variant="subtitle2">Sites & Positions</Typography>
         {sitesSummary}
       </div>
       <div className={classes.summaryDiv}>
-        <Typography variant="h6">Date Range</Typography>
+        <Typography variant="subtitle2">Date Range</Typography>
         {dateRangeSummary}
       </div>
       <div className={classes.summaryDiv}>
-        <Typography variant="h6">Variables</Typography>
+        <Typography variant="subtitle2">Variables</Typography>
         {variablesSummary}
       </div>
       <div className={classes.summaryDiv}>
-        <Typography variant="h6">x/y Axes</Typography>
+        <Typography variant="subtitle2">x/y Axes</Typography>
         {axesSummary}
       </div>
     </div>
@@ -454,10 +447,6 @@ export default function TimeSeriesViewerContainer() {
     >
       {Object.keys(TABS).map((tabId) => {
         const { label, ariaLabel, Icon: TabIcon } = TABS[tabId];
-        const style = {};
-        if (tabId === TAB_IDS.AXES && !belowMd) {
-          style.borderBottomLeftRadius = Theme.spacing(1);
-        }
         return (
           <Tab
             key={tabId}
@@ -466,7 +455,6 @@ export default function TimeSeriesViewerContainer() {
             aria-label={ariaLabel || label}
             icon={<TabIcon />}
             classes={tabClasses}
-            style={style}
             id={`time-series-viewer-tab-${tabId}`}
             aria-controls={`time-series-viewer-tabpanel-${tabId}`}
           />
@@ -503,7 +491,7 @@ export default function TimeSeriesViewerContainer() {
     if (isError) {
       return (
         <div className={classes.graphOverlay}>
-          <Typography variant="h6" style={{ marginBottom: Theme.spacing(4) }}>
+          <Typography variant="subtitle2" style={{ marginBottom: Theme.spacing(4) }}>
             {state.displayError || 'An unknown error occurred; unable to visualize data product'}
           </Typography>
           <ErrorIcon fontSize="large" color="error" />
@@ -522,7 +510,7 @@ export default function TimeSeriesViewerContainer() {
       }
       return (
         <div className={classes.graphOverlay}>
-          <Typography variant="h6" style={{ marginBottom: Theme.spacing(4) }}>
+          <Typography variant="subtitle2" style={{ marginBottom: Theme.spacing(4) }}>
             {title}
           </Typography>
           <CircularProgress {...progressProps} />
@@ -534,7 +522,7 @@ export default function TimeSeriesViewerContainer() {
 
   return (
     <div style={{ width: '100%' }}>
-      <Paper className={classes.graphContainer} elevation={4}>
+      <Card className={classes.graphContainer}>
         <div style={{ position: 'relative' }}>
           {state.product.productCode === loadedProductCode ? (
             <TimeSeriesViewerGraph />
@@ -545,7 +533,7 @@ export default function TimeSeriesViewerContainer() {
           {renderTabs()}
           {renderTabPanels()}
         </div>
-      </Paper>
+      </Card>
     </div>
   );
 }

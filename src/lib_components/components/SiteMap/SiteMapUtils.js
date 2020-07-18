@@ -59,7 +59,9 @@ import statesShapesJSON from '../../staticJSON/statesShapes.json';
 import domainsShapesJSON from '../../staticJSON/domainsShapes.json';
 
 export const MAP_ZOOM_RANGE = [1, 19];
+export const OBSERVATORY_CENTER = [52.68, -110.75];
 
+export const MIN_CONTAINER_HEIGHT = 300;
 export const MIN_TABLE_MAX_BODY_HEIGHT = 100;
 
 // export const MINIMUM_MAP_DIMENSIONS = { width: 300, height: 200 };
@@ -323,6 +325,7 @@ export const FEATURES = {
     dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
     description: '',
     parent: 'AQUATIC_WATERSHEDS',
+    featureShape: 'Marker',
     iconSvg: iconPourPointSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.HOMEPLATE.KEY,
   },
@@ -378,6 +381,7 @@ export const FEATURES = {
     matchLocationType: 'TOWER',
     description: '',
     parent: 'TERRESTRIAL_SITE_FEATURES',
+    featureShape: 'Marker',
     iconScale: 1.8,
     iconSvg: iconTowerSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.DIAMOND.KEY,
@@ -391,6 +395,7 @@ export const FEATURES = {
     matchLocationType: 'HUT',
     description: '',
     parent: 'TERRESTRIAL_SITE_FEATURES',
+    featureShape: 'Marker',
     iconScale: 1.4,
     iconSvg: iconHutSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.DIAMOND.KEY,
@@ -404,6 +409,7 @@ export const FEATURES = {
     matchLocationType: 'MEGAPIT',
     description: '',
     parent: 'TERRESTRIAL_SITE_FEATURES',
+    featureShape: 'Marker',
     iconScale: 1.8,
     iconSvg: iconMegapitSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.DIAMOND.KEY,
@@ -424,6 +430,7 @@ export const FEATURES = {
     parent: 'TOWER_PLOTS',
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'OS Plot - phe',
+    featureShape: 'Marker',
     focusZoom: 16,
     iconScale: 1.5,
     iconSvg: iconTowerPhenologyPlotSVG,
@@ -435,6 +442,7 @@ export const FEATURES = {
     type: FEATURE_TYPES.LOCATIONS,
     description: 'Tower plots support a variety of plant productivity, plant diversity, soil, biogeochemistry and microbe sampling. The number and size of Tower Base Plots is determined by the vegetation of the tower airshed. In forested sites, twenty 40m x 40m plots are established. In herbaceous sites, thirty 20m x 20m plots are established. Of these thirty tower plots, four have additional space to support soil sampling.',
     parent: 'TOWER_PLOTS',
+    featureShape: 'Marker',
     focusZoom: 18,
     iconSvg: iconTowerBasePlotSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
@@ -448,7 +456,9 @@ export const FEATURES = {
     matchLocationType: 'SOIL_PLOT',
     description: '',
     parent: 'TOWER_PLOTS',
+    featureShape: 'Marker',
     focusZoom: 18,
+    iconScale: 0.7,
     iconSvg: iconTowerSoilPlotSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
   },
@@ -468,6 +478,7 @@ export const FEATURES = {
     parent: 'DISTRIBUTED_PLOTS',
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'OS Plot - brd',
+    featureShape: 'Marker',
     iconScale: 1.8,
     focusZoom: 16,
     iconSvg: iconDistributedBirdGridSVG,
@@ -481,6 +492,7 @@ export const FEATURES = {
     parent: 'DISTRIBUTED_PLOTS',
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'OS Plot - mam',
+    featureShape: 'Marker',
     iconScale: 1.4,
     focusZoom: 17,
     iconSvg: iconDistributedMammalGridSVG,
@@ -492,6 +504,7 @@ export const FEATURES = {
     type: FEATURE_TYPES.LOCATIONS,
     description: 'Distributed Base Plots support a variety of plant productivity, plant diversity, soil, biogeochemistry, microbe and beetle sampling. Distributed Base Plots are 40m x 40m.',
     parent: 'DISTRIBUTED_PLOTS',
+    featureShape: 'Marker',
     iconScale: 1.2,
     focusZoom: 17,
     iconSvg: iconDistributedBasePlotSVG,
@@ -505,6 +518,7 @@ export const FEATURES = {
     parent: 'DISTRIBUTED_PLOTS',
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
     matchLocationType: 'OS Plot - tck',
+    featureShape: 'Marker',
     iconScale: 1.2,
     focusZoom: 17,
     iconSvg: iconDistributedTickPlotSVG,
@@ -520,63 +534,83 @@ export const FEATURES = {
     matchLocationType: 'OS Plot - mos',
     iconSvg: iconDistributedMosquitoPointSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
+    featureShape: 'Marker',
     focusZoom: 18,
   },
-  // Plots Sampling Points Group
-  PLOT_DETAIL_POINTS: {
-    name: 'Plot Detail Points',
+  // Plot Boundaries
+  PLOT_BOUNDARIES: {
+    name: 'Plot Boundaries',
     type: FEATURE_TYPES.GROUP,
     minZoom: 14,
-    description: 'Both distributed and tower plots may be composed of discrete sampling or transect loop points. When available, these points may appear on the map in addition to the plot marker icon.',
+    description: 'Some types of distributed and tower plots may be represented by a boundary polygon in addition their marker icon to denote actual size and location.',
     parent: 'TERRESTRIAL_SITE_FEATURES',
   },
-  TOWER_PHENOLOGY_PLOT_POINTS: {
-    name: 'Phenology Plot Transect Points',
-    nameSingular: 'Phenology Plot Transect Point',
+  TOWER_PHENOLOGY_PLOT_BOUNDARIES: {
+    name: 'Phenology Plot Boundaries',
+    nameSingular: 'Phenology Plot Boundary',
     type: FEATURE_TYPES.SAMPLING_POINTS,
-    description: 'Plant phenology observations are made along a transect loop or plot in or around the primary airshed. When possible, one plot is established north of the tower to calibrate phenology camera images captured from sensors on the tower. If there is insufficient space north of the tower for a 200m x 200m plot or if the vegetation does not match the primary airshed an additional plot is established.',
-    parent: 'PLOT_DETAIL_POINTS',
+    description: 'PARENT',
+    parent: 'PLOT_BOUNDARIES',
     parentDataFeatureKey: 'TOWER_PHENOLOGY_PLOTS',
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    matchLocationPattern: /\.phe\.(NW|NE|SE|SW)$/,
+    matchLocationCoordinateMap: ['NW', 'NE', 'SE', 'SW'],
     minZoom: 15,
-    featureShape: 'Circle',
-    style: { color: '#59a14f' },
+    featureShape: 'Polygon',
+    style: { color: '#59a14f', dashArray: '1, 12' },
   },
-  DISTRIBUTED_BIRD_GRID_POINTS: {
-    name: 'Bird Grid Sampling Points',
-    nameSingular: 'Bird Grid Sampling Point',
+  TOWER_SOIL_PLOT_BOUNDARIES: { // Comes back as data from TOWER_SOIL_PLOTS fetches so no fetch here
+    name: 'Tower Soil Plot Boundaries',
+    nameSingular: 'Tower Soil Plot Boundary',
     type: FEATURE_TYPES.SAMPLING_POINTS,
-    description: 'Bird Grids consist of 9 sampling points within a 500m x 500m square. Each point is 250m apart. Where possible, Bird Grids are colocated with Distributed Base Plots by placing the Bird Grid center (B2) in close proximity to the center of the Base Plot. At smaller sites, a single point count is done at the south-west corner (point 21) of the Distributed Base Plot.',
-    parent: 'PLOT_DETAIL_POINTS',
+    description: 'PARENT',
+    parent: 'PLOT_BOUNDARIES',
+    parentDataFeatureKey: 'TOWER_SOIL_PLOTS',
+    minZoom: 18,
+    featureShape: 'Polygon',
+    style: { color: '#bea488', dashArray: '1, 12' },
+  },
+  DISTRIBUTED_BIRD_GRID_BOUNDARIES: {
+    name: 'Bird Grid Boundaries',
+    nameSingular: 'Bird Grid Boundary',
+    type: FEATURE_TYPES.SAMPLING_POINTS,
+    description: 'PARENT',
+    parent: 'PLOT_BOUNDARIES',
     parentDataFeatureKey: 'DISTRIBUTED_BIRD_GRIDS',
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    matchLocationPattern: /\.brd\.(A1|A3|C3|C1)$/,
+    matchLocationCoordinateMap: ['A1', 'A3', 'C3', 'C1'],
     minZoom: 14,
-    featureShape: 'Circle',
-    style: { color: '#f28e2c' },
+    featureShape: 'Polygon',
+    style: { color: '#f28e2c', dashArray: '1, 12' },
   },
-  DISTRIBUTED_MAMMAL_GRID_POINTS: {
-    name: 'Mammal Grid Sampling Points',
-    nameSingular: 'Mammal Grid Sampling Point',
+  DISTRIBUTED_MAMMAL_GRID_BOUNDARIES: {
+    name: 'Mammal Grid Boundaries',
+    nameSingular: 'Mammal Grid Boundary',
     type: FEATURE_TYPES.SAMPLING_POINTS,
-    description: 'Mammal Grids are 90m x 90m and include 100 trapping locations at 10m spacing. Where possible, these grids are colocated with Distributed Base Plots by placing them a specified distance (150m +/- 50m) and random direction from the center of the Base Plot.',
-    parent: 'PLOT_DETAIL_POINTS',
+    description: 'PARENT',
+    parent: 'PLOT_BOUNDARIES',
     parentDataFeatureKey: 'DISTRIBUTED_MAMMAL_GRIDS',
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    matchLocationPattern: /\.mam\.(A1|A10|J10|J1)$/,
+    matchLocationCoordinateMap: ['A1', 'A10', 'J10', 'J1'],
     minZoom: 16,
-    featureShape: 'Circle',
-    style: { color: '#925214' },
+    featureShape: 'Polygon',
+    style: { color: '#925214', dashArray: '1, 12' },
   },
-  DISTRIBUTED_TICK_PLOT_POINTS: {
-    name: 'Tick Plot Sampling Points',
-    nameSingular: 'Tick Plot Sampling Point',
+  DISTRIBUTED_TICK_PLOT_BOUNDARIES: {
+    name: 'Tick Plot Boundaries',
+    nameSingular: 'Tick Plot Boundary',
     type: FEATURE_TYPES.SAMPLING_POINTS,
-    description: 'Tick Plots are sampled by conducting cloth dragging or flagging around the perimeter of a 40m x 40m plot. Tick plots are colocated with Distributed Base Plots by placing them a specified distance (150m +/- 15m) and random direction from the center of the Base Plot.',
-    parent: 'PLOT_DETAIL_POINTS',
+    description: 'PARENT',
+    parent: 'PLOT_BOUNDARIES',
     parentDataFeatureKey: 'DISTRIBUTED_TICK_PLOTS',
     dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    matchLocationPattern: /\.tck\.(57|61|25|21)$/,
+    matchLocationCoordinateMap: ['57', '61', '25', '21'],
     minZoom: 17,
-    featureShape: 'Circle',
-    style: { color: '#6b191a' },
+    featureShape: 'Polygon',
+    style: { color: '#000000', dashArray: '1, 12' },
   },
   // Aquatic Site Features
   AQUATIC_SITE_FEATURES: {
@@ -594,6 +628,7 @@ export const FEATURES = {
     matchLocationType: 'AOS benchmark named location type',
     description: '',
     parent: 'AQUATIC_SITE_FEATURES',
+    featureShape: 'Marker',
     iconScale: 1.3,
     iconSvg: iconBenchmarkSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.DIAMOND.KEY,
@@ -621,6 +656,7 @@ export const FEATURES = {
     matchLocationType: 'AOS riparian named location type',
     description: 'Number of locations for assessment of riparian vegetation composition and physical structure vary by site type. Lakes and non-wadeable rivers have ten locations. Wadeable streams have 20 locations and also include assessment of riparian vegetation percent cover in wadeable streams.',
     parent: 'AQUATIC_OBSERVATIONAL_SAMPLING',
+    featureShape: 'Marker',
     iconSvg: iconRiparianAssessmentSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
   },
@@ -633,6 +669,7 @@ export const FEATURES = {
     matchLocationType: 'AOS wet deposition named location type',
     description: '',
     parent: 'AQUATIC_OBSERVATIONAL_SAMPLING',
+    featureShape: 'Marker',
     iconScale: 1.2,
     iconSvg: iconWetDepositionPointSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
@@ -646,6 +683,7 @@ export const FEATURES = {
     matchLocationType: 'GROUNDWATER_WELL',
     description: 'Each site has up to eight groundwater wells outfitted with sensors that measure high temporal resolution groundwater elevation (pressure transducer-based), temperature, and specific conductance.',
     parent: 'AQUATIC_AUTOMATED_INSTRUMENTS',
+    featureShape: 'Marker',
     iconScale: 1.2,
     iconSvg: iconGroundwaterWellSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
@@ -659,6 +697,7 @@ export const FEATURES = {
     matchLocationType: 'MET_STATION',
     description: 'A meteorological station is located on the shore of most aquatic sites and collects data comparable with flux tower measurements at terrestrial sites. Lake and wadeable rivers also have an above water met. station on buoy. These data are unique with different sensors and data frequencies due to power and data storage constraints.',
     parent: 'AQUATIC_AUTOMATED_INSTRUMENTS',
+    featureShape: 'Marker',
     iconScale: 1.5,
     iconSvg: iconMeteorologicalStationSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
@@ -672,6 +711,7 @@ export const FEATURES = {
     matchLocationType: 'AOS discharge named location type',
     description: '',
     parent: 'AQUATIC_OBSERVATIONAL_SAMPLING',
+    featureShape: 'Marker',
     iconSvg: iconDischargePointSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
   },
@@ -684,6 +724,7 @@ export const FEATURES = {
     matchLocationType: 'AOS fish named location type',
     description: '',
     parent: 'AQUATIC_OBSERVATIONAL_SAMPLING',
+    featureShape: 'Marker',
     iconSvg: iconFishPointSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
   },
@@ -696,6 +737,7 @@ export const FEATURES = {
     matchLocationType: 'AOS plant named location type',
     description: '',
     parent: 'AQUATIC_OBSERVATIONAL_SAMPLING',
+    featureShape: 'Marker',
     iconScale: 1.3,
     iconSvg: iconPlantTransectSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
@@ -709,6 +751,7 @@ export const FEATURES = {
     matchLocationType: 'AOS sediment named location type',
     description: '',
     parent: 'AQUATIC_OBSERVATIONAL_SAMPLING',
+    featureShape: 'Marker',
     iconSvg: iconSedimentPointSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
   },
@@ -721,6 +764,7 @@ export const FEATURES = {
     matchLocationType: 'STAFF_GAUGE',
     description: 'The staff gauge measures gauge height, in meters, measured at lakes, wadeable rivers and non-wadeable streams. A phenocam is installed near most gauges. It collects RGB and IR images of the lake, river, or stream vegetation, stream surface, and stream gauge every 15 minutes.',
     parent: 'AQUATIC_AUTOMATED_INSTRUMENTS',
+    featureShape: 'Marker',
     iconSvg: iconStaffGaugeSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
   },
@@ -733,6 +777,7 @@ export const FEATURES = {
     matchLocationType: /^(S1|S2|INLET|OUTLET)_LOC$/,
     description: 'Wadeable streams have a sensor station near the top of the reach and the bottom of the reach; non-wadeable rivers have a sensor station on a buoy and one near the bank; Lakes have an inlet sensor station, an outlet sensor station and a sensor station on a buoy. Data collection varies by type of sensor station.',
     parent: 'AQUATIC_AUTOMATED_INSTRUMENTS',
+    featureShape: 'Marker',
     iconScale: 1.1,
     iconSvg: iconSensorStationSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
@@ -746,6 +791,7 @@ export const FEATURES = {
     matchLocationType: 'BUOY',
     description: '',
     parent: 'AQUATIC_AUTOMATED_INSTRUMENTS',
+    featureShape: 'Marker',
     iconScale: 1.2,
     iconSvg: iconBuoySVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
@@ -766,6 +812,7 @@ export const FEATURES = {
     attributes: { type: 'CORE', terrain: 'TERRESTRIAL' },
     dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
     primaryIdOnly: true,
+    featureShape: 'Marker',
     iconScale: 1,
     iconSvg: iconSiteCoreTerrestrialSVG,
     iconSelectedSvg: iconSiteCoreTerrestrialSelectedSVG,
@@ -780,6 +827,7 @@ export const FEATURES = {
     attributes: { type: 'RELOCATABLE', terrain: 'TERRESTRIAL' },
     dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
     primaryIdOnly: true,
+    featureShape: 'Marker',
     iconScale: 1,
     iconSvg: iconSiteRelocatableTerrestrialSVG,
     iconSelectedSvg: iconSiteRelocatableTerrestrialSelectedSVG,
@@ -794,6 +842,7 @@ export const FEATURES = {
     attributes: { type: 'CORE', terrain: 'AQUATIC' },
     dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
     primaryIdOnly: true,
+    featureShape: 'Marker',
     iconScale: 1,
     iconSvg: iconSiteCoreAquaticSVG,
     iconSelectedSvg: iconSiteCoreAquaticSelectedSVG,
@@ -808,6 +857,7 @@ export const FEATURES = {
     attributes: { type: 'RELOCATABLE', terrain: 'AQUATIC' },
     dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
     primaryIdOnly: true,
+    featureShape: 'Marker',
     iconScale: 1,
     iconSvg: iconSiteRelocatableAquaticSVG,
     iconSelectedSvg: iconSiteRelocatableAquaticSelectedSVG,
@@ -819,9 +869,9 @@ Object.keys(FEATURES).forEach((key) => { FEATURES[key].KEY = key; });
 
 // Common colors for selecatble boundary features
 export const BOUNDARY_COLORS = {
-  partialSelected: COLORS.SECONDARY_BLUE[300],
-  totalSelected: COLORS.SECONDARY_BLUE[500],
-  hover: COLORS.SECONDARY_BLUE[100],
+  partialSelected: COLORS.LIGHT_BLUE[300],
+  totalSelected: COLORS.LIGHT_BLUE[500],
+  hover: COLORS.LIGHT_BLUE[100],
 };
 
 export const calculateFeatureAvailability = (state) => {
@@ -867,11 +917,26 @@ export const calculateFeatureAvailability = (state) => {
 };
 
 /**
-   URL Bases
-   Used in construction of URLs when linking out to other pages
+   getHref
+   Used to construction URLs when linking out to other pages
 */
-export const SITE_DETAILS_URL_BASE = 'https://www.neonscience.org/field-sites/field-sites-map/';
-export const EXPLORE_DATA_PRODUCTS_URL_BASE = 'https://data.neonscience.org/data-products/explore?site=';
+export const getHref = (key, arg = null) => {
+  const EXPLORE_DATA_PRODUCTS_BASE = 'https://data.neonscience.org/data-products/explore';
+  switch (key) {
+    case 'EXPLORE_DATA_PRODUCTS_BY_SITE':
+      return `${EXPLORE_DATA_PRODUCTS_BASE}?site=${arg}`;
+    case 'EXPLORE_DATA_PRODUCTS_BY_STATE':
+      return `${EXPLORE_DATA_PRODUCTS_BASE}?state=${arg}`;
+    case 'EXPLORE_DATA_PRODUCTS_BY_DOMAIN':
+      return `${EXPLORE_DATA_PRODUCTS_BASE}?domain=${arg}`;
+    case 'SITE_DETAILS':
+      return `https://www.neonscience.org/field-sites/field-sites-map/${arg}`;
+    case 'DOMAIN_DETAILS':
+      return `https://www.neonscience.org/domains/${arg}`;
+    default:
+      return '#';
+  }
+};
 
 /**
  Tile Layers
@@ -981,7 +1046,9 @@ export const DEFAULT_STATE = {
     Object.keys(FEATURE_TYPES).map(featureType => [featureType, {}]),
   ),
   featureData: Object.fromEntries(
-    Object.keys(FEATURE_TYPES).map(featureType => [featureType, {}]),
+    Object.keys(FEATURE_TYPES)
+      .filter(type => type !== FEATURE_TYPES.SAMPLING_POINTS)
+      .map(featureType => [featureType, {}]),
   ),
   sites: {}, // Sites data is split into 4 features making it hard to look up, so extra refs here
   filters: {
@@ -998,13 +1065,16 @@ export const DEFAULT_STATE = {
   },
 };
 // Initialize featureData and featureDataFetches objects for all features that have a dataLoadType
+// (Note that sampling boundaries store data with their parents so we only want fetches for those)
 Object.keys(FEATURES)
   .filter(featureKey => (
     Object.keys(FEATURE_DATA_LOAD_TYPES).includes(FEATURES[featureKey].dataLoadType)
   ))
   .forEach((featureKey) => {
     const { type: featureType, dataLoadType } = FEATURES[featureKey];
-    DEFAULT_STATE.featureData[featureType][featureKey] = {};
+    if (FEATURES[featureKey].type !== FEATURE_TYPES.SAMPLING_POINTS) {
+      DEFAULT_STATE.featureData[featureType][featureKey] = {};
+    }
     if (dataLoadType !== FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT) {
       DEFAULT_STATE.featureDataFetches[featureType][featureKey] = {};
     }
@@ -1105,7 +1175,7 @@ export const SITE_MAP_DEFAULT_PROPS = {
   filterPosition: 'bottom',
   unusableVerticalSpace: 0,
   // Map Props
-  mapCenter: [52.68, -110.75],
+  mapCenter: OBSERVATORY_CENTER,
   mapZoom: null,
   mapTileLayer: Object.keys(TILE_LAYERS)[0],
   // Initial map focus (overrides mapCenter and mapZoom)
@@ -1473,4 +1543,13 @@ export const calculateLocationsInMap = (
     return false;
   };
   return Object.keys(locations).filter(locId => isInBounds(locations[locId]));
+};
+
+export const deriveFullObservatoryZoomLevel = (mapRef) => {
+  const FALLBACK_ZOOM = 2;
+  if (!mapRef.current) { return FALLBACK_ZOOM; }
+  const container = mapRef.current.container.parentElement;
+  const minorDim = Math.min(container.clientWidth / 136, container.clientHeight / 128);
+  const derivedZoom = [1, 2, 4, 6, 11].findIndex(m => m > minorDim);
+  return derivedZoom === -1 ? FALLBACK_ZOOM : derivedZoom;
 };

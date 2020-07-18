@@ -27,6 +27,7 @@ import {
   SELECTABLE_FEATURE_TYPES,
   SITE_LOCATION_HIERARCHIES_MIN_ZOOM,
   MAP_ZOOM_RANGE,
+  OBSERVATORY_CENTER,
   PLOT_SAMPLING_MODULES,
   SITE_MAP_PROP_TYPES,
   SITE_MAP_DEFAULT_PROPS,
@@ -39,6 +40,7 @@ import {
   calculateFeatureAvailability,
   boundsAreValid,
   calculateLocationsInMap,
+  deriveFullObservatoryZoomLevel,
 } from './SiteMapUtils';
 
 // Derive the selected status of a given boundary (US state or NEON domain). This should run
@@ -179,7 +181,11 @@ const calculateFeatureDataFetches = (state) => {
         && state.filters.features.visible[featureKey]
     ))
     .forEach((featureKey) => {
-      const { type: featureType, parentDataFeatureKey } = FEATURES[featureKey];
+      const {
+        type: featureType,
+        parentDataFeatureKey,
+        matchLocationPattern,
+      } = FEATURES[featureKey];
       const { type: parentDataFeatureType } = FEATURES[parentDataFeatureKey];
       const parentLocations = {};
       Object.keys(state.featureData[parentDataFeatureType][parentDataFeatureKey])
@@ -200,6 +206,7 @@ const calculateFeatureDataFetches = (state) => {
         parentLocations[locationCode].children
           .filter(childLocation => (
             !newState.featureDataFetches[featureType][featureKey][siteCode][childLocation]
+              && (!matchLocationPattern || matchLocationPattern.test(childLocation))
           ))
           .forEach((childLocation) => {
             newState.featureDataFetches[featureType][featureKey][siteCode][childLocation] = FETCH_STATUS.AWAITING_CALL; // eslint-disable-line max-len
@@ -235,7 +242,11 @@ const reducer = (state, action) => {
       location = null,
     } = action;
     if (!FEATURES[featureKey]) { return false; }
-    const { type: featureType } = FEATURES[featureKey];
+    const {
+      type: featureType,
+      parentDataFeatureKey,
+      matchLocationCoordinateMap = [],
+    } = FEATURES[featureKey];
     if (
       !newState.featureDataFetches[featureType]
         || !newState.featureDataFetches[featureType][featureKey]
@@ -281,6 +292,29 @@ const reducer = (state, action) => {
             (PLOT_SAMPLING_MODULES[a] || null) > (PLOT_SAMPLING_MODULES[b] || null) ? 1 : -1
           ));
       }
+      // Sampling points with parents all feed back into their parents as geometry coordinates
+      if (featureType === FEATURE_TYPES.SAMPLING_POINTS && parentDataFeatureKey) {
+        const { type: parentDataFeatureType } = FEATURES[parentDataFeatureKey];
+        const { locationParent } = data;
+        const parentData = newState.featureData[parentDataFeatureType][parentDataFeatureKey];
+        const coordIdx = matchLocationCoordinateMap.findIndex(match => location.endsWith(match));
+        if (coordIdx === -1) { return false; }
+        if (!parentData[siteCode]) { parentData[siteCode] = {}; }
+        if (!parentData[siteCode][locationParent]) { parentData[siteCode][locationParent] = {}; }
+        // Initialize the geometry.coordinates with as many empty points as expressed by the map
+        if (!parentData[siteCode][locationParent].geometry) {
+          parentData[siteCode][locationParent].geometry = { coordinates: [] };
+          for (let c = 0; c < matchLocationCoordinateMap.length; c += 1) {
+            parentData[siteCode][locationParent].geometry.coordinates.push([]);
+          }
+        }
+        parentData[siteCode][locationParent].geometry.coordinates[coordIdx] = [
+          parsedData.latitude,
+          parsedData.longitude,
+        ];
+        return true;
+      }
+      // Everything else: fill in feature data
       if (!newState.featureData[dataFeatureType][dataFeatureKey]) {
         newState.featureData[dataFeatureType][dataFeatureKey] = {};
       }
@@ -395,6 +429,11 @@ const reducer = (state, action) => {
 
     case 'setMapRepositionOpenPopupFunc':
       newState.map.repositionOpenPopupFunc = typeof action.func === 'function' ? action.func : null;
+      return newState;
+
+    case 'showFullObservatory':
+      newState.map.center = OBSERVATORY_CENTER;
+      newState.map.zoom = deriveFullObservatoryZoomLevel(action.mapRef);
       return newState;
 
     // Features

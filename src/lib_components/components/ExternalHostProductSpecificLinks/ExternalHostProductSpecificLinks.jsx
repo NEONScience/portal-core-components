@@ -11,8 +11,12 @@ import ExternalHost from '../ExternalHost/ExternalHost';
 
 const useStyles = makeStyles(theme => ({
   ulLinkList: {
-    paddingLeft: Theme.spacing(2),
+    paddingLeft: theme.spacing(2),
     margin: theme.spacing(0.5, 0),
+    fontSize: '0.85rem',
+    '& > li': {
+      marginBottom: theme.spacing(0.5),
+    },
   },
 }));
 
@@ -26,6 +30,7 @@ export default function ExternalHostProductSpecificLinks(props) {
 
   const belowSm = useMediaQuery(Theme.breakpoints.only('xs'));
   const belowMd = useMediaQuery(Theme.breakpoints.down('sm'));
+  const belowLg = useMediaQuery(Theme.breakpoints.down('md'));
 
   const externalHost = ExternalHost.getByProductCode(productCode);
   if (!externalHost || !Object.keys(ExternalHost.LINK_TYPES).includes(externalHost.linkType)) {
@@ -33,6 +38,7 @@ export default function ExternalHostProductSpecificLinks(props) {
   }
 
   let columnBasis = '25%';
+  if (belowLg) { columnBasis = '33.33%'; }
   if (belowMd) { columnBasis = '50%'; }
   if (belowSm) { columnBasis = '100%'; }
   const listDivStyle = { flex: `1 0 ${columnBasis}`, padding: Theme.spacing(0, 2, 2, 0) };
@@ -40,7 +46,7 @@ export default function ExternalHostProductSpecificLinks(props) {
   const renderLinksByProduct = () => {
     if (typeof externalHost.getProductLinks !== 'function') { return null; }
     return (
-      <ul style={{ marginTop: Theme.spacing(2) }}>
+      <ul style={{ marginTop: Theme.spacing(3), marginBottom: Theme.spacing(0.75) }}>
         {(externalHost.getProductLinks(productCode) || []).map(link => (
           <li key={link.key}>
             {link.node}
@@ -71,7 +77,7 @@ export default function ExternalHostProductSpecificLinks(props) {
             if (!links.length) { return null; }
             return (
               <div key={stateName} style={listDivStyle}>
-                <Typography variant="h6" key={stateName}>
+                <Typography variant="subtitle2" key={stateName}>
                   {stateName}
                 </Typography>
                 <ul className={classes.ulLinkList}>

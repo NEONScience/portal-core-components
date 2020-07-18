@@ -19,7 +19,7 @@ import domainsJSON from '../../staticJSON/domains.json';
 import bundlesJSON from '../../staticJSON/bundles.json';
 import timeSeriesDataProductsJSON from '../../staticJSON/timeSeriesDataProducts.json';
 
-const FETCH_STATUS = {
+export const FETCH_STATUS = {
   AWAITING_CALL: 'AWAITING_CALL',
   FETCHING: 'FETCHING',
   ERROR: 'ERROR',
@@ -36,13 +36,17 @@ const DEFAULT_STATE = {
     stateSites: {}, // derived when sites is fetched
     domainSites: {}, // derived when sites is fetched
   },
+  html: {
+    header: null,
+    footer: null,
+  },
   fetches: {
     sites: { status: FETCH_STATUS.AWAITING_CALL, error: null },
+    auth: { status: null, error: null },
+    header: { status: null, error: null },
+    footer: { status: null, error: null },
   },
-  auth: {
-    isAuthenticated: false,
-    fetchStatus: null,
-  },
+  isAuthenticated: false,
   isActive: false,
   isFinal: false,
   hasError: false,
@@ -69,6 +73,12 @@ const deriveRegionSites = (state) => {
     ...state,
     data: { ...state.data, stateSites, domainSites },
   };
+};
+
+// TODO: where to put this?
+const HTML_URLS = {
+  header: 'https://preview.neonscience.org/neon-assets/partial/header',
+  footer: 'https://preview.neonscience.org/neon-assets/partial/footer',
 };
 
 /**
@@ -101,10 +111,12 @@ const reducer = (state, action) => {
   // changing to trigger re-renders in the consumer.
   const newState = { ...state, fetches: cloneDeep(state.fetches) };
   switch (action.type) {
-    // Actions for handling sites fetch
-    case 'fetchSitesCalled':
-      newState.fetches.sites.status = FETCH_STATUS.FETCHING;
+    case 'fetchCalled':
+      if (!action.key || !state.fetches[action.key]) { return state; }
+      newState.fetches[action.key].status = FETCH_STATUS.FETCHING;
       return newState;
+
+    // Actions for handling sites fetch
     case 'fetchSitesSucceeded':
       newState.fetches.sites.status = FETCH_STATUS.SUCCESS;
       newState.data.sites = action.sites;
@@ -118,12 +130,25 @@ const reducer = (state, action) => {
       return newState;
 
     // Actions for handling auth fetch
-    case 'setIsAuthenticated':
-      newState.auth.isAuthenticated = !!action.isAuthenticated;
-      newState.auth.fetchStatus = FETCH_STATUS.SUCCESS;
+    case 'fetchAuthSucceeded':
+      newState.fetches.auth.status = FETCH_STATUS.SUCCESS;
+      newState.isAuthenticated = !!action.isAuthenticated;
       return newState;
-    case 'setAuthFetching':
-      newState.auth.fetchStatus = FETCH_STATUS.FETCHING;
+    case 'fetchAuthFailed':
+      newState.fetches.auth.status = FETCH_STATUS.ERROR;
+      newState.isAuthenticated = false;
+      return newState;
+
+    // Actions for handling HTML fetches
+    case 'fetchHtmlSucceeded':
+      if (!Object.keys(HTML_URLS).includes(action.part)) { return state; }
+      newState.fetches[action.part].status = FETCH_STATUS.SUCCESS;
+      newState.html[action.part] = action.html;
+      return newState;
+    case 'fetchHtmlFailed':
+      if (!Object.keys(HTML_URLS).includes(action.part)) { return state; }
+      newState.fetches[action.part].status = FETCH_STATUS.ERROR;
+      newState.fetches[action.part].error = action.error;
       return newState;
 
     default:
@@ -157,54 +182,78 @@ const parseSitesFetchResponse = (sitesArray = []) => {
    Context Provider
 */
 const Provider = (props) => {
-  const { useCoreAuth, children } = props;
+  const { useCoreAuth, useCoreHeader, children } = props;
 
-  const initialState = { ...DEFAULT_STATE, isActive: true };
+  const initialState = cloneDeep(DEFAULT_STATE);
+  initialState.isActive = true;
   if (useCoreAuth) {
-    initialState.auth.fetchStatus = FETCH_STATUS.AWAITING_CALL;
+    initialState.fetches.auth.status = FETCH_STATUS.AWAITING_CALL;
   }
-  const [state, dispatch] = useReducer(reducer, { ...DEFAULT_STATE, isActive: true });
+  if (!useCoreHeader) {
+    initialState.fetches.header.status = FETCH_STATUS.AWAITING_CALL;
+    initialState.fetches.footer.status = FETCH_STATUS.AWAITING_CALL;
+  }
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const fetchHTML = (part) => {
+    if (!Object.keys(HTML_URLS).includes(part)) { return; }
+    window.fetch(HTML_URLS[part], { method: 'GET', headers: { Accept: 'text/html' } })
+      .then(response => response.text())
+      .then((html) => {
+        dispatch({ type: 'fetchHtmlSucceeded', part, html });
+        return of(true);
+      })
+      .catch((error) => {
+        dispatch({ type: 'fetchHtmlFailed', part, error });
+        return of(false);
+      });
+  };
 
   // Subject and effect to perform and manage the sites GraphQL fetch
-  const fetchAllSites$ = NeonGraphQL.getAllSites().pipe(
-    map((response) => {
-      if (response.response && response.response.data && response.response.data.sites) {
-        const sites = parseSitesFetchResponse(response.response.data.sites);
-        dispatch({ type: 'fetchSitesSucceeded', sites });
-        return of(true);
-      }
-      dispatch({ type: 'fetchSitesFailed', error: 'malformed response' });
-      return of(false);
-    }),
-    catchError((error) => {
-      dispatch({ type: 'fetchSitesFailed', error: error.message });
-      return of(false);
-    }),
-  );
+  const fetchMethods = {
+    sites: () => {
+      NeonGraphQL.getAllSites().pipe(
+        map((response) => {
+          if (response.response && response.response.data && response.response.data.sites) {
+            const sites = parseSitesFetchResponse(response.response.data.sites);
+            dispatch({ type: 'fetchSitesSucceeded', sites });
+            return of(true);
+          }
+          dispatch({ type: 'fetchSitesFailed', error: 'malformed response' });
+          return of(false);
+        }),
+        catchError((error) => {
+          dispatch({ type: 'fetchSitesFailed', error: error.message });
+          return of(false);
+        }),
+      ).subscribe();
+    },
+    auth: () => {
+      const auth = new Authenticate();
+      auth.isAuthenticated(
+        (response) => {
+          dispatch({ type: 'fetchAuthSucceeded', isAuthenticated: auth.checkAuthResponse(response) });
+        },
+        (error) => {
+          dispatch({ type: 'fetchAuthFailed', error });
+        },
+      );
+    },
+    header: () => fetchHTML('header'),
+    footer: () => fetchHTML('footer'),
+  };
 
-  // Effect: fetch sites data
+  // Effect: Trigger all fetches that are awaiting call
   useEffect(() => {
-    if (state.fetches.sites.status === FETCH_STATUS.AWAITING_CALL) {
-      dispatch({ type: 'fetchSitesCalled' });
-      fetchAllSites$.subscribe();
-    }
+    Object.keys(state.fetches).forEach((key) => {
+      if (
+        state.fetches[key].status !== FETCH_STATUS.AWAITING_CALL
+          || typeof fetchMethods[key] !== 'function'
+      ) { return; }
+      dispatch({ type: 'fetchCalled', key });
+      fetchMethods[key]();
+    });
   });
-
-  // Effect: set the authentication status using the core authentication method.
-  // TODO: allow third party core-components consumers to provide their own auth method.
-  useEffect(() => {
-    if (state.auth.fetchStatus !== FETCH_STATUS.AWAITING_CALL) { return; }
-    dispatch({ type: 'setAuthFetching' });
-    const auth = new Authenticate();
-    auth.isAuthenticated(
-      (response) => {
-        dispatch({ type: 'setIsAuthenticated', isAuthenticated: auth.checkAuthResponse(response) });
-      },
-      () => {
-        dispatch({ type: 'setIsAuthenticated', isAuthenticated: false });
-      },
-    );
-  }, [state.auth.fetchStatus]);
 
   /**
      Render
@@ -218,6 +267,7 @@ const Provider = (props) => {
 
 Provider.propTypes = {
   useCoreAuth: PropTypes.bool,
+  useCoreHeader: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.oneOfType([
       PropTypes.node,
@@ -230,6 +280,7 @@ Provider.propTypes = {
 
 Provider.defaultProps = {
   useCoreAuth: false,
+  useCoreHeader: false,
 };
 
 /**

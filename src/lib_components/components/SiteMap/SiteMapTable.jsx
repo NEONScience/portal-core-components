@@ -10,6 +10,8 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
 import InfoIcon from '@material-ui/icons/InfoOutlined';
+import MarkerIcon from '@material-ui/icons/LocationOn';
+import ExploreDataProductsIcon from '@material-ui/icons/InsertChartOutlined';
 
 import MaterialTable, { MTableToolbar, MTableFilterRow } from 'material-table';
 
@@ -19,11 +21,10 @@ import Theme from '../Theme/Theme';
 
 import SiteMapContext from './SiteMapContext';
 import {
+  getHref,
   VIEWS,
   FEATURES,
   FEATURE_TYPES,
-  // SITE_DETAILS_URL_BASE,
-  // EXPLORE_DATA_PRODUCTS_URL_BASE,
   MIN_TABLE_MAX_BODY_HEIGHT,
   PLOT_SAMPLING_MODULES,
   calculateLocationsInMap,
@@ -39,6 +40,9 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: 'white',
     '& table': {
       margin: '0px !important',
+    },
+    '& tfoot': {
+      paddingRight: '36px',
     },
   },
   featureIcon: {
@@ -89,22 +93,15 @@ const useStyles = makeStyles(theme => ({
     fontSize: '1.05em',
     whiteSpace: 'nowrap',
   },
-  tooltip: {
-    marginLeft: theme.spacing(0.25),
-  },
-  popper: {
-    '& > div': {
-      padding: theme.spacing(1, 1.5),
-      fontSize: '0.85rem',
-      fontWeight: 300,
-      backgroundColor: theme.palette.grey[800],
-    },
-    '& a': {
-      color: theme.palette.grey[100],
-    },
-  },
   iconButton: {
     marginTop: theme.spacing(-0.25),
+  },
+  siteName: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    marginBottom: Theme.spacing(1),
+    minWidth: '200px',
   },
 }));
 
@@ -282,15 +279,50 @@ const SiteMapTable = () => {
         if (!site) { return null; }
         const featureKey = `${site.terrain.toUpperCase()}_${site.type.toUpperCase()}_SITES`;
         return (
-          <Link
-            component="button"
-            className={`${classes.linkButton} ${classes.startFlex}`}
-            onClick={() => jumpTo(site.siteCode)}
-            data-selenium="sitemap-table-siteLink"
-          >
-            {renderFeatureIcon(featureKey)}
-            <span>{`${site.description} (${site.siteCode})`}</span>
-          </Link>
+          <div>
+            <div className={classes.siteName}>
+              {renderFeatureIcon(featureKey)}
+              <span>{`${site.description} (${site.siteCode})`}</span>
+            </div>
+            <div className={classes.startFlex} style={{ marginLeft: Theme.spacing(-0.75) }}>
+              <Tooltip title={`Jump to ${site.siteCode} on the map`}>
+                <IconButton
+                  size="small"
+                  color="primary"
+                  className={classes.iconButton}
+                  onClick={() => jumpTo(site.siteCode)}
+                  data-selenium="sitemap-table-site-button-jumpTo"
+                  aria-label="Jump to site on map"
+                >
+                  <MarkerIcon fontSize="inherit" />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title={`Visit the ${site.siteCode} site details page`}>
+                <IconButton
+                  size="small"
+                  color="primary"
+                  className={classes.iconButton}
+                  href={`${getHref('SITE_DETAILS', site.siteCode)}`}
+                  data-selenium="sitemap-table-site-button-siteDetails"
+                  aria-label="Visit site details page"
+                >
+                  <InfoIcon fontSize="inherit" />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title={`Explore data products for ${site.siteCode}`}>
+                <IconButton
+                  size="small"
+                  color="primary"
+                  className={classes.iconButton}
+                  href={`${getHref('EXPLORE_DATA_PRODUCTS_BY_SITE', site.siteCode)}`}
+                  data-selenium="sitemap-table-site-button-exploreDataProducts"
+                  aria-label="Explore data products for this site"
+                >
+                  <ExploreDataProductsIcon fontSize="inherit" />
+                </IconButton>
+              </Tooltip>
+            </div>
+          </div>
         );
       },
     },
@@ -310,14 +342,49 @@ const SiteMapTable = () => {
       render: (row) => {
         const domain = getDomain(row);
         return !domain ? null : (
-          <Link
-            component="button"
-            className={classes.linkButton}
-            onClick={() => jumpTo(domain.domainCode)}
-            data-selenium="sitemap-table-domainLink"
-          >
-            {domain.domainCode}
-          </Link>
+          <div>
+            <div style={{ marginBottom: Theme.spacing(1) }}>
+              {domain.domainCode}
+            </div>
+            <div className={classes.startFlex} style={{ marginLeft: Theme.spacing(-0.75) }}>
+              <Tooltip title={`Jump to ${domain.domainCode} on the map`}>
+                <IconButton
+                  size="small"
+                  color="primary"
+                  className={classes.iconButton}
+                  onClick={() => jumpTo(domain.domainCode)}
+                  data-selenium="sitemap-table-domain-button-jumpTo"
+                  aria-label="Jump to domain on map"
+                >
+                  <MarkerIcon fontSize="inherit" />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title={`Visit the ${domain.domainCode} domain details page`}>
+                <IconButton
+                  size="small"
+                  color="primary"
+                  className={classes.iconButton}
+                  href={`${getHref('DOMAIN_DETAILS', domain.domainCode)}`}
+                  data-selenium="sitemap-table-domain-button-domainDetails"
+                  aria-label="Visit domain details page"
+                >
+                  <InfoIcon fontSize="inherit" />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title={`Explore data products for ${domain.domainCode}`}>
+                <IconButton
+                  size="small"
+                  color="primary"
+                  className={classes.iconButton}
+                  href={`${getHref('EXPLORE_DATA_PRODUCTS_BY_DOMAIN', domain.domainCode)}`}
+                  data-selenium="sitemap-table-domain-button-exploreDataProducts"
+                  aria-label="Explore data products for this domain"
+                >
+                  <ExploreDataProductsIcon fontSize="inherit" />
+                </IconButton>
+              </Tooltip>
+            </div>
+          </div>
         );
       },
     },
@@ -340,14 +407,37 @@ const SiteMapTable = () => {
       render: (row) => {
         const usstate = getState(row);
         return !usstate ? null : (
-          <Link
-            component="button"
-            className={classes.linkButton}
-            onClick={() => jumpTo(usstate.stateCode)}
-            data-selenium="sitemap-table-stateLink"
-          >
-            {usstate.name}
-          </Link>
+          <div>
+            <div style={{ marginBottom: Theme.spacing(1) }}>
+              {usstate.name}
+            </div>
+            <div className={classes.startFlex} style={{ marginLeft: Theme.spacing(-0.75) }}>
+              <Tooltip title={`Jump to ${usstate.name} on the map`}>
+                <IconButton
+                  size="small"
+                  color="primary"
+                  className={classes.iconButton}
+                  onClick={() => jumpTo(usstate.stateCode)}
+                  data-selenium="sitemap-table-state-button-jumpTo"
+                  aria-label="Jump to state on map"
+                >
+                  <MarkerIcon fontSize="inherit" />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title={`Explore data products for ${usstate.stateCode}`}>
+                <IconButton
+                  size="small"
+                  color="primary"
+                  className={classes.iconButton}
+                  href={`${getHref('EXPLORE_DATA_PRODUCTS_BY_STATE', usstate.stateCode)}`}
+                  data-selenium="sitemap-table-state-button-exploreDataProducts"
+                  aria-label="Explore data products for this state"
+                >
+                  <ExploreDataProductsIcon fontSize="inherit" />
+                </IconButton>
+              </Tooltip>
+            </div>
+          </div>
         );
       },
     },
@@ -529,6 +619,7 @@ const SiteMapTable = () => {
         render: row => (
           Array.isArray(row.samplingModules) ? (
             <Tooltip
+              interactive
               placement="left"
               title={
                 row.samplingModules.length ? (
@@ -539,9 +630,6 @@ const SiteMapTable = () => {
                   </ul>
                 ) : <i>none</i>
               }
-              className={classes.tooltip}
-              PopperProps={{ className: classes.popper }}
-              interactive
             >
               <div className={classes.startFlex}>
                 {renderNumberString(row.samplingModules.length, 'Potential Sampling Modules')}
@@ -568,9 +656,9 @@ const SiteMapTable = () => {
 
   const components = {
     Container: Box,
-    Toolbar: props => (
+    Toolbar: toolbarProps => (
       <div className={classes.toolbarContainer} data-selenium="sitemap-table-toolbar">
-        <MTableToolbar {...props} />
+        <MTableToolbar {...toolbarProps} />
       </div>
     ),
     FilterRow: filterRowProps => (

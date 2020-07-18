@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
 import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
@@ -47,70 +47,13 @@ const useStyles = makeStyles(() => ({
     flexGrow: 1,
     flexBasis: 0.5,
   },
-}));
-
-const boxShadow = alpha => `0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,${alpha}),0 0 0 1px rgba(0,0,0,0.02)`;
-const DateRangeSlider = withStyles({
-  root: {
+  slider: {
+    minWidth: Theme.spacing(40),
     width: `calc(100% - ${Theme.spacing(6)}px)`,
     marginLeft: Theme.spacing(3),
     marginBottom: Theme.spacing(4),
   },
-  rail: {
-    height: 3,
-  },
-  track: {
-    height: 7,
-    marginTop: -2,
-  },
-  mark: {
-    height: 12,
-    marginTop: -5,
-  },
-  markActive: {
-    height: 12,
-    marginTop: -5,
-    backgroundColor: Theme.palette.primary.main,
-  },
-  markLabel: {
-    marginTop: Theme.spacing(1),
-  },
-  thumb: {
-    height: Theme.spacing(3.5),
-    width: Theme.spacing(1.5),
-    backgroundColor: Theme.palette.grey[50],
-    boxShadow: boxShadow(0.13),
-    border: `2px solid ${Theme.palette.primary.main}`,
-    borderRadius: Theme.spacing(0.5),
-    marginTop: Theme.spacing(-1.75),
-    marginLeft: Theme.spacing(-0.75),
-    '&:focus,&:hover,&active': {
-      boxShadow: boxShadow(0.3),
-      // Reset on touch devices, it doesn't add specificity
-      '@media (hover: none)': {
-        boxShadow: boxShadow(0.13),
-      },
-    },
-  },
-  valueLabel: {
-    left: 'initial',
-    fontWeight: 600,
-    top: -20,
-    whiteSpace: 'nowrap',
-    '& span': {
-      width: 'auto',
-      height: 'auto',
-      padding: Theme.spacing(0.5, 1),
-      borderRadius: Theme.spacing(0.5),
-      transform: 'none',
-      '& span': {
-        transform: 'none',
-        padding: 0,
-        borderRadius: 0,
-      },
-    },
-  },
-})(Slider);
+}));
 
 const TimeSeriesViewerDateRange = (props) => {
   const classes = useStyles(Theme);
@@ -254,7 +197,7 @@ const TimeSeriesViewerDateRange = (props) => {
         <Typography variant="h6" gutterBottom>Select by Date</Typography>
         <div style={{ marginBottom: Theme.spacing(2) }}>
           <MuiPickersUtilsProvider utils={MomentUtils}>
-            <div className={classes.optionsContainer} style={{ marginBottom: Theme.spacing(1) }}>
+            <div className={classes.optionsContainer} style={{ marginBottom: Theme.spacing(3) }}>
               <div style={{ marginRight: Theme.spacing(3) }}>
                 <DatePicker
                   data-selenium="time-series-viewer.date-range.start-input"
@@ -285,8 +228,9 @@ const TimeSeriesViewerDateRange = (props) => {
               </div>
             </div>
           </MuiPickersUtilsProvider>
-          <DateRangeSlider
+          <Slider
             data-selenium="time-series-viewer.date-range.slider"
+            className={classes.slider}
             ref={dateRangeSliderRef}
             value={sliderValue}
             valueLabelDisplay="auto"
@@ -294,7 +238,6 @@ const TimeSeriesViewerDateRange = (props) => {
             max={displayMax}
             marks={marks}
             valueLabelFormat={x => displayRange[x]}
-            style={{ minWidth: Theme.spacing(40) }}
             onMouseDown={() => { setActivelySelecting(true); }}
             onChange={(event, values) => {
               setActivelySelectingDateRange([

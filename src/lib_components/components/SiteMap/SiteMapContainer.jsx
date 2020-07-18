@@ -1,4 +1,10 @@
-import React, { useRef, useEffect, useLayoutEffect } from 'react';
+import React, {
+  useRef,
+  useState,
+  useEffect,
+  useCallback,
+  useLayoutEffect,
+} from 'react';
 import PropTypes from 'prop-types';
 
 import uniqueId from 'lodash/uniqueId';
@@ -15,9 +21,10 @@ import Typography from '@material-ui/core/Typography';
 import ErrorIcon from '@material-ui/icons/Warning';
 import DownArrowIcon from '@material-ui/icons/ArrowDropDown';
 import LeftArrowIcon from '@material-ui/icons/ArrowLeft';
+import VertResizeIcon from '@material-ui/icons/Height';
 
 import NeonContext from '../NeonContext/NeonContext';
-import Theme, { COLORS } from '../Theme/Theme';
+import Theme from '../Theme/Theme';
 
 import SiteMapContext from './SiteMapContext';
 import SiteMapFilters from './SiteMapFilters';
@@ -27,6 +34,7 @@ import {
   VIEWS,
   FEATURES,
   FEATURE_TYPES,
+  MIN_CONTAINER_HEIGHT,
   getDynamicAspectRatio,
 } from './SiteMapUtils';
 
@@ -35,13 +43,15 @@ const progressId = `sitemap-progress-${uniqueId()}`;
 const boxShadow = '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)';
 const useStyles = makeStyles(theme => ({
   outerContainer: {
+    zIndex: 0,
     width: '100%',
+    position: 'relative',
   },
   contentContainer: {
     width: '100%',
     height: '0px', // Necessary to set a fixed aspect ratio from props (using paddingBottom)
     position: 'relative',
-    backgroundColor: COLORS.BLUE[200],
+    backgroundColor: theme.colors.NEON_BLUE[200],
     overflow: 'hidden',
     display: 'flex',
     justifyContent: 'center',
@@ -56,10 +66,12 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     alignItems: 'center',
     padding: theme.spacing(3),
+    borderRadius: '2px',
   },
   featuresContainer: {
-    backgroundColor: theme.palette.grey[75],
-    height: '100%',
+    backgroundColor: theme.palette.grey[100],
+    height: 'calc(100% - 26px)',
+    borderBottomLeftRadius: '4px',
     position: 'absolute',
     zIndex: 1000,
     top: '0px',
@@ -91,20 +103,38 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
   },
-  popper: {
-    marginLeft: theme.spacing(5),
-    marginTop: theme.spacing(0.5),
-    zIndex: 1001,
-    '& > div': {
-      margin: 0,
-      padding: theme.spacing(1, 1.5),
-      fontSize: '0.85rem',
-      fontWeight: 300,
-      backgroundColor: theme.palette.grey[800],
+  resizeButton: {
+    backgroundColor: '#fff',
+    position: 'absolute',
+    zIndex: 999,
+    bottom: '0px',
+    right: '0px',
+    width: '26px',
+    height: '26px',
+    padding: 'unset',
+    borderRadius: '2px 0px 2px 0px',
+    border: `1px solid ${theme.colors.LIGHT_BLUE[500]}`,
+    cursor: 'grab',
+    '&:hover, &:active': {
+      color: theme.colors.LIGHT_BLUE[400],
+      borderColor: theme.colors.LIGHT_BLUE[400],
+      backgroundColor: theme.palette.grey[50],
     },
-    '& a': {
-      color: theme.palette.grey[100],
+    '&:active': {
+      cursor: 'row-resize !important',
     },
+    '& svg': {
+      fontSize: '1.15rem !important',
+    },
+  },
+  resizeBorder: {
+    position: 'absolute',
+    border: `3px solid ${theme.colors.LIGHT_BLUE[500]}`,
+    top: '0px',
+    left: '0px',
+    width: '100%',
+    zIndex: 998,
+    display: 'none',
   },
 }));
 
@@ -126,6 +156,58 @@ const SiteMapContainer = (props) => {
 
   const featuresRef = useRef(null);
   const contentDivRef = useRef(null);
+  const resizeBorderRef = useRef(null);
+  const resizeButtonRef = useRef(null);
+
+  /**
+     Vertical Resize Hooks
+  */
+  const [resizeDragging, setResizeDragging] = useState(false);
+  const [dragStartY, setDragStartY] = useState(null);
+  const dragDeltaY = useRef(null);
+  const resizeVerticallyDragStart = useCallback((event) => {
+    if (!resizeBorderRef.current || !contentDivRef.current) { return; }
+    setDragStartY(event.clientY);
+    setResizeDragging(true);
+    dragDeltaY.current = 0;
+    resizeBorderRef.current.style.display = 'block';
+    resizeBorderRef.current.style.height = `${contentDivRef.current.clientHeight}px`;
+  }, [setDragStartY, setResizeDragging, dragDeltaY]);
+  const resizeVerticallyDrag = useCallback((event) => {
+    if (
+      !resizeDragging || !resizeBorderRef.current
+        || dragStartY === null || event.clientY === 0
+    ) { return; }
+    dragDeltaY.current = event.clientY - dragStartY;
+    const newHeight = Math.max(
+      contentDivRef.current.clientHeight + dragDeltaY.current,
+      MIN_CONTAINER_HEIGHT,
+    );
+    resizeBorderRef.current.style.height = `${newHeight}px`;
+  }, [resizeDragging, dragStartY, dragDeltaY]);
+  const resizeVerticallyDragEnd = useCallback(() => {
+    const finalHeight = Math.max(
+      contentDivRef.current.clientHeight + dragDeltaY.current,
+      MIN_CONTAINER_HEIGHT,
+    );
+    setDragStartY(null);
+    setResizeDragging(false);
+    dragDeltaY.current = null;
+    resizeBorderRef.current.style.display = 'none';
+    resizeButtonRef.current.blur();
+    const newAspectRatio = finalHeight / aspectRatio.widthReference;
+    dispatch({
+      type: 'setAspectRatio',
+      aspectRatio: newAspectRatio,
+      widthReference: aspectRatio.widthReference,
+    });
+  }, [
+    aspectRatio.widthReference,
+    dispatch,
+    setDragStartY,
+    setResizeDragging,
+    dragDeltaY,
+  ]);
 
   /**
      Effect - Register event listener to dynamically adjust aspect ratio from viewport dimensions
@@ -153,11 +235,15 @@ const SiteMapContainer = (props) => {
 
   /**
      Effect - Monitor all click events and close the features pane if open and clicked outside
+     and not in the content area (map or table)
   */
   useEffect(() => {
     if (!state.filters.features.open || !featuresRef.current) { return () => {}; }
     const handleClick = (event) => {
-      if (featuresRef.current && !featuresRef.current.contains(event.target)) {
+      if (
+        featuresRef.current && !featuresRef.current.contains(event.target)
+          && contentDivRef.current && !contentDivRef.current.contains(event.target)
+      ) {
         dispatch({ type: 'setFilterFeaturesOpen', open: false });
       }
     };
@@ -165,7 +251,12 @@ const SiteMapContainer = (props) => {
     return () => {
       document.removeEventListener('click', handleClick);
     };
-  }, [state.filters.features.open, featuresRef, dispatch]);
+  }, [
+    state.filters.features.open,
+    featuresRef,
+    contentDivRef,
+    dispatch,
+  ]);
 
   /**
      Effect - If NeonContext Data is now available and has not been hydrated into state then do so.
@@ -227,6 +318,25 @@ const SiteMapContainer = (props) => {
       </div>
     );
   }
+
+  /**
+     Render - Vertical resize Elements
+  */
+  const renderVerticalResizeButton = () => (
+    <Tooltip placement="left" title={`Resize ${view === VIEWS.MAP ? 'map' : 'table'} vertically`}>
+      <IconButton
+        draggable
+        type="button"
+        ref={resizeButtonRef}
+        className={classes.resizeButton}
+        onDragStart={resizeVerticallyDragStart}
+        onDrag={resizeVerticallyDrag}
+        onDragEnd={resizeVerticallyDragEnd}
+      >
+        <VertResizeIcon fontSize="small" />
+      </IconButton>
+    </Tooltip>
+  );
 
   /**
      Render - Single Feature Option
@@ -329,30 +439,32 @@ const SiteMapContainer = (props) => {
           <span style={{ fontWeight: 600 }}>
             {feature.name}
           </span>
-          <IconButton
-            size="small"
-            title={collapseTitle}
-            aria-label={collapseTitle}
-            onClick={(event) => {
-              event.preventDefault();
-              // We use a setTimeout here so the icon doesn't change before the click event bubbles
-              // Without it the target of the click event is an SVG that no longer exists in the
-              // DOM tree, and is thus not contained in the features container, and is thus seen as
-              // a click outside that will close the features container, when we know it's not.
-              window.setTimeout(() => {
-                dispatch({
-                  type: `setFilterFeature${collapsed ? 'Expanded' : 'Collapsed'}`,
-                  feature: key,
-                });
-              }, 0);
-            }}
-          >
-            {collapsed ? (
-              <LeftArrowIcon fontSize="inherit" />
-            ) : (
-              <DownArrowIcon fontSize="inherit" />
-            )}
-          </IconButton>
+          <Tooltip title={collapseTitle}>
+            <IconButton
+              size="small"
+              aria-label={collapseTitle}
+              style={{ marginLeft: Theme.spacing(1) }}
+              onClick={(event) => {
+                event.preventDefault();
+                // We use setTimeout here so the icon doesn't change before the click event bubbles.
+                // Without it the target of the click event is an SVG that no longer exists in the
+                // DOM tree (thus not contained in the features container, thus seen as a click
+                // outside that will close the features container, when we know it's not).
+                window.setTimeout(() => {
+                  dispatch({
+                    type: `setFilterFeature${collapsed ? 'Expanded' : 'Collapsed'}`,
+                    feature: key,
+                  });
+                }, 0);
+              }}
+            >
+              {collapsed ? (
+                <LeftArrowIcon fontSize="inherit" />
+              ) : (
+                <DownArrowIcon fontSize="inherit" />
+              )}
+            </IconButton>
+          </Tooltip>
         </div>
       );
     } else {
@@ -375,7 +487,7 @@ const SiteMapContainer = (props) => {
           <Checkbox
             checked={state.filters.features.visible[key]}
             onChange={handleChange}
-            color="secondary"
+            color="primary"
             indeterminate={indeterminate}
           />
         )}
@@ -387,7 +499,6 @@ const SiteMapContainer = (props) => {
           <Tooltip
             title={tooltip}
             placement="bottom-start"
-            PopperProps={{ className: classes.popper }}
             TransitionComponent={({ children }) => children} // set no transition by mock component
           >
             {formControl}
@@ -421,12 +532,14 @@ const SiteMapContainer = (props) => {
   /**
      Render - Full Component
   */
+  // MuiButtonBase-root MuiIconButton-root makeStyles-resizeButton-201 MuiIconButton-colorPrimary
   return (
     <div {...containerProps} aria-describedby={progressId}>
       {state.filters.position === 'top' ? <SiteMapFilters /> : null}
       <div ref={contentDivRef} {...contentDivProps}>
         {view === VIEWS.MAP ? <SiteMapLeaflet /> : null }
         {view === VIEWS.TABLE ? <SiteMapTable /> : null }
+        {renderVerticalResizeButton()}
         {!state.filters.features.open ? null : (
           <div ref={featuresRef} className={classes.featuresContainer}>
             {Object.keys(FEATURES)
@@ -437,6 +550,7 @@ const SiteMapContainer = (props) => {
       </div>
       {renderProgress()}
       {state.filters.position === 'bottom' ? <SiteMapFilters /> : null}
+      <div ref={resizeBorderRef} className={classes.resizeBorder} />
     </div>
   );
 };

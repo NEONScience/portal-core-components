@@ -1,7 +1,5 @@
 /* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid, max-len, no-unused-vars */
-
 import React, { useReducer, useEffect } from 'react';
-import PropTypes from 'prop-types';
 
 import { ReplaySubject } from 'rxjs';
 
@@ -181,13 +179,11 @@ const MyAppComponent = () => {
   );
 };
 
-export default function StyleGuide(props) {
+export default function StyleGuide() {
   const classes = useStyles(Theme);
-  const { onClickHash } = props;
   const downloadDataButtonLink = (
     <Link
       href="#DownloadDataButton"
-      onClick={() => onClickHash('#DownloadDataButton')}
     >
       Download Data Button
     </Link>
@@ -195,7 +191,6 @@ export default function StyleGuide(props) {
   const dataProductAvailabilityLink = (
     <Link
       href="#DataProductAvailability"
-      onClick={() => onClickHash('#DataProductAvailability')}
     >
       Data Product Availability
     </Link>
@@ -672,7 +667,3 @@ const MyAppComponent = () => {
     </React.Fragment>
   );
 }
-
-StyleGuide.propTypes = {
-  onClickHash: PropTypes.func.isRequired,
-};

@@ -1,25 +1,12 @@
-import React, { useState, useEffect } from 'react';
-
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import Grid from '@material-ui/core/Grid';
-import Hidden from '@material-ui/core/Hidden';
-import Paper from '@material-ui/core/Paper';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
+import React from 'react';
 
 import HomeIcon from '@material-ui/icons/Home';
+import BasicComponentsIcon from '@material-ui/icons/ViewModule';
 
 import NeonPage from './lib_components/components/NeonPage/NeonPage';
-import Theme from './lib_components/components/Theme/Theme';
 
 import Home from './components/Home';
+import BasicComponents from './components/BasicComponents';
 import AopDataViewerStyleGuide from './lib_components/components/AopDataViewer/StyleGuide';
 import DataProductAvailabilityStyleGuide from './lib_components/components/DataProductAvailability/StyleGuide';
 import DataThemeIconStyleGuide from './lib_components/components/DataThemeIcon/StyleGuide';
@@ -37,7 +24,19 @@ import StoryMapStyleGuide from './lib_components/components/StoryMap/StyleGuide'
 import ThemeStyleGuide from './lib_components/components/Theme/StyleGuide';
 import TimeSeriesViewerStyleGuide from './lib_components/components/TimeSeriesViewer/StyleGuide';
 
-const components = [
+const sidebarLinks = [
+  {
+    name: 'Home',
+    pageTitle: 'Portal Core Components',
+    icon: HomeIcon,
+    component: Home,
+  },
+  {
+    name: 'Basic Components',
+    hash: '#BasicComponents',
+    component: BasicComponents,
+    icon: BasicComponentsIcon,
+  },
   {
     name: 'AOP Data Viewer',
     hash: '#AopDataViewer',
@@ -120,124 +119,15 @@ const components = [
   },
 ];
 
-const getHashIndex = hash => components.findIndex(component => component.hash === hash);
-
-const intialSelectedIndex = getHashIndex(document.location.hash);
-
 export default function App() {
-  const [selectedIndex, setSelectedIndex] = useState(intialSelectedIndex);
-  const [collapsibleNavExpanded, setCollapsibleNavExpanded] = useState(false);
-
-  useEffect(() => {
-    if (selectedIndex === -1) {
-      document.location.hash = '';
-    } else if (document.location.hash !== components[selectedIndex].hash) {
-      document.location.hash = components[selectedIndex].hash;
-    }
-  });
-
-  const handleToggleExpand = (event, newExpanded) => {
-    setCollapsibleNavExpanded(newExpanded);
-  };
-
-  const handleListItemClick = (event, index) => {
-    if (collapsibleNavExpanded) { handleToggleExpand({}, false); }
-    setSelectedIndex(index);
-  };
-
-  const onClickHash = (hash) => {
-    if (collapsibleNavExpanded) { handleToggleExpand({}, false); }
-    setSelectedIndex(getHashIndex(hash));
-  };
-
-  const CurrentComponent = selectedIndex === -1 ? null : components[selectedIndex].component;
-
-  const renderCurrentComponent = () => (
-    selectedIndex === -1
-      ? (
-        <Paper style={{ padding: Theme.spacing(3) }}>
-          <Typography variant="h4" component="h2" gutterBottom>
-            Welcome
-          </Typography>
-          <Home onClickHash={onClickHash} />
-        </Paper>
-      ) : (
-        <Paper style={{ padding: Theme.spacing(3) }}>
-          <Typography variant="h4" component="h2" gutterBottom>
-            {components[selectedIndex].name}
-          </Typography>
-          <CurrentComponent onClickHash={onClickHash} />
-        </Paper>
-      )
-  );
-
-  const renderNavList = () => (
-    <React.Fragment>
-      <List component="nav" style={{ padding: '0' }}>
-        <ListItem
-          button
-          key="home"
-          selected={selectedIndex === -1}
-          onClick={event => handleListItemClick(event, -1)}
-        >
-          <ListItemIcon style={{ minWidth: '36px' }}>
-            <HomeIcon />
-          </ListItemIcon>
-          <ListItemText primary="Home" />
-        </ListItem>
-      </List>
-      <Divider />
-      <List component="nav" style={{ padding: '0' }}>
-        {components.map((component, index) => (
-          <ListItem
-            button
-            key={component.name}
-            selected={selectedIndex === index}
-            onClick={event => handleListItemClick(event, index)}
-          >
-            <ListItemText primary={component.name} />
-          </ListItem>
-        ))}
-      </List>
-    </React.Fragment>
-  );
-
-  const renderStandardNav = () => (
-    <Paper>
-      {renderNavList()}
-    </Paper>
-  );
-
-  const renderCollapsibleNav = () => (
-    <ExpansionPanel
-      expanded={collapsibleNavExpanded}
-      onChange={handleToggleExpand}
-      TransitionProps={{ timeout: 0 }}
-      style={{ marginBottom: Theme.spacing(1) }}
-    >
-      <ExpansionPanelSummary
-        expandIcon={<ExpandMoreIcon />}
-      >
-        <Typography variant="h5">Contents</Typography>
-      </ExpansionPanelSummary>
-      <ExpansionPanelDetails style={{ display: 'inherit', marginTop: Theme.spacing(-2) }}>
-        {renderNavList()}
-      </ExpansionPanelDetails>
-    </ExpansionPanel>
-  );
-
   return (
-    <NeonPage title="Portal Core Components">
-      <Hidden smDown>
-        <Grid container spacing={2}>
-          <Grid item sm={9}>{renderCurrentComponent()}</Grid>
-          <Grid item sm={3}>{renderStandardNav()}</Grid>
-        </Grid>
-      </Hidden>
-      <Hidden mdUp>
-        {renderCollapsibleNav()}
-        {renderCurrentComponent()}
-      </Hidden>
+    <NeonPage
+      title="Portal Core Components"
+      sidebarLinks={sidebarLinks}
+      sidebarLinksAsStandaloneChildren
+      useCoreAuth
+    >
+      <Home />
     </NeonPage>
   );
 }
