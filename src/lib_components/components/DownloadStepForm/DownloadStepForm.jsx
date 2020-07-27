@@ -83,6 +83,15 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.grey[300],
     marginRight: theme.spacing(2),
   },
+  calloutIconBrown: {
+    color: theme.colors.BROWN[300],
+    marginRight: theme.spacing(2),
+  },
+  calloutBrown: {
+    marginBottom: Theme.spacing(3),
+    backgroundColor: theme.colors.BROWN[50],
+    borderColor: theme.colors.BROWN[300],
+  },
   radio: {
     marginBottom: theme.spacing(1),
   },
@@ -622,11 +631,12 @@ export default function DownloadStepForm(props) {
       const externalHost = ExternalHost.getByProductCode(state.productData.productCode);
       if (!externalHost) { return null; }
       const hostLink = externalHost.renderLink(state.productData.productCode);
+      const availableSiteCodes = (state.productData.siteCodes || []).map(site => site.siteCode);
       return (
         <div data-selenium={`download-data-dialog.step-form.external-links.${externalHost.id.toLowerCase()}`}>
-          <Card style={{ marginBottom: Theme.spacing(3) }}>
+          <Card className={classes.calloutBrown}>
             <CardContent className={classes.startFlex}>
-              <InfoIcon fontSize="large" className={classes.calloutIcon} />
+              <InfoIcon fontSize="large" className={classes.calloutIconBrown} />
               <Typography variant="subtitle2">
                 {/* eslint-disable react/jsx-one-expression-per-line */}
                 Data for this product is not currently available for download through
@@ -636,7 +646,10 @@ export default function DownloadStepForm(props) {
               </Typography>
             </CardContent>
           </Card>
-          <ExternalHostProductSpecificLinks productCode={state.productData.productCode} />
+          <ExternalHostProductSpecificLinks
+            productCode={state.productData.productCode}
+            siteCodes={availableSiteCodes}
+          />
         </div>
       );
     },

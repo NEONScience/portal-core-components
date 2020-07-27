@@ -6,6 +6,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
@@ -24,9 +25,11 @@ const useStyles = makeStyles(theme => ({
   },
   callout: {
     margin: Theme.spacing(0.5, 0, 3, 0),
+    backgroundColor: theme.colors.BROWN[50],
+    borderColor: theme.colors.BROWN[300],
   },
   calloutIcon: {
-    color: theme.palette.grey[300],
+    color: theme.colors.BROWN[300],
     marginRight: theme.spacing(2),
   },
   specificLinksContainer: {
@@ -57,7 +60,7 @@ const ExternalHostInfo = (props) => {
 
   // Remaining setup
   const externalGeneralLink = externalHost.renderLink(productCode);
-  const expandTitle = `${expanded ? 'hide' : 'show'} external host links to data`;
+  const expandTitle = `${expanded ? 'Hide' : 'Show'} links to externally hosted data`;
   const rootProps = {};
   Object.keys(otherProps)
     .filter(key => ['data-selenium', 'style', 'className'].includes(key))
@@ -104,14 +107,15 @@ const ExternalHostInfo = (props) => {
           {blurb}
         </Typography>
         {hasSpecificLinks && expandable ? (
-          <IconButton
-            title={expandTitle}
-            aria-label={expandTitle}
-            onClick={() => setExpanded(!expanded)}
-            style={{ marginLeft: Theme.spacing(2) }}
-          >
-            {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-          </IconButton>
+          <Tooltip title={expandTitle}>
+            <IconButton
+              aria-label={expandTitle}
+              onClick={() => setExpanded(!expanded)}
+              style={{ marginLeft: Theme.spacing(2) }}
+            >
+              {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+            </IconButton>
+          </Tooltip>
         ) : null}
       </CardContent>
       <div

@@ -141,10 +141,12 @@ export default function DownloadDataDialog() {
     if (!externalHost || externalHost.hostType === ExternalHost.HOST_TYPES.EXCLUSIVE_DATA) {
       return null;
     }
+    const availableSiteCodes = (productData.siteCodes || []).map(site => site.siteCode);
     return (
       <ExternalHostInfo
         data-selenium="download-data-dialog.external-host-info"
         productCode={productData.productCode}
+        siteCodes={availableSiteCodes}
         expandable
       />
     );
