@@ -39,6 +39,7 @@ const ExternalHostInfo = (props) => {
   const {
     productCode,
     expandable,
+    siteCodes,
     ...otherProps
   } = props;
 
@@ -118,7 +119,7 @@ const ExternalHostInfo = (props) => {
         style={{ display: hasSpecificLinks && expanded ? 'block' : 'none' }}
       >
         <Divider />
-        <ExternalHostProductSpecificLinks productCode={productCode} />
+        <ExternalHostProductSpecificLinks productCode={productCode} siteCodes={siteCodes} />
       </div>
     </React.Fragment>
   );
@@ -135,10 +136,12 @@ const ExternalHostInfo = (props) => {
 ExternalHostInfo.propTypes = {
   productCode: PropTypes.string.isRequired,
   expandable: PropTypes.bool,
+  siteCodes: PropTypes.arrayOf(PropTypes.string),
 };
 
 ExternalHostInfo.defaultProps = {
   expandable: false,
+  siteCodes: null,
 };
 
 const WrappedExternalHostInfo = Theme.getWrappedComponent(ExternalHostInfo);

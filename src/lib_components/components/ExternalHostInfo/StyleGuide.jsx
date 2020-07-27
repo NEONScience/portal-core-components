@@ -53,13 +53,28 @@ import ExternalHostInfo from 'portal-core-components/lib/components/ExternalHost
         <ExternalHostInfo productCode="DP1.10038.001" />
         <ExternalHostInfo productCode="DP1.10108.001" />
         <ExternalHostInfo productCode="DP1.10055.001" />
-        <ExternalHostInfo productCode="DP1.00043.001" />
       </ExampleBlock>
       <CodeBlock>
         {`
 <ExternalHostInfo productCode="DP1.10038.001" />
 <ExternalHostInfo productCode="DP1.10108.001" />
 <ExternalHostInfo productCode="DP1.10055.001" />
+        `}
+      </CodeBlock>
+
+      <DocBlock>
+        Some products maps to links at an external host on a per-field-site basis. By default all
+        field sites will be displayed as a link. However, some products may only be available from
+        a subset of field sites. In such cases a list of valid sites (as an array of site code
+        strings) may be passed in using the <tt>siteCodes</tt> prop.
+      </DocBlock>
+      <ExampleBlock column>
+        <ExternalHostInfo productCode="DP1.00043.001" siteCodes={['BLAN', 'CRAM', 'SRER']} />
+        <ExternalHostInfo productCode="DP1.00043.001" />
+      </ExampleBlock>
+      <CodeBlock>
+        {`
+<ExternalHostInfo productCode="DP1.00043.001" siteCodes={['BLAN', 'CRAM', 'SRER']} />
 <ExternalHostInfo productCode="DP1.00043.001" />
         `}
       </CodeBlock>
