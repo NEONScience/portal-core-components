@@ -202,12 +202,13 @@ const externalHosts = {
     hostType: HOST_TYPES.EXCLUSIVE_DATA,
     linkType: LINK_TYPES.BY_SITE,
     getSiteLink: (allSites = {}, siteCode = '', productCode = 'n/a') => {
-      const hrefBase = 'http://aeronet.gsfc.nasa.gov/cgi-bin/webtool_inv_v3?stage=3&site=';
+      const hrefBase = 'https://aeronet.gsfc.nasa.gov/cgi-bin/data_display_aod_v3?site=';
       const nonStandardSites = {
         BART: 'NEON_Bartlett',
         CPER: 'NEON-CPER',
         DSNY: 'NEON-Disney',
         HARV: 'NEON_Harvard',
+        SOAP: 'NEON-SoaprootSaddle',
         STER: 'NEON_Sterling',
       };
       const hrefSite = Object.keys(nonStandardSites).includes(siteCode)
