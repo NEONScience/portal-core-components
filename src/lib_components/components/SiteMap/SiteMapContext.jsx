@@ -14,7 +14,6 @@ import { map, catchError } from 'rxjs/operators';
 import NeonApi from '../NeonApi/NeonApi';
 import NeonContext from '../NeonContext/NeonContext';
 
-import SiteMapDeferredJson from './SiteMapDeferredJson';
 import {
   DEFAULT_STATE,
   SORT_DIRECTIONS,
@@ -23,7 +22,7 @@ import {
   FEATURES,
   FETCH_STATUS,
   FEATURE_TYPES,
-  FEATURE_DATA_LOAD_TYPES,
+  FEATURE_DATA_SOURCES,
   SELECTABLE_FEATURE_TYPES,
   SITE_LOCATION_HIERARCHIES_MIN_ZOOM,
   MAP_ZOOM_RANGE,
@@ -109,10 +108,10 @@ const calculateFeatureDataFetches = (state) => {
       newState.featureDataFetchesHasAwaiting = true;
     });
   }
-  // Feature fetches - IMPORT (deferredJson)
+  // Feature fetches - ARCGIS_ASSET_API
   Object.keys(FEATURES)
     .filter(featureKey => (
-      FEATURES[featureKey].dataLoadType === FEATURE_DATA_LOAD_TYPES.IMPORT
+      FEATURES[featureKey].dataSource === FEATURE_DATA_SOURCES.ARCGIS_ASSETS_API
         && state.filters.features.available[featureKey]
         && state.filters.features.visible[featureKey]
     ))
@@ -125,12 +124,12 @@ const calculateFeatureDataFetches = (state) => {
         newState.featureDataFetchesHasAwaiting = true;
       });
     });
-  // Feature fetches - FETCH (Locations API, primary locations)
+  // Feature fetches - LOCATION_API
   Object.keys(FEATURES)
     // Only look at available+visible features that get fetched and have a location type match
     // If fetching for other child features then at least one of them must be available+visible
     .filter((featureKey) => {
-      let doFetch = FEATURES[featureKey].dataLoadType === FEATURE_DATA_LOAD_TYPES.FETCH
+      let doFetch = FEATURES[featureKey].dataSource === FEATURE_DATA_SOURCES.LOCATIONS_API
         && FEATURES[featureKey].matchLocationType
         && state.filters.features.available[featureKey]
         && state.filters.features.visible[featureKey];
@@ -175,7 +174,7 @@ const calculateFeatureDataFetches = (state) => {
     // Only look at available+visible features that get fetched and have a parentDataFeature
     .filter(featureKey => (
       FEATURES[featureKey].type === FEATURE_TYPES.SAMPLING_POINTS
-        && FEATURES[featureKey].dataLoadType === FEATURE_DATA_LOAD_TYPES.FETCH
+        && FEATURES[featureKey].dataSource === FEATURE_DATA_SOURCES.LOCATIONS_API
         && FEATURES[featureKey].parentDataFeatureKey
         && state.filters.features.available[featureKey]
         && state.filters.features.visible[featureKey]
@@ -770,29 +769,45 @@ const Provider = (props) => {
       .filter(type => type !== FEATURE_TYPES.SITE_LOCATION_HIERARCHIES)
       .forEach((type) => {
         Object.keys(state.featureDataFetches[type]).forEach((feature) => {
-          const { dataLoadType } = FEATURES[feature];
+          const { dataSource } = FEATURES[feature];
           Object.keys(state.featureDataFetches[type][feature]).forEach((siteCode) => {
             const featureSite = state.featureDataFetches[type][feature][siteCode];
-            // IMPORT - Fetch via SiteMapDeferredJson
-            if (dataLoadType === FEATURE_DATA_LOAD_TYPES.IMPORT) {
+            // ARCGIS_ASSETS_API
+            if (dataSource === FEATURE_DATA_SOURCES.ARCGIS_ASSETS_API) {
               if (featureSite !== FETCH_STATUS.AWAITING_CALL) { return; }
               dispatch({ type: 'setFeatureDataFetchStarted', feature, siteCode });
-              const onSuccess = data => dispatch({
-                type: 'setFeatureDataFetchSucceeded',
-                feature,
-                siteCode,
-                data,
-              });
-              const onError = error => dispatch({
-                type: 'setFeatureDataFetchFailed',
-                feature,
-                siteCode,
-                error,
-              });
-              SiteMapDeferredJson(feature, siteCode, onSuccess, onError);
+              NeonApi.getArcgisAssetObservable(feature, siteCode).pipe(
+                map((response) => {
+                  if (response) {
+                    dispatch({
+                      type: 'setFeatureDataFetchSucceeded',
+                      data: response,
+                      feature,
+                      siteCode,
+                    });
+                    return of(true);
+                  }
+                  dispatch({
+                    type: 'setFeatureDataFetchFailed',
+                    error: 'malformed response',
+                    feature,
+                    siteCode,
+                  });
+                  return of(false);
+                }),
+                catchError((error) => {
+                  dispatch({
+                    type: 'setFeatureDataFetchFailed',
+                    error: error.message,
+                    feature,
+                    siteCode,
+                  });
+                  return of(false);
+                }),
+              ).subscribe();
             }
-            // FETCH - Fetch via the Locations API
-            if (dataLoadType === FEATURE_DATA_LOAD_TYPES.FETCH) {
+            // LOCATIONS_API
+            if (dataSource === FEATURE_DATA_SOURCES.LOCATIONS_API) {
               if (typeof featureSite !== 'object') { return; }
               Object.keys(featureSite).forEach((location) => {
                 if (featureSite[location] !== FETCH_STATUS.AWAITING_CALL) { return; }
