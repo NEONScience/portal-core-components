@@ -28,7 +28,6 @@ import LeftIcon from '@material-ui/icons/ChevronLeft';
 import RightIcon from '@material-ui/icons/ChevronRight';
 import WarningIcon from '@material-ui/icons/Warning';
 
-import { ROUTES, getFullRoute } from '../../routing/routes';
 import DialogBase from '../DialogBase/DialogBase';
 import DownloadStepForm from '../DownloadStepForm/DownloadStepForm';
 import DownloadDataContext from '../DownloadDataContext/DownloadDataContext';
@@ -36,6 +35,7 @@ import DataThemeIcon from '../DataThemeIcon/DataThemeIcon';
 import ExternalHost from '../ExternalHost/ExternalHost';
 import ExternalHostInfo from '../ExternalHostInfo/ExternalHostInfo';
 import NeonContext from '../NeonContext/NeonContext';
+import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import Theme, { COLORS } from '../Theme/Theme';
 
 import {
@@ -385,7 +385,7 @@ export default function DownloadDataDialog() {
     const signInLink = (
       <Link
         target="_new"
-        href={getFullRoute(ROUTES.LOGIN)}
+        href={NeonEnvironment.getFullAuthPath('login')}
       >
         signing in
       </Link>

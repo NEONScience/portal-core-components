@@ -14,6 +14,7 @@ import DownloadDataButtonStyleGuide from './lib_components/components/DownloadDa
 import DownloadDataContextStyleGuide from './lib_components/components/DownloadDataContext/StyleGuide';
 import ExternalHostInfoStyleGuide from './lib_components/components/ExternalHostInfo/StyleGuide';
 import FullWidthVisualizationStyleGuide from './lib_components/components/FullWidthVisualization/StyleGuide';
+import NeonAuthStyleGuide from './lib_components/components/NeonAuth/StyleGuide'; /* eslint-disable-line */
 import NeonContextStyleGuide from './lib_components/components/NeonContext/StyleGuide';
 import NeonEnvironmentStyleGuide from './lib_components/components/NeonEnvironment/StyleGuide';
 import NeonGraphQLStyleGuide from './lib_components/components/NeonGraphQL/StyleGuide';
@@ -71,6 +72,11 @@ const sidebarLinks = [
     name: 'Full Width Visualization',
     hash: '#FullWidthVisualization',
     component: FullWidthVisualizationStyleGuide,
+  },
+  {
+    name: 'Neon Authentication',
+    hash: '#NeonAuth',
+    component: NeonAuthStyleGuide,
   },
   {
     name: 'Neon Context',

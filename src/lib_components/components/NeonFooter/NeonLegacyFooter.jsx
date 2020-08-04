@@ -65,7 +65,7 @@ const useStyles = makeStyles(theme => ({
 export default function NeonFooter() {
   const classes = useStyles(Theme);
   const year = new Date().getFullYear();
-  const copyrightDisplay = `Â© ${year.toString()} Battelle`;
+  const copyrightDisplay = `© ${year.toString()} Battelle`;
   const bottomCaption = `
 The National Ecological Observatory Network is a major facility fully funded by
 the National Science Foundation. Any opinions, findings and conclusions or

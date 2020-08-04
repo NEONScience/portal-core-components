@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import Menu, { SubMenu, MenuItem } from 'rc-menu';
@@ -7,8 +7,6 @@ import get from 'lodash/get';
 
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
 import IconButton from '@material-ui/core/IconButton';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
@@ -19,181 +17,17 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import HomeIcon from '@material-ui/icons/Home';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 
-import NeonDrawerMenu from './NeonDrawerMenu';
-import Authenticate from '../../auth/authenticate';
-
-import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonApi from '../NeonApi/NeonApi';
+import NeonAuth, { NeonAuthType, NeonAuthDisplayType } from '../NeonAuth/NeonAuth'; /* eslint-disable-line */
+import NeonDrawerMenu from './NeonDrawerMenu';
+import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import { COLORS } from '../Theme/Theme';
 
 import './NeonMenu.css';
 
 import NeonLogo from '../../images/NSF-NEON-logo.png';
 
-const defaultStaticMenuItems = [
-  {
-    name: 'About',
-    url: '/about',
-    isContainer: true,
-    children: [
-      {
-        name: 'Usage and Citation Policies',
-        url: '/data-policy',
-        isContainer: false,
-        children: [],
-      },
-      {
-        name: 'Data Quality Program',
-        url: '/data-quality',
-        isContainer: false,
-        children: [],
-      },
-      {
-        name: 'Data Portal News',
-        url: '/news',
-        isContainer: false,
-        children: [],
-      },
-    ],
-  },
-  {
-    name: 'Download Data',
-    url: '/download-data',
-    isContainer: true,
-    children: [
-      {
-        name: 'Data Products',
-        url: '/browse-data',
-        isContainer: false,
-        children: [],
-      },
-      {
-        name: 'API',
-        url: '/data-api',
-        isContainer: false,
-        children: [],
-      },
-      {
-        name: 'Prototype Data',
-        url: '/prototype-search',
-        isContainer: false,
-        children: [],
-      },
-    ],
-  },
-  {
-    name: 'Resources',
-    url: '/resources',
-    isContainer: true,
-    children: [
-      {
-        name: 'Document Library',
-        url: '/documents',
-        isContainer: false,
-        children: [],
-      },
-      {
-        name: 'Data Product Catalog',
-        url: '/data-product-catalog',
-        isContainer: false,
-        children: [],
-      },
-      {
-        name: 'Data Availability Chart',
-        url: '/view-data-availability',
-        isContainer: false,
-        children: [],
-      },
-      {
-        name: 'Taxonomy Lists',
-        url: '/apps/taxon',
-        type: 'url',
-        isContainer: false,
-        children: [],
-      },
-      {
-        name: 'Sample Viewer',
-        url: '/apps/samples',
-        type: 'url',
-        isContainer: false,
-        children: [],
-      },
-      {
-        name: 'Frequently Asked Questions',
-        url: '/faq',
-        type: 'url',
-        isContainer: false,
-        children: [],
-      },
-      {
-        name: 'Using NEON Data',
-        url: '/using-neon-data',
-        isContainer: true,
-        children: [
-          {
-            name: 'File Naming Conventions',
-            url: '/file-naming-conventions',
-            type: 'portlet',
-            isContainer: false,
-            children: [],
-          },
-          {
-            name: 'Data Tutorials, Workshops & More',
-            url: 'https://neonscience.org/resources',
-            isContainer: false,
-            children: [],
-          },
-          {
-            name: 'Software @ GitHub',
-            url: 'https://github.com/NEONScience',
-            isContainer: false,
-            isExternalLink: true,
-            navExternalLink: null,
-            isExpanded: false,
-            children: [],
-          },
-        ],
-      },
-      {
-        name: 'Learn More',
-        url: '/learn-more',
-        isContainer: true,
-        children: [
-          {
-            name: 'Field Sites',
-            url: 'https://www.neonscience.org/field-sites',
-            isContainer: false,
-            children: [],
-          },
-          {
-            name: 'Airborne Data',
-            url: 'https://www.neonscience.org/data-resources/get-data/airborne-data',
-            isContainer: false,
-            children: [],
-          },
-          {
-            name: 'Data Collection',
-            url: 'https://www.neonscience.org/data-collection',
-            isContainer: false,
-            children: [],
-          },
-          {
-            name: 'Sampling Schedules',
-            url: 'https://www.neonscience.org/resources/information-researchers#schedules',
-            isContainer: false,
-            children: [],
-          },
-        ],
-      },
-    ],
-  },
-  {
-    name: 'Contact Us',
-    url: '/feedback',
-    isContainer: false,
-    children: [],
-  },
-];
+import defaultStaticMenuItems from './menuDefaultFallback.json';
 
 const domParser = new DOMParser();
 const decodeName = name => domParser.parseFromString(name, 'text/html').documentElement.textContent;
@@ -275,243 +109,153 @@ const neonLogo = (
   />
 );
 
-class NeonMenu extends Component {
-  constructor(props) {
-    super(props);
-    this.auth = new Authenticate();
-    this.menuFromResponse = this.menuFromResponse.bind(this);
-    this.menuErrorCallback = this.menuErrorCallback.bind(this);
-    this.authCallback = this.authCallback.bind(this);
-    this.authErrorCallback = this.authErrorCallback.bind(this);
-    this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
-    this.handleDrawerClose = this.handleDrawerClose.bind(this);
+const cancellationSubject$ = new Subject();
 
-    // RxJS cancellation subject
-    this.cancellationSubject$ = new Subject();
+const NeonMenu = (props) => {
+  const {
+    loginPath,
+    logoutPath,
+    accountPath,
+    notifications,
+    onShowNotifications,
+  } = props;
 
-    this.state = {
-      fetched: false,
-      menuItems: [],
-      isFetchingAuthentication: true,
-      isAuthenticated: false,
-      drawerIsOpen: false,
-    };
-  }
+  const [menuFetched, setMenuFetched] = useState(false);
+  const [menuItems, setMenuItems] = useState([]);
+  const [drawerIsOpen, setDrawerIsOpen] = useState(false);
 
-  componentDidMount() {
+  useEffect(() => {
     NeonApi.getJson(
       NeonEnvironment.getFullApiPath('menu'),
-      this.menuFromResponse,
-      this.menuErrorCallback,
-      this.cancellationSubject$,
+      (response) => {
+        setMenuItems(get(response || {}, 'data.menuItems', defaultStaticMenuItems));
+        setMenuFetched(true);
+      },
+      () => {
+        setMenuItems(defaultStaticMenuItems);
+        setMenuFetched(true);
+      },
+      cancellationSubject$,
     );
-    this.auth.isAuthenticated(
-      this.authCallback,
-      this.authErrorCallback,
-    );
-  }
+    return () => {
+      cancellationSubject$.next(true);
+      cancellationSubject$.unsubscribe();
+    };
+  }, [loginPath]);
 
-  componentWillUnmount() {
-    this.cancellationSubject$.next(true);
-    this.cancellationSubject$.unsubscribe();
-    this.auth.cancellationEmitter();
-  }
+  const notificationsDisabled = notifications.some(n => !n.dismissed);
+  const notificationsColor = notificationsDisabled ? COLORS.GREY[200] : COLORS.GOLD[500];
+  const notificationsContent = notifications.length ? (
+    <IconButton
+      key="show-notifications"
+      aria-label="show-notifications"
+      title="Show Notifications"
+      onClick={onShowNotifications}
+      style={{ marginRight: '12px' }}
+      disabled={notificationsDisabled}
+    >
+      <NotificationsIcon style={{ color: notificationsColor, fontSize: '1.65rem !important' }} />
+    </IconButton>
+  ) : null;
+  const authContainer = (
+    <div className="neon-menu__auth">
+      {notificationsContent}
+      <NeonAuth
+        loginPath={loginPath}
+        logoutPath={logoutPath}
+        accountPath={accountPath}
+        loginType={NeonAuthType.INTERRUPT}
+        logoutType={NeonAuthType.SILENT}
+        displayType={NeonAuthDisplayType.MENU}
+      />
+    </div>
+  );
 
-  authCallback(response) {
-    if (this.auth.checkAuthResponse(response)) {
-      this.setState({
-        isFetchingAuthentication: false,
-        isAuthenticated: true,
-      });
-    } else {
-      this.setState({
-        isFetchingAuthentication: false,
-        isAuthenticated: false,
-      });
-    }
-  }
-
-  authErrorCallback(error) {
-    console.error(error); // eslint-disable-line no-console
-    this.setState({
-      isFetchingAuthentication: false,
-      isAuthenticated: false,
-    });
-  }
-
-  menuFromResponse(response) {
-    this.setState({
-      fetched: true,
-      menuItems: get(response || {}, 'data.menuItems', defaultStaticMenuItems),
-    });
-  }
-
-  menuErrorCallback() {
-    this.setState({
-      fetched: true,
-      menuItems: defaultStaticMenuItems,
-    });
-  }
-
-  handleDrawerOpen() {
-    this.setState({
-      drawerIsOpen: true,
-    });
-  }
-
-  handleDrawerClose() {
-    this.setState({
-      drawerIsOpen: false,
-    });
-  }
-
-  render() {
-    const {
-      loginPath,
-      logoutPath,
-      accountPath,
-      notifications,
-      onShowNotifications,
-    } = this.props;
-
-    const {
-      isFetchingAuthentication,
-      isAuthenticated,
-      fetched,
-      menuItems,
-      drawerIsOpen,
-    } = this.state;
-
-    const notificationsDisabled = notifications.some(n => !n.dismissed);
-    const notificationsColor = notificationsDisabled ? COLORS.GREY[200] : COLORS.GOLD[500];
-    const notificationsContent = notifications.length ? (
-      <IconButton
-        key="show-notifications"
-        aria-label="show-notifications"
-        title="Show Notifications"
-        onClick={onShowNotifications}
-        style={{ marginRight: '12px' }}
-        disabled={notificationsDisabled}
-      >
-        <NotificationsIcon style={{ color: notificationsColor, fontSize: '1.65rem !important' }} />
-      </IconButton>
-    ) : null;
-
-    let authContent = (
-      <Button href={loginPath} size="small" variant="outlined" data-selenium="neon-menu.sign-in-button">
-        Sign In
-      </Button>
-    );
-    if (isFetchingAuthentication) {
-      authContent = (
+  let menu = (
+    <Menu id="main-menu" mode="horizontal">
+      <MenuItem>
         <CircularProgress size={24} />
-      );
-    }
-    if (isAuthenticated) {
-      authContent = (
-        <ButtonGroup size="small" aria-label="Authentication">
-          <Button href={logoutPath} style={{ whiteSpace: 'nowrap' }} data-selenium="neon-menu.sign-out-button">
-            Sign Out
-          </Button>
-          <Button href={accountPath} style={{ whiteSpace: 'nowrap' }} data-selenium="neon-menu.my-account-button">
-            My Account
-          </Button>
-        </ButtonGroup>
-      );
-    }
-    const authContainer = (
-      <div className="neon-menu__auth">
-        {notificationsContent}
-        {authContent}
-      </div>
-    );
-
-    let menu = (
+      </MenuItem>
+    </Menu>
+  );
+  if (menuFetched) {
+    menu = (
       <Menu id="main-menu" mode="horizontal">
-        <MenuItem>
-          <CircularProgress size={24} />
+        <MenuItem
+          key="home"
+          className="rc-menu-item"
+          role="menuitem"
+        >
+          <a href="/" title="NEON Data Portal | Home">
+            <HomeIcon />
+          </a>
         </MenuItem>
+        {(menuItems.length ? menuItems : defaultStaticMenuItems).map(generateRCMenuItem)}
       </Menu>
     );
-    if (fetched) {
-      menu = (
-        <Menu id="main-menu" mode="horizontal">
-          <MenuItem
-            key="home"
-            className="rc-menu-item"
-            role="menuitem"
-          >
-            <a href="/" title="NEON Data Portal | Home">
-              <HomeIcon />
-            </a>
-          </MenuItem>
-          {(menuItems.length ? menuItems : defaultStaticMenuItems).map(generateRCMenuItem)}
-        </Menu>
-      );
-    }
-
-    return (
-      <React.Fragment>
-        <div className="neon-menu__container" data-selenium="neon-menu">
-          <Grid
-            container
-            direction="row"
-            justify="space-around"
-            alignItems="center"
-            spacing={0}
-          >
-            <Hidden mdUp>
-              <Grid item xs={7} style={{ whiteSpace: 'nowrap' }}>
-                <IconButton
-                  data-selenium="neon-menu.drawer-iconbutton.open"
-                  edge="start"
-                  aria-label="Menu"
-                  onClick={this.handleDrawerOpen}
-                  style={{ margin: '4px 0px 4px 12px' }}
-                >
-                  <MenuIcon />
-                </IconButton>
-                {neonLogo}
-              </Grid>
-              <Grid item xs={5}>
-                {authContainer}
-              </Grid>
-            </Hidden>
-            <Hidden smDown>
-              <Grid item md={9}>
-                <div className="neon-menu__header-container">
-                  {neonLogo}
-                  {menu}
-                </div>
-              </Grid>
-              <Grid item md={3}>
-                {authContainer}
-              </Grid>
-            </Hidden>
-          </Grid>
-        </div>
-        <Hidden mdUp>
-          <Drawer open={drawerIsOpen} onClose={this.handleDrawerClose}>
-            <div className="neon-menu__drawer-header-container">
-              {neonLogo}
-              <IconButton
-                data-selenium="neon-menu.drawer-iconbutton.close"
-                color="primary"
-                aria-label="Close Menu"
-                onClick={this.handleDrawerClose}
-                style={{ margin: '8px 0px' }}
-              >
-                <ChevronLeftIcon />
-              </IconButton>
-            </div>
-            <Divider />
-            <NeonDrawerMenu items={menuItems} />
-          </Drawer>
-        </Hidden>
-      </React.Fragment>
-    );
   }
-}
+
+  return (
+    <React.Fragment>
+      <div className="neon-menu__container" data-selenium="neon-menu">
+        <Grid
+          container
+          direction="row"
+          justify="space-around"
+          alignItems="center"
+          spacing={0}
+        >
+          <Hidden mdUp>
+            <Grid item xs={7} style={{ whiteSpace: 'nowrap' }}>
+              <IconButton
+                data-selenium="neon-menu.drawer-iconbutton.open"
+                edge="start"
+                aria-label="Menu"
+                onClick={() => setDrawerIsOpen(true)}
+                style={{ margin: '4px 0px 4px 12px' }}
+              >
+                <MenuIcon />
+              </IconButton>
+              {neonLogo}
+            </Grid>
+            <Grid item xs={5}>
+              {authContainer}
+            </Grid>
+          </Hidden>
+          <Hidden smDown>
+            <Grid item md={9}>
+              <div className="neon-menu__header-container">
+                {neonLogo}
+                {menu}
+              </div>
+            </Grid>
+            <Grid item md={3}>
+              {authContainer}
+            </Grid>
+          </Hidden>
+        </Grid>
+      </div>
+      <Hidden mdUp>
+        <Drawer open={drawerIsOpen} onClose={() => setDrawerIsOpen(false)}>
+          <div className="neon-menu__drawer-header-container">
+            {neonLogo}
+            <IconButton
+              data-selenium="neon-menu.drawer-iconbutton.close"
+              color="primary"
+              aria-label="Close Menu"
+              onClick={() => setDrawerIsOpen(false)}
+              style={{ margin: '8px 0px' }}
+            >
+              <ChevronLeftIcon />
+            </IconButton>
+          </div>
+          <Divider />
+          <NeonDrawerMenu items={menuItems} />
+        </Drawer>
+      </Hidden>
+    </React.Fragment>
+  );
+};
 
 NeonMenu.propTypes = {
   loginPath: PropTypes.string,
