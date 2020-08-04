@@ -7,6 +7,13 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
 import Divider from '@material-ui/core/Divider';
+import Paper from '@material-ui/core/Paper';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 
 import DocBlock from '../../../components/DocBlock';
@@ -30,6 +37,13 @@ const useStyles = makeStyles(theme => ({
     border: '1px dotted black',
     padding: '4px',
   },
+  tableRowGrey: {
+    backgroundColor: theme.palette.grey[50],
+  },
+  tt: {
+    fontSize: '1.1rem',
+    fontWeight: 700,
+  },
 }));
 
 export default function StyleGuide() {
@@ -38,6 +52,167 @@ export default function StyleGuide() {
   const dataProductAvailabilityLink = (
     <Link href="#DataProductAvailability">Data Product Availability Chart</Link>
   );
+
+  // Methods Table Rows
+  const methodRows = [
+    // getAllDataProducts
+    {
+      name: 'getAllDataProducts',
+      arguments: <i>none</i>,
+      description: 'Get an array of all data products with full attributes (including availability).',
+      example: (
+        <CodeBlock style={{ margin: 0 }}>
+          {`
+const observable = NeonGraphQL.getAllDataProducts().pipe(
+  map((response) => { /* handle response */ }),
+  catchError((error) => { /* handle error */ }),
+);
+
+observable.subscribe();
+          `}
+        </CodeBlock>
+      ),
+    },
+    // getDataProductByCode
+    {
+      name: 'getDataProductByCode',
+      arguments: (
+        <ul>
+          <li>
+            <tt className={classes.tt}>code</tt> - <i>String, Required</i>
+            <br />
+            Data product code (e.g. &quot;DP1.00001.001&quot;)
+          </li>
+        </ul>
+      ),
+      description: `
+Get a single data product with full attributes (including availability) by product code.
+        `,
+      example: (
+        <CodeBlock style={{ margin: 0 }}>
+          {`
+const code = 'DP1.00001.001';
+
+const observable = NeonGraphQL.getDataProductByCode(code).pipe(
+  map((response) => { /* handle response */ }),
+  catchError((error) => { /* handle error */ }),
+);
+
+observable.subscribe();
+          `}
+        </CodeBlock>
+      ),
+    },
+    // getAllSites
+    {
+      name: 'getAllSites',
+      arguments: <i>none</i>,
+      description: 'Get an array of all field sites with full attributes.',
+      example: (
+        <CodeBlock style={{ margin: 0 }}>
+          {`
+const observable = NeonGraphQL.getAllSites().pipe(
+  map((response) => { /* handle response */ }),
+  catchError((error) => { /* handle error */ }),
+);
+
+observable.subscribe();
+          `}
+        </CodeBlock>
+      ),
+    },
+    // getSiteByCode
+    {
+      name: 'getSiteByCode',
+      arguments: (
+        <ul>
+          <li>
+            <tt className={classes.tt}>code</tt> - <i>String, Required</i>
+            <br />
+            Site code (e.g. &quot;CPER&quot;)
+          </li>
+        </ul>
+      ),
+      description: `
+Get a single field site with full attributes by site code.
+        `,
+      example: (
+        <CodeBlock style={{ margin: 0 }}>
+          {`
+const code = 'ABBY';
+
+const observable = NeonGraphQL.getSiteByCode(code).pipe(
+  map((response) => { /* handle response */ }),
+  catchError((error) => { /* handle error */ }),
+);
+
+observable.subscribe();
+          `}
+        </CodeBlock>
+      ),
+    },
+    // getLocationByName
+    {
+      name: 'getLocationByName',
+      arguments: (
+        <ul>
+          <li>
+            <tt className={classes.tt}>name</tt> - <i>String, Required</i>
+            <br />
+            Location name (e.g. &quot;D10&quot;, &quot;CPER&quot;, &quot;TOWER104454&quot;, etc.)
+          </li>
+        </ul>
+      ),
+      description: `
+Get a location with full attributes (including locationProperties), by name.
+        `,
+      example: (
+        <CodeBlock style={{ margin: 0 }}>
+          {`
+const location = 'SOILPL104531';
+
+const observable = NeonGraphQL.getLocationByName(location).pipe(
+  map((response) => { /* handle response */ }),
+  catchError((error) => { /* handle error */ }),
+);
+
+observable.subscribe();
+          `}
+        </CodeBlock>
+      ),
+    },
+    // getManyLocationsByName
+    {
+      name: 'getManyLocationsByName',
+      arguments: (
+        <ul>
+          <li>
+            <tt className={classes.tt}>names</tt> - <i>Array of Strings, Required</i>
+            <br />
+            Array for location name strings (e.g. [&quot;D10&quot;, &quot;CPER&quot;])
+          </li>
+        </ul>
+      ),
+      description: `
+Get an array containing matching location objects with full attributes
+(including locationProperties), by name.
+        `,
+      example: (
+        <CodeBlock style={{ margin: 0 }}>
+          {`
+const locations = ['SYCA.AOS.fish.point.01', 'SYCA.AOS.fish.point.02', 'SYCA.AOS.fish.point.03'];
+
+const observable = NeonGraphQL.getManyLocationsByName(locations).pipe(
+  map((response) => { /* handle response */ }),
+  catchError((error) => { /* handle error */ }),
+);
+
+observable.subscribe();
+          `}
+        </CodeBlock>
+      ),
+    },
+  ];
 
   // getAllDataProducts
   const [allDataProductsStatus, setAllDataProductsStatus] = useState(null);
@@ -144,6 +319,38 @@ import NeonGraphQL from 'portal-core-components/lib/components/NeonGraphQL';
       </DocBlock>
 
       <Divider className={classes.divider} />
+      <Typography variant="h6" component="h4" gutterBottom>Query Methods</Typography>
+
+      <TableContainer component={Paper} style={{ maxHeight: '70vh' }}>
+        <Table stickyHeader aria-label="props">
+          <TableHead>
+            <TableRow>
+              <TableCell>Method</TableCell>
+              <TableCell>Arguments</TableCell>
+              <TableCell>Description</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {methodRows.map((row, idx) => (
+              <React.Fragment key={row.name}>
+                <TableRow className={idx % 2 ? classes.tableRowGrey : null}>
+                  <TableCell component="th" scope="row" rowSpan={2}>
+                    <tt className={classes.tt}>{row.name}</tt>
+                  </TableCell>
+                  <TableCell>{row.arguments}</TableCell>
+                  <TableCell>{row.description}</TableCell>
+                </TableRow>
+                <TableRow className={idx % 2 ? classes.tableRowGrey : null}>
+                  <TableCell colSpan={3} style={{ padding: 0 }}>{row.example}</TableCell>
+                </TableRow>
+              </React.Fragment>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+
+      <Divider className={classes.divider} />
+      <Typography variant="h5" component="h3" gutterBottom>Usage</Typography>
       <Typography variant="h6" component="h4" gutterBottom>Get All Data Products</Typography>
 
       <DocBlock>

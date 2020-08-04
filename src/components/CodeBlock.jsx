@@ -18,9 +18,9 @@ const useStyles = makeStyles(theme => ({
 
 export default function CodeBlock(props) {
   const classes = useStyles(Theme);
-  const { language, children } = props;
+  const { language, children, ...other } = props;
   return (
-    <Highlight language={language} className={classes.root}>
+    <Highlight language={language} className={classes.root} {...other}>
       {children}
     </Highlight>
   );
