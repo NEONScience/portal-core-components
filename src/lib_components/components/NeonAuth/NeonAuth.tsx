@@ -4,13 +4,12 @@ import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import AuthService from '../NeonAuth/AuthService'; /* eslint-disable-line */
+import AuthService from './AuthService';
 import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
 import Theme from '../Theme/Theme';
 
 export enum NeonAuthType {
-  INTERRUPT = 'INTERRUPT',
-  SEAMLESS = 'SEAMLESS',
+  REDIRECT = 'REDIRECT',
   SILENT = 'SILENT',
 }
 export enum NeonAuthDisplayType {
@@ -18,7 +17,6 @@ export enum NeonAuthDisplayType {
 }
 
 export interface NeonAuthProps {
-  title: string;
   loginType: NeonAuthType;
   logoutType: NeonAuthType;
   displayType: NeonAuthDisplayType;
@@ -29,10 +27,11 @@ export interface NeonAuthProps {
 
 const UX_TIMEOUT_MS: number = 300;
 
-const triggerAuth = (path: string, login: boolean): void => {
+const triggerAuth = (path: string, login: boolean, dispatch: Dispatch<any>): void => {
   if (!path) return;
   // Give the browser time to render to allow for immediate feedback
   // by way of a spinner.
+  dispatch({ type: 'setAuthWorking', isAuthWorking: true });
   setTimeout(
     () => {
       if (login) {
@@ -72,20 +71,15 @@ const renderAuth = (
     let appliedLoginType: NeonAuthType = loginType;
     // Default to interrupt if WS isn't connected
     if (!isAuthWsConnected) {
-      appliedLoginType = NeonAuthType.INTERRUPT;
+      appliedLoginType = NeonAuthType.REDIRECT;
     }
     switch (appliedLoginType) {
-      case NeonAuthType.SEAMLESS:
-        break;
       case NeonAuthType.SILENT:
-        setTimeout(
-          () => AuthService.loginSilently(dispatch),
-          UX_TIMEOUT_MS,
-        );
+        AuthService.loginSilently(dispatch);
         break;
-      case NeonAuthType.INTERRUPT:
+      case NeonAuthType.REDIRECT:
       default:
-        triggerAuth(loginPath, true);
+        triggerAuth(loginPath, true, dispatch);
         break;
     }
   };
@@ -93,19 +87,15 @@ const renderAuth = (
     let appliedLogoutType: NeonAuthType = logoutType;
     // Default to interrupt if WS isn't connected
     if (!isAuthWsConnected) {
-      appliedLogoutType = NeonAuthType.INTERRUPT;
+      appliedLogoutType = NeonAuthType.REDIRECT;
     }
     switch (appliedLogoutType) {
-      case NeonAuthType.SEAMLESS:
       case NeonAuthType.SILENT:
-        setTimeout(
-          () => AuthService.logoutSilently(dispatch),
-          UX_TIMEOUT_MS,
-        );
+        AuthService.logoutSilently(dispatch);
         break;
-      case NeonAuthType.INTERRUPT:
+      case NeonAuthType.REDIRECT:
       default:
-        triggerAuth(logoutPath, false);
+        triggerAuth(logoutPath, false, dispatch);
         break;
     }
   };
@@ -155,9 +145,11 @@ const renderAuth = (
 const NeonAuth = (props: NeonAuthProps): JSX.Element => {
   const [
     {
-      isAuthenticated,
-      isAuthWorking,
-      isAuthWsConnected,
+      auth: {
+        isAuthenticated,
+        isAuthWorking,
+        isAuthWsConnected,
+      },
       fetches: {
         auth: {
           status,
@@ -167,9 +159,9 @@ const NeonAuth = (props: NeonAuthProps): JSX.Element => {
     dispatch,
   ] = NeonContext.useNeonContextState();
 
-  const isFetchingAuthentication = (status === FETCH_STATUS.FETCHING);
-  const isAuthFetched = ([FETCH_STATUS.SUCCESS, FETCH_STATUS.ERROR].indexOf(status) >= 0);
-  const showAuthWorking = (isAuthWorking || isFetchingAuthentication);
+  const isFetchingAuthentication: boolean = (status === FETCH_STATUS.FETCHING);
+  const isAuthFetched: boolean = ([FETCH_STATUS.SUCCESS, FETCH_STATUS.ERROR].indexOf(status) >= 0);
+  const showAuthWorking: boolean = (isAuthWorking || isFetchingAuthentication);
 
   const authFetchCb = useCallback(() => {
     AuthService.fetchUserInfoWithDispatch(dispatch);

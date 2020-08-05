@@ -20,7 +20,7 @@
     "./src/lib_components/*.tsx",
   ],
   "exclude": [
-    "./src/**/StyleGuide.jsx",
+    "./src/**/StyleGuide.*",
     "./src/components/*",
     "./src/favicon/*",
     "./src/sampleData/*",

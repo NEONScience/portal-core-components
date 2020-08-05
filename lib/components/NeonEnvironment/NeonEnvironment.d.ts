@@ -13,6 +13,7 @@ declare namespace NeonEnvironment {
     export function getRootApiPath(): string;
     export function getRootGraphqlPath(): string | undefined;
     export function getRootJsonLdPath(): string;
+    export function getRootAuthApiPath(): string | undefined;
     export namespace getApiPath {
         export function aopDownload(): string | undefined;
         export function data(): string | undefined;
@@ -35,19 +36,37 @@ declare namespace NeonEnvironment {
         export function login(): string | undefined;
         export function logout(): string | undefined;
         export function userInfo(): string | undefined;
+        export function seamlessLogin(): string;
+        export function silentLogin(): string;
+        export function silentLogout(): string;
+    }
+    export namespace getAuthApiPath {
+        export function ws(): string | undefined;
+    }
+    export namespace authTopics {
+        export function getAuth0(): string | undefined;
     }
     export function getVisusProductsBaseUrl(): string | undefined;
     export function getVisusIframeBaseUrl(): string | undefined;
     export function getRouterBasePath(): string | undefined;
     export function getRouterBaseHomePath(): string | undefined;
     export function getHostOverride(): string | undefined;
+    export function getWsHostOverride(): string | undefined;
+    export namespace route {
+        export function account(): string;
+        export function getFullRoute(route: any): string;
+        export function buildRouteFromHost(route: any): string;
+        export function buildAccountRoute(): string;
+    }
     export function getNeonServerData(): Object;
     export function getHost(): string | undefined;
+    export function getWebSocketHost(): string | undefined;
     export function getApiTokenHeader(): string;
     export function getApiToken(): string;
     export function getFullApiPath(path?: string): string;
     export function getFullJsonLdApiPath(path?: string): string;
     export function getFullPagePath(path?: string): string;
     export function getFullAuthPath(path?: string): string;
+    export function getFullAuthApiPath(path?: string, useWs?: boolean): string;
     export function getFullGraphqlPath(): string;
 }

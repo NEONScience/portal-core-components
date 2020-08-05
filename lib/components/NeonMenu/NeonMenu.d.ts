@@ -1,25 +1,5 @@
 export default NeonMenu;
-declare class NeonMenu extends React.Component<any, any, any> {
-    constructor(props: any);
-    auth: Authenticate;
-    menuFromResponse(response: any): void;
-    menuErrorCallback(): void;
-    authCallback(response: any): void;
-    authErrorCallback(error: any): void;
-    handleDrawerOpen(): void;
-    handleDrawerClose(): void;
-    cancellationSubject$: Subject<any>;
-    state: {
-        fetched: boolean;
-        menuItems: never[];
-        isFetchingAuthentication: boolean;
-        isAuthenticated: boolean;
-        drawerIsOpen: boolean;
-    };
-    componentDidMount(): void;
-    componentWillUnmount(): void;
-    render(): JSX.Element;
-}
+declare function NeonMenu(props: any): JSX.Element;
 declare namespace NeonMenu {
     export namespace propTypes {
         export const loginPath: PropTypes.Requireable<string>;
@@ -45,7 +25,4 @@ declare namespace NeonMenu {
         export { onShowNotifications_1 as onShowNotifications };
     }
 }
-import React from "react";
-import Authenticate from "../../auth/authenticate";
-import { Subject } from "rxjs";
 import PropTypes from "prop-types";

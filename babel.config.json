@@ -10,6 +10,6 @@
     "@babel/plugin-transform-object-assign"
   ],
   "ignore": [
-    "**/*.d.ts",
+    "**/*.d.ts"
   ]
 }

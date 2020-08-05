@@ -1,9 +1,3 @@
 src/registerServiceWorker.js
-src/node_modules/auth
-src/node_modules/routing
-src/node_modules/util
-src/node_modules/components/NeonAuthLogin
-src/node_modules/components/NeonAuthLogout
-src/node_modules/components/NeonAuthRoot
 src/node_modules/components/PopupBase
 src/node_modules/components/PopupLoading

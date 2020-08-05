@@ -14,7 +14,7 @@ import DownloadDataButtonStyleGuide from './lib_components/components/DownloadDa
 import DownloadDataContextStyleGuide from './lib_components/components/DownloadDataContext/StyleGuide';
 import ExternalHostInfoStyleGuide from './lib_components/components/ExternalHostInfo/StyleGuide';
 import FullWidthVisualizationStyleGuide from './lib_components/components/FullWidthVisualization/StyleGuide';
-import NeonAuthStyleGuide from './lib_components/components/NeonAuth/StyleGuide'; /* eslint-disable-line */
+import NeonAuthStyleGuide from './lib_components/components/NeonAuth/StyleGuide';
 import NeonContextStyleGuide from './lib_components/components/NeonContext/StyleGuide';
 import NeonEnvironmentStyleGuide from './lib_components/components/NeonEnvironment/StyleGuide';
 import NeonGraphQLStyleGuide from './lib_components/components/NeonGraphQL/StyleGuide';
@@ -132,7 +132,6 @@ export default function App() {
       sidebarLinks={sidebarLinks}
       sidebarLinksAsStandaloneChildren
       useCoreAuth
-      useCoreHeader
     >
       <Home />
     </NeonPage>
