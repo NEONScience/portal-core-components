@@ -2,7 +2,10 @@
 
 import React from 'react';
 
+import cloneDeep from 'lodash/cloneDeep';
+
 import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
@@ -21,12 +24,23 @@ import PropsTable from '../../../components/PropsTable';
 
 import Theme from '../Theme/Theme';
 import SiteMap from './SiteMap';
+import FetchLocationsWorker from './FetchLocations.worker';
 
 import {
   MAP_ZOOM_RANGE,
   TILE_LAYERS,
   VIEWS,
+  FEATURES,
 } from './SiteMapUtils';
+
+const doFetch = () => {
+  const worker = new FetchLocationsWorker();
+  worker.addEventListener('message', (message) => {
+    console.log('New Message: ', message.data);
+  });
+  const locations = ['RMNP_012.birdGrid.brd', 'SYCA.AOS.fish.point.02', 'SYCA.AOS.fish.point.03'];
+  worker.postMessage(locations);
+};
 
 const useStyles = makeStyles(theme => ({
   divider: {
@@ -237,6 +251,10 @@ export default function StyleGuide() {
 import SiteMap from 'portal-core-components/lib/components/SiteMap';
         `}
       </CodeBlock>
+
+      <Button variant="contained" color="primary" onClick={doFetch}>
+        Fetch
+      </Button>
 
       <Typography variant="h4" component="h2" gutterBottom>Usage</Typography>
 
