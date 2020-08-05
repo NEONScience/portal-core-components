@@ -29,7 +29,7 @@ interface AuthMessage {
 }
 
 interface IAuthServiceState {
-  silentIFrame: HTMLIFrameElement;
+  silentIFrame: HTMLIFrameElement | undefined;
   rxStompClient: RxStomp | undefined;
   watchSubscription$: Subscription | undefined;
   cancellationSubject$: Subject<any>;
@@ -175,9 +175,9 @@ const factory = {
           dispatch({ type: 'setAuthWorking', isAuthWorking: false });
           // Clean up iframe
           try {
-            if (state.silentIFrame.src !== '') {
-              document.body.removeChild(state.silentIFrame);
-              state.silentIFrame.src = ''; // eslint-disable-line no-param-reassign
+            if (exists(state.silentIFrame)) {
+              document.body.removeChild(state.silentIFrame as HTMLIFrameElement);
+              state.silentIFrame = undefined; // eslint-disable-line no-param-reassign
             }
           } catch (e) {
             console.error(e); // eslint-disable-line no-console
@@ -190,7 +190,7 @@ const factory = {
 };
 
 const state: IAuthServiceState = {
-  silentIFrame: factory.createSilentIFrame(),
+  silentIFrame: undefined,
   rxStompClient: undefined,
   watchSubscription$: undefined,
   cancellationSubject$: new Subject(),
@@ -330,31 +330,38 @@ const AuthService: IAuthService = {
       .watch(NeonEnvironment.authTopics.getAuth0() as string)
       .pipe(
         map((message: Message) => {
-          const authMessage: AuthMessage = JSON.parse(message.body);
-          if (authMessage && authMessage.success) {
-            if (authMessage.logout) {
-              dispatch({ type: 'setAuthenticated', isAuthenticated: false });
+          try {
+            const authMessage: AuthMessage = JSON.parse(message.body);
+            if (authMessage && authMessage.success) {
+              if (authMessage.logout) {
+                dispatch({ type: 'setAuthenticated', isAuthenticated: false });
+              }
             }
+            // Clean up iframe
+            if (exists(state.silentIFrame)) {
+              document.body.removeChild(state.silentIFrame as HTMLIFrameElement);
+              state.silentIFrame = undefined;
+            }
+            // Re-fetching the user info will resolve any necessary auth state
+            AuthService.fetchUserInfoWithDispatch(dispatch, true);
+            dispatch({ type: 'setAuthWorking', isAuthWorking: false });
+            AuthService.cancelWorkingResolver();
+            return authMessage;
+          } catch (e) {
+            console.error(e); // eslint-disable-line no-console
+            return {
+              error: 'Failed to process WS message',
+            };
           }
-          // Clean up iframe
-          if (state.silentIFrame.src !== '') {
-            document.body.removeChild(state.silentIFrame);
-            state.silentIFrame.src = '';
-          }
-          // Re-fetching the user info will resolve any necessary auth state
-          AuthService.fetchUserInfoWithDispatch(dispatch, true);
-          dispatch({ type: 'setAuthWorking', isAuthWorking: false });
-          AuthService.cancelWorkingResolver();
-          return authMessage;
         }),
         // @ts-ignore
         catchError((error: any) => {
           console.error(error); // eslint-disable-line no-console
           try {
             // Clean up iframe
-            if (state.silentIFrame.src !== '') {
-              document.body.removeChild(state.silentIFrame);
-              state.silentIFrame.src = '';
+            if (exists(state.silentIFrame)) {
+              document.body.removeChild(state.silentIFrame as HTMLIFrameElement);
+              state.silentIFrame = undefined;
             }
             // In case of error state, always resubscribe to the WS
             AuthService.fetchUserInfoWithDispatch(dispatch, true);

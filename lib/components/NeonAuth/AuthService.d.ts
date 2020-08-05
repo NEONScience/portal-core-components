@@ -3,7 +3,7 @@ import { Subscription, Subject } from 'rxjs';
 import { RxStomp } from '@stomp/rx-stomp';
 import { AnyVoidFunc } from '../../types/core';
 interface IAuthServiceState {
-    silentIFrame: HTMLIFrameElement;
+    silentIFrame: HTMLIFrameElement | undefined;
     rxStompClient: RxStomp | undefined;
     watchSubscription$: Subscription | undefined;
     cancellationSubject$: Subject<any>;
