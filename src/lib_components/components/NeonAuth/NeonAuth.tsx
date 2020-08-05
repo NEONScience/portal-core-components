@@ -58,14 +58,7 @@ const renderAuth = (
     loginPath,
     logoutPath,
     accountPath,
-  }: {
-    loginType: NeonAuthType,
-    logoutType: NeonAuthType,
-    displayType: NeonAuthDisplayType,
-    loginPath: string,
-    logoutPath: string,
-    accountPath: string,
-  } = props;
+  }: NeonAuthProps = props;
 
   const handleLogin = (): void => {
     let appliedLoginType: NeonAuthType = loginType;
