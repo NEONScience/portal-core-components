@@ -30,7 +30,6 @@ import {
   MAP_ZOOM_RANGE,
   TILE_LAYERS,
   VIEWS,
-  FEATURES,
 } from './SiteMapUtils';
 
 const doFetch = () => {
@@ -264,7 +263,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
       </DocBlock>
 
       <ExampleBlock>
-        <SiteMap />
+        <SiteMap location="CPER" />
       </ExampleBlock>
       <CodeBlock>
         {`

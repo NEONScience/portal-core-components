@@ -139,7 +139,12 @@ const fetchLocations = (event) => {
         postMessage({ status: 'error', error: 'Malformed response' });
         return of(false);
       }
-      const data = result.response.data.locations.map(parseLocationData);
+      const data = {};
+      result.response.data.locations.forEach((rawLocationData) => {
+        const { locationName } = rawLocationData;
+        if (!locationName) { return; }
+        data[locationName] = parseLocationData(rawLocationData);
+      })
       postMessage({ status: 'success', data });
       return of(true);
     }),
