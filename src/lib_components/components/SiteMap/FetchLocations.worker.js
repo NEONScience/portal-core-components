@@ -69,6 +69,7 @@ const parseLocationProperties = (
 export const parseLocationData = (data = {}) => {
   const {
     siteCode = null,
+    locationName: name = null,
     locationType: type = null,
     locationDescription: description = null,
     locationDecimalLatitude: latitude = null,
@@ -76,13 +77,14 @@ export const parseLocationData = (data = {}) => {
     locationElevation: elevation = null,
     locationPolygon: polygon = null,
     locationProperties = {},
-    locationChildren: children = [],
+    locationParent: parent = null,
   } = data;
   const parsed = {
+    name,
     type,
     description,
     siteCode,
-    children,
+    parent,
     ...parseLocationProperties(locationProperties),
   };
   if (elevation !== null) { parsed.elevation = elevation; }

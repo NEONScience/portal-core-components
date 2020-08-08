@@ -119,6 +119,7 @@ const getQueryBody = (type = '', dimensionality = '', arg = null) => {
           ) {
             locationName
             locationDescription
+            locationParent
             locationType
             domainCode
             siteCode
