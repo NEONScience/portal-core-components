@@ -1,4 +1,4 @@
-/* eslint no-restricted-globals: 0 */
+/* eslint no-restricted-globals: 0, import/prefer-default-export: 0 */
 import { of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
@@ -6,8 +6,8 @@ import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
 
 import { parseLocationData } from './SiteMapWorkerSafeUtils';
 
-const fetchLocations = (event) => {
-  const locations = event.data || {};
+const fetchLocations = (event = null) => {
+  const locations = (event || {}).data || null;
 
   // Extract locations list and validate
   if (
@@ -42,7 +42,7 @@ const fetchLocations = (event) => {
     }),
     // Error
     catchError((error) => {
-      postMessage({ status: 'error', error });
+      postMessage({ status: 'error', error: error.message });
       return of(false);
     }),
   );

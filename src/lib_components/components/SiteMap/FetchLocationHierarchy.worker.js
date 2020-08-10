@@ -1,4 +1,4 @@
-/* eslint no-restricted-globals: 0 */
+/* eslint no-restricted-globals: 0, import/prefer-default-export: 0 */
 import { of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
@@ -34,8 +34,8 @@ const domainIsValid = (domainString) => {
   return true;
 };
 
-const fetchHierarchy = (event) => {
-  const domain = event.data || null;
+const fetchHierarchy = (event = null) => {
+  const domain = (event || {}).data || null;
 
   // Extract locations list and validate
   if (!domainIsValid(domain)) {
@@ -63,7 +63,7 @@ const fetchHierarchy = (event) => {
       return of(false);
     }),
     catchError((error) => {
-      postMessage({ status: 'error', error });
+      postMessage({ status: 'error', error: error.message });
       return of(false);
     }),
   ).subscribe();
@@ -71,6 +71,3 @@ const fetchHierarchy = (event) => {
 
 // Listen for the locations list
 self.addEventListener('message', fetchHierarchy);
-
-// Must have a default export for production build
-export default fetchHierarchy;

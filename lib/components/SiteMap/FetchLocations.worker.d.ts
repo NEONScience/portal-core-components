@@ -1,2 +1,2 @@
 export default fetchLocations;
-declare function fetchLocations(event: any): void;
+declare function fetchLocations(event?: any): void;
