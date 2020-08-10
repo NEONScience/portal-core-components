@@ -8,10 +8,8 @@
     "newLine": "lf"
   },
   "include": [
-    "./src/lib_components/auth/**/*",
     "./src/lib_components/components/**/*",
     "./src/lib_components/flow/**/*",
-    "./src/lib_components/routing/**/*",
     "./src/lib_components/types/**/*",
     "./src/lib_components/util/**/*",
     "./src/lib_components/*.js",
