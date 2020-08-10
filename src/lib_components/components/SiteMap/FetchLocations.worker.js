@@ -49,4 +49,8 @@ const fetchLocations = (event) => {
 };
 
 // Listen for the locations list
+// eslint-disable-next-line
 self.addEventListener("message", fetchLocations);
+
+// Must have a default export for production build
+export default fetchLocations;

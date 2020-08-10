@@ -1,5 +1,4 @@
 /* eslint-disable no-restricted-globals */
-/* global window, self */
 
 // Names of all environment variables that MUST be explicitly defined for the
 // environment to be reported as "valid". These are evnironment variables
@@ -102,9 +101,11 @@ const NeonEnvironment = {
    * @return {Object} The structured server data object
    */
   getNeonServerData: () => {
+    /* eslint-disable */
     if (typeof WorkerGlobalScope === 'function') {
       return self.NEON_SERVER_DATA ? self.NEON_SERVER_DATA : null;
     }
+    /* eslint-enable */
     if (typeof window === 'object') {
       return window.NEON_SERVER_DATA ? window.NEON_SERVER_DATA : null;
     }
@@ -117,9 +118,11 @@ const NeonEnvironment = {
         && NeonEnvironment.getHostOverride()) {
       return NeonEnvironment.getHostOverride();
     }
+    /* eslint-disable */
     if (typeof WorkerGlobalScope === 'function' && typeof self.location === 'object') {
       return `${self.location.protocol}//${self.location.host}`;
     }
+    /* eslint-enable */
     return `${window.location.protocol}//${window.location.host}`;
   },
 

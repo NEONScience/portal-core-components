@@ -69,4 +69,8 @@ const fetchHierarchy = (event) => {
 };
 
 // Listen for the locations list
+// eslint-disable-next-line
 self.addEventListener("message", fetchHierarchy);
+
+// Must have a default export for production build
+export default fetchHierarchy;

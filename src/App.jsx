@@ -126,6 +126,7 @@ export default function App() {
       sidebarLinks={sidebarLinks}
       sidebarLinksAsStandaloneChildren
       useCoreAuth
+      useCoreHeader
     >
       <Home />
     </NeonPage>
