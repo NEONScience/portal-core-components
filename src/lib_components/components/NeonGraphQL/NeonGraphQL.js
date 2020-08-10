@@ -104,6 +104,13 @@ const getQueryBody = (type = '', dimensionality = '', arg = null) => {
             locationDecimalLatitude
             locationDecimalLongitude
             locationElevation
+            locationPolygon {
+              coordinates {
+                latitude
+                longitude
+                elevation
+              }
+            }
             locationProperties {
               locationPropertyName
               locationPropertyValue
@@ -126,6 +133,13 @@ const getQueryBody = (type = '', dimensionality = '', arg = null) => {
             locationDecimalLatitude
             locationDecimalLongitude
             locationElevation
+            locationPolygon {
+              coordinates {
+                latitude
+                longitude
+                elevation
+              }
+            }
             locationProperties {
               locationPropertyName
               locationPropertyValue

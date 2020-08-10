@@ -248,7 +248,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
       </DocBlock>
 
       <ExampleBlock>
-        <SiteMap />
+        <SiteMap location="BART" />
       </ExampleBlock>
       <CodeBlock>
         {`

@@ -64,8 +64,6 @@ export const OBSERVATORY_CENTER = [52.68, -110.75];
 export const MIN_CONTAINER_HEIGHT = 300;
 export const MIN_TABLE_MAX_BODY_HEIGHT = 100;
 
-// export const MINIMUM_MAP_DIMENSIONS = { width: 300, height: 200 };
-
 export const KM2_TO_ACRES = 247.10538146717;
 
 // Minimum zoom level at which location hierarchy fetches are done on a per-domain basis
@@ -112,6 +110,8 @@ export const FEATURE_DATA_SOURCES = {
 // Subset of FEATURE_TYPES describing all features that are directly selectable
 export const SELECTABLE_FEATURE_TYPES = (({ SITES }) => ({ SITES }))(FEATURE_TYPES);
 
+const SELECTED_ICON_OFFSET = 30; // Number of pixels bigger in one dimension for selected icons
+
 // For consistency in denoting whether all or some of a region's selectable children are selected
 export const SELECTION_PORTIONS = { PARTIAL: 'PARTIAL', TOTAL: 'TOTAL' };
 
@@ -157,8 +157,7 @@ export const PLOT_SAMPLING_MODULES = {
    Icon SVGs
    An importable data structure containing all imported SVGs for map and legend icons
 */
-const SELECTED_ICON_OFFSET = 30; // Number of pixels bigger in one dimension for selected icons
-const LOCATION_ICON_SVG_SHAPES = {
+export const LOCATION_ICON_SVG_SHAPES = {
   CIRCLE: {
     KEY: 'CIRCLE',
     iconSize: [80, 80],
@@ -1144,9 +1143,12 @@ Object.keys(FEATURES)
       DEFAULT_STATE.featureData[featureType][featureKey] = {};
     }
     // Initialize featureDataFetches based on dataSource
-    // ARCGIS_ASSETS_API: grouped by feature key
+    // ARCGIS_ASSETS_API and REST_LOCATIONS_API: grouped by feature key
     // GRAPHQL_LOCATIONS_API: grouped by feature minZoom
-    if (dataSource === FEATURE_DATA_SOURCES.ARCGIS_ASSETS_API) {
+    if ([
+      FEATURE_DATA_SOURCES.ARCGIS_ASSETS_API,
+      FEATURE_DATA_SOURCES.REST_LOCATIONS_API,
+    ].includes(dataSource)) {
       DEFAULT_STATE.featureDataFetches[dataSource][featureKey] = {};
     }
     if (dataSource === FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API) {
@@ -1154,10 +1156,9 @@ Object.keys(FEATURES)
       DEFAULT_STATE.featureDataFetches[dataSource][minZoom] = {};
     }
   });
-// Location Hierarchies (REST_LOCATIONS_API)
-DEFAULT_STATE.featureDataFetches[FEATURE_DATA_SOURCES.REST_LOCATIONS_API] = {
-  [FEATURE_TYPES.SITE_LOCATION_HIERARCHIES]: {},
-};
+// Location Hierarchies (REST_LOCATIONS_API, not in the FEATURES structure since it doesn't render)
+// eslint-disable-next-line max-len
+DEFAULT_STATE.featureDataFetches[FEATURE_DATA_SOURCES.REST_LOCATIONS_API][FEATURE_TYPES.SITE_LOCATION_HIERARCHIES] = {};
 
 // Initialize all selectable features in selection state
 Object.keys(SELECTABLE_FEATURE_TYPES).forEach((selection) => {
@@ -1270,32 +1271,13 @@ export const SITE_MAP_DEFAULT_PROPS = {
 };
 
 /**
-   Aspect Ratio
-*/
-const dynamicAspectRatios = [
-  '1:2', '9:16', '2:3', '5:7', '4:5', '1:1', '5:4', '7:5', '3:2', '16:9', '2:1', '2.5:1', '3:1',
-].map((ratio) => {
-  const parts = /^([\d.]+):([\d.]+)$/.exec(ratio) || ['', '1', '1'];
-  return parseFloat(parts[2]) / parseFloat(parts[1]);
-});
-
-export const getDynamicAspectRatio = (unusableVerticalSpace = 0) => {
-  const buffer = 100; // Approximate height of the filters row and a bit of margin
-  const usableVericalSpace = window.innerHeight + buffer - unusableVerticalSpace;
-  const windowAspectRatio = Math.max(usableVericalSpace, 0) / (window.innerWidth || 1);
-  const arIdx = dynamicAspectRatios.findIndex(ar => ar < windowAspectRatio);
-  return arIdx === -1
-    ? dynamicAspectRatios[dynamicAspectRatios.length - 1]
-    : dynamicAspectRatios[arIdx];
-};
-
-/**
-   Map Icon Functions
+   Icon Utility Functions
    These appear here because of how Leaflet handles icons. Each icon must be a L.Icon instance,
    but many of our icons repeat. We also want to scale our icons with the zoom level. As such,
    we generate a stat structure containing only one instance of each distinct icon type scaled
    to the current zoom level and keep that in state. It is regenerated any time the zoom changes.
 */
+// Get a single zoomed Leaflet icon instance
 const getZoomedIcon = (
   featureKey = null,
   zoom = 3,
@@ -1442,6 +1424,26 @@ export const getMapStateForFocusLocation = (state = {}) => {
     };
   }
   return newState.map;
+};
+
+/**
+   Aspect Ratio
+*/
+const dynamicAspectRatios = [
+  '1:2', '9:16', '2:3', '5:7', '4:5', '1:1', '5:4', '7:5', '3:2', '16:9', '2:1', '2.5:1', '3:1',
+].map((ratio) => {
+  const parts = /^([\d.]+):([\d.]+)$/.exec(ratio) || ['', '1', '1'];
+  return parseFloat(parts[2]) / parseFloat(parts[1]);
+});
+
+export const getDynamicAspectRatio = (unusableVerticalSpace = 0) => {
+  const buffer = 100; // Approximate height of the filters row and a bit of margin
+  const usableVericalSpace = window.innerHeight + buffer - unusableVerticalSpace;
+  const windowAspectRatio = Math.max(usableVericalSpace, 0) / (window.innerWidth || 1);
+  const arIdx = dynamicAspectRatios.findIndex(ar => ar < windowAspectRatio);
+  return arIdx === -1
+    ? dynamicAspectRatios[dynamicAspectRatios.length - 1]
+    : dynamicAspectRatios[arIdx];
 };
 
 export const boundsAreValid = bounds => (

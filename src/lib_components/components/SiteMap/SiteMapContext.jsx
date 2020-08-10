@@ -17,6 +17,7 @@ import NeonContext from '../NeonContext/NeonContext';
 
 import FetchLocationsWorker from './FetchLocations.worker';
 import FetchLocationHierarchyWorker from './FetchLocationHierarchy.worker';
+import { parseLocationData } from './SiteMapWorkerSafeUtils';
 import {
   DEFAULT_STATE,
   SORT_DIRECTIONS,
@@ -35,9 +36,9 @@ import {
   SITE_MAP_DEFAULT_PROPS,
   MIN_TABLE_MAX_BODY_HEIGHT,
   GRAPHQL_LOCATIONS_API_CONSTANTS,
-  hydrateNeonContextData,
   getZoomedIcons,
   getMapStateForFocusLocation,
+  hydrateNeonContextData,
   calculateFeatureAvailability,
   boundsAreValid,
   calculateLocationsInMap,
@@ -137,6 +138,44 @@ const calculateFeatureDataFetches = (state) => {
         newState.overallFetch.expected += 1;
         newState.featureDataFetchesHasAwaiting = true;
       });
+    });
+
+  // Feature fetches - REST_LOCATIONS_API
+  Object.keys(FEATURES)
+    // Only look at available+visible features that get fetched and have a location type match
+    .filter(featureKey => (
+      FEATURES[featureKey].dataSource === FEATURE_DATA_SOURCES.REST_LOCATIONS_API
+        && FEATURES[featureKey].matchLocationType
+        && state.filters.features.available[featureKey]
+        && state.filters.features.visible[featureKey]
+    ))
+    .forEach((featureKey) => {
+      const { dataSource, matchLocationType } = FEATURES[featureKey];
+      // For each feature that warrants fetching; loop through the sites in the map
+      sitesInMap
+        // Domain hierarchy must be completed in order to generate subsequent fetches
+        // (only true if site location hierarchy feature data is there)
+        .filter(siteCode => state.featureData.SITE_LOCATION_HIERARCHIES[siteCode])
+        .forEach((siteCode) => {
+          if (!newState.featureDataFetches[dataSource][featureKey][siteCode]) {
+            newState.featureDataFetches[dataSource][featureKey][siteCode] = {};
+          }
+          // Extract matching location IDs from the hierarchy and set them as fetches awaiting call
+          const hierarchy = state.featureData.SITE_LOCATION_HIERARCHIES[siteCode];
+          const locationIsMatch = matchLocationType instanceof RegExp
+            ? (locationKey => matchLocationType.test(hierarchy[locationKey].type))
+            : (locationKey => hierarchy[locationKey].type === matchLocationType);
+          Object.keys(hierarchy)
+            .filter(locationIsMatch)
+            .forEach((locationKey) => {
+              if (newState.featureDataFetches[dataSource][featureKey][siteCode][locationKey]) {
+                return;
+              }
+              newState.featureDataFetches[dataSource][featureKey][siteCode][locationKey] = FETCH_STATUS.AWAITING_CALL; // eslint-disable-line max-len
+              newState.overallFetch.expected += 1;
+              newState.featureDataFetchesHasAwaiting = true;
+            });
+        });
     });
 
   // Feature fetches - GRAPHQL_LOCATIONS_API
@@ -259,6 +298,7 @@ const reducer = (state, action) => {
     // ARCGIS_ASSETS_API
     if (dataSource === FEATURE_DATA_SOURCES.ARCGIS_ASSETS_API) {
       const { featureKey, siteCode, data } = action;
+      if (!FEATURES[featureKey]) { return false; }
       if (
         !newState.featureDataFetches[dataSource]
           || !newState.featureDataFetches[dataSource][featureKey]
@@ -271,6 +311,40 @@ const reducer = (state, action) => {
         newState.featureData[featureType][featureKey][siteCode] = data;
       }
       return true;
+    }
+
+    // REST_LOCATIONS_API
+    if (dataSource === FEATURE_DATA_SOURCES.REST_LOCATIONS_API) {
+      const {
+        featureKey,
+        siteCode,
+        location,
+        data,
+      } = action;
+      if (!FEATURES[featureKey]) { return false; }
+      const { type: featureType } = FEATURES[featureKey];
+      if (!newState.featureDataFetches[dataSource][featureKey][siteCode][location]) {
+        return false;
+      }
+      newState.featureDataFetches[dataSource][featureKey][siteCode][location] = status;
+      // If the status is SUCCESS and the action has data, also commit the data
+      if (status === FETCH_STATUS.SUCCESS && data) {
+        const parsedData = parseLocationData(data);
+        if (!newState.featureData[featureType][featureKey]) {
+          newState.featureData[featureType][featureKey] = {};
+        }
+        if (!newState.featureData[featureType][featureKey][siteCode]) {
+          newState.featureData[featureType][featureKey][siteCode] = {};
+        }
+        newState.featureData[featureType][featureKey][siteCode][location] = {
+          ...parsedData,
+          siteCode,
+          featureKey,
+          name: location,
+          domainCode: state.sites[siteCode].domainCode,
+          stateCode: state.sites[siteCode].stateCode,
+        };
+      }
     }
 
     // GRAPHQL_LOCATIONS_API
@@ -854,19 +928,75 @@ const Provider = (props) => {
       });
     });
 
+    // REST_LOCATIONS_API Fetches
+    const restLocSource = FEATURE_DATA_SOURCES.REST_LOCATIONS_API;
+    const restLocFetches = state.featureDataFetches[restLocSource];
+    Object.keys(restLocFetches)
+      .filter(featureKey => featureKey !== FEATURE_TYPES.SITE_LOCATION_HIERARCHIES)
+      .forEach((featureKey) => {
+        Object.keys(state.featureDataFetches[restLocSource][featureKey]).forEach((siteCode) => {
+          const featureSite = state.featureDataFetches[restLocSource][featureKey][siteCode];
+          Object.keys(featureSite).forEach((location) => {
+            if (featureSite[location] !== FETCH_STATUS.AWAITING_CALL) { return; }
+            dispatch({
+              type: 'setFeatureDataFetchStarted',
+              dataSource: restLocSource,
+              featureKey,
+              siteCode,
+              location,
+            });
+            NeonApi.getLocationObservable(location).pipe(
+              map((response) => {
+                if (response && response.data && response.data) {
+                  dispatch({
+                    type: 'setFeatureDataFetchSucceeded',
+                    dataSource: restLocSource,
+                    data: response.data,
+                    featureKey,
+                    siteCode,
+                    location,
+                  });
+                  return of(true);
+                }
+                dispatch({
+                  type: 'setFeatureDataFetchFailed',
+                  dataSource: restLocSource,
+                  error: 'malformed response',
+                  featureKey,
+                  siteCode,
+                  location,
+                });
+                return of(false);
+              }),
+              catchError((error) => {
+                dispatch({
+                  type: 'setFeatureDataFetchFailed',
+                  dataSource: restLocSource,
+                  error: error.message,
+                  featureKey,
+                  siteCode,
+                  location,
+                });
+                return of(false);
+              }),
+            ).subscribe();
+          });
+        });
+      });
+
     // GRAPHQL_LOCATIONS_API Fetches
-    const locationsSource = FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API;
-    const locFetches = state.featureDataFetches[locationsSource];
-    Object.keys(locFetches).forEach((minZoom) => {
-      Object.keys(locFetches[minZoom]).forEach((siteCode) => {
-        Object.keys(locFetches[minZoom][siteCode].fetches)
+    const gqlLocSource = FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API;
+    const gqlLocFetches = state.featureDataFetches[gqlLocSource];
+    Object.keys(gqlLocFetches).forEach((minZoom) => {
+      Object.keys(gqlLocFetches[minZoom]).forEach((siteCode) => {
+        Object.keys(gqlLocFetches[minZoom][siteCode].fetches)
           .filter(fetchId => (
-            locFetches[minZoom][siteCode].fetches[fetchId].status === FETCH_STATUS.AWAITING_CALL
+            gqlLocFetches[minZoom][siteCode].fetches[fetchId].status === FETCH_STATUS.AWAITING_CALL
           ))
           .forEach((fetchId) => {
             dispatch({
               type: 'setFeatureDataFetchStarted',
-              dataSource: locationsSource,
+              dataSource: gqlLocSource,
               minZoom,
               siteCode,
               fetchId,
@@ -877,7 +1007,7 @@ const Provider = (props) => {
               if (status === 'success') {
                 dispatch({
                   type: 'setFeatureDataFetchSucceeded',
-                  dataSource: locationsSource,
+                  dataSource: gqlLocSource,
                   minZoom,
                   siteCode,
                   fetchId,
@@ -886,7 +1016,7 @@ const Provider = (props) => {
               } else {
                 dispatch({
                   type: 'setFeatureDataFetchFailed',
-                  dataSource: locationsSource,
+                  dataSource: gqlLocSource,
                   minZoom,
                   siteCode,
                   fetchId,
@@ -895,7 +1025,7 @@ const Provider = (props) => {
               }
               worker.terminate();
             });
-            worker.postMessage(locFetches[minZoom][siteCode].fetches[fetchId].locations);
+            worker.postMessage(gqlLocFetches[minZoom][siteCode].fetches[fetchId].locations);
           });
       });
     });
