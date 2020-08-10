@@ -624,17 +624,18 @@ const SiteMapFeature = (props) => {
         </Grid>
         <Grid item xs={5} style={{ textAlign: 'right' }} data-selenium="sitemap-map-popup-domain">
           <Typography variant="subtitle2">Domain</Typography>
-          <Link
-            variant="caption"
-            component="button"
-            title={`Jump to ${site.domainCode} on the map`}
-            style={{ textAlign: 'right' }}
-            onClick={() => jumpTo(site.domainCode)}
-            data-selenium="sitemap-map-popup-domainLink"
-          >
-            {markerIcon}
-            {domainTitle}
-          </Link>
+          <Tooltip title={`Jump to ${site.domainCode} on the map`}>
+            <Link
+              variant="caption"
+              component="button"
+              style={{ textAlign: 'right' }}
+              onClick={() => jumpTo(site.domainCode)}
+              data-selenium="sitemap-map-popup-domainLink"
+            >
+              {markerIcon}
+              {domainTitle}
+            </Link>
+          </Tooltip>
         </Grid>
       </React.Fragment>
     );
@@ -758,17 +759,18 @@ const SiteMapFeature = (props) => {
           {/* State/Territory */}
           <Grid item xs={4} style={{ textAlign: 'right' }}>
             <Typography variant="subtitle2">{stateFieldTitle}</Typography>
-            <Link
-              variant="caption"
-              component="button"
-              style={{ textAlign: 'right' }}
-              onClick={() => jumpTo(site.stateCode)}
-              title={`Jump to ${usState.name} on the map`}
-              data-selenium="sitemap-map-popup-stateLink"
-            >
-              {markerIcon}
-              {usState.name}
-            </Link>
+            <Tooltip title={`Jump to ${usState.name} on the map`}>
+              <Link
+                variant="caption"
+                component="button"
+                style={{ textAlign: 'right' }}
+                onClick={() => jumpTo(site.stateCode)}
+                data-selenium="sitemap-map-popup-stateLink"
+              >
+                {markerIcon}
+                {usState.name}
+              </Link>
+            </Tooltip>
           </Grid>
           {/* Latitude/Longitude */}
           <Grid item xs={5} style={{ display: 'flex', alignItems: 'flex-end' }}>
@@ -777,17 +779,18 @@ const SiteMapFeature = (props) => {
           {/* Domain */}
           <Grid item xs={7} style={{ textAlign: 'right' }}>
             <Typography variant="subtitle2">Domain</Typography>
-            <Link
-              variant="caption"
-              component="button"
-              style={{ textAlign: 'right' }}
-              onClick={() => jumpTo(site.domainCode)}
-              title={`Jump to ${site.domainCode} on the map`}
-              data-selenium="sitemap-map-popup-domainLink"
-            >
-              {markerIcon}
-              {`${site.domainCode} - ${domain.name}`}
-            </Link>
+            <Tooltip title={`Jump to ${site.domainCode} on the map`}>
+              <Link
+                variant="caption"
+                component="button"
+                style={{ textAlign: 'right' }}
+                onClick={() => jumpTo(site.domainCode)}
+                data-selenium="sitemap-map-popup-domainLink"
+              >
+                {markerIcon}
+                {`${site.domainCode} - ${domain.name}`}
+              </Link>
+            </Tooltip>
           </Grid>
         </Grid>
         {renderActions()}
