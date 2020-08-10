@@ -16,7 +16,19 @@ const svgLoadRule = {
   ]
 };
 
+const workerLoadRule = {
+  test: /\.worker\.js$/,
+  use: {
+    loader: 'worker-loader',
+    options: {
+      filename: '[name].[contenthash].worker.js',
+      chunkFilename: '[id].[contenthash].worker.js',
+    },
+  },
+}
+
 module.exports = override(
   useEslintRc(path.resolve(__dirname, '.eslintrc')),
-  addWebpackModuleRule(svgLoadRule)
+  addWebpackModuleRule(svgLoadRule),
+  addWebpackModuleRule(workerLoadRule),
 );

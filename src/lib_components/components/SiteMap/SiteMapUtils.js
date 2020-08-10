@@ -64,8 +64,6 @@ export const OBSERVATORY_CENTER = [52.68, -110.75];
 export const MIN_CONTAINER_HEIGHT = 300;
 export const MIN_TABLE_MAX_BODY_HEIGHT = 100;
 
-// export const MINIMUM_MAP_DIMENSIONS = { width: 300, height: 200 };
-
 export const KM2_TO_ACRES = 247.10538146717;
 
 // Minimum zoom level at which location hierarchy fetches are done on a per-domain basis
@@ -82,6 +80,9 @@ export const SITE_LOCATION_HIERARCHIES_MIN_ZOOM = 9;
 // For consistency in expressing the sort direction for the table
 export const SORT_DIRECTIONS = { ASC: 'ASC', DESC: 'DESC' };
 
+// For consistency in expressing site terrain
+export const SITE_TERRAINS = { AQUATIC: 'AQUATIC', TERRESTRIAL: 'TERRESTRIAL' };
+
 // For consistency in differentiating discrete sets of data that can be tabulated together.
 // e.g. all LOCATIONS type feature data can coexist in a single table view with a
 // single column definition. But LOCATIONS and SITES shouldn't, as each set has
@@ -97,15 +98,19 @@ export const FEATURE_TYPES = {
   OTHER: 'OTHER', // All features require a type. This catch-all type will not show in the table.
 };
 
-// For consistency in differentiating how feature data are loaded (e.g. by fetch or deferred import)
-export const FEATURE_DATA_LOAD_TYPES = {
-  FETCH: 'FETCH',
-  IMPORT: 'IMPORT',
+// For consistency in differentiating where feature data come from
+// (e.g. various fetch APIs, NeonContext)
+export const FEATURE_DATA_SOURCES = {
+  REST_LOCATIONS_API: 'REST_LOCATIONS_API',
+  GRAPHQL_LOCATIONS_API: 'GRAPHQL_LOCATIONS_API',
+  ARCGIS_ASSETS_API: 'ARCGIS_ASSETS_API',
   NEON_CONTEXT: 'NEON_CONTEXT',
 };
 
 // Subset of FEATURE_TYPES describing all features that are directly selectable
 export const SELECTABLE_FEATURE_TYPES = (({ SITES }) => ({ SITES }))(FEATURE_TYPES);
+
+const SELECTED_ICON_OFFSET = 30; // Number of pixels bigger in one dimension for selected icons
 
 // For consistency in denoting whether all or some of a region's selectable children are selected
 export const SELECTION_PORTIONS = { PARTIAL: 'PARTIAL', TOTAL: 'TOTAL' };
@@ -139,7 +144,7 @@ export const PLOT_SAMPLING_MODULES = {
   hbp: 'Herbaceous Productivity',
   ltr: 'Litter and Fine Woody Debris',
   mam: 'Mammal Abundance and Diversity',
-  mfb: 'MFB', // We don't know what this is...
+  mfb: 'MFB', // We don't know what this is but it does appear in some hierarchies...
   mos: 'Mosquitos',
   mpt: 'Mosquito Pathogens',
   phe: 'Plant Phenology',
@@ -152,8 +157,7 @@ export const PLOT_SAMPLING_MODULES = {
    Icon SVGs
    An importable data structure containing all imported SVGs for map and legend icons
 */
-const SELECTED_ICON_OFFSET = 30; // Number of pixels bigger in one dimension for selected icons
-const LOCATION_ICON_SVG_SHAPES = {
+export const LOCATION_ICON_SVG_SHAPES = {
   CIRCLE: {
     KEY: 'CIRCLE',
     iconSize: [80, 80],
@@ -262,7 +266,7 @@ export const FEATURES = {
     type: FEATURE_TYPES.BOUNDARIES,
     description: '',
     hideByDefault: true,
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
+    dataSource: FEATURE_DATA_SOURCES.NEON_CONTEXT,
     primaryIdOnly: true,
     featureShape: 'Polygon',
     style: { color: '#a067e4' },
@@ -273,7 +277,7 @@ export const FEATURES = {
     type: FEATURE_TYPES.BOUNDARIES,
     description: '',
     hideByDefault: true,
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
+    dataSource: FEATURE_DATA_SOURCES.NEON_CONTEXT,
     primaryIdOnly: true,
     featureShape: 'Polygon',
     style: { color: '#3cdd84' },
@@ -284,7 +288,7 @@ export const FEATURES = {
     nameSingular: 'AOP Flight Box Boundary',
     type: FEATURE_TYPES.BOUNDARIES,
     minZoom: 8,
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
+    dataSource: FEATURE_DATA_SOURCES.ARCGIS_ASSETS_API,
     description: '',
     featureShape: 'Polygon',
     style: { color: '#f0ee75', dashArray: '5, 10' },
@@ -293,15 +297,15 @@ export const FEATURES = {
   AQUATIC_WATERSHEDS: {
     name: 'Watersheds',
     type: FEATURE_TYPES.GROUP,
-    minZoom: 6,
+    minZoom: 7,
     description: '',
   },
   WATERSHED_BOUNDARIES: {
     name: 'Watershed Boundaries',
     nameSingular: 'Watershed Boundary',
     type: FEATURE_TYPES.BOUNDARIES,
-    minZoom: 10,
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
+    minZoom: 7,
+    dataSource: FEATURE_DATA_SOURCES.ARCGIS_ASSETS_API,
     description: '',
     parent: 'AQUATIC_WATERSHEDS',
     featureShape: 'Polygon',
@@ -310,8 +314,8 @@ export const FEATURES = {
   DRAINAGE_LINES: {
     name: 'Drainage Lines',
     type: FEATURE_TYPES.OTHER,
-    minZoom: 8,
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
+    minZoom: 7,
+    dataSource: FEATURE_DATA_SOURCES.ARCGIS_ASSETS_API,
     description: '',
     parent: 'AQUATIC_WATERSHEDS',
     featureShape: 'Polyline',
@@ -322,7 +326,7 @@ export const FEATURES = {
     nameSingular: 'Pour Point',
     type: FEATURE_TYPES.OTHER,
     minZoom: 7,
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
+    dataSource: FEATURE_DATA_SOURCES.ARCGIS_ASSETS_API,
     description: '',
     parent: 'AQUATIC_WATERSHEDS',
     featureShape: 'Marker',
@@ -334,7 +338,7 @@ export const FEATURES = {
     nameSingular: 'Site Sampling Boundary',
     type: FEATURE_TYPES.BOUNDARIES,
     minZoom: 9,
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
+    dataSource: FEATURE_DATA_SOURCES.ARCGIS_ASSETS_API,
     description: 'Terrestrial and Colocated Aquatic Sites',
     parent: 'TERRESTRIAL_SITE_FEATURES',
     featureShape: 'Polygon',
@@ -345,7 +349,7 @@ export const FEATURES = {
     nameSingular: 'Aquatic Site Reach',
     type: FEATURE_TYPES.BOUNDARIES,
     minZoom: 9,
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
+    dataSource: FEATURE_DATA_SOURCES.ARCGIS_ASSETS_API,
     description: '',
     parent: 'AQUATIC_SITE_FEATURES',
     featureShape: 'Polygon',
@@ -356,7 +360,7 @@ export const FEATURES = {
     nameSingular: 'Tower Airshed Boundary',
     type: FEATURE_TYPES.BOUNDARIES,
     minZoom: 10,
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.IMPORT,
+    dataSource: FEATURE_DATA_SOURCES.ARCGIS_ASSETS_API,
     description: '',
     parent: 'TERRESTRIAL_SITE_FEATURES',
     featureShape: 'Polygon',
@@ -366,10 +370,8 @@ export const FEATURES = {
   TERRESTRIAL_SITE_FEATURES: {
     name: 'Terrestrial Site Features',
     type: FEATURE_TYPES.GROUP,
-    minZoom: 9,
+    minZoom: 10,
     description: '',
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
-    matchLocationType: 'OS Plot - all', // Fetches for TOWER_BASE_PLOTS and DISTRIBUTED_BASE_PLOTS
     fetchingForFeatures: ['TOWER_BASE_PLOTS', 'DISTRIBUTED_BASE_PLOTS'],
   },
   TOWERS: {
@@ -377,7 +379,7 @@ export const FEATURES = {
     nameSingular: 'Tower Location',
     type: FEATURE_TYPES.LOCATIONS,
     minZoom: 10,
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'TOWER',
     description: '',
     parent: 'TERRESTRIAL_SITE_FEATURES',
@@ -385,13 +387,14 @@ export const FEATURES = {
     iconScale: 1.8,
     iconSvg: iconTowerSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.DIAMOND.KEY,
+    siteTerrain: SITE_TERRAINS.TERRESTRIAL,
   },
   HUTS: {
     name: 'Huts',
     nameSingular: 'Hut',
     type: FEATURE_TYPES.LOCATIONS,
     minZoom: 10,
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'HUT',
     description: '',
     parent: 'TERRESTRIAL_SITE_FEATURES',
@@ -399,13 +402,14 @@ export const FEATURES = {
     iconScale: 1.4,
     iconSvg: iconHutSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.DIAMOND.KEY,
+    siteTerrain: SITE_TERRAINS.TERRESTRIAL,
   },
   MEGAPITS: {
     name: 'Megapits',
     nameSingular: 'Megapit',
     type: FEATURE_TYPES.LOCATIONS,
     minZoom: 10,
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'MEGAPIT',
     description: '',
     parent: 'TERRESTRIAL_SITE_FEATURES',
@@ -413,6 +417,7 @@ export const FEATURES = {
     iconScale: 1.8,
     iconSvg: iconMegapitSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.DIAMOND.KEY,
+    siteTerrain: SITE_TERRAINS.TERRESTRIAL,
   },
   // TOWER_PLOTS Group
   TOWER_PLOTS: {
@@ -428,39 +433,46 @@ export const FEATURES = {
     type: FEATURE_TYPES.LOCATIONS,
     description: 'Plant phenology observations are made along a transect loop or plot in or around the primary airshed. When possible, one plot is established north of the tower to calibrate phenology camera images captured from sensors on the tower. If there is insufficient space north of the tower for a 200m x 200m plot or if the vegetation does not match the primary airshed an additional plot is established.',
     parent: 'TOWER_PLOTS',
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'OS Plot - phe',
     featureShape: 'Marker',
+    minZoom: 13,
     focusZoom: 16,
     iconScale: 1.5,
     iconSvg: iconTowerPhenologyPlotSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
+    siteTerrain: SITE_TERRAINS.TERRESTRIAL,
   },
-  TOWER_BASE_PLOTS: { // Fetched by parent since tower base plots share type
+  TOWER_BASE_PLOTS: {
     name: 'Tower Base Plots',
     nameSingular: 'Tower Base Plot',
     type: FEATURE_TYPES.LOCATIONS,
     description: 'Tower plots support a variety of plant productivity, plant diversity, soil, biogeochemistry and microbe sampling. The number and size of Tower Base Plots is determined by the vegetation of the tower airshed. In forested sites, twenty 40m x 40m plots are established. In herbaceous sites, thirty 20m x 20m plots are established. Of these thirty tower plots, four have additional space to support soil sampling.',
     parent: 'TOWER_PLOTS',
+    dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
+    matchLocationType: 'OS Plot - all',
     featureShape: 'Marker',
+    minZoom: 14,
     focusZoom: 18,
     iconSvg: iconTowerBasePlotSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
+    siteTerrain: SITE_TERRAINS.TERRESTRIAL,
   },
   TOWER_SOIL_PLOTS: {
     name: 'Tower Soil Plots',
     nameSingular: 'Tower Soil Plot',
     type: FEATURE_TYPES.LOCATIONS,
-    minZoom: 10,
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'SOIL_PLOT',
     description: '',
     parent: 'TOWER_PLOTS',
     featureShape: 'Marker',
+    minZoom: 14,
     focusZoom: 18,
     iconScale: 0.7,
     iconSvg: iconTowerSoilPlotSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
+    siteTerrain: SITE_TERRAINS.TERRESTRIAL,
   },
   // DISTRIBUTED_PLOTS Group
   DISTRIBUTED_PLOTS: {
@@ -476,13 +488,14 @@ export const FEATURES = {
     type: FEATURE_TYPES.LOCATIONS,
     description: 'Bird Grids consist of 9 sampling points within a 500m x 500m square. Each point is 250m apart. Where possible, Bird Grids are colocated with Distributed Base Plots by placing the Bird Grid center (B2) in close proximity to the center of the Base Plot. At smaller sites, a single point count is done at the south-west corner (point 21) of the Distributed Base Plot.',
     parent: 'DISTRIBUTED_PLOTS',
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'OS Plot - brd',
     featureShape: 'Marker',
     iconScale: 1.8,
     focusZoom: 16,
     iconSvg: iconDistributedBirdGridSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
+    siteTerrain: SITE_TERRAINS.TERRESTRIAL,
   },
   DISTRIBUTED_MAMMAL_GRIDS: {
     name: 'Distributed Mammal Grids',
@@ -490,25 +503,29 @@ export const FEATURES = {
     type: FEATURE_TYPES.LOCATIONS,
     description: 'Mammal Grids are 90m x 90m and include 100 trapping locations at 10m spacing. Where possible, these grids are colocated with Distributed Base Plots by placing them a specified distance (150m +/- 50m) and random direction from the center of the Base Plot.',
     parent: 'DISTRIBUTED_PLOTS',
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'OS Plot - mam',
     featureShape: 'Marker',
     iconScale: 1.4,
     focusZoom: 17,
     iconSvg: iconDistributedMammalGridSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
+    siteTerrain: SITE_TERRAINS.TERRESTRIAL,
   },
-  DISTRIBUTED_BASE_PLOTS: { // Fetched by parent since tower base plots share type
+  DISTRIBUTED_BASE_PLOTS: {
     name: 'Distributed Base Plots',
     nameSingular: 'Distributed Base Plot',
     type: FEATURE_TYPES.LOCATIONS,
     description: 'Distributed Base Plots support a variety of plant productivity, plant diversity, soil, biogeochemistry, microbe and beetle sampling. Distributed Base Plots are 40m x 40m.',
     parent: 'DISTRIBUTED_PLOTS',
     featureShape: 'Marker',
+    dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
+    matchLocationType: 'OS Plot - all',
     iconScale: 1.2,
     focusZoom: 17,
     iconSvg: iconDistributedBasePlotSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
+    siteTerrain: SITE_TERRAINS.TERRESTRIAL,
   },
   DISTRIBUTED_TICK_PLOTS: {
     name: 'Distributed Tick Plots',
@@ -516,13 +533,14 @@ export const FEATURES = {
     type: FEATURE_TYPES.LOCATIONS,
     description: 'Tick Plots are sampled by conducting cloth dragging or flagging around the perimeter of a 40m x 40m plot. Tick plots are colocated with Distributed Base Plots by placing them a specified distance (150m +/- 15m) and random direction from the center of the Base Plot.',
     parent: 'DISTRIBUTED_PLOTS',
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'OS Plot - tck',
     featureShape: 'Marker',
     iconScale: 1.2,
     focusZoom: 17,
     iconSvg: iconDistributedTickPlotSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
+    siteTerrain: SITE_TERRAINS.TERRESTRIAL,
   },
   DISTRIBUTED_MOSQUITO_POINTS: {
     name: 'Distributed Mosquito Points',
@@ -530,12 +548,13 @@ export const FEATURES = {
     type: FEATURE_TYPES.LOCATIONS,
     description: 'At each Mosquito Point, one CO2 trap is established. Due to the frequency of sampling and temporal sampling constraints, Mosquito Points are located within 45m of roads.',
     parent: 'DISTRIBUTED_PLOTS',
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'OS Plot - mos',
     iconSvg: iconDistributedMosquitoPointSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
     featureShape: 'Marker',
     focusZoom: 18,
+    siteTerrain: SITE_TERRAINS.TERRESTRIAL,
   },
   // Plot Boundaries
   PLOT_BOUNDARIES: {
@@ -552,12 +571,13 @@ export const FEATURES = {
     description: 'PARENT',
     parent: 'PLOT_BOUNDARIES',
     parentDataFeatureKey: 'TOWER_PHENOLOGY_PLOTS',
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
-    matchLocationPattern: /\.phe\.(NW|NE|SE|SW)$/,
+    dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
+    matchLocationName: /\.phe\.(NW|NE|SE|SW)$/,
     matchLocationCoordinateMap: ['NW', 'NE', 'SE', 'SW'],
     minZoom: 15,
     featureShape: 'Polygon',
     style: { color: '#59a14f', dashArray: '1, 12' },
+    siteTerrain: SITE_TERRAINS.TERRESTRIAL,
   },
   TOWER_SOIL_PLOT_BOUNDARIES: { // Comes back as data from TOWER_SOIL_PLOTS fetches so no fetch here
     name: 'Tower Soil Plot Boundaries',
@@ -577,12 +597,13 @@ export const FEATURES = {
     description: 'PARENT',
     parent: 'PLOT_BOUNDARIES',
     parentDataFeatureKey: 'DISTRIBUTED_BIRD_GRIDS',
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
-    matchLocationPattern: /\.brd\.(A1|A3|C3|C1)$/,
+    dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
+    matchLocationName: /\.brd\.(A1|A3|C3|C1)$/,
     matchLocationCoordinateMap: ['A1', 'A3', 'C3', 'C1'],
     minZoom: 14,
     featureShape: 'Polygon',
     style: { color: '#f28e2c', dashArray: '1, 12' },
+    siteTerrain: SITE_TERRAINS.TERRESTRIAL,
   },
   DISTRIBUTED_MAMMAL_GRID_BOUNDARIES: {
     name: 'Mammal Grid Boundaries',
@@ -591,12 +612,13 @@ export const FEATURES = {
     description: 'PARENT',
     parent: 'PLOT_BOUNDARIES',
     parentDataFeatureKey: 'DISTRIBUTED_MAMMAL_GRIDS',
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
-    matchLocationPattern: /\.mam\.(A1|A10|J10|J1)$/,
+    dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
+    matchLocationName: /\.mam\.(A1|A10|J10|J1)$/,
     matchLocationCoordinateMap: ['A1', 'A10', 'J10', 'J1'],
     minZoom: 16,
     featureShape: 'Polygon',
     style: { color: '#925214', dashArray: '1, 12' },
+    siteTerrain: SITE_TERRAINS.TERRESTRIAL,
   },
   DISTRIBUTED_TICK_PLOT_BOUNDARIES: {
     name: 'Tick Plot Boundaries',
@@ -605,18 +627,19 @@ export const FEATURES = {
     description: 'PARENT',
     parent: 'PLOT_BOUNDARIES',
     parentDataFeatureKey: 'DISTRIBUTED_TICK_PLOTS',
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
-    matchLocationPattern: /\.tck\.(57|61|25|21)$/,
+    dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
+    matchLocationName: /\.tck\.(57|61|25|21)$/,
     matchLocationCoordinateMap: ['57', '61', '25', '21'],
     minZoom: 17,
     featureShape: 'Polygon',
     style: { color: '#000000', dashArray: '1, 12' },
+    siteTerrain: SITE_TERRAINS.TERRESTRIAL,
   },
   // Aquatic Site Features
   AQUATIC_SITE_FEATURES: {
     name: 'Aquatic Site Features',
     type: FEATURE_TYPES.GROUP,
-    minZoom: 14,
+    minZoom: 10,
     description: '',
   },
   AQUATIC_BENCHMARKS: {
@@ -624,7 +647,7 @@ export const FEATURES = {
     nameSingular: 'Benchmark',
     type: FEATURE_TYPES.LOCATIONS,
     minZoom: 10,
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'AOS benchmark named location type',
     description: '',
     parent: 'AQUATIC_SITE_FEATURES',
@@ -632,6 +655,7 @@ export const FEATURES = {
     iconScale: 1.3,
     iconSvg: iconBenchmarkSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.DIAMOND.KEY,
+    siteTerrain: SITE_TERRAINS.AQUATIC,
   },
   AQUATIC_AUTOMATED_INSTRUMENTS: {
     name: 'Automated Instuments',
@@ -652,20 +676,21 @@ export const FEATURES = {
     nameSingular: 'Riparian Assessment',
     type: FEATURE_TYPES.LOCATIONS,
     minZoom: 11,
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'AOS riparian named location type',
     description: 'Number of locations for assessment of riparian vegetation composition and physical structure vary by site type. Lakes and non-wadeable rivers have ten locations. Wadeable streams have 20 locations and also include assessment of riparian vegetation percent cover in wadeable streams.',
     parent: 'AQUATIC_OBSERVATIONAL_SAMPLING',
     featureShape: 'Marker',
     iconSvg: iconRiparianAssessmentSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
+    siteTerrain: SITE_TERRAINS.AQUATIC,
   },
   AQUATIC_WET_DEPOSITION_POINTS: {
     name: 'Wet Deposition Points',
     nameSingular: 'Wet Deposition Point',
     type: FEATURE_TYPES.LOCATIONS,
     minZoom: 11,
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'AOS wet deposition named location type',
     description: '',
     parent: 'AQUATIC_OBSERVATIONAL_SAMPLING',
@@ -673,13 +698,14 @@ export const FEATURES = {
     iconScale: 1.2,
     iconSvg: iconWetDepositionPointSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
+    siteTerrain: SITE_TERRAINS.AQUATIC,
   },
   AQUATIC_GROUNDWATER_WELLS: {
     name: 'Groundwater Wells',
     nameSingular: 'Groundwater Well',
     type: FEATURE_TYPES.LOCATIONS,
     minZoom: 11,
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'GROUNDWATER_WELL',
     description: 'Each site has up to eight groundwater wells outfitted with sensors that measure high temporal resolution groundwater elevation (pressure transducer-based), temperature, and specific conductance.',
     parent: 'AQUATIC_AUTOMATED_INSTRUMENTS',
@@ -687,13 +713,14 @@ export const FEATURES = {
     iconScale: 1.2,
     iconSvg: iconGroundwaterWellSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
+    siteTerrain: SITE_TERRAINS.AQUATIC,
   },
   AQUATIC_METEOROLOGICAL_STATIONS: {
     name: 'Meteorological Stations',
     nameSingular: 'Meteorological Station',
     type: FEATURE_TYPES.LOCATIONS,
     minZoom: 10,
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'MET_STATION',
     description: 'A meteorological station is located on the shore of most aquatic sites and collects data comparable with flux tower measurements at terrestrial sites. Lake and wadeable rivers also have an above water met. station on buoy. These data are unique with different sensors and data frequencies due to power and data storage constraints.',
     parent: 'AQUATIC_AUTOMATED_INSTRUMENTS',
@@ -701,39 +728,42 @@ export const FEATURES = {
     iconScale: 1.5,
     iconSvg: iconMeteorologicalStationSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
+    siteTerrain: SITE_TERRAINS.AQUATIC,
   },
   AQUATIC_DISCHARGE_POINTS: {
     name: 'Discharge Points',
     nameSingular: 'Discharge Point',
     type: FEATURE_TYPES.LOCATIONS,
     minZoom: 11,
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'AOS discharge named location type',
     description: '',
     parent: 'AQUATIC_OBSERVATIONAL_SAMPLING',
     featureShape: 'Marker',
     iconSvg: iconDischargePointSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
+    siteTerrain: SITE_TERRAINS.AQUATIC,
   },
   AQUATIC_FISH_POINTS: {
     name: 'Fish Points',
     nameSingular: 'Fish Point',
     type: FEATURE_TYPES.LOCATIONS,
     minZoom: 11,
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'AOS fish named location type',
     description: '',
     parent: 'AQUATIC_OBSERVATIONAL_SAMPLING',
     featureShape: 'Marker',
     iconSvg: iconFishPointSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
+    siteTerrain: SITE_TERRAINS.AQUATIC,
   },
   AQUATIC_PLANT_TRANSECTS: {
     name: 'Plant Transects',
     nameSingular: 'Plant Transect',
     type: FEATURE_TYPES.LOCATIONS,
     minZoom: 11,
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'AOS plant named location type',
     description: '',
     parent: 'AQUATIC_OBSERVATIONAL_SAMPLING',
@@ -741,39 +771,42 @@ export const FEATURES = {
     iconScale: 1.3,
     iconSvg: iconPlantTransectSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
+    siteTerrain: SITE_TERRAINS.AQUATIC,
   },
   AQUATIC_SEDIMENT_POINTS: {
     name: 'Sediment Points',
     nameSingular: 'Sediment Point',
     type: FEATURE_TYPES.LOCATIONS,
     minZoom: 11,
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'AOS sediment named location type',
     description: '',
     parent: 'AQUATIC_OBSERVATIONAL_SAMPLING',
     featureShape: 'Marker',
     iconSvg: iconSedimentPointSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
+    siteTerrain: SITE_TERRAINS.AQUATIC,
   },
   AQUATIC_STAFF_GAUGES: {
     name: 'Staff Gauges',
     nameSingular: 'Staff Gauge',
     type: FEATURE_TYPES.LOCATIONS,
     minZoom: 11,
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'STAFF_GAUGE',
     description: 'The staff gauge measures gauge height, in meters, measured at lakes, wadeable rivers and non-wadeable streams. A phenocam is installed near most gauges. It collects RGB and IR images of the lake, river, or stream vegetation, stream surface, and stream gauge every 15 minutes.',
     parent: 'AQUATIC_AUTOMATED_INSTRUMENTS',
     featureShape: 'Marker',
     iconSvg: iconStaffGaugeSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
+    siteTerrain: SITE_TERRAINS.AQUATIC,
   },
   AQUATIC_SENSOR_STATIONS: {
     name: 'Sensor Stations',
     nameSingular: 'Sensor Station',
     type: FEATURE_TYPES.LOCATIONS,
     minZoom: 10,
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: /^(S1|S2|INLET|OUTLET)_LOC$/,
     description: 'Wadeable streams have a sensor station near the top of the reach and the bottom of the reach; non-wadeable rivers have a sensor station on a buoy and one near the bank; Lakes have an inlet sensor station, an outlet sensor station and a sensor station on a buoy. Data collection varies by type of sensor station.',
     parent: 'AQUATIC_AUTOMATED_INSTRUMENTS',
@@ -781,13 +814,14 @@ export const FEATURES = {
     iconScale: 1.1,
     iconSvg: iconSensorStationSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
+    siteTerrain: SITE_TERRAINS.AQUATIC,
   },
   AQUATIC_BUOYS: {
     name: 'Buoys',
     nameSingular: 'Buoy',
     type: FEATURE_TYPES.LOCATIONS,
     minZoom: 10,
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.FETCH,
+    dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'BUOY',
     description: '',
     parent: 'AQUATIC_AUTOMATED_INSTRUMENTS',
@@ -795,6 +829,7 @@ export const FEATURES = {
     iconScale: 1.2,
     iconSvg: iconBuoySVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
+    siteTerrain: SITE_TERRAINS.AQUATIC,
   },
   // SITE_MARKERS Group
   SITE_MARKERS: {
@@ -810,7 +845,7 @@ export const FEATURES = {
     description: 'Land-based; fixed location',
     parent: 'SITE_MARKERS',
     attributes: { type: 'CORE', terrain: 'TERRESTRIAL' },
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
+    dataSource: FEATURE_DATA_SOURCES.NEON_CONTEXT,
     primaryIdOnly: true,
     featureShape: 'Marker',
     iconScale: 1,
@@ -825,7 +860,7 @@ export const FEATURES = {
     description: 'Land-based; location may change',
     parent: 'SITE_MARKERS',
     attributes: { type: 'RELOCATABLE', terrain: 'TERRESTRIAL' },
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
+    dataSource: FEATURE_DATA_SOURCES.NEON_CONTEXT,
     primaryIdOnly: true,
     featureShape: 'Marker',
     iconScale: 1,
@@ -840,7 +875,7 @@ export const FEATURES = {
     description: 'Water-based; fixed location',
     parent: 'SITE_MARKERS',
     attributes: { type: 'CORE', terrain: 'AQUATIC' },
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
+    dataSource: FEATURE_DATA_SOURCES.NEON_CONTEXT,
     primaryIdOnly: true,
     featureShape: 'Marker',
     iconScale: 1,
@@ -855,7 +890,7 @@ export const FEATURES = {
     description: 'Water-based; location may change',
     parent: 'SITE_MARKERS',
     attributes: { type: 'RELOCATABLE', terrain: 'AQUATIC' },
-    dataLoadType: FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT,
+    dataSource: FEATURE_DATA_SOURCES.NEON_CONTEXT,
     primaryIdOnly: true,
     featureShape: 'Marker',
     iconScale: 1,
@@ -866,6 +901,38 @@ export const FEATURES = {
 };
 // Replicate keys as attributes to completely eliminate the need to write a feature key string
 Object.keys(FEATURES).forEach((key) => { FEATURES[key].KEY = key; });
+
+/**
+   GRAPHQL_LOCATIONS_API Constants
+   The Locations API groups fetchable assets by minZoom (i.e. all assets for all locations features
+   with the same minZoom are fetched together, for a given field site). Thus we want lookups of
+   minZoom by feature key and vice versa. These values never change, so derive them now.
+*/
+// A mapping of feature key to minZoom for GRAPHQL_LOCATIONS_API dataSource features
+const FEATURES_TO_MINZOOM_MAP = {};
+Object.keys(FEATURES)
+  .filter(featureKey => (
+    FEATURES[featureKey].dataSource === FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API
+  ))
+  .forEach((featureKey) => {
+    const feature = FEATURES[featureKey];
+    const minZoom = feature.minZoom || (FEATURES[feature.parent] || {}).minZoom || 0;
+    FEATURES_TO_MINZOOM_MAP[featureKey] = minZoom;
+  });
+
+// A mapping of minZoom level to feature keys (inversion of FEATURES_MINZOOM_MAP)
+const MINZOOM_TO_FEATURES_MAP = {};
+Object.keys(FEATURES_TO_MINZOOM_MAP).forEach((featureKey) => {
+  const minZoom = FEATURES_TO_MINZOOM_MAP[featureKey];
+  if (!MINZOOM_TO_FEATURES_MAP[minZoom]) { MINZOOM_TO_FEATURES_MAP[minZoom] = []; }
+  MINZOOM_TO_FEATURES_MAP[minZoom].push(featureKey);
+});
+
+// Roll all that up and export it
+export const GRAPHQL_LOCATIONS_API_CONSTANTS = {
+  FEATURES_TO_MINZOOM_MAP,
+  MINZOOM_TO_FEATURES_MAP,
+};
 
 // Common colors for selecatble boundary features
 export const BOUNDARY_COLORS = {
@@ -979,10 +1046,6 @@ Object.keys(TILE_LAYERS).forEach((key) => {
 });
 
 /**
-   Filters
-*/
-
-/**
    Default State
 */
 const featureIsHiddenByDefault = (key) => {
@@ -1043,11 +1106,13 @@ export const DEFAULT_STATE = {
   },
   featureDataFetchesHasAwaiting: false, // Boolean: track whether any data fetches are awaiting call
   featureDataFetches: Object.fromEntries(
-    Object.keys(FEATURE_TYPES).map(featureType => [featureType, {}]),
+    Object.keys(FEATURE_DATA_SOURCES)
+      .filter(dataSource => dataSource !== FEATURE_DATA_SOURCES.NEON_CONTEXT)
+      .map(dataSource => [dataSource, {}]),
   ),
   featureData: Object.fromEntries(
     Object.keys(FEATURE_TYPES)
-      .filter(type => type !== FEATURE_TYPES.SAMPLING_POINTS)
+      .filter(featureType => featureType !== FEATURE_TYPES.SAMPLING_POINTS)
       .map(featureType => [featureType, {}]),
   ),
   sites: {}, // Sites data is split into 4 features making it hard to look up, so extra refs here
@@ -1064,25 +1129,42 @@ export const DEFAULT_STATE = {
     },
   },
 };
-// Initialize featureData and featureDataFetches objects for all features that have a dataLoadType
-// (Note that sampling boundaries store data with their parents so we only want fetches for those)
+
+// Initialize featureData and featureDataFetches objects for all features that have a dataSource
 Object.keys(FEATURES)
   .filter(featureKey => (
-    Object.keys(FEATURE_DATA_LOAD_TYPES).includes(FEATURES[featureKey].dataLoadType)
+    Object.keys(FEATURE_DATA_SOURCES).includes(FEATURES[featureKey].dataSource)
   ))
   .forEach((featureKey) => {
-    const { type: featureType, dataLoadType } = FEATURES[featureKey];
-    if (FEATURES[featureKey].type !== FEATURE_TYPES.SAMPLING_POINTS) {
+    const { type: featureType, dataSource } = FEATURES[featureKey];
+    // Initialize featureData
+    // SAMPLING_POINTS are stored as geometry of their parent locations so don't need initialization
+    if (featureType !== FEATURE_TYPES.SAMPLING_POINTS) {
       DEFAULT_STATE.featureData[featureType][featureKey] = {};
     }
-    if (dataLoadType !== FEATURE_DATA_LOAD_TYPES.NEON_CONTEXT) {
-      DEFAULT_STATE.featureDataFetches[featureType][featureKey] = {};
+    // Initialize featureDataFetches based on dataSource
+    // ARCGIS_ASSETS_API and REST_LOCATIONS_API: grouped by feature key
+    // GRAPHQL_LOCATIONS_API: grouped by feature minZoom
+    if ([
+      FEATURE_DATA_SOURCES.ARCGIS_ASSETS_API,
+      FEATURE_DATA_SOURCES.REST_LOCATIONS_API,
+    ].includes(dataSource)) {
+      DEFAULT_STATE.featureDataFetches[dataSource][featureKey] = {};
+    }
+    if (dataSource === FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API) {
+      const minZoom = GRAPHQL_LOCATIONS_API_CONSTANTS.FEATURES_TO_MINZOOM_MAP[featureKey];
+      DEFAULT_STATE.featureDataFetches[dataSource][minZoom] = {};
     }
   });
+// Location Hierarchies (REST_LOCATIONS_API, not in the FEATURES structure since it doesn't render)
+// eslint-disable-next-line max-len
+DEFAULT_STATE.featureDataFetches[FEATURE_DATA_SOURCES.REST_LOCATIONS_API][FEATURE_TYPES.SITE_LOCATION_HIERARCHIES] = {};
+
 // Initialize all selectable features in selection state
 Object.keys(SELECTABLE_FEATURE_TYPES).forEach((selection) => {
   DEFAULT_STATE.selection[selection] = new Set();
 });
+
 // Initialize feature availability
 const availabilityState = calculateFeatureAvailability(DEFAULT_STATE);
 DEFAULT_STATE.filters.features.available = { ...availabilityState.filters.features.available };
@@ -1189,148 +1271,13 @@ export const SITE_MAP_DEFAULT_PROPS = {
 };
 
 /**
-   Aspect Ratio
-*/
-const dynamicAspectRatios = [
-  '1:2', '9:16', '2:3', '5:7', '4:5', '1:1', '5:4', '7:5', '3:2', '16:9', '2:1', '2.5:1', '3:1',
-].map((ratio) => {
-  const parts = /^([\d.]+):([\d.]+)$/.exec(ratio) || ['', '1', '1'];
-  return parseFloat(parts[2]) / parseFloat(parts[1]);
-});
-
-export const getDynamicAspectRatio = (unusableVerticalSpace = 0) => {
-  const buffer = 100; // Approximate height of the filters row and a bit of margin
-  const usableVericalSpace = window.innerHeight + buffer - unusableVerticalSpace;
-  const windowAspectRatio = Math.max(usableVericalSpace, 0) / (window.innerWidth || 1);
-  const arIdx = dynamicAspectRatios.findIndex(ar => ar < windowAspectRatio);
-  return arIdx === -1
-    ? dynamicAspectRatios[dynamicAspectRatios.length - 1]
-    : dynamicAspectRatios[arIdx];
-};
-
-/**
- Function to parse a locationProperties value from a locations API response into an object with
- only white-listed keys present. For example:
-   locationProperties": [
-     {
-       "locationPropertyName": "Value for Foo Bar",
-       "locationPropertyValue": 123
-     }
-   ]
-  becomes:
-   { fooBar: 123 }
-*/
-const parseLocationProperties = (inProps = [], whiteList = []) => {
-  const outProps = {};
-  const cleanPropKey = (inKey = '') => {
-    const words = inKey.substr(10)
-      .replace(/[^A-Za-z0-9_ -]/g, '')
-      .replace(/[_-]/g, ' ')
-      .toLowerCase()
-      .split(' ');
-    return words.map((word, idx) => (
-      idx === 0 ? word : `${word.substr(0, 1).toUpperCase()}${word.substr(1)}`
-    )).join('');
-  };
-  if (!Array.isArray(inProps) || !inProps.length) { return outProps; }
-  inProps.forEach((prop) => {
-    const inPropKeys = Object.keys(prop);
-    if (
-      inPropKeys.length !== 2
-        || !inPropKeys.includes('locationPropertyName')
-        || !inPropKeys.includes('locationPropertyValue')
-        || !(typeof prop.locationPropertyName === 'string')
-    ) { return; }
-    const propKey = cleanPropKey(prop.locationPropertyName);
-    if (propKey.length && (!whiteList.length || whiteList.includes(propKey))) {
-      outProps[propKey] = prop.locationPropertyValue;
-    }
-  });
-  return outProps;
-};
-
-const DEFAULT_LOCATION_PROPERTIES_WHITELIST = [
-  'maximumElevation',
-  'minimumElevation',
-  'nationalLandCoverDatabase2001',
-  'plotDimensions',
-  'plotId',
-  'plotSize',
-  'plotSubtype',
-  'plotType',
-  'slopeAspect',
-  'slopeGradient',
-  'soilTypeOrder,',
-];
-
-export const parseLocationData = (data = {}) => {
-  const {
-    siteCode = null,
-    locationType: type = null,
-    locationDescription: description = null,
-    locationDecimalLatitude: latitude = null,
-    locationDecimalLongitude: longitude = null,
-    locationElevation: elevation = null,
-    locationPolygon: polygon = null,
-    locationProperties = {},
-    locationChildren: children = [],
-  } = data;
-  const parsed = {
-    type,
-    description,
-    siteCode,
-    children,
-    ...parseLocationProperties(locationProperties, DEFAULT_LOCATION_PROPERTIES_WHITELIST),
-  };
-  if (elevation !== null) { parsed.elevation = elevation; }
-  if (latitude !== null && longitude !== null) {
-    parsed.latitude = latitude;
-    parsed.longitude = longitude;
-  }
-  if (polygon !== null) {
-    parsed.geometry = {
-      coordinates: polygon.coordinates.map(c => [c.latitude, c.longitude]),
-    };
-  }
-  // Have geometry but no lat/lon - calculate a basic lat/lon center for icon positioning
-  if (
-    !['latitude', 'longitude'].every(k => Object.keys(parsed).includes(k))
-      && parsed.geometry && parsed.geometry.coordinates
-  ) {
-    [parsed.latitude, parsed.longitude] = parsed.geometry.coordinates
-      .reduce((acc, cur) => [acc[0] + cur[0], acc[1] + cur[1]], [0, 0])
-      .map(c => c / parsed.geometry.coordinates.length);
-  }
-  // Special case: set plotType TOWER_SOIL_PLOTS (not present in locations API)
-  if (parsed.type === FEATURES.TOWER_SOIL_PLOTS.matchLocationType) {
-    parsed.plotType = 'tower';
-  }
-  return parsed;
-};
-
-export const parseLocationHierarchy = (inHierarchy, parent = null) => {
-  let outHierarchy = {};
-  const name = inHierarchy.locationParentHierarchy ? null : inHierarchy.locationName;
-  const description = inHierarchy.locationDescription || null;
-  const type = inHierarchy.locationType || null;
-  if (description.includes('Not Used')) { return outHierarchy; }
-  if (name !== null) { outHierarchy[name] = { type, description, parent }; }
-  inHierarchy.locationChildHierarchy.forEach((subLocation) => {
-    outHierarchy = {
-      ...outHierarchy,
-      ...parseLocationHierarchy(subLocation, name),
-    };
-  });
-  return outHierarchy;
-};
-
-/**
-   Map Icon Functions
+   Icon Utility Functions
    These appear here because of how Leaflet handles icons. Each icon must be a L.Icon instance,
    but many of our icons repeat. We also want to scale our icons with the zoom level. As such,
    we generate a stat structure containing only one instance of each distinct icon type scaled
    to the current zoom level and keep that in state. It is regenerated any time the zoom changes.
 */
+// Get a single zoomed Leaflet icon instance
 const getZoomedIcon = (
   featureKey = null,
   zoom = 3,
@@ -1477,6 +1424,26 @@ export const getMapStateForFocusLocation = (state = {}) => {
     };
   }
   return newState.map;
+};
+
+/**
+   Aspect Ratio
+*/
+const dynamicAspectRatios = [
+  '1:2', '9:16', '2:3', '5:7', '4:5', '1:1', '5:4', '7:5', '3:2', '16:9', '2:1', '2.5:1', '3:1',
+].map((ratio) => {
+  const parts = /^([\d.]+):([\d.]+)$/.exec(ratio) || ['', '1', '1'];
+  return parseFloat(parts[2]) / parseFloat(parts[1]);
+});
+
+export const getDynamicAspectRatio = (unusableVerticalSpace = 0) => {
+  const buffer = 100; // Approximate height of the filters row and a bit of margin
+  const usableVericalSpace = window.innerHeight + buffer - unusableVerticalSpace;
+  const windowAspectRatio = Math.max(usableVericalSpace, 0) / (window.innerWidth || 1);
+  const arIdx = dynamicAspectRatios.findIndex(ar => ar < windowAspectRatio);
+  return arIdx === -1
+    ? dynamicAspectRatios[dynamicAspectRatios.length - 1]
+    : dynamicAspectRatios[arIdx];
 };
 
 export const boundsAreValid = bounds => (

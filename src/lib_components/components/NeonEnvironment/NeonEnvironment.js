@@ -1,3 +1,6 @@
+/* eslint-disable no-restricted-globals */
+/* global window, self */
+
 // Names of all environment variables that MUST be explicitly defined for the
 // environment to be reported as "valid". These are evnironment variables
 // that are expected to be referenced by all apps. Standard vars present in all
@@ -38,6 +41,9 @@ export const optionalEnvironmentVars = [
   'REACT_APP_FOREIGN_LOCATION',
 ];
 
+// Temporary paths that shouldn't need to propogate to environment files until made more permanent
+const REACT_APP_NEON_PATH_ARCGIS_ASSETS_API = '/arcgis-assets';
+
 const EnvType = {
   DEV: 'development',
   PROD: 'production',
@@ -67,6 +73,7 @@ const NeonEnvironment = {
     products: () => process.env.REACT_APP_NEON_PATH_PRODUCTS_API,
     sites: () => process.env.REACT_APP_NEON_PATH_SITES_API,
     locations: () => process.env.REACT_APP_NEON_PATH_LOCATIONS_API,
+    arcgisAssets: () => REACT_APP_NEON_PATH_ARCGIS_ASSETS_API,
   },
 
   getApiLdPath: {
@@ -94,17 +101,24 @@ const NeonEnvironment = {
    * Gets the window.NEON_SERVER_DATA injected from the server environment.
    * @return {Object} The structured server data object
    */
-  getNeonServerData: () => (
-    window.NEON_SERVER_DATA
-      ? window.NEON_SERVER_DATA
-      : null
-  ),
+  getNeonServerData: () => {
+    if (typeof WorkerGlobalScope === 'function') {
+      return self.NEON_SERVER_DATA ? self.NEON_SERVER_DATA : null;
+    }
+    if (typeof window === 'object') {
+      return window.NEON_SERVER_DATA ? window.NEON_SERVER_DATA : null;
+    }
+    return null;
+  },
 
   getHost: () => {
     if (
       (NeonEnvironment.isDevEnv || NeonEnvironment.isForeignEnv)
         && NeonEnvironment.getHostOverride()) {
       return NeonEnvironment.getHostOverride();
+    }
+    if (typeof WorkerGlobalScope === 'function' && typeof self.location === 'object') {
+      return `${self.location.protocol}//${self.location.host}`;
     }
     return `${window.location.protocol}//${window.location.host}`;
   },

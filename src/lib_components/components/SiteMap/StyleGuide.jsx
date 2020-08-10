@@ -2,6 +2,8 @@
 
 import React from 'react';
 
+import cloneDeep from 'lodash/cloneDeep';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 import Link from '@material-ui/core/Link';
@@ -246,7 +248,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
       </DocBlock>
 
       <ExampleBlock>
-        <SiteMap />
+        <SiteMap location="BART" />
       </ExampleBlock>
       <CodeBlock>
         {`

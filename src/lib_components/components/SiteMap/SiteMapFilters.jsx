@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import ExpandUpIcon from '@material-ui/icons/ExpandLess';
 import ExpandDownIcon from '@material-ui/icons/ExpandMore';
@@ -95,6 +96,10 @@ const SiteMapFilters = () => {
     : { marginTop: Theme.spacing(1) };
   const openIcon = filters.position === 'top' ? <ExpandDownIcon /> : <ExpandUpIcon />;
   const closeIcon = filters.position === 'top' ? <ExpandUpIcon /> : <ExpandDownIcon />;
+  const viewTooltips = {
+    [VIEWS.MAP]: 'Show the map',
+    [VIEWS.TABLE]: 'Show a table of all locations currently visible in the map',
+  };
   return (
     <React.Fragment>
       <div className={classes.row} style={rowStyle}>
@@ -106,20 +111,39 @@ const SiteMapFilters = () => {
           onChange={handleChangeView}
         >
           {Object.keys(VIEWS).map(key => (
-            <ToggleButton key={key} value={key} data-selenium={`sitemap-viewButton-${key}`}>
-              {key}
-            </ToggleButton>
+            <Tooltip
+              key={key}
+              title={viewTooltips[key]}
+              enterDelay={500}
+              enterNextDelay={200}
+              placement={filters.position === 'top' ? 'bottom-start' : 'top-start'}
+            >
+              <ToggleButton
+                value={key}
+                selected={state.view.current === key}
+                data-selenium={`sitemap-viewButton-${key}`}
+              >
+                {key}
+              </ToggleButton>
+            </Tooltip>
           ))}
         </ToggleButtonGroup>
-        <Button
-          color="primary"
-          variant={filters.features.open ? 'contained' : 'outlined'}
-          endIcon={filters.features.open ? closeIcon : openIcon}
-          onClick={toggleFeatures}
-          data-selenium="sitemap-featuresButton"
+        <Tooltip
+          enterDelay={500}
+          enterNextDelay={200}
+          title="Toggle visibility of the list of features (the legend)"
+          placement={filters.position === 'top' ? 'bottom-end' : 'top-end'}
         >
-          Features
-        </Button>
+          <Button
+            color="primary"
+            variant={filters.features.open ? 'contained' : 'outlined'}
+            endIcon={filters.features.open ? closeIcon : openIcon}
+            onClick={toggleFeatures}
+            data-selenium="sitemap-featuresButton"
+          >
+            Features
+          </Button>
+        </Tooltip>
       </div>
       {renderFocusLocationForm()}
     </React.Fragment>

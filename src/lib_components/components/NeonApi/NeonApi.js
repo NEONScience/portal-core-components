@@ -125,6 +125,16 @@ const NeonApi = {
   getLocationObservable: location => (
     getJsonObservable(`${NeonEnvironment.getFullApiPath('locations')}/${location}`)
   ),
+
+  /**
+   * Gets the RxJS Observable for the ArcGIS asset endpoint for a given feature / site code combo
+   * @param {string} feature
+   * @param {string} siteCode
+   * @return The RxJS Ajax Observable
+   */
+  getArcgisAssetObservable: (feature, siteCode) => (
+    getJsonObservable(`${NeonEnvironment.getFullApiPath('arcgisAssets')}/${feature}/${siteCode}`)
+  ),
 };
 
 Object.freeze(NeonApi);
