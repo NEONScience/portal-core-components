@@ -101,6 +101,21 @@ If you have added or modified third-party dependencies then it is important to v
 
 Run `rm -rf node_modules && npm install` and re-run the app to validate a fresh install. This mimics how other apps importing `portal-core-components` will see your changes.
 
+### Worker Caveats
+
+This library does support workers in its current build process using `worker-loader`. To create a worker
+name any worker file `*.worker.js`.
+
+Note, however, that a bug in `react-app-rewired` can mean lint errors in workers may silently break
+production builds but not development builds. See [here](https://github.com/timarney/react-app-rewired/issues/362) for details.
+
+If you have added or modified a worker file and are seeing empty production builds then manually look for
+and fix any lint errors using this command (from the root directory):
+
+```
+npx eslint ./PATH_TO_YOUR_WORKER_FILE -c ./node_modules/eslint-config-react-app/index.js
+```
+
 ## Modifying Existing Components
 
 Have nodejs.

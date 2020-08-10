@@ -1,3 +1,4 @@
+/* eslint no-restricted-globals: 0 */
 import { of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
@@ -35,7 +36,7 @@ const fetchLocations = (event) => {
         const { locationName } = rawLocationData;
         if (!locationName) { return; }
         data[locationName] = parseLocationData(rawLocationData);
-      })
+      });
       postMessage({ status: 'success', data });
       return of(true);
     }),
@@ -49,8 +50,7 @@ const fetchLocations = (event) => {
 };
 
 // Listen for the locations list
-// eslint-disable-next-line
-self.addEventListener("message", fetchLocations);
+self.addEventListener('message', fetchLocations);
 
 // Must have a default export for production build
 export default fetchLocations;

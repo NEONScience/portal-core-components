@@ -1,3 +1,4 @@
+/* eslint no-restricted-globals: 0 */
 import { of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
@@ -28,7 +29,7 @@ const domainIsValid = (domainString) => {
   if (typeof domainString !== 'string') { return false; }
   const domainTest = /^D([0-9]{2})$/.exec(domainString);
   if (!domainTest) { return false; }
-  const domainNumber = Number.parseInt(domainTest[1]);
+  const domainNumber = Number.parseInt(domainTest[1], 10);
   if (isNaN(domainNumber) || domainNumber < 1 || domainNumber > 20) { return false; }
   return true;
 };
@@ -69,8 +70,7 @@ const fetchHierarchy = (event) => {
 };
 
 // Listen for the locations list
-// eslint-disable-next-line
-self.addEventListener("message", fetchHierarchy);
+self.addEventListener('message', fetchHierarchy);
 
 // Must have a default export for production build
 export default fetchHierarchy;
