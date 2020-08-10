@@ -114,6 +114,8 @@ const SiteMapFilters = () => {
             <Tooltip
               key={key}
               title={viewTooltips[key]}
+              enterDelay={500}
+              enterNextDelay={200}
               placement={filters.position === 'top' ? 'bottom-start' : 'top-start'}
             >
               <ToggleButton
@@ -127,6 +129,8 @@ const SiteMapFilters = () => {
           ))}
         </ToggleButtonGroup>
         <Tooltip
+          enterDelay={500}
+          enterNextDelay={200}
           title="Toggle visibility of the list of features (the legend)"
           placement={filters.position === 'top' ? 'bottom-end' : 'top-end'}
         >

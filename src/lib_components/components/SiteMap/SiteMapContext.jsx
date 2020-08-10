@@ -44,8 +44,6 @@ import {
   deriveFullObservatoryZoomLevel,
 } from './SiteMapUtils';
 
-const parseLocationData = () => {};
-
 // Derive the selected status of a given boundary (US state or NEON domain). This should run
 // every time the list of selected sites changes. It regenerates selectedStates and
 // selectedDomains in state to each contain a key/value lookup where the key is the boundary code
@@ -385,96 +383,6 @@ const reducer = (state, action) => {
       }
     }
 
-    /*
-    const {
-      type: featureType,
-      parentDataFeatureKey,
-      matchLocationCoordinateMap = [],
-    } = FEATURES[featureKey];
-    if (
-      !newState.featureDataFetches[featureType]
-        || !newState.featureDataFetches[featureType][featureKey]
-        || !newState.featureDataFetches[featureType][featureKey][siteCode]
-    ) { return false; }
-    // No location present in action: just siteCode deep
-    if (
-      !location
-        && typeof newState.featureDataFetches[featureType][featureKey][siteCode] === 'string'
-    ) {
-      newState.featureDataFetches[featureType][featureKey][siteCode] = status;
-      // If the status is SUCCESS and the action has data, also commit the data
-      if (status === FETCH_STATUS.SUCCESS && data) {
-        newState.featureData[featureType][featureKey][siteCode] = data;
-      }
-      return true;
-    }
-    // Location present: go one level deeper
-    if (!newState.featureDataFetches[featureType][featureKey][siteCode][location]) { return false; }
-    newState.featureDataFetches[featureType][featureKey][siteCode][location] = status;
-    // If the status is SUCCESS and the action has data, also commit the data
-    if (status === FETCH_STATUS.SUCCESS && data) {
-      const parsedData = parseLocationData(data);
-      let dataFeatureKey = featureKey;
-      let dataFeatureType = featureType;
-      // Tower and Distributed base plots share a type so both fetched as TERRESTRIAL_SITE_FEATURES
-      if (featureKey === FEATURES.TERRESTRIAL_SITE_FEATURES.KEY) {
-        dataFeatureKey = parsedData.plotType === 'tower'
-          ? FEATURES.TOWER_BASE_PLOTS.KEY
-          : FEATURES.DISTRIBUTED_BASE_PLOTS.KEY;
-        dataFeatureType = FEATURES[dataFeatureKey].type;
-        // We also want to pull sampling module data from the hierarchy just for these features
-        const hierarchy = newState.featureData[FEATURE_TYPES.SITE_LOCATION_HIERARCHIES][siteCode];
-        const basePlot = location.replace('all', '').replace('.', '\\.');
-        const basePlotRegex = new RegExp(`^${basePlot}([a-z]{3})$`);
-        parsedData.samplingModules = Object.keys(hierarchy).reduce((acc, cur) => {
-          const match = cur.match(basePlotRegex);
-          if (match) { acc.push(match[1]); }
-          return acc;
-        }, [])
-          .filter(k => k !== 'all' && k !== 'mfb')
-          .sort((a, b) => (
-            (PLOT_SAMPLING_MODULES[a] || null) > (PLOT_SAMPLING_MODULES[b] || null) ? 1 : -1
-          ));
-      }
-      // Sampling points with parents all feed back into their parents as geometry coordinates
-      if (featureType === FEATURE_TYPES.SAMPLING_POINTS && parentDataFeatureKey) {
-        const { type: parentDataFeatureType } = FEATURES[parentDataFeatureKey];
-        const { locationParent } = data;
-        const parentData = newState.featureData[parentDataFeatureType][parentDataFeatureKey];
-        const coordIdx = matchLocationCoordinateMap.findIndex(match => location.endsWith(match));
-        if (coordIdx === -1) { return false; }
-        if (!parentData[siteCode]) { parentData[siteCode] = {}; }
-        if (!parentData[siteCode][locationParent]) { parentData[siteCode][locationParent] = {}; }
-        // Initialize the geometry.coordinates with as many empty points as expressed by the map
-        if (!parentData[siteCode][locationParent].geometry) {
-          parentData[siteCode][locationParent].geometry = { coordinates: [] };
-          for (let c = 0; c < matchLocationCoordinateMap.length; c += 1) {
-            parentData[siteCode][locationParent].geometry.coordinates.push([]);
-          }
-        }
-        parentData[siteCode][locationParent].geometry.coordinates[coordIdx] = [
-          parsedData.latitude,
-          parsedData.longitude,
-        ];
-        return true;
-      }
-      // Everything else: fill in feature data
-      if (!newState.featureData[dataFeatureType][dataFeatureKey]) {
-        newState.featureData[dataFeatureType][dataFeatureKey] = {};
-      }
-      if (!newState.featureData[dataFeatureType][dataFeatureKey][siteCode]) {
-        newState.featureData[dataFeatureType][dataFeatureKey][siteCode] = {};
-      }
-      newState.featureData[dataFeatureType][dataFeatureKey][siteCode][location] = {
-        ...parsedData,
-        siteCode,
-        name: location,
-        featureKey: dataFeatureKey,
-        domainCode: state.sites[siteCode].domainCode,
-        stateCode: state.sites[siteCode].stateCode,
-      };
-    }
-    */
     return true;
   };
   // Recursively applies a feature visibility change to parents and chilren up/down the tree
@@ -633,7 +541,7 @@ const reducer = (state, action) => {
 
     case 'setFocusLocationFetchSucceeded':
       newState.focusLocation.fetch = { status: FETCH_STATUS.SUCCESS, error: null };
-      newState.focusLocation.data = action.skipParse ? action.data : parseLocationData(action.data);
+      newState.focusLocation.data = action.data;
       // For STATE and DOMAIN types: ensure corresponding feature is visible
       if (newState.focusLocation.data.type === 'STATE') {
         newState.filters.features.visible[FEATURES.STATES.KEY] = true;
@@ -818,8 +726,10 @@ const Provider = (props) => {
      Effect - trigger focusLocation fetch or short circuit if found in NeonContext data
   */
   useEffect(() => {
-    const { current, fetch: { status } } = state.focusLocation;
-    if (!current || status !== FETCH_STATUS.AWAITING_CALL || !state.neonContextHydrated) { return; }
+    const { current, fetch: { status: currentStatus } } = state.focusLocation;
+    if (!current || currentStatus !== FETCH_STATUS.AWAITING_CALL || !state.neonContextHydrated) {
+      return;
+    }
     // If the location is a known Domain or State then pull from NeonContext
     const {
       [FEATURES.STATES.KEY]: statesData = {},
@@ -830,7 +740,6 @@ const Provider = (props) => {
       dispatch({
         type: 'setFocusLocationFetchSucceeded',
         data: { type: 'STATE', latitude, longitude },
-        skipParse: true,
       });
       return;
     }
@@ -839,7 +748,6 @@ const Provider = (props) => {
       dispatch({
         type: 'setFocusLocationFetchSucceeded',
         data: { type: 'DOMAIN', latitude, longitude },
-        skipParse: true,
       });
       return;
     }
@@ -848,26 +756,22 @@ const Provider = (props) => {
       dispatch({
         type: 'setFocusLocationFetchSucceeded',
         data: { type: 'SITE', latitude, longitude },
-        skipParse: true,
       });
       return;
     }
     // Trigger focus location fetch
     dispatch({ type: 'setFocusLocationFetchStarted' });
-    NeonApi.getLocationObservable(current).pipe(
-      map((response) => {
-        if (response && response.data && response.data) {
-          dispatch({ type: 'setFocusLocationFetchSucceeded', data: response.data });
-          return of(true);
-        }
-        dispatch({ type: 'setFocusLocationFetchFailed', error: 'malformed response' });
-        return of(false);
-      }),
-      catchError((error) => {
-        dispatch({ type: 'setFocusLocationFetchFailed', error: error.message });
-        return of(false);
-      }),
-    ).subscribe();
+    const worker = new FetchLocationsWorker();
+    worker.addEventListener('message', (message) => {
+      const { status, data, error } = message.data;
+      if (status === 'success') {
+        dispatch({ type: 'setFocusLocationFetchSucceeded', data: data[current] });
+      } else {
+        dispatch({ type: 'setFocusLocationFetchFailed', error });
+      }
+      worker.terminate();
+    });
+    worker.postMessage([current]);
   }, [
     state.sites,
     state.focusLocation,
@@ -1012,64 +916,6 @@ const Provider = (props) => {
       });
     });
 
-    /*
-    // All other feature-based fetches
-    Object.keys(state.featureDataFetches)
-      .filter(type => type !== FEATURE_TYPES.SITE_LOCATION_HIERARCHIES)
-      .forEach((type) => {
-        Object.keys(state.featureDataFetches[type]).forEach((feature) => {
-          const { dataSource } = FEATURES[feature];
-          Object.keys(state.featureDataFetches[type][feature]).forEach((siteCode) => {
-            const featureSite = state.featureDataFetches[type][feature][siteCode];
-            // LOCATIONS_API
-            if (dataSource === FEATURE_DATA_SOURCES.LOCATIONS_API) {
-              if (typeof featureSite !== 'object') { return; }
-              Object.keys(featureSite).forEach((location) => {
-                if (featureSite[location] !== FETCH_STATUS.AWAITING_CALL) { return; }
-                dispatch({
-                  type: 'setFeatureDataFetchStarted',
-                  feature,
-                  siteCode,
-                  location,
-                });
-                NeonApi.getLocationObservable(location).pipe(
-                  map((response) => {
-                    if (response && response.data && response.data) {
-                      dispatch({
-                        type: 'setFeatureDataFetchSucceeded',
-                        data: response.data,
-                        feature,
-                        siteCode,
-                        location,
-                      });
-                      return of(true);
-                    }
-                    dispatch({
-                      type: 'setFeatureDataFetchFailed',
-                      error: 'malformed response',
-                      feature,
-                      siteCode,
-                      location,
-                    });
-                    return of(false);
-                  }),
-                  catchError((error) => {
-                    dispatch({
-                      type: 'setFeatureDataFetchFailed',
-                      error: error.message,
-                      feature,
-                      siteCode,
-                      location,
-                    });
-                    return of(false);
-                  }),
-                ).subscribe();
-              });
-            }
-          });
-        });
-      });
-    */
     dispatch({ type: 'awaitingFeatureDataFetchesTriggered' });
   }, [canFetchFeatureData, state.featureDataFetchesHasAwaiting, state.featureDataFetches]);
 

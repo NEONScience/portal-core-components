@@ -343,14 +343,14 @@ export const FEATURES = {
   AQUATIC_WATERSHEDS: {
     name: 'Watersheds',
     type: FEATURE_TYPES.GROUP,
-    minZoom: 6,
+    minZoom: 7,
     description: '',
   },
   WATERSHED_BOUNDARIES: {
     name: 'Watershed Boundaries',
     nameSingular: 'Watershed Boundary',
     type: FEATURE_TYPES.BOUNDARIES,
-    minZoom: 10,
+    minZoom: 7,
     dataSource: FEATURE_DATA_SOURCES.ARCGIS_ASSETS_API,
     description: '',
     parent: 'AQUATIC_WATERSHEDS',
@@ -360,7 +360,7 @@ export const FEATURES = {
   DRAINAGE_LINES: {
     name: 'Drainage Lines',
     type: FEATURE_TYPES.OTHER,
-    minZoom: 8,
+    minZoom: 7,
     dataSource: FEATURE_DATA_SOURCES.ARCGIS_ASSETS_API,
     description: '',
     parent: 'AQUATIC_WATERSHEDS',

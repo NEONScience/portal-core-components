@@ -248,7 +248,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
       </DocBlock>
 
       <ExampleBlock>
-        <SiteMap location="BART" />
+        <SiteMap location="BLUE.AOS.benchmark.3" />
       </ExampleBlock>
       <CodeBlock>
         {`
