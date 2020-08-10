@@ -16,6 +16,7 @@ import NeonApi from '../NeonApi/NeonApi';
 import NeonContext from '../NeonContext/NeonContext';
 
 import FetchLocationsWorker from './FetchLocations.worker';
+import FetchLocationHierarchyWorker from './FetchLocationHierarchy.worker';
 import {
   DEFAULT_STATE,
   SORT_DIRECTIONS,
@@ -35,7 +36,6 @@ import {
   MIN_TABLE_MAX_BODY_HEIGHT,
   GRAPHQL_LOCATIONS_API_CONSTANTS,
   hydrateNeonContextData,
-  parseLocationHierarchy,
   getZoomedIcons,
   getMapStateForFocusLocation,
   calculateFeatureAvailability,
@@ -588,13 +588,12 @@ const reducer = (state, action) => {
     case 'setDomainLocationHierarchyFetchSucceeded':
       if (
         !newState.featureDataFetches[hierarchiesSource][hierarchiesType][action.domainCode]
-          || !Array.isArray(action.data.locationChildHierarchy)
+          || !action.data
       ) { return state; }
       /* eslint-disable max-len */
       newState.featureDataFetches[hierarchiesSource][hierarchiesType][action.domainCode] = FETCH_STATUS.SUCCESS;
-      action.data.locationChildHierarchy.forEach((child) => {
-        if (child.locationType !== 'SITE' || child.locationName === 'HQTW') { return; }
-        newState.featureData.SITE_LOCATION_HIERARCHIES[child.locationName] = parseLocationHierarchy(child);
+      Object.keys(action.data).forEach((siteCode) => {
+        newState.featureData.SITE_LOCATION_HIERARCHIES[siteCode] = action.data[siteCode];
       });
       /* eslint-enable max-len */
       newState.overallFetch.pendingHierarchy -= 1;
@@ -795,32 +794,17 @@ const Provider = (props) => {
       .forEach((domainCode) => {
         if (state.featureDataFetches[hierarchiesSource][hierarchiesType][domainCode] !== FETCH_STATUS.AWAITING_CALL) { return; } // eslint-disable-line max-len
         dispatch({ type: 'setDomainLocationHierarchyFetchStarted', domainCode });
-        NeonApi.getSiteLocationHierarchyObservable(domainCode).pipe(
-          map((response) => {
-            if (response && response.data && response.data) {
-              dispatch({
-                type: 'setDomainLocationHierarchyFetchSucceeded',
-                data: response.data,
-                domainCode,
-              });
-              return of(true);
-            }
-            dispatch({
-              type: 'setDomainLocationHierarchyFetchFailed',
-              error: 'malformed response',
-              domainCode,
-            });
-            return of(false);
-          }),
-          catchError((error) => {
-            dispatch({
-              type: 'setDomainLocationHierarchyFetchFailed',
-              error: error.message,
-              domainCode,
-            });
-            return of(false);
-          }),
-        ).subscribe();
+        const worker = new FetchLocationHierarchyWorker();
+        worker.addEventListener('message', (message) => {
+          const { status, data, error } = message.data;
+          if (status === 'success') {
+            dispatch({ type: 'setDomainLocationHierarchyFetchSucceeded', data, domainCode });
+          } else {
+            dispatch({ type: 'setDomainLocationHierarchyFetchFailed', error, domainCode });
+          }
+          worker.terminate();
+        });
+        worker.postMessage(domainCode);
       });
 
     // ARCGIS_ASSETS_API Fetches

@@ -75,51 +75,6 @@ export const KM2_TO_ACRES = 247.10538146717;
 // most useful for generating subsequent fetches
 export const SITE_LOCATION_HIERARCHIES_MIN_ZOOM = 9;
 
-/*
-state = {
-  featureDataFetches: {
-    GRAPHQL_LOCATIONS_API: {
-      10: {
-        CPER: {
-          features: {
-            DISTRIBUTED_BIRD_GRIDS: {
-              fetchId: 'foo',
-              locations: ['a', 'c', 'd', 'e'],
-            },
-            DISTRIBUTED_MAMMAL_GRIDS: 'bar',
-            DISTRIBUTED_MOSQUITO_POINTS: null,
-            DISTRIBUTED_TICK_PLOTS: null,
-            HUTS: 'bar',
-            MEGAPITS: 'bar',
-            TOWERS: {
-              fetchId: 'foo',
-              locations: ['b'],
-            }
-          },
-          fetches: {
-            foo: {
-              status: 'SUCCESS',
-              locations: ['a', 'b', 'c', 'd', 'e'],
-            },
-            bar: {
-              status: 'SUCCESS',
-              locations: [],
-            },
-            qux: {
-              status: 'AWAITING_CALL',
-              locations: [],
-            },
-          },
-        },
-      },
-    },
-    SAMPLING_POINTS: {
-      18: { ... }
-    },
-  },
-}
-*/
-
 /**
    Key Sets
    Used to limit the use of "magic strings" that need to be consistent across many files
@@ -1332,22 +1287,6 @@ export const getDynamicAspectRatio = (unusableVerticalSpace = 0) => {
   return arIdx === -1
     ? dynamicAspectRatios[dynamicAspectRatios.length - 1]
     : dynamicAspectRatios[arIdx];
-};
-
-export const parseLocationHierarchy = (inHierarchy, parent = null) => {
-  let outHierarchy = {};
-  const name = inHierarchy.locationParentHierarchy ? null : inHierarchy.locationName;
-  const description = inHierarchy.locationDescription || null;
-  const type = inHierarchy.locationType || null;
-  if (description.includes('Not Used')) { return outHierarchy; }
-  if (name !== null) { outHierarchy[name] = { type, description, parent }; }
-  inHierarchy.locationChildHierarchy.forEach((subLocation) => {
-    outHierarchy = {
-      ...outHierarchy,
-      ...parseLocationHierarchy(subLocation, name),
-    };
-  });
-  return outHierarchy;
 };
 
 /**

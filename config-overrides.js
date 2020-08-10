@@ -18,7 +18,13 @@ const svgLoadRule = {
 
 const workerLoadRule = {
   test: /\.worker\.js$/,
-  use: { loader: 'worker-loader' },
+  use: {
+    loader: 'worker-loader',
+    options: {
+      filename: '[name].[contenthash].worker.js',
+      chunkFilename: '[id].[contenthash].worker.js',
+    },
+  },
 }
 
 module.exports = override(
