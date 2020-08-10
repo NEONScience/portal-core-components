@@ -19,6 +19,15 @@ const DEFAULT_LOCATION_PROPERTIES_WHITELIST = [
   'soilTypeOrder,',
 ];
 
+// Enforce numeric types for select properties
+const NUMERIC_LOCATION_PROPERTIES = [
+  'maximumElevation',
+  'minimumElevation',
+  'plotSize',
+  'slopeAspect',
+  'slopeGradient',
+];
+
 /**
  Function to parse a locationProperties value from a locations API response into an object with
  only white-listed keys present. For example:
@@ -57,7 +66,9 @@ const parseLocationProperties = (
     ) { return; }
     const propKey = cleanPropKey(prop.locationPropertyName);
     if (propKey.length && (!whiteList.length || whiteList.includes(propKey))) {
-      outProps[propKey] = prop.locationPropertyValue;
+      outProps[propKey] = NUMERIC_LOCATION_PROPERTIES.includes(propKey)
+        ? Number.parseFloat(prop.locationPropertyValue)
+        : prop.locationPropertyValue;
     }
   });
   return outProps;

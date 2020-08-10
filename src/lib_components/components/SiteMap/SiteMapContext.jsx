@@ -29,7 +29,7 @@ import {
   SITE_LOCATION_HIERARCHIES_MIN_ZOOM,
   MAP_ZOOM_RANGE,
   OBSERVATORY_CENTER,
-  // PLOT_SAMPLING_MODULES,
+  PLOT_SAMPLING_MODULES,
   SITE_MAP_PROP_TYPES,
   SITE_MAP_DEFAULT_PROPS,
   MIN_TABLE_MAX_BODY_HEIGHT,
@@ -81,6 +81,13 @@ const deriveBoundarySelections = (state) => {
     },
   };
 };
+
+// NOTE: DISTRIBUTED_BASE_PLOTS and TOWER_BASE_PLOTS have the same locationType. We must fetch
+// them all for a gicen site in order to differentiate them. This impacts how we structure fetches
+// for base plot features as well as how we turn those fetch results into feater data. This func
+// is used to consistently inform when to trigger that behavior for a given feature.
+const basePlots = [FEATURES.DISTRIBUTED_BASE_PLOTS.KEY, FEATURES.TOWER_BASE_PLOTS.KEY];
+const isBasePlot = featureKey => basePlots.includes(featureKey);
 
 /**
    Reducer
@@ -136,10 +143,6 @@ const calculateFeatureDataFetches = (state) => {
 
   // Feature fetches - GRAPHQL_LOCATIONS_API
   /* eslint-disable max-len */
-  // NOTE: DISTRIBUTED_BASE_PLOTS and TOWER_BASE_PLOTS have the same locationType. We must fetch
-  // them all in order to differentiate them. Thus if we're looking at either one here,
-  // automatically initialize the other one.
-  const basePlots = [FEATURES.DISTRIBUTED_BASE_PLOTS.KEY, FEATURES.TOWER_BASE_PLOTS.KEY];
   // Start by looping through all minZoom levels associated with any GraphQL Locations API features
   // Our goal is to build a single fetch containing a flat list of all locations for this site
   // that are now visible, clustered by minZoom level.
@@ -150,9 +153,8 @@ const calculateFeatureDataFetches = (state) => {
       GRAPHQL_LOCATIONS_API_CONSTANTS.MINZOOM_TO_FEATURES_MAP[minZoom].forEach((featureKey) => {
         if (!state.filters.features.available[featureKey] || !state.filters.features.visible[featureKey]) { return; }
         const { dataSource, matchLocationType, matchLocationName } = FEATURES[featureKey];
-        const isBasePlot = basePlots.includes(featureKey);
         const companionFeatureKey = (
-          !isBasePlot ? null : basePlots.find(key => key !== featureKey)
+          !isBasePlot(featureKey) ? null : basePlots.find(key => key !== featureKey)
         );
         if (!newState.featureDataFetches[dataSource][minZoom]) {
           newState.featureDataFetches[dataSource][minZoom] = {};
@@ -175,7 +177,7 @@ const calculateFeatureDataFetches = (state) => {
                 fetches: {},
               };
               // If this is a base plot feature then look to see if already handled
-              if (isBasePlot && companionFeatureKey) {
+              if (isBasePlot(featureKey) && companionFeatureKey) {
                 const companionMinZoom = GRAPHQL_LOCATIONS_API_CONSTANTS.FEATURES_TO_MINZOOM_MAP[companionFeatureKey];
                 if (companionMinZoom && newState.featureDataFetches[dataSource][companionMinZoom][siteCode]) {
                   const companionFetchId = newState.featureDataFetches[dataSource][companionMinZoom][siteCode].features[companionFeatureKey];
@@ -199,7 +201,7 @@ const calculateFeatureDataFetches = (state) => {
             }
             // Map this feature / site / zoom level / feature type to the unique fetch key
             newState.featureDataFetches[dataSource][minZoom][siteCode].features[featureKey].fetchId = awaitingFetchKey;
-            if (isBasePlot && companionFeatureKey) {
+            if (isBasePlot(featureKey) && companionFeatureKey) {
               if (!newState.featureDataFetches[dataSource][minZoom][siteCode].features[companionFeatureKey]) {
                 newState.featureDataFetches[dataSource][minZoom][siteCode].features[companionFeatureKey] = {
                   fetchId: null, locations: [],
@@ -225,7 +227,7 @@ const calculateFeatureDataFetches = (state) => {
               .forEach((locationKey) => {
                 newState.featureDataFetches[dataSource][minZoom][siteCode].fetches[awaitingFetchKey].locations.push(locationKey);
                 newState.featureDataFetches[dataSource][minZoom][siteCode].features[featureKey].locations.push(locationKey);
-                if (isBasePlot && companionFeatureKey) {
+                if (isBasePlot(featureKey) && companionFeatureKey) {
                   newState.featureDataFetches[dataSource][minZoom][siteCode].features[companionFeatureKey].locations.push(locationKey);
                 }
               });
@@ -290,7 +292,6 @@ const reducer = (state, action) => {
       newState.featureDataFetches[dataSource][minZoom][siteCode].fetches[fetchId].status = status;
       // If the status is SUCCESS and the action has data, also commit the data
       if (status === FETCH_STATUS.SUCCESS && data) {
-        const basePlots = [FEATURES.DISTRIBUTED_BASE_PLOTS.KEY, FEATURES.TOWER_BASE_PLOTS.KEY];
         // Make a map of location names to feature keys for this fetchId
         const { features } = newState.featureDataFetches[dataSource][minZoom][siteCode];
         const locNamesToFeatures = {};
@@ -300,7 +301,7 @@ const reducer = (state, action) => {
             features[featureKey].locations.forEach((locName) => {
               // For *_BASE_PLOT features, which both have the same API locationType, determine
               // which locations go to which feature by looking at the plotType in the data
-              if (basePlots.includes(featureKey)) {
+              if (isBasePlot(featureKey)) {
                 const { plotType } = data[locName];
                 if (plotType === 'tower') {
                   locNamesToFeatures[locName] = FEATURES.TOWER_BASE_PLOTS.KEY;
@@ -363,7 +364,23 @@ const reducer = (state, action) => {
           if (geometry) {
             newState.featureData[featureType][featureKey][siteCode][locName].geometry = geometry;
           }
-          newState.featureData[featureType][featureKey][siteCode][locName].samplingModules = [];
+          // Base plot features: also pull sampling module data from the hierarchy
+          if (isBasePlot(featureKey)) {
+            const hierarchy = newState.featureData[FEATURE_TYPES.SITE_LOCATION_HIERARCHIES][siteCode]; // eslint-disable-line max-len
+            const basePlot = locName.replace('all', '').replace('.', '\\.');
+            const basePlotRegex = new RegExp(`^${basePlot}([a-z]{3})$`);
+            newState.featureData[featureType][featureKey][siteCode][locName].samplingModules = (
+              Object.keys(hierarchy).reduce((acc, cur) => {
+                const match = cur.match(basePlotRegex);
+                if (match) { acc.push(match[1]); }
+                return acc;
+              }, [])
+                .filter(k => k !== 'all' && k !== 'mfb')
+                .sort((a, b) => (
+                  (PLOT_SAMPLING_MODULES[a] || null) > (PLOT_SAMPLING_MODULES[b] || null) ? 1 : -1
+                ))
+            );
+          }
         });
       }
     }
