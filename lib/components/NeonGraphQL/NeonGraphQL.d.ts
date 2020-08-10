@@ -1,6 +1,7 @@
 export namespace TYPES {
     export const DATA_PRODUCTS: string;
     export const SITES: string;
+    export const LOCATIONS: string;
 }
 export namespace DIMENSIONALITIES {
     export const ONE: string;
@@ -12,6 +13,8 @@ declare namespace NeonGraphQL {
     export function getAllDataProducts(): import("rxjs").Observable<null> | import("rxjs").Observable<import("rxjs/ajax").AjaxResponse>;
     export function getSiteByCode(code: any): import("rxjs").Observable<null> | import("rxjs").Observable<import("rxjs/ajax").AjaxResponse>;
     export function getAllSites(): import("rxjs").Observable<null> | import("rxjs").Observable<import("rxjs/ajax").AjaxResponse>;
+    export function getLocationByName(name: any): import("rxjs").Observable<null> | import("rxjs").Observable<import("rxjs/ajax").AjaxResponse>;
+    export function getManyLocationsByName(names?: any[]): import("rxjs").Observable<null> | import("rxjs").Observable<import("rxjs/ajax").AjaxResponse>;
     export function getGraphqlQuery(query: string): import("rxjs").Observable<null> | import("rxjs").Observable<import("rxjs/ajax").AjaxResponse>;
     export function getGraphqlAjaxRequest(query: string): {
         method: string;

@@ -23,6 +23,7 @@ declare namespace NeonEnvironment {
         export function products(): string | undefined;
         export function sites(): string | undefined;
         export function locations(): string | undefined;
+        export function arcgisAssets(): string;
     }
     export namespace getApiLdPath {
         export function repo(): string | undefined;

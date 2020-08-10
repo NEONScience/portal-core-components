@@ -9,4 +9,5 @@ declare namespace NeonApi {
     export function getSiteJsonObservable(siteCode: string): import("rxjs").Observable<any>;
     export function getSiteLocationHierarchyObservable(siteCode: string): import("rxjs").Observable<any>;
     export function getLocationObservable(location: string): import("rxjs").Observable<any>;
+    export function getArcgisAssetObservable(feature: string, siteCode: string): import("rxjs").Observable<any>;
 }
