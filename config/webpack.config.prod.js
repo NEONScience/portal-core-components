@@ -143,22 +143,6 @@ module.exports = {
               name: 'static/media/[name].[hash:8].[ext]',
             },
           },
-          // Process Workers with worker-loader
-          {
-            test: /\.worker\.js$/,
-            include: paths.appSrc,
-            use: [
-              {
-                loader: require.resolve('worker-loader'),
-              },
-              {
-                loader: require.resolve('babel-loader'),
-                options: {
-                  presets: ['@babel/preset-env'],
-                },
-              },
-            ],
-          },
           // Process Application JS with Babel.
           {
             test: /\.(js|jsx)$/,
