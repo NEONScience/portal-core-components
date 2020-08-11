@@ -7,3 +7,5 @@ export declare type AnyObject = {
 };
 export declare type Undef<T> = T | undefined;
 export declare type AnyVoidFunc = (p?: any) => void;
+export declare type UnknownRecord = Record<string, unknown>;
+export declare type NullableRecord = UnknownRecord | null | undefined;

@@ -5,3 +5,5 @@ export type Nullable<T> = T | null | undefined;
 export type AnyObject = {[key: string]: any};
 export type Undef<T> = T | undefined;
 export type AnyVoidFunc = (p?: any) => void;
+export type UnknownRecord = Record<string, unknown>;
+export type NullableRecord = UnknownRecord | null | undefined;
