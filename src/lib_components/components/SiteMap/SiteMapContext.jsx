@@ -15,8 +15,11 @@ import { map, catchError } from 'rxjs/operators';
 import NeonApi from '../NeonApi/NeonApi';
 import NeonContext from '../NeonContext/NeonContext';
 
-import FetchLocationsWorker from './FetchLocations.worker';
-import FetchLocationHierarchyWorker from './FetchLocationHierarchy.worker';
+// TODO: Complete worker support and then reload these as workers
+// import FetchLocationsWorker from './FetchLocations.worker';
+// import FetchLocationHierarchyWorker from './FetchLocationHierarchy.worker';
+import { fetchLocations, fetchDomainHierarchy } from './FetchLocationUtils';
+
 import { parseLocationData } from './SiteMapWorkerSafeUtils';
 import {
   DEFAULT_STATE,
@@ -834,6 +837,14 @@ const Provider = (props) => {
     }
     // Trigger focus location fetch
     dispatch({ type: 'setFocusLocationFetchStarted' });
+    fetchLocations([current])
+      .then((response) => {
+        dispatch({ type: 'setFocusLocationFetchSucceeded', data: response[current] });
+      })
+      .catch((error) => {
+        dispatch({ type: 'setFocusLocationFetchFailed', error });
+      });
+    /* TODO: Restore worker support
     const worker = new FetchLocationsWorker();
     worker.addEventListener('message', (message) => {
       const { status, data, error } = message.data;
@@ -845,6 +856,7 @@ const Provider = (props) => {
       worker.terminate();
     });
     worker.postMessage([current]);
+    */
   }, [
     state.sites,
     state.focusLocation,
@@ -868,6 +880,22 @@ const Provider = (props) => {
       .forEach((domainCode) => {
         if (state.featureDataFetches[hierarchiesSource][hierarchiesType][domainCode] !== FETCH_STATUS.AWAITING_CALL) { return; } // eslint-disable-line max-len
         dispatch({ type: 'setDomainLocationHierarchyFetchStarted', domainCode });
+        fetchDomainHierarchy(domainCode)
+          .then((response) => {
+            dispatch({
+              type: 'setDomainLocationHierarchyFetchSucceeded',
+              data: response,
+              domainCode,
+            });
+          })
+          .catch((error) => {
+            dispatch({
+              type: 'setDomainLocationHierarchyFetchFailed',
+              error,
+              domainCode,
+            });
+          });
+        /*
         const worker = new FetchLocationHierarchyWorker();
         worker.addEventListener('message', (message) => {
           const { status, data, error } = message.data;
@@ -879,6 +907,7 @@ const Provider = (props) => {
           worker.terminate();
         });
         worker.postMessage(domainCode);
+        */
       });
 
     // ARCGIS_ASSETS_API Fetches
@@ -1001,6 +1030,28 @@ const Provider = (props) => {
               siteCode,
               fetchId,
             });
+            fetchLocations(gqlLocFetches[minZoom][siteCode].fetches[fetchId].locations)
+              .then((response) => {
+                dispatch({
+                  type: 'setFeatureDataFetchSucceeded',
+                  dataSource: gqlLocSource,
+                  minZoom,
+                  siteCode,
+                  fetchId,
+                  data: response,
+                });
+              })
+              .catch((error) => {
+                dispatch({
+                  type: 'setFeatureDataFetchFailed',
+                  dataSource: gqlLocSource,
+                  minZoom,
+                  siteCode,
+                  fetchId,
+                  error,
+                });
+              });
+            /*
             const worker = new FetchLocationsWorker();
             worker.addEventListener('message', (message) => {
               const { status, data, error } = message.data;
@@ -1026,6 +1077,7 @@ const Provider = (props) => {
               worker.terminate();
             });
             worker.postMessage(gqlLocFetches[minZoom][siteCode].fetches[fetchId].locations);
+            */
           });
       });
     });
