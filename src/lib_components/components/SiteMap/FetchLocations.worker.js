@@ -51,6 +51,3 @@ const fetchLocations = (event = null) => {
 
 // Listen for the locations list
 self.addEventListener('message', fetchLocations);
-
-// Must have a default export for production build
-export default fetchLocations;

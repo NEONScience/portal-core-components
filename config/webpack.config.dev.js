@@ -140,13 +140,28 @@ module.exports = {
               name: 'static/media/[name].[hash:8].[ext]',
             },
           },
-          // Process JS with Babel.
+          // Process Workers with worker-loader
+          {
+            test: /\.worker\.js$/,
+            include: paths.appSrc,
+            use: [
+              {
+                loader: require.resolve('worker-loader'),
+              },
+              {
+                loader: require.resolve('babel-loader'),
+                options: {
+                  presets: ['@babel/preset-env'],
+                },
+              },
+            ],
+          },
+          // Process Application JS with Babel.
           {
             test: /\.(js|jsx)$/,
             include: paths.appSrc,
             loader: require.resolve('babel-loader'),
             options: {
-
               // This is a feature of `babel-loader` for webpack (not Babel itself).
               // It enables caching results in ./node_modules/.cache/babel-loader/
               // directory for faster rebuilds.

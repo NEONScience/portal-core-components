@@ -148,8 +148,15 @@ module.exports = {
             test: /\.worker\.js$/,
             include: paths.appSrc,
             use: [
-              { loader: require.resolve('worker-loader') },
-              { loader: require.resolve('babel-loader') },
+              {
+                loader: require.resolve('worker-loader'),
+              },
+              {
+                loader: require.resolve('babel-loader'),
+                options: {
+                  presets: ['@babel/preset-env'],
+                },
+              },
             ],
           },
           // Process Application JS with Babel.
