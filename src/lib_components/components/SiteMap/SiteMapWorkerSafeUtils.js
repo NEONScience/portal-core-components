@@ -93,6 +93,7 @@ export const parseLocationData = (data = {}) => {
     locationPolygon: polygon = null,
     locationProperties = {},
     locationParent: parent = null,
+    locationChildren: children,
   } = data;
   let { locationElevation: elevation = null } = data;
   const parsed = {
@@ -103,6 +104,9 @@ export const parseLocationData = (data = {}) => {
     parent,
     ...parseLocationProperties(locationProperties),
   };
+  if (Array.isArray(children) && children.length) {
+    parsed.children = children;
+  }
   if (latitude !== null && longitude !== null) {
     parsed.latitude = latitude;
     parsed.longitude = longitude;
