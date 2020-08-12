@@ -206,8 +206,9 @@ const AuthService: IAuthService = {
     const rootPath: string = exists(path)
       ? path
       : env.getFullAuthPath('login');
-    window.location.href = `${rootPath}
-      ?${REDIRECT_URI}=${env.route.getFullRoute(env.getRouterBaseHomePath())}`;
+    const redirectUri = `${env.route.getFullRoute(env.getRouterBaseHomePath())}`;
+    const href = `${rootPath}?${REDIRECT_URI}=${redirectUri}`;
+    window.location.href = href;
   },
   loginSilently: (dispatch: Dispatch<any>): void => {
     dispatch({ type: 'setAuthWorking', isAuthWorking: true });
@@ -241,8 +242,9 @@ const AuthService: IAuthService = {
     const rootPath: string = exists(path)
       ? path
       : env.getFullAuthPath('logout');
-    window.location.href = `${rootPath}
-      ?${REDIRECT_URI}=${env.getHost()}${env.route.getFullRoute(env.getRouterBaseHomePath())}`;
+    const redirectUri = `${env.getHost()}${env.route.getFullRoute(env.getRouterBaseHomePath())}}`;
+    const href = `${rootPath}?${REDIRECT_URI}=${redirectUri}`;
+    window.location.href = href;
   },
   logoutSilently: (dispatch: Dispatch<any>): void => {
     dispatch({ type: 'setAuthWorking', isAuthWorking: true });
