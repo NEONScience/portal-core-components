@@ -245,6 +245,8 @@ const DRUPAL_CSS_URL = 'https://preview.neonscience.org/themes/custom/neon/build
 const NeonPage = (props) => {
   const {
     breadcrumbs,
+    customHeader,
+    customFooter,
     error,
     loading,
     notification,
@@ -659,14 +661,20 @@ const NeonPage = (props) => {
       <ThemeProvider theme={Theme}>
         <CssBaseline />
         <GlobalCss />
-        <NeonHeader
-          ref={headerRef}
-          useCoreHeader={useCoreHeader}
-          unstickyDrupalHeader={unstickyDrupalHeader}
-          notifications={notifications}
-          onShowNotifications={handleShowNotifications}
-          drupalCssLoaded={drupalCssLoaded}
-        />
+        {customHeader ? (
+          <header ref={headerRef}>
+            {customHeader}
+          </header>
+        ) : (
+          <NeonHeader
+            ref={headerRef}
+            useCoreHeader={useCoreHeader}
+            unstickyDrupalHeader={unstickyDrupalHeader}
+            notifications={notifications}
+            onShowNotifications={handleShowNotifications}
+            drupalCssLoaded={drupalCssLoaded}
+          />
+        )}
         <Container className={classes.outerPageContainer} style={outerPageContainerStyles}>
           {renderSidebar()}
           <div
@@ -685,7 +693,7 @@ const NeonPage = (props) => {
           onHideNotifications={handleHideNotifications}
         />
         <BrowserWarning />
-        <NeonFooter drupalCssLoaded={drupalCssLoaded} />
+        {customFooter || <NeonFooter drupalCssLoaded={drupalCssLoaded} />}
         {renderLoading()}
         {renderError()}
       </ThemeProvider>
@@ -715,6 +723,8 @@ NeonPage.propTypes = {
       href: PropTypes.string,
     }),
   ),
+  customHeader: PropTypes.node,
+  customFooter: PropTypes.node,
   error: PropTypes.string,
   loading: PropTypes.string,
   notification: PropTypes.string,
@@ -751,6 +761,8 @@ NeonPage.propTypes = {
 
 NeonPage.defaultProps = {
   breadcrumbs: [],
+  customHeader: null,
+  customFooter: null,
   error: null,
   loading: null,
   notification: null,
