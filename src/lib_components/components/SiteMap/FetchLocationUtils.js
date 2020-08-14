@@ -1,3 +1,5 @@
+import Parallel from 'paralleljs';
+
 import { of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
@@ -11,6 +13,7 @@ import { parseLocationData } from './SiteMapWorkerSafeUtils';
  where keys are location names and values are objects containing only those location attributes
  the hierarchy affords us (type, description, and parent)
 */
+/*
 export const parseLocationHierarchy = (inHierarchy, parent = null) => {
   let outHierarchy = {};
   const name = inHierarchy.locationParentHierarchy ? null : inHierarchy.locationName;
@@ -26,6 +29,7 @@ export const parseLocationHierarchy = (inHierarchy, parent = null) => {
   });
   return outHierarchy;
 };
+*/
 
 const domainIsValid = (domainString) => {
   if (typeof domainString !== 'string') { return false; }
@@ -41,18 +45,12 @@ export const fetchDomainHierarchy = (domain) => {
     return Promise.reject(new Error('Domain is not valid'));
   }
 
-  // Execute Locations REST API hierarchy fetch and pipe results to processing function
+  // Execute Locations REST API hierarchy fetch
   return new Promise((resolve, reject) => {
     NeonApi.getSiteLocationHierarchyObservable(domain).pipe(
       map((response) => {
         if (response && response.data) {
-          const data = {};
-          response.data.locationChildHierarchy.forEach((child) => {
-            // At the top level we only care about sites and don't want the HQ test site
-            if (child.locationType !== 'SITE' || child.locationName === 'HQTW') { return; }
-            data[child.locationName] = parseLocationHierarchy(child);
-          });
-          resolve(data);
+          resolve(response.data);
           return of(true);
         }
         reject(new Error('Malformed response'));
@@ -63,6 +61,34 @@ export const fetchDomainHierarchy = (domain) => {
         return of(false);
       }),
     ).subscribe();
+  }).then((data) => {
+    // Parse the response in a worker
+    const worker = new Parallel(data);
+    console.log('WORKER', worker);
+    return worker.spawn((inData) => {
+      const parseLocationHierarchy = (inHierarchy, parent = null) => {
+        let outHierarchy = {};
+        const name = inHierarchy.locationParentHierarchy ? null : inHierarchy.locationName;
+        const description = inHierarchy.locationDescription || null;
+        const type = inHierarchy.locationType || null;
+        if (description.includes('Not Used')) { return outHierarchy; }
+        if (name !== null) { outHierarchy[name] = { type, description, parent }; }
+        inHierarchy.locationChildHierarchy.forEach((subLocation) => {
+          outHierarchy = {
+            ...outHierarchy,
+            ...parseLocationHierarchy(subLocation, name),
+          };
+        });
+        return outHierarchy;
+      };
+      const outData = {};
+      inData.locationChildHierarchy.forEach((child) => {
+        // At the top level we only care about sites and don't want the HQ test site
+        if (child.locationType !== 'SITE' || child.locationName === 'HQTW') { return; }
+        outData[child.locationName] = parseLocationHierarchy(child);
+      });
+      return outData;
+    });
   });
 };
 

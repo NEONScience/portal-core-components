@@ -16,6 +16,7 @@ const svgLoadRule = {
   ]
 };
 
+/*
 const workerLoadRule = {
   test: /\.worker\.js$/,
   use: {
@@ -26,9 +27,10 @@ const workerLoadRule = {
     },
   },
 }
+*/
 
 module.exports = override(
   useEslintRc(path.resolve(__dirname, '.eslintrc')),
   addWebpackModuleRule(svgLoadRule),
-  addWebpackModuleRule(workerLoadRule),
+  // addWebpackModuleRule(workerLoadRule),
 );

@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid, no-unused-vars, max-len */
 
-import React from 'react';
+import React, { useState } from 'react';
 
+import Parallel from 'paralleljs';
 import cloneDeep from 'lodash/cloneDeep';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -226,6 +227,22 @@ export default function StyleGuide() {
       #portal-feedback Slack channel
     </Link>
   );
+
+  /**
+    WORKERS
+  */
+  const [run, setRun] = useState(false);
+  if (!run) {
+    setRun(true);
+    const p = new Parallel(4);
+    console.log(p);
+    p.spawn((dataIn) => {
+      const j = dataIn * 2;
+      return j;
+    }).then((dataOut) => {
+      console.log(dataOut);
+    });
+  }
 
   return (
     <React.Fragment>

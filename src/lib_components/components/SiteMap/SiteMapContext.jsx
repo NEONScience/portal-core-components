@@ -882,6 +882,7 @@ const Provider = (props) => {
         dispatch({ type: 'setDomainLocationHierarchyFetchStarted', domainCode });
         fetchDomainHierarchy(domainCode)
           .then((response) => {
+            console.log('SUCCESS', response);
             dispatch({
               type: 'setDomainLocationHierarchyFetchSucceeded',
               data: response,
@@ -889,6 +890,7 @@ const Provider = (props) => {
             });
           })
           .catch((error) => {
+            console.log('FAILED', error);
             dispatch({
               type: 'setDomainLocationHierarchyFetchFailed',
               error,
