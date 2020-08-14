@@ -62,18 +62,18 @@ export const TIME_SERIES_VIEWER_STATUS_TITLES = {
 
 // Keys, details, and supporting functions for all possible Y-axis range modes
 export const Y_AXIS_RANGE_MODES = {
-  FROM_ZERO: 'FROM_ZERO',
   CENTERED: 'CENTERED',
+  FROM_ZERO: 'FROM_ZERO',
   CUSTOM: 'CUSTOM',
 };
 export const Y_AXIS_RANGE_MODE_DETAILS = {
-  FROM_ZERO: {
-    name: 'From Zero',
-    description: 'Range from zero to one standard deviation above data',
-  },
   CENTERED: {
     name: 'Centered',
     description: 'Center data by one standard deviation above and below',
+  },
+  FROM_ZERO: {
+    name: 'From Zero',
+    description: 'Range from zero to one standard deviation above data',
   },
   CUSTOM: {
     name: 'Custom',
@@ -132,7 +132,7 @@ const DEFAULT_AXIS_STATE = {
   dataRange: [null, null],
   precision: 0,
   standardDeviation: 0,
-  rangeMode: Y_AXIS_RANGE_MODES.FROM_ZERO,
+  rangeMode: Y_AXIS_RANGE_MODES.CENTERED,
   axisRange: [0, 0],
 };
 const DEFAULT_STATE = {
