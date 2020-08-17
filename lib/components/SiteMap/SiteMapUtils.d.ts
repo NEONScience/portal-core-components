@@ -876,7 +876,7 @@ export namespace SITE_MAP_PROP_TYPES {
     export const selection: PropTypes.Requireable<string>;
     export const maxSelectable: PropTypes.Requireable<number>;
     export const search: PropTypes.Requireable<string>;
-    export const features: PropTypes.Requireable<import("../../types/core").Nullable<string>[]>;
+    export const features: PropTypes.Requireable<(string | null | undefined)[]>;
 }
 export namespace SITE_MAP_DEFAULT_PROPS {
     const view_1: string;

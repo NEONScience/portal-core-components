@@ -50,6 +50,7 @@ const DEFAULT_STATE = {
     isAuthenticated: false,
     isAuthWorking: false,
     isAuthWsConnected: false,
+    userData: null,
   },
   isActive: false,
   isFinal: false,
@@ -146,10 +147,12 @@ const reducer = (state, action) => {
     case 'fetchAuthSucceeded':
       newState.fetches.auth.status = FETCH_STATUS.SUCCESS;
       newState.auth.isAuthenticated = !!action.isAuthenticated;
+      newState.auth.userData = AuthService.parseUserData(action.response);
       return newState;
     case 'fetchAuthFailed':
       newState.fetches.auth.status = FETCH_STATUS.ERROR;
       newState.auth.isAuthenticated = false;
+      newState.auth.userData = null;
       return newState;
 
     // Actions for handling HTML fetches
@@ -249,15 +252,15 @@ const Provider = (props) => {
       AuthService.fetchUserInfo(
         (response) => {
           const isAuthenticated = AuthService.isAuthenticated(response);
-          dispatch({ type: 'fetchAuthSucceeded', isAuthenticated });
+          dispatch({ type: 'fetchAuthSucceeded', isAuthenticated, response });
           if (!isAuthenticated && AuthService.isSsoLogin(response)) {
             // If we're not authenticated and have identified another SSO
             // application that's authenticated, trigger a silent authentication
             // check flow.
             if (!state.auth.isAuthWsConnected) {
-              cascadeAuthFetches.push(() => AuthService.loginSilently(dispatch));
+              cascadeAuthFetches.push(() => AuthService.loginSilently(dispatch, true));
             } else {
-              AuthService.loginSilently(dispatch);
+              AuthService.loginSilently(dispatch, true);
             }
           }
           // Initialize a subscription to the auth WS

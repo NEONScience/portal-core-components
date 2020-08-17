@@ -9,3 +9,7 @@ export declare type Undef<T> = T | undefined;
 export declare type AnyVoidFunc = (p?: any) => void;
 export declare type UnknownRecord = Record<string, unknown>;
 export declare type NullableRecord = UnknownRecord | null | undefined;
+export declare type StylesHook = (...props: unknown[]) => Record<string, string>;
+export declare type StringPropsObject = {
+    [key: string]: string;
+};

@@ -42,6 +42,8 @@ export const optionalEnvironmentVars = [
   'REACT_APP_NEON_HOST_OVERRIDE',
   'REACT_APP_NEON_WS_HOST_OVERRIDE',
   'REACT_APP_FOREIGN_LOCATION',
+  'REACT_APP_NEON_AUTH_ALLOW_SILENT',
+  'REACT_APP_NEON_AUTH_ALLOW_SILENT_BROWSER',
 ];
 
 // Temporary paths that shouldn't need to propogate to environment files until made more permanent
@@ -59,6 +61,19 @@ const NeonEnvironment = {
   isForeignEnv: process.env.REACT_APP_FOREIGN_LOCATION === 'true',
   useGraphql: process.env.REACT_APP_NEON_USE_GRAPHQL === 'true',
   showAopViewer: process.env.REACT_APP_NEON_SHOW_AOP_VIEWER === 'true',
+
+  /**
+   * Determines if the silent authentication process should be prevented
+   * based on environment as external dependencies are required.
+   * This property will override the preventSilentAuthBrowser property.
+   */
+  preventSilentAuth: process.env.REACT_APP_NEON_AUTH_PREVENT_SILENT === 'true',
+  /**
+   * Determines if the silent authentication process should be
+   * based on the browser as it is dependent on browser cookie handling.
+   * This property will be ignored when preventSilentAuth is false.
+   */
+  preventSilentAuthBrowser: process.env.REACT_APP_NEON_AUTH_PREVENT_SILENT_BROWSER === 'true',
 
   getApiName: () => process.env.REACT_APP_NEON_API_NAME,
   getApiVersion: () => process.env.REACT_APP_NEON_API_VERSION,

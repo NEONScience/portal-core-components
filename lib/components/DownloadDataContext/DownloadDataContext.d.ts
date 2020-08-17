@@ -16,12 +16,12 @@ declare namespace Provider {
             productName: PropTypes.Validator<string>;
             siteCodes: PropTypes.Requireable<(PropTypes.InferProps<{
                 siteCode: PropTypes.Validator<string>;
-                availableMonths: PropTypes.Validator<import("../../types/core").Nullable<string>[]>;
+                availableMonths: PropTypes.Validator<(string | null | undefined)[]>;
             }> | null | undefined)[]>;
         }>>;
         export const availabilityView: PropTypes.Requireable<string>;
-        export const sites: PropTypes.Requireable<import("../../types/core").Nullable<string>[]>;
-        export const dateRange: PropTypes.Requireable<import("../../types/core").Nullable<string>[]>;
+        export const sites: PropTypes.Requireable<(string | null | undefined)[]>;
+        export const dateRange: PropTypes.Requireable<(string | null | undefined)[]>;
         export const documentation: PropTypes.Requireable<string>;
         export const packageType: PropTypes.Requireable<string>;
         export const children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;

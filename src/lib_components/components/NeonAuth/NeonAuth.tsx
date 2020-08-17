@@ -4,8 +4,9 @@ import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import AuthService from './AuthService';
+import AuthService, { LOGOUT_REDIRECT_PATHS } from './AuthService';
 import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
+import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import Theme from '../Theme/Theme';
 
 export enum NeonAuthType {
@@ -62,13 +63,13 @@ const renderAuth = (
 
   const handleLogin = (): void => {
     let appliedLoginType: NeonAuthType = loginType;
-    // Default to interrupt if WS isn't connected
+    // Default to redirect if WS isn't connected
     if (!isAuthWsConnected) {
       appliedLoginType = NeonAuthType.REDIRECT;
     }
     switch (appliedLoginType) {
       case NeonAuthType.SILENT:
-        AuthService.loginSilently(dispatch);
+        AuthService.loginSilently(dispatch, false);
         break;
       case NeonAuthType.REDIRECT:
       default:
@@ -78,8 +79,12 @@ const renderAuth = (
   };
   const handleLogout = (): void => {
     let appliedLogoutType: NeonAuthType = logoutType;
-    // Default to interrupt if WS isn't connected
+    // Default to redirect if WS isn't connected
     if (!isAuthWsConnected) {
+      appliedLogoutType = NeonAuthType.REDIRECT;
+    }
+    const appPath: string = NeonEnvironment.getRouterBaseHomePath() || '';
+    if (LOGOUT_REDIRECT_PATHS.indexOf(appPath) >= 0) {
       appliedLogoutType = NeonAuthType.REDIRECT;
     }
     switch (appliedLogoutType) {

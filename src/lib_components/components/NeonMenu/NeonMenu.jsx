@@ -109,8 +109,6 @@ const neonLogo = (
   />
 );
 
-const cancellationSubject$ = new Subject();
-
 const NeonMenu = (props) => {
   const {
     loginPath,
@@ -125,23 +123,32 @@ const NeonMenu = (props) => {
   const [drawerIsOpen, setDrawerIsOpen] = useState(false);
 
   useEffect(() => {
+    const cancellationSubject$ = new Subject();
     NeonApi.getJson(
       NeonEnvironment.getFullApiPath('menu'),
       (response) => {
+        if (cancellationSubject$.closed) return;
         setMenuItems(get(response || {}, 'data.menuItems', defaultStaticMenuItems));
         setMenuFetched(true);
       },
       () => {
+        if (cancellationSubject$.closed) return;
         setMenuItems(defaultStaticMenuItems);
         setMenuFetched(true);
       },
       cancellationSubject$,
     );
     return () => {
-      cancellationSubject$.next(true);
-      cancellationSubject$.unsubscribe();
+      try {
+        cancellationSubject$.next(true);
+        cancellationSubject$.unsubscribe();
+      } catch (e) {
+        if (NeonEnvironment.isDevEnv) {
+          console.error(e); // eslint-disable-line no-console
+        }
+      }
     };
-  }, [loginPath]);
+  }, []);
 
   const notificationsDisabled = notifications.some(n => !n.dismissed);
   const notificationsColor = notificationsDisabled ? COLORS.GREY[200] : COLORS.GOLD[500];

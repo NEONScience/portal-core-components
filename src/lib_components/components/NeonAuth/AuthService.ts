@@ -15,27 +15,40 @@ import { RxStomp, RxStompConfig, RxStompState } from '@stomp/rx-stomp';
 import NeonApi from '../NeonApi';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 
+import BrowserService from '../../util/browserUtil';
 import { getJson } from '../../util/rxUtil';
 import { exists } from '../../util/typeUtil';
-import { AnyVoidFunc } from '../../types/core';
+import { AnyVoidFunc, Undef } from '../../types/core';
 
 const REDIRECT_URI: string = 'redirectUri';
+
+/**
+ * Set of white listed paths that should redirect upon logout
+ */
+export const LOGOUT_REDIRECT_PATHS: string[] = [
+  '/myaccount',
+];
 
 interface AuthMessage {
   login: boolean;
   logout: boolean;
   success: boolean;
-  message: string | undefined;
+  message: Undef<string>;
 }
 
 interface IAuthServiceState {
-  silentIFrame: HTMLIFrameElement | undefined;
-  rxStompClient: RxStomp | undefined;
-  watchSubscription$: Subscription | undefined;
+  silentIFrame: Undef<HTMLIFrameElement>;
+  rxStompClient: Undef<RxStomp>;
+  watchSubscription$: Undef<Subscription>;
   cancellationSubject$: Subject<any>;
   loginCancellationSubject$: Subject<any>;
   logoutCancellationSubject$: Subject<any>;
-  workingResolverSubscription$: Subscription | undefined;
+  workingResolverSubscription$: Undef<Subscription>;
+}
+
+enum AuthActionType {
+  LOGIN = 'LOGIN',
+  LOGOUT = 'LOGOUT',
 }
 
 export interface IAuthService {
@@ -45,6 +58,11 @@ export interface IAuthService {
    */
   getState: () => IAuthServiceState;
   /**
+   * Determines if the slient auth flow is supported
+   * @return {boolean} True if the silent auth flow is supported
+   */
+  allowSilentAuth: () => boolean;
+  /**
    * Initializes a login flow
    * @param {string} path - Optionally path to set for the root login URL
    */
@@ -52,8 +70,9 @@ export interface IAuthService {
   /**
    * Performs a silent login flow
    * @param {Dispatch} dispatch - The NeonContext dispatch function
+   * @param {boolean} isSsoCheck - Whether or not performaing an SSO check
    */
-  loginSilently: (dispatch: Dispatch<any>) => void;
+  loginSilently: (dispatch: Dispatch<any>, isSsoCheck: boolean) => void;
   /**
    * Initializes a logout flow
    * @param {string} path - Optionally path to set for the root logout URL
@@ -62,6 +81,7 @@ export interface IAuthService {
   /**
    * Performs a silent logout flow
    * @param {Dispatch} dispatch - The NeonContext dispatch function
+   *  upon logout
    */
   logoutSilently: (dispatch: Dispatch<any>) => void;
   /**
@@ -88,14 +108,22 @@ export interface IAuthService {
   ) => Subscription;
   /**
    * Parses the user info API response and determines the authenticated state
+   * @param {any} response - The API response
    * @return {boolean} True if the user is authenticated
    */
   isAuthenticated: (response: any) => boolean;
   /**
    * Determines if the user info response designates an SSO Login
+   * @param {any} response - The API response
    * @return {boolean} True if the user needs
    */
   isSsoLogin: (response: any) => boolean;
+  /**
+   * Parses user data from the API response
+   * @param {any} response - The API response
+   * @return {boolean} The resulting user data shape to store in state
+   */
+  parseUserData: (response: any) => any;
 
   /**
    * Watches the Auth0 topic via STOMP / WebSocket
@@ -157,21 +185,38 @@ const factory = {
   /**
    * Creates a subscription that will resolve any outstanding authentication
    * working state in case of error state that will not resolve appropriately.
-   * Will resolve itself after 30 seconds if not already unsubscribed.
-   * @param {AuthService} - The AuthService to perform on
-   * @param {IAuthServiceState} - The state of the auth service
+   * Will resolve itself after 15 seconds if not already unsubscribed.
+   * @param {AuthService} service - The AuthService to perform on
+   * @param {IAuthServiceState} state - The state of the auth service
    * @param {Dispatch} dispatch - The NeonContext dispatch function
+   * @param {AuthActionType} actionType - The type of action being performed
+   * @param {boolean} shouldRedirect - Option to redirect when resolving
    * @return The RxJS Subscription
    */
   createWorkingResolverSubscription: (
     service: IAuthService,
     state: IAuthServiceState,
     dispatch: Dispatch<any>,
+    actionType: AuthActionType,
+    shouldRedirect: boolean,
   ): Subscription => (
     of(true)
       .pipe(
-        delay(30000),
+        delay(15000),
         tap(() => {
+          if (shouldRedirect) {
+            switch (actionType) {
+              case AuthActionType.LOGIN:
+                service.login();
+                break;
+              case AuthActionType.LOGOUT:
+                service.logout();
+                break;
+              default:
+                break;
+            }
+            return;
+          }
           dispatch({ type: 'setAuthWorking', isAuthWorking: false });
           // Clean up iframe
           try {
@@ -201,6 +246,15 @@ const state: IAuthServiceState = {
 
 const AuthService: IAuthService = {
   getState: (): IAuthServiceState => state,
+  allowSilentAuth: (): boolean => {
+    if (NeonEnvironment.preventSilentAuth) {
+      return false;
+    }
+    if (NeonEnvironment.preventSilentAuthBrowser) {
+      return !BrowserService.getIsSafari();
+    }
+    return true;
+  },
   login: (path?: string): void => {
     const env: any = NeonEnvironment;
     const rootPath: string = exists(path)
@@ -210,12 +264,24 @@ const AuthService: IAuthService = {
     const href = `${rootPath}?${REDIRECT_URI}=${redirectUri}`;
     window.location.href = href;
   },
-  loginSilently: (dispatch: Dispatch<any>): void => {
+  loginSilently: (dispatch: Dispatch<any>, isSsoCheck: boolean): void => {
+    // Until custom domains are implemented,
+    // Safari does not support silent auth flow
+    const allowSilent: boolean = AuthService.allowSilentAuth();
+    if (isSsoCheck && !allowSilent) {
+      return;
+    }
+    if (!allowSilent) {
+      AuthService.login();
+      return;
+    }
     dispatch({ type: 'setAuthWorking', isAuthWorking: true });
     state.workingResolverSubscription$ = factory.createWorkingResolverSubscription(
       AuthService,
       state,
       dispatch,
+      AuthActionType.LOGIN,
+      !isSsoCheck,
     );
     getJson(
       NeonEnvironment.getFullAuthPath('silentLogin'),
@@ -247,11 +313,20 @@ const AuthService: IAuthService = {
     window.location.href = href;
   },
   logoutSilently: (dispatch: Dispatch<any>): void => {
+    // Until custom domains are implemented,
+    // Safari does not support silent auth flow
+    const allowSilent: boolean = AuthService.allowSilentAuth();
+    if (!allowSilent) {
+      AuthService.logout();
+      return;
+    }
     dispatch({ type: 'setAuthWorking', isAuthWorking: true });
     state.workingResolverSubscription$ = factory.createWorkingResolverSubscription(
       AuthService,
       state,
       dispatch,
+      AuthActionType.LOGOUT,
+      true,
     );
     getJson(
       NeonEnvironment.getFullAuthPath('silentLogout'),
@@ -314,6 +389,12 @@ const AuthService: IAuthService = {
       && exists(response.data)
       && (response.data.ssoLogin === true)
   ),
+  parseUserData: (response: any): any => {
+    if (!exists(response)) {
+      return null;
+    }
+    return response;
+  },
 
   watchAuth0: (dispatch: Dispatch<any>, onConnectCbs?: [AnyVoidFunc]): Subscription => {
     if (state.rxStompClient && state.watchSubscription$) {

@@ -1,15 +1,19 @@
 import { Dispatch } from 'react';
 import { Subscription, Subject } from 'rxjs';
 import { RxStomp } from '@stomp/rx-stomp';
-import { AnyVoidFunc } from '../../types/core';
+import { AnyVoidFunc, Undef } from '../../types/core';
+/**
+ * Set of white listed paths that should redirect upon logout
+ */
+export declare const LOGOUT_REDIRECT_PATHS: string[];
 interface IAuthServiceState {
-    silentIFrame: HTMLIFrameElement | undefined;
-    rxStompClient: RxStomp | undefined;
-    watchSubscription$: Subscription | undefined;
+    silentIFrame: Undef<HTMLIFrameElement>;
+    rxStompClient: Undef<RxStomp>;
+    watchSubscription$: Undef<Subscription>;
     cancellationSubject$: Subject<any>;
     loginCancellationSubject$: Subject<any>;
     logoutCancellationSubject$: Subject<any>;
-    workingResolverSubscription$: Subscription | undefined;
+    workingResolverSubscription$: Undef<Subscription>;
 }
 export interface IAuthService {
     /**
@@ -18,6 +22,11 @@ export interface IAuthService {
      */
     getState: () => IAuthServiceState;
     /**
+     * Determines if the slient auth flow is supported
+     * @return {boolean} True if the silent auth flow is supported
+     */
+    allowSilentAuth: () => boolean;
+    /**
      * Initializes a login flow
      * @param {string} path - Optionally path to set for the root login URL
      */
@@ -25,8 +34,9 @@ export interface IAuthService {
     /**
      * Performs a silent login flow
      * @param {Dispatch} dispatch - The NeonContext dispatch function
+     * @param {boolean} isSsoCheck - Whether or not performaing an SSO check
      */
-    loginSilently: (dispatch: Dispatch<any>) => void;
+    loginSilently: (dispatch: Dispatch<any>, isSsoCheck: boolean) => void;
     /**
      * Initializes a logout flow
      * @param {string} path - Optionally path to set for the root logout URL
@@ -35,6 +45,7 @@ export interface IAuthService {
     /**
      * Performs a silent logout flow
      * @param {Dispatch} dispatch - The NeonContext dispatch function
+     *  upon logout
      */
     logoutSilently: (dispatch: Dispatch<any>) => void;
     /**
@@ -58,14 +69,22 @@ export interface IAuthService {
     fetchUserInfoWithDispatch: (dispatch: Dispatch<any>, refreshSubscription?: boolean) => Subscription;
     /**
      * Parses the user info API response and determines the authenticated state
+     * @param {any} response - The API response
      * @return {boolean} True if the user is authenticated
      */
     isAuthenticated: (response: any) => boolean;
     /**
      * Determines if the user info response designates an SSO Login
+     * @param {any} response - The API response
      * @return {boolean} True if the user needs
      */
     isSsoLogin: (response: any) => boolean;
+    /**
+     * Parses user data from the API response
+     * @param {any} response - The API response
+     * @return {boolean} The resulting user data shape to store in state
+     */
+    parseUserData: (response: any) => any;
     /**
      * Watches the Auth0 topic via STOMP / WebSocket
      * @param {Dispatch} dispatch - The NeonContext dispatch function

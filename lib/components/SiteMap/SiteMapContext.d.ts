@@ -20,7 +20,7 @@ declare namespace Provider {
         selection: PropTypes.Requireable<string>;
         maxSelectable: PropTypes.Requireable<number>;
         search: PropTypes.Requireable<string>;
-        features: PropTypes.Requireable<import("../../types/core").Nullable<string>[]>;
+        features: PropTypes.Requireable<(string | null | undefined)[]>;
     };
     export { SITE_MAP_DEFAULT_PROPS as defaultProps };
 }

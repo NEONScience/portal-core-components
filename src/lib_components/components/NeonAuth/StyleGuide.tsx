@@ -1,8 +1,10 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 // @ts-nocheck
 
-import React from 'react';
+import React, { CSSProperties } from 'react';
 
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -16,8 +18,10 @@ import ExampleBlock from '../../../components/ExampleBlock';
 import PropsTable from '../../../components/PropsTable';
 
 import NeonAuth, { NeonAuthType, NeonAuthDisplayType } from './NeonAuth';
+import NeonContext from '../NeonContext/NeonContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import Theme from '../Theme/Theme';
+import UserCard from './UserCard';
 
 const NEON_SSO_COOKIE_NAME: string = 'X-NEON-SSO';
 const ALLOW_SSO_TOGGLE: boolean = false;
@@ -97,7 +101,54 @@ const propRows = [
   },
 ];
 
+const renderUserCard = (isAuthenticated: boolean, userData: any): JSX.Element => {
+  if (!isAuthenticated || !userData?.data?.user) {
+    return (<></>);
+  }
+  const {
+    data: {
+      user,
+    },
+  }: { user: Record<string, string> } = userData;
+  let fullName = '';
+  if (user.user_metadata && user.user_metadata.first_name) {
+    fullName = `${user.user_metadata.first_name}`;
+  } else if (user.given_name) {
+    fullName = `${user.give_name}`;
+  }
+  if (user.user_metadata && user.user_metadata.last_name) {
+    fullName = `${fullName} ${user.user_metadata.last_name}`;
+  } else if (user.family_name) {
+    fullName = `${user.family_name}`;
+  }
+  return (
+    <>
+      <Grid item xs={12} md={3} />
+      <Grid item xs={12} md={6}>
+        <Paper style={{ padding: '15px' }}>
+          <UserCard
+            pictureUrl={user.picture}
+            email={user.email}
+            fullName={`${fullName.trim()}`}
+            providers="Auth0"
+            lastLogin={user.last_login}
+          />
+        </Paper>
+      </Grid>
+      <Grid item xs={12} md={3} />
+    </>
+  );
+};
+
 export default function StyleGuide() {
+  const [
+    {
+      auth: {
+        isAuthenticated,
+        userData,
+      },
+    },
+  ] = NeonContext.useNeonContextState();
   const classes = useStyles(Theme);
   const hasSsoCookie: boolean = (document.cookie.indexOf(NEON_SSO_COOKIE_NAME) >= 0);
   const [ssoCookieEnabled, setSsoCookieEnabled] = React.useState(hasSsoCookie);
@@ -128,6 +179,12 @@ export default function StyleGuide() {
       </ExampleBlock>
     );
   }
+  const containerStyle: CSSProperties = {
+    textAlign: 'center',
+    display: 'flex',
+    alignContent: 'center',
+    justifyContent: 'center',
+  };
   return (
     <React.Fragment>
 
@@ -152,14 +209,21 @@ import NeonAuth from 'portal-core-components/lib/components/NeonAuth';
         flow for each action respectively.
       </DocBlock>
       <ExampleBlock>
-        <NeonAuth
-          loginPath={NeonEnvironment.getFullAuthPath('login')}
-          logoutPath={NeonEnvironment.getFullAuthPath('logout')}
-          accountPath={NeonEnvironment.route.buildAccountRoute()}
-          loginType={NeonAuthType.REDIRECT}
-          logoutType={NeonAuthType.REDIRECT}
-          displayType={NeonAuthDisplayType.MENU}
-        />
+        <Grid container spacing={1}>
+          <Grid item xs={12} style={containerStyle}>
+            <div style={{ alignSelf: 'center' }}>
+              <NeonAuth
+                loginPath={NeonEnvironment.getFullAuthPath('login')}
+                logoutPath={NeonEnvironment.getFullAuthPath('logout')}
+                accountPath={NeonEnvironment.route.buildAccountRoute()}
+                loginType={NeonAuthType.REDIRECT}
+                logoutType={NeonAuthType.REDIRECT}
+                displayType={NeonAuthDisplayType.MENU}
+              />
+            </div>
+          </Grid>
+          {renderUserCard(isAuthenticated, userData)}
+        </Grid>
       </ExampleBlock>
       <CodeBlock>
         {`
@@ -192,14 +256,21 @@ import NeonEnvironment from 'portal-core-components/lib/components/NeonEnvironme
         APIs.
       </DocBlock>
       <ExampleBlock>
-        <NeonAuth
-          loginPath={NeonEnvironment.getFullAuthPath('login')}
-          logoutPath={NeonEnvironment.getFullAuthPath('logout')}
-          accountPath={NeonEnvironment.route.buildAccountRoute()}
-          loginType={NeonAuthType.SILENT}
-          logoutType={NeonAuthType.SILENT}
-          displayType={NeonAuthDisplayType.MENU}
-        />
+        <Grid container spacing={1}>
+          <Grid item xs={12} style={containerStyle}>
+            <div style={{ alignSelf: 'center' }}>
+              <NeonAuth
+                loginPath={NeonEnvironment.getFullAuthPath('login')}
+                logoutPath={NeonEnvironment.getFullAuthPath('logout')}
+                accountPath={NeonEnvironment.route.buildAccountRoute()}
+                loginType={NeonAuthType.SILENT}
+                logoutType={NeonAuthType.SILENT}
+                displayType={NeonAuthDisplayType.MENU}
+              />
+            </div>
+          </Grid>
+          {renderUserCard(isAuthenticated, userData)}
+        </Grid>
       </ExampleBlock>
       <CodeBlock>
         {`
