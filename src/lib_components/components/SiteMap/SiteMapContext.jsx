@@ -15,12 +15,12 @@ import { map, catchError } from 'rxjs/operators';
 import NeonApi from '../NeonApi/NeonApi';
 import NeonContext from '../NeonContext/NeonContext';
 
-// TODO: Complete worker support and then reload these as workers
-// import FetchLocationsWorker from './FetchLocations.worker';
-// import FetchLocationHierarchyWorker from './FetchLocationHierarchy.worker';
-import { fetchLocations, fetchDomainHierarchy } from './FetchLocationUtils';
+import {
+  fetchManyLocationsGraphQL,
+  fetchSingleLocationREST,
+  fetchDomainHierarchy,
+} from './FetchLocationUtils';
 
-import { parseLocationData } from './SiteMapWorkerSafeUtils';
 import {
   DEFAULT_STATE,
   SORT_DIRECTIONS,
@@ -332,7 +332,6 @@ const reducer = (state, action) => {
       newState.featureDataFetches[dataSource][featureKey][siteCode][location] = status;
       // If the status is SUCCESS and the action has data, also commit the data
       if (status === FETCH_STATUS.SUCCESS && data) {
-        const parsedData = parseLocationData(data);
         if (!newState.featureData[featureType][featureKey]) {
           newState.featureData[featureType][featureKey] = {};
         }
@@ -340,7 +339,7 @@ const reducer = (state, action) => {
           newState.featureData[featureType][featureKey][siteCode] = {};
         }
         newState.featureData[featureType][featureKey][siteCode][location] = {
-          ...parsedData,
+          ...data,
           siteCode,
           featureKey,
           name: location,
@@ -837,26 +836,13 @@ const Provider = (props) => {
     }
     // Trigger focus location fetch
     dispatch({ type: 'setFocusLocationFetchStarted' });
-    fetchLocations([current])
+    fetchManyLocationsGraphQL([current])
       .then((response) => {
         dispatch({ type: 'setFocusLocationFetchSucceeded', data: response[current] });
       })
       .catch((error) => {
         dispatch({ type: 'setFocusLocationFetchFailed', error });
       });
-    /* TODO: Restore worker support
-    const worker = new FetchLocationsWorker();
-    worker.addEventListener('message', (message) => {
-      const { status, data, error } = message.data;
-      if (status === 'success') {
-        dispatch({ type: 'setFocusLocationFetchSucceeded', data: data[current] });
-      } else {
-        dispatch({ type: 'setFocusLocationFetchFailed', error });
-      }
-      worker.terminate();
-    });
-    worker.postMessage([current]);
-    */
   }, [
     state.sites,
     state.focusLocation,
@@ -882,7 +868,6 @@ const Provider = (props) => {
         dispatch({ type: 'setDomainLocationHierarchyFetchStarted', domainCode });
         fetchDomainHierarchy(domainCode)
           .then((response) => {
-            console.log('SUCCESS', response);
             dispatch({
               type: 'setDomainLocationHierarchyFetchSucceeded',
               data: response,
@@ -890,26 +875,12 @@ const Provider = (props) => {
             });
           })
           .catch((error) => {
-            console.log('FAILED', error);
             dispatch({
               type: 'setDomainLocationHierarchyFetchFailed',
               error,
               domainCode,
             });
           });
-        /*
-        const worker = new FetchLocationHierarchyWorker();
-        worker.addEventListener('message', (message) => {
-          const { status, data, error } = message.data;
-          if (status === 'success') {
-            dispatch({ type: 'setDomainLocationHierarchyFetchSucceeded', data, domainCode });
-          } else {
-            dispatch({ type: 'setDomainLocationHierarchyFetchFailed', error, domainCode });
-          }
-          worker.terminate();
-        });
-        worker.postMessage(domainCode);
-        */
       });
 
     // ARCGIS_ASSETS_API Fetches
@@ -976,30 +947,18 @@ const Provider = (props) => {
               siteCode,
               location,
             });
-            NeonApi.getLocationObservable(location).pipe(
-              map((response) => {
-                if (response && response.data && response.data) {
-                  dispatch({
-                    type: 'setFeatureDataFetchSucceeded',
-                    dataSource: restLocSource,
-                    data: response.data,
-                    featureKey,
-                    siteCode,
-                    location,
-                  });
-                  return of(true);
-                }
+            fetchSingleLocationREST(location)
+              .then((data) => {
                 dispatch({
-                  type: 'setFeatureDataFetchFailed',
+                  type: 'setFeatureDataFetchSucceeded',
                   dataSource: restLocSource,
-                  error: 'malformed response',
+                  data,
                   featureKey,
                   siteCode,
                   location,
                 });
-                return of(false);
-              }),
-              catchError((error) => {
+              })
+              .catch((error) => {
                 dispatch({
                   type: 'setFeatureDataFetchFailed',
                   dataSource: restLocSource,
@@ -1008,9 +967,7 @@ const Provider = (props) => {
                   siteCode,
                   location,
                 });
-                return of(false);
-              }),
-            ).subscribe();
+              });
           });
         });
       });
@@ -1032,7 +989,7 @@ const Provider = (props) => {
               siteCode,
               fetchId,
             });
-            fetchLocations(gqlLocFetches[minZoom][siteCode].fetches[fetchId].locations)
+            fetchManyLocationsGraphQL(gqlLocFetches[minZoom][siteCode].fetches[fetchId].locations)
               .then((response) => {
                 dispatch({
                   type: 'setFeatureDataFetchSucceeded',
@@ -1053,33 +1010,6 @@ const Provider = (props) => {
                   error,
                 });
               });
-            /*
-            const worker = new FetchLocationsWorker();
-            worker.addEventListener('message', (message) => {
-              const { status, data, error } = message.data;
-              if (status === 'success') {
-                dispatch({
-                  type: 'setFeatureDataFetchSucceeded',
-                  dataSource: gqlLocSource,
-                  minZoom,
-                  siteCode,
-                  fetchId,
-                  data,
-                });
-              } else {
-                dispatch({
-                  type: 'setFeatureDataFetchFailed',
-                  dataSource: gqlLocSource,
-                  minZoom,
-                  siteCode,
-                  fetchId,
-                  error,
-                });
-              }
-              worker.terminate();
-            });
-            worker.postMessage(gqlLocFetches[minZoom][siteCode].fetches[fetchId].locations);
-            */
           });
       });
     });
