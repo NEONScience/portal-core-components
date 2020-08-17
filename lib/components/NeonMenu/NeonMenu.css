@@ -113,7 +113,7 @@ li.rc-menu-item-active a:hover {
   margin-top: 0;
   padding-left: 0;
   list-style: none;
-  z-index: 101;
+  z-index: 3;
   border: 1px solid #cccece;
   /* box-shadow: 0 0 4px #d9d9d9; */
   /* border-radius: 3px; */

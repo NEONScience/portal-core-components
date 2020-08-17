@@ -557,11 +557,11 @@ export default function TimeSeriesViewerAxes() {
       <div style={{ marginRight: Theme.spacing(5) }}>
         <Typography variant="h6" style={{ marginBottom: Theme.spacing(2) }}>y Axes</Typography>
         <div className={classes.optionsContainer}>
-          <div style={{ marginBottom: Theme.spacing(3), marginRight: Theme.spacing(3) }}>
+          <div style={{ marginBottom: Theme.spacing(3), marginRight: Theme.spacing(4) }}>
             {renderOption('Y_AXIS_SCALE')}
           </div>
           <div className={classes.yAxesRangesContainer}>
-            <div style={!hasY2Axis ? null : { marginRight: Theme.spacing(3) }}>
+            <div style={!hasY2Axis ? null : { marginRight: Theme.spacing(4) }}>
               {renderOption('Y1_AXIS_RANGE')}
             </div>
             {!hasY2Axis ? null : renderOption('Y2_AXIS_RANGE')}
@@ -572,7 +572,7 @@ export default function TimeSeriesViewerAxes() {
         <Typography variant="h6" style={{ marginBottom: Theme.spacing(2) }}>x Axis (Time)</Typography>
         <div className={classes.optionsContainer}>
           {state.availableTimeSteps.size < 3 ? null : (
-            <div style={{ marginRight: Theme.spacing(3) }}>{renderOption('TIME_STEP')}</div>
+            <div style={{ marginRight: Theme.spacing(4) }}>{renderOption('TIME_STEP')}</div>
           )}
           {renderOption('ROLL_PERIOD')}
         </div>

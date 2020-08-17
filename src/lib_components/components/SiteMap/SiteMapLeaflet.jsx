@@ -49,12 +49,19 @@ const useStyles = makeStyles(theme => ({
         borderColor: Theme.colors.LIGHT_BLUE[400],
       },
     },
+    '& div.leaflet-control-zoom': {
+      border: 'none',
+    },
     '& div.leaflet-bar': {
       borderRadius: '2px',
       boxShadow: 'unset',
       '& a': {
         color: Theme.colors.LIGHT_BLUE[500],
         border: `1px solid ${Theme.colors.LIGHT_BLUE[500]}`,
+        width: '26px',
+        height: '26px',
+        lineHeight: '26px',
+        fontSize: '18px',
         '&:hover, &:active': {
           color: Theme.colors.LIGHT_BLUE[400],
           borderColor: Theme.colors.LIGHT_BLUE[400],

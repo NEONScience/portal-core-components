@@ -21,6 +21,10 @@ const useStyles = makeStyles(theme => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
+  exampleContainer: {
+    width: '100%',
+    overflow: 'hidden',
+  },
   example: {
     width: '100%',
     overflow: 'hidden',
@@ -55,6 +59,48 @@ const propRows = [
         optionally have an <tt>href</tt> string. When the <tt>href</tt> is not present the
         breadcrumb will appear as static text, not a link (this is usually intended for the last
         crumb in the chain representing the current page).
+      </p>
+    ),
+  },
+  // customFooter
+  {
+    name: 'customFooter',
+    type: 'jsx',
+    default: 'null',
+    examples: (
+      <CodeBlock>
+        {`
+<div>
+  footer content
+</div>
+        `}
+      </CodeBlock>
+    ),
+    description: (
+      <p>
+        A JSX node containing header content to be used as the page footer.
+      </p>
+    ),
+  },
+  // customHeader
+  {
+    name: 'customHeader',
+    type: 'jsx',
+    default: 'null',
+    examples: (
+      <CodeBlock>
+        {`
+<div>
+  header content
+</div>
+        `}
+      </CodeBlock>
+    ),
+    description: (
+      <p>
+        A JSX node containing header content to be used as the page header. When defined, if
+        the <tt>useCoreHeader</tt> prop is also defined, the latter will be ignored and the custom
+        header will take precendence.
       </p>
     ),
   },
@@ -345,6 +391,25 @@ export default function StyleGuide() {
     <Link href="https://material-ui.com/components/skeleton/">Material UI Skeletons</Link>
   );
 
+  const customStyles = {
+    width: '100%',
+    height: '100px',
+    fontSize: '3rem',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  };
+  const customHeader = (
+    <div style={{ backgroundColor: 'green', ...customStyles }}>
+      <span>Custom Header</span>
+    </div>
+  );
+  const customFooter = (
+    <div style={{ backgroundColor: 'purple', ...customStyles }}>
+      <span>Custom Footer</span>
+    </div>
+  );
+
   return (
     <React.Fragment>
 
@@ -363,6 +428,13 @@ import NeonPage from 'portal-core-components/lib/components/NeonPage';
         `}
       </CodeBlock>
 
+      <Typography variant="h4" component="h2" gutterBottom>Props</Typography>
+
+      <DocBlock>
+        <PropsTable props={propRows} />
+      </DocBlock>
+
+      <Divider className={classes.divider} />
       <Typography variant="h4" component="h2" gutterBottom>Usage</Typography>
 
       <DocBlock>
@@ -463,12 +535,11 @@ export default function MyNeonPage() {
         however, if defined.
       </DocBlock>
       <ExampleBlock>
-        <div>
+        <div className={classes.exampleContainer}>
           <Button {...buttonProps} onClick={() => setIsLoading(!isLoading)}>
             {`${isLoading ? 'Hide' : 'Show'} Loading`}
           </Button>
-          <br />
-          <div className={classes.example}>
+          <div className={classes.example} style={{ marginTop: '24px' }}>
             <NeonPage
               title="My Neon Page"
               breadcrumbs={breadcrumbs}
@@ -520,12 +591,11 @@ export default function MyNeonPage() {
         however, if defined.
       </DocBlock>
       <ExampleBlock>
-        <div>
+        <div className={classes.exampleContainer}>
           <Button {...buttonProps} onClick={() => setIsError(!isError)}>
             {`${isError ? 'Hide' : 'Show'} Error`}
           </Button>
-          <br />
-          <div className={classes.example}>
+          <div className={classes.example} style={{ marginTop: '24px' }}>
             <NeonPage
               title="My Neon Page"
               breadcrumbs={breadcrumbs}
@@ -587,6 +657,65 @@ const notification = 'Here is a sample NeonPage notification with a <a href="htt
 <NeonPage notification={notification}>
   <Typography>Content</Typography>
 </NeonPage>
+        `}
+      </CodeBlock>
+
+      <Divider className={classes.divider} />
+      <Typography variant="h5" component="h3" gutterBottom>Headers and Footers</Typography>
+      <DocBlock>
+        By default NeonPage will pull Header and Footer content from the NeonScience.org Drupal
+        site. If need be the legacy core components header may be used instead (requiring no
+        fetching) by supplying the <tt>useCoreHeader</tt> boolean prop.
+      </DocBlock>
+      <DocBlock>
+        NeonPage can also optionally render an entirely custom header or footer using
+        the <tt>customHeader</tt> and <tt>customFooter</tt> props. These props are independent of
+        one another, so for example using the core or drupal footer with a custom header is
+        supported. If <tt>customHeader</tt> and <tt>useCoreHeader</tt> are both defined then
+        the <tt>useCoreHeader</tt> boolean prop is ignored and the custom header takes precedence.
+      </DocBlock>
+      <ExampleBlock>
+        <div className={classes.example}>
+          <NeonPage
+            title="My Neon Page"
+            customHeader={customHeader}
+            customFooter={customFooter}
+          >
+            <Typography>Content</Typography>
+          </NeonPage>
+        </div>
+      </ExampleBlock>
+      <CodeBlock>
+        {`
+export default function MyNeonPage() {
+  const customStyles = {
+    width: '100%',
+    height: '100px',
+    fontSize: '3rem',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  };
+  const customHeader = (
+    <div style={{ backgroundColor: 'green', ...customStyles }}>
+      <span>Custom Header</span>
+    </div>
+  );
+  const customFooter = (
+    <div style={{ backgroundColor: 'purple', ...customStyles }}>
+      <span>Custom Footer</span>
+    </div>
+  );
+  return (
+    <NeonPage
+      title="My Neon Page"
+      customHeader={customHeader}
+      customFooter={customFooter}
+    >
+      <Typography>Content</Typography>
+    </NeonPage>
+  );
+}
         `}
       </CodeBlock>
 
@@ -659,13 +788,6 @@ export default function MyNeonPage() {
 }
         `}
       </CodeBlock>
-
-      <Divider className={classes.divider} />
-      <Typography variant="h4" component="h2" gutterBottom>Props</Typography>
-
-      <DocBlock>
-        <PropsTable props={propRows} />
-      </DocBlock>
 
     </React.Fragment>
   );

@@ -6,6 +6,8 @@ declare namespace NeonPage {
             name: PropTypes.Validator<string>;
             href: PropTypes.Requireable<string>;
         }> | null | undefined)[]>;
+        export const customHeader: PropTypes.Requireable<PropTypes.ReactNodeLike>;
+        export const customFooter: PropTypes.Requireable<PropTypes.ReactNodeLike>;
         export const error: PropTypes.Requireable<string>;
         export const loading: PropTypes.Requireable<string>;
         export const notification: PropTypes.Requireable<string>;
@@ -35,6 +37,10 @@ declare namespace NeonPage {
     export namespace defaultProps {
         const breadcrumbs_1: never[];
         export { breadcrumbs_1 as breadcrumbs };
+        const customHeader_1: null;
+        export { customHeader_1 as customHeader };
+        const customFooter_1: null;
+        export { customFooter_1 as customFooter };
         const error_1: null;
         export { error_1 as error };
         const loading_1: null;

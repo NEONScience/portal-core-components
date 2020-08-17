@@ -349,6 +349,9 @@ const SiteMapContainer = (props) => {
       iconSvg,
       featureShape,
       style: featureStyle = {},
+      description,
+      descriptionFromParentDataFeatureKey,
+      parentDataFeatureKey,
     } = feature;
     const handleChange = (event) => {
       dispatch({
@@ -419,7 +422,14 @@ const SiteMapContainer = (props) => {
     let indeterminate = false;
     let collapsed = false;
     let label = null;
-    const tooltip = feature.description || null;
+    let tooltip = null;
+    if (description) { tooltip = description; }
+    if (
+      descriptionFromParentDataFeatureKey
+        && parentDataFeatureKey && FEATURES[parentDataFeatureKey]
+    ) {
+      tooltip = FEATURES[parentDataFeatureKey].description || null;
+    }
     if (feature.type === FEATURE_TYPES.GROUP) {
       collapsed = state.filters.features.collapsed.has(key);
       const collapseTitle = `${collapsed ? 'Expand' : 'Collapse'} ${feature.name}`;
@@ -504,8 +514,8 @@ const SiteMapContainer = (props) => {
             {formControl}
           </Tooltip>
         ) : formControl}
-        {!allChildren.length || collapsed ? null : (
-          <div style={{ marginLeft: Theme.spacing(3) }}>
+        {!allChildren.length ? null : (
+          <div style={{ marginLeft: Theme.spacing(3), display: collapsed ? 'none' : 'block' }}>
             {allChildren
               .filter(f => state.filters.features.available[f])
               .map(renderFeatureOption)}
@@ -532,7 +542,6 @@ const SiteMapContainer = (props) => {
   /**
      Render - Full Component
   */
-  // MuiButtonBase-root MuiIconButton-root makeStyles-resizeButton-201 MuiIconButton-colorPrimary
   return (
     <div {...containerProps} aria-describedby={progressId}>
       {state.filters.position === 'top' ? <SiteMapFilters /> : null}
@@ -540,13 +549,15 @@ const SiteMapContainer = (props) => {
         {view === VIEWS.MAP ? <SiteMapLeaflet /> : null }
         {view === VIEWS.TABLE ? <SiteMapTable /> : null }
         {renderVerticalResizeButton()}
-        {!state.filters.features.open ? null : (
-          <div ref={featuresRef} className={classes.featuresContainer}>
-            {Object.keys(FEATURES)
-              .filter(f => state.filters.features.available[f] && !FEATURES[f].parent)
-              .map(renderFeatureOption)}
-          </div>
-        )}
+        <div
+          ref={featuresRef}
+          className={classes.featuresContainer}
+          style={{ display: state.filters.features.open ? 'flex' : 'none' }}
+        >
+          {Object.keys(FEATURES)
+            .filter(f => state.filters.features.available[f] && !FEATURES[f].parent)
+            .map(renderFeatureOption)}
+        </div>
       </div>
       {renderProgress()}
       {state.filters.position === 'bottom' ? <SiteMapFilters /> : null}

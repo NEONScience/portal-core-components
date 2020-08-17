@@ -39,6 +39,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import ClearIcon from '@material-ui/icons/Clear';
 import ElevationIcon from '@material-ui/icons/Terrain';
 import HistoryIcon from '@material-ui/icons/History';
+import InfoIcon from '@material-ui/icons/InfoOutlined';
 import LocationIcon from '@material-ui/icons/MyLocation';
 import NoneIcon from '@material-ui/icons/NotInterested';
 import SearchIcon from '@material-ui/icons/Search';
@@ -117,15 +118,10 @@ const useStyles = makeStyles(theme => ({
     flexFlow: 'row wrap',
   },
   siteCard: {
+    width: '100%',
     padding: theme.spacing(1.5, 2, 1.5, 2),
     backgroundColor: theme.palette.grey[50],
     marginTop: theme.spacing(3),
-    [theme.breakpoints.up('lg')]: {
-      marginRight: theme.spacing(3),
-    },
-    [theme.breakpoints.down('md')]: {
-      width: '100%',
-    },
   },
   siteTitleContainer: {
     display: 'flex',
@@ -159,17 +155,24 @@ const useStyles = makeStyles(theme => ({
   },
   positionsTitleContainer: {
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     alignItems: 'center',
+    marginTop: theme.spacing(2),
+  },
+  positionsCardContainer: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    flexWrap: 'wrap',
   },
   positionCard: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
     padding: theme.spacing(0.5, 2, 0.5, 0.5),
-    width: '100%',
     backgroundColor: theme.palette.grey[100],
     marginTop: theme.spacing(1.5),
+    marginRight: theme.spacing(3),
   },
   startFlex: {
     display: 'flex',
@@ -288,6 +291,17 @@ const OptionDefaultProps = {
   isDisabled: false,
 };
 
+const positionsDescription = `
+  Positions are distinct physical sensor locations at a given site. The x, y, and z coordinates
+  describe where the sensor is located relative to the ground-level reference point for the site.
+  Positions may change over time.
+`;
+
+const positionsSeriesDescription = `
+  Each position selected will become a distinct series in the chart for each variable (example: 2
+  positions × 3 variables = 6 distinct series).
+`;
+
 /**
    PositionHistoryButton - button that opens a dialog to show all history for a given position
 */
@@ -334,10 +348,7 @@ function PositionHistoryButton(props) {
         </DialogTitle>
         <DialogContent dividers>
           <DialogContentText id="position-history-dialog-description" tabIndex={-1} variant="body2">
-            Positions are distinct physical sensor locations at a given site. The x, y, and z
-            coordinates describe where the sensor is located relative to the ground-level
-            reference point for the site. Positions may change over time. The table below shows
-            changes to the physical location of this position since its creation.
+            {`${positionsDescription} The table below shows changes to the physical location of this position since its creation.`}
           </DialogContentText>
           <TableContainer>
             <Table className={classes.table} aria-label="simple table">
@@ -473,7 +484,7 @@ function PositionDetail(props) {
           </Typography>
         </div>
       </div>
-      <div>
+      <div style={{ marginRight: Theme.spacing(3) }}>
         <Typography variant="body2">
           <span style={{ ...axisStyle }}>x:</span>
           {`${xOffset}m`}
@@ -485,7 +496,7 @@ function PositionDetail(props) {
           {`${zOffset}m`}
         </Typography>
       </div>
-      <div style={{ flexGrow: 1, textAlign: 'right' }}>
+      <div style={{ textAlign: 'right' }}>
         <PositionHistoryButton siteCode={siteCode} position={position} history={history} />
       </div>
     </div>
@@ -512,7 +523,7 @@ function SelectedPosition(props) {
       <IconButton
         aria-label={`remove position ${position} from ${siteCode}`}
         disabled={disabled}
-        style={{ marginRight: Theme.spacing(1) }}
+        style={{ marginLeft: Theme.spacing(1), marginRight: Theme.spacing(1) }}
         onClick={() => {
           if (disabled) { return; }
           const selectedSiteIdx = state.selection.sites
@@ -573,6 +584,7 @@ function SelectPositionsButton(props) {
         size="small"
         variant="outlined"
         startIcon={<SelectIcon />}
+        style={{ marginLeft: Theme.spacing(4) }}
         onClick={() => {
           setLocalSelectedPositions(selectedPositions);
           setSelectDialogOpen(true);
@@ -607,10 +619,10 @@ function SelectPositionsButton(props) {
         </DialogTitle>
         <DialogContent dividers>
           <DialogContentText id="add-positions-dialog-description" tabIndex={-1} variant="body2">
-            Positions are distinct physical sensor locations at a given site. The x, y, and z
-            coordinates describe where the sensor is located relative to the ground-level
-            reference point for the site. Each position selected will become a distinct series
-            in the chart for each variable (example: 2 positions × 3 variables = 6 distinct series).
+            {positionsDescription}
+            <br />
+            <br />
+            {positionsSeriesDescription}
           </DialogContentText>
           <List>
             {availablePositions.map((position) => {
@@ -927,19 +939,35 @@ function SelectedSite(props) {
       {positions.length ? (
         <div>
           <div className={classes.positionsTitleContainer}>
-            <Typography variant="h6">
-              Position(s):
+            <Typography variant="subtitle2">
+              Position(s)
             </Typography>
+            <Tooltip
+              title={(
+                <React.Fragment>
+                  {positionsDescription}
+                  <br />
+                  <br />
+                  {positionsSeriesDescription}
+                </React.Fragment>
+              )}
+            >
+              <IconButton size="small" style={{ marginLeft: Theme.spacing(1) }}>
+                <InfoIcon fontSize="small" />
+              </IconButton>
+            </Tooltip>
             <SelectPositionsButton selectedSite={site} />
           </div>
-          {positions.map(position => (
-            <SelectedPosition
-              key={position}
-              siteCode={siteCode}
-              position={position}
-              disabled={positions.length < 2}
-            />
-          ))}
+          <div className={classes.positionsCardContainer}>
+            {positions.map(position => (
+              <SelectedPosition
+                key={position}
+                siteCode={siteCode}
+                position={position}
+                disabled={positions.length < 2}
+              />
+            ))}
+          </div>
         </div>
       ) : (
         <div>

@@ -147,7 +147,6 @@ export namespace FEATURES {
         name: string;
         nameSingular: string;
         type: string;
-        description: string;
         hideByDefault: boolean;
         dataSource: string;
         primaryIdOnly: boolean;
@@ -160,7 +159,6 @@ export namespace FEATURES {
         name: string;
         nameSingular: string;
         type: string;
-        description: string;
         hideByDefault: boolean;
         dataSource: string;
         primaryIdOnly: boolean;
@@ -175,7 +173,6 @@ export namespace FEATURES {
         type: string;
         minZoom: number;
         dataSource: string;
-        description: string;
         featureShape: string;
         style: {
             color: string;
@@ -186,7 +183,6 @@ export namespace FEATURES {
         name: string;
         type: string;
         minZoom: number;
-        description: string;
     };
     export const WATERSHED_BOUNDARIES: {
         name: string;
@@ -194,7 +190,6 @@ export namespace FEATURES {
         type: string;
         minZoom: number;
         dataSource: string;
-        description: string;
         parent: string;
         featureShape: string;
         style: {
@@ -207,7 +202,6 @@ export namespace FEATURES {
         type: string;
         minZoom: number;
         dataSource: string;
-        description: string;
         parent: string;
         featureShape: string;
         style: {
@@ -220,7 +214,6 @@ export namespace FEATURES {
         type: string;
         minZoom: number;
         dataSource: string;
-        description: string;
         parent: string;
         featureShape: string;
         iconSvg: any;
@@ -246,7 +239,6 @@ export namespace FEATURES {
         type: string;
         minZoom: number;
         dataSource: string;
-        description: string;
         parent: string;
         featureShape: string;
         style: {
@@ -260,7 +252,6 @@ export namespace FEATURES {
         type: string;
         minZoom: number;
         dataSource: string;
-        description: string;
         parent: string;
         featureShape: string;
         style: {
@@ -272,7 +263,6 @@ export namespace FEATURES {
         name: string;
         type: string;
         minZoom: number;
-        description: string;
         fetchingForFeatures: string[];
     };
     export const TOWERS: {
@@ -282,7 +272,6 @@ export namespace FEATURES {
         minZoom: number;
         dataSource: string;
         matchLocationType: string;
-        description: string;
         parent: string;
         featureShape: string;
         iconScale: number;
@@ -297,7 +286,6 @@ export namespace FEATURES {
         minZoom: number;
         dataSource: string;
         matchLocationType: string;
-        description: string;
         parent: string;
         featureShape: string;
         iconScale: number;
@@ -312,7 +300,6 @@ export namespace FEATURES {
         minZoom: number;
         dataSource: string;
         matchLocationType: string;
-        description: string;
         parent: string;
         featureShape: string;
         iconScale: number;
@@ -466,7 +453,7 @@ export namespace FEATURES {
         name: string;
         nameSingular: string;
         type: string;
-        description: string;
+        descriptionFromParentDataFeatureKey: boolean;
         parent: string;
         parentDataFeatureKey: string;
         dataSource: string;
@@ -484,7 +471,7 @@ export namespace FEATURES {
         name: string;
         nameSingular: string;
         type: string;
-        description: string;
+        descriptionFromParentDataFeatureKey: boolean;
         parent: string;
         parentDataFeatureKey: string;
         minZoom: number;
@@ -498,7 +485,7 @@ export namespace FEATURES {
         name: string;
         nameSingular: string;
         type: string;
-        description: string;
+        descriptionFromParentDataFeatureKey: boolean;
         parent: string;
         parentDataFeatureKey: string;
         dataSource: string;
@@ -516,7 +503,7 @@ export namespace FEATURES {
         name: string;
         nameSingular: string;
         type: string;
-        description: string;
+        descriptionFromParentDataFeatureKey: boolean;
         parent: string;
         parentDataFeatureKey: string;
         dataSource: string;
@@ -534,7 +521,7 @@ export namespace FEATURES {
         name: string;
         nameSingular: string;
         type: string;
-        description: string;
+        descriptionFromParentDataFeatureKey: boolean;
         parent: string;
         parentDataFeatureKey: string;
         dataSource: string;
@@ -552,7 +539,6 @@ export namespace FEATURES {
         name: string;
         type: string;
         minZoom: number;
-        description: string;
     };
     export const AQUATIC_BENCHMARKS: {
         name: string;
@@ -561,7 +547,6 @@ export namespace FEATURES {
         minZoom: number;
         dataSource: string;
         matchLocationType: string;
-        description: string;
         parent: string;
         featureShape: string;
         iconScale: number;
@@ -573,14 +558,12 @@ export namespace FEATURES {
         name: string;
         type: string;
         minZoom: number;
-        description: string;
         parent: string;
     };
     export const AQUATIC_OBSERVATIONAL_SAMPLING: {
         name: string;
         type: string;
         minZoom: number;
-        description: string;
         parent: string;
     };
     export const AQUATIC_RIPARIAN_ASSESSMENTS: {
@@ -604,7 +587,6 @@ export namespace FEATURES {
         minZoom: number;
         dataSource: string;
         matchLocationType: string;
-        description: string;
         parent: string;
         featureShape: string;
         iconScale: number;
@@ -649,7 +631,6 @@ export namespace FEATURES {
         minZoom: number;
         dataSource: string;
         matchLocationType: string;
-        description: string;
         parent: string;
         featureShape: string;
         iconSvg: any;
@@ -663,7 +644,6 @@ export namespace FEATURES {
         minZoom: number;
         dataSource: string;
         matchLocationType: string;
-        description: string;
         parent: string;
         featureShape: string;
         iconSvg: any;
@@ -677,7 +657,6 @@ export namespace FEATURES {
         minZoom: number;
         dataSource: string;
         matchLocationType: string;
-        description: string;
         parent: string;
         featureShape: string;
         iconScale: number;
@@ -692,7 +671,6 @@ export namespace FEATURES {
         minZoom: number;
         dataSource: string;
         matchLocationType: string;
-        description: string;
         parent: string;
         featureShape: string;
         iconSvg: any;
@@ -735,7 +713,6 @@ export namespace FEATURES {
         minZoom: number;
         dataSource: string;
         matchLocationType: string;
-        description: string;
         parent: string;
         featureShape: string;
         iconScale: number;
@@ -746,7 +723,6 @@ export namespace FEATURES {
     export const SITE_MARKERS: {
         name: string;
         type: string;
-        description: string;
         maxZoom: number;
     };
     export const TERRESTRIAL_CORE_SITES: {
