@@ -3,6 +3,19 @@
 const path = require('path');
 const fs = require('fs');
 
+/**
+   Fix Worker Babel
+
+   The lib export runs everything through babel, even the workers. But the transpiled internal logic
+   of a given worker will fail if it uses polyfills injected by babel at the top of the worker file
+   (outside of worker.spawn(...)).
+
+   This script runs as part of the post-babel cleanup of building the lib export. It edits any
+   workers that have babel polyfills by moving the polyfill definition lines directly into the
+   worker's internal body. This allows us to build workers with ES* syntax and trust that they
+   will work as expected when transpiled into the lib export.
+*/
+
 console.log('Adjusting babel polyfills for workers...');
 
 const workers = fs.readdirSync(path.resolve(__dirname, 'lib/workers/'));
