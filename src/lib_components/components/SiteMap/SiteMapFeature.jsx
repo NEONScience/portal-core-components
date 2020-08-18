@@ -750,6 +750,16 @@ const SiteMapFeature = (props) => {
     return (
       <Popup {...popupProps}>
         {renderPopupTitle(`${site.description} (${site.siteCode})`, false)}
+        <Link
+          variant="caption"
+          component="button"
+          onClick={() => jumpTo(site.siteCode)}
+          style={{ marginLeft: '-2px', marginBottom: '8px' }}
+          data-selenium="sitemap-map-popup-siteLink"
+        >
+          {markerIcon}
+          {`Jump to ${site.siteCode} on the map`}
+        </Link>
         <Grid container spacing={1} style={{ marginBottom: Theme.spacing(1) }}>
           {/* Terrain and Type */}
           <Grid item xs={8}>
@@ -842,7 +852,20 @@ const SiteMapFeature = (props) => {
           {featureData[domainCode].name}
         </span>
       );
-      return renderBoundaryPopup(domainCode, title, [renderChildSites]);
+      const jumpLink = (
+        <Link
+          key="jumpLink"
+          variant="caption"
+          component="button"
+          onClick={() => jumpTo(domainCode)}
+          style={{ marginBottom: '8px' }}
+          data-selenium="sitemap-map-popup-domainLink"
+        >
+          {markerIcon}
+          {`Jump to ${domainCode} on the map`}
+        </Link>
+      );
+      return renderBoundaryPopup(domainCode, title, [jumpLink, renderChildSites]);
     },
     FLIGHT_BOX_BOUNDARIES: renderBoundaryPopup,
     HUTS: renderLocationPopup,
@@ -856,11 +879,26 @@ const SiteMapFeature = (props) => {
       </Popup>
     ),
     SAMPLING_BOUNDARIES: renderBoundaryPopup,
-    STATES: stateCode => renderBoundaryPopup(
-      stateCode,
-      featureData[stateCode] ? featureData[stateCode].name : stateCode,
-      [renderChildSites],
-    ),
+    STATES: (stateCode) => {
+      const jumpLink = (
+        <Link
+          key="jumpLink"
+          variant="caption"
+          component="button"
+          onClick={() => jumpTo(stateCode)}
+          style={{ marginBottom: '8px' }}
+          data-selenium="sitemap-map-popup-stateLink"
+        >
+          {markerIcon}
+          {`Jump to ${stateCode} on the map`}
+        </Link>
+      );
+      return renderBoundaryPopup(
+        stateCode,
+        featureData[stateCode] ? featureData[stateCode].name : stateCode,
+        [jumpLink, renderChildSites],
+      );
+    },
     TERRESTRIAL_CORE_SITES: renderSitePopup,
     TERRESTRIAL_RELOCATABLE_SITES: renderSitePopup,
     TOWER_AIRSHEDS: renderBoundaryPopup,

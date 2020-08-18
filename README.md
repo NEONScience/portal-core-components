@@ -151,6 +151,7 @@ The lib build for core components includes a step to migrate any babel polyfills
 for `import` used to import Parallel.js) directly into the worker logic. This migration is not perfect.
 If it missed something that it should have caught please update `lif-fix-worker-babel.js` to suit.
 
+
 ## Modifying Existing Components
 
 Have nodejs.
