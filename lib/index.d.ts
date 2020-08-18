@@ -8,6 +8,7 @@ export { default as NeonContext } from './components/NeonContext';
 export { default as NeonEnvironment } from './components/NeonEnvironment';
 export { default as NeonGraphQL } from './components/NeonGraphQL';
 export { default as NeonPage } from './components/NeonPage';
+export { default as NeonRouter } from './components/NeonRouter';
 export { default as SiteChip } from './components/SiteChip';
 export { default as SiteMap } from './components/SiteMap';
 export { default as Theme } from './components/Theme';

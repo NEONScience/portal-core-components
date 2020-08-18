@@ -171,7 +171,7 @@ const NeonMenu = (props) => {
         loginPath={loginPath}
         logoutPath={logoutPath}
         accountPath={accountPath}
-        loginType={NeonAuthType.INTERRUPT}
+        loginType={NeonAuthType.REDIRECT}
         logoutType={NeonAuthType.SILENT}
         displayType={NeonAuthDisplayType.MENU}
       />

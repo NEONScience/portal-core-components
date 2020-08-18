@@ -4,11 +4,12 @@ export { default as DataThemeIcon } from './components/DataThemeIcon';
 export { default as DataProductAvailability } from './components/DataProductAvailability';
 export { default as DownloadDataButton } from './components/DownloadDataButton';
 export { default as DownloadDataContext } from './components/DownloadDataContext';
-export { default as NeonAuth } from './components/NeonAuth'; /* eslint-disable-line */
+export { default as NeonAuth } from './components/NeonAuth';
 export { default as NeonContext } from './components/NeonContext';
 export { default as NeonEnvironment } from './components/NeonEnvironment';
 export { default as NeonGraphQL } from './components/NeonGraphQL';
 export { default as NeonPage } from './components/NeonPage';
+export { default as NeonRouter } from './components/NeonRouter';
 export { default as SiteChip } from './components/SiteChip';
 export { default as SiteMap } from './components/SiteMap';
 export { default as Theme } from './components/Theme';

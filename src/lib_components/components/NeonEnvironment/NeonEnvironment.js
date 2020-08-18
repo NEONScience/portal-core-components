@@ -1,5 +1,7 @@
 /* eslint-disable no-restricted-globals */
 
+import { AuthSilentType } from '../../types/core';
+
 // Names of all environment variables that MUST be explicitly defined for the
 // environment to be reported as "valid". These are evnironment variables
 // that are expected to be referenced by all apps. Standard vars present in all
@@ -42,8 +44,7 @@ export const optionalEnvironmentVars = [
   'REACT_APP_NEON_HOST_OVERRIDE',
   'REACT_APP_NEON_WS_HOST_OVERRIDE',
   'REACT_APP_FOREIGN_LOCATION',
-  'REACT_APP_NEON_AUTH_ALLOW_SILENT',
-  'REACT_APP_NEON_AUTH_ALLOW_SILENT_BROWSER',
+  'REACT_APP_NEON_AUTH_DISABLE_WS',
 ];
 
 // Temporary paths that shouldn't need to propogate to environment files until made more permanent
@@ -61,19 +62,7 @@ const NeonEnvironment = {
   isForeignEnv: process.env.REACT_APP_FOREIGN_LOCATION === 'true',
   useGraphql: process.env.REACT_APP_NEON_USE_GRAPHQL === 'true',
   showAopViewer: process.env.REACT_APP_NEON_SHOW_AOP_VIEWER === 'true',
-
-  /**
-   * Determines if the silent authentication process should be prevented
-   * based on environment as external dependencies are required.
-   * This property will override the preventSilentAuthBrowser property.
-   */
-  preventSilentAuth: process.env.REACT_APP_NEON_AUTH_PREVENT_SILENT === 'true',
-  /**
-   * Determines if the silent authentication process should be
-   * based on the browser as it is dependent on browser cookie handling.
-   * This property will be ignored when preventSilentAuth is false.
-   */
-  preventSilentAuthBrowser: process.env.REACT_APP_NEON_AUTH_PREVENT_SILENT_BROWSER === 'true',
+  authDisableWs: process.env.REACT_APP_NEON_AUTH_DISABLE_WS === 'true',
 
   getApiName: () => process.env.REACT_APP_NEON_API_NAME,
   getApiVersion: () => process.env.REACT_APP_NEON_API_VERSION,
@@ -200,6 +189,21 @@ const NeonEnvironment = {
       return serverData.NeonPublicAPIToken;
     }
     return '';
+  },
+
+  /**
+   * Determines if the silent authentication process should be prevented
+   * based on environment or browser as external dependencies are required.
+   * @return {AuthSilentType}
+   */
+  getAuthSilentType: () => {
+    const serverData = NeonEnvironment.getNeonServerData();
+    if (serverData
+        && (typeof serverData.NeonAuthSilentType === 'string')
+        && (serverData.NeonAuthSilentType.length > 0)) {
+      return serverData.NeonAuthSilentType;
+    }
+    return AuthSilentType.PREVENT_BROWSER;
   },
 
   getFullApiPath: (path = '') => {

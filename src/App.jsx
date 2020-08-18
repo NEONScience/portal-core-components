@@ -4,6 +4,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import BasicComponentsIcon from '@material-ui/icons/ViewModule';
 
 import NeonPage from './lib_components/components/NeonPage/NeonPage';
+import NeonRouter from './lib_components/components/NeonRouter/NeonRouter';
 
 import Home from './components/Home';
 import BasicComponents from './components/BasicComponents';
@@ -127,13 +128,15 @@ const sidebarLinks = [
 
 export default function App() {
   return (
-    <NeonPage
-      title="Portal Core Components"
-      sidebarLinks={sidebarLinks}
-      sidebarLinksAsStandaloneChildren
-      useCoreAuth
-    >
-      <Home />
-    </NeonPage>
+    <NeonRouter>
+      <NeonPage
+        title="Portal Core Components"
+        sidebarLinks={sidebarLinks}
+        sidebarLinksAsStandaloneChildren
+        useCoreAuth
+      >
+        <Home />
+      </NeonPage>
+    </NeonRouter>
   );
 }

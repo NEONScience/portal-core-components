@@ -17,6 +17,7 @@ import DocBlock from '../../../components/DocBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 import PropsTable from '../../../components/PropsTable';
 
+import AuthService from './AuthService';
 import NeonAuth, { NeonAuthType, NeonAuthDisplayType } from './NeonAuth';
 import NeonContext from '../NeonContext/NeonContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
@@ -140,6 +141,98 @@ const renderUserCard = (isAuthenticated: boolean, userData: any): JSX.Element =>
   );
 };
 
+const renderSilentAuthSection = (
+  isAuthenticated: boolean,
+  userData: any,
+  ssoCookieEnabled: boolean,
+  handleSsoCookieToggle: (enable: boolean) => void,
+  classes: Record<string, string>,
+  containerStyle: CSSProperties,
+): JSX.Element => {
+  let ssoToggleContent: JSX.Element = (<React.Fragment />);
+  if (ALLOW_SSO_TOGGLE) {
+    ssoToggleContent = (
+      <ExampleBlock>
+        <FormGroup row>
+          <FormControlLabel
+            label="SSO Demo Enabled State"
+            control={(
+              <Switch
+                checked={ssoCookieEnabled}
+                onChange={() => handleSsoCookieToggle(!ssoCookieEnabled)}
+                color="primary"
+              />
+            )}
+          />
+        </FormGroup>
+      </ExampleBlock>
+    );
+  }
+  let silentAuthExampleContent: JSX.Element = (
+    <>
+      <ExampleBlock>
+        <Grid container spacing={1}>
+          <Grid item xs={12} style={containerStyle}>
+            <div style={{ alignSelf: 'center' }}>
+              <NeonAuth
+                loginPath={NeonEnvironment.getFullAuthPath('login')}
+                logoutPath={NeonEnvironment.getFullAuthPath('logout')}
+                accountPath={NeonEnvironment.route.buildAccountRoute()}
+                loginType={NeonAuthType.SILENT}
+                logoutType={NeonAuthType.SILENT}
+                displayType={NeonAuthDisplayType.MENU}
+              />
+            </div>
+          </Grid>
+          {renderUserCard(isAuthenticated, userData)}
+        </Grid>
+      </ExampleBlock>
+      <CodeBlock>
+        {`
+import NeonAuth, { NeonAuthType, NeonAuthDisplayType } from 'portal-core-components/lib/components/NeonAuth';
+import NeonEnvironment from 'portal-core-components/lib/components/NeonEnvironment';
+
+<NeonAuth
+  loginPath={NeonEnvironment.getFullAuthPath('login')}
+  logoutPath={NeonEnvironment.getFullAuthPath('logout')}
+  accountPath={NeonEnvironment.route.buildAccountRoute()}
+  loginType={NeonAuthType.SILENT}
+  logoutType={NeonAuthType.SILENT}
+  displayType={NeonAuthDisplayType.MENU}
+/>
+        `}
+      </CodeBlock>
+    </>
+  );
+  if (!AuthService.allowSilentAuth()) {
+    silentAuthExampleContent = (
+      <DocBlock>
+        Based on the environment configuration the silent authentication feature
+        is disabled.
+      </DocBlock>
+    );
+  }
+  return (
+    <>
+      <Divider className={classes.divider} />
+      <Typography variant="h6" component="h4" gutterBottom>Silent SSO Authentication</Typography>
+      <DocBlock>
+        Note that the following example for silent authentication is for demonstration
+        purposes only with respect to the login flow - it will only complete
+        successfully in the event that an actual SSO application is also logged in.
+      </DocBlock>
+      {ssoToggleContent}
+      <DocBlock>
+        The silent authentication flow will initiate the process inline and
+        check for an active SSO application silently. The logout flow will also
+        occur inline without yielding flow of the application to the authentication
+        APIs.
+      </DocBlock>
+      {silentAuthExampleContent}
+    </>
+  );
+};
+
 export default function StyleGuide() {
   const [
     {
@@ -160,25 +253,6 @@ export default function StyleGuide() {
     }
     setSsoCookieEnabled(enable);
   };
-  let ssoToggleContent: JSX.Element = (<React.Fragment />);
-  if (ALLOW_SSO_TOGGLE) {
-    ssoToggleContent = (
-      <ExampleBlock>
-        <FormGroup row>
-          <FormControlLabel
-            label="SSO Demo Enabled State"
-            control={(
-              <Switch
-                checked={ssoCookieEnabled}
-                onChange={() => handleSsoCookieToggle(!ssoCookieEnabled)}
-                color="primary"
-              />
-            )}
-          />
-        </FormGroup>
-      </ExampleBlock>
-    );
-  }
   const containerStyle: CSSProperties = {
     textAlign: 'center',
     display: 'flex',
@@ -241,52 +315,16 @@ import NeonEnvironment from 'portal-core-components/lib/components/NeonEnvironme
         `}
       </CodeBlock>
 
-      <Divider className={classes.divider} />
-      <Typography variant="h6" component="h4" gutterBottom>Silent SSO Authentication</Typography>
-      <DocBlock>
-        Note that the following example for silent authentication is for demonstration
-        purposes only with respect to the login flow - it will only complete
-        successfully in the event that an actual SSO application is also logged in.
-      </DocBlock>
-      {ssoToggleContent}
-      <DocBlock>
-        The silent authentication flow will initiate the process inline and
-        check for an active SSO application silently. The logout flow will also
-        occur inline without yielding flow of the application to the authentication
-        APIs.
-      </DocBlock>
-      <ExampleBlock>
-        <Grid container spacing={1}>
-          <Grid item xs={12} style={containerStyle}>
-            <div style={{ alignSelf: 'center' }}>
-              <NeonAuth
-                loginPath={NeonEnvironment.getFullAuthPath('login')}
-                logoutPath={NeonEnvironment.getFullAuthPath('logout')}
-                accountPath={NeonEnvironment.route.buildAccountRoute()}
-                loginType={NeonAuthType.SILENT}
-                logoutType={NeonAuthType.SILENT}
-                displayType={NeonAuthDisplayType.MENU}
-              />
-            </div>
-          </Grid>
-          {renderUserCard(isAuthenticated, userData)}
-        </Grid>
-      </ExampleBlock>
-      <CodeBlock>
-        {`
-import NeonAuth, { NeonAuthType, NeonAuthDisplayType } from 'portal-core-components/lib/components/NeonAuth';
-import NeonEnvironment from 'portal-core-components/lib/components/NeonEnvironment';
-
-<NeonAuth
-  loginPath={NeonEnvironment.getFullAuthPath('login')}
-  logoutPath={NeonEnvironment.getFullAuthPath('logout')}
-  accountPath={NeonEnvironment.route.buildAccountRoute()}
-  loginType={NeonAuthType.SILENT}
-  logoutType={NeonAuthType.SILENT}
-  displayType={NeonAuthDisplayType.MENU}
-/>
-        `}
-      </CodeBlock>
+      {
+        renderSilentAuthSection(
+          isAuthenticated,
+          userData,
+          ssoCookieEnabled,
+          handleSsoCookieToggle,
+          classes,
+          containerStyle,
+        )
+      }
 
       <Divider className={classes.divider} />
       <Typography variant="h4" component="h2" gutterBottom>Props</Typography>

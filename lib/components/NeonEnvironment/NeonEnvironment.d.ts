@@ -8,8 +8,7 @@ declare namespace NeonEnvironment {
     export const isForeignEnv: boolean;
     export const useGraphql: boolean;
     export const showAopViewer: boolean;
-    export const preventSilentAuth: boolean;
-    export const preventSilentAuthBrowser: boolean;
+    export const authDisableWs: boolean;
     export function getApiName(): import("../../types/core").Undef<string>;
     export function getApiVersion(): import("../../types/core").Undef<string>;
     export function getRootApiPath(): string;
@@ -65,6 +64,7 @@ declare namespace NeonEnvironment {
     export function getWebSocketHost(): import("../../types/core").Undef<string>;
     export function getApiTokenHeader(): string;
     export function getApiToken(): string;
+    export function getAuthSilentType(): AuthSilentType;
     export function getFullApiPath(path?: string): string;
     export function getFullJsonLdApiPath(path?: string): string;
     export function getFullPagePath(path?: string): string;
@@ -72,3 +72,4 @@ declare namespace NeonEnvironment {
     export function getFullAuthApiPath(path?: string, useWs?: boolean): string;
     export function getFullGraphqlPath(): string;
 }
+import { AuthSilentType } from "../../types/core";

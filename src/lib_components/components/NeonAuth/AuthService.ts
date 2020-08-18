@@ -18,7 +18,7 @@ import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import BrowserService from '../../util/browserUtil';
 import { getJson } from '../../util/rxUtil';
 import { exists } from '../../util/typeUtil';
-import { AnyVoidFunc, Undef } from '../../types/core';
+import { AnyVoidFunc, Undef, AuthSilentType } from '../../types/core';
 
 const REDIRECT_URI: string = 'redirectUri';
 
@@ -247,13 +247,18 @@ const state: IAuthServiceState = {
 const AuthService: IAuthService = {
   getState: (): IAuthServiceState => state,
   allowSilentAuth: (): boolean => {
-    if (NeonEnvironment.preventSilentAuth) {
+    if (NeonEnvironment.authDisableWs) {
       return false;
     }
-    if (NeonEnvironment.preventSilentAuthBrowser) {
-      return !BrowserService.getIsSafari();
+    switch (NeonEnvironment.getAuthSilentType()) {
+      case AuthSilentType.PREVENT_ALL:
+        return false;
+      case AuthSilentType.PREVENT_BROWSER:
+        return !BrowserService.getIsSafari();
+      case AuthSilentType.ALLOW_ALL:
+      default:
+        return true;
     }
-    return true;
   },
   login: (path?: string): void => {
     const env: any = NeonEnvironment;
@@ -308,7 +313,7 @@ const AuthService: IAuthService = {
     const rootPath: string = exists(path)
       ? path
       : env.getFullAuthPath('logout');
-    const redirectUri = `${env.getHost()}${env.route.getFullRoute(env.getRouterBaseHomePath())}}`;
+    const redirectUri = `${env.getHost()}${env.route.getFullRoute(env.getRouterBaseHomePath())}`;
     const href = `${rootPath}?${REDIRECT_URI}=${redirectUri}`;
     window.location.href = href;
   },
@@ -397,6 +402,10 @@ const AuthService: IAuthService = {
   },
 
   watchAuth0: (dispatch: Dispatch<any>, onConnectCbs?: [AnyVoidFunc]): Subscription => {
+    // If the WS subscription is disabled, do not attempt to connect
+    if (NeonEnvironment.authDisableWs) {
+      return (state.watchSubscription$ as Subscription);
+    }
     if (state.rxStompClient && state.watchSubscription$) {
       return (state.watchSubscription$ as Subscription);
     }

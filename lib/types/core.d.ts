@@ -13,3 +13,11 @@ export declare type StylesHook = (...props: unknown[]) => Record<string, string>
 export declare type StringPropsObject = {
     [key: string]: string;
 };
+/**
+ * Type to encapsulate silent authentication allowance
+ */
+export declare enum AuthSilentType {
+    PREVENT_ALL = "PREVENT_ALL",
+    PREVENT_BROWSER = "PREVENT_BROWSER",
+    ALLOW_ALL = "ALLOW_ALL"
+}
