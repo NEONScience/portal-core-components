@@ -101,20 +101,55 @@ If you have added or modified third-party dependencies then it is important to v
 
 Run `rm -rf node_modules && npm install` and re-run the app to validate a fresh install. This mimics how other apps importing `portal-core-components` will see your changes.
 
-### Worker Caveats
+### Using Workers in Components
 
-This library does support workers in its current build process using `worker-loader`. To create a worker
-name any worker file `*.worker.js`.
+This library supports parallel processing using web workers for components by using [Parallel.js](https://parallel.js.org/).
 
-Note, however, that a bug in `react-app-rewired` can mean lint errors in workers may silently break
-production builds but not development builds. See [here](https://github.com/timarney/react-app-rewired/issues/362) for details.
-
-If you have added or modified a worker file and are seeing empty production builds then manually look for
-and fix any lint errors using this command (from the root directory):
+To see how workers are currently in use in this library, see `src/lib_components/workers`. Example:
 
 ```
-npx eslint ./PATH_TO_YOUR_WORKER_FILE -c ./node_modules/eslint-config-react-app/index.js
+import Parallel from 'paralleljs';
+
+export default function myWorker(argument) {
+  const worker = new Parallel(argument);
+  return worker.spawn((inData) => {
+    /* do processing to generate outData */
+    return outData;
+  });
+}
 ```
+
+A worker like this could then be imported elsewhere and used with promise-stype syntax. Example:
+
+```
+import myWorker from 'path/to/workers/myWorker.js';
+
+myWorker.then((result) => {
+  /* do stuff with result */
+});
+```
+
+Critical rules for this worker pattern:
+
+* **Only put worker files in `src/lib_components/workers`.**
+* **Only define one worker function per worker file.**
+* **A worker file should only import Parallel and nothing else.**  
+  Any logic inside of `worker.spawn` will have no access to external definitions, even if defined in the worker file.
+  
+And most important: **Always test the lib export!**
+
+How a worker runs when developing core-components locally and how it runs when pulled in through the
+lib export in another app are *very* different. The former uses run-time webpack and the latter uses
+babel only, along with whatever bundling toolchain is in use by the other app.
+
+If you have developed a worker but find it is not working when pulled in as a lib export, run a clean
+lib build and then inspect the transpiled worker file in `lib/workers`. Look for any babel polyfill
+definitions that appear outside of `worker.spawn` but are used inside. This is the most common reason
+a worker fails to perform when pulled in through core components as an app dependency.
+
+The lib build for core components includes a step to migrate any babel polyfills (other than the one
+for `import` used to import Parallel.js) directly into the worker logic. This migration is not perfect.
+If it missed something that it should have caught please update `lif-fix-worker-babel.js` to suit.
 
 ## Modifying Existing Components
 
