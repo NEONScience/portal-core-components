@@ -122,7 +122,6 @@ declare namespace TimeSeriesViewerContext {
     export { Provider };
     export { useTimeSeriesViewerState };
     export { TimeSeriesViewerPropTypes };
-    export { getUpdatedValueRange };
 }
 declare function Provider(props: any): JSX.Element;
 declare namespace Provider {
@@ -194,4 +193,3 @@ declare namespace TimeSeriesViewerPropTypes {
     export function productData_2(props: any, propName: any, componentName: any): Error | null;
     export { productData_2 as productData };
 }
-declare function getUpdatedValueRange(existingRange: any, newValue: any): any;

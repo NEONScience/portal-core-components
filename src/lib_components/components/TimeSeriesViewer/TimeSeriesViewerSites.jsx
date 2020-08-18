@@ -169,7 +169,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    padding: theme.spacing(0.5, 2, 0.5, 0.5),
+    padding: theme.spacing(1, 2, 1, 0.5),
     backgroundColor: theme.palette.grey[100],
     marginTop: theme.spacing(1.5),
     marginRight: theme.spacing(3),
@@ -365,8 +365,8 @@ function PositionHistoryButton(props) {
               <TableBody>
                 {history.map((row, idx) => {
                   const {
-                    start,
-                    end: rawEnd,
+                    start = '',
+                    end: rawEnd = '',
                     xOffset,
                     yOffset,
                     zOffset,
@@ -411,13 +411,13 @@ PositionHistoryButton.propTypes = {
     azimuth: PropTypes.string.isRequired,
     pitch: PropTypes.string.isRequired,
     roll: PropTypes.string.isRequired,
-    start: PropTypes.string.isRequired,
-    end: PropTypes.string.isRequired,
+    start: PropTypes.string,
+    end: PropTypes.string,
     xOffset: PropTypes.string.isRequired,
     yOffset: PropTypes.string.isRequired,
     zOffset: PropTypes.string.isRequired,
-    referenceStart: PropTypes.string.isRequired,
-    referenceEnd: PropTypes.string.isRequired,
+    referenceStart: PropTypes.string,
+    referenceEnd: PropTypes.string,
     referenceLatitude: PropTypes.string.isRequired,
     referenceLongitude: PropTypes.string.isRequired,
     referenceElevation: PropTypes.string.isRequired,
@@ -818,7 +818,7 @@ function SelectedSite(props) {
         if (disabled) { return; }
         dispatch({ type: 'selectRemoveSite', siteCode });
       }}
-      style={{ minWidth: Theme.spacing(13) }}
+      style={{ minWidth: Theme.spacing(13), whiteSpace: 'nowrap' }}
       disabled={disabled}
       startIcon={<ClearIcon />}
     >
