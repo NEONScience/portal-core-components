@@ -14,6 +14,7 @@ export type StringPropsObject = {[key: string]: string};
  * Type to encapsulate silent authentication allowance
  */
 export enum AuthSilentType {
+  DISABLED = 'DISABLED',
   PREVENT_ALL = 'PREVENT_ALL',
   PREVENT_BROWSER = 'PREVENT_BROWSER',
   ALLOW_ALL = 'ALLOW_ALL',

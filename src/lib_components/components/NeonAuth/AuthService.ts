@@ -251,13 +251,14 @@ const AuthService: IAuthService = {
       return false;
     }
     switch (NeonEnvironment.getAuthSilentType()) {
-      case AuthSilentType.PREVENT_ALL:
-        return false;
       case AuthSilentType.PREVENT_BROWSER:
         return !BrowserService.getIsSafari();
       case AuthSilentType.ALLOW_ALL:
-      default:
         return true;
+      case AuthSilentType.DISABLED:
+      case AuthSilentType.PREVENT_ALL:
+      default:
+        return false;
     }
   },
   login: (path?: string): void => {
@@ -403,7 +404,8 @@ const AuthService: IAuthService = {
 
   watchAuth0: (dispatch: Dispatch<any>, onConnectCbs?: [AnyVoidFunc]): Subscription => {
     // If the WS subscription is disabled, do not attempt to connect
-    if (NeonEnvironment.authDisableWs) {
+    if (NeonEnvironment.authDisableWs
+        || (NeonEnvironment.getAuthSilentType() === AuthSilentType.DISABLED)) {
       return (state.watchSubscription$ as Subscription);
     }
     if (state.rxStompClient && state.watchSubscription$) {

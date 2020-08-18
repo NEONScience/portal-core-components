@@ -203,7 +203,7 @@ const NeonEnvironment = {
         && (serverData.NeonAuthSilentType.length > 0)) {
       return serverData.NeonAuthSilentType;
     }
-    return AuthSilentType.PREVENT_BROWSER;
+    return AuthSilentType.DISABLED;
   },
 
   getFullApiPath: (path = '') => {

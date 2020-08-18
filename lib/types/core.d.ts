@@ -17,6 +17,7 @@ export declare type StringPropsObject = {
  * Type to encapsulate silent authentication allowance
  */
 export declare enum AuthSilentType {
+    DISABLED = "DISABLED",
     PREVENT_ALL = "PREVENT_ALL",
     PREVENT_BROWSER = "PREVENT_BROWSER",
     ALLOW_ALL = "ALLOW_ALL"
