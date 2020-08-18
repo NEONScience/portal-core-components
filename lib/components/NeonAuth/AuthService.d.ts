@@ -27,6 +27,11 @@ export interface IAuthService {
      */
     allowSilentAuth: () => boolean;
     /**
+     * Determines if the current application requires authentication for access.
+     * @return {boolean}
+     */
+    isAuthOnlyApp: () => boolean;
+    /**
      * Initializes a login flow
      * @param {string} path - Optionally path to set for the root login URL
      */
@@ -40,8 +45,9 @@ export interface IAuthService {
     /**
      * Initializes a logout flow
      * @param {string} path - Optionally path to set for the root logout URL
+     * @param {string} redirectUriPath - Optionally set the redirect path
      */
-    logout: (path?: string) => void;
+    logout: (path?: string, redirectUriPath?: string) => void;
     /**
      * Performs a silent logout flow
      * @param {Dispatch} dispatch - The NeonContext dispatch function

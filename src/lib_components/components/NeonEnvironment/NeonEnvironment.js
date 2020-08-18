@@ -45,6 +45,8 @@ export const optionalEnvironmentVars = [
   'REACT_APP_NEON_WS_HOST_OVERRIDE',
   'REACT_APP_FOREIGN_LOCATION',
   'REACT_APP_NEON_AUTH_DISABLE_WS',
+  'REACT_APP_NEON_ROUTER_NEON_HOME',
+  'REACT_APP_NEON_ROUTER_NEON_MYACCOUNT',
 ];
 
 // Temporary paths that shouldn't need to propogate to environment files until made more permanent
@@ -116,10 +118,14 @@ const NeonEnvironment = {
   getWsHostOverride: () => process.env.REACT_APP_NEON_WS_HOST_OVERRIDE,
 
   route: {
-    account: () => '/myaccount',
+    home: () => process.env.REACT_APP_NEON_ROUTER_NEON_HOME || '/home',
+    account: () => process.env.REACT_APP_NEON_ROUTER_NEON_MYACCOUNT || '/myaccount',
     getFullRoute: route => `${NeonEnvironment.getRouterBasePath()}${route}`,
     buildRouteFromHost: route => (
       `${NeonEnvironment.getHost()}${NeonEnvironment.getFullRoute(route)}`
+    ),
+    buildHomeRoute: () => (
+      `${NeonEnvironment.getHost()}${NeonEnvironment.route.home()}`
     ),
     buildAccountRoute: () => (
       `${NeonEnvironment.getHost()}${NeonEnvironment.route.account()}`

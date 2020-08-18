@@ -8,6 +8,7 @@ import AuthService, { LOGOUT_REDIRECT_PATHS } from './AuthService';
 import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import Theme from '../Theme/Theme';
+import { Undef } from '../../types/core';
 
 export enum NeonAuthType {
   REDIRECT = 'REDIRECT',
@@ -28,7 +29,12 @@ export interface NeonAuthProps {
 
 const UX_TIMEOUT_MS: number = 300;
 
-const triggerAuth = (path: string, login: boolean, dispatch: Dispatch<any>): void => {
+const triggerAuth = (
+  path: string,
+  login: boolean,
+  dispatch: Dispatch<any>,
+  redirectUriPath?: string,
+): void => {
   if (!path) return;
   // Give the browser time to render to allow for immediate feedback
   // by way of a spinner.
@@ -38,7 +44,7 @@ const triggerAuth = (path: string, login: boolean, dispatch: Dispatch<any>): voi
       if (login) {
         AuthService.login(path);
       } else {
-        AuthService.logout(path);
+        AuthService.logout(path, redirectUriPath);
       }
     },
     UX_TIMEOUT_MS,
@@ -79,6 +85,7 @@ const renderAuth = (
   };
   const handleLogout = (): void => {
     let appliedLogoutType: NeonAuthType = logoutType;
+    let redirectUriPath: Undef<string>;
     // Default to redirect if WS isn't connected
     if (!isAuthWsConnected) {
       appliedLogoutType = NeonAuthType.REDIRECT;
@@ -86,6 +93,7 @@ const renderAuth = (
     const appPath: string = NeonEnvironment.getRouterBaseHomePath() || '';
     if (LOGOUT_REDIRECT_PATHS.indexOf(appPath) >= 0) {
       appliedLogoutType = NeonAuthType.REDIRECT;
+      redirectUriPath = NeonEnvironment.route.home();
     }
     switch (appliedLogoutType) {
       case NeonAuthType.SILENT:
@@ -93,7 +101,7 @@ const renderAuth = (
         break;
       case NeonAuthType.REDIRECT:
       default:
-        triggerAuth(logoutPath, false, dispatch);
+        triggerAuth(logoutPath, false, dispatch, redirectUriPath);
         break;
     }
   };

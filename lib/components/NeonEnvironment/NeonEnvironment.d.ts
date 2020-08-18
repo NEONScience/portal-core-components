@@ -9,59 +9,61 @@ declare namespace NeonEnvironment {
     export const useGraphql: boolean;
     export const showAopViewer: boolean;
     export const authDisableWs: boolean;
-    export function getApiName(): import("../../types/core").Undef<string>;
-    export function getApiVersion(): import("../../types/core").Undef<string>;
+    export function getApiName(): string | undefined;
+    export function getApiVersion(): string | undefined;
     export function getRootApiPath(): string;
-    export function getRootGraphqlPath(): import("../../types/core").Undef<string>;
+    export function getRootGraphqlPath(): string | undefined;
     export function getRootJsonLdPath(): string;
-    export function getRootAuthApiPath(): import("../../types/core").Undef<string>;
+    export function getRootAuthApiPath(): string | undefined;
     export namespace getApiPath {
-        export function aopDownload(): import("../../types/core").Undef<string>;
-        export function data(): import("../../types/core").Undef<string>;
-        export function documents(): import("../../types/core").Undef<string>;
-        export function download(): import("../../types/core").Undef<string>;
-        export function manifest(): import("../../types/core").Undef<string>;
-        export function menu(): import("../../types/core").Undef<string>;
-        export function products(): import("../../types/core").Undef<string>;
-        export function sites(): import("../../types/core").Undef<string>;
-        export function locations(): import("../../types/core").Undef<string>;
+        export function aopDownload(): string | undefined;
+        export function data(): string | undefined;
+        export function documents(): string | undefined;
+        export function download(): string | undefined;
+        export function manifest(): string | undefined;
+        export function menu(): string | undefined;
+        export function products(): string | undefined;
+        export function sites(): string | undefined;
+        export function locations(): string | undefined;
         export function arcgisAssets(): string;
     }
     export namespace getApiLdPath {
-        export function repo(): import("../../types/core").Undef<string>;
+        export function repo(): string | undefined;
     }
     export namespace getPagePath {
-        export function fileNamingConventions(): import("../../types/core").Undef<string>;
+        export function fileNamingConventions(): string | undefined;
     }
     export namespace getAuthPath {
-        export function login(): import("../../types/core").Undef<string>;
-        export function logout(): import("../../types/core").Undef<string>;
-        export function userInfo(): import("../../types/core").Undef<string>;
+        export function login(): string | undefined;
+        export function logout(): string | undefined;
+        export function userInfo(): string | undefined;
         export function seamlessLogin(): string;
         export function silentLogin(): string;
         export function silentLogout(): string;
     }
     export namespace getAuthApiPath {
-        export function ws(): import("../../types/core").Undef<string>;
+        export function ws(): string | undefined;
     }
     export namespace authTopics {
-        export function getAuth0(): import("../../types/core").Undef<string>;
+        export function getAuth0(): string | undefined;
     }
-    export function getVisusProductsBaseUrl(): import("../../types/core").Undef<string>;
-    export function getVisusIframeBaseUrl(): import("../../types/core").Undef<string>;
-    export function getRouterBasePath(): import("../../types/core").Undef<string>;
-    export function getRouterBaseHomePath(): import("../../types/core").Undef<string>;
-    export function getHostOverride(): import("../../types/core").Undef<string>;
-    export function getWsHostOverride(): import("../../types/core").Undef<string>;
+    export function getVisusProductsBaseUrl(): string | undefined;
+    export function getVisusIframeBaseUrl(): string | undefined;
+    export function getRouterBasePath(): string | undefined;
+    export function getRouterBaseHomePath(): string | undefined;
+    export function getHostOverride(): string | undefined;
+    export function getWsHostOverride(): string | undefined;
     export namespace route {
+        export function home(): string;
         export function account(): string;
         export function getFullRoute(route: any): string;
         export function buildRouteFromHost(route: any): string;
+        export function buildHomeRoute(): string;
         export function buildAccountRoute(): string;
     }
     export function getNeonServerData(): Object;
-    export function getHost(): import("../../types/core").Undef<string>;
-    export function getWebSocketHost(): import("../../types/core").Undef<string>;
+    export function getHost(): string | undefined;
+    export function getWebSocketHost(): string | undefined;
     export function getApiTokenHeader(): string;
     export function getApiToken(): string;
     export function getAuthSilentType(): AuthSilentType;

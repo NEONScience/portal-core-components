@@ -252,16 +252,21 @@ const Provider = (props) => {
       AuthService.fetchUserInfo(
         (response) => {
           const isAuthenticated = AuthService.isAuthenticated(response);
-          dispatch({ type: 'fetchAuthSucceeded', isAuthenticated, response });
           if (!isAuthenticated && AuthService.isSsoLogin(response)) {
             // If we're not authenticated and have identified another SSO
             // application that's authenticated, trigger a silent authentication
             // check flow.
-            if (!state.auth.isAuthWsConnected) {
-              cascadeAuthFetches.push(() => AuthService.loginSilently(dispatch, true));
+            if (AuthService.allowSilentAuth()) {
+              if (!state.auth.isAuthWsConnected) {
+                cascadeAuthFetches.push(() => AuthService.loginSilently(dispatch, true));
+              } else {
+                AuthService.loginSilently(dispatch, true);
+              }
             } else {
-              AuthService.loginSilently(dispatch, true);
+              AuthService.login();
             }
+          } else {
+            dispatch({ type: 'fetchAuthSucceeded', isAuthenticated, response });
           }
           // Initialize a subscription to the auth WS
           AuthService.watchAuth0(dispatch, cascadeAuthFetches);

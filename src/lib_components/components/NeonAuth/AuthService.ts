@@ -26,7 +26,7 @@ const REDIRECT_URI: string = 'redirectUri';
  * Set of white listed paths that should redirect upon logout
  */
 export const LOGOUT_REDIRECT_PATHS: string[] = [
-  '/myaccount',
+  NeonEnvironment.route.account() as string,
 ];
 
 interface AuthMessage {
@@ -63,6 +63,11 @@ export interface IAuthService {
    */
   allowSilentAuth: () => boolean;
   /**
+   * Determines if the current application requires authentication for access.
+   * @return {boolean}
+   */
+  isAuthOnlyApp: () => boolean;
+  /**
    * Initializes a login flow
    * @param {string} path - Optionally path to set for the root login URL
    */
@@ -76,8 +81,9 @@ export interface IAuthService {
   /**
    * Initializes a logout flow
    * @param {string} path - Optionally path to set for the root logout URL
+   * @param {string} redirectUriPath - Optionally set the redirect path
    */
-  logout: (path?: string) => void;
+  logout: (path?: string, redirectUriPath?: string) => void;
   /**
    * Performs a silent logout flow
    * @param {Dispatch} dispatch - The NeonContext dispatch function
@@ -261,6 +267,11 @@ const AuthService: IAuthService = {
         return false;
     }
   },
+  isAuthOnlyApp: (): boolean => (
+    [
+      NeonEnvironment.route.account(),
+    ].indexOf(NeonEnvironment.getRouterBaseHomePath() || '') >= 0
+  ),
   login: (path?: string): void => {
     const env: any = NeonEnvironment;
     const rootPath: string = exists(path)
@@ -309,13 +320,15 @@ const AuthService: IAuthService = {
       state.loginCancellationSubject$,
     );
   },
-  logout: (path?: string): void => {
+  logout: (path?: string, redirectUriPath?: string): void => {
     const env: any = NeonEnvironment;
     const rootPath: string = exists(path)
       ? path
       : env.getFullAuthPath('logout');
-    const redirectUri = `${env.getHost()}${env.route.getFullRoute(env.getRouterBaseHomePath())}`;
-    const href = `${rootPath}?${REDIRECT_URI}=${redirectUri}`;
+    const appliedRedirectUri = exists(redirectUriPath)
+      ? `${env.getHost()}${redirectUriPath}`
+      : `${env.getHost()}${env.route.getFullRoute(env.getRouterBaseHomePath())}`;
+    const href = `${rootPath}?${REDIRECT_URI}=${appliedRedirectUri}`;
     window.location.href = href;
   },
   logoutSilently: (dispatch: Dispatch<any>): void => {
@@ -370,6 +383,7 @@ const AuthService: IAuthService = {
         dispatch({
           type: 'fetchAuthSucceeded',
           isAuthenticated: AuthService.isAuthenticated(response),
+          response,
         });
         if (refreshSubscription) {
           AuthService.refreshWatchAuth0Subscription(dispatch, true);
@@ -428,6 +442,11 @@ const AuthService: IAuthService = {
             const authMessage: AuthMessage = JSON.parse(message.body);
             if (authMessage && authMessage.success) {
               if (authMessage.logout) {
+                // If successful logout and auth only app, redirect
+                if (AuthService.isAuthOnlyApp()) {
+                  window.location.href = NeonEnvironment.route.buildHomeRoute();
+                  return authMessage;
+                }
                 dispatch({ type: 'setAuthenticated', isAuthenticated: false });
               }
             }
