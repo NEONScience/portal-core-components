@@ -16,8 +16,9 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import MomentUtils from '@date-io/moment';
 import moment from 'moment';
 
-import { AvailabilityGrid, SVG } from '../DataProductAvailability/AvailabilityGrid';
-import AvailabilityLegend from '../DataProductAvailability/AvailabilityLegend';
+import { SVG } from '../DataProductAvailability/AvailabilityUtils';
+import BasicAvailabilityGrid from '../DataProductAvailability/BasicAvailabilityGrid';
+import BasicAvailabilityKey from '../DataProductAvailability/BasicAvailabilityKey';
 import FullWidthVisualization from '../FullWidthVisualization/FullWidthVisualization';
 import NeonContext from '../NeonContext/NeonContext';
 import Theme from '../Theme/Theme';
@@ -119,7 +120,7 @@ const TimeSeriesViewerDateRange = (props) => {
   }), [dispatch]);
   const svgRef = useRef(null);
   const handleSvgRedraw = useCallback(() => {
-    AvailabilityGrid({
+    BasicAvailabilityGrid({
       data: availabilityData,
       svgRef,
       allSites,
@@ -270,7 +271,7 @@ const TimeSeriesViewerDateRange = (props) => {
             className={classes.svg}
           />
         </FullWidthVisualization>
-        <AvailabilityLegend style={{ flexGrow: 1 }} />
+        <BasicAvailabilityKey style={{ flexGrow: 1 }} />
       </div>
     </div>
   );

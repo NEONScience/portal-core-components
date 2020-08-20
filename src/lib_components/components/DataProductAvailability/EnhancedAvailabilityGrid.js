@@ -390,8 +390,8 @@ export default function EnhancedAvailabilityGrid(config) {
   }
   */
 
-  const toggleSelection = (key) => {
-    console.log(key);
+  const toggleSelection = () => {
+    // console.log(key);
     /*
     if (!setSitesValue) { return; }
     let allSitesForKey = new Set();
@@ -446,7 +446,7 @@ export default function EnhancedAvailabilityGrid(config) {
     const labelX = labelWidth - SVG.CELL_PADDING;
     const rowLabelG = rowLabelsG.append('g').attr('transform', transform);
     const fill = selectionEnabled && setSitesValue && viewSelections[label]
-      ? Theme.palette.secondary.contrastText
+      ? Theme.palette.primary.contrastText
       : Theme.palette.grey[700];
     const text = rowLabelG.append('text')
       .attr('x', labelX)
@@ -502,7 +502,7 @@ export default function EnhancedAvailabilityGrid(config) {
       .data(() => getYearsInView(svgWidth, getTimeOffset()))
       .join('text')
       .attr('x', year => getYearCenterX(year))
-      .attr('y', SVG.LABEL_FONT_SIZE - (SVG.CELL_PADDING / 2))
+      .attr('y', SVG.LABEL_FONT_SIZE + 1)
       .text(year => year)
       .each((year, idx, labelNodes) => {
         SVG_STYLES.apply(select(labelNodes[idx]), 'timeLabel');
@@ -638,7 +638,7 @@ export default function EnhancedAvailabilityGrid(config) {
       .attr('fill', d => (
         isHighlighted(d) ? COLORS.LIGHT_BLUE[100] : COLORS.LIGHT_BLUE[300]
       ))
-      .attr('stroke', Theme.palette.secondary.main)
+      .attr('stroke', Theme.palette.primary.main)
       .style('stroke-width', '1.5px')
       .style('display', sites.value.length ? null : 'none');
   };
@@ -682,7 +682,7 @@ export default function EnhancedAvailabilityGrid(config) {
     const y = d => yOffset + (rowLabels.length - rowLabels.indexOf(d)) * yMultiplier;
     const fill = d => (
       viewSelections[d] === 'full'
-        ? Theme.palette.secondary.main
+        ? Theme.palette.primary.main
         : COLORS.LIGHT_BLUE[200]
     );
     let startX = getYearMonthGutterX(dateRange.value[0], 'left');

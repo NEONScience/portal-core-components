@@ -89,7 +89,7 @@ export default function EnhancedAvailabilityKey(props) {
     if (!['all', 'some'].includes(variant)) { return null; }
     const selectionSvgHeight = SVG.CELL_HEIGHT + 2;
     const label = variant === 'all' ? 'All sites selected' : 'Some sites selected';
-    const fill = variant === 'all' ? Theme.palette.secondary.main : 'url(#partialSelectionPattern)';
+    const fill = variant === 'all' ? Theme.palette.primary.main : 'url(#partialSelectionPattern)';
     const description = variant === 'all' ? ALL_SELECTED_TITLE : SOME_SELECTED_TITLE;
     const selectionWidth = 45;
     const selectionLabelX = selectionWidth + (3 * SVG.CELL_PADDING);
@@ -98,7 +98,7 @@ export default function EnhancedAvailabilityKey(props) {
       width: SVG.DATE_RANGE_HANDLE_WIDTH,
       height: SVG.CELL_HEIGHT,
       fill: COLORS.LIGHT_BLUE[300],
-      stroke: Theme.palette.secondary.main,
+      stroke: Theme.palette.primary.main,
       strokeWidth: 1.5,
     };
     const graphic = (
@@ -139,7 +139,7 @@ export default function EnhancedAvailabilityKey(props) {
     const renderStatus = (status) => {
       const { title, description } = VALID_ENHANCED_STATUSES[status];
       return (
-        <div style={{ marginBottom: Theme.spacing(2) }}>
+        <div style={{ marginBottom: Theme.spacing(2.5) }}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <svg
               width={Math.ceil(SVG.CELL_WIDTH * 1.25)}
@@ -149,7 +149,9 @@ export default function EnhancedAvailabilityKey(props) {
             >
               <JsxCell status={status} />
             </svg>
-            <Typography variant="subtitle2" style={{ fontSize: '1.05rem' }}>{title}</Typography>
+            <Typography variant="subtitle2" style={{ fontSize: '0.95rem', marginTop: '2px' }}>
+              {title}
+            </Typography>
           </div>
           <Typography variant="body2">{description}</Typography>
         </div>
@@ -163,7 +165,11 @@ export default function EnhancedAvailabilityKey(props) {
         aria-labelledby="availability-key-dialog-title"
       >
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <DialogTitle id="availability-key-dialog-title">Data Availability Chart Key</DialogTitle>
+          <DialogTitle id="availability-key-dialog-title">
+            <span style={{ fontSize: '1.4rem', fontWeight: '600' }}>
+              Data Availability Chart Key
+            </span>
+          </DialogTitle>
           <IconButton
             title="Close"
             aria-label="Close"

@@ -63,11 +63,11 @@ HalfAndHalfPattern.defaultProps = {
 export const SvgDefs = () => (
   <svg width="0px" height="0px">
     <defs>
-      <DiagLinesPattern id="beingProcessedPattern" color={Theme.palette.primary.main} />
-      <DiagLinesPattern id="delayedPattern" color={Theme.palette.warning.light} />
+      <DiagLinesPattern id="beingProcessedPattern" color={COLORS.NEON_BLUE[700]} />
+      <DiagLinesPattern id="delayedPattern" color={COLORS.GOLD[400]} />
       <DiagLinesPattern id="partialSelectionPattern" color={COLORS.LIGHT_BLUE[300]} secondaryColor={COLORS.LIGHT_BLUE[100]} />
-      <HalfAndHalfPattern id="mixedSomeAvailabilityPattern" color={Theme.palette.primary.main} secondaryColor={Theme.palette.warning.light} />
-      <HalfAndHalfPattern id="mixedNoAvailabilityPattern" color={Theme.palette.grey[75]} secondaryColor={Theme.palette.warning.light} />
+      <HalfAndHalfPattern id="mixedSomeAvailabilityPattern" color={COLORS.NEON_BLUE[700]} secondaryColor={COLORS.GOLD[400]} />
+      <HalfAndHalfPattern id="mixedNoAvailabilityPattern" color={Theme.palette.grey[200]} secondaryColor={COLORS.GOLD[400]} />
     </defs>
   </svg>
 );
@@ -99,50 +99,50 @@ const noStrokeAttrs = {
 };
 export const CELL_ATTRS = {
   available: {
-    fill: Theme.palette.primary.main,
+    fill: COLORS.NEON_BLUE[700],
     ...noStrokeAttrs,
   },
   'not available': {
-    fill: Theme.palette.grey[75],
+    fill: Theme.palette.grey[200],
     ...noStrokeAttrs,
   },
   'not collected': {
-    fill: Theme.palette.warning.light,
+    fill: COLORS.GOLD[400],
     ...noStrokeAttrs,
   },
   expected: {
     fill: '#ffffff',
-    stroke: Theme.palette.primary.main,
+    stroke: COLORS.NEON_BLUE[700],
     ...fatStrokeAttrs,
   },
   tentative: {
     fill: '#ffffff',
-    stroke: Theme.palette.success.main,
+    stroke: COLORS.BROWN[300],
     ...fatStrokeAttrs,
   },
   'not expected': {
     fill: '#ffffff',
-    stroke: Theme.palette.grey[100],
+    stroke: Theme.palette.grey[200],
     ...fatStrokeAttrs,
   },
   'being processed': {
     fill: 'url(#beingProcessedPattern)',
-    stroke: Theme.palette.primary.main,
+    stroke: COLORS.NEON_BLUE[700],
     ...fatStrokeAttrs,
   },
   delayed: {
     fill: 'url(#delayedPattern)',
-    stroke: Theme.palette.warning.light,
+    stroke: COLORS.GOLD[400],
     ...fatStrokeAttrs,
   },
   'mixed some availability': {
     fill: 'url(#mixedSomeAvailabilityPattern)',
-    stroke: Theme.palette.primary.main,
+    stroke: COLORS.NEON_BLUE[700],
     ...thinStrokeAttrs,
   },
   'mixed no availability': {
     fill: 'url(#mixedNoAvailabilityPattern)',
-    stroke: Theme.palette.warning.light,
+    stroke: COLORS.GOLD[400],
     ...thinStrokeAttrs,
   },
 };

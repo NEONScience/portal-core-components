@@ -13,16 +13,13 @@ import { uniqueId } from 'lodash';
 import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
-// import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-// import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
 import MenuItem from '@material-ui/core/MenuItem';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import Select from '@material-ui/core/Select';
 import Switch from '@material-ui/core/Switch';
-// import SnackbarContent from '@material-ui/core/SnackbarContent';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import Typography from '@material-ui/core/Typography';
@@ -31,6 +28,7 @@ import AscIcon from '@material-ui/icons/KeyboardArrowDown';
 import DescIcon from '@material-ui/icons/KeyboardArrowUp';
 
 import AvailabilityContext from './AvailabilityContext';
+import AvailabilityPending from './AvailabilityPending';
 import FullWidthVisualization from '../FullWidthVisualization/FullWidthVisualization';
 import DownloadDataContext from '../DownloadDataContext/DownloadDataContext';
 import NeonContext from '../NeonContext/NeonContext';
@@ -53,22 +51,6 @@ const preStyle = {
    Setup: CSS classes
 */
 const useStyles = makeStyles(theme => ({
-  optionButtonGroup: {
-    height: theme.spacing(4),
-  },
-  optionButton: {
-    height: theme.spacing(4),
-    fontWeight: 600,
-    color: theme.palette.primary.main,
-    borderColor: theme.palette.primary.main,
-    padding: theme.spacing(0, 1.5),
-    whiteSpace: 'nowrap',
-  },
-  // Use !important here to override the Mui-selected class with higher priority
-  optionButtonSelected: {
-    color: '#fff !important',
-    backgroundColor: `${theme.palette.primary.main} !important`,
-  },
   svg: {
     minWidth: `${SVG.MIN_WIDTH}px`,
     minHeight: `${SVG.MIN_HEIGHT}px`,
@@ -104,7 +86,9 @@ const EnhancedAvailabilityInterface = (props) => {
   const atXs = useMediaQuery(Theme.breakpoints.only('xs'));
   const atSm = useMediaQuery(Theme.breakpoints.only('sm'));
 
-  const [{ data: neonContextData }] = NeonContext.useNeonContextState();
+  const [
+    { data: neonContextData, isFinal: neonContextIsFinal, hasError: neonContextHasError },
+  ] = NeonContext.useNeonContextState();
   const { sites: allSites, states: allStates, domains: allDomains } = neonContextData;
 
   const { SORT_DIRECTIONS, useAvailabilityState } = AvailabilityContext;
@@ -162,22 +146,18 @@ const EnhancedAvailabilityInterface = (props) => {
   };
 
   /**
+     Render: NeonContext-related Loading and Error States
+  */
+  if (!neonContextIsFinal || neonContextHasError) {
+    return <AvailabilityPending />;
+  }
+
+  /**
      Render: Breakout Options
   */
   const renderBreakoutOptions = () => {
     const handleChangeBreakouts = (event, newBreakouts) => {
       availabilityDispatch({ type: 'setBreakouts', breakouts: newBreakouts });
-    };
-    const renderToggleButton = (key) => {
-      let className = classes.optionButton;
-      if (breakouts.includes(key)) {
-        className = `${className} ${classes.optionButtonSelected}`;
-      }
-      return (
-        <ToggleButton key={key} value={key} size="small" className={className}>
-          {key}
-        </ToggleButton>
-      );
     };
     return (
       <div
@@ -195,11 +175,14 @@ const EnhancedAvailabilityInterface = (props) => {
           color="primary"
           variant="outlined"
           size="small"
-          className={classes.optionButtonGroup}
           value={breakouts}
           onChange={handleChangeBreakouts}
         >
-          {validBreakouts.map(key => renderToggleButton(key))}
+          {validBreakouts.map(key => (
+            <ToggleButton key={key} value={key} size="small">
+              {key}
+            </ToggleButton>
+          ))}
         </ToggleButtonGroup>
       </div>
     );
@@ -223,57 +206,52 @@ const EnhancedAvailabilityInterface = (props) => {
       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
         <FormControl variant="outlined">
           <Select
-            value={breakouts.length ? breakouts[0] : ''}
+            value={breakouts.length ? breakouts[0] : 'n/a'}
             aria-label="Sort By"
             className={classes.sortSelect}
-            disabled={!breakouts.length}
             onChange={(event) => {
               availabilityDispatch({ type: 'setSortMethod', method: event.target.value });
             }}
             data-selenium="data-product-availability.sort-options.method"
           >
+            <MenuItem key="--" value="n/a" disabled>
+              --
+            </MenuItem>
             {validBreakouts.map(method => (
-              <MenuItem
-                key={method}
-                value={method}
-              >
-                {method}
+              <MenuItem key={method} value={method}>
+                {`${method.substr(0, 1).toUpperCase()}${method.substr(1)}`}
               </MenuItem>
             ))}
           </Select>
         </FormControl>
         <ToggleButtonGroup
           exclusive
+          size="small"
           value={breakouts.length ? sortDirection : null}
-          className={classes.optionButtonGroup}
           onChange={(event, newSortDirection) => {
             availabilityDispatch({ type: 'setSortDirection', direction: newSortDirection });
           }}
           data-selenium="data-product-availability.sort-options.direction"
         >
           <ToggleButton
-            size="small"
             key={SORT_DIRECTIONS.ASC}
             value={SORT_DIRECTIONS.ASC}
-            className={`${classes.optionButton} ${breakouts.length && sortDirection === SORT_DIRECTIONS.ASC ? classes.optionButtonSelected : ''}`}
             style={breakouts.length ? null : { borderColor: 'unset' }}
             disabled={!breakouts.length}
             title="Sort Ascending (A-Z)"
             aria-label="Sort Ascending (A-Z)"
           >
-            <AscIcon />
+            <AscIcon fontSize="small" />
           </ToggleButton>
           <ToggleButton
-            size="small"
             key={SORT_DIRECTIONS.DESC}
             value={SORT_DIRECTIONS.DESC}
-            className={`${classes.optionButton} ${breakouts.length && sortDirection === SORT_DIRECTIONS.DESC ? classes.optionButtonSelected : ''}`}
             style={breakouts.length ? null : { borderColor: 'unset' }}
             disabled={!breakouts.length}
             title="Sort Descending (Z-A)"
             aria-label="Sort Descending (Z-A)"
           >
-            <DescIcon />
+            <DescIcon fontSize="small" />
           </ToggleButton>
         </ToggleButtonGroup>
       </div>

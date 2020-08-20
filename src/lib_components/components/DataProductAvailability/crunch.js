@@ -1,17 +1,17 @@
-/* eslint-disable max-len */
+/* eslint-disable max-len, no-console */
 import { parse } from 'papaparse';
-import availabilityFile from './enhanced-availability-src.csv';
+// import availabilityFile from './enhanced-availability-src.csv';
 import availabilityJson from './enhanced-availability-api-response.json';
 
 const REPROCESS = false;
 
 const crunch = (returnResult = () => {}) => {
-  const path = `http://localhost:3010${availabilityFile}`;
-  const now = '2020-03';
   if (!REPROCESS) {
     returnResult(availabilityJson);
     return;
   }
+  const path = null; // `http://localhost:3010${availabilityFile}`;
+  const now = '2020-03';
   parse(path, {
     worker: true,
     download: true,

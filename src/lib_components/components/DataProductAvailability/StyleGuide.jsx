@@ -108,9 +108,6 @@ export default function StyleGuide() {
 import DataProductAvailability from 'portal-core-components/lib/components/DataProductAvailability';
         `}
       </CodeBlock>
-      <ExampleBlock>
-        <EnhancedAvailability />
-      </ExampleBlock>
 
       <Typography variant="h5" component="h3" gutterBottom>Usage</Typography>
 
@@ -385,6 +382,22 @@ const productData = {...};
 </DownloadDataContext.Provider>
         `}
       </CodeBlock>
+
+      <Divider className={classes.divider} />
+      <Typography variant="h6" component="h4" gutterBottom>
+        Enhanced Data Product Availability Chart
+      </Typography>
+
+      <DocBlock>
+        An experimental mode exists to show enhanced availability with a more nuanced and complete
+        set of statuses for a given site/month. It also allows for arbitrary rollups and breaks out
+        product tables where appropriate. It does not, however, support selection and currently
+        any APIs do deliver availability data structured as needed for the enhanced chart are still
+        in development.
+      </DocBlock>
+      <ExampleBlock>
+        <EnhancedAvailability />
+      </ExampleBlock>
 
     </React.Fragment>
   );

@@ -49,11 +49,11 @@ export default function BasicAvailabilityKey(props) {
     /* eslint-disable max-len */
     return (
       <svg width="90" height={totalHeight} className={classes.legendSvg}>
-        <rect x={0} y={rowY(0)} width={SVG.CELL_WIDTH} height={SVG.CELL_HEIGHT} rx={SVG.CELL_RX} fill={Theme.palette.primary.main} />
+        <rect x={0} y={rowY(0)} width={SVG.CELL_WIDTH} height={SVG.CELL_HEIGHT} rx={SVG.CELL_RX} fill={Theme.palette.secondary.main} />
         <text className={classes.legendText} x={cellOffset} y={rowLabelY(0)}>
           Available
         </text>
-        <rect x={0} y={rowY(1)} width={SVG.CELL_WIDTH} height={SVG.CELL_HEIGHT} rx={SVG.CELL_RX} fill={Theme.palette.grey[100]} />
+        <rect x={0} y={rowY(1)} width={SVG.CELL_WIDTH} height={SVG.CELL_HEIGHT} rx={SVG.CELL_RX} fill={Theme.palette.grey[200]} />
         <text className={classes.legendText} x={cellOffset} y={rowLabelY(1)}>
           No data
         </text>
@@ -76,11 +76,11 @@ export default function BasicAvailabilityKey(props) {
     /* eslint-disable max-len */
     return (
       <svg width={totalWidth} height={totalHeight} className={classes.legendSvg}>
-        <rect x={columnX(0)} y={0} width={SVG.CELL_WIDTH} height={SVG.CELL_HEIGHT} rx={SVG.CELL_RX} fill={Theme.palette.primary.main} />
+        <rect x={columnX(0)} y={0} width={SVG.CELL_WIDTH} height={SVG.CELL_HEIGHT} rx={SVG.CELL_RX} fill={Theme.palette.secondary.main} />
         <text className={classes.legendText} x={columnX(0) + cellOffset} y={rowLabelY}>
           Available
         </text>
-        <rect x={columnX(1)} y={0} width={SVG.CELL_WIDTH} height={SVG.CELL_HEIGHT} rx={SVG.CELL_RX} fill={Theme.palette.grey[100]} />
+        <rect x={columnX(1)} y={0} width={SVG.CELL_WIDTH} height={SVG.CELL_HEIGHT} rx={SVG.CELL_RX} fill={Theme.palette.grey[200]} />
         <text className={classes.legendText} x={columnX(1) + cellOffset} y={rowLabelY}>
           No data
         </text>
@@ -105,13 +105,13 @@ export default function BasicAvailabilityKey(props) {
       width: SVG.DATE_RANGE_HANDLE_WIDTH,
       height: SVG.CELL_HEIGHT,
       fill: COLORS.LIGHT_BLUE[300],
-      stroke: Theme.palette.secondary.main,
+      stroke: Theme.palette.primary.main,
       strokeWidth: 1.5,
     };
     /* eslint-disable max-len */
     return (
       <svg width="210" height={totalHeight} className={classes.legendSvg}>
-        <rect x={0.5} y={rowY(0) + 1.5} width={selectionWidth} height={SVG.CELL_HEIGHT - 2} fill={Theme.palette.secondary.main} />
+        <rect x={0.5} y={rowY(0) + 1.5} width={selectionWidth} height={SVG.CELL_HEIGHT - 2} fill={Theme.palette.primary.main} />
         <rect x={0.5} y={rowY(0) + 0.5} {...handleAttribs} />
         <rect x={selectionWidth - SVG.DATE_RANGE_HANDLE_WIDTH} y={rowY(0) + 0.5} {...handleAttribs} />
         <text className={classes.legendText} x={selectionLabelOffset} y={rowLabelY(0)}>

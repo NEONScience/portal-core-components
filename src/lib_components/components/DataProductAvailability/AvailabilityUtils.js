@@ -188,8 +188,8 @@ export const SVG_STYLES = {
       fontSize: `${SVG.LABEL_FONT_SIZE}px`,
     },
     timeHighlight: {
-      fill: COLORS.GOLD[400],
-      stroke: COLORS.GOLD[700],
+      fill: COLORS.GREEN[400],
+      stroke: COLORS.GREEN[700],
       strokeWidth: '1px',
       opacity: 0,
     },

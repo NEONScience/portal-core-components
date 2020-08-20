@@ -22,10 +22,24 @@ const DEFAULT_STATE = {
   breakouts: [],
   validBreakouts: ['states', 'domains', 'sites', 'tables'],
   sortDirection: SORT_DIRECTIONS.ASC,
-  neonContextLoaded: false,
-  allSites: {},
-  allStates: {},
-  allDomains: {},
+  neonContextHydrated: false, // Whether NeonContext data has been one-time hydrated into state
+  reference: {
+    sites: {},
+    states: {},
+    domains: {},
+  },
+};
+
+/**
+   Function to copy necessary NeonContext data into local state when ready
+*/
+const hydrateNeonContextData = (state, neonContextData) => {
+  const newState = { ...state, neonContextHydrated: true };
+  newState.reference.sites = neonContextData.sites || {};
+  newState.reference.states = neonContextData.states || {};
+  newState.reference.domains = neonContextData.domains || {};
+  newState.neonContextHydrated = true;
+  return newState;
 };
 
 /**
@@ -61,7 +75,7 @@ const extractTables = (state) => {
   Take a state object and spit out a new state containing rows for use in the SVG grid
 */
 const calculateRows = (state) => {
-  if (!state.neonContextLoaded) { return state; }
+  if (!state.neonContextHydrated) { return state; }
   const newState = {
     ...state,
     rows: {},
@@ -70,10 +84,8 @@ const calculateRows = (state) => {
   };
   const {
     sites,
-    allSites,
-    allStates,
-    allDomains,
     breakouts,
+    reference,
     sortDirection,
     tables: knownTables,
   } = state;
@@ -84,8 +96,8 @@ const calculateRows = (state) => {
   // Generate unsorted row labels and row data respecting breakouts
   sites.forEach((site) => {
     const { siteCode, tables } = site;
-    if (!allSites[siteCode]) { return; }
-    const { stateCode, domainCode } = allSites[siteCode];
+    if (!reference.sites[siteCode]) { return; }
+    const { stateCode, domainCode } = reference.sites[siteCode];
     tables.forEach((table) => {
       const { name: tableName, months } = table;
       if (!knownTables[tableName]) { return; }
@@ -97,13 +109,13 @@ const calculateRows = (state) => {
         breakouts.reduce((acc, cur) => {
           switch (cur) {
             case 'states':
-              title = `${title}${title.length ? ' - ' : ''}${allStates[stateCode].name}`;
+              title = `${title}${title.length ? ' - ' : ''}${reference.states[stateCode].name}`;
               return `${acc}${acc.length ? '-' : ''}${stateCode}`;
             case 'domains':
-              title = `${title}${title.length ? ' - ' : ''}${allDomains[domainCode].name}`;
+              title = `${title}${title.length ? ' - ' : ''}${reference.domains[domainCode].name}`;
               return `${acc}${acc.length ? '-' : ''}${domainCode}`;
             case 'sites':
-              title = `${title}${title.length ? ' - ' : ''}${allSites[siteCode].description}`;
+              title = `${title}${title.length ? ' - ' : ''}${reference.sites[siteCode].description}`;
               return `${acc}${acc.length ? '-' : ''}${siteCode}`;
             case 'tables':
               title = `${title}${title.length ? ' - ' : ''}${tableName}`;
@@ -138,12 +150,9 @@ const calculateRows = (state) => {
 const reducer = (state, action) => {
   const newState = { ...state };
   switch (action.type) {
-    case 'setNeonContextValues':
-      newState.allSites = action.allSites || {};
-      newState.allStates = action.allStates || {};
-      newState.allDomains = action.allDomains || {};
-      newState.neonContextLoaded = true;
-      return calculateRows(newState);
+    case 'hydrateNeonContextData':
+      if (!action.neonContextData) { return state; }
+      return calculateRows(hydrateNeonContextData(newState, action.neonContextData));
 
     case 'setBreakouts':
       if (!action.breakouts.every(b => state.validBreakouts.includes(b))) { return state; }
@@ -192,32 +201,31 @@ const Provider = (props) => {
   const { sites, children } = props;
 
   const [
-    { data: neonContextData, hasLoaded: neonContextHasLoaded },
+    { data: neonContextData, isFinal: neonContextIsFinal, hasError: neonContextHasError },
   ] = NeonContext.useNeonContextState();
 
   /**
      Initial State and Reducer Setup
   */
-  const initialState = { ...cloneDeep(DEFAULT_STATE), sites };
+  let initialState = { ...cloneDeep(DEFAULT_STATE), sites };
   initialState.tables = extractTables(initialState);
+  if (neonContextIsFinal && !neonContextHasError) {
+    initialState = hydrateNeonContextData(initialState, neonContextData);
+  }
   const [state, dispatch] = useReducer(reducer, calculateRows(initialState));
 
   /**
      Effect - Watch for changes to NeonContext data and push into local state
   */
   useEffect(() => {
-    if (!(neonContextHasLoaded && !state.neonContextLoaded)) { return; }
-    const { sites: allSites, states: allStates, domains: allDomains } = neonContextData;
-    dispatch({
-      type: 'setNeonContextValues',
-      allSites,
-      allStates,
-      allDomains,
-    });
+    if (!state.neonContextHydrated && neonContextIsFinal && !neonContextHasError) {
+      dispatch({ type: 'hydrateNeonContextData', neonContextData });
+    }
   }, [
     neonContextData,
-    neonContextHasLoaded,
-    state.neonContextLoaded,
+    neonContextIsFinal,
+    neonContextHasError,
+    state.neonContextHydrated,
     dispatch,
   ]);
 

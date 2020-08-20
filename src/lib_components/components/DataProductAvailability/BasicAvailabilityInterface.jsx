@@ -12,13 +12,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
 import MenuItem from '@material-ui/core/MenuItem';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import Select from '@material-ui/core/Select';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import Typography from '@material-ui/core/Typography';
@@ -38,6 +39,7 @@ import NeonContext from '../NeonContext/NeonContext';
 import SiteChip from '../SiteChip/SiteChip';
 import Theme from '../Theme/Theme';
 
+import AvailabilityPending from './AvailabilityPending';
 import BasicAvailabilityGrid from './BasicAvailabilityGrid';
 import BasicAvailabilityKey from './BasicAvailabilityKey';
 import { SVG, TIME, AvailabilityPropTypes } from './AvailabilityUtils';
@@ -46,22 +48,6 @@ import { SVG, TIME, AvailabilityPropTypes } from './AvailabilityUtils';
    Setup: CSS classes
 */
 const useStyles = makeStyles(theme => ({
-  optionButtonGroup: {
-    height: theme.spacing(4),
-  },
-  optionButton: {
-    height: theme.spacing(4),
-    fontWeight: 600,
-    color: theme.palette.primary.main,
-    borderColor: theme.palette.primary.main,
-    padding: theme.spacing(0, 1.5),
-    whiteSpace: 'nowrap',
-  },
-  // Use !important here to override the Mui-selected class with higher priority
-  optionButtonSelected: {
-    color: '#fff !important',
-    backgroundColor: `${theme.palette.primary.main} !important`,
-  },
   svg: {
     minWidth: `${SVG.MIN_WIDTH}px`,
     minHeight: `${SVG.MIN_HEIGHT}px`,
@@ -89,14 +75,6 @@ const useStyles = makeStyles(theme => ({
     },
     marginRight: theme.spacing(2),
   },
-  helpSnackbar: {
-    backgroundColor: theme.palette.grey[50],
-    color: '#000',
-    border: `1px solid ${theme.palette.primary.main}80`,
-    '& div.MuiSnackbarContent-message': {
-      width: '100%',
-    },
-  },
   helpIcon: {
     color: theme.palette.grey[300],
     marginRight: theme.spacing(1),
@@ -106,8 +84,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'flex-start',
     justifyContent: 'space-around',
     flexWrap: 'wrap',
-    marginBottom: theme.spacing(-1),
-    marginRight: theme.spacing(-1),
+    padding: '16px 16px 8px 16px !important',
   },
   helpGrid: {
     display: 'flex',
@@ -134,7 +111,9 @@ const BasicAvailabilityInterface = (props) => {
   const siteChipClasses = useSiteChipStyles(Theme);
   const { ...other } = props;
 
-  const [{ data: neonContextData }] = NeonContext.useNeonContextState();
+  const [
+    { data: neonContextData, isFinal: neonContextIsFinal, hasError: neonContextHasError },
+  ] = NeonContext.useNeonContextState();
   const { sites: allSites, states: allStates, domains: allDomains } = neonContextData;
 
   /**
@@ -289,6 +268,10 @@ const BasicAvailabilityInterface = (props) => {
     key: 'dateRange',
     value: dateRangeValue,
   }), [dispatchSelection]);
+
+  /**
+     Handlers
+  */
   const handleSelectAllSites = () => {
     setSitesValue(sites.validValues);
   };
@@ -458,62 +441,59 @@ const BasicAvailabilityInterface = (props) => {
   };
 
   /**
+     Render: NeonContext-related Loading and Error States
+  */
+  if (!neonContextIsFinal || neonContextHasError) {
+    return <AvailabilityPending />;
+  }
+
+  /**
      Render: View Options
   */
-  const renderViewOptions = () => {
-    const renderToggleButton = (key) => {
-      let className = classes.optionButton;
-      if (key === currentView) {
-        className = `${className} ${classes.optionButtonSelected}`;
-      }
-      return (
-        <ToggleButton key={key} value={key} size="small" className={className}>
-          {views[key].name}
-        </ToggleButton>
-      );
-    };
-    return (
-      <div
-        style={optionDivStyle}
-        data-selenium="data-product-availability.view-options"
+  const renderViewOptions = () => (
+    <div
+      style={optionDivStyle}
+      data-selenium="data-product-availability.view-options"
+    >
+      <Typography
+        variant="h6"
+        className={classes.h6Small}
+        style={{ marginRight: Theme.spacing(1.5), whiteSpace: 'nowrap' }}
       >
-        <Typography
-          variant="h6"
-          className={classes.h6Small}
-          style={{ marginRight: Theme.spacing(1.5), whiteSpace: 'nowrap' }}
+        View By:
+      </Typography>
+      <Hidden smDown key="viewMdUp">
+        <ToggleButtonGroup
+          exclusive
+          color="primary"
+          variant="outlined"
+          size="small"
+          value={currentView}
+          onChange={handleChangeView}
         >
-          View By:
-        </Typography>
-        <Hidden smDown key="viewMdUp">
-          <ToggleButtonGroup
-            exclusive
-            color="primary"
-            variant="outlined"
-            size="small"
-            className={classes.optionButtonGroup}
+          {selectableViewKeys.map(key => (
+            <ToggleButton key={key} value={key} size="small">
+              {views[key].name}
+            </ToggleButton>
+          ))}
+        </ToggleButtonGroup>
+      </Hidden>
+      <Hidden mdUp key="viewSmDown">
+        <FormControl variant="filled">
+          <Select
             value={currentView}
-            onChange={handleChangeView}
+            onChange={event => handleChangeView(event, event.target.value)}
+            input={<OutlinedInput margin="dense" className={selectionEnabled ? null : classes.xsSelect} />}
+            variant="filled"
           >
-            {selectableViewKeys.map(key => renderToggleButton(key))}
-          </ToggleButtonGroup>
-        </Hidden>
-        <Hidden mdUp key="viewSmDown">
-          <FormControl variant="filled">
-            <Select
-              value={currentView}
-              onChange={event => handleChangeView(event, event.target.value)}
-              input={<OutlinedInput margin="dense" className={selectionEnabled ? null : classes.xsSelect} />}
-              variant="filled"
-            >
-              {selectableViewKeys.map(key => (
-                <MenuItem key={key} value={key}>{views[key].name}</MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Hidden>
-      </div>
-    );
-  };
+            {selectableViewKeys.map(key => (
+              <MenuItem key={key} value={key}>{views[key].name}</MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Hidden>
+    </div>
+  );
 
   /**
      Render: Sort Options
@@ -551,30 +531,26 @@ const BasicAvailabilityInterface = (props) => {
         </FormControl>
         <ToggleButtonGroup
           exclusive
+          size="small"
           value={currentSortDirection}
-          className={classes.optionButtonGroup}
           onChange={handleChangeSortDirection}
           data-selenium="data-product-availability.sort-options.direction"
         >
           <ToggleButton
-            size="small"
             key={SORT_DIRECTIONS[0]}
             value={SORT_DIRECTIONS[0]}
-            className={`${classes.optionButton} ${currentSortDirection === SORT_DIRECTIONS[0] ? classes.optionButtonSelected : ''}`}
             title="Sort Ascending (A-Z)"
             aria-label="Sort Ascending (A-Z)"
           >
-            <AscIcon />
+            <AscIcon fontSize="small" />
           </ToggleButton>
           <ToggleButton
-            size="small"
             key={SORT_DIRECTIONS[1]}
             value={SORT_DIRECTIONS[1]}
-            className={`${classes.optionButton} ${currentSortDirection === SORT_DIRECTIONS[1] ? classes.optionButtonSelected : ''}`}
             title="Sort Descending (Z-A)"
             aria-label="Sort Descending (Z-A)"
           >
-            <DescIcon />
+            <DescIcon fontSize="small" />
           </ToggleButton>
         </ToggleButtonGroup>
       </div>
@@ -590,6 +566,7 @@ const BasicAvailabilityInterface = (props) => {
     const siteChipLabel = `${sites.value.length} site${sitesPlural}`;
     const siteChipProps = {
       size: 'large',
+      color: 'primary',
       classes: siteChipClasses,
       label: sites.value.length ? siteChipLabel : 'no sites selected',
       variant: sites.value.length ? 'default' : 'outlined',
@@ -674,32 +651,28 @@ const BasicAvailabilityInterface = (props) => {
           </div>
         </Grid>
         <Grid item xs={12} style={{ marginBottom: Theme.spacing(1) }}>
-          <SnackbarContent
-            className={classes.helpSnackbar}
-            style={{ justifyContent: 'center' }}
-            message={(
-              <div className={classes.helpGridContainer}>
-                <div className={classes.helpGrid}>
-                  <PanIcon className={classes.helpIcon} />
-                  <Typography variant="body1" component="div" style={{ flexGrow: 1 }}>
-                    Drag the grid to pan across time
-                  </Typography>
-                </div>
-                <div className={classes.helpGrid}>
-                  <ClickIcon className={classes.helpIcon} />
-                  <Typography variant="body1" component="div" style={{ flexGrow: 1 }}>
-                    Click rows to select sites
-                  </Typography>
-                </div>
-                <div className={classes.helpGrid}>
-                  <DragIcon className={classes.helpIcon} style={{ transform: 'rotate(90deg)' }} />
-                  <Typography variant="body1" component="div" style={{ flexGrow: 1 }}>
-                    Drag selection edges to adjust dates
-                  </Typography>
-                </div>
+          <Card>
+            <CardContent className={classes.helpGridContainer}>
+              <div className={classes.helpGrid}>
+                <PanIcon className={classes.helpIcon} />
+                <Typography variant="body1" component="div" style={{ flexGrow: 1 }}>
+                  Drag the grid to pan across time
+                </Typography>
               </div>
-            )}
-          />
+              <div className={classes.helpGrid}>
+                <ClickIcon className={classes.helpIcon} />
+                <Typography variant="body1" component="div" style={{ flexGrow: 1 }}>
+                  Click rows to select sites
+                </Typography>
+              </div>
+              <div className={classes.helpGrid}>
+                <DragIcon className={classes.helpIcon} style={{ transform: 'rotate(90deg)' }} />
+                <Typography variant="body1" component="div" style={{ flexGrow: 1 }}>
+                  Drag selection edges to adjust dates
+                </Typography>
+              </div>
+            </CardContent>
+          </Card>
         </Grid>
       </Grid>
     );
