@@ -1,0 +1,164 @@
+[
+  {
+    "name": "About",
+    "url": "/about",
+    "isContainer": true,
+    "children": [
+      {
+        "name": "Usage and Citation Policies",
+        "url": "/data-policy",
+        "isContainer": false,
+        "children": []
+      },
+      {
+        "name": "Data Quality Program",
+        "url": "/data-quality",
+        "isContainer": false,
+        "children": []
+      },
+      {
+        "name": "Data Portal News",
+        "url": "/news",
+        "isContainer": false,
+        "children": []
+      }
+    ]
+  },
+  {
+    "name": "Download Data",
+    "url": "/download-data",
+    "isContainer": true,
+    "children": [
+      {
+        "name": "Data Products",
+        "url": "/browse-data",
+        "isContainer": false,
+        "children": []
+      },
+      {
+        "name": "API",
+        "url": "/data-api",
+        "isContainer": false,
+        "children": []
+      },
+      {
+        "name": "Prototype Data",
+        "url": "/prototype-search",
+        "isContainer": false,
+        "children": []
+      }
+    ]
+  },
+  {
+    "name": "Resources",
+    "url": "/resources",
+    "isContainer": true,
+    "children": [
+      {
+        "name": "Document Library",
+        "url": "/documents",
+        "isContainer": false,
+        "children": []
+      },
+      {
+        "name": "Data Product Catalog",
+        "url": "/data-product-catalog",
+        "isContainer": false,
+        "children": []
+      },
+      {
+        "name": "Data Availability Chart",
+        "url": "/view-data-availability",
+        "isContainer": false,
+        "children": []
+      },
+      {
+        "name": "Taxonomy Lists",
+        "url": "/apps/taxon",
+        "type": "url",
+        "isContainer": false,
+        "children": []
+      },
+      {
+        "name": "Sample Viewer",
+        "url": "/apps/samples",
+        "type": "url",
+        "isContainer": false,
+        "children": []
+      },
+      {
+        "name": "Frequently Asked Questions",
+        "url": "/faq",
+        "type": "url",
+        "isContainer": false,
+        "children": []
+      },
+      {
+        "name": "Using NEON Data",
+        "url": "/using-neon-data",
+        "isContainer": true,
+        "children": [
+          {
+            "name": "File Naming Conventions",
+            "url": "/file-naming-conventions",
+            "type": "portlet",
+            "isContainer": false,
+            "children": []
+          },
+          {
+            "name": "Data Tutorials, Workshops & More",
+            "url": "https://neonscience.org/resources",
+            "isContainer": false,
+            "children": []
+          },
+          {
+            "name": "Software @ GitHub",
+            "url": "https://github.com/NEONScience",
+            "isContainer": false,
+            "isExternalLink": true,
+            "navExternalLink": null,
+            "isExpanded": false,
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "Learn More",
+        "url": "/learn-more",
+        "isContainer": true,
+        "children": [
+          {
+            "name": "Field Sites",
+            "url": "https://www.neonscience.org/field-sites",
+            "isContainer": false,
+            "children": []
+          },
+          {
+            "name": "Airborne Data",
+            "url": "https://www.neonscience.org/data-resources/get-data/airborne-data",
+            "isContainer": false,
+            "children": []
+          },
+          {
+            "name": "Data Collection",
+            "url": "https://www.neonscience.org/data-collection",
+            "isContainer": false,
+            "children": []
+          },
+          {
+            "name": "Sampling Schedules",
+            "url": "https://www.neonscience.org/resources/information-researchers#schedules",
+            "isContainer": false,
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Contact Us",
+    "url": "/feedback",
+    "isContainer": false,
+    "children": []
+  }
+]

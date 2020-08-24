@@ -1,6 +1,4 @@
-/* eslint-disable import/no-unresolved, import/extensions */
-
-import { Nullable } from '../types/coreTypes';
+import { Nullable } from '../types/core';
 
 const exists = (o: any): boolean => (typeof o !== 'undefined') && (o !== null);
 const isStringNonEmpty = (o: any): boolean => (typeof o === 'string') && ((o as string).trim().length > 0);

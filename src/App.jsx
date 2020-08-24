@@ -4,6 +4,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import BasicComponentsIcon from '@material-ui/icons/ViewModule';
 
 import NeonPage from './lib_components/components/NeonPage/NeonPage';
+import NeonRouter from './lib_components/components/NeonRouter/NeonRouter';
 
 import Home from './components/Home';
 import BasicComponents from './components/BasicComponents';
@@ -14,6 +15,7 @@ import DownloadDataButtonStyleGuide from './lib_components/components/DownloadDa
 import DownloadDataContextStyleGuide from './lib_components/components/DownloadDataContext/StyleGuide';
 import ExternalHostInfoStyleGuide from './lib_components/components/ExternalHostInfo/StyleGuide';
 import FullWidthVisualizationStyleGuide from './lib_components/components/FullWidthVisualization/StyleGuide';
+import NeonAuthStyleGuide from './lib_components/components/NeonAuth/StyleGuide';
 import NeonContextStyleGuide from './lib_components/components/NeonContext/StyleGuide';
 import NeonEnvironmentStyleGuide from './lib_components/components/NeonEnvironment/StyleGuide';
 import NeonGraphQLStyleGuide from './lib_components/components/NeonGraphQL/StyleGuide';
@@ -73,6 +75,11 @@ const sidebarLinks = [
     component: FullWidthVisualizationStyleGuide,
   },
   {
+    name: 'Neon Authentication',
+    hash: '#NeonAuth',
+    component: NeonAuthStyleGuide,
+  },
+  {
     name: 'Neon Context',
     hash: '#NeonContext',
     component: NeonContextStyleGuide,
@@ -121,14 +128,15 @@ const sidebarLinks = [
 
 export default function App() {
   return (
-    <NeonPage
-      title="Portal Core Components"
-      sidebarLinks={sidebarLinks}
-      sidebarLinksAsStandaloneChildren
-      useCoreAuth
-      useCoreHeader
-    >
-      <Home />
-    </NeonPage>
+    <NeonRouter>
+      <NeonPage
+        title="Portal Core Components"
+        sidebarLinks={sidebarLinks}
+        sidebarLinksAsStandaloneChildren
+        useCoreAuth
+      >
+        <Home />
+      </NeonPage>
+    </NeonRouter>
   );
 }

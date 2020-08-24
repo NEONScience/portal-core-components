@@ -1,6 +1,0 @@
-{
-  "private": true,
-  "name": "neon-auth-login",
-  "main": "./NeonAuthLogin.js",
-  "module": "./index.js"
-}

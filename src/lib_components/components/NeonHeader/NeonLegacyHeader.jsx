@@ -6,8 +6,7 @@ import Divider from '@material-ui/core/Divider';
 
 import NeonUtilityBar from '../NeonUtilityBar/NeonUtilityBar';
 import NeonMenu from '../NeonMenu/NeonMenu';
-
-import { ROUTES, getFullRoute, buildAccountRoute } from '../../routing/routes';
+import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -29,9 +28,9 @@ const NeonHeader = forwardRef((props, ref) => {
     <div ref={ref} className={classes.root} data-selenium="neon-header">
       <NeonUtilityBar />
       <NeonMenu
-        loginPath={getFullRoute(ROUTES.LOGIN)}
-        logoutPath={getFullRoute(ROUTES.LOGOUT)}
-        accountPath={buildAccountRoute()}
+        loginPath={NeonEnvironment.getFullAuthPath('login')}
+        logoutPath={NeonEnvironment.getFullAuthPath('logout')}
+        accountPath={NeonEnvironment.route.buildAccountRoute()}
         {...notificationsProps}
       />
       <Divider />

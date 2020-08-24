@@ -1,4 +1,4 @@
-import { Nullable } from '../types/coreTypes';
+import { Nullable } from '../types/core';
 declare const exists: (o: any) => boolean;
 declare const isStringNonEmpty: (o: any) => boolean;
 declare const isNum: (o: any) => boolean;

@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "name": "neon-auth",
+  "main": "./NeonAuth.tsx",
+  "module": "./NeonAuth.tsx"
+}

@@ -1,5 +1,7 @@
 /* eslint-disable no-restricted-globals */
 
+import { AuthSilentType } from '../../types/core';
+
 // Names of all environment variables that MUST be explicitly defined for the
 // environment to be reported as "valid". These are evnironment variables
 // that are expected to be referenced by all apps. Standard vars present in all
@@ -7,6 +9,9 @@
 export const requiredEnvironmentVars = [
   'REACT_APP_NEON_API_NAME',
   'REACT_APP_NEON_API_VERSION',
+  'REACT_APP_NEON_AUTH_API',
+  'REACT_APP_NEON_AUTH_WS_API',
+  'REACT_APP_NEON_AUTH_WS_TOPIC_AUTH0_API',
   'REACT_APP_NEON_AUTH_LOGIN',
   'REACT_APP_NEON_AUTH_LOGOUT',
   'REACT_APP_NEON_AUTH_USERINFO',
@@ -37,7 +42,11 @@ export const optionalEnvironmentVars = [
   'REACT_APP_NEON_VISUS_PRODUCTS_BASE_URL',
   'REACT_APP_NEON_VISUS_IFRAME_BASE_URL',
   'REACT_APP_NEON_HOST_OVERRIDE',
+  'REACT_APP_NEON_WS_HOST_OVERRIDE',
   'REACT_APP_FOREIGN_LOCATION',
+  'REACT_APP_NEON_AUTH_DISABLE_WS',
+  'REACT_APP_NEON_ROUTER_NEON_HOME',
+  'REACT_APP_NEON_ROUTER_NEON_MYACCOUNT',
 ];
 
 // Temporary paths that shouldn't need to propogate to environment files until made more permanent
@@ -55,12 +64,14 @@ const NeonEnvironment = {
   isForeignEnv: process.env.REACT_APP_FOREIGN_LOCATION === 'true',
   useGraphql: process.env.REACT_APP_NEON_USE_GRAPHQL === 'true',
   showAopViewer: process.env.REACT_APP_NEON_SHOW_AOP_VIEWER === 'true',
+  authDisableWs: process.env.REACT_APP_NEON_AUTH_DISABLE_WS === 'true',
 
   getApiName: () => process.env.REACT_APP_NEON_API_NAME,
   getApiVersion: () => process.env.REACT_APP_NEON_API_VERSION,
   getRootApiPath: () => `/${process.env.REACT_APP_NEON_API_NAME}/${process.env.REACT_APP_NEON_API_VERSION}`,
   getRootGraphqlPath: () => process.env.REACT_APP_NEON_PATH_PUBLIC_GRAPHQL,
   getRootJsonLdPath: () => `${NeonEnvironment.getRootApiPath()}${process.env.REACT_APP_NEON_PATH_LD_API}`,
+  getRootAuthApiPath: () => process.env.REACT_APP_NEON_AUTH_API,
 
   getApiPath: {
     aopDownload: () => process.env.REACT_APP_NEON_PATH_AOP_DOWNLOAD_API,
@@ -87,6 +98,15 @@ const NeonEnvironment = {
     login: () => process.env.REACT_APP_NEON_AUTH_LOGIN,
     logout: () => process.env.REACT_APP_NEON_AUTH_LOGOUT,
     userInfo: () => process.env.REACT_APP_NEON_AUTH_USERINFO,
+    seamlessLogin: () => `${NeonEnvironment.getAuthPath.login()}?seamless=true`,
+    silentLogin: () => `${NeonEnvironment.getAuthPath.login()}?silent=true`,
+    silentLogout: () => `${NeonEnvironment.getAuthPath.logout()}?silent=true`,
+  },
+  getAuthApiPath: {
+    ws: () => process.env.REACT_APP_NEON_AUTH_WS_API,
+  },
+  authTopics: {
+    getAuth0: () => process.env.REACT_APP_NEON_AUTH_WS_TOPIC_AUTH0_API,
   },
 
   getVisusProductsBaseUrl: () => process.env.REACT_APP_NEON_VISUS_PRODUCTS_BASE_URL,
@@ -95,6 +115,22 @@ const NeonEnvironment = {
   getRouterBasePath: () => process.env.REACT_APP_NEON_ROUTER_BASE,
   getRouterBaseHomePath: () => process.env.REACT_APP_NEON_ROUTER_BASE_HOME,
   getHostOverride: () => process.env.REACT_APP_NEON_HOST_OVERRIDE,
+  getWsHostOverride: () => process.env.REACT_APP_NEON_WS_HOST_OVERRIDE,
+
+  route: {
+    home: () => process.env.REACT_APP_NEON_ROUTER_NEON_HOME || '/home',
+    account: () => process.env.REACT_APP_NEON_ROUTER_NEON_MYACCOUNT || '/myaccount',
+    getFullRoute: route => `${NeonEnvironment.getRouterBasePath()}${route}`,
+    buildRouteFromHost: route => (
+      `${NeonEnvironment.getHost()}${NeonEnvironment.getFullRoute(route)}`
+    ),
+    buildHomeRoute: () => (
+      `${NeonEnvironment.getHost()}${NeonEnvironment.route.home()}`
+    ),
+    buildAccountRoute: () => (
+      `${NeonEnvironment.getHost()}${NeonEnvironment.route.account()}`
+    ),
+  },
 
   /**
    * Gets the window.NEON_SERVER_DATA injected from the server environment.
@@ -126,6 +162,17 @@ const NeonEnvironment = {
     return `${window.location.protocol}//${window.location.host}`;
   },
 
+  getWebSocketHost: () => {
+    if (
+      (NeonEnvironment.isDevEnv || NeonEnvironment.isForeignEnv)
+        && NeonEnvironment.getWsHostOverride()) {
+      return NeonEnvironment.getWsHostOverride();
+    }
+    return window.location.protocol.startsWith('https')
+      ? `wss://${window.location.host}`
+      : `ws://${window.location.host}`;
+  },
+
   /**
    * Gets the API token header name
    * @return {string} The API token header name
@@ -148,6 +195,21 @@ const NeonEnvironment = {
       return serverData.NeonPublicAPIToken;
     }
     return '';
+  },
+
+  /**
+   * Determines if the silent authentication process should be prevented
+   * based on environment or browser as external dependencies are required.
+   * @return {AuthSilentType}
+   */
+  getAuthSilentType: () => {
+    const serverData = NeonEnvironment.getNeonServerData();
+    if (serverData
+        && (typeof serverData.NeonAuthSilentType === 'string')
+        && (serverData.NeonAuthSilentType.length > 0)) {
+      return serverData.NeonAuthSilentType;
+    }
+    return AuthSilentType.DISABLED;
   },
 
   getFullApiPath: (path = '') => {
@@ -177,11 +239,35 @@ const NeonEnvironment = {
       : `${host}`;
   },
 
+  /**
+   * Creates the full auth path from the host and path.
+   * Auth path refers to /auth0.
+   * @param {string} path - The path to build from
+   */
   getFullAuthPath: (path = '') => {
     const host = NeonEnvironment.getHost();
     return NeonEnvironment.getAuthPath[path]
       ? `${host}${NeonEnvironment.getAuthPath[path]()}`
       : `${host}`;
+  },
+
+  /**
+   * Creates the full auth API path from the host and path.
+   * Auth API path refers to /api/auth/v0.
+   * @param {string} path - The path to build from
+   * @param {boolean} useWs - Option to build a websocket path
+   */
+  getFullAuthApiPath: (path = '', useWs = false) => {
+    const host = useWs
+      ? NeonEnvironment.getWebSocketHost()
+      : NeonEnvironment.getHost();
+    const root = NeonEnvironment.getRootAuthApiPath();
+    const appliedPath = Object.keys(NeonEnvironment.getAuthApiPath).includes(path)
+      ? NeonEnvironment.getAuthApiPath[path]()
+      : '';
+    return appliedPath
+      ? `${host}${root}${appliedPath}`
+      : `${host}${root}`;
   },
 
   getFullGraphqlPath: () => {

@@ -11,6 +11,11 @@
     "@material-ui/lab": "^4.0.0-alpha.20",
     "@material-ui/pickers": "^3.2.3",
     "@material-ui/styles": "^4.2.0",
+    "@stomp/rx-stomp": "^0.3.5",
+    "@stomp/stompjs": "^5.4.4",
+    "@types/react-router": "^5.1.8",
+    "@types/react-router-dom": "^5.1.5",
+    "@types/sockjs-client": "^1.1.1",
     "clsx": "^1.1.0",
     "core-js": "^3.2.1",
     "d3-drag": "^1.2.3",
@@ -39,11 +44,12 @@
     "react-highlight.js": "^1.0.7",
     "react-inlinesvg": "^1.2.0",
     "react-leaflet": "^2.6.1",
-    "react-router": "5.0.0",
-    "react-router-dom": "5.0.0",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
     "react-select": "^3.0.8",
     "redux": "^4.0.5",
     "rxjs": "6.3.3",
+    "sockjs-client": "^1.4.0",
     "tinycolor2": "^1.4.1",
     "typeface-inter": "^3.12.0",
     "universal-cookie": "^4.0.2"
@@ -57,6 +63,7 @@
     "@babel/preset-env": "^7.8.3",
     "@babel/preset-react": "^7.8.3",
     "@babel/preset-typescript": "^7.8.3",
+    "@typescript-eslint/parser": "^3.9.0",
     "customize-cra": "^0.9.1",
     "eslint": "^6.1.0",
     "eslint-config-airbnb": "^17.1.0",
@@ -87,7 +94,7 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "src/**/*.{js,jsx}"
+      "src/**/*.{js,jsx,ts,tsx}"
     ],
     "setupFiles": [
       "<rootDir>/config/polyfills.js"
@@ -99,9 +106,9 @@
     "testEnvironment": "node",
     "testURL": "http://localhost",
     "transform": {
-      "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
+      "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+      "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
     },
     "moduleNameMapper": {
       "^react-native$": "react-native-web"
@@ -109,9 +116,11 @@
     "moduleFileExtensions": [
       "web.js",
       "js",
+      "ts",
       "json",
       "web.jsx",
       "jsx",
+      "tsx",
       "node"
     ]
   },

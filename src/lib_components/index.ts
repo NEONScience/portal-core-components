@@ -4,10 +4,12 @@ export { default as DataThemeIcon } from './components/DataThemeIcon';
 export { default as DataProductAvailability } from './components/DataProductAvailability';
 export { default as DownloadDataButton } from './components/DownloadDataButton';
 export { default as DownloadDataContext } from './components/DownloadDataContext';
+export { default as NeonAuth } from './components/NeonAuth';
 export { default as NeonContext } from './components/NeonContext';
 export { default as NeonEnvironment } from './components/NeonEnvironment';
 export { default as NeonGraphQL } from './components/NeonGraphQL';
 export { default as NeonPage } from './components/NeonPage';
+export { default as NeonRouter } from './components/NeonRouter';
 export { default as SiteChip } from './components/SiteChip';
 export { default as SiteMap } from './components/SiteMap';
 export { default as Theme } from './components/Theme';
@@ -19,10 +21,6 @@ export { default as ExternalHost } from './components/ExternalHost';
 export { default as ExternalHostInfo } from './components/ExternalHostInfo';
 export { default as ExternalHostProductSpecificLinks } from './components/ExternalHostProductSpecificLinks';
 export { default as FullWidthVisualization } from './components/FullWidthVisualization';
-
-export { default as NeonAuthLogin } from './components/NeonAuthLogin';
-export { default as NeonAuthLogout } from './components/NeonAuthLogout';
-export { default as NeonAuthRoot } from './components/NeonAuthRoot';
 
 export { default as NeonFooter } from './components/NeonFooter';
 export { default as NeonHeader } from './components/NeonHeader';

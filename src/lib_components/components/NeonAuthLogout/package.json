@@ -1,6 +1,0 @@
-{
-  "private": true,
-  "name": "neon-auth-logout",
-  "main": "./NeonAuthLogout.js",
-  "module": "./index.js"
-}

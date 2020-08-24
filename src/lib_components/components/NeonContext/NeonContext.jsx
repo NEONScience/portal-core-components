@@ -11,7 +11,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import { of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
-import Authenticate from '../../auth/authenticate';
+import AuthService from '../NeonAuth/AuthService'; // eslint-disable-line
 import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
 import sitesJSON from '../../staticJSON/sites.json';
 import statesJSON from '../../staticJSON/states.json';
@@ -46,7 +46,12 @@ const DEFAULT_STATE = {
     header: { status: null, error: null },
     footer: { status: null, error: null },
   },
-  isAuthenticated: false,
+  auth: {
+    isAuthenticated: false,
+    isAuthWorking: false,
+    isAuthWsConnected: false,
+    userData: null,
+  },
   isActive: false,
   isFinal: false,
   hasError: false,
@@ -130,13 +135,24 @@ const reducer = (state, action) => {
       return newState;
 
     // Actions for handling auth fetch
+    case 'setAuthenticated':
+      newState.auth.isAuthenticated = action.isAuthenticated;
+      return newState;
+    case 'setAuthWorking':
+      newState.auth.isAuthWorking = action.isAuthWorking;
+      return newState;
+    case 'setAuthWsConnected':
+      newState.auth.isAuthWsConnected = action.isAuthWsConnected;
+      return newState;
     case 'fetchAuthSucceeded':
       newState.fetches.auth.status = FETCH_STATUS.SUCCESS;
-      newState.isAuthenticated = !!action.isAuthenticated;
+      newState.auth.isAuthenticated = !!action.isAuthenticated;
+      newState.auth.userData = AuthService.parseUserData(action.response);
       return newState;
     case 'fetchAuthFailed':
       newState.fetches.auth.status = FETCH_STATUS.ERROR;
-      newState.isAuthenticated = false;
+      newState.auth.isAuthenticated = false;
+      newState.auth.userData = null;
       return newState;
 
     // Actions for handling HTML fetches
@@ -209,6 +225,10 @@ const Provider = (props) => {
       });
   };
 
+  // Identify any cascading authentication fetches that require
+  // the WS to be connected to initiate.
+  const cascadeAuthFetches = [];
+
   // Subject and effect to perform and manage the sites GraphQL fetch
   const fetchMethods = {
     sites: () => {
@@ -229,13 +249,32 @@ const Provider = (props) => {
       ).subscribe();
     },
     auth: () => {
-      const auth = new Authenticate();
-      auth.isAuthenticated(
+      AuthService.fetchUserInfo(
         (response) => {
-          dispatch({ type: 'fetchAuthSucceeded', isAuthenticated: auth.checkAuthResponse(response) });
+          const isAuthenticated = AuthService.isAuthenticated(response);
+          if (!isAuthenticated && AuthService.isSsoLogin(response)) {
+            // If we're not authenticated and have identified another SSO
+            // application that's authenticated, trigger a silent authentication
+            // check flow.
+            if (AuthService.allowSilentAuth()) {
+              if (!state.auth.isAuthWsConnected) {
+                cascadeAuthFetches.push(() => AuthService.loginSilently(dispatch, true));
+              } else {
+                AuthService.loginSilently(dispatch, true);
+              }
+            } else {
+              AuthService.login();
+            }
+          } else {
+            dispatch({ type: 'fetchAuthSucceeded', isAuthenticated, response });
+          }
+          // Initialize a subscription to the auth WS
+          AuthService.watchAuth0(dispatch, cascadeAuthFetches);
         },
         (error) => {
           dispatch({ type: 'fetchAuthFailed', error });
+          // Initialize a subscription to the auth WS
+          AuthService.watchAuth0(dispatch, cascadeAuthFetches);
         },
       );
     },
@@ -259,7 +298,7 @@ const Provider = (props) => {
      Render
   */
   return (
-    <Context.Provider value={[state]}>
+    <Context.Provider value={[state, dispatch]}>
       {children}
     </Context.Provider>
   );

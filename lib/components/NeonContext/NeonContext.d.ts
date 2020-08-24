@@ -175,6 +175,9 @@ declare function useNeonContextState(): ({
                 zoom: number;
             };
             NH: {
+                /**
+                   CONTEXT
+                */
                 name: string;
                 center: number[];
                 zoom: number;
@@ -464,7 +467,12 @@ declare function useNeonContextState(): ({
             error: null;
         };
     };
-    isAuthenticated: boolean;
+    auth: {
+        isAuthenticated: boolean;
+        isAuthWorking: boolean;
+        isAuthWsConnected: boolean;
+        userData: null;
+    };
     isActive: boolean;
     isFinal: boolean;
     hasError: boolean;
@@ -618,6 +626,9 @@ declare function useNeonContextState(): ({
                 zoom: number;
             };
             NH: {
+                /**
+                   CONTEXT
+                */
                 name: string;
                 center: number[];
                 zoom: number;
@@ -907,7 +918,12 @@ declare function useNeonContextState(): ({
             error: null;
         };
     };
-    isAuthenticated: boolean;
+    auth: {
+        isAuthenticated: boolean;
+        isAuthWorking: boolean;
+        isAuthWsConnected: boolean;
+        userData: null;
+    };
     isActive: boolean;
     isFinal: boolean;
     hasError: boolean;
@@ -954,7 +970,13 @@ declare namespace DEFAULT_STATE {
         }
         export { footer_1 as footer };
     }
-    export const isAuthenticated: boolean;
+    export namespace auth_1 {
+        export const isAuthenticated: boolean;
+        export const isAuthWorking: boolean;
+        export const isAuthWsConnected: boolean;
+        export const userData: null;
+    }
+    export { auth_1 as auth };
     export const isActive: boolean;
     export const isFinal: boolean;
     export const hasError: boolean;
