@@ -45,6 +45,34 @@ const getJsonObservable = (url, headers = undefined, includeToken = true) => {
 };
 
 /**
+ * Gets the RxJS observable for making a POST API request to the specified URL
+ * with body and optional headers.
+ * @param {string} url The URL to make the API request to
+ * @param {any} body The body to send with the POST request
+ * @param {Object|undefined} headers The headers to add to the request
+ * @param {boolean} includeToken Option to include the API token in the request
+ * @return The RxJS Ajax Observable
+ */
+const postJsonObservable = (url, body, headers = undefined, includeToken = true) => {
+  if (!url.length) { return of(null); }
+  let appliedHeaders = headers || {};
+  if (includeToken) {
+    appliedHeaders = getApiTokenHeader(appliedHeaders);
+  }
+  return ajax({
+    url,
+    method: 'POST',
+    crossDomain: true,
+    responseType: 'json',
+    headers: {
+      ...appliedHeaders,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  });
+};
+
+/**
  * Container for supplying common NEON API request handlers.
  */
 const NeonApi = {
@@ -64,6 +92,18 @@ const NeonApi = {
    */
   getJsonObservable: (url, headers = undefined, includeToken = true) => (
     getJsonObservable(url, headers, includeToken)
+  ),
+  /**
+   * Gets the RxJS observable for making a POST API request to the specified URL
+   * with body and optional headers.
+   * @param {string} url The URL to make the API request to
+   * @param {any} body The body to send with the POST request
+   * @param {Object|undefined} headers The headers to add to the request
+   * @param {boolean} includeToken Option to include the API token in the request
+   * @return The RxJS Ajax Observable
+   */
+  postJsonObservable: (url, body, headers = undefined, includeToken = true) => (
+    postJsonObservable(url, body, headers, includeToken)
   ),
 
   /**

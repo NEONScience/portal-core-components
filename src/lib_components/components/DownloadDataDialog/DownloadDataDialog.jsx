@@ -207,8 +207,8 @@ export default function DownloadDataDialog() {
     if (fromAOPManifest) {
       return downloadAopManifest(productData, s3Files, documentation.value);
     }
-    if (manifest.status !== 'fetched' || !manifest.body) { return null; }
-    return downloadManifest(manifest.body);
+    if (manifest.status !== 'fetched' || !manifest.body || !manifest.body.data) { return null; }
+    return downloadManifest(manifest.body.data);
   };
 
   /**
@@ -323,9 +323,10 @@ export default function DownloadDataDialog() {
     const fileTypes = {
       'application/zip': 'ZIP (Compressed Text)',
     };
-    const mimeType = manifest.body && manifest.body.mimeType ? manifest.body.mimeType : null;
+    const mimeType = manifest.body && manifest.body.data
+      && manifest.body.data.mimeType ? manifest.body.data.mimeType : null;
     const fileTypeText = Object.keys(fileTypes).includes(mimeType)
-      ? fileTypes[manifest.body.mimeType]
+      ? fileTypes[mimeType]
       : 'Unknown';
     return (
       <Typography variant="body2" data-selenium="download-data-dialog.file-type">

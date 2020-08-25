@@ -1,4 +1,12 @@
-export function buildManifestRequestUrl(config: any): string;
+export function buildManifestRequestUrl(config: any, useBody?: boolean): string;
+export function buildManifestRequestBody(config: any): {
+    dpCode: any;
+    siteCodes: any;
+    startDateMonth: any;
+    endDateMonth: any;
+    pkgType: any;
+    includeDocs: any;
+};
 export function buildS3FilesRequestUrl(productCode: any, site: any, yearMonth: any): string;
 export function downloadManifest(manifest?: {}): void;
 export function downloadAopManifest(productData: any, s3Files: any, documentation?: string): void;

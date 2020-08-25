@@ -27,6 +27,7 @@ import ExternalHost from '../ExternalHost/ExternalHost';
 import {
   buildS3FilesRequestUrl,
   buildManifestRequestUrl,
+  buildManifestRequestBody,
   getSizeEstimateFromManifestResponse,
   MAX_POST_BODY_SIZE,
 } from '../../util/manifestUtil';
@@ -961,7 +962,9 @@ const getStateObservable = () => stateSubject$.asObservable();
 
 // Observables and getters for making and canceling manifest requests
 const manifestCancelation$ = new Subject();
-const getManifestAjaxObservable = url => ajax.getJSON(url);
+const getManifestAjaxObservable = request => (
+  NeonApi.postJsonObservable(request.url, request.body, null, false)
+);
 
 /**
   <DownloadDataContext.Provider />
@@ -978,10 +981,10 @@ const Provider = (props) => {
   // Create an observable for manifests requests and subscribe to it to execute
   // the manifest fetch and dispatch results when updated.
   const manifestRequest$ = new Subject();
-  manifestRequest$.subscribe(url => (
-    getManifestAjaxObservable(url)
+  manifestRequest$.subscribe(request => (
+    getManifestAjaxObservable(request)
       .pipe(
-        switchMap(resp => of(resp)),
+        switchMap(resp => of(request.body ? resp.response : resp)),
         takeUntil(manifestCancelation$),
       )
       .subscribe(
@@ -1078,8 +1081,9 @@ const Provider = (props) => {
       });
     } else {
       dispatch({ type: 'setFetchManifestCalled' });
-      const manifestURL = buildManifestRequestUrl(manifestURLConfig);
-      manifestRequest$.next(manifestURL);
+      const manifestURL = buildManifestRequestUrl(manifestURLConfig, true);
+      const manifestBody = buildManifestRequestBody(manifestURLConfig);
+      manifestRequest$.next({ url: manifestURL, body: manifestBody });
     }
   }, [state, manifestRequest$]);
 

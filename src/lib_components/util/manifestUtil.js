@@ -7,7 +7,7 @@ const buildSiteCodesParams = (sites = [], camelCase = false) => {
   ), '');
 };
 
-export const buildManifestRequestUrl = (config) => {
+export const buildManifestRequestUrl = (config, useBody = true) => {
   const {
     productCode,
     sites,
@@ -15,19 +15,44 @@ export const buildManifestRequestUrl = (config) => {
     packageType,
     documentation,
   } = config;
-  const siteCodesParam = buildSiteCodesParams(sites);
+  let url = `${NeonEnvironment.getFullApiPath('manifest')}/manifest`;
+  if (!useBody) {
+    const siteCodesParam = buildSiteCodesParams(sites);
+    const productCodeParam = productCode.startsWith('NEON.DOM.SITE')
+      ? productCode
+      : `NEON.DOM.SITE.${productCode}`;
+    const params = [
+      `dpcode=${productCodeParam}`,
+      `startdate=${dateRange[0]}`,
+      `enddate=${dateRange[1]}`,
+      `pkgtype=${packageType}`,
+      `includedocs=${documentation ? 'true' : 'false'}`,
+      siteCodesParam,
+    ];
+    url = `${url}?${params.join('&')}`;
+  }
+  return url;
+};
+
+export const buildManifestRequestBody = (config) => {
+  const {
+    productCode,
+    sites,
+    dateRange,
+    packageType,
+    documentation,
+  } = config;
   const productCodeParam = productCode.startsWith('NEON.DOM.SITE')
     ? productCode
     : `NEON.DOM.SITE.${productCode}`;
-  const params = [
-    `dpcode=${productCodeParam}`,
-    `startdate=${dateRange[0]}`,
-    `enddate=${dateRange[1]}`,
-    `pkgtype=${packageType}`,
-    `includedocs=${documentation ? 'true' : 'false'}`,
-    siteCodesParam,
-  ];
-  return `${NeonEnvironment.getFullApiPath('manifest')}/datasetDownload?${params.join('&')}`;
+  return {
+    dpCode: productCodeParam,
+    siteCodes: sites,
+    startDateMonth: dateRange[0],
+    endDateMonth: dateRange[1],
+    pkgType: packageType,
+    includeDocs: documentation,
+  };
 };
 
 export const buildS3FilesRequestUrl = (productCode, site, yearMonth) => {
@@ -40,7 +65,7 @@ export const buildS3FilesRequestUrl = (productCode, site, yearMonth) => {
 export const downloadManifest = (manifest = {}) => {
   const form = document.createElement('form');
   form.style.display = 'none';
-  form.action = `${NeonEnvironment.getFullApiPath('download')}/dpDownload`;
+  form.action = `${NeonEnvironment.getFullApiPath('download')}/stream`;
   form.method = 'POST';
 
   const input = document.createElement('input');
@@ -98,11 +123,12 @@ export const formatBytes = (bytes) => {
 
 export const getSizeEstimateFromManifestResponse = (response) => {
   if (typeof response !== 'object' || response === null
-      || !Array.isArray(response.manifestEntries)
-      || !response.manifestEntries.length) {
+      || typeof response.data !== 'object' || response.data === null
+      || !Array.isArray(response.data.manifestEntries)
+      || !response.data.manifestEntries.length) {
     return 0;
   }
-  return response.manifestEntries.reduce((total, entry) => (
+  return response.data.manifestEntries.reduce((total, entry) => (
     total + (parseInt(entry.fileSizeBytes, 10) || 0)
   ), 0);
 };
