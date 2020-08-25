@@ -19,6 +19,7 @@ import {
   map,
   tap,
   mergeMap,
+  switchMap,
   catchError,
   ignoreElements,
 } from 'rxjs/operators';
@@ -27,6 +28,8 @@ import NeonApi from '../NeonApi/NeonApi';
 import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import { forkJoinWithProgress } from '../../util/rxUtil';
+
+import parseTimeSeriesData from '../../workers/parseTimeSeriesData';
 
 // 'get' is a reserved word so can't be imported with import
 const lodashGet = require('lodash/get.js');
@@ -97,22 +100,6 @@ const generateYAxisRange = (axis = {}) => {
   if (rangeMode === Y_AXIS_RANGE_MODES.FROM_ZERO) { return [0, high]; }
   if (rangeMode === Y_AXIS_RANGE_MODES.CENTERED) { return [low, high]; }
   return axisRange;
-};
-
-// Functions to convert a value to the proper JS data type given a NEON variable dataType
-const castFloat = (v) => {
-  const cast = parseFloat(v, 10);
-  return Number.isNaN(cast) ? null : cast;
-};
-const castInt = (v) => {
-  const cast = parseInt(v, 10);
-  return Number.isNaN(cast) ? null : cast;
-};
-const DATA_TYPE_SETTERS = {
-  dateTime: v => ((typeof v === 'string') ? v.replace(/"/g, '') : v),
-  real: castFloat,
-  'signed integer': castInt,
-  'unsigned integer': castInt,
 };
 
 // PropTypes for any Tab Component (or component within a tab) for gettingsetSelectedTab
@@ -490,82 +477,6 @@ const parseSitePositions = (site, csv) => {
 };
 
 /**
- * Build an object containing series of data, indexed by fieldName, from a data fetch response
- * We don't use the same CSV parse method as with variables/positions because we don't want rows:
- *   [ { varX: 1, varY: 2, varZ: 3 }, { varX: 10, varY: 20, varZ: 30 }, ... ]
- * ...we want columns to individually stitch together with other months into continuous series:
- *   { varX: [1, 10, ...], varY: [2. 20, ...], varZ: [3, 30,...] }
- * @param {string} csv - unparsed CSV string from a data fetch response
- * @param {Object} variables - current state.variables object
- * @return {Object} series object to be applied to state (product/site/position/month/downloadPkg)
- */
-const parseSeriesData = (csv, variables) => {
-  const series = {};
-  const fields = [];
-  const rows = csv.split('\n');
-  if (!rows.length) { return series; }
-  // Our variables list is from the most recent month. Sometimes older months have variables that
-  // are no longer around. Ultimately it would be best to proactively pull and display these, but
-  // for now we ignore any series that we don't already have variable info on.
-  const skipIndexes = [];
-  rows[0].split(',').forEach((fieldName, idx) => {
-    if (!variables[fieldName]) {
-      skipIndexes.push(idx);
-      return;
-    }
-    const { dataType } = variables[fieldName];
-    const field = {
-      fieldName,
-      setType: DATA_TYPE_SETTERS[dataType] ? DATA_TYPE_SETTERS[dataType] : v => v,
-    };
-    fields.push(field);
-    series[fieldName] = {
-      data: [],
-      range: [null, null],
-      sum: 0,
-      count: 0,
-      variance: 0,
-    };
-  });
-  rows.slice(1).forEach((row) => {
-    if (!row.length) { return; }
-    const values = row.split(',');
-    values
-      .filter((value, idx) => !skipIndexes.includes(idx))
-      .forEach((value, idx) => {
-        const typedValue = fields[idx].setType(value);
-        series[fields[idx].fieldName].data.push(typedValue);
-        // Don't bother updating the range for non-numerical series and quality flags
-        if (typeof typedValue === 'number' && !/QF$/.test(fields[idx].fieldName)) {
-          series[fields[idx].fieldName].range = getUpdatedValueRange(
-            series[fields[idx].fieldName].range,
-            typedValue,
-          );
-          series[fields[idx].fieldName].sum += typedValue;
-          series[fields[idx].fieldName].count += 1;
-        }
-      });
-  });
-  // Loop across all numeric non-quality-flag series again to calculate series variance
-  Object.keys(series)
-    .filter(fieldName => !/QF$/.test(fieldName) && series[fieldName].count > 0)
-    .forEach((fieldName) => {
-      const { dataType } = variables[fieldName];
-      const setType = DATA_TYPE_SETTERS[dataType] ? DATA_TYPE_SETTERS[dataType] : v => v;
-      if (!['real', 'signed integer', 'unsigned integer'].includes(dataType)) { return; }
-      const mean = series[fieldName].sum / series[fieldName].count;
-      let sumOfSquares = 0;
-      series[fieldName].data.forEach((value) => {
-        if (value === null) { return; }
-        const typedValue = setType(value);
-        sumOfSquares += (typedValue - mean) ** 2;
-      });
-      series[fieldName].variance = sumOfSquares / series[fieldName].count;
-    });
-  return series;
-};
-
-/**
  * Build an updated state.selection object to fill in sane defaults from current state.
  * The goal is to have the selection always be valid and as complete as possible. For example,
  * as soon as the first variables request has completed and been parsed into state, select a
@@ -920,7 +831,7 @@ const reducer = (state, action) => {
         .sites[action.siteCode]
         .positions[action.position]
         .data[action.month][action.downloadPkg][action.timeStep]
-        .series = parseSeriesData(action.csv, newState.variables);
+        .series = action.series;
       return newState;
 
     // Core Selection Actions
@@ -1239,14 +1150,16 @@ const Provider = (props) => {
             // Add a file fetch observable to the main list
             dataFetches.push(
               fetchCSV(url).pipe(
-                map((response) => {
-                  dispatch({
-                    type: 'fetchDataFileSucceeded',
-                    csv: response.response,
-                    ...actionProps,
-                  });
-                  return of(true);
-                }),
+                map(response => response.response),
+                switchMap(csv => (
+                  parseTimeSeriesData({ csv, variables: state.variables }).then((series) => {
+                    dispatch({
+                      type: 'fetchDataFileSucceeded',
+                      series,
+                      ...actionProps,
+                    });
+                  })
+                )),
                 catchError((error) => {
                   dispatch({ type: 'fetchDataFileFailed', error: error.message, ...actionProps });
                   return of(false);
@@ -1401,7 +1314,6 @@ const TimeSeriesViewerContext = {
   Provider,
   useTimeSeriesViewerState,
   TimeSeriesViewerPropTypes,
-  getUpdatedValueRange,
 };
 
 export default TimeSeriesViewerContext;

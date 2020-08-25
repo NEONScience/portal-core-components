@@ -4,28 +4,8 @@ import { map, catchError } from 'rxjs/operators';
 import NeonApi from '../NeonApi/NeonApi';
 import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
 
-import { parseLocationData } from './SiteMapWorkerSafeUtils';
-
-/**
- Recursive function to parse a deeply nest hierarchy object into a flat key/value object
- where keys are location names and values are objects containing only those location attributes
- the hierarchy affords us (type, description, and parent)
-*/
-export const parseLocationHierarchy = (inHierarchy, parent = null) => {
-  let outHierarchy = {};
-  const name = inHierarchy.locationParentHierarchy ? null : inHierarchy.locationName;
-  const description = inHierarchy.locationDescription || null;
-  const type = inHierarchy.locationType || null;
-  if (description.includes('Not Used')) { return outHierarchy; }
-  if (name !== null) { outHierarchy[name] = { type, description, parent }; }
-  inHierarchy.locationChildHierarchy.forEach((subLocation) => {
-    outHierarchy = {
-      ...outHierarchy,
-      ...parseLocationHierarchy(subLocation, name),
-    };
-  });
-  return outHierarchy;
-};
+import parseDomainHierarchy from '../../workers/parseDomainHierarchy';
+import parseLocationsArray from '../../workers/parseLocationsArray';
 
 const domainIsValid = (domainString) => {
   if (typeof domainString !== 'string') { return false; }
@@ -40,19 +20,12 @@ export const fetchDomainHierarchy = (domain) => {
   if (!domainIsValid) {
     return Promise.reject(new Error('Domain is not valid'));
   }
-
-  // Execute Locations REST API hierarchy fetch and pipe results to processing function
+  // Execute Locations REST API hierarchy fetch
   return new Promise((resolve, reject) => {
     NeonApi.getSiteLocationHierarchyObservable(domain).pipe(
       map((response) => {
         if (response && response.data) {
-          const data = {};
-          response.data.locationChildHierarchy.forEach((child) => {
-            // At the top level we only care about sites and don't want the HQ test site
-            if (child.locationType !== 'SITE' || child.locationName === 'HQTW') { return; }
-            data[child.locationName] = parseLocationHierarchy(child);
-          });
-          resolve(data);
+          resolve(response.data);
           return of(true);
         }
         reject(new Error('Malformed response'));
@@ -63,10 +36,35 @@ export const fetchDomainHierarchy = (domain) => {
         return of(false);
       }),
     ).subscribe();
-  });
+  }).then(data => parseDomainHierarchy(data));
 };
 
-export const fetchLocations = (locations) => {
+export const fetchSingleLocationREST = (location) => {
+  if (typeof location !== 'string' || !location.length) {
+    return Promise.reject(
+      new Error('Location is not valid; must be non-empty string'),
+    );
+  }
+  // Execute REST query and pipe results to processing function
+  return new Promise((resolve, reject) => {
+    NeonApi.getLocationObservable(location).pipe(
+      map((response) => {
+        if (response && response.data) {
+          resolve([response.data]);
+          return of(true);
+        }
+        reject(new Error('Malformed response'));
+        return of(false);
+      }),
+      catchError((error) => {
+        reject(new Error(error.message));
+        return of(false);
+      }),
+    ).subscribe();
+  }).then(data => parseLocationsArray(data)).then(locationMap => (locationMap || {})[location]);
+};
+
+export const fetchManyLocationsGraphQL = (locations) => {
   // Extract locations list and validate
   if (
     !Array.isArray(locations) || !locations.length
@@ -88,13 +86,7 @@ export const fetchLocations = (locations) => {
           reject(new Error('Malformed response'));
           return of(false);
         }
-        const data = {};
-        result.response.data.locations.forEach((rawLocationData) => {
-          const { locationName } = rawLocationData;
-          if (!locationName) { return; }
-          data[locationName] = parseLocationData(rawLocationData);
-        });
-        resolve(data);
+        resolve(result.response.data.locations);
         return of(true);
       }),
       // Error
@@ -103,5 +95,5 @@ export const fetchLocations = (locations) => {
         return of(false);
       }),
     ).subscribe();
-  });
+  }).then(data => parseLocationsArray(data));
 };
