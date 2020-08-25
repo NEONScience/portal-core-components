@@ -1,8 +1,8 @@
 /**
    Main Function
 */
-declare function AvailabilityLegend(props: any): JSX.Element;
-declare namespace AvailabilityLegend {
+declare function BasicAvailabilityKey(props: any): JSX.Element;
+declare namespace BasicAvailabilityKey {
     export namespace propTypes {
         export const selectionEnabled: PropTypes.Requireable<boolean>;
     }
@@ -11,5 +11,5 @@ declare namespace AvailabilityLegend {
         export { selectionEnabled_1 as selectionEnabled };
     }
 }
-export default AvailabilityLegend;
+export default BasicAvailabilityKey;
 import PropTypes from "prop-types";

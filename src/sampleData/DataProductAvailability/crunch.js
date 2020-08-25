@@ -3,6 +3,14 @@ import { parse } from 'papaparse';
 // import availabilityFile from './enhanced-availability-src.csv';
 import availabilityJson from './enhanced-availability-api-response.json';
 
+/**
+   CRUNCH
+   This script takes the raw CSV format for enhance availability of all products and will process it
+   into an API response JSON. It is only used by the DataProductAvailability StyleGuide for data to
+   back the enhanced availability example. Ultimately this should all go away when a true enhanced
+   availability API endpoint is established.
+*/
+
 const REPROCESS = false;
 
 const crunch = (returnResult = () => {}) => {

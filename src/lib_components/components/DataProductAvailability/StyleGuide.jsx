@@ -20,7 +20,7 @@ import Theme from '../Theme/Theme';
 
 import sampleProductData from '../../../sampleData/DP1.00001.001.json';
 
-import crunch from './crunch';
+import crunch from '../../../sampleData/DataProductAvailability/crunch';
 
 const useStyles = makeStyles(theme => ({
   divider: {
