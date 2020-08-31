@@ -123,6 +123,9 @@ declare namespace TimeSeriesViewerContext {
     export { useTimeSeriesViewerState };
     export { TimeSeriesViewerPropTypes };
 }
+/**
+   Context Provider
+*/
 declare function Provider(props: any): JSX.Element;
 declare namespace Provider {
     export namespace propTypes {

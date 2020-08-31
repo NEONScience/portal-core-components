@@ -225,6 +225,63 @@ const baseTheme = createMuiTheme({
   },
   overrides: {
     // We have lots of overrides. Please keep them alphabetized for easier maintenance!
+    MuiAccordion: {
+      root: {
+        border: `1px solid ${COLORS.GREY[300]}`,
+        boxShadow: 'none',
+        '&:hover, &:active': {
+          border: `1px solid ${COLORS.LIGHT_BLUE[400]}`,
+          backgroundColor: `${COLORS.LIGHT_BLUE[500]}08`,
+        },
+        '&$expanded': {
+          margin: '0px',
+          border: `1px solid ${COLORS.LIGHT_BLUE[400]}`,
+          '&:hover, &:active': {
+            backgroundColor: '#fff',
+          },
+        },
+      },
+      rounded: {
+        '&:first-child': {
+          borderTopLeftRadius: '2px',
+          borderTopRightRadius: '2px',
+        },
+        '&:last-child': {
+          borderBottomLeftRadius: '2px',
+          borderBottomRightRadius: '2px',
+        },
+        '&:not(:first-child)': {
+          borderTopWidth: '0px',
+        },
+      },
+    },
+    MuiAccordionActions: {
+      root: {
+        padding: '16px 24px',
+      },
+    },
+    MuiAccordionDetails: {
+      root: {
+        padding: '0px 24px 24px 24px',
+        '&:not(:last-child)': {
+          paddingBottom: '0px',
+        },
+      },
+    },
+    MuiAccordionSummary: {
+      root: {
+        padding: '12px 24px',
+      },
+      content: {
+        fontSize: '0.95rem',
+        fontWeight: 500,
+      },
+      expandIcon: {
+        '&:hover': {
+          backgroundColor: `${COLORS.LIGHT_BLUE[500]}14`,
+        },
+      },
+    },
     MuiBackdrop: {
       root: {
         zIndex: 3,
@@ -233,6 +290,10 @@ const baseTheme = createMuiTheme({
     MuiBreadcrumbs: {
       root: {
         padding: '8px 0px',
+        marginBottom: '16px',
+        '@media (max-width:599.95px)': {
+          marginBottom: '8px',
+        },
       },
       separator: {
         fontSize: '1.1rem',

@@ -11,6 +11,9 @@ declare namespace NeonContext {
     export { DEFAULT_STATE };
     export { getWrappedComponent };
 }
+/**
+   Context Provider
+*/
 declare function Provider(props: any): JSX.Element;
 declare namespace Provider {
     export namespace propTypes {
@@ -25,6 +28,9 @@ declare namespace Provider {
         export { useCoreHeader_1 as useCoreHeader };
     }
 }
+/**
+   HOOK
+*/
 declare function useNeonContextState(): ({
     data: {
         sites: {};
@@ -981,6 +987,9 @@ declare namespace DEFAULT_STATE {
     export const isFinal: boolean;
     export const hasError: boolean;
 }
+/**
+   getWrappedComponent
+*/
 declare function getWrappedComponent(Component: any): (props: any) => JSX.Element;
 import PropTypes from "prop-types";
 import statesJSON from "../../staticJSON/states.json";

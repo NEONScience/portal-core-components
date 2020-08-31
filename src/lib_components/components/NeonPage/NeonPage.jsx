@@ -202,9 +202,6 @@ const useStyles = makeStyles(theme => ({
       margin: '8px 0px 12px 0px',
     },
   },
-  breadcrumbs: {
-    marginTop: '24px',
-  },
   backdropPaper: {
     display: 'flex',
     flexDirection: 'column',
@@ -481,7 +478,6 @@ const NeonPage = (props) => {
     <Breadcrumbs
       aria-label="Breadcrumbs"
       data-selenium="neon-page.breadcrumbs"
-      className={classes.breadcrumbs}
     >
       <Link key={uniqueId()} href="/">
         <HomeIcon title="Home" fontSize="small" style={{ marginBottom: '-4px' }} />

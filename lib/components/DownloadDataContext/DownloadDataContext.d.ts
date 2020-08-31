@@ -7,6 +7,9 @@ declare namespace DownloadDataContext {
     export { ALL_STEPS };
     export { getStateObservable };
 }
+/**
+  <DownloadDataContext.Provider />
+*/
 declare function Provider(props: any): JSX.Element;
 declare namespace Provider {
     export namespace propTypes {
@@ -43,6 +46,9 @@ declare namespace Provider {
         export { packageType_1 as packageType };
     }
 }
+/**
+   HOOK
+*/
 declare function useDownloadDataState(): {
     downloadContextIsActive: boolean;
     broadcast: boolean;
@@ -182,6 +188,9 @@ declare function useDownloadDataState(): {
         isValid: boolean;
     };
 })[];
+/**
+   REDUCER
+*/
 declare function reducer(state: any, action: any): any;
 declare namespace DEFAULT_STATE {
     export const downloadContextIsActive: boolean;

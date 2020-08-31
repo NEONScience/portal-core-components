@@ -4,4 +4,7 @@ declare namespace HistoryService {
     export { cleanPath };
 }
 declare const history: import("history").History<import("history").History.UnknownFacade>;
+/**
+ * Cleans the current browser path
+ */
 declare function cleanPath(): void;

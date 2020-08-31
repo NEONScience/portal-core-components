@@ -3,6 +3,10 @@
 import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionActions from '@material-ui/core/AccordionActions';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Card from '@material-ui/core/Card';
@@ -23,6 +27,7 @@ import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 
 import DownloadIcon from '@material-ui/icons/SaveAlt';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import InfoIcon from '@material-ui/icons/Info';
 import LeftIcon from '@material-ui/icons/ChevronLeft';
 import RightIcon from '@material-ui/icons/ChevronRight';
@@ -86,6 +91,108 @@ export default function BasicComponents() {
         This page contains examples of all stock Material UI components with NEON Theme style
         overrides for parity with the <Link href={styleGuideUrl}>NEON Drupal Style Guide</Link>.
       </DocBlock>
+
+      {/* Accordion */}
+      <Divider className={classes.divider} />
+      <Typography variant="h4" component="h2" gutterBottom>Accordion</Typography>
+
+      <div style={{ marginBottom: Theme.spacing(4) }}>
+        <Accordion>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            Basic Accordion
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography variant="body1">
+              Accordion Details Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
+              porttitor purus non lacus cursus iaculis. Phasellus mollis mauris vel arcu semper
+              rutrum. Pellentesque iaculis id orci eu laoreet. Integer placerat quam felis, ac
+              molestie urna feugiat at. Nunc id felis vulputate, commodo leo quis, consectetur diam.
+            </Typography>
+            <Typography variant="body1">
+              Aenean diam erat, imperdiet ut ipsum sit amet, luctus blandit ante. Sed sed euismod
+              diam, vitae dignissim ex. In hac habitasse platea dictumst. In suscipit, lectus vitae
+              interdum rhoncus, velit turpis pharetra est, quis fringilla magna tortor posuere
+              sapien. Aliquam gravida congue risus, ac finibus nisl porta a. Sed eu velit eget
+              lorem commodo tincidunt mattis eget mauris. In imperdiet tortor a suscipit ultricies.
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+      </div>
+      <div style={{ marginBottom: Theme.spacing(4) }}>
+        <Accordion>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            Stacked Accordions (1)
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography variant="body1">
+              Accordion Details Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
+              porttitor purus non lacus cursus iaculis. Phasellus mollis mauris vel arcu semper
+              rutrum. Pellentesque iaculis id orci eu laoreet. Integer placerat quam felis, ac
+              molestie urna feugiat at. Nunc id felis vulputate, commodo leo quis, consectetur diam.
+            </Typography>
+            <Typography variant="body1" style={{ marginLeft: Theme.spacing(3) }}>
+              Aenean diam erat, imperdiet ut ipsum sit amet, luctus blandit ante. Sed sed euismod
+              diam, vitae dignissim ex. In hac habitasse platea dictumst. In suscipit, lectus vitae
+              interdum rhoncus, velit turpis pharetra est, quis fringilla magna tortor posuere
+              sapien. Aliquam gravida congue risus, ac finibus nisl porta a. Sed eu velit eget
+              lorem commodo tincidunt mattis eget mauris. In imperdiet tortor a suscipit ultricies.
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            Stacked Accordions (2)
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography variant="body1">
+              Aenean diam erat, imperdiet ut ipsum sit amet, luctus blandit ante. Sed sed euismod
+              diam, vitae dignissim ex. In hac habitasse platea dictumst. In suscipit, lectus vitae
+              interdum rhoncus, velit turpis pharetra est, quis fringilla magna tortor posuere
+              sapien. Aliquam gravida congue risus, ac finibus nisl porta a. Sed eu velit eget
+              lorem commodo tincidunt mattis eget mauris. In imperdiet tortor a suscipit ultricies.
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            Stacked Accordions (3)
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography variant="body1">
+              Accordion Details Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
+              porttitor purus non lacus cursus iaculis. Phasellus mollis mauris vel arcu semper
+              rutrum. Pellentesque iaculis id orci eu laoreet. Integer placerat quam felis, ac
+              molestie urna feugiat at. Nunc id felis vulputate, commodo leo quis, consectetur diam.
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+      </div>
+      <div style={{ marginBottom: Theme.spacing(4) }}>
+        <Accordion>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            Accordion with Actions
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography variant="body1">
+              Accordion Details Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
+              porttitor purus non lacus cursus iaculis. Phasellus mollis mauris vel arcu semper
+              rutrum. Pellentesque iaculis id orci eu laoreet. Integer placerat quam felis, ac
+              molestie urna feugiat at. Nunc id felis vulputate, commodo leo quis, consectetur diam.
+            </Typography>
+            <Typography variant="body1" style={{ marginLeft: Theme.spacing(3) }}>
+              Aenean diam erat, imperdiet ut ipsum sit amet, luctus blandit ante. Sed sed euismod
+              diam, vitae dignissim ex. In hac habitasse platea dictumst. In suscipit, lectus vitae
+              interdum rhoncus, velit turpis pharetra est, quis fringilla magna tortor posuere
+              sapien. Aliquam gravida congue risus, ac finibus nisl porta a. Sed eu velit eget
+              lorem commodo tincidunt mattis eget mauris. In imperdiet tortor a suscipit ultricies.
+            </Typography>
+          </AccordionDetails>
+          <AccordionActions>
+            <Button>Cancel</Button>
+            <Button color="primary">Action</Button>
+          </AccordionActions>
+        </Accordion>
+      </div>
 
       {/* Button */}
       <Divider className={classes.divider} />

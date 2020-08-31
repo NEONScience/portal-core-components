@@ -5,6 +5,9 @@ declare namespace SiteMapContext {
     export { SORT_DIRECTIONS };
     export { VIEWS };
 }
+/**
+   Context Provider
+*/
 declare function Provider(props: any): JSX.Element;
 declare namespace Provider {
     export const propTypes: {
@@ -28,8 +31,7 @@ declare function useSiteMapContext(): any[] | {
     view: {
         current: null;
         initialized: {
-            [x: string]: boolean;
-            [x: number]: boolean;
+            [k: string]: boolean;
         };
     };
     neonContextHydrated: boolean;
@@ -78,12 +80,10 @@ declare function useSiteMapContext(): any[] | {
     };
     featureDataFetchesHasAwaiting: boolean;
     featureDataFetches: {
-        [x: string]: {};
-        [x: number]: {};
+        [k: string]: {};
     };
     featureData: {
-        [x: string]: {};
-        [x: number]: {};
+        [k: string]: {};
     };
     sites: {};
     filters: {
@@ -93,8 +93,7 @@ declare function useSiteMapContext(): any[] | {
             open: boolean;
             available: {};
             visible: {
-                [x: string]: boolean;
-                [x: number]: boolean;
+                [k: string]: boolean;
             };
             collapsed: Set<any>;
         };
