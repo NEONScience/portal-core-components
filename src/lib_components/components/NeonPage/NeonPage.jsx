@@ -102,6 +102,7 @@ const useStyles = makeStyles(theme => ({
   },
   pageContent: {
     display: 'table-cell',
+    verticalAlign: 'top',
     position: 'relative',
     padding: theme.spacing(4),
     paddingBottom: theme.spacing(8),
@@ -123,6 +124,7 @@ const useStyles = makeStyles(theme => ({
   },
   sidebarContainer: {
     display: 'table-cell',
+    verticalAlign: 'top',
     backgroundColor: COLORS.GREY[50],
     padding: theme.spacing(5, 4),
     [theme.breakpoints.down('sm')]: {
