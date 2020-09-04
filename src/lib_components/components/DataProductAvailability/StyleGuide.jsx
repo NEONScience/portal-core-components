@@ -1,9 +1,13 @@
 /* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid, max-len */
-import React from 'react';
+
+import React, { useEffect, useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
 import Divider from '@material-ui/core/Divider';
+import MenuItem from '@material-ui/core/MenuItem';
+import Paper from '@material-ui/core/Paper';
+import Select from '@material-ui/core/Select';
 import Typography from '@material-ui/core/Typography';
 
 import DocBlock from '../../../components/DocBlock';
@@ -16,11 +20,64 @@ import Theme from '../Theme/Theme';
 
 import sampleProductData from '../../../sampleData/DP1.00001.001.json';
 
+import crunch from '../../../sampleData/DataProductAvailability/crunch';
+
 const useStyles = makeStyles(theme => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
 }));
+
+const EnhancedAvailability = () => {
+  const [initialized, setInitialized] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [availability, setAvailability] = useState({});
+  const [selectedProductCode, setSelectedProductCode] = useState(null);
+
+  useEffect(() => {
+    if (!initialized) {
+      setInitialized(true);
+      crunch((result) => {
+        setAvailability(result);
+        setSelectedProductCode('DP1.20093.001'); // result.products[0].productCode
+        setLoading(false);
+      });
+    }
+  }, [initialized, setInitialized, setLoading, setAvailability]);
+
+  const productIdx = !availability.products ? -1
+    : availability.products.findIndex(p => p.productCode === selectedProductCode);
+  const sites = productIdx === -1 ? [] : availability.products[productIdx].sites;
+
+  const paperStyles = { width: '100%', padding: Theme.spacing(3) };
+  return loading ? (
+    <Paper style={paperStyles}>loading...</Paper>
+  ) : (
+    <Paper style={paperStyles}>
+      <Typography variant="h6" id="enhanced-availability-products-select-label" gutterBottom>
+        Select Data Product
+      </Typography>
+      <Select
+        id="enhanced-availability-products-select"
+        aria-labelledby="enhanced-availability-products-select-label"
+        variant="outlined"
+        value={selectedProductCode}
+        onChange={(event) => { setSelectedProductCode(event.target.value); }}
+        style={{ width: '100%', marginBottom: '32px' }}
+      >
+        {availability.products.map((product) => {
+          const { productCode } = product;
+          return (
+            <MenuItem key={productCode} value={productCode}>
+              {productCode}
+            </MenuItem>
+          );
+        })}
+      </Select>
+      <DataProductAvailability sites={sites} />
+    </Paper>
+  );
+};
 
 const sites = ['ARIK', 'COMO', 'CPER', 'NIWO', 'RMNP', 'STER', 'UNDE', 'WLOU'];
 const dateRange = ['2018-01', '2018-12'];
@@ -29,11 +86,15 @@ export default function StyleGuide() {
   const classes = useStyles(Theme);
 
   const DownloadDataContextLink = (
-    <Link href="#DownloadDataContext">DownloadDataContext</Link>
+    <Link href="#DownloadDataContext">
+      DownloadDataContext
+    </Link>
   );
 
   const DownloadDataButtonLink = (
-    <Link href="#DownloadDataButton">DownloadDataButton</Link>
+    <Link href="#DownloadDataButton">
+      DownloadDataButton
+    </Link>
   );
 
   return (
@@ -321,6 +382,22 @@ const productData = {...};
 </DownloadDataContext.Provider>
         `}
       </CodeBlock>
+
+      <Divider className={classes.divider} />
+      <Typography variant="h6" component="h4" gutterBottom>
+        Enhanced Data Product Availability Chart
+      </Typography>
+
+      <DocBlock>
+        An experimental mode exists to show enhanced availability with a more nuanced and complete
+        set of statuses for a given site/month. It also allows for arbitrary rollups and breaks out
+        product tables where appropriate. It does not, however, support selection and currently
+        any APIs do deliver availability data structured as needed for the enhanced chart are still
+        in development.
+      </DocBlock>
+      <ExampleBlock>
+        <EnhancedAvailability />
+      </ExampleBlock>
 
     </React.Fragment>
   );
