@@ -384,7 +384,7 @@ export default function TimeSeriesViewerGraph() {
                 || !posData[month][pkg][timeStep].series[variable]
                 || !posData[month][pkg][timeStep].series[dateTimeVariable]
             ) {
-              for (let t = monthIdx; t < monthStepCount; t += 1) {
+              for (let t = monthIdx; t < monthIdx + monthStepCount; t += 1) {
                 newData[t][columnIdx] = null;
               }
               return;
@@ -437,7 +437,7 @@ export default function TimeSeriesViewerGraph() {
                 || !posData[month][pkg][timeStep]
                 || !posData[month][pkg][timeStep].series[qf]
             ) {
-              for (let t = monthIdx; t < monthStepCount; t += 1) {
+              for (let t = monthIdx; t < monthIdx + monthStepCount; t += 1) {
                 newQualityData[t][columnIdx] = [...qfNullFill];
               }
               return;

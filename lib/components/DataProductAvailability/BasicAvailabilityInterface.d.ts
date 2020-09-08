@@ -1,4 +1,7 @@
 export default BasicAvailabilityInterface;
+/**
+   Main Function
+*/
 declare function BasicAvailabilityInterface(props: any): JSX.Element;
 declare namespace BasicAvailabilityInterface {
     export namespace propTypes {

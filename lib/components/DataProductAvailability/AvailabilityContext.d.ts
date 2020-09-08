@@ -4,6 +4,9 @@ declare namespace AvailabilityContext {
     export { useAvailabilityState };
     export { SORT_DIRECTIONS };
 }
+/**
+   Context Provider
+*/
 declare function Provider(props: any): JSX.Element;
 declare namespace Provider {
     export namespace propTypes {
