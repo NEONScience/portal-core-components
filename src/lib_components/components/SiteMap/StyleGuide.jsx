@@ -240,6 +240,13 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
         `}
       </CodeBlock>
 
+      <Typography variant="h4" component="h2" gutterBottom>Props</Typography>
+
+      <DocBlock>
+        <PropsTable props={propRows} />
+      </DocBlock>
+
+      <Divider className={classes.divider} />
       <Typography variant="h4" component="h2" gutterBottom>Usage</Typography>
 
       <DocBlock>
@@ -248,7 +255,10 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
       </DocBlock>
 
       <ExampleBlock>
+        foo
+        {/*
         <SiteMap />
+        */}
       </ExampleBlock>
       <CodeBlock>
         {`
@@ -256,23 +266,21 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
         `}
       </CodeBlock>
 
+      <Divider className={classes.divider} />
+      <Typography variant="h4" component="h2" gutterBottom>Selection</Typography>
+
       <DocBlock>
-        Various props allow for customizing the initial appearance of the SiteMap.
+        Selection
       </DocBlock>
+
+      <ExampleBlock>
+        <SiteMap selection="SITES" />
+      </ExampleBlock>
       <CodeBlock>
         {`
-<SiteMap location="CPER" />
-<SiteMap apectRatio={1} center={[38.4373, -109.9293]} zoom={14} tileLayer="WORLD_IMAGERY" />
-<SiteMap view="table" filterPosition="top" />
+<SiteMap selection="SITES" />
         `}
       </CodeBlock>
-
-      <Divider className={classes.divider} />
-      <Typography variant="h4" component="h2" gutterBottom>Props</Typography>
-
-      <DocBlock>
-        <PropsTable props={propRows} />
-      </DocBlock>
 
     </React.Fragment>
   );

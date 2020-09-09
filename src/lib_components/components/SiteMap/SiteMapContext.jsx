@@ -30,6 +30,7 @@ import {
   FETCH_STATUS,
   FEATURE_TYPES,
   FEATURE_DATA_SOURCES,
+  SELECTION_PORTIONS,
   SELECTABLE_FEATURE_TYPES,
   SITE_LOCATION_HIERARCHIES_MIN_ZOOM,
   MAP_ZOOM_RANGE,
@@ -67,7 +68,9 @@ const deriveBoundarySelections = (state) => {
         .filter(x => state.selection[SELECTABLE_FEATURE_TYPES.SITES].has(x));
       if (!intersection.length) { return; }
       selectedBoundarys[boundaryCode] = (
-        intersection.length === boundarySitesSet.size ? 'total' : 'partial'
+        intersection.length === boundarySitesSet.size
+          ? SELECTION_PORTIONS.TOTAL
+          : SELECTION_PORTIONS.PARTIAL
       );
     });
     return selectedBoundarys;
@@ -697,7 +700,7 @@ const reducer = (state, action) => {
     case 'toggleStateSelected':
       if (!action.stateCode) { return state; }
       setMethod = (
-        state.selection.derived[FEATURES.STATES.KEY][action.stateCode] === 'total'
+        state.selection.derived[FEATURES.STATES.KEY][action.stateCode] === SELECTION_PORTIONS.TOTAL
           ? 'delete' : 'add'
       );
       newState.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.STATES.KEY][action.stateCode].sites
@@ -708,10 +711,12 @@ const reducer = (state, action) => {
 
     case 'toggleDomainSelected':
       if (!action.domainCode) { return state; }
+      /* eslint-disable max-len */
       setMethod = (
-        state.selection.derived[FEATURES.DOMAINS.KEY][action.domainCode] === 'total'
+        state.selection.derived[FEATURES.DOMAINS.KEY][action.domainCode] === SELECTION_PORTIONS.TOTAL
           ? 'delete' : 'add'
       );
+      /* eslint-enable max-len */
       newState.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.DOMAINS.KEY][action.domainCode].sites
         .forEach((siteCode) => {
           newState.selection[SELECTABLE_FEATURE_TYPES.SITES][setMethod](siteCode);

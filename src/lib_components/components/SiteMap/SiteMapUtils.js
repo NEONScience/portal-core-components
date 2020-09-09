@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 
+import cloneDeep from 'lodash/cloneDeep';
+
 import L from 'leaflet';
 
 import { COLORS } from '../Theme/Theme';
@@ -1272,18 +1274,21 @@ const getZoomedIcon = (
   const iconScale = featureHasIcon ? feature.iconScale || 1 : 1;
   const minZoom = feature.minZoom || (FEATURES[feature.parent] || {}).minZoom || MAP_ZOOM_RANGE[0];
   const maxZoom = feature.maxZoom || (FEATURES[feature.parent] || {}).maxZoom || MAP_ZOOM_RANGE[1];
-  const { popupAnchor, shadow } = LOCATION_ICON_SVG_SHAPES[iconShape];
-  let { iconSize, iconAnchor } = LOCATION_ICON_SVG_SHAPES[iconShape];
+  // Use a deep clone of the base SVG shape object so that we can modify destructured data
+  // for variants like "selected" icons
+  const baseSvgShape = cloneDeep(LOCATION_ICON_SVG_SHAPES[iconShape]);
+  const { popupAnchor, shadow } = baseSvgShape;
+  let { iconSize, iconAnchor } = baseSvgShape;
   const { svg: shadowUrl } = shadow[highlight] || {};
   let { size: shadowSize, anchor: shadowAnchor } = shadow[highlight] || {};
   // Adjust icon, size, and anchor if selected (and a different "selected" icon is available)
   if (featureHasIcon && selection === SELECTION_STATUS.SELECTED && feature.iconSelectedSvg) {
     iconUrl = feature.iconSelectedSvg;
     iconSize = iconSize.map(d => d + SELECTED_ICON_OFFSET);
-    iconAnchor = iconSize.map(d => d + (SELECTED_ICON_OFFSET / 2));
+    iconAnchor = iconAnchor.map(d => d + (SELECTED_ICON_OFFSET / 2));
     shadowSize = shadowUrl ? shadowSize.map(d => d + SELECTED_ICON_OFFSET) : null;
-    shadowAnchor = shadowUrl ? shadowSize.map(d => d + (SELECTED_ICON_OFFSET / 2)) : null;
-    popupAnchor[1] += (SELECTED_ICON_OFFSET / 2);
+    shadowAnchor = shadowUrl ? shadowAnchor.map(d => d + (SELECTED_ICON_OFFSET / 2)) : null;
+    popupAnchor[1] -= (SELECTED_ICON_OFFSET / 2);
   }
   // Determine Icon Scale
   // Normalize the scale to a range of at least 0.2 to 0.5 (but as big as 0.2 to 1) based on
@@ -1323,7 +1328,7 @@ export const getZoomedIcons = (zoom) => {
       Object.keys(SELECTION_STATUS).forEach((selection) => {
         if (
           selection === SELECTION_STATUS.SELECTED
-            && !Object.keys(SELECTABLE_FEATURE_TYPES).includes(key)
+            && !Object.keys(SELECTABLE_FEATURE_TYPES).includes(FEATURES[key].type)
         ) { return; }
         icons[key][selection] = {};
         Object.keys(HIGHLIGHT_STATUS).forEach((highlight) => {
