@@ -75,7 +75,7 @@ const AllProductsTimeSeries = () => {
             product.siteCodes
               && product.siteCodes.length
               && productIsIS(product)
-              && !bundles.parents.includes(product.productCode)
+              && !Object.keys(bundles.parents).includes(product.productCode)
               && !Object.keys(bundles.children).includes(product.productCode)
           ))
           .map(product => ({ productCode: product.productCode, productName: product.productName }));
