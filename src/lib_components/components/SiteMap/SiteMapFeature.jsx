@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle, jsx-a11y/anchor-is-valid */
-import React from 'react';
+import React, { useRef, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import tinycolor from 'tinycolor2';
@@ -172,8 +172,7 @@ const positionsArrayIsValid = (positions, checkAllCoords = false) => {
 const SiteMapFeature = (props) => {
   const classes = useStyles(Theme);
   const { mapRef, featureKey } = props;
-
-  if (!FEATURES[featureKey] || !mapRef.current) { return null; }
+  const polygonRef = useRef(null);
 
   const feature = FEATURES[featureKey] || {};
 
@@ -189,6 +188,13 @@ const SiteMapFeature = (props) => {
     parentDataFeatureKey,
   } = feature;
   const featureName = nameSingular || name || featureKey;
+
+  useLayoutEffect(() => {
+    if (!polygonRef.current) { return; }
+    console.log(featureKey, polygonRef);
+  }, [featureKey, polygonRef]);
+
+  if (!FEATURES[featureKey] || !mapRef.current) { return null; }
 
   let featureDescription = description;
   let parentFeature = null;
@@ -751,8 +757,11 @@ const SiteMapFeature = (props) => {
   const renderBoundarySelectionAction = (boundaryFeatureKey, boundaryKey) => {
     if (!selectionActive || !state.selection.derived[boundaryFeatureKey]) { return null; }
     const { sites: boundarySites = new Set() } = featureData[boundaryKey];
+    if (!boundarySites.size) { return null; }
     const selectionPortion = state.selection.derived[boundaryFeatureKey][boundaryKey] || null;
-    let action = `add all ${boundarySites.size} sites`;
+    let action = boundarySites.size === 1
+      ? 'add this one site'
+      : `add all ${boundarySites.size} sites`;
     let preposition = 'to';
     let snackbarClass = classes.addToSelectionSnackbar;
     let snackbarIconClass = classes.addToSelectionSnackbarIcon;
@@ -762,7 +771,9 @@ const SiteMapFeature = (props) => {
       action = `add remaining ${remaining} site${remaining === 1 ? '' : 's'}`;
     }
     if (selectionPortion === SELECTION_PORTIONS.TOTAL) {
-      action = `remove all ${boundarySites.size} sites`;
+      action = boundarySites.size === 1
+        ? 'remove this one site'
+        : `remove all ${boundarySites.size} sites`;
       preposition = 'from';
       snackbarClass = classes.removeFromSelectionSnackbar;
       snackbarIconClass = classes.removeFromSelectionSnackbarIcon;
@@ -1055,8 +1066,8 @@ const SiteMapFeature = (props) => {
   */
   const baseColor = featureStyle ? featureStyle.color : '#666666';
   const hoverColor = `#${tinycolor(baseColor).lighten(10).toHex()}`;
-  const darkenedBaseColor = `#${tinycolor(baseColor).darken(20).toHex()}`;
-  const darkenedMoreBaseColor = `#${tinycolor(darkenedBaseColor).darken(20).toHex()}`;
+  const darkenedBaseColor = `#${tinycolor(baseColor).darken(15).toHex()}`;
+  const darkenedMoreBaseColor = `#${tinycolor(darkenedBaseColor).darken(15).toHex()}`;
   const isPoint = (shapeData) => {
     const shapeKeys = Object.keys(shapeData);
     return (
@@ -1121,6 +1132,11 @@ const SiteMapFeature = (props) => {
           ...featureStyle || {},
           ...polygonInteractionProps,
         };
+        // ReactLeaflet does not suport the mask prop, so add it as an unused class.
+        // The LayoutEffect in SiteMapLeaflet.jsx then applies it as a mask attribute.
+        if ([FEATURES.DOMAINS.KEY, FEATURES.STATES.KEY].includes(featureKey)) {
+          shapeProps.className = `#mask_${featureKey}_${primaryId}`;
+        }
         if (isHighlighted) {
           shapeProps.color = darkenedBaseColor;
           shapeProps.onMouseOut = (e) => {
@@ -1252,7 +1268,7 @@ const SiteMapFeature = (props) => {
         ) : null;
       case 'Polyline':
         return (
-          <Polyline key={`${key}-polyline`} positions={positions} {...shapeProps}>
+          <Polyline key={`${key}-polyline`} positions={positions} {...shapeProps} ref={polygonRef}>
             {renderedPopup}
           </Polyline>
         );

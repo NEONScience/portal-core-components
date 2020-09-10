@@ -270,7 +270,7 @@ export const FEATURES = {
     dataSource: FEATURE_DATA_SOURCES.NEON_CONTEXT,
     primaryIdOnly: true,
     featureShape: 'Polygon',
-    style: { color: '#a067e4' },
+    style: { color: '#885eba', weight: 8 },
   },
   STATES: {
     name: 'US States',
@@ -280,7 +280,7 @@ export const FEATURES = {
     dataSource: FEATURE_DATA_SOURCES.NEON_CONTEXT,
     primaryIdOnly: true,
     featureShape: 'Polygon',
-    style: { color: '#3cdd84' },
+    style: { color: '#53ac7b', weight: 8 },
   },
   // Various Boundary Types
   FLIGHT_BOX_BOUNDARIES: {

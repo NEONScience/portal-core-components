@@ -1,6 +1,12 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useRef, useEffect } from 'react';
+import React, {
+  useRef,
+  useEffect,
+  useLayoutEffect,
+} from 'react';
 import ReactDOMServer from 'react-dom/server';
+
+// import L from 'leaflet';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
@@ -218,6 +224,70 @@ const SiteMapLeaflet = () => {
     mapRef.current.leafletElement.invalidateSize();
     dispatch({ type: 'setViewInitialized' });
   }, [mapRef, state.view, dispatch]);
+
+  /**
+    Effect
+    Create masks for DOMAINS and/or STATES.
+    These features intentionally have extra-wide strokes. When combined with a mask it creates
+    the effect of stroke "only on the inside" so that strokes of adjacent domains/states never
+    overlap along shared borders. This is especially useful for visual differentiation of different
+    selection statuses for adjacent states/domains.
+  */
+  useLayoutEffect(() => {
+    // Only continue if the map is in a ready / fully rendered state.
+    if (
+      !mapRef || !mapRef.current || !mapRef.current.leafletElement
+        || !mapRef.current._ready || mapRef.current._updating
+        || !mapRef.current.leafletElement._panes
+        || !mapRef.current.leafletElement._panes.overlayPane
+        || !mapRef.current.leafletElement._panes.overlayPane.children.length
+        || mapRef.current.leafletElement._panes.overlayPane.children[0].nodeName !== 'svg'
+    ) { return; }
+    // Only continue if DOMAINS and/or STATES are showing
+    if (
+      !state.filters.features.visible[FEATURES.DOMAINS.KEY]
+        && !state.filters.features.visible[FEATURES.STATES.KEY]
+    ) { return; }
+    // Only continue if the overlay pane has child nodes (rendered feature data)
+    const svg = mapRef.current.leafletElement._panes.overlayPane.children[0];
+    if (!svg.children.length) { return; }
+    // Remove any existing <defs> node (it's only created by this effect, never by Leaflet)
+    if (svg.children[0].nodeName.toLowerCase() === 'defs') {
+      svg.removeChild(svg.children[0]);
+    }
+    // Only continue if there is one child node and it's a non-empty <g>
+    if (svg.children.length !== 1
+      || svg.children[0].nodeName.toLowerCase() !== 'g'
+      || !svg.children[0].children.length
+    ) { return; }
+    const paths = [...svg.children[0].children];
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const defs = document.createElementNS(svgNS, 'defs');
+    let defCount = 0;
+    paths
+      .filter(path => path.attributes.class && path.attributes.class.value.includes('#mask'))
+      .forEach((path) => {
+        defCount += 1;
+        const baseId = path.attributes.class.value.split(' ')[0];
+        const defMaskId = baseId.replace('#', '');
+        // Create a new <mask> element
+        const defMask = document.createElementNS(svgNS, 'mask');
+        defMask.setAttributeNS(null, 'id', defMaskId);
+        // Create a new <path> element with the same coordinates and append it to the mask
+        const defPath = document.createElementNS(svgNS, 'path');
+        defPath.setAttributeNS(null, 'd', path.attributes.d.value);
+        defPath.setAttributeNS(null, 'fill', 'white');
+        defPath.setAttributeNS(null, 'stroke', 'rgba(255, 255, 255, 0.5)');
+        defPath.setAttributeNS(null, 'stroke-width', '1.5');
+        defMask.appendChild(defPath);
+        // Append the <mask> to <defs>
+        defs.appendChild(defMask);
+        // Set the mask-path attribute on the <path> in the overlay pane
+        path.setAttributeNS(null, 'mask', `url(${baseId})`);
+      });
+    if (defCount === 0) { return; }
+    svg.prepend(defs);
+  });
 
   if (!canRender) { return null; }
 
