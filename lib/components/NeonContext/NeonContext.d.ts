@@ -442,8 +442,8 @@ declare function useNeonContextState(): ({
                 "DP4.00007.001": string;
                 "DP4.00137.001": string;
                 "DP4.00201.001": string;
-                "DP1.10102.001": string;
-                "DP1.10099.001": string;
+                "DP1.10102.001": string[];
+                "DP1.10099.001": string[];
                 "DP1.10053.001": string;
                 "DP1.10031.001": string;
                 "DP1.10101.001": string;
@@ -928,8 +928,8 @@ declare function useNeonContextState(): ({
                 "DP4.00007.001": string;
                 "DP4.00137.001": string;
                 "DP4.00201.001": string;
-                "DP1.10102.001": string;
-                "DP1.10099.001": string;
+                "DP1.10102.001": string[];
+                "DP1.10099.001": string[];
                 "DP1.10053.001": string;
                 "DP1.10031.001": string;
                 "DP1.10101.001": string;
