@@ -50,6 +50,9 @@ const useStyles = makeStyles(theme => ({
     '& div.leaflet-control-layers': {
       borderRadius: '2px',
       boxShadow: 'unset',
+      margin: '0px',
+      left: '8px',
+      top: '8px',
       border: `1px solid ${Theme.colors.LIGHT_BLUE[500]}`,
       '&:hover, &:active': {
         borderColor: Theme.colors.LIGHT_BLUE[400],
@@ -58,7 +61,14 @@ const useStyles = makeStyles(theme => ({
     '& div.leaflet-control-zoom': {
       border: 'none',
     },
+    '& div.leaflet-top.leaflet-right': {
+      right: 'unset !important',
+      left: '0px',
+    },
     '& div.leaflet-bar': {
+      top: '54px',
+      left: '8px',
+      margin: '0px',
       borderRadius: '2px',
       boxShadow: 'unset',
       '& a': {
@@ -119,14 +129,15 @@ const useStyles = makeStyles(theme => ({
     zIndex: 900,
     position: 'absolute',
     top: theme.spacing(1.5),
-    right: theme.spacing(7),
+    left: theme.spacing(7),
   },
   observatoryButton: {
     backgroundColor: '#fff',
     position: 'absolute',
     zIndex: 999,
-    top: '72px',
-    left: '10px',
+    margin: '0px',
+    top: '114px',
+    left: '8px',
     width: '26px',
     height: '26px',
     padding: 'unset',

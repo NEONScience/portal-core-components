@@ -14,7 +14,7 @@ declare namespace Provider {
         children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
         view: PropTypes.Requireable<string>;
         aspectRatio: PropTypes.Requireable<number>;
-        filterPosition: PropTypes.Requireable<string>;
+        fullscreen: PropTypes.Requireable<boolean>;
         unusableVerticalSpace: PropTypes.Requireable<number>;
         mapCenter: PropTypes.Requireable<(number | null | undefined)[]>;
         mapZoom: PropTypes.Requireable<number>;
@@ -87,7 +87,6 @@ declare function useSiteMapContext(): any[] | {
     };
     sites: {};
     filters: {
-        position: null;
         search: null;
         features: {
             open: boolean;
@@ -98,6 +97,7 @@ declare function useSiteMapContext(): any[] | {
             collapsed: Set<any>;
         };
     };
+    fullscreen: boolean;
 };
 import { SORT_DIRECTIONS } from "./SiteMapUtils";
 import { VIEWS } from "./SiteMapUtils";

@@ -153,6 +153,7 @@ export namespace FEATURES {
         featureShape: string;
         style: {
             color: string;
+            weight: number;
         };
     };
     export const STATES: {
@@ -165,6 +166,7 @@ export namespace FEATURES {
         featureShape: string;
         style: {
             color: string;
+            weight: number;
         };
     };
     export const FLIGHT_BOX_BOUNDARIES: {
@@ -867,7 +869,7 @@ export function hydrateNeonContextData(state: any, neonContextData: any): any;
 export namespace SITE_MAP_PROP_TYPES {
     export const view: PropTypes.Requireable<string>;
     export const aspectRatio: PropTypes.Requireable<number>;
-    export const filterPosition: PropTypes.Requireable<string>;
+    export const fullscreen: PropTypes.Requireable<boolean>;
     export const unusableVerticalSpace: PropTypes.Requireable<number>;
     export const mapCenter: PropTypes.Requireable<(number | null | undefined)[]>;
     export const mapZoom: PropTypes.Requireable<number>;
@@ -883,8 +885,8 @@ export namespace SITE_MAP_DEFAULT_PROPS {
     export { view_1 as view };
     const aspectRatio_1: null;
     export { aspectRatio_1 as aspectRatio };
-    const filterPosition_1: string;
-    export { filterPosition_1 as filterPosition };
+    const fullscreen_1: boolean;
+    export { fullscreen_1 as fullscreen };
     const unusableVerticalSpace_1: number;
     export { unusableVerticalSpace_1 as unusableVerticalSpace };
     export { OBSERVATORY_CENTER as mapCenter };

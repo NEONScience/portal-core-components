@@ -689,6 +689,14 @@ const reducer = (state, action) => {
       return newState;
 
     // Selection
+    case 'updateSitesSelection':
+      if (
+        !action.selection || !action.selection.constructor
+          || action.selection.constructor.name !== 'Set'
+      ) { return state; }
+      newState.selection[SELECTABLE_FEATURE_TYPES.SITES] = action.selection;
+      return deriveBoundarySelections(newState);
+
     case 'toggleSiteSelected':
       if (newState.selection[SELECTABLE_FEATURE_TYPES.SITES].has(action.site)) {
         newState.selection[SELECTABLE_FEATURE_TYPES.SITES].delete(action.site);
@@ -748,7 +756,7 @@ const Provider = (props) => {
   const {
     view,
     aspectRatio,
-    filterPosition,
+    fullscreen,
     mapZoom,
     mapCenter,
     mapTileLayer,
@@ -772,7 +780,7 @@ const Provider = (props) => {
   initialState.view.current = (
     Object.keys(VIEWS).includes(view.toUpperCase()) ? view.toUpperCase() : VIEWS.MAP
   );
-  initialState.filters.position = filterPosition;
+  initialState.fullscreen = fullscreen;
   initialState.map = {
     ...initialState.map,
     zoom: initialMapZoom,

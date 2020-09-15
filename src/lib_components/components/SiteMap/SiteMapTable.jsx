@@ -1,9 +1,8 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/anchor-is-valid, no-unused-vars */
 import React, { useRef, useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -40,9 +39,19 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: 'white',
     '& table': {
       margin: '0px !important',
-    },
-    '& tfoot': {
-      paddingRight: '36px',
+      borderCollapse: 'separate',
+      '& tr.MuiTableRow-head': {
+        backgroundColor: theme.palette.primary.main,
+        '& th:first-child span.MuiCheckbox-root': {
+          margin: theme.spacing(0, 0.5),
+        },
+      },
+      '& tbody tr:first-child': {
+        backgroundColor: theme.palette.grey[50],
+      },
+      '& tfoot': {
+        paddingRight: '36px',
+      },
     },
   },
   featureIcon: {
@@ -66,11 +75,18 @@ const useStyles = makeStyles(theme => ({
   toolbarContainer: {
     backgroundColor: theme.palette.grey[50],
     borderBottom: `1px dotted ${theme.palette.grey[300]}`,
-    paddingRight: theme.spacing(1),
-    // padding: theme.spacing(0, 1, 0, 2),
-    // display: 'flex',
-    // alignItems: 'center',
-    // justifyContent: 'space-between',
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: theme.spacing(4.5),
+    },
+    '& div.MuiToolbar-root': {
+      padding: theme.spacing(0, 2),
+      backgroundColor: theme.palette.grey[50],
+    },
+    // This hides all but the search input and show columns buttons.
+    // No other way to have material table NOT show a selection title in the toolbar.
+    '& div.MuiToolbar-root > div:not(:nth-last-child(-n+2))': {
+      display: 'none',
+    },
   },
   toggleButtonGroup: {
     height: theme.spacing(4),
@@ -102,6 +118,12 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'flex-start',
     marginBottom: Theme.spacing(1),
     minWidth: '200px',
+  },
+  selectionTitle: {
+    position: 'absolute',
+    left: '0px',
+    bottom: '0px',
+    padding: theme.spacing(0, 0, 2, 3),
   },
 }));
 
@@ -242,6 +264,20 @@ const SiteMapTable = () => {
     });
   });
   const rows = calculateLocationsInMap(locations, state.map.bounds).map(key => locations[key]);
+  if (selectionActive && selection.size > 0) {
+    if (focus === FEATURE_TYPES.SITES) {
+      selection.forEach((siteCode) => {
+        const idx = rows.findIndex(row => row.siteCode === siteCode);
+        rows[idx].tableData.checked = true;
+      });
+    }
+    /* Implement locations preselection here
+    if (focus === FEATURE_TYPES.LOCATIONS) {
+      selection.forEach((location) => {
+      });
+    }
+    */
+  }
 
   /**
      Unique sites, domains, and states off of rows
@@ -440,17 +476,6 @@ const SiteMapTable = () => {
           </div>
         );
       },
-    },
-    selected: {
-      field: 'selected',
-      title: '',
-      render: row => (
-        <Checkbox
-          checked={rowIsSelected(row)}
-          onChange={selectRow}
-          color="secondary"
-        />
-      ),
     },
     latitude: {
       field: 'latitude',
@@ -652,7 +677,6 @@ const SiteMapTable = () => {
       commonColumns.state,
     ];
   }
-  if (selectionActive) { columns.unshift(commonColumns.selected); }
 
   const components = {
     Container: Box,
@@ -678,6 +702,31 @@ const SiteMapTable = () => {
   };
 
   /**
+     Render a title at the bottom of the table showing current selection status
+  */
+  const renderSelectionTitle = () => {
+    if (!selectionActive) { return null; }
+    const unit = focus === FEATURE_TYPES.SITES ? 'site' : 'location';
+    const s = selection.size === 1 ? '' : 's';
+    const title = `${selection.size ? selection.size.toString() : 'No'} ${unit}${s} selected`;
+    const style = {
+      color: selection.size ? Theme.palette.primary.dark : Theme.palette.grey[300],
+      fontWeight: selection.size ? 600 : 400,
+    };
+    return (
+      <div className={classes.selectionTitle}>
+        <Typography
+          variant="h6"
+          style={style}
+          aria-label="Current selection status"
+        >
+          {title}
+        </Typography>
+      </div>
+    );
+  };
+
+  /**
      Render Table
   */
   return (
@@ -688,7 +737,7 @@ const SiteMapTable = () => {
         columns={columns}
         data={rows}
         localization={localization}
-        title={`${ucWord(focus)} in current view`}
+        title={null}
         options={{
           padding: 'dense',
           filtering: true,
@@ -699,8 +748,22 @@ const SiteMapTable = () => {
             backgroundColor: Theme.palette.grey[50],
           },
           maxBodyHeight: `${maxBodyHeight || MIN_TABLE_MAX_BODY_HEIGHT}px`,
+          selection: selectionActive,
+          selectionProps: !selectionActive ? null : {
+            style: { margin: Theme.spacing(0, 0.5) },
+          },
+        }}
+        onSelectionChange={!selectionActive ? null : (newRows) => {
+          const action = { type: 'updateSitesSelection', selection: new Set() };
+          newRows.filter(row => row.tableData.checked).forEach((row) => {
+            if (focus === FEATURE_TYPES.SITES) {
+              action.selection.add(row.siteCode);
+            }
+          });
+          dispatch(action);
         }}
       />
+      {renderSelectionTitle()}
     </div>
   );
 };

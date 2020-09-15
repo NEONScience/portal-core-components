@@ -10,15 +10,20 @@ import PropTypes from 'prop-types';
 import uniqueId from 'lodash/uniqueId';
 
 import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import IconButton from '@material-ui/core/IconButton';
-import LinearProgress from '@material-ui/core/LinearProgress';
 import Paper from '@material-ui/core/Paper';
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
+
 import ErrorIcon from '@material-ui/icons/Warning';
+import ExpandUpIcon from '@material-ui/icons/ExpandLess';
+import ExpandDownIcon from '@material-ui/icons/ExpandMore';
 import DownArrowIcon from '@material-ui/icons/ArrowDropDown';
 import LeftArrowIcon from '@material-ui/icons/ArrowLeft';
 import VertResizeIcon from '@material-ui/icons/Height';
@@ -27,7 +32,6 @@ import NeonContext from '../NeonContext/NeonContext';
 import Theme from '../Theme/Theme';
 
 import SiteMapContext from './SiteMapContext';
-import SiteMapFilters from './SiteMapFilters';
 import SiteMapLeaflet from './SiteMapLeaflet';
 import SiteMapTable from './SiteMapTable';
 import {
@@ -70,11 +74,12 @@ const useStyles = makeStyles(theme => ({
   },
   featuresContainer: {
     backgroundColor: theme.palette.grey[100],
-    height: 'calc(100% - 26px)',
+    height: 'calc(100% - 84px)',
     borderBottomLeftRadius: '4px',
+    borderTopLeftRadius: '4px',
     position: 'absolute',
     zIndex: 1000,
-    top: '0px',
+    top: '48px',
     right: '0px',
     boxShadow: '-3px 0 5px 0px rgba(0,0,0,0.5)',
     padding: theme.spacing(1),
@@ -136,6 +141,21 @@ const useStyles = makeStyles(theme => ({
     zIndex: 998,
     display: 'none',
   },
+  viewFeaturesButtonsContainer: {
+    display: 'flex',
+    position: 'absolute',
+    zIndex: 401,
+    top: '0px',
+    right: '0px',
+  },
+  mapTableToggleButtonGroup: {
+    borderRadius: '0px 0px 2px 2px',
+    backgroundColor: 'white',
+    '& button': {
+      borderTopLeftRadius: '0px !important',
+      borderTopRightRadius: '0px !important',
+    },
+  },
 }));
 
 const SiteMapContainer = (props) => {
@@ -145,10 +165,17 @@ const SiteMapContainer = (props) => {
   const [neonContextState] = NeonContext.useNeonContextState();
 
   const [state, dispatch] = SiteMapContext.useSiteMapContext();
+
   console.log('CONTAINER STATE:', state);
   const isLoading = state.overallFetch.expected !== state.overallFetch.completed;
 
-  const { aspectRatio, view: { current: view } } = state;
+  const {
+    filters,
+    fullscreen,
+    aspectRatio,
+    view: { current: view },
+  } = state;
+
   const contentDivProps = {
     className: classes.contentContainer,
     style: { paddingBottom: `${(aspectRatio.currentValue || 0.75) * 100}%` },
@@ -318,6 +345,80 @@ const SiteMapContainer = (props) => {
       </div>
     );
   }
+
+  /**
+     Render - Map/Table Toggle Button Group
+  */
+  const renderMapTableToggleButtonGroup = () => {
+    const viewTooltips = {
+      [VIEWS.MAP]: 'Show the observatory map',
+      [VIEWS.TABLE]: 'Show a table of all locations currently visible in the map',
+    };
+    return (
+      <ToggleButtonGroup
+        exclusive
+        color="primary"
+        variant="outlined"
+        value={view}
+        onChange={(event, newView) => dispatch({ type: 'setView', view: newView })}
+        className={classes.mapTableToggleButtonGroup}
+      >
+        {Object.keys(VIEWS).map(key => (
+          <Tooltip
+            key={key}
+            title={viewTooltips[key]}
+            enterDelay={500}
+            enterNextDelay={200}
+            placement={fullscreen ? 'bottom-end' : 'top-end'}
+          >
+            <ToggleButton
+              value={key}
+              selected={state.view.current === key}
+              data-selenium={`sitemap-viewButton-${key}`}
+            >
+              {key}
+            </ToggleButton>
+          </Tooltip>
+        ))}
+      </ToggleButtonGroup>
+    );
+  };
+
+  /**
+     Render - Features Button
+  */
+  const renderFeaturesButton = () => {
+    const buttonStyle = {
+      border: `1px solid ${Theme.palette.primary.main}`,
+      borderRadius: '0px 0px 0px 2px',
+    };
+    if (!filters.features.open) {
+      buttonStyle.backgroundColor = 'white';
+    }
+    return (
+      <div style={{ borderRadius: '2px', marginLeft: Theme.spacing(1) }}>
+        <Tooltip
+          enterDelay={500}
+          enterNextDelay={200}
+          title="Toggle visibility of the list of features (the legend)"
+          placement={fullscreen ? 'bottom-end' : 'top-end'}
+        >
+          <Button
+            color="primary"
+            style={buttonStyle}
+            variant={filters.features.open ? 'contained' : 'outlined'}
+            endIcon={filters.features.open ? <ExpandUpIcon /> : <ExpandDownIcon />}
+            data-selenium="sitemap-featuresButton"
+            onClick={() => {
+              dispatch({ type: 'setFilterFeaturesOpen', open: !filters.features.open });
+            }}
+          >
+            Features
+          </Button>
+        </Tooltip>
+      </div>
+    );
+  };
 
   /**
      Render - Vertical resize Elements
@@ -526,25 +627,10 @@ const SiteMapContainer = (props) => {
   };
 
   /**
-     Render - Progress Indicator
-  */
-  const renderProgress = () => {
-    const progress = !isLoading || state.overallFetch.expected === 0 ? 0
-      : Math.floor((state.overallFetch.completed / state.overallFetch.expected) * 10) * 10;
-    const style = isLoading ? {} : { opacity: 0 };
-    let variant = 'determinate';
-    if (isLoading && state.overallFetch.pendingHierarchy > 0) {
-      variant = 'query';
-    }
-    return <LinearProgress id={progressId} variant={variant} value={progress} style={style} />;
-  };
-
-  /**
      Render - Full Component
   */
   return (
     <div {...containerProps} aria-describedby={progressId}>
-      {state.filters.position === 'top' ? <SiteMapFilters /> : null}
       <div ref={contentDivRef} {...contentDivProps}>
         {view === VIEWS.MAP ? <SiteMapLeaflet /> : null }
         {view === VIEWS.TABLE ? <SiteMapTable /> : null }
@@ -558,9 +644,11 @@ const SiteMapContainer = (props) => {
             .filter(f => state.filters.features.available[f] && !FEATURES[f].parent)
             .map(renderFeatureOption)}
         </div>
+        <div className={classes.viewFeaturesButtonsContainer}>
+          {renderMapTableToggleButtonGroup()}
+          {renderFeaturesButton()}
+        </div>
       </div>
-      {renderProgress()}
-      {state.filters.position === 'bottom' ? <SiteMapFilters /> : null}
       <div ref={resizeBorderRef} className={classes.resizeBorder} />
     </div>
   );

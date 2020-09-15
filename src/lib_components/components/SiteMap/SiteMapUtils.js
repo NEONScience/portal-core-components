@@ -1097,7 +1097,6 @@ export const DEFAULT_STATE = {
   ),
   sites: {}, // Sites data is split into 4 features making it hard to look up, so extra refs here
   filters: {
-    position: null,
     search: null,
     features: {
       open: false, // whether the features pane is open/visible
@@ -1108,6 +1107,7 @@ export const DEFAULT_STATE = {
       collapsed: new Set(),
     },
   },
+  fullscreen: false,
 };
 
 // Initialize featureData and featureDataFetches objects for all features that have a dataSource
@@ -1214,7 +1214,7 @@ export const SITE_MAP_PROP_TYPES = {
   // Top-level Props
   view: PropTypes.oneOf(Object.keys(VIEWS).map(k => k.toLowerCase())),
   aspectRatio: PropTypes.number,
-  filterPosition: PropTypes.oneOf(['top', 'bottom']),
+  fullscreen: PropTypes.bool,
   unusableVerticalSpace: PropTypes.number,
   // Map Props
   mapCenter: PropTypes.arrayOf(PropTypes.number),
@@ -1232,9 +1232,9 @@ export const SITE_MAP_PROP_TYPES = {
 
 export const SITE_MAP_DEFAULT_PROPS = {
   // Top-level Props
-  view: VIEWS.MAP.toLowerCase(),
+  view: VIEWS.TABLE.toLowerCase(),
   aspectRatio: null,
-  filterPosition: 'bottom',
+  fullscreen: false,
   unusableVerticalSpace: 0,
   // Map Props
   mapCenter: OBSERVATORY_CENTER,

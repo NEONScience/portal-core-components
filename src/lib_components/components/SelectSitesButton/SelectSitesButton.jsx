@@ -78,13 +78,14 @@ const SelectSitesButton = (props) => {
           <Toolbar>
             <IconButton
               edge="start"
-              color="inherit"
+              color="primary"
+              variant="contained"
               aria-label="close"
               onClick={() => setDialogOpen(false)}
             >
               <CloseIcon />
             </IconButton>
-            <Typography variant="h6" className={classes.appBarTitle}>
+            <Typography variant="h5" className={classes.appBarTitle}>
               {selectSitesTitle}
             </Typography>
             <Tooltip
