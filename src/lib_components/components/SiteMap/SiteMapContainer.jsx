@@ -7,6 +7,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 
+import debounce from 'lodash/debounce';
 import uniqueId from 'lodash/uniqueId';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -88,6 +89,10 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'flex-start',
     overflowY: 'auto',
   },
+  featuresContainerFullscreen: {
+    top: '56px',
+    height: 'calc(100% - 92px)',
+  },
   featureIcon: {
     width: '28px',
     height: '28px',
@@ -141,12 +146,16 @@ const useStyles = makeStyles(theme => ({
     zIndex: 998,
     display: 'none',
   },
-  viewFeaturesButtonsContainer: {
+  viewLegendButtonsContainer: {
     display: 'flex',
     position: 'absolute',
     zIndex: 401,
     top: '0px',
     right: '0px',
+  },
+  viewLegendButtonsContainerFullscreen: {
+    top: '8px',
+    right: '8px',
   },
   mapTableToggleButtonGroup: {
     borderRadius: '0px 0px 2px 2px',
@@ -155,6 +164,10 @@ const useStyles = makeStyles(theme => ({
       borderTopLeftRadius: '0px !important',
       borderTopRightRadius: '0px !important',
     },
+  },
+  mapTableToggleButtonGroupFullscreen: {
+    borderRadius: '2px',
+    backgroundColor: 'white',
   },
 }));
 
@@ -182,6 +195,7 @@ const SiteMapContainer = (props) => {
   };
 
   const featuresRef = useRef(null);
+  const containerDivRef = useRef(null);
   const contentDivRef = useRef(null);
   const resizeBorderRef = useRef(null);
   const resizeButtonRef = useRef(null);
@@ -240,17 +254,29 @@ const SiteMapContainer = (props) => {
      Effect - Register event listener to dynamically adjust aspect ratio from viewport dimensions
   */
   useLayoutEffect(() => {
-    const handleResize = () => {
-      const newAspectRatio = aspectRatio.isDynamic
+    const handleResize = debounce(() => {
+      let newAspectRatio = aspectRatio.isDynamic
         ? getDynamicAspectRatio(unusableVerticalSpace)
         : aspectRatio.currentValue;
+      if (fullscreen && containerDivRef.current && contentDivRef.current) {
+        const boundingClientRect = contentDivRef.current.getBoundingClientRect();
+        const targetHeight = Math.max(window.innerHeight - boundingClientRect.y - 1, 0);
+        const targetWidth = boundingClientRect.height + boundingClientRect.y > window.innerHeight
+          ? window.innerWidth
+          : contentDivRef.current.clientWidth;
+        newAspectRatio = targetHeight / targetWidth;
+        containerDivRef.current.style.height = `calc(100vh - ${boundingClientRect.y}px)`;
+        containerDivRef.current.style.overflowY = 'hidden';
+      }
       dispatch({
         type: 'setAspectRatio',
         aspectRatio: newAspectRatio,
         widthReference: contentDivRef.current ? contentDivRef.current.clientWidth : 0,
       });
-    };
-    if (!aspectRatio.isDynamic || aspectRatio.currentValue !== null) { return () => {}; }
+    }, 100);
+    if (
+      (!aspectRatio.isDynamic || aspectRatio.currentValue !== null) && !fullscreen
+    ) { return () => {}; }
     handleResize();
     if (!aspectRatio.isDynamic || aspectRatio.resizeEventListenerInitialized) { return () => {}; }
     window.addEventListener('resize', handleResize);
@@ -258,7 +284,12 @@ const SiteMapContainer = (props) => {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [unusableVerticalSpace, aspectRatio, dispatch]);
+  }, [
+    unusableVerticalSpace,
+    aspectRatio,
+    fullscreen,
+    dispatch,
+  ]);
 
   /**
      Effect - Monitor all click events and close the features pane if open and clicked outside
@@ -305,6 +336,7 @@ const SiteMapContainer = (props) => {
   ]);
 
   const containerProps = {
+    ref: containerDivRef,
     className: classes.outerContainer,
     'aria-busy': isLoading ? 'true' : 'false',
     'data-selenium': 'siteMap-container',
@@ -361,7 +393,11 @@ const SiteMapContainer = (props) => {
         variant="outlined"
         value={view}
         onChange={(event, newView) => dispatch({ type: 'setView', view: newView })}
-        className={classes.mapTableToggleButtonGroup}
+        className={(
+          fullscreen
+            ? classes.mapTableToggleButtonGroupFullscreen
+            : classes.mapTableToggleButtonGroup
+        )}
       >
         {Object.keys(VIEWS).map(key => (
           <Tooltip
@@ -385,9 +421,9 @@ const SiteMapContainer = (props) => {
   };
 
   /**
-     Render - Features Button
+     Render - Legend Button
   */
-  const renderFeaturesButton = () => {
+  const renderLegendButton = () => {
     const buttonStyle = {
       border: `1px solid ${Theme.palette.primary.main}`,
       borderRadius: '0px 0px 0px 2px',
@@ -400,7 +436,7 @@ const SiteMapContainer = (props) => {
         <Tooltip
           enterDelay={500}
           enterNextDelay={200}
-          title="Toggle visibility of the list of features (the legend)"
+          title={`${filters.features.open ? 'Hide' : 'Show'} the legend`}
           placement={fullscreen ? 'bottom-end' : 'top-end'}
         >
           <Button
@@ -413,7 +449,7 @@ const SiteMapContainer = (props) => {
               dispatch({ type: 'setFilterFeaturesOpen', open: !filters.features.open });
             }}
           >
-            Features
+            Legend
           </Button>
         </Tooltip>
       </div>
@@ -423,7 +459,7 @@ const SiteMapContainer = (props) => {
   /**
      Render - Vertical resize Elements
   */
-  const renderVerticalResizeButton = () => (
+  const renderVerticalResizeButton = () => (fullscreen ? null : (
     <Tooltip placement="left" title={`Resize ${view === VIEWS.MAP ? 'map' : 'table'} vertically`}>
       <IconButton
         draggable
@@ -437,7 +473,7 @@ const SiteMapContainer = (props) => {
         <VertResizeIcon fontSize="small" />
       </IconButton>
     </Tooltip>
-  );
+  ));
 
   /**
      Render - Single Feature Option
@@ -629,6 +665,14 @@ const SiteMapContainer = (props) => {
   /**
      Render - Full Component
   */
+  let featuresContainerClassName = classes.featuresContainer;
+  let viewLegendButtonsContainerClassName = classes.viewLegendButtonsContainer;
+  if (fullscreen) {
+    /* eslint-disable max-len */
+    featuresContainerClassName = `${classes.featuresContainer} ${classes.featuresContainerFullscreen}`;
+    viewLegendButtonsContainerClassName = `${classes.viewLegendButtonsContainer} ${classes.viewLegendButtonsContainerFullscreen}`;
+    /* eslint-enable max-len */
+  }
   return (
     <div {...containerProps} aria-describedby={progressId}>
       <div ref={contentDivRef} {...contentDivProps}>
@@ -637,19 +681,19 @@ const SiteMapContainer = (props) => {
         {renderVerticalResizeButton()}
         <div
           ref={featuresRef}
-          className={classes.featuresContainer}
+          className={featuresContainerClassName}
           style={{ display: state.filters.features.open ? 'flex' : 'none' }}
         >
           {Object.keys(FEATURES)
             .filter(f => state.filters.features.available[f] && !FEATURES[f].parent)
             .map(renderFeatureOption)}
         </div>
-        <div className={classes.viewFeaturesButtonsContainer}>
+        <div className={viewLegendButtonsContainerClassName}>
           {renderMapTableToggleButtonGroup()}
-          {renderFeaturesButton()}
+          {renderLegendButton()}
         </div>
       </div>
-      <div ref={resizeBorderRef} className={classes.resizeBorder} />
+      {fullscreen ? null : <div ref={resizeBorderRef} className={classes.resizeBorder} />}
     </div>
   );
 };

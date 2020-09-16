@@ -109,6 +109,11 @@ const useStyles = makeStyles(theme => ({
       cursor: 'pointer',
     },
   },
+  mapFullscreen: {
+    '& div.leaflet-control-attribution': {
+      marginRight: '0px',
+    },
+  },
   attribution: {
     color: theme.palette.secondary.main,
     fontSize: '11.5px',
@@ -415,7 +420,7 @@ const SiteMapLeaflet = () => {
     <React.Fragment>
       <Map
         ref={mapRef}
-        className={classes.map}
+        className={state.fullscreen ? `${classes.map} ${classes.mapFullscreen}` : classes.map}
         style={{ paddingBottom: `${(state.aspectRatio.currentValue || 0.75) * 100}%` }}
         center={state.map.center}
         zoom={state.map.zoom}

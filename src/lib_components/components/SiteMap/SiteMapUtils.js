@@ -1232,7 +1232,7 @@ export const SITE_MAP_PROP_TYPES = {
 
 export const SITE_MAP_DEFAULT_PROPS = {
   // Top-level Props
-  view: VIEWS.TABLE.toLowerCase(),
+  view: VIEWS.MAP.toLowerCase(),
   aspectRatio: null,
   fullscreen: false,
   unusableVerticalSpace: 0,

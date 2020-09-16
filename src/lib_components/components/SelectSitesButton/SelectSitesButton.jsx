@@ -105,6 +105,7 @@ const SelectSitesButton = (props) => {
         </AppBar>
         <SiteMap
           selection="SITES"
+          fullscreen
           {...siteMapProps}
         />
       </Dialog>
