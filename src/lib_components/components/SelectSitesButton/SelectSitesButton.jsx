@@ -52,6 +52,7 @@ const SelectSitesButton = (props) => {
     label,
     buttonProps,
     tooltipProps,
+    validItems,
     selectedItems,
     selectionLimit,
     onSave,
@@ -144,6 +145,7 @@ const SelectSitesButton = (props) => {
           fullscreen
           selection="SITES"
           aspectRatio={aspectRatio}
+          validItems={validItems}
           selectedItems={selectedItems}
           selectionLimit={selectionLimit}
           onSelectionChange={setSelection}
@@ -157,6 +159,7 @@ SelectSitesButton.propTypes = {
   label: PropTypes.string,
   buttonProps: PropTypes.shape(Button.propTypes),
   tooltipProps: PropTypes.shape(Tooltip.propTypes),
+  validItems: SITE_MAP_PROP_TYPES.validItems,
   selectedItems: SITE_MAP_PROP_TYPES.selectedItems,
   selectionLimit: SITE_MAP_PROP_TYPES.selectionLimit,
   onSave: PropTypes.func,
@@ -166,6 +169,7 @@ SelectSitesButton.defaultProps = {
   label: 'Map',
   buttonProps: {},
   tooltipProps: {},
+  validItems: null,
   selectedItems: [],
   selectionLimit: null,
   onSave: () => {},

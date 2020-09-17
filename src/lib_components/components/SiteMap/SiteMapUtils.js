@@ -120,6 +120,9 @@ export const SELECTION_PORTIONS = { PARTIAL: 'PARTIAL', TOTAL: 'TOTAL' };
 // For consistency in denoting the selection status of any selectable thing
 export const SELECTION_STATUS = { SELECTED: 'SELECTED', UNSELECTED: 'UNSELECTED' };
 
+// For consistency in visually fading unselectable marker icons
+export const UNSELECTABLE_MARKER_FILTER = 'sepia(0.8) contrast(0.3) brightness(1.35)';
+
 // For consistency in denoting the highlight status of a marker
 export const HIGHLIGHT_STATUS = { NONE: 'NONE', HIGHLIGHT: 'HIGHLIGHT', SELECT: 'SELECT' };
 
@@ -1081,6 +1084,7 @@ export const DEFAULT_STATE = {
     limit: null, // null (unlimited), a non-zero positive integer, or an integer range
     valid: false, // Whether the current selection is non-emtpy and valid per the limit
     set: new Set(), // set of selected values
+    validSet: null, // optional subset of all values in the selectable feature to be selectable
     changed: false, // whether selection has changed warranting an onChange event
     onChange: () => {}, // Function that fires whenever state.selection changes
     derived: { // Derived feature-specific mappings of selectable item IDs to SELECTION_PORTIONS
@@ -1252,6 +1256,7 @@ export const SITE_MAP_PROP_TYPES = {
   // Selection Props
   selection: PropTypes.oneOf(Object.keys(SELECTABLE_FEATURE_TYPES)),
   selectedItems: PropTypes.arrayOf(PropTypes.string),
+  validItems: PropTypes.arrayOf(PropTypes.string),
   selectionLimit: SelectionLimitPropType,
   onSelectionChange: PropTypes.func,
   // Filter Props
@@ -1274,6 +1279,7 @@ export const SITE_MAP_DEFAULT_PROPS = {
   // Selection Props
   selection: null,
   selectedItems: [],
+  validItems: [],
   selectionLimit: null,
   onSelectionChange: () => {},
   // Filter Props

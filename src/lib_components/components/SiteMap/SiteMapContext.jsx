@@ -87,6 +87,17 @@ const deriveBoundarySelections = (state) => {
   };
 };
 
+// Returns a boolean indicating whether an item is selectable
+const isSelectable = (item, validSet = null) => {
+  if (!validSet) { return true; }
+  return validSet.has(item);
+};
+// Filters a set down to only selectable items
+const getSelectableSet = (set, validSet = null) => {
+  if (!validSet) { return set; }
+  return new Set([...set].filter(item => isSelectable(item, validSet)));
+};
+
 // Set the valid flag for selection based on current limits. Empty selections are always invalid.
 const validateSelection = (state) => {
   let valid = false;
@@ -303,6 +314,7 @@ const calculateFeatureDataFetches = (state) => {
 const reducer = (state, action) => {
   let setMethod = null;
   const newState = { ...state };
+  const { validSet } = state.selection;
   // Increment the completed count for overall fetch and, if completed and expected are now equal,
   // reset both (so that subsequent batches of fetches can give an accurate progress metric).
   const completeOverallFetch = () => {
@@ -718,31 +730,36 @@ const reducer = (state, action) => {
         !action.selection || !action.selection.constructor
           || action.selection.constructor.name !== 'Set'
       ) { return state; }
-      newState.selection.set = action.selection;
+      newState.selection.set = getSelectableSet(action.selection, validSet);
       newState.selection.changed = true;
       return deriveBoundarySelections(validateSelection(newState));
 
     case 'toggleSiteSelected':
       if (newState.selection.set.has(action.site)) {
         newState.selection.set.delete(action.site);
-      } else {
+        newState.selection.changed = true;
+      } else if (isSelectable(action.site, validSet)) {
         newState.selection.set.add(action.site);
+        newState.selection.changed = true;
       }
-      newState.selection.changed = true;
       return deriveBoundarySelections(validateSelection(newState));
 
     case 'toggleStateSelected':
       if (!action.stateCode) { return state; }
+      /* eslint-disable max-len */
       setMethod = (
         state.selection.derived[FEATURES.STATES.KEY][action.stateCode] === SELECTION_PORTIONS.TOTAL
           ? 'delete' : 'add'
       );
-      newState.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.STATES.KEY][action.stateCode].sites
-        .forEach((siteCode) => {
-          newState.selection.set[setMethod](siteCode);
-        });
+      getSelectableSet(
+        newState.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.STATES.KEY][action.stateCode].sites,
+        validSet,
+      ).forEach((siteCode) => {
+        newState.selection.set[setMethod](siteCode);
+      });
       newState.selection.changed = true;
       return deriveBoundarySelections(validateSelection(newState));
+      /* eslint-enable max-len */
 
     case 'toggleDomainSelected':
       if (!action.domainCode) { return state; }
@@ -751,12 +768,15 @@ const reducer = (state, action) => {
         state.selection.derived[FEATURES.DOMAINS.KEY][action.domainCode] === SELECTION_PORTIONS.TOTAL
           ? 'delete' : 'add'
       );
-      newState.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.DOMAINS.KEY][action.domainCode].sites
-        .forEach((siteCode) => {
-          newState.selection.set[setMethod](siteCode);
-        });
+      getSelectableSet(
+        newState.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.DOMAINS.KEY][action.domainCode].sites,
+        validSet,
+      ).forEach((siteCode) => {
+        newState.selection.set[setMethod](siteCode);
+      });
       newState.selection.changed = true;
       return deriveBoundarySelections(validateSelection(newState));
+      /* eslint-enable max-len */
 
     // Default
     default:
@@ -789,6 +809,7 @@ const Provider = (props) => {
     mapTileLayer,
     location: locationProp,
     selection,
+    validItems,
     selectedItems,
     selectionLimit,
     onSelectionChange,
@@ -830,6 +851,9 @@ const Provider = (props) => {
     initialState.selection.limit = selectionLimit;
     initialState.selection.onChange = onSelectionChange;
     initialState.selection.set = new Set(selectedItems);
+    if (Array.isArray(validItems)) {
+      initialState.selection.validSet = new Set(validItems);
+    }
   }
   if (neonContextIsFinal && !neonContextHasError) {
     initialState = hydrateNeonContextData(initialState, neonContextData);

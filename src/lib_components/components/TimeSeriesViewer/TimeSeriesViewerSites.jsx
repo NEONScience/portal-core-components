@@ -1113,6 +1113,7 @@ export default function TimeSeriesViewerSites(props) {
         <SelectSitesButton
           selectionLimit={[1, 5]}
           selectedItems={selectedItems}
+          validItems={Object.keys(state.product.sites)}
           buttonProps={{ style: { size: 'large', marginLeft: Theme.spacing(1.5) } }}
           onSave={(newSites) => { dispatch({ type: 'updateSelectedSites', siteCodes: newSites }); }}
         />

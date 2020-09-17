@@ -29,6 +29,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+// Set this to initialize the all products demo on a particular product
+const DEMO_PRODUCT_CODE = 'DP1.20046.001';
+
 const allProductsInitialState = {
   fetch: { status: 'AWAITING_CALL', error: null },
   products: [],
@@ -43,7 +46,7 @@ const allProductsReducer = (state, action) => {
     case 'fetchSucceeded':
       newState.fetch.status = 'SUCCESS';
       newState.products = action.products;
-      newState.selectedProduct = action.products[0].productCode;
+      newState.selectedProduct = DEMO_PRODUCT_CODE || action.products[0].productCode;
       return newState;
     case 'fetchFailed':
       newState.fetch.status = 'ERROR';

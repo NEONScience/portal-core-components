@@ -179,7 +179,7 @@ const SiteMapContainer = (props) => {
 
   const [state, dispatch] = SiteMapContext.useSiteMapContext();
 
-  console.log('CONTAINER STATE:', state);
+  console.log('SITEMAP STATE:', state);
   const isLoading = state.overallFetch.expected !== state.overallFetch.completed;
 
   const {

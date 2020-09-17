@@ -416,6 +416,8 @@ export default function TimeSeriesViewerContainer() {
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const belowMd = useMediaQuery(Theme.breakpoints.down('sm'));
 
+  console.log('TIME SERIES VIEWER STATE:', state);
+
   const initialTab = DEFAULT_TAB;
   const [selectedTab, setSelectedTab] = useState(initialTab);
   const [loadedProductCode, setLoadedProductCode] = useState(state.product.productCode);

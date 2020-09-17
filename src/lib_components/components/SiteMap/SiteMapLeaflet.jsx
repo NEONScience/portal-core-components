@@ -37,6 +37,7 @@ import {
   MAP_ZOOM_RANGE,
   FEATURES,
   FETCH_STATUS,
+  UNSELECTABLE_MARKER_FILTER,
   deriveFullObservatoryZoomLevel,
 } from './SiteMapUtils';
 
@@ -212,6 +213,40 @@ const SiteMapLeaflet = () => {
       },
     });
   }, [state.map.bounds, dispatch]);
+
+  /**
+    Effect
+    Visually distinguish unselectable markers in the marker pane while also changing the draw order
+    of marker icons to put unselectable ones behind selectable ones.
+  */
+  useLayoutEffect(() => {
+    if (
+      !mapRef.current || !mapRef.current.leafletElement
+        || !mapRef.current.leafletElement._panes || !mapRef.current.leafletElement._layers
+        || !state.selection.active || !state.selection.validSet
+    ) { return; }
+    const { markerPane } = mapRef.current.leafletElement._panes;
+    if (markerPane && markerPane.children && markerPane.children.length) {
+      // Unselectables: apply CSS filters to appear ghosted
+      [...markerPane.children]
+        .filter(marker => !state.selection.validSet.has(marker.title))
+        .forEach((marker) => {
+          // eslint-disable-next-line no-param-reassign
+          marker.style.filter = UNSELECTABLE_MARKER_FILTER;
+        });
+      // Selecatbles: Uniformly bump the zIndexOffset to put them all on top
+      state.selection.validSet.forEach((item) => {
+        const layerIdx = Object.keys(mapRef.current.leafletElement._layers).find(k => (
+          mapRef.current.leafletElement._layers[k].options
+            && mapRef.current.leafletElement._layers[k].options.title === item
+        ));
+        if (layerIdx !== -1) {
+          const zIndex = mapRef.current.leafletElement._layers[layerIdx]._zIndex || 0;
+          mapRef.current.leafletElement._layers[layerIdx].setZIndexOffset(zIndex + 1000);
+        }
+      });
+    }
+  }, [mapRef, state.map.bounds]);
 
   /**
      Render - Zoom to Observatory Button

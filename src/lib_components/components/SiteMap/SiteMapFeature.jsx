@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle, jsx-a11y/anchor-is-valid */
-import React, { useRef, useLayoutEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import tinycolor from 'tinycolor2';
@@ -21,6 +21,7 @@ import ExploreDataProductsIcon from '@material-ui/icons/InsertChartOutlined';
 import LocationIcon from '@material-ui/icons/MyLocation';
 import MarkerIcon from '@material-ui/icons/LocationOn';
 import SiteDetailsIcon from '@material-ui/icons/InfoOutlined';
+import UnselectableIcon from '@material-ui/icons/NotInterested';
 
 import SelectedIcon from '@material-ui/icons/DoneOutline';
 import UnselectedIcon from '@material-ui/icons/Remove';
@@ -57,6 +58,10 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(0, 1),
     boxShadow: 'none',
   },
+  unselectableSnackbar: {
+    backgroundColor: COLORS.GREY[100],
+    border: `1px solid ${COLORS.GREY[600]}80`,
+  },
   addToSelectionSnackbar: {
     backgroundColor: COLORS.GREEN[100],
     border: `1px solid ${COLORS.GREEN[600]}80`,
@@ -67,6 +72,9 @@ const useStyles = makeStyles(theme => ({
   },
   snackbarIcon: {
     marginRight: theme.spacing(2),
+  },
+  unselectableSnackbarIcon: {
+    color: COLORS.GREY[300],
   },
   addToSelectionSnackbarIcon: {
     color: COLORS.GREEN[500],
@@ -157,6 +165,9 @@ const useStyles = makeStyles(theme => ({
     marginBottom: '-3px',
     fontSize: '0.95rem',
   },
+  unselectable: {
+    filter: 'saturate(0.3) brightness(2)',
+  },
 }));
 
 const positionsArrayIsValid = (positions, checkAllCoords = false) => {
@@ -172,9 +183,10 @@ const positionsArrayIsValid = (positions, checkAllCoords = false) => {
 const SiteMapFeature = (props) => {
   const classes = useStyles(Theme);
   const { mapRef, featureKey } = props;
-  const polygonRef = useRef(null);
 
   const feature = FEATURES[featureKey] || {};
+
+  const [state, dispatch] = SiteMapContext.useSiteMapContext();
 
   const {
     name,
@@ -188,11 +200,6 @@ const SiteMapFeature = (props) => {
     parentDataFeatureKey,
   } = feature;
   const featureName = nameSingular || name || featureKey;
-
-  useLayoutEffect(() => {
-    if (!polygonRef.current) { return; }
-    console.log(featureKey, polygonRef);
-  }, [featureKey, polygonRef]);
 
   if (!FEATURES[featureKey] || !mapRef.current) { return null; }
 
@@ -209,7 +216,6 @@ const SiteMapFeature = (props) => {
   /**
      Extract feature data from SiteMapContext state
   */
-  const [state, dispatch] = SiteMapContext.useSiteMapContext();
   const {
     neonContextHydrated,
     focusLocation: { current: focusLocation },
@@ -223,6 +229,7 @@ const SiteMapFeature = (props) => {
 
   // Whether this feature can affect selection of items in the map
   const selectedItems = state.selection.set;
+  const validItems = state.selection.validSet;
   const selectionActive = state.selection.active === featureType || (
     state.selection.active === FEATURE_TYPES.SITES
       && [FEATURES.DOMAINS.KEY, FEATURES.STATES.KEY].includes(featureKey)
@@ -805,26 +812,39 @@ const SiteMapFeature = (props) => {
     const stateFieldTitle = (site.stateCode === 'PR' ? 'Territory' : 'State');
     const renderActions = () => {
       if (selectionActive) {
+        const isSelectable = !validItems || validItems.has(site.siteCode);
         const isSelected = selectedItems.has(site.siteCode);
         const verb = isSelected ? 'remove' : 'add';
         const preposition = isSelected ? 'from' : 'to';
-        const snackbarClass = isSelected
-          ? classes.removeFromSelectionSnackbar
-          : classes.addToSelectionSnackbar;
-        const snackbarIconClass = isSelected
-          ? classes.removeFromSelectionSnackbarIcon
-          : classes.addToSelectionSnackbarIcon;
+        let ActionIcon = UnselectableIcon;
+        let action = 'This site cannot be selected';
+        let snackbarClass = classes.unselectableSnackbar;
+        let snackbarIconClass = classes.unselectableSnackbarIcon;
+        if (isSelectable) {
+          ActionIcon = ClickIcon;
+          action = (
+            <React.Fragment>
+              {/* eslint-disable react/jsx-one-expression-per-line */}
+              Click to <b>{verb}</b> {preposition} selection
+              {/* eslint-enable react/jsx-one-expression-per-line */}
+            </React.Fragment>
+          );
+          snackbarClass = isSelected
+            ? classes.removeFromSelectionSnackbar
+            : classes.addToSelectionSnackbar;
+          snackbarIconClass = isSelected
+            ? classes.removeFromSelectionSnackbarIcon
+            : classes.addToSelectionSnackbarIcon;
+        }
         return (
           <SnackbarContent
             className={`${classes.selectionSnackbar} ${snackbarClass}`}
             message={(
               <div className={classes.startFlex}>
-                <ClickIcon className={`${classes.snackbarIcon} ${snackbarIconClass}`} />
+                <ActionIcon className={`${classes.snackbarIcon} ${snackbarIconClass}`} />
                 <div>
                   <Typography variant="body2">
-                    {/* eslint-disable react/jsx-one-expression-per-line */}
-                    Click to <b>{verb}</b> {preposition} selection
-                    {/* eslint-enable react/jsx-one-expression-per-line */}
+                    {action}
                   </Typography>
                 </div>
               </div>
@@ -1089,8 +1109,12 @@ const SiteMapFeature = (props) => {
     const shapeData = secondaryId && featureData[primaryId][secondaryId]
       ? featureData[primaryId][secondaryId]
       : featureData[primaryId];
+    let isSelectable = null;
     let isSelected = false;
     if (selectionActive) {
+      isSelectable = !validItems || (
+        secondaryId ? validItems.has(secondaryId) : validItems.has(primaryId)
+      );
       isSelected = secondaryId ? selectedItems.has(secondaryId) : selectedItems.has(primaryId);
     }
     const isHighlighted = (
@@ -1190,12 +1214,17 @@ const SiteMapFeature = (props) => {
         : shapeData.geometry.coordinates;
       if (state.map.zoomedIcons[featureKey] !== null) {
         const baseIcon = state.map.zoomedIcons[featureKey];
-        const selection = isSelected ? SELECTION_STATUS.SELECTED : SELECTION_STATUS.UNSELECTED;
+        const selection = isSelectable && isSelected
+          ? SELECTION_STATUS.SELECTED
+          : SELECTION_STATUS.UNSELECTED;
         const initialHighlight = isHighlighted ? HIGHLIGHT_STATUS.HIGHLIGHT : HIGHLIGHT_STATUS.NONE;
         icon = baseIcon[selection][initialHighlight];
         interaction = selectionActive ? {
           onMouseOver: (e) => {
-            const highlight = HIGHLIGHT_STATUS[isSelected ? 'HIGHLIGHT' : 'SELECT'];
+            let highlight = HIGHLIGHT_STATUS.HIGHLIGHT;
+            if (isSelectable) {
+              highlight = HIGHLIGHT_STATUS[isSelected ? 'HIGHLIGHT' : 'SELECT'];
+            }
             e.target.setIcon(baseIcon[selection][highlight]);
             e.target._bringToFront();
             if (hasPopup) {
@@ -1210,7 +1239,7 @@ const SiteMapFeature = (props) => {
             }
           },
           onClick: () => {
-            if (featureType === FEATURE_TYPES.SITES && shapeData.siteCode) {
+            if (featureType === FEATURE_TYPES.SITES && shapeData.siteCode && isSelectable) {
               dispatch({ type: 'toggleSiteSelected', site: shapeData.siteCode });
             }
           },
@@ -1262,7 +1291,7 @@ const SiteMapFeature = (props) => {
         ) : null;
       case 'Polyline':
         return (
-          <Polyline key={`${key}-polyline`} positions={positions} {...shapeProps} ref={polygonRef}>
+          <Polyline key={`${key}-polyline`} positions={positions} {...shapeProps}>
             {renderedPopup}
           </Polyline>
         );
@@ -1277,6 +1306,12 @@ const SiteMapFeature = (props) => {
   return (
     <FeatureGroup>
       {Object.keys(featureData)
+        // Valid items should render above unselecatbles
+        .sort((a) => {
+          if (!validItems) { return 0; }
+          return (validItems.has(a) ? 1 : -1);
+        })
+        // Focus lcoation should render above all others
         .sort(a => (a === state.focusLocation.current ? 1 : -1))
         .flatMap((keyA) => {
           if ([FEATURE_TYPES.LOCATIONS, FEATURE_TYPES.SAMPLING_POINTS].includes(featureType)) {
