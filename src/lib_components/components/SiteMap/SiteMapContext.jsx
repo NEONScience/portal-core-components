@@ -105,8 +105,8 @@ const getSelectableSet = (set, validSet = null) => {
 // Set the valid flag for selection based on current limits. Empty selections are always invalid.
 const validateSelection = (state) => {
   let valid = false;
-  const { limit, set } = state.selection;
-  if (set.size > 0) {
+  const { limit, set, validSet } = state.selection;
+  if (set.size > 0 && (!validSet || [...set].every(item => validSet.has(item)))) {
     valid = true;
     if (
       (Number.isFinite(limit) && set.size !== limit)
@@ -858,6 +858,8 @@ const Provider = (props) => {
     if (Array.isArray(validItems)) {
       initialState.selection.validSet = new Set(validItems);
     }
+    initialState.selection.changed = true;
+    initialState = validateSelection(initialState);
   }
   if (neonContextIsFinal && !neonContextHasError) {
     initialState = hydrateNeonContextData(initialState, neonContextData);

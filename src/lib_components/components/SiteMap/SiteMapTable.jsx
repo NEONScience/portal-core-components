@@ -18,7 +18,7 @@ import MaterialTable, { MTableToolbar, MTableFilterRow } from 'material-table';
 
 import MaterialTableIcons from '../MaterialTableIcons/MaterialTableIcons';
 import NeonContext from '../NeonContext/NeonContext';
-import Theme from '../Theme/Theme';
+import Theme, { COLORS } from '../Theme/Theme';
 
 import SiteMapContext from './SiteMapContext';
 import {
@@ -28,6 +28,8 @@ import {
   FEATURE_TYPES,
   MIN_TABLE_MAX_BODY_HEIGHT,
   PLOT_SAMPLING_MODULES,
+  SELECTABLE_FEATURE_TYPES,
+  UNSELECTABLE_MARKER_FILTER,
   calculateLocationsInMap,
 } from './SiteMapUtils';
 
@@ -55,6 +57,9 @@ const useStyles = makeStyles(theme => ({
         paddingRight: '36px',
       },
     },
+    '& td.MuiTablePagination-root': {
+      borderBottom: 'none',
+    },
   },
   featureIcon: {
     width: theme.spacing(3),
@@ -64,10 +69,6 @@ const useStyles = makeStyles(theme => ({
   },
   linkButton: {
     textAlign: 'left',
-  },
-  row: {},
-  rowSelected: {
-    backgroundColor: `${theme.palette.secondary.main}20`,
   },
   startFlex: {
     display: 'flex',
@@ -118,7 +119,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    marginBottom: Theme.spacing(1),
+    margin: Theme.spacing(1, 0, 0.5, 0),
     minWidth: '200px',
   },
   selectionTitle: {
@@ -156,7 +157,12 @@ const SiteMapTable = () => {
     maxBodyHeight,
     maxBodyHeightUpdateFromAspectRatio,
   } = state.table;
-  const { limit: selectionLimit, valid: selectionValid, set: selection } = state.selection;
+  const {
+    limit: selectionLimit,
+    valid: selectionValid,
+    set: selection,
+    validSet: selectableItems,
+  } = state.selection;
   const selectionActive = state.selection.active === focus;
 
   /**
@@ -192,10 +198,12 @@ const SiteMapTable = () => {
 
   // Selection functions
   let rowIsSelected = () => false;
+  let rowIsSelectable = () => false;
   let selectRow = () => {};
   switch (focus) {
     case FEATURE_TYPES.SITES:
       rowIsSelected = row => selection.has(row.siteCode);
+      rowIsSelectable = row => !selectableItems || selectableItems.has(row.siteCode);
       selectRow = row => dispatch({ type: 'toggleSiteSelected', site: row.siteCode });
       break;
     default:
@@ -237,10 +245,18 @@ const SiteMapTable = () => {
     }
     return featureKey;
   };
-  const renderFeatureIcon = (featureKey) => {
+  const renderFeatureIcon = (featureKey, unselectable = false) => {
     if (!FEATURES[featureKey] || !FEATURES[featureKey].iconSvg) { return null; }
     const { iconSvg } = FEATURES[featureKey];
-    return <img alt={getFeatureName(featureKey)} src={iconSvg} className={classes.featureIcon} />;
+    const style = unselectable ? { filter: UNSELECTABLE_MARKER_FILTER } : {};
+    return (
+      <img
+        src={iconSvg}
+        alt={getFeatureName(featureKey)}
+        className={classes.featureIcon}
+        style={style}
+      />
+    );
   };
 
   const renderNumberString = (str = '--', ariaLabel = null) => (
@@ -323,10 +339,11 @@ const SiteMapTable = () => {
         const site = getSite(row);
         if (!site) { return null; }
         const featureKey = `${site.terrain.toUpperCase()}_${site.type.toUpperCase()}_SITES`;
+        const unselectable = selectionActive && !rowIsSelectable(row);
         return (
           <div>
             <div className={classes.siteName}>
-              {renderFeatureIcon(featureKey)}
+              {renderFeatureIcon(featureKey, unselectable)}
               <span>{`${site.description} (${site.siteCode})`}</span>
             </div>
             <div className={classes.startFlex} style={{ marginLeft: Theme.spacing(-0.75) }}>
@@ -777,10 +794,22 @@ const SiteMapTable = () => {
             backgroundColor: Theme.palette.grey[50],
           },
           maxBodyHeight: `${maxBodyHeight || MIN_TABLE_MAX_BODY_HEIGHT}px`,
-          selection: selectionActive,
-          selectionProps: !selectionActive ? null : {
-            style: { margin: Theme.spacing(0, 0.5) },
+          rowStyle: (row) => {
+            if (selectionActive) {
+              if (!rowIsSelectable(row)) {
+                return { opacity: 0.65 };
+              }
+              if (rowIsSelected(row)) {
+                return { backgroundColor: COLORS.LIGHT_BLUE[50] };
+              }
+            }
+            return {};
           },
+          selection: selectionActive,
+          selectionProps: !selectionActive ? null : row => ({
+            style: { margin: Theme.spacing(0, 0.5) },
+            disabled: !rowIsSelectable(row),
+          }),
         }}
         onSelectionChange={!selectionActive ? null : (newRows) => {
           const action = { type: 'updateSitesSelection', selection: new Set() };

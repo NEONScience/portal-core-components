@@ -220,33 +220,36 @@ const SiteMapLeaflet = () => {
     of marker icons to put unselectable ones behind selectable ones.
   */
   useLayoutEffect(() => {
-    if (
-      !mapRef.current || !mapRef.current.leafletElement
-        || !mapRef.current.leafletElement._panes || !mapRef.current.leafletElement._layers
-        || !state.selection.active || !state.selection.validSet
-    ) { return; }
-    const { markerPane } = mapRef.current.leafletElement._panes;
-    if (markerPane && markerPane.children && markerPane.children.length) {
-      // Unselectables: apply CSS filters to appear ghosted
-      [...markerPane.children]
-        .filter(marker => !state.selection.validSet.has(marker.title))
-        .forEach((marker) => {
-          // eslint-disable-next-line no-param-reassign
-          marker.style.filter = UNSELECTABLE_MARKER_FILTER;
+    // setTimeout of 0 to fire after map render cycle completes
+    window.setTimeout(() => {
+      if (
+        !mapRef.current || !mapRef.current.leafletElement
+          || !mapRef.current.leafletElement._panes || !mapRef.current.leafletElement._layers
+          || !state.selection.active || !state.selection.validSet
+      ) { return; }
+      const { markerPane } = mapRef.current.leafletElement._panes;
+      if (markerPane && markerPane.children && markerPane.children.length) {
+        // Unselectables: apply CSS filters to appear ghosted
+        [...markerPane.children]
+          .filter(marker => !state.selection.validSet.has(marker.title))
+          .forEach((marker) => {
+            // eslint-disable-next-line no-param-reassign
+            marker.style.filter = UNSELECTABLE_MARKER_FILTER;
+          });
+        // Selecatbles: Uniformly bump the zIndexOffset to put them all on top
+        state.selection.validSet.forEach((item) => {
+          const layerIdx = Object.keys(mapRef.current.leafletElement._layers).find(k => (
+            mapRef.current.leafletElement._layers[k].options
+              && mapRef.current.leafletElement._layers[k].options.title === item
+          ));
+          if (layerIdx !== -1) {
+            const zIndex = mapRef.current.leafletElement._layers[layerIdx]._zIndex || 0;
+            mapRef.current.leafletElement._layers[layerIdx].setZIndexOffset(zIndex + 1000);
+          }
         });
-      // Selecatbles: Uniformly bump the zIndexOffset to put them all on top
-      state.selection.validSet.forEach((item) => {
-        const layerIdx = Object.keys(mapRef.current.leafletElement._layers).find(k => (
-          mapRef.current.leafletElement._layers[k].options
-            && mapRef.current.leafletElement._layers[k].options.title === item
-        ));
-        if (layerIdx !== -1) {
-          const zIndex = mapRef.current.leafletElement._layers[layerIdx]._zIndex || 0;
-          mapRef.current.leafletElement._layers[layerIdx].setZIndexOffset(zIndex + 1000);
-        }
-      });
-    }
-  }, [mapRef, state.map.bounds]);
+      }
+    }, 0);
+  }, [mapRef, state.map.bounds, state.view.current]);
 
   /**
      Render - Zoom to Observatory Button
@@ -285,59 +288,62 @@ const SiteMapLeaflet = () => {
     selection statuses for adjacent states/domains.
   */
   useLayoutEffect(() => {
-    // Only continue if the map is in a ready / fully rendered state.
-    if (
-      !mapRef || !mapRef.current || !mapRef.current.leafletElement
-        || !mapRef.current._ready || mapRef.current._updating
-        || !mapRef.current.leafletElement._panes
-        || !mapRef.current.leafletElement._panes.overlayPane
-        || !mapRef.current.leafletElement._panes.overlayPane.children.length
-        || mapRef.current.leafletElement._panes.overlayPane.children[0].nodeName !== 'svg'
-    ) { return; }
-    // Only continue if DOMAINS and/or STATES are showing
-    if (
-      !state.filters.features.visible[FEATURES.DOMAINS.KEY]
-        && !state.filters.features.visible[FEATURES.STATES.KEY]
-    ) { return; }
-    // Only continue if the overlay pane has child nodes (rendered feature data)
-    const svg = mapRef.current.leafletElement._panes.overlayPane.children[0];
-    if (!svg.children.length) { return; }
-    // Remove any existing <defs> node (it's only created by this effect, never by Leaflet)
-    if (svg.children[0].nodeName.toLowerCase() === 'defs') {
-      svg.removeChild(svg.children[0]);
-    }
-    // Only continue if there is one child node and it's a non-empty <g>
-    if (svg.children.length !== 1
-      || svg.children[0].nodeName.toLowerCase() !== 'g'
-      || !svg.children[0].children.length
-    ) { return; }
-    const paths = [...svg.children[0].children];
-    const svgNS = 'http://www.w3.org/2000/svg';
-    const defs = document.createElementNS(svgNS, 'defs');
-    let defCount = 0;
-    paths
-      .filter(path => path.attributes.class && path.attributes.class.value.includes('#mask'))
-      .forEach((path) => {
-        defCount += 1;
-        const baseId = path.attributes.class.value.split(' ')[0];
-        const defMaskId = baseId.replace('#', '');
-        // Create a new <mask> element
-        const defMask = document.createElementNS(svgNS, 'mask');
-        defMask.setAttributeNS(null, 'id', defMaskId);
-        // Create a new <path> element with the same coordinates and append it to the mask
-        const defPath = document.createElementNS(svgNS, 'path');
-        defPath.setAttributeNS(null, 'd', path.attributes.d.value);
-        defPath.setAttributeNS(null, 'fill', 'white');
-        defPath.setAttributeNS(null, 'stroke', 'rgba(255, 255, 255, 0.5)');
-        defPath.setAttributeNS(null, 'stroke-width', '1.5');
-        defMask.appendChild(defPath);
-        // Append the <mask> to <defs>
-        defs.appendChild(defMask);
-        // Set the mask-path attribute on the <path> in the overlay pane
-        path.setAttributeNS(null, 'mask', `url(${baseId})`);
-      });
-    if (defCount === 0) { return; }
-    svg.prepend(defs);
+    // setTimeout of 0 to fire after map render cycle completes
+    window.setTimeout(() => {
+      // Only continue if the map is in a ready / fully rendered state.
+      if (
+        !mapRef || !mapRef.current || !mapRef.current.leafletElement
+          || !mapRef.current._ready || mapRef.current._updating
+          || !mapRef.current.leafletElement._panes
+          || !mapRef.current.leafletElement._panes.overlayPane
+          || !mapRef.current.leafletElement._panes.overlayPane.children.length
+          || mapRef.current.leafletElement._panes.overlayPane.children[0].nodeName !== 'svg'
+      ) { return; }
+      // Only continue if DOMAINS and/or STATES are showing
+      if (
+        !state.filters.features.visible[FEATURES.DOMAINS.KEY]
+          && !state.filters.features.visible[FEATURES.STATES.KEY]
+      ) { return; }
+      // Only continue if the overlay pane has child nodes (rendered feature data)
+      const svg = mapRef.current.leafletElement._panes.overlayPane.children[0];
+      if (!svg.children.length) { return; }
+      // Remove any existing <defs> node (it's only created by this effect, never by Leaflet)
+      if (svg.children[0].nodeName.toLowerCase() === 'defs') {
+        svg.removeChild(svg.children[0]);
+      }
+      // Only continue if there is one child node and it's a non-empty <g>
+      if (svg.children.length !== 1
+        || svg.children[0].nodeName.toLowerCase() !== 'g'
+        || !svg.children[0].children.length
+      ) { return; }
+      const paths = [...svg.children[0].children];
+      const svgNS = 'http://www.w3.org/2000/svg';
+      const defs = document.createElementNS(svgNS, 'defs');
+      let defCount = 0;
+      paths
+        .filter(path => path.attributes.class && path.attributes.class.value.includes('#mask'))
+        .forEach((path) => {
+          defCount += 1;
+          const baseId = path.attributes.class.value.split(' ')[0];
+          const defMaskId = baseId.replace('#', '');
+          // Create a new <mask> element
+          const defMask = document.createElementNS(svgNS, 'mask');
+          defMask.setAttributeNS(null, 'id', defMaskId);
+          // Create a new <path> element with the same coordinates and append it to the mask
+          const defPath = document.createElementNS(svgNS, 'path');
+          defPath.setAttributeNS(null, 'd', path.attributes.d.value);
+          defPath.setAttributeNS(null, 'fill', 'white');
+          defPath.setAttributeNS(null, 'stroke', 'rgba(255, 255, 255, 0.5)');
+          defPath.setAttributeNS(null, 'stroke-width', '1.5');
+          defMask.appendChild(defPath);
+          // Append the <mask> to <defs>
+          defs.appendChild(defMask);
+          // Set the mask-path attribute on the <path> in the overlay pane
+          path.setAttributeNS(null, 'mask', `url(${baseId})`);
+        });
+      if (defCount === 0) { return; }
+      svg.prepend(defs);
+    }, 0);
   });
 
   if (!canRender) { return null; }
