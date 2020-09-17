@@ -8,8 +8,10 @@ import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
+import DoneIcon from '@material-ui/icons/Done';
 import InfoIcon from '@material-ui/icons/InfoOutlined';
 import MarkerIcon from '@material-ui/icons/LocationOn';
+import WarningIcon from '@material-ui/icons/Warning';
 import ExploreDataProductsIcon from '@material-ui/icons/InsertChartOutlined';
 
 import MaterialTable, { MTableToolbar, MTableFilterRow } from 'material-table';
@@ -121,9 +123,13 @@ const useStyles = makeStyles(theme => ({
   },
   selectionTitle: {
     position: 'absolute',
+    display: 'flex',
     left: '0px',
     bottom: '0px',
     padding: theme.spacing(0, 0, 2, 3),
+  },
+  selectionIcon: {
+    marginRight: theme.spacing(1.5),
   },
 }));
 
@@ -150,8 +156,8 @@ const SiteMapTable = () => {
     maxBodyHeight,
     maxBodyHeightUpdateFromAspectRatio,
   } = state.table;
+  const { limit: selectionLimit, valid: selectionValid, set: selection } = state.selection;
   const selectionActive = state.selection.active === focus;
-  const selection = selectionActive ? state.selection[state.selection.active] : new Set();
 
   /**
     Effect - Initialize table if this is the first time we're seeing it
@@ -268,7 +274,10 @@ const SiteMapTable = () => {
     if (focus === FEATURE_TYPES.SITES) {
       selection.forEach((siteCode) => {
         const idx = rows.findIndex(row => row.siteCode === siteCode);
-        rows[idx].tableData.checked = true;
+        if (idx !== -1) {
+          if (!rows[idx].tableData) { rows[idx].tableData = {}; }
+          rows[idx].tableData.checked = true;
+        }
       });
     }
     /* Implement locations preselection here
@@ -709,18 +718,38 @@ const SiteMapTable = () => {
     const unit = focus === FEATURE_TYPES.SITES ? 'site' : 'location';
     const s = selection.size === 1 ? '' : 's';
     const title = `${selection.size ? selection.size.toString() : 'No'} ${unit}${s} selected`;
-    const style = {
-      color: selection.size ? Theme.palette.primary.dark : Theme.palette.grey[300],
-      fontWeight: selection.size ? 600 : 400,
-    };
+    let icon = null;
+    const style = { color: Theme.palette.grey[300], fontWeight: 400 };
+    if (selection.size) {
+      style.fontWeight = 600;
+      if (selectionValid) {
+        style.color = Theme.palette.secondary.main;
+        icon = <DoneIcon className={classes.selectionIcon} color="secondary" />;
+      } else {
+        style.color = Theme.palette.error.main;
+        icon = <WarningIcon className={classes.selectionIcon} color="error" />;
+      }
+    }
+    let limit = null;
+    if (Number.isFinite(selectionLimit)) {
+      limit = `${selectionLimit} required`;
+    }
+    if (Array.isArray(selectionLimit)) {
+      if (selectionLimit[0] === 1) {
+        limit = `select up to ${selectionLimit[1]}`;
+      } else {
+        limit = `min ${selectionLimit[0]}; max ${selectionLimit[1]}`;
+      }
+    }
     return (
       <div className={classes.selectionTitle}>
+        {icon}
         <Typography
           variant="h6"
           style={style}
           aria-label="Current selection status"
         >
-          {title}
+          {limit ? `${title} (${limit})` : title}
         </Typography>
       </div>
     );

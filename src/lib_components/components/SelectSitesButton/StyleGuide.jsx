@@ -48,7 +48,10 @@ import SelectSitesButton from 'portal-core-components/lib/components/SelectSites
         ...
       </DocBlock>
       <ExampleBlock>
-        <SelectSitesButton />
+        <SelectSitesButton label="Unlimited" />
+        <SelectSitesButton label="Select 3" selectionLimit={3} />
+        <SelectSitesButton label="Select up to 4" selectionLimit={[1, 4]} />
+        <SelectSitesButton label="Select 2 to 5" selectionLimit={[2, 5]} />
       </ExampleBlock>
       <CodeBlock>
         {`

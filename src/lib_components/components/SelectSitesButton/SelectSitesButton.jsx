@@ -16,14 +16,31 @@ import GlobeIcon from '@material-ui/icons/Language';
 
 import SiteMap from '../SiteMap/SiteMap';
 import Theme from '../Theme/Theme';
+import {
+  DEFAULT_STATE,
+  SITE_MAP_PROP_TYPES,
+} from '../SiteMap/SiteMapUtils';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
     position: 'relative',
+    paddingRight: '0px !important',
   },
   appBarTitle: {
     marginLeft: theme.spacing(2),
     flex: 1,
+  },
+  toolbar: {
+    padding: '0px 10px 0px 14px',
+  },
+  toolbarClose: {
+    '&:hover': {
+      backgroundColor: '#ffffff33',
+    },
+    '&:not(:hover):not(:focus)': {
+      backgroundColor: '#ffffff11',
+      border: `1px solid ${theme.palette.primary.main}11`,
+    },
   },
   buttonIcon: {
     marginLeft: theme.spacing(1),
@@ -35,21 +52,35 @@ const SelectSitesButton = (props) => {
     label,
     buttonProps,
     tooltipProps,
-    siteMapProps,
+    selectedItems,
     selectionLimit,
+    onSave,
   } = props;
 
   const classes = useStyles(Theme);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [selection, setSelection] = useState(DEFAULT_STATE.selection);
 
+  // let canSave = true;
   let selectSitesTitle = 'Select sites';
   if (typeof selectionLimit === 'number') {
     selectSitesTitle = `Select ${selectionLimit.toString()} site${selectionLimit === 1 ? '' : 's'}`;
+    // canSave =
   }
   if (Array.isArray(selectionLimit)) {
     const { 0: min, 1: max } = selectionLimit;
-    selectSitesTitle = `Select ${min.toString()}-${max.toString()} sites`;
+    selectSitesTitle = min === 1
+      ? `Select up to ${max.toString()} sites`
+      : `Select ${min.toString()}-${max.toString()} sites`;
   }
+
+  const saveTooltipProps = selection.valid ? {} : {
+    disableFocusListener: true,
+    disableHoverListener: true,
+    disableTouchListener: true,
+  };
+
+  const aspectRatio = (window.innerHeight - 64) / window.innerWidth;
 
   return (
     <div>
@@ -75,12 +106,14 @@ const SelectSitesButton = (props) => {
         onClose={() => setDialogOpen(false)}
       >
         <AppBar color="secondary" className={classes.appBar}>
-          <Toolbar>
+          <Toolbar className={classes.toolbar}>
             <IconButton
               edge="start"
               color="primary"
               variant="contained"
               aria-label="close"
+              size="small"
+              className={classes.toolbarClose}
               onClick={() => setDialogOpen(false)}
             >
               <CloseIcon />
@@ -91,68 +124,51 @@ const SelectSitesButton = (props) => {
             <Tooltip
               title="Complete selection and return"
               aria-label="Complete selection and return"
+              {...saveTooltipProps}
             >
-              <Button
-                color="primary"
-                variant="contained"
-                onClick={() => {}}
-              >
-                Save
-                <DoneIcon className={classes.buttonIcon} />
-              </Button>
+              <div>
+                <Button
+                  color="primary"
+                  variant="contained"
+                  onClick={() => { onSave(selection.set); setDialogOpen(false); }}
+                  disabled={!selection.valid}
+                >
+                  Save
+                  <DoneIcon className={classes.buttonIcon} />
+                </Button>
+              </div>
             </Tooltip>
           </Toolbar>
         </AppBar>
         <SiteMap
-          selection="SITES"
           fullscreen
-          {...siteMapProps}
+          selection="SITES"
+          aspectRatio={aspectRatio}
+          selectedItems={selectedItems}
+          selectionLimit={selectionLimit}
+          onSelectionChange={setSelection}
         />
       </Dialog>
     </div>
   );
 };
 
-const SelectionLimitPropType = (props, propName) => {
-  const { [propName]: prop } = props;
-  if (typeof prop === 'number' && (!Number.isInteger(prop) || prop < 1)) {
-    return new Error(
-      `When setting ${propName} as a number it must be an integer greater than 0`,
-    );
-  }
-  if (
-    Array.isArray(prop) && (
-      prop.length !== 2 || !prop.every(x => Number.isInteger(x) && x > 0) || prop[0] >= prop[1]
-    )
-  ) {
-    return new Error(
-      // eslint-disable-next-line max-len
-      `When setting ${propName} as an array it must contain exactly two distinct non-zero positive integers in ascending order (e.g. [2, 5])`,
-    );
-  }
-  if (prop !== null) {
-    return new Error(
-      // eslint-disable-next-line max-len
-      `${propName} must be null, a positive non-zero integer, or an array of two ascending non-zero positive integers`,
-    );
-  }
-  return null;
-};
-
 SelectSitesButton.propTypes = {
   label: PropTypes.string,
   buttonProps: PropTypes.shape(Button.propTypes),
   tooltipProps: PropTypes.shape(Tooltip.propTypes),
-  siteMapProps: PropTypes.shape(SiteMap.propTypes),
-  selectionLimit: SelectionLimitPropType,
+  selectedItems: SITE_MAP_PROP_TYPES.selectedItems,
+  selectionLimit: SITE_MAP_PROP_TYPES.selectionLimit,
+  onSave: PropTypes.func,
 };
 
 SelectSitesButton.defaultProps = {
   label: 'Map',
   buttonProps: {},
   tooltipProps: {},
-  siteMapProps: {},
+  selectedItems: [],
   selectionLimit: null,
+  onSave: () => {},
 };
 
 const WrappedDownloadDataButton = Theme.getWrappedComponent(SelectSitesButton);

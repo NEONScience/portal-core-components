@@ -222,17 +222,11 @@ const SiteMapFeature = (props) => {
   if (!neonContextHydrated || !featureData || !Object.keys(featureData)) { return null; }
 
   // Whether this feature can affect selection of items in the map
-  let selectionActive = state.selection.active === featureType;
-  let selectedItems = selectionActive && state.selection[featureType]
-    ? state.selection[featureType]
-    : new Set();
-  if (
+  const selectedItems = state.selection.set;
+  const selectionActive = state.selection.active === featureType || (
     state.selection.active === FEATURE_TYPES.SITES
       && [FEATURES.DOMAINS.KEY, FEATURES.STATES.KEY].includes(featureKey)
-  ) {
-    selectionActive = true;
-    selectedItems = state.selection[FEATURE_TYPES.SITES];
-  }
+  );
 
   // Jump-To function to afford map navigation where appropriate
   const jumpTo = (locationCode = '') => {

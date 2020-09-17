@@ -65,7 +65,7 @@ const deriveBoundarySelections = (state) => {
         state.featureData[FEATURE_TYPES.BOUNDARIES][featureKey][boundaryCode].sites || new Set()
       );
       const intersection = [...boundarySitesSet]
-        .filter(x => state.selection[SELECTABLE_FEATURE_TYPES.SITES].has(x));
+        .filter(x => state.selection.set.has(x));
       if (!intersection.length) { return; }
       selectedBoundarys[boundaryCode] = (
         intersection.length === boundarySitesSet.size
@@ -83,6 +83,26 @@ const deriveBoundarySelections = (state) => {
         [FEATURES.STATES.KEY]: derive(FEATURES.STATES.KEY),
         [FEATURES.DOMAINS.KEY]: derive(FEATURES.DOMAINS.KEY),
       },
+    },
+  };
+};
+
+// Set the valid flag for selection based on current limits. Empty selections are always invalid.
+const validateSelection = (state) => {
+  let valid = false;
+  const { limit, set } = state.selection;
+  if (set.size > 0) {
+    valid = true;
+    if (
+      (Number.isFinite(limit) && set.size !== limit)
+        || (Array.isArray(limit) && (set.size < limit[0] || set.size > limit[1]))
+    ) { valid = false; }
+  }
+  return {
+    ...state,
+    selection: {
+      ...state.selection,
+      valid,
     },
   };
 };
@@ -689,21 +709,27 @@ const reducer = (state, action) => {
       return newState;
 
     // Selection
+    case 'selectionOnChangeTriggered':
+      newState.selection.changed = false;
+      return newState;
+
     case 'updateSitesSelection':
       if (
         !action.selection || !action.selection.constructor
           || action.selection.constructor.name !== 'Set'
       ) { return state; }
-      newState.selection[SELECTABLE_FEATURE_TYPES.SITES] = action.selection;
-      return deriveBoundarySelections(newState);
+      newState.selection.set = action.selection;
+      newState.selection.changed = true;
+      return deriveBoundarySelections(validateSelection(newState));
 
     case 'toggleSiteSelected':
-      if (newState.selection[SELECTABLE_FEATURE_TYPES.SITES].has(action.site)) {
-        newState.selection[SELECTABLE_FEATURE_TYPES.SITES].delete(action.site);
+      if (newState.selection.set.has(action.site)) {
+        newState.selection.set.delete(action.site);
       } else {
-        newState.selection[SELECTABLE_FEATURE_TYPES.SITES].add(action.site);
+        newState.selection.set.add(action.site);
       }
-      return deriveBoundarySelections(newState);
+      newState.selection.changed = true;
+      return deriveBoundarySelections(validateSelection(newState));
 
     case 'toggleStateSelected':
       if (!action.stateCode) { return state; }
@@ -713,9 +739,10 @@ const reducer = (state, action) => {
       );
       newState.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.STATES.KEY][action.stateCode].sites
         .forEach((siteCode) => {
-          newState.selection[SELECTABLE_FEATURE_TYPES.SITES][setMethod](siteCode);
+          newState.selection.set[setMethod](siteCode);
         });
-      return deriveBoundarySelections(newState);
+      newState.selection.changed = true;
+      return deriveBoundarySelections(validateSelection(newState));
 
     case 'toggleDomainSelected':
       if (!action.domainCode) { return state; }
@@ -724,12 +751,12 @@ const reducer = (state, action) => {
         state.selection.derived[FEATURES.DOMAINS.KEY][action.domainCode] === SELECTION_PORTIONS.TOTAL
           ? 'delete' : 'add'
       );
-      /* eslint-enable max-len */
       newState.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.DOMAINS.KEY][action.domainCode].sites
         .forEach((siteCode) => {
-          newState.selection[SELECTABLE_FEATURE_TYPES.SITES][setMethod](siteCode);
+          newState.selection.set[setMethod](siteCode);
         });
-      return deriveBoundarySelections(newState);
+      newState.selection.changed = true;
+      return deriveBoundarySelections(validateSelection(newState));
 
     // Default
     default:
@@ -762,7 +789,9 @@ const Provider = (props) => {
     mapTileLayer,
     location: locationProp,
     selection,
-    maxSelectable,
+    selectedItems,
+    selectionLimit,
+    onSelectionChange,
     children,
   } = props;
 
@@ -798,7 +827,9 @@ const Provider = (props) => {
   }
   if (Object.keys(SELECTABLE_FEATURE_TYPES).includes(selection)) {
     initialState.selection.active = selection;
-    initialState.selection.maxSelectable = maxSelectable;
+    initialState.selection.limit = selectionLimit;
+    initialState.selection.onChange = onSelectionChange;
+    initialState.selection.set = new Set(selectedItems);
   }
   if (neonContextIsFinal && !neonContextHasError) {
     initialState = hydrateNeonContextData(initialState, neonContextData);
@@ -1029,6 +1060,16 @@ const Provider = (props) => {
 
     dispatch({ type: 'awaitingFeatureDataFetchesTriggered' });
   }, [canFetchFeatureData, state.featureDataFetchesHasAwaiting, state.featureDataFetches]);
+
+  /**
+     Effect - trigger onChange for selection whenever selection has changed
+  */
+  useEffect(() => {
+    if (state.selection.changed) {
+      state.selection.onChange(state.selection);
+    }
+    dispatch({ type: 'selectionOnChangeTriggered' });
+  }, [state.selection.changed]);
 
   /**
      Render

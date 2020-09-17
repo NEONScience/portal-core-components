@@ -1078,7 +1078,11 @@ export const DEFAULT_STATE = {
   },
   selection: {
     active: null, // Set to any key in SELECTABLE_FEATURE_TYPES
-    maxSelectable: 0, // 0 is interpreted as unlimited, all other values are discrete limits
+    limit: null, // null (unlimited), a non-zero positive integer, or an integer range
+    valid: false, // Whether the current selection is non-emtpy and valid per the limit
+    set: new Set(), // set of selected values
+    changed: false, // whether selection has changed warranting an onChange event
+    onChange: () => {}, // Function that fires whenever state.selection changes
     derived: { // Derived feature-specific mappings of selectable item IDs to SELECTION_PORTIONS
       [FEATURES.STATES.KEY]: {}, // { stateCode: SELECTION_PORTIONS.KEY }
       [FEATURES.DOMAINS.KEY]: {}, // { domainCode: SELECTION_PORTIONS.KEY }
@@ -1139,11 +1143,6 @@ Object.keys(FEATURES)
 // Location Hierarchies (REST_LOCATIONS_API, not in the FEATURES structure since it doesn't render)
 // eslint-disable-next-line max-len
 DEFAULT_STATE.featureDataFetches[FEATURE_DATA_SOURCES.REST_LOCATIONS_API][FEATURE_TYPES.SITE_LOCATION_HIERARCHIES] = {};
-
-// Initialize all selectable features in selection state
-Object.keys(SELECTABLE_FEATURE_TYPES).forEach((selection) => {
-  DEFAULT_STATE.selection[selection] = new Set();
-});
 
 // Initialize feature availability
 const availabilityState = calculateFeatureAvailability(DEFAULT_STATE);
@@ -1210,6 +1209,34 @@ export const hydrateNeonContextData = (state, neonContextData) => {
 /**
    PropTypes and defaultProps
 */
+export const SelectionLimitPropType = (props, propName) => {
+  const { [propName]: prop } = props;
+  if (typeof prop === 'number') {
+    if (!Number.isInteger(prop) || prop < 1) {
+      return new Error(
+        `When setting ${propName} as a number it must be an integer greater than 0`,
+      );
+    }
+    return null;
+  }
+  if (Array.isArray(prop)) {
+    if (prop.length !== 2 || !prop.every(x => Number.isInteger(x) && x > 0) || prop[0] >= prop[1]) {
+      return new Error(
+        // eslint-disable-next-line max-len
+        `When setting ${propName} as an array it must contain exactly two distinct non-zero positive integers in ascending order (e.g. [2, 5])`,
+      );
+    }
+    return null;
+  }
+  if (prop !== null) {
+    return new Error(
+      // eslint-disable-next-line max-len
+      `${propName} must be null, a positive non-zero integer, or an array of two ascending non-zero positive integers.`,
+    );
+  }
+  return null;
+};
+
 export const SITE_MAP_PROP_TYPES = {
   // Top-level Props
   view: PropTypes.oneOf(Object.keys(VIEWS).map(k => k.toLowerCase())),
@@ -1224,7 +1251,9 @@ export const SITE_MAP_PROP_TYPES = {
   location: PropTypes.string,
   // Selection Props
   selection: PropTypes.oneOf(Object.keys(SELECTABLE_FEATURE_TYPES)),
-  maxSelectable: PropTypes.number,
+  selectedItems: PropTypes.arrayOf(PropTypes.string),
+  selectionLimit: SelectionLimitPropType,
+  onSelectionChange: PropTypes.func,
   // Filter Props
   search: PropTypes.string,
   features: PropTypes.arrayOf(PropTypes.oneOf(Object.keys(FEATURES))),
@@ -1244,7 +1273,9 @@ export const SITE_MAP_DEFAULT_PROPS = {
   location: null,
   // Selection Props
   selection: null,
-  maxSelectable: null,
+  selectedItems: [],
+  selectionLimit: null,
+  onSelectionChange: () => {},
   // Filter Props
   search: null,
   features: null,
@@ -1499,7 +1530,7 @@ export const deriveFullObservatoryZoomLevel = (mapRef) => {
   const FALLBACK_ZOOM = 2;
   if (!mapRef.current) { return FALLBACK_ZOOM; }
   const container = mapRef.current.container.parentElement;
-  const minorDim = Math.min(container.clientWidth / 136, container.clientHeight / 128);
+  const minorDim = Math.min(container.clientWidth / (22 * 8), container.clientHeight / (21 * 8));
   const derivedZoom = [1, 2, 4, 6, 11].findIndex(m => m > minorDim);
   return derivedZoom === -1 ? FALLBACK_ZOOM : derivedZoom;
 };
