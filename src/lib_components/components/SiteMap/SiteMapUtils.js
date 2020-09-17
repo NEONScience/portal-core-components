@@ -269,7 +269,7 @@ export const FEATURES = {
     name: 'NEON Domains',
     nameSingular: 'NEON Domain',
     type: FEATURE_TYPES.BOUNDARIES,
-    hideByDefault: true,
+    hideByDefault: false, // true,
     dataSource: FEATURE_DATA_SOURCES.NEON_CONTEXT,
     primaryIdOnly: true,
     featureShape: 'Polygon',

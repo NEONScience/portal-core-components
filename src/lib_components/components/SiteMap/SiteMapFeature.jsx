@@ -47,6 +47,7 @@ import {
   SELECTION_STATUS,
   SELECTION_PORTIONS,
   PLOT_SAMPLING_MODULES,
+  UNSELECTABLE_MARKER_FILTER,
 } from './SiteMapUtils';
 
 import Theme, { COLORS } from '../Theme/Theme';
@@ -388,8 +389,9 @@ const SiteMapFeature = (props) => {
 
   /**
      Render: Site with Icon
+     Optionally ghost (fade) icon if selection is active but it's not selectable
   */
-  const renderSite = (siteCode) => {
+  const renderSite = (siteCode, ghostUnselectable = false) => {
     const site = state.sites[siteCode];
     if (!site) { return null; }
     const siteFeatureKey = `${site.terrain}_${site.type}_SITES`;
@@ -397,15 +399,30 @@ const SiteMapFeature = (props) => {
     const isSelected = selectedItems.has(siteCode);
     const siteIcon = FEATURES[siteFeatureKey][isSelected ? 'iconSelectedSvg' : 'iconSvg'];
     let selectedIcon = null;
+    const markerStyle = {};
     if (selectionActive) {
-      selectedIcon = isSelected
-        ? <SelectedIcon className={classes.popupSiteSelectedIcon} color="primary" />
-        : <UnselectedIcon className={classes.popupSiteSelectedIcon} color="disabled" />;
+      if (validItems && !validItems.has(siteCode)) {
+        // eslint-disable-next-line max-len
+        selectedIcon = (
+          <UnselectableIcon
+            color="disabled"
+            style={{ padding: '4px' }}
+            className={classes.popupSiteSelectedIcon}
+          />
+        );
+        if (ghostUnselectable) {
+          markerStyle.filter = UNSELECTABLE_MARKER_FILTER;
+        }
+      } else {
+        selectedIcon = isSelected
+          ? <SelectedIcon className={classes.popupSiteSelectedIcon} color="primary" />
+          : <UnselectedIcon className={classes.popupSiteSelectedIcon} color="disabled" />;
+      }
     }
     const internal = (
       <React.Fragment>
         {selectedIcon}
-        <img src={siteIcon} alt={siteCode} className={classes.popupSiteIcon} />
+        <img src={siteIcon} alt={siteCode} className={classes.popupSiteIcon} style={markerStyle} />
         <Typography variant="caption" style={{ textAlign: 'left' }}>
           {`${site.description} (${site.siteCode})`}
         </Typography>
@@ -606,8 +623,18 @@ const SiteMapFeature = (props) => {
      Render Method: Popup Row; Child NEON Sites (e.g. within a domain or state)
   */
   const renderChildSites = (boundaryKey) => {
-    // const { [SELECTABLE_FEATURE_TYPES.SITES]: selectedSites } = state.selection;
     const { sites = new Set() } = featureData[boundaryKey];
+    let selectable = null;
+    if (selectionActive && validItems) {
+      const selectableSites = new Set([...sites].filter(siteCode => validItems.has(siteCode)));
+      if (!selectableSites.size) {
+        selectable = ', none selectable';
+      } else {
+        selectable = selectableSites.size === sites.size
+          ? ', all selectable'
+          : ` total, ${selectableSites.size} selectable`;
+      }
+    }
     return (
       <Grid key="childSites" item xs={12} data-selenium="sitemap-map-popup-childSites">
         {!sites.size ? (
@@ -619,9 +646,11 @@ const SiteMapFeature = (props) => {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <Typography variant="subtitle2" gutterBottom>{`NEON Sites (${sites.size}):`}</Typography>
+            <Typography variant="subtitle2" gutterBottom>
+              {`NEON Sites (${sites.size}${selectable}):`}
+            </Typography>
             <div>
-              {[...sites].map(siteCode => renderSite(siteCode))}
+              {[...sites].map(siteCode => renderSite(siteCode, true))}
             </div>
           </React.Fragment>
         )}
@@ -760,24 +789,43 @@ const SiteMapFeature = (props) => {
     const { sites: boundarySites = new Set() } = featureData[boundaryKey];
     if (!boundarySites.size) { return null; }
     const selectionPortion = state.selection.derived[boundaryFeatureKey][boundaryKey] || null;
-    let action = boundarySites.size === 1
-      ? 'add this one site'
-      : `add all ${boundarySites.size} sites`;
+    const selectableSites = !validItems
+      ? boundarySites
+      : new Set([...boundarySites].filter(siteCode => validItems.has(siteCode)));
+    const selectableCount = selectableSites.size;
+    const ActionIcon = selectableCount ? ClickIcon : UnselectableIcon;
+    const selectable = boundarySites.size === selectableCount ? '' : ' selectable';
+    const thisOne = boundarySites.size === selectableCount ? 'this one' : 'the one';
+    let action = selectableCount === 1
+      ? `add ${thisOne}${selectable} site`
+      : `add all ${selectableCount}${selectable} sites`;
     let preposition = 'to';
-    let snackbarClass = classes.addToSelectionSnackbar;
-    let snackbarIconClass = classes.addToSelectionSnackbarIcon;
-    if (selectionPortion === SELECTION_PORTIONS.PARTIAL) {
-      const intersection = new Set([...boundarySites].filter(x => selectedItems.has(x)));
-      const remaining = boundarySites.size - intersection.size;
-      action = `add remaining ${remaining} site${remaining === 1 ? '' : 's'}`;
-    }
-    if (selectionPortion === SELECTION_PORTIONS.TOTAL) {
-      action = boundarySites.size === 1
-        ? 'remove this one site'
-        : `remove all ${boundarySites.size} sites`;
-      preposition = 'from';
-      snackbarClass = classes.removeFromSelectionSnackbar;
-      snackbarIconClass = classes.removeFromSelectionSnackbarIcon;
+    /* eslint-disable max-len */
+    let snackbarClass = classes[selectableCount ? 'addToSelectionSnackbar' : 'unselectableSnackbar'];
+    let snackbarIconClass = classes[selectableCount ? 'addToSelectionSnackbarIcon' : 'unselectableSnackbarIcon'];
+    /* eslint-enable max-len */
+    let actionText = `No sites in this ${FEATURES[boundaryFeatureKey].nameSingular} are selectable`;
+    if (selectableCount) {
+      if (selectionPortion === SELECTION_PORTIONS.PARTIAL) {
+        const intersection = new Set([...selectableSites].filter(x => selectedItems.has(x)));
+        const remaining = selectableCount - intersection.size;
+        action = `add remaining ${remaining}${selectable} site${remaining === 1 ? '' : 's'}`;
+      }
+      if (selectionPortion === SELECTION_PORTIONS.TOTAL) {
+        action = selectableCount === 1
+          ? `remove ${thisOne}${selectable} site`
+          : `remove all ${selectableCount}${selectable} sites`;
+        preposition = 'from';
+        snackbarClass = classes.removeFromSelectionSnackbar;
+        snackbarIconClass = classes.removeFromSelectionSnackbarIcon;
+      }
+      actionText = (
+        <React.Fragment>
+          {/* eslint-disable react/jsx-one-expression-per-line */}
+          Click to <b>{action}</b> {preposition} selection
+          {/* eslint-enable react/jsx-one-expression-per-line */}
+        </React.Fragment>
+      );
     }
     return (
       <div key={boundaryKey} className={classes.centerFlex} style={{ padding: Theme.spacing(0.5) }}>
@@ -785,12 +833,10 @@ const SiteMapFeature = (props) => {
           className={`${classes.selectionSnackbar} ${snackbarClass}`}
           message={(
             <div className={classes.startFlex}>
-              <ClickIcon className={`${classes.snackbarIcon} ${snackbarIconClass}`} />
+              <ActionIcon className={`${classes.snackbarIcon} ${snackbarIconClass}`} />
               <div>
                 <Typography variant="body2">
-                  {/* eslint-disable react/jsx-one-expression-per-line */}
-                  Click to <b>{action}</b> {preposition} selection
-                  {/* eslint-enable react/jsx-one-expression-per-line */}
+                  {actionText}
                 </Typography>
               </div>
             </div>

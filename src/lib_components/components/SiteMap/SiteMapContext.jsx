@@ -59,21 +59,25 @@ const deriveBoundarySelections = (state) => {
     if (!state.neonContextHydrated || !state.featureData[FEATURE_TYPES.BOUNDARIES][featureKey]) {
       return {};
     }
-    const selectedBoundarys = {};
+    const { validSet } = state.selection;
+    const selectedBoundaries = {};
     Object.keys(state.featureData[FEATURE_TYPES.BOUNDARIES][featureKey]).forEach((boundaryCode) => {
       const boundarySitesSet = (
         state.featureData[FEATURE_TYPES.BOUNDARIES][featureKey][boundaryCode].sites || new Set()
       );
-      const intersection = [...boundarySitesSet]
+      const selectableSites = !validSet
+        ? boundarySitesSet
+        : new Set([...boundarySitesSet].filter(siteCode => validSet.has(siteCode)));
+      const intersection = [...selectableSites]
         .filter(x => state.selection.set.has(x));
       if (!intersection.length) { return; }
-      selectedBoundarys[boundaryCode] = (
-        intersection.length === boundarySitesSet.size
+      selectedBoundaries[boundaryCode] = (
+        intersection.length === selectableSites.size
           ? SELECTION_PORTIONS.TOTAL
           : SELECTION_PORTIONS.PARTIAL
       );
     });
-    return selectedBoundarys;
+    return selectedBoundaries;
   };
   return {
     ...state,
