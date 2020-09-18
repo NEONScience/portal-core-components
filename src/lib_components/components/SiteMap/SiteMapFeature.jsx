@@ -229,8 +229,12 @@ const SiteMapFeature = (props) => {
   if (!neonContextHydrated || !featureData || !Object.keys(featureData)) { return null; }
 
   // Whether this feature can affect selection of items in the map
-  const selectedItems = state.selection.set;
-  const validItems = state.selection.validSet;
+  const {
+    active: selectableFeatureType,
+    set: selectedItems,
+    validSet: validItems,
+    hideUnselectable,
+  } = state.selection;
   const selectionActive = state.selection.active === featureType || (
     state.selection.active === FEATURE_TYPES.SITES
       && [FEATURES.DOMAINS.KEY, FEATURES.STATES.KEY].includes(featureKey)
@@ -389,7 +393,8 @@ const SiteMapFeature = (props) => {
 
   /**
      Render: Site with Icon
-     Optionally ghost (fade) icon if selection is active but it's not selectable
+     Optionally ghost (fade) icon if selection is active but it's not selectable. If true and the
+     site is not selectable this will also skip rendering altogether when hideUnselectable is true.
   */
   const renderSite = (siteCode, ghostUnselectable = false) => {
     const site = state.sites[siteCode];
@@ -411,6 +416,7 @@ const SiteMapFeature = (props) => {
           />
         );
         if (ghostUnselectable) {
+          if (hideUnselectable) { return null; }
           markerStyle.filter = UNSELECTABLE_MARKER_FILTER;
         }
       } else {
@@ -1162,6 +1168,9 @@ const SiteMapFeature = (props) => {
         secondaryId ? validItems.has(secondaryId) : validItems.has(primaryId)
       );
       isSelected = secondaryId ? selectedItems.has(secondaryId) : selectedItems.has(primaryId);
+      if (featureType === selectableFeatureType && hideUnselectable && !isSelectable) {
+        return null;
+      }
     }
     const isHighlighted = (
       (primaryIdOnly && !secondaryId && primaryId === focusLocation)
@@ -1308,7 +1317,13 @@ const SiteMapFeature = (props) => {
         };
       }
       marker = (
-        <Marker key={`${key}-marker`} position={position} title={key} icon={icon} {...interaction}>
+        <Marker
+          key={`${key}-marker`}
+          position={position}
+          title={key}
+          icon={icon}
+          {...interaction}
+        >
           {renderedPopup}
         </Marker>
       );

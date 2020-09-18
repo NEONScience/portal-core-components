@@ -1082,9 +1082,10 @@ export const DEFAULT_STATE = {
   selection: {
     active: null, // Set to any key in SELECTABLE_FEATURE_TYPES
     limit: null, // null (unlimited), a non-zero positive integer, or an integer range
-    valid: false, // Whether the current selection is non-emtpy and valid per the limit
+    valid: false, // whether the current selection is non-emtpy and valid per the limit
     set: new Set(), // set of selected values
     validSet: null, // optional subset of all values in the selectable feature to be selectable
+    hideUnselectable: false, // whether any unselectable elements in the set are rendered
     changed: false, // whether selection has changed warranting an onChange event
     onChange: () => {}, // Function that fires whenever state.selection changes
     derived: { // Derived feature-specific mappings of selectable item IDs to SELECTION_PORTIONS

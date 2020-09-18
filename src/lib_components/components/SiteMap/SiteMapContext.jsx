@@ -725,6 +725,10 @@ const reducer = (state, action) => {
       return newState;
 
     // Selection
+    case 'setHideUnselectable':
+      newState.selection.hideUnselectable = !!action.hideUnselectable;
+      return newState;
+
     case 'selectionOnChangeTriggered':
       newState.selection.changed = false;
       return newState;

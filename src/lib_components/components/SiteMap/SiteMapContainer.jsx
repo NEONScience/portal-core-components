@@ -11,7 +11,9 @@ import debounce from 'lodash/debounce';
 import uniqueId from 'lodash/uniqueId';
 
 import { makeStyles } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Button from '@material-ui/core/Button';
+import Chip from '@material-ui/core/Chip';
 import Checkbox from '@material-ui/core/Checkbox';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -22,12 +24,20 @@ import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
-import ErrorIcon from '@material-ui/icons/Warning';
+import WarningIcon from '@material-ui/icons/Warning';
+import ErrorIcon from '@material-ui/icons/Error';
 import ExpandUpIcon from '@material-ui/icons/ExpandLess';
 import ExpandDownIcon from '@material-ui/icons/ExpandMore';
+import HideIcon from '@material-ui/icons/VisibilityOff';
+import ShowIcon from '@material-ui/icons/Visibility';
 import DownArrowIcon from '@material-ui/icons/ArrowDropDown';
 import LeftArrowIcon from '@material-ui/icons/ArrowLeft';
 import VertResizeIcon from '@material-ui/icons/Height';
+import LegendIcon from '@material-ui/icons/Toc';
+import UnselectableIcon from '@material-ui/icons/NotInterested';
+import DoneIcon from '@material-ui/icons/Done';
+import CancelIcon from '@material-ui/icons/Cancel';
+import NoneSelectedIcon from '@material-ui/icons/Remove';
 
 import NeonContext from '../NeonContext/NeonContext';
 import Theme from '../Theme/Theme';
@@ -169,6 +179,42 @@ const useStyles = makeStyles(theme => ({
     borderRadius: '2px',
     backgroundColor: 'white',
   },
+  legendButton: {
+    border: `1px solid ${Theme.palette.primary.main}`,
+    borderRadius: '0px 0px 0px 2px',
+  },
+  legendButtonFullscreen: {
+    border: `1px solid ${Theme.palette.primary.main}`,
+  },
+  unselectablesButton: {
+    border: `1px solid ${Theme.palette.primary.main}`,
+    borderRadius: '0px 0px 2px 2px',
+  },
+  unselectablesButtonFullscreen: {
+    border: `1px solid ${Theme.palette.primary.main}`,
+  },
+  selectionChipContainer: {
+    position: 'absolute',
+    left: '8px',
+    bottom: '8px',
+    zIndex: 400,
+  },
+  selectionChip: {
+    fontSize: theme.spacing(2),
+    height: theme.spacing(5),
+    borderRadius: theme.spacing(2.5),
+    padding: theme.spacing(0, 1),
+    '& .MuiChip-label': {
+      padding: theme.spacing(0, 2),
+    },
+  },
+  selectionChipError: {
+    backgroundColor: theme.palette.error.light,
+    fontWeight: 600,
+    '& .MuiChip-icon': {
+      color: theme.palette.error.dark,
+    },
+  },
 }));
 
 const SiteMapContainer = (props) => {
@@ -187,6 +233,14 @@ const SiteMapContainer = (props) => {
     fullscreen,
     aspectRatio,
     view: { current: view },
+    selection: {
+      set: selection,
+      active: selectionActive,
+      validSet: selectableItems,
+      valid: selectionValid,
+      limit: selectionLimit,
+      hideUnselectable,
+    },
   } = state;
 
   const contentDivProps = {
@@ -199,6 +253,8 @@ const SiteMapContainer = (props) => {
   const contentDivRef = useRef(null);
   const resizeBorderRef = useRef(null);
   const resizeButtonRef = useRef(null);
+
+  const belowMd = useMediaQuery(Theme.breakpoints.down('sm'));
 
   /**
      Vertical Resize Hooks
@@ -273,12 +329,14 @@ const SiteMapContainer = (props) => {
         aspectRatio: newAspectRatio,
         widthReference: contentDivRef.current ? contentDivRef.current.clientWidth : 0,
       });
-    }, 100);
+    }, 10);
     if (
       (!aspectRatio.isDynamic || aspectRatio.currentValue !== null) && !fullscreen
     ) { return () => {}; }
     handleResize();
-    if (!aspectRatio.isDynamic || aspectRatio.resizeEventListenerInitialized) { return () => {}; }
+    if (
+      (!aspectRatio.isDynamic || aspectRatio.resizeEventListenerInitialized) && !fullscreen
+    ) { return () => {}; }
     window.addEventListener('resize', handleResize);
     dispatch({ type: 'setAspectRatioResizeEventListenerInitialized' });
     return () => {
@@ -368,7 +426,7 @@ const SiteMapContainer = (props) => {
       <div {...containerProps}>
         <div ref={contentDivRef} {...contentDivProps}>
           <Paper className={classes.contentPaper}>
-            <ErrorIcon fontSize="large" color="error" />
+            <WarningIcon fontSize="large" color="error" />
             <Typography variant="h6" component="h3" style={{ marginTop: Theme.spacing(1) }}>
               {`Unable to load sites: ${neonContextState.fetches.sites.error}`}
             </Typography>
@@ -424,13 +482,7 @@ const SiteMapContainer = (props) => {
      Render - Legend Button
   */
   const renderLegendButton = () => {
-    const buttonStyle = {
-      border: `1px solid ${Theme.palette.primary.main}`,
-      borderRadius: '0px 0px 0px 2px',
-    };
-    if (!filters.features.open) {
-      buttonStyle.backgroundColor = 'white';
-    }
+    const buttonStyle = filters.features.open ? {} : { backgroundColor: 'white' };
     return (
       <div style={{ borderRadius: '2px', marginLeft: Theme.spacing(1) }}>
         <Tooltip
@@ -444,14 +496,112 @@ const SiteMapContainer = (props) => {
             style={buttonStyle}
             variant={filters.features.open ? 'contained' : 'outlined'}
             endIcon={filters.features.open ? <ExpandUpIcon /> : <ExpandDownIcon />}
-            data-selenium="sitemap-featuresButton"
+            data-selenium="sitemap-legendButton"
+            className={fullscreen ? classes.legendButtonFullscreen : classes.legendButton}
             onClick={() => {
               dispatch({ type: 'setFilterFeaturesOpen', open: !filters.features.open });
             }}
           >
-            Legend
+            {belowMd ? <LegendIcon style={{ fontSize: '20px' }} /> : 'Legend'}
           </Button>
         </Tooltip>
+      </div>
+    );
+  };
+
+  /**
+     Render - Unselectables Button
+  */
+  const renderUnselectablesButton = () => {
+    if (!selectionActive || !selectableItems) { return null; }
+    const buttonStyle = hideUnselectable ? { backgroundColor: 'white' } : {};
+    const items = selectionActive.toLowerCase().replace('_', '');
+    const title = `Click to ${hideUnselectable ? 'show' : 'hide'} ${items} that are not selectable`;
+    return (
+      <div style={{ borderRadius: '2px', marginRight: Theme.spacing(1) }}>
+        <Tooltip
+          enterDelay={500}
+          enterNextDelay={200}
+          title={title}
+          placement={fullscreen ? 'bottom-end' : 'top-end'}
+        >
+          <Button
+            color="primary"
+            style={buttonStyle}
+            variant={hideUnselectable ? 'outlined' : 'contained'}
+            startIcon={hideUnselectable ? <HideIcon /> : <ShowIcon />}
+            data-selenium="sitemap-unselectablesButton"
+            aria-label={title}
+            className={(
+              fullscreen
+                ? classes.unselectablesButtonFullscreen
+                : classes.unselectablesButton
+            )}
+            onClick={() => {
+              dispatch({ type: 'setHideUnselectable', hideUnselectable: !hideUnselectable });
+            }}
+          >
+            {belowMd ? <UnselectableIcon style={{ fontSize: '20px' }} /> : 'Unselectable'}
+          </Button>
+        </Tooltip>
+      </div>
+    );
+  };
+
+  /**
+     Render a chip reflectiong the size/validity of the current selection
+  */
+  const renderSelectionChip = () => {
+    if (!selectionActive) { return null; }
+    const unit = selectionActive === FEATURE_TYPES.SITES ? 'site' : 'location';
+    const s = selection.size === 1 ? '' : 's';
+    const title = `${selection.size ? selection.size.toString() : 'No'} ${unit}${s} selected`;
+    let icon = <NoneSelectedIcon />;
+    let color = 'default';
+    if (selection.size) {
+      if (selectionValid) {
+        icon = <DoneIcon />;
+        color = 'secondary';
+      } else {
+        icon = <ErrorIcon />;
+      }
+    }
+    let limit = null;
+    if (Number.isFinite(selectionLimit)) {
+      limit = `${selectionLimit} required`;
+    }
+    if (Array.isArray(selectionLimit)) {
+      if (selectionLimit[0] === 1) {
+        limit = `select up to ${selectionLimit[1]}`;
+      } else {
+        limit = `min ${selectionLimit[0]}; max ${selectionLimit[1]}`;
+      }
+    }
+    const chipContainerStyle = view !== VIEWS.MAP ? {} : { left: '108px' };
+    const chipStyle = selection.size ? {} : { opacity: 0.8 };
+    const chipClassName = !selection.size || selectionValid
+      ? classes.selectionChip
+      : `${classes.selectionChip} ${classes.selectionChipError}`;
+    return (
+      <div className={classes.selectionChipContainer} style={chipContainerStyle}>
+        <Chip
+          icon={icon}
+          color={color}
+          label={limit ? `${title} (${limit})` : title}
+          aria-label="Current selection status"
+          className={chipClassName}
+          style={chipStyle}
+          deleteIcon={(
+            <Tooltip title="Deselect all">
+              <CancelIcon />
+            </Tooltip>
+          )}
+          onDelete={(
+            selection.size
+              ? () => dispatch({ type: 'updateSitesSelection', selection: new Set() })
+              : () => {}
+          )}
+        />
       </div>
     );
   };
@@ -689,9 +839,11 @@ const SiteMapContainer = (props) => {
             .map(renderFeatureOption)}
         </div>
         <div className={viewLegendButtonsContainerClassName}>
+          {renderUnselectablesButton()}
           {renderMapTableToggleButtonGroup()}
           {renderLegendButton()}
         </div>
+        {renderSelectionChip()}
       </div>
       {fullscreen ? null : <div ref={resizeBorderRef} className={classes.resizeBorder} />}
     </div>

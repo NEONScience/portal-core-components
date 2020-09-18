@@ -108,17 +108,22 @@ const SelectSitesButton = (props) => {
       >
         <AppBar color="secondary" className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
-            <IconButton
-              edge="start"
-              color="primary"
-              variant="contained"
-              aria-label="close"
-              size="small"
-              className={classes.toolbarClose}
-              onClick={() => setDialogOpen(false)}
+            <Tooltip
+              title="Exit selection without saving"
+              aria-label="Exit selection without saving"
             >
-              <CloseIcon />
-            </IconButton>
+              <IconButton
+                edge="start"
+                color="primary"
+                variant="contained"
+                aria-label="close"
+                size="small"
+                className={classes.toolbarClose}
+                onClick={() => setDialogOpen(false)}
+              >
+                <CloseIcon />
+              </IconButton>
+            </Tooltip>
             <Typography variant="h5" className={classes.appBarTitle}>
               {selectSitesTitle}
             </Typography>

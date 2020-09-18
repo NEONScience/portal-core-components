@@ -8,10 +8,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
-import DoneIcon from '@material-ui/icons/Done';
 import InfoIcon from '@material-ui/icons/InfoOutlined';
 import MarkerIcon from '@material-ui/icons/LocationOn';
-import WarningIcon from '@material-ui/icons/Warning';
 import ExploreDataProductsIcon from '@material-ui/icons/InsertChartOutlined';
 
 import MaterialTable, { MTableToolbar, MTableFilterRow } from 'material-table';
@@ -48,6 +46,10 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: theme.palette.primary.main,
         '& th:first-child span.MuiCheckbox-root': {
           margin: theme.spacing(0, 0.5),
+          backgroundColor: '#ffffff88',
+          '&:hover': {
+            backgroundColor: '#ffffffaa',
+          },
         },
       },
       '& tbody tr:first-child': {
@@ -122,16 +124,6 @@ const useStyles = makeStyles(theme => ({
     margin: Theme.spacing(1, 0, 0.5, 0),
     minWidth: '200px',
   },
-  selectionTitle: {
-    position: 'absolute',
-    display: 'flex',
-    left: '0px',
-    bottom: '0px',
-    padding: theme.spacing(0, 0, 2, 3),
-  },
-  selectionIcon: {
-    marginRight: theme.spacing(1.5),
-  },
 }));
 
 const calculateMaxBodyHeight = (tableRef) => {
@@ -162,6 +154,7 @@ const SiteMapTable = () => {
     valid: selectionValid,
     set: selection,
     validSet: selectableItems,
+    hideUnselectable,
   } = state.selection;
   const selectionActive = state.selection.active === focus;
 
@@ -285,23 +278,19 @@ const SiteMapTable = () => {
       }
     });
   });
-  const rows = calculateLocationsInMap(locations, state.map.bounds).map(key => locations[key]);
-  if (selectionActive && selection.size > 0) {
-    if (focus === FEATURE_TYPES.SITES) {
-      selection.forEach((siteCode) => {
-        const idx = rows.findIndex(row => row.siteCode === siteCode);
-        if (idx !== -1) {
-          if (!rows[idx].tableData) { rows[idx].tableData = {}; }
-          rows[idx].tableData.checked = true;
-        }
-      });
-    }
-    /* Implement locations preselection here
-    if (focus === FEATURE_TYPES.LOCATIONS) {
-      selection.forEach((location) => {
-      });
-    }
-    */
+  let initialRows = calculateLocationsInMap(locations, state.map.bounds);
+  if (selectionActive && selectableItems && hideUnselectable) {
+    initialRows = initialRows.filter(item => selectableItems.has(item));
+  }
+  const rows = initialRows.map(key => locations[key]);
+  if (selectionActive) {
+    rows.forEach((row, idx) => {
+      let selected = false;
+      if (focus === FEATURE_TYPES.SITES) { selected = selection.has(row.siteCode); }
+      // Implement locations preselection here
+      if (!rows[idx].tableData) { rows[idx].tableData = {}; }
+      rows[idx].tableData.checked = selected;
+    });
   }
 
   /**
@@ -728,51 +717,6 @@ const SiteMapTable = () => {
   };
 
   /**
-     Render a title at the bottom of the table showing current selection status
-  */
-  const renderSelectionTitle = () => {
-    if (!selectionActive) { return null; }
-    const unit = focus === FEATURE_TYPES.SITES ? 'site' : 'location';
-    const s = selection.size === 1 ? '' : 's';
-    const title = `${selection.size ? selection.size.toString() : 'No'} ${unit}${s} selected`;
-    let icon = null;
-    const style = { color: Theme.palette.grey[300], fontWeight: 400 };
-    if (selection.size) {
-      style.fontWeight = 600;
-      if (selectionValid) {
-        style.color = Theme.palette.secondary.main;
-        icon = <DoneIcon className={classes.selectionIcon} color="secondary" />;
-      } else {
-        style.color = Theme.palette.error.main;
-        icon = <WarningIcon className={classes.selectionIcon} color="error" />;
-      }
-    }
-    let limit = null;
-    if (Number.isFinite(selectionLimit)) {
-      limit = `${selectionLimit} required`;
-    }
-    if (Array.isArray(selectionLimit)) {
-      if (selectionLimit[0] === 1) {
-        limit = `select up to ${selectionLimit[1]}`;
-      } else {
-        limit = `min ${selectionLimit[0]}; max ${selectionLimit[1]}`;
-      }
-    }
-    return (
-      <div className={classes.selectionTitle}>
-        {icon}
-        <Typography
-          variant="h6"
-          style={style}
-          aria-label="Current selection status"
-        >
-          {limit ? `${title} (${limit})` : title}
-        </Typography>
-      </div>
-    );
-  };
-
-  /**
      Render Table
   */
   return (
@@ -821,7 +765,6 @@ const SiteMapTable = () => {
           dispatch(action);
         }}
       />
-      {renderSelectionTitle()}
     </div>
   );
 };
