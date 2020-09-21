@@ -1,6 +1,6 @@
 {
   "name": "portal-core-components",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "main": "./lib/index.js",
   "private": true,
   "homepage": "http://localhost:3010/core-components",
@@ -91,7 +91,7 @@
     "lib:clean": "rm -r ./lib || true",
     "lib:clean-build": "(rm -r ./lib || true) && npm run lib",
     "lib:types": "tsc --project tsconfig.d.json",
-    "lib:post-cleanup": "rm ./lib/components/**/StyleGuide.* && rm -rf ./lib/*/__tests__ && rm -rf ./lib/*/*/__tests__ && node ./lib-fix-worker-babel.js"
+    "lib:post-cleanup": "rm ./lib/components/**/StyleGuide.* && rm -rf ./lib/components/SiteMap/png && rm -rf ./lib/*/__tests__ && rm -rf ./lib/*/*/__tests__ && node ./lib-fix-worker-babel.js"
   },
   "jest": {
     "collectCoverageFrom": [

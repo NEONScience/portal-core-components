@@ -442,8 +442,43 @@ declare function useNeonContextState(): ({
                 "DP4.00007.001": string;
                 "DP4.00137.001": string;
                 "DP4.00201.001": string;
+                "DP1.10102.001": string[];
+                "DP1.10099.001": string[];
+                "DP1.10053.001": string;
+                "DP1.10031.001": string;
+                "DP1.10101.001": string;
+                "DP1.10080.001": string;
+                "DP1.10078.001": string;
+                "DP1.10100.001": string;
+                "DP1.10008.001": string;
+                "DP1.00097.001": string;
             };
-            parents: string[];
+            parents: {
+                "DP4.00200.001": {
+                    forwardAvailability: boolean;
+                };
+                "DP1.10067.001": {
+                    forwardAvailability: boolean;
+                };
+                "DP1.10026.001": {
+                    forwardAvailability: boolean;
+                };
+                "DP1.10033.001": {
+                    forwardAvailability: boolean;
+                };
+                "DP1.10086.001": {
+                    forwardAvailability: boolean;
+                };
+                "DP1.10047.001": {
+                    forwardAvailability: boolean;
+                };
+                "DP1.00096.001": {
+                    forwardAvailability: boolean;
+                };
+                "DP1.10066.001": {
+                    forwardAvailability: boolean;
+                };
+            };
         };
         timeSeriesDataProducts: {
             productCodes: string[];
@@ -893,8 +928,43 @@ declare function useNeonContextState(): ({
                 "DP4.00007.001": string;
                 "DP4.00137.001": string;
                 "DP4.00201.001": string;
+                "DP1.10102.001": string[];
+                "DP1.10099.001": string[];
+                "DP1.10053.001": string;
+                "DP1.10031.001": string;
+                "DP1.10101.001": string;
+                "DP1.10080.001": string;
+                "DP1.10078.001": string;
+                "DP1.10100.001": string;
+                "DP1.10008.001": string;
+                "DP1.00097.001": string;
             };
-            parents: string[];
+            parents: {
+                "DP4.00200.001": {
+                    forwardAvailability: boolean;
+                };
+                "DP1.10067.001": {
+                    forwardAvailability: boolean;
+                };
+                "DP1.10026.001": {
+                    forwardAvailability: boolean;
+                };
+                "DP1.10033.001": {
+                    forwardAvailability: boolean;
+                };
+                "DP1.10086.001": {
+                    forwardAvailability: boolean;
+                };
+                "DP1.10047.001": {
+                    forwardAvailability: boolean;
+                };
+                "DP1.00096.001": {
+                    forwardAvailability: boolean;
+                };
+                "DP1.10066.001": {
+                    forwardAvailability: boolean;
+                };
+            };
         };
         timeSeriesDataProducts: {
             productCodes: string[];
