@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 // Set this to initialize the all products demo on a particular product
-const DEMO_PRODUCT_CODE = 'DP1.20046.001';
+const DEMO_PRODUCT_CODE = null;
 
 const allProductsInitialState = {
   fetch: { status: 'AWAITING_CALL', error: null },

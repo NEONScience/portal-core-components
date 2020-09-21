@@ -18,7 +18,13 @@ import Checkbox from '@material-ui/core/Checkbox';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import IconButton from '@material-ui/core/IconButton';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemText from '@material-ui/core/ListItemText';
 import Paper from '@material-ui/core/Paper';
+import Slide from '@material-ui/core/Slide';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -38,6 +44,7 @@ import UnselectableIcon from '@material-ui/icons/NotInterested';
 import DoneIcon from '@material-ui/icons/Done';
 import CancelIcon from '@material-ui/icons/Cancel';
 import NoneSelectedIcon from '@material-ui/icons/Remove';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import NeonContext from '../NeonContext/NeonContext';
 import Theme from '../Theme/Theme';
@@ -193,13 +200,47 @@ const useStyles = makeStyles(theme => ({
   unselectablesButtonFullscreen: {
     border: `1px solid ${Theme.palette.primary.main}`,
   },
-  selectionChipContainer: {
+  selectionSummaryContainer: {
     position: 'absolute',
     left: '8px',
     bottom: '8px',
     zIndex: 400,
+    overflowY: 'hidden',
+  },
+  selectionSummary: {
+    position: 'absolute',
+    bottom: theme.spacing(6),
+    overflowY: 'auto',
+    borderRadius: theme.spacing(2.5),
+    '& .MuiListItemText-primary': {
+      fontWeight: 600,
+    },
+    '& .MuiListItem-secondaryAction': {
+      paddingRight: theme.spacing(9),
+    },
+    '& .MuiListItemIcon-root': {
+      minWidth: 'unset',
+    },
+    '& .MuiListItemSecondaryAction-root': {
+      right: theme.spacing(3),
+    },
+  },
+  selectionSummaryValid: {
+    border: `1px solid ${theme.palette.secondary.main}`,
+    backgroundColor: theme.palette.grey[50],
+  },
+  selectionSummaryInvalid: {
+    border: `1px solid ${theme.palette.error.light}`,
+    backgroundColor: theme.palette.error.light,
+  },
+  summaryFeatureIcon: {
+    width: theme.spacing(3),
+    height: theme.spacing(3),
+    marginRight: theme.spacing(1.5),
+    filter: 'drop-shadow(0px 0px 1.5px #000000bb)',
   },
   selectionChip: {
+    opacity: 1,
     fontSize: theme.spacing(2),
     height: theme.spacing(5),
     borderRadius: theme.spacing(2.5),
@@ -225,13 +266,14 @@ const SiteMapContainer = (props) => {
 
   const [state, dispatch] = SiteMapContext.useSiteMapContext();
 
-  console.log('SITEMAP STATE:', state);
+  // console.log('SITEMAP STATE:', state);
   const isLoading = state.overallFetch.expected !== state.overallFetch.completed;
 
   const {
     filters,
     fullscreen,
     aspectRatio,
+    featureData,
     view: { current: view },
     selection: {
       set: selection,
@@ -240,6 +282,7 @@ const SiteMapContainer = (props) => {
       valid: selectionValid,
       limit: selectionLimit,
       hideUnselectable,
+      showSummary,
     },
   } = state;
 
@@ -549,9 +592,36 @@ const SiteMapContainer = (props) => {
   };
 
   /**
-     Render a chip reflectiong the size/validity of the current selection
+     Helper Functions - Selection Summary
   */
-  const renderSelectionChip = () => {
+  const getSelectedItemFeatureKey = (item) => {
+    if (!selectionActive) { return null; }
+    return Object.keys(featureData[selectionActive]).find(key => (
+      Object.keys(featureData[selectionActive][key]).includes(item)
+    )) || null;
+  };
+
+  const getSelectedItemIcon = (item) => {
+    if (!selectionActive) { return null; }
+    const featureKey = getSelectedItemFeatureKey(item);
+    if (!featureKey) { return null; }
+    return FEATURES[featureKey].iconSvg || null;
+  };
+
+  const getSelectedItemDescription = (item) => {
+    if (!selectionActive) { return null; }
+    const featureKey = getSelectedItemFeatureKey(item);
+    if (!featureKey) { return null; }
+    if (selectionActive === FEATURE_TYPES.SITES) {
+      return featureData[selectionActive][featureKey][item].description;
+    }
+    return null;
+  };
+
+  /**
+     Render - Selection Summary
+  */
+  const renderSelectionSummary = () => {
     if (!selectionActive) { return null; }
     const unit = selectionActive === FEATURE_TYPES.SITES ? 'site' : 'location';
     const s = selection.size === 1 ? '' : 's';
@@ -577,20 +647,65 @@ const SiteMapContainer = (props) => {
         limit = `min ${selectionLimit[0]}; max ${selectionLimit[1]}`;
       }
     }
-    const chipContainerStyle = view !== VIEWS.MAP ? {} : { left: '108px' };
-    const chipStyle = selection.size ? {} : { opacity: 0.8 };
+    const summaryContainerStyle = {};
+    if (view === VIEWS.MAP) { summaryContainerStyle.left = '108px'; }
     const chipClassName = !selection.size || selectionValid
       ? classes.selectionChip
       : `${classes.selectionChip} ${classes.selectionChipError}`;
+    const summaryValidClass = selection.size && selectionValid
+      ? classes.selectionSummaryValid
+      : classes.selectionSummaryInvalid;
+    const summaryClass = `${classes.selectionSummary} ${summaryValidClass}`;
+    let maxHeight = 72 * 3;
+    if (contentDivRef && contentDivRef.current) {
+      maxHeight = Math.max((contentDivRef.current.clientHeight || 0) - 72 * 2, 72 * 3);
+      maxHeight -= (maxHeight % 72);
+    }
+    const summaryStyle = { maxHeight: `${maxHeight}px` };
+    summaryContainerStyle.paddingTop = `${maxHeight + 16}px`;
     return (
-      <div className={classes.selectionChipContainer} style={chipContainerStyle}>
+      <div className={classes.selectionSummaryContainer} style={summaryContainerStyle}>
+        <Slide direction="up" in={showSummary} mountOnEnter unmountOnExit>
+          <div className={summaryClass} style={summaryStyle}>
+            <List dense>
+              {[...selection].map((selectedItem) => {
+                const src = getSelectedItemIcon(selectedItem);
+                const remove = `Remove ${selectedItem} from selection`;
+                return (
+                  <ListItem>
+                    {!src ? null : (
+                      <ListItemIcon>
+                        <img alt={selectedItem} src={src} className={classes.summaryFeatureIcon} />
+                      </ListItemIcon>
+                    )}
+                    <ListItemText
+                      primary={selectedItem}
+                      secondary={getSelectedItemDescription(selectedItem)}
+                    />
+                    <ListItemSecondaryAction>
+                      <Tooltip title={remove} placement="right">
+                        <IconButton
+                          edge="end"
+                          aria-label={remove}
+                          onClick={() => dispatch({ type: 'toggleSiteSelected', site: selectedItem })}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      </Tooltip>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                );
+              })}
+            </List>
+          </div>
+        </Slide>
         <Chip
           icon={icon}
           color={color}
           label={limit ? `${title} (${limit})` : title}
           aria-label="Current selection status"
           className={chipClassName}
-          style={chipStyle}
+          onClick={() => dispatch({ type: 'toggleSelectionSummary', showSummary: !showSummary })}
           deleteIcon={(
             <Tooltip title="Deselect all">
               <CancelIcon />
@@ -843,7 +958,7 @@ const SiteMapContainer = (props) => {
           {renderMapTableToggleButtonGroup()}
           {renderLegendButton()}
         </div>
-        {renderSelectionChip()}
+        {renderSelectionSummary()}
       </div>
       {fullscreen ? null : <div ref={resizeBorderRef} className={classes.resizeBorder} />}
     </div>

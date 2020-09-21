@@ -269,7 +269,7 @@ export const FEATURES = {
     name: 'NEON Domains',
     nameSingular: 'NEON Domain',
     type: FEATURE_TYPES.BOUNDARIES,
-    hideByDefault: false, // true,
+    hideByDefault: true,
     dataSource: FEATURE_DATA_SOURCES.NEON_CONTEXT,
     primaryIdOnly: true,
     featureShape: 'Polygon',
@@ -1086,6 +1086,7 @@ export const DEFAULT_STATE = {
     set: new Set(), // set of selected values
     validSet: null, // optional subset of all values in the selectable feature to be selectable
     hideUnselectable: false, // whether any unselectable elements in the set are rendered
+    showSummary: false, // whether to show the selection summary element
     changed: false, // whether selection has changed warranting an onChange event
     onChange: () => {}, // Function that fires whenever state.selection changes
     derived: { // Derived feature-specific mappings of selectable item IDs to SELECTION_PORTIONS
