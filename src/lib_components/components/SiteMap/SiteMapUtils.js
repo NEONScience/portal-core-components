@@ -1215,7 +1215,7 @@ export const hydrateNeonContextData = (state, neonContextData) => {
 /**
    PropTypes and defaultProps
 */
-export const SelectionLimitPropType = (props, propName) => {
+const SelectionLimitPropType = (props, propName) => {
   const { [propName]: prop } = props;
   if (typeof prop === 'number') {
     if (!Number.isInteger(prop) || prop < 1) {
@@ -1234,7 +1234,7 @@ export const SelectionLimitPropType = (props, propName) => {
     }
     return null;
   }
-  if (prop !== null) {
+  if (prop !== null && typeof prop !== 'undefined') {
     return new Error(
       // eslint-disable-next-line max-len
       `${propName} must be null, a positive non-zero integer, or an array of two ascending non-zero positive integers.`,

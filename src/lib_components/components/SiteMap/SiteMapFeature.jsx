@@ -71,6 +71,10 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: COLORS.BROWN[100],
     border: `1px solid ${COLORS.BROWN[600]}80`,
   },
+  selectedSelectionSnackbar: {
+    backgroundColor: COLORS.LIGHT_BLUE[100],
+    border: `1px solid ${theme.palette.primary.main}80`,
+  },
   snackbarIcon: {
     marginRight: theme.spacing(2),
   },
@@ -82,6 +86,9 @@ const useStyles = makeStyles(theme => ({
   },
   removeFromSelectionSnackbarIcon: {
     color: COLORS.BROWN[500],
+  },
+  selectedSelectionSnackbarIcon: {
+    color: theme.palette.primary.main,
   },
   popup: {
     minWidth: '320px',
@@ -233,6 +240,7 @@ const SiteMapFeature = (props) => {
     active: selectableFeatureType,
     set: selectedItems,
     validSet: validItems,
+    limit: selectionLimit,
     hideUnselectable,
   } = state.selection;
   const selectionActive = state.selection.active === featureType || (
@@ -791,7 +799,9 @@ const SiteMapFeature = (props) => {
      Render: Boundary Selection Action
   */
   const renderBoundarySelectionAction = (boundaryFeatureKey, boundaryKey) => {
-    if (!selectionActive || !state.selection.derived[boundaryFeatureKey]) { return null; }
+    if (
+      !selectionActive || !state.selection.derived[boundaryFeatureKey] || selectionLimit === 1
+    ) { return null; }
     const { sites: boundarySites = new Set() } = featureData[boundaryKey];
     if (!boundarySites.size) { return null; }
     const selectionPortion = state.selection.derived[boundaryFeatureKey][boundaryKey] || null;
@@ -874,19 +884,38 @@ const SiteMapFeature = (props) => {
         let snackbarIconClass = classes.unselectableSnackbarIcon;
         if (isSelectable) {
           ActionIcon = ClickIcon;
-          action = (
-            <React.Fragment>
-              {/* eslint-disable react/jsx-one-expression-per-line */}
-              Click to <b>{verb}</b> {preposition} selection
-              {/* eslint-enable react/jsx-one-expression-per-line */}
-            </React.Fragment>
-          );
-          snackbarClass = isSelected
-            ? classes.removeFromSelectionSnackbar
-            : classes.addToSelectionSnackbar;
-          snackbarIconClass = isSelected
-            ? classes.removeFromSelectionSnackbarIcon
-            : classes.addToSelectionSnackbarIcon;
+          if (selectionLimit === 1) {
+            ActionIcon = isSelected ? SelectedIcon : ClickIcon;
+            action = isSelected ? (
+              <b>Selected</b>
+            ) : (
+              <React.Fragment>
+                {/* eslint-disable react/jsx-one-expression-per-line */}
+                Click to <b>select</b>
+                {/* eslint-enable react/jsx-one-expression-per-line */}
+              </React.Fragment>
+            );
+            snackbarClass = isSelected
+              ? classes.selectedSelectionSnackbar
+              : classes.addToSelectionSnackbar;
+            snackbarIconClass = isSelected
+              ? classes.selectedSelectionSnackbarIcon
+              : classes.addToSelectionSnackbarIcon;
+          } else {
+            action = (
+              <React.Fragment>
+                {/* eslint-disable react/jsx-one-expression-per-line */}
+                Click to <b>{verb}</b> {preposition} selection
+                {/* eslint-enable react/jsx-one-expression-per-line */}
+              </React.Fragment>
+            );
+            snackbarClass = isSelected
+              ? classes.removeFromSelectionSnackbar
+              : classes.addToSelectionSnackbar;
+            snackbarIconClass = isSelected
+              ? classes.removeFromSelectionSnackbarIcon
+              : classes.addToSelectionSnackbarIcon;
+          }
         }
         return (
           <SnackbarContent
@@ -1251,14 +1280,16 @@ const SiteMapFeature = (props) => {
               e.target.closePopup();
             }
           };
-          shapeProps.onClick = () => {
-            if (featureKey === FEATURES.DOMAINS.KEY) {
-              dispatch({ type: 'toggleDomainSelected', domainCode: primaryId });
-            }
-            if (featureKey === FEATURES.STATES.KEY) {
-              dispatch({ type: 'toggleStateSelected', stateCode: primaryId });
-            }
-          };
+          if (selectionLimit !== 1) {
+            shapeProps.onClick = () => {
+              if (featureKey === FEATURES.DOMAINS.KEY) {
+                dispatch({ type: 'toggleDomainSelected', domainCode: primaryId });
+              }
+              if (featureKey === FEATURES.STATES.KEY) {
+                dispatch({ type: 'toggleStateSelected', stateCode: primaryId });
+              }
+            };
+          }
         }
       }
     }

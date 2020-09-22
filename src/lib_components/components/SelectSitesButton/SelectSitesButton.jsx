@@ -50,6 +50,7 @@ const useStyles = makeStyles(theme => ({
 const SelectSitesButton = (props) => {
   const {
     label,
+    icon,
     dialogTitle,
     buttonProps,
     siteMapProps,
@@ -66,7 +67,9 @@ const SelectSitesButton = (props) => {
 
   let selectSitesTitle = 'Select sites';
   if (typeof selectionLimit === 'number') {
-    selectSitesTitle = `Select ${selectionLimit.toString()} site${selectionLimit === 1 ? '' : 's'}`;
+    selectSitesTitle = selectionLimit === 1
+      ? 'Select a site'
+      : `Select ${selectionLimit.toString()} sites`;
   }
   if (Array.isArray(selectionLimit)) {
     const { 0: min, 1: max } = selectionLimit;
@@ -83,6 +86,20 @@ const SelectSitesButton = (props) => {
 
   const aspectRatio = (window.innerHeight - 64) / window.innerWidth;
 
+  const embedProps = {
+    fullscreen: true,
+    selection: 'SITES',
+    aspectRatio,
+    validItems,
+    selectedItems,
+    selectionLimit,
+    onSelectionChange: setSelection,
+  };
+  const finalEmbedProps = siteMapProps ? {
+    ...siteMapProps,
+    ...embedProps,
+  } : embedProps;
+
   return (
     <div>
       <Tooltip
@@ -98,7 +115,7 @@ const SelectSitesButton = (props) => {
           onClick={() => setDialogOpen(true)}
         >
           {label}
-          <GlobeIcon className={classes.buttonIcon} />
+          {icon ? <GlobeIcon className={classes.buttonIcon} fontSize="small" /> : null}
         </Button>
       </Tooltip>
       <Dialog
@@ -146,16 +163,7 @@ const SelectSitesButton = (props) => {
             </Tooltip>
           </Toolbar>
         </AppBar>
-        <SiteMap
-          {...siteMapProps}
-          fullscreen
-          selection="SITES"
-          aspectRatio={aspectRatio}
-          validItems={validItems}
-          selectedItems={selectedItems}
-          selectionLimit={selectionLimit}
-          onSelectionChange={setSelection}
-        />
+        <SiteMap {...finalEmbedProps} />
       </Dialog>
     </div>
   );
@@ -163,6 +171,7 @@ const SelectSitesButton = (props) => {
 
 SelectSitesButton.propTypes = {
   label: PropTypes.string,
+  icon: PropTypes.bool,
   dialogTitle: PropTypes.string,
   buttonProps: PropTypes.shape(Button.propTypes),
   siteMapProps: PropTypes.shape(SITE_MAP_PROP_TYPES),
@@ -175,9 +184,10 @@ SelectSitesButton.propTypes = {
 
 SelectSitesButton.defaultProps = {
   label: 'Map',
+  icon: true,
   dialogTitle: null,
   buttonProps: {},
-  siteMapProps: {},
+  siteMapProps: null,
   tooltipProps: {},
   validItems: null,
   selectedItems: [],

@@ -867,7 +867,6 @@ export namespace DEFAULT_STATE {
     }
 }
 export function hydrateNeonContextData(state: any, neonContextData: any): any;
-export function SelectionLimitPropType(props: any, propName: any): Error | null;
 export namespace SITE_MAP_PROP_TYPES {
     export const view: PropTypes.Requireable<string>;
     export const aspectRatio: PropTypes.Requireable<number>;
@@ -930,4 +929,8 @@ export function deriveFullObservatoryZoomLevel(mapRef: any): number;
 declare const FEATURES_TO_MINZOOM_MAP: {};
 declare const MINZOOM_TO_FEATURES_MAP: {};
 import PropTypes from "prop-types";
+/**
+   PropTypes and defaultProps
+*/
+declare function SelectionLimitPropType(props: any, propName: any): Error | null;
 export {};

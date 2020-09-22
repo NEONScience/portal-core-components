@@ -240,7 +240,7 @@ const SiteMapLeaflet = () => {
             && mapRef.current.leafletElement._layers[k].options.title === item
         ));
         if (layerIdx !== -1) {
-          const zIndex = mapRef.current.leafletElement._layers[layerIdx]._zIndex || 0;
+          const zIndex = (mapRef.current.leafletElement._layers[layerIdx] || {})._zIndex || 0;
           mapRef.current.leafletElement._layers[layerIdx].setZIndexOffset(zIndex + 1000);
         }
       });

@@ -48,6 +48,16 @@ const propRows = [
     ),
   },
   {
+    name: 'icon',
+    type: 'boolean',
+    default: 'true',
+    description: (
+      <p>
+        Whether to include the globe icon for the button.
+      </p>
+    ),
+  },
+  {
     name: 'label',
     type: 'string',
     default: '"map"',
@@ -177,6 +187,7 @@ const MyComponent = () => {
       <br />
       <SelectSitesButton
         label="Select Sites"
+        selectedItems={[...selection]}
         onSave={(newSelection) => { setSelection(newSelection); }}
       />
     </div>
@@ -219,16 +230,21 @@ import SelectSitesButton from 'portal-core-components/lib/components/SelectSites
           selectedItems={['RMNP', 'REDB']}
         />
         <SelectSitesButton
-          label="Select 3 from D07"
-          dialogTitle="Select 3 sites from D07"
-          selectionLimit={3}
+          label="Select a site from D07"
+          dialogTitle="Select a site from D07"
+          selectionLimit={1}
           validItems={['GRSM', 'LECO', 'MLBS', 'ORNL', 'WALK']}
           siteMapProps={{ location: 'D07' }}
+          tooltipProps={{
+            title: 'Select exactly one site from Domain D07',
+            'aria-label': 'Select exactly one site from Domain D07',
+          }}
         />
         <SelectSitesButton
-          label="Select up to 4"
+          label="Select up to 4 sites"
           dialogTitle="Select up to 4 sites"
           selectionLimit={[1, 4]}
+          icon={false}
         />
       </ExampleBlock>
       <CodeBlock>
@@ -238,17 +254,22 @@ import SelectSitesButton from 'portal-core-components/lib/components/SelectSites
 />
 
 <SelectSitesButton
-  label="Select 3 from D07"
-  dialogTitle="Select 3 sites from D07"
-  selectionLimit={3}
-  validItems={['BLAN', 'LEWI', 'POSE', 'SCBI', 'SERC']}
-  siteMapProps={{ location: 'D02' }}
+  label="Select a site from D07"
+  dialogTitle="Select a site from D07"
+  selectionLimit={1}
+  validItems={['GRSM', 'LECO', 'MLBS', 'ORNL', 'WALK']}
+  siteMapProps={{ location: 'D07' }}
+  tooltipProps={{
+    title: 'Select exactly one site from Domain D07',
+    'aria-label': 'Select exactly one site from Domain D07',
+  }}
 />
 
 <SelectSitesButton
-  label="Select up to 4"
+  label="Select up to 4 sites"
   dialogTitle="Select up to 4 sites"
   selectionLimit={[1, 4]}
+  icon={false}
 />
         `}
       </CodeBlock>
@@ -280,6 +301,7 @@ const MyComponent = () => {
       <br />
       <SelectSitesButton
         label="Select Sites"
+        selectedItems={[...selection]}
         onSave={(newSelection) => { setSelection(newSelection); }}
       />
     </div>

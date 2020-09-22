@@ -36,6 +36,7 @@ import Theme from '../Theme/Theme';
 import NeonContext from '../NeonContext/NeonContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import FullWidthVisualization from '../FullWidthVisualization/FullWidthVisualization';
+import SelectSitesButton from '../SelectSitesButton/SelectSitesButton';
 
 const MIN_IFRAME_WIDTH = 240;
 
@@ -126,6 +127,7 @@ const AopDataViewer = (props) => {
   const { sites, states } = neonContextData;
 
   const belowSm = useMediaQuery(Theme.breakpoints.only('xs'));
+  const atSm = useMediaQuery(Theme.breakpoints.only('sm'));
 
   /**
      Getters for site description and data set title
@@ -309,16 +311,26 @@ const AopDataViewer = (props) => {
         </MenuItem>
       ))));
     return (
-      <Select
-        data-selenium="aop-data-viewer.site-select"
-        value={currentSelection.site || ''}
-        onChange={event => handleSiteChange(event.target.value)}
-        input={<OutlinedInput name="site" id="site" margin="dense" />}
-        aria-labelledby="site-label"
-        renderValue={value => value}
-      >
-        {menuItems}
-      </Select>
+      <div style={{ display: 'flex', flexWrap: 'nowrap' }}>
+        <SelectSitesButton
+          selectionLimit={1}
+          selectedItems={currentSelection.site ? [currentSelection.site] : []}
+          validItems={Object.keys(data)}
+          buttonProps={{ style: { marginRight: Theme.spacing(1) } }}
+          onSave={(newSites) => { handleSiteChange([...newSites][0]); }}
+          icon={!atSm}
+        />
+        <Select
+          data-selenium="aop-data-viewer.site-select"
+          value={currentSelection.site || ''}
+          onChange={event => handleSiteChange(event.target.value)}
+          input={<OutlinedInput name="site" id="site" margin="dense" />}
+          aria-labelledby="site-label"
+          renderValue={value => value}
+        >
+          {menuItems}
+        </Select>
+      </div>
     );
   };
 
@@ -410,7 +422,7 @@ const AopDataViewer = (props) => {
   );
 
   const tooltips = {
-    site: 'All sites available for this product are shown here. Only one site can be viewed at a time.',
+    site: 'Use the map or the menu below to select a site to display. Only one site can be viewed at a time.',
     year: 'This slider can be used to move back and forth through time for a given site.',
     flight: 'Most sites are visited once per year, but sometimes subsequent flights are necessary to get complete data for that year. If more than one flight is available for a given site/year then this field can be used to select particular flights of interest.',
   };
@@ -447,7 +459,9 @@ const AopDataViewer = (props) => {
           <React.Fragment>
             <Grid container spacing={2} justify="center" style={{ marginBottom: Theme.spacing(1) }}>
               <Grid item xs={2}>{renderInputLabel('site', tooltips.site)}</Grid>
-              <Grid item xs={10}>{renderSiteSelect()}</Grid>
+              <Grid item xs={10}>
+                {renderSiteSelect()}
+              </Grid>
             </Grid>
             <Grid container spacing={2} justify="center" style={{ marginBottom: Theme.spacing(1) }}>
               <Grid item xs={2}>{renderInputLabel('year', tooltips.year)}</Grid>

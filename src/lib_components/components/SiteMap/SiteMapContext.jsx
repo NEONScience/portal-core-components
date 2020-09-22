@@ -747,7 +747,19 @@ const reducer = (state, action) => {
       return deriveBoundarySelections(validateSelection(newState));
 
     case 'toggleSiteSelected':
-      if (newState.selection.set.has(action.site)) {
+      // Special case: when the selectionLimit is 1 always maintain a selection size of 1
+      if (newState.selection.limit === 1) {
+        if (newState.selection.set.has(action.site) && newState.selection.set.size > 1) {
+          newState.selection.set.delete(action.site);
+          newState.selection.changed = true;
+        } else if (
+          !newState.selection.set.has(action.site)
+            && isSelectable(action.site, validSet)
+        ) {
+          newState.selection.set = new Set([action.site]);
+          newState.selection.changed = true;
+        }
+      } else if (newState.selection.set.has(action.site)) {
         newState.selection.set.delete(action.site);
         newState.selection.changed = true;
       } else if (isSelectable(action.site, validSet)) {
@@ -1113,7 +1125,7 @@ const Provider = (props) => {
       state.selection.onChange(state.selection);
     }
     dispatch({ type: 'selectionOnChangeTriggered' });
-  }, [state.selection.changed]);
+  }, [state.selection, state.selection.changed]);
 
   /**
      Render

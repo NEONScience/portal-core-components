@@ -661,7 +661,7 @@ const SiteMapContainer = (props) => {
       maxHeight -= (maxHeight % 72);
     }
     maxHeight = Math.min(maxHeight, selection.size * 72);
-    const summaryStyle = { maxHeight: `${maxHeight}px` };
+    const summaryStyle = { maxHeight: `${maxHeight + 1}px` };
     return (
       <div className={classes.selectionSummaryContainer} style={summaryContainerStyle}>
         <Zoom in={showSummary} mountOnEnter unmountOnExit>
