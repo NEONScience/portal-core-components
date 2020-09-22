@@ -887,33 +887,39 @@ const Provider = (props) => {
     if (!current || currentStatus !== FETCH_STATUS.AWAITING_CALL || !state.neonContextHydrated) {
       return;
     }
-    // If the location is a known Domain or State then pull from NeonContext
+    // If the location is a known Domain, State, or Site then pull from NeonContext
     const {
       [FEATURES.STATES.KEY]: statesData = {},
       [FEATURES.DOMAINS.KEY]: domainsData = {},
     } = state.featureData[FEATURE_TYPES.BOUNDARIES];
     if (Object.keys(statesData).includes(current)) {
       const { 0: latitude, 1: longitude } = statesData[current].center;
-      dispatch({
-        type: 'setFocusLocationFetchSucceeded',
-        data: { type: 'STATE', latitude, longitude },
-      });
+      window.setTimeout(() => {
+        dispatch({
+          type: 'setFocusLocationFetchSucceeded',
+          data: { type: 'STATE', latitude, longitude },
+        });
+      }, 0);
       return;
     }
     if (Object.keys(domainsData).includes(current)) {
       const { 0: latitude, 1: longitude } = domainsData[current].center;
-      dispatch({
-        type: 'setFocusLocationFetchSucceeded',
-        data: { type: 'DOMAIN', latitude, longitude },
-      });
+      window.setTimeout(() => {
+        dispatch({
+          type: 'setFocusLocationFetchSucceeded',
+          data: { type: 'DOMAIN', latitude, longitude },
+        });
+      }, 0);
       return;
     }
     if (Object.keys(state.sites).includes(current)) {
       const { latitude, longitude } = state.sites[current];
-      dispatch({
-        type: 'setFocusLocationFetchSucceeded',
-        data: { type: 'SITE', latitude, longitude },
-      });
+      window.setTimeout(() => {
+        dispatch({
+          type: 'setFocusLocationFetchSucceeded',
+          data: { type: 'SITE', latitude, longitude },
+        });
+      }, 0);
       return;
     }
     // Trigger focus location fetch

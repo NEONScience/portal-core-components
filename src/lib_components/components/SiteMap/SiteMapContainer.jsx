@@ -24,11 +24,11 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Paper from '@material-ui/core/Paper';
-import Slide from '@material-ui/core/Slide';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
+import Zoom from '@material-ui/core/Zoom';
 
 import WarningIcon from '@material-ui/icons/Warning';
 import ErrorIcon from '@material-ui/icons/Error';
@@ -205,7 +205,6 @@ const useStyles = makeStyles(theme => ({
     left: '8px',
     bottom: '8px',
     zIndex: 400,
-    overflowY: 'hidden',
   },
   selectionSummary: {
     position: 'absolute',
@@ -661,18 +660,18 @@ const SiteMapContainer = (props) => {
       maxHeight = Math.max((contentDivRef.current.clientHeight || 0) - 72 * 2, 72 * 3);
       maxHeight -= (maxHeight % 72);
     }
+    maxHeight = Math.min(maxHeight, selection.size * 72);
     const summaryStyle = { maxHeight: `${maxHeight}px` };
-    summaryContainerStyle.paddingTop = `${maxHeight + 16}px`;
     return (
       <div className={classes.selectionSummaryContainer} style={summaryContainerStyle}>
-        <Slide direction="up" in={showSummary} mountOnEnter unmountOnExit>
+        <Zoom in={showSummary} mountOnEnter unmountOnExit>
           <div className={summaryClass} style={summaryStyle}>
             <List dense>
               {[...selection].map((selectedItem) => {
                 const src = getSelectedItemIcon(selectedItem);
                 const remove = `Remove ${selectedItem} from selection`;
                 return (
-                  <ListItem>
+                  <ListItem key={selectedItem}>
                     {!src ? null : (
                       <ListItemIcon>
                         <img alt={selectedItem} src={src} className={classes.summaryFeatureIcon} />
@@ -698,7 +697,7 @@ const SiteMapContainer = (props) => {
               })}
             </List>
           </div>
-        </Slide>
+        </Zoom>
         <Chip
           icon={icon}
           color={color}

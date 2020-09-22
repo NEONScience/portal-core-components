@@ -1538,7 +1538,8 @@ export const deriveFullObservatoryZoomLevel = (mapRef) => {
   const FALLBACK_ZOOM = 2;
   if (!mapRef.current) { return FALLBACK_ZOOM; }
   const container = mapRef.current.container.parentElement;
-  const minorDim = Math.min(container.clientWidth / (22 * 8), container.clientHeight / (21 * 8));
+  const divisor = (23 * 8);
+  const minorDim = Math.min(container.clientWidth / divisor, container.clientHeight / divisor);
   const derivedZoom = [1, 2, 4, 6, 11].findIndex(m => m > minorDim);
   return derivedZoom === -1 ? FALLBACK_ZOOM : derivedZoom;
 };

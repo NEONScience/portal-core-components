@@ -7,8 +7,6 @@ import React, {
 } from 'react';
 import ReactDOMServer from 'react-dom/server';
 
-// import L from 'leaflet';
-
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -256,21 +254,6 @@ const SiteMapLeaflet = () => {
   }, [state.map.bounds, state.view.current]);
 
   /**
-     Render - Zoom to Observatory Button
-  */
-  const renderShowFullObservatoryButton = () => (
-    <Tooltip placement="right" title="Show the full NEON Observatory">
-      <IconButton
-        type="button"
-        className={classes.observatoryButton}
-        onClick={() => { dispatch({ type: 'showFullObservatory', mapRef }); }}
-      >
-        <ObservatoryIcon fontSize="small" />
-      </IconButton>
-    </Tooltip>
-  );
-
-  /**
     Effect
     Force a redraw when switching to the map for the first time from another view
   */
@@ -351,6 +334,21 @@ const SiteMapLeaflet = () => {
   });
 
   if (!canRender) { return null; }
+
+  /**
+     Render - Zoom to Observatory Button
+  */
+  const renderShowFullObservatoryButton = () => (
+    <Tooltip placement="right" title="Show the full NEON Observatory">
+      <IconButton
+        type="button"
+        className={classes.observatoryButton}
+        onClick={() => { dispatch({ type: 'showFullObservatory', mapRef }); }}
+      >
+        <ObservatoryIcon fontSize="small" />
+      </IconButton>
+    </Tooltip>
+  );
 
   /**
      Render: Tile Layers

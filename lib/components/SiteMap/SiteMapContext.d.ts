@@ -21,7 +21,10 @@ declare namespace Provider {
         mapTileLayer: PropTypes.Requireable<string>;
         location: PropTypes.Requireable<string>;
         selection: PropTypes.Requireable<string>;
-        maxSelectable: PropTypes.Requireable<number>;
+        selectedItems: PropTypes.Requireable<(string | null | undefined)[]>;
+        validItems: PropTypes.Requireable<(string | null | undefined)[]>;
+        selectionLimit: (props: any, propName: any) => Error | null;
+        onSelectionChange: PropTypes.Requireable<(...args: any[]) => any>;
         search: PropTypes.Requireable<string>;
         features: PropTypes.Requireable<(string | null | undefined)[]>;
     };
@@ -73,7 +76,14 @@ declare function useSiteMapContext(): any[] | {
     };
     selection: {
         active: null;
-        maxSelectable: number;
+        limit: null;
+        valid: boolean;
+        set: Set<any>;
+        validSet: null;
+        hideUnselectable: boolean;
+        showSummary: boolean;
+        changed: boolean;
+        onChange: () => void;
         derived: {
             [x: number]: {};
         };

@@ -50,7 +50,9 @@ const useStyles = makeStyles(theme => ({
 const SelectSitesButton = (props) => {
   const {
     label,
+    dialogTitle,
     buttonProps,
+    siteMapProps,
     tooltipProps,
     validItems,
     selectedItems,
@@ -62,11 +64,9 @@ const SelectSitesButton = (props) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [selection, setSelection] = useState(DEFAULT_STATE.selection);
 
-  // let canSave = true;
   let selectSitesTitle = 'Select sites';
   if (typeof selectionLimit === 'number') {
     selectSitesTitle = `Select ${selectionLimit.toString()} site${selectionLimit === 1 ? '' : 's'}`;
-    // canSave =
   }
   if (Array.isArray(selectionLimit)) {
     const { 0: min, 1: max } = selectionLimit;
@@ -93,9 +93,9 @@ const SelectSitesButton = (props) => {
         <Button
           color="primary"
           variant="contained"
-          onClick={() => setDialogOpen(true)}
           data-selenium="select-sites-button"
           {...buttonProps}
+          onClick={() => setDialogOpen(true)}
         >
           {label}
           <GlobeIcon className={classes.buttonIcon} />
@@ -125,7 +125,7 @@ const SelectSitesButton = (props) => {
               </IconButton>
             </Tooltip>
             <Typography variant="h5" className={classes.appBarTitle}>
-              {selectSitesTitle}
+              {dialogTitle || selectSitesTitle}
             </Typography>
             <Tooltip
               title="Complete selection and return"
@@ -147,6 +147,7 @@ const SelectSitesButton = (props) => {
           </Toolbar>
         </AppBar>
         <SiteMap
+          {...siteMapProps}
           fullscreen
           selection="SITES"
           aspectRatio={aspectRatio}
@@ -162,7 +163,9 @@ const SelectSitesButton = (props) => {
 
 SelectSitesButton.propTypes = {
   label: PropTypes.string,
+  dialogTitle: PropTypes.string,
   buttonProps: PropTypes.shape(Button.propTypes),
+  siteMapProps: PropTypes.shape(SITE_MAP_PROP_TYPES),
   tooltipProps: PropTypes.shape(Tooltip.propTypes),
   validItems: SITE_MAP_PROP_TYPES.validItems,
   selectedItems: SITE_MAP_PROP_TYPES.selectedItems,
@@ -172,7 +175,9 @@ SelectSitesButton.propTypes = {
 
 SelectSitesButton.defaultProps = {
   label: 'Map',
+  dialogTitle: null,
   buttonProps: {},
+  siteMapProps: {},
   tooltipProps: {},
   validItems: null,
   selectedItems: [],

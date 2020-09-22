@@ -1,19 +1,10 @@
-/* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid, no-unused-vars, max-len */
+/* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid, react/no-unescaped-entities, max-len */
 
-import React, { useState } from 'react';
-
-import cloneDeep from 'lodash/cloneDeep';
+import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 import Link from '@material-ui/core/Link';
-import Paper from '@material-ui/core/Paper';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 
 import DocBlock from '../../../components/DocBlock';
@@ -87,22 +78,14 @@ const propRows = [
     ),
   },
   {
-    name: 'filterPosition',
-    type: (
-      <div>
-        string, one of:
-        <br />
-        <tt>
-          <div>&quot;top&quot;</div>
-          <div>&quot;bottom&quot;</div>
-        </tt>
-      </div>
-    ),
-    default: '"bottom"',
+    name: 'fullscreen',
+    type: 'boolean',
+    default: 'false',
     description: (
       <p>
-        Whether the fitlers (map/table toggle button group and features button) should appear above
-        or below the main content area of the component.
+        Whether the SiteMap should appear in fullscreen mode. Fullscreen mode makes the map
+        attempt to fill all horizontal and vertical space available to it and repositions some
+        UI elements to have margins more in keeping with a fullscreen layout.
       </p>
     ),
   },
@@ -122,6 +105,87 @@ const propRows = [
         <p>
           If set this will override any zoom and/or center props as the focus location will
           determine the zoom and center for the map.
+        </p>
+      </React.Fragment>
+    ),
+  },
+  {
+    name: 'onSelectionChange',
+    type: 'function',
+    default: 'null',
+    description: (
+      <p>
+        A function that fires whenever the selection changes. It should take one argument
+        representing the updated selection as a Set (not an array).
+      </p>
+    ),
+  },
+  {
+    name: 'selectedItems',
+    type: 'array of strings',
+    default: '[]',
+    examples: (
+      <div>
+        <tt>['ABBY', 'WREF', 'CPER']</tt>
+        <br />
+        <tt>['JORN']</tt>
+      </div>
+    ),
+    description: (
+      <p>
+        Array of strings representing IDs of selectable items to show already selected when the
+        SiteMap initializes. For example, if <tt>selection</tt> is <tt>"SITES"</tt> then this prop
+        should contain siteCode strings.
+      </p>
+    ),
+  },
+  {
+    name: 'selection',
+    type: (
+      <div>
+        string, one of:
+        <br />
+        <tt>
+          <div>&quot;SITES&quot;</div>
+        </tt>
+      </div>
+    ),
+    default: 'null',
+    description: (
+      <p>
+        The selection mode for the map. Selection is limited to a single feature type. Presently
+        only <tt>SITES</tt> is supported. See other selection-related props for complete
+        integration.
+      </p>
+    ),
+  },
+  {
+    name: 'selectionLimit',
+    type: 'number or array of exactly two numbers',
+    default: 'null',
+    examples: (
+      <div>
+        <tt>3</tt>
+        <br />
+        <tt>[1, 5]</tt>
+      </div>
+    ),
+    description: (
+      <React.Fragment>
+        <p>
+          When selection is active and this prop is null there are no limits on what constitutes a
+          valid selection (as long as at least one selectable item is selected). When not null this
+          prop enforces limits on that validity.
+        </p>
+        <p>
+          A numeric value will set a discrete selection limit (e.g. a value of <tt>3</tt> means
+          that <i>exactly</i> three items must be selected to be valid). An array of two values
+          sets a range (e.g. <tt>[1, 5]</tt> will consider a selection anywhere from one item up
+          to five items to be valid).
+        </p>
+        <p>
+          For all numeric values for this prop only non-zero positive integers are allowed. For an
+          array of two numbers the second number must be greater than (and not equal two) the first.
         </p>
       </React.Fragment>
     ),
@@ -175,6 +239,26 @@ const propRows = [
     ),
   },
   {
+    name: 'validItems',
+    type: 'array of strings',
+    default: '[]',
+    examples: (
+      <div>
+        <tt>['ABBY', 'WREF', 'CPER']</tt>
+        <br />
+        <tt>['JORN']</tt>
+      </div>
+    ),
+    description: (
+      <p>
+        Array of strings representing IDs of selectable items. If non-empty this will be interpreted
+        as a subset of the set of all items for the selectable type that are enabled for selection.
+        Any items not represented in <tt>validItems</tt> will appear ghosted and will not be
+        selectable.
+      </p>
+    ),
+  },
+  {
     name: 'view',
     type: (
       <div>
@@ -218,14 +302,9 @@ const propRows = [
     ),
   },
 ];
-
+// TOWER103599
 export default function StyleGuide() {
   const classes = useStyles(Theme);
-  const slackLink = (
-    <Link href="https://neonscience.slack.com/archives/CQ6J40S85" target="_blank">
-      #portal-feedback Slack channel
-    </Link>
-  );
 
   return (
     <React.Fragment>
@@ -255,10 +334,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
       </DocBlock>
 
       <ExampleBlock>
-        foo
-        {/*
         <SiteMap />
-        */}
       </ExampleBlock>
       <CodeBlock>
         {`
@@ -267,20 +343,32 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
       </CodeBlock>
 
       <Divider className={classes.divider} />
-      <Typography variant="h4" component="h2" gutterBottom>Selection</Typography>
+      <Typography variant="h4" component="h2" gutterBottom>Focus Location</Typography>
 
       <DocBlock>
-        Selection
+        Use the <tt>location</tt> prop to initialize the Site Map on a particular location. Any
+        valid location name will work so long as it is represented in the locations API with a
+        geographical point (latitude and longitude). Additionally all Domain codes and US state
+        codes are also supported.
       </DocBlock>
 
       <ExampleBlock>
-        <SiteMap selection="SITES" />
+        <SiteMap location="D08" />
       </ExampleBlock>
       <CodeBlock>
         {`
-<SiteMap selection="SITES" />
+<SiteMap location="D08" />
         `}
       </CodeBlock>
+
+      <Divider className={classes.divider} />
+      <Typography variant="h4" component="h2" gutterBottom>Selection</Typography>
+
+      <DocBlock>
+        The SiteMap supports selection workflows for some feature types.
+        See the <Link href="#SelectSitesButton">Select Sites Button</Link>
+        documentation for details and examples.
+      </DocBlock>
 
     </React.Fragment>
   );
