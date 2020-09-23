@@ -21,6 +21,10 @@ import ExploreDataProductsIcon from '@material-ui/icons/InsertChartOutlined';
 import LocationIcon from '@material-ui/icons/MyLocation';
 import MarkerIcon from '@material-ui/icons/LocationOn';
 import SiteDetailsIcon from '@material-ui/icons/InfoOutlined';
+import UnselectableIcon from '@material-ui/icons/NotInterested';
+
+import SelectedIcon from '@material-ui/icons/DoneOutline';
+import UnselectedIcon from '@material-ui/icons/Remove';
 
 import 'leaflet/dist/leaflet.css';
 import {
@@ -41,22 +45,50 @@ import {
   KM2_TO_ACRES,
   HIGHLIGHT_STATUS,
   SELECTION_STATUS,
+  SELECTION_PORTIONS,
   PLOT_SAMPLING_MODULES,
+  UNSELECTABLE_MARKER_FILTER,
 } from './SiteMapUtils';
 
-import Theme from '../Theme/Theme';
+import Theme, { COLORS } from '../Theme/Theme';
 
 const useStyles = makeStyles(theme => ({
-  infoSnackbar: {
-    backgroundColor: theme.palette.grey[50],
+  selectionSnackbar: {
     color: '#000',
-    border: `1px solid ${theme.palette.primary.main}80`,
     justifyContent: 'center',
     padding: theme.spacing(0, 1),
+    boxShadow: 'none',
   },
-  infoSnackbarIcon: {
-    color: theme.palette.grey[300],
+  unselectableSnackbar: {
+    backgroundColor: COLORS.GREY[100],
+    border: `1px solid ${COLORS.GREY[600]}80`,
+  },
+  addToSelectionSnackbar: {
+    backgroundColor: COLORS.GREEN[100],
+    border: `1px solid ${COLORS.GREEN[600]}80`,
+  },
+  removeFromSelectionSnackbar: {
+    backgroundColor: COLORS.BROWN[100],
+    border: `1px solid ${COLORS.BROWN[600]}80`,
+  },
+  selectedSelectionSnackbar: {
+    backgroundColor: COLORS.LIGHT_BLUE[100],
+    border: `1px solid ${theme.palette.primary.main}80`,
+  },
+  snackbarIcon: {
     marginRight: theme.spacing(2),
+  },
+  unselectableSnackbarIcon: {
+    color: COLORS.GREY[300],
+  },
+  addToSelectionSnackbarIcon: {
+    color: COLORS.GREEN[500],
+  },
+  removeFromSelectionSnackbarIcon: {
+    color: COLORS.BROWN[500],
+  },
+  selectedSelectionSnackbarIcon: {
+    color: theme.palette.primary.main,
   },
   popup: {
     minWidth: '320px',
@@ -96,6 +128,9 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(1),
     filter: 'drop-shadow(0px 0px 1.5px #000000bb)',
   },
+  popupSiteSelectedIcon: {
+    marginRight: theme.spacing(1),
+  },
   popupSiteContainer: {
     display: 'flex',
     justifyContent: 'flex-start',
@@ -122,6 +157,12 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
+  centerFlex: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   endFlex: {
     display: 'flex',
     justifyContent: 'flex-end',
@@ -131,6 +172,9 @@ const useStyles = makeStyles(theme => ({
     marginRight: '2px',
     marginBottom: '-3px',
     fontSize: '0.95rem',
+  },
+  unselectable: {
+    filter: 'saturate(0.3) brightness(2)',
   },
 }));
 
@@ -148,9 +192,9 @@ const SiteMapFeature = (props) => {
   const classes = useStyles(Theme);
   const { mapRef, featureKey } = props;
 
-  if (!FEATURES[featureKey] || !mapRef.current) { return null; }
-
   const feature = FEATURES[featureKey] || {};
+
+  const [state, dispatch] = SiteMapContext.useSiteMapContext();
 
   const {
     name,
@@ -165,6 +209,8 @@ const SiteMapFeature = (props) => {
   } = feature;
   const featureName = nameSingular || name || featureKey;
 
+  if (!FEATURES[featureKey] || !mapRef.current) { return null; }
+
   let featureDescription = description;
   let parentFeature = null;
   if (parentDataFeatureKey && FEATURES[parentDataFeatureKey]) {
@@ -178,7 +224,6 @@ const SiteMapFeature = (props) => {
   /**
      Extract feature data from SiteMapContext state
   */
-  const [state, dispatch] = SiteMapContext.useSiteMapContext();
   const {
     neonContextHydrated,
     focusLocation: { current: focusLocation },
@@ -190,8 +235,18 @@ const SiteMapFeature = (props) => {
   } = state;
   if (!neonContextHydrated || !featureData || !Object.keys(featureData)) { return null; }
 
-  const selectionActive = state.selection.active === featureType;
-  const selectedItems = selectionActive ? state.selection[featureType] : new Set();
+  // Whether this feature can affect selection of items in the map
+  const {
+    active: selectableFeatureType,
+    set: selectedItems,
+    validSet: validItems,
+    limit: selectionLimit,
+    hideUnselectable,
+  } = state.selection;
+  const selectionActive = state.selection.active === featureType || (
+    state.selection.active === FEATURE_TYPES.SITES
+      && [FEATURES.DOMAINS.KEY, FEATURES.STATES.KEY].includes(featureKey)
+  );
 
   // Jump-To function to afford map navigation where appropriate
   const jumpTo = (locationCode = '') => {
@@ -225,12 +280,12 @@ const SiteMapFeature = (props) => {
       const contentHeight = containerNode.clientHeight;
       const tipHeight = tipNode.clientHeight;
       const contentBottom = 0 - iconHeight - contentHeight - tipHeight - (1.5 * containerBottom);
-      const tipBottom = contentHeight + tipHeight;
+      const tipBottom = contentHeight + tipHeight - 1;
       containerNode.style.bottom = `${contentBottom}px`;
       tipNode.style.transform = `rotate(0.5turn) translate(0px, ${tipBottom}px)`;
     } else {
       containerNode.style.bottom = `${-1.5 * containerBottom}px`;
-      popup._tipContainer.style.transform = null;
+      popup._tipContainer.style.transform = 'translate(0px, -1px)';
     }
     // For left/right we move the popup horizontally as needed while keeping the tip stationary
     const contentWidth = containerNode.clientWidth;
@@ -289,7 +344,7 @@ const SiteMapFeature = (props) => {
           <circle {...circleProps} />
         </svg>
       );
-    } else if (featureStyle && !['STATES', 'DOMAINS'].includes(featureKey)) {
+    } else if (featureStyle && ![FEATURES.DOMAINS.KEY, FEATURES.STATES.KEY].includes(featureKey)) {
       // We don't show the rect for states and domains since those cover the whole map when showing.
       const rectProps = {
         width: 33,
@@ -346,16 +401,42 @@ const SiteMapFeature = (props) => {
 
   /**
      Render: Site with Icon
+     Optionally ghost (fade) icon if selection is active but it's not selectable. If true and the
+     site is not selectable this will also skip rendering altogether when hideUnselectable is true.
   */
-  const renderSite = (siteCode, link = false) => {
+  const renderSite = (siteCode, ghostUnselectable = false) => {
     const site = state.sites[siteCode];
     if (!site) { return null; }
     const siteFeatureKey = `${site.terrain}_${site.type}_SITES`;
     if (!FEATURES[siteFeatureKey]) { return null; }
-    const { iconSvg: siteIcon } = FEATURES[siteFeatureKey];
+    const isSelected = selectedItems.has(siteCode);
+    const siteIcon = FEATURES[siteFeatureKey][isSelected ? 'iconSelectedSvg' : 'iconSvg'];
+    let selectedIcon = null;
+    const markerStyle = {};
+    if (selectionActive) {
+      if (validItems && !validItems.has(siteCode)) {
+        // eslint-disable-next-line max-len
+        selectedIcon = (
+          <UnselectableIcon
+            color="disabled"
+            style={{ padding: '4px' }}
+            className={classes.popupSiteSelectedIcon}
+          />
+        );
+        if (ghostUnselectable) {
+          if (hideUnselectable) { return null; }
+          markerStyle.filter = UNSELECTABLE_MARKER_FILTER;
+        }
+      } else {
+        selectedIcon = isSelected
+          ? <SelectedIcon className={classes.popupSiteSelectedIcon} color="primary" />
+          : <UnselectedIcon className={classes.popupSiteSelectedIcon} color="disabled" />;
+      }
+    }
     const internal = (
       <React.Fragment>
-        <img src={siteIcon} alt={siteCode} className={classes.popupSiteIcon} />
+        {selectedIcon}
+        <img src={siteIcon} alt={siteCode} className={classes.popupSiteIcon} style={markerStyle} />
         <Typography variant="caption" style={{ textAlign: 'left' }}>
           {`${site.description} (${site.siteCode})`}
         </Typography>
@@ -366,7 +447,9 @@ const SiteMapFeature = (props) => {
       className: classes.popupSiteContainer,
       style: { marginTop: Theme.spacing(0.5) },
     };
-    return link ? (
+    return selectionActive ? (
+      <div {...containerProps}>{internal}</div>
+    ) : (
       <Link
         variant="caption"
         component="button"
@@ -376,8 +459,6 @@ const SiteMapFeature = (props) => {
       >
         {internal}
       </Link>
-    ) : (
-      <div {...containerProps}>{internal}</div>
     );
   };
 
@@ -385,21 +466,35 @@ const SiteMapFeature = (props) => {
      Render: Latitude / Longitude with Copy to Clipboard
   */
   const renderLatLon = (latitude, longitude, right = false, renderSubtitle = false) => {
+    const iconButtonProps = {
+      size: 'small',
+      style: { marginRight: Theme.spacing(0.5) },
+    };
     const coords = Number.isFinite(latitude) && Number.isFinite(longitude) ? (
       <div
         className={classes[right ? 'endFlex' : 'startFlex']}
         data-selenium="sitemap-map-popup-coordinates"
       >
         <CopyToClipboard text={`${latitude.toFixed(5)} ${longitude.toFixed(5)}`}>
-          <Tooltip title="Latitude / Longitude (click to copy)">
+          {selectionActive ? (
             <IconButton
-              size="small"
-              style={{ marginRight: Theme.spacing(0.5) }}
-              aria-label="Latitude / Longitude (click to copy)"
+              {...iconButtonProps}
+              aria-label="Latitude / Longitude"
+              disabled={selectionActive}
             >
               <LocationIcon />
             </IconButton>
-          </Tooltip>
+          ) : (
+            <Tooltip title="Latitude / Longitude (click to copy)">
+              <IconButton
+                {...iconButtonProps}
+                aria-label="Latitude / Longitude (click to copy)"
+                disabled={selectionActive}
+              >
+                <LocationIcon />
+              </IconButton>
+            </Tooltip>
+          )}
         </CopyToClipboard>
         <Typography
           variant="caption"
@@ -486,7 +581,7 @@ const SiteMapFeature = (props) => {
       data-selenium="sitemap-map-popup-plotSlope"
     >
       <Typography variant="subtitle2">Plot Slope</Typography>
-      {renderNumericalValue(loc.slopeAspect, 'Aspect', 'Â°', 2, 'Slope Aspect', right)}
+      {renderNumericalValue(loc.slopeAspect, 'Aspect', '°', 2, 'Slope Aspect', right)}
       {renderNumericalValue(loc.slopeGradient, 'Gradient', '%', 2, 'Slope Gradient', right)}
     </div>
   );
@@ -542,20 +637,32 @@ const SiteMapFeature = (props) => {
      Render Method: Popup Row; Child NEON Sites (e.g. within a domain or state)
   */
   const renderChildSites = (boundaryKey) => {
-    // const { [SELECTABLE_FEATURE_TYPES.SITES]: selectedSites } = state.selection;
     const { sites = new Set() } = featureData[boundaryKey];
+    let selectable = null;
+    if (selectionActive && validItems) {
+      const selectableSites = new Set([...sites].filter(siteCode => validItems.has(siteCode)));
+      if (!selectableSites.size) {
+        selectable = ', none selectable';
+      } else {
+        selectable = selectableSites.size === sites.size
+          ? ', all selectable'
+          : ` total, ${selectableSites.size} selectable`;
+      }
+    }
     return (
       <Grid key="childSites" item xs={12} data-selenium="sitemap-map-popup-childSites">
         {!sites.size ? (
           <React.Fragment>
-            <Typography variant="subtitle2">NEON Sites</Typography>
+            <Typography variant="subtitle2" gutterBottom>NEON Sites</Typography>
             <Typography variant="caption">
               <i>none</i>
             </Typography>
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <Typography variant="subtitle2">{`NEON Sites (${sites.size}):`}</Typography>
+            <Typography variant="subtitle2" gutterBottom>
+              {`NEON Sites (${sites.size}${selectable}):`}
+            </Typography>
             <div>
               {[...sites].map(siteCode => renderSite(siteCode, true))}
             </div>
@@ -689,6 +796,73 @@ const SiteMapFeature = (props) => {
   };
 
   /**
+     Render: Boundary Selection Action
+  */
+  const renderBoundarySelectionAction = (boundaryFeatureKey, boundaryKey) => {
+    if (
+      !selectionActive || !state.selection.derived[boundaryFeatureKey] || selectionLimit === 1
+    ) { return null; }
+    const { sites: boundarySites = new Set() } = featureData[boundaryKey];
+    if (!boundarySites.size) { return null; }
+    const selectionPortion = state.selection.derived[boundaryFeatureKey][boundaryKey] || null;
+    const selectableSites = !validItems
+      ? boundarySites
+      : new Set([...boundarySites].filter(siteCode => validItems.has(siteCode)));
+    const selectableCount = selectableSites.size;
+    const ActionIcon = selectableCount ? ClickIcon : UnselectableIcon;
+    const selectable = boundarySites.size === selectableCount ? '' : ' selectable';
+    const thisOne = boundarySites.size === selectableCount ? 'this one' : 'the one';
+    let action = selectableCount === 1
+      ? `add ${thisOne}${selectable} site`
+      : `add all ${selectableCount}${selectable} sites`;
+    let preposition = 'to';
+    /* eslint-disable max-len */
+    let snackbarClass = classes[selectableCount ? 'addToSelectionSnackbar' : 'unselectableSnackbar'];
+    let snackbarIconClass = classes[selectableCount ? 'addToSelectionSnackbarIcon' : 'unselectableSnackbarIcon'];
+    /* eslint-enable max-len */
+    let actionText = `No sites in this ${FEATURES[boundaryFeatureKey].nameSingular} are selectable`;
+    if (selectableCount) {
+      if (selectionPortion === SELECTION_PORTIONS.PARTIAL) {
+        const intersection = new Set([...selectableSites].filter(x => selectedItems.has(x)));
+        const remaining = selectableCount - intersection.size;
+        action = `add remaining ${remaining}${selectable} site${remaining === 1 ? '' : 's'}`;
+      }
+      if (selectionPortion === SELECTION_PORTIONS.TOTAL) {
+        action = selectableCount === 1
+          ? `remove ${thisOne}${selectable} site`
+          : `remove all ${selectableCount}${selectable} sites`;
+        preposition = 'from';
+        snackbarClass = classes.removeFromSelectionSnackbar;
+        snackbarIconClass = classes.removeFromSelectionSnackbarIcon;
+      }
+      actionText = (
+        <React.Fragment>
+          {/* eslint-disable react/jsx-one-expression-per-line */}
+          Click to <b>{action}</b> {preposition} selection
+          {/* eslint-enable react/jsx-one-expression-per-line */}
+        </React.Fragment>
+      );
+    }
+    return (
+      <div key={boundaryKey} className={classes.centerFlex} style={{ padding: Theme.spacing(0.5) }}>
+        <SnackbarContent
+          className={`${classes.selectionSnackbar} ${snackbarClass}`}
+          message={(
+            <div className={classes.startFlex}>
+              <ActionIcon className={`${classes.snackbarIcon} ${snackbarIconClass}`} />
+              <div>
+                <Typography variant="body2">
+                  {actionText}
+                </Typography>
+              </div>
+            </div>
+          )}
+        />
+      </div>
+    );
+  };
+
+  /**
      Render: Site Popup
   */
   const renderSitePopup = (siteCode) => {
@@ -700,20 +874,58 @@ const SiteMapFeature = (props) => {
     const stateFieldTitle = (site.stateCode === 'PR' ? 'Territory' : 'State');
     const renderActions = () => {
       if (selectionActive) {
+        const isSelectable = !validItems || validItems.has(site.siteCode);
         const isSelected = selectedItems.has(site.siteCode);
         const verb = isSelected ? 'remove' : 'add';
         const preposition = isSelected ? 'from' : 'to';
+        let ActionIcon = UnselectableIcon;
+        let action = 'This site cannot be selected';
+        let snackbarClass = classes.unselectableSnackbar;
+        let snackbarIconClass = classes.unselectableSnackbarIcon;
+        if (isSelectable) {
+          ActionIcon = ClickIcon;
+          if (selectionLimit === 1) {
+            ActionIcon = isSelected ? SelectedIcon : ClickIcon;
+            action = isSelected ? (
+              <b>Selected</b>
+            ) : (
+              <React.Fragment>
+                {/* eslint-disable react/jsx-one-expression-per-line */}
+                Click to <b>select</b>
+                {/* eslint-enable react/jsx-one-expression-per-line */}
+              </React.Fragment>
+            );
+            snackbarClass = isSelected
+              ? classes.selectedSelectionSnackbar
+              : classes.addToSelectionSnackbar;
+            snackbarIconClass = isSelected
+              ? classes.selectedSelectionSnackbarIcon
+              : classes.addToSelectionSnackbarIcon;
+          } else {
+            action = (
+              <React.Fragment>
+                {/* eslint-disable react/jsx-one-expression-per-line */}
+                Click to <b>{verb}</b> {preposition} selection
+                {/* eslint-enable react/jsx-one-expression-per-line */}
+              </React.Fragment>
+            );
+            snackbarClass = isSelected
+              ? classes.removeFromSelectionSnackbar
+              : classes.addToSelectionSnackbar;
+            snackbarIconClass = isSelected
+              ? classes.removeFromSelectionSnackbarIcon
+              : classes.addToSelectionSnackbarIcon;
+          }
+        }
         return (
           <SnackbarContent
-            className={classes.infoSnackbar}
+            className={`${classes.selectionSnackbar} ${snackbarClass}`}
             message={(
               <div className={classes.startFlex}>
-                <ClickIcon className={classes.infoSnackbarIcon} />
+                <ActionIcon className={`${classes.snackbarIcon} ${snackbarIconClass}`} />
                 <div>
                   <Typography variant="body2">
-                    {/* eslint-disable react/jsx-one-expression-per-line */}
-                    Click to <b>{verb}</b> {preposition} selection
-                    {/* eslint-enable react/jsx-one-expression-per-line */}
+                    {action}
                   </Typography>
                 </div>
               </div>
@@ -750,16 +962,18 @@ const SiteMapFeature = (props) => {
     return (
       <Popup {...popupProps}>
         {renderPopupTitle(`${site.description} (${site.siteCode})`, false)}
-        <Link
-          variant="caption"
-          component="button"
-          onClick={() => jumpTo(site.siteCode)}
-          style={{ marginLeft: '-2px', marginBottom: '8px' }}
-          data-selenium="sitemap-map-popup-siteLink"
-        >
-          {markerIcon}
-          {`Jump to ${site.siteCode} on the map`}
-        </Link>
+        {selectionActive ? null : (
+          <Link
+            variant="caption"
+            component="button"
+            onClick={() => jumpTo(site.siteCode)}
+            style={{ marginLeft: '-2px', marginBottom: '8px' }}
+            data-selenium="sitemap-map-popup-siteLink"
+          >
+            {markerIcon}
+            {`Jump to ${site.siteCode} on the map`}
+          </Link>
+        )}
         <Grid container spacing={1} style={{ marginBottom: Theme.spacing(1) }}>
           {/* Terrain and Type */}
           <Grid item xs={8}>
@@ -769,18 +983,22 @@ const SiteMapFeature = (props) => {
           {/* State/Territory */}
           <Grid item xs={4} style={{ textAlign: 'right' }}>
             <Typography variant="subtitle2">{stateFieldTitle}</Typography>
-            <Tooltip title={`Jump to ${usState.name} on the map`}>
-              <Link
-                variant="caption"
-                component="button"
-                style={{ textAlign: 'right' }}
-                onClick={() => jumpTo(site.stateCode)}
-                data-selenium="sitemap-map-popup-stateLink"
-              >
-                {markerIcon}
-                {usState.name}
-              </Link>
-            </Tooltip>
+            {selectionActive ? (
+              <Typography variant="caption">{usState.name}</Typography>
+            ) : (
+              <Tooltip title={`Jump to ${usState.name} on the map`}>
+                <Link
+                  variant="caption"
+                  component="button"
+                  style={{ textAlign: 'right' }}
+                  onClick={() => jumpTo(site.stateCode)}
+                  data-selenium="sitemap-map-popup-stateLink"
+                >
+                  {markerIcon}
+                  {usState.name}
+                </Link>
+              </Tooltip>
+            )}
           </Grid>
           {/* Latitude/Longitude */}
           <Grid item xs={5} style={{ display: 'flex', alignItems: 'flex-end' }}>
@@ -789,18 +1007,22 @@ const SiteMapFeature = (props) => {
           {/* Domain */}
           <Grid item xs={7} style={{ textAlign: 'right' }}>
             <Typography variant="subtitle2">Domain</Typography>
-            <Tooltip title={`Jump to ${site.domainCode} on the map`}>
-              <Link
-                variant="caption"
-                component="button"
-                style={{ textAlign: 'right' }}
-                onClick={() => jumpTo(site.domainCode)}
-                data-selenium="sitemap-map-popup-domainLink"
-              >
-                {markerIcon}
-                {`${site.domainCode} - ${domain.name}`}
-              </Link>
-            </Tooltip>
+            {selectionActive ? (
+              <Typography variant="caption">{`${site.domainCode} - ${domain.name}`}</Typography>
+            ) : (
+              <Tooltip title={`Jump to ${site.domainCode} on the map`}>
+                <Link
+                  variant="caption"
+                  component="button"
+                  style={{ textAlign: 'right' }}
+                  onClick={() => jumpTo(site.domainCode)}
+                  data-selenium="sitemap-map-popup-domainLink"
+                >
+                  {markerIcon}
+                  {`${site.domainCode} - ${domain.name}`}
+                </Link>
+              </Tooltip>
+            )}
           </Grid>
         </Grid>
         {renderActions()}
@@ -847,12 +1069,10 @@ const SiteMapFeature = (props) => {
     DOMAINS: (domainCode) => {
       const title = !featureData[domainCode] ? null : (
         <span>
-          {`NEON Domain ${domainCode.replace('D', '')}`}
-          <br />
-          {featureData[domainCode].name}
+          {`NEON Domain ${domainCode.replace('D', '')} - ${featureData[domainCode].name}`}
         </span>
       );
-      const jumpLink = (
+      const jumpLink = selectionActive ? null : (
         <Link
           key="jumpLink"
           variant="caption"
@@ -865,7 +1085,15 @@ const SiteMapFeature = (props) => {
           {`Jump to ${domainCode} on the map`}
         </Link>
       );
-      return renderBoundaryPopup(domainCode, title, [jumpLink, renderChildSites]);
+      return renderBoundaryPopup(
+        domainCode,
+        title,
+        [
+          jumpLink,
+          renderChildSites,
+          renderBoundarySelectionAction(FEATURES.DOMAINS.KEY, domainCode),
+        ],
+      );
     },
     FLIGHT_BOX_BOUNDARIES: renderBoundaryPopup,
     HUTS: renderLocationPopup,
@@ -880,7 +1108,7 @@ const SiteMapFeature = (props) => {
     ),
     SAMPLING_BOUNDARIES: renderBoundaryPopup,
     STATES: (stateCode) => {
-      const jumpLink = (
+      const jumpLink = selectionActive ? null : (
         <Link
           key="jumpLink"
           variant="caption"
@@ -896,7 +1124,11 @@ const SiteMapFeature = (props) => {
       return renderBoundaryPopup(
         stateCode,
         featureData[stateCode] ? featureData[stateCode].name : stateCode,
-        [jumpLink, renderChildSites],
+        [
+          jumpLink,
+          renderChildSites,
+          renderBoundarySelectionAction(FEATURES.STATES.KEY, stateCode),
+        ],
       );
     },
     TERRESTRIAL_CORE_SITES: renderSitePopup,
@@ -914,6 +1146,7 @@ const SiteMapFeature = (props) => {
     ]),
     WATERSHED_BOUNDARIES: renderBoundaryPopup,
   };
+  const hasPopup = typeof renderPopupFunctions[featureKey] === 'function';
   const renderPopup = (siteCode, location = null) => {
     if (
       typeof renderPopupFunctions[featureKey] !== 'function'
@@ -928,7 +1161,8 @@ const SiteMapFeature = (props) => {
   */
   const baseColor = featureStyle ? featureStyle.color : '#666666';
   const hoverColor = `#${tinycolor(baseColor).lighten(10).toHex()}`;
-  const darkenedBaseColor = `#${tinycolor(baseColor).darken(20).toHex()}`;
+  const darkenedBaseColor = `#${tinycolor(baseColor).darken(15).toHex()}`;
+  const darkenedMoreBaseColor = `#${tinycolor(darkenedBaseColor).darken(15).toHex()}`;
   const isPoint = (shapeData) => {
     const shapeKeys = Object.keys(shapeData);
     return (
@@ -956,9 +1190,16 @@ const SiteMapFeature = (props) => {
     const shapeData = secondaryId && featureData[primaryId][secondaryId]
       ? featureData[primaryId][secondaryId]
       : featureData[primaryId];
+    let isSelectable = null;
     let isSelected = false;
     if (selectionActive) {
+      isSelectable = !validItems || (
+        secondaryId ? validItems.has(secondaryId) : validItems.has(primaryId)
+      );
       isSelected = secondaryId ? selectedItems.has(secondaryId) : selectedItems.has(primaryId);
+      if (featureType === selectableFeatureType && hideUnselectable && !isSelectable) {
+        return null;
+      }
     }
     const isHighlighted = (
       (primaryIdOnly && !secondaryId && primaryId === focusLocation)
@@ -975,6 +1216,7 @@ const SiteMapFeature = (props) => {
     let shapeProps = {};
     if (shapeData.geometry && shapeData.geometry.coordinates) {
       positions = shapeData.geometry.coordinates;
+      // Polyline
       if (featureShape === 'Polyline') {
         shapeProps = {
           ...featureStyle || {},
@@ -986,11 +1228,17 @@ const SiteMapFeature = (props) => {
           },
         };
       }
+      // Polygon
       if (featureShape === 'Polygon') {
         shapeProps = {
           ...featureStyle || {},
           ...polygonInteractionProps,
         };
+        // ReactLeaflet does not suport the mask prop, so add it as an unused class.
+        // The LayoutEffect in SiteMapLeaflet.jsx then applies it as a mask attribute.
+        if ([FEATURES.DOMAINS.KEY, FEATURES.STATES.KEY].includes(featureKey)) {
+          shapeProps.className = `#mask_${featureKey}_${primaryId}`;
+        }
         if (isHighlighted) {
           shapeProps.color = darkenedBaseColor;
           shapeProps.onMouseOut = (e) => {
@@ -998,21 +1246,71 @@ const SiteMapFeature = (props) => {
             e.target._path.setAttribute('fill', darkenedBaseColor);
           };
         }
+        if (selectionActive) {
+          const baseColors = {
+            [SELECTION_PORTIONS.PARTIAL]: darkenedBaseColor,
+            [SELECTION_PORTIONS.TOTAL]: darkenedMoreBaseColor,
+          };
+          let returnColor = isHighlighted ? darkenedBaseColor : featureStyle.color;
+          if (
+            state.selection.derived[featureKey]
+              && state.selection.derived[featureKey][primaryId]
+          ) {
+            // eslint-disable-next-line max-len
+            returnColor = baseColors[state.selection.derived[featureKey][primaryId]] || featureStyle.color;
+            shapeProps.color = returnColor;
+          }
+          shapeProps.onMouseOver = (e) => {
+            e.target._path.setAttribute('stroke', hoverColor);
+            e.target._path.setAttribute('fill', hoverColor);
+            if (hasPopup) {
+              e.target.openPopup();
+              positionPopup(e.target, e.latlng, true);
+            }
+          };
+          shapeProps.onMouseMove = (e) => {
+            if (hasPopup) {
+              positionPopup(e.target, e.latlng, true);
+            }
+          };
+          shapeProps.onMouseOut = (e) => {
+            e.target._path.setAttribute('stroke', returnColor);
+            e.target._path.setAttribute('fill', returnColor);
+            if (hasPopup) {
+              e.target.closePopup();
+            }
+          };
+          if (selectionLimit !== 1) {
+            shapeProps.onClick = () => {
+              if (featureKey === FEATURES.DOMAINS.KEY) {
+                dispatch({ type: 'toggleDomainSelected', domainCode: primaryId });
+              }
+              if (featureKey === FEATURES.STATES.KEY) {
+                dispatch({ type: 'toggleStateSelected', stateCode: primaryId });
+              }
+            };
+          }
+        }
       }
     }
+    // Marker
     if (featureShape === 'Marker' && isPoint(shapeData)) {
       position = ['latitude', 'longitude'].every(k => shapeKeys.includes(k))
         ? [shapeData.latitude, shapeData.longitude]
         : shapeData.geometry.coordinates;
       if (state.map.zoomedIcons[featureKey] !== null) {
         const baseIcon = state.map.zoomedIcons[featureKey];
-        const selection = isSelected ? SELECTION_STATUS.SELECTED : SELECTION_STATUS.UNSELECTED;
+        const selection = isSelectable && isSelected
+          ? SELECTION_STATUS.SELECTED
+          : SELECTION_STATUS.UNSELECTED;
         const initialHighlight = isHighlighted ? HIGHLIGHT_STATUS.HIGHLIGHT : HIGHLIGHT_STATUS.NONE;
         icon = baseIcon[selection][initialHighlight];
-        const hasPopup = typeof renderPopupFunctions[featureKey] === 'function';
         interaction = selectionActive ? {
           onMouseOver: (e) => {
-            const highlight = HIGHLIGHT_STATUS[isSelected ? 'HIGHLIGHT' : 'SELECT'];
+            let highlight = HIGHLIGHT_STATUS.HIGHLIGHT;
+            if (isSelectable) {
+              highlight = HIGHLIGHT_STATUS[isSelected ? 'HIGHLIGHT' : 'SELECT'];
+            }
             e.target.setIcon(baseIcon[selection][highlight]);
             e.target._bringToFront();
             if (hasPopup) {
@@ -1021,17 +1319,16 @@ const SiteMapFeature = (props) => {
             }
           },
           onMouseOut: (e) => {
-            const highlight = HIGHLIGHT_STATUS[isSelected ? initialHighlight : 'SELECT'];
-            e.target.setIcon(baseIcon[selection][highlight]);
+            e.target.setIcon(baseIcon[selection][initialHighlight]);
             if (hasPopup) {
               e.target.closePopup();
             }
           },
-          /*
-          onClick: (e) => {
-            console.log('SELECT', e.target);
+          onClick: () => {
+            if (featureType === FEATURE_TYPES.SITES && shapeData.siteCode && isSelectable) {
+              dispatch({ type: 'toggleSiteSelected', site: shapeData.siteCode });
+            }
           },
-          */
         } : {
           onMouseOver: (e) => {
             e.target.setIcon(baseIcon[selection][HIGHLIGHT_STATUS.HIGHLIGHT]);
@@ -1051,7 +1348,13 @@ const SiteMapFeature = (props) => {
         };
       }
       marker = (
-        <Marker key={`${key}-marker`} position={position} title={key} icon={icon} {...interaction}>
+        <Marker
+          key={`${key}-marker`}
+          position={position}
+          title={key}
+          icon={icon}
+          {...interaction}
+        >
           {renderedPopup}
         </Marker>
       );
@@ -1095,6 +1398,12 @@ const SiteMapFeature = (props) => {
   return (
     <FeatureGroup>
       {Object.keys(featureData)
+        // Valid items should render above unselecatbles
+        .sort((a) => {
+          if (!validItems) { return 0; }
+          return (validItems.has(a) ? 1 : -1);
+        })
+        // Focus lcoation should render above all others
         .sort(a => (a === state.focusLocation.current ? 1 : -1))
         .flatMap((keyA) => {
           if ([FEATURE_TYPES.LOCATIONS, FEATURE_TYPES.SAMPLING_POINTS].includes(featureType)) {

@@ -1,9 +1,8 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/anchor-is-valid, no-unused-vars */
 import React, { useRef, useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -17,7 +16,7 @@ import MaterialTable, { MTableToolbar, MTableFilterRow } from 'material-table';
 
 import MaterialTableIcons from '../MaterialTableIcons/MaterialTableIcons';
 import NeonContext from '../NeonContext/NeonContext';
-import Theme from '../Theme/Theme';
+import Theme, { COLORS } from '../Theme/Theme';
 
 import SiteMapContext from './SiteMapContext';
 import {
@@ -27,6 +26,8 @@ import {
   FEATURE_TYPES,
   MIN_TABLE_MAX_BODY_HEIGHT,
   PLOT_SAMPLING_MODULES,
+  SELECTABLE_FEATURE_TYPES,
+  UNSELECTABLE_MARKER_FILTER,
   calculateLocationsInMap,
 } from './SiteMapUtils';
 
@@ -40,9 +41,26 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: 'white',
     '& table': {
       margin: '0px !important',
+      borderCollapse: 'separate',
+      '& tr.MuiTableRow-head': {
+        backgroundColor: theme.palette.primary.main,
+        '& th:first-child span.MuiCheckbox-root': {
+          margin: theme.spacing(0, 0.5),
+          backgroundColor: '#ffffff88',
+          '&:hover': {
+            backgroundColor: '#ffffffaa',
+          },
+        },
+      },
+      '& tbody tr:first-child': {
+        backgroundColor: theme.palette.grey[50],
+      },
+      '& tfoot': {
+        paddingRight: '36px',
+      },
     },
-    '& tfoot': {
-      paddingRight: '36px',
+    '& td.MuiTablePagination-root': {
+      borderBottom: 'none',
     },
   },
   featureIcon: {
@@ -54,10 +72,6 @@ const useStyles = makeStyles(theme => ({
   linkButton: {
     textAlign: 'left',
   },
-  row: {},
-  rowSelected: {
-    backgroundColor: `${theme.palette.secondary.main}20`,
-  },
   startFlex: {
     display: 'flex',
     alignItems: 'center',
@@ -66,11 +80,18 @@ const useStyles = makeStyles(theme => ({
   toolbarContainer: {
     backgroundColor: theme.palette.grey[50],
     borderBottom: `1px dotted ${theme.palette.grey[300]}`,
-    paddingRight: theme.spacing(1),
-    // padding: theme.spacing(0, 1, 0, 2),
-    // display: 'flex',
-    // alignItems: 'center',
-    // justifyContent: 'space-between',
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: theme.spacing(4.5),
+    },
+    '& div.MuiToolbar-root': {
+      padding: theme.spacing(0, 2),
+      backgroundColor: theme.palette.grey[50],
+    },
+    // This hides all but the search input and show columns buttons.
+    // No other way to have material table NOT show a selection title in the toolbar.
+    '& div.MuiToolbar-root > div:not(:nth-last-child(-n+2))': {
+      display: 'none',
+    },
   },
   toggleButtonGroup: {
     height: theme.spacing(4),
@@ -100,7 +121,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    marginBottom: Theme.spacing(1),
+    margin: Theme.spacing(1, 0, 0.5, 0),
     minWidth: '200px',
   },
 }));
@@ -128,8 +149,14 @@ const SiteMapTable = () => {
     maxBodyHeight,
     maxBodyHeightUpdateFromAspectRatio,
   } = state.table;
+  const {
+    limit: selectionLimit,
+    valid: selectionValid,
+    set: selection,
+    validSet: selectableItems,
+    hideUnselectable,
+  } = state.selection;
   const selectionActive = state.selection.active === focus;
-  const selection = selectionActive ? state.selection[state.selection.active] : new Set();
 
   /**
     Effect - Initialize table if this is the first time we're seeing it
@@ -164,10 +191,12 @@ const SiteMapTable = () => {
 
   // Selection functions
   let rowIsSelected = () => false;
+  let rowIsSelectable = () => false;
   let selectRow = () => {};
   switch (focus) {
     case FEATURE_TYPES.SITES:
       rowIsSelected = row => selection.has(row.siteCode);
+      rowIsSelectable = row => !selectableItems || selectableItems.has(row.siteCode);
       selectRow = row => dispatch({ type: 'toggleSiteSelected', site: row.siteCode });
       break;
     default:
@@ -209,10 +238,18 @@ const SiteMapTable = () => {
     }
     return featureKey;
   };
-  const renderFeatureIcon = (featureKey) => {
+  const renderFeatureIcon = (featureKey, unselectable = false) => {
     if (!FEATURES[featureKey] || !FEATURES[featureKey].iconSvg) { return null; }
     const { iconSvg } = FEATURES[featureKey];
-    return <img alt={getFeatureName(featureKey)} src={iconSvg} className={classes.featureIcon} />;
+    const style = unselectable ? { filter: UNSELECTABLE_MARKER_FILTER } : {};
+    return (
+      <img
+        src={iconSvg}
+        alt={getFeatureName(featureKey)}
+        className={classes.featureIcon}
+        style={style}
+      />
+    );
   };
 
   const renderNumberString = (str = '--', ariaLabel = null) => (
@@ -241,7 +278,20 @@ const SiteMapTable = () => {
       }
     });
   });
-  const rows = calculateLocationsInMap(locations, state.map.bounds).map(key => locations[key]);
+  let initialRows = calculateLocationsInMap(locations, state.map.bounds);
+  if (selectionActive && selectableItems && hideUnselectable) {
+    initialRows = initialRows.filter(item => selectableItems.has(item));
+  }
+  const rows = initialRows.map(key => locations[key]);
+  if (selectionActive) {
+    rows.forEach((row, idx) => {
+      let selected = false;
+      if (focus === FEATURE_TYPES.SITES) { selected = selection.has(row.siteCode); }
+      // Implement locations preselection here
+      if (!rows[idx].tableData) { rows[idx].tableData = {}; }
+      rows[idx].tableData.checked = selected;
+    });
+  }
 
   /**
      Unique sites, domains, and states off of rows
@@ -278,10 +328,11 @@ const SiteMapTable = () => {
         const site = getSite(row);
         if (!site) { return null; }
         const featureKey = `${site.terrain.toUpperCase()}_${site.type.toUpperCase()}_SITES`;
+        const unselectable = selectionActive && !rowIsSelectable(row);
         return (
           <div>
             <div className={classes.siteName}>
-              {renderFeatureIcon(featureKey)}
+              {renderFeatureIcon(featureKey, unselectable)}
               <span>{`${site.description} (${site.siteCode})`}</span>
             </div>
             <div className={classes.startFlex} style={{ marginLeft: Theme.spacing(-0.75) }}>
@@ -440,17 +491,6 @@ const SiteMapTable = () => {
           </div>
         );
       },
-    },
-    selected: {
-      field: 'selected',
-      title: '',
-      render: row => (
-        <Checkbox
-          checked={rowIsSelected(row)}
-          onChange={selectRow}
-          color="secondary"
-        />
-      ),
     },
     latitude: {
       field: 'latitude',
@@ -652,7 +692,6 @@ const SiteMapTable = () => {
       commonColumns.state,
     ];
   }
-  if (selectionActive) { columns.unshift(commonColumns.selected); }
 
   const components = {
     Container: Box,
@@ -688,7 +727,7 @@ const SiteMapTable = () => {
         columns={columns}
         data={rows}
         localization={localization}
-        title={`${ucWord(focus)} in current view`}
+        title={null}
         options={{
           padding: 'dense',
           filtering: true,
@@ -699,6 +738,31 @@ const SiteMapTable = () => {
             backgroundColor: Theme.palette.grey[50],
           },
           maxBodyHeight: `${maxBodyHeight || MIN_TABLE_MAX_BODY_HEIGHT}px`,
+          rowStyle: (row) => {
+            if (selectionActive) {
+              if (!rowIsSelectable(row)) {
+                return { opacity: 0.65 };
+              }
+              if (rowIsSelected(row)) {
+                return { backgroundColor: COLORS.LIGHT_BLUE[50] };
+              }
+            }
+            return {};
+          },
+          selection: selectionActive,
+          selectionProps: !selectionActive ? null : row => ({
+            style: { margin: Theme.spacing(0, 0.5) },
+            disabled: !rowIsSelectable(row),
+          }),
+        }}
+        onSelectionChange={!selectionActive ? null : (newRows) => {
+          const action = { type: 'updateSitesSelection', selection: new Set() };
+          newRows.filter(row => row.tableData.checked).forEach((row) => {
+            if (focus === FEATURE_TYPES.SITES) {
+              action.selection.add(row.siteCode);
+            }
+          });
+          dispatch(action);
         }}
       />
     </div>

@@ -939,6 +939,20 @@ const reducer = (state, action) => {
       calcSelection();
       calcStatus();
       return newState;
+    case 'updateSelectedSites':
+      if (!action.siteCodes.size) { return state; }
+      // Remove any sites that are no longer in the selected set
+      newState.selection.sites = newState.selection.sites
+        .filter(site => action.siteCodes.has(site.siteCode));
+      // Add any new sites from the action
+      action.siteCodes.forEach((siteCode) => {
+        if (!state.product.sites[siteCode]) { return; }
+        if (newState.selection.sites.some(site => site.siteCode === siteCode)) { return; }
+        newState.selection.sites.push({ siteCode, positions: [] });
+      });
+      calcSelection();
+      calcStatus();
+      return newState;
     case 'selectRemoveSite':
       if (state.selection.sites.length < 2) { return state; }
       if (!state.selection.sites.some(site => site.siteCode === action.siteCode)) { return state; }

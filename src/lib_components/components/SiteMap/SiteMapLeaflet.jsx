@@ -1,5 +1,10 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useRef, useEffect } from 'react';
+import React, {
+  useRef,
+  useEffect,
+  useCallback,
+  useLayoutEffect,
+} from 'react';
 import ReactDOMServer from 'react-dom/server';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -31,6 +36,7 @@ import {
   MAP_ZOOM_RANGE,
   FEATURES,
   FETCH_STATUS,
+  UNSELECTABLE_MARKER_FILTER,
   deriveFullObservatoryZoomLevel,
 } from './SiteMapUtils';
 
@@ -44,6 +50,9 @@ const useStyles = makeStyles(theme => ({
     '& div.leaflet-control-layers': {
       borderRadius: '2px',
       boxShadow: 'unset',
+      margin: '0px',
+      left: '8px',
+      top: '8px',
       border: `1px solid ${Theme.colors.LIGHT_BLUE[500]}`,
       '&:hover, &:active': {
         borderColor: Theme.colors.LIGHT_BLUE[400],
@@ -52,7 +61,14 @@ const useStyles = makeStyles(theme => ({
     '& div.leaflet-control-zoom': {
       border: 'none',
     },
+    '& div.leaflet-top.leaflet-right': {
+      right: 'unset !important',
+      left: '0px',
+    },
     '& div.leaflet-bar': {
+      top: '54px',
+      left: '8px',
+      margin: '0px',
       borderRadius: '2px',
       boxShadow: 'unset',
       '& a': {
@@ -93,6 +109,11 @@ const useStyles = makeStyles(theme => ({
       cursor: 'pointer',
     },
   },
+  mapFullscreen: {
+    '& div.leaflet-control-attribution': {
+      marginRight: '0px',
+    },
+  },
   attribution: {
     color: theme.palette.secondary.main,
     fontSize: '11.5px',
@@ -113,14 +134,15 @@ const useStyles = makeStyles(theme => ({
     zIndex: 900,
     position: 'absolute',
     top: theme.spacing(1.5),
-    right: theme.spacing(7),
+    left: theme.spacing(7),
   },
   observatoryButton: {
     backgroundColor: '#fff',
     position: 'absolute',
     zIndex: 999,
-    top: '72px',
-    left: '10px',
+    margin: '0px',
+    top: '114px',
+    left: '8px',
     width: '26px',
     height: '26px',
     padding: 'unset',
@@ -192,19 +214,44 @@ const SiteMapLeaflet = () => {
   }, [state.map.bounds, dispatch]);
 
   /**
-     Render - Zoom to Observatory Button
+    Effect
+    Visually distinguish unselectable markers in the marker pane while also changing the draw order
+    of marker icons to put unselectable ones behind selectable ones.
   */
-  const renderShowFullObservatoryButton = () => (
-    <Tooltip placement="right" title="Show the full NEON Observatory">
-      <IconButton
-        type="button"
-        className={classes.observatoryButton}
-        onClick={() => { dispatch({ type: 'showFullObservatory', mapRef }); }}
-      >
-        <ObservatoryIcon fontSize="small" />
-      </IconButton>
-    </Tooltip>
-  );
+  const ghostUnselectables = useCallback(() => {
+    if (
+      !mapRef.current || !mapRef.current.leafletElement
+        || !mapRef.current.leafletElement._panes || !mapRef.current.leafletElement._layers
+        || !state.selection.active || !state.selection.validSet
+    ) { return; }
+    const { markerPane } = mapRef.current.leafletElement._panes;
+    if (markerPane && markerPane.children && markerPane.children.length) {
+      // Unselectables: apply CSS filters to appear ghosted
+      [...markerPane.children]
+        .filter(marker => !state.selection.validSet.has(marker.title))
+        .forEach((marker) => {
+          // eslint-disable-next-line no-param-reassign
+          marker.style.filter = UNSELECTABLE_MARKER_FILTER;
+        });
+      // Selecatbles: Uniformly bump the zIndexOffset to put them all on top
+      state.selection.validSet.forEach((item) => {
+        const layerIdx = Object.keys(mapRef.current.leafletElement._layers).find(k => (
+          mapRef.current.leafletElement._layers[k].options
+            && mapRef.current.leafletElement._layers[k].options.title === item
+        ));
+        if (layerIdx !== -1) {
+          const zIndex = (mapRef.current.leafletElement._layers[layerIdx] || {})._zIndex || 0;
+          mapRef.current.leafletElement._layers[layerIdx].setZIndexOffset(zIndex + 1000);
+        }
+      });
+    }
+  });
+  useLayoutEffect(ghostUnselectables, [mapRef, state.selection.hideUnselectable]);
+  // Fire ghostUnselectables with a 0-length setTimeout when changing the view to allow the newly
+  // rendered map to complete one render cycle first.
+  useLayoutEffect(() => {
+    window.setTimeout(ghostUnselectables, 0);
+  }, [state.map.bounds, state.view.current]);
 
   /**
     Effect
@@ -219,7 +266,89 @@ const SiteMapLeaflet = () => {
     dispatch({ type: 'setViewInitialized' });
   }, [mapRef, state.view, dispatch]);
 
+  /**
+    Effect
+    Create masks for DOMAINS and/or STATES.
+    These features intentionally have extra-wide strokes. When combined with a mask it creates
+    the effect of stroke "only on the inside" so that strokes of adjacent domains/states never
+    overlap along shared borders. This is especially useful for visual differentiation of different
+    selection statuses for adjacent states/domains.
+  */
+  useLayoutEffect(() => {
+    // setTimeout of 0 to fire after map render cycle completes
+    window.setTimeout(() => {
+      // Only continue if the map is in a ready / fully rendered state.
+      if (
+        !mapRef || !mapRef.current || !mapRef.current.leafletElement
+          || !mapRef.current._ready || mapRef.current._updating
+          || !mapRef.current.leafletElement._panes
+          || !mapRef.current.leafletElement._panes.overlayPane
+          || !mapRef.current.leafletElement._panes.overlayPane.children.length
+          || mapRef.current.leafletElement._panes.overlayPane.children[0].nodeName !== 'svg'
+      ) { return; }
+      // Only continue if DOMAINS and/or STATES are showing
+      if (
+        !state.filters.features.visible[FEATURES.DOMAINS.KEY]
+          && !state.filters.features.visible[FEATURES.STATES.KEY]
+      ) { return; }
+      // Only continue if the overlay pane has child nodes (rendered feature data)
+      const svg = mapRef.current.leafletElement._panes.overlayPane.children[0];
+      if (!svg.children.length) { return; }
+      // Remove any existing <defs> node (it's only created by this effect, never by Leaflet)
+      if (svg.children[0].nodeName.toLowerCase() === 'defs') {
+        svg.removeChild(svg.children[0]);
+      }
+      // Only continue if there is one child node and it's a non-empty <g>
+      if (svg.children.length !== 1
+        || svg.children[0].nodeName.toLowerCase() !== 'g'
+        || !svg.children[0].children.length
+      ) { return; }
+      const paths = [...svg.children[0].children];
+      const svgNS = 'http://www.w3.org/2000/svg';
+      const defs = document.createElementNS(svgNS, 'defs');
+      let defCount = 0;
+      paths
+        .filter(path => path.attributes.class && path.attributes.class.value.includes('#mask'))
+        .forEach((path) => {
+          defCount += 1;
+          const baseId = path.attributes.class.value.split(' ')[0];
+          const defMaskId = baseId.replace('#', '');
+          // Create a new <mask> element
+          const defMask = document.createElementNS(svgNS, 'mask');
+          defMask.setAttributeNS(null, 'id', defMaskId);
+          // Create a new <path> element with the same coordinates and append it to the mask
+          const defPath = document.createElementNS(svgNS, 'path');
+          defPath.setAttributeNS(null, 'd', path.attributes.d.value);
+          defPath.setAttributeNS(null, 'fill', 'white');
+          defPath.setAttributeNS(null, 'stroke', 'rgba(255, 255, 255, 0.5)');
+          defPath.setAttributeNS(null, 'stroke-width', '1.5');
+          defMask.appendChild(defPath);
+          // Append the <mask> to <defs>
+          defs.appendChild(defMask);
+          // Set the mask-path attribute on the <path> in the overlay pane
+          path.setAttributeNS(null, 'mask', `url(${baseId})`);
+        });
+      if (defCount === 0) { return; }
+      svg.prepend(defs);
+    }, 0);
+  });
+
   if (!canRender) { return null; }
+
+  /**
+     Render - Zoom to Observatory Button
+  */
+  const renderShowFullObservatoryButton = () => (
+    <Tooltip placement="right" title="Show the full NEON Observatory">
+      <IconButton
+        type="button"
+        className={classes.observatoryButton}
+        onClick={() => { dispatch({ type: 'showFullObservatory', mapRef }); }}
+      >
+        <ObservatoryIcon fontSize="small" />
+      </IconButton>
+    </Tooltip>
+  );
 
   /**
      Render: Tile Layers
@@ -334,7 +463,7 @@ const SiteMapLeaflet = () => {
     <React.Fragment>
       <Map
         ref={mapRef}
-        className={classes.map}
+        className={state.fullscreen ? `${classes.map} ${classes.mapFullscreen}` : classes.map}
         style={{ paddingBottom: `${(state.aspectRatio.currentValue || 0.75) * 100}%` }}
         center={state.map.center}
         zoom={state.map.zoom}

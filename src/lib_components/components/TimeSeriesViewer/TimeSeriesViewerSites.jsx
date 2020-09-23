@@ -47,6 +47,7 @@ import SelectIcon from '@material-ui/icons/TouchApp';
 
 import Theme from '../Theme/Theme';
 import NeonContext from '../NeonContext/NeonContext';
+import SelectSitesButton from '../SelectSitesButton/SelectSitesButton';
 
 import iconCoreTerrestrialSVG from '../SiteMap/svg/icon-site-core-terrestrial.svg';
 import iconCoreAquaticSVG from '../SiteMap/svg/icon-site-core-aquatic.svg';
@@ -1062,26 +1063,28 @@ const SitesSelect = () => {
 
   return (
     <NoSsr>
-      <Select
-        isMulti
-        isSearchable
-        clearable={false}
-        classes={classes}
-        styles={selectStyles}
-        aria-label="Add Sites"
-        data-gtm="time-series-viewer.add-sites"
-        options={selectableSites}
-        components={SitesSelectComponents}
-        value={selectedSites}
-        controlShouldRenderValue={false}
-        filterOption={(option, searchText) => (
-          option.data.search.includes(searchText.toLowerCase())
-        )}
-        onChange={(value, change) => {
-          if (change.action !== 'select-option') { return; }
-          dispatch({ type: 'selectAddSite', siteCode: change.option.siteCode });
-        }}
-      />
+      <div style={{ flex: 1 }}>
+        <Select
+          isMulti
+          isSearchable
+          clearable={false}
+          classes={classes}
+          styles={selectStyles}
+          aria-label="Add Sites"
+          data-gtm="time-series-viewer.add-sites"
+          options={selectableSites}
+          components={SitesSelectComponents}
+          value={selectedSites}
+          controlShouldRenderValue={false}
+          filterOption={(option, searchText) => (
+            option.data.search.includes(searchText.toLowerCase())
+          )}
+          onChange={(value, change) => {
+            if (change.action !== 'select-option') { return; }
+            dispatch({ type: 'selectAddSite', siteCode: change.option.siteCode });
+          }}
+        />
+      </div>
     </NoSsr>
   );
 };
@@ -1091,7 +1094,7 @@ const SitesSelect = () => {
 */
 export default function TimeSeriesViewerSites(props) {
   const classes = useStyles(Theme);
-  const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
+  const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
 
   const [{ data: neonContextData }] = NeonContext.useNeonContextState();
   const { sites: allSites } = neonContextData;
@@ -1102,9 +1105,19 @@ export default function TimeSeriesViewerSites(props) {
     );
   }
 
+  const selectedItems = state.selection.sites.map(site => site.siteCode);
   return (
     <div className={classes.root}>
-      <SitesSelect />
+      <div style={{ width: '100%', display: 'flex', alignItems: 'center' }}>
+        <SitesSelect />
+        <SelectSitesButton
+          selectionLimit={[1, 5]}
+          selectedItems={selectedItems}
+          validItems={Object.keys(state.product.sites)}
+          buttonProps={{ style: { size: 'large', marginLeft: Theme.spacing(1.5) } }}
+          onSave={(newSites) => { dispatch({ type: 'updateSelectedSites', siteCodes: newSites }); }}
+        />
+      </div>
       <div className={classes.sitesContainer}>
         {state.selection.sites.map(site => (
           <SelectedSite

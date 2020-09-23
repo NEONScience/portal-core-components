@@ -14,14 +14,17 @@ declare namespace Provider {
         children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
         view: PropTypes.Requireable<string>;
         aspectRatio: PropTypes.Requireable<number>;
-        filterPosition: PropTypes.Requireable<string>;
+        fullscreen: PropTypes.Requireable<boolean>;
         unusableVerticalSpace: PropTypes.Requireable<number>;
         mapCenter: PropTypes.Requireable<(number | null | undefined)[]>;
         mapZoom: PropTypes.Requireable<number>;
         mapTileLayer: PropTypes.Requireable<string>;
         location: PropTypes.Requireable<string>;
         selection: PropTypes.Requireable<string>;
-        maxSelectable: PropTypes.Requireable<number>;
+        selectedItems: PropTypes.Requireable<(string | null | undefined)[]>;
+        validItems: PropTypes.Requireable<(string | null | undefined)[]>;
+        selectionLimit: (props: any, propName: any) => Error | null;
+        onSelectionChange: PropTypes.Requireable<(...args: any[]) => any>;
         search: PropTypes.Requireable<string>;
         features: PropTypes.Requireable<(string | null | undefined)[]>;
     };
@@ -73,7 +76,14 @@ declare function useSiteMapContext(): any[] | {
     };
     selection: {
         active: null;
-        maxSelectable: number;
+        limit: null;
+        valid: boolean;
+        set: Set<any>;
+        validSet: null;
+        hideUnselectable: boolean;
+        showSummary: boolean;
+        changed: boolean;
+        onChange: () => void;
         derived: {
             [x: number]: {};
         };
@@ -87,7 +97,6 @@ declare function useSiteMapContext(): any[] | {
     };
     sites: {};
     filters: {
-        position: null;
         search: null;
         features: {
             open: boolean;
@@ -98,6 +107,7 @@ declare function useSiteMapContext(): any[] | {
             collapsed: Set<any>;
         };
     };
+    fullscreen: boolean;
 };
 import { SORT_DIRECTIONS } from "./SiteMapUtils";
 import { VIEWS } from "./SiteMapUtils";

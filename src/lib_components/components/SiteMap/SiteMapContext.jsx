@@ -30,6 +30,7 @@ import {
   FETCH_STATUS,
   FEATURE_TYPES,
   FEATURE_DATA_SOURCES,
+  SELECTION_PORTIONS,
   SELECTABLE_FEATURE_TYPES,
   SITE_LOCATION_HIERARCHIES_MIN_ZOOM,
   MAP_ZOOM_RANGE,
@@ -58,19 +59,25 @@ const deriveBoundarySelections = (state) => {
     if (!state.neonContextHydrated || !state.featureData[FEATURE_TYPES.BOUNDARIES][featureKey]) {
       return {};
     }
-    const selectedBoundarys = {};
+    const { validSet } = state.selection;
+    const selectedBoundaries = {};
     Object.keys(state.featureData[FEATURE_TYPES.BOUNDARIES][featureKey]).forEach((boundaryCode) => {
       const boundarySitesSet = (
         state.featureData[FEATURE_TYPES.BOUNDARIES][featureKey][boundaryCode].sites || new Set()
       );
-      const intersection = [...boundarySitesSet]
-        .filter(x => state.selection[SELECTABLE_FEATURE_TYPES.SITES].has(x));
+      const selectableSites = !validSet
+        ? boundarySitesSet
+        : new Set([...boundarySitesSet].filter(siteCode => validSet.has(siteCode)));
+      const intersection = [...selectableSites]
+        .filter(x => state.selection.set.has(x));
       if (!intersection.length) { return; }
-      selectedBoundarys[boundaryCode] = (
-        intersection.length === boundarySitesSet.size ? 'total' : 'partial'
+      selectedBoundaries[boundaryCode] = (
+        intersection.length === selectableSites.size
+          ? SELECTION_PORTIONS.TOTAL
+          : SELECTION_PORTIONS.PARTIAL
       );
     });
-    return selectedBoundarys;
+    return selectedBoundaries;
   };
   return {
     ...state,
@@ -80,6 +87,37 @@ const deriveBoundarySelections = (state) => {
         [FEATURES.STATES.KEY]: derive(FEATURES.STATES.KEY),
         [FEATURES.DOMAINS.KEY]: derive(FEATURES.DOMAINS.KEY),
       },
+    },
+  };
+};
+
+// Returns a boolean indicating whether an item is selectable
+const isSelectable = (item, validSet = null) => {
+  if (!validSet) { return true; }
+  return validSet.has(item);
+};
+// Filters a set down to only selectable items
+const getSelectableSet = (set, validSet = null) => {
+  if (!validSet) { return set; }
+  return new Set([...set].filter(item => isSelectable(item, validSet)));
+};
+
+// Set the valid flag for selection based on current limits. Empty selections are always invalid.
+const validateSelection = (state) => {
+  let valid = false;
+  const { limit, set, validSet } = state.selection;
+  if (set.size > 0 && (!validSet || [...set].every(item => validSet.has(item)))) {
+    valid = true;
+    if (
+      (Number.isFinite(limit) && set.size !== limit)
+        || (Array.isArray(limit) && (set.size < limit[0] || set.size > limit[1]))
+    ) { valid = false; }
+  }
+  return {
+    ...state,
+    selection: {
+      ...state.selection,
+      valid,
     },
   };
 };
@@ -280,6 +318,7 @@ const calculateFeatureDataFetches = (state) => {
 const reducer = (state, action) => {
   let setMethod = null;
   const newState = { ...state };
+  const { validSet } = state.selection;
   // Increment the completed count for overall fetch and, if completed and expected are now equal,
   // reset both (so that subsequent batches of fetches can give an accurate progress metric).
   const completeOverallFetch = () => {
@@ -686,37 +725,82 @@ const reducer = (state, action) => {
       return newState;
 
     // Selection
+    case 'setHideUnselectable':
+      newState.selection.hideUnselectable = !!action.hideUnselectable;
+      return newState;
+
+    case 'toggleSelectionSummary':
+      newState.selection.showSummary = !!action.showSummary;
+      return newState;
+
+    case 'selectionOnChangeTriggered':
+      newState.selection.changed = false;
+      return newState;
+
+    case 'updateSitesSelection':
+      if (
+        !action.selection || !action.selection.constructor
+          || action.selection.constructor.name !== 'Set'
+      ) { return state; }
+      newState.selection.set = getSelectableSet(action.selection, validSet);
+      newState.selection.changed = true;
+      return deriveBoundarySelections(validateSelection(newState));
+
     case 'toggleSiteSelected':
-      if (newState.selection[SELECTABLE_FEATURE_TYPES.SITES].has(action.site)) {
-        newState.selection[SELECTABLE_FEATURE_TYPES.SITES].delete(action.site);
-      } else {
-        newState.selection[SELECTABLE_FEATURE_TYPES.SITES].add(action.site);
+      // Special case: when the selectionLimit is 1 always maintain a selection size of 1
+      if (newState.selection.limit === 1) {
+        if (newState.selection.set.has(action.site) && newState.selection.set.size > 1) {
+          newState.selection.set.delete(action.site);
+          newState.selection.changed = true;
+        } else if (
+          !newState.selection.set.has(action.site)
+            && isSelectable(action.site, validSet)
+        ) {
+          newState.selection.set = new Set([action.site]);
+          newState.selection.changed = true;
+        }
+      } else if (newState.selection.set.has(action.site)) {
+        newState.selection.set.delete(action.site);
+        newState.selection.changed = true;
+      } else if (isSelectable(action.site, validSet)) {
+        newState.selection.set.add(action.site);
+        newState.selection.changed = true;
       }
-      return deriveBoundarySelections(newState);
+      return deriveBoundarySelections(validateSelection(newState));
 
     case 'toggleStateSelected':
       if (!action.stateCode) { return state; }
+      /* eslint-disable max-len */
       setMethod = (
-        state.selection.derived[FEATURES.STATES.KEY][action.stateCode] === 'total'
+        state.selection.derived[FEATURES.STATES.KEY][action.stateCode] === SELECTION_PORTIONS.TOTAL
           ? 'delete' : 'add'
       );
-      newState.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.STATES.KEY][action.stateCode].sites
-        .forEach((siteCode) => {
-          newState.selection[SELECTABLE_FEATURE_TYPES.SITES][setMethod](siteCode);
-        });
-      return deriveBoundarySelections(newState);
+      getSelectableSet(
+        newState.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.STATES.KEY][action.stateCode].sites,
+        validSet,
+      ).forEach((siteCode) => {
+        newState.selection.set[setMethod](siteCode);
+      });
+      newState.selection.changed = true;
+      return deriveBoundarySelections(validateSelection(newState));
+      /* eslint-enable max-len */
 
     case 'toggleDomainSelected':
       if (!action.domainCode) { return state; }
+      /* eslint-disable max-len */
       setMethod = (
-        state.selection.derived[FEATURES.DOMAINS.KEY][action.domainCode] === 'total'
+        state.selection.derived[FEATURES.DOMAINS.KEY][action.domainCode] === SELECTION_PORTIONS.TOTAL
           ? 'delete' : 'add'
       );
-      newState.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.DOMAINS.KEY][action.domainCode].sites
-        .forEach((siteCode) => {
-          newState.selection[SELECTABLE_FEATURE_TYPES.SITES][setMethod](siteCode);
-        });
-      return deriveBoundarySelections(newState);
+      getSelectableSet(
+        newState.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.DOMAINS.KEY][action.domainCode].sites,
+        validSet,
+      ).forEach((siteCode) => {
+        newState.selection.set[setMethod](siteCode);
+      });
+      newState.selection.changed = true;
+      return deriveBoundarySelections(validateSelection(newState));
+      /* eslint-enable max-len */
 
     // Default
     default:
@@ -743,13 +827,16 @@ const Provider = (props) => {
   const {
     view,
     aspectRatio,
-    filterPosition,
+    fullscreen,
     mapZoom,
     mapCenter,
     mapTileLayer,
     location: locationProp,
     selection,
-    maxSelectable,
+    validItems,
+    selectedItems,
+    selectionLimit,
+    onSelectionChange,
     children,
   } = props;
 
@@ -767,7 +854,7 @@ const Provider = (props) => {
   initialState.view.current = (
     Object.keys(VIEWS).includes(view.toUpperCase()) ? view.toUpperCase() : VIEWS.MAP
   );
-  initialState.filters.position = filterPosition;
+  initialState.fullscreen = fullscreen;
   initialState.map = {
     ...initialState.map,
     zoom: initialMapZoom,
@@ -785,7 +872,14 @@ const Provider = (props) => {
   }
   if (Object.keys(SELECTABLE_FEATURE_TYPES).includes(selection)) {
     initialState.selection.active = selection;
-    initialState.selection.maxSelectable = maxSelectable;
+    initialState.selection.limit = selectionLimit;
+    initialState.selection.onChange = onSelectionChange;
+    initialState.selection.set = new Set(selectedItems);
+    if (Array.isArray(validItems)) {
+      initialState.selection.validSet = new Set(validItems);
+    }
+    initialState.selection.changed = true;
+    initialState = validateSelection(initialState);
   }
   if (neonContextIsFinal && !neonContextHasError) {
     initialState = hydrateNeonContextData(initialState, neonContextData);
@@ -805,33 +899,39 @@ const Provider = (props) => {
     if (!current || currentStatus !== FETCH_STATUS.AWAITING_CALL || !state.neonContextHydrated) {
       return;
     }
-    // If the location is a known Domain or State then pull from NeonContext
+    // If the location is a known Domain, State, or Site then pull from NeonContext
     const {
       [FEATURES.STATES.KEY]: statesData = {},
       [FEATURES.DOMAINS.KEY]: domainsData = {},
     } = state.featureData[FEATURE_TYPES.BOUNDARIES];
     if (Object.keys(statesData).includes(current)) {
       const { 0: latitude, 1: longitude } = statesData[current].center;
-      dispatch({
-        type: 'setFocusLocationFetchSucceeded',
-        data: { type: 'STATE', latitude, longitude },
-      });
+      window.setTimeout(() => {
+        dispatch({
+          type: 'setFocusLocationFetchSucceeded',
+          data: { type: 'STATE', latitude, longitude },
+        });
+      }, 0);
       return;
     }
     if (Object.keys(domainsData).includes(current)) {
       const { 0: latitude, 1: longitude } = domainsData[current].center;
-      dispatch({
-        type: 'setFocusLocationFetchSucceeded',
-        data: { type: 'DOMAIN', latitude, longitude },
-      });
+      window.setTimeout(() => {
+        dispatch({
+          type: 'setFocusLocationFetchSucceeded',
+          data: { type: 'DOMAIN', latitude, longitude },
+        });
+      }, 0);
       return;
     }
     if (Object.keys(state.sites).includes(current)) {
       const { latitude, longitude } = state.sites[current];
-      dispatch({
-        type: 'setFocusLocationFetchSucceeded',
-        data: { type: 'SITE', latitude, longitude },
-      });
+      window.setTimeout(() => {
+        dispatch({
+          type: 'setFocusLocationFetchSucceeded',
+          data: { type: 'SITE', latitude, longitude },
+        });
+      }, 0);
       return;
     }
     // Trigger focus location fetch
@@ -1016,6 +1116,16 @@ const Provider = (props) => {
 
     dispatch({ type: 'awaitingFeatureDataFetchesTriggered' });
   }, [canFetchFeatureData, state.featureDataFetchesHasAwaiting, state.featureDataFetches]);
+
+  /**
+     Effect - trigger onChange for selection whenever selection has changed
+  */
+  useEffect(() => {
+    if (state.selection.changed) {
+      state.selection.onChange(state.selection);
+    }
+    dispatch({ type: 'selectionOnChangeTriggered' });
+  }, [state.selection, state.selection.changed]);
 
   /**
      Render

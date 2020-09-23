@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 
+import cloneDeep from 'lodash/cloneDeep';
+
 import L from 'leaflet';
 
 import { COLORS } from '../Theme/Theme';
@@ -117,6 +119,9 @@ export const SELECTION_PORTIONS = { PARTIAL: 'PARTIAL', TOTAL: 'TOTAL' };
 
 // For consistency in denoting the selection status of any selectable thing
 export const SELECTION_STATUS = { SELECTED: 'SELECTED', UNSELECTED: 'UNSELECTED' };
+
+// For consistency in visually fading unselectable marker icons
+export const UNSELECTABLE_MARKER_FILTER = 'sepia(0.8) contrast(0.3) brightness(1.35)';
 
 // For consistency in denoting the highlight status of a marker
 export const HIGHLIGHT_STATUS = { NONE: 'NONE', HIGHLIGHT: 'HIGHLIGHT', SELECT: 'SELECT' };
@@ -268,7 +273,7 @@ export const FEATURES = {
     dataSource: FEATURE_DATA_SOURCES.NEON_CONTEXT,
     primaryIdOnly: true,
     featureShape: 'Polygon',
-    style: { color: '#a067e4' },
+    style: { color: '#885eba', weight: 8 },
   },
   STATES: {
     name: 'US States',
@@ -278,7 +283,7 @@ export const FEATURES = {
     dataSource: FEATURE_DATA_SOURCES.NEON_CONTEXT,
     primaryIdOnly: true,
     featureShape: 'Polygon',
-    style: { color: '#3cdd84' },
+    style: { color: '#53ac7b', weight: 8 },
   },
   // Various Boundary Types
   FLIGHT_BOX_BOUNDARIES: {
@@ -1076,7 +1081,14 @@ export const DEFAULT_STATE = {
   },
   selection: {
     active: null, // Set to any key in SELECTABLE_FEATURE_TYPES
-    maxSelectable: 0, // 0 is interpreted as unlimited, all other values are discrete limits
+    limit: null, // null (unlimited), a non-zero positive integer, or an integer range
+    valid: false, // whether the current selection is non-emtpy and valid per the limit
+    set: new Set(), // set of selected values
+    validSet: null, // optional subset of all values in the selectable feature to be selectable
+    hideUnselectable: false, // whether any unselectable elements in the set are rendered
+    showSummary: false, // whether to show the selection summary element
+    changed: false, // whether selection has changed warranting an onChange event
+    onChange: () => {}, // Function that fires whenever state.selection changes
     derived: { // Derived feature-specific mappings of selectable item IDs to SELECTION_PORTIONS
       [FEATURES.STATES.KEY]: {}, // { stateCode: SELECTION_PORTIONS.KEY }
       [FEATURES.DOMAINS.KEY]: {}, // { domainCode: SELECTION_PORTIONS.KEY }
@@ -1095,7 +1107,6 @@ export const DEFAULT_STATE = {
   ),
   sites: {}, // Sites data is split into 4 features making it hard to look up, so extra refs here
   filters: {
-    position: null,
     search: null,
     features: {
       open: false, // whether the features pane is open/visible
@@ -1106,6 +1117,7 @@ export const DEFAULT_STATE = {
       collapsed: new Set(),
     },
   },
+  fullscreen: false,
 };
 
 // Initialize featureData and featureDataFetches objects for all features that have a dataSource
@@ -1137,11 +1149,6 @@ Object.keys(FEATURES)
 // Location Hierarchies (REST_LOCATIONS_API, not in the FEATURES structure since it doesn't render)
 // eslint-disable-next-line max-len
 DEFAULT_STATE.featureDataFetches[FEATURE_DATA_SOURCES.REST_LOCATIONS_API][FEATURE_TYPES.SITE_LOCATION_HIERARCHIES] = {};
-
-// Initialize all selectable features in selection state
-Object.keys(SELECTABLE_FEATURE_TYPES).forEach((selection) => {
-  DEFAULT_STATE.selection[selection] = new Set();
-});
 
 // Initialize feature availability
 const availabilityState = calculateFeatureAvailability(DEFAULT_STATE);
@@ -1208,11 +1215,39 @@ export const hydrateNeonContextData = (state, neonContextData) => {
 /**
    PropTypes and defaultProps
 */
+const SelectionLimitPropType = (props, propName) => {
+  const { [propName]: prop } = props;
+  if (typeof prop === 'number') {
+    if (!Number.isInteger(prop) || prop < 1) {
+      return new Error(
+        `When setting ${propName} as a number it must be an integer greater than 0`,
+      );
+    }
+    return null;
+  }
+  if (Array.isArray(prop)) {
+    if (prop.length !== 2 || !prop.every(x => Number.isInteger(x) && x > 0) || prop[0] >= prop[1]) {
+      return new Error(
+        // eslint-disable-next-line max-len
+        `When setting ${propName} as an array it must contain exactly two distinct non-zero positive integers in ascending order (e.g. [2, 5])`,
+      );
+    }
+    return null;
+  }
+  if (prop !== null && typeof prop !== 'undefined') {
+    return new Error(
+      // eslint-disable-next-line max-len
+      `${propName} must be null, a positive non-zero integer, or an array of two ascending non-zero positive integers.`,
+    );
+  }
+  return null;
+};
+
 export const SITE_MAP_PROP_TYPES = {
   // Top-level Props
   view: PropTypes.oneOf(Object.keys(VIEWS).map(k => k.toLowerCase())),
   aspectRatio: PropTypes.number,
-  filterPosition: PropTypes.oneOf(['top', 'bottom']),
+  fullscreen: PropTypes.bool,
   unusableVerticalSpace: PropTypes.number,
   // Map Props
   mapCenter: PropTypes.arrayOf(PropTypes.number),
@@ -1222,7 +1257,10 @@ export const SITE_MAP_PROP_TYPES = {
   location: PropTypes.string,
   // Selection Props
   selection: PropTypes.oneOf(Object.keys(SELECTABLE_FEATURE_TYPES)),
-  maxSelectable: PropTypes.number,
+  selectedItems: PropTypes.arrayOf(PropTypes.string),
+  validItems: PropTypes.arrayOf(PropTypes.string),
+  selectionLimit: SelectionLimitPropType,
+  onSelectionChange: PropTypes.func,
   // Filter Props
   search: PropTypes.string,
   features: PropTypes.arrayOf(PropTypes.oneOf(Object.keys(FEATURES))),
@@ -1232,7 +1270,7 @@ export const SITE_MAP_DEFAULT_PROPS = {
   // Top-level Props
   view: VIEWS.MAP.toLowerCase(),
   aspectRatio: null,
-  filterPosition: 'bottom',
+  fullscreen: false,
   unusableVerticalSpace: 0,
   // Map Props
   mapCenter: OBSERVATORY_CENTER,
@@ -1242,7 +1280,10 @@ export const SITE_MAP_DEFAULT_PROPS = {
   location: null,
   // Selection Props
   selection: null,
-  maxSelectable: null,
+  selectedItems: [],
+  validItems: [],
+  selectionLimit: null,
+  onSelectionChange: () => {},
   // Filter Props
   search: null,
   features: null,
@@ -1272,18 +1313,21 @@ const getZoomedIcon = (
   const iconScale = featureHasIcon ? feature.iconScale || 1 : 1;
   const minZoom = feature.minZoom || (FEATURES[feature.parent] || {}).minZoom || MAP_ZOOM_RANGE[0];
   const maxZoom = feature.maxZoom || (FEATURES[feature.parent] || {}).maxZoom || MAP_ZOOM_RANGE[1];
-  const { popupAnchor, shadow } = LOCATION_ICON_SVG_SHAPES[iconShape];
-  let { iconSize, iconAnchor } = LOCATION_ICON_SVG_SHAPES[iconShape];
+  // Use a deep clone of the base SVG shape object so that we can modify destructured data
+  // for variants like "selected" icons
+  const baseSvgShape = cloneDeep(LOCATION_ICON_SVG_SHAPES[iconShape]);
+  const { popupAnchor, shadow } = baseSvgShape;
+  let { iconSize, iconAnchor } = baseSvgShape;
   const { svg: shadowUrl } = shadow[highlight] || {};
   let { size: shadowSize, anchor: shadowAnchor } = shadow[highlight] || {};
   // Adjust icon, size, and anchor if selected (and a different "selected" icon is available)
   if (featureHasIcon && selection === SELECTION_STATUS.SELECTED && feature.iconSelectedSvg) {
     iconUrl = feature.iconSelectedSvg;
     iconSize = iconSize.map(d => d + SELECTED_ICON_OFFSET);
-    iconAnchor = iconSize.map(d => d + (SELECTED_ICON_OFFSET / 2));
+    iconAnchor = iconAnchor.map(d => d + (SELECTED_ICON_OFFSET / 2));
     shadowSize = shadowUrl ? shadowSize.map(d => d + SELECTED_ICON_OFFSET) : null;
-    shadowAnchor = shadowUrl ? shadowSize.map(d => d + (SELECTED_ICON_OFFSET / 2)) : null;
-    popupAnchor[1] += (SELECTED_ICON_OFFSET / 2);
+    shadowAnchor = shadowUrl ? shadowAnchor.map(d => d + (SELECTED_ICON_OFFSET / 2)) : null;
+    popupAnchor[1] -= (SELECTED_ICON_OFFSET / 2);
   }
   // Determine Icon Scale
   // Normalize the scale to a range of at least 0.2 to 0.5 (but as big as 0.2 to 1) based on
@@ -1323,7 +1367,7 @@ export const getZoomedIcons = (zoom) => {
       Object.keys(SELECTION_STATUS).forEach((selection) => {
         if (
           selection === SELECTION_STATUS.SELECTED
-            && !Object.keys(SELECTABLE_FEATURE_TYPES).includes(key)
+            && !Object.keys(SELECTABLE_FEATURE_TYPES).includes(FEATURES[key].type)
         ) { return; }
         icons[key][selection] = {};
         Object.keys(HIGHLIGHT_STATUS).forEach((highlight) => {
@@ -1494,7 +1538,8 @@ export const deriveFullObservatoryZoomLevel = (mapRef) => {
   const FALLBACK_ZOOM = 2;
   if (!mapRef.current) { return FALLBACK_ZOOM; }
   const container = mapRef.current.container.parentElement;
-  const minorDim = Math.min(container.clientWidth / 136, container.clientHeight / 128);
+  const divisor = (23 * 8);
+  const minorDim = Math.min(container.clientWidth / divisor, container.clientHeight / divisor);
   const derivedZoom = [1, 2, 4, 6, 11].findIndex(m => m > minorDim);
   return derivedZoom === -1 ? FALLBACK_ZOOM : derivedZoom;
 };

@@ -38,6 +38,7 @@ export namespace SELECTION_STATUS {
     export const SELECTED: string;
     export const UNSELECTED: string;
 }
+export const UNSELECTABLE_MARKER_FILTER: "sepia(0.8) contrast(0.3) brightness(1.35)";
 export namespace HIGHLIGHT_STATUS {
     export const NONE: string;
     export const HIGHLIGHT: string;
@@ -153,6 +154,7 @@ export namespace FEATURES {
         featureShape: string;
         style: {
             color: string;
+            weight: number;
         };
     };
     export const STATES: {
@@ -165,6 +167,7 @@ export namespace FEATURES {
         featureShape: string;
         style: {
             color: string;
+            weight: number;
         };
     };
     export const FLIGHT_BOX_BOUNDARIES: {
@@ -867,14 +870,17 @@ export function hydrateNeonContextData(state: any, neonContextData: any): any;
 export namespace SITE_MAP_PROP_TYPES {
     export const view: PropTypes.Requireable<string>;
     export const aspectRatio: PropTypes.Requireable<number>;
-    export const filterPosition: PropTypes.Requireable<string>;
+    export const fullscreen: PropTypes.Requireable<boolean>;
     export const unusableVerticalSpace: PropTypes.Requireable<number>;
     export const mapCenter: PropTypes.Requireable<(number | null | undefined)[]>;
     export const mapZoom: PropTypes.Requireable<number>;
     export const mapTileLayer: PropTypes.Requireable<string>;
     export const location: PropTypes.Requireable<string>;
     export const selection: PropTypes.Requireable<string>;
-    export const maxSelectable: PropTypes.Requireable<number>;
+    export const selectedItems: PropTypes.Requireable<(string | null | undefined)[]>;
+    export const validItems: PropTypes.Requireable<(string | null | undefined)[]>;
+    export { SelectionLimitPropType as selectionLimit };
+    export const onSelectionChange: PropTypes.Requireable<(...args: any[]) => any>;
     export const search: PropTypes.Requireable<string>;
     export const features: PropTypes.Requireable<(string | null | undefined)[]>;
 }
@@ -883,8 +889,8 @@ export namespace SITE_MAP_DEFAULT_PROPS {
     export { view_1 as view };
     const aspectRatio_1: null;
     export { aspectRatio_1 as aspectRatio };
-    const filterPosition_1: string;
-    export { filterPosition_1 as filterPosition };
+    const fullscreen_1: boolean;
+    export { fullscreen_1 as fullscreen };
     const unusableVerticalSpace_1: number;
     export { unusableVerticalSpace_1 as unusableVerticalSpace };
     export { OBSERVATORY_CENTER as mapCenter };
@@ -896,8 +902,13 @@ export namespace SITE_MAP_DEFAULT_PROPS {
     export { location_1 as location };
     const selection_1: null;
     export { selection_1 as selection };
-    const maxSelectable_1: null;
-    export { maxSelectable_1 as maxSelectable };
+    const selectedItems_1: never[];
+    export { selectedItems_1 as selectedItems };
+    const validItems_1: never[];
+    export { validItems_1 as validItems };
+    export const selectionLimit: null;
+    export function onSelectionChange_1(): void;
+    export { onSelectionChange_1 as onSelectionChange };
     const search_1: null;
     export { search_1 as search };
     const features_1: null;
@@ -918,4 +929,8 @@ export function deriveFullObservatoryZoomLevel(mapRef: any): number;
 declare const FEATURES_TO_MINZOOM_MAP: {};
 declare const MINZOOM_TO_FEATURES_MAP: {};
 import PropTypes from "prop-types";
+/**
+   PropTypes and defaultProps
+*/
+declare function SelectionLimitPropType(props: any, propName: any): Error | null;
 export {};
