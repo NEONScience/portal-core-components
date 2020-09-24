@@ -895,9 +895,10 @@ const Provider = (props) => {
      Effect - trigger focusLocation fetch or short circuit if found in NeonContext data
   */
   useEffect(() => {
+    const noop = () => {};
     const { current, fetch: { status: currentStatus } } = state.focusLocation;
     if (!current || currentStatus !== FETCH_STATUS.AWAITING_CALL || !state.neonContextHydrated) {
-      return;
+      return noop;
     }
     // If the location is a known Domain, State, or Site then pull from NeonContext
     const {
@@ -906,33 +907,33 @@ const Provider = (props) => {
     } = state.featureData[FEATURE_TYPES.BOUNDARIES];
     if (Object.keys(statesData).includes(current)) {
       const { 0: latitude, 1: longitude } = statesData[current].center;
-      window.setTimeout(() => {
+      const timeout = window.setTimeout(() => {
         dispatch({
           type: 'setFocusLocationFetchSucceeded',
           data: { type: 'STATE', latitude, longitude },
         });
       }, 0);
-      return;
+      return () => window.clearTimeout(timeout);
     }
     if (Object.keys(domainsData).includes(current)) {
       const { 0: latitude, 1: longitude } = domainsData[current].center;
-      window.setTimeout(() => {
+      const timeout = window.setTimeout(() => {
         dispatch({
           type: 'setFocusLocationFetchSucceeded',
           data: { type: 'DOMAIN', latitude, longitude },
         });
       }, 0);
-      return;
+      return () => window.clearTimeout(timeout);
     }
     if (Object.keys(state.sites).includes(current)) {
       const { latitude, longitude } = state.sites[current];
-      window.setTimeout(() => {
+      const timeout = window.setTimeout(() => {
         dispatch({
           type: 'setFocusLocationFetchSucceeded',
           data: { type: 'SITE', latitude, longitude },
         });
       }, 0);
-      return;
+      return () => window.clearTimeout(timeout);
     }
     // Trigger focus location fetch
     dispatch({ type: 'setFocusLocationFetchStarted' });
@@ -943,6 +944,7 @@ const Provider = (props) => {
       .catch((error) => {
         dispatch({ type: 'setFocusLocationFetchFailed', error });
       });
+    return noop;
   }, [
     state.sites,
     state.focusLocation,

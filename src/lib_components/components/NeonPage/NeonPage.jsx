@@ -271,6 +271,7 @@ const NeonPage = (props) => {
   const headerRef = useRef(null);
   const contentRef = useRef(null);
   const sidebarRef = useRef(null);
+  const sidebarLinksContainerRef = useRef(null);
   const belowMd = useMediaQuery(Theme.breakpoints.down('sm'));
 
   /**
@@ -287,8 +288,8 @@ const NeonPage = (props) => {
   const sidebarHashMap = !hasSidebarLinks ? {} : Object.fromEntries(
     sidebarLinks.map((link, idx) => [link.hash || '#', idx]),
   );
-  const initialCurrectSidebarHash = hasSidebarLinks ? sidebarLinks[0].hash || '#' : '#';
-  const [currentSidebarHash, setCurrentSidebarHash] = useState(initialCurrectSidebarHash);
+  const initialCurrentSidebarHash = hasSidebarLinks ? sidebarLinks[0].hash || '#' : '#';
+  const [currentSidebarHash, setCurrentSidebarHash] = useState(initialCurrentSidebarHash);
   const [hashInitialized, setHashInitialized] = useState(false);
   const [sidebarExpanded, setSidebarExpanded] = useState(false); // for small viewports only
 
@@ -302,29 +303,45 @@ const NeonPage = (props) => {
     return !anchor ? -1 : anchor.offsetTop + headerOffset - stickyOffset - Theme.spacing(5);
   }, [hasSidebarLinks, sidebarLinksAsStandaloneChildren, belowMd]);
 
-  // For sidebarLinks pages, on successful load, if hash is present then update the current
+  /**
+     Effect - For sidebarLinks pages, on successful load, if hash is present then update the current
+  */
   useLayoutEffect(() => {
     if (error || loading || !hasSidebarLinks) { return () => {}; }
+    const handleHashChange = () => {
+      const { hash } = document.location;
+      if (currentSidebarHash === hash) { return; }
+      setCurrentSidebarHash(hash);
+      // If standard sidebar mode (scroll to content) also perform the scroll offset here
+      if (!sidebarLinksAsStandaloneChildren) {
+        window.setTimeout(() => {
+          window.scrollTo(0, getSidebarLinkScrollPosition(hash));
+        }, 0);
+      }
+    };
     // Handle URL-defined hash on initial load
     if (document.location.hash && !hashInitialized) {
       // Ensure the document hash maps to a defined hash or '#' at all times
       if (!Object.keys(sidebarHashMap).includes(document.location.hash)) {
         document.location.hash = '#';
       }
-      const { hash } = document.location;
-      if (currentSidebarHash !== hash) {
-        setCurrentSidebarHash(hash);
-        // If standard sidebar mode (scroll to content) also perform the scroll offset here
-        if (!sidebarLinksAsStandaloneChildren) {
-          window.setTimeout(() => {
-            window.scrollTo(0, getSidebarLinkScrollPosition(hash));
-          }, 0);
-        }
-      }
+      handleHashChange();
       setHashInitialized(true);
     }
+    // Set max-height on sidebar links container when the sidebar is sticky so the links get
+    // a dedicated scrollbar instead of clipping
+    if (!sidebarUnsticky && hasSidebarLinks && sidebarLinksContainerRef.current) {
+      const maxHeight = window.innerHeight - sidebarLinksContainerRef.current.offsetTop - 104;
+      sidebarLinksContainerRef.current.style.maxHeight = `${maxHeight}px`;
+    }
+    // For sidebarLinksAsStandaloneChildren listen for hash changes to trigger a "redirect".
+    if (sidebarLinksAsStandaloneChildren) {
+      window.addEventListener('hashchange', handleHashChange);
+      return () => {
+        window.removeEventListener('hashchange', handleHashChange);
+      };
+    }
     // Set up event listener / handler for user-input scroll events for standard scrolling pages
-    if (sidebarLinksAsStandaloneChildren) { return () => {}; }
     const handleScroll = () => {
       const scrollBreaks = sidebarLinks.map(link => ({
         y: getSidebarLinkScrollPosition(link.hash || '#'),
@@ -349,6 +366,7 @@ const NeonPage = (props) => {
   }, [
     error,
     loading,
+    sidebarUnsticky,
     hasSidebarLinks,
     sidebarLinks,
     sidebarHashMap,
@@ -356,12 +374,13 @@ const NeonPage = (props) => {
     setHashInitialized,
     currentSidebarHash,
     setCurrentSidebarHash,
+    sidebarLinksContainerRef,
     getSidebarLinkScrollPosition,
     sidebarLinksAsStandaloneChildren,
   ]);
 
   /**
-     Drupal CSS Loading
+     Effect - Load Drupal CSS
   */
   const [drupalCssLoaded, setDrupalCssLoaded] = useState(false);
   useEffect(() => {
@@ -424,6 +443,9 @@ const NeonPage = (props) => {
     setNotifications(notifications.map(n => ({ ...n, dismissed: false })));
   };
 
+  /**
+     Effect - Fetch notifications
+  */
   useEffect(() => {
     if (fetchNotificationsStatus !== null) { return; }
     setFetchNotificationsStatus('fetching');
@@ -605,7 +627,10 @@ const NeonPage = (props) => {
     };
     const fullLinks = (
       <React.Fragment>
-        <div className={classes.sidebarLinksContainer}>
+        <div
+          ref={sidebarLinksContainerRef}
+          className={classes.sidebarLinksContainer}
+        >
           {sidebarLinks.map(link => renderLink(link))}
         </div>
         {belowMd ? null : (

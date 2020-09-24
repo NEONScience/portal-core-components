@@ -133,10 +133,15 @@ const sidebarLinks = [
 ];
 
 export default function App() {
+  let sidebarSubtitle = null;
+  if (process.env.REACT_APP_VERSION) {
+    sidebarSubtitle = `version ${process.env.REACT_APP_VERSION}`;
+  }
   return (
     <NeonRouter>
       <NeonPage
-        title="Portal Core Components"
+        title="NEON Data Portal Core Components"
+        sidebarSubtitle={sidebarSubtitle}
         sidebarLinks={sidebarLinks}
         sidebarLinksAsStandaloneChildren
         useCoreAuth
