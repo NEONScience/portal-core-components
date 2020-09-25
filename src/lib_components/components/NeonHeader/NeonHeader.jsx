@@ -1,4 +1,8 @@
-import React, { forwardRef, useState, useEffect } from 'react';
+import React, {
+  forwardRef,
+  useState,
+  useLayoutEffect,
+} from 'react';
 import PropTypes from 'prop-types';
 import HTMLReactParser from 'html-react-parser';
 
@@ -45,11 +49,13 @@ const useStyles = makeStyles(theme => ({
   coreAuthContainer: {
     padding: theme.spacing(1, 2),
     textAlign: 'right',
+    position: 'absolute',
+    zIndex: 10,
+    top: theme.spacing(0),
+    right: theme.spacing(0.5),
     [theme.breakpoints.down('md')]: {
-      position: 'absolute',
       top: theme.spacing(1),
       right: theme.spacing(9),
-      zIndex: 10,
     },
   },
 }));
@@ -64,32 +70,60 @@ const NeonHeader = forwardRef((props, headerRef) => {
   const belowLg = useMediaQuery(Theme.breakpoints.down('md'));
 
   const [{
-    isActive,
+    isActive: neonContextIsActive,
     fetches: { header: headerFetch },
     html: { header: headerHTML },
     auth,
   }] = NeonContext.useNeonContextState();
 
   const [headerJsLoaded, setHeaderJsLoaded] = useState(false);
+  const [headerRenderDelayed, setHeaderRenderDelayed] = useState(false);
 
   let renderMode = 'legacy';
-  if (!useCoreHeader && isActive) {
-    if (headerFetch.status === FETCH_STATUS.SUCCESS && headerHTML && drupalCssLoaded) {
-      renderMode = 'drupal';
-    }
-    if ([FETCH_STATUS.AWAITING_CALL, FETCH_STATUS.FETCHING].includes(headerFetch.status)) {
-      renderMode = 'loading';
+  if (!useCoreHeader && neonContextIsActive) {
+    switch (headerFetch.status) {
+      case FETCH_STATUS.SUCCESS:
+        renderMode = (headerHTML && drupalCssLoaded && headerRenderDelayed)
+          ? 'drupal' : 'loading';
+        break;
+      case FETCH_STATUS.ERROR:
+        renderMode = 'legacy';
+        break;
+      default:
+        renderMode = 'loading';
+        break;
     }
   }
 
-  // Load header.js
-  useEffect(() => {
-    if (headerJsLoaded || renderMode !== 'drupal') { return; }
+  // Load header.js only after initial delayed render of the drupal header is complete
+  useLayoutEffect(() => {
+    if (
+      renderMode !== 'drupal' || headerJsLoaded || !headerRenderDelayed || !drupalCssLoaded
+    ) { return; }
     setHeaderJsLoaded(true);
     const script = document.createElement('script');
     script.src = HEADER_JS_URL;
     document.body.appendChild(script);
-  }, [headerJsLoaded, setHeaderJsLoaded, renderMode]);
+  }, [headerJsLoaded, drupalCssLoaded, headerRenderDelayed, setHeaderJsLoaded, renderMode]);
+
+  // Delay the rendering of the drupal header one render cycle to allow the CSS to propogate into
+  // the environment. This prevents a "flash" of the unstyled menu in the drupal header on page load
+  useLayoutEffect(() => {
+    if (
+      !useCoreHeader && neonContextIsActive
+        && headerHTML && drupalCssLoaded && !headerRenderDelayed
+    ) {
+      const timeout = window.setTimeout(() => setHeaderRenderDelayed(true), 0);
+      return () => window.clearTimeout(timeout);
+    }
+    return () => {};
+  }, [
+    neonContextIsActive,
+    useCoreHeader,
+    headerHTML,
+    drupalCssLoaded,
+    headerRenderDelayed,
+  ]);
 
   // Render Loading
   if (renderMode === 'loading') {

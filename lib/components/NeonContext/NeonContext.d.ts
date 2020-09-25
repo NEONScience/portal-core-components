@@ -181,13 +181,12 @@ declare function useNeonContextState(): ({
                 zoom: number;
             };
             NH: {
-                /**
-                   CONTEXT
-                */
                 name: string;
                 center: number[];
                 zoom: number;
-            };
+            }; /**
+               HOOK
+            */
             NJ: {
                 name: string;
                 center: number[];
@@ -509,6 +508,7 @@ declare function useNeonContextState(): ({
         };
     };
     auth: {
+        useCore: boolean;
         isAuthenticated: boolean;
         isAuthWorking: boolean;
         isAuthWsConnected: boolean;
@@ -667,13 +667,12 @@ declare function useNeonContextState(): ({
                 zoom: number;
             };
             NH: {
-                /**
-                   CONTEXT
-                */
                 name: string;
                 center: number[];
                 zoom: number;
-            };
+            }; /**
+               HOOK
+            */
             NJ: {
                 name: string;
                 center: number[];
@@ -995,6 +994,7 @@ declare function useNeonContextState(): ({
         };
     };
     auth: {
+        useCore: boolean;
         isAuthenticated: boolean;
         isAuthWorking: boolean;
         isAuthWsConnected: boolean;
@@ -1047,6 +1047,7 @@ declare namespace DEFAULT_STATE {
         export { footer_1 as footer };
     }
     export namespace auth_1 {
+        export const useCore: boolean;
         export const isAuthenticated: boolean;
         export const isAuthWorking: boolean;
         export const isAuthWsConnected: boolean;
