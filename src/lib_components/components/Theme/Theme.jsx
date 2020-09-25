@@ -130,6 +130,15 @@ const COLOR_TEXT_PRIMARY = 'rgba(0, 0, 0, 0.9)';
 // https://material-ui.com/customization/default-theme/#explore
 
 const baseTheme = createMuiTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1600,
+    },
+  },
   colors: COLORS,
   palette: {
     background: {

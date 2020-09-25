@@ -47,6 +47,7 @@ const DEFAULT_STATE = {
     footer: { status: null, error: null },
   },
   auth: {
+    useCore: false,
     isAuthenticated: false,
     isAuthWorking: false,
     isAuthWsConnected: false,
@@ -203,6 +204,7 @@ const Provider = (props) => {
   const initialState = cloneDeep(DEFAULT_STATE);
   initialState.isActive = true;
   if (useCoreAuth) {
+    initialState.auth.useCore = true;
     initialState.fetches.auth.status = FETCH_STATUS.AWAITING_CALL;
   }
   if (!useCoreHeader) {
@@ -211,12 +213,17 @@ const Provider = (props) => {
   }
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const fetchHTML = (part) => {
+  // Method to sanitize partial HTML. As delivered presently there are some markup issues that
+  // throw warnings when parsed with HTMLReactParser.
+  const sanitizePartialHTML = html => html.replace(/ value=""/g, ' initialValue=""');
+
+  // Method to fetch header and/or footer partials
+  const fetchPartialHTML = (part) => {
     if (!Object.keys(HTML_URLS).includes(part)) { return; }
     window.fetch(HTML_URLS[part], { method: 'GET', headers: { Accept: 'text/html' } })
       .then(response => response.text())
       .then((html) => {
-        dispatch({ type: 'fetchHtmlSucceeded', part, html });
+        dispatch({ type: 'fetchHtmlSucceeded', part, html: sanitizePartialHTML(html) });
         return of(true);
       })
       .catch((error) => {
@@ -278,8 +285,8 @@ const Provider = (props) => {
         },
       );
     },
-    header: () => fetchHTML('header'),
-    footer: () => fetchHTML('footer'),
+    header: () => fetchPartialHTML('header'),
+    footer: () => fetchPartialHTML('footer'),
   };
 
   // Effect: Trigger all fetches that are awaiting call

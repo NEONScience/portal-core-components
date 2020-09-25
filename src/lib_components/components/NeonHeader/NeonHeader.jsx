@@ -7,11 +7,14 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Skeleton from '@material-ui/lab/Skeleton';
 
 import Theme from '../Theme/Theme';
+import NeonAuth, { NeonAuthType, NeonAuthDisplayType } from '../NeonAuth/NeonAuth';
+import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
 
 import NeonLegacyHeader from './NeonLegacyHeader';
 
 const HEADER_JS_URL = 'https://preview.neonscience.org/themes/custom/neon/build/components/header/header.js';
+const AUTH_ELEMENT_ID = 'header__authentication-ui';
 
 const useStyles = makeStyles(theme => ({
   skeletonHeader: {
@@ -39,9 +42,19 @@ const useStyles = makeStyles(theme => ({
       },
     },
   },
+  coreAuthContainer: {
+    padding: theme.spacing(1, 2),
+    textAlign: 'right',
+    [theme.breakpoints.down('md')]: {
+      position: 'absolute',
+      top: theme.spacing(1),
+      right: theme.spacing(9),
+      zIndex: 10,
+    },
+  },
 }));
 
-const NeonHeader = forwardRef((props, ref) => {
+const NeonHeader = forwardRef((props, headerRef) => {
   const {
     drupalCssLoaded,
     useCoreHeader,
@@ -54,6 +67,7 @@ const NeonHeader = forwardRef((props, ref) => {
     isActive,
     fetches: { header: headerFetch },
     html: { header: headerHTML },
+    auth,
   }] = NeonContext.useNeonContextState();
 
   const [headerJsLoaded, setHeaderJsLoaded] = useState(false);
@@ -80,7 +94,7 @@ const NeonHeader = forwardRef((props, ref) => {
   // Render Loading
   if (renderMode === 'loading') {
     return (
-      <header ref={ref} id="header" className={classes.skeletonHeader}>
+      <header ref={headerRef} id="header" className={classes.skeletonHeader}>
         <Skeleton variant="rect" height={`${belowLg ? 60 : 125}px`} width="100%" />
       </header>
     );
@@ -88,19 +102,33 @@ const NeonHeader = forwardRef((props, ref) => {
 
   // Render Drupal
   if (renderMode === 'drupal') {
+    const injectAuth = !auth.useCore ? null : {
+      replace: domNode => ((domNode.attribs || {}).id !== AUTH_ELEMENT_ID ? null : (
+        <div id={AUTH_ELEMENT_ID} className={classes.coreAuthContainer}>
+          <NeonAuth
+            loginPath={NeonEnvironment.getFullAuthPath('login')}
+            logoutPath={NeonEnvironment.getFullAuthPath('logout')}
+            accountPath={NeonEnvironment.route.buildAccountRoute()}
+            loginType={NeonAuthType.REDIRECT}
+            logoutType={NeonAuthType.SILENT}
+            displayType={NeonAuthDisplayType.MENU}
+          />
+        </div>
+      )),
+    };
     return (
       <header
-        ref={ref}
+        ref={headerRef}
         id="header"
         className={unstickyDrupalHeader ? classes.unstickyHeader : null}
       >
-        {HTMLReactParser(headerHTML.replace(/ value=""/g, ' initialValue=""'))}
+        {HTMLReactParser(headerHTML, injectAuth)}
       </header>
     );
   }
 
   // Render Legacy
-  return <NeonLegacyHeader {...props} ref={ref} />;
+  return <NeonLegacyHeader {...props} ref={headerRef} />;
 });
 
 NeonHeader.propTypes = {
