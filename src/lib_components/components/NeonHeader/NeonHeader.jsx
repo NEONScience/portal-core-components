@@ -24,6 +24,32 @@ const useStyles = makeStyles(theme => ({
   skeletonHeader: {
     boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.25), 0px 1px 1px rgba(0, 0, 0, 0.25)',
   },
+  coreAuthContainer: {
+    // common styles
+    textAlign: 'right',
+    position: 'absolute',
+    zIndex: 10,
+    // viewport-specific styles
+    [theme.breakpoints.up('lg')]: {
+      padding: '0px',
+      top: '-1px',
+      right: '0px',
+      '& :last-child': {
+        borderRight: 'none',
+        borderTopRightRadius: '0px',
+        borderBottomRightRadius: '0px',
+      },
+      '& :first-child': {
+        borderRight: 'none',
+        borderTopLeftRadius: '0px',
+      },
+    },
+    [theme.breakpoints.down('md')]: {
+      padding: theme.spacing(1, 2),
+      top: theme.spacing(1),
+      right: theme.spacing(9),
+    },
+  },
   // These styles are gross. We need to rework the header coming from the Drupal site to make this
   // less necessary.
   unstickyHeader: {
@@ -44,18 +70,6 @@ const useStyles = makeStyles(theme => ({
           display: 'block',
         },
       },
-    },
-  },
-  coreAuthContainer: {
-    padding: theme.spacing(1, 2),
-    textAlign: 'right',
-    position: 'absolute',
-    zIndex: 10,
-    top: theme.spacing(0),
-    right: theme.spacing(0.5),
-    [theme.breakpoints.down('md')]: {
-      top: theme.spacing(1),
-      right: theme.spacing(9),
     },
   },
 }));
