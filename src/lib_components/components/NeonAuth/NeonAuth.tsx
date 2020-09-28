@@ -141,7 +141,18 @@ const renderAuth = (
       );
       if (showAuthWorking) {
         authContent = (
-          <CircularProgress size={24} />
+          <div style={{ display: 'flex', alignItems: 'center', margin: Theme.spacing(0.5) }}>
+            <span
+              style={{
+                fontStyle: 'italic',
+                marginRight: Theme.spacing(1),
+                color: Theme.palette.grey[400],
+              }}
+            >
+              Signing in...
+            </span>
+            <CircularProgress size={20} />
+          </div>
         );
       } else if (isAuthenticated) {
         authContent = (
