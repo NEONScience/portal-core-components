@@ -4,10 +4,12 @@ import HTMLReactParser from 'html-react-parser';
 
 import Skeleton from '@material-ui/lab/Skeleton';
 
-import REMOTE_ASSETS from '../../remoteAssets/remoteAssets';
+import REMOTE_ASSETS from '../../remoteAssetsMap/remoteAssetsMap';
 import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
 
 import NeonLegacyFooter from './NeonLegacyFooter';
+
+const DRUPAL_FOOTER_HTML_FALLBACK = require('../../remoteAssets/drupal-footer.html');
 
 const DRUPAL_FOOTER_HTML = REMOTE_ASSETS.DRUPAL_FOOTER_HTML.KEY;
 
@@ -17,7 +19,6 @@ const NeonFooter = (props) => {
     isActive: neonContextIsActive,
     fetches: { [DRUPAL_FOOTER_HTML]: footerFetch },
     html: { [DRUPAL_FOOTER_HTML]: footerHTML },
-    fallbackHtml: { [DRUPAL_FOOTER_HTML]: fallbackHTML },
   }] = NeonContext.useNeonContextState();
 
   let renderMode = 'legacy';
@@ -53,7 +54,7 @@ const NeonFooter = (props) => {
     case 'drupal-fallback':
       return (
         <footer id="footer">
-          {HTMLReactParser(fallbackHTML)}
+          {HTMLReactParser(DRUPAL_FOOTER_HTML_FALLBACK)}
         </footer>
       );
 

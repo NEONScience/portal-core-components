@@ -18,6 +18,4 @@ const REMOTE_ASSETS = {
 // Replicate keys as attributes to allow for all variable references everywhere
 Object.keys(REMOTE_ASSETS).forEach((key) => { REMOTE_ASSETS[key].KEY = key; });
 
-// Export (use this syntax so that node can require this as a module)
-module.exports = REMOTE_ASSETS;
-module.exports.default = module.exports;
+export default REMOTE_ASSETS;

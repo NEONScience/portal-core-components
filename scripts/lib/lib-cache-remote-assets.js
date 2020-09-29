@@ -1,7 +1,5 @@
 'use strict';
 
-const REMOTE_ASSETS = require('../src/lib_components/remoteAssets/remoteAssets');
-
 process.env.NODE_ENV = 'DEVELOPMENT';
 
 // Makes the script crash on unhandled rejections instead of silently
@@ -11,11 +9,16 @@ process.on('unhandledRejection', err => {
   throw err;
 });
 
-const fs = require('fs');
-const fetch = require('node-fetch');
-const path = require('path');
+import fs from 'fs';
+import fetch from 'node-fetch';
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
-const CACHED_REMOTE_ASSETS_PATH = path.join(__dirname, '/../src/lib_components/remoteAssets');
+import REMOTE_ASSETS from '../../src/lib_components/remoteAssetsMap/remoteAssetsMap.js'
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+const CACHED_REMOTE_ASSETS_PATH = path.join(__dirname, '../../src/lib_components/remoteAssets');
 
 console.log('Caching remote assets...\n');
 

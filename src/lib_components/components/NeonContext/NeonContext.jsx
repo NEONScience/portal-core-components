@@ -11,17 +11,14 @@ import cloneDeep from 'lodash/cloneDeep';
 import { of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
-import REMOTE_ASSETS from '../../remoteAssets/remoteAssets';
-import AuthService from '../NeonAuth/AuthService'; // eslint-disable-line
+import REMOTE_ASSETS from '../../remoteAssetsMap/remoteAssetsMap';
+import AuthService from '../NeonAuth/AuthService';
 import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
 import sitesJSON from '../../staticJSON/sites.json';
 import statesJSON from '../../staticJSON/states.json';
 import domainsJSON from '../../staticJSON/domains.json';
 import bundlesJSON from '../../staticJSON/bundles.json';
 import timeSeriesDataProductsJSON from '../../staticJSON/timeSeriesDataProducts.json';
-
-const DRUPAL_HEADER_HTML_CONTENT = require('../../remoteAssets/drupal-header.html');
-const DRUPAL_FOOTER_HTML_CONTENT = require('../../remoteAssets/drupal-footer.html');
 
 const DRUPAL_HEADER_HTML = REMOTE_ASSETS.DRUPAL_HEADER_HTML.KEY;
 const DRUPAL_FOOTER_HTML = REMOTE_ASSETS.DRUPAL_FOOTER_HTML.KEY;
@@ -46,10 +43,6 @@ const DEFAULT_STATE = {
   html: {
     [DRUPAL_HEADER_HTML]: null,
     [DRUPAL_FOOTER_HTML]: null,
-  },
-  fallbackHtml: {
-    [DRUPAL_HEADER_HTML]: DRUPAL_HEADER_HTML_CONTENT,
-    [DRUPAL_FOOTER_HTML]: DRUPAL_FOOTER_HTML_CONTENT,
   },
   fetches: {
     sites: { status: FETCH_STATUS.AWAITING_CALL, error: null },

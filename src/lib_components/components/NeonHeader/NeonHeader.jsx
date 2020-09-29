@@ -10,13 +10,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Skeleton from '@material-ui/lab/Skeleton';
 
-import REMOTE_ASSETS from '../../remoteAssets/remoteAssets';
+import REMOTE_ASSETS from '../../remoteAssetsMap/remoteAssetsMap';
 import Theme from '../Theme/Theme';
 import NeonAuth, { NeonAuthType, NeonAuthDisplayType } from '../NeonAuth/NeonAuth';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
 
 import NeonLegacyHeader from './NeonLegacyHeader';
+
+const DRUPAL_HEADER_HTML_FALLBACK = require('../../remoteAssets/drupal-header.html');
 
 const DRUPAL_HEADER_HTML = REMOTE_ASSETS.DRUPAL_HEADER_HTML.KEY;
 // const DRUPAL_HEADER_JS = REMOTE_ASSETS.DRUPAL_HEADER_JS.KEY;
@@ -89,7 +91,6 @@ const NeonHeader = forwardRef((props, headerRef) => {
     isActive: neonContextIsActive,
     fetches: { [DRUPAL_HEADER_HTML]: headerFetch },
     html: { [DRUPAL_HEADER_HTML]: headerHTML },
-    fallbackHtml: { [DRUPAL_HEADER_HTML]: fallbackHTML },
     auth,
   }] = NeonContext.useNeonContextState();
 
@@ -115,7 +116,8 @@ const NeonHeader = forwardRef((props, headerRef) => {
   // Load header.js only after initial delayed render of the drupal header is complete
   useLayoutEffect(() => {
     if (
-      renderMode !== 'drupal' || headerJsLoaded || !headerRenderDelayed || !drupalCssLoaded
+      !['drupal', 'drupal-fallback'].includes(renderMode)
+        || headerJsLoaded || !headerRenderDelayed || !drupalCssLoaded
     ) { return; }
     setHeaderJsLoaded(true);
     const script = document.createElement('script');
@@ -168,13 +170,14 @@ const NeonHeader = forwardRef((props, headerRef) => {
         </div>
       )),
     };
+    const html = renderMode === 'drupal' ? headerHTML : DRUPAL_HEADER_HTML_FALLBACK;
     return (
       <header
         ref={headerRef}
         id="header"
         className={unstickyDrupalHeader ? classes.unstickyHeader : null}
       >
-        {HTMLReactParser(renderMode === 'drupal' ? headerHTML : fallbackHTML, injectAuth)}
+        {HTMLReactParser(html, injectAuth)}
       </header>
     );
   }
