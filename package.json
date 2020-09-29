@@ -73,6 +73,7 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.0",
+    "html-loader": "^1.3.1",
     "react-app-rewired": "^2.1.3",
     "react-scripts": "^3.3.0",
     "react-test-renderer": "^16.13.1",
@@ -88,12 +89,13 @@
     "test:watch": "react-app-rewired test - env=jsdom",
     "lint": "(eslint src/ --ext .js,.jsx || true) && exit 0",
     "lint:fix": "(eslint --fix src/ --ext .js,.jsx || true) && exit 0",
-    "lib": "npm run lib:babel-build && npm run lib:types && npm run lib:post-cleanup",
+    "lib": "npm run lib:pre-process && npm run lib:babel-build && npm run lib:types && npm run lib:post-cleanup",
     "lib:babel-build": "NODE_ENV=production babel ./src/lib_components --out-dir lib --extensions \".js,.jsx,.ts,.tsx\" --copy-files --no-copy-ignored",
     "lib:clean": "rm -r ./lib || true",
     "lib:clean-build": "(rm -r ./lib || true) && npm run lib",
     "lib:types": "tsc --project tsconfig.d.json",
-    "lib:post-cleanup": "rm ./lib/components/**/StyleGuide.* && rm -rf ./lib/components/SiteMap/png && rm -rf ./lib/*/__tests__ && rm -rf ./lib/*/*/__tests__ && node ./lib-fix-worker-babel.js"
+    "lib:pre-process": "node ./scripts/lib-cache-remote-assets.js",
+    "lib:post-cleanup": "rm ./lib/components/**/StyleGuide.* && rm -rf ./lib/components/SiteMap/png && rm -rf ./lib/*/__tests__ && rm -rf ./lib/*/*/__tests__ && node ./scripts/lib-fix-worker-babel.js"
   },
   "jest": {
     "collectCoverageFrom": [

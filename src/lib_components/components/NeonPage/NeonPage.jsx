@@ -136,7 +136,7 @@ const useStyles = makeStyles(() => ({
       position: 'sticky',
       top: '-2px',
       boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.25), 0px 1px 1px rgba(0, 0, 0, 0.25)',
-      zIndex: 2,
+      zIndex: 1,
     },
     [Theme.breakpoints.down('xs')]: {
       padding: Theme.spacing(1.5),
@@ -158,6 +158,9 @@ const useStyles = makeStyles(() => ({
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
     },
+    [Theme.breakpoints.only('sm')]: {
+      marginRight: Theme.spacing(1.5),
+    },
   },
   sidebarSubtitle: {
     color: COLORS.GREY[300],
@@ -166,9 +169,18 @@ const useStyles = makeStyles(() => ({
       overflow: 'hidden',
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
+      marginTop: '0px',
     },
     [Theme.breakpoints.down('xs')]: {
       display: 'none',
+    },
+  },
+  sidebarTitlesContainer: {
+    minWidth: '0px',
+    paddingRight: Theme.spacing(1),
+    [Theme.breakpoints.only('sm')]: {
+      display: 'flex',
+      alignItems: 'baseline',
     },
   },
   sidebarLink: {
@@ -566,7 +578,7 @@ const NeonPage = (props) => {
     const renderSidebarTitle = () => {
       if (!sidebarTitle && !title) { return null; }
       return (
-        <div style={{ minWidth: '0px', paddingRight: '8px' }}>
+        <div className={classes.sidebarTitlesContainer}>
           {loading || error ? (
             <React.Fragment>
               <Skeleton width={200} height={22} style={{ marginBottom: Theme.spacing(1) }} />
@@ -717,7 +729,16 @@ const NeonPage = (props) => {
           onHideNotifications={handleHideNotifications}
         />
         <BrowserWarning />
-        {customFooter || <NeonFooter drupalCssLoaded={drupalCssLoaded} />}
+        {customFooter ? (
+          <footer>
+            {customFooter}
+          </footer>
+        ) : (
+          <NeonFooter
+            useCoreHeader={useCoreHeader}
+            drupalCssLoaded={drupalCssLoaded}
+          />
+        )}
         {renderLoading()}
         {renderError()}
       </ThemeProvider>

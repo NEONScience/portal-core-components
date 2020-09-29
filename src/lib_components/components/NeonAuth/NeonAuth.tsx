@@ -149,7 +149,7 @@ const renderAuth = (
                 color: Theme.palette.grey[400],
               }}
             >
-              Signing in...
+              {isAuthenticated ? 'Signing out...' : 'Signing in...'}
             </span>
             <CircularProgress size={20} />
           </div>

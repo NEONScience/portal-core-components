@@ -10,6 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Skeleton from '@material-ui/lab/Skeleton';
 
+import REMOTE_ASSETS from '../../remoteAssets/remoteAssets';
 import Theme from '../Theme/Theme';
 import NeonAuth, { NeonAuthType, NeonAuthDisplayType } from '../NeonAuth/NeonAuth';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
@@ -17,7 +18,8 @@ import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
 
 import NeonLegacyHeader from './NeonLegacyHeader';
 
-const HEADER_JS_URL = 'https://preview.neonscience.org/themes/custom/neon/build/components/header/header.js';
+const DRUPAL_HEADER_HTML = REMOTE_ASSETS.DRUPAL_HEADER_HTML.KEY;
+// const DRUPAL_HEADER_JS = REMOTE_ASSETS.DRUPAL_HEADER_JS.KEY;
 const AUTH_ELEMENT_ID = 'header__authentication-ui';
 
 const useStyles = makeStyles(theme => ({
@@ -85,8 +87,9 @@ const NeonHeader = forwardRef((props, headerRef) => {
 
   const [{
     isActive: neonContextIsActive,
-    fetches: { header: headerFetch },
-    html: { header: headerHTML },
+    fetches: { [DRUPAL_HEADER_HTML]: headerFetch },
+    html: { [DRUPAL_HEADER_HTML]: headerHTML },
+    fallbackHtml: { [DRUPAL_HEADER_HTML]: fallbackHTML },
     auth,
   }] = NeonContext.useNeonContextState();
 
@@ -101,7 +104,7 @@ const NeonHeader = forwardRef((props, headerRef) => {
           ? 'drupal' : 'loading';
         break;
       case FETCH_STATUS.ERROR:
-        renderMode = 'legacy';
+        renderMode = drupalCssLoaded ? 'drupal-fallback' : 'loading';
         break;
       default:
         renderMode = 'loading';
@@ -116,8 +119,9 @@ const NeonHeader = forwardRef((props, headerRef) => {
     ) { return; }
     setHeaderJsLoaded(true);
     const script = document.createElement('script');
-    script.src = HEADER_JS_URL;
+    script.src = REMOTE_ASSETS.DRUPAL_HEADER_JS.url;
     document.body.appendChild(script);
+    // TODO: verify header.js loaded and if not load the fallback
   }, [headerJsLoaded, drupalCssLoaded, headerRenderDelayed, setHeaderJsLoaded, renderMode]);
 
   // Delay the rendering of the drupal header one render cycle to allow the CSS to propogate into
@@ -149,7 +153,7 @@ const NeonHeader = forwardRef((props, headerRef) => {
   }
 
   // Render Drupal
-  if (renderMode === 'drupal') {
+  if (renderMode === 'drupal' || renderMode === 'drupal-fallback') {
     const injectAuth = !auth.useCore ? null : {
       replace: domNode => ((domNode.attribs || {}).id !== AUTH_ELEMENT_ID ? null : (
         <div id={AUTH_ELEMENT_ID} className={classes.coreAuthContainer}>
@@ -170,7 +174,7 @@ const NeonHeader = forwardRef((props, headerRef) => {
         id="header"
         className={unstickyDrupalHeader ? classes.unstickyHeader : null}
       >
-        {HTMLReactParser(headerHTML, injectAuth)}
+        {HTMLReactParser(renderMode === 'drupal' ? headerHTML : fallbackHTML, injectAuth)}
       </header>
     );
   }
