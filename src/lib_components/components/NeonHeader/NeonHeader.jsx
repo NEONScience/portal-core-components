@@ -21,7 +21,7 @@ import NeonLegacyHeader from './NeonLegacyHeader';
 const DRUPAL_HEADER_HTML_FALLBACK = require('../../remoteAssets/drupal-header.html');
 
 const DRUPAL_HEADER_HTML = REMOTE_ASSETS.DRUPAL_HEADER_HTML.KEY;
-// const DRUPAL_HEADER_JS = REMOTE_ASSETS.DRUPAL_HEADER_JS.KEY;
+
 const AUTH_ELEMENT_ID = 'header__authentication-ui';
 
 const useStyles = makeStyles(theme => ({
@@ -94,7 +94,7 @@ const NeonHeader = forwardRef((props, headerRef) => {
     auth,
   }] = NeonContext.useNeonContextState();
 
-  const [headerJsLoaded, setHeaderJsLoaded] = useState(false);
+  const [headerJsStatus, setHeaderJsStatus] = useState(FETCH_STATUS.AWAITING_CALL);
   const [headerRenderDelayed, setHeaderRenderDelayed] = useState(false);
 
   let renderMode = 'legacy';
@@ -116,15 +116,23 @@ const NeonHeader = forwardRef((props, headerRef) => {
   // Load header.js only after initial delayed render of the drupal header is complete
   useLayoutEffect(() => {
     if (
-      !['drupal', 'drupal-fallback'].includes(renderMode)
-        || headerJsLoaded || !headerRenderDelayed || !drupalCssLoaded
+      !renderMode.includes('drupal') || headerJsStatus !== FETCH_STATUS.AWAITING_CALL
+        || !headerRenderDelayed || !drupalCssLoaded
     ) { return; }
-    setHeaderJsLoaded(true);
+    setHeaderJsStatus(FETCH_STATUS.FETCHING);
     const script = document.createElement('script');
     script.src = REMOTE_ASSETS.DRUPAL_HEADER_JS.url;
+    script.onload = (() => {
+      setHeaderJsStatus(FETCH_STATUS.SUCCESS);
+    });
+    script.onerror = (() => {
+      setHeaderJsStatus(FETCH_STATUS.ERROR);
+      // eslint-disable-next-line no-unused-expressions
+      import('../../remoteAssets/drupal-header.js');
+    });
     document.body.appendChild(script);
     // TODO: verify header.js loaded and if not load the fallback
-  }, [headerJsLoaded, drupalCssLoaded, headerRenderDelayed, setHeaderJsLoaded, renderMode]);
+  }, [headerJsStatus, drupalCssLoaded, headerRenderDelayed, setHeaderJsStatus, renderMode]);
 
   // Delay the rendering of the drupal header one render cycle to allow the CSS to propogate into
   // the environment. This prevents a "flash" of the unstyled menu in the drupal header on page load

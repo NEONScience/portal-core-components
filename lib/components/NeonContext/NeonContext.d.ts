@@ -214,9 +214,7 @@ declare function useNeonContextState(): ({
                 name: string;
                 center: number[];
                 zoom: number;
-            }; /**
-               Reducer
-            */
+            };
             OK: {
                 name: string;
                 center: number[];
@@ -414,9 +412,6 @@ declare function useNeonContextState(): ({
                 zoom: number;
             };
             D20: {
-                /**
-                   HOOK
-                */
                 name: string;
                 areaKm2: number;
                 center: number[];
@@ -698,9 +693,7 @@ declare function useNeonContextState(): ({
                 name: string;
                 center: number[];
                 zoom: number;
-            }; /**
-               Reducer
-            */
+            };
             OK: {
                 name: string;
                 center: number[];
@@ -898,9 +891,6 @@ declare function useNeonContextState(): ({
                 zoom: number;
             };
             D20: {
-                /**
-                   HOOK
-                */
                 name: string;
                 areaKm2: number;
                 center: number[];

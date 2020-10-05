@@ -34,10 +34,11 @@ import HomeIcon from '@material-ui/icons/Home';
 
 import Skeleton from '@material-ui/lab/Skeleton';
 
+import REMOTE_ASSETS from '../../remoteAssetsMap/remoteAssetsMap';
 import Theme, { COLORS } from '../Theme/Theme';
 import NeonHeader from '../NeonHeader/NeonHeader';
 import NeonFooter from '../NeonFooter/NeonFooter';
-import NeonContext from '../NeonContext/NeonContext';
+import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
 import BrowserWarning from './BrowserWarning';
 import LiferayNotifications from './LiferayNotifications';
 
@@ -46,6 +47,8 @@ import {
   generateNotificationId,
   getLiferayNotificationsApiPath,
 } from '../../util/liferayNotificationsUtil';
+
+const DRUPAL_THEME_CSS = REMOTE_ASSETS.DRUPAL_THEME_CSS.KEY;
 
 const cookies = new Cookies();
 
@@ -252,8 +255,6 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const DRUPAL_CSS_URL = 'https://preview.neonscience.org/themes/custom/neon/build/components/theme/theme.css';
-
 const NeonPage = (props) => {
   const {
     breadcrumbs,
@@ -379,10 +380,10 @@ const NeonPage = (props) => {
   }, [
     error,
     loading,
-    sidebarUnsticky,
-    hasSidebarLinks,
     sidebarLinks,
     sidebarHashMap,
+    sidebarUnsticky,
+    hasSidebarLinks,
     hashInitialized,
     setHashInitialized,
     currentSidebarHash,
@@ -395,15 +396,28 @@ const NeonPage = (props) => {
   /**
      Effect - Load Drupal CSS
   */
-  const [drupalCssLoaded, setDrupalCssLoaded] = useState(false);
+  const [drupalCssStatus, setDrupalCssStatus] = useState(FETCH_STATUS.AWAITING_CALL);
   useEffect(() => {
-    if (useCoreHeader || drupalCssLoaded) { return; }
+    if (useCoreHeader || drupalCssStatus !== FETCH_STATUS.AWAITING_CALL) { return; }
+    setDrupalCssStatus(FETCH_STATUS.FETCHING);
     const link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = DRUPAL_CSS_URL;
+    link.href = REMOTE_ASSETS[DRUPAL_THEME_CSS].url;
+    link.crossOrigin = 'anonymous';
+    link.onload = (() => {
+      setDrupalCssStatus(FETCH_STATUS.SUCCESS);
+    });
+    link.onerror = (() => {
+      // eslint-disable-next-line no-unused-expressions
+      import('../../remoteAssets/drupal-theme.css');
+      // Assume this local import worked and still report the load as successful
+      // We do this because props on header and footer express whether the CSS is loaded and we want
+      // to simplify that as a boolean. The header and footer don't care where the CSS came from
+      // so long as it's there.
+      setDrupalCssStatus(FETCH_STATUS.SUCCESS);
+    });
     document.body.appendChild(link);
-    setDrupalCssLoaded(true);
-  }, [useCoreHeader, drupalCssLoaded, setDrupalCssLoaded]);
+  }, [useCoreHeader, drupalCssStatus, setDrupalCssStatus]);
 
   /**
      Liferay Notifications
@@ -708,7 +722,7 @@ const NeonPage = (props) => {
             unstickyDrupalHeader={unstickyDrupalHeader}
             notifications={notifications}
             onShowNotifications={handleShowNotifications}
-            drupalCssLoaded={drupalCssLoaded}
+            drupalCssLoaded={drupalCssStatus === FETCH_STATUS.SUCCESS}
           />
         )}
         <Container className={classes.outerPageContainer} style={outerPageContainerStyles}>
@@ -736,7 +750,7 @@ const NeonPage = (props) => {
         ) : (
           <NeonFooter
             useCoreHeader={useCoreHeader}
-            drupalCssLoaded={drupalCssLoaded}
+            drupalCssLoaded={drupalCssStatus === FETCH_STATUS.SUCCESS}
           />
         )}
         {renderLoading()}
