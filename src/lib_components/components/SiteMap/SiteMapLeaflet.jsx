@@ -53,6 +53,10 @@ const useStyles = makeStyles(theme => ({
       left: '8px',
       top: '8px',
       border: `1px solid ${Theme.colors.LIGHT_BLUE[500]}`,
+      '& a': {
+        width: '36px',
+        height: '36px',
+      },
       '&:hover, &:active': {
         borderColor: Theme.colors.LIGHT_BLUE[400],
       },

@@ -74,6 +74,242 @@ export namespace PLOT_SAMPLING_MODULES {
     export const tck: string;
     export const vst: string;
 }
+export namespace NLCD_CLASSES {
+    export namespace openWater {
+        export const name: string;
+        export const value: number;
+        export const description: string;
+        export const color: string;
+        export const category: string;
+    }
+    export namespace perennialIceSnow {
+        const name_1: string;
+        export { name_1 as name };
+        export const vaule: number;
+        const description_1: string;
+        export { description_1 as description };
+        const color_1: string;
+        export { color_1 as color };
+        const category_1: string;
+        export { category_1 as category };
+    }
+    export namespace developedOpenSpace {
+        const name_2: string;
+        export { name_2 as name };
+        const value_1: number;
+        export { value_1 as value };
+        const description_2: string;
+        export { description_2 as description };
+        const color_2: string;
+        export { color_2 as color };
+        const category_2: string;
+        export { category_2 as category };
+    }
+    export namespace developedLowIntensity {
+        const name_3: string;
+        export { name_3 as name };
+        const value_2: number;
+        export { value_2 as value };
+        const description_3: string;
+        export { description_3 as description };
+        const color_3: string;
+        export { color_3 as color };
+        const category_3: string;
+        export { category_3 as category };
+    }
+    export namespace developedMediumIntensity {
+        const name_4: string;
+        export { name_4 as name };
+        const value_3: number;
+        export { value_3 as value };
+        const description_4: string;
+        export { description_4 as description };
+        const color_4: string;
+        export { color_4 as color };
+        const category_4: string;
+        export { category_4 as category };
+    }
+    export namespace developedHighIntensity {
+        const name_5: string;
+        export { name_5 as name };
+        const value_4: number;
+        export { value_4 as value };
+        const description_5: string;
+        export { description_5 as description };
+        const color_5: string;
+        export { color_5 as color };
+        const category_5: string;
+        export { category_5 as category };
+    }
+    export namespace barrenLand {
+        const name_6: string;
+        export { name_6 as name };
+        const value_5: number;
+        export { value_5 as value };
+        const description_6: string;
+        export { description_6 as description };
+        const color_6: string;
+        export { color_6 as color };
+        const category_6: string;
+        export { category_6 as category };
+    }
+    export namespace deciduousForest {
+        const name_7: string;
+        export { name_7 as name };
+        const value_6: number;
+        export { value_6 as value };
+        const description_7: string;
+        export { description_7 as description };
+        const color_7: string;
+        export { color_7 as color };
+        const category_7: string;
+        export { category_7 as category };
+    }
+    export namespace evergreenForest {
+        const name_8: string;
+        export { name_8 as name };
+        const value_7: number;
+        export { value_7 as value };
+        const description_8: string;
+        export { description_8 as description };
+        const color_8: string;
+        export { color_8 as color };
+        const category_8: string;
+        export { category_8 as category };
+    }
+    export namespace mixedForest {
+        const name_9: string;
+        export { name_9 as name };
+        const value_8: number;
+        export { value_8 as value };
+        const description_9: string;
+        export { description_9 as description };
+        const color_9: string;
+        export { color_9 as color };
+        const category_9: string;
+        export { category_9 as category };
+    }
+    export namespace dwarfScrub {
+        const name_10: string;
+        export { name_10 as name };
+        const value_9: number;
+        export { value_9 as value };
+        const description_10: string;
+        export { description_10 as description };
+        const color_10: string;
+        export { color_10 as color };
+        const category_10: string;
+        export { category_10 as category };
+    }
+    export namespace shrubScrub {
+        const name_11: string;
+        export { name_11 as name };
+        const value_10: number;
+        export { value_10 as value };
+        const description_11: string;
+        export { description_11 as description };
+        const color_11: string;
+        export { color_11 as color };
+        const category_11: string;
+        export { category_11 as category };
+    }
+    export namespace grasslandHerbaceous {
+        const name_12: string;
+        export { name_12 as name };
+        const value_11: number;
+        export { value_11 as value };
+        const description_12: string;
+        export { description_12 as description };
+        const color_12: string;
+        export { color_12 as color };
+        const category_12: string;
+        export { category_12 as category };
+    }
+    export namespace sedgeHerbaceous {
+        const name_13: string;
+        export { name_13 as name };
+        const value_12: number;
+        export { value_12 as value };
+        const description_13: string;
+        export { description_13 as description };
+        const color_13: string;
+        export { color_13 as color };
+        const category_13: string;
+        export { category_13 as category };
+    }
+    export namespace lichens {
+        const name_14: string;
+        export { name_14 as name };
+        const value_13: number;
+        export { value_13 as value };
+        const description_14: string;
+        export { description_14 as description };
+        const color_14: string;
+        export { color_14 as color };
+        const category_14: string;
+        export { category_14 as category };
+    }
+    export namespace moss {
+        const name_15: string;
+        export { name_15 as name };
+        const value_14: number;
+        export { value_14 as value };
+        const description_15: string;
+        export { description_15 as description };
+        const color_15: string;
+        export { color_15 as color };
+        const category_15: string;
+        export { category_15 as category };
+    }
+    export namespace pastureHay {
+        const name_16: string;
+        export { name_16 as name };
+        const value_15: number;
+        export { value_15 as value };
+        const description_16: string;
+        export { description_16 as description };
+        const color_16: string;
+        export { color_16 as color };
+        const category_16: string;
+        export { category_16 as category };
+    }
+    export namespace cultivatedCrops {
+        const name_17: string;
+        export { name_17 as name };
+        const value_16: number;
+        export { value_16 as value };
+        const description_17: string;
+        export { description_17 as description };
+        const color_17: string;
+        export { color_17 as color };
+        const category_17: string;
+        export { category_17 as category };
+    }
+    export namespace woodyWetlands {
+        const name_18: string;
+        export { name_18 as name };
+        const value_17: number;
+        export { value_17 as value };
+        const description_18: string;
+        export { description_18 as description };
+        const color_18: string;
+        export { color_18 as color };
+        const category_18: string;
+        export { category_18 as category };
+    }
+    export namespace emergentHerbaceousWetlands {
+        const name_19: string;
+        export { name_19 as name };
+        const value_18: number;
+        export { value_18 as value };
+        const description_19: string;
+        export { description_19 as description };
+        const color_19: string;
+        export { color_19 as color };
+        const category_19: string;
+        export { category_19 as category };
+    }
+}
 export namespace LOCATION_ICON_SVG_SHAPES {
     export namespace CIRCLE {
         export const KEY: string;
@@ -816,7 +1052,8 @@ export namespace TILE_LAYERS {
     export namespace NATGEO_WORLD_MAP {
         const KEY_4: string;
         export { KEY_4 as KEY };
-        export const name: string;
+        const name_20: string;
+        export { name_20 as name };
         export const shortAttribution: string;
         export const fullAttribution: string;
         export const url: string;
@@ -824,8 +1061,8 @@ export namespace TILE_LAYERS {
     export namespace WORLD_IMAGERY {
         const KEY_5: string;
         export { KEY_5 as KEY };
-        const name_1: string;
-        export { name_1 as name };
+        const name_21: string;
+        export { name_21 as name };
         const shortAttribution_1: string;
         export { shortAttribution_1 as shortAttribution };
         const fullAttribution_1: string;
@@ -836,8 +1073,8 @@ export namespace TILE_LAYERS {
     export namespace WORLD_STREET_MAP {
         const KEY_6: string;
         export { KEY_6 as KEY };
-        const name_2: string;
-        export { name_2 as name };
+        const name_22: string;
+        export { name_22 as name };
         const shortAttribution_2: string;
         export { shortAttribution_2 as shortAttribution };
         const fullAttribution_2: string;
@@ -848,8 +1085,8 @@ export namespace TILE_LAYERS {
     export namespace WORLD_TOPO_MAP {
         const KEY_7: string;
         export { KEY_7 as KEY };
-        const name_3: string;
-        export { name_3 as name };
+        const name_23: string;
+        export { name_23 as name };
         const shortAttribution_3: string;
         export { shortAttribution_3 as shortAttribution };
         const fullAttribution_3: string;

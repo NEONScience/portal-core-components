@@ -31,6 +31,11 @@ export default function parseLocationsArray(locationsArray = []) {
       'soilTypeOrder,',
     ];
 
+    // A mapping of location property names to aliases to be worked with more easily
+    const RENAME_LOCATION_PROPERTIES = {
+      nationalLandCoverDatabase2001: 'nlcdClass',
+    };
+
     // Enforce numeric types for select properties
     const NUMERIC_LOCATION_PROPERTIES = [
       'maximumElevation',
@@ -56,18 +61,27 @@ export default function parseLocationsArray(locationsArray = []) {
       inProps = [],
       whiteList = DEFAULT_LOCATION_PROPERTIES_WHITELIST,
     ) => {
-      const outProps = {};
+      // Function to convert a prop key into camelCase or, if applicable, a defined alias
       const cleanPropKey = (inKey = '') => {
         const words = inKey.substr(10)
           .replace(/[^A-Za-z0-9_ -]/g, '')
           .replace(/[_-]/g, ' ')
           .toLowerCase()
           .split(' ');
-        return words.map((word, idx) => (
+        const newPropKey = words.map((word, idx) => (
           idx === 0 ? word : `${word.substr(0, 1).toUpperCase()}${word.substr(1)}`
         )).join('');
+        return RENAME_LOCATION_PROPERTIES[newPropKey] || newPropKey;
       };
+      // Add any aliases to the whitelist
+      const whiteListAliases = whiteList
+        .filter(k => Object.keys(RENAME_LOCATION_PROPERTIES).includes(k))
+        .map(k => RENAME_LOCATION_PROPERTIES[k]);
+      const fullWhiteList = whiteList.concat(whiteListAliases);
+      // outProps is the structure we plan to fill with parsed variables and return
+      const outProps = {};
       if (!Array.isArray(inProps) || !inProps.length) { return outProps; }
+      // Main loop over inProps
       inProps.forEach((prop) => {
         const inPropKeys = Object.keys(prop);
         if (
@@ -77,7 +91,7 @@ export default function parseLocationsArray(locationsArray = []) {
             || !(typeof prop.locationPropertyName === 'string')
         ) { return; }
         const propKey = cleanPropKey(prop.locationPropertyName);
-        if (propKey.length && (!whiteList.length || whiteList.includes(propKey))) {
+        if (propKey.length && (!fullWhiteList.length || fullWhiteList.includes(propKey))) {
           outProps[propKey] = NUMERIC_LOCATION_PROPERTIES.includes(propKey)
             ? Number.parseFloat(prop.locationPropertyValue)
             : prop.locationPropertyValue;

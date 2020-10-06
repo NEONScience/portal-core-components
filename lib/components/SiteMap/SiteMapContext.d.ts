@@ -47,9 +47,12 @@ declare function useSiteMapContext(): any[] | {
         current: null;
         data: null;
         fetch: {
-            status: null;
+            status: null; /**
+               Export
+            */
             error: null;
         };
+        isAtCenter: boolean;
     };
     aspectRatio: {
         currentValue: null;
