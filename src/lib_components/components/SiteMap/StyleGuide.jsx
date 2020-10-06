@@ -334,7 +334,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
       </DocBlock>
 
       <ExampleBlock>
-        <SiteMap location="RMNP_001.birdGrid.brd" />
+        <SiteMap />
       </ExampleBlock>
       <CodeBlock>
         {`
@@ -352,11 +352,9 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
         codes are also supported.
       </DocBlock>
 
-      {/*
       <ExampleBlock>
         <SiteMap location="D08" />
       </ExampleBlock>
-      */}
       <CodeBlock>
         {`
 <SiteMap location="D08" />

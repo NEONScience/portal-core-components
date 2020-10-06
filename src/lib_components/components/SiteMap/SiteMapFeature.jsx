@@ -817,7 +817,7 @@ const SiteMapFeature = (props) => {
         <Grid container spacing={1}>
           {renderCoordsAndElevation(loc)}
           {additionalRows.map(row => (typeof row === 'function' ? row(loc) : row))}
-          {renderNlcdClass(loc)}
+          {loc.nlcdClass ? renderNlcdClass(loc) : null}
           {renderLocationSiteAndDomain(siteCode)}
         </Grid>
       </Popup>
