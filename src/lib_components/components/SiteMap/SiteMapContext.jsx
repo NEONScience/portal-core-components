@@ -24,7 +24,8 @@ import {
 import {
   DEFAULT_STATE,
   SORT_DIRECTIONS,
-  TILE_LAYERS,
+  BASE_LAYERS,
+  OVERLAYS,
   VIEWS,
   FEATURES,
   FETCH_STATUS,
@@ -538,14 +539,14 @@ const reducer = (state, action) => {
   // NATGEO_WORLD_MAP has no data at zoom 17 or higher so go to WORLD_IMAGERY (satellite)
   const updateMapTileWithZoom = () => {
     if (
-      newState.map.zoom <= 17 && state.map.tileLayer !== TILE_LAYERS.NATGEO_WORLD_MAP.KEY
-        && state.map.tileLayerAutoChangedAbove17) {
-      newState.map.tileLayer = TILE_LAYERS.NATGEO_WORLD_MAP.KEY;
-      newState.map.tileLayerAutoChangedAbove17 = false;
+      newState.map.zoom <= 17 && state.map.baseLayer !== BASE_LAYERS.NATGEO_WORLD_MAP.KEY
+        && state.map.baseLayerAutoChangedAbove17) {
+      newState.map.baseLayer = BASE_LAYERS.NATGEO_WORLD_MAP.KEY;
+      newState.map.baseLayerAutoChangedAbove17 = false;
     }
-    if (newState.map.zoom >= 17 && state.map.tileLayer === TILE_LAYERS.NATGEO_WORLD_MAP.KEY) {
-      newState.map.tileLayer = TILE_LAYERS.WORLD_IMAGERY.KEY;
-      newState.map.tileLayerAutoChangedAbove17 = true;
+    if (newState.map.zoom >= 17 && state.map.baseLayer === BASE_LAYERS.NATGEO_WORLD_MAP.KEY) {
+      newState.map.baseLayer = BASE_LAYERS.WORLD_IMAGERY.KEY;
+      newState.map.baseLayerAutoChangedAbove17 = true;
     }
   };
   // Shortcuts for deailing with hierarchies
@@ -612,9 +613,18 @@ const reducer = (state, action) => {
       newState.focusLocation.isAtCenter = false;
       return calculateFeatureDataFetches(newState);
 
-    case 'setMapTileLayer':
-      if (!Object.keys(TILE_LAYERS).includes(action.tileLayer)) { return state; }
-      newState.map.tileLayer = action.tileLayer;
+    case 'setMapBaseLayer':
+      if (!Object.keys(BASE_LAYERS).includes(action.baseLayer)) { return state; }
+      newState.map.baseLayer = action.baseLayer;
+      return newState;
+
+    case 'setMapOverlays':
+      if (
+        !Array.isArray(action.overlays)
+          || !action.overlays.every(o => OVERLAYS[o])) {
+        return state;
+      }
+      newState.map.overlays = action.overlays;
       return newState;
 
     case 'setMapRepositionOpenPopupFunc':
@@ -863,7 +873,7 @@ const Provider = (props) => {
     fullscreen,
     mapZoom,
     mapCenter,
-    mapTileLayer,
+    mapBaseLayer,
     location: locationProp,
     selection,
     validItems,
@@ -892,7 +902,7 @@ const Provider = (props) => {
     ...initialState.map,
     zoom: initialMapZoom,
     center: mapCenter,
-    tileLayer: mapTileLayer,
+    baseLayer: mapBaseLayer,
   };
   if (typeof locationProp === 'string') {
     initialState.focusLocation.current = locationProp;

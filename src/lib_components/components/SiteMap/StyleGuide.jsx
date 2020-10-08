@@ -17,7 +17,7 @@ import SiteMap from './SiteMap';
 
 import {
   MAP_ZOOM_RANGE,
-  TILE_LAYERS,
+  BASE_LAYERS,
   VIEWS,
 } from './SiteMapUtils';
 
@@ -59,25 +59,6 @@ const propRows = [
     ),
   },
   {
-    name: 'center',
-    type: 'array of exactly two numbers',
-    default: '[52.28, -110.75]',
-    examples: (
-      <div>
-        <tt>[33.9, -110.5]</tt> (US southwest)
-        <br />
-        <tt>[65.85, -151.5]</tt> (Alaska)
-      </div>
-    ),
-    description: (
-      <p>
-        Array expressing latitude and longitude to set as the initial center of the map.
-        Default value is a point chosen to approximately center the entire set of existing
-        filed sites in a map at the appropriate zoom level.
-      </p>
-    ),
-  },
-  {
     name: 'fullscreen',
     type: 'boolean',
     default: 'false',
@@ -105,6 +86,71 @@ const propRows = [
         <p>
           If set this will override any zoom and/or center props as the focus location will
           determine the zoom and center for the map.
+        </p>
+      </React.Fragment>
+    ),
+  },
+  {
+    name: 'mapBaseLayer',
+    type: (
+      <div>
+        string, one of:
+        <br />
+        <tt>
+          {Object.keys(BASE_LAYERS).map(k => <div key={k}>{`"${k}"`}</div>)}
+        </tt>
+      </div>
+    ),
+    default: '"NATGEO_WORLD_MAP"',
+    description: (
+      <p>
+        Initial base tile layer for the map (i.e. the background map). Valid values are defined in
+        the Site Map <tt>BASE_LAYERS</tt> data structure and include a name, url, and attribution
+        strings. This is only the initial layer; a user may change the tile layer through stock
+        Leaflet UI once loaded.
+      </p>
+    ),
+  },
+  {
+    name: 'mapCenter',
+    type: 'array of exactly two numbers',
+    default: '[52.28, -110.75]',
+    examples: (
+      <div>
+        <tt>[33.9, -110.5]</tt> (US southwest)
+        <br />
+        <tt>[65.85, -151.5]</tt> (Alaska)
+      </div>
+    ),
+    description: (
+      <p>
+        Array expressing latitude and longitude to set as the initial center of the map.
+        Default value is a point chosen to approximately center the entire set of existing
+        filed sites in a map at the appropriate zoom level.
+      </p>
+    ),
+  },
+  {
+    name: 'mapZoom',
+    type: 'integer',
+    default: 'null',
+    examples: (
+      <div>
+        <tt>2</tt>, <tt>9</tt>, <tt>17</tt>
+      </div>
+    ),
+    description: (
+      <React.Fragment>
+        <p>
+          Initial zoom level for the map. Min and max zoom levels are hard-coded
+          to <tt>{MAP_ZOOM_RANGE[0]}</tt> and <tt>{MAP_ZOOM_RANGE[1]}</tt> respectively, so the zoom
+          prop must be equal to or between these values. A greater value is a closer zoom.
+        </p>
+        <p>
+          When undefined, and if the location prop is not set, the initial zoom is dynamically
+          derived to ensure all sites are in view given the dynamically derived aspect ratio
+          and dimensions of the map component (i.e a larger viewport may have a closer initial
+          zoom as there is more pixel space to fit all sites).
         </p>
       </React.Fragment>
     ),
@@ -191,27 +237,6 @@ const propRows = [
     ),
   },
   {
-    name: 'tileLayer',
-    type: (
-      <div>
-        string, one of:
-        <br />
-        <tt>
-          {Object.keys(TILE_LAYERS).map(k => <div key={k}>{`"${k}"`}</div>)}
-        </tt>
-      </div>
-    ),
-    default: '"NATGEO_WORLD_MAP"',
-    description: (
-      <p>
-        Initial tile layer for the map (i.e. the visual appearance of the map). Valid values
-        are defined in the Site Map <tt>TILE_LAYERS</tt> data structure and include a name, url,
-        and attribution strings. This is only the initial layer; a user may change the tile layer
-        through stock Leaflet UI once loaded.
-      </p>
-    ),
-  },
-  {
     name: 'unusableVerticalSpace',
     type: 'integer',
     default: '0',
@@ -276,31 +301,6 @@ const propRows = [
       </p>
     ),
   },
-  {
-    name: 'zoom',
-    type: 'integer',
-    default: 'null',
-    examples: (
-      <div>
-        <tt>2</tt>, <tt>9</tt>, <tt>17</tt>
-      </div>
-    ),
-    description: (
-      <React.Fragment>
-        <p>
-          Initial zoom level for the map. Min and max zoom levels are hard-coded
-          to <tt>{MAP_ZOOM_RANGE[0]}</tt> and <tt>{MAP_ZOOM_RANGE[1]}</tt> respectively, so the zoom
-          prop must be equal to or between these values. A greater value is a closer zoom.
-        </p>
-        <p>
-          When undefined, and if the location prop is not set, the initial zoom is dynamically
-          derived to ensure all sites are in view given the dynamically derived aspect ratio
-          and dimensions of the map component (i.e a larger viewport may have a closer initial
-          zoom as there is more pixel space to fit all sites).
-        </p>
-      </React.Fragment>
-    ),
-  },
 ];
 // TOWER103599
 export default function StyleGuide() {
@@ -352,9 +352,11 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
         codes are also supported.
       </DocBlock>
 
+      {/*
       <ExampleBlock>
         <SiteMap location="D08" />
       </ExampleBlock>
+      */}
       <CodeBlock>
         {`
 <SiteMap location="D08" />

@@ -45,6 +45,7 @@
     "react-highlight.js": "^1.0.7",
     "react-inlinesvg": "^1.2.0",
     "react-leaflet": "^2.6.1",
+    "react-leaflet-grouped-layer-control": "0.0.13",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-select": "^3.0.8",

@@ -1,4 +1,4 @@
-/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-underscore-dangle, no-unused-vars */
 import React, {
   useRef,
   useEffect,
@@ -18,11 +18,14 @@ import 'leaflet/dist/leaflet.css';
 import './SiteMap.css';
 
 import {
-  LayersControl,
+  LayerGroup,
   Map,
   ScaleControl,
   TileLayer,
+  WMSTileLayer,
 } from 'react-leaflet';
+
+import { ReactLeafletGroupedLayerControl } from 'react-leaflet-grouped-layer-control';
 
 import Theme from '../Theme/Theme';
 
@@ -30,8 +33,10 @@ import SiteMapContext from './SiteMapContext';
 import SiteMapFeature from './SiteMapFeature';
 import {
   VIEWS,
-  TILE_LAYERS,
-  TILE_LAYERS_BY_NAME,
+  BASE_LAYERS,
+  BASE_LAYERS_BY_TITLE,
+  OVERLAYS,
+  OVERLAY_GROUPS,
   MAP_ZOOM_RANGE,
   FEATURES,
   FETCH_STATUS,
@@ -39,26 +44,27 @@ import {
   deriveFullObservatoryZoomLevel,
 } from './SiteMapUtils';
 
-const { BaseLayer } = LayersControl;
-
 const useStyles = makeStyles(theme => ({
   map: {
     width: '100%',
     height: '0px', // Necessary to set a fixed aspect ratio from props (using paddingBottom)
     overflow: 'hidden',
-    '& div.leaflet-control-layers': {
-      borderRadius: '2px',
+    '& div.rlglc-wrap': {
       boxShadow: 'unset',
       margin: '0px',
       left: '8px',
       top: '8px',
-      border: `1px solid ${Theme.colors.LIGHT_BLUE[500]}`,
-      '& a': {
-        width: '36px',
-        height: '36px',
+      '& .rlglc': {
+        border: `1px solid ${Theme.colors.LIGHT_BLUE[500]}`,
+        borderRadius: '2px',
       },
-      '&:hover, &:active': {
-        borderColor: Theme.colors.LIGHT_BLUE[400],
+      '& .rlglc:not(.rlglc-active) .rlglc-a': {
+        width: '36px',
+        height: '36px !important',
+      },
+      '& .rlglc.rlglc-active .rlglc-a': {
+        width: 'auto !important',
+        height: 'auto !important',
       },
     },
     '& div.leaflet-control-zoom': {
@@ -341,6 +347,16 @@ const SiteMapLeaflet = () => {
     }, 0);
   });
 
+  /*
+  useLayoutEffect(() => {
+    if (
+      !mapRef || !mapRef.current || !mapRef.current.leafletElement
+        || !mapRef.current._ready || mapRef.current._updating
+    ) { return; }
+    console.log('LCONTROL', L.control.groupedLayers);
+  });
+  */
+
   if (!canRender) { return null; }
 
   /**
@@ -359,24 +375,42 @@ const SiteMapLeaflet = () => {
   );
 
   /**
-     Render: Tile Layers
+     Render: Base Layer
   */
-  const renderTileLayer = (key) => {
-    const tileLayer = TILE_LAYERS[key];
+  const renderBaseLayer = () => {
+    const baseLayer = BASE_LAYERS[state.map.baseLayer];
     const attributionNode = (
-      <div title={tileLayer.fullAttribution} className={classes.attribution}>
-        {tileLayer.shortAttribution}
+      <div title={baseLayer.fullAttribution} className={classes.attribution}>
+        {baseLayer.shortAttribution}
       </div>
     );
     const attributionString = ReactDOMServer.renderToStaticMarkup(attributionNode);
     return (
-      <BaseLayer
-        key={key}
-        name={tileLayer.name}
-        checked={key === state.map.tileLayer}
-      >
-        <TileLayer key={key} url={tileLayer.url} attribution={attributionString} />
-      </BaseLayer>
+      <TileLayer url={baseLayer.url} attribution={attributionString} />
+    );
+  };
+
+  /**
+     Render: Overlay
+  */
+  const renderOverlay = (key) => {
+    const overlay = OVERLAYS[key];
+    const group = OVERLAY_GROUPS[overlay.group] || {};
+    const commonProps = {
+      ...(group.commonProps || {}),
+      ...(overlay.commonProps || {}),
+    };
+    return (
+      <LayerGroup key={key}>
+        {overlay.components.map((node) => {
+          let Component = null;
+          if (node.type === 'WMSTileLayer') { Component = WMSTileLayer; }
+          if (!Component) { return null; }
+          return (
+            <Component key={node.key} {...{ ...commonProps, ...node.props }} />
+          );
+        })}
+      </LayerGroup>
     );
   };
 
@@ -414,11 +448,14 @@ const SiteMapLeaflet = () => {
       state.map.repositionOpenPopupFunc();
     }
   };
-  const handleBaseLayerChange = (event) => {
-    if (!event.name || !TILE_LAYERS_BY_NAME[event.name]) { return; }
+  const handleBaseLayerChange = (key) => {
+    if (!BASE_LAYERS[key]) { return; }
+    dispatch({ type: 'setMapBaseLayer', baseLayer: key });
+  };
+  const handleOverlayChange = (overlays) => {
     dispatch({
-      type: 'setMapTileLayer',
-      tileLayer: TILE_LAYERS_BY_NAME[event.name],
+      type: 'setMapOverlays',
+      overlays: overlays.filter(o => o.checked).map(o => o.name),
     });
   };
 
@@ -467,6 +504,18 @@ const SiteMapLeaflet = () => {
   /**
      Render: Map
   */
+  const groupedLayerControlBaseLayers = Object.keys(BASE_LAYERS).map(key => ({
+    name: key,
+    title: BASE_LAYERS[key].title,
+  }));
+  const groupedLayerControlOverlays = Object.keys(OVERLAYS).map((key) => {
+    const { KEY: name, title, group } = OVERLAYS[key];
+    const checked = state.map.overlays.includes(key);
+    let groupTitle = null;
+    if (group && OVERLAY_GROUPS[group]) { groupTitle = OVERLAY_GROUPS[group].title; }
+    return { name, title, groupTitle, checked }; // eslint-disable-line object-curly-newline
+  });
+  const canRenderGroupedLayerControl = mapRef && mapRef.current && mapRef.current.leafletElement;
   return (
     <React.Fragment>
       <Map
@@ -485,9 +534,20 @@ const SiteMapLeaflet = () => {
         data-selenium="sitemap-content-map"
       >
         <ScaleControl imperial metric updateWhenIdle />
-        <LayersControl position="topright">
-          {Object.keys(TILE_LAYERS).map(renderTileLayer)}
-        </LayersControl>
+        {renderBaseLayer()}
+        {state.map.overlays.map(renderOverlay)}
+        {!canRenderGroupedLayerControl ? null : (
+          <ReactLeafletGroupedLayerControl
+            position="topright"
+            baseLayers={groupedLayerControlBaseLayers}
+            checkedBaseLayer={state.map.baseLayer}
+            exclusiveGroups={[]}
+            overlays={groupedLayerControlOverlays}
+            onBaseLayerChange={handleBaseLayerChange}
+            onOverlayChange={handleOverlayChange}
+            leaflet={{ map: mapRef.current.leafletElement }}
+          />
+        )}
         {Object.keys(FEATURES)
           .filter(key => state.filters.features.available[key])
           .filter(key => state.filters.features.visible[key])

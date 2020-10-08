@@ -1133,44 +1133,142 @@ export const getHref = (key, arg = null) => {
 };
 
 /**
- Tile Layers
+ Map Base Layers
  Third party services providing tiles for different earth views (topographic, satellite, etc.)
- with attributions
+ with attributions. Only one base layer can be shown at a time.
 */
-export const TILE_LAYERS = {
+export const BASE_LAYERS = {
   NATGEO_WORLD_MAP: {
-    KEY: 'NATGEO_WORLD_MAP',
-    name: 'National Geographic',
+    title: 'National Geographic',
     shortAttribution: '© Natl. Geographic et al.',
     fullAttribution: '© National Geographic, Esri, Garmin, HERE, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC',
     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}',
   },
   WORLD_IMAGERY: {
-    KEY: 'WORLD_IMAGERY',
-    name: 'Satellite Imagery',
+    title: 'Satellite Imagery',
     shortAttribution: '© Esri et al.',
     fullAttribution: '© Esri, DigitalGlobe, GeoEye, Earthstar Geographics, CNES/Airbus DS, USDA, USGS, AeroGRID, IGN, GIS Community',
     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
   },
   WORLD_STREET_MAP: {
-    KEY: 'WORLD_STREET_MAP',
-    name: 'Streets',
+    title: 'Streets',
     shortAttribution: '© Esri et al.',
     fullAttribution: '© Esri, HERE, Garmin, USGS, Intermap, INCREMENT P, NRCan, Esri Japan, METI, Esri China (Hong Kong), Esri Korea, Esri (Thailand), NGCC, OSM contributors, GIS Community',
     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
   },
   WORLD_TOPO_MAP: {
-    KEY: 'WORLD_TOPO_MAP',
-    name: 'Topographic',
+    title: 'Topographic',
     shortAttribution: '© Esri et al.',
     fullAttribution: '© Esri, HERE, Garmin, Intermap, iPC, GEBCO, USGS, FAO, NPS, NRCAN, GeoBase, IGN, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), OSM contributors, GIS Community',
     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
   },
 };
-export const TILE_LAYERS_BY_NAME = {};
-Object.keys(TILE_LAYERS).forEach((key) => {
-  TILE_LAYERS_BY_NAME[TILE_LAYERS[key].name] = key;
+export const BASE_LAYERS_BY_TITLE = {};
+Object.keys(BASE_LAYERS).forEach((key) => {
+  BASE_LAYERS[key].KEY = key;
+  BASE_LAYERS_BY_TITLE[BASE_LAYERS[key].title] = key;
 });
+
+/**
+ Map Overlays
+ Third party services providing tiles for different environmental contexts. These layers are similar
+ to base layers in that they cover most or all of the observatory if not the whole planet. They add
+ additional context from a third party data source, such as NLCD.
+*/
+export const OVERLAY_GROUPS = {
+  NLCD_2001: {
+    title: 'National Land Cover Database (NLCD) 2001',
+    description: 'National Land Cover Database (NLCD) 2001 release data from the Multi-Resolution Land Characteristics (MRLC) consortium',
+    commonProps: { format: 'image/png', transparent: true },
+  },
+};
+export const OVERLAY_GROUPS_BY_TITLE = {};
+Object.keys(OVERLAY_GROUPS).forEach((key) => {
+  OVERLAY_GROUPS[key].KEY = key;
+  OVERLAY_GROUPS_BY_TITLE[OVERLAY_GROUPS[key].title] = key;
+});
+
+export const OVERLAYS = {
+  LAND_COVER: {
+    group: OVERLAY_GROUPS.NLCD_2001.KEY,
+    title: 'Land Cover',
+    commonProps: { attribution: 'NLCD 2001 Land Cover' },
+    components: [
+      {
+        type: 'WMSTileLayer',
+        key: 'L48',
+        props: {
+          url: 'https://www.mrlc.gov/geoserver/mrlc_display/NLCD_2001_Land_Cover_L48/wms?',
+          layers: 'NLCD_2001_Land_Cover_L48',
+        },
+      },
+      {
+        type: 'WMSTileLayer',
+        key: 'AK',
+        props: {
+          url: 'https://www.mrlc.gov/geoserver/mrlc_display/NLCD_2001_Land_Cover_AK/wms?',
+          layers: 'NLCD_2001_Land_Cover_AK',
+        },
+      },
+      {
+        type: 'WMSTileLayer',
+        key: 'HI',
+        props: {
+          url: 'https://www.mrlc.gov/geoserver/mrlc_display/NLCD_2001_Land_Cover_HI/wms?',
+          layers: 'NLCD_2001_Land_Cover_HI',
+        },
+      },
+      {
+        type: 'WMSTileLayer',
+        key: 'PR',
+        props: {
+          url: 'https://www.mrlc.gov/geoserver/mrlc_display/NLCD_2001_Land_Cover_PR/wms?',
+          layers: 'NLCD_2001_Land_Cover_PR',
+        },
+      },
+    ],
+  },
+  IMPERVIOUS: {
+    group: OVERLAY_GROUPS.NLCD_2001.KEY,
+    title: 'Impervious Surface',
+    commonProps: { attribution: 'NLCD 2001 Land Cover' },
+    components: [
+      {
+        type: 'WMSTileLayer',
+        key: 'L48',
+        props: {
+          url: 'https://www.mrlc.gov/geoserver/mrlc_display/NLCD_2001_Impervious_L48/wms?',
+          layers: 'NLCD_2001_Impervious_L48',
+        },
+      },
+      {
+        type: 'WMSTileLayer',
+        key: 'AK',
+        props: {
+          url: 'https://www.mrlc.gov/geoserver/mrlc_display/NLCD_2001_Impervious_AK/wms?',
+          layers: 'NLCD_2001_Impervious_AK',
+        },
+      },
+      {
+        type: 'WMSTileLayer',
+        key: 'HI',
+        props: {
+          url: 'https://www.mrlc.gov/geoserver/mrlc_display/NLCD_2001_Impervious_HI/wms?',
+          layers: 'NLCD_2001_Impervious_HI',
+        },
+      },
+      {
+        type: 'WMSTileLayer',
+        key: 'PR',
+        props: {
+          url: 'https://www.mrlc.gov/geoserver/mrlc_display/NLCD_2001_Impervious_PR/wms?',
+          layers: 'NLCD_2001_Impervious_PR',
+        },
+      },
+    ],
+  },
+};
+Object.keys(OVERLAYS).forEach((key) => { OVERLAYS[key].KEY = key; });
 
 /**
    Default State
@@ -1219,8 +1317,9 @@ export const DEFAULT_STATE = {
     zoom: null,
     center: [],
     bounds: null,
-    tileLayer: null,
-    tileLayerAutoChangedAbove17: false,
+    baseLayer: null,
+    baseLayerAutoChangedAbove17: false,
+    overlays: ['LAND_COVER'],
     zoomedIcons: {},
     repositionOpenPopupFunc: null,
   },
@@ -1397,7 +1496,8 @@ export const SITE_MAP_PROP_TYPES = {
   // Map Props
   mapCenter: PropTypes.arrayOf(PropTypes.number),
   mapZoom: PropTypes.number,
-  mapTileLayer: PropTypes.oneOf(Object.keys(TILE_LAYERS)),
+  mapBaseLayer: PropTypes.oneOf(Object.keys(BASE_LAYERS)),
+  // mapOverlays: PropTypes.arrayOf(Object.keys(OVERLAYS)),
   // Initial map focus (overrides mapCenter and mapZoom)
   location: PropTypes.string,
   // Selection Props
@@ -1420,7 +1520,8 @@ export const SITE_MAP_DEFAULT_PROPS = {
   // Map Props
   mapCenter: OBSERVATORY_CENTER,
   mapZoom: null,
-  mapTileLayer: Object.keys(TILE_LAYERS)[0],
+  mapBaseLayer: Object.keys(BASE_LAYERS)[0],
+  // mapOverlays: null,
   // Initial map focus (overrides mapCenter and mapZoom)
   location: null,
   // Selection Props
