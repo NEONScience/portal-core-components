@@ -58,6 +58,9 @@ const useStyles = makeStyles(theme => ({
         border: `1px solid ${Theme.colors.LIGHT_BLUE[500]}`,
         borderRadius: '2px',
       },
+      '& .rlglc-active': {
+        border: `1px solid ${Theme.palette.grey[300]}`,
+      },
       '& .rlglc:not(.rlglc-active) .rlglc-a': {
         width: '36px',
         height: '36px !important',
@@ -65,6 +68,22 @@ const useStyles = makeStyles(theme => ({
       '& .rlglc.rlglc-active .rlglc-a': {
         width: 'auto !important',
         height: 'auto !important',
+        padding: '12px',
+      },
+      '& .rlglc-open': {
+        '& .rlglc-input': {
+          width: '14px',
+          height: '14px',
+          margin: '3px 0px 0px 0px',
+          cursor: 'pointer',
+        },
+        '& .rlglc-title': {
+          fontFamily: '"Inter",Helvetica,Arial,sans-serif',
+        },
+        '& .rlglc-groupTitle': {
+          fontFamily: '"Inter",Helvetica,Arial,sans-serif',
+          fontSize: '13px',
+        },
       },
     },
     '& div.leaflet-control-zoom': {
