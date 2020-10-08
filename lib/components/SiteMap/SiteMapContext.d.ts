@@ -18,7 +18,7 @@ declare namespace Provider {
         unusableVerticalSpace: PropTypes.Requireable<number>;
         mapCenter: PropTypes.Requireable<(number | null | undefined)[]>;
         mapZoom: PropTypes.Requireable<number>;
-        mapTileLayer: PropTypes.Requireable<string>;
+        mapBaseLayer: PropTypes.Requireable<string>;
         location: PropTypes.Requireable<string>;
         selection: PropTypes.Requireable<string>;
         selectedItems: PropTypes.Requireable<(string | null | undefined)[]>;
@@ -47,9 +47,7 @@ declare function useSiteMapContext(): any[] | {
         current: null;
         data: null;
         fetch: {
-            status: null; /**
-               Export
-            */
+            status: null;
             error: null;
         };
         isAtCenter: boolean;
@@ -72,8 +70,9 @@ declare function useSiteMapContext(): any[] | {
         zoom: null;
         center: never[];
         bounds: null;
-        tileLayer: null;
-        tileLayerAutoChangedAbove17: boolean;
+        baseLayer: null;
+        baseLayerAutoChangedAbove17: boolean;
+        overlays: Set<any>;
         zoomedIcons: {};
         repositionOpenPopupFunc: null;
     };
@@ -101,13 +100,16 @@ declare function useSiteMapContext(): any[] | {
     sites: {};
     filters: {
         search: null;
+        legendOpen: boolean;
         features: {
-            open: boolean;
             available: {};
             visible: {
                 [k: string]: boolean;
             };
             collapsed: Set<any>;
+        };
+        overlays: {
+            expanded: Set<any>;
         };
     };
     fullscreen: boolean;

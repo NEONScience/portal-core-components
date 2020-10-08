@@ -1,4 +1,4 @@
-/* eslint-disable no-underscore-dangle, no-unused-vars */
+/* eslint-disable no-underscore-dangle */
 import React, {
   useRef,
   useEffect,
@@ -34,7 +34,6 @@ import SiteMapFeature from './SiteMapFeature';
 import {
   VIEWS,
   BASE_LAYERS,
-  BASE_LAYERS_BY_TITLE,
   OVERLAYS,
   OVERLAY_GROUPS,
   MAP_ZOOM_RANGE,
@@ -366,16 +365,6 @@ const SiteMapLeaflet = () => {
     }, 0);
   });
 
-  /*
-  useLayoutEffect(() => {
-    if (
-      !mapRef || !mapRef.current || !mapRef.current.leafletElement
-        || !mapRef.current._ready || mapRef.current._updating
-    ) { return; }
-    console.log('LCONTROL', L.control.groupedLayers);
-  });
-  */
-
   if (!canRender) { return null; }
 
   /**
@@ -529,7 +518,7 @@ const SiteMapLeaflet = () => {
   }));
   const groupedLayerControlOverlays = Object.keys(OVERLAYS).map((key) => {
     const { KEY: name, title, group } = OVERLAYS[key];
-    const checked = state.map.overlays.includes(key);
+    const checked = state.map.overlays.has(key);
     let groupTitle = null;
     if (group && OVERLAY_GROUPS[group]) { groupTitle = OVERLAY_GROUPS[group].title; }
     return { name, title, groupTitle, checked }; // eslint-disable-line object-curly-newline
@@ -554,7 +543,7 @@ const SiteMapLeaflet = () => {
       >
         <ScaleControl imperial metric updateWhenIdle />
         {renderBaseLayer()}
-        {state.map.overlays.map(renderOverlay)}
+        {Array.from(state.map.overlays).map(renderOverlay)}
         {!canRenderGroupedLayerControl ? null : (
           <ReactLeafletGroupedLayerControl
             position="topright"

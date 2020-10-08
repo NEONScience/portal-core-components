@@ -618,13 +618,28 @@ const reducer = (state, action) => {
       newState.map.baseLayer = action.baseLayer;
       return newState;
 
+    case 'setMapOverlayVisibility':
+      if (!OVERLAYS[action.overlay]) { return state; }
+      if (action.visible) {
+        newState.map.overlays.add(action.overlay);
+        newState.filters.overlays.expanded.add(action.overlay);
+      } else {
+        newState.map.overlays.delete(action.overlay);
+        newState.filters.overlays.expanded.delete(action.overlay);
+      }
+      return newState;
+
     case 'setMapOverlays':
       if (
         !Array.isArray(action.overlays)
           || !action.overlays.every(o => OVERLAYS[o])) {
         return state;
       }
-      newState.map.overlays = action.overlays;
+      newState.map.overlays = new Set(action.overlays);
+      newState.filters.overlays = new Set();
+      action.overlays.forEach((overlay) => {
+        newState.filters.overlays.expanded.add(overlay);
+      });
       return newState;
 
     case 'setMapRepositionOpenPopupFunc':
@@ -638,11 +653,11 @@ const reducer = (state, action) => {
       return newState;
 
     // Features
-    case 'setFilterFeaturesOpen':
-      newState.filters.features.open = !!action.open;
+    case 'setLegendOpen':
+      newState.filters.legendOpen = !!action.open;
       return newState;
 
-    case 'setFilterFeatureVisibility':
+    case 'setLegendFeatureOptionVisibility':
       if (
         !Object.keys(FEATURES).includes(action.feature) || typeof action.visible !== 'boolean'
       ) { return state; }
@@ -650,14 +665,24 @@ const reducer = (state, action) => {
       applyFeatureVisibilityToParents(action.feature);
       return calculateFeatureDataFetches(newState);
 
-    case 'setFilterFeatureCollapsed':
+    case 'setLegendFeatureOptionCollapsed':
       if (!Object.keys(FEATURES).includes(action.feature)) { return state; }
       newState.filters.features.collapsed.add(action.feature);
       return newState;
 
-    case 'setFilterFeatureExpanded':
+    case 'setLegendFeatureOptionExpanded':
       if (!Object.keys(FEATURES).includes(action.feature)) { return state; }
       newState.filters.features.collapsed.delete(action.feature);
+      return newState;
+
+    case 'setLegendOverlayOptionCollapsed':
+      if (!Object.keys(OVERLAYS).includes(action.overlay)) { return state; }
+      newState.filters.overlays.expanded.delete(action.overlay);
+      return newState;
+
+    case 'setLegendOverlayOptionExpanded':
+      if (!Object.keys(OVERLAYS).includes(action.overlay)) { return state; }
+      newState.filters.overlays.expanded.add(action.overlay);
       return newState;
 
     // Focus Location

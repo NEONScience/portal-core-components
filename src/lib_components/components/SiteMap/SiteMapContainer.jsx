@@ -57,6 +57,8 @@ import {
   FEATURES,
   FEATURE_TYPES,
   MIN_CONTAINER_HEIGHT,
+  OVERLAYS,
+  OVERLAY_GROUPS,
   getDynamicAspectRatio,
 } from './SiteMapUtils';
 
@@ -90,7 +92,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(3),
     borderRadius: '2px',
   },
-  featuresContainer: {
+  legendContainer: {
     backgroundColor: theme.palette.grey[100],
     height: 'calc(100% - 84px)',
     borderBottomLeftRadius: '4px',
@@ -100,22 +102,38 @@ const useStyles = makeStyles(theme => ({
     top: '48px',
     right: '0px',
     boxShadow: '-3px 0 5px 0px rgba(0,0,0,0.5)',
-    padding: theme.spacing(1),
+    padding: theme.spacing(2),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
     overflowY: 'auto',
+    '& span.MuiCheckbox-root': {
+      marginLeft: '-9px',
+    },
   },
-  featuresContainerFullscreen: {
+  legendContainerFullscreen: {
     top: '56px',
     height: 'calc(100% - 92px)',
+  },
+  legendDivider: {
+    width: '100%',
+    borderBottomColor: theme.palette.grey[300],
+    borderWidth: '0px 0px 1px 0px',
+    margin: theme.spacing(2.5, 0),
+  },
+  legendSection: {
+    width: '100%',
+  },
+  legendSectionTitle: {
+    fontWeight: 600,
+    marginBottom: '8px',
   },
   featureIcon: {
     width: '28px',
     height: '28px',
     marginRight: theme.spacing(1),
   },
-  featureOptionFormControlLabel: {
+  legendOptionFormControlLabel: {
     width: '100%',
     paddingRight: theme.spacing(1),
     margin: 0,
@@ -126,7 +144,7 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: theme.palette.grey[100],
     },
   },
-  featureOptionLabel: {
+  legendOptionLabel: {
     display: 'flex',
     alignItems: 'center',
   },
@@ -255,6 +273,34 @@ const useStyles = makeStyles(theme => ({
       color: theme.palette.error.dark,
     },
   },
+  overlayLegendContainer: {
+    margin: theme.spacing(0.5, 0, 2, 3.5),
+  },
+  overlayLegendItem: {
+    display: 'flex',
+    alignItems: 'center',
+    marginBottom: '6px',
+    cursor: 'help',
+  },
+  overlayLegendSwatch: {
+    width: '36px',
+    height: '12px',
+    border: '1px solid black',
+    marginRight: theme.spacing(1.5),
+    marginBottom: '-1px',
+    display: 'inline-block',
+  },
+  overlayLegendItemTooltipTitle: {
+    display: 'flex',
+    alignItems: 'center',
+    marginBottom: '8px',
+  },
+  overlayLegendCategory: {
+    marginBottom: '6px',
+    '& span.MuiTypography-caption': {
+      fontWeight: 600,
+    },
+  },
 }));
 
 const SiteMapContainer = (props) => {
@@ -290,7 +336,7 @@ const SiteMapContainer = (props) => {
     style: { paddingBottom: `${(aspectRatio.currentValue || 0.75) * 100}%` },
   };
 
-  const featuresRef = useRef(null);
+  const legendRef = useRef(null);
   const containerDivRef = useRef(null);
   const contentDivRef = useRef(null);
   const resizeBorderRef = useRef(null);
@@ -392,17 +438,17 @@ const SiteMapContainer = (props) => {
   ]);
 
   /**
-     Effect - Monitor all click events and close the features pane if open and clicked outside
+     Effect - Monitor all click events and close the legend pane if open and clicked outside
      and not in the content area (map or table)
   */
   useEffect(() => {
-    if (!state.filters.features.open || !featuresRef.current) { return () => {}; }
+    if (!state.filters.legendOpen || !legendRef.current) { return () => {}; }
     const handleClick = (event) => {
       if (
-        featuresRef.current && !featuresRef.current.contains(event.target)
+        legendRef.current && !legendRef.current.contains(event.target)
           && contentDivRef.current && !contentDivRef.current.contains(event.target)
       ) {
-        dispatch({ type: 'setFilterFeaturesOpen', open: false });
+        dispatch({ type: 'setLegendOpen', open: false });
       }
     };
     document.addEventListener('click', handleClick);
@@ -410,8 +456,8 @@ const SiteMapContainer = (props) => {
       document.removeEventListener('click', handleClick);
     };
   }, [
-    state.filters.features.open,
-    featuresRef,
+    state.filters.legendOpen,
+    legendRef,
     contentDivRef,
     dispatch,
   ]);
@@ -524,24 +570,24 @@ const SiteMapContainer = (props) => {
      Render - Legend Button
   */
   const renderLegendButton = () => {
-    const buttonStyle = filters.features.open ? {} : { backgroundColor: 'white' };
+    const buttonStyle = filters.legendOpen ? {} : { backgroundColor: 'white' };
     return (
       <div style={{ borderRadius: '2px', marginLeft: Theme.spacing(1) }}>
         <Tooltip
           enterDelay={500}
           enterNextDelay={200}
-          title={`${filters.features.open ? 'Hide' : 'Show'} the legend`}
+          title={`${filters.legendOpen ? 'Hide' : 'Show'} the legend`}
           placement={fullscreen ? 'bottom-end' : 'top-end'}
         >
           <Button
             color="primary"
             style={buttonStyle}
-            variant={filters.features.open ? 'contained' : 'outlined'}
-            endIcon={filters.features.open ? <ExpandUpIcon /> : <ExpandDownIcon />}
+            variant={filters.legendOpen ? 'contained' : 'outlined'}
+            endIcon={filters.legendOpen ? <ExpandUpIcon /> : <ExpandDownIcon />}
             data-selenium="sitemap-legendButton"
             className={fullscreen ? classes.legendButtonFullscreen : classes.legendButton}
             onClick={() => {
-              dispatch({ type: 'setFilterFeaturesOpen', open: !filters.features.open });
+              dispatch({ type: 'setLegendOpen', open: !filters.legendOpen });
             }}
           >
             {belowMd ? <LegendIcon style={{ fontSize: '20px' }} /> : 'Legend'}
@@ -682,7 +728,12 @@ const SiteMapContainer = (props) => {
                       secondary={getSelectedItemDescription(selectedItem)}
                     />
                     <ListItemSecondaryAction>
-                      <Tooltip title={remove} placement="right">
+                      <Tooltip
+                        title={remove}
+                        enterDelay={500}
+                        enterNextDelay={200}
+                        placement="right"
+                      >
                         <IconButton
                           edge="end"
                           aria-label={remove}
@@ -706,7 +757,7 @@ const SiteMapContainer = (props) => {
           className={chipClassName}
           onClick={() => dispatch({ type: 'toggleSelectionSummary', showSummary: !showSummary })}
           deleteIcon={(
-            <Tooltip title="Deselect all">
+            <Tooltip enterDelay={500} enterNextDelay={200} title="Deselect all">
               <CancelIcon />
             </Tooltip>
           )}
@@ -724,7 +775,12 @@ const SiteMapContainer = (props) => {
      Render - Vertical resize Elements
   */
   const renderVerticalResizeButton = () => (fullscreen ? null : (
-    <Tooltip placement="left" title={`Resize ${view === VIEWS.MAP ? 'map' : 'table'} vertically`}>
+    <Tooltip
+      placement="left"
+      enterDelay={500}
+      enterNextDelay={200}
+      title={`Resize ${view === VIEWS.MAP ? 'map' : 'table'} vertically`}
+    >
       <IconButton
         draggable
         type="button"
@@ -756,7 +812,7 @@ const SiteMapContainer = (props) => {
     } = feature;
     const handleChange = (event) => {
       dispatch({
-        type: 'setFilterFeatureVisibility',
+        type: 'setLegendFeatureOptionVisibility',
         feature: key,
         visible: event.target.checked,
       });
@@ -846,15 +902,15 @@ const SiteMapContainer = (props) => {
       visibleChildren = allChildren.filter(f => state.filters.features.visible[f]);
       indeterminate = visibleChildren.length > 0 && visibleChildren.length < allChildren.length;
       label = (
-        <div className={classes.featureOptionLabel} style={{ justifyContent: 'space-between' }}>
-          <span style={{ fontWeight: 600 }}>
+        <div className={classes.legendOptionLabel} style={{ justifyContent: 'space-between' }}>
+          <span style={{ fontWeight: 500 }}>
             {feature.name}
           </span>
-          <Tooltip title={collapseTitle}>
+          <Tooltip title={collapseTitle} enterDelay={500} enterNextDelay={200}>
             <IconButton
               size="small"
               aria-label={collapseTitle}
-              style={{ marginLeft: Theme.spacing(1) }}
+              style={{ margin: Theme.spacing(0, -2, 0, 1) }}
               onClick={(event) => {
                 event.preventDefault();
                 // We use setTimeout here so the icon doesn't change before the click event bubbles.
@@ -863,7 +919,7 @@ const SiteMapContainer = (props) => {
                 // outside that will close the features container, when we know it's not).
                 window.setTimeout(() => {
                   dispatch({
-                    type: `setFilterFeature${collapsed ? 'Expanded' : 'Collapsed'}`,
+                    type: `setLegendFeatureOption${collapsed ? 'Expanded' : 'Collapsed'}`,
                     feature: key,
                   });
                 }, 0);
@@ -880,7 +936,7 @@ const SiteMapContainer = (props) => {
       );
     } else {
       label = (
-        <div className={classes.featureOptionLabel}>
+        <div className={classes.legendOptionLabel}>
           {icon}
           <span>
             {feature.name}
@@ -893,7 +949,7 @@ const SiteMapContainer = (props) => {
         key={key}
         label={label}
         aria-label={tooltip}
-        className={classes.featureOptionFormControlLabel}
+        className={classes.legendOptionFormControlLabel}
         control={(
           <Checkbox
             checked={state.filters.features.visible[key]}
@@ -909,6 +965,8 @@ const SiteMapContainer = (props) => {
         {tooltip ? (
           <Tooltip
             title={tooltip}
+            enterDelay={500}
+            enterNextDelay={200}
             placement="bottom-start"
             TransitionComponent={({ children }) => children} // set no transition by mock component
           >
@@ -927,13 +985,229 @@ const SiteMapContainer = (props) => {
   };
 
   /**
+     Render - Single Overlay Legend
+  */
+  const renderOverlayLegend = (legend) => {
+    const renderItem = (legendKey) => {
+      const { name: itemName, color: itemColor, description: itemDescription } = legend[legendKey];
+      const swatch = (
+        <div
+          className={classes.overlayLegendSwatch}
+          style={{ backgroundColor: itemColor }}
+        />
+      );
+      const itemLabel = (
+        <div key={legendKey} className={classes.overlayLegendItem}>
+          {swatch}
+          <Typography variant="caption">{itemName}</Typography>
+        </div>
+      );
+      return itemDescription ? (
+        <Tooltip
+          key={legendKey}
+          title={(
+            <>
+              <div className={classes.overlayLegendItemTooltipTitle}>
+                {swatch}
+                <b>{itemName}</b>
+              </div>
+              {itemDescription}
+            </>
+          )}
+          enterDelay={500}
+          enterNextDelay={200}
+          placement="left"
+          TransitionComponent={({ children }) => children}
+        >
+          {itemLabel}
+        </Tooltip>
+      ) : itemLabel;
+    };
+    if (!Object.keys(legend).some(legendKey => legend[legendKey].category)) {
+      return (
+        <div className={classes.overlayLegendContainer}>
+          {Object.keys(legend).map(renderItem)}
+        </div>
+      );
+    }
+    const otherCategory = 'Other';
+    const categories = Object.keys(legend).reduce((acc, cur) => {
+      acc.add(legend[cur].category || otherCategory);
+      return acc;
+    }, new Set());
+    return (
+      <div className={classes.overlayLegendContainer}>
+        {Array.from(categories).map((category, idx) => (
+          <React.Fragment key={category}>
+            <div
+              className={classes.overlayLegendCategory}
+              style={{ marginTop: idx ? '8px' : '0px' }}
+            >
+              <Typography variant="caption">{category}</Typography>
+            </div>
+            {Object.keys(legend)
+              .filter(legendKey => (
+                legend[legendKey].category === category
+                  || (!legend[legendKey].category && category === otherCategory)
+              ))
+              .map(renderItem)}
+          </React.Fragment>
+        ))}
+      </div>
+    );
+  };
+
+  /**
+     Render - Single Overlay Option
+  */
+  const renderOverlayOption = (key) => {
+    const { title, description: tooltip, legend } = OVERLAYS[key];
+    const handleChange = (event) => {
+      dispatch({
+        type: 'setMapOverlayVisibility',
+        overlay: key,
+        visible: event.target.checked,
+      });
+    };
+    let collapsed = true;
+    let label = null;
+    if (legend) {
+      collapsed = !state.filters.overlays.expanded.has(key);
+      const collapseTitle = `${collapsed ? 'Expand' : 'Collapse'} ${title} Legend`;
+      label = (
+        <div className={classes.legendOptionLabel} style={{ justifyContent: 'space-between' }}>
+          <span style={{ fontWeight: 500 }}>
+            {title}
+          </span>
+          <Tooltip title={collapseTitle} enterDelay={500} enterNextDelay={200} placement="top">
+            <IconButton
+              size="small"
+              aria-label={collapseTitle}
+              style={{ margin: Theme.spacing(0, -2, 0, 1) }}
+              onClick={(event) => {
+                event.preventDefault();
+                // We use setTimeout here so the icon doesn't change before the click event bubbles.
+                // Without it the target of the click event is an SVG that no longer exists in the
+                // DOM tree (thus not contained in the features container, thus seen as a click
+                // outside that will close the features container, when we know it's not).
+                window.setTimeout(() => {
+                  dispatch({
+                    type: `setLegendOverlayOption${collapsed ? 'Expanded' : 'Collapsed'}`,
+                    overlay: key,
+                  });
+                }, 0);
+              }}
+            >
+              {collapsed ? (
+                <LeftArrowIcon fontSize="inherit" />
+              ) : (
+                <DownArrowIcon fontSize="inherit" />
+              )}
+            </IconButton>
+          </Tooltip>
+        </div>
+      );
+    } else {
+      label = (
+        <div className={classes.legendOptionLabel}>
+          <span>{title}</span>
+        </div>
+      );
+    }
+    const formControl = (
+      <FormControlLabel
+        key={key}
+        label={label}
+        aria-label={tooltip}
+        className={classes.legendOptionFormControlLabel}
+        control={(
+          <Checkbox
+            checked={state.map.overlays.has(key)}
+            onChange={handleChange}
+            color="primary"
+          />
+        )}
+      />
+    );
+    return (
+      <div key={key} style={{ width: '100%' }}>
+        {tooltip ? (
+          <Tooltip
+            title={tooltip}
+            enterDelay={500}
+            enterNextDelay={200}
+            placement="bottom-start"
+            TransitionComponent={({ children }) => children} // set no transition by mock component
+          >
+            {formControl}
+          </Tooltip>
+        ) : formControl}
+        {collapsed || !legend ? null : renderOverlayLegend(legend)}
+      </div>
+    );
+  };
+
+  /**
+     Render - Legend - NEON Observatory Features
+  */
+  const renderLegendNEONObservatoryFeatures = () => (
+    <div className={classes.legendSection}>
+      <Typography variant="h6" className={classes.legendSectionTitle}>
+        NEON Observatory Features
+      </Typography>
+      {Object.keys(FEATURES)
+        .filter(f => state.filters.features.available[f] && !FEATURES[f].parent)
+        .filter(f => !FEATURES[f].generalLegendGroup)
+        .map(renderFeatureOption)}
+    </div>
+  );
+
+  /**
+     Render - Legend - Overlays
+  */
+  const renderLegendOverlays = () => (
+    <React.Fragment>
+      {Object.keys(OVERLAY_GROUPS).map((groupKey) => {
+        const { title: groupTitle } = OVERLAY_GROUPS[groupKey];
+        return (
+          <div key={groupKey} className={classes.legendSection}>
+            <hr className={classes.legendDivider} />
+            <Typography variant="h6" className={classes.legendSectionTitle}>
+              {groupTitle}
+            </Typography>
+            {Object.keys(OVERLAYS)
+              .filter(o => OVERLAYS[o].group === groupKey)
+              .map(renderOverlayOption)}
+          </div>
+        );
+      })}
+    </React.Fragment>
+  );
+
+  /**
+     Render - Legend - General Features
+  */
+  const renderLegendGeneralFeatures = () => (
+    <div className={classes.legendSection}>
+      <hr className={classes.legendDivider} />
+      <Typography variant="h6" className={classes.legendSectionTitle}>
+        General Features
+      </Typography>
+      {Object.keys(FEATURES)
+        .filter(f => state.filters.features.available[f] && !FEATURES[f].parent)
+        .filter(f => FEATURES[f].generalLegendGroup)
+        .map(renderFeatureOption)}
+    </div>
+  );
+
+  /**
      Render - Full Component
   */
-  let featuresContainerClassName = classes.featuresContainer;
+  let legendContainerClassName = classes.legendContainer;
   let viewLegendButtonsContainerClassName = classes.viewLegendButtonsContainer;
   if (fullscreen) {
     /* eslint-disable max-len */
-    featuresContainerClassName = `${classes.featuresContainer} ${classes.featuresContainerFullscreen}`;
+    legendContainerClassName = `${classes.legendContainer} ${classes.legendContainerFullscreen}`;
     viewLegendButtonsContainerClassName = `${classes.viewLegendButtonsContainer} ${classes.viewLegendButtonsContainerFullscreen}`;
     /* eslint-enable max-len */
   }
@@ -944,13 +1218,13 @@ const SiteMapContainer = (props) => {
         {view === VIEWS.TABLE ? <SiteMapTable /> : null }
         {renderVerticalResizeButton()}
         <div
-          ref={featuresRef}
-          className={featuresContainerClassName}
-          style={{ display: state.filters.features.open ? 'flex' : 'none' }}
+          ref={legendRef}
+          className={legendContainerClassName}
+          style={{ display: state.filters.legendOpen ? 'flex' : 'none' }}
         >
-          {Object.keys(FEATURES)
-            .filter(f => state.filters.features.available[f] && !FEATURES[f].parent)
-            .map(renderFeatureOption)}
+          {renderLegendNEONObservatoryFeatures()}
+          {renderLegendOverlays()}
+          {renderLegendGeneralFeatures()}
         </div>
         <div className={viewLegendButtonsContainerClassName}>
           {renderUnselectablesButton()}

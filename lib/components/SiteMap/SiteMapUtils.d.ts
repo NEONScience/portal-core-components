@@ -380,7 +380,7 @@ export namespace LOCATION_ICON_SVG_SHAPES {
     }
 }
 export namespace FEATURES {
-    export const DOMAINS: {
+    export const STATES: {
         name: string;
         nameSingular: string;
         type: string;
@@ -392,8 +392,9 @@ export namespace FEATURES {
             color: string;
             weight: number;
         };
+        generalLegendGroup: boolean;
     };
-    export const STATES: {
+    export const DOMAINS: {
         name: string;
         nameSingular: string;
         type: string;
@@ -1048,21 +1049,16 @@ export namespace BOUNDARY_COLORS {
 }
 export function calculateFeatureAvailability(state: any): any;
 export function getHref(key: any, arg?: any): string;
-export namespace TILE_LAYERS {
+export namespace BASE_LAYERS {
     export namespace NATGEO_WORLD_MAP {
-        const KEY_4: string;
-        export { KEY_4 as KEY };
-        const name_20: string;
-        export { name_20 as name };
+        export const title: string;
         export const shortAttribution: string;
         export const fullAttribution: string;
         export const url: string;
     }
     export namespace WORLD_IMAGERY {
-        const KEY_5: string;
-        export { KEY_5 as KEY };
-        const name_21: string;
-        export { name_21 as name };
+        const title_1: string;
+        export { title_1 as title };
         const shortAttribution_1: string;
         export { shortAttribution_1 as shortAttribution };
         const fullAttribution_1: string;
@@ -1071,10 +1067,8 @@ export namespace TILE_LAYERS {
         export { url_1 as url };
     }
     export namespace WORLD_STREET_MAP {
-        const KEY_6: string;
-        export { KEY_6 as KEY };
-        const name_22: string;
-        export { name_22 as name };
+        const title_2: string;
+        export { title_2 as title };
         const shortAttribution_2: string;
         export { shortAttribution_2 as shortAttribution };
         const fullAttribution_2: string;
@@ -1083,10 +1077,8 @@ export namespace TILE_LAYERS {
         export { url_2 as url };
     }
     export namespace WORLD_TOPO_MAP {
-        const KEY_7: string;
-        export { KEY_7 as KEY };
-        const name_23: string;
-        export { name_23 as name };
+        const title_3: string;
+        export { title_3 as title };
         const shortAttribution_3: string;
         export { shortAttribution_3 as shortAttribution };
         const fullAttribution_3: string;
@@ -1095,7 +1087,64 @@ export namespace TILE_LAYERS {
         export { url_3 as url };
     }
 }
-export const TILE_LAYERS_BY_NAME: {};
+export const BASE_LAYERS_BY_TITLE: {};
+export namespace OVERLAY_GROUPS {
+    export namespace NLCD_2001 {
+        const title_4: string;
+        export { title_4 as title };
+        const description_20: string;
+        export { description_20 as description };
+        export namespace commonProps {
+            export const format: string;
+            export const transparent: boolean;
+        }
+    }
+}
+export const OVERLAY_GROUPS_BY_TITLE: {};
+export namespace OVERLAYS {
+    export namespace LAND_COVER {
+        export const group: any;
+        const title_5: string;
+        export { title_5 as title };
+        const description_21: string;
+        export { description_21 as description };
+        export namespace commonProps_1 {
+            export const attribution: string;
+        }
+        export { commonProps_1 as commonProps };
+        export { NLCD_CLASSES as legend };
+        export const components: {
+            type: string;
+            key: string;
+            props: {
+                url: string;
+                layers: string;
+            };
+        }[];
+    }
+    export namespace IMPERVIOUS {
+        const group_1: any;
+        export { group_1 as group };
+        const title_6: string;
+        export { title_6 as title };
+        const description_22: string;
+        export { description_22 as description };
+        export namespace commonProps_2 {
+            const attribution_1: string;
+            export { attribution_1 as attribution };
+        }
+        export { commonProps_2 as commonProps };
+        const components_1: {
+            type: string;
+            key: string;
+            props: {
+                url: string;
+                layers: string;
+            };
+        }[];
+        export { components_1 as components };
+    }
+}
 export namespace DEFAULT_STATE {
     export namespace filters {
         export namespace features {
@@ -1111,7 +1160,7 @@ export namespace SITE_MAP_PROP_TYPES {
     export const unusableVerticalSpace: PropTypes.Requireable<number>;
     export const mapCenter: PropTypes.Requireable<(number | null | undefined)[]>;
     export const mapZoom: PropTypes.Requireable<number>;
-    export const mapTileLayer: PropTypes.Requireable<string>;
+    export const mapBaseLayer: PropTypes.Requireable<string>;
     export const location: PropTypes.Requireable<string>;
     export const selection: PropTypes.Requireable<string>;
     export const selectedItems: PropTypes.Requireable<(string | null | undefined)[]>;
@@ -1133,8 +1182,8 @@ export namespace SITE_MAP_DEFAULT_PROPS {
     export { OBSERVATORY_CENTER as mapCenter };
     const mapZoom_1: null;
     export { mapZoom_1 as mapZoom };
-    const mapTileLayer_1: string;
-    export { mapTileLayer_1 as mapTileLayer };
+    const mapBaseLayer_1: string;
+    export { mapBaseLayer_1 as mapBaseLayer };
     const location_1: null;
     export { location_1 as location };
     const selection_1: null;

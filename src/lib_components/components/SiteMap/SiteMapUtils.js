@@ -196,7 +196,7 @@ export const NLCD_CLASSES = {
     category: 'Developed',
   },
   developedHighIntensity: {
-    name: 'Developed High Intensity',
+    name: 'Developed, High Intensity',
     value: 24,
     description: 'Highly developed areas where people reside or work in high numbers. Examples include apartment complexes, row houses and commercial/industrial. Impervious surfaces account for 80% to 100% of the total cover.',
     color: '#b50000',
@@ -409,16 +409,6 @@ export const LOCATION_ICON_SVG_SHAPES = {
 */
 export const FEATURES = {
   // States and Domains
-  DOMAINS: {
-    name: 'NEON Domains',
-    nameSingular: 'NEON Domain',
-    type: FEATURE_TYPES.BOUNDARIES,
-    hideByDefault: true,
-    dataSource: FEATURE_DATA_SOURCES.NEON_CONTEXT,
-    primaryIdOnly: true,
-    featureShape: 'Polygon',
-    style: { color: '#885eba', weight: 8 },
-  },
   STATES: {
     name: 'US States',
     nameSingular: 'US State',
@@ -428,6 +418,17 @@ export const FEATURES = {
     primaryIdOnly: true,
     featureShape: 'Polygon',
     style: { color: '#53ac7b', weight: 8 },
+    generalLegendGroup: true,
+  },
+  DOMAINS: {
+    name: 'NEON Domains',
+    nameSingular: 'NEON Domain',
+    type: FEATURE_TYPES.BOUNDARIES,
+    hideByDefault: true,
+    dataSource: FEATURE_DATA_SOURCES.NEON_CONTEXT,
+    primaryIdOnly: true,
+    featureShape: 'Polygon',
+    style: { color: '#885eba', weight: 8 },
   },
   // Various Boundary Types
   FLIGHT_BOX_BOUNDARIES: {
@@ -1192,7 +1193,9 @@ export const OVERLAYS = {
   LAND_COVER: {
     group: OVERLAY_GROUPS.NLCD_2001.KEY,
     title: 'Land Cover',
-    commonProps: { attribution: 'NLCD 2001 Land Cover' },
+    description: 'Nationwide data on land cover at a 30m resolution with a 16-class legend based on a modified Anderson Level II classification system',
+    commonProps: { attribution: '© MRLC / USGS' },
+    legend: NLCD_CLASSES,
     components: [
       {
         type: 'WMSTileLayer',
@@ -1230,8 +1233,9 @@ export const OVERLAYS = {
   },
   IMPERVIOUS: {
     group: OVERLAY_GROUPS.NLCD_2001.KEY,
-    title: 'Impervious Surface',
-    commonProps: { attribution: 'NLCD 2001 Land Cover' },
+    title: 'Urban Impervious Surfaces',
+    description: 'Urban impervious surfaces as a percentage of developed surface over every 30-meter pixel in the United States',
+    commonProps: { attribution: '© MRLC / USGS' },
     components: [
       {
         type: 'WMSTileLayer',
@@ -1319,7 +1323,7 @@ export const DEFAULT_STATE = {
     bounds: null,
     baseLayer: null,
     baseLayerAutoChangedAbove17: false,
-    overlays: ['LAND_COVER'],
+    overlays: new Set(),
     zoomedIcons: {},
     repositionOpenPopupFunc: null,
   },
@@ -1352,13 +1356,16 @@ export const DEFAULT_STATE = {
   sites: {}, // Sites data is split into 4 features making it hard to look up, so extra refs here
   filters: {
     search: null,
+    legendOpen: false, // whether the legend pane is open/visible
     features: {
-      open: false, // whether the features pane is open/visible
       available: {},
       visible: Object.fromEntries( // key/bool map of which available features are visible
         Object.keys(FEATURES).map(key => [key, !featureIsHiddenByDefault(key)]),
       ),
-      collapsed: new Set(),
+      collapsed: new Set(), // Collapsed (not expanded) since the default for features is expanded
+    },
+    overlays: {
+      expanded: new Set(), // Expanded since the default for overlay legends is collapsed
     },
   },
   fullscreen: false,
