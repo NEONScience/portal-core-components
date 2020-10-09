@@ -1134,6 +1134,58 @@ export namespace OVERLAYS {
             export { attribution_1 as attribution };
         }
         export { commonProps_2 as commonProps };
+        export const legend: {
+            10: {
+                name: string;
+                description: string;
+                color: string;
+            };
+            20: {
+                name: string;
+                description: string;
+                color: string;
+            };
+            30: {
+                name: string;
+                description: string;
+                color: string;
+            };
+            40: {
+                name: string;
+                description: string;
+                color: string;
+            };
+            50: {
+                name: string;
+                description: string;
+                color: string;
+            };
+            60: {
+                name: string;
+                description: string;
+                color: string;
+            };
+            70: {
+                name: string;
+                description: string;
+                color: string;
+            };
+            80: {
+                name: string;
+                description: string;
+                color: string;
+            };
+            90: {
+                name: string;
+                description: string;
+                color: string;
+            };
+            100: {
+                name: string;
+                description: string;
+                color: string;
+            };
+        };
         const components_1: {
             type: string;
             key: string;

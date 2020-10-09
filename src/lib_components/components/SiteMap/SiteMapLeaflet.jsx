@@ -48,6 +48,7 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     height: '0px', // Necessary to set a fixed aspect ratio from props (using paddingBottom)
     overflow: 'hidden',
+    background: theme.palette.grey[50],
     '& div.rlglc-wrap': {
       boxShadow: 'unset',
       margin: '0px',
@@ -386,6 +387,7 @@ const SiteMapLeaflet = () => {
      Render: Base Layer
   */
   const renderBaseLayer = () => {
+    if (!state.map.baseLayer) { return <TileLayer url="" attribution="" />; }
     const baseLayer = BASE_LAYERS[state.map.baseLayer];
     const attributionNode = (
       <div title={baseLayer.fullAttribution} className={classes.attribution}>
@@ -457,7 +459,7 @@ const SiteMapLeaflet = () => {
     }
   };
   const handleBaseLayerChange = (key) => {
-    if (!BASE_LAYERS[key]) { return; }
+    if (key !== null && !BASE_LAYERS[key]) { return; }
     dispatch({ type: 'setMapBaseLayer', baseLayer: key });
   };
   const handleOverlayChange = (overlays) => {
@@ -515,7 +517,10 @@ const SiteMapLeaflet = () => {
   const groupedLayerControlBaseLayers = Object.keys(BASE_LAYERS).map(key => ({
     name: key,
     title: BASE_LAYERS[key].title,
-  }));
+  })).concat([{
+    name: null,
+    title: <span style={{ color: Theme.palette.grey[300], fontStyle: 'italic' }}>none</span>,
+  }]);
   const groupedLayerControlOverlays = Object.keys(OVERLAYS).map((key) => {
     const { KEY: name, title, group } = OVERLAYS[key];
     const checked = state.map.overlays.has(key);

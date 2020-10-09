@@ -1236,6 +1236,58 @@ export const OVERLAYS = {
     title: 'Urban Impervious Surfaces',
     description: 'Urban impervious surfaces as a percentage of developed surface over every 30-meter pixel in the United States',
     commonProps: { attribution: '© MRLC / USGS' },
+    legend: {
+      10: {
+        name: '10%',
+        description: '10% of the surface of a given 30-meter pixel is impervious',
+        color: '#d6bcbc',
+      },
+      20: {
+        name: '20%',
+        description: '20% of the surface of a given 30-meter pixel is impervious',
+        color: '#dba8a8',
+      },
+      30: {
+        name: '30%',
+        description: '30% of the surface of a given 30-meter pixel is impervious',
+        color: '#dd9393',
+      },
+      40: {
+        name: '40%',
+        description: '40% of the surface of a given 30-meter pixel is impervious',
+        color: '#e27c7c',
+      },
+      50: {
+        name: '50%',
+        description: '50% of the surface of a given 30-meter pixel is impervious',
+        color: '#e86868',
+      },
+      60: {
+        name: '60%',
+        description: '60% of the surface of a given 30-meter pixel is impervious',
+        color: '#ea5151',
+      },
+      70: {
+        name: '70%',
+        description: '70% of the surface of a given 30-meter pixel is impervious',
+        color: '#f23d3d',
+      },
+      80: {
+        name: '80%',
+        description: '80% of the surface of a given 30-meter pixel is impervious',
+        color: '#ed82ed',
+      },
+      90: {
+        name: '90%',
+        description: '90% of the surface of a given 30-meter pixel is impervious',
+        color: '#c64fed',
+      },
+      100: {
+        name: '100%',
+        description: '100% of the surface of a given 30-meter pixel is impervious',
+        color: '#9e21ed',
+      },
+    },
     components: [
       {
         type: 'WMSTileLayer',

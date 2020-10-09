@@ -614,7 +614,9 @@ const reducer = (state, action) => {
       return calculateFeatureDataFetches(newState);
 
     case 'setMapBaseLayer':
-      if (!Object.keys(BASE_LAYERS).includes(action.baseLayer)) { return state; }
+      if (action.baseLayer !== null && !Object.keys(BASE_LAYERS).includes(action.baseLayer)) {
+        return state;
+      }
       newState.map.baseLayer = action.baseLayer;
       return newState;
 
@@ -636,7 +638,7 @@ const reducer = (state, action) => {
         return state;
       }
       newState.map.overlays = new Set(action.overlays);
-      newState.filters.overlays = new Set();
+      newState.filters.overlays.expanded = new Set();
       action.overlays.forEach((overlay) => {
         newState.filters.overlays.expanded.add(overlay);
       });
