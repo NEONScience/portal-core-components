@@ -24,6 +24,22 @@ console.log('Caching remote assets...\n');
 
 const fetches = [];
 
+const sanitizeContent = (key, content) => {
+  switch (key) {
+    // DRUPAL_THEME_CSS - comment out all styles with relative path URLs (these will always fail)
+    case REMOTE_ASSETS.DRUPAL_THEME_CSS.KEY:
+      content.match(/^(.*url\([\"\']((?!data)).*)$/mg).forEach((match) => {
+        const replacement = match.endsWith('}')
+          ? `/* ${match.slice(0, -1)} */ }`
+          : `/* ${match} */`;
+        content = content.replace(match, replacement);
+      });
+      return content;
+    default:
+      return content;
+  }
+};
+
 Object.keys(REMOTE_ASSETS)
   .filter((key) => key !== 'default')
   .forEach((key) => {
@@ -37,7 +53,11 @@ Object.keys(REMOTE_ASSETS)
       .then((res) => {
         return new Promise((resolve, reject) => {
           const destination = path.join(CACHED_REMOTE_ASSETS_PATH, name);
-          fs.writeFileSync(destination, res, { encoding:'utf8' });
+          fs.writeFileSync(
+            destination,
+            sanitizeContent(key, res),
+            { encoding:'utf8' },
+          );
           console.log(`* Completed: ${name}`);
           resolve(true);
         });
