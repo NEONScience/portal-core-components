@@ -24,7 +24,8 @@ import {
 import {
   DEFAULT_STATE,
   SORT_DIRECTIONS,
-  TILE_LAYERS,
+  BASE_LAYERS,
+  OVERLAYS,
   VIEWS,
   FEATURES,
   FETCH_STATUS,
@@ -139,8 +140,23 @@ const centerIsValid = center => (
   Array.isArray(center) && center.length === 2 && center.every(v => typeof v === 'number')
 );
 
-const calculateFeatureDataFetches = (state) => {
+// Creates fetch objects with an AWAITING_CALL status based on current state.
+// New fetches are created for all fetchable feature data found to be active (the feature is
+// available and visible), within the current bounds of the map, and not already fetched.
+// Optionally include required sites to consider "in bounds" (useful for when a focus location
+// is a site feature like a plot far from the site center so the site itself may not be seen as
+// "in bounds").
+const calculateFeatureDataFetches = (state, requiredSites = []) => {
   const sitesInMap = calculateLocationsInMap(state.sites, state.map.bounds, true, 0.06);
+  let requiredSitesArray = [];
+  if (requiredSites) {
+    requiredSitesArray = (
+      Array.isArray(requiredSites) ? requiredSites : [requiredSites]
+    ).filter(siteCode => Object.keys(state.sites).includes(siteCode));
+  }
+  requiredSitesArray.forEach((siteCode) => {
+    if (!sitesInMap.includes(siteCode)) { sitesInMap.push(siteCode); }
+  });
   if (!sitesInMap.length) { return state; }
   const domainsInMap = new Set();
   sitesInMap
@@ -317,6 +333,7 @@ const calculateFeatureDataFetches = (state) => {
 };
 const reducer = (state, action) => {
   let setMethod = null;
+  let calculateFetchesRequiredSites = null;
   const newState = { ...state };
   const { validSet } = state.selection;
   // Increment the completed count for overall fetch and, if completed and expected are now equal,
@@ -522,14 +539,14 @@ const reducer = (state, action) => {
   // NATGEO_WORLD_MAP has no data at zoom 17 or higher so go to WORLD_IMAGERY (satellite)
   const updateMapTileWithZoom = () => {
     if (
-      newState.map.zoom <= 17 && state.map.tileLayer !== TILE_LAYERS.NATGEO_WORLD_MAP.KEY
-        && state.map.tileLayerAutoChangedAbove17) {
-      newState.map.tileLayer = TILE_LAYERS.NATGEO_WORLD_MAP.KEY;
-      newState.map.tileLayerAutoChangedAbove17 = false;
+      newState.map.zoom <= 17 && state.map.baseLayer !== BASE_LAYERS.NATGEO_WORLD_MAP.KEY
+        && state.map.baseLayerAutoChangedAbove17) {
+      newState.map.baseLayer = BASE_LAYERS.NATGEO_WORLD_MAP.KEY;
+      newState.map.baseLayerAutoChangedAbove17 = false;
     }
-    if (newState.map.zoom >= 17 && state.map.tileLayer === TILE_LAYERS.NATGEO_WORLD_MAP.KEY) {
-      newState.map.tileLayer = TILE_LAYERS.WORLD_IMAGERY.KEY;
-      newState.map.tileLayerAutoChangedAbove17 = true;
+    if (newState.map.zoom >= 17 && state.map.baseLayer === BASE_LAYERS.NATGEO_WORLD_MAP.KEY) {
+      newState.map.baseLayer = BASE_LAYERS.WORLD_IMAGERY.KEY;
+      newState.map.baseLayerAutoChangedAbove17 = true;
     }
   };
   // Shortcuts for deailing with hierarchies
@@ -575,6 +592,7 @@ const reducer = (state, action) => {
     case 'setMapZoom':
       if (!zoomIsValid(action.zoom)) { return state; }
       newState.map.zoom = action.zoom;
+      newState.focusLocation.isAtCenter = false;
       if (centerIsValid(action.center)) { newState.map.center = action.center; }
       if (boundsAreValid(action.bounds)) { newState.map.bounds = action.bounds; }
       newState.map.zoomedIcons = getZoomedIcons(newState.map.zoom);
@@ -585,17 +603,45 @@ const reducer = (state, action) => {
 
     case 'setMapBounds':
       if (boundsAreValid(action.bounds)) { newState.map.bounds = action.bounds; }
+      newState.focusLocation.isAtCenter = false;
       return calculateFeatureDataFetches(newState);
 
     case 'setMapCenter':
       if (!centerIsValid(action.center)) { return state; }
       if (boundsAreValid(action.bounds)) { newState.map.bounds = action.bounds; }
       newState.map.center = [...action.center];
+      newState.focusLocation.isAtCenter = false;
       return calculateFeatureDataFetches(newState);
 
-    case 'setMapTileLayer':
-      if (!Object.keys(TILE_LAYERS).includes(action.tileLayer)) { return state; }
-      newState.map.tileLayer = action.tileLayer;
+    case 'setMapBaseLayer':
+      if (action.baseLayer !== null && !Object.keys(BASE_LAYERS).includes(action.baseLayer)) {
+        return state;
+      }
+      newState.map.baseLayer = action.baseLayer;
+      return newState;
+
+    case 'setMapOverlayVisibility':
+      if (!OVERLAYS[action.overlay]) { return state; }
+      if (action.visible) {
+        newState.map.overlays.add(action.overlay);
+        newState.filters.overlays.expanded.add(action.overlay);
+      } else {
+        newState.map.overlays.delete(action.overlay);
+        newState.filters.overlays.expanded.delete(action.overlay);
+      }
+      return newState;
+
+    case 'setMapOverlays':
+      if (
+        !Array.isArray(action.overlays)
+          || !action.overlays.every(o => OVERLAYS[o])) {
+        return state;
+      }
+      newState.map.overlays = new Set(action.overlays);
+      newState.filters.overlays.expanded = new Set();
+      action.overlays.forEach((overlay) => {
+        newState.filters.overlays.expanded.add(overlay);
+      });
       return newState;
 
     case 'setMapRepositionOpenPopupFunc':
@@ -605,14 +651,15 @@ const reducer = (state, action) => {
     case 'showFullObservatory':
       newState.map.center = OBSERVATORY_CENTER;
       newState.map.zoom = deriveFullObservatoryZoomLevel(action.mapRef);
+      newState.focusLocation.isAtCenter = false;
       return newState;
 
     // Features
-    case 'setFilterFeaturesOpen':
-      newState.filters.features.open = !!action.open;
+    case 'setLegendOpen':
+      newState.filters.legendOpen = !!action.open;
       return newState;
 
-    case 'setFilterFeatureVisibility':
+    case 'setLegendFeatureOptionVisibility':
       if (
         !Object.keys(FEATURES).includes(action.feature) || typeof action.visible !== 'boolean'
       ) { return state; }
@@ -620,14 +667,24 @@ const reducer = (state, action) => {
       applyFeatureVisibilityToParents(action.feature);
       return calculateFeatureDataFetches(newState);
 
-    case 'setFilterFeatureCollapsed':
+    case 'setLegendFeatureOptionCollapsed':
       if (!Object.keys(FEATURES).includes(action.feature)) { return state; }
       newState.filters.features.collapsed.add(action.feature);
       return newState;
 
-    case 'setFilterFeatureExpanded':
+    case 'setLegendFeatureOptionExpanded':
       if (!Object.keys(FEATURES).includes(action.feature)) { return state; }
       newState.filters.features.collapsed.delete(action.feature);
+      return newState;
+
+    case 'setLegendOverlayOptionCollapsed':
+      if (!Object.keys(OVERLAYS).includes(action.overlay)) { return state; }
+      newState.filters.overlays.expanded.delete(action.overlay);
+      return newState;
+
+    case 'setLegendOverlayOptionExpanded':
+      if (!Object.keys(OVERLAYS).includes(action.overlay)) { return state; }
+      newState.filters.overlays.expanded.add(action.overlay);
       return newState;
 
     // Focus Location
@@ -669,8 +726,12 @@ const reducer = (state, action) => {
       completeOverallFetch();
       newState.map = getMapStateForFocusLocation(newState);
       updateMapTileWithZoom();
+      if (newState.focusLocation.data && newState.focusLocation.data.siteCode) {
+        calculateFetchesRequiredSites = [newState.focusLocation.data.siteCode];
+      }
       return calculateFeatureDataFetches(
         calculateFeatureAvailability(newState),
+        calculateFetchesRequiredSites,
       );
 
     // Fetch and Import
@@ -713,7 +774,16 @@ const reducer = (state, action) => {
       /* eslint-enable max-len */
       newState.overallFetch.pendingHierarchy -= 1;
       completeOverallFetch();
-      return calculateFeatureDataFetches(newState);
+      if (
+        state.focusLocation.isAtCenter
+          && state.focusLocation.data && state.focusLocation.data.siteCode
+      ) {
+        calculateFetchesRequiredSites = [state.focusLocation.data.siteCode];
+      }
+      return calculateFeatureDataFetches(
+        newState,
+        calculateFetchesRequiredSites,
+      );
 
     case 'setDomainLocationHierarchyFetchFailed':
       /* eslint-disable max-len */
@@ -830,7 +900,7 @@ const Provider = (props) => {
     fullscreen,
     mapZoom,
     mapCenter,
-    mapTileLayer,
+    mapBaseLayer,
     location: locationProp,
     selection,
     validItems,
@@ -859,7 +929,7 @@ const Provider = (props) => {
     ...initialState.map,
     zoom: initialMapZoom,
     center: mapCenter,
-    tileLayer: mapTileLayer,
+    baseLayer: mapBaseLayer,
   };
   if (typeof locationProp === 'string') {
     initialState.focusLocation.current = locationProp;

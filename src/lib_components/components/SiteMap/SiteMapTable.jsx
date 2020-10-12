@@ -23,6 +23,7 @@ import {
   getHref,
   VIEWS,
   FEATURES,
+  NLCD_CLASSES,
   FEATURE_TYPES,
   MIN_TABLE_MAX_BODY_HEIGHT,
   PLOT_SAMPLING_MODULES,
@@ -109,7 +110,7 @@ const useStyles = makeStyles(theme => ({
     color: '#fff !important',
     backgroundColor: `${theme.palette.primary.main} !important`,
   },
-  number: {
+  caption: {
     fontFamily: 'monospace',
     fontSize: '1.05em',
     whiteSpace: 'nowrap',
@@ -123,6 +124,16 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'flex-start',
     margin: Theme.spacing(1, 0, 0.5, 0),
     minWidth: '200px',
+  },
+  nlcdClassContainer: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  nlcdClass: {
+    width: '14px',
+    height: '14px',
+    border: '1px solid black',
+    marginRight: theme.spacing(1.5),
   },
 }));
 
@@ -252,8 +263,8 @@ const SiteMapTable = () => {
     );
   };
 
-  const renderNumberString = (str = '--', ariaLabel = null) => (
-    <Typography variant="caption" aria-label={ariaLabel} className={classes.number}>
+  const renderCaptionString = (str = '--', ariaLabel = null) => (
+    <Typography variant="caption" aria-label={ariaLabel} className={classes.caption}>
       {str}
     </Typography>
   );
@@ -497,14 +508,14 @@ const SiteMapTable = () => {
       title: 'Latitude',
       sorting: true,
       filtering: false,
-      render: row => renderNumberString(row.latitude.toFixed(5), 'Latitude'),
+      render: row => renderCaptionString(row.latitude.toFixed(5), 'Latitude'),
     },
     longitude: {
       field: 'longitude',
       title: 'Longitude',
       sorting: true,
       filtering: false,
-      render: row => renderNumberString(row.longitude.toFixed(5), 'Longitude'),
+      render: row => renderCaptionString(row.longitude.toFixed(5), 'Longitude'),
     },
   };
 
@@ -597,10 +608,36 @@ const SiteMapTable = () => {
         sorting: true,
         defaultSort: 'desc',
         filtering: false,
-        render: row => renderNumberString(
+        render: row => renderCaptionString(
           Number.isFinite(row.elevation) ? `${row.elevation.toFixed(2)}m` : '--',
           'Elevation',
         ),
+      },
+      { // NLCD Class
+        field: 'nlcdClass',
+        title: 'NLCD Class',
+        sorting: true,
+        deafultSort: 'asc',
+        lookup: Object.fromEntries(
+          Object.keys(NLCD_CLASSES)
+            .filter(classKey => rows.some(row => row.nlcdClass === classKey))
+            .map(classKey => [classKey, NLCD_CLASSES[classKey].name]),
+        ),
+        render: (row) => {
+          if (!row.nlcdClass) {
+            return renderCaptionString();
+          }
+          if (!NLCD_CLASSES[row.nlcdClass]) {
+            return renderCaptionString(row.nlcdClass, 'NLCD Class');
+          }
+          const { name: title, color: backgroundColor } = NLCD_CLASSES[row.nlcdClass];
+          return (
+            <div className={classes.nlcdClassContainer}>
+              <div className={classes.nlcdClass} title={title} style={{ backgroundColor }} />
+              {renderCaptionString(title, 'NLCD Class')}
+            </div>
+          );
+        },
       },
       { // Plot Size
         field: 'plotSize',
@@ -610,15 +647,15 @@ const SiteMapTable = () => {
         filtering: false,
         render: row => (row.plotDimensions ? (
           <React.Fragment>
-            {renderNumberString(`${row.plotDimensions}`, 'Plot Size (Dimensions)')}
+            {renderCaptionString(`${row.plotDimensions}`, 'Plot Size (Dimensions)')}
             {Number.isFinite(row.plotSize) ? (
               <React.Fragment>
                 <br />
-                {renderNumberString(`(${row.plotSize.toFixed(0)}m²)`, 'Plot Size (Area)')}
+                {renderCaptionString(`(${row.plotSize.toFixed(0)}m\u00b2)`, 'Plot Size (Area)')}
               </React.Fragment>
             ) : null}
           </React.Fragment>
-        ) : renderNumberString()),
+        ) : renderCaptionString()),
       },
       { // Plot Slope Aspect
         field: 'slopeAspect',
@@ -626,8 +663,8 @@ const SiteMapTable = () => {
         sorting: true,
         deafultSort: 'asc',
         filtering: false,
-        render: row => renderNumberString(
-          Number.isFinite(row.slopeAspect) ? `${row.slopeAspect.toFixed(2)}°` : '--',
+        render: row => renderCaptionString(
+          Number.isFinite(row.slopeAspect) ? `${row.slopeAspect.toFixed(2)}\u00b0` : '--',
           'Slope Aspect',
         ),
       },
@@ -637,7 +674,7 @@ const SiteMapTable = () => {
         sorting: true,
         deafultSort: 'asc',
         filtering: false,
-        render: row => renderNumberString(
+        render: row => renderCaptionString(
           Number.isFinite(row.slopeGradient) ? `${row.slopeGradient.toFixed(2)}%` : '--',
           'Slope Gradient',
         ),
@@ -672,7 +709,7 @@ const SiteMapTable = () => {
               }
             >
               <div className={classes.startFlex}>
-                {renderNumberString(row.samplingModules.length, 'Potential Sampling Modules')}
+                {renderCaptionString(row.samplingModules.length, 'Potential Sampling Modules')}
                 <IconButton
                   size="small"
                   className={classes.iconButton}
@@ -683,7 +720,7 @@ const SiteMapTable = () => {
               </div>
             </Tooltip>
           ) : (
-            renderNumberString()
+            renderCaptionString()
           )
         ),
       },

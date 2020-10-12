@@ -158,6 +158,150 @@ export const PLOT_SAMPLING_MODULES = {
   vst: 'Vegetation Structure',
 };
 
+// Source: https://www.mrlc.gov/data/legends/national-land-cover-database-2001-nlcd2001-legend
+export const NLCD_CLASSES = {
+  openWater: {
+    name: 'Open Water',
+    value: 11,
+    description: 'Areas of open water, generally with less than 25% cover of vegetation or soil.',
+    color: '#5475a8',
+    category: 'Water',
+  },
+  perennialIceSnow: {
+    name: 'Perennial Ice/Snow',
+    vaule: 12,
+    description: 'Areas characterized by a perennial cover of ice and/or snow, generally greater than 25% of total cover.',
+    color: '#ffffff',
+    category: 'Water',
+  },
+  developedOpenSpace: {
+    name: 'Developed, Open Space',
+    value: 21,
+    description: 'Areas with a mixture of some constructed materials, but mostly vegetation in the form of lawn grasses. Impervious surfaces account for less than 20% of total cover. These areas most commonly include large-lot single-family housing units, parks, golf courses, and vegetation planted in developed settings for recreation, erosion control, or aesthetic purposes.',
+    color: '#e8d1d1',
+    category: 'Developed',
+  },
+  developedLowIntensity: {
+    name: 'Developed, Low Intensity',
+    value: 22,
+    description: 'Areas with a mixture of constructed materials and vegetation. Impervious surfaces account for 20% to 49% percent of total cover. These areas most commonly include single-family housing units.',
+    color: '#e29e8c',
+    category: 'Developed',
+  },
+  developedMediumIntensity: {
+    name: 'Developed, Medium Intensity',
+    value: 23,
+    description: 'Areas with a mixture of constructed materials and vegetation. Impervious surfaces account for 50% to 79% of the total cover. These areas most commonly include single-family housing units.',
+    color: '#ff0000',
+    category: 'Developed',
+  },
+  developedHighIntensity: {
+    name: 'Developed, High Intensity',
+    value: 24,
+    description: 'Highly developed areas where people reside or work in high numbers. Examples include apartment complexes, row houses and commercial/industrial. Impervious surfaces account for 80% to 100% of the total cover.',
+    color: '#b50000',
+    category: 'Developed',
+  },
+  barrenLand: {
+    name: 'Barren Land (Rock/Sand/Clay)',
+    value: 31,
+    description: 'Areas of bedrock, desert pavement, scarps, talus, slides, volcanic material, glacial debris, sand dunes, strip mines, gravel pits and other accumulations of earthen material. Generally, vegetation accounts for less than 15% of total cover.',
+    color: '#d2cdc0',
+    category: 'Barren',
+  },
+  deciduousForest: {
+    name: 'Deciduous Forest',
+    value: 41,
+    description: 'Areas dominated by trees generally greater than 5 meters tall, and greater than 20% of total vegetation cover. More than 75% of the tree species shed foliage simultaneously in response to seasonal change.',
+    color: '#85c77e',
+    category: 'Forest',
+  },
+  evergreenForest: {
+    name: 'Evergreen Forest',
+    value: 42,
+    description: 'Areas dominated by trees generally greater than 5 meters tall, and greater than 20% of total vegetation cover. More than 75% of the tree species maintain their leaves all year. Canopy is never without green foliage.',
+    color: '#38814e',
+    category: 'Forest',
+  },
+  mixedForest: {
+    name: 'Mixed Forest',
+    value: 43,
+    description: 'Areas dominated by trees generally greater than 5 meters tall, and greater than 20% of total vegetation cover. Neither deciduous nor evergreen species are greater than 75% of total tree cover.',
+    color: '#d4e7b0',
+    category: 'Forest',
+  },
+  dwarfScrub: {
+    name: 'Dwarf Scrub',
+    value: 51,
+    description: 'Alaska only areas dominated by shrubs less than 20 centimeters tall with shrub canopy typically greater than 20% of total vegetation. This type is often co-associated with grasses, sedges, herbs, and non-vascular vegetation.',
+    color: '#af963c',
+    category: 'Shrubland',
+  },
+  shrubScrub: {
+    name: 'Shrub/Scrub',
+    value: 52,
+    description: 'Areas dominated by shrubs; less than 5 meters tall with shrub canopy typically greater than 20% of total vegetation. This class includes true shrubs, young trees in an early successional stage or trees stunted from environmental conditions.',
+    color: '#dcca8f',
+    category: 'Shrubland',
+  },
+  grasslandHerbaceous: {
+    name: 'Grassland/Herbaceous',
+    value: 71,
+    description: 'Areas dominated by gramanoid or herbaceous vegetation, generally greater than 80% of total vegetation. These areas are not subject to intensive management such as tilling, but can be utilized for grazing.',
+    color: '#fde9aa',
+    category: 'Herbaceous',
+  },
+  sedgeHerbaceous: {
+    name: 'Sedge/Herbaceous',
+    value: 72,
+    description: 'Alaska only areas dominated by sedges and forbs, generally greater than 80% of total vegetation. This type can occur with significant other grasses or other grass like plants, and includes sedge tundra, and sedge tussock tundra.',
+    color: '#d1d182',
+    category: 'Herbaceous',
+  },
+  lichens: {
+    name: 'Lichens',
+    value: 73,
+    description: 'Alaska only areas dominated by fruticose or foliose lichens generally greater than 80% of total vegetation.',
+    color: '#a3cc51',
+    category: 'Herbaceous',
+  },
+  moss: {
+    name: 'Moss',
+    value: 74,
+    description: 'Alaska only areas dominated by mosses, generally greater than 80% of total vegetation.',
+    color: '#82ba9e',
+    category: 'Herbaceous',
+  },
+  pastureHay: {
+    name: 'Pasture/Hay',
+    value: 81,
+    description: 'Areas of grasses, legumes, or grass-legume mixtures planted for livestock grazing or the production of seed or hay crops, typically on a perennial cycle. Pasture/hay vegetation accounts for greater than 20% of total vegetation.',
+    color: '#fbf65d',
+    category: 'Planted/Cultivated',
+  },
+  cultivatedCrops: {
+    name: 'Cultivated Crops',
+    value: 82,
+    description: 'Areas used for the production of annual crops, such as corn, soybeans, vegetables, tobacco, and cotton, and also perennial woody crops such as orchards and vineyards. Crop vegetation accounts for greater than 20% of total vegetation. This class also includes all land being actively tilled.',
+    color: '#ca9146',
+    category: 'Planted/Cultivated',
+  },
+  woodyWetlands: {
+    name: 'Woody Wetlands',
+    value: 90,
+    description: 'Areas where forest or shrubland vegetation accounts for greater than 20% of vegetative cover and the soil or substrate is periodically saturated with or covered with water.',
+    color: '#c8e6f8',
+    category: 'Wetlands',
+  },
+  emergentHerbaceousWetlands: {
+    name: 'Emergent Herbaceous Wetlands',
+    value: 95,
+    description: 'Areas where perennial herbaceous vegetation accounts for greater than 80% of vegetative cover and the soil or substrate is periodically saturated with or covered with water.',
+    color: '#64b3d5',
+    category: 'Wetlands',
+  },
+};
+
 /**
    Icon SVGs
    An importable data structure containing all imported SVGs for map and legend icons
@@ -265,16 +409,6 @@ export const LOCATION_ICON_SVG_SHAPES = {
 */
 export const FEATURES = {
   // States and Domains
-  DOMAINS: {
-    name: 'NEON Domains',
-    nameSingular: 'NEON Domain',
-    type: FEATURE_TYPES.BOUNDARIES,
-    hideByDefault: true,
-    dataSource: FEATURE_DATA_SOURCES.NEON_CONTEXT,
-    primaryIdOnly: true,
-    featureShape: 'Polygon',
-    style: { color: '#885eba', weight: 8 },
-  },
   STATES: {
     name: 'US States',
     nameSingular: 'US State',
@@ -284,6 +418,17 @@ export const FEATURES = {
     primaryIdOnly: true,
     featureShape: 'Polygon',
     style: { color: '#53ac7b', weight: 8 },
+    generalLegendGroup: true,
+  },
+  DOMAINS: {
+    name: 'NEON Domains',
+    nameSingular: 'NEON Domain',
+    type: FEATURE_TYPES.BOUNDARIES,
+    hideByDefault: true,
+    dataSource: FEATURE_DATA_SOURCES.NEON_CONTEXT,
+    primaryIdOnly: true,
+    featureShape: 'Polygon',
+    style: { color: '#885eba', weight: 8 },
   },
   // Various Boundary Types
   FLIGHT_BOX_BOUNDARIES: {
@@ -989,44 +1134,197 @@ export const getHref = (key, arg = null) => {
 };
 
 /**
- Tile Layers
+ Map Base Layers
  Third party services providing tiles for different earth views (topographic, satellite, etc.)
- with attributions
+ with attributions. Only one base layer can be shown at a time.
 */
-export const TILE_LAYERS = {
+export const BASE_LAYERS = {
   NATGEO_WORLD_MAP: {
-    KEY: 'NATGEO_WORLD_MAP',
-    name: 'National Geographic',
+    title: 'National Geographic',
     shortAttribution: '© Natl. Geographic et al.',
     fullAttribution: '© National Geographic, Esri, Garmin, HERE, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC',
     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}',
   },
   WORLD_IMAGERY: {
-    KEY: 'WORLD_IMAGERY',
-    name: 'Satellite Imagery',
+    title: 'Satellite Imagery',
     shortAttribution: '© Esri et al.',
     fullAttribution: '© Esri, DigitalGlobe, GeoEye, Earthstar Geographics, CNES/Airbus DS, USDA, USGS, AeroGRID, IGN, GIS Community',
     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
   },
   WORLD_STREET_MAP: {
-    KEY: 'WORLD_STREET_MAP',
-    name: 'Streets',
+    title: 'Streets',
     shortAttribution: '© Esri et al.',
     fullAttribution: '© Esri, HERE, Garmin, USGS, Intermap, INCREMENT P, NRCan, Esri Japan, METI, Esri China (Hong Kong), Esri Korea, Esri (Thailand), NGCC, OSM contributors, GIS Community',
     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
   },
   WORLD_TOPO_MAP: {
-    KEY: 'WORLD_TOPO_MAP',
-    name: 'Topographic',
+    title: 'Topographic',
     shortAttribution: '© Esri et al.',
     fullAttribution: '© Esri, HERE, Garmin, Intermap, iPC, GEBCO, USGS, FAO, NPS, NRCAN, GeoBase, IGN, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), OSM contributors, GIS Community',
     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
   },
 };
-export const TILE_LAYERS_BY_NAME = {};
-Object.keys(TILE_LAYERS).forEach((key) => {
-  TILE_LAYERS_BY_NAME[TILE_LAYERS[key].name] = key;
+export const BASE_LAYERS_BY_TITLE = {};
+Object.keys(BASE_LAYERS).forEach((key) => {
+  BASE_LAYERS[key].KEY = key;
+  BASE_LAYERS_BY_TITLE[BASE_LAYERS[key].title] = key;
 });
+
+/**
+ Map Overlays
+ Third party services providing tiles for different environmental contexts. These layers are similar
+ to base layers in that they cover most or all of the observatory if not the whole planet. They add
+ additional context from a third party data source, such as NLCD.
+*/
+export const OVERLAY_GROUPS = {
+  NLCD_2001: {
+    title: 'National Land Cover Database (NLCD) 2001',
+    description: 'National Land Cover Database (NLCD) 2001 release data from the Multi-Resolution Land Characteristics (MRLC) consortium',
+    commonProps: { format: 'image/png', transparent: true },
+  },
+};
+export const OVERLAY_GROUPS_BY_TITLE = {};
+Object.keys(OVERLAY_GROUPS).forEach((key) => {
+  OVERLAY_GROUPS[key].KEY = key;
+  OVERLAY_GROUPS_BY_TITLE[OVERLAY_GROUPS[key].title] = key;
+});
+
+export const OVERLAYS = {
+  LAND_COVER: {
+    group: OVERLAY_GROUPS.NLCD_2001.KEY,
+    title: 'Land Cover',
+    description: 'Nationwide data on land cover at a 30m resolution with a 16-class legend based on a modified Anderson Level II classification system',
+    commonProps: { attribution: '© MRLC / USGS' },
+    legend: NLCD_CLASSES,
+    components: [
+      {
+        type: 'WMSTileLayer',
+        key: 'L48',
+        props: {
+          url: 'https://www.mrlc.gov/geoserver/mrlc_display/NLCD_2001_Land_Cover_L48/wms?',
+          layers: 'NLCD_2001_Land_Cover_L48',
+        },
+      },
+      {
+        type: 'WMSTileLayer',
+        key: 'AK',
+        props: {
+          url: 'https://www.mrlc.gov/geoserver/mrlc_display/NLCD_2001_Land_Cover_AK/wms?',
+          layers: 'NLCD_2001_Land_Cover_AK',
+        },
+      },
+      {
+        type: 'WMSTileLayer',
+        key: 'HI',
+        props: {
+          url: 'https://www.mrlc.gov/geoserver/mrlc_display/NLCD_2001_Land_Cover_HI/wms?',
+          layers: 'NLCD_2001_Land_Cover_HI',
+        },
+      },
+      {
+        type: 'WMSTileLayer',
+        key: 'PR',
+        props: {
+          url: 'https://www.mrlc.gov/geoserver/mrlc_display/NLCD_2001_Land_Cover_PR/wms?',
+          layers: 'NLCD_2001_Land_Cover_PR',
+        },
+      },
+    ],
+  },
+  IMPERVIOUS: {
+    group: OVERLAY_GROUPS.NLCD_2001.KEY,
+    title: 'Urban Impervious Surfaces',
+    description: 'Urban impervious surfaces as a percentage of developed surface over every 30-meter pixel in the United States',
+    commonProps: { attribution: '© MRLC / USGS' },
+    legend: {
+      10: {
+        name: '10%',
+        description: '10% of the surface of a given 30-meter pixel is impervious',
+        color: '#d6bcbc',
+      },
+      20: {
+        name: '20%',
+        description: '20% of the surface of a given 30-meter pixel is impervious',
+        color: '#dba8a8',
+      },
+      30: {
+        name: '30%',
+        description: '30% of the surface of a given 30-meter pixel is impervious',
+        color: '#dd9393',
+      },
+      40: {
+        name: '40%',
+        description: '40% of the surface of a given 30-meter pixel is impervious',
+        color: '#e27c7c',
+      },
+      50: {
+        name: '50%',
+        description: '50% of the surface of a given 30-meter pixel is impervious',
+        color: '#e86868',
+      },
+      60: {
+        name: '60%',
+        description: '60% of the surface of a given 30-meter pixel is impervious',
+        color: '#ea5151',
+      },
+      70: {
+        name: '70%',
+        description: '70% of the surface of a given 30-meter pixel is impervious',
+        color: '#f23d3d',
+      },
+      80: {
+        name: '80%',
+        description: '80% of the surface of a given 30-meter pixel is impervious',
+        color: '#ed82ed',
+      },
+      90: {
+        name: '90%',
+        description: '90% of the surface of a given 30-meter pixel is impervious',
+        color: '#c64fed',
+      },
+      100: {
+        name: '100%',
+        description: '100% of the surface of a given 30-meter pixel is impervious',
+        color: '#9e21ed',
+      },
+    },
+    components: [
+      {
+        type: 'WMSTileLayer',
+        key: 'L48',
+        props: {
+          url: 'https://www.mrlc.gov/geoserver/mrlc_display/NLCD_2001_Impervious_L48/wms?',
+          layers: 'NLCD_2001_Impervious_L48',
+        },
+      },
+      {
+        type: 'WMSTileLayer',
+        key: 'AK',
+        props: {
+          url: 'https://www.mrlc.gov/geoserver/mrlc_display/NLCD_2001_Impervious_AK/wms?',
+          layers: 'NLCD_2001_Impervious_AK',
+        },
+      },
+      {
+        type: 'WMSTileLayer',
+        key: 'HI',
+        props: {
+          url: 'https://www.mrlc.gov/geoserver/mrlc_display/NLCD_2001_Impervious_HI/wms?',
+          layers: 'NLCD_2001_Impervious_HI',
+        },
+      },
+      {
+        type: 'WMSTileLayer',
+        key: 'PR',
+        props: {
+          url: 'https://www.mrlc.gov/geoserver/mrlc_display/NLCD_2001_Impervious_PR/wms?',
+          layers: 'NLCD_2001_Impervious_PR',
+        },
+      },
+    ],
+  },
+};
+Object.keys(OVERLAYS).forEach((key) => { OVERLAYS[key].KEY = key; });
 
 /**
    Default State
@@ -1053,6 +1351,7 @@ export const DEFAULT_STATE = {
     current: null,
     data: null,
     fetch: { status: null, error: null },
+    isAtCenter: false, // Boolean to track when the map moves off of a focus location by the user
   },
   aspectRatio: {
     currentValue: null, // Aspect ratio of the Site Map component content area (table and/or map)
@@ -1074,8 +1373,9 @@ export const DEFAULT_STATE = {
     zoom: null,
     center: [],
     bounds: null,
-    tileLayer: null,
-    tileLayerAutoChangedAbove17: false,
+    baseLayer: null,
+    baseLayerAutoChangedAbove17: false,
+    overlays: new Set(),
     zoomedIcons: {},
     repositionOpenPopupFunc: null,
   },
@@ -1108,13 +1408,16 @@ export const DEFAULT_STATE = {
   sites: {}, // Sites data is split into 4 features making it hard to look up, so extra refs here
   filters: {
     search: null,
+    legendOpen: false, // whether the legend pane is open/visible
     features: {
-      open: false, // whether the features pane is open/visible
       available: {},
       visible: Object.fromEntries( // key/bool map of which available features are visible
         Object.keys(FEATURES).map(key => [key, !featureIsHiddenByDefault(key)]),
       ),
-      collapsed: new Set(),
+      collapsed: new Set(), // Collapsed (not expanded) since the default for features is expanded
+    },
+    overlays: {
+      expanded: new Set(), // Expanded since the default for overlay legends is collapsed
     },
   },
   fullscreen: false,
@@ -1252,7 +1555,8 @@ export const SITE_MAP_PROP_TYPES = {
   // Map Props
   mapCenter: PropTypes.arrayOf(PropTypes.number),
   mapZoom: PropTypes.number,
-  mapTileLayer: PropTypes.oneOf(Object.keys(TILE_LAYERS)),
+  mapBaseLayer: PropTypes.oneOf(Object.keys(BASE_LAYERS)),
+  // mapOverlays: PropTypes.arrayOf(Object.keys(OVERLAYS)),
   // Initial map focus (overrides mapCenter and mapZoom)
   location: PropTypes.string,
   // Selection Props
@@ -1275,7 +1579,8 @@ export const SITE_MAP_DEFAULT_PROPS = {
   // Map Props
   mapCenter: OBSERVATORY_CENTER,
   mapZoom: null,
-  mapTileLayer: Object.keys(TILE_LAYERS)[0],
+  mapBaseLayer: Object.keys(BASE_LAYERS)[0],
+  // mapOverlays: null,
   // Initial map focus (overrides mapCenter and mapZoom)
   location: null,
   // Selection Props
@@ -1445,6 +1750,11 @@ export const getMapStateForFocusLocation = (state = {}) => {
       /* eslint-enable no-underscore-dangle */
     };
   }
+
+  // Register the focusLocation as being at the map center
+  newState.focusLocation.isAtCenter = true;
+
+  // Done
   return newState.map;
 };
 

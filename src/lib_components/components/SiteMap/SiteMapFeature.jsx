@@ -15,6 +15,7 @@ import SnackbarContent from '@material-ui/core/SnackbarContent';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
+import HelpIcon from '@material-ui/icons/HelpOutline';
 import ClickIcon from '@material-ui/icons/TouchApp';
 import ElevationIcon from '@material-ui/icons/Terrain';
 import ExploreDataProductsIcon from '@material-ui/icons/InsertChartOutlined';
@@ -42,6 +43,7 @@ import {
   getHref,
   FEATURES,
   FEATURE_TYPES,
+  NLCD_CLASSES,
   KM2_TO_ACRES,
   HIGHLIGHT_STATUS,
   SELECTION_STATUS,
@@ -175,6 +177,14 @@ const useStyles = makeStyles(theme => ({
   },
   unselectable: {
     filter: 'saturate(0.3) brightness(2)',
+  },
+  nlcdClass: {
+    width: '36px',
+    height: '12px',
+    border: '1px solid black',
+    marginLeft: theme.spacing(1.5),
+    marginBottom: '-2px',
+    display: 'inline-block',
   },
 }));
 
@@ -565,7 +575,7 @@ const SiteMapFeature = (props) => {
         {!Number.isFinite(loc.plotSize) ? null : (
           <React.Fragment>
             <br />
-            {`(${loc.plotSize.toFixed(0)}m²)`}
+            {`(${loc.plotSize.toFixed(0)}m\u00b2)`}
           </React.Fragment>
         )}
       </Typography>
@@ -581,7 +591,7 @@ const SiteMapFeature = (props) => {
       data-selenium="sitemap-map-popup-plotSlope"
     >
       <Typography variant="subtitle2">Plot Slope</Typography>
-      {renderNumericalValue(loc.slopeAspect, 'Aspect', '�', 2, 'Slope Aspect', right)}
+      {renderNumericalValue(loc.slopeAspect, 'Aspect', '\u00b0', 2, 'Slope Aspect', right)}
       {renderNumericalValue(loc.slopeGradient, 'Gradient', '%', 2, 'Slope Gradient', right)}
     </div>
   );
@@ -622,7 +632,7 @@ const SiteMapFeature = (props) => {
       <Grid item xs={12} data-selenium="sitemap-map-popup-area">
         <Typography variant="subtitle2">Area</Typography>
         <div className={classes.startFlex}>
-          {renderNumericalValue(areaKm2, null, 'km²', 2, 'Area (km²)')}
+          {renderNumericalValue(areaKm2, null, 'km\u00b2', 2, 'Area (km\u00b2)')}
           {areaAcres === null ? null : (
             <div style={{ marginLeft: Theme.spacing(1) }}>
               {renderNumericalValue(areaAcres, null, ' acres', 2, 'Area (acres)', false, true)}
@@ -716,6 +726,46 @@ const SiteMapFeature = (props) => {
   );
 
   /**
+     Render: Popup Row; NLCD Classes (nationalLandCoverDatabase2001)
+  */
+  const renderNlcdClass = (loc) => {
+    let nlcd = <i>n/a</i>;
+    const titleStyle = {};
+    if (loc.nlcdClass) {
+      nlcd = loc.nlcdClass;
+      if (NLCD_CLASSES[loc.nlcdClass]) {
+        titleStyle.marginBottom = '-4px';
+        const tooltip = `${NLCD_CLASSES[loc.nlcdClass].name} - ${NLCD_CLASSES[loc.nlcdClass].description}`;
+        nlcd = (
+          <React.Fragment>
+            {NLCD_CLASSES[loc.nlcdClass].name}
+            <div
+              className={classes.nlcdClass}
+              title={NLCD_CLASSES[loc.nlcdClass].name}
+              style={{ backgroundColor: NLCD_CLASSES[loc.nlcdClass].color }}
+            />
+            <Tooltip title={tooltip}>
+              <IconButton
+                size="small"
+                style={{ marginLeft: Theme.spacing(0.5), marginBottom: '1px' }}
+                aria-label="NLCD Class Description"
+              >
+                <HelpIcon style={{ fontSize: '1rem' }} />
+              </IconButton>
+            </Tooltip>
+          </React.Fragment>
+        );
+      }
+    }
+    return (
+      <Grid key="nlcdClass" item xs={12} data-selenium="sitemap-map-popup-nlcdClass">
+        <Typography variant="subtitle2" style={titleStyle}>NLCD Class</Typography>
+        <Typography variant="caption">{nlcd}</Typography>
+      </Grid>
+    );
+  };
+
+  /**
      Render: Popup Row; Location Site and Domain
   */
   const renderLocationSiteAndDomain = (siteCode) => {
@@ -767,6 +817,7 @@ const SiteMapFeature = (props) => {
         <Grid container spacing={1}>
           {renderCoordsAndElevation(loc)}
           {additionalRows.map(row => (typeof row === 'function' ? row(loc) : row))}
+          {loc.nlcdClass ? renderNlcdClass(loc) : null}
           {renderLocationSiteAndDomain(siteCode)}
         </Grid>
       </Popup>
