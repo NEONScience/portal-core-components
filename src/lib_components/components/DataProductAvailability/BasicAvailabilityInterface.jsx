@@ -36,6 +36,7 @@ import MomentUtils from '@date-io/moment';
 import FullWidthVisualization from '../FullWidthVisualization/FullWidthVisualization';
 import DownloadDataContext from '../DownloadDataContext/DownloadDataContext';
 import NeonContext from '../NeonContext/NeonContext';
+import SelectSitesButton from '../SelectSitesButton/SelectSitesButton';
 import SiteChip from '../SiteChip/SiteChip';
 import Theme from '../Theme/Theme';
 
@@ -596,15 +597,13 @@ const BasicAvailabilityInterface = (props) => {
             >
               Select All Sites
             </Button>
-            {/* Show/enable when site selection widget exists and cab be used here */}
-            <Button
-              {...selectionButtonProps}
-              data-selenium="data-product-availability.browse-sites-button"
-              style={{ marginLeft: Theme.spacing(1), display: 'none' }}
-              disabled
-            >
-              Browse Sites…
-            </Button>
+            <SelectSitesButton
+              selectedItems={sites.value}
+              validItems={sites.validValues}
+              buttonProps={{ ...selectionButtonProps, style: { marginLeft: Theme.spacing(1) } }}
+              data-selenium="data-product-availability.map-button"
+              onSave={(newSites) => { setSitesValue(Array.from(newSites)); }}
+            />
           </div>
         </Grid>
         <Grid item xs={12} sm={7} md={6}>
