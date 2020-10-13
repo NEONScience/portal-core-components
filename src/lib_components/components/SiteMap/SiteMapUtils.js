@@ -129,6 +129,9 @@ export const HIGHLIGHT_STATUS = { NONE: 'NONE', HIGHLIGHT: 'HIGHLIGHT', SELECT: 
 // For consistency in denoting which dinstinct user interfaces are available and which is visible
 export const VIEWS = { MAP: 'MAP', TABLE: 'TABLE' };
 
+// For consistency in denoting exclusive available mouse behaviors on the map
+export const MAP_MOUSE_MODES = { PAN: 'PAN', AREA_SELECT: 'AREA_SELECT' };
+
 // For consistency in tracking the current status of a fetch or import
 export const FETCH_STATUS = {
   AWAITING_CALL: 'AWAITING_CALL',
@@ -1376,6 +1379,7 @@ export const DEFAULT_STATE = {
     baseLayer: null,
     baseLayerAutoChangedAbove17: false,
     overlays: new Set(),
+    mouseMode: MAP_MOUSE_MODES.PAN,
     zoomedIcons: {},
     repositionOpenPopupFunc: null,
   },
@@ -1586,7 +1590,7 @@ export const SITE_MAP_DEFAULT_PROPS = {
   // Selection Props
   selection: null,
   selectedItems: [],
-  validItems: [],
+  validItems: null,
   selectionLimit: null,
   onSelectionChange: () => {},
   // Filter Props

@@ -10,8 +10,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import IconButton from '@material-ui/core/IconButton';
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
+
+import MapPanIcon from '@material-ui/icons/PanTool';
+import MapAreaSelectIcon from '@material-ui/icons/CropFree';
 import ObservatoryIcon from '@material-ui/icons/Public';
 
 import 'leaflet/dist/leaflet.css';
@@ -38,7 +43,9 @@ import {
   OVERLAY_GROUPS,
   MAP_ZOOM_RANGE,
   FEATURES,
+  FEATURE_TYPES,
   FETCH_STATUS,
+  MAP_MOUSE_MODES,
   UNSELECTABLE_MARKER_FILTER,
   deriveFullObservatoryZoomLevel,
 } from './SiteMapUtils';
@@ -161,8 +168,8 @@ const useStyles = makeStyles(theme => ({
   progress: {
     zIndex: 900,
     position: 'absolute',
-    top: theme.spacing(1.5),
-    left: theme.spacing(7),
+    top: '12px',
+    left: '56px',
   },
   observatoryButton: {
     backgroundColor: '#fff',
@@ -183,6 +190,23 @@ const useStyles = makeStyles(theme => ({
     },
     '& svg': {
       fontSize: '1.15rem !important',
+    },
+  },
+  mouseModeToggleButtonGroup: {
+    borderRadius: '2px',
+    backgroundColor: 'white',
+    position: 'absolute',
+    zIndex: 999,
+    margin: '0px',
+    top: '8px',
+    left: '56px',
+    '& button': {
+      width: '26px',
+      height: '26px',
+      padding: 'unset !important',
+      '& svg': {
+        fontSize: '0.9rem',
+      },
     },
   },
 }));
@@ -384,6 +408,56 @@ const SiteMapLeaflet = () => {
   );
 
   /**
+     Render - Mouse Mode Buttoms (Pan / Select)
+   */
+  const renderMouseModeToggleButtonGroup = () => {
+    if (!state.selection.active) { return null; }
+    const units = state.selection.active === FEATURE_TYPES.SITES ? 'sites' : 'locations';
+    const mouseModeTooltips = {
+      [MAP_MOUSE_MODES.PAN]: 'Click and drag on map to move the map center; shift+drag to zoom to an area',
+      [MAP_MOUSE_MODES.AREA_SELECT]: `Click and drag on map to select ${units} in an area; shift+drag to add onto selection`,
+    };
+    const mouseModeIcons = {
+      [MAP_MOUSE_MODES.PAN]: MapPanIcon,
+      [MAP_MOUSE_MODES.AREA_SELECT]: MapAreaSelectIcon,
+    };
+    return (
+      <ToggleButtonGroup
+        exclusive
+        color="primary"
+        variant="outlined"
+        value={state.map.mouseMode}
+        onChange={(event, newMouseMode) => {
+          dispatch({ type: 'setMapMouseMode', mouseMode: newMouseMode });
+        }}
+        className={classes.mouseModeToggleButtonGroup}
+      >
+        {Object.keys(MAP_MOUSE_MODES).map((key) => {
+          const Icon = mouseModeIcons[key];
+          return (
+            <Tooltip
+              key={key}
+              title={mouseModeTooltips[key]}
+              enterDelay={500}
+              enterNextDelay={200}
+              placement="bottom-start"
+            >
+              <ToggleButton
+                value={key}
+                selected={state.map.mouseMode === key}
+                data-selenium={`sitemap-mouseMode-${key}`}
+                area-label={mouseModeTooltips[key]}
+              >
+                <Icon />
+              </ToggleButton>
+            </Tooltip>
+          );
+        })}
+      </ToggleButtonGroup>
+    );
+  };
+
+  /**
      Render: Base Layer
   */
   const renderBaseLayer = () => {
@@ -474,9 +548,10 @@ const SiteMapLeaflet = () => {
   */
   const renderProgress = () => {
     if (state.overallFetch.expected === state.overallFetch.completed) { return null; }
+    const style = state.selection.active ? { left: '48px', top: '48px' } : null;
     if (state.overallFetch.pendingHierarchy !== 0) {
       return (
-        <Box className={classes.progress}>
+        <Box className={classes.progress} style={style}>
           <CircularProgress size={32} />
         </Box>
       );
@@ -491,7 +566,7 @@ const SiteMapLeaflet = () => {
       value: progress,
     };
     return (
-      <Box className={classes.progress}>
+      <Box className={classes.progress} style={style}>
         <CircularProgress {...progressProps} />
         <Box
           top={0}
@@ -529,12 +604,24 @@ const SiteMapLeaflet = () => {
     return { name, title, groupTitle, checked }; // eslint-disable-line object-curly-newline
   });
   const canRenderGroupedLayerControl = mapRef && mapRef.current && mapRef.current.leafletElement;
+  const mouseModeCursors = {
+    [MAP_MOUSE_MODES.PAN]: 'grab',
+    [MAP_MOUSE_MODES.AREA_SELECT]: 'crosshair',
+  };
+  const mouseModeProps = state.map.mouseMode === MAP_MOUSE_MODES.PAN ? {
+    boxZoom: true, dragging: true,
+  } : {
+    boxZoom: false, dragging: false, touchZoom: false,
+  };
   return (
     <React.Fragment>
       <Map
         ref={mapRef}
         className={state.fullscreen ? `${classes.map} ${classes.mapFullscreen}` : classes.map}
-        style={{ paddingBottom: `${(state.aspectRatio.currentValue || 0.75) * 100}%` }}
+        style={{
+          paddingBottom: `${(state.aspectRatio.currentValue || 0.75) * 100}%`,
+          cursor: mouseModeCursors[state.map.mouseMode],
+        }}
         center={state.map.center}
         zoom={state.map.zoom}
         minZoom={MAP_ZOOM_RANGE[0]}
@@ -545,6 +632,7 @@ const SiteMapLeaflet = () => {
         worldCopyJump
         data-component="SiteMap"
         data-selenium="sitemap-content-map"
+        {...mouseModeProps}
       >
         <ScaleControl imperial metric updateWhenIdle />
         {renderBaseLayer()}
@@ -567,6 +655,7 @@ const SiteMapLeaflet = () => {
           .map(key => <SiteMapFeature key={key} featureKey={key} mapRef={mapRef} />)}
       </Map>
       {renderShowFullObservatoryButton()}
+      {renderMouseModeToggleButtonGroup()}
       {renderProgress()}
     </React.Fragment>
   );

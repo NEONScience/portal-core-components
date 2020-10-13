@@ -35,6 +35,7 @@ import {
   SELECTABLE_FEATURE_TYPES,
   SITE_LOCATION_HIERARCHIES_MIN_ZOOM,
   MAP_ZOOM_RANGE,
+  MAP_MOUSE_MODES,
   OBSERVATORY_CENTER,
   PLOT_SAMPLING_MODULES,
   SITE_MAP_PROP_TYPES,
@@ -654,7 +655,12 @@ const reducer = (state, action) => {
       newState.focusLocation.isAtCenter = false;
       return newState;
 
-    // Features
+    case 'setMapMouseMode':
+      if (!Object.keys(MAP_MOUSE_MODES).includes(action.mouseMode)) { return state; }
+      newState.map.mouseMode = action.mouseMode;
+      return newState;
+
+    // Legend
     case 'setLegendOpen':
       newState.filters.legendOpen = !!action.open;
       return newState;
