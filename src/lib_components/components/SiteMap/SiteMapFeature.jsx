@@ -1200,8 +1200,7 @@ const SiteMapFeature = (props) => {
   const hasPopup = typeof renderPopupFunctions[featureKey] === 'function';
   const renderPopup = (siteCode, location = null) => {
     if (
-      typeof renderPopupFunctions[featureKey] !== 'function'
-        || !featureData[siteCode]
+      !hasPopup || !featureData[siteCode]
         || (location !== null && !featureData[siteCode][location])
     ) { return null; }
     return renderPopupFunctions[featureKey](siteCode, location);

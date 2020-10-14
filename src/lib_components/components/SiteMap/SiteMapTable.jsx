@@ -29,7 +29,7 @@ import {
   PLOT_SAMPLING_MODULES,
   SELECTABLE_FEATURE_TYPES,
   UNSELECTABLE_MARKER_FILTER,
-  calculateLocationsInMap,
+  calculateLocationsInBounds,
 } from './SiteMapUtils';
 
 const ucWord = word => `${word.slice(0, 1).toUpperCase()}${word.slice(1).toLowerCase()}`;
@@ -289,7 +289,7 @@ const SiteMapTable = () => {
       }
     });
   });
-  let initialRows = calculateLocationsInMap(locations, state.map.bounds);
+  let initialRows = calculateLocationsInBounds(locations, state.map.bounds);
   if (selectionActive && selectableItems && hideUnselectable) {
     initialRows = initialRows.filter(item => selectableItems.has(item));
   }

@@ -2,9 +2,12 @@
 import React, {
   useRef,
   useEffect,
+  useReducer,
   useLayoutEffect,
 } from 'react';
 import ReactDOMServer from 'react-dom/server';
+
+import L from 'leaflet';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
@@ -47,6 +50,8 @@ import {
   FETCH_STATUS,
   MAP_MOUSE_MODES,
   UNSELECTABLE_MARKER_FILTER,
+  getPhantomLeafletMap,
+  calculateLocationsInBounds,
   deriveFullObservatoryZoomLevel,
 } from './SiteMapUtils';
 
@@ -144,6 +149,11 @@ const useStyles = makeStyles(theme => ({
       cursor: 'pointer',
     },
   },
+  mapNoMarkerPointerEvents: {
+    '& div.leaflet-marker-pane *': {
+      pointerEvents: 'none',
+    },
+  },
   mapFullscreen: {
     '& div.leaflet-control-attribution': {
       marginRight: '0px',
@@ -208,6 +218,14 @@ const useStyles = makeStyles(theme => ({
         fontSize: '0.9rem',
       },
     },
+  },
+  areaSelection: {
+    position: 'absolute',
+    pointerEvents: 'none',
+    border: `3px dotted ${theme.colors.LIGHT_BLUE[500]}`,
+    backgroundColor: theme.colors.LIGHT_BLUE[100],
+    opacity: 0.6,
+    zIndex: 999,
   },
 }));
 
@@ -322,6 +340,112 @@ const SiteMapLeaflet = () => {
     mapRef.current.leafletElement.invalidateSize();
     dispatch({ type: 'setViewInitialized' });
   }, [mapRef, state.view, dispatch]);
+
+  /**
+     Reducer
+     Area Selection state and reducer function
+     NOTE: this is not kept in primary state because it's used only when actively selecting and
+     updated frequently during mouse drag. The cycle through the main reducer is too laggy.
+  */
+  const areaSelectionDefaultState = {
+    isDragging: false,
+    shiftPressed: false,
+    center: { x: null, y: null },
+    reach: { x: null, y: null },
+  };
+  const areaSelectionReducer = (areaSelectionState, action) => {
+    const { isDragging } = areaSelectionState;
+    const newState = { ...areaSelectionState };
+    switch (action.type) {
+      case 'start':
+        if (isDragging || !Number.isInteger(action.x) || !Number.isInteger(action.y)) {
+          return areaSelectionState;
+        }
+        newState.isDragging = true;
+        newState.center = { x: action.x, y: action.y };
+        newState.reach = { x: action.x, y: action.y };
+        return newState;
+      case 'move':
+        if (!isDragging || !Number.isInteger(action.x) || !Number.isInteger(action.y)) {
+          return areaSelectionState;
+        }
+        newState.reach = { x: action.x, y: action.y };
+        return newState;
+      case 'end':
+        if (!isDragging || !Number.isInteger(action.x) || !Number.isInteger(action.y)) {
+          return areaSelectionState;
+        }
+        newState.isDragging = false;
+        newState.center = { x: null, y: null };
+        newState.reach = { x: null, y: null };
+        return newState;
+      case 'shift':
+        newState.shiftPressed = !!action.pressed;
+        return newState;
+      default:
+        return areaSelectionState;
+    }
+  };
+  const [areaSelection, areaSelectionDispatch] = useReducer(
+    areaSelectionReducer,
+    areaSelectionDefaultState,
+  );
+
+  /**
+     Effect
+     Area Selection - event listeners to handle area selection mouse events
+  */
+  useEffect(() => {
+    if (
+      !mapRef || !mapRef.current || !mapRef.current.container
+        || state.map.mouseMode !== MAP_MOUSE_MODES.AREA_SELECT
+    ) { return () => {}; }
+    const { isDragging, center, shiftPressed } = areaSelection;
+    mapRef.current.container.onmousedown = (event) => {
+      if (isDragging) { return; }
+      areaSelectionDispatch({ type: 'start', x: event.offsetX, y: event.offsetY });
+    };
+    mapRef.current.container.onmousemove = (event) => {
+      if (!isDragging) { return; }
+      areaSelectionDispatch({ type: 'move', x: event.offsetX, y: event.offsetY });
+    };
+    mapRef.current.container.onmouseup = (event) => {
+      if (!isDragging) { return; }
+      const reach = { x: event.offsetX, y: event.offsetY };
+      const phantomMap = getPhantomLeafletMap(state);
+      const centerLatLng = phantomMap.layerPointToLatLng(L.point(center.x, center.y));
+      const reachLatLng = phantomMap.layerPointToLatLng(L.point(reach.x, reach.y));
+      const selectionBounds = {
+        lat: [
+          Math.min(centerLatLng.lat, reachLatLng.lat),
+          Math.max(centerLatLng.lat, reachLatLng.lat),
+        ],
+        lng: [
+          Math.min(centerLatLng.lng, reachLatLng.lng),
+          Math.max(centerLatLng.lng, reachLatLng.lng),
+        ],
+      };
+      const selectionSites = calculateLocationsInBounds(state.sites, selectionBounds);
+      const newSelectionSet = new Set([
+        ...selectionSites,
+        ...(shiftPressed ? Array.from(state.selection.set) : []),
+      ]);
+      areaSelectionDispatch({ type: 'end', x: event.offsetX, y: event.offsetY });
+      dispatch({ type: 'updateSitesSelection', selection: newSelectionSet });
+    };
+    const handleKeyDown = (event) => {
+      if (event.key === 'Shift') { areaSelectionDispatch({ type: 'shift', pressed: true }); }
+    };
+    const handleKeyUp = (event) => {
+      if (event.key === 'Shift') { areaSelectionDispatch({ type: 'shift', pressed: false }); }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('keyup', handleKeyUp);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('keyup', handleKeyUp);
+    };
+  });
 
   /**
     Effect
@@ -499,6 +623,25 @@ const SiteMapLeaflet = () => {
   };
 
   /**
+     Render: AreaSelection
+  */
+  const renderAreaSelection = () => {
+    const { isDragging, center, reach } = areaSelection;
+    if (
+      !isDragging
+        || !Number.isInteger(center.x) || !Number.isInteger(center.y)
+        || !Number.isInteger(reach.x) || !Number.isInteger(reach.y)
+    ) { return null; }
+    const style = {
+      width: Math.abs(reach.x - center.x),
+      height: Math.abs(reach.y - center.y),
+      left: Math.min(center.x, reach.x),
+      top: Math.min(center.y, reach.y),
+    };
+    return <div className={classes.areaSelection} style={style} />;
+  };
+
+  /**
      Interaction Handlers
   */
   const handleMoveEnd = (event) => {
@@ -613,11 +756,14 @@ const SiteMapLeaflet = () => {
   } : {
     boxZoom: false, dragging: false, touchZoom: false,
   };
+  let className = classes.map;
+  if (state.fullscreen) { className = `${className} ${classes.mapFullscreen}`; }
+  if (areaSelection.isDragging) { className = `${className} ${classes.mapNoMarkerPointerEvents}`; }
   return (
     <React.Fragment>
       <Map
         ref={mapRef}
-        className={state.fullscreen ? `${classes.map} ${classes.mapFullscreen}` : classes.map}
+        className={className}
         style={{
           paddingBottom: `${(state.aspectRatio.currentValue || 0.75) * 100}%`,
           cursor: mouseModeCursors[state.map.mouseMode],
@@ -654,6 +800,7 @@ const SiteMapLeaflet = () => {
           .filter(key => state.filters.features.visible[key])
           .map(key => <SiteMapFeature key={key} featureKey={key} mapRef={mapRef} />)}
       </Map>
+      {renderAreaSelection()}
       {renderShowFullObservatoryButton()}
       {renderMouseModeToggleButtonGroup()}
       {renderProgress()}

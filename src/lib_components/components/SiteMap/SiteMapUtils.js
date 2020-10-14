@@ -1382,6 +1382,7 @@ export const DEFAULT_STATE = {
     mouseMode: MAP_MOUSE_MODES.PAN,
     zoomedIcons: {},
     repositionOpenPopupFunc: null,
+    isDraggingAreaSelection: false,
   },
   selection: {
     active: null, // Set to any key in SELECTABLE_FEATURE_TYPES
@@ -1687,11 +1688,23 @@ export const getZoomedIcons = (zoom) => {
   return icons;
 };
 
+// Creare a temporary non-rendering empty Leaflet map with dimensions, center, and zoom all
+// identical to a given state. This is necessary whenever needing to do pixel/latlon projections.
+export const getPhantomLeafletMap = (state) => {
+  const { aspectRatio: { currentValue: aspectRatio, widthReference } } = state;
+  L.Map.include({
+    getSize: () => new L.Point(widthReference, widthReference * aspectRatio),
+  });
+  const element = document.createElement('div');
+  const map = new L.Map(element, {
+    center: state.map.center,
+    zoom: state.map.zoom,
+  });
+  return map;
+};
+
 export const getMapStateForFocusLocation = (state = {}) => {
-  const {
-    focusLocation,
-    aspectRatio: { currentValue: aspectRatio, widthReference },
-  } = state;
+  const { focusLocation } = state;
   if (!focusLocation || !focusLocation.current) { return state; }
   const { current } = focusLocation;
   const { type = '', latitude, longitude } = focusLocation.data || {};
@@ -1736,17 +1749,8 @@ export const getMapStateForFocusLocation = (state = {}) => {
   if (newState.map.zoom !== null) {
     // Regenerate icons
     newState.map.zoomedIcons = getZoomedIcons(newState.map.zoom);
-    // Derive map bounds. Must be done by Leaflet but to do this without a full re-render we can
-    // create a non-rendering empty Leaflet map with mocked dimensions that we promptly destroy.
-    L.Map.include({
-      getSize: () => new L.Point(widthReference, widthReference * aspectRatio),
-    });
-    const element = document.createElement('div');
-    const map = new L.Map(element, {
-      center: newState.map.center,
-      zoom: newState.map.zoom,
-    });
-    const newBounds = map.getBounds() || null;
+    const phantomMap = getPhantomLeafletMap(newState);
+    const newBounds = phantomMap.getBounds() || null;
     newState.map.bounds = !newBounds ? null : {
       /* eslint-disable no-underscore-dangle */
       lat: [newBounds._southWest.lat, newBounds._northEast.lat],
@@ -1790,9 +1794,9 @@ export const boundsAreValid = bounds => (
     ))
 );
 
-export const calculateLocationsInMap = (
-  locations,
-  bounds = null,
+export const calculateLocationsInBounds = (
+  locations, // Keyed object of locations (e.g. sites)
+  bounds = null, // Leaflet LatLngBounds object
   extendMap = false, // Boolean, whether or not to extend the map bounds by 50% on each dimension
   extendPoints = 0, // Number, a margin to add/subtract to lat/lon for a point's hit box
 ) => {

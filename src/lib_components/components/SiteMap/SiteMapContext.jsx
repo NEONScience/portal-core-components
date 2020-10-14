@@ -47,7 +47,7 @@ import {
   hydrateNeonContextData,
   calculateFeatureAvailability,
   boundsAreValid,
-  calculateLocationsInMap,
+  calculateLocationsInBounds,
   deriveFullObservatoryZoomLevel,
 } from './SiteMapUtils';
 
@@ -148,7 +148,7 @@ const centerIsValid = center => (
 // is a site feature like a plot far from the site center so the site itself may not be seen as
 // "in bounds").
 const calculateFeatureDataFetches = (state, requiredSites = []) => {
-  const sitesInMap = calculateLocationsInMap(state.sites, state.map.bounds, true, 0.06);
+  const sitesInMap = calculateLocationsInBounds(state.sites, state.map.bounds, true, 0.06);
   let requiredSitesArray = [];
   if (requiredSites) {
     requiredSitesArray = (
