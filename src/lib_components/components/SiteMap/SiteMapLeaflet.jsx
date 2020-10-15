@@ -50,7 +50,6 @@ import {
   FETCH_STATUS,
   MAP_MOUSE_MODES,
   UNSELECTABLE_MARKER_FILTER,
-  getPhantomLeafletMap,
   calculateLocationsInBounds,
   deriveFullObservatoryZoomLevel,
 } from './SiteMapUtils';
@@ -330,20 +329,27 @@ const SiteMapLeaflet = () => {
 
   /**
     Effect
-    Force a redraw when switching to the map for the first time from another view
+    Force a redraw when switching to the map for the first time from another view or when component
+    dimensions (e.g. aspectRatio or widthReference) has changed
   */
   useEffect(() => {
     if (
       !mapRef || !mapRef.current || !mapRef.current.leafletElement
-        || state.view.current !== VIEWS.MAP || state.view.initialized[VIEWS.MAP]
+        || state.view.current !== VIEWS.MAP
     ) { return; }
     mapRef.current.leafletElement.invalidateSize();
-    dispatch({ type: 'setViewInitialized' });
-  }, [mapRef, state.view, dispatch]);
+    if (!state.view.initialized[VIEWS.MAP]) {
+      dispatch({ type: 'setViewInitialized' });
+    }
+  }, [
+    dispatch,
+    state.view,
+    state.aspectRatio.currentValue,
+    state.aspectRatio.widthReference,
+  ]);
 
   /**
-     Reducer
-     Area Selection state and reducer function
+     Area Selection - Local State & Reducer
      NOTE: this is not kept in primary state because it's used only when actively selecting and
      updated frequently during mouse drag. The cycle through the main reducer is too laggy.
   */
@@ -397,9 +403,10 @@ const SiteMapLeaflet = () => {
   */
   useEffect(() => {
     if (
-      !mapRef || !mapRef.current || !mapRef.current.container
+      !mapRef || !mapRef.current || !mapRef.current.container || !mapRef.current.leafletElement
         || state.map.mouseMode !== MAP_MOUSE_MODES.AREA_SELECT
     ) { return () => {}; }
+    const { leafletElement } = mapRef.current;
     const { isDragging, center, shiftPressed } = areaSelection;
     mapRef.current.container.onmousedown = (event) => {
       if (isDragging) { return; }
@@ -412,9 +419,8 @@ const SiteMapLeaflet = () => {
     mapRef.current.container.onmouseup = (event) => {
       if (!isDragging) { return; }
       const reach = { x: event.offsetX, y: event.offsetY };
-      const phantomMap = getPhantomLeafletMap(state);
-      const centerLatLng = phantomMap.layerPointToLatLng(L.point(center.x, center.y));
-      const reachLatLng = phantomMap.layerPointToLatLng(L.point(reach.x, reach.y));
+      const centerLatLng = leafletElement.containerPointToLatLng(L.point(center.x, center.y));
+      const reachLatLng = leafletElement.containerPointToLatLng(L.point(reach.x, reach.y));
       const selectionBounds = {
         lat: [
           Math.min(centerLatLng.lat, reachLatLng.lat),

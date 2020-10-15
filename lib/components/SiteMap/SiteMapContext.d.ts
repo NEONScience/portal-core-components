@@ -73,8 +73,10 @@ declare function useSiteMapContext(): any[] | {
         baseLayer: null;
         baseLayerAutoChangedAbove17: boolean;
         overlays: Set<any>;
+        mouseMode: string;
         zoomedIcons: {};
         repositionOpenPopupFunc: null;
+        isDraggingAreaSelection: boolean;
     };
     selection: {
         active: null;

@@ -1690,7 +1690,7 @@ export const getZoomedIcons = (zoom) => {
 
 // Creare a temporary non-rendering empty Leaflet map with dimensions, center, and zoom all
 // identical to a given state. This is necessary whenever needing to do pixel/latlon projections.
-export const getPhantomLeafletMap = (state) => {
+const getPhantomLeafletMap = (state) => {
   const { aspectRatio: { currentValue: aspectRatio, widthReference } } = state;
   L.Map.include({
     getSize: () => new L.Point(widthReference, widthReference * aspectRatio),
