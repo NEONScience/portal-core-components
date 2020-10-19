@@ -514,11 +514,50 @@ const SiteMapLeaflet = () => {
           defs.appendChild(defMask);
           // Set the mask-path attribute on the <path> in the overlay pane
           path.setAttributeNS(null, 'mask', `url(${baseId})`);
+          // React Leaflet Polygon doesn't afford arbitrary styling and we use the className for
+          // masking as we can't set arbitrary attributes or id either. But when showing masked
+          // polygons AND doing area selection we need to apply some extra styles to the polygons
+          // so that they are not fighting area selection for mouse control.
+          path.setAttributeNS(null, 'style', state.map.mouseMode === MAP_MOUSE_MODES.AREA_SELECT
+            ? 'cursor: crosshair; pointer-events: none'
+            : '');
         });
       if (defCount === 0) { return; }
       svg.prepend(defs);
     }, 0);
   });
+
+  /*
+  useLayoutEffect(() => {
+    // setTimeout of 0 to fire after map render cycle completes
+    window.setTimeout(() => {
+      // Only continue if the map is in a ready / fully rendered state.
+      if (
+        state.map.mouseMode !== MAP_MOUSE_MODES.AREA_SELECT
+          || !mapRef || !mapRef.current || !mapRef.current.leafletElement
+          || !mapRef.current._ready || mapRef.current._updating
+          || !mapRef.current.leafletElement._panes
+          || !mapRef.current.leafletElement._panes.overlayPane
+          || !mapRef.current.leafletElement._panes.overlayPane.children.length
+          || mapRef.current.leafletElement._panes.overlayPane.children[0].nodeName !== 'svg'
+      ) { return; }
+      // Only continue if DOMAINS and/or STATES are showing
+      if (
+        !state.filters.features.visible[FEATURES.DOMAINS.KEY]
+          && !state.filters.features.visible[FEATURES.STATES.KEY]
+      ) { return; }
+      // Only continue if the overlay pane has one child node and it's a non-empty <g>
+      const svg = mapRef.current.leafletElement._panes.overlayPane.children[0];
+      if (svg.children.length !== 1
+        || svg.children[0].nodeName.toLowerCase() !== 'g'
+        || !svg.children[0].children.length
+      ) { return; }
+      const paths = [...svg.children[0].children];
+      paths.forEach((path) => {
+      });
+    }, 0);
+  }, [state.map.mouseMode]);
+  */
 
   if (!canRender) { return null; }
 

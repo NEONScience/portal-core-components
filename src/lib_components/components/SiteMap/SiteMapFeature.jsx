@@ -45,6 +45,7 @@ import {
   FEATURE_TYPES,
   NLCD_CLASSES,
   KM2_TO_ACRES,
+  MAP_MOUSE_MODES,
   HIGHLIGHT_STATUS,
   SELECTION_STATUS,
   SELECTION_PORTIONS,
@@ -1426,11 +1427,25 @@ const SiteMapFeature = (props) => {
           </CircleMarker>
         );
       case 'Polygon':
-        return positionsArrayIsValid(positions, featureType === FEATURE_TYPES.SAMPLING_POINTS) ? (
+        // Only render polygon popups when not in area selection mode. Otherwise area selection
+        // could neither start, move, nor end over feature shapes.
+        if (!positionsArrayIsValid(positions, featureType === FEATURE_TYPES.SAMPLING_POINTS)) {
+          return null;
+        }
+        return state.map.mouseMode === MAP_MOUSE_MODES.AREA_SELECT ? (
+          <Polygon
+            key={`${key}-polygon`}
+            positions={positions}
+            {...shapeProps}
+            onMouseOver={null}
+            onMouseMove={null}
+            onMouseOut={null}
+          />
+        ) : (
           <Polygon key={`${key}-polygon`} positions={positions} {...shapeProps}>
             {renderedPopup}
           </Polygon>
-        ) : null;
+        );
       case 'Polyline':
         return (
           <Polyline key={`${key}-polyline`} positions={positions} {...shapeProps}>
