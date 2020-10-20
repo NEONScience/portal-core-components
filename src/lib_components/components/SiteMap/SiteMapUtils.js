@@ -1180,9 +1180,9 @@ Object.keys(BASE_LAYERS).forEach((key) => {
  additional context from a third party data source, such as NLCD.
 */
 export const OVERLAY_GROUPS = {
-  NLCD_2001: {
-    title: 'National Land Cover Database (NLCD) 2001',
-    description: 'National Land Cover Database (NLCD) 2001 release data from the Multi-Resolution Land Characteristics (MRLC) consortium',
+  NLCD: {
+    title: 'National Land Cover Database',
+    description: 'National Land Cover Database (NLCD) from the Multi-Resolution Land Characteristics (MRLC) consortium. Release years: 2001 (Alaska and Puerto Rico), 2006 (Continental US), and 2011 (Hawaii).',
     commonProps: { format: 'image/png', transparent: true },
   },
 };
@@ -1194,7 +1194,7 @@ Object.keys(OVERLAY_GROUPS).forEach((key) => {
 
 export const OVERLAYS = {
   LAND_COVER: {
-    group: OVERLAY_GROUPS.NLCD_2001.KEY,
+    group: OVERLAY_GROUPS.NLCD.KEY,
     title: 'Land Cover',
     description: 'Nationwide data on land cover at a 30m resolution with a 16-class legend based on a modified Anderson Level II classification system',
     commonProps: { attribution: '© MRLC / USGS' },
@@ -1204,8 +1204,8 @@ export const OVERLAYS = {
         type: 'WMSTileLayer',
         key: 'L48',
         props: {
-          url: 'https://www.mrlc.gov/geoserver/mrlc_display/NLCD_2001_Land_Cover_L48/wms?',
-          layers: 'NLCD_2001_Land_Cover_L48',
+          url: 'https://www.mrlc.gov/geoserver/mrlc_display/NLCD_2006_Land_Cover_L48/wms?',
+          layers: 'NLCD_2006_Land_Cover_L48',
         },
       },
       {
@@ -1220,8 +1220,8 @@ export const OVERLAYS = {
         type: 'WMSTileLayer',
         key: 'HI',
         props: {
-          url: 'https://www.mrlc.gov/geoserver/mrlc_display/NLCD_2001_Land_Cover_HI/wms?',
-          layers: 'NLCD_2001_Land_Cover_HI',
+          url: 'https://www.mrlc.gov/geoserver/mrlc_display/NLCD_2011_Land_Cover_HI/wms?',
+          layers: 'NLCD_2011_Land_Cover_HI',
         },
       },
       {
@@ -1235,7 +1235,7 @@ export const OVERLAYS = {
     ],
   },
   IMPERVIOUS: {
-    group: OVERLAY_GROUPS.NLCD_2001.KEY,
+    group: OVERLAY_GROUPS.NLCD.KEY,
     title: 'Urban Impervious Surfaces',
     description: 'Urban impervious surfaces as a percentage of developed surface over every 30-meter pixel in the United States',
     commonProps: { attribution: '© MRLC / USGS' },
@@ -1296,8 +1296,8 @@ export const OVERLAYS = {
         type: 'WMSTileLayer',
         key: 'L48',
         props: {
-          url: 'https://www.mrlc.gov/geoserver/mrlc_display/NLCD_2001_Impervious_L48/wms?',
-          layers: 'NLCD_2001_Impervious_L48',
+          url: 'https://www.mrlc.gov/geoserver/mrlc_display/NLCD_2006_Impervious_L48/wms?',
+          layers: 'NLCD_2006_Impervious_L48',
         },
       },
       {
@@ -1312,8 +1312,8 @@ export const OVERLAYS = {
         type: 'WMSTileLayer',
         key: 'HI',
         props: {
-          url: 'https://www.mrlc.gov/geoserver/mrlc_display/NLCD_2001_Impervious_HI/wms?',
-          layers: 'NLCD_2001_Impervious_HI',
+          url: 'https://www.mrlc.gov/geoserver/mrlc_display/NLCD_2011_Impervious_HI/wms?',
+          layers: 'NLCD_2011_Impervious_HI',
         },
       },
       {
@@ -1354,7 +1354,7 @@ export const DEFAULT_STATE = {
     current: null,
     data: null,
     fetch: { status: null, error: null },
-    isAtCenter: false, // Boolean to track when the map moves off of a focus location by the user
+    map: { zoom: null, center: [] },
   },
   aspectRatio: {
     currentValue: null, // Aspect ratio of the Site Map component content area (table and/or map)
@@ -1703,6 +1703,15 @@ const getPhantomLeafletMap = (state) => {
   return map;
 };
 
+export const mapIsAtFocusLocation = (state = {}) => (
+  state.map.zoom && Array.isArray(state.map.center) && state.map.center.length === 2
+    && state.focusLocation.current && state.focusLocation.map.zoom
+    && Array.isArray(state.focusLocation.map.center) && state.focusLocation.map.center.length === 2
+    && state.map.zoom === state.focusLocation.map.zoom
+    && state.map.center[0] === state.focusLocation.map.center[0]
+    && state.map.center[1] === state.focusLocation.map.center[1]
+);
+
 export const getMapStateForFocusLocation = (state = {}) => {
   const { focusLocation } = state;
   if (!focusLocation || !focusLocation.current) { return state; }
@@ -1758,9 +1767,6 @@ export const getMapStateForFocusLocation = (state = {}) => {
       /* eslint-enable no-underscore-dangle */
     };
   }
-
-  // Register the focusLocation as being at the map center
-  newState.focusLocation.isAtCenter = true;
 
   // Done
   return newState.map;

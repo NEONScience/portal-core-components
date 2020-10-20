@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React, {
   useRef,
+  useState,
   useEffect,
   useReducer,
   useLayoutEffect,
@@ -21,6 +22,7 @@ import Typography from '@material-ui/core/Typography';
 import MapPanIcon from '@material-ui/icons/PanTool';
 import MapAreaSelectIcon from '@material-ui/icons/CropFree';
 import ObservatoryIcon from '@material-ui/icons/Public';
+import FocusLocationIcon from '@material-ui/icons/Place';
 
 import 'leaflet/dist/leaflet.css';
 import './SiteMap.css';
@@ -50,6 +52,7 @@ import {
   FETCH_STATUS,
   MAP_MOUSE_MODES,
   UNSELECTABLE_MARKER_FILTER,
+  mapIsAtFocusLocation,
   calculateLocationsInBounds,
   deriveFullObservatoryZoomLevel,
 } from './SiteMapUtils';
@@ -180,13 +183,14 @@ const useStyles = makeStyles(theme => ({
     top: '12px',
     left: '56px',
   },
-  observatoryButton: {
-    backgroundColor: '#fff',
+  mapNavButtonContainer: {
     position: 'absolute',
     zIndex: 999,
     margin: '0px',
-    top: '114px',
     left: '8px',
+  },
+  mapNavButton: {
+    backgroundColor: '#fff !important',
     width: '26px',
     height: '26px',
     padding: 'unset',
@@ -200,6 +204,12 @@ const useStyles = makeStyles(theme => ({
     '& svg': {
       fontSize: '1.15rem !important',
     },
+  },
+  observatoryButton: {
+    top: '114px',
+  },
+  focusLocationButton: {
+    top: '148px',
   },
   mouseModeToggleButtonGroup: {
     borderRadius: '2px',
@@ -311,7 +321,7 @@ const SiteMapLeaflet = () => {
             mapRef.current.leafletElement._layers[k].options
               && mapRef.current.leafletElement._layers[k].options.title === item
           ));
-          if (layerIdx !== -1) {
+          if (layerIdx !== -1 && mapRef.current.leafletElement._layers[layerIdx]) {
             const zIndex = (mapRef.current.leafletElement._layers[layerIdx] || {})._zIndex || 0;
             mapRef.current.leafletElement._layers[layerIdx].setZIndexOffset(zIndex + 1000);
           }
@@ -396,6 +406,19 @@ const SiteMapLeaflet = () => {
     areaSelectionReducer,
     areaSelectionDefaultState,
   );
+
+  /**
+     Local State / Effect - Whether GroupedLayerControl has been rendered
+     <ReactLeafletGroupedLayerControl> is a child of <Map>, but it also must take the ref to the map
+     as a prop. Thus we must track whether it has rendered with local state. We want to basically
+     re-render the map immediately and only once when the mepRef is set through the first render.
+  */
+  const [mapRefReady, setMapRefReady] = useState(false);
+  useEffect(() => {
+    if (mapRef.current !== null && !mapRefReady) {
+      setMapRefReady(true);
+    }
+  }); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
      Effect
@@ -527,38 +550,6 @@ const SiteMapLeaflet = () => {
     }, 0);
   });
 
-  /*
-  useLayoutEffect(() => {
-    // setTimeout of 0 to fire after map render cycle completes
-    window.setTimeout(() => {
-      // Only continue if the map is in a ready / fully rendered state.
-      if (
-        state.map.mouseMode !== MAP_MOUSE_MODES.AREA_SELECT
-          || !mapRef || !mapRef.current || !mapRef.current.leafletElement
-          || !mapRef.current._ready || mapRef.current._updating
-          || !mapRef.current.leafletElement._panes
-          || !mapRef.current.leafletElement._panes.overlayPane
-          || !mapRef.current.leafletElement._panes.overlayPane.children.length
-          || mapRef.current.leafletElement._panes.overlayPane.children[0].nodeName !== 'svg'
-      ) { return; }
-      // Only continue if DOMAINS and/or STATES are showing
-      if (
-        !state.filters.features.visible[FEATURES.DOMAINS.KEY]
-          && !state.filters.features.visible[FEATURES.STATES.KEY]
-      ) { return; }
-      // Only continue if the overlay pane has one child node and it's a non-empty <g>
-      const svg = mapRef.current.leafletElement._panes.overlayPane.children[0];
-      if (svg.children.length !== 1
-        || svg.children[0].nodeName.toLowerCase() !== 'g'
-        || !svg.children[0].children.length
-      ) { return; }
-      const paths = [...svg.children[0].children];
-      paths.forEach((path) => {
-      });
-    }, 0);
-  }, [state.map.mouseMode]);
-  */
-
   if (!canRender) { return null; }
 
   /**
@@ -566,14 +557,39 @@ const SiteMapLeaflet = () => {
   */
   const renderShowFullObservatoryButton = () => (
     <Tooltip placement="right" title="Show the full NEON Observatory">
-      <IconButton
-        type="button"
-        className={classes.observatoryButton}
-        onClick={() => { dispatch({ type: 'showFullObservatory', mapRef }); }}
-      >
-        <ObservatoryIcon fontSize="small" />
-      </IconButton>
+      <div className={`${classes.mapNavButtonContainer} ${classes.observatoryButton}`}>
+        <IconButton
+          type="button"
+          className={classes.mapNavButton}
+          onClick={() => { dispatch({ type: 'showFullObservatory', mapRef }); }}
+        >
+          <ObservatoryIcon fontSize="small" />
+        </IconButton>
+      </div>
     </Tooltip>
+  );
+
+  /**
+     Render - Zoom to Observatory Button
+  */
+  const renderReturnToFocusLocationButton = () => (
+    !state.focusLocation.current ? null : (
+      <Tooltip
+        placement="right"
+        title={`Return to previous focus location: ${state.focusLocation.current}`}
+      >
+        <div className={`${classes.mapNavButtonContainer} ${classes.focusLocationButton}`}>
+          <IconButton
+            type="button"
+            className={classes.mapNavButton}
+            onClick={() => { dispatch({ type: 'returnToFocusLocation' }); }}
+            disabled={mapIsAtFocusLocation(state)}
+          >
+            <FocusLocationIcon fontSize="small" />
+          </IconButton>
+        </div>
+      </Tooltip>
+    )
   );
 
   /**
@@ -847,6 +863,7 @@ const SiteMapLeaflet = () => {
       </Map>
       {renderAreaSelection()}
       {renderShowFullObservatoryButton()}
+      {renderReturnToFocusLocationButton()}
       {renderMouseModeToggleButtonGroup()}
       {renderProgress()}
     </React.Fragment>

@@ -43,6 +43,7 @@ import {
   MIN_TABLE_MAX_BODY_HEIGHT,
   GRAPHQL_LOCATIONS_API_CONSTANTS,
   getZoomedIcons,
+  mapIsAtFocusLocation,
   getMapStateForFocusLocation,
   hydrateNeonContextData,
   calculateFeatureAvailability,
@@ -593,7 +594,6 @@ const reducer = (state, action) => {
     case 'setMapZoom':
       if (!zoomIsValid(action.zoom)) { return state; }
       newState.map.zoom = action.zoom;
-      newState.focusLocation.isAtCenter = false;
       if (centerIsValid(action.center)) { newState.map.center = action.center; }
       if (boundsAreValid(action.bounds)) { newState.map.bounds = action.bounds; }
       newState.map.zoomedIcons = getZoomedIcons(newState.map.zoom);
@@ -604,14 +604,12 @@ const reducer = (state, action) => {
 
     case 'setMapBounds':
       if (boundsAreValid(action.bounds)) { newState.map.bounds = action.bounds; }
-      newState.focusLocation.isAtCenter = false;
       return calculateFeatureDataFetches(newState);
 
     case 'setMapCenter':
       if (!centerIsValid(action.center)) { return state; }
       if (boundsAreValid(action.bounds)) { newState.map.bounds = action.bounds; }
       newState.map.center = [...action.center];
-      newState.focusLocation.isAtCenter = false;
       return calculateFeatureDataFetches(newState);
 
     case 'setMapBaseLayer':
@@ -652,7 +650,6 @@ const reducer = (state, action) => {
     case 'showFullObservatory':
       newState.map.center = OBSERVATORY_CENTER;
       newState.map.zoom = deriveFullObservatoryZoomLevel(action.mapRef);
-      newState.focusLocation.isAtCenter = false;
       return newState;
 
     case 'setMapMouseMode':
@@ -731,6 +728,29 @@ const reducer = (state, action) => {
       }
       completeOverallFetch();
       newState.map = getMapStateForFocusLocation(newState);
+      newState.focusLocation.map.zoom = newState.map.zoom;
+      newState.focusLocation.map.center = [...newState.map.center];
+      updateMapTileWithZoom();
+      if (newState.focusLocation.data && newState.focusLocation.data.siteCode) {
+        calculateFetchesRequiredSites = [newState.focusLocation.data.siteCode];
+      }
+      return calculateFeatureDataFetches(
+        calculateFeatureAvailability(newState),
+        calculateFetchesRequiredSites,
+      );
+
+    case 'returnToFocusLocation':
+      if (!state.focusLocation.current || !state.focusLocation.data) { return state; }
+      // For STATE and DOMAIN types: ensure corresponding feature is visible
+      if (newState.focusLocation.data.type === 'STATE') {
+        newState.filters.features.visible[FEATURES.STATES.KEY] = true;
+        newState.filters.features.visible[FEATURES.DOMAINS.KEY] = false;
+      }
+      if (newState.focusLocation.data.type === 'DOMAIN') {
+        newState.filters.features.visible[FEATURES.DOMAINS.KEY] = true;
+        newState.filters.features.visible[FEATURES.STATES.KEY] = false;
+      }
+      newState.map = getMapStateForFocusLocation(state);
       updateMapTileWithZoom();
       if (newState.focusLocation.data && newState.focusLocation.data.siteCode) {
         calculateFetchesRequiredSites = [newState.focusLocation.data.siteCode];
@@ -781,7 +801,7 @@ const reducer = (state, action) => {
       newState.overallFetch.pendingHierarchy -= 1;
       completeOverallFetch();
       if (
-        state.focusLocation.isAtCenter
+        mapIsAtFocusLocation(state)
           && state.focusLocation.data && state.focusLocation.data.siteCode
       ) {
         calculateFetchesRequiredSites = [state.focusLocation.data.siteCode];

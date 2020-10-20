@@ -20,7 +20,7 @@ import ClickIcon from '@material-ui/icons/TouchApp';
 import ElevationIcon from '@material-ui/icons/Terrain';
 import ExploreDataProductsIcon from '@material-ui/icons/InsertChartOutlined';
 import LocationIcon from '@material-ui/icons/MyLocation';
-import MarkerIcon from '@material-ui/icons/LocationOn';
+import MarkerIcon from '@material-ui/icons/Place';
 import SiteDetailsIcon from '@material-ui/icons/InfoOutlined';
 import UnselectableIcon from '@material-ui/icons/NotInterested';
 
