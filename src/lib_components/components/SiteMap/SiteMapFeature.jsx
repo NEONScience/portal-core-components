@@ -20,7 +20,7 @@ import ClickIcon from '@material-ui/icons/TouchApp';
 import ElevationIcon from '@material-ui/icons/Terrain';
 import ExploreDataProductsIcon from '@material-ui/icons/InsertChartOutlined';
 import LocationIcon from '@material-ui/icons/MyLocation';
-import MarkerIcon from '@material-ui/icons/LocationOn';
+import MarkerIcon from '@material-ui/icons/Place';
 import SiteDetailsIcon from '@material-ui/icons/InfoOutlined';
 import UnselectableIcon from '@material-ui/icons/NotInterested';
 
@@ -45,6 +45,7 @@ import {
   FEATURE_TYPES,
   NLCD_CLASSES,
   KM2_TO_ACRES,
+  MAP_MOUSE_MODES,
   HIGHLIGHT_STATUS,
   SELECTION_STATUS,
   SELECTION_PORTIONS,
@@ -1200,8 +1201,7 @@ const SiteMapFeature = (props) => {
   const hasPopup = typeof renderPopupFunctions[featureKey] === 'function';
   const renderPopup = (siteCode, location = null) => {
     if (
-      typeof renderPopupFunctions[featureKey] !== 'function'
-        || !featureData[siteCode]
+      !hasPopup || !featureData[siteCode]
         || (location !== null && !featureData[siteCode][location])
     ) { return null; }
     return renderPopupFunctions[featureKey](siteCode, location);
@@ -1427,11 +1427,25 @@ const SiteMapFeature = (props) => {
           </CircleMarker>
         );
       case 'Polygon':
-        return positionsArrayIsValid(positions, featureType === FEATURE_TYPES.SAMPLING_POINTS) ? (
+        // Only render polygon popups when not in area selection mode. Otherwise area selection
+        // could neither start, move, nor end over feature shapes.
+        if (!positionsArrayIsValid(positions, featureType === FEATURE_TYPES.SAMPLING_POINTS)) {
+          return null;
+        }
+        return state.map.mouseMode === MAP_MOUSE_MODES.AREA_SELECT ? (
+          <Polygon
+            key={`${key}-polygon`}
+            positions={positions}
+            {...shapeProps}
+            onMouseOver={null}
+            onMouseMove={null}
+            onMouseOut={null}
+          />
+        ) : (
           <Polygon key={`${key}-polygon`} positions={positions} {...shapeProps}>
             {renderedPopup}
           </Polygon>
-        ) : null;
+        );
       case 'Polyline':
         return (
           <Polyline key={`${key}-polyline`} positions={positions} {...shapeProps}>

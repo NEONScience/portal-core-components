@@ -1,18 +1,28 @@
 /* eslint-disable no-underscore-dangle */
 import React, {
   useRef,
+  useState,
   useEffect,
+  useReducer,
   useLayoutEffect,
 } from 'react';
 import ReactDOMServer from 'react-dom/server';
+
+import L from 'leaflet';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import IconButton from '@material-ui/core/IconButton';
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
+
+import MapPanIcon from '@material-ui/icons/PanTool';
+import MapAreaSelectIcon from '@material-ui/icons/CropFree';
 import ObservatoryIcon from '@material-ui/icons/Public';
+import FocusLocationIcon from '@material-ui/icons/Place';
 
 import 'leaflet/dist/leaflet.css';
 import './SiteMap.css';
@@ -38,8 +48,12 @@ import {
   OVERLAY_GROUPS,
   MAP_ZOOM_RANGE,
   FEATURES,
+  FEATURE_TYPES,
   FETCH_STATUS,
+  MAP_MOUSE_MODES,
   UNSELECTABLE_MARKER_FILTER,
+  mapIsAtFocusLocation,
+  calculateLocationsInBounds,
   deriveFullObservatoryZoomLevel,
 } from './SiteMapUtils';
 
@@ -137,6 +151,11 @@ const useStyles = makeStyles(theme => ({
       cursor: 'pointer',
     },
   },
+  mapNoMarkerPointerEvents: {
+    '& div.leaflet-marker-pane *': {
+      pointerEvents: 'none',
+    },
+  },
   mapFullscreen: {
     '& div.leaflet-control-attribution': {
       marginRight: '0px',
@@ -161,16 +180,17 @@ const useStyles = makeStyles(theme => ({
   progress: {
     zIndex: 900,
     position: 'absolute',
-    top: theme.spacing(1.5),
-    left: theme.spacing(7),
+    top: '12px',
+    left: '56px',
   },
-  observatoryButton: {
-    backgroundColor: '#fff',
+  mapNavButtonContainer: {
     position: 'absolute',
     zIndex: 999,
     margin: '0px',
-    top: '114px',
     left: '8px',
+  },
+  mapNavButton: {
+    backgroundColor: '#fff !important',
     width: '26px',
     height: '26px',
     padding: 'unset',
@@ -184,6 +204,37 @@ const useStyles = makeStyles(theme => ({
     '& svg': {
       fontSize: '1.15rem !important',
     },
+  },
+  observatoryButton: {
+    top: '114px',
+  },
+  focusLocationButton: {
+    top: '148px',
+  },
+  mouseModeToggleButtonGroup: {
+    borderRadius: '2px',
+    backgroundColor: 'white',
+    position: 'absolute',
+    zIndex: 999,
+    margin: '0px',
+    top: '8px',
+    left: '56px',
+    '& button': {
+      width: '26px',
+      height: '26px',
+      padding: 'unset !important',
+      '& svg': {
+        fontSize: '0.9rem',
+      },
+    },
+  },
+  areaSelection: {
+    position: 'absolute',
+    pointerEvents: 'none',
+    border: `3px dotted ${theme.colors.LIGHT_BLUE[500]}`,
+    backgroundColor: theme.colors.LIGHT_BLUE[100],
+    opacity: 0.6,
+    zIndex: 999,
   },
 }));
 
@@ -270,7 +321,7 @@ const SiteMapLeaflet = () => {
             mapRef.current.leafletElement._layers[k].options
               && mapRef.current.leafletElement._layers[k].options.title === item
           ));
-          if (layerIdx !== -1) {
+          if (layerIdx !== -1 && mapRef.current.leafletElement._layers[layerIdx]) {
             const zIndex = (mapRef.current.leafletElement._layers[layerIdx] || {})._zIndex || 0;
             mapRef.current.leafletElement._layers[layerIdx].setZIndexOffset(zIndex + 1000);
           }
@@ -288,16 +339,142 @@ const SiteMapLeaflet = () => {
 
   /**
     Effect
-    Force a redraw when switching to the map for the first time from another view
+    Force a redraw when switching to the map for the first time from another view or when component
+    dimensions (e.g. aspectRatio or widthReference) has changed
   */
   useEffect(() => {
     if (
       !mapRef || !mapRef.current || !mapRef.current.leafletElement
-        || state.view.current !== VIEWS.MAP || state.view.initialized[VIEWS.MAP]
+        || state.view.current !== VIEWS.MAP
     ) { return; }
     mapRef.current.leafletElement.invalidateSize();
-    dispatch({ type: 'setViewInitialized' });
-  }, [mapRef, state.view, dispatch]);
+    if (!state.view.initialized[VIEWS.MAP]) {
+      dispatch({ type: 'setViewInitialized' });
+    }
+  }, [
+    dispatch,
+    state.view,
+    state.aspectRatio.currentValue,
+    state.aspectRatio.widthReference,
+  ]);
+
+  /**
+     Area Selection - Local State & Reducer
+     NOTE: this is not kept in primary state because it's used only when actively selecting and
+     updated frequently during mouse drag. The cycle through the main reducer is too laggy.
+  */
+  const areaSelectionDefaultState = {
+    isDragging: false,
+    shiftPressed: false,
+    center: { x: null, y: null },
+    reach: { x: null, y: null },
+  };
+  const areaSelectionReducer = (areaSelectionState, action) => {
+    const { isDragging } = areaSelectionState;
+    const newState = { ...areaSelectionState };
+    switch (action.type) {
+      case 'start':
+        if (isDragging || !Number.isInteger(action.x) || !Number.isInteger(action.y)) {
+          return areaSelectionState;
+        }
+        newState.isDragging = true;
+        newState.center = { x: action.x, y: action.y };
+        newState.reach = { x: action.x, y: action.y };
+        return newState;
+      case 'move':
+        if (!isDragging || !Number.isInteger(action.x) || !Number.isInteger(action.y)) {
+          return areaSelectionState;
+        }
+        newState.reach = { x: action.x, y: action.y };
+        return newState;
+      case 'end':
+        if (!isDragging || !Number.isInteger(action.x) || !Number.isInteger(action.y)) {
+          return areaSelectionState;
+        }
+        newState.isDragging = false;
+        newState.center = { x: null, y: null };
+        newState.reach = { x: null, y: null };
+        return newState;
+      case 'shift':
+        newState.shiftPressed = !!action.pressed;
+        return newState;
+      default:
+        return areaSelectionState;
+    }
+  };
+  const [areaSelection, areaSelectionDispatch] = useReducer(
+    areaSelectionReducer,
+    areaSelectionDefaultState,
+  );
+
+  /**
+     Local State / Effect - Whether GroupedLayerControl has been rendered
+     <ReactLeafletGroupedLayerControl> is a child of <Map>, but it also must take the ref to the map
+     as a prop. Thus we must track whether it has rendered with local state. We want to basically
+     re-render the map immediately and only once when the mepRef is set through the first render.
+  */
+  const [mapRefReady, setMapRefReady] = useState(false);
+  useEffect(() => {
+    if (mapRef.current !== null && !mapRefReady) {
+      setMapRefReady(true);
+    }
+  }); // eslint-disable-line react-hooks/exhaustive-deps
+
+  /**
+     Effect
+     Area Selection - event listeners to handle area selection mouse events
+  */
+  useEffect(() => {
+    if (
+      !mapRef || !mapRef.current || !mapRef.current.container || !mapRef.current.leafletElement
+        || state.map.mouseMode !== MAP_MOUSE_MODES.AREA_SELECT
+    ) { return () => {}; }
+    const { leafletElement } = mapRef.current;
+    const { isDragging, center, shiftPressed } = areaSelection;
+    mapRef.current.container.onmousedown = (event) => {
+      if (isDragging) { return; }
+      areaSelectionDispatch({ type: 'start', x: event.offsetX, y: event.offsetY });
+    };
+    mapRef.current.container.onmousemove = (event) => {
+      if (!isDragging) { return; }
+      areaSelectionDispatch({ type: 'move', x: event.offsetX, y: event.offsetY });
+    };
+    mapRef.current.container.onmouseup = (event) => {
+      if (!isDragging) { return; }
+      const reach = { x: event.offsetX, y: event.offsetY };
+      const centerLatLng = leafletElement.containerPointToLatLng(L.point(center.x, center.y));
+      const reachLatLng = leafletElement.containerPointToLatLng(L.point(reach.x, reach.y));
+      const selectionBounds = {
+        lat: [
+          Math.min(centerLatLng.lat, reachLatLng.lat),
+          Math.max(centerLatLng.lat, reachLatLng.lat),
+        ],
+        lng: [
+          Math.min(centerLatLng.lng, reachLatLng.lng),
+          Math.max(centerLatLng.lng, reachLatLng.lng),
+        ],
+      };
+      const selectionSites = calculateLocationsInBounds(state.sites, selectionBounds);
+      const newSelectionSet = new Set([
+        ...selectionSites,
+        ...(shiftPressed ? Array.from(state.selection.set) : []),
+      ]);
+      areaSelectionDispatch({ type: 'end', x: event.offsetX, y: event.offsetY });
+      dispatch({ type: 'updateSitesSelection', selection: newSelectionSet });
+    };
+    const handleKeyDown = (event) => {
+      if (event.key === 'Shift') { areaSelectionDispatch({ type: 'shift', pressed: true }); }
+    };
+    const handleKeyUp = (event) => {
+      if (event.key === 'Shift') { areaSelectionDispatch({ type: 'shift', pressed: false }); }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('keyup', handleKeyUp);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('keyup', handleKeyUp);
+    };
+  });
 
   /**
     Effect
@@ -360,6 +537,13 @@ const SiteMapLeaflet = () => {
           defs.appendChild(defMask);
           // Set the mask-path attribute on the <path> in the overlay pane
           path.setAttributeNS(null, 'mask', `url(${baseId})`);
+          // React Leaflet Polygon doesn't afford arbitrary styling and we use the className for
+          // masking as we can't set arbitrary attributes or id either. But when showing masked
+          // polygons AND doing area selection we need to apply some extra styles to the polygons
+          // so that they are not fighting area selection for mouse control.
+          path.setAttributeNS(null, 'style', state.map.mouseMode === MAP_MOUSE_MODES.AREA_SELECT
+            ? 'cursor: crosshair; pointer-events: none'
+            : '');
         });
       if (defCount === 0) { return; }
       svg.prepend(defs);
@@ -373,15 +557,90 @@ const SiteMapLeaflet = () => {
   */
   const renderShowFullObservatoryButton = () => (
     <Tooltip placement="right" title="Show the full NEON Observatory">
-      <IconButton
-        type="button"
-        className={classes.observatoryButton}
-        onClick={() => { dispatch({ type: 'showFullObservatory', mapRef }); }}
-      >
-        <ObservatoryIcon fontSize="small" />
-      </IconButton>
+      <div className={`${classes.mapNavButtonContainer} ${classes.observatoryButton}`}>
+        <IconButton
+          type="button"
+          className={classes.mapNavButton}
+          onClick={() => { dispatch({ type: 'showFullObservatory', mapRef }); }}
+        >
+          <ObservatoryIcon fontSize="small" />
+        </IconButton>
+      </div>
     </Tooltip>
   );
+
+  /**
+     Render - Zoom to Observatory Button
+  */
+  const renderReturnToFocusLocationButton = () => (
+    !state.focusLocation.current ? null : (
+      <Tooltip
+        placement="right"
+        title={`Return to previous focus location: ${state.focusLocation.current}`}
+      >
+        <div className={`${classes.mapNavButtonContainer} ${classes.focusLocationButton}`}>
+          <IconButton
+            type="button"
+            className={classes.mapNavButton}
+            onClick={() => { dispatch({ type: 'returnToFocusLocation' }); }}
+            disabled={mapIsAtFocusLocation(state)}
+          >
+            <FocusLocationIcon fontSize="small" />
+          </IconButton>
+        </div>
+      </Tooltip>
+    )
+  );
+
+  /**
+     Render - Mouse Mode Buttoms (Pan / Select)
+   */
+  const renderMouseModeToggleButtonGroup = () => {
+    if (!state.selection.active) { return null; }
+    const units = state.selection.active === FEATURE_TYPES.SITES ? 'sites' : 'locations';
+    const mouseModeTooltips = {
+      [MAP_MOUSE_MODES.PAN]: 'Click and drag on map to move the map center; shift+drag to zoom to an area',
+      [MAP_MOUSE_MODES.AREA_SELECT]: `Click and drag on map to select ${units} in an area; shift+drag to add onto selection`,
+    };
+    const mouseModeIcons = {
+      [MAP_MOUSE_MODES.PAN]: MapPanIcon,
+      [MAP_MOUSE_MODES.AREA_SELECT]: MapAreaSelectIcon,
+    };
+    return (
+      <ToggleButtonGroup
+        exclusive
+        color="primary"
+        variant="outlined"
+        value={state.map.mouseMode}
+        onChange={(event, newMouseMode) => {
+          dispatch({ type: 'setMapMouseMode', mouseMode: newMouseMode });
+        }}
+        className={classes.mouseModeToggleButtonGroup}
+      >
+        {Object.keys(MAP_MOUSE_MODES).map((key) => {
+          const Icon = mouseModeIcons[key];
+          return (
+            <Tooltip
+              key={key}
+              title={mouseModeTooltips[key]}
+              enterDelay={500}
+              enterNextDelay={200}
+              placement="bottom-start"
+            >
+              <ToggleButton
+                value={key}
+                selected={state.map.mouseMode === key}
+                data-selenium={`sitemap-mouseMode-${key}`}
+                area-label={mouseModeTooltips[key]}
+              >
+                <Icon />
+              </ToggleButton>
+            </Tooltip>
+          );
+        })}
+      </ToggleButtonGroup>
+    );
+  };
 
   /**
      Render: Base Layer
@@ -422,6 +681,25 @@ const SiteMapLeaflet = () => {
         })}
       </LayerGroup>
     );
+  };
+
+  /**
+     Render: AreaSelection
+  */
+  const renderAreaSelection = () => {
+    const { isDragging, center, reach } = areaSelection;
+    if (
+      !isDragging
+        || !Number.isInteger(center.x) || !Number.isInteger(center.y)
+        || !Number.isInteger(reach.x) || !Number.isInteger(reach.y)
+    ) { return null; }
+    const style = {
+      width: Math.abs(reach.x - center.x),
+      height: Math.abs(reach.y - center.y),
+      left: Math.min(center.x, reach.x),
+      top: Math.min(center.y, reach.y),
+    };
+    return <div className={classes.areaSelection} style={style} />;
   };
 
   /**
@@ -474,9 +752,10 @@ const SiteMapLeaflet = () => {
   */
   const renderProgress = () => {
     if (state.overallFetch.expected === state.overallFetch.completed) { return null; }
+    const style = state.selection.active ? { left: '48px', top: '48px' } : null;
     if (state.overallFetch.pendingHierarchy !== 0) {
       return (
-        <Box className={classes.progress}>
+        <Box className={classes.progress} style={style}>
           <CircularProgress size={32} />
         </Box>
       );
@@ -491,7 +770,7 @@ const SiteMapLeaflet = () => {
       value: progress,
     };
     return (
-      <Box className={classes.progress}>
+      <Box className={classes.progress} style={style}>
         <CircularProgress {...progressProps} />
         <Box
           top={0}
@@ -529,12 +808,27 @@ const SiteMapLeaflet = () => {
     return { name, title, groupTitle, checked }; // eslint-disable-line object-curly-newline
   });
   const canRenderGroupedLayerControl = mapRef && mapRef.current && mapRef.current.leafletElement;
+  const mouseModeCursors = {
+    [MAP_MOUSE_MODES.PAN]: 'grab',
+    [MAP_MOUSE_MODES.AREA_SELECT]: 'crosshair',
+  };
+  const mouseModeProps = state.map.mouseMode === MAP_MOUSE_MODES.PAN ? {
+    boxZoom: true, dragging: true,
+  } : {
+    boxZoom: false, dragging: false, touchZoom: false,
+  };
+  let className = classes.map;
+  if (state.fullscreen) { className = `${className} ${classes.mapFullscreen}`; }
+  if (areaSelection.isDragging) { className = `${className} ${classes.mapNoMarkerPointerEvents}`; }
   return (
     <React.Fragment>
       <Map
         ref={mapRef}
-        className={state.fullscreen ? `${classes.map} ${classes.mapFullscreen}` : classes.map}
-        style={{ paddingBottom: `${(state.aspectRatio.currentValue || 0.75) * 100}%` }}
+        className={className}
+        style={{
+          paddingBottom: `${(state.aspectRatio.currentValue || 0.75) * 100}%`,
+          cursor: mouseModeCursors[state.map.mouseMode],
+        }}
         center={state.map.center}
         zoom={state.map.zoom}
         minZoom={MAP_ZOOM_RANGE[0]}
@@ -545,6 +839,7 @@ const SiteMapLeaflet = () => {
         worldCopyJump
         data-component="SiteMap"
         data-selenium="sitemap-content-map"
+        {...mouseModeProps}
       >
         <ScaleControl imperial metric updateWhenIdle />
         {renderBaseLayer()}
@@ -566,7 +861,10 @@ const SiteMapLeaflet = () => {
           .filter(key => state.filters.features.visible[key])
           .map(key => <SiteMapFeature key={key} featureKey={key} mapRef={mapRef} />)}
       </Map>
+      {renderAreaSelection()}
       {renderShowFullObservatoryButton()}
+      {renderReturnToFocusLocationButton()}
+      {renderMouseModeToggleButtonGroup()}
       {renderProgress()}
     </React.Fragment>
   );

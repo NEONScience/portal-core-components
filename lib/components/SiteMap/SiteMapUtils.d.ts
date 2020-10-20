@@ -48,6 +48,10 @@ export namespace VIEWS {
     export const MAP: string;
     export const TABLE: string;
 }
+export namespace MAP_MOUSE_MODES {
+    export const PAN: string;
+    export const AREA_SELECT: string;
+}
 export namespace FETCH_STATUS {
     export const AWAITING_CALL: string;
     export const FETCHING: string;
@@ -1089,7 +1093,7 @@ export namespace BASE_LAYERS {
 }
 export const BASE_LAYERS_BY_TITLE: {};
 export namespace OVERLAY_GROUPS {
-    export namespace NLCD_2001 {
+    export namespace NLCD {
         const title_4: string;
         export { title_4 as title };
         const description_20: string;
@@ -1242,7 +1246,7 @@ export namespace SITE_MAP_DEFAULT_PROPS {
     export { selection_1 as selection };
     const selectedItems_1: never[];
     export { selectedItems_1 as selectedItems };
-    const validItems_1: never[];
+    const validItems_1: null;
     export { validItems_1 as validItems };
     export const selectionLimit: null;
     export function onSelectionChange_1(): void;
@@ -1253,10 +1257,11 @@ export namespace SITE_MAP_DEFAULT_PROPS {
     export { features_1 as features };
 }
 export function getZoomedIcons(zoom: any): {};
+export function mapIsAtFocusLocation(state?: {}): boolean;
 export function getMapStateForFocusLocation(state?: {}): any;
 export function getDynamicAspectRatio(unusableVerticalSpace?: number): number;
 export function boundsAreValid(bounds: any): boolean;
-export function calculateLocationsInMap(locations: any, bounds?: any, extendMap?: boolean, extendPoints?: number): string[];
+export function calculateLocationsInBounds(locations: any, bounds?: any, extendMap?: boolean, extendPoints?: number): string[];
 export function deriveFullObservatoryZoomLevel(mapRef: any): number;
 /**
    GRAPHQL_LOCATIONS_API Constants

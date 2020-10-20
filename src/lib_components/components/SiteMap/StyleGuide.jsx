@@ -334,7 +334,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
       </DocBlock>
 
       <ExampleBlock>
-        <SiteMap />
+        <SiteMap selection="SITES" />
       </ExampleBlock>
       <CodeBlock>
         {`
@@ -352,6 +352,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
         codes are also supported.
       </DocBlock>
 
+      {/*
       <ExampleBlock>
         <SiteMap location="D08" />
       </ExampleBlock>
@@ -360,6 +361,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
 <SiteMap location="D08" />
         `}
       </CodeBlock>
+      */}
 
       <Divider className={classes.divider} />
       <Typography variant="h4" component="h2" gutterBottom>Selection</Typography>

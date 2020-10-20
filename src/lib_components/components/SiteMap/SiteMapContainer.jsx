@@ -30,6 +30,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import Zoom from '@material-ui/core/Zoom';
 
+import HelpIcon from '@material-ui/icons/HelpOutline';
 import WarningIcon from '@material-ui/icons/Warning';
 import ErrorIcon from '@material-ui/icons/Error';
 import ExpandUpIcon from '@material-ui/icons/ExpandLess';
@@ -124,9 +125,14 @@ const useStyles = makeStyles(theme => ({
   legendSection: {
     width: '100%',
   },
+  legendSectionTitleContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: '8px',
+  },
   legendSectionTitle: {
     fontWeight: 600,
-    marginBottom: '8px',
   },
   featureIcon: {
     width: '28px',
@@ -1152,9 +1158,11 @@ const SiteMapContainer = (props) => {
   */
   const renderLegendNEONObservatoryFeatures = () => (
     <div className={classes.legendSection}>
-      <Typography variant="h6" className={classes.legendSectionTitle}>
-        NEON Observatory Features
-      </Typography>
+      <div className={classes.legendSectionTitleContainer}>
+        <Typography variant="h6" className={classes.legendSectionTitle}>
+          NEON Observatory Features
+        </Typography>
+      </div>
       {Object.keys(FEATURES)
         .filter(f => state.filters.features.available[f] && !FEATURES[f].parent)
         .filter(f => !FEATURES[f].generalLegendGroup)
@@ -1168,13 +1176,26 @@ const SiteMapContainer = (props) => {
   const renderLegendOverlays = () => (
     <React.Fragment>
       {Object.keys(OVERLAY_GROUPS).map((groupKey) => {
-        const { title: groupTitle } = OVERLAY_GROUPS[groupKey];
+        const { title, description } = OVERLAY_GROUPS[groupKey];
         return (
           <div key={groupKey} className={classes.legendSection}>
             <hr className={classes.legendDivider} />
-            <Typography variant="h6" className={classes.legendSectionTitle}>
-              {groupTitle}
-            </Typography>
+            <div className={classes.legendSectionTitleContainer}>
+              <Typography variant="h6" className={classes.legendSectionTitle}>
+                {title}
+              </Typography>
+              {!description ? null : (
+                <Tooltip title={description}>
+                  <IconButton
+                    size="small"
+                    style={{ margin: Theme.spacing(0, -0.75, 0, 1) }}
+                    aria-label={`${title} layer group description`}
+                  >
+                    <HelpIcon style={{ fontSize: '1rem' }} />
+                  </IconButton>
+                </Tooltip>
+              )}
+            </div>
             {Object.keys(OVERLAYS)
               .filter(o => OVERLAYS[o].group === groupKey)
               .map(renderOverlayOption)}
@@ -1190,9 +1211,11 @@ const SiteMapContainer = (props) => {
   const renderLegendGeneralFeatures = () => (
     <div className={classes.legendSection}>
       <hr className={classes.legendDivider} />
-      <Typography variant="h6" className={classes.legendSectionTitle}>
-        General Features
-      </Typography>
+      <div className={classes.legendSectionTitleContainer}>
+        <Typography variant="h6" className={classes.legendSectionTitle}>
+          General Features
+        </Typography>
+      </div>
       {Object.keys(FEATURES)
         .filter(f => state.filters.features.available[f] && !FEATURES[f].parent)
         .filter(f => FEATURES[f].generalLegendGroup)

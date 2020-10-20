@@ -50,7 +50,10 @@ declare function useSiteMapContext(): any[] | {
             status: null;
             error: null;
         };
-        isAtCenter: boolean;
+        map: {
+            zoom: null;
+            center: never[];
+        };
     };
     aspectRatio: {
         currentValue: null;
@@ -73,8 +76,10 @@ declare function useSiteMapContext(): any[] | {
         baseLayer: null;
         baseLayerAutoChangedAbove17: boolean;
         overlays: Set<any>;
+        mouseMode: string;
         zoomedIcons: {};
         repositionOpenPopupFunc: null;
+        isDraggingAreaSelection: boolean;
     };
     selection: {
         active: null;
