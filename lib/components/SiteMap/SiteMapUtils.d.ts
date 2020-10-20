@@ -1093,7 +1093,7 @@ export namespace BASE_LAYERS {
 }
 export const BASE_LAYERS_BY_TITLE: {};
 export namespace OVERLAY_GROUPS {
-    export namespace NLCD_2001 {
+    export namespace NLCD {
         const title_4: string;
         export { title_4 as title };
         const description_20: string;
@@ -1257,6 +1257,7 @@ export namespace SITE_MAP_DEFAULT_PROPS {
     export { features_1 as features };
 }
 export function getZoomedIcons(zoom: any): {};
+export function mapIsAtFocusLocation(state?: {}): boolean;
 export function getMapStateForFocusLocation(state?: {}): any;
 export function getDynamicAspectRatio(unusableVerticalSpace?: number): number;
 export function boundsAreValid(bounds: any): boolean;

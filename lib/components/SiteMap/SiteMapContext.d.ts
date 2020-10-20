@@ -50,7 +50,10 @@ declare function useSiteMapContext(): any[] | {
             status: null;
             error: null;
         };
-        isAtCenter: boolean;
+        map: {
+            zoom: null;
+            center: never[];
+        };
     };
     aspectRatio: {
         currentValue: null;
