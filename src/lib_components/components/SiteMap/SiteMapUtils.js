@@ -1182,7 +1182,7 @@ Object.keys(BASE_LAYERS).forEach((key) => {
 export const OVERLAY_GROUPS = {
   NLCD: {
     title: 'National Land Cover Database',
-    description: 'National Land Cover Database (NLCD) from the Multi-Resolution Land Characteristics (MRLC) consortium. Release years: 2001 (Alaska and Puerto Rico), 2006 (Continental US), and 2011 (Hawaii).',
+    description: 'National Land Cover Database (NLCD) from the Multi-Resolution Land Characteristics (MRLC) consortium. Release years: 2001 (Alaska, Hawaii, and Puerto Rico) and 2006 (Continental US).',
     commonProps: { format: 'image/png', transparent: true },
   },
 };
@@ -1220,8 +1220,8 @@ export const OVERLAYS = {
         type: 'WMSTileLayer',
         key: 'HI',
         props: {
-          url: 'https://www.mrlc.gov/geoserver/mrlc_display/NLCD_2011_Land_Cover_HI/wms?',
-          layers: 'NLCD_2011_Land_Cover_HI',
+          url: 'https://www.mrlc.gov/geoserver/mrlc_display/NLCD_2001_Land_Cover_HI/wms?',
+          layers: 'NLCD_2001_Land_Cover_HI',
         },
       },
       {
@@ -1312,8 +1312,8 @@ export const OVERLAYS = {
         type: 'WMSTileLayer',
         key: 'HI',
         props: {
-          url: 'https://www.mrlc.gov/geoserver/mrlc_display/NLCD_2011_Impervious_HI/wms?',
-          layers: 'NLCD_2011_Impervious_HI',
+          url: 'https://www.mrlc.gov/geoserver/mrlc_display/NLCD_2001_Impervious_HI/wms?',
+          layers: 'NLCD_2001_Impervious_HI',
         },
       },
       {
