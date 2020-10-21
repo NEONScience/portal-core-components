@@ -565,10 +565,14 @@
   #header .l--1col-wrapper, #footer .l--1col-wrapper {
     width: 100%; }
   #header .sticky, #footer .sticky {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    margin-bottom: 3rem; }
+    position: static;
+    margin-bottom: 0; }
+    @media (min-width: 62em) {
+      #header .sticky, #footer .sticky {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        margin-bottom: 3rem; } }
   #header body.page-node-type-page .page-landing-page .paragraph--type--section:first-of-type .layout:first-of-type, #footer body.page-node-type-page .page-landing-page .paragraph--type--section:first-of-type .layout:first-of-type {
     padding-top: 0; }
   #header body.page-node-type-page .page-full .page__default--content .layout.default-layout, #footer body.page-node-type-page .page-full .page__default--content .layout.default-layout {
@@ -2931,7 +2935,7 @@
         text-align: center; }
         #header nav#block-neon-main-menu > ul > li.myAccount a, #footer nav#block-neon-main-menu > ul > li.myAccount a {
           padding: 6px 12px;
-          color: #565A5C;
+          color: #565a5c;
           letter-spacing: 1.2px;
           text-transform: uppercase;
           background: #E4E6E7;
@@ -3172,7 +3176,7 @@
           margin: 0 0 25px 0; }
           #header nav#block-neon-main-menu > ul.menu--main > li.myAccount a, #footer nav#block-neon-main-menu > ul.menu--main > li.myAccount a {
             padding: 6px 12px;
-            color: #565A5C;
+            color: #565a5c;
             letter-spacing: 1.2px;
             line-height: 18px;
             text-transform: uppercase;
@@ -3282,7 +3286,8 @@
         position: absolute;
         top: 0;
         left: calc(100% / 3);
-        width: 100%; }
+        width: 100%;
+        height: 100%; }
       #header .subNavWrapper.depthThree .innerSubNavWrapper:after, #footer .subNavWrapper.depthThree .innerSubNavWrapper:after {
         content: "";
         border-left: 1px solid #0073CF;
@@ -3290,7 +3295,8 @@
         top: 0;
         right: 0;
         background: #001c4c;
-        width: calc(100% / 3); }
+        width: calc(100% / 3);
+        height: 100%; }
     #header nav#block-neon-main-menu ul.menu--main li.over .subNavWrapper, #footer nav#block-neon-main-menu ul.menu--main li.over .subNavWrapper {
       transition: opacity 0.2s ease-in-out;
       opacity: 1;
