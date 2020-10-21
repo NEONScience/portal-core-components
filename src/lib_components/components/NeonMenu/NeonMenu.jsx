@@ -18,7 +18,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 
 import NeonApi from '../NeonApi/NeonApi';
-import NeonAuth, { NeonAuthType, NeonAuthDisplayType } from '../NeonAuth/NeonAuth'; // eslint-disable-line
+import NeonAuth, { NeonAuthType, NeonAuthDisplayType } from '../NeonAuth/NeonAuth';
 import NeonDrawerMenu from './NeonDrawerMenu';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import { COLORS } from '../Theme/Theme';

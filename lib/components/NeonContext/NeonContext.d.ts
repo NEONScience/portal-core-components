@@ -181,9 +181,6 @@ declare function useNeonContextState(): ({
                 zoom: number;
             };
             NH: {
-                /**
-                   CONTEXT
-                */
                 name: string;
                 center: number[];
                 zoom: number;
@@ -487,10 +484,13 @@ declare function useNeonContextState(): ({
         domainSites: {};
     };
     html: {
-        header: null;
-        footer: null;
+        [x: number]: null;
     };
     fetches: {
+        [x: number]: {
+            status: null;
+            error: null;
+        };
         sites: {
             status: string;
             error: null;
@@ -499,16 +499,9 @@ declare function useNeonContextState(): ({
             status: null;
             error: null;
         };
-        header: {
-            status: null;
-            error: null;
-        };
-        footer: {
-            status: null;
-            error: null;
-        };
     };
     auth: {
+        useCore: boolean;
         isAuthenticated: boolean;
         isAuthWorking: boolean;
         isAuthWsConnected: boolean;
@@ -667,9 +660,6 @@ declare function useNeonContextState(): ({
                 zoom: number;
             };
             NH: {
-                /**
-                   CONTEXT
-                */
                 name: string;
                 center: number[];
                 zoom: number;
@@ -973,10 +963,13 @@ declare function useNeonContextState(): ({
         domainSites: {};
     };
     html: {
-        header: null;
-        footer: null;
+        [x: number]: null;
     };
     fetches: {
+        [x: number]: {
+            status: null;
+            error: null;
+        };
         sites: {
             status: string;
             error: null;
@@ -985,16 +978,9 @@ declare function useNeonContextState(): ({
             status: null;
             error: null;
         };
-        header: {
-            status: null;
-            error: null;
-        };
-        footer: {
-            status: null;
-            error: null;
-        };
     };
     auth: {
+        useCore: boolean;
         isAuthenticated: boolean;
         isAuthWorking: boolean;
         isAuthWsConnected: boolean;
@@ -1014,45 +1000,30 @@ declare namespace DEFAULT_STATE {
         export const stateSites: {};
         export const domainSites: {};
     }
-    export namespace html {
-        export const header: null;
-        export const footer: null;
-    }
-    export namespace fetches {
-        export namespace sites_1 {
-            import status = AWAITING_CALL;
-            export { status };
-            export const error: null;
-        }
-        export { sites_1 as sites };
-        export namespace auth {
-            const status_1: null;
-            export { status_1 as status };
-            const error_1: null;
-            export { error_1 as error };
-        }
-        export namespace header_1 {
-            const status_2: null;
-            export { status_2 as status };
-            const error_2: null;
-            export { error_2 as error };
-        }
-        export { header_1 as header };
-        export namespace footer_1 {
-            const status_3: null;
-            export { status_3 as status };
-            const error_3: null;
-            export { error_3 as error };
-        }
-        export { footer_1 as footer };
-    }
-    export namespace auth_1 {
+    export const html: {
+        [x: number]: null;
+    };
+    export const fetches: {
+        [x: number]: {
+            status: null;
+            error: null;
+        };
+        sites: {
+            status: string;
+            error: null;
+        };
+        auth: {
+            status: null;
+            error: null;
+        };
+    };
+    export namespace auth {
+        export const useCore: boolean;
         export const isAuthenticated: boolean;
         export const isAuthWorking: boolean;
         export const isAuthWsConnected: boolean;
         export const userData: null;
     }
-    export { auth_1 as auth };
     export const isActive: boolean;
     export const isFinal: boolean;
     export const hasError: boolean;

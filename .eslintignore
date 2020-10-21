@@ -2,3 +2,4 @@ src/registerServiceWorker.js
 src/lib_components/components/PopupBase
 src/lib_components/components/PopupLoading
 src/lib_components/components/**/*.d.ts
+src/lib_components/remoteAssets

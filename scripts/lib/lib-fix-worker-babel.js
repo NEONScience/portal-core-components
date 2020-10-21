@@ -1,7 +1,21 @@
 'use strict';
 
-const path = require('path');
-const fs = require('fs');
+process.env.NODE_ENV = 'DEVELOPMENT';
+
+// Makes the script crash on unhandled rejections instead of silently
+// ignoring them. In the future, promise rejections that are not handled will
+// terminate the Node.js process with a non-zero exit code.
+process.on('unhandledRejection', err => {
+  throw err;
+});
+
+import fs from 'fs';
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+const WORKERS_PATH = '../../lib/workers/';
 
 /**
    Fix Worker Babel
@@ -18,11 +32,11 @@ const fs = require('fs');
 
 console.log('Adjusting babel polyfills for workers...');
 
-const workers = fs.readdirSync(path.resolve(__dirname, 'lib/workers/'));
+const workers = fs.readdirSync(path.resolve(__dirname, WORKERS_PATH));
 workers.forEach((worker) => {
   // Only look at .js files
   if (!/\.js$/.test(worker)) { return; }
-  const uri = path.resolve(__dirname, 'lib/workers/', worker);
+  const uri = path.resolve(__dirname, WORKERS_PATH, worker);
   const inSource = fs.readFileSync(uri, 'utf8');
   let workerEntered = false;
   const preLines = [];

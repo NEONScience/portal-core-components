@@ -3,11 +3,15 @@ import React, { useCallback, Dispatch } from 'react';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { makeStyles, Theme as MuiThemeType } from '@material-ui/core/styles';
 
 import AuthService, { LOGOUT_REDIRECT_PATHS } from './AuthService';
 import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import Theme from '../Theme/Theme';
+
+import { StringPropsObject } from '../../types/objectTypes';
+import { StylesHook } from '../../types/muiTypes';
 import { Undef } from '../../types/core';
 
 export enum NeonAuthType {
@@ -26,6 +30,20 @@ export interface NeonAuthProps {
   logoutPath: string;
   accountPath: string;
 }
+
+const useStyles: StylesHook = makeStyles((theme: MuiThemeType) => ({
+  button: {
+    whiteSpace: 'nowrap',
+    // The following styles are !important overrides to styles applied by the drupal header.css
+    // when NeonAuth is injected into the drupal header.
+    color: `${theme.palette.primary.main} !important`,
+    textTransform: 'uppercase !important' as 'uppercase',
+    fontSize: '0.55rem !important',
+    fontWeight: '600 !important' as any,
+    fontFamily: '"Inter",Helvetica,Arial,sans-serif !important',
+    lineHeight: '1.75 !important',
+  },
+})) as StylesHook;
 
 const UX_TIMEOUT_MS: number = 300;
 
@@ -53,6 +71,7 @@ const triggerAuth = (
 
 const renderAuth = (
   props: NeonAuthProps,
+  classes: StringPropsObject,
   isAuthenticated: boolean,
   showAuthWorking: boolean,
   isAuthWsConnected: boolean,
@@ -113,6 +132,7 @@ const renderAuth = (
         <Button
           size="small"
           variant="outlined"
+          className={classes.button}
           data-selenium="neon-menu.sign-in-button"
           onClick={() => handleLogin()}
         >
@@ -121,13 +141,24 @@ const renderAuth = (
       );
       if (showAuthWorking) {
         authContent = (
-          <CircularProgress size={24} />
+          <div style={{ display: 'flex', alignItems: 'center', margin: Theme.spacing(0.5) }}>
+            <span
+              style={{
+                fontStyle: 'italic',
+                marginRight: Theme.spacing(1),
+                color: Theme.palette.grey[400],
+              }}
+            >
+              {isAuthenticated ? 'Signing out...' : 'Signing in...'}
+            </span>
+            <CircularProgress size={20} />
+          </div>
         );
       } else if (isAuthenticated) {
         authContent = (
           <ButtonGroup size="small" aria-label="Authentication">
             <Button
-              style={{ whiteSpace: 'nowrap' }}
+              className={classes.button}
               data-selenium="neon-menu.sign-out-button"
               onClick={() => handleLogout()}
             >
@@ -135,7 +166,7 @@ const renderAuth = (
             </Button>
             <Button
               href={accountPath}
-              style={{ whiteSpace: 'nowrap' }}
+              className={classes.button}
               data-selenium="neon-menu.my-account-button"
             >
               My Account
@@ -165,6 +196,8 @@ const NeonAuth = (props: NeonAuthProps): JSX.Element => {
     dispatch,
   ] = NeonContext.useNeonContextState();
 
+  const classes: StringPropsObject = useStyles(Theme);
+
   const isFetchingAuthentication: boolean = (status === FETCH_STATUS.FETCHING);
   const isAuthFetched: boolean = ([FETCH_STATUS.SUCCESS, FETCH_STATUS.ERROR].indexOf(status) >= 0);
   const showAuthWorking: boolean = (isAuthWorking || isFetchingAuthentication);
@@ -177,7 +210,7 @@ const NeonAuth = (props: NeonAuthProps): JSX.Element => {
   }
   return (
     <React.Fragment>
-      {renderAuth(props, isAuthenticated, showAuthWorking, isAuthWsConnected, dispatch)}
+      {renderAuth(props, classes, isAuthenticated, showAuthWorking, isAuthWsConnected, dispatch)}
     </React.Fragment>
   );
 };

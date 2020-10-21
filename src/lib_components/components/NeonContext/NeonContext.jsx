@@ -11,13 +11,17 @@ import cloneDeep from 'lodash/cloneDeep';
 import { of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
-import AuthService from '../NeonAuth/AuthService'; // eslint-disable-line
+import REMOTE_ASSETS from '../../remoteAssetsMap/remoteAssetsMap';
+import AuthService from '../NeonAuth/AuthService';
 import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
 import sitesJSON from '../../staticJSON/sites.json';
 import statesJSON from '../../staticJSON/states.json';
 import domainsJSON from '../../staticJSON/domains.json';
 import bundlesJSON from '../../staticJSON/bundles.json';
 import timeSeriesDataProductsJSON from '../../staticJSON/timeSeriesDataProducts.json';
+
+const DRUPAL_HEADER_HTML = REMOTE_ASSETS.DRUPAL_HEADER_HTML.KEY;
+const DRUPAL_FOOTER_HTML = REMOTE_ASSETS.DRUPAL_FOOTER_HTML.KEY;
 
 export const FETCH_STATUS = {
   AWAITING_CALL: 'AWAITING_CALL',
@@ -37,16 +41,17 @@ const DEFAULT_STATE = {
     domainSites: {}, // derived when sites is fetched
   },
   html: {
-    header: null,
-    footer: null,
+    [DRUPAL_HEADER_HTML]: null,
+    [DRUPAL_FOOTER_HTML]: null,
   },
   fetches: {
     sites: { status: FETCH_STATUS.AWAITING_CALL, error: null },
     auth: { status: null, error: null },
-    header: { status: null, error: null },
-    footer: { status: null, error: null },
+    [DRUPAL_HEADER_HTML]: { status: null, error: null },
+    [DRUPAL_FOOTER_HTML]: { status: null, error: null },
   },
   auth: {
+    useCore: false,
     isAuthenticated: false,
     isAuthWorking: false,
     isAuthWsConnected: false,
@@ -80,12 +85,6 @@ const deriveRegionSites = (state) => {
   };
 };
 
-// TODO: where to put this?
-const HTML_URLS = {
-  header: 'https://preview.neonscience.org/neon-assets/partial/header',
-  footer: 'https://preview.neonscience.org/neon-assets/partial/footer',
-};
-
 /**
    CONTEXT
 */
@@ -115,6 +114,7 @@ const reducer = (state, action) => {
   // Always deep clone fetches as that's the main thing we care about
   // changing to trigger re-renders in the consumer.
   const newState = { ...state, fetches: cloneDeep(state.fetches) };
+  const hasValidRemoteAsset = action.asset && Object.keys(REMOTE_ASSETS).includes(action.asset);
   switch (action.type) {
     case 'fetchCalled':
       if (!action.key || !state.fetches[action.key]) { return state; }
@@ -155,16 +155,16 @@ const reducer = (state, action) => {
       newState.auth.userData = null;
       return newState;
 
-    // Actions for handling HTML fetches
+    // Actions for handling remote assets
     case 'fetchHtmlSucceeded':
-      if (!Object.keys(HTML_URLS).includes(action.part)) { return state; }
-      newState.fetches[action.part].status = FETCH_STATUS.SUCCESS;
-      newState.html[action.part] = action.html;
+      if (!hasValidRemoteAsset) { return state; }
+      newState.fetches[action.asset].status = FETCH_STATUS.SUCCESS;
+      newState.html[action.asset] = action.html;
       return newState;
     case 'fetchHtmlFailed':
-      if (!Object.keys(HTML_URLS).includes(action.part)) { return state; }
-      newState.fetches[action.part].status = FETCH_STATUS.ERROR;
-      newState.fetches[action.part].error = action.error;
+      if (!hasValidRemoteAsset) { return state; }
+      newState.fetches[action.asset].status = FETCH_STATUS.ERROR;
+      newState.fetches[action.asset].error = action.error;
       return newState;
 
     default:
@@ -203,24 +203,34 @@ const Provider = (props) => {
   const initialState = cloneDeep(DEFAULT_STATE);
   initialState.isActive = true;
   if (useCoreAuth) {
+    initialState.auth.useCore = true;
     initialState.fetches.auth.status = FETCH_STATUS.AWAITING_CALL;
   }
   if (!useCoreHeader) {
-    initialState.fetches.header.status = FETCH_STATUS.AWAITING_CALL;
-    initialState.fetches.footer.status = FETCH_STATUS.AWAITING_CALL;
+    initialState.fetches[DRUPAL_HEADER_HTML].status = FETCH_STATUS.AWAITING_CALL;
+    initialState.fetches[DRUPAL_FOOTER_HTML].status = FETCH_STATUS.AWAITING_CALL;
   }
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const fetchHTML = (part) => {
-    if (!Object.keys(HTML_URLS).includes(part)) { return; }
-    window.fetch(HTML_URLS[part], { method: 'GET', headers: { Accept: 'text/html' } })
-      .then(response => response.text())
+  // Method to sanitize partial HTML. As delivered presently there are some markup issues that
+  // throw warnings when parsed with HTMLReactParser.
+  const sanitizePartialHTML = html => html.replace(/ value=""/g, ' initialValue=""');
+
+  // Method to fetch header and/or footer partials
+  const fetchPartialHTML = (key) => {
+    if (!Object.keys(REMOTE_ASSETS).includes(key)) { return; }
+    const { url } = REMOTE_ASSETS[key];
+    window.fetch(url, { method: 'GET', headers: { Accept: 'text/html' } })
+      .then((res) => {
+        if (res.status >= 400) { throw new Error(`${res.status} ${res.statusText}`); }
+        return res.text();
+      })
       .then((html) => {
-        dispatch({ type: 'fetchHtmlSucceeded', part, html });
+        dispatch({ type: 'fetchHtmlSucceeded', asset: key, html: sanitizePartialHTML(html) });
         return of(true);
       })
       .catch((error) => {
-        dispatch({ type: 'fetchHtmlFailed', part, error });
+        dispatch({ type: 'fetchHtmlFailed', asset: key, error });
         return of(false);
       });
   };
@@ -278,8 +288,8 @@ const Provider = (props) => {
         },
       );
     },
-    header: () => fetchHTML('header'),
-    footer: () => fetchHTML('footer'),
+    [DRUPAL_HEADER_HTML]: () => fetchPartialHTML(DRUPAL_HEADER_HTML),
+    [DRUPAL_FOOTER_HTML]: () => fetchPartialHTML(DRUPAL_FOOTER_HTML),
   };
 
   // Effect: Trigger all fetches that are awaiting call

@@ -34,10 +34,11 @@ import HomeIcon from '@material-ui/icons/Home';
 
 import Skeleton from '@material-ui/lab/Skeleton';
 
+import REMOTE_ASSETS from '../../remoteAssetsMap/remoteAssetsMap';
 import Theme, { COLORS } from '../Theme/Theme';
 import NeonHeader from '../NeonHeader/NeonHeader';
 import NeonFooter from '../NeonFooter/NeonFooter';
-import NeonContext from '../NeonContext/NeonContext';
+import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
 import BrowserWarning from './BrowserWarning';
 import LiferayNotifications from './LiferayNotifications';
 
@@ -46,6 +47,8 @@ import {
   generateNotificationId,
   getLiferayNotificationsApiPath,
 } from '../../util/liferayNotificationsUtil';
+
+const DRUPAL_THEME_CSS = REMOTE_ASSETS.DRUPAL_THEME_CSS.KEY;
 
 const cookies = new Cookies();
 
@@ -84,19 +87,20 @@ if (!window.gtmDataLayer) {
   window.gtmDataLayer = [];
 }
 
-// NOTE: because these are defined outside the ThemeProvider any theme vars will come from
-// MUI default, NOT the NeonTheme. Hence why some definitions use COLORS directly.
-const useStyles = makeStyles(theme => ({
+// NOTE: because these are defined outside the ThemeProvider any theme vars must come directly from
+// the Theme import, unlike most other useStyles() instances where the Theme import is passed to the
+// hook as an argument.
+const useStyles = makeStyles(() => ({
   outerPageContainer: {
     position: 'relative',
-    minHeight: theme.spacing(30),
+    minHeight: Theme.spacing(30),
     borderTop: '2px solid transparent',
-    [theme.breakpoints.up('md')]: {
+    [Theme.breakpoints.up('md')]: {
       display: 'table',
       tableLayout: 'fixed',
     },
-    [theme.breakpoints.down('sm')]: {
-      paddingBottom: theme.spacing(2.5),
+    [Theme.breakpoints.down('sm')]: {
+      paddingBottom: Theme.spacing(2.5),
       flexDirection: 'column',
     },
   },
@@ -104,12 +108,12 @@ const useStyles = makeStyles(theme => ({
     display: 'table-cell',
     verticalAlign: 'top',
     position: 'relative',
-    padding: theme.spacing(4),
-    paddingBottom: theme.spacing(8),
-    [theme.breakpoints.down('sm')]: {
+    padding: Theme.spacing(4),
+    paddingBottom: Theme.spacing(8),
+    [Theme.breakpoints.down('sm')]: {
       display: 'block',
-      padding: theme.spacing(3),
-      paddingBottom: theme.spacing(6),
+      padding: Theme.spacing(3),
+      paddingBottom: Theme.spacing(6),
     },
     // These override links created with a naked <a> tag, as opposed to a <Link>
     // component, to appear the same as the <Link> component. This is especially
@@ -126,19 +130,19 @@ const useStyles = makeStyles(theme => ({
     display: 'table-cell',
     verticalAlign: 'top',
     backgroundColor: COLORS.GREY[50],
-    padding: theme.spacing(5, 4),
-    [theme.breakpoints.down('sm')]: {
+    padding: Theme.spacing(5, 4),
+    [Theme.breakpoints.down('sm')]: {
       display: 'inline-block',
       width: '100%',
       maxHeight: 'calc(100vh - 84px)',
-      padding: theme.spacing(2.5, 2),
+      padding: Theme.spacing(2.5, 2),
       position: 'sticky',
       top: '-2px',
       boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.25), 0px 1px 1px rgba(0, 0, 0, 0.25)',
-      zIndex: 2,
+      zIndex: 1,
     },
-    [theme.breakpoints.down('xs')]: {
-      padding: theme.spacing(1.5),
+    [Theme.breakpoints.down('xs')]: {
+      padding: Theme.spacing(1.5),
     },
   },
   sidebarInnerStickyContainer: {
@@ -152,22 +156,34 @@ const useStyles = makeStyles(theme => ({
   },
   sidebarTitle: {
     fontWeight: 700,
-    [theme.breakpoints.down('sm')]: {
+    [Theme.breakpoints.down('sm')]: {
       overflow: 'hidden',
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
+    },
+    [Theme.breakpoints.only('sm')]: {
+      marginRight: Theme.spacing(1.5),
     },
   },
   sidebarSubtitle: {
     color: COLORS.GREY[300],
     marginTop: Theme.spacing(1),
-    [theme.breakpoints.down('sm')]: {
+    [Theme.breakpoints.down('sm')]: {
       overflow: 'hidden',
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
+      marginTop: '0px',
     },
-    [theme.breakpoints.down('xs')]: {
+    [Theme.breakpoints.down('xs')]: {
       display: 'none',
+    },
+  },
+  sidebarTitlesContainer: {
+    minWidth: '0px',
+    paddingRight: Theme.spacing(1),
+    [Theme.breakpoints.only('sm')]: {
+      display: 'flex',
+      alignItems: 'baseline',
     },
   },
   sidebarLink: {
@@ -197,10 +213,10 @@ const useStyles = makeStyles(theme => ({
   },
   sidebarDivider: {
     margin: '24px 0px',
-    [theme.breakpoints.down('sm')]: {
+    [Theme.breakpoints.down('sm')]: {
       margin: '16px 0px',
     },
-    [theme.breakpoints.down('xs')]: {
+    [Theme.breakpoints.down('xs')]: {
       margin: '8px 0px 12px 0px',
     },
   },
@@ -211,22 +227,22 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     textAlign: 'center',
     borderRadius: '4px',
-    padding: theme.spacing(3, 3, 4, 3),
+    padding: Theme.spacing(3, 3, 4, 3),
     position: 'sticky',
-    top: theme.spacing(12),
+    top: Theme.spacing(12),
     left: 0,
     right: 0,
     marginLeft: 'auto',
     marginRight: 'auto',
     width: '70%',
-    [theme.breakpoints.up('lg')]: {
+    [Theme.breakpoints.up('lg')]: {
       width: '50%',
     },
   },
   pageTitle: {
-    margin: theme.spacing(3, 0, 4, 0),
-    [theme.breakpoints.up('sm')]: {
-      margin: theme.spacing(3, 0, 4, 0),
+    margin: Theme.spacing(3, 0, 4, 0),
+    [Theme.breakpoints.up('sm')]: {
+      margin: Theme.spacing(3, 0, 4, 0),
     },
   },
   pageSubtitle: {
@@ -234,12 +250,10 @@ const useStyles = makeStyles(theme => ({
     color: COLORS.GREY[500],
     lineHeight: '1.5',
     fontSize: '1.1rem',
-    marginTop: theme.spacing(-1),
-    marginBottom: theme.spacing(4),
+    marginTop: Theme.spacing(-1),
+    marginBottom: Theme.spacing(4),
   },
 }));
-
-const DRUPAL_CSS_URL = 'https://preview.neonscience.org/themes/custom/neon/build/components/theme/theme.css';
 
 const NeonPage = (props) => {
   const {
@@ -266,7 +280,7 @@ const NeonPage = (props) => {
     children,
   } = props;
 
-  const classes = useStyles(Theme);
+  const classes = useStyles();
   const [{ isActive: neonContextIsActive }] = NeonContext.useNeonContextState();
   const headerRef = useRef(null);
   const contentRef = useRef(null);
@@ -366,10 +380,10 @@ const NeonPage = (props) => {
   }, [
     error,
     loading,
-    sidebarUnsticky,
-    hasSidebarLinks,
     sidebarLinks,
     sidebarHashMap,
+    sidebarUnsticky,
+    hasSidebarLinks,
     hashInitialized,
     setHashInitialized,
     currentSidebarHash,
@@ -382,15 +396,28 @@ const NeonPage = (props) => {
   /**
      Effect - Load Drupal CSS
   */
-  const [drupalCssLoaded, setDrupalCssLoaded] = useState(false);
+  const [drupalCssStatus, setDrupalCssStatus] = useState(FETCH_STATUS.AWAITING_CALL);
   useEffect(() => {
-    if (useCoreHeader || drupalCssLoaded) { return; }
+    if (useCoreHeader || drupalCssStatus !== FETCH_STATUS.AWAITING_CALL) { return; }
+    setDrupalCssStatus(FETCH_STATUS.FETCHING);
     const link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = DRUPAL_CSS_URL;
+    link.href = REMOTE_ASSETS[DRUPAL_THEME_CSS].url;
+    link.crossOrigin = 'anonymous';
+    link.onload = (() => {
+      setDrupalCssStatus(FETCH_STATUS.SUCCESS);
+    });
+    link.onerror = (() => {
+      // eslint-disable-next-line no-unused-expressions
+      import('../../remoteAssets/drupal-theme.css');
+      // Assume this local import worked and still report the load as successful
+      // We do this because props on header and footer express whether the CSS is loaded and we want
+      // to simplify that as a boolean. The header and footer don't care where the CSS came from
+      // so long as it's there.
+      setDrupalCssStatus(FETCH_STATUS.SUCCESS);
+    });
     document.body.appendChild(link);
-    setDrupalCssLoaded(true);
-  }, [useCoreHeader, drupalCssLoaded, setDrupalCssLoaded]);
+  }, [useCoreHeader, drupalCssStatus, setDrupalCssStatus]);
 
   /**
      Liferay Notifications
@@ -565,7 +592,7 @@ const NeonPage = (props) => {
     const renderSidebarTitle = () => {
       if (!sidebarTitle && !title) { return null; }
       return (
-        <div style={{ minWidth: '0px', paddingRight: '8px' }}>
+        <div className={classes.sidebarTitlesContainer}>
           {loading || error ? (
             <React.Fragment>
               <Skeleton width={200} height={22} style={{ marginBottom: Theme.spacing(1) }} />
@@ -695,7 +722,7 @@ const NeonPage = (props) => {
             unstickyDrupalHeader={unstickyDrupalHeader}
             notifications={notifications}
             onShowNotifications={handleShowNotifications}
-            drupalCssLoaded={drupalCssLoaded}
+            drupalCssLoaded={drupalCssStatus === FETCH_STATUS.SUCCESS}
           />
         )}
         <Container className={classes.outerPageContainer} style={outerPageContainerStyles}>
@@ -716,7 +743,16 @@ const NeonPage = (props) => {
           onHideNotifications={handleHideNotifications}
         />
         <BrowserWarning />
-        {customFooter || <NeonFooter drupalCssLoaded={drupalCssLoaded} />}
+        {customFooter ? (
+          <footer>
+            {customFooter}
+          </footer>
+        ) : (
+          <NeonFooter
+            useCoreHeader={useCoreHeader}
+            drupalCssLoaded={drupalCssStatus === FETCH_STATUS.SUCCESS}
+          />
+        )}
         {renderLoading()}
         {renderError()}
       </ThemeProvider>
