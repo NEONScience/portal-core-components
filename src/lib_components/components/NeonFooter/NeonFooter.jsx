@@ -5,11 +5,10 @@ import HTMLReactParser from 'html-react-parser';
 import Skeleton from '@material-ui/lab/Skeleton';
 
 import REMOTE_ASSETS from '../../remoteAssetsMap/remoteAssetsMap';
+import DRUPAL_FOOTER_HTML_FALLBACK from '../../remoteAssets/drupal-footer.html';
 import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
 
 import NeonLegacyFooter from './NeonLegacyFooter';
-
-const DRUPAL_FOOTER_HTML_FALLBACK = require('../../remoteAssets/drupal-footer.html');
 
 const DRUPAL_FOOTER_HTML = REMOTE_ASSETS.DRUPAL_FOOTER_HTML.KEY;
 

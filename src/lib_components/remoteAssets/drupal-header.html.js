@@ -1,4 +1,5 @@
-
+let html;
+export default html = `
 
 <!-- THEME DEBUG -->
 <!-- THEME HOOK: 'html' -->
@@ -337,7 +338,7 @@
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
-          <a href="/code-resource-guidelines" class="menu__link" data-drupal-link-system-path="node/8619">Code Resource Guidelines</a>
+          <a href="/resources/code-hub/code-resources-guidelines" class="menu__link" data-drupal-link-system-path="node/8619">Code Resources Guidelines</a>
 
                   </li>
               <li  class="menu__item">
@@ -498,6 +499,10 @@
             
                       <ul  class="menu menu--main" data-depth="2">
 
+              <li  class="menu__item">
+          <a href="/data/samples-specimens/excess-samples" class="menu__link" data-drupal-link-system-path="node/10297">Excess Samples</a>
+
+                  </li>
               <li  class="menu__item">
           <a href="/data-samples/samples/megapit-soil-archive" class="menu__link" data-drupal-link-system-path="node/5">Megapit and Distributed Initial Characterization Soil Archives</a>
 
@@ -899,7 +904,7 @@
    x input.html.twig
 -->
 <!-- BEGIN OUTPUT from 'core/themes/stable/templates/form/input.html.twig' -->
-<input autocomplete="off" data-drupal-selector="form-lte43qc-0sdfi6ebjtt5cw3qwm3f6orovgbtmdg6oyg" type="hidden" name="form_build_id" value="form-LTE43Qc-0sdFI6ebJTt5cw3QWm3f6ORoVGBtMdg6OYg" />
+<input autocomplete="off" data-drupal-selector="form-4jvfqdq6k4xz3l-9tkhd1hyup1lyfzodg6vwqglcapo" type="hidden" name="form_build_id" value="form-4JvfQdq6k4XZ3L_9tKHD1HyUp1lYfzoDG6vwQgLCapo" />
 
 <!-- END OUTPUT from 'core/themes/stable/templates/form/input.html.twig' -->
 
@@ -1005,7 +1010,7 @@
    x input.html.twig
 -->
 <!-- BEGIN OUTPUT from 'core/themes/stable/templates/form/input.html.twig' -->
-<input autocomplete="off" data-drupal-selector="form-3d-zvpwkmqpv8mjmnjte61zkvljrybq4lsqwji-gz-i" type="hidden" name="form_build_id" value="form-3d_ZvPwKMqpV8MjmnjTE61zKVLJryBq4LSQwJI_gZ_I" />
+<input autocomplete="off" data-drupal-selector="form-0fmkscsjxfpbuj-jame76mrj24qq5cmvjo4kezoeb4c" type="hidden" name="form_build_id" value="form-0FMkSCsjxFPbuJ_JAme76mrj24Qq5CmvjO4kezoEB4c" />
 
 <!-- END OUTPUT from 'core/themes/stable/templates/form/input.html.twig' -->
 
@@ -1043,3 +1048,4 @@
 
 <!-- END OUTPUT from 'themes/custom/neon/templates/html/html--neon-assets--partial--header.html.twig' -->
 
+`;

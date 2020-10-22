@@ -35,6 +35,12 @@ const sanitizeContent = (key, content) => {
         content = content.replace(match, replacement);
       });
       return content;
+    // HTML files - convert to JS module that exports a string of the HTML content
+    // We do this so that apps consuming portal-core-components don't need to configure html-loader
+    case REMOTE_ASSETS.DRUPAL_HEADER_HTML.KEY:
+    case REMOTE_ASSETS.DRUPAL_FOOTER_HTML.KEY:
+      content = content.replace(/`/g, '\\`');
+      return `let html;\nexport default html = \`${content}\`;`;
     default:
       return content;
   }
@@ -52,13 +58,19 @@ Object.keys(REMOTE_ASSETS)
       })
       .then((res) => {
         return new Promise((resolve, reject) => {
-          const destination = path.join(CACHED_REMOTE_ASSETS_PATH, name);
+          let cachedFileName = name;
+          let savedAs = '';
+          if (cachedFileName.endsWith('.html')) {
+            cachedFileName = `${cachedFileName}.js`;
+            savedAs = ` (saved as ${cachedFileName})`;
+          }
+          const destination = path.join(CACHED_REMOTE_ASSETS_PATH, cachedFileName);
           fs.writeFileSync(
             destination,
             sanitizeContent(key, res),
             { encoding:'utf8' },
           );
-          console.log(`* Completed: ${name}`);
+          console.log(`* Completed: ${name}${savedAs}`);
           resolve(true);
         });
       })

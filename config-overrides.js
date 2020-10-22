@@ -16,13 +16,7 @@ const svgLoadRule = {
   ]
 };
 
-const htmlLoadRule = {
-  test: /\.html$/i,
-  loader: 'html-loader',
-};
-
 module.exports = override(
   useEslintRc(path.resolve(__dirname, '.eslintrc')),
   addWebpackModuleRule(svgLoadRule),
-  addWebpackModuleRule(htmlLoadRule),
 );

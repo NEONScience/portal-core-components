@@ -414,11 +414,11 @@ const SiteMapLeaflet = () => {
      re-render the map immediately and only once when the mepRef is set through the first render.
   */
   const [mapRefReady, setMapRefReady] = useState(false);
-  useEffect(() => {
+  useEffect(() => { // eslint-disable-line react-hooks/exhaustive-deps
     if (mapRef.current !== null && !mapRefReady) {
       setMapRefReady(true);
     }
-  }); // eslint-disable-line react-hooks/exhaustive-deps
+  });
 
   /**
      Effect

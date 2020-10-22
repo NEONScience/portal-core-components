@@ -1,4 +1,5 @@
-
+let html;
+export default html = `
 
 <!-- THEME DEBUG -->
 <!-- THEME HOOK: 'html' -->
@@ -131,3 +132,4 @@
 
 <!-- END OUTPUT from 'themes/custom/neon/templates/html/html--neon-assets--partial--footer.html.twig' -->
 
+`;

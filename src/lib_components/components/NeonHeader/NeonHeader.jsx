@@ -11,14 +11,13 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Skeleton from '@material-ui/lab/Skeleton';
 
 import REMOTE_ASSETS from '../../remoteAssetsMap/remoteAssetsMap';
+import DRUPAL_HEADER_HTML_FALLBACK from '../../remoteAssets/drupal-header.html';
 import Theme from '../Theme/Theme';
 import NeonAuth, { NeonAuthType, NeonAuthDisplayType } from '../NeonAuth/NeonAuth';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
 
 import NeonLegacyHeader from './NeonLegacyHeader';
-
-const DRUPAL_HEADER_HTML_FALLBACK = require('../../remoteAssets/drupal-header.html');
 
 const DRUPAL_HEADER_HTML = REMOTE_ASSETS.DRUPAL_HEADER_HTML.KEY;
 
