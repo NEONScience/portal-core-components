@@ -666,7 +666,7 @@ const SiteMapContainer = (props) => {
     switch (selectionActive) {
       case FEATURE_TYPES.SITES.KEY:
         return featureData[selectionActive][featureKey][item].description;
-      case FEATURE_TYPES.STATES:
+      case FEATURE_TYPES.STATES.KEY:
       case FEATURE_TYPES.DOMAINS.KEY:
         return featureData[selectionActive][featureKey][item].name;
       default:

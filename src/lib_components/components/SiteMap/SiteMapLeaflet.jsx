@@ -457,13 +457,24 @@ const SiteMapLeaflet = () => {
           Math.max(centerLatLng.lng, reachLatLng.lng),
         ],
       };
-      const selectionSites = calculateLocationsInBounds(state.sites, selectionBounds);
-      const newSelectionSet = new Set([
-        ...selectionSites,
+      let selectableData = {};
+      if (state.selection.active === FEATURE_TYPES.SITES.KEY) {
+        selectableData = state.sites;
+      }
+      if ([FEATURE_TYPES.STATES.KEY, FEATURE_TYPES.DOMAINS.KEY].includes(state.selection.active)) {
+        const selectableFeatureKey = Object.keys(FEATURES)
+          .find(k => FEATURES[k].type === state.selection.active);
+        if (selectableFeatureKey) {
+          selectableData = state.featureData[state.selection.active][selectableFeatureKey];
+        }
+      }
+      const newSelectionSet = calculateLocationsInBounds(selectableData, selectionBounds);
+      const finalSelectionSet = new Set([
+        ...newSelectionSet,
         ...(shiftPressed ? Array.from(state.selection.set) : []),
       ]);
       areaSelectionDispatch({ type: 'end', x: event.offsetX, y: event.offsetY });
-      dispatch({ type: 'updateSelectionSet', selection: newSelectionSet });
+      dispatch({ type: 'updateSelectionSet', selection: finalSelectionSet });
     };
     const handleKeyDown = (event) => {
       if (event.key === 'Shift') { areaSelectionDispatch({ type: 'shift', pressed: true }); }

@@ -133,29 +133,6 @@ export const FEATURE_TYPES = {
 // Replicate keys as attributes to completely eliminate the need to write a feature type key string
 Object.keys(FEATURE_TYPES).forEach((key) => { FEATURE_TYPES[key].KEY = key; });
 
-/*
-// For consistency in differentiating discrete sets of data that can be tabulated together.
-// e.g. all LOCATIONS type feature data can coexist in a single table view with a
-// single column definition. But LOCATIONS and SITES shouldn't, as each set has
-// different common attributes that should map to table columns (yes, sites are locations too,
-// but we represent and interact with them differently)
-export const FEATURE_TYPES = {
-  SITES: 'SITES',
-  SITE_LOCATION_HIERARCHIES: 'SITE_LOCATION_HIERARCHIES',
-  LOCATIONS: 'LOCATIONS',
-  SAMPLING_POINTS: 'SAMPLING_POINTS',
-  BOUNDARIES: 'BOUNDARIES',
-  DOMAINS: 'DOMAINS',
-  STATES: 'STATES',
-  GROUP: 'GROUP',
-  OTHER: 'OTHER', // All features require a type. This catch-all type will not show in the table.
-};
-// Subset of FEATURE_TYPES describing all features that are directly selectable
-// eslint-disable-next-line max-len
-export const SELECTABLE_FEATURE_TYPES = (({ SITES, STATES, DOMAINS }) =>
-({ SITES, STATES, DOMAINS }))(FEATURE_TYPES);
-*/
-
 // For consistency in differentiating where feature data come from
 // (e.g. various fetch APIs, NeonContext)
 export const FEATURE_DATA_SOURCES = {
@@ -1914,8 +1891,8 @@ export const calculateLocationsInBounds = (
     if (loc.geometry && loc.geometry.coordinates) {
       const flatCoords = flatten(loc.geometry.coordinates);
       return flatCoords.some(coord => (
-        coord.latitude >= extendedBounds.lat[0] && coord.latitude <= extendedBounds.lat[1]
-          && coord.longitude >= extendedBounds.lng[0] && coord.longitude <= extendedBounds.lng[1]
+        coord[0] >= extendedBounds.lat[0] && coord[0] <= extendedBounds.lat[1]
+          && coord[1] >= extendedBounds.lng[0] && coord[1] <= extendedBounds.lng[1]
       ));
     }
     return false;

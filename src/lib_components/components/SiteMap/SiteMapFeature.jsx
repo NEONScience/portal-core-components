@@ -679,7 +679,13 @@ const SiteMapFeature = (props) => {
       }
     }
     return (
-      <Grid key="childSites" item xs={12} data-selenium="sitemap-map-popup-childSites">
+      <Grid
+        key="childSites"
+        item
+        xs={12}
+        data-selenium="sitemap-map-popup-childSites"
+        style={{ marginBottom: Theme.spacing(2) }}
+      >
         {!sites.size ? (
           <React.Fragment>
             <Typography variant="subtitle2" gutterBottom>NEON Sites</Typography>
@@ -1249,6 +1255,8 @@ const SiteMapFeature = (props) => {
   */
   const baseColor = featureStyle ? featureStyle.color : '#666666';
   const hoverColor = `#${tinycolor(baseColor).lighten(10).toHex()}`;
+  const ghostedBaseColor = `#${tinycolor(baseColor).lighten(10).desaturate(60).toHex()}`;
+  const ghostedHoverColor = `#${tinycolor(hoverColor).lighten(10).desaturate(60).toHex()}`;
   const darkenedBaseColor = `#${tinycolor(baseColor).darken(15).toHex()}`;
   const darkenedMoreBaseColor = `#${tinycolor(darkenedBaseColor).darken(15).toHex()}`;
   const isPoint = (shapeData) => {
@@ -1336,8 +1344,13 @@ const SiteMapFeature = (props) => {
         }
         if (selectionActive) {
           let returnColor = isHighlighted ? darkenedBaseColor : featureStyle.color;
-          if (selectingCurrentFeatureType && state.selection.set.has(primaryId)) {
-            returnColor = darkenedMoreBaseColor;
+          let useHoverColor = hoverColor;
+          if (selectingCurrentFeatureType) {
+            if (state.selection.set.has(primaryId)) { returnColor = darkenedMoreBaseColor; }
+            if (!isSelectable) {
+              returnColor = ghostedBaseColor;
+              useHoverColor = ghostedHoverColor;
+            }
           }
           if (selectingActiveTypeByProxy) {
             const baseColors = {
@@ -1354,8 +1367,8 @@ const SiteMapFeature = (props) => {
           }
           shapeProps.color = returnColor;
           shapeProps.onMouseOver = (e) => {
-            e.target._path.setAttribute('stroke', hoverColor);
-            e.target._path.setAttribute('fill', hoverColor);
+            e.target._path.setAttribute('stroke', useHoverColor);
+            e.target._path.setAttribute('fill', useHoverColor);
             if (hasPopup) {
               e.target.openPopup();
               positionPopup(e.target, e.latlng, true);
