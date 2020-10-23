@@ -58,6 +58,7 @@ import {
   FEATURES,
   FEATURE_TYPES,
   MIN_CONTAINER_HEIGHT,
+  SELECTABLE_FEATURE_TYPES,
   OVERLAYS,
   OVERLAY_GROUPS,
   getDynamicAspectRatio,
@@ -317,7 +318,7 @@ const SiteMapContainer = (props) => {
 
   const [state, dispatch] = SiteMapContext.useSiteMapContext();
 
-  // console.log('SITEMAP STATE:', state);
+  console.log('SITEMAP STATE:', state);
   const isLoading = state.overallFetch.expected !== state.overallFetch.completed;
 
   const {
@@ -663,10 +664,15 @@ const SiteMapContainer = (props) => {
     if (!selectionActive) { return null; }
     const featureKey = getSelectedItemFeatureKey(item);
     if (!featureKey) { return null; }
-    if (selectionActive === FEATURE_TYPES.SITES) {
-      return featureData[selectionActive][featureKey][item].description;
+    switch (selectionActive) {
+      case SELECTABLE_FEATURE_TYPES.SITES:
+        return featureData[selectionActive][featureKey][item].description;
+      case SELECTABLE_FEATURE_TYPES.STATES:
+      case SELECTABLE_FEATURE_TYPES.DOMAINS:
+        return featureData[selectionActive][featureKey][item].name;
+      default:
+        return null;
     }
-    return null;
   };
 
   /**
@@ -674,7 +680,21 @@ const SiteMapContainer = (props) => {
   */
   const renderSelectionSummary = () => {
     if (!selectionActive) { return null; }
-    const unit = selectionActive === FEATURE_TYPES.SITES ? 'site' : 'location';
+    let unit = '';
+    switch (selectionActive) {
+      case SELECTABLE_FEATURE_TYPES.SITES:
+        unit = 'site';
+        break;
+      case SELECTABLE_FEATURE_TYPES.STATES:
+        unit = 'state';
+        break;
+      case SELECTABLE_FEATURE_TYPES.DOMAINS:
+        unit = 'domain';
+        break;
+      // This shouldn't happen so bail
+      default:
+        return null;
+    }
     const s = selection.size === 1 ? '' : 's';
     const title = `${selection.size ? selection.size.toString() : 'No'} ${unit}${s} selected`;
     let icon = <NoneSelectedIcon />;
@@ -743,7 +763,7 @@ const SiteMapContainer = (props) => {
                         <IconButton
                           edge="end"
                           aria-label={remove}
-                          onClick={() => dispatch({ type: 'toggleSiteSelected', site: selectedItem })}
+                          onClick={() => dispatch({ type: 'toggleItemSelected', item: selectedItem })}
                         >
                           <DeleteIcon />
                         </IconButton>
@@ -769,7 +789,7 @@ const SiteMapContainer = (props) => {
           )}
           onDelete={(
             selection.size
-              ? () => dispatch({ type: 'updateSitesSelection', selection: new Set() })
+              ? () => dispatch({ type: 'updateSelectionSet', selection: new Set() })
               : () => {}
           )}
         />

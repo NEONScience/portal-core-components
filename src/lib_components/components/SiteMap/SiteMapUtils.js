@@ -89,13 +89,15 @@ export const SITE_TERRAINS = { AQUATIC: 'AQUATIC', TERRESTRIAL: 'TERRESTRIAL' };
 // e.g. all LOCATIONS type feature data can coexist in a single table view with a
 // single column definition. But LOCATIONS and SITES shouldn't, as each set has
 // different common attributes that should map to table columns (yes, sites are locations too,
-// but we represent and interact with them differently... I think? Maybe?)
+// but we represent and interact with them differently)
 export const FEATURE_TYPES = {
   SITES: 'SITES',
   SITE_LOCATION_HIERARCHIES: 'SITE_LOCATION_HIERARCHIES',
   LOCATIONS: 'LOCATIONS',
   SAMPLING_POINTS: 'SAMPLING_POINTS',
   BOUNDARIES: 'BOUNDARIES',
+  DOMAINS: 'DOMAINS',
+  STATES: 'STATES',
   GROUP: 'GROUP',
   OTHER: 'OTHER', // All features require a type. This catch-all type will not show in the table.
 };
@@ -110,7 +112,8 @@ export const FEATURE_DATA_SOURCES = {
 };
 
 // Subset of FEATURE_TYPES describing all features that are directly selectable
-export const SELECTABLE_FEATURE_TYPES = (({ SITES }) => ({ SITES }))(FEATURE_TYPES);
+// eslint-disable-next-line max-len
+export const SELECTABLE_FEATURE_TYPES = (({ SITES, STATES, DOMAINS }) => ({ SITES, STATES, DOMAINS }))(FEATURE_TYPES);
 
 const SELECTED_ICON_OFFSET = 30; // Number of pixels bigger in one dimension for selected icons
 
@@ -415,7 +418,7 @@ export const FEATURES = {
   STATES: {
     name: 'US States',
     nameSingular: 'US State',
-    type: FEATURE_TYPES.BOUNDARIES,
+    type: FEATURE_TYPES.STATES,
     hideByDefault: true,
     dataSource: FEATURE_DATA_SOURCES.NEON_CONTEXT,
     primaryIdOnly: true,
@@ -426,7 +429,7 @@ export const FEATURES = {
   DOMAINS: {
     name: 'NEON Domains',
     nameSingular: 'NEON Domain',
-    type: FEATURE_TYPES.BOUNDARIES,
+    type: FEATURE_TYPES.DOMAINS,
     hideByDefault: true,
     dataSource: FEATURE_DATA_SOURCES.NEON_CONTEXT,
     primaryIdOnly: true,
@@ -1463,12 +1466,19 @@ const availabilityState = calculateFeatureAvailability(DEFAULT_STATE);
 DEFAULT_STATE.filters.features.available = { ...availabilityState.filters.features.available };
 
 // Populate static JSON featureData
+// Note that we end up with some redundancy in our object structure:
+// (e.g. state.featureData.STATES.STATES) This is a balanced trade-off... many references to
+// feature data that renders (so excpeting site location hiearchies) abstractly expect the structure
+// to be organized by feature type and then feature key. States and Domains have dedicated feature
+// types to allow for selection. It would be far messier to shorten their featureData structure
+// and have to build exceptions for this difference in various places.
+// --
 // States
 if (statesShapesJSON) {
   statesShapesJSON.features.forEach((feature) => {
     if (!feature.properties || !feature.properties.stateCode) { return; }
     const { stateCode } = feature.properties;
-    DEFAULT_STATE.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.STATES.KEY][stateCode] = {
+    DEFAULT_STATE.featureData[FEATURE_TYPES.STATES][FEATURES.STATES.KEY][stateCode] = {
       geometry: feature.geometry,
       sites: new Set(),
     };
@@ -1479,7 +1489,7 @@ if (domainsShapesJSON) {
   domainsShapesJSON.features.forEach((feature) => {
     if (!feature.properties || !feature.properties.domainCode) { return; }
     const { domainCode } = feature.properties;
-    DEFAULT_STATE.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.DOMAINS.KEY][domainCode] = {
+    DEFAULT_STATE.featureData[FEATURE_TYPES.DOMAINS][FEATURES.DOMAINS.KEY][domainCode] = {
       geometry: feature.geometry,
       sites: new Set(),
     };
@@ -1503,16 +1513,16 @@ export const hydrateNeonContextData = (state, neonContextData) => {
   });
   // States
   Object.keys(neonContextData.states).forEach((stateCode) => {
-    newState.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.STATES.KEY][stateCode] = {
-      ...newState.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.STATES.KEY][stateCode],
+    newState.featureData[FEATURE_TYPES.STATES][FEATURES.STATES.KEY][stateCode] = {
+      ...newState.featureData[FEATURE_TYPES.STATES][FEATURES.STATES.KEY][stateCode],
       ...neonContextData.states[stateCode],
       sites: neonContextData.stateSites[stateCode],
     };
   });
   // Domains
   Object.keys(neonContextData.domains).forEach((domainCode) => {
-    newState.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.DOMAINS.KEY][domainCode] = {
-      ...newState.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.DOMAINS.KEY][domainCode],
+    newState.featureData[FEATURE_TYPES.DOMAINS][FEATURES.DOMAINS.KEY][domainCode] = {
+      ...newState.featureData[FEATURE_TYPES.DOMAINS][FEATURES.DOMAINS.KEY][domainCode],
       ...neonContextData.domains[domainCode],
       sites: neonContextData.domainSites[domainCode],
     };
@@ -1736,10 +1746,10 @@ export const getMapStateForFocusLocation = (state = {}) => {
   if (type === 'SITE') {
     newState.map.zoom = (state.sites[current] || {}).zoom || 12;
   } else if (type === 'DOMAIN') {
-    const { [FEATURES.DOMAINS.KEY]: domainsData } = state.featureData[FEATURE_TYPES.BOUNDARIES];
+    const { [FEATURES.DOMAINS.KEY]: domainsData } = state.featureData[FEATURE_TYPES.DOMAINS];
     newState.map.zoom = (domainsData[current] || {}).zoom || null;
   } else if (type === 'STATE') {
-    const { [FEATURES.STATES.KEY]: statesData } = state.featureData[FEATURE_TYPES.BOUNDARIES];
+    const { [FEATURES.STATES.KEY]: statesData } = state.featureData[FEATURE_TYPES.STATES];
     newState.map.zoom = (statesData[current] || {}).zoom || null;
   } else {
     const featureKey = Object.keys(FEATURES)

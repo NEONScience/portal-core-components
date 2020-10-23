@@ -460,7 +460,7 @@ const SiteMapLeaflet = () => {
         ...(shiftPressed ? Array.from(state.selection.set) : []),
       ]);
       areaSelectionDispatch({ type: 'end', x: event.offsetX, y: event.offsetY });
-      dispatch({ type: 'updateSitesSelection', selection: newSelectionSet });
+      dispatch({ type: 'updateSelectionSet', selection: newSelectionSet });
     };
     const handleKeyDown = (event) => {
       if (event.key === 'Shift') { areaSelectionDispatch({ type: 'shift', pressed: true }); }

@@ -49,6 +49,7 @@ import {
   HIGHLIGHT_STATUS,
   SELECTION_STATUS,
   SELECTION_PORTIONS,
+  SELECTABLE_FEATURE_TYPES,
   PLOT_SAMPLING_MODULES,
   UNSELECTABLE_MARKER_FILTER,
 } from './SiteMapUtils';
@@ -255,9 +256,10 @@ const SiteMapFeature = (props) => {
     hideUnselectable,
   } = state.selection;
   const selectionActive = state.selection.active === featureType || (
-    state.selection.active === FEATURE_TYPES.SITES
+    state.selection.active === SELECTABLE_FEATURE_TYPES.SITES
       && [FEATURES.DOMAINS.KEY, FEATURES.STATES.KEY].includes(featureKey)
   );
+  const selectionType = selectionActive ? state.selection.active : null;
 
   // Jump-To function to afford map navigation where appropriate
   const jumpTo = (locationCode = '') => {
@@ -424,7 +426,7 @@ const SiteMapFeature = (props) => {
     const siteIcon = FEATURES[siteFeatureKey][isSelected ? 'iconSelectedSvg' : 'iconSvg'];
     let selectedIcon = null;
     const markerStyle = {};
-    if (selectionActive) {
+    if (selectionActive && selectionType === FEATURE_TYPES.SITES) {
       if (validItems && !validItems.has(siteCode)) {
         // eslint-disable-next-line max-len
         selectedIcon = (
@@ -458,7 +460,7 @@ const SiteMapFeature = (props) => {
       className: classes.popupSiteContainer,
       style: { marginTop: Theme.spacing(0.5) },
     };
-    return selectionActive ? (
+    return selectionActive && selectionType === FEATURE_TYPES.SITES ? (
       <div {...containerProps}>{internal}</div>
     ) : (
       <Link
@@ -650,8 +652,10 @@ const SiteMapFeature = (props) => {
   const renderChildSites = (boundaryKey) => {
     const { sites = new Set() } = featureData[boundaryKey];
     let selectable = null;
-    if (selectionActive && validItems) {
-      const selectableSites = new Set([...sites].filter(siteCode => validItems.has(siteCode)));
+    if (selectionActive && selectionType === FEATURE_TYPES.SITES) {
+      const selectableSites = new Set([...sites].filter(siteCode => (
+        !validItems || validItems.has(siteCode)
+      )));
       if (!selectableSites.size) {
         selectable = ', none selectable';
       } else {
@@ -672,7 +676,7 @@ const SiteMapFeature = (props) => {
         ) : (
           <React.Fragment>
             <Typography variant="subtitle2" gutterBottom>
-              {`NEON Sites (${sites.size}${selectable}):`}
+              {`NEON Sites (${sites.size}${selectable || ''}):`}
             </Typography>
             <div>
               {[...sites].map(siteCode => renderSite(siteCode, true))}
@@ -771,8 +775,8 @@ const SiteMapFeature = (props) => {
   */
   const renderLocationSiteAndDomain = (siteCode) => {
     const site = state.sites[siteCode];
-    if (!site || !state.featureData.BOUNDARIES.DOMAINS[site.domainCode]) { return null; }
-    const { name: domainName } = state.featureData.BOUNDARIES.DOMAINS[site.domainCode];
+    if (!site || !state.featureData.DOMAINS.DOMAINS[site.domainCode]) { return null; }
+    const { name: domainName } = state.featureData.DOMAINS.DOMAINS[site.domainCode];
     const domainTitle = `${site.domainCode} - ${domainName}`;
     return (
       <React.Fragment key="locationSiteAndDomain">
@@ -920,9 +924,9 @@ const SiteMapFeature = (props) => {
   const renderSitePopup = (siteCode) => {
     const site = featureData[siteCode] || {};
     const { [site.stateCode]: usState = {} } = state
-      .featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.STATES.KEY];
+      .featureData[FEATURE_TYPES.STATES][FEATURES.STATES.KEY];
     const { [site.domainCode]: domain = {} } = state
-      .featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.DOMAINS.KEY];
+      .featureData[FEATURE_TYPES.DOMAINS][FEATURES.DOMAINS.KEY];
     const stateFieldTitle = (site.stateCode === 'PR' ? 'Territory' : 'State');
     const renderActions = () => {
       if (selectionActive) {
@@ -1331,13 +1335,23 @@ const SiteMapFeature = (props) => {
               e.target.closePopup();
             }
           };
-          if (selectionLimit !== 1) {
+          // Onclick to select sites by way of clicking a state or domain to capture sites within
+          if (selectionType === SELECTABLE_FEATURE_TYPES.SITES && selectionLimit !== 1) {
+            console.log('Setting first', primaryId);
             shapeProps.onClick = () => {
               if (featureKey === FEATURES.DOMAINS.KEY) {
-                dispatch({ type: 'toggleDomainSelected', domainCode: primaryId });
+                dispatch({ type: 'toggleSitesSelectedForDomain', domainCode: primaryId });
               }
               if (featureKey === FEATURES.STATES.KEY) {
-                dispatch({ type: 'toggleStateSelected', stateCode: primaryId });
+                dispatch({ type: 'toggleSitesSelectedForState', stateCode: primaryId });
+              }
+            };
+          }
+          // Onclick to select states or domains directly
+          if (selectionType === featureType) {
+            shapeProps.onClick = () => {
+              if (isSelectable) {
+                dispatch({ type: 'toggleItemSelected', item: primaryId });
               }
             };
           }
@@ -1356,7 +1370,7 @@ const SiteMapFeature = (props) => {
           : SELECTION_STATUS.UNSELECTED;
         const initialHighlight = isHighlighted ? HIGHLIGHT_STATUS.HIGHLIGHT : HIGHLIGHT_STATUS.NONE;
         icon = baseIcon[selection][initialHighlight];
-        interaction = selectionActive ? {
+        interaction = selectionActive && selectionType === featureType ? {
           onMouseOver: (e) => {
             let highlight = HIGHLIGHT_STATUS.HIGHLIGHT;
             if (isSelectable) {
@@ -1377,7 +1391,7 @@ const SiteMapFeature = (props) => {
           },
           onClick: () => {
             if (featureType === FEATURE_TYPES.SITES && shapeData.siteCode && isSelectable) {
-              dispatch({ type: 'toggleSiteSelected', site: shapeData.siteCode });
+              dispatch({ type: 'toggleItemSelected', item: shapeData.siteCode });
             }
           },
         } : {

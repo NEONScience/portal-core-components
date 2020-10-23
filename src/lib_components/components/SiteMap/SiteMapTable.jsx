@@ -208,7 +208,7 @@ const SiteMapTable = () => {
     case FEATURE_TYPES.SITES:
       rowIsSelected = row => selection.has(row.siteCode);
       rowIsSelectable = row => !selectableItems || selectableItems.has(row.siteCode);
-      selectRow = row => dispatch({ type: 'toggleSiteSelected', site: row.siteCode });
+      selectRow = row => dispatch({ type: 'toggleItemSelected', item: row.siteCode });
       break;
     default:
       break;
@@ -226,9 +226,9 @@ const SiteMapTable = () => {
     if (type === 'SITE') {
       source = { code: 'siteCode', data: state.sites };
     } else if (type === 'STATE') {
-      source = { code: 'stateCode', data: state.featureData.BOUNDARIES.STATES };
+      source = { code: 'stateCode', data: state.featureData.STATES.STATES };
     } else if (type === 'DOMAIN') {
-      source = { code: 'domainCode', data: state.featureData.BOUNDARIES.DOMAINS };
+      source = { code: 'domainCode', data: state.featureData.DOMAINS.DOMAINS };
     }
     if (!source) { return null; }
     let code = null;
@@ -458,7 +458,7 @@ const SiteMapTable = () => {
       lookup: Object.fromEntries(
         Array.from(statesInMap).map(stateCode => [
           stateCode,
-          state.featureData.BOUNDARIES.STATES[stateCode].name,
+          state.featureData.STATES.STATES[stateCode].name,
         ]),
       ),
       customSort: (rowA, rowB) => {
@@ -793,7 +793,7 @@ const SiteMapTable = () => {
           }),
         }}
         onSelectionChange={!selectionActive ? null : (newRows) => {
-          const action = { type: 'updateSitesSelection', selection: new Set() };
+          const action = { type: 'updateSelectionSet', selection: new Set() };
           newRows.filter(row => row.tableData.checked).forEach((row) => {
             if (focus === FEATURE_TYPES.SITES) {
               action.selection.add(row.siteCode);

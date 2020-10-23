@@ -59,14 +59,15 @@ import {
 // (some sites selected). If no sites are selected for the boundary it is omitted from the map.
 const deriveBoundarySelections = (state) => {
   const derive = (featureKey) => {
-    if (!state.neonContextHydrated || !state.featureData[FEATURE_TYPES.BOUNDARIES][featureKey]) {
+    const featureType = FEATURES[featureKey].type;
+    if (!state.neonContextHydrated || !state.featureData[featureType][featureKey]) {
       return {};
     }
     const { validSet } = state.selection;
     const selectedBoundaries = {};
-    Object.keys(state.featureData[FEATURE_TYPES.BOUNDARIES][featureKey]).forEach((boundaryCode) => {
+    Object.keys(state.featureData[featureType][featureKey]).forEach((boundaryCode) => {
       const boundarySitesSet = (
-        state.featureData[FEATURE_TYPES.BOUNDARIES][featureKey][boundaryCode].sites || new Set()
+        state.featureData[featureType][featureKey][boundaryCode].sites || new Set()
       );
       const selectableSites = !validSet
         ? boundarySitesSet
@@ -833,70 +834,74 @@ const reducer = (state, action) => {
       newState.selection.changed = false;
       return newState;
 
-    case 'updateSitesSelection':
+    case 'updateSelectionSet':
       if (
         !action.selection || !action.selection.constructor
           || action.selection.constructor.name !== 'Set'
       ) { return state; }
       newState.selection.set = getSelectableSet(action.selection, validSet);
       newState.selection.changed = true;
-      return deriveBoundarySelections(validateSelection(newState));
+      if (newState.selection.active === SELECTABLE_FEATURE_TYPES.SITES) {
+        return deriveBoundarySelections(validateSelection(newState));
+      }
+      return validateSelection(newState);
 
-    case 'toggleSiteSelected':
+    case 'toggleItemSelected':
       // Special case: when the selectionLimit is 1 always maintain a selection size of 1
       if (newState.selection.limit === 1) {
-        if (newState.selection.set.has(action.site) && newState.selection.set.size > 1) {
-          newState.selection.set.delete(action.site);
+        if (newState.selection.set.has(action.item) && newState.selection.set.size > 1) {
+          newState.selection.set.delete(action.item);
           newState.selection.changed = true;
         } else if (
-          !newState.selection.set.has(action.site)
-            && isSelectable(action.site, validSet)
+          !newState.selection.set.has(action.item)
+            && isSelectable(action.item, validSet)
         ) {
-          newState.selection.set = new Set([action.site]);
+          newState.selection.set = new Set([action.item]);
           newState.selection.changed = true;
         }
-      } else if (newState.selection.set.has(action.site)) {
-        newState.selection.set.delete(action.site);
+      } else if (newState.selection.set.has(action.item)) {
+        newState.selection.set.delete(action.item);
         newState.selection.changed = true;
-      } else if (isSelectable(action.site, validSet)) {
-        newState.selection.set.add(action.site);
+      } else if (isSelectable(action.item, validSet)) {
+        newState.selection.set.add(action.item);
         newState.selection.changed = true;
       }
-      return deriveBoundarySelections(validateSelection(newState));
+      if (newState.selection.active === SELECTABLE_FEATURE_TYPES.SITES) {
+        return deriveBoundarySelections(validateSelection(newState));
+      }
+      return validateSelection(newState);
 
-    case 'toggleStateSelected':
+    case 'toggleSitesSelectedForState':
       if (!action.stateCode) { return state; }
-      /* eslint-disable max-len */
       setMethod = (
         state.selection.derived[FEATURES.STATES.KEY][action.stateCode] === SELECTION_PORTIONS.TOTAL
           ? 'delete' : 'add'
       );
       getSelectableSet(
-        newState.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.STATES.KEY][action.stateCode].sites,
+        newState.featureData[FEATURE_TYPES.STATES][FEATURES.STATES.KEY][action.stateCode].sites,
         validSet,
       ).forEach((siteCode) => {
         newState.selection.set[setMethod](siteCode);
       });
       newState.selection.changed = true;
       return deriveBoundarySelections(validateSelection(newState));
-      /* eslint-enable max-len */
 
-    case 'toggleDomainSelected':
+    case 'toggleSitesSelectedForDomain':
       if (!action.domainCode) { return state; }
       /* eslint-disable max-len */
       setMethod = (
         state.selection.derived[FEATURES.DOMAINS.KEY][action.domainCode] === SELECTION_PORTIONS.TOTAL
           ? 'delete' : 'add'
       );
+      /* eslint-enable max-len */
       getSelectableSet(
-        newState.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.DOMAINS.KEY][action.domainCode].sites,
+        newState.featureData[FEATURE_TYPES.DOMAINS][FEATURES.DOMAINS.KEY][action.domainCode].sites,
         validSet,
       ).forEach((siteCode) => {
         newState.selection.set[setMethod](siteCode);
       });
       newState.selection.changed = true;
       return deriveBoundarySelections(validateSelection(newState));
-      /* eslint-enable max-len */
 
     // Default
     default:
@@ -976,6 +981,14 @@ const Provider = (props) => {
     }
     initialState.selection.changed = true;
     initialState = validateSelection(initialState);
+    // Toggle States / Domains layers automatically if selecting either of those types
+    if (selection === SELECTABLE_FEATURE_TYPES.STATES) {
+      initialState.filters.features.visible[FEATURES.STATES.KEY] = true;
+      initialState.filters.features.visible[FEATURES.DOMAINS.KEY] = false;
+    } else if (selection === SELECTABLE_FEATURE_TYPES.DOMAINS) {
+      initialState.filters.features.visible[FEATURES.DOMAINS.KEY] = true;
+      initialState.filters.features.visible[FEATURES.STATES.KEY] = false;
+    }
   }
   if (neonContextIsFinal && !neonContextHasError) {
     initialState = hydrateNeonContextData(initialState, neonContextData);
@@ -997,10 +1010,8 @@ const Provider = (props) => {
       return noop;
     }
     // If the location is a known Domain, State, or Site then pull from NeonContext
-    const {
-      [FEATURES.STATES.KEY]: statesData = {},
-      [FEATURES.DOMAINS.KEY]: domainsData = {},
-    } = state.featureData[FEATURE_TYPES.BOUNDARIES];
+    const { [FEATURES.STATES.KEY]: statesData = {} } = state.featureData[FEATURE_TYPES.STATES];
+    const { [FEATURES.DOMAINS.KEY]: domainsData = {} } = state.featureData[FEATURE_TYPES.DOMAINS];
     if (Object.keys(statesData).includes(current)) {
       const { 0: latitude, 1: longitude } = statesData[current].center;
       const timeout = window.setTimeout(() => {
