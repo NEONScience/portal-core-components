@@ -11,6 +11,8 @@ import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 import PropsTable from '../../../components/PropsTable';
 
+import { FEATURE_TYPES } from '../SiteMap/SiteMapUtils';
+
 import MapSelectionButton from './MapSelectionButton';
 
 import Theme from '../Theme/Theme';
@@ -100,23 +102,21 @@ const propRows = [
   },
   {
     name: 'selection',
-    type: 'feature type (string)',
-    default: 'n/a (required)',
-    examples: (
+    type: (
       <div>
-        <tt>'SITES'</tt>
-        <br />
-        <tt>'DOMAINS'</tt>
-        <br />
-        <tt>'STATES'</tt>
+        string, one of:
+        {Object.keys(FEATURE_TYPES).filter(k => FEATURE_TYPES[k].selectable).map(k => (
+          <div key={k} style={{ marginTop: '8px' }}>
+            <tt>{`"${k}"`}</tt>
+          </div>
+        ))}
       </div>
     ),
+    default: 'n/a (required)',
     description: (
       <p>
         <b>Required</b> string representing the feature type to be selectable in the map. All map
-        features are grouped into types, and certain types are selectable. Selectable feature types:
-        <br />
-        <tt>SITES</tt>, <tt>STATES</tt>, and <tt>DOMAINS</tt>
+        features are grouped into types, and certain types are selectable.
       </p>
     ),
   },

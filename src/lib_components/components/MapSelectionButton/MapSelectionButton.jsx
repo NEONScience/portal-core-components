@@ -18,8 +18,8 @@ import SiteMap from '../SiteMap/SiteMap';
 import Theme from '../Theme/Theme';
 import {
   DEFAULT_STATE,
+  FEATURE_TYPES,
   SITE_MAP_PROP_TYPES,
-  SELECTABLE_FEATURE_TYPES,
 } from '../SiteMap/SiteMapUtils';
 
 const useStyles = makeStyles(theme => ({
@@ -69,22 +69,9 @@ const MapSelectionButton = (props) => {
 
   let unit = '';
   let units = '';
-  switch (selectionProp) {
-    case SELECTABLE_FEATURE_TYPES.SITES:
-      unit = 'site';
-      units = 'sites';
-      break;
-    case SELECTABLE_FEATURE_TYPES.STATES:
-      unit = 'state';
-      units = 'states';
-      break;
-    case SELECTABLE_FEATURE_TYPES.DOMAINS:
-      unit = 'domain';
-      units = 'domains';
-      break;
-    // This shouldn't happen but in case it does render no button at all!
-    default:
-      return null;
+  if (selectionProp) {
+    unit = FEATURE_TYPES[selectionProp].unit || '';
+    units = FEATURE_TYPES[selectionProp].units || '';
   }
 
   let dialogTitle = `Select ${units}`;
