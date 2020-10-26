@@ -353,7 +353,6 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
         codes are also supported.
       </DocBlock>
 
-      {/*
       <ExampleBlock>
         <SiteMap location="D08" />
       </ExampleBlock>
@@ -362,15 +361,14 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
 <SiteMap location="D08" />
         `}
       </CodeBlock>
-      */}
 
       <Divider className={classes.divider} />
       <Typography variant="h4" component="h2" gutterBottom>Selection</Typography>
 
       <DocBlock>
         The SiteMap supports selection workflows for some feature types.
-        See the <Link href="#SelectSitesButton">Select Sites Button</Link>
-        documentation for details and examples.
+        See the <Link href="#MapSelectionButton">Map Selection Button</Link> documentation
+        for details and examples.
       </DocBlock>
 
     </React.Fragment>

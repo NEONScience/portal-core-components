@@ -36,7 +36,7 @@ import Theme from '../Theme/Theme';
 import NeonContext from '../NeonContext/NeonContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import FullWidthVisualization from '../FullWidthVisualization/FullWidthVisualization';
-import SelectSitesButton from '../SelectSitesButton/SelectSitesButton';
+import MapSelectionButton from '../MapSelectionButton/MapSelectionButton';
 
 const MIN_IFRAME_WIDTH = 240;
 
@@ -312,7 +312,8 @@ const AopDataViewer = (props) => {
       ))));
     return (
       <div style={{ display: 'flex', flexWrap: 'nowrap' }}>
-        <SelectSitesButton
+        <MapSelectionButton
+          selection="SITES"
           selectionLimit={1}
           selectedItems={currentSelection.site ? [currentSelection.site] : []}
           validItems={Object.keys(data)}

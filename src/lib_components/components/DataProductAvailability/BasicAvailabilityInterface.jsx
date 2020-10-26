@@ -36,7 +36,7 @@ import MomentUtils from '@date-io/moment';
 import FullWidthVisualization from '../FullWidthVisualization/FullWidthVisualization';
 import DownloadDataContext from '../DownloadDataContext/DownloadDataContext';
 import NeonContext from '../NeonContext/NeonContext';
-import SelectSitesButton from '../SelectSitesButton/SelectSitesButton';
+import MapSelectionButton from '../MapSelectionButton/MapSelectionButton';
 import SiteChip from '../SiteChip/SiteChip';
 import Theme from '../Theme/Theme';
 
@@ -597,7 +597,8 @@ const BasicAvailabilityInterface = (props) => {
             >
               Select All Sites
             </Button>
-            <SelectSitesButton
+            <MapSelectionButton
+              selection="SITES"
               selectedItems={sites.value}
               validItems={sites.validValues}
               buttonProps={{ ...selectionButtonProps, style: { marginLeft: Theme.spacing(1) } }}
