@@ -57,6 +57,7 @@ import Theme, { COLORS } from '../Theme/Theme';
 
 const useStyles = makeStyles(theme => ({
   selectionSnackbar: {
+    width: '100%',
     color: '#000',
     justifyContent: 'center',
     padding: theme.spacing(0, 1),
@@ -230,7 +231,7 @@ const SiteMapFeature = (props) => {
   }
 
   // Groups don't render anything ever!
-  if (featureType === FEATURE_TYPES.GROUP) { return null; }
+  if (featureType === FEATURE_TYPES.GROUP.KEY) { return null; }
 
   /**
      Extract feature data from SiteMapContext state
@@ -254,10 +255,25 @@ const SiteMapFeature = (props) => {
     limit: selectionLimit,
     hideUnselectable,
   } = state.selection;
-  const selectionActive = state.selection.active === featureType || (
-    state.selection.active === FEATURE_TYPES.SITES
-      && [FEATURES.DOMAINS.KEY, FEATURES.STATES.KEY].includes(featureKey)
-  );
+  const selectionActive = !!state.selection.active;
+  const selectionType = selectionActive ? state.selection.active : null;
+  const selectingCurrentFeatureType = selectionType === featureType;
+
+  // Whether interaction on this type means selection of another type (e.g. clicking a state or
+  // domain to affect selection of sites in those regions; distinct from selection states or domains
+  // directly).
+  let selectingActiveTypeByProxy = false;
+  if (selectionActive && !selectingCurrentFeatureType) {
+    switch (selectionType) {
+      case FEATURE_TYPES.SITES.KEY:
+        if ([FEATURES.DOMAINS.KEY, FEATURES.STATES.KEY].includes(featureKey)) {
+          selectingActiveTypeByProxy = true;
+        }
+        break;
+      default:
+        break;
+    }
+  }
 
   // Jump-To function to afford map navigation where appropriate
   const jumpTo = (locationCode = '') => {
@@ -424,7 +440,7 @@ const SiteMapFeature = (props) => {
     const siteIcon = FEATURES[siteFeatureKey][isSelected ? 'iconSelectedSvg' : 'iconSvg'];
     let selectedIcon = null;
     const markerStyle = {};
-    if (selectionActive) {
+    if (selectionActive && selectionType === FEATURE_TYPES.SITES.KEY) {
       if (validItems && !validItems.has(siteCode)) {
         // eslint-disable-next-line max-len
         selectedIcon = (
@@ -650,8 +666,10 @@ const SiteMapFeature = (props) => {
   const renderChildSites = (boundaryKey) => {
     const { sites = new Set() } = featureData[boundaryKey];
     let selectable = null;
-    if (selectionActive && validItems) {
-      const selectableSites = new Set([...sites].filter(siteCode => validItems.has(siteCode)));
+    if (selectionActive && selectionType === FEATURE_TYPES.SITES.KEY) {
+      const selectableSites = new Set([...sites].filter(siteCode => (
+        !validItems || validItems.has(siteCode)
+      )));
       if (!selectableSites.size) {
         selectable = ', none selectable';
       } else {
@@ -661,7 +679,13 @@ const SiteMapFeature = (props) => {
       }
     }
     return (
-      <Grid key="childSites" item xs={12} data-selenium="sitemap-map-popup-childSites">
+      <Grid
+        key="childSites"
+        item
+        xs={12}
+        data-selenium="sitemap-map-popup-childSites"
+        style={{ marginBottom: Theme.spacing(2) }}
+      >
         {!sites.size ? (
           <React.Fragment>
             <Typography variant="subtitle2" gutterBottom>NEON Sites</Typography>
@@ -672,10 +696,12 @@ const SiteMapFeature = (props) => {
         ) : (
           <React.Fragment>
             <Typography variant="subtitle2" gutterBottom>
-              {`NEON Sites (${sites.size}${selectable}):`}
+              {`NEON Sites (${sites.size}${selectable || ''}):`}
             </Typography>
             <div>
-              {[...sites].map(siteCode => renderSite(siteCode, true))}
+              {[...sites].map(siteCode => (
+                renderSite(siteCode, selectionType === FEATURE_TYPES.SITES.KEY)
+              ))}
             </div>
           </React.Fragment>
         )}
@@ -771,8 +797,8 @@ const SiteMapFeature = (props) => {
   */
   const renderLocationSiteAndDomain = (siteCode) => {
     const site = state.sites[siteCode];
-    if (!site || !state.featureData.BOUNDARIES.DOMAINS[site.domainCode]) { return null; }
-    const { name: domainName } = state.featureData.BOUNDARIES.DOMAINS[site.domainCode];
+    if (!site || !state.featureData.DOMAINS.DOMAINS[site.domainCode]) { return null; }
+    const { name: domainName } = state.featureData.DOMAINS.DOMAINS[site.domainCode];
     const domainTitle = `${site.domainCode} - ${domainName}`;
     return (
       <React.Fragment key="locationSiteAndDomain">
@@ -848,9 +874,9 @@ const SiteMapFeature = (props) => {
   };
 
   /**
-     Render: Boundary Selection Action
+     Render: Region Selection Action
   */
-  const renderBoundarySelectionAction = (boundaryFeatureKey, boundaryKey) => {
+  const renderRegionSelectionAction = (boundaryFeatureKey, boundaryKey) => {
     if (
       !selectionActive || !state.selection.derived[boundaryFeatureKey] || selectionLimit === 1
     ) { return null; }
@@ -915,75 +941,88 @@ const SiteMapFeature = (props) => {
   };
 
   /**
+     Render: Item Selection Action Snackbar for a Popup
+     (Only for selecting the item directly; selection by proxy action snackbars are different)
+  */
+  const renderItemSelectionActionSnackbar = (item) => {
+    if (!selectionActive) { return null; }
+    const unit = FEATURE_TYPES[selectionType].unit || 'item';
+    const isSelectable = !validItems || validItems.has(item);
+    const isSelected = selectedItems.has(item);
+    const verb = isSelected ? 'remove' : 'add';
+    const preposition = isSelected ? 'from' : 'to';
+    let ActionIcon = UnselectableIcon;
+    let action = `This ${unit} cannot be selected`;
+    let snackbarClass = classes.unselectableSnackbar;
+    let snackbarIconClass = classes.unselectableSnackbarIcon;
+    if (isSelectable) {
+      ActionIcon = ClickIcon;
+      if (selectionLimit === 1) {
+        ActionIcon = isSelected ? SelectedIcon : ClickIcon;
+        action = isSelected ? (
+          <b>Selected</b>
+        ) : (
+          <React.Fragment>
+            {/* eslint-disable react/jsx-one-expression-per-line */}
+            Click to <b>select</b>
+            {/* eslint-enable react/jsx-one-expression-per-line */}
+          </React.Fragment>
+        );
+        snackbarClass = isSelected
+          ? classes.selectedSelectionSnackbar
+          : classes.addToSelectionSnackbar;
+        snackbarIconClass = isSelected
+          ? classes.selectedSelectionSnackbarIcon
+          : classes.addToSelectionSnackbarIcon;
+      } else {
+        action = (
+          <React.Fragment>
+            {/* eslint-disable react/jsx-one-expression-per-line */}
+            Click to <b>{verb}</b> {preposition} selection
+            {/* eslint-enable react/jsx-one-expression-per-line */}
+          </React.Fragment>
+        );
+        snackbarClass = isSelected
+          ? classes.removeFromSelectionSnackbar
+          : classes.addToSelectionSnackbar;
+        snackbarIconClass = isSelected
+          ? classes.removeFromSelectionSnackbarIcon
+          : classes.addToSelectionSnackbarIcon;
+      }
+    }
+    return (
+      <SnackbarContent
+        key="renderItemSelectionActionSnackbar"
+        className={`${classes.selectionSnackbar} ${snackbarClass}`}
+        message={(
+          <div className={classes.startFlex}>
+            <ActionIcon className={`${classes.snackbarIcon} ${snackbarIconClass}`} />
+            <div>
+              <Typography variant="body2">
+                {action}
+              </Typography>
+            </div>
+          </div>
+        )}
+      />
+    );
+  };
+
+  /**
      Render: Site Popup
   */
   const renderSitePopup = (siteCode) => {
     const site = featureData[siteCode] || {};
     const { [site.stateCode]: usState = {} } = state
-      .featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.STATES.KEY];
+      .featureData[FEATURE_TYPES.STATES.KEY][FEATURES.STATES.KEY];
     const { [site.domainCode]: domain = {} } = state
-      .featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.DOMAINS.KEY];
+      .featureData[FEATURE_TYPES.DOMAINS.KEY][FEATURES.DOMAINS.KEY];
     const stateFieldTitle = (site.stateCode === 'PR' ? 'Territory' : 'State');
     const renderActions = () => {
       if (selectionActive) {
-        const isSelectable = !validItems || validItems.has(site.siteCode);
-        const isSelected = selectedItems.has(site.siteCode);
-        const verb = isSelected ? 'remove' : 'add';
-        const preposition = isSelected ? 'from' : 'to';
-        let ActionIcon = UnselectableIcon;
-        let action = 'This site cannot be selected';
-        let snackbarClass = classes.unselectableSnackbar;
-        let snackbarIconClass = classes.unselectableSnackbarIcon;
-        if (isSelectable) {
-          ActionIcon = ClickIcon;
-          if (selectionLimit === 1) {
-            ActionIcon = isSelected ? SelectedIcon : ClickIcon;
-            action = isSelected ? (
-              <b>Selected</b>
-            ) : (
-              <React.Fragment>
-                {/* eslint-disable react/jsx-one-expression-per-line */}
-                Click to <b>select</b>
-                {/* eslint-enable react/jsx-one-expression-per-line */}
-              </React.Fragment>
-            );
-            snackbarClass = isSelected
-              ? classes.selectedSelectionSnackbar
-              : classes.addToSelectionSnackbar;
-            snackbarIconClass = isSelected
-              ? classes.selectedSelectionSnackbarIcon
-              : classes.addToSelectionSnackbarIcon;
-          } else {
-            action = (
-              <React.Fragment>
-                {/* eslint-disable react/jsx-one-expression-per-line */}
-                Click to <b>{verb}</b> {preposition} selection
-                {/* eslint-enable react/jsx-one-expression-per-line */}
-              </React.Fragment>
-            );
-            snackbarClass = isSelected
-              ? classes.removeFromSelectionSnackbar
-              : classes.addToSelectionSnackbar;
-            snackbarIconClass = isSelected
-              ? classes.removeFromSelectionSnackbarIcon
-              : classes.addToSelectionSnackbarIcon;
-          }
-        }
-        return (
-          <SnackbarContent
-            className={`${classes.selectionSnackbar} ${snackbarClass}`}
-            message={(
-              <div className={classes.startFlex}>
-                <ActionIcon className={`${classes.snackbarIcon} ${snackbarIconClass}`} />
-                <div>
-                  <Typography variant="body2">
-                    {action}
-                  </Typography>
-                </div>
-              </div>
-            )}
-          />
-        );
+        return selectingCurrentFeatureType
+          ? renderItemSelectionActionSnackbar(site.siteCode)
+          : null;
       }
       const actionButtonProps = {
         className: classes.popupButton,
@@ -1143,7 +1182,9 @@ const SiteMapFeature = (props) => {
         [
           jumpLink,
           renderChildSites,
-          renderBoundarySelectionAction(FEATURES.DOMAINS.KEY, domainCode),
+          selectingCurrentFeatureType
+            ? renderItemSelectionActionSnackbar(domainCode)
+            : renderRegionSelectionAction(FEATURES.DOMAINS.KEY, domainCode),
         ],
       );
     },
@@ -1179,7 +1220,9 @@ const SiteMapFeature = (props) => {
         [
           jumpLink,
           renderChildSites,
-          renderBoundarySelectionAction(FEATURES.STATES.KEY, stateCode),
+          selectingCurrentFeatureType
+            ? renderItemSelectionActionSnackbar(stateCode)
+            : renderRegionSelectionAction(FEATURES.DOMAINS.KEY, stateCode),
         ],
       );
     },
@@ -1212,6 +1255,8 @@ const SiteMapFeature = (props) => {
   */
   const baseColor = featureStyle ? featureStyle.color : '#666666';
   const hoverColor = `#${tinycolor(baseColor).lighten(10).toHex()}`;
+  const ghostedBaseColor = `#${tinycolor(baseColor).lighten(10).desaturate(60).toHex()}`;
+  const ghostedHoverColor = `#${tinycolor(hoverColor).lighten(10).desaturate(60).toHex()}`;
   const darkenedBaseColor = `#${tinycolor(baseColor).darken(15).toHex()}`;
   const darkenedMoreBaseColor = `#${tinycolor(darkenedBaseColor).darken(15).toHex()}`;
   const isPoint = (shapeData) => {
@@ -1298,22 +1343,32 @@ const SiteMapFeature = (props) => {
           };
         }
         if (selectionActive) {
-          const baseColors = {
-            [SELECTION_PORTIONS.PARTIAL]: darkenedBaseColor,
-            [SELECTION_PORTIONS.TOTAL]: darkenedMoreBaseColor,
-          };
           let returnColor = isHighlighted ? darkenedBaseColor : featureStyle.color;
-          if (
-            state.selection.derived[featureKey]
-              && state.selection.derived[featureKey][primaryId]
-          ) {
-            // eslint-disable-next-line max-len
-            returnColor = baseColors[state.selection.derived[featureKey][primaryId]] || featureStyle.color;
-            shapeProps.color = returnColor;
+          let useHoverColor = hoverColor;
+          if (selectingCurrentFeatureType) {
+            if (state.selection.set.has(primaryId)) { returnColor = darkenedMoreBaseColor; }
+            if (!isSelectable) {
+              returnColor = ghostedBaseColor;
+              useHoverColor = ghostedHoverColor;
+            }
           }
+          if (selectingActiveTypeByProxy) {
+            const baseColors = {
+              [SELECTION_PORTIONS.PARTIAL]: darkenedBaseColor,
+              [SELECTION_PORTIONS.TOTAL]: darkenedMoreBaseColor,
+            };
+            if (
+              state.selection.derived[featureKey]
+                && state.selection.derived[featureKey][primaryId]
+            ) {
+              // eslint-disable-next-line max-len
+              returnColor = baseColors[state.selection.derived[featureKey][primaryId]] || featureStyle.color;
+            }
+          }
+          shapeProps.color = returnColor;
           shapeProps.onMouseOver = (e) => {
-            e.target._path.setAttribute('stroke', hoverColor);
-            e.target._path.setAttribute('fill', hoverColor);
+            e.target._path.setAttribute('stroke', useHoverColor);
+            e.target._path.setAttribute('fill', useHoverColor);
             if (hasPopup) {
               e.target.openPopup();
               positionPopup(e.target, e.latlng, true);
@@ -1331,13 +1386,22 @@ const SiteMapFeature = (props) => {
               e.target.closePopup();
             }
           };
-          if (selectionLimit !== 1) {
+          // Onclick to select sites by way of clicking a state or domain to capture sites within
+          if (selectingActiveTypeByProxy && selectionLimit !== 1) {
             shapeProps.onClick = () => {
               if (featureKey === FEATURES.DOMAINS.KEY) {
-                dispatch({ type: 'toggleDomainSelected', domainCode: primaryId });
+                dispatch({ type: 'toggleSitesSelectedForDomain', domainCode: primaryId });
               }
               if (featureKey === FEATURES.STATES.KEY) {
-                dispatch({ type: 'toggleStateSelected', stateCode: primaryId });
+                dispatch({ type: 'toggleSitesSelectedForState', stateCode: primaryId });
+              }
+            };
+          }
+          // Onclick to select states or domains directly
+          if (selectionType === featureType) {
+            shapeProps.onClick = () => {
+              if (isSelectable) {
+                dispatch({ type: 'toggleItemSelected', item: primaryId });
               }
             };
           }
@@ -1356,44 +1420,42 @@ const SiteMapFeature = (props) => {
           : SELECTION_STATUS.UNSELECTED;
         const initialHighlight = isHighlighted ? HIGHLIGHT_STATUS.HIGHLIGHT : HIGHLIGHT_STATUS.NONE;
         icon = baseIcon[selection][initialHighlight];
-        interaction = selectionActive ? {
+        interaction = {
           onMouseOver: (e) => {
             let highlight = HIGHLIGHT_STATUS.HIGHLIGHT;
-            if (isSelectable) {
+            if (selectionActive && selectingCurrentFeatureType && isSelectable) {
               highlight = HIGHLIGHT_STATUS[isSelected ? 'HIGHLIGHT' : 'SELECT'];
             }
             e.target.setIcon(baseIcon[selection][highlight]);
             e.target._bringToFront();
-            if (hasPopup) {
+            if (hasPopup && selectionActive) {
               e.target.openPopup();
               positionPopup(e.target, e.latlng, selectionActive);
             }
           },
           onMouseOut: (e) => {
             e.target.setIcon(baseIcon[selection][initialHighlight]);
-            if (hasPopup) {
+            if (hasPopup && selectionActive) {
               e.target.closePopup();
             }
           },
-          onClick: () => {
-            if (featureType === FEATURE_TYPES.SITES && shapeData.siteCode && isSelectable) {
-              dispatch({ type: 'toggleSiteSelected', site: shapeData.siteCode });
-            }
-          },
-        } : {
-          onMouseOver: (e) => {
-            e.target.setIcon(baseIcon[selection][HIGHLIGHT_STATUS.HIGHLIGHT]);
-            e.target._bringToFront();
-          },
-          onMouseOut: (e) => {
-            e.target.setIcon(baseIcon[selection][initialHighlight]);
-          },
           onClick: (e) => {
-            if (hasPopup) {
+            if (!selectionActive && hasPopup) {
               const popupOpen = e.target._popup.isOpen();
               const func = () => positionPopup(e.target, e.latlng, selectionActive);
               dispatch({ type: 'setMapRepositionOpenPopupFunc', func });
               if (popupOpen) { func(); }
+            }
+            if (selectionActive && selectingCurrentFeatureType && isSelectable) {
+              switch (selectionType) {
+                case FEATURE_TYPES.SITES.KEY:
+                  if (shapeData.siteCode) {
+                    dispatch({ type: 'toggleItemSelected', item: shapeData.siteCode });
+                  }
+                  break;
+                default:
+                  break;
+              }
             }
           },
         };
@@ -1429,7 +1491,7 @@ const SiteMapFeature = (props) => {
       case 'Polygon':
         // Only render polygon popups when not in area selection mode. Otherwise area selection
         // could neither start, move, nor end over feature shapes.
-        if (!positionsArrayIsValid(positions, featureType === FEATURE_TYPES.SAMPLING_POINTS)) {
+        if (!positionsArrayIsValid(positions, featureType === FEATURE_TYPES.SAMPLING_POINTS.KEY)) {
           return null;
         }
         return state.map.mouseMode === MAP_MOUSE_MODES.AREA_SELECT ? (
@@ -1471,7 +1533,9 @@ const SiteMapFeature = (props) => {
         // Focus lcoation should render above all others
         .sort(a => (a === state.focusLocation.current ? 1 : -1))
         .flatMap((keyA) => {
-          if ([FEATURE_TYPES.LOCATIONS, FEATURE_TYPES.SAMPLING_POINTS].includes(featureType)) {
+          if (
+            [FEATURE_TYPES.LOCATIONS.KEY, FEATURE_TYPES.SAMPLING_POINTS.KEY].includes(featureType)
+          ) {
             return Object.keys(featureData[keyA]).map(keyB => renderShape(keyA, keyB));
           }
           return renderShape(keyA);

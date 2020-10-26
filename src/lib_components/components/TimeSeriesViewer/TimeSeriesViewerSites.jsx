@@ -47,7 +47,7 @@ import SelectIcon from '@material-ui/icons/TouchApp';
 
 import Theme from '../Theme/Theme';
 import NeonContext from '../NeonContext/NeonContext';
-import SelectSitesButton from '../SelectSitesButton/SelectSitesButton';
+import MapSelectionButton from '../MapSelectionButton/MapSelectionButton';
 
 import iconCoreTerrestrialSVG from '../SiteMap/svg/icon-site-core-terrestrial.svg';
 import iconCoreAquaticSVG from '../SiteMap/svg/icon-site-core-aquatic.svg';
@@ -1110,7 +1110,8 @@ export default function TimeSeriesViewerSites(props) {
     <div className={classes.root}>
       <div style={{ width: '100%', display: 'flex', alignItems: 'center' }}>
         <SitesSelect />
-        <SelectSitesButton
+        <MapSelectionButton
+          selection="SITES"
           selectionLimit={[1, 5]}
           selectedItems={selectedItems}
           validItems={Object.keys(state.product.sites)}

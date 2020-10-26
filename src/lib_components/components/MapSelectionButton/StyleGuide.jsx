@@ -11,7 +11,9 @@ import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 import PropsTable from '../../../components/PropsTable';
 
-import SelectSitesButton from './SelectSitesButton';
+import { FEATURE_TYPES } from '../SiteMap/SiteMapUtils';
+
+import MapSelectionButton from './MapSelectionButton';
 
 import Theme from '../Theme/Theme';
 
@@ -95,6 +97,26 @@ const propRows = [
         Array of strings representing IDs of selectable items to show already selected when the
         SiteMap initializes. For example, if <tt>selection</tt> is <tt>"SITES"</tt> then this prop
         should contain siteCode strings.
+      </p>
+    ),
+  },
+  {
+    name: 'selection',
+    type: (
+      <div>
+        string, one of:
+        {Object.keys(FEATURE_TYPES).filter(k => FEATURE_TYPES[k].selectable).map(k => (
+          <div key={k} style={{ marginTop: '8px' }}>
+            <tt>{`"${k}"`}</tt>
+          </div>
+        ))}
+      </div>
+    ),
+    default: 'n/a (required)',
+    description: (
+      <p>
+        <b>Required</b> string representing the feature type to be selectable in the map. All map
+        features are grouped into types, and certain types are selectable.
       </p>
     ),
   },
@@ -185,7 +207,8 @@ const MyComponent = () => {
         {!selection.size ? <i>none</i> : [...selection].join(', ')}
       </div>
       <br />
-      <SelectSitesButton
+      <MapSelectionButton
+        selection="SITES"
         label="Select Sites"
         selectedItems={[...selection]}
         onSave={(newSelection) => { setSelection(newSelection); }}
@@ -206,7 +229,7 @@ export default function StyleGuide() {
       </DocBlock>
       <CodeBlock>
         {`
-import SelectSitesButton from 'portal-core-components/lib/components/SelectSitesButton';
+import MapSelectionButton from 'portal-core-components/lib/components/MapSelectionButton';
         `}
       </CodeBlock>
 
@@ -220,16 +243,18 @@ import SelectSitesButton from 'portal-core-components/lib/components/SelectSites
       <Typography variant="h5" component="h3" gutterBottom>Usage</Typography>
 
       <DocBlock>
-        The Select Sites Button takes on many of the selection-related props of the Site Map (which
+        The Map Selection Button takes on many of the selection-related props of the Site Map (which
         are passed directly through to the embedded Site Map component). It is effectively a button
         with an attached dialog to launch the selected workflow. The examples below demonstrate
         different seed props.
       </DocBlock>
       <ExampleBlock>
-        <SelectSitesButton
+        <MapSelectionButton
+          selection="SITES"
           selectedItems={['RMNP', 'REDB']}
         />
-        <SelectSitesButton
+        <MapSelectionButton
+          selection="SITES"
           label="Select a site from D07"
           dialogTitle="Select a site from D07"
           selectionLimit={1}
@@ -240,7 +265,8 @@ import SelectSitesButton from 'portal-core-components/lib/components/SelectSites
             'aria-label': 'Select exactly one site from Domain D07',
           }}
         />
-        <SelectSitesButton
+        <MapSelectionButton
+          selection="SITES"
           label="Select up to 4 sites"
           dialogTitle="Select up to 4 sites"
           selectionLimit={[1, 4]}
@@ -249,11 +275,13 @@ import SelectSitesButton from 'portal-core-components/lib/components/SelectSites
       </ExampleBlock>
       <CodeBlock>
         {`
-<SelectSitesButton
+<MapSelectionButton
+  selection="SITES"
   selectedItems={['RMNP', 'REDB']}
 />
 
-<SelectSitesButton
+<MapSelectionButton
+  selection="SITES"
   label="Select a site from D07"
   dialogTitle="Select a site from D07"
   selectionLimit={1}
@@ -265,7 +293,8 @@ import SelectSitesButton from 'portal-core-components/lib/components/SelectSites
   }}
 />
 
-<SelectSitesButton
+<MapSelectionButton
+  selection="SITES"
   label="Select up to 4 sites"
   dialogTitle="Select up to 4 sites"
   selectionLimit={[1, 4]}
@@ -278,7 +307,7 @@ import SelectSitesButton from 'portal-core-components/lib/components/SelectSites
       <Typography variant="h6" component="h4" gutterBottom>Saving Changes</Typography>
 
       <DocBlock>
-        Unlike the Site Map component the Select Sites Button component supports an <tt>onSave</tt> method.
+        Unlike the Site Map component the Map Selection Button component supports an <tt>onSave</tt> method.
         This function will only fire when the Save button is clicked, which is only possible with a
         valid selection. This is the primary mechanism of exporting a selection.
       </DocBlock>
@@ -288,7 +317,7 @@ import SelectSitesButton from 'portal-core-components/lib/components/SelectSites
       <CodeBlock>
         {`
 import React, { useState } from 'react';
-import SelectSitesButton from 'portal-core-components/lib/components/SelectSitesButton';
+import MapSelectionButton from 'portal-core-components/lib/components/MapSelectionButton';
 
 const MyComponent = () => {
   const [selection, setSelection] = useState(new Set());
@@ -299,7 +328,8 @@ const MyComponent = () => {
         {!selection.size ? <i>none</i> : [...selection].join(', ')}
       </div>
       <br />
-      <SelectSitesButton
+      <MapSelectionButton
+        selection="SITES"
         label="Select Sites"
         selectedItems={[...selection]}
         onSave={(newSelection) => { setSelection(newSelection); }}
@@ -309,6 +339,45 @@ const MyComponent = () => {
 };
 
 <MyComponent />
+        `}
+      </CodeBlock>
+
+      <Divider className={classes.divider} />
+      <Typography variant="h6" component="h4" gutterBottom>Selecting States and/or Domains</Typography>
+
+      <DocBlock>
+        Passing an alternate feature type of <tt>"STATES"</tt> or <tt>"DOMAINS"</tt> for
+        the <tt>selection</tt> prop will put the map into selection mode for that type. As all other
+        props pertaining to valid items, existing selection, and selection limits are all
+        type-agnostic they should all work as expected.
+      </DocBlock>
+      <ExampleBlock>
+        <MapSelectionButton
+          selection="STATES"
+          label="Select between 2 and 7 states"
+          selectedItems={['CO', 'UT', 'AZ', 'NM']}
+          selectionLimit={[2, 7]}
+        />
+        <MapSelectionButton
+          selection="DOMAINS"
+          label="Select a domain in the Eastern US"
+          validItems={['D01', 'D02', 'D03', 'D04', 'D05', 'D06', 'D07', 'D08']}
+        />
+      </ExampleBlock>
+      <CodeBlock>
+        {`
+<MapSelectionButton
+  selection="STATES"
+  label="Select between 2 and 7 states"
+  selectedItems={['CO', 'UT', 'AZ', 'NM']}
+  selectionLimit={[2, 7]}
+/>
+
+<MapSelectionButton
+  selection="DOMAINS"
+  label="Select a domain in the Eastern US"
+  validItems={['D01', 'D02', 'D03', 'D04', 'D05', 'D06', 'D07', 'D08']}
+/>
         `}
       </CodeBlock>
 

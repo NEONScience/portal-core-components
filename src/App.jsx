@@ -15,12 +15,12 @@ import DownloadDataButtonStyleGuide from './lib_components/components/DownloadDa
 import DownloadDataContextStyleGuide from './lib_components/components/DownloadDataContext/StyleGuide';
 import ExternalHostInfoStyleGuide from './lib_components/components/ExternalHostInfo/StyleGuide';
 import FullWidthVisualizationStyleGuide from './lib_components/components/FullWidthVisualization/StyleGuide';
+import MapSelectionButtonStyleGuide from './lib_components/components/MapSelectionButton/StyleGuide';
 import NeonAuthStyleGuide from './lib_components/components/NeonAuth/StyleGuide';
 import NeonContextStyleGuide from './lib_components/components/NeonContext/StyleGuide';
 import NeonEnvironmentStyleGuide from './lib_components/components/NeonEnvironment/StyleGuide';
 import NeonGraphQLStyleGuide from './lib_components/components/NeonGraphQL/StyleGuide';
 import NeonPageStyleGuide from './lib_components/components/NeonPage/StyleGuide';
-import SelectSitesButtonStyleGuide from './lib_components/components/SelectSitesButton/StyleGuide';
 import SiteChipStyleGuide from './lib_components/components/SiteChip/StyleGuide';
 import SiteMapStyleGuide from './lib_components/components/SiteMap/StyleGuide';
 import StoryMapStyleGuide from './lib_components/components/StoryMap/StyleGuide';
@@ -76,6 +76,11 @@ const sidebarLinks = [
     component: FullWidthVisualizationStyleGuide,
   },
   {
+    name: 'Map Selection Button',
+    hash: '#MapSelectionButton',
+    component: MapSelectionButtonStyleGuide,
+  },
+  {
     name: 'Neon Authentication',
     hash: '#NeonAuth',
     component: NeonAuthStyleGuide,
@@ -99,11 +104,6 @@ const sidebarLinks = [
     name: 'Neon Page',
     hash: '#NeonPage',
     component: NeonPageStyleGuide,
-  },
-  {
-    name: 'Select Sites Button',
-    hash: '#SelectSitesButton',
-    component: SelectSitesButtonStyleGuide,
   },
   {
     name: 'Site Chip',

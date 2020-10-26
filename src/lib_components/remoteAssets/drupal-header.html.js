@@ -1,16 +1,5 @@
 let html;
 export default html = `
-
-<!-- THEME DEBUG -->
-<!-- THEME HOOK: 'html' -->
-<!-- FILE NAME SUGGESTIONS:
-   x html--neon-assets--partial--header.html.twig
-   * html--neon-assets--partial.html.twig
-   * html--neon-assets.html.twig
-   * html.html.twig
--->
-<!-- BEGIN OUTPUT from 'themes/custom/neon/templates/html/html--neon-assets--partial--header.html.twig' -->
-
 <header class="header" role="banner">
   <div class="header__inner l--offset-wide">
     <div class="header__logo">
@@ -33,34 +22,12 @@ export default html = `
     </label>
     <div class="header__site-navigation">
       <div class="header__menu-main">
-        
-
-<!-- THEME DEBUG -->
-<!-- THEME HOOK: 'block' -->
-<!-- FILE NAME SUGGESTIONS:
-   * block--neon-main-menu.html.twig
-   * block--system-menu-block--main.html.twig
-   x block--system-menu-block.html.twig
-   * block--system.html.twig
-   * block.html.twig
--->
-<!-- BEGIN OUTPUT from 'core/themes/stable/templates/block/block--system-menu-block.html.twig' -->
-<nav role="navigation" aria-labelledby="block-neon-main-menu-menu" id="block-neon-main-menu">
+        <nav role="navigation" aria-labelledby="block-neon-main-menu-menu" id="block-neon-main-menu">
             
   <h2 class="visually-hidden" id="block-neon-main-menu-menu">Main navigation</h2>
   
 
         
-
-<!-- THEME DEBUG -->
-<!-- THEME HOOK: 'menu__main' -->
-<!-- FILE NAME SUGGESTIONS:
-   x menu--main.html.twig
-   x menu--main.html.twig
-   * menu.html.twig
--->
-<!-- BEGIN OUTPUT from 'themes/custom/neon/templates/menu/menu--main.html.twig' -->
-
           <ul  class="menu menu--main" data-depth="0">
 
               <li  class="menu__item menu__item--expanded">
@@ -190,6 +157,14 @@ export default html = `
 
               <li  class="menu__item">
           <a href="/impact/observatory-blog" class="menu__link" data-drupal-link-system-path="node/8857">Observatory Blog</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="/impact/case-studies" class="menu__link" data-drupal-link-system-path="node/10904">Case Studies</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="/impact/spotlights" class="menu__link" data-drupal-link-system-path="node/10905">Spotlights</a>
 
                   </li>
               <li  class="menu__item menu__item--expanded">
@@ -409,6 +384,10 @@ export default html = `
           <a href="/resources/research-support/aop-flight-campaigns" class="menu__link" data-drupal-link-system-path="node/7754">AOP Flight Campaigns</a>
 
                   </li>
+              <li  class="menu__item">
+          <a href="/data-samples/samples/excess-samples" class="menu__link" data-drupal-link-system-path="node/10297">Excess Samples</a>
+
+                  </li>
       
           </ul>
   
@@ -491,6 +470,54 @@ export default html = `
               <li  class="menu__item menu__item--expanded">
           <a href="/data-samples/data" class="menu__link" data-drupal-link-system-path="node/8858">Data</a>
 
+          
+            
+                      <ul  class="menu menu--main" data-depth="2">
+
+              <li  class="menu__item menu__item--expanded">
+          <a href="/data-samples/data-management" class="menu__link" data-drupal-link-system-path="node/10557">Data Management</a>
+
+          
+            
+                      <ul  class="menu menu--main" data-depth="3">
+
+              <li  class="menu__item">
+          <a href="/data-samples/data-management/data-availability" class="menu__link" data-drupal-link-system-path="node/10298">Data Availability</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="/data-samples/data-management/data-formats-conventions" class="menu__link" data-drupal-link-system-path="node/10560">Data Formats and Conventions</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="/data-samples/data-management/data-processing" class="menu__link" data-drupal-link-system-path="node/8470">Data Processing</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="/data-samples/data-management/data-quality-program" class="menu__link" data-drupal-link-system-path="node/10299">Data Quality</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="/data-samples/data-management/data-revisions-releases" class="menu__link" data-drupal-link-system-path="node/10559">Data Product Revisions and Releases</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="/data-samples/data-management/externally-hosted-data" class="menu__link" data-drupal-link-system-path="node/10552">Externally Hosted Data</a>
+
+                  </li>
+      
+          </ul>
+  
+
+            
+
+                  </li>
+      
+          </ul>
+  
+
+            
+
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="/data-samples/samples" class="menu__link" data-drupal-link-system-path="node/10295">Samples &amp; Specimens</a>
@@ -499,12 +526,27 @@ export default html = `
             
                       <ul  class="menu menu--main" data-depth="2">
 
+              <li  class="menu__item menu__item--expanded">
+          <a href="/data-samples/samples/find-neon-samples" class="menu__link" data-drupal-link-system-path="node/8174">Discover and Use NEON Samples</a>
+
+          
+            
+                      <ul  class="menu menu--main" data-depth="3">
+
               <li  class="menu__item">
-          <a href="/data/samples-specimens/excess-samples" class="menu__link" data-drupal-link-system-path="node/10297">Excess Samples</a>
+          <a href="/data/samples-specimens/archival-samples-catalog" class="menu__link" data-drupal-link-system-path="node/6223">Sample Types</a>
 
                   </li>
               <li  class="menu__item">
-          <a href="/data-samples/samples/megapit-soil-archive" class="menu__link" data-drupal-link-system-path="node/5">Megapit and Distributed Initial Characterization Soil Archives</a>
+          <a href="/data-samples/samples/sample-repositories" class="menu__link" data-drupal-link-system-path="node/10907">Sample Repositories</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="/data-samples/samples/soil-archive" class="menu__link" data-drupal-link-system-path="node/5">Megapit and Distributed Initial Characterization Soil Archives</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="/data-samples/samples/excess-samples" class="menu__link" data-drupal-link-system-path="node/10297">Excess Samples</a>
 
                   </li>
       
@@ -515,16 +557,27 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
-          <a href="/data-samples/data-policies-citation" class="menu__link" data-drupal-link-system-path="node/6294">Data Policies &amp; Citation Guidelines</a>
+          <a href="/data-samples/samples/sample-quality" class="menu__link" data-drupal-link-system-path="node/10908">Sample Quality</a>
+
+                  </li>
+      
+          </ul>
+  
+
+            
 
                   </li>
               <li  class="menu__item menu__item--expanded">
-          <a href="/data-samples/data-collection" class="menu__link" data-drupal-link-system-path="node/4776">Data Collection</a>
+          <a href="/data-samples/data-collection" class="menu__link" data-drupal-link-system-path="node/4776">Collection Methods</a>
 
           
             
                       <ul  class="menu menu--main" data-depth="2">
 
+              <li  class="menu__item">
+          <a href="/data-collection/protocols-standardized-methods" class="menu__link" data-drupal-link-system-path="node/9">Protocols &amp; Standardized Methods</a>
+
+                  </li>
               <li  class="menu__item menu__item--expanded">
           <a href="/data-samples/data-collection/airborne-remote-sensing" class="menu__link" data-drupal-link-system-path="node/3821">AIrborne Remote Sensing</a>
 
@@ -533,7 +586,7 @@ export default html = `
                       <ul  class="menu menu--main" data-depth="3">
 
               <li  class="menu__item">
-          <a href="/data-samples/data-collection/airborne-remote-sensing/flight-box-design" class="menu__link" data-drupal-link-system-path="node/10550">Flight Box Design</a>
+          <a href="/data-collection/flight-box-design" class="menu__link" data-drupal-link-system-path="node/10550">Flight Box Design</a>
 
                   </li>
               <li  class="menu__item">
@@ -571,7 +624,7 @@ export default html = `
                       <ul  class="menu menu--main" data-depth="3">
 
               <li  class="menu__item">
-          <a href="/site-level-sampling-design" class="menu__link" data-drupal-link-system-path="node/10897">Site Level Sampling Design</a>
+          <a href="/data-samples/data-collection/automated-instruments/site-level-sampling-design" class="menu__link" data-drupal-link-system-path="node/10897">Site Level Sampling Design</a>
 
                   </li>
               <li  class="menu__item">
@@ -598,7 +651,7 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
-          <a href="/data-samples/data-collection/groundwater" class="menu__link" data-drupal-link-system-path="node/7839">Ground Water</a>
+          <a href="/groundwater" class="menu__link" data-drupal-link-system-path="node/7839">Ground Water</a>
 
                   </li>
               <li  class="menu__item">
@@ -776,42 +829,8 @@ export default html = `
             
 
                   </li>
-              <li  class="menu__item menu__item--expanded">
-          <a href="/data-samples/data-management" class="menu__link" data-drupal-link-system-path="node/10557">Data Management</a>
-
-          
-            
-                      <ul  class="menu menu--main" data-depth="2">
-
               <li  class="menu__item">
-          <a href="/data-samples/data-management/data-availability" class="menu__link" data-drupal-link-system-path="node/10298">Data Availability</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="/data-samples/data-management/data-formats-conventions" class="menu__link" data-drupal-link-system-path="node/10560">Data Formats and Conventions</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="/data-samples/data-management/data-processing" class="menu__link" data-drupal-link-system-path="node/8470">Data Processing</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="/data-samples/data-management/data-quality-program" class="menu__link" data-drupal-link-system-path="node/10299">Data Quality</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="/data-samples/data-management/data-revisions-releases" class="menu__link" data-drupal-link-system-path="node/10559">Data Product Revisions and Releases</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="/data-samples/data-management/externally-hosted-data" class="menu__link" data-drupal-link-system-path="node/10552">Externally Hosted Data</a>
-
-                  </li>
-      
-          </ul>
-  
-
-            
+          <a href="/data-samples/data-policies-citation" class="menu__link" data-drupal-link-system-path="node/6294">Data Policies &amp; Citation Guidelines</a>
 
                   </li>
       
@@ -849,83 +868,18 @@ export default html = `
   id="block-searchform-mobile"
   role="search"
 >
-  
-
-<!-- THEME DEBUG -->
-<!-- THEME HOOK: 'form' -->
-<!-- BEGIN OUTPUT from 'core/themes/stable/templates/form/form.html.twig' -->
-<form class="search-form" id="search-block-form-mobile" data-drupal-selector="mobile-beta-search-form" action="/neon-assets/partial/header" method="post" accept-charset="UTF-8">
-  <div class="js-form-item form-item js-form-type-search form-item-keys js-form-item-keys form-no-label">
-
-<!-- THEME DEBUG -->
-<!-- THEME HOOK: 'form_element' -->
-<!-- BEGIN OUTPUT from 'themes/custom/neon/templates/form/form-element.html.twig' -->
-<div class="js-form-item form-item js-form-type-search form-item-mobile-search js-form-item-mobile-search form-no-label">
-        
-
-<!-- THEME DEBUG -->
-<!-- THEME HOOK: 'input__search' -->
-<!-- FILE NAME SUGGESTIONS:
-   * input--search.html.twig
-   x input.html.twig
--->
-<!-- BEGIN OUTPUT from 'core/themes/stable/templates/form/input.html.twig' -->
-<input value="" placeholder="Enter your search term" class="search-form__input form-search" id="mobile-search-input" data-drupal-selector="edit-mobile-search" type="search" name="mobile_search" size="15" maxlength="128" />
-
-<!-- END OUTPUT from 'core/themes/stable/templates/form/input.html.twig' -->
-
+  <form class="search-form" id="search-block-form-mobile" data-drupal-selector="mobile-beta-search-form" action="/neon-assets/partial/header" method="post" accept-charset="UTF-8">
+  <div class="js-form-item form-item js-form-type-search form-item-keys js-form-item-keys form-no-label"><div class="js-form-item form-item js-form-type-search form-item-mobile-search js-form-item-mobile-search form-no-label">
+        <input value="" placeholder="Enter your search term" class="search-form__input form-search" id="mobile-search-input" data-drupal-selector="edit-mobile-search" type="search" name="mobile_search" size="15" maxlength="128" />
 
         </div>
-
-<!-- END OUTPUT from 'themes/custom/neon/templates/form/form-element.html.twig' -->
-
 </div><div class="search-form__actions form-actions js-form-wrapper form-wrapper" id="edit-actions-mobile">
 
-<!-- THEME DEBUG -->
-<!-- THEME HOOK: 'input__submit' -->
-<!-- FILE NAME SUGGESTIONS:
-   x input--submit.html.twig
-   x input--submit.html.twig
-   * input.html.twig
--->
-<!-- BEGIN OUTPUT from 'themes/custom/neon/templates/form/input--submit.html.twig' -->
-
-
 <input class="search-form__button button js-form-submit form-submit" id="edit-submit-mobile" data-drupal-selector="edit-submit" type="submit" name="op" value="Search" />
-
-<!-- END OUTPUT from 'themes/custom/neon/templates/form/input--submit.html.twig' -->
-
-</div>
-
-<!-- THEME DEBUG -->
-<!-- THEME HOOK: 'input__hidden' -->
-<!-- FILE NAME SUGGESTIONS:
-   * input--hidden.html.twig
-   x input.html.twig
--->
-<!-- BEGIN OUTPUT from 'core/themes/stable/templates/form/input.html.twig' -->
-<input autocomplete="off" data-drupal-selector="form-4jvfqdq6k4xz3l-9tkhd1hyup1lyfzodg6vwqglcapo" type="hidden" name="form_build_id" value="form-4JvfQdq6k4XZ3L_9tKHD1HyUp1lYfzoDG6vwQgLCapo" />
-
-<!-- END OUTPUT from 'core/themes/stable/templates/form/input.html.twig' -->
-
-
-
-<!-- THEME DEBUG -->
-<!-- THEME HOOK: 'input__hidden' -->
-<!-- FILE NAME SUGGESTIONS:
-   * input--hidden.html.twig
-   x input.html.twig
--->
-<!-- BEGIN OUTPUT from 'core/themes/stable/templates/form/input.html.twig' -->
+</div><input autocomplete="off" data-drupal-selector="form-2sdexbrfz2lg4m0n-tmq-qr5r1gfa-v6d2agcxyto6k" type="hidden" name="form_build_id" value="form-2SdeXBrfZ2lG4m0N-tMQ_qR5r1GFa-v6d2AGCXYtO6k" />
 <input data-drupal-selector="edit-mobile-beta-search-form" type="hidden" name="form_id" value="mobile_beta_search_form" />
 
-<!-- END OUTPUT from 'core/themes/stable/templates/form/input.html.twig' -->
-
-
 </form>
-
-<!-- END OUTPUT from 'core/themes/stable/templates/form/form.html.twig' -->
-
 
 </div>
         </li>
@@ -933,105 +887,26 @@ export default html = `
   
 
 
-<!-- END OUTPUT from 'themes/custom/neon/templates/menu/menu--main.html.twig' -->
-
-
   </nav>
-
-<!-- END OUTPUT from 'core/themes/stable/templates/block/block--system-menu-block.html.twig' -->
-
 
       </div>
     </div>
   </div>
   <div class="l--offset isDesktop header__search visually-hidden">
     <div class="header__search--inner">
-                
-
-<!-- THEME DEBUG -->
-<!-- THEME HOOK: 'form' -->
-<!-- BEGIN OUTPUT from 'core/themes/stable/templates/form/form.html.twig' -->
-<form class="beta-search-form" data-drupal-selector="beta-search-form" action="/neon-assets/partial/header" method="post" id="beta-search-form" accept-charset="UTF-8">
-  
-
-<!-- THEME DEBUG -->
-<!-- THEME HOOK: 'form_element' -->
-<!-- BEGIN OUTPUT from 'themes/custom/neon/templates/form/form-element.html.twig' -->
-<div class="js-form-item form-item js-form-type-search form-item-search js-form-item-search">
-      
-
-<!-- THEME DEBUG -->
-<!-- THEME HOOK: 'form_element_label' -->
-<!-- BEGIN OUTPUT from 'core/themes/stable/templates/form/form-element-label.html.twig' -->
-<label for="edit-search">Search</label>
-<!-- END OUTPUT from 'core/themes/stable/templates/form/form-element-label.html.twig' -->
-
-
-        
-
-<!-- THEME DEBUG -->
-<!-- THEME HOOK: 'input__search' -->
-<!-- FILE NAME SUGGESTIONS:
-   * input--search.html.twig
-   x input.html.twig
--->
-<!-- BEGIN OUTPUT from 'core/themes/stable/templates/form/input.html.twig' -->
-<input value="" placeholder="Enter your search term" class="search-form__input form-search" data-drupal-selector="edit-search" type="search" id="edit-search" name="search" size="64" maxlength="128" />
-
-<!-- END OUTPUT from 'core/themes/stable/templates/form/input.html.twig' -->
-
+                <form class="beta-search-form" data-drupal-selector="beta-search-form" action="/neon-assets/partial/header" method="post" id="beta-search-form" accept-charset="UTF-8">
+  <div class="js-form-item form-item js-form-type-search form-item-search js-form-item-search">
+      <label for="edit-search">Search</label>
+        <input value="" placeholder="Enter your search term" class="search-form__input form-search" data-drupal-selector="edit-search" type="search" id="edit-search" name="search" size="64" maxlength="128" />
 
         </div>
 
-<!-- END OUTPUT from 'themes/custom/neon/templates/form/form-element.html.twig' -->
 
-
-
-<!-- THEME DEBUG -->
-<!-- THEME HOOK: 'input__submit' -->
-<!-- FILE NAME SUGGESTIONS:
-   x input--submit.html.twig
-   x input--submit.html.twig
-   * input.html.twig
--->
-<!-- BEGIN OUTPUT from 'themes/custom/neon/templates/form/input--submit.html.twig' -->
-
-
-<input class="search-form__button button js-form-submit form-submit" data-drupal-selector="edit-submit" type="submit" id="edit-submit--2" name="op" value="Search" />
-
-<!-- END OUTPUT from 'themes/custom/neon/templates/form/input--submit.html.twig' -->
-
-
-
-<!-- THEME DEBUG -->
-<!-- THEME HOOK: 'input__hidden' -->
-<!-- FILE NAME SUGGESTIONS:
-   * input--hidden.html.twig
-   x input.html.twig
--->
-<!-- BEGIN OUTPUT from 'core/themes/stable/templates/form/input.html.twig' -->
-<input autocomplete="off" data-drupal-selector="form-0fmkscsjxfpbuj-jame76mrj24qq5cmvjo4kezoeb4c" type="hidden" name="form_build_id" value="form-0FMkSCsjxFPbuJ_JAme76mrj24Qq5CmvjO4kezoEB4c" />
-
-<!-- END OUTPUT from 'core/themes/stable/templates/form/input.html.twig' -->
-
-
-
-<!-- THEME DEBUG -->
-<!-- THEME HOOK: 'input__hidden' -->
-<!-- FILE NAME SUGGESTIONS:
-   * input--hidden.html.twig
-   x input.html.twig
--->
-<!-- BEGIN OUTPUT from 'core/themes/stable/templates/form/input.html.twig' -->
+<input class="search-form__button button js-form-submit form-submit" data-drupal-selector="edit-submit" type="submit" id="edit-submit" name="op" value="Search" />
+<input autocomplete="off" data-drupal-selector="form-snpebdykjaqtt36uhr3xdmxkqd32jmmogq22snwjuse" type="hidden" name="form_build_id" value="form-snpeBDykJaqtt36UHr3xdMXKqd32jMmOGQ22SNWjusE" />
 <input data-drupal-selector="edit-beta-search-form" type="hidden" name="form_id" value="beta_search_form" />
 
-<!-- END OUTPUT from 'core/themes/stable/templates/form/input.html.twig' -->
-
-
 </form>
-
-<!-- END OUTPUT from 'core/themes/stable/templates/form/form.html.twig' -->
-
 
         <div class="header__search-close">
           <button aria-label="Close Search" class="button__search-close">
@@ -1044,8 +919,5 @@ export default html = `
           <div id="header__authentication-ui"></div>
   </header>
 
-
-
-<!-- END OUTPUT from 'themes/custom/neon/templates/html/html--neon-assets--partial--header.html.twig' -->
 
 `;

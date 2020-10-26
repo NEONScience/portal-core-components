@@ -296,7 +296,9 @@ const SiteMapLeaflet = () => {
     Effect
     Visually distinguish unselectable markers in the marker pane while also changing the draw order
     of marker icons to put unselectable ones behind selectable ones. Use a 0-length setTimeout to
-    allow the map to complete one render cycle first.
+    allow the map to complete one render cycle first. We must do this here, instead of in
+    SiteMapFeature.jsx where we render the markers, because React-Leaflet does not currently support
+    setting arbitrary styles on markers. =(
   */
   useLayoutEffect(() => {
     const timeout = window.setTimeout(() => {
@@ -305,6 +307,7 @@ const SiteMapLeaflet = () => {
           || !mapRef.current.leafletElement._panes || !mapRef.current.leafletElement._layers
           || !state.selection.active || !state.selection.validSet
           || state.view.current !== VIEWS.MAP
+          || state.selection.active !== FEATURE_TYPES.SITES.KEY
       ) { return; }
       const { markerPane } = mapRef.current.leafletElement._panes;
       if (markerPane && markerPane.children && markerPane.children.length) {
@@ -454,13 +457,24 @@ const SiteMapLeaflet = () => {
           Math.max(centerLatLng.lng, reachLatLng.lng),
         ],
       };
-      const selectionSites = calculateLocationsInBounds(state.sites, selectionBounds);
-      const newSelectionSet = new Set([
-        ...selectionSites,
+      let selectableData = {};
+      if (state.selection.active === FEATURE_TYPES.SITES.KEY) {
+        selectableData = state.sites;
+      }
+      if ([FEATURE_TYPES.STATES.KEY, FEATURE_TYPES.DOMAINS.KEY].includes(state.selection.active)) {
+        const selectableFeatureKey = Object.keys(FEATURES)
+          .find(k => FEATURES[k].type === state.selection.active);
+        if (selectableFeatureKey) {
+          selectableData = state.featureData[state.selection.active][selectableFeatureKey];
+        }
+      }
+      const newSelectionSet = calculateLocationsInBounds(selectableData, selectionBounds);
+      const finalSelectionSet = new Set([
+        ...newSelectionSet,
         ...(shiftPressed ? Array.from(state.selection.set) : []),
       ]);
       areaSelectionDispatch({ type: 'end', x: event.offsetX, y: event.offsetY });
-      dispatch({ type: 'updateSitesSelection', selection: newSelectionSet });
+      dispatch({ type: 'updateSelectionSet', selection: finalSelectionSet });
     };
     const handleKeyDown = (event) => {
       if (event.key === 'Shift') { areaSelectionDispatch({ type: 'shift', pressed: true }); }
@@ -597,7 +611,7 @@ const SiteMapLeaflet = () => {
    */
   const renderMouseModeToggleButtonGroup = () => {
     if (!state.selection.active) { return null; }
-    const units = state.selection.active === FEATURE_TYPES.SITES ? 'sites' : 'locations';
+    const units = FEATURE_TYPES[state.selection.active].units || '';
     const mouseModeTooltips = {
       [MAP_MOUSE_MODES.PAN]: 'Click and drag on map to move the map center; shift+drag to zoom to an area',
       [MAP_MOUSE_MODES.AREA_SELECT]: `Click and drag on map to select ${units} in an area; shift+drag to add onto selection`,

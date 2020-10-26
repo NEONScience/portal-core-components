@@ -1,17 +1,6 @@
 let html;
 export default html = `
 
-<!-- THEME DEBUG -->
-<!-- THEME HOOK: 'html' -->
-<!-- FILE NAME SUGGESTIONS:
-   x html--neon-assets--partial--footer.html.twig
-   * html--neon-assets--partial.html.twig
-   * html--neon-assets.html.twig
-   * html.html.twig
--->
-<!-- BEGIN OUTPUT from 'themes/custom/neon/templates/html/html--neon-assets--partial--footer.html.twig' -->
-
-
 <footer class="footer-top__wrapper" role="contentinfo">
   <div class="footer-top__inner l--offset-wide l--wrapper">
   <div class="footer-top__logo-social">
@@ -50,43 +39,13 @@ export default html = `
 <footer class="footer-bottom__wrapper" role="contentinfo">
   <div class="footer-bottom__inner l--offset-wide l--wrapper">
     <div class="footer-bottom__menu">
-      
-
-<!-- THEME DEBUG -->
-<!-- THEME HOOK: 'region' -->
-<!-- FILE NAME SUGGESTIONS:
-   * region--bottom-footer.html.twig
-   x region.html.twig
--->
-<!-- BEGIN OUTPUT from 'core/themes/stable/templates/layout/region.html.twig' -->
-  <div>
-    
-
-<!-- THEME DEBUG -->
-<!-- THEME HOOK: 'block' -->
-<!-- FILE NAME SUGGESTIONS:
-   * block--footer.html.twig
-   * block--system-menu-block--footer.html.twig
-   x block--system-menu-block.html.twig
-   * block--system.html.twig
-   * block.html.twig
--->
-<!-- BEGIN OUTPUT from 'core/themes/stable/templates/block/block--system-menu-block.html.twig' -->
-<nav role="navigation" aria-labelledby="block-footer-menu" id="block-footer">
+        <div>
+    <nav role="navigation" aria-labelledby="block-footer-menu" id="block-footer">
             
   <h2 class="visually-hidden" id="block-footer-menu">Footer</h2>
   
 
         
-
-<!-- THEME DEBUG -->
-<!-- THEME HOOK: 'menu__footer' -->
-<!-- FILE NAME SUGGESTIONS:
-   * menu--footer.html.twig
-   x menu.html.twig
--->
-<!-- BEGIN OUTPUT from 'themes/custom/neon/templates/menu/menu.html.twig' -->
-
           <ul  class="menu menu--footer" data-depth="0">
           <li  class="myAccount menu__item">
         <a href="/user/login" title="My Account" class="menu__link" data-drupal-link-system-path="user/login">My Account</a>
@@ -107,18 +66,9 @@ export default html = `
   
 
 
-<!-- END OUTPUT from 'themes/custom/neon/templates/menu/menu.html.twig' -->
-
-
   </nav>
 
-<!-- END OUTPUT from 'core/themes/stable/templates/block/block--system-menu-block.html.twig' -->
-
-
   </div>
-
-<!-- END OUTPUT from 'core/themes/stable/templates/layout/region.html.twig' -->
-
 
     </div>
     <div class="footer-bottom__copyright">
@@ -129,7 +79,4 @@ export default html = `
     </div>
   </div>
 </footer>
-
-<!-- END OUTPUT from 'themes/custom/neon/templates/html/html--neon-assets--partial--footer.html.twig' -->
-
 `;

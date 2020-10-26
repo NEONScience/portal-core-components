@@ -89,16 +89,49 @@ export const SITE_TERRAINS = { AQUATIC: 'AQUATIC', TERRESTRIAL: 'TERRESTRIAL' };
 // e.g. all LOCATIONS type feature data can coexist in a single table view with a
 // single column definition. But LOCATIONS and SITES shouldn't, as each set has
 // different common attributes that should map to table columns (yes, sites are locations too,
-// but we represent and interact with them differently... I think? Maybe?)
+// but we represent and interact with them differently)
 export const FEATURE_TYPES = {
-  SITES: 'SITES',
-  SITE_LOCATION_HIERARCHIES: 'SITE_LOCATION_HIERARCHIES',
-  LOCATIONS: 'LOCATIONS',
-  SAMPLING_POINTS: 'SAMPLING_POINTS',
-  BOUNDARIES: 'BOUNDARIES',
-  GROUP: 'GROUP',
-  OTHER: 'OTHER', // All features require a type. This catch-all type will not show in the table.
+  SITES: {
+    unit: 'site',
+    units: 'sites',
+    selectable: true,
+    viewableInTable: true,
+    deriveRegionSelections: true,
+  },
+  SITE_LOCATION_HIERARCHIES: {
+    selectable: false,
+  },
+  LOCATIONS: {
+    selectable: false,
+    viewableInTable: true,
+  },
+  SAMPLING_POINTS: {
+    selectable: false,
+  },
+  BOUNDARIES: {
+    selectable: false,
+  },
+  DOMAINS: {
+    unit: 'domain',
+    units: 'domains',
+    selectable: true,
+    viewableInTable: true,
+  },
+  STATES: {
+    unit: 'state',
+    units: 'states',
+    selectable: true,
+    viewableInTable: true,
+  },
+  GROUP: {
+    selectable: false,
+  },
+  OTHER: { // All features require a type. This catch-all type will not show in the table.
+    selectable: false,
+  },
 };
+// Replicate keys as attributes to completely eliminate the need to write a feature type key string
+Object.keys(FEATURE_TYPES).forEach((key) => { FEATURE_TYPES[key].KEY = key; });
 
 // For consistency in differentiating where feature data come from
 // (e.g. various fetch APIs, NeonContext)
@@ -108,9 +141,6 @@ export const FEATURE_DATA_SOURCES = {
   ARCGIS_ASSETS_API: 'ARCGIS_ASSETS_API',
   NEON_CONTEXT: 'NEON_CONTEXT',
 };
-
-// Subset of FEATURE_TYPES describing all features that are directly selectable
-export const SELECTABLE_FEATURE_TYPES = (({ SITES }) => ({ SITES }))(FEATURE_TYPES);
 
 const SELECTED_ICON_OFFSET = 30; // Number of pixels bigger in one dimension for selected icons
 
@@ -415,7 +445,7 @@ export const FEATURES = {
   STATES: {
     name: 'US States',
     nameSingular: 'US State',
-    type: FEATURE_TYPES.BOUNDARIES,
+    type: FEATURE_TYPES.STATES.KEY,
     hideByDefault: true,
     dataSource: FEATURE_DATA_SOURCES.NEON_CONTEXT,
     primaryIdOnly: true,
@@ -426,7 +456,7 @@ export const FEATURES = {
   DOMAINS: {
     name: 'NEON Domains',
     nameSingular: 'NEON Domain',
-    type: FEATURE_TYPES.BOUNDARIES,
+    type: FEATURE_TYPES.DOMAINS.KEY,
     hideByDefault: true,
     dataSource: FEATURE_DATA_SOURCES.NEON_CONTEXT,
     primaryIdOnly: true,
@@ -437,7 +467,7 @@ export const FEATURES = {
   FLIGHT_BOX_BOUNDARIES: {
     name: 'AOP Flight Box Boundaries',
     nameSingular: 'AOP Flight Box Boundary',
-    type: FEATURE_TYPES.BOUNDARIES,
+    type: FEATURE_TYPES.BOUNDARIES.KEY,
     minZoom: 8,
     dataSource: FEATURE_DATA_SOURCES.ARCGIS_ASSETS_API,
     featureShape: 'Polygon',
@@ -446,13 +476,13 @@ export const FEATURES = {
   // AQUATIC_WATERSHEDS Group
   AQUATIC_WATERSHEDS: {
     name: 'Watersheds',
-    type: FEATURE_TYPES.GROUP,
+    type: FEATURE_TYPES.GROUP.KEY,
     minZoom: 7,
   },
   WATERSHED_BOUNDARIES: {
     name: 'Watershed Boundaries',
     nameSingular: 'Watershed Boundary',
-    type: FEATURE_TYPES.BOUNDARIES,
+    type: FEATURE_TYPES.BOUNDARIES.KEY,
     minZoom: 7,
     dataSource: FEATURE_DATA_SOURCES.ARCGIS_ASSETS_API,
     parent: 'AQUATIC_WATERSHEDS',
@@ -461,7 +491,7 @@ export const FEATURES = {
   },
   DRAINAGE_LINES: {
     name: 'Drainage Lines',
-    type: FEATURE_TYPES.OTHER,
+    type: FEATURE_TYPES.OTHER.KEY,
     minZoom: 7,
     dataSource: FEATURE_DATA_SOURCES.ARCGIS_ASSETS_API,
     parent: 'AQUATIC_WATERSHEDS',
@@ -471,7 +501,7 @@ export const FEATURES = {
   POUR_POINTS: {
     name: 'Pour Points',
     nameSingular: 'Pour Point',
-    type: FEATURE_TYPES.OTHER,
+    type: FEATURE_TYPES.OTHER.KEY,
     minZoom: 10,
     dataSource: FEATURE_DATA_SOURCES.ARCGIS_ASSETS_API,
     parent: 'AQUATIC_WATERSHEDS',
@@ -482,7 +512,7 @@ export const FEATURES = {
   SAMPLING_BOUNDARIES: {
     name: 'Site Sampling Boundaries',
     nameSingular: 'Site Sampling Boundary',
-    type: FEATURE_TYPES.BOUNDARIES,
+    type: FEATURE_TYPES.BOUNDARIES.KEY,
     minZoom: 9,
     dataSource: FEATURE_DATA_SOURCES.ARCGIS_ASSETS_API,
     description: 'Terrestrial and Colocated Aquatic Sites',
@@ -493,7 +523,7 @@ export const FEATURES = {
   AQUATIC_REACHES: {
     name: 'Aquatic Site Reaches',
     nameSingular: 'Aquatic Site Reach',
-    type: FEATURE_TYPES.BOUNDARIES,
+    type: FEATURE_TYPES.BOUNDARIES.KEY,
     minZoom: 9,
     dataSource: FEATURE_DATA_SOURCES.ARCGIS_ASSETS_API,
     parent: 'AQUATIC_SITE_FEATURES',
@@ -503,7 +533,7 @@ export const FEATURES = {
   TOWER_AIRSHEDS: {
     name: 'Tower Airshed Boundaries',
     nameSingular: 'Tower Airshed Boundary',
-    type: FEATURE_TYPES.BOUNDARIES,
+    type: FEATURE_TYPES.BOUNDARIES.KEY,
     minZoom: 10,
     dataSource: FEATURE_DATA_SOURCES.ARCGIS_ASSETS_API,
     parent: 'TERRESTRIAL_SITE_FEATURES',
@@ -513,14 +543,14 @@ export const FEATURES = {
   // Terrestrial Site Features
   TERRESTRIAL_SITE_FEATURES: {
     name: 'Terrestrial Site Features',
-    type: FEATURE_TYPES.GROUP,
+    type: FEATURE_TYPES.GROUP.KEY,
     minZoom: 10,
     fetchingForFeatures: ['TOWER_BASE_PLOTS', 'DISTRIBUTED_BASE_PLOTS'],
   },
   TOWERS: {
     name: 'Tower Locations',
     nameSingular: 'Tower Location',
-    type: FEATURE_TYPES.LOCATIONS,
+    type: FEATURE_TYPES.LOCATIONS.KEY,
     minZoom: 10,
     // Get from REST because fetching from GraphQL won't return children for a count of levels
     // (you can get this from GraphQL but it hoses performance and only this feature needs children)
@@ -536,7 +566,7 @@ export const FEATURES = {
   HUTS: {
     name: 'Huts',
     nameSingular: 'Hut',
-    type: FEATURE_TYPES.LOCATIONS,
+    type: FEATURE_TYPES.LOCATIONS.KEY,
     minZoom: 10,
     dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'HUT',
@@ -550,7 +580,7 @@ export const FEATURES = {
   MEGAPITS: {
     name: 'Megapits',
     nameSingular: 'Megapit',
-    type: FEATURE_TYPES.LOCATIONS,
+    type: FEATURE_TYPES.LOCATIONS.KEY,
     minZoom: 10,
     dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'MEGAPIT',
@@ -564,7 +594,7 @@ export const FEATURES = {
   // TOWER_PLOTS Group
   TOWER_PLOTS: {
     name: 'Tower Plots',
-    type: FEATURE_TYPES.GROUP,
+    type: FEATURE_TYPES.GROUP.KEY,
     minZoom: 13,
     description: 'Tower plots provide a direct link between NEON’s Terrestrial Observation System and Terrestrial Instrument System. Tower Plots are located in and around the NEON tower primary and secondary airsheds.',
     parent: 'TERRESTRIAL_SITE_FEATURES',
@@ -572,7 +602,7 @@ export const FEATURES = {
   TOWER_PHENOLOGY_PLOTS: {
     name: 'Tower Phenology Plots',
     nameSingular: 'Tower Phenology Plot',
-    type: FEATURE_TYPES.LOCATIONS,
+    type: FEATURE_TYPES.LOCATIONS.KEY,
     description: 'Plant phenology observations are made along a transect loop or plot in or around the primary airshed. When possible, one plot is established north of the tower to calibrate phenology camera images captured from sensors on the tower. If there is insufficient space north of the tower for a 200m x 200m plot or if the vegetation does not match the primary airshed an additional plot is established.',
     parent: 'TOWER_PLOTS',
     dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
@@ -588,7 +618,7 @@ export const FEATURES = {
   TOWER_BASE_PLOTS: {
     name: 'Tower Base Plots',
     nameSingular: 'Tower Base Plot',
-    type: FEATURE_TYPES.LOCATIONS,
+    type: FEATURE_TYPES.LOCATIONS.KEY,
     description: 'Tower plots support a variety of plant productivity, plant diversity, soil, biogeochemistry and microbe sampling. The number and size of Tower Base Plots is determined by the vegetation of the tower airshed. In forested sites, twenty 40m x 40m plots are established. In herbaceous sites, thirty 20m x 20m plots are established. Of these thirty tower plots, four have additional space to support soil sampling.',
     parent: 'TOWER_PLOTS',
     dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
@@ -603,7 +633,7 @@ export const FEATURES = {
   TOWER_SOIL_PLOTS: {
     name: 'Tower Soil Plots',
     nameSingular: 'Tower Soil Plot',
-    type: FEATURE_TYPES.LOCATIONS,
+    type: FEATURE_TYPES.LOCATIONS.KEY,
     dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'SOIL_PLOT',
     description: 'Soil plots are located within the flux tower\'s footprint and in the locally dominant (~1 km² scale) soil type of each terrestrial field site, while being constrained to no more than 40m²',
@@ -619,7 +649,7 @@ export const FEATURES = {
   // DISTRIBUTED_PLOTS Group
   DISTRIBUTED_PLOTS: {
     name: 'Distributed Plots',
-    type: FEATURE_TYPES.GROUP,
+    type: FEATURE_TYPES.GROUP.KEY,
     minZoom: 10,
     description: 'Distributed Plots are located throughout the TOS Sampling boundary in an effort to describe organisms and process with plot, point, and grid sampling. Plots were established according to a stratified-random and spatially balanced design.',
     parent: 'TERRESTRIAL_SITE_FEATURES',
@@ -627,7 +657,7 @@ export const FEATURES = {
   DISTRIBUTED_BIRD_GRIDS: {
     name: 'Distributed Bird Grids',
     nameSingular: 'Distributed Bird Grid',
-    type: FEATURE_TYPES.LOCATIONS,
+    type: FEATURE_TYPES.LOCATIONS.KEY,
     description: 'Bird Grids consist of 9 sampling points within a 500m x 500m square. Each point is 250m apart. Where possible, Bird Grids are colocated with Distributed Base Plots by placing the Bird Grid center (B2) in close proximity to the center of the Base Plot. At smaller sites, a single point count is done at the south-west corner (point 21) of the Distributed Base Plot.',
     parent: 'DISTRIBUTED_PLOTS',
     dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
@@ -642,7 +672,7 @@ export const FEATURES = {
   DISTRIBUTED_MAMMAL_GRIDS: {
     name: 'Distributed Mammal Grids',
     nameSingular: 'Distributed Mammal Grid',
-    type: FEATURE_TYPES.LOCATIONS,
+    type: FEATURE_TYPES.LOCATIONS.KEY,
     description: 'Mammal Grids are 90m x 90m and include 100 trapping locations at 10m spacing. Where possible, these grids are colocated with Distributed Base Plots by placing them a specified distance (150m +/- 50m) and random direction from the center of the Base Plot.',
     parent: 'DISTRIBUTED_PLOTS',
     dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
@@ -657,7 +687,7 @@ export const FEATURES = {
   DISTRIBUTED_BASE_PLOTS: {
     name: 'Distributed Base Plots',
     nameSingular: 'Distributed Base Plot',
-    type: FEATURE_TYPES.LOCATIONS,
+    type: FEATURE_TYPES.LOCATIONS.KEY,
     description: 'Distributed Base Plots support a variety of plant productivity, plant diversity, soil, biogeochemistry, microbe and beetle sampling. Distributed Base Plots are 40m x 40m.',
     parent: 'DISTRIBUTED_PLOTS',
     featureShape: 'Marker',
@@ -672,7 +702,7 @@ export const FEATURES = {
   DISTRIBUTED_TICK_PLOTS: {
     name: 'Distributed Tick Plots',
     nameSingular: 'Distributed Tick Plot',
-    type: FEATURE_TYPES.LOCATIONS,
+    type: FEATURE_TYPES.LOCATIONS.KEY,
     description: 'Tick Plots are sampled by conducting cloth dragging or flagging around the perimeter of a 40m x 40m plot. Tick plots are colocated with Distributed Base Plots by placing them a specified distance (150m +/- 15m) and random direction from the center of the Base Plot.',
     parent: 'DISTRIBUTED_PLOTS',
     dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
@@ -687,7 +717,7 @@ export const FEATURES = {
   DISTRIBUTED_MOSQUITO_POINTS: {
     name: 'Distributed Mosquito Points',
     nameSingular: 'Distributed Mosquito Point',
-    type: FEATURE_TYPES.LOCATIONS,
+    type: FEATURE_TYPES.LOCATIONS.KEY,
     description: 'At each Mosquito Point, one CO2 trap is established. Due to the frequency of sampling and temporal sampling constraints, Mosquito Points are located within 45m of roads.',
     parent: 'DISTRIBUTED_PLOTS',
     dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
@@ -701,7 +731,7 @@ export const FEATURES = {
   // Plot Boundaries
   PLOT_BOUNDARIES: {
     name: 'Plot Boundaries',
-    type: FEATURE_TYPES.GROUP,
+    type: FEATURE_TYPES.GROUP.KEY,
     minZoom: 14,
     description: 'Some types of distributed and tower plots may be represented by a boundary polygon in addition their marker icon to denote actual size and location.',
     parent: 'TERRESTRIAL_SITE_FEATURES',
@@ -709,7 +739,7 @@ export const FEATURES = {
   TOWER_PHENOLOGY_PLOT_BOUNDARIES: {
     name: 'Phenology Plot Boundaries',
     nameSingular: 'Phenology Plot Boundary',
-    type: FEATURE_TYPES.SAMPLING_POINTS,
+    type: FEATURE_TYPES.SAMPLING_POINTS.KEY,
     descriptionFromParentDataFeatureKey: true,
     parent: 'PLOT_BOUNDARIES',
     parentDataFeatureKey: 'TOWER_PHENOLOGY_PLOTS',
@@ -724,7 +754,7 @@ export const FEATURES = {
   TOWER_SOIL_PLOT_BOUNDARIES: { // Comes back as data from TOWER_SOIL_PLOTS fetches so no fetch here
     name: 'Tower Soil Plot Boundaries',
     nameSingular: 'Tower Soil Plot Boundary',
-    type: FEATURE_TYPES.SAMPLING_POINTS,
+    type: FEATURE_TYPES.SAMPLING_POINTS.KEY,
     descriptionFromParentDataFeatureKey: true,
     parent: 'PLOT_BOUNDARIES',
     parentDataFeatureKey: 'TOWER_SOIL_PLOTS',
@@ -735,7 +765,7 @@ export const FEATURES = {
   DISTRIBUTED_BIRD_GRID_BOUNDARIES: {
     name: 'Bird Grid Boundaries',
     nameSingular: 'Bird Grid Boundary',
-    type: FEATURE_TYPES.SAMPLING_POINTS,
+    type: FEATURE_TYPES.SAMPLING_POINTS.KEY,
     descriptionFromParentDataFeatureKey: true,
     parent: 'PLOT_BOUNDARIES',
     parentDataFeatureKey: 'DISTRIBUTED_BIRD_GRIDS',
@@ -750,7 +780,7 @@ export const FEATURES = {
   DISTRIBUTED_MAMMAL_GRID_BOUNDARIES: {
     name: 'Mammal Grid Boundaries',
     nameSingular: 'Mammal Grid Boundary',
-    type: FEATURE_TYPES.SAMPLING_POINTS,
+    type: FEATURE_TYPES.SAMPLING_POINTS.KEY,
     descriptionFromParentDataFeatureKey: true,
     parent: 'PLOT_BOUNDARIES',
     parentDataFeatureKey: 'DISTRIBUTED_MAMMAL_GRIDS',
@@ -765,7 +795,7 @@ export const FEATURES = {
   DISTRIBUTED_TICK_PLOT_BOUNDARIES: {
     name: 'Tick Plot Boundaries',
     nameSingular: 'Tick Plot Boundary',
-    type: FEATURE_TYPES.SAMPLING_POINTS,
+    type: FEATURE_TYPES.SAMPLING_POINTS.KEY,
     descriptionFromParentDataFeatureKey: true,
     parent: 'PLOT_BOUNDARIES',
     parentDataFeatureKey: 'DISTRIBUTED_TICK_PLOTS',
@@ -780,13 +810,13 @@ export const FEATURES = {
   // Aquatic Site Features
   AQUATIC_SITE_FEATURES: {
     name: 'Aquatic Site Features',
-    type: FEATURE_TYPES.GROUP,
+    type: FEATURE_TYPES.GROUP.KEY,
     minZoom: 10,
   },
   AQUATIC_BENCHMARKS: {
     name: 'Benchmarks',
     nameSingular: 'Benchmark',
-    type: FEATURE_TYPES.LOCATIONS,
+    type: FEATURE_TYPES.LOCATIONS.KEY,
     minZoom: 10,
     dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'AOS benchmark named location type',
@@ -799,20 +829,20 @@ export const FEATURES = {
   },
   AQUATIC_AUTOMATED_INSTRUMENTS: {
     name: 'Automated Instuments',
-    type: FEATURE_TYPES.GROUP,
+    type: FEATURE_TYPES.GROUP.KEY,
     minZoom: 10,
     parent: 'AQUATIC_SITE_FEATURES',
   },
   AQUATIC_OBSERVATIONAL_SAMPLING: {
     name: 'Observational Sampling',
-    type: FEATURE_TYPES.GROUP,
+    type: FEATURE_TYPES.GROUP.KEY,
     minZoom: 11,
     parent: 'AQUATIC_SITE_FEATURES',
   },
   AQUATIC_RIPARIAN_ASSESSMENTS: {
     name: 'Riparian Assessments',
     nameSingular: 'Riparian Assessment',
-    type: FEATURE_TYPES.LOCATIONS,
+    type: FEATURE_TYPES.LOCATIONS.KEY,
     minZoom: 11,
     dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'AOS riparian named location type',
@@ -826,7 +856,7 @@ export const FEATURES = {
   AQUATIC_WET_DEPOSITION_POINTS: {
     name: 'Wet Deposition Points',
     nameSingular: 'Wet Deposition Point',
-    type: FEATURE_TYPES.LOCATIONS,
+    type: FEATURE_TYPES.LOCATIONS.KEY,
     minZoom: 11,
     dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'AOS wet deposition named location type',
@@ -840,7 +870,7 @@ export const FEATURES = {
   AQUATIC_GROUNDWATER_WELLS: {
     name: 'Groundwater Wells',
     nameSingular: 'Groundwater Well',
-    type: FEATURE_TYPES.LOCATIONS,
+    type: FEATURE_TYPES.LOCATIONS.KEY,
     minZoom: 11,
     dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'GROUNDWATER_WELL',
@@ -855,7 +885,7 @@ export const FEATURES = {
   AQUATIC_METEOROLOGICAL_STATIONS: {
     name: 'Meteorological Stations',
     nameSingular: 'Meteorological Station',
-    type: FEATURE_TYPES.LOCATIONS,
+    type: FEATURE_TYPES.LOCATIONS.KEY,
     minZoom: 10,
     dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'MET_STATION',
@@ -870,7 +900,7 @@ export const FEATURES = {
   AQUATIC_DISCHARGE_POINTS: {
     name: 'Discharge Points',
     nameSingular: 'Discharge Point',
-    type: FEATURE_TYPES.LOCATIONS,
+    type: FEATURE_TYPES.LOCATIONS.KEY,
     minZoom: 11,
     dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'AOS discharge named location type',
@@ -883,7 +913,7 @@ export const FEATURES = {
   AQUATIC_FISH_POINTS: {
     name: 'Fish Points',
     nameSingular: 'Fish Point',
-    type: FEATURE_TYPES.LOCATIONS,
+    type: FEATURE_TYPES.LOCATIONS.KEY,
     minZoom: 11,
     dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'AOS fish named location type',
@@ -896,7 +926,7 @@ export const FEATURES = {
   AQUATIC_PLANT_TRANSECTS: {
     name: 'Plant Transects',
     nameSingular: 'Plant Transect',
-    type: FEATURE_TYPES.LOCATIONS,
+    type: FEATURE_TYPES.LOCATIONS.KEY,
     minZoom: 11,
     dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'AOS plant named location type',
@@ -910,7 +940,7 @@ export const FEATURES = {
   AQUATIC_SEDIMENT_POINTS: {
     name: 'Sediment Points',
     nameSingular: 'Sediment Point',
-    type: FEATURE_TYPES.LOCATIONS,
+    type: FEATURE_TYPES.LOCATIONS.KEY,
     minZoom: 11,
     dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'AOS sediment named location type',
@@ -923,7 +953,7 @@ export const FEATURES = {
   AQUATIC_STAFF_GAUGES: {
     name: 'Staff Gauges',
     nameSingular: 'Staff Gauge',
-    type: FEATURE_TYPES.LOCATIONS,
+    type: FEATURE_TYPES.LOCATIONS.KEY,
     minZoom: 11,
     dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'STAFF_GAUGE',
@@ -937,7 +967,7 @@ export const FEATURES = {
   AQUATIC_SENSOR_STATIONS: {
     name: 'Sensor Stations',
     nameSingular: 'Sensor Station',
-    type: FEATURE_TYPES.LOCATIONS,
+    type: FEATURE_TYPES.LOCATIONS.KEY,
     minZoom: 10,
     dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: /^(S1|S2|INLET|OUTLET)_LOC$/,
@@ -952,7 +982,7 @@ export const FEATURES = {
   AQUATIC_BUOYS: {
     name: 'Buoys',
     nameSingular: 'Buoy',
-    type: FEATURE_TYPES.LOCATIONS,
+    type: FEATURE_TYPES.LOCATIONS.KEY,
     minZoom: 10,
     dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'BUOY',
@@ -966,13 +996,13 @@ export const FEATURES = {
   // SITE_MARKERS Group
   SITE_MARKERS: {
     name: 'NEON Site Markers',
-    type: FEATURE_TYPES.GROUP,
+    type: FEATURE_TYPES.GROUP.KEY,
     maxZoom: 9,
   },
   TERRESTRIAL_CORE_SITES: {
     name: 'Terrestrial Core Sites',
     nameSingular: 'Terrestrial Core Site',
-    type: FEATURE_TYPES.SITES,
+    type: FEATURE_TYPES.SITES.KEY,
     description: 'Land-based; fixed location',
     parent: 'SITE_MARKERS',
     attributes: { type: 'CORE', terrain: 'TERRESTRIAL' },
@@ -987,7 +1017,7 @@ export const FEATURES = {
   TERRESTRIAL_RELOCATABLE_SITES: {
     name: 'Terrestrial Relocatable Sites',
     nameSingular: 'Terrestrial Relocatable Site',
-    type: FEATURE_TYPES.SITES,
+    type: FEATURE_TYPES.SITES.KEY,
     description: 'Land-based; location may change',
     parent: 'SITE_MARKERS',
     attributes: { type: 'RELOCATABLE', terrain: 'TERRESTRIAL' },
@@ -1002,7 +1032,7 @@ export const FEATURES = {
   AQUATIC_CORE_SITES: {
     name: 'Aquatic Core Sites',
     nameSingular: 'Aquatic Core Site',
-    type: FEATURE_TYPES.SITES,
+    type: FEATURE_TYPES.SITES.KEY,
     description: 'Water-based; fixed location',
     parent: 'SITE_MARKERS',
     attributes: { type: 'CORE', terrain: 'AQUATIC' },
@@ -1017,7 +1047,7 @@ export const FEATURES = {
   AQUATIC_RELOCATABLE_SITES: {
     name: 'Aquatic Relocatable Sites',
     nameSingular: 'Aquatic Relocatable Site',
-    type: FEATURE_TYPES.SITES,
+    type: FEATURE_TYPES.SITES.KEY,
     description: 'Water-based; location may change',
     parent: 'SITE_MARKERS',
     attributes: { type: 'RELOCATABLE', terrain: 'AQUATIC' },
@@ -1363,10 +1393,10 @@ export const DEFAULT_STATE = {
     widthReference: 0, // Width of content area we can combine with currentValue to get dimensions
   },
   table: { // Settings that ONLY apply to the table
-    focus: FEATURE_TYPES.SITES,
+    focus: FEATURE_TYPES.SITES.KEY,
     availableFeatureTypes: {
-      [FEATURE_TYPES.SITES]: false,
-      [FEATURE_TYPES.LOCATIONS]: false,
+      [FEATURE_TYPES.SITES.KEY]: false,
+      [FEATURE_TYPES.LOCATIONS.KEY]: false,
     },
     maxBodyHeight: null,
     // A way for the SiteMapContainer resizeHandler to inform the SiteMapTable to recalc body height
@@ -1385,7 +1415,7 @@ export const DEFAULT_STATE = {
     isDraggingAreaSelection: false,
   },
   selection: {
-    active: null, // Set to any key in SELECTABLE_FEATURE_TYPES
+    active: null, // Set to any key in FEATURE_TYPES that is explicitly selectable
     limit: null, // null (unlimited), a non-zero positive integer, or an integer range
     valid: false, // whether the current selection is non-emtpy and valid per the limit
     set: new Set(), // set of selected values
@@ -1407,7 +1437,7 @@ export const DEFAULT_STATE = {
   ),
   featureData: Object.fromEntries(
     Object.keys(FEATURE_TYPES)
-      .filter(featureType => featureType !== FEATURE_TYPES.SAMPLING_POINTS)
+      .filter(featureType => featureType !== FEATURE_TYPES.SAMPLING_POINTS.KEY)
       .map(featureType => [featureType, {}]),
   ),
   sites: {}, // Sites data is split into 4 features making it hard to look up, so extra refs here
@@ -1437,7 +1467,7 @@ Object.keys(FEATURES)
     const { type: featureType, dataSource } = FEATURES[featureKey];
     // Initialize featureData
     // SAMPLING_POINTS are stored as geometry of their parent locations so don't need initialization
-    if (featureType !== FEATURE_TYPES.SAMPLING_POINTS) {
+    if (featureType !== FEATURE_TYPES.SAMPLING_POINTS.KEY) {
       DEFAULT_STATE.featureData[featureType][featureKey] = {};
     }
     // Initialize featureDataFetches based on dataSource
@@ -1456,19 +1486,26 @@ Object.keys(FEATURES)
   });
 // Location Hierarchies (REST_LOCATIONS_API, not in the FEATURES structure since it doesn't render)
 // eslint-disable-next-line max-len
-DEFAULT_STATE.featureDataFetches[FEATURE_DATA_SOURCES.REST_LOCATIONS_API][FEATURE_TYPES.SITE_LOCATION_HIERARCHIES] = {};
+DEFAULT_STATE.featureDataFetches[FEATURE_DATA_SOURCES.REST_LOCATIONS_API][FEATURE_TYPES.SITE_LOCATION_HIERARCHIES.KEY] = {};
 
 // Initialize feature availability
 const availabilityState = calculateFeatureAvailability(DEFAULT_STATE);
 DEFAULT_STATE.filters.features.available = { ...availabilityState.filters.features.available };
 
 // Populate static JSON featureData
+// Note that we end up with some redundancy in our object structure:
+// (e.g. state.featureData.STATES.STATES) This is a balanced trade-off... many references to
+// feature data that renders (so excpeting site location hiearchies) abstractly expect the structure
+// to be organized by feature type and then feature key. States and Domains have dedicated feature
+// types to allow for selection. It would be far messier to shorten their featureData structure
+// and have to build exceptions for this difference in various places.
+// --
 // States
 if (statesShapesJSON) {
   statesShapesJSON.features.forEach((feature) => {
     if (!feature.properties || !feature.properties.stateCode) { return; }
     const { stateCode } = feature.properties;
-    DEFAULT_STATE.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.STATES.KEY][stateCode] = {
+    DEFAULT_STATE.featureData[FEATURE_TYPES.STATES.KEY][FEATURES.STATES.KEY][stateCode] = {
       geometry: feature.geometry,
       sites: new Set(),
     };
@@ -1479,7 +1516,7 @@ if (domainsShapesJSON) {
   domainsShapesJSON.features.forEach((feature) => {
     if (!feature.properties || !feature.properties.domainCode) { return; }
     const { domainCode } = feature.properties;
-    DEFAULT_STATE.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.DOMAINS.KEY][domainCode] = {
+    DEFAULT_STATE.featureData[FEATURE_TYPES.DOMAINS.KEY][FEATURES.DOMAINS.KEY][domainCode] = {
       geometry: feature.geometry,
       sites: new Set(),
     };
@@ -1492,27 +1529,28 @@ export const hydrateNeonContextData = (state, neonContextData) => {
   Object.keys(neonContextData.sites).forEach((siteCode) => {
     newState.sites[siteCode] = { ...neonContextData.sites[siteCode] };
     const featureKey = Object.keys(FEATURES)
-      .filter(key => FEATURES[key].type === FEATURE_TYPES.SITES)
+      .filter(key => FEATURES[key].type === FEATURE_TYPES.SITES.KEY)
       .find(key => (
         FEATURES[key].attributes.type === neonContextData.sites[siteCode].type
           && FEATURES[key].attributes.terrain === neonContextData.sites[siteCode].terrain
       )) || null;
     if (featureKey !== null) {
-      newState.featureData[FEATURE_TYPES.SITES][featureKey][siteCode] = newState.sites[siteCode];
+      // eslint-disable-next-line max-len
+      newState.featureData[FEATURE_TYPES.SITES.KEY][featureKey][siteCode] = newState.sites[siteCode];
     }
   });
   // States
   Object.keys(neonContextData.states).forEach((stateCode) => {
-    newState.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.STATES.KEY][stateCode] = {
-      ...newState.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.STATES.KEY][stateCode],
+    newState.featureData[FEATURE_TYPES.STATES.KEY][FEATURES.STATES.KEY][stateCode] = {
+      ...newState.featureData[FEATURE_TYPES.STATES.KEY][FEATURES.STATES.KEY][stateCode],
       ...neonContextData.states[stateCode],
       sites: neonContextData.stateSites[stateCode],
     };
   });
   // Domains
   Object.keys(neonContextData.domains).forEach((domainCode) => {
-    newState.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.DOMAINS.KEY][domainCode] = {
-      ...newState.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.DOMAINS.KEY][domainCode],
+    newState.featureData[FEATURE_TYPES.DOMAINS.KEY][FEATURES.DOMAINS.KEY][domainCode] = {
+      ...newState.featureData[FEATURE_TYPES.DOMAINS.KEY][FEATURES.DOMAINS.KEY][domainCode],
       ...neonContextData.domains[domainCode],
       sites: neonContextData.domainSites[domainCode],
     };
@@ -1565,7 +1603,7 @@ export const SITE_MAP_PROP_TYPES = {
   // Initial map focus (overrides mapCenter and mapZoom)
   location: PropTypes.string,
   // Selection Props
-  selection: PropTypes.oneOf(Object.keys(SELECTABLE_FEATURE_TYPES)),
+  selection: PropTypes.oneOf(Object.keys(FEATURE_TYPES).filter(k => FEATURE_TYPES[k].selectable)),
   selectedItems: PropTypes.arrayOf(PropTypes.string),
   validItems: PropTypes.arrayOf(PropTypes.string),
   selectionLimit: SelectionLimitPropType,
@@ -1665,7 +1703,11 @@ const getZoomedIcon = (
 // state and regenerated any time the zoom level changes. We do this so that we're not generating
 // a new icon instance for every discrete location in view when several share the same icon.
 export const getZoomedIcons = (zoom) => {
-  const featureTypes = [FEATURE_TYPES.LOCATIONS, FEATURE_TYPES.SITES, FEATURE_TYPES.OTHER];
+  const featureTypes = [
+    FEATURE_TYPES.LOCATIONS.KEY,
+    FEATURE_TYPES.SITES.KEY,
+    FEATURE_TYPES.OTHER.KEY,
+  ];
   const icons = {};
   Object.keys(FEATURES)
     .filter(key => (
@@ -1677,7 +1719,7 @@ export const getZoomedIcons = (zoom) => {
       Object.keys(SELECTION_STATUS).forEach((selection) => {
         if (
           selection === SELECTION_STATUS.SELECTED
-            && !Object.keys(SELECTABLE_FEATURE_TYPES).includes(FEATURES[key].type)
+            && !FEATURE_TYPES[FEATURES[key].type].selectable
         ) { return; }
         icons[key][selection] = {};
         Object.keys(HIGHLIGHT_STATUS).forEach((highlight) => {
@@ -1736,10 +1778,10 @@ export const getMapStateForFocusLocation = (state = {}) => {
   if (type === 'SITE') {
     newState.map.zoom = (state.sites[current] || {}).zoom || 12;
   } else if (type === 'DOMAIN') {
-    const { [FEATURES.DOMAINS.KEY]: domainsData } = state.featureData[FEATURE_TYPES.BOUNDARIES];
+    const { [FEATURES.DOMAINS.KEY]: domainsData } = state.featureData[FEATURE_TYPES.DOMAINS.KEY];
     newState.map.zoom = (domainsData[current] || {}).zoom || null;
   } else if (type === 'STATE') {
-    const { [FEATURES.STATES.KEY]: statesData } = state.featureData[FEATURE_TYPES.BOUNDARIES];
+    const { [FEATURES.STATES.KEY]: statesData } = state.featureData[FEATURE_TYPES.STATES.KEY];
     newState.map.zoom = (statesData[current] || {}).zoom || null;
   } else {
     const featureKey = Object.keys(FEATURES)
@@ -1849,8 +1891,8 @@ export const calculateLocationsInBounds = (
     if (loc.geometry && loc.geometry.coordinates) {
       const flatCoords = flatten(loc.geometry.coordinates);
       return flatCoords.some(coord => (
-        coord.latitude >= extendedBounds.lat[0] && coord.latitude <= extendedBounds.lat[1]
-          && coord.longitude >= extendedBounds.lng[0] && coord.longitude <= extendedBounds.lng[1]
+        coord[0] >= extendedBounds.lat[0] && coord[0] <= extendedBounds.lat[1]
+          && coord[1] >= extendedBounds.lng[0] && coord[1] <= extendedBounds.lng[1]
       ));
     }
     return false;

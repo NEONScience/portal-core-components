@@ -663,10 +663,15 @@ const SiteMapContainer = (props) => {
     if (!selectionActive) { return null; }
     const featureKey = getSelectedItemFeatureKey(item);
     if (!featureKey) { return null; }
-    if (selectionActive === FEATURE_TYPES.SITES) {
-      return featureData[selectionActive][featureKey][item].description;
+    switch (selectionActive) {
+      case FEATURE_TYPES.SITES.KEY:
+        return featureData[selectionActive][featureKey][item].description;
+      case FEATURE_TYPES.STATES.KEY:
+      case FEATURE_TYPES.DOMAINS.KEY:
+        return featureData[selectionActive][featureKey][item].name;
+      default:
+        return null;
     }
-    return null;
   };
 
   /**
@@ -674,9 +679,10 @@ const SiteMapContainer = (props) => {
   */
   const renderSelectionSummary = () => {
     if (!selectionActive) { return null; }
-    const unit = selectionActive === FEATURE_TYPES.SITES ? 'site' : 'location';
-    const s = selection.size === 1 ? '' : 's';
-    const title = `${selection.size ? selection.size.toString() : 'No'} ${unit}${s} selected`;
+    const unit = FEATURE_TYPES[selectionActive].unit || '';
+    const units = FEATURE_TYPES[selectionActive].units || '';
+    const plural = selection.size !== 1;
+    const title = `${selection.size ? selection.size.toString() : 'No'} ${plural ? units : unit} selected`;
     let icon = <NoneSelectedIcon />;
     let color = 'default';
     if (selection.size) {
@@ -719,7 +725,7 @@ const SiteMapContainer = (props) => {
         <Zoom in={showSummary} mountOnEnter unmountOnExit>
           <div className={summaryClass} style={summaryStyle}>
             <List dense>
-              {[...selection].map((selectedItem) => {
+              {[...selection].sort().map((selectedItem) => {
                 const src = getSelectedItemIcon(selectedItem);
                 const remove = `Remove ${selectedItem} from selection`;
                 return (
@@ -743,7 +749,7 @@ const SiteMapContainer = (props) => {
                         <IconButton
                           edge="end"
                           aria-label={remove}
-                          onClick={() => dispatch({ type: 'toggleSiteSelected', site: selectedItem })}
+                          onClick={() => dispatch({ type: 'toggleItemSelected', item: selectedItem })}
                         >
                           <DeleteIcon />
                         </IconButton>
@@ -769,7 +775,7 @@ const SiteMapContainer = (props) => {
           )}
           onDelete={(
             selection.size
-              ? () => dispatch({ type: 'updateSitesSelection', selection: new Set() })
+              ? () => dispatch({ type: 'updateSelectionSet', selection: new Set() })
               : () => {}
           )}
         />
@@ -893,15 +899,18 @@ const SiteMapContainer = (props) => {
     ) {
       tooltip = FEATURES[parentDataFeatureKey].description || null;
     }
-    if (feature.type === FEATURE_TYPES.GROUP) {
+    if (feature.type === FEATURE_TYPES.GROUP.KEY) {
       collapsed = state.filters.features.collapsed.has(key);
       const collapseTitle = `${collapsed ? 'Expand' : 'Collapse'} ${feature.name}`;
       allChildren = Object.keys(FEATURES).filter(f => FEATURES[f].parent === key);
       allChildren.sort((a, b) => {
         const { type: aType, name: aName } = FEATURES[a];
         const { type: bType, name: bName } = FEATURES[b];
-        if (aType !== bType && (aType === FEATURE_TYPES.GROUP || bType === FEATURE_TYPES.GROUP)) {
-          return (bType === FEATURE_TYPES.GROUP ? -1 : 1);
+        if (
+          aType !== bType
+            && (aType === FEATURE_TYPES.GROUP.KEY || bType === FEATURE_TYPES.GROUP.KEY)
+        ) {
+          return (bType === FEATURE_TYPES.GROUP.KEY ? -1 : 1);
         }
         return (aName < bName ? -1 : 1);
       });

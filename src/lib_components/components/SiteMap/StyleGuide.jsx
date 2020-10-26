@@ -17,6 +17,7 @@ import SiteMap from './SiteMap';
 
 import {
   MAP_ZOOM_RANGE,
+  FEATURE_TYPES,
   BASE_LAYERS,
   VIEWS,
 } from './SiteMapUtils';
@@ -190,18 +191,18 @@ const propRows = [
     type: (
       <div>
         string, one of:
-        <br />
-        <tt>
-          <div>&quot;SITES&quot;</div>
-        </tt>
+        {Object.keys(FEATURE_TYPES).filter(k => FEATURE_TYPES[k].selectable).map(k => (
+          <div key={k} style={{ marginTop: '8px' }}>
+            <tt>{`"${k}"`}</tt>
+          </div>
+        ))}
       </div>
     ),
     default: 'null',
     description: (
       <p>
-        The selection mode for the map. Selection is limited to a single feature type. Presently
-        only <tt>SITES</tt> is supported. See other selection-related props for complete
-        integration.
+        String representing the feature type to be selectable in the map. All map features are
+        grouped into types, and certain types are selectable.
       </p>
     ),
   },
@@ -352,7 +353,6 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
         codes are also supported.
       </DocBlock>
 
-      {/*
       <ExampleBlock>
         <SiteMap location="D08" />
       </ExampleBlock>
@@ -361,15 +361,14 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
 <SiteMap location="D08" />
         `}
       </CodeBlock>
-      */}
 
       <Divider className={classes.divider} />
       <Typography variant="h4" component="h2" gutterBottom>Selection</Typography>
 
       <DocBlock>
         The SiteMap supports selection workflows for some feature types.
-        See the <Link href="#SelectSitesButton">Select Sites Button</Link>
-        documentation for details and examples.
+        See the <Link href="#MapSelectionButton">Map Selection Button</Link> documentation
+        for details and examples.
       </DocBlock>
 
     </React.Fragment>

@@ -27,7 +27,6 @@ import {
   FEATURE_TYPES,
   MIN_TABLE_MAX_BODY_HEIGHT,
   PLOT_SAMPLING_MODULES,
-  SELECTABLE_FEATURE_TYPES,
   UNSELECTABLE_MARKER_FILTER,
   calculateLocationsInBounds,
 } from './SiteMapUtils';
@@ -205,10 +204,10 @@ const SiteMapTable = () => {
   let rowIsSelectable = () => false;
   let selectRow = () => {};
   switch (focus) {
-    case FEATURE_TYPES.SITES:
+    case FEATURE_TYPES.SITES.KEY:
       rowIsSelected = row => selection.has(row.siteCode);
       rowIsSelectable = row => !selectableItems || selectableItems.has(row.siteCode);
-      selectRow = row => dispatch({ type: 'toggleSiteSelected', site: row.siteCode });
+      selectRow = row => dispatch({ type: 'toggleItemSelected', item: row.siteCode });
       break;
     default:
       break;
@@ -226,9 +225,9 @@ const SiteMapTable = () => {
     if (type === 'SITE') {
       source = { code: 'siteCode', data: state.sites };
     } else if (type === 'STATE') {
-      source = { code: 'stateCode', data: state.featureData.BOUNDARIES.STATES };
+      source = { code: 'stateCode', data: state.featureData.STATES.STATES };
     } else if (type === 'DOMAIN') {
-      source = { code: 'domainCode', data: state.featureData.BOUNDARIES.DOMAINS };
+      source = { code: 'domainCode', data: state.featureData.DOMAINS.DOMAINS };
     }
     if (!source) { return null; }
     let code = null;
@@ -279,10 +278,10 @@ const SiteMapTable = () => {
   const locations = {};
   visibleFeatureKeys.forEach((featureKey) => {
     Object.keys(state.featureData[focus][featureKey]).forEach((siteCode) => {
-      if (focus === FEATURE_TYPES.SITES) {
+      if (focus === FEATURE_TYPES.SITES.KEY) {
         locations[siteCode] = state.featureData[focus][featureKey][siteCode];
       }
-      if (focus === FEATURE_TYPES.LOCATIONS) {
+      if (focus === FEATURE_TYPES.LOCATIONS.KEY) {
         Object.keys(state.featureData[focus][featureKey][siteCode]).forEach((locationCode) => {
           locations[locationCode] = state.featureData[focus][featureKey][siteCode][locationCode];
         });
@@ -297,7 +296,7 @@ const SiteMapTable = () => {
   if (selectionActive) {
     rows.forEach((row, idx) => {
       let selected = false;
-      if (focus === FEATURE_TYPES.SITES) { selected = selection.has(row.siteCode); }
+      if (focus === FEATURE_TYPES.SITES.KEY) { selected = selection.has(row.siteCode); }
       // Implement locations preselection here
       if (!rows[idx].tableData) { rows[idx].tableData = {}; }
       rows[idx].tableData.checked = selected;
@@ -458,7 +457,7 @@ const SiteMapTable = () => {
       lookup: Object.fromEntries(
         Array.from(statesInMap).map(stateCode => [
           stateCode,
-          state.featureData.BOUNDARIES.STATES[stateCode].name,
+          state.featureData.STATES.STATES[stateCode].name,
         ]),
       ),
       customSort: (rowA, rowB) => {
@@ -523,7 +522,7 @@ const SiteMapTable = () => {
      Define columns from current focus feature type
   */
   let columns = [];
-  if (focus === FEATURE_TYPES.SITES) {
+  if (focus === FEATURE_TYPES.SITES.KEY) {
     columns = [
       commonColumns.site,
       commonColumns.latitude,
@@ -556,7 +555,7 @@ const SiteMapTable = () => {
       commonColumns.state,
     ];
   }
-  if (focus === FEATURE_TYPES.LOCATIONS) {
+  if (focus === FEATURE_TYPES.LOCATIONS.KEY) {
     columns = [
       { // Location Name
         field: 'name',
@@ -793,9 +792,9 @@ const SiteMapTable = () => {
           }),
         }}
         onSelectionChange={!selectionActive ? null : (newRows) => {
-          const action = { type: 'updateSitesSelection', selection: new Set() };
+          const action = { type: 'updateSelectionSet', selection: new Set() };
           newRows.filter(row => row.tableData.checked).forEach((row) => {
-            if (focus === FEATURE_TYPES.SITES) {
+            if (focus === FEATURE_TYPES.SITES.KEY) {
               action.selection.add(row.siteCode);
             }
           });

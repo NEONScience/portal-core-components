@@ -32,7 +32,6 @@ import {
   FEATURE_TYPES,
   FEATURE_DATA_SOURCES,
   SELECTION_PORTIONS,
-  SELECTABLE_FEATURE_TYPES,
   SITE_LOCATION_HIERARCHIES_MIN_ZOOM,
   MAP_ZOOM_RANGE,
   MAP_MOUSE_MODES,
@@ -52,21 +51,23 @@ import {
   deriveFullObservatoryZoomLevel,
 } from './SiteMapUtils';
 
-// Derive the selected status of a given boundary (US state or NEON domain). This should run
-// every time the list of selected sites changes. It regenerates selectedStates and
-// selectedDomains in state to each contain a key/value lookup where the key is the boundary code
-// (state code or domain code) and the value is either 'total' (all sites selected) or 'partial'
-// (some sites selected). If no sites are selected for the boundary it is omitted from the map.
-const deriveBoundarySelections = (state) => {
+// Derive the selected status of a given region (US state or NEON domain). This should run every
+// time the list of selected items changes depending on the selecatble feature type. It regenerates
+// selectedStates and selectedDomains in state to each contain a key/value lookup where the key is
+// the region id (state code or domain code) and the value is either 'total' (all sites selected)
+// or 'partial' (some sites selected). If no sites are selected for the boundary it is omitted from
+// the map.
+const deriveRegionSelections = (state) => {
   const derive = (featureKey) => {
-    if (!state.neonContextHydrated || !state.featureData[FEATURE_TYPES.BOUNDARIES][featureKey]) {
+    const featureType = FEATURES[featureKey].type;
+    if (!state.neonContextHydrated || !state.featureData[featureType][featureKey]) {
       return {};
     }
     const { validSet } = state.selection;
     const selectedBoundaries = {};
-    Object.keys(state.featureData[FEATURE_TYPES.BOUNDARIES][featureKey]).forEach((boundaryCode) => {
+    Object.keys(state.featureData[featureType][featureKey]).forEach((boundaryCode) => {
       const boundarySitesSet = (
-        state.featureData[FEATURE_TYPES.BOUNDARIES][featureKey][boundaryCode].sites || new Set()
+        state.featureData[featureType][featureKey][boundaryCode].sites || new Set()
       );
       const selectableSites = !validSet
         ? boundarySitesSet
@@ -172,7 +173,7 @@ const calculateFeatureDataFetches = (state, requiredSites = []) => {
   // Only fetch if bounds are not null as that way we can trust sitesInMap is not all the sites
   if (state.map.zoom >= SITE_LOCATION_HIERARCHIES_MIN_ZOOM && state.map.bounds) {
     const hierarchiesSource = FEATURE_DATA_SOURCES.REST_LOCATIONS_API;
-    const hierarchiesType = FEATURE_TYPES.SITE_LOCATION_HIERARCHIES;
+    const hierarchiesType = FEATURE_TYPES.SITE_LOCATION_HIERARCHIES.KEY;
     Array.from(domainsInMap).forEach((domainCode) => {
       if (newState.featureDataFetches[hierarchiesSource][hierarchiesType][domainCode]) { return; }
       newState.featureDataFetches[hierarchiesSource][hierarchiesType][domainCode] = FETCH_STATUS.AWAITING_CALL; // eslint-disable-line max-len
@@ -498,7 +499,7 @@ const reducer = (state, action) => {
           }
           // Base plot features: also pull sampling module data from the hierarchy
           if (isBasePlot(featureKey)) {
-            const hierarchy = newState.featureData[FEATURE_TYPES.SITE_LOCATION_HIERARCHIES][siteCode]; // eslint-disable-line max-len
+            const hierarchy = newState.featureData[FEATURE_TYPES.SITE_LOCATION_HIERARCHIES.KEY][siteCode]; // eslint-disable-line max-len
             const basePlot = locName.replace('all', '').replace('.', '\\.');
             const basePlotRegex = new RegExp(`^${basePlot}([a-z]{3})$`);
             newState.featureData[featureType][featureKey][siteCode][locName].samplingModules = (
@@ -523,7 +524,7 @@ const reducer = (state, action) => {
   const applyFeatureVisibilityToChildren = (feature, visible) => {
     if (newState.filters.features.visible[feature] === visible) { return; }
     newState.filters.features.visible[feature] = visible;
-    if (FEATURES[feature].type === FEATURE_TYPES.GROUP) {
+    if (FEATURES[feature].type === FEATURE_TYPES.GROUP.KEY) {
       Object.keys(FEATURES)
         .filter(f => FEATURES[f].parent === feature)
         .forEach((f) => { applyFeatureVisibilityToChildren(f, visible); });
@@ -553,7 +554,7 @@ const reducer = (state, action) => {
   };
   // Shortcuts for deailing with hierarchies
   const hierarchiesSource = FEATURE_DATA_SOURCES.REST_LOCATIONS_API;
-  const hierarchiesType = FEATURE_TYPES.SITE_LOCATION_HIERARCHIES;
+  const hierarchiesType = FEATURE_TYPES.SITE_LOCATION_HIERARCHIES.KEY;
   switch (action.type) {
     case 'setView':
       if (!Object.keys(VIEWS).includes(action.view)) { return state; }
@@ -833,55 +834,59 @@ const reducer = (state, action) => {
       newState.selection.changed = false;
       return newState;
 
-    case 'updateSitesSelection':
+    case 'updateSelectionSet':
       if (
         !action.selection || !action.selection.constructor
           || action.selection.constructor.name !== 'Set'
       ) { return state; }
       newState.selection.set = getSelectableSet(action.selection, validSet);
       newState.selection.changed = true;
-      return deriveBoundarySelections(validateSelection(newState));
+      if (FEATURE_TYPES[newState.selection.active].deriveRegionSelections) {
+        return deriveRegionSelections(validateSelection(newState));
+      }
+      return validateSelection(newState);
 
-    case 'toggleSiteSelected':
+    case 'toggleItemSelected':
       // Special case: when the selectionLimit is 1 always maintain a selection size of 1
       if (newState.selection.limit === 1) {
-        if (newState.selection.set.has(action.site) && newState.selection.set.size > 1) {
-          newState.selection.set.delete(action.site);
+        if (newState.selection.set.has(action.item) && newState.selection.set.size > 1) {
+          newState.selection.set.delete(action.item);
           newState.selection.changed = true;
         } else if (
-          !newState.selection.set.has(action.site)
-            && isSelectable(action.site, validSet)
+          !newState.selection.set.has(action.item)
+            && isSelectable(action.item, validSet)
         ) {
-          newState.selection.set = new Set([action.site]);
+          newState.selection.set = new Set([action.item]);
           newState.selection.changed = true;
         }
-      } else if (newState.selection.set.has(action.site)) {
-        newState.selection.set.delete(action.site);
+      } else if (newState.selection.set.has(action.item)) {
+        newState.selection.set.delete(action.item);
         newState.selection.changed = true;
-      } else if (isSelectable(action.site, validSet)) {
-        newState.selection.set.add(action.site);
+      } else if (isSelectable(action.item, validSet)) {
+        newState.selection.set.add(action.item);
         newState.selection.changed = true;
       }
-      return deriveBoundarySelections(validateSelection(newState));
+      if (FEATURE_TYPES[newState.selection.active].deriveRegionSelections) {
+        return deriveRegionSelections(validateSelection(newState));
+      }
+      return validateSelection(newState);
 
-    case 'toggleStateSelected':
+    case 'toggleSitesSelectedForState':
       if (!action.stateCode) { return state; }
-      /* eslint-disable max-len */
       setMethod = (
         state.selection.derived[FEATURES.STATES.KEY][action.stateCode] === SELECTION_PORTIONS.TOTAL
           ? 'delete' : 'add'
       );
       getSelectableSet(
-        newState.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.STATES.KEY][action.stateCode].sites,
+        newState.featureData[FEATURE_TYPES.STATES.KEY][FEATURES.STATES.KEY][action.stateCode].sites,
         validSet,
       ).forEach((siteCode) => {
         newState.selection.set[setMethod](siteCode);
       });
       newState.selection.changed = true;
-      return deriveBoundarySelections(validateSelection(newState));
-      /* eslint-enable max-len */
+      return deriveRegionSelections(validateSelection(newState));
 
-    case 'toggleDomainSelected':
+    case 'toggleSitesSelectedForDomain':
       if (!action.domainCode) { return state; }
       /* eslint-disable max-len */
       setMethod = (
@@ -889,14 +894,14 @@ const reducer = (state, action) => {
           ? 'delete' : 'add'
       );
       getSelectableSet(
-        newState.featureData[FEATURE_TYPES.BOUNDARIES][FEATURES.DOMAINS.KEY][action.domainCode].sites,
+        newState.featureData[FEATURE_TYPES.DOMAINS.KEY][FEATURES.DOMAINS.KEY][action.domainCode].sites,
         validSet,
       ).forEach((siteCode) => {
         newState.selection.set[setMethod](siteCode);
       });
-      newState.selection.changed = true;
-      return deriveBoundarySelections(validateSelection(newState));
       /* eslint-enable max-len */
+      newState.selection.changed = true;
+      return deriveRegionSelections(validateSelection(newState));
 
     // Default
     default:
@@ -966,7 +971,7 @@ const Provider = (props) => {
     initialState.aspectRatio.isDynamic = false;
     initialState.aspectRatio.currentValue = aspectRatio;
   }
-  if (Object.keys(SELECTABLE_FEATURE_TYPES).includes(selection)) {
+  if (Object.keys(FEATURE_TYPES).filter(k => FEATURE_TYPES[k].selectable).includes(selection)) {
     initialState.selection.active = selection;
     initialState.selection.limit = selectionLimit;
     initialState.selection.onChange = onSelectionChange;
@@ -976,6 +981,19 @@ const Provider = (props) => {
     }
     initialState.selection.changed = true;
     initialState = validateSelection(initialState);
+    // Automatically set feature visibility, table view, etc. based on selection type
+    switch (selection) {
+      case FEATURE_TYPES.STATES.KEY:
+        initialState.filters.features.visible[FEATURES.STATES.KEY] = true;
+        initialState.filters.features.visible[FEATURES.DOMAINS.KEY] = false;
+        break;
+      case FEATURE_TYPES.DOMAINS.KEY:
+        initialState.filters.features.visible[FEATURES.DOMAINS.KEY] = true;
+        initialState.filters.features.visible[FEATURES.STATES.KEY] = false;
+        break;
+      default:
+        break;
+    }
   }
   if (neonContextIsFinal && !neonContextHasError) {
     initialState = hydrateNeonContextData(initialState, neonContextData);
@@ -999,8 +1017,10 @@ const Provider = (props) => {
     // If the location is a known Domain, State, or Site then pull from NeonContext
     const {
       [FEATURES.STATES.KEY]: statesData = {},
+    } = state.featureData[FEATURE_TYPES.STATES.KEY];
+    const {
       [FEATURES.DOMAINS.KEY]: domainsData = {},
-    } = state.featureData[FEATURE_TYPES.BOUNDARIES];
+    } = state.featureData[FEATURE_TYPES.DOMAINS.KEY];
     if (Object.keys(statesData).includes(current)) {
       const { 0: latitude, 1: longitude } = statesData[current].center;
       const timeout = window.setTimeout(() => {
@@ -1059,7 +1079,7 @@ const Provider = (props) => {
     // These are not features themselves but constitute critical data in order to generate feature
     // fetches for anything from the locations API family
     const hierarchiesSource = FEATURE_DATA_SOURCES.REST_LOCATIONS_API;
-    const hierarchiesType = FEATURE_TYPES.SITE_LOCATION_HIERARCHIES;
+    const hierarchiesType = FEATURE_TYPES.SITE_LOCATION_HIERARCHIES.KEY;
     Object.keys(state.featureDataFetches[hierarchiesSource][hierarchiesType])
       .forEach((domainCode) => {
         if (state.featureDataFetches[hierarchiesSource][hierarchiesType][domainCode] !== FETCH_STATUS.AWAITING_CALL) { return; } // eslint-disable-line max-len
@@ -1132,7 +1152,7 @@ const Provider = (props) => {
     const restLocSource = FEATURE_DATA_SOURCES.REST_LOCATIONS_API;
     const restLocFetches = state.featureDataFetches[restLocSource];
     Object.keys(restLocFetches)
-      .filter(featureKey => featureKey !== FEATURE_TYPES.SITE_LOCATION_HIERARCHIES)
+      .filter(featureKey => featureKey !== FEATURE_TYPES.SITE_LOCATION_HIERARCHIES.KEY)
       .forEach((featureKey) => {
         Object.keys(state.featureDataFetches[restLocSource][featureKey]).forEach((siteCode) => {
           const featureSite = state.featureDataFetches[restLocSource][featureKey][siteCode];

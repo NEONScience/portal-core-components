@@ -18,6 +18,7 @@ import SiteMap from '../SiteMap/SiteMap';
 import Theme from '../Theme/Theme';
 import {
   DEFAULT_STATE,
+  FEATURE_TYPES,
   SITE_MAP_PROP_TYPES,
 } from '../SiteMap/SiteMapUtils';
 
@@ -47,14 +48,15 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const SelectSitesButton = (props) => {
+const MapSelectionButton = (props) => {
   const {
     label,
     icon,
-    dialogTitle,
+    dialogTitle: dialogTitleProp,
     buttonProps,
     siteMapProps,
     tooltipProps,
+    selection: selectionProp,
     validItems,
     selectedItems,
     selectionLimit,
@@ -65,17 +67,24 @@ const SelectSitesButton = (props) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [selection, setSelection] = useState(DEFAULT_STATE.selection);
 
-  let selectSitesTitle = 'Select sites';
+  let unit = '';
+  let units = '';
+  if (selectionProp) {
+    unit = FEATURE_TYPES[selectionProp].unit || '';
+    units = FEATURE_TYPES[selectionProp].units || '';
+  }
+
+  let dialogTitle = `Select ${units}`;
   if (typeof selectionLimit === 'number') {
-    selectSitesTitle = selectionLimit === 1
-      ? 'Select a site'
-      : `Select ${selectionLimit.toString()} sites`;
+    dialogTitle = selectionLimit === 1
+      ? `Select a ${unit}`
+      : `Select ${selectionLimit.toString()} ${units}`;
   }
   if (Array.isArray(selectionLimit)) {
     const { 0: min, 1: max } = selectionLimit;
-    selectSitesTitle = min === 1
-      ? `Select up to ${max.toString()} sites`
-      : `Select ${min.toString()}-${max.toString()} sites`;
+    dialogTitle = min === 1
+      ? `Select up to ${max.toString()} ${units}`
+      : `Select ${min.toString()}-${max.toString()} ${units}`;
   }
 
   const saveTooltipProps = selection.valid ? {} : {
@@ -88,7 +97,7 @@ const SelectSitesButton = (props) => {
 
   const embedProps = {
     fullscreen: true,
-    selection: 'SITES',
+    selection: selectionProp,
     aspectRatio,
     validItems,
     selectedItems,
@@ -103,19 +112,19 @@ const SelectSitesButton = (props) => {
   return (
     <div>
       <Tooltip
-        title={`${selectSitesTitle} using the observatory map`}
-        aria-label={`${selectSitesTitle} using the observatory map`}
+        title={`${dialogTitle} using the observatory map`}
+        aria-label={`${dialogTitle} using the observatory map`}
         {...tooltipProps}
       >
         <Button
           color="primary"
           variant="contained"
-          data-selenium="select-sites-button"
+          data-selenium="map-selection-button"
+          startIcon={icon ? <GlobeIcon /> : null}
           {...buttonProps}
           onClick={() => setDialogOpen(true)}
         >
           {label}
-          {icon ? <GlobeIcon className={classes.buttonIcon} fontSize="small" /> : null}
         </Button>
       </Tooltip>
       <Dialog
@@ -142,7 +151,7 @@ const SelectSitesButton = (props) => {
               </IconButton>
             </Tooltip>
             <Typography variant="h5" className={classes.appBarTitle}>
-              {dialogTitle || selectSitesTitle}
+              {dialogTitleProp || dialogTitle}
             </Typography>
             <Tooltip
               title="Complete selection and return"
@@ -169,20 +178,21 @@ const SelectSitesButton = (props) => {
   );
 };
 
-SelectSitesButton.propTypes = {
+MapSelectionButton.propTypes = {
   label: PropTypes.string,
   icon: PropTypes.bool,
   dialogTitle: PropTypes.string,
   buttonProps: PropTypes.shape(Button.propTypes),
   siteMapProps: PropTypes.shape(SITE_MAP_PROP_TYPES),
   tooltipProps: PropTypes.shape(Tooltip.propTypes),
+  selection: SITE_MAP_PROP_TYPES.selection.isRequired,
   validItems: SITE_MAP_PROP_TYPES.validItems,
   selectedItems: SITE_MAP_PROP_TYPES.selectedItems,
   selectionLimit: SITE_MAP_PROP_TYPES.selectionLimit,
   onSave: PropTypes.func,
 };
 
-SelectSitesButton.defaultProps = {
+MapSelectionButton.defaultProps = {
   label: 'Map',
   icon: true,
   dialogTitle: null,
@@ -195,6 +205,6 @@ SelectSitesButton.defaultProps = {
   onSave: () => {},
 };
 
-const WrappedDownloadDataButton = Theme.getWrappedComponent(SelectSitesButton);
+const WrappedMapSelectionButton = Theme.getWrappedComponent(MapSelectionButton);
 
-export default WrappedDownloadDataButton;
+export default WrappedMapSelectionButton;

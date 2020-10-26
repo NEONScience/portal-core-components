@@ -1,6 +1,0 @@
-{
-  "private": true,
-  "name": "select-sites-button",
-  "main": "./SelectSitesButton.jsx",
-  "module": "./SelectSitesButton.js"
-}

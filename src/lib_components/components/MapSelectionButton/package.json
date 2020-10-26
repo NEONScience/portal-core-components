@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "name": "map-selection-button",
+  "main": "./MapSelectionButton.jsx",
+  "module": "./MapSelectionButton.js"
+}

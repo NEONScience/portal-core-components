@@ -13,22 +13,65 @@ export namespace SITE_TERRAINS {
     export const TERRESTRIAL: string;
 }
 export namespace FEATURE_TYPES {
-    export const SITES: string;
-    export const SITE_LOCATION_HIERARCHIES: string;
-    export const LOCATIONS: string;
-    export const SAMPLING_POINTS: string;
-    export const BOUNDARIES: string;
-    export const GROUP: string;
-    export const OTHER: string;
+    export namespace SITES {
+        export const unit: string;
+        export const units: string;
+        export const selectable: boolean;
+        export const viewableInTable: boolean;
+        export const deriveRegionSelections: boolean;
+    }
+    export namespace SITE_LOCATION_HIERARCHIES {
+        const selectable_1: boolean;
+        export { selectable_1 as selectable };
+    }
+    export namespace LOCATIONS {
+        const selectable_2: boolean;
+        export { selectable_2 as selectable };
+        const viewableInTable_1: boolean;
+        export { viewableInTable_1 as viewableInTable };
+    }
+    export namespace SAMPLING_POINTS {
+        const selectable_3: boolean;
+        export { selectable_3 as selectable };
+    }
+    export namespace BOUNDARIES {
+        const selectable_4: boolean;
+        export { selectable_4 as selectable };
+    }
+    export namespace DOMAINS {
+        const unit_1: string;
+        export { unit_1 as unit };
+        const units_1: string;
+        export { units_1 as units };
+        const selectable_5: boolean;
+        export { selectable_5 as selectable };
+        const viewableInTable_2: boolean;
+        export { viewableInTable_2 as viewableInTable };
+    }
+    export namespace STATES {
+        const unit_2: string;
+        export { unit_2 as unit };
+        const units_2: string;
+        export { units_2 as units };
+        const selectable_6: boolean;
+        export { selectable_6 as selectable };
+        const viewableInTable_3: boolean;
+        export { viewableInTable_3 as viewableInTable };
+    }
+    export namespace GROUP {
+        const selectable_7: boolean;
+        export { selectable_7 as selectable };
+    }
+    export namespace OTHER {
+        const selectable_8: boolean;
+        export { selectable_8 as selectable };
+    }
 }
 export namespace FEATURE_DATA_SOURCES {
     export const REST_LOCATIONS_API: string;
     export const GRAPHQL_LOCATIONS_API: string;
     export const ARCGIS_ASSETS_API: string;
     export const NEON_CONTEXT: string;
-}
-export namespace SELECTABLE_FEATURE_TYPES {
-    export { SITES };
 }
 export namespace SELECTION_PORTIONS {
     export const PARTIAL: string;
@@ -384,10 +427,10 @@ export namespace LOCATION_ICON_SVG_SHAPES {
     }
 }
 export namespace FEATURES {
-    export const STATES: {
+    const STATES_1: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         hideByDefault: boolean;
         dataSource: string;
         primaryIdOnly: boolean;
@@ -398,10 +441,11 @@ export namespace FEATURES {
         };
         generalLegendGroup: boolean;
     };
-    export const DOMAINS: {
+    export { STATES_1 as STATES };
+    const DOMAINS_1: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         hideByDefault: boolean;
         dataSource: string;
         primaryIdOnly: boolean;
@@ -411,10 +455,11 @@ export namespace FEATURES {
             weight: number;
         };
     };
+    export { DOMAINS_1 as DOMAINS };
     export const FLIGHT_BOX_BOUNDARIES: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         minZoom: number;
         dataSource: string;
         featureShape: string;
@@ -425,13 +470,13 @@ export namespace FEATURES {
     };
     export const AQUATIC_WATERSHEDS: {
         name: string;
-        type: string;
+        type: any;
         minZoom: number;
     };
     export const WATERSHED_BOUNDARIES: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         minZoom: number;
         dataSource: string;
         parent: string;
@@ -443,7 +488,7 @@ export namespace FEATURES {
     };
     export const DRAINAGE_LINES: {
         name: string;
-        type: string;
+        type: any;
         minZoom: number;
         dataSource: string;
         parent: string;
@@ -455,7 +500,7 @@ export namespace FEATURES {
     export const POUR_POINTS: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         minZoom: number;
         dataSource: string;
         parent: string;
@@ -466,7 +511,7 @@ export namespace FEATURES {
     export const SAMPLING_BOUNDARIES: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         minZoom: number;
         dataSource: string;
         description: string;
@@ -480,7 +525,7 @@ export namespace FEATURES {
     export const AQUATIC_REACHES: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         minZoom: number;
         dataSource: string;
         parent: string;
@@ -493,7 +538,7 @@ export namespace FEATURES {
     export const TOWER_AIRSHEDS: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         minZoom: number;
         dataSource: string;
         parent: string;
@@ -505,14 +550,14 @@ export namespace FEATURES {
     };
     export const TERRESTRIAL_SITE_FEATURES: {
         name: string;
-        type: string;
+        type: any;
         minZoom: number;
         fetchingForFeatures: string[];
     };
     export const TOWERS: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         minZoom: number;
         dataSource: string;
         matchLocationType: string;
@@ -526,7 +571,7 @@ export namespace FEATURES {
     export const HUTS: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         minZoom: number;
         dataSource: string;
         matchLocationType: string;
@@ -540,7 +585,7 @@ export namespace FEATURES {
     export const MEGAPITS: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         minZoom: number;
         dataSource: string;
         matchLocationType: string;
@@ -553,7 +598,7 @@ export namespace FEATURES {
     };
     export const TOWER_PLOTS: {
         name: string;
-        type: string;
+        type: any;
         minZoom: number;
         description: string;
         parent: string;
@@ -561,7 +606,7 @@ export namespace FEATURES {
     export const TOWER_PHENOLOGY_PLOTS: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         description: string;
         parent: string;
         dataSource: string;
@@ -577,7 +622,7 @@ export namespace FEATURES {
     export const TOWER_BASE_PLOTS: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         description: string;
         parent: string;
         dataSource: string;
@@ -592,7 +637,7 @@ export namespace FEATURES {
     export const TOWER_SOIL_PLOTS: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         dataSource: string;
         matchLocationType: string;
         description: string;
@@ -607,7 +652,7 @@ export namespace FEATURES {
     };
     export const DISTRIBUTED_PLOTS: {
         name: string;
-        type: string;
+        type: any;
         minZoom: number;
         description: string;
         parent: string;
@@ -615,7 +660,7 @@ export namespace FEATURES {
     export const DISTRIBUTED_BIRD_GRIDS: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         description: string;
         parent: string;
         dataSource: string;
@@ -630,7 +675,7 @@ export namespace FEATURES {
     export const DISTRIBUTED_MAMMAL_GRIDS: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         description: string;
         parent: string;
         dataSource: string;
@@ -645,7 +690,7 @@ export namespace FEATURES {
     export const DISTRIBUTED_BASE_PLOTS: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         description: string;
         parent: string;
         featureShape: string;
@@ -660,7 +705,7 @@ export namespace FEATURES {
     export const DISTRIBUTED_TICK_PLOTS: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         description: string;
         parent: string;
         dataSource: string;
@@ -675,7 +720,7 @@ export namespace FEATURES {
     export const DISTRIBUTED_MOSQUITO_POINTS: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         description: string;
         parent: string;
         dataSource: string;
@@ -688,7 +733,7 @@ export namespace FEATURES {
     };
     export const PLOT_BOUNDARIES: {
         name: string;
-        type: string;
+        type: any;
         minZoom: number;
         description: string;
         parent: string;
@@ -696,7 +741,7 @@ export namespace FEATURES {
     export const TOWER_PHENOLOGY_PLOT_BOUNDARIES: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         descriptionFromParentDataFeatureKey: boolean;
         parent: string;
         parentDataFeatureKey: string;
@@ -714,7 +759,7 @@ export namespace FEATURES {
     export const TOWER_SOIL_PLOT_BOUNDARIES: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         descriptionFromParentDataFeatureKey: boolean;
         parent: string;
         parentDataFeatureKey: string;
@@ -728,7 +773,7 @@ export namespace FEATURES {
     export const DISTRIBUTED_BIRD_GRID_BOUNDARIES: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         descriptionFromParentDataFeatureKey: boolean;
         parent: string;
         parentDataFeatureKey: string;
@@ -746,7 +791,7 @@ export namespace FEATURES {
     export const DISTRIBUTED_MAMMAL_GRID_BOUNDARIES: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         descriptionFromParentDataFeatureKey: boolean;
         parent: string;
         parentDataFeatureKey: string;
@@ -764,7 +809,7 @@ export namespace FEATURES {
     export const DISTRIBUTED_TICK_PLOT_BOUNDARIES: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         descriptionFromParentDataFeatureKey: boolean;
         parent: string;
         parentDataFeatureKey: string;
@@ -781,13 +826,13 @@ export namespace FEATURES {
     };
     export const AQUATIC_SITE_FEATURES: {
         name: string;
-        type: string;
+        type: any;
         minZoom: number;
     };
     export const AQUATIC_BENCHMARKS: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         minZoom: number;
         dataSource: string;
         matchLocationType: string;
@@ -800,20 +845,20 @@ export namespace FEATURES {
     };
     export const AQUATIC_AUTOMATED_INSTRUMENTS: {
         name: string;
-        type: string;
+        type: any;
         minZoom: number;
         parent: string;
     };
     export const AQUATIC_OBSERVATIONAL_SAMPLING: {
         name: string;
-        type: string;
+        type: any;
         minZoom: number;
         parent: string;
     };
     export const AQUATIC_RIPARIAN_ASSESSMENTS: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         minZoom: number;
         dataSource: string;
         matchLocationType: string;
@@ -827,7 +872,7 @@ export namespace FEATURES {
     export const AQUATIC_WET_DEPOSITION_POINTS: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         minZoom: number;
         dataSource: string;
         matchLocationType: string;
@@ -841,7 +886,7 @@ export namespace FEATURES {
     export const AQUATIC_GROUNDWATER_WELLS: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         minZoom: number;
         dataSource: string;
         matchLocationType: string;
@@ -856,7 +901,7 @@ export namespace FEATURES {
     export const AQUATIC_METEOROLOGICAL_STATIONS: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         minZoom: number;
         dataSource: string;
         matchLocationType: string;
@@ -871,7 +916,7 @@ export namespace FEATURES {
     export const AQUATIC_DISCHARGE_POINTS: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         minZoom: number;
         dataSource: string;
         matchLocationType: string;
@@ -884,7 +929,7 @@ export namespace FEATURES {
     export const AQUATIC_FISH_POINTS: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         minZoom: number;
         dataSource: string;
         matchLocationType: string;
@@ -897,7 +942,7 @@ export namespace FEATURES {
     export const AQUATIC_PLANT_TRANSECTS: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         minZoom: number;
         dataSource: string;
         matchLocationType: string;
@@ -911,7 +956,7 @@ export namespace FEATURES {
     export const AQUATIC_SEDIMENT_POINTS: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         minZoom: number;
         dataSource: string;
         matchLocationType: string;
@@ -924,7 +969,7 @@ export namespace FEATURES {
     export const AQUATIC_STAFF_GAUGES: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         minZoom: number;
         dataSource: string;
         matchLocationType: string;
@@ -938,7 +983,7 @@ export namespace FEATURES {
     export const AQUATIC_SENSOR_STATIONS: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         minZoom: number;
         dataSource: string;
         matchLocationType: RegExp;
@@ -953,7 +998,7 @@ export namespace FEATURES {
     export const AQUATIC_BUOYS: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         minZoom: number;
         dataSource: string;
         matchLocationType: string;
@@ -966,13 +1011,13 @@ export namespace FEATURES {
     };
     export const SITE_MARKERS: {
         name: string;
-        type: string;
+        type: any;
         maxZoom: number;
     };
     export const TERRESTRIAL_CORE_SITES: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         description: string;
         parent: string;
         attributes: {
@@ -990,7 +1035,7 @@ export namespace FEATURES {
     export const TERRESTRIAL_RELOCATABLE_SITES: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         description: string;
         parent: string;
         attributes: {
@@ -1008,7 +1053,7 @@ export namespace FEATURES {
     export const AQUATIC_CORE_SITES: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         description: string;
         parent: string;
         attributes: {
@@ -1026,7 +1071,7 @@ export namespace FEATURES {
     export const AQUATIC_RELOCATABLE_SITES: {
         name: string;
         nameSingular: string;
-        type: string;
+        type: any;
         description: string;
         parent: string;
         attributes: {

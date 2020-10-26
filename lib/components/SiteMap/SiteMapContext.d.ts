@@ -62,9 +62,9 @@ declare function useSiteMapContext(): any[] | {
         widthReference: number;
     };
     table: {
-        focus: string;
+        focus: any;
         availableFeatureTypes: {
-            [x: string]: boolean;
+            [x: number]: boolean;
         };
         maxBodyHeight: null;
         maxBodyHeightUpdateFromAspectRatio: boolean;
