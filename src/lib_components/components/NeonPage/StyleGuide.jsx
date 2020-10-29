@@ -1,6 +1,8 @@
 /* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
 
+import { useErrorHandler } from 'react-error-boundary';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
@@ -165,6 +167,20 @@ const propRows = [
       <p>
         An integer between <tt>0</tt> and <tt>100</tt> indicating the quantified progress of loading
         the page. Must be combined with the <tt>loading</tt> prop to be visible.
+      </p>
+    ),
+  },
+  // resetStateAfterRuntimeError
+  {
+    name: 'resetStateAfterRuntimeError',
+    type: 'function',
+    default: 'no-op',
+    description: (
+      <p>
+        A function that fires when there is a run-time error, triggering the generic NEON Error
+        Page, and the user click the reset button. If not defined the default is action is to reload
+        the page. Define this if certain state reset operations are worth doing when hitting a
+        run-time error.
       </p>
     ),
   },
@@ -363,6 +379,8 @@ export default function StyleGuide() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [lifecycleRunTimeError, setLifecycleRunTimeError] = useState(false);
+  const handleRunTimeError = useErrorHandler();
 
   const breadcrumbs = [
     { name: 'Breadcrumb 1', href: '/bc1' },
@@ -389,6 +407,17 @@ export default function StyleGuide() {
 
   const skeletonsLink = (
     <Link href="https://material-ui.com/components/skeleton/">Material UI Skeletons</Link>
+  );
+
+  const reactErrorBoundaryLink = (
+    <Link href="https://www.npmjs.com/package/react-error-boundary">
+      react-error-boundary
+    </Link>
+  );
+  const useErrorBoundaryLink = (
+    <Link href="https://www.npmjs.com/package/react-error-boundary#useerrorhandlererror-error">
+      useErrorBoundary()
+    </Link>
   );
 
   const customStyles = {
@@ -784,6 +813,70 @@ export default function MyNeonPage() {
         {skeletionGrid}
       </Grid>
     </NeonPage>
+  );
+}
+        `}
+      </CodeBlock>
+
+      <Divider className={classes.divider} />
+      <Typography variant="h5" component="h3" gutterBottom>Run-Time Error Handling</Typography>
+      <DocBlock>
+        All NeonPage instances are wrapped in an error boundary to catch any run-time errors. If
+        a run-time error is caught the user will see a generic NEON error page with the option
+        to reset it and try again.
+      </DocBlock>
+      <DocBlock>
+        Use the <tt>resetStateAfterRuntimeError</tt> prop to fire additional logic when the reset
+        button is pressed (e.g. to modify state).
+      </DocBlock>
+      <DocBlock>
+        Click the buttons below to see contrived examples of run-time errors. Note that there are
+        limitations to what types of errors can be caught by the general error boundary and how.
+      </DocBlock>
+      <DocBlock>
+        First, reference the {reactErrorBoundaryLink} npm library; this is what is used to make the
+        the error boundary work. Just by using a NeonPage all <b>React lifecycle errors</b> will be
+        caught (e.g. errors when rendering). Errors from events, async functions, and other sources
+        require using the react-error-boundary {useErrorBoundaryLink} hook as an error handler.
+      </DocBlock>
+      <ExampleBlock>
+        <Button
+          variant="outlined"
+          onClick={() => { setLifecycleRunTimeError(true); }}
+        >
+          Trigger Run-Time Error (React Lifecycle)
+          {!lifecycleRunTimeError ? null : lifecycleRunTimeError.triggered()}
+        </Button>
+        <Button
+          variant="outlined"
+          onClick={() => { handleRunTimeError(new Error('Event run-time error triggered!')); }}
+        >
+          Trigger Run-Time Error (Event)
+        </Button>
+      </ExampleBlock>
+      <CodeBlock>
+        {`
+import React, { useState } from 'react';
+import { useErrorHandler } from 'react-error-boundary';
+
+import Button from '@material-ui/core/Button';
+
+export default function TriggerRunTimeErrorButtons() {
+  const [lifecycleRunTimeError, setLifecycleRunTimeError] = useState(false);
+  const handleRunTimeError = useErrorHandler();
+  return (
+    <div>
+
+      <Button onClick={() => { setLifecycleRunTimeError(true); }}>
+        Trigger Run-Time Error (React Lifecycle)
+        {!lifecycleRunTimeError ? null : lifecycleRunTimeError.triggered()}
+      </Button>
+
+      <Button onClick={() => { handleRunTimeError(new Error('Event run-time error triggered!')); }}>
+        Trigger Run-Time Error (Event)
+      </Button>
+
+    </div>
   );
 }
         `}

@@ -13,11 +13,14 @@ import uniqueId from 'lodash/uniqueId';
 
 import { Subject } from 'rxjs';
 
+import { ErrorBoundary } from 'react-error-boundary';
+
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Backdrop from '@material-ui/core/Backdrop';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
+import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -31,6 +34,7 @@ import CollapseIcon from '@material-ui/icons/ExpandLess';
 import ErrorIcon from '@material-ui/icons/Warning';
 import ExpandIcon from '@material-ui/icons/ExpandMore';
 import HomeIcon from '@material-ui/icons/Home';
+import ResetIcon from '@material-ui/icons/Autorenew';
 
 import Skeleton from '@material-ui/lab/Skeleton';
 
@@ -253,7 +257,60 @@ const useStyles = makeStyles(() => ({
     marginTop: Theme.spacing(-1),
     marginBottom: Theme.spacing(4),
   },
+  errorPageTitleIcon: {
+    marginRight: Theme.spacing(1.5),
+    color: Theme.palette.error.dark,
+    fontSize: '2.3rem',
+    marginBottom: '-3px',
+  },
+  errorPageCaption: {
+    display: 'block',
+    fontSize: '1rem',
+    fontFamily: 'monospace, monospace',
+    marginBottom: '36px',
+  },
 }));
+
+/**
+  NEON Error Page
+  Shown as the fallback for a general error boundary around all NEON page instances
+ */
+const NeonErrorPage = (props) => {
+  const { error, resetErrorBoundary } = props;
+  const classes = useStyles();
+  console.log('ERROR', error);
+  return (
+    <ThemeProvider theme={Theme}>
+      <CssBaseline />
+      <GlobalCss />
+      <Container className={classes.outerPageContainer}>
+        <div className={classes.pageContent} data-selenium="neon-page.content">
+          <Typography variant="h3" component="h1" className={classes.pageTitle}>
+            <ErrorIcon className={classes.errorPageTitleIcon} />
+            Something broke.
+          </Typography>
+          <div>
+            <Typography variant="caption" className={classes.errorPageCaption}>
+              {error.message}
+            </Typography>
+          </div>
+          <Button color="primary" variant="outlined" onClick={resetErrorBoundary}>
+            <ResetIcon style={{ marginRight: Theme.spacing(0.5) }} />
+            Reset and Try Again
+          </Button>
+        </div>
+      </Container>
+    </ThemeProvider>
+  );
+};
+
+NeonErrorPage.propTypes = {
+  error: PropTypes.shape({
+    message: PropTypes.string.isRequired,
+    stack: PropTypes.string,
+  }).isRequired,
+  resetErrorBoundary: PropTypes.func.isRequired,
+};
 
 const NeonPage = (props) => {
   const {
@@ -265,6 +322,7 @@ const NeonPage = (props) => {
     notification,
     outerPageContainerMaxWidth,
     progress,
+    resetStateAfterRuntimeError,
     sidebarContent,
     sidebarContainerClassName: sidebarContainerClassNameProp,
     sidebarLinks,
@@ -759,10 +817,19 @@ const NeonPage = (props) => {
     );
   };
 
-  return neonContextIsActive ? renderNeonPage() : (
+  const renderedPage = neonContextIsActive ? renderNeonPage() : (
     <NeonContext.Provider useCoreAuth useCoreHeader={useCoreHeader}>
       {renderNeonPage()}
     </NeonContext.Provider>
+  );
+
+  return (
+    <ErrorBoundary
+      FallbackComponent={NeonErrorPage}
+      onReset={resetStateAfterRuntimeError}
+    >
+      {renderedPage}
+    </ErrorBoundary>
   );
 };
 
@@ -789,6 +856,7 @@ NeonPage.propTypes = {
   notification: PropTypes.string,
   outerPageContainerMaxWidth: PropTypes.string,
   progress: PropTypes.number,
+  resetStateAfterRuntimeError: PropTypes.func,
   sidebarContent: children,
   sidebarContainerClassName: PropTypes.string,
   sidebarLinks: PropTypes.arrayOf(
@@ -827,6 +895,7 @@ NeonPage.defaultProps = {
   notification: null,
   outerPageContainerMaxWidth: '2000px',
   progress: null,
+  resetStateAfterRuntimeError: () => {},
   sidebarContent: null,
   sidebarContainerClassName: null,
   sidebarLinks: null,
