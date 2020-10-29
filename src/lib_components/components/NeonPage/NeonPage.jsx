@@ -52,6 +52,8 @@ import {
   getLiferayNotificationsApiPath,
 } from '../../util/liferayNotificationsUtil';
 
+import NeonLogo from '../../images/NSF-NEON-logo.png';
+
 const DRUPAL_THEME_CSS = REMOTE_ASSETS.DRUPAL_THEME_CSS.KEY;
 
 const cookies = new Cookies();
@@ -267,7 +269,12 @@ const useStyles = makeStyles(() => ({
     display: 'block',
     fontSize: '1rem',
     fontFamily: 'monospace, monospace',
-    marginBottom: '36px',
+    marginBottom: Theme.spacing(4),
+  },
+  errorPageLogo: {
+    height: '6em',
+    marginTop: Theme.spacing(3),
+    marginBottom: Theme.spacing(4),
   },
 }));
 
@@ -278,13 +285,19 @@ const useStyles = makeStyles(() => ({
 const NeonErrorPage = (props) => {
   const { error, resetErrorBoundary } = props;
   const classes = useStyles();
-  console.log('ERROR', error);
+  console.error(error.stack);
   return (
     <ThemeProvider theme={Theme}>
       <CssBaseline />
       <GlobalCss />
       <Container className={classes.outerPageContainer}>
         <div className={classes.pageContent} data-selenium="neon-page.content">
+          <img
+            title="NEON Data Portal"
+            alt="NEON Data Portal"
+            className={classes.errorPageLogo}
+            src={NeonLogo}
+          />
           <Typography variant="h3" component="h1" className={classes.pageTitle}>
             <ErrorIcon className={classes.errorPageTitleIcon} />
             Something broke.
@@ -294,10 +307,14 @@ const NeonErrorPage = (props) => {
               {error.message}
             </Typography>
           </div>
-          <Button color="primary" variant="outlined" onClick={resetErrorBoundary}>
-            <ResetIcon style={{ marginRight: Theme.spacing(0.5) }} />
-            Reset and Try Again
-          </Button>
+          <div style={{ display: 'flex' }}>
+            <Button startIcon={<ResetIcon />} variant="outlined" onClick={resetErrorBoundary}>
+              Reset and Try Again
+            </Button>
+            <Button startIcon={<HomeIcon />} href="/" style={{ marginLeft: Theme.spacing(4) }}>
+              Return Home
+            </Button>
+          </div>
         </div>
       </Container>
     </ThemeProvider>
