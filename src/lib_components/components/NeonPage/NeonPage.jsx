@@ -283,9 +283,12 @@ const useStyles = makeStyles(() => ({
   Shown as the fallback for a general error boundary around all NEON page instances
  */
 const NeonErrorPage = (props) => {
-  const { error, resetErrorBoundary } = props;
+  const {
+    error: { message, stack },
+    resetErrorBoundary,
+  } = props;
   const classes = useStyles();
-  console.error(error.stack);
+  console.error(stack);
   return (
     <ThemeProvider theme={Theme}>
       <CssBaseline />
@@ -304,7 +307,7 @@ const NeonErrorPage = (props) => {
           </Typography>
           <div>
             <Typography variant="caption" className={classes.errorPageCaption}>
-              {error.message}
+              {message}
             </Typography>
           </div>
           <div style={{ display: 'flex' }}>
@@ -316,6 +319,11 @@ const NeonErrorPage = (props) => {
             </Button>
           </div>
         </div>
+        <input
+          type="hidden"
+          data-gtm="react-page-run-time-error.stack"
+          value={`${stack}`}
+        />
       </Container>
     </ThemeProvider>
   );

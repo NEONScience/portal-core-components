@@ -28,6 +28,7 @@ const useStyles = makeStyles(theme => ({
     overflow: 'hidden',
   },
   example: {
+    position: 'relative',
     width: '100%',
     overflow: 'hidden',
     border: `1px dotted ${theme.palette.primary.main}`,
