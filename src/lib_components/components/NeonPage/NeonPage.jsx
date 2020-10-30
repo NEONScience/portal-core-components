@@ -288,6 +288,7 @@ const NeonErrorPage = (props) => {
     resetErrorBoundary,
   } = props;
   const classes = useStyles();
+  // eslint-disable-next-line no-console
   console.error(stack);
   return (
     <ThemeProvider theme={Theme}>

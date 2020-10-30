@@ -965,7 +965,7 @@ export default html = `
 
 
 <input class="search-form__button button js-form-submit form-submit" data-drupal-selector="edit-submit" type="submit" id="edit-submit" name="op" value="Search" />
-<input autocomplete="off" data-drupal-selector="form-2phpcoiqqalplwf9jswkmds4t3zsbzqf68agnqescda" type="hidden" name="form_build_id" value="form-2phPcoIQQalplwf9JswKMdS4t3ZsBzqF68AgNqESCDA" />
+<input autocomplete="off" data-drupal-selector="form-x0o2uedczltbmmwk3vkg3c1xc-lma7wecnm8qekx89w" type="hidden" name="form_build_id" value="form-X0o2UeDCZLtbmMWK3VKg3C1xc-lma7WeCNm8qEKX89w" />
 <input data-drupal-selector="edit-beta-search-form" type="hidden" name="form_id" value="beta_search_form" />
 
 </form>
