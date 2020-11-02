@@ -4,9 +4,12 @@ import React, {
   useState,
   useEffect,
   useReducer,
+  useCallback,
   useLayoutEffect,
 } from 'react';
 import ReactDOMServer from 'react-dom/server';
+
+import { useId } from 'react-id-generator';
 
 import L from 'leaflet';
 
@@ -244,6 +247,7 @@ const useStyles = makeStyles(theme => ({
 const SiteMapLeaflet = () => {
   const classes = useStyles(Theme);
   const mapRef = useRef(null);
+  const [mapInstanceId] = useId();
 
   // State, Dispatch, and other stuff from SiteMapContext
   const [state, dispatch] = SiteMapContext.useSiteMapContext();
@@ -339,6 +343,17 @@ const SiteMapLeaflet = () => {
     state.map.bounds,
     state.view,
   ]);
+
+  /**
+     Callback
+     Call map.invalidateSize to fix any tiling errors. We call this when the map is first ready
+     to get around race conditions with leaflet initialization and loading the sitemap in dynamic
+     containers like dialogs.
+  */
+  const invalidateSize = useCallback(() => {
+    if (!mapRef || !mapRef.current || !mapRef.current.leafletElement) { return; }
+    mapRef.current.leafletElement.invalidateSize();
+  }, []);
 
   /**
     Effect
@@ -837,6 +852,7 @@ const SiteMapLeaflet = () => {
   return (
     <React.Fragment>
       <Map
+        id={`sitemap-${mapInstanceId}`}
         ref={mapRef}
         className={className}
         style={{
@@ -849,6 +865,7 @@ const SiteMapLeaflet = () => {
         maxZoom={MAP_ZOOM_RANGE[1]}
         onMoveEnd={handleMoveEnd}
         onZoomEnd={handleZoomEnd}
+        whenReady={invalidateSize}
         onBaseLayerChange={handleBaseLayerChange}
         worldCopyJump
         data-component="SiteMap"

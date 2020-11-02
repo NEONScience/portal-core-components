@@ -44,6 +44,7 @@
     "react-dom": "^16.8.6",
     "react-error-boundary": "^3.0.2",
     "react-highlight.js": "^1.0.7",
+    "react-id-generator": "^3.0.1",
     "react-inlinesvg": "^1.2.0",
     "react-leaflet": "^2.6.1",
     "react-leaflet-grouped-layer-control": "0.0.13",

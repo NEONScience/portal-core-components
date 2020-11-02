@@ -499,11 +499,11 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
-          <a href="https://data.neonscience.org/data-api" class="menu__link">API / GraphQL</a>
+          <a href="https://data.neonscience.org/data-api" class="menu__link">API &amp; GraphQL</a>
 
                   </li>
               <li  class="menu__item">
-          <a href="https://data.neonscience.org/news" class="menu__link">Data Notifications</a>
+          <a href="https://data.neonscience.org/news" class="menu__link">Data News &amp; Notifications</a>
 
                   </li>
               <li  class="menu__item menu__item--expanded">
@@ -938,7 +938,7 @@ export default html = `
 </div><div class="search-form__actions form-actions js-form-wrapper form-wrapper" id="edit-actions-mobile">
 
 <input class="search-form__button button js-form-submit form-submit" id="edit-submit-mobile" data-drupal-selector="edit-submit" type="submit" name="op" value="Search" />
-</div><input autocomplete="off" data-drupal-selector="form-3zj8bf3edfpvfn7-ay7z5eprv5adqcggmn7bs74zlla" type="hidden" name="form_build_id" value="form-3ZJ8bF3EDfpVfn7-aY7z5eprV5adqCgGMn7BS74ZlLA" />
+</div><input autocomplete="off" data-drupal-selector="form-v2tecvcfdeihdzjnjkf3qufbye2wtq8ybguvprdxxlq" type="hidden" name="form_build_id" value="form-V2TEcvcFdEIHdzJnJKf3QuFbYe2wtQ8YbguVprdXXLQ" />
 <input data-drupal-selector="edit-mobile-beta-search-form" type="hidden" name="form_id" value="mobile_beta_search_form" />
 
 </form>
@@ -965,7 +965,7 @@ export default html = `
 
 
 <input class="search-form__button button js-form-submit form-submit" data-drupal-selector="edit-submit" type="submit" id="edit-submit" name="op" value="Search" />
-<input autocomplete="off" data-drupal-selector="form-x0o2uedczltbmmwk3vkg3c1xc-lma7wecnm8qekx89w" type="hidden" name="form_build_id" value="form-X0o2UeDCZLtbmMWK3VKg3C1xc-lma7WeCNm8qEKX89w" />
+<input autocomplete="off" data-drupal-selector="form-unb5l7opauv-yxnwetisqd1-aotuz7xsrnftao68e40" type="hidden" name="form_build_id" value="form-UnB5l7OPauV_yxNWETISqD1-aoTUz7XSRnFTaO68E40" />
 <input data-drupal-selector="edit-beta-search-form" type="hidden" name="form_id" value="beta_search_form" />
 
 </form>
