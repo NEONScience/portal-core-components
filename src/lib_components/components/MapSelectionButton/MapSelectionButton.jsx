@@ -65,6 +65,7 @@ const MapSelectionButton = (props) => {
 
   const classes = useStyles(Theme);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogEntered, setDialogEntered] = useState(false);
   const [selection, setSelection] = useState(DEFAULT_STATE.selection);
 
   let unit = '';
@@ -131,6 +132,7 @@ const MapSelectionButton = (props) => {
         fullScreen
         open={dialogOpen}
         onClose={() => setDialogOpen(false)}
+        onEntered={() => setDialogEntered(true)}
       >
         <AppBar color="secondary" className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
@@ -172,7 +174,7 @@ const MapSelectionButton = (props) => {
             </Tooltip>
           </Toolbar>
         </AppBar>
-        <SiteMap {...finalEmbedProps} />
+        {dialogEntered ? <SiteMap {...finalEmbedProps} /> : null}
       </Dialog>
     </div>
   );

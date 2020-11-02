@@ -13,11 +13,14 @@ import uniqueId from 'lodash/uniqueId';
 
 import { Subject } from 'rxjs';
 
+import { ErrorBoundary } from 'react-error-boundary';
+
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Backdrop from '@material-ui/core/Backdrop';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
+import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -31,6 +34,7 @@ import CollapseIcon from '@material-ui/icons/ExpandLess';
 import ErrorIcon from '@material-ui/icons/Warning';
 import ExpandIcon from '@material-ui/icons/ExpandMore';
 import HomeIcon from '@material-ui/icons/Home';
+import ResetIcon from '@material-ui/icons/Autorenew';
 
 import Skeleton from '@material-ui/lab/Skeleton';
 
@@ -47,6 +51,8 @@ import {
   generateNotificationId,
   getLiferayNotificationsApiPath,
 } from '../../util/liferayNotificationsUtil';
+
+import NeonLogo from '../../images/NSF-NEON-logo.png';
 
 const DRUPAL_THEME_CSS = REMOTE_ASSETS.DRUPAL_THEME_CSS.KEY;
 
@@ -253,7 +259,84 @@ const useStyles = makeStyles(() => ({
     marginTop: Theme.spacing(-1),
     marginBottom: Theme.spacing(4),
   },
+  errorPageTitleIcon: {
+    marginRight: Theme.spacing(1.5),
+    color: Theme.palette.error.dark,
+    fontSize: '2.3rem',
+    marginBottom: '-3px',
+  },
+  errorPageCaption: {
+    display: 'block',
+    fontSize: '1rem',
+    fontFamily: 'monospace, monospace',
+    marginBottom: Theme.spacing(4),
+  },
+  errorPageLogo: {
+    height: '6em',
+    marginTop: Theme.spacing(3),
+    marginBottom: Theme.spacing(4),
+  },
 }));
+
+/**
+  NEON Error Page
+  Shown as the fallback for a general error boundary around all NEON page instances
+ */
+const NeonErrorPage = (props) => {
+  const {
+    error: { message, stack },
+    resetErrorBoundary,
+  } = props;
+  const classes = useStyles();
+  // eslint-disable-next-line no-console
+  console.error(stack);
+  return (
+    <ThemeProvider theme={Theme}>
+      <CssBaseline />
+      <GlobalCss />
+      <Container className={classes.outerPageContainer}>
+        <div className={classes.pageContent} data-selenium="neon-page.content">
+          <img
+            title="NEON Data Portal"
+            alt="NEON Data Portal"
+            className={classes.errorPageLogo}
+            src={NeonLogo}
+          />
+          <Typography variant="h3" component="h1" className={classes.pageTitle}>
+            <ErrorIcon className={classes.errorPageTitleIcon} />
+            Something broke.
+          </Typography>
+          <div>
+            <Typography variant="caption" className={classes.errorPageCaption}>
+              {message}
+            </Typography>
+          </div>
+          <div style={{ display: 'flex' }}>
+            <Button startIcon={<ResetIcon />} variant="outlined" onClick={resetErrorBoundary}>
+              Reset and Try Again
+            </Button>
+            <Button startIcon={<HomeIcon />} href="/" style={{ marginLeft: Theme.spacing(4) }}>
+              Return Home
+            </Button>
+          </div>
+        </div>
+        <input
+          type="hidden"
+          data-gtm="react-page-run-time-error.stack"
+          value={`${stack}`}
+        />
+      </Container>
+    </ThemeProvider>
+  );
+};
+
+NeonErrorPage.propTypes = {
+  error: PropTypes.shape({
+    message: PropTypes.string.isRequired,
+    stack: PropTypes.string,
+  }).isRequired,
+  resetErrorBoundary: PropTypes.func.isRequired,
+};
 
 const NeonPage = (props) => {
   const {
@@ -265,6 +348,7 @@ const NeonPage = (props) => {
     notification,
     outerPageContainerMaxWidth,
     progress,
+    resetStateAfterRuntimeError,
     sidebarContent,
     sidebarContainerClassName: sidebarContainerClassNameProp,
     sidebarLinks,
@@ -759,10 +843,19 @@ const NeonPage = (props) => {
     );
   };
 
-  return neonContextIsActive ? renderNeonPage() : (
+  const renderedPage = neonContextIsActive ? renderNeonPage() : (
     <NeonContext.Provider useCoreAuth useCoreHeader={useCoreHeader}>
       {renderNeonPage()}
     </NeonContext.Provider>
+  );
+
+  return (
+    <ErrorBoundary
+      FallbackComponent={NeonErrorPage}
+      onReset={resetStateAfterRuntimeError}
+    >
+      {renderedPage}
+    </ErrorBoundary>
   );
 };
 
@@ -789,6 +882,7 @@ NeonPage.propTypes = {
   notification: PropTypes.string,
   outerPageContainerMaxWidth: PropTypes.string,
   progress: PropTypes.number,
+  resetStateAfterRuntimeError: PropTypes.func,
   sidebarContent: children,
   sidebarContainerClassName: PropTypes.string,
   sidebarLinks: PropTypes.arrayOf(
@@ -827,6 +921,7 @@ NeonPage.defaultProps = {
   notification: null,
   outerPageContainerMaxWidth: '2000px',
   progress: null,
+  resetStateAfterRuntimeError: () => {},
   sidebarContent: null,
   sidebarContainerClassName: null,
   sidebarLinks: null,

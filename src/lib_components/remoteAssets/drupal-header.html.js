@@ -167,6 +167,10 @@ export default html = `
           <a href="/impact/spotlights" class="menu__link" data-drupal-link-system-path="node/10905">Spotlights</a>
 
                   </li>
+              <li  class="menu__item">
+          <a href="/impact/papers-publications" class="menu__link" data-drupal-link-system-path="node/10915">Papers &amp; Publications</a>
+
+                  </li>
               <li  class="menu__item menu__item--expanded">
           <a href="/impact/newsroom" class="menu__link" data-drupal-link-system-path="node/10890">Newsroom</a>
 
@@ -175,7 +179,7 @@ export default html = `
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
-          <a href="/observatory/observatory-blog/newsletter-archive" class="menu__link" data-drupal-link-system-path="node/7826">Newsletter Archive</a>
+          <a href="/impact/newsroom/newsletter-archive" class="menu__link" data-drupal-link-system-path="node/7826">Newsletter Archive</a>
 
                   </li>
       
@@ -226,7 +230,7 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
-          <a href="/get-involved/engagement" class="menu__link" data-drupal-link-system-path="node/10556">Engagement</a>
+          <a href="/get-involved/engagement" class="menu__link" data-drupal-link-system-path="node/10556">Community Engagement</a>
 
                   </li>
               <li  class="menu__item menu__item--expanded">
@@ -339,15 +343,23 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
-          <a href="/resources/learning-hub/data-education-fellows" class="menu__link" data-drupal-link-system-path="node/7828">Data Education Fellows</a>
-
-                  </li>
-              <li  class="menu__item">
           <a href="/resources/learning-hub/tutorials" class="menu__link" data-drupal-link-system-path="node/10896">Tutorials</a>
 
                   </li>
               <li  class="menu__item">
-          <a href="/workshops-courses" class="menu__link" data-drupal-link-system-path="node/6529">Workshops &amp; Courses</a>
+          <a href="/resources/learning-hub/workshops-courses" class="menu__link" data-drupal-link-system-path="node/6529">Workshops &amp; Courses</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="/resources/learning-hub/teaching-modules" class="menu__link" data-drupal-link-system-path="node/10909">Teaching Modules</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="/resources/learning-hub/faculty-mentoring-networks" class="menu__link" data-drupal-link-system-path="node/7463">Faculty Mentoring Networks</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="/resources/learning-hub/data-education-fellows" class="menu__link" data-drupal-link-system-path="node/7828">Data Education Fellows</a>
 
                   </li>
       
@@ -393,6 +405,10 @@ export default html = `
   
 
             
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://data.neonscience.org/documents" class="menu__link">NEON Document Library</a>
 
                   </li>
       
@@ -474,35 +490,31 @@ export default html = `
             
                       <ul  class="menu menu--main" data-depth="2">
 
+              <li  class="menu__item">
+          <a href="https://data.neonscience.org/data-products/explore" class="menu__link">Explore Data Products</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="/data-samples/data/spatial-data-maps" class="menu__link" data-drupal-link-system-path="node/10547">Spatial Data &amp; Maps</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://data.neonscience.org/data-api" class="menu__link">API / GraphQL</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://data.neonscience.org/news" class="menu__link">Data Notifications</a>
+
+                  </li>
               <li  class="menu__item menu__item--expanded">
-          <a href="/data-samples/data-management" class="menu__link" data-drupal-link-system-path="node/10557">Data Management</a>
+          <a href="https://data.neonscience.org/prototype-search" class="menu__link">Prototype Data</a>
 
           
             
                       <ul  class="menu menu--main" data-depth="3">
 
               <li  class="menu__item">
-          <a href="/data-samples/data-management/data-availability" class="menu__link" data-drupal-link-system-path="node/10298">Data Availability</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="/data-samples/data-management/data-formats-conventions" class="menu__link" data-drupal-link-system-path="node/10560">Data Formats and Conventions</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="/data-samples/data-management/data-processing" class="menu__link" data-drupal-link-system-path="node/8470">Data Processing</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="/data-samples/data-management/data-quality-program" class="menu__link" data-drupal-link-system-path="node/10299">Data Quality</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="/data-samples/data-management/data-revisions-releases" class="menu__link" data-drupal-link-system-path="node/10559">Data Product Revisions and Releases</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="/data-samples/data-management/externally-hosted-data" class="menu__link" data-drupal-link-system-path="node/10552">Externally Hosted Data</a>
+          <a href="https://data.neonscience.org/prototype-ingest" class="menu__link">Prototype Data Ingest</a>
 
                   </li>
       
@@ -510,6 +522,10 @@ export default html = `
   
 
             
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://data.neonscience.org/web/external-lab-ingest" class="menu__link">External Lab Data Ingest (restricted)</a>
 
                   </li>
       
@@ -534,11 +550,15 @@ export default html = `
                       <ul  class="menu menu--main" data-depth="3">
 
               <li  class="menu__item">
-          <a href="/data/samples-specimens/archival-samples-catalog" class="menu__link" data-drupal-link-system-path="node/6223">Sample Types</a>
+          <a href="/data-samples/samples/sample-types" class="menu__link" data-drupal-link-system-path="node/6223">Sample Types</a>
 
                   </li>
               <li  class="menu__item">
           <a href="/data-samples/samples/sample-repositories" class="menu__link" data-drupal-link-system-path="node/10907">Sample Repositories</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://data.neonscience.org/sample-explorer" class="menu__link">Sample Explorer</a>
 
                   </li>
               <li  class="menu__item">
@@ -558,6 +578,10 @@ export default html = `
                   </li>
               <li  class="menu__item">
           <a href="/data-samples/samples/sample-quality" class="menu__link" data-drupal-link-system-path="node/10908">Sample Quality</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://data.neonscience.org/taxonomic-lists" class="menu__link">Taxonomic Lists</a>
 
                   </li>
       
@@ -829,6 +853,44 @@ export default html = `
             
 
                   </li>
+              <li  class="menu__item menu__item--expanded">
+          <a href="/data-samples/data-management" class="menu__link" data-drupal-link-system-path="node/10557">Data Management</a>
+
+          
+            
+                      <ul  class="menu menu--main" data-depth="2">
+
+              <li  class="menu__item">
+          <a href="/data-samples/data-management/data-availability" class="menu__link" data-drupal-link-system-path="node/10298">Data Availability</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="/data-samples/data-management/data-formats-conventions" class="menu__link" data-drupal-link-system-path="node/10560">Data Formats and Conventions</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="/data-samples/data-management/data-processing" class="menu__link" data-drupal-link-system-path="node/8470">Data Processing</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="/data-samples/data-management/data-quality-program" class="menu__link" data-drupal-link-system-path="node/10299">Data Quality</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="/data-samples/data-management/data-revisions-releases" class="menu__link" data-drupal-link-system-path="node/10559">Data Product Revisions and Releases</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="/data-samples/data-management/externally-hosted-data" class="menu__link" data-drupal-link-system-path="node/10552">Externally Hosted Data</a>
+
+                  </li>
+      
+          </ul>
+  
+
+            
+
+                  </li>
               <li  class="menu__item">
           <a href="/data-samples/data-policies-citation" class="menu__link" data-drupal-link-system-path="node/6294">Data Policies &amp; Citation Guidelines</a>
 
@@ -876,7 +938,7 @@ export default html = `
 </div><div class="search-form__actions form-actions js-form-wrapper form-wrapper" id="edit-actions-mobile">
 
 <input class="search-form__button button js-form-submit form-submit" id="edit-submit-mobile" data-drupal-selector="edit-submit" type="submit" name="op" value="Search" />
-</div><input autocomplete="off" data-drupal-selector="form-2sdexbrfz2lg4m0n-tmq-qr5r1gfa-v6d2agcxyto6k" type="hidden" name="form_build_id" value="form-2SdeXBrfZ2lG4m0N-tMQ_qR5r1GFa-v6d2AGCXYtO6k" />
+</div><input autocomplete="off" data-drupal-selector="form-3zj8bf3edfpvfn7-ay7z5eprv5adqcggmn7bs74zlla" type="hidden" name="form_build_id" value="form-3ZJ8bF3EDfpVfn7-aY7z5eprV5adqCgGMn7BS74ZlLA" />
 <input data-drupal-selector="edit-mobile-beta-search-form" type="hidden" name="form_id" value="mobile_beta_search_form" />
 
 </form>
@@ -903,7 +965,7 @@ export default html = `
 
 
 <input class="search-form__button button js-form-submit form-submit" data-drupal-selector="edit-submit" type="submit" id="edit-submit" name="op" value="Search" />
-<input autocomplete="off" data-drupal-selector="form-snpebdykjaqtt36uhr3xdmxkqd32jmmogq22snwjuse" type="hidden" name="form_build_id" value="form-snpeBDykJaqtt36UHr3xdMXKqd32jMmOGQ22SNWjusE" />
+<input autocomplete="off" data-drupal-selector="form-x0o2uedczltbmmwk3vkg3c1xc-lma7wecnm8qekx89w" type="hidden" name="form_build_id" value="form-X0o2UeDCZLtbmMWK3VKg3C1xc-lma7WeCNm8qEKX89w" />
 <input data-drupal-selector="edit-beta-search-form" type="hidden" name="form_id" value="beta_search_form" />
 
 </form>

@@ -13,6 +13,7 @@ declare namespace NeonPage {
         export const notification: PropTypes.Requireable<string>;
         export const outerPageContainerMaxWidth: PropTypes.Requireable<string>;
         export const progress: PropTypes.Requireable<number>;
+        export const resetStateAfterRuntimeError: PropTypes.Requireable<(...args: any[]) => any>;
         export { children as sidebarContent };
         export const sidebarContainerClassName: PropTypes.Requireable<string>;
         export const sidebarLinks: PropTypes.Requireable<(PropTypes.InferProps<{
@@ -51,6 +52,8 @@ declare namespace NeonPage {
         export { outerPageContainerMaxWidth_1 as outerPageContainerMaxWidth };
         const progress_1: null;
         export { progress_1 as progress };
+        export function resetStateAfterRuntimeError_1(): void;
+        export { resetStateAfterRuntimeError_1 as resetStateAfterRuntimeError };
         export const sidebarContent: null;
         const sidebarContainerClassName_1: null;
         export { sidebarContainerClassName_1 as sidebarContainerClassName };
