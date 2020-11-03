@@ -1262,6 +1262,7 @@ export namespace SITE_MAP_PROP_TYPES {
     export const mapCenter: PropTypes.Requireable<(number | null | undefined)[]>;
     export const mapZoom: PropTypes.Requireable<number>;
     export const mapBaseLayer: PropTypes.Requireable<string>;
+    export const tableFullHeight: PropTypes.Requireable<boolean>;
     export const location: PropTypes.Requireable<string>;
     export const selection: PropTypes.Requireable<string>;
     export const selectedItems: PropTypes.Requireable<(string | null | undefined)[]>;
@@ -1285,6 +1286,8 @@ export namespace SITE_MAP_DEFAULT_PROPS {
     export { mapZoom_1 as mapZoom };
     const mapBaseLayer_1: string;
     export { mapBaseLayer_1 as mapBaseLayer };
+    const tableFullHeight_1: boolean;
+    export { tableFullHeight_1 as tableFullHeight };
     const location_1: null;
     export { location_1 as location };
     const selection_1: null;

@@ -938,6 +938,7 @@ const Provider = (props) => {
     selectedItems,
     selectionLimit,
     onSelectionChange,
+    tableFullHeight,
     children,
   } = props;
 
@@ -962,6 +963,9 @@ const Provider = (props) => {
     center: mapCenter,
     baseLayer: mapBaseLayer,
   };
+  if (tableFullHeight) {
+    initialState.table.fullHeight = true;
+  }
   if (typeof locationProp === 'string') {
     initialState.focusLocation.current = locationProp;
     initialState.focusLocation.fetch.status = FETCH_STATUS.AWAITING_CALL;

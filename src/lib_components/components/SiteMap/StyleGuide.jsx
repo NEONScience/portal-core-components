@@ -238,6 +238,25 @@ const propRows = [
     ),
   },
   {
+    name: 'tableFullHeight',
+    type: 'boolean',
+    default: 'false',
+    description: (
+      <React.Fragment>
+        <p>
+          Whether the table view of the SiteMap should be unbounded by the aspect ratio restrictions
+          of the map view and be allowed to extend to arbitrarirly large vertical height. This also
+          changes the options offered for table page size with the largest size going up to 100 and
+          that max size selected by default.
+        </p>
+        <p>
+          It recommended to keep this false when <tt>fullScreen</tt> is true as it may make some
+          table rows and the table pager impossible to reach.
+        </p>
+      </React.Fragment>
+    ),
+  },
+  {
     name: 'unusableVerticalSpace',
     type: 'integer',
     default: '0',
@@ -303,7 +322,7 @@ const propRows = [
     ),
   },
 ];
-// TOWER103599
+
 export default function StyleGuide() {
   const classes = useStyles(Theme);
 
@@ -359,6 +378,25 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
       <CodeBlock>
         {`
 <SiteMap location="D08" />
+        `}
+      </CodeBlock>
+
+      <Divider className={classes.divider} />
+      <Typography variant="h4" component="h2" gutterBottom>Full Height Table View</Typography>
+
+      <DocBlock>
+        Use the <tt>tableFullHeight</tt> prop to allow for the table view to be unbounded by the
+        aspect ratio limitations imposed on the map. The result is, when switching into table view,
+        the height of the component may grow arbitrarily large with table content. Larger table page
+        sizes are also afforded.
+      </DocBlock>
+
+      <ExampleBlock>
+        <SiteMap tableFullHeight />
+      </ExampleBlock>
+      <CodeBlock>
+        {`
+<SiteMap tableFullHeight />
         `}
       </CodeBlock>
 

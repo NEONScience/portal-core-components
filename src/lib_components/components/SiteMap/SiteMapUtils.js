@@ -1398,6 +1398,7 @@ export const DEFAULT_STATE = {
       [FEATURE_TYPES.SITES.KEY]: false,
       [FEATURE_TYPES.LOCATIONS.KEY]: false,
     },
+    fullHeight: false,
     maxBodyHeight: null,
     // A way for the SiteMapContainer resizeHandler to inform the SiteMapTable to recalc body height
     maxBodyHeightUpdateFromAspectRatio: false,
@@ -1590,49 +1591,51 @@ const SelectionLimitPropType = (props, propName) => {
 };
 
 export const SITE_MAP_PROP_TYPES = {
-  // Top-level Props
+  // Top-level props
   view: PropTypes.oneOf(Object.keys(VIEWS).map(k => k.toLowerCase())),
   aspectRatio: PropTypes.number,
   fullscreen: PropTypes.bool,
   unusableVerticalSpace: PropTypes.number,
-  // Map Props
+  // Map props
   mapCenter: PropTypes.arrayOf(PropTypes.number),
   mapZoom: PropTypes.number,
   mapBaseLayer: PropTypes.oneOf(Object.keys(BASE_LAYERS)),
-  // mapOverlays: PropTypes.arrayOf(Object.keys(OVERLAYS)),
+  // Table props
+  tableFullHeight: PropTypes.bool,
   // Initial map focus (overrides mapCenter and mapZoom)
   location: PropTypes.string,
-  // Selection Props
+  // Selection props
   selection: PropTypes.oneOf(Object.keys(FEATURE_TYPES).filter(k => FEATURE_TYPES[k].selectable)),
   selectedItems: PropTypes.arrayOf(PropTypes.string),
   validItems: PropTypes.arrayOf(PropTypes.string),
   selectionLimit: SelectionLimitPropType,
   onSelectionChange: PropTypes.func,
-  // Filter Props
+  // Filter props
   search: PropTypes.string,
   features: PropTypes.arrayOf(PropTypes.oneOf(Object.keys(FEATURES))),
 };
 
 export const SITE_MAP_DEFAULT_PROPS = {
-  // Top-level Props
+  // Top-level props
   view: VIEWS.MAP.toLowerCase(),
   aspectRatio: null,
   fullscreen: false,
   unusableVerticalSpace: 0,
-  // Map Props
+  // Map props
   mapCenter: OBSERVATORY_CENTER,
   mapZoom: null,
   mapBaseLayer: Object.keys(BASE_LAYERS)[0],
-  // mapOverlays: null,
+  // Table props
+  tableFullHeight: false,
   // Initial map focus (overrides mapCenter and mapZoom)
   location: null,
-  // Selection Props
+  // Selection props
   selection: null,
   selectedItems: [],
   validItems: null,
   selectionLimit: null,
   onSelectionChange: () => {},
-  // Filter Props
+  // Filter props
   search: null,
   features: null,
 };

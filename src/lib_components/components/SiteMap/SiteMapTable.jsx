@@ -167,6 +167,7 @@ const SiteMapTable = () => {
   const [state, dispatch] = SiteMapContext.useSiteMapContext();
   const {
     focus,
+    fullHeight,
     maxBodyHeight,
     maxBodyHeightUpdateFromAspectRatio,
   } = state.table;
@@ -766,8 +767,45 @@ const SiteMapTable = () => {
   /**
      Render Table
   */
+  const tableOptions = {
+    padding: 'dense',
+    filtering: true,
+    columnsButton: true,
+    headerStyle: {
+      position: 'sticky',
+      top: 0,
+      backgroundColor: Theme.palette.grey[50],
+    },
+    pageSizeOptions: [5, 10, 20, 50, 100],
+    rowStyle: (row) => {
+      if (selectionActive) {
+        if (!rowIsSelectable(row)) {
+          return { opacity: 0.65 };
+        }
+        if (rowIsSelected(row)) {
+          return { backgroundColor: COLORS.LIGHT_BLUE[50] };
+        }
+      }
+      return {};
+    },
+    selection: selectionActive,
+    selectionProps: !selectionActive ? null : row => ({
+      style: { margin: Theme.spacing(0, 0.5) },
+      disabled: !rowIsSelectable(row),
+    }),
+  };
+  if (fullHeight) {
+    tableOptions.pageSize = 50;
+  } else {
+    tableOptions.maxBodyHeight = `${maxBodyHeight || MIN_TABLE_MAX_BODY_HEIGHT}px`;
+  }
   return (
-    <div ref={tableRef} className={classes.tableContainer} data-selenium="sitemap-content-table">
+    <div
+      ref={tableRef}
+      className={classes.tableContainer}
+      style={fullHeight ? { position: 'relative' } : {}}
+      data-selenium="sitemap-content-table"
+    >
       <MaterialTable
         icons={MaterialTableIcons}
         components={components}
@@ -775,33 +813,7 @@ const SiteMapTable = () => {
         data={rows}
         localization={localization}
         title={null}
-        options={{
-          padding: 'dense',
-          filtering: true,
-          columnsButton: true,
-          headerStyle: {
-            position: 'sticky',
-            top: 0,
-            backgroundColor: Theme.palette.grey[50],
-          },
-          maxBodyHeight: `${maxBodyHeight || MIN_TABLE_MAX_BODY_HEIGHT}px`,
-          rowStyle: (row) => {
-            if (selectionActive) {
-              if (!rowIsSelectable(row)) {
-                return { opacity: 0.65 };
-              }
-              if (rowIsSelected(row)) {
-                return { backgroundColor: COLORS.LIGHT_BLUE[50] };
-              }
-            }
-            return {};
-          },
-          selection: selectionActive,
-          selectionProps: !selectionActive ? null : row => ({
-            style: { margin: Theme.spacing(0, 0.5) },
-            disabled: !rowIsSelectable(row),
-          }),
-        }}
+        options={tableOptions}
         onSelectionChange={!selectionActive ? null : (newRows) => {
           const action = { type: 'updateSelectionSet', selection: new Set() };
           newRows.filter(row => row.tableData.checked).forEach((row) => {

@@ -326,6 +326,7 @@ const SiteMapContainer = (props) => {
     aspectRatio,
     featureData,
     view: { current: view },
+    table: { fullHeight: tableFullHeight },
     selection: {
       set: selection,
       active: selectionActive,
@@ -339,7 +340,9 @@ const SiteMapContainer = (props) => {
 
   const contentDivProps = {
     className: classes.contentContainer,
-    style: { paddingBottom: `${(aspectRatio.currentValue || 0.75) * 100}%` },
+    style: tableFullHeight
+      ? { height: 'auto', overflow: 'auto' }
+      : { paddingBottom: `${(aspectRatio.currentValue || 0.75) * 100}%` },
   };
 
   const legendRef = useRef(null);
@@ -786,26 +789,29 @@ const SiteMapContainer = (props) => {
   /**
      Render - Vertical resize Elements
   */
-  const renderVerticalResizeButton = () => (fullscreen ? null : (
-    <Tooltip
-      placement="left"
-      enterDelay={500}
-      enterNextDelay={200}
-      title={`Resize ${view === VIEWS.MAP ? 'map' : 'table'} vertically`}
-    >
-      <IconButton
-        draggable
-        type="button"
-        ref={resizeButtonRef}
-        className={classes.resizeButton}
-        onDragStart={resizeVerticallyDragStart}
-        onDrag={resizeVerticallyDrag}
-        onDragEnd={resizeVerticallyDragEnd}
+  const renderVerticalResizeButton = () => {
+    if (fullscreen || (view === VIEWS.TABLE && tableFullHeight)) { return null; }
+    return (
+      <Tooltip
+        placement="left"
+        enterDelay={500}
+        enterNextDelay={200}
+        title={`Resize ${view === VIEWS.MAP ? 'map' : 'table'} vertically`}
       >
-        <VertResizeIcon fontSize="small" />
-      </IconButton>
-    </Tooltip>
-  ));
+        <IconButton
+          draggable
+          type="button"
+          ref={resizeButtonRef}
+          className={classes.resizeButton}
+          onDragStart={resizeVerticallyDragStart}
+          onDrag={resizeVerticallyDrag}
+          onDragEnd={resizeVerticallyDragEnd}
+        >
+          <VertResizeIcon fontSize="small" />
+        </IconButton>
+      </Tooltip>
+    );
+  };
 
   /**
      Render - Single Feature Option

@@ -19,6 +19,7 @@ declare namespace Provider {
         mapCenter: PropTypes.Requireable<(number | null | undefined)[]>;
         mapZoom: PropTypes.Requireable<number>;
         mapBaseLayer: PropTypes.Requireable<string>;
+        tableFullHeight: PropTypes.Requireable<boolean>;
         location: PropTypes.Requireable<string>;
         selection: PropTypes.Requireable<string>;
         selectedItems: PropTypes.Requireable<(string | null | undefined)[]>;
@@ -66,6 +67,7 @@ declare function useSiteMapContext(): any[] | {
         availableFeatureTypes: {
             [x: number]: boolean;
         };
+        fullHeight: boolean;
         maxBodyHeight: null;
         maxBodyHeightUpdateFromAspectRatio: boolean;
     };

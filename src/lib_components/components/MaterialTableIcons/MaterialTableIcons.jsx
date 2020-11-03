@@ -15,7 +15,7 @@ import LastPage from '@material-ui/icons/LastPage';
 import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
-import ViewColumn from '@material-ui/icons/ViewColumn';
+import ViewColumn from '@material-ui/icons/TableChart';
 
 const MaterialTableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
