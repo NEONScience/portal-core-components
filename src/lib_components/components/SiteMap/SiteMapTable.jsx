@@ -39,6 +39,7 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     height: '100%',
     backgroundColor: 'white',
+    overflowWrap: 'normal',
     '& table': {
       margin: '0px !important',
       borderCollapse: 'separate',
@@ -91,6 +92,16 @@ const useStyles = makeStyles(theme => ({
     // No other way to have material table NOT show a selection title in the toolbar.
     '& div.MuiToolbar-root > div:not(:nth-last-child(-n+2))': {
       display: 'none',
+    },
+    // Make the columns button more prominent (really hard to do with component overriding)
+    '& button': {
+      color: theme.palette.primary.main,
+      '&:hover, &:active': {
+        color: COLORS.LIGHT_BLUE[400],
+        border: `1px solid ${COLORS.LIGHT_BLUE[400]}`,
+        backgroundColor: `${COLORS.LIGHT_BLUE[400]}20`,
+        padding: '11px',
+      },
     },
   },
   toggleButtonGroup: {

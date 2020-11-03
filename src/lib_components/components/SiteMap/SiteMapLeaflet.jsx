@@ -249,6 +249,11 @@ const SiteMapLeaflet = () => {
   const mapRef = useRef(null);
   const [mapInstanceId] = useId();
 
+  const mapRefExists = () => (
+    mapRef && mapRef.current && mapRef.current.container && mapRef.current.leafletElement
+      && mapRef.current.leafletElement._panes && mapRef.current.leafletElement._layers
+  );
+
   // State, Dispatch, and other stuff from SiteMapContext
   const [state, dispatch] = SiteMapContext.useSiteMapContext();
   let canRender = state.neonContextHydrated;
@@ -264,10 +269,7 @@ const SiteMapLeaflet = () => {
      and whether height or width is the deciding factor depends on the aspect ratio.
   */
   useEffect(() => {
-    if (
-      !canRender || state.map.zoom !== null
-        || !mapRef || !mapRef.current || !mapRef.current.container
-    ) { return; }
+    if (!canRender || state.map.zoom !== null || !mapRefExists()) { return; }
     dispatch({
       type: 'setMapZoom',
       zoom: deriveFullObservatoryZoomLevel(mapRef),
@@ -285,7 +287,7 @@ const SiteMapLeaflet = () => {
     We have to do it this way as only the Leaflet Map instance can give us bounds
   */
   useEffect(() => {
-    if (state.map.bounds !== null || mapRef.current === null) { return; }
+    if (state.map.bounds !== null || !mapRefExists()) { return; }
     const bounds = mapRef.current.leafletElement.getBounds();
     dispatch({
       type: 'setMapBounds',
@@ -307,10 +309,8 @@ const SiteMapLeaflet = () => {
   useLayoutEffect(() => {
     const timeout = window.setTimeout(() => {
       if (
-        !mapRef.current || !mapRef.current.leafletElement
-          || !mapRef.current.leafletElement._panes || !mapRef.current.leafletElement._layers
+        !mapRefExists() || state.view.current !== VIEWS.MAP
           || !state.selection.active || !state.selection.validSet
-          || state.view.current !== VIEWS.MAP
           || state.selection.active !== FEATURE_TYPES.SITES.KEY
       ) { return; }
       const { markerPane } = mapRef.current.leafletElement._panes;
@@ -351,8 +351,12 @@ const SiteMapLeaflet = () => {
      containers like dialogs.
   */
   const invalidateSize = useCallback(() => {
-    if (!mapRef || !mapRef.current || !mapRef.current.leafletElement) { return; }
-    mapRef.current.leafletElement.invalidateSize();
+    if (!mapRefExists()) { return; }
+    // setTimeout of 0 to fire after map render cycle completes
+    window.setTimeout(() => {
+      if (!mapRefExists()) { return; }
+      mapRef.current.leafletElement.invalidateSize();
+    }, 0);
   }, []);
 
   /**
@@ -361,10 +365,7 @@ const SiteMapLeaflet = () => {
     dimensions (e.g. aspectRatio or widthReference) has changed
   */
   useEffect(() => {
-    if (
-      !mapRef || !mapRef.current || !mapRef.current.leafletElement
-        || state.view.current !== VIEWS.MAP
-    ) { return; }
+    if (!mapRefExists() || state.view.current !== VIEWS.MAP) { return; }
     mapRef.current.leafletElement.invalidateSize();
     if (!state.view.initialized[VIEWS.MAP]) {
       dispatch({ type: 'setViewInitialized' });
@@ -433,8 +434,9 @@ const SiteMapLeaflet = () => {
   */
   const [mapRefReady, setMapRefReady] = useState(false);
   useEffect(() => { // eslint-disable-line react-hooks/exhaustive-deps
-    if (mapRef.current !== null && !mapRefReady) {
+    if (mapRefExists() && !mapRefReady) {
       setMapRefReady(true);
+      mapRef.current.leafletElement.invalidateSize();
     }
   });
 
@@ -590,7 +592,10 @@ const SiteMapLeaflet = () => {
         <IconButton
           type="button"
           className={classes.mapNavButton}
-          onClick={() => { dispatch({ type: 'showFullObservatory', mapRef }); }}
+          onClick={() => {
+            if (mapRefExists()) { mapRef.current.leafletElement.invalidateSize(); }
+            dispatch({ type: 'showFullObservatory', mapRef });
+          }}
         >
           <ObservatoryIcon fontSize="small" />
         </IconButton>

@@ -938,7 +938,7 @@ export default html = `
 </div><div class="search-form__actions form-actions js-form-wrapper form-wrapper" id="edit-actions-mobile">
 
 <input class="search-form__button button js-form-submit form-submit" id="edit-submit-mobile" data-drupal-selector="edit-submit" type="submit" name="op" value="Search" />
-</div><input autocomplete="off" data-drupal-selector="form-v2tecvcfdeihdzjnjkf3qufbye2wtq8ybguvprdxxlq" type="hidden" name="form_build_id" value="form-V2TEcvcFdEIHdzJnJKf3QuFbYe2wtQ8YbguVprdXXLQ" />
+</div><input autocomplete="off" data-drupal-selector="form-hgb1odlbxrfpyke9hkcgl1vmjsr3dphvougarkxci5o" type="hidden" name="form_build_id" value="form-hGB1odlBXRFpYkE9hKCGl1vmjSr3dPHvOUgARkXCI5o" />
 <input data-drupal-selector="edit-mobile-beta-search-form" type="hidden" name="form_id" value="mobile_beta_search_form" />
 
 </form>
@@ -965,7 +965,7 @@ export default html = `
 
 
 <input class="search-form__button button js-form-submit form-submit" data-drupal-selector="edit-submit" type="submit" id="edit-submit" name="op" value="Search" />
-<input autocomplete="off" data-drupal-selector="form-unb5l7opauv-yxnwetisqd1-aotuz7xsrnftao68e40" type="hidden" name="form_build_id" value="form-UnB5l7OPauV_yxNWETISqD1-aoTUz7XSRnFTaO68E40" />
+<input autocomplete="off" data-drupal-selector="form-1dw7dvlnntjgewpnbcqolkmnpccowvhykvmzwqd-vh8" type="hidden" name="form_build_id" value="form-1dW7dVLNntjGEwPnBCqolKMnpcCOwVHYKVmZWqd_vH8" />
 <input data-drupal-selector="edit-beta-search-form" type="hidden" name="form_id" value="beta_search_form" />
 
 </form>
