@@ -678,9 +678,13 @@ const SiteMapLeaflet = () => {
 
   /**
      Render: Base Layer
+     NOTE: Leaflet has breaking display issues when a tile layer is "reused". We use the unique map
+     instance id here with the data-id attribute to attempt to force no tile layer reuse between
+     instances of SiteMap components.
   */
   const renderBaseLayer = () => {
-    if (!state.map.baseLayer) { return <TileLayer url="" attribution="" />; }
+    const id = `tile-layer-${mapInstanceId}`;
+    if (!state.map.baseLayer) { return <TileLayer url="" attribution="" data-id={id} />; }
     const baseLayer = BASE_LAYERS[state.map.baseLayer];
     const attributionNode = (
       <div title={baseLayer.fullAttribution} className={classes.attribution}>
@@ -689,7 +693,7 @@ const SiteMapLeaflet = () => {
     );
     const attributionString = ReactDOMServer.renderToStaticMarkup(attributionNode);
     return (
-      <TileLayer url={baseLayer.url} attribution={attributionString} />
+      <TileLayer url={baseLayer.url} attribution={attributionString} data-id={id} />
     );
   };
 
