@@ -48,19 +48,19 @@ export default html = `
         
           <ul  class="menu menu--footer" data-depth="0">
           <li  class="myAccount menu__item">
-        <a href="/user/login" title="My Account" class="menu__link" data-drupal-link-system-path="user/login">My Account</a>
+        <a href="https://preview.neonscience.org/user/login" title="My Account" class="menu__link" data-drupal-link-system-path="user/login">My Account</a>
               </li>
           <li  class="menu__item">
-        <a href="/about" title="About Us" class="menu__link" data-drupal-link-system-path="node/8793">About Us</a>
+        <a href="https://preview.neonscience.org/about" title="About Us" class="menu__link" data-drupal-link-system-path="node/8793">About Us</a>
               </li>
           <li  class="menu__item">
-        <a href="/impact/newsroom" class="menu__link" data-drupal-link-system-path="node/10890">Newsroom</a>
+        <a href="https://preview.neonscience.org/impact/newsroom" class="menu__link" data-drupal-link-system-path="node/10890">Newsroom</a>
               </li>
           <li  class="menu__item">
-        <a href="/about/contact-us" title="Contact Us" class="menu__link" data-drupal-link-system-path="node/24">Contact Us</a>
+        <a href="https://preview.neonscience.org/about/contact-us" title="Contact Us" class="menu__link" data-drupal-link-system-path="node/24">Contact Us</a>
               </li>
           <li  class="menu__item">
-        <a href="/terms-use" title="Terms &amp; Conditions" class="menu__link" data-drupal-link-system-path="node/31">Terms &amp; Conditions</a>
+        <a href="https://preview.neonscience.org/terms-use" title="Terms &amp; Conditions" class="menu__link" data-drupal-link-system-path="node/31">Terms &amp; Conditions</a>
               </li>
         </ul>
   
