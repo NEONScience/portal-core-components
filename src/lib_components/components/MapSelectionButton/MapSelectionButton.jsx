@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -14,13 +14,14 @@ import CloseIcon from '@material-ui/icons/Close';
 import DoneIcon from '@material-ui/icons/Done';
 import GlobeIcon from '@material-ui/icons/Language';
 
-import SiteMap from '../SiteMap/SiteMap';
 import Theme from '../Theme/Theme';
 import {
   DEFAULT_STATE,
   FEATURE_TYPES,
   SITE_MAP_PROP_TYPES,
 } from '../SiteMap/SiteMapUtils';
+
+const SiteMap = React.lazy(() => import('../SiteMap/SiteMap'));
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -45,6 +46,15 @@ const useStyles = makeStyles(theme => ({
   },
   buttonIcon: {
     marginLeft: theme.spacing(1),
+  },
+  suspenseFallback: {
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: theme.palette.grey[200],
+    fontSize: '1.5em',
   },
 }));
 
@@ -110,6 +120,12 @@ const MapSelectionButton = (props) => {
     ...embedProps,
   } : embedProps;
 
+  const suspenseFallback = (
+    <div className={classes.suspenseFallback}>
+      Loading Map...
+    </div>
+  );
+
   return (
     <div>
       <Tooltip
@@ -174,7 +190,11 @@ const MapSelectionButton = (props) => {
             </Tooltip>
           </Toolbar>
         </AppBar>
-        {dialogEntered ? <SiteMap {...finalEmbedProps} /> : null}
+        {!dialogEntered ? null : (
+          <Suspense fallback={suspenseFallback}>
+            <SiteMap {...finalEmbedProps} />
+          </Suspense>
+        )}
       </Dialog>
     </div>
   );

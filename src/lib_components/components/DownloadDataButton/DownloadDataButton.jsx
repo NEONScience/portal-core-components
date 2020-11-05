@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import DownloadIcon from '@material-ui/icons/SaveAlt';
 
-import DownloadDataDialog from '../DownloadDataDialog/DownloadDataDialog';
-
 import DownloadDataContext from '../DownloadDataContext/DownloadDataContext';
 import Theme from '../Theme/Theme';
+
+const DownloadDataDialog = React.lazy(() => import('../DownloadDataDialog/DownloadDataDialog'));
 
 const useStyles = makeStyles(() => ({
   gtmCaptureButton: {
@@ -26,7 +26,7 @@ const DownloadDataButton = (props) => {
 
   const classes = useStyles();
 
-  const [{ productData }, dispatch] = DownloadDataContext.useDownloadDataState();
+  const [{ dialogOpen, productData }, dispatch] = DownloadDataContext.useDownloadDataState();
 
   function handleOpenDialog() {
     dispatch({ type: 'setDialogOpen', open: true });
@@ -51,7 +51,11 @@ const DownloadDataButton = (props) => {
         {label}
         <DownloadIcon style={{ marginLeft: Theme.spacing(1) }} />
       </Button>
-      <DownloadDataDialog />
+      {!dialogOpen ? null : (
+        <Suspense fallback={null}>
+          <DownloadDataDialog />
+        </Suspense>
+      )}
     </React.Fragment>
   );
 };
