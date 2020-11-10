@@ -86,7 +86,7 @@ const ReleaseFilter = (props) => {
   if (skeleton) {
     const skeletonStyle = { marginBottom: Theme.spacing(1) };
     return (
-      <div {...otherProps} style={{ maxWidth: `${maxWidth}px` }}>
+      <div {...(otherProps || {})} style={{ maxWidth: `${maxWidth}px` }}>
         {titleNode}
         <Skeleton variant="rect" width={maxWidth} height={36} style={skeletonStyle} />
         <Skeleton width="70%" height={16} style={skeletonStyle} />
