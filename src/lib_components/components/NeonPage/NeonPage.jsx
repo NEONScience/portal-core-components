@@ -352,6 +352,7 @@ const NeonPage = (props) => {
     sidebarContent,
     sidebarContainerClassName: sidebarContainerClassNameProp,
     sidebarLinks,
+    sidebarLinksAdditionalContent,
     sidebarLinksAsStandaloneChildren: sidebarLinksAsStandaloneChildrenProp,
     sidebarSubtitle,
     sidebarTitle,
@@ -773,6 +774,12 @@ const NeonPage = (props) => {
             )}
           </div>
           <Divider className={classes.sidebarDivider} style={{ ...dividerStyle }} />
+          {(sidebarLinksAdditionalContent && (!belowMd || sidebarExpanded)) ? (
+            <React.Fragment>
+              {sidebarLinksAdditionalContent}
+              <Divider className={classes.sidebarDivider} style={{ ...dividerStyle }} />
+            </React.Fragment>
+          ) : null}
           {belowMd && !sidebarExpanded ? currentLinkOnly : fullLinks}
         </div>
       </div>
@@ -900,6 +907,7 @@ NeonPage.propTypes = {
       ]),
     }),
   ),
+  sidebarLinksAdditionalContent: children,
   sidebarLinksAsStandaloneChildren: PropTypes.bool,
   sidebarSubtitle: PropTypes.string,
   sidebarTitle: PropTypes.string,
@@ -925,6 +933,7 @@ NeonPage.defaultProps = {
   sidebarContent: null,
   sidebarContainerClassName: null,
   sidebarLinks: null,
+  sidebarLinksAdditionalContent: null,
   sidebarLinksAsStandaloneChildren: false,
   sidebarSubtitle: null,
   sidebarTitle: null,

@@ -21,6 +21,7 @@ import NeonContextStyleGuide from './lib_components/components/NeonContext/Style
 import NeonEnvironmentStyleGuide from './lib_components/components/NeonEnvironment/StyleGuide';
 import NeonGraphQLStyleGuide from './lib_components/components/NeonGraphQL/StyleGuide';
 import NeonPageStyleGuide from './lib_components/components/NeonPage/StyleGuide';
+import ReleaseFilterStyleGuide from './lib_components/components/ReleaseFilter/StyleGuide';
 import SiteChipStyleGuide from './lib_components/components/SiteChip/StyleGuide';
 import SiteMapStyleGuide from './lib_components/components/SiteMap/StyleGuide';
 import StoryMapStyleGuide from './lib_components/components/StoryMap/StyleGuide';
@@ -104,6 +105,11 @@ const sidebarLinks = [
     name: 'Neon Page',
     hash: '#NeonPage',
     component: NeonPageStyleGuide,
+  },
+  {
+    name: 'Release Filter',
+    hash: '#ReleaseFilter',
+    component: ReleaseFilterStyleGuide,
   },
   {
     name: 'Site Chip',

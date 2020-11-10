@@ -171,6 +171,10 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
+          <a href="https://data.neonscience.org/documents" class="menu__link">Document Library</a>
+
+                  </li>
+              <li  class="menu__item">
           <a href="https://data.neonscience.org/data-api" class="menu__link">API &amp; GraphQL</a>
 
                   </li>
@@ -721,7 +725,7 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
-          <a href="https://data.neonscience.org/documents" class="menu__link">NEON Document Library</a>
+          <a href="https://data.neonscience.org/documents" class="menu__link">Document Library</a>
 
                   </li>
       

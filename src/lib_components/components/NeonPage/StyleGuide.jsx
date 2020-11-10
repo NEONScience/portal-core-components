@@ -257,6 +257,19 @@ const sidebarLinks = [
       </React.Fragment>
     ),
   },
+  // sidebarLinksAdditionalContent
+  {
+    name: 'sidebarLinksAdditionalContent',
+    type: 'children (arbitrary jsx)',
+    default: 'null',
+    description: (
+      <p>
+        When wanting to use the regular pattern of <tt>sidebarLinks</tt> but some additional UI is
+        needed in the sidebar this prop can be used to inject arbitrary content between the
+        sidebar title/subtitle and the links container, flanked by dividers.
+      </p>
+    ),
+  },
   // sidebarLinksAsStandaloneChildren
   {
     name: 'sidebarLinksAsStandaloneChildren',

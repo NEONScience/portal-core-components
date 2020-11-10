@@ -23,6 +23,7 @@ declare namespace NeonPage {
             icon: PropTypes.Requireable<object>;
             component: PropTypes.Requireable<object>;
         }> | null | undefined)[]>;
+        export { children as sidebarLinksAdditionalContent };
         export const sidebarLinksAsStandaloneChildren: PropTypes.Requireable<boolean>;
         export const sidebarSubtitle: PropTypes.Requireable<string>;
         export const sidebarTitle: PropTypes.Requireable<string>;
@@ -59,6 +60,7 @@ declare namespace NeonPage {
         export { sidebarContainerClassName_1 as sidebarContainerClassName };
         const sidebarLinks_1: null;
         export { sidebarLinks_1 as sidebarLinks };
+        export const sidebarLinksAdditionalContent: null;
         const sidebarLinksAsStandaloneChildren_1: boolean;
         export { sidebarLinksAsStandaloneChildren_1 as sidebarLinksAsStandaloneChildren };
         const sidebarSubtitle_1: null;
