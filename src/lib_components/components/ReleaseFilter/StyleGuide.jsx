@@ -20,10 +20,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const releases = [
-  { name: 'NEON.2021.1', doi: 'https://doi.org/abc/jkl_mno' },
-  { name: 'NEON.2021.0', doi: 'https://doi.org/abc/def_ghi' },
-  { name: 'NEON.2022.0', doi: 'https://doi.org/abc/vwx_yza' },
-  { name: 'NEON.2021.2', doi: 'https://doi.org/abc/psr_stu' },
+  { name: 'NEON.2021.1', doi: 'https://doi.org/abc/jkl_mno_pqr_stuvwx/yzabcdef' },
+  { name: 'NEON.2021.0', doi: 'https://doi.org/abc/def_ghi_jkl_mnopqrstu' },
+  { name: 'NEON.2022.0', doi: 'https://doi.org/abc/vwx_yza_bcd_efghijklmnop' },
+  { name: 'NEON.2021.2', doi: 'https://doi.org/abc/psr_stu_vwxyz_abcdef' },
 ];
 
 export default function StyleGuide() {

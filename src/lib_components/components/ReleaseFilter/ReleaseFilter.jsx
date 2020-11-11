@@ -43,12 +43,33 @@ const useStyles = makeStyles(theme => ({
     },
     backgroundColor: theme.palette.grey[100],
   },
+  descriptionContainer: {
+    marginTop: theme.spacing(1),
+  },
+  descriptionFlexInnerContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: theme.spacing(0.5),
+  },
   description: {
     display: 'block',
-    marginTop: theme.spacing(1),
     color: theme.palette.grey[400],
+    overflowWrap: 'break-word',
+  },
+  descriptionLabel: {
+    fontWeight: 700,
+    color: theme.palette.grey[400],
+    marginRight: theme.spacing(1),
   },
   copyButton: {
+    backgroundColor: '#fff',
+    '& svg': {
+      width: '0.9rem',
+      height: '0.9rem',
+    },
+  },
+  copyButtonAdornment: {
     padding: Theme.spacing(1.25, 1),
     backgroundColor: '#fff',
     marginRight: Theme.spacing(-1.75),
@@ -127,7 +148,9 @@ const ReleaseFilter = (props) => {
   }
 
   let descriptionNode = null;
+  const doiTitle = "Digital Object Identifier - A citable permanent link to this this data product release";
   if (currentRelease.doi) {
+    /*
     descriptionNode = (
       <OutlinedInput
         margin="dense"
@@ -142,7 +165,12 @@ const ReleaseFilter = (props) => {
         endAdornment={(
           <InputAdornment position="end" style={{ marginLeft: '0px' }}>
             <CopyToClipboard text={currentRelease.doi}>
-              <Button color="primary" variant="outlined" size="small" className={classes.copyButton}>
+              <Button
+                color="primary"
+                variant="outlined"
+                size="small"
+                className={classes.copyButtonAdornment}
+              >
                 <CopyIcon fontSize="small" style={{ marginRight: Theme.spacing(1) }} />
                 Copy
               </Button>
@@ -156,11 +184,42 @@ const ReleaseFilter = (props) => {
         style={maxWidthStyle}
       />
     );
+    */
+    descriptionNode = (
+      <div className={classes.descriptionContainer}>
+        <div className={classes.descriptionFlexInnerContainer}>
+          <Typography
+            variant="subtitle2"
+            className={classes.descriptionLabel}
+            title={doiTitle}
+          >
+            DOI
+          </Typography>
+          <CopyToClipboard text={currentRelease.doi}>
+            <Button
+              color="primary"
+              variant="outlined"
+              size="small"
+              className={classes.copyButton}
+              title={`Copy DOI: ${currentRelease.doi}`}
+            >
+              <CopyIcon fontSize="small" style={{ marginRight: Theme.spacing(1) }} />
+              Copy
+            </Button>
+          </CopyToClipboard>
+        </div>
+        <Typography variant="caption" aria-label="doi" className={classes.description}>
+          {currentRelease.doi}
+        </Typography>
+      </div>
+    );
   } else if (currentRelease.description) {
     descriptionNode = (
-      <Typography variant="caption" className={classes.description}>
-        {currentRelease.description}
-      </Typography>
+      <div className={classes.descriptionContainer}>
+        <Typography variant="caption" className={classes.description}>
+          {currentRelease.description}
+        </Typography>
+      </div>
     );
   }
 
