@@ -29,8 +29,8 @@ declare namespace NeonPage {
         export const sidebarTitle: PropTypes.Requireable<string>;
         export const sidebarWidth: PropTypes.Requireable<number>;
         export const sidebarUnsticky: PropTypes.Requireable<boolean>;
-        export const subtitle: PropTypes.Requireable<string>;
-        export const title: PropTypes.Requireable<string>;
+        export const subtitle: PropTypes.Requireable<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+        export const title: PropTypes.Requireable<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
         export const useCoreHeader: PropTypes.Requireable<boolean>;
         export const unstickyDrupalHeader: PropTypes.Requireable<boolean>;
         const children_1: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;

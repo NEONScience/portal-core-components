@@ -47,10 +47,17 @@ import ReleaseFilter from 'portal-core-components/lib/components/ReleaseFilter';
         ...
       </DocBlock>
       <ExampleBlock>
-        <ReleaseFilter releases={[]} skeleton />
+        <div style={{ width: '276px' }}>
+          <ReleaseFilter skeleton />
+        </div>
       </ExampleBlock>
       <ExampleBlock>
-        <ReleaseFilter releases={releases} />
+        <div style={{ width: '236px' }}>
+          <ReleaseFilter releases={releases} />
+        </div>
+      </ExampleBlock>
+      <ExampleBlock>
+        <ReleaseFilter releases={releases} maxWidth={236} selected="NEON.2021.1" />
       </ExampleBlock>
       <CodeBlock>
         {`

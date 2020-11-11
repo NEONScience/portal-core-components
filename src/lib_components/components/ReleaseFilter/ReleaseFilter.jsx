@@ -3,14 +3,19 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { useId } from 'react-id-generator';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import InputAdornment from '@material-ui/core/InputAdornment';
 import MenuItem from '@material-ui/core/MenuItem';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import Select from '@material-ui/core/Select';
 import Typography from '@material-ui/core/Typography';
 
 import Skeleton from '@material-ui/lab/Skeleton';
+
+import CopyIcon from '@material-ui/icons/Assignment';
 
 import Theme from '../Theme/Theme';
 
@@ -19,13 +24,38 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 500,
     marginBottom: theme.spacing(1),
   },
-  input: {
+  selectInput: {
     width: '100%',
+  },
+  doiInput: {
+    width: '100%',
+    marginTop: theme.spacing(1),
+    '& input': {
+      backgroundColor: '#fff',
+      padding: '10.5px',
+      borderLeft: `1px solid ${theme.palette.grey[300]}`,
+    },
+  },
+  doiLabel: {
+    '& > p': {
+      fontWeight: 700,
+      color: theme.palette.grey[400],
+    },
+    backgroundColor: theme.palette.grey[100],
   },
   description: {
     display: 'block',
     marginTop: theme.spacing(1),
     color: theme.palette.grey[400],
+  },
+  copyButton: {
+    padding: Theme.spacing(1.25, 1),
+    backgroundColor: '#fff',
+    marginRight: Theme.spacing(-1.75),
+    '& svg': {
+      width: '0.9rem',
+      height: '0.9rem',
+    },
   },
 }));
 
@@ -47,7 +77,7 @@ const ReleaseFilter = (props) => {
   const inputId = `release-filter-input-${instanceId}`;
   const labelId = `release-filter-label-${instanceId}`;
 
-  const releases = [...releasesProp];
+  const releases = [...releasesProp || []];
   releases.sort((a, b) => a.name > b.name);
   releases.unshift({
     name: UNSPECIFIED,
@@ -67,13 +97,15 @@ const ReleaseFilter = (props) => {
     onChange(newRelease.name);
   };
 
+  const maxWidthStyle = maxWidth ? { maxWidth: `${maxWidth}px` } : {};
+
   const input = (
     <OutlinedInput
       id={inputId}
       name={inputId}
       margin="dense"
-      className={classes.input}
-      style={{ width: `${maxWidth}px` }}
+      className={classes.selectInput}
+      style={maxWidthStyle}
     />
   );
 
@@ -94,8 +126,46 @@ const ReleaseFilter = (props) => {
     );
   }
 
+  let descriptionNode = null;
+  if (currentRelease.doi) {
+    descriptionNode = (
+      <OutlinedInput
+        margin="dense"
+        title={currentRelease.doi}
+        value={currentRelease.doi}
+        className={classes.doiInput}
+        startAdornment={(
+          <InputAdornment position="start" className={classes.doiLabel}>
+            DOI:
+          </InputAdornment>
+        )}
+        endAdornment={(
+          <InputAdornment position="end" style={{ marginLeft: '0px' }}>
+            <CopyToClipboard text={currentRelease.doi}>
+              <Button color="primary" variant="outlined" size="small" className={classes.copyButton}>
+                <CopyIcon fontSize="small" style={{ marginRight: Theme.spacing(1) }} />
+                Copy
+              </Button>
+            </CopyToClipboard>
+          </InputAdornment>
+        )}
+        inputProps={{
+          'aria-label': 'weight',
+        }}
+        labelWidth={0}
+        style={maxWidthStyle}
+      />
+    );
+  } else if (currentRelease.description) {
+    descriptionNode = (
+      <Typography variant="caption" className={classes.description}>
+        {currentRelease.description}
+      </Typography>
+    );
+  }
+
   return (
-    <div {...otherProps} style={{ maxWidth: `${maxWidth}px` }}>
+    <div {...otherProps} style={{ width: '100%', ...maxWidthStyle }}>
       {titleNode}
       <Select
         data-selenium="release-filter"
@@ -122,9 +192,7 @@ const ReleaseFilter = (props) => {
           );
         })}
       </Select>
-      <Typography variant="caption" className={classes.description}>
-        {currentRelease.description || `DOI: ${currentRelease.doi || 'n/a'}`}
-      </Typography>
+      {descriptionNode}
     </div>
   );
 };
@@ -138,15 +206,16 @@ ReleaseFilter.propTypes = {
       doi: PropTypes.string,
       description: PropTypes.string,
     }),
-  ).isRequired,
+  ),
   selected: PropTypes.string,
   skeleton: PropTypes.bool,
   title: PropTypes.string,
 };
 
 ReleaseFilter.defaultProps = {
-  maxWidth: 300,
+  maxWidth: null,
   onChange: () => {},
+  releases: [],
   selected: null,
   skeleton: false,
   title: 'Release',

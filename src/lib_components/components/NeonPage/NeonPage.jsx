@@ -913,8 +913,14 @@ NeonPage.propTypes = {
   sidebarTitle: PropTypes.string,
   sidebarWidth: PropTypes.number,
   sidebarUnsticky: PropTypes.bool,
-  subtitle: PropTypes.string,
-  title: PropTypes.string,
+  subtitle: PropTypes.oneOfType([
+    PropTypes.string,
+    children,
+  ]),
+  title: PropTypes.oneOfType([
+    PropTypes.string,
+    children,
+  ]),
   useCoreHeader: PropTypes.bool,
   unstickyDrupalHeader: PropTypes.bool,
   children: children.isRequired,
