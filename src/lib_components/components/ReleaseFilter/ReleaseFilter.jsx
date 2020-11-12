@@ -148,7 +148,7 @@ const ReleaseFilter = (props) => {
   }
 
   let descriptionNode = null;
-  const doiTitle = "Digital Object Identifier - A citable permanent link to this this data product release";
+  const doiTitle = 'Digital Object Identifier - A citable permanent link to this this data product release';
   if (currentRelease.doi) {
     /*
     descriptionNode = (
