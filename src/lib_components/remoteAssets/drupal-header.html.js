@@ -49,7 +49,7 @@ export default html = `
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/about/overview/design" class="menu__link" data-drupal-link-system-path="node/10532">Design</a>
+          <a href="https://www.neonscience.org/about/overview/design" class="menu__link" data-drupal-link-system-path="node/10532">Spatial and Temporal Design</a>
 
                   </li>
               <li  class="menu__item">
@@ -134,364 +134,6 @@ export default html = `
                   <svg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M.808 17.778L17.778.808l1.414 1.414-16.97 16.97-1.414-1.414z' fill='#fff'/><path d='M2.222.808l16.97 16.97-1.414 1.414L.808 2.222 2.222.808z' fill='#fff'/></svg>
                 </button>
                 <h3 class='isDesktop'>About Us</h3>
-                <button class='mobileBack isMobile' aria-label='Back'>
-                  <svg width='14' height='10' viewBox='0 0 14 10' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M5 9L1 5l4-4M1 5h12' stroke='#0073CF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/>
-                  </svg>
-                </button>
-              </div>
-                            </div>
-
-            
-
-                  </li>
-              <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/impact" title="Impact" class="menu__link" data-drupal-link-system-path="node/8795">Impact</a>
-
-          
-                                        <button class='arrow visually-hidden focusable' tabindex='0' aria-label='Toggle Mega Menu'><svg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M9 1L5 5 1 1' stroke='#fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></button>
-
-                            <div class='subNavWrapper'>
-                            <div class='innerSubNavWrapper'>
-            
-                      <ul  class="menu menu--main" data-depth="1">
-
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/impact/observatory-blog" class="menu__link" data-drupal-link-system-path="node/8857">Observatory Blog</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/impact/case-studies" class="menu__link" data-drupal-link-system-path="node/10904">Case Studies</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/impact/spotlights" class="menu__link" data-drupal-link-system-path="node/10905">Spotlights</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/impact/papers-publications" class="menu__link" data-drupal-link-system-path="node/10915">Papers &amp; Publications</a>
-
-                  </li>
-              <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/impact/newsroom" class="menu__link" data-drupal-link-system-path="node/10890">Newsroom</a>
-
-          
-            
-                      <ul  class="menu menu--main" data-depth="2">
-
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/impact/newsroom/newsletter-archive" class="menu__link" data-drupal-link-system-path="node/7826">Newsletter Archive</a>
-
-                  </li>
-      
-          </ul>
-  
-
-            
-
-                  </li>
-      
-          </ul>
-  
-
-                          </div>
-
-              <div class='subNavLabelWrapper'>
-                <button class='subNavClose isDesktop' aria-label='Close Mega Menu'>
-                  <svg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M.808 17.778L17.778.808l1.414 1.414-16.97 16.97-1.414-1.414z' fill='#fff'/><path d='M2.222.808l16.97 16.97-1.414 1.414L.808 2.222 2.222.808z' fill='#fff'/></svg>
-                </button>
-                <h3 class='isDesktop'>Impact</h3>
-                <button class='mobileBack isMobile' aria-label='Back'>
-                  <svg width='14' height='10' viewBox='0 0 14 10' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M5 9L1 5l4-4M1 5h12' stroke='#0073CF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/>
-                  </svg>
-                </button>
-              </div>
-                            </div>
-
-            
-
-                  </li>
-              <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/get-involved" class="menu__link" data-drupal-link-system-path="node/6753">Get Involved</a>
-
-          
-                                        <button class='arrow visually-hidden focusable' tabindex='0' aria-label='Toggle Mega Menu'><svg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M9 1L5 5 1 1' stroke='#fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></button>
-
-                            <div class='subNavWrapper'>
-                            <div class='innerSubNavWrapper'>
-            
-                      <ul  class="menu menu--main" data-depth="1">
-
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/get-involved/upcoming-events" class="menu__link" data-drupal-link-system-path="node/10737">Upcoming Events</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/get-involved/past-events" class="menu__link" data-drupal-link-system-path="node/10738">Past Events</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/get-involved/engagement" class="menu__link" data-drupal-link-system-path="node/10556">Community Engagement</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/get-involved/neon-science-community-forum" class="menu__link" data-drupal-link-system-path="node/6761">NEON Science Community Forum</a>
-
-                  </li>
-              <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/get-involved/work-opportunities" class="menu__link" data-drupal-link-system-path="node/6229">Work Opportunities</a>
-
-          
-            
-                      <ul  class="menu menu--main" data-depth="2">
-
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/get-involved/work-opportunities/careers" class="menu__link" data-drupal-link-system-path="node/5198">Careers</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/get-involved/work-opportunities/seasonal-fieldwork" class="menu__link" data-drupal-link-system-path="node/6131">Seasonal Fieldwork</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/get-involved/work-opportunities/postdoctoral-fellows" class="menu__link" data-drupal-link-system-path="node/8729">Postdoctoral Fellows</a>
-
-                  </li>
-              <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/get-involved/work-opportunities/internships" class="menu__link" data-drupal-link-system-path="node/16">Internships</a>
-
-          
-            
-                      <ul  class="menu menu--main" data-depth="3">
-
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/get-involved/work-opportunities/internships/intern-alumni" class="menu__link" data-drupal-link-system-path="node/10553">Intern Alumni</a>
-
-                  </li>
-      
-          </ul>
-  
-
-            
-
-                  </li>
-      
-          </ul>
-  
-
-            
-
-                  </li>
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/get-involved/partners" class="menu__link" data-drupal-link-system-path="node/8094">Partners</a>
-
-                  </li>
-      
-          </ul>
-  
-
-                          </div>
-
-              <div class='subNavLabelWrapper'>
-                <button class='subNavClose isDesktop' aria-label='Close Mega Menu'>
-                  <svg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M.808 17.778L17.778.808l1.414 1.414-16.97 16.97-1.414-1.414z' fill='#fff'/><path d='M2.222.808l16.97 16.97-1.414 1.414L.808 2.222 2.222.808z' fill='#fff'/></svg>
-                </button>
-                <h3 class='isDesktop'>Get Involved</h3>
-                <button class='mobileBack isMobile' aria-label='Back'>
-                  <svg width='14' height='10' viewBox='0 0 14 10' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M5 9L1 5l4-4M1 5h12' stroke='#0073CF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/>
-                  </svg>
-                </button>
-              </div>
-                            </div>
-
-            
-
-                  </li>
-              <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/resources" class="menu__link" data-drupal-link-system-path="node/6228">Resources</a>
-
-          
-                                        <button class='arrow visually-hidden focusable' tabindex='0' aria-label='Toggle Mega Menu'><svg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M9 1L5 5 1 1' stroke='#fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></button>
-
-                            <div class='subNavWrapper'>
-                            <div class='innerSubNavWrapper'>
-            
-                      <ul  class="menu menu--main" data-depth="1">
-
-              <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/resources/communication-resources" class="menu__link" data-drupal-link-system-path="node/6316">Documents and Communication Resources</a>
-
-          
-            
-                      <ul  class="menu menu--main" data-depth="2">
-
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/impact/papers-publications" class="menu__link" data-drupal-link-system-path="node/10915">Papers &amp; Publications</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="https://data.neonscience.org/documents" class="menu__link">NEON Document Library</a>
-
-                  </li>
-      
-          </ul>
-  
-
-            
-
-                  </li>
-              <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/resources/code-hub" class="menu__link" data-drupal-link-system-path="node/7076">Code Hub</a>
-
-          
-            
-                      <ul  class="menu menu--main" data-depth="2">
-
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/resources/code-hub/code-resources-guidelines" class="menu__link" data-drupal-link-system-path="node/8619">Code Resources Guidelines</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/code-resources-submission" class="menu__link" data-drupal-link-system-path="node/8631">Code Resources Submission</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="https://github.com/neonscience" class="menu__link">NEON&#039;s GitHub Organization Homepage</a>
-
-                  </li>
-      
-          </ul>
-  
-
-            
-
-                  </li>
-              <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/resources/learning-hub" class="menu__link" data-drupal-link-system-path="node/6136">Learning Hub</a>
-
-          
-            
-                      <ul  class="menu menu--main" data-depth="2">
-
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/resources/learning-hub/science-videos" class="menu__link" data-drupal-link-system-path="node/5345">Science Videos</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/resources/learning-hub/tutorials" class="menu__link" data-drupal-link-system-path="node/10896">Tutorials</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/resources/learning-hub/workshops-courses" class="menu__link" data-drupal-link-system-path="node/6529">Workshops &amp; Courses</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/resources/learning-hub/teaching-modules" class="menu__link" data-drupal-link-system-path="node/10909">Teaching Modules</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/resources/learning-hub/faculty-mentoring-networks" class="menu__link" data-drupal-link-system-path="node/7463">Faculty Mentoring Networks</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/resources/learning-hub/data-education-fellows" class="menu__link" data-drupal-link-system-path="node/7828">Data Education Fellows</a>
-
-                  </li>
-      
-          </ul>
-  
-
-            
-
-                  </li>
-              <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/resources/research-support" class="menu__link" data-drupal-link-system-path="node/10764">Research Support</a>
-
-          
-            
-                      <ul  class="menu menu--main" data-depth="2">
-
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/resources/research-support/field-site-coordination" class="menu__link" data-drupal-link-system-path="node/6">Field Site Coordination</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/resources/research-support/letters-collaboration-support" class="menu__link" data-drupal-link-system-path="node/8731">Letters of Collaboration/Support</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/resources/research-support/mobile-deployment-platforms" class="menu__link" data-drupal-link-system-path="node/7751">Mobile Deployment Platforms</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/resources/research-support/permits-permissions" class="menu__link" data-drupal-link-system-path="node/10769">Permits and Permissions</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/resources/research-support/aop-flight-campaigns" class="menu__link" data-drupal-link-system-path="node/7754">AOP Flight Campaigns</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/samples/excess-samples" class="menu__link" data-drupal-link-system-path="node/10297">Excess Samples</a>
-
-                  </li>
-      
-          </ul>
-  
-
-            
-
-                  </li>
-      
-          </ul>
-  
-
-                          </div>
-
-              <div class='subNavLabelWrapper'>
-                <button class='subNavClose isDesktop' aria-label='Close Mega Menu'>
-                  <svg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M.808 17.778L17.778.808l1.414 1.414-16.97 16.97-1.414-1.414z' fill='#fff'/><path d='M2.222.808l16.97 16.97-1.414 1.414L.808 2.222 2.222.808z' fill='#fff'/></svg>
-                </button>
-                <h3 class='isDesktop'>Resources</h3>
-                <button class='mobileBack isMobile' aria-label='Back'>
-                  <svg width='14' height='10' viewBox='0 0 14 10' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M5 9L1 5l4-4M1 5h12' stroke='#0073CF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/>
-                  </svg>
-                </button>
-              </div>
-                            </div>
-
-            
-
-                  </li>
-              <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/field-sites" class="menu__link" data-drupal-link-system-path="node/8796">Field Sites</a>
-
-          
-                                        <button class='arrow visually-hidden focusable' tabindex='0' aria-label='Toggle Mega Menu'><svg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M9 1L5 5 1 1' stroke='#fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></button>
-
-                            <div class='subNavWrapper'>
-                            <div class='innerSubNavWrapper'>
-            
-                      <ul  class="menu menu--main" data-depth="1">
-
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/field-sites/about-field-sites" class="menu__link" data-drupal-link-system-path="node/6226">About Field Sites and Domains</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/field-sites/explore-field-sites" class="menu__link" data-drupal-link-system-path="node/10899">Explore Field Sites</a>
-
-                  </li>
-      
-          </ul>
-  
-
-                          </div>
-
-              <div class='subNavLabelWrapper'>
-                <button class='subNavClose isDesktop' aria-label='Close Mega Menu'>
-                  <svg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M.808 17.778L17.778.808l1.414 1.414-16.97 16.97-1.414-1.414z' fill='#fff'/><path d='M2.222.808l16.97 16.97-1.414 1.414L.808 2.222 2.222.808z' fill='#fff'/></svg>
-                </button>
-                <h3 class='isDesktop'>Field Sites</h3>
                 <button class='mobileBack isMobile' aria-label='Back'>
                   <svg width='14' height='10' viewBox='0 0 14 10' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M5 9L1 5l4-4M1 5h12' stroke='#0073CF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/>
                   </svg>
@@ -648,7 +290,7 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-collection/airborne-remote-sensing/camera" class="menu__link" data-drupal-link-system-path="node/10554">Camera</a>
+          <a href="https://www.neonscience.org/data-samples/data-collection/airborne-remote-sensing/camera" class="menu__link" data-drupal-link-system-path="node/10554">Camera</a>
 
                   </li>
               <li  class="menu__item">
@@ -678,11 +320,11 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/collection-frequency" class="menu__link" data-drupal-link-system-path="node/10901">Collection Frequency</a>
+          <a href="https://www.neonscience.org/data-samples/data-collection/automated-instruments/collection-frequency" class="menu__link" data-drupal-link-system-path="node/10901">Collection Frequency</a>
 
                   </li>
               <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/instrumented-collection-types" class="menu__link" data-drupal-link-system-path="node/10900">Instrumented Collection Types</a>
+          <a href="https://www.neonscience.org/data-samples/data-collection/automated-instruments/instrumented-collection-types" class="menu__link" data-drupal-link-system-path="node/10900">Instrumented Collection Types</a>
 
           
             
@@ -701,7 +343,7 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/groundwater" class="menu__link" data-drupal-link-system-path="node/7839">Ground Water</a>
+          <a href="https://www.neonscience.org/data-samples/data-collection/automated-instruments/instrument-collection-types/groundwater" class="menu__link" data-drupal-link-system-path="node/7839">Ground Water</a>
 
                   </li>
               <li  class="menu__item">
@@ -775,7 +417,7 @@ export default html = `
 
                   </li>
               <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/data-samples/data-collection/observational-sampling/terrestrial-organisms" class="menu__link" data-drupal-link-system-path="node/3278">Terrestrial Organisms</a>
+          <a href="https://www.neonscience.org/data-samples/data-collection/observational-sampling/observation-types/terrestrial-organisms" class="menu__link" data-drupal-link-system-path="node/3278">Terrestrial Organisms</a>
 
           
             
@@ -946,12 +588,406 @@ export default html = `
             
 
                   </li>
+              <li  class="menu__item menu__item--expanded">
+          <a href="https://www.neonscience.org/field-sites" class="menu__link" data-drupal-link-system-path="node/8796">Field Sites</a>
+
+          
+                                        <button class='arrow visually-hidden focusable' tabindex='0' aria-label='Toggle Mega Menu'><svg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M9 1L5 5 1 1' stroke='#fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></button>
+
+                            <div class='subNavWrapper'>
+                            <div class='innerSubNavWrapper'>
+            
+                      <ul  class="menu menu--main" data-depth="1">
+
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/field-sites/about-field-sites" class="menu__link" data-drupal-link-system-path="node/6226">About Field Sites and Domains</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/field-sites/explore-field-sites" class="menu__link" data-drupal-link-system-path="node/10899">Explore Field Sites</a>
+
+                  </li>
+      
+          </ul>
+  
+
+                          </div>
+
+              <div class='subNavLabelWrapper'>
+                <button class='subNavClose isDesktop' aria-label='Close Mega Menu'>
+                  <svg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M.808 17.778L17.778.808l1.414 1.414-16.97 16.97-1.414-1.414z' fill='#fff'/><path d='M2.222.808l16.97 16.97-1.414 1.414L.808 2.222 2.222.808z' fill='#fff'/></svg>
+                </button>
+                <h3 class='isDesktop'>Field Sites</h3>
+                <button class='mobileBack isMobile' aria-label='Back'>
+                  <svg width='14' height='10' viewBox='0 0 14 10' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M5 9L1 5l4-4M1 5h12' stroke='#0073CF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/>
+                  </svg>
+                </button>
+              </div>
+                            </div>
+
+            
+
+                  </li>
+              <li  class="menu__item menu__item--expanded">
+          <a href="https://www.neonscience.org/impact" title="Impact" class="menu__link" data-drupal-link-system-path="node/8795">Impact</a>
+
+          
+                                        <button class='arrow visually-hidden focusable' tabindex='0' aria-label='Toggle Mega Menu'><svg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M9 1L5 5 1 1' stroke='#fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></button>
+
+                            <div class='subNavWrapper'>
+                            <div class='innerSubNavWrapper'>
+            
+                      <ul  class="menu menu--main" data-depth="1">
+
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/impact/observatory-blog" class="menu__link" data-drupal-link-system-path="node/8857">Observatory Blog</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/impact/case-studies" class="menu__link" data-drupal-link-system-path="node/10904">Case Studies</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/impact/spotlights" class="menu__link" data-drupal-link-system-path="node/10905">Spotlights</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/impact/papers-publications" class="menu__link" data-drupal-link-system-path="node/10915">Papers &amp; Publications</a>
+
+                  </li>
+              <li  class="menu__item menu__item--expanded">
+          <a href="https://www.neonscience.org/impact/newsroom" class="menu__link" data-drupal-link-system-path="node/10890">Newsroom</a>
+
+          
+            
+                      <ul  class="menu menu--main" data-depth="2">
+
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/impact/newsroom/neon-news" class="menu__link" data-drupal-link-system-path="node/6042">NEON in the News</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/impact/newsroom/newsletter-archive" class="menu__link" data-drupal-link-system-path="node/7826">Newsletter Archive</a>
+
+                  </li>
+      
+          </ul>
+  
+
+            
+
+                  </li>
+      
+          </ul>
+  
+
+                          </div>
+
+              <div class='subNavLabelWrapper'>
+                <button class='subNavClose isDesktop' aria-label='Close Mega Menu'>
+                  <svg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M.808 17.778L17.778.808l1.414 1.414-16.97 16.97-1.414-1.414z' fill='#fff'/><path d='M2.222.808l16.97 16.97-1.414 1.414L.808 2.222 2.222.808z' fill='#fff'/></svg>
+                </button>
+                <h3 class='isDesktop'>Impact</h3>
+                <button class='mobileBack isMobile' aria-label='Back'>
+                  <svg width='14' height='10' viewBox='0 0 14 10' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M5 9L1 5l4-4M1 5h12' stroke='#0073CF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/>
+                  </svg>
+                </button>
+              </div>
+                            </div>
+
+            
+
+                  </li>
+              <li  class="menu__item menu__item--expanded">
+          <a href="https://www.neonscience.org/resources" class="menu__link" data-drupal-link-system-path="node/6228">Resources</a>
+
+          
+                                        <button class='arrow visually-hidden focusable' tabindex='0' aria-label='Toggle Mega Menu'><svg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M9 1L5 5 1 1' stroke='#fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></button>
+
+                            <div class='subNavWrapper'>
+                            <div class='innerSubNavWrapper'>
+            
+                      <ul  class="menu menu--main" data-depth="1">
+
+              <li  class="menu__item menu__item--expanded">
+          <a href="https://www.neonscience.org/resources/communication-resources" class="menu__link" data-drupal-link-system-path="node/6316">Documents and Communication Resources</a>
+
+          
+            
+                      <ul  class="menu menu--main" data-depth="2">
+
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/impact/papers-publications" class="menu__link" data-drupal-link-system-path="node/10915">Papers &amp; Publications</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://data.neonscience.org/documents" class="menu__link">NEON Document Library</a>
+
+                  </li>
+      
+          </ul>
+  
+
+            
+
+                  </li>
+              <li  class="menu__item menu__item--expanded">
+          <a href="https://www.neonscience.org/resources/code-hub" class="menu__link" data-drupal-link-system-path="node/7076">Code Hub</a>
+
+          
+            
+                      <ul  class="menu menu--main" data-depth="2">
+
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/resources/code-hub/code-resources-guidelines" class="menu__link" data-drupal-link-system-path="node/8619">Code Resources Guidelines</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/resources/code-hub/code-resources-submission" class="menu__link" data-drupal-link-system-path="node/8631">Code Resources Submission</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://github.com/neonscience" class="menu__link">NEON&#039;s GitHub Organization Homepage</a>
+
+                  </li>
+      
+          </ul>
+  
+
+            
+
+                  </li>
+              <li  class="menu__item menu__item--expanded">
+          <a href="https://www.neonscience.org/resources/learning-hub" class="menu__link" data-drupal-link-system-path="node/6136">Learning Hub</a>
+
+          
+            
+                      <ul  class="menu menu--main" data-depth="2">
+
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/resources/learning-hub/science-videos" class="menu__link" data-drupal-link-system-path="node/5345">Science Videos</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/resources/learning-hub/tutorials" class="menu__link" data-drupal-link-system-path="node/10896">Tutorials</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/resources/learning-hub/workshops-courses" class="menu__link" data-drupal-link-system-path="node/6529">Workshops &amp; Courses</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/resources/learning-hub/teaching-modules" class="menu__link" data-drupal-link-system-path="node/10909">Teaching Modules</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/resources/learning-hub/faculty-mentoring-networks" class="menu__link" data-drupal-link-system-path="node/7463">Faculty Mentoring Networks</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/resources/learning-hub/data-education-fellows" class="menu__link" data-drupal-link-system-path="node/7828">Data Education Fellows</a>
+
+                  </li>
+      
+          </ul>
+  
+
+            
+
+                  </li>
+              <li  class="menu__item menu__item--expanded">
+          <a href="https://www.neonscience.org/resources/research-support" class="menu__link" data-drupal-link-system-path="node/10764">Research Support and Assignable Assets</a>
+
+          
+            
+                      <ul  class="menu menu--main" data-depth="2">
+
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/resources/research-support/field-site-coordination" class="menu__link" data-drupal-link-system-path="node/6">Field Site Coordination</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/resources/research-support/letters-support" class="menu__link" data-drupal-link-system-path="node/8731">Letters of Support</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/resources/research-support/mobile-deployment-platforms" class="menu__link" data-drupal-link-system-path="node/7751">Mobile Deployment Platforms</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/resources/research-support/permits-permissions" class="menu__link" data-drupal-link-system-path="node/10769">Permits and Permissions</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/resources/research-support/aop-flight-campaigns" class="menu__link" data-drupal-link-system-path="node/7754">AOP Flight Campaigns</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/data-samples/samples/excess-samples" class="menu__link" data-drupal-link-system-path="node/10297">Excess Samples</a>
+
+                  </li>
+      
+          </ul>
+  
+
+            
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/get-involved/neon-science-community-forum" class="menu__link" data-drupal-link-system-path="node/6761">Community Forum</a>
+
+                  </li>
+      
+          </ul>
+  
+
+                          </div>
+
+              <div class='subNavLabelWrapper'>
+                <button class='subNavClose isDesktop' aria-label='Close Mega Menu'>
+                  <svg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M.808 17.778L17.778.808l1.414 1.414-16.97 16.97-1.414-1.414z' fill='#fff'/><path d='M2.222.808l16.97 16.97-1.414 1.414L.808 2.222 2.222.808z' fill='#fff'/></svg>
+                </button>
+                <h3 class='isDesktop'>Resources</h3>
+                <button class='mobileBack isMobile' aria-label='Back'>
+                  <svg width='14' height='10' viewBox='0 0 14 10' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M5 9L1 5l4-4M1 5h12' stroke='#0073CF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/>
+                  </svg>
+                </button>
+              </div>
+                            </div>
+
+            
+
+                  </li>
+              <li  class="menu__item menu__item--expanded">
+          <a href="https://www.neonscience.org/get-involved" class="menu__link" data-drupal-link-system-path="node/6753">Get Involved</a>
+
+          
+                                        <button class='arrow visually-hidden focusable' tabindex='0' aria-label='Toggle Mega Menu'><svg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M9 1L5 5 1 1' stroke='#fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></button>
+
+                            <div class='subNavWrapper'>
+                            <div class='innerSubNavWrapper'>
+            
+                      <ul  class="menu menu--main" data-depth="1">
+
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/about/advisory-groups" class="menu__link" data-drupal-link-system-path="node/10534">Advisory Groups</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/get-involved/upcoming-events" class="menu__link" data-drupal-link-system-path="node/10737">Upcoming Events</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/get-involved/past-events" class="menu__link" data-drupal-link-system-path="node/10738">Past Events</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/get-involved/engagement" class="menu__link" data-drupal-link-system-path="node/10556">Community Engagement</a>
+
+                  </li>
+              <li  class="menu__item menu__item--expanded">
+          <a href="https://www.neonscience.org/get-involved/work-opportunities" class="menu__link" data-drupal-link-system-path="node/6229">Work Opportunities</a>
+
+          
+            
+                      <ul  class="menu menu--main" data-depth="2">
+
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/get-involved/work-opportunities/careers" class="menu__link" data-drupal-link-system-path="node/5198">Careers</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/get-involved/work-opportunities/seasonal-fieldwork" class="menu__link" data-drupal-link-system-path="node/6131">Seasonal Fieldwork</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/get-involved/work-opportunities/postdoctoral-fellows" class="menu__link" data-drupal-link-system-path="node/8729">Postdoctoral Fellows</a>
+
+                  </li>
+              <li  class="menu__item menu__item--expanded">
+          <a href="https://www.neonscience.org/get-involved/work-opportunities/internships" class="menu__link" data-drupal-link-system-path="node/16">Internships</a>
+
+          
+            
+                      <ul  class="menu menu--main" data-depth="3">
+
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/get-involved/work-opportunities/internships/intern-alumni" class="menu__link" data-drupal-link-system-path="node/10553">Intern Alumni</a>
+
+                  </li>
+      
+          </ul>
+  
+
+            
+
+                  </li>
+      
+          </ul>
+  
+
+            
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/get-involved/partners" class="menu__link" data-drupal-link-system-path="node/8094">Partners</a>
+
+                  </li>
+      
+          </ul>
+  
+
+                          </div>
+
+              <div class='subNavLabelWrapper'>
+                <button class='subNavClose isDesktop' aria-label='Close Mega Menu'>
+                  <svg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M.808 17.778L17.778.808l1.414 1.414-16.97 16.97-1.414-1.414z' fill='#fff'/><path d='M2.222.808l16.97 16.97-1.414 1.414L.808 2.222 2.222.808z' fill='#fff'/></svg>
+                </button>
+                <h3 class='isDesktop'>Get Involved</h3>
+                <button class='mobileBack isMobile' aria-label='Back'>
+                  <svg width='14' height='10' viewBox='0 0 14 10' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M5 9L1 5l4-4M1 5h12' stroke='#0073CF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/>
+                  </svg>
+                </button>
+              </div>
+                            </div>
+
+            
+
+                  </li>
       
                       <li class="myAccount">
           <a href="/user/login" title="My Account" class="menu__link">My Account</a>
         </li>
 
-                                          </ul>
+                <li class="siteSearch isDesktop">
+          <a href="/search/site" title="Search" class="menu__link">Search</a>
+        </li>
+                <li class="siteSearch isMobile">
+          
+<div
+  class="search-form-mobile isMobile"
+  id="block-searchform-mobile"
+  role="search"
+>
+  <form class="search-form" action="/search/site" method="get" id="search-block-form" accept-charset="UTF-8">
+  <form class="search-form" data-drupal-selector="search-block-form" action="/search/site" method="get" id="search-block-form" accept-charset="UTF-8">
+  <div class="js-form-item form-item js-form-type-search form-item-keys js-form-item-keys form-no-label">
+        <input title="Enter the terms you wish to search for." class="search-form__input form-search" data-drupal-selector="edit-keys" type="search" id="edit-keys" name="keys" value="" size="15" maxlength="128" />
+
+        <label for="edit-keys" class="visually-hidden">Search</label>
+      </div>
+<div class="search-form__actions form-actions js-form-wrapper form-wrapper" data-drupal-selector="edit-actions" id="edit-actions">
+
+<input class="search-form__button button js-form-submit form-submit" data-drupal-selector="edit-submit" type="submit" id="edit-submit" value="Search" />
+</div>
+
+</form>
+
+</form>
+
+</div>
+        </li>
+          </ul>
   
 
 
@@ -960,7 +996,37 @@ export default html = `
       </div>
     </div>
   </div>
-                                <div id="header__authentication-ui"></div>
+  <div class="l--offset isDesktop header__search visually-hidden">
+    <div class="header__search--inner">
+        <h3 class="header__search--title">Search</h3>
+        
+
+  <form class="search-form" action="/search/site" method="get" id="search-block-form--2" accept-charset="UTF-8">
+  <form action="/search/site" method="get" id="search-block-form--2" accept-charset="UTF-8">
+  <div class="js-form-item form-item js-form-type-search form-item-keys js-form-item-keys form-no-label">
+        <input title="Enter the terms you wish to search for." class="search-form__input form-search" data-drupal-selector="edit-keys" type="search" id="edit-keys--2" name="keys" value="" size="15" maxlength="128" />
+
+        <label for="edit-keys--2" class="visually-hidden">Search</label>
+      </div>
+<div class="search-form__actions form-actions js-form-wrapper form-wrapper" data-drupal-selector="edit-actions" id="edit-actions--2">
+
+<input class="search-form__button button js-form-submit form-submit" data-drupal-selector="edit-submit" type="submit" id="edit-submit--2" value="Search" />
+</div>
+
+</form>
+
+</form>
+
+
+        <div class="header__search-close">
+          <button aria-label="Close Search" class="button__search-close">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M.808 17.778L17.778.808l1.414 1.414-16.97 16.97-1.414-1.414z" fill="#0073CF"/><path d="M2.222.808l16.97 16.97-1.414 1.414L.808 2.222 2.222.808z" fill="#0073CF"/></svg>
+          </button>
+
+        </div>
+    </div>
+  </div>
+          <div id="header__authentication-ui"></div>
   </header>
 
 

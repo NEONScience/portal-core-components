@@ -432,6 +432,7 @@ const SiteMapTable = () => {
                   <MarkerIcon fontSize="inherit" />
                 </IconButton>
               </Tooltip>
+              {/*
               <Tooltip title={`Visit the ${domain.domainCode} domain details page`}>
                 <IconButton
                   size="small"
@@ -444,6 +445,7 @@ const SiteMapTable = () => {
                   <InfoIcon fontSize="inherit" />
                 </IconButton>
               </Tooltip>
+              */}
               <Tooltip title={`Explore data products for ${domain.domainCode}`}>
                 <IconButton
                   size="small"
