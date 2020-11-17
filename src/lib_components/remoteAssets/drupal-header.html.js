@@ -156,7 +156,7 @@ export default html = `
                       <ul  class="menu menu--main" data-depth="1">
 
               <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/data-samples/data" class="menu__link" data-drupal-link-system-path="node/8858">Data</a>
+          <a href="https://www.neonscience.org/data" class="menu__link" data-drupal-link-system-path="node/8858">Data Portal</a>
 
           
             
@@ -428,7 +428,7 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-collection/ground-beetles" class="menu__link" data-drupal-link-system-path="node/8614">Ground Beetles</a>
+          <a href="https://www.neonscience.org/data-samples/data-collection/observational-sampling/observational-types/terrestrial-organisms/ground-beetles" class="menu__link" data-drupal-link-system-path="node/8614">Ground Beetles</a>
 
                   </li>
               <li  class="menu__item">
@@ -448,7 +448,7 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-collection/ticks" class="menu__link" data-drupal-link-system-path="node/8615">Ticks</a>
+          <a href="https://www.neonscience.org/data-samples/data-collection/observational-sampling/observation-types/terrestrial-organisms/ticks" class="menu__link" data-drupal-link-system-path="node/8615">Ticks</a>
 
                   </li>
       
@@ -489,7 +489,7 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-collection/pathogens" class="menu__link" data-drupal-link-system-path="node/7881">Pathogens</a>
+          <a href="https://www.neonscience.org/data-samples/data-collection/observational-sampling/observation-types/pathogens" class="menu__link" data-drupal-link-system-path="node/7881">Pathogens</a>
 
                   </li>
               <li  class="menu__item">

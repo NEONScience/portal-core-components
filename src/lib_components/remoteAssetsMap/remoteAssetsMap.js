@@ -3,19 +3,19 @@
 const REMOTE_ASSETS = {
   DRUPAL_THEME_CSS: {
     name: 'drupal-theme.css',
-    url: 'https://neonscience.org/themes/custom/neon/build/components/theme/theme.css',
+    url: 'https://www.neonscience.org/themes/custom/neon/build/components/theme/theme.css',
   },
   DRUPAL_HEADER_JS: {
     name: 'drupal-header.js',
-    url: 'https://neonscience.org/themes/custom/neon/build/components/header/header.js',
+    url: 'https://www.neonscience.org/themes/custom/neon/build/components/header/header.js',
   },
   DRUPAL_HEADER_HTML: {
     name: 'drupal-header.html',
-    url: 'https://neonscience.org/neon-assets/partial/header',
+    url: 'https://www.neonscience.org/neon-assets/partial/header',
   },
   DRUPAL_FOOTER_HTML: {
     name: 'drupal-footer.html',
-    url: 'https://neonscience.org/neon-assets/partial/footer',
+    url: 'https://www.neonscience.org/neon-assets/partial/footer',
   },
 };
 
