@@ -11,7 +11,6 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 
 import { of, merge, Subject } from 'rxjs';
-import { ajax } from 'rxjs/ajax';
 import {
   map,
   mergeMap,
@@ -25,10 +24,11 @@ import {
 import NeonApi from '../NeonApi/NeonApi';
 import ExternalHost from '../ExternalHost/ExternalHost';
 import {
+  buildManifestConfig,
   buildS3FilesRequestUrl,
   buildManifestRequestUrl,
   buildManifestRequestBody,
-  getSizeEstimateFromManifestResponse,
+  getSizeEstimateFromManifestRollupResponse,
   MAX_POST_BODY_SIZE,
 } from '../../util/manifestUtil';
 
@@ -458,30 +458,6 @@ const getInitialStateFromProps = (props) => {
   return initialState;
 };
 
-// Build an object from state suitable for manifestUtil.buildManifestRequestUrl()
-const getManifestURLConfig = (state) => {
-  let manifestConfigError = null;
-  const manifestURLConfig = {};
-  if (!state.productData || !state.productData.productCode) {
-    manifestConfigError = 'Invalid data product';
-  }
-  if (!state.sites.isValid) {
-    manifestConfigError = 'No sites selected';
-  }
-  if (!state.dateRange.isValid) {
-    manifestConfigError = 'Invalid date range';
-  }
-  if (manifestConfigError) {
-    return [manifestURLConfig, manifestConfigError];
-  }
-  manifestURLConfig.productCode = state.productData.productCode;
-  manifestURLConfig.sites = state.sites.value;
-  manifestURLConfig.dateRange = state.dateRange.value;
-  manifestURLConfig.documentation = (state.documentation.value === 'include');
-  manifestURLConfig.packageType = state.packageType.value || ALL_POSSIBLE_VALID_PACKAGE_TYPE[0];
-  return [manifestURLConfig, manifestConfigError];
-};
-
 const getS3FilesFilteredFileCount = state => state.s3Files.validValues.filter(row => (
   Object.keys(state.s3Files.filters).every((col) => {
     if (col === 'name') {
@@ -872,9 +848,13 @@ const reducer = (state, action) => {
         newState.s3FileFetches[`${response.site}.${response.yearMonth}`] = 'fetched';
         const files = response.files.map((fileObj) => {
           const file = {
+            release: response.release || '',
+            productCode: response.productCode,
             name: fileObj.name,
             size: parseInt(fileObj.size, 10),
             url: fileObj.url,
+            checksum: fileObj.md5 ? fileObj.md5 : fileObj.crc32,
+            checksumAlgorithm: fileObj.md5 ? 'MD5' : 'CRC32',
             site: response.site,
             yearMonth: response.yearMonth,
             tableData: { checked: false },
@@ -991,7 +971,7 @@ const Provider = (props) => {
         resp => dispatch({
           type: 'setFetchManifestSucceeded',
           body: resp,
-          sizeEstimate: getSizeEstimateFromManifestResponse(resp),
+          sizeEstimate: getSizeEstimateFromManifestRollupResponse(resp),
         }),
         err => dispatch({
           type: 'setFetchManifestFailed',
@@ -1018,12 +998,14 @@ const Provider = (props) => {
               files: response.data.files,
               site,
               yearMonth,
+              productCode,
             })),
             catchError(() => ({
               status: 'error',
               files: [],
               site,
               yearMonth,
+              productCode,
             })),
           );
       }),
@@ -1073,16 +1055,19 @@ const Provider = (props) => {
     if (!state.fromManifest || state.manifest.status !== 'awaitingFetchCall') { return; }
     // Cancel any in-progress manifest fetch
     manifestCancelation$.next(true);
-    const [manifestURLConfig, manifestConfigError] = getManifestURLConfig(state);
-    if (manifestConfigError) {
+    const config = buildManifestConfig(
+      state,
+      ALL_POSSIBLE_VALID_PACKAGE_TYPE[0],
+    );
+    if (config.isError && config.errorMessage) {
       dispatch({
         type: 'setFetchManifestFailed',
-        error: manifestConfigError,
+        error: config.errorMessage,
       });
     } else {
       dispatch({ type: 'setFetchManifestCalled' });
-      const manifestURL = buildManifestRequestUrl(manifestURLConfig, true);
-      const manifestBody = buildManifestRequestBody(manifestURLConfig);
+      const manifestURL = buildManifestRequestUrl(config, true);
+      const manifestBody = buildManifestRequestBody(config);
       manifestRequest$.next({ url: manifestURL, body: manifestBody });
     }
   }, [state, manifestRequest$]);

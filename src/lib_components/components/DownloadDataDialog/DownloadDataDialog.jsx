@@ -39,6 +39,8 @@ import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import Theme, { COLORS } from '../Theme/Theme';
 
 import {
+  buildManifestConfig,
+  buildManifestRequestBody,
   downloadManifest,
   downloadAopManifest,
   formatBytes,
@@ -204,11 +206,21 @@ export default function DownloadDataDialog() {
 
   const handleDownload = () => {
     setDownloadExecuted(true);
+    const manifestSelection = {
+      productData,
+      sites,
+      dateRange,
+      documentation,
+      packageType,
+    };
     if (fromAOPManifest) {
-      return downloadAopManifest(productData, s3Files, documentation.value);
+      const config = buildManifestConfig(manifestSelection, '', true);
+      return downloadAopManifest(config, s3Files, documentation.value);
     }
     if (manifest.status !== 'fetched' || !manifest.body || !manifest.body.data) { return null; }
-    return downloadManifest(manifest.body.data);
+    const config = buildManifestConfig(manifestSelection);
+    const manifestBody = buildManifestRequestBody(config);
+    return downloadManifest(manifestBody);
   };
 
   /**
