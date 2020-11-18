@@ -23,6 +23,7 @@ declare namespace NeonEnvironment {
         export function manifest(): string | undefined;
         export function menu(): string | undefined;
         export function products(): string | undefined;
+        export function releases(): string | undefined;
         export function sites(): string | undefined;
         export function locations(): string | undefined;
         export function arcgisAssets(): string;

@@ -85,17 +85,33 @@ const NeonApi = {
    * @return The RxJS Ajax Observable
    */
   getProductsObservable: () => getJsonObservable(NeonEnvironment.getFullApiPath('products')),
+
   /**
    * Gets the product endpoint RxJS Observable for the specified product code.
    * @param {string} productCode The product code to get for.
-   * @param {string} release An option release to scope the product.
+   * @param {string} release An optional release to scope the product.
    * @return The RxJS Ajax Observable
    */
   getProductObservable: (productCode, release = null) => {
     const root = NeonEnvironment.getFullApiPath('products');
-    const path = release ? `${root}/${productCode}/${release}` : `${root}/${productCode}`
+    const path = release ? `${root}/${productCode}/${release}` : `${root}/${productCode}`;
     return getJsonObservable(path);
   },
+
+  /**
+   * Gets the release endpoint RxJS Observable.
+   * @return The RxJS Ajax Observable
+   */
+  getReleasesObservable: () => getJsonObservable(NeonEnvironment.getFullApiPath('releases')),
+
+  /**
+   * Gets the release endpoint RxJS Observable for the specified release.
+   * @param {string} release The release tag to get
+   * @return The RxJS Ajax Observable
+   */
+  getReleaseObservable: release => (
+    getJsonObservable(`${NeonEnvironment.getFullApiPath('releases')}/${release}`)
+  ),
 
   /**
    * Gets the sites endpoint RxJS Observable.
