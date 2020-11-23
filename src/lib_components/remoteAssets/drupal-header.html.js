@@ -208,25 +208,25 @@ export default html = `
 
                   </li>
               <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/data-samples/samples" class="menu__link" data-drupal-link-system-path="node/10295">Samples &amp; Specimens</a>
+          <a href="https://www.neonscience.org/samples" class="menu__link" data-drupal-link-system-path="node/10295">Samples &amp; Specimens</a>
 
           
             
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/data-samples/samples/find-neon-samples" class="menu__link" data-drupal-link-system-path="node/8174">Discover and Use NEON Samples</a>
+          <a href="https://www.neonscience.org/samples/find-samples" class="menu__link" data-drupal-link-system-path="node/8174">Discover and Use NEON Samples</a>
 
           
             
                       <ul  class="menu menu--main" data-depth="3">
 
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/samples/sample-types" class="menu__link" data-drupal-link-system-path="node/6223">Sample Types</a>
+          <a href="https://www.neonscience.org/samples/sample-types" class="menu__link" data-drupal-link-system-path="node/6223">Sample Types</a>
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/samples/sample-repositories" class="menu__link" data-drupal-link-system-path="node/10907">Sample Repositories</a>
+          <a href="https://www.neonscience.org/samples/sample-repositories" class="menu__link" data-drupal-link-system-path="node/10907">Sample Repositories</a>
 
                   </li>
               <li  class="menu__item">
@@ -234,11 +234,11 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/samples/soil-archive" class="menu__link" data-drupal-link-system-path="node/5">Megapit and Distributed Initial Characterization Soil Archives</a>
+          <a href="https://www.neonscience.org/samples/soil-archive" class="menu__link" data-drupal-link-system-path="node/5">Megapit and Distributed Initial Characterization Soil Archives</a>
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/samples/excess-samples" class="menu__link" data-drupal-link-system-path="node/10297">Excess Samples</a>
+          <a href="https://www.neonscience.org/samples/excess-samples" class="menu__link" data-drupal-link-system-path="node/10297">Excess Samples</a>
 
                   </li>
       
@@ -249,7 +249,11 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/samples/sample-quality" class="menu__link" data-drupal-link-system-path="node/10908">Sample Quality</a>
+          <a href="https://www.neonscience.org/samples/sample-processing" class="menu__link" data-drupal-link-system-path="node/10906">Sample Processing</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/samples/sample-quality" class="menu__link" data-drupal-link-system-path="node/10908">Sample Quality</a>
 
                   </li>
               <li  class="menu__item">
@@ -827,7 +831,7 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/samples/excess-samples" class="menu__link" data-drupal-link-system-path="node/10297">Excess Samples</a>
+          <a href="https://www.neonscience.org/samples/excess-samples" class="menu__link" data-drupal-link-system-path="node/10297">Excess Samples</a>
 
                   </li>
       

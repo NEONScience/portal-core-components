@@ -20,10 +20,21 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const releases = [
-  { name: 'NEON.2021.1', doi: 'https://doi.org/abc/jkl_mno_pqr_stuvwx/yzabcdef' },
-  { name: 'NEON.2021.0', doi: 'https://doi.org/abc/def_ghi_jkl_mnopqrstu' },
-  { name: 'NEON.2022.0', doi: 'https://doi.org/abc/vwx_yza_bcd_efghijklmnop' },
-  { name: 'NEON.2021.2', doi: 'https://doi.org/abc/psr_stu_vwxyz_abcdef' },
+  {
+    release: 'test-tag-1',
+    url: 'https://doi.test.datacite.org/10.80606/1wvk-f032',
+    generationDate: '2020-11-10T01:01:30Z',
+  },
+  {
+    release: 'test-tag-3',
+    url: 'https://doi.test.datacite.org/10.80606/c93r-j2px',
+    generationDate: '2020-11-20T03:22:30Z',
+  },
+  {
+    release: 'test-tag-2',
+    url: 'https://doi.test.datacite.org/10.80606/8cuy-lz8m',
+    generationDate: '2020-11-15T02:17:30Z',
+  },
 ];
 
 export default function StyleGuide() {
@@ -57,7 +68,16 @@ import ReleaseFilter from 'portal-core-components/lib/components/ReleaseFilter';
         </div>
       </ExampleBlock>
       <ExampleBlock>
-        <ReleaseFilter releases={releases} maxWidth={236} selected="NEON.2021.1" />
+        <ReleaseFilter releases={releases} maxWidth={236} selected="test-tag-2" />
+      </ExampleBlock>
+      <ExampleBlock>
+        <ReleaseFilter releases={releases} selected="test-tag-1" showGenerationDate />
+      </ExampleBlock>
+      <ExampleBlock>
+        <ReleaseFilter releases={releases} selected="test-tag-3" showDoi />
+      </ExampleBlock>
+      <ExampleBlock>
+        <ReleaseFilter releases={releases} selected="test-tag-2" showDoi showGenerationDate />
       </ExampleBlock>
       <CodeBlock>
         {`

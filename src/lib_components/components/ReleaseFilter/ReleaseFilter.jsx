@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
+import moment from 'moment';
+
 import { useId } from 'react-id-generator';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
@@ -49,8 +51,7 @@ const useStyles = makeStyles(theme => ({
   descriptionFlexInnerContainer: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: theme.spacing(0.5),
+    justifyContent: 'flex-start',
   },
   description: {
     display: 'block',
@@ -63,6 +64,7 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(1),
   },
   copyButton: {
+    marginTop: theme.spacing(1),
     backgroundColor: '#fff',
     '& svg': {
       width: '0.9rem',
@@ -80,7 +82,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const UNSPECIFIED = 'n/a';
+const UNSPECIFIED_NAME = 'n/a';
+const UNSPECIFIED_DESCRIPTION = 'Latest released and provisional data';
+const DOI_TITLE = 'Digital Object Identifier (DOI) - A citable permanent link to this this data product release';
+
+const formatGenerationDate = (generationDate) => {
+  const generationMoment = moment(generationDate);
+  return generationMoment ? generationMoment.format('MMMM D, YYYY') : null;
+};
 
 const ReleaseFilter = (props) => {
   const classes = useStyles(Theme);
@@ -91,6 +100,8 @@ const ReleaseFilter = (props) => {
     selected,
     skeleton,
     title,
+    showDoi,
+    showGenerationDate,
     ...otherProps
   } = props;
 
@@ -98,24 +109,22 @@ const ReleaseFilter = (props) => {
   const inputId = `release-filter-input-${instanceId}`;
   const labelId = `release-filter-label-${instanceId}`;
 
-  const releases = [...releasesProp || []];
-  releases.sort((a, b) => a.name > b.name);
-  releases.unshift({
-    name: UNSPECIFIED,
-    doi: null,
-    description: 'No release specified - show all released and provisional data',
-  });
+  const releases = [...releasesProp || []].sort(
+    (a, b) => (a.generationDate > b.generationDate ? -1 : 1),
+  );
 
-  const findRelease = name => releases.find(release => release.name === name) || releases[0];
+  const findReleaseObject = release => releases.find(entry => entry.release === release) || null;
+  const findRelease = release => (findReleaseObject(release) || {}).release || null;
 
   const initialRelease = findRelease(selected);
-  const [selectedRelease, setSelectedRelease] = useState(initialRelease.name);
-  const currentRelease = findRelease(selectedRelease);
+  const [selectedRelease, setSelectedRelease] = useState(initialRelease);
+  const selectedReleaseObject = findReleaseObject(selectedRelease);
 
-  const handleChange = (newReleaseName) => {
-    const newRelease = findRelease(newReleaseName);
-    setSelectedRelease(newRelease.name);
-    onChange(newRelease.name);
+  const handleChange = (newRelease) => {
+    const validatedNewRelease = newRelease === UNSPECIFIED_NAME ? null : findRelease(newRelease);
+    if (validatedNewRelease === selectedRelease) { return; }
+    setSelectedRelease(validatedNewRelease);
+    onChange(validatedNewRelease);
   };
 
   const maxWidthStyle = maxWidth ? { maxWidth: `${maxWidth}px` } : {};
@@ -141,84 +150,60 @@ const ReleaseFilter = (props) => {
     return (
       <div {...(otherProps || {})} style={{ maxWidth: `${maxWidth}px` }}>
         {titleNode}
-        <Skeleton variant="rect" width={maxWidth} height={36} style={skeletonStyle} />
+        <Skeleton variant="rect" width="100%" height={36} style={skeletonStyle} />
         <Skeleton width="70%" height={16} style={skeletonStyle} />
       </div>
     );
   }
 
-  let descriptionNode = null;
-  const doiTitle = 'Digital Object Identifier - A citable permanent link to this this data product release';
-  if (currentRelease.doi) {
-    /*
-    descriptionNode = (
-      <OutlinedInput
-        margin="dense"
-        title={currentRelease.doi}
-        value={currentRelease.doi}
-        className={classes.doiInput}
-        startAdornment={(
-          <InputAdornment position="start" className={classes.doiLabel}>
-            DOI:
-          </InputAdornment>
-        )}
-        endAdornment={(
-          <InputAdornment position="end" style={{ marginLeft: '0px' }}>
-            <CopyToClipboard text={currentRelease.doi}>
-              <Button
-                color="primary"
-                variant="outlined"
-                size="small"
-                className={classes.copyButtonAdornment}
-              >
-                <CopyIcon fontSize="small" style={{ marginRight: Theme.spacing(1) }} />
-                Copy
-              </Button>
-            </CopyToClipboard>
-          </InputAdornment>
-        )}
-        inputProps={{
-          'aria-label': 'weight',
-        }}
-        labelWidth={0}
-        style={maxWidthStyle}
-      />
-    );
-    */
-    descriptionNode = (
+  const unspecifiedNode = selectedRelease !== null ? null : (
+    <div className={classes.descriptionContainer}>
+      <Typography variant="caption" className={classes.description}>
+        {UNSPECIFIED_DESCRIPTION}
+      </Typography>
+    </div>
+  );
+
+  let generationDateNode = null;
+  if (showGenerationDate && selectedRelease !== null) {
+    generationDateNode = (
       <div className={classes.descriptionContainer}>
-        <div className={classes.descriptionFlexInnerContainer}>
-          <Typography
-            variant="subtitle2"
-            className={classes.descriptionLabel}
-            title={doiTitle}
-          >
-            DOI
-          </Typography>
-          <CopyToClipboard text={currentRelease.doi}>
-            <Button
-              color="primary"
-              variant="outlined"
-              size="small"
-              className={classes.copyButton}
-              title={`Copy DOI: ${currentRelease.doi}`}
-            >
-              <CopyIcon fontSize="small" style={{ marginRight: Theme.spacing(1) }} />
-              Copy
-            </Button>
-          </CopyToClipboard>
-        </div>
-        <Typography variant="caption" aria-label="doi" className={classes.description}>
-          {currentRelease.doi}
+        <Typography variant="caption" className={classes.description}>
+          {`Generated: ${formatGenerationDate(selectedReleaseObject.generationDate)}`}
         </Typography>
       </div>
     );
-  } else if (currentRelease.description) {
-    descriptionNode = (
+  }
+
+  let doiNode = null;
+  if (showDoi && selectedRelease !== null) {
+    doiNode = (
       <div className={classes.descriptionContainer}>
-        <Typography variant="caption" className={classes.description}>
-          {currentRelease.description}
-        </Typography>
+        <div className={classes.descriptionFlexInnerContainer}>
+          <Typography
+            variant="caption"
+            title={DOI_TITLE}
+            className={classes.description}
+            style={{ marginRight: '4px' }}
+          >
+            DOI:
+          </Typography>
+          <Typography variant="caption" aria-label="doi" className={classes.description}>
+            {selectedReleaseObject.url}
+          </Typography>
+        </div>
+        <CopyToClipboard text={selectedReleaseObject.url}>
+          <Button
+            color="primary"
+            variant="outlined"
+            size="small"
+            className={classes.copyButton}
+            title={`Copy DOI: ${selectedReleaseObject.url}`}
+          >
+            <CopyIcon fontSize="small" style={{ marginRight: Theme.spacing(1) }} />
+            Copy DOI
+          </Button>
+        </CopyToClipboard>
       </div>
     );
   }
@@ -228,30 +213,42 @@ const ReleaseFilter = (props) => {
       {titleNode}
       <Select
         data-selenium="release-filter"
-        value={selectedRelease}
+        value={selectedRelease || UNSPECIFIED_NAME}
         onChange={event => handleChange(event.target.value)}
         input={input}
         aria-labelledby={labelId}
         renderValue={value => value}
         disabled={releases.length <= 1}
       >
-        {releases.map((release) => {
-          const { name, doi, description } = release;
+        <MenuItem value={UNSPECIFIED_NAME}>
+          <div>
+            <Typography display="block">
+              {UNSPECIFIED_NAME}
+            </Typography>
+            <Typography display="block" variant="caption">
+              {UNSPECIFIED_DESCRIPTION}
+            </Typography>
+          </div>
+        </MenuItem>
+        {releases.map((entry) => {
+          const { release, generationDate } = entry;
           return (
-            <MenuItem key={name} value={name}>
+            <MenuItem key={release} value={release}>
               <div>
                 <Typography display="block">
-                  {name}
+                  {release}
                 </Typography>
                 <Typography display="block" variant="caption">
-                  {description || `DOI: ${doi}`}
+                  {`Generated: ${formatGenerationDate(generationDate)}`}
                 </Typography>
               </div>
             </MenuItem>
           );
         })}
       </Select>
-      {descriptionNode}
+      {unspecifiedNode}
+      {generationDateNode}
+      {doiNode}
     </div>
   );
 };
@@ -261,23 +258,27 @@ ReleaseFilter.propTypes = {
   onChange: PropTypes.func,
   releases: PropTypes.arrayOf(
     PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      doi: PropTypes.string,
-      description: PropTypes.string,
+      release: PropTypes.string.isRequired,
+      generationDate: PropTypes.string.isRequired,
+      url: PropTypes.string,
     }),
   ),
   selected: PropTypes.string,
   skeleton: PropTypes.bool,
   title: PropTypes.string,
+  showDoi: PropTypes.bool,
+  showGenerationDate: PropTypes.bool,
 };
 
 ReleaseFilter.defaultProps = {
-  maxWidth: null,
+  maxWidth: 300,
   onChange: () => {},
   releases: [],
   selected: null,
   skeleton: false,
   title: 'Release',
+  showDoi: false,
+  showGenerationDate: false,
 };
 
 const WrappedReleaseFilter = Theme.getWrappedComponent(ReleaseFilter);
