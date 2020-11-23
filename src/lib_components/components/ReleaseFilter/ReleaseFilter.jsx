@@ -218,7 +218,7 @@ const ReleaseFilter = (props) => {
         input={input}
         aria-labelledby={labelId}
         renderValue={value => value}
-        disabled={releases.length <= 1}
+        disabled={releases.length === 0}
       >
         <MenuItem value={UNSPECIFIED_NAME}>
           <div>
