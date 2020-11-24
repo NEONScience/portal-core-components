@@ -116,14 +116,18 @@ const ReleaseFilter = (props) => {
   const findReleaseObject = release => releases.find(entry => entry.release === release) || null;
   const findRelease = release => (findReleaseObject(release) || {}).release || null;
 
+  const selectedRelease = findRelease(selected);
+  const selectedReleaseObject = findReleaseObject(selectedRelease);
+  /*
   const initialRelease = findRelease(selected);
   const [selectedRelease, setSelectedRelease] = useState(initialRelease);
   const selectedReleaseObject = findReleaseObject(selectedRelease);
+  */
 
   const handleChange = (newRelease) => {
     const validatedNewRelease = newRelease === UNSPECIFIED_NAME ? null : findRelease(newRelease);
     if (validatedNewRelease === selectedRelease) { return; }
-    setSelectedRelease(validatedNewRelease);
+    // setSelectedRelease(validatedNewRelease);
     onChange(validatedNewRelease);
   };
 
