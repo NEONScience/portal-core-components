@@ -1,5 +1,4 @@
-/* eslint no-unused-vars: 0 */
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import moment from 'moment';
@@ -9,7 +8,6 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import InputAdornment from '@material-ui/core/InputAdornment';
 import MenuItem from '@material-ui/core/MenuItem';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import Select from '@material-ui/core/Select';
@@ -94,14 +92,15 @@ const formatGenerationDate = (generationDate) => {
 const ReleaseFilter = (props) => {
   const classes = useStyles(Theme);
   const {
+    excludeNullRelease,
     maxWidth,
     onChange,
     releases: releasesProp,
     selected,
-    skeleton,
-    title,
     showDoi,
     showGenerationDate,
+    skeleton,
+    title,
     ...otherProps
   } = props;
 
@@ -113,21 +112,20 @@ const ReleaseFilter = (props) => {
     (a, b) => (a.generationDate > b.generationDate ? -1 : 1),
   );
 
+  // SANITY CHECK: Render nothing if there are no releases and null release is excluded
+  const optionCount = releases.length + (excludeNullRelease ? 0 : 1);
+  if (!optionCount) { return null; }
+
   const findReleaseObject = release => releases.find(entry => entry.release === release) || null;
   const findRelease = release => (findReleaseObject(release) || {}).release || null;
 
-  const selectedRelease = findRelease(selected);
+  let selectedRelease = findRelease(selected);
+  if (!selectedRelease && excludeNullRelease) { selectedRelease = releases[0].release; }
   const selectedReleaseObject = findReleaseObject(selectedRelease);
-  /*
-  const initialRelease = findRelease(selected);
-  const [selectedRelease, setSelectedRelease] = useState(initialRelease);
-  const selectedReleaseObject = findReleaseObject(selectedRelease);
-  */
 
   const handleChange = (newRelease) => {
     const validatedNewRelease = newRelease === UNSPECIFIED_NAME ? null : findRelease(newRelease);
     if (validatedNewRelease === selectedRelease) { return; }
-    // setSelectedRelease(validatedNewRelease);
     onChange(validatedNewRelease);
   };
 
@@ -143,23 +141,25 @@ const ReleaseFilter = (props) => {
     />
   );
 
-  const titleNode = (
+  const titleNode = !title ? null : (
     <Typography variant="h5" component="h3" className={classes.title} id={labelId}>
       {title}
     </Typography>
   );
 
+  // Render skeleton
   if (skeleton) {
     const skeletonStyle = { marginBottom: Theme.spacing(1) };
     return (
-      <div {...(otherProps || {})} style={{ maxWidth: `${maxWidth}px` }}>
+      <div {...(otherProps || {})} style={{ maxWidth: `${maxWidth}px`, overflow: 'hidden' }}>
         {titleNode}
-        <Skeleton variant="rect" width="100%" height={36} style={skeletonStyle} />
+        <Skeleton variant="rect" width={maxWidth} height={36} style={skeletonStyle} />
         <Skeleton width="70%" height={16} style={skeletonStyle} />
       </div>
     );
   }
 
+  // Unspecified Node
   const unspecifiedNode = selectedRelease !== null ? null : (
     <div className={classes.descriptionContainer}>
       <Typography variant="caption" className={classes.description}>
@@ -168,6 +168,7 @@ const ReleaseFilter = (props) => {
     </div>
   );
 
+  // Generation Date Node
   let generationDateNode = null;
   if (showGenerationDate && selectedRelease !== null) {
     generationDateNode = (
@@ -179,6 +180,7 @@ const ReleaseFilter = (props) => {
     );
   }
 
+  // DIO Node
   let doiNode = null;
   if (showDoi && selectedRelease !== null) {
     doiNode = (
@@ -212,6 +214,7 @@ const ReleaseFilter = (props) => {
     );
   }
 
+  // Final Render
   return (
     <div {...otherProps} style={{ width: '100%', ...maxWidthStyle }}>
       {titleNode}
@@ -222,18 +225,20 @@ const ReleaseFilter = (props) => {
         input={input}
         aria-labelledby={labelId}
         renderValue={value => value}
-        disabled={releases.length === 0}
+        disabled={optionCount < 2}
       >
-        <MenuItem value={UNSPECIFIED_NAME}>
-          <div>
-            <Typography display="block">
-              {UNSPECIFIED_NAME}
-            </Typography>
-            <Typography display="block" variant="caption">
-              {UNSPECIFIED_DESCRIPTION}
-            </Typography>
-          </div>
-        </MenuItem>
+        {excludeNullRelease ? null : (
+          <MenuItem value={UNSPECIFIED_NAME}>
+            <div>
+              <Typography display="block">
+                {UNSPECIFIED_NAME}
+              </Typography>
+              <Typography display="block" variant="caption">
+                {UNSPECIFIED_DESCRIPTION}
+              </Typography>
+            </div>
+          </MenuItem>
+        )}
         {releases.map((entry) => {
           const { release, generationDate } = entry;
           return (
@@ -258,6 +263,7 @@ const ReleaseFilter = (props) => {
 };
 
 ReleaseFilter.propTypes = {
+  excludeNullRelease: PropTypes.bool,
   maxWidth: PropTypes.number,
   onChange: PropTypes.func,
   releases: PropTypes.arrayOf(
@@ -268,21 +274,22 @@ ReleaseFilter.propTypes = {
     }),
   ),
   selected: PropTypes.string,
-  skeleton: PropTypes.bool,
-  title: PropTypes.string,
   showDoi: PropTypes.bool,
   showGenerationDate: PropTypes.bool,
+  skeleton: PropTypes.bool,
+  title: PropTypes.string,
 };
 
 ReleaseFilter.defaultProps = {
-  maxWidth: 300,
+  excludeNullRelease: false,
+  maxWidth: 236,
   onChange: () => {},
   releases: [],
   selected: null,
-  skeleton: false,
-  title: 'Release',
   showDoi: false,
   showGenerationDate: false,
+  skeleton: false,
+  title: 'Release',
 };
 
 const WrappedReleaseFilter = Theme.getWrappedComponent(ReleaseFilter);

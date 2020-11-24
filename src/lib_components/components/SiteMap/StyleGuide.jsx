@@ -26,9 +26,6 @@ const useStyles = makeStyles(theme => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
-  propTableRowGrey: {
-    backgroundColor: theme.palette.grey[50],
-  },
 }));
 
 const propRows = [
