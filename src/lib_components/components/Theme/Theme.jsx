@@ -139,7 +139,6 @@ const baseTheme = createMuiTheme({
       xl: 1600,
     },
   },
-  colors: COLORS,
   palette: {
     background: {
       default: '#fff',
@@ -803,6 +802,7 @@ const baseTheme = createMuiTheme({
 
 const theme = responsiveFontSizes(baseTheme);
 theme.isNeonTheme = true;
+theme.colors = COLORS;
 
 /**
    getWrappedComponent
