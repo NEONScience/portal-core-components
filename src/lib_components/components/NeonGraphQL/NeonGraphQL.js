@@ -39,6 +39,11 @@ const getQueryBody = (type = '', dimensionality = '', arg = null) => {
               siteCode
               availableMonths
             }
+            dois {
+              release
+              generationDate
+              url
+            }
           }
         }`;
       } else {
@@ -57,6 +62,11 @@ const getQueryBody = (type = '', dimensionality = '', arg = null) => {
             siteCodes {
               siteCode
               availableMonths
+            }
+            dois {
+              release
+              generationDate
+              url
             }
           }
         }`;
