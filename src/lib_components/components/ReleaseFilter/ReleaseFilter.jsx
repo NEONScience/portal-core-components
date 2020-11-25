@@ -26,6 +26,7 @@ const useStyles = makeStyles(theme => ({
   },
   selectInput: {
     width: '100%',
+    marginBottom: theme.spacing(0.5),
   },
   doiInput: {
     width: '100%',
@@ -44,11 +45,11 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.grey[100],
   },
   descriptionContainer: {
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(0.5),
   },
   descriptionFlexInnerContainer: {
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'flex-start',
   },
   description: {
@@ -78,6 +79,9 @@ const useStyles = makeStyles(theme => ({
       height: '0.9rem',
     },
   },
+  menuItemSubtitle: {
+    color: theme.palette.grey[400],
+  },
 }));
 
 const UNSPECIFIED_NAME = 'n/a';
@@ -94,11 +98,13 @@ const ReleaseFilter = (props) => {
   const {
     excludeNullRelease,
     maxWidth,
+    nullReleaseProductCount,
     onChange,
     releases: releasesProp,
     selected,
     showDoi,
     showGenerationDate,
+    showProductCount,
     skeleton,
     title,
     ...otherProps
@@ -118,6 +124,16 @@ const ReleaseFilter = (props) => {
 
   const findReleaseObject = release => releases.find(entry => entry.release === release) || null;
   const findRelease = release => (findReleaseObject(release) || {}).release || null;
+  const getProductCount = (release) => {
+    if (!release) { return null; }
+    if (Array.isArray(release.dataProducts)) {
+      return release.dataProducts.length;
+    }
+    if (Array.isArray(release.dataProductCodes)) {
+      return release.dataProductCodes.length;
+    }
+    return null;
+  };
 
   let selectedRelease = findRelease(selected);
   if (!selectedRelease && excludeNullRelease) { selectedRelease = releases[0].release; }
@@ -180,6 +196,29 @@ const ReleaseFilter = (props) => {
     );
   }
 
+  // Product Count Node
+  let productCountNode = null;
+  if (showProductCount) {
+    if (selectedRelease === null) {
+      productCountNode = nullReleaseProductCount === null ? null : (
+        <div className={classes.descriptionContainer}>
+          <Typography variant="caption" className={classes.description}>
+            {`${nullReleaseProductCount} data products`}
+          </Typography>
+        </div>
+      );
+    } else {
+      const productCount = getProductCount(selectedReleaseObject);
+      productCountNode = (
+        <div className={classes.descriptionContainer}>
+          <Typography variant="caption" className={classes.description}>
+            {productCount !== null ? `${productCount} data products` : 'Unknown data product count'}
+          </Typography>
+        </div>
+      );
+    }
+  }
+
   // DIO Node
   let doiNode = null;
   if (showDoi && selectedRelease !== null) {
@@ -194,7 +233,12 @@ const ReleaseFilter = (props) => {
           >
             DOI:
           </Typography>
-          <Typography variant="caption" aria-label="doi" className={classes.description}>
+          <Typography
+            variant="caption"
+            aria-label="doi"
+            className={classes.description}
+            style={{ overflowWrap: 'anywhere' }}
+          >
             {selectedReleaseObject.url}
           </Typography>
         </div>
@@ -215,6 +259,11 @@ const ReleaseFilter = (props) => {
   }
 
   // Final Render
+  const menuItemSubtitleProps = {
+    display: 'block',
+    variant: 'caption',
+    className: classes.menuItemSubtitle,
+  };
   return (
     <div {...otherProps} style={{ width: '100%', ...maxWidthStyle }}>
       {titleNode}
@@ -233,23 +282,39 @@ const ReleaseFilter = (props) => {
               <Typography display="block">
                 {UNSPECIFIED_NAME}
               </Typography>
-              <Typography display="block" variant="caption">
+              <Typography {...menuItemSubtitleProps}>
                 {UNSPECIFIED_DESCRIPTION}
               </Typography>
+              {!showProductCount || nullReleaseProductCount === null ? null : (
+                <Typography {...menuItemSubtitleProps}>
+                  {`${nullReleaseProductCount} data products`}
+                </Typography>
+              )}
             </div>
           </MenuItem>
         )}
         {releases.map((entry) => {
           const { release, generationDate } = entry;
+          const productCount = getProductCount(entry);
+          const productCountSubtitle = productCount !== null
+            ? `${productCount} data products`
+            : 'Unknown data product count';
           return (
             <MenuItem key={release} value={release}>
               <div>
                 <Typography display="block">
                   {release}
                 </Typography>
-                <Typography display="block" variant="caption">
-                  {`Generated: ${formatGenerationDate(generationDate)}`}
-                </Typography>
+                {!showGenerationDate ? null : (
+                  <Typography {...menuItemSubtitleProps}>
+                    {`Generated: ${formatGenerationDate(generationDate)}`}
+                  </Typography>
+                )}
+                {!showProductCount ? null : (
+                  <Typography {...menuItemSubtitleProps}>
+                    {productCountSubtitle}
+                  </Typography>
+                )}
               </div>
             </MenuItem>
           );
@@ -257,6 +322,7 @@ const ReleaseFilter = (props) => {
       </Select>
       {unspecifiedNode}
       {generationDateNode}
+      {productCountNode}
       {doiNode}
     </div>
   );
@@ -265,6 +331,7 @@ const ReleaseFilter = (props) => {
 ReleaseFilter.propTypes = {
   excludeNullRelease: PropTypes.bool,
   maxWidth: PropTypes.number,
+  nullReleaseProductCount: PropTypes.number,
   onChange: PropTypes.func,
   releases: PropTypes.arrayOf(
     PropTypes.shape({
@@ -276,6 +343,7 @@ ReleaseFilter.propTypes = {
   selected: PropTypes.string,
   showDoi: PropTypes.bool,
   showGenerationDate: PropTypes.bool,
+  showProductCount: PropTypes.bool,
   skeleton: PropTypes.bool,
   title: PropTypes.string,
 };
@@ -283,11 +351,13 @@ ReleaseFilter.propTypes = {
 ReleaseFilter.defaultProps = {
   excludeNullRelease: false,
   maxWidth: 236,
+  nullReleaseProductCount: null,
   onChange: () => {},
   releases: [],
   selected: null,
   showDoi: false,
   showGenerationDate: false,
+  showProductCount: false,
   skeleton: false,
   title: 'Release',
 };

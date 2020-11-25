@@ -54,6 +54,26 @@ const propRows = [
     ),
   },
   {
+    name: 'nullReleaseProductCount',
+    type: 'number',
+    default: 'null',
+    examples: (
+      <div>
+        <tt>100</tt>
+        <br />
+        <tt>400</tt>
+      </div>
+    ),
+    description: (
+      <p>
+        The product count value for the null release when <tt>showProductCounts</tt> is true.
+        Typically this would represent the number of data products in the n/a release category, or
+        the number of data product in the latest release in addition to any providional-only
+        data products.
+      </p>
+    ),
+  },
+  {
     name: 'onChange',
     type: 'function',
     default: '() => {}',
@@ -119,7 +139,22 @@ const propRows = [
     default: 'false',
     description: (
       <p>
-        Whether to show the selected release generation date below the select input.
+        Whether to show the release generation dates on all menu items and below the select input
+        for the selected release. Will not show in either location for the null release.
+      </p>
+    ),
+  },
+  {
+    name: 'showProductCount',
+    type: 'boolean',
+    default: 'false',
+    description: (
+      <p>
+        Whether to show product counts on all menu items and below the select input for the selected
+        release. Will not show for the null release if <tt>nullReleaseProductCount</tt> is not also
+        provided. In order to work all objects in the <tt>releases</tt> array must contain either
+        a <tt>dataProducts</tt> array or a <tt>dataProductCodes</tt> array, the length of which is
+        used as a product count. Of those two arrays <tt>dataProducts</tt> takes precedence.
       </p>
     ),
   },
@@ -168,6 +203,30 @@ const releases = [
     release: 'test-tag-2',
     url: 'https://doi.test.datacite.org/10.80606/8cuy-lz8m',
     generationDate: '2020-11-15T02:17:30Z',
+  },
+];
+
+const releasesWithCounts = [
+  {
+    release: 'test-tag-A',
+    url: 'https://doi.test.datacite.org/10.80606/1wvk-f032',
+    generationDate: '2020-11-10T01:01:30Z',
+    dataProductCodes: ['DP1.00001.001', 'DP1.00002.001', 'DP1.00003.001', 'DP1.00004.001'],
+  },
+  {
+    release: 'test-tag-B',
+    url: 'https://doi.test.datacite.org/10.80606/c93r-j2px',
+    generationDate: '2020-11-20T03:22:30Z',
+    dataProductCodes: ['DP1.00001.001', 'DP1.00003.001', 'DP1.00004.001'],
+  },
+  {
+    release: 'test-tag-C',
+    url: 'https://doi.test.datacite.org/10.80606/8cuy-lz8m',
+    generationDate: '2020-11-15T02:17:30Z',
+    dataProducts: [
+      { productCode: 'DP1.00002.001' },
+      { productCode: 'DP1.00004.001' },
+    ],
   },
 ];
 
@@ -256,6 +315,67 @@ const onChange = (newRelease) => {
 <ReleaseFilter releases={releases} selected="test-tag-3" showGenerationDate showDoi />
 <ReleaseFilter releases={releases} title={null} excludeNullRelease />
         `}
+      </CodeBlock>
+
+      <Divider className={classes.divider} />
+      <Typography variant="h4" component="h2" gutterBottom>Including Data Product Counts</Typography>
+
+      <ExampleBlock>
+        <ReleaseFilter
+          releases={releasesWithCounts}
+          showGenerationDate
+          showProductCount
+          nullReleaseProductCount={42}
+        />
+      </ExampleBlock>
+      <ExampleBlock>
+        <ReleaseFilter
+          releases={releasesWithCounts}
+          selected="test-tag-B"
+          showGenerationDate
+          showProductCount
+        />
+      </ExampleBlock>
+
+      <CodeBlock>
+        {`
+const releasesWithCounts = [
+  {
+    release: 'test-tag-A',
+    url: 'https://doi.test.datacite.org/10.80606/1wvk-f032',
+    generationDate: '2020-11-10T01:01:30Z',
+    dataProductCodes: ['DP1.00001.001', 'DP1.00002.001', 'DP1.00003.001', 'DP1.00004.001'],
+  },
+  {
+    release: 'test-tag-B',
+    url: 'https://doi.test.datacite.org/10.80606/c93r-j2px',
+    generationDate: '2020-11-20T03:22:30Z',
+    dataProductCodes: ['DP1.00001.001', 'DP1.00003.001', 'DP1.00004.001'],
+  },
+  {
+    release: 'test-tag-C',
+    url: 'https://doi.test.datacite.org/10.80606/8cuy-lz8m',
+    generationDate: '2020-11-15T02:17:30Z',
+    dataProducts: [
+      { productCode: 'DP1.00002.001' },
+      { productCode: 'DP1.00004.001' },
+    ],
+  },
+];
+
+<ReleaseFilter
+  releases={releasesWithCounts}
+  showGenerationDate
+  showProductCount
+  nullReleaseProductCount={42}
+/>
+<ReleaseFilter
+  releases={releasesWithCounts}
+  selected="test-tag-B"
+  showGenerationDate
+  showProductCount
+/>
+`}
       </CodeBlock>
 
     </React.Fragment>
