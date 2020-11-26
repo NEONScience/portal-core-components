@@ -27,22 +27,7 @@ const useStyles = makeStyles(theme => ({
   selectInput: {
     width: '100%',
     marginBottom: theme.spacing(0.5),
-  },
-  doiInput: {
-    width: '100%',
-    marginTop: theme.spacing(1),
-    '& input': {
-      backgroundColor: '#fff',
-      padding: '10.5px',
-      borderLeft: `1px solid ${theme.palette.grey[300]}`,
-    },
-  },
-  doiLabel: {
-    '& > p': {
-      fontWeight: 700,
-      color: theme.palette.grey[400],
-    },
-    backgroundColor: theme.palette.grey[100],
+    backgroundColor: '#fff',
   },
   descriptionContainer: {
     marginTop: theme.spacing(0.5),
@@ -82,6 +67,17 @@ const useStyles = makeStyles(theme => ({
   menuItemSubtitle: {
     color: theme.palette.grey[400],
   },
+  horizontalFlex: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+  },
+  horizontalDescriptions: {
+    marginLeft: Theme.spacing(3),
+    '& > div:first-child': {
+      marginTop: '-2px !important',
+    },
+  },
 }));
 
 const UNSPECIFIED_NAME = 'n/a';
@@ -97,6 +93,7 @@ const ReleaseFilter = (props) => {
   const classes = useStyles(Theme);
   const {
     excludeNullRelease,
+    horizontal,
     maxWidth,
     nullReleaseProductCount,
     onChange,
@@ -219,7 +216,7 @@ const ReleaseFilter = (props) => {
     }
   }
 
-  // DIO Node
+  // DOI Node
   let doiNode = null;
   if (showDoi && selectedRelease !== null) {
     doiNode = (
@@ -258,68 +255,90 @@ const ReleaseFilter = (props) => {
     );
   }
 
-  // Final Render
+  // Select Node
   const menuItemSubtitleProps = {
     display: 'block',
     variant: 'caption',
     className: classes.menuItemSubtitle,
   };
-  return (
-    <div {...otherProps} style={{ width: '100%', ...maxWidthStyle }}>
-      {titleNode}
-      <Select
-        data-selenium="release-filter"
-        value={selectedRelease || UNSPECIFIED_NAME}
-        onChange={event => handleChange(event.target.value)}
-        input={input}
-        aria-labelledby={labelId}
-        renderValue={value => value}
-        disabled={optionCount < 2}
-      >
-        {excludeNullRelease ? null : (
-          <MenuItem value={UNSPECIFIED_NAME}>
+  const selectNode = (
+    <Select
+      data-selenium="release-filter"
+      value={selectedRelease || UNSPECIFIED_NAME}
+      onChange={event => handleChange(event.target.value)}
+      input={input}
+      aria-labelledby={labelId}
+      renderValue={value => value}
+      disabled={optionCount < 2}
+    >
+      {excludeNullRelease ? null : (
+        <MenuItem value={UNSPECIFIED_NAME}>
+          <div>
+            <Typography display="block">
+              {UNSPECIFIED_NAME}
+            </Typography>
+            <Typography {...menuItemSubtitleProps}>
+              {UNSPECIFIED_DESCRIPTION}
+            </Typography>
+            {!showProductCount || nullReleaseProductCount === null ? null : (
+              <Typography {...menuItemSubtitleProps}>
+                {`${nullReleaseProductCount} data products`}
+              </Typography>
+            )}
+          </div>
+        </MenuItem>
+      )}
+      {releases.map((entry) => {
+        const { release, generationDate } = entry;
+        const productCount = getProductCount(entry);
+        const productCountSubtitle = productCount !== null
+          ? `${productCount} data products`
+          : 'Unknown data product count';
+        return (
+          <MenuItem key={release} value={release}>
             <div>
               <Typography display="block">
-                {UNSPECIFIED_NAME}
+                {release}
               </Typography>
-              <Typography {...menuItemSubtitleProps}>
-                {UNSPECIFIED_DESCRIPTION}
-              </Typography>
-              {!showProductCount || nullReleaseProductCount === null ? null : (
+              {!showGenerationDate ? null : (
                 <Typography {...menuItemSubtitleProps}>
-                  {`${nullReleaseProductCount} data products`}
+                  {`Generated: ${formatGenerationDate(generationDate)}`}
+                </Typography>
+              )}
+              {!showProductCount ? null : (
+                <Typography {...menuItemSubtitleProps}>
+                  {productCountSubtitle}
                 </Typography>
               )}
             </div>
           </MenuItem>
-        )}
-        {releases.map((entry) => {
-          const { release, generationDate } = entry;
-          const productCount = getProductCount(entry);
-          const productCountSubtitle = productCount !== null
-            ? `${productCount} data products`
-            : 'Unknown data product count';
-          return (
-            <MenuItem key={release} value={release}>
-              <div>
-                <Typography display="block">
-                  {release}
-                </Typography>
-                {!showGenerationDate ? null : (
-                  <Typography {...menuItemSubtitleProps}>
-                    {`Generated: ${formatGenerationDate(generationDate)}`}
-                  </Typography>
-                )}
-                {!showProductCount ? null : (
-                  <Typography {...menuItemSubtitleProps}>
-                    {productCountSubtitle}
-                  </Typography>
-                )}
-              </div>
-            </MenuItem>
-          );
-        })}
-      </Select>
+        );
+      })}
+    </Select>
+  );
+
+  // Final Render
+  return horizontal ? (
+    <div {...otherProps}>
+      <div>
+        {titleNode}
+      </div>
+      <div className={classes.horizontalFlex}>
+        <div style={maxWidth ? { width: `${maxWidth}px` } : {}}>
+          {selectNode}
+        </div>
+        <div className={classes.horizontalDescriptions}>
+          {unspecifiedNode}
+          {generationDateNode}
+          {productCountNode}
+          {doiNode}
+        </div>
+      </div>
+    </div>
+  ) : (
+    <div {...otherProps} style={{ width: '100%', ...maxWidthStyle }}>
+      {titleNode}
+      {selectNode}
       {unspecifiedNode}
       {generationDateNode}
       {productCountNode}
@@ -330,6 +349,7 @@ const ReleaseFilter = (props) => {
 
 ReleaseFilter.propTypes = {
   excludeNullRelease: PropTypes.bool,
+  horizontal: PropTypes.bool,
   maxWidth: PropTypes.number,
   nullReleaseProductCount: PropTypes.number,
   onChange: PropTypes.func,
@@ -350,6 +370,7 @@ ReleaseFilter.propTypes = {
 
 ReleaseFilter.defaultProps = {
   excludeNullRelease: false,
+  horizontal: false,
   maxWidth: 236,
   nullReleaseProductCount: null,
   onChange: () => {},

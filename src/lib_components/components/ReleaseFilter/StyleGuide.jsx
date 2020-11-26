@@ -34,6 +34,17 @@ const propRows = [
     ),
   },
   {
+    name: 'horizontal',
+    type: 'boolean',
+    default: 'false',
+    description: (
+      <p>
+        Whether to render the subtitle / descriptive elements horizontally to the right of the
+        select instead of below.
+      </p>
+    ),
+  },
+  {
     name: 'maxWidth',
     type: 'number',
     default: '236',
@@ -276,7 +287,7 @@ import ReleaseFilter from 'portal-core-components/lib/components/ReleaseFilter';
         <ReleaseFilter releases={releases} maxWidth={400} selected="test-tag-2" />
       </ExampleBlock>
       <ExampleBlock>
-        <ReleaseFilter releases={releases} selected="test-tag-1" showGenerationDate />
+        <ReleaseFilter releases={releases} selected="test-tag-1" showGenerationDate horizontal />
       </ExampleBlock>
       <ExampleBlock>
         <ReleaseFilter releases={releases} selected="test-tag-3" showGenerationDate showDoi />
@@ -334,6 +345,7 @@ const onChange = (newRelease) => {
           selected="test-tag-B"
           showGenerationDate
           showProductCount
+          horizontal
         />
       </ExampleBlock>
 

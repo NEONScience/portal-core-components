@@ -104,10 +104,6 @@ export default html = `
           <a href="https://www.neonscience.org/about/contact-us/field-offices" class="menu__link" data-drupal-link-system-path="node/7874">Field Offices</a>
 
                   </li>
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/about/contact-us/supplier-information" class="menu__link" data-drupal-link-system-path="node/21">Supplier Information</a>
-
-                  </li>
       
           </ul>
   
