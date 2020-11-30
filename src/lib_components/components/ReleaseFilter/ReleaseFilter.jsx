@@ -70,7 +70,7 @@ const useStyles = makeStyles(theme => ({
   horizontalFlex: {
     display: 'flex',
     alignItems: 'flex-start',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
   },
   horizontalDescriptions: {
     marginLeft: Theme.spacing(3),
