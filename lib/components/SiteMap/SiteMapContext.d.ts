@@ -22,12 +22,12 @@ declare namespace Provider {
         tableFullHeight: PropTypes.Requireable<boolean>;
         location: PropTypes.Requireable<string>;
         selection: PropTypes.Requireable<string>;
-        selectedItems: PropTypes.Requireable<(string | null | undefined)[]>;
-        validItems: PropTypes.Requireable<(string | null | undefined)[]>;
+        selectedItems: PropTypes.Requireable<import("../../types/core").Nullable<string>[]>;
+        validItems: PropTypes.Requireable<import("../../types/core").Nullable<string>[]>;
         selectionLimit: (props: any, propName: any) => Error | null;
         onSelectionChange: PropTypes.Requireable<(...args: any[]) => any>;
         search: PropTypes.Requireable<string>;
-        features: PropTypes.Requireable<(string | null | undefined)[]>;
+        features: PropTypes.Requireable<import("../../types/core").Nullable<string>[]>;
     };
     export { SITE_MAP_DEFAULT_PROPS as defaultProps };
 }
