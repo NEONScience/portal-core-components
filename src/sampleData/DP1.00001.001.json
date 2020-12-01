@@ -296,6 +296,19 @@
       "meteorological station",
       "wind direction"
     ],
+    "dois": [
+      {
+        "release": "test-tag-1",
+        "url": "https://doi.test.datacite.org/10.80606/1wvk-f032",
+        "generationDate": "2020-11-10T01:01:30Z"
+      }
+    ],
+    "releases": [
+      {
+        "release": "test-tag-1",
+        "generationDate": "2020-11-10T00:51:17Z"
+      }
+    ],
     "siteCodes": [
       {
         "siteCode": "PRIN",

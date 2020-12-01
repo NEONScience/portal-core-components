@@ -136,6 +136,11 @@ const DEFAULT_STATE = {
     },
     visibleColumns: ['site', 'visit', 'date', 'name', 'type'],
   },
+  release: {
+    value: null,
+    validValues: [],
+    isValid: false,
+  },
   sites: {
     value: [],
     validValues: [],
@@ -164,15 +169,15 @@ const DEFAULT_STATE = {
 };
 
 // State keys that have a common { value, validValues, isValid } shape and can be validated
-const VALIDATABLE_STATE_KEYS = ['sites', 'dateRange', 'documentation', 'packageType', 's3Files', 'policies'];
+const VALIDATABLE_STATE_KEYS = ['release', 'sites', 'dateRange', 'documentation', 'packageType', 's3Files', 'policies'];
 
 // State keys that can be transfered between contexts through higher order state
 // (must be a subset of VALIDATABLE_STATE_KEYS)
-const HIGHER_ORDER_TRANSFERABLE_STATE_KEYS = ['sites', 'dateRange'];
+const HIGHER_ORDER_TRANSFERABLE_STATE_KEYS = ['release', 'sites', 'dateRange'];
 
 // State keys that should trigger a new manifest (file size estimate) request when updated
 // (must be a subset of VALIDATABLE_STATE_KEYS)
-const MANIFEST_TRIGGERING_STATE_KEYS = ['sites', 'dateRange', 'documentation', 'packageType'];
+const MANIFEST_TRIGGERING_STATE_KEYS = ['release', 'sites', 'dateRange', 'documentation', 'packageType'];
 
 // Regexes and associated capture group names for parse s3 file names and URLs
 const S3_PATTERN = {
@@ -210,6 +215,8 @@ const yearMonthIsValid = (yearMonth = '') => {
 // this state to render a form will render it correctly.
 const newStateIsAllowable = (key, value) => {
   switch (key) {
+    case 'release':
+      return (value === null || (typeof value === 'string' && value.length > 0));
     case 'sites':
       return (
         Array.isArray(value)
@@ -276,7 +283,7 @@ const newStateIsValid = (key, value, validValues = []) => {
     case 'policies':
       return value === true;
     default:
-      return validValues.includes(value);
+      return newStateIsAllowable(key, value) && validValues.includes(value);
   }
 };
 
@@ -318,8 +325,10 @@ const estimatePostSize = (s3FilesState, sitesState) => {
 */
 const getValidValuesFromProductData = (productData, key) => {
   switch (key) {
+    case 'release':
+      return (productData.releases || []).map(r => r.release) || [];
     case 'sites':
-      return productData.siteCodes.map(s => s.siteCode) || [];
+      return (productData.siteCodes || []).map(s => s.siteCode) || [];
     case 'dateRange':
       return (productData.siteCodes || [])
         .reduce((acc, site) => {
@@ -909,6 +918,11 @@ const reducer = (state, action) => {
       return state;
   }
 };
+const wrappedReducer = (state, action) => {
+  const newState = reducer(state, action);
+  console.log('ACTION', action, newState);
+  return newState;
+};
 
 /**
    CONTEXT
@@ -956,7 +970,7 @@ const Provider = (props) => {
   } = props;
 
   const initialState = getInitialStateFromProps(props);
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(wrappedReducer, initialState);
 
   // Create an observable for manifests requests and subscribe to it to execute
   // the manifest fetch and dispatch results when updated.
@@ -1101,6 +1115,7 @@ Provider.propTypes = {
   }),
   /* eslint-disable react/no-unused-prop-types */
   availabilityView: PropTypes.oneOf(AVAILABILITY_VIEW_MODES),
+  release: PropTypes.string,
   sites: PropTypes.arrayOf(PropTypes.string),
   dateRange: PropTypes.arrayOf(PropTypes.string),
   documentation: PropTypes.oneOf(ALL_POSSIBLE_VALID_DOCUMENTATION),
@@ -1120,6 +1135,7 @@ Provider.defaultProps = {
   stateObservable: null,
   productData: {},
   availabilityView: DEFAULT_STATE.availabilityView,
+  release: DEFAULT_STATE.release.value,
   sites: DEFAULT_STATE.sites.value,
   dateRange: DEFAULT_STATE.dateRange.value,
   documentation: DEFAULT_STATE.documentation.value,

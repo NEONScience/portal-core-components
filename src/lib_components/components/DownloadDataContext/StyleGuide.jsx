@@ -297,6 +297,13 @@ const productData = {
         Supported props (all optional):
         <ul>
           <li>
+            <tt>release</tt> - <i>String</i>
+            <br />
+            Tag for release to download. Note at present that this prop is the only way to instigate
+            a download workflow for a particular release and it <b>cannot</b> be changed from inside
+            the workflow via UI at this time.
+          </li>
+          <li>
             <tt>sites</tt> - <i>Array</i>
             <br />
             List of selected site code strings (e.g. <tt>[&quot;ABBY&quot;, &quot;BART&quot;, ...]</tt>)
@@ -321,6 +328,7 @@ const productData = {
       <ExampleBlock>
         <DownloadDataContext.Provider
           productData={sampleProductData1.data}
+          release="test-tag-1"
           sites={selectedSites}
           documentation="exclude"
           packageType="basic"
@@ -338,6 +346,7 @@ const selectedSites = ['ARIK', 'COMO', 'CPER', 'NIWO', 'RMNP', 'STER', 'UNDE', '
 
 <DownloadDataContext.Provider
   productData={productData}
+  release="test-tag-1"
   sites={selectedSites}
   documentation="exclude"
   packageType="basic"

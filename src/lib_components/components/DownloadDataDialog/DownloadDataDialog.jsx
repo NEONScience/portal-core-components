@@ -90,6 +90,10 @@ const useStyles = makeStyles(theme => ({
       pointerEvents: 'none',
     },
   },
+  releaseTitle: {
+    color: Theme.palette.grey[400],
+    fontSize: '1.1rem',
+  },
 }));
 
 export default function DownloadDataDialog() {
@@ -110,6 +114,7 @@ export default function DownloadDataDialog() {
       fromAOPManifest,
       documentation,
       s3Files,
+      release,
       sites,
       dateRange,
       packageType,
@@ -691,7 +696,7 @@ export default function DownloadDataDialog() {
           <Typography variant="h5" style={{ marginBottom: Theme.spacing(1) }}>
             {productData.productName}
           </Typography>
-          <div className={classes.startFlex}>
+          <div className={classes.startFlex} style={{ marginBottom: Theme.spacing(1) }}>
             {(productData.themes || []).map(dataTheme => (
               <div key={dataTheme} style={{ marginRight: Theme.spacing(1) }}>
                 <DataThemeIcon size={3} theme={dataTheme} />
@@ -701,6 +706,13 @@ export default function DownloadDataDialog() {
               {productData.productCode}
             </Typography>
           </div>
+          <Typography variant="subtitle2" className={classes.releaseTitle}>
+            {release.value === null ? (
+              'Latest released and provisional data'
+            ) : (
+              `Release: ${release.value}`
+            )}
+          </Typography>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
           {fromManifest || fromAOPManifest ? (
