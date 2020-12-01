@@ -340,6 +340,7 @@ NeonErrorPage.propTypes = {
 
 const NeonPage = (props) => {
   const {
+    breadcrumbHomeHref,
     breadcrumbs,
     customHeader,
     customFooter,
@@ -615,7 +616,7 @@ const NeonPage = (props) => {
       aria-label="Breadcrumbs"
       data-selenium="neon-page.breadcrumbs"
     >
-      <Link key={uniqueId()} href="/">
+      <Link key={uniqueId()} href={breadcrumbHomeHref}>
         <HomeIcon title="Home" fontSize="small" style={{ marginBottom: '-4px' }} />
       </Link>
       {breadcrumbs.map(
@@ -876,6 +877,7 @@ const children = PropTypes.oneOfType([
 ]);
 
 NeonPage.propTypes = {
+  breadcrumbHomeHref: PropTypes.string,
   breadcrumbs: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
@@ -927,6 +929,7 @@ NeonPage.propTypes = {
 };
 
 NeonPage.defaultProps = {
+  breadcrumbHomeHref: '/',
   breadcrumbs: [],
   customHeader: null,
   customFooter: null,

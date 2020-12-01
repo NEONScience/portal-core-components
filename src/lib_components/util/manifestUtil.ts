@@ -14,6 +14,7 @@ export const buildManifestConfig = (
 ): ManifestConfig => {
   const config: ManifestConfig = {
     productCode: '',
+    release: '',
     sites: [],
     dateRange: [],
     documentation: false,
@@ -36,6 +37,7 @@ export const buildManifestConfig = (
   }
   config.isError = false;
   config.productCode = selection.productData.productCode as string;
+  config.release = selection.release.value;
   config.sites = selection.sites.value;
   config.dateRange = selection.dateRange.value;
   config.documentation = (selection.documentation.value === 'include');
@@ -81,6 +83,7 @@ export const buildManifestRequestUrl = (config: ManifestConfig, useBody = true):
 export const buildManifestRequestBody = (config: ManifestConfig): ManifestRequest => {
   const {
     productCode,
+    release,
     sites,
     dateRange,
     packageType,
@@ -94,7 +97,7 @@ export const buildManifestRequestBody = (config: ManifestConfig): ManifestReques
     siteCodes: sites,
     startDateMonth: dateRange[0],
     endDateMonth: dateRange[1],
-    release: '',
+    release,
     pkgType: packageType,
     includeDocs: documentation,
     presign: true,
