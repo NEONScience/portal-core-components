@@ -1,0 +1,640 @@
+{
+  "data": {
+    "productCodeLong": "NEON.DOM.SITE.DP1.00001.001",
+    "productCode": "DP1.00001.001",
+    "productCodePresentation": "NEON.DP1.00001",
+    "productName": "2D wind speed and direction",
+    "productDescription": "Two-dimensional wind speed and direction, available as two- and thirty-minute aggregations of 1 Hz observations.  Observations are made by 2-D sonic anemometer sensors located at multiple heights on the tower infrastructure and by 2-D sonic anemometer sensors located on the aquatic meteorological station.",
+    "productStatus": "ACTIVE",
+    "productCategory": "Level 1 Data Product",
+    "productHasExpanded": true,
+    "productScienceTeamAbbr": "TIS",
+    "productScienceTeam": "Terrestrial Instrument System (TIS)",
+    "productPublicationFormatType": "TIS Data Product Type",
+    "productAbstract": "Wind plays an important role in atmospheric and environmental sciences. A function of differential heating of Earth's surface and subsequent pressure gradients, horizontal and vertical winds are responsible for advection of atmospheric pollutants, moisture, heat and momentum (Stull 1988). As such, horizontal and vertical winds will be measured throughout the Observatory.\n\nLatency:\nData collected in any given month are published during the second full week of the following month.",
+    "productDesignDescription": "Multiple 2D anemometers are deployed at tower sites. They are located on each boom arm below the tower-top level at terrestrial sites. A single 2D anemometer is located at the top of the aquatic met station at a standard height of 3m above ground level. Two- and thirty-minute averages of horizontal wind speed and direction are calculated. Each 2D anemometer represents the point at which it is placed on the tower infrastructure.",
+    "productStudyDescription": "2D wind speed is measured at all NEON terrestrial and aquatic sites.",
+    "productBasicDescription": "Includes the data product , summary statistics, expanded uncertainty,  and final quality flag.",
+    "productExpandedDescription": "Includes the basic package information plus quality metrics for all of the quality assessment and quality control analyses.",
+    "productSensor": "Gill - Wind Observer II; Extreme Weather Wind Observer",
+    "productRemarks": "Note that the final quality flag for wind direction (windDirFinalQF) in the basic download package includes a test for calm winds, under which the computed wind direction is unreliable (due to light wind speed) though the data quality may still be adequate for scientific purposes. To distinguish between data flagged for calm winds and other quality tests, please download the expanded package.",
+    "themes": [
+      "Atmosphere"
+    ],
+    "changeLogs": [
+      {
+        "id": 506,
+        "parentIssueID": null,
+        "issueDate": "2018-01-05T00:00:00Z",
+        "resolvedDate": "2018-01-05T00:00:00Z",
+        "dateRangeStart": "2017-12-28T00:00:00Z",
+        "dateRangeEnd": "2018-03-19T00:00:00Z",
+        "locationAffected": "DEJU (HOR.VER: 000.020)",
+        "issue": "Ice-forming conditions on 2D wind sensor tines.",
+        "resolution": "Applied manual flagging."
+      },
+      {
+        "id": 601,
+        "parentIssueID": 506,
+        "issueDate": "2018-01-05T00:00:00Z",
+        "resolvedDate": "2018-01-05T00:00:00Z",
+        "dateRangeStart": "2017-09-15T00:00:00Z",
+        "dateRangeEnd": "2017-12-14T00:00:00Z",
+        "locationAffected": "TOOK",
+        "issue": "Ice-forming conditions on 2D wind sensor tines.",
+        "resolution": "Applied manual flagging."
+      },
+      {
+        "id": 602,
+        "parentIssueID": 506,
+        "issueDate": "2018-01-05T00:00:00Z",
+        "resolvedDate": "2018-01-05T00:00:00Z",
+        "dateRangeStart": "2017-10-15T00:00:00Z",
+        "dateRangeEnd": "2017-12-14T00:00:00Z",
+        "locationAffected": "CARI",
+        "issue": "Ice-forming conditions on 2D wind sensor tines.",
+        "resolution": "Applied manual flagging."
+      },
+      {
+        "id": 701,
+        "parentIssueID": null,
+        "issueDate": "2018-01-09T00:00:00Z",
+        "resolvedDate": "2018-01-09T00:00:00Z",
+        "dateRangeStart": "2017-12-11T00:00:00Z",
+        "dateRangeEnd": "2018-04-25T00:00:00Z",
+        "locationAffected": "BART",
+        "issue": "Removed 2D Wind on ML1 for winterization",
+        "resolution": "Sensor reinstalled."
+      },
+      {
+        "id": 810,
+        "parentIssueID": 506,
+        "issueDate": "2018-01-05T00:00:00Z",
+        "resolvedDate": "2018-01-05T00:00:00Z",
+        "dateRangeStart": "2017-10-15T00:00:00Z",
+        "dateRangeEnd": "2018-03-07T00:00:00Z",
+        "locationAffected": "HEAL",
+        "issue": "Ice-forming conditions on 2D wind sensor tines.",
+        "resolution": "Applied manual flagging."
+      },
+      {
+        "id": 816,
+        "parentIssueID": null,
+        "issueDate": "2018-01-23T00:00:00Z",
+        "resolvedDate": "2017-10-23T00:00:00Z",
+        "dateRangeStart": "2017-10-06T00:00:00Z",
+        "dateRangeEnd": "2017-10-23T00:00:00Z",
+        "locationAffected": "CLBJ",
+        "issue": "2D Wind boom seized and orientation was off for 2D Wind Direction.",
+        "resolution": "Fixed orientation of 2D Wind boom."
+      },
+      {
+        "id": 1320,
+        "parentIssueID": 701,
+        "issueDate": "2018-01-09T00:00:00Z",
+        "resolvedDate": "2018-01-09T00:00:00Z",
+        "dateRangeStart": "2017-10-10T00:00:00Z",
+        "dateRangeEnd": "2018-06-13T00:00:00Z",
+        "locationAffected": "TOOL",
+        "issue": "Removed 2D Wind on ML1 for winterization",
+        "resolution": "Sensor reinstalled."
+      },
+      {
+        "id": 1321,
+        "parentIssueID": 701,
+        "issueDate": "2018-01-09T00:00:00Z",
+        "resolvedDate": "2018-01-09T00:00:00Z",
+        "dateRangeStart": "2017-10-24T00:00:00Z",
+        "dateRangeEnd": "2018-05-09T00:00:00Z",
+        "locationAffected": "NIWO",
+        "issue": "Removed 2D Wind on ML1 for winterization",
+        "resolution": "Sensor reinstalled."
+      },
+      {
+        "id": 1829,
+        "parentIssueID": null,
+        "issueDate": "2018-03-28T00:00:00Z",
+        "resolvedDate": "2018-03-28T00:00:00Z",
+        "dateRangeStart": "2018-03-04T00:00:00Z",
+        "dateRangeEnd": "2018-03-06T00:00:00Z",
+        "locationAffected": "MLBS tower level 3 (000.030).",
+        "issue": "A tree branch bent the sensor mount and misaligned the sensor.",
+        "resolution": "Manual flagging applied to affected data. Sensor disconnected until repaired."
+      },
+      {
+        "id": 1917,
+        "parentIssueID": null,
+        "issueDate": "2018-04-10T00:00:00Z",
+        "resolvedDate": "2019-04-16T00:00:00Z",
+        "dateRangeStart": "2015-11-16T00:00:00Z",
+        "dateRangeEnd": "2015-12-07T00:00:00Z",
+        "locationAffected": "HARV tower level 4 (000.040)",
+        "issue": "Technicians fully retracted the boom due to interference with problem trees. There is potential for flow distortion due to sensor's proximity to infrastructure.",
+        "resolution": "Manual flagging applied to affected data."
+      },
+      {
+        "id": 2124,
+        "parentIssueID": null,
+        "issueDate": "2018-04-27T00:00:00Z",
+        "resolvedDate": "2019-04-16T00:00:00Z",
+        "dateRangeStart": "2015-02-17T00:00:00Z",
+        "dateRangeEnd": "2019-04-16T00:00:00Z",
+        "locationAffected": "HARV tower level 3 (000.030)",
+        "issue": "Boom fully retracted due to persistent disturbance by trees",
+        "resolution": "Manually flagging applied to data."
+      },
+      {
+        "id": 2125,
+        "parentIssueID": 2124,
+        "issueDate": "2018-04-27T00:00:00Z",
+        "resolvedDate": "2019-04-16T00:00:00Z",
+        "dateRangeStart": "2015-02-17T00:00:00Z",
+        "dateRangeEnd": "2019-04-16T00:00:00Z",
+        "locationAffected": "HARV tower level 3 (000.030)",
+        "issue": "Boom fully retracted due to persistent disturbance by trees",
+        "resolution": "Manually flagging applied to data."
+      },
+      {
+        "id": 2126,
+        "parentIssueID": 2124,
+        "issueDate": "2018-04-27T00:00:00Z",
+        "resolvedDate": "2019-04-16T00:00:00Z",
+        "dateRangeStart": "2015-02-17T00:00:00Z",
+        "dateRangeEnd": "2019-04-16T00:00:00Z",
+        "locationAffected": "HARV tower level 3 (000.030)",
+        "issue": "Boom fully retracted due to persistent disturbance by trees",
+        "resolution": "Manually flagging applied to data."
+      },
+      {
+        "id": 2127,
+        "parentIssueID": 1917,
+        "issueDate": "2018-04-10T00:00:00Z",
+        "resolvedDate": "2019-04-16T00:00:00Z",
+        "dateRangeStart": "2014-11-01T00:00:00Z",
+        "dateRangeEnd": "2019-04-16T00:00:00Z",
+        "locationAffected": "HARV tower level 4 (000.040)",
+        "issue": "Technicians fully retracted the boom due to interference with problem trees. There is potential for flow distortion due to sensor's proximity to infrastructure.",
+        "resolution": "Manual flagging applied to affected data."
+      },
+      {
+        "id": 2520,
+        "parentIssueID": null,
+        "issueDate": "2018-05-07T00:00:00Z",
+        "resolvedDate": "2017-04-21T00:00:00Z",
+        "dateRangeStart": "2017-04-12T00:00:00Z",
+        "dateRangeEnd": "2017-04-21T00:00:00Z",
+        "locationAffected": "GRSM tower level 4 (000.040)",
+        "issue": "Sensor mounting bracket bent by tree and sensor unable to be leveled to specifications.",
+        "resolution": "New bracket was installed. Data manually flagged."
+      },
+      {
+        "id": 2525,
+        "parentIssueID": null,
+        "issueDate": "2018-05-08T00:00:00Z",
+        "resolvedDate": "2018-05-08T00:00:00Z",
+        "dateRangeStart": "2018-04-19T00:00:00Z",
+        "dateRangeEnd": "2018-04-19T00:00:00Z",
+        "locationAffected": "NIWO (HOR.VER 000.020)",
+        "issue": "Sensor not powered down for cleaning.",
+        "resolution": "Applied manual flagging."
+      },
+      {
+        "id": 4620,
+        "parentIssueID": null,
+        "issueDate": "2018-09-07T00:00:00Z",
+        "resolvedDate": "2018-09-07T00:00:00Z",
+        "dateRangeStart": "2018-08-30T00:00:00Z",
+        "dateRangeEnd": "2018-08-30T00:00:00Z",
+        "locationAffected": "CLBJ ML4 (HOR.VER 000.040)",
+        "issue": "Sensor was streaming data while boom was retracted.",
+        "resolution": "Applied manual flagging"
+      },
+      {
+        "id": 5930,
+        "parentIssueID": 506,
+        "issueDate": "2018-01-05T00:00:00Z",
+        "resolvedDate": "2018-01-05T00:00:00Z",
+        "dateRangeStart": "2017-12-28T00:00:00Z",
+        "dateRangeEnd": "2018-05-02T00:00:00Z",
+        "locationAffected": "DEJU (HOR.VER: 000.030 & 000.040)",
+        "issue": "Ice-forming conditions on 2D wind sensor tines.",
+        "resolution": "Applied manual flagging."
+      },
+      {
+        "id": 5931,
+        "parentIssueID": 506,
+        "issueDate": "2018-01-05T00:00:00Z",
+        "resolvedDate": "2018-01-05T00:00:00Z",
+        "dateRangeStart": "2017-12-28T00:00:00Z",
+        "dateRangeEnd": "2018-05-02T00:00:00Z",
+        "locationAffected": "DEJU (HOR.VER: 000.030 and .000.040)",
+        "issue": "Ice-forming conditions on 2D wind sensor tines.",
+        "resolution": "Applied manual flagging."
+      },
+      {
+        "id": 5932,
+        "parentIssueID": null,
+        "issueDate": "2018-01-05T00:00:00Z",
+        "resolvedDate": "2018-01-05T00:00:00Z",
+        "dateRangeStart": "2017-12-28T00:00:00Z",
+        "dateRangeEnd": "2018-05-02T00:00:00Z",
+        "locationAffected": "DEJU (HOR.VER: 000.030 and .000.040)",
+        "issue": "Ice-forming conditions on 2D Wind sensor",
+        "resolution": "Applied manual flagging."
+      },
+      {
+        "id": 6331,
+        "parentIssueID": null,
+        "issueDate": "2018-12-11T00:00:00Z",
+        "resolvedDate": "2018-12-11T00:00:00Z",
+        "dateRangeStart": "2018-10-31T00:00:00Z",
+        "dateRangeEnd": "2018-11-19T00:00:00Z",
+        "locationAffected": "GRSM ML4 (HOR.VER: 000.040)",
+        "issue": "Mounting bracket was bent by tree limb and wind direction was distorted",
+        "resolution": "Mounting bracket was replaced and manual flagging was applied to impacted data."
+      },
+      {
+        "id": 6626,
+        "parentIssueID": 6331,
+        "issueDate": "2018-12-11T00:00:00Z",
+        "resolvedDate": "2018-12-11T00:00:00Z",
+        "dateRangeStart": "2018-11-26T00:00:00Z",
+        "dateRangeEnd": "2018-11-29T00:00:00Z",
+        "locationAffected": "SERC ML3 (HOR.VER.000.030)",
+        "issue": "Mounting bracket was bent by tree limb and wind direction was distorted",
+        "resolution": "Mounting bracket was replaced and manual flagging was applied to impacted data."
+      },
+      {
+        "id": 7126,
+        "parentIssueID": null,
+        "issueDate": "2019-02-19T00:00:00Z",
+        "resolvedDate": "2019-02-19T00:00:00Z",
+        "dateRangeStart": "2018-01-01T00:00:00Z",
+        "dateRangeEnd": "2018-10-31T00:00:00Z",
+        "locationAffected": "All locations.",
+        "issue": "Processing failures resulted in poor data product coverage for some sites and time periods.",
+        "resolution": "Data reprocessed to improve data product coverage."
+      },
+      {
+        "id": 7159,
+        "parentIssueID": null,
+        "issueDate": "2019-02-19T00:00:00Z",
+        "resolvedDate": "2019-02-19T00:00:00Z",
+        "dateRangeStart": "2018-12-06T00:00:00Z",
+        "dateRangeEnd": "2019-02-18T00:00:00Z",
+        "locationAffected": "TALL ML2 (HOR.VER.000.020)",
+        "issue": "2D sensor was installed with an orientation of 0 degrees when it should have been 270 degrees.",
+        "resolution": "Sensor was realigned and affected data flagged"
+      },
+      {
+        "id": 7726,
+        "parentIssueID": null,
+        "issueDate": "2019-04-04T00:00:00Z",
+        "resolvedDate": "2019-04-04T00:00:00Z",
+        "dateRangeStart": "2019-03-14T00:00:00Z",
+        "dateRangeEnd": "2019-03-31T00:00:00Z",
+        "locationAffected": "KONZ ML1 (HOR.VER.000.010)",
+        "issue": "2D sensor transducer cap became dislodged rendering calibrations invalid.",
+        "resolution": "Sensor swapped. Affected data has had manual flagging applied."
+      },
+      {
+        "id": 8832,
+        "parentIssueID": null,
+        "issueDate": "2019-05-13T00:00:00Z",
+        "resolvedDate": "2019-05-13T00:00:00Z",
+        "dateRangeStart": "2019-01-30T00:00:00Z",
+        "dateRangeEnd": "2019-04-23T00:00:00Z",
+        "locationAffected": "DSNY ML2 (HOR.VER.000.020)",
+        "issue": "Sensor was installed with an orientation 180 degrees off of spec.",
+        "resolution": "Sensor was reinstalled correctly and data manually flagged."
+      },
+      {
+        "id": 9134,
+        "parentIssueID": null,
+        "issueDate": "2019-05-20T00:00:00Z",
+        "resolvedDate": "2019-05-02T00:00:00Z",
+        "dateRangeStart": "2019-04-19T00:00:00Z",
+        "dateRangeEnd": "2019-05-02T00:00:00Z",
+        "locationAffected": "POSE (HOR.VER: 200.000)",
+        "issue": "MET station hit by falling tree",
+        "resolution": "MET station leveled.  Manual flagging applied"
+      },
+      {
+        "id": 9729,
+        "parentIssueID": null,
+        "issueDate": "2019-05-31T00:00:00Z",
+        "resolvedDate": "2019-06-05T00:00:00Z",
+        "dateRangeStart": "2019-05-30T00:00:00Z",
+        "dateRangeEnd": "2019-05-30T00:00:00Z",
+        "locationAffected": "CLBJ ML1 and ML2 (HOR.VER.000.010 and HOR.VER.000.020)",
+        "issue": "Sensors streaming during measurement level troubleshooting",
+        "resolution": "Manual flagging applied"
+      },
+      {
+        "id": 9731,
+        "parentIssueID": null,
+        "issueDate": "2019-06-04T00:00:00Z",
+        "resolvedDate": "2019-06-06T00:00:00Z",
+        "dateRangeStart": "2019-06-04T00:00:00Z",
+        "dateRangeEnd": "2019-06-05T00:00:00Z",
+        "locationAffected": "WREF ML6 (HOR.VER.000.060)",
+        "issue": "Sensor streaming while boom was fully retracted",
+        "resolution": "Manual flagging applied"
+      },
+      {
+        "id": 10726,
+        "parentIssueID": null,
+        "issueDate": "2019-08-02T00:00:00Z",
+        "resolvedDate": "2019-08-02T00:00:00Z",
+        "dateRangeStart": "2019-07-01T00:00:00Z",
+        "dateRangeEnd": "2019-08-02T00:00:00Z",
+        "locationAffected": "HARV ML3(HOR.VER.000.030) and ML4 (HOR.VER.000.040)",
+        "issue": "Sensors streaming while boom was fully retracted",
+        "resolution": "Ongoing. Manual flagging is been applied."
+      },
+      {
+        "id": 10728,
+        "parentIssueID": null,
+        "issueDate": "2019-08-02T00:00:00Z",
+        "resolvedDate": "2019-08-02T00:00:00Z",
+        "dateRangeStart": "2019-05-22T00:00:00Z",
+        "dateRangeEnd": "2019-06-20T00:00:00Z",
+        "locationAffected": "TREE ML4 (HOR.VER.000.040)",
+        "issue": "Sensor bent 22 degrees off of level by tree",
+        "resolution": "Parts replaced. Manual flagging applied"
+      },
+      {
+        "id": 11829,
+        "parentIssueID": null,
+        "issueDate": "2019-09-27T00:00:00Z",
+        "resolvedDate": "2019-09-27T00:00:00Z",
+        "dateRangeStart": "2019-08-30T00:00:00Z",
+        "dateRangeEnd": "2019-09-23T00:00:00Z",
+        "locationAffected": "UKFS ML4 (HOR.VER.000.040)",
+        "issue": "Sensor mounting bracket bent off of level by a tree branch",
+        "resolution": "Mounting bracket replaced and manual flagging applied"
+      },
+      {
+        "id": 12427,
+        "parentIssueID": null,
+        "issueDate": "2019-10-10T00:00:00Z",
+        "resolvedDate": "2019-10-10T00:00:00Z",
+        "dateRangeStart": "2019-10-06T00:00:00Z",
+        "dateRangeEnd": "2019-10-09T00:00:00Z",
+        "locationAffected": "NOGP ML2 (HOR.VER.000.020)",
+        "issue": "Sensor fell off mounting bracket while still streaming",
+        "resolution": "Sensor reattached. Manual flagging applied."
+      },
+      {
+        "id": 12926,
+        "parentIssueID": null,
+        "issueDate": "2019-10-30T00:00:00Z",
+        "resolvedDate": "2019-10-30T00:00:00Z",
+        "dateRangeStart": "2018-04-24T00:00:00Z",
+        "dateRangeEnd": "2019-04-04T00:00:00Z",
+        "locationAffected": "LIRO (HOR.VER.200.000)",
+        "issue": "Sensor installed with a rotation of 180 degrees from spec",
+        "resolution": "Manual flagging applied"
+      }
+    ],
+    "specs": [
+      {
+        "specId": 2398,
+        "specNumber": "NEON.DOC.000780vB",
+        "specType": "application/pdf",
+        "specSize": 993762,
+        "specDescription": "NEON Algorithm Theoretical Basis Document (ATBD) - 2D Wind Speed and Direction"
+      },
+      {
+        "specId": 2399,
+        "specNumber": "NEON.DOC.000387vC",
+        "specType": "application/pdf",
+        "specSize": 712482,
+        "specDescription": "NEON Sensor Command, Control and Configuration (C3) Document: 2D Wind"
+      },
+      {
+        "specId": 3534,
+        "specNumber": "NEON.DOC.000783vA",
+        "specType": "application/pdf",
+        "specSize": 305679,
+        "specDescription": "Time Series Automatic Despiking for TIS Level 1 Data Products - QA/QC Algorithm Theoretical Basis Document"
+      },
+      {
+        "specId": 3535,
+        "specNumber": "NEON.DOC.001113vA",
+        "specType": "application/pdf",
+        "specSize": 1613904,
+        "specDescription": "ATBD: Quality Flags and Quality Metrics for TIS Data Products"
+      },
+      {
+        "specId": 3536,
+        "specNumber": "NEON.DOC.011081vB",
+        "specType": "application/pdf",
+        "specSize": 444406,
+        "specDescription": "NEON Algorithm Theoretical Basis Document QA/QC Plausibility Testing"
+      }
+    ],
+    "keywords": [
+      "met station",
+      "meteorological station",
+      "wind direction",
+      "sonic anemometer",
+      "horizontal wind",
+      "tower",
+      "wind speed"
+    ],
+    "dois": [
+      {
+        "release": "test-tag-1",
+        "url": "https://doi.test.datacite.org/10.80606/1wvk-f032",
+        "generationDate": "2020-11-10T01:01:30Z"
+      },
+      {
+        "release": "test-tag-2",
+        "url": "https://doi.test.datacite.org/10.80606/ej6d-zm84",
+        "generationDate": "2020-11-19T22:03:10Z"
+      },
+      {
+        "release": "test-tag-4",
+        "url": "https://doi.test.datacite.org/10.80606/24h5-vp10",
+        "generationDate": "2020-11-20T15:55:29Z"
+      },
+      {
+        "release": "test-tag-5",
+        "url": "https://doi.test.datacite.org/10.80606/6a6g-fm66",
+        "generationDate": "2020-11-21T05:59:51Z"
+      },
+      {
+        "release": "test-tag-32",
+        "url": "https://doi.test.datacite.org/10.80606/0f47-2h25",
+        "generationDate": "2020-12-01T02:41:37Z"
+      }
+    ],
+    "releases": [
+      {
+        "release": "test-tag-1",
+        "generationDate": "2020-11-10T00:51:17Z"
+      },
+      {
+        "release": "test-tag-2",
+        "generationDate": "2020-11-19T21:14:51Z"
+      },
+      {
+        "release": "test-tag-3",
+        "generationDate": "2020-11-20T15:52:48Z"
+      },
+      {
+        "release": "test-tag-4",
+        "generationDate": "2020-11-20T15:54:48Z"
+      },
+      {
+        "release": "test-tag-5",
+        "generationDate": "2020-11-21T05:50:45Z"
+      },
+      {
+        "release": "test-tag-6",
+        "generationDate": "2020-11-23T07:23:48Z"
+      },
+      {
+        "release": "test-tag-7",
+        "generationDate": "2020-11-23T08:31:25Z"
+      },
+      {
+        "release": "test-tag-8",
+        "generationDate": "2020-11-23T08:36:27Z"
+      },
+      {
+        "release": "test-tag-9",
+        "generationDate": "2020-11-23T08:37:53Z"
+      },
+      {
+        "release": "test-tag-10",
+        "generationDate": "2020-11-23T08:49:14Z"
+      },
+      {
+        "release": "test-tag-11",
+        "generationDate": "2020-11-23T08:53:43Z"
+      },
+      {
+        "release": "test-tag-12",
+        "generationDate": "2020-11-23T14:48:10Z"
+      },
+      {
+        "release": "test-tag-13",
+        "generationDate": "2020-11-23T15:11:33Z"
+      },
+      {
+        "release": "test-tag-14",
+        "generationDate": "2020-11-23T15:41:12Z"
+      },
+      {
+        "release": "test-tag-15",
+        "generationDate": "2020-11-23T17:01:42Z"
+      },
+      {
+        "release": "test-tag-16",
+        "generationDate": "2020-11-23T17:06:41Z"
+      },
+      {
+        "release": "test-tag-17",
+        "generationDate": "2020-11-23T19:15:36Z"
+      },
+      {
+        "release": "test-tag-18",
+        "generationDate": "2020-11-23T22:12:23Z"
+      },
+      {
+        "release": "test-tag-19",
+        "generationDate": "2020-11-24T01:53:53Z"
+      },
+      {
+        "release": "test-tag-20",
+        "generationDate": "2020-11-24T01:59:28Z"
+      },
+      {
+        "release": "test-tag-21",
+        "generationDate": "2020-11-24T02:01:18Z"
+      },
+      {
+        "release": "test-tag-22",
+        "generationDate": "2020-11-26T02:21:16Z"
+      },
+      {
+        "release": "test-tag-23",
+        "generationDate": "2020-11-26T02:23:35Z"
+      },
+      {
+        "release": "test-tag-24",
+        "generationDate": "2020-11-26T02:28:34Z"
+      },
+      {
+        "release": "test-tag-25",
+        "generationDate": "2020-11-26T02:29:35Z"
+      },
+      {
+        "release": "test-tag-26",
+        "generationDate": "2020-11-26T02:33:19Z"
+      },
+      {
+        "release": "test-tag-27",
+        "generationDate": "2020-11-26T02:36:10Z"
+      },
+      {
+        "release": "test-tag-28",
+        "generationDate": "2020-11-26T02:41:50Z"
+      },
+      {
+        "release": "test-tag-29",
+        "generationDate": "2020-11-26T02:43:20Z"
+      },
+      {
+        "release": "test-tag-30",
+        "generationDate": "2020-11-26T02:43:45Z"
+      },
+      {
+        "release": "test-tag-31",
+        "generationDate": "2020-11-26T02:50:22Z"
+      },
+      {
+        "release": "test-tag-32",
+        "generationDate": "2020-12-01T02:16:49Z"
+      }
+    ],
+    "siteCodes": [
+      {
+        "siteCode": "ARIK",
+        "availableMonths": [
+          "2018-08"
+        ],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP1.00001.001/ARIK/2018-08"
+        ],
+        "availableReleases": [
+          {
+            "release": "test-tag-32",
+            "availableMonths": [
+              "2018-08"
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "OAES",
+        "availableMonths": [
+          "2017-02"
+        ],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP1.00001.001/OAES/2017-02"
+        ],
+        "availableReleases": [
+          {
+            "release": "test-tag-32",
+            "availableMonths": [
+              "2017-02"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

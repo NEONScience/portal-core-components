@@ -136,6 +136,7 @@ const DEFAULT_STATE = {
     },
     visibleColumns: ['site', 'visit', 'date', 'name', 'type'],
   },
+  latestRelease: null,
   release: {
     value: null,
     validValues: [],
@@ -380,6 +381,14 @@ const getInitialStateFromProps = (props) => {
       .some(key => (typeof productData[key] === 'string' && productData[key].includes('AOP')))
     && (productData.productPublicationFormatType || '').includes('AOP')
   );
+
+  // Pull the latest release from productData
+  if (productData.releases && productData.releases.length) {
+    const sortedReleases = [...productData.releases].sort(
+      (a, b) => (a.generationDate > b.generationDate ? -1 : 1),
+    );
+    initialState.latestRelease = sortedReleases[0].release;
+  }
 
   // Set required steps and data download origin booleans
   // Note that a data product can come from the NEON manifest AND an external host

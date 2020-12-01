@@ -13,17 +13,20 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
+import IconButton from '@material-ui/core/IconButton';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Link from '@material-ui/core/Link';
 import MobileStepper from '@material-ui/core/MobileStepper';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepButton from '@material-ui/core/StepButton';
+import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
 import CircleStarIcon from '@material-ui/icons/Stars';
 import DownloadIcon from '@material-ui/icons/SaveAlt';
 import ErrorIcon from '@material-ui/icons/ErrorOutline';
+import InfoIcon from '@material-ui/icons/InfoOutlined';
 import LeftIcon from '@material-ui/icons/ChevronLeft';
 import RightIcon from '@material-ui/icons/ChevronRight';
 import WarningIcon from '@material-ui/icons/Warning';
@@ -91,8 +94,14 @@ const useStyles = makeStyles(theme => ({
     },
   },
   releaseTitle: {
-    color: Theme.palette.grey[400],
+    color: COLORS.BROWN[500],
     fontSize: '1.1rem',
+  },
+  tooltip: {
+    marginLeft: theme.spacing(0.5),
+  },
+  iconButton: {
+    marginTop: theme.spacing(-0.25),
   },
 }));
 
@@ -115,6 +124,7 @@ export default function DownloadDataDialog() {
       documentation,
       s3Files,
       release,
+      latestRelease,
       sites,
       dateRange,
       packageType,
@@ -405,20 +415,10 @@ export default function DownloadDataDialog() {
   const renderAuthSuggestion = () => {
     if (isAuthenticated) { return null; }
     const signInLink = (
-      <Link
-        target="_new"
-        href={NeonEnvironment.getFullAuthPath('login')}
-      >
-        signing in
-      </Link>
+      <Link target="_new" href={NeonEnvironment.getFullAuthPath('login')}>signing in</Link>
     );
     const benefitsLink = (
-      <Link
-        target="_new"
-        href="https://www.neonscience.org/data/about-data/data-portal-user-accounts"
-      >
-        here
-      </Link>
+      <Link target="_new" href="https://www.neonscience.org/about/user-accounts">here</Link>
     );
     /* eslint-disable react/jsx-one-expression-per-line */
     const authStyles = { color: COLORS.GOLD[800], textAlign: 'right', whiteSpace: 'nowrap' };
@@ -672,6 +672,9 @@ export default function DownloadDataDialog() {
     </React.Fragment>
   );
 
+  const releaseTooltip = release.value === null
+    ? `You are downloading only the latest released and provisional data (release: ${latestRelease || 'unknown'}).`
+    : `You are downloading product data only from the ${release.value} release (no provisional data will be included).`;
   return (
     <DialogBase
       data-selenium="download-data-dialog"
@@ -706,13 +709,24 @@ export default function DownloadDataDialog() {
               {productData.productCode}
             </Typography>
           </div>
-          <Typography variant="subtitle2" className={classes.releaseTitle}>
-            {release.value === null ? (
-              'Latest released and provisional data'
-            ) : (
-              `Release: ${release.value}`
-            )}
-          </Typography>
+          <div className={classes.startFlex}>
+            <Typography variant="subtitle2" className={classes.releaseTitle}>
+              {release.value === null ? (
+                'Latest released and provisional data'
+              ) : (
+                `Release: ${release.value}`
+              )}
+            </Typography>
+            <Tooltip
+              placement="right"
+              title={releaseTooltip}
+              className={classes.tooltip}
+            >
+              <IconButton size="small" className={classes.iconButton} aria-label={releaseTooltip}>
+                <InfoIcon fontSize="small" />
+              </IconButton>
+            </Tooltip>
+          </div>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
           {fromManifest || fromAOPManifest ? (

@@ -20,6 +20,7 @@ import Theme from '../Theme/Theme';
 
 import sampleProductData1 from '../../../sampleData/DP1.00001.001.json';
 import sampleProductData2 from '../../../sampleData/DP1.00004.001.json';
+import sampleProductData3 from '../../../sampleData/DP1.00001.001.release.json';
 
 const useStyles = makeStyles(theme => ({
   divider: {
@@ -244,9 +245,12 @@ import DownloadDataContext from 'portal-core-components/lib/components/DownloadD
         and a <tt>siteCodes</tt> array of site availability objects.
       </DocBlock>
       <ExampleBlock>
+        <div />
+        {/*
         <DownloadDataContext.Provider productData={sampleProductData1.data}>
           <DownloadDataButton />
         </DownloadDataContext.Provider>
+        */}
       </ExampleBlock>
       <CodeBlock>
         {`
@@ -327,13 +331,18 @@ const productData = {
       </DocBlock>
       <ExampleBlock>
         <DownloadDataContext.Provider
-          productData={sampleProductData1.data}
+          productData={sampleProductData3.data}
           release="test-tag-1"
-          sites={selectedSites}
+          sites={['ARIK']}
           documentation="exclude"
           packageType="basic"
         >
           <DownloadDataButton />
+        </DownloadDataContext.Provider>
+        <DownloadDataContext.Provider
+          productData={sampleProductData3.data}
+        >
+          <DownloadDataButton label="No Props" />
         </DownloadDataContext.Provider>
       </ExampleBlock>
       <CodeBlock>
@@ -342,12 +351,11 @@ import DownloadDataButton from 'portal-core-components/lib/components/DownloadDa
 import DownloadDataContext from 'portal-core-components/lib/components/DownloadDataContext';
 
 const productData = {...};
-const selectedSites = ['ARIK', 'COMO', 'CPER', 'NIWO', 'RMNP', 'STER', 'UNDE', 'WLOU'];
 
 <DownloadDataContext.Provider
   productData={productData}
   release="test-tag-1"
-  sites={selectedSites}
+  sites={['ARIK']}
   documentation="exclude"
   packageType="basic"
 >
@@ -372,6 +380,8 @@ const selectedSites = ['ARIK', 'COMO', 'CPER', 'NIWO', 'RMNP', 'STER', 'UNDE', '
         configuration state, out of which individual state values can be destructured.
       </DocBlock>
       <ExampleBlock>
+        <div />
+        {/*
         <div>
           <DownloadDataContext.Provider
             productData={sampleProductData1.data}
@@ -382,6 +392,7 @@ const selectedSites = ['ARIK', 'COMO', 'CPER', 'NIWO', 'RMNP', 'STER', 'UNDE', '
             <DataProductAvailability />
           </DownloadDataContext.Provider>
         </div>
+         */}
       </ExampleBlock>
       <CodeBlock>
         {`
@@ -424,6 +435,8 @@ const ListSitesComponent = () => {
         appropriate, new data to apply.
       </DocBlock>
       <ExampleBlock>
+        <div />
+        {/*
         <div>
           <DownloadDataContext.Provider
             productData={sampleProductData1.data}
@@ -434,6 +447,7 @@ const ListSitesComponent = () => {
             <DataProductAvailability />
           </DownloadDataContext.Provider>
         </div>
+        */}
       </ExampleBlock>
       <CodeBlock>
         {`
@@ -553,7 +567,10 @@ const AlphaSitesComponent = () => {
         to the higher order component.
       </DocBlock>
       <ExampleBlock>
+        <div />
+        {/*
         <MyAppComponent />
+        */}
       </ExampleBlock>
       <CodeBlock>
         {`
