@@ -39,6 +39,7 @@ export interface ManifestResult {
 }
 export interface ManifestConfig {
     productCode: string;
+    release: Nullable<string>;
     sites: string[];
     dateRange: string[];
     documentation: boolean;
@@ -48,6 +49,7 @@ export interface ManifestConfig {
 }
 export interface ManifestSelection {
     productData: Record<string, unknown>;
+    release: ReleaseSelectionState;
     sites: SiteSelectionState;
     dateRange: DateRangeSelectionState;
     documentation: DocumentationSelectionState;
@@ -55,6 +57,9 @@ export interface ManifestSelection {
 }
 export interface ISelectionState {
     isValid: boolean;
+}
+export interface ReleaseSelectionState extends ISelectionState {
+    value: string;
 }
 export interface SiteSelectionState extends ISelectionState {
     value: string[];

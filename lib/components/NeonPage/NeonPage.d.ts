@@ -2,6 +2,7 @@ export default NeonPage;
 declare function NeonPage(props: any): JSX.Element;
 declare namespace NeonPage {
     export namespace propTypes {
+        export const breadcrumbHomeHref: PropTypes.Requireable<string>;
         export const breadcrumbs: PropTypes.Requireable<(PropTypes.InferProps<{
             name: PropTypes.Validator<string>;
             href: PropTypes.Requireable<string>;
@@ -37,6 +38,8 @@ declare namespace NeonPage {
         export { children_1 as children };
     }
     export namespace defaultProps {
+        const breadcrumbHomeHref_1: string;
+        export { breadcrumbHomeHref_1 as breadcrumbHomeHref };
         const breadcrumbs_1: never[];
         export { breadcrumbs_1 as breadcrumbs };
         const customHeader_1: null;
