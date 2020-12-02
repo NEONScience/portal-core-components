@@ -929,7 +929,7 @@ const reducer = (state, action) => {
 };
 const wrappedReducer = (state, action) => {
   const newState = reducer(state, action);
-  console.log('ACTION', action, newState);
+  // console.log('ACTION', action, newState);
   return newState;
 };
 
