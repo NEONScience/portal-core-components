@@ -80,8 +80,8 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const UNSPECIFIED_NAME = 'n/a';
-const UNSPECIFIED_DESCRIPTION = 'Latest released and provisional data';
+const UNSPECIFIED_NAME = 'Latest and Provisional';
+const UNSPECIFIED_DESCRIPTION = 'Data in the latest release in addition to provisional data (not yet in any release)';
 const DOI_TITLE = 'Digital Object Identifier (DOI) - A citable permanent link to this this data product release';
 
 const formatGenerationDate = (generationDate) => {
