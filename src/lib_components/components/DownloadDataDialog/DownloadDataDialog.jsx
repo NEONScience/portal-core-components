@@ -223,6 +223,7 @@ export default function DownloadDataDialog() {
     setDownloadExecuted(true);
     const manifestSelection = {
       productData,
+      release,
       sites,
       dateRange,
       documentation,
