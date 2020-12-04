@@ -34,6 +34,12 @@ declare namespace NeonPage {
         export const title: PropTypes.Requireable<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
         export const useCoreHeader: PropTypes.Requireable<boolean>;
         export const unstickyDrupalHeader: PropTypes.Requireable<boolean>;
+        export const NeonContextProviderProps: {
+            children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+            useCoreAuth: PropTypes.Requireable<boolean>;
+            useCoreHeader: PropTypes.Requireable<boolean>;
+            whenFinal: PropTypes.Requireable<(...args: any[]) => any>;
+        };
         const children_1: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
         export { children_1 as children };
     }
@@ -82,6 +88,8 @@ declare namespace NeonPage {
         export { useCoreHeader_1 as useCoreHeader };
         const unstickyDrupalHeader_1: boolean;
         export { unstickyDrupalHeader_1 as unstickyDrupalHeader };
+        const NeonContextProviderProps_1: {};
+        export { NeonContextProviderProps_1 as NeonContextProviderProps };
     }
 }
 import PropTypes from "prop-types";

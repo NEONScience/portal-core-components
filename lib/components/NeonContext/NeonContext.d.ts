@@ -10,22 +10,18 @@ declare namespace NeonContext {
     export { useNeonContextState };
     export { DEFAULT_STATE };
     export { getWrappedComponent };
+    export { ProviderPropTypes };
 }
 /**
    Context Provider
 */
 declare function Provider(props: any): JSX.Element;
 declare namespace Provider {
-    export namespace propTypes {
-        export const useCoreAuth: PropTypes.Requireable<boolean>;
-        export const useCoreHeader: PropTypes.Requireable<boolean>;
-        export const children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
-    }
+    export { ProviderPropTypes as propTypes };
     export namespace defaultProps {
-        const useCoreAuth_1: boolean;
-        export { useCoreAuth_1 as useCoreAuth };
-        const useCoreHeader_1: boolean;
-        export { useCoreHeader_1 as useCoreHeader };
+        export const useCoreAuth: boolean;
+        export const useCoreHeader: boolean;
+        export function whenFinal(): void;
     }
 }
 /**
@@ -183,7 +179,9 @@ declare function useNeonContextState(): ({
             NH: {
                 name: string;
                 center: number[];
-                zoom: number;
+                zoom: number; /**
+                   CONTEXT
+                */
             };
             NJ: {
                 name: string;
@@ -510,6 +508,7 @@ declare function useNeonContextState(): ({
     isActive: boolean;
     isFinal: boolean;
     hasError: boolean;
+    whenFinalCalled: boolean;
 } & any[]) | ((() => void) | {
     data: {
         sites: {};
@@ -662,7 +661,9 @@ declare function useNeonContextState(): ({
             NH: {
                 name: string;
                 center: number[];
-                zoom: number;
+                zoom: number; /**
+                   CONTEXT
+                */
             };
             NJ: {
                 name: string;
@@ -989,6 +990,7 @@ declare function useNeonContextState(): ({
     isActive: boolean;
     isFinal: boolean;
     hasError: boolean;
+    whenFinalCalled: boolean;
 })[];
 declare namespace DEFAULT_STATE {
     export namespace data {
@@ -1027,13 +1029,23 @@ declare namespace DEFAULT_STATE {
     export const isActive: boolean;
     export const isFinal: boolean;
     export const hasError: boolean;
+    export const whenFinalCalled: boolean;
 }
 /**
    getWrappedComponent
 */
 declare function getWrappedComponent(Component: any): (props: any) => JSX.Element;
-import PropTypes from "prop-types";
+declare namespace ProviderPropTypes {
+    export const children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+    const useCoreAuth_1: PropTypes.Requireable<boolean>;
+    export { useCoreAuth_1 as useCoreAuth };
+    const useCoreHeader_1: PropTypes.Requireable<boolean>;
+    export { useCoreHeader_1 as useCoreHeader };
+    const whenFinal_1: PropTypes.Requireable<(...args: any[]) => any>;
+    export { whenFinal_1 as whenFinal };
+}
 import statesJSON from "../../staticJSON/states.json";
 import domainsJSON from "../../staticJSON/domains.json";
 import bundlesJSON from "../../staticJSON/bundles.json";
 import timeSeriesDataProductsJSON from "../../staticJSON/timeSeriesDataProducts.json";
+import PropTypes from "prop-types";

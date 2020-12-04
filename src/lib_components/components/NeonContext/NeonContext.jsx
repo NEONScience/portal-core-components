@@ -60,6 +60,7 @@ const DEFAULT_STATE = {
   isActive: false,
   isFinal: false,
   hasError: false,
+  whenFinalCalled: false,
 };
 
 // Derive values for stateSites and domainSites in state. This is a one-time mapping we
@@ -167,6 +168,9 @@ const reducer = (state, action) => {
       newState.fetches[action.asset].error = action.error;
       return newState;
 
+    case 'whenFinalCalled':
+      return { ...newState, whenFinalCalled: true };
+
     default:
       return state;
   }
@@ -198,7 +202,12 @@ const parseSitesFetchResponse = (sitesArray = []) => {
    Context Provider
 */
 const Provider = (props) => {
-  const { useCoreAuth, useCoreHeader, children } = props;
+  const {
+    children,
+    useCoreAuth,
+    useCoreHeader,
+    whenFinal,
+  } = props;
 
   const initialState = cloneDeep(DEFAULT_STATE);
   initialState.isActive = true;
@@ -211,6 +220,7 @@ const Provider = (props) => {
     initialState.fetches[DRUPAL_FOOTER_HTML].status = FETCH_STATUS.AWAITING_CALL;
   }
   const [state, dispatch] = useReducer(reducer, initialState);
+  const { isFinal, whenFinalCalled } = state;
 
   // Method to sanitize partial HTML. As delivered presently there are some markup issues that
   // throw warnings when parsed with HTMLReactParser.
@@ -304,6 +314,13 @@ const Provider = (props) => {
     });
   });
 
+  // Effect: call the whenFinal function prop exactly once when first finalized
+  useEffect(() => {
+    if (!isFinal || whenFinalCalled) { return; }
+    whenFinal();
+    dispatch({ type: 'whenFinalCalled' });
+  }, [isFinal, whenFinalCalled, whenFinal]);
+
   /**
      Render
   */
@@ -314,9 +331,7 @@ const Provider = (props) => {
   );
 };
 
-Provider.propTypes = {
-  useCoreAuth: PropTypes.bool,
-  useCoreHeader: PropTypes.bool,
+const ProviderPropTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.oneOfType([
       PropTypes.node,
@@ -325,11 +340,16 @@ Provider.propTypes = {
     PropTypes.node,
     PropTypes.string,
   ]).isRequired,
+  useCoreAuth: PropTypes.bool,
+  useCoreHeader: PropTypes.bool,
+  whenFinal: PropTypes.func,
 };
+Provider.propTypes = ProviderPropTypes;
 
 Provider.defaultProps = {
   useCoreAuth: false,
   useCoreHeader: false,
+  whenFinal: () => {},
 };
 
 /**
@@ -355,5 +375,6 @@ const NeonContext = {
   useNeonContextState,
   DEFAULT_STATE,
   getWrappedComponent,
+  ProviderPropTypes,
 };
 export default NeonContext;

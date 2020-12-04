@@ -114,6 +114,30 @@ const MyComponent = () => {
       </DocBlock>
 
       <Divider className={classes.divider} />
+      <Typography variant="h6" component="h4" gutterBottom>When Final</Typography>
+
+      <DocBlock>
+        Pass a function that takes no arguments to the <tt>whenFinal</tt> prop on the Provider
+        to trigger arbitrary logic exactly once when the NeonContext is finalized. This can be
+        useful for components or pages that rely on NeonContext data to be present and accessible
+        before taking certain actions.
+      </DocBlock>
+      <CodeBlock>
+        {`
+import NeonContext from 'portal-core-components/lib/components/NeonContext';
+
+const MyComponent = () => {
+  ...
+  return (
+    <NeonContext.Provider whenFinal={() => { console.log('NeonContext is Ready!'); }}>
+      ...
+    </NeonContext.Provider>
+  );
+};
+        `}
+      </CodeBlock>
+
+      <Divider className={classes.divider} />
       <Typography variant="h6" component="h4" gutterBottom>Authentication</Typography>
       <DocBlock>
         The NeonContext Provider accepts a <tt>useCoreAuth</tt> boolean prop to trigger an auth

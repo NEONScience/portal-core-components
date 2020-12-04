@@ -85,7 +85,7 @@ const UNSPECIFIED_DESCRIPTION = 'Data in the latest release in addition to provi
 const DOI_TITLE = 'Digital Object Identifier (DOI) - A citable permanent link to this this data product release';
 
 const formatGenerationDate = (generationDate) => {
-  const generationMoment = moment(generationDate);
+  const generationMoment = moment.utc(generationDate);
   return generationMoment ? generationMoment.format('MMMM D, YYYY') : null;
 };
 

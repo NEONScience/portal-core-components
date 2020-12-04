@@ -363,6 +363,7 @@ const NeonPage = (props) => {
     title,
     useCoreHeader,
     unstickyDrupalHeader,
+    NeonContextProviderProps,
     children,
   } = props;
 
@@ -852,7 +853,7 @@ const NeonPage = (props) => {
   };
 
   const renderedPage = neonContextIsActive ? renderNeonPage() : (
-    <NeonContext.Provider useCoreAuth useCoreHeader={useCoreHeader}>
+    <NeonContext.Provider useCoreAuth useCoreHeader={useCoreHeader} {...NeonContextProviderProps}>
       {renderNeonPage()}
     </NeonContext.Provider>
   );
@@ -925,6 +926,7 @@ NeonPage.propTypes = {
   ]),
   useCoreHeader: PropTypes.bool,
   unstickyDrupalHeader: PropTypes.bool,
+  NeonContextProviderProps: NeonContext.ProviderPropTypes,
   children: children.isRequired,
 };
 
@@ -952,6 +954,7 @@ NeonPage.defaultProps = {
   title: null,
   useCoreHeader: false,
   unstickyDrupalHeader: true,
+  NeonContextProviderProps: {},
 };
 
 export default NeonPage;
