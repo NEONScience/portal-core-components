@@ -34,12 +34,12 @@ declare namespace NeonPage {
         export const title: PropTypes.Requireable<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
         export const useCoreHeader: PropTypes.Requireable<boolean>;
         export const unstickyDrupalHeader: PropTypes.Requireable<boolean>;
-        export const NeonContextProviderProps: {
-            children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+        export const NeonContextProviderProps: PropTypes.Requireable<PropTypes.InferProps<{
+            children: PropTypes.Requireable<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
             useCoreAuth: PropTypes.Requireable<boolean>;
             useCoreHeader: PropTypes.Requireable<boolean>;
             whenFinal: PropTypes.Requireable<(...args: any[]) => any>;
-        };
+        }>>;
         const children_1: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
         export { children_1 as children };
     }

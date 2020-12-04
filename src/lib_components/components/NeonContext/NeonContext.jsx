@@ -339,7 +339,7 @@ const ProviderPropTypes = {
     ])),
     PropTypes.node,
     PropTypes.string,
-  ]).isRequired,
+  ]),
   useCoreAuth: PropTypes.bool,
   useCoreHeader: PropTypes.bool,
   whenFinal: PropTypes.func,

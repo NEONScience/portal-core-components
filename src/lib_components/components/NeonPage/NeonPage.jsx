@@ -926,7 +926,7 @@ NeonPage.propTypes = {
   ]),
   useCoreHeader: PropTypes.bool,
   unstickyDrupalHeader: PropTypes.bool,
-  NeonContextProviderProps: NeonContext.ProviderPropTypes,
+  NeonContextProviderProps: PropTypes.shape(NeonContext.ProviderPropTypes),
   children: children.isRequired,
 };
 

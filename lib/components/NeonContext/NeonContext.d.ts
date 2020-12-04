@@ -1036,7 +1036,7 @@ declare namespace DEFAULT_STATE {
 */
 declare function getWrappedComponent(Component: any): (props: any) => JSX.Element;
 declare namespace ProviderPropTypes {
-    export const children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+    export const children: PropTypes.Requireable<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
     const useCoreAuth_1: PropTypes.Requireable<boolean>;
     export { useCoreAuth_1 as useCoreAuth };
     const useCoreHeader_1: PropTypes.Requireable<boolean>;
