@@ -117,10 +117,13 @@ const MyComponent = () => {
       <Typography variant="h6" component="h4" gutterBottom>When Final</Typography>
 
       <DocBlock>
-        Pass a function that takes no arguments to the <tt>whenFinal</tt> prop on the Provider
-        to trigger arbitrary logic exactly once when the NeonContext is finalized. This can be
-        useful for components or pages that rely on NeonContext data to be present and accessible
-        before taking certain actions.
+        Pass a function to the <tt>whenFinal</tt> prop on the Provider to trigger arbitrary logic
+        exactly once when the NeonContext is finalized. This can be useful for components or pages
+        that rely on NeonContext data to be present and accessible before taking certain actions.
+      </DocBlock>
+      <DocBlock>
+        The <tt>whenFinal</tt> function can no arguments or an single optional argument representing
+        a deep copy of the finalized NeonContext state.
       </DocBlock>
       <CodeBlock>
         {`
@@ -129,7 +132,11 @@ import NeonContext from 'portal-core-components/lib/components/NeonContext';
 const MyComponent = () => {
   ...
   return (
-    <NeonContext.Provider whenFinal={() => { console.log('NeonContext is Ready!'); }}>
+    <NeonContext.Provider
+      whenFinal={(finalizedStateClone) => {
+        console.log('NeonContext is Ready!', finalizedStateClone);
+      }}
+    >
       ...
     </NeonContext.Provider>
   );

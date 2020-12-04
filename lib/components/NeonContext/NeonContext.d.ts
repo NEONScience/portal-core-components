@@ -19,6 +19,7 @@ declare function Provider(props: any): JSX.Element;
 declare namespace Provider {
     export { ProviderPropTypes as propTypes };
     export namespace defaultProps {
+        export const children: null;
         export const useCoreAuth: boolean;
         export const useCoreHeader: boolean;
         export function whenFinal(): void;
@@ -1036,7 +1037,8 @@ declare namespace DEFAULT_STATE {
 */
 declare function getWrappedComponent(Component: any): (props: any) => JSX.Element;
 declare namespace ProviderPropTypes {
-    export const children: PropTypes.Requireable<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+    const children_1: PropTypes.Requireable<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+    export { children_1 as children };
     const useCoreAuth_1: PropTypes.Requireable<boolean>;
     export { useCoreAuth_1 as useCoreAuth };
     const useCoreHeader_1: PropTypes.Requireable<boolean>;

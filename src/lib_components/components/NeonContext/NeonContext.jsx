@@ -317,9 +317,9 @@ const Provider = (props) => {
   // Effect: call the whenFinal function prop exactly once when first finalized
   useEffect(() => {
     if (!isFinal || whenFinalCalled) { return; }
-    whenFinal();
+    whenFinal(cloneDeep({ ...state, whenFinalCalled: true }));
     dispatch({ type: 'whenFinalCalled' });
-  }, [isFinal, whenFinalCalled, whenFinal]);
+  }, [isFinal, whenFinalCalled, whenFinal, state]);
 
   /**
      Render
@@ -347,6 +347,7 @@ const ProviderPropTypes = {
 Provider.propTypes = ProviderPropTypes;
 
 Provider.defaultProps = {
+  children: null,
   useCoreAuth: false,
   useCoreHeader: false,
   whenFinal: () => {},
