@@ -1013,12 +1013,16 @@ const Provider = (props) => {
       keys.map((key) => {
         const site = key.substr(0, 4);
         const yearMonth = key.substr(5, 7);
+        const release = currentState.release && currentState.release.value
+          ? currentState.release.value
+          : null;
         return NeonApi
-          .getJsonObservable(buildS3FilesRequestUrl(productCode, site, yearMonth))
+          .getJsonObservable(buildS3FilesRequestUrl(productCode, site, yearMonth, release))
           .pipe(
             map(response => ({
               status: 'fetched',
               files: response.data.files,
+              release: response.data.release,
               site,
               yearMonth,
               productCode,

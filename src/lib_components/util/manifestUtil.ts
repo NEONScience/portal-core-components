@@ -1,4 +1,5 @@
 import NeonEnvironment from '../components/NeonEnvironment/NeonEnvironment';
+import { Nullable } from '../types/core';
 import {
   ManifestConfig,
   ManifestFile,
@@ -108,11 +109,16 @@ export const buildS3FilesRequestUrl = (
   productCode: string,
   site: string,
   yearMonth: string,
+  release: Nullable<string>,
 ): string => {
   const productCodeDir = productCode.startsWith('NEON.DOM.SITE')
     ? productCode
     : `NEON.DOM.SITE.${productCode}`;
-  return `${NeonEnvironment.getFullApiPath('data')}/${productCodeDir}/${site}/${yearMonth}?presign=false`;
+  const releaseParam = ((typeof release === 'string') && ((release as string).length > 0))
+    ? `&release=${release}`
+    : '';
+  const root = `${NeonEnvironment.getFullApiPath('data')}/${productCodeDir}/${site}/${yearMonth}`;
+  return `${root}?presign=false${releaseParam}`;
 };
 
 export const downloadManifest = (manifest: ManifestRequest) => {
@@ -139,19 +145,28 @@ export const downloadAopManifest = (
   documentation = 'include',
 ) => {
   const siteCodes: string[] = [];
-  const s3FileValues: Record<string, unknown>[] = s3Files.cachedValues as Record<string, unknown>[];
+  const s3FileValues: Record<string, unknown>[] = s3Files.validValues as Record<string, unknown>[];
   const manifestS3Files: ManifestFile[] = s3FileValues
-    .map((file: Record<string, unknown>): ManifestFile => ({
-      release: file.release as string,
-      productCode: file.productCode as string,
-      siteCode: file.site as string,
-      month: file.yearMonth as string,
-      fileName: (file.url as string).split('/').pop() || '',
-      fileSizeBytes: file.size as number,
-      checksum: file.checksum as string,
-      checksumAlgorithm: file.checksumAlgorithm as string,
-      uri: file.url as string,
-    }));
+    .filter((file: Record<string, unknown>): boolean => (
+      (s3Files.value as string[]).includes(file.url as string)
+    ))
+    .map((file: Record<string, unknown>): ManifestFile => {
+      if (!siteCodes.includes(file.site as string)) {
+        siteCodes.push(file.site as string);
+      }
+      return {
+        release: file.release as string,
+        productCode: file.productCode as string,
+        siteCode: file.site as string,
+        month: file.yearMonth as string,
+        packageType: 'basic',
+        fileName: (file.url as string).split('/').pop() || '',
+        fileSizeBytes: file.size as number,
+        checksum: file.checksum as string,
+        checksumAlgorithm: file.checksumAlgorithm as string,
+        uri: file.url as string,
+      };
+    });
 
   const includeDocs = documentation === 'include';
   const productCodeParam: string = config.productCode.startsWith('NEON.DOM.SITE')
@@ -161,7 +176,7 @@ export const downloadAopManifest = (
     dpCode: productCodeParam,
     startDateMonth: null,
     endDateMonth: null,
-    release: null,
+    release: config.release,
     pkgType: null,
     presign: true,
     manifestFiles: manifestS3Files,

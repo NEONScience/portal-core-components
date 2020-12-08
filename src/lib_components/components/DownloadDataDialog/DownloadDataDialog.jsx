@@ -239,7 +239,7 @@ export default function DownloadDataDialog() {
       packageType,
     };
     if (fromAOPManifest) {
-      const config = buildManifestConfig(manifestSelection, '', true);
+      const config = buildManifestConfig(manifestSelection, null, true);
       return downloadAopManifest(config, s3Files, documentation.value);
     }
     if (manifest.status !== 'fetched' || !manifest.body || !manifest.body.data) { return null; }
