@@ -13,7 +13,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
-import IconButton from '@material-ui/core/IconButton';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Link from '@material-ui/core/Link';
 import MobileStepper from '@material-ui/core/MobileStepper';
@@ -56,6 +55,26 @@ const useStyles = makeStyles(theme => ({
     fontSize: '1rem',
     fontWeight: 600,
   },
+  productCodeChip: {
+    color: theme.palette.grey[400],
+    border: `1px solid ${theme.palette.grey[400]}`,
+    backgroundColor: theme.palette.grey[100],
+    fontWeight: 600,
+    cursor: 'help',
+    height: '26px',
+    margin: theme.spacing(-0.5, 1.5, 0, 0),
+  },
+  releaseChip: {
+    color: Theme.colors.BROWN[500],
+    border: `1px solid ${Theme.colors.BROWN[500]}`,
+    backgroundColor: Theme.colors.BROWN[100],
+    fontWeight: 600,
+    fontSize: '0.9rem',
+    cursor: 'help',
+    '& svg': {
+      margin: theme.spacing(0, -0.5, 0, 0.75),
+    },
+  },
   startFlex: {
     display: 'flex',
     justifyContent: 'flex-start',
@@ -92,16 +111,6 @@ const useStyles = makeStyles(theme => ({
     '& span': {
       pointerEvents: 'none',
     },
-  },
-  releaseTitle: {
-    color: COLORS.BROWN[500],
-    fontSize: '1.1rem',
-  },
-  tooltip: {
-    marginLeft: theme.spacing(0.5),
-  },
-  iconButton: {
-    marginTop: theme.spacing(-0.25),
   },
 }));
 
@@ -676,6 +685,9 @@ export default function DownloadDataDialog() {
   const releaseTooltip = release.value === null
     ? `You are downloading only the latest released and provisional data (release: ${latestRelease || 'unknown'}).`
     : `You are downloading product data only from the ${release.value} release (no provisional data will be included).`;
+  const releaseChipLabel = release.value === null
+    ? 'Latest released and provisional data'
+    : `Release: ${release.value}`;
   return (
     <DialogBase
       data-selenium="download-data-dialog"
@@ -697,35 +709,33 @@ export default function DownloadDataDialog() {
       {renderGtmTags()}
       <Grid container spacing={2} alignItems="flex-start" style={{ marginBottom: Theme.spacing(2) }}>
         <Grid item xs={12} sm={6} md={8} data-selenium="download-data-dialog.product-info">
-          <Typography variant="h5" style={{ marginBottom: Theme.spacing(1) }}>
+          <Typography variant="h5" style={{ marginBottom: Theme.spacing(1.5) }}>
             {productData.productName}
           </Typography>
-          <div className={classes.startFlex} style={{ marginBottom: Theme.spacing(1) }}>
+          <div className={classes.startFlex} style={{ marginBottom: Theme.spacing(1.5) }}>
+            <Tooltip
+              placement="right"
+              title="The unique identifier for this data product independent of release"
+            >
+              <Chip label={productData.productCode} className={classes.productCodeChip} />
+            </Tooltip>
             {(productData.themes || []).map(dataTheme => (
-              <div key={dataTheme} style={{ marginRight: Theme.spacing(1) }}>
+              <div key={dataTheme} style={{ marginLeft: Theme.spacing(1.5) }}>
                 <DataThemeIcon size={3} theme={dataTheme} />
               </div>
             ))}
-            <Typography variant="subtitle2">
-              {productData.productCode}
-            </Typography>
           </div>
-          <div className={classes.startFlex}>
-            <Typography variant="subtitle2" className={classes.releaseTitle}>
-              {release.value === null ? (
-                'Latest released and provisional data'
-              ) : (
-                `Release: ${release.value}`
-              )}
-            </Typography>
-            <Tooltip
-              placement="right"
-              title={releaseTooltip}
-              className={classes.tooltip}
-            >
-              <IconButton size="small" className={classes.iconButton} aria-label={releaseTooltip}>
-                <InfoIcon fontSize="small" />
-              </IconButton>
+          <div>
+            <Tooltip placement="bottom-start" title={releaseTooltip}>
+              <Chip
+                label={(
+                  <div className={classes.startFlex}>
+                    {releaseChipLabel}
+                    <InfoIcon fontSize="small" />
+                  </div>
+                )}
+                className={classes.releaseChip}
+              />
             </Tooltip>
           </div>
         </Grid>
