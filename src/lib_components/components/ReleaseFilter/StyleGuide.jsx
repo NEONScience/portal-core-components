@@ -1,5 +1,4 @@
 /* eslint react/jsx-one-expression-per-line: 0 */
-
 import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -202,42 +201,58 @@ const propRows = [
 const releases = [
   {
     release: 'test-tag-1',
-    url: 'https://doi.test.datacite.org/10.80606/1wvk-f032',
     generationDate: '2020-11-10T01:01:30Z',
+    url: 'https://test.neonscience.org/local-url',
+    productDoi: {
+      generationDate: '2020-11-10T01:01:30Z',
+      url: 'https://doi.test.datacite.org/10.80606/1wvk-f032',
+    },
   },
   {
     release: 'test-tag-3',
-    url: 'https://doi.test.datacite.org/10.80606/c93r-j2px',
     generationDate: '2020-11-20T03:22:30Z',
+    url: 'https://test.neonscience.org/local-url',
+    productDoi: {
+      generationDate: '2020-11-20T03:22:30Z',
+      url: 'https://doi.test.datacite.org/10.80606/c93r-j2px',
+    },
   },
   {
     release: 'test-tag-2',
-    url: 'https://doi.test.datacite.org/10.80606/8cuy-lz8m',
     generationDate: '2020-11-15T02:17:30Z',
+    url: 'https://test.neonscience.org/local-url',
   },
 ];
 
 const releasesWithCounts = [
   {
     release: 'test-tag-A',
-    url: 'https://doi.test.datacite.org/10.80606/1wvk-f032',
+    url: 'https://test.neonscience.org/local-url',
     generationDate: '2020-11-10T01:01:30Z',
     dataProductCodes: ['DP1.00001.001', 'DP1.00002.001', 'DP1.00003.001', 'DP1.00004.001'],
+    productDoi: {
+      generationDate: '2020-11-10T01:01:30Z',
+      url: 'https://doi.test.datacite.org/10.80606/1wvk-f032',
+    },
   },
   {
     release: 'test-tag-B',
-    url: 'https://doi.test.datacite.org/10.80606/c93r-j2px',
+    url: 'https://test.neonscience.org/local-url',
     generationDate: '2020-11-20T03:22:30Z',
     dataProductCodes: ['DP1.00001.001', 'DP1.00003.001', 'DP1.00004.001'],
   },
   {
     release: 'test-tag-C',
-    url: 'https://doi.test.datacite.org/10.80606/8cuy-lz8m',
+    url: 'https://test.neonscience.org/local-url',
     generationDate: '2020-11-15T02:17:30Z',
     dataProducts: [
       { productCode: 'DP1.00002.001' },
       { productCode: 'DP1.00004.001' },
     ],
+    productDoi: {
+      generationDate: '2020-11-15T02:17:30Z',
+      url: 'https://doi.test.datacite.org/10.80606/c93r-j2px',
+    },
   },
 ];
 
@@ -300,18 +315,26 @@ import ReleaseFilter from 'portal-core-components/lib/components/ReleaseFilter';
 const releases = [
   {
     release: 'test-tag-1',
-    url: 'https://doi.test.datacite.org/10.80606/1wvk-f032',
     generationDate: '2020-11-10T01:01:30Z',
+    url: 'https://test.neonscience.org/local-url',
+    productDoi: {
+      generationDate: '2020-11-10T01:01:30Z',
+      url: 'https://doi.test.datacite.org/10.80606/1wvk-f032',
+    },
   },
   {
     release: 'test-tag-3',
-    url: 'https://doi.test.datacite.org/10.80606/c93r-j2px',
     generationDate: '2020-11-20T03:22:30Z',
+    url: 'https://test.neonscience.org/local-url',
+    productDoi: {
+      generationDate: '2020-11-20T03:22:30Z',
+      url: 'https://doi.test.datacite.org/10.80606/c93r-j2px',
+    },
   },
   {
     release: 'test-tag-2',
-    url: 'https://doi.test.datacite.org/10.80606/8cuy-lz8m',
     generationDate: '2020-11-15T02:17:30Z',
+    url: 'https://test.neonscience.org/local-url',
   },
 ];
 
@@ -354,24 +377,32 @@ const onChange = (newRelease) => {
 const releasesWithCounts = [
   {
     release: 'test-tag-A',
-    url: 'https://doi.test.datacite.org/10.80606/1wvk-f032',
+    url: 'https://test.neonscience.org/local-url',
     generationDate: '2020-11-10T01:01:30Z',
     dataProductCodes: ['DP1.00001.001', 'DP1.00002.001', 'DP1.00003.001', 'DP1.00004.001'],
+    productDoi: {
+      generationDate: '2020-11-10T01:01:30Z',
+      url: 'https://doi.test.datacite.org/10.80606/1wvk-f032',
+    },
   },
   {
     release: 'test-tag-B',
-    url: 'https://doi.test.datacite.org/10.80606/c93r-j2px',
+    url: 'https://test.neonscience.org/local-url',
     generationDate: '2020-11-20T03:22:30Z',
     dataProductCodes: ['DP1.00001.001', 'DP1.00003.001', 'DP1.00004.001'],
   },
   {
     release: 'test-tag-C',
-    url: 'https://doi.test.datacite.org/10.80606/8cuy-lz8m',
+    url: 'https://test.neonscience.org/local-url',
     generationDate: '2020-11-15T02:17:30Z',
     dataProducts: [
       { productCode: 'DP1.00002.001' },
       { productCode: 'DP1.00004.001' },
     ],
+    productDoi: {
+      generationDate: '2020-11-15T02:17:30Z',
+      url: 'https://doi.test.datacite.org/10.80606/c93r-j2px',
+    },
   },
 ];
 

@@ -8,20 +8,29 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import Link from '@material-ui/core/Link';
 import MenuItem from '@material-ui/core/MenuItem';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import Select from '@material-ui/core/Select';
+import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
 import Skeleton from '@material-ui/lab/Skeleton';
 
 import CopyIcon from '@material-ui/icons/Assignment';
+import InfoIcon from '@material-ui/icons/InfoOutlined';
 
 import Theme from '../Theme/Theme';
 
 const useStyles = makeStyles(theme => ({
   title: {
     fontWeight: 500,
+  },
+  titleContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
     marginBottom: theme.spacing(1),
   },
   selectInput: {
@@ -83,6 +92,7 @@ const useStyles = makeStyles(theme => ({
 const UNSPECIFIED_NAME = 'Latest and Provisional';
 const UNSPECIFIED_DESCRIPTION = 'Data in the latest release in addition to provisional data (not yet in any release)';
 const DOI_TITLE = 'Digital Object Identifier (DOI) - A citable permanent link to this this data product release';
+const INFO_URL = 'https://www.neonscience.org/data-samples/data-management/data-revisions-releases';
 
 const formatGenerationDate = (generationDate) => {
   const generationMoment = moment.utc(generationDate);
@@ -154,10 +164,30 @@ const ReleaseFilter = (props) => {
     />
   );
 
+  const releasesLink = (
+    <Link href={INFO_URL} target="_blank">
+      Data Product Revisions and Releases
+    </Link>
+  );
+  /* eslint-disable react/jsx-one-expression-per-line */
+  const tooltip = (
+    <div>
+      A data release is a set of data files that is static (unchanging), always available to end
+      users, and citable. See {releasesLink} for more details.
+    </div>
+  );
+  /* eslint-enable react/jsx-one-expression-per-line */
   const titleNode = !title ? null : (
-    <Typography variant="h5" component="h3" className={classes.title} id={labelId}>
-      {title}
-    </Typography>
+    <div className={classes.titleContainer}>
+      <Typography variant="h5" component="h3" className={classes.title} id={labelId}>
+        {title}
+      </Typography>
+      <Tooltip placement="right" title={tooltip} interactive>
+        <IconButton size="small" aria-label={tooltip} style={{ marginLeft: Theme.spacing(0.5) }}>
+          <InfoIcon fontSize="small" />
+        </IconButton>
+      </Tooltip>
+    </div>
   );
 
   // Render skeleton
@@ -219,6 +249,7 @@ const ReleaseFilter = (props) => {
   // DOI Node
   let doiNode = null;
   if (showDoi && selectedRelease !== null) {
+    const doiUrl = (selectedReleaseObject.productDoi || {}).url || null;
     doiNode = (
       <div className={classes.descriptionContainer}>
         <div className={classes.descriptionFlexInnerContainer}>
@@ -236,21 +267,23 @@ const ReleaseFilter = (props) => {
             className={classes.description}
             style={{ overflowWrap: 'anywhere' }}
           >
-            {selectedReleaseObject.url}
+            {doiUrl || <i>none</i>}
           </Typography>
         </div>
-        <CopyToClipboard text={selectedReleaseObject.url}>
-          <Button
-            color="primary"
-            variant="outlined"
-            size="small"
-            className={classes.copyButton}
-            title={`Copy DOI: ${selectedReleaseObject.url}`}
-          >
-            <CopyIcon fontSize="small" style={{ marginRight: Theme.spacing(1) }} />
-            Copy DOI
-          </Button>
-        </CopyToClipboard>
+        {!doiUrl ? null : (
+          <CopyToClipboard text={doiUrl}>
+            <Button
+              color="primary"
+              variant="outlined"
+              size="small"
+              className={classes.copyButton}
+              title={`Copy DOI: ${doiUrl}`}
+            >
+              <CopyIcon fontSize="small" style={{ marginRight: Theme.spacing(1) }} />
+              Copy DOI
+            </Button>
+          </CopyToClipboard>
+        )}
       </div>
     );
   }
@@ -358,6 +391,10 @@ ReleaseFilter.propTypes = {
       release: PropTypes.string.isRequired,
       generationDate: PropTypes.string.isRequired,
       url: PropTypes.string,
+      productDoi: PropTypes.shape({
+        generationDate: PropTypes.string.isRequired,
+        url: PropTypes.string.isRequired,
+      }),
     }),
   ),
   selected: PropTypes.string,

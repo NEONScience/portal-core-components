@@ -24,7 +24,7 @@ export default function Home() {
     <React.Fragment>
 
       <DocBlock>
-        Portal Core Components is an open source library of <Link href="https://reactjs.org" target="_blank">React</Link> components
+        NEON Data Portal Core Components is an open source library of <Link href="https://reactjs.org" target="_blank">React</Link> components
         intended for use on <Link href="https://data.neonscience.org" target="_blank">NEON Data Portal</Link> pages.
       </DocBlock>
       <DocBlock>

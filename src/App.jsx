@@ -31,7 +31,7 @@ import TimeSeriesViewerStyleGuide from './lib_components/components/TimeSeriesVi
 const sidebarLinks = [
   {
     name: 'Home',
-    pageTitle: 'Portal Core Components',
+    pageTitle: 'Core Components',
     icon: HomeIcon,
     component: Home,
   },

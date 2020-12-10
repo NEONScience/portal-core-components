@@ -101,6 +101,8 @@ const useStyles = makeStyles(() => ({
     position: 'relative',
     minHeight: Theme.spacing(30),
     borderTop: '2px solid transparent',
+    paddingLeft: '0px',
+    paddingRight: '0px',
     [Theme.breakpoints.up('md')]: {
       display: 'table',
       tableLayout: 'fixed',
@@ -114,12 +116,10 @@ const useStyles = makeStyles(() => ({
     display: 'table-cell',
     verticalAlign: 'top',
     position: 'relative',
-    padding: Theme.spacing(4),
-    paddingBottom: Theme.spacing(8),
+    padding: Theme.spacing(4, 8, 12, 8),
     [Theme.breakpoints.down('sm')]: {
       display: 'block',
-      padding: Theme.spacing(3),
-      paddingBottom: Theme.spacing(6),
+      padding: Theme.spacing(3, 5, 8, 5),
     },
     // These override links created with a naked <a> tag, as opposed to a <Link>
     // component, to appear the same as the <Link> component. This is especially
@@ -130,6 +130,12 @@ const useStyles = makeStyles(() => ({
     },
     '& a:hover:not([class]), a:hover[class=""]': {
       textDecoration: 'underline',
+    },
+  },
+  breadcrumbs: {
+    margin: Theme.spacing(2, 0, 4, 0),
+    [Theme.breakpoints.down('sm')]: {
+      margin: Theme.spacing(1, 0, 2, 0),
     },
   },
   sidebarContainer: {
@@ -616,6 +622,7 @@ const NeonPage = (props) => {
     <Breadcrumbs
       aria-label="Breadcrumbs"
       data-selenium="neon-page.breadcrumbs"
+      className={classes.breadcrumbs}
     >
       <Link key={uniqueId()} href={breadcrumbHomeHref}>
         <HomeIcon title="Home" fontSize="small" style={{ marginBottom: '-4px' }} />
