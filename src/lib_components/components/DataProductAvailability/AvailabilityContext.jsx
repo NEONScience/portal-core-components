@@ -155,11 +155,11 @@ const reducer = (state, action) => {
       return calculateRows(hydrateNeonContextData(newState, action.neonContextData));
 
     case 'setBreakouts':
-      if (!action.breakouts.every(b => state.validBreakouts.includes(b))) { return state; }
+      if (!action.breakouts.every((b) => state.validBreakouts.includes(b))) { return state; }
       newState.breakouts = [...action.breakouts];
       // If new breakouts contains the old leading breakout (the sort method) then keep it in front
       if (state.breakouts.length && newState.breakouts.includes(state.breakouts[0])) {
-        newState.breakouts = newState.breakouts.filter(b => b !== state.breakouts[0]);
+        newState.breakouts = newState.breakouts.filter((b) => b !== state.breakouts[0]);
         newState.breakouts.unshift(state.breakouts[0]);
       }
       return calculateRows(newState);
@@ -167,7 +167,7 @@ const reducer = (state, action) => {
     case 'setSortMethod':
       // Sort method is not a top-level value; rather the first breakout in the list.
       if (!state.validBreakouts.includes(action.method)) { return state; }
-      newState.breakouts = state.breakouts.filter(b => b !== action.method);
+      newState.breakouts = state.breakouts.filter((b) => b !== action.method);
       newState.breakouts.unshift(action.method);
       return calculateRows(newState);
 
@@ -254,7 +254,6 @@ Provider.propTypes = {
 Provider.defaultProps = {
   sites: [],
 };
-
 
 /**
    Export

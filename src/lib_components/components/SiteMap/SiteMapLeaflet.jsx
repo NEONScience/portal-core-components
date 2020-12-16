@@ -60,7 +60,7 @@ import {
   deriveFullObservatoryZoomLevel,
 } from './SiteMapUtils';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   map: {
     width: '100%',
     height: '0px', // Necessary to set a fixed aspect ratio from props (using paddingBottom)
@@ -317,14 +317,14 @@ const SiteMapLeaflet = () => {
       if (markerPane && markerPane.children && markerPane.children.length) {
         // Unselectables: apply CSS filters to appear ghosted
         [...markerPane.children]
-          .filter(marker => !state.selection.validSet.has(marker.title))
+          .filter((marker) => !state.selection.validSet.has(marker.title))
           .forEach((marker) => {
             // eslint-disable-next-line no-param-reassign
             marker.style.filter = UNSELECTABLE_MARKER_FILTER;
           });
         // Selecatbles: Uniformly bump the zIndexOffset to put them all on top
         state.selection.validSet.forEach((item) => {
-          const layerIdx = Object.keys(mapRef.current.leafletElement._layers).find(k => (
+          const layerIdx = Object.keys(mapRef.current.leafletElement._layers).find((k) => (
             mapRef.current.leafletElement._layers[k].options
               && mapRef.current.leafletElement._layers[k].options.title === item
           ));
@@ -480,7 +480,7 @@ const SiteMapLeaflet = () => {
       }
       if ([FEATURE_TYPES.STATES.KEY, FEATURE_TYPES.DOMAINS.KEY].includes(state.selection.active)) {
         const selectableFeatureKey = Object.keys(FEATURES)
-          .find(k => FEATURES[k].type === state.selection.active);
+          .find((k) => FEATURES[k].type === state.selection.active);
         if (selectableFeatureKey) {
           selectableData = state.featureData[state.selection.active][selectableFeatureKey];
         }
@@ -549,7 +549,7 @@ const SiteMapLeaflet = () => {
       const defs = document.createElementNS(svgNS, 'defs');
       let defCount = 0;
       paths
-        .filter(path => path.attributes.class && path.attributes.class.value.includes('#mask'))
+        .filter((path) => path.attributes.class && path.attributes.class.value.includes('#mask'))
         .forEach((path) => {
           defCount += 1;
           const baseId = path.attributes.class.value.split(' ')[0];
@@ -781,7 +781,7 @@ const SiteMapLeaflet = () => {
   const handleOverlayChange = (overlays) => {
     dispatch({
       type: 'setMapOverlays',
-      overlays: overlays.filter(o => o.checked).map(o => o.name),
+      overlays: overlays.filter((o) => o.checked).map((o) => o.name),
     });
   };
 
@@ -804,7 +804,7 @@ const SiteMapLeaflet = () => {
       size: 32,
     } : {
       size: 32,
-      variant: 'static',
+      variant: 'determinate',
       value: progress,
     };
     return (
@@ -831,7 +831,7 @@ const SiteMapLeaflet = () => {
   /**
      Render: Map
   */
-  const groupedLayerControlBaseLayers = Object.keys(BASE_LAYERS).map(key => ({
+  const groupedLayerControlBaseLayers = Object.keys(BASE_LAYERS).map((key) => ({
     name: key,
     title: BASE_LAYERS[key].title,
   })).concat([{
@@ -859,7 +859,7 @@ const SiteMapLeaflet = () => {
   if (state.fullscreen) { className = `${className} ${classes.mapFullscreen}`; }
   if (areaSelection.isDragging) { className = `${className} ${classes.mapNoMarkerPointerEvents}`; }
   return (
-    <React.Fragment>
+    <>
       <Map
         id={`sitemap-${mapInstanceId}`}
         ref={mapRef}
@@ -897,16 +897,16 @@ const SiteMapLeaflet = () => {
           />
         )}
         {Object.keys(FEATURES)
-          .filter(key => state.filters.features.available[key])
-          .filter(key => state.filters.features.visible[key])
-          .map(key => <SiteMapFeature key={key} featureKey={key} mapRef={mapRef} />)}
+          .filter((key) => state.filters.features.available[key])
+          .filter((key) => state.filters.features.visible[key])
+          .map((key) => <SiteMapFeature key={key} featureKey={key} mapRef={mapRef} />)}
       </Map>
       {renderAreaSelection()}
       {renderShowFullObservatoryButton()}
       {renderReturnToFocusLocationButton()}
       {renderMouseModeToggleButtonGroup()}
       {renderProgress()}
-    </React.Fragment>
+    </>
   );
 };
 

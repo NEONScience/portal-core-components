@@ -23,7 +23,7 @@ import {
 
 const SiteMap = React.lazy(() => import('../SiteMap/SiteMap'));
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   appBar: {
     position: 'relative',
     paddingRight: '0px !important',

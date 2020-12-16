@@ -64,7 +64,7 @@ import {
 } from './SiteMapUtils';
 
 const boxShadow = '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)';
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   outerContainer: {
     zIndex: 0,
     width: '100%',
@@ -554,7 +554,7 @@ const SiteMapContainer = (props) => {
             : classes.mapTableToggleButtonGroup
         )}
       >
-        {Object.keys(VIEWS).map(key => (
+        {Object.keys(VIEWS).map((key) => (
           <Tooltip
             key={key}
             title={viewTooltips[key]}
@@ -650,7 +650,7 @@ const SiteMapContainer = (props) => {
   */
   const getSelectedItemFeatureKey = (item) => {
     if (!selectionActive) { return null; }
-    return Object.keys(featureData[selectionActive]).find(key => (
+    return Object.keys(featureData[selectionActive]).find((key) => (
       Object.keys(featureData[selectionActive][key]).includes(item)
     )) || null;
   };
@@ -908,7 +908,7 @@ const SiteMapContainer = (props) => {
     if (feature.type === FEATURE_TYPES.GROUP.KEY) {
       collapsed = state.filters.features.collapsed.has(key);
       const collapseTitle = `${collapsed ? 'Expand' : 'Collapse'} ${feature.name}`;
-      allChildren = Object.keys(FEATURES).filter(f => FEATURES[f].parent === key);
+      allChildren = Object.keys(FEATURES).filter((f) => FEATURES[f].parent === key);
       allChildren.sort((a, b) => {
         const { type: aType, name: aName } = FEATURES[a];
         const { type: bType, name: bName } = FEATURES[b];
@@ -920,7 +920,7 @@ const SiteMapContainer = (props) => {
         }
         return (aName < bName ? -1 : 1);
       });
-      visibleChildren = allChildren.filter(f => state.filters.features.visible[f]);
+      visibleChildren = allChildren.filter((f) => state.filters.features.visible[f]);
       indeterminate = visibleChildren.length > 0 && visibleChildren.length < allChildren.length;
       label = (
         <div className={classes.legendOptionLabel} style={{ justifyContent: 'space-between' }}>
@@ -997,7 +997,7 @@ const SiteMapContainer = (props) => {
         {!allChildren.length ? null : (
           <div style={{ marginLeft: Theme.spacing(3), display: collapsed ? 'none' : 'block' }}>
             {allChildren
-              .filter(f => state.filters.features.available[f])
+              .filter((f) => state.filters.features.available[f])
               .map(renderFeatureOption)}
           </div>
         )}
@@ -1044,7 +1044,7 @@ const SiteMapContainer = (props) => {
         </Tooltip>
       ) : itemLabel;
     };
-    if (!Object.keys(legend).some(legendKey => legend[legendKey].category)) {
+    if (!Object.keys(legend).some((legendKey) => legend[legendKey].category)) {
       return (
         <div className={classes.overlayLegendContainer}>
           {Object.keys(legend).map(renderItem)}
@@ -1067,7 +1067,7 @@ const SiteMapContainer = (props) => {
               <Typography variant="caption">{category}</Typography>
             </div>
             {Object.keys(legend)
-              .filter(legendKey => (
+              .filter((legendKey) => (
                 legend[legendKey].category === category
                   || (!legend[legendKey].category && category === otherCategory)
               ))
@@ -1179,8 +1179,8 @@ const SiteMapContainer = (props) => {
         </Typography>
       </div>
       {Object.keys(FEATURES)
-        .filter(f => state.filters.features.available[f] && !FEATURES[f].parent)
-        .filter(f => !FEATURES[f].generalLegendGroup)
+        .filter((f) => state.filters.features.available[f] && !FEATURES[f].parent)
+        .filter((f) => !FEATURES[f].generalLegendGroup)
         .map(renderFeatureOption)}
     </div>
   );
@@ -1189,7 +1189,7 @@ const SiteMapContainer = (props) => {
      Render - Legend - Overlays
   */
   const renderLegendOverlays = () => (
-    <React.Fragment>
+    <>
       {Object.keys(OVERLAY_GROUPS).map((groupKey) => {
         const { title, description } = OVERLAY_GROUPS[groupKey];
         return (
@@ -1212,12 +1212,12 @@ const SiteMapContainer = (props) => {
               )}
             </div>
             {Object.keys(OVERLAYS)
-              .filter(o => OVERLAYS[o].group === groupKey)
+              .filter((o) => OVERLAYS[o].group === groupKey)
               .map(renderOverlayOption)}
           </div>
         );
       })}
-    </React.Fragment>
+    </>
   );
 
   /**
@@ -1232,8 +1232,8 @@ const SiteMapContainer = (props) => {
         </Typography>
       </div>
       {Object.keys(FEATURES)
-        .filter(f => state.filters.features.available[f] && !FEATURES[f].parent)
-        .filter(f => FEATURES[f].generalLegendGroup)
+        .filter((f) => state.filters.features.available[f] && !FEATURES[f].parent)
+        .filter((f) => FEATURES[f].generalLegendGroup)
         .map(renderFeatureOption)}
     </div>
   );

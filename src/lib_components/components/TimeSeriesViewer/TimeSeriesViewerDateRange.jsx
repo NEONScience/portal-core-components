@@ -92,7 +92,7 @@ const TimeSeriesViewerDateRange = (props) => {
 
   // Derive site and availability values for the AvailabilityGrid
   const availabilityDateRange = { value: currentRange, validValues: selectableRange };
-  const selectedSites = state.selection.sites.map(site => site.siteCode);
+  const selectedSites = state.selection.sites.map((site) => site.siteCode);
   const availabilitySites = { value: selectedSites, validValues: selectedSites };
   const availabilityData = {
     view: 'sites',
@@ -100,8 +100,8 @@ const TimeSeriesViewerDateRange = (props) => {
     selectable: true,
     rows: {},
     getLabel: {
-      text: key => key,
-      title: key => (allSites[key] ? allSites[key].description : key),
+      text: (key) => key,
+      title: (key) => (allSites[key] ? allSites[key].description : key),
     },
   };
   selectedSites.forEach((siteCode) => {
@@ -114,7 +114,7 @@ const TimeSeriesViewerDateRange = (props) => {
     + (SVG.CELL_HEIGHT + SVG.CELL_PADDING) * (selectedSites.length + 1);
 
   // Set up AvailabilityGrid
-  const setDateRangeValue = useCallback(dateRange => dispatch({
+  const setDateRangeValue = useCallback((dateRange) => dispatch({
     type: 'selectDateRange',
     dateRange,
   }), [dispatch]);
@@ -191,7 +191,38 @@ const TimeSeriesViewerDateRange = (props) => {
     dispatch({ type: 'selectDateRange', dateRange });
   };
 
-  // style={{ display: 'flex', justifyContent: 'center' }}
+  const uniqueSliderMarks = (new Set((marks || []).map((m) => m.value))).size;
+  const renderedSlider = uniqueSliderMarks <= 1 ? null : (
+    <Slider
+      data-selenium="time-series-viewer.date-range.slider"
+      className={classes.slider}
+      ref={dateRangeSliderRef}
+      value={sliderValue}
+      valueLabelDisplay="auto"
+      min={displayMin}
+      max={displayMax}
+      marks={marks}
+      valueLabelFormat={(x) => displayRange[x]}
+      onMouseDown={() => { setActivelySelecting(true); }}
+      onChange={(event, values) => {
+        setActivelySelectingDateRange([
+          Math.max(values[0], sliderMin),
+          Math.min(values[1], sliderMax),
+        ].map((x) => displayRange[x]));
+      }}
+      onChangeCommitted={(event, values) => {
+        setActivelySelecting(false);
+        dispatch({
+          type: 'selectDateRange',
+          dateRange: [
+            Math.max(values[0], sliderMin),
+            Math.min(values[1], sliderMax),
+          ].map((x) => displayRange[x]),
+        });
+      }}
+    />
+  );
+
   return (
     <div className={classes.optionsContainer}>
       <div className={classes.optionContainer}>
@@ -205,7 +236,7 @@ const TimeSeriesViewerDateRange = (props) => {
                   inputVariant="outlined"
                   margin="dense"
                   value={getYearMonthMoment(currentRange[0] || displayRange[sliderMin])}
-                  onChange={value => handleChangeDatePicker(0, value)}
+                  onChange={(value) => handleChangeDatePicker(0, value)}
                   views={['month', 'year']}
                   label="Start"
                   openTo="month"
@@ -219,7 +250,7 @@ const TimeSeriesViewerDateRange = (props) => {
                   inputVariant="outlined"
                   margin="dense"
                   value={getYearMonthMoment(currentRange[1] || displayRange[sliderMax])}
-                  onChange={value => handleChangeDatePicker(1, value)}
+                  onChange={(value) => handleChangeDatePicker(1, value)}
                   views={['month', 'year']}
                   label="End"
                   openTo="month"
@@ -229,34 +260,7 @@ const TimeSeriesViewerDateRange = (props) => {
               </div>
             </div>
           </MuiPickersUtilsProvider>
-          <Slider
-            data-selenium="time-series-viewer.date-range.slider"
-            className={classes.slider}
-            ref={dateRangeSliderRef}
-            value={sliderValue}
-            valueLabelDisplay="auto"
-            min={displayMin}
-            max={displayMax}
-            marks={marks}
-            valueLabelFormat={x => displayRange[x]}
-            onMouseDown={() => { setActivelySelecting(true); }}
-            onChange={(event, values) => {
-              setActivelySelectingDateRange([
-                Math.max(values[0], sliderMin),
-                Math.min(values[1], sliderMax),
-              ].map(x => displayRange[x]));
-            }}
-            onChangeCommitted={(event, values) => {
-              setActivelySelecting(false);
-              dispatch({
-                type: 'selectDateRange',
-                dateRange: [
-                  Math.max(values[0], sliderMin),
-                  Math.min(values[1], sliderMax),
-                ].map(x => displayRange[x]),
-              });
-            }}
-          />
+          {renderedSlider}
         </div>
       </div>
       <div className={classes.optionContainer} style={{ minWidth: Theme.spacing(50) }}>

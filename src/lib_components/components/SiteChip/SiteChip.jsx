@@ -9,7 +9,7 @@ import DeleteIcon from '@material-ui/icons/Cancel';
 
 import Theme from '../Theme/Theme';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   avatarLarge: {
     '& svg': {
       height: theme.spacing(3),
@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const useChipStyles = makeStyles(theme => ({
+const useChipStyles = makeStyles((theme) => ({
   outlined: {
     color: theme.palette.grey.A200,
   },

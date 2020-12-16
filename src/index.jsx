@@ -14,7 +14,6 @@ import 'core-js/es/object/values';
 import 'core-js/es/string/includes';
 import 'core-js/es/string/pad-start';
 import 'core-js/es/string/starts-with';
-import 'whatwg-fetch';
 
 import React from 'react';
 import ReactDOM from 'react-dom';

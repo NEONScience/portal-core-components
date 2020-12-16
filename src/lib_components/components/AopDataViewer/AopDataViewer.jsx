@@ -43,7 +43,7 @@ const MIN_IFRAME_WIDTH = 240;
 /**
    Setup: CSS classes
 */
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   selectionForm: {
     width: '100%',
     marginBottom: theme.spacing(2),
@@ -76,7 +76,7 @@ const useStyles = makeStyles(theme => ({
    each containing an array of flights. Each flight contains the month and URL.
 */
 /* eslint-disable no-param-reassign */
-const parseFetchResponse = response => response.data.siteCodes.reduce(
+const parseFetchResponse = (response) => response.data.siteCodes.reduce(
   (obj, site) => {
     obj[site.siteCode] = site.availableMonths.reduce(
       (siteObj, yearMonth, idx) => {
@@ -99,11 +99,11 @@ const parseFetchResponse = response => response.data.siteCodes.reduce(
    Functions to get slider marks and bounds
    Limit slider marks to one per year where the year is the slider value
 */
-const getCurrentSliderMarks = currentYears => Array.from(
+const getCurrentSliderMarks = (currentYears) => Array.from(
   new Set(
     Object.keys(currentYears || {})
       .sort()
-      .map(year => ({ label: year, value: year })),
+      .map((year) => ({ label: year, value: year })),
   ),
 );
 
@@ -206,10 +206,10 @@ const AopDataViewer = (props) => {
     });
   }, [initialSite, initialYear, initialFlight, data]);
   const handleSliderChange = (year) => {
-    const validYears = Object.keys(data[currentSelection.site]).map(y => parseInt(y, 10));
+    const validYears = Object.keys(data[currentSelection.site]).map((y) => parseInt(y, 10));
     if (!year || !validYears.includes(year) || year === currentSelection.year) { return; }
     const flight = data[currentSelection.site][year].length;
-    setCurrentSelection(previousCurrentSelection => ({
+    setCurrentSelection((previousCurrentSelection) => ({
       ...previousCurrentSelection,
       year,
       flight,
@@ -217,7 +217,7 @@ const AopDataViewer = (props) => {
   };
   const handleSliderButtonClick = (direction) => {
     if (!['next', 'previous'].includes(direction)) { return; }
-    const validYears = Object.keys(data[currentSelection.site]).map(y => parseInt(y, 10));
+    const validYears = Object.keys(data[currentSelection.site]).map((y) => parseInt(y, 10));
     const currentYearIdx = validYears.indexOf(currentSelection.year);
     const nudge = direction === 'next' ? 1 : -1;
     const newYear = validYears[currentYearIdx + nudge];
@@ -228,7 +228,7 @@ const AopDataViewer = (props) => {
     if (Number.isNaN(flight) || !data[currentSelection.site][currentSelection.year][flight - 1]) {
       return;
     }
-    setCurrentSelection(previousCurrentSelection => ({
+    setCurrentSelection((previousCurrentSelection) => ({
       ...previousCurrentSelection,
       flight,
     }));
@@ -288,7 +288,7 @@ const AopDataViewer = (props) => {
     });
     const menuItems = Object.keys(sitesByStateName)
       .sort()
-      .flatMap(stateName => [
+      .flatMap((stateName) => [
         <MenuItem
           key={stateName}
           value={stateName}
@@ -298,7 +298,7 @@ const AopDataViewer = (props) => {
         >
           {stateName}
         </MenuItem>,
-      ].concat(sitesByStateName[stateName].map(site => (
+      ].concat(sitesByStateName[stateName].map((site) => (
         <MenuItem key={site} value={site}>
           <div>
             <Typography display="block">
@@ -324,10 +324,10 @@ const AopDataViewer = (props) => {
         <Select
           data-selenium="aop-data-viewer.site-select"
           value={currentSelection.site || ''}
-          onChange={event => handleSiteChange(event.target.value)}
+          onChange={(event) => handleSiteChange(event.target.value)}
           input={<OutlinedInput name="site" id="site" margin="dense" />}
           aria-labelledby="site-label"
-          renderValue={value => value}
+          renderValue={(value) => value}
         >
           {menuItems}
         </Select>
@@ -362,7 +362,7 @@ const AopDataViewer = (props) => {
             max={currentSelection.sliderBounds.max}
             aria-labelledby="year-label"
             valueLabelDisplay="auto"
-            valueLabelFormat={value => value}
+            valueLabelFormat={(value) => value}
             onChange={(event, newYear) => handleSliderChange(parseInt(newYear, 10))}
           />
         </div>
@@ -394,10 +394,10 @@ const AopDataViewer = (props) => {
       <Select
         data-selenium="aop-data-viewer.flight-select"
         value={flight}
-        onChange={event => handleFlightChange(parseInt(event.target.value, 10))}
+        onChange={(event) => handleFlightChange(parseInt(event.target.value, 10))}
         input={<OutlinedInput name="flight" id="flight" margin="dense" />}
         aria-labelledby="flight-label"
-        renderValue={value => getFlightLabel(value, data[site][year][value - 1].month)}
+        renderValue={(value) => getFlightLabel(value, data[site][year][value - 1].month)}
         disabled={total === 1}
       >
         {data[site][year].map((f, idx) => (
@@ -457,7 +457,7 @@ const AopDataViewer = (props) => {
       <Divider className={classes.divider} />
       {belowSm
         ? (
-          <React.Fragment>
+          <>
             <Grid container spacing={2} justify="center" style={{ marginBottom: Theme.spacing(1) }}>
               <Grid item xs={2}>{renderInputLabel('site', tooltips.site)}</Grid>
               <Grid item xs={10}>
@@ -472,7 +472,7 @@ const AopDataViewer = (props) => {
               <Grid item xs={2}>{renderInputLabel('flight', tooltips.flight)}</Grid>
               <Grid item xs={10}>{renderFlightSelect()}</Grid>
             </Grid>
-          </React.Fragment>
+          </>
         ) : (
           <div style={{ width: '100%', display: 'flex' }}>
             <div style={{ flexGrow: 0 }}>

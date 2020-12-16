@@ -139,7 +139,6 @@ const baseTheme = createMuiTheme({
       xl: 1600,
     },
   },
-  colors: COLORS,
   palette: {
     background: {
       default: '#fff',
@@ -803,13 +802,14 @@ const baseTheme = createMuiTheme({
 
 const theme = responsiveFontSizes(baseTheme);
 theme.isNeonTheme = true;
+theme.colors = COLORS;
 
 /**
    getWrappedComponent
    Function used to automatically wrap functional components in a ThemeProvider if not already
    present. Will not wrap in theme if running in jsdom so as not to inject themes into snapshots.
 */
-theme.getWrappedComponent = Component => (props) => {
+theme.getWrappedComponent = (Component) => (props) => {
   const currentTheme = useTheme();
   const isJsdom = navigator.userAgent.includes('Node.js') || navigator.userAgent.includes('jsdom');
   if (!currentTheme.isNeonTheme && !isJsdom) {

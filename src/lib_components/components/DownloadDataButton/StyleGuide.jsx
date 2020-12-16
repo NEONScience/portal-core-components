@@ -24,7 +24,7 @@ import sampleProductDataMGRast from '../../../sampleData/DP1.10107.001.json';
 import sampleProductDataNPN from '../../../sampleData/DP1.10055.001.json';
 import sampleProductDataPhenocam from '../../../sampleData/DP1.00033.001.json';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -41,7 +41,7 @@ export default function StyleGuide() {
   );
 
   return (
-    <React.Fragment>
+    <>
 
       <DocBlock>
         A button to launch the Download Data Dialog.
@@ -162,6 +162,6 @@ const productData = {...};
         </div>
       </ExampleBlock>
 
-    </React.Fragment>
+    </>
   );
 }

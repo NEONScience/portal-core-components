@@ -5,7 +5,7 @@ import NeonContext from '../NeonContext/NeonContext';
 import TimeSeriesViewerContainer from './TimeSeriesViewerContainer';
 import TimeSeriesViewerContext from './TimeSeriesViewerContext';
 
-const TimeSeriesViewer = props => (
+const TimeSeriesViewer = (props) => (
   <TimeSeriesViewerContext.Provider {...props}>
     <TimeSeriesViewerContainer />
   </TimeSeriesViewerContext.Provider>

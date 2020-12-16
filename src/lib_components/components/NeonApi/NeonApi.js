@@ -45,6 +45,34 @@ const getJsonObservable = (url, headers = undefined, includeToken = true) => {
 };
 
 /**
+ * Gets the RxJS observable for making a POST API request to the specified URL
+ * with body and optional headers.
+ * @param {string} url The URL to make the API request to
+ * @param {any} body The body to send with the POST request
+ * @param {Object|undefined} headers The headers to add to the request
+ * @param {boolean} includeToken Option to include the API token in the request
+ * @return The RxJS Ajax Observable
+ */
+const postJsonObservable = (url, body, headers = undefined, includeToken = true) => {
+  if (!url.length) { return of(null); }
+  let appliedHeaders = headers || {};
+  if (includeToken) {
+    appliedHeaders = getApiTokenHeader(appliedHeaders);
+  }
+  return ajax({
+    url,
+    method: 'POST',
+    crossDomain: true,
+    responseType: 'json',
+    headers: {
+      ...appliedHeaders,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  });
+};
+
+/**
  * Container for supplying common NEON API request handlers.
  */
 const NeonApi = {
@@ -64,6 +92,18 @@ const NeonApi = {
    */
   getJsonObservable: (url, headers = undefined, includeToken = true) => (
     getJsonObservable(url, headers, includeToken)
+  ),
+  /**
+   * Gets the RxJS observable for making a POST API request to the specified URL
+   * with body and optional headers.
+   * @param {string} url The URL to make the API request to
+   * @param {any} body The body to send with the POST request
+   * @param {Object|undefined} headers The headers to add to the request
+   * @param {boolean} includeToken Option to include the API token in the request
+   * @return The RxJS Ajax Observable
+   */
+  postJsonObservable: (url, body, headers = undefined, includeToken = true) => (
+    postJsonObservable(url, body, headers, includeToken)
   ),
 
   /**
@@ -85,13 +125,32 @@ const NeonApi = {
    * @return The RxJS Ajax Observable
    */
   getProductsObservable: () => getJsonObservable(NeonEnvironment.getFullApiPath('products')),
+
   /**
    * Gets the product endpoint RxJS Observable for the specified product code.
    * @param {string} productCode The product code to get for.
+   * @param {string} release An optional release to scope the product.
    * @return The RxJS Ajax Observable
    */
-  getProductObservable: productCode => (
-    getJsonObservable(`${NeonEnvironment.getFullApiPath('products')}/${productCode}`)
+  getProductObservable: (productCode, release = null) => {
+    const root = NeonEnvironment.getFullApiPath('products');
+    const path = release ? `${root}/${productCode}/${release}` : `${root}/${productCode}`;
+    return getJsonObservable(path);
+  },
+
+  /**
+   * Gets the release endpoint RxJS Observable.
+   * @return The RxJS Ajax Observable
+   */
+  getReleasesObservable: () => getJsonObservable(NeonEnvironment.getFullApiPath('releases')),
+
+  /**
+   * Gets the release endpoint RxJS Observable for the specified release.
+   * @param {string} release The release tag to get
+   * @return The RxJS Ajax Observable
+   */
+  getReleaseObservable: (release) => (
+    getJsonObservable(`${NeonEnvironment.getFullApiPath('releases')}/${release}`)
   ),
 
   /**
@@ -104,7 +163,7 @@ const NeonApi = {
    * @param {string} siteCode The site code to get for.
    * @return The RxJS Ajax Observable
    */
-  getSiteJsonObservable: siteCode => (
+  getSiteJsonObservable: (siteCode) => (
     getJsonObservable(`${NeonEnvironment.getFullApiPath('sites')}/${siteCode}`)
   ),
 
@@ -113,7 +172,7 @@ const NeonApi = {
    * @param {string} siteCode The site code to get complete hierarchy for.
    * @return The RxJS Ajax Observable
    */
-  getSiteLocationHierarchyObservable: siteCode => (
+  getSiteLocationHierarchyObservable: (siteCode) => (
     getJsonObservable(`${NeonEnvironment.getFullApiPath('locations')}/${siteCode}?hierarchy=true`)
   ),
 
@@ -122,7 +181,7 @@ const NeonApi = {
    * @param {string} location The named location to fetch.
    * @return The RxJS Ajax Observable
    */
-  getLocationObservable: location => (
+  getLocationObservable: (location) => (
     getJsonObservable(`${NeonEnvironment.getFullApiPath('locations')}/${location}`)
   ),
 

@@ -75,8 +75,8 @@ export default function parseLocationsArray(locationsArray = []) {
       };
       // Add any aliases to the whitelist
       const whiteListAliases = whiteList
-        .filter(k => Object.keys(RENAME_LOCATION_PROPERTIES).includes(k))
-        .map(k => RENAME_LOCATION_PROPERTIES[k]);
+        .filter((k) => Object.keys(RENAME_LOCATION_PROPERTIES).includes(k))
+        .map((k) => RENAME_LOCATION_PROPERTIES[k]);
       const fullWhiteList = whiteList.concat(whiteListAliases);
       // outProps is the structure we plan to fill with parsed variables and return
       const outProps = {};
@@ -133,7 +133,7 @@ export default function parseLocationsArray(locationsArray = []) {
       }
       if (polygon !== null) {
         parsed.geometry = {
-          coordinates: polygon.coordinates.map(c => [c.latitude, c.longitude]),
+          coordinates: polygon.coordinates.map((c) => [c.latitude, c.longitude]),
         };
         // Fill in top-level elevation if not present but geometry with elevation is
         if (elevation === null) {
@@ -153,12 +153,12 @@ export default function parseLocationsArray(locationsArray = []) {
       if (elevation !== null) { parsed.elevation = elevation; }
       // Have geometry but no lat/lon - calculate a basic lat/lon center for icon positioning
       if (
-        !['latitude', 'longitude'].every(k => Object.keys(parsed).includes(k))
+        !['latitude', 'longitude'].every((k) => Object.keys(parsed).includes(k))
           && parsed.geometry && parsed.geometry.coordinates
       ) {
         [parsed.latitude, parsed.longitude] = parsed.geometry.coordinates
           .reduce((acc, cur) => [acc[0] + cur[0], acc[1] + cur[1]], [0, 0])
-          .map(c => c / parsed.geometry.coordinates.length);
+          .map((c) => c / parsed.geometry.coordinates.length);
       }
       // Special case: set plotType TOWER_SOIL_PLOTS (not present in locations API)
       // The 'SOIL_PLOT' type maps to FEATURES.TOWER_SOIL_PLOTS.matchLocationType in SiteMapUtils.js

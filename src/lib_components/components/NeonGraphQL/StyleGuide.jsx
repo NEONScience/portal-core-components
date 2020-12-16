@@ -24,7 +24,7 @@ import NeonGraphQL from './NeonGraphQL';
 
 import Theme from '../Theme/Theme';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -58,7 +58,15 @@ export default function StyleGuide() {
     // getAllDataProducts
     {
       name: 'getAllDataProducts',
-      arguments: <i>none</i>,
+      arguments: (
+        <ul>
+          <li>
+            <tt className={classes.tt}>release</tt> - <i>String, Optional</i>
+            <br />
+            Release tag (e.g. &quot;test-tag-1&quot;)
+          </li>
+        </ul>
+      ),
       description: 'Get an array of all data products with full attributes (including availability).',
       example: (
         <CodeBlock style={{ margin: 0 }}>
@@ -79,9 +87,14 @@ observable.subscribe();
       arguments: (
         <ul>
           <li>
-            <tt className={classes.tt}>code</tt> - <i>String, Required</i>
+            <tt className={classes.tt}>productCode</tt> - <i>String, Required</i>
             <br />
             Data product code (e.g. &quot;DP1.00001.001&quot;)
+          </li>
+          <li>
+            <tt className={classes.tt}>release</tt> - <i>String, Optional</i>
+            <br />
+            Release tag (e.g. &quot;test-tag-1&quot;)
           </li>
         </ul>
       ),
@@ -91,9 +104,9 @@ Get a single data product with full attributes (including availability) by produ
       example: (
         <CodeBlock style={{ margin: 0 }}>
           {`
-const code = 'DP1.00001.001';
+const productCode = 'DP1.00001.001';
 
-const observable = NeonGraphQL.getDataProductByCode(code).pipe(
+const observable = NeonGraphQL.getDataProductByCode(productCode).pipe(
   map((response) => { /* handle response */ }),
   catchError((error) => { /* handle error */ }),
 );
@@ -127,7 +140,7 @@ observable.subscribe();
       arguments: (
         <ul>
           <li>
-            <tt className={classes.tt}>code</tt> - <i>String, Required</i>
+            <tt className={classes.tt}>siteCode</tt> - <i>String, Required</i>
             <br />
             Site code (e.g. &quot;CPER&quot;)
           </li>
@@ -139,9 +152,9 @@ Get a single field site with full attributes by site code.
       example: (
         <CodeBlock style={{ margin: 0 }}>
           {`
-const code = 'ABBY';
+const siteCode = 'ABBY';
 
-const observable = NeonGraphQL.getSiteByCode(code).pipe(
+const observable = NeonGraphQL.getSiteByCode(siteCode).pipe(
   map((response) => { /* handle response */ }),
   catchError((error) => { /* handle error */ }),
 );
@@ -157,7 +170,7 @@ observable.subscribe();
       arguments: (
         <ul>
           <li>
-            <tt className={classes.tt}>name</tt> - <i>String, Required</i>
+            <tt className={classes.tt}>locationName</tt> - <i>String, Required</i>
             <br />
             Location name (e.g. &quot;D10&quot;, &quot;CPER&quot;, &quot;TOWER104454&quot;, etc.)
           </li>
@@ -169,9 +182,9 @@ Get a location with full attributes (including locationProperties), by name.
       example: (
         <CodeBlock style={{ margin: 0 }}>
           {`
-const location = 'SOILPL104531';
+const locationName = 'SOILPL104531';
 
-const observable = NeonGraphQL.getLocationByName(location).pipe(
+const observable = NeonGraphQL.getLocationByName(locationName).pipe(
   map((response) => { /* handle response */ }),
   catchError((error) => { /* handle error */ }),
 );
@@ -187,7 +200,7 @@ observable.subscribe();
       arguments: (
         <ul>
           <li>
-            <tt className={classes.tt}>names</tt> - <i>Array of Strings, Required</i>
+            <tt className={classes.tt}>locationNames</tt> - <i>Array of Strings, Required</i>
             <br />
             Array for location name strings (e.g. [&quot;D10&quot;, &quot;CPER&quot;])
           </li>
@@ -200,9 +213,9 @@ Get an array containing matching location objects with full attributes
       example: (
         <CodeBlock style={{ margin: 0 }}>
           {`
-const locations = ['SYCA.AOS.fish.point.01', 'SYCA.AOS.fish.point.02', 'SYCA.AOS.fish.point.03'];
+const locationNames = ['SYCA.AOS.fish.point.01', 'SYCA.AOS.fish.point.02', 'SYCA.AOS.fish.point.03'];
 
-const observable = NeonGraphQL.getManyLocationsByName(locations).pipe(
+const observable = NeonGraphQL.getManyLocationsByName(locationNames).pipe(
   map((response) => { /* handle response */ }),
   catchError((error) => { /* handle error */ }),
 );
@@ -217,42 +230,52 @@ observable.subscribe();
   // getAllDataProducts
   const [allDataProductsStatus, setAllDataProductsStatus] = useState(null);
   const [allDataProductsResponse, setAllDataProductsResponse] = useState(null);
-  const allDataProductsObservable = NeonGraphQL.getAllDataProducts().pipe(
-    map((response) => {
-      setAllDataProductsStatus('success');
-      setAllDataProductsResponse(response.response);
-    }),
-    catchError((error) => {
-      setAllDataProductsStatus('error');
-      setAllDataProductsResponse(error);
-    }),
+  const [allDataProductsReleaseArgument, setAllDataProductsReleaseArgument] = useState(null);
+  const getAllDataProductsObservable = (release) => (
+    NeonGraphQL.getAllDataProducts(release).pipe(
+      map((response) => {
+        setAllDataProductsStatus('success');
+        setAllDataProductsResponse(response.response);
+      }),
+      catchError((error) => {
+        setAllDataProductsStatus('error');
+        setAllDataProductsResponse(error);
+      }),
+    )
   );
   const handleFetchAllDataProducts = () => {
+    const release = document.getElementById('allDataProductsReleaseInput').value;
     setAllDataProductsStatus('fetching');
-    allDataProductsObservable.subscribe();
+    setAllDataProductsReleaseArgument(release);
+    getAllDataProductsObservable(release).subscribe();
   };
 
   // getDataProductByCode
   const [dataProductByCodeStatus, setDataProductByCodeStatus] = useState(null);
   const [dataProductByCodeArgument, setDataProductByCodeArgument] = useState(null);
+  const [dataProductByCodeReleaseArgument, setDataProductByCodeReleaseArgument] = useState(null);
   const [dataProductByCodeResponse, setDataProductByCodeResponse] = useState(null);
-  const getDataProductByCodeObservable = code => NeonGraphQL.getDataProductByCode(code).pipe(
-    switchMap(resp => of(resp)),
-  ).pipe(
-    map((response) => {
-      setDataProductByCodeStatus('success');
-      setDataProductByCodeResponse(response.response);
-    }),
-    catchError((error) => {
-      setDataProductByCodeStatus('error');
-      setDataProductByCodeResponse(error);
-    }),
+  const getDataProductByCodeObservable = (code, release) => (
+    NeonGraphQL.getDataProductByCode(code, release).pipe(
+      switchMap((resp) => of(resp)),
+    ).pipe(
+      map((response) => {
+        setDataProductByCodeStatus('success');
+        setDataProductByCodeResponse(response.response);
+      }),
+      catchError((error) => {
+        setDataProductByCodeStatus('error');
+        setDataProductByCodeResponse(error);
+      }),
+    )
   );
   const handleFetchDataProductByCode = () => {
-    const code = document.getElementById('getDataProductByCodeInput').value;
+    const productCode = document.getElementById('getDataProductByCodeInput').value;
+    const release = document.getElementById('getDataProductByCodeReleaseInput').value;
     setDataProductByCodeStatus('fetching');
-    setDataProductByCodeArgument(code);
-    getDataProductByCodeObservable(code).subscribe();
+    setDataProductByCodeArgument(productCode);
+    setDataProductByCodeReleaseArgument(release);
+    getDataProductByCodeObservable(productCode, release).subscribe();
   };
 
   // getAllSites
@@ -277,8 +300,8 @@ observable.subscribe();
   const [siteByCodeStatus, setSiteByCodeStatus] = useState(null);
   const [siteByCodeArgument, setSiteByCodeArgument] = useState(null);
   const [siteByCodeResponse, setSiteByCodeResponse] = useState(null);
-  const getSiteByCodeObservable = code => NeonGraphQL.getSiteByCode(code).pipe(
-    switchMap(resp => of(resp)),
+  const getSiteByCodeObservable = (code) => NeonGraphQL.getSiteByCode(code).pipe(
+    switchMap((resp) => of(resp)),
   ).pipe(
     map((response) => {
       setSiteByCodeStatus('success');
@@ -297,7 +320,7 @@ observable.subscribe();
   };
 
   return (
-    <React.Fragment>
+    <>
 
       <DocBlock>
         A utility for generating common Neon GraphQL queries succinctly.
@@ -376,9 +399,18 @@ import NeonGraphQL from 'portal-core-components/lib/components/NeonGraphQL';
       </DocBlock>
       <ExampleBlock>
         <div style={{ width: '100%' }}>
-          <button type="button" onClick={handleFetchAllDataProducts}>
-            Fetch all data products
-          </button>
+          <div>
+            Fetch all data products (optional: in release tag:&nbsp;
+            <input size="15" id="allDataProductsReleaseInput" defaultValue="" />
+            )
+            <br />
+            <button type="button" onClick={handleFetchAllDataProducts}>
+              Fetch
+            </button>
+          </div>
+          <div>
+            release: {allDataProductsReleaseArgument || <i>n/a</i>}
+          </div>
           <div>
             Status: {allDataProductsStatus || <i>n/a</i>}
           </div>
@@ -400,28 +432,42 @@ const myComponent = () => {
 
   const [allDataProductsStatus, setAllDataProductsStatus] = useState(null);
   const [allDataProductsResponse, setAllDataProductsResponse] = useState(null);
+  const [allDataProductsReleaseArgument, setAllDataProductsReleaseArgument] = useState(null);
 
-  const allDataProductsObservable = NeonGraphQL.getAllDataProducts().pipe(
-    map((response) => {
-      setAllDataProductsStatus('success');
-      setAllDataProductsResponse(response.response);
-    }),
-    catchError((error) => {
-      setAllDataProductsStatus('error');
-      setAllDataProductsResponse(error);
-    }),
+  const getAllDataProductsObservable = release => (
+    NeonGraphQL.getAllDataProducts(release).pipe(
+      map((response) => {
+        setAllDataProductsStatus('success');
+        setAllDataProductsResponse(response.response);
+      }),
+      catchError((error) => {
+        setAllDataProductsStatus('error');
+        setAllDataProductsResponse(error);
+      }),
+    )
   );
 
   const handleFetchAllDataProducts = () => {
+    const release = document.getElementById('allDataProductsReleaseInput').value;
     setAllDataProductsStatus('fetching');
-    allDataProductsObservable.subscribe();
+    setAllDataProductsReleaseArgument(release);
+    getAllDataProductsObservable(release).subscribe();
   };
 
   return (
     <div>
-      <button type="button" onClick={handleFetchAllDataProducts}>
-        Fetch all data products
-      </button>
+      <div>
+        Fetch all data products (optional: in release tag:&nbsp;
+        <input size="15" id="allDataProductsReleaseInput" defaultValue="" />
+        )
+        <br />
+        <button type="button" onClick={handleFetchAllDataProducts}>
+          Fetch
+        </button>
+      </div>
+      <div>
+        release: {allDataProductsReleaseArgument || <i>n/a</i>}
+      </div>
       <div>
         Status: {allDataProductsStatus || <i>n/a</i>}
       </div>
@@ -460,12 +506,18 @@ const myComponent = () => {
           <div>
             Fetch a data product by code:&nbsp;
             <input size="15" id="getDataProductByCodeInput" defaultValue="" />
+            &nbsp;...(optional: in release tag:&nbsp;
+            <input size="15" id="getDataProductByCodeReleaseInput" defaultValue="" />
+            )
+            <br />
             <button type="button" onClick={handleFetchDataProductByCode}>
               Fetch
             </button>
           </div>
           <div>
-            Argument: {dataProductByCodeArgument || <i>n/a</i>}
+            productCode: {dataProductByCodeArgument || <i>n/a</i>}
+            <br />
+            release: {dataProductByCodeReleaseArgument || <i>n/a</i>}
           </div>
           <div>
             Status: {dataProductByCodeStatus || <i>n/a</i>}
@@ -489,26 +541,32 @@ const myComponent = () => {
 
   const [dataProductByCodeStatus, setDataProductByCodeStatus] = useState(null);
   const [dataProductByCodeArgument, setDataProductByCodeArgument] = useState(null);
+  const [dataProductByCodeReleaseArgument, setDataProductByCodeReleaseArgument] = useState(null);
   const [dataProductByCodeResponse, setDataProductByCodeResponse] = useState(null);
 
-  const getDataProductByCodeObservable = code => NeonGraphQL.getDataProductByCode(code).pipe(
-    switchMap(resp => of(resp)),
-  ).pipe(
-    map((response) => {
-      setDataProductByCodeStatus('success');
-      setDataProductByCodeResponse(response.response);
-    }),
-    catchError((error) => {
-      setDataProductByCodeStatus('error');
-      setDataProductByCodeResponse(error);
-    }),
+  const getDataProductByCodeObservable = (code, release) => (
+    NeonGraphQL.getDataProductByCode(code, release).pipe(
+      switchMap(resp => of(resp)),
+    ).pipe(
+      map((response) => {
+        setDataProductByCodeStatus('success');
+        setDataProductByCodeResponse(response.response);
+      }),
+      catchError((error) => {
+        console.log('ERROR', error);
+        setDataProductByCodeStatus('error');
+        setDataProductByCodeResponse(error);
+      }),
+    )
   );
 
   const handleFetchDataProductByCode = () => {
-    const code = document.getElementById('getDataProductByCodeInput').value;
+    const productCode = document.getElementById('getDataProductByCodeInput').value;
+    const release = document.getElementById('getDataProductByCodeReleaseInput').value;
     setDataProductByCodeStatus('fetching');
-    setDataProductByCodeArgument(code);
-    getDataProductByCodeObservable(code).subscribe();
+    setDataProductByCodeArgument(productCode);
+    setDataProductByCodeReleaseArgument(release);
+    getDataProductByCodeObservable(productCode, release).subscribe();
   };
 
   return (
@@ -516,12 +574,18 @@ const myComponent = () => {
       <div>
         Fetch a data product by code:&nbsp;
         <input size="15" id="getDataProductByCodeInput" defaultValue="" />
+        &nbsp;...(optional: in release tag:&nbsp;
+        <input size="15" id="getDataProductByCodeReleaseInput" defaultValue="" />
+        )
+        <br />
         <button type="button" onClick={handleFetchDataProductByCode}>
           Fetch
         </button>
       </div>
       <div>
-        Argument: {dataProductByCodeArgument || <i>n/a</i>}
+        productCode: {dataProductByCodeArgument || <i>n/a</i>}
+        <br />
+        release: {dataProductByCodeReleaseArgument || <i>n/a</i>}
       </div>
       <div>
         Status: {dataProductByCodeStatus || <i>n/a</i>}
@@ -720,6 +784,6 @@ const myComponent = () => {
         `}
       </CodeBlock>
 
-    </React.Fragment>
+    </>
   );
 }

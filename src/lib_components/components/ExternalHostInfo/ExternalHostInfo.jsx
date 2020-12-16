@@ -17,7 +17,7 @@ import Theme from '../Theme/Theme';
 import ExternalHost from '../ExternalHost/ExternalHost';
 import ExternalHostProductSpecificLinks from '../ExternalHostProductSpecificLinks/ExternalHostProductSpecificLinks';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   startFlex: {
     display: 'flex',
     justifyContent: 'flex-start',
@@ -63,27 +63,27 @@ const ExternalHostInfo = (props) => {
   const expandTitle = `${expanded ? 'Hide' : 'Show'} links to externally hosted data`;
   const rootProps = {};
   Object.keys(otherProps)
-    .filter(key => ['data-selenium', 'style', 'className'].includes(key))
+    .filter((key) => ['data-selenium', 'style', 'className'].includes(key))
     .forEach((key) => { rootProps[key] = otherProps[key]; });
 
   let blurb = null;
   let dataVariety = externalHost.hostDataVariety || 'Data';
   if (externalHost.hostType === ExternalHost.HOST_TYPES.REFORMATTED_DATA) {
     blurb = (
-      <React.Fragment>
+      <>
         {`${dataVariety} for this product are available in other formats from`}
         &nbsp;
         {externalGeneralLink}
-      </React.Fragment>
+      </>
     );
   }
   if (externalHost.hostType === ExternalHost.HOST_TYPES.EXCLUSIVE_DATA) {
     blurb = (
-      <React.Fragment>
+      <>
         {`${dataVariety} for this product are only available from`}
         &nbsp;
         {externalGeneralLink}
-      </React.Fragment>
+      </>
     );
   }
   // Default: ExternalHost.HOST_TYPES.ADDITIONAL_DATA:
@@ -91,16 +91,16 @@ const ExternalHostInfo = (props) => {
     dataVariety = externalHost.hostDataVariety || 'Additional data';
     const are = hasSpecificLinks ? 'are' : 'may be';
     blurb = (
-      <React.Fragment>
+      <>
         {`${dataVariety} associated with this product ${are} available from`}
         &nbsp;
         {externalGeneralLink}
-      </React.Fragment>
+      </>
     );
   }
 
   const content = (
-    <React.Fragment>
+    <>
       <CardContent className={classes.startFlex}>
         <InfoIcon fontSize="large" className={classes.calloutIcon} />
         <Typography variant="subtitle2" style={{ flexGrow: 1 }}>
@@ -125,7 +125,7 @@ const ExternalHostInfo = (props) => {
         <Divider />
         <ExternalHostProductSpecificLinks productCode={productCode} siteCodes={siteCodes} />
       </div>
-    </React.Fragment>
+    </>
   );
 
   return (

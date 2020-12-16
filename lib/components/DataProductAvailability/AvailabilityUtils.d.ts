@@ -47,7 +47,7 @@ export function calcRollupStatus(statuses?: any[]): any;
 export namespace AvailabilityPropTypes {
     export const basicSiteCodes: PropTypes.Requireable<(PropTypes.InferProps<{
         siteCode: PropTypes.Validator<string>;
-        availableMonths: PropTypes.Validator<(string | null | undefined)[]>;
+        availableMonths: PropTypes.Validator<import("../../types/core").Nullable<string>[]>;
     }> | null | undefined)[]>;
     export const enhancedSites: PropTypes.Requireable<(PropTypes.InferProps<{
         siteCode: PropTypes.Validator<string>;
@@ -56,7 +56,7 @@ export namespace AvailabilityPropTypes {
             description: PropTypes.Validator<string>;
             waitInterval: PropTypes.Validator<string>;
             months: PropTypes.Validator<{
-                [x: string]: string | null | undefined;
+                [x: string]: import("../../types/core").Nullable<string>;
             }>;
         }> | null | undefined)[]>;
     }> | null | undefined)[]>;

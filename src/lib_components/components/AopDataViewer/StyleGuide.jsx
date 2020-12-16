@@ -13,7 +13,7 @@ import ExampleBlock from '../../../components/ExampleBlock';
 import AopDataViewer from './AopDataViewer';
 import Theme from '../Theme/Theme';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -23,7 +23,7 @@ export default function StyleGuide() {
   const classes = useStyles(Theme);
 
   return (
-    <React.Fragment>
+    <>
 
       <DocBlock>
         An interactive visualization of AOP data sets built and maintained by the
@@ -116,6 +116,6 @@ import AopDataViewer from 'portal-core-components/lib/components/AopDataViewer';
         `}
       </CodeBlock>
 
-    </React.Fragment>
+    </>
   );
 }

@@ -39,7 +39,7 @@ const DownloadDataButton = (props) => {
   }
 
   return (
-    <React.Fragment>
+    <>
       <Button
         color="primary"
         variant="contained"
@@ -56,7 +56,7 @@ const DownloadDataButton = (props) => {
           <DownloadDataDialog />
         </Suspense>
       )}
-    </React.Fragment>
+    </>
   );
 };
 

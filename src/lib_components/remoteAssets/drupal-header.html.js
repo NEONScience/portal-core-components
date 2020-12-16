@@ -104,10 +104,6 @@ export default html = `
           <a href="https://www.neonscience.org/about/contact-us/field-offices" class="menu__link" data-drupal-link-system-path="node/7874">Field Offices</a>
 
                   </li>
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/about/contact-us/supplier-information" class="menu__link" data-drupal-link-system-path="node/21">Supplier Information</a>
-
-                  </li>
       
           </ul>
   
@@ -171,6 +167,10 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
+          <a href="https://data.neonscience.org/documents" class="menu__link">Document Library</a>
+
+                  </li>
+              <li  class="menu__item">
           <a href="https://data.neonscience.org/data-api" class="menu__link">API &amp; GraphQL</a>
 
                   </li>
@@ -204,25 +204,25 @@ export default html = `
 
                   </li>
               <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/data-samples/samples" class="menu__link" data-drupal-link-system-path="node/10295">Samples &amp; Specimens</a>
+          <a href="https://www.neonscience.org/samples" class="menu__link" data-drupal-link-system-path="node/10295">Samples &amp; Specimens</a>
 
           
             
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/data-samples/samples/find-neon-samples" class="menu__link" data-drupal-link-system-path="node/8174">Discover and Use NEON Samples</a>
+          <a href="https://www.neonscience.org/samples/find-samples" class="menu__link" data-drupal-link-system-path="node/8174">Discover and Use NEON Samples</a>
 
           
             
                       <ul  class="menu menu--main" data-depth="3">
 
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/samples/sample-types" class="menu__link" data-drupal-link-system-path="node/6223">Sample Types</a>
+          <a href="https://www.neonscience.org/samples/sample-types" class="menu__link" data-drupal-link-system-path="node/6223">Sample Types</a>
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/samples/sample-repositories" class="menu__link" data-drupal-link-system-path="node/10907">Sample Repositories</a>
+          <a href="https://www.neonscience.org/samples/sample-repositories" class="menu__link" data-drupal-link-system-path="node/10907">Sample Repositories</a>
 
                   </li>
               <li  class="menu__item">
@@ -230,11 +230,11 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/samples/soil-archive" class="menu__link" data-drupal-link-system-path="node/5">Megapit and Distributed Initial Characterization Soil Archives</a>
+          <a href="https://www.neonscience.org/samples/soil-archive" class="menu__link" data-drupal-link-system-path="node/5">Megapit and Distributed Initial Characterization Soil Archives</a>
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/samples/excess-samples" class="menu__link" data-drupal-link-system-path="node/10297">Excess Samples</a>
+          <a href="https://www.neonscience.org/samples/excess-samples" class="menu__link" data-drupal-link-system-path="node/10297">Excess Samples</a>
 
                   </li>
       
@@ -245,7 +245,11 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/samples/sample-quality" class="menu__link" data-drupal-link-system-path="node/10908">Sample Quality</a>
+          <a href="https://www.neonscience.org/samples/sample-processing" class="menu__link" data-drupal-link-system-path="node/10906">Sample Processing</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/samples/sample-quality" class="menu__link" data-drupal-link-system-path="node/10908">Sample Quality</a>
 
                   </li>
               <li  class="menu__item">
@@ -260,7 +264,7 @@ export default html = `
 
                   </li>
               <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/data-samples/data-collection" class="menu__link" data-drupal-link-system-path="node/4776">Collection Methods</a>
+          <a href="https://www.neonscience.org/data-collection" class="menu__link" data-drupal-link-system-path="node/4776">Collection Methods</a>
 
           
             
@@ -271,7 +275,7 @@ export default html = `
 
                   </li>
               <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/data-samples/data-collection/airborne-remote-sensing" class="menu__link" data-drupal-link-system-path="node/3821">AIrborne Remote Sensing</a>
+          <a href="https://www.neonscience.org/data-collection/airborne-remote-sensing" class="menu__link" data-drupal-link-system-path="node/3821">AIrborne Remote Sensing</a>
 
           
             
@@ -282,23 +286,23 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/data-collection/airborne-remote-sensing/flight-schedules-coverage" class="menu__link" data-drupal-link-system-path="node/7871">Flight Schedules and Coverage</a>
+          <a href="https://www.neonscience.org/data-collection/flight-schedules-coverage" class="menu__link" data-drupal-link-system-path="node/7871">Flight Schedules and Coverage</a>
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/data-collection/airborne-remote-sensing/daily-flight-reports" class="menu__link" data-drupal-link-system-path="node/10542">Daily Flight Reports</a>
+          <a href="https://www.neonscience.org/data-collection/daily-flight-reports" class="menu__link" data-drupal-link-system-path="node/10542">Daily Flight Reports</a>
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/data-collection/airborne-remote-sensing/camera" class="menu__link" data-drupal-link-system-path="node/10554">Camera</a>
+          <a href="https://www.neonscience.org/data-collection/camera" class="menu__link" data-drupal-link-system-path="node/10554">Camera</a>
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/data-collection/airborne-remote-sensing/imaging-spectrometer" class="menu__link" data-drupal-link-system-path="node/10555">Imaging Spectrometer</a>
+          <a href="https://www.neonscience.org/data-collection/imaging-spectrometer" class="menu__link" data-drupal-link-system-path="node/10555">Imaging Spectrometer</a>
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/data-collection/airborne-remote-sensing/lidar" class="menu__link" data-drupal-link-system-path="node/10551">Lidar</a>
+          <a href="https://www.neonscience.org/data-collection/lidar" class="menu__link" data-drupal-link-system-path="node/10551">Lidar</a>
 
                   </li>
       
@@ -309,45 +313,45 @@ export default html = `
 
                   </li>
               <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/data-samples/data-collection/automated-instruments" class="menu__link" data-drupal-link-system-path="node/7819">Automated Instruments</a>
+          <a href="https://www.neonscience.org/data-collection/automated-instruments" class="menu__link" data-drupal-link-system-path="node/7819">Automated Instruments</a>
 
           
             
                       <ul  class="menu menu--main" data-depth="3">
 
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/data-collection/automated-instruments/site-level-sampling-design" class="menu__link" data-drupal-link-system-path="node/10897">Site Level Sampling Design</a>
+          <a href="https://www.neonscience.org/data-collection/site-level-sampling-design" class="menu__link" data-drupal-link-system-path="node/10897">Site Level Sampling Design</a>
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/data-collection/automated-instruments/collection-frequency" class="menu__link" data-drupal-link-system-path="node/10901">Collection Frequency</a>
+          <a href="https://www.neonscience.org/data-collection/sensor-collection-frequency" class="menu__link" data-drupal-link-system-path="node/10901">Sensor Collection Frequency</a>
 
                   </li>
               <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/data-samples/data-collection/automated-instruments/instrumented-collection-types" class="menu__link" data-drupal-link-system-path="node/10900">Instrumented Collection Types</a>
+          <a href="https://www.neonscience.org/data-collection/instrumented-collection-types" class="menu__link" data-drupal-link-system-path="node/10900">Instrumented Collection Types</a>
 
           
             
                       <ul  class="menu menu--main" data-depth="4">
 
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/data-collection/automated-instruments/instrumented-collection-types/meteorology" class="menu__link" data-drupal-link-system-path="node/7842">Meteorology</a>
+          <a href="https://www.neonscience.org/data-collection/meteorology" class="menu__link" data-drupal-link-system-path="node/7842">Meteorology</a>
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/data-collection/automated-instruments/instrument-collection-types/phenocams" class="menu__link" data-drupal-link-system-path="node/7843">Phenocams</a>
+          <a href="https://www.neonscience.org/data-collection/phenocams" class="menu__link" data-drupal-link-system-path="node/7843">Phenocams</a>
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/data-collection/automated-instruments/instrumented-collection-types/soil-sensors" class="menu__link" data-drupal-link-system-path="node/7841">Soil Sensors</a>
+          <a href="https://www.neonscience.org/data-collection/soil-sensors" class="menu__link" data-drupal-link-system-path="node/7841">Soil Sensors</a>
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/data-collection/automated-instruments/instrument-collection-types/groundwater" class="menu__link" data-drupal-link-system-path="node/7839">Ground Water</a>
+          <a href="https://www.neonscience.org/data-collection/groundwater" class="menu__link" data-drupal-link-system-path="node/7839">Ground Water</a>
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/data-collection/automated-instruments/instrument-collection-types/surface-water" class="menu__link" data-drupal-link-system-path="node/7840">Surface Water</a>
+          <a href="https://www.neonscience.org/data-collection/surface-water" class="menu__link" data-drupal-link-system-path="node/7840">Surface Water</a>
 
                   </li>
       
@@ -365,7 +369,7 @@ export default html = `
 
                   </li>
               <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/data-samples/data-collection/observational-sampling" class="menu__link" data-drupal-link-system-path="node/7820">Observational Sampling</a>
+          <a href="https://www.neonscience.org/data-collection/observational-sampling" class="menu__link" data-drupal-link-system-path="node/7820">Observational Sampling</a>
 
           
             
@@ -376,25 +380,25 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/data-collection/observational-sampling/sampling-schedules" class="menu__link" data-drupal-link-system-path="node/10889">Sampling Schedules</a>
+          <a href="https://www.neonscience.org/data-collection/sampling-schedules" class="menu__link" data-drupal-link-system-path="node/10889">Sampling Schedules</a>
 
                   </li>
               <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/data-samples/data-collection/observational-sampling/observation-types" class="menu__link" data-drupal-link-system-path="node/10535">Observation Types</a>
+          <a href="https://www.neonscience.org/data-collection/observation-types" class="menu__link" data-drupal-link-system-path="node/10535">Observation Types</a>
 
           
             
                       <ul  class="menu menu--main" data-depth="4">
 
               <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/data-samples/data-collection/observational-sampling/observation-types/aquatic-organisms" class="menu__link" data-drupal-link-system-path="node/3277">Aquatic Organisms</a>
+          <a href="https://www.neonscience.org/data-collection/aquatic-organisms" class="menu__link" data-drupal-link-system-path="node/3277">Aquatic Organisms</a>
 
           
             
                       <ul  class="menu menu--main" data-depth="5">
 
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/data-collection/observationl-sampling/observation-types/aquatic-organisms/aquatic-microbes" class="menu__link" data-drupal-link-system-path="node/8113">Aquatic Microbes</a>
+          <a href="https://www.neonscience.org/data-collection/aquatic-microbes" class="menu__link" data-drupal-link-system-path="node/8113">Aquatic Microbes</a>
 
                   </li>
               <li  class="menu__item">
@@ -402,7 +406,7 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/data-collection/observational-sampling/observational-types/aquatic-organisms/macroinvertebrates-zooplankton" class="menu__link" data-drupal-link-system-path="node/10538">Macroinvertebrates &amp; Zooplankton</a>
+          <a href="https://www.neonscience.org/data-collection/macroinvertebrates-zooplankton" class="menu__link" data-drupal-link-system-path="node/10538">Macroinvertebrates &amp; Zooplankton</a>
 
                   </li>
               <li  class="menu__item">
@@ -417,38 +421,38 @@ export default html = `
 
                   </li>
               <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/data-samples/data-collection/observational-sampling/observation-types/terrestrial-organisms" class="menu__link" data-drupal-link-system-path="node/3278">Terrestrial Organisms</a>
+          <a href="https://www.neonscience.org/data-collection/terrestrial-organisms" class="menu__link" data-drupal-link-system-path="node/3278">Terrestrial Organisms</a>
 
           
             
                       <ul  class="menu menu--main" data-depth="5">
 
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/data-collection/observational-sampling/observation-types/terrestrial-organisms/birds" class="menu__link" data-drupal-link-system-path="node/8288">Birds</a>
+          <a href="https://www.neonscience.org/data-collection/birds" class="menu__link" data-drupal-link-system-path="node/8288">Birds</a>
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/data-collection/observational-sampling/observational-types/terrestrial-organisms/ground-beetles" class="menu__link" data-drupal-link-system-path="node/8614">Ground Beetles</a>
+          <a href="https://www.neonscience.org/data-collection/ground-beetles" class="menu__link" data-drupal-link-system-path="node/8614">Ground Beetles</a>
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/data-collection/observational-sampling/observation-types/terrestrial-organisms/mosquitoes" class="menu__link" data-drupal-link-system-path="node/8290">Mosquitoes</a>
+          <a href="https://www.neonscience.org/data-collection/mosquitoes" class="menu__link" data-drupal-link-system-path="node/8290">Mosquitoes</a>
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/data-collection/observational-sampling/observation-types/terrestrial-organisms/small-mammals" class="menu__link" data-drupal-link-system-path="node/8616">Small Mammals</a>
+          <a href="https://www.neonscience.org/data-collection/small-mammals" class="menu__link" data-drupal-link-system-path="node/8616">Small Mammals</a>
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/data-collection/observational-sampling/observation-types/soil-microbes" class="menu__link" data-drupal-link-system-path="node/8617">Soil Microbes</a>
+          <a href="https://www.neonscience.org/data-collection/soil-microbes" class="menu__link" data-drupal-link-system-path="node/8617">Soil Microbes</a>
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/data-collection/observational-sampling/observation-types/terrestrial-plants" class="menu__link" data-drupal-link-system-path="node/8679">Terrestrial Plants</a>
+          <a href="https://www.neonscience.org/data-collection/terrestrial-plants" class="menu__link" data-drupal-link-system-path="node/8679">Terrestrial Plants</a>
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/data-collection/observational-sampling/observation-types/terrestrial-organisms/ticks" class="menu__link" data-drupal-link-system-path="node/8615">Ticks</a>
+          <a href="https://www.neonscience.org/data-collection/ticks" class="menu__link" data-drupal-link-system-path="node/8615">Ticks</a>
 
                   </li>
       
@@ -459,18 +463,18 @@ export default html = `
 
                   </li>
               <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/data-samples/data-collection/observational-sampling/observation-types/hydrology-geomorphology" class="menu__link" data-drupal-link-system-path="node/10536">Hydrology &amp; Geomorphology</a>
+          <a href="https://www.neonscience.org/data-collection/hydrology-geomorphology" class="menu__link" data-drupal-link-system-path="node/10536">Hydrology &amp; Geomorphology</a>
 
           
             
                       <ul  class="menu menu--main" data-depth="5">
 
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/data-collection/observational-sampling/observation-types/geomorphology-hydrology/discharge" class="menu__link" data-drupal-link-system-path="node/10537">Discharge</a>
+          <a href="https://www.neonscience.org/data-collection/discharge" class="menu__link" data-drupal-link-system-path="node/10537">Discharge</a>
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/data-collection/geomorphology" class="menu__link" data-drupal-link-system-path="node/7917">Geomorphology</a>
+          <a href="https://www.neonscience.org/data-collection/geomorphology" class="menu__link" data-drupal-link-system-path="node/7917">Geomorphology</a>
 
                   </li>
       
@@ -481,7 +485,7 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/data-collection/observational-sampling/observation-types/biogeochemistry" class="menu__link" data-drupal-link-system-path="node/7918">Biogeochemistry</a>
+          <a href="https://www.neonscience.org/data-collection/biogeochemistry" class="menu__link" data-drupal-link-system-path="node/7918">Biogeochemistry</a>
 
                   </li>
               <li  class="menu__item">
@@ -489,15 +493,15 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/data-collection/observational-sampling/observation-types/pathogens" class="menu__link" data-drupal-link-system-path="node/7881">Pathogens</a>
+          <a href="https://www.neonscience.org/data-collection/pathogens" class="menu__link" data-drupal-link-system-path="node/7881">Pathogens</a>
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/data-collection/observational-sampling/observation-types/sediments" class="menu__link" data-drupal-link-system-path="node/10541">Sediments</a>
+          <a href="https://www.neonscience.org/data-collection/sediments" class="menu__link" data-drupal-link-system-path="node/10541">Sediments</a>
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/data-collection/observational-sampling/observational-types/soils" class="menu__link" data-drupal-link-system-path="node/10549">Soils</a>
+          <a href="https://www.neonscience.org/data-collection/soils" class="menu__link" data-drupal-link-system-path="node/10549">Soils</a>
 
                   </li>
       
@@ -721,7 +725,7 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
-          <a href="https://data.neonscience.org/documents" class="menu__link">NEON Document Library</a>
+          <a href="https://data.neonscience.org/documents" class="menu__link">Document Library</a>
 
                   </li>
       
@@ -823,7 +827,7 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/samples/excess-samples" class="menu__link" data-drupal-link-system-path="node/10297">Excess Samples</a>
+          <a href="https://www.neonscience.org/samples/excess-samples" class="menu__link" data-drupal-link-system-path="node/10297">Excess Samples</a>
 
                   </li>
       

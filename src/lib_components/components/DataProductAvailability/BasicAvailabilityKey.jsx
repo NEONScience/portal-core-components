@@ -10,7 +10,7 @@ import Theme, { COLORS } from '../Theme/Theme';
 /**
    Setup: CSS classes
 */
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   legendContainer: {
     marginLeft: SVG.LABEL_WIDTH,
     marginTop: theme.spacing(1),
@@ -43,8 +43,8 @@ export default function BasicAvailabilityKey(props) {
     const totalRows = 2;
     const rowHeight = SVG.CELL_HEIGHT + (2 * SVG.CELL_PADDING);
     const totalHeight = (rowHeight * totalRows) - SVG.CELL_PADDING;
-    const rowY = row => row * rowHeight;
-    const rowLabelY = row => rowY(row) + (SVG.LABEL_FONT_SIZE - SVG.CELL_PADDING + 1);
+    const rowY = (row) => row * rowHeight;
+    const rowLabelY = (row) => rowY(row) + (SVG.LABEL_FONT_SIZE - SVG.CELL_PADDING + 1);
     const cellOffset = SVG.CELL_WIDTH + (2 * SVG.CELL_PADDING);
     /* eslint-disable max-len */
     return (
@@ -70,7 +70,7 @@ export default function BasicAvailabilityKey(props) {
     const columnWidth = SVG.CELL_WIDTH + (2 * SVG.CELL_PADDING) + 100;
     const totalWidth = columnWidth * totalColumns;
     const totalHeight = SVG.CELL_HEIGHT + SVG.CELL_PADDING;
-    const columnX = col => col * columnWidth;
+    const columnX = (col) => col * columnWidth;
     const rowLabelY = (SVG.LABEL_FONT_SIZE - SVG.CELL_PADDING + 1);
     const cellOffset = SVG.CELL_WIDTH + (2 * SVG.CELL_PADDING);
     /* eslint-disable max-len */
@@ -97,8 +97,8 @@ export default function BasicAvailabilityKey(props) {
     const totalRows = 2;
     const rowHeight = SVG.CELL_HEIGHT + (2 * SVG.CELL_PADDING);
     const totalHeight = (rowHeight * totalRows) - SVG.CELL_PADDING;
-    const rowY = row => row * rowHeight;
-    const rowLabelY = row => rowY(row) + (SVG.LABEL_FONT_SIZE - SVG.CELL_PADDING + 1);
+    const rowY = (row) => row * rowHeight;
+    const rowLabelY = (row) => rowY(row) + (SVG.LABEL_FONT_SIZE - SVG.CELL_PADDING + 1);
     const selectionWidth = 45;
     const selectionLabelOffset = selectionWidth + (2 * SVG.CELL_PADDING);
     const handleAttribs = {

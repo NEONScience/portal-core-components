@@ -15,7 +15,7 @@ import NewsletterIcon from './images/social--newsletter.png';
 
 require('font-awesome/css/font-awesome.min.css');
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   box: {
     padding: theme.spacing(0),
     margin: theme.spacing(0),

@@ -21,7 +21,7 @@ import Theme from '../Theme/Theme';
 const browserIsIE = navigator.userAgent.indexOf('MSIE') !== -1
   || navigator.appVersion.indexOf('Trident/') > -1;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   browserWarning: {
     backgroundColor: theme.palette.error.main,
   },

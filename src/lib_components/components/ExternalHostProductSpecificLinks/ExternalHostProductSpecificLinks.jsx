@@ -11,7 +11,7 @@ import Theme from '../Theme/Theme';
 import NeonContext from '../NeonContext/NeonContext';
 import ExternalHost from '../ExternalHost/ExternalHost';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   siteLinksContainer: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -63,7 +63,7 @@ export default function ExternalHostProductSpecificLinks(props) {
     if (typeof externalHost.getProductLinks !== 'function') { return null; }
     return (
       <ul style={{ marginTop: Theme.spacing(3), marginBottom: Theme.spacing(0.75) }}>
-        {(externalHost.getProductLinks(productCode) || []).map(link => (
+        {(externalHost.getProductLinks(productCode) || []).map((link) => (
           <li key={link.key}>
             {link.node}
           </li>
@@ -81,7 +81,7 @@ export default function ExternalHostProductSpecificLinks(props) {
     if (filterByAvailability) {
       availableSites = Object.fromEntries(
         // eslint-disable-next-line react/prop-types
-        siteCodes.map(siteCode => [siteCode, allSites[siteCode]]),
+        siteCodes.map((siteCode) => [siteCode, allSites[siteCode]]),
       );
     }
     // Sites still loading; render loading message
@@ -123,11 +123,11 @@ export default function ExternalHostProductSpecificLinks(props) {
           .map((stateName) => {
             const links = sitesByStateName[stateName]
               // eslint-disable-next-line react/prop-types
-              .filter(siteCode => !filterByAvailability || siteCodes.includes(siteCode))
-              .map(siteCode => (
+              .filter((siteCode) => !filterByAvailability || siteCodes.includes(siteCode))
+              .map((siteCode) => (
                 { siteCode, link: externalHost.getSiteLink(allSites, siteCode, productCode) }
               ))
-              .filter(entry => entry.link !== null);
+              .filter((entry) => entry.link !== null);
             if (!links.length) { return null; }
             return (
               <div key={stateName} style={listDivStyle}>
@@ -135,7 +135,7 @@ export default function ExternalHostProductSpecificLinks(props) {
                   {stateName}
                 </Typography>
                 <ul className={classes.ulLinkList}>
-                  {links.map(entry => <li key={entry.siteCode}>{entry.link}</li>)}
+                  {links.map((entry) => <li key={entry.siteCode}>{entry.link}</li>)}
                 </ul>
               </div>
             );

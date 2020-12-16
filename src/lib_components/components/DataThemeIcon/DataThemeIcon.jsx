@@ -49,7 +49,7 @@ const DataThemeIcon = (props) => {
   } = props;
   const dataTheme = dataThemes[theme]
         || Object.values(dataThemes).find(
-          entry => theme === entry.title || entry.aliases.includes(theme),
+          (entry) => theme === entry.title || entry.aliases.includes(theme),
         );
   const elementProps = {
     src: dataTheme.src,
@@ -82,7 +82,7 @@ const DataThemeIcon = (props) => {
 // a full list of all supported aliases here to feed PropTypes.
 const dataThemeAliases = [
   ...Object.keys(dataThemes),
-  ...Object.values(dataThemes).map(theme => theme.aliases.concat(theme.title)).flat(),
+  ...Object.values(dataThemes).map((theme) => theme.aliases.concat(theme.title)).flat(),
 ];
 
 DataThemeIcon.propTypes = {

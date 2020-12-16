@@ -19,12 +19,13 @@ declare namespace Provider {
             productName: PropTypes.Validator<string>;
             siteCodes: PropTypes.Requireable<(PropTypes.InferProps<{
                 siteCode: PropTypes.Validator<string>;
-                availableMonths: PropTypes.Validator<(string | null | undefined)[]>;
+                availableMonths: PropTypes.Validator<import("../../types/core").Nullable<string>[]>;
             }> | null | undefined)[]>;
         }>>;
         export const availabilityView: PropTypes.Requireable<string>;
-        export const sites: PropTypes.Requireable<(string | null | undefined)[]>;
-        export const dateRange: PropTypes.Requireable<(string | null | undefined)[]>;
+        export const release: PropTypes.Requireable<string>;
+        export const sites: PropTypes.Requireable<import("../../types/core").Nullable<string>[]>;
+        export const dateRange: PropTypes.Requireable<import("../../types/core").Nullable<string>[]>;
         export const documentation: PropTypes.Requireable<string>;
         export const packageType: PropTypes.Requireable<string>;
         export const children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
@@ -36,6 +37,8 @@ declare namespace Provider {
         export { productData_1 as productData };
         import availabilityView_1 = availabilityView;
         export { availabilityView_1 as availabilityView };
+        import release_1 = value;
+        export { release_1 as release };
         import sites_1 = value;
         export { sites_1 as sites };
         import dateRange_1 = value;
@@ -92,6 +95,12 @@ declare function useDownloadDataState(): {
             yearMonth: {};
         };
         visibleColumns: string[];
+    };
+    latestRelease: null;
+    release: {
+        value: null;
+        validValues: never[];
+        isValid: boolean;
     };
     sites: {
         value: never[];
@@ -161,6 +170,12 @@ declare function useDownloadDataState(): {
             yearMonth: {};
         };
         visibleColumns: string[];
+    };
+    latestRelease: null;
+    release: {
+        value: null;
+        validValues: never[];
+        isValid: boolean;
     };
     sites: {
         value: never[];
@@ -239,49 +254,59 @@ declare namespace DEFAULT_STATE {
         };
         export const visibleColumns: string[];
     }
-    export namespace sites_2 {
-        const value_2: never[];
+    export const latestRelease: null;
+    export namespace release_2 {
+        const value_2: null;
         export { value_2 as value };
         const validValues_1: never[];
         export { validValues_1 as validValues };
         const isValid_1: boolean;
         export { isValid_1 as isValid };
     }
-    export { sites_2 as sites };
-    export namespace dateRange_2 {
-        const value_3: string[];
+    export { release_2 as release };
+    export namespace sites_2 {
+        const value_3: never[];
         export { value_3 as value };
-        const validValues_2: string[];
+        const validValues_2: never[];
         export { validValues_2 as validValues };
         const isValid_2: boolean;
         export { isValid_2 as isValid };
     }
-    export { dateRange_2 as dateRange };
-    export namespace documentation_2 {
-        const value_4: string;
+    export { sites_2 as sites };
+    export namespace dateRange_2 {
+        const value_4: string[];
         export { value_4 as value };
         const validValues_3: string[];
         export { validValues_3 as validValues };
         const isValid_3: boolean;
         export { isValid_3 as isValid };
     }
-    export { documentation_2 as documentation };
-    export namespace packageType_2 {
-        const value_5: null;
+    export { dateRange_2 as dateRange };
+    export namespace documentation_2 {
+        const value_5: string;
         export { value_5 as value };
         const validValues_4: string[];
         export { validValues_4 as validValues };
         const isValid_4: boolean;
         export { isValid_4 as isValid };
     }
-    export { packageType_2 as packageType };
-    export namespace policies {
-        const value_6: boolean;
+    export { documentation_2 as documentation };
+    export namespace packageType_2 {
+        const value_6: null;
         export { value_6 as value };
-        const validValues_5: null;
+        const validValues_5: string[];
         export { validValues_5 as validValues };
         const isValid_5: boolean;
         export { isValid_5 as isValid };
+    }
+    export { packageType_2 as packageType };
+    export namespace policies {
+        const value_7: boolean;
+        export { value_7 as value };
+        const validValues_6: null;
+        export { validValues_6 as validValues };
+        const isValid_6: boolean;
+        export { isValid_6 as isValid };
     }
 }
 declare namespace ALL_STEPS {

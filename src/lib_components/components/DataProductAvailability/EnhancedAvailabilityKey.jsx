@@ -21,7 +21,7 @@ import Theme, { COLORS } from '../Theme/Theme';
 /**
    Setup: CSS classes
 */
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   keyContainer: {
     display: 'flex',
     alignItems: 'flex-start',
@@ -102,11 +102,11 @@ export default function EnhancedAvailabilityKey(props) {
       strokeWidth: 1.5,
     };
     const graphic = (
-      <React.Fragment>
+      <>
         <rect x={0.5} y={1.5} width={selectionWidth} height={SVG.CELL_HEIGHT - 2} fill={fill} />
         <rect x={0.5} y={0.5} {...handleAttribs} />
         <rect x={selectionWidth - SVG.DATE_RANGE_HANDLE_WIDTH} y={0.5} {...handleAttribs} />
-      </React.Fragment>
+      </>
     );
     return inDialog ? (
       <div style={{ marginBottom: Theme.spacing(2) }}>
@@ -216,7 +216,7 @@ export default function EnhancedAvailabilityKey(props) {
   };
 
   return (
-    <React.Fragment>
+    <>
       <div className={classes.keyContainer}>
         <div>
           <Typography
@@ -252,22 +252,22 @@ export default function EnhancedAvailabilityKey(props) {
         {!(selectionEnabled || rollUpPresent) ? null : (
           <div>
             {!rollUpPresent ? null : (
-              <React.Fragment>
+              <>
                 {statusSvgs['mixed some availability']}
                 {statusSvgs['mixed no availability']}
-              </React.Fragment>
+              </>
             )}
             {!selectionEnabled ? null : (
-              <React.Fragment>
+              <>
                 {renderSelectionElement('all')}
                 {renderSelectionElement('some')}
-              </React.Fragment>
+              </>
             )}
           </div>
         )}
       </div>
       {renderDialog()}
-    </React.Fragment>
+    </>
   );
 }
 

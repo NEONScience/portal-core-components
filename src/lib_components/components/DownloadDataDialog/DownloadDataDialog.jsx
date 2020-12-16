@@ -19,11 +19,13 @@ import MobileStepper from '@material-ui/core/MobileStepper';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepButton from '@material-ui/core/StepButton';
+import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
 import CircleStarIcon from '@material-ui/icons/Stars';
 import DownloadIcon from '@material-ui/icons/SaveAlt';
 import ErrorIcon from '@material-ui/icons/ErrorOutline';
+import InfoIcon from '@material-ui/icons/InfoOutlined';
 import LeftIcon from '@material-ui/icons/ChevronLeft';
 import RightIcon from '@material-ui/icons/ChevronRight';
 import WarningIcon from '@material-ui/icons/Warning';
@@ -39,17 +41,39 @@ import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import Theme, { COLORS } from '../Theme/Theme';
 
 import {
+  buildManifestConfig,
+  buildManifestRequestBody,
   downloadManifest,
   downloadAopManifest,
   formatBytes,
   DOWNLOAD_SIZE_WARN,
 } from '../../util/manifestUtil';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   stepChip: {
     marginRight: theme.spacing(1),
     fontSize: '1rem',
     fontWeight: 600,
+  },
+  productCodeChip: {
+    color: theme.palette.grey[400],
+    border: `1px solid ${theme.palette.grey[400]}`,
+    backgroundColor: theme.palette.grey[100],
+    fontWeight: 600,
+    cursor: 'help',
+    height: '26px',
+    margin: theme.spacing(-0.5, 1.5, 0, 0),
+  },
+  releaseChip: {
+    color: Theme.colors.BROWN[500],
+    border: `1px solid ${Theme.colors.BROWN[500]}`,
+    backgroundColor: Theme.colors.BROWN[100],
+    fontWeight: 600,
+    fontSize: '0.9rem',
+    cursor: 'help',
+    '& svg': {
+      margin: theme.spacing(0, -0.5, 0, 0.75),
+    },
   },
   startFlex: {
     display: 'flex',
@@ -108,6 +132,8 @@ export default function DownloadDataDialog() {
       fromAOPManifest,
       documentation,
       s3Files,
+      release,
+      latestRelease,
       sites,
       dateRange,
       packageType,
@@ -145,7 +171,7 @@ export default function DownloadDataDialog() {
     if (!externalHost || externalHost.hostType === ExternalHost.HOST_TYPES.EXCLUSIVE_DATA) {
       return null;
     }
-    const availableSiteCodes = (productData.siteCodes || []).map(site => site.siteCode);
+    const availableSiteCodes = (productData.siteCodes || []).map((site) => site.siteCode);
     return (
       <ExternalHostInfo
         data-selenium="download-data-dialog.external-host-info"
@@ -178,8 +204,8 @@ export default function DownloadDataDialog() {
       ? lastStepIndex
       : null;
     const allIncompleteSteps = Object.keys(requiredSteps)
-      .map(idx => parseInt(idx, 10))
-      .filter(idx => (
+      .map((idx) => parseInt(idx, 10))
+      .filter((idx) => (
         idx !== activeStepIndex && idx !== summaryIndex && !requiredSteps[idx].isComplete
       ));
     if (activeStepIndex === lastStepIndex) { return null; }
@@ -190,7 +216,7 @@ export default function DownloadDataDialog() {
     // If any steps are after the current active step (OTHER than summary), go there first.
     // If not then take the first incomplete step in the list.
     const laterIncompleteSteps = allIncompleteSteps
-      .filter(idx => idx !== summaryIndex && idx > activeStepIndex);
+      .filter((idx) => idx !== summaryIndex && idx > activeStepIndex);
     return changeToStep(
       laterIncompleteSteps.length
         ? laterIncompleteSteps[0]
@@ -204,11 +230,22 @@ export default function DownloadDataDialog() {
 
   const handleDownload = () => {
     setDownloadExecuted(true);
+    const manifestSelection = {
+      productData,
+      release,
+      sites,
+      dateRange,
+      documentation,
+      packageType,
+    };
     if (fromAOPManifest) {
-      return downloadAopManifest(productData, s3Files, documentation.value);
+      const config = buildManifestConfig(manifestSelection, null, true);
+      return downloadAopManifest(config, s3Files, documentation.value);
     }
-    if (manifest.status !== 'fetched' || !manifest.body) { return null; }
-    return downloadManifest(manifest.body);
+    if (manifest.status !== 'fetched' || !manifest.body || !manifest.body.data) { return null; }
+    const config = buildManifestConfig(manifestSelection);
+    const manifestBody = buildManifestRequestBody(config);
+    return downloadManifest(manifestBody);
   };
 
   /**
@@ -290,11 +327,11 @@ export default function DownloadDataDialog() {
       </Link>
     );
     const aopBlurb = (
-      <React.Fragment>
+      <>
         {/* eslint-disable react/jsx-one-expression-per-line */}
         An alternate way to obtain lots of AOP data is to submit an {aopHardDriveLink}.
         {/* eslint-enable react/jsx-one-expression-per-line */}
-      </React.Fragment>
+      </>
     );
     return (
       <Card className={classes.callout}>
@@ -323,9 +360,10 @@ export default function DownloadDataDialog() {
     const fileTypes = {
       'application/zip': 'ZIP (Compressed Text)',
     };
-    const mimeType = manifest.body && manifest.body.mimeType ? manifest.body.mimeType : null;
+    const mimeType = manifest.body && manifest.body.data
+      && manifest.body.data.mimeType ? manifest.body.data.mimeType : null;
     const fileTypeText = Object.keys(fileTypes).includes(mimeType)
-      ? fileTypes[manifest.body.mimeType]
+      ? fileTypes[mimeType]
       : 'Unknown';
     return (
       <Typography variant="body2" data-selenium="download-data-dialog.file-type">
@@ -387,25 +425,15 @@ export default function DownloadDataDialog() {
   const renderAuthSuggestion = () => {
     if (isAuthenticated) { return null; }
     const signInLink = (
-      <Link
-        target="_new"
-        href={NeonEnvironment.getFullAuthPath('login')}
-      >
-        signing in
-      </Link>
+      <Link target="_new" href={NeonEnvironment.getFullAuthPath('login')}>signing in</Link>
     );
     const benefitsLink = (
-      <Link
-        target="_new"
-        href="https://www.neonscience.org/data/about-data/data-portal-user-accounts"
-      >
-        here
-      </Link>
+      <Link target="_new" href="https://www.neonscience.org/about/user-accounts">here</Link>
     );
     /* eslint-disable react/jsx-one-expression-per-line */
     const authStyles = { color: COLORS.GOLD[800], textAlign: 'right', whiteSpace: 'nowrap' };
     return (
-      <React.Fragment>
+      <>
         <Typography
           variant="body2"
           style={{
@@ -426,7 +454,7 @@ export default function DownloadDataDialog() {
         >
           Learn more about the benefits of signing in {benefitsLink}.
         </Typography>
-      </React.Fragment>
+      </>
     );
     /* eslint-enable react/jsx-one-expression-per-line */
   };
@@ -499,7 +527,7 @@ export default function DownloadDataDialog() {
       const handleBack = () => changeToStep(activeStepIndex - 1);
       const handleNext = () => changeToStep(activeStepIndex + 1);
       return (
-        <React.Fragment>
+        <>
           <MobileStepper
             steps={maxSteps}
             variant="dots"
@@ -526,11 +554,11 @@ export default function DownloadDataDialog() {
             )}
           />
           <Divider />
-        </React.Fragment>
+        </>
       );
     }
     return (
-      <React.Fragment>
+      <>
         <Stepper nonLinear data-selenium="download-data-dialog.stepper">
           {requiredSteps.map((step, index) => {
             const { label } = getStep(index);
@@ -562,7 +590,7 @@ export default function DownloadDataDialog() {
           })}
         </Stepper>
         <Divider />
-      </React.Fragment>
+      </>
     );
   };
 
@@ -570,7 +598,7 @@ export default function DownloadDataDialog() {
     if (!requiredSteps.length) { return null; }
     if (requiredSteps.length < 2) {
       return (
-        <React.Fragment>
+        <>
           {getStep(activeStepIndex).title ? (
             <div style={{ marginTop: Theme.spacing(3) }}>
               <Typography variant="h5" style={{ flexGrow: 1 }}>
@@ -581,14 +609,14 @@ export default function DownloadDataDialog() {
           <div style={{ margin: Theme.spacing(3, belowSm ? 0 : 5) }}>
             <DownloadStepForm stepKey={requiredSteps[activeStepIndex].key} />
           </div>
-        </React.Fragment>
+        </>
       );
     }
     const titleMarker = requiredSteps[activeStepIndex].key === 'summary'
       ? <CircleStarIcon className={classes.summaryIconTitleMarker} />
       : <Chip color="primary" label={activeStepIndex + 1} className={classes.stepChip} />;
     return (
-      <React.Fragment>
+      <>
         <div className={classes.startFlex} style={{ marginTop: Theme.spacing(3) }}>
           {titleMarker}
           <Typography variant="h5" style={{ flexGrow: 1 }}>
@@ -604,17 +632,17 @@ export default function DownloadDataDialog() {
             renderDownloadButton={renderDownloadButton}
           />
         </div>
-      </React.Fragment>
+      </>
     );
   };
 
   // Google Tag Manager variables
   const getStepsCompleted = () => requiredSteps
-    .filter(step => step.isComplete === true)
-    .map(step => step.key);
+    .filter((step) => step.isComplete === true)
+    .map((step) => step.key);
   const getStepsNotCompleted = () => requiredSteps
-    .filter(step => step.isComplete === false)
-    .map(step => step.key);
+    .filter((step) => step.isComplete === false)
+    .map((step) => step.key);
   const getStepCompletionPercentage = () => {
     const completed = getStepsCompleted();
     const notCompleted = getStepsNotCompleted();
@@ -625,10 +653,10 @@ export default function DownloadDataDialog() {
     if (!allStepsComplete) { return ''; }
     // The subset of possible steps we actually want to persist in the GA event
     const eventSteps = ['sites', 'dateRange'];
-    if (requiredSteps.some(step => step.key === 'documentation')) {
+    if (requiredSteps.some((step) => step.key === 'documentation')) {
       eventSteps.push('documentation');
     }
-    if (requiredSteps.some(step => step.key === 'packageType')) {
+    if (requiredSteps.some((step) => step.key === 'packageType')) {
       eventSteps.push('packageType');
     }
     // Build the config for reporting
@@ -641,7 +669,7 @@ export default function DownloadDataDialog() {
     return lzw.encode(JSON.stringify(eventConfig));
   };
   const renderGtmTags = () => (
-    <React.Fragment>
+    <>
       {/* Google Tag Manager elements to track download progress */}
       <input type="hidden" data-gtm="download-data-dialog.product-code" value={productData.productCode} />
       <input type="hidden" data-gtm="download-data-dialog.size-estimate-bytes" value={getSizeEstimateBytes()} />
@@ -651,9 +679,15 @@ export default function DownloadDataDialog() {
       <input type="hidden" data-gtm="download-data-dialog.download-executed" value={downloadExecuted ? 1 : 0} />
       <input type="hidden" data-gtm="download-data-dialog.lzw-compressed-config" value={getLZWCompressedConfig()} />
       {/* end Google Tag Manager elements */}
-    </React.Fragment>
+    </>
   );
 
+  const releaseTooltip = release.value === null
+    ? `You are downloading only the latest released and provisional data (release: ${latestRelease || 'unknown'}).`
+    : `You are downloading product data only from the ${release.value} release (no provisional data will be included).`;
+  const releaseChipLabel = release.value === null
+    ? 'Latest released and provisional data'
+    : `Release: ${release.value}`;
   return (
     <DialogBase
       data-selenium="download-data-dialog"
@@ -675,18 +709,34 @@ export default function DownloadDataDialog() {
       {renderGtmTags()}
       <Grid container spacing={2} alignItems="flex-start" style={{ marginBottom: Theme.spacing(2) }}>
         <Grid item xs={12} sm={6} md={8} data-selenium="download-data-dialog.product-info">
-          <Typography variant="h5" style={{ marginBottom: Theme.spacing(1) }}>
+          <Typography variant="h5" style={{ marginBottom: Theme.spacing(1.5) }}>
             {productData.productName}
           </Typography>
-          <div className={classes.startFlex}>
-            {(productData.themes || []).map(dataTheme => (
-              <div key={dataTheme} style={{ marginRight: Theme.spacing(1) }}>
+          <div className={classes.startFlex} style={{ marginBottom: Theme.spacing(1.5) }}>
+            <Tooltip
+              placement="right"
+              title="The unique identifier for this data product independent of release"
+            >
+              <Chip label={productData.productCode} className={classes.productCodeChip} />
+            </Tooltip>
+            {(productData.themes || []).map((dataTheme) => (
+              <div key={dataTheme} style={{ marginLeft: Theme.spacing(1.5) }}>
                 <DataThemeIcon size={3} theme={dataTheme} />
               </div>
             ))}
-            <Typography variant="subtitle2">
-              {productData.productCode}
-            </Typography>
+          </div>
+          <div>
+            <Tooltip placement="bottom-start" title={releaseTooltip}>
+              <Chip
+                label={(
+                  <div className={classes.startFlex}>
+                    {releaseChipLabel}
+                    <InfoIcon fontSize="small" />
+                  </div>
+                )}
+                className={classes.releaseChip}
+              />
+            </Tooltip>
           </div>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>

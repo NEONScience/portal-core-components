@@ -17,7 +17,7 @@ import MapSelectionButton from './MapSelectionButton';
 
 import Theme from '../Theme/Theme';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -105,7 +105,7 @@ const propRows = [
     type: (
       <div>
         string, one of:
-        {Object.keys(FEATURE_TYPES).filter(k => FEATURE_TYPES[k].selectable).map(k => (
+        {Object.keys(FEATURE_TYPES).filter((k) => FEATURE_TYPES[k].selectable).map((k) => (
           <div key={k} style={{ marginTop: '8px' }}>
             <tt>{`"${k}"`}</tt>
           </div>
@@ -132,7 +132,7 @@ const propRows = [
       </div>
     ),
     description: (
-      <React.Fragment>
+      <>
         <p>
           When selection is active and this prop is null there are no limits on what constitutes a
           valid selection (as long as at least one selectable item is selected). When not null this
@@ -148,7 +148,7 @@ const propRows = [
           For all numeric values for this prop only non-zero positive integers are allowed. For an
           array of two numbers the second number must be greater than (and not equal two) the first.
         </p>
-      </React.Fragment>
+      </>
     ),
   },
   {
@@ -221,7 +221,7 @@ export default function StyleGuide() {
   const classes = useStyles(Theme);
 
   return (
-    <React.Fragment>
+    <>
 
       <DocBlock>
         A button to launch the <Link href="#SiteMap">Site Map</Link> in a full screen
@@ -381,6 +381,6 @@ const MyComponent = () => {
         `}
       </CodeBlock>
 
-    </React.Fragment>
+    </>
   );
 }

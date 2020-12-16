@@ -29,9 +29,9 @@ const menuItemIconMap = {
 };
 
 const domParser = new DOMParser();
-const decodeName = name => domParser.parseFromString(name, 'text/html').documentElement.textContent;
+const decodeName = (name) => domParser.parseFromString(name, 'text/html').documentElement.textContent;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
     maxWidth: 360,
@@ -52,7 +52,7 @@ const NeonDrawerMenu = (props) => {
   // Menu items need a unique identifier so we can map their
   // open states, if they have children. One isn't discretely
   // provided so the function can be used to make one.
-  const getMenuId = item => `${item.name}|${item.url}`;
+  const getMenuId = (item) => `${item.name}|${item.url}`;
 
   const initialState = items.reduce((acc, cur) => {
     if (cur.children.length) {
@@ -107,7 +107,7 @@ const NeonDrawerMenu = (props) => {
       collapse = (
         <Collapse in={open[id]} timeout="auto" unmountOnExit>
           <List data-selenium={`neon-drawer-menu.submenu.${seleniumKey}`} component="div" disablePadding>
-            {item.children.map(child => renderMenuItem(child, nesting + 1))}
+            {item.children.map((child) => renderMenuItem(child, nesting + 1))}
           </List>
         </Collapse>
       );
@@ -135,7 +135,7 @@ const NeonDrawerMenu = (props) => {
       className={classes.root}
     >
       {renderMenuItem({ name: 'Home', url: '/', children: [] })}
-      {items.map(item => renderMenuItem(item))}
+      {items.map((item) => renderMenuItem(item))}
     </List>
   );
 };
@@ -145,7 +145,14 @@ NeonDrawerMenu.propTypes = {
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       url: PropTypes.string.isRequired,
-      children: PropTypes.array.isRequired,
+      children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.oneOfType([
+          PropTypes.node,
+          PropTypes.string,
+        ])),
+        PropTypes.node,
+        PropTypes.string,
+      ]).isRequired,
     }),
   ).isRequired,
 };

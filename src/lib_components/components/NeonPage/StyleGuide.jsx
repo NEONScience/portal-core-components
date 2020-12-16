@@ -19,7 +19,7 @@ import PropsTable from '../../../components/PropsTable';
 import NeonPage from './NeonPage';
 import Theme from '../Theme/Theme';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -39,6 +39,20 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const propRows = [
+  // breadcrumbHomeHref
+  {
+    name: 'breadcrumbHomeHref',
+    type: 'string',
+    default: '"/"',
+    examples: '"https://www.neonscience.org"',
+    description: (
+      <p>
+        The <tt>href</tt> for the home breadcrumb that is automatically included when providing an
+        array of <tt>breadcrumbs</tt>. Useful if a NeonPage instance needs to refer to a different
+        root home page in breadcrumbs than the current URL root.
+      </p>
+    ),
+  },
   // breadcrumbs
   {
     name: 'breadcrumbs',
@@ -234,7 +248,7 @@ const sidebarLinks = [
       </CodeBlock>
     ),
     description: (
-      <React.Fragment>
+      <>
         <p>
           Array of objects describing links to appear in the page sidebar navigation.
         </p>
@@ -254,7 +268,20 @@ const sidebarLinks = [
           Finally, when <tt>sidebarLinksAsStandaloneChildren</tt> is <tt>true</tt>, the title of
           the page can be overridden on a per-sidebar-link basis by setting a <tt>pageTitle</tt>.
         </p>
-      </React.Fragment>
+      </>
+    ),
+  },
+  // sidebarLinksAdditionalContent
+  {
+    name: 'sidebarLinksAdditionalContent',
+    type: 'children (arbitrary jsx)',
+    default: 'null',
+    description: (
+      <p>
+        When wanting to use the regular pattern of <tt>sidebarLinks</tt> but some additional UI is
+        needed in the sidebar this prop can be used to inject arbitrary content between the
+        sidebar title/subtitle and the links container, flanked by dividers.
+      </p>
     ),
   },
   // sidebarLinksAsStandaloneChildren
@@ -305,7 +332,7 @@ const sidebarLinks = [
     type: 'boolean',
     default: 'false',
     description: (
-      <React.Fragment>
+      <>
         <p>
           When a sidebar has enough links or content the sticky positioning can become a hinderance.
           This is especially true when used on a page with very tall content or infinitely tall
@@ -317,7 +344,7 @@ const sidebarLinks = [
           will not have sticky behavior and instead scroll with the rest of the page. The difference
           in behavior is only visible at and above the medium breakpoint.
         </p>
-      </React.Fragment>
+      </>
     ),
   },
   // sidebarWidth
@@ -441,7 +468,7 @@ export default function StyleGuide() {
   );
 
   return (
-    <React.Fragment>
+    <>
 
       <DocBlock>
         The standard component for generating a page on the Data Portal with a consistent header,
@@ -525,13 +552,20 @@ import NeonPage from 'portal-core-components/lib/components/NeonPage';
       <DocBlock>
         This prop is defined as an array of objects, each containing
         a <tt>name</tt> string. All but the last element in the array also
-        must contain an <tt>href</tt> string. Note that the initial <i>Home</i>
-        breadcrumb link is automatically generated and does not need to be
-        defined in <tt>breadcrumbs</tt>.
+        must contain an <tt>href</tt> string.
+      </DocBlock>
+      <DocBlock>
+        Note that the initial <i>Home</i> breadcrumb link is automatically generated and does not
+        need to be defined in <tt>breadcrumbs</tt>. The home breadcrumb will, by default, have an
+        href of <tt>/</tt>. This can be overridden using the <tt>breadcrumbHomeHref</tt> prop.
       </DocBlock>
       <ExampleBlock>
         <div className={classes.example}>
-          <NeonPage title="My Neon Page" breadcrumbs={breadcrumbs}>
+          <NeonPage
+            title="My Neon Page"
+            breadcrumbs={breadcrumbs}
+            breadcrumbHomeHref="https://www.neonscience.org/"
+          >
             <Typography>Content</Typography>
           </NeonPage>
         </div>
@@ -546,7 +580,11 @@ const breadcrumbs = [
 
 export default function MyNeonPage() {
   return (
-    <NeonPage title="My Neon Page" breadcrumbs={breadcrumbs}>
+    <NeonPage
+      title="My Neon Page"
+      breadcrumbs={breadcrumbs}
+      breadcrumbHomeHref="https://www.neonscience.org/"
+    >
       <Typography>Content</Typography>
     </NeonPage>
   );
@@ -883,6 +921,6 @@ export default function TriggerRunTimeErrorButtons() {
         `}
       </CodeBlock>
 
-    </React.Fragment>
+    </>
   );
 }

@@ -15,7 +15,7 @@ import Theme from '../Theme/Theme';
 
 import ExternalHostInfo from './ExternalHostInfo';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -27,7 +27,7 @@ export default function StyleGuide() {
   const snackbarUrl = 'https://material-ui.com/components/snackbars/';
 
   return (
-    <React.Fragment>
+    <>
 
       <DocBlock>
         A component for displaying info about and links to an external host (a research project
@@ -121,6 +121,6 @@ import ExternalHostInfo from 'portal-core-components/lib/components/ExternalHost
         See <Link href={externalHostJsxUrl}>Portal Core Components | External Host</Link> for the
         latest model, relationships, and functions.
       </DocBlock>
-    </React.Fragment>
+    </>
   );
 }

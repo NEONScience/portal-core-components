@@ -12,7 +12,7 @@ import CodeBlock from '../../../components/CodeBlock';
 
 import Theme from './Theme';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -23,7 +23,7 @@ export default function StyleGuide() {
   const styleGuideUrl = 'https://raw.githubusercontent.com/NEONScience/portal-core-components/master/reference/NSF-NEON-BRAND.GUIDELINES.pdf';
 
   return (
-    <React.Fragment>
+    <>
 
       <DocBlock>
         A Material UI Theme based on the NEON Style Guide.
@@ -125,6 +125,6 @@ const myComponent = () => {
         `}
       </CodeBlock>
 
-    </React.Fragment>
+    </>
   );
 }

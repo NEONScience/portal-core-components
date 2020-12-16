@@ -176,7 +176,6 @@ const useTimeSeriesViewerState = () => {
   return hookResponse;
 };
 
-
 /**
    Time Step Definitions and Functions
 */
@@ -190,8 +189,8 @@ export const TIME_STEPS = {
   '0AQ': { key: '0AQ', tmi: '100', seconds: 60 },
   '1day': { key: '1day', tmi: '01D', seconds: 86400 },
 };
-const getTimeStep = input => (
-  Object.keys(TIME_STEPS).find(key => TIME_STEPS[key].tmi === input) || null
+const getTimeStep = (input) => (
+  Object.keys(TIME_STEPS).find((key) => TIME_STEPS[key].tmi === input) || null
 );
 export const summarizeTimeSteps = (steps, timeStep = null, pluralize = true) => {
   if (steps === 1) { return 'none'; }
@@ -211,27 +210,27 @@ export const summarizeTimeSteps = (steps, timeStep = null, pluralize = true) => 
 const DATA_FILE_PARTS = {
   POSITION_H: {
     offset: 6,
-    isValid: p => /^[\d]{3}$/.test(p),
+    isValid: (p) => /^[\d]{3}$/.test(p),
   },
   POSITION_V: {
     offset: 7,
-    isValid: p => /^[\d]{3}$/.test(p),
+    isValid: (p) => /^[\d]{3}$/.test(p),
   },
   TIME_STEP: {
     offset: 8,
-    isValid: p => Object.keys(TIME_STEPS).some(t => TIME_STEPS[t].tmi === p),
+    isValid: (p) => Object.keys(TIME_STEPS).some((t) => TIME_STEPS[t].tmi === p),
   },
   MONTH: {
     offset: 10,
-    isValid: p => /^[\d]{4}-[\d]{2}$/.test(p),
+    isValid: (p) => /^[\d]{4}-[\d]{2}$/.test(p),
   },
   PACKAGE_TYPE: {
     offset: 11,
-    isValid: p => ['basic', 'expanded'].includes(p),
+    isValid: (p) => ['basic', 'expanded'].includes(p),
   },
   EXTENSION: {
     offset: 13,
-    isValid: p => p === 'csv',
+    isValid: (p) => p === 'csv',
   },
 };
 
@@ -239,7 +238,7 @@ const DATA_FILE_PARTS = {
    CSV Fetch/Parse Functions
 */
 // const siteMonthCancelation$ = new Subject();
-const fetchCSV = url => ajax({
+const fetchCSV = (url) => ajax({
   method: 'GET',
   crossDomain: true,
   responseType: 'text',
@@ -263,7 +262,7 @@ const parseCSV = (rawCsv, dedupeLines = false) => {
 */
 const getUpdatedValueRange = (existingRange, newValue) => {
   const arrayVal = Array.isArray(newValue) ? newValue : [newValue];
-  if (arrayVal.some(v => typeof v !== 'number')) { return existingRange; }
+  if (arrayVal.some((v) => typeof v !== 'number')) { return existingRange; }
   const newRange = [...existingRange];
   arrayVal.forEach((v) => {
     if (newRange[0] === null || newRange[0] > v) { newRange[0] = v; }
@@ -519,7 +518,7 @@ const applyDefaultsToSelection = (state) => {
   if (Object.keys(variables).length) {
     // Ensure the selection has at least one variable
     if (!selection.variables.length) {
-      const defaultVar = Object.keys(variables).find(v => variables[v].canBeDefault);
+      const defaultVar = Object.keys(variables).find((v) => variables[v].canBeDefault);
       if (defaultVar) {
         selection.variables.push(defaultVar);
         selection.yAxes.y1.units = variables[defaultVar].units;
@@ -527,7 +526,7 @@ const applyDefaultsToSelection = (state) => {
     }
     // Ensure the selection has at least one dateTime variable
     if (!selection.dateTimeVariable) {
-      const defaultDateTimeVar = Object.keys(variables).find(v => variables[v].isDateTime);
+      const defaultDateTimeVar = Object.keys(variables).find((v) => variables[v].isDateTime);
       if (defaultDateTimeVar) {
         selection.dateTimeVariable = defaultDateTimeVar;
       }
@@ -547,7 +546,7 @@ const applyDefaultsToSelection = (state) => {
     const monthVariances = [];
     selection.yAxes[yAxis].dataRange = [null, null];
     selection.yAxes[yAxis].standardDeviation = 0;
-    selection.variables.filter(variable => (
+    selection.variables.filter((variable) => (
       variables[variable].units === selection.yAxes[yAxis].units
     )).forEach((variable) => {
       const { downloadPkg: pkg } = variables[variable];
@@ -579,7 +578,7 @@ const applyDefaultsToSelection = (state) => {
           + (Math.log10(dataRangeMax) >= 2 ? 0 : 2)
       );
       const combinedMean = combinedSum / combinedCount;
-      const deviations = monthMeans.map(mean => mean - combinedMean);
+      const deviations = monthMeans.map((mean) => mean - combinedMean);
       const standardDeviation = (
         monthVariances.reduce((sum, variance, idx) => (
           monthCounts[idx] * (variance + (deviations[idx] ** 2))
@@ -633,7 +632,7 @@ const reducer = (state, action) => {
     }
     return {
       selectedUnits: Array.from(selectedUnits),
-      variables: variables.filter(variable => selectedUnits.has(state.variables[variable].units)),
+      variables: variables.filter((variable) => selectedUnits.has(state.variables[variable].units)),
     };
   };
   const setDataFileFetchStatuses = (fetches) => {
@@ -751,10 +750,10 @@ const reducer = (state, action) => {
       ]);
       newState.availableQualityFlags = new Set([
         ...state.availableQualityFlags,
-        ...Object.keys(newState.variables).filter(v => /QF$/.test(v)),
+        ...Object.keys(newState.variables).filter((v) => /QF$/.test(v)),
       ]);
       // A valid dateTime variable must be present otherwise we have no x-axis
-      if (Object.keys(newState.variables).every(v => !newState.variables[v].isDateTime)) {
+      if (Object.keys(newState.variables).every((v) => !newState.variables[v].isDateTime)) {
         return fail('This data product is not compatible with the Time Series Viewer (no dateTime data found)');
       }
       calcSelection();
@@ -883,7 +882,7 @@ const reducer = (state, action) => {
       if (!state.selection.yAxes[action.axis]) { return state; }
       if (!(
         Array.isArray(action.range) && action.range.length === 2
-          && action.range.every(v => typeof v === 'number')
+          && action.range.every((v) => typeof v === 'number')
           && action.range[0] < action.range[1]
       )) { return state; }
       newState.selection.yAxes[action.axis].axisRange = action.range;
@@ -923,7 +922,7 @@ const reducer = (state, action) => {
         newState.selection.qualityFlags.push(action.qualityFlag);
       } else if (!action.selected) {
         newState.selection.qualityFlags = newState.selection.qualityFlags
-          .filter(v => v !== action.qualityFlag);
+          .filter((v) => v !== action.qualityFlag);
       }
       calcStatus();
       return newState;
@@ -934,7 +933,7 @@ const reducer = (state, action) => {
       return newState;
     case 'selectAddSite':
       if (!state.product.sites[action.siteCode]) { return state; }
-      if (state.selection.sites.some(site => site.siteCode === action.siteCode)) { return state; }
+      if (state.selection.sites.some((site) => site.siteCode === action.siteCode)) { return state; }
       newState.selection.sites.push({ siteCode: action.siteCode, positions: [] });
       calcSelection();
       calcStatus();
@@ -943,11 +942,11 @@ const reducer = (state, action) => {
       if (!action.siteCodes.size) { return state; }
       // Remove any sites that are no longer in the selected set
       newState.selection.sites = newState.selection.sites
-        .filter(site => action.siteCodes.has(site.siteCode));
+        .filter((site) => action.siteCodes.has(site.siteCode));
       // Add any new sites from the action
       action.siteCodes.forEach((siteCode) => {
         if (!state.product.sites[siteCode]) { return; }
-        if (newState.selection.sites.some(site => site.siteCode === siteCode)) { return; }
+        if (newState.selection.sites.some((site) => site.siteCode === siteCode)) { return; }
         newState.selection.sites.push({ siteCode, positions: [] });
       });
       calcSelection();
@@ -955,17 +954,21 @@ const reducer = (state, action) => {
       return newState;
     case 'selectRemoveSite':
       if (state.selection.sites.length < 2) { return state; }
-      if (!state.selection.sites.some(site => site.siteCode === action.siteCode)) { return state; }
+      if (!state.selection.sites.some((site) => site.siteCode === action.siteCode)) {
+        return state;
+      }
       newState.selection.sites = newState.selection.sites
-        .filter(site => site.siteCode !== action.siteCode);
+        .filter((site) => site.siteCode !== action.siteCode);
       calcSelection();
       calcStatus();
       return newState;
     case 'selectSitePositions':
-      selectedSiteIdx = state.selection.sites.findIndex(site => site.siteCode === action.siteCode);
+      selectedSiteIdx = state.selection.sites.findIndex(
+        (site) => (site.siteCode === action.siteCode),
+      );
       if (selectedSiteIdx === -1) { return state; }
       if (!state.product.sites[action.siteCode] || !action.positions.length) { return state; }
-      if (!action.positions.every(p => (
+      if (!action.positions.every((p) => (
         Object.keys(state.product.sites[action.siteCode].positions).includes(p)
       ))) { return state; }
       newState.selection.sites[selectedSiteIdx].positions = [...action.positions];
@@ -1098,7 +1101,7 @@ const Provider = (props) => {
     };
 
     const fetchNeededSiteMonths = (siteCode, fetches) => {
-      continuousDateRange.filter(month => !fetches.siteMonths[month]).forEach((month) => {
+      continuousDateRange.filter((month) => !fetches.siteMonths[month]).forEach((month) => {
         // Don't attempt to fetch any months that are known to be unavailable for a given site
         if (!state.product.sites[siteCode].availableMonths.includes(month)) { return; }
         metaFetchTriggered = true;
@@ -1164,8 +1167,8 @@ const Provider = (props) => {
             // Add a file fetch observable to the main list
             dataFetches.push(
               fetchCSV(url).pipe(
-                map(response => response.response),
-                switchMap(csv => (
+                map((response) => response.response),
+                switchMap((csv) => (
                   parseTimeSeriesData({ csv, variables: state.variables }).then((series) => {
                     dispatch({
                       type: 'fetchDataFileSucceeded',
@@ -1222,7 +1225,7 @@ const Provider = (props) => {
         forkJoinWithProgress(dataFetches).pipe(
           mergeMap(([finalResult, progress]) => merge(
             progress.pipe(
-              tap(value => dispatch({
+              tap((value) => dispatch({
                 type: 'fetchDataFilesProgress',
                 token: masterFetchToken,
                 value,
@@ -1231,7 +1234,7 @@ const Provider = (props) => {
             ),
             finalResult,
           )),
-        ).subscribe(value => dispatch({
+        ).subscribe((value) => dispatch({
           type: 'fetchDataFilesCompleted',
           token: masterFetchToken,
           value,

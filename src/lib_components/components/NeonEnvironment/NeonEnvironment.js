@@ -35,6 +35,7 @@ export const optionalEnvironmentVars = [
   'REACT_APP_NEON_PATH_DOWNLOAD_API',
   'REACT_APP_NEON_PATH_MANIFEST_API',
   'REACT_APP_NEON_PATH_PRODUCTS_API',
+  'REACT_APP_NEON_PATH_RELEASES_API',
   'REACT_APP_NEON_PATH_SITES_API',
   'REACT_APP_NEON_PATH_LOCATIONS_API',
   'REACT_APP_NEON_PATH_FILE_NAMING_CONVENTIONS',
@@ -58,7 +59,7 @@ const EnvType = {
 };
 
 const NeonEnvironment = {
-  isValid: requiredEnvironmentVars.every(envVar => typeof process.env[envVar] !== 'undefined'),
+  isValid: requiredEnvironmentVars.every((envVar) => typeof process.env[envVar] !== 'undefined'),
   isDevEnv: process.env.NODE_ENV === EnvType.DEV,
   isProdEnv: process.env.NODE_ENV === EnvType.PROD,
   isForeignEnv: process.env.REACT_APP_FOREIGN_LOCATION === 'true',
@@ -81,6 +82,7 @@ const NeonEnvironment = {
     manifest: () => process.env.REACT_APP_NEON_PATH_MANIFEST_API,
     menu: () => process.env.REACT_APP_NEON_PATH_MENU_API,
     products: () => process.env.REACT_APP_NEON_PATH_PRODUCTS_API,
+    releases: () => process.env.REACT_APP_NEON_PATH_RELEASES_API,
     sites: () => process.env.REACT_APP_NEON_PATH_SITES_API,
     locations: () => process.env.REACT_APP_NEON_PATH_LOCATIONS_API,
     arcgisAssets: () => REACT_APP_NEON_PATH_ARCGIS_ASSETS_API,
@@ -120,8 +122,8 @@ const NeonEnvironment = {
   route: {
     home: () => process.env.REACT_APP_NEON_ROUTER_NEON_HOME || '/home',
     account: () => process.env.REACT_APP_NEON_ROUTER_NEON_MYACCOUNT || '/myaccount',
-    getFullRoute: route => `${NeonEnvironment.getRouterBasePath()}${route}`,
-    buildRouteFromHost: route => (
+    getFullRoute: (route) => `${NeonEnvironment.getRouterBasePath()}${route}`,
+    buildRouteFromHost: (route) => (
       `${NeonEnvironment.getHost()}${NeonEnvironment.getFullRoute(route)}`
     ),
     buildHomeRoute: () => (

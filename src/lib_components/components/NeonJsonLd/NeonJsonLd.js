@@ -16,7 +16,7 @@ const NeonJsonLd = {
    * @param {string} url The URL to build from.
    * @return The RxJS AJAX Observable.
    */
-  getJsonLdObservable: url => NeonApi.getJsonObservable(url),
+  getJsonLdObservable: (url) => NeonApi.getJsonObservable(url),
 
   /**
    * Gets the repository JSON-LD endpoint observable.
@@ -29,13 +29,23 @@ const NeonJsonLd = {
   /**
    * Gets the product JSON-LD endpoint observable.
    * @param {string} productCode The product code to build the URL from.
+   * @param {string} release The release to build the URL from.
    * @return The RxJS AJAX Observable.
    */
-  getProductJsonLdObservable: productCode => (
-    NeonJsonLd.getJsonLdObservable(
+  getProductJsonLdObservable: (productCode, release) => {
+    const hasRelease = (typeof release !== 'undefined')
+      && (release !== null)
+      && (typeof release === 'string')
+      && (release.length > 0);
+    if (hasRelease) {
+      return NeonJsonLd.getJsonLdObservable(
+        `${NeonEnvironment.getFullJsonLdApiPath('products')}/${productCode}?release=${release}`,
+      );
+    }
+    return NeonJsonLd.getJsonLdObservable(
       `${NeonEnvironment.getFullJsonLdApiPath('products')}/${productCode}`,
-    )
-  ),
+    );
+  },
 
   /**
    * Injects the JSON-LD object as a script block with the appropriate type
@@ -45,6 +55,14 @@ const NeonJsonLd = {
    */
   inject: (data) => {
     if (!data) return;
+    try {
+      const existingBlock = document.head.querySelector('script[type="application/ld+json"]');
+      if ((typeof existingBlock !== 'undefined') && (existingBlock !== null)) {
+        existingBlock.remove();
+      }
+    } catch (e) {
+      console.error(e); // eslint-disable-line no-console
+    }
     const block = document.createElement('script');
     block.setAttribute('type', 'application/ld+json');
     block.innerText = JSON.stringify(data);
@@ -58,7 +76,7 @@ const NeonJsonLd = {
   getJsonLdWithInjection: (url) => {
     const observable = NeonApi.getJsonObservable(url)
       .pipe(
-        map(response => NeonJsonLd.inject(response)),
+        map((response) => NeonJsonLd.inject(response)),
         catchError((err) => {
           console.error(err); // eslint-disable-line no-console
           return of('JSON-LD not found');
@@ -77,12 +95,22 @@ const NeonJsonLd = {
   /**
    * Fetches and injects the product JSON-LD based on the specified product code.
    * @param {string} productCode The product code to query with.
+   * @param {string} release The release to build the URL from.
    */
-  injectProduct: productCode => (
-    NeonJsonLd.getJsonLdWithInjection(
+  injectProduct: (productCode, release) => {
+    const hasRelease = (typeof release !== 'undefined')
+      && (release !== null)
+      && (typeof release === 'string')
+      && (release.length > 0);
+    if (hasRelease) {
+      return NeonJsonLd.getJsonLdWithInjection(
+        `${NeonEnvironment.getFullJsonLdApiPath('products')}/${productCode}?release=${release}`,
+      );
+    }
+    return NeonJsonLd.getJsonLdWithInjection(
       `${NeonEnvironment.getFullJsonLdApiPath('products')}/${productCode}`,
-    )
-  ),
+    );
+  },
 };
 
 Object.freeze(NeonJsonLd);

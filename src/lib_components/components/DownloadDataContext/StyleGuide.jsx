@@ -20,8 +20,9 @@ import Theme from '../Theme/Theme';
 
 import sampleProductData1 from '../../../sampleData/DP1.00001.001.json';
 import sampleProductData2 from '../../../sampleData/DP1.00004.001.json';
+import sampleProductData3 from '../../../sampleData/DP1.00001.001.release.json';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -43,7 +44,7 @@ const ListSitesComponent = () => {
 const AlphaSitesComponent = () => {
   const [{ sites }, dispatch] = DownloadDataContext.useDownloadDataState();
   const handleSelectSitesByLetter = (letter) => {
-    const newSites = sites.validValues.filter(site => (
+    const newSites = sites.validValues.filter((site) => (
       site.toLowerCase().startsWith(letter.toLowerCase())
     ));
     dispatch({
@@ -56,7 +57,7 @@ const AlphaSitesComponent = () => {
   return (
     <div>
       <b>Select all sites starting with a given letter:</b>
-      {letters.map(letter => (
+      {letters.map((letter) => (
         <button
           type="button"
           key={letter}
@@ -129,7 +130,7 @@ const MyAppComponent = () => {
 
   const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
   const handleSelectSitesByLetter = (letter) => {
-    const newSites = myAppState.downloadState.sites.validValues.filter(site => (
+    const newSites = myAppState.downloadState.sites.validValues.filter((site) => (
       site.toLowerCase().startsWith(letter.toLowerCase())
     ));
     myAppDispatch({
@@ -142,7 +143,7 @@ const MyAppComponent = () => {
   return (
     <div>
       Workflow in one button gets applied to the other through higher-order state:
-      {products.map(productData => (
+      {products.map((productData) => (
         <div key={productData.productCode} style={{ marginBottom: '20px' }}>
           <hr />
           <DownloadDataContext.Provider
@@ -164,7 +165,7 @@ const MyAppComponent = () => {
         </div>
         <br />
         <b>Select all sites starting with a given letter:</b>
-        {letters.map(letter => (
+        {letters.map((letter) => (
           <button
             type="button"
             key={letter}
@@ -213,7 +214,7 @@ export default function StyleGuide() {
   );
 
   return (
-    <React.Fragment>
+    <>
 
       <DocBlock>
         The Download Data Context is a component designed to encapsulate all state
@@ -244,9 +245,12 @@ import DownloadDataContext from 'portal-core-components/lib/components/DownloadD
         and a <tt>siteCodes</tt> array of site availability objects.
       </DocBlock>
       <ExampleBlock>
+        <div />
+        {/*
         <DownloadDataContext.Provider productData={sampleProductData1.data}>
           <DownloadDataButton />
         </DownloadDataContext.Provider>
+        */}
       </ExampleBlock>
       <CodeBlock>
         {`
@@ -297,6 +301,13 @@ const productData = {
         Supported props (all optional):
         <ul>
           <li>
+            <tt>release</tt> - <i>String</i>
+            <br />
+            Tag for release to download. Note at present that this prop is the only way to instigate
+            a download workflow for a particular release and it <b>cannot</b> be changed from inside
+            the workflow via UI at this time.
+          </li>
+          <li>
             <tt>sites</tt> - <i>Array</i>
             <br />
             List of selected site code strings (e.g. <tt>[&quot;ABBY&quot;, &quot;BART&quot;, ...]</tt>)
@@ -320,12 +331,18 @@ const productData = {
       </DocBlock>
       <ExampleBlock>
         <DownloadDataContext.Provider
-          productData={sampleProductData1.data}
-          sites={selectedSites}
+          productData={sampleProductData3.data}
+          release="test-tag-1"
+          sites={['ARIK']}
           documentation="exclude"
           packageType="basic"
         >
           <DownloadDataButton />
+        </DownloadDataContext.Provider>
+        <DownloadDataContext.Provider
+          productData={sampleProductData3.data}
+        >
+          <DownloadDataButton label="No Props" />
         </DownloadDataContext.Provider>
       </ExampleBlock>
       <CodeBlock>
@@ -334,11 +351,11 @@ import DownloadDataButton from 'portal-core-components/lib/components/DownloadDa
 import DownloadDataContext from 'portal-core-components/lib/components/DownloadDataContext';
 
 const productData = {...};
-const selectedSites = ['ARIK', 'COMO', 'CPER', 'NIWO', 'RMNP', 'STER', 'UNDE', 'WLOU'];
 
 <DownloadDataContext.Provider
   productData={productData}
-  sites={selectedSites}
+  release="test-tag-1"
+  sites={['ARIK']}
   documentation="exclude"
   packageType="basic"
 >
@@ -363,6 +380,8 @@ const selectedSites = ['ARIK', 'COMO', 'CPER', 'NIWO', 'RMNP', 'STER', 'UNDE', '
         configuration state, out of which individual state values can be destructured.
       </DocBlock>
       <ExampleBlock>
+        <div />
+        {/*
         <div>
           <DownloadDataContext.Provider
             productData={sampleProductData1.data}
@@ -373,6 +392,7 @@ const selectedSites = ['ARIK', 'COMO', 'CPER', 'NIWO', 'RMNP', 'STER', 'UNDE', '
             <DataProductAvailability />
           </DownloadDataContext.Provider>
         </div>
+         */}
       </ExampleBlock>
       <CodeBlock>
         {`
@@ -415,6 +435,8 @@ const ListSitesComponent = () => {
         appropriate, new data to apply.
       </DocBlock>
       <ExampleBlock>
+        <div />
+        {/*
         <div>
           <DownloadDataContext.Provider
             productData={sampleProductData1.data}
@@ -425,6 +447,7 @@ const ListSitesComponent = () => {
             <DataProductAvailability />
           </DownloadDataContext.Provider>
         </div>
+        */}
       </ExampleBlock>
       <CodeBlock>
         {`
@@ -544,7 +567,10 @@ const AlphaSitesComponent = () => {
         to the higher order component.
       </DocBlock>
       <ExampleBlock>
+        <div />
+        {/*
         <MyAppComponent />
+        */}
       </ExampleBlock>
       <CodeBlock>
         {`
@@ -664,6 +690,6 @@ const MyAppComponent = () => {
         `}
       </CodeBlock>
 
-    </React.Fragment>
+    </>
   );
 }

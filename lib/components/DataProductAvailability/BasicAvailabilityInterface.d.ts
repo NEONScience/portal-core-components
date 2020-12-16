@@ -7,7 +7,7 @@ declare namespace BasicAvailabilityInterface {
     export namespace propTypes {
         export const siteCodes: PropTypes.Requireable<(PropTypes.InferProps<{
             siteCode: PropTypes.Validator<string>;
-            availableMonths: PropTypes.Validator<(string | null | undefined)[]>;
+            availableMonths: PropTypes.Validator<import("../../types/core").Nullable<string>[]>;
         }> | null | undefined)[]>;
         export const view: PropTypes.Requireable<string>;
         export const sortMethod: PropTypes.Requireable<string>;

@@ -2,6 +2,7 @@ export default NeonPage;
 declare function NeonPage(props: any): JSX.Element;
 declare namespace NeonPage {
     export namespace propTypes {
+        export const breadcrumbHomeHref: PropTypes.Requireable<string>;
         export const breadcrumbs: PropTypes.Requireable<(PropTypes.InferProps<{
             name: PropTypes.Validator<string>;
             href: PropTypes.Requireable<string>;
@@ -23,19 +24,28 @@ declare namespace NeonPage {
             icon: PropTypes.Requireable<object>;
             component: PropTypes.Requireable<object>;
         }> | null | undefined)[]>;
+        export { children as sidebarLinksAdditionalContent };
         export const sidebarLinksAsStandaloneChildren: PropTypes.Requireable<boolean>;
         export const sidebarSubtitle: PropTypes.Requireable<string>;
         export const sidebarTitle: PropTypes.Requireable<string>;
         export const sidebarWidth: PropTypes.Requireable<number>;
         export const sidebarUnsticky: PropTypes.Requireable<boolean>;
-        export const subtitle: PropTypes.Requireable<string>;
-        export const title: PropTypes.Requireable<string>;
+        export const subtitle: PropTypes.Requireable<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+        export const title: PropTypes.Requireable<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
         export const useCoreHeader: PropTypes.Requireable<boolean>;
         export const unstickyDrupalHeader: PropTypes.Requireable<boolean>;
+        export const NeonContextProviderProps: PropTypes.Requireable<PropTypes.InferProps<{
+            children: PropTypes.Requireable<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+            useCoreAuth: PropTypes.Requireable<boolean>;
+            useCoreHeader: PropTypes.Requireable<boolean>;
+            whenFinal: PropTypes.Requireable<(...args: any[]) => any>;
+        }>>;
         const children_1: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
         export { children_1 as children };
     }
     export namespace defaultProps {
+        const breadcrumbHomeHref_1: string;
+        export { breadcrumbHomeHref_1 as breadcrumbHomeHref };
         const breadcrumbs_1: never[];
         export { breadcrumbs_1 as breadcrumbs };
         const customHeader_1: null;
@@ -59,6 +69,7 @@ declare namespace NeonPage {
         export { sidebarContainerClassName_1 as sidebarContainerClassName };
         const sidebarLinks_1: null;
         export { sidebarLinks_1 as sidebarLinks };
+        export const sidebarLinksAdditionalContent: null;
         const sidebarLinksAsStandaloneChildren_1: boolean;
         export { sidebarLinksAsStandaloneChildren_1 as sidebarLinksAsStandaloneChildren };
         const sidebarSubtitle_1: null;
@@ -77,6 +88,8 @@ declare namespace NeonPage {
         export { useCoreHeader_1 as useCoreHeader };
         const unstickyDrupalHeader_1: boolean;
         export { unstickyDrupalHeader_1 as unstickyDrupalHeader };
+        const NeonContextProviderProps_1: {};
+        export { NeonContextProviderProps_1 as NeonContextProviderProps };
     }
 }
 import PropTypes from "prop-types";

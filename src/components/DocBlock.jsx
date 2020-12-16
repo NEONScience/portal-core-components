@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 
 import Theme from '../lib_components/components/Theme/Theme';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     marginBottom: theme.spacing(2.5),
     '& tt': {

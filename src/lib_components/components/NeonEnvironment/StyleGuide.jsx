@@ -15,7 +15,7 @@ import NeonEnvironment, {
   optionalEnvironmentVars,
 } from './NeonEnvironment';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -31,7 +31,7 @@ export default function StyleGuide() {
     });
 
   return (
-    <React.Fragment>
+    <>
 
       <DocBlock>
         A module for standardized access to paths and other environment variables
@@ -95,6 +95,6 @@ ${optionalEnvironmentVars.join('\n')}
         <tt>.env.production</tt> files in the root directory of a given application.
       </DocBlock>
 
-    </React.Fragment>
+    </>
   );
 }

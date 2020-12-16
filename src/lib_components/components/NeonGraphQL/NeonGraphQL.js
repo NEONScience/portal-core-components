@@ -15,16 +15,74 @@ export const DIMENSIONALITIES = {
   MANY: 'MANY',
 };
 
-const transformQuery = query => JSON.stringify({ query });
+const transformQuery = (query) => JSON.stringify({ query });
 
-const getQueryBody = (type = '', dimensionality = '', arg = null) => {
+/*
+query Products {
+  products(release: "test-tag-1") {
+    productCode
+    productName
+    productDescription
+    productScienceTeam
+    productHasExpanded
+    productBasicDescription
+    productExpandedDescription
+    productPublicationFormatType
+    keywords
+    themes
+    siteCodes {
+      siteCode
+      availableMonths
+    }
+    dois {
+      release
+      generationDate
+      url
+    }
+    releases {
+      release
+      generationDate
+    }
+  }
+}
+query Products {
+    product (productCode: "DP1.00001.001", release: "test-tag-1") {
+        productCode
+        productName
+        productDescription
+        productScienceTeam
+        productHasExpanded
+        productBasicDescription
+        productExpandedDescription
+        productPublicationFormatType
+        keywords
+        themes
+        siteCodes {
+            siteCode
+            availableMonths
+        }
+        dois {
+            release
+            generationDate
+            url
+        }
+        releases {
+            release
+            generationDate
+        }
+    }
+}
+*/
+
+const getQueryBody = (type = '', dimensionality = '', args = {}) => {
   let query = '';
   switch (type) {
     case TYPES.DATA_PRODUCTS:
       if (dimensionality === DIMENSIONALITIES.ONE) {
         // TODO: Add support for deeper product data when querying for one
+        const releaseArgument = !args.release ? '' : `, release: "${args.release}"`;
         query = `query Products {
-          product (productCode: "${arg}") {
+          product (productCode: "${args.productCode}"${releaseArgument}) {
             productCode
             productName
             productDescription
@@ -39,11 +97,21 @@ const getQueryBody = (type = '', dimensionality = '', arg = null) => {
               siteCode
               availableMonths
             }
+            dois {
+              release
+              generationDate
+              url
+            }
+            releases {
+              release
+              generationDate
+            }
           }
         }`;
       } else {
+        const releaseArgument = !args.release ? '' : `(release: "${args.release}")`;
         query = `query Products {
-          products {
+          products ${releaseArgument}{
             productCode
             productName
             productDescription
@@ -57,6 +125,15 @@ const getQueryBody = (type = '', dimensionality = '', arg = null) => {
             siteCodes {
               siteCode
               availableMonths
+            }
+            dois {
+              release
+              generationDate
+              url
+            }
+            releases {
+              release
+              generationDate
             }
           }
         }`;
@@ -67,7 +144,7 @@ const getQueryBody = (type = '', dimensionality = '', arg = null) => {
       if (dimensionality === DIMENSIONALITIES.ONE) {
         // TODO: Add support for deeper site data when querying for one
         query = `query Sites {
-          site (siteCode: "${arg}") {
+          site (siteCode: "${args.siteCode}") {
             siteCode
             siteDescription
             siteType
@@ -95,7 +172,7 @@ const getQueryBody = (type = '', dimensionality = '', arg = null) => {
     case TYPES.LOCATIONS:
       if (dimensionality === DIMENSIONALITIES.ONE) {
         query = `query Location {
-          location(name: "${arg}") {
+          location(name: "${args.locationName}") {
             locationName
             locationDescription
             locationType
@@ -121,7 +198,7 @@ const getQueryBody = (type = '', dimensionality = '', arg = null) => {
         query = `query findLocations {
           locations: findLocations(
             query: { 
-              locationNames: ${JSON.stringify(arg)}
+              locationNames: ${JSON.stringify(args.locationNames)}
             }
           ) {
             locationName
@@ -178,26 +255,54 @@ const getObservable = (query) => {
   return ajax(getAjaxRequest(query));
 };
 
-const getObservableWith = (type = null, dimensionality = null, arg = null) => {
+const getObservableWith = (type = null, dimensionality = null, args = null) => {
+  const argsHaveAtLeastOneDefinedKey = (
+    args !== null && typeof args === 'object' && Object.keys(args).length > 0
+      && Object.keys(args).some((key) => (typeof args[key] !== 'undefined'))
+  );
   // Type and Dimensionality must exist
   if (!TYPES[type] || !DIMENSIONALITIES[dimensionality]) { return of(null); }
   // Dimensionality of ONE always requires some argument (looking up one thing)
-  if (dimensionality === DIMENSIONALITIES.ONE && !arg) { return of(null); }
-  const query = getQueryBody(type, dimensionality, arg);
+  if (dimensionality === DIMENSIONALITIES.ONE && !argsHaveAtLeastOneDefinedKey) { return of(null); }
+  const query = getQueryBody(type, dimensionality, args);
   return getObservable(query);
 };
 
 const NeonGraphQL = {
-  getDataProductByCode: code => getObservableWith(TYPES.DATA_PRODUCTS, DIMENSIONALITIES.ONE, code),
-  getAllDataProducts: () => getObservableWith(TYPES.DATA_PRODUCTS, DIMENSIONALITIES.MANY),
-  getSiteByCode: code => getObservableWith(TYPES.SITES, DIMENSIONALITIES.ONE, code),
-  getAllSites: () => getObservableWith(TYPES.SITES, DIMENSIONALITIES.MANY),
-  getLocationByName: name => getObservableWith(TYPES.LOCATIONS, DIMENSIONALITIES.ONE, name),
-  getManyLocationsByName: (names = []) => {
-    if (!Array.isArray(names) || !names.length || !names.every(name => typeof name === 'string')) {
-      return of(null);
-    }
-    return getObservableWith(TYPES.LOCATIONS, DIMENSIONALITIES.MANY, names);
+  getDataProductByCode: (productCode, release) => getObservableWith(
+    TYPES.DATA_PRODUCTS,
+    DIMENSIONALITIES.ONE,
+    { productCode, release },
+  ),
+  getAllDataProducts: (release) => getObservableWith(
+    TYPES.DATA_PRODUCTS,
+    DIMENSIONALITIES.MANY,
+    { release },
+  ),
+  getSiteByCode: (siteCode) => getObservableWith(
+    TYPES.SITES,
+    DIMENSIONALITIES.ONE,
+    { siteCode },
+  ),
+  getAllSites: () => getObservableWith(
+    TYPES.SITES,
+    DIMENSIONALITIES.MANY,
+  ),
+  getLocationByName: (locationName) => getObservableWith(
+    TYPES.LOCATIONS,
+    DIMENSIONALITIES.ONE,
+    { locationName },
+  ),
+  getManyLocationsByName: (locationNames = []) => {
+    if (
+      !Array.isArray(locationNames) || !locationNames.length
+        || !locationNames.every((name) => typeof name === 'string')
+    ) { return of(null); }
+    return getObservableWith(
+      TYPES.LOCATIONS,
+      DIMENSIONALITIES.MANY,
+      { locationNames },
+    );
   },
 
   /**
@@ -205,13 +310,13 @@ const NeonGraphQL = {
    * @param {string} query - The raw GraphQL query
    * @return The resulting RxJS Observable from the specified query
    */
-  getGraphqlQuery: query => getObservable(transformQuery(query)),
+  getGraphqlQuery: (query) => getObservable(transformQuery(query)),
   /**
    * Builds a custom GraphQL AjaxRequest
    * @param {string} query - The raw GraphQL query
    * @return The resulting RxJS AjaxRequest
    */
-  getGraphqlAjaxRequest: query => getAjaxRequest(transformQuery(query)),
+  getGraphqlAjaxRequest: (query) => getAjaxRequest(transformQuery(query)),
 };
 
 Object.freeze(NeonGraphQL);

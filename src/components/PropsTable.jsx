@@ -10,11 +10,17 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
-import Theme from '../lib_components/components/Theme/Theme';
+import Theme, { COLORS } from '../lib_components/components/Theme/Theme';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   propTableRowGrey: {
     backgroundColor: theme.palette.grey[50],
+  },
+  required: {
+    marginTop: theme.spacing(2),
+    fontSize: '0.9em',
+    fontWeight: 600,
+    color: COLORS.RED[400],
   },
 }));
 
@@ -39,6 +45,7 @@ const PropsTable = (props) => {
               <TableRow className={idx % 2 ? classes.propTableRowGrey : null}>
                 <TableCell component="th" scope="row" rowSpan={2}>
                   <tt>{row.name}</tt>
+                  {!row.required ? null : <div className={classes.required}>REQUIRED</div>}
                 </TableCell>
                 <TableCell>{row.type}</TableCell>
                 <TableCell><tt>{row.default}</tt></TableCell>

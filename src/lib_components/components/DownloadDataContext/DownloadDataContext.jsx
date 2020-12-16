@@ -11,7 +11,6 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 
 import { of, merge, Subject } from 'rxjs';
-import { ajax } from 'rxjs/ajax';
 import {
   map,
   mergeMap,
@@ -25,9 +24,11 @@ import {
 import NeonApi from '../NeonApi/NeonApi';
 import ExternalHost from '../ExternalHost/ExternalHost';
 import {
+  buildManifestConfig,
   buildS3FilesRequestUrl,
   buildManifestRequestUrl,
-  getSizeEstimateFromManifestResponse,
+  buildManifestRequestBody,
+  getSizeEstimateFromManifestRollupResponse,
   MAX_POST_BODY_SIZE,
 } from '../../util/manifestUtil';
 
@@ -135,6 +136,12 @@ const DEFAULT_STATE = {
     },
     visibleColumns: ['site', 'visit', 'date', 'name', 'type'],
   },
+  latestRelease: null,
+  release: {
+    value: null,
+    validValues: [],
+    isValid: false,
+  },
   sites: {
     value: [],
     validValues: [],
@@ -163,15 +170,15 @@ const DEFAULT_STATE = {
 };
 
 // State keys that have a common { value, validValues, isValid } shape and can be validated
-const VALIDATABLE_STATE_KEYS = ['sites', 'dateRange', 'documentation', 'packageType', 's3Files', 'policies'];
+const VALIDATABLE_STATE_KEYS = ['release', 'sites', 'dateRange', 'documentation', 'packageType', 's3Files', 'policies'];
 
 // State keys that can be transfered between contexts through higher order state
 // (must be a subset of VALIDATABLE_STATE_KEYS)
-const HIGHER_ORDER_TRANSFERABLE_STATE_KEYS = ['sites', 'dateRange'];
+const HIGHER_ORDER_TRANSFERABLE_STATE_KEYS = ['release', 'sites', 'dateRange'];
 
 // State keys that should trigger a new manifest (file size estimate) request when updated
 // (must be a subset of VALIDATABLE_STATE_KEYS)
-const MANIFEST_TRIGGERING_STATE_KEYS = ['sites', 'dateRange', 'documentation', 'packageType'];
+const MANIFEST_TRIGGERING_STATE_KEYS = ['release', 'sites', 'dateRange', 'documentation', 'packageType'];
 
 // Regexes and associated capture group names for parse s3 file names and URLs
 const S3_PATTERN = {
@@ -189,7 +196,7 @@ const S3_PATTERN = {
    VALIDATOR FUNCTIONS
 */
 // Naive check, replace with a more robust JSON schema check
-const productDataIsValid = productData => (
+const productDataIsValid = (productData) => (
   typeof productData === 'object' && productData !== null
   && typeof productData.productName === 'string'
   && Array.isArray(productData.siteCodes)
@@ -209,10 +216,12 @@ const yearMonthIsValid = (yearMonth = '') => {
 // this state to render a form will render it correctly.
 const newStateIsAllowable = (key, value) => {
   switch (key) {
+    case 'release':
+      return (value === null || (typeof value === 'string' && value.length > 0));
     case 'sites':
       return (
         Array.isArray(value)
-          && value.every(site => (typeof site === 'string' && /^[A-Z]{4}$/.test(site)))
+          && value.every((site) => (typeof site === 'string' && /^[A-Z]{4}$/.test(site)))
       );
     case 'dateRange':
       return (
@@ -234,7 +243,7 @@ const newStateIsAllowable = (key, value) => {
       );
     case 's3Files':
       return (
-        Array.isArray(value) && value.every(id => typeof id === 'string')
+        Array.isArray(value) && value.every((id) => typeof id === 'string')
       );
     case 'policies':
       return value === true;
@@ -254,7 +263,7 @@ const newStateIsValid = (key, value, validValues = []) => {
         Array.isArray(value)
         && Array.isArray(validValues)
         && value.length > 0
-        && value.every(site => validValues.includes(site))
+        && value.every((site) => validValues.includes(site))
       );
     case 'dateRange':
       return (
@@ -267,15 +276,15 @@ const newStateIsValid = (key, value, validValues = []) => {
         && value[0] >= validValues[0] && value[1] <= validValues[1]
       );
     case 's3Files':
-      idList = validValues.map(fileObj => fileObj.url);
+      idList = validValues.map((fileObj) => fileObj.url);
       return (
         Array.isArray(value) && value.length > 0
-        && value.every(id => idList.includes(id))
+        && value.every((id) => idList.includes(id))
       );
     case 'policies':
       return value === true;
     default:
-      return validValues.includes(value);
+      return newStateIsAllowable(key, value) && validValues.includes(value);
   }
 };
 
@@ -285,7 +294,7 @@ const mutateNewStateIntoRange = (key, value, validValues = []) => {
   let valueIsDefault = false;
   switch (key) {
     case 'sites':
-      return valueIsAllowable ? value.filter(site => validValues.includes(site)) : [];
+      return valueIsAllowable ? value.filter((site) => validValues.includes(site)) : [];
     case 'dateRange':
       valueIsDefault = valueIsAllowable
         && value[0] === ALL_POSSIBLE_VALID_DATE_RANGE[0]
@@ -317,8 +326,10 @@ const estimatePostSize = (s3FilesState, sitesState) => {
 */
 const getValidValuesFromProductData = (productData, key) => {
   switch (key) {
+    case 'release':
+      return (productData.releases || []).map((r) => r.release) || [];
     case 'sites':
-      return productData.siteCodes.map(s => s.siteCode) || [];
+      return (productData.siteCodes || []).map((s) => s.siteCode) || [];
     case 'dateRange':
       return (productData.siteCodes || [])
         .reduce((acc, site) => {
@@ -367,9 +378,17 @@ const getInitialStateFromProps = (props) => {
 
   const isAOPPipeline = (
     ['productScienceTeam', 'productScienceTeamAbbr']
-      .some(key => (typeof productData[key] === 'string' && productData[key].includes('AOP')))
+      .some((key) => (typeof productData[key] === 'string' && productData[key].includes('AOP')))
     && (productData.productPublicationFormatType || '').includes('AOP')
   );
+
+  // Pull the latest release from productData
+  if (productData.releases && productData.releases.length) {
+    const sortedReleases = [...productData.releases].sort(
+      (a, b) => (a.generationDate > b.generationDate ? -1 : 1),
+    );
+    initialState.latestRelease = sortedReleases[0].release;
+  }
 
   // Set required steps and data download origin booleans
   // Note that a data product can come from the NEON manifest AND an external host
@@ -403,8 +422,8 @@ const getInitialStateFromProps = (props) => {
     ];
   }
   // Remove package type step if product does not offer expanded data
-  if (productData.productHasExpanded === false && requiredSteps.some(step => step.key === 'packageType')) {
-    requiredSteps.splice(requiredSteps.findIndex(step => step.key === 'packageType'), 1);
+  if (productData.productHasExpanded === false && requiredSteps.some((step) => step.key === 'packageType')) {
+    requiredSteps.splice(requiredSteps.findIndex((step) => step.key === 'packageType'), 1);
   }
   initialState.requiredSteps = requiredSteps;
   initialState.fromManifest = fromManifest;
@@ -444,44 +463,20 @@ const getInitialStateFromProps = (props) => {
   initialState.requiredSteps.forEach((step, idx) => {
     if (initialState.requiredSteps[idx].isComplete === null) { return; }
     initialState.requiredSteps[idx].isComplete = ALL_STEPS[step.key]
-      && ALL_STEPS[step.key].requiredStateKeys.every(key => initialState[key].isValid);
+      && ALL_STEPS[step.key].requiredStateKeys.every((key) => initialState[key].isValid);
   });
 
   // Set allStepsComplete boolean. Ignore steps where isComplete is null
   // as that signifies "n/a" (the step is informational, completion doesn't apply).
   initialState.allStepsComplete = initialState
     .requiredSteps
-    .every(step => step.isComplete || step.isComplete === null);
+    .every((step) => step.isComplete || step.isComplete === null);
 
   // Done!
   return initialState;
 };
 
-// Build an object from state suitable for manifestUtil.buildManifestRequestUrl()
-const getManifestURLConfig = (state) => {
-  let manifestConfigError = null;
-  const manifestURLConfig = {};
-  if (!state.productData || !state.productData.productCode) {
-    manifestConfigError = 'Invalid data product';
-  }
-  if (!state.sites.isValid) {
-    manifestConfigError = 'No sites selected';
-  }
-  if (!state.dateRange.isValid) {
-    manifestConfigError = 'Invalid date range';
-  }
-  if (manifestConfigError) {
-    return [manifestURLConfig, manifestConfigError];
-  }
-  manifestURLConfig.productCode = state.productData.productCode;
-  manifestURLConfig.sites = state.sites.value;
-  manifestURLConfig.dateRange = state.dateRange.value;
-  manifestURLConfig.documentation = (state.documentation.value === 'include');
-  manifestURLConfig.packageType = state.packageType.value || ALL_POSSIBLE_VALID_PACKAGE_TYPE[0];
-  return [manifestURLConfig, manifestConfigError];
-};
-
-const getS3FilesFilteredFileCount = state => state.s3Files.validValues.filter(row => (
+const getS3FilesFilteredFileCount = (state) => state.s3Files.validValues.filter((row) => (
   Object.keys(state.s3Files.filters).every((col) => {
     if (col === 'name') {
       return (!state.s3Files.filters.name.length || row.name.includes(state.s3Files.filters.name));
@@ -495,7 +490,7 @@ const getS3FilesFilteredFileCount = state => state.s3Files.validValues.filter(ro
 // because of the few discrete ways to update s3Files state and the common side
 // effects / validation all of those ways require.
 const getAndValidateNewS3FilesState = (previousState, action, broadcast = false) => {
-  const s3FilesIdx = previousState.requiredSteps.findIndex(step => step.key === 's3Files');
+  const s3FilesIdx = previousState.requiredSteps.findIndex((step) => step.key === 's3Files');
   if (s3FilesIdx === -1) { return previousState; }
   const newState = { ...previousState, broadcast };
   let fileIdx = 0;
@@ -520,7 +515,7 @@ const getAndValidateNewS3FilesState = (previousState, action, broadcast = false)
       break;
 
     case 'setS3FilesValueSelectAll':
-      newState.s3Files.value = newState.s3Files.validValues.map(file => file.url);
+      newState.s3Files.value = newState.s3Files.validValues.map((file) => file.url);
       newState.s3Files.validValues.forEach((file, idx) => {
         newState.s3Files.validValues[idx].tableData.checked = true;
       });
@@ -535,20 +530,20 @@ const getAndValidateNewS3FilesState = (previousState, action, broadcast = false)
 
     case 'setS3FilesValueSelectFiltered':
       newState.s3Files.value = newState.s3Files.validValues
-        .filter(row => Object.keys(newState.s3Files.filters).every((col) => {
+        .filter((row) => Object.keys(newState.s3Files.filters).every((col) => {
           if (col === 'name') {
             return (!newState.s3Files.filters.name.length || row.name.includes(newState.s3Files.filters.name)); // eslint-disable-line max-len
           }
           return (!newState.s3Files.filters[col].length || newState.s3Files.filters[col].includes(row[col])); // eslint-disable-line max-len
         }))
-        .map(file => file.url);
+        .map((file) => file.url);
       newState.s3Files.validValues.forEach((file, idx) => {
         newState.s3Files.validValues[idx].tableData.checked = newState.s3Files.value.includes(file.url); // eslint-disable-line max-len
       });
       break;
 
     case 'setIndividualS3FileSelected':
-      fileIdx = newState.s3Files.validValues.findIndex(file => file.url === action.url);
+      fileIdx = newState.s3Files.validValues.findIndex((file) => file.url === action.url);
       if (fileIdx === -1) { return newState; }
       newState.s3Files.validValues[fileIdx].tableData.checked = action.selected;
       // When doing one file at a time we don't have to recalculate the total size,
@@ -570,7 +565,7 @@ const getAndValidateNewS3FilesState = (previousState, action, broadcast = false)
   // If we didn't already update the total size then recalculate it
   if (action.type !== 'setIndividualS3FileSelected') {
     newState.s3Files.totalSize = newState.s3Files.value
-      .map(id => newState.s3Files.bytesByUrl[id])
+      .map((id) => newState.s3Files.bytesByUrl[id])
       .reduce((a, b) => a + b, 0);
   }
 
@@ -603,7 +598,7 @@ const getAndValidateNewS3FilesState = (previousState, action, broadcast = false)
 // This function may also cascade into adjusting s3Files.value by removing files no longer in
 // scope, but does that through getAndValidateNewS3FilesState().
 const regenerateS3FilesFiltersAndValidValues = (state) => {
-  if (!state.requiredSteps.some(step => step.key === 's3Files')) { return state; }
+  if (!state.requiredSteps.some((step) => step.key === 's3Files')) { return state; }
   const updated = { ...state };
   updated.s3Files.validValues = [];
   if (!updated.sites.isValid || !updated.dateRange.isValid) {
@@ -617,17 +612,17 @@ const regenerateS3FilesFiltersAndValidValues = (state) => {
   // Generate new validValues as a subset of cachedValues in scope of sites and dateRange.
   // Use the current selections in s3Files.value to add tableData to each validValue record.
   // This is what Material Table looks for to render a checked box for the row.
-  updated.s3Files.cachedValues = updated.s3Files.cachedValues.map(file => ({
+  updated.s3Files.cachedValues = updated.s3Files.cachedValues.map((file) => ({
     ...file,
     tableData: { checked: false },
   }));
   updated.s3Files.validValues = updated.s3Files.cachedValues
-    .filter(file => (
+    .filter((file) => (
       updated.sites.value.includes(file.site)
       && updated.dateRange.value[0] <= file.yearMonth
       && file.yearMonth <= updated.dateRange.value[1]
     ))
-    .map(file => ({
+    .map((file) => ({
       ...file,
       tableData: { checked: updated.s3Files.value.includes(file.url) },
     }));
@@ -646,7 +641,7 @@ const regenerateS3FilesFiltersAndValidValues = (state) => {
     });
     filterKeys.forEach((key) => {
       updated.s3Files.filters[key] = updated.s3Files.filters[key]
-        .filter(filterVal => Object.keys(updated.s3Files.valueLookups[key]).includes(filterVal));
+        .filter((filterVal) => Object.keys(updated.s3Files.valueLookups[key]).includes(filterVal));
     });
   }
   updated.s3Files.filteredFileCount = getS3FilesFilteredFileCount(updated);
@@ -655,8 +650,8 @@ const regenerateS3FilesFiltersAndValidValues = (state) => {
     key: 's3Files',
     type: 'setValueFromUpdatedValidValues',
     value: updated.s3Files.validValues
-      .filter(file => file.tableData.checked)
-      .map(file => file.url),
+      .filter((file) => file.tableData.checked)
+      .map((file) => file.url),
   };
   return getAndValidateNewS3FilesState(updated, action, updated.broadcast);
 };
@@ -694,11 +689,11 @@ const getAndValidateNewState = (previousState, action, broadcast = false) => {
       ? { ...step }
       : {
         ...step,
-        isComplete: requiredStateKeys.every(key => newState[key].isValid),
+        isComplete: requiredStateKeys.every((key) => newState[key].isValid),
       };
   });
   newState.allStepsComplete = newState.requiredSteps
-    .every(step => step.isComplete || step.isComplete === null);
+    .every((step) => step.isComplete || step.isComplete === null);
   // Trigger a new manifest request for file size estimate if this update warrants it
   if (
     previousState.fromManifest
@@ -713,7 +708,7 @@ const getAndValidateNewState = (previousState, action, broadcast = false) => {
   // 2. Regenerate s3Files.validValues
   if (['sites', 'dateRange'].includes(action.key) && previousState.fromAOPManifest) {
     Object.keys(previousState.s3FileFetches)
-      .filter(key => ['notRequested', 'error'].includes(previousState.s3FileFetches[key]))
+      .filter((key) => ['notRequested', 'error'].includes(previousState.s3FileFetches[key]))
       .filter((key) => {
         const site = key.substr(0, 4);
         const yearMonth = key.substr(5, 7);
@@ -736,7 +731,7 @@ const getAndValidateNewState = (previousState, action, broadcast = false) => {
 */
 const reducer = (state, action) => {
   let newState = {};
-  const getStateFromHigherOrderState = newHigherOrderState => HIGHER_ORDER_TRANSFERABLE_STATE_KEYS
+  const getStateFromHigherOrderState = (newHigherOrderState) => HIGHER_ORDER_TRANSFERABLE_STATE_KEYS
     .reduce((higherOrderState, stateKey) => {
       const newValue = mutateNewStateIntoRange(
         stateKey,
@@ -871,9 +866,13 @@ const reducer = (state, action) => {
         newState.s3FileFetches[`${response.site}.${response.yearMonth}`] = 'fetched';
         const files = response.files.map((fileObj) => {
           const file = {
+            release: response.release || '',
+            productCode: response.productCode,
             name: fileObj.name,
             size: parseInt(fileObj.size, 10),
             url: fileObj.url,
+            checksum: fileObj.md5 ? fileObj.md5 : fileObj.crc32,
+            checksumAlgorithm: fileObj.md5 ? 'MD5' : 'CRC32',
             site: response.site,
             yearMonth: response.yearMonth,
             tableData: { checked: false },
@@ -928,6 +927,11 @@ const reducer = (state, action) => {
       return state;
   }
 };
+const wrappedReducer = (state, action) => {
+  const newState = reducer(state, action);
+  // console.log('ACTION', action, newState);
+  return newState;
+};
 
 /**
    CONTEXT
@@ -961,7 +965,9 @@ const getStateObservable = () => stateSubject$.asObservable();
 
 // Observables and getters for making and canceling manifest requests
 const manifestCancelation$ = new Subject();
-const getManifestAjaxObservable = url => ajax.getJSON(url);
+const getManifestAjaxObservable = (request) => (
+  NeonApi.postJsonObservable(request.url, request.body, null, false)
+);
 
 /**
   <DownloadDataContext.Provider />
@@ -973,24 +979,24 @@ const Provider = (props) => {
   } = props;
 
   const initialState = getInitialStateFromProps(props);
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(wrappedReducer, initialState);
 
   // Create an observable for manifests requests and subscribe to it to execute
   // the manifest fetch and dispatch results when updated.
   const manifestRequest$ = new Subject();
-  manifestRequest$.subscribe(url => (
-    getManifestAjaxObservable(url)
+  manifestRequest$.subscribe((request) => (
+    getManifestAjaxObservable(request)
       .pipe(
-        switchMap(resp => of(resp)),
+        switchMap((resp) => of(request.body ? resp.response : resp)),
         takeUntil(manifestCancelation$),
       )
       .subscribe(
-        resp => dispatch({
+        (resp) => dispatch({
           type: 'setFetchManifestSucceeded',
           body: resp,
-          sizeEstimate: getSizeEstimateFromManifestResponse(resp),
+          sizeEstimate: getSizeEstimateFromManifestRollupResponse(resp),
         }),
-        err => dispatch({
+        (err) => dispatch({
           type: 'setFetchManifestFailed',
           error: err,
         }),
@@ -1000,27 +1006,33 @@ const Provider = (props) => {
   const handleFetchS3Files = (currentState) => {
     const { productCode } = currentState.productData;
     const keys = Object.keys(currentState.s3FileFetches)
-      .filter(key => currentState.s3FileFetches[key] === 'awaitingFetchCall');
+      .filter((key) => currentState.s3FileFetches[key] === 'awaitingFetchCall');
     if (!keys.length) { return; }
     dispatch({ type: 'setS3FileFetchesCalled', keys });
     const observable = forkJoinWithProgress(
       keys.map((key) => {
         const site = key.substr(0, 4);
         const yearMonth = key.substr(5, 7);
+        const release = currentState.release && currentState.release.value
+          ? currentState.release.value
+          : null;
         return NeonApi
-          .getJsonObservable(buildS3FilesRequestUrl(productCode, site, yearMonth))
+          .getJsonObservable(buildS3FilesRequestUrl(productCode, site, yearMonth, release))
           .pipe(
-            map(response => ({
+            map((response) => ({
               status: 'fetched',
               files: response.data.files,
+              release: response.data.release,
               site,
               yearMonth,
+              productCode,
             })),
             catchError(() => ({
               status: 'error',
               files: [],
               site,
               yearMonth,
+              productCode,
             })),
           );
       }),
@@ -1028,7 +1040,7 @@ const Provider = (props) => {
     observable.pipe(
       mergeMap(([finalResult, progress]) => merge(
         progress.pipe(
-          tap(value => dispatch({
+          tap((value) => dispatch({
             type: 'setS3FileFetchesProgress',
             value,
           })),
@@ -1036,7 +1048,7 @@ const Provider = (props) => {
         ),
         finalResult,
       )),
-    ).subscribe(value => dispatch({
+    ).subscribe((value) => dispatch({
       type: 'setS3FileFetchesCompleted',
       value,
     }));
@@ -1070,23 +1082,27 @@ const Provider = (props) => {
     if (!state.fromManifest || state.manifest.status !== 'awaitingFetchCall') { return; }
     // Cancel any in-progress manifest fetch
     manifestCancelation$.next(true);
-    const [manifestURLConfig, manifestConfigError] = getManifestURLConfig(state);
-    if (manifestConfigError) {
+    const config = buildManifestConfig(
+      state,
+      ALL_POSSIBLE_VALID_PACKAGE_TYPE[0],
+    );
+    if (config.isError && config.errorMessage) {
       dispatch({
         type: 'setFetchManifestFailed',
-        error: manifestConfigError,
+        error: config.errorMessage,
       });
     } else {
       dispatch({ type: 'setFetchManifestCalled' });
-      const manifestURL = buildManifestRequestUrl(manifestURLConfig);
-      manifestRequest$.next(manifestURL);
+      const manifestURL = buildManifestRequestUrl(config, true);
+      const manifestBody = buildManifestRequestBody(config);
+      manifestRequest$.next({ url: manifestURL, body: manifestBody });
     }
   }, [state, manifestRequest$]);
 
   // If the state has changed such that new fetches for s3 files are expected:
   // generate those fetches.
   useEffect(() => {
-    if (Object.values(state.s3FileFetches).some(status => status === 'awaitingFetchCall')) {
+    if (Object.values(state.s3FileFetches).some((status) => status === 'awaitingFetchCall')) {
       handleFetchS3Files(state);
     }
   }, [state]);
@@ -1112,6 +1128,7 @@ Provider.propTypes = {
   }),
   /* eslint-disable react/no-unused-prop-types */
   availabilityView: PropTypes.oneOf(AVAILABILITY_VIEW_MODES),
+  release: PropTypes.string,
   sites: PropTypes.arrayOf(PropTypes.string),
   dateRange: PropTypes.arrayOf(PropTypes.string),
   documentation: PropTypes.oneOf(ALL_POSSIBLE_VALID_DOCUMENTATION),
@@ -1131,6 +1148,7 @@ Provider.defaultProps = {
   stateObservable: null,
   productData: {},
   availabilityView: DEFAULT_STATE.availabilityView,
+  release: DEFAULT_STATE.release.value,
   sites: DEFAULT_STATE.sites.value,
   dateRange: DEFAULT_STATE.dateRange.value,
   documentation: DEFAULT_STATE.documentation.value,

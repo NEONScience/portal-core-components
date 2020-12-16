@@ -36,7 +36,7 @@ export const fetchDomainHierarchy = (domain) => {
         return of(false);
       }),
     ).subscribe();
-  }).then(data => parseDomainHierarchy(data));
+  }).then((data) => parseDomainHierarchy(data));
 };
 
 export const fetchSingleLocationREST = (location) => {
@@ -61,14 +61,14 @@ export const fetchSingleLocationREST = (location) => {
         return of(false);
       }),
     ).subscribe();
-  }).then(data => parseLocationsArray(data)).then(locationMap => (locationMap || {})[location]);
+  }).then((data) => parseLocationsArray(data)).then((locationMap) => (locationMap || {})[location]);
 };
 
 export const fetchManyLocationsGraphQL = (locations) => {
   // Extract locations list and validate
   if (
     !Array.isArray(locations) || !locations.length
-      || !locations.every(loc => typeof loc === 'string')
+      || !locations.every((loc) => typeof loc === 'string')
   ) {
     return Promise.reject(
       new Error('Locations list is not valid; must be non-empty array of only strings'),
@@ -95,5 +95,5 @@ export const fetchManyLocationsGraphQL = (locations) => {
         return of(false);
       }),
     ).subscribe();
-  }).then(data => parseLocationsArray(data));
+  }).then((data) => parseLocationsArray(data));
 };

@@ -71,9 +71,9 @@ const deriveRegionSelections = (state) => {
       );
       const selectableSites = !validSet
         ? boundarySitesSet
-        : new Set([...boundarySitesSet].filter(siteCode => validSet.has(siteCode)));
+        : new Set([...boundarySitesSet].filter((siteCode) => validSet.has(siteCode)));
       const intersection = [...selectableSites]
-        .filter(x => state.selection.set.has(x));
+        .filter((x) => state.selection.set.has(x));
       if (!intersection.length) { return; }
       selectedBoundaries[boundaryCode] = (
         intersection.length === selectableSites.size
@@ -103,14 +103,14 @@ const isSelectable = (item, validSet = null) => {
 // Filters a set down to only selectable items
 const getSelectableSet = (set, validSet = null) => {
   if (!validSet) { return set; }
-  return new Set([...set].filter(item => isSelectable(item, validSet)));
+  return new Set([...set].filter((item) => isSelectable(item, validSet)));
 };
 
 // Set the valid flag for selection based on current limits. Empty selections are always invalid.
 const validateSelection = (state) => {
   let valid = false;
   const { limit, set, validSet } = state.selection;
-  if (set.size > 0 && (!validSet || [...set].every(item => validSet.has(item)))) {
+  if (set.size > 0 && (!validSet || [...set].every((item) => validSet.has(item)))) {
     valid = true;
     if (
       (Number.isFinite(limit) && set.size !== limit)
@@ -131,16 +131,16 @@ const validateSelection = (state) => {
 // for base plot features as well as how we turn those fetch results into feater data. This func
 // is used to consistently inform when to trigger that behavior for a given feature.
 const basePlots = [FEATURES.DISTRIBUTED_BASE_PLOTS.KEY, FEATURES.TOWER_BASE_PLOTS.KEY];
-const isBasePlot = featureKey => basePlots.includes(featureKey);
+const isBasePlot = (featureKey) => basePlots.includes(featureKey);
 
 /**
    Reducer
 */
-const zoomIsValid = zoom => (
+const zoomIsValid = (zoom) => (
   Number.isInteger(zoom) && zoom >= MAP_ZOOM_RANGE[0] && zoom <= MAP_ZOOM_RANGE[1]
 );
-const centerIsValid = center => (
-  Array.isArray(center) && center.length === 2 && center.every(v => typeof v === 'number')
+const centerIsValid = (center) => (
+  Array.isArray(center) && center.length === 2 && center.every((v) => typeof v === 'number')
 );
 
 // Creates fetch objects with an AWAITING_CALL status based on current state.
@@ -155,7 +155,7 @@ const calculateFeatureDataFetches = (state, requiredSites = []) => {
   if (requiredSites) {
     requiredSitesArray = (
       Array.isArray(requiredSites) ? requiredSites : [requiredSites]
-    ).filter(siteCode => Object.keys(state.sites).includes(siteCode));
+    ).filter((siteCode) => Object.keys(state.sites).includes(siteCode));
   }
   requiredSitesArray.forEach((siteCode) => {
     if (!sitesInMap.includes(siteCode)) { sitesInMap.push(siteCode); }
@@ -163,7 +163,7 @@ const calculateFeatureDataFetches = (state, requiredSites = []) => {
   if (!sitesInMap.length) { return state; }
   const domainsInMap = new Set();
   sitesInMap
-    .filter(siteCode => state.sites[siteCode])
+    .filter((siteCode) => state.sites[siteCode])
     .forEach((siteCode) => {
       domainsInMap.add(state.sites[siteCode].domainCode);
     });
@@ -185,7 +185,7 @@ const calculateFeatureDataFetches = (state, requiredSites = []) => {
 
   // Feature fetches - ARCGIS_ASSET_API
   Object.keys(FEATURES)
-    .filter(featureKey => (
+    .filter((featureKey) => (
       FEATURES[featureKey].dataSource === FEATURE_DATA_SOURCES.ARCGIS_ASSETS_API
         && state.filters.features.available[featureKey]
         && state.filters.features.visible[featureKey]
@@ -203,7 +203,7 @@ const calculateFeatureDataFetches = (state, requiredSites = []) => {
   // Feature fetches - REST_LOCATIONS_API
   Object.keys(FEATURES)
     // Only look at available+visible features that get fetched and have a location type match
-    .filter(featureKey => (
+    .filter((featureKey) => (
       FEATURES[featureKey].dataSource === FEATURE_DATA_SOURCES.REST_LOCATIONS_API
         && FEATURES[featureKey].matchLocationType
         && state.filters.features.available[featureKey]
@@ -215,7 +215,7 @@ const calculateFeatureDataFetches = (state, requiredSites = []) => {
       sitesInMap
         // Domain hierarchy must be completed in order to generate subsequent fetches
         // (only true if site location hierarchy feature data is there)
-        .filter(siteCode => state.featureData.SITE_LOCATION_HIERARCHIES[siteCode])
+        .filter((siteCode) => state.featureData.SITE_LOCATION_HIERARCHIES[siteCode])
         .forEach((siteCode) => {
           if (!newState.featureDataFetches[dataSource][featureKey][siteCode]) {
             newState.featureDataFetches[dataSource][featureKey][siteCode] = {};
@@ -223,8 +223,8 @@ const calculateFeatureDataFetches = (state, requiredSites = []) => {
           // Extract matching location IDs from the hierarchy and set them as fetches awaiting call
           const hierarchy = state.featureData.SITE_LOCATION_HIERARCHIES[siteCode];
           const locationIsMatch = matchLocationType instanceof RegExp
-            ? (locationKey => matchLocationType.test(hierarchy[locationKey].type))
-            : (locationKey => hierarchy[locationKey].type === matchLocationType);
+            ? ((locationKey) => matchLocationType.test(hierarchy[locationKey].type))
+            : ((locationKey) => hierarchy[locationKey].type === matchLocationType);
           Object.keys(hierarchy)
             .filter(locationIsMatch)
             .forEach((locationKey) => {
@@ -244,14 +244,14 @@ const calculateFeatureDataFetches = (state, requiredSites = []) => {
   // Our goal is to build a single fetch containing a flat list of all locations for this site
   // that are now visible, clustered by minZoom level.
   Object.keys(GRAPHQL_LOCATIONS_API_CONSTANTS.MINZOOM_TO_FEATURES_MAP)
-    .filter(minZoom => state.map.zoom >= minZoom)
+    .filter((minZoom) => state.map.zoom >= minZoom)
     .forEach((minZoom) => {
       // Loop through all available and visible features at this minZoom level
       GRAPHQL_LOCATIONS_API_CONSTANTS.MINZOOM_TO_FEATURES_MAP[minZoom].forEach((featureKey) => {
         if (!state.filters.features.available[featureKey] || !state.filters.features.visible[featureKey]) { return; }
         const { dataSource, matchLocationType, matchLocationName } = FEATURES[featureKey];
         const companionFeatureKey = (
-          !isBasePlot(featureKey) ? null : basePlots.find(key => key !== featureKey)
+          !isBasePlot(featureKey) ? null : basePlots.find((key) => key !== featureKey)
         );
         if (!newState.featureDataFetches[dataSource][minZoom]) {
           newState.featureDataFetches[dataSource][minZoom] = {};
@@ -259,17 +259,17 @@ const calculateFeatureDataFetches = (state, requiredSites = []) => {
         // We've narrowed to minZoom and feature, now narrow to only the sites in the map
         sitesInMap
           // Domain hierarchy must be completely loaded in order to generate subsequent fetches
-          .filter(siteCode => state.featureData.SITE_LOCATION_HIERARCHIES[siteCode])
+          .filter((siteCode) => state.featureData.SITE_LOCATION_HIERARCHIES[siteCode])
           // Site must have meaningful features to fetch at this minZoom level
-          .filter(siteCode => state.sites[siteCode].terrain === FEATURES[featureKey].siteTerrain)
+          .filter((siteCode) => state.sites[siteCode].terrain === FEATURES[featureKey].siteTerrain)
           .forEach((siteCode) => {
             // Initialize the fetch structure for the dataSource / minZoom / siteCode
             if (!newState.featureDataFetches[dataSource][minZoom][siteCode]) {
               newState.featureDataFetches[dataSource][minZoom][siteCode] = {
                 features: Object.fromEntries(
                   GRAPHQL_LOCATIONS_API_CONSTANTS.MINZOOM_TO_FEATURES_MAP[minZoom]
-                    .filter(fKey => state.sites[siteCode].terrain === FEATURES[fKey].siteTerrain)
-                    .map(fKey => [fKey, { fetchId: null, locations: [] }]),
+                    .filter((fKey) => state.sites[siteCode].terrain === FEATURES[fKey].siteTerrain)
+                    .map((fKey) => [fKey, { fetchId: null, locations: [] }]),
                 ),
                 fetches: {},
               };
@@ -287,7 +287,7 @@ const calculateFeatureDataFetches = (state, requiredSites = []) => {
             if (features[featureKey].fetchId !== null) { return; }
             // Find or create a fetch that's awaiting call with a unique ID
             let awaitingFetchKey = Object.keys(fetches)
-              .find(fetchKey => fetches[fetchKey].status === FETCH_STATUS.AWAITING_CALL);
+              .find((fetchKey) => fetches[fetchKey].status === FETCH_STATUS.AWAITING_CALL);
             if (!awaitingFetchKey) {
               awaitingFetchKey = uniqueId('f');
               newState.featureDataFetches[dataSource][minZoom][siteCode].fetches[awaitingFetchKey] = {
@@ -311,13 +311,13 @@ const calculateFeatureDataFetches = (state, requiredSites = []) => {
             const hierarchy = state.featureData.SITE_LOCATION_HIERARCHIES[siteCode];
             let locationIsMatch = () => false;
             if (matchLocationType instanceof RegExp) {
-              locationIsMatch = locationKey => matchLocationType.test(hierarchy[locationKey].type);
+              locationIsMatch = (locationKey) => matchLocationType.test(hierarchy[locationKey].type);
             }
             if (typeof matchLocationType === 'string') {
-              locationIsMatch = locationKey => hierarchy[locationKey].type === matchLocationType;
+              locationIsMatch = (locationKey) => hierarchy[locationKey].type === matchLocationType;
             }
             if (matchLocationName instanceof RegExp) {
-              locationIsMatch = locationKey => matchLocationName.test(locationKey);
+              locationIsMatch = (locationKey) => matchLocationName.test(locationKey);
             }
             Object.keys(hierarchy)
               .filter(locationIsMatch)
@@ -429,7 +429,7 @@ const reducer = (state, action) => {
         const { features } = newState.featureDataFetches[dataSource][minZoom][siteCode];
         const locNamesToFeatures = {};
         Object.keys(features)
-          .filter(featureKey => features[featureKey].fetchId === fetchId)
+          .filter((featureKey) => features[featureKey].fetchId === fetchId)
           .forEach((featureKey) => {
             features[featureKey].locations.forEach((locName) => {
               // For *_BASE_PLOT features, which both have the same API locationType, determine
@@ -457,7 +457,9 @@ const reducer = (state, action) => {
           } = FEATURES[featureKey];
           // This location is supplemental data to another location, so pipe it to the parent record
           if (parentDataFeatureKey) {
-            const coordIdx = matchLocationCoordinateMap.findIndex(match => locName.endsWith(match));
+            const coordIdx = matchLocationCoordinateMap.findIndex(
+              (match) => locName.endsWith(match),
+            );
             if (coordIdx === -1) { return; }
             const { type: parentDataFeatureType } = FEATURES[parentDataFeatureKey];
             if (!newState.featureData[parentDataFeatureType][parentDataFeatureKey][siteCode]) {
@@ -508,7 +510,7 @@ const reducer = (state, action) => {
                 if (match) { acc.push(match[1]); }
                 return acc;
               }, [])
-                .filter(k => k !== 'all' && k !== 'mfb')
+                .filter((k) => k !== 'all' && k !== 'mfb')
                 .sort((a, b) => (
                   (PLOT_SAMPLING_MODULES[a] || null) > (PLOT_SAMPLING_MODULES[b] || null) ? 1 : -1
                 ))
@@ -526,15 +528,15 @@ const reducer = (state, action) => {
     newState.filters.features.visible[feature] = visible;
     if (FEATURES[feature].type === FEATURE_TYPES.GROUP.KEY) {
       Object.keys(FEATURES)
-        .filter(f => FEATURES[f].parent === feature)
+        .filter((f) => FEATURES[f].parent === feature)
         .forEach((f) => { applyFeatureVisibilityToChildren(f, visible); });
     }
   };
   const applyFeatureVisibilityToParents = (feature) => {
     if (FEATURES[feature].parent) {
       const parentVisible = Object.keys(FEATURES)
-        .filter(f => FEATURES[f].parent === FEATURES[feature].parent) // Of all children...
-        .some(f => newState.filters.features.visible[f]); // ...some child is visible
+        .filter((f) => FEATURES[f].parent === FEATURES[feature].parent) // Of all children...
+        .some((f) => newState.filters.features.visible[f]); // ...some child is visible
       newState.filters.features.visible[FEATURES[feature].parent] = parentVisible;
       applyFeatureVisibilityToParents(FEATURES[feature].parent, parentVisible);
     }
@@ -634,7 +636,7 @@ const reducer = (state, action) => {
     case 'setMapOverlays':
       if (
         !Array.isArray(action.overlays)
-          || !action.overlays.every(o => OVERLAYS[o])) {
+          || !action.overlays.every((o) => OVERLAYS[o])) {
         return state;
       }
       newState.map.overlays = new Set(action.overlays);
@@ -975,7 +977,7 @@ const Provider = (props) => {
     initialState.aspectRatio.isDynamic = false;
     initialState.aspectRatio.currentValue = aspectRatio;
   }
-  if (Object.keys(FEATURE_TYPES).filter(k => FEATURE_TYPES[k].selectable).includes(selection)) {
+  if (Object.keys(FEATURE_TYPES).filter((k) => FEATURE_TYPES[k].selectable).includes(selection)) {
     initialState.selection.active = selection;
     initialState.selection.limit = selectionLimit;
     initialState.selection.onChange = onSelectionChange;
@@ -1156,7 +1158,7 @@ const Provider = (props) => {
     const restLocSource = FEATURE_DATA_SOURCES.REST_LOCATIONS_API;
     const restLocFetches = state.featureDataFetches[restLocSource];
     Object.keys(restLocFetches)
-      .filter(featureKey => featureKey !== FEATURE_TYPES.SITE_LOCATION_HIERARCHIES.KEY)
+      .filter((featureKey) => featureKey !== FEATURE_TYPES.SITE_LOCATION_HIERARCHIES.KEY)
       .forEach((featureKey) => {
         Object.keys(state.featureDataFetches[restLocSource][featureKey]).forEach((siteCode) => {
           const featureSite = state.featureDataFetches[restLocSource][featureKey][siteCode];
@@ -1200,7 +1202,7 @@ const Provider = (props) => {
     Object.keys(gqlLocFetches).forEach((minZoom) => {
       Object.keys(gqlLocFetches[minZoom]).forEach((siteCode) => {
         Object.keys(gqlLocFetches[minZoom][siteCode].fetches)
-          .filter(fetchId => (
+          .filter((fetchId) => (
             gqlLocFetches[minZoom][siteCode].fetches[fetchId].status === FETCH_STATUS.AWAITING_CALL
           ))
           .forEach((fetchId) => {

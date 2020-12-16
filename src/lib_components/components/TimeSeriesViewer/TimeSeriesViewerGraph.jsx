@@ -95,7 +95,7 @@ const BASE_GRAPH_OPTIONS = {
 
 const NULL_DATA = [[0, 0]];
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   graphOuterContainer: {
     backgroundColor: '#ffffff',
     padding: theme.spacing(2),
@@ -193,7 +193,7 @@ const useStyles = makeStyles(theme => ({
 
 // Get the next year/month string after a given year/month string
 // Example: getNextMonth('2012-12') => '2013-01'
-const getNextMonth = month => moment.utc(`${month}-15T00:00:00Z`).add(1, 'month').format('YYYY-MM');
+const getNextMonth = (month) => moment.utc(`${month}-15T00:00:00Z`).add(1, 'month').format('YYYY-MM');
 
 const INITIAL_GRAPH_STATE = {
   hiddenSeries: new Set(),
@@ -240,7 +240,7 @@ const graphReducer = (state, action) => {
     case 'setPngDimensions':
       if (!(
         Array.isArray(action.dimensions) && action.dimensions.length === 2
-          && action.dimensions.every(v => typeof v === 'number' && v >= 0)
+          && action.dimensions.every((v) => typeof v === 'number' && v >= 0)
       )) { return state; }
       newState.pngDimensions = action.dimensions;
       return newState;
@@ -414,7 +414,7 @@ export default function TimeSeriesViewerGraph() {
             const setSeriesValueByTimestamp = (t) => {
               const isodate = moment.utc(newData[t][0]).format('YYYY-MM-DD[T]HH:mm:ss[Z]');
               const dataIdx = posData[month][pkg][timeStep].series[dateTimeVariable].data
-                .findIndex(dateTimeVal => dateTimeVal === isodate);
+                .findIndex((dateTimeVal) => dateTimeVal === isodate);
               newData[t][columnIdx] = dataIdx !== -1
                 ? posData[month][pkg][timeStep].series[variable].data[dataIdx]
                 : null;
@@ -450,7 +450,7 @@ export default function TimeSeriesViewerGraph() {
               const setQualityValueByTimestamp = (t) => {
                 const isodate = moment.utc(newQualityData[t][0]).format('YYYY-MM-DD[T]HH:mm:ss[Z]');
                 const dataIdx = posData[month][pkg][timeStep].series[dateTimeVariable].data
-                  .findIndex(dateTimeVal => dateTimeVal === isodate);
+                  .findIndex((dateTimeVal) => dateTimeVal === isodate);
                 if (dataIdx === -1) {
                   newQualityData[t][columnIdx] = [...qfNullFill];
                   return;
@@ -474,10 +474,10 @@ export default function TimeSeriesViewerGraph() {
       });
     });
     // With series and qualityLabels built out purge any hidden labels that are no longer present
-    const seriesLabels = newSeries.map(s => s.label);
+    const seriesLabels = newSeries.map((s) => s.label);
     if (
-      Array.from(graphState.hiddenQualityFlags).some(label => !newQualityLabels.includes(label))
-        || Array.from(graphState.hiddenSeries).some(label => !seriesLabels.includes(label))
+      Array.from(graphState.hiddenQualityFlags).some((label) => !newQualityLabels.includes(label))
+        || Array.from(graphState.hiddenSeries).some((label) => !seriesLabels.includes(label))
     ) {
       graphDispatch({
         type: 'purgeRemovedHiddenLabels',
@@ -530,7 +530,7 @@ export default function TimeSeriesViewerGraph() {
     const { series } = state.graphData;
     const seriesOption = {};
     series.forEach((s) => {
-      const axis = axes.find(a => a.units === s.units);
+      const axis = axes.find((a) => a.units === s.units);
       if (!axis) { return; }
       seriesOption[s.label] = {
         axis: axis.axis,
@@ -592,7 +592,7 @@ export default function TimeSeriesViewerGraph() {
       const qfData = qualityData[qfOffset] ? qualityData[qfOffset].slice(2) : null;
       qualityFlagsLegend = qualityLabels.slice(2).map((qualityLabel, qlIdx) => {
         const isHidden = graphState.hiddenQualityFlags.has(qualityLabel);
-        const isHighlighted = graphData.series.some(s => (
+        const isHighlighted = graphData.series.some((s) => (
           s.isHighlighted && s.label.includes(qualityLabel)
         ));
         const qualityStyle = isHighlighted ? { backgroundColor: Theme.palette.grey[100] } : {};
@@ -638,11 +638,11 @@ export default function TimeSeriesViewerGraph() {
     }
     // Render
     return ReactDOMServer.renderToString(
-      <React.Fragment>
+      <>
         {seriesLegend}
         {qualityFlagsLegend}
         {dateLegend}
-      </React.Fragment>,
+      </>,
     );
   };
 
@@ -658,7 +658,7 @@ export default function TimeSeriesViewerGraph() {
       h /= qualitySeriesCount;
       for (let c = 2; c < row.length; c += 1) {
         if (!graphState.hiddenQualityFlags.has(qualityLabels[c])) {
-          if (row[c] && row[c].some(v => v !== 0)) {
+          if (row[c] && row[c].some((v) => v !== 0)) {
             canvas.fillStyle = QUALITY_COLORS[(c - 2) % 12]; // eslint-disable-line no-param-reassign, max-len
             canvas.fillRect(startX, y, endX - startX, h);
           }
@@ -685,7 +685,7 @@ export default function TimeSeriesViewerGraph() {
   if (state.status === TIME_SERIES_VIEWER_STATUS.READY) {
     // Determine the set of axes and their units
     const previousAxisCount = axisCountRef.current;
-    const axes = Object.keys(yAxes).map(axis => ({
+    const axes = Object.keys(yAxes).map((axis) => ({
       axis: axis === 'y1' ? 'y' : 'y2',
       units: yAxes[axis].units,
       // logscale: yAxes[axis].logscale,
@@ -706,7 +706,7 @@ export default function TimeSeriesViewerGraph() {
       legend: 'always',
       legendFormatter,
       underlayCallback: getUnderlayCallback(),
-      visibility: series.map(s => !graphState.hiddenSeries.has(s.label)),
+      visibility: series.map((s) => !graphState.hiddenSeries.has(s.label)),
     };
 
     // Apply axis labels to graphOptions
@@ -817,7 +817,7 @@ export default function TimeSeriesViewerGraph() {
     if (downloadRef.current === null) { return; }
     domtoimage.toBlob(downloadRef.current)
       .then((blob) => {
-        const siteCodes = state.selection.sites.map(site => site.siteCode).join(' ');
+        const siteCodes = state.selection.sites.map((site) => site.siteCode).join(' ');
         const fileName = `NEON Time Series - ${state.product.productCode} - ${state.product.productName} - ${siteCodes}.png`;
         saveAs(blob, fileName);
       })
@@ -846,7 +846,7 @@ export default function TimeSeriesViewerGraph() {
   // Toggle Series Visibility Button
   const { series } = state.graphData;
   const toggleSeriesVisibility = () => {
-    const allSeries = series.map(s => s.label);
+    const allSeries = series.map((s) => s.label);
     graphDispatch({ type: 'toggleSeriesVisibility', series: allSeries });
   };
   const toggleSeriesVisibilityButton = (
@@ -896,7 +896,7 @@ export default function TimeSeriesViewerGraph() {
      RENDER
   */
   return (
-    <React.Fragment>
+    <>
       <div ref={downloadRef} className={classes.graphOuterContainer}>
         <Typography variant="h6" className={classes.title}>
           {state.product.productName
@@ -934,6 +934,6 @@ export default function TimeSeriesViewerGraph() {
           </div>
         </div>
       </div>
-    </React.Fragment>
+    </>
   );
 }

@@ -13,7 +13,7 @@ import ExampleBlock from '../../../components/ExampleBlock';
 import DataThemeIcon from './DataThemeIcon';
 import Theme from '../Theme/Theme';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
 export default function StyleGuide() {
   const classes = useStyles(Theme);
   return (
-    <React.Fragment>
+    <>
 
       <DocBlock>
         A set of five scalable icons representing the different NEON Data Themes.
@@ -122,6 +122,6 @@ import DataThemeIcon from 'portal-core-components/lib/components/DataThemeIcon';
 <DataThemeIcon theme="organisms" size={15} avatar />
         `}
       </CodeBlock>
-    </React.Fragment>
+    </>
   );
 }

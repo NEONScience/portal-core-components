@@ -101,6 +101,8 @@ const useStyles = makeStyles(() => ({
     position: 'relative',
     minHeight: Theme.spacing(30),
     borderTop: '2px solid transparent',
+    paddingLeft: '0px',
+    paddingRight: '0px',
     [Theme.breakpoints.up('md')]: {
       display: 'table',
       tableLayout: 'fixed',
@@ -114,12 +116,10 @@ const useStyles = makeStyles(() => ({
     display: 'table-cell',
     verticalAlign: 'top',
     position: 'relative',
-    padding: Theme.spacing(4),
-    paddingBottom: Theme.spacing(8),
+    padding: Theme.spacing(4, 8, 12, 8),
     [Theme.breakpoints.down('sm')]: {
       display: 'block',
-      padding: Theme.spacing(3),
-      paddingBottom: Theme.spacing(6),
+      padding: Theme.spacing(3, 5, 8, 5),
     },
     // These override links created with a naked <a> tag, as opposed to a <Link>
     // component, to appear the same as the <Link> component. This is especially
@@ -130,6 +130,12 @@ const useStyles = makeStyles(() => ({
     },
     '& a:hover:not([class]), a:hover[class=""]': {
       textDecoration: 'underline',
+    },
+  },
+  breadcrumbs: {
+    margin: Theme.spacing(2, 0, 4, 0),
+    [Theme.breakpoints.down('sm')]: {
+      margin: Theme.spacing(1, 0, 2, 0),
     },
   },
   sidebarContainer: {
@@ -340,6 +346,7 @@ NeonErrorPage.propTypes = {
 
 const NeonPage = (props) => {
   const {
+    breadcrumbHomeHref,
     breadcrumbs,
     customHeader,
     customFooter,
@@ -352,6 +359,7 @@ const NeonPage = (props) => {
     sidebarContent,
     sidebarContainerClassName: sidebarContainerClassNameProp,
     sidebarLinks,
+    sidebarLinksAdditionalContent,
     sidebarLinksAsStandaloneChildren: sidebarLinksAsStandaloneChildrenProp,
     sidebarSubtitle,
     sidebarTitle,
@@ -361,6 +369,7 @@ const NeonPage = (props) => {
     title,
     useCoreHeader,
     unstickyDrupalHeader,
+    NeonContextProviderProps,
     children,
   } = props;
 
@@ -381,7 +390,7 @@ const NeonPage = (props) => {
   const hasSidebar = hasSidebarContent || hasSidebarLinks;
   // sidebarLinksAsStandaloneChildren can only be true if all sidebar links have a defined component
   const sidebarLinksAsStandaloneChildren = hasSidebarLinks && sidebarLinksAsStandaloneChildrenProp
-    ? sidebarLinks.every(link => link.component)
+    ? sidebarLinks.every((link) => link.component)
     : false;
   const sidebarHashMap = !hasSidebarLinks ? {} : Object.fromEntries(
     sidebarLinks.map((link, idx) => [link.hash || '#', idx]),
@@ -441,7 +450,7 @@ const NeonPage = (props) => {
     }
     // Set up event listener / handler for user-input scroll events for standard scrolling pages
     const handleScroll = () => {
-      const scrollBreaks = sidebarLinks.map(link => ({
+      const scrollBreaks = sidebarLinks.map((link) => ({
         y: getSidebarLinkScrollPosition(link.hash || '#'),
         hash: link.hash || '#',
       }));
@@ -544,14 +553,14 @@ const NeonPage = (props) => {
   };
 
   const handleHideNotifications = () => {
-    const updatedDismissals = notifications.map(n => n.id);
+    const updatedDismissals = notifications.map((n) => n.id);
     cookies.set('dismissed-notifications', updatedDismissals, { path: '/', maxAge: 86400 });
-    setNotifications(notifications.map(n => ({ ...n, dismissed: true })));
+    setNotifications(notifications.map((n) => ({ ...n, dismissed: true })));
   };
 
   const handleShowNotifications = () => {
     cookies.remove('dismissed-notifications');
-    setNotifications(notifications.map(n => ({ ...n, dismissed: false })));
+    setNotifications(notifications.map((n) => ({ ...n, dismissed: false })));
   };
 
   /**
@@ -586,7 +595,7 @@ const NeonPage = (props) => {
       titleString = sidebarLink.pageTitle || sidebarLink.name;
     }
     return (
-      <React.Fragment>
+      <>
         <Typography
           data-selenium="neon-page.title"
           variant="h3"
@@ -605,7 +614,7 @@ const NeonPage = (props) => {
             {subtitle}
           </Typography>
         ) : null}
-      </React.Fragment>
+      </>
     );
   };
 
@@ -613,8 +622,9 @@ const NeonPage = (props) => {
     <Breadcrumbs
       aria-label="Breadcrumbs"
       data-selenium="neon-page.breadcrumbs"
+      className={classes.breadcrumbs}
     >
-      <Link key={uniqueId()} href="/">
+      <Link key={uniqueId()} href={breadcrumbHomeHref}>
         <HomeIcon title="Home" fontSize="small" style={{ marginBottom: '-4px' }} />
       </Link>
       {breadcrumbs.map(
@@ -625,7 +635,7 @@ const NeonPage = (props) => {
     </Breadcrumbs>
   ));
 
-  const renderOverlay = overlayChildren => (
+  const renderOverlay = (overlayChildren) => (
     <Backdrop open>
       <Paper className={classes.backdropPaper}>
         {overlayChildren}
@@ -634,7 +644,7 @@ const NeonPage = (props) => {
   );
 
   const renderLoading = () => (!loading || error ? null : renderOverlay(
-    <React.Fragment>
+    <>
       <Typography variant="h5" component="h3" gutterBottom>
         {loading}
       </Typography>
@@ -643,16 +653,16 @@ const NeonPage = (props) => {
       ) : (
         <CircularProgress variant="static" value={progress} />
       )}
-    </React.Fragment>,
+    </>,
   ));
 
   const renderError = () => (!error ? null : renderOverlay(
-    <React.Fragment>
+    <>
       <ErrorIcon fontSize="large" color="error" />
       <Typography variant="h5" component="h3" style={{ marginTop: Theme.spacing(1) }}>
         {error}
       </Typography>
-    </React.Fragment>,
+    </>,
   ));
 
   const renderSidebar = () => {
@@ -665,11 +675,11 @@ const NeonPage = (props) => {
     // Arbitrary Content Sidebar (no automatic skeleton)
     if (hasSidebarContent) {
       return (
-        <React.Fragment>
+        <>
           <div ref={sidebarRef} className={sidebarClassName} style={sidebarContainerStyle}>
             {sidebarContent}
           </div>
-        </React.Fragment>
+        </>
       );
     }
     // Render Sidebar Title
@@ -678,14 +688,14 @@ const NeonPage = (props) => {
       return (
         <div className={classes.sidebarTitlesContainer}>
           {loading || error ? (
-            <React.Fragment>
+            <>
               <Skeleton width={200} height={22} style={{ marginBottom: Theme.spacing(1) }} />
               {!sidebarSubtitle ? null : (
                 <Skeleton width={120} height={16} style={{ marginBottom: Theme.spacing(1) }} />
               )}
-            </React.Fragment>
+            </>
           ) : (
-            <React.Fragment>
+            <>
               <Typography variant="h5" component="h3" className={classes.sidebarTitle}>
                 {sidebarTitle || title}
               </Typography>
@@ -694,7 +704,7 @@ const NeonPage = (props) => {
                   {sidebarSubtitle}
                 </Typography>
               )}
-            </React.Fragment>
+            </>
           )}
         </div>
       );
@@ -737,12 +747,12 @@ const NeonPage = (props) => {
       );
     };
     const fullLinks = (
-      <React.Fragment>
+      <>
         <div
           ref={sidebarLinksContainerRef}
           className={classes.sidebarLinksContainer}
         >
-          {sidebarLinks.map(link => renderLink(link))}
+          {sidebarLinks.map((link) => renderLink(link))}
         </div>
         {belowMd ? null : (
           <Divider
@@ -750,7 +760,7 @@ const NeonPage = (props) => {
             style={{ marginBottom: '0px', ...dividerStyle }}
           />
         )}
-      </React.Fragment>
+      </>
     );
     const currentLinkOnly = (
       <div className={classes.sidebarLinksContainer}>
@@ -773,6 +783,12 @@ const NeonPage = (props) => {
             )}
           </div>
           <Divider className={classes.sidebarDivider} style={{ ...dividerStyle }} />
+          {(sidebarLinksAdditionalContent && (!belowMd || sidebarExpanded)) ? (
+            <>
+              {sidebarLinksAdditionalContent}
+              <Divider className={classes.sidebarDivider} style={{ ...dividerStyle }} />
+            </>
+          ) : null}
           {belowMd && !sidebarExpanded ? currentLinkOnly : fullLinks}
         </div>
       </div>
@@ -844,7 +860,7 @@ const NeonPage = (props) => {
   };
 
   const renderedPage = neonContextIsActive ? renderNeonPage() : (
-    <NeonContext.Provider useCoreAuth useCoreHeader={useCoreHeader}>
+    <NeonContext.Provider useCoreAuth useCoreHeader={useCoreHeader} {...NeonContextProviderProps}>
       {renderNeonPage()}
     </NeonContext.Provider>
   );
@@ -869,6 +885,7 @@ const children = PropTypes.oneOfType([
 ]);
 
 NeonPage.propTypes = {
+  breadcrumbHomeHref: PropTypes.string,
   breadcrumbs: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
@@ -900,19 +917,28 @@ NeonPage.propTypes = {
       ]),
     }),
   ),
+  sidebarLinksAdditionalContent: children,
   sidebarLinksAsStandaloneChildren: PropTypes.bool,
   sidebarSubtitle: PropTypes.string,
   sidebarTitle: PropTypes.string,
   sidebarWidth: PropTypes.number,
   sidebarUnsticky: PropTypes.bool,
-  subtitle: PropTypes.string,
-  title: PropTypes.string,
+  subtitle: PropTypes.oneOfType([
+    PropTypes.string,
+    children,
+  ]),
+  title: PropTypes.oneOfType([
+    PropTypes.string,
+    children,
+  ]),
   useCoreHeader: PropTypes.bool,
   unstickyDrupalHeader: PropTypes.bool,
+  NeonContextProviderProps: PropTypes.shape(NeonContext.ProviderPropTypes),
   children: children.isRequired,
 };
 
 NeonPage.defaultProps = {
+  breadcrumbHomeHref: '/',
   breadcrumbs: [],
   customHeader: null,
   customFooter: null,
@@ -925,6 +951,7 @@ NeonPage.defaultProps = {
   sidebarContent: null,
   sidebarContainerClassName: null,
   sidebarLinks: null,
+  sidebarLinksAdditionalContent: null,
   sidebarLinksAsStandaloneChildren: false,
   sidebarSubtitle: null,
   sidebarTitle: null,
@@ -934,6 +961,7 @@ NeonPage.defaultProps = {
   title: null,
   useCoreHeader: false,
   unstickyDrupalHeader: true,
+  NeonContextProviderProps: {},
 };
 
 export default NeonPage;

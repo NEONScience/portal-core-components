@@ -32,19 +32,19 @@ export default function AvailabilityPending() {
         }}
       >
         {status === 'loading' ? (
-          <React.Fragment>
+          <>
             <Typography variant="subtitle2" component="h6" gutterBottom>
               Loading Sites...
             </Typography>
             <CircularProgress />
-          </React.Fragment>
+          </>
         ) : (
-          <React.Fragment>
+          <>
             <ErrorIcon fontSize="large" color="error" />
             <Typography variant="subtitle2" component="h6" style={{ marginTop: '8px' }}>
               Error - Unable to Load Sites
             </Typography>
-          </React.Fragment>
+          </>
         )}
       </CardContent>
     </Card>

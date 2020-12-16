@@ -50,7 +50,7 @@ import Theme, { COLORS } from '../Theme/Theme';
 
 import { formatBytes, MAX_POST_BODY_SIZE } from '../../util/manifestUtil';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   copyButton: {
     marginLeft: Theme.spacing(2),
   },
@@ -186,7 +186,7 @@ export default function DownloadStepForm(props) {
       const { value: sites } = state.sites;
       const { value: dateRange } = state.dateRange;
       const sitesPlural = sites.length > 1 ? 's' : '';
-      const getYearMonthMoment = yearMonth => moment(`${yearMonth}-01`);
+      const getYearMonthMoment = (yearMonth) => moment(`${yearMonth}-01`);
       const humanDateRange = `${getYearMonthMoment(dateRange[0]).format('MMM YYYY')} - ${getYearMonthMoment(dateRange[1]).format('MMM YYYY')}`;
       const siteChipLabel = `${sites.length} site${sitesPlural} — ${humanDateRange}`;
       return (
@@ -319,7 +319,7 @@ export default function DownloadStepForm(props) {
     s3Files: () => {
       const { s3FileFetches, s3FileFetchProgress } = state;
       const isLoading = Object.keys(s3FileFetches)
-        .some(key => ['awaitingFetchCall', 'fetching'].includes(s3FileFetches[key]));
+        .some((key) => ['awaitingFetchCall', 'fetching'].includes(s3FileFetches[key]));
       const {
         value: selection,
         validValues,
@@ -370,13 +370,13 @@ export default function DownloadStepForm(props) {
           field: 'size',
           filtering: false,
           removable: false,
-          render: row => formatBytes(row.size),
+          render: (row) => formatBytes(row.size),
         },
       ];
       const debouncedFilterDispatch = debounce((filter, value) => {
         dispatch({ type: 'setS3FilesFilterValue', filter, value });
       }, 200);
-      const noFiltersApplied = Object.keys(filters).every(col => !filters[col].length);
+      const noFiltersApplied = Object.keys(filters).every((col) => !filters[col].length);
       /* eslint-disable react/jsx-one-expression-per-line */
       const postSizeError = (estimatedPostSize >= MAX_POST_BODY_SIZE) ? (
         <Grid item xs={12}>
@@ -399,7 +399,7 @@ export default function DownloadStepForm(props) {
       ) : null;
       const components = {
         Container: Box,
-        Toolbar: toolbarProps => (
+        Toolbar: (toolbarProps) => (
           <Grid container spacing={2} alignItems="flex-start" style={{ marginBottom: '24px' }}>
             <Grid item xs={12} md={6}>
               <div style={{ marginBottom: Theme.spacing(1) }}>
@@ -492,7 +492,7 @@ export default function DownloadStepForm(props) {
             {postSizeError}
           </Grid>
         ),
-        FilterRow: filterRowProps => (
+        FilterRow: (filterRowProps) => (
           <MTableFilterRow
             {...filterRowProps}
             onFilterChanged={(columnId, value) => {
@@ -505,7 +505,7 @@ export default function DownloadStepForm(props) {
               }
               if (
                 current
-                && (value.length !== current.length || value.some(v => !current.includes(v)))
+                && (value.length !== current.length || value.some((v) => !current.includes(v)))
               ) {
                 dispatch({ type: 'setS3FilesFilterValue', filter, value });
               }
@@ -631,7 +631,7 @@ export default function DownloadStepForm(props) {
       const externalHost = ExternalHost.getByProductCode(state.productData.productCode);
       if (!externalHost) { return null; }
       const hostLink = externalHost.renderLink(state.productData.productCode);
-      const availableSiteCodes = (state.productData.siteCodes || []).map(site => site.siteCode);
+      const availableSiteCodes = (state.productData.siteCodes || []).map((site) => site.siteCode);
       return (
         <div data-selenium={`download-data-dialog.step-form.external-links.${externalHost.id.toLowerCase()}`}>
           <Card className={classes.calloutBrown}>

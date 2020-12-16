@@ -10,6 +10,7 @@ import cloneDeep from 'lodash/cloneDeep';
 
 import { of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { ajax } from 'rxjs/ajax';
 
 import REMOTE_ASSETS from '../../remoteAssetsMap/remoteAssetsMap';
 import AuthService from '../NeonAuth/AuthService';
@@ -60,6 +61,7 @@ const DEFAULT_STATE = {
   isActive: false,
   isFinal: false,
   hasError: false,
+  whenFinalCalled: false,
 };
 
 // Derive values for stateSites and domainSites in state. This is a one-time mapping we
@@ -167,6 +169,9 @@ const reducer = (state, action) => {
       newState.fetches[action.asset].error = action.error;
       return newState;
 
+    case 'whenFinalCalled':
+      return { ...newState, whenFinalCalled: true };
+
     default:
       return state;
   }
@@ -198,7 +203,12 @@ const parseSitesFetchResponse = (sitesArray = []) => {
    Context Provider
 */
 const Provider = (props) => {
-  const { useCoreAuth, useCoreHeader, children } = props;
+  const {
+    children,
+    useCoreAuth,
+    useCoreHeader,
+    whenFinal,
+  } = props;
 
   const initialState = cloneDeep(DEFAULT_STATE);
   initialState.isActive = true;
@@ -211,28 +221,34 @@ const Provider = (props) => {
     initialState.fetches[DRUPAL_FOOTER_HTML].status = FETCH_STATUS.AWAITING_CALL;
   }
   const [state, dispatch] = useReducer(reducer, initialState);
+  const { isFinal, whenFinalCalled } = state;
 
   // Method to sanitize partial HTML. As delivered presently there are some markup issues that
   // throw warnings when parsed with HTMLReactParser.
-  const sanitizePartialHTML = html => html.replace(/ value=""/g, ' initialValue=""');
+  const sanitizePartialHTML = (html) => html.replace(/ value=""/g, ' initialValue=""');
 
   // Method to fetch header and/or footer partials
   const fetchPartialHTML = (key) => {
     if (!Object.keys(REMOTE_ASSETS).includes(key)) { return; }
     const { url } = REMOTE_ASSETS[key];
-    window.fetch(url, { method: 'GET', headers: { Accept: 'text/html' } })
-      .then((res) => {
-        if (res.status >= 400) { throw new Error(`${res.status} ${res.statusText}`); }
-        return res.text();
-      })
-      .then((html) => {
-        dispatch({ type: 'fetchHtmlSucceeded', asset: key, html: sanitizePartialHTML(html) });
+    ajax({
+      url,
+      method: 'GET',
+      responseType: 'text',
+    }).pipe(
+      map((response) => {
+        dispatch({
+          type: 'fetchHtmlSucceeded',
+          asset: key,
+          html: sanitizePartialHTML(response.response),
+        });
         return of(true);
-      })
-      .catch((error) => {
+      }),
+      catchError((error) => {
         dispatch({ type: 'fetchHtmlFailed', asset: key, error });
         return of(false);
-      });
+      }),
+    ).subscribe();
   };
 
   // Identify any cascading authentication fetches that require
@@ -304,6 +320,13 @@ const Provider = (props) => {
     });
   });
 
+  // Effect: call the whenFinal function prop exactly once when first finalized
+  useEffect(() => {
+    if (!isFinal || whenFinalCalled) { return; }
+    whenFinal(cloneDeep({ ...state, whenFinalCalled: true }));
+    dispatch({ type: 'whenFinalCalled' });
+  }, [isFinal, whenFinalCalled, whenFinal, state]);
+
   /**
      Render
   */
@@ -314,9 +337,7 @@ const Provider = (props) => {
   );
 };
 
-Provider.propTypes = {
-  useCoreAuth: PropTypes.bool,
-  useCoreHeader: PropTypes.bool,
+const ProviderPropTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.oneOfType([
       PropTypes.node,
@@ -324,18 +345,24 @@ Provider.propTypes = {
     ])),
     PropTypes.node,
     PropTypes.string,
-  ]).isRequired,
+  ]),
+  useCoreAuth: PropTypes.bool,
+  useCoreHeader: PropTypes.bool,
+  whenFinal: PropTypes.func,
 };
+Provider.propTypes = ProviderPropTypes;
 
 Provider.defaultProps = {
+  children: null,
   useCoreAuth: false,
   useCoreHeader: false,
+  whenFinal: () => {},
 };
 
 /**
    getWrappedComponent
 */
-const getWrappedComponent = Component => (props) => {
+const getWrappedComponent = (Component) => (props) => {
   const [{ isActive }] = useNeonContextState();
   if (!isActive) {
     return (
@@ -355,5 +382,6 @@ const NeonContext = {
   useNeonContextState,
   DEFAULT_STATE,
   getWrappedComponent,
+  ProviderPropTypes,
 };
 export default NeonContext;

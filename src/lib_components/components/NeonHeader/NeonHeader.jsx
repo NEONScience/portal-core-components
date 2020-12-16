@@ -23,7 +23,7 @@ const DRUPAL_HEADER_HTML = REMOTE_ASSETS.DRUPAL_HEADER_HTML.KEY;
 
 const AUTH_ELEMENT_ID = 'header__authentication-ui';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   skeletonHeader: {
     boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.25), 0px 1px 1px rgba(0, 0, 0, 0.25)',
   },
@@ -164,7 +164,7 @@ const NeonHeader = forwardRef((props, headerRef) => {
   // Render Drupal
   if (renderMode === 'drupal' || renderMode === 'drupal-fallback') {
     const injectAuth = !auth.useCore ? null : {
-      replace: domNode => ((domNode.attribs || {}).id !== AUTH_ELEMENT_ID ? null : (
+      replace: (domNode) => ((domNode.attribs || {}).id !== AUTH_ELEMENT_ID ? null : (
         <div id={AUTH_ELEMENT_ID} className={classes.coreAuthContainer}>
           <NeonAuth
             loginPath={NeonEnvironment.getFullAuthPath('login')}

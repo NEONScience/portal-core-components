@@ -6,7 +6,7 @@ import Container from '@material-ui/core/Container';
 
 import Theme from '../lib_components/components/Theme/Theme';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 'unset !important',
     margin: theme.spacing(2, 0),

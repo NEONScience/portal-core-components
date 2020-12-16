@@ -124,7 +124,7 @@ const renderAuth = (
         break;
     }
   };
-  let authContent: JSX.Element = <React.Fragment />;
+  let authContent: JSX.Element = <></>;
   switch (displayType) {
     case NeonAuthDisplayType.MENU:
     default:
@@ -209,9 +209,9 @@ const NeonAuth = (props: NeonAuthProps): JSX.Element => {
     authFetchCb();
   }
   return (
-    <React.Fragment>
+    <>
       {renderAuth(props, classes, isAuthenticated, showAuthWorking, isAuthWsConnected, dispatch)}
-    </React.Fragment>
+    </>
   );
 };
 

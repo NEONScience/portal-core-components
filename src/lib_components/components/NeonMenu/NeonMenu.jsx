@@ -30,7 +30,7 @@ import NeonLogo from '../../images/NSF-NEON-logo.png';
 import defaultStaticMenuItems from './menuDefaultFallback.json';
 
 const domParser = new DOMParser();
-const decodeName = name => domParser.parseFromString(name, 'text/html').documentElement.textContent;
+const decodeName = (name) => domParser.parseFromString(name, 'text/html').documentElement.textContent;
 
 /**
  * Generates the specified menu item for rc-menu (NOT material-ui)
@@ -150,7 +150,7 @@ const NeonMenu = (props) => {
     };
   }, []);
 
-  const notificationsDisabled = notifications.some(n => !n.dismissed);
+  const notificationsDisabled = notifications.some((n) => !n.dismissed);
   const notificationsColor = notificationsDisabled ? COLORS.GREY[200] : COLORS.GOLD[500];
   const notificationsContent = notifications.length ? (
     <IconButton
@@ -203,7 +203,7 @@ const NeonMenu = (props) => {
   }
 
   return (
-    <React.Fragment>
+    <>
       <div className="neon-menu__container" data-selenium="neon-menu">
         <Grid
           container
@@ -260,7 +260,7 @@ const NeonMenu = (props) => {
           <NeonDrawerMenu items={menuItems} />
         </Drawer>
       </Hidden>
-    </React.Fragment>
+    </>
   );
 };
 

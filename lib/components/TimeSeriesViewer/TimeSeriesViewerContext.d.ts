@@ -52,7 +52,7 @@ export namespace Y_AXIS_RANGE_MODE_DETAILS {
 export namespace TabComponentPropTypes {
     export const setSelectedTab: PropTypes.Validator<(...args: any[]) => any>;
     export const TAB_IDS: PropTypes.Validator<{
-        [x: string]: string | null | undefined;
+        [x: string]: import("../../types/core").Nullable<string>;
     }>;
 }
 /**

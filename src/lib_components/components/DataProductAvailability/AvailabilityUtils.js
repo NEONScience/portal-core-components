@@ -119,13 +119,13 @@ SVG.YEAR_WIDTH = (SVG.YEAR_MONTH_WIDTH * 12) - SVG.CELL_PADDING;
    into the future from right now to serve as an x-axis data set
 */
 export const TIME = {
-  getYearMonthMoment: yearMonth => (
+  getYearMonthMoment: (yearMonth) => (
     moment(`${yearMonth}-01`)
   ),
-  getNextMonth: month => (
+  getNextMonth: (month) => (
     moment.utc(`${month}-15T00:00:00Z`).add(1, 'month').format('YYYY-MM')
   ),
-  getPreviousMonth: month => (
+  getPreviousMonth: (month) => (
     moment.utc(`${month}-15T00:00:00Z`).subtract(1, 'month').format('YYYY-MM')
   ),
   CURRENT_MONTH: moment().format('YYYY-MM'),
@@ -141,7 +141,7 @@ TIME.MONTHS = Array(12)
   .fill(0)
   .map((val, idx) => (idx + 1).toString().padStart(2, '0'));
 TIME.YEAR_MONTHS = TIME.YEARS
-  .flatMap(year => TIME.MONTHS.map(month => `${year}-${month}`));
+  .flatMap((year) => TIME.MONTHS.map((month) => `${year}-${month}`));
 
 // Derive an SVG constant from TIME
 SVG.ABS_MAX_DATA_WIDTH = (2 * SVG.END_PADDING)
@@ -215,7 +215,7 @@ export const SVG_STYLES = {
 SVG_STYLES.apply = (node, styleName) => {
   if (!SVG_STYLES.styles[styleName]) { return; }
   Object.keys(SVG_STYLES.styles[styleName]).forEach((key) => {
-    const style = key.replace(/([A-Z]){1}/g, v => `-${v.toLowerCase()}`);
+    const style = key.replace(/([A-Z]){1}/g, (v) => `-${v.toLowerCase()}`);
     node.style(style, SVG_STYLES.styles[styleName][key]);
   });
 };

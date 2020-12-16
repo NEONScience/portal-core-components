@@ -13,7 +13,7 @@ import ExampleBlock from '../../../components/ExampleBlock';
 import NeonContext from './NeonContext';
 import Theme from '../Theme/Theme';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -56,7 +56,7 @@ export default function StyleGuide() {
   );
 
   return (
-    <React.Fragment>
+    <>
 
       <DocBlock>
         Many components in Portal Core Components, as well as many apps utilizing Portal Core
@@ -112,6 +112,37 @@ const MyComponent = () => {
           the NeonContext state.
         </span>
       </DocBlock>
+
+      <Divider className={classes.divider} />
+      <Typography variant="h6" component="h4" gutterBottom>When Final</Typography>
+
+      <DocBlock>
+        Pass a function to the <tt>whenFinal</tt> prop on the Provider to trigger arbitrary logic
+        exactly once when the NeonContext is finalized. This can be useful for components or pages
+        that rely on NeonContext data to be present and accessible before taking certain actions.
+      </DocBlock>
+      <DocBlock>
+        The <tt>whenFinal</tt> function can no arguments or an single optional argument representing
+        a deep copy of the finalized NeonContext state.
+      </DocBlock>
+      <CodeBlock>
+        {`
+import NeonContext from 'portal-core-components/lib/components/NeonContext';
+
+const MyComponent = () => {
+  ...
+  return (
+    <NeonContext.Provider
+      whenFinal={(finalizedStateClone) => {
+        console.log('NeonContext is Ready!', finalizedStateClone);
+      }}
+    >
+      ...
+    </NeonContext.Provider>
+  );
+};
+        `}
+      </CodeBlock>
 
       <Divider className={classes.divider} />
       <Typography variant="h6" component="h4" gutterBottom>Authentication</Typography>
@@ -240,6 +271,6 @@ export default WrappedFoo;
         developer to make add a higher order NeonContext Provider if the situation calls for it.
       </DocBlock>
 
-    </React.Fragment>
+    </>
   );
 }
