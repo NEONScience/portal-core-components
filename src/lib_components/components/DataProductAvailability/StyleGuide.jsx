@@ -22,7 +22,7 @@ import sampleProductData from '../../../sampleData/DP1.00001.001.json';
 
 import crunch from '../../../sampleData/DataProductAvailability/crunch';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -46,7 +46,7 @@ const EnhancedAvailability = () => {
   }, [initialized, setInitialized, setLoading, setAvailability]);
 
   const productIdx = !availability.products ? -1
-    : availability.products.findIndex(p => p.productCode === selectedProductCode);
+    : availability.products.findIndex((p) => p.productCode === selectedProductCode);
   const sites = productIdx === -1 ? [] : availability.products[productIdx].sites;
 
   const paperStyles = { width: '100%', padding: Theme.spacing(3) };
@@ -98,7 +98,7 @@ export default function StyleGuide() {
   );
 
   return (
-    <React.Fragment>
+    <>
 
       <DocBlock>
         A visualization of all available data for a given data product over time.
@@ -399,6 +399,6 @@ const productData = {...};
         <EnhancedAvailability />
       </ExampleBlock>
 
-    </React.Fragment>
+    </>
   );
 }

@@ -16,7 +16,7 @@ const NeonJsonLd = {
    * @param {string} url The URL to build from.
    * @return The RxJS AJAX Observable.
    */
-  getJsonLdObservable: url => NeonApi.getJsonObservable(url),
+  getJsonLdObservable: (url) => NeonApi.getJsonObservable(url),
 
   /**
    * Gets the repository JSON-LD endpoint observable.
@@ -76,7 +76,7 @@ const NeonJsonLd = {
   getJsonLdWithInjection: (url) => {
     const observable = NeonApi.getJsonObservable(url)
       .pipe(
-        map(response => NeonJsonLd.inject(response)),
+        map((response) => NeonJsonLd.inject(response)),
         catchError((err) => {
           console.error(err); // eslint-disable-line no-console
           return of('JSON-LD not found');

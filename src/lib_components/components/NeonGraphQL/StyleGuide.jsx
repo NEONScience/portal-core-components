@@ -24,7 +24,7 @@ import NeonGraphQL from './NeonGraphQL';
 
 import Theme from '../Theme/Theme';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -231,7 +231,7 @@ observable.subscribe();
   const [allDataProductsStatus, setAllDataProductsStatus] = useState(null);
   const [allDataProductsResponse, setAllDataProductsResponse] = useState(null);
   const [allDataProductsReleaseArgument, setAllDataProductsReleaseArgument] = useState(null);
-  const getAllDataProductsObservable = release => (
+  const getAllDataProductsObservable = (release) => (
     NeonGraphQL.getAllDataProducts(release).pipe(
       map((response) => {
         setAllDataProductsStatus('success');
@@ -257,7 +257,7 @@ observable.subscribe();
   const [dataProductByCodeResponse, setDataProductByCodeResponse] = useState(null);
   const getDataProductByCodeObservable = (code, release) => (
     NeonGraphQL.getDataProductByCode(code, release).pipe(
-      switchMap(resp => of(resp)),
+      switchMap((resp) => of(resp)),
     ).pipe(
       map((response) => {
         setDataProductByCodeStatus('success');
@@ -300,8 +300,8 @@ observable.subscribe();
   const [siteByCodeStatus, setSiteByCodeStatus] = useState(null);
   const [siteByCodeArgument, setSiteByCodeArgument] = useState(null);
   const [siteByCodeResponse, setSiteByCodeResponse] = useState(null);
-  const getSiteByCodeObservable = code => NeonGraphQL.getSiteByCode(code).pipe(
-    switchMap(resp => of(resp)),
+  const getSiteByCodeObservable = (code) => NeonGraphQL.getSiteByCode(code).pipe(
+    switchMap((resp) => of(resp)),
   ).pipe(
     map((response) => {
       setSiteByCodeStatus('success');
@@ -320,7 +320,7 @@ observable.subscribe();
   };
 
   return (
-    <React.Fragment>
+    <>
 
       <DocBlock>
         A utility for generating common Neon GraphQL queries succinctly.
@@ -784,6 +784,6 @@ const myComponent = () => {
         `}
       </CodeBlock>
 
-    </React.Fragment>
+    </>
   );
 }

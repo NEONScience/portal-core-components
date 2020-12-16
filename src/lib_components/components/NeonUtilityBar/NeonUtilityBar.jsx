@@ -18,7 +18,7 @@ import Theme from '../Theme/Theme';
  visual changes can be made here and appear consistently across all sites.
 */
 
-const useTabsStyles = makeStyles(theme => ({
+const useTabsStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
     minHeight: theme.spacing(3),
@@ -35,7 +35,7 @@ const useTabsStyles = makeStyles(theme => ({
   },
 }));
 
-const useTabStyles = makeStyles(theme => ({
+const useTabStyles = makeStyles((theme) => ({
   root: {
     color: '#fff',
     backgroundColor: theme.palette.secondary.main,

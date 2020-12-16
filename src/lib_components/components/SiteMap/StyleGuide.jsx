@@ -4,7 +4,7 @@ import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
-import Link from '@material-ui/core/Link';
+// import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 
 import DocBlock from '../../../components/DocBlock';
@@ -22,7 +22,7 @@ import {
   VIEWS,
 } from './SiteMapUtils';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -41,7 +41,7 @@ const propRows = [
       </div>
     ),
     description: (
-      <React.Fragment>
+      <>
         <p>
           Desired map height divided by desired map width. Setting discrete dimensions is not
           supported as Site Map instances will always try to expand to the full width of their
@@ -53,7 +53,7 @@ const propRows = [
           this prop will set aspect ratio dynamically based on viewport size (e.g. wider for larger
           viewports, more square for smaller viewports, taller for very small / phone viewports).
         </p>
-      </React.Fragment>
+      </>
     ),
   },
   {
@@ -73,7 +73,7 @@ const propRows = [
     type: 'string',
     default: 'null',
     description: (
-      <React.Fragment>
+      <>
         <p>
           A location code, as it would appear in the locations API, to initialize the focus of the
           map. This can be any site code (e.g. &quot;ABBY&quot;, &quot;CPER&quot;), domain code
@@ -85,7 +85,7 @@ const propRows = [
           If set this will override any zoom and/or center props as the focus location will
           determine the zoom and center for the map.
         </p>
-      </React.Fragment>
+      </>
     ),
   },
   {
@@ -95,7 +95,7 @@ const propRows = [
         string, one of:
         <br />
         <tt>
-          {Object.keys(BASE_LAYERS).map(k => <div key={k}>{`"${k}"`}</div>)}
+          {Object.keys(BASE_LAYERS).map((k) => <div key={k}>{`"${k}"`}</div>)}
         </tt>
       </div>
     ),
@@ -138,7 +138,7 @@ const propRows = [
       </div>
     ),
     description: (
-      <React.Fragment>
+      <>
         <p>
           Initial zoom level for the map. Min and max zoom levels are hard-coded
           to <tt>{MAP_ZOOM_RANGE[0]}</tt> and <tt>{MAP_ZOOM_RANGE[1]}</tt> respectively, so the zoom
@@ -150,7 +150,7 @@ const propRows = [
           and dimensions of the map component (i.e a larger viewport may have a closer initial
           zoom as there is more pixel space to fit all sites).
         </p>
-      </React.Fragment>
+      </>
     ),
   },
   {
@@ -188,7 +188,7 @@ const propRows = [
     type: (
       <div>
         string, one of:
-        {Object.keys(FEATURE_TYPES).filter(k => FEATURE_TYPES[k].selectable).map(k => (
+        {Object.keys(FEATURE_TYPES).filter((k) => FEATURE_TYPES[k].selectable).map((k) => (
           <div key={k} style={{ marginTop: '8px' }}>
             <tt>{`"${k}"`}</tt>
           </div>
@@ -215,7 +215,7 @@ const propRows = [
       </div>
     ),
     description: (
-      <React.Fragment>
+      <>
         <p>
           When selection is active and this prop is null there are no limits on what constitutes a
           valid selection (as long as at least one selectable item is selected). When not null this
@@ -231,7 +231,7 @@ const propRows = [
           For all numeric values for this prop only non-zero positive integers are allowed. For an
           array of two numbers the second number must be greater than (and not equal two) the first.
         </p>
-      </React.Fragment>
+      </>
     ),
   },
   {
@@ -239,7 +239,7 @@ const propRows = [
     type: 'boolean',
     default: 'false',
     description: (
-      <React.Fragment>
+      <>
         <p>
           Whether the table view of the SiteMap should be unbounded by the aspect ratio restrictions
           of the map view and be allowed to extend to arbitrarirly large vertical height. This also
@@ -250,7 +250,7 @@ const propRows = [
           It recommended to keep this false when <tt>fullScreen</tt> is true as it may make some
           table rows and the table pager impossible to reach.
         </p>
-      </React.Fragment>
+      </>
     ),
   },
   {
@@ -263,7 +263,7 @@ const propRows = [
       </div>
     ),
     description: (
-      <React.Fragment>
+      <>
         <p>
           Dynamic aspect ratio is based on window innerHeight and innerWidth. In sitautions where the
           available height or width differs this value can be used to still have a dynamic aspect
@@ -277,7 +277,7 @@ const propRows = [
           inform the aspect ratio calculation and at all viewport sizes the SiteMap should end up
           with a height that vertically fits in the scrollable area.
         </p>
-      </React.Fragment>
+      </>
     ),
   },
   {
@@ -307,7 +307,7 @@ const propRows = [
         string, one of:
         <br />
         <tt>
-          {Object.keys(VIEWS).map(k => <div key={k}>{`"${k.toLowerCase()}"`}</div>)}
+          {Object.keys(VIEWS).map((k) => <div key={k}>{`"${k.toLowerCase()}"`}</div>)}
         </tt>
       </div>
     ),
@@ -324,7 +324,7 @@ export default function StyleGuide() {
   const classes = useStyles(Theme);
 
   return (
-    <React.Fragment>
+    <>
 
       <DocBlock>
         An all-inclusive interactive map for geographically visualizing the NEON observatory at
@@ -406,6 +406,6 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
         for details and examples.
       </DocBlock>
 
-    </React.Fragment>
+    </>
   );
 }

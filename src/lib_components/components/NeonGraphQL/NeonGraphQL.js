@@ -15,7 +15,7 @@ export const DIMENSIONALITIES = {
   MANY: 'MANY',
 };
 
-const transformQuery = query => JSON.stringify({ query });
+const transformQuery = (query) => JSON.stringify({ query });
 
 /*
 query Products {
@@ -258,7 +258,7 @@ const getObservable = (query) => {
 const getObservableWith = (type = null, dimensionality = null, args = null) => {
   const argsHaveAtLeastOneDefinedKey = (
     args !== null && typeof args === 'object' && Object.keys(args).length > 0
-      && Object.keys(args).some(key => (typeof args[key] !== 'undefined'))
+      && Object.keys(args).some((key) => (typeof args[key] !== 'undefined'))
   );
   // Type and Dimensionality must exist
   if (!TYPES[type] || !DIMENSIONALITIES[dimensionality]) { return of(null); }
@@ -274,12 +274,12 @@ const NeonGraphQL = {
     DIMENSIONALITIES.ONE,
     { productCode, release },
   ),
-  getAllDataProducts: release => getObservableWith(
+  getAllDataProducts: (release) => getObservableWith(
     TYPES.DATA_PRODUCTS,
     DIMENSIONALITIES.MANY,
     { release },
   ),
-  getSiteByCode: siteCode => getObservableWith(
+  getSiteByCode: (siteCode) => getObservableWith(
     TYPES.SITES,
     DIMENSIONALITIES.ONE,
     { siteCode },
@@ -288,7 +288,7 @@ const NeonGraphQL = {
     TYPES.SITES,
     DIMENSIONALITIES.MANY,
   ),
-  getLocationByName: locationName => getObservableWith(
+  getLocationByName: (locationName) => getObservableWith(
     TYPES.LOCATIONS,
     DIMENSIONALITIES.ONE,
     { locationName },
@@ -296,7 +296,7 @@ const NeonGraphQL = {
   getManyLocationsByName: (locationNames = []) => {
     if (
       !Array.isArray(locationNames) || !locationNames.length
-        || !locationNames.every(name => typeof name === 'string')
+        || !locationNames.every((name) => typeof name === 'string')
     ) { return of(null); }
     return getObservableWith(
       TYPES.LOCATIONS,
@@ -310,13 +310,13 @@ const NeonGraphQL = {
    * @param {string} query - The raw GraphQL query
    * @return The resulting RxJS Observable from the specified query
    */
-  getGraphqlQuery: query => getObservable(transformQuery(query)),
+  getGraphqlQuery: (query) => getObservable(transformQuery(query)),
   /**
    * Builds a custom GraphQL AjaxRequest
    * @param {string} query - The raw GraphQL query
    * @return The resulting RxJS AjaxRequest
    */
-  getGraphqlAjaxRequest: query => getAjaxRequest(transformQuery(query)),
+  getGraphqlAjaxRequest: (query) => getAjaxRequest(transformQuery(query)),
 };
 
 Object.freeze(NeonGraphQL);

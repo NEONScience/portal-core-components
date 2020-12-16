@@ -48,7 +48,7 @@ import { SVG, TIME, AvailabilityPropTypes } from './AvailabilityUtils';
 /**
    Setup: CSS classes
 */
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   svg: {
     minWidth: `${SVG.MIN_WIDTH}px`,
     minHeight: `${SVG.MIN_HEIGHT}px`,
@@ -96,7 +96,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const useSiteChipStyles = makeStyles(theme => ({
+const useSiteChipStyles = makeStyles((theme) => ({
   deleteIcon: {
     marginLeft: theme.spacing(-0.25),
   },
@@ -123,7 +123,7 @@ const BasicAvailabilityInterface = (props) => {
   const SORT_METHODS = {
     states: {
       label: 'by State',
-      getSortFunction: ret => (a, b) => {
+      getSortFunction: (ret) => (a, b) => {
         const aState = allStates[allSites[a].stateCode].name;
         const bState = allStates[allSites[b].stateCode].name;
         if (aState === bState) { return (a < b ? ret[0] : ret[1]); }
@@ -132,7 +132,7 @@ const BasicAvailabilityInterface = (props) => {
     },
     domains: {
       label: 'by Domain',
-      getSortFunction: ret => (a, b) => {
+      getSortFunction: (ret) => (a, b) => {
         const aDomain = allSites[a].domainCode;
         const bDomain = allSites[b].domainCode;
         if (aDomain === bDomain) { return (a < b ? ret[0] : ret[1]); }
@@ -141,7 +141,7 @@ const BasicAvailabilityInterface = (props) => {
     },
     sites: {
       label: 'by Site',
-      getSortFunction: ret => (a, b) => (a < b ? ret[0] : ret[1]),
+      getSortFunction: (ret) => (a, b) => (a < b ? ret[0] : ret[1]),
     },
   };
   const SORT_DIRECTIONS = ['ASC', 'DESC'];
@@ -170,8 +170,8 @@ const BasicAvailabilityInterface = (props) => {
       selectable: true,
       rows: {},
       getLabel: {
-        text: key => key,
-        title: key => allSites[key].description,
+        text: (key) => key,
+        title: (key) => allSites[key].description,
       },
     },
     states: {
@@ -180,8 +180,8 @@ const BasicAvailabilityInterface = (props) => {
       selectable: true,
       rows: {},
       getLabel: {
-        text: key => ` ${key} `,
-        title: key => allStates[key].name,
+        text: (key) => ` ${key} `,
+        title: (key) => allStates[key].name,
       },
     },
     domains: {
@@ -190,8 +190,8 @@ const BasicAvailabilityInterface = (props) => {
       selectable: true,
       rows: {},
       getLabel: {
-        text: key => `${key} `,
-        title: key => allDomains[key].name,
+        text: (key) => `${key} `,
+        title: (key) => allDomains[key].name,
       },
     },
     ungrouped: {
@@ -199,7 +199,7 @@ const BasicAvailabilityInterface = (props) => {
       name: 'Ungrouped',
       selectable: false,
       getLabel: {
-        text: key => `${allSites[key].stateCode}-${allSites[key].domainCode}-${key}`,
+        text: (key) => `${allSites[key].stateCode}-${allSites[key].domainCode}-${key}`,
         title: (key) => {
           const siteTitle = allSites[key].description;
           const domainTitle = allDomains[allSites[key].domainCode].name;
@@ -210,7 +210,7 @@ const BasicAvailabilityInterface = (props) => {
     },
   };
   views.ungrouped.rows = views.sites.rows;
-  const selectableViewKeys = Object.keys(views).filter(key => views[key].selectable);
+  const selectableViewKeys = Object.keys(views).filter((key) => views[key].selectable);
 
   /**
      State: Context-Derived Stuff
@@ -231,7 +231,7 @@ const BasicAvailabilityInterface = (props) => {
 
   const { disableSelection } = props;
   const selectionEnabled = !disableSelection
-    && requiredSteps.some(step => step.key === 'sitesAndDateRange');
+    && requiredSteps.some((step) => step.key === 'sitesAndDateRange');
 
   /**
      State: Current View
@@ -259,12 +259,12 @@ const BasicAvailabilityInterface = (props) => {
   const [currentSortMethod, setCurrentSortMethod] = useState(initialSortMethod);
   const [currentSortDirection, setCurrentSortDirection] = useState(initialSortDirection);
 
-  const setSitesValue = useCallback(sitesValue => dispatchSelection({
+  const setSitesValue = useCallback((sitesValue) => dispatchSelection({
     type: 'setValidatableValue',
     key: 'sites',
     value: sitesValue,
   }), [dispatchSelection]);
-  const setDateRangeValue = useCallback(dateRangeValue => dispatchSelection({
+  const setDateRangeValue = useCallback((dateRangeValue) => dispatchSelection({
     type: 'setValidatableValue',
     key: 'dateRange',
     value: dateRangeValue,
@@ -472,7 +472,7 @@ const BasicAvailabilityInterface = (props) => {
           value={currentView}
           onChange={handleChangeView}
         >
-          {selectableViewKeys.map(key => (
+          {selectableViewKeys.map((key) => (
             <ToggleButton key={key} value={key} size="small">
               {views[key].name}
             </ToggleButton>
@@ -483,11 +483,11 @@ const BasicAvailabilityInterface = (props) => {
         <FormControl variant="filled">
           <Select
             value={currentView}
-            onChange={event => handleChangeView(event, event.target.value)}
+            onChange={(event) => handleChangeView(event, event.target.value)}
             input={<OutlinedInput margin="dense" className={selectionEnabled ? null : classes.xsSelect} />}
             variant="filled"
           >
-            {selectableViewKeys.map(key => (
+            {selectableViewKeys.map((key) => (
               <MenuItem key={key} value={key}>{views[key].name}</MenuItem>
             ))}
           </Select>
@@ -520,7 +520,7 @@ const BasicAvailabilityInterface = (props) => {
             onChange={handleChangeSortMethod}
             data-selenium="data-product-availability.sort-options.method"
           >
-            {Object.keys(SORT_METHODS).map(method => (
+            {Object.keys(SORT_METHODS).map((method) => (
               <MenuItem
                 key={method}
                 value={method}
@@ -616,7 +616,7 @@ const BasicAvailabilityInterface = (props) => {
                 label="Start"
                 data-selenium="data-product-availability.date-range-start"
                 value={TIME.getYearMonthMoment(dateRange.value[0])}
-                onChange={newDate => handleChangeStartDate(newDate)}
+                onChange={(newDate) => handleChangeStartDate(newDate)}
                 minDate={TIME.getYearMonthMoment(dateRange.validValues[0])}
                 maxDate={TIME.getYearMonthMoment(dateRange.value[1])}
                 style={{ marginRight: Theme.spacing(1.5) }}
@@ -626,7 +626,7 @@ const BasicAvailabilityInterface = (props) => {
                 label="End"
                 data-selenium="data-product-availability.date-range-end"
                 value={TIME.getYearMonthMoment(dateRange.value[1])}
-                onChange={newDate => handleChangeEndDate(newDate)}
+                onChange={(newDate) => handleChangeEndDate(newDate)}
                 minDate={TIME.getYearMonthMoment(dateRange.value[0])}
                 maxDate={TIME.getYearMonthMoment(dateRange.validValues[1])}
               />

@@ -38,7 +38,7 @@ export default function parseTimeSeriesData(payload = {}) {
       return Number.isNaN(cast) ? null : cast;
     };
     const DATA_TYPE_SETTERS = {
-      dateTime: v => ((typeof v === 'string') ? v.replace(/"/g, '') : v),
+      dateTime: (v) => ((typeof v === 'string') ? v.replace(/"/g, '') : v),
       real: castFloat,
       'signed integer': castInt,
       'unsigned integer': castInt,
@@ -48,7 +48,7 @@ export default function parseTimeSeriesData(payload = {}) {
     // Expands a nullable high/low value range based on a single new value
     const getUpdatedValueRange = (existingRange, newValue) => {
       const arrayVal = Array.isArray(newValue) ? newValue : [newValue];
-      if (arrayVal.some(v => typeof v !== 'number')) { return existingRange; }
+      if (arrayVal.some((v) => typeof v !== 'number')) { return existingRange; }
       const newRange = [existingRange[0], existingRange[1]];
       arrayVal.forEach((v) => {
         if (newRange[0] === null || newRange[0] > v) { newRange[0] = v; }
@@ -70,7 +70,7 @@ export default function parseTimeSeriesData(payload = {}) {
       const { dataType } = variables[fieldName];
       const field = {
         fieldName,
-        setType: DATA_TYPE_SETTERS[dataType] ? DATA_TYPE_SETTERS[dataType] : v => v,
+        setType: DATA_TYPE_SETTERS[dataType] ? DATA_TYPE_SETTERS[dataType] : (v) => v,
       };
       fields.push(field);
       series[fieldName] = {
@@ -105,10 +105,10 @@ export default function parseTimeSeriesData(payload = {}) {
 
     // Loop across all numeric non-quality-flag series again to calculate series variance
     Object.keys(series)
-      .filter(fieldName => !/QF$/.test(fieldName) && series[fieldName].count > 0)
+      .filter((fieldName) => !/QF$/.test(fieldName) && series[fieldName].count > 0)
       .forEach((fieldName) => {
         const { dataType } = variables[fieldName];
-        const setType = DATA_TYPE_SETTERS[dataType] ? DATA_TYPE_SETTERS[dataType] : v => v;
+        const setType = DATA_TYPE_SETTERS[dataType] ? DATA_TYPE_SETTERS[dataType] : (v) => v;
         if (!['real', 'signed integer', 'unsigned integer'].includes(dataType)) { return; }
         const mean = series[fieldName].sum / series[fieldName].count;
         let sumOfSquares = 0;

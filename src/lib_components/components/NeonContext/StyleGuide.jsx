@@ -13,7 +13,7 @@ import ExampleBlock from '../../../components/ExampleBlock';
 import NeonContext from './NeonContext';
 import Theme from '../Theme/Theme';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -56,7 +56,7 @@ export default function StyleGuide() {
   );
 
   return (
-    <React.Fragment>
+    <>
 
       <DocBlock>
         Many components in Portal Core Components, as well as many apps utilizing Portal Core
@@ -271,6 +271,6 @@ export default WrappedFoo;
         developer to make add a higher order NeonContext Provider if the situation calls for it.
       </DocBlock>
 
-    </React.Fragment>
+    </>
   );
 }

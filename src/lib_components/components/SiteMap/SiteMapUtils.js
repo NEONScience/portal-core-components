@@ -1072,7 +1072,7 @@ Object.keys(FEATURES).forEach((key) => { FEATURES[key].KEY = key; });
 // A mapping of feature key to minZoom for GRAPHQL_LOCATIONS_API dataSource features
 const FEATURES_TO_MINZOOM_MAP = {};
 Object.keys(FEATURES)
-  .filter(featureKey => (
+  .filter((featureKey) => (
     FEATURES[featureKey].dataSource === FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API
   ))
   .forEach((featureKey) => {
@@ -1125,7 +1125,7 @@ export const calculateFeatureAvailability = (state) => {
       features: {
         ...state.filters.features,
         available: Object.fromEntries(
-          Object.entries(FEATURES).map(entry => [entry[0], featureIsAvailable(entry[1])]),
+          Object.entries(FEATURES).map((entry) => [entry[0], featureIsAvailable(entry[1])]),
         ),
       },
     },
@@ -1133,12 +1133,12 @@ export const calculateFeatureAvailability = (state) => {
   // Update table focus to reflect availability if need be
   Object.keys(state.table.availableFeatureTypes).forEach((featureType) => {
     newState.table.availableFeatureTypes[featureType] = Object.keys(FEATURES)
-      .filter(featureKey => FEATURES[featureKey].type === featureType)
-      .some(featureKey => newState.filters.features.available[featureKey]);
+      .filter((featureKey) => FEATURES[featureKey].type === featureType)
+      .some((featureKey) => newState.filters.features.available[featureKey]);
   });
   if (!newState.table.availableFeatureTypes[newState.table.focus]) {
     const available = Object.keys(newState.table.availableFeatureTypes)
-      .filter(k => newState.table.availableFeatureTypes[k]);
+      .filter((k) => newState.table.availableFeatureTypes[k]);
     newState.table.focus = available[0] || state.table.focus;
   }
   return newState;
@@ -1371,7 +1371,7 @@ export const DEFAULT_STATE = {
   view: {
     current: null,
     initialized: Object.fromEntries(
-      Object.keys(VIEWS).map(view => [view, false]),
+      Object.keys(VIEWS).map((view) => [view, false]),
     ),
   },
   neonContextHydrated: false, // Whether NeonContext data has been one-time hydrated into state
@@ -1433,13 +1433,13 @@ export const DEFAULT_STATE = {
   featureDataFetchesHasAwaiting: false, // Boolean: track whether any data fetches are awaiting call
   featureDataFetches: Object.fromEntries(
     Object.keys(FEATURE_DATA_SOURCES)
-      .filter(dataSource => dataSource !== FEATURE_DATA_SOURCES.NEON_CONTEXT)
-      .map(dataSource => [dataSource, {}]),
+      .filter((dataSource) => dataSource !== FEATURE_DATA_SOURCES.NEON_CONTEXT)
+      .map((dataSource) => [dataSource, {}]),
   ),
   featureData: Object.fromEntries(
     Object.keys(FEATURE_TYPES)
-      .filter(featureType => featureType !== FEATURE_TYPES.SAMPLING_POINTS.KEY)
-      .map(featureType => [featureType, {}]),
+      .filter((featureType) => featureType !== FEATURE_TYPES.SAMPLING_POINTS.KEY)
+      .map((featureType) => [featureType, {}]),
   ),
   sites: {}, // Sites data is split into 4 features making it hard to look up, so extra refs here
   filters: {
@@ -1448,7 +1448,7 @@ export const DEFAULT_STATE = {
     features: {
       available: {},
       visible: Object.fromEntries( // key/bool map of which available features are visible
-        Object.keys(FEATURES).map(key => [key, !featureIsHiddenByDefault(key)]),
+        Object.keys(FEATURES).map((key) => [key, !featureIsHiddenByDefault(key)]),
       ),
       collapsed: new Set(), // Collapsed (not expanded) since the default for features is expanded
     },
@@ -1461,7 +1461,7 @@ export const DEFAULT_STATE = {
 
 // Initialize featureData and featureDataFetches objects for all features that have a dataSource
 Object.keys(FEATURES)
-  .filter(featureKey => (
+  .filter((featureKey) => (
     Object.keys(FEATURE_DATA_SOURCES).includes(FEATURES[featureKey].dataSource)
   ))
   .forEach((featureKey) => {
@@ -1530,8 +1530,8 @@ export const hydrateNeonContextData = (state, neonContextData) => {
   Object.keys(neonContextData.sites).forEach((siteCode) => {
     newState.sites[siteCode] = { ...neonContextData.sites[siteCode] };
     const featureKey = Object.keys(FEATURES)
-      .filter(key => FEATURES[key].type === FEATURE_TYPES.SITES.KEY)
-      .find(key => (
+      .filter((key) => FEATURES[key].type === FEATURE_TYPES.SITES.KEY)
+      .find((key) => (
         FEATURES[key].attributes.type === neonContextData.sites[siteCode].type
           && FEATURES[key].attributes.terrain === neonContextData.sites[siteCode].terrain
       )) || null;
@@ -1573,7 +1573,9 @@ const SelectionLimitPropType = (props, propName) => {
     return null;
   }
   if (Array.isArray(prop)) {
-    if (prop.length !== 2 || !prop.every(x => Number.isInteger(x) && x > 0) || prop[0] >= prop[1]) {
+    if (
+      prop.length !== 2 || !prop.every((x) => Number.isInteger(x) && x > 0) || prop[0] >= prop[1]
+    ) {
       return new Error(
         // eslint-disable-next-line max-len
         `When setting ${propName} as an array it must contain exactly two distinct non-zero positive integers in ascending order (e.g. [2, 5])`,
@@ -1592,7 +1594,7 @@ const SelectionLimitPropType = (props, propName) => {
 
 export const SITE_MAP_PROP_TYPES = {
   // Top-level props
-  view: PropTypes.oneOf(Object.keys(VIEWS).map(k => k.toLowerCase())),
+  view: PropTypes.oneOf(Object.keys(VIEWS).map((k) => k.toLowerCase())),
   aspectRatio: PropTypes.number,
   fullscreen: PropTypes.bool,
   unusableVerticalSpace: PropTypes.number,
@@ -1605,7 +1607,7 @@ export const SITE_MAP_PROP_TYPES = {
   // Initial map focus (overrides mapCenter and mapZoom)
   location: PropTypes.string,
   // Selection props
-  selection: PropTypes.oneOf(Object.keys(FEATURE_TYPES).filter(k => FEATURE_TYPES[k].selectable)),
+  selection: PropTypes.oneOf(Object.keys(FEATURE_TYPES).filter((k) => FEATURE_TYPES[k].selectable)),
   selectedItems: PropTypes.arrayOf(PropTypes.string),
   validItems: PropTypes.arrayOf(PropTypes.string),
   selectionLimit: SelectionLimitPropType,
@@ -1674,10 +1676,10 @@ const getZoomedIcon = (
   // Adjust icon, size, and anchor if selected (and a different "selected" icon is available)
   if (featureHasIcon && selection === SELECTION_STATUS.SELECTED && feature.iconSelectedSvg) {
     iconUrl = feature.iconSelectedSvg;
-    iconSize = iconSize.map(d => d + SELECTED_ICON_OFFSET);
-    iconAnchor = iconAnchor.map(d => d + (SELECTED_ICON_OFFSET / 2));
-    shadowSize = shadowUrl ? shadowSize.map(d => d + SELECTED_ICON_OFFSET) : null;
-    shadowAnchor = shadowUrl ? shadowAnchor.map(d => d + (SELECTED_ICON_OFFSET / 2)) : null;
+    iconSize = iconSize.map((d) => d + SELECTED_ICON_OFFSET);
+    iconAnchor = iconAnchor.map((d) => d + (SELECTED_ICON_OFFSET / 2));
+    shadowSize = shadowUrl ? shadowSize.map((d) => d + SELECTED_ICON_OFFSET) : null;
+    shadowAnchor = shadowUrl ? shadowAnchor.map((d) => d + (SELECTED_ICON_OFFSET / 2)) : null;
     popupAnchor[1] -= (SELECTED_ICON_OFFSET / 2);
   }
   // Determine Icon Scale
@@ -1690,14 +1692,14 @@ const getZoomedIcon = (
   const iconProps = {
     iconUrl,
     iconRetinaUrl: iconUrl,
-    iconSize: iconSize.map(x => x * scale),
-    iconAnchor: iconAnchor.map(x => x * scale),
-    popupAnchor: popupAnchor.map(x => x * scale),
+    iconSize: iconSize.map((x) => x * scale),
+    iconAnchor: iconAnchor.map((x) => x * scale),
+    popupAnchor: popupAnchor.map((x) => x * scale),
   };
   if (shadowUrl && shadowSize && shadowAnchor) {
     iconProps.shadowUrl = shadowUrl;
-    iconProps.shadowSize = shadowSize.map(x => x * scale);
-    iconProps.shadowAnchor = shadowAnchor.map(x => x * scale);
+    iconProps.shadowSize = shadowSize.map((x) => x * scale);
+    iconProps.shadowAnchor = shadowAnchor.map((x) => x * scale);
   }
   return new L.Icon(iconProps);
 };
@@ -1713,7 +1715,7 @@ export const getZoomedIcons = (zoom) => {
   ];
   const icons = {};
   Object.keys(FEATURES)
-    .filter(key => (
+    .filter((key) => (
       featureTypes.includes(FEATURES[key].type) && FEATURES[key].iconSvg
         && FEATURES[key].iconShape && LOCATION_ICON_SVG_SHAPES[FEATURES[key].iconShape]
     ))
@@ -1788,8 +1790,8 @@ export const getMapStateForFocusLocation = (state = {}) => {
     newState.map.zoom = (statesData[current] || {}).zoom || null;
   } else {
     const featureKey = Object.keys(FEATURES)
-      .filter(key => FEATURES[key].matchLocationType)
-      .find(key => (new RegExp(FEATURES[key].matchLocationType)).test(type));
+      .filter((key) => FEATURES[key].matchLocationType)
+      .find((key) => (new RegExp(FEATURES[key].matchLocationType)).test(type));
     if (featureKey) {
       if (FEATURES[featureKey].focusZoom) {
         newState.map.zoom = FEATURES[featureKey].focusZoom;
@@ -1831,17 +1833,17 @@ export const getDynamicAspectRatio = (unusableVerticalSpace = 0) => {
   const buffer = 100; // Approximate height of the filters row and a bit of margin
   const usableVericalSpace = window.innerHeight + buffer - unusableVerticalSpace;
   const windowAspectRatio = Math.max(usableVericalSpace, 0) / (window.innerWidth || 1);
-  const arIdx = dynamicAspectRatios.findIndex(ar => ar < windowAspectRatio);
+  const arIdx = dynamicAspectRatios.findIndex((ar) => ar < windowAspectRatio);
   return arIdx === -1
     ? dynamicAspectRatios[dynamicAspectRatios.length - 1]
     : dynamicAspectRatios[arIdx];
 };
 
-export const boundsAreValid = bounds => (
+export const boundsAreValid = (bounds) => (
   typeof bounds === 'object' && bounds !== null
-    && Object.keys(bounds).every(key => (
+    && Object.keys(bounds).every((key) => (
       ['lat', 'lng'].includes(key) && Array.isArray(bounds[key]) && bounds[key].length === 2
-        && bounds[key].every(v => typeof v === 'number') && bounds[key][1] > bounds[key][0]
+        && bounds[key].every((v) => typeof v === 'number') && bounds[key][1] > bounds[key][0]
     ))
 );
 
@@ -1865,7 +1867,7 @@ export const calculateLocationsInBounds = (
   // This function flattens a geometry object to just coordinates so we can check if a boundary
   // is in the map. NOTE: extendPoints does not work with boundaries, only solitary points.
   const flatten = (items) => {
-    const isCoord = c => Array.isArray(c) && c.length === 2 && c.every(x => Number.isFinite(x));
+    const isCoord = (c) => Array.isArray(c) && c.length === 2 && c.every((x) => Number.isFinite(x));
     const flat = [];
     items.forEach((item) => {
       if (Array.isArray(item) && !isCoord(item)) {
@@ -1893,14 +1895,14 @@ export const calculateLocationsInBounds = (
     }
     if (loc.geometry && loc.geometry.coordinates) {
       const flatCoords = flatten(loc.geometry.coordinates);
-      return flatCoords.some(coord => (
+      return flatCoords.some((coord) => (
         coord[0] >= extendedBounds.lat[0] && coord[0] <= extendedBounds.lat[1]
           && coord[1] >= extendedBounds.lng[0] && coord[1] <= extendedBounds.lng[1]
       ));
     }
     return false;
   };
-  return Object.keys(locations).filter(locId => isInBounds(locations[locId]));
+  return Object.keys(locations).filter((locId) => isInBounds(locations[locId]));
 };
 
 export const deriveFullObservatoryZoomLevel = (mapRef) => {
@@ -1909,6 +1911,6 @@ export const deriveFullObservatoryZoomLevel = (mapRef) => {
   const container = mapRef.current.container.parentElement;
   const divisor = (23 * 8);
   const minorDim = Math.min(container.clientWidth / divisor, container.clientHeight / divisor);
-  const derivedZoom = [1, 2, 4, 6, 11].findIndex(m => m > minorDim);
+  const derivedZoom = [1, 2, 4, 6, 11].findIndex((m) => m > minorDim);
   return derivedZoom === -1 ? FALLBACK_ZOOM : derivedZoom;
 };

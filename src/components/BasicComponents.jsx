@@ -36,7 +36,7 @@ import DocBlock from './DocBlock';
 
 import Theme from '../lib_components/components/Theme/Theme';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -85,7 +85,7 @@ export default function BasicComponents() {
   const styleGuideUrl = 'https://www.figma.com/proto/Oppe8meMyYmzaSeEpXeSfZ/NEON---Styleguide?node-id=736%3A3056&scaling=scale-down-width';
 
   return (
-    <React.Fragment>
+    <>
 
       <DocBlock>
         This page contains examples of all stock Material UI components with NEON Theme style
@@ -414,7 +414,7 @@ export default function BasicComponents() {
         <div style={{ width: 300, marginRight: '48px' }}>
           <Slider
             defaultValue={30}
-            getAriaValueText={value => `${value} units`}
+            getAriaValueText={(value) => `${value} units`}
             valueLabelDisplay="auto"
             marks={marks}
             min={10}
@@ -423,7 +423,7 @@ export default function BasicComponents() {
           />
           <Slider
             defaultValue={[50, 90]}
-            getAriaValueText={value => `${value} units`}
+            getAriaValueText={(value) => `${value} units`}
             valueLabelDisplay="auto"
             marks={marks}
             min={10}
@@ -432,7 +432,7 @@ export default function BasicComponents() {
           />
           <Slider
             defaultValue={[70, 100]}
-            getAriaValueText={value => `${value} units`}
+            getAriaValueText={(value) => `${value} units`}
             valueLabelDisplay="auto"
             marks={marks}
             min={10}
@@ -442,7 +442,7 @@ export default function BasicComponents() {
         </div>
         <Slider
           defaultValue={30}
-          getAriaValueText={value => `${value} units`}
+          getAriaValueText={(value) => `${value} units`}
           valueLabelDisplay="auto"
           marks={marks}
           min={10}
@@ -452,7 +452,7 @@ export default function BasicComponents() {
         />
         <Slider
           defaultValue={[50, 90]}
-          getAriaValueText={value => `${value} units`}
+          getAriaValueText={(value) => `${value} units`}
           valueLabelDisplay="auto"
           marks={marks}
           min={10}
@@ -462,7 +462,7 @@ export default function BasicComponents() {
         />
         <Slider
           defaultValue={[70, 100]}
-          getAriaValueText={value => `${value} units`}
+          getAriaValueText={(value) => `${value} units`}
           valueLabelDisplay="auto"
           marks={marks}
           min={10}
@@ -517,7 +517,7 @@ export default function BasicComponents() {
         </Tooltip>
         <Tooltip
           title={(
-            <React.Fragment>
+            <>
               <div>
                 An interactive tooltip that contains HTML including lists and links:
               </div>
@@ -533,7 +533,7 @@ export default function BasicComponents() {
               <div>
                 <a href="/">Another link to get more info.</a>
               </div>
-            </React.Fragment>
+            </>
           )}
           interactive
         >
@@ -577,6 +577,6 @@ export default function BasicComponents() {
         </Typography>
       </div>
 
-    </React.Fragment>
+    </>
   );
 }

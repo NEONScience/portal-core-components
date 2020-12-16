@@ -390,7 +390,7 @@ const NeonPage = (props) => {
   const hasSidebar = hasSidebarContent || hasSidebarLinks;
   // sidebarLinksAsStandaloneChildren can only be true if all sidebar links have a defined component
   const sidebarLinksAsStandaloneChildren = hasSidebarLinks && sidebarLinksAsStandaloneChildrenProp
-    ? sidebarLinks.every(link => link.component)
+    ? sidebarLinks.every((link) => link.component)
     : false;
   const sidebarHashMap = !hasSidebarLinks ? {} : Object.fromEntries(
     sidebarLinks.map((link, idx) => [link.hash || '#', idx]),
@@ -450,7 +450,7 @@ const NeonPage = (props) => {
     }
     // Set up event listener / handler for user-input scroll events for standard scrolling pages
     const handleScroll = () => {
-      const scrollBreaks = sidebarLinks.map(link => ({
+      const scrollBreaks = sidebarLinks.map((link) => ({
         y: getSidebarLinkScrollPosition(link.hash || '#'),
         hash: link.hash || '#',
       }));
@@ -553,14 +553,14 @@ const NeonPage = (props) => {
   };
 
   const handleHideNotifications = () => {
-    const updatedDismissals = notifications.map(n => n.id);
+    const updatedDismissals = notifications.map((n) => n.id);
     cookies.set('dismissed-notifications', updatedDismissals, { path: '/', maxAge: 86400 });
-    setNotifications(notifications.map(n => ({ ...n, dismissed: true })));
+    setNotifications(notifications.map((n) => ({ ...n, dismissed: true })));
   };
 
   const handleShowNotifications = () => {
     cookies.remove('dismissed-notifications');
-    setNotifications(notifications.map(n => ({ ...n, dismissed: false })));
+    setNotifications(notifications.map((n) => ({ ...n, dismissed: false })));
   };
 
   /**
@@ -595,7 +595,7 @@ const NeonPage = (props) => {
       titleString = sidebarLink.pageTitle || sidebarLink.name;
     }
     return (
-      <React.Fragment>
+      <>
         <Typography
           data-selenium="neon-page.title"
           variant="h3"
@@ -614,7 +614,7 @@ const NeonPage = (props) => {
             {subtitle}
           </Typography>
         ) : null}
-      </React.Fragment>
+      </>
     );
   };
 
@@ -635,7 +635,7 @@ const NeonPage = (props) => {
     </Breadcrumbs>
   ));
 
-  const renderOverlay = overlayChildren => (
+  const renderOverlay = (overlayChildren) => (
     <Backdrop open>
       <Paper className={classes.backdropPaper}>
         {overlayChildren}
@@ -644,7 +644,7 @@ const NeonPage = (props) => {
   );
 
   const renderLoading = () => (!loading || error ? null : renderOverlay(
-    <React.Fragment>
+    <>
       <Typography variant="h5" component="h3" gutterBottom>
         {loading}
       </Typography>
@@ -653,16 +653,16 @@ const NeonPage = (props) => {
       ) : (
         <CircularProgress variant="static" value={progress} />
       )}
-    </React.Fragment>,
+    </>,
   ));
 
   const renderError = () => (!error ? null : renderOverlay(
-    <React.Fragment>
+    <>
       <ErrorIcon fontSize="large" color="error" />
       <Typography variant="h5" component="h3" style={{ marginTop: Theme.spacing(1) }}>
         {error}
       </Typography>
-    </React.Fragment>,
+    </>,
   ));
 
   const renderSidebar = () => {
@@ -675,11 +675,11 @@ const NeonPage = (props) => {
     // Arbitrary Content Sidebar (no automatic skeleton)
     if (hasSidebarContent) {
       return (
-        <React.Fragment>
+        <>
           <div ref={sidebarRef} className={sidebarClassName} style={sidebarContainerStyle}>
             {sidebarContent}
           </div>
-        </React.Fragment>
+        </>
       );
     }
     // Render Sidebar Title
@@ -688,14 +688,14 @@ const NeonPage = (props) => {
       return (
         <div className={classes.sidebarTitlesContainer}>
           {loading || error ? (
-            <React.Fragment>
+            <>
               <Skeleton width={200} height={22} style={{ marginBottom: Theme.spacing(1) }} />
               {!sidebarSubtitle ? null : (
                 <Skeleton width={120} height={16} style={{ marginBottom: Theme.spacing(1) }} />
               )}
-            </React.Fragment>
+            </>
           ) : (
-            <React.Fragment>
+            <>
               <Typography variant="h5" component="h3" className={classes.sidebarTitle}>
                 {sidebarTitle || title}
               </Typography>
@@ -704,7 +704,7 @@ const NeonPage = (props) => {
                   {sidebarSubtitle}
                 </Typography>
               )}
-            </React.Fragment>
+            </>
           )}
         </div>
       );
@@ -747,12 +747,12 @@ const NeonPage = (props) => {
       );
     };
     const fullLinks = (
-      <React.Fragment>
+      <>
         <div
           ref={sidebarLinksContainerRef}
           className={classes.sidebarLinksContainer}
         >
-          {sidebarLinks.map(link => renderLink(link))}
+          {sidebarLinks.map((link) => renderLink(link))}
         </div>
         {belowMd ? null : (
           <Divider
@@ -760,7 +760,7 @@ const NeonPage = (props) => {
             style={{ marginBottom: '0px', ...dividerStyle }}
           />
         )}
-      </React.Fragment>
+      </>
     );
     const currentLinkOnly = (
       <div className={classes.sidebarLinksContainer}>
@@ -784,10 +784,10 @@ const NeonPage = (props) => {
           </div>
           <Divider className={classes.sidebarDivider} style={{ ...dividerStyle }} />
           {(sidebarLinksAdditionalContent && (!belowMd || sidebarExpanded)) ? (
-            <React.Fragment>
+            <>
               {sidebarLinksAdditionalContent}
               <Divider className={classes.sidebarDivider} style={{ ...dividerStyle }} />
-            </React.Fragment>
+            </>
           ) : null}
           {belowMd && !sidebarExpanded ? currentLinkOnly : fullLinks}
         </div>

@@ -27,7 +27,7 @@ import UserCard from './UserCard';
 const NEON_SSO_COOKIE_NAME: string = 'X-NEON-SSO';
 const ALLOW_SSO_TOGGLE: boolean = false;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -57,11 +57,11 @@ const propRows = [
       </div>
     ),
     description: (
-      <React.Fragment>
+      <>
         <p>
           Controls the login flow type.
         </p>
-      </React.Fragment>
+      </>
     ),
   },
   {
@@ -76,11 +76,11 @@ const propRows = [
       </div>
     ),
     description: (
-      <React.Fragment>
+      <>
         <p>
           Controls the logout flow type.
         </p>
-      </React.Fragment>
+      </>
     ),
   },
   {
@@ -93,11 +93,11 @@ const propRows = [
       </div>
     ),
     description: (
-      <React.Fragment>
+      <>
         <p>
           Controls the display of the authentication component.
         </p>
-      </React.Fragment>
+      </>
     ),
   },
 ];
@@ -149,7 +149,7 @@ const renderSilentAuthSection = (
   classes: Record<string, string>,
   containerStyle: CSSProperties,
 ): JSX.Element => {
-  let ssoToggleContent: JSX.Element = (<React.Fragment />);
+  let ssoToggleContent: JSX.Element = (<></>);
   if (ALLOW_SSO_TOGGLE) {
     ssoToggleContent = (
       <ExampleBlock>
@@ -260,7 +260,7 @@ export default function StyleGuide() {
     justifyContent: 'center',
   };
   return (
-    <React.Fragment>
+    <>
 
       <DocBlock>
         A module for standardized access to authentication functionality and UI elements.
@@ -333,6 +333,6 @@ import NeonEnvironment from 'portal-core-components/lib/components/NeonEnvironme
         <PropsTable props={propRows} />
       </DocBlock>
 
-    </React.Fragment>
+    </>
   );
 }

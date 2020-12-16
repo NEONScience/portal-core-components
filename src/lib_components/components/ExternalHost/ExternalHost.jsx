@@ -297,7 +297,7 @@ const externalHosts = {
     hostDataVariety: 'Raw sequence data',
     getProductLinks: (productCode = '') => {
       if (!externalProducts[productCode]) { return []; }
-      return externalProducts[productCode].searches.map(search => ({
+      return externalProducts[productCode].searches.map((search) => ({
         key: search.query,
         node: renderExternalHostLink(
           `http://www.boldsystems.org/index.php/Public_SearchTerms?query=${search.query}`,
@@ -318,7 +318,7 @@ const externalHosts = {
     linkType: LINK_TYPES.BY_PRODUCT,
     getProductLinks: (productCode = '') => {
       if (!externalProducts[productCode]) { return []; }
-      return externalProducts[productCode].projects.map(project => ({
+      return externalProducts[productCode].projects.map((project) => ({
         key: project.id,
         node: renderExternalHostLink(
           `https://www.mg-rast.org/mgmain.html?mgpage=project&project=${project.id}`,

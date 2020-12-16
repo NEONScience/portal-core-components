@@ -22,7 +22,7 @@ import sampleProductData1 from '../../../sampleData/DP1.00001.001.json';
 import sampleProductData2 from '../../../sampleData/DP1.00004.001.json';
 import sampleProductData3 from '../../../sampleData/DP1.00001.001.release.json';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -44,7 +44,7 @@ const ListSitesComponent = () => {
 const AlphaSitesComponent = () => {
   const [{ sites }, dispatch] = DownloadDataContext.useDownloadDataState();
   const handleSelectSitesByLetter = (letter) => {
-    const newSites = sites.validValues.filter(site => (
+    const newSites = sites.validValues.filter((site) => (
       site.toLowerCase().startsWith(letter.toLowerCase())
     ));
     dispatch({
@@ -57,7 +57,7 @@ const AlphaSitesComponent = () => {
   return (
     <div>
       <b>Select all sites starting with a given letter:</b>
-      {letters.map(letter => (
+      {letters.map((letter) => (
         <button
           type="button"
           key={letter}
@@ -130,7 +130,7 @@ const MyAppComponent = () => {
 
   const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
   const handleSelectSitesByLetter = (letter) => {
-    const newSites = myAppState.downloadState.sites.validValues.filter(site => (
+    const newSites = myAppState.downloadState.sites.validValues.filter((site) => (
       site.toLowerCase().startsWith(letter.toLowerCase())
     ));
     myAppDispatch({
@@ -143,7 +143,7 @@ const MyAppComponent = () => {
   return (
     <div>
       Workflow in one button gets applied to the other through higher-order state:
-      {products.map(productData => (
+      {products.map((productData) => (
         <div key={productData.productCode} style={{ marginBottom: '20px' }}>
           <hr />
           <DownloadDataContext.Provider
@@ -165,7 +165,7 @@ const MyAppComponent = () => {
         </div>
         <br />
         <b>Select all sites starting with a given letter:</b>
-        {letters.map(letter => (
+        {letters.map((letter) => (
           <button
             type="button"
             key={letter}
@@ -214,7 +214,7 @@ export default function StyleGuide() {
   );
 
   return (
-    <React.Fragment>
+    <>
 
       <DocBlock>
         The Download Data Context is a component designed to encapsulate all state
@@ -690,6 +690,6 @@ const MyAppComponent = () => {
         `}
       </CodeBlock>
 
-    </React.Fragment>
+    </>
   );
 }

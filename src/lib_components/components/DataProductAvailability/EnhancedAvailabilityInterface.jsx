@@ -50,7 +50,7 @@ const preStyle = {
 /**
    Setup: CSS classes
 */
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   svg: {
     minWidth: `${SVG.MIN_WIDTH}px`,
     minHeight: `${SVG.MIN_HEIGHT}px`,
@@ -178,7 +178,7 @@ const EnhancedAvailabilityInterface = (props) => {
           value={breakouts}
           onChange={handleChangeBreakouts}
         >
-          {validBreakouts.map(key => (
+          {validBreakouts.map((key) => (
             <ToggleButton key={key} value={key} size="small">
               {key}
             </ToggleButton>
@@ -217,7 +217,7 @@ const EnhancedAvailabilityInterface = (props) => {
             <MenuItem key="--" value="n/a" disabled>
               --
             </MenuItem>
-            {validBreakouts.map(method => (
+            {validBreakouts.map((method) => (
               <MenuItem key={method} value={method}>
                 {`${method.substr(0, 1).toUpperCase()}${method.substr(1)}`}
               </MenuItem>

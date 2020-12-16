@@ -149,7 +149,7 @@ const NeonApi = {
    * @param {string} release The release tag to get
    * @return The RxJS Ajax Observable
    */
-  getReleaseObservable: release => (
+  getReleaseObservable: (release) => (
     getJsonObservable(`${NeonEnvironment.getFullApiPath('releases')}/${release}`)
   ),
 
@@ -163,7 +163,7 @@ const NeonApi = {
    * @param {string} siteCode The site code to get for.
    * @return The RxJS Ajax Observable
    */
-  getSiteJsonObservable: siteCode => (
+  getSiteJsonObservable: (siteCode) => (
     getJsonObservable(`${NeonEnvironment.getFullApiPath('sites')}/${siteCode}`)
   ),
 
@@ -172,7 +172,7 @@ const NeonApi = {
    * @param {string} siteCode The site code to get complete hierarchy for.
    * @return The RxJS Ajax Observable
    */
-  getSiteLocationHierarchyObservable: siteCode => (
+  getSiteLocationHierarchyObservable: (siteCode) => (
     getJsonObservable(`${NeonEnvironment.getFullApiPath('locations')}/${siteCode}?hierarchy=true`)
   ),
 
@@ -181,7 +181,7 @@ const NeonApi = {
    * @param {string} location The named location to fetch.
    * @return The RxJS Ajax Observable
    */
-  getLocationObservable: location => (
+  getLocationObservable: (location) => (
     getJsonObservable(`${NeonEnvironment.getFullApiPath('locations')}/${location}`)
   ),
 

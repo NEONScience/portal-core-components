@@ -28,7 +28,7 @@ import SelectAllIcon from '@material-ui/icons/DoneAll';
 import Theme from '../Theme/Theme';
 import TimeSeriesViewerContext from './TimeSeriesViewerContext';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
@@ -108,7 +108,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const ucWord = word => `${word.slice(0, 1).toUpperCase()}${word.slice(1).toLowerCase()}`;
+const ucWord = (word) => `${word.slice(0, 1).toUpperCase()}${word.slice(1).toLowerCase()}`;
 
 function inputComponent({ inputRef, ...props }) {
   return <div ref={inputRef} {...props} />;
@@ -287,17 +287,17 @@ const components = {
 };
 
 const selectStyles = {
-  input: base => ({
+  input: (base) => ({
     ...base,
     color: Theme.palette.text.primary,
     '& input': {
       font: 'inherit',
     },
   }),
-  clearIndicator: base => ({ ...base, display: 'none' }),
-  indicatorSeparator: base => ({ ...base, display: 'none' }),
-  dropdownIndicator: base => ({ ...base, cursor: 'pointer' }),
-  groupHeading: base => ({
+  clearIndicator: (base) => ({ ...base, display: 'none' }),
+  indicatorSeparator: (base) => ({ ...base, display: 'none' }),
+  dropdownIndicator: (base) => ({ ...base, cursor: 'pointer' }),
+  groupHeading: (base) => ({
     ...base,
     fontSize: '1rem',
     fontWeight: 600,
@@ -313,7 +313,7 @@ const QualityFlags = () => {
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const { availableQualityFlags } = state;
   const { qualityFlags: selectedQualityFlags } = state.selection;
-  const toggleFlag = qualityFlag => (event) => {
+  const toggleFlag = (qualityFlag) => (event) => {
     dispatch({ type: 'selectToggleQualityFlag', qualityFlag, selected: event.target.checked });
   };
   if (!availableQualityFlags.size) {
@@ -336,7 +336,7 @@ const QualityFlags = () => {
   organizedQualityFlags.expanded.sort();
   const downloadPkgs = ['basic', 'expanded'];
   return (
-    <React.Fragment>
+    <>
       {availableQualityFlags.size > 1 ? (
         <div className={classes.qualityFlagsButtons}>
           <Button
@@ -359,7 +359,7 @@ const QualityFlags = () => {
         </div>
       ) : null}
       <FormGroup>
-        {downloadPkgs.map(downloadPkg => (
+        {downloadPkgs.map((downloadPkg) => (
           <div key={downloadPkg}>
             <Typography variant="subtitle2">{ucWord(downloadPkg)}</Typography>
             {!organizedQualityFlags[downloadPkg].length ? (
@@ -367,7 +367,7 @@ const QualityFlags = () => {
                 {`No ${downloadPkg} quality flags available`}
               </Typography>
             ) : (
-              <React.Fragment>
+              <>
                 {organizedQualityFlags[downloadPkg].map((qf) => {
                   const checked = selectedQualityFlags.includes(qf);
                   const captionStyle = { display: 'block', color: Theme.palette.grey[400] };
@@ -396,12 +396,12 @@ const QualityFlags = () => {
                     />
                   );
                 })}
-              </React.Fragment>
+              </>
             )}
           </div>
         ))}
       </FormGroup>
-    </React.Fragment>
+    </>
   );
 };
 
@@ -409,7 +409,7 @@ export default function TimeSeriesViewerVariables() {
   const classes = useStyles(Theme);
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
 
-  const selectedVariables = state.selection.variables.map(variable => ({
+  const selectedVariables = state.selection.variables.map((variable) => ({
     ...state.variables[variable],
     value: variable,
   }));
@@ -425,7 +425,7 @@ export default function TimeSeriesViewerVariables() {
   ];
   let selectableVariablesCount = 0;
   Object.keys(state.variables)
-    .filter(variable => state.variables[variable].isSelectable)
+    .filter((variable) => state.variables[variable].isSelectable)
     .forEach((variable) => {
       const groupIdx = state.variables[variable].downloadPkg === 'basic' ? 0 : 1;
       const isDisabled = selectedUnits.length === 2
@@ -466,7 +466,7 @@ export default function TimeSeriesViewerVariables() {
           )}
           onChange={(value) => {
             if (!value) { return; }
-            dispatch({ type: 'selectVariables', variables: value.map(v => v.value) });
+            dispatch({ type: 'selectVariables', variables: value.map((v) => v.value) });
           }}
         />
       </NoSsr>
@@ -482,7 +482,7 @@ export default function TimeSeriesViewerVariables() {
                 onClick={() => {
                   dispatch({
                     type: 'selectVariables',
-                    variables: state.selection.variables.filter(v => v !== variable),
+                    variables: state.selection.variables.filter((v) => v !== variable),
                   });
                 }}
               >

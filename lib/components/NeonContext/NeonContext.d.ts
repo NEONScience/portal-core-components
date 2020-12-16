@@ -180,9 +180,7 @@ declare function useNeonContextState(): ({
             NH: {
                 name: string;
                 center: number[];
-                zoom: number; /**
-                   CONTEXT
-                */
+                zoom: number;
             };
             NJ: {
                 name: string;
@@ -662,9 +660,7 @@ declare function useNeonContextState(): ({
             NH: {
                 name: string;
                 center: number[];
-                zoom: number; /**
-                   CONTEXT
-                */
+                zoom: number;
             };
             NJ: {
                 name: string;

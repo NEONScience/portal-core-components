@@ -59,7 +59,7 @@ const EnvType = {
 };
 
 const NeonEnvironment = {
-  isValid: requiredEnvironmentVars.every(envVar => typeof process.env[envVar] !== 'undefined'),
+  isValid: requiredEnvironmentVars.every((envVar) => typeof process.env[envVar] !== 'undefined'),
   isDevEnv: process.env.NODE_ENV === EnvType.DEV,
   isProdEnv: process.env.NODE_ENV === EnvType.PROD,
   isForeignEnv: process.env.REACT_APP_FOREIGN_LOCATION === 'true',
@@ -122,8 +122,8 @@ const NeonEnvironment = {
   route: {
     home: () => process.env.REACT_APP_NEON_ROUTER_NEON_HOME || '/home',
     account: () => process.env.REACT_APP_NEON_ROUTER_NEON_MYACCOUNT || '/myaccount',
-    getFullRoute: route => `${NeonEnvironment.getRouterBasePath()}${route}`,
-    buildRouteFromHost: route => (
+    getFullRoute: (route) => `${NeonEnvironment.getRouterBasePath()}${route}`,
+    buildRouteFromHost: (route) => (
       `${NeonEnvironment.getHost()}${NeonEnvironment.getFullRoute(route)}`
     ),
     buildHomeRoute: () => (

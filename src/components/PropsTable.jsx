@@ -12,7 +12,7 @@ import TableRow from '@material-ui/core/TableRow';
 
 import Theme, { COLORS } from '../lib_components/components/Theme/Theme';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   propTableRowGrey: {
     backgroundColor: theme.palette.grey[50],
   },

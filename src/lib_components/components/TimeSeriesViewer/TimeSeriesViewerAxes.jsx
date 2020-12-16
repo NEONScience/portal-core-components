@@ -23,7 +23,7 @@ import TimeSeriesViewerContext, {
   summarizeTimeSteps,
 } from './TimeSeriesViewerContext';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   optionsContainer: {
     display: 'flex',
     alignItems: 'flex-start',
@@ -245,7 +245,7 @@ const YAxisRangeOption = (props) => {
     } else {
       marks = [customMin, customMin * (2 / 3), customMin * (1 / 3), 0, customMax];
     }
-    marks = marks.map(m => ({ value: m, label: m.toFixed(precision) }));
+    marks = marks.map((m) => ({ value: m, label: m.toFixed(precision) }));
   }
   const step = 10 ** (-1 * precision);
 
@@ -292,7 +292,7 @@ const YAxisRangeOption = (props) => {
           dispatch({ type: 'selectYAxisRangeMode', axis, mode: value });
         }}
       >
-        {Object.keys(Y_AXIS_RANGE_MODES).map(key => (
+        {Object.keys(Y_AXIS_RANGE_MODES).map((key) => (
           <ToggleButton
             key={key}
             value={key}
@@ -364,9 +364,9 @@ const YAxisRangeOption = (props) => {
           min={customMin}
           max={customMax}
           value={[...axisRange]}
-          valueLabelFormat={x => x.toFixed(precision)}
+          valueLabelFormat={(x) => x.toFixed(precision)}
           onChange={(event, values) => {
-            const range = values.map(v => (
+            const range = values.map((v) => (
               parseFloat(Math.min(Math.max(v, customMin), customMax).toFixed(precision), 10)
             ));
             dispatch({ type: 'selectYAxisCustomRange', axis, range });
@@ -421,7 +421,10 @@ const RollPeriodOption = () => {
     markValues.push(Math.floor(rollMax * (m / (interimMarks + 1))));
   }
   markValues.push(rollMax);
-  const marks = markValues.map(m => ({ value: m, label: summarizeTimeSteps(m, currentTimeStep) }));
+  const marks = markValues.map((m) => ({
+    value: m,
+    label: summarizeTimeSteps(m, currentTimeStep),
+  }));
 
   return !currentTimeStep ? (
     <Skeleton variant="rect" width="100%" height={56} />
@@ -433,7 +436,7 @@ const RollPeriodOption = () => {
         data-selenium="time-series-viewer.options.roll-period-slider"
         value={activeRollPeriod}
         valueLabelDisplay="auto"
-        valueLabelFormat={x => summarizeTimeSteps(x, currentTimeStep)}
+        valueLabelFormat={(x) => summarizeTimeSteps(x, currentTimeStep)}
         min={rollMin}
         max={rollMax}
         onMouseDown={() => { setIsActivelySetting(true); }}

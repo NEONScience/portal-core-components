@@ -32,7 +32,7 @@ const makeVizClass = (base, dark, light) => ({
   backgroundPosition: '0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px',
 });
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -60,7 +60,7 @@ export default function StyleGuide() {
   const [redraws, setRedraws] = useState(0);
 
   return (
-    <React.Fragment>
+    <>
 
       <DocBlock>
         A container for a visualization that is expected to dynamically resize and
@@ -188,7 +188,7 @@ const myVizRef = useRef(null);
       <ExampleBlock>
         <FullWidthVisualization
           vizRef={myVizRefs[3]}
-          deriveHeightFromWidth={width => Math.floor(width / 2)}
+          deriveHeightFromWidth={(width) => Math.floor(width / 2)}
         >
           <div ref={myVizRefs[3]} className={classes.viz_3} />
         </FullWidthVisualization>
@@ -281,6 +281,6 @@ export default function MyVizApp() {
 }
         `}
       </CodeBlock>
-    </React.Fragment>
+    </>
   );
 }

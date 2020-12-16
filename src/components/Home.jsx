@@ -10,7 +10,7 @@ import DocBlock from './DocBlock';
 
 import Theme from '../lib_components/components/Theme/Theme';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -21,7 +21,7 @@ export default function Home() {
   const styleGuideUrl = 'https://raw.githubusercontent.com/NEONScience/portal-core-components/master/reference/NSF-NEON-BRAND.GUIDELINES.pdf';
 
   return (
-    <React.Fragment>
+    <>
 
       <DocBlock>
         NEON Data Portal Core Components is an open source library of <Link href="https://reactjs.org" target="_blank">React</Link> components
@@ -62,6 +62,6 @@ export default function Home() {
         See <Link href="#Theme">Theme</Link> for complete details.
       </DocBlock>
 
-    </React.Fragment>
+    </>
   );
 }

@@ -49,7 +49,7 @@ import {
   DOWNLOAD_SIZE_WARN,
 } from '../../util/manifestUtil';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   stepChip: {
     marginRight: theme.spacing(1),
     fontSize: '1rem',
@@ -171,7 +171,7 @@ export default function DownloadDataDialog() {
     if (!externalHost || externalHost.hostType === ExternalHost.HOST_TYPES.EXCLUSIVE_DATA) {
       return null;
     }
-    const availableSiteCodes = (productData.siteCodes || []).map(site => site.siteCode);
+    const availableSiteCodes = (productData.siteCodes || []).map((site) => site.siteCode);
     return (
       <ExternalHostInfo
         data-selenium="download-data-dialog.external-host-info"
@@ -204,8 +204,8 @@ export default function DownloadDataDialog() {
       ? lastStepIndex
       : null;
     const allIncompleteSteps = Object.keys(requiredSteps)
-      .map(idx => parseInt(idx, 10))
-      .filter(idx => (
+      .map((idx) => parseInt(idx, 10))
+      .filter((idx) => (
         idx !== activeStepIndex && idx !== summaryIndex && !requiredSteps[idx].isComplete
       ));
     if (activeStepIndex === lastStepIndex) { return null; }
@@ -216,7 +216,7 @@ export default function DownloadDataDialog() {
     // If any steps are after the current active step (OTHER than summary), go there first.
     // If not then take the first incomplete step in the list.
     const laterIncompleteSteps = allIncompleteSteps
-      .filter(idx => idx !== summaryIndex && idx > activeStepIndex);
+      .filter((idx) => idx !== summaryIndex && idx > activeStepIndex);
     return changeToStep(
       laterIncompleteSteps.length
         ? laterIncompleteSteps[0]
@@ -327,11 +327,11 @@ export default function DownloadDataDialog() {
       </Link>
     );
     const aopBlurb = (
-      <React.Fragment>
+      <>
         {/* eslint-disable react/jsx-one-expression-per-line */}
         An alternate way to obtain lots of AOP data is to submit an {aopHardDriveLink}.
         {/* eslint-enable react/jsx-one-expression-per-line */}
-      </React.Fragment>
+      </>
     );
     return (
       <Card className={classes.callout}>
@@ -433,7 +433,7 @@ export default function DownloadDataDialog() {
     /* eslint-disable react/jsx-one-expression-per-line */
     const authStyles = { color: COLORS.GOLD[800], textAlign: 'right', whiteSpace: 'nowrap' };
     return (
-      <React.Fragment>
+      <>
         <Typography
           variant="body2"
           style={{
@@ -454,7 +454,7 @@ export default function DownloadDataDialog() {
         >
           Learn more about the benefits of signing in {benefitsLink}.
         </Typography>
-      </React.Fragment>
+      </>
     );
     /* eslint-enable react/jsx-one-expression-per-line */
   };
@@ -527,7 +527,7 @@ export default function DownloadDataDialog() {
       const handleBack = () => changeToStep(activeStepIndex - 1);
       const handleNext = () => changeToStep(activeStepIndex + 1);
       return (
-        <React.Fragment>
+        <>
           <MobileStepper
             steps={maxSteps}
             variant="dots"
@@ -554,11 +554,11 @@ export default function DownloadDataDialog() {
             )}
           />
           <Divider />
-        </React.Fragment>
+        </>
       );
     }
     return (
-      <React.Fragment>
+      <>
         <Stepper nonLinear data-selenium="download-data-dialog.stepper">
           {requiredSteps.map((step, index) => {
             const { label } = getStep(index);
@@ -590,7 +590,7 @@ export default function DownloadDataDialog() {
           })}
         </Stepper>
         <Divider />
-      </React.Fragment>
+      </>
     );
   };
 
@@ -598,7 +598,7 @@ export default function DownloadDataDialog() {
     if (!requiredSteps.length) { return null; }
     if (requiredSteps.length < 2) {
       return (
-        <React.Fragment>
+        <>
           {getStep(activeStepIndex).title ? (
             <div style={{ marginTop: Theme.spacing(3) }}>
               <Typography variant="h5" style={{ flexGrow: 1 }}>
@@ -609,14 +609,14 @@ export default function DownloadDataDialog() {
           <div style={{ margin: Theme.spacing(3, belowSm ? 0 : 5) }}>
             <DownloadStepForm stepKey={requiredSteps[activeStepIndex].key} />
           </div>
-        </React.Fragment>
+        </>
       );
     }
     const titleMarker = requiredSteps[activeStepIndex].key === 'summary'
       ? <CircleStarIcon className={classes.summaryIconTitleMarker} />
       : <Chip color="primary" label={activeStepIndex + 1} className={classes.stepChip} />;
     return (
-      <React.Fragment>
+      <>
         <div className={classes.startFlex} style={{ marginTop: Theme.spacing(3) }}>
           {titleMarker}
           <Typography variant="h5" style={{ flexGrow: 1 }}>
@@ -632,17 +632,17 @@ export default function DownloadDataDialog() {
             renderDownloadButton={renderDownloadButton}
           />
         </div>
-      </React.Fragment>
+      </>
     );
   };
 
   // Google Tag Manager variables
   const getStepsCompleted = () => requiredSteps
-    .filter(step => step.isComplete === true)
-    .map(step => step.key);
+    .filter((step) => step.isComplete === true)
+    .map((step) => step.key);
   const getStepsNotCompleted = () => requiredSteps
-    .filter(step => step.isComplete === false)
-    .map(step => step.key);
+    .filter((step) => step.isComplete === false)
+    .map((step) => step.key);
   const getStepCompletionPercentage = () => {
     const completed = getStepsCompleted();
     const notCompleted = getStepsNotCompleted();
@@ -653,10 +653,10 @@ export default function DownloadDataDialog() {
     if (!allStepsComplete) { return ''; }
     // The subset of possible steps we actually want to persist in the GA event
     const eventSteps = ['sites', 'dateRange'];
-    if (requiredSteps.some(step => step.key === 'documentation')) {
+    if (requiredSteps.some((step) => step.key === 'documentation')) {
       eventSteps.push('documentation');
     }
-    if (requiredSteps.some(step => step.key === 'packageType')) {
+    if (requiredSteps.some((step) => step.key === 'packageType')) {
       eventSteps.push('packageType');
     }
     // Build the config for reporting
@@ -669,7 +669,7 @@ export default function DownloadDataDialog() {
     return lzw.encode(JSON.stringify(eventConfig));
   };
   const renderGtmTags = () => (
-    <React.Fragment>
+    <>
       {/* Google Tag Manager elements to track download progress */}
       <input type="hidden" data-gtm="download-data-dialog.product-code" value={productData.productCode} />
       <input type="hidden" data-gtm="download-data-dialog.size-estimate-bytes" value={getSizeEstimateBytes()} />
@@ -679,7 +679,7 @@ export default function DownloadDataDialog() {
       <input type="hidden" data-gtm="download-data-dialog.download-executed" value={downloadExecuted ? 1 : 0} />
       <input type="hidden" data-gtm="download-data-dialog.lzw-compressed-config" value={getLZWCompressedConfig()} />
       {/* end Google Tag Manager elements */}
-    </React.Fragment>
+    </>
   );
 
   const releaseTooltip = release.value === null
@@ -719,7 +719,7 @@ export default function DownloadDataDialog() {
             >
               <Chip label={productData.productCode} className={classes.productCodeChip} />
             </Tooltip>
-            {(productData.themes || []).map(dataTheme => (
+            {(productData.themes || []).map((dataTheme) => (
               <div key={dataTheme} style={{ marginLeft: Theme.spacing(1.5) }}>
                 <DataThemeIcon size={3} theme={dataTheme} />
               </div>

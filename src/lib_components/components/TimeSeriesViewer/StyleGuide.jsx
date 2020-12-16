@@ -23,7 +23,7 @@ import Theme from '../Theme/Theme';
 
 import TimeSeriesViewer from './TimeSeriesViewer';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -53,7 +53,7 @@ const allProductsReducer = (state, action) => {
       newState.fetch.error = action.error;
       return newState;
     case 'selectProduct':
-      if (!state.products.find(product => product.productCode === action.productCode)) {
+      if (!state.products.find((product) => product.productCode === action.productCode)) {
         return state;
       }
       newState.selectedProduct = action.productCode;
@@ -66,7 +66,7 @@ const AllProductsTimeSeries = () => {
   const [state, dispatch] = useReducer(allProductsReducer, cloneDeep(allProductsInitialState));
   const [{ data: neonContextData }] = NeonContext.useNeonContextState();
   const { bundles } = neonContextData;
-  const productIsIS = product => (
+  const productIsIS = (product) => (
     product.productScienceTeam.includes('AIS') || product.productScienceTeam.includes('TIS')
   );
   // Subject and effect to perform and manage the sites GraphQL fetch
@@ -74,14 +74,17 @@ const AllProductsTimeSeries = () => {
     map((response) => {
       if (response.response && response.response.data && response.response.data.products) {
         const products = response.response.data.products
-          .filter(product => (
+          .filter((product) => (
             product.siteCodes
               && product.siteCodes.length
               && productIsIS(product)
               && !Object.keys(bundles.parents).includes(product.productCode)
               && !Object.keys(bundles.children).includes(product.productCode)
           ))
-          .map(product => ({ productCode: product.productCode, productName: product.productName }));
+          .map((product) => ({
+            productCode: product.productCode,
+            productName: product.productName,
+          }));
         if (!products.length) {
           dispatch({ type: 'fetchFailed', error: 'fetch succeeded; no products found' });
           return of(false);
@@ -144,7 +147,7 @@ export default function StyleGuide() {
   const classes = useStyles(Theme);
 
   return (
-    <React.Fragment>
+    <>
 
       <DocBlock>
         The Time Series Viewer is a component designed to compose arbitrary NEON data into an
@@ -185,6 +188,6 @@ import TimeSeriesViewer from 'portal-core-components/lib/components/TimeSeriesVi
       </DocBlock>
       */}
 
-    </React.Fragment>
+    </>
   );
 }

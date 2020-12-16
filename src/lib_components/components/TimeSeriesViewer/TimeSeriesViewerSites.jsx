@@ -56,7 +56,7 @@ import iconRelocatableAquaticSVG from '../SiteMap/svg/icon-site-relocatable-aqua
 
 import TimeSeriesViewerContext, { TabComponentPropTypes } from './TimeSeriesViewerContext';
 
-const ucWord = word => `${word.slice(0, 1)}${word.slice(1).toLowerCase()}`;
+const ucWord = (word) => `${word.slice(0, 1)}${word.slice(1).toLowerCase()}`;
 
 const ICON_SVGS = {
   CORE: {
@@ -69,11 +69,10 @@ const ICON_SVGS = {
   },
 };
 
-
 /**
    Classes and Styles
 */
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     width: '100%',
@@ -183,17 +182,17 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const selectStyles = {
-  input: base => ({
+  input: (base) => ({
     ...base,
     color: Theme.palette.text.primary,
     '& input': {
       font: 'inherit',
     },
   }),
-  clearIndicator: base => ({ ...base, display: 'none' }),
-  indicatorSeparator: base => ({ ...base, display: 'none' }),
-  dropdownIndicator: base => ({ ...base, cursor: 'pointer' }),
-  groupHeading: base => ({
+  clearIndicator: (base) => ({ ...base, display: 'none' }),
+  indicatorSeparator: (base) => ({ ...base, display: 'none' }),
+  dropdownIndicator: (base) => ({ ...base, cursor: 'pointer' }),
+  groupHeading: (base) => ({
     ...base,
     fontSize: '1rem',
     fontWeight: 600,
@@ -325,7 +324,7 @@ function PositionHistoryButton(props) {
     );
   }
   return (
-    <React.Fragment>
+    <>
       <Button
         size="small"
         variant="outlined"
@@ -400,7 +399,7 @@ function PositionHistoryButton(props) {
           </Button>
         </DialogActions>
       </Dialog>
-    </React.Fragment>
+    </>
   );
 }
 
@@ -528,12 +527,10 @@ function SelectedPosition(props) {
         onClick={() => {
           if (disabled) { return; }
           const selectedSiteIdx = state.selection.sites
-            .findIndex(site => site.siteCode === siteCode);
-          dispatch({
-            type: 'selectSitePositions',
-            positions: state.selection.sites[selectedSiteIdx].positions.filter(p => p !== position),
-            siteCode,
-          });
+            .findIndex((site) => site.siteCode === siteCode);
+          const positions = state.selection.sites[selectedSiteIdx].positions
+            .filter((p) => p !== position);
+          dispatch({ type: 'selectSitePositions', positions, siteCode });
         }}
       >
         <ClearIcon fontSize="small" />
@@ -569,7 +566,7 @@ function SelectPositionsButton(props) {
   const [localSelectedPositions, setLocalSelectedPositions] = useState(selectedPositions);
   const togglePosition = (position) => {
     if (localSelectedPositions.includes(position)) {
-      setLocalSelectedPositions(localSelectedPositions.filter(p => p !== position));
+      setLocalSelectedPositions(localSelectedPositions.filter((p) => p !== position));
     } else {
       setLocalSelectedPositions([...localSelectedPositions, position]);
     }
@@ -580,7 +577,7 @@ function SelectPositionsButton(props) {
     dispatch({ type: 'selectSitePositions', siteCode, positions: localSelectedPositions });
   };
   return (
-    <React.Fragment>
+    <>
       <Button
         size="small"
         variant="outlined"
@@ -667,7 +664,7 @@ function SelectPositionsButton(props) {
           </Button>
         </DialogActions>
       </Dialog>
-    </React.Fragment>
+    </>
   );
 }
 
@@ -945,12 +942,12 @@ function SelectedSite(props) {
             </Typography>
             <Tooltip
               title={(
-                <React.Fragment>
+                <>
                   {positionsDescription}
                   <br />
                   <br />
                   {positionsSeriesDescription}
-                </React.Fragment>
+                </>
               )}
             >
               <IconButton size="small" style={{ marginLeft: Theme.spacing(1) }}>
@@ -960,7 +957,7 @@ function SelectedSite(props) {
             <SelectPositionsButton selectedSite={site} />
           </div>
           <div className={classes.positionsCardContainer}>
-            {positions.map(position => (
+            {positions.map((position) => (
               <SelectedPosition
                 key={position}
                 siteCode={siteCode}
@@ -1024,13 +1021,13 @@ const SitesSelect = () => {
   // Build list of selectable sites grouped by US state
   const selectableSiteCodes = Object.keys(state.product.sites);
   let selectableSitesCount = 0;
-  const selectableSites = Object.keys(allStates).map(stateCode => (
+  const selectableSites = Object.keys(allStates).map((stateCode) => (
     { label: allStates[stateCode].name, stateCode, options: [] }
   ));
   Object.keys(state.product.sites)
-    .filter(siteCode => selectableSiteCodes.includes(siteCode))
+    .filter((siteCode) => selectableSiteCodes.includes(siteCode))
     .forEach((siteCode) => {
-      const groupIdx = selectableSites.findIndex(group => (
+      const groupIdx = selectableSites.findIndex((group) => (
         allSites[siteCode] && group.stateCode === allSites[siteCode].stateCode
       ));
       if (groupIdx === -1) { return; }
@@ -1056,8 +1053,8 @@ const SitesSelect = () => {
     });
 
   const selectedSites = state.selection.sites
-    .map(site => site.siteCode)
-    .filter(siteCode => selectableSiteCodes.includes(siteCode));
+    .map((site) => site.siteCode)
+    .filter((siteCode) => selectableSiteCodes.includes(siteCode));
 
   if (!selectableSitesCount) { return null; }
 
@@ -1105,7 +1102,7 @@ export default function TimeSeriesViewerSites(props) {
     );
   }
 
-  const selectedItems = state.selection.sites.map(site => site.siteCode);
+  const selectedItems = state.selection.sites.map((site) => site.siteCode);
   return (
     <div className={classes.root}>
       <div style={{ width: '100%', display: 'flex', alignItems: 'center' }}>
@@ -1120,7 +1117,7 @@ export default function TimeSeriesViewerSites(props) {
         />
       </div>
       <div className={classes.sitesContainer}>
-        {state.selection.sites.map(site => (
+        {state.selection.sites.map((site) => (
           <SelectedSite
             key={site.siteCode}
             site={site}

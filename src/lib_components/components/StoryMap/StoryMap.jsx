@@ -10,7 +10,7 @@ import FullWidthVisualization from '../FullWidthVisualization/FullWidthVisualiza
 
 const MIN_IFRAME_WIDTH = 240;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   openInNewLink: {
     display: 'block',
     width: '100%',

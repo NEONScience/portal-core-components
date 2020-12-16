@@ -809,7 +809,7 @@ theme.colors = COLORS;
    Function used to automatically wrap functional components in a ThemeProvider if not already
    present. Will not wrap in theme if running in jsdom so as not to inject themes into snapshots.
 */
-theme.getWrappedComponent = Component => (props) => {
+theme.getWrappedComponent = (Component) => (props) => {
   const currentTheme = useTheme();
   const isJsdom = navigator.userAgent.includes('Node.js') || navigator.userAgent.includes('jsdom');
   if (!currentTheme.isNeonTheme && !isJsdom) {

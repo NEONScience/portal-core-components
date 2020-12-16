@@ -16,7 +16,7 @@ export default function StyleGuide() {
   );
 
   return (
-    <React.Fragment>
+    <>
 
       <DocBlock>
         A component for neatly embedding an ArcGIS Story Map into a page.
@@ -57,6 +57,6 @@ import StoryMap from 'portal-core-components/lib/components/StoryMap';
         `}
       </CodeBlock>
 
-    </React.Fragment>
+    </>
   );
 }

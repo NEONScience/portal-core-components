@@ -20,7 +20,7 @@ const Transition = forwardRef((props, ref) => (
   <Slide direction="up" ref={ref} {...props} />
 ));
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   dialogTitle: {
     marginLeft: theme.spacing(2),
     flex: 1,

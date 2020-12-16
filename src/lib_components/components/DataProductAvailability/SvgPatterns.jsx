@@ -37,7 +37,7 @@ const svgPatternsSrc = {
 
 export default function SvgPatterns() {
   return (
-    <React.Fragment>
+    <>
       {Object.keys(svgPatternsSrc).map((pattern) => {
         const { dim, node } = svgPatternsSrc[pattern];
         const base64 = btoa(ReactDOMServer.renderToStaticMarkup(node));
@@ -53,7 +53,7 @@ export default function SvgPatterns() {
           </pattern>
         );
       })}
-    </React.Fragment>
+    </>
   );
 }
 

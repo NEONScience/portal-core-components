@@ -10,6 +10,7 @@ import cloneDeep from 'lodash/cloneDeep';
 
 import { of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { ajax } from 'rxjs/ajax';
 
 import REMOTE_ASSETS from '../../remoteAssetsMap/remoteAssetsMap';
 import AuthService from '../NeonAuth/AuthService';
@@ -224,25 +225,30 @@ const Provider = (props) => {
 
   // Method to sanitize partial HTML. As delivered presently there are some markup issues that
   // throw warnings when parsed with HTMLReactParser.
-  const sanitizePartialHTML = html => html.replace(/ value=""/g, ' initialValue=""');
+  const sanitizePartialHTML = (html) => html.replace(/ value=""/g, ' initialValue=""');
 
   // Method to fetch header and/or footer partials
   const fetchPartialHTML = (key) => {
     if (!Object.keys(REMOTE_ASSETS).includes(key)) { return; }
     const { url } = REMOTE_ASSETS[key];
-    window.fetch(url, { method: 'GET', headers: { Accept: 'text/html' } })
-      .then((res) => {
-        if (res.status >= 400) { throw new Error(`${res.status} ${res.statusText}`); }
-        return res.text();
-      })
-      .then((html) => {
-        dispatch({ type: 'fetchHtmlSucceeded', asset: key, html: sanitizePartialHTML(html) });
+    ajax({
+      url,
+      method: 'GET',
+      responseType: 'text',
+    }).pipe(
+      map((response) => {
+        dispatch({
+          type: 'fetchHtmlSucceeded',
+          asset: key,
+          html: sanitizePartialHTML(response.response),
+        });
         return of(true);
-      })
-      .catch((error) => {
+      }),
+      catchError((error) => {
         dispatch({ type: 'fetchHtmlFailed', asset: key, error });
         return of(false);
-      });
+      }),
+    ).subscribe();
   };
 
   // Identify any cascading authentication fetches that require
@@ -356,7 +362,7 @@ Provider.defaultProps = {
 /**
    getWrappedComponent
 */
-const getWrappedComponent = Component => (props) => {
+const getWrappedComponent = (Component) => (props) => {
   const [{ isActive }] = useNeonContextState();
   if (!isActive) {
     return (

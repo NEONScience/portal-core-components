@@ -133,7 +133,7 @@ export default function EnhancedAvailabilityGrid(config) {
       + (TIME.YEARS.indexOf(intYear) * SVG.YEAR_WIDTH)
       + (TIME.YEARS.indexOf(intYear) * SVG.YEAR_PADDING);
   };
-  const getYearCenterX = year => getYearStartX(year) + (SVG.YEAR_WIDTH / 2);
+  const getYearCenterX = (year) => getYearStartX(year) + (SVG.YEAR_WIDTH / 2);
   const getYearMonthStartX = (yearMonth) => {
     const year = parseInt(yearMonth.substr(0, 4), 10);
     const month = parseInt(yearMonth.substr(5, 2), 10);
@@ -193,7 +193,7 @@ export default function EnhancedAvailabilityGrid(config) {
      Functions to get a translate() string for a data row by index
      in the sorted rowLabels array
   */
-  const getRowY = idx => (
+  const getRowY = (idx) => (
     SVG.CELL_PADDING + (rowLabels.length - idx) * (SVG.CELL_HEIGHT + SVG.CELL_PADDING)
   );
   const getRowTranslation = (d, idx) => `translate(0,${getRowY(idx)})`;
@@ -501,9 +501,9 @@ export default function EnhancedAvailabilityGrid(config) {
     timeAxis.innerG.selectAll('text')
       .data(() => getYearsInView(svgWidth, getTimeOffset()))
       .join('text')
-      .attr('x', year => getYearCenterX(year))
+      .attr('x', (year) => getYearCenterX(year))
       .attr('y', SVG.LABEL_FONT_SIZE + 1)
-      .text(year => year)
+      .text((year) => year)
       .each((year, idx, labelNodes) => {
         SVG_STYLES.apply(select(labelNodes[idx]), 'timeLabel');
       });
@@ -515,9 +515,9 @@ export default function EnhancedAvailabilityGrid(config) {
           : lineYears;
       })
       .join('line')
-      .attr('x1', year => getYearStartX(year) - (SVG.YEAR_PADDING / 2))
+      .attr('x1', (year) => getYearStartX(year) - (SVG.YEAR_PADDING / 2))
       .attr('y1', 0)
-      .attr('x2', year => getYearStartX(year) - (SVG.YEAR_PADDING / 2))
+      .attr('x2', (year) => getYearStartX(year) - (SVG.YEAR_PADDING / 2))
       .attr('y2', svgHeight)
       .each((year, idx, lineNodes) => {
         SVG_STYLES.apply(select(lineNodes[idx]), 'timeDivider');
@@ -558,7 +558,7 @@ export default function EnhancedAvailabilityGrid(config) {
       .attr('transform', getRowTranslation)
       .each((label, idx, gNodes) => {
         const rowData = rows[label];
-        const getDefaultStatus = month => (
+        const getDefaultStatus = (month) => (
           month >= TIME.CURRENT_MONTH ? 'not expected' : 'not available'
         );
         const getCellAttr = (month, attr) => {
@@ -573,14 +573,14 @@ export default function EnhancedAvailabilityGrid(config) {
           .selectAll('rect')
           .data(() => getYearMonthsInView(svgWidth, getTimeOffset()))
           .join('rect')
-          .attr('x', month => getYearMonthStartX(month) + (getCellAttr(month, 'nudge') || 0))
-          .attr('y', month => getCellAttr(month, 'nudge') || 0)
+          .attr('x', (month) => getYearMonthStartX(month) + (getCellAttr(month, 'nudge') || 0))
+          .attr('y', (month) => getCellAttr(month, 'nudge') || 0)
           .attr('rx', `${SVG.CELL_RX}px`)
-          .attr('width', month => getCellAttr(month, 'width'))
-          .attr('height', month => getCellAttr(month, 'height'))
-          .attr('fill', month => getCellAttr(month, 'fill'))
-          .attr('stroke', month => getCellAttr(month, 'stroke'))
-          .attr('stroke-width', month => getCellAttr(month, 'strokeWidth'));
+          .attr('width', (month) => getCellAttr(month, 'width'))
+          .attr('height', (month) => getCellAttr(month, 'height'))
+          .attr('fill', (month) => getCellAttr(month, 'fill'))
+          .attr('stroke', (month) => getCellAttr(month, 'stroke'))
+          .attr('stroke-width', (month) => getCellAttr(month, 'strokeWidth'));
       });
   };
 
@@ -592,7 +592,7 @@ export default function EnhancedAvailabilityGrid(config) {
     : null;
   const redrawDateRangeHandles = () => {
     if (!selectionEnabled) { return; }
-    const isHighlighted = d => (dateRangeHoverKey === d || draggingDateRange[d].dragging);
+    const isHighlighted = (d) => (dateRangeHoverKey === d || draggingDateRange[d].dragging);
     const yBounds = Object.keys(viewSelections)
       .reduce((acc, key) => {
         const y = getRowY(rowLabels.indexOf(key));
@@ -606,7 +606,7 @@ export default function EnhancedAvailabilityGrid(config) {
     dateRangeHandlesG.selectAll('rect')
       .data([0, 1])
       .join('rect')
-      .attr('class', d => `dateRange${d === 0 ? 'Start' : 'End'}HandleRect`)
+      .attr('class', (d) => `dateRange${d === 0 ? 'Start' : 'End'}HandleRect`)
       .attr('x', (d) => {
         const useWidth = isHighlighted(d)
           ? SVG.DATE_RANGE_HANDLE_WIDTH + 2
@@ -620,7 +620,7 @@ export default function EnhancedAvailabilityGrid(config) {
         }
         return gutterX - (useWidth / 2);
       })
-      .attr('width', d => (
+      .attr('width', (d) => (
         isHighlighted(d) ? SVG.DATE_RANGE_HANDLE_WIDTH + 2 : SVG.DATE_RANGE_HANDLE_WIDTH
       ))
       .attr('y', (d) => {
@@ -635,7 +635,7 @@ export default function EnhancedAvailabilityGrid(config) {
         }
         return yBounds[1] - yBounds[0];
       })
-      .attr('fill', d => (
+      .attr('fill', (d) => (
         isHighlighted(d) ? COLORS.LIGHT_BLUE[100] : COLORS.LIGHT_BLUE[300]
       ))
       .attr('stroke', Theme.palette.primary.main)
@@ -654,8 +654,8 @@ export default function EnhancedAvailabilityGrid(config) {
     dateRangeMasksG.selectAll('rect')
       .data([0, 1])
       .join('rect')
-      .attr('class', d => `dateRange${d === 0 ? 'Start' : 'End'}MaskRect`)
-      .attr('x', d => (
+      .attr('class', (d) => `dateRange${d === 0 ? 'Start' : 'End'}MaskRect`)
+      .attr('x', (d) => (
         getYearMonthGutterX(dateRange.value[d] || TIME.MIN_YEAR_MONTH, d === 0 ? 'left' : 'right')
           - (SVG.DATE_RANGE_MASK_WIDTH / 2)
           + getTimeOffset()
@@ -679,8 +679,8 @@ export default function EnhancedAvailabilityGrid(config) {
     // Row and label backgrounds
     const yOffset = (SVG.CELL_PADDING / 2);
     const yMultiplier = SVG.CELL_HEIGHT + SVG.CELL_PADDING;
-    const y = d => yOffset + (rowLabels.length - rowLabels.indexOf(d)) * yMultiplier;
-    const fill = d => (
+    const y = (d) => yOffset + (rowLabels.length - rowLabels.indexOf(d)) * yMultiplier;
+    const fill = (d) => (
       viewSelections[d] === 'full'
         ? Theme.palette.primary.main
         : COLORS.LIGHT_BLUE[200]
@@ -774,7 +774,7 @@ export default function EnhancedAvailabilityGrid(config) {
       // Perform a select action if selection is enabled to keep the end user happy. =)
       cellDragTime = (new Date()).getTime() - cellDragTime;
       if (selectionEnabled && setSitesValue && cellDragTime < 100) {
-        SVG_STYLES.touchRipple(dataMasksG.selectAll('rect').filter(d => d === rowHoverKey), 15);
+        SVG_STYLES.touchRipple(dataMasksG.selectAll('rect').filter((d) => d === rowHoverKey), 15);
         setTimeout(() => toggleSelection(rowHoverKey), 15);
       }
     });

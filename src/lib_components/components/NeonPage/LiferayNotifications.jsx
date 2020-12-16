@@ -10,7 +10,7 @@ import CloseIcon from '@material-ui/icons/Close';
 
 import Theme, { COLORS } from '../Theme/Theme';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   notification: {
     color: theme.palette.text.primary,
     backgroundColor: COLORS.GOLD[50],
@@ -33,11 +33,11 @@ const LiferayNotifications = (props) => {
   const classes = useStyles(Theme);
   const { notifications, onHideNotifications } = props;
 
-  if (!notifications.length || notifications.every(n => n.dismissed)) { return null; }
+  if (!notifications.length || notifications.every((n) => n.dismissed)) { return null; }
 
   const renderNotificationContent = () => (
     <div id="neon-data-portal-notifications">
-      {notifications.map(notification => (
+      {notifications.map((notification) => (
         <div
           key={notification.id}
           // eslint-disable-next-line react/no-danger

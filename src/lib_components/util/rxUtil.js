@@ -48,9 +48,9 @@ export const getJson = (
 
   // Placeholders for subscriber events, handled upstream in observable
   return rxObs$.subscribe(
-    response => response,
-    error => error,
-    complete => complete,
+    (response) => response,
+    (error) => error,
+    (complete) => complete,
   );
 };
 
@@ -60,11 +60,11 @@ export default getJson;
   Convert an array of obbservables into a single observable block that reports
   progress as the number of completed observables out of the total.
  */
-export const forkJoinWithProgress = arrayOfObservables => defer(() => {
+export const forkJoinWithProgress = (arrayOfObservables) => defer(() => {
   let counter = 0;
   const percent$ = new Subject();
   const modifiedObservablesList = arrayOfObservables.map(
-    item => item.pipe(
+    (item) => item.pipe(
       finalize(() => {
         counter += 1;
         const percentValue = (counter * 100) / arrayOfObservables.length;

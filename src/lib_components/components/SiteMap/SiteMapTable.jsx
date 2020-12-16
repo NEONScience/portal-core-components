@@ -31,9 +31,9 @@ import {
   calculateLocationsInBounds,
 } from './SiteMapUtils';
 
-const ucWord = word => `${word.slice(0, 1).toUpperCase()}${word.slice(1).toLowerCase()}`;
+const ucWord = (word) => `${word.slice(0, 1).toUpperCase()}${word.slice(1).toLowerCase()}`;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   tableContainer: {
     position: 'absolute',
     width: '100%',
@@ -217,9 +217,9 @@ const SiteMapTable = () => {
   let selectRow = () => {};
   switch (focus) {
     case FEATURE_TYPES.SITES.KEY:
-      rowIsSelected = row => selection.has(row.siteCode);
-      rowIsSelectable = row => !selectableItems || selectableItems.has(row.siteCode);
-      selectRow = row => dispatch({ type: 'toggleItemSelected', item: row.siteCode });
+      rowIsSelected = (row) => selection.has(row.siteCode);
+      rowIsSelectable = (row) => !selectableItems || selectableItems.has(row.siteCode);
+      selectRow = (row) => dispatch({ type: 'toggleItemSelected', item: row.siteCode });
       break;
     default:
       break;
@@ -250,9 +250,9 @@ const SiteMapTable = () => {
     }
     return source.data[code] ? { [source.code]: code, ...source.data[code] } : null;
   };
-  const getSite = location => getParent('SITE', location);
-  const getState = location => getParent('STATE', location);
-  const getDomain = location => getParent('DOMAIN', location);
+  const getSite = (location) => getParent('SITE', location);
+  const getState = (location) => getParent('STATE', location);
+  const getDomain = (location) => getParent('DOMAIN', location);
 
   const getFeatureName = (featureKey) => {
     if (FEATURES[featureKey]) {
@@ -284,7 +284,7 @@ const SiteMapTable = () => {
      Calculate rows
   */
   const visibleFeatureKeys = Object.keys(state.featureData[focus])
-    .filter(featureKey => (
+    .filter((featureKey) => (
       state.filters.features.available[featureKey] && state.filters.features.visible[featureKey]
     ));
   const locations = {};
@@ -302,9 +302,9 @@ const SiteMapTable = () => {
   });
   let initialRows = calculateLocationsInBounds(locations, state.map.bounds);
   if (selectionActive && selectableItems && hideUnselectable) {
-    initialRows = initialRows.filter(item => selectableItems.has(item));
+    initialRows = initialRows.filter((item) => selectableItems.has(item));
   }
-  const rows = initialRows.map(key => locations[key]);
+  const rows = initialRows.map((key) => locations[key]);
   if (selectionActive) {
     rows.forEach((row, idx) => {
       let selected = false;
@@ -325,7 +325,7 @@ const SiteMapTable = () => {
   const domainsInMap = new Set();
   const statesInMap = new Set();
   sitesInMap
-    .filter(siteCode => state.sites[siteCode])
+    .filter((siteCode) => state.sites[siteCode])
     .forEach((siteCode) => {
       domainsInMap.add(state.sites[siteCode].domainCode);
       statesInMap.add(state.sites[siteCode].stateCode);
@@ -339,7 +339,7 @@ const SiteMapTable = () => {
       sorting: true,
       defaultSort: 'desc',
       lookup: Object.fromEntries(
-        Array.from(sitesInMap).map(siteCode => [siteCode, siteCode]),
+        Array.from(sitesInMap).map((siteCode) => [siteCode, siteCode]),
       ),
       customSort: (rowA, rowB) => {
         const siteA = getSite(rowA);
@@ -405,7 +405,7 @@ const SiteMapTable = () => {
       sorting: true,
       defaultSort: 'desc',
       lookup: Object.fromEntries(
-        Array.from(domainsInMap).map(domainCode => [domainCode, domainCode]),
+        Array.from(domainsInMap).map((domainCode) => [domainCode, domainCode]),
       ),
       customSort: (rowA, rowB) => {
         const domainA = getDomain(rowA);
@@ -469,7 +469,7 @@ const SiteMapTable = () => {
       sorting: true,
       defaultSort: 'desc',
       lookup: Object.fromEntries(
-        Array.from(statesInMap).map(stateCode => [
+        Array.from(statesInMap).map((stateCode) => [
           stateCode,
           state.featureData.STATES.STATES[stateCode].name,
         ]),
@@ -521,14 +521,14 @@ const SiteMapTable = () => {
       title: 'Latitude',
       sorting: true,
       filtering: false,
-      render: row => renderCaptionString(row.latitude.toFixed(5), 'Latitude'),
+      render: (row) => renderCaptionString(row.latitude.toFixed(5), 'Latitude'),
     },
     longitude: {
       field: 'longitude',
       title: 'Longitude',
       sorting: true,
       filtering: false,
-      render: row => renderCaptionString(row.longitude.toFixed(5), 'Longitude'),
+      render: (row) => renderCaptionString(row.longitude.toFixed(5), 'Longitude'),
     },
   };
 
@@ -548,10 +548,10 @@ const SiteMapTable = () => {
         defaultSort: 'desc',
         lookup: Object.fromEntries(
           Array.from(
-            new Set(rows.map(row => row.type)),
-          ).sort().map(k => [k, ucWord(k)]),
+            new Set(rows.map((row) => row.type)),
+          ).sort().map((k) => [k, ucWord(k)]),
         ),
-        render: row => ucWord(row.type),
+        render: (row) => ucWord(row.type),
       },
       { // Site Terrain
         field: 'terrain',
@@ -560,10 +560,10 @@ const SiteMapTable = () => {
         defaultSort: 'desc',
         lookup: Object.fromEntries(
           Array.from(
-            new Set(rows.map(row => row.terrain)),
-          ).sort().map(k => [k, ucWord(k)]),
+            new Set(rows.map((row) => row.terrain)),
+          ).sort().map((k) => [k, ucWord(k)]),
         ),
-        render: row => ucWord(row.terrain),
+        render: (row) => ucWord(row.terrain),
       },
       commonColumns.domain,
       commonColumns.state,
@@ -576,7 +576,7 @@ const SiteMapTable = () => {
         title: 'Name',
         sorting: true,
         defaultSort: 'desc',
-        render: row => (
+        render: (row) => (
           <Link
             component="button"
             className={classes.linkButton}
@@ -592,9 +592,9 @@ const SiteMapTable = () => {
         sorting: true,
         defaultSort: 'desc',
         lookup: Object.fromEntries(
-          Array.from(new Set(rows.map(row => row.featureKey)))
+          Array.from(new Set(rows.map((row) => row.featureKey)))
             .sort((a, b) => (getFeatureName(a) > getFeatureName(b) ? 1 : -1))
-            .map(featureKey => [featureKey, getFeatureName(featureKey)]),
+            .map((featureKey) => [featureKey, getFeatureName(featureKey)]),
         ),
         customSort: (rowA, rowB) => {
           const typeA = getFeatureName(rowA.featureKey);
@@ -621,7 +621,7 @@ const SiteMapTable = () => {
         sorting: true,
         defaultSort: 'desc',
         filtering: false,
-        render: row => renderCaptionString(
+        render: (row) => renderCaptionString(
           Number.isFinite(row.elevation) ? `${row.elevation.toFixed(2)}m` : '--',
           'Elevation',
         ),
@@ -633,8 +633,8 @@ const SiteMapTable = () => {
         deafultSort: 'asc',
         lookup: Object.fromEntries(
           Object.keys(NLCD_CLASSES)
-            .filter(classKey => rows.some(row => row.nlcdClass === classKey))
-            .map(classKey => [classKey, NLCD_CLASSES[classKey].name]),
+            .filter((classKey) => rows.some((row) => row.nlcdClass === classKey))
+            .map((classKey) => [classKey, NLCD_CLASSES[classKey].name]),
         ),
         render: (row) => {
           if (!row.nlcdClass) {
@@ -658,16 +658,16 @@ const SiteMapTable = () => {
         sorting: true,
         deafultSort: 'asc',
         filtering: false,
-        render: row => (row.plotDimensions ? (
-          <React.Fragment>
+        render: (row) => (row.plotDimensions ? (
+          <>
             {renderCaptionString(`${row.plotDimensions}`, 'Plot Size (Dimensions)')}
             {Number.isFinite(row.plotSize) ? (
-              <React.Fragment>
+              <>
                 <br />
                 {renderCaptionString(`(${row.plotSize.toFixed(0)}m\u00b2)`, 'Plot Size (Area)')}
-              </React.Fragment>
+              </>
             ) : null}
-          </React.Fragment>
+          </>
         ) : renderCaptionString()),
       },
       { // Plot Slope Aspect
@@ -676,7 +676,7 @@ const SiteMapTable = () => {
         sorting: true,
         deafultSort: 'asc',
         filtering: false,
-        render: row => renderCaptionString(
+        render: (row) => renderCaptionString(
           Number.isFinite(row.slopeAspect) ? `${row.slopeAspect.toFixed(2)}\u00b0` : '--',
           'Slope Aspect',
         ),
@@ -687,7 +687,7 @@ const SiteMapTable = () => {
         sorting: true,
         deafultSort: 'asc',
         filtering: false,
-        render: row => renderCaptionString(
+        render: (row) => renderCaptionString(
           Number.isFinite(row.slopeGradient) ? `${row.slopeGradient.toFixed(2)}%` : '--',
           'Slope Gradient',
         ),
@@ -706,7 +706,7 @@ const SiteMapTable = () => {
           if (a !== null && b === null) { return -1; }
           return a > b ? 1 : -1;
         },
-        render: row => (
+        render: (row) => (
           Array.isArray(row.samplingModules) ? (
             <Tooltip
               interactive
@@ -714,7 +714,7 @@ const SiteMapTable = () => {
               title={
                 row.samplingModules.length ? (
                   <ul style={{ marginLeft: Theme.spacing(-1) }}>
-                    {row.samplingModules.map(m => (
+                    {row.samplingModules.map((m) => (
                       <li key={m}>{PLOT_SAMPLING_MODULES[m]}</li>
                     ))}
                   </ul>
@@ -745,12 +745,12 @@ const SiteMapTable = () => {
 
   const components = {
     Container: Box,
-    Toolbar: toolbarProps => (
+    Toolbar: (toolbarProps) => (
       <div className={classes.toolbarContainer} data-selenium="sitemap-table-toolbar">
         <MTableToolbar {...toolbarProps} />
       </div>
     ),
-    FilterRow: filterRowProps => (
+    FilterRow: (filterRowProps) => (
       <MTableFilterRow
         {...filterRowProps}
         filterCellStyle={{ padding: '8px', backgroundColor: Theme.palette.grey[50] }}
@@ -791,7 +791,7 @@ const SiteMapTable = () => {
       return {};
     },
     selection: selectionActive,
-    selectionProps: !selectionActive ? null : row => ({
+    selectionProps: !selectionActive ? null : (row) => ({
       style: { margin: Theme.spacing(0, 0.5) },
       disabled: !rowIsSelectable(row),
     }),
@@ -818,7 +818,7 @@ const SiteMapTable = () => {
         options={tableOptions}
         onSelectionChange={!selectionActive ? null : (newRows) => {
           const action = { type: 'updateSelectionSet', selection: new Set() };
-          newRows.filter(row => row.tableData.checked).forEach((row) => {
+          newRows.filter((row) => row.tableData.checked).forEach((row) => {
             if (focus === FEATURE_TYPES.SITES.KEY) {
               action.selection.add(row.siteCode);
             }

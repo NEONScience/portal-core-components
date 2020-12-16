@@ -19,7 +19,7 @@ import PropsTable from '../../../components/PropsTable';
 import NeonPage from './NeonPage';
 import Theme from '../Theme/Theme';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -248,7 +248,7 @@ const sidebarLinks = [
       </CodeBlock>
     ),
     description: (
-      <React.Fragment>
+      <>
         <p>
           Array of objects describing links to appear in the page sidebar navigation.
         </p>
@@ -268,7 +268,7 @@ const sidebarLinks = [
           Finally, when <tt>sidebarLinksAsStandaloneChildren</tt> is <tt>true</tt>, the title of
           the page can be overridden on a per-sidebar-link basis by setting a <tt>pageTitle</tt>.
         </p>
-      </React.Fragment>
+      </>
     ),
   },
   // sidebarLinksAdditionalContent
@@ -332,7 +332,7 @@ const sidebarLinks = [
     type: 'boolean',
     default: 'false',
     description: (
-      <React.Fragment>
+      <>
         <p>
           When a sidebar has enough links or content the sticky positioning can become a hinderance.
           This is especially true when used on a page with very tall content or infinitely tall
@@ -344,7 +344,7 @@ const sidebarLinks = [
           will not have sticky behavior and instead scroll with the rest of the page. The difference
           in behavior is only visible at and above the medium breakpoint.
         </p>
-      </React.Fragment>
+      </>
     ),
   },
   // sidebarWidth
@@ -468,7 +468,7 @@ export default function StyleGuide() {
   );
 
   return (
-    <React.Fragment>
+    <>
 
       <DocBlock>
         The standard component for generating a page on the Data Portal with a consistent header,
@@ -921,6 +921,6 @@ export default function TriggerRunTimeErrorButtons() {
         `}
       </CodeBlock>
 
-    </React.Fragment>
+    </>
   );
 }

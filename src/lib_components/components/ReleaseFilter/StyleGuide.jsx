@@ -14,7 +14,7 @@ import PropsTable from '../../../components/PropsTable';
 import ReleaseFilter from './ReleaseFilter';
 import Theme from '../Theme/Theme';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -103,7 +103,7 @@ const propRows = [
       <i>See functional example code below</i>
     ),
     description: (
-      <React.Fragment>
+      <>
         <p>
           Array of objects containing the following keys:
         </p>
@@ -112,7 +112,7 @@ const propRows = [
           <li><tt>generationDate</tt> (ISO date string, required)</li>
           <li><tt>url</tt> (DOI string, optional)</li>
         </ul>
-      </React.Fragment>
+      </>
     ),
   },
   {
@@ -264,7 +264,7 @@ export default function StyleGuide() {
   const classes = useStyles(Theme);
 
   return (
-    <React.Fragment>
+    <>
 
       <DocBlock>
         Use a ReleaseFilter to present a visually consistent means of switching between releases
@@ -421,6 +421,6 @@ const releasesWithCounts = [
 `}
       </CodeBlock>
 
-    </React.Fragment>
+    </>
   );
 }

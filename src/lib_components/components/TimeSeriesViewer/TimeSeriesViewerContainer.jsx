@@ -41,7 +41,7 @@ import TimeSeriesViewerGraph from './TimeSeriesViewerGraph';
 // We can't rely on flex-sizing to work during resize events as some components within tabs
 // won't be able to shrink correctly on resize (notably: Data Product Availability charts).
 const VERTICAL_TABS_WIDTH = 150;
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   tabsContainer: {
     display: 'flex',
     margin: theme.spacing(0, -0.5, -0.5, -0.5),
@@ -111,7 +111,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const useTabsStyles = makeStyles(theme => ({
+const useTabsStyles = makeStyles((theme) => ({
   scroller: {
     [theme.breakpoints.up('md')]: {
       backgroundColor: theme.palette.grey[200],
@@ -119,7 +119,7 @@ const useTabsStyles = makeStyles(theme => ({
   },
 }));
 
-const useTabStyles = makeStyles(theme => ({
+const useTabStyles = makeStyles((theme) => ({
   root: {
     [theme.breakpoints.up('md')]: {
       marginLeft: '-1.5px',
@@ -275,7 +275,7 @@ function TimeSeriesViewerSummary() {
   const variablesSummary = !variables.length ? (
     <Skeleton {...skeletonProps} width={250} />
   ) : (
-    <React.Fragment>
+    <>
       <Typography variant="body2">
         {variables.join(', ')}
       </Typography>
@@ -284,7 +284,7 @@ function TimeSeriesViewerSummary() {
           {`Quality flags: ${qualityFlags.join(', ')}`}
         </Typography>
       ) : null}
-    </React.Fragment>
+    </>
   );
 
   // Axes
@@ -306,7 +306,7 @@ function TimeSeriesViewerSummary() {
       axes[yAxis].push({ title: 'Range', value: range });
     }
   });
-  const renderAxisSetting = setting => (
+  const renderAxisSetting = (setting) => (
     <div key={setting.title} style={{ marginRight: Theme.spacing(2), whiteSpace: 'nowrap' }}>
       <span className={classes.axisSettingTitle}>
         {`${setting.title}:`}

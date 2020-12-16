@@ -23,7 +23,7 @@ import InfoIcon from '@material-ui/icons/InfoOutlined';
 
 import Theme from '../Theme/Theme';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   title: {
     fontWeight: 500,
   },
@@ -129,8 +129,8 @@ const ReleaseFilter = (props) => {
   const optionCount = releases.length + (excludeNullRelease ? 0 : 1);
   if (!optionCount) { return null; }
 
-  const findReleaseObject = release => releases.find(entry => entry.release === release) || null;
-  const findRelease = release => (findReleaseObject(release) || {}).release || null;
+  const findReleaseObject = (release) => releases.find((r) => r.release === release) || null;
+  const findRelease = (release) => (findReleaseObject(release) || {}).release || null;
   const getProductCount = (release) => {
     if (!release) { return null; }
     if (Array.isArray(release.dataProducts)) {
@@ -298,10 +298,10 @@ const ReleaseFilter = (props) => {
     <Select
       data-selenium="release-filter"
       value={selectedRelease || UNSPECIFIED_NAME}
-      onChange={event => handleChange(event.target.value)}
+      onChange={(event) => handleChange(event.target.value)}
       input={input}
       aria-labelledby={labelId}
-      renderValue={value => value}
+      renderValue={(value) => value}
       disabled={optionCount < 2}
     >
       {excludeNullRelease ? null : (

@@ -14,7 +14,7 @@ import ExampleBlock from '../../../components/ExampleBlock';
 import SiteChip from './SiteChip';
 import Theme from '../Theme/Theme';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -24,7 +24,7 @@ export default function StyleGuide() {
   const classes = useStyles(Theme);
 
   return (
-    <React.Fragment>
+    <>
 
       <DocBlock>
         A standardized Material UI Chip for displaying a site or short-form
@@ -102,6 +102,6 @@ import SiteChip from 'portal-core-components/lib/components/SiteChip';
 <SiteChip label="DEJU" size="large" variant="default" color="default" onDelete={() => {}} />
         `}
       </CodeBlock>
-    </React.Fragment>
+    </>
   );
 }

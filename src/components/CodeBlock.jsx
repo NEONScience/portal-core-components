@@ -7,7 +7,7 @@ import '../../node_modules/highlight.js/styles/zenburn.css';
 
 import Theme from '../lib_components/components/Theme/Theme';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     margin: theme.spacing(2, 0),
     '& code': {

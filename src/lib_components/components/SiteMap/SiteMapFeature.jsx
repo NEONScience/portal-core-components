@@ -55,7 +55,7 @@ import {
 
 import Theme, { COLORS } from '../Theme/Theme';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   selectionSnackbar: {
     width: '100%',
     color: '#000',
@@ -193,9 +193,9 @@ const useStyles = makeStyles(theme => ({
 const positionsArrayIsValid = (positions, checkAllCoords = false) => {
   if (!Array.isArray(positions) || positions.length === 0) { return false; }
   if (!checkAllCoords) { return true; }
-  return positions.every(p => (
+  return positions.every((p) => (
     Array.isArray(p) && (
-      (p.length === 2 && p.every(c => Number.isFinite(c))) || positionsArrayIsValid(p)
+      (p.length === 2 && p.every((c) => Number.isFinite(c))) || positionsArrayIsValid(p)
     )
   ));
 };
@@ -461,13 +461,13 @@ const SiteMapFeature = (props) => {
       }
     }
     const internal = (
-      <React.Fragment>
+      <>
         {selectedIcon}
         <img src={siteIcon} alt={siteCode} className={classes.popupSiteIcon} style={markerStyle} />
         <Typography variant="caption" style={{ textAlign: 'left' }}>
           {`${site.description} (${site.siteCode})`}
         </Typography>
-      </React.Fragment>
+      </>
     );
     const containerProps = {
       key: siteCode,
@@ -590,10 +590,10 @@ const SiteMapFeature = (props) => {
       <Typography variant="caption">
         {loc.plotDimensions}
         {!Number.isFinite(loc.plotSize) ? null : (
-          <React.Fragment>
+          <>
             <br />
             {`(${loc.plotSize.toFixed(0)}m\u00b2)`}
-          </React.Fragment>
+          </>
         )}
       </Typography>
     </div>
@@ -632,7 +632,7 @@ const SiteMapFeature = (props) => {
           {!loc.samplingModules.length ? (
             <i>none</i>
           ) : (
-            loc.samplingModules.map(m => PLOT_SAMPLING_MODULES[m]).join(', ')
+            loc.samplingModules.map((m) => PLOT_SAMPLING_MODULES[m]).join(', ')
           )}
         </Typography>
       </Grid>
@@ -667,7 +667,7 @@ const SiteMapFeature = (props) => {
     const { sites = new Set() } = featureData[boundaryKey];
     let selectable = null;
     if (selectionActive && selectionType === FEATURE_TYPES.SITES.KEY) {
-      const selectableSites = new Set([...sites].filter(siteCode => (
+      const selectableSites = new Set([...sites].filter((siteCode) => (
         !validItems || validItems.has(siteCode)
       )));
       if (!selectableSites.size) {
@@ -687,23 +687,23 @@ const SiteMapFeature = (props) => {
         style={{ marginBottom: Theme.spacing(2) }}
       >
         {!sites.size ? (
-          <React.Fragment>
+          <>
             <Typography variant="subtitle2" gutterBottom>NEON Sites</Typography>
             <Typography variant="caption">
               <i>none</i>
             </Typography>
-          </React.Fragment>
+          </>
         ) : (
-          <React.Fragment>
+          <>
             <Typography variant="subtitle2" gutterBottom>
               {`NEON Sites (${sites.size}${selectable || ''}):`}
             </Typography>
             <div>
-              {[...sites].map(siteCode => (
+              {[...sites].map((siteCode) => (
                 renderSite(siteCode, selectionType === FEATURE_TYPES.SITES.KEY)
               ))}
             </div>
-          </React.Fragment>
+          </>
         )}
       </Grid>
     );
@@ -731,7 +731,7 @@ const SiteMapFeature = (props) => {
   /**
      Render: Popup Row; Plot Size and Slope
   */
-  const renderPlotSizeAndSlope = loc => (
+  const renderPlotSizeAndSlope = (loc) => (
     <React.Fragment key="plotSizeAndSlope">
       <Grid item xs={6}>
         {renderPlotSize(loc)}
@@ -745,7 +745,7 @@ const SiteMapFeature = (props) => {
   /**
      Render: Popup Row; Tower Details
   */
-  const renderTowerDetails = loc => (
+  const renderTowerDetails = (loc) => (
     <Grid key="towerDetails" item xs={12} data-selenium="sitemap-map-popup-towerDetails">
       <Typography variant="subtitle2">Levels</Typography>
       <Typography variant="caption">{(loc.children || []).length}</Typography>
@@ -764,7 +764,7 @@ const SiteMapFeature = (props) => {
         titleStyle.marginBottom = '-4px';
         const tooltip = `${NLCD_CLASSES[loc.nlcdClass].name} - ${NLCD_CLASSES[loc.nlcdClass].description}`;
         nlcd = (
-          <React.Fragment>
+          <>
             {NLCD_CLASSES[loc.nlcdClass].name}
             <div
               className={classes.nlcdClass}
@@ -780,7 +780,7 @@ const SiteMapFeature = (props) => {
                 <HelpIcon style={{ fontSize: '1rem' }} />
               </IconButton>
             </Tooltip>
-          </React.Fragment>
+          </>
         );
       }
     }
@@ -843,7 +843,7 @@ const SiteMapFeature = (props) => {
         {renderPopupTitle(location)}
         <Grid container spacing={1}>
           {renderCoordsAndElevation(loc)}
-          {additionalRows.map(row => (typeof row === 'function' ? row(loc) : row))}
+          {additionalRows.map((row) => (typeof row === 'function' ? row(loc) : row))}
           {loc.nlcdClass ? renderNlcdClass(loc) : null}
           {renderLocationSiteAndDomain(siteCode)}
         </Grid>
@@ -864,7 +864,7 @@ const SiteMapFeature = (props) => {
           {properties.areaKm2 ? renderBoundaryArea(featureData[key]) : null}
           {(
             Array.isArray(additionalRows)
-              ? additionalRows.map(row => (typeof row === 'function' ? row(key) : row))
+              ? additionalRows.map((row) => (typeof row === 'function' ? row(key) : row))
               : null
           )}
           {renderLocationSiteAndDomain(key)}
@@ -885,7 +885,7 @@ const SiteMapFeature = (props) => {
     const selectionPortion = state.selection.derived[boundaryFeatureKey][boundaryKey] || null;
     const selectableSites = !validItems
       ? boundarySites
-      : new Set([...boundarySites].filter(siteCode => validItems.has(siteCode)));
+      : new Set([...boundarySites].filter((siteCode) => validItems.has(siteCode)));
     const selectableCount = selectableSites.size;
     const ActionIcon = selectableCount ? ClickIcon : UnselectableIcon;
     const selectable = boundarySites.size === selectableCount ? '' : ' selectable';
@@ -901,7 +901,7 @@ const SiteMapFeature = (props) => {
     let actionText = `No sites in this ${FEATURES[boundaryFeatureKey].nameSingular} are selectable`;
     if (selectableCount) {
       if (selectionPortion === SELECTION_PORTIONS.PARTIAL) {
-        const intersection = new Set([...selectableSites].filter(x => selectedItems.has(x)));
+        const intersection = new Set([...selectableSites].filter((x) => selectedItems.has(x)));
         const remaining = selectableCount - intersection.size;
         action = `add remaining ${remaining}${selectable} site${remaining === 1 ? '' : 's'}`;
       }
@@ -914,11 +914,11 @@ const SiteMapFeature = (props) => {
         snackbarIconClass = classes.removeFromSelectionSnackbarIcon;
       }
       actionText = (
-        <React.Fragment>
+        <>
           {/* eslint-disable react/jsx-one-expression-per-line */}
           Click to <b>{action}</b> {preposition} selection
           {/* eslint-enable react/jsx-one-expression-per-line */}
-        </React.Fragment>
+        </>
       );
     }
     return (
@@ -962,11 +962,11 @@ const SiteMapFeature = (props) => {
         action = isSelected ? (
           <b>Selected</b>
         ) : (
-          <React.Fragment>
+          <>
             {/* eslint-disable react/jsx-one-expression-per-line */}
             Click to <b>select</b>
             {/* eslint-enable react/jsx-one-expression-per-line */}
-          </React.Fragment>
+          </>
         );
         snackbarClass = isSelected
           ? classes.selectedSelectionSnackbar
@@ -976,11 +976,11 @@ const SiteMapFeature = (props) => {
           : classes.addToSelectionSnackbarIcon;
       } else {
         action = (
-          <React.Fragment>
+          <>
             {/* eslint-disable react/jsx-one-expression-per-line */}
             Click to <b>{verb}</b> {preposition} selection
             {/* eslint-enable react/jsx-one-expression-per-line */}
-          </React.Fragment>
+          </>
         );
         snackbarClass = isSelected
           ? classes.removeFromSelectionSnackbar
@@ -1191,7 +1191,7 @@ const SiteMapFeature = (props) => {
     FLIGHT_BOX_BOUNDARIES: renderBoundaryPopup,
     HUTS: renderLocationPopup,
     MEGAPITS: renderLocationPopup,
-    POUR_POINTS: siteCode => (
+    POUR_POINTS: (siteCode) => (
       <Popup {...popupProps}>
         {renderPopupTitle(`${siteCode} Watershed Pour Point`)}
         <Grid container spacing={1}>
@@ -1266,7 +1266,7 @@ const SiteMapFeature = (props) => {
         shapeKeys.includes('geometry') && Object.keys(shapeData.geometry).includes('coordinates')
           && Array.isArray(shapeData.geometry.coordinates)
           && shapeData.geometry.coordinates.length === 2
-          && shapeData.geometry.coordinates.every(x => Number.isFinite(x))
+          && shapeData.geometry.coordinates.every((x) => Number.isFinite(x))
       ) || (
         shapeKeys.includes('latitude') && shapeKeys.includes('longitude')
       )
@@ -1410,7 +1410,7 @@ const SiteMapFeature = (props) => {
     }
     // Marker
     if (featureShape === 'Marker' && isPoint(shapeData)) {
-      position = ['latitude', 'longitude'].every(k => shapeKeys.includes(k))
+      position = ['latitude', 'longitude'].every((k) => shapeKeys.includes(k))
         ? [shapeData.latitude, shapeData.longitude]
         : shapeData.geometry.coordinates;
       if (state.map.zoomedIcons[featureKey] !== null) {
@@ -1531,12 +1531,12 @@ const SiteMapFeature = (props) => {
           return (validItems.has(a) ? 1 : -1);
         })
         // Focus lcoation should render above all others
-        .sort(a => (a === state.focusLocation.current ? 1 : -1))
+        .sort((a) => (a === state.focusLocation.current ? 1 : -1))
         .flatMap((keyA) => {
           if (
             [FEATURE_TYPES.LOCATIONS.KEY, FEATURE_TYPES.SAMPLING_POINTS.KEY].includes(featureType)
           ) {
-            return Object.keys(featureData[keyA]).map(keyB => renderShape(keyA, keyB));
+            return Object.keys(featureData[keyA]).map((keyB) => renderShape(keyA, keyB));
           }
           return renderShape(keyA);
         })}
