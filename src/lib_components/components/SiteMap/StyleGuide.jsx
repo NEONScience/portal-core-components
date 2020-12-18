@@ -4,7 +4,7 @@ import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
-// import Link from '@material-ui/core/Link';
+import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 
 import DocBlock from '../../../components/DocBlock';
