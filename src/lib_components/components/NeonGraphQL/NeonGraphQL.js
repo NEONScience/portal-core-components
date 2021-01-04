@@ -17,63 +17,6 @@ export const DIMENSIONALITIES = {
 
 const transformQuery = (query) => JSON.stringify({ query });
 
-/*
-query Products {
-  products(release: "test-tag-1") {
-    productCode
-    productName
-    productDescription
-    productScienceTeam
-    productHasExpanded
-    productBasicDescription
-    productExpandedDescription
-    productPublicationFormatType
-    keywords
-    themes
-    siteCodes {
-      siteCode
-      availableMonths
-    }
-    dois {
-      release
-      generationDate
-      url
-    }
-    releases {
-      release
-      generationDate
-    }
-  }
-}
-query Products {
-    product (productCode: "DP1.00001.001", release: "test-tag-1") {
-        productCode
-        productName
-        productDescription
-        productScienceTeam
-        productHasExpanded
-        productBasicDescription
-        productExpandedDescription
-        productPublicationFormatType
-        keywords
-        themes
-        siteCodes {
-            siteCode
-            availableMonths
-        }
-        dois {
-            release
-            generationDate
-            url
-        }
-        releases {
-            release
-            generationDate
-        }
-    }
-}
-*/
-
 const getQueryBody = (type = '', dimensionality = '', args = {}) => {
   let query = '';
   switch (type) {
@@ -97,14 +40,10 @@ const getQueryBody = (type = '', dimensionality = '', args = {}) => {
               siteCode
               availableMonths
             }
-            dois {
-              release
-              generationDate
-              url
-            }
             releases {
               release
               generationDate
+              url
             }
           }
         }`;
@@ -126,14 +65,10 @@ const getQueryBody = (type = '', dimensionality = '', args = {}) => {
               siteCode
               availableMonths
             }
-            dois {
-              release
-              generationDate
-              url
-            }
             releases {
               release
               generationDate
+              url
             }
           }
         }`;

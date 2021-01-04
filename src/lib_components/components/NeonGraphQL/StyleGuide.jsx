@@ -44,6 +44,21 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '1.1rem',
     fontWeight: 700,
   },
+  statusSuccess: {
+    fontWeight: 700,
+    color: '#009900',
+  },
+  statusFetching: {
+    fontWeight: 700,
+    color: '#999900',
+  },
+  statusError: {
+    fontWeight: 700,
+    color: '#CC0000',
+  },
+  statusOther: {
+    color: '#666666',
+  },
 }));
 
 export default function StyleGuide() {
@@ -234,7 +249,7 @@ observable.subscribe();
   const getAllDataProductsObservable = (release) => (
     NeonGraphQL.getAllDataProducts(release).pipe(
       map((response) => {
-        setAllDataProductsStatus('success');
+        setAllDataProductsStatus(response.response.errors ? 'error' : 'success');
         setAllDataProductsResponse(response.response);
       }),
       catchError((error) => {
@@ -260,7 +275,7 @@ observable.subscribe();
       switchMap((resp) => of(resp)),
     ).pipe(
       map((response) => {
-        setDataProductByCodeStatus('success');
+        setDataProductByCodeStatus(response.response.errors ? 'error' : 'success');
         setDataProductByCodeResponse(response.response);
       }),
       catchError((error) => {
@@ -283,7 +298,7 @@ observable.subscribe();
   const [allSitesResponse, setAllSitesResponse] = useState(null);
   const allSitesObservable = NeonGraphQL.getAllSites().pipe(
     map((response) => {
-      setAllSitesStatus('success');
+      setAllSitesStatus(response.response.errors ? 'error' : 'success');
       setAllSitesResponse(response.response);
     }),
     catchError((error) => {
@@ -304,7 +319,7 @@ observable.subscribe();
     switchMap((resp) => of(resp)),
   ).pipe(
     map((response) => {
-      setSiteByCodeStatus('success');
+      setSiteByCodeStatus(response.response.errors ? 'error' : 'success');
       setSiteByCodeResponse(response.response);
     }),
     catchError((error) => {
@@ -317,6 +332,13 @@ observable.subscribe();
     setSiteByCodeStatus('fetching');
     setSiteByCodeArgument(code);
     getSiteByCodeObservable(code).subscribe();
+  };
+
+  const renderStatus = (status) => {
+    let className = classes.statusOther;
+    if (status === 'success') { className = classes.statusSuccess; }
+    if (status === 'error') { className = classes.statusError; }
+    return <span className={className}>{status || <i>n/a</i>}</span>;
   };
 
   return (
@@ -412,7 +434,7 @@ import NeonGraphQL from 'portal-core-components/lib/components/NeonGraphQL';
             release: {allDataProductsReleaseArgument || <i>n/a</i>}
           </div>
           <div>
-            Status: {allDataProductsStatus || <i>n/a</i>}
+            Status: {renderStatus(allDataProductsStatus)}
           </div>
           <div className={classes.pre}>
             {allDataProductsResponse
@@ -520,7 +542,7 @@ const myComponent = () => {
             release: {dataProductByCodeReleaseArgument || <i>n/a</i>}
           </div>
           <div>
-            Status: {dataProductByCodeStatus || <i>n/a</i>}
+            Status: {renderStatus(dataProductByCodeStatus)}
           </div>
           <div className={classes.pre}>
             {dataProductByCodeResponse
@@ -629,7 +651,7 @@ const myComponent = () => {
             Fetch all sites
           </button>
           <div>
-            Status: {allSitesStatus || <i>n/a</i>}
+            Status: {renderStatus(allSitesStatus)}
           </div>
           <div className={classes.pre}>
             {allSitesResponse
@@ -715,7 +737,7 @@ const myComponent = () => {
             Argument: {siteByCodeArgument || <i>n/a</i>}
           </div>
           <div>
-            Status: {siteByCodeStatus || <i>n/a</i>}
+            Status: {renderStatus(siteByCodeStatus)}
           </div>
           <div className={classes.pre}>
             {siteByCodeResponse
