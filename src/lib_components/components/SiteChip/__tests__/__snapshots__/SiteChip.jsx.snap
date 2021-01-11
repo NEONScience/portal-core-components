@@ -12,7 +12,7 @@ exports[`SiteChip Renders correctly 1`] = `
     className="MuiAvatar-root MuiAvatar-circle MuiChip-avatar MuiChip-avatarSmall MuiChip-avatarColorSecondary MuiAvatar-colorDefault"
     style={
       Object {
-        "backgroundColor": "#0073cf",
+        "backgroundColor": "#002c77",
         "height": "24px",
         "marginLeft": "0px",
         "width": "24px",
@@ -20,7 +20,7 @@ exports[`SiteChip Renders correctly 1`] = `
     }
   >
     <svg
-      aria-hidden="true"
+      aria-hidden={true}
       className="MuiSvgIcon-root"
       focusable="false"
       viewBox="0 0 24 24"
