@@ -389,10 +389,10 @@ ReleaseFilter.propTypes = {
   releases: PropTypes.arrayOf(
     PropTypes.shape({
       release: PropTypes.string.isRequired,
-      generationDate: PropTypes.string.isRequired,
+      generationDate: PropTypes.string,
       url: PropTypes.string,
       productDoi: PropTypes.shape({
-        generationDate: PropTypes.string.isRequired,
+        generationDate: PropTypes.string,
         url: PropTypes.string.isRequired,
       }),
     }),
