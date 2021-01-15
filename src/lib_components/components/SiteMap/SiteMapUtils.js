@@ -1150,6 +1150,7 @@ export const calculateFeatureAvailability = (state) => {
 */
 export const getHref = (key, arg = null) => {
   const EXPLORE_DATA_PRODUCTS_BASE = 'https://data.neonscience.org/data-products/explore';
+  if ((arg || '').length === 0) { return '#'; }
   switch (key) {
     case 'EXPLORE_DATA_PRODUCTS_BY_SITE':
       return `${EXPLORE_DATA_PRODUCTS_BASE}?site=${arg}`;
@@ -1158,7 +1159,7 @@ export const getHref = (key, arg = null) => {
     case 'EXPLORE_DATA_PRODUCTS_BY_DOMAIN':
       return `${EXPLORE_DATA_PRODUCTS_BASE}?domain=${arg}`;
     case 'SITE_DETAILS':
-      return `https://www.neonscience.org/field-sites/field-sites-map/${arg}`;
+      return `https://www.neonscience.org/field-sites/${arg}`;
     case 'DOMAIN_DETAILS':
       return `https://www.neonscience.org/domains/${arg}`;
     default:
@@ -1907,10 +1908,11 @@ export const calculateLocationsInBounds = (
 
 export const deriveFullObservatoryZoomLevel = (mapRef) => {
   const FALLBACK_ZOOM = 2;
-  if (!mapRef.current) { return FALLBACK_ZOOM; }
+  if (typeof mapRef !== 'object' || mapRef === null || !mapRef.current) { return FALLBACK_ZOOM; }
   const container = mapRef.current.container.parentElement;
+  if (!container.clientWidth || !container.clientHeight) { return FALLBACK_ZOOM; }
   const divisor = (23 * 8);
   const minorDim = Math.min(container.clientWidth / divisor, container.clientHeight / divisor);
   const derivedZoom = [1, 2, 4, 6, 11].findIndex((m) => m > minorDim);
-  return derivedZoom === -1 ? FALLBACK_ZOOM : derivedZoom;
+  return Math.max(derivedZoom, 1);
 };
