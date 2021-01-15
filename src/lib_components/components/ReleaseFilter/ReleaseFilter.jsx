@@ -96,7 +96,7 @@ const INFO_URL = 'https://www.neonscience.org/data-samples/data-management/data-
 
 const formatGenerationDate = (generationDate) => {
   const generationMoment = moment.utc(generationDate);
-  return generationMoment ? generationMoment.format('MMMM D, YYYY') : null;
+  return generationMoment.isValid() ? generationMoment.format('MMMM D, YYYY') : null;
 };
 
 const ReleaseFilter = (props) => {
@@ -121,7 +121,7 @@ const ReleaseFilter = (props) => {
   const inputId = `release-filter-input-${instanceId}`;
   const labelId = `release-filter-label-${instanceId}`;
 
-  const releases = [...releasesProp || []].sort(
+  const releases = [...releasesProp].sort(
     (a, b) => (a.generationDate > b.generationDate ? -1 : 1),
   );
 
@@ -132,7 +132,6 @@ const ReleaseFilter = (props) => {
   const findReleaseObject = (release) => releases.find((r) => r.release === release) || null;
   const findRelease = (release) => (findReleaseObject(release) || {}).release || null;
   const getProductCount = (release) => {
-    if (!release) { return null; }
     if (Array.isArray(release.dataProducts)) {
       return release.dataProducts.length;
     }
@@ -194,7 +193,7 @@ const ReleaseFilter = (props) => {
   if (skeleton) {
     const skeletonStyle = { marginBottom: Theme.spacing(1) };
     return (
-      <div {...(otherProps || {})} style={{ maxWidth: `${maxWidth}px`, overflow: 'hidden' }}>
+      <div {...otherProps} style={{ maxWidth: `${maxWidth}px`, overflow: 'hidden' }}>
         {titleNode}
         <Skeleton variant="rect" width={maxWidth} height={36} style={skeletonStyle} />
         <Skeleton width="70%" height={16} style={skeletonStyle} />

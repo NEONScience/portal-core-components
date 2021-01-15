@@ -255,6 +255,248 @@ exports[`ReleaseFilter Renders in skeleton mode 1`] = `
 </div>
 `;
 
+exports[`ReleaseFilter Renders nothing with no releases and an excluded null release 1`] = `null`;
+
+exports[`ReleaseFilter Renders product counts without a defined null release count 1`] = `
+<div
+  style={
+    Object {
+      "maxWidth": "236px",
+      "width": "100%",
+    }
+  }
+>
+  <div
+    className="makeStyles-titleContainer-2"
+  >
+    <h3
+      className="MuiTypography-root makeStyles-title-1 MuiTypography-h5"
+      id="release-filter-label-id12"
+    >
+      Release
+    </h3>
+    <button
+      aria-describedby={null}
+      aria-label={
+        <div>
+          A data release is a set of data files that is static (unchanging), always available to end users, and citable. See 
+          <ForwardRef(WithStyles)
+            href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases"
+            target="_blank"
+          >
+            Data Product Revisions and Releases
+          </ForwardRef(WithStyles)>
+           for more details.
+        </div>
+      }
+      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+      disabled={false}
+      onBlur={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseOver={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      style={
+        Object {
+          "marginLeft": 4,
+        }
+      }
+      tabIndex={0}
+      title={null}
+      type="button"
+    >
+      <span
+        className="MuiIconButton-label"
+      >
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+          />
+        </svg>
+      </span>
+      <span
+        className="MuiTouchRipple-root"
+      />
+    </button>
+  </div>
+  <div
+    aria-labelledby="release-filter-label-id12"
+    className="MuiInputBase-root MuiOutlinedInput-root makeStyles-selectInput-3 MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+    data-selenium="release-filter"
+    onClick={[Function]}
+    style={
+      Object {
+        "maxWidth": "236px",
+      }
+    }
+  >
+    <div
+      aria-haspopup="listbox"
+      aria-labelledby="mui-component-select-release-filter-input-id12"
+      className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+      id="mui-component-select-release-filter-input-id12"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onMouseDown={[Function]}
+      role="button"
+      tabIndex={0}
+    >
+      TEST-TAG-2
+    </div>
+    <input
+      aria-hidden={true}
+      className="MuiSelect-nativeInput"
+      id="release-filter-input-id12"
+      name="release-filter-input-id12"
+      onAnimationStart={[Function]}
+      onChange={[Function]}
+      tabIndex={-1}
+      value="TEST-TAG-2"
+    />
+    <svg
+      aria-hidden={true}
+      className="MuiSvgIcon-root MuiSelect-icon"
+      focusable="false"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M7 10l5 5 5-5z"
+      />
+    </svg>
+    <fieldset
+      aria-hidden={true}
+      className="PrivateNotchedOutline-root-13 MuiOutlinedInput-notchedOutline"
+      style={
+        Object {
+          "paddingLeft": 8,
+        }
+      }
+    >
+      <legend
+        className="PrivateNotchedOutline-legend-14"
+        style={
+          Object {
+            "width": 0.01,
+          }
+        }
+      >
+        <span
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "&#8203;",
+            }
+          }
+        />
+      </legend>
+    </fieldset>
+  </div>
+  <div
+    className="makeStyles-descriptionContainer-4"
+  >
+    <span
+      className="MuiTypography-root makeStyles-description-6 MuiTypography-caption"
+    >
+      Generated: January 15, 2021
+    </span>
+  </div>
+  <div
+    className="makeStyles-descriptionContainer-4"
+  >
+    <span
+      className="MuiTypography-root makeStyles-description-6 MuiTypography-caption"
+    >
+      2 data products
+    </span>
+  </div>
+  <div
+    className="makeStyles-descriptionContainer-4"
+  >
+    <div
+      className="makeStyles-descriptionFlexInnerContainer-5"
+    >
+      <span
+        className="MuiTypography-root makeStyles-description-6 MuiTypography-caption"
+        style={
+          Object {
+            "marginRight": "4px",
+          }
+        }
+        title="Digital Object Identifier (DOI) - A citable permanent link to this this data product release"
+      >
+        DOI:
+      </span>
+      <span
+        aria-label="doi"
+        className="MuiTypography-root makeStyles-description-6 MuiTypography-caption"
+        style={
+          Object {
+            "overflowWrap": "anywhere",
+          }
+        }
+      >
+        http://data.cite/bar
+      </span>
+    </div>
+    <button
+      className="MuiButtonBase-root MuiButton-root MuiButton-outlined makeStyles-copyButton-8 MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+      disabled={false}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+      title="Copy DOI: http://data.cite/bar"
+      type="button"
+    >
+      <span
+        className="MuiButton-label"
+      >
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+          focusable="false"
+          style={
+            Object {
+              "marginRight": 8,
+            }
+          }
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"
+          />
+        </svg>
+        Copy DOI
+      </span>
+      <span
+        className="MuiTouchRipple-root"
+      />
+    </button>
+  </div>
+</div>
+`;
+
 exports[`ReleaseFilter Renders with a custom title 1`] = `
 <div
   style={
@@ -559,6 +801,100 @@ exports[`ReleaseFilter Renders with a selected release 1`] = `
         />
       </legend>
     </fieldset>
+  </div>
+</div>
+`;
+
+exports[`ReleaseFilter Renders with blank title 1`] = `
+<div
+  style={
+    Object {
+      "maxWidth": "236px",
+      "width": "100%",
+    }
+  }
+>
+  <div
+    aria-labelledby="release-filter-label-id9"
+    className="MuiInputBase-root MuiOutlinedInput-root makeStyles-selectInput-3 Mui-disabled Mui-disabled MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+    data-selenium="release-filter"
+    onClick={[Function]}
+    style={
+      Object {
+        "maxWidth": "236px",
+      }
+    }
+  >
+    <div
+      aria-disabled="true"
+      aria-haspopup="listbox"
+      aria-labelledby="mui-component-select-release-filter-input-id9"
+      className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiOutlinedInput-input Mui-disabled Mui-disabled MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense Mui-disabled"
+      id="mui-component-select-release-filter-input-id9"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onMouseDown={null}
+      role="button"
+      tabIndex={null}
+    >
+      Latest and Provisional
+    </div>
+    <input
+      aria-hidden={true}
+      className="MuiSelect-nativeInput"
+      id="release-filter-input-id9"
+      name="release-filter-input-id9"
+      onAnimationStart={[Function]}
+      onChange={[Function]}
+      tabIndex={-1}
+      value="Latest and Provisional"
+    />
+    <svg
+      aria-hidden={true}
+      className="MuiSvgIcon-root MuiSelect-icon Mui-disabled"
+      focusable="false"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M7 10l5 5 5-5z"
+      />
+    </svg>
+    <fieldset
+      aria-hidden={true}
+      className="PrivateNotchedOutline-root-13 MuiOutlinedInput-notchedOutline"
+      style={
+        Object {
+          "paddingLeft": 8,
+        }
+      }
+    >
+      <legend
+        className="PrivateNotchedOutline-legend-14"
+        style={
+          Object {
+            "width": 0.01,
+          }
+        }
+      >
+        <span
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "&#8203;",
+            }
+          }
+        />
+      </legend>
+    </fieldset>
+  </div>
+  <div
+    className="makeStyles-descriptionContainer-4"
+  >
+    <span
+      className="MuiTypography-root makeStyles-description-6 MuiTypography-caption"
+    >
+      Data in the latest release in addition to provisional data (not yet in any release)
+    </span>
   </div>
 </div>
 `;
@@ -1222,6 +1558,164 @@ exports[`ReleaseFilter Renders with product counts (using data product codes) 1`
   >
     <h3
       className="MuiTypography-root makeStyles-title-1 MuiTypography-h5"
+      id="release-filter-label-id11"
+    >
+      Release
+    </h3>
+    <button
+      aria-describedby={null}
+      aria-label={
+        <div>
+          A data release is a set of data files that is static (unchanging), always available to end users, and citable. See 
+          <ForwardRef(WithStyles)
+            href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases"
+            target="_blank"
+          >
+            Data Product Revisions and Releases
+          </ForwardRef(WithStyles)>
+           for more details.
+        </div>
+      }
+      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+      disabled={false}
+      onBlur={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseOver={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      style={
+        Object {
+          "marginLeft": 4,
+        }
+      }
+      tabIndex={0}
+      title={null}
+      type="button"
+    >
+      <span
+        className="MuiIconButton-label"
+      >
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+          />
+        </svg>
+      </span>
+      <span
+        className="MuiTouchRipple-root"
+      />
+    </button>
+  </div>
+  <div
+    aria-labelledby="release-filter-label-id11"
+    className="MuiInputBase-root MuiOutlinedInput-root makeStyles-selectInput-3 MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+    data-selenium="release-filter"
+    onClick={[Function]}
+    style={
+      Object {
+        "maxWidth": "236px",
+      }
+    }
+  >
+    <div
+      aria-haspopup="listbox"
+      aria-labelledby="mui-component-select-release-filter-input-id11"
+      className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+      id="mui-component-select-release-filter-input-id11"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onMouseDown={[Function]}
+      role="button"
+      tabIndex={0}
+    >
+      TEST-TAG-1
+    </div>
+    <input
+      aria-hidden={true}
+      className="MuiSelect-nativeInput"
+      id="release-filter-input-id11"
+      name="release-filter-input-id11"
+      onAnimationStart={[Function]}
+      onChange={[Function]}
+      tabIndex={-1}
+      value="TEST-TAG-1"
+    />
+    <svg
+      aria-hidden={true}
+      className="MuiSvgIcon-root MuiSelect-icon"
+      focusable="false"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M7 10l5 5 5-5z"
+      />
+    </svg>
+    <fieldset
+      aria-hidden={true}
+      className="PrivateNotchedOutline-root-13 MuiOutlinedInput-notchedOutline"
+      style={
+        Object {
+          "paddingLeft": 8,
+        }
+      }
+    >
+      <legend
+        className="PrivateNotchedOutline-legend-14"
+        style={
+          Object {
+            "width": 0.01,
+          }
+        }
+      >
+        <span
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "&#8203;",
+            }
+          }
+        />
+      </legend>
+    </fieldset>
+  </div>
+  <div
+    className="makeStyles-descriptionContainer-4"
+  >
+    <span
+      className="MuiTypography-root makeStyles-description-6 MuiTypography-caption"
+    >
+      3 data products
+    </span>
+  </div>
+</div>
+`;
+
+exports[`ReleaseFilter Renders with product counts (using data product objects) 1`] = `
+<div
+  style={
+    Object {
+      "maxWidth": "236px",
+      "width": "100%",
+    }
+  }
+>
+  <div
+    className="makeStyles-titleContainer-2"
+  >
+    <h3
+      className="MuiTypography-root makeStyles-title-1 MuiTypography-h5"
       id="release-filter-label-id10"
     >
       Release
@@ -1305,171 +1799,13 @@ exports[`ReleaseFilter Renders with product counts (using data product codes) 1`
       role="button"
       tabIndex={0}
     >
-      TEST-TAG-2
+      Latest and Provisional
     </div>
     <input
       aria-hidden={true}
       className="MuiSelect-nativeInput"
       id="release-filter-input-id10"
       name="release-filter-input-id10"
-      onAnimationStart={[Function]}
-      onChange={[Function]}
-      tabIndex={-1}
-      value="TEST-TAG-2"
-    />
-    <svg
-      aria-hidden={true}
-      className="MuiSvgIcon-root MuiSelect-icon"
-      focusable="false"
-      viewBox="0 0 24 24"
-    >
-      <path
-        d="M7 10l5 5 5-5z"
-      />
-    </svg>
-    <fieldset
-      aria-hidden={true}
-      className="PrivateNotchedOutline-root-13 MuiOutlinedInput-notchedOutline"
-      style={
-        Object {
-          "paddingLeft": 8,
-        }
-      }
-    >
-      <legend
-        className="PrivateNotchedOutline-legend-14"
-        style={
-          Object {
-            "width": 0.01,
-          }
-        }
-      >
-        <span
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "&#8203;",
-            }
-          }
-        />
-      </legend>
-    </fieldset>
-  </div>
-  <div
-    className="makeStyles-descriptionContainer-4"
-  >
-    <span
-      className="MuiTypography-root makeStyles-description-6 MuiTypography-caption"
-    >
-      2 data products
-    </span>
-  </div>
-</div>
-`;
-
-exports[`ReleaseFilter Renders with product counts (using data product objects) 1`] = `
-<div
-  style={
-    Object {
-      "maxWidth": "236px",
-      "width": "100%",
-    }
-  }
->
-  <div
-    className="makeStyles-titleContainer-2"
-  >
-    <h3
-      className="MuiTypography-root makeStyles-title-1 MuiTypography-h5"
-      id="release-filter-label-id9"
-    >
-      Release
-    </h3>
-    <button
-      aria-describedby={null}
-      aria-label={
-        <div>
-          A data release is a set of data files that is static (unchanging), always available to end users, and citable. See 
-          <ForwardRef(WithStyles)
-            href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases"
-            target="_blank"
-          >
-            Data Product Revisions and Releases
-          </ForwardRef(WithStyles)>
-           for more details.
-        </div>
-      }
-      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-      disabled={false}
-      onBlur={[Function]}
-      onDragLeave={[Function]}
-      onFocus={[Function]}
-      onKeyDown={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseLeave={[Function]}
-      onMouseOver={[Function]}
-      onMouseUp={[Function]}
-      onTouchEnd={[Function]}
-      onTouchMove={[Function]}
-      onTouchStart={[Function]}
-      style={
-        Object {
-          "marginLeft": 4,
-        }
-      }
-      tabIndex={0}
-      title={null}
-      type="button"
-    >
-      <span
-        className="MuiIconButton-label"
-      >
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-          />
-        </svg>
-      </span>
-      <span
-        className="MuiTouchRipple-root"
-      />
-    </button>
-  </div>
-  <div
-    aria-labelledby="release-filter-label-id9"
-    className="MuiInputBase-root MuiOutlinedInput-root makeStyles-selectInput-3 MuiInputBase-marginDense MuiOutlinedInput-marginDense"
-    data-selenium="release-filter"
-    onClick={[Function]}
-    style={
-      Object {
-        "maxWidth": "236px",
-      }
-    }
-  >
-    <div
-      aria-haspopup="listbox"
-      aria-labelledby="mui-component-select-release-filter-input-id9"
-      className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
-      id="mui-component-select-release-filter-input-id9"
-      onBlur={[Function]}
-      onFocus={[Function]}
-      onKeyDown={[Function]}
-      onMouseDown={[Function]}
-      role="button"
-      tabIndex={0}
-    >
-      Latest and Provisional
-    </div>
-    <input
-      aria-hidden={true}
-      className="MuiSelect-nativeInput"
-      id="release-filter-input-id9"
-      name="release-filter-input-id9"
       onAnimationStart={[Function]}
       onChange={[Function]}
       tabIndex={-1}
