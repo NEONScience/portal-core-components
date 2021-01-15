@@ -20,4 +20,4 @@
      ...
    }
 */
-export default function parseDomainHierarchy(rawHierarchy?: {}): any;
+export default function parseDomainHierarchy(rawHierarchy: any): any;
