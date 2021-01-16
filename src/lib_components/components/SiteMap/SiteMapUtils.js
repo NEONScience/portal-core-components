@@ -1544,7 +1544,7 @@ export const hydrateNeonContextData = (state, neonContextData) => {
   // States
   Object.keys(neonContextData.states).forEach((stateCode) => {
     newState.featureData[FEATURE_TYPES.STATES.KEY][FEATURES.STATES.KEY][stateCode] = {
-      ...newState.featureData[FEATURE_TYPES.STATES.KEY][FEATURES.STATES.KEY][stateCode],
+      ...(newState.featureData[FEATURE_TYPES.STATES.KEY][FEATURES.STATES.KEY][stateCode] || {}),
       ...neonContextData.states[stateCode],
       sites: neonContextData.stateSites[stateCode],
     };
@@ -1552,7 +1552,7 @@ export const hydrateNeonContextData = (state, neonContextData) => {
   // Domains
   Object.keys(neonContextData.domains).forEach((domainCode) => {
     newState.featureData[FEATURE_TYPES.DOMAINS.KEY][FEATURES.DOMAINS.KEY][domainCode] = {
-      ...newState.featureData[FEATURE_TYPES.DOMAINS.KEY][FEATURES.DOMAINS.KEY][domainCode],
+      ...(newState.featureData[FEATURE_TYPES.DOMAINS.KEY][FEATURES.DOMAINS.KEY][domainCode] || {}),
       ...neonContextData.domains[domainCode],
       sites: neonContextData.domainSites[domainCode],
     };
@@ -1751,14 +1751,14 @@ const getPhantomLeafletMap = (state) => {
   return map;
 };
 
-export const mapIsAtFocusLocation = (state = {}) => (
-  state.map.zoom && Array.isArray(state.map.center) && state.map.center.length === 2
-    && state.focusLocation.current && state.focusLocation.map.zoom
+export const mapIsAtFocusLocation = (state = {}) => ((
+  state.map && state.map.zoom && Array.isArray(state.map.center) && state.map.center.length === 2
+    && state.focusLocation && state.focusLocation.current && state.focusLocation.map.zoom
     && Array.isArray(state.focusLocation.map.center) && state.focusLocation.map.center.length === 2
     && state.map.zoom === state.focusLocation.map.zoom
     && state.map.center[0] === state.focusLocation.map.center[0]
     && state.map.center[1] === state.focusLocation.map.center[1]
-);
+) || false);
 
 export const getMapStateForFocusLocation = (state = {}) => {
   const { focusLocation } = state;
