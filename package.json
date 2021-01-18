@@ -131,6 +131,7 @@
       "/node_modules/",
       "/src/lib_components/remoteAssets/",
       "/src/lib_components/types/",
+      "src/sampleData",
       "StyleGuide.jsx"
     ]
   },

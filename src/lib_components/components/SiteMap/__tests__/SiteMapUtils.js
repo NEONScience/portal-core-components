@@ -8,6 +8,7 @@ import {
   mapIsAtFocusLocation,
   DEFAULT_STATE,
   FEATURES,
+  SITE_MAP_PROP_TYPES
 } from '../SiteMapUtils';
 
 describe('SiteMapUtils', () => {
@@ -360,6 +361,52 @@ describe('SiteMapUtils', () => {
           map: { center: [-68.3, 15] },
         }
       })).toBe(false);      
+    });
+  });
+
+  describe('SelectionLimitPropType', () => {
+    const { selectionLimit: SelectionLimitPropType } = SITE_MAP_PROP_TYPES;
+    test('valid for null', () => {
+      expect(SelectionLimitPropType({ p: null }, 'p')).toBe(null);
+    });
+    test('invalid for unsupported types', () => {
+      expect(SelectionLimitPropType({}, 'p')).toBeInstanceOf(Error);
+      expect(SelectionLimitPropType({ p: 'foo' }, 'p')).toBeInstanceOf(Error);
+      expect(SelectionLimitPropType({ p: () => {} }, 'p')).toBeInstanceOf(Error);
+      expect(SelectionLimitPropType({ p: { foo: 'bar' } }, 'p')).toBeInstanceOf(Error);
+      expect(SelectionLimitPropType({ p: NaN }, 'p')).toBeInstanceOf(Error);
+    });
+    test('valid for integers greater than or equal to 1', () => {
+      expect(SelectionLimitPropType({ p: 1 }, 'p')).toBe(null);
+      expect(SelectionLimitPropType({ p: 10 }, 'p')).toBe(null);
+      expect(SelectionLimitPropType({ p: 10000000 }, 'p')).toBe(null);
+    });
+    test('invalid for integers less than 1', () => {
+      expect(SelectionLimitPropType({ p: 0 }, 'p')).toBeInstanceOf(Error);
+      expect(SelectionLimitPropType({ p: -7 }, 'p')).toBeInstanceOf(Error);
+    });
+    test('invalid for non-integer numbers', () => {
+      expect(SelectionLimitPropType({ p: 1.7 }, 'p')).toBeInstanceOf(Error);
+      expect(SelectionLimitPropType({ p: Math.PI }, 'p')).toBeInstanceOf(Error);
+    });
+    test('valid for 2-length arrays of increasing non-equal integers', () => {
+      expect(SelectionLimitPropType({ p: [2, 5] }, 'p')).toBe(null);
+      expect(SelectionLimitPropType({ p: [1, 4000] }, 'p')).toBe(null);
+      expect(SelectionLimitPropType({ p: [466, 467] }, 'p')).toBe(null);
+    });
+    test('invalid for arrays of integers with length other than 2', () => {
+      expect(SelectionLimitPropType({ p: [3] }, 'p')).toBeInstanceOf(Error);
+      expect(SelectionLimitPropType({ p: [2, 5, 7] }, 'p')).toBeInstanceOf(Error);
+    });
+    test('invalid for arrays where any values are non-integer or less than 1', () => {
+      expect(SelectionLimitPropType({ p: [3, Math.PI] }, 'p')).toBeInstanceOf(Error);
+      expect(SelectionLimitPropType({ p: [5.8, 7] }, 'p')).toBeInstanceOf(Error);
+      expect(SelectionLimitPropType({ p: [0, 10] }, 'p')).toBeInstanceOf(Error);
+      expect(SelectionLimitPropType({ p: [-15, 10] }, 'p')).toBeInstanceOf(Error);
+    });
+    test('invalid for 2-length integer arrays where values are equal or not ascending', () => {
+      expect(SelectionLimitPropType({ p: [3, 3] }, 'p')).toBeInstanceOf(Error);
+      expect(SelectionLimitPropType({ p: [7, 5] }, 'p')).toBeInstanceOf(Error);
     });
   });
 
