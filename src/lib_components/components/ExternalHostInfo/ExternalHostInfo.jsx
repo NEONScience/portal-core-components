@@ -24,12 +24,12 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   callout: {
-    margin: Theme.spacing(0.5, 0, 3, 0),
-    backgroundColor: theme.colors.BROWN[50],
-    borderColor: theme.colors.BROWN[300],
+    margin: theme.spacing(0.5, 0, 3, 0),
+    backgroundColor: Theme.colors.BROWN[50],
+    borderColor: Theme.colors.BROWN[300],
   },
   calloutIcon: {
-    color: theme.colors.BROWN[300],
+    color: Theme.colors.BROWN[300],
     marginRight: theme.spacing(2),
   },
   specificLinksContainer: {
