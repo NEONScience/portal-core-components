@@ -3,17 +3,36 @@ import { renderHook } from "@testing-library/react-hooks";
 import TimeSeriesViewerContext, {
   summarizeTimeSteps,
   getTestableItems,
+  Y_AXIS_RANGE_MODES,
 } from '../TimeSeriesViewerContext';
 
 const { useTimeSeriesViewerState } = TimeSeriesViewerContext;
 
 const {
   DEFAULT_STATE,
+  FETCH_STATUS,
+  generateYAxisRange,
   getTimeStep,
   getUpdatedValueRange,
   getContinuousDatesArray,
+  parseProductData,
+  parseSiteMonthData,
+  parseSiteVariables,
+  parseSitePositions,
   TimeSeriesViewerPropTypes,
 } = getTestableItems();
+
+// Used in testing the parse functions below
+const expectedInitialSite = {
+  fetches: {
+    siteMonths: {},
+    positions: { status: FETCH_STATUS.AWAITING_CALL, error: null, url: null },
+    variables: { status: FETCH_STATUS.AWAITING_CALL, error: null, url: null },
+  },
+  variables: new Set(),
+  positions: {},
+  availableMonths: [],
+};
 
 describe('TimeSeriesViewerContext', () => {
   describe('useTimeSeriesViewerState()', () => {
@@ -46,6 +65,40 @@ describe('TimeSeriesViewerContext', () => {
       expect(summarizeTimeSteps(2, '5min', false)).toBe('10 minute');
       expect(summarizeTimeSteps(300, '1day', false)).toBe('10 month');
       expect(summarizeTimeSteps(50, '60min', false)).toBe('2.1 day');
+    });
+  });
+
+  describe('generateYAxisRange', () => {
+    test('returns original axis range if the providd axis object is misconfigured', () => {
+      expect(generateYAxisRange({})).toBeUndefined();
+      expect(generateYAxisRange({
+        rangeMode: 'INVALID',
+        axisRange: [0, 10],
+      })).toStrictEqual([0, 10]);
+    });
+    test('returns proper range for CENTERED', () => {
+      expect(generateYAxisRange({
+        rangeMode: Y_AXIS_RANGE_MODES.CENTERED,
+        axisRange: [0, 10],
+        dataRange: [-10, 30],
+        standardDeviation: 1,
+      })).toStrictEqual([-11, 31]);
+    });
+    test('returns proper range for FROM_ZERO', () => {
+      expect(generateYAxisRange({
+        rangeMode: Y_AXIS_RANGE_MODES.FROM_ZERO,
+        axisRange: [0, 10],
+        dataRange: [15, 30],
+        standardDeviation: 3,
+      })).toStrictEqual([0, 33]);
+    });
+    test('returns unaltered axisRange for CUSTOM', () => {
+      expect(generateYAxisRange({
+        rangeMode: Y_AXIS_RANGE_MODES.CUSTOM,
+        axisRange: [0, 10],
+        dataRange: [15, 30],
+        standardDeviation: 7,
+      })).toStrictEqual([0, 10]);
     });
   });
 
@@ -120,9 +173,374 @@ describe('TimeSeriesViewerContext', () => {
     });
   });
 
-  /*
-  describe('TimeSeriesViewerPropTypes', () => {
-    
+  describe('parseProductData', () => {
+    const parseProductDataInput = {
+      productCode: 'DP1.00001.001',
+      productName: '2D wind speed and direction',
+      productDescription: 'Lorem ipsum',
+      siteCodes: [
+        { siteCode: 'ABBY', availableMonths: ['2001-01', '2001-02'] },
+        { siteCode: 'BONA', availableMonths: ['2001-05', '2001-07'] },
+        { siteCode: 'CLBJ', availableMonths: null },
+      ],
+    };
+    const expectedParseProductDataOutput = {
+      productCode: 'DP1.00001.001',
+      productName: '2D wind speed and direction',
+      productDescription: 'Lorem ipsum',
+      productSensor: null,
+      dateRange: ['2001-01', '2001-07'],
+      variables: {},
+      sites: {
+        ABBY: {
+          ...expectedInitialSite,
+          availableMonths: ['2001-01', '2001-02'],
+        },
+        BONA: {
+          ...expectedInitialSite,
+          availableMonths: ['2001-05', '2001-07'],
+        },
+      },
+      continuousDateRange: [
+        '2001-01', '2001-02', '2001-03', '2001-04', '2001-05', '2001-06', '2001-07', '2001-08',
+        '2001-09', '2001-10', '2001-11', '2001-12', '2002-01',
+      ],
+    };
+    test('correctly parses valid input', () => {
+      expect(parseProductData(parseProductDataInput))
+        .toStrictEqual(expectedParseProductDataOutput);
+    });
   });
-  */
+
+  describe('parseSiteMonthData', () => {
+    const parseSiteMonthDataInputSite = {
+      ...expectedInitialSite,
+      availableMonths: ['2001-01', '2001-02'],
+    };
+    const parseSiteMonthDataInputFiles = [
+      { // valid data file
+        name: 'NEON.D16.ABBY.DP1.00001.001.000.030.002.2DWSD_2min.2001-01.expanded.20210105T140638Z.csv',
+        url: 'https://bar/qux',
+      },
+      { // invalid data file (position '0F0' is not valid)
+        name: 'NEON.D16.ABBY.DP1.00001.001.0F0.030.002.2DWSD_2min.2001-01.expanded.20210105T140638Z.csv',
+        url: 'https://bar/qux',
+      },
+      { // valid data file
+        name: 'NEON.D16.ABBY.DP1.00001.001.000.010.030.2DWSD_30min.2001-02.basic.20210105T140638Z.csv',
+        url: 'https://foo/bar',
+      },
+      { // invalid data file (timestep '75min' is not valid)
+        name: 'NEON.D16.ABBY.DP1.00001.001.000.030.002.2DWSD_75min.2001-01.expanded.20210105T140638Z.csv',
+        url: 'https://bar/qux',
+      },
+      { // valid variables file
+        name: 'NEON.D16.ABBY.DP1.00001.001.variables.csv',
+        url: 'https://foo/bar/var',
+      },
+      { // valid sensor positions file
+        name: 'NEON.D16.ABBY.DP1.00001.001.sensor_positions.csv',
+        url: 'https://foo/bar/sen',
+      },
+      { // valid second sensor positions file
+        name: 'NEON.D16.ABBY.DP1.00001.001.sensor_positions.2.csv',
+        url: 'https://foo/bar/sen2',
+      },
+      { // invalid / unrecognized file
+        name: 'NOT-A-CSV.json',
+        url: 'https://foo/bar/json',
+      },
+    ];
+    const expectedParseSiteMonthDataOutput = {
+      availableTimeSteps: new Set(['2min', '30min']),
+      siteObject: {
+        ...parseSiteMonthDataInputSite,
+        fetches: {
+          siteMonths: {},
+          positions: {
+            status: FETCH_STATUS.AWAITING_CALL,
+            error: null,
+            url: 'https://foo/bar/sen',
+          },
+          variables: {
+            status: FETCH_STATUS.AWAITING_CALL,
+            error: null,
+            url: 'https://foo/bar/var'
+          },
+        },
+        positions: {
+          '000.030': {
+            history: [],
+            data: {
+              '2001-01': {
+                expanded: {
+                  '2min': {
+                    url: 'https://bar/qux',
+                    status: FETCH_STATUS.AWAITING_CALL,
+                    error: null,
+                    series: {},
+                  },
+                },
+              },
+            },
+          },
+          '000.010': {
+            history: [],
+            data: {
+              '2001-02': {
+                basic: {
+                  '30min': {
+                    url: 'https://foo/bar',
+                    status: FETCH_STATUS.AWAITING_CALL,
+                    error: null,
+                    series: {},
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    };
+    test('correctly parses valid input', () => {
+      expect(parseSiteMonthData(parseSiteMonthDataInputSite, parseSiteMonthDataInputFiles))
+        .toStrictEqual(expectedParseSiteMonthDataOutput);
+    });
+  });
+
+  describe('parseSiteVariables', () => {
+    const previousVariables = {
+      existingVar: {
+        dataType: 'unsigned integer',
+        description: 'Existing...',
+        downloadPkg: 'expanded',
+        units: 'foo',
+        timeSteps: new Set(['1min']),
+        sites: new Set(['BONA', 'CLBJ']),
+        isSelectable: true,
+        canBeDefault: false,
+        isDateTime: false,
+      },
+    };
+    const inputCSV = `
+table,fieldName,description,dataType,units,downloadPkg,pubFormat
+2DWSD_2min,startDateTime,"Date...",dateTime,NA,basic,"yyyy-MM-dd'T'HH:mm:ss'Z'(floor)"
+2DWSD_2min,windSpeedMean,"Mean...",real,metersPerSecond,basic,"*.##(round)"
+2DWSD_30min,rangeFailQM,"QM...",real,percent,expanded,"*.##(round)"
+2DWSD_15min,calmWindQF,"QF...",signed integer,NA,expanded,"integer"
+`;
+    const expectedOutput = {
+      variablesSet: new Set(['startDateTime', 'windSpeedMean', 'rangeFailQM', 'calmWindQF']),
+      variablesObject: {
+        ...previousVariables,
+        startDateTime: {
+          dataType: 'dateTime',
+          description: 'Date...',
+          downloadPkg: 'basic',
+          units: 'NA',
+          timeSteps: new Set(['2min']),
+          sites: new Set(['ABBY']),
+          isSelectable: false,
+          canBeDefault: false,
+          isDateTime: true,
+        },
+        windSpeedMean: {
+          dataType: 'real',
+          description: 'Mean...',
+          downloadPkg: 'basic',
+          units: 'metersPerSecond',
+          timeSteps: new Set(['2min']),
+          sites: new Set(['ABBY']),
+          isSelectable: true,
+          canBeDefault: true,
+          isDateTime: false,
+        },
+        rangeFailQM: {
+          dataType: 'real',
+          description: 'QM...',
+          downloadPkg: 'expanded',
+          units: 'percent',
+          timeSteps: new Set(['30min']),
+          sites: new Set(['ABBY']),
+          isSelectable: true,
+          canBeDefault: false,
+          isDateTime: false,
+        },
+        calmWindQF: {
+          dataType: 'signed integer',
+          description: 'QF...',
+          downloadPkg: 'expanded',
+          units: 'NA',
+          timeSteps: new Set(['15min']),
+          sites: new Set(['ABBY']),
+          isSelectable: false,
+          canBeDefault: false,
+          isDateTime: false,
+        },
+      },
+    };
+    test('correctly parses valid input', () => {
+      expect(parseSiteVariables(previousVariables, 'ABBY', inputCSV))
+        .toStrictEqual(expectedOutput);
+    });
+  });
+
+  describe('parseSitePositions', () => {
+    const inputSite = {
+      ...expectedInitialSite,
+      positions: {
+        '000.010': {
+          history: [
+            {
+              'HOR.VER': '000.010',
+              name: 'CFGLOC102010',
+              description: 'Abby Road 2D Wind L1',
+              start: '2001-01-01T00:00:00Z',
+              end: '2009-01-01T00:00:00Z',
+              xOffset: '2.36',
+              yOffset: '6.25',
+              zOffset: '0.22',
+            },
+          ],
+          data: {},
+        },
+      },
+    };
+    const inputCSV = `
+HOR.VER,name,description,start,end,xOffset,yOffset,zOffset
+"000.010",CFGLOC102010,"Abby Road 2D Wind L1","2010-01-01T00:00:00Z",,2.36,6.25,0.22
+"000.010",CFGLOC102010,"Abby Road 2D Wind L1","2010-01-01T00:00:00Z",,2.36,6.25,0.22
+"000.030",CFGLOC102020,"Abby Road 2D Wind L3","2010-01-01T00:00:00Z",,2.36,6.22,9.43
+`;
+    const expectedOutput = {
+      ...expectedInitialSite,
+      positions: {
+        '000.010': {
+          history: [
+            {
+              'HOR.VER': '000.010',
+              name: 'CFGLOC102010',
+              description: 'Abby Road 2D Wind L1',
+              start: '2001-01-01T00:00:00Z',
+              end: '2009-01-01T00:00:00Z',
+              xOffset: '2.36',
+              yOffset: '6.25',
+              zOffset: '0.22',
+            },
+            {
+              'HOR.VER': '000.010',
+              name: 'CFGLOC102010',
+              description: 'Abby Road 2D Wind L1',
+              start: '2010-01-01T00:00:00Z',
+              end: '',
+              xOffset: '2.36',
+              yOffset: '6.25',
+              zOffset: '0.22',
+            },
+          ],
+          data: {},
+        },
+        '000.030': {
+          history: [
+            {
+              'HOR.VER': '000.030',
+              name: 'CFGLOC102020',
+              description: 'Abby Road 2D Wind L3',
+              start: '2010-01-01T00:00:00Z',
+              end: '',
+              xOffset: '2.36',
+              yOffset: '6.22',
+              zOffset: '9.43',
+            },
+          ],
+          data: {},
+        },
+      },
+    };
+    test('correctly parses valid input', () => {
+      expect(parseSitePositions(inputSite, inputCSV))
+        .toStrictEqual(expectedOutput);
+    });
+  });
+
+  describe('TimeSeriesViewerPropTypes', () => {
+    const { productCode, productData } = TimeSeriesViewerPropTypes;
+    describe('productCode', () => {
+      test('not valid if neither productCode nor productData are present', () => {
+        expect(productCode({ foo: 'bar' }, 'productCode')).toBeInstanceOf(Error);
+      });
+      test('valid if missing but productData is present', () => {
+        expect(productCode({ productData: 'bar' }, 'productCode')).toBe(null);
+      });
+      test('invalid if present but not a string or otherwise empty', () => {
+        expect(productCode({ productCode: null }, 'productCode')).toBeInstanceOf(Error);
+        expect(productCode({ productCode: 1000 }, 'productCode')).toBeInstanceOf(Error);
+        expect(productCode({ productCode: ['foo', 'bar'] }, 'productCode')).toBeInstanceOf(Error);
+        expect(productCode({ productCode: '' }, 'productCode')).toBeInstanceOf(Error);
+      });
+      test('valid with any string', () => {
+        expect(productCode({ productCode: 'DP1.00001.001' }, 'productCode')).toBe(null);
+        expect(productCode({ productCode: 'bar' }, 'productCode')).toBe(null);
+      });
+    });
+    describe('productData', () => {
+      test('not valid if neither productCode nor productData are present', () => {
+        expect(productData({ foo: 'bar' }, 'productData')).toBeInstanceOf(Error);
+      });
+      test('valid if missing but productCode is present', () => {
+        expect(productData({ productCode: 'bar' }, 'productData')).toBe(null);
+      });
+      test('invalid if present but not matching the productDataShape', () => {
+        const badProductDataShapes = [
+          { productCode: 'foo' },
+          {
+            productCode: 'foo',
+            siteCodes: [
+              { siteCode: 'A', availableMonths: ['2001-01', '2001-02'] },
+            ],
+          },
+          {
+            productCode: 'foo',
+            productName: 'bar',
+            siteCodes: [
+              { availableMonths: ['2001-01', '2001-02'] },
+            ],
+          },
+          {
+            productCode: 'foo',
+            productName: 'bar',
+            siteCodes: [
+              { siteCode: 'A', availableMonths: [null] },
+            ],
+          },
+        ];
+        badProductDataShapes.forEach((badShape, idx) => {
+          expect(productData({ productData: badShape }, 'productData')).toBeInstanceOf(Error);
+        });
+      });
+      test('valid for supported product data shapes', () => {
+        const goodProductDataShapes = [
+          {
+            productCode: 'foo',
+            productName: 'bar',
+            siteCodes: [
+              { siteCode: 'A', availableMonths: ['2001-01', '2001-02'] },
+            ],
+          },
+          {
+            productCode: 'foo',
+            productName: 'bar',
+            siteCodes: [
+              { siteCode: 'A', availableMonths: ['2001-01', '2001-02'], otherThings: null, },
+              { siteCode: 'B', availableMonths: ['2001-01', '2001-02'] },
+            ],
+            additionalStuff: 'whatever',
+          },
+        ];
+        goodProductDataShapes.forEach((goodShape) => {
+          expect(productData({ productData: goodShape }, 'productData')).toBe(null);
+        });
+      });
+    });
+  });
 });

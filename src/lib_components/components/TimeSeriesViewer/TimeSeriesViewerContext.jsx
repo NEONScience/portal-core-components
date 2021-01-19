@@ -189,8 +189,11 @@ export const TIME_STEPS = {
   '0AQ': { key: '0AQ', tmi: '100', seconds: 60 },
   '1day': { key: '1day', tmi: '01D', seconds: 86400 },
 };
-const getTimeStep = (input) => (
+const getTimeStep = (input = '') => (
   Object.keys(TIME_STEPS).find((key) => TIME_STEPS[key].tmi === input) || null
+);
+const getTimeStepForTableName = (tableName = '') => (
+  Object.keys(TIME_STEPS).find((key) => tableName.endsWith(`_${key}`)) || null
 );
 export const summarizeTimeSteps = (steps, timeStep = null, pluralize = true) => {
   if (steps === 1) { return 'none'; }
@@ -314,7 +317,7 @@ const parseProductData = (productData = {}) => {
     productCode: productData.productCode,
     productName: productData.productName,
     productDescription: productData.productDescription,
-    productSensor: productData.productSensor,
+    productSensor: productData.productSensor || null,
     dateRange: [null, null],
     variables: {},
     sites: {},
@@ -359,12 +362,12 @@ const parseSiteMonthData = (site, files) => {
     // Must be a CSV file
     if (!/\.csv$/.test(name)) { return; }
     // Must not be a variables or positions file
-    if (name.includes('variables') && !newSite.fetches.variables.url) {
-      newSite.fetches.variables.url = url;
+    if (name.includes('variables')) {
+      if (!newSite.fetches.variables.url) { newSite.fetches.variables.url = url; }
       return;
     }
-    if (name.includes('sensor_positions') && !newSite.fetches.positions.url) {
-      newSite.fetches.positions.url = url;
+    if (name.includes('sensor_positions')) {
+      if (!newSite.fetches.positions.url) { newSite.fetches.positions.url = url; }
       return;
     }
     // Split file name by (.); all DATA_FILE_PARTS validators must point to a valid part
@@ -424,7 +427,7 @@ const parseSiteVariables = (previousVariables, siteCode, csv) => {
       table,
       units,
     } = variable;
-    const timeStep = getTimeStep(table);
+    const timeStep = getTimeStepForTableName(table);
     const isSelectable = variable.dataType !== 'dateTime'
       && variable.units !== 'NA'
       && !/QF$/.test(fieldName);
@@ -1264,45 +1267,34 @@ const Provider = (props) => {
 /**
    Prop Types
 */
-const productDataShape = PropTypes.shape({
-  productCode: PropTypes.string.isRequired,
-  productName: PropTypes.string.isRequired,
-  siteCodes: PropTypes.arrayOf(
-    PropTypes.shape({
-      siteCode: PropTypes.string.isRequired,
-      availableMonths: PropTypes.arrayOf(PropTypes.string).isRequired,
-    }),
-  ),
-});
-
 const TimeSeriesViewerPropTypes = {
   productCode: (props, propName, componentName) => {
     const { productCode, productData } = props;
     if (!productCode && !productData) {
       return new Error(`One of props 'productCode' or 'productData' was not specified in '${componentName}'.`);
     }
-    if (productCode) {
-      PropTypes.checkPropTypes(
-        { productCode: PropTypes.string },
-        { productCode },
-        propName,
-        componentName,
-      );
+    if (productData && !productCode) { return null; }
+    if (productCode && typeof productCode === 'string' && productCode.length > 0) {
+      return null;
     }
-    return null;
+    return new Error(`Props 'productCode' must be a non-empty string in '${componentName}'.`);
   },
   productData: (props, propName, componentName) => {
     const { productCode, productData } = props;
     if (!productCode && !productData) {
       return new Error(`One of props 'productCode' or 'productData' was not specified in '${componentName}'.`);
     }
-    if (productData) {
-      PropTypes.checkPropTypes(
-        { productData: productDataShape },
-        { productData },
-        propName,
-        componentName,
-      );
+    if (productCode && !productData) { return null; }
+    if (
+      (typeof productData.productCode !== 'string' || !productData.productCode.length)
+        || (typeof productData.productName !== 'string' || !productData.productName.length)
+        || (Array.isArray(productData.siteCodes) && !productData.siteCodes.every((siteObj) => (
+          typeof siteObj.siteCode === 'string' && siteObj.siteCode.length
+            && Array.isArray(siteObj.availableMonths)
+            && siteObj.availableMonths.every((month) => (typeof month === 'string' && month.length))
+        )))
+    ) {
+      return new Error(`Prop 'productData' is malformed in '${componentName}'.`);
     }
     return null;
   },
@@ -1341,9 +1333,15 @@ export default TimeSeriesViewerContext;
 export const getTestableItems = () => (
   process.env.NODE_ENV !== 'test' ? {} : {
     DEFAULT_STATE,
+    FETCH_STATUS,
+    generateYAxisRange,
     getTimeStep,
     getUpdatedValueRange,
     getContinuousDatesArray,
+    parseProductData,
+    parseSiteMonthData,
+    parseSiteVariables,
+    parseSitePositions,
     TimeSeriesViewerPropTypes,
   }
 );
