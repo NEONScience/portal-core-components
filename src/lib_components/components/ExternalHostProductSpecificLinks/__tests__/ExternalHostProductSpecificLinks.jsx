@@ -4,26 +4,7 @@ import renderer from 'react-test-renderer';
 import sitesJSON from '../../../staticJSON/sites.json';
 import statesJSON from '../../../staticJSON/states.json';
 
-/**
-   NeonContext Mock
-   We expect NeonContext to be final with sites data to get a full test of
-   ExternalHostProductSpecificLinks.
-*/
-jest.mock('../../NeonContext/NeonContext', () => (
-  {
-    ...(jest.requireActual('../../NeonContext/NeonContext')),
-    useNeonContextState: jest.fn()
-  }
-));
-
-import NeonContext from '../../NeonContext/NeonContext';
-
-NeonContext.useNeonContextState.mockReturnValue([
-  {
-    data: { sites: sitesJSON, states: statesJSON },
-    isFinal: true,
-  },
-]);
+import '../../../../__mocks__/NeonContext';
 
 import ExternalHostProductSpecificLinks from '../ExternalHostProductSpecificLinks';
 
