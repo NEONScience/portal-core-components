@@ -53,7 +53,12 @@ export const VALID_ENHANCED_STATUSES = {
 };
 
 export const calcRollupStatus = (statuses = []) => {
-  if (!Array.isArray(statuses)) { return statuses || null; }
+  if (!Array.isArray(statuses)) {
+    return Object.keys(VALID_ENHANCED_STATUSES).includes(statuses) ? statuses : null;
+  }
+  if (statuses.some(status => !Object.keys(VALID_ENHANCED_STATUSES).includes(status))) {
+    return null;
+  }
   const set = new Set(statuses);
   if (set.size === 0) { return null; }
   if (set.size === 1) { return Array.from(set)[0]; }
