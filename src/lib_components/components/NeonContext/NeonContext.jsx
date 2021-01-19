@@ -67,7 +67,7 @@ const DEFAULT_STATE = {
 // Derive values for stateSites and domainSites in state. This is a one-time mapping we
 // generate when sites are loaded into state containing lists of site codes for each
 // state code / domain code.
-const deriveRegionSites = (state) => {
+export const deriveRegionSites = (state) => {
   const stateSites = {};
   const domainSites = {};
   Object.keys(state.data.sites).forEach((siteCode) => {
@@ -78,9 +78,9 @@ const deriveRegionSites = (state) => {
     domainSites[domainCode].add(siteCode);
   });
   // Fill in empty sets for any states that had no NEON sites
-  Object.keys(state.data.states).forEach((stateCode) => {
-    if (!stateSites[stateCode]) { stateSites[stateCode] = new Set(); }
-  });
+  Object.keys(state.data.states)
+    .filter(stateCode => !stateSites[stateCode])
+    .forEach((stateCode) => { stateSites[stateCode] = new Set(); });
   return {
     ...state,
     data: { ...state.data, stateSites, domainSites },
@@ -180,20 +180,23 @@ const reducer = (state, action) => {
 /**
    Function to convert sites fetch response to the shape we expect
 */
-const parseSitesFetchResponse = (sitesArray = []) => {
+export const parseSitesFetchResponse = (sitesArray = []) => {
   if (!Array.isArray(sitesArray)) { return {}; }
   const sitesObj = {};
   sitesArray.forEach((site) => {
+    const siteCode = site.siteCode || site.code || null;
+    if (!siteCode) { return; }
+    const localReference = sitesJSON[siteCode] || {};
     sitesObj[site.siteCode] = {
-      siteCode: site.siteCode || site.code,
-      description: site.siteDescription || site.description,
-      type: site.siteType || site.type,
-      stateCode: site.stateCode,
-      domainCode: site.domainCode,
-      latitude: site.siteLatitude || site.latitude,
-      longitude: site.siteLongitude || site.longitude,
-      terrain: site.terrain || sitesJSON[site.siteCode].terrain,
-      zoom: site.zoom || sitesJSON[site.siteCode].zoom,
+      siteCode,
+      description: site.siteDescription || site.description || null,
+      type: site.siteType || site.type || null,
+      stateCode: site.stateCode || null,
+      domainCode: site.domainCode || null,
+      latitude: site.siteLatitude || site.latitude || null,
+      longitude: site.siteLongitude || site.longitude || null,
+      terrain: site.terrain || localReference.terrain || null,
+      zoom: site.zoom || localReference.zoom || null,
     };
   });
   return sitesObj;
