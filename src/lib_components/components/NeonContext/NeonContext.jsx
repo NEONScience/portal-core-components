@@ -67,7 +67,7 @@ const DEFAULT_STATE = {
 // Derive values for stateSites and domainSites in state. This is a one-time mapping we
 // generate when sites are loaded into state containing lists of site codes for each
 // state code / domain code.
-export const deriveRegionSites = (state) => {
+const deriveRegionSites = (state) => {
   const stateSites = {};
   const domainSites = {};
   Object.keys(state.data.sites).forEach((siteCode) => {
@@ -138,13 +138,13 @@ const reducer = (state, action) => {
 
     // Actions for handling auth fetch
     case 'setAuthenticated':
-      newState.auth.isAuthenticated = action.isAuthenticated;
+      newState.auth.isAuthenticated = !!action.isAuthenticated;
       return newState;
     case 'setAuthWorking':
-      newState.auth.isAuthWorking = action.isAuthWorking;
+      newState.auth.isAuthWorking = !!action.isAuthWorking;
       return newState;
     case 'setAuthWsConnected':
-      newState.auth.isAuthWsConnected = action.isAuthWsConnected;
+      newState.auth.isAuthWsConnected = !!action.isAuthWsConnected;
       return newState;
     case 'fetchAuthSucceeded':
       newState.fetches.auth.status = FETCH_STATUS.SUCCESS;
@@ -153,6 +153,7 @@ const reducer = (state, action) => {
       return newState;
     case 'fetchAuthFailed':
       newState.fetches.auth.status = FETCH_STATUS.ERROR;
+      newState.fetches.auth.error = action.error;
       newState.auth.isAuthenticated = false;
       newState.auth.userData = null;
       return newState;
@@ -180,7 +181,7 @@ const reducer = (state, action) => {
 /**
    Function to convert sites fetch response to the shape we expect
 */
-export const parseSitesFetchResponse = (sitesArray = []) => {
+const parseSitesFetchResponse = (sitesArray = []) => {
   if (!Array.isArray(sitesArray)) { return {}; }
   const sitesObj = {};
   sitesArray.forEach((site) => {
@@ -388,3 +389,14 @@ const NeonContext = {
   ProviderPropTypes,
 };
 export default NeonContext;
+
+// Additional items exported for unit testing
+export const getTestableItems = () => (
+  process.env.NODE_ENV !== 'test' ? {} : {
+    deriveRegionSites,
+    parseSitesFetchResponse,
+    reducer,
+    DRUPAL_HEADER_HTML,
+    DRUPAL_FOOTER_HTML,
+  }
+);

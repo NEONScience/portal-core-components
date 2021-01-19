@@ -185,7 +185,7 @@ export const TIME_STEPS = {
   '5min': { key: '5min', tmi: '005', seconds: 300 },
   '15min': { key: '15min', tmi: '015', seconds: 900 },
   '30min': { key: '30min', tmi: '030', seconds: 1800 },
-  '60min': { key: '1hr', tmi: '060', seconds: 1800 },
+  '60min': { key: '1hr', tmi: '060', seconds: 3600 },
   '0AQ': { key: '0AQ', tmi: '100', seconds: 60 },
   '1day': { key: '1day', tmi: '01D', seconds: 86400 },
 };
@@ -196,8 +196,8 @@ export const summarizeTimeSteps = (steps, timeStep = null, pluralize = true) => 
   if (steps === 1) { return 'none'; }
   const timeStepSeconds = timeStep && TIME_STEPS[timeStep] ? TIME_STEPS[timeStep].seconds : 1800;
   const seconds = steps * timeStepSeconds;
-  const breaks = [3600, 86400, 2592000, 31536000];
-  const intervals = ['hour', 'day', 'month', 'year'];
+  const breaks = [60, 3600, 86400, 2592000, 31536000];
+  const intervals = ['minute', 'hour', 'day', 'month', 'year'];
   const breakIdx = breaks.reduce((acc, cur, idx) => ((seconds > cur) ? idx : acc), 0);
   let value = (seconds / breaks[breakIdx]).toFixed(1);
   if (value.slice(value.length - 1) === '0') { value = value.slice(0, value.length - 2); }
@@ -275,6 +275,8 @@ const getUpdatedValueRange = (existingRange, newValue) => {
  * Generate a continuous list of "YYYY-MM" strings given an input date range
  * Will extend beginning and end of date range to encompass whole years
  * (e.g. ['2012-06', '2017-08'] => ['2012-01', '2012-02', ..., '2017-12', '2018-01']
+ * Note that in order for the range to actuall appear showing the whole year the following
+ * January must also be added.
  * @param {Array} dateRange - array of exactly two "YYYY-MM" strings
  * @param {boolean} roundToYears - if true then extend each side of the range to whole years
  */
@@ -304,7 +306,7 @@ const getContinuousDatesArray = (dateRange, roundToYears = false) => {
 
 /**
  * Build an object for state.product from a product data fetch response
- * @param {Object} productDate - JSON parse response from product data endpoint
+ * @param {Object} productData - JSON parse response from product data endpoint
  * @return {Object} new product object to be applied at state.product
  */
 const parseProductData = (productData = {}) => {
@@ -1334,3 +1336,14 @@ const TimeSeriesViewerContext = {
 };
 
 export default TimeSeriesViewerContext;
+
+// Additional items exported for unit testing
+export const getTestableItems = () => (
+  process.env.NODE_ENV !== 'test' ? {} : {
+    DEFAULT_STATE,
+    getTimeStep,
+    getUpdatedValueRange,
+    getContinuousDatesArray,
+    TimeSeriesViewerPropTypes,
+  }
+);
