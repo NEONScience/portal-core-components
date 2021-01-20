@@ -11,7 +11,7 @@ import {
   SITE_MAP_PROP_TYPES
 } from '../SiteMapUtils';
 
-describe('SiteMapUtils', () => {
+describe('SiteMap - SiteMapUtils', () => {
   /**
      Functions
   */

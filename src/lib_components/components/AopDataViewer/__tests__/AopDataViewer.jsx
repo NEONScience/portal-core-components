@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import mockAjaxResponse from '../../../../__mocks__/ajax';
+import { mockAjaxResponse } from '../../../../__mocks__/ajax';
 import mockReactComponent from '../../../../__mocks__/mockReactComponent';
 import '../../../../__mocks__/NeonContext';
 
