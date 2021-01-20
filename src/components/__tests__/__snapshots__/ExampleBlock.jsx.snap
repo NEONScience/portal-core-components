@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ExampleBlock renders with a single child 1`] = `
+<div
+  className="MuiContainer-root makeStyles-root-1 MuiContainer-maxWidthLg"
+  style={
+    Object {
+      "flexDirection": "row",
+    }
+  }
+>
+  <div>
+    1
+  </div>
+</div>
+`;
+
+exports[`ExampleBlock renders with many children (column) 1`] = `
+<div
+  className="MuiContainer-root makeStyles-root-1 MuiContainer-maxWidthLg"
+  style={
+    Object {
+      "flexDirection": "column",
+    }
+  }
+>
+  <div>
+    4
+  </div>
+  <div>
+    5
+  </div>
+  <div>
+    6
+  </div>
+</div>
+`;
+
+exports[`ExampleBlock renders with many children (row) 1`] = `
+<div
+  className="MuiContainer-root makeStyles-root-1 MuiContainer-maxWidthLg"
+  style={
+    Object {
+      "flexDirection": "row",
+    }
+  }
+>
+  <div>
+    1
+  </div>
+  <div>
+    2
+  </div>
+  <div>
+    3
+  </div>
+</div>
+`;

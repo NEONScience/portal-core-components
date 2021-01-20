@@ -161,7 +161,7 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
             </button>
           </div>
           <div
-            MuiComponent="@material-ui/core/Select"
+            ComponentPath="@material-ui/core/Select"
             prop-aria-labelledby="site-label"
             prop-data-selenium="aop-data-viewer.site-select"
             prop-input="Non-renderable object (TypeError: Converting circular structure to JSON
@@ -185,7 +185,160 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
           return value;
         }"
             prop-value="BONA"
-          />
+          >
+            <li
+              aria-disabled={true}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root makeStyles-optgroup-5 MuiMenuItem-gutters MuiListItem-gutters Mui-disabled MuiListItem-button Mui-disabled"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+              tabIndex={-1}
+              value="Alaska"
+            >
+              Alaska
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="BONA"
+            >
+              <div>
+                <p
+                  className="MuiTypography-root MuiTypography-body1 MuiTypography-displayBlock"
+                >
+                  BONA
+                </p>
+                <span
+                  className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
+                >
+                  Caribou-Poker Creeks Research Watershed
+                </span>
+              </div>
+              <span
+                className="MuiTouchRipple-root"
+              />
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="HEAL"
+            >
+              <div>
+                <p
+                  className="MuiTypography-root MuiTypography-body1 MuiTypography-displayBlock"
+                >
+                  HEAL
+                </p>
+                <span
+                  className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
+                >
+                  Healy
+                </span>
+              </div>
+              <span
+                className="MuiTouchRipple-root"
+              />
+            </li>
+            <li
+              aria-disabled={true}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root makeStyles-optgroup-5 MuiMenuItem-gutters MuiListItem-gutters Mui-disabled MuiListItem-button Mui-disabled"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+              tabIndex={-1}
+              value="California"
+            >
+              California
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="SJER"
+            >
+              <div>
+                <p
+                  className="MuiTypography-root MuiTypography-body1 MuiTypography-displayBlock"
+                >
+                  SJER
+                </p>
+                <span
+                  className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
+                >
+                  San Joaquin
+                </span>
+              </div>
+              <span
+                className="MuiTouchRipple-root"
+              />
+            </li>
+          </div>
         </div>
       </div>
       <div
@@ -295,6 +448,9 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
                   />
                 </svg>
               </span>
+              <span
+                className="MuiTouchRipple-root"
+              />
             </button>
           </div>
           <div
@@ -305,7 +461,7 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
             }
           >
             <div
-              MuiComponent="@material-ui/core/Slider"
+              ComponentPath="@material-ui/core/Slider"
               prop-aria-labelledby="year-label"
               prop-data-selenium="aop-data-viewer.year-slider"
               prop-marks="[{\\"label\\":\\"2017\\",\\"value\\":\\"2017\\"},{\\"label\\":\\"2018\\",\\"value\\":\\"2018\\"}]"
@@ -435,7 +591,7 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
           </button>
         </p>
         <div
-          MuiComponent="@material-ui/core/Select"
+          ComponentPath="@material-ui/core/Select"
           prop-aria-labelledby="flight-label"
           prop-data-selenium="aop-data-viewer.flight-select"
           prop-disabled={true}
@@ -460,7 +616,31 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
           return getFlightLabel(value, data[site][year][value - 1].month);
         }"
           prop-value={1}
-        />
+        >
+          <li
+            aria-disabled={false}
+            className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+            onBlur={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            role="menuitem"
+            tabIndex={-1}
+            value={1}
+          >
+            1/1 (August)
+            <span
+              className="MuiTouchRipple-root"
+            />
+          </li>
+        </div>
       </div>
     </div>
   </form>
@@ -634,7 +814,7 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
             </button>
           </div>
           <div
-            MuiComponent="@material-ui/core/Select"
+            ComponentPath="@material-ui/core/Select"
             prop-aria-labelledby="site-label"
             prop-data-selenium="aop-data-viewer.site-select"
             prop-input="Non-renderable object (TypeError: Converting circular structure to JSON
@@ -658,7 +838,160 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
           return value;
         }"
             prop-value="HEAL"
-          />
+          >
+            <li
+              aria-disabled={true}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root makeStyles-optgroup-5 MuiMenuItem-gutters MuiListItem-gutters Mui-disabled MuiListItem-button Mui-disabled"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+              tabIndex={-1}
+              value="Alaska"
+            >
+              Alaska
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="BONA"
+            >
+              <div>
+                <p
+                  className="MuiTypography-root MuiTypography-body1 MuiTypography-displayBlock"
+                >
+                  BONA
+                </p>
+                <span
+                  className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
+                >
+                  Caribou-Poker Creeks Research Watershed
+                </span>
+              </div>
+              <span
+                className="MuiTouchRipple-root"
+              />
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="HEAL"
+            >
+              <div>
+                <p
+                  className="MuiTypography-root MuiTypography-body1 MuiTypography-displayBlock"
+                >
+                  HEAL
+                </p>
+                <span
+                  className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
+                >
+                  Healy
+                </span>
+              </div>
+              <span
+                className="MuiTouchRipple-root"
+              />
+            </li>
+            <li
+              aria-disabled={true}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root makeStyles-optgroup-5 MuiMenuItem-gutters MuiListItem-gutters Mui-disabled MuiListItem-button Mui-disabled"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+              tabIndex={-1}
+              value="California"
+            >
+              California
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="SJER"
+            >
+              <div>
+                <p
+                  className="MuiTypography-root MuiTypography-body1 MuiTypography-displayBlock"
+                >
+                  SJER
+                </p>
+                <span
+                  className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
+                >
+                  San Joaquin
+                </span>
+              </div>
+              <span
+                className="MuiTouchRipple-root"
+              />
+            </li>
+          </div>
         </div>
       </div>
       <div
@@ -778,7 +1111,7 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
             }
           >
             <div
-              MuiComponent="@material-ui/core/Slider"
+              ComponentPath="@material-ui/core/Slider"
               prop-aria-labelledby="year-label"
               prop-data-selenium="aop-data-viewer.year-slider"
               prop-marks="[{\\"label\\":\\"2017\\",\\"value\\":\\"2017\\"},{\\"label\\":\\"2018\\",\\"value\\":\\"2018\\"}]"
@@ -911,7 +1244,7 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
           </button>
         </p>
         <div
-          MuiComponent="@material-ui/core/Select"
+          ComponentPath="@material-ui/core/Select"
           prop-aria-labelledby="flight-label"
           prop-data-selenium="aop-data-viewer.flight-select"
           prop-disabled={true}
@@ -936,7 +1269,31 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
           return getFlightLabel(value, data[site][year][value - 1].month);
         }"
           prop-value={1}
-        />
+        >
+          <li
+            aria-disabled={false}
+            className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+            onBlur={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            role="menuitem"
+            tabIndex={-1}
+            value={1}
+          >
+            1/1 (July)
+            <span
+              className="MuiTouchRipple-root"
+            />
+          </li>
+        </div>
       </div>
     </div>
   </form>
@@ -1110,7 +1467,7 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
             </button>
           </div>
           <div
-            MuiComponent="@material-ui/core/Select"
+            ComponentPath="@material-ui/core/Select"
             prop-aria-labelledby="site-label"
             prop-data-selenium="aop-data-viewer.site-select"
             prop-input="Non-renderable object (TypeError: Converting circular structure to JSON
@@ -1134,7 +1491,160 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
           return value;
         }"
             prop-value="SJER"
-          />
+          >
+            <li
+              aria-disabled={true}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root makeStyles-optgroup-5 MuiMenuItem-gutters MuiListItem-gutters Mui-disabled MuiListItem-button Mui-disabled"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+              tabIndex={-1}
+              value="Alaska"
+            >
+              Alaska
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="BONA"
+            >
+              <div>
+                <p
+                  className="MuiTypography-root MuiTypography-body1 MuiTypography-displayBlock"
+                >
+                  BONA
+                </p>
+                <span
+                  className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
+                >
+                  Caribou-Poker Creeks Research Watershed
+                </span>
+              </div>
+              <span
+                className="MuiTouchRipple-root"
+              />
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="HEAL"
+            >
+              <div>
+                <p
+                  className="MuiTypography-root MuiTypography-body1 MuiTypography-displayBlock"
+                >
+                  HEAL
+                </p>
+                <span
+                  className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
+                >
+                  Healy
+                </span>
+              </div>
+              <span
+                className="MuiTouchRipple-root"
+              />
+            </li>
+            <li
+              aria-disabled={true}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root makeStyles-optgroup-5 MuiMenuItem-gutters MuiListItem-gutters Mui-disabled MuiListItem-button Mui-disabled"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+              tabIndex={-1}
+              value="California"
+            >
+              California
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="SJER"
+            >
+              <div>
+                <p
+                  className="MuiTypography-root MuiTypography-body1 MuiTypography-displayBlock"
+                >
+                  SJER
+                </p>
+                <span
+                  className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
+                >
+                  San Joaquin
+                </span>
+              </div>
+              <span
+                className="MuiTouchRipple-root"
+              />
+            </li>
+          </div>
         </div>
       </div>
       <div
@@ -1254,7 +1764,7 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
             }
           >
             <div
-              MuiComponent="@material-ui/core/Slider"
+              ComponentPath="@material-ui/core/Slider"
               prop-aria-labelledby="year-label"
               prop-data-selenium="aop-data-viewer.year-slider"
               prop-marks="[{\\"label\\":\\"2017\\",\\"value\\":\\"2017\\"},{\\"label\\":\\"2018\\",\\"value\\":\\"2018\\"},{\\"label\\":\\"2019\\",\\"value\\":\\"2019\\"}]"
@@ -1387,7 +1897,7 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
           </button>
         </p>
         <div
-          MuiComponent="@material-ui/core/Select"
+          ComponentPath="@material-ui/core/Select"
           prop-aria-labelledby="flight-label"
           prop-data-selenium="aop-data-viewer.flight-select"
           prop-disabled={false}
@@ -1412,7 +1922,54 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
           return getFlightLabel(value, data[site][year][value - 1].month);
         }"
           prop-value={2}
-        />
+        >
+          <li
+            aria-disabled={false}
+            className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+            onBlur={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            role="menuitem"
+            tabIndex={-1}
+            value={1}
+          >
+            1/2 (March)
+            <span
+              className="MuiTouchRipple-root"
+            />
+          </li>
+          <li
+            aria-disabled={false}
+            className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+            onBlur={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            role="menuitem"
+            tabIndex={-1}
+            value={2}
+          >
+            2/2 (March)
+            <span
+              className="MuiTouchRipple-root"
+            />
+          </li>
+        </div>
       </div>
     </div>
   </form>
@@ -1586,7 +2143,7 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
             </button>
           </div>
           <div
-            MuiComponent="@material-ui/core/Select"
+            ComponentPath="@material-ui/core/Select"
             prop-aria-labelledby="site-label"
             prop-data-selenium="aop-data-viewer.site-select"
             prop-input="Non-renderable object (TypeError: Converting circular structure to JSON
@@ -1610,7 +2167,160 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
           return value;
         }"
             prop-value="BONA"
-          />
+          >
+            <li
+              aria-disabled={true}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root makeStyles-optgroup-5 MuiMenuItem-gutters MuiListItem-gutters Mui-disabled MuiListItem-button Mui-disabled"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+              tabIndex={-1}
+              value="Alaska"
+            >
+              Alaska
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="BONA"
+            >
+              <div>
+                <p
+                  className="MuiTypography-root MuiTypography-body1 MuiTypography-displayBlock"
+                >
+                  BONA
+                </p>
+                <span
+                  className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
+                >
+                  Caribou-Poker Creeks Research Watershed
+                </span>
+              </div>
+              <span
+                className="MuiTouchRipple-root"
+              />
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="HEAL"
+            >
+              <div>
+                <p
+                  className="MuiTypography-root MuiTypography-body1 MuiTypography-displayBlock"
+                >
+                  HEAL
+                </p>
+                <span
+                  className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
+                >
+                  Healy
+                </span>
+              </div>
+              <span
+                className="MuiTouchRipple-root"
+              />
+            </li>
+            <li
+              aria-disabled={true}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root makeStyles-optgroup-5 MuiMenuItem-gutters MuiListItem-gutters Mui-disabled MuiListItem-button Mui-disabled"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+              tabIndex={-1}
+              value="California"
+            >
+              California
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="SJER"
+            >
+              <div>
+                <p
+                  className="MuiTypography-root MuiTypography-body1 MuiTypography-displayBlock"
+                >
+                  SJER
+                </p>
+                <span
+                  className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
+                >
+                  San Joaquin
+                </span>
+              </div>
+              <span
+                className="MuiTouchRipple-root"
+              />
+            </li>
+          </div>
         </div>
       </div>
       <div
@@ -1720,6 +2430,9 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
                   />
                 </svg>
               </span>
+              <span
+                className="MuiTouchRipple-root"
+              />
             </button>
           </div>
           <div
@@ -1730,7 +2443,7 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
             }
           >
             <div
-              MuiComponent="@material-ui/core/Slider"
+              ComponentPath="@material-ui/core/Slider"
               prop-aria-labelledby="year-label"
               prop-data-selenium="aop-data-viewer.year-slider"
               prop-marks="[{\\"label\\":\\"2017\\",\\"value\\":\\"2017\\"},{\\"label\\":\\"2018\\",\\"value\\":\\"2018\\"}]"
@@ -1860,7 +2573,7 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
           </button>
         </p>
         <div
-          MuiComponent="@material-ui/core/Select"
+          ComponentPath="@material-ui/core/Select"
           prop-aria-labelledby="flight-label"
           prop-data-selenium="aop-data-viewer.flight-select"
           prop-disabled={true}
@@ -1885,7 +2598,31 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
           return getFlightLabel(value, data[site][year][value - 1].month);
         }"
           prop-value={1}
-        />
+        >
+          <li
+            aria-disabled={false}
+            className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+            onBlur={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            role="menuitem"
+            tabIndex={-1}
+            value={1}
+          >
+            1/1 (August)
+            <span
+              className="MuiTouchRipple-root"
+            />
+          </li>
+        </div>
       </div>
     </div>
   </form>
@@ -2054,7 +2791,7 @@ exports[`AopDataViewer renders with title disabled 1`] = `
             </button>
           </div>
           <div
-            MuiComponent="@material-ui/core/Select"
+            ComponentPath="@material-ui/core/Select"
             prop-aria-labelledby="site-label"
             prop-data-selenium="aop-data-viewer.site-select"
             prop-input="Non-renderable object (TypeError: Converting circular structure to JSON
@@ -2078,7 +2815,160 @@ exports[`AopDataViewer renders with title disabled 1`] = `
           return value;
         }"
             prop-value="BONA"
-          />
+          >
+            <li
+              aria-disabled={true}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root makeStyles-optgroup-5 MuiMenuItem-gutters MuiListItem-gutters Mui-disabled MuiListItem-button Mui-disabled"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+              tabIndex={-1}
+              value="Alaska"
+            >
+              Alaska
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="BONA"
+            >
+              <div>
+                <p
+                  className="MuiTypography-root MuiTypography-body1 MuiTypography-displayBlock"
+                >
+                  BONA
+                </p>
+                <span
+                  className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
+                >
+                  Caribou-Poker Creeks Research Watershed
+                </span>
+              </div>
+              <span
+                className="MuiTouchRipple-root"
+              />
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="HEAL"
+            >
+              <div>
+                <p
+                  className="MuiTypography-root MuiTypography-body1 MuiTypography-displayBlock"
+                >
+                  HEAL
+                </p>
+                <span
+                  className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
+                >
+                  Healy
+                </span>
+              </div>
+              <span
+                className="MuiTouchRipple-root"
+              />
+            </li>
+            <li
+              aria-disabled={true}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root makeStyles-optgroup-5 MuiMenuItem-gutters MuiListItem-gutters Mui-disabled MuiListItem-button Mui-disabled"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+              tabIndex={-1}
+              value="California"
+            >
+              California
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="SJER"
+            >
+              <div>
+                <p
+                  className="MuiTypography-root MuiTypography-body1 MuiTypography-displayBlock"
+                >
+                  SJER
+                </p>
+                <span
+                  className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
+                >
+                  San Joaquin
+                </span>
+              </div>
+              <span
+                className="MuiTouchRipple-root"
+              />
+            </li>
+          </div>
         </div>
       </div>
       <div
@@ -2188,6 +3078,9 @@ exports[`AopDataViewer renders with title disabled 1`] = `
                   />
                 </svg>
               </span>
+              <span
+                className="MuiTouchRipple-root"
+              />
             </button>
           </div>
           <div
@@ -2198,7 +3091,7 @@ exports[`AopDataViewer renders with title disabled 1`] = `
             }
           >
             <div
-              MuiComponent="@material-ui/core/Slider"
+              ComponentPath="@material-ui/core/Slider"
               prop-aria-labelledby="year-label"
               prop-data-selenium="aop-data-viewer.year-slider"
               prop-marks="[{\\"label\\":\\"2017\\",\\"value\\":\\"2017\\"},{\\"label\\":\\"2018\\",\\"value\\":\\"2018\\"}]"
@@ -2328,7 +3221,7 @@ exports[`AopDataViewer renders with title disabled 1`] = `
           </button>
         </p>
         <div
-          MuiComponent="@material-ui/core/Select"
+          ComponentPath="@material-ui/core/Select"
           prop-aria-labelledby="flight-label"
           prop-data-selenium="aop-data-viewer.flight-select"
           prop-disabled={true}
@@ -2353,7 +3246,31 @@ exports[`AopDataViewer renders with title disabled 1`] = `
           return getFlightLabel(value, data[site][year][value - 1].month);
         }"
           prop-value={1}
-        />
+        >
+          <li
+            aria-disabled={false}
+            className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+            onBlur={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            role="menuitem"
+            tabIndex={-1}
+            value={1}
+          >
+            1/1 (August)
+            <span
+              className="MuiTouchRipple-root"
+            />
+          </li>
+        </div>
       </div>
     </div>
   </form>

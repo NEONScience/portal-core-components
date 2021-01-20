@@ -2,9 +2,11 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 
 import mockAjaxResponse from '../../../../__mocks__/ajax';
-import '../../../../__mocks__/MuiSelect';
-import '../../../../__mocks__/MuiSlider';
+import mockReactComponent from '../../../../__mocks__/mockReactComponent';
 import '../../../../__mocks__/NeonContext';
+
+jest.mock('@material-ui/core/Select', () => mockReactComponent('@material-ui/core/Select'));
+jest.mock('@material-ui/core/Slider', () => mockReactComponent('@material-ui/core/Slider'));
 
 import AopDataViewer from '../AopDataViewer';
 
