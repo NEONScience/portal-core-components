@@ -71,6 +71,7 @@ PropsTable.propTypes = {
       default: PropTypes.string,
       examples: stringOrNode,
       description: stringOrNode,
+      required: PropTypes.bool,
     }),
   ).isRequired,
 };

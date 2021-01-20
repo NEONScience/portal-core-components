@@ -19,7 +19,7 @@ const dataThemes = {
   },
   biogeochemistry: {
     title: 'Biogeochemistry',
-    aliases: ['bigeo'],
+    aliases: ['biogeo'],
     src: BiogeochemistrySVG,
   },
   ecohydrology: {

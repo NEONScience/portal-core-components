@@ -1,8 +1,6 @@
 import {
   mockAjaxResponse,
   mockAjaxError,
-  mockRawAjaxResponse,
-  mockRawAjaxError,
 } from '../../../../__mocks__/ajax';
 
 import parseDomainHierarchy from '../../../workers/parseDomainHierarchy';
@@ -99,11 +97,11 @@ describe('SiteMap - FetchLocationUtils', () => {
       expect(fetchManyLocationsGraphQL(['GUAN', null])).rejects.toBeInstanceOf(Error)
     ));
     test('rejects if API call fails', () => {
-      mockRawAjaxError('fail');
+      mockAjaxError('fail');
       return expect(fetchManyLocationsGraphQL(['GUAN', 'HEAL'])).rejects.toBeInstanceOf(Error);
     });
     test('rejects if response from API is not an object with a response.data.locations array', () => {
-      mockRawAjaxResponse({
+      mockAjaxResponse({
         response: {
           data: {
             locations: 'foo',
@@ -113,7 +111,7 @@ describe('SiteMap - FetchLocationUtils', () => {
       return expect(fetchManyLocationsGraphQL(['GUAN', 'HEAL'])).rejects.toBeInstanceOf(Error);
     });
     test('resolves by passing the fetched response.data.locations array to parseLocationsArray', () => {
-      mockRawAjaxResponse({
+      mockAjaxResponse({
         response: {
           data: {
             locations: ['foo', 'bar'],
