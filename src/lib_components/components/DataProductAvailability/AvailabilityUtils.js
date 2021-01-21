@@ -56,7 +56,7 @@ export const calcRollupStatus = (statuses = []) => {
   if (!Array.isArray(statuses)) {
     return Object.keys(VALID_ENHANCED_STATUSES).includes(statuses) ? statuses : null;
   }
-  if (statuses.some(status => !Object.keys(VALID_ENHANCED_STATUSES).includes(status))) {
+  if (statuses.some((status) => !Object.keys(VALID_ENHANCED_STATUSES).includes(status))) {
     return null;
   }
   const set = new Set(statuses);

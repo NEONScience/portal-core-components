@@ -97,13 +97,17 @@ const deriveRegionSelections = (state) => {
 
 // Returns a boolean indicating whether an item is selectable
 const isSelectable = (item, validSet = null) => {
-  if (!validSet) { return true; }
-  return validSet.has(item);
+  if (!item && item !== 0) { return false; }
+  return validSet instanceof Set ? validSet.has(item) : true;
 };
+
 // Filters a set down to only selectable items
-const getSelectableSet = (set, validSet = null) => {
-  if (!validSet) { return set; }
-  return new Set([...set].filter((item) => isSelectable(item, validSet)));
+const getSelectableSet = (setArg, validSet = null) => {
+  if (!(setArg instanceof Set) && !Array.isArray(setArg)) { return new Set(); }
+  const set = setArg instanceof Set ? setArg : new Set(setArg);
+  return validSet instanceof Set
+    ? new Set([...set].filter((item) => isSelectable(item, validSet)))
+    : set;
 };
 
 // Set the valid flag for selection based on current limits. Empty selections are always invalid.
@@ -134,13 +138,15 @@ const basePlots = [FEATURES.DISTRIBUTED_BASE_PLOTS.KEY, FEATURES.TOWER_BASE_PLOT
 const isBasePlot = (featureKey) => basePlots.includes(featureKey);
 
 /**
-   Reducer
+   Reducer Helpers (functions used exclusively by the reducer)
 */
 const zoomIsValid = (zoom) => (
   Number.isInteger(zoom) && zoom >= MAP_ZOOM_RANGE[0] && zoom <= MAP_ZOOM_RANGE[1]
 );
 const centerIsValid = (center) => (
-  Array.isArray(center) && center.length === 2 && center.every((v) => typeof v === 'number')
+  Array.isArray(center)
+    && center.length === 2
+    && center.every((v) => (typeof v === 'number' && !Number.isNaN(v)))
 );
 
 // Creates fetch objects with an AWAITING_CALL status based on current state.
@@ -334,13 +340,19 @@ const calculateFeatureDataFetches = (state, requiredSites = []) => {
   /* eslint-enable max-len */
   return newState;
 };
+
+/**
+   Reducer
+*/
 const reducer = (state, action) => {
   let setMethod = null;
   let calculateFetchesRequiredSites = null;
   const newState = { ...state };
   const { validSet } = state.selection;
+
   // Increment the completed count for overall fetch and, if completed and expected are now equal,
   // reset both (so that subsequent batches of fetches can give an accurate progress metric).
+  // TODO: make pure, move out of reducer, unit test
   const completeOverallFetch = () => {
     newState.overallFetch.completed += 1;
     if (newState.overallFetch.expected === newState.overallFetch.completed) {
@@ -349,7 +361,9 @@ const reducer = (state, action) => {
       newState.overallFetch.pendingHierarchy = 0;
     }
   };
+
   // Returns a boolean describing whether a fetch status was updated
+  // TODO: make pure, move out of reducer, unit test
   const setFetchStatusFromAction = (status) => {
     if (!Object.keys(FETCH_STATUS).includes(status) || status === FETCH_STATUS.AWAITING_CALL) {
       return false;
@@ -522,7 +536,9 @@ const reducer = (state, action) => {
 
     return true;
   };
+
   // Recursively applies a feature visibility change to parents and chilren up/down the tree
+  // TODO: make pure, move out of reducer, unit test
   const applyFeatureVisibilityToChildren = (feature, visible) => {
     if (newState.filters.features.visible[feature] === visible) { return; }
     newState.filters.features.visible[feature] = visible;
@@ -532,6 +548,8 @@ const reducer = (state, action) => {
         .forEach((f) => { applyFeatureVisibilityToChildren(f, visible); });
     }
   };
+
+  // TODO: make pure, move out of reducer, unit test
   const applyFeatureVisibilityToParents = (feature) => {
     if (FEATURES[feature].parent) {
       const parentVisible = Object.keys(FEATURES)
@@ -541,7 +559,9 @@ const reducer = (state, action) => {
       applyFeatureVisibilityToParents(FEATURES[feature].parent, parentVisible);
     }
   };
+
   // NATGEO_WORLD_MAP has no data at zoom 17 or higher so go to WORLD_IMAGERY (satellite)
+  // TODO: make pure, move out of reducer, unit test
   const updateMapTileWithZoom = () => {
     if (
       newState.map.zoom <= 17 && state.map.baseLayer !== BASE_LAYERS.NATGEO_WORLD_MAP.KEY
@@ -554,6 +574,7 @@ const reducer = (state, action) => {
       newState.map.baseLayerAutoChangedAbove17 = true;
     }
   };
+
   // Shortcuts for deailing with hierarchies
   const hierarchiesSource = FEATURE_DATA_SOURCES.REST_LOCATIONS_API;
   const hierarchiesType = FEATURE_TYPES.SITE_LOCATION_HIERARCHIES.KEY;
@@ -1290,5 +1311,12 @@ export default SiteMapContext;
 export const getTestableItems = () => (
   process.env.NODE_ENV !== 'test' ? {} : {
     deriveRegionSelections,
+    isSelectable,
+    getSelectableSet,
+    validateSelection,
+    isBasePlot,
+    zoomIsValid,
+    centerIsValid,
+    calculateFeatureDataFetches,
   }
 );
