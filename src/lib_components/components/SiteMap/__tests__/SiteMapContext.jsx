@@ -3,13 +3,25 @@ import { renderHook } from "@testing-library/react-hooks";
 import cloneDeep from 'lodash/cloneDeep';
 // import statesJSON from '../../../staticJSON/sites.json';
 
+// Mock some functions within SiteMapUtils as they are called by functions we test here
+// but are tested directly in the SiteMapUtils test suite
+jest.mock('../SiteMapUtils', () => ({
+  ...jest.requireActual('../SiteMapUtils'),
+  calculateLocationsInBounds: jest.fn(),
+}));
+
 import SiteMapContext, { getTestableItems } from '../SiteMapContext';
+
 import {
   DEFAULT_STATE,
+  FETCH_STATUS,
   FEATURES,
   FEATURE_TYPES,
+  FEATURE_DATA_SOURCES,
   MAP_ZOOM_RANGE,
   SELECTION_PORTIONS,
+  SITE_LOCATION_HIERARCHIES_MIN_ZOOM,
+  calculateLocationsInBounds,
 } from '../SiteMapUtils';
 
 const { useSiteMapContext } = SiteMapContext;
@@ -347,10 +359,178 @@ describe('SiteMap - SiteMapContext', () => {
     });
   });
 
-  /*
   describe('calculateFeatureDataFetches()', () => {
-    test('', () => {
+    let state;
+    const {
+      REST_LOCATIONS_API,
+      ARCGIS_ASSETS_API,
+      GRAPHQL_LOCATIONS_API,
+    } = FEATURE_DATA_SOURCES;
+    const {
+      SITE_LOCATION_HIERARCHIES: { KEY: SITE_LOCATION_HIERARCHIES },
+    } = FEATURE_TYPES;
+    const {
+      SAMPLING_BOUNDARIES: { KEY: SAMPLING_BOUNDARIES },
+      WATERSHED_BOUNDARIES: { KEY: WATERSHED_BOUNDARIES },
+      TOWER_AIRSHEDS: { KEY: TOWER_AIRSHEDS },
+      POUR_POINTS: { KEY: POUR_POINTS },
+    } = FEATURES;
+    beforeEach(() => {
+      state = cloneDeep(DEFAULT_STATE);
+      state.sites = {
+        SA: { domainCode: 'D16' },
+        SB: { domainCode: 'D01' },
+        SC: { domainCode: 'D19' },
+        SD: { domainCode: 'D16' },
+        SE: { domainCode: 'D01' },
+        SF: { domainCode: 'D01' },
+        SG: { domainCode: 'D20' },
+        SH: { domainCode: 'D12' },
+      };
+    });
+    describe('without requiredSites argument', () => {
+      test('takes no action on state if there are no sites in bounds', () => {
+        calculateLocationsInBounds.mockReturnValue([]);
+        const newState = calculateFeatureDataFetches(state);
+        expect(newState).toStrictEqual(state);      
+      });
+      describe('SITE_LOCATION_HIERARCHIES', () => {
+        test('applies no awaiting fetches if zoom is below minimum', () => {
+          state.map.zoom = SITE_LOCATION_HIERARCHIES_MIN_ZOOM - 1;
+          state.map.bounds = { lat: [-10, 10], lng: [-10, 10] };
+          calculateLocationsInBounds.mockReturnValue(['SB', 'SE', 'SG', 'SH']);
+          const newState = calculateFeatureDataFetches(state);
+          expect(
+            Object.keys(newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES])
+          ).toStrictEqual([]);
+          expect(newState.overallFetch.expected).toBe(0);
+          expect(newState.overallFetch.pendingHierarchy).toBe(0);
+          expect(newState.featureDataFetchesHasAwaiting).toBe(false);
+        });
+        test('applies awaiting fetches when zoom is at or above minimum', () => {
+          state.map.zoom = SITE_LOCATION_HIERARCHIES_MIN_ZOOM;
+          state.map.bounds = { lat: [-10, 10], lng: [-10, 10] };
+          state.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES].D01 = FETCH_STATUS.FETCHING;
+          calculateLocationsInBounds.mockReturnValue(['SB', 'SE', 'SG', 'SH']);
+          const newState = calculateFeatureDataFetches(state);
+          expect(
+            Object.keys(newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES])
+          ).toStrictEqual(['D01', 'D20', 'D12']);
+          expect(
+            newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES].D01
+          ).toBe(FETCH_STATUS.FETCHING);
+          expect(
+            newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES].D20
+          ).toBe(FETCH_STATUS.AWAITING_CALL);
+          expect(
+            newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES].D12
+          ).toBe(FETCH_STATUS.AWAITING_CALL);
+          expect(newState.overallFetch.expected).toBe(2);
+          expect(newState.overallFetch.pendingHierarchy).toBe(2);
+          expect(newState.featureDataFetchesHasAwaiting).toBe(true);
+        });
+      });
+      describe('ARCGIS_ASSETS_API', () => {
+        test('applies fetches for visible features', () => {
+          calculateLocationsInBounds.mockReturnValue(['SB', 'SE', 'SF']);
+          state.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES].D01 = FETCH_STATUS.SUCCESS;
+          state.filters.features.available[SAMPLING_BOUNDARIES] = true;
+          state.filters.features.available[WATERSHED_BOUNDARIES] = true;
+          state.filters.features.available[POUR_POINTS] = true;
+          state.filters.features.available[TOWER_AIRSHEDS] = false;
+          state.filters.features.visible[SAMPLING_BOUNDARIES] = true;
+          state.filters.features.visible[WATERSHED_BOUNDARIES] = true;
+          state.filters.features.visible[POUR_POINTS] = false;
+          state.filters.features.visible[TOWER_AIRSHEDS] = true;
+          state.featureDataFetches[ARCGIS_ASSETS_API][SAMPLING_BOUNDARIES].SE = FETCH_STATUS.FETCHING;
+          const newState = calculateFeatureDataFetches(state);
+          console.log('NEWSTATE', newState.featureDataFetches[ARCGIS_ASSETS_API]);
+          Object.keys(newState.featureDataFetches[ARCGIS_ASSETS_API])
+            .filter((k) => ![SAMPLING_BOUNDARIES, WATERSHED_BOUNDARIES].includes(k))
+            .forEach((k) => {
+              expect(Object.keys(newState.featureDataFetches[ARCGIS_ASSETS_API][k])).toStrictEqual([]);
+            });
+          expect(
+            Object.keys(newState.featureDataFetches[ARCGIS_ASSETS_API][SAMPLING_BOUNDARIES])
+          ).toStrictEqual(['SE', 'SB', 'SF']);
+          expect(
+            Object.keys(newState.featureDataFetches[ARCGIS_ASSETS_API][WATERSHED_BOUNDARIES])
+          ).toStrictEqual(['SB', 'SE', 'SF']);
+          expect(
+            newState.featureDataFetches[ARCGIS_ASSETS_API][SAMPLING_BOUNDARIES].SB
+          ).toBe(FETCH_STATUS.AWAITING_CALL);
+          expect(
+            newState.featureDataFetches[ARCGIS_ASSETS_API][SAMPLING_BOUNDARIES].SE
+          ).toBe(FETCH_STATUS.FETCHING);
+          expect(
+            newState.featureDataFetches[ARCGIS_ASSETS_API][SAMPLING_BOUNDARIES].SF
+          ).toBe(FETCH_STATUS.AWAITING_CALL);
+          expect(
+            newState.featureDataFetches[ARCGIS_ASSETS_API][WATERSHED_BOUNDARIES].SB
+          ).toBe(FETCH_STATUS.AWAITING_CALL);
+          expect(
+            newState.featureDataFetches[ARCGIS_ASSETS_API][WATERSHED_BOUNDARIES].SE
+          ).toBe(FETCH_STATUS.AWAITING_CALL);
+          expect(
+            newState.featureDataFetches[ARCGIS_ASSETS_API][WATERSHED_BOUNDARIES].SF
+          ).toBe(FETCH_STATUS.AWAITING_CALL);
+          expect(newState.overallFetch.expected).toBe(5);
+          expect(newState.overallFetch.pendingHierarchy).toBe(0);
+          expect(newState.featureDataFetchesHasAwaiting).toBe(true);
+        });
+      });
+      /*
+      describe('REST_LOCATIONS_API', () => {
+      });
+      describe('REST_LOCATIONS_API', () => {
+      });
+      */
+    });
+    describe('with requiredSites argument', () => {
+      test('takes no action on state if there are no sites in bounds', () => {
+        calculateLocationsInBounds.mockReturnValue([]);
+        const newState = calculateFeatureDataFetches(state, ['SG', 'SC']);
+        expect(newState).toStrictEqual(state);      
+      });
+      describe('SITE_LOCATION_HIERARCHIES', () => {
+        test('applies no awaiting fetches if zoom is below minimum', () => {
+          state.map.zoom = SITE_LOCATION_HIERARCHIES_MIN_ZOOM - 1;
+          state.map.bounds = { lat: [-10, 10], lng: [-10, 10] };
+          calculateLocationsInBounds.mockReturnValue(['SB', 'SE', 'SG', 'SH']);
+          const newState = calculateFeatureDataFetches(state, ['SG', 'SC']);
+          expect(
+            Object.keys(newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES])
+          ).toStrictEqual([]);
+          expect(newState.overallFetch.expected).toBe(0);
+          expect(newState.overallFetch.pendingHierarchy).toBe(0);
+          expect(newState.featureDataFetchesHasAwaiting).toBe(false);
+        });
+        test('applies awaiting fetches when zoom is at or above minimum', () => {
+          state.map.zoom = SITE_LOCATION_HIERARCHIES_MIN_ZOOM;
+          state.map.bounds = { lat: [-10, 10], lng: [-10, 10] };
+          state.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES].D01 = FETCH_STATUS.FETCHING;
+          calculateLocationsInBounds.mockReturnValue(['SB', 'SE', 'SG', 'SH']);
+          const newState = calculateFeatureDataFetches(state, ['SG', 'SC']);
+          expect(
+            Object.keys(newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES])
+          ).toStrictEqual(['D01', 'D20', 'D12', 'D19']);
+          expect(
+            newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES].D01
+          ).toBe(FETCH_STATUS.FETCHING);
+          expect(
+            newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES].D20
+          ).toBe(FETCH_STATUS.AWAITING_CALL);
+          expect(
+            newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES].D12
+          ).toBe(FETCH_STATUS.AWAITING_CALL);
+          expect(
+            newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES].D19
+          ).toBe(FETCH_STATUS.AWAITING_CALL);
+          expect(newState.overallFetch.expected).toBe(3);
+          expect(newState.overallFetch.pendingHierarchy).toBe(3);
+          expect(newState.featureDataFetchesHasAwaiting).toBe(true);
+        });
+      });
     });
   });
-  */
 });

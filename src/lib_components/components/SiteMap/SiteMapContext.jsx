@@ -158,7 +158,7 @@ const centerIsValid = (center) => (
 const calculateFeatureDataFetches = (state, requiredSites = []) => {
   const sitesInMap = calculateLocationsInBounds(state.sites, state.map.bounds, true, 0.06);
   let requiredSitesArray = [];
-  if (requiredSites) {
+  if (requiredSites.length) {
     requiredSitesArray = (
       Array.isArray(requiredSites) ? requiredSites : [requiredSites]
     ).filter((siteCode) => Object.keys(state.sites).includes(siteCode));
