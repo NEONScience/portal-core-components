@@ -553,7 +553,7 @@ export const FEATURES = {
     type: FEATURE_TYPES.LOCATIONS.KEY,
     minZoom: 10,
     // Get from REST because fetching from GraphQL won't return children for a count of levels
-    // (you can get this from GraphQL but it hoses performance and only this feature needs children)
+    // (you can get children from GraphQL but it hoses performance and only this feature needs them)
     dataSource: FEATURE_DATA_SOURCES.REST_LOCATIONS_API,
     matchLocationType: 'TOWER',
     parent: 'TERRESTRIAL_SITE_FEATURES',

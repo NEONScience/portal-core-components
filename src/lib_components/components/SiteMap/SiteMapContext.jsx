@@ -131,7 +131,7 @@ const validateSelection = (state) => {
 };
 
 // NOTE: DISTRIBUTED_BASE_PLOTS and TOWER_BASE_PLOTS have the same locationType. We must fetch
-// them all for a gicen site in order to differentiate them. This impacts how we structure fetches
+// them all for a given site in order to differentiate them. This impacts how we structure fetches
 // for base plot features as well as how we turn those fetch results into feater data. This func
 // is used to consistently inform when to trigger that behavior for a given feature.
 const basePlots = [FEATURES.DISTRIBUTED_BASE_PLOTS.KEY, FEATURES.TOWER_BASE_PLOTS.KEY];
@@ -158,7 +158,7 @@ const centerIsValid = (center) => (
 const calculateFeatureDataFetches = (state, requiredSites = []) => {
   const sitesInMap = calculateLocationsInBounds(state.sites, state.map.bounds, true, 0.06);
   let requiredSitesArray = [];
-  if (requiredSites.length) {
+  if (requiredSites && requiredSites.length) {
     requiredSitesArray = (
       Array.isArray(requiredSites) ? requiredSites : [requiredSites]
     ).filter((siteCode) => Object.keys(state.sites).includes(siteCode));
@@ -259,6 +259,9 @@ const calculateFeatureDataFetches = (state, requiredSites = []) => {
         const companionFeatureKey = (
           !isBasePlot(featureKey) ? null : basePlots.find((key) => key !== featureKey)
         );
+        const companionMinZoom = companionFeatureKey
+          ? GRAPHQL_LOCATIONS_API_CONSTANTS.FEATURES_TO_MINZOOM_MAP[companionFeatureKey]
+          : null;
         if (!newState.featureDataFetches[dataSource][minZoom]) {
           newState.featureDataFetches[dataSource][minZoom] = {};
         }
@@ -269,23 +272,25 @@ const calculateFeatureDataFetches = (state, requiredSites = []) => {
           // Site must have meaningful features to fetch at this minZoom level
           .filter((siteCode) => state.sites[siteCode].terrain === FEATURES[featureKey].siteTerrain)
           .forEach((siteCode) => {
+            const getInitialSiteCodeFetchObject = (fetchMinZoom) => ({
+              features: Object.fromEntries(
+                GRAPHQL_LOCATIONS_API_CONSTANTS.MINZOOM_TO_FEATURES_MAP[fetchMinZoom]
+                  .filter((fKey) => state.sites[siteCode].terrain === FEATURES[fKey].siteTerrain)
+                  .map((fKey) => [fKey, { fetchId: null, locations: [] }]),
+              ),
+              fetches: {},
+            });
             // Initialize the fetch structure for the dataSource / minZoom / siteCode
             if (!newState.featureDataFetches[dataSource][minZoom][siteCode]) {
-              newState.featureDataFetches[dataSource][minZoom][siteCode] = {
-                features: Object.fromEntries(
-                  GRAPHQL_LOCATIONS_API_CONSTANTS.MINZOOM_TO_FEATURES_MAP[minZoom]
-                    .filter((fKey) => state.sites[siteCode].terrain === FEATURES[fKey].siteTerrain)
-                    .map((fKey) => [fKey, { fetchId: null, locations: [] }]),
-                ),
-                fetches: {},
-              };
-              // If this is a base plot feature then look to see if already handled
-              if (isBasePlot(featureKey) && companionFeatureKey) {
-                const companionMinZoom = GRAPHQL_LOCATIONS_API_CONSTANTS.FEATURES_TO_MINZOOM_MAP[companionFeatureKey];
-                if (companionMinZoom && newState.featureDataFetches[dataSource][companionMinZoom][siteCode]) {
-                  const companionFetchId = newState.featureDataFetches[dataSource][companionMinZoom][siteCode].features[companionFeatureKey];
-                  newState.featureDataFetches[dataSource][minZoom][siteCode].features[featureKey] = companionFetchId;
-                }
+              newState.featureDataFetches[dataSource][minZoom][siteCode] = getInitialSiteCodeFetchObject(minZoom);
+            }
+            // If this is a base plot feature then look to see if already handled
+            if (isBasePlot(featureKey) && companionFeatureKey && companionMinZoom) {
+              if (!newState.featureDataFetches[dataSource][companionMinZoom][siteCode]) {
+                newState.featureDataFetches[dataSource][companionMinZoom][siteCode] = getInitialSiteCodeFetchObject(companionMinZoom);
+              } else {
+                const companionFeatureObject = newState.featureDataFetches[dataSource][companionMinZoom][siteCode].features[companionFeatureKey];
+                newState.featureDataFetches[dataSource][minZoom][siteCode].features[featureKey] = { ...companionFeatureObject };
               }
             }
             const { features, fetches } = newState.featureDataFetches[dataSource][minZoom][siteCode];
@@ -304,13 +309,11 @@ const calculateFeatureDataFetches = (state, requiredSites = []) => {
             }
             // Map this feature / site / zoom level / feature type to the unique fetch key
             newState.featureDataFetches[dataSource][minZoom][siteCode].features[featureKey].fetchId = awaitingFetchKey;
-            if (isBasePlot(featureKey) && companionFeatureKey) {
-              if (!newState.featureDataFetches[dataSource][minZoom][siteCode].features[companionFeatureKey]) {
-                newState.featureDataFetches[dataSource][minZoom][siteCode].features[companionFeatureKey] = {
-                  fetchId: null, locations: [],
-                };
-              }
-              newState.featureDataFetches[dataSource][minZoom][siteCode].features[companionFeatureKey].fetchId = awaitingFetchKey;
+            if (
+              companionMinZoom && companionFeatureKey
+                && !newState.featureDataFetches[dataSource][companionMinZoom][siteCode].features[companionFeatureKey].fetchId
+            ) {
+              newState.featureDataFetches[dataSource][companionMinZoom][siteCode].features[companionFeatureKey].fetchId = awaitingFetchKey;
             }
             // Harvest locations from the hierarchy for this feature/site; append to awaiting fetch
             // Matching function varies depending on how the feature is set up.
@@ -318,11 +321,9 @@ const calculateFeatureDataFetches = (state, requiredSites = []) => {
             let locationIsMatch = () => false;
             if (matchLocationType instanceof RegExp) {
               locationIsMatch = (locationKey) => matchLocationType.test(hierarchy[locationKey].type);
-            }
-            if (typeof matchLocationType === 'string') {
+            } else if (typeof matchLocationType === 'string') {
               locationIsMatch = (locationKey) => hierarchy[locationKey].type === matchLocationType;
-            }
-            if (matchLocationName instanceof RegExp) {
+            } else if (matchLocationName instanceof RegExp) {
               locationIsMatch = (locationKey) => matchLocationName.test(locationKey);
             }
             Object.keys(hierarchy)
@@ -330,8 +331,8 @@ const calculateFeatureDataFetches = (state, requiredSites = []) => {
               .forEach((locationKey) => {
                 newState.featureDataFetches[dataSource][minZoom][siteCode].fetches[awaitingFetchKey].locations.push(locationKey);
                 newState.featureDataFetches[dataSource][minZoom][siteCode].features[featureKey].locations.push(locationKey);
-                if (isBasePlot(featureKey) && companionFeatureKey) {
-                  newState.featureDataFetches[dataSource][minZoom][siteCode].features[companionFeatureKey].locations.push(locationKey);
+                if (isBasePlot(featureKey) && companionMinZoom && companionFeatureKey) {
+                  newState.featureDataFetches[dataSource][companionMinZoom][siteCode].features[companionFeatureKey].locations.push(locationKey);
                 }
               });
           });
@@ -341,239 +342,250 @@ const calculateFeatureDataFetches = (state, requiredSites = []) => {
   return newState;
 };
 
+// NATGEO_WORLD_MAP has no data at zoom 17 or higher so go to WORLD_IMAGERY (satellite)
+const updateMapTileWithZoom = (state) => {
+  const newState = { ...state };
+  if (
+    newState.map.zoom <= 17 && state.map.baseLayer !== BASE_LAYERS.NATGEO_WORLD_MAP.KEY
+      && state.map.baseLayerAutoChangedAbove17) {
+    newState.map.baseLayer = BASE_LAYERS.NATGEO_WORLD_MAP.KEY;
+    newState.map.baseLayerAutoChangedAbove17 = false;
+  } else if (newState.map.zoom >= 17 && state.map.baseLayer === BASE_LAYERS.NATGEO_WORLD_MAP.KEY) {
+    newState.map.baseLayer = BASE_LAYERS.WORLD_IMAGERY.KEY;
+    newState.map.baseLayerAutoChangedAbove17 = true;
+  }
+  return newState;
+};
+
+// Increment the completed count for overall fetch and, if completed and expected are now equal,
+// reset both (so that subsequent batches of fetches can give an accurate progress metric).
+const completeOverallFetch = (state) => {
+  const newState = { ... state };
+  newState.overallFetch.completed += 1;
+  if (newState.overallFetch.expected === newState.overallFetch.completed) {
+    newState.overallFetch.expected = 0;
+    newState.overallFetch.completed = 0;
+    newState.overallFetch.pendingHierarchy = 0;
+  }
+  return newState;
+};
+
+// Recursively applies a feature visibility change to children down the tree
+const applyFeatureVisibilityToChildren = (state, feature, visible) => {
+  if (state.filters.features.visible[feature] === visible) { return state; }
+  let newState = { ...state };
+  newState.filters.features.visible[feature] = visible;
+  if (FEATURES[feature].type === FEATURE_TYPES.GROUP.KEY) {
+    Object.keys(FEATURES)
+      .filter((f) => FEATURES[f].parent === feature)
+      .forEach((f) => {
+        newState = applyFeatureVisibilityToChildren(newState, f, visible);
+      });
+  }
+  return newState;
+};
+
+// Recursively applies a feature visibility change to parents up the tree
+const applyFeatureVisibilityToParents = (state, feature) => {
+  let newState = { ...state };
+  if (FEATURES[feature].parent) {
+    const parentVisible = Object.keys(FEATURES)
+      .filter((f) => FEATURES[f].parent === FEATURES[feature].parent) // Of all children...
+      .some((f) => newState.filters.features.visible[f]); // ...some child is visible
+    newState.filters.features.visible[FEATURES[feature].parent] = parentVisible;
+    newState = applyFeatureVisibilityToParents(newState, FEATURES[feature].parent);
+  }
+  return newState;
+};
+
+// Returns a boolean describing whether a fetch status was updated
+const setFetchStatusFromAction = (state, action, status) => {
+  if (!Object.keys(FETCH_STATUS).includes(status) || status === FETCH_STATUS.AWAITING_CALL) {
+    return state;
+  }
+  const { dataSource } = action;
+  if (!FEATURE_DATA_SOURCES[dataSource]) { return state; }
+
+  const newState = { ...state };
+
+  // ARCGIS_ASSETS_API
+  if (dataSource === FEATURE_DATA_SOURCES.ARCGIS_ASSETS_API) {
+    const { featureKey, siteCode, data } = action;
+    if (!FEATURES[featureKey]) { return newState; }
+    if (
+      !newState.featureDataFetches[dataSource]
+        || !newState.featureDataFetches[dataSource][featureKey]
+        || !newState.featureDataFetches[dataSource][featureKey][siteCode]
+    ) { return newState; }
+    newState.featureDataFetches[dataSource][featureKey][siteCode] = status;
+    // If the status is SUCCESS and the action has data, also commit the data
+    if (status === FETCH_STATUS.SUCCESS && data) {
+      const { type: featureType } = FEATURES[featureKey];
+      newState.featureData[featureType][featureKey][siteCode] = data;
+    }
+    return newState;
+  }
+
+  // REST_LOCATIONS_API
+  if (dataSource === FEATURE_DATA_SOURCES.REST_LOCATIONS_API) {
+    const {
+      featureKey,
+      siteCode,
+      location,
+      data,
+    } = action;
+    if (!FEATURES[featureKey]) { return newState; }
+    const { type: featureType } = FEATURES[featureKey];
+    if (
+      !newState.featureDataFetches[dataSource]
+        || !newState.featureDataFetches[dataSource][featureKey]
+        || !newState.featureDataFetches[dataSource][featureKey][siteCode]
+        || !newState.featureDataFetches[dataSource][featureKey][siteCode][location]
+    ) {
+      return newState;
+    }
+    newState.featureDataFetches[dataSource][featureKey][siteCode][location] = status;
+    // If the status is SUCCESS and the action has data, also commit the data
+    if (status === FETCH_STATUS.SUCCESS && data) {
+      if (!newState.featureData[featureType][featureKey][siteCode]) {
+        newState.featureData[featureType][featureKey][siteCode] = {};
+      }
+      newState.featureData[featureType][featureKey][siteCode][location] = {
+        ...data,
+        siteCode,
+        featureKey,
+        name: location,
+        domainCode: state.sites[siteCode].domainCode,
+        stateCode: state.sites[siteCode].stateCode,
+      };
+    }
+    return newState;
+  }
+
+  // GRAPHQL_LOCATIONS_API
+  if (dataSource === FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API) {
+    const {
+      minZoom,
+      siteCode,
+      fetchId,
+      data,
+    } = action;
+    if (
+      !newState.featureDataFetches[dataSource]
+        || !newState.featureDataFetches[dataSource][minZoom]
+        || !newState.featureDataFetches[dataSource][minZoom][siteCode]
+        || !newState.featureDataFetches[dataSource][minZoom][siteCode].fetches[fetchId]
+    ) { return newState; }
+    newState.featureDataFetches[dataSource][minZoom][siteCode].fetches[fetchId].status = status;
+    // If the status is SUCCESS and the action has data, also commit the data
+    if (status === FETCH_STATUS.SUCCESS && data) {
+      // Make a map of location names to feature keys for this fetchId
+      const { features } = newState.featureDataFetches[dataSource][minZoom][siteCode];
+      const locNamesToFeatures = {};
+      Object.keys(features)
+        .filter((featureKey) => features[featureKey].fetchId === fetchId)
+        .forEach((featureKey) => {
+          features[featureKey].locations.forEach((locName) => {
+            // For *_BASE_PLOT features, which both have the same API locationType, determine
+            // which locations go to which feature by looking at the plotType in the data
+            if (isBasePlot(featureKey)) {
+              const { plotType } = data[locName];
+              if (plotType === 'tower') {
+                locNamesToFeatures[locName] = FEATURES.TOWER_BASE_PLOTS.KEY;
+              } else if (plotType === 'distributed') {
+                locNamesToFeatures[locName] = FEATURES.DISTRIBUTED_BASE_PLOTS.KEY;
+              }
+              return;
+            }
+            // All other features get a simple mapping
+            locNamesToFeatures[locName] = featureKey;
+          });
+        });
+      Object.keys(data).forEach((locName) => {
+        const featureKey = locNamesToFeatures[locName];
+        if (!FEATURES[featureKey]) { return; }
+        const {
+          type: featureType,
+          parentDataFeatureKey,
+          matchLocationCoordinateMap,
+        } = FEATURES[featureKey];
+        // This location is supplemental data to another location, so pipe it to the parent record
+        if (parentDataFeatureKey) {
+          const coordIdx = matchLocationCoordinateMap.findIndex(
+            (match) => locName.endsWith(match),
+          );
+          if (coordIdx === -1) { return; }
+          const { type: parentDataFeatureType } = FEATURES[parentDataFeatureKey];
+          if (!newState.featureData[parentDataFeatureType][parentDataFeatureKey][siteCode]) {
+            newState.featureData[parentDataFeatureType][parentDataFeatureKey][siteCode] = {};
+          }
+          const { parent: parentLocName, latitude, longitude } = data[locName];
+          if (!parentLocName) { return; }
+          const parentSiteData = newState.featureData[parentDataFeatureType][parentDataFeatureKey][siteCode]; // eslint-disable-line max-len
+          if (!parentSiteData[parentLocName]) {
+            parentSiteData[parentLocName] = {};
+          }
+          // Initialize the geometry.coordinates with as many empty points as expressed by the map
+          if (!parentSiteData[parentLocName].geometry) {
+            parentSiteData[parentLocName].geometry = { coordinates: [] };
+            for (let c = 0; c < matchLocationCoordinateMap.length; c += 1) {
+              parentSiteData[parentLocName].geometry.coordinates.push([]);
+            }
+          }
+          parentSiteData[parentLocName].geometry.coordinates[coordIdx] = [latitude, longitude];
+          return;
+        }
+        // This is a "normal" location that is not part of another point-based location
+        if (!newState.featureData[featureType][featureKey][siteCode]) {
+          newState.featureData[featureType][featureKey][siteCode] = {};
+        }
+        // Geometry may be loaded by another sub-location so look for that and don't blow it away!
+        const geometry = (
+          !newState.featureData[featureType][featureKey][siteCode][locName]
+            || !newState.featureData[featureType][featureKey][siteCode][locName].geometry
+        ) ? null : { ...newState.featureData[featureType][featureKey][siteCode][locName].geometry }; // eslint-disable-line max-len
+        newState.featureData[featureType][featureKey][siteCode][locName] = {
+          ...data[locName],
+          featureKey,
+          domainCode: state.sites[siteCode].domainCode,
+          stateCode: state.sites[siteCode].stateCode,
+        };
+        if (geometry) {
+          newState.featureData[featureType][featureKey][siteCode][locName].geometry = geometry;
+        }
+        // Base plot features: also pull sampling module data from the hierarchy
+        if (isBasePlot(featureKey)) {
+          const hierarchy = newState.featureData[FEATURE_TYPES.SITE_LOCATION_HIERARCHIES.KEY][siteCode]; // eslint-disable-line max-len
+          const basePlot = locName.replace('all', '').replace('.', '\\.');
+          const basePlotRegex = new RegExp(`^${basePlot}([a-z]{3})$`);
+          newState.featureData[featureType][featureKey][siteCode][locName].samplingModules = (
+            Object.keys(hierarchy).reduce((acc, cur) => {
+              const match = cur.match(basePlotRegex);
+              if (match) { acc.push(match[1]); }
+              return acc;
+            }, [])
+              .filter((k) => k !== 'all' && k !== 'mfb' && PLOT_SAMPLING_MODULES[k])
+              .sort((a, b) => (
+                (PLOT_SAMPLING_MODULES[a] > PLOT_SAMPLING_MODULES[b]) ? 1 : -1
+              ))
+          );
+        }
+      });
+    }
+    return newState;
+  }
+
+  return newState;
+};
+
 /**
    Reducer
 */
 const reducer = (state, action) => {
   let setMethod = null;
   let calculateFetchesRequiredSites = null;
-  const newState = { ...state };
+  let newState = { ...state };
   const { validSet } = state.selection;
-
-  // Increment the completed count for overall fetch and, if completed and expected are now equal,
-  // reset both (so that subsequent batches of fetches can give an accurate progress metric).
-  // TODO: make pure, move out of reducer, unit test
-  const completeOverallFetch = () => {
-    newState.overallFetch.completed += 1;
-    if (newState.overallFetch.expected === newState.overallFetch.completed) {
-      newState.overallFetch.expected = 0;
-      newState.overallFetch.completed = 0;
-      newState.overallFetch.pendingHierarchy = 0;
-    }
-  };
-
-  // Returns a boolean describing whether a fetch status was updated
-  // TODO: make pure, move out of reducer, unit test
-  const setFetchStatusFromAction = (status) => {
-    if (!Object.keys(FETCH_STATUS).includes(status) || status === FETCH_STATUS.AWAITING_CALL) {
-      return false;
-    }
-    const { dataSource } = action;
-    if (!FEATURE_DATA_SOURCES[dataSource]) { return false; }
-
-    // ARCGIS_ASSETS_API
-    if (dataSource === FEATURE_DATA_SOURCES.ARCGIS_ASSETS_API) {
-      const { featureKey, siteCode, data } = action;
-      if (!FEATURES[featureKey]) { return false; }
-      if (
-        !newState.featureDataFetches[dataSource]
-          || !newState.featureDataFetches[dataSource][featureKey]
-          || !newState.featureDataFetches[dataSource][featureKey][siteCode]
-      ) { return false; }
-      newState.featureDataFetches[dataSource][featureKey][siteCode] = status;
-      // If the status is SUCCESS and the action has data, also commit the data
-      if (status === FETCH_STATUS.SUCCESS && data) {
-        const { type: featureType } = FEATURES[featureKey];
-        newState.featureData[featureType][featureKey][siteCode] = data;
-      }
-      return true;
-    }
-
-    // REST_LOCATIONS_API
-    if (dataSource === FEATURE_DATA_SOURCES.REST_LOCATIONS_API) {
-      const {
-        featureKey,
-        siteCode,
-        location,
-        data,
-      } = action;
-      if (!FEATURES[featureKey]) { return false; }
-      const { type: featureType } = FEATURES[featureKey];
-      if (!newState.featureDataFetches[dataSource][featureKey][siteCode][location]) {
-        return false;
-      }
-      newState.featureDataFetches[dataSource][featureKey][siteCode][location] = status;
-      // If the status is SUCCESS and the action has data, also commit the data
-      if (status === FETCH_STATUS.SUCCESS && data) {
-        if (!newState.featureData[featureType][featureKey]) {
-          newState.featureData[featureType][featureKey] = {};
-        }
-        if (!newState.featureData[featureType][featureKey][siteCode]) {
-          newState.featureData[featureType][featureKey][siteCode] = {};
-        }
-        newState.featureData[featureType][featureKey][siteCode][location] = {
-          ...data,
-          siteCode,
-          featureKey,
-          name: location,
-          domainCode: state.sites[siteCode].domainCode,
-          stateCode: state.sites[siteCode].stateCode,
-        };
-      }
-    }
-
-    // GRAPHQL_LOCATIONS_API
-    if (dataSource === FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API) {
-      const {
-        minZoom,
-        siteCode,
-        fetchId,
-        data,
-      } = action;
-      if (
-        !newState.featureDataFetches[dataSource]
-          || !newState.featureDataFetches[dataSource][minZoom]
-          || !newState.featureDataFetches[dataSource][minZoom][siteCode]
-          || !newState.featureDataFetches[dataSource][minZoom][siteCode].fetches[fetchId]
-      ) { return false; }
-      newState.featureDataFetches[dataSource][minZoom][siteCode].fetches[fetchId].status = status;
-      // If the status is SUCCESS and the action has data, also commit the data
-      if (status === FETCH_STATUS.SUCCESS && data) {
-        // Make a map of location names to feature keys for this fetchId
-        const { features } = newState.featureDataFetches[dataSource][minZoom][siteCode];
-        const locNamesToFeatures = {};
-        Object.keys(features)
-          .filter((featureKey) => features[featureKey].fetchId === fetchId)
-          .forEach((featureKey) => {
-            features[featureKey].locations.forEach((locName) => {
-              // For *_BASE_PLOT features, which both have the same API locationType, determine
-              // which locations go to which feature by looking at the plotType in the data
-              if (isBasePlot(featureKey)) {
-                const { plotType } = data[locName];
-                if (plotType === 'tower') {
-                  locNamesToFeatures[locName] = FEATURES.TOWER_BASE_PLOTS.KEY;
-                } else if (plotType === 'distributed') {
-                  locNamesToFeatures[locName] = FEATURES.DISTRIBUTED_BASE_PLOTS.KEY;
-                }
-                return;
-              }
-              // All other features get a simple mapping
-              locNamesToFeatures[locName] = featureKey;
-            });
-          });
-        Object.keys(data).forEach((locName) => {
-          const featureKey = locNamesToFeatures[locName];
-          if (!FEATURES[featureKey]) { return; }
-          const {
-            type: featureType,
-            parentDataFeatureKey,
-            matchLocationCoordinateMap,
-          } = FEATURES[featureKey];
-          // This location is supplemental data to another location, so pipe it to the parent record
-          if (parentDataFeatureKey) {
-            const coordIdx = matchLocationCoordinateMap.findIndex(
-              (match) => locName.endsWith(match),
-            );
-            if (coordIdx === -1) { return; }
-            const { type: parentDataFeatureType } = FEATURES[parentDataFeatureKey];
-            if (!newState.featureData[parentDataFeatureType][parentDataFeatureKey][siteCode]) {
-              newState.featureData[parentDataFeatureType][parentDataFeatureKey][siteCode] = {};
-            }
-            const { parent: parentLocName, latitude, longitude } = data[locName];
-            if (!parentLocName) { return; }
-            const parentSiteData = newState.featureData[parentDataFeatureType][parentDataFeatureKey][siteCode]; // eslint-disable-line max-len
-            if (!parentSiteData[parentLocName]) {
-              parentSiteData[parentLocName] = {};
-            }
-            // Initialize the geometry.coordinates with as many empty points as expressed by the map
-            if (!parentSiteData[parentLocName].geometry) {
-              parentSiteData[parentLocName].geometry = { coordinates: [] };
-              for (let c = 0; c < matchLocationCoordinateMap.length; c += 1) {
-                parentSiteData[parentLocName].geometry.coordinates.push([]);
-              }
-            }
-            parentSiteData[parentLocName].geometry.coordinates[coordIdx] = [latitude, longitude];
-            return;
-          }
-          // This is a "normal" location that is not part of another point-based location
-          if (!newState.featureData[featureType][featureKey][siteCode]) {
-            newState.featureData[featureType][featureKey][siteCode] = {};
-          }
-          // Geometry may be loaded by another sub-location so look for that and don't blow it away!
-          const geometry = (
-            !newState.featureData[featureType][featureKey][siteCode][locName]
-              || !newState.featureData[featureType][featureKey][siteCode][locName].geometry
-          ) ? null : { ...newState.featureData[featureType][featureKey][siteCode][locName].geometry }; // eslint-disable-line max-len
-          newState.featureData[featureType][featureKey][siteCode][locName] = {
-            ...data[locName],
-            featureKey,
-            domainCode: state.sites[siteCode].domainCode,
-            stateCode: state.sites[siteCode].stateCode,
-          };
-          if (geometry) {
-            newState.featureData[featureType][featureKey][siteCode][locName].geometry = geometry;
-          }
-          // Base plot features: also pull sampling module data from the hierarchy
-          if (isBasePlot(featureKey)) {
-            const hierarchy = newState.featureData[FEATURE_TYPES.SITE_LOCATION_HIERARCHIES.KEY][siteCode]; // eslint-disable-line max-len
-            const basePlot = locName.replace('all', '').replace('.', '\\.');
-            const basePlotRegex = new RegExp(`^${basePlot}([a-z]{3})$`);
-            newState.featureData[featureType][featureKey][siteCode][locName].samplingModules = (
-              Object.keys(hierarchy).reduce((acc, cur) => {
-                const match = cur.match(basePlotRegex);
-                if (match) { acc.push(match[1]); }
-                return acc;
-              }, [])
-                .filter((k) => k !== 'all' && k !== 'mfb')
-                .sort((a, b) => (
-                  (PLOT_SAMPLING_MODULES[a] || null) > (PLOT_SAMPLING_MODULES[b] || null) ? 1 : -1
-                ))
-            );
-          }
-        });
-      }
-    }
-
-    return true;
-  };
-
-  // Recursively applies a feature visibility change to parents and chilren up/down the tree
-  // TODO: make pure, move out of reducer, unit test
-  const applyFeatureVisibilityToChildren = (feature, visible) => {
-    if (newState.filters.features.visible[feature] === visible) { return; }
-    newState.filters.features.visible[feature] = visible;
-    if (FEATURES[feature].type === FEATURE_TYPES.GROUP.KEY) {
-      Object.keys(FEATURES)
-        .filter((f) => FEATURES[f].parent === feature)
-        .forEach((f) => { applyFeatureVisibilityToChildren(f, visible); });
-    }
-  };
-
-  // TODO: make pure, move out of reducer, unit test
-  const applyFeatureVisibilityToParents = (feature) => {
-    if (FEATURES[feature].parent) {
-      const parentVisible = Object.keys(FEATURES)
-        .filter((f) => FEATURES[f].parent === FEATURES[feature].parent) // Of all children...
-        .some((f) => newState.filters.features.visible[f]); // ...some child is visible
-      newState.filters.features.visible[FEATURES[feature].parent] = parentVisible;
-      applyFeatureVisibilityToParents(FEATURES[feature].parent, parentVisible);
-    }
-  };
-
-  // NATGEO_WORLD_MAP has no data at zoom 17 or higher so go to WORLD_IMAGERY (satellite)
-  // TODO: make pure, move out of reducer, unit test
-  const updateMapTileWithZoom = () => {
-    if (
-      newState.map.zoom <= 17 && state.map.baseLayer !== BASE_LAYERS.NATGEO_WORLD_MAP.KEY
-        && state.map.baseLayerAutoChangedAbove17) {
-      newState.map.baseLayer = BASE_LAYERS.NATGEO_WORLD_MAP.KEY;
-      newState.map.baseLayerAutoChangedAbove17 = false;
-    }
-    if (newState.map.zoom >= 17 && state.map.baseLayer === BASE_LAYERS.NATGEO_WORLD_MAP.KEY) {
-      newState.map.baseLayer = BASE_LAYERS.WORLD_IMAGERY.KEY;
-      newState.map.baseLayerAutoChangedAbove17 = true;
-    }
-  };
 
   // Shortcuts for deailing with hierarchies
   const hierarchiesSource = FEATURE_DATA_SOURCES.REST_LOCATIONS_API;
@@ -621,10 +633,10 @@ const reducer = (state, action) => {
       if (centerIsValid(action.center)) { newState.map.center = action.center; }
       if (boundsAreValid(action.bounds)) { newState.map.bounds = action.bounds; }
       newState.map.zoomedIcons = getZoomedIcons(newState.map.zoom);
-      updateMapTileWithZoom();
-      return calculateFeatureDataFetches(
-        calculateFeatureAvailability(newState),
-      );
+      newState = updateMapTileWithZoom(newState);
+      newState = calculateFeatureAvailability(newState);
+      newState = calculateFeatureDataFetches(newState);
+      return newState;
 
     case 'setMapBounds':
       if (boundsAreValid(action.bounds)) { newState.map.bounds = action.bounds; }
@@ -690,9 +702,10 @@ const reducer = (state, action) => {
       if (
         !Object.keys(FEATURES).includes(action.feature) || typeof action.visible !== 'boolean'
       ) { return state; }
-      applyFeatureVisibilityToChildren(action.feature, action.visible);
-      applyFeatureVisibilityToParents(action.feature);
-      return calculateFeatureDataFetches(newState);
+      newState = applyFeatureVisibilityToChildren(newState, action.feature, action.visible);
+      newState = applyFeatureVisibilityToParents(newState, action.feature);
+      newState = calculateFeatureDataFetches(newState);
+      return newState;
 
     case 'setLegendFeatureOptionCollapsed':
       if (!Object.keys(FEATURES).includes(action.feature)) { return state; }
@@ -735,7 +748,7 @@ const reducer = (state, action) => {
       };
       newState.focusLocation.current = null;
       newState.focusLocation.data = null;
-      completeOverallFetch();
+      newState = completeOverallFetch(newState);
       return newState;
 
     case 'setFocusLocationFetchSucceeded':
@@ -750,18 +763,16 @@ const reducer = (state, action) => {
         newState.filters.features.visible[FEATURES.DOMAINS.KEY] = true;
         newState.filters.features.visible[FEATURES.STATES.KEY] = false;
       }
-      completeOverallFetch();
+      newState = completeOverallFetch(newState);
       newState.map = getMapStateForFocusLocation(newState);
       newState.focusLocation.map.zoom = newState.map.zoom;
       newState.focusLocation.map.center = [...newState.map.center];
-      updateMapTileWithZoom();
+      newState = updateMapTileWithZoom(newState);
       if (newState.focusLocation.data && newState.focusLocation.data.siteCode) {
         calculateFetchesRequiredSites = [newState.focusLocation.data.siteCode];
       }
-      return calculateFeatureDataFetches(
-        calculateFeatureAvailability(newState),
-        calculateFetchesRequiredSites,
-      );
+      newState = calculateFeatureAvailability(newState);
+      return calculateFeatureDataFetches(newState, calculateFetchesRequiredSites);
 
     case 'returnToFocusLocation':
       if (!state.focusLocation.current || !state.focusLocation.data) { return state; }
@@ -775,33 +786,31 @@ const reducer = (state, action) => {
         newState.filters.features.visible[FEATURES.STATES.KEY] = false;
       }
       newState.map = getMapStateForFocusLocation(state);
-      updateMapTileWithZoom();
+      newState = updateMapTileWithZoom(newState);
       if (newState.focusLocation.data && newState.focusLocation.data.siteCode) {
         calculateFetchesRequiredSites = [newState.focusLocation.data.siteCode];
       }
-      return calculateFeatureDataFetches(
-        calculateFeatureAvailability(newState),
-        calculateFetchesRequiredSites,
-      );
+      newState = calculateFeatureAvailability(newState);
+      return calculateFeatureDataFetches(newState, calculateFetchesRequiredSites);
 
     // Fetch and Import
     case 'awaitingFeatureDataFetchesTriggered':
       return { ...state, featureDataFetchesHasAwaiting: false };
 
     case 'setFeatureDataFetchStarted':
-      setFetchStatusFromAction(FETCH_STATUS.FETCHING);
-      return newState;
+      return setFetchStatusFromAction(newState, action, FETCH_STATUS.FETCHING);
 
     case 'setFeatureDataFetchSucceeded':
-      setFetchStatusFromAction(FETCH_STATUS.SUCCESS);
-      completeOverallFetch();
-      return newState.overallFetch.expected === 0
-        ? calculateFeatureDataFetches(newState)
-        : newState;
+      newState = setFetchStatusFromAction(newState, action, FETCH_STATUS.SUCCESS);
+      newState = completeOverallFetch(newState);
+      if (newState.overallFetch.expected === 0) {
+        newState = calculateFeatureDataFetches(newState);
+      }
+      return newState;
 
     case 'setFeatureDataFetchFailed':
-      setFetchStatusFromAction(FETCH_STATUS.ERROR);
-      completeOverallFetch();
+      newState = setFetchStatusFromAction(newState, action, FETCH_STATUS.ERROR);
+      newState = completeOverallFetch(newState);
       return newState;
 
     case 'setDomainLocationHierarchyFetchStarted':
@@ -823,17 +832,14 @@ const reducer = (state, action) => {
       });
       /* eslint-enable max-len */
       newState.overallFetch.pendingHierarchy -= 1;
-      completeOverallFetch();
+      newState = completeOverallFetch(newState);
       if (
         mapIsAtFocusLocation(state)
           && state.focusLocation.data && state.focusLocation.data.siteCode
       ) {
         calculateFetchesRequiredSites = [state.focusLocation.data.siteCode];
       }
-      return calculateFeatureDataFetches(
-        newState,
-        calculateFetchesRequiredSites,
-      );
+      return calculateFeatureDataFetches(newState, calculateFetchesRequiredSites);
 
     case 'setDomainLocationHierarchyFetchFailed':
       /* eslint-disable max-len */
@@ -841,7 +847,7 @@ const reducer = (state, action) => {
       newState.featureDataFetches[hierarchiesSource][hierarchiesType][action.domainCode] = FETCH_STATUS.ERROR;
       /* eslint-enable max-len */
       newState.overallFetch.pendingHierarchy -= 1;
-      completeOverallFetch();
+      newState = completeOverallFetch(newState);
       return newState;
 
     // Selection
@@ -864,10 +870,11 @@ const reducer = (state, action) => {
       ) { return state; }
       newState.selection.set = getSelectableSet(action.selection, validSet);
       newState.selection.changed = true;
+      newState = validateSelection(newState);
       if (FEATURE_TYPES[newState.selection.active].deriveRegionSelections) {
-        return deriveRegionSelections(validateSelection(newState));
+        newState = deriveRegionSelections(newState);
       }
-      return validateSelection(newState);
+      return newState;
 
     case 'toggleItemSelected':
       // Special case: when the selectionLimit is 1 always maintain a selection size of 1
@@ -889,10 +896,11 @@ const reducer = (state, action) => {
         newState.selection.set.add(action.item);
         newState.selection.changed = true;
       }
+      newState = validateSelection(newState);
       if (FEATURE_TYPES[newState.selection.active].deriveRegionSelections) {
-        return deriveRegionSelections(validateSelection(newState));
+        newState = deriveRegionSelections(newState);
       }
-      return validateSelection(newState);
+      return newState;
 
     case 'toggleSitesSelectedForState':
       if (!action.stateCode) { return state; }
@@ -907,7 +915,9 @@ const reducer = (state, action) => {
         newState.selection.set[setMethod](siteCode);
       });
       newState.selection.changed = true;
-      return deriveRegionSelections(validateSelection(newState));
+      newState = validateSelection(newState);
+      newState = deriveRegionSelections(newState);
+      return newState;
 
     case 'toggleSitesSelectedForDomain':
       if (!action.domainCode) { return state; }
@@ -924,7 +934,9 @@ const reducer = (state, action) => {
       });
       /* eslint-enable max-len */
       newState.selection.changed = true;
-      return deriveRegionSelections(validateSelection(newState));
+      newState = validateSelection(newState);
+      newState = deriveRegionSelections(newState);
+      return newState;
 
     // Default
     default:
@@ -1318,5 +1330,10 @@ export const getTestableItems = () => (
     zoomIsValid,
     centerIsValid,
     calculateFeatureDataFetches,
+    updateMapTileWithZoom,
+    completeOverallFetch,
+    applyFeatureVisibilityToChildren,
+    applyFeatureVisibilityToParents,
+    setFetchStatusFromAction,
   }
 );
