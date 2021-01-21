@@ -1285,3 +1285,10 @@ const SiteMapContext = {
 };
 
 export default SiteMapContext;
+
+// Additional items exported for unit testing
+export const getTestableItems = () => (
+  process.env.NODE_ENV !== 'test' ? {} : {
+    deriveRegionSelections,
+  }
+);
