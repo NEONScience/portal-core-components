@@ -103,8 +103,10 @@ const generateYAxisRange = (axis = {}) => {
     !Object.keys(Y_AXIS_RANGE_MODES).includes(rangeMode)
       || !Number.isFinite(standardDeviation)
       || !Number.isFinite(precision)) { return axisRange; }
-  const low = (dataRange[0] || 0) - standardDeviation;
-  const high = (dataRange[1] || 0) + standardDeviation;
+  let low = (dataRange[0] || 0) - standardDeviation;
+  let high = (dataRange[1] || 0) + standardDeviation;
+  low = parseFloat(low.toFixed(precision), 10);
+  high = parseFloat(high.toFixed(precision), 10);  
   if (rangeMode === Y_AXIS_RANGE_MODES.FROM_ZERO) { return [0, high]; }
   if (rangeMode === Y_AXIS_RANGE_MODES.CENTERED) { return [low, high]; }
   return axisRange;
@@ -212,8 +214,7 @@ export const summarizeTimeSteps = (steps, timeStep = null, pluralize = true) => 
   const breakIdx = breaks.reduce((acc, cur, idx) => ((seconds > cur) ? idx : acc), 0);
   let value = (seconds / breaks[breakIdx]).toFixed(1);
   if (value.slice(value.length - 1) === '0') { value = value.slice(0, value.length - 2); }
-  let plural = '';
-  if (pluralize) { plural = value === '1' ? '' : 's'; }
+  const plural = pluralize ? 's' : '';
   return `${value} ${intervals[breakIdx]}${plural}`;
 };
 
@@ -1351,6 +1352,7 @@ export const getTestableItems = () => (
   process.env.NODE_ENV !== 'test' ? {} : {
     DEFAULT_STATE,
     FETCH_STATUS,
+    applyDefaultsToSelection,
     generateYAxisRange,
     getTimeStep,
     getUpdatedValueRange,
@@ -1359,6 +1361,7 @@ export const getTestableItems = () => (
     parseSiteMonthData,
     parseSiteVariables,
     parseSitePositions,
+    reducer,
     TimeSeriesViewerPropTypes,
   }
 );

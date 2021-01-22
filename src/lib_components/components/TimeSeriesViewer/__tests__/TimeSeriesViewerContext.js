@@ -1,5 +1,7 @@
 import { renderHook } from "@testing-library/react-hooks";
 
+import cloneDeep from 'lodash/cloneDeep';
+
 import TimeSeriesViewerContext, {
   summarizeTimeSteps,
   getTestableItems,
@@ -11,6 +13,7 @@ const { useTimeSeriesViewerState } = TimeSeriesViewerContext;
 const {
   DEFAULT_STATE,
   FETCH_STATUS,
+  applyDefaultsToSelection,
   generateYAxisRange,
   getTimeStep,
   getUpdatedValueRange,
@@ -51,7 +54,7 @@ describe('TimeSeriesViewerContext', () => {
     test('returns "none" for a single step', () => {
       expect(summarizeTimeSteps(1)).toBe('none');
     });
-    test('defaults to 30 minute increments if not passes an explicit timestep', () => {
+    test('defaults to 30 minute increments if not passed an explicit timestep', () => {
       expect(summarizeTimeSteps(2)).toBe('60 minutes');
       expect(summarizeTimeSteps(48)).toBe('24 hours');
       expect(summarizeTimeSteps(2880)).toBe('2 months');
@@ -408,8 +411,9 @@ table,fieldName,description,dataType,units,downloadPkg,pubFormat
     };
     const inputCSV = `
 HOR.VER,name,description,start,end,xOffset,yOffset,zOffset
-"000.010",CFGLOC102010,"Abby Road 2D Wind L1","2010-01-01T00:00:00Z",,2.36,6.25,0.22
-"000.010",CFGLOC102010,"Abby Road 2D Wind L1","2010-01-01T00:00:00Z",,2.36,6.25,0.22
+"000.010",CFGLOC102010,"Abby Road 2D Wind L1","2010-01-01T00:00:00Z","2020-01-01T00:00:00Z",2.36,6.25,0.22
+"000.010",CFGLOC102010,"Abby Road 2D Wind L1","2010-01-01T00:00:00Z","2020-01-01T00:00:00Z",2.36,6.25,0.22
+"000.010",CFGLOC102010,"Abby Road 2D Wind L1","2020-01-01T00:00:01Z",,2.45,6.25,0.22
 "000.030",CFGLOC102020,"Abby Road 2D Wind L3","2010-01-01T00:00:00Z",,2.36,6.22,9.43
 `;
     const expectedOutput = {
@@ -432,8 +436,18 @@ HOR.VER,name,description,start,end,xOffset,yOffset,zOffset
               name: 'CFGLOC102010',
               description: 'Abby Road 2D Wind L1',
               start: '2010-01-01T00:00:00Z',
-              end: '',
+              end: '2020-01-01T00:00:00Z',
               xOffset: '2.36',
+              yOffset: '6.25',
+              zOffset: '0.22',
+            },
+            {
+              'HOR.VER': '000.010',
+              name: 'CFGLOC102010',
+              description: 'Abby Road 2D Wind L1',
+              start: '2020-01-01T00:00:01Z',
+              end: '',
+              xOffset: '2.45',
               yOffset: '6.25',
               zOffset: '0.22',
             },
@@ -543,4 +557,128 @@ HOR.VER,name,description,start,end,xOffset,yOffset,zOffset
       });
     });
   });
+
+  describe('applyDefaultsToSelection()', () => {
+    let state;
+    beforeEach(() => {
+      state = cloneDeep(DEFAULT_STATE);
+      state.selection.sites = [];
+      state.product.sites = {
+        S1: {
+          ...expectedInitialSite,
+          availableMonths: ['2010-03', '2010-09'],
+          positions: {
+            '000.010': { data: {}, history: [] },
+            '000.020': { data: {}, history: [] },
+          },
+        },
+        S2: {
+          ...expectedInitialSite,
+          availableMonths: ['2012-04', '2012-10'],
+          positions: {
+            '000.040': { data: {}, history: [] },
+            '000.050': { data: {}, history: [] },
+          },
+        },
+        S3: {
+          ...expectedInitialSite,
+          availableMonths: ['2016-05', '2016-11'],
+          positions: {},
+        },
+      };
+      state.variables = {
+        foo: { canBeDefault: false, isDateTime: false, downloadPkg: 'basic', units: 'foos' },
+        endDate: { canBeDefault: false, isDateTime: true, downloadPkg: 'basic', units: 'NA' },
+        zux: { canBeDefault: false, isDateTime: false, downloadPkg: 'expanded', units: 'zuxs' },
+        bar: { canBeDefault: true, isDateTime: false, downloadPkg: 'basic', units: 'bars' },
+        startDate: { canBeDefault: false, isDateTime: true, downloadPkg: 'basic', units: 'NA' },
+        startDateTime: { canBeDefault: false, isDateTime: true, downloadPkg: 'basic', units: 'NA' },
+        endDateTime: { canBeDefault: false, isDateTime: true, downloadPkg: 'basic', units: 'NA' },
+      };
+    });
+    test('does nothing if there are no product sites in state', () => {
+      state.product.sites = {};
+      expect(
+        applyDefaultsToSelection(state)
+      ).toStrictEqual(state.selection);
+    });
+    test('applies site, date range, and position if none are defined in selection and no variables yet', () => {
+      state.variables = [];
+      const newSelection = applyDefaultsToSelection(state);
+      expect(newSelection.sites).toStrictEqual([{ siteCode: 'S1', positions: ['000.010'] }]);
+      expect(newSelection.dateRange).toStrictEqual(['2010-09', '2010-09']);
+    });
+    test('also applies variable if none selected and variable present', () => {
+      const newSelection = applyDefaultsToSelection(state);
+      expect(newSelection.variables).toStrictEqual(['bar']);
+      expect(newSelection.dateTimeVariable).toStrictEqual('startDateTime');
+    });
+    test('does not apply variable if no default is available', () => {
+      Object.keys(state.variables).forEach((v) => {
+        state.variables[v].canBeDefault = false;
+      });
+      const newSelection = applyDefaultsToSelection(state);
+      expect(newSelection.variables).toStrictEqual([]);
+    });
+    test('does not apply dateTimeVariable if no dateTime variables are available', () => {
+      Object.keys(state.variables).forEach((v) => {
+        state.variables[v].isDateTime = false;
+      });
+      const newSelection = applyDefaultsToSelection(state);
+      expect(newSelection.dateTimeVariable).toBe(null);
+    });
+    test('does not apply position if site has none to apply', () => {
+      state.selection.sites = [{ siteCode: 'S3', positions: [] }];
+      state.selection.dateRange = ['2016-05', '2016-11'];
+      const newSelection = applyDefaultsToSelection(state);
+      expect(newSelection.sites).toStrictEqual([{ siteCode: 'S3', positions: [] }]);
+      expect(newSelection.dateRange).toStrictEqual(['2016-05', '2016-11']);
+    });
+    test('does not apply site, date range, position, or variables if already selected', () => {
+      state.selection.sites = [{ siteCode: 'S2', positions: ['000.050'] }];
+      state.selection.dateRange = ['2012-04', '2012-04'];
+      state.selection.variables = ['foo', 'zux'];
+      state.selection.dateTimeVariable = 'endDate';
+      const newSelection = applyDefaultsToSelection(state);
+      expect(newSelection.sites).toStrictEqual([{ siteCode: 'S2', positions: ['000.050'] }]);
+      expect(newSelection.dateRange).toStrictEqual(['2012-04', '2012-04']);
+    });
+    test('sets yAxis range when changing the default variable if series data present', () => {
+      state.selection.sites = [{ siteCode: 'S2', positions: ['000.050'] }];
+      state.selection.timeStep = '30min';
+      state.product.sites.S2.positions['000.050'].data['2012-10'] = {
+        basic: {
+          '30min': {
+            series: {
+              bar: {
+                data: [17, 15, 23, 7, 9, 13],
+                range: [7, 23],
+                count: 6,
+                sum: 84,
+                variance: 33.2
+              },
+              startDateTime: {
+                data: [1, 2, 3, 4, 5, 6],
+                range: [null, null],
+                count: 0,
+                sum: 0,
+                variance: 0
+              },
+            },
+          },
+        },
+      };
+      const newSelection = applyDefaultsToSelection(state);
+      expect(newSelection.yAxes.y1.units).toBe('bars');
+      expect(newSelection.yAxes.y1.precision).toBe(2);
+      expect(newSelection.yAxes.y1.standardDeviation).toBe(5.76);
+      expect(newSelection.yAxes.y1.dataRange).toStrictEqual([7, 23]);
+      expect(newSelection.yAxes.y1.axisRange).toStrictEqual([1.24, 28.76]);
+    });
+  });
+
+  /*
+  describe('reducer()', () => {
+  });
+  */
 });
