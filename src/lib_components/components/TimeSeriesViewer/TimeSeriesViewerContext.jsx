@@ -63,6 +63,14 @@ export const TIME_SERIES_VIEWER_STATUS_TITLES = {
   READY: null,
 };
 
+// List of common date-time variable names to use for the x axis ordered by preference
+const PREFERRED_DATETIME_VARIABLES = [
+  'startDateTime',
+  'endDateTime',
+  'startDate',
+  'endDate',
+];
+
 // Keys, details, and supporting functions for all possible Y-axis range modes
 export const Y_AXIS_RANGE_MODES = {
   CENTERED: 'CENTERED',
@@ -529,11 +537,20 @@ const applyDefaultsToSelection = (state) => {
         selection.yAxes.y1.units = variables[defaultVar].units;
       }
     }
-    // Ensure the selection has at least one dateTime variable
+    // Ensure the selection has at least one dateTime variable. Use the PREFERRED_DATETIME_VARIABLES
+    // list to sort the existing date time variables in order of preference and take the first one.
     if (!selection.dateTimeVariable) {
-      const defaultDateTimeVar = Object.keys(variables).find((v) => variables[v].isDateTime);
-      if (defaultDateTimeVar) {
-        selection.dateTimeVariable = defaultDateTimeVar;
+      const dateTimeVars = Object.keys(variables).filter((v) => variables[v].isDateTime);
+      if (dateTimeVars.length) {
+        dateTimeVars.sort((a, b) => {
+          const aIdx = PREFERRED_DATETIME_VARIABLES.indexOf(a);
+          const bIdx = PREFERRED_DATETIME_VARIABLES.indexOf(b);
+          if (aIdx === bIdx) { return 0; }
+          if (aIdx === -1 && bIdx !== -1) { return 1; }
+          if (aIdx !== -1 && bIdx === -1) { return -1; }
+          return aIdx < bIdx ? -1 : 1;
+        });
+        selection.dateTimeVariable = dateTimeVars[0]; // eslint-disable-line prefer-destructuring
       }
     }
   }

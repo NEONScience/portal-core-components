@@ -1,13 +1,17 @@
 import { renderHook } from "@testing-library/react-hooks";
 
 import cloneDeep from 'lodash/cloneDeep';
-// import statesJSON from '../../../staticJSON/sites.json';
 
 // Mock some functions within SiteMapUtils as they are called by functions we test here
 // but are tested directly in the SiteMapUtils test suite
 jest.mock('../SiteMapUtils', () => ({
   ...jest.requireActual('../SiteMapUtils'),
+  boundsAreValid: jest.fn(),
   calculateLocationsInBounds: jest.fn(),
+  deriveFullObservatoryZoomLevel: jest.fn(),
+  hydrateNeonContextData: jest.fn(),
+  getMapStateForFocusLocation: jest.fn(),
+  getZoomedIcons: jest.fn(),
 }));
 
 jest.mock('lodash/uniqueId');
@@ -22,11 +26,21 @@ import {
   FEATURES,
   FEATURE_TYPES,
   FEATURE_DATA_SOURCES,
+  MAP_MOUSE_MODES,
   MAP_ZOOM_RANGE,
+  MIN_TABLE_MAX_BODY_HEIGHT,
+  OBSERVATORY_CENTER,
+  OVERLAYS,
   SELECTION_PORTIONS,
   SITE_TERRAINS,
   SITE_LOCATION_HIERARCHIES_MIN_ZOOM,
+  VIEWS,
+  boundsAreValid,
   calculateLocationsInBounds,
+  deriveFullObservatoryZoomLevel,
+  hydrateNeonContextData,
+  getMapStateForFocusLocation,
+  getZoomedIcons,
 } from '../SiteMapUtils';
 
 const { useSiteMapContext } = SiteMapContext;
@@ -45,6 +59,7 @@ const {
   applyFeatureVisibilityToChildren,
   applyFeatureVisibilityToParents,
   setFetchStatusFromAction,
+  reducer,
 } = getTestableItems();
 
 describe('SiteMap - SiteMapContext', () => {
@@ -713,6 +728,70 @@ describe('SiteMap - SiteMapContext', () => {
           expect(newState.overallFetch.pendingHierarchy).toBe(0);
           expect(newState.featureDataFetchesHasAwaiting).toBe(true);          
         });
+        test('applies awaiting fetches for visible features with companion keys, respecting existing fetches', () => {
+          calculateLocationsInBounds.mockReturnValue(['SA']);
+          uniqueId
+            .mockReturnValueOnce('f_uid_1')
+            .mockReturnValueOnce('f_uid_2')
+            .mockReturnValue('f_BAD');
+          state.map.zoom = 18;
+          state.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES].D16 = FETCH_STATUS.SUCCESS;
+          state.featureDataFetches[GRAPHQL_LOCATIONS_API][DISTRIBUTED_BASE_PLOTS_MINZOOM] = {
+            SA: {
+              features: {
+                [DISTRIBUTED_BASE_PLOTS]: {
+                  fetchId: 'f_uid_0',
+                  locations: ['BP001', 'DP003'],
+                },
+              },
+              fetches: {
+                fetchId: 'f_uid_0',
+                locations: ['BP001', 'DP003'],
+                status: FETCH_STATUS.AWAITING_CALL,
+              },
+            }
+          };
+          state.featureData[SITE_LOCATION_HIERARCHIES].SA = {
+            BP001: { type: 'OS Plot - all', parent: 'SB', description: 'tower base plot 001' },
+            DP003: { type: 'OS Plot - all', parent: 'SB', description: 'distributed base plot 003' },
+          };
+          state.filters.features.available[TOWER_BASE_PLOTS] = true;
+          state.filters.features.visible[TOWER_BASE_PLOTS] = true;
+          state.filters.features.available[DISTRIBUTED_BASE_PLOTS] = true;
+          state.filters.features.visible[DISTRIBUTED_BASE_PLOTS] = false;
+          const newState = calculateFeatureDataFetches(state);
+          expect(
+            Object.keys(state.featureDataFetches[GRAPHQL_LOCATIONS_API][TOWER_BASE_PLOTS_MINZOOM])
+          ).toStrictEqual(['SA']);
+          expect(
+            Object.keys(state.featureDataFetches[GRAPHQL_LOCATIONS_API][DISTRIBUTED_BASE_PLOTS_MINZOOM])
+          ).toStrictEqual(['SA']);
+          expect(
+            state.featureDataFetches[GRAPHQL_LOCATIONS_API][TOWER_BASE_PLOTS_MINZOOM].SA.features[TOWER_BASE_PLOTS]
+          ).toStrictEqual({
+            fetchId: 'f_uid_0',
+            locations: ['BP001', 'DP003'],
+          });
+          expect(
+            state.featureDataFetches[GRAPHQL_LOCATIONS_API][TOWER_BASE_PLOTS_MINZOOM].SA.fetches
+          ).toStrictEqual({});
+          expect(
+            state.featureDataFetches[GRAPHQL_LOCATIONS_API][DISTRIBUTED_BASE_PLOTS_MINZOOM].SA.features[DISTRIBUTED_BASE_PLOTS]
+          ).toStrictEqual({
+            fetchId: 'f_uid_0',
+            locations: ['BP001', 'DP003'],
+          });
+          expect(
+            state.featureDataFetches[GRAPHQL_LOCATIONS_API][DISTRIBUTED_BASE_PLOTS_MINZOOM].SA.fetches
+          ).toStrictEqual({
+            fetchId: 'f_uid_0',
+            status: FETCH_STATUS.AWAITING_CALL,
+            locations: ['BP001', 'DP003'],
+          });
+          expect(newState.overallFetch.expected).toBe(0);
+          expect(newState.overallFetch.pendingHierarchy).toBe(0);
+          expect(newState.featureDataFetchesHasAwaiting).toBe(false);          
+        });
       });
     });
     describe('with requiredSites argument', () => {
@@ -1337,6 +1416,856 @@ and so this test must be updated.`;
             },
           });
         });
+      });
+    });
+  });
+
+  describe('reducer()', () => {
+    let state;
+    beforeEach(() => {
+      state = cloneDeep(DEFAULT_STATE);
+    });
+    test('does nothing if passed an unsupported action type', () => {
+      expect(reducer(state, { type: 'invalidActionType' })).toStrictEqual(state);
+    });
+    describe('setView', () => {
+      test('does nothing if passed an invalid view', () => {
+        expect(
+          reducer(state, { type: 'setView' })
+        ).toStrictEqual(state);
+        expect(
+          reducer(state, { type: 'setView', view: 'INVALID_VIEW' })
+        ).toStrictEqual(state);
+      });
+      test('applies view if valid', () => {
+        const newState = reducer(state, { type: 'setView', view: VIEWS.TABLE });
+        expect(newState.view.current).toBe(VIEWS.TABLE);
+      });
+    });
+    describe('setViewInitialized', () => {
+      test('does nothing if current view is not valid (somehow)', () => {
+        state.view.current = 'INVALID_VIEW';
+        const newState = reducer(state, { type: 'setViewInitialized' });
+        expect(newState.view.current).toBe('INVALID_VIEW');
+        Object.keys(newState.view.initialized).forEach((view) => {
+          expect(newState.view.initialized[view]).toBe(false);
+        });
+      });
+      test('initializes only the current view (if valid)', () => {
+        state.view.current = VIEWS.TABLE;
+        const newState = reducer(state, { type: 'setViewInitialized' });
+        expect(newState.view.current).toBe(VIEWS.TABLE);
+        Object.keys(newState.view.initialized).forEach((view) => {
+          expect(newState.view.initialized[view]).toBe(view === VIEWS.TABLE);
+        });
+      });
+    });
+    describe('setAspectRatio', () => {
+      test('does nothing if action ascpectRatio is not a positive number', () => {
+        expect(
+          reducer(state, { type: 'setAspectRatio' })
+        ).toStrictEqual(state);
+        expect(
+          reducer(state, { type: 'setAspectRatio', aspectRatio: 'foo' })
+        ).toStrictEqual(state);
+        expect(
+          reducer(state, { type: 'setAspectRatio', aspectRatio: 0 })
+        ).toStrictEqual(state);
+        expect(
+          reducer(state, { type: 'setAspectRatio', aspectRatio: -1.5 })
+        ).toStrictEqual(state);
+      });
+      test('applies aspectRatio if valid, optionally taking up widthReference', () => {
+        let newState = reducer(state, { type: 'setAspectRatio', aspectRatio: 1.5 });
+        expect(newState.aspectRatio.currentValue).toBe(1.5);
+        expect(newState.aspectRatio.widthReference).toBe(0);
+        expect(newState.table.maxBodyHeightUpdateFromAspectRatio).toBe(true);
+        newState = reducer(state, { type: 'setAspectRatio', aspectRatio: 1.5, widthReference: 60 });
+        expect(newState.aspectRatio.currentValue).toBe(1.5);
+        expect(newState.aspectRatio.widthReference).toBe(60);
+        expect(newState.table.maxBodyHeightUpdateFromAspectRatio).toBe(true);
+      });
+    });
+    describe('setAspectRatioResizeEventListenerInitialized', () => {
+      test('flips the bit', () => {
+        const newState = reducer(state, { type: 'setAspectRatioResizeEventListenerInitialized' });
+        expect(newState.aspectRatio.resizeEventListenerInitialized).toBe(true);
+      });
+    });
+    describe('hydrateNeonContextData', () => {
+      test('does nothing if action is missing neonContextData', () => {
+        hydrateNeonContextData.mockReset();
+        const newState = reducer(state, { type: 'hydrateNeonContextData' });
+        expect(newState).toStrictEqual(state);
+        expect(hydrateNeonContextData).not.toHaveBeenCalled();
+      });
+      test('invokes hydrateNeonContextData()', () => {
+        hydrateNeonContextData.mockReset();
+        const newState = reducer(
+          state,
+          { type: 'hydrateNeonContextData', neonContextData: { foo: 'bar' } },
+        );
+        expect(hydrateNeonContextData).toHaveBeenCalledTimes(1);
+        expect(hydrateNeonContextData).toHaveBeenCalledWith(state, { foo: 'bar' });
+      });
+    });
+    describe('setTableFocus', () => {
+      test('sets table focus', () => {
+        const newState = reducer(state, { type: 'setTableFocus', focus: 'foo' });
+        expect(newState.table.focus).toBe('foo');
+      });
+    });
+    describe('setTableMaxBodyHeight', () => {
+      test('sets table maxBodyHeight from action if above minimum', () => {
+        const height = MIN_TABLE_MAX_BODY_HEIGHT + 50;
+        const newState = reducer(state, { type: 'setTableMaxBodyHeight', height });
+        expect(newState.table.maxBodyHeight).toBe(height);
+        expect(newState.table.maxBodyHeightUpdateFromAspectRatio).toBe(false);
+      });
+      test('sets table maxBodyHeight to the minimum if invalid or below', () => {
+        const newState = reducer(state, { type: 'setTableMaxBodyHeight' });
+        expect(newState.table.maxBodyHeight).toBe(MIN_TABLE_MAX_BODY_HEIGHT);
+        expect(newState.table.maxBodyHeightUpdateFromAspectRatio).toBe(false);
+      });
+    });
+    describe('setMapZoom', () => {
+      test('does nothing if action zoom is invalid', () => {
+        expect(
+          reducer(state, { type: 'setMapZoom' })
+        ).toStrictEqual(state);
+        expect(
+          reducer(state, { type: 'setMapZoom', zoom: -50 })
+        ).toStrictEqual(state);
+      });
+      test('sets only zoom (not center and not bounds) if only passed zoom', () => {
+        getZoomedIcons.mockReset();
+        getZoomedIcons.mockReturnValue('ZOOMED ICONS');
+        const newState = reducer(state, { type: 'setMapZoom', zoom: 10 });
+        expect(newState.map.zoom).toBe(10);
+        expect(newState.map.zoomedIcons).toBe('ZOOMED ICONS');
+      });
+      test('sets center if provided', () => {
+        getZoomedIcons.mockReset();
+        getZoomedIcons.mockReturnValue('ZOOMED ICONS');
+        const newState = reducer(state, { type: 'setMapZoom', zoom: 12, center: [50, 80] });
+        expect(newState.map.zoom).toBe(12);
+        expect(newState.map.center).toStrictEqual([50, 80]);
+        expect(newState.map.zoomedIcons).toBe('ZOOMED ICONS');
+      });
+      test('sets bounds if provided', () => {
+        const bounds = 'BOUNDS';
+        boundsAreValid.mockReset();
+        boundsAreValid.mockReturnValue(true);
+        getZoomedIcons.mockReset();
+        getZoomedIcons.mockReturnValue('ZOOMED ICONS');
+        const newState = reducer(state, { type: 'setMapZoom', zoom: 5, bounds });
+        expect(newState.map.zoom).toBe(5);
+        expect(newState.map.bounds).toBe(bounds);
+        expect(newState.map.zoomedIcons).toBe('ZOOMED ICONS');
+      });
+    });
+    describe('setMapBounds', () => {
+      test('does nothing if action bounds are invalid', () => {
+        const bounds = 'BOUNDS';
+        boundsAreValid.mockReset();
+        boundsAreValid.mockReturnValue(false);
+        const newState = reducer(state, { type: 'setMapBounds', bounds });
+        expect(newState).toStrictEqual(state);
+      });
+      test('sets bounds if valid', () => {
+        const bounds = 'BOUNDS';
+        boundsAreValid.mockReset();
+        boundsAreValid.mockReturnValue(true);
+        const newState = reducer(state, { type: 'setMapBounds', bounds });
+        expect(newState.map.bounds).toBe(bounds);
+      });
+    });
+    describe('setMapCenter', () => {
+      test('does nothing if action center is invalid', () => {
+        const newState = reducer(state, { type: 'setMapCenter', center: 'invalid' });
+        expect(newState).toStrictEqual(state);
+      });
+      test('sets map center valid', () => {
+        boundsAreValid.mockReset();
+        boundsAreValid.mockReturnValue(false);   
+        const newState = reducer(state, { type: 'setMapCenter', center: [50, 80] });
+        expect(newState.map.center).toStrictEqual([50, 80]);
+      });
+      test('sets map center and bounds if both provided and valid', () => {
+        const bounds = 'BOUNDS';
+        boundsAreValid.mockReset();
+        boundsAreValid.mockReturnValue(true);        
+        const newState = reducer(state, { type: 'setMapCenter', center: [50, 80], bounds });
+        expect(newState.map.center).toStrictEqual([50, 80]);
+        expect(newState.map.bounds).toBe(bounds);
+      });
+    });
+    describe('setMapBaseLayer', () => {
+      test('does nothing if action base layer is not null and not valid', () => {
+        const baseLayer = 'foo';
+        const newState = reducer(state, { type: 'setMapBaseLayer', baseLayer });
+        expect(newState).toStrictEqual(state);
+      });
+      test('sets base layer if null', () => {
+        state.map.baseLayer = 'something else';
+        const baseLayer = null;
+        const newState = reducer(state, { type: 'setMapBaseLayer', baseLayer });
+        expect(newState.map.baseLayer).toBe(null);
+      });
+      test('sets base layer if valid', () => {
+        state.map.baseLayer = 'something else';
+        const baseLayer = Object.keys(BASE_LAYERS)[0];
+        const newState = reducer(state, { type: 'setMapBaseLayer', baseLayer });
+        expect(newState.map.baseLayer).toBe(baseLayer);
+      });
+    });
+    describe('setMapOverlayVisibility', () => {
+      test('does nothing if action overlay is not valid', () => {
+        const overlay = 'invalid';
+        const newState = reducer(state, { type: 'setMapOverlayVisibility', overlay });
+        expect(newState).toStrictEqual(state);
+      });
+      test('sets and automatically expands a valid overlay if setting to visible', () => {
+        const overlay = Object.keys(OVERLAYS)[0];
+        const newState = reducer(state, { type: 'setMapOverlayVisibility', visible: true, overlay });
+        expect(newState.map.overlays).toStrictEqual(new Set([overlay]));
+        expect(newState.filters.overlays.expanded).toStrictEqual(new Set([overlay]));
+      });
+      test('removes and automatically collapses a valid overlay if setting to not visible', () => {
+        const { 0: overlay0, 1: overlay1 } = Object.keys(OVERLAYS);
+        state.map.overlays = new Set([overlay0, overlay1]);
+        state.filters.overlays.expanded = new Set([overlay0]);
+        const newState = reducer(
+          state,
+          { type: 'setMapOverlayVisibility', visible: false, overlay: overlay0 },
+        );
+        expect(newState.map.overlays).toStrictEqual(new Set([overlay1]));
+        expect(newState.filters.overlays.expanded).toStrictEqual(new Set());
+      });
+    });
+    describe('setMapOverlays', () => {
+      test('does nothing if action overlays is not an array containing only overlay keys', () => {
+        expect(
+          reducer(state, { type: 'setMapOverlays', overlays: null })
+        ).toStrictEqual(state);
+        expect(
+          reducer(state, { type: 'setMapOverlays', overlays: [Object.keys(OVERLAYS)[0], 'invalid'] })
+        ).toStrictEqual(state);
+      });
+      test('applies overlays and expands all of them if valid', () => {
+        const { 0: overlay0, 1: overlay1 } = Object.keys(OVERLAYS);
+        state.map.overlays = new Set([overlay1]);
+        state.filters.overlays.expanded = new Set([overlay1]);
+        const newState = reducer(
+          state,
+          { type: 'setMapOverlays', overlays: [overlay0] },
+        );
+        expect(newState.map.overlays).toStrictEqual(new Set([overlay0]));
+        expect(newState.filters.overlays.expanded).toStrictEqual(new Set([overlay0]));        
+      });        
+    });
+    describe('setMapRepositionOpenPopupFunc', () => {
+      test('sets reposition function to null if passed anything but a function', () => {
+        state.map.repositionOpenPopupFunc = 'foo';
+        const newState = reducer(
+          state,
+          { type: 'setMapRepositionOpenPopupFunc', func: 123 },
+        );
+        expect(newState.map.repositionOpenPopupFunc).toBe(null);
+      });
+      test('sets reposition function to passed function', () => {
+        state.map.repositionOpenPopupFunc = 'foo';
+        const func = () => 'funcreturn';
+        const newState = reducer(
+          state,
+          { type: 'setMapRepositionOpenPopupFunc', func },
+        );
+        expect(typeof newState.map.repositionOpenPopupFunc).toBe('function');
+        expect(newState.map.repositionOpenPopupFunc()).toBe('funcreturn');
+      });
+    });
+    describe('showFullObservatory', () => {
+      test('resets map center and zoom appropriately', () => {
+        deriveFullObservatoryZoomLevel.mockReset();
+        deriveFullObservatoryZoomLevel.mockReturnValue(7);
+        const newState = reducer(state, { type: 'showFullObservatory', mapRef: 'foo' });
+        expect(newState.map.center).toStrictEqual(OBSERVATORY_CENTER);
+        expect(deriveFullObservatoryZoomLevel).toHaveBeenCalledTimes(1);
+        expect(deriveFullObservatoryZoomLevel).toHaveBeenCalledWith('foo');
+        expect(newState.map.zoom).toBe(7);
+      });
+    });
+    describe('setMapMouseMode', () => {
+      test('does nothing if action mouseMode is not valid', () => {
+        expect(
+          reducer(state, { type: 'setMapMouseMode', mouseMode: null })
+        ).toStrictEqual(state);
+        expect(
+          reducer(state, { type: 'setMapMouseMode', mouseMode: 'invalid' })
+        ).toStrictEqual(state);
+      });
+      test('sets mouseMode if valid', () => {
+        const { 0: mouseMode } = Object.keys(MAP_MOUSE_MODES);
+        state.map.mouseMode = 'notyetset';
+        const newState = reducer(state, { type: 'setMapMouseMode', mouseMode });
+        expect(newState.map.mouseMode).toBe(mouseMode);
+      });
+    });
+    describe('setLegendOpen', () => {
+      test('coerces passed value to a boolean to set the open status of the legend', () => {
+        const newState1 = reducer(state, { type: 'setLegendOpen' });
+        expect(newState1.filters.legendOpen).toBe(false);
+        const newState2 = reducer(state, { type: 'setLegendOpen', open: 'true' });
+        expect(newState2.filters.legendOpen).toBe(true);
+        const newState3 = reducer(state, { type: 'setLegendOpen', open: 0 });
+        expect(newState3.filters.legendOpen).toBe(false);
+        const newState4 = reducer(state, { type: 'setLegendOpen', open: 'OPEN' });
+        expect(newState4.filters.legendOpen).toBe(true);
+      });
+    });
+    describe('setLegendFeatureOptionVisibility', () => {
+      test('does nothing if not both action feature and action visible are valid', () => {
+        expect(
+          reducer(state, { type: 'setLegendFeatureOptionVisibility' })
+        ).toStrictEqual(state);
+        expect(
+          reducer(state, { type: 'setLegendFeatureOptionVisibility', feature: FEATURES.HUTS.KEY })
+        ).toStrictEqual(state);
+        expect(
+          reducer(state, { type: 'setLegendFeatureOptionVisibility', feature: FEATURES.HUTS.KEY, visible: 'foo' })
+        ).toStrictEqual(state);        
+      });
+      test('sets the feature visibility correctly for valid feature and visibility', () => {
+        const { HUTS: { KEY: HUTS } } = FEATURES;
+        state.filters.features.visible[HUTS] = false;
+        const newState = reducer(
+          state,
+          { type: 'setLegendFeatureOptionVisibility', feature: HUTS, visible: true },
+        );
+        expect(newState.filters.features.visible[HUTS]).toBe(true);
+      });
+    });
+    describe('setLegendFeatureOptionCollapsed', () => {
+      test('does nothing if action feature is not valid', () => {
+        state.filters.features.collapsed = new Set([FEATURES.MEGAPITS.KEY]);
+        expect(
+          reducer(state, { type: 'setLegendFeatureOptionCollapsed' })
+        ).toStrictEqual(state);
+        expect(
+          reducer(state, { type: 'setLegendFeatureOptionCollapsed', feature: 'invalid' })
+        ).toStrictEqual(state);
+      });
+      test('collapses feature if action feature is valid', () => {
+        state.filters.features.collapsed = new Set();
+        const newState = reducer(
+          state,
+          { type: 'setLegendFeatureOptionCollapsed', feature: FEATURES.HUTS.KEY }
+        );
+        expect(newState.filters.features.collapsed).toStrictEqual(new Set([FEATURES.HUTS.KEY]));
+      });
+    });
+    describe('setLegendFeatureOptionExpanded', () => {
+      test('does nothing if action feature is not valid', () => {
+        state.filters.features.collapsed = new Set([FEATURES.HUTS.KEY, FEATURES.MEGAPITS.KEY]);
+        expect(
+          reducer(state, { type: 'setLegendFeatureOptionExpanded' })
+        ).toStrictEqual(state);
+        expect(
+          reducer(state, { type: 'setLegendFeatureOptionExpanded', feature: 'invalid' })
+        ).toStrictEqual(state);
+      });
+      test('expands feature if action feature is valid', () => {
+        state.filters.features.collapsed = new Set([FEATURES.HUTS.KEY, FEATURES.MEGAPITS.KEY]);
+        const newState = reducer(
+          state,
+          { type: 'setLegendFeatureOptionExpanded', feature: FEATURES.HUTS.KEY }
+        );
+        expect(newState.filters.features.collapsed).toStrictEqual(new Set([FEATURES.MEGAPITS.KEY]));
+      });
+    });
+    describe('setLegendOverlayOptionCollapsed', () => {
+      test('does nothing if action overlay is not valid', () => {
+        state.filters.features.collapsed = new Set([OVERLAYS.IMPERVIOUS.KEY, OVERLAYS.LAND_COVER.KEY]);
+        expect(
+          reducer(state, { type: 'setLegendOverlayOptionCollapsed' })
+        ).toStrictEqual(state);
+        expect(
+          reducer(state, { type: 'setLegendOverlayOptionCollapsed', overlay: 'invalid' })
+        ).toStrictEqual(state);
+      });
+      test('collapses overlay if action overlay is valid', () => {
+        state.filters.overlays.expanded = new Set([OVERLAYS.IMPERVIOUS.KEY, OVERLAYS.LAND_COVER.KEY]);
+        const newState = reducer(
+          state,
+          { type: 'setLegendOverlayOptionCollapsed', overlay: OVERLAYS.IMPERVIOUS.KEY }
+        );
+        expect(newState.filters.overlays.expanded).toStrictEqual(new Set([OVERLAYS.LAND_COVER.KEY]));
+      });
+    });
+    describe('setLegendOverlayOptionExpanded', () => {
+      test('does nothing if action overlay is not valid', () => {
+        state.filters.features.collapsed = new Set([OVERLAYS.LAND_COVER.KEY]);
+        expect(
+          reducer(state, { type: 'setLegendOverlayOptionExpanded' })
+        ).toStrictEqual(state);
+        expect(
+          reducer(state, { type: 'setLegendOverlayOptionExpanded', overlay: 'invalid' })
+        ).toStrictEqual(state);
+      });
+      test('expands overlay if action overlay is valid', () => {
+        state.filters.overlays.expanded = new Set([OVERLAYS.LAND_COVER.KEY]);
+        const newState = reducer(
+          state,
+          { type: 'setLegendOverlayOptionExpanded', overlay: OVERLAYS.IMPERVIOUS.KEY }
+        );
+        expect(newState.filters.overlays.expanded).toStrictEqual(new Set([OVERLAYS.LAND_COVER.KEY, OVERLAYS.IMPERVIOUS.KEY]));
+      });
+    });
+    describe('setNewFocusLocation', () => {
+      test('sets the location and stays on the map if already there', () => {
+        state.view.current = VIEWS.MAP;
+        const newState = reducer(state, { type: 'setNewFocusLocation', location: 'foo' });
+        expect(newState.focusLocation.fetch.status).toBe(FETCH_STATUS.AWAITING_CALL);
+        expect(newState.focusLocation.current).toBe('foo');
+        expect(newState.focusLocation.data).toBe(null);
+        expect(newState.overallFetch.expected).toBe(1);
+        expect(newState.view.current).toBe(VIEWS.MAP);
+      });
+      test('sets the location and switches to map view if necessary', () => {
+        state.focusLocation.data = { foo: 'bar' };
+        state.overallFetch.expected = 4;
+        state.view.current = VIEWS.TABLE;
+        const newState = reducer(state, { type: 'setNewFocusLocation', location: 'bar' });
+        expect(newState.focusLocation.fetch.status).toBe(FETCH_STATUS.AWAITING_CALL);
+        expect(newState.focusLocation.current).toBe('bar');
+        expect(newState.focusLocation.data).toBe(null);
+        expect(newState.overallFetch.expected).toBe(5);
+        expect(newState.view.current).toBe(VIEWS.MAP);
+      });
+    });
+    describe('setFocusLocationFetchStarted', () => {
+      test('initializes the fetch', () => {
+        state.focusLocation.fetch = { status: FETCH_STATUS.AWAITING_CALL, error: null };
+        state.focusLocation.data = { foo: 'bar' };
+        const newState = reducer(state, { type: 'setFocusLocationFetchStarted' });
+        expect(newState.focusLocation.fetch.status).toBe(FETCH_STATUS.FETCHING);
+        expect(newState.focusLocation.fetch.error).toBe(null);
+        expect(newState.focusLocation.data).toBe(null);
+      });
+    });
+    describe('setFocusLocationFetchFailed', () => {
+      test('fails the fetch', () => {
+        state.overallFetch = { expected: 7, completed: 5, pendingHierarchy: 0 };
+        state.focusLocation.current = 'foo';
+        state.focusLocation.fetch = { status: FETCH_STATUS.FETCHING, error: null };
+        state.focusLocation.data = { foo: 'bar' };
+        const newState = reducer(state, { type: 'setFocusLocationFetchFailed' });
+        expect(newState.focusLocation.fetch.status).toBe(FETCH_STATUS.ERROR);
+        expect(typeof newState.focusLocation.fetch.error).toBe('string');
+        expect(newState.focusLocation.data).toBe(null);
+        expect(newState.overallFetch.completed).toBe(6);
+      });
+    });
+    describe('setFocusLocationFetchSucceeded', () => {
+      beforeEach(() => {
+        getMapStateForFocusLocation.mockReset();
+        getMapStateForFocusLocation.mockReturnValue({ zoom: 4, center: [21, 15] });
+      });
+      test('completes the fetch and sets data', () => {
+        state.overallFetch = { expected: 4, completed: 2, pendingHierarchy: 0 };
+        state.focusLocation.fetch = { status: FETCH_STATUS.FETCHING, error: null };
+        state.focusLocation.data = { foo: 'bar' };
+        const newState = reducer(
+          state,
+          {
+            type: 'setFocusLocationFetchSucceeded',
+            data: { type: 'SITE', siteCode: 'ABCD' },
+          }
+        );
+        expect(newState.focusLocation.fetch.status).toBe(FETCH_STATUS.SUCCESS);
+        expect(newState.focusLocation.fetch.error).toBe(null);
+        expect(newState.focusLocation.data).toStrictEqual({ type: 'SITE', siteCode: 'ABCD' });
+        expect(newState.focusLocation.map.zoom).toBe(4);
+        expect(newState.focusLocation.map.center).toStrictEqual([21, 15]);
+        expect(newState.overallFetch.completed).toBe(3);
+      });
+      test('completes the fetch and sets data; if state data sets states on and domains off', () => {
+        state.overallFetch = { expected: 2, completed: 0, pendingHierarchy: 0 };
+        state.focusLocation.fetch = { status: FETCH_STATUS.FETCHING, error: null };
+        state.focusLocation.data = { foo: 'bar' };
+        state.filters.features.visible[FEATURES.STATES.KEY] = false;
+        state.filters.features.visible[FEATURES.DOMAINS.KEY] = true;
+        const newState = reducer(
+          state,
+          {
+            type: 'setFocusLocationFetchSucceeded',
+            data: { type: 'STATE', name: 'CO' },
+          }
+        );
+        expect(newState.focusLocation.fetch.status).toBe(FETCH_STATUS.SUCCESS);
+        expect(newState.focusLocation.fetch.error).toBe(null);
+        expect(newState.focusLocation.data).toStrictEqual({ type: 'STATE', name: 'CO' });
+        expect(newState.focusLocation.map.zoom).toBe(4);
+        expect(newState.focusLocation.map.center).toStrictEqual([21, 15]);
+        expect(newState.overallFetch.completed).toBe(1);
+        expect(newState.filters.features.visible[FEATURES.STATES.KEY]).toBe(true);
+        expect(newState.filters.features.visible[FEATURES.DOMAINS.KEY]).toBe(false);
+      });
+      test('completes the fetch and sets data; if domain data sets domains on and states off', () => {
+        state.overallFetch = { expected: 20, completed: 10, pendingHierarchy: 0 };
+        state.focusLocation.fetch = { status: FETCH_STATUS.FETCHING, error: null };
+        state.focusLocation.data = { foo: 'bar' };
+        state.filters.features.visible[FEATURES.STATES.KEY] = true;
+        state.filters.features.visible[FEATURES.DOMAINS.KEY] = false;
+        const newState = reducer(
+          state,
+          {
+            type: 'setFocusLocationFetchSucceeded',
+            data: { type: 'DOMAIN', name: 'D05' },
+          }
+        );
+        expect(newState.focusLocation.fetch.status).toBe(FETCH_STATUS.SUCCESS);
+        expect(newState.focusLocation.fetch.error).toBe(null);
+        expect(newState.focusLocation.data).toStrictEqual({ type: 'DOMAIN', name: 'D05' });
+        expect(newState.focusLocation.map.zoom).toBe(4);
+        expect(newState.focusLocation.map.center).toStrictEqual([21, 15]);
+        expect(newState.overallFetch.completed).toBe(11);
+        expect(newState.filters.features.visible[FEATURES.STATES.KEY]).toBe(false);
+        expect(newState.filters.features.visible[FEATURES.DOMAINS.KEY]).toBe(true);
+      });
+    });
+    describe('returnToFocusLocation', () => {
+      beforeEach(() => {
+        state.map = { zoom: 14, center: [12, 18] };
+        getMapStateForFocusLocation.mockReset();
+        getMapStateForFocusLocation.mockReturnValue({ zoom: 10, center: [20, 30] });
+      });
+      test('does nothing if focusLocation is not fully set', () => {
+        state.focusLocation = { current: null, data: null };
+        expect(
+          reducer(state, { type: 'returnToFocusLocation' })
+        ).toStrictEqual(state);
+        state.focusLocation = { current: 'foo', data: null };
+        expect(
+          reducer(state, { type: 'returnToFocusLocation' })
+        ).toStrictEqual(state);
+        state.focusLocation = { current: null, data: { foo: 'bar' } };
+        expect(
+          reducer(state, { type: 'returnToFocusLocation' })
+        ).toStrictEqual(state);
+      });
+      test('returns to focus location center and zoom', () => {
+        state.focusLocation = { current: 'foo', data: { type: 'SITE', siteCode: 'ABCD' } };
+        const newState = reducer(state, { type: 'returnToFocusLocation' });
+        expect(newState.map.zoom).toBe(10);
+        expect(newState.map.center).toStrictEqual([20, 30]);
+      });
+      test('returns to focus location center and zoom, toggles states on and domains off if state', () => {
+        state.focusLocation = { current: 'foo', data: { type: 'STATE', name: 'CO' } };
+        state.filters.features.visible[FEATURES.STATES.KEY] = false;
+        state.filters.features.visible[FEATURES.DOMAINS.KEY] = true;
+        const newState = reducer(state, { type: 'returnToFocusLocation' });
+        expect(newState.map.zoom).toBe(10);
+        expect(newState.map.center).toStrictEqual([20, 30]);
+        expect(newState.filters.features.visible[FEATURES.STATES.KEY]).toBe(true);
+        expect(newState.filters.features.visible[FEATURES.DOMAINS.KEY]).toBe(false);
+      });
+      test('returns to focus location center and zoom, toggles domains on and states off if domain', () => {
+        state.focusLocation = { current: 'foo', data: { type: 'DOMAIN', name: 'D05' } };
+        state.filters.features.visible[FEATURES.STATES.KEY] = true;
+        state.filters.features.visible[FEATURES.DOMAINS.KEY] = false;
+        const newState = reducer(state, { type: 'returnToFocusLocation' });
+        expect(newState.map.zoom).toBe(10);
+        expect(newState.map.center).toStrictEqual([20, 30]);
+        expect(newState.filters.features.visible[FEATURES.STATES.KEY]).toBe(false);
+        expect(newState.filters.features.visible[FEATURES.DOMAINS.KEY]).toBe(true);
+      });
+    });
+    describe('awaitingFeatureDataFetchesTriggered', () => {
+      test('toggles off awaiting flag', () => {
+        state.featureDataFetchesHasAwaiting = true;
+        const newState = reducer(state, { type: 'awaitingFeatureDataFetchesTriggered' });
+        expect(newState.featureDataFetchesHasAwaiting).toBe(false);
+      });
+    });
+    describe('setFeatureDataFetchStarted', () => {
+      test('does nothing if action dataSource is invalid', () => {
+        expect(
+          reducer(state, { type: 'setFeatureDataFetchStarted' })
+        ).toStrictEqual(state);
+      });
+    });
+    describe('setFeatureDataFetchSucceeded', () => {
+      test('completes the fetch as success', () => {
+        state.overallFetch = { expected: 2, completed: 0, pendingHierarchy: 0 };
+        let newState = reducer(state, { type: 'setFeatureDataFetchSucceeded' });
+        expect(newState.overallFetch.completed).toBe(1);
+        expect(newState.overallFetch.expected).toBe(2);
+        newState = reducer(state, { type: 'setFeatureDataFetchSucceeded' });
+        expect(newState.overallFetch.completed).toBe(0);
+        expect(newState.overallFetch.expected).toBe(0);
+      });
+    });
+    describe('setFeatureDataFetchFailed', () => {
+      test('completes the fetch as error', () => {
+        state.overallFetch = { expected: 2, completed: 0, pendingHierarchy: 0 };
+        const newState = reducer(state, { type: 'setFeatureDataFetchFailed' });
+        expect(newState.overallFetch.completed).toBe(1);
+        expect(newState.overallFetch.expected).toBe(2);
+      });
+    });
+    describe('setDomainLocationHierarchyFetchStarted', () => {
+      test('does nothing if action domain code does not map to a fetch', () => {
+        const { REST_LOCATIONS_API: DATA_SOURCE } = FEATURE_DATA_SOURCES;
+        const { SITE_LOCATION_HIERARCHIES: { KEY: FEATURE_TYPE } } = FEATURE_TYPES;
+        state.overallFetch = { expected: 4, completed: 2, pendingHierarchy: 1 };
+        expect(
+          reducer(state, { type: 'setDomainLocationHierarchyFetchStarted' })
+        ).toStrictEqual(state);
+        state.featureDataFetches[DATA_SOURCE][FEATURE_TYPE].D05 = FETCH_STATUS.AWAITING_CALL;
+        expect(
+          reducer(state, { type: 'setDomainLocationHierarchyFetchStarted', domainCode: 'D13' })
+        ).toStrictEqual(state);
+      });
+      test('sets existing hierarchy to fetching for a valid domain code', () => {
+        const { REST_LOCATIONS_API: DATA_SOURCE } = FEATURE_DATA_SOURCES;
+        const { SITE_LOCATION_HIERARCHIES: { KEY: FEATURE_TYPE } } = FEATURE_TYPES;
+        state.featureDataFetches[DATA_SOURCE][FEATURE_TYPE].D05 = FETCH_STATUS.AWAITING_CALL;
+        const newState = reducer(state, { type: 'setDomainLocationHierarchyFetchStarted', domainCode: 'D05' });
+        expect(newState.featureDataFetches[DATA_SOURCE][FEATURE_TYPE].D05).toBe(FETCH_STATUS.FETCHING);
+      });
+    });
+    describe('setDomainLocationHierarchyFetchSucceeded', () => {
+      test('does nothing if action domainCode fetch does not exist or no action data', () => {
+        const { REST_LOCATIONS_API: DATA_SOURCE } = FEATURE_DATA_SOURCES;
+        const { SITE_LOCATION_HIERARCHIES: { KEY: FEATURE_TYPE } } = FEATURE_TYPES;
+        state.overallFetch = { expected: 4, completed: 2, pendingHierarchy: 1 };
+        expect(
+          reducer(state, { type: 'setDomainLocationHierarchyFetchSucceeded' })
+        ).toStrictEqual(state);
+        state.featureDataFetches[DATA_SOURCE][FEATURE_TYPE].D05 = FETCH_STATUS.FETCHING;
+        expect(
+          reducer(state, { type: 'setDomainLocationHierarchyFetchSucceeded', domainCode: 'D13' })
+        ).toStrictEqual(state);
+        expect(
+          reducer(state, { type: 'setDomainLocationHierarchyFetchSucceeded', data: { foo: 'bar' } })
+        ).toStrictEqual(state);
+      });
+      test('applies data for valid domainCode and data', () => {
+        const { REST_LOCATIONS_API: DATA_SOURCE } = FEATURE_DATA_SOURCES;
+        const { SITE_LOCATION_HIERARCHIES: { KEY: FEATURE_TYPE } } = FEATURE_TYPES;
+        state.featureDataFetches[DATA_SOURCE][FEATURE_TYPE].D05 = FETCH_STATUS.FETCHING;
+        state.overallFetch = { expected: 2, completed: 0, pendingHierarchy: 1 };
+        const newState = reducer(
+          state,
+          {
+            type: 'setDomainLocationHierarchyFetchSucceeded',
+            domainCode: 'D05',
+            data: { S1: 'foo', S2: 'bar' },
+          },
+        );
+        expect(newState.featureDataFetches[DATA_SOURCE][FEATURE_TYPE].D05).toBe(FETCH_STATUS.SUCCESS);
+        expect(newState.featureData[FEATURE_TYPE].S1).toBe('foo');
+        expect(newState.featureData[FEATURE_TYPE].S2).toBe('bar');  
+        expect(newState.overallFetch.completed).toBe(1);
+        expect(newState.overallFetch.expected).toBe(2);
+        expect(newState.overallFetch.pendingHierarchy).toBe(0);
+      });
+    });
+    describe('setDomainLocationHierarchyFetchFailed', () => {
+      test('does nothing if action domainCode fetch does not exist or no action data', () => {
+        const { REST_LOCATIONS_API: DATA_SOURCE } = FEATURE_DATA_SOURCES;
+        const { SITE_LOCATION_HIERARCHIES: { KEY: FEATURE_TYPE } } = FEATURE_TYPES;
+        state.overallFetch = { expected: 4, completed: 2, pendingHierarchy: 1 };
+        expect(
+          reducer(state, { type: 'setDomainLocationHierarchyFetchFailed' })
+        ).toStrictEqual(state);
+        state.featureDataFetches[DATA_SOURCE][FEATURE_TYPE].D05 = FETCH_STATUS.FETCHING;
+        expect(
+          reducer(state, { type: 'setDomainLocationHierarchyFetchFailed', domainCode: 'D13' })
+        ).toStrictEqual(state);
+      });
+      test('fails the fetch', () => {
+        const { REST_LOCATIONS_API: DATA_SOURCE } = FEATURE_DATA_SOURCES;
+        const { SITE_LOCATION_HIERARCHIES: { KEY: FEATURE_TYPE } } = FEATURE_TYPES;
+        state.featureDataFetches[DATA_SOURCE][FEATURE_TYPE].D05 = FETCH_STATUS.FETCHING;
+        state.overallFetch = { expected: 4, completed: 2, pendingHierarchy: 1 };
+        const newState = reducer(state, { type: 'setDomainLocationHierarchyFetchFailed', domainCode: 'D05' });
+        expect(newState.featureDataFetches[DATA_SOURCE][FEATURE_TYPE].D05).toBe(FETCH_STATUS.ERROR);
+        expect(newState.overallFetch.completed).toBe(3);
+        expect(newState.overallFetch.expected).toBe(4);
+        expect(newState.overallFetch.pendingHierarchy).toBe(0);
+      });
+    });
+    describe('setHideUnselectable', () => {
+      test('coerces action hideUnselectable to boolean and applies', () => {
+        state.selection.hideUnselectable = false;
+        const newState = reducer(state, { type: 'setHideUnselectable', hideUnselectable: 'true' });
+        expect(newState.selection.hideUnselectable).toBe(true);
+      });
+    });
+    describe('toggleSelectionSummary', () => {
+      test('coerces action showSummary to boolean and applies', () => {
+        state.selection.showSummary = false;
+        const newState = reducer(state, { type: 'toggleSelectionSummary', showSummary: 'true' });
+        expect(newState.selection.showSummary).toBe(true);
+      });
+    });
+    describe('selectionOnChangeTriggered', () => {
+      test('flips the bit', () => {
+        state.selection.changed = true;
+        const newState = reducer(state, { type: 'selectionOnChangeTriggered' });
+        expect(newState.selection.changed).toBe(false);
+      });
+    });
+    describe('updateSelectionSet', () => {
+      test('does nothing if not provided a selection set', () => {
+        expect(
+          reducer(state, { type: 'updateSelectionSet' })
+        ).toStrictEqual(state);
+        expect(
+          reducer(state, { type: 'updateSelectionSet', selection: ['foo', 'bar'] })
+        ).toStrictEqual(state);
+      });
+      test('applies the selection set if valid', () => {
+        state.selection.validSet = new Set(['foo', 'qux']);
+        state.selection.active = FEATURE_TYPES.SITES.KEY;
+        let newState = reducer(state, { type: 'updateSelectionSet', selection: new Set(['foo', 'bar']) });
+        expect(newState.selection.set).toStrictEqual(new Set(['foo']));
+        expect(newState.selection.changed).toBe(true);
+        newState.selection.active = FEATURE_TYPES.DOMAINS.KEY;
+        newState.selection.changed = false;
+        newState = reducer(newState, { type: 'updateSelectionSet', selection: new Set(['qux', 'bar']) });
+        expect(newState.selection.set).toStrictEqual(new Set(['qux']));
+        expect(newState.selection.changed).toBe(true);
+      });
+    });
+    describe('toggleItemSelected', () => {
+      test('does not change the selection if action item is not in the validSet', () => {
+        state.selection.limit = 1;
+        state.selection.set = new Set(['foo']);
+        state.selection.validSet = new Set(['foo', 'bar', 'qux']);
+        state.selection.active = FEATURE_TYPES.SITES.KEY;
+        state.selection.changed = false;
+        const newState = reducer(state, { type: 'toggleItemSelected', item: 'tap' });
+        expect(newState.selection.set).toStrictEqual(new Set(['foo']));
+        expect(newState.selection.changed).toBe(false);
+      });
+      test('selects one item when limit is 1 and none selected', () => {
+        state.selection.limit = 1;
+        state.selection.set = new Set();
+        state.selection.validSet = new Set(['foo', 'bar', 'qux']);
+        state.selection.active = FEATURE_TYPES.SITES.KEY;
+        state.selection.changed = false;
+        const newState = reducer(state, { type: 'toggleItemSelected', item: 'foo' });
+        expect(newState.selection.set).toStrictEqual(new Set(['foo']));
+        expect(newState.selection.changed).toBe(true);
+      });
+      test('still allows deselection when limit is 1 and 1 selected', () => {
+        state.selection.limit = 1;
+        state.selection.set = new Set(['qux']);
+        state.selection.validSet = new Set(['foo', 'bar', 'qux']);
+        state.selection.active = FEATURE_TYPES.SITES.KEY;
+        state.selection.changed = false;
+        const newState = reducer(state, { type: 'toggleItemSelected', item: 'qux' });
+        expect(newState.selection.set).toStrictEqual(new Set());
+        expect(newState.selection.changed).toBe(true);
+      });
+      test('maintains a selection of 1 when limit is 1', () => {
+        state.selection.limit = 1;
+        state.selection.set = new Set(['foo']);
+        state.selection.validSet = new Set(['foo', 'bar', 'qux']);
+        state.selection.active = FEATURE_TYPES.STATES.KEY;
+        state.selection.changed = false;
+        const newState = reducer(state, { type: 'toggleItemSelected', item: 'bar' });
+        expect(newState.selection.set).toStrictEqual(new Set(['bar']));
+        expect(newState.selection.changed).toBe(true);
+      });
+      test('selects unselected items when not limited to 1', () => {
+        state.selection.limit = [2, 5];
+        state.selection.set = new Set(['foo', 'bar']);
+        state.selection.validSet = new Set(['foo', 'bar', 'qux']);
+        state.selection.active = FEATURE_TYPES.DOMAINS.KEY;
+        state.selection.changed = false;
+        const newState = reducer(state, { type: 'toggleItemSelected', item: 'qux' });
+        expect(newState.selection.set).toStrictEqual(new Set(['foo', 'bar', 'qux']));
+        expect(newState.selection.changed).toBe(true);
+      });
+      test('deselects selected items', () => {
+        state.selection.limit = [2, 5];
+        state.selection.set = new Set(['foo', 'bar']);
+        state.selection.validSet = new Set(['foo', 'bar', 'qux']);
+        state.selection.active = FEATURE_TYPES.DOMAINS.KEY;
+        state.selection.changed = false;
+        const newState = reducer(state, { type: 'toggleItemSelected', item: 'bar' });
+        expect(newState.selection.set).toStrictEqual(new Set(['foo']));
+        expect(newState.selection.changed).toBe(true);
+      });
+    });
+    describe('toggleSitesSelectedForState', () => {
+      test('does nothing if action stateCode is invalid', () => {
+        expect(
+          reducer(state, { type: 'toggleSitesSelectedForState' })
+        ).toStrictEqual(state);        
+      });
+      test('adds valid state sites selection when state is not totally selected', () => {
+        state.selection.changed = false;
+        state.selection.active = FEATURE_TYPES.SITES.KEY;
+        state.selection.set = new Set(['S2']);
+        state.selection.validSet = new Set(['S1', 'S2', 'S3', 'S4']);
+        state.selection.derived[FEATURES.STATES.KEY].CO = SELECTION_PORTIONS.PARTIAL;
+        state.featureData[FEATURE_TYPES.STATES.KEY][FEATURES.STATES.KEY].CO = {
+          sites: new Set(['S1', 'S2', 'S3']),
+        };
+        const newState = reducer(state, { type: 'toggleSitesSelectedForState', stateCode: 'CO' });
+        expect(newState.selection.changed).toBe(true);
+        expect(newState.selection.set).toStrictEqual(new Set(['S1', 'S2', 'S3']));
+      });
+      test('removes all valid state sites from selection when state is totally selected', () => {
+        state.selection.changed = false;
+        state.selection.active = FEATURE_TYPES.SITES.KEY;
+        state.selection.set = new Set(['S1', 'S2', 'S3', 'S4']);
+        state.selection.validSet = new Set(['S1', 'S2', 'S3', 'S4']);
+        state.selection.derived[FEATURES.STATES.KEY].CO = SELECTION_PORTIONS.TOTAL;
+        state.featureData[FEATURE_TYPES.STATES.KEY][FEATURES.STATES.KEY].CO = {
+          sites: new Set(['S1', 'S2', 'S3']),
+        };
+        const newState = reducer(state, { type: 'toggleSitesSelectedForState', stateCode: 'CO' });
+        expect(newState.selection.changed).toBe(true);
+        expect(newState.selection.set).toStrictEqual(new Set(['S4']));
+      });
+    });
+    describe('toggleSitesSelectedForDomain', () => {
+      test('does nothing if action domainCode is invalid', () => {
+        expect(
+          reducer(state, { type: 'toggleSitesSelectedForDomain' })
+        ).toStrictEqual(state);        
+      });
+      test('adds valid domain sites selection when domain is not totally selected', () => {
+        state.selection.changed = false;
+        state.selection.active = FEATURE_TYPES.SITES.KEY;
+        state.selection.set = new Set(['S2']);
+        state.selection.validSet = new Set(['S1', 'S2', 'S3', 'S4']);
+        state.selection.derived[FEATURES.DOMAINS.KEY].CO = SELECTION_PORTIONS.PARTIAL;
+        state.featureData[FEATURE_TYPES.DOMAINS.KEY][FEATURES.DOMAINS.KEY].CO = {
+          sites: new Set(['S1', 'S2', 'S3']),
+        };
+        const newState = reducer(state, { type: 'toggleSitesSelectedForDomain', domainCode: 'CO' });
+        expect(newState.selection.changed).toBe(true);
+        expect(newState.selection.set).toStrictEqual(new Set(['S1', 'S2', 'S3']));
+      });
+      test('removes all valid domain sites from selection when domain is totally selected', () => {
+        state.selection.changed = false;
+        state.selection.active = FEATURE_TYPES.SITES.KEY;
+        state.selection.set = new Set(['S1', 'S2', 'S3', 'S4']);
+        state.selection.validSet = new Set(['S1', 'S2', 'S3', 'S4']);
+        state.selection.derived[FEATURES.DOMAINS.KEY].CO = SELECTION_PORTIONS.TOTAL;
+        state.featureData[FEATURE_TYPES.DOMAINS.KEY][FEATURES.DOMAINS.KEY].CO = {
+          sites: new Set(['S1', 'S2', 'S3']),
+        };
+        const newState = reducer(state, { type: 'toggleSitesSelectedForDomain', domainCode: 'CO' });
+        expect(newState.selection.changed).toBe(true);
+        expect(newState.selection.set).toStrictEqual(new Set(['S4']));
       });
     });
   });

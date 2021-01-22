@@ -583,7 +583,6 @@ const setFetchStatusFromAction = (state, action, status) => {
 */
 const reducer = (state, action) => {
   let setMethod = null;
-  let calculateFetchesRequiredSites = null;
   let newState = { ...state };
   const { validSet } = state.selection;
 
@@ -639,7 +638,8 @@ const reducer = (state, action) => {
       return newState;
 
     case 'setMapBounds':
-      if (boundsAreValid(action.bounds)) { newState.map.bounds = action.bounds; }
+      if (!boundsAreValid(action.bounds)) { return state; }
+      newState.map.bounds = action.bounds;
       return calculateFeatureDataFetches(newState);
 
     case 'setMapCenter':
@@ -667,16 +667,11 @@ const reducer = (state, action) => {
       return newState;
 
     case 'setMapOverlays':
-      if (
-        !Array.isArray(action.overlays)
-          || !action.overlays.every((o) => OVERLAYS[o])) {
+      if (!Array.isArray(action.overlays) || !action.overlays.every((o) => OVERLAYS[o])) {
         return state;
       }
       newState.map.overlays = new Set(action.overlays);
-      newState.filters.overlays.expanded = new Set();
-      action.overlays.forEach((overlay) => {
-        newState.filters.overlays.expanded.add(overlay);
-      });
+      newState.filters.overlays.expanded = new Set(action.overlays);
       return newState;
 
     case 'setMapRepositionOpenPopupFunc':
@@ -768,11 +763,14 @@ const reducer = (state, action) => {
       newState.focusLocation.map.zoom = newState.map.zoom;
       newState.focusLocation.map.center = [...newState.map.center];
       newState = updateMapTileWithZoom(newState);
-      if (newState.focusLocation.data && newState.focusLocation.data.siteCode) {
-        calculateFetchesRequiredSites = [newState.focusLocation.data.siteCode];
-      }
       newState = calculateFeatureAvailability(newState);
-      return calculateFeatureDataFetches(newState, calculateFetchesRequiredSites);
+      newState = calculateFeatureDataFetches(
+        newState, (
+          newState.focusLocation.data && newState.focusLocation.data.siteCode
+            ? [newState.focusLocation.data.siteCode] : []
+        ),
+      );
+      return newState;
 
     case 'returnToFocusLocation':
       if (!state.focusLocation.current || !state.focusLocation.data) { return state; }
@@ -787,11 +785,14 @@ const reducer = (state, action) => {
       }
       newState.map = getMapStateForFocusLocation(state);
       newState = updateMapTileWithZoom(newState);
-      if (newState.focusLocation.data && newState.focusLocation.data.siteCode) {
-        calculateFetchesRequiredSites = [newState.focusLocation.data.siteCode];
-      }
       newState = calculateFeatureAvailability(newState);
-      return calculateFeatureDataFetches(newState, calculateFetchesRequiredSites);
+      newState = calculateFeatureDataFetches(
+        newState, (
+          newState.focusLocation.data && newState.focusLocation.data.siteCode
+            ? [newState.focusLocation.data.siteCode] : []
+        ),
+      );
+      return newState;
 
     // Fetch and Import
     case 'awaitingFeatureDataFetchesTriggered':
@@ -833,13 +834,15 @@ const reducer = (state, action) => {
       /* eslint-enable max-len */
       newState.overallFetch.pendingHierarchy -= 1;
       newState = completeOverallFetch(newState);
-      if (
-        mapIsAtFocusLocation(state)
-          && state.focusLocation.data && state.focusLocation.data.siteCode
-      ) {
-        calculateFetchesRequiredSites = [state.focusLocation.data.siteCode];
-      }
-      return calculateFeatureDataFetches(newState, calculateFetchesRequiredSites);
+      newState = calculateFeatureDataFetches(
+        newState, (
+          mapIsAtFocusLocation(state)
+            && newState.focusLocation.data
+            && newState.focusLocation.data.siteCode
+            ? [newState.focusLocation.data.siteCode] : []
+        ),
+      );
+      return newState;
 
     case 'setDomainLocationHierarchyFetchFailed':
       /* eslint-disable max-len */
@@ -878,14 +881,11 @@ const reducer = (state, action) => {
 
     case 'toggleItemSelected':
       // Special case: when the selectionLimit is 1 always maintain a selection size of 1
-      if (newState.selection.limit === 1) {
-        if (newState.selection.set.has(action.item) && newState.selection.set.size > 1) {
+      if (newState.selection.limit === 1 && isSelectable(action.item, validSet)) {
+        if (newState.selection.set.has(action.item)) {
           newState.selection.set.delete(action.item);
           newState.selection.changed = true;
-        } else if (
-          !newState.selection.set.has(action.item)
-            && isSelectable(action.item, validSet)
-        ) {
+        } else {
           newState.selection.set = new Set([action.item]);
           newState.selection.changed = true;
         }
@@ -1335,5 +1335,6 @@ export const getTestableItems = () => (
     applyFeatureVisibilityToChildren,
     applyFeatureVisibilityToParents,
     setFetchStatusFromAction,
+    reducer,
   }
 );
