@@ -36,7 +36,7 @@ const getApiTokenHeader = (headers = undefined) => {
  * @return The RxJS Ajax Observable
  */
 const getJsonObservable = (url, headers = undefined, includeToken = true) => {
-  if (!url.length) { return of(null); }
+  if (typeof url !== 'string' || !url.length) { return of(null); }
   let appliedHeaders = headers || {};
   if (includeToken) {
     appliedHeaders = getApiTokenHeader(appliedHeaders);
@@ -54,7 +54,7 @@ const getJsonObservable = (url, headers = undefined, includeToken = true) => {
  * @return The RxJS Ajax Observable
  */
 const postJsonObservable = (url, body, headers = undefined, includeToken = true) => {
-  if (!url.length) { return of(null); }
+  if (typeof url !== 'string' || !url.length) { return of(null); }
   let appliedHeaders = headers || {};
   if (includeToken) {
     appliedHeaders = getApiTokenHeader(appliedHeaders);
@@ -68,7 +68,7 @@ const postJsonObservable = (url, body, headers = undefined, includeToken = true)
       ...appliedHeaders,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(body),
+    body: JSON.stringify(body || {}),
   });
 };
 
@@ -199,3 +199,12 @@ const NeonApi = {
 Object.freeze(NeonApi);
 
 export default NeonApi;
+
+// Additional items exported for unit testing
+export const getTestableItems = () => (
+  process.env.NODE_ENV !== 'test' ? {} : {
+    getApiTokenHeader,
+    getJsonObservable,
+    postJsonObservable,
+  }
+);
