@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NeonFooter renders fallback with drupalCSSLoaded prop and error NeonContext state 1`] = `
+<footer
+  id="footer"
+>
+  <div>
+    MOCK-FALLBACK-DRUPAL-FOOTER-HTML
+  </div>
+</footer>
+`;
+
+exports[`NeonFooter renders with drupalCssLoaded prop and success NeonContext state 1`] = `
+<footer
+  id="footer"
+>
+  <div>
+    test drupal html
+  </div>
+</footer>
+`;
+
+exports[`NeonFooter renders with no props and active/fetching NeonContext state 1`] = `
+<footer
+  id="footer"
+>
+  <span
+    className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+    style={
+      Object {
+        "height": "300px",
+        "width": "100%",
+      }
+    }
+  />
+</footer>
+`;
+
+exports[`NeonFooter renders with no props and error NeonContext state 1`] = `
+<footer
+  id="footer"
+>
+  <span
+    className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+    style={
+      Object {
+        "height": "300px",
+        "width": "100%",
+      }
+    }
+  />
+</footer>
+`;
+
+exports[`NeonFooter renders with no props and inactive NeonContext state 1`] = `
+<div
+  className="makeStyles-box-1"
+  data-selenium="neon-footer"
+>
+  <hr
+    className="MuiDivider-root"
+  />
+  <div
+    className="MuiContainer-root makeStyles-container-2 MuiContainer-maxWidthLg"
+  />
+</div>
+`;
+
+exports[`NeonFooter renders with no props and success NeonContext state 1`] = `
+<footer
+  id="footer"
+>
+  <span
+    className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+    style={
+      Object {
+        "height": "300px",
+        "width": "100%",
+      }
+    }
+  />
+</footer>
+`;

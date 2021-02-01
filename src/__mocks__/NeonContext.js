@@ -19,6 +19,12 @@ jest.mock('../lib_components/components/NeonContext/NeonContext', () => (
   {
     ...(jest.requireActual('../lib_components/components/NeonContext/NeonContext').default),
     useNeonContextState: jest.fn(),
+    FETCH_STATUS: {
+      AWAITING_CALL: 'AWAITING_CALL',
+      FETCHING: 'FETCHING',
+      ERROR: 'ERROR',
+      SUCCESS: 'SUCCESS',
+    },
   }
 ));
 

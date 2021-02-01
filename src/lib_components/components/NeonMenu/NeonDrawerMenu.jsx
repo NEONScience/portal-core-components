@@ -140,21 +140,24 @@ const NeonDrawerMenu = (props) => {
   );
 };
 
+// for nested proptypes
+function lazyFunction(f) {
+  return function () {
+    return f().apply(this, arguments);
+  };
+}
+
+let itemShape;
+itemShape = PropTypes.shape({
+  name: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
+  children: PropTypes.arrayOf(
+    lazyFunction(() => itemShape)
+  ),
+});
+
 NeonDrawerMenu.propTypes = {
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired,
-      children: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.oneOfType([
-          PropTypes.node,
-          PropTypes.string,
-        ])),
-        PropTypes.node,
-        PropTypes.string,
-      ]).isRequired,
-    }),
-  ).isRequired,
+  items: PropTypes.arrayOf(itemShape).isRequired,
 };
 
 export default NeonDrawerMenu;
