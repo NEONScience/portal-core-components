@@ -370,11 +370,14 @@ describe('SiteMap - SiteMapUtils', () => {
       expect(SelectionLimitPropType({ p: null }, 'p')).toBe(null);
     });
     test('invalid for unsupported types', () => {
-      expect(SelectionLimitPropType({}, 'p')).toBeInstanceOf(Error);
       expect(SelectionLimitPropType({ p: 'foo' }, 'p')).toBeInstanceOf(Error);
       expect(SelectionLimitPropType({ p: () => {} }, 'p')).toBeInstanceOf(Error);
       expect(SelectionLimitPropType({ p: { foo: 'bar' } }, 'p')).toBeInstanceOf(Error);
       expect(SelectionLimitPropType({ p: NaN }, 'p')).toBeInstanceOf(Error);
+    });
+    test('valid for null / undefined', () => {
+      expect(SelectionLimitPropType({}, 'p')).toBe(null);
+      expect(SelectionLimitPropType({ p: null }, 'p')).toBe(null);
     });
     test('valid for integers greater than or equal to 1', () => {
       expect(SelectionLimitPropType({ p: 1 }, 'p')).toBe(null);

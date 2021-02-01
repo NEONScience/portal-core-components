@@ -1565,7 +1565,7 @@ export const hydrateNeonContextData = (state, neonContextData) => {
 */
 const SelectionLimitPropType = (props, propName) => {
   const { [propName]: prop } = props;
-  if (prop === null) { return null; }
+  if (prop === null || typeof prop === 'undefined') { return null; }
   if (typeof prop === 'number') {
     if (!Number.isInteger(prop) || prop < 1) {
       return new Error(
