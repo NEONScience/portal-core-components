@@ -1,4 +1,4 @@
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook } from '@testing-library/react-hooks';
 
 import cloneDeep from 'lodash/cloneDeep';
 
@@ -32,7 +32,7 @@ describe('NeonContext', () => {
     });
   });
 
-  describe('deriveRegionSites()', () => {  
+  describe('deriveRegionSites()', () => {
     const derived = deriveRegionSites({
       otherState: 'foo',
       data: {
@@ -44,7 +44,7 @@ describe('NeonContext', () => {
           SITE_D: { stateCode: 'NH', domainCode: 'D01' },
         },
         states: statesJSON,
-      }
+      },
     });
     test('properly maps all sites to domains with no backfill for empty domains', () => {
       expect(derived.data.domainSites).toStrictEqual({
@@ -77,9 +77,15 @@ describe('NeonContext', () => {
     });
     test('correctly parses a response with data', () => {
       const parsed = parseSitesFetchResponse([
-        { siteCode: 'SITE_A', stateCode: 'WA', domainCode: 'D16', siteLatitude: 23, longitude: 12 },
-        { siteCode: 'SITE_B', stateCode: 'WA', domainCode: 'D16', latitude: 44, siteLongitude: 7 },
-        { siteCode: 'SITE_C', stateCode: 'CO', type: 'CORE', terrain: 'AQUATIC' },
+        {
+          siteCode: 'SITE_A', stateCode: 'WA', domainCode: 'D16', siteLatitude: 23, longitude: 12,
+        },
+        {
+          siteCode: 'SITE_B', stateCode: 'WA', domainCode: 'D16', latitude: 44, siteLongitude: 7,
+        },
+        {
+          siteCode: 'SITE_C', stateCode: 'CO', type: 'CORE', terrain: 'AQUATIC',
+        },
         { siteCode: 'SITE_D', stateCode: 'NH', siteDescription: 'foo' },
         { stateCode: 'PR' },
       ]);
@@ -97,7 +103,7 @@ describe('NeonContext', () => {
       expect(parsed.SITE_B.domainCode).toBe('D16');
       expect(parsed.SITE_B.latitude).toBe(44);
       expect(parsed.SITE_B.longitude).toBe(7);
-      expect(parsed.SITE_B.description).toBe(null);     
+      expect(parsed.SITE_B.description).toBe(null);
       expect(parsed.SITE_C.type).toBe('CORE');
       expect(parsed.SITE_C.terrain).toBe('AQUATIC');
       expect(parsed.SITE_D.description).toBe('foo');

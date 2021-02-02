@@ -3,9 +3,9 @@ import renderer from 'react-test-renderer';
 
 import mockReactComponent from '../../__mocks__/mockReactComponent';
 
-jest.mock('react-highlight.js', () => mockReactComponent('react-highlight.js'));
-
 import CodeBlock from '../CodeBlock';
+
+jest.mock('react-highlight.js', () => mockReactComponent('react-highlight.js'));
 
 describe('CodeBlock', () => {
   test('renders with a string', () => {
@@ -13,7 +13,7 @@ describe('CodeBlock', () => {
       .create(
         <CodeBlock>
           var code = 'block';
-        </CodeBlock>
+        </CodeBlock>,
       ).toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -22,7 +22,7 @@ describe('CodeBlock', () => {
       .create(
         <CodeBlock language="php">
           $code = "block";
-        </CodeBlock>
+        </CodeBlock>,
       ).toJSON();
     expect(tree).toMatchSnapshot();
   });

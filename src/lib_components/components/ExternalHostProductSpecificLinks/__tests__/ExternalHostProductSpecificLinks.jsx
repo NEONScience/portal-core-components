@@ -34,7 +34,8 @@ describe('ExternalHostProductSpecificLinks', () => {
       .create((
         <ExternalHostProductSpecificLinks
           productCode="DP1.00001.001"
-          sites={['GUAN', 'BLAN', 'PUUM', 'STER', 'RMNP', 'TALL', 'WOOD', 'UKFS']} />
+          sites={['GUAN', 'BLAN', 'PUUM', 'STER', 'RMNP', 'TALL', 'WOOD', 'UKFS']}
+        />
       ))
       .toJSON();
     expect(treeAMERIFLUX).toMatchSnapshot();

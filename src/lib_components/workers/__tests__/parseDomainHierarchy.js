@@ -1,4 +1,4 @@
-import parseDomainHierarchy from '../../workers/parseDomainHierarchy';
+import parseDomainHierarchy from '../parseDomainHierarchy';
 
 const input = {
   locationName: 'D10',
@@ -497,7 +497,7 @@ describe('parseDomainHierarchy worker', () => {
         expect(actualOutput).toStrictEqual({});
         done();
       } catch (error) { done(error); }
-    })
+    });
   });
   test('generates a flat site location hierarchy object', (done) => {
     parseDomainHierarchy(input).then((actualOutput) => {
@@ -505,6 +505,6 @@ describe('parseDomainHierarchy worker', () => {
         expect(actualOutput).toStrictEqual(expectedOutput);
         done();
       } catch (error) { done(error); }
-    })
+    });
   });
 });

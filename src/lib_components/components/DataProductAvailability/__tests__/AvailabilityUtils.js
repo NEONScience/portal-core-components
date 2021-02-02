@@ -30,11 +30,11 @@ describe('AvailabilityUtils', () => {
         'not collected', 'delayed', 'mixed no availability', 'available',
       ])).toBe('mixed some availability');
       expect(calcRollupStatus([
-        'tentative', 'delayed','mixed some availability', 'expected',
+        'tentative', 'delayed', 'mixed some availability', 'expected',
       ])).toBe('mixed no availability');
     });
   });
-  
+
   describe('TIME', () => {
     test('getYearMonthMoment', () => {
       const tests = ['2005-06', '1999-12', '2000-01'];

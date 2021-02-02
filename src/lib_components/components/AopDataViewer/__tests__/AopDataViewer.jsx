@@ -5,10 +5,10 @@ import { mockAjaxResponse } from '../../../../__mocks__/ajax';
 import mockReactComponent from '../../../../__mocks__/mockReactComponent';
 import '../../../../__mocks__/NeonContext';
 
+import AopDataViewer from '../AopDataViewer';
+
 jest.mock('@material-ui/core/Select', () => mockReactComponent('@material-ui/core/Select'));
 jest.mock('@material-ui/core/Slider', () => mockReactComponent('@material-ui/core/Slider'));
-
-import AopDataViewer from '../AopDataViewer';
 
 mockAjaxResponse({
   data: {

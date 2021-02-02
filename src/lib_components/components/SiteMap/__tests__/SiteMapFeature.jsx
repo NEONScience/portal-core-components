@@ -3,6 +3,7 @@ import renderer from 'react-test-renderer';
 
 import cloneDeep from 'lodash/cloneDeep';
 
+import { Map } from 'react-leaflet';
 import {
   DEFAULT_STATE,
   FEATURES,
@@ -10,6 +11,9 @@ import {
   HIGHLIGHT_STATUS,
   SELECTION_STATUS,
 } from '../SiteMapUtils';
+import { useSiteMapContext } from '../SiteMapContext';
+
+import SiteMapFeature from '../SiteMapFeature';
 
 // Mock the Leaflet Map class
 const mockMap = class Map {
@@ -27,7 +31,6 @@ const mockMap = class Map {
     };
   }
 };
-import { Map } from 'react-leaflet';
 jest.mock('react-leaflet', () => ({
   ...jest.requireActual('react-leaflet'),
   Map: jest.fn().mockImplementation(mockMap),
@@ -38,7 +41,6 @@ jest.mock('../SiteMapContext', () => ({
   ...(jest.requireActual('../SiteMapContext').default),
   useSiteMapContext: jest.fn(),
 }));
-import { useSiteMapContext } from '../SiteMapContext';
 useSiteMapContext.mockReturnValue([{
   ...cloneDeep(DEFAULT_STATE),
   neonContextHydrated: true,
@@ -71,10 +73,8 @@ useSiteMapContext.mockReturnValue([{
         },
       },
     },
-  }
+  },
 }]);
-
-import SiteMapFeature from '../SiteMapFeature';
 
 /**
    SKIPPED TEST SUITE

@@ -15,6 +15,8 @@ import domainsJSON from '../lib_components/staticJSON/domains.json';
 import bundlesJSON from '../lib_components/staticJSON/bundles.json';
 import timeSeriesDataProductsJSON from '../lib_components/staticJSON/timeSeriesDataProducts.json';
 
+import NeonContext from '../lib_components/components/NeonContext/NeonContext';
+
 jest.mock('../lib_components/components/NeonContext/NeonContext', () => (
   {
     ...(jest.requireActual('../lib_components/components/NeonContext/NeonContext').default),
@@ -27,8 +29,6 @@ jest.mock('../lib_components/components/NeonContext/NeonContext', () => (
     },
   }
 ));
-
-import NeonContext from '../lib_components/components/NeonContext/NeonContext';
 
 NeonContext.useNeonContextState.mockReturnValue([
   {

@@ -172,7 +172,7 @@ describe('ExternalHost', () => {
       const tree = renderer
         .create((
           <div>
-            {getByHostId('BOLD').getProductLinks('DP1.10020.001').map(link => (
+            {getByHostId('BOLD').getProductLinks('DP1.10020.001').map((link) => (
               <div key={link.key}>{link.node}</div>
             ))}
           </div>
@@ -220,7 +220,7 @@ describe('ExternalHost', () => {
       const tree = renderer
         .create((
           <div>
-            {getByHostId('MGRAST').getProductLinks('DP1.10107.001').map(link => (
+            {getByHostId('MGRAST').getProductLinks('DP1.10107.001').map((link) => (
               <div key={link.key}>{link.node}</div>
             ))}
           </div>

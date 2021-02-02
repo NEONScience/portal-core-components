@@ -9,7 +9,7 @@ describe('ExampleBlock', () => {
       .create(
         <ExampleBlock>
           <div>1</div>
-        </ExampleBlock>
+        </ExampleBlock>,
       ).toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -20,7 +20,7 @@ describe('ExampleBlock', () => {
           <div>1</div>
           <div>2</div>
           <div>3</div>
-        </ExampleBlock>
+        </ExampleBlock>,
       ).toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -31,7 +31,7 @@ describe('ExampleBlock', () => {
           <div>4</div>
           <div>5</div>
           <div>6</div>
-        </ExampleBlock>
+        </ExampleBlock>,
       ).toJSON();
     expect(tree).toMatchSnapshot();
   });

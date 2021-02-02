@@ -1,4 +1,4 @@
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook } from '@testing-library/react-hooks';
 
 import cloneDeep from 'lodash/cloneDeep';
 
@@ -54,19 +54,22 @@ describe('AvailabilityContext', () => {
       rowLabels: ['foo', 'bar'],
       sites: [
         {
-          siteCode: 'ABBY', tables: [ // WA / D16
+          siteCode: 'ABBY',
+          tables: [ // WA / D16
             { name: 't1', months: { '2010-01': 'available', '2010-10': 'delayed' } },
             { name: 't2', months: { '2010-01': 'available', '2010-10': 'tentative' } },
           ],
         },
         {
-          siteCode: 'BARR', tables: [ // AK / D18
+          siteCode: 'BARR',
+          tables: [ // AK / D18
             { name: 't1', months: { '2010-10': 'not collected', '2013-10': 'expected' } },
             { name: 't3', months: { '2010-10': 'delayed', '2013-10': 'available' } },
           ],
         },
         {
-          siteCode: 'CLBJ', tables: [ // TX / D11
+          siteCode: 'CLBJ',
+          tables: [ // TX / D11
             { name: 't2', months: { '2013-10': 'delayed', '2017-10': 'expected' } },
             { name: 't3', months: { '2013-10': 'tentative', '2017-10': 'being processed' } },
             { name: 'unknown table' },
@@ -87,7 +90,7 @@ describe('AvailabilityContext', () => {
         rows: {
           ALL: {
             '2010-01': ['available', 'available'],
-            '2010-10': ['delayed', 'tentative', 'not collected','delayed'],
+            '2010-10': ['delayed', 'tentative', 'not collected', 'delayed'],
             '2013-10': ['expected', 'available', 'delayed', 'tentative'],
             '2017-10': ['expected', 'being processed'],
           },
@@ -162,14 +165,16 @@ describe('AvailabilityContext', () => {
       ...cloneDeep(initialHydratedState),
       sites: [
         {
-          siteCode: 'ABBY', tables: [
+          siteCode: 'ABBY',
+          tables: [
             { name: 't1', description: 'table 1', waitInterval: 60 },
             { name: 't2', description: 'table 2', waitInterval: 40 },
             { name: 't1', description: 'table 1', waitInterval: 60 },
           ],
         },
         {
-          siteCode: 'BARR', tables: [
+          siteCode: 'BARR',
+          tables: [
             { name: 't1', description: 'table 1 different description', waitInterval: 60 },
             { name: 't3', description: 'table 3', waitInterval: 100 },
           ],

@@ -1,20 +1,6 @@
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook } from '@testing-library/react-hooks';
 
 import cloneDeep from 'lodash/cloneDeep';
-
-// Mock some functions within SiteMapUtils as they are called by functions we test here
-// but are tested directly in the SiteMapUtils test suite
-jest.mock('../SiteMapUtils', () => ({
-  ...jest.requireActual('../SiteMapUtils'),
-  boundsAreValid: jest.fn(),
-  calculateLocationsInBounds: jest.fn(),
-  deriveFullObservatoryZoomLevel: jest.fn(),
-  hydrateNeonContextData: jest.fn(),
-  getMapStateForFocusLocation: jest.fn(),
-  getZoomedIcons: jest.fn(),
-}));
-
-jest.mock('lodash/uniqueId');
 import uniqueId from 'lodash/uniqueId';
 
 import SiteMapContext, { getTestableItems } from '../SiteMapContext';
@@ -42,6 +28,20 @@ import {
   getMapStateForFocusLocation,
   getZoomedIcons,
 } from '../SiteMapUtils';
+
+// Mock some functions within SiteMapUtils as they are called by functions we test here
+// but are tested directly in the SiteMapUtils test suite
+jest.mock('../SiteMapUtils', () => ({
+  ...jest.requireActual('../SiteMapUtils'),
+  boundsAreValid: jest.fn(),
+  calculateLocationsInBounds: jest.fn(),
+  deriveFullObservatoryZoomLevel: jest.fn(),
+  hydrateNeonContextData: jest.fn(),
+  getMapStateForFocusLocation: jest.fn(),
+  getZoomedIcons: jest.fn(),
+}));
+
+jest.mock('lodash/uniqueId');
 
 const { useSiteMapContext } = SiteMapContext;
 
@@ -436,7 +436,7 @@ describe('SiteMap - SiteMapContext', () => {
       test('takes no action on state if there are no sites in bounds', () => {
         calculateLocationsInBounds.mockReturnValue([]);
         const newState = calculateFeatureDataFetches(state);
-        expect(newState).toStrictEqual(state);      
+        expect(newState).toStrictEqual(state);
       });
       describe('SITE_LOCATION_HIERARCHIES', () => {
         test('applies no awaiting fetches if zoom is below minimum', () => {
@@ -445,7 +445,7 @@ describe('SiteMap - SiteMapContext', () => {
           calculateLocationsInBounds.mockReturnValue(['SB', 'SE', 'SG', 'SH']);
           const newState = calculateFeatureDataFetches(state);
           expect(
-            Object.keys(newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES])
+            Object.keys(newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES]),
           ).toStrictEqual([]);
           expect(newState.overallFetch.expected).toBe(0);
           expect(newState.overallFetch.pendingHierarchy).toBe(0);
@@ -458,16 +458,16 @@ describe('SiteMap - SiteMapContext', () => {
           calculateLocationsInBounds.mockReturnValue(['SB', 'SE', 'SG', 'SH']);
           const newState = calculateFeatureDataFetches(state);
           expect(
-            Object.keys(newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES])
+            Object.keys(newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES]),
           ).toStrictEqual(['D01', 'D20', 'D12']);
           expect(
-            newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES].D01
+            newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES].D01,
           ).toBe(FETCH_STATUS.FETCHING);
           expect(
-            newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES].D20
+            newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES].D20,
           ).toBe(FETCH_STATUS.AWAITING_CALL);
           expect(
-            newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES].D12
+            newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES].D12,
           ).toBe(FETCH_STATUS.AWAITING_CALL);
           expect(newState.overallFetch.expected).toBe(2);
           expect(newState.overallFetch.pendingHierarchy).toBe(2);
@@ -494,28 +494,28 @@ describe('SiteMap - SiteMapContext', () => {
               expect(Object.keys(newState.featureDataFetches[ARCGIS_ASSETS_API][k])).toStrictEqual([]);
             });
           expect(
-            Object.keys(newState.featureDataFetches[ARCGIS_ASSETS_API][SAMPLING_BOUNDARIES])
+            Object.keys(newState.featureDataFetches[ARCGIS_ASSETS_API][SAMPLING_BOUNDARIES]),
           ).toStrictEqual(['SE', 'SB', 'SF']);
           expect(
-            Object.keys(newState.featureDataFetches[ARCGIS_ASSETS_API][WATERSHED_BOUNDARIES])
+            Object.keys(newState.featureDataFetches[ARCGIS_ASSETS_API][WATERSHED_BOUNDARIES]),
           ).toStrictEqual(['SB', 'SE', 'SF']);
           expect(
-            newState.featureDataFetches[ARCGIS_ASSETS_API][SAMPLING_BOUNDARIES].SB
+            newState.featureDataFetches[ARCGIS_ASSETS_API][SAMPLING_BOUNDARIES].SB,
           ).toBe(FETCH_STATUS.AWAITING_CALL);
           expect(
-            newState.featureDataFetches[ARCGIS_ASSETS_API][SAMPLING_BOUNDARIES].SE
+            newState.featureDataFetches[ARCGIS_ASSETS_API][SAMPLING_BOUNDARIES].SE,
           ).toBe(FETCH_STATUS.FETCHING);
           expect(
-            newState.featureDataFetches[ARCGIS_ASSETS_API][SAMPLING_BOUNDARIES].SF
+            newState.featureDataFetches[ARCGIS_ASSETS_API][SAMPLING_BOUNDARIES].SF,
           ).toBe(FETCH_STATUS.AWAITING_CALL);
           expect(
-            newState.featureDataFetches[ARCGIS_ASSETS_API][WATERSHED_BOUNDARIES].SB
+            newState.featureDataFetches[ARCGIS_ASSETS_API][WATERSHED_BOUNDARIES].SB,
           ).toBe(FETCH_STATUS.AWAITING_CALL);
           expect(
-            newState.featureDataFetches[ARCGIS_ASSETS_API][WATERSHED_BOUNDARIES].SE
+            newState.featureDataFetches[ARCGIS_ASSETS_API][WATERSHED_BOUNDARIES].SE,
           ).toBe(FETCH_STATUS.AWAITING_CALL);
           expect(
-            newState.featureDataFetches[ARCGIS_ASSETS_API][WATERSHED_BOUNDARIES].SF
+            newState.featureDataFetches[ARCGIS_ASSETS_API][WATERSHED_BOUNDARIES].SF,
           ).toBe(FETCH_STATUS.AWAITING_CALL);
           expect(newState.overallFetch.expected).toBe(5);
           expect(newState.overallFetch.pendingHierarchy).toBe(0);
@@ -544,25 +544,25 @@ describe('SiteMap - SiteMapContext', () => {
           };
           const newState = calculateFeatureDataFetches(state);
           expect(
-            Object.keys(newState.featureDataFetches[REST_LOCATIONS_API])
+            Object.keys(newState.featureDataFetches[REST_LOCATIONS_API]),
           ).toStrictEqual([TOWERS, SITE_LOCATION_HIERARCHIES]);
           expect(
-            Object.keys(newState.featureDataFetches[REST_LOCATIONS_API][TOWERS])
+            Object.keys(newState.featureDataFetches[REST_LOCATIONS_API][TOWERS]),
           ).toStrictEqual(['SB', 'SF']);
           expect(
-            Object.keys(newState.featureDataFetches[REST_LOCATIONS_API][TOWERS].SB)
+            Object.keys(newState.featureDataFetches[REST_LOCATIONS_API][TOWERS].SB),
           ).toStrictEqual(['TOWER456', 'TOWER123']);
           expect(
-            newState.featureDataFetches[REST_LOCATIONS_API][TOWERS].SB.TOWER456
+            newState.featureDataFetches[REST_LOCATIONS_API][TOWERS].SB.TOWER456,
           ).toBe(FETCH_STATUS.FETCHING);
           expect(
-            newState.featureDataFetches[REST_LOCATIONS_API][TOWERS].SB.TOWER123
+            newState.featureDataFetches[REST_LOCATIONS_API][TOWERS].SB.TOWER123,
           ).toBe(FETCH_STATUS.AWAITING_CALL);
           expect(
-            Object.keys(newState.featureDataFetches[REST_LOCATIONS_API][TOWERS].SF)
+            Object.keys(newState.featureDataFetches[REST_LOCATIONS_API][TOWERS].SF),
           ).toStrictEqual(['TOWER987']);
           expect(
-            newState.featureDataFetches[REST_LOCATIONS_API][TOWERS].SF.TOWER987
+            newState.featureDataFetches[REST_LOCATIONS_API][TOWERS].SF.TOWER987,
           ).toBe(FETCH_STATUS.AWAITING_CALL);
           expect(newState.overallFetch.expected).toBe(2);
           expect(newState.overallFetch.pendingHierarchy).toBe(0);
@@ -602,7 +602,7 @@ describe('SiteMap - SiteMapContext', () => {
               [AQUATIC_STAFF_GAUGES]: {
                 fetchId: 'f12345',
                 locations: ['SG789'],
-              }
+              },
             },
             fetches: {
               f12345: {
@@ -613,16 +613,16 @@ describe('SiteMap - SiteMapContext', () => {
           };
           const newState = calculateFeatureDataFetches(state);
           expect(
-            Object.keys(state.featureDataFetches[GRAPHQL_LOCATIONS_API][AQUATIC_SENSOR_STATIONS_MINZOOM])
+            Object.keys(state.featureDataFetches[GRAPHQL_LOCATIONS_API][AQUATIC_SENSOR_STATIONS_MINZOOM]),
           ).toStrictEqual(['SB', 'SF']);
           expect(
-            state.featureDataFetches[GRAPHQL_LOCATIONS_API][AQUATIC_SENSOR_STATIONS_MINZOOM].SB.features[AQUATIC_SENSOR_STATIONS]
+            state.featureDataFetches[GRAPHQL_LOCATIONS_API][AQUATIC_SENSOR_STATIONS_MINZOOM].SB.features[AQUATIC_SENSOR_STATIONS],
           ).toStrictEqual({
             fetchId: 'f_uid_1',
             locations: ['SENSTA123', 'SENSTA456'],
           });
           expect(
-            state.featureDataFetches[GRAPHQL_LOCATIONS_API][AQUATIC_SENSOR_STATIONS_MINZOOM].SB.fetches
+            state.featureDataFetches[GRAPHQL_LOCATIONS_API][AQUATIC_SENSOR_STATIONS_MINZOOM].SB.fetches,
           ).toStrictEqual({
             f_uid_1: {
               locations: ['SENSTA123', 'SENSTA456'],
@@ -630,13 +630,13 @@ describe('SiteMap - SiteMapContext', () => {
             },
           });
           expect(
-            state.featureDataFetches[GRAPHQL_LOCATIONS_API][AQUATIC_SENSOR_STATIONS_MINZOOM].SF.features[AQUATIC_SENSOR_STATIONS]
+            state.featureDataFetches[GRAPHQL_LOCATIONS_API][AQUATIC_SENSOR_STATIONS_MINZOOM].SF.features[AQUATIC_SENSOR_STATIONS],
           ).toStrictEqual({
             fetchId: 'f_uid_2',
             locations: ['SENSTA789'],
           });
           expect(
-            state.featureDataFetches[GRAPHQL_LOCATIONS_API][AQUATIC_SENSOR_STATIONS_MINZOOM].SF.fetches
+            state.featureDataFetches[GRAPHQL_LOCATIONS_API][AQUATIC_SENSOR_STATIONS_MINZOOM].SF.fetches,
           ).toStrictEqual({
             f_uid_2: {
               locations: ['SENSTA789'],
@@ -644,16 +644,16 @@ describe('SiteMap - SiteMapContext', () => {
             },
           });
           expect(
-            Object.keys(state.featureDataFetches[GRAPHQL_LOCATIONS_API][AQUATIC_STAFF_GAUGES_MINZOOM])
+            Object.keys(state.featureDataFetches[GRAPHQL_LOCATIONS_API][AQUATIC_STAFF_GAUGES_MINZOOM]),
           ).toStrictEqual(['SB', 'SF']);
           expect(
-            state.featureDataFetches[GRAPHQL_LOCATIONS_API][AQUATIC_STAFF_GAUGES_MINZOOM].SB.features[AQUATIC_STAFF_GAUGES]
+            state.featureDataFetches[GRAPHQL_LOCATIONS_API][AQUATIC_STAFF_GAUGES_MINZOOM].SB.features[AQUATIC_STAFF_GAUGES],
           ).toStrictEqual({
             fetchId: 'f12345',
             locations: ['SG789'],
           });
           expect(
-            state.featureDataFetches[GRAPHQL_LOCATIONS_API][AQUATIC_STAFF_GAUGES_MINZOOM].SB.fetches
+            state.featureDataFetches[GRAPHQL_LOCATIONS_API][AQUATIC_STAFF_GAUGES_MINZOOM].SB.fetches,
           ).toStrictEqual({
             f12345: {
               locations: ['SG789'],
@@ -661,13 +661,13 @@ describe('SiteMap - SiteMapContext', () => {
             },
           });
           expect(
-            state.featureDataFetches[GRAPHQL_LOCATIONS_API][AQUATIC_STAFF_GAUGES_MINZOOM].SF.features[AQUATIC_STAFF_GAUGES]
+            state.featureDataFetches[GRAPHQL_LOCATIONS_API][AQUATIC_STAFF_GAUGES_MINZOOM].SF.features[AQUATIC_STAFF_GAUGES],
           ).toStrictEqual({
             fetchId: 'f_uid_3',
             locations: ['SG456', 'SG012'],
           });
           expect(
-            state.featureDataFetches[GRAPHQL_LOCATIONS_API][AQUATIC_STAFF_GAUGES_MINZOOM].SF.fetches
+            state.featureDataFetches[GRAPHQL_LOCATIONS_API][AQUATIC_STAFF_GAUGES_MINZOOM].SF.fetches,
           ).toStrictEqual({
             f_uid_3: {
               locations: ['SG456', 'SG012'],
@@ -696,19 +696,19 @@ describe('SiteMap - SiteMapContext', () => {
           state.filters.features.visible[DISTRIBUTED_BASE_PLOTS] = false;
           const newState = calculateFeatureDataFetches(state);
           expect(
-            Object.keys(state.featureDataFetches[GRAPHQL_LOCATIONS_API][TOWER_BASE_PLOTS_MINZOOM])
+            Object.keys(state.featureDataFetches[GRAPHQL_LOCATIONS_API][TOWER_BASE_PLOTS_MINZOOM]),
           ).toStrictEqual(['SA']);
           expect(
-            Object.keys(state.featureDataFetches[GRAPHQL_LOCATIONS_API][DISTRIBUTED_BASE_PLOTS_MINZOOM])
+            Object.keys(state.featureDataFetches[GRAPHQL_LOCATIONS_API][DISTRIBUTED_BASE_PLOTS_MINZOOM]),
           ).toStrictEqual(['SA']);
           expect(
-            state.featureDataFetches[GRAPHQL_LOCATIONS_API][TOWER_BASE_PLOTS_MINZOOM].SA.features[TOWER_BASE_PLOTS]
+            state.featureDataFetches[GRAPHQL_LOCATIONS_API][TOWER_BASE_PLOTS_MINZOOM].SA.features[TOWER_BASE_PLOTS],
           ).toStrictEqual({
             fetchId: 'f_uid_1',
             locations: ['BP001', 'DP003'],
           });
           expect(
-            state.featureDataFetches[GRAPHQL_LOCATIONS_API][TOWER_BASE_PLOTS_MINZOOM].SA.fetches
+            state.featureDataFetches[GRAPHQL_LOCATIONS_API][TOWER_BASE_PLOTS_MINZOOM].SA.fetches,
           ).toStrictEqual({
             f_uid_1: {
               locations: ['BP001', 'DP003'],
@@ -716,17 +716,17 @@ describe('SiteMap - SiteMapContext', () => {
             },
           });
           expect(
-            state.featureDataFetches[GRAPHQL_LOCATIONS_API][DISTRIBUTED_BASE_PLOTS_MINZOOM].SA.features[DISTRIBUTED_BASE_PLOTS]
+            state.featureDataFetches[GRAPHQL_LOCATIONS_API][DISTRIBUTED_BASE_PLOTS_MINZOOM].SA.features[DISTRIBUTED_BASE_PLOTS],
           ).toStrictEqual({
             fetchId: 'f_uid_1',
             locations: ['BP001', 'DP003'],
           });
           expect(
-            state.featureDataFetches[GRAPHQL_LOCATIONS_API][DISTRIBUTED_BASE_PLOTS_MINZOOM].SA.fetches
+            state.featureDataFetches[GRAPHQL_LOCATIONS_API][DISTRIBUTED_BASE_PLOTS_MINZOOM].SA.fetches,
           ).toStrictEqual({});
           expect(newState.overallFetch.expected).toBe(1);
           expect(newState.overallFetch.pendingHierarchy).toBe(0);
-          expect(newState.featureDataFetchesHasAwaiting).toBe(true);          
+          expect(newState.featureDataFetchesHasAwaiting).toBe(true);
         });
         test('applies awaiting fetches for visible features with companion keys, respecting existing fetches', () => {
           calculateLocationsInBounds.mockReturnValue(['SA']);
@@ -749,7 +749,7 @@ describe('SiteMap - SiteMapContext', () => {
                 locations: ['BP001', 'DP003'],
                 status: FETCH_STATUS.AWAITING_CALL,
               },
-            }
+            },
           };
           state.featureData[SITE_LOCATION_HIERARCHIES].SA = {
             BP001: { type: 'OS Plot - all', parent: 'SB', description: 'tower base plot 001' },
@@ -761,28 +761,28 @@ describe('SiteMap - SiteMapContext', () => {
           state.filters.features.visible[DISTRIBUTED_BASE_PLOTS] = false;
           const newState = calculateFeatureDataFetches(state);
           expect(
-            Object.keys(state.featureDataFetches[GRAPHQL_LOCATIONS_API][TOWER_BASE_PLOTS_MINZOOM])
+            Object.keys(state.featureDataFetches[GRAPHQL_LOCATIONS_API][TOWER_BASE_PLOTS_MINZOOM]),
           ).toStrictEqual(['SA']);
           expect(
-            Object.keys(state.featureDataFetches[GRAPHQL_LOCATIONS_API][DISTRIBUTED_BASE_PLOTS_MINZOOM])
+            Object.keys(state.featureDataFetches[GRAPHQL_LOCATIONS_API][DISTRIBUTED_BASE_PLOTS_MINZOOM]),
           ).toStrictEqual(['SA']);
           expect(
-            state.featureDataFetches[GRAPHQL_LOCATIONS_API][TOWER_BASE_PLOTS_MINZOOM].SA.features[TOWER_BASE_PLOTS]
+            state.featureDataFetches[GRAPHQL_LOCATIONS_API][TOWER_BASE_PLOTS_MINZOOM].SA.features[TOWER_BASE_PLOTS],
           ).toStrictEqual({
             fetchId: 'f_uid_0',
             locations: ['BP001', 'DP003'],
           });
           expect(
-            state.featureDataFetches[GRAPHQL_LOCATIONS_API][TOWER_BASE_PLOTS_MINZOOM].SA.fetches
+            state.featureDataFetches[GRAPHQL_LOCATIONS_API][TOWER_BASE_PLOTS_MINZOOM].SA.fetches,
           ).toStrictEqual({});
           expect(
-            state.featureDataFetches[GRAPHQL_LOCATIONS_API][DISTRIBUTED_BASE_PLOTS_MINZOOM].SA.features[DISTRIBUTED_BASE_PLOTS]
+            state.featureDataFetches[GRAPHQL_LOCATIONS_API][DISTRIBUTED_BASE_PLOTS_MINZOOM].SA.features[DISTRIBUTED_BASE_PLOTS],
           ).toStrictEqual({
             fetchId: 'f_uid_0',
             locations: ['BP001', 'DP003'],
           });
           expect(
-            state.featureDataFetches[GRAPHQL_LOCATIONS_API][DISTRIBUTED_BASE_PLOTS_MINZOOM].SA.fetches
+            state.featureDataFetches[GRAPHQL_LOCATIONS_API][DISTRIBUTED_BASE_PLOTS_MINZOOM].SA.fetches,
           ).toStrictEqual({
             fetchId: 'f_uid_0',
             status: FETCH_STATUS.AWAITING_CALL,
@@ -790,7 +790,7 @@ describe('SiteMap - SiteMapContext', () => {
           });
           expect(newState.overallFetch.expected).toBe(0);
           expect(newState.overallFetch.pendingHierarchy).toBe(0);
-          expect(newState.featureDataFetchesHasAwaiting).toBe(false);          
+          expect(newState.featureDataFetchesHasAwaiting).toBe(false);
         });
       });
     });
@@ -798,7 +798,7 @@ describe('SiteMap - SiteMapContext', () => {
       test('takes no action on state if there are no sites in bounds', () => {
         calculateLocationsInBounds.mockReturnValue([]);
         const newState = calculateFeatureDataFetches(state, ['SG', 'SC']);
-        expect(newState).toStrictEqual(state);      
+        expect(newState).toStrictEqual(state);
       });
       describe('SITE_LOCATION_HIERARCHIES', () => {
         test('applies no awaiting fetches if zoom is below minimum', () => {
@@ -807,7 +807,7 @@ describe('SiteMap - SiteMapContext', () => {
           calculateLocationsInBounds.mockReturnValue(['SB', 'SE', 'SG', 'SH']);
           const newState = calculateFeatureDataFetches(state, ['SG', 'SC']);
           expect(
-            Object.keys(newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES])
+            Object.keys(newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES]),
           ).toStrictEqual([]);
           expect(newState.overallFetch.expected).toBe(0);
           expect(newState.overallFetch.pendingHierarchy).toBe(0);
@@ -820,19 +820,19 @@ describe('SiteMap - SiteMapContext', () => {
           calculateLocationsInBounds.mockReturnValue(['SB', 'SE', 'SG', 'SH']);
           const newState = calculateFeatureDataFetches(state, ['SG', 'SC']);
           expect(
-            Object.keys(newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES])
+            Object.keys(newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES]),
           ).toStrictEqual(['D01', 'D20', 'D12', 'D19']);
           expect(
-            newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES].D01
+            newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES].D01,
           ).toBe(FETCH_STATUS.FETCHING);
           expect(
-            newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES].D20
+            newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES].D20,
           ).toBe(FETCH_STATUS.AWAITING_CALL);
           expect(
-            newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES].D12
+            newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES].D12,
           ).toBe(FETCH_STATUS.AWAITING_CALL);
           expect(
-            newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES].D19
+            newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES].D19,
           ).toBe(FETCH_STATUS.AWAITING_CALL);
           expect(newState.overallFetch.expected).toBe(3);
           expect(newState.overallFetch.pendingHierarchy).toBe(3);
@@ -965,7 +965,7 @@ describe('SiteMap - SiteMapContext', () => {
     let state;
     beforeEach(() => {
       state = cloneDeep(DEFAULT_STATE);
-    }); 
+    });
     test('takes no action if the feature has no parent', () => {
       const newState = applyFeatureVisibilityToParents(state, FEATURES.DOMAINS.KEY);
       expect(newState).toStrictEqual(state);
@@ -978,7 +978,7 @@ describe('SiteMap - SiteMapContext', () => {
       const newState = applyFeatureVisibilityToParents(state, FEATURES.DISTRIBUTED_TICK_PLOT_BOUNDARIES.KEY);
       expect(
         Object.keys(state.filters.features.visible)
-          .filter((k) => state.filters.features.visible[k])
+          .filter((k) => state.filters.features.visible[k]),
       ).toStrictEqual([
         FEATURES.TERRESTRIAL_SITE_FEATURES.KEY,
         FEATURES.PLOT_BOUNDARIES.KEY,
@@ -993,7 +993,7 @@ describe('SiteMap - SiteMapContext', () => {
       const newState = applyFeatureVisibilityToParents(state, FEATURES.DISTRIBUTED_TICK_PLOT_BOUNDARIES.KEY);
       expect(
         Object.keys(state.filters.features.visible)
-          .filter((k) => !state.filters.features.visible[k])
+          .filter((k) => !state.filters.features.visible[k]),
       ).toStrictEqual([
         FEATURES.DISTRIBUTED_TICK_PLOT_BOUNDARIES.KEY,
       ]);
@@ -1094,7 +1094,7 @@ describe('SiteMap - SiteMapContext', () => {
           featureKey: SAMPLING_BOUNDARIES,
           siteCode: 'S4',
         };
-        expect(setFetchStatusFromAction(state, action, FETCH_STATUS.ERROR)).toStrictEqual(state);        
+        expect(setFetchStatusFromAction(state, action, FETCH_STATUS.ERROR)).toStrictEqual(state);
       });
       test('applies only status if status is not SUCCESS', () => {
         state.featureDataFetches[ARCGIS_ASSETS_API][SAMPLING_BOUNDARIES] = {
@@ -1126,7 +1126,7 @@ describe('SiteMap - SiteMapContext', () => {
         const newState = setFetchStatusFromAction(state, action, FETCH_STATUS.SUCCESS);
         expect(newState.featureDataFetches[ARCGIS_ASSETS_API][SAMPLING_BOUNDARIES].S1).toBe(FETCH_STATUS.SUCCESS);
         expect(Object.keys(newState.featureData[BOUNDARIES][SAMPLING_BOUNDARIES])).toStrictEqual(['S1']);
-        expect(newState.featureData[BOUNDARIES][SAMPLING_BOUNDARIES].S1).toStrictEqual(action.data);        
+        expect(newState.featureData[BOUNDARIES][SAMPLING_BOUNDARIES].S1).toStrictEqual(action.data);
       });
     });
     describe('REST_LOCATIONS_API', () => {
@@ -1189,7 +1189,7 @@ describe('SiteMap - SiteMapContext', () => {
         expect(newState.featureDataFetches[REST_LOCATIONS_API][TOWERS].S3.TC).toBe(FETCH_STATUS.ERROR);
         expect(newState.featureDataFetches[REST_LOCATIONS_API][TOWERS].S3.TB).toBe(FETCH_STATUS.FETCHING);
         expect(newState.featureData[LOCATIONS][TOWERS])
-          .toStrictEqual(state.featureData[LOCATIONS][TOWERS]);        
+          .toStrictEqual(state.featureData[LOCATIONS][TOWERS]);
       });
       test('applies status and data if status is SUCCESS', () => {
         state.sites = {
@@ -1265,7 +1265,7 @@ describe('SiteMap - SiteMapContext', () => {
           siteCode: 'S1',
           fetchId: 'f2',
         };
-        expect(setFetchStatusFromAction(state, action, FETCH_STATUS.ERROR)).toStrictEqual(state);     
+        expect(setFetchStatusFromAction(state, action, FETCH_STATUS.ERROR)).toStrictEqual(state);
       });
       test('applies only status if status is not SUCCESS', () => {
         state.featureDataFetches[GRAPHQL_LOCATIONS_API][HUTS_MINZOOM] = {
@@ -1286,7 +1286,7 @@ describe('SiteMap - SiteMapContext', () => {
         };
         const newState = setFetchStatusFromAction(state, action, FETCH_STATUS.ERROR);
         expect(
-          newState.featureDataFetches[GRAPHQL_LOCATIONS_API][HUTS_MINZOOM].S3.fetches.f2.status
+          newState.featureDataFetches[GRAPHQL_LOCATIONS_API][HUTS_MINZOOM].S3.fetches.f2.status,
         ).toBe(FETCH_STATUS.ERROR);
       });
       describe('applies status and data if status is SUCCESS', () => {
@@ -1325,7 +1325,7 @@ and so this test must be updated.`;
           // mimic geometry that was already fetched
           state.featureData[LOCATIONS][TOWER_BASE_PLOTS] = {
             S3: {
-              ['TBP2.foo.all']: {
+              'TBP2.foo.all': {
                 geometry: {
                   coordinates: [[3, 4], [5, 6], [7, 9], [3, 9]],
                 },
@@ -1338,15 +1338,15 @@ and so this test must be updated.`;
             siteCode: 'S3',
             fetchId: 'f2',
             data: {
-              HUT2: { name: 'foo', },
+              HUT2: { name: 'foo' },
               'DBP1.foo.all': { name: 'bar', plotType: 'distributed' },
               'TBP2.foo.all': { name: 'qux', plotType: 'tower' },
-              BAD1: { name: 'bad', },
+              BAD1: { name: 'bad' },
             },
           };
           const newState = setFetchStatusFromAction(state, action, FETCH_STATUS.SUCCESS);
           expect(
-            newState.featureDataFetches[GRAPHQL_LOCATIONS_API][HUTS_MINZOOM].S3.fetches.f2.status
+            newState.featureDataFetches[GRAPHQL_LOCATIONS_API][HUTS_MINZOOM].S3.fetches.f2.status,
           ).toBe(FETCH_STATUS.SUCCESS);
           expect(newState.featureData[LOCATIONS][HUTS].S3.HUT2).toStrictEqual({
             name: 'foo',
@@ -1400,15 +1400,21 @@ and so this test must be updated.`;
             siteCode: 'S3',
             fetchId: 'f7',
             data: {
-              'TPP1.phe.NW': { name: 'foo', parent: 'TPP1.foo.all', latitude: 10, longitude: 14 },
-              'TPP1.phe.SE': { name: 'bar', parent: 'TPP1.foo.all', latitude: 13, longitude: 17 },
-              'TPP1.phe.XX': { name: 'qux', parent: 'TPP1.foo.all', latitude: 25, longitude: 75 },
+              'TPP1.phe.NW': {
+                name: 'foo', parent: 'TPP1.foo.all', latitude: 10, longitude: 14,
+              },
+              'TPP1.phe.SE': {
+                name: 'bar', parent: 'TPP1.foo.all', latitude: 13, longitude: 17,
+              },
+              'TPP1.phe.XX': {
+                name: 'qux', parent: 'TPP1.foo.all', latitude: 25, longitude: 75,
+              },
               'TPP1.phe.SW': { name: 'no parent', latitude: 38, longitude: 72 },
             },
           };
           const newState = setFetchStatusFromAction(state, action, FETCH_STATUS.SUCCESS);
           expect(
-            newState.featureDataFetches[GRAPHQL_LOCATIONS_API][TOWER_PHENOLOGY_PLOT_BOUNDARIES_MINZOOM].S3.fetches.f7.status
+            newState.featureDataFetches[GRAPHQL_LOCATIONS_API][TOWER_PHENOLOGY_PLOT_BOUNDARIES_MINZOOM].S3.fetches.f7.status,
           ).toBe(FETCH_STATUS.SUCCESS);
           expect(newState.featureData[LOCATIONS][TOWER_PHENOLOGY_PLOTS].S3['TPP1.foo.all']).toStrictEqual({
             geometry: {
@@ -1431,10 +1437,10 @@ and so this test must be updated.`;
     describe('setView', () => {
       test('does nothing if passed an invalid view', () => {
         expect(
-          reducer(state, { type: 'setView' })
+          reducer(state, { type: 'setView' }),
         ).toStrictEqual(state);
         expect(
-          reducer(state, { type: 'setView', view: 'INVALID_VIEW' })
+          reducer(state, { type: 'setView', view: 'INVALID_VIEW' }),
         ).toStrictEqual(state);
       });
       test('applies view if valid', () => {
@@ -1463,16 +1469,16 @@ and so this test must be updated.`;
     describe('setAspectRatio', () => {
       test('does nothing if action ascpectRatio is not a positive number', () => {
         expect(
-          reducer(state, { type: 'setAspectRatio' })
+          reducer(state, { type: 'setAspectRatio' }),
         ).toStrictEqual(state);
         expect(
-          reducer(state, { type: 'setAspectRatio', aspectRatio: 'foo' })
+          reducer(state, { type: 'setAspectRatio', aspectRatio: 'foo' }),
         ).toStrictEqual(state);
         expect(
-          reducer(state, { type: 'setAspectRatio', aspectRatio: 0 })
+          reducer(state, { type: 'setAspectRatio', aspectRatio: 0 }),
         ).toStrictEqual(state);
         expect(
-          reducer(state, { type: 'setAspectRatio', aspectRatio: -1.5 })
+          reducer(state, { type: 'setAspectRatio', aspectRatio: -1.5 }),
         ).toStrictEqual(state);
       });
       test('applies aspectRatio if valid, optionally taking up widthReference', () => {
@@ -1531,10 +1537,10 @@ and so this test must be updated.`;
     describe('setMapZoom', () => {
       test('does nothing if action zoom is invalid', () => {
         expect(
-          reducer(state, { type: 'setMapZoom' })
+          reducer(state, { type: 'setMapZoom' }),
         ).toStrictEqual(state);
         expect(
-          reducer(state, { type: 'setMapZoom', zoom: -50 })
+          reducer(state, { type: 'setMapZoom', zoom: -50 }),
         ).toStrictEqual(state);
       });
       test('sets only zoom (not center and not bounds) if only passed zoom', () => {
@@ -1587,14 +1593,14 @@ and so this test must be updated.`;
       });
       test('sets map center valid', () => {
         boundsAreValid.mockReset();
-        boundsAreValid.mockReturnValue(false);   
+        boundsAreValid.mockReturnValue(false);
         const newState = reducer(state, { type: 'setMapCenter', center: [50, 80] });
         expect(newState.map.center).toStrictEqual([50, 80]);
       });
       test('sets map center and bounds if both provided and valid', () => {
         const bounds = 'BOUNDS';
         boundsAreValid.mockReset();
-        boundsAreValid.mockReturnValue(true);        
+        boundsAreValid.mockReturnValue(true);
         const newState = reducer(state, { type: 'setMapCenter', center: [50, 80], bounds });
         expect(newState.map.center).toStrictEqual([50, 80]);
         expect(newState.map.bounds).toBe(bounds);
@@ -1646,10 +1652,10 @@ and so this test must be updated.`;
     describe('setMapOverlays', () => {
       test('does nothing if action overlays is not an array containing only overlay keys', () => {
         expect(
-          reducer(state, { type: 'setMapOverlays', overlays: null })
+          reducer(state, { type: 'setMapOverlays', overlays: null }),
         ).toStrictEqual(state);
         expect(
-          reducer(state, { type: 'setMapOverlays', overlays: [Object.keys(OVERLAYS)[0], 'invalid'] })
+          reducer(state, { type: 'setMapOverlays', overlays: [Object.keys(OVERLAYS)[0], 'invalid'] }),
         ).toStrictEqual(state);
       });
       test('applies overlays and expands all of them if valid', () => {
@@ -1661,8 +1667,8 @@ and so this test must be updated.`;
           { type: 'setMapOverlays', overlays: [overlay0] },
         );
         expect(newState.map.overlays).toStrictEqual(new Set([overlay0]));
-        expect(newState.filters.overlays.expanded).toStrictEqual(new Set([overlay0]));        
-      });        
+        expect(newState.filters.overlays.expanded).toStrictEqual(new Set([overlay0]));
+      });
     });
     describe('setMapRepositionOpenPopupFunc', () => {
       test('sets reposition function to null if passed anything but a function', () => {
@@ -1698,10 +1704,10 @@ and so this test must be updated.`;
     describe('setMapMouseMode', () => {
       test('does nothing if action mouseMode is not valid', () => {
         expect(
-          reducer(state, { type: 'setMapMouseMode', mouseMode: null })
+          reducer(state, { type: 'setMapMouseMode', mouseMode: null }),
         ).toStrictEqual(state);
         expect(
-          reducer(state, { type: 'setMapMouseMode', mouseMode: 'invalid' })
+          reducer(state, { type: 'setMapMouseMode', mouseMode: 'invalid' }),
         ).toStrictEqual(state);
       });
       test('sets mouseMode if valid', () => {
@@ -1726,14 +1732,14 @@ and so this test must be updated.`;
     describe('setLegendFeatureOptionVisibility', () => {
       test('does nothing if not both action feature and action visible are valid', () => {
         expect(
-          reducer(state, { type: 'setLegendFeatureOptionVisibility' })
+          reducer(state, { type: 'setLegendFeatureOptionVisibility' }),
         ).toStrictEqual(state);
         expect(
-          reducer(state, { type: 'setLegendFeatureOptionVisibility', feature: FEATURES.HUTS.KEY })
+          reducer(state, { type: 'setLegendFeatureOptionVisibility', feature: FEATURES.HUTS.KEY }),
         ).toStrictEqual(state);
         expect(
-          reducer(state, { type: 'setLegendFeatureOptionVisibility', feature: FEATURES.HUTS.KEY, visible: 'foo' })
-        ).toStrictEqual(state);        
+          reducer(state, { type: 'setLegendFeatureOptionVisibility', feature: FEATURES.HUTS.KEY, visible: 'foo' }),
+        ).toStrictEqual(state);
       });
       test('sets the feature visibility correctly for valid feature and visibility', () => {
         const { HUTS: { KEY: HUTS } } = FEATURES;
@@ -1749,17 +1755,17 @@ and so this test must be updated.`;
       test('does nothing if action feature is not valid', () => {
         state.filters.features.collapsed = new Set([FEATURES.MEGAPITS.KEY]);
         expect(
-          reducer(state, { type: 'setLegendFeatureOptionCollapsed' })
+          reducer(state, { type: 'setLegendFeatureOptionCollapsed' }),
         ).toStrictEqual(state);
         expect(
-          reducer(state, { type: 'setLegendFeatureOptionCollapsed', feature: 'invalid' })
+          reducer(state, { type: 'setLegendFeatureOptionCollapsed', feature: 'invalid' }),
         ).toStrictEqual(state);
       });
       test('collapses feature if action feature is valid', () => {
         state.filters.features.collapsed = new Set();
         const newState = reducer(
           state,
-          { type: 'setLegendFeatureOptionCollapsed', feature: FEATURES.HUTS.KEY }
+          { type: 'setLegendFeatureOptionCollapsed', feature: FEATURES.HUTS.KEY },
         );
         expect(newState.filters.features.collapsed).toStrictEqual(new Set([FEATURES.HUTS.KEY]));
       });
@@ -1768,17 +1774,17 @@ and so this test must be updated.`;
       test('does nothing if action feature is not valid', () => {
         state.filters.features.collapsed = new Set([FEATURES.HUTS.KEY, FEATURES.MEGAPITS.KEY]);
         expect(
-          reducer(state, { type: 'setLegendFeatureOptionExpanded' })
+          reducer(state, { type: 'setLegendFeatureOptionExpanded' }),
         ).toStrictEqual(state);
         expect(
-          reducer(state, { type: 'setLegendFeatureOptionExpanded', feature: 'invalid' })
+          reducer(state, { type: 'setLegendFeatureOptionExpanded', feature: 'invalid' }),
         ).toStrictEqual(state);
       });
       test('expands feature if action feature is valid', () => {
         state.filters.features.collapsed = new Set([FEATURES.HUTS.KEY, FEATURES.MEGAPITS.KEY]);
         const newState = reducer(
           state,
-          { type: 'setLegendFeatureOptionExpanded', feature: FEATURES.HUTS.KEY }
+          { type: 'setLegendFeatureOptionExpanded', feature: FEATURES.HUTS.KEY },
         );
         expect(newState.filters.features.collapsed).toStrictEqual(new Set([FEATURES.MEGAPITS.KEY]));
       });
@@ -1787,17 +1793,17 @@ and so this test must be updated.`;
       test('does nothing if action overlay is not valid', () => {
         state.filters.features.collapsed = new Set([OVERLAYS.IMPERVIOUS.KEY, OVERLAYS.LAND_COVER.KEY]);
         expect(
-          reducer(state, { type: 'setLegendOverlayOptionCollapsed' })
+          reducer(state, { type: 'setLegendOverlayOptionCollapsed' }),
         ).toStrictEqual(state);
         expect(
-          reducer(state, { type: 'setLegendOverlayOptionCollapsed', overlay: 'invalid' })
+          reducer(state, { type: 'setLegendOverlayOptionCollapsed', overlay: 'invalid' }),
         ).toStrictEqual(state);
       });
       test('collapses overlay if action overlay is valid', () => {
         state.filters.overlays.expanded = new Set([OVERLAYS.IMPERVIOUS.KEY, OVERLAYS.LAND_COVER.KEY]);
         const newState = reducer(
           state,
-          { type: 'setLegendOverlayOptionCollapsed', overlay: OVERLAYS.IMPERVIOUS.KEY }
+          { type: 'setLegendOverlayOptionCollapsed', overlay: OVERLAYS.IMPERVIOUS.KEY },
         );
         expect(newState.filters.overlays.expanded).toStrictEqual(new Set([OVERLAYS.LAND_COVER.KEY]));
       });
@@ -1806,17 +1812,17 @@ and so this test must be updated.`;
       test('does nothing if action overlay is not valid', () => {
         state.filters.features.collapsed = new Set([OVERLAYS.LAND_COVER.KEY]);
         expect(
-          reducer(state, { type: 'setLegendOverlayOptionExpanded' })
+          reducer(state, { type: 'setLegendOverlayOptionExpanded' }),
         ).toStrictEqual(state);
         expect(
-          reducer(state, { type: 'setLegendOverlayOptionExpanded', overlay: 'invalid' })
+          reducer(state, { type: 'setLegendOverlayOptionExpanded', overlay: 'invalid' }),
         ).toStrictEqual(state);
       });
       test('expands overlay if action overlay is valid', () => {
         state.filters.overlays.expanded = new Set([OVERLAYS.LAND_COVER.KEY]);
         const newState = reducer(
           state,
-          { type: 'setLegendOverlayOptionExpanded', overlay: OVERLAYS.IMPERVIOUS.KEY }
+          { type: 'setLegendOverlayOptionExpanded', overlay: OVERLAYS.IMPERVIOUS.KEY },
         );
         expect(newState.filters.overlays.expanded).toStrictEqual(new Set([OVERLAYS.LAND_COVER.KEY, OVERLAYS.IMPERVIOUS.KEY]));
       });
@@ -1880,7 +1886,7 @@ and so this test must be updated.`;
           {
             type: 'setFocusLocationFetchSucceeded',
             data: { type: 'SITE', siteCode: 'ABCD' },
-          }
+          },
         );
         expect(newState.focusLocation.fetch.status).toBe(FETCH_STATUS.SUCCESS);
         expect(newState.focusLocation.fetch.error).toBe(null);
@@ -1900,7 +1906,7 @@ and so this test must be updated.`;
           {
             type: 'setFocusLocationFetchSucceeded',
             data: { type: 'STATE', name: 'CO' },
-          }
+          },
         );
         expect(newState.focusLocation.fetch.status).toBe(FETCH_STATUS.SUCCESS);
         expect(newState.focusLocation.fetch.error).toBe(null);
@@ -1922,7 +1928,7 @@ and so this test must be updated.`;
           {
             type: 'setFocusLocationFetchSucceeded',
             data: { type: 'DOMAIN', name: 'D05' },
-          }
+          },
         );
         expect(newState.focusLocation.fetch.status).toBe(FETCH_STATUS.SUCCESS);
         expect(newState.focusLocation.fetch.error).toBe(null);
@@ -1943,15 +1949,15 @@ and so this test must be updated.`;
       test('does nothing if focusLocation is not fully set', () => {
         state.focusLocation = { current: null, data: null };
         expect(
-          reducer(state, { type: 'returnToFocusLocation' })
+          reducer(state, { type: 'returnToFocusLocation' }),
         ).toStrictEqual(state);
         state.focusLocation = { current: 'foo', data: null };
         expect(
-          reducer(state, { type: 'returnToFocusLocation' })
+          reducer(state, { type: 'returnToFocusLocation' }),
         ).toStrictEqual(state);
         state.focusLocation = { current: null, data: { foo: 'bar' } };
         expect(
-          reducer(state, { type: 'returnToFocusLocation' })
+          reducer(state, { type: 'returnToFocusLocation' }),
         ).toStrictEqual(state);
       });
       test('returns to focus location center and zoom', () => {
@@ -1991,7 +1997,7 @@ and so this test must be updated.`;
     describe('setFeatureDataFetchStarted', () => {
       test('does nothing if action dataSource is invalid', () => {
         expect(
-          reducer(state, { type: 'setFeatureDataFetchStarted' })
+          reducer(state, { type: 'setFeatureDataFetchStarted' }),
         ).toStrictEqual(state);
       });
     });
@@ -2020,11 +2026,11 @@ and so this test must be updated.`;
         const { SITE_LOCATION_HIERARCHIES: { KEY: FEATURE_TYPE } } = FEATURE_TYPES;
         state.overallFetch = { expected: 4, completed: 2, pendingHierarchy: 1 };
         expect(
-          reducer(state, { type: 'setDomainLocationHierarchyFetchStarted' })
+          reducer(state, { type: 'setDomainLocationHierarchyFetchStarted' }),
         ).toStrictEqual(state);
         state.featureDataFetches[DATA_SOURCE][FEATURE_TYPE].D05 = FETCH_STATUS.AWAITING_CALL;
         expect(
-          reducer(state, { type: 'setDomainLocationHierarchyFetchStarted', domainCode: 'D13' })
+          reducer(state, { type: 'setDomainLocationHierarchyFetchStarted', domainCode: 'D13' }),
         ).toStrictEqual(state);
       });
       test('sets existing hierarchy to fetching for a valid domain code', () => {
@@ -2041,14 +2047,14 @@ and so this test must be updated.`;
         const { SITE_LOCATION_HIERARCHIES: { KEY: FEATURE_TYPE } } = FEATURE_TYPES;
         state.overallFetch = { expected: 4, completed: 2, pendingHierarchy: 1 };
         expect(
-          reducer(state, { type: 'setDomainLocationHierarchyFetchSucceeded' })
+          reducer(state, { type: 'setDomainLocationHierarchyFetchSucceeded' }),
         ).toStrictEqual(state);
         state.featureDataFetches[DATA_SOURCE][FEATURE_TYPE].D05 = FETCH_STATUS.FETCHING;
         expect(
-          reducer(state, { type: 'setDomainLocationHierarchyFetchSucceeded', domainCode: 'D13' })
+          reducer(state, { type: 'setDomainLocationHierarchyFetchSucceeded', domainCode: 'D13' }),
         ).toStrictEqual(state);
         expect(
-          reducer(state, { type: 'setDomainLocationHierarchyFetchSucceeded', data: { foo: 'bar' } })
+          reducer(state, { type: 'setDomainLocationHierarchyFetchSucceeded', data: { foo: 'bar' } }),
         ).toStrictEqual(state);
       });
       test('applies data for valid domainCode and data', () => {
@@ -2066,7 +2072,7 @@ and so this test must be updated.`;
         );
         expect(newState.featureDataFetches[DATA_SOURCE][FEATURE_TYPE].D05).toBe(FETCH_STATUS.SUCCESS);
         expect(newState.featureData[FEATURE_TYPE].S1).toBe('foo');
-        expect(newState.featureData[FEATURE_TYPE].S2).toBe('bar');  
+        expect(newState.featureData[FEATURE_TYPE].S2).toBe('bar');
         expect(newState.overallFetch.completed).toBe(1);
         expect(newState.overallFetch.expected).toBe(2);
         expect(newState.overallFetch.pendingHierarchy).toBe(0);
@@ -2078,11 +2084,11 @@ and so this test must be updated.`;
         const { SITE_LOCATION_HIERARCHIES: { KEY: FEATURE_TYPE } } = FEATURE_TYPES;
         state.overallFetch = { expected: 4, completed: 2, pendingHierarchy: 1 };
         expect(
-          reducer(state, { type: 'setDomainLocationHierarchyFetchFailed' })
+          reducer(state, { type: 'setDomainLocationHierarchyFetchFailed' }),
         ).toStrictEqual(state);
         state.featureDataFetches[DATA_SOURCE][FEATURE_TYPE].D05 = FETCH_STATUS.FETCHING;
         expect(
-          reducer(state, { type: 'setDomainLocationHierarchyFetchFailed', domainCode: 'D13' })
+          reducer(state, { type: 'setDomainLocationHierarchyFetchFailed', domainCode: 'D13' }),
         ).toStrictEqual(state);
       });
       test('fails the fetch', () => {
@@ -2121,10 +2127,10 @@ and so this test must be updated.`;
     describe('updateSelectionSet', () => {
       test('does nothing if not provided a selection set', () => {
         expect(
-          reducer(state, { type: 'updateSelectionSet' })
+          reducer(state, { type: 'updateSelectionSet' }),
         ).toStrictEqual(state);
         expect(
-          reducer(state, { type: 'updateSelectionSet', selection: ['foo', 'bar'] })
+          reducer(state, { type: 'updateSelectionSet', selection: ['foo', 'bar'] }),
         ).toStrictEqual(state);
       });
       test('applies the selection set if valid', () => {
@@ -2205,8 +2211,8 @@ and so this test must be updated.`;
     describe('toggleSitesSelectedForState', () => {
       test('does nothing if action stateCode is invalid', () => {
         expect(
-          reducer(state, { type: 'toggleSitesSelectedForState' })
-        ).toStrictEqual(state);        
+          reducer(state, { type: 'toggleSitesSelectedForState' }),
+        ).toStrictEqual(state);
       });
       test('adds valid state sites selection when state is not totally selected', () => {
         state.selection.changed = false;
@@ -2238,8 +2244,8 @@ and so this test must be updated.`;
     describe('toggleSitesSelectedForDomain', () => {
       test('does nothing if action domainCode is invalid', () => {
         expect(
-          reducer(state, { type: 'toggleSitesSelectedForDomain' })
-        ).toStrictEqual(state);        
+          reducer(state, { type: 'toggleSitesSelectedForDomain' }),
+        ).toStrictEqual(state);
       });
       test('adds valid domain sites selection when domain is not totally selected', () => {
         state.selection.changed = false;

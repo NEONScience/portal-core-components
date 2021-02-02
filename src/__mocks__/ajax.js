@@ -16,9 +16,9 @@
 
 import { of, throwError } from 'rxjs';
 
-jest.mock('rxjs/ajax');
-
 import { ajax } from 'rxjs/ajax';
+
+jest.mock('rxjs/ajax');
 
 ajax.mockReturnValue(of({}));
 
@@ -28,29 +28,29 @@ ajax.getJSON.mockReturnValue(of({}));
 export function mockRawAjaxResponse(response = {}) {
   ajax.mockReset();
   ajax.mockReturnValue(of(response));
-};
+}
 
 export function mockRawAjaxError(error = '') {
   ajax.mockReset();
   ajax.mockImplementation(() => throwError(new Error(error)));
-};
+}
 
 export function mockGetJSONAjaxResponse(response = {}) {
   ajax.getJSON.mockReset();
   ajax.getJSON.mockReturnValue(of(response));
-};
+}
 
 export function mockGetJSONAjaxError(error = '') {
   ajax.getJSON.mockReset();
   ajax.getJSON.mockImplementation(() => throwError(new Error(error)));
-};
+}
 
 export function mockAjaxResponse(response = {}) {
   mockRawAjaxResponse(response);
   mockGetJSONAjaxResponse(response);
-};
+}
 
 export function mockAjaxError(error = '') {
   mockRawAjaxError(error);
   mockGetJSONAjaxError(error);
-};
+}

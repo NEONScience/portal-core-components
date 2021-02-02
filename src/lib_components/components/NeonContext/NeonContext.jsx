@@ -79,7 +79,7 @@ const deriveRegionSites = (state) => {
   });
   // Fill in empty sets for any states that had no NEON sites
   Object.keys(state.data.states)
-    .filter(stateCode => !stateSites[stateCode])
+    .filter((stateCode) => !stateSites[stateCode])
     .forEach((stateCode) => { stateSites[stateCode] = new Set(); });
   return {
     ...state,

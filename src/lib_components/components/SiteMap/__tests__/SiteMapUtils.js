@@ -8,7 +8,7 @@ import {
   mapIsAtFocusLocation,
   DEFAULT_STATE,
   FEATURES,
-  SITE_MAP_PROP_TYPES
+  SITE_MAP_PROP_TYPES,
 } from '../SiteMapUtils';
 
 describe('SiteMap - SiteMapUtils', () => {
@@ -103,7 +103,7 @@ describe('SiteMap - SiteMapUtils', () => {
     });
     test('correctly identifies locations in bounds with both map and point extension', () => {
       expect(calculateLocationsInBounds(locations, bounds, true, 10)).toStrictEqual([
-        'A', 'B', 'C', 'D', 'E', 'F', 'H', 'I', 'J',  'K', 'L', 'M',
+        'A', 'B', 'C', 'D', 'E', 'F', 'H', 'I', 'J', 'K', 'L', 'M',
       ]);
     });
     test('correctly handles deeply nested single coord geometries', () => {
@@ -151,55 +151,55 @@ describe('SiteMap - SiteMapUtils', () => {
   describe('getDynamicAspectRatio', () => {
     let windowSpy;
     beforeEach(() => {
-      windowSpy = jest.spyOn(global, "window", "get");
+      windowSpy = jest.spyOn(global, 'window', 'get');
     });
     afterEach(() => {
       windowSpy.mockRestore();
     });
     test('gets appropriate aspect ratios for various window sizes without a buffer', () => {
       [
-        [800, 1, (1/3)],
-        [800, 100, (1/3)],
-        [800, 300, (1/2.5)],
-        [800, 400, (9/16)],
-        [800, 450, (2/3)],
-        [800, 520, (5/7)],
-        [800, 600, (4/5)],
-        [800, 800, (1/1)],
-        [800, 1000, (5/4)],
-        [750, 1000, (7/5)],
-        [700, 1000, (3/2)],
-        [600, 1000, (16/9)],
-        [500, 1000, (2/1)],
-        [100, 1000, (2/1)],
-        [1, 1000, (2/1)],
+        [800, 1, (1 / 3)],
+        [800, 100, (1 / 3)],
+        [800, 300, (1 / 2.5)],
+        [800, 400, (9 / 16)],
+        [800, 450, (2 / 3)],
+        [800, 520, (5 / 7)],
+        [800, 600, (4 / 5)],
+        [800, 800, (1 / 1)],
+        [800, 1000, (5 / 4)],
+        [750, 1000, (7 / 5)],
+        [700, 1000, (3 / 2)],
+        [600, 1000, (16 / 9)],
+        [500, 1000, (2 / 1)],
+        [100, 1000, (2 / 1)],
+        [1, 1000, (2 / 1)],
       ].forEach((test) => {
         windowSpy.mockImplementation(() => (
-          {innerWidth: test[0], innerHeight: test[1] }
+          { innerWidth: test[0], innerHeight: test[1] }
         ));
         expect(getDynamicAspectRatio()).toBe(test[2]);
       });
     });
     test('gets appropriate aspect ratios for various window sizes with a buffer', () => {
       [
-        [800, 1, (1/3)],
-        [800, 400, (1/3)],
-        [800, 600, (1/2.5)],
-        [800, 700, (9/16)],
-        [800, 750, (2/3)],
-        [800, 820, (5/7)],
-        [800, 900, (4/5)],
-        [800, 1100, (1/1)],
-        [800, 1300, (5/4)],
-        [750, 1300, (7/5)],
-        [700, 1300, (3/2)],
-        [600, 1300, (16/9)],
-        [500, 1300, (2/1)],
-        [100, 1300, (2/1)],
-        [1, 1300, (2/1)],
+        [800, 1, (1 / 3)],
+        [800, 400, (1 / 3)],
+        [800, 600, (1 / 2.5)],
+        [800, 700, (9 / 16)],
+        [800, 750, (2 / 3)],
+        [800, 820, (5 / 7)],
+        [800, 900, (4 / 5)],
+        [800, 1100, (1 / 1)],
+        [800, 1300, (5 / 4)],
+        [750, 1300, (7 / 5)],
+        [700, 1300, (3 / 2)],
+        [600, 1300, (16 / 9)],
+        [500, 1300, (2 / 1)],
+        [100, 1300, (2 / 1)],
+        [1, 1300, (2 / 1)],
       ].forEach((test) => {
         windowSpy.mockImplementation(() => (
-          {innerWidth: test[0], innerHeight: test[1] }
+          { innerWidth: test[0], innerHeight: test[1] }
         ));
         expect(getDynamicAspectRatio(300)).toBe(test[2]);
       });
@@ -256,10 +256,18 @@ describe('SiteMap - SiteMapUtils', () => {
       };
       const neonContextData = {
         sites: {
-          ABBY: { type: 'RELOCATABLE', terrain: 'TERRESTRIAL', stateCode: 'WA', domainCode: 'D16' },
-          CLBJ: { type: 'CORE', terrain: 'TERRESTRIAL', stateCode: 'TX', domainCode: 'D11' },
-          SUGG: { type: 'CORE', terrain: 'AQUATIC', stateCode: 'FL', domainCode: 'D03' },
-          WLOU: { type: 'RELOCATABLE', terrain: 'AQUATIC', stateCode: 'CO', domainCode: 'D13' },
+          ABBY: {
+            type: 'RELOCATABLE', terrain: 'TERRESTRIAL', stateCode: 'WA', domainCode: 'D16',
+          },
+          CLBJ: {
+            type: 'CORE', terrain: 'TERRESTRIAL', stateCode: 'TX', domainCode: 'D11',
+          },
+          SUGG: {
+            type: 'CORE', terrain: 'AQUATIC', stateCode: 'FL', domainCode: 'D03',
+          },
+          WLOU: {
+            type: 'RELOCATABLE', terrain: 'AQUATIC', stateCode: 'CO', domainCode: 'D13',
+          },
         },
         states: {
           CO: { name: 'Colorado' },
@@ -273,8 +281,12 @@ describe('SiteMap - SiteMapUtils', () => {
           D13: { name: 'Southern Rockies and Colorado Plateau' },
           D16: { name: 'Pacific Northwest' },
         },
-        stateSites: { CO: ['WLOU'], FL: ['SUGG'], TX: ['CLBJ'], WA: ['ABBY'] },
-        domainSites: { D03: ['SUGG'], D11: ['CLBJ'], D13: ['WLOU'], D16: ['ABBY'] },
+        stateSites: {
+          CO: ['WLOU'], FL: ['SUGG'], TX: ['CLBJ'], WA: ['ABBY'],
+        },
+        domainSites: {
+          D03: ['SUGG'], D11: ['CLBJ'], D13: ['WLOU'], D16: ['ABBY'],
+        },
       };
       expect(hydrateNeonContextData(initialState, neonContextData)).toStrictEqual({
         neonContextHydrated: true,
@@ -322,7 +334,7 @@ describe('SiteMap - SiteMapUtils', () => {
         focusLocation: {
           current: 'foo',
           map: { zoom: 4, center: [-68.3, 15] },
-        }
+        },
       })).toBe(true);
     });
     test('correctly identifies when map center is not at focus location', () => {
@@ -331,14 +343,14 @@ describe('SiteMap - SiteMapUtils', () => {
         focusLocation: {
           current: 'foo',
           map: { zoom: 4, center: [-68.3, 15] },
-        }
+        },
       })).toBe(false);
       expect(mapIsAtFocusLocation({
         map: { zoom: 4, center: [-69.3, 15] },
         focusLocation: {
           current: 'foo',
           map: { zoom: 4, center: [-68.3, 15] },
-        }
+        },
       })).toBe(false);
     });
     test('gracefully returns false for any missing focus location or malformed state', () => {
@@ -352,15 +364,15 @@ describe('SiteMap - SiteMapUtils', () => {
         focusLocation: {
           current: null,
           map: { zoom: 4, center: [-68.3, 15] },
-        }
+        },
       })).toBe(false);
       expect(mapIsAtFocusLocation({
         map: { zoom: 4, center: [-68.3, 15] },
         focusLocation: {
           current: 'foo',
           map: { center: [-68.3, 15] },
-        }
-      })).toBe(false);      
+        },
+      })).toBe(false);
     });
   });
 
@@ -458,7 +470,7 @@ describe('SiteMap - SiteMapUtils', () => {
           16: {},
           17: {},
         },
-      });        
-    });      
+      });
+    });
   });
 });

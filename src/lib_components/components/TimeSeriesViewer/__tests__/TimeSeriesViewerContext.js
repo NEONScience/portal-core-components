@@ -1,4 +1,4 @@
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook } from '@testing-library/react-hooks';
 
 import cloneDeep from 'lodash/cloneDeep';
 
@@ -268,7 +268,7 @@ describe('TimeSeriesViewerContext', () => {
           variables: {
             status: FETCH_STATUS.AWAITING_CALL,
             error: null,
-            url: 'https://foo/bar/var'
+            url: 'https://foo/bar/var',
           },
         },
         positions: {
@@ -545,7 +545,7 @@ HOR.VER,name,description,start,end,xOffset,yOffset,zOffset
             productCode: 'foo',
             productName: 'bar',
             siteCodes: [
-              { siteCode: 'A', availableMonths: ['2001-01', '2001-02'], otherThings: null, },
+              { siteCode: 'A', availableMonths: ['2001-01', '2001-02'], otherThings: null },
               { siteCode: 'B', availableMonths: ['2001-01', '2001-02'] },
             ],
             additionalStuff: 'whatever',
@@ -587,19 +587,33 @@ HOR.VER,name,description,start,end,xOffset,yOffset,zOffset
         },
       };
       state.variables = {
-        foo: { canBeDefault: false, isDateTime: false, downloadPkg: 'basic', units: 'foos' },
-        endDate: { canBeDefault: false, isDateTime: true, downloadPkg: 'basic', units: 'NA' },
-        zux: { canBeDefault: false, isDateTime: false, downloadPkg: 'expanded', units: 'zuxs' },
-        bar: { canBeDefault: true, isDateTime: false, downloadPkg: 'basic', units: 'bars' },
-        startDate: { canBeDefault: false, isDateTime: true, downloadPkg: 'basic', units: 'NA' },
-        startDateTime: { canBeDefault: false, isDateTime: true, downloadPkg: 'basic', units: 'NA' },
-        endDateTime: { canBeDefault: false, isDateTime: true, downloadPkg: 'basic', units: 'NA' },
+        foo: {
+          canBeDefault: false, isDateTime: false, downloadPkg: 'basic', units: 'foos',
+        },
+        endDate: {
+          canBeDefault: false, isDateTime: true, downloadPkg: 'basic', units: 'NA',
+        },
+        zux: {
+          canBeDefault: false, isDateTime: false, downloadPkg: 'expanded', units: 'zuxs',
+        },
+        bar: {
+          canBeDefault: true, isDateTime: false, downloadPkg: 'basic', units: 'bars',
+        },
+        startDate: {
+          canBeDefault: false, isDateTime: true, downloadPkg: 'basic', units: 'NA',
+        },
+        startDateTime: {
+          canBeDefault: false, isDateTime: true, downloadPkg: 'basic', units: 'NA',
+        },
+        endDateTime: {
+          canBeDefault: false, isDateTime: true, downloadPkg: 'basic', units: 'NA',
+        },
       };
     });
     test('does nothing if there are no product sites in state', () => {
       state.product.sites = {};
       expect(
-        applyDefaultsToSelection(state)
+        applyDefaultsToSelection(state),
       ).toStrictEqual(state.selection);
     });
     test('applies site, date range, and position if none are defined in selection and no variables yet', () => {
@@ -655,14 +669,14 @@ HOR.VER,name,description,start,end,xOffset,yOffset,zOffset
                 range: [7, 23],
                 count: 6,
                 sum: 84,
-                variance: 33.2
+                variance: 33.2,
               },
               startDateTime: {
                 data: [1, 2, 3, 4, 5, 6],
                 range: [null, null],
                 count: 0,
                 sum: 0,
-                variance: 0
+                variance: 0,
               },
             },
           },

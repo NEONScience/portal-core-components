@@ -1,4 +1,4 @@
-import parseLocationsArray from '../../workers/parseLocationsArray';
+import parseLocationsArray from '../parseLocationsArray';
 
 const restInput = [
   {
@@ -85,7 +85,7 @@ const restInput = [
       {
         locationPropertyName: 'Value for UTM Zone',
         locationPropertyValue: '17N',
-      }
+      },
     ],
     locationParent: 'OSBS',
     locationParentUrl: 'https://int-data.neonscience.org/api/v0/locations/OSBS',
@@ -96,7 +96,7 @@ const restInput = [
       'LEVEL100123',
       'LEVEL100128',
       'LEVEL100124',
-      'LEVEL100126'
+      'LEVEL100126',
     ],
     locationChildrenUrls: [
       'https://int-data.neonscience.org/api/v0/locations/LEVEL100125',
@@ -105,7 +105,7 @@ const restInput = [
       'https://int-data.neonscience.org/api/v0/locations/LEVEL100123',
       'https://int-data.neonscience.org/api/v0/locations/LEVEL100128',
       'https://int-data.neonscience.org/api/v0/locations/LEVEL100124',
-      'https://int-data.neonscience.org/api/v0/locations/LEVEL100126'
+      'https://int-data.neonscience.org/api/v0/locations/LEVEL100126',
     ],
   },
 ];
@@ -124,13 +124,13 @@ const expectedRestOutput = {
       'LEVEL100123',
       'LEVEL100128',
       'LEVEL100124',
-      'LEVEL100126'
+      'LEVEL100126',
     ],
     latitude: 29.689289,
     longitude: -81.993431,
     elevation: 46.0339,
   },
-}
+};
 
 const graphqlInput = [
   {
@@ -271,7 +271,7 @@ describe('parseLocationsArray worker', () => {
         expect(actualOutput).toStrictEqual({});
         done();
       } catch (error) { done(error); }
-    })
+    });
   });
   test('generates an empty object from an empty array input', (done) => {
     parseLocationsArray([]).then((actualOutput) => {
@@ -279,7 +279,7 @@ describe('parseLocationsArray worker', () => {
         expect(actualOutput).toStrictEqual({});
         done();
       } catch (error) { done(error); }
-    })
+    });
   });
   test('ignores invalid input objects', (done) => {
     const input = [
@@ -292,7 +292,7 @@ describe('parseLocationsArray worker', () => {
         expect(actualOutput).toStrictEqual({});
         done();
       } catch (error) { done(error); }
-    })
+    });
   });
   test('generates expected output from REST data', (done) => {
     parseLocationsArray(restInput).then((actualOutput) => {
@@ -300,7 +300,7 @@ describe('parseLocationsArray worker', () => {
         expect(actualOutput).toStrictEqual(expectedRestOutput);
         done();
       } catch (error) { done(error); }
-    })
+    });
   });
   test('generates expected output from GraphQL data', (done) => {
     parseLocationsArray(graphqlInput).then((actualOutput) => {
@@ -308,7 +308,7 @@ describe('parseLocationsArray worker', () => {
         expect(actualOutput).toStrictEqual(expectedGraphqlOutput);
         done();
       } catch (error) { done(error); }
-    })
+    });
   });
   test('generates expected output when locationType is SOIL_PLOT', (done) => {
     const input = [
@@ -337,12 +337,12 @@ describe('parseLocationsArray worker', () => {
       locationPolygon: {
         coordinates: [
           { latitude: 38.248202, longitude: -109.388458, elevation: 1798.21 },
-          { latitude: 38.248216, longitude:-109.388404, elevation: 1798.37 },
-          { latitude:38.248259, longitude:-109.388422, elevation: 1798.32 },
-          { latitude:38.248244, longitude:-109.388476, elevation:1798.2 },
-          { latitude:38.248202, longitude:-109.388458, elevation:1798.21 },
+          { latitude: 38.248216, longitude: -109.388404, elevation: 1798.37 },
+          { latitude: 38.248259, longitude: -109.388422, elevation: 1798.32 },
+          { latitude: 38.248244, longitude: -109.388476, elevation: 1798.2 },
+          { latitude: 38.248202, longitude: -109.388458, elevation: 1798.21 },
         ],
-      },      
+      },
     }];
     const expectedOutput = {
       Foo: {
@@ -350,11 +350,11 @@ describe('parseLocationsArray worker', () => {
         elevation: 1798.26,
         geometry: {
           coordinates: [
-            [ 38.248202, -109.388458 ],              
-            [ 38.248216, -109.388404 ],
-            [ 38.248259, -109.388422 ],
-            [ 38.248244, -109.388476 ],
-            [ 38.248202, -109.388458 ],
+            [38.248202, -109.388458],
+            [38.248216, -109.388404],
+            [38.248259, -109.388422],
+            [38.248244, -109.388476],
+            [38.248202, -109.388458],
           ],
         },
         latitude: 38.2482246,
@@ -371,5 +371,5 @@ describe('parseLocationsArray worker', () => {
         done();
       } catch (error) { done(error); }
     });
-  });  
+  });
 });

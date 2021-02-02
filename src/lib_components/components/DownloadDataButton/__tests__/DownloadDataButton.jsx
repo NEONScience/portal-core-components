@@ -1,13 +1,13 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import { useDownloadDataState, DEFAULT_STATE } from '../../DownloadDataContext/DownloadDataContext';
+
+import DownloadDataButton from '../DownloadDataButton';
 
 jest.mock('../../DownloadDataContext/DownloadDataContext', () => ({
   ...(jest.requireActual('../../DownloadDataContext/DownloadDataContext').default),
   useDownloadDataState: jest.fn(),
 }));
-import { useDownloadDataState, DEFAULT_STATE } from '../../DownloadDataContext/DownloadDataContext';
-
-import DownloadDataButton from '../DownloadDataButton';
 
 describe('DownloadDataButton', () => {
   beforeEach(() => {

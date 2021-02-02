@@ -1,12 +1,13 @@
 import { of } from 'rxjs';
+import { ajax } from 'rxjs/ajax';
+
+import NeonApi, { getTestableItems } from '../NeonApi';
+import NeonEnvironment from '../../NeonEnvironment/NeonEnvironment';
 
 jest.mock('rxjs/ajax', () => ({
   ajax: jest.fn().mockImplementation((arg1) => arg1),
 }));
-import { ajax } from 'rxjs/ajax';
 ajax.getJSON = jest.fn().mockImplementation((arg1, arg2) => [arg1, arg2]);
-
-import NeonApi, { getTestableItems } from '../NeonApi';
 
 // Mock some NeonEnvironment functions
 jest.mock('../../NeonEnvironment/NeonEnvironment', () => ({
@@ -16,7 +17,6 @@ jest.mock('../../NeonEnvironment/NeonEnvironment', () => ({
     getApiToken: jest.fn(),
   },
 }));
-import NeonEnvironment from '../../NeonEnvironment/NeonEnvironment';
 
 const {
   getApiTokenHeader,
@@ -34,7 +34,7 @@ describe('NeonApi', () => {
     test('returns only token headers in object if passed nothing', () => {
       NeonEnvironment.getApiTokenHeader.mockReturnValue('x-mock-token-header');
       NeonEnvironment.getApiToken.mockReturnValue('mockToken123');
-      const expectedHeaders = { 'x-mock-token-header': 'mockToken123', };
+      const expectedHeaders = { 'x-mock-token-header': 'mockToken123' };
       expect(getApiTokenHeader()).toStrictEqual(expectedHeaders);
     });
     test('does not modify headers if not both token header and token are defined', () => {
@@ -50,7 +50,7 @@ describe('NeonApi', () => {
       expect(getApiTokenHeader(headers)).toStrictEqual(headers);
     });
     test('does not apply token header if already present', () => {
-      const headers = { 'x-foo': 'bar', 'x-mock-token-header': 'otherMockToken123', };
+      const headers = { 'x-foo': 'bar', 'x-mock-token-header': 'otherMockToken123' };
       NeonEnvironment.getApiTokenHeader.mockReturnValue('x-mock-token-header');
       NeonEnvironment.getApiToken.mockReturnValue('mockToken123');
       expect(getApiTokenHeader(headers)).toStrictEqual(headers);
@@ -83,7 +83,7 @@ describe('NeonApi', () => {
       expect(res[0]).toBe('test');
       expect(res[1]).toStrictEqual({
         'x-foo': 'bar',
-        'x-mock-token-header': 'mockToken123',        
+        'x-mock-token-header': 'mockToken123',
       });
     });
     test('returns ajax.getJSON observable without token if url is valid but includeToken is false', () => {
@@ -92,7 +92,7 @@ describe('NeonApi', () => {
       const res = getJsonObservable('test', { 'x-foo': 'bar' }, false);
       expect(res[0]).toBe('test');
       expect(res[1]).toStrictEqual({
-        'x-foo': 'bar',    
+        'x-foo': 'bar',
       });
     });
   });
@@ -117,7 +117,7 @@ describe('NeonApi', () => {
         responseType: 'json',
         headers: {
           'x-foo': 'bar',
-          'x-mock-token-header': 'mockToken123', 
+          'x-mock-token-header': 'mockToken123',
           'Content-Type': 'application/json',
         },
         body: '{"foo":"bar"}',

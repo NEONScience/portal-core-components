@@ -36,24 +36,24 @@ const dataProductsReleases = [
   {
     release: 'TEST-TAG-1',
     generationDate: '2021-01-15T18:27:10Z',
-    dataProducts: [ {}, {}, {} ],
+    dataProducts: [{}, {}, {}],
   },
   {
     release: 'TEST-TAG-2',
     generationDate: '2021-01-18T18:27:10Z',
-    dataProducts: [ {}, {} ],
+    dataProducts: [{}, {}],
   },
 ];
 
 const dataProductCodesReleases = [
   {
     release: 'TEST-TAG-1',
-    dataProductCodes: [ 'A', 'B', 'C' ],
+    dataProductCodes: ['A', 'B', 'C'],
   },
   {
     release: 'TEST-TAG-2',
     generationDate: '2021-01-15T18:27:10Z',
-    dataProductCodes: [ 'A', 'C' ],
+    dataProductCodes: ['A', 'C'],
     productDoi: {
       generationDate: '2021-01-18T15:27:10Z',
       url: 'http://data.cite/bar',
@@ -103,7 +103,7 @@ describe('ReleaseFilter', () => {
   });
   test('Renders with custom layouts', () => {
     const tree = renderer
-          .create(<ReleaseFilter horizontal maxWidth={300} />)
+      .create(<ReleaseFilter horizontal maxWidth={300} />)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -127,7 +127,7 @@ describe('ReleaseFilter', () => {
           nullReleaseProductCount={5}
           onChange={() => {}}
           showProductCount
-        />
+        />,
       ).toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -138,7 +138,7 @@ describe('ReleaseFilter', () => {
           releases={dataProductCodesReleases}
           excludeNullRelease
           showProductCount
-        />
+        />,
       ).toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -151,7 +151,7 @@ describe('ReleaseFilter', () => {
           showProductCount
           showGenerationDate
           showDoi
-        />
+        />,
       ).toJSON();
     expect(tree).toMatchSnapshot();
   });
