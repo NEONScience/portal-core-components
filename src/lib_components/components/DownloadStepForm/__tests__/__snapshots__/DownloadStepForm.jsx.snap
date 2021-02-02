@@ -1,0 +1,749 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DownloadStepForm Step documentation renders correctly 1`] = `
+<div
+  className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-flex-start"
+  data-selenium="download-data-dialog.step-form.documentation"
+>
+  <div
+    className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-6"
+  >
+    <fieldset
+      className="MuiFormControl-root"
+    >
+      <div
+        aria-label="Documentation"
+        className="MuiFormGroup-root"
+        role="radiogroup"
+      >
+        <label
+          className="MuiFormControlLabel-root makeStyles-radio-8"
+        >
+          <span
+            aria-disabled={false}
+            className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-18 MuiRadio-root MuiRadio-colorSecondary PrivateSwitchBase-checked-19 Mui-checked MuiIconButton-colorSecondary"
+            onBlur={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex={null}
+          >
+            <span
+              className="MuiIconButton-label"
+            >
+              <input
+                checked={true}
+                className="PrivateSwitchBase-input-21"
+                disabled={false}
+                name="documentation"
+                onChange={[Function]}
+                type="radio"
+                value="include"
+              />
+              <div
+                className="PrivateRadioButtonIcon-root-22 PrivateRadioButtonIcon-checked-24"
+              >
+                <svg
+                  aria-hidden={true}
+                  className="MuiSvgIcon-root"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+                  />
+                </svg>
+                <svg
+                  aria-hidden={true}
+                  className="MuiSvgIcon-root PrivateRadioButtonIcon-layer-23"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M8.465 8.465C9.37 7.56 10.62 7 12 7C14.76 7 17 9.24 17 12C17 13.38 16.44 14.63 15.535 15.535C14.63 16.44 13.38 17 12 17C9.24 17 7 14.76 7 12C7 10.62 7.56 9.37 8.465 8.465Z"
+                  />
+                </svg>
+              </div>
+            </span>
+          </span>
+          <span
+            className="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+          >
+            <div
+              className="makeStyles-radioLabel-9"
+            >
+              <h6
+                className="MuiTypography-root MuiTypography-h6"
+              >
+                Include
+              </h6>
+              <p
+                className="MuiTypography-root MuiTypography-body2"
+              >
+                Include relevant documents for this Data Product
+              </p>
+            </div>
+          </span>
+        </label>
+        <label
+          className="MuiFormControlLabel-root makeStyles-radio-8"
+        >
+          <span
+            aria-disabled={false}
+            className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-18 MuiRadio-root MuiRadio-colorSecondary MuiIconButton-colorSecondary"
+            onBlur={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex={null}
+          >
+            <span
+              className="MuiIconButton-label"
+            >
+              <input
+                checked={false}
+                className="PrivateSwitchBase-input-21"
+                disabled={false}
+                name="documentation"
+                onChange={[Function]}
+                type="radio"
+                value="exclude"
+              />
+              <div
+                className="PrivateRadioButtonIcon-root-22"
+              >
+                <svg
+                  aria-hidden={true}
+                  className="MuiSvgIcon-root"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+                  />
+                </svg>
+                <svg
+                  aria-hidden={true}
+                  className="MuiSvgIcon-root PrivateRadioButtonIcon-layer-23"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M8.465 8.465C9.37 7.56 10.62 7 12 7C14.76 7 17 9.24 17 12C17 13.38 16.44 14.63 15.535 15.535C14.63 16.44 13.38 17 12 17C9.24 17 7 14.76 7 12C7 10.62 7.56 9.37 8.465 8.465Z"
+                  />
+                </svg>
+              </div>
+            </span>
+          </span>
+          <span
+            className="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+          >
+            <div
+              className="makeStyles-radioLabel-9"
+            >
+              <h6
+                className="MuiTypography-root MuiTypography-h6"
+              >
+                Exclude
+              </h6>
+              <p
+                className="MuiTypography-root MuiTypography-body2"
+              >
+                Data only, no relevant documents for this Data Product
+              </p>
+            </div>
+          </span>
+        </label>
+      </div>
+    </fieldset>
+  </div>
+  <div
+    className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-6"
+  >
+    <div
+      className="MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded"
+      style={
+        Object {
+          "marginTop": 12,
+        }
+      }
+    >
+      <div
+        className="MuiCardContent-root makeStyles-startFlex-11"
+      >
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root makeStyles-calloutIcon-5 MuiSvgIcon-fontSizeLarge"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
+          />
+        </svg>
+        <p
+          className="MuiTypography-root MuiTypography-body1"
+        >
+          EML files for this Data Product are included in all downloads. Learn more about EML files in the 
+          <a
+            className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+            data-gtm="download-data-dialog.neon-faq-link"
+            href="http://data.neonscience.org/faq"
+            onBlur={[Function]}
+            onFocus={[Function]}
+            target="_blank"
+          >
+            NEON FAQ
+          </a>
+           and at 
+          <a
+            className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+            data-gtm-external-host="KNB"
+            data-gtm-product-code="n/a"
+            href="https://eml.ecoinformatics.org"
+            onBlur={[Function]}
+            onFocus={[Function]}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            KNB
+          </a>
+          .
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DownloadStepForm Step externalExclusive renders correctly 1`] = `null`;
+
+exports[`DownloadStepForm Step packageType renders correctly 1`] = `
+<fieldset
+  className="MuiFormControl-root"
+  data-selenium="download-data-dialog.step-form.package-type"
+>
+  <div
+    aria-label="Package Type"
+    className="MuiFormGroup-root"
+    role="radiogroup"
+  >
+    <label
+      className="MuiFormControlLabel-root makeStyles-radio-8"
+    >
+      <span
+        aria-disabled={false}
+        className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-18 MuiRadio-root MuiRadio-colorSecondary MuiIconButton-colorSecondary"
+        onBlur={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        tabIndex={null}
+      >
+        <span
+          className="MuiIconButton-label"
+        >
+          <input
+            checked={false}
+            className="PrivateSwitchBase-input-21"
+            disabled={false}
+            name="package-type"
+            onChange={[Function]}
+            type="radio"
+            value="basic"
+          />
+          <div
+            className="PrivateRadioButtonIcon-root-22"
+          >
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+              />
+            </svg>
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root PrivateRadioButtonIcon-layer-23"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M8.465 8.465C9.37 7.56 10.62 7 12 7C14.76 7 17 9.24 17 12C17 13.38 16.44 14.63 15.535 15.535C14.63 16.44 13.38 17 12 17C9.24 17 7 14.76 7 12C7 10.62 7.56 9.37 8.465 8.465Z"
+              />
+            </svg>
+          </div>
+        </span>
+      </span>
+      <span
+        className="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+      >
+        <div
+          className="makeStyles-radioLabel-9"
+        >
+          <h6
+            className="MuiTypography-root MuiTypography-h6"
+          >
+            Basic
+          </h6>
+          <p
+            className="MuiTypography-root MuiTypography-body2"
+          >
+            Includes the data product, summary statistics, expanded uncertainty, and final quality flag
+          </p>
+        </div>
+      </span>
+    </label>
+    <label
+      className="MuiFormControlLabel-root makeStyles-radio-8"
+    >
+      <span
+        aria-disabled={false}
+        className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-18 MuiRadio-root MuiRadio-colorSecondary MuiIconButton-colorSecondary"
+        onBlur={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        tabIndex={null}
+      >
+        <span
+          className="MuiIconButton-label"
+        >
+          <input
+            checked={false}
+            className="PrivateSwitchBase-input-21"
+            disabled={false}
+            name="package-type"
+            onChange={[Function]}
+            type="radio"
+            value="expanded"
+          />
+          <div
+            className="PrivateRadioButtonIcon-root-22"
+          >
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+              />
+            </svg>
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root PrivateRadioButtonIcon-layer-23"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M8.465 8.465C9.37 7.56 10.62 7 12 7C14.76 7 17 9.24 17 12C17 13.38 16.44 14.63 15.535 15.535C14.63 16.44 13.38 17 12 17C9.24 17 7 14.76 7 12C7 10.62 7.56 9.37 8.465 8.465Z"
+              />
+            </svg>
+          </div>
+        </span>
+      </span>
+      <span
+        className="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+      >
+        <div
+          className="makeStyles-radioLabel-9"
+        >
+          <h6
+            className="MuiTypography-root MuiTypography-h6"
+          >
+            Expanded
+          </h6>
+          <p
+            className="MuiTypography-root MuiTypography-body2"
+          >
+            Includes the basic package information plus quality metrics for all of the quality assessment and quality control analysis
+          </p>
+        </div>
+      </span>
+    </label>
+  </div>
+</fieldset>
+`;
+
+exports[`DownloadStepForm Step policies renders correctly 1`] = `
+<div
+  data-selenium="download-data-dialog.step-form.policies"
+>
+  <h6
+    className="MuiTypography-root MuiTypography-subtitle1 MuiTypography-gutterBottom"
+  >
+    In order to proceed to download NEON data you must agree to the 
+    <a
+      className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+      data-gtm="download-data-dialog.policies-link"
+      href="https://www.neonscience.org/data/about-data/data-policies"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      target="_blank"
+    >
+      Data Usage and Citation Policies
+    </a>
+    .
+  </h6>
+  <label
+    className="MuiFormControlLabel-root makeStyles-formControlBold-3"
+  >
+    <span
+      aria-disabled={false}
+      className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-18 MuiCheckbox-root MuiCheckbox-colorPrimary MuiIconButton-colorPrimary"
+      onBlur={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={null}
+    >
+      <span
+        className="MuiIconButton-label"
+      >
+        <input
+          checked={false}
+          className="PrivateSwitchBase-input-21"
+          data-indeterminate={false}
+          disabled={false}
+          onChange={[Function]}
+          type="checkbox"
+          value="policies"
+        />
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+          />
+        </svg>
+      </span>
+    </span>
+    <span
+      className="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+    >
+      I agree to the NEON Data Usage and Citation Policies.
+    </span>
+  </label>
+</div>
+`;
+
+exports[`DownloadStepForm Step s3Files renders correctly 1`] = `
+<h6
+  className="MuiTypography-root MuiTypography-subtitle1"
+  style={
+    Object {
+      "marginTop": 24,
+    }
+  }
+>
+  Select sites and date range in order to generate a list of files to choose from.
+</h6>
+`;
+
+exports[`DownloadStepForm Step sitesAndDateRange renders correctly 1`] = `
+<div
+  className="MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded"
+  style={
+    Object {
+      "width": "100%",
+    }
+  }
+>
+  <div
+    className="MuiCardContent-root"
+    style={
+      Object {
+        "alignItems": "center",
+        "display": "flex",
+        "flexDirection": "column",
+        "justifyContent": "center",
+        "padding": "24px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom"
+    >
+      Loading Sites...
+    </h6>
+    <div
+      className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+      role="progressbar"
+      style={
+        Object {
+          "height": 40,
+          "width": 40,
+        }
+      }
+    >
+      <svg
+        className="MuiCircularProgress-svg"
+        viewBox="22 22 44 44"
+      >
+        <circle
+          className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+          cx={44}
+          cy={44}
+          fill="none"
+          r={20.2}
+          strokeWidth={3.6}
+          style={Object {}}
+        />
+      </svg>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DownloadStepForm Step summary renders correctly 1`] = `
+<div
+  className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-flex-start"
+>
+  <div
+    className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-6"
+  >
+    <div
+      data-selenium="download-data-dialog.step-form.summary"
+    >
+      <div
+        className="makeStyles-stepSummary-12"
+      />
+    </div>
+  </div>
+  <div
+    className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-6"
+  >
+    <div
+      className="MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded"
+      data-selenium="download-data-dialog.step-form.summary.download-and-explore"
+      style={
+        Object {
+          "margin": "4px 0px 24px 0px",
+        }
+      }
+    >
+      <div
+        className="MuiCardContent-root makeStyles-startFlex-11"
+      >
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root makeStyles-calloutIcon-5 MuiSvgIcon-fontSizeLarge"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M12 10.9c-.61 0-1.1.49-1.1 1.1s.49 1.1 1.1 1.1c.61 0 1.1-.49 1.1-1.1s-.49-1.1-1.1-1.1zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm2.19 12.19L6 18l3.81-8.19L18 6l-3.81 8.19z"
+          />
+        </svg>
+        <h6
+          className="MuiTypography-root MuiTypography-subtitle2"
+        >
+          Tip: Check out our 
+          <a
+            className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+            data-gtm="download-data-dialog.download-and-explore-link"
+            href="https://www.neonscience.org/download-explore-neon-data"
+            onBlur={[Function]}
+            onFocus={[Function]}
+            target="_blank"
+          >
+            Download and Explore NEON Data
+          </a>
+           tutorial. This tutorial will explain how our neonUtilities package can be used to unzip and join data tables with just a few lines of code.
+        </h6>
+      </div>
+    </div>
+    <div
+      className="MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded"
+      data-selenium="download-data-dialog.step-form.summary.file-naming"
+      style={
+        Object {
+          "margin": "4px 0px 24px 0px",
+        }
+      }
+    >
+      <div
+        className="MuiCardContent-root makeStyles-startFlex-11"
+      >
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root makeStyles-calloutIcon-5 MuiSvgIcon-fontSizeLarge"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"
+          />
+        </svg>
+        <h6
+          className="MuiTypography-root MuiTypography-subtitle2"
+        >
+          Files in this download will follow 
+          <a
+            className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+            data-gtm="download-data-dialog.file-naming-conventions-link"
+            href="https://data.neonscience.org/file-naming-conventions"
+            onBlur={[Function]}
+            onFocus={[Function]}
+            target="_blank"
+          >
+            NEON File Naming Conventions
+          </a>
+          .
+        </h6>
+      </div>
+    </div>
+    <div
+      className="MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded"
+      data-selenium="download-data-dialog.step-form.summary.citation"
+      style={
+        Object {
+          "margin": "4px 0px 24px 0px",
+        }
+      }
+    >
+      <div
+        className="MuiCardContent-root"
+      >
+        <div
+          className="makeStyles-startFlex-11"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root makeStyles-calloutIcon-5 MuiSvgIcon-fontSizeLarge"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"
+            />
+          </svg>
+          <h6
+            className="MuiTypography-root MuiTypography-subtitle2"
+            style={
+              Object {
+                "flexGrow": 1,
+              }
+            }
+          >
+            Please use this citation in your publications. See 
+            <a
+              className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+              data-gtm="download-data-dialog.policies-link"
+              href="https://www.neonscience.org/data/about-data/data-policies"
+              onBlur={[Function]}
+              onFocus={[Function]}
+              target="_blank"
+            >
+              Data Usage and Citation Policies
+            </a>
+             for more info.
+          </h6>
+          <button
+            className="MuiButtonBase-root MuiButton-root MuiButton-outlined makeStyles-copyButton-1 MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex={0}
+            type="button"
+          >
+            <span
+              className="MuiButton-label"
+            >
+              <span
+                className="MuiButton-startIcon MuiButton-iconSizeSmall"
+              >
+                <svg
+                  aria-hidden={true}
+                  className="MuiSvgIcon-root"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"
+                  />
+                </svg>
+              </span>
+              Copy
+            </span>
+            <span
+              className="MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <hr
+          className="MuiDivider-root"
+          style={
+            Object {
+              "margin": "12px 0px",
+            }
+          }
+        />
+        <p
+          className="MuiTypography-root MuiTypography-body2"
+          style={
+            Object {
+              "backgroundColor": "rgba(255, 255, 255, 0.01)",
+            }
+          }
+        >
+          National Ecological Observatory Network. 2021. Data Product undefined, undefined. Provisional data downloaded from http://data.neonscience.org on February 2, 2021. Battelle, Boulder, CO, USA NEON. 2021.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
