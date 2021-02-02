@@ -360,7 +360,7 @@ const updateMapTileWithZoom = (state) => {
 // Increment the completed count for overall fetch and, if completed and expected are now equal,
 // reset both (so that subsequent batches of fetches can give an accurate progress metric).
 const completeOverallFetch = (state) => {
-  const newState = { ... state };
+  const newState = { ...state };
   newState.overallFetch.completed += 1;
   if (newState.overallFetch.expected === newState.overallFetch.completed) {
     newState.overallFetch.expected = 0;
