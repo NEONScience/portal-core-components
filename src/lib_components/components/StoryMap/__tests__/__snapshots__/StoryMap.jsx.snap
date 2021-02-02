@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StoryMap Renders correctly with a custom title 1`] = `
+<div
+  data-selenium="story-map-container"
+  style={
+    Object {
+      "minWidth": "240px",
+      "width": "100%",
+    }
+  }
+>
+  <iframe
+    frameBorder="0"
+    marginHeight="0"
+    marginWidth="0"
+    src="https://foo.bar"
+    style={
+      Object {
+        "minHeight": "240px",
+        "minWidth": "240px",
+      }
+    }
+    title="Foo"
+  />
+  <a
+    className="MuiTypography-root MuiLink-root MuiLink-underlineHover makeStyles-openInNewLink-1 MuiTypography-colorPrimary"
+    href="https://foo.bar"
+    onBlur={[Function]}
+    onFocus={[Function]}
+    target="_blank"
+  >
+    <svg
+      aria-hidden={true}
+      className="MuiSvgIcon-root makeStyles-openInNewIcon-2"
+      focusable="false"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
+      />
+    </svg>
+    Open in New Window
+  </a>
+</div>
+`;
+
+exports[`StoryMap Renders correctly with no title 1`] = `
+<div
+  data-selenium="story-map-container"
+  style={
+    Object {
+      "minWidth": "240px",
+      "width": "100%",
+    }
+  }
+>
+  <iframe
+    frameBorder="0"
+    marginHeight="0"
+    marginWidth="0"
+    src="https://foo.bar"
+    style={
+      Object {
+        "minHeight": "240px",
+        "minWidth": "240px",
+      }
+    }
+    title="Neon Story Map"
+  />
+  <a
+    className="MuiTypography-root MuiLink-root MuiLink-underlineHover makeStyles-openInNewLink-1 MuiTypography-colorPrimary"
+    href="https://foo.bar"
+    onBlur={[Function]}
+    onFocus={[Function]}
+    target="_blank"
+  >
+    <svg
+      aria-hidden={true}
+      className="MuiSvgIcon-root makeStyles-openInNewIcon-2"
+      focusable="false"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
+      />
+    </svg>
+    Open in New Window
+  </a>
+</div>
+`;

@@ -170,6 +170,45 @@ to run a local instance.  Modify and deliver as normal.
 
 For local development without needing to send things to git, you may want to check out the npm link command at https://docs.npmjs.com/cli/link.  This can cause some unexpected behaviors, so do some research before you try.
 
+
+## Testing
+
+### Running Tests
+
+Portal Core Components has a suite of unit and snapshot tests run via [Jest](https://jestjs.io/).
+
+To run the entire test suite:
+
+    npm run test
+
+Note that with snapshot testing there are several components with stored snapshots containing DOM trees. These are expected to fall out of sync with components as those components are updated. If you see failing snapshot tests then inspect the failures carefully to make sure they express differences that are expected given updated to those components. If there are unexpected differences, or snapshot tests fail for components that have not changed, then there is unintended breakage somewhere (and the snapshot tests are doing their job!)
+
+To update **all** snapshots (after confirming all failures are expected from recent development) run:
+
+    npm run test:updateSnapshots
+
+### Writing Tests
+
+The Jest configuration will pick up all javascript files in a `__tests__` directory. By convention, for portal-core-components, every file that has accompanying unit tests should have an adjacent `__tests__` folder containing any/all test files, and each test file should bear the same name as the source file it is testing.
+
+Example:
+
+    src/
+    | App.jsx
+    | __tests__/
+    | |  App.jsx
+    | lib_components/
+    | | components/
+    | | | MyComponent/
+    | | | | MyComponent.jsx
+    | | | | __tests__/
+    | | | | | MyComponent.jsx
+    | | | OtherComponent/
+    | | | | OtherComponent.jsx
+    | | | | __tests__/
+    | | | | | OtherComponent.jsx
+
+
 ## Building the Library
 
 After any additions or modifications to source the library must be rebuilt in order for the changes to be importable by other applications. Rebuild the library and generate TypeScript declaration files like so:
@@ -203,7 +242,10 @@ Components are then created in `src/lib_components/components`, each with its ow
     Compile a production (optimized) build
 
 * **`npm run test`**
-    Run tests
+    Run all unit and snapshot tests
+
+* **`npm run test:updateSnapshots`**
+    Run all unit and snapshot tests while also updating all snapshot tests (i.e. all snapshot tests will pass by being updated)
 
 * **`npm run lint`**
     Run the linter to get a summary of all lint errors and warnings.

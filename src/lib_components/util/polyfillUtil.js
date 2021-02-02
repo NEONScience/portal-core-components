@@ -21,7 +21,7 @@ export const startsWithPolyfill = (baseString, searchString, position) => (
  */
 export const endsWithPolyfill = (baseString, searchString, thisLen) => {
   let len = thisLen;
-  if (thisLen === undefined || thisLen > this.length) {
+  if (thisLen === undefined || thisLen > baseString.length) {
     len = baseString.length;
   }
   return baseString.substring(len - searchString.length, len) === searchString;

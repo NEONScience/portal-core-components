@@ -63,6 +63,14 @@ export const TIME_SERIES_VIEWER_STATUS_TITLES = {
   READY: null,
 };
 
+// List of common date-time variable names to use for the x axis ordered by preference
+const PREFERRED_DATETIME_VARIABLES = [
+  'startDateTime',
+  'endDateTime',
+  'startDate',
+  'endDate',
+];
+
 // Keys, details, and supporting functions for all possible Y-axis range modes
 export const Y_AXIS_RANGE_MODES = {
   CENTERED: 'CENTERED',
@@ -95,8 +103,10 @@ const generateYAxisRange = (axis = {}) => {
     !Object.keys(Y_AXIS_RANGE_MODES).includes(rangeMode)
       || !Number.isFinite(standardDeviation)
       || !Number.isFinite(precision)) { return axisRange; }
-  const low = (dataRange[0] || 0) - standardDeviation;
-  const high = (dataRange[1] || 0) + standardDeviation;
+  let low = (dataRange[0] || 0) - standardDeviation;
+  let high = (dataRange[1] || 0) + standardDeviation;
+  low = parseFloat(low.toFixed(precision), 10);
+  high = parseFloat(high.toFixed(precision), 10);
   if (rangeMode === Y_AXIS_RANGE_MODES.FROM_ZERO) { return [0, high]; }
   if (rangeMode === Y_AXIS_RANGE_MODES.CENTERED) { return [low, high]; }
   return axisRange;
@@ -185,24 +195,26 @@ export const TIME_STEPS = {
   '5min': { key: '5min', tmi: '005', seconds: 300 },
   '15min': { key: '15min', tmi: '015', seconds: 900 },
   '30min': { key: '30min', tmi: '030', seconds: 1800 },
-  '60min': { key: '1hr', tmi: '060', seconds: 1800 },
+  '60min': { key: '1hr', tmi: '060', seconds: 3600 },
   '0AQ': { key: '0AQ', tmi: '100', seconds: 60 },
   '1day': { key: '1day', tmi: '01D', seconds: 86400 },
 };
-const getTimeStep = (input) => (
+const getTimeStep = (input = '') => (
   Object.keys(TIME_STEPS).find((key) => TIME_STEPS[key].tmi === input) || null
+);
+const getTimeStepForTableName = (tableName = '') => (
+  Object.keys(TIME_STEPS).find((key) => tableName.endsWith(`_${key}`)) || null
 );
 export const summarizeTimeSteps = (steps, timeStep = null, pluralize = true) => {
   if (steps === 1) { return 'none'; }
   const timeStepSeconds = timeStep && TIME_STEPS[timeStep] ? TIME_STEPS[timeStep].seconds : 1800;
   const seconds = steps * timeStepSeconds;
-  const breaks = [3600, 86400, 2592000, 31536000];
-  const intervals = ['hour', 'day', 'month', 'year'];
+  const breaks = [60, 3600, 86400, 2592000, 31536000];
+  const intervals = ['minute', 'hour', 'day', 'month', 'year'];
   const breakIdx = breaks.reduce((acc, cur, idx) => ((seconds > cur) ? idx : acc), 0);
   let value = (seconds / breaks[breakIdx]).toFixed(1);
   if (value.slice(value.length - 1) === '0') { value = value.slice(0, value.length - 2); }
-  let plural = '';
-  if (pluralize) { plural = value === '1' ? '' : 's'; }
+  const plural = pluralize ? 's' : '';
   return `${value} ${intervals[breakIdx]}${plural}`;
 };
 
@@ -275,6 +287,8 @@ const getUpdatedValueRange = (existingRange, newValue) => {
  * Generate a continuous list of "YYYY-MM" strings given an input date range
  * Will extend beginning and end of date range to encompass whole years
  * (e.g. ['2012-06', '2017-08'] => ['2012-01', '2012-02', ..., '2017-12', '2018-01']
+ * Note that in order for the range to actuall appear showing the whole year the following
+ * January must also be added.
  * @param {Array} dateRange - array of exactly two "YYYY-MM" strings
  * @param {boolean} roundToYears - if true then extend each side of the range to whole years
  */
@@ -304,7 +318,7 @@ const getContinuousDatesArray = (dateRange, roundToYears = false) => {
 
 /**
  * Build an object for state.product from a product data fetch response
- * @param {Object} productDate - JSON parse response from product data endpoint
+ * @param {Object} productData - JSON parse response from product data endpoint
  * @return {Object} new product object to be applied at state.product
  */
 const parseProductData = (productData = {}) => {
@@ -312,7 +326,7 @@ const parseProductData = (productData = {}) => {
     productCode: productData.productCode,
     productName: productData.productName,
     productDescription: productData.productDescription,
-    productSensor: productData.productSensor,
+    productSensor: productData.productSensor || null,
     dateRange: [null, null],
     variables: {},
     sites: {},
@@ -357,12 +371,12 @@ const parseSiteMonthData = (site, files) => {
     // Must be a CSV file
     if (!/\.csv$/.test(name)) { return; }
     // Must not be a variables or positions file
-    if (name.includes('variables') && !newSite.fetches.variables.url) {
-      newSite.fetches.variables.url = url;
+    if (name.includes('variables')) {
+      if (!newSite.fetches.variables.url) { newSite.fetches.variables.url = url; }
       return;
     }
-    if (name.includes('sensor_positions') && !newSite.fetches.positions.url) {
-      newSite.fetches.positions.url = url;
+    if (name.includes('sensor_positions')) {
+      if (!newSite.fetches.positions.url) { newSite.fetches.positions.url = url; }
       return;
     }
     // Split file name by (.); all DATA_FILE_PARTS validators must point to a valid part
@@ -422,7 +436,7 @@ const parseSiteVariables = (previousVariables, siteCode, csv) => {
       table,
       units,
     } = variable;
-    const timeStep = getTimeStep(table);
+    const timeStep = getTimeStepForTableName(table);
     const isSelectable = variable.dataType !== 'dateTime'
       && variable.units !== 'NA'
       && !/QF$/.test(fieldName);
@@ -524,11 +538,20 @@ const applyDefaultsToSelection = (state) => {
         selection.yAxes.y1.units = variables[defaultVar].units;
       }
     }
-    // Ensure the selection has at least one dateTime variable
+    // Ensure the selection has at least one dateTime variable. Use the PREFERRED_DATETIME_VARIABLES
+    // list to sort the existing date time variables in order of preference and take the first one.
     if (!selection.dateTimeVariable) {
-      const defaultDateTimeVar = Object.keys(variables).find((v) => variables[v].isDateTime);
-      if (defaultDateTimeVar) {
-        selection.dateTimeVariable = defaultDateTimeVar;
+      const dateTimeVars = Object.keys(variables).filter((v) => variables[v].isDateTime);
+      if (dateTimeVars.length) {
+        dateTimeVars.sort((a, b) => {
+          const aIdx = PREFERRED_DATETIME_VARIABLES.indexOf(a);
+          const bIdx = PREFERRED_DATETIME_VARIABLES.indexOf(b);
+          if (aIdx === bIdx) { return 0; }
+          if (aIdx === -1 && bIdx !== -1) { return 1; }
+          if (aIdx !== -1 && bIdx === -1) { return -1; }
+          return aIdx < bIdx ? -1 : 1;
+        });
+        selection.dateTimeVariable = dateTimeVars[0]; // eslint-disable-line prefer-destructuring
       }
     }
   }
@@ -1262,45 +1285,34 @@ const Provider = (props) => {
 /**
    Prop Types
 */
-const productDataShape = PropTypes.shape({
-  productCode: PropTypes.string.isRequired,
-  productName: PropTypes.string.isRequired,
-  siteCodes: PropTypes.arrayOf(
-    PropTypes.shape({
-      siteCode: PropTypes.string.isRequired,
-      availableMonths: PropTypes.arrayOf(PropTypes.string).isRequired,
-    }),
-  ),
-});
-
 const TimeSeriesViewerPropTypes = {
   productCode: (props, propName, componentName) => {
     const { productCode, productData } = props;
     if (!productCode && !productData) {
       return new Error(`One of props 'productCode' or 'productData' was not specified in '${componentName}'.`);
     }
-    if (productCode) {
-      PropTypes.checkPropTypes(
-        { productCode: PropTypes.string },
-        { productCode },
-        propName,
-        componentName,
-      );
+    if (productData && !productCode) { return null; }
+    if (productCode && typeof productCode === 'string' && productCode.length > 0) {
+      return null;
     }
-    return null;
+    return new Error(`Props 'productCode' must be a non-empty string in '${componentName}'.`);
   },
   productData: (props, propName, componentName) => {
     const { productCode, productData } = props;
     if (!productCode && !productData) {
       return new Error(`One of props 'productCode' or 'productData' was not specified in '${componentName}'.`);
     }
-    if (productData) {
-      PropTypes.checkPropTypes(
-        { productData: productDataShape },
-        { productData },
-        propName,
-        componentName,
-      );
+    if (productCode && !productData) { return null; }
+    if (
+      (typeof productData.productCode !== 'string' || !productData.productCode.length)
+        || (typeof productData.productName !== 'string' || !productData.productName.length)
+        || (Array.isArray(productData.siteCodes) && !productData.siteCodes.every((siteObj) => (
+          typeof siteObj.siteCode === 'string' && siteObj.siteCode.length
+            && Array.isArray(siteObj.availableMonths)
+            && siteObj.availableMonths.every((month) => (typeof month === 'string' && month.length))
+        )))
+    ) {
+      return new Error(`Prop 'productData' is malformed in '${componentName}'.`);
     }
     return null;
   },
@@ -1334,3 +1346,22 @@ const TimeSeriesViewerContext = {
 };
 
 export default TimeSeriesViewerContext;
+
+// Additional items exported for unit testing
+export const getTestableItems = () => (
+  process.env.NODE_ENV !== 'test' ? {} : {
+    DEFAULT_STATE,
+    FETCH_STATUS,
+    applyDefaultsToSelection,
+    generateYAxisRange,
+    getTimeStep,
+    getUpdatedValueRange,
+    getContinuousDatesArray,
+    parseProductData,
+    parseSiteMonthData,
+    parseSiteVariables,
+    parseSitePositions,
+    reducer,
+    TimeSeriesViewerPropTypes,
+  }
+);

@@ -5,7 +5,7 @@ declare namespace NeonDrawerMenu {
         export const items: PropTypes.Validator<(PropTypes.InferProps<{
             name: PropTypes.Validator<string>;
             url: PropTypes.Validator<string>;
-            children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+            children: PropTypes.Requireable<any[]>;
         }> | null | undefined)[]>;
     }
 }

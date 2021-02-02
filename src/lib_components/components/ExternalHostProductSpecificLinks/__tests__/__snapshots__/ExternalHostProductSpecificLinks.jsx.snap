@@ -1,0 +1,5433 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ExternalHostProductSpecificLinks renders graceful failure with no valid product code 1`] = `null`;
+
+exports[`ExternalHostProductSpecificLinks renders with valid product code and no sites 1`] = `
+<div
+  className="makeStyles-siteLinksContainer-1"
+>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Alabama
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xDL/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          DELA -  - Dead Lake
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xLE/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          LENO -  - Lenoir Landing
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xTA/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          TALL -  - Talladega National Forest
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Alaska
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xBA/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          BARR -  - Utqiaġvik Environmental Observatory
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xBN/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          BONA -  - Caribou-Poker Creeks Research Watershed
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xDJ/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          DEJU -  - Delta Junction
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xHE/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          HEAL -  - Healy
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xTL/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          TOOL -  - Toolik
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Arizona
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xSR/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          SRER -  - Santa Rita Experimental Range
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      California
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xSP/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          SOAP -  - Soaproot Saddle
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xTE/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          TEAK -  - Lower Teakettle
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Colorado
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xCP/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          CPER -  - Central Plains Experimental Range
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xNW/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          NIWO -  - Niwot Ridge Mountain Research Station
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xRM/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          RMNP -  - Rocky Mountain National Park
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xSL/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          STER -  - Sterling
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Florida
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xDS/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          DSNY -  - Disney Wilderness Preserve
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xSB/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          OSBS -  - Ordway-Swisher Biological Station
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Georgia
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xJE/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          JERC -  - Jones Ecological Research Center
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Hawaii
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xPU/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          PUUM -  - Pu-u Maka-ala Natural Area Reserve
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Kansas
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xKA/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          KONA -  - Konza Prairie Biological Station
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xKZ/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          KONZ -  - Konza Prairie Biological Station
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xUK/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          UKFS -  - The University of Kansas Field Station
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Maryland
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xSE/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          SERC -  - Smithsonian Environmental Research Center
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Massachusetts
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xHA/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          HARV -  - Harvard Forest
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Michigan
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xUN/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          UNDE -  - UNDERC
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      New Hampshire
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xBR/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          BART -  - Bartlett Experimental Forest
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      New Mexico
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xJR/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          JORN -  - Jornada LTER
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      North Dakota
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xDC/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          DCFS -  - Dakota Coteau Field School
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xNG/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          NOGP -  - Northern Great Plains Research Laboratory
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xWD/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          WOOD -  - Woodworth
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Oklahoma
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xAE/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          OAES -  - Klemme Range Research Station
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Puerto Rico
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/PR-xGU/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          GUAN -  - Guanica Forest
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/PR-xLA/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          LAJA -  - Lajas Experimental Station
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Tennessee
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xGR/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          GRSM -  - Great Smoky Mountains National Park
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xRN/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          ORNL -  - Oak Ridge
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Texas
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xCL/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          CLBJ -  - LBJ National Grassland
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Utah
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xMB/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          MOAB -  - Moab
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xNQ/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          ONAQ -  - Onaqui
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Virginia
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xBL/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          BLAN -  - Blandy Experimental Farm
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xML/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          MLBS -  - Mountain Lake Biological Station
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xSC/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          SCBI -  - Smithsonian Conservation Biology Institute
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Washington
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xAB/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          ABBY -  - Abby Road
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xWR/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          WREF -  - Wind River Experimental Forest
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Wisconsin
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xST/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          STEI -  - Steigerwaldt Land Services
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xTR/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          TREE -  - Treehaven
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Wyoming
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xYE/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          YELL -  - Yellowstone National Park
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`ExternalHostProductSpecificLinks renders with valid product code and no sites 2`] = `
+<ul
+  style={
+    Object {
+      "marginBottom": 6,
+      "marginTop": 24,
+    }
+  }
+>
+  <li>
+    <a
+      className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+      data-gtm-external-host="BOLD"
+      data-gtm-product-code="DP1.10020.001"
+      href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETN"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      Ground beetle sequences DNA barcode
+    </a>
+  </li>
+  <li>
+    <a
+      className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+      data-gtm-external-host="BOLD"
+      data-gtm-product-code="DP1.10020.001"
+      href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETP"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      Ground beetle sequences DNA barcode (Prototype Data)
+    </a>
+  </li>
+</ul>
+`;
+
+exports[`ExternalHostProductSpecificLinks renders with valid product code and no sites 3`] = `
+<div
+  className="makeStyles-siteLinksContainer-1"
+>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Alabama
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D08.BLWA.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          BLWA - Black Warrior River
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D08.DELA.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          DELA - Dead Lake
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D08.LENO.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          LENO - Lenoir Landing
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D08.MAYF.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          MAYF - Mayfield Creek
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D08.TALL.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          TALL - Talladega National Forest
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D08.TOMB.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          TOMB - Tombigbee River
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Alaska
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D18.BARR.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          BARR - Utqiaġvik Environmental Observatory
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D19.BONA.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          BONA - Caribou-Poker Creeks Research Watershed
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D19.CARI.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          CARI - Caribou Creek at Caribou-Poker Creeks Research Watershed
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D19.DEJU.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          DEJU - Delta Junction
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D19.HEAL.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          HEAL - Healy
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D18.OKSR.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          OKSR - Oksrukuyik Creek
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D18.TOOK.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          TOOK - Toolik Lake
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D18.TOOL.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          TOOL - Toolik
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Arizona
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D14.SRER.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          SRER - Santa Rita Experimental Range
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D14.SYCA.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          SYCA - Sycamore Creek
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      California
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D17.BIGC.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          BIGC - Upper Big Creek
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D17.SJER.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          SJER - San Joaquin
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D17.SOAP.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          SOAP - Soaproot Saddle
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D17.TEAK.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          TEAK - Lower Teakettle
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D17.TECR.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          TECR - Teakettle 2 Creek
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Colorado
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D10.ARIK.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          ARIK - Arikaree River
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D13.COMO.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          COMO - Como Creek
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D10.CPER.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          CPER - Central Plains Experimental Range
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D13.NIWO.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          NIWO - Niwot Ridge Mountain Research Station
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D10.RMNP.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          RMNP - Rocky Mountain National Park
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D10.STER.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          STER - Sterling
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D13.WLOU.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          WLOU - West St Louis Creek
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Florida
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D03.BARC.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          BARC - Barco Lake
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D03.DSNY.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          DSNY - Disney Wilderness Preserve
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D03.OSBS.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          OSBS - Ordway-Swisher Biological Station
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D03.SUGG.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          SUGG - Suggs Lake
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Georgia
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D03.FLNT.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          FLNT - Flint River
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D03.JERC.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          JERC - Jones Ecological Research Center
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Hawaii
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D20.PUUM.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          PUUM - Pu-u Maka-ala Natural Area Reserve
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Kansas
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D06.KING.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          KING - Kings Creek
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D06.KONA.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          KONA - Konza Prairie Biological Station
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D06.KONZ.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          KONZ - Konza Prairie Biological Station
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D06.MCDI.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          MCDI - McDiffett Creek
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D06.UKFS.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          UKFS - The University of Kansas Field Station
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Maryland
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D02.SERC.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          SERC - Smithsonian Environmental Research Center
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Massachusetts
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D01.HARV.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          HARV - Harvard Forest
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D01.HOPB.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          HOPB - Hop Brook
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Michigan
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D05.UNDE.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          UNDE - UNDERC
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      New Hampshire
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D01.BART.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          BART - Bartlett Experimental Forest
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      New Mexico
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D14.JORN.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          JORN - Jornada LTER
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      North Dakota
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D09.DCFS.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          DCFS - Dakota Coteau Field School
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D09.NOGP.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          NOGP - Northern Great Plains Research Laboratory
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D09.PRLA.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          PRLA - Prairie Lake at Dakota Coteau Field School
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D09.PRPO.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          PRPO - Prairie Pothole
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D09.WOOD.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          WOOD - Woodworth
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Oklahoma
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D11.BLUE.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          BLUE - Blue River
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D11.OAES.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          OAES - Klemme Range Research Station
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Oregon
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D16.MCRA.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          MCRA - McRae Creek
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Puerto Rico
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D04.CUPE.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          CUPE - Rio Cupeyes
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D04.GUAN.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          GUAN - Guanica Forest
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D04.GUIL.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          GUIL - Rio Guilarte
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D04.LAJA.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          LAJA - Lajas Experimental Station
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Tennessee
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D07.GRSM.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          GRSM - Great Smoky Mountains National Park
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D07.LECO.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          LECO - LeConte Creek
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D07.ORNL.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          ORNL - Oak Ridge
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D07.WALK.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          WALK - Walker Branch
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Texas
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D11.CLBJ.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          CLBJ - LBJ National Grassland
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D11.PRIN.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          PRIN - Pringle Creek
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Utah
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D13.MOAB.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          MOAB - Moab
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D15.ONAQ.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          ONAQ - Onaqui
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D15.REDB.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          REDB - Red Butte Creek
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Virginia
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D02.BLAN.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          BLAN - Blandy Experimental Farm
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D02.LEWI.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          LEWI - Lewis Run
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D07.MLBS.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          MLBS - Mountain Lake Biological Station
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D02.POSE.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          POSE - Posey Creek
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D02.SCBI.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          SCBI - Smithsonian Conservation Biology Institute
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Washington
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D16.ABBY.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          ABBY - Abby Road
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D16.MART.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          MART - Martha Creek
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D16.WREF.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          WREF - Wind River Experimental Forest
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Wisconsin
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D05.CRAM.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          CRAM - Crampton Lake
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D05.LIRO.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          LIRO - Little Rock Lake
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D05.STEI.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          STEI - Steigerwaldt Land Services
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D05.TREE.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          TREE - Treehaven
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Wyoming
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D12.BLDE.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          BLDE - Blacktail Deer Creek
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D12.YELL.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          YELL - Yellowstone National Park
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`ExternalHostProductSpecificLinks renders with valid product code and sites 1`] = `
+<div
+  className="makeStyles-siteLinksContainer-1"
+>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Alabama
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xDL/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          DELA -  - Dead Lake
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xLE/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          LENO -  - Lenoir Landing
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xTA/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          TALL -  - Talladega National Forest
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Alaska
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xBA/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          BARR -  - Utqiaġvik Environmental Observatory
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xBN/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          BONA -  - Caribou-Poker Creeks Research Watershed
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xDJ/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          DEJU -  - Delta Junction
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xHE/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          HEAL -  - Healy
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xTL/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          TOOL -  - Toolik
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Arizona
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xSR/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          SRER -  - Santa Rita Experimental Range
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      California
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xSP/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          SOAP -  - Soaproot Saddle
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xTE/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          TEAK -  - Lower Teakettle
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Colorado
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xCP/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          CPER -  - Central Plains Experimental Range
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xNW/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          NIWO -  - Niwot Ridge Mountain Research Station
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xRM/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          RMNP -  - Rocky Mountain National Park
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xSL/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          STER -  - Sterling
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Florida
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xDS/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          DSNY -  - Disney Wilderness Preserve
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xSB/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          OSBS -  - Ordway-Swisher Biological Station
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Georgia
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xJE/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          JERC -  - Jones Ecological Research Center
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Hawaii
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xPU/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          PUUM -  - Pu-u Maka-ala Natural Area Reserve
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Kansas
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xKA/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          KONA -  - Konza Prairie Biological Station
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xKZ/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          KONZ -  - Konza Prairie Biological Station
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xUK/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          UKFS -  - The University of Kansas Field Station
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Maryland
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xSE/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          SERC -  - Smithsonian Environmental Research Center
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Massachusetts
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xHA/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          HARV -  - Harvard Forest
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Michigan
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xUN/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          UNDE -  - UNDERC
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      New Hampshire
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xBR/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          BART -  - Bartlett Experimental Forest
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      New Mexico
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xJR/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          JORN -  - Jornada LTER
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      North Dakota
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xDC/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          DCFS -  - Dakota Coteau Field School
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xNG/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          NOGP -  - Northern Great Plains Research Laboratory
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xWD/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          WOOD -  - Woodworth
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Oklahoma
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xAE/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          OAES -  - Klemme Range Research Station
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Puerto Rico
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/PR-xGU/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          GUAN -  - Guanica Forest
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/PR-xLA/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          LAJA -  - Lajas Experimental Station
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Tennessee
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xGR/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          GRSM -  - Great Smoky Mountains National Park
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xRN/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          ORNL -  - Oak Ridge
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Texas
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xCL/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          CLBJ -  - LBJ National Grassland
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Utah
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xMB/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          MOAB -  - Moab
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xNQ/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          ONAQ -  - Onaqui
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Virginia
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xBL/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          BLAN -  - Blandy Experimental Farm
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xML/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          MLBS -  - Mountain Lake Biological Station
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xSC/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          SCBI -  - Smithsonian Conservation Biology Institute
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Washington
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xAB/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          ABBY -  - Abby Road
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xWR/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          WREF -  - Wind River Experimental Forest
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Wisconsin
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xST/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          STEI -  - Steigerwaldt Land Services
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xTR/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          TREE -  - Treehaven
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Wyoming
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov/sites/siteinfo/US-xYE/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          YELL -  - Yellowstone National Park
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`ExternalHostProductSpecificLinks renders with valid product code and sites 2`] = `
+<ul
+  style={
+    Object {
+      "marginBottom": 6,
+      "marginTop": 24,
+    }
+  }
+>
+  <li>
+    <a
+      className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+      data-gtm-external-host="BOLD"
+      data-gtm-product-code="DP1.10020.001"
+      href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETN"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      Ground beetle sequences DNA barcode
+    </a>
+  </li>
+  <li>
+    <a
+      className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+      data-gtm-external-host="BOLD"
+      data-gtm-product-code="DP1.10020.001"
+      href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETP"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      Ground beetle sequences DNA barcode (Prototype Data)
+    </a>
+  </li>
+</ul>
+`;
+
+exports[`ExternalHostProductSpecificLinks renders with valid product code and sites 3`] = `
+<div
+  className="makeStyles-siteLinksContainer-1"
+>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Alabama
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D08.BLWA.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          BLWA - Black Warrior River
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D08.DELA.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          DELA - Dead Lake
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D08.LENO.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          LENO - Lenoir Landing
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D08.MAYF.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          MAYF - Mayfield Creek
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D08.TALL.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          TALL - Talladega National Forest
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D08.TOMB.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          TOMB - Tombigbee River
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Alaska
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D18.BARR.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          BARR - Utqiaġvik Environmental Observatory
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D19.BONA.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          BONA - Caribou-Poker Creeks Research Watershed
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D19.CARI.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          CARI - Caribou Creek at Caribou-Poker Creeks Research Watershed
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D19.DEJU.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          DEJU - Delta Junction
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D19.HEAL.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          HEAL - Healy
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D18.OKSR.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          OKSR - Oksrukuyik Creek
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D18.TOOK.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          TOOK - Toolik Lake
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D18.TOOL.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          TOOL - Toolik
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Arizona
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D14.SRER.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          SRER - Santa Rita Experimental Range
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D14.SYCA.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          SYCA - Sycamore Creek
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      California
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D17.BIGC.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          BIGC - Upper Big Creek
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D17.SJER.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          SJER - San Joaquin
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D17.SOAP.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          SOAP - Soaproot Saddle
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D17.TEAK.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          TEAK - Lower Teakettle
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D17.TECR.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          TECR - Teakettle 2 Creek
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Colorado
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D10.ARIK.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          ARIK - Arikaree River
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D13.COMO.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          COMO - Como Creek
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D10.CPER.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          CPER - Central Plains Experimental Range
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D13.NIWO.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          NIWO - Niwot Ridge Mountain Research Station
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D10.RMNP.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          RMNP - Rocky Mountain National Park
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D10.STER.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          STER - Sterling
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D13.WLOU.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          WLOU - West St Louis Creek
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Florida
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D03.BARC.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          BARC - Barco Lake
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D03.DSNY.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          DSNY - Disney Wilderness Preserve
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D03.OSBS.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          OSBS - Ordway-Swisher Biological Station
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D03.SUGG.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          SUGG - Suggs Lake
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Georgia
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D03.FLNT.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          FLNT - Flint River
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D03.JERC.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          JERC - Jones Ecological Research Center
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Hawaii
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D20.PUUM.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          PUUM - Pu-u Maka-ala Natural Area Reserve
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Kansas
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D06.KING.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          KING - Kings Creek
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D06.KONA.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          KONA - Konza Prairie Biological Station
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D06.KONZ.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          KONZ - Konza Prairie Biological Station
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D06.MCDI.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          MCDI - McDiffett Creek
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D06.UKFS.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          UKFS - The University of Kansas Field Station
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Maryland
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D02.SERC.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          SERC - Smithsonian Environmental Research Center
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Massachusetts
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D01.HARV.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          HARV - Harvard Forest
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D01.HOPB.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          HOPB - Hop Brook
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Michigan
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D05.UNDE.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          UNDE - UNDERC
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      New Hampshire
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D01.BART.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          BART - Bartlett Experimental Forest
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      New Mexico
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D14.JORN.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          JORN - Jornada LTER
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      North Dakota
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D09.DCFS.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          DCFS - Dakota Coteau Field School
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D09.NOGP.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          NOGP - Northern Great Plains Research Laboratory
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D09.PRLA.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          PRLA - Prairie Lake at Dakota Coteau Field School
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D09.PRPO.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          PRPO - Prairie Pothole
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D09.WOOD.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          WOOD - Woodworth
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Oklahoma
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D11.BLUE.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          BLUE - Blue River
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D11.OAES.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          OAES - Klemme Range Research Station
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Oregon
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D16.MCRA.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          MCRA - McRae Creek
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Puerto Rico
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D04.CUPE.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          CUPE - Rio Cupeyes
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D04.GUAN.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          GUAN - Guanica Forest
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D04.GUIL.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          GUIL - Rio Guilarte
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D04.LAJA.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          LAJA - Lajas Experimental Station
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Tennessee
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D07.GRSM.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          GRSM - Great Smoky Mountains National Park
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D07.LECO.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          LECO - LeConte Creek
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D07.ORNL.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          ORNL - Oak Ridge
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D07.WALK.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          WALK - Walker Branch
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Texas
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D11.CLBJ.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          CLBJ - LBJ National Grassland
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D11.PRIN.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          PRIN - Pringle Creek
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Utah
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D13.MOAB.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          MOAB - Moab
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D15.ONAQ.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          ONAQ - Onaqui
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D15.REDB.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          REDB - Red Butte Creek
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Virginia
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D02.BLAN.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          BLAN - Blandy Experimental Farm
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D02.LEWI.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          LEWI - Lewis Run
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D07.MLBS.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          MLBS - Mountain Lake Biological Station
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D02.POSE.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          POSE - Posey Creek
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D02.SCBI.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          SCBI - Smithsonian Conservation Biology Institute
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Washington
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D16.ABBY.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          ABBY - Abby Road
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D16.MART.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          MART - Martha Creek
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D16.WREF.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          WREF - Wind River Experimental Forest
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Wisconsin
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D05.CRAM.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          CRAM - Crampton Lake
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D05.LIRO.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          LIRO - Little Rock Lake
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D05.STEI.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          STEI - Steigerwaldt Land Services
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D05.TREE.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          TREE - Treehaven
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    style={
+      Object {
+        "flex": "1 0 25%",
+        "padding": "0px 16px 16px 0px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Wyoming
+    </h6>
+    <ul
+      className="makeStyles-ulLinkList-3"
+    >
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D12.BLDE.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          BLDE - Blacktail Deer Creek
+        </a>
+      </li>
+      <li>
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/sites/NEON.D12.YELL.DP1.00033/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          YELL - Yellowstone National Park
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`ExternalHostProductSpecificLinks renders with valid product code and sites 4`] = `null`;

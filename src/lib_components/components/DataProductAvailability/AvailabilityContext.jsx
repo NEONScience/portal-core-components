@@ -265,3 +265,14 @@ const AvailabilityContext = {
 };
 
 export default AvailabilityContext;
+
+// Additional items exported for unit testing
+export const getTestableItems = () => (
+  process.env.NODE_ENV !== 'test' ? {} : {
+    DEFAULT_STATE,
+    calculateRows,
+    extractTables,
+    hydrateNeonContextData,
+    reducer,
+  }
+);

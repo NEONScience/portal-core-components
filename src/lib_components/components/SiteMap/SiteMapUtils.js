@@ -553,7 +553,7 @@ export const FEATURES = {
     type: FEATURE_TYPES.LOCATIONS.KEY,
     minZoom: 10,
     // Get from REST because fetching from GraphQL won't return children for a count of levels
-    // (you can get this from GraphQL but it hoses performance and only this feature needs children)
+    // (you can get children from GraphQL but it hoses performance and only this feature needs them)
     dataSource: FEATURE_DATA_SOURCES.REST_LOCATIONS_API,
     matchLocationType: 'TOWER',
     parent: 'TERRESTRIAL_SITE_FEATURES',
@@ -1150,6 +1150,7 @@ export const calculateFeatureAvailability = (state) => {
 */
 export const getHref = (key, arg = null) => {
   const EXPLORE_DATA_PRODUCTS_BASE = 'https://data.neonscience.org/data-products/explore';
+  if ((arg || '').length === 0) { return '#'; }
   switch (key) {
     case 'EXPLORE_DATA_PRODUCTS_BY_SITE':
       return `${EXPLORE_DATA_PRODUCTS_BASE}?site=${arg}`;
@@ -1158,7 +1159,7 @@ export const getHref = (key, arg = null) => {
     case 'EXPLORE_DATA_PRODUCTS_BY_DOMAIN':
       return `${EXPLORE_DATA_PRODUCTS_BASE}?domain=${arg}`;
     case 'SITE_DETAILS':
-      return `https://www.neonscience.org/field-sites/field-sites-map/${arg}`;
+      return `https://www.neonscience.org/field-sites/${arg}`;
     case 'DOMAIN_DETAILS':
       return `https://www.neonscience.org/domains/${arg}`;
     default:
@@ -1543,7 +1544,7 @@ export const hydrateNeonContextData = (state, neonContextData) => {
   // States
   Object.keys(neonContextData.states).forEach((stateCode) => {
     newState.featureData[FEATURE_TYPES.STATES.KEY][FEATURES.STATES.KEY][stateCode] = {
-      ...newState.featureData[FEATURE_TYPES.STATES.KEY][FEATURES.STATES.KEY][stateCode],
+      ...(newState.featureData[FEATURE_TYPES.STATES.KEY][FEATURES.STATES.KEY][stateCode] || {}),
       ...neonContextData.states[stateCode],
       sites: neonContextData.stateSites[stateCode],
     };
@@ -1551,7 +1552,7 @@ export const hydrateNeonContextData = (state, neonContextData) => {
   // Domains
   Object.keys(neonContextData.domains).forEach((domainCode) => {
     newState.featureData[FEATURE_TYPES.DOMAINS.KEY][FEATURES.DOMAINS.KEY][domainCode] = {
-      ...newState.featureData[FEATURE_TYPES.DOMAINS.KEY][FEATURES.DOMAINS.KEY][domainCode],
+      ...(newState.featureData[FEATURE_TYPES.DOMAINS.KEY][FEATURES.DOMAINS.KEY][domainCode] || {}),
       ...neonContextData.domains[domainCode],
       sites: neonContextData.domainSites[domainCode],
     };
@@ -1564,6 +1565,7 @@ export const hydrateNeonContextData = (state, neonContextData) => {
 */
 const SelectionLimitPropType = (props, propName) => {
   const { [propName]: prop } = props;
+  if (prop === null || typeof prop === 'undefined') { return null; }
   if (typeof prop === 'number') {
     if (!Number.isInteger(prop) || prop < 1) {
       return new Error(
@@ -1583,13 +1585,10 @@ const SelectionLimitPropType = (props, propName) => {
     }
     return null;
   }
-  if (prop !== null && typeof prop !== 'undefined') {
-    return new Error(
-      // eslint-disable-next-line max-len
-      `${propName} must be null, a positive non-zero integer, or an array of two ascending non-zero positive integers.`,
-    );
-  }
-  return null;
+  return new Error(
+    // eslint-disable-next-line max-len
+    `${propName} must be null, a positive non-zero integer, or an array of two ascending non-zero positive integers.`,
+  );
 };
 
 export const SITE_MAP_PROP_TYPES = {
@@ -1750,14 +1749,14 @@ const getPhantomLeafletMap = (state) => {
   return map;
 };
 
-export const mapIsAtFocusLocation = (state = {}) => (
-  state.map.zoom && Array.isArray(state.map.center) && state.map.center.length === 2
-    && state.focusLocation.current && state.focusLocation.map.zoom
+export const mapIsAtFocusLocation = (state = {}) => ((
+  state.map && state.map.zoom && Array.isArray(state.map.center) && state.map.center.length === 2
+    && state.focusLocation && state.focusLocation.current && state.focusLocation.map.zoom
     && Array.isArray(state.focusLocation.map.center) && state.focusLocation.map.center.length === 2
     && state.map.zoom === state.focusLocation.map.zoom
     && state.map.center[0] === state.focusLocation.map.center[0]
     && state.map.center[1] === state.focusLocation.map.center[1]
-);
+) || false);
 
 export const getMapStateForFocusLocation = (state = {}) => {
   const { focusLocation } = state;
@@ -1907,10 +1906,11 @@ export const calculateLocationsInBounds = (
 
 export const deriveFullObservatoryZoomLevel = (mapRef) => {
   const FALLBACK_ZOOM = 2;
-  if (!mapRef.current) { return FALLBACK_ZOOM; }
+  if (typeof mapRef !== 'object' || mapRef === null || !mapRef.current) { return FALLBACK_ZOOM; }
   const container = mapRef.current.container.parentElement;
+  if (!container.clientWidth || !container.clientHeight) { return FALLBACK_ZOOM; }
   const divisor = (23 * 8);
   const minorDim = Math.min(container.clientWidth / divisor, container.clientHeight / divisor);
   const derivedZoom = [1, 2, 4, 6, 11].findIndex((m) => m > minorDim);
-  return derivedZoom === -1 ? FALLBACK_ZOOM : derivedZoom;
+  return Math.max(derivedZoom, 1);
 };

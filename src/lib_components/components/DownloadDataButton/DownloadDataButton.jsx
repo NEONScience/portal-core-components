@@ -33,7 +33,7 @@ const DownloadDataButton = (props) => {
   }
 
   const gtmProps = {};
-  if (productData.productCode) {
+  if ((productData || {}).productCode) {
     gtmProps.className = classes.gtmCaptureButton;
     gtmProps['data-gtm-product-code'] = productData.productCode;
   }

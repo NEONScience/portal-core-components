@@ -16,8 +16,8 @@ const domainIsValid = (domainString) => {
   return true;
 };
 
-export const fetchDomainHierarchy = (domain) => {
-  if (!domainIsValid) {
+export const fetchDomainHierarchy = (domain = '') => {
+  if (!domainIsValid(domain)) {
     return Promise.reject(new Error('Domain is not valid'));
   }
   // Execute Locations REST API hierarchy fetch
@@ -97,3 +97,10 @@ export const fetchManyLocationsGraphQL = (locations) => {
     ).subscribe();
   }).then((data) => parseLocationsArray(data));
 };
+
+// Additional items exported for unit testing
+export const getTestableItems = () => (
+  process.env.NODE_ENV !== 'test' ? {} : {
+    domainIsValid,
+  }
+);

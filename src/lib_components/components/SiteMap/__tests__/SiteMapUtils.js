@@ -1,562 +1,464 @@
-/*
 import {
-  parseLocationProperties,
-  parseLocationHierarchy,
+  boundsAreValid,
+  calculateLocationsInBounds,
+  deriveFullObservatoryZoomLevel,
+  getDynamicAspectRatio,
+  getHref,
+  hydrateNeonContextData,
+  mapIsAtFocusLocation,
+  DEFAULT_STATE,
+  FEATURES,
+  SITE_MAP_PROP_TYPES
 } from '../SiteMapUtils';
-*/
-const parseLocationProperties = () => {};
-const parseLocationHierarchy = () => {};
 
-/**
-   This test covers functionality that still exists but moved into workers.
-   See:
-     ~/src/lib_components/workers/parseDomainHierarchy.js
-     ~/src/lib_components/workers/parseLocationsArray.js
-   There is not currently an established pattern to unit test workers. If you're reading this, and
-   you want to make these tests work, refactor them to target those two workers.
-*/
-
-describe.skip('SiteMapUtils', () => {
-  describe('parseLocationProperties()', () => {
-    const input = [
-      {
-        locationPropertyName: 'Value for Coordinate source',
-        locationPropertyValue: 'Geomorphology Midpoint',
-      },
-      {
-        locationPropertyName: 'Value for Coordinate uncertainty',
-        locationPropertyValue: 10.0,
-      },
-      {
-        locationPropertyName: 'Value for "DURATION"',
-        locationPropertyValue: 'Core',
-      },
-      {
-        locationPropertyName: 'Value for Elevation uncertainty',
-        locationPropertyValue: 10.0,
-      },
-      {
-        locationPropertyName: 'Value for Geodetic-(datum)',
-        locationPropertyValue: 'WGS84',
-      },
-      {
-        locationPropertyName: 'Value for HABITAT',
-        locationPropertyValue: 'Aquatic Wadeable Stream',
-      },
-      {
-        locationPropertyName: 'Value for Has Location-Started Receiving Data?',
-        locationPropertyValue: 'N',
-      },
-      {
-        locationPropertyName: 'Value for IS_ACTIVE',
-        locationPropertyValue: 'Yes',
-      },
-      {
-        locationPropertyName: 'Value for Site Timezone',
-        locationPropertyValue: 'US/Mountain',
-      },
-    ];
-    test('generates keyed object without defined whitelist', () => {
-      expect(parseLocationProperties(input)).toStrictEqual({
-        coordinateSource: 'Geomorphology Midpoint',
-        coordinateUncertainty: 10.0,
-        duration: 'Core',
-        elevationUncertainty: 10.0,
-        geodeticDatum: 'WGS84',
-        habitat: 'Aquatic Wadeable Stream',
-        hasLocationStartedReceivingData: 'N',
-        isActive: 'Yes',
-        siteTimezone: 'US/Mountain',
+describe('SiteMap - SiteMapUtils', () => {
+  /**
+     Functions
+  */
+  describe('boundsAreValid', () => {
+    test('correctly identifies valid bounds', () => {
+      [
+        { lat: [10, 20], lng: [10, 20] },
+        { lat: [-10, 20], lng: [-80, -30] },
+      ].forEach((bounds) => {
+        expect(boundsAreValid(bounds)).toBe(true);
       });
     });
-    test('generates keyed object with a defined whitelist', () => {
-      const whiteList = ['coordinateUncertainty', 'habitat'];
-      expect(parseLocationProperties(input, whiteList)).toStrictEqual({
-        coordinateUncertainty: 10.0,
-        habitat: 'Aquatic Wadeable Stream',
+    test('correctly identifies invalid bounds', () => {
+      [
+        null,
+        '',
+        [[10, 20], [10, 20]],
+        { lat: [10, 20], lon: [10, 20] },
+        { lat: [20, 10], lng: [10, 20] },
+      ].forEach((bounds) => {
+        expect(boundsAreValid(bounds)).toBe(false);
       });
     });
   });
 
-  describe('parseLocationHierarchy()', () => {
-    const input = {
-      locationDescription: 'Arikaree River Site, CORE',
-      locationName: 'ARIK',
-      locationProperties: [],
-      locationParentHierarchy: { locationName: 'D10' },
-      locationChildHierarchy: [
-        {
-          locationDescription: 'Arikaree River Stream',
-          locationName: 'STREAM100096',
-          locationType: 'STREAM',
-          locationChildHierarchy: [
-            {
-              locationDescription: 'Arikaree River S1 Location',
-              locationName: 'S1LOC100099',
-              locationType: 'S1_LOC',
-              locationChildHierarchy: [
-                {
-                  locationDescription: 'Not Used - Arikaree River S1 Above Water',
-                  locationName: 'ABVWAT100104',
-                  locationType: 'ABOVE_WATER',
-                  locationChildHierarchy: [],
-                },
-                {
-                  locationDescription: 'Arikaree River PAR Radiation S1',
-                  locationName: 'CFGLOC100111',
-                  locationType: 'CONFIG',
-                  locationChildHierarchy: [],
-                },
-                {
-                  locationDescription: 'Arikaree River Water Level S1',
-                  locationName: 'CFGLOC101669',
-                  locationType: 'CONFIG',
-                  locationChildHierarchy: [],
-                },
-                {
-                  locationDescription: 'Arikaree River Water Chemistry and Temperature S1',
-                  locationName: 'CFGLOC101670',
-                  locationType: 'CONFIG',
-                  locationChildHierarchy: [],
-                },
-              ],
-            },
-            {
-              locationDescription: 'Arikaree River S2 Location',
-              locationName: 'S2LOC100103',
-              locationType: 'S2_LOC',
-              locationChildHierarchy: [
-                {
-                  locationDescription: 'Not Used - Arikaree River S2 Above Water',
-                  locationName: 'ABVWAT100109',
-                  locationType: 'ABOVE_WATER',
-                  locationChildHierarchy: [],
-                },
-                {
-                  locationDescription: 'Arikaree River PAR Radiation S2',
-                  locationName: 'CFGLOC100112',
-                  locationType: 'CONFIG',
-                  locationChildHierarchy: [],
-                },
-                {
-                  locationDescription: 'Arikaree River Water Level S2',
-                  locationName: 'CFGLOC101671',
-                  locationType: 'CONFIG',
-                  locationChildHierarchy: [],
-                },
-                {
-                  locationDescription: 'Arikaree River Water Chemistry and Temperature S2',
-                  locationName: 'CFGLOC101672',
-                  locationType: 'CONFIG',
-                  locationChildHierarchy: [],
-                },
-                {
-                  locationDescription: 'Arikaree River Nitrate Analyzer S2',
-                  locationName: 'CFGLOC101679',
-                  locationType: 'CONFIG',
-                  locationChildHierarchy: [],
-                },
-                {
-                  locationDescription: 'ss - S2 Location',
-                  locationName: 'ARIK.AOS.S2',
-                  locationType: 'AOS S2 named location type',
-                  locationChildHierarchy: [],
-                },
-              ],
-            },
-            {
-              locationDescription: 'Not Used - Arikaree River Gauge',
-              locationName: 'GAUGE101247',
-              locationChildHierarchy: [
-                {
-                  locationDescription: 'Not Used - Arikaree River Discharge',
-                  locationName: 'DISCHG101249',
-                  locationChildHierarchy: [],
-                },
-              ],
-            },
-            {
-              locationDescription: 'Arikaree River Staff Gauge',
-              locationName: 'SGAUGE101248',
-              locationType: 'STAFF_GAUGE',
-              locationChildHierarchy: [
-                {
-                  locationDescription: 'Arikaree River Staff Gauge Camera',
-                  locationName: 'CFGLOC101673',
-                  locationType: 'CONFIG',
-                  locationChildHierarchy: [],
-                },
-                {
-                  locationDescription: 'Gauge',
-                  locationName: 'ARIK.AOS.gauge',
-                  locationType: 'AOS gauge named location type',
-                  locationChildHierarchy: [],
-                },
-              ],
-            },
-            {
-              locationDescription: 'Aquatic Plant Parent',
-              locationName: 'ARIK.AOS.plant.parent',
-              locationType: 'AOS aquatic plant parent named location type',
-              locationChildHierarchy: [
-                {
-                  locationDescription: '01 - Aquatic Plant Transect',
-                  locationName: 'ARIK.AOS.aquatic.plant.transect.01',
-                  locationType: 'AOS aquatic plant named location type',
-                  locationChildHierarchy: [],
-                },
-                {
-                  locationDescription: '02 - Aquatic Plant Transect',
-                  locationName: 'ARIK.AOS.aquatic.plant.transect.02',
-                  locationType: 'AOS aquatic plant named location type',
-                  locationChildHierarchy: [],
-                },
-                {
-                  locationDescription: '03 - Aquatic Plant Transect',
-                  locationName: 'ARIK.AOS.aquatic.plant.transect.03',
-                  locationType: 'AOS aquatic plant named location type',
-                  locationChildHierarchy: [],
-                },
-              ],
-            },
-            {
-              locationDescription: 'Fish parent',
-              locationName: 'ARIK.AOS.fish.parent',
-              locationType: 'AOS fish parent named location type',
-              locationChildHierarchy: [
-                {
-                  locationDescription: '01 Fish Point',
-                  locationName: 'ARIK.AOS.fish.point.01',
-                  locationType: 'AOS fish named location type',
-                  locationChildHierarchy: [],
-                },
-                {
-                  locationDescription: '02 Fish Point',
-                  locationName: 'ARIK.AOS.fish.point.02',
-                  locationType: 'AOS fish named location type',
-                  locationChildHierarchy: [],
-                },
-                {
-                  locationDescription: '03 Fish Point',
-                  locationName: 'ARIK.AOS.fish.point.03',
-                  locationType: 'AOS fish named location type',
-                  locationChildHierarchy: [],
-                },
-              ],
-            },
-            {
-              locationDescription: 'Sediment Parent',
-              locationName: 'ARIK.AOS.sediment.parent',
-              locationType: 'AOS sediment parent named location type',
-              locationChildHierarchy: [
-                {
-                  locationDescription: '1 - Sediment',
-                  locationName: 'ARIK.AOS.sediment.01',
-                  locationType: 'AOS sediment named location type',
-                  locationChildHierarchy: [],
-                },
-                {
-                  locationDescription: '2 - Sediment',
-                  locationName: 'ARIK.AOS.sediment.02',
-                  locationType: 'AOS sediment named location type',
-                  locationChildHierarchy: [],
-                },
-                {
-                  locationDescription: '3 - Sediment',
-                  locationName: 'ARIK.AOS.sediment.03',
-                  locationType: 'AOS sediment named location type',
-                  locationChildHierarchy: [],
-                },
-              ],
-            },
-            {
-              locationDescription: 'Reaeration Parent',
-              locationName: 'ARIK.AOS.reaeration.parent',
-              locationType: 'AOS reaeration station parent named location type',
-              locationChildHierarchy: [
-                {
-                  locationDescription: 'Station 0 - Drip REA',
-                  locationName: 'ARIK.AOS.reaeration.station.drip',
-                  locationType: 'AOS reaeration station named location type',
-                  locationChildHierarchy: [],
-                },
-                {
-                  locationDescription: 'Station 1 - REA',
-                  locationName: 'ARIK.AOS.reaeration.station.01',
-                  locationType: 'AOS reaeration station named location type',
-                  locationChildHierarchy: [],
-                },
-                {
-                  locationDescription: 'Station 2 - REA',
-                  locationName: 'ARIK.AOS.reaeration.station.02',
-                  locationType: 'AOS reaeration station named location type',
-                  locationChildHierarchy: [],
-                },
-                {
-                  locationDescription: 'Station 3 - REA',
-                  locationName: 'ARIK.AOS.reaeration.station.03',
-                  locationType: 'AOS reaeration station named location type',
-                  locationChildHierarchy: [],
-                },
-                {
-                  locationDescription: 'Station 4 - REA',
-                  locationName: 'ARIK.AOS.reaeration.station.04',
-                  locationType: 'AOS reaeration station named location type',
-                  locationChildHierarchy: [],
-                },
-              ],
-            },
-            {
-              locationDescription: 'Discharge',
-              locationName: 'ARIK.AOS.discharge',
-              locationType: 'AOS discharge named location type',
-              locationChildHierarchy: [],
-            },
-            {
-              locationDescription: 'TOP - Top of reach',
-              locationName: 'ARIK.AOS.reach.top',
-              locationType: 'AOS reach top named location type',
-              locationChildHierarchy: [],
-            },
-            {
-              locationDescription: 'BOT - Bottom of reach',
-              locationName: 'ARIK.AOS.reach.bottom',
-              locationType: 'AOS reach bottom named location type',
-              locationChildHierarchy: [],
-            },
-          ],
-        },
-        {
-          locationDescription: 'Arikaree River Groundwater Wells',
-          locationName: 'GWWELL101238',
-          locationType: 'GROUNDWATER_WELLS',
-          locationChildHierarchy: [
-            {
-              locationDescription: 'Arikaree River Well, 001',
-              locationName: 'WELL101680',
-              locationType: 'GROUNDWATER_WELL',
-              locationChildHierarchy: [
-                {
-                  locationDescription: 'Arikaree River Groundwater Well 001',
-                  locationName: 'CFGLOC101239',
-                  locationType: 'CONFIG',
-                  locationChildHierarchy: [],
-                },
-                {
-                  locationDescription: 'w1 - GW Well 001',
-                  locationName: 'ARIK.AOS.groundwater.well.001',
-                  locationType: 'AOS groundwater well named location type',
-                  locationChildHierarchy: [],
-                },
-              ],
-            },
-            {
-              locationDescription: 'Arikaree River Well, 002',
-              locationName: 'WELL101681',
-              locationType: 'GROUNDWATER_WELL',
-              locationChildHierarchy: [
-                {
-                  locationDescription: 'Arikaree River Groundwater Well 002',
-                  locationName: 'CFGLOC101240',
-                  locationType: 'CONFIG',
-                  locationChildHierarchy: [],
-                },
-                {
-                  locationDescription: 'w2 - GW Well 002',
-                  locationName: 'ARIK.AOS.groundwater.well.002',
-                  locationType: 'AOS groundwater well named location type',
-                  locationChildHierarchy: [],
-                },
-              ],
-            },
-          ],
-        },
-        {
-          locationDescription: 'Arikaree River Met Station',
-          locationName: 'METSTN101250',
-          locationType: 'MET_STATION',
-          locationChildHierarchy: [
-            {
-              locationDescription: 'Arikaree River 2d Wind',
-              locationName: 'CFGLOC101251',
-              locationType: 'CONFIG',
-              locationChildHierarchy: [],
-            },
-            {
-              locationDescription: 'Arikaree River Relative Humidity',
-              locationName: 'CFGLOC101252',
-              locationType: 'CONFIG',
-              locationChildHierarchy: [],
-            },
-            {
-              locationDescription: 'Arikaree River PAR Radiation Met Station',
-              locationName: 'CFGLOC101253',
-              locationType: 'CONFIG',
-              locationChildHierarchy: [],
-            },
-            {
-              locationDescription: 'Arikaree River Net Radiation',
-              locationName: 'CFGLOC101254',
-              locationType: 'CONFIG',
-              locationChildHierarchy: [],
-            },
-            {
-              locationDescription: 'Arikaree River Single Aspirated Air Temperature',
-              locationName: 'CFGLOC101255',
-              locationType: 'CONFIG',
-              locationChildHierarchy: [],
-            },
-            {
-              locationDescription: 'Arikaree River Barometric Pressure',
-              locationName: 'CFGLOC101256',
-              locationType: 'CONFIG',
-              locationChildHierarchy: [],
-            },
-          ],
-        },
-        {
-          locationDescription: 'Arikaree River Wet Deposition',
-          locationName: 'CFGLOC101674',
-          locationType: 'CONFIG',
-          locationChildHierarchy: [
-            {
-              locationDescription: 'Wet Deposition',
-              locationName: 'ARIK.AOS.wet.deposition',
-              locationType: 'AOS wet deposition named location type',
-              locationChildHierarchy: [],
-            },
-          ],
-        },
-        {
-          locationDescription: 'Arikaree River Primary Precipitation',
-          locationName: 'CFGLOC101675',
-          locationType: 'CONFIG',
-          locationChildHierarchy: [],
-        },
-        {
-          locationDescription: 'Riparian Parent ',
-          locationName: 'ARIK.AOS.riparian.parent',
-          locationType: 'AOS riparian parent named location type',
-          locationChildHierarchy: [
-            {
-              locationDescription: '01 - Riparian Transect',
-              locationName: 'ARIK.AOS.riparian.transect.01',
-              locationType: 'AOS riparian named location type',
-              locationChildHierarchy: [],
-            },
-            {
-              locationDescription: '02 - Riparian Transect',
-              locationName: 'ARIK.AOS.riparian.transect.02',
-              locationType: 'AOS riparian named location type',
-              locationChildHierarchy: [],
-            },
-            {
-              locationDescription: '03 - Riparian Transect',
-              locationName: 'ARIK.AOS.riparian.transect.03',
-              locationType: 'AOS riparian named location type',
-              locationChildHierarchy: [],
-            },
-          ],
-        },
-        {
-          locationDescription: 'BEN_1',
-          locationName: 'ARIK.AOS.benchmark.1',
-          locationType: 'AOS benchmark named location type',
-          locationChildHierarchy: [],
-        },
-        {
-          locationDescription: 'BEN_2',
-          locationName: 'ARIK.AOS.benchmark.2',
-          locationType: 'AOS benchmark named location type',
-          locationChildHierarchy: [],
-        },
-        {
-          locationDescription: 'BEN_3',
-          locationName: 'ARIK.AOS.benchmark.3',
-          locationType: 'AOS benchmark named location type',
-          locationChildHierarchy: [],
-        },
-        {
-          locationDescription: 're - Reach',
-          locationName: 'ARIK.AOS.reach',
-          locationType: 'AOS reach named location type',
-          locationChildHierarchy: [],
-        },
-        {
-          locationDescription: 'BEN_4',
-          locationName: 'ARIK.AOS.benchmark.4',
-          locationType: 'AOS benchmark named location type',
-          locationChildHierarchy: [],
-        },
-      ],
-      locationParent: 'D10',
-      locationParentUrl: 'https://data.neonscience.org/api/v0/locations/D10',
+  describe('calculateLocationsInBounds', () => {
+    const locations = {
+      A: { latitude: 15, longitude: 0 },
+      B: { latitude: 12, longitude: 0 },
+      C: { latitude: 19, longitude: 0 },
+      D: { latitude: 8, longitude: 0 },
+      E: { latitude: 27, longitude: 0 },
+      F: { latitude: -2, longitude: 0 },
+      G: { latitude: 38, longitude: 0 },
+      H: { latitude: 15, longitude: 0 },
+      I: { latitude: 15, longitude: -15 },
+      J: { latitude: 15, longitude: 23 },
+      K: { latitude: 15, longitude: -37 },
+      L: { latitude: 15, longitude: 42 },
+      M: { latitude: 15, longitude: -62 },
+      N: { latitude: 15, longitude: 71 },
+      X: { latitude: 15 },
+      Y: { longitude: 0 },
+      Z: [12, 0],
     };
-    const output = {
-      STREAM100096: { parent: null, type: 'STREAM', description: 'Arikaree River Stream' },
-      S1LOC100099: { parent: 'STREAM100096', type: 'S1_LOC', description: 'Arikaree River S1 Location' },
-      CFGLOC100111: { parent: 'S1LOC100099', type: 'CONFIG', description: 'Arikaree River PAR Radiation S1' },
-      CFGLOC101669: { parent: 'S1LOC100099', type: 'CONFIG', description: 'Arikaree River Water Level S1' },
-      CFGLOC101670: { parent: 'S1LOC100099', type: 'CONFIG', description: 'Arikaree River Water Chemistry and Temperature S1' },
-      S2LOC100103: { parent: 'STREAM100096', type: 'S2_LOC', description: 'Arikaree River S2 Location' },
-      CFGLOC100112: { parent: 'S2LOC100103', type: 'CONFIG', description: 'Arikaree River PAR Radiation S2' },
-      CFGLOC101671: { parent: 'S2LOC100103', type: 'CONFIG', description: 'Arikaree River Water Level S2' },
-      CFGLOC101672: { parent: 'S2LOC100103', type: 'CONFIG', description: 'Arikaree River Water Chemistry and Temperature S2' },
-      CFGLOC101679: { parent: 'S2LOC100103', type: 'CONFIG', description: 'Arikaree River Nitrate Analyzer S2' },
-      'ARIK.AOS.S2': { parent: 'S2LOC100103', type: 'AOS S2 named location type', description: 'ss - S2 Location' },
-      SGAUGE101248: { parent: 'STREAM100096', type: 'STAFF_GAUGE', description: 'Arikaree River Staff Gauge' },
-      CFGLOC101673: { parent: 'SGAUGE101248', type: 'CONFIG', description: 'Arikaree River Staff Gauge Camera' },
-      'ARIK.AOS.gauge': { parent: 'SGAUGE101248', type: 'AOS gauge named location type', description: 'Gauge' },
-      'ARIK.AOS.plant.parent': { parent: 'STREAM100096', type: 'AOS aquatic plant parent named location type', description: 'Aquatic Plant Parent' },
-      'ARIK.AOS.aquatic.plant.transect.01': { parent: 'ARIK.AOS.plant.parent', type: 'AOS aquatic plant named location type', description: '01 - Aquatic Plant Transect' },
-      'ARIK.AOS.aquatic.plant.transect.02': { parent: 'ARIK.AOS.plant.parent', type: 'AOS aquatic plant named location type', description: '02 - Aquatic Plant Transect' },
-      'ARIK.AOS.aquatic.plant.transect.03': { parent: 'ARIK.AOS.plant.parent', type: 'AOS aquatic plant named location type', description: '03 - Aquatic Plant Transect' },
-      'ARIK.AOS.fish.parent': { parent: 'STREAM100096', type: 'AOS fish parent named location type', description: 'Fish parent' },
-      'ARIK.AOS.fish.point.01': { parent: 'ARIK.AOS.fish.parent', type: 'AOS fish named location type', description: '01 Fish Point' },
-      'ARIK.AOS.fish.point.02': { parent: 'ARIK.AOS.fish.parent', type: 'AOS fish named location type', description: '02 Fish Point' },
-      'ARIK.AOS.fish.point.03': { parent: 'ARIK.AOS.fish.parent', type: 'AOS fish named location type', description: '03 Fish Point' },
-      'ARIK.AOS.sediment.parent': { parent: 'STREAM100096', type: 'AOS sediment parent named location type', description: 'Sediment Parent' },
-      'ARIK.AOS.sediment.01': { parent: 'ARIK.AOS.sediment.parent', type: 'AOS sediment named location type', description: '1 - Sediment' },
-      'ARIK.AOS.sediment.02': { parent: 'ARIK.AOS.sediment.parent', type: 'AOS sediment named location type', description: '2 - Sediment' },
-      'ARIK.AOS.sediment.03': { parent: 'ARIK.AOS.sediment.parent', type: 'AOS sediment named location type', description: '3 - Sediment' },
-      'ARIK.AOS.reaeration.parent': { parent: 'STREAM100096', type: 'AOS reaeration station parent named location type', description: 'Reaeration Parent' },
-      'ARIK.AOS.reaeration.station.drip': { parent: 'ARIK.AOS.reaeration.parent', type: 'AOS reaeration station named location type', description: 'Station 0 - Drip REA' },
-      'ARIK.AOS.reaeration.station.01': { parent: 'ARIK.AOS.reaeration.parent', type: 'AOS reaeration station named location type', description: 'Station 1 - REA' },
-      'ARIK.AOS.reaeration.station.02': { parent: 'ARIK.AOS.reaeration.parent', type: 'AOS reaeration station named location type', description: 'Station 2 - REA' },
-      'ARIK.AOS.reaeration.station.03': { parent: 'ARIK.AOS.reaeration.parent', type: 'AOS reaeration station named location type', description: 'Station 3 - REA' },
-      'ARIK.AOS.reaeration.station.04': { parent: 'ARIK.AOS.reaeration.parent', type: 'AOS reaeration station named location type', description: 'Station 4 - REA' },
-      'ARIK.AOS.discharge': { parent: 'STREAM100096', type: 'AOS discharge named location type', description: 'Discharge' },
-      'ARIK.AOS.reach.top': { parent: 'STREAM100096', type: 'AOS reach top named location type', description: 'TOP - Top of reach' },
-      'ARIK.AOS.reach.bottom': { parent: 'STREAM100096', type: 'AOS reach bottom named location type', description: 'BOT - Bottom of reach' },
-      GWWELL101238: { parent: null, type: 'GROUNDWATER_WELLS', description: 'Arikaree River Groundwater Wells' },
-      WELL101680: { parent: 'GWWELL101238', type: 'GROUNDWATER_WELL', description: 'Arikaree River Well, 001' },
-      CFGLOC101239: { parent: 'WELL101680', type: 'CONFIG', description: 'Arikaree River Groundwater Well 001' },
-      'ARIK.AOS.groundwater.well.001': { parent: 'WELL101680', type: 'AOS groundwater well named location type', description: 'w1 - GW Well 001' },
-      WELL101681: { parent: 'GWWELL101238', type: 'GROUNDWATER_WELL', description: 'Arikaree River Well, 002' },
-      CFGLOC101240: { parent: 'WELL101681', type: 'CONFIG', description: 'Arikaree River Groundwater Well 002' },
-      'ARIK.AOS.groundwater.well.002': { parent: 'WELL101681', type: 'AOS groundwater well named location type', description: 'w2 - GW Well 002' },
-      METSTN101250: { parent: null, type: 'MET_STATION', description: 'Arikaree River Met Station' },
-      CFGLOC101251: { parent: 'METSTN101250', type: 'CONFIG', description: 'Arikaree River 2d Wind' },
-      CFGLOC101252: { parent: 'METSTN101250', type: 'CONFIG', description: 'Arikaree River Relative Humidity' },
-      CFGLOC101253: { parent: 'METSTN101250', type: 'CONFIG', description: 'Arikaree River PAR Radiation Met Station' },
-      CFGLOC101254: { parent: 'METSTN101250', type: 'CONFIG', description: 'Arikaree River Net Radiation' },
-      CFGLOC101255: { parent: 'METSTN101250', type: 'CONFIG', description: 'Arikaree River Single Aspirated Air Temperature' },
-      CFGLOC101256: { parent: 'METSTN101250', type: 'CONFIG', description: 'Arikaree River Barometric Pressure' },
-      CFGLOC101674: { parent: null, type: 'CONFIG', description: 'Arikaree River Wet Deposition' },
-      'ARIK.AOS.wet.deposition': { parent: 'CFGLOC101674', type: 'AOS wet deposition named location type', description: 'Wet Deposition' },
-      CFGLOC101675: { parent: null, type: 'CONFIG', description: 'Arikaree River Primary Precipitation' },
-      'ARIK.AOS.riparian.parent': { parent: null, type: 'AOS riparian parent named location type', description: 'Riparian Parent ' },
-      'ARIK.AOS.riparian.transect.01': { parent: 'ARIK.AOS.riparian.parent', type: 'AOS riparian named location type', description: '01 - Riparian Transect' },
-      'ARIK.AOS.riparian.transect.02': { parent: 'ARIK.AOS.riparian.parent', type: 'AOS riparian named location type', description: '02 - Riparian Transect' },
-      'ARIK.AOS.riparian.transect.03': { parent: 'ARIK.AOS.riparian.parent', type: 'AOS riparian named location type', description: '03 - Riparian Transect' },
-      'ARIK.AOS.benchmark.1': { parent: null, type: 'AOS benchmark named location type', description: 'BEN_1' },
-      'ARIK.AOS.benchmark.2': { parent: null, type: 'AOS benchmark named location type', description: 'BEN_2' },
-      'ARIK.AOS.benchmark.3': { parent: null, type: 'AOS benchmark named location type', description: 'BEN_3' },
-      'ARIK.AOS.benchmark.4': { parent: null, type: 'AOS benchmark named location type', description: 'BEN_4' },
-      'ARIK.AOS.reach': { parent: null, type: 'AOS reach named location type', description: 're - Reach' },
+    const coordLocations = {
+      X: {
+        geometry: {
+          coordinates: [[13, 20]],
+        },
+      },
+      Y: {
+        geometry: {
+          coordinates: [[0, 67], [24, -80], [17, -5]],
+        },
+      },
+      Z: {
+        geometry: {
+          coordinates: [
+            [[12, 0], [-30, -41], [-35, 8]],
+            [[-32, -87], [-37, -82], [-41, -65]],
+          ],
+        },
+      },
+      W: {
+        geometry: {
+          coordinates: [
+            [[56, 0], [-30, -41], [-35, 8]],
+            [[-32, -87], [-37, -82], [-41, -65]],
+          ],
+        },
+      },
     };
-    test('generates a flat site location hierarchy object', () => {
-      expect(parseLocationHierarchy(input)).toStrictEqual(output);
+    const bounds = { lat: [10, 20], lng: [-30, 30] };
+    test('correctly identifies locations in bounds with neither map nor point extension', () => {
+      expect(calculateLocationsInBounds(locations, bounds)).toStrictEqual([
+        'A', 'B', 'C', 'H', 'I', 'J',
+      ]);
     });
+    test('correctly identifies locations in bounds with only map extension', () => {
+      expect(calculateLocationsInBounds(locations, bounds, true)).toStrictEqual([
+        'A', 'B', 'C', 'D', 'H', 'I', 'J', 'K', 'L',
+      ]);
+    });
+    test('correctly identifies locations in bounds with only point extension', () => {
+      expect(calculateLocationsInBounds(locations, bounds, false, 10)).toStrictEqual([
+        'A', 'B', 'C', 'D', 'E', 'H', 'I', 'J', 'K',
+      ]);
+    });
+    test('correctly identifies locations in bounds with both map and point extension', () => {
+      expect(calculateLocationsInBounds(locations, bounds, true, 10)).toStrictEqual([
+        'A', 'B', 'C', 'D', 'E', 'F', 'H', 'I', 'J',  'K', 'L', 'M',
+      ]);
+    });
+    test('correctly handles deeply nested single coord geometries', () => {
+      expect(calculateLocationsInBounds(coordLocations, bounds)).toStrictEqual([
+        'X', 'Y', 'Z',
+      ]);
+    });
+    test('correctly returns empty set for invalid inputs', () => {
+      expect(calculateLocationsInBounds({})).toStrictEqual([]);
+      expect(calculateLocationsInBounds('bad locations')).toStrictEqual([]);
+      expect(calculateLocationsInBounds(locations, 'bad bounds')).toStrictEqual([]);
+    });
+    test('correctly reflects back all locations for null/missing bounds', () => {
+      expect(calculateLocationsInBounds(locations)).toStrictEqual(Object.keys(locations));
+      expect(calculateLocationsInBounds(locations, null)).toStrictEqual(Object.keys(locations));
+    });
+  });
+
+  describe('deriveFullObservatoryZoomLevel', () => {
+    test('returns FALLBACK_ZOOM if provided mapRef is not valid', () => {
+      expect(deriveFullObservatoryZoomLevel()).toBe(2);
+      expect(deriveFullObservatoryZoomLevel({ current: null })).toBe(2);
+    });
+    test('returns appropriate zoom levels for various container sizes', () => {
+      const mapRef = { current: { container: { parentElement: {} } } };
+      [
+        [10, 0, 2],
+        [0, 10, 2],
+        [10, 10, 1],
+        [300, 200, 1],
+        [600, 400, 2],
+        [800, 600, 2],
+        [1000, 800, 3],
+        [1400, 1200, 4],
+        [1200, 200, 1],
+        [1200, 600, 2],
+      ].forEach((test) => {
+        mapRef.current.container.parentElement.clientWidth = test[0];
+        mapRef.current.container.parentElement.clientHeight = test[1];
+        expect(deriveFullObservatoryZoomLevel(mapRef)).toBe(test[2]);
+      });
+    });
+  });
+
+  describe('getDynamicAspectRatio', () => {
+    let windowSpy;
+    beforeEach(() => {
+      windowSpy = jest.spyOn(global, "window", "get");
+    });
+    afterEach(() => {
+      windowSpy.mockRestore();
+    });
+    test('gets appropriate aspect ratios for various window sizes without a buffer', () => {
+      [
+        [800, 1, (1/3)],
+        [800, 100, (1/3)],
+        [800, 300, (1/2.5)],
+        [800, 400, (9/16)],
+        [800, 450, (2/3)],
+        [800, 520, (5/7)],
+        [800, 600, (4/5)],
+        [800, 800, (1/1)],
+        [800, 1000, (5/4)],
+        [750, 1000, (7/5)],
+        [700, 1000, (3/2)],
+        [600, 1000, (16/9)],
+        [500, 1000, (2/1)],
+        [100, 1000, (2/1)],
+        [1, 1000, (2/1)],
+      ].forEach((test) => {
+        windowSpy.mockImplementation(() => (
+          {innerWidth: test[0], innerHeight: test[1] }
+        ));
+        expect(getDynamicAspectRatio()).toBe(test[2]);
+      });
+    });
+    test('gets appropriate aspect ratios for various window sizes with a buffer', () => {
+      [
+        [800, 1, (1/3)],
+        [800, 400, (1/3)],
+        [800, 600, (1/2.5)],
+        [800, 700, (9/16)],
+        [800, 750, (2/3)],
+        [800, 820, (5/7)],
+        [800, 900, (4/5)],
+        [800, 1100, (1/1)],
+        [800, 1300, (5/4)],
+        [750, 1300, (7/5)],
+        [700, 1300, (3/2)],
+        [600, 1300, (16/9)],
+        [500, 1300, (2/1)],
+        [100, 1300, (2/1)],
+        [1, 1300, (2/1)],
+      ].forEach((test) => {
+        windowSpy.mockImplementation(() => (
+          {innerWidth: test[0], innerHeight: test[1] }
+        ));
+        expect(getDynamicAspectRatio(300)).toBe(test[2]);
+      });
+    });
+  });
+
+  describe('getHref', () => {
+    test('generates proper fallback href for missing or invalid key', () => {
+      expect(getHref()).toEqual('#');
+      expect(getHref('INVALID_KEY', 'foo')).toEqual('#');
+    });
+    test('generates proper href for EXPLORE_DATA_PRODUCTS_BY_SITE', () => {
+      expect(getHref('EXPLORE_DATA_PRODUCTS_BY_SITE', 'ARIK'))
+        .toEqual('https://data.neonscience.org/data-products/explore?site=ARIK');
+      expect(getHref('EXPLORE_DATA_PRODUCTS_BY_SITE')).toEqual('#');
+    });
+    test('generates proper href for EXPLORE_DATA_PRODUCTS_BY_STATE', () => {
+      expect(getHref('EXPLORE_DATA_PRODUCTS_BY_STATE', 'CO'))
+        .toEqual('https://data.neonscience.org/data-products/explore?state=CO');
+      expect(getHref('EXPLORE_DATA_PRODUCTS_BY_STATE')).toEqual('#');
+    });
+    test('generates proper href for EXPLORE_DATA_PRODUCTS_BY_DOMAIN', () => {
+      expect(getHref('EXPLORE_DATA_PRODUCTS_BY_DOMAIN', 'D13'))
+        .toEqual('https://data.neonscience.org/data-products/explore?domain=D13');
+      expect(getHref('EXPLORE_DATA_PRODUCTS_BY_DOMAIN')).toEqual('#');
+    });
+    test('generates proper href for SITE_DETAILS', () => {
+      expect(getHref('SITE_DETAILS', 'BARC'))
+        .toEqual('https://www.neonscience.org/field-sites/BARC');
+      expect(getHref('SITE_DETAILS')).toEqual('#');
+    });
+    test('generates proper href for DOMAIN_DETAILS', () => {
+      expect(getHref('DOMAIN_DETAILS', 'D08'))
+        .toEqual('https://www.neonscience.org/domains/D08');
+      expect(getHref('DOMAIN_DETAILS')).toEqual('#');
+    });
+  });
+
+  describe('hydrateNeonContextData', () => {
+    test('applies NeonContext data correctly', () => {
+      const initialState = {
+        neonContextHydrated: false,
+        sites: {},
+        featureData: {
+          SITES: {
+            TERRESTRIAL_CORE_SITES: {},
+            AQUATIC_CORE_SITES: {},
+            TERRESTRIAL_RELOCATABLE_SITES: {},
+            AQUATIC_RELOCATABLE_SITES: {},
+          },
+          STATES: { STATES: {} },
+          DOMAINS: { DOMAINS: {} },
+        },
+      };
+      const neonContextData = {
+        sites: {
+          ABBY: { type: 'RELOCATABLE', terrain: 'TERRESTRIAL', stateCode: 'WA', domainCode: 'D16' },
+          CLBJ: { type: 'CORE', terrain: 'TERRESTRIAL', stateCode: 'TX', domainCode: 'D11' },
+          SUGG: { type: 'CORE', terrain: 'AQUATIC', stateCode: 'FL', domainCode: 'D03' },
+          WLOU: { type: 'RELOCATABLE', terrain: 'AQUATIC', stateCode: 'CO', domainCode: 'D13' },
+        },
+        states: {
+          CO: { name: 'Colorado' },
+          FL: { name: 'Florida' },
+          TX: { name: 'Texas' },
+          WA: { name: 'Washington' },
+        },
+        domains: {
+          D03: { name: 'Southeast' },
+          D11: { name: 'Southern Plains' },
+          D13: { name: 'Southern Rockies and Colorado Plateau' },
+          D16: { name: 'Pacific Northwest' },
+        },
+        stateSites: { CO: ['WLOU'], FL: ['SUGG'], TX: ['CLBJ'], WA: ['ABBY'] },
+        domainSites: { D03: ['SUGG'], D11: ['CLBJ'], D13: ['WLOU'], D16: ['ABBY'] },
+      };
+      expect(hydrateNeonContextData(initialState, neonContextData)).toStrictEqual({
+        neonContextHydrated: true,
+        sites: { ...neonContextData.sites },
+        featureData: {
+          SITES: {
+            TERRESTRIAL_CORE_SITES: {
+              CLBJ: { ...neonContextData.sites.CLBJ },
+            },
+            AQUATIC_CORE_SITES: {
+              SUGG: { ...neonContextData.sites.SUGG },
+            },
+            TERRESTRIAL_RELOCATABLE_SITES: {
+              ABBY: { ...neonContextData.sites.ABBY },
+            },
+            AQUATIC_RELOCATABLE_SITES: {
+              WLOU: { ...neonContextData.sites.WLOU },
+            },
+          },
+          STATES: {
+            STATES: {
+              CO: { name: 'Colorado', sites: ['WLOU'] },
+              FL: { name: 'Florida', sites: ['SUGG'] },
+              TX: { name: 'Texas', sites: ['CLBJ'] },
+              WA: { name: 'Washington', sites: ['ABBY'] },
+            },
+          },
+          DOMAINS: {
+            DOMAINS: {
+              D03: { name: 'Southeast', sites: ['SUGG'] },
+              D11: { name: 'Southern Plains', sites: ['CLBJ'] },
+              D13: { name: 'Southern Rockies and Colorado Plateau', sites: ['WLOU'] },
+              D16: { name: 'Pacific Northwest', sites: ['ABBY'] },
+            },
+          },
+        },
+      });
+    });
+  });
+
+  describe('mapIsAtFocusLocation', () => {
+    test('correctly identifies when map center is at focus location', () => {
+      expect(mapIsAtFocusLocation({
+        map: { zoom: 4, center: [-68.3, 15] },
+        focusLocation: {
+          current: 'foo',
+          map: { zoom: 4, center: [-68.3, 15] },
+        }
+      })).toBe(true);
+    });
+    test('correctly identifies when map center is not at focus location', () => {
+      expect(mapIsAtFocusLocation({
+        map: { zoom: 5, center: [-68.3, 15] },
+        focusLocation: {
+          current: 'foo',
+          map: { zoom: 4, center: [-68.3, 15] },
+        }
+      })).toBe(false);
+      expect(mapIsAtFocusLocation({
+        map: { zoom: 4, center: [-69.3, 15] },
+        focusLocation: {
+          current: 'foo',
+          map: { zoom: 4, center: [-68.3, 15] },
+        }
+      })).toBe(false);
+    });
+    test('gracefully returns false for any missing focus location or malformed state', () => {
+      expect(mapIsAtFocusLocation()).toBe(false);
+      expect(mapIsAtFocusLocation({
+        map: { zoom: 4, center: [-69.3, 15] },
+        focusLocation: { current: null },
+      })).toBe(false);
+      expect(mapIsAtFocusLocation({
+        map: { zoom: 4, center: [-68.3, 15] },
+        focusLocation: {
+          current: null,
+          map: { zoom: 4, center: [-68.3, 15] },
+        }
+      })).toBe(false);
+      expect(mapIsAtFocusLocation({
+        map: { zoom: 4, center: [-68.3, 15] },
+        focusLocation: {
+          current: 'foo',
+          map: { center: [-68.3, 15] },
+        }
+      })).toBe(false);      
+    });
+  });
+
+  describe('SelectionLimitPropType', () => {
+    const { selectionLimit: SelectionLimitPropType } = SITE_MAP_PROP_TYPES;
+    test('valid for null', () => {
+      expect(SelectionLimitPropType({ p: null }, 'p')).toBe(null);
+    });
+    test('invalid for unsupported types', () => {
+      expect(SelectionLimitPropType({ p: 'foo' }, 'p')).toBeInstanceOf(Error);
+      expect(SelectionLimitPropType({ p: () => {} }, 'p')).toBeInstanceOf(Error);
+      expect(SelectionLimitPropType({ p: { foo: 'bar' } }, 'p')).toBeInstanceOf(Error);
+      expect(SelectionLimitPropType({ p: NaN }, 'p')).toBeInstanceOf(Error);
+    });
+    test('valid for null / undefined', () => {
+      expect(SelectionLimitPropType({}, 'p')).toBe(null);
+      expect(SelectionLimitPropType({ p: null }, 'p')).toBe(null);
+    });
+    test('valid for integers greater than or equal to 1', () => {
+      expect(SelectionLimitPropType({ p: 1 }, 'p')).toBe(null);
+      expect(SelectionLimitPropType({ p: 10 }, 'p')).toBe(null);
+      expect(SelectionLimitPropType({ p: 10000000 }, 'p')).toBe(null);
+    });
+    test('invalid for integers less than 1', () => {
+      expect(SelectionLimitPropType({ p: 0 }, 'p')).toBeInstanceOf(Error);
+      expect(SelectionLimitPropType({ p: -7 }, 'p')).toBeInstanceOf(Error);
+    });
+    test('invalid for non-integer numbers', () => {
+      expect(SelectionLimitPropType({ p: 1.7 }, 'p')).toBeInstanceOf(Error);
+      expect(SelectionLimitPropType({ p: Math.PI }, 'p')).toBeInstanceOf(Error);
+    });
+    test('valid for 2-length arrays of increasing non-equal integers', () => {
+      expect(SelectionLimitPropType({ p: [2, 5] }, 'p')).toBe(null);
+      expect(SelectionLimitPropType({ p: [1, 4000] }, 'p')).toBe(null);
+      expect(SelectionLimitPropType({ p: [466, 467] }, 'p')).toBe(null);
+    });
+    test('invalid for arrays of integers with length other than 2', () => {
+      expect(SelectionLimitPropType({ p: [3] }, 'p')).toBeInstanceOf(Error);
+      expect(SelectionLimitPropType({ p: [2, 5, 7] }, 'p')).toBeInstanceOf(Error);
+    });
+    test('invalid for arrays where any values are non-integer or less than 1', () => {
+      expect(SelectionLimitPropType({ p: [3, Math.PI] }, 'p')).toBeInstanceOf(Error);
+      expect(SelectionLimitPropType({ p: [5.8, 7] }, 'p')).toBeInstanceOf(Error);
+      expect(SelectionLimitPropType({ p: [0, 10] }, 'p')).toBeInstanceOf(Error);
+      expect(SelectionLimitPropType({ p: [-15, 10] }, 'p')).toBeInstanceOf(Error);
+    });
+    test('invalid for 2-length integer arrays where values are equal or not ascending', () => {
+      expect(SelectionLimitPropType({ p: [3, 3] }, 'p')).toBeInstanceOf(Error);
+      expect(SelectionLimitPropType({ p: [7, 5] }, 'p')).toBeInstanceOf(Error);
+    });
+  });
+
+  /**
+     CONSTANTS
+  */
+  describe('FEATURES construction', () => {
+    test('all features have an explicit KEY', () => {
+      Object.keys(FEATURES).forEach((key) => {
+        expect(FEATURES[key].KEY).toBe(key);
+      });
+    });
+  });
+
+  describe('DEFAULT_STATE construction', () => {
+    test('view - all VIEWS present and uninitialized', () => {
+      expect(DEFAULT_STATE.view).toStrictEqual({
+        current: null,
+        initialized: {
+          MAP: false,
+          TABLE: false,
+        },
+      });
+    });
+    describe('featureDataFetches - initialized for all fetchable in FEATURE_DATA_SOURCES', () => {
+      expect(DEFAULT_STATE.featureDataFetches).toStrictEqual({
+        REST_LOCATIONS_API: {
+          SITE_LOCATION_HIERARCHIES: {},
+          TOWERS: {},
+        },
+        ARCGIS_ASSETS_API: {
+          FLIGHT_BOX_BOUNDARIES: {},
+          WATERSHED_BOUNDARIES: {},
+          DRAINAGE_LINES: {},
+          POUR_POINTS: {},
+          SAMPLING_BOUNDARIES: {},
+          AQUATIC_REACHES: {},
+          TOWER_AIRSHEDS: {},
+        },
+        GRAPHQL_LOCATIONS_API: {
+          10: {},
+          11: {},
+          13: {},
+          14: {},
+          15: {},
+          16: {},
+          17: {},
+        },
+      });        
+    });      
   });
 });

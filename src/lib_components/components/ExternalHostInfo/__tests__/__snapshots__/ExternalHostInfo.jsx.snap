@@ -1,0 +1,1013 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ExternalHostInfo renders graceful failure with no valid product code 1`] = `null`;
+
+exports[`ExternalHostInfo renders with valid product code and no sites 1`] = `
+<div>
+  <div
+    className="MuiPaper-root MuiCard-root makeStyles-callout-2 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <div
+      className="MuiCardContent-root makeStyles-startFlex-1"
+    >
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root makeStyles-calloutIcon-3 MuiSvgIcon-fontSizeLarge"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
+        />
+      </svg>
+      <h6
+        className="MuiTypography-root MuiTypography-subtitle2"
+        style={
+          Object {
+            "flexGrow": 1,
+          }
+        }
+      >
+        Data for this product are available in other formats from
+         
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          AmeriFlux
+        </a>
+      </h6>
+    </div>
+    <div
+      className="makeStyles-specificLinksContainer-4"
+      style={
+        Object {
+          "display": "block",
+        }
+      }
+    >
+      <hr
+        className="MuiDivider-root"
+      />
+      <div
+        className="makeStyles-siteLinksLoadingContainer-6"
+      >
+        <div
+          className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+          role="progressbar"
+          style={
+            Object {
+              "height": 36,
+              "margin": "32px 0px",
+              "width": 36,
+            }
+          }
+        >
+          <svg
+            className="MuiCircularProgress-svg"
+            viewBox="22 22 44 44"
+          >
+            <circle
+              className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+              cx={44}
+              cy={44}
+              fill="none"
+              r={20.2}
+              strokeWidth={3.6}
+              style={Object {}}
+            />
+          </svg>
+        </div>
+        <p
+          className="MuiTypography-root MuiTypography-body1"
+          style={
+            Object {
+              "marginBottom": 32,
+            }
+          }
+        >
+          Loading sites...
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
+<div>
+  <div
+    className="MuiPaper-root MuiCard-root makeStyles-callout-2 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <div
+      className="MuiCardContent-root makeStyles-startFlex-1"
+    >
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root makeStyles-calloutIcon-3 MuiSvgIcon-fontSizeLarge"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
+        />
+      </svg>
+      <h6
+        className="MuiTypography-root MuiTypography-subtitle2"
+        style={
+          Object {
+            "flexGrow": 1,
+          }
+        }
+      >
+        Raw sequence data associated with this product are available from
+         
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="BOLD"
+          data-gtm-product-code="DP1.10020.001"
+          href="http://www.barcodinglife.com/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          BOLD (Barcode of Life Datasystem)
+        </a>
+      </h6>
+    </div>
+    <div
+      className="makeStyles-specificLinksContainer-4"
+      style={
+        Object {
+          "display": "block",
+        }
+      }
+    >
+      <hr
+        className="MuiDivider-root"
+      />
+      <ul
+        style={
+          Object {
+            "marginBottom": 6,
+            "marginTop": 24,
+          }
+        }
+      >
+        <li>
+          <a
+            className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+            data-gtm-external-host="BOLD"
+            data-gtm-product-code="DP1.10020.001"
+            href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETN"
+            onBlur={[Function]}
+            onFocus={[Function]}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Ground beetle sequences DNA barcode
+          </a>
+        </li>
+        <li>
+          <a
+            className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+            data-gtm-external-host="BOLD"
+            data-gtm-product-code="DP1.10020.001"
+            href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETP"
+            onBlur={[Function]}
+            onFocus={[Function]}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Ground beetle sequences DNA barcode (Prototype Data)
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
+<div
+  data-selenium="foo"
+>
+  <div
+    className="MuiPaper-root MuiCard-root makeStyles-callout-2 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <div
+      className="MuiCardContent-root makeStyles-startFlex-1"
+    >
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root makeStyles-calloutIcon-3 MuiSvgIcon-fontSizeLarge"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
+        />
+      </svg>
+      <h6
+        className="MuiTypography-root MuiTypography-subtitle2"
+        style={
+          Object {
+            "flexGrow": 1,
+          }
+        }
+      >
+        Data for this product are only available from
+         
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/about/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          The PhenoCam Network
+        </a>
+      </h6>
+    </div>
+    <div
+      className="makeStyles-specificLinksContainer-4"
+      style={
+        Object {
+          "display": "block",
+        }
+      }
+    >
+      <hr
+        className="MuiDivider-root"
+      />
+      <div
+        className="makeStyles-siteLinksLoadingContainer-6"
+      >
+        <div
+          className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+          role="progressbar"
+          style={
+            Object {
+              "height": 36,
+              "margin": "32px 0px",
+              "width": 36,
+            }
+          }
+        >
+          <svg
+            className="MuiCircularProgress-svg"
+            viewBox="22 22 44 44"
+          >
+            <circle
+              className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+              cx={44}
+              cy={44}
+              fill="none"
+              r={20.2}
+              strokeWidth={3.6}
+              style={Object {}}
+            />
+          </svg>
+        </div>
+        <p
+          className="MuiTypography-root MuiTypography-body1"
+          style={
+            Object {
+              "marginBottom": 32,
+            }
+          }
+        >
+          Loading sites...
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`ExternalHostInfo renders with valid product code and sites 1`] = `
+<div>
+  <div
+    className="MuiPaper-root MuiCard-root makeStyles-callout-2 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <div
+      className="MuiCardContent-root makeStyles-startFlex-1"
+    >
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root makeStyles-calloutIcon-3 MuiSvgIcon-fontSizeLarge"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
+        />
+      </svg>
+      <h6
+        className="MuiTypography-root MuiTypography-subtitle2"
+        style={
+          Object {
+            "flexGrow": 1,
+          }
+        }
+      >
+        Data for this product are available in other formats from
+         
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          AmeriFlux
+        </a>
+      </h6>
+    </div>
+    <div
+      className="makeStyles-specificLinksContainer-4"
+      style={
+        Object {
+          "display": "block",
+        }
+      }
+    >
+      <hr
+        className="MuiDivider-root"
+      />
+      <div
+        className="makeStyles-siteLinksLoadingContainer-6"
+      >
+        <div
+          className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+          role="progressbar"
+          style={
+            Object {
+              "height": 36,
+              "margin": "32px 0px",
+              "width": 36,
+            }
+          }
+        >
+          <svg
+            className="MuiCircularProgress-svg"
+            viewBox="22 22 44 44"
+          >
+            <circle
+              className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+              cx={44}
+              cy={44}
+              fill="none"
+              r={20.2}
+              strokeWidth={3.6}
+              style={Object {}}
+            />
+          </svg>
+        </div>
+        <p
+          className="MuiTypography-root MuiTypography-body1"
+          style={
+            Object {
+              "marginBottom": 32,
+            }
+          }
+        >
+          Loading sites...
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
+<div>
+  <div
+    className="MuiPaper-root MuiCard-root makeStyles-callout-2 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <div
+      className="MuiCardContent-root makeStyles-startFlex-1"
+    >
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root makeStyles-calloutIcon-3 MuiSvgIcon-fontSizeLarge"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
+        />
+      </svg>
+      <h6
+        className="MuiTypography-root MuiTypography-subtitle2"
+        style={
+          Object {
+            "flexGrow": 1,
+          }
+        }
+      >
+        Raw sequence data associated with this product are available from
+         
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="BOLD"
+          data-gtm-product-code="DP1.10020.001"
+          href="http://www.barcodinglife.com/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          BOLD (Barcode of Life Datasystem)
+        </a>
+      </h6>
+    </div>
+    <div
+      className="makeStyles-specificLinksContainer-4"
+      style={
+        Object {
+          "display": "block",
+        }
+      }
+    >
+      <hr
+        className="MuiDivider-root"
+      />
+      <ul
+        style={
+          Object {
+            "marginBottom": 6,
+            "marginTop": 24,
+          }
+        }
+      >
+        <li>
+          <a
+            className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+            data-gtm-external-host="BOLD"
+            data-gtm-product-code="DP1.10020.001"
+            href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETN"
+            onBlur={[Function]}
+            onFocus={[Function]}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Ground beetle sequences DNA barcode
+          </a>
+        </li>
+        <li>
+          <a
+            className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+            data-gtm-external-host="BOLD"
+            data-gtm-product-code="DP1.10020.001"
+            href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETP"
+            onBlur={[Function]}
+            onFocus={[Function]}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Ground beetle sequences DNA barcode (Prototype Data)
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
+<div>
+  <div
+    className="MuiPaper-root MuiCard-root makeStyles-callout-2 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <div
+      className="MuiCardContent-root makeStyles-startFlex-1"
+    >
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root makeStyles-calloutIcon-3 MuiSvgIcon-fontSizeLarge"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
+        />
+      </svg>
+      <h6
+        className="MuiTypography-root MuiTypography-subtitle2"
+        style={
+          Object {
+            "flexGrow": 1,
+          }
+        }
+      >
+        Data for this product are only available from
+         
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/about/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          The PhenoCam Network
+        </a>
+      </h6>
+    </div>
+    <div
+      className="makeStyles-specificLinksContainer-4"
+      style={
+        Object {
+          "display": "block",
+        }
+      }
+    >
+      <hr
+        className="MuiDivider-root"
+      />
+      <div
+        className="makeStyles-siteLinksLoadingContainer-6"
+      >
+        <div
+          className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+          role="progressbar"
+          style={
+            Object {
+              "height": 36,
+              "margin": "32px 0px",
+              "width": 36,
+            }
+          }
+        >
+          <svg
+            className="MuiCircularProgress-svg"
+            viewBox="22 22 44 44"
+          >
+            <circle
+              className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+              cx={44}
+              cy={44}
+              fill="none"
+              r={20.2}
+              strokeWidth={3.6}
+              style={Object {}}
+            />
+          </svg>
+        </div>
+        <p
+          className="MuiTypography-root MuiTypography-body1"
+          style={
+            Object {
+              "marginBottom": 32,
+            }
+          }
+        >
+          Loading sites...
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`ExternalHostInfo renders with valid product code, sites, and expandable boolean 1`] = `
+<div>
+  <div
+    className="MuiPaper-root MuiCard-root makeStyles-callout-2 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <div
+      className="MuiCardContent-root makeStyles-startFlex-1"
+    >
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root makeStyles-calloutIcon-3 MuiSvgIcon-fontSizeLarge"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
+        />
+      </svg>
+      <h6
+        className="MuiTypography-root MuiTypography-subtitle2"
+        style={
+          Object {
+            "flexGrow": 1,
+          }
+        }
+      >
+        Data for this product are available in other formats from
+         
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="AMERIFLUX"
+          data-gtm-product-code="DP1.00001.001"
+          href="https://ameriflux.lbl.gov"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          AmeriFlux
+        </a>
+      </h6>
+      <button
+        aria-describedby={null}
+        aria-label="Show links to externally hosted data"
+        className="MuiButtonBase-root MuiIconButton-root"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseOver={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        style={
+          Object {
+            "marginLeft": 16,
+          }
+        }
+        tabIndex={0}
+        title="Show links to externally hosted data"
+        type="button"
+      >
+        <span
+          className="MuiIconButton-label"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+            />
+          </svg>
+        </span>
+        <span
+          className="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div
+      className="makeStyles-specificLinksContainer-4"
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+    >
+      <hr
+        className="MuiDivider-root"
+      />
+      <div
+        className="makeStyles-siteLinksLoadingContainer-6"
+      >
+        <div
+          className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+          role="progressbar"
+          style={
+            Object {
+              "height": 36,
+              "margin": "32px 0px",
+              "width": 36,
+            }
+          }
+        >
+          <svg
+            className="MuiCircularProgress-svg"
+            viewBox="22 22 44 44"
+          >
+            <circle
+              className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+              cx={44}
+              cy={44}
+              fill="none"
+              r={20.2}
+              strokeWidth={3.6}
+              style={Object {}}
+            />
+          </svg>
+        </div>
+        <p
+          className="MuiTypography-root MuiTypography-body1"
+          style={
+            Object {
+              "marginBottom": 32,
+            }
+          }
+        >
+          Loading sites...
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`ExternalHostInfo renders with valid product code, sites, and expandable boolean 2`] = `
+<div>
+  <div
+    className="MuiPaper-root MuiCard-root makeStyles-callout-2 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <div
+      className="MuiCardContent-root makeStyles-startFlex-1"
+    >
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root makeStyles-calloutIcon-3 MuiSvgIcon-fontSizeLarge"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
+        />
+      </svg>
+      <h6
+        className="MuiTypography-root MuiTypography-subtitle2"
+        style={
+          Object {
+            "flexGrow": 1,
+          }
+        }
+      >
+        Raw sequence data associated with this product are available from
+         
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="BOLD"
+          data-gtm-product-code="DP1.10020.001"
+          href="http://www.barcodinglife.com/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          BOLD (Barcode of Life Datasystem)
+        </a>
+      </h6>
+      <button
+        aria-describedby={null}
+        aria-label="Show links to externally hosted data"
+        className="MuiButtonBase-root MuiIconButton-root"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseOver={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        style={
+          Object {
+            "marginLeft": 16,
+          }
+        }
+        tabIndex={0}
+        title="Show links to externally hosted data"
+        type="button"
+      >
+        <span
+          className="MuiIconButton-label"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+            />
+          </svg>
+        </span>
+        <span
+          className="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div
+      className="makeStyles-specificLinksContainer-4"
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+    >
+      <hr
+        className="MuiDivider-root"
+      />
+      <ul
+        style={
+          Object {
+            "marginBottom": 6,
+            "marginTop": 24,
+          }
+        }
+      >
+        <li>
+          <a
+            className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+            data-gtm-external-host="BOLD"
+            data-gtm-product-code="DP1.10020.001"
+            href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETN"
+            onBlur={[Function]}
+            onFocus={[Function]}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Ground beetle sequences DNA barcode
+          </a>
+        </li>
+        <li>
+          <a
+            className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+            data-gtm-external-host="BOLD"
+            data-gtm-product-code="DP1.10020.001"
+            href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETP"
+            onBlur={[Function]}
+            onFocus={[Function]}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Ground beetle sequences DNA barcode (Prototype Data)
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`ExternalHostInfo renders with valid product code, sites, and expandable boolean 3`] = `
+<div>
+  <div
+    className="MuiPaper-root MuiCard-root makeStyles-callout-2 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <div
+      className="MuiCardContent-root makeStyles-startFlex-1"
+    >
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root makeStyles-calloutIcon-3 MuiSvgIcon-fontSizeLarge"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
+        />
+      </svg>
+      <h6
+        className="MuiTypography-root MuiTypography-subtitle2"
+        style={
+          Object {
+            "flexGrow": 1,
+          }
+        }
+      >
+        Data for this product are only available from
+         
+        <a
+          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-gtm-external-host="PHENOCAM"
+          data-gtm-product-code="DP1.00033.001"
+          href="https://phenocam.sr.unh.edu/webcam/about/"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          The PhenoCam Network
+        </a>
+      </h6>
+      <button
+        aria-describedby={null}
+        aria-label="Show links to externally hosted data"
+        className="MuiButtonBase-root MuiIconButton-root"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseOver={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        style={
+          Object {
+            "marginLeft": 16,
+          }
+        }
+        tabIndex={0}
+        title="Show links to externally hosted data"
+        type="button"
+      >
+        <span
+          className="MuiIconButton-label"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+            />
+          </svg>
+        </span>
+        <span
+          className="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div
+      className="makeStyles-specificLinksContainer-4"
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+    >
+      <hr
+        className="MuiDivider-root"
+      />
+      <div
+        className="makeStyles-siteLinksLoadingContainer-6"
+      >
+        <div
+          className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+          role="progressbar"
+          style={
+            Object {
+              "height": 36,
+              "margin": "32px 0px",
+              "width": 36,
+            }
+          }
+        >
+          <svg
+            className="MuiCircularProgress-svg"
+            viewBox="22 22 44 44"
+          >
+            <circle
+              className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+              cx={44}
+              cy={44}
+              fill="none"
+              r={20.2}
+              strokeWidth={3.6}
+              style={Object {}}
+            />
+          </svg>
+        </div>
+        <p
+          className="MuiTypography-root MuiTypography-body1"
+          style={
+            Object {
+              "marginBottom": 32,
+            }
+          }
+        >
+          Loading sites...
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;

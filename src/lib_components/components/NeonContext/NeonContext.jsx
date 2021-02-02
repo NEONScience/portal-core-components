@@ -78,9 +78,9 @@ const deriveRegionSites = (state) => {
     domainSites[domainCode].add(siteCode);
   });
   // Fill in empty sets for any states that had no NEON sites
-  Object.keys(state.data.states).forEach((stateCode) => {
-    if (!stateSites[stateCode]) { stateSites[stateCode] = new Set(); }
-  });
+  Object.keys(state.data.states)
+    .filter(stateCode => !stateSites[stateCode])
+    .forEach((stateCode) => { stateSites[stateCode] = new Set(); });
   return {
     ...state,
     data: { ...state.data, stateSites, domainSites },
@@ -138,13 +138,13 @@ const reducer = (state, action) => {
 
     // Actions for handling auth fetch
     case 'setAuthenticated':
-      newState.auth.isAuthenticated = action.isAuthenticated;
+      newState.auth.isAuthenticated = !!action.isAuthenticated;
       return newState;
     case 'setAuthWorking':
-      newState.auth.isAuthWorking = action.isAuthWorking;
+      newState.auth.isAuthWorking = !!action.isAuthWorking;
       return newState;
     case 'setAuthWsConnected':
-      newState.auth.isAuthWsConnected = action.isAuthWsConnected;
+      newState.auth.isAuthWsConnected = !!action.isAuthWsConnected;
       return newState;
     case 'fetchAuthSucceeded':
       newState.fetches.auth.status = FETCH_STATUS.SUCCESS;
@@ -153,6 +153,7 @@ const reducer = (state, action) => {
       return newState;
     case 'fetchAuthFailed':
       newState.fetches.auth.status = FETCH_STATUS.ERROR;
+      newState.fetches.auth.error = action.error;
       newState.auth.isAuthenticated = false;
       newState.auth.userData = null;
       return newState;
@@ -184,16 +185,19 @@ const parseSitesFetchResponse = (sitesArray = []) => {
   if (!Array.isArray(sitesArray)) { return {}; }
   const sitesObj = {};
   sitesArray.forEach((site) => {
+    const siteCode = site.siteCode || site.code || null;
+    if (!siteCode) { return; }
+    const localReference = sitesJSON[siteCode] || {};
     sitesObj[site.siteCode] = {
-      siteCode: site.siteCode || site.code,
-      description: site.siteDescription || site.description,
-      type: site.siteType || site.type,
-      stateCode: site.stateCode,
-      domainCode: site.domainCode,
-      latitude: site.siteLatitude || site.latitude,
-      longitude: site.siteLongitude || site.longitude,
-      terrain: site.terrain || sitesJSON[site.siteCode].terrain,
-      zoom: site.zoom || sitesJSON[site.siteCode].zoom,
+      siteCode,
+      description: site.siteDescription || site.description || null,
+      type: site.siteType || site.type || null,
+      stateCode: site.stateCode || null,
+      domainCode: site.domainCode || null,
+      latitude: site.siteLatitude || site.latitude || null,
+      longitude: site.siteLongitude || site.longitude || null,
+      terrain: site.terrain || localReference.terrain || null,
+      zoom: site.zoom || localReference.zoom || null,
     };
   });
   return sitesObj;
@@ -385,3 +389,14 @@ const NeonContext = {
   ProviderPropTypes,
 };
 export default NeonContext;
+
+// Additional items exported for unit testing
+export const getTestableItems = () => (
+  process.env.NODE_ENV !== 'test' ? {} : {
+    deriveRegionSites,
+    parseSitesFetchResponse,
+    reducer,
+    DRUPAL_HEADER_HTML,
+    DRUPAL_FOOTER_HTML,
+  }
+);

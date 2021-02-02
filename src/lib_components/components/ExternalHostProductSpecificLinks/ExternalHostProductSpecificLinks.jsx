@@ -15,10 +15,10 @@ const useStyles = makeStyles((theme) => ({
   siteLinksContainer: {
     display: 'flex',
     flexWrap: 'wrap',
-    marginTop: Theme.spacing(3),
+    marginTop: theme.spacing(3),
   },
   siteLinksLoadingContainer: {
-    marginTop: Theme.spacing(3),
+    marginTop: theme.spacing(3),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',

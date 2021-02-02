@@ -102,6 +102,90 @@ export const TIME_STEPS: {
 };
 export function summarizeTimeSteps(steps: any, timeStep?: any, pluralize?: boolean): string;
 export default TimeSeriesViewerContext;
+export function getTestableItems(): {
+    DEFAULT_STATE?: undefined;
+    FETCH_STATUS?: undefined;
+    applyDefaultsToSelection?: undefined;
+    generateYAxisRange?: undefined;
+    getTimeStep?: undefined;
+    getUpdatedValueRange?: undefined;
+    getContinuousDatesArray?: undefined;
+    parseProductData?: undefined;
+    parseSiteMonthData?: undefined;
+    parseSiteVariables?: undefined;
+    parseSitePositions?: undefined;
+    reducer?: undefined;
+    TimeSeriesViewerPropTypes?: undefined;
+} | {
+    DEFAULT_STATE: {
+        status: string;
+        displayError: null;
+        fetchProduct: {
+            status: string;
+            error: null;
+        };
+        metaFetches: {};
+        dataFetches: {};
+        dataFetchProgress: number;
+        variables: {};
+        product: {
+            productCode: null;
+            productName: null;
+            productDescription: null;
+            productSensor: null;
+            dateRange: null[];
+            continuousDateRange: never[];
+            sites: {};
+        };
+        graphData: {
+            data: never[];
+            qualityData: never[];
+            monthOffsets: {};
+            timestampMap: {};
+            series: never[];
+            labels: string[];
+            qualityLabels: string[];
+        };
+        selection: {
+            dateRange: null[];
+            continuousDateRange: never[];
+            variables: never[];
+            dateTimeVariable: null;
+            sites: never[];
+            timeStep: string;
+            autoTimeStep: null;
+            qualityFlags: never[];
+            rollPeriod: number;
+            logscale: boolean;
+            yAxes: {
+                y1: any;
+                y2: any;
+            };
+        };
+        availableQualityFlags: Set<any>;
+        availableTimeSteps: Set<string>;
+    };
+    FETCH_STATUS: {
+        AWAITING_CALL: string;
+        FETCHING: string;
+        ERROR: string;
+        SUCCESS: string;
+    };
+    applyDefaultsToSelection: (state: Object) => Object;
+    generateYAxisRange: (axis?: {}) => any;
+    getTimeStep: (input?: string) => string | null;
+    getUpdatedValueRange: (existingRange: any, newValue: any) => any;
+    getContinuousDatesArray: (dateRange: any[], roundToYears?: boolean) => any[];
+    parseProductData: (productData?: Object) => Object;
+    parseSiteMonthData: (site: Object, files: any[]) => Object;
+    parseSiteVariables: (previousVariables: Object, siteCode: string, csv: string) => ParseSiteVariablesReturn;
+    parseSitePositions: (site: Object, csv: string) => Object;
+    reducer: (state: any, action: any) => any;
+    TimeSeriesViewerPropTypes: {
+        productCode: (props: any, propName: any, componentName: any) => Error | null;
+        productData: (props: any, propName: any, componentName: any) => Error | null;
+    };
+};
 /**
  * Build a set of data to update various parts of state from a product/site variables fetch response
  * Goal 1: Expand state.variables to include anything new from this variables fetch

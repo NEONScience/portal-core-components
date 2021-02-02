@@ -22,9 +22,9 @@ import Parallel from 'paralleljs';
      ...
    }
 */
-export default function parseDomainHierarchy(rawHierarchy = {}) {
+export default function parseDomainHierarchy(rawHierarchy) {
   const worker = new Parallel(rawHierarchy);
-  return worker.spawn((inData) => {
+  return worker.spawn((inData = {}) => {
     // Recursive function to parse a deeply nest hierarchy object into a flat key/value object
     // where keys are location names and values are objects containing only those location
     // attributes the hierarchy affords us (type, description, and parent)
@@ -33,7 +33,7 @@ export default function parseDomainHierarchy(rawHierarchy = {}) {
       const name = inHierarchy.locationParentHierarchy ? null : inHierarchy.locationName;
       const description = inHierarchy.locationDescription || null;
       const type = inHierarchy.locationType || null;
-      if (description.includes('Not Used')) { return outHierarchy; }
+      if ((description || '').includes('Not Used')) { return outHierarchy; }
       if (name !== null) { outHierarchy[name] = { type, description, parent }; }
       inHierarchy.locationChildHierarchy.forEach((subLocation) => {
         outHierarchy = Object.assign({}, outHierarchy, recursiveParseHierarchy(subLocation, name));
@@ -41,7 +41,7 @@ export default function parseDomainHierarchy(rawHierarchy = {}) {
       return outHierarchy;
     };
     const outData = {};
-    inData.locationChildHierarchy.forEach((child) => {
+    (inData.locationChildHierarchy || []).forEach((child) => {
       // At the top level we only care about sites and don't want the HQ test site
       if (child.locationType !== 'SITE' || child.locationName === 'HQTW') { return; }
       outData[child.locationName] = recursiveParseHierarchy(child);

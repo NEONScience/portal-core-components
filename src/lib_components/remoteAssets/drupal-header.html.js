@@ -556,8 +556,22 @@ export default html = `
           <a href="https://www.neonscience.org/data-samples/data-management/data-quality-program" class="menu__link" data-drupal-link-system-path="node/10299">Data Quality</a>
 
                   </li>
-              <li  class="menu__item">
+              <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases" class="menu__link" data-drupal-link-system-path="node/10559">Data Product Revisions and Releases</a>
+
+          
+            
+                      <ul  class="menu menu--main" data-depth="3">
+
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases/release-2021" class="menu__link" data-drupal-link-system-path="node/11212">Release 2021</a>
+
+                  </li>
+      
+          </ul>
+  
+
+            
 
                   </li>
               <li  class="menu__item">

@@ -93,8 +93,11 @@ const NeonHeader = forwardRef((props, headerRef) => {
     auth,
   }] = NeonContext.useNeonContextState();
 
+  // Only do the delay effect if not in test
+  const initialRenderDelay = process.env.NODE_ENV === 'test';
+
   const [headerJsStatus, setHeaderJsStatus] = useState(FETCH_STATUS.AWAITING_CALL);
-  const [headerRenderDelayed, setHeaderRenderDelayed] = useState(false);
+  const [headerRenderDelayed, setHeaderRenderDelayed] = useState(initialRenderDelay);
 
   let renderMode = 'legacy';
   if (!useCoreHeader && neonContextIsActive) {

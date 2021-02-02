@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const StoryMap = (props) => {
-  const { url, title = 'NEON Story Map' } = props;
+  const { url, title } = props;
 
   const classes = useStyles(Theme);
   const iframeRef = useRef(null);
@@ -39,7 +39,7 @@ const StoryMap = (props) => {
     >
       <iframe
         src={url}
-        title={title}
+        title={title || 'Neon Story Map'}
         ref={iframeRef}
         frameBorder="0"
         marginHeight="0"
