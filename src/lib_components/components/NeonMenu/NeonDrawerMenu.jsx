@@ -142,7 +142,8 @@ const NeonDrawerMenu = (props) => {
 
 // for nested proptypes
 function lazyFunction(f) {
-  return function() {
+  // eslint-disable-next-line func-names
+  return function () {
     // eslint-disable-next-line prefer-rest-params
     return f().apply(this, arguments);
   };
