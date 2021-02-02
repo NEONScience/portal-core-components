@@ -1,4 +1,13 @@
 export default NeonApi;
+export function getTestableItems(): {
+    getApiTokenHeader?: undefined;
+    getJsonObservable?: undefined;
+    postJsonObservable?: undefined;
+} | {
+    getApiTokenHeader: (headers?: Object | undefined) => Object;
+    getJsonObservable: (url: string, headers?: Object | undefined, includeToken?: boolean) => import("rxjs").Observable<any>;
+    postJsonObservable: (url: string, body: any, headers?: Object | undefined, includeToken?: boolean) => import("rxjs").Observable<null> | import("rxjs").Observable<import("rxjs/ajax").AjaxResponse>;
+};
 declare namespace NeonApi {
     export function getApiTokenHeader(headers?: Object | undefined): Object;
     export function getJsonObservable(url: string, headers?: Object | undefined, includeToken?: boolean): import("rxjs").Observable<any>;

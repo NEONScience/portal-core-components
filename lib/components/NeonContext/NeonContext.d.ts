@@ -5,6 +5,19 @@ export namespace FETCH_STATUS {
     export const SUCCESS: string;
 }
 export default NeonContext;
+export function getTestableItems(): {
+    deriveRegionSites?: undefined;
+    parseSitesFetchResponse?: undefined;
+    reducer?: undefined;
+    DRUPAL_HEADER_HTML?: undefined;
+    DRUPAL_FOOTER_HTML?: undefined;
+} | {
+    deriveRegionSites: (state: any) => any;
+    parseSitesFetchResponse: (sitesArray?: any[]) => {};
+    reducer: (state: any, action: any) => any;
+    DRUPAL_HEADER_HTML: any;
+    DRUPAL_FOOTER_HTML: any;
+};
 declare namespace NeonContext {
     export { Provider };
     export { useNeonContextState };

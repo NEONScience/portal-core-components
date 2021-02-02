@@ -1,4 +1,35 @@
 export default SiteMapContext;
+export function getTestableItems(): {
+    deriveRegionSelections?: undefined;
+    isSelectable?: undefined;
+    getSelectableSet?: undefined;
+    validateSelection?: undefined;
+    isBasePlot?: undefined;
+    zoomIsValid?: undefined;
+    centerIsValid?: undefined;
+    calculateFeatureDataFetches?: undefined;
+    updateMapTileWithZoom?: undefined;
+    completeOverallFetch?: undefined;
+    applyFeatureVisibilityToChildren?: undefined;
+    applyFeatureVisibilityToParents?: undefined;
+    setFetchStatusFromAction?: undefined;
+    reducer?: undefined;
+} | {
+    deriveRegionSelections: (state: any) => any;
+    isSelectable: (item: any, validSet?: any) => boolean;
+    getSelectableSet: (setArg: any, validSet?: any) => Set<any>;
+    validateSelection: (state: any) => any;
+    isBasePlot: (featureKey: any) => boolean;
+    zoomIsValid: (zoom: any) => boolean;
+    centerIsValid: (center: any) => boolean;
+    calculateFeatureDataFetches: (state: any, requiredSites?: any[]) => any;
+    updateMapTileWithZoom: (state: any) => any;
+    completeOverallFetch: (state: any) => any;
+    applyFeatureVisibilityToChildren: (state: any, feature: any, visible: any) => any;
+    applyFeatureVisibilityToParents: (state: any, feature: any) => any;
+    setFetchStatusFromAction: (state: any, action: any, status: any) => any;
+    reducer: (state: any, action: any) => any;
+};
 declare namespace SiteMapContext {
     export { Provider };
     export { useSiteMapContext };

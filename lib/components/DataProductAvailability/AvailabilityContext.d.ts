@@ -1,4 +1,32 @@
 export default AvailabilityContext;
+export function getTestableItems(): {
+    DEFAULT_STATE?: undefined;
+    calculateRows?: undefined;
+    extractTables?: undefined;
+    hydrateNeonContextData?: undefined;
+    reducer?: undefined;
+} | {
+    DEFAULT_STATE: {
+        sites: never[];
+        tables: {};
+        rows: {};
+        rowTitles: {};
+        rowLabels: never[];
+        breakouts: never[];
+        validBreakouts: string[];
+        sortDirection: string;
+        neonContextHydrated: boolean;
+        reference: {
+            sites: {};
+            states: {};
+            domains: {};
+        };
+    };
+    calculateRows: (state: any) => any;
+    extractTables: (state: any) => {};
+    hydrateNeonContextData: (state: any, neonContextData: any) => any;
+    reducer: (state: any, action: any) => any;
+};
 declare namespace AvailabilityContext {
     export { Provider };
     export { useAvailabilityState };

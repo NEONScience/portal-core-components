@@ -95,7 +95,7 @@ const NeonHeader = forwardRef((props, headerRef) => {
 
   // Only do the delay effect if not in test
   const initialRenderDelay = process.env.NODE_ENV === 'test';
-  
+
   const [headerJsStatus, setHeaderJsStatus] = useState(FETCH_STATUS.AWAITING_CALL);
   const [headerRenderDelayed, setHeaderRenderDelayed] = useState(initialRenderDelay);
 

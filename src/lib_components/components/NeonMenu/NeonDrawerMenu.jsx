@@ -142,17 +142,19 @@ const NeonDrawerMenu = (props) => {
 
 // for nested proptypes
 function lazyFunction(f) {
-  return function () {
+  return function() {
+    // eslint-disable-next-line prefer-rest-params
     return f().apply(this, arguments);
   };
 }
 
 let itemShape;
+// eslint-disable-next-line prefer-const
 itemShape = PropTypes.shape({
   name: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
   children: PropTypes.arrayOf(
-    lazyFunction(() => itemShape)
+    lazyFunction(() => itemShape),
   ),
 });
 

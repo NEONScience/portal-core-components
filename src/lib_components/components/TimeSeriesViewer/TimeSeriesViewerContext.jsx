@@ -106,7 +106,7 @@ const generateYAxisRange = (axis = {}) => {
   let low = (dataRange[0] || 0) - standardDeviation;
   let high = (dataRange[1] || 0) + standardDeviation;
   low = parseFloat(low.toFixed(precision), 10);
-  high = parseFloat(high.toFixed(precision), 10);  
+  high = parseFloat(high.toFixed(precision), 10);
   if (rangeMode === Y_AXIS_RANGE_MODES.FROM_ZERO) { return [0, high]; }
   if (rangeMode === Y_AXIS_RANGE_MODES.CENTERED) { return [low, high]; }
   return axisRange;
