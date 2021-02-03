@@ -6,7 +6,7 @@ import {
   TIME,
 } from '../AvailabilityUtils';
 
-describe('AvailabilityUtils', () => {
+describe('DataProductAvailability - AvailabilityUtils', () => {
   describe('calcRollupStatus', () => {
     test('returns null for any invalid argument or array containing invalid status', () => {
       expect(calcRollupStatus()).toBe(null);

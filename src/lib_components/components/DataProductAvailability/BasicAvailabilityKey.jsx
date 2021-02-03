@@ -93,7 +93,6 @@ export default function BasicAvailabilityKey(props) {
      Render: Selection
   */
   const renderSelectionLegend = () => {
-    if (!selectionEnabled) { return null; }
     const totalRows = 2;
     const rowHeight = SVG.CELL_HEIGHT + (2 * SVG.CELL_PADDING);
     const totalHeight = (rowHeight * totalRows) - SVG.CELL_PADDING;

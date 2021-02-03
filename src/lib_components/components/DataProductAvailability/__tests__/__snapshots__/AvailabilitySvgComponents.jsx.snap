@@ -1,0 +1,237 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataProductAvailability - AvailabilitySvgComponents renders JsxCell correctly for every status JsxCell for status: available 1`] = `
+<rect
+  fill="#002c77"
+  height="12px"
+  rx="2px"
+  stroke={null}
+  strokeWidth={null}
+  width="7px"
+  x={10}
+  y={20}
+/>
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents renders JsxCell correctly for every status JsxCell for status: being processed 1`] = `
+<rect
+  fill="url(#beingProcessedPattern)"
+  height="10.5px"
+  rx="1px"
+  stroke="#002c77"
+  strokeWidth="1.5px"
+  width="5.5px"
+  x={10.75}
+  y={20.75}
+/>
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents renders JsxCell correctly for every status JsxCell for status: delayed 1`] = `
+<rect
+  fill="url(#delayedPattern)"
+  height="10.5px"
+  rx="1px"
+  stroke="#f8bb32"
+  strokeWidth="1.5px"
+  width="5.5px"
+  x={10.75}
+  y={20.75}
+/>
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents renders JsxCell correctly for every status JsxCell for status: expected 1`] = `
+<rect
+  fill="#ffffff"
+  height="10.5px"
+  rx="1px"
+  stroke="#002c77"
+  strokeWidth="1.5px"
+  width="5.5px"
+  x={10.75}
+  y={20.75}
+/>
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents renders JsxCell correctly for every status JsxCell for status: mixed no availability 1`] = `
+<rect
+  fill="url(#mixedNoAvailabilityPattern)"
+  height="11.2px"
+  rx="1.5px"
+  stroke="#f8bb32"
+  strokeWidth="0.8px"
+  width="6.2px"
+  x={10.4}
+  y={20.4}
+/>
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents renders JsxCell correctly for every status JsxCell for status: mixed some availability 1`] = `
+<rect
+  fill="url(#mixedSomeAvailabilityPattern)"
+  height="11.2px"
+  rx="1.5px"
+  stroke="#002c77"
+  strokeWidth="0.8px"
+  width="6.2px"
+  x={10.4}
+  y={20.4}
+/>
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents renders JsxCell correctly for every status JsxCell for status: not available 1`] = `
+<rect
+  fill="#d7d9d9"
+  height="12px"
+  rx="2px"
+  stroke={null}
+  strokeWidth={null}
+  width="7px"
+  x={10}
+  y={20}
+/>
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents renders JsxCell correctly for every status JsxCell for status: not collected 1`] = `
+<rect
+  fill="#f8bb32"
+  height="12px"
+  rx="2px"
+  stroke={null}
+  strokeWidth={null}
+  width="7px"
+  x={10}
+  y={20}
+/>
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents renders JsxCell correctly for every status JsxCell for status: not expected 1`] = `
+<rect
+  fill="#ffffff"
+  height="10.5px"
+  rx="1px"
+  stroke="#d7d9d9"
+  strokeWidth="1.5px"
+  width="5.5px"
+  x={10.75}
+  y={20.75}
+/>
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents renders JsxCell correctly for every status JsxCell for status: tentative 1`] = `
+<rect
+  fill="#ffffff"
+  height="10.5px"
+  rx="1px"
+  stroke="#b39076"
+  strokeWidth="1.5px"
+  width="5.5px"
+  x={10.75}
+  y={20.75}
+/>
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents renders SvgDefs correctly 1`] = `
+<svg
+  height="0px"
+  width="0px"
+>
+  <defs>
+    <pattern
+      height={3}
+      id="beingProcessedPattern"
+      patternTransform="rotate(45)"
+      patternUnits="userSpaceOnUse"
+      width={7}
+    >
+      <rect
+        fill="#002c77"
+        height={1.25}
+        width={7}
+        x={0}
+        y={0}
+      />
+      <rect
+        fill="#ffffff"
+        height={1.75}
+        width={7}
+        x={0}
+        y={1.25}
+      />
+    </pattern>
+    <pattern
+      height={3}
+      id="delayedPattern"
+      patternTransform="rotate(45)"
+      patternUnits="userSpaceOnUse"
+      width={7}
+    >
+      <rect
+        fill="#f8bb32"
+        height={1.25}
+        width={7}
+        x={0}
+        y={0}
+      />
+      <rect
+        fill="#ffffff"
+        height={1.75}
+        width={7}
+        x={0}
+        y={1.25}
+      />
+    </pattern>
+    <pattern
+      height={3}
+      id="partialSelectionPattern"
+      patternTransform="rotate(45)"
+      patternUnits="userSpaceOnUse"
+      width={7}
+    >
+      <rect
+        fill="#5ca6e3"
+        height={1.25}
+        width={7}
+        x={0}
+        y={0}
+      />
+      <rect
+        fill="#b8d8f4"
+        height={1.75}
+        width={7}
+        x={0}
+        y={1.25}
+      />
+    </pattern>
+    <pattern
+      height={1}
+      id="mixedSomeAvailabilityPattern"
+      patternContentUnits="objectBoundingBox"
+      width={1}
+    >
+      <path
+        d="M 0 0 V 1 L 1 0 Z"
+        fill="#002c77"
+      />
+      <path
+        d="M 1 1 V 0 L 0 1 Z"
+        fill="#f8bb32"
+      />
+    </pattern>
+    <pattern
+      height={1}
+      id="mixedNoAvailabilityPattern"
+      patternContentUnits="objectBoundingBox"
+      width={1}
+    >
+      <path
+        d="M 0 0 V 1 L 1 0 Z"
+        fill="#d7d9d9"
+      />
+      <path
+        d="M 1 1 V 0 L 0 1 Z"
+        fill="#f8bb32"
+      />
+    </pattern>
+  </defs>
+</svg>
+`;

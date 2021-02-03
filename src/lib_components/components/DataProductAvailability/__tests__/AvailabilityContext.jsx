@@ -1,3 +1,5 @@
+import React from 'react';
+import renderer from 'react-test-renderer';
 import { renderHook } from '@testing-library/react-hooks';
 
 import cloneDeep from 'lodash/cloneDeep';
@@ -9,7 +11,9 @@ import domainsJSON from '../../../staticJSON/domains.json';
 import AvailabilityContext, { getTestableItems } from '../AvailabilityContext';
 
 const {
+  Provider,
   useAvailabilityState,
+  SORT_DIRECTIONS,
 } = AvailabilityContext;
 
 const {
@@ -17,7 +21,7 @@ const {
   calculateRows,
   extractTables,
   hydrateNeonContextData,
-  // reducer,
+  reducer,
 } = getTestableItems();
 
 const initialHydratedState = {
@@ -30,7 +34,22 @@ const initialHydratedState = {
   },
 };
 
-describe('AvailabilityContext', () => {
+describe('DataProductAvailability - AvailabilityContext', () => {
+  describe('Provider', () => {
+    test('renders with no props', (done) => {
+      setTimeout(() => {
+        const tree = renderer
+          .create(
+            <Provider>
+              <div>children</div>
+            </Provider>
+          ).toJSON();
+        expect(tree).toMatchSnapshot();
+        done();
+      });
+    });
+  });
+
   describe('useAvailabilityState()', () => {
     test('returns default state and a passthough when invoked outside of a provider', () => {
       const { result } = renderHook(() => useAvailabilityState());
@@ -234,8 +253,100 @@ describe('AvailabilityContext', () => {
     });
   });
 
-  /*
   describe('reducer()', () => {
+    test('reflects back original state for unrecognized action', () => {
+      expect(
+        reducer({ foo: 'bar'}, { type: 'unknown' })
+      ).toStrictEqual({ foo: 'bar' });
+    });
+    describe('hydrateNeonContextData', () => {
+      test('requires neonContextData in the action to do anything', () => {
+        expect(
+          reducer({ foo: 'bar'}, { type: 'hydrateNeonContextData' })
+        ).toStrictEqual({ foo: 'bar' });
+      });
+      test('hydrates data and calculates rows if neonContextData is present', () => {
+        const initialState = cloneDeep(DEFAULT_STATE);
+        const neonContextData = {
+          sites: sitesJSON,
+          states: statesJSON,
+          domains: domainsJSON,
+        };
+        const newState = reducer(initialState, { type: 'hydrateNeonContextData', neonContextData });
+        expect(newState.neonContextHydrated).toBe(true);
+        expect(newState.reference).toStrictEqual(neonContextData);
+        expect(newState.rows).toStrictEqual({ ALL: {} });
+      });
+    });
+    describe('setBreakouts', () => {
+      test('requires action breakouts to be an array of all valid breakouts', () => {
+        expect(
+          reducer(initialHydratedState, { type: 'setBreakouts' })
+        ).toStrictEqual(initialHydratedState);
+        expect(
+          reducer(initialHydratedState, { type: 'setBreakouts', breakouts: ['states', 'qux'] })
+        ).toStrictEqual(initialHydratedState);
+      });
+      test('sets breakouts and caluclates rows', () => {
+        const newState = reducer(
+          initialHydratedState,
+          { type: 'setBreakouts', breakouts: ['states', 'domains'] },
+        );
+        expect(newState.breakouts).toStrictEqual(['states', 'domains']);
+      });
+      test('keeps leading breakout in the front if still present in action breakouts', () => {
+        const previousState = {
+          ...initialHydratedState,
+          breakouts: ['states', 'domains'],
+        };
+        const newState = reducer(
+          previousState,
+          { type: 'setBreakouts', breakouts: ['sites', 'domains', 'states'] },
+        );
+        expect(newState.breakouts).toStrictEqual(['states', 'sites', 'domains']);
+      });
+    });
+    describe('setSortMethod', () => {
+      test('requires action method be a valid breakout', () => {
+        expect(
+          reducer(initialHydratedState, { type: 'setSortMethod' })
+        ).toStrictEqual(initialHydratedState);
+        expect(
+          reducer(initialHydratedState, { type: 'setSortMethod', method: 'qux' })
+        ).toStrictEqual(initialHydratedState);
+      });
+      test('adds valid action method to the front of the breakout list', () => {
+        const previousState = {
+          ...initialHydratedState,
+          breakouts: ['states', 'domains', 'tables'],
+        };
+        const newState = reducer(
+          previousState,
+          { type: 'setSortMethod', method: 'tables' },
+        );
+        expect(newState.breakouts).toStrictEqual(['tables', 'states', 'domains']);
+      });
+    });
+    describe('setSortDirection', () => {
+      test('requires a valid sort direction', () => {
+        expect(
+          reducer(initialHydratedState, { type: 'setSortDirection' })
+        ).toStrictEqual(initialHydratedState);
+        expect(
+          reducer(initialHydratedState, { type: 'setSortDirection', direction: 'qux' })
+        ).toStrictEqual(initialHydratedState);
+      });
+      test('applies valid sort direction', () => {
+        const previousState = {
+          ...initialHydratedState,
+          sortDirection: SORT_DIRECTIONS.ASC,
+        };
+        const newState = reducer(
+          previousState,
+          { type: 'setSortDirection', direction: SORT_DIRECTIONS.DESC },
+        );
+        expect(newState.sortDirection).toBe(SORT_DIRECTIONS.DESC);
+      });
+    });
   });
-  */
 });
