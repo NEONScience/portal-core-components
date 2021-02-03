@@ -1,3 +1,5 @@
+import React from 'react';
+import renderer from 'react-test-renderer';
 import { renderHook } from '@testing-library/react-hooks';
 
 import cloneDeep from 'lodash/cloneDeep';
@@ -43,7 +45,7 @@ jest.mock('../SiteMapUtils', () => ({
 
 jest.mock('lodash/uniqueId');
 
-const { useSiteMapContext } = SiteMapContext;
+const { Provider, useSiteMapContext } = SiteMapContext;
 
 const {
   deriveRegionSelections,
@@ -63,6 +65,19 @@ const {
 } = getTestableItems();
 
 describe('SiteMap - SiteMapContext', () => {
+  describe('Provider', () => {
+    test('renders with no props', () => {
+      const tree = renderer
+        .create((
+          <Provider>
+            <div>children</div>
+          </Provider>
+        ))
+        .toJSON();
+      expect(tree).toMatchSnapshot();
+    });
+  });
+
   describe('useSiteMapContextState()', () => {
     test('returns default state and a passthough when invoked outside of a provider', () => {
       const { result } = renderHook(() => useSiteMapContext());

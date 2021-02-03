@@ -12,7 +12,7 @@
 
    import 'path/to/__mocks__/mockReactComponent';
 
-   jest.mock('path/to/Component', () => mockMuiComponent('path/to/Component'));
+   jest.mock('path/to/Component', () => mockReactComponent('path/to/Component'));
 */
 
 import React from 'react';

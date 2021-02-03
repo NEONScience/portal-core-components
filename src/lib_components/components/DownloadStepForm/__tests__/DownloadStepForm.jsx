@@ -3,8 +3,12 @@ import renderer from 'react-test-renderer';
 
 import cloneDeep from 'lodash/cloneDeep';
 
+import mockReactComponent from '../../../../__mocks__/mockReactComponent';
+
 import DownloadDataContext from '../../DownloadDataContext/DownloadDataContext';
 import DownloadStepForm from '../DownloadStepForm';
+
+jest.mock('material-table', () => mockReactComponent('material-table'));
 
 // Mock the DownloadDataContext state
 jest.mock('../../DownloadDataContext/DownloadDataContext', () => ({
@@ -21,6 +25,39 @@ const {
 const mockDispatch = jest.fn();
 useDownloadDataState.mockReturnValue([{
   ...cloneDeep(DEFAULT_STATE),
+  requiredSteps: [
+    { key: 'sitesAndDateRange', isComplete: true },
+    { key: 'documentation', isComplete: true },
+    { key: 'packageType', isComplete: true },
+    { key: 's3Files', isComplete: true },
+    { key: 'policies', isComplete: false },
+    { key: 'summary', isComplete: null },
+  ],
+  sites: {
+    value: ['JERC', 'BONA', 'FLNT'],
+    validValues: ['JERC', 'BONA', 'FLNT'],
+    isValid: true,
+  },
+  dateRange: {
+    value: ['2018-04', '2019-07'],
+    isValid: true,
+  },
+  s3Files: {
+    ...cloneDeep(DEFAULT_STATE.s3Files),
+    value: ['f1', 'f2', 'f3'],
+    validValues: [
+      { url: 'f1', tableData: 'f1' },
+      { url: 'f2', tableData: 'f2' },
+      { url: 'f3', tableData: 'f3' },
+    ],
+    isValid: true,
+    totalSize: 12345,
+  },
+  packageType: {
+    value: 'expanded',
+    validValues: ['basic', 'expanded'],
+    isValid: true,
+  },
 }, mockDispatch]);
 
 // console.log('RUN', ALL_STEPS, DEFAULT_STATE, useDownloadDataState);

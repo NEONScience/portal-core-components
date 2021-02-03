@@ -1,3 +1,5 @@
+import React from 'react';
+import renderer from 'react-test-renderer';
 import { renderHook } from '@testing-library/react-hooks';
 
 import cloneDeep from 'lodash/cloneDeep';
@@ -8,7 +10,7 @@ import TimeSeriesViewerContext, {
   Y_AXIS_RANGE_MODES,
 } from '../TimeSeriesViewerContext';
 
-const { useTimeSeriesViewerState } = TimeSeriesViewerContext;
+const { Provider, useTimeSeriesViewerState } = TimeSeriesViewerContext;
 
 const {
   DEFAULT_STATE,
@@ -38,6 +40,19 @@ const expectedInitialSite = {
 };
 
 describe('TimeSeriesViewerContext', () => {
+  describe('Provider', () => {
+    test('renders with no props', () => {
+      const tree = renderer
+        .create((
+          <Provider>
+            <div>children</div>
+          </Provider>
+        ))
+        .toJSON();
+      expect(tree).toMatchSnapshot();
+    });
+  });
+
   describe('useTimeSeriesViewerState()', () => {
     test('returns default state and a passthough when invoked outside of a provider', () => {
       const { result } = renderHook(() => useTimeSeriesViewerState());

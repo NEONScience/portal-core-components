@@ -557,7 +557,7 @@ export default function DownloadStepForm(props) {
             <Typography variant="h6" style={{ marginBottom: Theme.spacing(4) }}>
               {`Loading files (${Math.floor(s3FileFetchProgress || 0)}%)...`}
             </Typography>
-            <CircularProgress variant="static" value={s3FileFetchProgress} />
+            <CircularProgress variant="determinate" value={s3FileFetchProgress} />
           </div>
         </div>
       ) : (

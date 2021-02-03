@@ -323,7 +323,7 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
     >
       <span
         aria-disabled={false}
-        className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-18 MuiRadio-root MuiRadio-colorSecondary MuiIconButton-colorSecondary"
+        className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-18 MuiRadio-root MuiRadio-colorSecondary PrivateSwitchBase-checked-19 Mui-checked MuiIconButton-colorSecondary"
         onBlur={[Function]}
         onDragLeave={[Function]}
         onFocus={[Function]}
@@ -341,7 +341,7 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
           className="MuiIconButton-label"
         >
           <input
-            checked={false}
+            checked={true}
             className="PrivateSwitchBase-input-21"
             disabled={false}
             name="package-type"
@@ -350,7 +350,7 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
             value="expanded"
           />
           <div
-            className="PrivateRadioButtonIcon-root-22"
+            className="PrivateRadioButtonIcon-root-22 PrivateRadioButtonIcon-checked-24"
           >
             <svg
               aria-hidden={true}
@@ -471,16 +471,83 @@ exports[`DownloadStepForm Step policies renders correctly 1`] = `
 `;
 
 exports[`DownloadStepForm Step s3Files renders correctly 1`] = `
-<h6
-  className="MuiTypography-root MuiTypography-subtitle1"
-  style={
-    Object {
-      "marginTop": 24,
-    }
-  }
+<div
+  className="makeStyles-fileTable-2"
+  id="s3Files-selection-table-container"
 >
-  Select sites and date range in order to generate a list of files to choose from.
-</h6>
+  <div
+    ComponentPath="material-table"
+    prop-columns="[{\\"title\\":\\"Site\\",\\"field\\":\\"site\\",\\"lookup\\":{},\\"defaultFilter\\":[],\\"hidden\\":false},{\\"title\\":\\"Date\\",\\"field\\":\\"yearMonth\\",\\"lookup\\":{},\\"defaultFilter\\":[],\\"hidden\\":false},{\\"title\\":\\"Visit\\",\\"field\\":\\"visit\\",\\"lookup\\":{},\\"defaultFilter\\":[],\\"hidden\\":false},{\\"title\\":\\"Name\\",\\"field\\":\\"name\\",\\"defaultFilter\\":\\"\\",\\"hidden\\":false},{\\"title\\":\\"Type\\",\\"field\\":\\"type\\",\\"lookup\\":{},\\"defaultFilter\\":[],\\"hidden\\":false},{\\"title\\":\\"Size\\",\\"field\\":\\"size\\",\\"filtering\\":false,\\"removable\\":false}]"
+    prop-components="{\\"Container\\":{\\"propTypes\\":{},\\"displayName\\":\\"Styled(MuiBox)\\"}}"
+    prop-data="[{\\"url\\":\\"f1\\",\\"tableData\\":\\"f1\\"},{\\"url\\":\\"f2\\",\\"tableData\\":\\"f2\\"},{\\"url\\":\\"f3\\",\\"tableData\\":\\"f3\\"}]"
+    prop-icons="{\\"Add\\":{},\\"Check\\":{},\\"Clear\\":{},\\"Delete\\":{},\\"DetailPanel\\":{},\\"Edit\\":{},\\"Export\\":{},\\"Filter\\":{},\\"FirstPage\\":{},\\"LastPage\\":{},\\"NextPage\\":{},\\"PreviousPage\\":{},\\"ResetSearch\\":{},\\"Search\\":{},\\"SortArrow\\":{},\\"ThirdStateCheck\\":{},\\"ViewColumn\\":{}}"
+    prop-localization="{\\"pagination\\":{\\"labelRowsSelect\\":\\"files\\"},\\"toolbar\\":{\\"nRowsSelected\\":\\"{0} files selected (12.1 KB uncompressed)\\"},\\"body\\":{\\"emptyDataSourceMessage\\":\\"No files to display. Select more sites, broaden date range, or broaden search / filters.\\"}}"
+    prop-onSelectionChange="function
+          /* istanbul ignore next */
+          onSelectionChange(rows, file) {
+            /* istanbul ignore next */
+            cov_9h6mzt5r9.f[26]++;
+            cov_9h6mzt5r9.s[71]++;
+            dispatch({
+              type: 'setIndividualS3FileSelected',
+              url: file.url,
+              selected: file.tableData.checked
+            });
+          }"
+    prop-options="{\\"selection\\":true,\\"showSelectAllCheckbox\\":false,\\"padding\\":\\"dense\\",\\"filtering\\":true,\\"columnsButton\\":false,\\"pageSize\\":10,\\"pageSizeOptions\\":[5,10,50,100],\\"showTitle\\":false,\\"search\\":false,\\"isLoading\\":false}"
+  />
+  <div
+    className="makeStyles-loadingOverlay-4"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-h6"
+      style={
+        Object {
+          "marginBottom": 32,
+        }
+      }
+    >
+      Loading files (0%)...
+    </h6>
+    <div
+      aria-valuenow={0}
+      className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-determinate"
+      role="progressbar"
+      style={
+        Object {
+          "height": 40,
+          "transform": "rotate(-90deg)",
+          "width": 40,
+        }
+      }
+    >
+      <svg
+        className="MuiCircularProgress-svg"
+        viewBox="22 22 44 44"
+      >
+        <circle
+          className="MuiCircularProgress-circle MuiCircularProgress-circleDeterminate"
+          cx={44}
+          cy={44}
+          fill="none"
+          r={20.2}
+          strokeWidth={3.6}
+          style={
+            Object {
+              "strokeDasharray": "126.920",
+              "strokeDashoffset": "126.920px",
+            }
+          }
+        />
+      </svg>
+    </div>
+  </div>
+</div>
 `;
 
 exports[`DownloadStepForm Step sitesAndDateRange renders correctly 1`] = `
@@ -548,6 +615,210 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
     <div
       data-selenium="download-data-dialog.step-form.summary"
     >
+      <div
+        className="makeStyles-stepSummary-12"
+      >
+        <div
+          className="makeStyles-stepSummaryHeader-13"
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="button"
+          tabIndex={0}
+        >
+          <div
+            className="MuiChip-root makeStyles-summaryChip-15 MuiChip-colorPrimary"
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+          >
+            <span
+              className="MuiChip-label"
+            >
+              1
+            </span>
+          </div>
+          <h6
+            className="MuiTypography-root MuiTypography-h6"
+            style={
+              Object {
+                "flexGrow": 1,
+              }
+            }
+          >
+            Sites and Date Range
+          </h6>
+        </div>
+        <div
+          className="makeStyles-stepSummaryContent-14"
+        >
+          <div
+            className="MuiChip-root MuiChip-colorSecondary"
+            data-selenium="site-chip"
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            style={
+              Object {
+                "borderRadius": "20px",
+                "fontSize": "1rem",
+                "height": "40px",
+              }
+            }
+          >
+            <div
+              className="MuiAvatar-root MuiAvatar-circle MuiChip-avatar makeStyles-avatarLarge-35 MuiChip-avatarColorSecondary MuiAvatar-colorDefault"
+              style={
+                Object {
+                  "backgroundColor": "#002c77",
+                  "height": "40px",
+                  "marginLeft": "0px",
+                  "width": "40px",
+                }
+              }
+            >
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                />
+              </svg>
+            </div>
+            <span
+              className="MuiChip-label"
+            >
+              3 sites — Apr 2018 - Jul 2019
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        className="makeStyles-stepSummary-12"
+      >
+        <div
+          className="makeStyles-stepSummaryHeader-13"
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="button"
+          tabIndex={0}
+        >
+          <div
+            className="MuiChip-root makeStyles-summaryChip-15 MuiChip-colorPrimary"
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+          >
+            <span
+              className="MuiChip-label"
+            >
+              2
+            </span>
+          </div>
+          <h6
+            className="MuiTypography-root MuiTypography-h6"
+            style={
+              Object {
+                "flexGrow": 1,
+              }
+            }
+          >
+            Documentation
+          </h6>
+        </div>
+        <div
+          className="makeStyles-stepSummaryContent-14"
+        >
+          <p
+            className="MuiTypography-root makeStyles-summaryText-16 MuiTypography-body2"
+          >
+            Include
+          </p>
+        </div>
+      </div>
+      <div
+        className="makeStyles-stepSummary-12"
+      >
+        <div
+          className="makeStyles-stepSummaryHeader-13"
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="button"
+          tabIndex={0}
+        >
+          <div
+            className="MuiChip-root makeStyles-summaryChip-15 MuiChip-colorPrimary"
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+          >
+            <span
+              className="MuiChip-label"
+            >
+              3
+            </span>
+          </div>
+          <h6
+            className="MuiTypography-root MuiTypography-h6"
+            style={
+              Object {
+                "flexGrow": 1,
+              }
+            }
+          >
+            Package Type
+          </h6>
+        </div>
+        <div
+          className="makeStyles-stepSummaryContent-14"
+        >
+          <p
+            className="MuiTypography-root makeStyles-summaryText-16 MuiTypography-body2"
+          >
+            Expanded
+          </p>
+        </div>
+      </div>
+      <div
+        className="makeStyles-stepSummary-12"
+      >
+        <div
+          className="makeStyles-stepSummaryHeader-13"
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="button"
+          tabIndex={0}
+        >
+          <div
+            className="MuiChip-root makeStyles-summaryChip-15 MuiChip-colorPrimary"
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+          >
+            <span
+              className="MuiChip-label"
+            >
+              4
+            </span>
+          </div>
+          <h6
+            className="MuiTypography-root MuiTypography-h6"
+            style={
+              Object {
+                "flexGrow": 1,
+              }
+            }
+          >
+            Files
+          </h6>
+        </div>
+        <div
+          className="makeStyles-stepSummaryContent-14"
+        >
+          <p
+            className="MuiTypography-root makeStyles-summaryText-16 MuiTypography-body2"
+          >
+            3 files (12.1 KB uncompressed)
+          </p>
+        </div>
+      </div>
       <div
         className="makeStyles-stepSummary-12"
       />
