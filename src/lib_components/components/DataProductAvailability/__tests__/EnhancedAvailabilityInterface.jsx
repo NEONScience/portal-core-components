@@ -33,7 +33,7 @@ useDownloadDataState.mockReturnValue([{
   },
   dateRange: {
     value: ['2020-02', '2020-05'],
-    validValues: ['2020-01', '2020-02', '2020-03', '2020-04', '2020-05', '2020-06'],
+    validValues: ['2020-01', '2020-06'],
     isValid: true,
   },
 }, mockDispatch]);

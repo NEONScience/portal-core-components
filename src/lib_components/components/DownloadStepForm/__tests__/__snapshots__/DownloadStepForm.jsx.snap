@@ -688,7 +688,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
             <span
               className="MuiChip-label"
             >
-              3 sites — Apr 2018 - Jul 2019
+              3 sites — Dec 2019 - Dec 2019
             </span>
           </div>
         </div>
@@ -1011,7 +1011,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
             }
           }
         >
-          National Ecological Observatory Network. 2021. Data Product undefined, undefined. Provisional data downloaded from http://data.neonscience.org on February 2, 2021. Battelle, Boulder, CO, USA NEON. 2021.
+          National Ecological Observatory Network. 2019. Data Product undefined, undefined. Provisional data downloaded from http://data.neonscience.org on December 31, 2019. Battelle, Boulder, CO, USA NEON. 2019.
         </p>
       </div>
     </div>

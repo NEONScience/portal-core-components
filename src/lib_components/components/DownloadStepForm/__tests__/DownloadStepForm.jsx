@@ -16,6 +16,11 @@ jest.mock('../../DownloadDataContext/DownloadDataContext', () => ({
   useDownloadDataState: jest.fn(),
 }));
 
+// Force moment into a fixed point in time
+jest.mock('moment', () => {
+  return () => jest.requireActual('moment')('2020-01-01T00:00:00.000Z');
+});
+
 const {
   DEFAULT_STATE,
   ALL_STEPS,
@@ -41,6 +46,7 @@ useDownloadDataState.mockReturnValue([{
   dateRange: {
     value: ['2018-04', '2019-07'],
     isValid: true,
+    validValues: ['2018-01', '2019-12'],
   },
   s3Files: {
     ...cloneDeep(DEFAULT_STATE.s3Files),

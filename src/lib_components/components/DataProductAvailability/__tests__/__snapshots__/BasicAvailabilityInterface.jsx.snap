@@ -271,17 +271,17 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
               onKeyDown={[Function]}
             >
               <label
-                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined Mui-error Mui-error"
+                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined"
                 data-shrink={false}
               >
                 End
               </label>
               <div
-                className="MuiInputBase-root MuiOutlinedInput-root Mui-error Mui-error MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+                className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
                 onClick={[Function]}
               >
                 <input
-                  aria-invalid={true}
+                  aria-invalid={false}
                   autoFocus={false}
                   className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
                   disabled={false}
@@ -307,11 +307,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                   </legend>
                 </fieldset>
               </div>
-              <p
-                className="MuiFormHelperText-root MuiFormHelperText-contained Mui-error MuiFormHelperText-marginDense"
-              >
-                Date should not be after maximal date
-              </p>
+              
             </div>
           </div>
           <div
@@ -917,17 +913,17 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
               onKeyDown={[Function]}
             >
               <label
-                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined Mui-error Mui-error"
+                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined"
                 data-shrink={false}
               >
                 End
               </label>
               <div
-                className="MuiInputBase-root MuiOutlinedInput-root Mui-error Mui-error MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+                className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
                 onClick={[Function]}
               >
                 <input
-                  aria-invalid={true}
+                  aria-invalid={false}
                   autoFocus={false}
                   className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
                   disabled={false}
@@ -953,11 +949,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                   </legend>
                 </fieldset>
               </div>
-              <p
-                className="MuiFormHelperText-root MuiFormHelperText-contained Mui-error MuiFormHelperText-marginDense"
-              >
-                Date should not be after maximal date
-              </p>
+              
             </div>
           </div>
           <div
@@ -1676,17 +1668,17 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
               onKeyDown={[Function]}
             >
               <label
-                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined Mui-error Mui-error"
+                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined"
                 data-shrink={false}
               >
                 End
               </label>
               <div
-                className="MuiInputBase-root MuiOutlinedInput-root Mui-error Mui-error MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+                className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
                 onClick={[Function]}
               >
                 <input
-                  aria-invalid={true}
+                  aria-invalid={false}
                   autoFocus={false}
                   className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
                   disabled={false}
@@ -1712,11 +1704,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                   </legend>
                 </fieldset>
               </div>
-              <p
-                className="MuiFormHelperText-root MuiFormHelperText-contained Mui-error MuiFormHelperText-marginDense"
-              >
-                Date should not be after maximal date
-              </p>
+              
             </div>
           </div>
           <div
@@ -2322,17 +2310,17 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
               onKeyDown={[Function]}
             >
               <label
-                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined Mui-error Mui-error"
+                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined"
                 data-shrink={false}
               >
                 End
               </label>
               <div
-                className="MuiInputBase-root MuiOutlinedInput-root Mui-error Mui-error MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+                className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
                 onClick={[Function]}
               >
                 <input
-                  aria-invalid={true}
+                  aria-invalid={false}
                   autoFocus={false}
                   className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
                   disabled={false}
@@ -2358,11 +2346,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                   </legend>
                 </fieldset>
               </div>
-              <p
-                className="MuiFormHelperText-root MuiFormHelperText-contained Mui-error MuiFormHelperText-marginDense"
-              >
-                Date should not be after maximal date
-              </p>
+              
             </div>
           </div>
           <div
