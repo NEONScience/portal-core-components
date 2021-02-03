@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataProductAvailability - AvailabilityPending renders correctly for NeonContext that is final with error 1`] = `
+<div
+  className="MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded"
+  style={
+    Object {
+      "width": "100%",
+    }
+  }
+>
+  <div
+    className="MuiCardContent-root"
+    style={
+      Object {
+        "alignItems": "center",
+        "display": "flex",
+        "flexDirection": "column",
+        "justifyContent": "center",
+        "padding": "24px",
+      }
+    }
+  >
+    <svg
+      aria-hidden={true}
+      className="MuiSvgIcon-root MuiSvgIcon-colorError MuiSvgIcon-fontSizeLarge"
+      focusable="false"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"
+      />
+    </svg>
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+      style={
+        Object {
+          "marginTop": "8px",
+        }
+      }
+    >
+      Error - Unable to Load Sites
+    </h6>
+  </div>
+</div>
+`;
+
+exports[`DataProductAvailability - AvailabilityPending renders correctly for NeonContext that is final without error 1`] = `null`;
+
+exports[`DataProductAvailability - AvailabilityPending renders correctly for NeonContext that is neither error nor final 1`] = `
+<div
+  className="MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded"
+  style={
+    Object {
+      "width": "100%",
+    }
+  }
+>
+  <div
+    className="MuiCardContent-root"
+    style={
+      Object {
+        "alignItems": "center",
+        "display": "flex",
+        "flexDirection": "column",
+        "justifyContent": "center",
+        "padding": "24px",
+      }
+    }
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom"
+    >
+      Loading Sites...
+    </h6>
+    <div
+      className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+      role="progressbar"
+      style={
+        Object {
+          "height": 40,
+          "width": 40,
+        }
+      }
+    >
+      <svg
+        className="MuiCircularProgress-svg"
+        viewBox="22 22 44 44"
+      >
+        <circle
+          className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+          cx={44}
+          cy={44}
+          fill="none"
+          r={20.2}
+          strokeWidth={3.6}
+          style={Object {}}
+        />
+      </svg>
+    </div>
+  </div>
+</div>
+`;

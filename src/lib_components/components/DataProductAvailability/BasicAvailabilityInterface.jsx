@@ -562,7 +562,6 @@ const BasicAvailabilityInterface = (props) => {
      Render: Selection
   */
   const renderSelection = () => {
-    if (!selectionEnabled) { return null; }
     const sitesPlural = sites.value.length > 1 ? 's' : '';
     const siteChipLabel = `${sites.value.length} site${sitesPlural}`;
     const siteChipProps = {

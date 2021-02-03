@@ -1,0 +1,4885 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with explicit sort method 1`] = `
+<div
+  data-selenium="data-product-availability"
+  style={
+    Object {
+      "minWidth": "153px",
+      "width": "100%",
+    }
+  }
+>
+  <svg
+    height="0px"
+    width="0px"
+  >
+    <defs>
+      <pattern
+        height={3}
+        id="beingProcessedPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#002c77"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#ffffff"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={3}
+        id="delayedPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#f8bb32"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#ffffff"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={3}
+        id="partialSelectionPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#5ca6e3"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#b8d8f4"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedSomeAvailabilityPattern"
+        patternContentUnits="objectBoundingBox"
+        width={1}
+      >
+        <path
+          d="M 0 0 V 1 L 1 0 Z"
+          fill="#002c77"
+        />
+        <path
+          d="M 1 1 V 0 L 0 1 Z"
+          fill="#f8bb32"
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedNoAvailabilityPattern"
+        patternContentUnits="objectBoundingBox"
+        width={1}
+      >
+        <path
+          d="M 0 0 V 1 L 1 0 Z"
+          fill="#d7d9d9"
+        />
+        <path
+          d="M 1 1 V 0 L 0 1 Z"
+          fill="#f8bb32"
+        />
+      </pattern>
+    </defs>
+  </svg>
+  <div
+    className="makeStyles-viewAndSortOptionsContainer-5"
+  >
+    <div
+      data-selenium="data-product-availability.breakout-options"
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "justifyContent": "flex-start",
+          "marginRight": 24,
+        }
+      }
+    >
+      <h6
+        className="MuiTypography-root makeStyles-h6Small-2 MuiTypography-h6"
+        style={
+          Object {
+            "marginRight": 12,
+            "whiteSpace": "nowrap",
+          }
+        }
+      >
+        View By:
+      </h6>
+      <div
+        className="MuiToggleButtonGroup-root"
+        color="primary"
+        role="group"
+        variant="outlined"
+      >
+        <button
+          aria-pressed={false}
+          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          disabled={false}
+          onBlur={[Function]}
+          onChange={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+          value="states"
+        >
+          <span
+            className="MuiToggleButton-label"
+          >
+            states
+          </span>
+        </button>
+        <button
+          aria-pressed={false}
+          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          disabled={false}
+          onBlur={[Function]}
+          onChange={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+          value="domains"
+        >
+          <span
+            className="MuiToggleButton-label"
+          >
+            domains
+          </span>
+        </button>
+        <button
+          aria-pressed={false}
+          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          disabled={false}
+          onBlur={[Function]}
+          onChange={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+          value="sites"
+        >
+          <span
+            className="MuiToggleButton-label"
+          >
+            sites
+          </span>
+        </button>
+        <button
+          aria-pressed={false}
+          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          disabled={false}
+          onBlur={[Function]}
+          onChange={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+          value="tables"
+        >
+          <span
+            className="MuiToggleButton-label"
+          >
+            tables
+          </span>
+        </button>
+      </div>
+    </div>
+    <div
+      data-selenium="data-product-availability.sort-options"
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "justifyContent": "flex-start",
+        }
+      }
+    >
+      <h6
+        className="MuiTypography-root makeStyles-h6Small-2 MuiTypography-h6"
+        style={
+          Object {
+            "marginRight": 12,
+            "whiteSpace": "nowrap",
+          }
+        }
+      >
+        Sort By:
+      </h6>
+      <div
+        style={
+          Object {
+            "display": "flex",
+            "justifyContent": "flex-end",
+          }
+        }
+      >
+        <div
+          className="MuiFormControl-root"
+        >
+          <div
+            ComponentPath="@material-ui/core/Select"
+            prop-aria-label="Sort By"
+            prop-className="makeStyles-sortSelect-4"
+            prop-data-selenium="data-product-availability.sort-options.method"
+            prop-onChange="function
+        /* istanbul ignore next */
+        onChange(event) {
+          /* istanbul ignore next */
+          cov_1k5vljwa7c.f[8]++;
+          cov_1k5vljwa7c.s[32]++;
+          availabilityDispatch({
+            type: 'setSortMethod',
+            method: event.target.value
+          });
+        }"
+            prop-value="n/a"
+          >
+            <li
+              aria-disabled={true}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters Mui-disabled MuiListItem-button Mui-disabled"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="n/a"
+            >
+              --
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="states"
+            >
+              States
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="domains"
+            >
+              Domains
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="sites"
+            >
+              Sites
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="tables"
+            >
+              Tables
+            </li>
+          </div>
+        </div>
+        <div
+          className="MuiToggleButtonGroup-root"
+          data-selenium="data-product-availability.sort-options.direction"
+          role="group"
+        >
+          <button
+            aria-label="Sort Ascending (A-Z)"
+            aria-pressed={false}
+            className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal Mui-disabled MuiToggleButton-sizeSmall Mui-disabled"
+            disabled={true}
+            onBlur={[Function]}
+            onChange={[Function]}
+            onClick={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            style={
+              Object {
+                "borderColor": "unset",
+              }
+            }
+            tabIndex={-1}
+            title="Sort Ascending (A-Z)"
+            type="button"
+            value="ASC"
+          >
+            <span
+              className="MuiToggleButton-label"
+            >
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"
+                />
+              </svg>
+            </span>
+          </button>
+          <button
+            aria-label="Sort Descending (Z-A)"
+            aria-pressed={false}
+            className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal Mui-disabled MuiToggleButton-sizeSmall Mui-disabled"
+            disabled={true}
+            onBlur={[Function]}
+            onChange={[Function]}
+            onClick={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            style={
+              Object {
+                "borderColor": "unset",
+              }
+            }
+            tabIndex={-1}
+            title="Sort Descending (Z-A)"
+            type="button"
+            value="DESC"
+          >
+            <span
+              className="MuiToggleButton-label"
+            >
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
+                />
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="makeStyles-keyContainer-6"
+  >
+    <div>
+      <h6
+        className="MuiTypography-root makeStyles-h6Small-9 MuiTypography-h6"
+        style={
+          Object {
+            "margin": "-6px 24px 4px 0px",
+          }
+        }
+      >
+        Key:
+      </h6>
+      <button
+        aria-label="Help - Data Availability Chart Key"
+        className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        style={
+          Object {
+            "marginLeft": "-3px",
+          }
+        }
+        tabIndex={0}
+        title="Help - Data Availability Chart Key"
+        type="button"
+      >
+        <span
+          className="MuiIconButton-label"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"
+            />
+          </svg>
+        </span>
+      </button>
+    </div>
+    <div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data have been published and are available for download"
+      >
+        <svg
+          height={14}
+          width={87}
+        >
+          <rect
+            fill="#002c77"
+            height="12px"
+            rx="2px"
+            stroke={null}
+            strokeWidth={null}
+            width="7px"
+            x={0}
+            y={0}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Available
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data have been collected and will be published after processing has completed"
+      >
+        <svg
+          height={14}
+          width={135}
+        >
+          <rect
+            fill="url(#beingProcessedPattern)"
+            height="10.5px"
+            rx="1px"
+            stroke="#002c77"
+            strokeWidth="1.5px"
+            width="5.5px"
+            x={0.75}
+            y={0.75}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Being Processed
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data collection is scheduled to happen"
+      >
+        <svg
+          height={14}
+          width={79}
+        >
+          <rect
+            fill="#ffffff"
+            height="10.5px"
+            rx="1px"
+            stroke="#002c77"
+            strokeWidth="1.5px"
+            width="5.5px"
+            x={0.75}
+            y={0.75}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Expected
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="No data collection is scheduled"
+      >
+        <svg
+          height={14}
+          width={111}
+        >
+          <rect
+            fill="#ffffff"
+            height="10.5px"
+            rx="1px"
+            stroke="#d7d9d9"
+            strokeWidth="1.5px"
+            width="5.5px"
+            x={0.75}
+            y={0.75}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Not Expected
+          </text>
+        </svg>
+      </div>
+    </div>
+    <div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data was neither expected nor collected"
+      >
+        <svg
+          height={14}
+          width={119}
+        >
+          <rect
+            fill="#d7d9d9"
+            height="12px"
+            rx="2px"
+            stroke={null}
+            strokeWidth={null}
+            width="7px"
+            x={0}
+            y={0}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Not Available
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data collection was expected but collection could not take place; no data will be published"
+      >
+        <svg
+          height={14}
+          width={119}
+        >
+          <rect
+            fill="#f8bb32"
+            height="12px"
+            rx="2px"
+            stroke={null}
+            strokeWidth={null}
+            width="7px"
+            x={0}
+            y={0}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Not Collected
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data should be available for download but something has prevented publication"
+      >
+        <svg
+          height={14}
+          width={71}
+        >
+          <rect
+            fill="url(#delayedPattern)"
+            height="10.5px"
+            rx="1px"
+            stroke="#f8bb32"
+            strokeWidth="1.5px"
+            width="5.5px"
+            x={0.75}
+            y={0.75}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Delayed
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data collection is desired but not expected until other conditions are met"
+      >
+        <svg
+          height={14}
+          width={87}
+        >
+          <rect
+            fill="#ffffff"
+            height="10.5px"
+            rx="1px"
+            stroke="#b39076"
+            strokeWidth="1.5px"
+            width="5.5px"
+            x={0.75}
+            y={0.75}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Potential
+          </text>
+        </svg>
+      </div>
+    </div>
+    <div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="More than one status including at least one \\"Available\\" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)"
+      >
+        <svg
+          height={14}
+          width={215}
+        >
+          <rect
+            fill="url(#mixedSomeAvailabilityPattern)"
+            height="11.2px"
+            rx="1.5px"
+            stroke="#002c77"
+            strokeWidth="0.8px"
+            width="6.2px"
+            x={0.4}
+            y={0.4}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Mixed (Some Availability)
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="More than one status with none \\"Available\\" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)"
+      >
+        <svg
+          height={14}
+          width={199}
+        >
+          <rect
+            fill="url(#mixedNoAvailabilityPattern)"
+            height="11.2px"
+            rx="1.5px"
+            stroke="#f8bb32"
+            strokeWidth="0.8px"
+            width="6.2px"
+            x={0.4}
+            y={0.4}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Mixed (No Availability)
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="If the chart is presenting a roll-up (e.g. view by state) then all sites rolled into a given row are selected"
+      >
+        <svg
+          height={14}
+          width={201}
+        >
+          <rect
+            fill="#0073cf"
+            height={10}
+            width={45}
+            x={0.5}
+            y={1.5}
+          />
+          <rect
+            fill="#5ca6e3"
+            height={12}
+            stroke="#0073cf"
+            strokeWidth={1.5}
+            width={4}
+            x={0.5}
+            y={0.5}
+          />
+          <rect
+            fill="#5ca6e3"
+            height={12}
+            stroke="#0073cf"
+            strokeWidth={1.5}
+            width={4}
+            x={41}
+            y={0.5}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={57}
+            y={9}
+          >
+            All sites selected
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="If the chart is presenting a roll-up (e.g. view by state) then one or more but not all of the sites rolled into a given row are selected"
+      >
+        <svg
+          height={14}
+          width={209}
+        >
+          <rect
+            fill="url(#partialSelectionPattern)"
+            height={10}
+            width={45}
+            x={0.5}
+            y={1.5}
+          />
+          <rect
+            fill="#5ca6e3"
+            height={12}
+            stroke="#0073cf"
+            strokeWidth={1.5}
+            width={4}
+            x={0.5}
+            y={0.5}
+          />
+          <rect
+            fill="#5ca6e3"
+            height={12}
+            stroke="#0073cf"
+            strokeWidth={1.5}
+            width={4}
+            x={41}
+            y={0.5}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={57}
+            y={9}
+          >
+            Some sites selected
+          </text>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <br />
+  <svg
+    className="makeStyles-svg-1"
+    height={20}
+    id="dpa-3"
+  />
+  <br />
+  <br />
+  <br />
+  <pre
+    style={
+      Object {
+        "border": "1px dotted black",
+        "height": "50vh",
+        "overflowY": "scroll",
+        "padding": "2px",
+        "width": "100%",
+      }
+    }
+  >
+    {}
+  </pre>
+</div>
+`;
+
+exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no props 1`] = `
+<div
+  data-selenium="data-product-availability"
+  style={
+    Object {
+      "minWidth": "153px",
+      "width": "100%",
+    }
+  }
+>
+  <svg
+    height="0px"
+    width="0px"
+  >
+    <defs>
+      <pattern
+        height={3}
+        id="beingProcessedPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#002c77"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#ffffff"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={3}
+        id="delayedPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#f8bb32"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#ffffff"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={3}
+        id="partialSelectionPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#5ca6e3"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#b8d8f4"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedSomeAvailabilityPattern"
+        patternContentUnits="objectBoundingBox"
+        width={1}
+      >
+        <path
+          d="M 0 0 V 1 L 1 0 Z"
+          fill="#002c77"
+        />
+        <path
+          d="M 1 1 V 0 L 0 1 Z"
+          fill="#f8bb32"
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedNoAvailabilityPattern"
+        patternContentUnits="objectBoundingBox"
+        width={1}
+      >
+        <path
+          d="M 0 0 V 1 L 1 0 Z"
+          fill="#d7d9d9"
+        />
+        <path
+          d="M 1 1 V 0 L 0 1 Z"
+          fill="#f8bb32"
+        />
+      </pattern>
+    </defs>
+  </svg>
+  <div
+    className="makeStyles-viewAndSortOptionsContainer-5"
+  >
+    <div
+      data-selenium="data-product-availability.breakout-options"
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "justifyContent": "flex-start",
+          "marginRight": 24,
+        }
+      }
+    >
+      <h6
+        className="MuiTypography-root makeStyles-h6Small-2 MuiTypography-h6"
+        style={
+          Object {
+            "marginRight": 12,
+            "whiteSpace": "nowrap",
+          }
+        }
+      >
+        View By:
+      </h6>
+      <div
+        className="MuiToggleButtonGroup-root"
+        color="primary"
+        role="group"
+        variant="outlined"
+      >
+        <button
+          aria-pressed={false}
+          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          disabled={false}
+          onBlur={[Function]}
+          onChange={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+          value="states"
+        >
+          <span
+            className="MuiToggleButton-label"
+          >
+            states
+          </span>
+        </button>
+        <button
+          aria-pressed={false}
+          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          disabled={false}
+          onBlur={[Function]}
+          onChange={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+          value="domains"
+        >
+          <span
+            className="MuiToggleButton-label"
+          >
+            domains
+          </span>
+        </button>
+        <button
+          aria-pressed={false}
+          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          disabled={false}
+          onBlur={[Function]}
+          onChange={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+          value="sites"
+        >
+          <span
+            className="MuiToggleButton-label"
+          >
+            sites
+          </span>
+        </button>
+        <button
+          aria-pressed={false}
+          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          disabled={false}
+          onBlur={[Function]}
+          onChange={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+          value="tables"
+        >
+          <span
+            className="MuiToggleButton-label"
+          >
+            tables
+          </span>
+        </button>
+      </div>
+    </div>
+    <div
+      data-selenium="data-product-availability.sort-options"
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "justifyContent": "flex-start",
+        }
+      }
+    >
+      <h6
+        className="MuiTypography-root makeStyles-h6Small-2 MuiTypography-h6"
+        style={
+          Object {
+            "marginRight": 12,
+            "whiteSpace": "nowrap",
+          }
+        }
+      >
+        Sort By:
+      </h6>
+      <div
+        style={
+          Object {
+            "display": "flex",
+            "justifyContent": "flex-end",
+          }
+        }
+      >
+        <div
+          className="MuiFormControl-root"
+        >
+          <div
+            ComponentPath="@material-ui/core/Select"
+            prop-aria-label="Sort By"
+            prop-className="makeStyles-sortSelect-4"
+            prop-data-selenium="data-product-availability.sort-options.method"
+            prop-onChange="function
+        /* istanbul ignore next */
+        onChange(event) {
+          /* istanbul ignore next */
+          cov_1k5vljwa7c.f[8]++;
+          cov_1k5vljwa7c.s[32]++;
+          availabilityDispatch({
+            type: 'setSortMethod',
+            method: event.target.value
+          });
+        }"
+            prop-value="n/a"
+          >
+            <li
+              aria-disabled={true}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters Mui-disabled MuiListItem-button Mui-disabled"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="n/a"
+            >
+              --
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="states"
+            >
+              States
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="domains"
+            >
+              Domains
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="sites"
+            >
+              Sites
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="tables"
+            >
+              Tables
+            </li>
+          </div>
+        </div>
+        <div
+          className="MuiToggleButtonGroup-root"
+          data-selenium="data-product-availability.sort-options.direction"
+          role="group"
+        >
+          <button
+            aria-label="Sort Ascending (A-Z)"
+            aria-pressed={false}
+            className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal Mui-disabled MuiToggleButton-sizeSmall Mui-disabled"
+            disabled={true}
+            onBlur={[Function]}
+            onChange={[Function]}
+            onClick={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            style={
+              Object {
+                "borderColor": "unset",
+              }
+            }
+            tabIndex={-1}
+            title="Sort Ascending (A-Z)"
+            type="button"
+            value="ASC"
+          >
+            <span
+              className="MuiToggleButton-label"
+            >
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"
+                />
+              </svg>
+            </span>
+          </button>
+          <button
+            aria-label="Sort Descending (Z-A)"
+            aria-pressed={false}
+            className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal Mui-disabled MuiToggleButton-sizeSmall Mui-disabled"
+            disabled={true}
+            onBlur={[Function]}
+            onChange={[Function]}
+            onClick={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            style={
+              Object {
+                "borderColor": "unset",
+              }
+            }
+            tabIndex={-1}
+            title="Sort Descending (Z-A)"
+            type="button"
+            value="DESC"
+          >
+            <span
+              className="MuiToggleButton-label"
+            >
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
+                />
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="makeStyles-keyContainer-6"
+  >
+    <div>
+      <h6
+        className="MuiTypography-root makeStyles-h6Small-9 MuiTypography-h6"
+        style={
+          Object {
+            "margin": "-6px 24px 4px 0px",
+          }
+        }
+      >
+        Key:
+      </h6>
+      <button
+        aria-label="Help - Data Availability Chart Key"
+        className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        style={
+          Object {
+            "marginLeft": "-3px",
+          }
+        }
+        tabIndex={0}
+        title="Help - Data Availability Chart Key"
+        type="button"
+      >
+        <span
+          className="MuiIconButton-label"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"
+            />
+          </svg>
+        </span>
+      </button>
+    </div>
+    <div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data have been published and are available for download"
+      >
+        <svg
+          height={14}
+          width={87}
+        >
+          <rect
+            fill="#002c77"
+            height="12px"
+            rx="2px"
+            stroke={null}
+            strokeWidth={null}
+            width="7px"
+            x={0}
+            y={0}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Available
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data have been collected and will be published after processing has completed"
+      >
+        <svg
+          height={14}
+          width={135}
+        >
+          <rect
+            fill="url(#beingProcessedPattern)"
+            height="10.5px"
+            rx="1px"
+            stroke="#002c77"
+            strokeWidth="1.5px"
+            width="5.5px"
+            x={0.75}
+            y={0.75}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Being Processed
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data collection is scheduled to happen"
+      >
+        <svg
+          height={14}
+          width={79}
+        >
+          <rect
+            fill="#ffffff"
+            height="10.5px"
+            rx="1px"
+            stroke="#002c77"
+            strokeWidth="1.5px"
+            width="5.5px"
+            x={0.75}
+            y={0.75}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Expected
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="No data collection is scheduled"
+      >
+        <svg
+          height={14}
+          width={111}
+        >
+          <rect
+            fill="#ffffff"
+            height="10.5px"
+            rx="1px"
+            stroke="#d7d9d9"
+            strokeWidth="1.5px"
+            width="5.5px"
+            x={0.75}
+            y={0.75}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Not Expected
+          </text>
+        </svg>
+      </div>
+    </div>
+    <div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data was neither expected nor collected"
+      >
+        <svg
+          height={14}
+          width={119}
+        >
+          <rect
+            fill="#d7d9d9"
+            height="12px"
+            rx="2px"
+            stroke={null}
+            strokeWidth={null}
+            width="7px"
+            x={0}
+            y={0}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Not Available
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data collection was expected but collection could not take place; no data will be published"
+      >
+        <svg
+          height={14}
+          width={119}
+        >
+          <rect
+            fill="#f8bb32"
+            height="12px"
+            rx="2px"
+            stroke={null}
+            strokeWidth={null}
+            width="7px"
+            x={0}
+            y={0}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Not Collected
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data should be available for download but something has prevented publication"
+      >
+        <svg
+          height={14}
+          width={71}
+        >
+          <rect
+            fill="url(#delayedPattern)"
+            height="10.5px"
+            rx="1px"
+            stroke="#f8bb32"
+            strokeWidth="1.5px"
+            width="5.5px"
+            x={0.75}
+            y={0.75}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Delayed
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data collection is desired but not expected until other conditions are met"
+      >
+        <svg
+          height={14}
+          width={87}
+        >
+          <rect
+            fill="#ffffff"
+            height="10.5px"
+            rx="1px"
+            stroke="#b39076"
+            strokeWidth="1.5px"
+            width="5.5px"
+            x={0.75}
+            y={0.75}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Potential
+          </text>
+        </svg>
+      </div>
+    </div>
+    <div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="More than one status including at least one \\"Available\\" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)"
+      >
+        <svg
+          height={14}
+          width={215}
+        >
+          <rect
+            fill="url(#mixedSomeAvailabilityPattern)"
+            height="11.2px"
+            rx="1.5px"
+            stroke="#002c77"
+            strokeWidth="0.8px"
+            width="6.2px"
+            x={0.4}
+            y={0.4}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Mixed (Some Availability)
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="More than one status with none \\"Available\\" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)"
+      >
+        <svg
+          height={14}
+          width={199}
+        >
+          <rect
+            fill="url(#mixedNoAvailabilityPattern)"
+            height="11.2px"
+            rx="1.5px"
+            stroke="#f8bb32"
+            strokeWidth="0.8px"
+            width="6.2px"
+            x={0.4}
+            y={0.4}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Mixed (No Availability)
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="If the chart is presenting a roll-up (e.g. view by state) then all sites rolled into a given row are selected"
+      >
+        <svg
+          height={14}
+          width={201}
+        >
+          <rect
+            fill="#0073cf"
+            height={10}
+            width={45}
+            x={0.5}
+            y={1.5}
+          />
+          <rect
+            fill="#5ca6e3"
+            height={12}
+            stroke="#0073cf"
+            strokeWidth={1.5}
+            width={4}
+            x={0.5}
+            y={0.5}
+          />
+          <rect
+            fill="#5ca6e3"
+            height={12}
+            stroke="#0073cf"
+            strokeWidth={1.5}
+            width={4}
+            x={41}
+            y={0.5}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={57}
+            y={9}
+          >
+            All sites selected
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="If the chart is presenting a roll-up (e.g. view by state) then one or more but not all of the sites rolled into a given row are selected"
+      >
+        <svg
+          height={14}
+          width={209}
+        >
+          <rect
+            fill="url(#partialSelectionPattern)"
+            height={10}
+            width={45}
+            x={0.5}
+            y={1.5}
+          />
+          <rect
+            fill="#5ca6e3"
+            height={12}
+            stroke="#0073cf"
+            strokeWidth={1.5}
+            width={4}
+            x={0.5}
+            y={0.5}
+          />
+          <rect
+            fill="#5ca6e3"
+            height={12}
+            stroke="#0073cf"
+            strokeWidth={1.5}
+            width={4}
+            x={41}
+            y={0.5}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={57}
+            y={9}
+          >
+            Some sites selected
+          </text>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <br />
+  <svg
+    className="makeStyles-svg-1"
+    height={20}
+    id="dpa-1"
+  />
+  <br />
+  <br />
+  <br />
+  <pre
+    style={
+      Object {
+        "border": "1px dotted black",
+        "height": "50vh",
+        "overflowY": "scroll",
+        "padding": "2px",
+        "width": "100%",
+      }
+    }
+  >
+    {}
+  </pre>
+</div>
+`;
+
+exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with selection disabled 1`] = `
+<div
+  data-selenium="data-product-availability"
+  style={
+    Object {
+      "minWidth": "153px",
+      "width": "100%",
+    }
+  }
+>
+  <svg
+    height="0px"
+    width="0px"
+  >
+    <defs>
+      <pattern
+        height={3}
+        id="beingProcessedPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#002c77"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#ffffff"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={3}
+        id="delayedPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#f8bb32"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#ffffff"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={3}
+        id="partialSelectionPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#5ca6e3"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#b8d8f4"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedSomeAvailabilityPattern"
+        patternContentUnits="objectBoundingBox"
+        width={1}
+      >
+        <path
+          d="M 0 0 V 1 L 1 0 Z"
+          fill="#002c77"
+        />
+        <path
+          d="M 1 1 V 0 L 0 1 Z"
+          fill="#f8bb32"
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedNoAvailabilityPattern"
+        patternContentUnits="objectBoundingBox"
+        width={1}
+      >
+        <path
+          d="M 0 0 V 1 L 1 0 Z"
+          fill="#d7d9d9"
+        />
+        <path
+          d="M 1 1 V 0 L 0 1 Z"
+          fill="#f8bb32"
+        />
+      </pattern>
+    </defs>
+  </svg>
+  <div
+    className="makeStyles-viewAndSortOptionsContainer-5"
+  >
+    <div
+      data-selenium="data-product-availability.breakout-options"
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "justifyContent": "flex-start",
+          "marginRight": 24,
+        }
+      }
+    >
+      <h6
+        className="MuiTypography-root makeStyles-h6Small-2 MuiTypography-h6"
+        style={
+          Object {
+            "marginRight": 12,
+            "whiteSpace": "nowrap",
+          }
+        }
+      >
+        View By:
+      </h6>
+      <div
+        className="MuiToggleButtonGroup-root"
+        color="primary"
+        role="group"
+        variant="outlined"
+      >
+        <button
+          aria-pressed={false}
+          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          disabled={false}
+          onBlur={[Function]}
+          onChange={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+          value="states"
+        >
+          <span
+            className="MuiToggleButton-label"
+          >
+            states
+          </span>
+        </button>
+        <button
+          aria-pressed={false}
+          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          disabled={false}
+          onBlur={[Function]}
+          onChange={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+          value="domains"
+        >
+          <span
+            className="MuiToggleButton-label"
+          >
+            domains
+          </span>
+        </button>
+        <button
+          aria-pressed={false}
+          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          disabled={false}
+          onBlur={[Function]}
+          onChange={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+          value="sites"
+        >
+          <span
+            className="MuiToggleButton-label"
+          >
+            sites
+          </span>
+        </button>
+        <button
+          aria-pressed={false}
+          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          disabled={false}
+          onBlur={[Function]}
+          onChange={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+          value="tables"
+        >
+          <span
+            className="MuiToggleButton-label"
+          >
+            tables
+          </span>
+        </button>
+      </div>
+    </div>
+    <div
+      data-selenium="data-product-availability.sort-options"
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "justifyContent": "flex-start",
+        }
+      }
+    >
+      <h6
+        className="MuiTypography-root makeStyles-h6Small-2 MuiTypography-h6"
+        style={
+          Object {
+            "marginRight": 12,
+            "whiteSpace": "nowrap",
+          }
+        }
+      >
+        Sort By:
+      </h6>
+      <div
+        style={
+          Object {
+            "display": "flex",
+            "justifyContent": "flex-end",
+          }
+        }
+      >
+        <div
+          className="MuiFormControl-root"
+        >
+          <div
+            ComponentPath="@material-ui/core/Select"
+            prop-aria-label="Sort By"
+            prop-className="makeStyles-sortSelect-4"
+            prop-data-selenium="data-product-availability.sort-options.method"
+            prop-onChange="function
+        /* istanbul ignore next */
+        onChange(event) {
+          /* istanbul ignore next */
+          cov_1k5vljwa7c.f[8]++;
+          cov_1k5vljwa7c.s[32]++;
+          availabilityDispatch({
+            type: 'setSortMethod',
+            method: event.target.value
+          });
+        }"
+            prop-value="n/a"
+          >
+            <li
+              aria-disabled={true}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters Mui-disabled MuiListItem-button Mui-disabled"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="n/a"
+            >
+              --
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="states"
+            >
+              States
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="domains"
+            >
+              Domains
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="sites"
+            >
+              Sites
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="tables"
+            >
+              Tables
+            </li>
+          </div>
+        </div>
+        <div
+          className="MuiToggleButtonGroup-root"
+          data-selenium="data-product-availability.sort-options.direction"
+          role="group"
+        >
+          <button
+            aria-label="Sort Ascending (A-Z)"
+            aria-pressed={false}
+            className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal Mui-disabled MuiToggleButton-sizeSmall Mui-disabled"
+            disabled={true}
+            onBlur={[Function]}
+            onChange={[Function]}
+            onClick={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            style={
+              Object {
+                "borderColor": "unset",
+              }
+            }
+            tabIndex={-1}
+            title="Sort Ascending (A-Z)"
+            type="button"
+            value="ASC"
+          >
+            <span
+              className="MuiToggleButton-label"
+            >
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"
+                />
+              </svg>
+            </span>
+          </button>
+          <button
+            aria-label="Sort Descending (Z-A)"
+            aria-pressed={false}
+            className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal Mui-disabled MuiToggleButton-sizeSmall Mui-disabled"
+            disabled={true}
+            onBlur={[Function]}
+            onChange={[Function]}
+            onClick={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            style={
+              Object {
+                "borderColor": "unset",
+              }
+            }
+            tabIndex={-1}
+            title="Sort Descending (Z-A)"
+            type="button"
+            value="DESC"
+          >
+            <span
+              className="MuiToggleButton-label"
+            >
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
+                />
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="makeStyles-keyContainer-6"
+  >
+    <div>
+      <h6
+        className="MuiTypography-root makeStyles-h6Small-9 MuiTypography-h6"
+        style={
+          Object {
+            "margin": "-6px 24px 4px 0px",
+          }
+        }
+      >
+        Key:
+      </h6>
+      <button
+        aria-label="Help - Data Availability Chart Key"
+        className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        style={
+          Object {
+            "marginLeft": "-3px",
+          }
+        }
+        tabIndex={0}
+        title="Help - Data Availability Chart Key"
+        type="button"
+      >
+        <span
+          className="MuiIconButton-label"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"
+            />
+          </svg>
+        </span>
+      </button>
+    </div>
+    <div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data have been published and are available for download"
+      >
+        <svg
+          height={14}
+          width={87}
+        >
+          <rect
+            fill="#002c77"
+            height="12px"
+            rx="2px"
+            stroke={null}
+            strokeWidth={null}
+            width="7px"
+            x={0}
+            y={0}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Available
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data have been collected and will be published after processing has completed"
+      >
+        <svg
+          height={14}
+          width={135}
+        >
+          <rect
+            fill="url(#beingProcessedPattern)"
+            height="10.5px"
+            rx="1px"
+            stroke="#002c77"
+            strokeWidth="1.5px"
+            width="5.5px"
+            x={0.75}
+            y={0.75}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Being Processed
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data collection is scheduled to happen"
+      >
+        <svg
+          height={14}
+          width={79}
+        >
+          <rect
+            fill="#ffffff"
+            height="10.5px"
+            rx="1px"
+            stroke="#002c77"
+            strokeWidth="1.5px"
+            width="5.5px"
+            x={0.75}
+            y={0.75}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Expected
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="No data collection is scheduled"
+      >
+        <svg
+          height={14}
+          width={111}
+        >
+          <rect
+            fill="#ffffff"
+            height="10.5px"
+            rx="1px"
+            stroke="#d7d9d9"
+            strokeWidth="1.5px"
+            width="5.5px"
+            x={0.75}
+            y={0.75}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Not Expected
+          </text>
+        </svg>
+      </div>
+    </div>
+    <div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data was neither expected nor collected"
+      >
+        <svg
+          height={14}
+          width={119}
+        >
+          <rect
+            fill="#d7d9d9"
+            height="12px"
+            rx="2px"
+            stroke={null}
+            strokeWidth={null}
+            width="7px"
+            x={0}
+            y={0}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Not Available
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data collection was expected but collection could not take place; no data will be published"
+      >
+        <svg
+          height={14}
+          width={119}
+        >
+          <rect
+            fill="#f8bb32"
+            height="12px"
+            rx="2px"
+            stroke={null}
+            strokeWidth={null}
+            width="7px"
+            x={0}
+            y={0}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Not Collected
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data should be available for download but something has prevented publication"
+      >
+        <svg
+          height={14}
+          width={71}
+        >
+          <rect
+            fill="url(#delayedPattern)"
+            height="10.5px"
+            rx="1px"
+            stroke="#f8bb32"
+            strokeWidth="1.5px"
+            width="5.5px"
+            x={0.75}
+            y={0.75}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Delayed
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data collection is desired but not expected until other conditions are met"
+      >
+        <svg
+          height={14}
+          width={87}
+        >
+          <rect
+            fill="#ffffff"
+            height="10.5px"
+            rx="1px"
+            stroke="#b39076"
+            strokeWidth="1.5px"
+            width="5.5px"
+            x={0.75}
+            y={0.75}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Potential
+          </text>
+        </svg>
+      </div>
+    </div>
+    <div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="More than one status including at least one \\"Available\\" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)"
+      >
+        <svg
+          height={14}
+          width={215}
+        >
+          <rect
+            fill="url(#mixedSomeAvailabilityPattern)"
+            height="11.2px"
+            rx="1.5px"
+            stroke="#002c77"
+            strokeWidth="0.8px"
+            width="6.2px"
+            x={0.4}
+            y={0.4}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Mixed (Some Availability)
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="More than one status with none \\"Available\\" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)"
+      >
+        <svg
+          height={14}
+          width={199}
+        >
+          <rect
+            fill="url(#mixedNoAvailabilityPattern)"
+            height="11.2px"
+            rx="1.5px"
+            stroke="#f8bb32"
+            strokeWidth="0.8px"
+            width="6.2px"
+            x={0.4}
+            y={0.4}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Mixed (No Availability)
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="If the chart is presenting a roll-up (e.g. view by state) then all sites rolled into a given row are selected"
+      >
+        <svg
+          height={14}
+          width={201}
+        >
+          <rect
+            fill="#0073cf"
+            height={10}
+            width={45}
+            x={0.5}
+            y={1.5}
+          />
+          <rect
+            fill="#5ca6e3"
+            height={12}
+            stroke="#0073cf"
+            strokeWidth={1.5}
+            width={4}
+            x={0.5}
+            y={0.5}
+          />
+          <rect
+            fill="#5ca6e3"
+            height={12}
+            stroke="#0073cf"
+            strokeWidth={1.5}
+            width={4}
+            x={41}
+            y={0.5}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={57}
+            y={9}
+          >
+            All sites selected
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="If the chart is presenting a roll-up (e.g. view by state) then one or more but not all of the sites rolled into a given row are selected"
+      >
+        <svg
+          height={14}
+          width={209}
+        >
+          <rect
+            fill="url(#partialSelectionPattern)"
+            height={10}
+            width={45}
+            x={0.5}
+            y={1.5}
+          />
+          <rect
+            fill="#5ca6e3"
+            height={12}
+            stroke="#0073cf"
+            strokeWidth={1.5}
+            width={4}
+            x={0.5}
+            y={0.5}
+          />
+          <rect
+            fill="#5ca6e3"
+            height={12}
+            stroke="#0073cf"
+            strokeWidth={1.5}
+            width={4}
+            x={41}
+            y={0.5}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={57}
+            y={9}
+          >
+            Some sites selected
+          </text>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <br />
+  <svg
+    className="makeStyles-svg-1"
+    height={20}
+    id="dpa-5"
+  />
+  <br />
+  <br />
+  <br />
+  <pre
+    style={
+      Object {
+        "border": "1px dotted black",
+        "height": "50vh",
+        "overflowY": "scroll",
+        "padding": "2px",
+        "width": "100%",
+      }
+    }
+  >
+    {}
+  </pre>
+</div>
+`;
+
+exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with siteCodes and view 1`] = `
+<div
+  data-selenium="data-product-availability"
+  style={
+    Object {
+      "minWidth": "153px",
+      "width": "100%",
+    }
+  }
+>
+  <svg
+    height="0px"
+    width="0px"
+  >
+    <defs>
+      <pattern
+        height={3}
+        id="beingProcessedPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#002c77"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#ffffff"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={3}
+        id="delayedPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#f8bb32"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#ffffff"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={3}
+        id="partialSelectionPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#5ca6e3"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#b8d8f4"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedSomeAvailabilityPattern"
+        patternContentUnits="objectBoundingBox"
+        width={1}
+      >
+        <path
+          d="M 0 0 V 1 L 1 0 Z"
+          fill="#002c77"
+        />
+        <path
+          d="M 1 1 V 0 L 0 1 Z"
+          fill="#f8bb32"
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedNoAvailabilityPattern"
+        patternContentUnits="objectBoundingBox"
+        width={1}
+      >
+        <path
+          d="M 0 0 V 1 L 1 0 Z"
+          fill="#d7d9d9"
+        />
+        <path
+          d="M 1 1 V 0 L 0 1 Z"
+          fill="#f8bb32"
+        />
+      </pattern>
+    </defs>
+  </svg>
+  <div
+    className="makeStyles-viewAndSortOptionsContainer-5"
+  >
+    <div
+      data-selenium="data-product-availability.breakout-options"
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "justifyContent": "flex-start",
+          "marginRight": 24,
+        }
+      }
+    >
+      <h6
+        className="MuiTypography-root makeStyles-h6Small-2 MuiTypography-h6"
+        style={
+          Object {
+            "marginRight": 12,
+            "whiteSpace": "nowrap",
+          }
+        }
+      >
+        View By:
+      </h6>
+      <div
+        className="MuiToggleButtonGroup-root"
+        color="primary"
+        role="group"
+        variant="outlined"
+      >
+        <button
+          aria-pressed={false}
+          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          disabled={false}
+          onBlur={[Function]}
+          onChange={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+          value="states"
+        >
+          <span
+            className="MuiToggleButton-label"
+          >
+            states
+          </span>
+          <span
+            className="MuiTouchRipple-root"
+          />
+        </button>
+        <button
+          aria-pressed={false}
+          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          disabled={false}
+          onBlur={[Function]}
+          onChange={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+          value="domains"
+        >
+          <span
+            className="MuiToggleButton-label"
+          >
+            domains
+          </span>
+          <span
+            className="MuiTouchRipple-root"
+          />
+        </button>
+        <button
+          aria-pressed={false}
+          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          disabled={false}
+          onBlur={[Function]}
+          onChange={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+          value="sites"
+        >
+          <span
+            className="MuiToggleButton-label"
+          >
+            sites
+          </span>
+          <span
+            className="MuiTouchRipple-root"
+          />
+        </button>
+        <button
+          aria-pressed={false}
+          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          disabled={false}
+          onBlur={[Function]}
+          onChange={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+          value="tables"
+        >
+          <span
+            className="MuiToggleButton-label"
+          >
+            tables
+          </span>
+          <span
+            className="MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+    </div>
+    <div
+      data-selenium="data-product-availability.sort-options"
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "justifyContent": "flex-start",
+        }
+      }
+    >
+      <h6
+        className="MuiTypography-root makeStyles-h6Small-2 MuiTypography-h6"
+        style={
+          Object {
+            "marginRight": 12,
+            "whiteSpace": "nowrap",
+          }
+        }
+      >
+        Sort By:
+      </h6>
+      <div
+        style={
+          Object {
+            "display": "flex",
+            "justifyContent": "flex-end",
+          }
+        }
+      >
+        <div
+          className="MuiFormControl-root"
+        >
+          <div
+            ComponentPath="@material-ui/core/Select"
+            prop-aria-label="Sort By"
+            prop-className="makeStyles-sortSelect-4"
+            prop-data-selenium="data-product-availability.sort-options.method"
+            prop-onChange="function
+        /* istanbul ignore next */
+        onChange(event) {
+          /* istanbul ignore next */
+          cov_1k5vljwa7c.f[8]++;
+          cov_1k5vljwa7c.s[32]++;
+          availabilityDispatch({
+            type: 'setSortMethod',
+            method: event.target.value
+          });
+        }"
+            prop-value="n/a"
+          >
+            <li
+              aria-disabled={true}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters Mui-disabled MuiListItem-button Mui-disabled"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="n/a"
+            >
+              --
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="states"
+            >
+              States
+              <span
+                className="MuiTouchRipple-root"
+              />
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="domains"
+            >
+              Domains
+              <span
+                className="MuiTouchRipple-root"
+              />
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="sites"
+            >
+              Sites
+              <span
+                className="MuiTouchRipple-root"
+              />
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="tables"
+            >
+              Tables
+              <span
+                className="MuiTouchRipple-root"
+              />
+            </li>
+          </div>
+        </div>
+        <div
+          className="MuiToggleButtonGroup-root"
+          data-selenium="data-product-availability.sort-options.direction"
+          role="group"
+        >
+          <button
+            aria-label="Sort Ascending (A-Z)"
+            aria-pressed={false}
+            className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal Mui-disabled MuiToggleButton-sizeSmall Mui-disabled"
+            disabled={true}
+            onBlur={[Function]}
+            onChange={[Function]}
+            onClick={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            style={
+              Object {
+                "borderColor": "unset",
+              }
+            }
+            tabIndex={-1}
+            title="Sort Ascending (A-Z)"
+            type="button"
+            value="ASC"
+          >
+            <span
+              className="MuiToggleButton-label"
+            >
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"
+                />
+              </svg>
+            </span>
+          </button>
+          <button
+            aria-label="Sort Descending (Z-A)"
+            aria-pressed={false}
+            className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal Mui-disabled MuiToggleButton-sizeSmall Mui-disabled"
+            disabled={true}
+            onBlur={[Function]}
+            onChange={[Function]}
+            onClick={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            style={
+              Object {
+                "borderColor": "unset",
+              }
+            }
+            tabIndex={-1}
+            title="Sort Descending (Z-A)"
+            type="button"
+            value="DESC"
+          >
+            <span
+              className="MuiToggleButton-label"
+            >
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
+                />
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="makeStyles-keyContainer-6"
+  >
+    <div>
+      <h6
+        className="MuiTypography-root makeStyles-h6Small-9 MuiTypography-h6"
+        style={
+          Object {
+            "margin": "-6px 24px 4px 0px",
+          }
+        }
+      >
+        Key:
+      </h6>
+      <button
+        aria-label="Help - Data Availability Chart Key"
+        className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        style={
+          Object {
+            "marginLeft": "-3px",
+          }
+        }
+        tabIndex={0}
+        title="Help - Data Availability Chart Key"
+        type="button"
+      >
+        <span
+          className="MuiIconButton-label"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"
+            />
+          </svg>
+        </span>
+        <span
+          className="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data have been published and are available for download"
+      >
+        <svg
+          height={14}
+          width={87}
+        >
+          <rect
+            fill="#002c77"
+            height="12px"
+            rx="2px"
+            stroke={null}
+            strokeWidth={null}
+            width="7px"
+            x={0}
+            y={0}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Available
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data have been collected and will be published after processing has completed"
+      >
+        <svg
+          height={14}
+          width={135}
+        >
+          <rect
+            fill="url(#beingProcessedPattern)"
+            height="10.5px"
+            rx="1px"
+            stroke="#002c77"
+            strokeWidth="1.5px"
+            width="5.5px"
+            x={0.75}
+            y={0.75}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Being Processed
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data collection is scheduled to happen"
+      >
+        <svg
+          height={14}
+          width={79}
+        >
+          <rect
+            fill="#ffffff"
+            height="10.5px"
+            rx="1px"
+            stroke="#002c77"
+            strokeWidth="1.5px"
+            width="5.5px"
+            x={0.75}
+            y={0.75}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Expected
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="No data collection is scheduled"
+      >
+        <svg
+          height={14}
+          width={111}
+        >
+          <rect
+            fill="#ffffff"
+            height="10.5px"
+            rx="1px"
+            stroke="#d7d9d9"
+            strokeWidth="1.5px"
+            width="5.5px"
+            x={0.75}
+            y={0.75}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Not Expected
+          </text>
+        </svg>
+      </div>
+    </div>
+    <div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data was neither expected nor collected"
+      >
+        <svg
+          height={14}
+          width={119}
+        >
+          <rect
+            fill="#d7d9d9"
+            height="12px"
+            rx="2px"
+            stroke={null}
+            strokeWidth={null}
+            width="7px"
+            x={0}
+            y={0}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Not Available
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data collection was expected but collection could not take place; no data will be published"
+      >
+        <svg
+          height={14}
+          width={119}
+        >
+          <rect
+            fill="#f8bb32"
+            height="12px"
+            rx="2px"
+            stroke={null}
+            strokeWidth={null}
+            width="7px"
+            x={0}
+            y={0}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Not Collected
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data should be available for download but something has prevented publication"
+      >
+        <svg
+          height={14}
+          width={71}
+        >
+          <rect
+            fill="url(#delayedPattern)"
+            height="10.5px"
+            rx="1px"
+            stroke="#f8bb32"
+            strokeWidth="1.5px"
+            width="5.5px"
+            x={0.75}
+            y={0.75}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Delayed
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data collection is desired but not expected until other conditions are met"
+      >
+        <svg
+          height={14}
+          width={87}
+        >
+          <rect
+            fill="#ffffff"
+            height="10.5px"
+            rx="1px"
+            stroke="#b39076"
+            strokeWidth="1.5px"
+            width="5.5px"
+            x={0.75}
+            y={0.75}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Potential
+          </text>
+        </svg>
+      </div>
+    </div>
+    <div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="More than one status including at least one \\"Available\\" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)"
+      >
+        <svg
+          height={14}
+          width={215}
+        >
+          <rect
+            fill="url(#mixedSomeAvailabilityPattern)"
+            height="11.2px"
+            rx="1.5px"
+            stroke="#002c77"
+            strokeWidth="0.8px"
+            width="6.2px"
+            x={0.4}
+            y={0.4}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Mixed (Some Availability)
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="More than one status with none \\"Available\\" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)"
+      >
+        <svg
+          height={14}
+          width={199}
+        >
+          <rect
+            fill="url(#mixedNoAvailabilityPattern)"
+            height="11.2px"
+            rx="1.5px"
+            stroke="#f8bb32"
+            strokeWidth="0.8px"
+            width="6.2px"
+            x={0.4}
+            y={0.4}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Mixed (No Availability)
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="If the chart is presenting a roll-up (e.g. view by state) then all sites rolled into a given row are selected"
+      >
+        <svg
+          height={14}
+          width={201}
+        >
+          <rect
+            fill="#0073cf"
+            height={10}
+            width={45}
+            x={0.5}
+            y={1.5}
+          />
+          <rect
+            fill="#5ca6e3"
+            height={12}
+            stroke="#0073cf"
+            strokeWidth={1.5}
+            width={4}
+            x={0.5}
+            y={0.5}
+          />
+          <rect
+            fill="#5ca6e3"
+            height={12}
+            stroke="#0073cf"
+            strokeWidth={1.5}
+            width={4}
+            x={41}
+            y={0.5}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={57}
+            y={9}
+          >
+            All sites selected
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="If the chart is presenting a roll-up (e.g. view by state) then one or more but not all of the sites rolled into a given row are selected"
+      >
+        <svg
+          height={14}
+          width={209}
+        >
+          <rect
+            fill="url(#partialSelectionPattern)"
+            height={10}
+            width={45}
+            x={0.5}
+            y={1.5}
+          />
+          <rect
+            fill="#5ca6e3"
+            height={12}
+            stroke="#0073cf"
+            strokeWidth={1.5}
+            width={4}
+            x={0.5}
+            y={0.5}
+          />
+          <rect
+            fill="#5ca6e3"
+            height={12}
+            stroke="#0073cf"
+            strokeWidth={1.5}
+            width={4}
+            x={41}
+            y={0.5}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={57}
+            y={9}
+          >
+            Some sites selected
+          </text>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <br />
+  <svg
+    className="makeStyles-svg-1"
+    height={20}
+    id="dpa-2"
+  />
+  <br />
+  <br />
+  <br />
+  <pre
+    style={
+      Object {
+        "border": "1px dotted black",
+        "height": "50vh",
+        "overflowY": "scroll",
+        "padding": "2px",
+        "width": "100%",
+      }
+    }
+  >
+    {}
+  </pre>
+</div>
+`;
+
+exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ungrouped view 1`] = `
+<div
+  data-selenium="data-product-availability"
+  style={
+    Object {
+      "minWidth": "153px",
+      "width": "100%",
+    }
+  }
+>
+  <svg
+    height="0px"
+    width="0px"
+  >
+    <defs>
+      <pattern
+        height={3}
+        id="beingProcessedPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#002c77"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#ffffff"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={3}
+        id="delayedPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#f8bb32"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#ffffff"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={3}
+        id="partialSelectionPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#5ca6e3"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#b8d8f4"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedSomeAvailabilityPattern"
+        patternContentUnits="objectBoundingBox"
+        width={1}
+      >
+        <path
+          d="M 0 0 V 1 L 1 0 Z"
+          fill="#002c77"
+        />
+        <path
+          d="M 1 1 V 0 L 0 1 Z"
+          fill="#f8bb32"
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedNoAvailabilityPattern"
+        patternContentUnits="objectBoundingBox"
+        width={1}
+      >
+        <path
+          d="M 0 0 V 1 L 1 0 Z"
+          fill="#d7d9d9"
+        />
+        <path
+          d="M 1 1 V 0 L 0 1 Z"
+          fill="#f8bb32"
+        />
+      </pattern>
+    </defs>
+  </svg>
+  <div
+    className="makeStyles-viewAndSortOptionsContainer-5"
+  >
+    <div
+      data-selenium="data-product-availability.breakout-options"
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "justifyContent": "flex-start",
+          "marginRight": 24,
+        }
+      }
+    >
+      <h6
+        className="MuiTypography-root makeStyles-h6Small-2 MuiTypography-h6"
+        style={
+          Object {
+            "marginRight": 12,
+            "whiteSpace": "nowrap",
+          }
+        }
+      >
+        View By:
+      </h6>
+      <div
+        className="MuiToggleButtonGroup-root"
+        color="primary"
+        role="group"
+        variant="outlined"
+      >
+        <button
+          aria-pressed={false}
+          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          disabled={false}
+          onBlur={[Function]}
+          onChange={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+          value="states"
+        >
+          <span
+            className="MuiToggleButton-label"
+          >
+            states
+          </span>
+          <span
+            className="MuiTouchRipple-root"
+          />
+        </button>
+        <button
+          aria-pressed={false}
+          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          disabled={false}
+          onBlur={[Function]}
+          onChange={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+          value="domains"
+        >
+          <span
+            className="MuiToggleButton-label"
+          >
+            domains
+          </span>
+          <span
+            className="MuiTouchRipple-root"
+          />
+        </button>
+        <button
+          aria-pressed={false}
+          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          disabled={false}
+          onBlur={[Function]}
+          onChange={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+          value="sites"
+        >
+          <span
+            className="MuiToggleButton-label"
+          >
+            sites
+          </span>
+          <span
+            className="MuiTouchRipple-root"
+          />
+        </button>
+        <button
+          aria-pressed={false}
+          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          disabled={false}
+          onBlur={[Function]}
+          onChange={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+          value="tables"
+        >
+          <span
+            className="MuiToggleButton-label"
+          >
+            tables
+          </span>
+          <span
+            className="MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+    </div>
+    <div
+      data-selenium="data-product-availability.sort-options"
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "justifyContent": "flex-start",
+        }
+      }
+    >
+      <h6
+        className="MuiTypography-root makeStyles-h6Small-2 MuiTypography-h6"
+        style={
+          Object {
+            "marginRight": 12,
+            "whiteSpace": "nowrap",
+          }
+        }
+      >
+        Sort By:
+      </h6>
+      <div
+        style={
+          Object {
+            "display": "flex",
+            "justifyContent": "flex-end",
+          }
+        }
+      >
+        <div
+          className="MuiFormControl-root"
+        >
+          <div
+            ComponentPath="@material-ui/core/Select"
+            prop-aria-label="Sort By"
+            prop-className="makeStyles-sortSelect-4"
+            prop-data-selenium="data-product-availability.sort-options.method"
+            prop-onChange="function
+        /* istanbul ignore next */
+        onChange(event) {
+          /* istanbul ignore next */
+          cov_1k5vljwa7c.f[8]++;
+          cov_1k5vljwa7c.s[32]++;
+          availabilityDispatch({
+            type: 'setSortMethod',
+            method: event.target.value
+          });
+        }"
+            prop-value="n/a"
+          >
+            <li
+              aria-disabled={true}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters Mui-disabled MuiListItem-button Mui-disabled"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="n/a"
+            >
+              --
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="states"
+            >
+              States
+              <span
+                className="MuiTouchRipple-root"
+              />
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="domains"
+            >
+              Domains
+              <span
+                className="MuiTouchRipple-root"
+              />
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="sites"
+            >
+              Sites
+              <span
+                className="MuiTouchRipple-root"
+              />
+            </li>
+            <li
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              role="menuitem"
+              tabIndex={-1}
+              value="tables"
+            >
+              Tables
+              <span
+                className="MuiTouchRipple-root"
+              />
+            </li>
+          </div>
+        </div>
+        <div
+          className="MuiToggleButtonGroup-root"
+          data-selenium="data-product-availability.sort-options.direction"
+          role="group"
+        >
+          <button
+            aria-label="Sort Ascending (A-Z)"
+            aria-pressed={false}
+            className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal Mui-disabled MuiToggleButton-sizeSmall Mui-disabled"
+            disabled={true}
+            onBlur={[Function]}
+            onChange={[Function]}
+            onClick={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            style={
+              Object {
+                "borderColor": "unset",
+              }
+            }
+            tabIndex={-1}
+            title="Sort Ascending (A-Z)"
+            type="button"
+            value="ASC"
+          >
+            <span
+              className="MuiToggleButton-label"
+            >
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"
+                />
+              </svg>
+            </span>
+          </button>
+          <button
+            aria-label="Sort Descending (Z-A)"
+            aria-pressed={false}
+            className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal Mui-disabled MuiToggleButton-sizeSmall Mui-disabled"
+            disabled={true}
+            onBlur={[Function]}
+            onChange={[Function]}
+            onClick={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            style={
+              Object {
+                "borderColor": "unset",
+              }
+            }
+            tabIndex={-1}
+            title="Sort Descending (Z-A)"
+            type="button"
+            value="DESC"
+          >
+            <span
+              className="MuiToggleButton-label"
+            >
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
+                />
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="makeStyles-keyContainer-6"
+  >
+    <div>
+      <h6
+        className="MuiTypography-root makeStyles-h6Small-9 MuiTypography-h6"
+        style={
+          Object {
+            "margin": "-6px 24px 4px 0px",
+          }
+        }
+      >
+        Key:
+      </h6>
+      <button
+        aria-label="Help - Data Availability Chart Key"
+        className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        style={
+          Object {
+            "marginLeft": "-3px",
+          }
+        }
+        tabIndex={0}
+        title="Help - Data Availability Chart Key"
+        type="button"
+      >
+        <span
+          className="MuiIconButton-label"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"
+            />
+          </svg>
+        </span>
+        <span
+          className="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data have been published and are available for download"
+      >
+        <svg
+          height={14}
+          width={87}
+        >
+          <rect
+            fill="#002c77"
+            height="12px"
+            rx="2px"
+            stroke={null}
+            strokeWidth={null}
+            width="7px"
+            x={0}
+            y={0}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Available
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data have been collected and will be published after processing has completed"
+      >
+        <svg
+          height={14}
+          width={135}
+        >
+          <rect
+            fill="url(#beingProcessedPattern)"
+            height="10.5px"
+            rx="1px"
+            stroke="#002c77"
+            strokeWidth="1.5px"
+            width="5.5px"
+            x={0.75}
+            y={0.75}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Being Processed
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data collection is scheduled to happen"
+      >
+        <svg
+          height={14}
+          width={79}
+        >
+          <rect
+            fill="#ffffff"
+            height="10.5px"
+            rx="1px"
+            stroke="#002c77"
+            strokeWidth="1.5px"
+            width="5.5px"
+            x={0.75}
+            y={0.75}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Expected
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="No data collection is scheduled"
+      >
+        <svg
+          height={14}
+          width={111}
+        >
+          <rect
+            fill="#ffffff"
+            height="10.5px"
+            rx="1px"
+            stroke="#d7d9d9"
+            strokeWidth="1.5px"
+            width="5.5px"
+            x={0.75}
+            y={0.75}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Not Expected
+          </text>
+        </svg>
+      </div>
+    </div>
+    <div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data was neither expected nor collected"
+      >
+        <svg
+          height={14}
+          width={119}
+        >
+          <rect
+            fill="#d7d9d9"
+            height="12px"
+            rx="2px"
+            stroke={null}
+            strokeWidth={null}
+            width="7px"
+            x={0}
+            y={0}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Not Available
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data collection was expected but collection could not take place; no data will be published"
+      >
+        <svg
+          height={14}
+          width={119}
+        >
+          <rect
+            fill="#f8bb32"
+            height="12px"
+            rx="2px"
+            stroke={null}
+            strokeWidth={null}
+            width="7px"
+            x={0}
+            y={0}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Not Collected
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data should be available for download but something has prevented publication"
+      >
+        <svg
+          height={14}
+          width={71}
+        >
+          <rect
+            fill="url(#delayedPattern)"
+            height="10.5px"
+            rx="1px"
+            stroke="#f8bb32"
+            strokeWidth="1.5px"
+            width="5.5px"
+            x={0.75}
+            y={0.75}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Delayed
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="Data collection is desired but not expected until other conditions are met"
+      >
+        <svg
+          height={14}
+          width={87}
+        >
+          <rect
+            fill="#ffffff"
+            height="10.5px"
+            rx="1px"
+            stroke="#b39076"
+            strokeWidth="1.5px"
+            width="5.5px"
+            x={0.75}
+            y={0.75}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Potential
+          </text>
+        </svg>
+      </div>
+    </div>
+    <div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="More than one status including at least one \\"Available\\" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)"
+      >
+        <svg
+          height={14}
+          width={215}
+        >
+          <rect
+            fill="url(#mixedSomeAvailabilityPattern)"
+            height="11.2px"
+            rx="1.5px"
+            stroke="#002c77"
+            strokeWidth="0.8px"
+            width="6.2px"
+            x={0.4}
+            y={0.4}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Mixed (Some Availability)
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="More than one status with none \\"Available\\" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)"
+      >
+        <svg
+          height={14}
+          width={199}
+        >
+          <rect
+            fill="url(#mixedNoAvailabilityPattern)"
+            height="11.2px"
+            rx="1.5px"
+            stroke="#f8bb32"
+            strokeWidth="0.8px"
+            width="6.2px"
+            x={0.4}
+            y={0.4}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={15}
+            y={9}
+          >
+            Mixed (No Availability)
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="If the chart is presenting a roll-up (e.g. view by state) then all sites rolled into a given row are selected"
+      >
+        <svg
+          height={14}
+          width={201}
+        >
+          <rect
+            fill="#0073cf"
+            height={10}
+            width={45}
+            x={0.5}
+            y={1.5}
+          />
+          <rect
+            fill="#5ca6e3"
+            height={12}
+            stroke="#0073cf"
+            strokeWidth={1.5}
+            width={4}
+            x={0.5}
+            y={0.5}
+          />
+          <rect
+            fill="#5ca6e3"
+            height={12}
+            stroke="#0073cf"
+            strokeWidth={1.5}
+            width={4}
+            x={41}
+            y={0.5}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={57}
+            y={9}
+          >
+            All sites selected
+          </text>
+        </svg>
+      </div>
+      <div
+        className="makeStyles-keyElement-7"
+        onClick={[Function]}
+        role="button"
+        title="If the chart is presenting a roll-up (e.g. view by state) then one or more but not all of the sites rolled into a given row are selected"
+      >
+        <svg
+          height={14}
+          width={209}
+        >
+          <rect
+            fill="url(#partialSelectionPattern)"
+            height={10}
+            width={45}
+            x={0.5}
+            y={1.5}
+          />
+          <rect
+            fill="#5ca6e3"
+            height={12}
+            stroke="#0073cf"
+            strokeWidth={1.5}
+            width={4}
+            x={0.5}
+            y={0.5}
+          />
+          <rect
+            fill="#5ca6e3"
+            height={12}
+            stroke="#0073cf"
+            strokeWidth={1.5}
+            width={4}
+            x={41}
+            y={0.5}
+          />
+          <text
+            className="makeStyles-keyElementText-8"
+            x={57}
+            y={9}
+          >
+            Some sites selected
+          </text>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <br />
+  <svg
+    className="makeStyles-svg-1"
+    height={20}
+    id="dpa-4"
+  />
+  <br />
+  <br />
+  <br />
+  <pre
+    style={
+      Object {
+        "border": "1px dotted black",
+        "height": "50vh",
+        "overflowY": "scroll",
+        "padding": "2px",
+        "width": "100%",
+      }
+    }
+  >
+    {}
+  </pre>
+</div>
+`;
