@@ -177,7 +177,7 @@ const DEFAULT_STATE = {
   availableQualityFlags: new Set(),
   availableTimeSteps: new Set(['auto']),
 };
-const Context = createContext(DEFAULT_STATE);
+const Context = createContext(cloneDeep(DEFAULT_STATE));
 const useTimeSeriesViewerState = () => {
   const hookResponse = useContext(Context);
   if (hookResponse.length !== 2) {

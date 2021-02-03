@@ -4,6 +4,8 @@ import { renderHook } from '@testing-library/react-hooks';
 
 import cloneDeep from 'lodash/cloneDeep';
 
+import { mockAjaxResponse } from '../../../../__mocks__/ajax';
+
 import TimeSeriesViewerContext, {
   summarizeTimeSteps,
   getTestableItems,
@@ -27,6 +29,8 @@ const {
   TimeSeriesViewerPropTypes,
 } = getTestableItems();
 
+mockAjaxResponse({});
+
 // Used in testing the parse functions below
 const expectedInitialSite = {
   fetches: {
@@ -41,27 +45,54 @@ const expectedInitialSite = {
 
 describe('TimeSeriesViewerContext', () => {
   describe('Provider', () => {
-    test('renders with no props', () => {
-      const tree = renderer
-        .create((
-          <Provider>
-            <div>children</div>
-          </Provider>
-        ))
-        .toJSON();
-      expect(tree).toMatchSnapshot();
+    test.skip('renders with productData prop', (done) => {
+      const productData = {
+        productCode: 'foo',
+        productName: 'bar',
+        siteCodes: [
+          {
+            siteCode: 'A',
+            availableMonths: ['2001-01', '2001-02']
+          },
+        ],
+      };
+      setTimeout(() => {
+        const tree = renderer
+          .create(
+            <Provider productData={productData}>
+              <div>children</div>
+            </Provider>
+          ).toJSON();
+        expect(tree).toMatchSnapshot();
+        done();
+      });
+    });
+    test('renders with productCode prop', (done) => {
+      setTimeout(() => {
+        const tree = renderer
+          .create(
+            <Provider productCode="DP1.23456.789">
+              <div>children</div>
+            </Provider>
+          ).toJSON();
+        expect(tree).toMatchSnapshot();
+        done();
+      });
     });
   });
 
   describe('useTimeSeriesViewerState()', () => {
-    test('returns default state and a passthough when invoked outside of a provider', () => {
-      const { result } = renderHook(() => useTimeSeriesViewerState());
-      expect(Array.isArray(result.current)).toBe(true);
-      expect(result.current.length).toBe(2);
-      const [state, dispatch] = result.current;
-      expect(state).toStrictEqual(DEFAULT_STATE);
-      expect(typeof dispatch).toBe('function');
-      expect(dispatch()).toBeUndefined();
+    test('returns default state and a passthough when invoked outside of a provider', (done) => {
+      setTimeout(() => {
+        const { result } = renderHook(() => useTimeSeriesViewerState());
+        expect(Array.isArray(result.current)).toBe(true);
+        expect(result.current.length).toBe(2);
+        const [state, dispatch] = result.current;
+        expect(state).toStrictEqual(DEFAULT_STATE);
+        expect(typeof dispatch).toBe('function');
+        expect(dispatch()).toBeUndefined();
+        done();
+      });
     });
   });
 
