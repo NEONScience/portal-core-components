@@ -25,8 +25,8 @@ export default function parseTimeSeriesData(payload = {}) {
     if (!variables || typeof variables !== 'object' || !Object.keys(variables).length) {
       return {};
     }
+
     const rows = csv.split('\n');
-    if (!rows.length) { return {}; }
 
     // Functions to convert a value to the proper JS data type given a NEON variable dataType
     const castFloat = (v) => {
