@@ -108,12 +108,12 @@ describe('TimeSeriesViewerContext', () => {
     test('appropriately scales response to provided timestep', () => {
       expect(summarizeTimeSteps(2, '5min')).toBe('10 minutes');
       expect(summarizeTimeSteps(300, '1day')).toBe('10 months');
-      expect(summarizeTimeSteps(50, '60min')).toBe('2.1 days');
+      expect(summarizeTimeSteps(50, '1hr')).toBe('2.1 days');
     });
     test('does not pluralize if directed not to', () => {
       expect(summarizeTimeSteps(2, '5min', false)).toBe('10 minute');
       expect(summarizeTimeSteps(300, '1day', false)).toBe('10 month');
-      expect(summarizeTimeSteps(50, '60min', false)).toBe('2.1 day');
+      expect(summarizeTimeSteps(50, '1hr', false)).toBe('2.1 day');
     });
   });
 

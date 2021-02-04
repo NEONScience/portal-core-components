@@ -195,7 +195,7 @@ export const TIME_STEPS = {
   '5min': { key: '5min', tmi: '005', seconds: 300 },
   '15min': { key: '15min', tmi: '015', seconds: 900 },
   '30min': { key: '30min', tmi: '030', seconds: 1800 },
-  '60min': { key: '1hr', tmi: '060', seconds: 3600 },
+  '1hr': { key: '1hr', tmi: '060', seconds: 3600 },
   '0AQ': { key: '0AQ', tmi: '100', seconds: 60 },
   '1day': { key: '1day', tmi: '01D', seconds: 86400 },
 };

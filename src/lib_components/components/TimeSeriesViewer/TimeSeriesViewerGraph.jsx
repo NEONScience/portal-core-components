@@ -443,6 +443,20 @@ export default function TimeSeriesViewerGraph() {
   useEffect(() => {
     if (state.status !== TIME_SERIES_VIEWER_STATUS.READY_FOR_SERIES) { return; }
     generateTimeSeriesGraphData(state).then((graphData) => {
+      // With new series and qualityLabels purge any hidden labels that are no longer present
+      const { series: newSeries, qualityLabels: newQualityLabels } = graphData;
+      const seriesLabels = newSeries.map((s) => s.label);
+      if (
+        Array.from(graphState.hiddenQualityFlags).some((label) => !newQualityLabels.includes(label))
+          || Array.from(graphState.hiddenSeries).some((label) => !seriesLabels.includes(label))
+      ) {
+        graphDispatch({
+          type: 'purgeRemovedHiddenLabels',
+          qualityLabels: newQualityLabels.slice(2),
+          seriesLabels,
+        });
+      }
+      // Store newly generate graphData in primary context state
       dispatch({ type: 'regenerateGraphData', graphData });
     });
   });

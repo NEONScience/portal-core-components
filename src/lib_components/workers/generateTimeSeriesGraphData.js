@@ -8,18 +8,18 @@ export function getTimeSteps() {
     '5min': { key: '5min', tmi: '005', seconds: 300 },
     '15min': { key: '15min', tmi: '015', seconds: 900 },
     '30min': { key: '30min', tmi: '030', seconds: 1800 },
-    '60min': { key: '1hr', tmi: '060', seconds: 3600 },
+    '1hr': { key: '1hr', tmi: '060', seconds: 3600 },
     '0AQ': { key: '0AQ', tmi: '100', seconds: 60 },
     '1day': { key: '1day', tmi: '01D', seconds: 86400 },
   };
 }
 
 function monthIsValidFormat(month) {
-  return (typeof month === 'string' && /\d{4}-\d{2}/.test(month));
+  return (typeof month === 'string' && /^\d{4}-\d{2}$/.test(month));
 }
 
 function monthToNumbers(month) {
-  if (!monthIsValidFormat(month)) { return [null, null]; }
+  if (!monthIsValidFormat(month)) { return { y: null, m: null }; }
   const split = month.split('-');
   return { y: parseInt(split[0], 10), m: parseInt(split[1], 10) };
 }
@@ -27,7 +27,7 @@ function monthToNumbers(month) {
 function monthIsValid(month) {
   if (!monthIsValidFormat(month)) { return false; }
   const { y, m } = monthToNumbers(month);
-  return (y >= 2000 && m >= 1 && m <= 12);
+  return (y !== null && m !== null && y >= 2000 && m >= 1 && m <= 12);
 }
 
 function monthToTicker(month) {
@@ -53,7 +53,7 @@ function tickerToIso(ticker) {
   const d = new Date(ticker);
   const YYYY = d.getUTCFullYear().toString();
   const MM = (d.getUTCMonth() + 1).toString().padStart(2, '0');
-  const DD = d.getUTCDay().toString().padStart(2, '0');
+  const DD = d.getUTCDate().toString().padStart(2, '0');
   const hh = d.getUTCHours().toString().padStart(2, '0');
   const mm = d.getUTCMinutes().toString().padStart(2, '0');
   const ss = d.getUTCSeconds().toString().padStart(2, '0');
@@ -67,6 +67,20 @@ function getNextMonth(month) {
   if (m === 13) { m = 1; y += 1; }
   return `${y.toString()}-${m.toString().padStart(2, '0')}`;
 }
+
+// Additional items exported for unit testing
+export const getTestableItems = () => (
+  process.env.NODE_ENV !== 'test' ? {} : {
+    monthIsValidFormat,
+    monthToNumbers,
+    monthIsValid,
+    monthToTicker,
+    tickerIsValid,
+    tickerToMonth,
+    tickerToIso,
+    getNextMonth,
+  }
+);
 
 /**
    Worker - Generate Time Series Graph Data
@@ -116,7 +130,11 @@ export default function generateTimeSeriesGraphData(payload = {}) {
     /**
        Validate input (return unmodified state.graphData if anything fails)
     */
-    // TBD
+    if (!TIME_STEPS[timeStep]) {
+      const outSanityCheckData = inData.graphData;
+      outSanityCheckData.data = [[0, 0]];
+      return outSanityCheckData;
+    }
 
     /**
        Initialize data set with timestep-based times and monthOffsets for registering actual data
@@ -126,11 +144,7 @@ export default function generateTimeSeriesGraphData(payload = {}) {
     const newQualityData = [];
     const newMonthOffsets = {};
     const newTimestampMap = {};
-    // Sanity check: must have a valid time step
-    if (!TIME_STEPS[timeStep]) {
-      console.log('IN WORKER - buildTimeData - BAIL', timeStep);
-      // return { ...graphData, data: [[0, 0]] };
-    }
+
     // Tick through date range one time step at a time to build data / qualityData / timeStampMap
     const { seconds } = TIME_STEPS[timeStep];
     let ticker = monthToTicker(dateRange[0]);
@@ -300,21 +314,6 @@ export default function generateTimeSeriesGraphData(payload = {}) {
         });
       });
     });
-    // With series and qualityLabels built out purge any hidden labels that are no longer present
-    // MOVE BACK TO graph.js
-    /*
-    const seriesLabels = newSeries.map((s) => s.label);
-    if (
-      Array.from(graphState.hiddenQualityFlags).some((label) => !newQualityLabels.includes(label))
-        || Array.from(graphState.hiddenSeries).some((label) => !seriesLabels.includes(label))
-    ) {
-      graphDispatch({
-        type: 'purgeRemovedHiddenLabels',
-        qualityLabels: newQualityLabels.slice(2),
-        seriesLabels,
-      });
-    }
-    */
 
     /**
        Apply generated values and return the result
