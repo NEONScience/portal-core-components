@@ -124,18 +124,101 @@ export default function generateTimeSeriesGraphData(payload = {}) {
       },
     } = inData;
     const timeStep = selectedTimeStep === 'auto' ? autoTimeStep : selectedTimeStep;
-    const qfNullFill = qualityFlags.map(() => null);
+    const qfNullFill = (qualityFlags || []).map(() => null);
     const TIME_STEPS = getTimeSteps();
 
     /**
        Validate input (return unmodified state.graphData if anything fails)
     */
+    const outSanityCheckData = {
+      data: [[0, 0]],
+      qualityData: [[0, 0]],
+      monthOffsets: {},
+      timestampMap: {},
+      series: [],
+      labels: ['x'],
+      qualityLabels: ['start', 'end'],
+    };
+    // Must have valid time step
     if (!TIME_STEPS[timeStep]) {
-      const outSanityCheckData = inData.graphData;
-      outSanityCheckData.data = [[0, 0]];
       return outSanityCheckData;
     }
-
+    // Must have valid date range
+    if (
+      !Array.isArray(dateRange) || dateRange.length !== 2
+        || dateRange.some((month) => !monthIsValid(month))
+        || dateRange[0] > dateRange[1]
+    ) {
+      return outSanityCheckData;
+    }
+    // Must have valid continuous date range with same bounds as date range
+    if (
+      !Array.isArray(continuousDateRange) || continuousDateRange.length < 1
+        || continuousDateRange.some((month) => !monthIsValid(month))
+        || dateRange[0] !== continuousDateRange[0]
+        || dateRange[1] !== continuousDateRange[continuousDateRange.length - 1]
+    ) {
+      return outSanityCheckData;
+    }
+    // Must have qualityFlags that's an array (can be empty) where all entries are valid variables
+    if (
+      !Array.isArray(qualityFlags)
+        || (qualityFlags.length && qualityFlags.some((qf) => !stateVariables[qf]))
+    ) {
+      return outSanityCheckData;
+    }
+    // Must have a valid dateTimeVariable that's represented in stateVariables
+    if (!dateTimeVariable || !stateVariables[dateTimeVariable]) {
+      return outSanityCheckData;
+    }
+    // Must have at least one selected variable and all must be in stateVariables
+    if (!Array.isArray(selectedVariables) || selectedVariables.some((v) => !stateVariables[v])) {
+      return outSanityCheckData;
+    }
+    // Must have a non-empty selected sites array with all proper structure
+    if (
+      !Array.isArray(sites) || !sites.length
+        || sites.some((site) => (
+          !site.siteCode || !Array.isArray(site.positions) || !site.positions.length
+        ))
+    ) {
+      return outSanityCheckData;
+    }
+    // Requires product must be an object with a sites object
+    if (
+      typeof product !== 'object' || product === null
+        || typeof product.sites !== 'object' || product.sites === null
+    ) {
+      return outSanityCheckData;      
+    }
+    // All selected sites must have positions, and all site/position combinations must be
+    // represented in the product with some data
+    let productSitesAreValid = true;
+    sites.forEach((site) => {
+      const { siteCode, positions } = site;
+      if (
+        typeof product.sites[siteCode] !== 'object' || product.sites[siteCode] === null
+          || typeof product.sites[siteCode].positions !== 'object'
+          || product.sites[siteCode].positions === null
+      ) {
+        productSitesAreValid = false;
+        return;
+      }
+      positions.forEach((position) => {
+        if (
+          typeof product.sites[siteCode].positions[position] !== 'object'
+            || product.sites[siteCode].positions[position] === null
+            || typeof product.sites[siteCode].positions[position].data !== 'object'
+            || product.sites[siteCode].positions[position].data === null
+            || Object.keys(product.sites[siteCode].positions[position].data).length < 1
+        ) {
+          productSitesAreValid = false;
+          return;
+        }
+      });
+    });
+    if (!productSitesAreValid) { return outSanityCheckData; }
+    
     /**
        Initialize data set with timestep-based times and monthOffsets for registering actual data
     */
@@ -166,7 +249,6 @@ export default function generateTimeSeriesGraphData(payload = {}) {
       ticker += (seconds * 1000);
       currentMonth = tickerToMonth(ticker);
     }
-    if (newData.length === 0) { newData.push([0, 0]); }
 
     /**
        Build the rest of the data structure and labels using selection values
@@ -175,8 +257,6 @@ export default function generateTimeSeriesGraphData(payload = {}) {
     const newSeries = [];
     const newLabels = ['x'];
     const newQualityLabels = ['start', 'end'];
-    // Sanity check: must have a valid dateTimeVariable
-    // if (!dateTimeVariable) { return graphData; }
     // Loop through each site...
     sites.forEach((site) => {
       const { siteCode, positions } = site;
@@ -232,16 +312,17 @@ export default function generateTimeSeriesGraphData(payload = {}) {
             }
             // This site/position/month/variable series exists, so add it into the data set
             const seriesStepCount = posData[month][pkg][timeStep].series[variable].data.length;
-            // Series and month data lengths are either identical (as expected) then we can stream
-            // values directly in without matching timestamps
+            // Series and month data lengths are identical (as expected):
+            // Stream values directly in without matching timestamps
             if (seriesStepCount === monthStepCount) {
               posData[month][pkg][timeStep].series[variable].data.forEach((d, datumIdx) => {
                 newData[datumIdx + monthIdx][columnIdx] = d;
               });
               return;
             }
-            // More series data than month data - for now, stream values directly in
-            // without matching timestamps, being careful to not go over the month step count
+            // More series data than month data:
+            // Stream values directly in without matching timestamps, truncate data so as not to
+            // exceed month step count
             if (seriesStepCount >= monthStepCount) {
               posData[month][pkg][timeStep].series[variable].data.forEach((d, datumIdx) => {
                 if (datumIdx >= monthStepCount) { return; }
@@ -249,7 +330,7 @@ export default function generateTimeSeriesGraphData(payload = {}) {
               });
               return;
             }
-            // Series data length is shorter than expected month length
+            // Series data length is shorter than expected month length:
             // Add what data we have by going through each time step in the month and comparing to
             // start dates in the data set, null-filling any steps without a corresponding datum
             const setSeriesValueByTimestamp = (t) => {
@@ -296,7 +377,10 @@ export default function generateTimeSeriesGraphData(payload = {}) {
                   newQualityData[t][columnIdx] = [...qfNullFill];
                   return;
                 }
-                const d = posData[month][pkg][timeStep].series[qf].data[dataIdx];
+                const d = (
+                  typeof posData[month][pkg][timeStep].series[qf].data[dataIdx] !== 'undefined'
+                    ? posData[month][pkg][timeStep].series[qf].data[dataIdx] : null
+                );
                 newQualityData[t][columnIdx] = qfIdx ? [...newQualityData[t][columnIdx], d] : [d];
               };
               for (let t = monthIdx; t < monthIdx + monthStepCount; t += 1) {
@@ -318,14 +402,15 @@ export default function generateTimeSeriesGraphData(payload = {}) {
     /**
        Apply generated values and return the result
     */
-    const outData = inData.graphData;
-    outData.data = newData;
-    outData.qualityData = newQualityData;
-    outData.monthOffsets = newMonthOffsets;
-    outData.timestampMap = newTimestampMap;
-    outData.series = newSeries;
-    outData.labels = newLabels;
-    outData.qualityLabels = newQualityLabels;
+    const outData = {
+      data: newData,
+      qualityData: newQualityData,
+      monthOffsets: newMonthOffsets,
+      timestampMap: newTimestampMap,
+      series: newSeries,
+      labels: newLabels,
+      qualityLabels: newQualityLabels,
+    };
     return outData;
   });
 }
