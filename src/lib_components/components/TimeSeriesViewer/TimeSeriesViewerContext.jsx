@@ -622,6 +622,49 @@ const applyDefaultsToSelection = (state) => {
   return selection;
 };
 
+const limitVariablesToTwoUnits = (state, variables) => {
+  let selectedUnits = variables.reduce((units, variable) => {
+    units.add(state.variables[variable].units);
+    return units;
+  }, new Set());
+  if (selectedUnits.size <= 2) {
+    return { selectedUnits: Array.from(selectedUnits), variables };
+  }
+  selectedUnits = new Set(Array.from(selectedUnits).slice(0, 2));
+  return {
+    selectedUnits: Array.from(selectedUnits),
+    variables: variables.filter((variable) => selectedUnits.has(state.variables[variable].units)),
+  };
+};
+
+const setDataFileFetchStatuses = (state, fetches) => {
+  const newState = { ...state };
+  fetches.forEach((fetch) => {
+    const {
+      siteCode,
+      position,
+      month,
+      downloadPkg,
+      timeStep,
+    } = fetch;
+    if (
+      !newState.product || !newState.product.sites || !newState.product.sites[siteCode]
+        || !newState.product.sites[siteCode].positions
+        || !newState.product.sites[siteCode].positions[position]
+        || !newState.product.sites[siteCode].positions[position].data
+        || !newState.product.sites[siteCode].positions[position].data[month]
+        || !newState.product.sites[siteCode].positions[position].data[month][downloadPkg]
+        || !newState.product.sites[siteCode].positions[position].data[month][downloadPkg][timeStep]
+    ) { return; }      
+    newState.product
+      .sites[siteCode]
+      .positions[position]
+      .data[month][downloadPkg][timeStep]
+      .status = FETCH_STATUS.FETCHING;
+  });
+  return newState;
+};
+
 /**
    Reducer
 */
@@ -644,35 +687,6 @@ const reducer = (state, action) => {
     newState.status = TIME_SERIES_VIEWER_STATUS.ERROR;
     newState.displayError = error;
     return newState;
-  };
-  const limitVariablesToTwoUnits = (variables) => {
-    const selectedUnits = variables.reduce((units, variable) => {
-      units.add(state.variables[variable].units);
-      return units;
-    }, new Set());
-    if (selectedUnits.size < 2) {
-      return { selectedUnits: Array.from(selectedUnits), variables };
-    }
-    return {
-      selectedUnits: Array.from(selectedUnits),
-      variables: variables.filter((variable) => selectedUnits.has(state.variables[variable].units)),
-    };
-  };
-  const setDataFileFetchStatuses = (fetches) => {
-    fetches.forEach((fetch) => {
-      const {
-        siteCode,
-        position,
-        month,
-        downloadPkg,
-        timeStep,
-      } = fetch;
-      newState.product
-        .sites[siteCode]
-        .positions[position]
-        .data[month][downloadPkg][timeStep]
-        .status = FETCH_STATUS.FETCHING;
-    });
   };
   let parsedContent = null;
   let selectedSiteIdx = null;
@@ -701,6 +715,9 @@ const reducer = (state, action) => {
 
     // Fetch Site Month Actions
     case 'fetchSiteMonth':
+      if (!action.siteCode || !action.month || !newState.product.sites[action.siteCode]) {
+        return state;
+      }
       newState.metaFetches[`fetchSiteMonth.${action.siteCode}.${action.month}`] = true;
       newState.product.sites[action.siteCode].fetches.siteMonths[action.month] = {
         status: FETCH_STATUS.FETCHING, error: null,
@@ -708,6 +725,10 @@ const reducer = (state, action) => {
       newState.status = TIME_SERIES_VIEWER_STATUS.LOADING_META;
       return newState;
     case 'fetchSiteMonthFailed':
+      if (
+        !action.siteCode || !action.month
+          || !state.metaFetches[`fetchSiteMonth.${action.siteCode}.${action.month}`]
+      ) { return state; }
       delete newState.metaFetches[`fetchSiteMonth.${action.siteCode}.${action.month}`];
       newState.product.sites[action.siteCode]
         .fetches.siteMonths[action.month].status = FETCH_STATUS.ERROR;
@@ -716,6 +737,10 @@ const reducer = (state, action) => {
       calcStatus();
       return newState;
     case 'fetchSiteMonthSucceeded':
+      if (
+        !action.siteCode || !action.month
+          || !state.metaFetches[`fetchSiteMonth.${action.siteCode}.${action.month}`]
+      ) { return state; }
       delete newState.metaFetches[`fetchSiteMonth.${action.siteCode}.${action.month}`];
       newState.product.sites[action.siteCode]
         .fetches.siteMonths[action.month].status = FETCH_STATUS.SUCCESS;
@@ -814,7 +839,7 @@ const reducer = (state, action) => {
     // Fetch Data Actions (Many Files)
     case 'fetchDataFiles':
       newState.dataFetches[action.token] = true;
-      setDataFileFetchStatuses(action.fetches);
+      newState = setDataFileFetchStatuses(newState, action.fetches);
       newState.dataFetchProgress = 0;
       newState.status = TIME_SERIES_VIEWER_STATUS.LOADING_DATA;
       return newState;
@@ -864,7 +889,7 @@ const reducer = (state, action) => {
       calcStatus();
       return newState;
     case 'selectVariables':
-      parsedContent = limitVariablesToTwoUnits(action.variables);
+      parsedContent = limitVariablesToTwoUnits(state, action.variables);
       newState.selection.variables = parsedContent.variables;
       if (parsedContent.selectedUnits.length === 1) {
         // eslint-disable-next-line prefer-destructuring
@@ -1357,11 +1382,13 @@ export const getTestableItems = () => (
     getTimeStep,
     getUpdatedValueRange,
     getContinuousDatesArray,
+    limitVariablesToTwoUnits,
     parseProductData,
     parseSiteMonthData,
     parseSiteVariables,
     parseSitePositions,
     reducer,
+    setDataFileFetchStatuses,
     TimeSeriesViewerPropTypes,
   }
 );

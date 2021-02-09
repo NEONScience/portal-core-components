@@ -7,8 +7,9 @@ import cloneDeep from 'lodash/cloneDeep';
 import { mockAjaxResponse } from '../../../../__mocks__/ajax';
 
 import TimeSeriesViewerContext, {
-  summarizeTimeSteps,
   getTestableItems,
+  summarizeTimeSteps,
+  TIME_SERIES_VIEWER_STATUS,
   Y_AXIS_RANGE_MODES,
 } from '../TimeSeriesViewerContext';
 
@@ -22,10 +23,13 @@ const {
   getTimeStep,
   getUpdatedValueRange,
   getContinuousDatesArray,
+  limitVariablesToTwoUnits,
   parseProductData,
   parseSiteMonthData,
   parseSiteVariables,
   parseSitePositions,
+  reducer,
+  setDataFileFetchStatuses,
   TimeSeriesViewerPropTypes,
 } = getTestableItems();
 
@@ -279,8 +283,8 @@ describe('TimeSeriesViewerContext', () => {
         name: 'NEON.D16.ABBY.DP1.00001.001.000.010.030.2DWSD_30min.2001-02.basic.20210105T140638Z.csv',
         url: 'https://foo/bar',
       },
-      { // invalid data file (timestep '75min' is not valid)
-        name: 'NEON.D16.ABBY.DP1.00001.001.000.030.002.2DWSD_75min.2001-01.expanded.20210105T140638Z.csv',
+      { // invalid data file (timestep '075' is not valid)
+        name: 'NEON.D16.ABBY.DP1.00001.001.000.030.075.2DWSD_75min.2001-01.expanded.20210105T140638Z.csv',
         url: 'https://bar/qux',
       },
       { // valid variables file
@@ -737,8 +741,408 @@ HOR.VER,name,description,start,end,xOffset,yOffset,zOffset
     });
   });
 
-  /*
-  describe('reducer()', () => {
+  describe('limitVariablesToTwoUnits()', () => {
+    test('generates appropriate output with ordered selectedUnits for two variables', () => {
+      const output = limitVariablesToTwoUnits(
+        {
+          variables: {
+            v1: { units: 'bar' },
+            v2: { units: 'foo' },
+            v3: { units: 'foo' },
+            v4: { units: 'qux' },
+          },
+        },
+        ['v4', 'v2'],
+      );
+      expect(output.selectedUnits).toStrictEqual(['qux', 'foo']);
+      expect(output.variables).toStrictEqual(['v4', 'v2']);
+    });
+    test('truncates selected variables if a third unit is present', () => {
+      const output = limitVariablesToTwoUnits(
+        {
+          variables: {
+            v1: { units: 'bar' },
+            v2: { units: 'foo' },
+            v3: { units: 'foo' },
+            v4: { units: 'qux' },
+          },
+        },
+        ['v2', 'v4', 'v1', 'v3'],
+      );
+      expect(output.selectedUnits).toStrictEqual(['foo', 'qux']);
+      expect(output.variables).toStrictEqual(['v2', 'v4', 'v3']);
+    });
   });
-  */
+
+  describe('setDataFileFetchStatuses()', () => {
+    test('applies FETCHING status for all supplied fetches, ignoring mismatches', () => {
+      const newState = setDataFileFetchStatuses(
+        // state argument
+        {
+          product: {
+            sites: {
+              BLUE: {
+                positions: {
+                  A: {
+                    data: {
+                      X: { basic: { '1min': { status: FETCH_STATUS.AWAITING_CALL } } },
+                      Y: { basic: { '1min': { status: FETCH_STATUS.AWAITING_CALL } } },
+                    },
+                  }
+                },
+              },
+              HARV: {
+                positions: {
+                  B: {
+                    data: {
+                      X: { basic: { '1min': { status: FETCH_STATUS.AWAITING_CALL } } },
+                      Y: { basic: { '1min': { status: FETCH_STATUS.AWAITING_CALL } } },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+        // fetches argument
+        [
+          { siteCode: 'BLUE', position: 'A', month: 'X', downloadPkg: 'basic', timeStep: '1min' },
+          { siteCode: 'HARV', position: 'B', month: 'Y', downloadPkg: 'basic', timeStep: '1min' },
+          { siteCode: 'HARV', position: 'B', month: 'X', downloadPkg: 'basic', timeStep: '10min' },
+        ],
+      );
+      expect(
+        newState.product.sites.BLUE.positions.A.data.X.basic['1min'].status
+      ).toBe(FETCH_STATUS.FETCHING);
+      expect(
+        newState.product.sites.BLUE.positions.A.data.Y.basic['1min'].status
+      ).toBe(FETCH_STATUS.AWAITING_CALL);
+      expect(
+        newState.product.sites.HARV.positions.B.data.X.basic['1min'].status
+      ).toBe(FETCH_STATUS.AWAITING_CALL);
+      expect(
+        newState.product.sites.HARV.positions.B.data.Y.basic['1min'].status
+      ).toBe(FETCH_STATUS.FETCHING);
+    });
+  });
+
+  describe('reducer()', () => {
+    let state;
+    beforeEach(() => {
+      state = cloneDeep(DEFAULT_STATE);
+    });
+    test('does nothing if passed an unsupported action type', () => {
+      expect(reducer(state, { type: 'invalidActionType' })).toStrictEqual(state);
+    });
+    describe('reinitialize', () => {
+      test('resets to default state and applies productCode', () => {
+        const modifiedState = { ...state, otherStuff: 'bar' };
+        const newState = reducer(modifiedState, { type: 'reinitialize', productCode: 'foo' });
+        expect(newState).toStrictEqual({
+          ...DEFAULT_STATE,
+          product: {
+            ...DEFAULT_STATE.product,
+            productCode: 'foo',
+          },
+        });
+      });
+    });
+    describe('initFetchProductCalled', () => {
+      test('sets the status', () => {
+        expect(reducer(state, { type: 'initFetchProductCalled' })).toStrictEqual({
+          ...state,
+          fetchProduct: {
+            ...state.fetchProduct,
+            status: FETCH_STATUS.FETCHING,
+          },
+        });
+      });
+    });
+    describe('initFetchProductFailed', () => {
+      test('sets failure appropriately', () => {
+        expect(reducer(state, { type: 'initFetchProductFailed', error: 'foo' })).toStrictEqual({
+          ...state,
+          fetchProduct: {
+            ...state.fetchProduct,
+            status: FETCH_STATUS.ERROR,
+            error: 'foo',
+          },
+          status: TIME_SERIES_VIEWER_STATUS.ERROR,
+          displayError: 'Unable to load product: foo',
+        });
+      });
+    });
+    describe('initFetchProductSucceeded', () => {
+      test('sets success appropriately', () => {
+        const productData = { productCode: 'foo', productName: 'bar' };
+        const newState = reducer(state, { type: 'initFetchProductSucceeded', productData });
+        expect(newState.fetchProduct.status).toBe(FETCH_STATUS.SUCCESS);
+        expect(newState.status).toBe(TIME_SERIES_VIEWER_STATUS.LOADING_META);
+      });
+    });
+    describe('fetchSiteMonth', () => {
+      test('does nothing if siteCode is not present in product', () => {
+        state.product.sites = { HARV: {}, BLUE: {} };
+        expect(
+          reducer(state, { type: 'fetchSiteMonth', siteCode: 'JERC', month: '2020-01' })
+        ).toStrictEqual(state);
+      });
+      test('sets site/month meta fetch in motion', () => {
+        state.product.sites = {
+          HARV: { fetches: { siteMonths: {} } },
+          JERC: { fetches: { siteMonths: {} } },
+        };
+        const newState = reducer(
+          state,
+          { type: 'fetchSiteMonth', siteCode: 'JERC', month: '2020-01' },
+        );
+        expect(newState.metaFetches).toStrictEqual({
+          'fetchSiteMonth.JERC.2020-01': true,
+        });
+        expect(newState.product.sites.JERC.fetches.siteMonths['2020-01']).toStrictEqual({
+          status: FETCH_STATUS.FETCHING, error: null,
+        });
+        expect(newState.status).toBe(TIME_SERIES_VIEWER_STATUS.LOADING_META);
+      });
+    });
+    describe('fetchSiteMonthFailed', () => {
+      test('does nothing if siteCode or month do not map to an existing meta fetch', () => {
+        expect(
+          reducer(state, { type: 'fetchSiteMonthFailed', siteCode: 'JERC', month: '2020-01' })
+        ).toStrictEqual(state);
+      });
+      test('properly fails an existing siteMonth fetch', () => {
+        state.status = TIME_SERIES_VIEWER_STATUS.LOADING_META;
+        state.product.sites = {
+          HARV: {
+            fetches: {
+              siteMonths: {
+                '2020-01': { status: FETCH_STATUS.FETCHING, error: null },
+              },
+            },
+          },
+          JERC: {
+            fetches: {
+              siteMonths: {
+                '2020-01': { status: FETCH_STATUS.FETCHING, error: null },
+              },
+            },
+          },
+        };
+        state.metaFetches = {
+          'fetchSiteMonth.JERC.2020-01': true,
+          'fetchSiteMonth.HARV.2020-01': true,
+        };        
+        const newState = reducer(
+          state,
+          { type: 'fetchSiteMonthFailed', siteCode: 'JERC', month: '2020-01', error: 'foo' },
+        );
+        expect(newState.metaFetches).toStrictEqual({
+          'fetchSiteMonth.HARV.2020-01': true,
+        });
+        expect(newState.product.sites.JERC.fetches.siteMonths['2020-01']).toStrictEqual({
+          status: FETCH_STATUS.ERROR, error: 'foo',
+        });
+        expect(newState.product.sites.HARV.fetches.siteMonths['2020-01']).toStrictEqual({
+          status: FETCH_STATUS.FETCHING, error: null,
+        });
+        expect(newState.status).toBe(TIME_SERIES_VIEWER_STATUS.LOADING_META);
+      });
+    });
+    describe('fetchSiteMonthSucceeded', () => {
+      beforeEach(() => {
+        state.status = TIME_SERIES_VIEWER_STATUS.LOADING_META;
+        state.product.sites = {
+          JERC: {
+            ...expectedInitialSite,
+            availableMonths: ['2020-01', '2020-02'],
+          },
+        };
+        state.product.sites.JERC.fetches.siteMonths = {
+          '2020-01': { status: FETCH_STATUS.FETCHING, error: null },
+        };
+        state.metaFetches = {
+          'fetchSiteMonth.JERC.2020-01': true,
+        };
+      });
+      test('does nothing if siteCode or month do not map to an existing meta fetch', () => {
+        expect(
+          reducer(state, { type: 'fetchSiteMonthSucceeded', siteCode: 'BLUE', month: '2020-01' })
+        ).toStrictEqual(state);
+      });
+      test('fails generally if no available timestep results', () => {
+        const files = [
+          { // invalid data file (timestep '075' is not valid)
+            name: 'NEON.D16.JERC.DP1.00001.001.000.030.075.2DWSD_75min.2020-01.expanded.20210105T140638Z.csv',
+            url: 'https://bar/qux',
+          },
+          { // valid variables file
+            name: 'NEON.D16.JERC.DP1.00001.001.variables.csv',
+            url: 'https://foo/bar/var',
+          },
+          { // valid sensor positions file
+            name: 'NEON.D16.JERC.DP1.00001.001.sensor_positions.csv',
+            url: 'https://foo/bar/sen',
+          },
+        ];
+        const newState = reducer(
+          state, { type: 'fetchSiteMonthSucceeded', siteCode: 'JERC', month: '2020-01', files},
+        );
+        expect(newState.metaFetches).toStrictEqual({});
+        expect(newState.product.sites.JERC.fetches.siteMonths['2020-01']).toStrictEqual({
+          status: FETCH_STATUS.SUCCESS,  error: null,
+        });
+        expect(newState.availableTimeSteps).toStrictEqual(new Set(['auto']));
+        expect(newState.status).toBe(TIME_SERIES_VIEWER_STATUS.ERROR);        
+      });
+      test('stores results and sets the autoTimeStep if not yet set', () => {
+        const files = [
+          { // invalid data file (timestep '75min' is not valid)
+            name: 'NEON.D16.JERC.DP1.00001.001.000.030.002.2DWSD_2min.2020-01.basic.20210105T140638Z.csv',
+            url: 'https://bar/qux',
+          },
+          { // valid variables file
+            name: 'NEON.D16.JERC.DP1.00001.001.variables.csv',
+            url: 'https://foo/bar/var',
+          },
+          { // valid sensor positions file
+            name: 'NEON.D16.JERC.DP1.00001.001.sensor_positions.csv',
+            url: 'https://foo/bar/sen',
+          },
+        ];
+        const newState = reducer(
+          state, { type: 'fetchSiteMonthSucceeded', siteCode: 'JERC', month: '2020-01', files},
+        );
+        expect(newState.metaFetches).toStrictEqual({});
+        expect(newState.product.sites.JERC.fetches.siteMonths['2020-01']).toStrictEqual({
+          status: FETCH_STATUS.SUCCESS,  error: null,
+        });
+        expect(
+          newState.product.sites.JERC.positions['000.030'].data['2020-01'].basic['2min']
+        ).toStrictEqual({
+          url: 'https://bar/qux',
+          status: FETCH_STATUS.AWAITING_CALL,
+          error: null,
+          series: {},
+        });
+        expect(newState.availableTimeSteps).toStrictEqual(new Set(['auto', '2min']));
+        expect(newState.selection.autoTimeStep).toBe('2min');
+        expect(newState.status).toBe(TIME_SERIES_VIEWER_STATUS.LOADING_META);         
+      });
+    });
+    /*
+    describe('fetchSiteVariables', () => {
+      test('', () => {
+      });
+    });
+    describe('fetchSiteVariablesFailed', () => {
+      test('', () => {
+      });
+    });
+    describe('fetchSiteVariablesSucceeded', () => {
+      test('', () => {
+      });
+    });
+    describe('regenerateGraphData', () => {
+      test('', () => {
+      });
+    });
+    describe('fetchSitePositions', () => {
+      test('', () => {
+      });
+    });
+    describe('fetchSitePositionsFailed', () => {
+      test('', () => {
+      });
+    });
+    describe('fetchSitePositionsSucceeded', () => {
+      test('', () => {
+      });
+    });
+    describe('fetchDataFiles', () => {
+      test('', () => {
+      });
+    });
+    describe('fetchDataFilesProgress', () => {
+      test('', () => {
+      });
+    });
+    describe('fetchDataFilesCompleted', () => {
+      test('', () => {
+      });
+    });
+    describe('noDataFilesFetchNecessary', () => {
+      test('', () => {
+      });
+    });
+    describe('fetchDataFileFailed', () => {
+      test('', () => {
+      });
+    });
+    describe('fetchDataFileSucceeded', () => {
+      test('', () => {
+      });
+    });
+    describe('selectDateRange', () => {
+      test('', () => {
+      });
+    });
+    describe('selectVariables', () => {
+      test('', () => {
+      });
+    });
+    describe('selectYAxisRangeMode', () => {
+      test('', () => {
+      });
+    });
+    describe('selectYAxisCustomRange', () => {
+      test('', () => {
+      });
+    });
+    describe('selectLogScale', () => {
+      test('', () => {
+      });
+    });
+    describe('selectSwapYAxes', () => {
+      test('', () => {
+      });
+    });
+    describe('setRollPeriod', () => {
+      test('', () => {
+      });
+    });
+    describe('selectAllQualityFlags', () => {
+      test('', () => {
+      });
+    });
+    describe('selectNoneQualityFlags', () => {
+      test('', () => {
+      });
+    });
+    describe('selectToggleQualityFlag', () => {
+      test('', () => {
+      });
+    });
+    describe('selectTimeStep', () => {
+      test('', () => {
+      });
+    });
+    describe('selectAddSite', () => {
+      test('', () => {
+      });
+    });
+    describe('updateSelectedSites', () => {
+      test('', () => {
+      });
+    });
+    describe('selectRemoveSite', () => {
+      test('', () => {
+      });
+    });
+    describe('selectSitePositions', () => {
+      test('', () => {
+      });
+    });
+    */
+  });
 });
