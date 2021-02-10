@@ -56,7 +56,7 @@ describe('TimeSeriesViewerContext', () => {
         siteCodes: [
           {
             siteCode: 'A',
-            availableMonths: ['2001-01', '2001-02']
+            availableMonths: ['2001-01', '2001-02'],
           },
         ],
       };
@@ -65,7 +65,7 @@ describe('TimeSeriesViewerContext', () => {
           .create(
             <Provider productData={productData}>
               <div>children</div>
-            </Provider>
+            </Provider>,
           ).toJSON();
         expect(tree).toMatchSnapshot();
         done();
@@ -77,7 +77,7 @@ describe('TimeSeriesViewerContext', () => {
           .create(
             <Provider productCode="DP1.23456.789">
               <div>children</div>
-            </Provider>
+            </Provider>,
           ).toJSON();
         expect(tree).toMatchSnapshot();
         done();
@@ -584,7 +584,7 @@ HOR.VER,name,description,start,end,xOffset,yOffset,zOffset
             ],
           },
         ];
-        badProductDataShapes.forEach((badShape, idx) => {
+        badProductDataShapes.forEach((badShape) => {
           expect(productData({ productData: badShape }, 'productData')).toBeInstanceOf(Error);
         });
       });
@@ -794,7 +794,7 @@ HOR.VER,name,description,start,end,xOffset,yOffset,zOffset
                       X: { basic: { '1min': { status: FETCH_STATUS.AWAITING_CALL } } },
                       Y: { basic: { '1min': { status: FETCH_STATUS.AWAITING_CALL } } },
                     },
-                  }
+                  },
                 },
               },
               HARV: {
@@ -812,22 +812,28 @@ HOR.VER,name,description,start,end,xOffset,yOffset,zOffset
         },
         // fetches argument
         [
-          { siteCode: 'BLUE', position: 'A', month: 'X', downloadPkg: 'basic', timeStep: '1min' },
-          { siteCode: 'HARV', position: 'B', month: 'Y', downloadPkg: 'basic', timeStep: '1min' },
-          { siteCode: 'HARV', position: 'B', month: 'X', downloadPkg: 'basic', timeStep: '10min' },
+          {
+            siteCode: 'BLUE', position: 'A', month: 'X', downloadPkg: 'basic', timeStep: '1min',
+          },
+          {
+            siteCode: 'HARV', position: 'B', month: 'Y', downloadPkg: 'basic', timeStep: '1min',
+          },
+          {
+            siteCode: 'HARV', position: 'B', month: 'X', downloadPkg: 'basic', timeStep: '10min',
+          },
         ],
       );
       expect(
-        newState.product.sites.BLUE.positions.A.data.X.basic['1min'].status
+        newState.product.sites.BLUE.positions.A.data.X.basic['1min'].status,
       ).toBe(FETCH_STATUS.FETCHING);
       expect(
-        newState.product.sites.BLUE.positions.A.data.Y.basic['1min'].status
+        newState.product.sites.BLUE.positions.A.data.Y.basic['1min'].status,
       ).toBe(FETCH_STATUS.AWAITING_CALL);
       expect(
-        newState.product.sites.HARV.positions.B.data.X.basic['1min'].status
+        newState.product.sites.HARV.positions.B.data.X.basic['1min'].status,
       ).toBe(FETCH_STATUS.AWAITING_CALL);
       expect(
-        newState.product.sites.HARV.positions.B.data.Y.basic['1min'].status
+        newState.product.sites.HARV.positions.B.data.Y.basic['1min'].status,
       ).toBe(FETCH_STATUS.FETCHING);
     });
   });
@@ -894,7 +900,7 @@ HOR.VER,name,description,start,end,xOffset,yOffset,zOffset
       test('does nothing if siteCode is not present in product', () => {
         state.product.sites = { HARV: {}, BLUE: {} };
         expect(
-          reducer(state, { type: 'fetchSiteMonth', siteCode: 'JERC', month: '2020-01' })
+          reducer(state, { type: 'fetchSiteMonth', siteCode: 'JERC', month: '2020-01' }),
         ).toStrictEqual(state);
       });
       test('sets site/month fetch in motion', () => {
@@ -918,7 +924,7 @@ HOR.VER,name,description,start,end,xOffset,yOffset,zOffset
     describe('fetchSiteMonthFailed', () => {
       test('does nothing if siteCode or month do not map to an existing meta fetch', () => {
         expect(
-          reducer(state, { type: 'fetchSiteMonthFailed', siteCode: 'JERC', month: '2020-01' })
+          reducer(state, { type: 'fetchSiteMonthFailed', siteCode: 'JERC', month: '2020-01' }),
         ).toStrictEqual(state);
       });
       test('properly fails an existing siteMonth fetch', () => {
@@ -942,10 +948,12 @@ HOR.VER,name,description,start,end,xOffset,yOffset,zOffset
         state.metaFetches = {
           'fetchSiteMonth.JERC.2020-01': true,
           'fetchSiteMonth.HARV.2020-01': true,
-        };        
+        };
         const newState = reducer(
           state,
-          { type: 'fetchSiteMonthFailed', siteCode: 'JERC', month: '2020-01', error: 'foo' },
+          {
+            type: 'fetchSiteMonthFailed', siteCode: 'JERC', month: '2020-01', error: 'foo',
+          },
         );
         expect(newState.metaFetches).toStrictEqual({
           'fetchSiteMonth.HARV.2020-01': true,
@@ -977,7 +985,7 @@ HOR.VER,name,description,start,end,xOffset,yOffset,zOffset
       });
       test('does nothing if siteCode or month do not map to an existing meta fetch', () => {
         expect(
-          reducer(state, { type: 'fetchSiteMonthSucceeded', siteCode: 'BLUE', month: '2020-01' })
+          reducer(state, { type: 'fetchSiteMonthSucceeded', siteCode: 'BLUE', month: '2020-01' }),
         ).toStrictEqual(state);
       });
       test('fails generally if no available timestep results', () => {
@@ -996,14 +1004,16 @@ HOR.VER,name,description,start,end,xOffset,yOffset,zOffset
           },
         ];
         const newState = reducer(
-          state, { type: 'fetchSiteMonthSucceeded', siteCode: 'JERC', month: '2020-01', files},
+          state, {
+            type: 'fetchSiteMonthSucceeded', siteCode: 'JERC', month: '2020-01', files,
+          },
         );
         expect(newState.metaFetches).toStrictEqual({});
         expect(newState.product.sites.JERC.fetches.siteMonths['2020-01']).toStrictEqual({
-          status: FETCH_STATUS.SUCCESS,  error: null,
+          status: FETCH_STATUS.SUCCESS, error: null,
         });
         expect(newState.availableTimeSteps).toStrictEqual(new Set(['auto']));
-        expect(newState.status).toBe(TIME_SERIES_VIEWER_STATUS.ERROR);        
+        expect(newState.status).toBe(TIME_SERIES_VIEWER_STATUS.ERROR);
       });
       test('stores results and sets the autoTimeStep if not yet set', () => {
         const files = [
@@ -1021,14 +1031,16 @@ HOR.VER,name,description,start,end,xOffset,yOffset,zOffset
           },
         ];
         const newState = reducer(
-          state, { type: 'fetchSiteMonthSucceeded', siteCode: 'JERC', month: '2020-01', files},
+          state, {
+            type: 'fetchSiteMonthSucceeded', siteCode: 'JERC', month: '2020-01', files,
+          },
         );
         expect(newState.metaFetches).toStrictEqual({});
         expect(newState.product.sites.JERC.fetches.siteMonths['2020-01']).toStrictEqual({
-          status: FETCH_STATUS.SUCCESS,  error: null,
+          status: FETCH_STATUS.SUCCESS, error: null,
         });
         expect(
-          newState.product.sites.JERC.positions['000.030'].data['2020-01'].basic['2min']
+          newState.product.sites.JERC.positions['000.030'].data['2020-01'].basic['2min'],
         ).toStrictEqual({
           url: 'https://bar/qux',
           status: FETCH_STATUS.AWAITING_CALL,
@@ -1037,7 +1049,7 @@ HOR.VER,name,description,start,end,xOffset,yOffset,zOffset
         });
         expect(newState.availableTimeSteps).toStrictEqual(new Set(['auto', '2min']));
         expect(newState.selection.autoTimeStep).toBe('2min');
-        expect(newState.status).toBe(TIME_SERIES_VIEWER_STATUS.LOADING_META);         
+        expect(newState.status).toBe(TIME_SERIES_VIEWER_STATUS.LOADING_META);
       });
     });
 
@@ -1049,7 +1061,7 @@ HOR.VER,name,description,start,end,xOffset,yOffset,zOffset
           BLUE: { ...cloneDeep(expectedInitialSite) },
         };
         expect(
-          reducer(state, { type: 'fetchSiteVariables', siteCode: 'JERC' })
+          reducer(state, { type: 'fetchSiteVariables', siteCode: 'JERC' }),
         ).toStrictEqual(state);
       });
       test('sets variables fetch in motion', () => {
@@ -1077,7 +1089,7 @@ HOR.VER,name,description,start,end,xOffset,yOffset,zOffset
           BLUE: { ...cloneDeep(expectedInitialSite) },
         };
         expect(
-          reducer(state, { type: 'fetchSiteVariablesFailed', siteCode: 'JERC', error: 'foo' })
+          reducer(state, { type: 'fetchSiteVariablesFailed', siteCode: 'JERC', error: 'foo' }),
         ).toStrictEqual(state);
       });
       test('properly fails an existing variable fetch', () => {
@@ -1103,7 +1115,7 @@ HOR.VER,name,description,start,end,xOffset,yOffset,zOffset
           BLUE: { ...cloneDeep(expectedInitialSite) },
         };
         expect(
-          reducer(state, { type: 'fetchSiteVariablesSucceeded', siteCode: 'JERC', csv: '' })
+          reducer(state, { type: 'fetchSiteVariablesSucceeded', siteCode: 'JERC', csv: '' }),
         ).toStrictEqual(state);
       });
       test('properly handles completed variables fetch for only valid tables', () => {
@@ -1262,7 +1274,7 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
           BLUE: { ...cloneDeep(expectedInitialSite) },
         };
         expect(
-          reducer(state, { type: 'fetchSitePositions', siteCode: 'JERC' })
+          reducer(state, { type: 'fetchSitePositions', siteCode: 'JERC' }),
         ).toStrictEqual(state);
       });
       test('sets positions fetch in motion', () => {
@@ -1290,7 +1302,7 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
           BLUE: { ...cloneDeep(expectedInitialSite) },
         };
         expect(
-          reducer(state, { type: 'fetchSitePositionsFailed', siteCode: 'JERC', error: 'foo' })
+          reducer(state, { type: 'fetchSitePositionsFailed', siteCode: 'JERC', error: 'foo' }),
         ).toStrictEqual(state);
       });
       test('properly fails an existing variable fetch', () => {
@@ -1316,7 +1328,7 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
           BLUE: { ...cloneDeep(expectedInitialSite) },
         };
         expect(
-          reducer(state, { type: 'fetchSitePositionsSucceeded', siteCode: 'JERC', csv: '' })
+          reducer(state, { type: 'fetchSitePositionsSucceeded', siteCode: 'JERC', csv: '' }),
         ).toStrictEqual(state);
       });
       test('properly handles completed positions fetch for only valid tables', () => {
@@ -1360,24 +1372,28 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
                   X: { basic: { '1min': { status: FETCH_STATUS.AWAITING_CALL } } },
                   Y: { basic: { '1min': { status: FETCH_STATUS.AWAITING_CALL } } },
                 },
-              }
+              },
             },
           },
         };
         const fetches = [
-          { siteCode: 'BLUE', position: 'A', month: 'X', downloadPkg: 'basic', timeStep: '1min' },
-          { siteCode: 'BLUE', position: 'A', month: 'Y', downloadPkg: 'basic', timeStep: '1min' },
+          {
+            siteCode: 'BLUE', position: 'A', month: 'X', downloadPkg: 'basic', timeStep: '1min',
+          },
+          {
+            siteCode: 'BLUE', position: 'A', month: 'Y', downloadPkg: 'basic', timeStep: '1min',
+          },
         ];
         const newState = reducer(state, { type: 'fetchDataFiles', token: 'foo', fetches });
         expect(
-          newState.product.sites.BLUE.positions.A.data.X.basic['1min'].status
+          newState.product.sites.BLUE.positions.A.data.X.basic['1min'].status,
         ).toBe(FETCH_STATUS.FETCHING);
         expect(
-          newState.product.sites.BLUE.positions.A.data.Y.basic['1min'].status
+          newState.product.sites.BLUE.positions.A.data.Y.basic['1min'].status,
         ).toBe(FETCH_STATUS.FETCHING);
-        expect(newState.dataFetches).toStrictEqual({ 'foo': true });
+        expect(newState.dataFetches).toStrictEqual({ foo: true });
         expect(newState.dataFetchProgress).toBe(0);
-        expect(newState.status).toBe(TIME_SERIES_VIEWER_STATUS.LOADING_DATA);                
+        expect(newState.status).toBe(TIME_SERIES_VIEWER_STATUS.LOADING_DATA);
       });
     });
     describe('fetchDataFilesProgress', () => {
@@ -1390,7 +1406,7 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
       test('does nothing if action token is not present in dataFetches', () => {
         const modifiedState = { ...state, dataFetches: { foo: true } };
         expect(
-          reducer(modifiedState, { type: 'fetchDataFilesCompleted', token: 'bar' })
+          reducer(modifiedState, { type: 'fetchDataFilesCompleted', token: 'bar' }),
         ).toStrictEqual(modifiedState);
       });
       test('clears the data fetches token and applies default selections', () => {
@@ -1399,13 +1415,13 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
         const newState = reducer(state, { type: 'fetchDataFilesCompleted', token: 'foo' });
         expect(newState.dataFetches).toStrictEqual({});
         expect(newState.status).toBe(TIME_SERIES_VIEWER_STATUS.READY_FOR_SERIES);
-        expect(newState.selection.sites).toStrictEqual([{ siteCode: 'S1', positions: [] }]); 
+        expect(newState.selection.sites).toStrictEqual([{ siteCode: 'S1', positions: [] }]);
       });
     });
     describe('noDataFilesFetchNecessary', () => {
       test('only sets general status to continue', () => {
         const newState = reducer(state, { type: 'noDataFilesFetchNecessary' });
-        expect(newState.status).toBe(TIME_SERIES_VIEWER_STATUS.READY_FOR_SERIES);        
+        expect(newState.status).toBe(TIME_SERIES_VIEWER_STATUS.READY_FOR_SERIES);
       });
     });
     describe('fetchDataFileFailed', () => {
@@ -1422,14 +1438,19 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
           },
         };
         const newState = reducer(state, {
-          type: 'fetchDataFileFailed', siteCode: 'BLUE', position: 'A', month: 'X',
-          downloadPkg: 'basic', timeStep: '1min', error: 'foo',
+          type: 'fetchDataFileFailed',
+          siteCode: 'BLUE',
+          position: 'A',
+          month: 'X',
+          downloadPkg: 'basic',
+          timeStep: '1min',
+          error: 'foo',
         });
         expect(
-          newState.product.sites.BLUE.positions.A.data.X.basic['1min'].status
+          newState.product.sites.BLUE.positions.A.data.X.basic['1min'].status,
         ).toBe(FETCH_STATUS.ERROR);
         expect(
-          newState.product.sites.BLUE.positions.A.data.X.basic['1min'].error
+          newState.product.sites.BLUE.positions.A.data.X.basic['1min'].error,
         ).toBe('foo');
       });
     });
@@ -1447,17 +1468,22 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
           },
         };
         const newState = reducer(state, {
-          type: 'fetchDataFileSucceeded', siteCode: 'BLUE', position: 'A', month: 'X',
-          downloadPkg: 'basic', timeStep: '1min', series: [1, 2, 3],
+          type: 'fetchDataFileSucceeded',
+          siteCode: 'BLUE',
+          position: 'A',
+          month: 'X',
+          downloadPkg: 'basic',
+          timeStep: '1min',
+          series: [1, 2, 3],
         });
         expect(
-          newState.product.sites.BLUE.positions.A.data.X.basic['1min'].status
+          newState.product.sites.BLUE.positions.A.data.X.basic['1min'].status,
         ).toBe(FETCH_STATUS.SUCCESS);
         expect(
-          newState.product.sites.BLUE.positions.A.data.X.basic['1min'].error
+          newState.product.sites.BLUE.positions.A.data.X.basic['1min'].error,
         ).toBe(null);
         expect(
-          newState.product.sites.BLUE.positions.A.data.X.basic['1min'].series
+          newState.product.sites.BLUE.positions.A.data.X.basic['1min'].series,
         ).toStrictEqual([1, 2, 3]);
       });
     });
@@ -1515,7 +1541,7 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
         state.selection.yAxes.y1 = { rangeMode: Y_AXIS_RANGE_MODES.FROM_ZERO };
         const newState = reducer(
           state,
-          { type: 'selectYAxisRangeMode', axis: 'y1', mode: 'BAD' }
+          { type: 'selectYAxisRangeMode', axis: 'y1', mode: 'BAD' },
         );
         expect(newState).toStrictEqual(state);
       });
@@ -1525,12 +1551,12 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
           axisRange: [0, 100],
           dataRange: [40, 80],
           precision: 1,
-          standardDeviation: 5,          
+          standardDeviation: 5,
         };
         state.selection.yAxes.y1 = y1;
         const newState = reducer(
           state,
-          { type: 'selectYAxisRangeMode', axis: 'y1', mode: Y_AXIS_RANGE_MODES.CUSTOM  }
+          { type: 'selectYAxisRangeMode', axis: 'y1', mode: Y_AXIS_RANGE_MODES.CUSTOM },
         );
         expect(newState.selection.yAxes.y1).toStrictEqual({
           ...y1, rangeMode: Y_AXIS_RANGE_MODES.CUSTOM,
@@ -1547,7 +1573,7 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
         state.selection.yAxes.y1 = y1;
         const newState = reducer(
           state,
-          { type: 'selectYAxisRangeMode', axis: 'y1', mode: Y_AXIS_RANGE_MODES.CENTERED  }
+          { type: 'selectYAxisRangeMode', axis: 'y1', mode: Y_AXIS_RANGE_MODES.CENTERED },
         );
         expect(newState.selection.yAxes.y1).toStrictEqual({
           ...y1, axisRange: [35, 85], rangeMode: Y_AXIS_RANGE_MODES.CENTERED,
@@ -1559,7 +1585,7 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
         state.selection.yAxes.y1 = { rangeMode: Y_AXIS_RANGE_MODES.FROM_ZERO };
         const newState = reducer(
           state,
-          { type: 'selectYAxisCustomRange', axis: 'y3', range: [0, 100] }
+          { type: 'selectYAxisCustomRange', axis: 'y3', range: [0, 100] },
         );
         expect(newState).toStrictEqual(state);
       });
@@ -1573,7 +1599,7 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
         };
         const newState = reducer(
           state,
-          { type: 'selectYAxisCustomRange', axis: 'y1', range: [100, 10] }
+          { type: 'selectYAxisCustomRange', axis: 'y1', range: [100, 10] },
         );
         expect(newState).toStrictEqual(state);
       });
@@ -1588,7 +1614,7 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
         state.selection.yAxes.y1 = y1;
         const newState = reducer(
           state,
-          { type: 'selectYAxisCustomRange', axis: 'y1', range: [15, 90] }
+          { type: 'selectYAxisCustomRange', axis: 'y1', range: [15, 90] },
         );
         expect(newState.selection.yAxes.y1).toStrictEqual({ ...y1, axisRange: [15, 90] });
       });
@@ -1707,7 +1733,7 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
         state.availableTimeSteps = new Set(['auto', '2min', '30min']);
         state.selection.timeStep = 'auto';
         const newState = reducer(state, { type: 'selectTimeStep', timeStep: '30min' });
-        expect(newState.selection.timeStep).toBe('30min');        
+        expect(newState.selection.timeStep).toBe('30min');
       });
     });
 
@@ -1747,7 +1773,7 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
         };
         const newState = reducer(state, { type: 'selectAddSite', siteCode: 'JERC' });
         expect(newState.selection.sites).toStrictEqual([
-          { siteCode: 'JERC', positions: ['000.010'] }
+          { siteCode: 'JERC', positions: ['000.010'] },
         ]);
       });
     });
@@ -1820,7 +1846,7 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
         const newState = reducer(state, { type: 'selectRemoveSite', siteCode: 'JERC' });
         expect(newState.selection.sites).toStrictEqual([
           { siteCode: 'HARV', positions: ['000.090'] },
-        ]);       
+        ]);
       });
     });
     describe('selectSitePositions', () => {
@@ -1848,7 +1874,7 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
           state,
           { type: 'selectSitePositions', siteCode: 'BLUE', positions: ['000.080'] },
         );
-        expect(newState).toStrictEqual(state); 
+        expect(newState).toStrictEqual(state);
       });
       test('does nothing if no action positions are present (must have at least one)', () => {
         state.product.sites = {
@@ -1874,7 +1900,7 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
           state,
           { type: 'selectSitePositions', siteCode: 'JERC', positions: [] },
         );
-        expect(newState).toStrictEqual(state); 
+        expect(newState).toStrictEqual(state);
       });
       test('does nothing if any action positions are not present on the site', () => {
         state.product.sites = {
@@ -1900,7 +1926,7 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
           state,
           { type: 'selectSitePositions', siteCode: 'JERC', positions: ['000.010', '000.080'] },
         );
-        expect(newState).toStrictEqual(state); 
+        expect(newState).toStrictEqual(state);
       });
       test('applies positions to the already-selected site', () => {
         state.product.sites = {

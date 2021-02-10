@@ -3,7 +3,6 @@ import renderer from 'react-test-renderer';
 
 import cloneDeep from 'lodash/cloneDeep';
 
-import { Map } from 'react-leaflet';
 import {
   DEFAULT_STATE,
   FEATURES,
@@ -11,7 +10,7 @@ import {
   HIGHLIGHT_STATUS,
   SELECTION_STATUS,
 } from '../SiteMapUtils';
-import { useSiteMapContext } from '../SiteMapContext';
+import SiteMapContext from '../SiteMapContext';
 
 import SiteMapFeature from '../SiteMapFeature';
 
@@ -41,6 +40,9 @@ jest.mock('../SiteMapContext', () => ({
   ...(jest.requireActual('../SiteMapContext').default),
   useSiteMapContext: jest.fn(),
 }));
+
+const { useSiteMapContext } = SiteMapContext;
+
 useSiteMapContext.mockReturnValue([{
   ...cloneDeep(DEFAULT_STATE),
   neonContextHydrated: true,

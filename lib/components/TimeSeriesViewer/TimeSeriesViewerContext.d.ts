@@ -110,11 +110,13 @@ export function getTestableItems(): {
     getTimeStep?: undefined;
     getUpdatedValueRange?: undefined;
     getContinuousDatesArray?: undefined;
+    limitVariablesToTwoUnits?: undefined;
     parseProductData?: undefined;
     parseSiteMonthData?: undefined;
     parseSiteVariables?: undefined;
     parseSitePositions?: undefined;
     reducer?: undefined;
+    setDataFileFetchStatuses?: undefined;
     TimeSeriesViewerPropTypes?: undefined;
 } | {
     DEFAULT_STATE: {
@@ -176,11 +178,16 @@ export function getTestableItems(): {
     getTimeStep: (input?: string) => string | null;
     getUpdatedValueRange: (existingRange: any, newValue: any) => any;
     getContinuousDatesArray: (dateRange: any[], roundToYears?: boolean) => any[];
+    limitVariablesToTwoUnits: (state: any, variables: any) => {
+        selectedUnits: any[];
+        variables: any;
+    };
     parseProductData: (productData?: Object) => Object;
     parseSiteMonthData: (site: Object, files: any[]) => Object;
     parseSiteVariables: (previousVariables: Object, siteCode: string, csv: string) => ParseSiteVariablesReturn;
     parseSitePositions: (site: Object, csv: string) => Object;
     reducer: (state: any, action: any) => any;
+    setDataFileFetchStatuses: (state: any, fetches: any) => any;
     TimeSeriesViewerPropTypes: {
         productCode: (props: any, propName: any, componentName: any) => Error | null;
         productData: (props: any, propName: any, componentName: any) => Error | null;
@@ -226,54 +233,7 @@ declare namespace Provider {
         export { productData_1 as productData };
     }
 }
-declare function useTimeSeriesViewerState(): any[] | {
-    status: string;
-    displayError: null;
-    fetchProduct: {
-        status: string;
-        error: null;
-    };
-    metaFetches: {};
-    dataFetches: {};
-    dataFetchProgress: number;
-    variables: {};
-    product: {
-        productCode: null;
-        productName: null;
-        productDescription: null;
-        productSensor: null;
-        dateRange: null[];
-        continuousDateRange: never[];
-        sites: {};
-    };
-    graphData: {
-        data: never[];
-        qualityData: never[];
-        monthOffsets: {};
-        timestampMap: {};
-        series: never[];
-        labels: string[];
-        qualityLabels: string[];
-    };
-    selection: {
-        dateRange: null[];
-        continuousDateRange: never[];
-        variables: never[];
-        dateTimeVariable: null;
-        sites: never[];
-        timeStep: string;
-        autoTimeStep: null;
-        qualityFlags: never[];
-        rollPeriod: number;
-        logscale: boolean;
-        yAxes: {
-            y1: any;
-            y2: any;
-        };
-    };
-    availableQualityFlags: Set<any>;
-    availableTimeSteps: Set<string>;
-};
+declare function useTimeSeriesViewerState(): any;
 declare namespace TimeSeriesViewerPropTypes {
     export function productCode_2(props: any, propName: any, componentName: any): Error | null;
     export { productCode_2 as productCode };

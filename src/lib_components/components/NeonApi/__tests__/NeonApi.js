@@ -1,7 +1,7 @@
-import { of } from 'rxjs';
+/* eslint no-underscore-dangle: 0 */
 import { ajax } from 'rxjs/ajax';
 
-import NeonApi, { getTestableItems } from '../NeonApi';
+import { getTestableItems } from '../NeonApi';
 import NeonEnvironment from '../../NeonEnvironment/NeonEnvironment';
 
 jest.mock('rxjs/ajax', () => ({

@@ -17,9 +17,7 @@ jest.mock('../../DownloadDataContext/DownloadDataContext', () => ({
 }));
 
 // Force moment into a fixed point in time
-jest.mock('moment', () => {
-  return () => jest.requireActual('moment')('2020-01-01T00:00:00.000Z');
-});
+jest.mock('moment', () => () => jest.requireActual('moment')('2020-01-01T00:00:00.000Z'));
 
 const {
   DEFAULT_STATE,

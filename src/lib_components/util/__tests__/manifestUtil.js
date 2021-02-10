@@ -2,12 +2,6 @@ import cloneDeep from 'lodash/cloneDeep';
 
 // Mock some NeonEnvironment functions
 import NeonEnvironment from '../../components/NeonEnvironment/NeonEnvironment';
-jest.mock('../../components/NeonEnvironment/NeonEnvironment', () => ({
-  __esModule: true,
-  default: {
-    getFullApiPath: jest.fn(),
-  },
-}));
 
 import {
   formatBytes,
@@ -20,6 +14,13 @@ import {
   getSizeEstimateFromManifestRollupResponse,
   downloadAopManifest,
 } from '../manifestUtil';
+
+jest.mock('../../components/NeonEnvironment/NeonEnvironment', () => ({
+  __esModule: true,
+  default: {
+    getFullApiPath: jest.fn(),
+  },
+}));
 
 describe('Utils - manifestUtil', () => {
   beforeAll(() => {
@@ -51,7 +52,7 @@ describe('Utils - manifestUtil', () => {
 
   describe('buildManifestConfig()', () => {
     const baseSelection = {
-      productData: { productCode: 'DPx.xxxxx.xxx', },
+      productData: { productCode: 'DPx.xxxxx.xxx' },
       release: { value: 'release-foo', isValid: true },
       sites: { value: ['JERC', 'COMO'], isValid: true },
       dateRange: { value: ['2020-01', '2020-06'], isValid: true },
@@ -146,8 +147,8 @@ describe('Utils - manifestUtil', () => {
     test('handles NEON.DOM.SITE already being in config', () => {
       const configA = cloneDeep(config);
       configA.documentation = false;
-      configA.productCode ='NEON.DOM.SITE.DP0.00000.000';
-      
+      configA.productCode = 'NEON.DOM.SITE.DP0.00000.000';
+
       const url = buildManifestRequestUrl(configA, false);
       const expectedUrl = 'MANIFEST_REQUEST_URL/manifest/rollup?dpcode=NEON.DOM.SITE.DP0.00000.000&startdate=2020-01&enddate=2020-06&pkgtype=expanded&includedocs=false&sitecode=JERC&sitecode=COMO';
       expect(url).toBe(expectedUrl);
@@ -178,7 +179,7 @@ describe('Utils - manifestUtil', () => {
     });
     test('handles NEON.DOM.SITE already being in config', () => {
       const configA = cloneDeep(config);
-      configA.productCode ='NEON.DOM.SITE.DP0.00000.000';
+      configA.productCode = 'NEON.DOM.SITE.DP0.00000.000';
       expect(buildManifestRequestBody(configA)).toStrictEqual({
         dpCode: 'NEON.DOM.SITE.DP0.00000.000',
         siteCodes: ['JERC', 'COMO'],
@@ -203,7 +204,7 @@ describe('Utils - manifestUtil', () => {
           'BONA',
           '2020-04',
           null,
-        )
+        ),
       ).toBe('DATA_URL/NEON.DOM.SITE.DP1.12345.001/BONA/2020-04?presign=false');
     });
     test('handles NEON.DOM.SITE already being in product code', () => {
@@ -213,7 +214,7 @@ describe('Utils - manifestUtil', () => {
           'BONA',
           '2020-04',
           '',
-        )
+        ),
       ).toBe('DATA_URL/NEON.DOM.SITE.DP1.12345.001/BONA/2020-04?presign=false');
     });
     test('handles a defined release', () => {
@@ -223,7 +224,7 @@ describe('Utils - manifestUtil', () => {
           'BONA',
           '2020-04',
           'foo',
-        )
+        ),
       ).toBe('DATA_URL/NEON.DOM.SITE.DP1.12345.001/BONA/2020-04?presign=false&release=foo');
     });
   });
@@ -283,20 +284,44 @@ describe('Utils - manifestUtil', () => {
         value: ['root/f1', 'root/f3', 'f4'],
         validValues: [
           {
-            url: 'root/f1', site: 'JERC', productCode: 'DP123', release: 'foo',
-            yearMonth: '2020-01', size: 101, checksum: 'abc', checksumAlgorithm: 'MD5',
+            url: 'root/f1',
+            site: 'JERC',
+            productCode: 'DP123',
+            release: 'foo',
+            yearMonth: '2020-01',
+            size: 101,
+            checksum: 'abc',
+            checksumAlgorithm: 'MD5',
           },
           {
-            url: 'root/f2', site: 'JERC', productCode: 'DP123', release: 'foo',
-            yearMonth: '2020-10', size: 202, checksum: 'def', checksumAlgorithm: 'MD5',
+            url: 'root/f2',
+            site: 'JERC',
+            productCode: 'DP123',
+            release: 'foo',
+            yearMonth: '2020-10',
+            size: 202,
+            checksum: 'def',
+            checksumAlgorithm: 'MD5',
           },
           {
-            url: 'root/f3', site: 'BONA', productCode: 'DP123', release: 'foo',
-            yearMonth: '2020-04', size: 303, checksum: 'ghi', checksumAlgorithm: 'MD5',
+            url: 'root/f3',
+            site: 'BONA',
+            productCode: 'DP123',
+            release: 'foo',
+            yearMonth: '2020-04',
+            size: 303,
+            checksum: 'ghi',
+            checksumAlgorithm: 'MD5',
           },
           {
-            url: 'f4', site: 'BONA', productCode: 'DP123', release: null,
-            yearMonth: '2020-05', size: 404, checksum: 'jkl', checksumAlgorithm: 'MD5',
+            url: 'f4',
+            site: 'BONA',
+            productCode: 'DP123',
+            release: null,
+            yearMonth: '2020-05',
+            size: 404,
+            checksum: 'jkl',
+            checksumAlgorithm: 'MD5',
           },
         ],
       };
@@ -332,7 +357,7 @@ describe('Utils - manifestUtil', () => {
             fileSizeBytes: 303,
             checksum: 'ghi',
             checksumAlgorithm: 'MD5',
-            uri: 'root/f3'
+            uri: 'root/f3',
           },
           {
             release: null,
@@ -345,9 +370,9 @@ describe('Utils - manifestUtil', () => {
             checksum: 'jkl',
             checksumAlgorithm: 'MD5',
             uri: 'f4',
-          }
+          },
         ],
-        siteCodes: [ 'JERC', 'BONA' ],
+        siteCodes: ['JERC', 'BONA'],
         includeDocs: true,
       });
     });

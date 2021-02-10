@@ -141,9 +141,11 @@ describe('SiteMap - SiteMapUtils', () => {
         [1200, 200, 1],
         [1200, 600, 2],
       ].forEach((test) => {
+        /* eslint-disable prefer-destructuring */
         mapRef.current.container.parentElement.clientWidth = test[0];
         mapRef.current.container.parentElement.clientHeight = test[1];
         expect(deriveFullObservatoryZoomLevel(mapRef)).toBe(test[2]);
+        /* eslint-enable prefer-destructuring */
       });
     });
   });

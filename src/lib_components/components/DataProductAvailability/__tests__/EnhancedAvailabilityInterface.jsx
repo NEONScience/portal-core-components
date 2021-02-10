@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer';
 import cloneDeep from 'lodash/cloneDeep';
 
 import '../../../../__mocks__/NeonContext';
-import mockReactComponent from '../../../../__mocks__/mockReactComponent'; 
+import mockReactComponent from '../../../../__mocks__/mockReactComponent';
 
 import DownloadDataContext from '../../DownloadDataContext/DownloadDataContext';
 import EnhancedAvailabilityInterface from '../EnhancedAvailabilityInterface';

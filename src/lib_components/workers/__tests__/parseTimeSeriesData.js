@@ -77,7 +77,7 @@ describe('parseTimeSeriesData worker', () => {
     },
     v3: {
       data: [null, -54, 32, 0],
-      range: [ -54, 32],
+      range: [-54, 32],
       sum: -22,
       count: 3,
       variance: 1259.5555555555554,

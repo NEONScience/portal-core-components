@@ -11,7 +11,7 @@ describe('NeonAuth - UserCard', () => {
         email="joeyjojojr@shabadu"
         providers="momar"
         pictureUrl="carhole"
-      />
+      />,
     ).toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -23,7 +23,7 @@ describe('NeonAuth - UserCard', () => {
         providers="monks"
         pictureUrl="label/baby/jr"
         lastLogin="2018-05-05T00:00:00Z"
-      />
+      />,
     ).toJSON();
     expect(tree).toMatchSnapshot();
   });

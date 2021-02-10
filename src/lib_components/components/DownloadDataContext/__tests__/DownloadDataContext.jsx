@@ -2,14 +2,12 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { renderHook } from '@testing-library/react-hooks';
 
-import cloneDeep from 'lodash/cloneDeep';
-
-// Force moment into a fixed point in time
-jest.mock('moment', () => {
-  return () => jest.requireActual('moment')('2020-01-15T12:00:00.000Z');
-});
+// import cloneDeep from 'lodash/cloneDeep';
 
 import DownloadDataContext, { getTestableItems } from '../DownloadDataContext';
+
+// Force moment into a fixed point in time
+jest.mock('moment', () => () => jest.requireActual('moment')('2020-01-15T12:00:00.000Z'));
 
 const {
   Provider,
@@ -25,12 +23,12 @@ const {
   newStateIsValid,
   mutateNewStateIntoRange,
   estimatePostSize,
-  getValidValuesFromProductData,
-  getInitialStateFromProps,
-  getS3FilesFilteredFileCount,
-  getAndValidateNewS3FilesState,
-  regenerateS3FilesFiltersAndValidValues,
-  getAndValidateNewState,
+  // getValidValuesFromProductData,
+  // getInitialStateFromProps,
+  // getS3FilesFilteredFileCount,
+  // getAndValidateNewS3FilesState,
+  // regenerateS3FilesFiltersAndValidValues,
+  // getAndValidateNewState,
   ALL_POSSIBLE_VALID_DATE_RANGE,
 } = getTestableItems();
 
@@ -50,7 +48,7 @@ describe('DownloadDataContext', () => {
           .create(
             <Provider productData={productData}>
               <div>children</div>
-            </Provider>
+            </Provider>,
           ).toJSON();
         expect(tree).toMatchSnapshot();
         done();
@@ -129,8 +127,8 @@ describe('DownloadDataContext', () => {
       expect(newStateIsAllowable('sites')).toBe(false);
       expect(newStateIsAllowable('sites', [])).toBe(true);
       expect(newStateIsAllowable('sites', [true])).toBe(false);
-      expect(newStateIsAllowable('sites', ['JERC',''])).toBe(false);
-      expect(newStateIsAllowable('sites', ['JERC','BONA'])).toBe(true);
+      expect(newStateIsAllowable('sites', ['JERC', ''])).toBe(false);
+      expect(newStateIsAllowable('sites', ['JERC', 'BONA'])).toBe(true);
     });
     test('dateRange', () => {
       expect(newStateIsAllowable('dateRange')).toBe(false);
@@ -176,8 +174,8 @@ describe('DownloadDataContext', () => {
       expect(newStateIsValid('bar', 'valid')).toBe(false);
     });
     test('sites', () => {
-      expect(newStateIsValid('sites', ['JERC','BONA'], 'bad')).toBe(false);
-      expect(newStateIsValid('sites', ['JERC','BONA'], ['JERC', 'COMO'])).toBe(false);
+      expect(newStateIsValid('sites', ['JERC', 'BONA'], 'bad')).toBe(false);
+      expect(newStateIsValid('sites', ['JERC', 'BONA'], ['JERC', 'COMO'])).toBe(false);
       expect(newStateIsValid('sites', [], ['JERC', 'COMO'])).toBe(false);
       expect(newStateIsValid('sites', ['COMO'], ['JERC', 'COMO'])).toBe(true);
     });
@@ -190,37 +188,37 @@ describe('DownloadDataContext', () => {
     });
     test('s3Files', () => {
       expect(
-        newStateIsValid('s3Files', [], null)
+        newStateIsValid('s3Files', [], null),
       ).toBe(false);
       expect(
-        newStateIsValid('s3Files', [], [])
+        newStateIsValid('s3Files', [], []),
       ).toBe(false);
       expect(
-        newStateIsValid('s3Files', [], [{ url: 'foo' }, 'bar'])
+        newStateIsValid('s3Files', [], [{ url: 'foo' }, 'bar']),
       ).toBe(false);
       expect(
-        newStateIsValid('s3Files', [], [{ url: 'foo' }, null])
+        newStateIsValid('s3Files', [], [{ url: 'foo' }, null]),
       ).toBe(false);
       expect(
-        newStateIsValid('s3Files', [], [{ url: 'foo' }, { foo: 'bar' }])
+        newStateIsValid('s3Files', [], [{ url: 'foo' }, { foo: 'bar' }]),
       ).toBe(false);
       expect(
-        newStateIsValid('s3Files', [], [{ url: 'foo' }, { url: null }])
+        newStateIsValid('s3Files', [], [{ url: 'foo' }, { url: null }]),
       ).toBe(false);
       expect(
-        newStateIsValid('s3Files', [], [{ url: 'foo' }, { url: '' }])
+        newStateIsValid('s3Files', [], [{ url: 'foo' }, { url: '' }]),
       ).toBe(false);
       expect(
-        newStateIsValid('s3Files', 'bad', [{ url: 'foo' }, { url: 'bar' }])
+        newStateIsValid('s3Files', 'bad', [{ url: 'foo' }, { url: 'bar' }]),
       ).toBe(false);
       expect(
-        newStateIsValid('s3Files', [], [{ url: 'foo' }, { url: 'bar' }])
+        newStateIsValid('s3Files', [], [{ url: 'foo' }, { url: 'bar' }]),
       ).toBe(false);
       expect(
-        newStateIsValid('s3Files', ['foo', 'qux'], [{ url: 'foo' }, { url: 'bar' }])
+        newStateIsValid('s3Files', ['foo', 'qux'], [{ url: 'foo' }, { url: 'bar' }]),
       ).toBe(false);
       expect(
-        newStateIsValid('s3Files', ['bar'], [{ url: 'foo' }, { url: 'bar' }])
+        newStateIsValid('s3Files', ['bar'], [{ url: 'foo' }, { url: 'bar' }]),
       ).toBe(true);
     });
   });
@@ -228,46 +226,46 @@ describe('DownloadDataContext', () => {
   describe('mutateNewStateIntoRange()', () => {
     test('coerces missing validValues to array', () => {
       expect(
-        mutateNewStateIntoRange('sites', ['COMO'])
+        mutateNewStateIntoRange('sites', ['COMO']),
       ).toStrictEqual([]);
     });
     test('reflects back valid values', () => {
       expect(
-        mutateNewStateIntoRange('sites', ['COMO'], ['JERC', 'COMO'])
+        mutateNewStateIntoRange('sites', ['COMO'], ['JERC', 'COMO']),
       ).toStrictEqual(['COMO']);
       expect(
-        mutateNewStateIntoRange('dateRange', ['2012-12', '2014-07'], ['2010-12', '2018-01'])
+        mutateNewStateIntoRange('dateRange', ['2012-12', '2014-07'], ['2010-12', '2018-01']),
       ).toStrictEqual(['2012-12', '2014-07']);
     });
     describe('sites', () => {
       test('renders unallowable sites array to an empty array', () => {
         expect(
-          mutateNewStateIntoRange('sites', 'foo', ['JERC', 'COMO'])
+          mutateNewStateIntoRange('sites', 'foo', ['JERC', 'COMO']),
         ).toStrictEqual([]);
       });
       test('filters allowable sites to intersection with validValues', () => {
         expect(
-          mutateNewStateIntoRange('sites', ['JERC', 'BONA'], ['JERC', 'COMO'])
+          mutateNewStateIntoRange('sites', ['JERC', 'BONA'], ['JERC', 'COMO']),
         ).toStrictEqual(['JERC']);
       });
     });
     describe('dateRange', () => {
       test('renders unallowable range to validValues', () => {
         expect(
-          mutateNewStateIntoRange('dateRange', ['1900-01', '2015-06'], ['2015-01', '2015-12'])
+          mutateNewStateIntoRange('dateRange', ['1900-01', '2015-06'], ['2015-01', '2015-12']),
         ).toStrictEqual(['2015-01', '2015-12']);
       });
       test('renders all possible range input to validValues', () => {
         expect(
-          mutateNewStateIntoRange('dateRange', ALL_POSSIBLE_VALID_DATE_RANGE, ['2015-01', '2015-12'])
+          mutateNewStateIntoRange('dateRange', ALL_POSSIBLE_VALID_DATE_RANGE, ['2015-01', '2015-12']),
         ).toStrictEqual(['2015-01', '2015-12']);
       });
       test('pulls range into validValues', () => {
         expect(
-          mutateNewStateIntoRange('dateRange', ['2014-04', '2015-06'], ['2015-01', '2015-12'])
+          mutateNewStateIntoRange('dateRange', ['2014-04', '2015-06'], ['2015-01', '2015-12']),
         ).toStrictEqual(['2015-01', '2015-06']);
         expect(
-          mutateNewStateIntoRange('dateRange', ['2015-03', '2017-06'], ['2015-01', '2015-12'])
+          mutateNewStateIntoRange('dateRange', ['2015-03', '2017-06'], ['2015-01', '2015-12']),
         ).toStrictEqual(['2015-03', '2015-12']);
       });
     });
@@ -279,13 +277,13 @@ describe('DownloadDataContext', () => {
         estimatePostSize(
           { value: ['foo', 'barbar', 'quxquxqux'] },
           { value: ['JERC', 'BONA'] },
-        )
+        ),
       ).toBe(616);
       expect(
         estimatePostSize(
           { value: ['lorem', 'ispum dolor', 'sit amet lorem'] },
           { value: ['JERC', 'BONA', 'HARV', 'BLUE', 'FLNT'] },
-        )
+        ),
       ).toBe(820);
     });
   });

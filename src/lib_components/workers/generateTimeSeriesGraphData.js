@@ -124,7 +124,7 @@ export default function generateTimeSeriesGraphData(payload = {}) {
       },
     } = inData;
     const timeStep = selectedTimeStep === 'auto' ? autoTimeStep : selectedTimeStep;
-    const qfNullFill = (qualityFlags || []).map(() => null);
+    const getQFNullFill = () => (qualityFlags || []).map(() => null);
     const TIME_STEPS = getTimeSteps();
 
     /**
@@ -256,10 +256,10 @@ export default function generateTimeSeriesGraphData(payload = {}) {
     const newSeries = [];
     const newLabels = ['x'];
     const newQualityLabels = ['start', 'end'];
-    // Loop through each site...
+    // Loop through each site
     sites.forEach((site) => {
       const { siteCode, positions } = site;
-      // Loop through each site position...
+      // Loop through each site position
       positions.forEach((position) => {
         // Generate quality flag label and add to the list of quality labels
         const qualityLabel = `${siteCode} - ${position}`;
@@ -277,7 +277,7 @@ export default function generateTimeSeriesGraphData(payload = {}) {
             ? newMonthOffsets[nextMonth] - monthIdx
             : newData.length - monthIdx;
 
-          // For each site/position/month loop through all selected variables...
+          // For each site/position/month loop through all selected variables
           selectedVariables.forEach((variable) => {
             // Generate series label and add to the list of labels if this is the first we see it
             const label = `${siteCode} - ${position} - ${variable}`;
@@ -345,7 +345,7 @@ export default function generateTimeSeriesGraphData(payload = {}) {
             }
           });
 
-          // Also for each site/position/month loop through all selected quality flags...
+          // Also for each site/position/month loop through all selected quality flags
           qualityFlags.forEach((qf, qfIdx) => {
             const columnIdx = newQualityLabels.indexOf(qualityLabel);
             if (columnIdx < 2) { return; } // 0 is start and 1 is end
@@ -359,7 +359,7 @@ export default function generateTimeSeriesGraphData(payload = {}) {
                 || !posData[month][pkg][timeStep].series[qf]
             ) {
               for (let t = monthIdx; t < monthIdx + monthStepCount; t += 1) {
-                newQualityData[t][columnIdx] = [...qfNullFill];
+                newQualityData[t][columnIdx] = getQFNullFill();
               }
               return;
             }
@@ -373,14 +373,17 @@ export default function generateTimeSeriesGraphData(payload = {}) {
                 const dataIdx = posData[month][pkg][timeStep].series[dateTimeVariable].data
                   .findIndex((dateTimeVal) => dateTimeVal === isodate);
                 if (dataIdx === -1) {
-                  newQualityData[t][columnIdx] = [...qfNullFill];
+                  newQualityData[t][columnIdx] = getQFNullFill();
                   return;
                 }
                 const d = (
                   typeof posData[month][pkg][timeStep].series[qf].data[dataIdx] !== 'undefined'
                     ? posData[month][pkg][timeStep].series[qf].data[dataIdx] : null
                 );
-                newQualityData[t][columnIdx] = qfIdx ? [...newQualityData[t][columnIdx], d] : [d];
+                if (!Array.isArray(newQualityData[t][columnIdx])) {
+                  newQualityData[t][columnIdx] = [];
+                }
+                newQualityData[t][columnIdx][qfIdx] = d;
               };
               for (let t = monthIdx; t < monthIdx + monthStepCount; t += 1) {
                 setQualityValueByTimestamp(t);
@@ -391,7 +394,10 @@ export default function generateTimeSeriesGraphData(payload = {}) {
             // values directly in without matching timestamps
             posData[month][pkg][timeStep].series[qf].data.forEach((d, datumIdx) => {
               const t = datumIdx + monthIdx;
-              newQualityData[t][columnIdx] = qfIdx ? [...newQualityData[t][columnIdx], d] : [d];
+              if (!Array.isArray(newQualityData[t][columnIdx])) {
+                newQualityData[t][columnIdx] = [];
+              }
+              newQualityData[t][columnIdx][qfIdx] = d;
             });
           });
         });

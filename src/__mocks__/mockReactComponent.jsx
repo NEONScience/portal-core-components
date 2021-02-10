@@ -1,3 +1,4 @@
+/* eslint react/prop-types: 0 */
 /**
    Mock React Component
 
@@ -32,9 +33,10 @@ export default function mockReactComponent(path) {
       }
       dataProps[`prop-${prop}`] = renderableValue;
     });
-    return props.children ? (
+    const { children } = props;
+    return children ? (
       <div ComponentPath={path} {...dataProps}>
-        {props.children}
+        {children}
       </div>
     ) : (
       <div ComponentPath={path} {...dataProps} />
