@@ -8,7 +8,7 @@ export function getTimeSteps() {
     '5min': { key: '5min', tmi: '005', seconds: 300 },
     '15min': { key: '15min', tmi: '015', seconds: 900 },
     '30min': { key: '30min', tmi: '030', seconds: 1800 },
-    '1hr': { key: '1hr', tmi: '060', seconds: 3600 },
+    '60min': { key: '60min', tmi: '060', seconds: 3600 },
     '0AQ': { key: '0AQ', tmi: '100', seconds: 60 },
     '1day': { key: '1day', tmi: '01D', seconds: 86400 },
   };
@@ -189,7 +189,7 @@ export default function generateTimeSeriesGraphData(payload = {}) {
       typeof product !== 'object' || product === null
         || typeof product.sites !== 'object' || product.sites === null
     ) {
-      return outSanityCheckData;      
+      return outSanityCheckData;
     }
     // All selected sites must have positions, and all site/position combinations must be
     // represented in the product with some data
@@ -213,12 +213,11 @@ export default function generateTimeSeriesGraphData(payload = {}) {
             || Object.keys(product.sites[siteCode].positions[position].data).length < 1
         ) {
           productSitesAreValid = false;
-          return;
         }
       });
     });
     if (!productSitesAreValid) { return outSanityCheckData; }
-    
+
     /**
        Initialize data set with timestep-based times and monthOffsets for registering actual data
     */

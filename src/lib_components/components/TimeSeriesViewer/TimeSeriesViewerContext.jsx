@@ -195,7 +195,7 @@ export const TIME_STEPS = {
   '5min': { key: '5min', tmi: '005', seconds: 300 },
   '15min': { key: '15min', tmi: '015', seconds: 900 },
   '30min': { key: '30min', tmi: '030', seconds: 1800 },
-  '1hr': { key: '1hr', tmi: '060', seconds: 3600 },
+  '60min': { key: '60min', tmi: '060', seconds: 3600 },
   '0AQ': { key: '0AQ', tmi: '100', seconds: 60 },
   '1day': { key: '1day', tmi: '01D', seconds: 86400 },
 };
@@ -426,40 +426,54 @@ const parseSiteMonthData = (site, files) => {
 const parseSiteVariables = (previousVariables, siteCode, csv) => {
   const newStateVariables = { ...previousVariables };
   const variables = parseCSV(csv);
-  const variablesSet = new Set();
+  // Build a list of tables we care about. Some products include maintenance tables that should
+  // be ignored altogether. Presently our best mechanism to differentiate is that maintenance
+  // tables will all have a 'uid' field.
+  const tablesWithUid = {};
   variables.data.forEach((variable) => {
-    const {
-      dataType,
-      description,
-      downloadPkg,
-      fieldName,
-      table,
-      units,
-    } = variable;
-    const timeStep = getTimeStepForTableName(table);
-    const isSelectable = variable.dataType !== 'dateTime'
-      && variable.units !== 'NA'
-      && !/QF$/.test(fieldName);
-    const canBeDefault = isSelectable
-      && variable.downloadPkg !== 'expanded'
-      && !/QM$/.test(fieldName);
-    variablesSet.add(fieldName);
-    if (!newStateVariables[fieldName]) {
-      newStateVariables[fieldName] = {
-        dataType,
-        description,
-        downloadPkg,
-        units,
-        timeSteps: new Set(),
-        sites: new Set(),
-        isSelectable,
-        canBeDefault,
-        isDateTime: variable.dataType === 'dateTime',
-      };
-    }
-    newStateVariables[fieldName].timeSteps.add(timeStep);
-    newStateVariables[fieldName].sites.add(siteCode);
+    const { table, fieldName } = variable;
+    tablesWithUid[table] = tablesWithUid[table] || fieldName === 'uid';
   });
+  const validTables = new Set(Object.keys(tablesWithUid).filter((k) => !tablesWithUid[k]));
+  // Build the set of variables using only the valid tables
+  const variablesSet = new Set();
+  variables.data
+    .filter((variable) => validTables.has(variable.table))
+    .forEach((variable) => {
+      const {
+        table,
+        fieldName,
+        description,
+        dataType,
+        units,
+        downloadPkg,
+      } = variable;
+      const timeStep = getTimeStepForTableName(table);
+      const isSelectable = variable.dataType !== 'dateTime'
+        && variable.units !== 'NA'
+        && !/QF$/.test(fieldName);
+      const canBeDefault = isSelectable
+        && variable.downloadPkg !== 'expanded'
+        && !/QM$/.test(fieldName);
+      variablesSet.add(fieldName);
+      if (!newStateVariables[fieldName]) {
+        newStateVariables[fieldName] = {
+          dataType,
+          description,
+          downloadPkg,
+          units,
+          tables: new Set(),
+          timeSteps: new Set(),
+          sites: new Set(),
+          isSelectable,
+          canBeDefault,
+          isDateTime: variable.dataType === 'dateTime',
+        };
+      }
+      newStateVariables[fieldName].tables.add(table);
+      newStateVariables[fieldName].timeSteps.add(timeStep);
+      newStateVariables[fieldName].sites.add(siteCode);
+    });
   return { variablesSet, variablesObject: newStateVariables };
 };
 
@@ -655,7 +669,7 @@ const setDataFileFetchStatuses = (state, fetches) => {
         || !newState.product.sites[siteCode].positions[position].data[month]
         || !newState.product.sites[siteCode].positions[position].data[month][downloadPkg]
         || !newState.product.sites[siteCode].positions[position].data[month][downloadPkg][timeStep]
-    ) { return; }      
+    ) { return; }
     newState.product
       .sites[siteCode]
       .positions[position]
@@ -774,17 +788,20 @@ const reducer = (state, action) => {
 
     // Fetch Site Variables Actions
     case 'fetchSiteVariables':
+      if (!state.product.sites[action.siteCode]) { return state; }
       newState.metaFetches[`fetchSiteVariables.${action.siteCode}`] = true;
       newState.product.sites[action.siteCode].fetches.variables.status = FETCH_STATUS.FETCHING;
       calcStatus();
       return newState;
     case 'fetchSiteVariablesFailed':
+      if (!state.product.sites[action.siteCode]) { return state; }
       delete newState.metaFetches[`fetchSiteVariables.${action.siteCode}`];
       newState.product.sites[action.siteCode].fetches.variables.status = FETCH_STATUS.ERROR;
       newState.product.sites[action.siteCode].fetches.variables.error = action.error;
       calcStatus();
       return newState;
     case 'fetchSiteVariablesSucceeded':
+      if (!state.product.sites[action.siteCode]) { return state; }
       delete newState.metaFetches[`fetchSiteVariables.${action.siteCode}`];
       newState.product.sites[action.siteCode].fetches.variables.status = FETCH_STATUS.SUCCESS;
       parsedContent = parseSiteVariables(newState.variables, action.siteCode, action.csv);
@@ -816,17 +833,20 @@ const reducer = (state, action) => {
 
     // Fetch Site Positions Actions
     case 'fetchSitePositions':
+      if (!state.product.sites[action.siteCode]) { return state; }
       newState.metaFetches[`fetchSitePositions.${action.siteCode}`] = true;
       newState.product.sites[action.siteCode].fetches.positions.status = FETCH_STATUS.FETCHING;
       calcStatus();
       return newState;
     case 'fetchSitePositionsFailed':
+      if (!state.product.sites[action.siteCode]) { return state; }
       delete newState.metaFetches[`fetchSitePositions.${action.siteCode}`];
       newState.product.sites[action.siteCode].fetches.positions.status = FETCH_STATUS.ERROR;
       newState.product.sites[action.siteCode].fetches.positions.error = action.error;
       calcStatus();
       return newState;
     case 'fetchSitePositionsSucceeded':
+      if (!state.product.sites[action.siteCode]) { return state; }
       delete newState.metaFetches[`fetchSitePositions.${action.siteCode}`];
       newState.product.sites[action.siteCode].fetches.positions.status = FETCH_STATUS.SUCCESS;
       newState.product.sites[action.siteCode] = parseSitePositions(
@@ -847,6 +867,7 @@ const reducer = (state, action) => {
       newState.dataFetchProgress = action.value;
       return newState;
     case 'fetchDataFilesCompleted':
+      if (!state.dataFetches[action.token]) { return state; }
       delete newState.dataFetches[action.token];
       newState.status = TIME_SERIES_VIEWER_STATUS.READY_FOR_SERIES;
       calcSelection();
@@ -969,8 +990,8 @@ const reducer = (state, action) => {
       if (action.selected && !state.selection.qualityFlags.includes(action.qualityFlag)) {
         newState.selection.qualityFlags.push(action.qualityFlag);
       } else if (!action.selected) {
-        newState.selection.qualityFlags = newState.selection.qualityFlags
-          .filter((v) => v !== action.qualityFlag);
+        newState.selection.qualityFlags = [...state.selection.qualityFlags]
+          .filter((qf) => qf !== action.qualityFlag);
       }
       calcStatus();
       return newState;
