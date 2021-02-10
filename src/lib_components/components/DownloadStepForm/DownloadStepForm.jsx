@@ -52,7 +52,7 @@ import { formatBytes, MAX_POST_BODY_SIZE } from '../../util/manifestUtil';
 
 const useStyles = makeStyles((theme) => ({
   copyButton: {
-    marginLeft: Theme.spacing(2),
+    marginLeft: theme.spacing(2),
   },
   fileTable: {
     position: 'relative',
@@ -84,13 +84,13 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   calloutIconBrown: {
-    color: theme.colors.BROWN[300],
+    color: Theme.colors.BROWN[300],
     marginRight: theme.spacing(2),
   },
   calloutBrown: {
-    marginBottom: Theme.spacing(3),
-    backgroundColor: theme.colors.BROWN[50],
-    borderColor: theme.colors.BROWN[300],
+    marginBottom: theme.spacing(3),
+    backgroundColor: Theme.colors.BROWN[50],
+    borderColor: Theme.colors.BROWN[300],
   },
   radio: {
     marginBottom: theme.spacing(1),
@@ -557,7 +557,7 @@ export default function DownloadStepForm(props) {
             <Typography variant="h6" style={{ marginBottom: Theme.spacing(4) }}>
               {`Loading files (${Math.floor(s3FileFetchProgress || 0)}%)...`}
             </Typography>
-            <CircularProgress variant="static" value={s3FileFetchProgress} />
+            <CircularProgress variant="determinate" value={s3FileFetchProgress} />
           </div>
         </div>
       ) : (

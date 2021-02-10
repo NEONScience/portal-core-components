@@ -203,6 +203,7 @@ const productDataIsValid = (productData) => (
 );
 
 const yearMonthIsValid = (yearMonth = '') => {
+  if (typeof yearMonth !== 'string') { return false; }
   const match = yearMonth.match(/^([\d]{4})-([\d]{2})$/);
   if (!match) { return false; }
   const year = parseInt(match[1], 10);
@@ -230,6 +231,7 @@ const newStateIsAllowable = (key, value) => {
         && yearMonthIsValid(value[0]) && yearMonthIsValid(value[1])
         && value[0] >= ALL_POSSIBLE_VALID_DATE_RANGE[0]
         && value[1] <= ALL_POSSIBLE_VALID_DATE_RANGE[1]
+        && value[0] <= value[1]
       );
     case 'documentation':
       return (
@@ -260,29 +262,31 @@ const newStateIsValid = (key, value, validValues = []) => {
   switch (key) {
     case 'sites':
       return (
-        Array.isArray(value)
+        newStateIsAllowable(key, value)
         && Array.isArray(validValues)
         && value.length > 0
         && value.every((site) => validValues.includes(site))
       );
     case 'dateRange':
       return (
-        Array.isArray(value)
-        && value.length === 2
-        && Array.isArray(validValues)
-        && validValues.length === 2
-        && yearMonthIsValid(value[0]) && yearMonthIsValid(value[1])
-        && yearMonthIsValid(validValues[0]) && yearMonthIsValid(validValues[1])
+        newStateIsAllowable(key, value)
+        && newStateIsAllowable(key, validValues)
         && value[0] >= validValues[0] && value[1] <= validValues[1]
       );
     case 's3Files':
+      if (
+        !Array.isArray(validValues)
+        || !validValues.length
+        || !validValues.every((f) => (
+          typeof f === 'object' && f !== null && typeof f.url === 'string' && f.url.length
+        ))
+      ) { return false; }
       idList = validValues.map((fileObj) => fileObj.url);
       return (
-        Array.isArray(value) && value.length > 0
+        newStateIsAllowable(key, value)
+        && value.length > 0
         && value.every((id) => idList.includes(id))
       );
-    case 'policies':
-      return value === true;
     default:
       return newStateIsAllowable(key, value) && validValues.includes(value);
   }
@@ -301,7 +305,7 @@ const mutateNewStateIntoRange = (key, value, validValues = []) => {
         && value[1] === ALL_POSSIBLE_VALID_DATE_RANGE[1];
       return valueIsAllowable || valueIsDefault ? [
         (value[0] < validValues[0] ? validValues[0] : value[0]),
-        (value[1] > validValues[0] ? validValues[1] : value[1]),
+        (value[1] > validValues[1] ? validValues[1] : value[1]),
       ] : validValues;
     default:
       return valueIsAllowable ? value : DEFAULT_STATE[key].value;
@@ -1165,3 +1169,22 @@ const DownloadDataContext = {
 };
 
 export default DownloadDataContext;
+
+// Additional items exported for unit testing
+export const getTestableItems = () => (
+  process.env.NODE_ENV !== 'test' ? {} : {
+    productDataIsValid,
+    yearMonthIsValid,
+    newStateIsAllowable,
+    newStateIsValid,
+    mutateNewStateIntoRange,
+    estimatePostSize,
+    getValidValuesFromProductData,
+    getInitialStateFromProps,
+    getS3FilesFilteredFileCount,
+    getAndValidateNewS3FilesState,
+    regenerateS3FilesFiltersAndValidValues,
+    getAndValidateNewState,
+    ALL_POSSIBLE_VALID_DATE_RANGE,
+  }
+);

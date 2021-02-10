@@ -1,9 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import sitesJSON from '../../../staticJSON/sites.json';
-import statesJSON from '../../../staticJSON/states.json';
-
 import '../../../../__mocks__/NeonContext';
 
 import ExternalHostProductSpecificLinks from '../ExternalHostProductSpecificLinks';

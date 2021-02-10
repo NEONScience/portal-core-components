@@ -177,7 +177,7 @@ const DEFAULT_STATE = {
   availableQualityFlags: new Set(),
   availableTimeSteps: new Set(['auto']),
 };
-const Context = createContext(DEFAULT_STATE);
+const Context = createContext(cloneDeep(DEFAULT_STATE));
 const useTimeSeriesViewerState = () => {
   const hookResponse = useContext(Context);
   if (hookResponse.length !== 2) {
@@ -195,7 +195,7 @@ export const TIME_STEPS = {
   '5min': { key: '5min', tmi: '005', seconds: 300 },
   '15min': { key: '15min', tmi: '015', seconds: 900 },
   '30min': { key: '30min', tmi: '030', seconds: 1800 },
-  '60min': { key: '1hr', tmi: '060', seconds: 3600 },
+  '60min': { key: '60min', tmi: '060', seconds: 3600 },
   '0AQ': { key: '0AQ', tmi: '100', seconds: 60 },
   '1day': { key: '1day', tmi: '01D', seconds: 86400 },
 };
@@ -426,40 +426,54 @@ const parseSiteMonthData = (site, files) => {
 const parseSiteVariables = (previousVariables, siteCode, csv) => {
   const newStateVariables = { ...previousVariables };
   const variables = parseCSV(csv);
-  const variablesSet = new Set();
+  // Build a list of tables we care about. Some products include maintenance tables that should
+  // be ignored altogether. Presently our best mechanism to differentiate is that maintenance
+  // tables will all have a 'uid' field.
+  const tablesWithUid = {};
   variables.data.forEach((variable) => {
-    const {
-      dataType,
-      description,
-      downloadPkg,
-      fieldName,
-      table,
-      units,
-    } = variable;
-    const timeStep = getTimeStepForTableName(table);
-    const isSelectable = variable.dataType !== 'dateTime'
-      && variable.units !== 'NA'
-      && !/QF$/.test(fieldName);
-    const canBeDefault = isSelectable
-      && variable.downloadPkg !== 'expanded'
-      && !/QM$/.test(fieldName);
-    variablesSet.add(fieldName);
-    if (!newStateVariables[fieldName]) {
-      newStateVariables[fieldName] = {
-        dataType,
-        description,
-        downloadPkg,
-        units,
-        timeSteps: new Set(),
-        sites: new Set(),
-        isSelectable,
-        canBeDefault,
-        isDateTime: variable.dataType === 'dateTime',
-      };
-    }
-    newStateVariables[fieldName].timeSteps.add(timeStep);
-    newStateVariables[fieldName].sites.add(siteCode);
+    const { table, fieldName } = variable;
+    tablesWithUid[table] = tablesWithUid[table] || fieldName === 'uid';
   });
+  const validTables = new Set(Object.keys(tablesWithUid).filter((k) => !tablesWithUid[k]));
+  // Build the set of variables using only the valid tables
+  const variablesSet = new Set();
+  variables.data
+    .filter((variable) => validTables.has(variable.table))
+    .forEach((variable) => {
+      const {
+        table,
+        fieldName,
+        description,
+        dataType,
+        units,
+        downloadPkg,
+      } = variable;
+      const timeStep = getTimeStepForTableName(table);
+      const isSelectable = variable.dataType !== 'dateTime'
+        && variable.units !== 'NA'
+        && !/QF$/.test(fieldName);
+      const canBeDefault = isSelectable
+        && variable.downloadPkg !== 'expanded'
+        && !/QM$/.test(fieldName);
+      variablesSet.add(fieldName);
+      if (!newStateVariables[fieldName]) {
+        newStateVariables[fieldName] = {
+          dataType,
+          description,
+          downloadPkg,
+          units,
+          tables: new Set(),
+          timeSteps: new Set(),
+          sites: new Set(),
+          isSelectable,
+          canBeDefault,
+          isDateTime: variable.dataType === 'dateTime',
+        };
+      }
+      newStateVariables[fieldName].tables.add(table);
+      newStateVariables[fieldName].timeSteps.add(timeStep);
+      newStateVariables[fieldName].sites.add(siteCode);
+    });
   return { variablesSet, variablesObject: newStateVariables };
 };
 
@@ -622,6 +636,49 @@ const applyDefaultsToSelection = (state) => {
   return selection;
 };
 
+const limitVariablesToTwoUnits = (state, variables) => {
+  let selectedUnits = variables.reduce((units, variable) => {
+    units.add(state.variables[variable].units);
+    return units;
+  }, new Set());
+  if (selectedUnits.size <= 2) {
+    return { selectedUnits: Array.from(selectedUnits), variables };
+  }
+  selectedUnits = new Set(Array.from(selectedUnits).slice(0, 2));
+  return {
+    selectedUnits: Array.from(selectedUnits),
+    variables: variables.filter((variable) => selectedUnits.has(state.variables[variable].units)),
+  };
+};
+
+const setDataFileFetchStatuses = (state, fetches) => {
+  const newState = { ...state };
+  fetches.forEach((fetch) => {
+    const {
+      siteCode,
+      position,
+      month,
+      downloadPkg,
+      timeStep,
+    } = fetch;
+    if (
+      !newState.product || !newState.product.sites || !newState.product.sites[siteCode]
+        || !newState.product.sites[siteCode].positions
+        || !newState.product.sites[siteCode].positions[position]
+        || !newState.product.sites[siteCode].positions[position].data
+        || !newState.product.sites[siteCode].positions[position].data[month]
+        || !newState.product.sites[siteCode].positions[position].data[month][downloadPkg]
+        || !newState.product.sites[siteCode].positions[position].data[month][downloadPkg][timeStep]
+    ) { return; }
+    newState.product
+      .sites[siteCode]
+      .positions[position]
+      .data[month][downloadPkg][timeStep]
+      .status = FETCH_STATUS.FETCHING;
+  });
+  return newState;
+};
+
 /**
    Reducer
 */
@@ -644,35 +701,6 @@ const reducer = (state, action) => {
     newState.status = TIME_SERIES_VIEWER_STATUS.ERROR;
     newState.displayError = error;
     return newState;
-  };
-  const limitVariablesToTwoUnits = (variables) => {
-    const selectedUnits = variables.reduce((units, variable) => {
-      units.add(state.variables[variable].units);
-      return units;
-    }, new Set());
-    if (selectedUnits.size < 2) {
-      return { selectedUnits: Array.from(selectedUnits), variables };
-    }
-    return {
-      selectedUnits: Array.from(selectedUnits),
-      variables: variables.filter((variable) => selectedUnits.has(state.variables[variable].units)),
-    };
-  };
-  const setDataFileFetchStatuses = (fetches) => {
-    fetches.forEach((fetch) => {
-      const {
-        siteCode,
-        position,
-        month,
-        downloadPkg,
-        timeStep,
-      } = fetch;
-      newState.product
-        .sites[siteCode]
-        .positions[position]
-        .data[month][downloadPkg][timeStep]
-        .status = FETCH_STATUS.FETCHING;
-    });
   };
   let parsedContent = null;
   let selectedSiteIdx = null;
@@ -701,6 +729,9 @@ const reducer = (state, action) => {
 
     // Fetch Site Month Actions
     case 'fetchSiteMonth':
+      if (!action.siteCode || !action.month || !newState.product.sites[action.siteCode]) {
+        return state;
+      }
       newState.metaFetches[`fetchSiteMonth.${action.siteCode}.${action.month}`] = true;
       newState.product.sites[action.siteCode].fetches.siteMonths[action.month] = {
         status: FETCH_STATUS.FETCHING, error: null,
@@ -708,6 +739,10 @@ const reducer = (state, action) => {
       newState.status = TIME_SERIES_VIEWER_STATUS.LOADING_META;
       return newState;
     case 'fetchSiteMonthFailed':
+      if (
+        !action.siteCode || !action.month
+          || !state.metaFetches[`fetchSiteMonth.${action.siteCode}.${action.month}`]
+      ) { return state; }
       delete newState.metaFetches[`fetchSiteMonth.${action.siteCode}.${action.month}`];
       newState.product.sites[action.siteCode]
         .fetches.siteMonths[action.month].status = FETCH_STATUS.ERROR;
@@ -716,6 +751,10 @@ const reducer = (state, action) => {
       calcStatus();
       return newState;
     case 'fetchSiteMonthSucceeded':
+      if (
+        !action.siteCode || !action.month
+          || !state.metaFetches[`fetchSiteMonth.${action.siteCode}.${action.month}`]
+      ) { return state; }
       delete newState.metaFetches[`fetchSiteMonth.${action.siteCode}.${action.month}`];
       newState.product.sites[action.siteCode]
         .fetches.siteMonths[action.month].status = FETCH_STATUS.SUCCESS;
@@ -749,17 +788,20 @@ const reducer = (state, action) => {
 
     // Fetch Site Variables Actions
     case 'fetchSiteVariables':
+      if (!state.product.sites[action.siteCode]) { return state; }
       newState.metaFetches[`fetchSiteVariables.${action.siteCode}`] = true;
       newState.product.sites[action.siteCode].fetches.variables.status = FETCH_STATUS.FETCHING;
       calcStatus();
       return newState;
     case 'fetchSiteVariablesFailed':
+      if (!state.product.sites[action.siteCode]) { return state; }
       delete newState.metaFetches[`fetchSiteVariables.${action.siteCode}`];
       newState.product.sites[action.siteCode].fetches.variables.status = FETCH_STATUS.ERROR;
       newState.product.sites[action.siteCode].fetches.variables.error = action.error;
       calcStatus();
       return newState;
     case 'fetchSiteVariablesSucceeded':
+      if (!state.product.sites[action.siteCode]) { return state; }
       delete newState.metaFetches[`fetchSiteVariables.${action.siteCode}`];
       newState.product.sites[action.siteCode].fetches.variables.status = FETCH_STATUS.SUCCESS;
       parsedContent = parseSiteVariables(newState.variables, action.siteCode, action.csv);
@@ -791,17 +833,20 @@ const reducer = (state, action) => {
 
     // Fetch Site Positions Actions
     case 'fetchSitePositions':
+      if (!state.product.sites[action.siteCode]) { return state; }
       newState.metaFetches[`fetchSitePositions.${action.siteCode}`] = true;
       newState.product.sites[action.siteCode].fetches.positions.status = FETCH_STATUS.FETCHING;
       calcStatus();
       return newState;
     case 'fetchSitePositionsFailed':
+      if (!state.product.sites[action.siteCode]) { return state; }
       delete newState.metaFetches[`fetchSitePositions.${action.siteCode}`];
       newState.product.sites[action.siteCode].fetches.positions.status = FETCH_STATUS.ERROR;
       newState.product.sites[action.siteCode].fetches.positions.error = action.error;
       calcStatus();
       return newState;
     case 'fetchSitePositionsSucceeded':
+      if (!state.product.sites[action.siteCode]) { return state; }
       delete newState.metaFetches[`fetchSitePositions.${action.siteCode}`];
       newState.product.sites[action.siteCode].fetches.positions.status = FETCH_STATUS.SUCCESS;
       newState.product.sites[action.siteCode] = parseSitePositions(
@@ -814,7 +859,7 @@ const reducer = (state, action) => {
     // Fetch Data Actions (Many Files)
     case 'fetchDataFiles':
       newState.dataFetches[action.token] = true;
-      setDataFileFetchStatuses(action.fetches);
+      newState = setDataFileFetchStatuses(newState, action.fetches);
       newState.dataFetchProgress = 0;
       newState.status = TIME_SERIES_VIEWER_STATUS.LOADING_DATA;
       return newState;
@@ -822,6 +867,7 @@ const reducer = (state, action) => {
       newState.dataFetchProgress = action.value;
       return newState;
     case 'fetchDataFilesCompleted':
+      if (!state.dataFetches[action.token]) { return state; }
       delete newState.dataFetches[action.token];
       newState.status = TIME_SERIES_VIEWER_STATUS.READY_FOR_SERIES;
       calcSelection();
@@ -864,10 +910,10 @@ const reducer = (state, action) => {
       calcStatus();
       return newState;
     case 'selectVariables':
-      parsedContent = limitVariablesToTwoUnits(action.variables);
+      parsedContent = limitVariablesToTwoUnits(state, action.variables);
       newState.selection.variables = parsedContent.variables;
+      /* eslint-disable prefer-destructuring */
       if (parsedContent.selectedUnits.length === 1) {
-        // eslint-disable-next-line prefer-destructuring
         newState.selection.yAxes.y1.units = parsedContent.selectedUnits[0];
         if (newState.selection.yAxes.y2.units === parsedContent.selectedUnits[0]) {
           newState.selection.yAxes.y1.logscale = newState.selection.yAxes.y2.logscale;
@@ -876,15 +922,14 @@ const reducer = (state, action) => {
       } else {
         if (!newState.selection.yAxes.y1.units) {
           newState.selection.yAxes.y1 = cloneDeep(DEFAULT_AXIS_STATE);
-          // eslint-disable-next-line prefer-destructuring
-          newState.selection.yAxes.y1.units = parsedContent.selectedUnits[0];
         }
         if (!newState.selection.yAxes.y2.units) {
           newState.selection.yAxes.y2 = cloneDeep(DEFAULT_AXIS_STATE);
-          // eslint-disable-next-line prefer-destructuring
-          newState.selection.yAxes.y2.units = parsedContent.selectedUnits[1];
         }
+        newState.selection.yAxes.y1.units = parsedContent.selectedUnits[0];
+        newState.selection.yAxes.y2.units = parsedContent.selectedUnits[1];
       }
+      /* eslint-enable prefer-destructuring */
       calcSelection();
       calcStatus();
       return newState;
@@ -944,8 +989,8 @@ const reducer = (state, action) => {
       if (action.selected && !state.selection.qualityFlags.includes(action.qualityFlag)) {
         newState.selection.qualityFlags.push(action.qualityFlag);
       } else if (!action.selected) {
-        newState.selection.qualityFlags = newState.selection.qualityFlags
-          .filter((v) => v !== action.qualityFlag);
+        newState.selection.qualityFlags = [...state.selection.qualityFlags]
+          .filter((qf) => qf !== action.qualityFlag);
       }
       calcStatus();
       return newState;
@@ -962,7 +1007,10 @@ const reducer = (state, action) => {
       calcStatus();
       return newState;
     case 'updateSelectedSites':
-      if (!action.siteCodes.size) { return state; }
+      if (
+        !action.siteCodes || !action.siteCodes.constructor
+          || action.siteCodes.constructor.name !== 'Set' || !action.siteCodes.size
+      ) { return state; }
       // Remove any sites that are no longer in the selected set
       newState.selection.sites = newState.selection.sites
         .filter((site) => action.siteCodes.has(site.siteCode));
@@ -1357,11 +1405,13 @@ export const getTestableItems = () => (
     getTimeStep,
     getUpdatedValueRange,
     getContinuousDatesArray,
+    limitVariablesToTwoUnits,
     parseProductData,
     parseSiteMonthData,
     parseSiteVariables,
     parseSitePositions,
     reducer,
+    setDataFileFetchStatuses,
     TimeSeriesViewerPropTypes,
   }
 );

@@ -1,3 +1,4 @@
+/* eslint react/prop-types: 0 */
 /**
    Mock React Component
 
@@ -12,7 +13,7 @@
 
    import 'path/to/__mocks__/mockReactComponent';
 
-   jest.mock('path/to/Component', () => mockMuiComponent('path/to/Component'));
+   jest.mock('path/to/Component', () => mockReactComponent('path/to/Component'));
 */
 
 import React from 'react';
@@ -32,9 +33,10 @@ export default function mockReactComponent(path) {
       }
       dataProps[`prop-${prop}`] = renderableValue;
     });
-    return props.children ? (
+    const { children } = props;
+    return children ? (
       <div ComponentPath={path} {...dataProps}>
-        {props.children}
+        {children}
       </div>
     ) : (
       <div ComponentPath={path} {...dataProps} />

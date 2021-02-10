@@ -28,10 +28,9 @@ import ImageIcon from '@material-ui/icons/Image';
 import ShowIcon from '@material-ui/icons/Visibility';
 import HideIcon from '@material-ui/icons/VisibilityOff';
 
-import TimeSeriesViewerContext, {
-  TIME_SERIES_VIEWER_STATUS,
-  TIME_STEPS,
-} from './TimeSeriesViewerContext';
+import generateTimeSeriesGraphData from '../../workers/generateTimeSeriesGraphData';
+
+import TimeSeriesViewerContext, { TIME_SERIES_VIEWER_STATUS } from './TimeSeriesViewerContext';
 import Theme, { COLORS } from '../Theme/Theme';
 
 import NeonLogo from '../../images/NSF-NEON-logo.png';
@@ -92,8 +91,6 @@ const BASE_GRAPH_OPTIONS = {
     new Dygraph.Plugins.Crosshair({ direction: 'vertical' }),
   ],
 };
-
-const NULL_DATA = [[0, 0]];
 
 const useStyles = makeStyles((theme) => ({
   graphOuterContainer: {
@@ -191,10 +188,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// Get the next year/month string after a given year/month string
-// Example: getNextMonth('2012-12') => '2013-01'
-const getNextMonth = (month) => moment.utc(`${month}-15T00:00:00Z`).add(1, 'month').format('YYYY-MM');
-
 const INITIAL_GRAPH_STATE = {
   hiddenSeries: new Set(),
   hiddenQualityFlags: new Set(),
@@ -263,239 +256,14 @@ export default function TimeSeriesViewerGraph() {
   const belowMd = useMediaQuery(Theme.breakpoints.down('sm'));
   const {
     selectionDigest,
-    dateRange,
-    continuousDateRange,
-    variables,
-    dateTimeVariable,
-    sites,
-    timeStep: selectedTimeStep,
-    autoTimeStep,
-    rollPeriod,
     logscale,
-    yAxes,
     qualityFlags,
+    rollPeriod,
+    yAxes,
   } = state.selection;
-  const timeStep = selectedTimeStep === 'auto' ? autoTimeStep : selectedTimeStep;
 
   // let data = cloneDeep(NULL_DATA);
-  const qfNullFill = qualityFlags.map(() => null);
   let graphOptions = cloneDeep(BASE_GRAPH_OPTIONS);
-
-  // Initialize data set with timestep-based times and monthOffsets for registering actual data
-  const buildTimeData = (graphData = {}) => {
-    // Reinitialize
-    const newData = [];
-    const newQualityData = [];
-    const newMonthOffsets = {};
-    const newTimestampMap = {};
-    // Sanity check: must have a valid time step
-    if (!TIME_STEPS[timeStep]) {
-      return { ...graphData, data: cloneDeep(NULL_DATA) };
-    }
-    // Tick through date range one time step at a time building data, qualityData, and timeStampMap
-    const { seconds } = TIME_STEPS[timeStep];
-    const startMonth = dateRange[0];
-    const ticker = moment.utc(`${startMonth}-01T00:00:00Z`);
-    const endMonth = getNextMonth(dateRange[1]);
-    let currentMonth = ticker.format('YYYY-MM');
-    let previousMonth = null;
-    let offset = null;
-    let endStep = null;
-    while (currentMonth < endMonth) {
-      newData.push([ticker.toDate()]);
-      endStep = moment.utc(ticker).add(seconds, 'seconds');
-      newQualityData.push([ticker.toDate(), endStep.toDate()]);
-      offset = newData.length - 1;
-      newTimestampMap[ticker.valueOf()] = offset;
-      if (currentMonth !== previousMonth) {
-        newMonthOffsets[currentMonth] = offset;
-        previousMonth = currentMonth;
-      }
-      ticker.add(seconds, 'seconds');
-      currentMonth = ticker.format('YYYY-MM');
-    }
-    return {
-      ...graphData,
-      // everything is hidden: render the minimum, which is NOT an empty array
-      data: newData.length === 0 ? cloneDeep(NULL_DATA) : newData,
-      qualityData: newQualityData,
-      monthOffsets: newMonthOffsets,
-      timestampMap: newTimestampMap,
-    };
-  };
-
-  // Build the rest of the data structure and labels using selection values
-  const buildSeriesData = (graphData = {}) => {
-    const { // These were generated in the previous function
-      data: newData,
-      qualityData: newQualityData,
-      monthOffsets: newMonthOffsets,
-    } = graphData;
-    // Reinitialize
-    const newSeries = [];
-    const newLabels = ['x'];
-    const newQualityLabels = ['start', 'end'];
-    // Sanity check: must have a valid dateTimeVariable
-    if (!dateTimeVariable) { return graphData; }
-    // Loop through each site...
-    sites.forEach((site) => {
-      const { siteCode, positions } = site;
-      // Loop through each site position...
-      positions.forEach((position) => {
-        // Generate quality flag label and add to the list of quality labels
-        const qualityLabel = `${siteCode} - ${position}`;
-        if (qualityFlags.length && !newQualityLabels.includes(qualityLabel)) {
-          newQualityLabels.push(qualityLabel);
-        }
-
-        // For each site position loop through every month in the continuous date range (no gaps)
-        continuousDateRange.forEach((month) => {
-          // Use monthOffsets to determine where in the entire data set this month belongs
-          if (!Object.keys(newMonthOffsets).includes(month)) { return; }
-          const monthIdx = newMonthOffsets[month];
-          const nextMonth = getNextMonth(month);
-          const monthStepCount = Object.keys(newMonthOffsets).includes(nextMonth)
-            ? newMonthOffsets[nextMonth] - monthIdx
-            : newData.length - monthIdx;
-
-          // For each site/position/month loop through all selected variables...
-          variables.forEach((variable) => {
-            // Generate series label and add to the list of labels if this is the first we see it
-            const label = `${siteCode} - ${position} - ${variable}`;
-            if (!newLabels.includes(label)) {
-              newLabels.push(label);
-              newSeries.push({
-                siteCode,
-                position,
-                variable,
-                label,
-                units: state.variables[variable].units,
-              });
-            }
-            const columnIdx = newLabels.indexOf(label);
-            if (!columnIdx) { return; } // 0 is x, so this should always be 1 or greater
-            const { downloadPkg: pkg } = state.variables[variable];
-            const posData = state.product.sites[siteCode].positions[position].data;
-            // Null-fill if this site/position/month/variable has no series data or no dateTime data
-            if (
-              !posData[month]
-                || !posData[month][pkg]
-                || !posData[month][pkg][timeStep]
-                || !posData[month][pkg][timeStep].series[variable]
-                || !posData[month][pkg][timeStep].series[dateTimeVariable]
-            ) {
-              for (let t = monthIdx; t < monthIdx + monthStepCount; t += 1) {
-                newData[t][columnIdx] = null;
-              }
-              return;
-            }
-            // This site/position/month/variable series exists, so add it into the data set
-            const seriesStepCount = posData[month][pkg][timeStep].series[variable].data.length;
-            // Series and month data lengths are either identical (as expected) then we can stream
-            // values directly in without matching timestamps
-            if (seriesStepCount === monthStepCount) {
-              posData[month][pkg][timeStep].series[variable].data.forEach((d, datumIdx) => {
-                newData[datumIdx + monthIdx][columnIdx] = d;
-              });
-              return;
-            }
-            // More series data than month data - for now, stream values directly in
-            // without matching timestamps, being careful to not go over the month step count
-            if (seriesStepCount >= monthStepCount) {
-              posData[month][pkg][timeStep].series[variable].data.forEach((d, datumIdx) => {
-                if (datumIdx >= monthStepCount) { return; }
-                newData[datumIdx + monthIdx][columnIdx] = d;
-              });
-              return;
-            }
-            // Series data length is shorter than expected month length
-            // Add what data we have by going through each time step in the month and comparing to
-            // start dates in the data set, null-filling any steps without a corresponding datum
-            const setSeriesValueByTimestamp = (t) => {
-              const isodate = moment.utc(newData[t][0]).format('YYYY-MM-DD[T]HH:mm:ss[Z]');
-              const dataIdx = posData[month][pkg][timeStep].series[dateTimeVariable].data
-                .findIndex((dateTimeVal) => dateTimeVal === isodate);
-              newData[t][columnIdx] = dataIdx !== -1
-                ? posData[month][pkg][timeStep].series[variable].data[dataIdx]
-                : null;
-            };
-            for (let t = monthIdx; t < monthIdx + monthStepCount; t += 1) {
-              setSeriesValueByTimestamp(t);
-            }
-          });
-
-          // Also for each site/position/month loop through all selected quality flags...
-          qualityFlags.forEach((qf, qfIdx) => {
-            const columnIdx = newQualityLabels.indexOf(qualityLabel);
-            if (columnIdx < 2) { return; } // 0 is start and 1 is end
-            const { downloadPkg: pkg } = state.variables[qf];
-            const posData = state.product.sites[siteCode].positions[position].data;
-            // If this site/position/month/variable has no series data then fill with nulls
-            if (
-              !posData[month]
-                || !posData[month][pkg]
-                || !posData[month][pkg][timeStep]
-                || !posData[month][pkg][timeStep].series[qf]
-            ) {
-              for (let t = monthIdx; t < monthIdx + monthStepCount; t += 1) {
-                newQualityData[t][columnIdx] = [...qfNullFill];
-              }
-              return;
-            }
-            // This site/position/month/qf series exists, so add it into the quality data set
-            const seriesStepCount = posData[month][pkg][timeStep].series[qf].data.length;
-            if (seriesStepCount !== monthStepCount) {
-              // The series data length does not match the expected month length so
-              // loop through by month steps pulling in series values through timestamp matching
-              const setQualityValueByTimestamp = (t) => {
-                const isodate = moment.utc(newQualityData[t][0]).format('YYYY-MM-DD[T]HH:mm:ss[Z]');
-                const dataIdx = posData[month][pkg][timeStep].series[dateTimeVariable].data
-                  .findIndex((dateTimeVal) => dateTimeVal === isodate);
-                if (dataIdx === -1) {
-                  newQualityData[t][columnIdx] = [...qfNullFill];
-                  return;
-                }
-                const d = posData[month][pkg][timeStep].series[qf].data[dataIdx];
-                newQualityData[t][columnIdx] = qfIdx ? [...newQualityData[t][columnIdx], d] : [d];
-              };
-              for (let t = monthIdx; t < monthIdx + monthStepCount; t += 1) {
-                setQualityValueByTimestamp(t);
-              }
-              return;
-            }
-            // Series and month data lengths are identical as expected so we can stream
-            // values directly in without matching timestamps
-            posData[month][pkg][timeStep].series[qf].data.forEach((d, datumIdx) => {
-              const t = datumIdx + monthIdx;
-              newQualityData[t][columnIdx] = qfIdx ? [...newQualityData[t][columnIdx], d] : [d];
-            });
-          });
-        });
-      });
-    });
-    // With series and qualityLabels built out purge any hidden labels that are no longer present
-    const seriesLabels = newSeries.map((s) => s.label);
-    if (
-      Array.from(graphState.hiddenQualityFlags).some((label) => !newQualityLabels.includes(label))
-        || Array.from(graphState.hiddenSeries).some((label) => !seriesLabels.includes(label))
-    ) {
-      graphDispatch({
-        type: 'purgeRemovedHiddenLabels',
-        qualityLabels: newQualityLabels.slice(2),
-        seriesLabels,
-      });
-    }
-    // All done, return updated graphData to ultimately commit to TSV global state
-    return {
-      ...graphData,
-      data: newData,
-      qualityData: newQualityData,
-      monthOffsets: newMonthOffsets,
-      series: newSeries,
-      labels: newLabels,
-      qualityLabels: newQualityLabels,
-    };
-  };
 
   // Build the axes option
   const buildAxesOption = (axes = []) => {
@@ -674,11 +442,22 @@ export default function TimeSeriesViewerGraph() {
   // Effect - Generate all series data for the graph only when necessary, store in TSV global state
   useEffect(() => {
     if (state.status !== TIME_SERIES_VIEWER_STATUS.READY_FOR_SERIES) { return; }
-    dispatch({
-      type: 'regenerateGraphData',
-      graphData: buildSeriesData(
-        buildTimeData({ ...state.graphData }),
-      ),
+    generateTimeSeriesGraphData(state).then((graphData) => {
+      // With new series and qualityLabels purge any hidden labels that are no longer present
+      const { series: newSeries, qualityLabels: newQualityLabels } = graphData;
+      const seriesLabels = newSeries.map((s) => s.label);
+      if (
+        Array.from(graphState.hiddenQualityFlags).some((label) => !newQualityLabels.includes(label))
+          || Array.from(graphState.hiddenSeries).some((label) => !seriesLabels.includes(label))
+      ) {
+        graphDispatch({
+          type: 'purgeRemovedHiddenLabels',
+          qualityLabels: newQualityLabels.slice(2),
+          seriesLabels,
+        });
+      }
+      // Store newly generate graphData in primary context state
+      dispatch({ type: 'regenerateGraphData', graphData });
     });
   });
 

@@ -1,4 +1,108 @@
 export default DownloadDataContext;
+export function getTestableItems(): {
+    productDataIsValid?: undefined;
+    yearMonthIsValid?: undefined;
+    newStateIsAllowable?: undefined;
+    newStateIsValid?: undefined;
+    mutateNewStateIntoRange?: undefined;
+    estimatePostSize?: undefined;
+    getValidValuesFromProductData?: undefined;
+    getInitialStateFromProps?: undefined;
+    getS3FilesFilteredFileCount?: undefined;
+    getAndValidateNewS3FilesState?: undefined;
+    regenerateS3FilesFiltersAndValidValues?: undefined;
+    getAndValidateNewState?: undefined;
+    ALL_POSSIBLE_VALID_DATE_RANGE?: undefined;
+} | {
+    productDataIsValid: (productData: any) => boolean;
+    yearMonthIsValid: (yearMonth?: string) => boolean;
+    newStateIsAllowable: (key: any, value: any) => boolean;
+    newStateIsValid: (key: any, value: any, validValues?: any[]) => any;
+    mutateNewStateIntoRange: (key: any, value: any, validValues?: any[]) => any;
+    estimatePostSize: (s3FilesState: any, sitesState: any) => any;
+    getValidValuesFromProductData: (productData: any, key: any) => any;
+    getInitialStateFromProps: (props: any) => {
+        availabilityView: any;
+        productData: any;
+        downloadContextIsActive: boolean;
+        broadcast: boolean;
+        dialogOpen: boolean;
+        awaitingHigherOrderUpdateWhenDialogOpens: boolean;
+        cachedHigherOrderState: {};
+        requiredSteps: never[];
+        allStepsComplete: boolean;
+        fromManifest: boolean;
+        fromAOPManifest: boolean;
+        fromExternalHost: boolean;
+        manifest: {
+            status: string;
+            value: null;
+            error: null;
+        };
+        s3FileFetches: {};
+        s3FileFetchProgress: number;
+        s3Files: {
+            value: never[];
+            cachedValues: never[];
+            validValues: never[];
+            isValid: boolean;
+            bytesByUrl: {};
+            totalSize: number;
+            estimatedPostSize: number;
+            filteredFileCount: number;
+            lastFilterChanged: null;
+            filters: {
+                site: never[];
+                type: never[];
+                visit: never[];
+                yearMonth: never[];
+            };
+            valueLookups: {
+                site: {};
+                type: {};
+                visit: {};
+                yearMonth: {};
+            };
+            visibleColumns: string[];
+        };
+        latestRelease: null;
+        release: {
+            value: null;
+            validValues: never[];
+            isValid: boolean;
+        };
+        sites: {
+            value: never[];
+            validValues: never[];
+            isValid: boolean;
+        };
+        dateRange: {
+            value: string[];
+            validValues: string[];
+            isValid: boolean;
+        };
+        documentation: {
+            value: string;
+            validValues: string[];
+            isValid: boolean;
+        };
+        packageType: {
+            value: null;
+            validValues: string[];
+            isValid: boolean;
+        };
+        policies: {
+            value: boolean;
+            validValues: null;
+            isValid: boolean;
+        };
+    };
+    getS3FilesFilteredFileCount: (state: any) => any;
+    getAndValidateNewS3FilesState: (previousState: any, action: any, broadcast?: boolean) => any;
+    regenerateS3FilesFiltersAndValidValues: (state: any) => any;
+    getAndValidateNewState: (previousState: any, action: any, broadcast?: boolean) => any;
+    ALL_POSSIBLE_VALID_DATE_RANGE: string[];
+};
 declare namespace DownloadDataContext {
     export { Provider };
     export { useDownloadDataState };

@@ -1,0 +1,157 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when selection is enabled 1`] = `
+<div
+  className="makeStyles-legendContainer-1"
+>
+  <svg
+    className="makeStyles-legendSvg-2"
+    height={36}
+    width="90"
+  >
+    <rect
+      fill="#002c77"
+      height={12}
+      rx={1}
+      width={7}
+      x={0}
+      y={0}
+    />
+    <text
+      className="makeStyles-legendText-3"
+      x={15}
+      y={9}
+    >
+      Available
+    </text>
+    <rect
+      fill="#d7d9d9"
+      height={12}
+      rx={1}
+      width={7}
+      x={0}
+      y={20}
+    />
+    <text
+      className="makeStyles-legendText-3"
+      x={15}
+      y={29}
+    >
+      No data
+    </text>
+  </svg>
+  <svg
+    className="makeStyles-legendSvg-2"
+    height={36}
+    width="210"
+  >
+    <rect
+      fill="#0073cf"
+      height={10}
+      width={45}
+      x={0.5}
+      y={1.5}
+    />
+    <rect
+      fill="#5ca6e3"
+      height={12}
+      stroke="#0073cf"
+      strokeWidth={1.5}
+      width={4}
+      x={0.5}
+      y={0.5}
+    />
+    <rect
+      fill="#5ca6e3"
+      height={12}
+      stroke="#0073cf"
+      strokeWidth={1.5}
+      width={4}
+      x={41}
+      y={0.5}
+    />
+    <text
+      className="makeStyles-legendText-3"
+      x={53}
+      y={9}
+    >
+      All sites selected
+    </text>
+    <rect
+      fill="#8abfec"
+      height={10}
+      width={45}
+      x={0.5}
+      y={21.5}
+    />
+    <rect
+      fill="#5ca6e3"
+      height={12}
+      stroke="#0073cf"
+      strokeWidth={1.5}
+      width={4}
+      x={0.5}
+      y={20.5}
+    />
+    <rect
+      fill="#5ca6e3"
+      height={12}
+      stroke="#0073cf"
+      strokeWidth={1.5}
+      width={4}
+      x={41}
+      y={20.5}
+    />
+    <text
+      className="makeStyles-legendText-3"
+      x={53}
+      y={29}
+    >
+      Some sites selected
+    </text>
+  </svg>
+</div>
+`;
+
+exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when selection is not enabled (default) 1`] = `
+<div
+  className="makeStyles-legendContainer-1"
+>
+  <svg
+    className="makeStyles-legendSvg-2"
+    height={16}
+    width={230}
+  >
+    <rect
+      fill="#002c77"
+      height={12}
+      rx={1}
+      width={7}
+      x={0}
+      y={0}
+    />
+    <text
+      className="makeStyles-legendText-3"
+      x={15}
+      y={9}
+    >
+      Available
+    </text>
+    <rect
+      fill="#d7d9d9"
+      height={12}
+      rx={1}
+      width={7}
+      x={115}
+      y={0}
+    />
+    <text
+      className="makeStyles-legendText-3"
+      x={130}
+      y={9}
+    >
+      No data
+    </text>
+  </svg>
+</div>
+`;

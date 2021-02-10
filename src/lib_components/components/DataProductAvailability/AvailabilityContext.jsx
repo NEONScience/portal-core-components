@@ -155,6 +155,7 @@ const reducer = (state, action) => {
       return calculateRows(hydrateNeonContextData(newState, action.neonContextData));
 
     case 'setBreakouts':
+      if (!action.breakouts) { return state; }
       if (!action.breakouts.every((b) => state.validBreakouts.includes(b))) { return state; }
       newState.breakouts = [...action.breakouts];
       // If new breakouts contains the old leading breakout (the sort method) then keep it in front

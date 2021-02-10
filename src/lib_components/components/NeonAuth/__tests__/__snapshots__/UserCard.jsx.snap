@@ -1,0 +1,193 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NeonAuth - UserCard Renders with a lastLogin prop 1`] = `
+<div
+  className="makeStyles-profileArea-3"
+>
+  <div
+    className="makeStyles-card-2"
+  >
+    <div
+      className="makeStyles-cardHeaderContainer-1"
+    >
+      <img
+        alt="Profile"
+        className="profile-image"
+        src="label/baby/jr"
+      />
+    </div>
+    <div>
+      <h4
+        className="MuiTypography-root MuiTypography-h4"
+        style={
+          Object {
+            "margin": "10px",
+          }
+        }
+      >
+        Slappy White
+      </h4>
+    </div>
+    <div
+      className="makeStyles-emailChipContainer-5"
+    >
+      <div
+        className="MuiChip-root chip-email MuiChip-colorPrimary"
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+      >
+        <div
+          className="MuiAvatar-root MuiAvatar-circle MuiChip-avatar MuiChip-avatarColorPrimary MuiAvatar-colorDefault"
+          color="primary"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+            />
+          </svg>
+        </div>
+        <span
+          className="MuiChip-label"
+        >
+          separate@knob
+        </span>
+      </div>
+    </div>
+    <div
+      className="makeStyles-profileInfoArea-4"
+    >
+      <hr
+        className="MuiDivider-root"
+      />
+      <div
+        className="label-info-container"
+      >
+        <label
+          className="control-label label-block"
+        >
+          Identity Provider
+        </label>
+        <label
+          className="label-normal"
+        >
+          monks
+        </label>
+      </div>
+      <div
+        className="label-info-container"
+      >
+        <label
+          className="control-label label-block"
+        >
+          Last Login
+        </label>
+        <label
+          className="label-normal"
+        >
+          May 4th, 2018 6:00:00 pm
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`NeonAuth - UserCard Renders without a lastLogin prop 1`] = `
+<div
+  className="makeStyles-profileArea-3"
+>
+  <div
+    className="makeStyles-card-2"
+  >
+    <div
+      className="makeStyles-cardHeaderContainer-1"
+    >
+      <img
+        alt="Profile"
+        className="profile-image"
+        src="carhole"
+      />
+    </div>
+    <div>
+      <h4
+        className="MuiTypography-root MuiTypography-h4"
+        style={
+          Object {
+            "margin": "10px",
+          }
+        }
+      >
+        Guy Incognito
+      </h4>
+    </div>
+    <div
+      className="makeStyles-emailChipContainer-5"
+    >
+      <div
+        className="MuiChip-root chip-email MuiChip-colorPrimary"
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+      >
+        <div
+          className="MuiAvatar-root MuiAvatar-circle MuiChip-avatar MuiChip-avatarColorPrimary MuiAvatar-colorDefault"
+          color="primary"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+            />
+          </svg>
+        </div>
+        <span
+          className="MuiChip-label"
+        >
+          joeyjojojr@shabadu
+        </span>
+      </div>
+    </div>
+    <div
+      className="makeStyles-profileInfoArea-4"
+    >
+      <hr
+        className="MuiDivider-root"
+      />
+      <div
+        className="label-info-container"
+      >
+        <label
+          className="control-label label-block"
+        >
+          Identity Provider
+        </label>
+        <label
+          className="label-normal"
+        >
+          momar
+        </label>
+      </div>
+      <div
+        className="label-info-container"
+      >
+        <label
+          className="control-label label-block"
+        >
+          Last Login
+        </label>
+        <label
+          className="label-normal"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

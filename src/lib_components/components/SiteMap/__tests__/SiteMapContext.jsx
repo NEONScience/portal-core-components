@@ -1,3 +1,6 @@
+/* eslint max-len: 0 */
+import React from 'react';
+import renderer from 'react-test-renderer';
 import { renderHook } from '@testing-library/react-hooks';
 
 import cloneDeep from 'lodash/cloneDeep';
@@ -43,7 +46,7 @@ jest.mock('../SiteMapUtils', () => ({
 
 jest.mock('lodash/uniqueId');
 
-const { useSiteMapContext } = SiteMapContext;
+const { Provider, useSiteMapContext } = SiteMapContext;
 
 const {
   deriveRegionSelections,
@@ -63,6 +66,19 @@ const {
 } = getTestableItems();
 
 describe('SiteMap - SiteMapContext', () => {
+  describe('Provider', () => {
+    test('renders with no props', () => {
+      const tree = renderer
+        .create((
+          <Provider>
+            <div>children</div>
+          </Provider>
+        ))
+        .toJSON();
+      expect(tree).toMatchSnapshot();
+    });
+  });
+
   describe('useSiteMapContextState()', () => {
     test('returns default state and a passthough when invoked outside of a provider', () => {
       const { result } = renderHook(() => useSiteMapContext());
@@ -192,7 +208,6 @@ describe('SiteMap - SiteMapContext', () => {
       )).toStrictEqual(new Set());
     });
     test('coerces array argument to be a set', () => {
-      const setArg = ['a', 'b'];
       expect(getSelectableSet(['a', 'b'])).toStrictEqual(new Set(['a', 'b']));
       expect(getSelectableSet(
         ['a', 'b'],
@@ -852,25 +867,25 @@ describe('SiteMap - SiteMapContext', () => {
       state.map.baseLayer = BASE_LAYERS.NATGEO_WORLD_MAP.KEY;
       state.map.baseLayerAutoChangedAbove17 = false;
       let newState = updateMapTileWithZoom(state);
-      expect(state.map.zoom).toBe(17);
-      expect(state.map.baseLayer).toBe(BASE_LAYERS.WORLD_IMAGERY.KEY);
-      expect(state.map.baseLayerAutoChangedAbove17).toBe(true);
-      state.map.zoom = 20;
-      state.map.baseLayer = BASE_LAYERS.NATGEO_WORLD_MAP.KEY;
-      state.map.baseLayerAutoChangedAbove17 = false;
+      expect(newState.map.zoom).toBe(17);
+      expect(newState.map.baseLayer).toBe(BASE_LAYERS.WORLD_IMAGERY.KEY);
+      expect(newState.map.baseLayerAutoChangedAbove17).toBe(true);
+      newState.map.zoom = 20;
+      newState.map.baseLayer = BASE_LAYERS.NATGEO_WORLD_MAP.KEY;
+      newState.map.baseLayerAutoChangedAbove17 = false;
       newState = updateMapTileWithZoom(newState);
-      expect(state.map.zoom).toBe(20);
-      expect(state.map.baseLayer).toBe(BASE_LAYERS.WORLD_IMAGERY.KEY);
-      expect(state.map.baseLayerAutoChangedAbove17).toBe(true);
+      expect(newState.map.zoom).toBe(20);
+      expect(newState.map.baseLayer).toBe(BASE_LAYERS.WORLD_IMAGERY.KEY);
+      expect(newState.map.baseLayerAutoChangedAbove17).toBe(true);
     });
     test('changes base layer from WORLD_IMAGERY to WORLD_MAP when zooming below 17 if necessary', () => {
       state.map.zoom = 16;
       state.map.baseLayer = BASE_LAYERS.WORLD_IMAGERY.KEY;
       state.map.baseLayerAutoChangedAbove17 = true;
       const newState = updateMapTileWithZoom(state);
-      expect(state.map.zoom).toBe(16);
-      expect(state.map.baseLayer).toBe(BASE_LAYERS.NATGEO_WORLD_MAP.KEY);
-      expect(state.map.baseLayerAutoChangedAbove17).toBe(false);
+      expect(newState.map.zoom).toBe(16);
+      expect(newState.map.baseLayer).toBe(BASE_LAYERS.NATGEO_WORLD_MAP.KEY);
+      expect(newState.map.baseLayerAutoChangedAbove17).toBe(false);
     });
     test('makes no changes when crossing the zoom threshold or higher if the map is anything but the special cases', () => {
       state.map.zoom = 16;
@@ -977,8 +992,8 @@ describe('SiteMap - SiteMapContext', () => {
       state.filters.features.visible[FEATURES.DISTRIBUTED_TICK_PLOT_BOUNDARIES.KEY] = true;
       const newState = applyFeatureVisibilityToParents(state, FEATURES.DISTRIBUTED_TICK_PLOT_BOUNDARIES.KEY);
       expect(
-        Object.keys(state.filters.features.visible)
-          .filter((k) => state.filters.features.visible[k]),
+        Object.keys(newState.filters.features.visible)
+          .filter((k) => newState.filters.features.visible[k]),
       ).toStrictEqual([
         FEATURES.TERRESTRIAL_SITE_FEATURES.KEY,
         FEATURES.PLOT_BOUNDARIES.KEY,
@@ -992,8 +1007,8 @@ describe('SiteMap - SiteMapContext', () => {
       state.filters.features.visible[FEATURES.DISTRIBUTED_TICK_PLOT_BOUNDARIES.KEY] = false;
       const newState = applyFeatureVisibilityToParents(state, FEATURES.DISTRIBUTED_TICK_PLOT_BOUNDARIES.KEY);
       expect(
-        Object.keys(state.filters.features.visible)
-          .filter((k) => !state.filters.features.visible[k]),
+        Object.keys(newState.filters.features.visible)
+          .filter((k) => !newState.filters.features.visible[k]),
       ).toStrictEqual([
         FEATURES.DISTRIBUTED_TICK_PLOT_BOUNDARIES.KEY,
       ]);
@@ -1011,14 +1026,13 @@ describe('SiteMap - SiteMapContext', () => {
     const {
       BOUNDARIES: { KEY: BOUNDARIES },
       LOCATIONS: { KEY: LOCATIONS },
-      SAMPLING_POINTS: { KEY: SAMPLING_POINTS },
     } = FEATURE_TYPES;
     const {
       SAMPLING_BOUNDARIES: { KEY: SAMPLING_BOUNDARIES },
       WATERSHED_BOUNDARIES: { KEY: WATERSHED_BOUNDARIES },
       TOWERS: { KEY: TOWERS },
       HUTS: { KEY: HUTS, minZoom: HUTS_MINZOOM },
-      TOWER_BASE_PLOTS: { KEY: TOWER_BASE_PLOTS, minZoom: TOWER_BASE_PLOTS_MINZOOM },
+      TOWER_BASE_PLOTS: { KEY: TOWER_BASE_PLOTS },
       DISTRIBUTED_BASE_PLOTS: { KEY: DISTRIBUTED_BASE_PLOTS },
       DISTRIBUTED_PLOTS: { minZoom: DISTRIBUTED_BASE_PLOTS_MINZOOM },
       TOWER_PHENOLOGY_PLOTS: { KEY: TOWER_PHENOLOGY_PLOTS },
@@ -1292,9 +1306,9 @@ describe('SiteMap - SiteMapContext', () => {
       describe('applies status and data if status is SUCCESS', () => {
         test('correctly handles multiple features at the same zoom level', () => {
           if (HUTS_MINZOOM !== DISTRIBUTED_BASE_PLOTS_MINZOOM) {
-            throw `This test is broken! It relies on two features with the same minZoom,
+            throw new Error(`This test is broken! It relies on two features with the same minZoom,
 expecting HUTS and DISTRIBUTED_BASE_PLOTS to match. One or both of those must have changed
-and so this test must be updated.`;
+and so this test must be updated.`);
           }
           state.sites = {
             S3: { stateCode: 'PR', domainCode: 'D09' },
@@ -1507,7 +1521,7 @@ and so this test must be updated.`;
       });
       test('invokes hydrateNeonContextData()', () => {
         hydrateNeonContextData.mockReset();
-        const newState = reducer(
+        reducer(
           state,
           { type: 'hydrateNeonContextData', neonContextData: { foo: 'bar' } },
         );

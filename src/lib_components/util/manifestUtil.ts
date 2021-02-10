@@ -23,14 +23,14 @@ export const buildManifestConfig = (
     isError: true,
   };
   let manifestConfigError = null;
-  if (!isAop && (!selection.productData || !selection.productData.productCode)) {
-    manifestConfigError = 'Invalid data product';
-  }
-  if (!isAop && !selection.sites.isValid) {
-    manifestConfigError = 'No sites selected';
-  }
-  if (!isAop && !selection.dateRange.isValid) {
-    manifestConfigError = 'Invalid date range';
+  if (!isAop) {
+    if (!selection.productData || !selection.productData.productCode) {
+      manifestConfigError = 'Invalid data product';
+    } else if (!selection.sites.isValid) {
+      manifestConfigError = 'Invalid site selection';
+    } else if (!selection.dateRange.isValid) {
+      manifestConfigError = 'Invalid date range';
+    }
   }
   if (manifestConfigError) {
     config.errorMessage = manifestConfigError;
@@ -47,7 +47,7 @@ export const buildManifestConfig = (
 };
 
 // eslint-disable-next-line no-array-constructor
-const buildSiteCodesParams = (sites = new Array<string>(), camelCase = false): string => {
+export const buildSiteCodesParams = (sites = new Array<string>(), camelCase = false): string => {
   const param = camelCase ? 'siteCode' : 'sitecode';
   return sites.reduce((sitesString, siteCode, index) => (
     `${sitesString}${index === 0 ? '' : '&'}${param}=${siteCode}`

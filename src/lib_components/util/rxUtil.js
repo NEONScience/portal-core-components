@@ -57,8 +57,8 @@ export const getJson = (
 export default getJson;
 
 /**
-  Convert an array of obbservables into a single observable block that reports
-  progress as the number of completed observables out of the total.
+  Convert an array of obbservables into a single observable block that reports progress
+  (the number of completed observables out of the total) as a percentage from 0 to 100
  */
 export const forkJoinWithProgress = (arrayOfObservables) => defer(() => {
   let counter = 0;

@@ -32,6 +32,7 @@ jest.mock('../lib_components/components/NeonContext/NeonContext', () => (
 
 NeonContext.useNeonContextState.mockReturnValue([
   {
+    ...NeonContext.DEFAULT_STATE,
     data: {
       sites: sitesJSON,
       states: statesJSON,
