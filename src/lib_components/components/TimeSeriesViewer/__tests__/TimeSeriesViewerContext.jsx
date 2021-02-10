@@ -1473,33 +1473,42 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
         expect(newState.selection.activelySelectingDateRange).toStrictEqual(['2020-01', '2020-04']);
       });
     });
-    /*
     describe('selectVariables', () => {
-      test('', () => {
+      beforeEach(() => {
+        state.variables = {
+          v1: { units: 'foo' },
+          v2: { units: 'foo' },
+          v3: { units: 'foo' },
+          v4: { units: 'bar' },
+          v5: { units: 'bar' },
+        };
+      });
+      test('applies variables selection (1 selected unit / y axis)', () => {
+        const newState = reducer(state, { type: 'selectVariables', variables: ['v1', 'v3'] });
+        expect(newState.selection.variables).toStrictEqual(['v1', 'v3']);
+        expect(newState.selection.yAxes.y1.units).toBe('foo');
+        expect(newState.selection.yAxes.y2).toStrictEqual(DEFAULT_STATE.selection.yAxes.y2);
+      });
+      test('applies variables selection (2 selected units / y axes)', () => {
+        const newState = reducer(state, { type: 'selectVariables', variables: ['v1', 'v4'] });
+        expect(newState.selection.variables).toStrictEqual(['v1', 'v4']);
+        expect(newState.selection.yAxes.y1.units).toBe('foo');
+        expect(newState.selection.yAxes.y2.units).toBe('bar');
+      });
+      test('preserves logscale from y2 if going from 2 axes to 1 with y2 being kept as y1', () => {
+        state.selection.variables = ['v1', 'v4', 'v5'];
+        state.selection.yAxes.y1.units = 'foo';
+        state.selection.yAxes.y1.logscale = false;
+        state.selection.yAxes.y2.units = 'bar';
+        state.selection.yAxes.y2.logscale = true;
+        const newState = reducer(state, { type: 'selectVariables', variables: ['v4', 'v5'] });
+        expect(newState.selection.variables).toStrictEqual(['v4', 'v5']);
+        expect(newState.selection.yAxes.y1.units).toBe('bar');
+        expect(newState.selection.yAxes.y1.logscale).toBe(true);
+        expect(newState.selection.yAxes.y2).toStrictEqual(DEFAULT_STATE.selection.yAxes.y2);
       });
     });
-    */
 
-    /*
-yAxes:
-y1:
-axisRange: (2) [5.08, 15.64]
-dataRange: (2) [6.06, 14.66]
-logscale: false
-precision: 2
-rangeMode: "CENTERED"
-standardDeviation: 0.98
-units: "milligramsPerLiter"
-__proto__: Object
-y2:
-axisRange: (2) [0, 0]
-dataRange: (2) [null, null]
-logscale: false
-precision: 0
-rangeMode: "CENTERED"
-standardDeviation: 0
-units: null
-     */
     // select axis actions
     describe('selectYAxisRangeMode', () => {
       test('does nothing if either the axis or the mode are invalid', () => {
@@ -1688,27 +1697,233 @@ units: null
       });
     });
 
-    /*
     describe('selectTimeStep', () => {
-      test('', () => {
+      test('does nothing if action time step is not available', () => {
+        state.availableTimeSteps = new Set(['auto', '2min', '30min']);
+        const newState = reducer(state, { type: 'selectTimeStep', timeStep: '15min' });
+        expect(newState).toStrictEqual(state);
+      });
+      test('applies action time step if available', () => {
+        state.availableTimeSteps = new Set(['auto', '2min', '30min']);
+        state.selection.timeStep = 'auto';
+        const newState = reducer(state, { type: 'selectTimeStep', timeStep: '30min' });
+        expect(newState.selection.timeStep).toBe('30min');        
       });
     });
+
+    // select site actions
     describe('selectAddSite', () => {
-      test('', () => {
+      test('does nothing if trying to add a site that is not in the product', () => {
+        state.product.sites = {
+          JERC: {
+            ...cloneDeep(expectedInitialSite),
+            availableMonths: ['2020-01', '2020-02'],
+          },
+        };
+        const newState = reducer(state, { type: 'selectAddSite', siteCode: 'BLUE' });
+        expect(newState).toStrictEqual(state);
+      });
+      test('does nothing if trying to add a site that is already selected', () => {
+        state.product.sites = {
+          JERC: {
+            ...cloneDeep(expectedInitialSite),
+            availableMonths: ['2020-01', '2020-02'],
+          },
+        };
+        state.selection.sites = [{ siteCode: 'JERC', positions: [] }];
+        const newState = reducer(state, { type: 'selectAddSite', siteCode: 'JERC' });
+        expect(newState).toStrictEqual(state);
+      });
+      test('adds a valid unselected site to the selection', () => {
+        state.product.sites = {
+          JERC: {
+            ...cloneDeep(expectedInitialSite),
+            availableMonths: ['2020-01', '2020-02'],
+            positions: {
+              '000.030': { history: [] },
+              '000.010': { history: [] },
+            },
+          },
+        };
+        const newState = reducer(state, { type: 'selectAddSite', siteCode: 'JERC' });
+        expect(newState.selection.sites).toStrictEqual([
+          { siteCode: 'JERC', positions: ['000.010'] }
+        ]);
       });
     });
     describe('updateSelectedSites', () => {
-      test('', () => {
+      test('does nothing if action siteCodes is an empty set', () => {
+        state.product.sites = {
+          JERC: { ...cloneDeep(expectedInitialSite) },
+          BLUE: { ...cloneDeep(expectedInitialSite) },
+        };
+        state.selection.sites = [{ siteCode: 'JERC', positions: [] }];
+        const newState = reducer(state, { type: 'updateSelectedSites', siteCodes: new Set() });
+        expect(newState).toStrictEqual(state);
+      });
+      test('adds to and removes from selection as necessary, ignoring any invalid sites', () => {
+        state.product.sites = {
+          JERC: { ...cloneDeep(expectedInitialSite), positions: { '000.030': { history: [] } } },
+          BLUE: { ...cloneDeep(expectedInitialSite), positions: { '000.070': { history: [] } } },
+          HARV: { ...cloneDeep(expectedInitialSite), positions: { '000.090': { history: [] } } },
+          FLNT: { ...cloneDeep(expectedInitialSite), positions: { '010.010': { history: [] } } },
+        };
+        state.selection.sites = [
+          { siteCode: 'JERC', positions: ['000.030'] },
+          { siteCode: 'HARV', positions: ['000.090'] },
+        ];
+        const newState = reducer(
+          state,
+          { type: 'updateSelectedSites', siteCodes: new Set(['HARV', 'FLNT', 'ABBY']) },
+        );
+        expect(newState.selection.sites).toStrictEqual([
+          { siteCode: 'HARV', positions: ['000.090'] },
+          { siteCode: 'FLNT', positions: ['010.010'] },
+        ]);
       });
     });
     describe('selectRemoveSite', () => {
-      test('', () => {
+      test('does nothing if there is only one selected set (can never have zero selected)', () => {
+        state.product.sites = {
+          JERC: { ...cloneDeep(expectedInitialSite), positions: { '000.030': { history: [] } } },
+          BLUE: { ...cloneDeep(expectedInitialSite), positions: { '000.070': { history: [] } } },
+        };
+        state.selection.sites = [
+          { siteCode: 'JERC', positions: ['000.030'] },
+        ];
+        const newState = reducer(state, { type: 'selectRemoveSite', siteCode: 'JERC' });
+        expect(newState).toStrictEqual(state);
+      });
+      test('does nothing action site is not currently selected', () => {
+        state.product.sites = {
+          JERC: { ...cloneDeep(expectedInitialSite), positions: { '000.030': { history: [] } } },
+          BLUE: { ...cloneDeep(expectedInitialSite), positions: { '000.070': { history: [] } } },
+          HARV: { ...cloneDeep(expectedInitialSite), positions: { '000.090': { history: [] } } },
+        };
+        state.selection.sites = [
+          { siteCode: 'JERC', positions: ['000.030'] },
+          { siteCode: 'BLUE', positions: ['000.070'] },
+        ];
+        const newState = reducer(state, { type: 'selectRemoveSite', siteCode: 'HARV' });
+        expect(newState).toStrictEqual(state);
+      });
+      test('removes only the action site if currently selected at least one will remain', () => {
+        state.product.sites = {
+          JERC: { ...cloneDeep(expectedInitialSite), positions: { '000.030': { history: [] } } },
+          BLUE: { ...cloneDeep(expectedInitialSite), positions: { '000.070': { history: [] } } },
+          HARV: { ...cloneDeep(expectedInitialSite), positions: { '000.090': { history: [] } } },
+        };
+        state.selection.sites = [
+          { siteCode: 'JERC', positions: ['000.030'] },
+          { siteCode: 'HARV', positions: ['000.090'] },
+        ];
+        const newState = reducer(state, { type: 'selectRemoveSite', siteCode: 'JERC' });
+        expect(newState.selection.sites).toStrictEqual([
+          { siteCode: 'HARV', positions: ['000.090'] },
+        ]);       
       });
     });
     describe('selectSitePositions', () => {
-      test('', () => {
+      test('does nothing if action siteCode does not map to a currently selected site', () => {
+        state.product.sites = {
+          JERC: {
+            ...cloneDeep(expectedInitialSite),
+            positions: {
+              '000.010': { history: [] },
+              '000.030': { history: [] },
+            },
+          },
+          BLUE: {
+            ...cloneDeep(expectedInitialSite),
+            positions: {
+              '000.080': { history: [] },
+              '000.090': { history: [] },
+            },
+          },
+        };
+        state.selection.sites = [
+          { siteCode: 'JERC', positions: ['000.030'] },
+        ];
+        const newState = reducer(
+          state,
+          { type: 'selectSitePositions', siteCode: 'BLUE', positions: ['000.080'] },
+        );
+        expect(newState).toStrictEqual(state); 
+      });
+      test('does nothing if no action positions are present (must have at least one)', () => {
+        state.product.sites = {
+          JERC: {
+            ...cloneDeep(expectedInitialSite),
+            positions: {
+              '000.010': { history: [] },
+              '000.030': { history: [] },
+            },
+          },
+          BLUE: {
+            ...cloneDeep(expectedInitialSite),
+            positions: {
+              '000.080': { history: [] },
+              '000.090': { history: [] },
+            },
+          },
+        };
+        state.selection.sites = [
+          { siteCode: 'JERC', positions: ['000.030'] },
+        ];
+        const newState = reducer(
+          state,
+          { type: 'selectSitePositions', siteCode: 'JERC', positions: [] },
+        );
+        expect(newState).toStrictEqual(state); 
+      });
+      test('does nothing if any action positions are not present on the site', () => {
+        state.product.sites = {
+          JERC: {
+            ...cloneDeep(expectedInitialSite),
+            positions: {
+              '000.010': { history: [] },
+              '000.030': { history: [] },
+            },
+          },
+          BLUE: {
+            ...cloneDeep(expectedInitialSite),
+            positions: {
+              '000.080': { history: [] },
+              '000.090': { history: [] },
+            },
+          },
+        };
+        state.selection.sites = [
+          { siteCode: 'JERC', positions: ['000.030'] },
+        ];
+        const newState = reducer(
+          state,
+          { type: 'selectSitePositions', siteCode: 'JERC', positions: ['000.010', '000.080'] },
+        );
+        expect(newState).toStrictEqual(state); 
+      });
+      test('applies positions to the already-selected site', () => {
+        state.product.sites = {
+          JERC: {
+            ...cloneDeep(expectedInitialSite),
+            positions: {
+              '000.010': { history: [] },
+              '000.030': { history: [] },
+              '000.050': { history: [] },
+            },
+          },
+        };
+        state.selection.sites = [
+          { siteCode: 'JERC', positions: ['000.030'] },
+        ];
+        const newState = reducer(
+          state,
+          { type: 'selectSitePositions', siteCode: 'JERC', positions: ['000.010', '000.050'] },
+        );
+        expect(newState.selection.sites).toStrictEqual([
+          { siteCode: 'JERC', positions: ['000.010', '000.050'] },
+        ]);
       });
     });
-    */
   });
 });

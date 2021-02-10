@@ -912,8 +912,8 @@ const reducer = (state, action) => {
     case 'selectVariables':
       parsedContent = limitVariablesToTwoUnits(state, action.variables);
       newState.selection.variables = parsedContent.variables;
+      /* eslint-disable prefer-destructuring */
       if (parsedContent.selectedUnits.length === 1) {
-        // eslint-disable-next-line prefer-destructuring
         newState.selection.yAxes.y1.units = parsedContent.selectedUnits[0];
         if (newState.selection.yAxes.y2.units === parsedContent.selectedUnits[0]) {
           newState.selection.yAxes.y1.logscale = newState.selection.yAxes.y2.logscale;
@@ -922,15 +922,14 @@ const reducer = (state, action) => {
       } else {
         if (!newState.selection.yAxes.y1.units) {
           newState.selection.yAxes.y1 = cloneDeep(DEFAULT_AXIS_STATE);
-          // eslint-disable-next-line prefer-destructuring
-          newState.selection.yAxes.y1.units = parsedContent.selectedUnits[0];
         }
         if (!newState.selection.yAxes.y2.units) {
           newState.selection.yAxes.y2 = cloneDeep(DEFAULT_AXIS_STATE);
-          // eslint-disable-next-line prefer-destructuring
-          newState.selection.yAxes.y2.units = parsedContent.selectedUnits[1];
         }
+        newState.selection.yAxes.y1.units = parsedContent.selectedUnits[0];
+        newState.selection.yAxes.y2.units = parsedContent.selectedUnits[1];
       }
+      /* eslint-enable prefer-destructuring */
       calcSelection();
       calcStatus();
       return newState;
@@ -1008,7 +1007,10 @@ const reducer = (state, action) => {
       calcStatus();
       return newState;
     case 'updateSelectedSites':
-      if (!action.siteCodes.size) { return state; }
+      if (
+        !action.siteCodes || !action.siteCodes.constructor
+          || action.siteCodes.constructor.name !== 'Set' || !action.siteCodes.size
+      ) { return state; }
       // Remove any sites that are no longer in the selected set
       newState.selection.sites = newState.selection.sites
         .filter((site) => action.siteCodes.has(site.siteCode));
