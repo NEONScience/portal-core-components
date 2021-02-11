@@ -35,6 +35,7 @@ export const optionalEnvironmentVars = [
   'REACT_APP_NEON_PATH_DOWNLOAD_API',
   'REACT_APP_NEON_PATH_MANIFEST_API',
   'REACT_APP_NEON_PATH_PRODUCTS_API',
+  'REACT_APP_NEON_PATH_PROTOTYPE_DATA_API',
   'REACT_APP_NEON_PATH_RELEASES_API',
   'REACT_APP_NEON_PATH_SITES_API',
   'REACT_APP_NEON_PATH_LOCATIONS_API',
@@ -77,6 +78,7 @@ const NeonEnvironment = {
   getApiPath: {
     aopDownload: () => process.env.REACT_APP_NEON_PATH_AOP_DOWNLOAD_API,
     data: () => process.env.REACT_APP_NEON_PATH_DATA_API,
+    prototype: () => process.env.REACT_APP_NEON_PATH_PROTOTYPE_DATA_API,
     documents: () => process.env.REACT_APP_NEON_PATH_DOCUMENTS_API,
     download: () => process.env.REACT_APP_NEON_PATH_DOWNLOAD_API,
     manifest: () => process.env.REACT_APP_NEON_PATH_MANIFEST_API,
