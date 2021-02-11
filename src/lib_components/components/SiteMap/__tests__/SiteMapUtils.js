@@ -111,6 +111,12 @@ describe('SiteMap - SiteMapUtils', () => {
         'X', 'Y', 'Z',
       ]);
     });
+    test('correctly excludes boundaries that do not intersect the bounds', () => {
+      const smallerBounds = { lat: [15, 20], lng: [-6, 0] };
+      expect(calculateLocationsInBounds(coordLocations, smallerBounds)).toStrictEqual([
+        'Y',
+      ]);
+    });
     test('correctly returns empty set for invalid inputs', () => {
       expect(calculateLocationsInBounds({})).toStrictEqual([]);
       expect(calculateLocationsInBounds('bad locations')).toStrictEqual([]);

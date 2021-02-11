@@ -41,6 +41,7 @@ import {
 import SiteMapContext from './SiteMapContext';
 import {
   getHref,
+  calculateLocationsInBounds,
   FEATURES,
   FEATURE_TYPES,
   NLCD_CLASSES,
@@ -238,6 +239,7 @@ const SiteMapFeature = (props) => {
   */
   const {
     neonContextHydrated,
+    map: { bounds: mapBounds },
     focusLocation: { current: focusLocation },
     featureData: {
       [parentFeature ? parentFeature.type : featureType]: {
@@ -1326,6 +1328,10 @@ const SiteMapFeature = (props) => {
       }
       // Polygon
       if (featureShape === 'Polygon') {
+        // If the polygon boundary does not intersect the map bounds then do not render it
+        // We see this when the map bounds are entirely contained within a boundary but the
+        // feature is still visible, resulting in an always-on popup with no context otherwise
+        if (!calculateLocationsInBounds({ X: shapeData }, mapBounds).length) { return null; }
         shapeProps = {
           ...featureStyle || {},
           ...polygonInteractionProps,
