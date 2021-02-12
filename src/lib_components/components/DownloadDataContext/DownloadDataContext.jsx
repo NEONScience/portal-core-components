@@ -288,7 +288,10 @@ const newStateIsValid = (key, value, validValues = []) => {
         && value.every((id) => idList.includes(id))
       );
     default:
-      return newStateIsAllowable(key, value) && validValues.includes(value);
+      return (
+        newStateIsAllowable(key, value)
+          && (!Array.isArray(validValues) || validValues.includes(value))
+      );
   }
 };
 
