@@ -29,7 +29,7 @@ const dataThemes = {
   },
   landcover: {
     title: 'Land Cover & Processes',
-    aliases: ['landuse', 'Land Use, Land Cover, and Land Processes'],
+    aliases: ['landuse', 'Land Cover and Processes', 'Land Use, Land Cover, and Land Processes'],
     src: LandCoverSVG,
   },
   organisms: {
@@ -47,10 +47,12 @@ const DataThemeIcon = (props) => {
     className,
     ...other
   } = props;
-  const dataTheme = dataThemes[theme]
-        || Object.values(dataThemes).find(
-          (entry) => theme === entry.title || entry.aliases.includes(theme),
-        );
+  const dataTheme = dataThemes[theme] || Object.values(dataThemes).find(
+    (entry) => theme === entry.title || entry.aliases.includes(theme),
+  );
+
+  if (!dataTheme) { return null; }
+
   const elementProps = {
     src: dataTheme.src,
     alt: dataTheme.title,
