@@ -148,6 +148,10 @@ const NeonApi = {
   getPrototypeDatasetObservable: (uuid) => (
     getJsonObservable(`${NeonEnvironment.getFullApiPath('prototype')}/datasets/${uuid}`)
   ),
+  getPrototypeManifestObservable: (uuid) => (
+    // eslint-disable-next-line max-len
+    getJsonObservable(`${NeonEnvironment.getFullApiPath('manifest')}/prototype/manifest?uuid=${uuid}`)
+  ),
   getPrototypeDataFileObservable: (uuid, fileName) => (
     getJsonObservable(`${NeonEnvironment.getFullApiPath('prototype')}/data/${uuid}/${fileName}`)
   ),
