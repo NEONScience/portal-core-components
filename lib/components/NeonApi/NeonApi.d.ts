@@ -17,7 +17,7 @@ declare namespace NeonApi {
     export function getProductObservable(productCode: string, release?: string): import("rxjs").Observable<any>;
     export function getPrototypeDatasetsObservable(): import("rxjs").Observable<any>;
     export function getPrototypeDatasetObservable(uuid: any): import("rxjs").Observable<any>;
-    export function getPrototypeManifestObservable(uuid: any): import("rxjs").Observable<any>;
+    export function getPrototypeManifestRollupObservable(uuid: any): import("rxjs").Observable<any>;
     export function getPrototypeDataFileObservable(uuid: any, fileName: any): import("rxjs").Observable<any>;
     export function getReleasesObservable(): import("rxjs").Observable<any>;
     export function getReleaseObservable(release: string): import("rxjs").Observable<any>;
