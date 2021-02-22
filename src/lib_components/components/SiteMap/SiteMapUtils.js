@@ -1465,7 +1465,10 @@ export const DEFAULT_STATE = {
   featureDataFetchesHasAwaiting: false, // Boolean: track whether any data fetches are awaiting call
   featureDataFetches: Object.fromEntries(
     Object.keys(FEATURE_DATA_SOURCES)
-      .filter((dataSource) => dataSource !== FEATURE_DATA_SOURCES.NEON_CONTEXT)
+      .filter((dataSource) => (
+        // eslint-disable-next-line max-len
+        ![FEATURE_DATA_SOURCES.MANUAL_LOCATIONS, FEATURE_DATA_SOURCES.NEON_CONTEXT].includes(dataSource)
+      ))
       .map((dataSource) => [dataSource, {}]),
   ),
   featureData: Object.fromEntries(
@@ -1601,6 +1604,12 @@ export const hydrateNeonContextData = (state, neonContextData) => {
         const featureType = FEATURE_TYPES.SITES.KEY;
         const featureKey = FEATURES.DECOMMISSIONED_SITES.KEY;
         newState.featureData[featureType][featureKey][siteCode] = manualLocation;
+        // Harmonize some values
+        newState.featureData[featureType][featureKey][siteCode].type = 'Decommissioned';
+        newState.featureData[featureType][featureKey][siteCode].stateCode = manualLocation.state;
+        newState.featureData[featureType][featureKey][siteCode].domainCode = manualLocation.domain;
+        // eslint-disable-next-line max-len
+        newState.featureData[featureType][featureKey][siteCode].description = manualLocation.siteName;
       }
     });
   }

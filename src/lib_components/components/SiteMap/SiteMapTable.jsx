@@ -25,13 +25,14 @@ import {
   FEATURES,
   NLCD_CLASSES,
   FEATURE_TYPES,
+  MANUAL_LOCATION_TYPES,
   MIN_TABLE_MAX_BODY_HEIGHT,
   PLOT_SAMPLING_MODULES,
   UNSELECTABLE_MARKER_FILTER,
   calculateLocationsInBounds,
 } from './SiteMapUtils';
 
-const ucWord = (word) => `${word.slice(0, 1).toUpperCase()}${word.slice(1).toLowerCase()}`;
+const ucWord = (word = '') => `${word.slice(0, 1).toUpperCase()}${word.slice(1).toLowerCase()}`;
 
 const useStyles = makeStyles((theme) => ({
   tableContainer: {
@@ -165,6 +166,7 @@ const SiteMapTable = () => {
 
   // Site Map State
   const [state, dispatch] = SiteMapContext.useSiteMapContext();
+  const { manualLocationData } = state;
   const {
     focus,
     fullHeight,
@@ -235,7 +237,15 @@ const SiteMapTable = () => {
   const getParent = (type, location) => {
     let source = null;
     if (type === 'SITE') {
-      source = { code: 'siteCode', data: state.sites };
+      let data = state.sites;
+      if (Array.isArray(manualLocationData) && manualLocationData.length) {
+        data = {};
+        manualLocationData.forEach((ml) => {
+          const { siteCode } = ml;
+          data[siteCode] = Object.keys(state.sites).includes(siteCode) ? state.sites[siteCode] : ml;
+        });
+      }
+      source = { code: 'siteCode', data };
     } else if (type === 'STATE') {
       source = { code: 'stateCode', data: state.featureData.STATES.STATES };
     } else if (type === 'DOMAIN') {
@@ -304,6 +314,13 @@ const SiteMapTable = () => {
   if (selectionActive && selectableItems && hideUnselectable) {
     initialRows = initialRows.filter((item) => selectableItems.has(item));
   }
+  const hasPrototypeSites = (manualLocationData || []).some((ml) => (
+    ml.manualLocationType === MANUAL_LOCATION_TYPES.PROTOTYPE_SITE
+  ));
+  if (hasPrototypeSites) {
+    const visibleSites = manualLocationData.map((ml) => ml.siteCode);
+    initialRows = initialRows.filter((item) => visibleSites.includes(item));
+  }
   const rows = initialRows.map((key) => locations[key]);
   if (selectionActive) {
     rows.forEach((row, idx) => {
@@ -344,18 +361,23 @@ const SiteMapTable = () => {
       customSort: (rowA, rowB) => {
         const siteA = getSite(rowA);
         const siteB = getSite(rowB);
-        return siteA.description > siteB.description ? -1 : 1;
+        const aName = siteA.description;
+        const bName = siteB.description;
+        return aName > bName ? -1 : 1;
       },
       render: (row) => {
         const site = getSite(row);
         if (!site) { return null; }
-        const featureKey = `${site.terrain.toUpperCase()}_${site.type.toUpperCase()}_SITES`;
+        const isDecommissioned = site.manualLocationType === MANUAL_LOCATION_TYPES.PROTOTYPE_SITE;
+        const featureKey = isDecommissioned
+          ? FEATURES.DECOMMISSIONED_SITES.KEY
+          : `${site.terrain.toUpperCase()}_${site.type.toUpperCase()}_SITES`;
         const unselectable = selectionActive && !rowIsSelectable(row);
         return (
           <div>
             <div className={classes.siteName}>
               {renderFeatureIcon(featureKey, unselectable)}
-              <span>{`${site.description} (${site.siteCode})`}</span>
+              <span>{`${site.description || 'Unnamed Site'} (${site.siteCode})`}</span>
             </div>
             <div className={classes.startFlex} style={{ marginLeft: Theme.spacing(-0.75) }}>
               <Tooltip title={`Jump to ${site.siteCode} on the map`}>
@@ -370,30 +392,34 @@ const SiteMapTable = () => {
                   <MarkerIcon fontSize="inherit" />
                 </IconButton>
               </Tooltip>
-              <Tooltip title={`Visit the ${site.siteCode} site details page`}>
-                <IconButton
-                  size="small"
-                  color="primary"
-                  className={classes.iconButton}
-                  href={`${getHref('SITE_DETAILS', site.siteCode)}`}
-                  data-selenium="sitemap-table-site-button-siteDetails"
-                  aria-label="Visit site details page"
-                >
-                  <InfoIcon fontSize="inherit" />
-                </IconButton>
-              </Tooltip>
-              <Tooltip title={`Explore data products for ${site.siteCode}`}>
-                <IconButton
-                  size="small"
-                  color="primary"
-                  className={classes.iconButton}
-                  href={`${getHref('EXPLORE_DATA_PRODUCTS_BY_SITE', site.siteCode)}`}
-                  data-selenium="sitemap-table-site-button-exploreDataProducts"
-                  aria-label="Explore data products for this site"
-                >
-                  <ExploreDataProductsIcon fontSize="inherit" />
-                </IconButton>
-              </Tooltip>
+              {isDecommissioned ? null : (
+                <>
+                  <Tooltip title={`Visit the ${site.siteCode} site details page`}>
+                    <IconButton
+                      size="small"
+                      color="primary"
+                      className={classes.iconButton}
+                      href={`${getHref('SITE_DETAILS', site.siteCode)}`}
+                      data-selenium="sitemap-table-site-button-siteDetails"
+                      aria-label="Visit site details page"
+                    >
+                      <InfoIcon fontSize="inherit" />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title={`Explore data products for ${site.siteCode}`}>
+                    <IconButton
+                      size="small"
+                      color="primary"
+                      className={classes.iconButton}
+                      href={`${getHref('EXPLORE_DATA_PRODUCTS_BY_SITE', site.siteCode)}`}
+                      data-selenium="sitemap-table-site-button-exploreDataProducts"
+                      aria-label="Explore data products for this site"
+                    >
+                      <ExploreDataProductsIcon fontSize="inherit" />
+                    </IconButton>
+                  </Tooltip>
+                </>
+              )}
             </div>
           </div>
         );
