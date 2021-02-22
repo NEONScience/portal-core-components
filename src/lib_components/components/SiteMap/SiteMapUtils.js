@@ -1738,11 +1738,13 @@ export const getZoomedIcons = (zoom) => {
 // identical to a given state. This is necessary whenever needing to do pixel/latlon projections.
 const getPhantomLeafletMap = (state) => {
   const { aspectRatio: { currentValue: aspectRatio, widthReference } } = state;
-  L.Map.include({
-    getSize: () => new L.Point(widthReference, widthReference * aspectRatio),
+  const PhantomMapClass = L.Map.extend({
+    includes: {
+      getSize: () => new L.Point(widthReference, widthReference * aspectRatio),
+    },
   });
   const element = document.createElement('div');
-  const map = new L.Map(element, {
+  const map = new PhantomMapClass(element, {
     center: state.map.center,
     zoom: state.map.zoom,
   });
