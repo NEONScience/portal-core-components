@@ -1711,12 +1711,13 @@ export const SITE_MAP_DEFAULT_PROPS = {
    to the current zoom level and keep that in state. It is regenerated any time the zoom changes.
 */
 // Get a single zoomed Leaflet icon instance
-const getZoomedIcon = (
+export const getZoomedIcon = (
   featureKey = null,
   zoom = 3,
   highlight = HIGHLIGHT_STATUS.NONE,
   selection = SELECTION_STATUS.UNSELECTED,
 ) => {
+  const round = (x) => Number.parseFloat(x.toFixed(3), 10);
   const feature = FEATURES[featureKey] || {};
   const featureHasIcon = (
     feature && feature.iconSvg
@@ -1749,18 +1750,18 @@ const getZoomedIcon = (
   const minScale = 0.2;
   const maxScale = Math.max((maxZoom - minZoom) / (MAP_ZOOM_RANGE[1] - MAP_ZOOM_RANGE[0]), 0.5);
   const baseScale = ((zoom || minZoom) - minZoom) / (maxZoom - minZoom);
-  const scale = (minScale + (baseScale * (maxScale - minScale))) * iconScale;
+  const scale = Math.max((minScale + (baseScale * (maxScale - minScale))) * iconScale, minScale);
   const iconProps = {
     iconUrl,
     iconRetinaUrl: iconUrl,
-    iconSize: iconSize.map((x) => x * scale),
-    iconAnchor: iconAnchor.map((x) => x * scale),
-    popupAnchor: popupAnchor.map((x) => x * scale),
+    iconSize: iconSize.map((x) => round(x * scale)),
+    iconAnchor: iconAnchor.map((x) => round(x * scale)),
+    popupAnchor: popupAnchor.map((x) => round(x * scale)),
   };
   if (shadowUrl && shadowSize && shadowAnchor) {
     iconProps.shadowUrl = shadowUrl;
-    iconProps.shadowSize = shadowSize.map((x) => x * scale);
-    iconProps.shadowAnchor = shadowAnchor.map((x) => x * scale);
+    iconProps.shadowSize = shadowSize.map((x) => round(x * scale));
+    iconProps.shadowAnchor = shadowAnchor.map((x) => round(x * scale));
   }
   return new L.Icon(iconProps);
 };

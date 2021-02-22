@@ -6,10 +6,19 @@ import {
   getHref,
   hydrateNeonContextData,
   mapIsAtFocusLocation,
+  getZoomedIcon,
   DEFAULT_STATE,
   FEATURES,
+  MANUAL_LOCATION_TYPES,
   SITE_MAP_PROP_TYPES,
+  HIGHLIGHT_STATUS,
+  SELECTION_STATUS,
 } from '../SiteMapUtils';
+
+import L from 'leaflet';
+jest.mock('leaflet', () => ({
+  Icon: jest.fn(),
+}));
 
 describe('SiteMap - SiteMapUtils', () => {
   /**
@@ -246,7 +255,41 @@ describe('SiteMap - SiteMapUtils', () => {
     });
   });
 
-  describe('hydrateNeonContextData', () => {
+  describe('hydrateNeonContextData', () => {    
+    const neonContextData = {
+      sites: {
+        ABBY: {
+          type: 'RELOCATABLE', terrain: 'TERRESTRIAL', stateCode: 'WA', domainCode: 'D16',
+        },
+        CLBJ: {
+          type: 'CORE', terrain: 'TERRESTRIAL', stateCode: 'TX', domainCode: 'D11',
+        },
+        SUGG: {
+          type: 'CORE', terrain: 'AQUATIC', stateCode: 'FL', domainCode: 'D03',
+        },
+        WLOU: {
+          type: 'RELOCATABLE', terrain: 'AQUATIC', stateCode: 'CO', domainCode: 'D13',
+        },
+      },
+      states: {
+        CO: { name: 'Colorado' },
+        FL: { name: 'Florida' },
+        TX: { name: 'Texas' },
+        WA: { name: 'Washington' },
+      },
+      domains: {
+        D03: { name: 'Southeast' },
+        D11: { name: 'Southern Plains' },
+        D13: { name: 'Southern Rockies and Colorado Plateau' },
+        D16: { name: 'Pacific Northwest' },
+      },
+      stateSites: {
+        CO: ['WLOU'], FL: ['SUGG'], TX: ['CLBJ'], WA: ['ABBY'],
+      },
+      domainSites: {
+        D03: ['SUGG'], D11: ['CLBJ'], D13: ['WLOU'], D16: ['ABBY'],
+      },
+    };
     test('applies NeonContext data correctly', () => {
       const initialState = {
         neonContextHydrated: false,
@@ -260,40 +303,6 @@ describe('SiteMap - SiteMapUtils', () => {
           },
           STATES: { STATES: {} },
           DOMAINS: { DOMAINS: {} },
-        },
-      };
-      const neonContextData = {
-        sites: {
-          ABBY: {
-            type: 'RELOCATABLE', terrain: 'TERRESTRIAL', stateCode: 'WA', domainCode: 'D16',
-          },
-          CLBJ: {
-            type: 'CORE', terrain: 'TERRESTRIAL', stateCode: 'TX', domainCode: 'D11',
-          },
-          SUGG: {
-            type: 'CORE', terrain: 'AQUATIC', stateCode: 'FL', domainCode: 'D03',
-          },
-          WLOU: {
-            type: 'RELOCATABLE', terrain: 'AQUATIC', stateCode: 'CO', domainCode: 'D13',
-          },
-        },
-        states: {
-          CO: { name: 'Colorado' },
-          FL: { name: 'Florida' },
-          TX: { name: 'Texas' },
-          WA: { name: 'Washington' },
-        },
-        domains: {
-          D03: { name: 'Southeast' },
-          D11: { name: 'Southern Plains' },
-          D13: { name: 'Southern Rockies and Colorado Plateau' },
-          D16: { name: 'Pacific Northwest' },
-        },
-        stateSites: {
-          CO: ['WLOU'], FL: ['SUGG'], TX: ['CLBJ'], WA: ['ABBY'],
-        },
-        domainSites: {
-          D03: ['SUGG'], D11: ['CLBJ'], D13: ['WLOU'], D16: ['ABBY'],
         },
       };
       expect(hydrateNeonContextData(initialState, neonContextData)).toStrictEqual({
@@ -312,6 +321,137 @@ describe('SiteMap - SiteMapUtils', () => {
             },
             AQUATIC_RELOCATABLE_SITES: {
               WLOU: { ...neonContextData.sites.WLOU },
+            },
+          },
+          STATES: {
+            STATES: {
+              CO: { name: 'Colorado', sites: ['WLOU'] },
+              FL: { name: 'Florida', sites: ['SUGG'] },
+              TX: { name: 'Texas', sites: ['CLBJ'] },
+              WA: { name: 'Washington', sites: ['ABBY'] },
+            },
+          },
+          DOMAINS: {
+            DOMAINS: {
+              D03: { name: 'Southeast', sites: ['SUGG'] },
+              D11: { name: 'Southern Plains', sites: ['CLBJ'] },
+              D13: { name: 'Southern Rockies and Colorado Plateau', sites: ['WLOU'] },
+              D16: { name: 'Pacific Northwest', sites: ['ABBY'] },
+            },
+          },
+        },
+      });
+    });
+    test('applies manualLocationData correctly when present', () => {
+      const initialState = {
+        neonContextHydrated: false,
+        sites: {},
+        featureData: {
+          SITES: {
+            TERRESTRIAL_CORE_SITES: {},
+            AQUATIC_CORE_SITES: {},
+            TERRESTRIAL_RELOCATABLE_SITES: {},
+            AQUATIC_RELOCATABLE_SITES: {},
+            DECOMMISSIONED_SITES: {},
+          },
+          STATES: { STATES: {} },
+          DOMAINS: { DOMAINS: {} },
+        },
+        manualLocationData: [
+          {
+            manualLocationType: MANUAL_LOCATION_TYPES.PROTOTYPE_SITE,
+            siteCode: 'FOOO',
+            siteName: 'fooo site',
+            domain: 'D03',
+            state: 'FL',
+          },
+          {
+            manualLocationType: MANUAL_LOCATION_TYPES.PROTOTYPE_SITE,
+            siteCode: 'ABBY',
+            siteName: 'abby site', // known incorrect, expect context data to override
+            domain: 'D11',
+            state: 'TX',
+          },
+          {
+            manualLocationType: MANUAL_LOCATION_TYPES.PROTOTYPE_SITE,
+            siteCode: 'BRRR',
+            siteName: 'brrr site',
+            domain: 'D16',
+            state: 'WA',
+          },
+        ],
+      };
+      expect(hydrateNeonContextData(initialState, neonContextData)).toStrictEqual({
+        neonContextHydrated: true,
+        sites: { ...neonContextData.sites },
+        manualLocationData: [
+          {
+            manualLocationType: MANUAL_LOCATION_TYPES.PROTOTYPE_SITE,
+            type: 'Decommissioned',
+            siteCode: 'FOOO',
+            siteName: 'fooo site',
+            description: 'fooo site',
+            domain: 'D03',
+            domainCode: 'D03',
+            state: 'FL',
+            stateCode: 'FL',
+          },
+          {
+            manualLocationType: MANUAL_LOCATION_TYPES.PROTOTYPE_SITE,
+            siteCode: 'ABBY',
+            siteName: 'abby site', // known incorrect, expect context data to override
+            domain: 'D11',
+            state: 'TX',
+          },
+          {
+            manualLocationType: MANUAL_LOCATION_TYPES.PROTOTYPE_SITE,
+            type: 'Decommissioned',
+            siteCode: 'BRRR',
+            siteName: 'brrr site',
+            description: 'brrr site',
+            domain: 'D16',
+            domainCode: 'D16',
+            state: 'WA',
+            stateCode: 'WA',
+          },
+        ],
+        featureData: {
+          SITES: {
+            TERRESTRIAL_CORE_SITES: {
+              CLBJ: { ...neonContextData.sites.CLBJ },
+            },
+            AQUATIC_CORE_SITES: {
+              SUGG: { ...neonContextData.sites.SUGG },
+            },
+            TERRESTRIAL_RELOCATABLE_SITES: {
+              ABBY: { ...neonContextData.sites.ABBY },
+            },
+            AQUATIC_RELOCATABLE_SITES: {
+              WLOU: { ...neonContextData.sites.WLOU },
+            },
+            DECOMMISSIONED_SITES: {
+              FOOO: {
+                manualLocationType: MANUAL_LOCATION_TYPES.PROTOTYPE_SITE,
+                type: 'Decommissioned',
+                siteCode: 'FOOO',
+                siteName: 'fooo site',
+                description: 'fooo site',
+                domain: 'D03',
+                domainCode: 'D03',
+                state: 'FL',
+                stateCode: 'FL',
+              },
+              BRRR: {
+                manualLocationType: MANUAL_LOCATION_TYPES.PROTOTYPE_SITE,
+                type: 'Decommissioned',
+                siteCode: 'BRRR',
+                siteName: 'brrr site',
+                description: 'brrr site',
+                domain: 'D16',
+                domainCode: 'D16',
+                state: 'WA',
+                stateCode: 'WA',
+              },
             },
           },
           STATES: {
@@ -381,6 +521,90 @@ describe('SiteMap - SiteMapUtils', () => {
           map: { center: [-68.3, 15] },
         },
       })).toBe(false);
+    });
+  });
+
+  describe('getZoomedIcon', () => {
+    beforeEach(() => { L.Icon.mockReset(); });
+    test('Uses placeholder when feature has no defined icon', () => {
+      getZoomedIcon(FEATURES.TOWER_AIRSHEDS.KEY);
+      expect(L.Icon.mock.calls.length).toBe(1);
+      expect(L.Icon.mock.calls[0].length).toBe(1);
+      expect(L.Icon.mock.calls[0][0]).toStrictEqual({
+        iconUrl: 'icon-placeholder.svg',
+        iconRetinaUrl: 'icon-placeholder.svg',
+        iconSize: [ 15, 15 ],
+        iconAnchor: [ 7.5, 7.5 ],
+        popupAnchor: [ 0, -7.5 ],
+        shadowUrl: 'icon-shape-square-shadow.svg',
+        shadowSize: [ 18.8, 18.8 ],
+        shadowAnchor: [ 9.4, 9.4 ]
+      });
+    });
+    test('Scales appropriately with no defined zoom', () => {
+      getZoomedIcon(FEATURES.POUR_POINTS.KEY);
+      expect(L.Icon.mock.calls.length).toBe(1);
+      expect(L.Icon.mock.calls[0].length).toBe(1);
+      expect(L.Icon.mock.calls[0][0]).toStrictEqual({
+        iconUrl: 'icon-pour-point.svg',
+        iconRetinaUrl: 'icon-pour-point.svg',
+        iconSize: [ 16, 18 ],
+        iconAnchor: [ 8, 9 ],
+        popupAnchor: [ 0, -9 ],
+        shadowUrl: 'icon-shape-homeplate-shadow.svg',
+        shadowSize: [ 20.2, 22.2 ],
+        shadowAnchor: [ 10.1, 11.1 ]
+      });
+    });
+    test('Scales appropriately with defined zoom', () => {
+      getZoomedIcon(FEATURES.TOWERS.KEY, 12);
+      expect(L.Icon.mock.calls.length).toBe(1);
+      expect(L.Icon.mock.calls[0].length).toBe(1);
+      expect(L.Icon.mock.calls[0][0]).toStrictEqual({
+        iconUrl: 'icon-tower.svg',
+        iconRetinaUrl: 'icon-tower.svg',
+        iconSize: [ 48, 48 ],
+        iconAnchor: [ 24, 24 ],
+        popupAnchor: [ 0, -24 ],
+        shadowUrl: 'icon-shape-diamond-shadow.svg',
+        shadowSize: [ 59.52, 59.52 ],
+        shadowAnchor: [ 29.76, 29.76 ]
+      });
+    });
+    test('Handles explicit highlight status', () => {
+      getZoomedIcon(FEATURES.TERRESTRIAL_RELOCATABLE_SITES.KEY, 7, HIGHLIGHT_STATUS.HIGHLIGHT);
+      expect(L.Icon.mock.calls.length).toBe(1);
+      expect(L.Icon.mock.calls[0].length).toBe(1);
+      expect(L.Icon.mock.calls[0][0]).toStrictEqual({
+        iconUrl: 'icon-site-relocatable-terrestrial.svg',
+        iconRetinaUrl: 'icon-site-relocatable-terrestrial.svg',
+        iconSize: [ 34, 34 ],
+        iconAnchor: [ 17, 17 ],
+        popupAnchor: [ 0, -17 ],
+        shadowUrl: 'icon-shape-circle-highlight.svg',
+        shadowSize: [ 51, 51 ],
+        shadowAnchor: [ 25.5, 25.5 ]
+      });
+    });
+    test('Handles explicit selection status', () => {
+      getZoomedIcon(
+        FEATURES.AQUATIC_RELOCATABLE_SITES.KEY,
+        15,
+        HIGHLIGHT_STATUS.NONE,
+        SELECTION_STATUS.SELECTED,
+      );
+      expect(L.Icon.mock.calls.length).toBe(1);
+      expect(L.Icon.mock.calls[0].length).toBe(1);
+      expect(L.Icon.mock.calls[0][0]).toStrictEqual({
+        iconUrl: 'icon-site-relocatable-aquatic-selected.svg',
+        iconRetinaUrl: 'icon-site-relocatable-aquatic-selected.svg',
+        iconSize: [ 79.75, 79.75 ],
+        iconAnchor: [ 39.875, 39.875 ],
+        popupAnchor: [ 0, -39.875 ],
+        shadowUrl: 'icon-shape-circle-shadow.svg',
+        shadowSize: [ 94.25, 94.25 ],
+        shadowAnchor: [ 47.125, 47.125 ],
+      });
     });
   });
 
