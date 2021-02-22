@@ -15,6 +15,7 @@ import {
   FEATURES,
   FEATURE_TYPES,
   FEATURE_DATA_SOURCES,
+  MANUAL_LOCATION_TYPES,
   MAP_MOUSE_MODES,
   MAP_ZOOM_RANGE,
   MIN_TABLE_MAX_BODY_HEIGHT,
@@ -452,6 +453,25 @@ describe('SiteMap - SiteMapContext', () => {
         calculateLocationsInBounds.mockReturnValue([]);
         const newState = calculateFeatureDataFetches(state);
         expect(newState).toStrictEqual(state);
+      });
+      test('only acts on subset of sites if manualLocationData contains prototype sites', () => {
+        calculateLocationsInBounds.mockReturnValue(['SB']);
+        state.manualLocationData = [
+          { manualLocationType: MANUAL_LOCATION_TYPES.PROTOTYPE_SITE, siteCode: 'SB' },
+          { manualLocationType: MANUAL_LOCATION_TYPES.PROTOTYPE_SITE, siteCode: 'FOO' },
+        ];
+        state.map.zoom = SITE_LOCATION_HIERARCHIES_MIN_ZOOM;
+        state.map.bounds = { lat: [-10, 10], lng: [-10, 10] };
+        const newState = calculateFeatureDataFetches(state);
+        expect(
+          Object.keys(newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES]),
+        ).toStrictEqual(['D01']);
+        expect(
+          newState.featureDataFetches[REST_LOCATIONS_API][SITE_LOCATION_HIERARCHIES].D01,
+        ).toBe(FETCH_STATUS.AWAITING_CALL);
+        expect(newState.overallFetch.expected).toBe(1);
+        expect(newState.overallFetch.pendingHierarchy).toBe(1);
+        expect(newState.featureDataFetchesHasAwaiting).toBe(true);
       });
       describe('SITE_LOCATION_HIERARCHIES', () => {
         test('applies no awaiting fetches if zoom is below minimum', () => {

@@ -57,6 +57,7 @@ import {
   VIEWS,
   FEATURES,
   FEATURE_TYPES,
+  FEATURE_DATA_SOURCES,
   MIN_CONTAINER_HEIGHT,
   OVERLAYS,
   OVERLAY_GROUPS,
@@ -315,7 +316,7 @@ const SiteMapContainer = (props) => {
 
   const [state, dispatch] = SiteMapContext.useSiteMapContext();
 
-  // console.log('SITEMAP STATE:', state);
+  console.log('SITEMAP STATE:', state);
   const isLoading = state.overallFetch.expected !== state.overallFetch.completed;
 
   const progressId = `sitemap-progress-${uniqueId()}`;
@@ -336,6 +337,7 @@ const SiteMapContainer = (props) => {
       hideUnselectable,
       showSummary,
     },
+    manualLocationData,
   } = state;
 
   const contentDivProps = {
@@ -827,7 +829,13 @@ const SiteMapContainer = (props) => {
       description,
       descriptionFromParentDataFeatureKey,
       parentDataFeatureKey,
+      dataSource,
     } = feature;
+    // Special case: do not include any features with a dataSource of MANUAL_LOCATIONS if
+    // manualLocationData is not also defined
+    if (dataSource === FEATURE_DATA_SOURCES.MANUAL_LOCATIONS && !manualLocationData) {
+      return null;
+    }
     const handleChange = (event) => {
       dispatch({
         type: 'setLegendFeatureOptionVisibility',

@@ -320,6 +320,36 @@ const propRows = [
   },
 ];
 
+const manualLocationData = [
+  {
+    manualLocationType: 'PROTOTYPE_SITE',
+    domain: 'D04',
+    state: 'FL',
+    siteCode: 'MAME',
+    siteName: 'Mameyes',
+    latitude: 18.02192,
+    longitude: -66.61391,
+  },
+  {
+    manualLocationType: 'PROTOTYPE_SITE',
+    domain: 'D08',
+    state: 'OK',
+    siteCode: 'BLUE',
+    siteName: 'Blue River',
+    latitude: 34.444218,
+    longitude: -96.624201,
+  },
+  {
+    manualLocationType: 'PROTOTYPE_SITE',
+    domain: 'D03',
+    state: 'GA',
+    siteCode: 'ICHA',
+    siteName: 'Ichawaynochaway Creek',
+    latitude: 31.199,
+    longitude: -84.467,
+  },
+];
+
 export default function StyleGuide() {
   const classes = useStyles(Theme);
 
@@ -350,9 +380,11 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
         automatic sizing and aspect ratio based on the current viewport.
       </DocBlock>
 
+      {/*
       <ExampleBlock>
         <SiteMap selection="SITES" />
       </ExampleBlock>
+       */}
       <CodeBlock>
         {`
 <SiteMap />
@@ -369,9 +401,11 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
         codes are also supported.
       </DocBlock>
 
+      {/*
       <ExampleBlock>
         <SiteMap location="D08" />
       </ExampleBlock>
+       */}
       <CodeBlock>
         {`
 <SiteMap location="D08" />
@@ -388,9 +422,11 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
         sizes are also afforded.
       </DocBlock>
 
+      {/*
       <ExampleBlock>
         <SiteMap tableFullHeight />
       </ExampleBlock>
+       */}
       <CodeBlock>
         {`
 <SiteMap tableFullHeight />
@@ -405,6 +441,54 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
         See the <Link href="#MapSelectionButton">Map Selection Button</Link> documentation
         for details and examples.
       </DocBlock>
+
+      <Divider className={classes.divider} />
+      <Typography variant="h4" component="h2" gutterBottom>Manual Locations</Typography>
+
+      <DocBlock>
+        Manual locations...
+      </DocBlock>
+
+      <ExampleBlock>
+        <SiteMap manualLocationData={manualLocationData} />
+      </ExampleBlock>
+      <CodeBlock>
+        {`
+const manualLocationData = [
+  {
+    manualLocationType: 'PROTOTYPE_SITE',
+    domain: 'D04',
+    state: 'FL',
+    siteCode: 'MAME',
+    siteName: 'Mameyes',
+    latitude: 18.02192,
+    longitude: -66.61391,
+  },
+  {
+    manualLocationType: 'PROTOTYPE_SITE',
+    domain: 'D08',
+    state: 'OK',
+    siteCode: 'BLUE',
+    siteName: 'Blue River',
+    latitude: 34.444218,
+    longitude: -96.624201,
+  },
+  {
+    manualLocationType: 'PROTOTYPE_SITE',
+    domain: 'D03',
+    state: 'GA',
+    siteCode: 'ICHA',
+    siteName: 'Ichawaynochaway Creek',
+    latitude: 31.199,
+    longitude: -84.467,
+  },
+];
+
+return (
+  <SiteMap manualLocationData={manualLocationData} />
+);
+        `}
+      </CodeBlock>
 
     </>
   );

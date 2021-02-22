@@ -30,6 +30,7 @@ import iconSiteRelocatableTerrestrialSVG from './svg/icon-site-relocatable-terre
 import iconSiteRelocatableTerrestrialSelectedSVG from './svg/icon-site-relocatable-terrestrial-selected.svg';
 import iconSiteRelocatableAquaticSVG from './svg/icon-site-relocatable-aquatic.svg';
 import iconSiteRelocatableAquaticSelectedSVG from './svg/icon-site-relocatable-aquatic-selected.svg';
+import iconSiteDecommissionedSVG from './svg/icon-site-decommissioned.svg';
 
 import iconBenchmarkSVG from './svg/icon-benchmark.svg';
 import iconBuoySVG from './svg/icon-buoy.svg';
@@ -84,6 +85,9 @@ export const SORT_DIRECTIONS = { ASC: 'ASC', DESC: 'DESC' };
 
 // For consistency in expressing site terrain
 export const SITE_TERRAINS = { AQUATIC: 'AQUATIC', TERRESTRIAL: 'TERRESTRIAL' };
+
+// For consistency in expressing the types of manual location data fed in through props
+export const MANUAL_LOCATION_TYPES = { PROTOTYPE_SITE: 'PROTOTYPE_SITE' };
 
 // For consistency in differentiating discrete sets of data that can be tabulated together.
 // e.g. all LOCATIONS type feature data can coexist in a single table view with a
@@ -140,6 +144,7 @@ export const FEATURE_DATA_SOURCES = {
   GRAPHQL_LOCATIONS_API: 'GRAPHQL_LOCATIONS_API',
   ARCGIS_ASSETS_API: 'ARCGIS_ASSETS_API',
   NEON_CONTEXT: 'NEON_CONTEXT',
+  MANUAL_LOCATIONS: 'MANUAL_LOCATIONS', // data injected by manualLocationData prop
 };
 
 const SELECTED_ICON_OFFSET = 30; // Number of pixels bigger in one dimension for selected icons
@@ -1013,6 +1018,7 @@ export const FEATURES = {
     iconSvg: iconSiteCoreTerrestrialSVG,
     iconSelectedSvg: iconSiteCoreTerrestrialSelectedSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
+    maxZoom: 9,
   },
   TERRESTRIAL_RELOCATABLE_SITES: {
     name: 'Terrestrial Relocatable Sites',
@@ -1028,6 +1034,7 @@ export const FEATURES = {
     iconSvg: iconSiteRelocatableTerrestrialSVG,
     iconSelectedSvg: iconSiteRelocatableTerrestrialSelectedSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
+    maxZoom: 9,
   },
   AQUATIC_CORE_SITES: {
     name: 'Aquatic Core Sites',
@@ -1043,6 +1050,7 @@ export const FEATURES = {
     iconSvg: iconSiteCoreAquaticSVG,
     iconSelectedSvg: iconSiteCoreAquaticSelectedSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
+    maxZoom: 9,
   },
   AQUATIC_RELOCATABLE_SITES: {
     name: 'Aquatic Relocatable Sites',
@@ -1058,6 +1066,23 @@ export const FEATURES = {
     iconSvg: iconSiteRelocatableAquaticSVG,
     iconSelectedSvg: iconSiteRelocatableAquaticSelectedSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
+    maxZoom: 9,
+  },
+  DECOMMISSIONED_SITES: {
+    name: 'Decommissioned Sites',
+    nameSingular: 'Decommissioned Site',
+    type: FEATURE_TYPES.SITES.KEY,
+    description: 'No longer active in observatory',
+    parent: 'SITE_MARKERS',
+    attributes: { type: 'DECOMMISSIONED', terrain: 'DECOMMISSIONED' },
+    dataSource: FEATURE_DATA_SOURCES.MANUAL_LOCATIONS,
+    primaryIdOnly: true,
+    featureShape: 'Marker',
+    iconScale: 1,
+    iconSvg: iconSiteDecommissionedSVG,
+    iconSelectedSvg: iconSiteDecommissionedSVG,
+    iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
+    maxZoom: 19,
   },
 };
 // Replicate keys as attributes to completely eliminate the need to write a feature key string
@@ -1104,6 +1129,12 @@ export const BOUNDARY_COLORS = {
 
 export const calculateFeatureAvailability = (state) => {
   const featureIsAvailable = (feature) => {
+    // Special case: show SITES group at all zoom levels if DECOMMISSIONED_SITES are also shown
+    const hasDecomissionedSites = !!(state.manualLocationData || []).filter((manualLocation) => (
+      manualLocation.manualLocationType === MANUAL_LOCATION_TYPES.PROTOTYPE_SITE
+        && !state.sites[manualLocation.siteCode]
+    )).length;
+    if (feature.KEY === 'SITE_MARKERS' && hasDecomissionedSites) { return true; }
     // Parent must be available (if the feature has a parent)
     if (typeof feature.parent === 'string' && !featureIsAvailable(FEATURES[feature.parent])) {
       return false;
@@ -1458,6 +1489,7 @@ export const DEFAULT_STATE = {
     },
   },
   fullscreen: false,
+  manualLocationData: null,
 };
 
 // Initialize featureData and featureDataFetches objects for all features that have a dataSource
@@ -1557,6 +1589,21 @@ export const hydrateNeonContextData = (state, neonContextData) => {
       sites: neonContextData.domainSites[domainCode],
     };
   });
+  // With NeonContextData now populated attempt to parse any manualLocationData into the main
+  // featureData object so that it can be rendered consistently with other features
+  if (Array.isArray(state.manualLocationData) && state.manualLocationData.length) {
+    state.manualLocationData.forEach((manualLocation) => {
+      const { siteCode } = manualLocation;
+      if (
+        manualLocation.manualLocationType === MANUAL_LOCATION_TYPES.PROTOTYPE_SITE
+          && siteCode && !newState.sites[siteCode]
+      ) {
+        const featureType = FEATURE_TYPES.SITES.KEY;
+        const featureKey = FEATURES.DECOMMISSIONED_SITES.KEY;
+        newState.featureData[featureType][featureKey][siteCode] = manualLocation;
+      }
+    });
+  }
   return newState;
 };
 
@@ -1614,6 +1661,10 @@ export const SITE_MAP_PROP_TYPES = {
   // Filter props
   search: PropTypes.string,
   features: PropTypes.arrayOf(PropTypes.oneOf(Object.keys(FEATURES))),
+  // Manual Location Data
+  manualLocationData: PropTypes.arrayOf(PropTypes.shape({
+    manualLocationType: PropTypes.oneOf(Object.keys(MANUAL_LOCATION_TYPES)).isRequired,
+  })),
 };
 
 export const SITE_MAP_DEFAULT_PROPS = {
@@ -1639,6 +1690,8 @@ export const SITE_MAP_DEFAULT_PROPS = {
   // Filter props
   search: null,
   features: null,
+  // Manual Location Data
+  manualLocationData: null,
 };
 
 /**
