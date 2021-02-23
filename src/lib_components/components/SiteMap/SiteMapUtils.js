@@ -62,6 +62,7 @@ import statesShapesJSON from '../../staticJSON/statesShapes.json';
 import domainsShapesJSON from '../../staticJSON/domainsShapes.json';
 
 const isCoord = (c) => Array.isArray(c) && c.length === 2 && c.every((x) => Number.isFinite(x));
+const round = (x) => Number.parseFloat(x.toFixed(4), 10);
 
 export const MAP_ZOOM_RANGE = [1, 19];
 export const OBSERVATORY_CENTER = [52.68, -110.75];
@@ -1663,7 +1664,6 @@ export const getZoomedIcon = (
   highlight = HIGHLIGHT_STATUS.NONE,
   selection = SELECTION_STATUS.UNSELECTED,
 ) => {
-  const round = (x) => Number.parseFloat(x.toFixed(3), 10);
   const feature = FEATURES[featureKey] || {};
   const featureHasIcon = (
     feature && feature.iconSvg
@@ -1745,8 +1745,11 @@ export const getZoomedIcons = (zoom) => {
 
 // Creare a temporary non-rendering empty Leaflet map with dimensions, center, and zoom all
 // identical to a given state. This is necessary whenever needing to do pixel/latlon projections.
-const getPhantomLeafletMap = (state) => {
-  const { aspectRatio: { currentValue: aspectRatio, widthReference } } = state;
+export const getPhantomLeafletMap = (state) => {
+  const {
+    aspectRatio: { currentValue: aspectRatio, widthReference },
+    map: { center, zoom },
+  } = state;
   const x = widthReference || 400;
   const y = (widthReference * aspectRatio) || 300;
   const PhantomMapClass = L.Map.extend({
@@ -1755,11 +1758,7 @@ const getPhantomLeafletMap = (state) => {
     },
   });
   const element = document.createElement('div');
-  const map = new PhantomMapClass(element, {
-    center: state.map.center,
-    zoom: state.map.zoom,
-  });
-  return map;
+  return new PhantomMapClass(element, { center, zoom });
 };
 
 export const mapIsAtFocusLocation = (state = {}) => ((
@@ -1773,19 +1772,16 @@ export const mapIsAtFocusLocation = (state = {}) => ((
 
 export const getMapStateForFocusLocation = (state = {}) => {
   const { focusLocation } = state;
-  if (!focusLocation || !focusLocation.current) { return state; }
+  if (!focusLocation || !focusLocation.current) { return state.map; }
   const { current } = focusLocation;
   const { type = '', latitude, longitude } = focusLocation.data || {};
+
+  // No latitude/longitude: previous map state
+  if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) { return state.map; }
 
   const newState = { ...state };
   newState.map.bounds = null;
   newState.map.zoom = null;
-
-  // No latitude/longitude: return all defaults
-  if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
-    newState.map.center = SITE_MAP_DEFAULT_PROPS.mapCenter;
-    return newState;
-  }
 
   // Everything else (valid location with a center)
   newState.map.center = [latitude, longitude];
@@ -1821,8 +1817,8 @@ export const getMapStateForFocusLocation = (state = {}) => {
     const newBounds = phantomMap.getBounds() || null;
     newState.map.bounds = !newBounds ? null : {
       /* eslint-disable no-underscore-dangle */
-      lat: [newBounds._southWest.lat, newBounds._northEast.lat],
-      lng: [newBounds._southWest.lng, newBounds._northEast.lng],
+      lat: [round(newBounds._southWest.lat), round(newBounds._northEast.lat)],
+      lng: [round(newBounds._southWest.lng), round(newBounds._northEast.lng)],
       /* eslint-enable no-underscore-dangle */
     };
     phantomMap.remove();
@@ -1849,7 +1845,6 @@ export const findCentroid = (coords = []) => {
   const cLng = Math.atan2(c.y, c.x);
   const cHyp = Math.sqrt((c.x ** 2) + (c.y ** 2));
   const cLat = Math.atan2(c.z, cHyp);
-  const round = (x) => Number.parseFloat(x.toFixed(4), 10);
   return [round(cLat * (180 / Math.PI)), round(cLng * (180 / Math.PI))];
 };
 
@@ -1896,8 +1891,8 @@ export const getMapStateForManualLocationData = (state) => {
     const newBounds = phantomMap.getBounds() || null;
     newState.map.bounds = !newBounds ? null : {
       /* eslint-disable no-underscore-dangle */
-      lat: [newBounds._southWest.lat, newBounds._northEast.lat],
-      lng: [newBounds._southWest.lng, newBounds._northEast.lng],
+      lat: [round(newBounds._southWest.lat), round(newBounds._northEast.lat)],
+      lng: [round(newBounds._southWest.lng), round(newBounds._northEast.lng)],
       /* eslint-enable no-underscore-dangle */
     };
     phantomMap.remove();

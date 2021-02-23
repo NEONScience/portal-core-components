@@ -11,7 +11,9 @@ import {
   getZoomedIcon,
   getZoomedIcons,
   findCentroid,
-  // getMapStateForManualLocationData,
+  getPhantomLeafletMap,
+  getMapStateForFocusLocation,
+  getMapStateForManualLocationData,
   parseManualLocationFeatureData,
   DEFAULT_STATE,
   FEATURES,
@@ -22,10 +24,12 @@ import {
   SELECTION_STATUS,
 } from '../SiteMapUtils';
 
-import L from 'leaflet';
 jest.mock('leaflet', () => ({
+  ...(jest.requireActual('leaflet')),
   Icon: jest.fn(),
 }));
+
+import L from 'leaflet';
 
 const neonContextData = {
   sites: {
@@ -348,6 +352,232 @@ describe('SiteMap - SiteMapUtils', () => {
             },
           },
         },
+      });
+    });
+  });
+
+  describe('getPhantomLeafletMap()', () => {
+    test('provides sane defaults for size when aspect ratio and width reference are null', () => {
+      const state = {
+        map: { center: [0, 0], zoom: null },
+        aspectRatio: { currentValue: null, widthReference: null },
+      };
+      const phantomMap = getPhantomLeafletMap(state);
+      expect(phantomMap.getZoom()).toBe(0);
+      expect(phantomMap.getCenter()).toStrictEqual({ lat: 0, lng: 0 });
+      expect(phantomMap.getSize()).toStrictEqual({ x: 400, y: 300 });
+    });
+    test('provides size based off of aspect ratio and width reference when defined', () => {
+      const state = {
+        map: { center: [70, -110], zoom: 4 },
+        aspectRatio: { currentValue: 0.85, widthReference: 600 },
+      };
+      const phantomMap = getPhantomLeafletMap(state);
+      expect(phantomMap.getZoom()).toBe(4);
+      expect(phantomMap.getCenter()).toStrictEqual({ lat: 70, lng: -110 });
+      expect(phantomMap.getSize()).toStrictEqual({ x: 600, y: 510 });
+    });
+  });
+
+  describe('getMapState functions GAGAGA', () => {
+    const newMapStateBoundsAreValid = (newMapState) => {
+      expect(typeof newMapState.bounds).toBe('object');
+      expect(new Set(Object.keys(newMapState.bounds))).toStrictEqual(new Set(['lat', 'lng']));
+      expect(newMapState.bounds.lat.every((c) => Number.isFinite(c))).toBe(true);
+      expect(newMapState.bounds.lng.every((c) => Number.isFinite(c))).toBe(true);
+      expect(newMapState.bounds.lat[0]).toBeLessThan(newMapState.center[0]);
+      expect(newMapState.bounds.lat[1]).toBeGreaterThan(newMapState.center[0]);
+      expect(newMapState.bounds.lng[0]).toBeLessThan(newMapState.center[1]);
+      expect(newMapState.bounds.lng[1]).toBeGreaterThan(newMapState.center[1]);      
+    };
+    const newMapStateZoomedIconsAreValid = (newMapState) => {
+      expect(typeof newMapState.zoomedIcons).toBe('object');
+      expect(Object.keys(newMapState.zoomedIcons).length).toBeGreaterThan(0);      
+    };
+
+    describe('getMapStateForManualLocationData()', () => {
+      test('returns previous map state if no manual locations are present', () => {
+        const state = {
+          map: { center: [60, -115], zoom: 10 },
+          aspectRatio: { currentValue: 0.6, widthReference: 640 },
+        };
+        const newMapState = getMapStateForManualLocationData(state);
+        expect(newMapState).toStrictEqual(state.map);
+      });
+      test('returns previous map state if manual locations are present but incomplete lat/lon', () => {
+        const state = {
+          map: { center: [60, -115], zoom: 10 },
+          aspectRatio: { currentValue: 0.6, widthReference: 640 },
+          manualLocationData: [{ latitude: 'bar', longitude: -35 }, { baz: 'qux', latitude: 24 }],
+        };
+        const newMapState = getMapStateForManualLocationData(state);
+        expect(newMapState).toStrictEqual(state.map);
+      });
+      test('builds out complete map state for a single manual location', () => {
+        const state = {
+          map: { center: [60, -115], zoom: 10 },
+          aspectRatio: { currentValue: 0.6, widthReference: 640 },
+          manualLocationData: [
+            { latitude: 35, longitude: -85 },
+          ],
+        };
+        const newMapState = getMapStateForManualLocationData(state);
+        expect(typeof newMapState).toBe('object');
+        expect(newMapState.zoom).toBe(6);
+        expect(newMapState.center).toStrictEqual([35, -85]);
+        newMapStateBoundsAreValid(newMapState);
+        newMapStateZoomedIconsAreValid(newMapState);
+      });
+      test('builds out complete map state for multiple manual locations', () => {
+        const state = {
+          map: { center: [60, -115], zoom: 10 },
+          aspectRatio: { currentValue: 0.6, widthReference: 640 },
+          manualLocationData: [
+            { latitude: 18.02192, longitude: -66.61391 },
+            { latitude: 34.444218, longitude: -96.624201 },
+            { latitude: 31.199, longitude: -84.467 },
+          ],
+        };
+        const newMapState = getMapStateForManualLocationData(state);
+        expect(typeof newMapState).toBe('object');
+        expect(newMapState.zoom).toBe(4);
+        expect(newMapState.center).toStrictEqual([28.4642, -81.8378]);
+        newMapStateBoundsAreValid(newMapState);
+        newMapStateZoomedIconsAreValid(newMapState);
+      });
+    });
+
+    describe('getMapStateForFocusLocation()', () => {
+      test('returns previous map state if no focus location is present', () => {
+        const state = {
+          map: { ...cloneDeep(DEFAULT_STATE.map) },
+          aspectRatio: { currentValue: 0.6, widthReference: 640 },
+        };
+        const newMapState = getMapStateForFocusLocation(state);
+        expect(newMapState).toStrictEqual(state.map);
+      });
+      test('returns previous map state if focus location is present but has invalid lat/lon', () => {
+        const state = {
+          map: { ...cloneDeep(DEFAULT_STATE.map) },
+          aspectRatio: { currentValue: 0.6, widthReference: 640 },
+          focusLocation: {
+            current: 'Foo',
+            data: { type: 'bar', latitude: 62, longitude: null },
+          },
+        };
+        const newMapState = getMapStateForFocusLocation(state);
+        expect(newMapState).toStrictEqual(state.map);
+      });
+      test('properly handles type SITE', () => {
+        const state = {
+          map: { ...cloneDeep(DEFAULT_STATE.map) },
+          aspectRatio: { currentValue: 0.6, widthReference: 640 },
+          focusLocation: {
+            current: 'FOO',
+            data: { type: 'SITE', latitude: 62, longitude: -12 },
+          },
+          sites: {
+            FOO: { zoom: 13 },
+          },
+        };
+        const newMapState = getMapStateForFocusLocation(state);
+        expect(typeof newMapState).toBe('object');
+        expect(newMapState.zoom).toBe(13);
+        expect(newMapState.center).toStrictEqual([62, -12]);
+        newMapStateBoundsAreValid(newMapState);
+        newMapStateZoomedIconsAreValid(newMapState);
+      });
+      test('properly handles type DOMAIN', () => {
+        const state = {
+          map: { ...cloneDeep(DEFAULT_STATE.map) },
+          aspectRatio: { currentValue: 0.6, widthReference: 640 },
+          focusLocation: {
+            current: 'D18',
+            data: { type: 'DOMAIN', latitude: 42, longitude: -72 },
+          },
+          featureData: {
+            [FEATURE_TYPES.DOMAINS.KEY]: {
+              [FEATURES.DOMAINS.KEY]: {
+                D18: { zoom: 7 },
+              },
+            },
+          },
+        };
+        const newMapState = getMapStateForFocusLocation(state);
+        expect(typeof newMapState).toBe('object');
+        expect(newMapState.zoom).toBe(7);
+        expect(newMapState.center).toStrictEqual([42, -72]);
+        newMapStateBoundsAreValid(newMapState);
+        newMapStateZoomedIconsAreValid(newMapState);
+      });
+      test('properly handles type STATE', () => {
+        const state = {
+          map: { ...cloneDeep(DEFAULT_STATE.map) },
+          aspectRatio: { currentValue: 0.6, widthReference: 640 },
+          focusLocation: {
+            current: 'CO',
+            data: { type: 'STATE', latitude: 56, longitude: -116 },
+          },
+          featureData: {
+            [FEATURE_TYPES.STATES.KEY]: {
+              [FEATURES.STATES.KEY]: {
+                CO: { zoom: 9 },
+              },
+            },
+          },
+        };
+        const newMapState = getMapStateForFocusLocation(state);
+        expect(typeof newMapState).toBe('object');
+        expect(newMapState.zoom).toBe(9);
+        expect(newMapState.center).toStrictEqual([56, -116]);
+        newMapStateBoundsAreValid(newMapState);
+        newMapStateZoomedIconsAreValid(newMapState); 
+      });
+      test('properly handles other feature type with set focusZoom', () => {
+        const state = {
+          map: { ...cloneDeep(DEFAULT_STATE.map) },
+          aspectRatio: { currentValue: 0.6, widthReference: 640 },
+          focusLocation: {
+            current: 'plotABC',
+            data: { type: 'OS Plot - mam', latitude: 61, longitude: -122 },
+          },
+          featureData: {
+            [FEATURE_TYPES.LOCATIONS.KEY]: {
+              [FEATURES.DISTRIBUTED_MAMMAL_GRIDS.KEY]: {
+                plotABC: { latitude: 61, longitude: -122 },
+              },
+            },
+          },
+        };
+        const newMapState = getMapStateForFocusLocation(state);
+        expect(typeof newMapState).toBe('object');
+        expect(newMapState.zoom).toBe(17);
+        expect(newMapState.center).toStrictEqual([61, -122]);
+        newMapStateBoundsAreValid(newMapState);
+        newMapStateZoomedIconsAreValid(newMapState);
+      });
+      test('properly handles other feature type without set focusZoom', () => {
+        const state = {
+          map: { ...cloneDeep(DEFAULT_STATE.map) },
+          aspectRatio: { currentValue: 0.6, widthReference: 640 },
+          focusLocation: {
+            current: 'buoyABC',
+            data: { type: 'BUOY', latitude: 61, longitude: -122 },
+          },
+          featureData: {
+            [FEATURE_TYPES.LOCATIONS.KEY]: {
+              [FEATURES.AQUATIC_BUOYS.KEY]: {
+                plotABC: { latitude: 61, longitude: -122 },
+              },
+            },
+          },
+        };
+        const newMapState = getMapStateForFocusLocation(state);
+        expect(typeof newMapState).toBe('object');
+        expect(newMapState.zoom).toBe(18);
+        expect(newMapState.center).toStrictEqual([61, -122]);
+        newMapStateBoundsAreValid(newMapState);
+        newMapStateZoomedIconsAreValid(newMapState);
       });
     });
   });
