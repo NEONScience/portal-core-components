@@ -12,6 +12,7 @@ import {
   getZoomedIcons,
   findCentroid,
   // getMapStateForManualLocationData,
+  parseManualLocationFeatureData,
   DEFAULT_STATE,
   FEATURES,
   FEATURE_TYPES,
@@ -25,6 +26,41 @@ import L from 'leaflet';
 jest.mock('leaflet', () => ({
   Icon: jest.fn(),
 }));
+
+const neonContextData = {
+  sites: {
+    ABBY: {
+      type: 'RELOCATABLE', terrain: 'TERRESTRIAL', stateCode: 'WA', domainCode: 'D16',
+    },
+    CLBJ: {
+      type: 'CORE', terrain: 'TERRESTRIAL', stateCode: 'TX', domainCode: 'D11',
+    },
+    SUGG: {
+      type: 'CORE', terrain: 'AQUATIC', stateCode: 'FL', domainCode: 'D03',
+    },
+    WLOU: {
+      type: 'RELOCATABLE', terrain: 'AQUATIC', stateCode: 'CO', domainCode: 'D13',
+    },
+  },
+  states: {
+    CO: { name: 'Colorado' },
+    FL: { name: 'Florida' },
+    TX: { name: 'Texas' },
+    WA: { name: 'Washington' },
+  },
+  domains: {
+    D03: { name: 'Southeast' },
+    D11: { name: 'Southern Plains' },
+    D13: { name: 'Southern Rockies and Colorado Plateau' },
+    D16: { name: 'Pacific Northwest' },
+  },
+  stateSites: {
+    CO: ['WLOU'], FL: ['SUGG'], TX: ['CLBJ'], WA: ['ABBY'],
+  },
+  domainSites: {
+    D03: ['SUGG'], D11: ['CLBJ'], D13: ['WLOU'], D16: ['ABBY'],
+  },
+};
 
 describe('SiteMap - SiteMapUtils', () => {
   /**
@@ -261,41 +297,7 @@ describe('SiteMap - SiteMapUtils', () => {
     });
   });
 
-  describe('hydrateNeonContextData()', () => {    
-    const neonContextData = {
-      sites: {
-        ABBY: {
-          type: 'RELOCATABLE', terrain: 'TERRESTRIAL', stateCode: 'WA', domainCode: 'D16',
-        },
-        CLBJ: {
-          type: 'CORE', terrain: 'TERRESTRIAL', stateCode: 'TX', domainCode: 'D11',
-        },
-        SUGG: {
-          type: 'CORE', terrain: 'AQUATIC', stateCode: 'FL', domainCode: 'D03',
-        },
-        WLOU: {
-          type: 'RELOCATABLE', terrain: 'AQUATIC', stateCode: 'CO', domainCode: 'D13',
-        },
-      },
-      states: {
-        CO: { name: 'Colorado' },
-        FL: { name: 'Florida' },
-        TX: { name: 'Texas' },
-        WA: { name: 'Washington' },
-      },
-      domains: {
-        D03: { name: 'Southeast' },
-        D11: { name: 'Southern Plains' },
-        D13: { name: 'Southern Rockies and Colorado Plateau' },
-        D16: { name: 'Pacific Northwest' },
-      },
-      stateSites: {
-        CO: ['WLOU'], FL: ['SUGG'], TX: ['CLBJ'], WA: ['ABBY'],
-      },
-      domainSites: {
-        D03: ['SUGG'], D11: ['CLBJ'], D13: ['WLOU'], D16: ['ABBY'],
-      },
-    };
+  describe('hydrateNeonContextData()', () => {
     test('applies NeonContext data correctly', () => {
       const initialState = {
         neonContextHydrated: false,
@@ -348,20 +350,53 @@ describe('SiteMap - SiteMapUtils', () => {
         },
       });
     });
-    test('applies manualLocationData correctly when present', () => {
+  });
+
+  describe('parseManualLocationFeatureData()', () => {
+    test('does nothing when neonContextData is not yet hydrated', () => {
       const initialState = {
         neonContextHydrated: false,
         sites: {},
+        featureData: { SITES: { DECOMMISSIONED_SITES: {} } },
+        map: { ...cloneDeep(DEFAULT_STATE.map) },
+        manualLocationData: [
+          {
+            manualLocationType: MANUAL_LOCATION_TYPES.PROTOTYPE_SITE,
+            siteCode: 'FOOO',
+            siteName: 'fooo site',
+            domain: 'D03',
+            state: 'FL',
+          },
+        ],
+      };
+      expect(parseManualLocationFeatureData(initialState)).toStrictEqual(initialState);
+    });
+    test('does nothing when manualLocationData is missing or empty', () => {
+      const initialState = {
+        neonContextHydrated: true,
+        sites: { ...neonContextData.sites },
+        featureData: { SITES: { DECOMMISSIONED_SITES: {} } },
+        map: { ...cloneDeep(DEFAULT_STATE.map) },
+        manualLocationData: [
+          {
+            manualLocationType: MANUAL_LOCATION_TYPES.PROTOTYPE_SITE,
+            siteCode: 'FOOO',
+            siteName: 'fooo site',
+            domain: 'D03',
+            state: 'FL',
+          },
+        ],
+      };
+      expect(parseManualLocationFeatureData(initialState)).toStrictEqual(initialState);      
+    });
+    test('applies manualLocationData correctly when present', () => {
+      const initialState = {
+        neonContextHydrated: true,
+        sites: { ...neonContextData.sites },
         featureData: {
           SITES: {
-            TERRESTRIAL_CORE_SITES: {},
-            AQUATIC_CORE_SITES: {},
-            TERRESTRIAL_RELOCATABLE_SITES: {},
-            AQUATIC_RELOCATABLE_SITES: {},
             DECOMMISSIONED_SITES: {},
           },
-          STATES: { STATES: {} },
-          DOMAINS: { DOMAINS: {} },
         },
         map: { ...cloneDeep(DEFAULT_STATE.map) },
         manualLocationData: [
@@ -388,7 +423,7 @@ describe('SiteMap - SiteMapUtils', () => {
           },
         ],
       };
-      expect(hydrateNeonContextData(initialState, neonContextData)).toStrictEqual({
+      expect(parseManualLocationFeatureData(initialState)).toStrictEqual({
         neonContextHydrated: true,
         sites: { ...neonContextData.sites },
         map: { ...DEFAULT_STATE.map, center: [52.68, -110.75] },
@@ -425,18 +460,6 @@ describe('SiteMap - SiteMapUtils', () => {
         ],
         featureData: {
           SITES: {
-            TERRESTRIAL_CORE_SITES: {
-              CLBJ: { ...neonContextData.sites.CLBJ },
-            },
-            AQUATIC_CORE_SITES: {
-              SUGG: { ...neonContextData.sites.SUGG },
-            },
-            TERRESTRIAL_RELOCATABLE_SITES: {
-              ABBY: { ...neonContextData.sites.ABBY },
-            },
-            AQUATIC_RELOCATABLE_SITES: {
-              WLOU: { ...neonContextData.sites.WLOU },
-            },
             DECOMMISSIONED_SITES: {
               FOOO: {
                 manualLocationType: MANUAL_LOCATION_TYPES.PROTOTYPE_SITE,
@@ -460,22 +483,6 @@ describe('SiteMap - SiteMapUtils', () => {
                 state: 'WA',
                 stateCode: 'WA',
               },
-            },
-          },
-          STATES: {
-            STATES: {
-              CO: { name: 'Colorado', sites: ['WLOU'] },
-              FL: { name: 'Florida', sites: ['SUGG'] },
-              TX: { name: 'Texas', sites: ['CLBJ'] },
-              WA: { name: 'Washington', sites: ['ABBY'] },
-            },
-          },
-          DOMAINS: {
-            DOMAINS: {
-              D03: { name: 'Southeast', sites: ['SUGG'] },
-              D11: { name: 'Southern Plains', sites: ['CLBJ'] },
-              D13: { name: 'Southern Rockies and Colorado Plateau', sites: ['WLOU'] },
-              D16: { name: 'Pacific Northwest', sites: ['ABBY'] },
             },
           },
         },

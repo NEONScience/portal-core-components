@@ -1341,6 +1341,7 @@ export function mapIsAtFocusLocation(state?: {}): boolean;
 export function getMapStateForFocusLocation(state?: {}): any;
 export function findCentroid(coords?: any[]): any[] | null;
 export function getMapStateForManualLocationData(state: any): any;
+export function parseManualLocationFeatureData(state: any): any;
 export function hydrateNeonContextData(state: any, neonContextData: any): any;
 export function getDynamicAspectRatio(unusableVerticalSpace?: number): number;
 export function boundsAreValid(bounds: any): boolean;

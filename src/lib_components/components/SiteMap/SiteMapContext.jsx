@@ -1049,11 +1049,11 @@ const Provider = (props) => {
         break;
     }
   }
-  if (neonContextIsFinal && !neonContextHasError) {
-    initialState = hydrateNeonContextData(initialState, neonContextData);
-  }
   if (Array.isArray(manualLocationData) && manualLocationData.length > 0) {
     initialState.manualLocationData = manualLocationData;
+  }
+  if (neonContextIsFinal && !neonContextHasError) {
+    initialState = hydrateNeonContextData(initialState, neonContextData);
   }
   const [state, dispatch] = useReducer(reducer, initialState);
 

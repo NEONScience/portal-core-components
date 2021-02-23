@@ -1747,9 +1747,11 @@ export const getZoomedIcons = (zoom) => {
 // identical to a given state. This is necessary whenever needing to do pixel/latlon projections.
 const getPhantomLeafletMap = (state) => {
   const { aspectRatio: { currentValue: aspectRatio, widthReference } } = state;
+  const x = widthReference || 400;
+  const y = (widthReference * aspectRatio) || 300;
   const PhantomMapClass = L.Map.extend({
     includes: {
-      getSize: () => new L.Point(widthReference, widthReference * aspectRatio),
+      getSize: () => new L.Point(x, y),
     },
   });
   const element = document.createElement('div');
@@ -1905,6 +1907,34 @@ export const getMapStateForManualLocationData = (state) => {
   return newState.map;
 };
 
+// Parse any manualLocationData into the mainfeatureData object so that its entries can be
+// rendered consistently with other features
+export const parseManualLocationFeatureData = (state) => {
+  if (
+    !state.neonContextHydrated
+      || !Array.isArray(state.manualLocationData) || !state.manualLocationData.length
+  ) { return state; }
+  const newState = { ...state };
+  state.manualLocationData.forEach((manualLocation) => {
+    const { siteCode } = manualLocation;
+    if (
+      manualLocation.manualLocationType === MANUAL_LOCATION_TYPES.PROTOTYPE_SITE
+        && siteCode && !newState.sites[siteCode]
+    ) {
+      const featureType = FEATURE_TYPES.SITES.KEY;
+      const featureKey = FEATURES.DECOMMISSIONED_SITES.KEY;
+      newState.featureData[featureType][featureKey][siteCode] = manualLocation;
+      // Harmonize some values
+      newState.featureData[featureType][featureKey][siteCode].type = 'Decommissioned';
+      newState.featureData[featureType][featureKey][siteCode].stateCode = manualLocation.state;
+      newState.featureData[featureType][featureKey][siteCode].domainCode = manualLocation.domain;
+      newState.featureData[featureType][featureKey][siteCode].description = manualLocation.siteName;
+    }
+  });
+  newState.map = getMapStateForManualLocationData(newState);
+  return newState;
+};
+
 export const hydrateNeonContextData = (state, neonContextData) => {
   const newState = { ...state, neonContextHydrated: true };
   // Sites
@@ -1937,29 +1967,7 @@ export const hydrateNeonContextData = (state, neonContextData) => {
       sites: neonContextData.domainSites[domainCode],
     };
   });
-  // With NeonContextData now populated attempt to parse any manualLocationData into the main
-  // featureData object so that it can be rendered consistently with other features
-  if (Array.isArray(state.manualLocationData) && state.manualLocationData.length) {
-    state.manualLocationData.forEach((manualLocation) => {
-      const { siteCode } = manualLocation;
-      if (
-        manualLocation.manualLocationType === MANUAL_LOCATION_TYPES.PROTOTYPE_SITE
-          && siteCode && !newState.sites[siteCode]
-      ) {
-        const featureType = FEATURE_TYPES.SITES.KEY;
-        const featureKey = FEATURES.DECOMMISSIONED_SITES.KEY;
-        newState.featureData[featureType][featureKey][siteCode] = manualLocation;
-        // Harmonize some values
-        newState.featureData[featureType][featureKey][siteCode].type = 'Decommissioned';
-        newState.featureData[featureType][featureKey][siteCode].stateCode = manualLocation.state;
-        newState.featureData[featureType][featureKey][siteCode].domainCode = manualLocation.domain;
-        // eslint-disable-next-line max-len
-        newState.featureData[featureType][featureKey][siteCode].description = manualLocation.siteName;
-      }
-    });
-    newState.map = getMapStateForManualLocationData(newState);
-  }
-  return newState;
+  return parseManualLocationFeatureData(newState);
 };
 
 /**
