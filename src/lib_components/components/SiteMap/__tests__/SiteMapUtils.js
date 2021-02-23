@@ -1,3 +1,5 @@
+import cloneDeep from 'lodash/cloneDeep';
+
 import {
   boundsAreValid,
   calculateLocationsInBounds,
@@ -7,8 +9,12 @@ import {
   hydrateNeonContextData,
   mapIsAtFocusLocation,
   getZoomedIcon,
+  getZoomedIcons,
+  findCentroid,
+  // getMapStateForManualLocationData,
   DEFAULT_STATE,
   FEATURES,
+  FEATURE_TYPES,
   MANUAL_LOCATION_TYPES,
   SITE_MAP_PROP_TYPES,
   HIGHLIGHT_STATUS,
@@ -24,7 +30,7 @@ describe('SiteMap - SiteMapUtils', () => {
   /**
      Functions
   */
-  describe('boundsAreValid', () => {
+  describe('boundsAreValid()', () => {
     test('correctly identifies valid bounds', () => {
       [
         { lat: [10, 20], lng: [10, 20] },
@@ -46,7 +52,7 @@ describe('SiteMap - SiteMapUtils', () => {
     });
   });
 
-  describe('calculateLocationsInBounds', () => {
+  describe('calculateLocationsInBounds()', () => {
     const locations = {
       A: { latitude: 15, longitude: 0 },
       B: { latitude: 12, longitude: 0 },
@@ -137,7 +143,7 @@ describe('SiteMap - SiteMapUtils', () => {
     });
   });
 
-  describe('deriveFullObservatoryZoomLevel', () => {
+  describe('deriveFullObservatoryZoomLevel()', () => {
     test('returns FALLBACK_ZOOM if provided mapRef is not valid', () => {
       expect(deriveFullObservatoryZoomLevel()).toBe(2);
       expect(deriveFullObservatoryZoomLevel({ current: null })).toBe(2);
@@ -165,7 +171,7 @@ describe('SiteMap - SiteMapUtils', () => {
     });
   });
 
-  describe('getDynamicAspectRatio', () => {
+  describe('getDynamicAspectRatio()', () => {
     let windowSpy;
     beforeEach(() => {
       windowSpy = jest.spyOn(global, 'window', 'get');
@@ -223,7 +229,7 @@ describe('SiteMap - SiteMapUtils', () => {
     });
   });
 
-  describe('getHref', () => {
+  describe('getHref()', () => {
     test('generates proper fallback href for missing or invalid key', () => {
       expect(getHref()).toEqual('#');
       expect(getHref('INVALID_KEY', 'foo')).toEqual('#');
@@ -255,7 +261,7 @@ describe('SiteMap - SiteMapUtils', () => {
     });
   });
 
-  describe('hydrateNeonContextData', () => {    
+  describe('hydrateNeonContextData()', () => {    
     const neonContextData = {
       sites: {
         ABBY: {
@@ -357,6 +363,7 @@ describe('SiteMap - SiteMapUtils', () => {
           STATES: { STATES: {} },
           DOMAINS: { DOMAINS: {} },
         },
+        map: { ...cloneDeep(DEFAULT_STATE.map) },
         manualLocationData: [
           {
             manualLocationType: MANUAL_LOCATION_TYPES.PROTOTYPE_SITE,
@@ -384,6 +391,7 @@ describe('SiteMap - SiteMapUtils', () => {
       expect(hydrateNeonContextData(initialState, neonContextData)).toStrictEqual({
         neonContextHydrated: true,
         sites: { ...neonContextData.sites },
+        map: { ...DEFAULT_STATE.map, center: [52.68, -110.75] },
         manualLocationData: [
           {
             manualLocationType: MANUAL_LOCATION_TYPES.PROTOTYPE_SITE,
@@ -475,7 +483,7 @@ describe('SiteMap - SiteMapUtils', () => {
     });
   });
 
-  describe('mapIsAtFocusLocation', () => {
+  describe('mapIsAtFocusLocation()', () => {
     test('correctly identifies when map center is at focus location', () => {
       expect(mapIsAtFocusLocation({
         map: { zoom: 4, center: [-68.3, 15] },
@@ -524,7 +532,7 @@ describe('SiteMap - SiteMapUtils', () => {
     });
   });
 
-  describe('getZoomedIcon', () => {
+  describe('getZoomedIcon()', () => {
     beforeEach(() => { L.Icon.mockReset(); });
     test('Uses placeholder when feature has no defined icon', () => {
       getZoomedIcon(FEATURES.TOWER_AIRSHEDS.KEY);
@@ -605,6 +613,47 @@ describe('SiteMap - SiteMapUtils', () => {
         shadowSize: [ 94.25, 94.25 ],
         shadowAnchor: [ 47.125, 47.125 ],
       });
+    });
+  });
+
+  describe('getZoomedIcons()', () => {
+    test('generates an icon map with appropriate structure and feature representation', () => {
+      const zoomedIcons = getZoomedIcons(5);
+      expect(typeof zoomedIcons).toBe('object');
+      Object.keys(zoomedIcons).forEach((f) => {
+        const feature = FEATURES[f];
+        expect(!!feature.iconSvg && !!feature.iconShape).toBe(true);
+        expect(typeof zoomedIcons[f]).toBe('object');
+        if (FEATURE_TYPES[feature.type].selectable) {
+          expect(Object.keys(zoomedIcons[f])).toStrictEqual(Object.keys(SELECTION_STATUS));
+        } else {
+          expect(Object.keys(zoomedIcons[f])).toStrictEqual([SELECTION_STATUS.UNSELECTED]);
+        }
+        Object.keys(zoomedIcons[f]).forEach((s) => {
+          expect(Object.keys(zoomedIcons[f][s])).toStrictEqual(Object.keys(HIGHLIGHT_STATUS));
+        });
+      });
+    });
+  });
+
+  describe('findCentroid()', () => {
+    test('returns null if not provided a non-empty array of all valid points', () => {
+      expect(findCentroid()).toBe(null);
+      expect(findCentroid([])).toBe(null);
+      expect(findCentroid(['foo'])).toBe(null);
+      expect(findCentroid([[0, 0], [0, 'foo']])).toBe(null);
+    });
+    test('reflects back only valid point if only one is present', () => {
+      expect(findCentroid([[0, 0]])).toStrictEqual([0, 0]);
+      expect(findCentroid([[30, 10]])).toStrictEqual([30, 10]);
+    });
+    test('calculates centroids when provided more than one valid point', () => {
+      expect(
+        findCentroid([[-10, -10], [10, 10]])
+      ).toStrictEqual([0, 0]);
+      expect(
+        findCentroid([[18.02192, -66.61391], [34.444218, -96.624201], [31.199, -84.467]])
+      ).toStrictEqual([28.4642, -81.8378]);
     });
   });
 

@@ -427,6 +427,8 @@
       text-decoration: none; }
       #header .jumpmenu__heading a:visited.is-active, #footer .jumpmenu__heading a:visited.is-active {
         color: #565A5C; }
+  #header .ui-autocomplete, #footer .ui-autocomplete {
+    z-index: 9999; }
   #header .layout, #footer .layout {
     padding: 2rem 7.40741%; }
     @media (min-width: 75em) {

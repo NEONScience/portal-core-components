@@ -89,6 +89,22 @@ const propRows = [
     ),
   },
   {
+    name: 'manualLocationData',
+    type: (
+      <div>
+        Array of objects each containing a valid <tt>manualLocationType</tt> attribute
+      </div>
+    ),
+    default: 'null',
+    description: (
+      <p>
+        When supplied this list of locations will show exclusively relative to other locations of
+        the same type (e.g. when providing prototype sites all sites not included will not appear).
+        The map will also initialize its zoom and bounds to show only the manual locations.
+      </p>
+    ),
+  },
+  {
     name: 'mapBaseLayer',
     type: (
       <div>
@@ -446,7 +462,12 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
       <Typography variant="h4" component="h2" gutterBottom>Manual Locations</Typography>
 
       <DocBlock>
-        Manual locations...
+        In some circumstances it is useful to pass the SiteMap a discrete list of locations for
+        exclusive display. This is done using the the <tt>manualLocationData</tt> prop. This should
+        be an array of objects that each has a <tt>manualLocationType</tt> attribute. The SiteMap
+        has an explicit list of supported values for this attribute that help it determine how to
+        process each manual location. Presently only <tt>&quot;PROTOTYPE_SITE&quot;</tt> is
+        supported.
       </DocBlock>
 
       <ExampleBlock>

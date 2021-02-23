@@ -316,7 +316,7 @@ const SiteMapContainer = (props) => {
 
   const [state, dispatch] = SiteMapContext.useSiteMapContext();
 
-  console.log('SITEMAP STATE:', state);
+  // console.log('SITEMAP STATE:', state);
   const isLoading = state.overallFetch.expected !== state.overallFetch.completed;
 
   const progressId = `sitemap-progress-${uniqueId()}`;

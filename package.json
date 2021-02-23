@@ -135,6 +135,7 @@
       "/node_modules/",
       "/src/lib_components/remoteAssets/",
       "/src/lib_components/types/",
+      "/src/lib_components/images/",
       "/src/lib_components/components/SiteMap/svg/",
       "src/sampleData",
       "StyleGuide"
