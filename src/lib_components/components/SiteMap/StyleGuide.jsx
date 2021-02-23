@@ -396,11 +396,9 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
         automatic sizing and aspect ratio based on the current viewport.
       </DocBlock>
 
-      {/*
       <ExampleBlock>
         <SiteMap selection="SITES" />
       </ExampleBlock>
-       */}
       <CodeBlock>
         {`
 <SiteMap />
@@ -417,11 +415,9 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
         codes are also supported.
       </DocBlock>
 
-      {/*
       <ExampleBlock>
         <SiteMap location="D08" />
       </ExampleBlock>
-       */}
       <CodeBlock>
         {`
 <SiteMap location="D08" />
@@ -438,11 +434,9 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
         sizes are also afforded.
       </DocBlock>
 
-      {/*
       <ExampleBlock>
         <SiteMap tableFullHeight />
       </ExampleBlock>
-       */}
       <CodeBlock>
         {`
 <SiteMap tableFullHeight />
