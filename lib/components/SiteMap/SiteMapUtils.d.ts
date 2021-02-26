@@ -1337,6 +1337,7 @@ export namespace SITE_MAP_DEFAULT_PROPS {
 }
 export function getZoomedIcon(featureKey?: any, zoom?: number, highlight?: string, selection?: string): any;
 export function getZoomedIcons(zoom: any): {};
+export function getPhantomLeafletMap(state: any): any;
 export function mapIsAtFocusLocation(state?: {}): boolean;
 export function getMapStateForFocusLocation(state?: {}): any;
 export function findCentroid(coords?: any[]): any[] | null;
