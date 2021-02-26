@@ -126,8 +126,7 @@ export default function BasicAvailabilityGrid(config) {
   const getYearStartX = (year) => {
     const intYear = parseInt(year, 10);
     return getLabelWidth() + SVG.END_PADDING
-      + (TIME.YEARS.indexOf(intYear) * SVG.YEAR_WIDTH)
-      + (TIME.YEARS.indexOf(intYear) * SVG.YEAR_PADDING);
+      + (TIME.YEARS.indexOf(intYear) * (SVG.YEAR_WIDTH + SVG.YEAR_PADDING));
   };
   const getYearCenterX = (year) => getYearStartX(year) + (SVG.YEAR_WIDTH / 2);
   const getYearMonthStartX = (yearMonth) => {
@@ -293,7 +292,8 @@ export default function BasicAvailabilityGrid(config) {
   };
   // Get the yearMonth string that's next to a given yearMonth on either side.
   // Stays within the selectable range unless selectable is false, in which case
-  // is stays within the chart's global min and max.
+  // it stays within the chart's global min and max.
+  /*
   const getAdjacentYearMonth = (yearMonth, side = 'left', selectable = true) => {
     const year = parseInt(yearMonth.substr(0, 4), 10);
     const month = parseInt(yearMonth.substr(5, 2), 10);
@@ -317,6 +317,39 @@ export default function BasicAvailabilityGrid(config) {
       default:
         return adjacent;
     }
+  };
+  */
+  // Get the string for the yearmonth closest to a given pixel x-offset on either side.
+  // Stays within the selectable range unless selectable is false, in which case
+  // it stays within the chart's global min and max.
+  const getXOffsetYearMonth = (xOffset, dragOffset, side = 'left', selectable = true) => {
+    /***/
+    const basis = Math.min(Math.max(xOffset, getLabelWidth()), svgWidth) - dragOffset;
+    const yearIdx = Math.floor((basis - getLabelWidth()) / (SVG.YEAR_WIDTH + SVG.YEAR_PADDING));
+    const boundedYearIdx = Math.max(Math.min(yearIdx, TIME.YEARS.length - 1), 0);
+    let year = TIME.YEARS[boundedYearIdx];
+    let yearStartX = getYearStartX(year);
+    if (basis < yearStartX && side === 'left' && boundedYearIdx !== 0) {
+      year = parseInt(year, 10) - 1;
+      yearStartX = getYearStartX(year);
+    } else if (
+      basis > (yearStartX + SVG.YEAR_WIDTH)
+        && side === 'right'
+        && boundedYearIdx !== (TIME.YEARS.length - 1)
+    ) {
+      year = parseInt(year, 10) + 1;
+      yearStartX = getYearStartX(year);
+    }
+    const roundFunc = side === 'left' ? 'floor' : 'ceil';
+    const month = Math[roundFunc](
+      (basis - yearStartX) / SVG.YEAR_MONTH_WIDTH,
+    ) + 1;
+    const boundedMonth = Math.max(Math.min(month, 12), 1);
+    const yearMonth = `${year}-${boundedMonth.toString().padStart(2, '0')}`;
+    const bounds = selectable ? dateRange.validValues : [TIME.MIN_YEAR_MONTH, TIME.MAX_YEAR_MONTH];
+    if (yearMonth < bounds[0]) { return bounds[0]; }
+    if (yearMonth > bounds[1]) { return bounds[1]; }
+    return yearMonth;
   };
 
   /**
@@ -654,7 +687,7 @@ export default function BasicAvailabilityGrid(config) {
       .attr('y', 0)
       .attr('width', SVG.DATE_RANGE_MASK_WIDTH)
       .attr('height', svgHeight)
-      .style('cursor', 'ew-resize')
+      .style('cursor', 'crosshair') // 'ew-resize'
       .style('outline', 'none')
       .attr('fill', 'red')
       .style('opacity', 0)
@@ -828,15 +861,16 @@ export default function BasicAvailabilityGrid(config) {
       })
       .on('drag', () => {
         draggingDateRange[0].centerDragX += event.dx;
-        dragDateRangeStartMask.attr('x', draggingDateRange[0].centerDragX - (SVG.DATE_RANGE_MASK_WIDTH / 2));
-        const adjacentYearMonth = getAdjacentYearMonth(dateRange.value[0], event.dx > 0 ? 'right' : 'left');
-        const adjacentYearMonthStartX = getYearMonthGutterX(adjacentYearMonth, 'left');
+        const { centerDragX } = draggingDateRange[0];
+        dragDateRangeStartMask.attr('x', centerDragX - (SVG.DATE_RANGE_MASK_WIDTH / 2));
+        const nextYearMonth = getXOffsetYearMonth(centerDragX, getTimeOffset(), 'right');
+        const nextYearMonthStartX = getYearMonthGutterX(nextYearMonth, 'left');
         const currentYearMonthStartX = getYearMonthGutterX(dateRange.value[0], 'left');
         const insideClipCenterDragX = draggingDateRange[0].centerDragX - getTimeOffset();
-        const distanceToAdjacent = Math.abs(insideClipCenterDragX - adjacentYearMonthStartX);
+        const distanceToNext = Math.abs(insideClipCenterDragX - nextYearMonthStartX);
         const distanceToCurrent = Math.abs(insideClipCenterDragX - currentYearMonthStartX);
-        if (adjacentYearMonth !== dateRange.value[0] && distanceToAdjacent < distanceToCurrent) {
-          dateRange.value[0] = adjacentYearMonth;
+        if (nextYearMonth !== dateRange.value[0] && distanceToNext < distanceToCurrent) {
+          dateRange.value[0] = nextYearMonth;
           redrawSelections();
         }
       })
@@ -869,15 +903,16 @@ export default function BasicAvailabilityGrid(config) {
       })
       .on('drag', () => {
         draggingDateRange[1].centerDragX += event.dx;
-        dragDateRangeEndMask.attr('x', draggingDateRange[1].centerDragX - (SVG.DATE_RANGE_MASK_WIDTH / 2));
-        const adjacentYearMonth = getAdjacentYearMonth(dateRange.value[1], event.dx > 0 ? 'right' : 'left');
-        const adjacentYearMonthEndX = getYearMonthGutterX(adjacentYearMonth, 'right');
+        const { centerDragX } = draggingDateRange[1];
+        dragDateRangeEndMask.attr('x', centerDragX - (SVG.DATE_RANGE_MASK_WIDTH / 2));
+        const nextYearMonth = getXOffsetYearMonth(centerDragX, getTimeOffset(), 'left');
+        const nextYearMonthEndX = getYearMonthGutterX(nextYearMonth, 'right');
         const currentYearMonthEndX = getYearMonthGutterX(dateRange.value[1], 'right');
         const insideClipCenterDragX = draggingDateRange[1].centerDragX - getTimeOffset();
-        const distanceToAdjacent = Math.abs(insideClipCenterDragX - adjacentYearMonthEndX);
+        const distanceToNext = Math.abs(insideClipCenterDragX - nextYearMonthEndX);
         const distanceToCurrent = Math.abs(insideClipCenterDragX - currentYearMonthEndX);
-        if (adjacentYearMonth !== dateRange.value[1] && distanceToAdjacent < distanceToCurrent) {
-          dateRange.value[1] = adjacentYearMonth;
+        if (nextYearMonth !== dateRange.value[1] && distanceToNext < distanceToCurrent) {
+          dateRange.value[1] = nextYearMonth;
           redrawSelections();
         }
       })
