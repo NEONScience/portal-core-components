@@ -9,5 +9,5 @@ declare namespace NeonJsonLd {
     export function removeReleaseMeta(): void;
     export function getJsonLdWithInjection(url: string, injectReleaseMeta?: boolean): void;
     export function injectRepo(): void;
-    export function injectProduct(productCode: string, release: string, injectReleaseMeta?: boolean, onNotExistsOnly?: boolean): void;
+    export function injectProduct(productCode: string, release: string, injectReleaseMeta?: boolean, onNotExistsOnly?: boolean): void | null;
 }

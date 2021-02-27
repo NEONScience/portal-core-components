@@ -18,7 +18,7 @@ describe('NeonEnvironment', () => {
       'authDisableWs',
     ].forEach((prop) => {
       test(`${prop}`, () => {
-        expect(typeof NeonEnvironment[prop]).toBe('boolean')
+        expect(typeof NeonEnvironment[prop]).toBe('boolean');
       });
     });
   });
@@ -39,7 +39,7 @@ describe('NeonEnvironment', () => {
       'getWsHostOverride',
     ].forEach((method) => {
       test(`${method}()`, () => {
-        expect(typeof NeonEnvironment[method]()).toBe('string')
+        expect(typeof NeonEnvironment[method]()).toBe('string');
       });
     });
   });
@@ -57,7 +57,7 @@ describe('NeonEnvironment', () => {
       describe(`${methodGroup} string access methods`, () => {
         Object.keys(NeonEnvironment[methodGroup]).forEach((method) => {
           test(`${methodGroup}.${method}()`, () => {
-            expect(typeof NeonEnvironment[methodGroup][method]()).toBe('string')
+            expect(typeof NeonEnvironment[methodGroup][method]()).toBe('string');
           });
         });
       });

@@ -112,12 +112,10 @@ const NeonJsonLd = {
         if ((typeof currentTitleBlock !== 'undefined') && (currentTitleBlock !== null)) {
           currentTitleBlock.remove();
         }
+      } else if ((typeof currentTitleBlock !== 'undefined') && (currentTitleBlock !== null)) {
+        document.head.replaceChild(titleBlock, currentTitleBlock);
       } else {
-        if ((typeof currentTitleBlock !== 'undefined') && (currentTitleBlock !== null)) {
-          document.head.replaceChild(titleBlock, currentTitleBlock);
-        } else {
-          document.head.appendChild(titleBlock);
-        }
+        document.head.appendChild(titleBlock);
       }
 
       const currentAuthorBlock = document.head.querySelector('meta[name="citation_author"]');
@@ -200,7 +198,7 @@ const NeonJsonLd = {
       }
     }
     if (!shouldFetch) {
-      return;
+      return null;
     }
     const hasRelease = (typeof release !== 'undefined')
       && (release !== null)

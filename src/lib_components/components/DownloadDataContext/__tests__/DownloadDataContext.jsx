@@ -23,13 +23,15 @@ const {
   newStateIsValid,
   mutateNewStateIntoRange,
   estimatePostSize,
-  // getValidValuesFromProductData,
-  // getInitialStateFromProps,
+  getValidValuesFromProductData,
+  getInitialStateFromProps,
   // getS3FilesFilteredFileCount,
   // getAndValidateNewS3FilesState,
   // regenerateS3FilesFiltersAndValidValues,
   // getAndValidateNewState,
   ALL_POSSIBLE_VALID_DATE_RANGE,
+  ALL_POSSIBLE_VALID_DOCUMENTATION,
+  ALL_POSSIBLE_VALID_PACKAGE_TYPE,
 } = getTestableItems();
 
 describe('DownloadDataContext', () => {
@@ -288,17 +290,217 @@ describe('DownloadDataContext', () => {
     });
   });
 
-  /*
   describe('getValidValuesFromProductData()', () => {
-    test('', () => {
+    test('extracts releases', () => {
+      expect(getValidValuesFromProductData({}, 'release')).toStrictEqual([]);
+      const productData = {
+        releases: [{ release: 'foo' }, { release: 'bar' }],
+      };
+      expect(getValidValuesFromProductData(productData, 'release')).toStrictEqual(['foo', 'bar']);
+    });
+    test('extracts sites', () => {
+      expect(getValidValuesFromProductData({}, 'sites')).toStrictEqual([]);
+      const productData = {
+        siteCodes: [{ siteCode: 'foo' }, { siteCode: 'bar' }],
+      };
+      expect(getValidValuesFromProductData(productData, 'sites')).toStrictEqual(['foo', 'bar']);
+    });
+    test('extracts dateRange', () => {
+      expect(getValidValuesFromProductData({}, 'dateRange')).toStrictEqual([null, null]);
+      let productData = {
+        siteCodes: [
+          { siteCode: 'foo' },
+          { siteCode: 'bar' },
+        ],
+      };
+      expect(getValidValuesFromProductData(productData, 'dateRange')).toStrictEqual([null, null]);
+      productData = {
+        siteCodes: [
+          { siteCode: 'foo', availableMonths: ['2015-04', '2015-08', '2015-09'] },
+          { siteCode: 'bar', availableMonths: ['2015-07', '2015-10', '2015-11'] },
+        ],
+      };
+      expect(getValidValuesFromProductData(productData, 'dateRange'))
+        .toStrictEqual(['2015-04', '2015-11']);
+    });
+    test('extracts documentation', () => {
+      expect(getValidValuesFromProductData({}, 'documentation')).toStrictEqual([
+        ...ALL_POSSIBLE_VALID_DOCUMENTATION,
+      ]);
+    });
+    test('extracts packageType', () => {
+      expect(getValidValuesFromProductData({}, 'packageType')).toStrictEqual([
+        ...ALL_POSSIBLE_VALID_PACKAGE_TYPE,
+      ]);
+    });
+    test('returns null for policies', () => {
+      expect(getValidValuesFromProductData({}, 'policies')).toBe(null);
+    });
+    test('returns empty array for unrecognized attribute', () => {
+      expect(getValidValuesFromProductData({}, 'foo')).toStrictEqual([]);
     });
   });
 
   describe('getInitialStateFromProps()', () => {
-    test('', () => {
+    test('returns default state with no required steps if productData is invalid', () => {
+      const initialState = getInitialStateFromProps({
+        productData: {},
+        availabilityView: 'domains',
+      });
+      expect(initialState.availabilityView).toBe('domains');
+      expect(initialState.requiredSteps).toStrictEqual([]);
+    });
+    test('builds required steps appropriately when AOP pipeline is detected', () => {
+      const props = {
+        productData: {
+          productName: 'foo',
+          siteCodes: [
+            { siteCode: 'foo', availableMonths: ['2015-04', '2015-08', '2015-09'] },
+            { siteCode: 'bar', availableMonths: ['2015-07', '2015-10', '2015-11'] },
+          ],
+          productScienceTeam: 'AOP',
+          productPublicationFormatType: 'AOP',
+          releases: [
+            { release: 'r0', generationDate: '2019-01-01T00:00:00' },
+            { release: 'r1', generationDate: '2020-01-01T00:00:00' },
+          ],
+        },
+        availabilityView: 'domains',
+      };
+      const initialState = getInitialStateFromProps(props);
+      expect(initialState.availabilityView).toBe(props.availabilityView);
+      expect(initialState.productData).toStrictEqual(props.productData);
+      expect(initialState.latestRelease).toBe('r1');
+      expect(initialState.fromManifest).toBe(false);
+      expect(initialState.fromAOPManifest).toBe(true);
+      expect(initialState.fromExternalHost).toBe(false);
+      expect(initialState.requiredSteps).toStrictEqual([
+        { key: 'sitesAndDateRange', isComplete: false },
+        { key: 's3Files', isComplete: false },
+        { key: 'documentation', isComplete: true },
+        { key: 'policies', isComplete: false },
+        { key: 'summary', isComplete: null },
+      ]);
+      expect(initialState.s3FileFetches).toStrictEqual({
+        'foo.2015-04': 'notRequested',
+        'foo.2015-08': 'notRequested',
+        'foo.2015-09': 'notRequested',
+        'bar.2015-07': 'notRequested',
+        'bar.2015-10': 'notRequested',
+        'bar.2015-11': 'notRequested',
+      });
+    });
+    test('removes packageType required step is product does not have expanded data', () => {
+      const props = {
+        productData: {
+          productName: 'foo',
+          productHasExpanded: false,
+          siteCodes: [],
+          releases: [
+            { release: 'r1', generationDate: '2020-01-01T00:00:00' },
+            { release: 'r0', generationDate: '2019-01-01T00:00:00' },
+          ],
+        },
+        availabilityView: 'states',
+      };
+      const initialState = getInitialStateFromProps(props);
+      expect(initialState.availabilityView).toBe(props.availabilityView);
+      expect(initialState.productData).toStrictEqual(props.productData);
+      expect(initialState.latestRelease).toBe('r1');
+      expect(initialState.fromManifest).toBe(true);
+      expect(initialState.fromAOPManifest).toBe(false);
+      expect(initialState.fromExternalHost).toBe(false);
+      expect(initialState.requiredSteps).toStrictEqual([
+        { key: 'sitesAndDateRange', isComplete: false },
+        { key: 'documentation', isComplete: true },
+        { key: 'policies', isComplete: false },
+        { key: 'summary', isComplete: null },
+      ]);
+    });
+    test('preserves packageType required step is product has expanded data', () => {
+      const props = {
+        productData: {
+          productName: 'foo',
+          productHasExpanded: true,
+          siteCodes: [],
+          releases: [
+            { release: 'r1', generationDate: '2020-01-01T00:00:00' },
+            { release: 'r0', generationDate: '2019-01-01T00:00:00' },
+          ],
+        },
+        availabilityView: 'states',
+      };
+      const initialState = getInitialStateFromProps(props);
+      expect(initialState.availabilityView).toBe(props.availabilityView);
+      expect(initialState.productData).toStrictEqual(props.productData);
+      expect(initialState.latestRelease).toBe('r1');
+      expect(initialState.fromManifest).toBe(true);
+      expect(initialState.fromAOPManifest).toBe(false);
+      expect(initialState.fromExternalHost).toBe(false);
+      expect(initialState.requiredSteps).toStrictEqual([
+        { key: 'sitesAndDateRange', isComplete: false },
+        { key: 'documentation', isComplete: true },
+        { key: 'packageType', isComplete: false },
+        { key: 'policies', isComplete: false },
+        { key: 'summary', isComplete: null },
+      ]);
+    });
+    test('properly detects externally hosted products - reformatted data', () => {
+      const props = {
+        productData: {
+          productName: 'foo',
+          productCode: 'DP1.00001.001', // Host-type: reformatted data
+          productHasExpanded: true,
+          siteCodes: [],
+          releases: [
+            { release: 'r1', generationDate: '2020-01-01T00:00:00' },
+            { release: 'r0', generationDate: '2019-01-01T00:00:00' },
+          ],
+        },
+        availabilityView: 'sites',
+      };
+      const initialState = getInitialStateFromProps(props);
+      expect(initialState.availabilityView).toBe(props.availabilityView);
+      expect(initialState.productData).toStrictEqual(props.productData);
+      expect(initialState.latestRelease).toBe('r1');
+      expect(initialState.fromManifest).toBe(true);
+      expect(initialState.fromAOPManifest).toBe(false);
+      expect(initialState.fromExternalHost).toBe(true);
+      expect(initialState.requiredSteps).toStrictEqual([
+        { key: 'sitesAndDateRange', isComplete: false },
+        { key: 'documentation', isComplete: true },
+        { key: 'packageType', isComplete: false },
+        { key: 'policies', isComplete: false },
+        { key: 'summary', isComplete: null },
+      ]);
+    });
+    test('properly detects externally hosted products - exclusive data', () => {
+      const props = {
+        productData: {
+          productName: 'foo',
+          productCode: 'DP1.00043.001', // Host-type: exclusive data
+          productHasExpanded: true,
+          siteCodes: [],
+          releases: [
+            { release: 'r1', generationDate: '2020-01-01T00:00:00' },
+          ],
+        },
+        availabilityView: 'sites',
+      };
+      const initialState = getInitialStateFromProps(props);
+      expect(initialState.availabilityView).toBe(props.availabilityView);
+      expect(initialState.productData).toStrictEqual(props.productData);
+      expect(initialState.latestRelease).toBe('r1');
+      expect(initialState.fromManifest).toBe(false);
+      expect(initialState.fromAOPManifest).toBe(false);
+      expect(initialState.fromExternalHost).toBe(true);
+      expect(initialState.requiredSteps).toStrictEqual([
+        { key: 'externalExclusive', isComplete: null },
+      ]);
     });
   });
 
+  /*
   describe('getS3FilesFilteredFileCount()', () => {
     test('', () => {
     });

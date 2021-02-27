@@ -1,5 +1,6 @@
 import cloneDeep from 'lodash/cloneDeep';
 
+import L from 'leaflet';
 import {
   boundsAreValid,
   calculateLocationsInBounds,
@@ -28,8 +29,6 @@ jest.mock('leaflet', () => ({
   ...(jest.requireActual('leaflet')),
   Icon: jest.fn(),
 }));
-
-import L from 'leaflet';
 
 const neonContextData = {
   sites: {
@@ -379,7 +378,7 @@ describe('SiteMap - SiteMapUtils', () => {
     });
   });
 
-  describe('getMapState functions GAGAGA', () => {
+  describe('getMapState functions', () => {
     const newMapStateBoundsAreValid = (newMapState) => {
       expect(typeof newMapState.bounds).toBe('object');
       expect(new Set(Object.keys(newMapState.bounds))).toStrictEqual(new Set(['lat', 'lng']));
@@ -388,11 +387,11 @@ describe('SiteMap - SiteMapUtils', () => {
       expect(newMapState.bounds.lat[0]).toBeLessThan(newMapState.center[0]);
       expect(newMapState.bounds.lat[1]).toBeGreaterThan(newMapState.center[0]);
       expect(newMapState.bounds.lng[0]).toBeLessThan(newMapState.center[1]);
-      expect(newMapState.bounds.lng[1]).toBeGreaterThan(newMapState.center[1]);      
+      expect(newMapState.bounds.lng[1]).toBeGreaterThan(newMapState.center[1]);
     };
     const newMapStateZoomedIconsAreValid = (newMapState) => {
       expect(typeof newMapState.zoomedIcons).toBe('object');
-      expect(Object.keys(newMapState.zoomedIcons).length).toBeGreaterThan(0);      
+      expect(Object.keys(newMapState.zoomedIcons).length).toBeGreaterThan(0);
     };
 
     describe('getMapStateForManualLocationData()', () => {
@@ -531,7 +530,7 @@ describe('SiteMap - SiteMapUtils', () => {
         expect(newMapState.zoom).toBe(9);
         expect(newMapState.center).toStrictEqual([56, -116]);
         newMapStateBoundsAreValid(newMapState);
-        newMapStateZoomedIconsAreValid(newMapState); 
+        newMapStateZoomedIconsAreValid(newMapState);
       });
       test('properly handles other feature type with set focusZoom', () => {
         const state = {
@@ -617,7 +616,7 @@ describe('SiteMap - SiteMapUtils', () => {
           },
         ],
       };
-      expect(parseManualLocationFeatureData(initialState)).toStrictEqual(initialState);      
+      expect(parseManualLocationFeatureData(initialState)).toStrictEqual(initialState);
     });
     test('applies manualLocationData correctly when present', () => {
       const initialState = {
@@ -778,12 +777,12 @@ describe('SiteMap - SiteMapUtils', () => {
       expect(L.Icon.mock.calls[0][0]).toStrictEqual({
         iconUrl: 'icon-placeholder.svg',
         iconRetinaUrl: 'icon-placeholder.svg',
-        iconSize: [ 15, 15 ],
-        iconAnchor: [ 7.5, 7.5 ],
-        popupAnchor: [ 0, -7.5 ],
+        iconSize: [15, 15],
+        iconAnchor: [7.5, 7.5],
+        popupAnchor: [0, -7.5],
         shadowUrl: 'icon-shape-square-shadow.svg',
-        shadowSize: [ 18.8, 18.8 ],
-        shadowAnchor: [ 9.4, 9.4 ]
+        shadowSize: [18.8, 18.8],
+        shadowAnchor: [9.4, 9.4],
       });
     });
     test('Scales appropriately with no defined zoom', () => {
@@ -793,12 +792,12 @@ describe('SiteMap - SiteMapUtils', () => {
       expect(L.Icon.mock.calls[0][0]).toStrictEqual({
         iconUrl: 'icon-pour-point.svg',
         iconRetinaUrl: 'icon-pour-point.svg',
-        iconSize: [ 16, 18 ],
-        iconAnchor: [ 8, 9 ],
-        popupAnchor: [ 0, -9 ],
+        iconSize: [16, 18],
+        iconAnchor: [8, 9],
+        popupAnchor: [0, -9],
         shadowUrl: 'icon-shape-homeplate-shadow.svg',
-        shadowSize: [ 20.2, 22.2 ],
-        shadowAnchor: [ 10.1, 11.1 ]
+        shadowSize: [20.2, 22.2],
+        shadowAnchor: [10.1, 11.1],
       });
     });
     test('Scales appropriately with defined zoom', () => {
@@ -808,12 +807,12 @@ describe('SiteMap - SiteMapUtils', () => {
       expect(L.Icon.mock.calls[0][0]).toStrictEqual({
         iconUrl: 'icon-tower.svg',
         iconRetinaUrl: 'icon-tower.svg',
-        iconSize: [ 48, 48 ],
-        iconAnchor: [ 24, 24 ],
-        popupAnchor: [ 0, -24 ],
+        iconSize: [48, 48],
+        iconAnchor: [24, 24],
+        popupAnchor: [0, -24],
         shadowUrl: 'icon-shape-diamond-shadow.svg',
-        shadowSize: [ 59.52, 59.52 ],
-        shadowAnchor: [ 29.76, 29.76 ]
+        shadowSize: [59.52, 59.52],
+        shadowAnchor: [29.76, 29.76],
       });
     });
     test('Handles explicit highlight status', () => {
@@ -823,12 +822,12 @@ describe('SiteMap - SiteMapUtils', () => {
       expect(L.Icon.mock.calls[0][0]).toStrictEqual({
         iconUrl: 'icon-site-relocatable-terrestrial.svg',
         iconRetinaUrl: 'icon-site-relocatable-terrestrial.svg',
-        iconSize: [ 34, 34 ],
-        iconAnchor: [ 17, 17 ],
-        popupAnchor: [ 0, -17 ],
+        iconSize: [34, 34],
+        iconAnchor: [17, 17],
+        popupAnchor: [0, -17],
         shadowUrl: 'icon-shape-circle-highlight.svg',
-        shadowSize: [ 51, 51 ],
-        shadowAnchor: [ 25.5, 25.5 ]
+        shadowSize: [51, 51],
+        shadowAnchor: [25.5, 25.5],
       });
     });
     test('Handles explicit selection status', () => {
@@ -843,12 +842,12 @@ describe('SiteMap - SiteMapUtils', () => {
       expect(L.Icon.mock.calls[0][0]).toStrictEqual({
         iconUrl: 'icon-site-relocatable-aquatic-selected.svg',
         iconRetinaUrl: 'icon-site-relocatable-aquatic-selected.svg',
-        iconSize: [ 79.75, 79.75 ],
-        iconAnchor: [ 39.875, 39.875 ],
-        popupAnchor: [ 0, -39.875 ],
+        iconSize: [79.75, 79.75],
+        iconAnchor: [39.875, 39.875],
+        popupAnchor: [0, -39.875],
         shadowUrl: 'icon-shape-circle-shadow.svg',
-        shadowSize: [ 94.25, 94.25 ],
-        shadowAnchor: [ 47.125, 47.125 ],
+        shadowSize: [94.25, 94.25],
+        shadowAnchor: [47.125, 47.125],
       });
     });
   });
@@ -886,10 +885,10 @@ describe('SiteMap - SiteMapUtils', () => {
     });
     test('calculates centroids when provided more than one valid point', () => {
       expect(
-        findCentroid([[-10, -10], [10, 10]])
+        findCentroid([[-10, -10], [10, 10]]),
       ).toStrictEqual([0, 0]);
       expect(
-        findCentroid([[18.02192, -66.61391], [34.444218, -96.624201], [31.199, -84.467]])
+        findCentroid([[18.02192, -66.61391], [34.444218, -96.624201], [31.199, -84.467]]),
       ).toStrictEqual([28.4642, -81.8378]);
     });
   });

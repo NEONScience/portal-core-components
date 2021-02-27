@@ -1189,5 +1189,7 @@ export const getTestableItems = () => (
     regenerateS3FilesFiltersAndValidValues,
     getAndValidateNewState,
     ALL_POSSIBLE_VALID_DATE_RANGE,
+    ALL_POSSIBLE_VALID_DOCUMENTATION,
+    ALL_POSSIBLE_VALID_PACKAGE_TYPE,
   }
 );

@@ -1114,6 +1114,8 @@
     @media (min-width: 37.5em) {
       #header .webform-element-description, #footer .webform-element-description {
         font-size: 0.75rem; } }
+  #header #linkit-editor-dialog-form, #footer #linkit-editor-dialog-form {
+    min-height: 400px; }
   #header .table-wrapper, #footer .table-wrapper {
     display: -ms-grid;
     display: grid;
