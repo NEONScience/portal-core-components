@@ -124,9 +124,9 @@ const NeonEnvironment = {
   route: {
     home: () => process.env.REACT_APP_NEON_ROUTER_NEON_HOME || '/home',
     account: () => process.env.REACT_APP_NEON_ROUTER_NEON_MYACCOUNT || '/myaccount',
-    getFullRoute: (route) => `${NeonEnvironment.getRouterBasePath()}${route}`,
-    buildRouteFromHost: (route) => (
-      `${NeonEnvironment.getHost()}${NeonEnvironment.getFullRoute(route)}`
+    getFullRoute: (route = '') => `${NeonEnvironment.getRouterBasePath()}${route}`,
+    buildRouteFromHost: (route = '') => (
+      `${NeonEnvironment.getHost()}${NeonEnvironment.route.getFullRoute(route)}`
     ),
     buildHomeRoute: () => (
       `${NeonEnvironment.getHost()}${NeonEnvironment.route.home()}`
@@ -228,9 +228,12 @@ const NeonEnvironment = {
   getFullJsonLdApiPath: (path = '') => {
     const host = NeonEnvironment.getHost();
     const root = NeonEnvironment.getRootJsonLdPath();
-    const appliedPath = ['products'].includes(path)
-      ? NeonEnvironment.getApiPath[path]()
-      : NeonEnvironment.getApiLdPath[path]();
+    let appliedPath = '';
+    if (['products'].includes(path)) {
+      appliedPath = NeonEnvironment.getApiPath[path]();
+    } else if (typeof NeonEnvironment.getApiLdPath[path] === 'function') {
+      appliedPath = NeonEnvironment.getApiLdPath[path]();
+    }
     return appliedPath
       ? `${host}${root}${appliedPath}`
       : `${host}${root}`;

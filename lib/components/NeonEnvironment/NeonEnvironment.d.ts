@@ -57,8 +57,8 @@ declare namespace NeonEnvironment {
     export namespace route {
         export function home(): string;
         export function account(): string;
-        export function getFullRoute(route: any): string;
-        export function buildRouteFromHost(route: any): string;
+        export function getFullRoute(route?: string): string;
+        export function buildRouteFromHost(route?: string): string;
         export function buildHomeRoute(): string;
         export function buildAccountRoute(): string;
     }
