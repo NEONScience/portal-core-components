@@ -34,6 +34,33 @@ import {
 
 const ucWord = (word = '') => `${word.slice(0, 1).toUpperCase()}${word.slice(1).toLowerCase()}`;
 
+/**
+ * Parse an input search string into discrete terms.
+ * Supports quoting words together as a single term.
+ * Example: '"foo bar" baz' => ['foo bar', 'baz']
+ * @param {string} input - string to parse into discrete terms
+ */
+const parseSearchTerms = (input) => {
+  const terms = input
+    .replace(/[^\w\s."]/g, '')
+    .match(/(".*?"|[^" \s]+)(?=\s* |\s*$)/g);
+  return (terms || [])
+    .map((term) => term.replace(/"/g, '').toLowerCase());
+};
+
+/**
+ * Apply a searchString to a list of string attributes; return boolean for a match
+ */
+const searchOnAttribs = (searchString, searchableAttribs = []) => {
+  const searchTerms = parseSearchTerms(searchString);
+  if (!searchTerms.length) { return true; }
+  return searchTerms.some((term) => (
+    searchableAttribs.some((attrib) => (
+      (attrib || '').toLowerCase().includes(term)
+    ))
+  ));
+};
+
 const useStyles = makeStyles((theme) => ({
   tableContainer: {
     position: 'absolute',
@@ -44,6 +71,9 @@ const useStyles = makeStyles((theme) => ({
     '& table': {
       margin: '0px !important',
       borderCollapse: 'separate',
+      '& tr.MuiTableRow-root:empty': {
+        height: '0px !important',
+      },
       '& tr.MuiTableRow-head': {
         backgroundColor: theme.palette.primary.main,
         '& th:first-child span.MuiCheckbox-root': {
@@ -135,6 +165,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-start',
     margin: Theme.spacing(1, 0, 0.5, 0),
     minWidth: '200px',
+    textAlign: 'left',
   },
   nlcdClassContainer: {
     display: 'flex',
@@ -355,9 +386,19 @@ const SiteMapTable = () => {
       title: 'Site',
       sorting: true,
       defaultSort: 'desc',
+      searchable: true,
       lookup: Object.fromEntries(
         Array.from(sitesInMap).map((siteCode) => [siteCode, siteCode]),
       ),
+      customFilterAndSearch: (input, row) => {
+        if (typeof input === 'string') {
+          return searchOnAttribs(input, [row.siteCode, row.description]);
+        }
+        if (Array.isArray(input)) {
+          return input.includes(row.siteCode);
+        }
+        return false;
+      },
       customSort: (rowA, rowB) => {
         const siteA = getSite(rowA);
         const siteB = getSite(rowB);
@@ -365,6 +406,7 @@ const SiteMapTable = () => {
         const bName = siteB.description;
         return aName > bName ? -1 : 1;
       },
+      // eslint-disable-next-line arrow-body-style
       render: (row) => {
         const site = getSite(row);
         if (!site) { return null; }
@@ -375,10 +417,16 @@ const SiteMapTable = () => {
         const unselectable = selectionActive && !rowIsSelectable(row);
         return (
           <div>
-            <div className={classes.siteName}>
+            <Link
+              component="button"
+              className={classes.siteName}
+              onClick={() => jumpTo(row.siteCode)}
+              title={`Click to view ${row.siteCode} on the map`}
+            >
               {renderFeatureIcon(featureKey, unselectable)}
               <span>{`${site.description || 'Unnamed Site'} (${site.siteCode})`}</span>
-            </div>
+            </Link>
+            {/*
             <div className={classes.startFlex} style={{ marginLeft: Theme.spacing(-0.75) }}>
               <Tooltip title={`Jump to ${site.siteCode} on the map`}>
                 <IconButton
@@ -421,6 +469,7 @@ const SiteMapTable = () => {
                 </>
               )}
             </div>
+            */}
           </div>
         );
       },
@@ -430,6 +479,7 @@ const SiteMapTable = () => {
       title: 'Domain',
       sorting: true,
       defaultSort: 'desc',
+      searchable: true,
       lookup: Object.fromEntries(
         Array.from(domainsInMap).map((domainCode) => [domainCode, domainCode]),
       ),
@@ -442,9 +492,15 @@ const SiteMapTable = () => {
         const domain = getDomain(row);
         return !domain ? null : (
           <div>
-            <div style={{ marginBottom: Theme.spacing(1) }}>
+            <Link
+              component="button"
+              className={classes.linkButton}
+              onClick={() => jumpTo(domain.domainCode)}
+              title={`Click to view ${domain.domainCode} on the map`}
+            >
               {domain.domainCode}
-            </div>
+            </Link>
+            {/*
             <div className={classes.startFlex} style={{ marginLeft: Theme.spacing(-0.75) }}>
               <Tooltip title={`Jump to ${domain.domainCode} on the map`}>
                 <IconButton
@@ -458,20 +514,6 @@ const SiteMapTable = () => {
                   <MarkerIcon fontSize="inherit" />
                 </IconButton>
               </Tooltip>
-              {/*
-              <Tooltip title={`Visit the ${domain.domainCode} domain details page`}>
-                <IconButton
-                  size="small"
-                  color="primary"
-                  className={classes.iconButton}
-                  href={`${getHref('DOMAIN_DETAILS', domain.domainCode)}`}
-                  data-selenium="sitemap-table-domain-button-domainDetails"
-                  aria-label="Visit domain details page"
-                >
-                  <InfoIcon fontSize="inherit" />
-                </IconButton>
-              </Tooltip>
-              */}
               <Tooltip title={`Explore data products for ${domain.domainCode}`}>
                 <IconButton
                   size="small"
@@ -485,6 +527,7 @@ const SiteMapTable = () => {
                 </IconButton>
               </Tooltip>
             </div>
+            */}
           </div>
         );
       },
@@ -494,6 +537,7 @@ const SiteMapTable = () => {
       title: 'State',
       sorting: true,
       defaultSort: 'desc',
+      searchable: true,
       lookup: Object.fromEntries(
         Array.from(statesInMap).map((stateCode) => [
           stateCode,
@@ -505,13 +549,29 @@ const SiteMapTable = () => {
         const stateB = getState(rowB);
         return stateA.name > stateB.name ? -1 : 1;
       },
+      customFilterAndSearch: (input, row) => {
+        if (typeof input === 'string') {
+          const rowState = getState(row);
+          return searchOnAttribs(input, [row.stateCode, rowState.name]);
+        }
+        if (Array.isArray(input)) {
+          return input.includes(row.stateCode);
+        }
+        return false;
+      },
       render: (row) => {
         const usstate = getState(row);
         return !usstate ? null : (
           <div>
-            <div style={{ marginBottom: Theme.spacing(1) }}>
+            <Link
+              component="button"
+              className={classes.linkButton}
+              onClick={() => jumpTo(row.stateCode)}
+              title={`Click to view ${row.stateCode} on the map`}
+            >
               {usstate.name}
-            </div>
+            </Link>
+            {/*
             <div className={classes.startFlex} style={{ marginLeft: Theme.spacing(-0.75) }}>
               <Tooltip title={`Jump to ${usstate.name} on the map`}>
                 <IconButton
@@ -538,6 +598,7 @@ const SiteMapTable = () => {
                 </IconButton>
               </Tooltip>
             </div>
+            */}
           </div>
         );
       },
@@ -572,6 +633,7 @@ const SiteMapTable = () => {
         title: 'Type',
         sorting: true,
         defaultSort: 'desc',
+        searchable: true,
         lookup: Object.fromEntries(
           Array.from(
             new Set(rows.map((row) => row.type)),
@@ -602,11 +664,13 @@ const SiteMapTable = () => {
         title: 'Name',
         sorting: true,
         defaultSort: 'desc',
+        searchable: true,
         render: (row) => (
           <Link
             component="button"
             className={classes.linkButton}
             onClick={() => jumpTo(row.name)}
+            title={`View ${row.name} on map`}
           >
             {row.name}
           </Link>
@@ -617,6 +681,7 @@ const SiteMapTable = () => {
         title: 'Type',
         sorting: true,
         defaultSort: 'desc',
+        searchable: true,
         lookup: Object.fromEntries(
           Array.from(new Set(rows.map((row) => row.featureKey)))
             .sort((a, b) => (getFeatureName(a) > getFeatureName(b) ? 1 : -1))
@@ -657,6 +722,7 @@ const SiteMapTable = () => {
         title: 'NLCD Class',
         sorting: true,
         deafultSort: 'asc',
+        searchable: true,
         lookup: Object.fromEntries(
           Object.keys(NLCD_CLASSES)
             .filter((classKey) => rows.some((row) => row.nlcdClass === classKey))
@@ -724,6 +790,7 @@ const SiteMapTable = () => {
         filtering: false,
         sorting: true,
         deafultSort: 'asc',
+        searchable: true,
         customSort: (rowA, rowB) => {
           const a = Array.isArray(rowA.samplingModules) ? rowA.samplingModules.length : null;
           const b = Array.isArray(rowB.samplingModules) ? rowB.samplingModules.length : null;
@@ -804,7 +871,8 @@ const SiteMapTable = () => {
       top: 0,
       backgroundColor: Theme.palette.grey[50],
     },
-    pageSizeOptions: [5, 10, 20, 50, 100],
+    pageSize: 100,
+    pageSizeOptions: [100, 200, 500],
     rowStyle: (row) => {
       if (selectionActive) {
         if (!rowIsSelectable(row)) {
@@ -822,9 +890,7 @@ const SiteMapTable = () => {
       disabled: !rowIsSelectable(row),
     }),
   };
-  if (fullHeight) {
-    tableOptions.pageSize = 50;
-  } else {
+  if (!fullHeight) {
     tableOptions.maxBodyHeight = `${maxBodyHeight || MIN_TABLE_MAX_BODY_HEIGHT}px`;
   }
   return (
@@ -857,3 +923,12 @@ const SiteMapTable = () => {
 };
 
 export default SiteMapTable;
+
+// Additional items exported for unit testing
+export const getTestableItems = () => (
+  process.env.NODE_ENV !== 'test' ? {} : {
+    ucWord,
+    parseSearchTerms,
+    searchOnAttribs,
+  }
+);

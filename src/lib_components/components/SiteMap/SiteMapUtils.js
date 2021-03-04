@@ -165,7 +165,7 @@ export const UNSELECTABLE_MARKER_FILTER = 'sepia(0.8) contrast(0.3) brightness(1
 export const HIGHLIGHT_STATUS = { NONE: 'NONE', HIGHLIGHT: 'HIGHLIGHT', SELECT: 'SELECT' };
 
 // For consistency in denoting which dinstinct user interfaces are available and which is visible
-export const VIEWS = { MAP: 'MAP', TABLE: 'TABLE' };
+export const VIEWS = { MAP: 'MAP', TABLE: 'TABLE', SPLIT: 'SPLIT' };
 
 // For consistency in denoting exclusive available mouse behaviors on the map
 export const MAP_MOUSE_MODES = { PAN: 'PAN', AREA_SELECT: 'AREA_SELECT' };
@@ -1405,9 +1405,10 @@ const featureIsHiddenByDefault = (key) => {
 export const DEFAULT_STATE = {
   view: {
     current: null,
-    initialized: Object.fromEntries(
-      Object.keys(VIEWS).map((view) => [view, false]),
-    ),
+    initialized: {
+      [VIEWS.MAP]: false,
+      [VIEWS.TABLE]: false,
+    },
   },
   neonContextHydrated: false, // Whether NeonContext data has been one-time hydrated into state
   overallFetch: { // Aggregation of all current fetch statuses for the SiteMap component

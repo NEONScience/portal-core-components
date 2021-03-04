@@ -66,6 +66,9 @@ import {
 
 const boxShadow = '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)';
 const useStyles = makeStyles((theme) => ({
+  ':root': {
+    fontSize: '24px',
+  },
   outerContainer: {
     zIndex: 0,
     width: '100%',
@@ -174,7 +177,7 @@ const useStyles = makeStyles((theme) => ({
       cursor: 'row-resize !important',
     },
     '& svg': {
-      fontSize: '1.15rem !important',
+      fontSize: '17px !important',
     },
   },
   resizeBorder: {
@@ -556,7 +559,7 @@ const SiteMapContainer = (props) => {
             : classes.mapTableToggleButtonGroup
         )}
       >
-        {Object.keys(VIEWS).map((key) => (
+        {Object.keys(VIEWS).filter((key) => key !== VIEWS.SPLIT).map((key) => (
           <Tooltip
             key={key}
             title={viewTooltips[key]}
@@ -1257,7 +1260,8 @@ const SiteMapContainer = (props) => {
     viewLegendButtonsContainerClassName = `${classes.viewLegendButtonsContainer} ${classes.viewLegendButtonsContainerFullscreen}`;
     /* eslint-enable max-len */
   }
-  return (
+  const startTime = Date.now();
+  const ret = (
     <div {...containerProps} aria-describedby={progressId}>
       <div ref={contentDivRef} {...contentDivProps}>
         {view === VIEWS.MAP ? <SiteMapLeaflet /> : null }
@@ -1282,6 +1286,10 @@ const SiteMapContainer = (props) => {
       {fullscreen ? null : <div ref={resizeBorderRef} className={classes.resizeBorder} />}
     </div>
   );
+  if (view === VIEWS.TABLE) {
+    console.log('OUTER TABLE RENDER', (Date.now() - startTime) / 1000);
+  }
+  return ret;
 };
 
 SiteMapContainer.propTypes = {
