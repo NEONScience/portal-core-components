@@ -94,6 +94,7 @@ export namespace HIGHLIGHT_STATUS {
 export namespace VIEWS {
     export const MAP: string;
     export const TABLE: string;
+    export const SPLIT: string;
 }
 export namespace MAP_MOUSE_MODES {
     export const PAN: string;

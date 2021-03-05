@@ -69,7 +69,7 @@ declare function useSiteMapContext(): any[] | {
     view: {
         current: null;
         initialized: {
-            [k: string]: boolean;
+            [x: string]: boolean;
         };
     };
     neonContextHydrated: boolean;

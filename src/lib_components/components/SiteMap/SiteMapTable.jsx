@@ -3,14 +3,15 @@ import React, { useRef, useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
 import InfoIcon from '@material-ui/icons/InfoOutlined';
-import MarkerIcon from '@material-ui/icons/LocationOn';
-import ExploreDataProductsIcon from '@material-ui/icons/InsertChartOutlined';
+// import MarkerIcon from '@material-ui/icons/LocationOn';
+// import ExploreDataProductsIcon from '@material-ui/icons/InsertChartOutlined';
 
 import MaterialTable, { MTableToolbar, MTableFilterRow } from 'material-table';
 
@@ -163,9 +164,16 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    margin: Theme.spacing(1, 0, 0.5, 0),
+    margin: theme.spacing(1, 0, 0.5, 0),
     minWidth: '200px',
     textAlign: 'left',
+  },
+  siteLinksDivider: {
+    margin: theme.spacing(0, 1, 0, 1),
+  },
+  siteDetailsLink: {
+    fontSize: '80%',
+    fontStyle: 'italic',
   },
   nlcdClassContainer: {
     display: 'flex',
@@ -426,6 +434,21 @@ const SiteMapTable = () => {
               {renderFeatureIcon(featureKey, unselectable)}
               <span>{`${site.description || 'Unnamed Site'} (${site.siteCode})`}</span>
             </Link>
+            <div className={classes.startFlex}>
+              <Link
+                className={classes.siteDetailsLink}
+                href={`${getHref('SITE_DETAILS', site.siteCode)}`}
+              >
+                Site Details
+              </Link>
+              <span className={classes.siteLinksDivider}>|</span>
+              <Link
+                className={classes.siteDetailsLink}
+                href={`${getHref('EXPLORE_DATA_PRODUCTS_BY_SITE', site.siteCode)}`}
+              >
+                Explore Data
+              </Link>
+            </div>
             {/*
             <div className={classes.startFlex} style={{ marginLeft: Theme.spacing(-0.75) }}>
               <Tooltip title={`Jump to ${site.siteCode} on the map`}>
@@ -603,6 +626,20 @@ const SiteMapTable = () => {
         );
       },
     },
+    coordinates: {
+      field: 'latitude',
+      title: 'Coordinates',
+      sorting: false,
+      filtering: false,
+      searchable: false,
+      render: (row) => (
+        <>
+          {renderCaptionString(row.latitude.toFixed(5), 'Latitude')}
+          <br />
+          {renderCaptionString(row.longitude.toFixed(5), 'Longitude')}
+        </>
+      ),
+    },
     latitude: {
       field: 'latitude',
       title: 'Latitude',
@@ -626,8 +663,6 @@ const SiteMapTable = () => {
   if (focus === FEATURE_TYPES.SITES.KEY) {
     columns = [
       commonColumns.site,
-      commonColumns.latitude,
-      commonColumns.longitude,
       { // Site Type
         field: 'type',
         title: 'Type',
@@ -655,6 +690,11 @@ const SiteMapTable = () => {
       },
       commonColumns.domain,
       commonColumns.state,
+      commonColumns.coordinates,
+      /*
+      commonColumns.latitude,
+      commonColumns.longitude,
+      */
     ];
   }
   if (focus === FEATURE_TYPES.LOCATIONS.KEY) {
@@ -704,8 +744,6 @@ const SiteMapTable = () => {
           );
         },
       },
-      commonColumns.latitude,
-      commonColumns.longitude,
       { // Elevation
         field: 'elevation',
         title: 'Elevation',
@@ -833,6 +871,11 @@ const SiteMapTable = () => {
       commonColumns.site,
       commonColumns.domain,
       commonColumns.state,
+      commonColumns.coordinates,
+      /*
+      commonColumns.latitude,
+      commonColumns.longitude,
+      */
     ];
   }
 

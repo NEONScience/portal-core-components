@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     // common styles
     textAlign: 'right',
     position: 'absolute',
-    zIndex: 10,
+    zIndex: 15,
     // viewport-specific styles
     [theme.breakpoints.up('lg')]: {
       padding: '0px',
@@ -60,10 +60,10 @@ const useStyles = makeStyles((theme) => ({
     '& > header': {
       position: 'unset !important',
       '& label[for="nav-trigger"]': {
-        zIndex: '3 !important',
+        zIndex: '9 !important',
       },
       '& div.header__site-navigation': {
-        zIndex: '2 !important',
+        zIndex: '8 !important',
       },
       [theme.breakpoints.down('sm')]: {
         '& .header__site-navigation': {
