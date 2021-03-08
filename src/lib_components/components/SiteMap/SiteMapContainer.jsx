@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     height: '0px', // Necessary to set a fixed aspect ratio from props (using paddingBottom)
     position: 'relative',
-    backgroundColor: theme.colors.NEON_BLUE[200],
+    backgroundColor: Theme.colors.NEON_BLUE[200],
     overflow: 'hidden',
     display: 'flex',
     justifyContent: 'center',
@@ -166,11 +166,11 @@ const useStyles = makeStyles((theme) => ({
     height: '26px',
     padding: 'unset',
     borderRadius: '2px 0px 2px 0px',
-    border: `1px solid ${theme.colors.LIGHT_BLUE[500]}`,
+    border: `1px solid ${Theme.colors.LIGHT_BLUE[500]}`,
     cursor: 'grab',
     '&:hover, &:active': {
-      color: theme.colors.LIGHT_BLUE[400],
-      borderColor: theme.colors.LIGHT_BLUE[400],
+      color: Theme.colors.LIGHT_BLUE[400],
+      borderColor: Theme.colors.LIGHT_BLUE[400],
       backgroundColor: theme.palette.grey[50],
     },
     '&:active': {
@@ -182,7 +182,7 @@ const useStyles = makeStyles((theme) => ({
   },
   resizeBorder: {
     position: 'absolute',
-    border: `3px solid ${theme.colors.LIGHT_BLUE[500]}`,
+    border: `3px solid ${Theme.colors.LIGHT_BLUE[500]}`,
     top: '0px',
     left: '0px',
     width: '100%',

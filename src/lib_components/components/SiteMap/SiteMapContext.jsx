@@ -742,7 +742,8 @@ const reducer = (state, action) => {
       newState.focusLocation.current = action.location;
       newState.focusLocation.data = null;
       newState.overallFetch.expected += 1;
-      if (newState.view.current !== VIEWS.MAP) { newState.view.current = VIEWS.MAP; }
+      // Switch view to MAP if we're on TABLE (and not on SPLIT)
+      if (newState.view.current === VIEWS.TABLE) { newState.view.current = VIEWS.MAP; }
       return newState;
 
     case 'setFocusLocationFetchStarted':

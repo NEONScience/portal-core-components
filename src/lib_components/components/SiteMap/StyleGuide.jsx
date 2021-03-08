@@ -564,7 +564,10 @@ return (
         <div role="tabpanel">
           <Typography variant="h4" component="h2" gutterBottom>Split View</Typography>
           <DocBlock>
-            ...
+            For some applications it may be preferable to see the map and table simultaneously. This
+            can be achieved by setting the <tt>view</tt> prop to <tt>&quot;split&quot;</tt>. Both
+            map and table will still be linked such that only sites or locations visible in the
+            map will be visible in the table.
           </DocBlock>
           <ExampleBlock>
             <SiteMap view="split" />

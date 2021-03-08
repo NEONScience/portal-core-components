@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid, no-unused-vars */
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useLayoutEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
@@ -10,8 +10,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
 import InfoIcon from '@material-ui/icons/InfoOutlined';
-// import MarkerIcon from '@material-ui/icons/LocationOn';
-// import ExploreDataProductsIcon from '@material-ui/icons/InsertChartOutlined';
 
 import MaterialTable, { MTableToolbar, MTableFilterRow } from 'material-table';
 
@@ -192,6 +190,12 @@ const useStyles = makeStyles((theme) => ({
     border: '1px solid black',
     marginRight: theme.spacing(1.5),
   },
+  tableTitle: {
+    '& h6': {
+      fontSize: '1.2rem',
+      fontWeight: 500,
+    },
+  },
 }));
 
 const calculateMaxBodyHeight = (tableRef) => {
@@ -264,6 +268,42 @@ const SiteMapTable = () => {
     viewsInitialized,
     dispatch,
     maxBodyHeightUpdateFromAspectRatio,
+  ]);
+
+  /**
+    Layout Effect - Inject a second horizontal scrollbar above the table linked to the main
+  */
+  useLayoutEffect(() => {
+    // This all only applies to full height table and/or split view (which behaves as full height)
+    if (!fullHeight && view !== VIEWS.SPLIT) { return () => {}; }
+    const timeout = window.setTimeout(() => {
+      const tableNode = tableRef.current.querySelector('table');
+      if (!tableNode) { return; }
+      const scrollingNode = (tableNode.parentElement || {}).parentElement;
+      if (!scrollingNode) { return; }
+      const containerNode = scrollingNode.parentElement;
+      if (!containerNode) { return; }
+      const scrollbar = document.createElement('div');
+      scrollbar.appendChild(document.createElement('div'));
+      scrollbar.style.overflow = 'auto';
+      scrollbar.style.overflowY = 'hidden';
+      scrollbar.firstChild.style.width = `${tableNode.scrollWidth || 0}px`;
+      scrollbar.firstChild.style.paddingTop = '1px';
+      scrollbar.onscroll = () => {
+        scrollingNode.scrollLeft = scrollbar.scrollLeft;
+      };
+      scrollingNode.onscroll = () => {
+        scrollbar.scrollLeft = scrollingNode.scrollLeft;
+      };
+      containerNode.parentNode.insertBefore(scrollbar, containerNode);
+    }, 0);
+    return () => {
+      window.clearTimeout(timeout);
+    };
+  }, [
+    tableRef,
+    fullHeight,
+    view,
   ]);
 
   if (!canRender) { return null; }
@@ -465,50 +505,6 @@ const SiteMapTable = () => {
                 Explore Data
               </Link>
             </div>
-            {/*
-            <div className={classes.startFlex} style={{ marginLeft: Theme.spacing(-0.75) }}>
-              <Tooltip title={`Jump to ${site.siteCode} on the map`}>
-                <IconButton
-                  size="small"
-                  color="primary"
-                  className={classes.iconButton}
-                  onClick={() => jumpTo(site.siteCode)}
-                  data-selenium="sitemap-table-site-button-jumpTo"
-                  aria-label="Jump to site on map"
-                >
-                  <MarkerIcon fontSize="inherit" />
-                </IconButton>
-              </Tooltip>
-              {isDecommissioned ? null : (
-                <>
-                  <Tooltip title={`Visit the ${site.siteCode} site details page`}>
-                    <IconButton
-                      size="small"
-                      color="primary"
-                      className={classes.iconButton}
-                      href={`${getHref('SITE_DETAILS', site.siteCode)}`}
-                      data-selenium="sitemap-table-site-button-siteDetails"
-                      aria-label="Visit site details page"
-                    >
-                      <InfoIcon fontSize="inherit" />
-                    </IconButton>
-                  </Tooltip>
-                  <Tooltip title={`Explore data products for ${site.siteCode}`}>
-                    <IconButton
-                      size="small"
-                      color="primary"
-                      className={classes.iconButton}
-                      href={`${getHref('EXPLORE_DATA_PRODUCTS_BY_SITE', site.siteCode)}`}
-                      data-selenium="sitemap-table-site-button-exploreDataProducts"
-                      aria-label="Explore data products for this site"
-                    >
-                      <ExploreDataProductsIcon fontSize="inherit" />
-                    </IconButton>
-                  </Tooltip>
-                </>
-              )}
-            </div>
-            */}
           </div>
         );
       },
@@ -539,34 +535,6 @@ const SiteMapTable = () => {
             >
               {domain.domainCode}
             </Link>
-            {/*
-            <div className={classes.startFlex} style={{ marginLeft: Theme.spacing(-0.75) }}>
-              <Tooltip title={`Jump to ${domain.domainCode} on the map`}>
-                <IconButton
-                  size="small"
-                  color="primary"
-                  className={classes.iconButton}
-                  onClick={() => jumpTo(domain.domainCode)}
-                  data-selenium="sitemap-table-domain-button-jumpTo"
-                  aria-label="Jump to domain on map"
-                >
-                  <MarkerIcon fontSize="inherit" />
-                </IconButton>
-              </Tooltip>
-              <Tooltip title={`Explore data products for ${domain.domainCode}`}>
-                <IconButton
-                  size="small"
-                  color="primary"
-                  className={classes.iconButton}
-                  href={`${getHref('EXPLORE_DATA_PRODUCTS_BY_DOMAIN', domain.domainCode)}`}
-                  data-selenium="sitemap-table-domain-button-exploreDataProducts"
-                  aria-label="Explore data products for this domain"
-                >
-                  <ExploreDataProductsIcon fontSize="inherit" />
-                </IconButton>
-              </Tooltip>
-            </div>
-            */}
           </div>
         );
       },
@@ -610,34 +578,6 @@ const SiteMapTable = () => {
             >
               {usstate.name}
             </Link>
-            {/*
-            <div className={classes.startFlex} style={{ marginLeft: Theme.spacing(-0.75) }}>
-              <Tooltip title={`Jump to ${usstate.name} on the map`}>
-                <IconButton
-                  size="small"
-                  color="primary"
-                  className={classes.iconButton}
-                  onClick={() => jumpTo(usstate.stateCode)}
-                  data-selenium="sitemap-table-state-button-jumpTo"
-                  aria-label="Jump to state on map"
-                >
-                  <MarkerIcon fontSize="inherit" />
-                </IconButton>
-              </Tooltip>
-              <Tooltip title={`Explore data products for ${usstate.stateCode}`}>
-                <IconButton
-                  size="small"
-                  color="primary"
-                  className={classes.iconButton}
-                  href={`${getHref('EXPLORE_DATA_PRODUCTS_BY_STATE', usstate.stateCode)}`}
-                  data-selenium="sitemap-table-state-button-exploreDataProducts"
-                  aria-label="Explore data products for this state"
-                >
-                  <ExploreDataProductsIcon fontSize="inherit" />
-                </IconButton>
-              </Tooltip>
-            </div>
-            */}
           </div>
         );
       },
@@ -902,7 +842,7 @@ const SiteMapTable = () => {
     Container: Box,
     Toolbar: (toolbarProps) => (
       <div className={toolbarClassName} data-selenium="sitemap-table-toolbar">
-        <MTableToolbar {...toolbarProps} />
+        <MTableToolbar {...toolbarProps} classes={{ title: classes.tableTitle }} />
       </div>
     ),
     FilterRow: (filterRowProps) => (
