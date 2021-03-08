@@ -64,9 +64,6 @@ const searchOnAttribs = (searchString, searchableAttribs = []) => {
 
 const useStyles = makeStyles((theme) => ({
   tableContainer: {
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
     backgroundColor: 'white',
     overflowWrap: 'normal',
     '& table': {
@@ -96,6 +93,14 @@ const useStyles = makeStyles((theme) => ({
       borderBottom: 'none',
     },
   },
+  tableContainerIntegrated: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+  },
+  tableContainerStandalone: {
+    // ...
+  },
   featureIcon: {
     width: theme.spacing(3),
     height: theme.spacing(3),
@@ -120,11 +125,6 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(0, 2),
       backgroundColor: theme.palette.grey[50],
     },
-    // This hides all but the search input and show columns buttons.
-    // No other way to have material table NOT show a selection title in the toolbar.
-    '& div.MuiToolbar-root > div:not(:nth-last-child(-n+2))': {
-      display: 'none',
-    },
     // Make the columns button more prominent (really hard to do with component overriding)
     '& button': {
       color: theme.palette.primary.main,
@@ -134,6 +134,13 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: `${COLORS.LIGHT_BLUE[400]}20`,
         padding: '11px',
       },
+    },
+  },
+  toolbarContainerNoSplit: {
+    // This hides all but the search input and show columns buttons.
+    // No other way to have material table NOT show a selection title in the toolbar.
+    '& div.MuiToolbar-root > div:not(:nth-last-child(-n+2))': {
+      display: 'none',
     },
   },
   toggleButtonGroup: {
@@ -205,7 +212,10 @@ const SiteMapTable = () => {
 
   // Site Map State
   const [state, dispatch] = SiteMapContext.useSiteMapContext();
-  const { manualLocationData } = state;
+  const {
+    manualLocationData,
+    view: { current: view, initialized: viewsInitialized },
+  } = state;
   const {
     focus,
     fullHeight,
@@ -227,25 +237,31 @@ const SiteMapTable = () => {
   useEffect(() => {
     if (
       !tableRef || !tableRef.current
-        || state.view.current !== VIEWS.TABLE || state.view.initialized[VIEWS.TABLE]
+        || view !== VIEWS.TABLE || viewsInitialized[VIEWS.TABLE]
     ) { return; }
     dispatch({ type: 'setViewInitialized' });
     dispatch({ type: 'setTableMaxBodyHeight', height: calculateMaxBodyHeight(tableRef) });
-  }, [tableRef, state.view, dispatch]);
+  }, [
+    tableRef,
+    view,
+    viewsInitialized,
+    dispatch,
+  ]);
 
   /**
     Effect - Recalculate the max body height from an aspect ratio change (e.g. page resize)
   */
   useEffect(() => {
     if (
-      state.view.current === VIEWS.TABLE && state.view.initialized[VIEWS.TABLE]
+      view === VIEWS.TABLE && viewsInitialized[VIEWS.TABLE]
         && maxBodyHeightUpdateFromAspectRatio
     ) {
       dispatch({ type: 'setTableMaxBodyHeight', height: calculateMaxBodyHeight(tableRef) });
     }
   }, [
     tableRef,
-    state.view,
+    view,
+    viewsInitialized,
     dispatch,
     maxBodyHeightUpdateFromAspectRatio,
   ]);
@@ -879,10 +895,13 @@ const SiteMapTable = () => {
     ];
   }
 
+  const toolbarClassName = view === VIEWS.SPLIT
+    ? classes.toolbarContainer
+    : `${classes.toolbarContainer} ${classes.toolbarContainerNoSplit}`;
   const components = {
     Container: Box,
     Toolbar: (toolbarProps) => (
-      <div className={classes.toolbarContainer} data-selenium="sitemap-table-toolbar">
+      <div className={toolbarClassName} data-selenium="sitemap-table-toolbar">
         <MTableToolbar {...toolbarProps} />
       </div>
     ),
@@ -933,23 +952,31 @@ const SiteMapTable = () => {
       disabled: !rowIsSelectable(row),
     }),
   };
-  if (!fullHeight) {
+  if (!fullHeight && view !== VIEWS.SPLIT) {
     tableOptions.maxBodyHeight = `${maxBodyHeight || MIN_TABLE_MAX_BODY_HEIGHT}px`;
+  }
+  let containerClassName = `${classes.tableContainer} ${classes.tableContainerIntegrated}`;
+  let containerStyle = {};
+  if (view === VIEWS.TABLE && fullHeight) {
+    containerStyle = { position: 'relative' };
+  }
+  if (view === VIEWS.SPLIT) {
+    containerClassName = `${classes.tableContainer} ${classes.tableContainerStandalone}`;
   }
   return (
     <div
       ref={tableRef}
-      className={classes.tableContainer}
-      style={fullHeight ? { position: 'relative' } : {}}
+      className={containerClassName}
+      style={containerStyle}
       data-selenium="sitemap-content-table"
     >
       <MaterialTable
+        title={`${ucWord(focus)} in view`}
         icons={MaterialTableIcons}
         components={components}
         columns={columns}
         data={rows}
         localization={localization}
-        title={null}
         options={tableOptions}
         onSelectionChange={!selectionActive ? null : (newRows) => {
           const action = { type: 'updateSelectionSet', selection: new Set() };

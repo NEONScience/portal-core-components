@@ -419,6 +419,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
           <Tab label="Focus Location" />
           <Tab label="Full Height Table" />
           <Tab label="Manual Locations" />
+          <Tab label="Split View" />
         </Tabs>
       </AppBar>
 
@@ -554,6 +555,24 @@ return (
   <SiteMap manualLocationData={manualLocationData} />
 );
         `}
+          </CodeBlock>
+        </div>
+      )}
+
+      {/* 5: Split View */}
+      {tabValue !== 5 ? null : (
+        <div role="tabpanel">
+          <Typography variant="h4" component="h2" gutterBottom>Split View</Typography>
+          <DocBlock>
+            ...
+          </DocBlock>
+          <ExampleBlock>
+            <SiteMap view="split" />
+          </ExampleBlock>
+          <CodeBlock>
+            {`
+<SiteMap view="split" />
+          `}
           </CodeBlock>
         </div>
       )}

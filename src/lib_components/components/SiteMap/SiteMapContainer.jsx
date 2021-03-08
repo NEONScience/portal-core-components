@@ -542,6 +542,7 @@ const SiteMapContainer = (props) => {
      Render - Map/Table Toggle Button Group
   */
   const renderMapTableToggleButtonGroup = () => {
+    if (state.view.current === VIEWS.SPLIT) { return null; }
     const viewTooltips = {
       [VIEWS.MAP]: 'Show the observatory map',
       [VIEWS.TABLE]: 'Show a table of all locations currently visible in the map',
@@ -801,7 +802,7 @@ const SiteMapContainer = (props) => {
         placement="left"
         enterDelay={500}
         enterNextDelay={200}
-        title={`Resize ${view === VIEWS.MAP ? 'map' : 'table'} vertically`}
+        title={`Resize ${view === VIEWS.TABLE ? 'table' : 'map'} vertically`}
       >
         <IconButton
           draggable
@@ -1260,11 +1261,10 @@ const SiteMapContainer = (props) => {
     viewLegendButtonsContainerClassName = `${classes.viewLegendButtonsContainer} ${classes.viewLegendButtonsContainerFullscreen}`;
     /* eslint-enable max-len */
   }
-  const startTime = Date.now();
   const ret = (
     <div {...containerProps} aria-describedby={progressId}>
       <div ref={contentDivRef} {...contentDivProps}>
-        {view === VIEWS.MAP ? <SiteMapLeaflet /> : null }
+        {view === VIEWS.MAP || view === VIEWS.SPLIT ? <SiteMapLeaflet /> : null }
         {view === VIEWS.TABLE ? <SiteMapTable /> : null }
         {renderVerticalResizeButton()}
         <div
@@ -1284,11 +1284,9 @@ const SiteMapContainer = (props) => {
         {renderSelectionSummary()}
       </div>
       {fullscreen ? null : <div ref={resizeBorderRef} className={classes.resizeBorder} />}
+      {view === VIEWS.SPLIT ? <SiteMapTable /> : null }
     </div>
   );
-  if (view === VIEWS.TABLE) {
-    console.log('OUTER TABLE RENDER', (Date.now() - startTime) / 1000);
-  }
   return ret;
 };
 
