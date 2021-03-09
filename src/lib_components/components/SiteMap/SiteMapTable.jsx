@@ -60,6 +60,21 @@ const searchOnAttribs = (searchString, searchableAttribs = []) => {
   ));
 };
 
+const getFeatureName = (featureKey) => {
+  if (FEATURES[featureKey]) {
+    return (FEATURES[featureKey].nameSingular || FEATURES[featureKey].name || featureKey);
+  }
+  return featureKey;
+};
+
+const calculateMaxBodyHeight = (tableRef) => {
+  if (!tableRef || !tableRef.current) { return MIN_TABLE_MAX_BODY_HEIGHT; }
+  const containerHeight = tableRef.current.clientHeight || 0;
+  const toolbarHeight = tableRef.current.children[0].children[0].clientHeight || 0;
+  const pagerHeight = tableRef.current.children[0].children[2].clientHeight || 0;
+  return Math.max(containerHeight - toolbarHeight - pagerHeight, MIN_TABLE_MAX_BODY_HEIGHT);
+};
+
 const useStyles = makeStyles((theme) => ({
   tableContainer: {
     backgroundColor: 'white',
@@ -115,7 +130,6 @@ const useStyles = makeStyles((theme) => ({
   },
   toolbarContainer: {
     backgroundColor: theme.palette.grey[50],
-    borderBottom: `1px dotted ${theme.palette.grey[300]}`,
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(4.5),
     },
@@ -198,14 +212,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const calculateMaxBodyHeight = (tableRef) => {
-  if (!tableRef || !tableRef.current) { return MIN_TABLE_MAX_BODY_HEIGHT; }
-  const containerHeight = tableRef.current.clientHeight || 0;
-  const toolbarHeight = tableRef.current.children[0].children[0].clientHeight || 0;
-  const pagerHeight = tableRef.current.children[0].children[2].clientHeight || 0;
-  return Math.max(containerHeight - toolbarHeight - pagerHeight, MIN_TABLE_MAX_BODY_HEIGHT);
-};
-
 const SiteMapTable = () => {
   const classes = useStyles(Theme);
   const tableRef = useRef(null);
@@ -274,19 +280,28 @@ const SiteMapTable = () => {
     Layout Effect - Inject a second horizontal scrollbar above the table linked to the main
   */
   useLayoutEffect(() => {
+    const noop = () => {};
     // This all only applies to full height table and/or split view (which behaves as full height)
-    if (!fullHeight && view !== VIEWS.SPLIT) { return () => {}; }
-    const timeout = window.setTimeout(() => {
-      const tableNode = tableRef.current.querySelector('table');
-      if (!tableNode) { return; }
-      const scrollingNode = (tableNode.parentElement || {}).parentElement;
-      if (!scrollingNode) { return; }
-      const containerNode = scrollingNode.parentElement;
-      if (!containerNode) { return; }
-      const scrollbar = document.createElement('div');
+    if (!fullHeight && view !== VIEWS.SPLIT) { return noop; }
+    // Collect the nodes we pay attention to. Each one has a distinct purpose.
+    const tableNode = tableRef.current.querySelector('table');
+    if (!tableNode) { return noop; }
+    const tbodyNode = tableRef.current.querySelector('tbody');
+    if (!tbodyNode) { return noop; }
+    const scrollingNode = (tableNode.parentElement || {}).parentElement;
+    if (!scrollingNode) { return noop; }
+    const containerNode = scrollingNode.parentElement;
+    if (!containerNode) { return noop; }
+    // Initialize the new scrollbar in this scope
+    let scrollbar = null;
+    // Function to do the initial injection fo the scrollbar node
+    const injectScrollbar = () => {
+      scrollbar = document.createElement('div');
       scrollbar.appendChild(document.createElement('div'));
       scrollbar.style.overflow = 'auto';
       scrollbar.style.overflowY = 'hidden';
+      // eslint-disable-next-line prefer-destructuring
+      scrollbar.style.backgroundColor = Theme.palette.grey[50];
       scrollbar.firstChild.style.width = `${tableNode.scrollWidth || 0}px`;
       scrollbar.firstChild.style.paddingTop = '1px';
       scrollbar.onscroll = () => {
@@ -296,8 +311,23 @@ const SiteMapTable = () => {
         scrollbar.scrollLeft = scrollingNode.scrollLeft;
       };
       containerNode.parentNode.insertBefore(scrollbar, containerNode);
-    }, 0);
+    };
+    // Function to resize the scrollbar. We can't rely on the scrollWidth being accurate when we
+    // inject as not-yet-fully-rendered table rows may expand the scrollWidth.
+    const resizeScrollbar = () => {
+      if (!scrollbar) { return; }
+      scrollbar.firstChild.style.width = `${tableNode.scrollWidth || 0}px`;
+      scrollbar.scrollLeft = scrollingNode.scrollLeft;
+    };
+    // Inject the scrollbar one step removed from the initial render cycle (with a 0-sec timeout)
+    const timeout = window.setTimeout(injectScrollbar, 0);
+    // Observe the childList of the tbody - i.e. rows being added or removed - to trigger a resize
+    // of the injected scrollbar
+    const observer = new MutationObserver(resizeScrollbar);
+    observer.observe(tbodyNode, { childList: true });
+    // Clear any pending timeouts and disconnect our observer on unload to avoid memory leaks
     return () => {
+      observer.disconnect();
       window.clearTimeout(timeout);
     };
   }, [
@@ -359,12 +389,6 @@ const SiteMapTable = () => {
   const getState = (location) => getParent('STATE', location);
   const getDomain = (location) => getParent('DOMAIN', location);
 
-  const getFeatureName = (featureKey) => {
-    if (FEATURES[featureKey]) {
-      return (FEATURES[featureKey].nameSingular || FEATURES[featureKey].name || featureKey);
-    }
-    return featureKey;
-  };
   const renderFeatureIcon = (featureKey, unselectable = false) => {
     if (!FEATURES[featureKey] || !FEATURES[featureKey].iconSvg) { return null; }
     const { iconSvg } = FEATURES[featureKey];
@@ -940,5 +964,7 @@ export const getTestableItems = () => (
     ucWord,
     parseSearchTerms,
     searchOnAttribs,
+    calculateMaxBodyHeight,
+    getFeatureName,
   }
 );

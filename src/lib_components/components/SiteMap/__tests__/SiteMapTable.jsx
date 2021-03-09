@@ -2,10 +2,14 @@ import React from 'react';
 
 import { getTestableItems } from '../SiteMapTable';
 
+import { MIN_TABLE_MAX_BODY_HEIGHT } from '../SiteMapUtils';
+
 const {
   ucWord,
   parseSearchTerms,
   searchOnAttribs,
+  getFeatureName,
+  calculateMaxBodyHeight,
 } = getTestableItems();
 
 describe('SiteMap - SiteMapTable', () => {
@@ -46,6 +50,42 @@ describe('SiteMap - SiteMapTable', () => {
       cases.forEach((c) => {
         expect(searchOnAttribs(c[0], c[1])).toBe(c[2]);
       });
+    });
+  });
+
+  describe('getFeatureName()', () => {
+    test('reflects back feature key if not valid', () => {
+      expect(getFeatureName('notValid')).toBe('notValid');
+    });
+    test('returns singular name if defined', () => {
+      expect(getFeatureName('STATES')).toBe('US State');
+    });
+    test('returns name if singular name is not defined', () => {
+      expect(getFeatureName('AQUATIC_WATERSHEDS')).toBe('Watersheds');
+    });
+  });
+
+  describe('calculateMaxBodyHeight()', () => {
+    test('returns mininum for an invalid tableRef', () => {
+      expect(calculateMaxBodyHeight()).toBe(MIN_TABLE_MAX_BODY_HEIGHT);
+      expect(calculateMaxBodyHeight({ current: null })).toBe(MIN_TABLE_MAX_BODY_HEIGHT);
+    });
+    test('calculates value correctly based on children', () => {
+      const tableRef = {
+        current: {
+          clientHeight: 400,
+          children: [
+            {
+              children: [
+                { clientHeight: 80 }, // toolbar
+                { clientHeight: 30 },
+                { clientHeight: 50 }, // pager
+              ],
+            },
+          ],
+        },
+      };
+      expect(calculateMaxBodyHeight(tableRef)).toBe(270);
     });
   });
 });
