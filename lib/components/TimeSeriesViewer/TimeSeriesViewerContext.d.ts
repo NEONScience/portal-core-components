@@ -4,6 +4,7 @@ export namespace TIME_SERIES_VIEWER_STATUS {
     export const READY_FOR_DATA: string;
     export const LOADING_DATA: string;
     export const ERROR: string;
+    export const WARNING: string;
     export const READY_FOR_SERIES: string;
     export const READY: string;
 }
@@ -163,6 +164,8 @@ export function getTestableItems(): {
                 y1: any;
                 y2: any;
             };
+            isDefault: boolean;
+            invalidDefaultVariables: Set<any>;
         };
         availableQualityFlags: Set<any>;
         availableTimeSteps: Set<string>;

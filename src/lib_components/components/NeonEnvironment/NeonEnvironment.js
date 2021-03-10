@@ -35,6 +35,7 @@ export const optionalEnvironmentVars = [
   'REACT_APP_NEON_PATH_DOWNLOAD_API',
   'REACT_APP_NEON_PATH_MANIFEST_API',
   'REACT_APP_NEON_PATH_PRODUCTS_API',
+  'REACT_APP_NEON_PATH_PROTOTYPE_DATA_API',
   'REACT_APP_NEON_PATH_RELEASES_API',
   'REACT_APP_NEON_PATH_SITES_API',
   'REACT_APP_NEON_PATH_LOCATIONS_API',
@@ -77,6 +78,7 @@ const NeonEnvironment = {
   getApiPath: {
     aopDownload: () => process.env.REACT_APP_NEON_PATH_AOP_DOWNLOAD_API,
     data: () => process.env.REACT_APP_NEON_PATH_DATA_API,
+    prototype: () => process.env.REACT_APP_NEON_PATH_PROTOTYPE_DATA_API,
     documents: () => process.env.REACT_APP_NEON_PATH_DOCUMENTS_API,
     download: () => process.env.REACT_APP_NEON_PATH_DOWNLOAD_API,
     manifest: () => process.env.REACT_APP_NEON_PATH_MANIFEST_API,
@@ -122,9 +124,9 @@ const NeonEnvironment = {
   route: {
     home: () => process.env.REACT_APP_NEON_ROUTER_NEON_HOME || '/home',
     account: () => process.env.REACT_APP_NEON_ROUTER_NEON_MYACCOUNT || '/myaccount',
-    getFullRoute: (route) => `${NeonEnvironment.getRouterBasePath()}${route}`,
-    buildRouteFromHost: (route) => (
-      `${NeonEnvironment.getHost()}${NeonEnvironment.getFullRoute(route)}`
+    getFullRoute: (route = '') => `${NeonEnvironment.getRouterBasePath()}${route}`,
+    buildRouteFromHost: (route = '') => (
+      `${NeonEnvironment.getHost()}${NeonEnvironment.route.getFullRoute(route)}`
     ),
     buildHomeRoute: () => (
       `${NeonEnvironment.getHost()}${NeonEnvironment.route.home()}`
@@ -226,9 +228,12 @@ const NeonEnvironment = {
   getFullJsonLdApiPath: (path = '') => {
     const host = NeonEnvironment.getHost();
     const root = NeonEnvironment.getRootJsonLdPath();
-    const appliedPath = ['products'].includes(path)
-      ? NeonEnvironment.getApiPath[path]()
-      : NeonEnvironment.getApiLdPath[path]();
+    let appliedPath = '';
+    if (['products'].includes(path)) {
+      appliedPath = NeonEnvironment.getApiPath[path]();
+    } else if (typeof NeonEnvironment.getApiLdPath[path] === 'function') {
+      appliedPath = NeonEnvironment.getApiLdPath[path]();
+    }
     return appliedPath
       ? `${host}${root}${appliedPath}`
       : `${host}${root}`;

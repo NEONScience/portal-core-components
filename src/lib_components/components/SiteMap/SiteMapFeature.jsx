@@ -47,6 +47,7 @@ import {
   NLCD_CLASSES,
   KM2_TO_ACRES,
   MAP_MOUSE_MODES,
+  MANUAL_LOCATION_TYPES,
   HIGHLIGHT_STATUS,
   SELECTION_STATUS,
   SELECTION_PORTIONS,
@@ -239,6 +240,7 @@ const SiteMapFeature = (props) => {
   */
   const {
     neonContextHydrated,
+    manualLocationData,
     map: { bounds: mapBounds },
     focusLocation: { current: focusLocation },
     featureData: {
@@ -1124,6 +1126,84 @@ const SiteMapFeature = (props) => {
   };
 
   /**
+     Render: Decommissioned Site Popup
+  */
+  const renderDecommissionedSitePopup = (siteCode) => {
+    const site = featureData[siteCode] || {};
+    const { [site.state]: usState = {} } = state
+      .featureData[FEATURE_TYPES.STATES.KEY][FEATURES.STATES.KEY];
+    const { [site.domain]: domain = {} } = state
+      .featureData[FEATURE_TYPES.DOMAINS.KEY][FEATURES.DOMAINS.KEY];
+    const stateFieldTitle = (site.stateCode === 'PR' ? 'Territory' : 'State');
+    return (
+      <Popup {...popupProps}>
+        {renderPopupTitle(`${site.siteName} (${site.siteCode})`, false)}
+        <Link
+          variant="caption"
+          component="button"
+          onClick={() => jumpTo(site.siteCode)}
+          style={{ marginLeft: '-2px', marginBottom: '8px' }}
+          data-selenium="sitemap-map-popup-siteLink"
+        >
+          {markerIcon}
+          {`Jump to ${site.siteCode} on the map`}
+        </Link>
+        <Grid container spacing={1} style={{ marginBottom: Theme.spacing(1) }}>
+          {/* Terrain and Type */}
+          <Grid item xs={8}>
+            <Typography variant="subtitle2">{feature.nameSingular}</Typography>
+            <Typography variant="caption"><i>{featureDescription}</i></Typography>
+          </Grid>
+          {/* State/Territory */}
+          <Grid item xs={4} style={{ textAlign: 'right' }}>
+            <Typography variant="subtitle2">{stateFieldTitle}</Typography>
+            {selectionActive ? (
+              <Typography variant="caption">{usState.name}</Typography>
+            ) : (
+              <Tooltip title={`Jump to ${usState.name} on the map`}>
+                <Link
+                  variant="caption"
+                  component="button"
+                  style={{ textAlign: 'right' }}
+                  onClick={() => jumpTo(site.state)}
+                  data-selenium="sitemap-map-popup-stateLink"
+                >
+                  {markerIcon}
+                  {usState.name}
+                </Link>
+              </Tooltip>
+            )}
+          </Grid>
+          {/* Latitude/Longitude */}
+          <Grid item xs={5} style={{ display: 'flex', alignItems: 'flex-end' }}>
+            {renderLatLon(site.latitude, site.longitude)}
+          </Grid>
+          {/* Domain */}
+          <Grid item xs={7} style={{ textAlign: 'right' }}>
+            <Typography variant="subtitle2">Domain</Typography>
+            {selectionActive ? (
+              <Typography variant="caption">{`${site.domain} - ${domain.name}`}</Typography>
+            ) : (
+              <Tooltip title={`Jump to ${site.domain} on the map`}>
+                <Link
+                  variant="caption"
+                  component="button"
+                  style={{ textAlign: 'right' }}
+                  onClick={() => jumpTo(site.domain)}
+                  data-selenium="sitemap-map-popup-domainLink"
+                >
+                  {markerIcon}
+                  {`${site.domain} - ${domain.name}`}
+                </Link>
+              </Tooltip>
+            )}
+          </Grid>
+        </Grid>
+      </Popup>
+    );
+  };
+
+  /**
      Render - All the Rest of the Popups
      Convention is alphabetical listing of keys since order here doesn't matter
   */
@@ -1148,6 +1228,7 @@ const SiteMapFeature = (props) => {
     AQUATIC_SENSOR_STATIONS: renderLocationPopup,
     AQUATIC_STAFF_GAUGES: renderLocationPopup,
     AQUATIC_WET_DEPOSITION_POINTS: renderLocationPopup,
+    DECOMMISSIONED_SITES: renderDecommissionedSitePopup,
     DISTRIBUTED_BASE_PLOTS: (siteCode, location) => renderLocationPopup(siteCode, location, [
       renderPlotSizeAndSlope,
       renderPlotSamplingModules,
@@ -1528,15 +1609,30 @@ const SiteMapFeature = (props) => {
   /**
      Main Render
   */
+  let renderableKeys = Object.keys(featureData);
+  if (Array.isArray(manualLocationData) && manualLocationData.length) {
+    const hasPrototypeSites = manualLocationData.some((ml) => (
+      ml.manualLocationType === MANUAL_LOCATION_TYPES.PROTOTYPE_SITE
+    ));
+    if (hasPrototypeSites && featureType === FEATURE_TYPES.SITES.KEY) {
+      const allKeys = Object.keys(featureData);
+      renderableKeys = manualLocationData
+        .filter((ml) => (
+          ml.manualLocationType === MANUAL_LOCATION_TYPES.PROTOTYPE_SITE
+            && allKeys.includes(ml.siteCode)
+        ))
+        .map((ml) => ml.siteCode);
+    }
+  }
   return (
     <FeatureGroup>
-      {Object.keys(featureData)
+      {renderableKeys
         // Valid items should render above unselecatbles
         .sort((a) => {
           if (!validItems) { return 0; }
           return (validItems.has(a) ? 1 : -1);
         })
-        // Focus lcoation should render above all others
+        // Focus location should render above all others
         .sort((a) => (a === state.focusLocation.current ? 1 : -1))
         .flatMap((keyA) => {
           if (

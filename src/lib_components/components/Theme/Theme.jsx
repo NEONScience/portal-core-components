@@ -292,7 +292,7 @@ const baseTheme = createMuiTheme({
     },
     MuiBackdrop: {
       root: {
-        zIndex: 3,
+        zIndex: 50,
       },
     },
     MuiBreadcrumbs: {
@@ -444,7 +444,7 @@ const baseTheme = createMuiTheme({
         zIndex: 105,
       },
       paper: {
-        zIndex: 3,
+        zIndex: 10,
       },
     },
     MuiFormControlLabel: {

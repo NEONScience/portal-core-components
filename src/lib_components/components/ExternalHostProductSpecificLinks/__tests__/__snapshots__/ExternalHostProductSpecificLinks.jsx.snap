@@ -93,7 +93,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and no
           rel="noopener noreferrer"
           target="_blank"
         >
-          BARR -  - Utqiaġvik Environmental Observatory
+          BARR -  - Utqiaġvik
         </a>
       </li>
       <li>
@@ -287,7 +287,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and no
           rel="noopener noreferrer"
           target="_blank"
         >
-          RMNP -  - Rocky Mountain National Park
+          RMNP -  - Rocky Mountain National Park, CASTNET
         </a>
       </li>
       <li>
@@ -301,7 +301,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and no
           rel="noopener noreferrer"
           target="_blank"
         >
-          STER -  - Sterling
+          STER -  - North Sterling, CO
         </a>
       </li>
     </ul>
@@ -411,7 +411,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and no
           rel="noopener noreferrer"
           target="_blank"
         >
-          PUUM -  - Pu-u Maka-ala Natural Area Reserve
+          PUUM -  - Pu'u Maka'ala Natural Area Reserve
         </a>
       </li>
     </ul>
@@ -443,7 +443,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and no
           rel="noopener noreferrer"
           target="_blank"
         >
-          KONA -  - Konza Prairie Biological Station
+          KONA -  - Konza Prairie Biological Station - Relocatable
         </a>
       </li>
       <li>
@@ -801,7 +801,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and no
           rel="noopener noreferrer"
           target="_blank"
         >
-          GRSM -  - Great Smoky Mountains National Park
+          GRSM -  - Great Smoky Mountains National Park, Twin Creeks
         </a>
       </li>
       <li>
@@ -1077,7 +1077,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and no
           rel="noopener noreferrer"
           target="_blank"
         >
-          YELL -  - Yellowstone National Park
+          YELL -  - Yellowstone Nothern Range (Frog Rock)
         </a>
       </li>
     </ul>
@@ -1156,7 +1156,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and no
           rel="noopener noreferrer"
           target="_blank"
         >
-          BLWA - Black Warrior River
+          BLWA - Black Warrior River near Dead Lake
         </a>
       </li>
       <li>
@@ -1226,7 +1226,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and no
           rel="noopener noreferrer"
           target="_blank"
         >
-          TOMB - Tombigbee River
+          TOMB - Lower Tombigbee River at Choctaw Refuge
         </a>
       </li>
     </ul>
@@ -1258,7 +1258,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and no
           rel="noopener noreferrer"
           target="_blank"
         >
-          BARR - Utqiaġvik Environmental Observatory
+          BARR - Utqiaġvik
         </a>
       </li>
       <li>
@@ -1286,7 +1286,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and no
           rel="noopener noreferrer"
           target="_blank"
         >
-          CARI - Caribou Creek at Caribou-Poker Creeks Research Watershed
+          CARI - Caribou Creek, Caribou-Poker Creeks Research Watershed
         </a>
       </li>
       <li>
@@ -1448,7 +1448,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and no
           rel="noopener noreferrer"
           target="_blank"
         >
-          SJER - San Joaquin
+          SJER - San Joaquin Experimental Range
         </a>
       </li>
       <li>
@@ -1578,7 +1578,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and no
           rel="noopener noreferrer"
           target="_blank"
         >
-          RMNP - Rocky Mountain National Park
+          RMNP - Rocky Mountain National Park, CASTNET
         </a>
       </li>
       <li>
@@ -1592,7 +1592,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and no
           rel="noopener noreferrer"
           target="_blank"
         >
-          STER - Sterling
+          STER - North Sterling, CO
         </a>
       </li>
       <li>
@@ -1638,7 +1638,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and no
           rel="noopener noreferrer"
           target="_blank"
         >
-          BARC - Barco Lake
+          BARC - Ordway-Swisher Biological Station - Barco Lake
         </a>
       </li>
       <li>
@@ -1680,7 +1680,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and no
           rel="noopener noreferrer"
           target="_blank"
         >
-          SUGG - Suggs Lake
+          SUGG - Ordway-Swisher Biological Station - Suggs Lake
         </a>
       </li>
     </ul>
@@ -1758,7 +1758,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and no
           rel="noopener noreferrer"
           target="_blank"
         >
-          PUUM - Pu-u Maka-ala Natural Area Reserve
+          PUUM - Pu'u Maka'ala Natural Area Reserve
         </a>
       </li>
     </ul>
@@ -1804,7 +1804,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and no
           rel="noopener noreferrer"
           target="_blank"
         >
-          KONA - Konza Prairie Biological Station
+          KONA - Konza Prairie Biological Station - Relocatable
         </a>
       </li>
       <li>
@@ -1924,7 +1924,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and no
           rel="noopener noreferrer"
           target="_blank"
         >
-          HOPB - Hop Brook
+          HOPB - Lower Hop Brook
         </a>
       </li>
     </ul>
@@ -2292,7 +2292,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and no
           rel="noopener noreferrer"
           target="_blank"
         >
-          GRSM - Great Smoky Mountains National Park
+          GRSM - Great Smoky Mountains National Park, Twin Creeks
         </a>
       </li>
       <li>
@@ -2708,7 +2708,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and no
           rel="noopener noreferrer"
           target="_blank"
         >
-          YELL - Yellowstone National Park
+          YELL - Yellowstone Nothern Range (Frog Rock)
         </a>
       </li>
     </ul>
@@ -2807,7 +2807,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and si
           rel="noopener noreferrer"
           target="_blank"
         >
-          BARR -  - Utqiaġvik Environmental Observatory
+          BARR -  - Utqiaġvik
         </a>
       </li>
       <li>
@@ -3001,7 +3001,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and si
           rel="noopener noreferrer"
           target="_blank"
         >
-          RMNP -  - Rocky Mountain National Park
+          RMNP -  - Rocky Mountain National Park, CASTNET
         </a>
       </li>
       <li>
@@ -3015,7 +3015,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and si
           rel="noopener noreferrer"
           target="_blank"
         >
-          STER -  - Sterling
+          STER -  - North Sterling, CO
         </a>
       </li>
     </ul>
@@ -3125,7 +3125,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and si
           rel="noopener noreferrer"
           target="_blank"
         >
-          PUUM -  - Pu-u Maka-ala Natural Area Reserve
+          PUUM -  - Pu'u Maka'ala Natural Area Reserve
         </a>
       </li>
     </ul>
@@ -3157,7 +3157,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and si
           rel="noopener noreferrer"
           target="_blank"
         >
-          KONA -  - Konza Prairie Biological Station
+          KONA -  - Konza Prairie Biological Station - Relocatable
         </a>
       </li>
       <li>
@@ -3515,7 +3515,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and si
           rel="noopener noreferrer"
           target="_blank"
         >
-          GRSM -  - Great Smoky Mountains National Park
+          GRSM -  - Great Smoky Mountains National Park, Twin Creeks
         </a>
       </li>
       <li>
@@ -3791,7 +3791,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and si
           rel="noopener noreferrer"
           target="_blank"
         >
-          YELL -  - Yellowstone National Park
+          YELL -  - Yellowstone Nothern Range (Frog Rock)
         </a>
       </li>
     </ul>
@@ -3870,7 +3870,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and si
           rel="noopener noreferrer"
           target="_blank"
         >
-          BLWA - Black Warrior River
+          BLWA - Black Warrior River near Dead Lake
         </a>
       </li>
       <li>
@@ -3940,7 +3940,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and si
           rel="noopener noreferrer"
           target="_blank"
         >
-          TOMB - Tombigbee River
+          TOMB - Lower Tombigbee River at Choctaw Refuge
         </a>
       </li>
     </ul>
@@ -3972,7 +3972,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and si
           rel="noopener noreferrer"
           target="_blank"
         >
-          BARR - Utqiaġvik Environmental Observatory
+          BARR - Utqiaġvik
         </a>
       </li>
       <li>
@@ -4000,7 +4000,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and si
           rel="noopener noreferrer"
           target="_blank"
         >
-          CARI - Caribou Creek at Caribou-Poker Creeks Research Watershed
+          CARI - Caribou Creek, Caribou-Poker Creeks Research Watershed
         </a>
       </li>
       <li>
@@ -4162,7 +4162,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and si
           rel="noopener noreferrer"
           target="_blank"
         >
-          SJER - San Joaquin
+          SJER - San Joaquin Experimental Range
         </a>
       </li>
       <li>
@@ -4292,7 +4292,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and si
           rel="noopener noreferrer"
           target="_blank"
         >
-          RMNP - Rocky Mountain National Park
+          RMNP - Rocky Mountain National Park, CASTNET
         </a>
       </li>
       <li>
@@ -4306,7 +4306,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and si
           rel="noopener noreferrer"
           target="_blank"
         >
-          STER - Sterling
+          STER - North Sterling, CO
         </a>
       </li>
       <li>
@@ -4352,7 +4352,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and si
           rel="noopener noreferrer"
           target="_blank"
         >
-          BARC - Barco Lake
+          BARC - Ordway-Swisher Biological Station - Barco Lake
         </a>
       </li>
       <li>
@@ -4394,7 +4394,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and si
           rel="noopener noreferrer"
           target="_blank"
         >
-          SUGG - Suggs Lake
+          SUGG - Ordway-Swisher Biological Station - Suggs Lake
         </a>
       </li>
     </ul>
@@ -4472,7 +4472,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and si
           rel="noopener noreferrer"
           target="_blank"
         >
-          PUUM - Pu-u Maka-ala Natural Area Reserve
+          PUUM - Pu'u Maka'ala Natural Area Reserve
         </a>
       </li>
     </ul>
@@ -4518,7 +4518,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and si
           rel="noopener noreferrer"
           target="_blank"
         >
-          KONA - Konza Prairie Biological Station
+          KONA - Konza Prairie Biological Station - Relocatable
         </a>
       </li>
       <li>
@@ -4638,7 +4638,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and si
           rel="noopener noreferrer"
           target="_blank"
         >
-          HOPB - Hop Brook
+          HOPB - Lower Hop Brook
         </a>
       </li>
     </ul>
@@ -5006,7 +5006,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and si
           rel="noopener noreferrer"
           target="_blank"
         >
-          GRSM - Great Smoky Mountains National Park
+          GRSM - Great Smoky Mountains National Park, Twin Creeks
         </a>
       </li>
       <li>
@@ -5422,7 +5422,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and si
           rel="noopener noreferrer"
           target="_blank"
         >
-          YELL - Yellowstone National Park
+          YELL - Yellowstone Nothern Range (Frog Rock)
         </a>
       </li>
     </ul>

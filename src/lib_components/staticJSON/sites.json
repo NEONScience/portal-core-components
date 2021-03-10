@@ -20,7 +20,7 @@
     "zoom": 15
   },
   "BARC": {
-    "description": "Barco Lake",
+    "description": "Ordway-Swisher Biological Station - Barco Lake",
     "type": "CORE",
     "stateCode": "FL",
     "domainCode": "D03",
@@ -30,7 +30,7 @@
     "zoom": 16
   },
   "BARR": {
-    "description": "Utqiaġvik Environmental Observatory",
+    "description": "Utqiaġvik",
     "type": "RELOCATABLE",
     "stateCode": "AK",
     "domainCode": "D18",
@@ -90,7 +90,7 @@
     "zoom": 15
   },
   "BLWA": {
-    "description": "Black Warrior River",
+    "description": "Black Warrior River near Dead Lake",
     "type": "RELOCATABLE",
     "stateCode": "AL",
     "domainCode": "D08",
@@ -110,7 +110,7 @@
     "zoom": 15
   },
   "CARI": {
-    "description": "Caribou Creek at Caribou-Poker Creeks Research Watershed",
+    "description": "Caribou Creek, Caribou-Poker Creeks Research Watershed",
     "type": "CORE",
     "stateCode": "AK",
     "domainCode": "D19",
@@ -220,7 +220,7 @@
     "zoom": 15
   },
   "GRSM": {
-    "description": "Great Smoky Mountains National Park",
+    "description": "Great Smoky Mountains National Park, Twin Creeks",
     "type": "RELOCATABLE",
     "stateCode": "TN",
     "domainCode": "D07",
@@ -270,7 +270,7 @@
     "zoom": 12
   },
   "HOPB": {
-    "description": "Hop Brook",
+    "description": "Lower Hop Brook",
     "type": "CORE",
     "stateCode": "MA",
     "domainCode": "D01",
@@ -310,7 +310,7 @@
     "zoom": 15
   },
   "KONA": {
-    "description": "Konza Prairie Biological Station",
+    "description": "Konza Prairie Biological Station - Relocatable",
     "type": "RELOCATABLE",
     "stateCode": "KS",
     "domainCode": "D06",
@@ -550,7 +550,7 @@
     "zoom": 15
   },
   "PUUM": {
-    "description": "Pu-u Maka-ala Natural Area Reserve",
+    "description": "Pu'u Maka'ala Natural Area Reserve",
     "type": "CORE",
     "stateCode": "HI",
     "domainCode": "D20",
@@ -570,7 +570,7 @@
     "zoom": 15
   },
   "RMNP": {
-    "description": "Rocky Mountain National Park",
+    "description": "Rocky Mountain National Park, CASTNET",
     "type": "RELOCATABLE",
     "stateCode": "CO",
     "domainCode": "D10",
@@ -600,7 +600,7 @@
     "zoom": 12
   },
   "SJER": {
-    "description": "San Joaquin",
+    "description": "San Joaquin Experimental Range",
     "type": "CORE",
     "stateCode": "CA",
     "domainCode": "D17",
@@ -640,7 +640,7 @@
     "zoom": 12
   },
   "STER": {
-    "description": "Sterling",
+    "description": "North Sterling, CO",
     "type": "RELOCATABLE",
     "stateCode": "CO",
     "domainCode": "D10",
@@ -650,7 +650,7 @@
     "zoom": 12
   },
   "SUGG": {
-    "description": "Suggs Lake",
+    "description": "Ordway-Swisher Biological Station - Suggs Lake",
     "type": "CORE",
     "stateCode": "FL",
     "domainCode": "D03",
@@ -700,7 +700,7 @@
     "zoom": 16
   },
   "TOMB": {
-    "description": "Tombigbee River",
+    "description": "Lower Tombigbee River at Choctaw Refuge",
     "type": "RELOCATABLE",
     "stateCode": "AL",
     "domainCode": "D08",
@@ -800,7 +800,7 @@
     "zoom": 12
   },
   "YELL": {
-    "description": "Yellowstone National Park",
+    "description": "Yellowstone Nothern Range (Frog Rock)",
     "type": "CORE",
     "stateCode": "WY",
     "domainCode": "D12",

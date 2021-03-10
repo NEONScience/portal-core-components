@@ -198,10 +198,10 @@ const useStyles = makeStyles((theme) => ({
     height: '26px',
     padding: 'unset',
     borderRadius: '2px 0px 2px 0px',
-    border: `1px solid ${theme.colors.LIGHT_BLUE[500]}`,
+    border: `1px solid ${Theme.colors.LIGHT_BLUE[500]}`,
     '&:hover, &:active': {
-      color: theme.colors.LIGHT_BLUE[400],
-      borderColor: theme.colors.LIGHT_BLUE[400],
+      color: Theme.colors.LIGHT_BLUE[400],
+      borderColor: Theme.colors.LIGHT_BLUE[400],
       backgroundColor: theme.palette.grey[50],
     },
     '& svg': {
@@ -234,8 +234,8 @@ const useStyles = makeStyles((theme) => ({
   areaSelection: {
     position: 'absolute',
     pointerEvents: 'none',
-    border: `3px dotted ${theme.colors.LIGHT_BLUE[500]}`,
-    backgroundColor: theme.colors.LIGHT_BLUE[100],
+    border: `3px dotted ${Theme.colors.LIGHT_BLUE[500]}`,
+    backgroundColor: Theme.colors.LIGHT_BLUE[100],
     opacity: 0.6,
     zIndex: 999,
   },

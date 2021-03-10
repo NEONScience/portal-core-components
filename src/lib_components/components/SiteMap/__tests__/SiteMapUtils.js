@@ -1,3 +1,6 @@
+import cloneDeep from 'lodash/cloneDeep';
+
+import L from 'leaflet';
 import {
   boundsAreValid,
   calculateLocationsInBounds,
@@ -6,16 +9,67 @@ import {
   getHref,
   hydrateNeonContextData,
   mapIsAtFocusLocation,
+  getZoomedIcon,
+  getZoomedIcons,
+  findCentroid,
+  getPhantomLeafletMap,
+  getMapStateForFocusLocation,
+  getMapStateForManualLocationData,
+  parseManualLocationFeatureData,
   DEFAULT_STATE,
   FEATURES,
+  FEATURE_TYPES,
+  MANUAL_LOCATION_TYPES,
   SITE_MAP_PROP_TYPES,
+  HIGHLIGHT_STATUS,
+  SELECTION_STATUS,
 } from '../SiteMapUtils';
+
+jest.mock('leaflet', () => ({
+  ...(jest.requireActual('leaflet')),
+  Icon: jest.fn(),
+}));
+
+const neonContextData = {
+  sites: {
+    ABBY: {
+      type: 'RELOCATABLE', terrain: 'TERRESTRIAL', stateCode: 'WA', domainCode: 'D16',
+    },
+    CLBJ: {
+      type: 'CORE', terrain: 'TERRESTRIAL', stateCode: 'TX', domainCode: 'D11',
+    },
+    SUGG: {
+      type: 'CORE', terrain: 'AQUATIC', stateCode: 'FL', domainCode: 'D03',
+    },
+    WLOU: {
+      type: 'RELOCATABLE', terrain: 'AQUATIC', stateCode: 'CO', domainCode: 'D13',
+    },
+  },
+  states: {
+    CO: { name: 'Colorado' },
+    FL: { name: 'Florida' },
+    TX: { name: 'Texas' },
+    WA: { name: 'Washington' },
+  },
+  domains: {
+    D03: { name: 'Southeast' },
+    D11: { name: 'Southern Plains' },
+    D13: { name: 'Southern Rockies and Colorado Plateau' },
+    D16: { name: 'Pacific Northwest' },
+  },
+  stateSites: {
+    CO: ['WLOU'], FL: ['SUGG'], TX: ['CLBJ'], WA: ['ABBY'],
+  },
+  domainSites: {
+    D03: ['SUGG'], D11: ['CLBJ'], D13: ['WLOU'], D16: ['ABBY'],
+  },
+};
 
 describe('SiteMap - SiteMapUtils', () => {
   /**
      Functions
   */
-  describe('boundsAreValid', () => {
+  describe('boundsAreValid()', () => {
     test('correctly identifies valid bounds', () => {
       [
         { lat: [10, 20], lng: [10, 20] },
@@ -37,7 +91,7 @@ describe('SiteMap - SiteMapUtils', () => {
     });
   });
 
-  describe('calculateLocationsInBounds', () => {
+  describe('calculateLocationsInBounds()', () => {
     const locations = {
       A: { latitude: 15, longitude: 0 },
       B: { latitude: 12, longitude: 0 },
@@ -128,7 +182,7 @@ describe('SiteMap - SiteMapUtils', () => {
     });
   });
 
-  describe('deriveFullObservatoryZoomLevel', () => {
+  describe('deriveFullObservatoryZoomLevel()', () => {
     test('returns FALLBACK_ZOOM if provided mapRef is not valid', () => {
       expect(deriveFullObservatoryZoomLevel()).toBe(2);
       expect(deriveFullObservatoryZoomLevel({ current: null })).toBe(2);
@@ -156,7 +210,7 @@ describe('SiteMap - SiteMapUtils', () => {
     });
   });
 
-  describe('getDynamicAspectRatio', () => {
+  describe('getDynamicAspectRatio()', () => {
     let windowSpy;
     beforeEach(() => {
       windowSpy = jest.spyOn(global, 'window', 'get');
@@ -214,7 +268,7 @@ describe('SiteMap - SiteMapUtils', () => {
     });
   });
 
-  describe('getHref', () => {
+  describe('getHref()', () => {
     test('generates proper fallback href for missing or invalid key', () => {
       expect(getHref()).toEqual('#');
       expect(getHref('INVALID_KEY', 'foo')).toEqual('#');
@@ -246,7 +300,7 @@ describe('SiteMap - SiteMapUtils', () => {
     });
   });
 
-  describe('hydrateNeonContextData', () => {
+  describe('hydrateNeonContextData()', () => {
     test('applies NeonContext data correctly', () => {
       const initialState = {
         neonContextHydrated: false,
@@ -260,40 +314,6 @@ describe('SiteMap - SiteMapUtils', () => {
           },
           STATES: { STATES: {} },
           DOMAINS: { DOMAINS: {} },
-        },
-      };
-      const neonContextData = {
-        sites: {
-          ABBY: {
-            type: 'RELOCATABLE', terrain: 'TERRESTRIAL', stateCode: 'WA', domainCode: 'D16',
-          },
-          CLBJ: {
-            type: 'CORE', terrain: 'TERRESTRIAL', stateCode: 'TX', domainCode: 'D11',
-          },
-          SUGG: {
-            type: 'CORE', terrain: 'AQUATIC', stateCode: 'FL', domainCode: 'D03',
-          },
-          WLOU: {
-            type: 'RELOCATABLE', terrain: 'AQUATIC', stateCode: 'CO', domainCode: 'D13',
-          },
-        },
-        states: {
-          CO: { name: 'Colorado' },
-          FL: { name: 'Florida' },
-          TX: { name: 'Texas' },
-          WA: { name: 'Washington' },
-        },
-        domains: {
-          D03: { name: 'Southeast' },
-          D11: { name: 'Southern Plains' },
-          D13: { name: 'Southern Rockies and Colorado Plateau' },
-          D16: { name: 'Pacific Northwest' },
-        },
-        stateSites: {
-          CO: ['WLOU'], FL: ['SUGG'], TX: ['CLBJ'], WA: ['ABBY'],
-        },
-        domainSites: {
-          D03: ['SUGG'], D11: ['CLBJ'], D13: ['WLOU'], D16: ['ABBY'],
         },
       };
       expect(hydrateNeonContextData(initialState, neonContextData)).toStrictEqual({
@@ -335,7 +355,371 @@ describe('SiteMap - SiteMapUtils', () => {
     });
   });
 
-  describe('mapIsAtFocusLocation', () => {
+  describe('getPhantomLeafletMap()', () => {
+    test('provides sane defaults for size when aspect ratio and width reference are null', () => {
+      const state = {
+        map: { center: [0, 0], zoom: null },
+        aspectRatio: { currentValue: null, widthReference: null },
+      };
+      const phantomMap = getPhantomLeafletMap(state);
+      expect(phantomMap.getZoom()).toBe(0);
+      expect(phantomMap.getCenter()).toStrictEqual({ lat: 0, lng: 0 });
+      expect(phantomMap.getSize()).toStrictEqual({ x: 400, y: 300 });
+    });
+    test('provides size based off of aspect ratio and width reference when defined', () => {
+      const state = {
+        map: { center: [70, -110], zoom: 4 },
+        aspectRatio: { currentValue: 0.85, widthReference: 600 },
+      };
+      const phantomMap = getPhantomLeafletMap(state);
+      expect(phantomMap.getZoom()).toBe(4);
+      expect(phantomMap.getCenter()).toStrictEqual({ lat: 70, lng: -110 });
+      expect(phantomMap.getSize()).toStrictEqual({ x: 600, y: 510 });
+    });
+  });
+
+  describe('getMapState functions', () => {
+    const newMapStateBoundsAreValid = (newMapState) => {
+      expect(typeof newMapState.bounds).toBe('object');
+      expect(new Set(Object.keys(newMapState.bounds))).toStrictEqual(new Set(['lat', 'lng']));
+      expect(newMapState.bounds.lat.every((c) => Number.isFinite(c))).toBe(true);
+      expect(newMapState.bounds.lng.every((c) => Number.isFinite(c))).toBe(true);
+      expect(newMapState.bounds.lat[0]).toBeLessThan(newMapState.center[0]);
+      expect(newMapState.bounds.lat[1]).toBeGreaterThan(newMapState.center[0]);
+      expect(newMapState.bounds.lng[0]).toBeLessThan(newMapState.center[1]);
+      expect(newMapState.bounds.lng[1]).toBeGreaterThan(newMapState.center[1]);
+    };
+    const newMapStateZoomedIconsAreValid = (newMapState) => {
+      expect(typeof newMapState.zoomedIcons).toBe('object');
+      expect(Object.keys(newMapState.zoomedIcons).length).toBeGreaterThan(0);
+    };
+
+    describe('getMapStateForManualLocationData()', () => {
+      test('returns previous map state if no manual locations are present', () => {
+        const state = {
+          map: { center: [60, -115], zoom: 10 },
+          aspectRatio: { currentValue: 0.6, widthReference: 640 },
+        };
+        const newMapState = getMapStateForManualLocationData(state);
+        expect(newMapState).toStrictEqual(state.map);
+      });
+      test('returns previous map state if manual locations are present but incomplete lat/lon', () => {
+        const state = {
+          map: { center: [60, -115], zoom: 10 },
+          aspectRatio: { currentValue: 0.6, widthReference: 640 },
+          manualLocationData: [{ latitude: 'bar', longitude: -35 }, { baz: 'qux', latitude: 24 }],
+        };
+        const newMapState = getMapStateForManualLocationData(state);
+        expect(newMapState).toStrictEqual(state.map);
+      });
+      test('builds out complete map state for a single manual location', () => {
+        const state = {
+          map: { center: [60, -115], zoom: 10 },
+          aspectRatio: { currentValue: 0.6, widthReference: 640 },
+          manualLocationData: [
+            { latitude: 35, longitude: -85 },
+          ],
+        };
+        const newMapState = getMapStateForManualLocationData(state);
+        expect(typeof newMapState).toBe('object');
+        expect(newMapState.zoom).toBe(6);
+        expect(newMapState.center).toStrictEqual([35, -85]);
+        newMapStateBoundsAreValid(newMapState);
+        newMapStateZoomedIconsAreValid(newMapState);
+      });
+      test('builds out complete map state for multiple manual locations', () => {
+        const state = {
+          map: { center: [60, -115], zoom: 10 },
+          aspectRatio: { currentValue: 0.6, widthReference: 640 },
+          manualLocationData: [
+            { latitude: 18.02192, longitude: -66.61391 },
+            { latitude: 34.444218, longitude: -96.624201 },
+            { latitude: 31.199, longitude: -84.467 },
+          ],
+        };
+        const newMapState = getMapStateForManualLocationData(state);
+        expect(typeof newMapState).toBe('object');
+        expect(newMapState.zoom).toBe(4);
+        expect(newMapState.center).toStrictEqual([28.4642, -81.8378]);
+        newMapStateBoundsAreValid(newMapState);
+        newMapStateZoomedIconsAreValid(newMapState);
+      });
+    });
+
+    describe('getMapStateForFocusLocation()', () => {
+      test('returns previous map state if no focus location is present', () => {
+        const state = {
+          map: { ...cloneDeep(DEFAULT_STATE.map) },
+          aspectRatio: { currentValue: 0.6, widthReference: 640 },
+        };
+        const newMapState = getMapStateForFocusLocation(state);
+        expect(newMapState).toStrictEqual(state.map);
+      });
+      test('returns previous map state if focus location is present but has invalid lat/lon', () => {
+        const state = {
+          map: { ...cloneDeep(DEFAULT_STATE.map) },
+          aspectRatio: { currentValue: 0.6, widthReference: 640 },
+          focusLocation: {
+            current: 'Foo',
+            data: { type: 'bar', latitude: 62, longitude: null },
+          },
+        };
+        const newMapState = getMapStateForFocusLocation(state);
+        expect(newMapState).toStrictEqual(state.map);
+      });
+      test('properly handles type SITE', () => {
+        const state = {
+          map: { ...cloneDeep(DEFAULT_STATE.map) },
+          aspectRatio: { currentValue: 0.6, widthReference: 640 },
+          focusLocation: {
+            current: 'FOO',
+            data: { type: 'SITE', latitude: 62, longitude: -12 },
+          },
+          sites: {
+            FOO: { zoom: 13 },
+          },
+        };
+        const newMapState = getMapStateForFocusLocation(state);
+        expect(typeof newMapState).toBe('object');
+        expect(newMapState.zoom).toBe(13);
+        expect(newMapState.center).toStrictEqual([62, -12]);
+        newMapStateBoundsAreValid(newMapState);
+        newMapStateZoomedIconsAreValid(newMapState);
+      });
+      test('properly handles type DOMAIN', () => {
+        const state = {
+          map: { ...cloneDeep(DEFAULT_STATE.map) },
+          aspectRatio: { currentValue: 0.6, widthReference: 640 },
+          focusLocation: {
+            current: 'D18',
+            data: { type: 'DOMAIN', latitude: 42, longitude: -72 },
+          },
+          featureData: {
+            [FEATURE_TYPES.DOMAINS.KEY]: {
+              [FEATURES.DOMAINS.KEY]: {
+                D18: { zoom: 7 },
+              },
+            },
+          },
+        };
+        const newMapState = getMapStateForFocusLocation(state);
+        expect(typeof newMapState).toBe('object');
+        expect(newMapState.zoom).toBe(7);
+        expect(newMapState.center).toStrictEqual([42, -72]);
+        newMapStateBoundsAreValid(newMapState);
+        newMapStateZoomedIconsAreValid(newMapState);
+      });
+      test('properly handles type STATE', () => {
+        const state = {
+          map: { ...cloneDeep(DEFAULT_STATE.map) },
+          aspectRatio: { currentValue: 0.6, widthReference: 640 },
+          focusLocation: {
+            current: 'CO',
+            data: { type: 'STATE', latitude: 56, longitude: -116 },
+          },
+          featureData: {
+            [FEATURE_TYPES.STATES.KEY]: {
+              [FEATURES.STATES.KEY]: {
+                CO: { zoom: 9 },
+              },
+            },
+          },
+        };
+        const newMapState = getMapStateForFocusLocation(state);
+        expect(typeof newMapState).toBe('object');
+        expect(newMapState.zoom).toBe(9);
+        expect(newMapState.center).toStrictEqual([56, -116]);
+        newMapStateBoundsAreValid(newMapState);
+        newMapStateZoomedIconsAreValid(newMapState);
+      });
+      test('properly handles other feature type with set focusZoom', () => {
+        const state = {
+          map: { ...cloneDeep(DEFAULT_STATE.map) },
+          aspectRatio: { currentValue: 0.6, widthReference: 640 },
+          focusLocation: {
+            current: 'plotABC',
+            data: { type: 'OS Plot - mam', latitude: 61, longitude: -122 },
+          },
+          featureData: {
+            [FEATURE_TYPES.LOCATIONS.KEY]: {
+              [FEATURES.DISTRIBUTED_MAMMAL_GRIDS.KEY]: {
+                plotABC: { latitude: 61, longitude: -122 },
+              },
+            },
+          },
+        };
+        const newMapState = getMapStateForFocusLocation(state);
+        expect(typeof newMapState).toBe('object');
+        expect(newMapState.zoom).toBe(17);
+        expect(newMapState.center).toStrictEqual([61, -122]);
+        newMapStateBoundsAreValid(newMapState);
+        newMapStateZoomedIconsAreValid(newMapState);
+      });
+      test('properly handles other feature type without set focusZoom', () => {
+        const state = {
+          map: { ...cloneDeep(DEFAULT_STATE.map) },
+          aspectRatio: { currentValue: 0.6, widthReference: 640 },
+          focusLocation: {
+            current: 'buoyABC',
+            data: { type: 'BUOY', latitude: 61, longitude: -122 },
+          },
+          featureData: {
+            [FEATURE_TYPES.LOCATIONS.KEY]: {
+              [FEATURES.AQUATIC_BUOYS.KEY]: {
+                plotABC: { latitude: 61, longitude: -122 },
+              },
+            },
+          },
+        };
+        const newMapState = getMapStateForFocusLocation(state);
+        expect(typeof newMapState).toBe('object');
+        expect(newMapState.zoom).toBe(18);
+        expect(newMapState.center).toStrictEqual([61, -122]);
+        newMapStateBoundsAreValid(newMapState);
+        newMapStateZoomedIconsAreValid(newMapState);
+      });
+    });
+  });
+
+  describe('parseManualLocationFeatureData()', () => {
+    test('does nothing when neonContextData is not yet hydrated', () => {
+      const initialState = {
+        neonContextHydrated: false,
+        sites: {},
+        featureData: { SITES: { DECOMMISSIONED_SITES: {} } },
+        map: { ...cloneDeep(DEFAULT_STATE.map) },
+        manualLocationData: [
+          {
+            manualLocationType: MANUAL_LOCATION_TYPES.PROTOTYPE_SITE,
+            siteCode: 'FOOO',
+            siteName: 'fooo site',
+            domain: 'D03',
+            state: 'FL',
+          },
+        ],
+      };
+      expect(parseManualLocationFeatureData(initialState)).toStrictEqual(initialState);
+    });
+    test('does nothing when manualLocationData is missing or empty', () => {
+      const initialState = {
+        neonContextHydrated: true,
+        sites: { ...neonContextData.sites },
+        featureData: { SITES: { DECOMMISSIONED_SITES: {} } },
+        map: { ...cloneDeep(DEFAULT_STATE.map) },
+        manualLocationData: [
+          {
+            manualLocationType: MANUAL_LOCATION_TYPES.PROTOTYPE_SITE,
+            siteCode: 'FOOO',
+            siteName: 'fooo site',
+            domain: 'D03',
+            state: 'FL',
+          },
+        ],
+      };
+      expect(parseManualLocationFeatureData(initialState)).toStrictEqual(initialState);
+    });
+    test('applies manualLocationData correctly when present', () => {
+      const initialState = {
+        neonContextHydrated: true,
+        sites: { ...neonContextData.sites },
+        featureData: {
+          SITES: {
+            DECOMMISSIONED_SITES: {},
+          },
+        },
+        map: { ...cloneDeep(DEFAULT_STATE.map) },
+        manualLocationData: [
+          {
+            manualLocationType: MANUAL_LOCATION_TYPES.PROTOTYPE_SITE,
+            siteCode: 'FOOO',
+            siteName: 'fooo site',
+            domain: 'D03',
+            state: 'FL',
+          },
+          {
+            manualLocationType: MANUAL_LOCATION_TYPES.PROTOTYPE_SITE,
+            siteCode: 'ABBY',
+            siteName: 'abby site', // known incorrect, expect context data to override
+            domain: 'D11',
+            state: 'TX',
+          },
+          {
+            manualLocationType: MANUAL_LOCATION_TYPES.PROTOTYPE_SITE,
+            siteCode: 'BRRR',
+            siteName: 'brrr site',
+            domain: 'D16',
+            state: 'WA',
+          },
+        ],
+      };
+      expect(parseManualLocationFeatureData(initialState)).toStrictEqual({
+        neonContextHydrated: true,
+        sites: { ...neonContextData.sites },
+        map: { ...DEFAULT_STATE.map, center: [52.68, -110.75] },
+        manualLocationData: [
+          {
+            manualLocationType: MANUAL_LOCATION_TYPES.PROTOTYPE_SITE,
+            type: 'Decommissioned',
+            siteCode: 'FOOO',
+            siteName: 'fooo site',
+            description: 'fooo site',
+            domain: 'D03',
+            domainCode: 'D03',
+            state: 'FL',
+            stateCode: 'FL',
+          },
+          {
+            manualLocationType: MANUAL_LOCATION_TYPES.PROTOTYPE_SITE,
+            siteCode: 'ABBY',
+            siteName: 'abby site', // known incorrect, expect context data to override
+            domain: 'D11',
+            state: 'TX',
+          },
+          {
+            manualLocationType: MANUAL_LOCATION_TYPES.PROTOTYPE_SITE,
+            type: 'Decommissioned',
+            siteCode: 'BRRR',
+            siteName: 'brrr site',
+            description: 'brrr site',
+            domain: 'D16',
+            domainCode: 'D16',
+            state: 'WA',
+            stateCode: 'WA',
+          },
+        ],
+        featureData: {
+          SITES: {
+            DECOMMISSIONED_SITES: {
+              FOOO: {
+                manualLocationType: MANUAL_LOCATION_TYPES.PROTOTYPE_SITE,
+                type: 'Decommissioned',
+                siteCode: 'FOOO',
+                siteName: 'fooo site',
+                description: 'fooo site',
+                domain: 'D03',
+                domainCode: 'D03',
+                state: 'FL',
+                stateCode: 'FL',
+              },
+              BRRR: {
+                manualLocationType: MANUAL_LOCATION_TYPES.PROTOTYPE_SITE,
+                type: 'Decommissioned',
+                siteCode: 'BRRR',
+                siteName: 'brrr site',
+                description: 'brrr site',
+                domain: 'D16',
+                domainCode: 'D16',
+                state: 'WA',
+                stateCode: 'WA',
+              },
+            },
+          },
+        },
+      });
+    });
+  });
+
+  describe('mapIsAtFocusLocation()', () => {
     test('correctly identifies when map center is at focus location', () => {
       expect(mapIsAtFocusLocation({
         map: { zoom: 4, center: [-68.3, 15] },
@@ -381,6 +765,131 @@ describe('SiteMap - SiteMapUtils', () => {
           map: { center: [-68.3, 15] },
         },
       })).toBe(false);
+    });
+  });
+
+  describe('getZoomedIcon()', () => {
+    beforeEach(() => { L.Icon.mockReset(); });
+    test('Uses placeholder when feature has no defined icon', () => {
+      getZoomedIcon(FEATURES.TOWER_AIRSHEDS.KEY);
+      expect(L.Icon.mock.calls.length).toBe(1);
+      expect(L.Icon.mock.calls[0].length).toBe(1);
+      expect(L.Icon.mock.calls[0][0]).toStrictEqual({
+        iconUrl: 'icon-placeholder.svg',
+        iconRetinaUrl: 'icon-placeholder.svg',
+        iconSize: [15, 15],
+        iconAnchor: [7.5, 7.5],
+        popupAnchor: [0, -7.5],
+        shadowUrl: 'icon-shape-square-shadow.svg',
+        shadowSize: [18.8, 18.8],
+        shadowAnchor: [9.4, 9.4],
+      });
+    });
+    test('Scales appropriately with no defined zoom', () => {
+      getZoomedIcon(FEATURES.POUR_POINTS.KEY);
+      expect(L.Icon.mock.calls.length).toBe(1);
+      expect(L.Icon.mock.calls[0].length).toBe(1);
+      expect(L.Icon.mock.calls[0][0]).toStrictEqual({
+        iconUrl: 'icon-pour-point.svg',
+        iconRetinaUrl: 'icon-pour-point.svg',
+        iconSize: [16, 18],
+        iconAnchor: [8, 9],
+        popupAnchor: [0, -9],
+        shadowUrl: 'icon-shape-homeplate-shadow.svg',
+        shadowSize: [20.2, 22.2],
+        shadowAnchor: [10.1, 11.1],
+      });
+    });
+    test('Scales appropriately with defined zoom', () => {
+      getZoomedIcon(FEATURES.TOWERS.KEY, 12);
+      expect(L.Icon.mock.calls.length).toBe(1);
+      expect(L.Icon.mock.calls[0].length).toBe(1);
+      expect(L.Icon.mock.calls[0][0]).toStrictEqual({
+        iconUrl: 'icon-tower.svg',
+        iconRetinaUrl: 'icon-tower.svg',
+        iconSize: [48, 48],
+        iconAnchor: [24, 24],
+        popupAnchor: [0, -24],
+        shadowUrl: 'icon-shape-diamond-shadow.svg',
+        shadowSize: [59.52, 59.52],
+        shadowAnchor: [29.76, 29.76],
+      });
+    });
+    test('Handles explicit highlight status', () => {
+      getZoomedIcon(FEATURES.TERRESTRIAL_RELOCATABLE_SITES.KEY, 7, HIGHLIGHT_STATUS.HIGHLIGHT);
+      expect(L.Icon.mock.calls.length).toBe(1);
+      expect(L.Icon.mock.calls[0].length).toBe(1);
+      expect(L.Icon.mock.calls[0][0]).toStrictEqual({
+        iconUrl: 'icon-site-relocatable-terrestrial.svg',
+        iconRetinaUrl: 'icon-site-relocatable-terrestrial.svg',
+        iconSize: [34, 34],
+        iconAnchor: [17, 17],
+        popupAnchor: [0, -17],
+        shadowUrl: 'icon-shape-circle-highlight.svg',
+        shadowSize: [51, 51],
+        shadowAnchor: [25.5, 25.5],
+      });
+    });
+    test('Handles explicit selection status', () => {
+      getZoomedIcon(
+        FEATURES.AQUATIC_RELOCATABLE_SITES.KEY,
+        15,
+        HIGHLIGHT_STATUS.NONE,
+        SELECTION_STATUS.SELECTED,
+      );
+      expect(L.Icon.mock.calls.length).toBe(1);
+      expect(L.Icon.mock.calls[0].length).toBe(1);
+      expect(L.Icon.mock.calls[0][0]).toStrictEqual({
+        iconUrl: 'icon-site-relocatable-aquatic-selected.svg',
+        iconRetinaUrl: 'icon-site-relocatable-aquatic-selected.svg',
+        iconSize: [79.75, 79.75],
+        iconAnchor: [39.875, 39.875],
+        popupAnchor: [0, -39.875],
+        shadowUrl: 'icon-shape-circle-shadow.svg',
+        shadowSize: [94.25, 94.25],
+        shadowAnchor: [47.125, 47.125],
+      });
+    });
+  });
+
+  describe('getZoomedIcons()', () => {
+    test('generates an icon map with appropriate structure and feature representation', () => {
+      const zoomedIcons = getZoomedIcons(5);
+      expect(typeof zoomedIcons).toBe('object');
+      Object.keys(zoomedIcons).forEach((f) => {
+        const feature = FEATURES[f];
+        expect(!!feature.iconSvg && !!feature.iconShape).toBe(true);
+        expect(typeof zoomedIcons[f]).toBe('object');
+        if (FEATURE_TYPES[feature.type].selectable) {
+          expect(Object.keys(zoomedIcons[f])).toStrictEqual(Object.keys(SELECTION_STATUS));
+        } else {
+          expect(Object.keys(zoomedIcons[f])).toStrictEqual([SELECTION_STATUS.UNSELECTED]);
+        }
+        Object.keys(zoomedIcons[f]).forEach((s) => {
+          expect(Object.keys(zoomedIcons[f][s])).toStrictEqual(Object.keys(HIGHLIGHT_STATUS));
+        });
+      });
+    });
+  });
+
+  describe('findCentroid()', () => {
+    test('returns null if not provided a non-empty array of all valid points', () => {
+      expect(findCentroid()).toBe(null);
+      expect(findCentroid([])).toBe(null);
+      expect(findCentroid(['foo'])).toBe(null);
+      expect(findCentroid([[0, 0], [0, 'foo']])).toBe(null);
+    });
+    test('reflects back only valid point if only one is present', () => {
+      expect(findCentroid([[0, 0]])).toStrictEqual([0, 0]);
+      expect(findCentroid([[30, 10]])).toStrictEqual([30, 10]);
+    });
+    test('calculates centroids when provided more than one valid point', () => {
+      expect(
+        findCentroid([[-10, -10], [10, 10]]),
+      ).toStrictEqual([0, 0]);
+      expect(
+        findCentroid([[18.02192, -66.61391], [34.444218, -96.624201], [31.199, -84.467]]),
+      ).toStrictEqual([28.4642, -81.8378]);
     });
   });
 

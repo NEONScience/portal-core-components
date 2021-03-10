@@ -57,6 +57,7 @@ import {
   VIEWS,
   FEATURES,
   FEATURE_TYPES,
+  FEATURE_DATA_SOURCES,
   MIN_CONTAINER_HEIGHT,
   OVERLAYS,
   OVERLAY_GROUPS,
@@ -65,6 +66,9 @@ import {
 
 const boxShadow = '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)';
 const useStyles = makeStyles((theme) => ({
+  ':root': {
+    fontSize: '24px',
+  },
   outerContainer: {
     zIndex: 0,
     width: '100%',
@@ -74,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     height: '0px', // Necessary to set a fixed aspect ratio from props (using paddingBottom)
     position: 'relative',
-    backgroundColor: theme.colors.NEON_BLUE[200],
+    backgroundColor: Theme.colors.NEON_BLUE[200],
     overflow: 'hidden',
     display: 'flex',
     justifyContent: 'center',
@@ -162,23 +166,23 @@ const useStyles = makeStyles((theme) => ({
     height: '26px',
     padding: 'unset',
     borderRadius: '2px 0px 2px 0px',
-    border: `1px solid ${theme.colors.LIGHT_BLUE[500]}`,
+    border: `1px solid ${Theme.colors.LIGHT_BLUE[500]}`,
     cursor: 'grab',
     '&:hover, &:active': {
-      color: theme.colors.LIGHT_BLUE[400],
-      borderColor: theme.colors.LIGHT_BLUE[400],
+      color: Theme.colors.LIGHT_BLUE[400],
+      borderColor: Theme.colors.LIGHT_BLUE[400],
       backgroundColor: theme.palette.grey[50],
     },
     '&:active': {
       cursor: 'row-resize !important',
     },
     '& svg': {
-      fontSize: '1.15rem !important',
+      fontSize: '17px !important',
     },
   },
   resizeBorder: {
     position: 'absolute',
-    border: `3px solid ${theme.colors.LIGHT_BLUE[500]}`,
+    border: `3px solid ${Theme.colors.LIGHT_BLUE[500]}`,
     top: '0px',
     left: '0px',
     width: '100%',
@@ -336,6 +340,7 @@ const SiteMapContainer = (props) => {
       hideUnselectable,
       showSummary,
     },
+    manualLocationData,
   } = state;
 
   const contentDivProps = {
@@ -537,6 +542,7 @@ const SiteMapContainer = (props) => {
      Render - Map/Table Toggle Button Group
   */
   const renderMapTableToggleButtonGroup = () => {
+    if (state.view.current === VIEWS.SPLIT) { return null; }
     const viewTooltips = {
       [VIEWS.MAP]: 'Show the observatory map',
       [VIEWS.TABLE]: 'Show a table of all locations currently visible in the map',
@@ -554,7 +560,7 @@ const SiteMapContainer = (props) => {
             : classes.mapTableToggleButtonGroup
         )}
       >
-        {Object.keys(VIEWS).map((key) => (
+        {Object.keys(VIEWS).filter((key) => key !== VIEWS.SPLIT).map((key) => (
           <Tooltip
             key={key}
             title={viewTooltips[key]}
@@ -796,7 +802,7 @@ const SiteMapContainer = (props) => {
         placement="left"
         enterDelay={500}
         enterNextDelay={200}
-        title={`Resize ${view === VIEWS.MAP ? 'map' : 'table'} vertically`}
+        title={`Resize ${view === VIEWS.TABLE ? 'table' : 'map'} vertically`}
       >
         <IconButton
           draggable
@@ -827,7 +833,13 @@ const SiteMapContainer = (props) => {
       description,
       descriptionFromParentDataFeatureKey,
       parentDataFeatureKey,
+      dataSource,
     } = feature;
+    // Special case: do not include any features with a dataSource of MANUAL_LOCATIONS if
+    // manualLocationData is not also defined
+    if (dataSource === FEATURE_DATA_SOURCES.MANUAL_LOCATIONS && !manualLocationData) {
+      return null;
+    }
     const handleChange = (event) => {
       dispatch({
         type: 'setLegendFeatureOptionVisibility',
@@ -1249,10 +1261,10 @@ const SiteMapContainer = (props) => {
     viewLegendButtonsContainerClassName = `${classes.viewLegendButtonsContainer} ${classes.viewLegendButtonsContainerFullscreen}`;
     /* eslint-enable max-len */
   }
-  return (
+  const ret = (
     <div {...containerProps} aria-describedby={progressId}>
       <div ref={contentDivRef} {...contentDivProps}>
-        {view === VIEWS.MAP ? <SiteMapLeaflet /> : null }
+        {view === VIEWS.MAP || view === VIEWS.SPLIT ? <SiteMapLeaflet /> : null }
         {view === VIEWS.TABLE ? <SiteMapTable /> : null }
         {renderVerticalResizeButton()}
         <div
@@ -1272,8 +1284,10 @@ const SiteMapContainer = (props) => {
         {renderSelectionSummary()}
       </div>
       {fullscreen ? null : <div ref={resizeBorderRef} className={classes.resizeBorder} />}
+      {view === VIEWS.SPLIT ? <SiteMapTable /> : null }
     </div>
   );
+  return ret;
 };
 
 SiteMapContainer.propTypes = {

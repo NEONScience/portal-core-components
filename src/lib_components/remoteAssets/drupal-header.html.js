@@ -727,6 +727,10 @@ export default html = `
             
                       <ul  class="menu menu--main" data-depth="1">
 
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/resources/getting-started-neon-data-resources" class="menu__link" data-drupal-link-system-path="node/11293">Getting Started with NEON Data &amp; Resources</a>
+
+                  </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/resources/communication-resources" class="menu__link" data-drupal-link-system-path="node/6316">Documents and Communication Resources</a>
 

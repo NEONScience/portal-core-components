@@ -30,6 +30,7 @@ import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
+import ClearIcon from '@material-ui/icons/Clear';
 import CollapseIcon from '@material-ui/icons/ExpandLess';
 import ErrorIcon from '@material-ui/icons/Warning';
 import ExpandIcon from '@material-ui/icons/ExpandMore';
@@ -151,7 +152,7 @@ const useStyles = makeStyles(() => ({
       position: 'sticky',
       top: '-2px',
       boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.25), 0px 1px 1px rgba(0, 0, 0, 0.25)',
-      zIndex: 1,
+      zIndex: 2,
     },
     [Theme.breakpoints.down('xs')]: {
       padding: Theme.spacing(1.5),
@@ -239,7 +240,7 @@ const useStyles = makeStyles(() => ({
     justifyContent: 'center',
     textAlign: 'center',
     borderRadius: '4px',
-    padding: Theme.spacing(3, 3, 4, 3),
+    padding: Theme.spacing(3),
     position: 'sticky',
     top: Theme.spacing(12),
     left: 0,
@@ -281,6 +282,11 @@ const useStyles = makeStyles(() => ({
     height: '6em',
     marginTop: Theme.spacing(3),
     marginBottom: Theme.spacing(4),
+  },
+  dismissOverlay: {
+    width: '100%',
+    textAlign: 'right',
+    marginTop: Theme.spacing(2),
   },
 }));
 
@@ -380,6 +386,7 @@ const NeonPage = (props) => {
   const sidebarRef = useRef(null);
   const sidebarLinksContainerRef = useRef(null);
   const belowMd = useMediaQuery(Theme.breakpoints.down('sm'));
+  const [overlayDismissed, setOverlayDismissed] = useState(false);
 
   /**
     Sidebar Setup
@@ -636,9 +643,19 @@ const NeonPage = (props) => {
   ));
 
   const renderOverlay = (overlayChildren) => (
-    <Backdrop open>
+    <Backdrop open={!overlayDismissed}>
       <Paper className={classes.backdropPaper}>
         {overlayChildren}
+        <div className={classes.dismissOverlay}>
+          <Button
+            size="small"
+            startIcon={<ClearIcon />}
+            variant="outlined"
+            onClick={() => { setOverlayDismissed(true); }}
+          >
+            Dismiss
+          </Button>
+        </div>
       </Paper>
     </Backdrop>
   );
@@ -860,7 +877,7 @@ const NeonPage = (props) => {
   };
 
   const renderedPage = neonContextIsActive ? renderNeonPage() : (
-    <NeonContext.Provider useCoreAuth useCoreHeader={useCoreHeader} {...NeonContextProviderProps}>
+    <NeonContext.Provider useCoreAuth fetchPartials={!useCoreHeader} {...NeonContextProviderProps}>
       {renderNeonPage()}
     </NeonContext.Provider>
   );

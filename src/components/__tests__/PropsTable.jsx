@@ -48,4 +48,22 @@ describe('PropsTable', () => {
     const tree = renderer.create(<PropsTable props={props} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
+  test('renders at full height', () => {
+    const props = [
+      {
+        name: 'foo',
+        type: 'string',
+        description: 'lorem ipsum',
+        examples: '"abc", "def"',
+        required: true,
+      },
+      {
+        name: 'bar',
+        type: <div>type node</div>,
+        description: <div>description node</div>,
+      },
+    ];
+    const tree = renderer.create(<PropsTable props={props} fullHeight />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });

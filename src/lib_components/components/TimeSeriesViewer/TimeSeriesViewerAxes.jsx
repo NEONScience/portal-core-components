@@ -31,8 +31,8 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
   },
   smallButton: {
-    fontSize: '0.8rem',
-    padding: theme.spacing(0.125, 0.75),
+    fontSize: '0.55rem',
+    padding: theme.spacing(0.25, 0.75),
     whiteSpace: 'nowrap',
   },
   smallButtonIcon: {

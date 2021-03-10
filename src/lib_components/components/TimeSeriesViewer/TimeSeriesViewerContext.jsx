@@ -48,7 +48,8 @@ export const TIME_SERIES_VIEWER_STATUS = {
   LOADING_META: 'LOADING_META', // Actively loading meta data (sites, variables, and positions)
   READY_FOR_DATA: 'READY_FOR_DATA', // Ready to trigger fetches for data
   LOADING_DATA: 'LOADING_DATA', // Actively loading plottable series data
-  ERROR: 'ERROR', // Stop everything because problem
+  ERROR: 'ERROR', // Stop everything because problem, do not trigger new fetches no matter what
+  WARNING: 'WARNING', // Current selection/data makes a graph not possible; show warning
   READY_FOR_SERIES: 'READY_FOR_SERIES', // Ready to re-calculate series data for the graph
   READY: 'READY', // Ready for user input
 };
@@ -103,8 +104,9 @@ const generateYAxisRange = (axis = {}) => {
     !Object.keys(Y_AXIS_RANGE_MODES).includes(rangeMode)
       || !Number.isFinite(standardDeviation)
       || !Number.isFinite(precision)) { return axisRange; }
-  let low = (dataRange[0] || 0) - standardDeviation;
-  let high = (dataRange[1] || 0) + standardDeviation;
+  const margin = standardDeviation !== 0 ? standardDeviation : (dataRange[0] / 2);
+  let low = (dataRange[0] || 0) - margin;
+  let high = (dataRange[1] || 0) + margin;
   low = parseFloat(low.toFixed(precision), 10);
   high = parseFloat(high.toFixed(precision), 10);
   if (rangeMode === Y_AXIS_RANGE_MODES.FROM_ZERO) { return [0, high]; }
@@ -173,6 +175,8 @@ const DEFAULT_STATE = {
       y1: cloneDeep(DEFAULT_AXIS_STATE),
       y2: cloneDeep(DEFAULT_AXIS_STATE),
     },
+    isDefault: true,
+    invalidDefaultVariables: new Set(), // canBeDefault vars found to have no series data after load
   },
   availableQualityFlags: new Set(),
   availableTimeSteps: new Set(['auto']),
@@ -516,6 +520,7 @@ const parseSitePositions = (site, csv) => {
  */
 const applyDefaultsToSelection = (state) => {
   const {
+    status,
     product,
     variables,
     selection,
@@ -546,7 +551,8 @@ const applyDefaultsToSelection = (state) => {
   if (Object.keys(variables).length) {
     // Ensure the selection has at least one variable
     if (!selection.variables.length) {
-      const defaultVar = Object.keys(variables).find((v) => variables[v].canBeDefault);
+      const defaultVar = Object.keys(variables)
+        .find((v) => (variables[v].canBeDefault && !selection.invalidDefaultVariables.has(v)));
       if (defaultVar) {
         selection.variables.push(defaultVar);
         selection.yAxes.y1.units = variables[defaultVar].units;
@@ -627,6 +633,24 @@ const applyDefaultsToSelection = (state) => {
       selection.yAxes[yAxis].axisRange = generateYAxisRange(selection.yAxes[yAxis]);
     }
   });
+  // Edge case: if the default site/month/position/variable produces a series with no data then
+  // it wasn't a good default, but we had no way of knowing until the data series was fully parsed.
+  // Here we check for this scenario and if we're in it then add the variable to the
+  // invalidDefaultVariables set, remove the variable from the selection, and run again.
+  // We'll recurse through the variables available for the site/month/position until we find one
+  // that works or show a meaningful error instructing the user to select a different site,
+  // month, or position. Note that as soon as the user makes an active selection of any kind
+  // isDefault will be false for the lifetime of the time series viewer instance, so this automated
+  // removal of a selected variable can only happen before any user selection happens.
+  if (
+    status === TIME_SERIES_VIEWER_STATUS.READY_FOR_SERIES
+      && selection.isDefault && selection.variables.length
+      && selection.yAxes.y1.dataRange.every((x) => x === null)
+  ) {
+    selection.invalidDefaultVariables.add(selection.variables[0]);
+    selection.variables = [];
+    return applyDefaultsToSelection({ ...state, selection });
+  }
   // Generate a new digest for effect comparison
   selection.digest = JSON.stringify({
     sites: selection.sites,
@@ -696,6 +720,11 @@ const reducer = (state, action) => {
     } else {
       newState.status = TIME_SERIES_VIEWER_STATUS.READY_FOR_DATA;
     }
+  };
+  const softFail = (error) => {
+    newState.status = TIME_SERIES_VIEWER_STATUS.WARNING;
+    newState.displayError = error;
+    return newState;
   };
   const fail = (error) => {
     newState.status = TIME_SERIES_VIEWER_STATUS.ERROR;
@@ -827,6 +856,14 @@ const reducer = (state, action) => {
 
     // Regenerate Graph Data Actions
     case 'regenerateGraphData':
+      if (
+        !action.graphData.series.length
+          || Object.keys(state.selection.yAxes).every((y) => (
+            state.selection.yAxes[y].dataRange.every((x) => x === null)
+          ))
+      ) {
+        return softFail('Current selection of dates/sites/positions/variables does not have any valid numeric data.');
+      }
       newState.graphData = action.graphData;
       newState.status = TIME_SERIES_VIEWER_STATUS.READY;
       return newState;
@@ -871,6 +908,9 @@ const reducer = (state, action) => {
       delete newState.dataFetches[action.token];
       newState.status = TIME_SERIES_VIEWER_STATUS.READY_FOR_SERIES;
       calcSelection();
+      if (!newState.selection.variables.length) {
+        return softFail('None of the variables for this product\'s default site/month/position have data. Please select a different site, month, or position.');
+      }
       return newState;
     case 'noDataFilesFetchNecessary':
       newState.status = TIME_SERIES_VIEWER_STATUS.READY_FOR_SERIES;
@@ -904,12 +944,14 @@ const reducer = (state, action) => {
 
     // Core Selection Actions
     case 'selectDateRange':
+      newState.selection.isDefault = false;
       newState.selection.dateRange = action.dateRange;
       newState.selection.activelySelectingDateRange = action.dateRange;
       calcSelection();
       calcStatus();
       return newState;
     case 'selectVariables':
+      newState.selection.isDefault = false;
       parsedContent = limitVariablesToTwoUnits(state, action.variables);
       newState.selection.variables = parsedContent.variables;
       /* eslint-disable prefer-destructuring */
@@ -939,6 +981,7 @@ const reducer = (state, action) => {
         !state.selection.yAxes[action.axis]
           || !Object.keys(Y_AXIS_RANGE_MODES).includes(action.mode)
       ) { return state; }
+      newState.selection.isDefault = false;
       newState.selection.yAxes[action.axis].rangeMode = action.mode;
       if (action.mode !== Y_AXIS_RANGE_MODES.CUSTOM) {
         newState.selection.yAxes[action.axis].axisRange = generateYAxisRange(
@@ -953,6 +996,7 @@ const reducer = (state, action) => {
           && action.range.every((v) => typeof v === 'number')
           && action.range[0] < action.range[1]
       )) { return state; }
+      newState.selection.isDefault = false;
       newState.selection.yAxes[action.axis].axisRange = action.range;
       return newState;
     /*
@@ -965,9 +1009,11 @@ const reducer = (state, action) => {
     */
     // Option Selection Actions
     case 'selectLogScale':
+      newState.selection.isDefault = false;
       newState.selection.logscale = !!action.logscale;
       return newState;
     case 'selectSwapYAxes':
+      newState.selection.isDefault = false;
       if (state.selection.yAxes.y2.units === null) { return state; }
       parsedContent = {
         y1: cloneDeep(state.selection.yAxes.y2),
@@ -976,16 +1022,20 @@ const reducer = (state, action) => {
       newState.selection.yAxes = parsedContent;
       return newState;
     case 'setRollPeriod':
+      newState.selection.isDefault = false;
       newState.selection.rollPeriod = action.rollPeriod;
       return newState;
     case 'selectAllQualityFlags':
+      newState.selection.isDefault = false;
       newState.selection.qualityFlags = Array.from(state.availableQualityFlags);
       calcStatus();
       return newState;
     case 'selectNoneQualityFlags':
+      newState.selection.isDefault = false;
       newState.selection.qualityFlags = [];
       return newState;
     case 'selectToggleQualityFlag':
+      newState.selection.isDefault = false;
       if (action.selected && !state.selection.qualityFlags.includes(action.qualityFlag)) {
         newState.selection.qualityFlags.push(action.qualityFlag);
       } else if (!action.selected) {
@@ -995,11 +1045,13 @@ const reducer = (state, action) => {
       calcStatus();
       return newState;
     case 'selectTimeStep':
+      newState.selection.isDefault = false;
       if (!state.availableTimeSteps.has(action.timeStep)) { return state; }
       newState.selection.timeStep = action.timeStep;
       calcStatus();
       return newState;
     case 'selectAddSite':
+      newState.selection.isDefault = false;
       if (!state.product.sites[action.siteCode]) { return state; }
       if (state.selection.sites.some((site) => site.siteCode === action.siteCode)) { return state; }
       newState.selection.sites.push({ siteCode: action.siteCode, positions: [] });
@@ -1011,6 +1063,7 @@ const reducer = (state, action) => {
         !action.siteCodes || !action.siteCodes.constructor
           || action.siteCodes.constructor.name !== 'Set' || !action.siteCodes.size
       ) { return state; }
+      newState.selection.isDefault = false;
       // Remove any sites that are no longer in the selected set
       newState.selection.sites = newState.selection.sites
         .filter((site) => action.siteCodes.has(site.siteCode));
@@ -1028,6 +1081,7 @@ const reducer = (state, action) => {
       if (!state.selection.sites.some((site) => site.siteCode === action.siteCode)) {
         return state;
       }
+      newState.selection.isDefault = false;
       newState.selection.sites = newState.selection.sites
         .filter((site) => site.siteCode !== action.siteCode);
       calcSelection();
@@ -1042,6 +1096,7 @@ const reducer = (state, action) => {
       if (!action.positions.every((p) => (
         Object.keys(state.product.sites[action.siteCode].positions).includes(p)
       ))) { return state; }
+      newState.selection.isDefault = false;
       newState.selection.sites[selectedSiteIdx].positions = [...action.positions];
       calcSelection();
       calcStatus();

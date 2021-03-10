@@ -13,6 +13,8 @@ export function getTestableItems(): {
     regenerateS3FilesFiltersAndValidValues?: undefined;
     getAndValidateNewState?: undefined;
     ALL_POSSIBLE_VALID_DATE_RANGE?: undefined;
+    ALL_POSSIBLE_VALID_DOCUMENTATION?: undefined;
+    ALL_POSSIBLE_VALID_PACKAGE_TYPE?: undefined;
 } | {
     productDataIsValid: (productData: any) => boolean;
     yearMonthIsValid: (yearMonth?: string) => boolean;
@@ -102,6 +104,8 @@ export function getTestableItems(): {
     regenerateS3FilesFiltersAndValidValues: (state: any) => any;
     getAndValidateNewState: (previousState: any, action: any, broadcast?: boolean) => any;
     ALL_POSSIBLE_VALID_DATE_RANGE: string[];
+    ALL_POSSIBLE_VALID_DOCUMENTATION: string[];
+    ALL_POSSIBLE_VALID_PACKAGE_TYPE: string[];
 };
 declare namespace DownloadDataContext {
     export { Provider };

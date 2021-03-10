@@ -419,3 +419,161 @@ exports[`PropsTable renders a multiple rows with optional strings 1`] = `
   </table>
 </div>
 `;
+
+exports[`PropsTable renders at full height 1`] = `
+<div
+  className="MuiPaper-root MuiTableContainer-root MuiPaper-elevation1 MuiPaper-rounded"
+  style={Object {}}
+>
+  <table
+    aria-label="props"
+    className="MuiTable-root MuiTable-stickyHeader"
+    role={null}
+  >
+    <thead
+      className="MuiTableHead-root"
+      role={null}
+    >
+      <tr
+        className="MuiTableRow-root MuiTableRow-head"
+        role={null}
+      >
+        <th
+          aria-sort={null}
+          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader"
+          scope="col"
+        >
+          Prop
+        </th>
+        <th
+          aria-sort={null}
+          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader"
+          scope="col"
+        >
+          Type
+        </th>
+        <th
+          aria-sort={null}
+          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader"
+          scope="col"
+        >
+          Default
+        </th>
+        <th
+          aria-sort={null}
+          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader"
+          scope="col"
+        >
+          Examples
+        </th>
+      </tr>
+    </thead>
+    <tbody
+      className="MuiTableBody-root"
+      role={null}
+    >
+      <tr
+        className="MuiTableRow-root"
+        role={null}
+      >
+        <th
+          aria-sort={null}
+          className="MuiTableCell-root MuiTableCell-body"
+          role="cell"
+          rowSpan={2}
+          scope="row"
+        >
+          <tt>
+            foo
+          </tt>
+          <div
+            className="makeStyles-required-2"
+          >
+            REQUIRED
+          </div>
+        </th>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root MuiTableCell-body"
+        >
+          string
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root MuiTableCell-body"
+        >
+          <tt />
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root MuiTableCell-body"
+        >
+          "abc", "def"
+        </td>
+      </tr>
+      <tr
+        className="MuiTableRow-root"
+        role={null}
+      >
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root MuiTableCell-body"
+          colSpan={4}
+        >
+          lorem ipsum
+        </td>
+      </tr>
+      <tr
+        className="MuiTableRow-root makeStyles-propTableRowGrey-1"
+        role={null}
+      >
+        <th
+          aria-sort={null}
+          className="MuiTableCell-root MuiTableCell-body"
+          role="cell"
+          rowSpan={2}
+          scope="row"
+        >
+          <tt>
+            bar
+          </tt>
+        </th>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root MuiTableCell-body"
+        >
+          <div>
+            type node
+          </div>
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root MuiTableCell-body"
+        >
+          <tt />
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root MuiTableCell-body"
+        >
+          --
+        </td>
+      </tr>
+      <tr
+        className="MuiTableRow-root makeStyles-propTableRowGrey-1"
+        role={null}
+      >
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root MuiTableCell-body"
+          colSpan={4}
+        >
+          <div>
+            description node
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;

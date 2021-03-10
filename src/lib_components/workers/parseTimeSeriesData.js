@@ -110,6 +110,13 @@ export default function parseTimeSeriesData(payload = {}) {
         const { dataType } = variables[fieldName];
         const setType = DATA_TYPE_SETTERS[dataType] ? DATA_TYPE_SETTERS[dataType] : (v) => v;
         if (!['real', 'signed integer', 'unsigned integer'].includes(dataType)) { return; }
+        if (
+          Number.isFinite(series[fieldName].range[0])
+            && series[fieldName].range[0] === series[fieldName].range[1]
+        ) {
+          series[fieldName].variance = 0;
+          return;
+        }
         const mean = series[fieldName].sum / series[fieldName].count;
         let sumOfSquares = 0;
         series[fieldName].data.forEach((value) => {

@@ -331,7 +331,7 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
                 <span
                   className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
                 >
-                  San Joaquin
+                  San Joaquin Experimental Range
                 </span>
               </div>
               <span
@@ -984,7 +984,7 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
                 <span
                   className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
                 >
-                  San Joaquin
+                  San Joaquin Experimental Range
                 </span>
               </div>
               <span
@@ -1637,7 +1637,7 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
                 <span
                   className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
                 >
-                  San Joaquin
+                  San Joaquin Experimental Range
                 </span>
               </div>
               <span
@@ -1976,7 +1976,7 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
   <iframe
     className="makeStyles-iframe-2"
     scrolling="no"
-    src="undefined?server=https://roma.chpc.utah.edu:7070/mod_visus?&dataset=DP3.30010.001-D17-2017_SJER_2-L3-Camera-Mosaic-V02&title=San%20Joaquin%2C%20CA%20--%20March%202017%20--%20Flight%202%2F2"
+    src="undefined?server=https://roma.chpc.utah.edu:7070/mod_visus?&dataset=DP3.30010.001-D17-2017_SJER_2-L3-Camera-Mosaic-V02&title=San%20Joaquin%20Experimental%20Range%2C%20CA%20--%20March%202017%20--%20Flight%202%2F2"
     title=""
   />
 </div>
@@ -2313,7 +2313,7 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
                 <span
                   className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
                 >
-                  San Joaquin
+                  San Joaquin Experimental Range
                 </span>
               </div>
               <span
@@ -2961,7 +2961,7 @@ exports[`AopDataViewer renders with title disabled 1`] = `
                 <span
                   className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
                 >
-                  San Joaquin
+                  San Joaquin Experimental Range
                 </span>
               </div>
               <span

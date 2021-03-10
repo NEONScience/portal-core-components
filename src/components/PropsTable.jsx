@@ -25,11 +25,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const PropsTable = (props) => {
-  const { props: propRows } = props;
+  const { props: propRows, fullHeight } = props;
   const classes = useStyles(Theme);
 
   return (
-    <TableContainer component={Paper} style={{ maxHeight: '70vh' }}>
+    <TableContainer component={Paper} style={fullHeight ? {} : { maxHeight: '70vh' }}>
       <Table stickyHeader aria-label="props">
         <TableHead>
           <TableRow>
@@ -74,6 +74,11 @@ PropsTable.propTypes = {
       required: PropTypes.bool,
     }),
   ).isRequired,
+  fullHeight: PropTypes.bool,
+};
+
+PropsTable.defaultProps = {
+  fullHeight: false,
 };
 
 export default PropsTable;

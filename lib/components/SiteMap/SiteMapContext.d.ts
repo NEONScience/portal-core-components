@@ -59,6 +59,9 @@ declare namespace Provider {
         onSelectionChange: PropTypes.Requireable<(...args: any[]) => any>;
         search: PropTypes.Requireable<string>;
         features: PropTypes.Requireable<import("../../types/core").Nullable<string>[]>;
+        manualLocationData: PropTypes.Requireable<(PropTypes.InferProps<{
+            manualLocationType: PropTypes.Validator<string>;
+        }> | null | undefined)[]>;
     };
     export { SITE_MAP_DEFAULT_PROPS as defaultProps };
 }
@@ -66,7 +69,7 @@ declare function useSiteMapContext(): any[] | {
     view: {
         current: null;
         initialized: {
-            [k: string]: boolean;
+            [x: string]: boolean;
         };
     };
     neonContextHydrated: boolean;
@@ -151,6 +154,7 @@ declare function useSiteMapContext(): any[] | {
         };
     };
     fullscreen: boolean;
+    manualLocationData: null;
 };
 import { SORT_DIRECTIONS } from "./SiteMapUtils";
 import { VIEWS } from "./SiteMapUtils";

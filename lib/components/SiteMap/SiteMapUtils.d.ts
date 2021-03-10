@@ -12,6 +12,9 @@ export namespace SITE_TERRAINS {
     export const AQUATIC: string;
     export const TERRESTRIAL: string;
 }
+export namespace MANUAL_LOCATION_TYPES {
+    export const PROTOTYPE_SITE: string;
+}
 export namespace FEATURE_TYPES {
     export namespace SITES {
         export const unit: string;
@@ -72,6 +75,7 @@ export namespace FEATURE_DATA_SOURCES {
     export const GRAPHQL_LOCATIONS_API: string;
     export const ARCGIS_ASSETS_API: string;
     export const NEON_CONTEXT: string;
+    export const MANUAL_LOCATIONS: string;
 }
 export namespace SELECTION_PORTIONS {
     export const PARTIAL: string;
@@ -90,6 +94,7 @@ export namespace HIGHLIGHT_STATUS {
 export namespace VIEWS {
     export const MAP: string;
     export const TABLE: string;
+    export const SPLIT: string;
 }
 export namespace MAP_MOUSE_MODES {
     export const PAN: string;
@@ -1031,6 +1036,7 @@ export namespace FEATURES {
         iconSvg: any;
         iconSelectedSvg: any;
         iconShape: string;
+        maxZoom: number;
     };
     export const TERRESTRIAL_RELOCATABLE_SITES: {
         name: string;
@@ -1049,6 +1055,7 @@ export namespace FEATURES {
         iconSvg: any;
         iconSelectedSvg: any;
         iconShape: string;
+        maxZoom: number;
     };
     export const AQUATIC_CORE_SITES: {
         name: string;
@@ -1067,6 +1074,7 @@ export namespace FEATURES {
         iconSvg: any;
         iconSelectedSvg: any;
         iconShape: string;
+        maxZoom: number;
     };
     export const AQUATIC_RELOCATABLE_SITES: {
         name: string;
@@ -1085,6 +1093,26 @@ export namespace FEATURES {
         iconSvg: any;
         iconSelectedSvg: any;
         iconShape: string;
+        maxZoom: number;
+    };
+    export const DECOMMISSIONED_SITES: {
+        name: string;
+        nameSingular: string;
+        type: any;
+        description: string;
+        parent: string;
+        attributes: {
+            type: string;
+            terrain: string;
+        };
+        dataSource: string;
+        primaryIdOnly: boolean;
+        featureShape: string;
+        iconScale: number;
+        iconSvg: any;
+        iconSelectedSvg: any;
+        iconShape: string;
+        maxZoom: number;
     };
 }
 export namespace GRAPHQL_LOCATIONS_API_CONSTANTS {
@@ -1253,7 +1281,6 @@ export namespace DEFAULT_STATE {
         }
     }
 }
-export function hydrateNeonContextData(state: any, neonContextData: any): any;
 export namespace SITE_MAP_PROP_TYPES {
     export const view: PropTypes.Requireable<string>;
     export const aspectRatio: PropTypes.Requireable<number>;
@@ -1271,6 +1298,9 @@ export namespace SITE_MAP_PROP_TYPES {
     export const onSelectionChange: PropTypes.Requireable<(...args: any[]) => any>;
     export const search: PropTypes.Requireable<string>;
     export const features: PropTypes.Requireable<import("../../types/core").Nullable<string>[]>;
+    export const manualLocationData: PropTypes.Requireable<(PropTypes.InferProps<{
+        manualLocationType: PropTypes.Validator<string>;
+    }> | null | undefined)[]>;
 }
 export namespace SITE_MAP_DEFAULT_PROPS {
     const view_1: string;
@@ -1303,10 +1333,18 @@ export namespace SITE_MAP_DEFAULT_PROPS {
     export { search_1 as search };
     const features_1: null;
     export { features_1 as features };
+    const manualLocationData_1: null;
+    export { manualLocationData_1 as manualLocationData };
 }
+export function getZoomedIcon(featureKey?: any, zoom?: number, highlight?: string, selection?: string): any;
 export function getZoomedIcons(zoom: any): {};
+export function getPhantomLeafletMap(state: any): any;
 export function mapIsAtFocusLocation(state?: {}): boolean;
 export function getMapStateForFocusLocation(state?: {}): any;
+export function findCentroid(coords?: any[]): any[] | null;
+export function getMapStateForManualLocationData(state: any): any;
+export function parseManualLocationFeatureData(state: any): any;
+export function hydrateNeonContextData(state: any, neonContextData: any): any;
 export function getDynamicAspectRatio(unusableVerticalSpace?: number): number;
 export function boundsAreValid(bounds: any): boolean;
 export function calculateLocationsInBounds(locations: any, bounds?: any, extendMap?: boolean, extendPoints?: number): string[];

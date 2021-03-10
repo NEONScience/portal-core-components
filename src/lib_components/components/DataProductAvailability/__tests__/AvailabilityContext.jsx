@@ -153,8 +153,8 @@ describe('DataProductAvailability - AvailabilityContext', () => {
           },
         },
         rowTitles: {
-          'AK-D18-BARR-T1': 'Alaska - Tundra - Utqiaġvik Environmental Observatory - t1',
-          'AK-D18-BARR-T3': 'Alaska - Tundra - Utqiaġvik Environmental Observatory - t3',
+          'AK-D18-BARR-T1': 'Alaska - Tundra - Utqiaġvik - t1',
+          'AK-D18-BARR-T3': 'Alaska - Tundra - Utqiaġvik - t3',
           'TX-D11-CLBJ-T2': 'Texas - Southern Plains - LBJ National Grassland - t2',
           'TX-D11-CLBJ-T3': 'Texas - Southern Plains - LBJ National Grassland - t3',
           'WA-D16-ABBY-T1': 'Washington - Pacific Northwest - Abby Road - t1',

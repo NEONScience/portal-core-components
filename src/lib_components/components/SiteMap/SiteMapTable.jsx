@@ -1,16 +1,15 @@
 /* eslint-disable jsx-a11y/anchor-is-valid, no-unused-vars */
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useLayoutEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
 import InfoIcon from '@material-ui/icons/InfoOutlined';
-import MarkerIcon from '@material-ui/icons/LocationOn';
-import ExploreDataProductsIcon from '@material-ui/icons/InsertChartOutlined';
 
 import MaterialTable, { MTableToolbar, MTableFilterRow } from 'material-table';
 
@@ -25,24 +24,67 @@ import {
   FEATURES,
   NLCD_CLASSES,
   FEATURE_TYPES,
+  MANUAL_LOCATION_TYPES,
   MIN_TABLE_MAX_BODY_HEIGHT,
   PLOT_SAMPLING_MODULES,
   UNSELECTABLE_MARKER_FILTER,
   calculateLocationsInBounds,
 } from './SiteMapUtils';
 
-const ucWord = (word) => `${word.slice(0, 1).toUpperCase()}${word.slice(1).toLowerCase()}`;
+const ucWord = (word = '') => `${word.slice(0, 1).toUpperCase()}${word.slice(1).toLowerCase()}`;
+
+/**
+ * Parse an input search string into discrete terms.
+ * Supports quoting words together as a single term.
+ * Example: '"foo bar" baz' => ['foo bar', 'baz']
+ * @param {string} input - string to parse into discrete terms
+ */
+const parseSearchTerms = (input) => {
+  const terms = input
+    .replace(/[^\w\s."]/g, '')
+    .match(/(".*?"|[^" \s]+)(?=\s* |\s*$)/g);
+  return (terms || [])
+    .map((term) => term.replace(/"/g, '').toLowerCase());
+};
+
+/**
+ * Apply a searchString to a list of string attributes; return boolean for a match
+ */
+const searchOnAttribs = (searchString, searchableAttribs = []) => {
+  const searchTerms = parseSearchTerms(searchString);
+  if (!searchTerms.length) { return true; }
+  return searchTerms.some((term) => (
+    searchableAttribs.some((attrib) => (
+      (attrib || '').toLowerCase().includes(term)
+    ))
+  ));
+};
+
+const getFeatureName = (featureKey) => {
+  if (FEATURES[featureKey]) {
+    return (FEATURES[featureKey].nameSingular || FEATURES[featureKey].name || featureKey);
+  }
+  return featureKey;
+};
+
+const calculateMaxBodyHeight = (tableRef) => {
+  if (!tableRef || !tableRef.current) { return MIN_TABLE_MAX_BODY_HEIGHT; }
+  const containerHeight = tableRef.current.clientHeight || 0;
+  const toolbarHeight = tableRef.current.children[0].children[0].clientHeight || 0;
+  const pagerHeight = tableRef.current.children[0].children[2].clientHeight || 0;
+  return Math.max(containerHeight - toolbarHeight - pagerHeight, MIN_TABLE_MAX_BODY_HEIGHT);
+};
 
 const useStyles = makeStyles((theme) => ({
   tableContainer: {
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
     backgroundColor: 'white',
     overflowWrap: 'normal',
     '& table': {
       margin: '0px !important',
       borderCollapse: 'separate',
+      '& tr.MuiTableRow-root:empty': {
+        height: '0px !important',
+      },
       '& tr.MuiTableRow-head': {
         backgroundColor: theme.palette.primary.main,
         '& th:first-child span.MuiCheckbox-root': {
@@ -64,6 +106,14 @@ const useStyles = makeStyles((theme) => ({
       borderBottom: 'none',
     },
   },
+  tableContainerIntegrated: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+  },
+  tableContainerStandalone: {
+    // ...
+  },
   featureIcon: {
     width: theme.spacing(3),
     height: theme.spacing(3),
@@ -80,18 +130,12 @@ const useStyles = makeStyles((theme) => ({
   },
   toolbarContainer: {
     backgroundColor: theme.palette.grey[50],
-    borderBottom: `1px dotted ${theme.palette.grey[300]}`,
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(4.5),
     },
     '& div.MuiToolbar-root': {
       padding: theme.spacing(0, 2),
       backgroundColor: theme.palette.grey[50],
-    },
-    // This hides all but the search input and show columns buttons.
-    // No other way to have material table NOT show a selection title in the toolbar.
-    '& div.MuiToolbar-root > div:not(:nth-last-child(-n+2))': {
-      display: 'none',
     },
     // Make the columns button more prominent (really hard to do with component overriding)
     '& button': {
@@ -102,6 +146,13 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: `${COLORS.LIGHT_BLUE[400]}20`,
         padding: '11px',
       },
+    },
+  },
+  toolbarContainerNoSplit: {
+    // This hides all but the search input and show columns buttons.
+    // No other way to have material table NOT show a selection title in the toolbar.
+    '& div.MuiToolbar-root > div:not(:nth-last-child(-n+2))': {
+      display: 'none',
     },
   },
   toggleButtonGroup: {
@@ -132,8 +183,16 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    margin: Theme.spacing(1, 0, 0.5, 0),
+    margin: theme.spacing(1, 0, 0.5, 0),
     minWidth: '200px',
+    textAlign: 'left',
+  },
+  siteLinksDivider: {
+    margin: theme.spacing(0, 1, 0, 1),
+  },
+  siteDetailsLink: {
+    fontSize: '80%',
+    fontStyle: 'italic',
   },
   nlcdClassContainer: {
     display: 'flex',
@@ -145,15 +204,13 @@ const useStyles = makeStyles((theme) => ({
     border: '1px solid black',
     marginRight: theme.spacing(1.5),
   },
+  tableTitle: {
+    '& h6': {
+      fontSize: '1.2rem',
+      fontWeight: 500,
+    },
+  },
 }));
-
-const calculateMaxBodyHeight = (tableRef) => {
-  if (!tableRef || !tableRef.current) { return MIN_TABLE_MAX_BODY_HEIGHT; }
-  const containerHeight = tableRef.current.clientHeight || 0;
-  const toolbarHeight = tableRef.current.children[0].children[0].clientHeight || 0;
-  const pagerHeight = tableRef.current.children[0].children[2].clientHeight || 0;
-  return Math.max(containerHeight - toolbarHeight - pagerHeight, MIN_TABLE_MAX_BODY_HEIGHT);
-};
 
 const SiteMapTable = () => {
   const classes = useStyles(Theme);
@@ -165,6 +222,10 @@ const SiteMapTable = () => {
 
   // Site Map State
   const [state, dispatch] = SiteMapContext.useSiteMapContext();
+  const {
+    manualLocationData,
+    view: { current: view, initialized: viewsInitialized },
+  } = state;
   const {
     focus,
     fullHeight,
@@ -186,27 +247,93 @@ const SiteMapTable = () => {
   useEffect(() => {
     if (
       !tableRef || !tableRef.current
-        || state.view.current !== VIEWS.TABLE || state.view.initialized[VIEWS.TABLE]
+        || view !== VIEWS.TABLE || viewsInitialized[VIEWS.TABLE]
     ) { return; }
     dispatch({ type: 'setViewInitialized' });
     dispatch({ type: 'setTableMaxBodyHeight', height: calculateMaxBodyHeight(tableRef) });
-  }, [tableRef, state.view, dispatch]);
+  }, [
+    tableRef,
+    view,
+    viewsInitialized,
+    dispatch,
+  ]);
 
   /**
     Effect - Recalculate the max body height from an aspect ratio change (e.g. page resize)
   */
   useEffect(() => {
     if (
-      state.view.current === VIEWS.TABLE && state.view.initialized[VIEWS.TABLE]
+      view === VIEWS.TABLE && viewsInitialized[VIEWS.TABLE]
         && maxBodyHeightUpdateFromAspectRatio
     ) {
       dispatch({ type: 'setTableMaxBodyHeight', height: calculateMaxBodyHeight(tableRef) });
     }
   }, [
     tableRef,
-    state.view,
+    view,
+    viewsInitialized,
     dispatch,
     maxBodyHeightUpdateFromAspectRatio,
+  ]);
+
+  /**
+    Layout Effect - Inject a second horizontal scrollbar above the table linked to the main
+  */
+  useLayoutEffect(() => {
+    const noop = () => {};
+    // This all only applies to full height table and/or split view (which behaves as full height)
+    if (!fullHeight && view !== VIEWS.SPLIT) { return noop; }
+    // Collect the nodes we pay attention to. Each one has a distinct purpose.
+    const tableNode = tableRef.current.querySelector('table');
+    if (!tableNode) { return noop; }
+    const tbodyNode = tableRef.current.querySelector('tbody');
+    if (!tbodyNode) { return noop; }
+    const scrollingNode = (tableNode.parentElement || {}).parentElement;
+    if (!scrollingNode) { return noop; }
+    const containerNode = scrollingNode.parentElement;
+    if (!containerNode) { return noop; }
+    // Initialize the new scrollbar in this scope
+    let scrollbar = null;
+    // Function to do the initial injection fo the scrollbar node
+    const injectScrollbar = () => {
+      scrollbar = document.createElement('div');
+      scrollbar.appendChild(document.createElement('div'));
+      scrollbar.style.overflow = 'auto';
+      scrollbar.style.overflowY = 'hidden';
+      // eslint-disable-next-line prefer-destructuring
+      scrollbar.style.backgroundColor = Theme.palette.grey[50];
+      scrollbar.firstChild.style.width = `${tableNode.scrollWidth || 0}px`;
+      scrollbar.firstChild.style.paddingTop = '1px';
+      scrollbar.onscroll = () => {
+        scrollingNode.scrollLeft = scrollbar.scrollLeft;
+      };
+      scrollingNode.onscroll = () => {
+        scrollbar.scrollLeft = scrollingNode.scrollLeft;
+      };
+      containerNode.parentNode.insertBefore(scrollbar, containerNode);
+    };
+    // Function to resize the scrollbar. We can't rely on the scrollWidth being accurate when we
+    // inject as not-yet-fully-rendered table rows may expand the scrollWidth.
+    const resizeScrollbar = () => {
+      if (!scrollbar) { return; }
+      scrollbar.firstChild.style.width = `${tableNode.scrollWidth || 0}px`;
+      scrollbar.scrollLeft = scrollingNode.scrollLeft;
+    };
+    // Inject the scrollbar one step removed from the initial render cycle (with a 0-sec timeout)
+    const timeout = window.setTimeout(injectScrollbar, 0);
+    // Observe the childList of the tbody - i.e. rows being added or removed - to trigger a resize
+    // of the injected scrollbar
+    const observer = new MutationObserver(resizeScrollbar);
+    observer.observe(tbodyNode, { childList: true });
+    // Clear any pending timeouts and disconnect our observer on unload to avoid memory leaks
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(timeout);
+    };
+  }, [
+    tableRef,
+    fullHeight,
+    view,
   ]);
 
   if (!canRender) { return null; }
@@ -235,7 +362,15 @@ const SiteMapTable = () => {
   const getParent = (type, location) => {
     let source = null;
     if (type === 'SITE') {
-      source = { code: 'siteCode', data: state.sites };
+      let data = state.sites;
+      if (Array.isArray(manualLocationData) && manualLocationData.length) {
+        data = {};
+        manualLocationData.forEach((ml) => {
+          const { siteCode } = ml;
+          data[siteCode] = Object.keys(state.sites).includes(siteCode) ? state.sites[siteCode] : ml;
+        });
+      }
+      source = { code: 'siteCode', data };
     } else if (type === 'STATE') {
       source = { code: 'stateCode', data: state.featureData.STATES.STATES };
     } else if (type === 'DOMAIN') {
@@ -254,12 +389,6 @@ const SiteMapTable = () => {
   const getState = (location) => getParent('STATE', location);
   const getDomain = (location) => getParent('DOMAIN', location);
 
-  const getFeatureName = (featureKey) => {
-    if (FEATURES[featureKey]) {
-      return (FEATURES[featureKey].nameSingular || FEATURES[featureKey].name || featureKey);
-    }
-    return featureKey;
-  };
   const renderFeatureIcon = (featureKey, unselectable = false) => {
     if (!FEATURES[featureKey] || !FEATURES[featureKey].iconSvg) { return null; }
     const { iconSvg } = FEATURES[featureKey];
@@ -304,6 +433,13 @@ const SiteMapTable = () => {
   if (selectionActive && selectableItems && hideUnselectable) {
     initialRows = initialRows.filter((item) => selectableItems.has(item));
   }
+  const hasPrototypeSites = (manualLocationData || []).some((ml) => (
+    ml.manualLocationType === MANUAL_LOCATION_TYPES.PROTOTYPE_SITE
+  ));
+  if (hasPrototypeSites) {
+    const visibleSites = manualLocationData.map((ml) => ml.siteCode);
+    initialRows = initialRows.filter((item) => visibleSites.includes(item));
+  }
   const rows = initialRows.map((key) => locations[key]);
   if (selectionActive) {
     rows.forEach((row, idx) => {
@@ -338,62 +474,60 @@ const SiteMapTable = () => {
       title: 'Site',
       sorting: true,
       defaultSort: 'desc',
+      searchable: true,
       lookup: Object.fromEntries(
         Array.from(sitesInMap).map((siteCode) => [siteCode, siteCode]),
       ),
+      customFilterAndSearch: (input, row) => {
+        if (typeof input === 'string') {
+          return searchOnAttribs(input, [row.siteCode, row.description]);
+        }
+        if (Array.isArray(input)) {
+          return input.includes(row.siteCode);
+        }
+        return false;
+      },
       customSort: (rowA, rowB) => {
         const siteA = getSite(rowA);
         const siteB = getSite(rowB);
-        return siteA.description > siteB.description ? -1 : 1;
+        const aName = siteA.description;
+        const bName = siteB.description;
+        return aName > bName ? -1 : 1;
       },
+      // eslint-disable-next-line arrow-body-style
       render: (row) => {
         const site = getSite(row);
         if (!site) { return null; }
-        const featureKey = `${site.terrain.toUpperCase()}_${site.type.toUpperCase()}_SITES`;
+        const isDecommissioned = site.manualLocationType === MANUAL_LOCATION_TYPES.PROTOTYPE_SITE;
+        const featureKey = isDecommissioned
+          ? FEATURES.DECOMMISSIONED_SITES.KEY
+          : `${site.terrain.toUpperCase()}_${site.type.toUpperCase()}_SITES`;
         const unselectable = selectionActive && !rowIsSelectable(row);
         return (
           <div>
-            <div className={classes.siteName}>
+            <Link
+              component="button"
+              className={classes.siteName}
+              onClick={() => jumpTo(row.siteCode)}
+              title={`Click to view ${row.siteCode} on the map`}
+            >
               {renderFeatureIcon(featureKey, unselectable)}
-              <span>{`${site.description} (${site.siteCode})`}</span>
-            </div>
-            <div className={classes.startFlex} style={{ marginLeft: Theme.spacing(-0.75) }}>
-              <Tooltip title={`Jump to ${site.siteCode} on the map`}>
-                <IconButton
-                  size="small"
-                  color="primary"
-                  className={classes.iconButton}
-                  onClick={() => jumpTo(site.siteCode)}
-                  data-selenium="sitemap-table-site-button-jumpTo"
-                  aria-label="Jump to site on map"
-                >
-                  <MarkerIcon fontSize="inherit" />
-                </IconButton>
-              </Tooltip>
-              <Tooltip title={`Visit the ${site.siteCode} site details page`}>
-                <IconButton
-                  size="small"
-                  color="primary"
-                  className={classes.iconButton}
-                  href={`${getHref('SITE_DETAILS', site.siteCode)}`}
-                  data-selenium="sitemap-table-site-button-siteDetails"
-                  aria-label="Visit site details page"
-                >
-                  <InfoIcon fontSize="inherit" />
-                </IconButton>
-              </Tooltip>
-              <Tooltip title={`Explore data products for ${site.siteCode}`}>
-                <IconButton
-                  size="small"
-                  color="primary"
-                  className={classes.iconButton}
-                  href={`${getHref('EXPLORE_DATA_PRODUCTS_BY_SITE', site.siteCode)}`}
-                  data-selenium="sitemap-table-site-button-exploreDataProducts"
-                  aria-label="Explore data products for this site"
-                >
-                  <ExploreDataProductsIcon fontSize="inherit" />
-                </IconButton>
-              </Tooltip>
+              <span>{`${site.description || 'Unnamed Site'} (${site.siteCode})`}</span>
+            </Link>
+            <div className={classes.startFlex}>
+              <Link
+                className={classes.siteDetailsLink}
+                href={`${getHref('SITE_DETAILS', site.siteCode)}`}
+              >
+                Site Details
+              </Link>
+              <span className={classes.siteLinksDivider}>|</span>
+              <Link
+                className={classes.siteDetailsLink}
+                href={`${getHref('EXPLORE_DATA_PRODUCTS_BY_SITE', site.siteCode)}`}
+              >
+                Explore Data
+              </Link>
             </div>
           </div>
         );
@@ -404,6 +538,7 @@ const SiteMapTable = () => {
       title: 'Domain',
       sorting: true,
       defaultSort: 'desc',
+      searchable: true,
       lookup: Object.fromEntries(
         Array.from(domainsInMap).map((domainCode) => [domainCode, domainCode]),
       ),
@@ -416,49 +551,14 @@ const SiteMapTable = () => {
         const domain = getDomain(row);
         return !domain ? null : (
           <div>
-            <div style={{ marginBottom: Theme.spacing(1) }}>
+            <Link
+              component="button"
+              className={classes.linkButton}
+              onClick={() => jumpTo(domain.domainCode)}
+              title={`Click to view ${domain.domainCode} on the map`}
+            >
               {domain.domainCode}
-            </div>
-            <div className={classes.startFlex} style={{ marginLeft: Theme.spacing(-0.75) }}>
-              <Tooltip title={`Jump to ${domain.domainCode} on the map`}>
-                <IconButton
-                  size="small"
-                  color="primary"
-                  className={classes.iconButton}
-                  onClick={() => jumpTo(domain.domainCode)}
-                  data-selenium="sitemap-table-domain-button-jumpTo"
-                  aria-label="Jump to domain on map"
-                >
-                  <MarkerIcon fontSize="inherit" />
-                </IconButton>
-              </Tooltip>
-              {/*
-              <Tooltip title={`Visit the ${domain.domainCode} domain details page`}>
-                <IconButton
-                  size="small"
-                  color="primary"
-                  className={classes.iconButton}
-                  href={`${getHref('DOMAIN_DETAILS', domain.domainCode)}`}
-                  data-selenium="sitemap-table-domain-button-domainDetails"
-                  aria-label="Visit domain details page"
-                >
-                  <InfoIcon fontSize="inherit" />
-                </IconButton>
-              </Tooltip>
-              */}
-              <Tooltip title={`Explore data products for ${domain.domainCode}`}>
-                <IconButton
-                  size="small"
-                  color="primary"
-                  className={classes.iconButton}
-                  href={`${getHref('EXPLORE_DATA_PRODUCTS_BY_DOMAIN', domain.domainCode)}`}
-                  data-selenium="sitemap-table-domain-button-exploreDataProducts"
-                  aria-label="Explore data products for this domain"
-                >
-                  <ExploreDataProductsIcon fontSize="inherit" />
-                </IconButton>
-              </Tooltip>
-            </div>
+            </Link>
           </div>
         );
       },
@@ -468,6 +568,7 @@ const SiteMapTable = () => {
       title: 'State',
       sorting: true,
       defaultSort: 'desc',
+      searchable: true,
       lookup: Object.fromEntries(
         Array.from(statesInMap).map((stateCode) => [
           stateCode,
@@ -479,42 +580,45 @@ const SiteMapTable = () => {
         const stateB = getState(rowB);
         return stateA.name > stateB.name ? -1 : 1;
       },
+      customFilterAndSearch: (input, row) => {
+        if (typeof input === 'string') {
+          const rowState = getState(row);
+          return searchOnAttribs(input, [row.stateCode, rowState.name]);
+        }
+        if (Array.isArray(input)) {
+          return input.includes(row.stateCode);
+        }
+        return false;
+      },
       render: (row) => {
         const usstate = getState(row);
         return !usstate ? null : (
           <div>
-            <div style={{ marginBottom: Theme.spacing(1) }}>
+            <Link
+              component="button"
+              className={classes.linkButton}
+              onClick={() => jumpTo(row.stateCode)}
+              title={`Click to view ${row.stateCode} on the map`}
+            >
               {usstate.name}
-            </div>
-            <div className={classes.startFlex} style={{ marginLeft: Theme.spacing(-0.75) }}>
-              <Tooltip title={`Jump to ${usstate.name} on the map`}>
-                <IconButton
-                  size="small"
-                  color="primary"
-                  className={classes.iconButton}
-                  onClick={() => jumpTo(usstate.stateCode)}
-                  data-selenium="sitemap-table-state-button-jumpTo"
-                  aria-label="Jump to state on map"
-                >
-                  <MarkerIcon fontSize="inherit" />
-                </IconButton>
-              </Tooltip>
-              <Tooltip title={`Explore data products for ${usstate.stateCode}`}>
-                <IconButton
-                  size="small"
-                  color="primary"
-                  className={classes.iconButton}
-                  href={`${getHref('EXPLORE_DATA_PRODUCTS_BY_STATE', usstate.stateCode)}`}
-                  data-selenium="sitemap-table-state-button-exploreDataProducts"
-                  aria-label="Explore data products for this state"
-                >
-                  <ExploreDataProductsIcon fontSize="inherit" />
-                </IconButton>
-              </Tooltip>
-            </div>
+            </Link>
           </div>
         );
       },
+    },
+    coordinates: {
+      field: 'latitude',
+      title: 'Coordinates',
+      sorting: false,
+      filtering: false,
+      searchable: false,
+      render: (row) => (
+        <>
+          {renderCaptionString(row.latitude.toFixed(5), 'Latitude')}
+          <br />
+          {renderCaptionString(row.longitude.toFixed(5), 'Longitude')}
+        </>
+      ),
     },
     latitude: {
       field: 'latitude',
@@ -539,13 +643,12 @@ const SiteMapTable = () => {
   if (focus === FEATURE_TYPES.SITES.KEY) {
     columns = [
       commonColumns.site,
-      commonColumns.latitude,
-      commonColumns.longitude,
       { // Site Type
         field: 'type',
         title: 'Type',
         sorting: true,
         defaultSort: 'desc',
+        searchable: true,
         lookup: Object.fromEntries(
           Array.from(
             new Set(rows.map((row) => row.type)),
@@ -567,6 +670,11 @@ const SiteMapTable = () => {
       },
       commonColumns.domain,
       commonColumns.state,
+      commonColumns.coordinates,
+      /*
+      commonColumns.latitude,
+      commonColumns.longitude,
+      */
     ];
   }
   if (focus === FEATURE_TYPES.LOCATIONS.KEY) {
@@ -576,11 +684,13 @@ const SiteMapTable = () => {
         title: 'Name',
         sorting: true,
         defaultSort: 'desc',
+        searchable: true,
         render: (row) => (
           <Link
             component="button"
             className={classes.linkButton}
             onClick={() => jumpTo(row.name)}
+            title={`View ${row.name} on map`}
           >
             {row.name}
           </Link>
@@ -591,6 +701,7 @@ const SiteMapTable = () => {
         title: 'Type',
         sorting: true,
         defaultSort: 'desc',
+        searchable: true,
         lookup: Object.fromEntries(
           Array.from(new Set(rows.map((row) => row.featureKey)))
             .sort((a, b) => (getFeatureName(a) > getFeatureName(b) ? 1 : -1))
@@ -613,8 +724,6 @@ const SiteMapTable = () => {
           );
         },
       },
-      commonColumns.latitude,
-      commonColumns.longitude,
       { // Elevation
         field: 'elevation',
         title: 'Elevation',
@@ -631,6 +740,7 @@ const SiteMapTable = () => {
         title: 'NLCD Class',
         sorting: true,
         deafultSort: 'asc',
+        searchable: true,
         lookup: Object.fromEntries(
           Object.keys(NLCD_CLASSES)
             .filter((classKey) => rows.some((row) => row.nlcdClass === classKey))
@@ -698,6 +808,7 @@ const SiteMapTable = () => {
         filtering: false,
         sorting: true,
         deafultSort: 'asc',
+        searchable: true,
         customSort: (rowA, rowB) => {
           const a = Array.isArray(rowA.samplingModules) ? rowA.samplingModules.length : null;
           const b = Array.isArray(rowB.samplingModules) ? rowB.samplingModules.length : null;
@@ -740,14 +851,22 @@ const SiteMapTable = () => {
       commonColumns.site,
       commonColumns.domain,
       commonColumns.state,
+      commonColumns.coordinates,
+      /*
+      commonColumns.latitude,
+      commonColumns.longitude,
+      */
     ];
   }
 
+  const toolbarClassName = view === VIEWS.SPLIT
+    ? classes.toolbarContainer
+    : `${classes.toolbarContainer} ${classes.toolbarContainerNoSplit}`;
   const components = {
     Container: Box,
     Toolbar: (toolbarProps) => (
-      <div className={classes.toolbarContainer} data-selenium="sitemap-table-toolbar">
-        <MTableToolbar {...toolbarProps} />
+      <div className={toolbarClassName} data-selenium="sitemap-table-toolbar">
+        <MTableToolbar {...toolbarProps} classes={{ title: classes.tableTitle }} />
       </div>
     ),
     FilterRow: (filterRowProps) => (
@@ -778,7 +897,8 @@ const SiteMapTable = () => {
       top: 0,
       backgroundColor: Theme.palette.grey[50],
     },
-    pageSizeOptions: [5, 10, 20, 50, 100],
+    pageSize: 100,
+    pageSizeOptions: [100, 200, 500],
     rowStyle: (row) => {
       if (selectionActive) {
         if (!rowIsSelectable(row)) {
@@ -796,25 +916,31 @@ const SiteMapTable = () => {
       disabled: !rowIsSelectable(row),
     }),
   };
-  if (fullHeight) {
-    tableOptions.pageSize = 50;
-  } else {
+  if (!fullHeight && view !== VIEWS.SPLIT) {
     tableOptions.maxBodyHeight = `${maxBodyHeight || MIN_TABLE_MAX_BODY_HEIGHT}px`;
+  }
+  let containerClassName = `${classes.tableContainer} ${classes.tableContainerIntegrated}`;
+  let containerStyle = {};
+  if (view === VIEWS.TABLE && fullHeight) {
+    containerStyle = { position: 'relative' };
+  }
+  if (view === VIEWS.SPLIT) {
+    containerClassName = `${classes.tableContainer} ${classes.tableContainerStandalone}`;
   }
   return (
     <div
       ref={tableRef}
-      className={classes.tableContainer}
-      style={fullHeight ? { position: 'relative' } : {}}
+      className={containerClassName}
+      style={containerStyle}
       data-selenium="sitemap-content-table"
     >
       <MaterialTable
+        title={`${ucWord(focus)} in view`}
         icons={MaterialTableIcons}
         components={components}
         columns={columns}
         data={rows}
         localization={localization}
-        title={null}
         options={tableOptions}
         onSelectionChange={!selectionActive ? null : (newRows) => {
           const action = { type: 'updateSelectionSet', selection: new Set() };
@@ -831,3 +957,14 @@ const SiteMapTable = () => {
 };
 
 export default SiteMapTable;
+
+// Additional items exported for unit testing
+export const getTestableItems = () => (
+  process.env.NODE_ENV !== 'test' ? {} : {
+    ucWord,
+    parseSearchTerms,
+    searchOnAttribs,
+    calculateMaxBodyHeight,
+    getFeatureName,
+  }
+);

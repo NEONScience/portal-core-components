@@ -40,6 +40,7 @@ import {
   SITE_MAP_PROP_TYPES,
   SITE_MAP_DEFAULT_PROPS,
   MIN_TABLE_MAX_BODY_HEIGHT,
+  MANUAL_LOCATION_TYPES,
   GRAPHQL_LOCATIONS_API_CONSTANTS,
   getZoomedIcons,
   mapIsAtFocusLocation,
@@ -156,7 +157,20 @@ const centerIsValid = (center) => (
 // is a site feature like a plot far from the site center so the site itself may not be seen as
 // "in bounds").
 const calculateFeatureDataFetches = (state, requiredSites = []) => {
-  const sitesInMap = calculateLocationsInBounds(state.sites, state.map.bounds, true, 0.06);
+  // Determine which sites are in the map from the set of all current sites unless
+  // manualLocationData is non-empty and contains prototpye sites
+  const fetchablePrototypeSites = (state.manualLocationData || []).filter((manualLocation) => (
+    manualLocation.manualLocationType === MANUAL_LOCATION_TYPES.PROTOTYPE_SITE
+      && state.sites[manualLocation.siteCode]
+  ));
+  let sitesToConsider = state.sites;
+  if (state.manualLocationData && fetchablePrototypeSites.length) {
+    sitesToConsider = {};
+    fetchablePrototypeSites.forEach((manualLocation) => {
+      sitesToConsider[manualLocation.siteCode] = state.sites[manualLocation.siteCode];
+    });
+  }
+  const sitesInMap = calculateLocationsInBounds(sitesToConsider, state.map.bounds, true, 0.06);
   let requiredSitesArray = [];
   if (requiredSites && requiredSites.length) {
     requiredSitesArray = (
@@ -728,7 +742,8 @@ const reducer = (state, action) => {
       newState.focusLocation.current = action.location;
       newState.focusLocation.data = null;
       newState.overallFetch.expected += 1;
-      if (newState.view.current !== VIEWS.MAP) { newState.view.current = VIEWS.MAP; }
+      // Switch view to MAP if we're on TABLE (and not on SPLIT)
+      if (newState.view.current === VIEWS.TABLE) { newState.view.current = VIEWS.MAP; }
       return newState;
 
     case 'setFocusLocationFetchStarted':
@@ -974,6 +989,7 @@ const Provider = (props) => {
     selectionLimit,
     onSelectionChange,
     tableFullHeight,
+    manualLocationData,
     children,
   } = props;
 
@@ -1034,6 +1050,9 @@ const Provider = (props) => {
         break;
     }
   }
+  if (Array.isArray(manualLocationData) && manualLocationData.length > 0) {
+    initialState.manualLocationData = manualLocationData;
+  }
   if (neonContextIsFinal && !neonContextHasError) {
     initialState = hydrateNeonContextData(initialState, neonContextData);
   }
@@ -1045,7 +1064,7 @@ const Provider = (props) => {
   );
 
   /**
-     Effect - trigger focusLocation fetch or short circuit if found in NeonContext data
+     Effect - trigger focusLocation fetch or short circuit if found in NeonContext or manual data
   */
   useEffect(() => {
     const noop = () => {};
@@ -1090,6 +1109,20 @@ const Provider = (props) => {
       }, 0);
       return () => window.clearTimeout(timeout);
     }
+    // If the location is found in manualLocationData then pull from there
+    if (state.manualLocationData) {
+      const manualSite = state.manualLocationData.find((ml) => ml.siteCode === current);
+      if (manualSite) {
+        const { latitude, longitude } = manualSite;
+        const timeout = window.setTimeout(() => {
+          dispatch({
+            type: 'setFocusLocationFetchSucceeded',
+            data: { type: 'SITE', latitude, longitude },
+          });
+        }, 0);
+        return () => window.clearTimeout(timeout);
+      }
+    }
     // Trigger focus location fetch
     dispatch({ type: 'setFocusLocationFetchStarted' });
     fetchManyLocationsGraphQL([current])
@@ -1105,6 +1138,7 @@ const Provider = (props) => {
     state.focusLocation,
     state.focusLocation.fetch.status,
     state.neonContextHydrated,
+    state.manualLocationData,
     state.featureData,
   ]);
 

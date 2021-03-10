@@ -138,7 +138,7 @@ export const TIME = {
   END_YEAR: ((new Date().getFullYear()) + 1),
 };
 TIME.MIN_YEAR_MONTH = `${TIME.START_YEAR}-01`;
-TIME.MAX_YEAR_MONTH = `${TIME.endYear}-12`;
+TIME.MAX_YEAR_MONTH = `${TIME.END_YEAR}-12`;
 TIME.YEARS = Array(TIME.END_YEAR - TIME.START_YEAR + 1)
   .fill(0)
   .map((val, idx) => TIME.START_YEAR + idx);

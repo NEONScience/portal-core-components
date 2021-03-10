@@ -36,8 +36,8 @@ declare namespace NeonPage {
         export const unstickyDrupalHeader: PropTypes.Requireable<boolean>;
         export const NeonContextProviderProps: PropTypes.Requireable<PropTypes.InferProps<{
             children: PropTypes.Requireable<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+            fetchPartials: PropTypes.Requireable<boolean>;
             useCoreAuth: PropTypes.Requireable<boolean>;
-            useCoreHeader: PropTypes.Requireable<boolean>;
             whenFinal: PropTypes.Requireable<(...args: any[]) => any>;
         }>>;
         const children_1: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;

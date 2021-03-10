@@ -139,6 +139,24 @@ const NeonApi = {
   },
 
   /**
+   * Gets the prototype data endpoint RxJS Observable.
+   * @return The RxJS Ajax Observable
+   */
+  getPrototypeDatasetsObservable: () => (
+    getJsonObservable(`${NeonEnvironment.getFullApiPath('prototype')}/datasets`)
+  ),
+  getPrototypeDatasetObservable: (uuid) => (
+    getJsonObservable(`${NeonEnvironment.getFullApiPath('prototype')}/datasets/${uuid}`)
+  ),
+  getPrototypeManifestRollupObservable: (uuid) => (
+    // eslint-disable-next-line max-len
+    getJsonObservable(`${NeonEnvironment.getFullApiPath('manifest')}/prototype/manifest/rollup?uuid=${uuid}`)
+  ),
+  getPrototypeDataFileObservable: (uuid, fileName) => (
+    getJsonObservable(`${NeonEnvironment.getFullApiPath('prototype')}/data/${uuid}/${fileName}`)
+  ),
+
+  /**
    * Gets the release endpoint RxJS Observable.
    * @return The RxJS Ajax Observable
    */

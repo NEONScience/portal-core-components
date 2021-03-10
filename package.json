@@ -1,13 +1,13 @@
 {
   "name": "portal-core-components",
-  "version": "1.6.3",
+  "version": "1.6.4",
   "main": "./lib/index.js",
   "private": true,
   "homepage": "http://localhost:3010/core-components",
   "dependencies": {
     "@date-io/moment": "^1.3.9",
-    "@material-ui/core": "^4.11.0",
-    "@material-ui/icons": "^4.9.1",
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.56",
     "@material-ui/pickers": "^3.2.10",
     "@material-ui/styles": "^4.10.0",
@@ -105,8 +105,11 @@
     "verbose": true,
     "moduleNameMapper": {
       "typeface-inter": "<rootDir>/src/__mocks__/fileMock.js",
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/__mocks__/fileMock.js",
       "\\.(css|less)$": "<rootDir>/src/__mocks__/styleMock.js"
+    },
+    "transform": {
+      "\\.(js|jsx|ts|tsx)$": "babel-jest",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/__mocks__/fileTransformer.js"
     },
     "setupFiles": [
       "jest-canvas-mock"
@@ -132,6 +135,8 @@
       "/node_modules/",
       "/src/lib_components/remoteAssets/",
       "/src/lib_components/types/",
+      "/src/lib_components/images/",
+      "/src/lib_components/components/SiteMap/svg/",
       "src/sampleData",
       "StyleGuide"
     ]
