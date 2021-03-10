@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { getTestableItems } from '../SiteMapTable';
 
 import { MIN_TABLE_MAX_BODY_HEIGHT } from '../SiteMapUtils';

@@ -1256,11 +1256,31 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
       });
     });
     describe('regenerateGraphData', () => {
-      test('applies graphData and sets status', () => {
-        expect(reducer(state, { type: 'regenerateGraphData', graphData: { foo: 'bar' } }))
+      test('soft fails to warning if graphData has no series', () => {
+        expect(reducer(state, { type: 'regenerateGraphData', graphData: { series: [] } }))
           .toStrictEqual({
             ...state,
-            graphData: { foo: 'bar' },
+            status: TIME_SERIES_VIEWER_STATUS.WARNING,
+            displayError: 'Current selection of dates/sites/positions/variables does not have any valid numeric data.',
+          });
+      });
+      test('soft fails to warning if no yAxes have a non-null dataRange', () => {
+        state.selection.yAxes.y1.dataRange = [null, null];
+        state.selection.yAxes.y2.dataRange = [null, null];
+        expect(reducer(state, { type: 'regenerateGraphData', graphData: { series: ['foo'] } }))
+          .toStrictEqual({
+            ...state,
+            status: TIME_SERIES_VIEWER_STATUS.WARNING,
+            displayError: 'Current selection of dates/sites/positions/variables does not have any valid numeric data.',
+          });
+      });
+      test('applies graphData and sets status if ', () => {
+        state.selection.yAxes.y1.dataRange = [0.1, 0.4];
+        state.selection.yAxes.y2.dataRange = [null, null];
+        expect(reducer(state, { type: 'regenerateGraphData', graphData: { series: ['foo'] } }))
+          .toStrictEqual({
+            ...state,
+            graphData: { series: ['foo'] },
             status: TIME_SERIES_VIEWER_STATUS.READY,
           });
       });
@@ -1409,9 +1429,26 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
           reducer(modifiedState, { type: 'fetchDataFilesCompleted', token: 'bar' }),
         ).toStrictEqual(modifiedState);
       });
-      test('clears the data fetches token and applies default selections', () => {
+      test('clears the data fetches token and applies default selections with warning', () => {
         state.dataFetches = { foo: true };
         state.product.sites = { S1: { ...cloneDeep(expectedInitialSite) } };
+        const newState = reducer(state, { type: 'fetchDataFilesCompleted', token: 'foo' });
+        expect(newState.dataFetches).toStrictEqual({});
+        expect(newState.status).toBe(TIME_SERIES_VIEWER_STATUS.WARNING);
+        expect(newState.selection.sites).toStrictEqual([{ siteCode: 'S1', positions: [] }]);
+      });
+      test('ends on ready for series status if able', () => {
+        state.dataFetches = { foo: true };
+        state.product.sites = { S1: { ...cloneDeep(expectedInitialSite) } };
+        state.selection.isDefault = false;
+        state.variables = {
+          foo: {
+            canBeDefault: true, isDateTime: false, downloadPkg: 'basic', units: 'foos',
+          },
+          startDate: {
+            canBeDefault: false, isDateTime: true, downloadPkg: 'basic', units: 'NA',
+          },
+        };
         const newState = reducer(state, { type: 'fetchDataFilesCompleted', token: 'foo' });
         expect(newState.dataFetches).toStrictEqual({});
         expect(newState.status).toBe(TIME_SERIES_VIEWER_STATUS.READY_FOR_SERIES);

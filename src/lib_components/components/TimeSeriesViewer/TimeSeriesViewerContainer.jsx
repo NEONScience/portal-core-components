@@ -85,6 +85,10 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(-0.5, -0.5, 0, -0.5),
     padding: theme.spacing(20, 4, 4, 4),
     backgroundColor: 'rgba(255, 255, 255, 0.75)',
+    '& .MuiTypography-root': {
+      boxShadow: '0px 0px 20px 25px #fff',
+      backgroundColor: '#fff',
+    },
   },
   titleContainer: {
     marginBottom: theme.spacing(2),
@@ -108,6 +112,12 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 700,
     fontSize: '85%',
     marginRight: Theme.spacing(1),
+  },
+  errorIcon: {
+    color: Theme.colors.RED[400],
+  },
+  warningIcon: {
+    color: Theme.colors.GOLD[500],
   },
 }));
 
@@ -489,14 +499,15 @@ export default function TimeSeriesViewerContainer() {
 
   const renderGraphOverlay = () => {
     const isError = state.status === TIME_SERIES_VIEWER_STATUS.ERROR;
+    const isWarning = state.status === TIME_SERIES_VIEWER_STATUS.WARNING;
     const isLoading = !isError && state.status !== TIME_SERIES_VIEWER_STATUS.READY;
-    if (isError) {
+    if (isError || isWarning) {
       return (
         <div className={classes.graphOverlay}>
           <Typography variant="subtitle2" style={{ marginBottom: Theme.spacing(4) }}>
             {state.displayError || 'An unknown error occurred; unable to visualize data product'}
           </Typography>
-          <ErrorIcon fontSize="large" color="error" />
+          <ErrorIcon fontSize="large" className={classes[isError ? 'errorIcon' : 'warningIcon']} />
         </div>
       );
     }
