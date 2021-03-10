@@ -877,7 +877,7 @@ const NeonPage = (props) => {
   };
 
   const renderedPage = neonContextIsActive ? renderNeonPage() : (
-    <NeonContext.Provider useCoreAuth useCoreHeader={useCoreHeader} {...NeonContextProviderProps}>
+    <NeonContext.Provider useCoreAuth fetchPartials={!useCoreHeader} {...NeonContextProviderProps}>
       {renderNeonPage()}
     </NeonContext.Provider>
   );

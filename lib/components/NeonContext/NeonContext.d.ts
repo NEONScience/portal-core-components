@@ -33,8 +33,8 @@ declare namespace Provider {
     export { ProviderPropTypes as propTypes };
     export namespace defaultProps {
         export const children: null;
+        export const fetchPartials: boolean;
         export const useCoreAuth: boolean;
-        export const useCoreHeader: boolean;
         export function whenFinal(): void;
     }
 }
@@ -1048,10 +1048,10 @@ declare function getWrappedComponent(Component: any): (props: any) => JSX.Elemen
 declare namespace ProviderPropTypes {
     const children_1: PropTypes.Requireable<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
     export { children_1 as children };
+    const fetchPartials_1: PropTypes.Requireable<boolean>;
+    export { fetchPartials_1 as fetchPartials };
     const useCoreAuth_1: PropTypes.Requireable<boolean>;
     export { useCoreAuth_1 as useCoreAuth };
-    const useCoreHeader_1: PropTypes.Requireable<boolean>;
-    export { useCoreHeader_1 as useCoreHeader };
     const whenFinal_1: PropTypes.Requireable<(...args: any[]) => any>;
     export { whenFinal_1 as whenFinal };
 }

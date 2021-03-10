@@ -209,8 +209,8 @@ const parseSitesFetchResponse = (sitesArray = []) => {
 const Provider = (props) => {
   const {
     children,
+    fetchPartials,
     useCoreAuth,
-    useCoreHeader,
     whenFinal,
   } = props;
 
@@ -220,7 +220,7 @@ const Provider = (props) => {
     initialState.auth.useCore = true;
     initialState.fetches.auth.status = FETCH_STATUS.AWAITING_CALL;
   }
-  if (!useCoreHeader) {
+  if (fetchPartials) {
     initialState.fetches[DRUPAL_HEADER_HTML].status = FETCH_STATUS.AWAITING_CALL;
     initialState.fetches[DRUPAL_FOOTER_HTML].status = FETCH_STATUS.AWAITING_CALL;
   }
@@ -350,16 +350,16 @@ const ProviderPropTypes = {
     PropTypes.node,
     PropTypes.string,
   ]),
+  fetchPartials: PropTypes.bool,
   useCoreAuth: PropTypes.bool,
-  useCoreHeader: PropTypes.bool,
   whenFinal: PropTypes.func,
 };
 Provider.propTypes = ProviderPropTypes;
 
 Provider.defaultProps = {
   children: null,
+  fetchPartials: false,
   useCoreAuth: false,
-  useCoreHeader: false,
   whenFinal: () => {},
 };
 
