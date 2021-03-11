@@ -153,6 +153,22 @@ describe('TimeSeriesViewerContext', () => {
         standardDeviation: 7,
       })).toStrictEqual([0, 10]);
     });
+    test('returns proper range for CENTERED with 0 stddev; flat at zero', () => {
+      expect(generateYAxisRange({
+        rangeMode: Y_AXIS_RANGE_MODES.CENTERED,
+        axisRange: [0, 0],
+        dataRange: [0, 0],
+        standardDeviation: 0,
+      })).toStrictEqual([-1, 1]);
+    });
+    test('returns proper range for CENTERED with 0 stddev; flat at non-zero value', () => {
+      expect(generateYAxisRange({
+        rangeMode: Y_AXIS_RANGE_MODES.CENTERED,
+        axisRange: [0, 0],
+        dataRange: [-12, -12],
+        standardDeviation: 0,
+      })).toStrictEqual([-18, -6]);
+    });
   });
 
   describe('getTimeStep', () => {

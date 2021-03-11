@@ -104,7 +104,13 @@ const generateYAxisRange = (axis = {}) => {
     !Object.keys(Y_AXIS_RANGE_MODES).includes(rangeMode)
       || !Number.isFinite(standardDeviation)
       || !Number.isFinite(precision)) { return axisRange; }
-  const margin = standardDeviation !== 0 ? standardDeviation : (dataRange[0] / 2);
+  // Most of the time the margin for our auto-generated axis range is one standard deviation above
+  // and below our high and low values of our data range. Edge cases for when stddev is zero:
+  // * Data range is flat at zero: margin of 1
+  // * Data range is flat at another value: margin of half the absolute value above and below
+  let margin = 1;
+  if (standardDeviation !== 0) { margin = standardDeviation; }
+  else if (dataRange[0] !== 0) { margin = Math.abs(dataRange[0] / 2); }
   let low = (dataRange[0] || 0) - margin;
   let high = (dataRange[1] || 0) + margin;
   low = parseFloat(low.toFixed(precision), 10);

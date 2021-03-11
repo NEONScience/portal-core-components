@@ -62,6 +62,9 @@ export default html = `
           <li  class="menu__item">
         <a href="https://www.neonscience.org/terms-use" title="Terms &amp; Conditions" class="menu__link" data-drupal-link-system-path="node/31">Terms &amp; Conditions</a>
               </li>
+          <li  class="menu__item">
+        <a href="https://www.neonscience.org/get-involved/work-opportunities/careers" class="menu__link">Careers</a>
+              </li>
         </ul>
   
 
