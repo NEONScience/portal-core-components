@@ -109,8 +109,11 @@ const generateYAxisRange = (axis = {}) => {
   // * Data range is flat at zero: margin of 1
   // * Data range is flat at another value: margin of half the absolute value above and below
   let margin = 1;
-  if (standardDeviation !== 0) { margin = standardDeviation; }
-  else if (dataRange[0] !== 0) { margin = Math.abs(dataRange[0] / 2); }
+  if (standardDeviation !== 0) {
+    margin = standardDeviation;
+  } else if (dataRange[0] !== 0) {
+    margin = Math.abs(dataRange[0] / 2);
+  }
   let low = (dataRange[0] || 0) - margin;
   let high = (dataRange[1] || 0) + margin;
   low = parseFloat(low.toFixed(precision), 10);
