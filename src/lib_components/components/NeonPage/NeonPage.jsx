@@ -294,7 +294,7 @@ const useStyles = makeStyles(() => ({
   NEON Error Page
   Shown as the fallback for a general error boundary around all NEON page instances
  */
-const NeonErrorPage = (props) => {
+export const NeonErrorPage = (props) => {
   const {
     error: { message, stack },
     resetErrorBoundary,
@@ -668,7 +668,7 @@ const NeonPage = (props) => {
       {progress === null ? (
         <CircularProgress />
       ) : (
-        <CircularProgress variant="static" value={progress} />
+        <CircularProgress variant="determinate" value={progress} />
       )}
     </>,
   ));

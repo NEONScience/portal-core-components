@@ -1,0 +1,1354 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NeonPage NeonErrorPage 1`] = `
+<div
+  className="MuiContainer-root makeStyles-outerPageContainer-1 MuiContainer-maxWidthLg"
+>
+  <div
+    className="makeStyles-pageContent-2"
+    data-selenium="neon-page.content"
+  >
+    <img
+      alt="NEON Data Portal"
+      className="makeStyles-errorPageLogo-20"
+      src="NSF-NEON-logo.png"
+      title="NEON Data Portal"
+    />
+    <h1
+      className="MuiTypography-root makeStyles-pageTitle-16 MuiTypography-h3"
+    >
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root makeStyles-errorPageTitleIcon-18"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"
+        />
+      </svg>
+      Something broke.
+    </h1>
+    <div>
+      <span
+        className="MuiTypography-root makeStyles-errorPageCaption-19 MuiTypography-caption"
+      >
+        fail
+      </span>
+    </div>
+    <div
+      style={
+        Object {
+          "display": "flex",
+        }
+      }
+    >
+      <button
+        className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        tabIndex={0}
+        type="button"
+      >
+        <span
+          className="MuiButton-label"
+        >
+          <span
+            className="MuiButton-startIcon MuiButton-iconSizeMedium"
+          >
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"
+              />
+            </svg>
+          </span>
+          Reset and Try Again
+        </span>
+        <span
+          className="MuiTouchRipple-root"
+        />
+      </button>
+      <a
+        aria-disabled={false}
+        className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary"
+        href="/"
+        onBlur={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        style={
+          Object {
+            "marginLeft": 32,
+          }
+        }
+        tabIndex={0}
+      >
+        <span
+          className="MuiButton-label"
+        >
+          <span
+            className="MuiButton-startIcon MuiButton-iconSizeMedium"
+          >
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"
+              />
+            </svg>
+          </span>
+          Return Home
+        </span>
+        <span
+          className="MuiTouchRipple-root"
+        />
+      </a>
+    </div>
+  </div>
+  <input
+    data-gtm="react-page-run-time-error.stack"
+    type="hidden"
+    value="Disregard; this is console.error() call is expected in the NeonErrorPage test"
+  />
+</div>
+`;
+
+exports[`NeonPage renders a basic functional page with no props 1`] = `
+Array [
+  <header
+    className="makeStyles-skeletonHeader-22"
+    id="header"
+  >
+    <span
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      style={
+        Object {
+          "height": "125px",
+          "width": "100%",
+        }
+      }
+    />
+  </header>,
+  <div
+    className="MuiContainer-root makeStyles-outerPageContainer-1 MuiContainer-maxWidthLg"
+    style={
+      Object {
+        "maxWidth": "2000px",
+      }
+    }
+  >
+    <div
+      className="makeStyles-pageContent-2"
+      data-selenium="neon-page.content"
+      style={
+        Object {
+          "top": "0px",
+        }
+      }
+    >
+      <div>
+        content
+      </div>
+    </div>
+  </div>,
+  <footer
+    id="footer"
+  >
+    <span
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      style={
+        Object {
+          "height": "300px",
+          "width": "100%",
+        }
+      }
+    />
+  </footer>,
+]
+`;
+
+exports[`NeonPage renders sidebar items as skeletons when in appropriate state 1`] = `
+Array [
+  <header
+    className="makeStyles-skeletonHeader-22"
+    id="header"
+  >
+    <span
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      style={
+        Object {
+          "height": "125px",
+          "width": "100%",
+        }
+      }
+    />
+  </header>,
+  <div
+    className="MuiContainer-root makeStyles-outerPageContainer-1 MuiContainer-maxWidthLg"
+    style={
+      Object {
+        "maxWidth": "calc(2000px - 348px)",
+      }
+    }
+  >
+    <div
+      className="makeStyles-sidebarContainer-4"
+      style={
+        Object {
+          "width": "300px",
+        }
+      }
+    >
+      <div>
+        Sidebar
+      </div>
+    </div>
+    <div
+      className="makeStyles-pageContent-2"
+      data-selenium="neon-page.content"
+      style={
+        Object {
+          "top": "12px",
+        }
+      }
+    >
+      <span
+        className="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse"
+        style={
+          Object {
+            "height": 24,
+            "margin": "16px 0px 32px 0px",
+            "width": "45%",
+          }
+        }
+      />
+      <div>
+        content
+      </div>
+    </div>
+  </div>,
+  <footer
+    id="footer"
+  >
+    <span
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      style={
+        Object {
+          "height": "300px",
+          "width": "100%",
+        }
+      }
+    />
+  </footer>,
+  <div
+    ComponentPath="@material-ui/core/Backdrop"
+    prop-open={true}
+  >
+    <div
+      className="MuiPaper-root makeStyles-backdropPaper-15 MuiPaper-elevation1 MuiPaper-rounded"
+    >
+      <h3
+        className="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom"
+      >
+        Loading
+      </h3>
+      <div
+        className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+        role="progressbar"
+        style={
+          Object {
+            "height": 40,
+            "width": 40,
+          }
+        }
+      >
+        <svg
+          className="MuiCircularProgress-svg"
+          viewBox="22 22 44 44"
+        >
+          <circle
+            className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+            cx={44}
+            cy={44}
+            fill="none"
+            r={20.2}
+            strokeWidth={3.6}
+            style={Object {}}
+          />
+        </svg>
+      </div>
+      <div
+        className="makeStyles-dismissOverlay-21"
+      >
+        <button
+          className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+        >
+          <span
+            className="MuiButton-label"
+          >
+            <span
+              className="MuiButton-startIcon MuiButton-iconSizeSmall"
+            >
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                />
+              </svg>
+            </span>
+            Dismiss
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>,
+]
+`;
+
+exports[`NeonPage renders with a custom header/footer 1`] = `
+Array [
+  <header>
+    <div>
+      Header
+    </div>
+  </header>,
+  <div
+    className="MuiContainer-root makeStyles-outerPageContainer-1 MuiContainer-maxWidthLg"
+    style={
+      Object {
+        "maxWidth": "2000px",
+      }
+    }
+  >
+    <div
+      className="makeStyles-pageContent-2"
+      data-selenium="neon-page.content"
+      style={
+        Object {
+          "top": "0px",
+        }
+      }
+    >
+      <div>
+        content
+      </div>
+    </div>
+  </div>,
+  <footer>
+    <div>
+      Header
+    </div>
+  </footer>,
+]
+`;
+
+exports[`NeonPage renders with a notification 1`] = `
+Array [
+  <header
+    className="makeStyles-skeletonHeader-22"
+    id="header"
+  >
+    <span
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      style={
+        Object {
+          "height": "125px",
+          "width": "100%",
+        }
+      }
+    />
+  </header>,
+  <div
+    className="MuiContainer-root makeStyles-outerPageContainer-1 MuiContainer-maxWidthLg"
+    style={
+      Object {
+        "maxWidth": "2000px",
+      }
+    }
+  >
+    <div
+      className="makeStyles-pageContent-2"
+      data-selenium="neon-page.content"
+      style={
+        Object {
+          "top": "0px",
+        }
+      }
+    >
+      <div>
+        content
+      </div>
+    </div>
+  </div>,
+  <div
+    ComponentPath="@material-ui/core/Snackbar"
+    prop-ContentProps="{\\"aria-describedby\\":\\"neon-data-portal-notifications\\"}"
+    prop-anchorOrigin="{\\"vertical\\":\\"bottom\\",\\"horizontal\\":\\"right\\"}"
+    prop-open={true}
+  >
+    <div
+      className="MuiPaper-root MuiSnackbarContent-root makeStyles-notification-25 MuiPaper-elevation6"
+      role="alert"
+    >
+      <div
+        className="MuiSnackbarContent-message"
+      >
+        <div
+          id="neon-data-portal-notifications"
+        >
+          <div
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "Notification",
+              }
+            }
+          />
+        </div>
+      </div>
+      <div
+        className="MuiSnackbarContent-action"
+      >
+        <button
+          aria-label="close"
+          className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+        >
+          <span
+            className="MuiIconButton-label"
+          >
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+              />
+            </svg>
+          </span>
+          <span
+            className="MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+    </div>
+  </div>,
+  <footer
+    id="footer"
+  >
+    <span
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      style={
+        Object {
+          "height": "300px",
+          "width": "100%",
+        }
+      }
+    />
+  </footer>,
+]
+`;
+
+exports[`NeonPage renders with a title and subtitle 1`] = `
+Array [
+  <header
+    className="makeStyles-skeletonHeader-22"
+    id="header"
+  >
+    <span
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      style={
+        Object {
+          "height": "125px",
+          "width": "100%",
+        }
+      }
+    />
+  </header>,
+  <div
+    className="MuiContainer-root makeStyles-outerPageContainer-1 MuiContainer-maxWidthLg"
+    style={
+      Object {
+        "maxWidth": "2000px",
+      }
+    }
+  >
+    <div
+      className="makeStyles-pageContent-2"
+      data-selenium="neon-page.content"
+      style={
+        Object {
+          "top": "0px",
+        }
+      }
+    >
+      <h1
+        className="MuiTypography-root makeStyles-pageTitle-16 MuiTypography-h3"
+        data-selenium="neon-page.title"
+      >
+        Title
+      </h1>
+      <p
+        className="MuiTypography-root makeStyles-pageSubtitle-17 MuiTypography-subtitle1"
+        data-selenium="neon-page.subtitle"
+      >
+        Subtitle
+      </p>
+      <div>
+        content
+      </div>
+    </div>
+  </div>,
+  <footer
+    id="footer"
+  >
+    <span
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      style={
+        Object {
+          "height": "300px",
+          "width": "100%",
+        }
+      }
+    />
+  </footer>,
+]
+`;
+
+exports[`NeonPage renders with an error 1`] = `
+Array [
+  <header
+    className="makeStyles-skeletonHeader-22"
+    id="header"
+  >
+    <span
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      style={
+        Object {
+          "height": "125px",
+          "width": "100%",
+        }
+      }
+    />
+  </header>,
+  <div
+    className="MuiContainer-root makeStyles-outerPageContainer-1 MuiContainer-maxWidthLg"
+    style={
+      Object {
+        "maxWidth": "2000px",
+      }
+    }
+  >
+    <div
+      className="makeStyles-pageContent-2"
+      data-selenium="neon-page.content"
+      style={
+        Object {
+          "top": "0px",
+        }
+      }
+    >
+      <span
+        className="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse"
+        style={
+          Object {
+            "height": 24,
+            "margin": "16px 0px 32px 0px",
+            "width": "45%",
+          }
+        }
+      />
+      <div>
+        content
+      </div>
+    </div>
+  </div>,
+  <footer
+    id="footer"
+  >
+    <span
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      style={
+        Object {
+          "height": "300px",
+          "width": "100%",
+        }
+      }
+    />
+  </footer>,
+  <div
+    ComponentPath="@material-ui/core/Backdrop"
+    prop-open={true}
+  >
+    <div
+      className="MuiPaper-root makeStyles-backdropPaper-15 MuiPaper-elevation1 MuiPaper-rounded"
+    >
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root MuiSvgIcon-colorError MuiSvgIcon-fontSizeLarge"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"
+        />
+      </svg>
+      <h3
+        className="MuiTypography-root MuiTypography-h5"
+        style={
+          Object {
+            "marginTop": 8,
+          }
+        }
+      >
+        Fail
+      </h3>
+      <div
+        className="makeStyles-dismissOverlay-21"
+      >
+        <button
+          className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+        >
+          <span
+            className="MuiButton-label"
+          >
+            <span
+              className="MuiButton-startIcon MuiButton-iconSizeSmall"
+            >
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                />
+              </svg>
+            </span>
+            Dismiss
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>,
+]
+`;
+
+exports[`NeonPage renders with custom sidebar content 1`] = `
+Array [
+  <header
+    className="makeStyles-skeletonHeader-22"
+    id="header"
+  >
+    <span
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      style={
+        Object {
+          "height": "125px",
+          "width": "100%",
+        }
+      }
+    />
+  </header>,
+  <div
+    className="MuiContainer-root makeStyles-outerPageContainer-1 MuiContainer-maxWidthLg"
+    style={
+      Object {
+        "maxWidth": "calc(2000px - 348px)",
+      }
+    }
+  >
+    <div
+      className="makeStyles-sidebarContainer-4"
+      style={
+        Object {
+          "width": "300px",
+        }
+      }
+    >
+      <div>
+        Sidebar
+      </div>
+    </div>
+    <div
+      className="makeStyles-pageContent-2"
+      data-selenium="neon-page.content"
+      style={
+        Object {
+          "top": "12px",
+        }
+      }
+    >
+      <div>
+        content
+      </div>
+    </div>
+  </div>,
+  <footer
+    id="footer"
+  >
+    <span
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      style={
+        Object {
+          "height": "300px",
+          "width": "100%",
+        }
+      }
+    />
+  </footer>,
+]
+`;
+
+exports[`NeonPage renders with loading message 1`] = `
+Array [
+  <header
+    className="makeStyles-skeletonHeader-22"
+    id="header"
+  >
+    <span
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      style={
+        Object {
+          "height": "125px",
+          "width": "100%",
+        }
+      }
+    />
+  </header>,
+  <div
+    className="MuiContainer-root makeStyles-outerPageContainer-1 MuiContainer-maxWidthLg"
+    style={
+      Object {
+        "maxWidth": "3333px",
+      }
+    }
+  >
+    <div
+      className="makeStyles-pageContent-2"
+      data-selenium="neon-page.content"
+      style={
+        Object {
+          "top": "0px",
+        }
+      }
+    >
+      <span
+        className="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse"
+        style={
+          Object {
+            "height": 24,
+            "margin": "16px 0px 32px 0px",
+            "width": "45%",
+          }
+        }
+      />
+      <div>
+        content
+      </div>
+    </div>
+  </div>,
+  <footer
+    id="footer"
+  >
+    <span
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      style={
+        Object {
+          "height": "300px",
+          "width": "100%",
+        }
+      }
+    />
+  </footer>,
+  <div
+    ComponentPath="@material-ui/core/Backdrop"
+    prop-open={true}
+  >
+    <div
+      className="MuiPaper-root makeStyles-backdropPaper-15 MuiPaper-elevation1 MuiPaper-rounded"
+    >
+      <h3
+        className="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom"
+      >
+        Loading
+      </h3>
+      <div
+        className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+        role="progressbar"
+        style={
+          Object {
+            "height": 40,
+            "width": 40,
+          }
+        }
+      >
+        <svg
+          className="MuiCircularProgress-svg"
+          viewBox="22 22 44 44"
+        >
+          <circle
+            className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+            cx={44}
+            cy={44}
+            fill="none"
+            r={20.2}
+            strokeWidth={3.6}
+            style={Object {}}
+          />
+        </svg>
+      </div>
+      <div
+        className="makeStyles-dismissOverlay-21"
+      >
+        <button
+          className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+        >
+          <span
+            className="MuiButton-label"
+          >
+            <span
+              className="MuiButton-startIcon MuiButton-iconSizeSmall"
+            >
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                />
+              </svg>
+            </span>
+            Dismiss
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>,
+]
+`;
+
+exports[`NeonPage renders with loading message and progress 1`] = `
+Array [
+  <header
+    className="makeStyles-skeletonHeader-22"
+    id="header"
+  >
+    <span
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      style={
+        Object {
+          "height": "125px",
+          "width": "100%",
+        }
+      }
+    />
+  </header>,
+  <div
+    className="MuiContainer-root makeStyles-outerPageContainer-1 MuiContainer-maxWidthLg"
+    style={
+      Object {
+        "maxWidth": "2000px",
+      }
+    }
+  >
+    <div
+      className="makeStyles-pageContent-2"
+      data-selenium="neon-page.content"
+      style={
+        Object {
+          "top": "0px",
+        }
+      }
+    >
+      <span
+        className="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse"
+        style={
+          Object {
+            "height": 24,
+            "margin": "16px 0px 32px 0px",
+            "width": "45%",
+          }
+        }
+      />
+      <div>
+        content
+      </div>
+    </div>
+  </div>,
+  <footer
+    id="footer"
+  >
+    <span
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      style={
+        Object {
+          "height": "300px",
+          "width": "100%",
+        }
+      }
+    />
+  </footer>,
+  <div
+    ComponentPath="@material-ui/core/Backdrop"
+    prop-open={true}
+  >
+    <div
+      className="MuiPaper-root makeStyles-backdropPaper-15 MuiPaper-elevation1 MuiPaper-rounded"
+    >
+      <h3
+        className="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom"
+      >
+        Loading
+      </h3>
+      <div
+        aria-valuenow={62}
+        className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-determinate"
+        role="progressbar"
+        style={
+          Object {
+            "height": 40,
+            "transform": "rotate(-90deg)",
+            "width": 40,
+          }
+        }
+      >
+        <svg
+          className="MuiCircularProgress-svg"
+          viewBox="22 22 44 44"
+        >
+          <circle
+            className="MuiCircularProgress-circle MuiCircularProgress-circleDeterminate"
+            cx={44}
+            cy={44}
+            fill="none"
+            r={20.2}
+            strokeWidth={3.6}
+            style={
+              Object {
+                "strokeDasharray": "126.920",
+                "strokeDashoffset": "48.230px",
+              }
+            }
+          />
+        </svg>
+      </div>
+      <div
+        className="makeStyles-dismissOverlay-21"
+      >
+        <button
+          className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+        >
+          <span
+            className="MuiButton-label"
+          >
+            <span
+              className="MuiButton-startIcon MuiButton-iconSizeSmall"
+            >
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                />
+              </svg>
+            </span>
+            Dismiss
+          </span>
+          <span
+            className="MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+    </div>
+  </div>,
+]
+`;
+
+exports[`NeonPage renders with sidebar links 1`] = `
+Array [
+  <header
+    className="makeStyles-skeletonHeader-22"
+    id="header"
+  >
+    <span
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      style={
+        Object {
+          "height": "125px",
+          "width": "100%",
+        }
+      }
+    />
+  </header>,
+  <div
+    className="MuiContainer-root makeStyles-outerPageContainer-1 MuiContainer-maxWidthLg"
+    style={
+      Object {
+        "maxWidth": "calc(2000px - 348px)",
+      }
+    }
+  >
+    <div
+      className="makeStyles-sidebarContainer-4"
+      style={
+        Object {
+          "width": "300px",
+        }
+      }
+    >
+      <div
+        className="makeStyles-sidebarInnerStickyContainer-5"
+      >
+        <div
+          className="makeStyles-sidebarTitleContainer-6"
+        >
+          <div
+            className="makeStyles-sidebarTitlesContainer-9"
+          >
+            <h3
+              className="MuiTypography-root makeStyles-sidebarTitle-7 MuiTypography-h5"
+            >
+              foo
+            </h3>
+            <h4
+              className="MuiTypography-root makeStyles-sidebarSubtitle-8 MuiTypography-subtitle2"
+            >
+              bar
+            </h4>
+          </div>
+        </div>
+        <hr
+          className="MuiDivider-root makeStyles-sidebarDivider-14"
+          style={
+            Object {
+              "width": "236px",
+            }
+          }
+        />
+        <div>
+          More
+        </div>
+        <hr
+          className="MuiDivider-root makeStyles-sidebarDivider-14"
+          style={
+            Object {
+              "width": "236px",
+            }
+          }
+        />
+        <div
+          className="makeStyles-sidebarLinksContainer-13"
+        >
+          <a
+            className="MuiTypography-root MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-10 makeStyles-sidebarLinkCurrent-11 MuiTypography-colorPrimary"
+            href="#"
+            onBlur={[Function]}
+            onClick={null}
+            onFocus={[Function]}
+            style={Object {}}
+          >
+            Section A
+          </a>
+          <a
+            className="MuiTypography-root MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-10 MuiTypography-colorPrimary"
+            href="#sectionB"
+            onBlur={[Function]}
+            onClick={null}
+            onFocus={[Function]}
+            style={Object {}}
+          >
+            Section B
+          </a>
+          <a
+            className="MuiTypography-root MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-10 MuiTypography-colorPrimary"
+            href="#sectionC"
+            onBlur={[Function]}
+            onClick={null}
+            onFocus={[Function]}
+            style={Object {}}
+          >
+            <div>
+              stub icon
+            </div>
+            Section C
+          </a>
+          <a
+            className="MuiTypography-root MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-10 MuiTypography-colorPrimary"
+            href="#sectionD"
+            onBlur={[Function]}
+            onClick={null}
+            onFocus={[Function]}
+            style={Object {}}
+          >
+            Section D
+          </a>
+        </div>
+        <hr
+          className="MuiDivider-root makeStyles-sidebarDivider-14"
+          style={
+            Object {
+              "marginBottom": "0px",
+              "width": "236px",
+            }
+          }
+        />
+      </div>
+    </div>
+    <div
+      className="makeStyles-pageContent-2"
+      data-selenium="neon-page.content"
+      style={
+        Object {
+          "top": "12px",
+        }
+      }
+    >
+      <div>
+        content
+      </div>
+    </div>
+  </div>,
+  <footer
+    id="footer"
+  >
+    <span
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      style={
+        Object {
+          "height": "300px",
+          "width": "100%",
+        }
+      }
+    />
+  </footer>,
+]
+`;
+
+exports[`NeonPage renders with sidebar links as standlone children 1`] = `
+Array [
+  <header
+    className="makeStyles-skeletonHeader-22"
+    id="header"
+  >
+    <span
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      style={
+        Object {
+          "height": "125px",
+          "width": "100%",
+        }
+      }
+    />
+  </header>,
+  <div
+    className="MuiContainer-root makeStyles-outerPageContainer-1 MuiContainer-maxWidthLg"
+    style={
+      Object {
+        "maxWidth": "calc(2000px - 470px)",
+      }
+    }
+  >
+    <div
+      className="makeStyles-sidebarContainer-4 sidebarClassName"
+      style={
+        Object {
+          "width": "422px",
+        }
+      }
+    >
+      <div
+        className={null}
+      >
+        <div
+          className="makeStyles-sidebarTitleContainer-6"
+        />
+        <hr
+          className="MuiDivider-root makeStyles-sidebarDivider-14"
+          style={
+            Object {
+              "width": "358px",
+            }
+          }
+        />
+        <div
+          className="makeStyles-sidebarLinksContainer-13"
+        >
+          <a
+            className="MuiTypography-root MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-10 makeStyles-sidebarLinkCurrent-11 MuiTypography-colorPrimary"
+            href="#sectionA"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            style={Object {}}
+          >
+            Section A
+          </a>
+          <a
+            className="MuiTypography-root MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-10 makeStyles-sidebarLinkCurrent-11 MuiTypography-colorPrimary"
+            href="#sectionA"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            style={Object {}}
+          >
+            Section B
+          </a>
+        </div>
+        <hr
+          className="MuiDivider-root makeStyles-sidebarDivider-14"
+          style={
+            Object {
+              "marginBottom": "0px",
+              "width": "358px",
+            }
+          }
+        />
+      </div>
+    </div>
+    <div
+      className="makeStyles-pageContent-2"
+      data-selenium="neon-page.content"
+      style={
+        Object {
+          "top": "12px",
+        }
+      }
+    >
+      <h1
+        className="MuiTypography-root makeStyles-pageTitle-16 MuiTypography-h3"
+        data-selenium="neon-page.title"
+      >
+        Section B
+      </h1>
+      <div>
+        stub component B
+      </div>
+    </div>
+  </div>,
+  <footer
+    id="footer"
+  >
+    <span
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      style={
+        Object {
+          "height": "300px",
+          "width": "100%",
+        }
+      }
+    />
+  </footer>,
+]
+`;
