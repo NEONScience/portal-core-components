@@ -88,7 +88,7 @@ describe('SiteMap - SiteMapTable', () => {
     });
   });
 
-  describe('exportCsv() GAGAGA', () => {
+  describe('exportCsv()', () => {
     let createElementMock = null;
     const setAttributeMock = jest.fn();
     const clickMock = jest.fn();
