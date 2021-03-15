@@ -8,6 +8,7 @@ const {
   searchOnAttribs,
   getFeatureName,
   calculateMaxBodyHeight,
+  exportCsv,
 } = getTestableItems();
 
 describe('SiteMap - SiteMapTable', () => {
@@ -84,6 +85,66 @@ describe('SiteMap - SiteMapTable', () => {
         },
       };
       expect(calculateMaxBodyHeight(tableRef)).toBe(270);
+    });
+  });
+
+  describe('exportCsv() GAGAGA', () => {
+    let createElementMock = null;
+    const setAttributeMock = jest.fn();
+    const clickMock = jest.fn();
+    beforeAll(() => {
+      createElementMock = jest.spyOn(document, 'createElement').mockReturnValue({
+        href: null,
+        setAttribute: setAttributeMock,
+        click: clickMock,
+      });
+      Object.defineProperty(window.document, 'body', {
+        writeable: false,
+        value: { appendChild: jest.fn(), removeChild: jest.fn() },
+      });
+    });
+    afterEach(() => { jest.clearAllMocks(); });
+    afterAll(() => { jest.resetAllMocks(); });
+    test('does nothing if either columns or rows are empty', () => {
+      exportCsv();
+      expect(createElementMock).not.toHaveBeenCalled();
+      exportCsv([{ name: 'foo' }], []);
+      expect(createElementMock).not.toHaveBeenCalled();
+      exportCsv([], [{ name: 'foo' }]);
+      expect(createElementMock).not.toHaveBeenCalled();
+    });
+    test('generates a csv with appropriate column spreading', () => {
+      const columns = [
+        {
+          field: 'siteCode',
+          csvFields: ['siteCode', 'siteName'],
+          csvRender: (row) => [row.siteCode, row.siteName || null],
+        },
+        {
+          field: 'domainCode',
+        },
+        {
+          field: 'elevation',
+          csvFields: ['elevation (m)'],
+          csvRender: (row) => (
+            Number.isFinite(row.elevation) ? row.elevation.toFixed(2) : null
+          ),
+        },
+      ];
+      const rows = [
+        // eslint-disable-next-line object-curly-newline
+        { siteCode: 'ABBY', siteName: 'Abbey, Road', domainCode: 'D16', elevation: 123.4567 },
+        { siteCode: 'BARR', domainCode: 'D12', elevation: 'n/a' },
+        { siteName: 'Some "site"', domainCode: null, elevation: 45.678 },
+      ];
+      const expectedHref = 'data:text/csv;charset=utf-8,siteCode,siteName,domainCode,elevation%20(m)%0AABBY,%22Abbey,%20Road%22,D16,123.46%0ABARR,,D12,%0A,%22Some%20%5C%22site%22%22,,45.68';
+      const expectedFilename = 'NEON-SiteMap-Table.csv';
+      exportCsv(columns, rows);
+      expect(createElementMock).toHaveBeenCalled();
+      expect(setAttributeMock).toHaveBeenCalledTimes(2);
+      expect(setAttributeMock).toHaveBeenNthCalledWith(1, 'href', expectedHref);
+      expect(setAttributeMock).toHaveBeenNthCalledWith(2, 'download', expectedFilename);
+      expect(clickMock).toHaveBeenCalled();
     });
   });
 });
