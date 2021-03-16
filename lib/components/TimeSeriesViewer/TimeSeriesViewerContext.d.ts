@@ -56,6 +56,62 @@ export namespace TabComponentPropTypes {
         [x: string]: import("../../types/core").Nullable<string>;
     }>;
 }
+export namespace DEFAULT_STATE {
+    import status = INIT_PRODUCT;
+    export { status };
+    export const displayError: null;
+    export namespace fetchProduct {
+        import status_1 = AWAITING_CALL;
+        export { status_1 as status };
+        export const error: null;
+    }
+    export const metaFetches: {};
+    export const dataFetches: {};
+    export const dataFetchProgress: number;
+    export const variables: {};
+    export namespace product {
+        export const productCode: null;
+        export const productName: null;
+        export const productDescription: null;
+        export const productSensor: null;
+        export const dateRange: null[];
+        export const continuousDateRange: never[];
+        export const sites: {};
+    }
+    export namespace graphData {
+        export const data: never[];
+        export const qualityData: never[];
+        export const monthOffsets: {};
+        export const timestampMap: {};
+        export const series: never[];
+        export const labels: string[];
+        export const qualityLabels: string[];
+    }
+    export namespace selection {
+        const dateRange_1: null[];
+        export { dateRange_1 as dateRange };
+        const continuousDateRange_1: never[];
+        export { continuousDateRange_1 as continuousDateRange };
+        const variables_1: never[];
+        export { variables_1 as variables };
+        export const dateTimeVariable: null;
+        const sites_1: never[];
+        export { sites_1 as sites };
+        export const timeStep: string;
+        export const autoTimeStep: null;
+        export const qualityFlags: never[];
+        export const rollPeriod: number;
+        export const logscale: boolean;
+        export namespace yAxes {
+            export const y1: any;
+            export const y2: any;
+        }
+        export const isDefault: boolean;
+        export const invalidDefaultVariables: Set<any>;
+    }
+    export const availableQualityFlags: Set<any>;
+    export const availableTimeSteps: Set<string>;
+}
 /**
    Time Step Definitions and Functions
 */
@@ -212,6 +268,13 @@ export type ParseSiteVariablesReturn = {
     variablesObject: Object;
 };
 import PropTypes from "prop-types";
+declare namespace FETCH_STATUS {
+    export const AWAITING_CALL: string;
+    export const FETCHING: string;
+    const ERROR_2: string;
+    export { ERROR_2 as ERROR };
+    export const SUCCESS: string;
+}
 declare namespace TimeSeriesViewerContext {
     export { Provider };
     export { useTimeSeriesViewerState };
@@ -223,23 +286,23 @@ declare namespace TimeSeriesViewerContext {
 declare function Provider(props: any): JSX.Element;
 declare namespace Provider {
     export namespace propTypes {
-        import productCode = productCode;
-        export { productCode };
+        import productCode_1 = productCode;
+        export { productCode_1 as productCode };
         import productData = productData;
         export { productData };
         export const children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
     }
     export namespace defaultProps {
-        const productCode_1: null;
-        export { productCode_1 as productCode };
+        const productCode_2: null;
+        export { productCode_2 as productCode };
         const productData_1: null;
         export { productData_1 as productData };
     }
 }
 declare function useTimeSeriesViewerState(): any;
 declare namespace TimeSeriesViewerPropTypes {
-    export function productCode_2(props: any, propName: any, componentName: any): Error | null;
-    export { productCode_2 as productCode };
+    export function productCode_3(props: any, propName: any, componentName: any): Error | null;
+    export { productCode_3 as productCode };
     export function productData_2(props: any, propName: any, componentName: any): Error | null;
     export { productData_2 as productData };
 }

@@ -879,6 +879,7 @@ const SiteMapLeaflet = () => {
         worldCopyJump
         data-component="SiteMap"
         data-selenium="sitemap-content-map"
+        tap={false}
         {...mouseModeProps}
       >
         <ScaleControl imperial metric updateWhenIdle />
