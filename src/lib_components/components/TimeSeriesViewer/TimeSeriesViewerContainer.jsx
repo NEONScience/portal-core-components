@@ -180,7 +180,7 @@ const useTabStyles = makeStyles((theme) => ({
 /**
    Summary Component
 */
-function TimeSeriesViewerSummary() {
+export function TimeSeriesViewerSummary() {
   const classes = useStyles(Theme);
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
 

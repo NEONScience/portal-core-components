@@ -143,7 +143,7 @@ const DEFAULT_AXIS_STATE = {
   rangeMode: Y_AXIS_RANGE_MODES.CENTERED,
   axisRange: [0, 0],
 };
-const DEFAULT_STATE = {
+export const DEFAULT_STATE = {
   status: TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT,
   displayError: null,
   fetchProduct: { status: FETCH_STATUS.AWAITING_CALL, error: null },
