@@ -1144,5 +1144,5 @@ export const getTestableItems = () => (
     SitesControl,
     SiteOption,
     SelectedSite,
-  }  
+  }
 );

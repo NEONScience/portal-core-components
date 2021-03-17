@@ -5,10 +5,7 @@ import cloneDeep from 'lodash/cloneDeep';
 
 import '../../../../__mocks__/NeonContext';
 
-import TimeSeriesViewerContext, {
-  DEFAULT_STATE,
-  useTimeSeriesViewerState,
-} from '../TimeSeriesViewerContext';
+import TimeSeriesViewerContext, { DEFAULT_STATE } from '../TimeSeriesViewerContext';
 
 import { getTestableItems } from '../TimeSeriesViewerSites';
 
@@ -18,6 +15,8 @@ jest.mock('../TimeSeriesViewerContext', () => ({
   DEFAULT_STATE: jest.requireActual('../TimeSeriesViewerContext').DEFAULT_STATE,
   useTimeSeriesViewerState: jest.fn(),
 }));
+
+const { useTimeSeriesViewerState } = TimeSeriesViewerContext;
 
 const {
   ucWord,
@@ -78,13 +77,13 @@ describe('TimeSeriesViewerSites', () => {
   describe('PositionHistoryButton', () => {
     test('Renders disabled when history has less than two entries', () => {
       const tree = renderer.create(
-        <PositionHistoryButton siteCode="ABBY" position="000.010" history={[]} />
+        <PositionHistoryButton siteCode="ABBY" position="000.010" history={[]} />,
       ).toJSON();
       expect(tree).toMatchSnapshot();
     });
     test('Renders enabled when history has two or more entries', () => {
       const tree = renderer.create(
-        <PositionHistoryButton siteCode="ABBY" position="000.010" history={history010} />
+        <PositionHistoryButton siteCode="ABBY" position="000.010" history={history010} />,
       ).toJSON();
       expect(tree).toMatchSnapshot();
     });
@@ -104,7 +103,7 @@ describe('TimeSeriesViewerSites', () => {
         },
       }]);
       const tree = renderer.create(
-        <PositionDetail siteCode="ABBY" position="000.010" />
+        <PositionDetail siteCode="ABBY" position="000.010" />,
       ).toJSON();
       expect(tree).toMatchSnapshot();
     });
@@ -122,7 +121,7 @@ describe('TimeSeriesViewerSites', () => {
         },
       }]);
       const tree = renderer.create(
-        <PositionDetail siteCode="ABBY" position="000.010" />
+        <PositionDetail siteCode="ABBY" position="000.010" />,
       ).toJSON();
       expect(tree).toMatchSnapshot();
     });
@@ -140,7 +139,7 @@ describe('TimeSeriesViewerSites', () => {
         },
       }]);
       const tree = renderer.create(
-        <PositionDetail siteCode="ABBY" position="000.010" wide />
+        <PositionDetail siteCode="ABBY" position="000.010" wide />,
       ).toJSON();
       expect(tree).toMatchSnapshot();
     });
@@ -160,7 +159,7 @@ describe('TimeSeriesViewerSites', () => {
         },
       }]);
       const tree = renderer.create(
-        <SelectedPosition siteCode="ABBY" position="000.010" />
+        <SelectedPosition siteCode="ABBY" position="000.010" />,
       ).toJSON();
       expect(tree).toMatchSnapshot();
     });
@@ -185,7 +184,7 @@ describe('TimeSeriesViewerSites', () => {
       const tree = renderer.create(
         <SelectPositionsButton
           selectedSite={{ siteCode: 'ABBY', positions: ['000.020', '000.010'] }}
-        />
+        />,
       ).toJSON();
       expect(tree).toMatchSnapshot();
     });
@@ -196,11 +195,12 @@ describe('TimeSeriesViewerSites', () => {
     test('Renders as expected', () => {
       const tree = renderer.create(
         <SitesControl
-          children={<div>children</div>}
           innerProps={{ 'data-inner': 'foo', onMouseDown: () => {} }}
           selectProps={{ TextFieldProps: { 'data-textField': 'bar' } }}
           innerRef={() => {}}
-        />
+        >
+          <div>children</div>
+        </SitesControl>,
       ).toJSON();
       expect(tree).toMatchSnapshot();
     });
@@ -227,7 +227,7 @@ describe('TimeSeriesViewerSites', () => {
           data={data}
           isSelected
           isFocused
-        />
+        />,
       ).toJSON();
       expect(tree).toMatchSnapshot();
     });
@@ -236,29 +236,29 @@ describe('TimeSeriesViewerSites', () => {
   // SelectedSite
   describe('SelectedSite', () => {
     beforeEach(() => {
-      useTimeSeriesViewerState.mockReturnValue([cloneDeep(DEFAULT_STATE), () => {}]);      
+      useTimeSeriesViewerState.mockReturnValue([cloneDeep(DEFAULT_STATE), () => {}]);
     });
     test('Renders as expected (terrestrial / relocatable)', () => {
       const tree = renderer.create(
-        <SelectedSite site={{ siteCode: 'ABBY', positions: ['000.020', '000.010'] }} />
+        <SelectedSite site={{ siteCode: 'ABBY', positions: ['000.020', '000.010'] }} />,
       ).toJSON();
       expect(tree).toMatchSnapshot();
     });
     test('Renders as expected (terrestrial / core)', () => {
       const tree = renderer.create(
-        <SelectedSite site={{ siteCode: 'CPER', positions: ['000.050', '000.040'] }} />
+        <SelectedSite site={{ siteCode: 'CPER', positions: ['000.050', '000.040'] }} />,
       ).toJSON();
       expect(tree).toMatchSnapshot();
     });
     test('Renders as expected (aquatic / relocatable)', () => {
       const tree = renderer.create(
-        <SelectedSite site={{ siteCode: 'BIGC', positions: ['000.030', '000.010'] }} />
+        <SelectedSite site={{ siteCode: 'BIGC', positions: ['000.030', '000.010'] }} />,
       ).toJSON();
       expect(tree).toMatchSnapshot();
     });
     test('Renders as expected (aquatic / core)', () => {
       const tree = renderer.create(
-        <SelectedSite site={{ siteCode: 'CUPE', positions: ['000.010'] }} />
+        <SelectedSite site={{ siteCode: 'CUPE', positions: ['000.010'] }} />,
       ).toJSON();
       expect(tree).toMatchSnapshot();
     });
