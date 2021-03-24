@@ -194,7 +194,7 @@ const useStyles = makeStyles((theme) => ({
       paddingTop: theme.spacing(4.5),
     },
     '& div.MuiToolbar-root': {
-      width: 'calc(100% - 104px)',
+      width: '100%',
       padding: theme.spacing(0, 0, 0, 2),
       backgroundColor: theme.palette.grey[50],
     },

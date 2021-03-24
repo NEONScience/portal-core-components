@@ -1506,35 +1506,36 @@ const SiteMapFeature = (props) => {
           ? SELECTION_STATUS.SELECTED
           : SELECTION_STATUS.UNSELECTED;
         const initialHighlight = isHighlighted ? HIGHLIGHT_STATUS.HIGHLIGHT : HIGHLIGHT_STATUS.NONE;
-        icon = baseIcon[selection][initialHighlight];
-        interaction = {
-          onMouseOver: (e) => {
-            let highlight = HIGHLIGHT_STATUS.HIGHLIGHT;
-            if (selectionActive && selectingCurrentFeatureType && isSelectable) {
-              highlight = HIGHLIGHT_STATUS[isSelected ? 'HIGHLIGHT' : 'SELECT'];
-            }
-            e.target.setIcon(baseIcon[selection][highlight]);
-            e.target._bringToFront();
-            if (hasPopup && selectionActive) {
-              e.target.openPopup();
-              positionPopup(e.target, e.latlng, selectionActive);
-            }
-          },
-          onMouseOut: (e) => {
-            e.target.setIcon(baseIcon[selection][initialHighlight]);
-            if (hasPopup && selectionActive) {
-              e.target.closePopup();
-            }
-          },
-          onClick: (e) => {
-            if (!selectionActive && hasPopup) {
-              const popupOpen = e.target._popup.isOpen();
-              const func = () => positionPopup(e.target, e.latlng, selectionActive);
-              dispatch({ type: 'setMapRepositionOpenPopupFunc', func });
-              if (popupOpen) { func(); }
-            }
-            if (selectionActive && selectingCurrentFeatureType && isSelectable) {
-              switch (selectionType) {
+        if (baseIcon && baseIcon[selection]) {
+          icon = baseIcon[selection][initialHighlight];
+          interaction = {
+            onMouseOver: (e) => {
+              let highlight = HIGHLIGHT_STATUS.HIGHLIGHT;
+              if (selectionActive && selectingCurrentFeatureType && isSelectable) {
+                highlight = HIGHLIGHT_STATUS[isSelected ? 'HIGHLIGHT' : 'SELECT'];
+              }
+              e.target.setIcon(baseIcon[selection][highlight]);
+              e.target._bringToFront();
+              if (hasPopup && selectionActive) {
+                e.target.openPopup();
+                positionPopup(e.target, e.latlng, selectionActive);
+              }
+            },
+            onMouseOut: (e) => {
+              e.target.setIcon(baseIcon[selection][initialHighlight]);
+              if (hasPopup && selectionActive) {
+                e.target.closePopup();
+              }
+            },
+            onClick: (e) => {
+              if (!selectionActive && hasPopup) {
+                const popupOpen = e.target._popup.isOpen();
+                const func = () => positionPopup(e.target, e.latlng, selectionActive);
+                dispatch({ type: 'setMapRepositionOpenPopupFunc', func });
+                if (popupOpen) { func(); }
+              }
+              if (selectionActive && selectingCurrentFeatureType && isSelectable) {
+                switch (selectionType) {
                 case FEATURE_TYPES.SITES.KEY:
                   if (shapeData.siteCode) {
                     dispatch({ type: 'toggleItemSelected', item: shapeData.siteCode });
@@ -1542,10 +1543,11 @@ const SiteMapFeature = (props) => {
                   break;
                 default:
                   break;
+                }
               }
-            }
-          },
-        };
+            },
+          };
+        }
       }
       marker = (
         <Marker
