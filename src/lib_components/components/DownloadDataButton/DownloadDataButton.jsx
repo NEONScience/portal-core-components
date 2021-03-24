@@ -45,11 +45,11 @@ const DownloadDataButton = (props) => {
         variant="contained"
         onClick={handleOpenDialog}
         data-selenium="download-data-button"
+        endIcon={<DownloadIcon />}
         {...gtmProps}
         {...other}
       >
         {label}
-        <DownloadIcon style={{ marginLeft: Theme.spacing(1) }} />
       </Button>
       {!dialogOpen ? null : (
         <Suspense fallback={null}>

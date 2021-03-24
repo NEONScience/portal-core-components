@@ -295,8 +295,8 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
         /* istanbul ignore next */
         onChange(event) {
           /* istanbul ignore next */
-          cov_1k5vljwa7c.f[8]++;
-          cov_1k5vljwa7c.s[32]++;
+          cov_xdumi0wq8.f[8]++;
+          cov_xdumi0wq8.s[32]++;
           availabilityDispatch({
             type: 'setSortMethod',
             method: event.target.value
@@ -1261,8 +1261,8 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
         /* istanbul ignore next */
         onChange(event) {
           /* istanbul ignore next */
-          cov_1k5vljwa7c.f[8]++;
-          cov_1k5vljwa7c.s[32]++;
+          cov_xdumi0wq8.f[8]++;
+          cov_xdumi0wq8.s[32]++;
           availabilityDispatch({
             type: 'setSortMethod',
             method: event.target.value
@@ -2227,8 +2227,8 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
         /* istanbul ignore next */
         onChange(event) {
           /* istanbul ignore next */
-          cov_1k5vljwa7c.f[8]++;
-          cov_1k5vljwa7c.s[32]++;
+          cov_xdumi0wq8.f[8]++;
+          cov_xdumi0wq8.s[32]++;
           availabilityDispatch({
             type: 'setSortMethod',
             method: event.target.value
@@ -3205,8 +3205,8 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
         /* istanbul ignore next */
         onChange(event) {
           /* istanbul ignore next */
-          cov_1k5vljwa7c.f[8]++;
-          cov_1k5vljwa7c.s[32]++;
+          cov_xdumi0wq8.f[8]++;
+          cov_xdumi0wq8.s[32]++;
           availabilityDispatch({
             type: 'setSortMethod',
             method: event.target.value
@@ -4198,8 +4198,8 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
         /* istanbul ignore next */
         onChange(event) {
           /* istanbul ignore next */
-          cov_1k5vljwa7c.f[8]++;
-          cov_1k5vljwa7c.s[32]++;
+          cov_xdumi0wq8.f[8]++;
+          cov_xdumi0wq8.s[32]++;
           availabilityDispatch({
             type: 'setSortMethod',
             method: event.target.value

@@ -2558,35 +2558,35 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
               prop-data-selenium="data-product-availability.sort-options.method"
               prop-onChange="function handleChangeSortMethod(event) {
     /* istanbul ignore next */
-    cov_1nv0xggsxg.f[31]++;
+    cov_9jpap9lao.f[31]++;
     var newSortMethod =
     /* istanbul ignore next */
-    (cov_1nv0xggsxg.s[100]++, event.target.value);
+    (cov_9jpap9lao.s[100]++, event.target.value);
 
     /* istanbul ignore next */
-    cov_1nv0xggsxg.s[101]++;
+    cov_9jpap9lao.s[101]++;
 
     if (
     /* istanbul ignore next */
-    (cov_1nv0xggsxg.b[23][0]++, !Object.keys(SORT_METHODS).includes(newSortMethod)) ||
+    (cov_9jpap9lao.b[23][0]++, !Object.keys(SORT_METHODS).includes(newSortMethod)) ||
     /* istanbul ignore next */
-    (cov_1nv0xggsxg.b[23][1]++, currentSortMethod === newSortMethod)) {
+    (cov_9jpap9lao.b[23][1]++, currentSortMethod === newSortMethod)) {
       /* istanbul ignore next */
-      cov_1nv0xggsxg.b[22][0]++;
-      cov_1nv0xggsxg.s[102]++;
+      cov_9jpap9lao.b[22][0]++;
+      cov_9jpap9lao.s[102]++;
       return;
     } else
     /* istanbul ignore next */
     {
-      cov_1nv0xggsxg.b[22][1]++;
+      cov_9jpap9lao.b[22][1]++;
     }
 
-    cov_1nv0xggsxg.s[103]++;
+    cov_9jpap9lao.s[103]++;
 
     if (downloadContextIsActive) {
       /* istanbul ignore next */
-      cov_1nv0xggsxg.b[24][0]++;
-      cov_1nv0xggsxg.s[104]++;
+      cov_9jpap9lao.b[24][0]++;
+      cov_9jpap9lao.s[104]++;
       dispatchSelection({
         type: 'setAvailabilitySortMethod',
         value: newSortMethod
@@ -2594,14 +2594,14 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
     } else
     /* istanbul ignore next */
     {
-      cov_1nv0xggsxg.b[24][1]++;
+      cov_9jpap9lao.b[24][1]++;
     }
 
-    cov_1nv0xggsxg.s[105]++;
+    cov_9jpap9lao.s[105]++;
     setCurrentSortMethod(newSortMethod);
 
     /* istanbul ignore next */
-    cov_1nv0xggsxg.s[106]++;
+    cov_9jpap9lao.s[106]++;
     applySort();
   }"
               prop-value="states"

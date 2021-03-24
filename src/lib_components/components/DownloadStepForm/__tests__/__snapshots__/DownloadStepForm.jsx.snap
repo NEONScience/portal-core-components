@@ -486,8 +486,8 @@ exports[`DownloadStepForm Step s3Files renders correctly 1`] = `
           /* istanbul ignore next */
           onSelectionChange(rows, file) {
             /* istanbul ignore next */
-            cov_9h6mzt5r9.f[26]++;
-            cov_9h6mzt5r9.s[71]++;
+            cov_5qg8hh1of.f[26]++;
+            cov_5qg8hh1of.s[71]++;
             dispatch({
               type: 'setIndividualS3FileSelected',
               url: file.url,

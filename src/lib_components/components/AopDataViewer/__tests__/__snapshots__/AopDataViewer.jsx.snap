@@ -172,16 +172,16 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
         /* istanbul ignore next */
         onChange(event) {
           /* istanbul ignore next */
-          cov_1pyg19vp3l.f[28]++;
-          cov_1pyg19vp3l.s[129]++;
+          cov_i8yc1khef.f[28]++;
+          cov_i8yc1khef.s[129]++;
           return handleSiteChange(event.target.value);
         }"
             prop-renderValue="function
         /* istanbul ignore next */
         renderValue(value) {
           /* istanbul ignore next */
-          cov_1pyg19vp3l.f[29]++;
-          cov_1pyg19vp3l.s[130]++;
+          cov_i8yc1khef.f[29]++;
+          cov_i8yc1khef.s[130]++;
           return value;
         }"
             prop-value="BONA"
@@ -471,8 +471,8 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
         /* istanbul ignore next */
         onChange(event, newYear) {
           /* istanbul ignore next */
-          cov_1pyg19vp3l.f[33]++;
-          cov_1pyg19vp3l.s[137]++;
+          cov_i8yc1khef.f[33]++;
+          cov_i8yc1khef.s[137]++;
           return handleSliderChange(parseInt(newYear, 10));
         }"
               prop-step="null"
@@ -482,8 +482,8 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
         /* istanbul ignore next */
         valueLabelFormat(value) {
           /* istanbul ignore next */
-          cov_1pyg19vp3l.f[32]++;
-          cov_1pyg19vp3l.s[136]++;
+          cov_i8yc1khef.f[32]++;
+          cov_i8yc1khef.s[136]++;
           return value;
         }"
             />
@@ -603,16 +603,16 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
         /* istanbul ignore next */
         onChange(event) {
           /* istanbul ignore next */
-          cov_1pyg19vp3l.f[37]++;
-          cov_1pyg19vp3l.s[147]++;
+          cov_i8yc1khef.f[37]++;
+          cov_i8yc1khef.s[147]++;
           return handleFlightChange(parseInt(event.target.value, 10));
         }"
           prop-renderValue="function
         /* istanbul ignore next */
         renderValue(value) {
           /* istanbul ignore next */
-          cov_1pyg19vp3l.f[38]++;
-          cov_1pyg19vp3l.s[148]++;
+          cov_i8yc1khef.f[38]++;
+          cov_i8yc1khef.s[148]++;
           return getFlightLabel(value, data[site][year][value - 1].month);
         }"
           prop-value={1}
@@ -825,16 +825,16 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
         /* istanbul ignore next */
         onChange(event) {
           /* istanbul ignore next */
-          cov_1pyg19vp3l.f[28]++;
-          cov_1pyg19vp3l.s[129]++;
+          cov_i8yc1khef.f[28]++;
+          cov_i8yc1khef.s[129]++;
           return handleSiteChange(event.target.value);
         }"
             prop-renderValue="function
         /* istanbul ignore next */
         renderValue(value) {
           /* istanbul ignore next */
-          cov_1pyg19vp3l.f[29]++;
-          cov_1pyg19vp3l.s[130]++;
+          cov_i8yc1khef.f[29]++;
+          cov_i8yc1khef.s[130]++;
           return value;
         }"
             prop-value="HEAL"
@@ -1121,8 +1121,8 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
         /* istanbul ignore next */
         onChange(event, newYear) {
           /* istanbul ignore next */
-          cov_1pyg19vp3l.f[33]++;
-          cov_1pyg19vp3l.s[137]++;
+          cov_i8yc1khef.f[33]++;
+          cov_i8yc1khef.s[137]++;
           return handleSliderChange(parseInt(newYear, 10));
         }"
               prop-step="null"
@@ -1132,8 +1132,8 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
         /* istanbul ignore next */
         valueLabelFormat(value) {
           /* istanbul ignore next */
-          cov_1pyg19vp3l.f[32]++;
-          cov_1pyg19vp3l.s[136]++;
+          cov_i8yc1khef.f[32]++;
+          cov_i8yc1khef.s[136]++;
           return value;
         }"
             />
@@ -1256,16 +1256,16 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
         /* istanbul ignore next */
         onChange(event) {
           /* istanbul ignore next */
-          cov_1pyg19vp3l.f[37]++;
-          cov_1pyg19vp3l.s[147]++;
+          cov_i8yc1khef.f[37]++;
+          cov_i8yc1khef.s[147]++;
           return handleFlightChange(parseInt(event.target.value, 10));
         }"
           prop-renderValue="function
         /* istanbul ignore next */
         renderValue(value) {
           /* istanbul ignore next */
-          cov_1pyg19vp3l.f[38]++;
-          cov_1pyg19vp3l.s[148]++;
+          cov_i8yc1khef.f[38]++;
+          cov_i8yc1khef.s[148]++;
           return getFlightLabel(value, data[site][year][value - 1].month);
         }"
           prop-value={1}
@@ -1478,16 +1478,16 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
         /* istanbul ignore next */
         onChange(event) {
           /* istanbul ignore next */
-          cov_1pyg19vp3l.f[28]++;
-          cov_1pyg19vp3l.s[129]++;
+          cov_i8yc1khef.f[28]++;
+          cov_i8yc1khef.s[129]++;
           return handleSiteChange(event.target.value);
         }"
             prop-renderValue="function
         /* istanbul ignore next */
         renderValue(value) {
           /* istanbul ignore next */
-          cov_1pyg19vp3l.f[29]++;
-          cov_1pyg19vp3l.s[130]++;
+          cov_i8yc1khef.f[29]++;
+          cov_i8yc1khef.s[130]++;
           return value;
         }"
             prop-value="SJER"
@@ -1774,8 +1774,8 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
         /* istanbul ignore next */
         onChange(event, newYear) {
           /* istanbul ignore next */
-          cov_1pyg19vp3l.f[33]++;
-          cov_1pyg19vp3l.s[137]++;
+          cov_i8yc1khef.f[33]++;
+          cov_i8yc1khef.s[137]++;
           return handleSliderChange(parseInt(newYear, 10));
         }"
               prop-step="null"
@@ -1785,8 +1785,8 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
         /* istanbul ignore next */
         valueLabelFormat(value) {
           /* istanbul ignore next */
-          cov_1pyg19vp3l.f[32]++;
-          cov_1pyg19vp3l.s[136]++;
+          cov_i8yc1khef.f[32]++;
+          cov_i8yc1khef.s[136]++;
           return value;
         }"
             />
@@ -1909,16 +1909,16 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
         /* istanbul ignore next */
         onChange(event) {
           /* istanbul ignore next */
-          cov_1pyg19vp3l.f[37]++;
-          cov_1pyg19vp3l.s[147]++;
+          cov_i8yc1khef.f[37]++;
+          cov_i8yc1khef.s[147]++;
           return handleFlightChange(parseInt(event.target.value, 10));
         }"
           prop-renderValue="function
         /* istanbul ignore next */
         renderValue(value) {
           /* istanbul ignore next */
-          cov_1pyg19vp3l.f[38]++;
-          cov_1pyg19vp3l.s[148]++;
+          cov_i8yc1khef.f[38]++;
+          cov_i8yc1khef.s[148]++;
           return getFlightLabel(value, data[site][year][value - 1].month);
         }"
           prop-value={2}
@@ -2154,16 +2154,16 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
         /* istanbul ignore next */
         onChange(event) {
           /* istanbul ignore next */
-          cov_1pyg19vp3l.f[28]++;
-          cov_1pyg19vp3l.s[129]++;
+          cov_i8yc1khef.f[28]++;
+          cov_i8yc1khef.s[129]++;
           return handleSiteChange(event.target.value);
         }"
             prop-renderValue="function
         /* istanbul ignore next */
         renderValue(value) {
           /* istanbul ignore next */
-          cov_1pyg19vp3l.f[29]++;
-          cov_1pyg19vp3l.s[130]++;
+          cov_i8yc1khef.f[29]++;
+          cov_i8yc1khef.s[130]++;
           return value;
         }"
             prop-value="BONA"
@@ -2453,8 +2453,8 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
         /* istanbul ignore next */
         onChange(event, newYear) {
           /* istanbul ignore next */
-          cov_1pyg19vp3l.f[33]++;
-          cov_1pyg19vp3l.s[137]++;
+          cov_i8yc1khef.f[33]++;
+          cov_i8yc1khef.s[137]++;
           return handleSliderChange(parseInt(newYear, 10));
         }"
               prop-step="null"
@@ -2464,8 +2464,8 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
         /* istanbul ignore next */
         valueLabelFormat(value) {
           /* istanbul ignore next */
-          cov_1pyg19vp3l.f[32]++;
-          cov_1pyg19vp3l.s[136]++;
+          cov_i8yc1khef.f[32]++;
+          cov_i8yc1khef.s[136]++;
           return value;
         }"
             />
@@ -2585,16 +2585,16 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
         /* istanbul ignore next */
         onChange(event) {
           /* istanbul ignore next */
-          cov_1pyg19vp3l.f[37]++;
-          cov_1pyg19vp3l.s[147]++;
+          cov_i8yc1khef.f[37]++;
+          cov_i8yc1khef.s[147]++;
           return handleFlightChange(parseInt(event.target.value, 10));
         }"
           prop-renderValue="function
         /* istanbul ignore next */
         renderValue(value) {
           /* istanbul ignore next */
-          cov_1pyg19vp3l.f[38]++;
-          cov_1pyg19vp3l.s[148]++;
+          cov_i8yc1khef.f[38]++;
+          cov_i8yc1khef.s[148]++;
           return getFlightLabel(value, data[site][year][value - 1].month);
         }"
           prop-value={1}
@@ -2802,16 +2802,16 @@ exports[`AopDataViewer renders with title disabled 1`] = `
         /* istanbul ignore next */
         onChange(event) {
           /* istanbul ignore next */
-          cov_1pyg19vp3l.f[28]++;
-          cov_1pyg19vp3l.s[129]++;
+          cov_i8yc1khef.f[28]++;
+          cov_i8yc1khef.s[129]++;
           return handleSiteChange(event.target.value);
         }"
             prop-renderValue="function
         /* istanbul ignore next */
         renderValue(value) {
           /* istanbul ignore next */
-          cov_1pyg19vp3l.f[29]++;
-          cov_1pyg19vp3l.s[130]++;
+          cov_i8yc1khef.f[29]++;
+          cov_i8yc1khef.s[130]++;
           return value;
         }"
             prop-value="BONA"
@@ -3101,8 +3101,8 @@ exports[`AopDataViewer renders with title disabled 1`] = `
         /* istanbul ignore next */
         onChange(event, newYear) {
           /* istanbul ignore next */
-          cov_1pyg19vp3l.f[33]++;
-          cov_1pyg19vp3l.s[137]++;
+          cov_i8yc1khef.f[33]++;
+          cov_i8yc1khef.s[137]++;
           return handleSliderChange(parseInt(newYear, 10));
         }"
               prop-step="null"
@@ -3112,8 +3112,8 @@ exports[`AopDataViewer renders with title disabled 1`] = `
         /* istanbul ignore next */
         valueLabelFormat(value) {
           /* istanbul ignore next */
-          cov_1pyg19vp3l.f[32]++;
-          cov_1pyg19vp3l.s[136]++;
+          cov_i8yc1khef.f[32]++;
+          cov_i8yc1khef.s[136]++;
           return value;
         }"
             />
@@ -3233,16 +3233,16 @@ exports[`AopDataViewer renders with title disabled 1`] = `
         /* istanbul ignore next */
         onChange(event) {
           /* istanbul ignore next */
-          cov_1pyg19vp3l.f[37]++;
-          cov_1pyg19vp3l.s[147]++;
+          cov_i8yc1khef.f[37]++;
+          cov_i8yc1khef.s[147]++;
           return handleFlightChange(parseInt(event.target.value, 10));
         }"
           prop-renderValue="function
         /* istanbul ignore next */
         renderValue(value) {
           /* istanbul ignore next */
-          cov_1pyg19vp3l.f[38]++;
-          cov_1pyg19vp3l.s[148]++;
+          cov_i8yc1khef.f[38]++;
+          cov_i8yc1khef.s[148]++;
           return getFlightLabel(value, data[site][year][value - 1].month);
         }"
           prop-value={1}
