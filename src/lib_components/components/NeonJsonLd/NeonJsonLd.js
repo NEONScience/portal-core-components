@@ -58,14 +58,7 @@ const NeonJsonLd = {
    */
   inject: (data, injectReleaseMeta = false) => {
     if (!data) return;
-    try {
-      const existingBlock = document.head.querySelector('script[type="application/ld+json"]');
-      if ((typeof existingBlock !== 'undefined') && (existingBlock !== null)) {
-        existingBlock.remove();
-      }
-    } catch (e) {
-      console.error(e); // eslint-disable-line no-console
-    }
+    NeonJsonLd.removeJsonLdScript();
     if (injectReleaseMeta) {
       NeonJsonLd.injectReleaseMeta(data);
     }
@@ -126,6 +119,28 @@ const NeonJsonLd = {
         document.head.replaceChild(authorBlock, currentAuthorBlock);
       } else {
         document.head.appendChild(authorBlock);
+      }
+    } catch (e) {
+      console.error(e); // eslint-disable-line no-console
+    }
+  },
+
+  /**
+   * Removes all JSON-LD based metadata
+   */
+  removeAllMetadata: () => {
+    NeonJsonLd.removeJsonLdScript();
+    NeonJsonLd.removeReleaseMeta();
+  },
+
+  /**
+   * Removes the JDON-LD script block when present
+   */
+  removeJsonLdScript: () => {
+    try {
+      const existingBlock = document.head.querySelector('script[type="application/ld+json"]');
+      if ((typeof existingBlock !== 'undefined') && (existingBlock !== null)) {
+        existingBlock.remove();
       }
     } catch (e) {
       console.error(e); // eslint-disable-line no-console
@@ -213,6 +228,32 @@ const NeonJsonLd = {
     NeonJsonLd.removeReleaseMeta();
     return NeonJsonLd.getJsonLdWithInjection(
       `${NeonEnvironment.getFullJsonLdApiPath('products')}/${productCode}`,
+    );
+  },
+
+  /**
+   * Fetches and injects the prototype dataset JSON-LD based on the specified UUID.
+   * @param {string} uuid The dataset UUID to query with.
+   * @param {boolean} onNotExistsOnly Inject only if JSON-LD is not already injected
+   */
+   injectPrototypeDataset: (uuid, onNotExistsOnly = false) => {
+    let shouldFetch = true;
+    if (onNotExistsOnly) {
+      try {
+        const existingBlock = document.head.querySelector('script[type="application/ld+json"]');
+        if ((typeof existingBlock !== 'undefined') && (existingBlock !== null)) {
+          shouldFetch = false;
+        }
+      } catch (e) {
+        console.error(e); // eslint-disable-line no-console
+      }
+    }
+    if (!shouldFetch) {
+      return null;
+    }
+    return NeonJsonLd.getJsonLdWithInjection(
+      `${NeonEnvironment.getFullJsonLdApiPath('prototype')}/datasets/${uuid}`,
+      true,
     );
   },
 };
