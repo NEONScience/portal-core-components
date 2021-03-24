@@ -291,17 +291,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
             prop-aria-label="Sort By"
             prop-className="makeStyles-sortSelect-4"
             prop-data-selenium="data-product-availability.sort-options.method"
-            prop-onChange="function
-        /* istanbul ignore next */
-        onChange(event) {
-          /* istanbul ignore next */
-          cov_xdumi0wq8.f[8]++;
-          cov_xdumi0wq8.s[32]++;
-          availabilityDispatch({
-            type: 'setSortMethod',
-            method: event.target.value
-          });
-        }"
+            prop-onChange="[Function]"
             prop-value="n/a"
           >
             <li
@@ -1257,17 +1247,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
             prop-aria-label="Sort By"
             prop-className="makeStyles-sortSelect-4"
             prop-data-selenium="data-product-availability.sort-options.method"
-            prop-onChange="function
-        /* istanbul ignore next */
-        onChange(event) {
-          /* istanbul ignore next */
-          cov_xdumi0wq8.f[8]++;
-          cov_xdumi0wq8.s[32]++;
-          availabilityDispatch({
-            type: 'setSortMethod',
-            method: event.target.value
-          });
-        }"
+            prop-onChange="[Function]"
             prop-value="n/a"
           >
             <li
@@ -2223,17 +2203,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
             prop-aria-label="Sort By"
             prop-className="makeStyles-sortSelect-4"
             prop-data-selenium="data-product-availability.sort-options.method"
-            prop-onChange="function
-        /* istanbul ignore next */
-        onChange(event) {
-          /* istanbul ignore next */
-          cov_xdumi0wq8.f[8]++;
-          cov_xdumi0wq8.s[32]++;
-          availabilityDispatch({
-            type: 'setSortMethod',
-            method: event.target.value
-          });
-        }"
+            prop-onChange="[Function]"
             prop-value="n/a"
           >
             <li
@@ -3201,17 +3171,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
             prop-aria-label="Sort By"
             prop-className="makeStyles-sortSelect-4"
             prop-data-selenium="data-product-availability.sort-options.method"
-            prop-onChange="function
-        /* istanbul ignore next */
-        onChange(event) {
-          /* istanbul ignore next */
-          cov_xdumi0wq8.f[8]++;
-          cov_xdumi0wq8.s[32]++;
-          availabilityDispatch({
-            type: 'setSortMethod',
-            method: event.target.value
-          });
-        }"
+            prop-onChange="[Function]"
             prop-value="n/a"
           >
             <li
@@ -4194,17 +4154,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
             prop-aria-label="Sort By"
             prop-className="makeStyles-sortSelect-4"
             prop-data-selenium="data-product-availability.sort-options.method"
-            prop-onChange="function
-        /* istanbul ignore next */
-        onChange(event) {
-          /* istanbul ignore next */
-          cov_xdumi0wq8.f[8]++;
-          cov_xdumi0wq8.s[32]++;
-          availabilityDispatch({
-            type: 'setSortMethod',
-            method: event.target.value
-          });
-        }"
+            prop-onChange="[Function]"
             prop-value="n/a"
           >
             <li

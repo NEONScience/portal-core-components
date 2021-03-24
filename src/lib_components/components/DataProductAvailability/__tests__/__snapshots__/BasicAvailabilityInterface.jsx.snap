@@ -2556,54 +2556,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
               prop-aria-label="Sort Method"
               prop-className="makeStyles-sortSelect-6"
               prop-data-selenium="data-product-availability.sort-options.method"
-              prop-onChange="function handleChangeSortMethod(event) {
-    /* istanbul ignore next */
-    cov_9jpap9lao.f[31]++;
-    var newSortMethod =
-    /* istanbul ignore next */
-    (cov_9jpap9lao.s[100]++, event.target.value);
-
-    /* istanbul ignore next */
-    cov_9jpap9lao.s[101]++;
-
-    if (
-    /* istanbul ignore next */
-    (cov_9jpap9lao.b[23][0]++, !Object.keys(SORT_METHODS).includes(newSortMethod)) ||
-    /* istanbul ignore next */
-    (cov_9jpap9lao.b[23][1]++, currentSortMethod === newSortMethod)) {
-      /* istanbul ignore next */
-      cov_9jpap9lao.b[22][0]++;
-      cov_9jpap9lao.s[102]++;
-      return;
-    } else
-    /* istanbul ignore next */
-    {
-      cov_9jpap9lao.b[22][1]++;
-    }
-
-    cov_9jpap9lao.s[103]++;
-
-    if (downloadContextIsActive) {
-      /* istanbul ignore next */
-      cov_9jpap9lao.b[24][0]++;
-      cov_9jpap9lao.s[104]++;
-      dispatchSelection({
-        type: 'setAvailabilitySortMethod',
-        value: newSortMethod
-      });
-    } else
-    /* istanbul ignore next */
-    {
-      cov_9jpap9lao.b[24][1]++;
-    }
-
-    cov_9jpap9lao.s[105]++;
-    setCurrentSortMethod(newSortMethod);
-
-    /* istanbul ignore next */
-    cov_9jpap9lao.s[106]++;
-    applySort();
-  }"
+              prop-onChange="[Function]"
               prop-value="states"
             >
               <li

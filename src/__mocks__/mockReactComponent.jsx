@@ -27,9 +27,9 @@ export default function mockReactComponent(path) {
       let renderableValue = value;
       try {
         if (typeof value === 'object') { renderableValue = JSON.stringify(value); }
-        if (typeof value === 'function') { renderableValue = value.toString(); }
+        if (typeof value === 'function') { renderableValue = '[Function]'; }
       } catch (error) {
-        renderableValue = `Non-renderable ${typeof value} (${error})`;
+        renderableValue = `Non-renderable ${typeof value}`;
       }
       dataProps[`prop-${prop}`] = renderableValue;
     });
