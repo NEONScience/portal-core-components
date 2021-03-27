@@ -187,6 +187,8 @@ To update **all** snapshots (after confirming all failures are expected from rec
 
     npm run test:updateSnapshots
 
+When tests are run test coverage information is generated. This appears in the shell and can also be found formatted as HTML pages in the `test_coverage` directory.
+
 ### Writing Tests
 
 The Jest configuration will pick up all javascript files in a `__tests__` directory. By convention, for portal-core-components, every file that has accompanying unit tests should have an adjacent `__tests__` folder containing any/all test files, and each test file should bear the same name as the source file it is testing.
@@ -208,6 +210,7 @@ Example:
     | | | | __tests__/
     | | | | | OtherComponent.jsx
 
+Several mocks exist for testing any part of the core components library that may need them. These can be found in `~/src/__mocks__`. See README.md in that directory for details.
 
 ## Building the Library
 
@@ -226,7 +229,7 @@ For Windows users the `npm run lib` command may fail with complaint about 'NODE_
 
 ## Library Composition
 
-This package was configured with advice from [this article](https://medium.com/@lokhmakov/best-way-to-create-npm-packages-with-create-react-app-b24dd449c354).
+This package was originally onfigured with advice from [this article](https://medium.com/@lokhmakov/best-way-to-create-npm-packages-with-create-react-app-b24dd449c354).
 
 In summary, it began as a create-react-app app that was ejected. A `babel.config.json` was added with minor configuration and a script to invoke babel to run a library build was added.
 

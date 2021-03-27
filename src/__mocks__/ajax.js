@@ -5,7 +5,7 @@
 
    Usage:
 
-   import { mockAjaxResponse, mockAjaxError } from ''path/to/src/__mocks__/ajax';
+   import { mockAjaxResponse, mockAjaxError } from 'path/to/src/__mocks__/ajax';
 
    // Set a mock response (for ajax() AND ajax.getJSON() methods)
    mockAjaxResponse({ ...response });
