@@ -562,6 +562,7 @@ const SiteMapTable = () => {
       render: (row) => {
         const site = getSite(row);
         if (!site) { return null; }
+        const { siteCode, description } = site;
         const isDecommissioned = site.manualLocationType === MANUAL_LOCATION_TYPES.PROTOTYPE_SITE;
         const featureKey = isDecommissioned
           ? FEATURES.DECOMMISSIONED_SITES.KEY
@@ -572,23 +573,23 @@ const SiteMapTable = () => {
             <Link
               component="button"
               className={classes.siteName}
-              onClick={() => jumpTo(row.siteCode)}
-              title={`Click to view ${row.siteCode} on the map`}
+              onClick={() => jumpTo(siteCode)}
+              title={`Click to view ${siteCode} on the map`}
             >
               {renderFeatureIcon(featureKey, unselectable)}
-              <span>{`${site.description || 'Unnamed Site'} (${site.siteCode})`}</span>
+              <span>{`${description || 'Unnamed Site'} (${siteCode})`}</span>
             </Link>
             <div className={classes.startFlex}>
               <Link
                 className={classes.siteDetailsLink}
-                href={`${getHref('SITE_DETAILS', site.siteCode)}`}
+                href={`${getHref('SITE_DETAILS', siteCode)}`}
               >
                 Site Details
               </Link>
               <span className={classes.siteLinksDivider}>|</span>
               <Link
                 className={classes.siteDetailsLink}
-                href={`${getHref('EXPLORE_DATA_PRODUCTS_BY_SITE', site.siteCode)}`}
+                href={`${getHref('EXPLORE_DATA_PRODUCTS_BY_SITE', siteCode)}`}
               >
                 Explore Data
               </Link>
@@ -661,13 +662,14 @@ const SiteMapTable = () => {
       },
       render: (row) => {
         const usstate = getState(row);
+        const { stateCode } = row;
         return !usstate ? null : (
           <div>
             <Link
               component="button"
               className={classes.linkButton}
-              onClick={() => jumpTo(row.stateCode)}
-              title={`Click to view ${row.stateCode} on the map`}
+              onClick={() => jumpTo(stateCode)}
+              title={`Click to view ${stateCode} on the map`}
             >
               {usstate.name}
             </Link>
@@ -683,8 +685,9 @@ const SiteMapTable = () => {
       filtering: false,
       searchable: false,
       render: (row) => {
-        const latitude = Number.isFinite(row.latitude) ? row.latitude.toFixed(5) : null;
-        const longitude = Number.isFinite(row.longitude) ? row.longitude.toFixed(5) : null;
+        const { latitude: rowLatitude, longitude: rowLongitude } = row;
+        const latitude = Number.isFinite(rowLatitude) ? rowLatitude.toFixed(5) : null;
+        const longitude = Number.isFinite(rowLongitude) ? rowLongitude.toFixed(5) : null;
         return (
           <>
             {renderCaptionString(latitude, 'Latitude')}
@@ -767,16 +770,19 @@ const SiteMapTable = () => {
         sorting: true,
         defaultSort: 'desc',
         searchable: true,
-        render: (row) => (
-          <Link
-            component="button"
-            className={classes.linkButton}
-            onClick={() => jumpTo(row.name)}
-            title={`View ${row.name} on map`}
-          >
-            {row.name}
-          </Link>
-        ),
+        render: (row) => {
+          const { name } = row;
+          return (
+            <Link
+              component="button"
+              className={classes.linkButton}
+              onClick={() => jumpTo(name)}
+              title={`View ${name} on map`}
+            >
+              {name}
+            </Link>
+          );
+        },
       },
       { // Location Type
         field: 'featureKey',
@@ -835,13 +841,10 @@ const SiteMapTable = () => {
             .map((classKey) => [classKey, NLCD_CLASSES[classKey].name]),
         ),
         render: (row) => {
-          if (!row.nlcdClass) {
-            return renderCaptionString();
-          }
-          if (!NLCD_CLASSES[row.nlcdClass]) {
-            return renderCaptionString(row.nlcdClass, 'NLCD Class');
-          }
-          const { name: title, color: backgroundColor } = NLCD_CLASSES[row.nlcdClass];
+          const { nlcdClass } = row;
+          if (!nlcdClass) { return renderCaptionString(); }
+          if (!NLCD_CLASSES[nlcdClass]) { return renderCaptionString(nlcdClass, 'NLCD Class'); }
+          const { name: title, color: backgroundColor } = NLCD_CLASSES[nlcdClass];
           return (
             <div className={classes.nlcdClassContainer}>
               <div className={classes.nlcdClass} title={title} style={{ backgroundColor }} />
@@ -850,9 +853,10 @@ const SiteMapTable = () => {
           );
         },
         csvRender: (row) => {
-          if (!row.nlcdClass) { return null; }
-          if (!NLCD_CLASSES[row.nlcdClass]) { return row.nlcdClass; }
-          return NLCD_CLASSES[row.nlcdClass].name;
+          const { nlcdClass } = row;
+          if (!nlcdClass) { return null; }
+          if (!NLCD_CLASSES[nlcdClass]) { return nlcdClass; }
+          return NLCD_CLASSES[nlcdClass].name;
         },
       },
       { // Plot Size
@@ -862,21 +866,28 @@ const SiteMapTable = () => {
         sorting: true,
         deafultSort: 'asc',
         filtering: false,
-        render: (row) => (row.plotDimensions ? (
-          <>
-            {renderCaptionString(`${row.plotDimensions}`, 'Plot Size (Dimensions)')}
-            {Number.isFinite(row.plotSize) ? (
-              <>
-                <br />
-                {renderCaptionString(`(${row.plotSize.toFixed(0)}m\u00b2)`, 'Plot Size (Area)')}
-              </>
-            ) : null}
-          </>
-        ) : renderCaptionString()),
-        csvRender: (row) => ([
-          row.plotDimensions || null,
-          Number.isFinite(row.plotSize) ? row.plotSize.toFixed(0) : null,
-        ]),
+        render: (row) => {
+          const { plotDimensions, plotSize } = row;
+          if (!plotDimensions) { return renderCaptionString(); }
+          return (
+            <>
+              {renderCaptionString(`${plotDimensions}`, 'Plot Size (Dimensions)')}
+              {Number.isFinite(plotSize) ? (
+                <>
+                  <br />
+                  {renderCaptionString(`(${plotSize.toFixed(0)}m\u00b2)`, 'Plot Size (Area)')}
+                </>
+              ) : null}
+            </>
+          );
+        },
+        csvRender: (row) => {
+          const { plotDimensions, plotSize } = row;
+          return [
+            plotDimensions || null,
+            Number.isFinite(plotSize) ? plotSize.toFixed(0) : null,
+          ];
+        },
       },
       { // Plot Slope Aspect
         field: 'slopeAspect',
@@ -922,15 +933,17 @@ const SiteMapTable = () => {
           if (a !== null && b === null) { return -1; }
           return a > b ? 1 : -1;
         },
-        render: (row) => (
-          Array.isArray(row.samplingModules) ? (
+        render: (row) => {
+          const { samplingModules } = row;
+          if (!Array.isArray(samplingModules)) { return renderCaptionString(); }
+          return (
             <Tooltip
               interactive
               placement="left"
               title={
-                row.samplingModules.length ? (
+                samplingModules.length ? (
                   <ul style={{ marginLeft: Theme.spacing(-1) }}>
-                    {row.samplingModules.map((m) => (
+                    {samplingModules.map((m) => (
                       <li key={m}>{PLOT_SAMPLING_MODULES[m]}</li>
                     ))}
                   </ul>
@@ -938,7 +951,7 @@ const SiteMapTable = () => {
               }
             >
               <div className={classes.startFlex}>
-                {renderCaptionString(row.samplingModules.length, 'Potential Sampling Modules')}
+                {renderCaptionString(samplingModules.length, 'Potential Sampling Modules')}
                 <IconButton
                   size="small"
                   className={classes.iconButton}
@@ -948,10 +961,8 @@ const SiteMapTable = () => {
                 </IconButton>
               </div>
             </Tooltip>
-          ) : (
-            renderCaptionString()
-          )
-        ),
+          );
+        },
         csvRender: (row) => (
           Array.isArray(row.samplingModules) ? row.samplingModules.length : null
         ),

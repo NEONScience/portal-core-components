@@ -44,7 +44,6 @@ declare namespace NeonPage {
         export const sidebarUnsticky: PropTypes.Requireable<boolean>;
         export const subtitle: PropTypes.Requireable<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
         export const title: PropTypes.Requireable<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
-        export const useCoreHeader: PropTypes.Requireable<boolean>;
         export const unstickyDrupalHeader: PropTypes.Requireable<boolean>;
         export const NeonContextProviderProps: PropTypes.Requireable<PropTypes.InferProps<{
             children: PropTypes.Requireable<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
@@ -97,8 +96,6 @@ declare namespace NeonPage {
         export { subtitle_1 as subtitle };
         const title_1: null;
         export { title_1 as title };
-        const useCoreHeader_1: boolean;
-        export { useCoreHeader_1 as useCoreHeader };
         const unstickyDrupalHeader_1: boolean;
         export { unstickyDrupalHeader_1 as unstickyDrupalHeader };
         const NeonContextProviderProps_1: {};

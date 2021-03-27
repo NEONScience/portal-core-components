@@ -95,7 +95,7 @@ const propRows = [
     ),
     description: (
       <p>
-        A JSX node containing header content to be used as the page footer.
+        A JSX nodeto be used as the page footer in place of the stock NEON Data Portal footer.
       </p>
     ),
   },
@@ -115,9 +115,7 @@ const propRows = [
     ),
     description: (
       <p>
-        A JSX node containing header content to be used as the page header. When defined, if
-        the <tt>useCoreHeader</tt> prop is also defined, the latter will be ignored and the custom
-        header will take precendence.
+        A JSX node to be used as the page header in place of the stock NEON Data Portal header.
       </p>
     ),
   },
@@ -383,20 +381,6 @@ const sidebarLinks = [
     description: (
       <p>
         Optional page-level title to appear prominently at the top of the page.
-      </p>
-    ),
-  },
-  // useCoreHeader
-  {
-    name: 'useCoreHeader',
-    type: 'boolean',
-    default: 'false',
-    description: (
-      <p>
-        Boolean to determine the type of page header and footer to use. When false (default) will
-        attempt to fetch the Drupal header and footer, falling back to the original core-components
-        header and footer if the fetch fails. When set to true will skip the attempt to fetch the
-        Drupal assets and immediately use the fallback legacy header/footer.
       </p>
     ),
   },
@@ -732,15 +716,13 @@ const notification = 'Here is a sample NeonPage notification with a <a href="htt
       <Typography variant="h5" component="h3" gutterBottom>Headers and Footers</Typography>
       <DocBlock>
         By default NeonPage will pull Header and Footer content from the NeonScience.org Drupal
-        site. If need be the legacy core components header may be used instead (requiring no
-        fetching) by supplying the <tt>useCoreHeader</tt> boolean prop.
+        site. If the fetch fails then core components has a cached copy to use instead.
       </DocBlock>
       <DocBlock>
         NeonPage can also optionally render an entirely custom header or footer using
         the <tt>customHeader</tt> and <tt>customFooter</tt> props. These props are independent of
         one another, so for example using the core or drupal footer with a custom header is
-        supported. If <tt>customHeader</tt> and <tt>useCoreHeader</tt> are both defined then
-        the <tt>useCoreHeader</tt> boolean prop is ignored and the custom header takes precedence.
+        supported.
       </DocBlock>
       <ExampleBlock>
         <div className={classes.example}>

@@ -1,6 +1,0 @@
-{
-  "private": true,
-  "name": "popup-loading",
-  "main": "./PopupLoading.js",
-  "module": "./index.js"
-}

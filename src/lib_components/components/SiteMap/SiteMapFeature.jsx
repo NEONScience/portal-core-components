@@ -1536,13 +1536,13 @@ const SiteMapFeature = (props) => {
               }
               if (selectionActive && selectingCurrentFeatureType && isSelectable) {
                 switch (selectionType) {
-                case FEATURE_TYPES.SITES.KEY:
-                  if (shapeData.siteCode) {
-                    dispatch({ type: 'toggleItemSelected', item: shapeData.siteCode });
-                  }
-                  break;
-                default:
-                  break;
+                  case FEATURE_TYPES.SITES.KEY:
+                    if (shapeData.siteCode) {
+                      dispatch({ type: 'toggleItemSelected', item: shapeData.siteCode });
+                    }
+                    break;
+                  default:
+                    break;
                 }
               }
             },

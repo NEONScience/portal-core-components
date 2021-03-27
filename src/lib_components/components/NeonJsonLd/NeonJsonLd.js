@@ -236,7 +236,7 @@ const NeonJsonLd = {
    * @param {string} uuid The dataset UUID to query with.
    * @param {boolean} onNotExistsOnly Inject only if JSON-LD is not already injected
    */
-   injectPrototypeDataset: (uuid, onNotExistsOnly = false) => {
+  injectPrototypeDataset: (uuid, onNotExistsOnly = false) => {
     let shouldFetch = true;
     if (onNotExistsOnly) {
       try {

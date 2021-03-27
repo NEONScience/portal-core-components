@@ -53,17 +53,13 @@ exports[`NeonFooter renders with no props and error NeonContext state 1`] = `
 `;
 
 exports[`NeonFooter renders with no props and inactive NeonContext state 1`] = `
-<div
-  className="makeStyles-box-1"
-  data-selenium="neon-footer"
+<footer
+  id="footer"
 >
-  <hr
-    className="MuiDivider-root"
-  />
-  <div
-    className="MuiContainer-root makeStyles-container-2 MuiContainer-maxWidthLg"
-  />
-</div>
+  <div>
+    MOCK-FALLBACK-DRUPAL-FOOTER-HTML
+  </div>
+</footer>
 `;
 
 exports[`NeonFooter renders with no props and success NeonContext state 1`] = `

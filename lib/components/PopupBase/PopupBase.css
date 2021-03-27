@@ -1,9 +1,0 @@
-.popup__base {
-  position: fixed;
-  background: #FFF;
-  z-index: 201;
-}
-
-.popup__base--noscroll {
-  overflow: hidden;
-}

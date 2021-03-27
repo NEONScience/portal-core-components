@@ -17,8 +17,6 @@ import NeonAuth, { NeonAuthType, NeonAuthDisplayType } from '../NeonAuth/NeonAut
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
 
-import NeonLegacyHeader from './NeonLegacyHeader';
-
 const DRUPAL_HEADER_HTML = REMOTE_ASSETS.DRUPAL_HEADER_HTML.KEY;
 
 const AUTH_ELEMENT_ID = 'header__authentication-ui';
@@ -80,7 +78,6 @@ const useStyles = makeStyles((theme) => ({
 const NeonHeader = forwardRef((props, headerRef) => {
   const {
     drupalCssLoaded,
-    useCoreHeader,
     unstickyDrupalHeader,
   } = props;
   const classes = useStyles(Theme);
@@ -99,8 +96,8 @@ const NeonHeader = forwardRef((props, headerRef) => {
   const [headerJsStatus, setHeaderJsStatus] = useState(FETCH_STATUS.AWAITING_CALL);
   const [headerRenderDelayed, setHeaderRenderDelayed] = useState(initialRenderDelay);
 
-  let renderMode = 'legacy';
-  if (!useCoreHeader && neonContextIsActive) {
+  let renderMode = 'loading';
+  if (neonContextIsActive) {
     switch (headerFetch.status) {
       case FETCH_STATUS.SUCCESS:
         renderMode = (headerHTML && drupalCssLoaded && headerRenderDelayed)
@@ -139,17 +136,13 @@ const NeonHeader = forwardRef((props, headerRef) => {
   // Delay the rendering of the drupal header one render cycle to allow the CSS to propogate into
   // the environment. This prevents a "flash" of the unstyled menu in the drupal header on page load
   useLayoutEffect(() => {
-    if (
-      !useCoreHeader && neonContextIsActive
-        && headerHTML && drupalCssLoaded && !headerRenderDelayed
-    ) {
+    if (neonContextIsActive && headerHTML && drupalCssLoaded && !headerRenderDelayed) {
       const timeout = window.setTimeout(() => setHeaderRenderDelayed(true), 0);
       return () => window.clearTimeout(timeout);
     }
     return () => {};
   }, [
     neonContextIsActive,
-    useCoreHeader,
     headerHTML,
     drupalCssLoaded,
     headerRenderDelayed,
@@ -164,10 +157,12 @@ const NeonHeader = forwardRef((props, headerRef) => {
     );
   }
 
-  // Render Drupal
-  if (renderMode === 'drupal' || renderMode === 'drupal-fallback') {
-    const injectAuth = !auth.useCore ? null : {
-      replace: (domNode) => ((domNode.attribs || {}).id !== AUTH_ELEMENT_ID ? null : (
+  // Render Drupal header
+  const injectAuth = !auth.useCore ? null : {
+    replace: (domNode) => {
+      const { attribs = {} } = domNode;
+      if (!attribs.id !== AUTH_ELEMENT_ID) { return null; }
+      return (
         <div id={AUTH_ELEMENT_ID} className={classes.coreAuthContainer}>
           <NeonAuth
             loginPath={NeonEnvironment.getFullAuthPath('login')}
@@ -178,35 +173,28 @@ const NeonHeader = forwardRef((props, headerRef) => {
             displayType={NeonAuthDisplayType.MENU}
           />
         </div>
-      )),
-    };
-    const html = renderMode === 'drupal' ? headerHTML : DRUPAL_HEADER_HTML_FALLBACK;
-    return (
-      <header
-        ref={headerRef}
-        id="header"
-        className={unstickyDrupalHeader ? classes.unstickyHeader : null}
-      >
-        {HTMLReactParser(html, injectAuth)}
-      </header>
-    );
-  }
-
-  // Render Legacy
-  return <NeonLegacyHeader {...props} ref={headerRef} />;
+      );
+    },
+  };
+  const html = renderMode === 'drupal' ? headerHTML : DRUPAL_HEADER_HTML_FALLBACK;
+  return (
+    <header
+      ref={headerRef}
+      id="header"
+      className={unstickyDrupalHeader ? classes.unstickyHeader : null}
+    >
+      {HTMLReactParser(html, injectAuth)}
+    </header>
+  );
 });
 
 NeonHeader.propTypes = {
-  ...NeonLegacyHeader.propTypes,
   drupalCssLoaded: PropTypes.bool,
-  useCoreHeader: PropTypes.bool,
   unstickyDrupalHeader: PropTypes.bool,
 };
 
 NeonHeader.defaultProps = {
-  ...NeonLegacyHeader.defaultProps,
   drupalCssLoaded: false,
-  useCoreHeader: false,
   unstickyDrupalHeader: true,
 };
 

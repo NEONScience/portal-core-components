@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
+import '../../../../__mocks__/ajax';
 import mockReactComponent from '../../../../__mocks__/mockReactComponent';
 
 jest.mock('@material-ui/core/Backdrop', () => mockReactComponent('@material-ui/core/Backdrop'));
@@ -10,6 +11,15 @@ jest.mock('@material-ui/core/Snackbar', () => mockReactComponent('@material-ui/c
 import NeonPage, { NeonErrorPage } from '../NeonPage';
 
 describe('NeonPage', () => {
+  beforeAll(() => {
+    console.error = jest.fn();
+  });
+  afterEach(() => {
+    console.error.mockReset();
+  });
+  afterAll(() => {
+    console.error.mockRestore();
+  });
   test('renders a basic functional page with no props', () => {
     const tree = renderer.create(
       <NeonPage>

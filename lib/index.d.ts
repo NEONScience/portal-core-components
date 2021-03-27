@@ -19,9 +19,5 @@ export { default as ExternalHostProductSpecificLinks } from './components/Extern
 export { default as FullWidthVisualization } from './components/FullWidthVisualization';
 export { default as NeonFooter } from './components/NeonFooter';
 export { default as NeonHeader } from './components/NeonHeader';
-export { default as NeonMenu } from './components/NeonMenu';
-export { default as NeonUtilityBar } from './components/NeonUtilityBar';
 export { default as NeonJsonLd } from './components/NeonJsonLd';
 export { default as DialogBase } from './components/DialogBase';
-export { default as PopupBase } from './components/PopupBase';
-export { default as PopupLoading } from './components/PopupLoading';
