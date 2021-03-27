@@ -444,7 +444,7 @@ const baseTheme = createMuiTheme({
         zIndex: 105,
       },
       paper: {
-        zIndex: 10,
+        zIndex: 60,
       },
     },
     MuiFormControlLabel: {
