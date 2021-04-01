@@ -482,18 +482,7 @@ exports[`DownloadStepForm Step s3Files renders correctly 1`] = `
     prop-data="[{\\"url\\":\\"f1\\",\\"tableData\\":\\"f1\\"},{\\"url\\":\\"f2\\",\\"tableData\\":\\"f2\\"},{\\"url\\":\\"f3\\",\\"tableData\\":\\"f3\\"}]"
     prop-icons="{\\"Add\\":{},\\"Check\\":{},\\"Clear\\":{},\\"Delete\\":{},\\"DetailPanel\\":{},\\"Edit\\":{},\\"Export\\":{},\\"Filter\\":{},\\"FirstPage\\":{},\\"LastPage\\":{},\\"NextPage\\":{},\\"PreviousPage\\":{},\\"ResetSearch\\":{},\\"Search\\":{},\\"SortArrow\\":{},\\"ThirdStateCheck\\":{},\\"ViewColumn\\":{}}"
     prop-localization="{\\"pagination\\":{\\"labelRowsSelect\\":\\"files\\"},\\"toolbar\\":{\\"nRowsSelected\\":\\"{0} files selected (12.1 KB uncompressed)\\"},\\"body\\":{\\"emptyDataSourceMessage\\":\\"No files to display. Select more sites, broaden date range, or broaden search / filters.\\"}}"
-    prop-onSelectionChange="function
-          /* istanbul ignore next */
-          onSelectionChange(rows, file) {
-            /* istanbul ignore next */
-            cov_9h6mzt5r9.f[26]++;
-            cov_9h6mzt5r9.s[71]++;
-            dispatch({
-              type: 'setIndividualS3FileSelected',
-              url: file.url,
-              selected: file.tableData.checked
-            });
-          }"
+    prop-onSelectionChange="[Function]"
     prop-options="{\\"selection\\":true,\\"showSelectAllCheckbox\\":false,\\"padding\\":\\"dense\\",\\"filtering\\":true,\\"columnsButton\\":false,\\"pageSize\\":10,\\"pageSizeOptions\\":[5,10,50,100],\\"showTitle\\":false,\\"search\\":false,\\"isLoading\\":false}"
   />
   <div

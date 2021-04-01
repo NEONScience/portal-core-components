@@ -48,7 +48,7 @@ function tickerToMonth(ticker) {
   return `${YYYY}-${MM}`;
 }
 
-function tickerToIso(ticker) {
+function tickerToIso(ticker, includeSeconds = true) {
   if (!tickerIsValid(ticker)) { return null; }
   const d = new Date(ticker);
   const YYYY = d.getUTCFullYear().toString();
@@ -57,7 +57,9 @@ function tickerToIso(ticker) {
   const hh = d.getUTCHours().toString().padStart(2, '0');
   const mm = d.getUTCMinutes().toString().padStart(2, '0');
   const ss = d.getUTCSeconds().toString().padStart(2, '0');
-  return `${YYYY}-${MM}-${DD}T${hh}:${mm}:${ss}Z`;
+  return includeSeconds
+    ? `${YYYY}-${MM}-${DD}T${hh}:${mm}:${ss}Z`
+    : `${YYYY}-${MM}-${DD}T${hh}:${mm}Z`;
 }
 
 function getNextMonth(month) {
@@ -332,10 +334,13 @@ export default function generateTimeSeriesGraphData(payload = {}) {
             // Series data length is shorter than expected month length:
             // Add what data we have by going through each time step in the month and comparing to
             // start dates in the data set, null-filling any steps without a corresponding datum
+            // Note that sometimes dates come back with seconds and sometimes without, so for
+            // matching we look for either.
             const setSeriesValueByTimestamp = (t) => {
-              const isodate = tickerToIso(newData[t][0].getTime());
+              const isodateS = tickerToIso(newData[t][0].getTime(), true);
+              const isodateM = tickerToIso(newData[t][0].getTime(), false);
               const dataIdx = posData[month][pkg][timeStep].series[dateTimeVariable].data
-                .findIndex((dateTimeVal) => dateTimeVal === isodate);
+                .findIndex((dateTimeVal) => (dateTimeVal === isodateS || dateTimeVal === isodateM));
               newData[t][columnIdx] = dataIdx !== -1
                 ? posData[month][pkg][timeStep].series[variable].data[dataIdx]
                 : null;

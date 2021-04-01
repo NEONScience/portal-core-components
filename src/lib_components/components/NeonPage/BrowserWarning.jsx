@@ -14,12 +14,14 @@ import Theme from '../Theme/Theme';
 /*
   Browser duck typing and warning
   We know detecting browser on user agent strings for feature gating is bad practice.
-  Here, though, we just want a generic wanring if we know the browser is IE.
+  Here, though, we just want a generic warning if we know the browser is IE.
   Nothing else is or should be predicated on the value detected here.
   Don't make this any more complicated!
 */
-const browserIsIE = navigator.userAgent.indexOf('MSIE') !== -1
-  || navigator.appVersion.indexOf('Trident/') > -1;
+const isBrowserIE = () => (
+  navigator.userAgent.indexOf('MSIE') !== -1
+    || navigator.appVersion.indexOf('Trident/') > -1
+);
 
 const useStyles = makeStyles((theme) => ({
   browserWarning: {
@@ -40,6 +42,7 @@ const cookies = new Cookies();
 
 const BrowserWarning = () => {
   const classes = useStyles(Theme);
+  const browserIsIE = isBrowserIE();
   const [browserWarningOpen, setBrowserWarningOpen] = useState(browserIsIE);
 
   if (!browserIsIE) {

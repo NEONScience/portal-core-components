@@ -25,21 +25,20 @@ exports[`DownloadDataButton Automatically includes data-gtm props from product i
     className="MuiButton-label"
   >
     foo
-    <svg
-      aria-hidden={true}
-      className="MuiSvgIcon-root"
-      focusable="false"
-      style={
-        Object {
-          "marginLeft": 8,
-        }
-      }
-      viewBox="0 0 24 24"
+    <span
+      className="MuiButton-endIcon MuiButton-iconSizeMedium"
     >
-      <path
-        d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z"
-      />
-    </svg>
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z"
+        />
+      </svg>
+    </span>
   </span>
   <span
     className="MuiTouchRipple-root"
@@ -71,21 +70,20 @@ exports[`DownloadDataButton Preserves MUI button props 1`] = `
     className="MuiButton-label"
   >
     foo
-    <svg
-      aria-hidden={true}
-      className="MuiSvgIcon-root"
-      focusable="false"
-      style={
-        Object {
-          "marginLeft": 8,
-        }
-      }
-      viewBox="0 0 24 24"
+    <span
+      className="MuiButton-endIcon MuiButton-iconSizeLarge"
     >
-      <path
-        d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z"
-      />
-    </svg>
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z"
+        />
+      </svg>
+    </span>
   </span>
   <span
     className="MuiTouchRipple-root"
@@ -117,21 +115,20 @@ exports[`DownloadDataButton Renders correctly with only a label 1`] = `
     className="MuiButton-label"
   >
     foo
-    <svg
-      aria-hidden={true}
-      className="MuiSvgIcon-root"
-      focusable="false"
-      style={
-        Object {
-          "marginLeft": 8,
-        }
-      }
-      viewBox="0 0 24 24"
+    <span
+      className="MuiButton-endIcon MuiButton-iconSizeMedium"
     >
-      <path
-        d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z"
-      />
-    </svg>
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z"
+        />
+      </svg>
+    </span>
   </span>
 </button>
 `;
@@ -160,21 +157,20 @@ exports[`DownloadDataButton Renders with the dialog open from context state 1`] 
     className="MuiButton-label"
   >
     foo
-    <svg
-      aria-hidden={true}
-      className="MuiSvgIcon-root"
-      focusable="false"
-      style={
-        Object {
-          "marginLeft": 8,
-        }
-      }
-      viewBox="0 0 24 24"
+    <span
+      className="MuiButton-endIcon MuiButton-iconSizeMedium"
     >
-      <path
-        d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z"
-      />
-    </svg>
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z"
+        />
+      </svg>
+    </span>
   </span>
 </button>
 `;

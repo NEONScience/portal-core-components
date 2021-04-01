@@ -294,7 +294,7 @@ const useStyles = makeStyles(() => ({
   NEON Error Page
   Shown as the fallback for a general error boundary around all NEON page instances
  */
-const NeonErrorPage = (props) => {
+export const NeonErrorPage = (props) => {
   const {
     error: { message, stack },
     resetErrorBoundary,
@@ -373,7 +373,6 @@ const NeonPage = (props) => {
     sidebarUnsticky,
     subtitle,
     title,
-    useCoreHeader,
     unstickyDrupalHeader,
     NeonContextProviderProps,
     children,
@@ -387,6 +386,9 @@ const NeonPage = (props) => {
   const sidebarLinksContainerRef = useRef(null);
   const belowMd = useMediaQuery(Theme.breakpoints.down('sm'));
   const [overlayDismissed, setOverlayDismissed] = useState(false);
+
+  // Boolean - whether any Drupal assets are used; only false if both header and footer are custom
+  const useSomeDrupalAssets = !(customHeader && customFooter);
 
   /**
     Sidebar Setup
@@ -498,7 +500,8 @@ const NeonPage = (props) => {
   */
   const [drupalCssStatus, setDrupalCssStatus] = useState(FETCH_STATUS.AWAITING_CALL);
   useEffect(() => {
-    if (useCoreHeader || drupalCssStatus !== FETCH_STATUS.AWAITING_CALL) { return; }
+    if (!useSomeDrupalAssets) { return; }
+    if (drupalCssStatus !== FETCH_STATUS.AWAITING_CALL) { return; }
     setDrupalCssStatus(FETCH_STATUS.FETCHING);
     const link = document.createElement('link');
     link.rel = 'stylesheet';
@@ -517,7 +520,7 @@ const NeonPage = (props) => {
       setDrupalCssStatus(FETCH_STATUS.SUCCESS);
     });
     document.body.appendChild(link);
-  }, [useCoreHeader, drupalCssStatus, setDrupalCssStatus]);
+  }, [useSomeDrupalAssets, drupalCssStatus, setDrupalCssStatus]);
 
   /**
      Liferay Notifications
@@ -668,7 +671,7 @@ const NeonPage = (props) => {
       {progress === null ? (
         <CircularProgress />
       ) : (
-        <CircularProgress variant="static" value={progress} />
+        <CircularProgress variant="determinate" value={progress} />
       )}
     </>,
   ));
@@ -835,7 +838,6 @@ const NeonPage = (props) => {
         ) : (
           <NeonHeader
             ref={headerRef}
-            useCoreHeader={useCoreHeader}
             unstickyDrupalHeader={unstickyDrupalHeader}
             notifications={notifications}
             onShowNotifications={handleShowNotifications}
@@ -866,7 +868,6 @@ const NeonPage = (props) => {
           </footer>
         ) : (
           <NeonFooter
-            useCoreHeader={useCoreHeader}
             drupalCssLoaded={drupalCssStatus === FETCH_STATUS.SUCCESS}
           />
         )}
@@ -877,7 +878,11 @@ const NeonPage = (props) => {
   };
 
   const renderedPage = neonContextIsActive ? renderNeonPage() : (
-    <NeonContext.Provider useCoreAuth fetchPartials={!useCoreHeader} {...NeonContextProviderProps}>
+    <NeonContext.Provider
+      useCoreAuth
+      fetchPartials={useSomeDrupalAssets}
+      {...NeonContextProviderProps}
+    >
       {renderNeonPage()}
     </NeonContext.Provider>
   );
@@ -948,7 +953,6 @@ NeonPage.propTypes = {
     PropTypes.string,
     children,
   ]),
-  useCoreHeader: PropTypes.bool,
   unstickyDrupalHeader: PropTypes.bool,
   NeonContextProviderProps: PropTypes.shape(NeonContext.ProviderPropTypes),
   children: children.isRequired,
@@ -976,7 +980,6 @@ NeonPage.defaultProps = {
   sidebarUnsticky: false,
   subtitle: null,
   title: null,
-  useCoreHeader: false,
   unstickyDrupalHeader: true,
   NeonContextProviderProps: {},
 };

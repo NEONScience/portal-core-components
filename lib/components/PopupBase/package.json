@@ -1,6 +1,0 @@
-{
-  "private": true,
-  "name": "popup-base",
-  "main": "./PopupBase.js",
-  "module": "./index.js"
-}

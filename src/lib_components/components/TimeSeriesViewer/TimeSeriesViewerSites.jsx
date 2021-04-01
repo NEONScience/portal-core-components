@@ -56,7 +56,7 @@ import iconRelocatableAquaticSVG from '../SiteMap/svg/icon-site-relocatable-aqua
 
 import TimeSeriesViewerContext, { TabComponentPropTypes } from './TimeSeriesViewerContext';
 
-const ucWord = (word) => `${word.slice(0, 1)}${word.slice(1).toLowerCase()}`;
+const ucWord = (word) => `${word.slice(0, 1).toUpperCase()}${word.slice(1).toLowerCase()}`;
 
 const ICON_SVGS = {
   CORE: {
@@ -378,8 +378,9 @@ function PositionHistoryButton(props) {
                   const end = rawEnd === '' ? 'Current' : rawEnd;
                   const cellStyle = idx !== history.length - 1 ? {}
                     : { fontWeight: '600', borderBottom: 'none' };
+                  const key = `${start}${end}${xOffset}${yOffset}${zOffset}`;
                   return (
-                    <TableRow key={row.start}>
+                    <TableRow key={key}>
                       <TableCell component="th" scope="row" style={cellStyle}>{start}</TableCell>
                       <TableCell component="th" scope="row" style={cellStyle}>{end}</TableCell>
                       <TableCell align="right" style={cellStyle}>{`${xOffset}m`}</TableCell>
@@ -1131,3 +1132,17 @@ export default function TimeSeriesViewerSites(props) {
 }
 
 TimeSeriesViewerSites.propTypes = TabComponentPropTypes;
+
+// Additional items exported for unit testing
+export const getTestableItems = () => (
+  process.env.NODE_ENV !== 'test' ? {} : {
+    ucWord,
+    PositionHistoryButton,
+    PositionDetail,
+    SelectedPosition,
+    SelectPositionsButton,
+    SitesControl,
+    SiteOption,
+    SelectedSite,
+  }
+);

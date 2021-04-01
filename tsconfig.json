@@ -23,7 +23,8 @@
     "noEmit": true,
     "jsx": "react",
     "allowJs": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "noFallthroughCasesInSwitch": true
   },
   "include": [
     "./src/**/*"

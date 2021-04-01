@@ -505,7 +505,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
       )}
 
       {/* 4: Manual Locations */}
-      {tabValue !== 3 ? null : (
+      {tabValue !== 4 ? null : (
         <div role="tabpanel">
           <Typography variant="h4" component="h2" gutterBottom>Manual Locations</Typography>
           <DocBlock>

@@ -83,6 +83,6 @@ declare function monthIsValid(month: any): boolean;
 declare function monthToTicker(month: any): number;
 declare function tickerIsValid(ticker: any): boolean;
 declare function tickerToMonth(ticker: any): string | null;
-declare function tickerToIso(ticker: any): string | null;
+declare function tickerToIso(ticker: any, includeSeconds?: boolean): string | null;
 declare function getNextMonth(month: any): string | null;
 export {};

@@ -2987,7 +2987,13 @@
         background: none;
         -webkit-appearance: none;
            -moz-appearance: none;
-                appearance: none; }
+                appearance: none;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: center;
+            justify-content: center;
+        -ms-flex-align: center;
+            align-items: center; }
     #header nav#block-neon-main-menu ul[data-depth="0"], #footer nav#block-neon-main-menu ul[data-depth="0"] {
       visibility: visible;
       width: 100%;

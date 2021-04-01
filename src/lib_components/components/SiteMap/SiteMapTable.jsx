@@ -1,9 +1,8 @@
-/* eslint-disable jsx-a11y/anchor-is-valid, no-unused-vars */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useRef, useEffect, useLayoutEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -75,6 +74,59 @@ const calculateMaxBodyHeight = (tableRef) => {
   return Math.max(containerHeight - toolbarHeight - pagerHeight, MIN_TABLE_MAX_BODY_HEIGHT);
 };
 
+const EXPORT_FILENAME = 'NEON-SiteMap-Table';
+const exportCsv = (columns = [], rows = []) => {
+  if (!columns.length || !rows.length) { return; }
+  const columnHeaders = columns.reduce((acc, cur) => {
+    if (Array.isArray(cur.csvFields)) {
+      cur.csvFields.forEach((field) => { acc.push(field); });
+    } else {
+      acc.push(cur.field);
+    }
+    return acc;
+  }, []);
+  const payloadRows = [columnHeaders.join(',')];
+  rows.forEach((row) => {
+    const payloadRow = [];
+    columns.forEach((column) => {
+      const render = typeof column.csvRender === 'function'
+        ? column.csvRender
+        : (r) => (r[column.field] || null);
+      payloadRow.push(
+        [render(row)].flat().map(
+          (value) => {
+            if (value === null || typeof value === 'undefined' || Number.isNaN(value)) {
+              return '';
+            }
+            if (/["',\s]/.test(value.toString())) {
+              return `"${value.toString().replace('"', '\\"')}"`;
+            }
+            return value;
+          },
+        ).join(','),
+      );
+    });
+    payloadRows.push(payloadRow.join(','));
+  });
+  const payload = payloadRows.join('\n');
+  const mimeType = 'text/csv;charset=utf-8';
+  const fileName = `${EXPORT_FILENAME}.csv`;
+  if (navigator.msSaveBlob) { // IE10+
+    navigator.msSaveBlob(new Blob([payload], { type: mimeType }), fileName);
+  } else {
+    const link = document.createElement('a');
+    if (URL && typeof URL.createObjectURL === 'function') {
+      link.href = URL.createObjectURL(new Blob([payload], { type: mimeType }));
+    } else {
+      link.setAttribute('href', `data:${mimeType},${encodeURI(payload)}`);
+    }
+    link.setAttribute('download', fileName);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+};
+
 const useStyles = makeStyles((theme) => ({
   tableContainer: {
     backgroundColor: 'white',
@@ -123,10 +175,18 @@ const useStyles = makeStyles((theme) => ({
   linkButton: {
     textAlign: 'left',
   },
+  downloadCsvButton: {
+    marginRight: theme.spacing(2),
+  },
   startFlex: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
+  },
+  endFlex: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
   },
   toolbarContainer: {
     backgroundColor: theme.palette.grey[50],
@@ -134,7 +194,8 @@ const useStyles = makeStyles((theme) => ({
       paddingTop: theme.spacing(4.5),
     },
     '& div.MuiToolbar-root': {
-      padding: theme.spacing(0, 2),
+      width: '100%',
+      padding: theme.spacing(0, 0, 0, 2),
       backgroundColor: theme.palette.grey[50],
     },
     // Make the columns button more prominent (really hard to do with component overriding)
@@ -149,7 +210,10 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   toolbarContainerNoSplit: {
-    // This hides all but the search input and show columns buttons.
+    '& div.MuiToolbar-root': {
+      width: 'calc(100% - 244px)',
+    },
+    // This hides all but the search input, show columns, and export buttons.
     // No other way to have material table NOT show a selection title in the toolbar.
     '& div.MuiToolbar-root > div:not(:nth-last-child(-n+2))': {
       display: 'none',
@@ -210,6 +274,9 @@ const useStyles = makeStyles((theme) => ({
       fontWeight: 500,
     },
   },
+  paginationRoot: {
+    width: 'auto',
+  },
 }));
 
 const SiteMapTable = () => {
@@ -233,8 +300,6 @@ const SiteMapTable = () => {
     maxBodyHeightUpdateFromAspectRatio,
   } = state.table;
   const {
-    limit: selectionLimit,
-    valid: selectionValid,
     set: selection,
     validSet: selectableItems,
     hideUnselectable,
@@ -341,12 +406,10 @@ const SiteMapTable = () => {
   // Selection functions
   let rowIsSelected = () => false;
   let rowIsSelectable = () => false;
-  let selectRow = () => {};
   switch (focus) {
     case FEATURE_TYPES.SITES.KEY:
       rowIsSelected = (row) => selection.has(row.siteCode);
       rowIsSelectable = (row) => !selectableItems || selectableItems.has(row.siteCode);
-      selectRow = (row) => dispatch({ type: 'toggleItemSelected', item: row.siteCode });
       break;
     default:
       break;
@@ -471,21 +534,22 @@ const SiteMapTable = () => {
   const commonColumns = {
     site: {
       field: 'siteCode',
+      csvFields: ['siteCode', 'siteName'], // Some single table columns are split in the CSV like so
       title: 'Site',
       sorting: true,
       defaultSort: 'desc',
       searchable: true,
       lookup: Object.fromEntries(
-        Array.from(sitesInMap).map((siteCode) => [siteCode, siteCode]),
+        Array.from(sitesInMap).sort().map((siteCode) => [siteCode, siteCode]),
       ),
       customFilterAndSearch: (input, row) => {
-        if (typeof input === 'string') {
+        if (typeof input === 'string' && input.length) {
           return searchOnAttribs(input, [row.siteCode, row.description]);
         }
-        if (Array.isArray(input)) {
+        if (Array.isArray(input) && input.length) {
           return input.includes(row.siteCode);
         }
-        return false;
+        return true;
       },
       customSort: (rowA, rowB) => {
         const siteA = getSite(rowA);
@@ -498,6 +562,7 @@ const SiteMapTable = () => {
       render: (row) => {
         const site = getSite(row);
         if (!site) { return null; }
+        const { siteCode, description } = site;
         const isDecommissioned = site.manualLocationType === MANUAL_LOCATION_TYPES.PROTOTYPE_SITE;
         const featureKey = isDecommissioned
           ? FEATURES.DECOMMISSIONED_SITES.KEY
@@ -508,29 +573,34 @@ const SiteMapTable = () => {
             <Link
               component="button"
               className={classes.siteName}
-              onClick={() => jumpTo(row.siteCode)}
-              title={`Click to view ${row.siteCode} on the map`}
+              onClick={() => jumpTo(siteCode)}
+              title={`Click to view ${siteCode} on the map`}
             >
               {renderFeatureIcon(featureKey, unselectable)}
-              <span>{`${site.description || 'Unnamed Site'} (${site.siteCode})`}</span>
+              <span>{`${description || 'Unnamed Site'} (${siteCode})`}</span>
             </Link>
             <div className={classes.startFlex}>
               <Link
                 className={classes.siteDetailsLink}
-                href={`${getHref('SITE_DETAILS', site.siteCode)}`}
+                href={`${getHref('SITE_DETAILS', siteCode)}`}
               >
                 Site Details
               </Link>
               <span className={classes.siteLinksDivider}>|</span>
               <Link
                 className={classes.siteDetailsLink}
-                href={`${getHref('EXPLORE_DATA_PRODUCTS_BY_SITE', site.siteCode)}`}
+                href={`${getHref('EXPLORE_DATA_PRODUCTS_BY_SITE', siteCode)}`}
               >
                 Explore Data
               </Link>
             </div>
           </div>
         );
+      },
+      csvRender: (row) => {
+        let siteName = null;
+        if (state.sites[row.siteCode]) { siteName = state.sites[row.siteCode].description; }
+        return [row.siteCode, siteName];
       },
     },
     domain: {
@@ -540,7 +610,7 @@ const SiteMapTable = () => {
       defaultSort: 'desc',
       searchable: true,
       lookup: Object.fromEntries(
-        Array.from(domainsInMap).map((domainCode) => [domainCode, domainCode]),
+        Array.from(domainsInMap).sort().map((domainCode) => [domainCode, domainCode]),
       ),
       customSort: (rowA, rowB) => {
         const domainA = getDomain(rowA);
@@ -570,7 +640,7 @@ const SiteMapTable = () => {
       defaultSort: 'desc',
       searchable: true,
       lookup: Object.fromEntries(
-        Array.from(statesInMap).map((stateCode) => [
+        Array.from(statesInMap).sort().map((stateCode) => [
           stateCode,
           state.featureData.STATES.STATES[stateCode].name,
         ]),
@@ -581,24 +651,25 @@ const SiteMapTable = () => {
         return stateA.name > stateB.name ? -1 : 1;
       },
       customFilterAndSearch: (input, row) => {
-        if (typeof input === 'string') {
+        if (typeof input === 'string' && input.length) {
           const rowState = getState(row);
           return searchOnAttribs(input, [row.stateCode, rowState.name]);
         }
-        if (Array.isArray(input)) {
+        if (Array.isArray(input) && input.length) {
           return input.includes(row.stateCode);
         }
-        return false;
+        return true;
       },
       render: (row) => {
         const usstate = getState(row);
+        const { stateCode } = row;
         return !usstate ? null : (
           <div>
             <Link
               component="button"
               className={classes.linkButton}
-              onClick={() => jumpTo(row.stateCode)}
-              title={`Click to view ${row.stateCode} on the map`}
+              onClick={() => jumpTo(stateCode)}
+              title={`Click to view ${stateCode} on the map`}
             >
               {usstate.name}
             </Link>
@@ -608,31 +679,49 @@ const SiteMapTable = () => {
     },
     coordinates: {
       field: 'latitude',
+      csvFields: ['latitude', 'longitude'],
       title: 'Coordinates',
       sorting: false,
       filtering: false,
       searchable: false,
-      render: (row) => (
-        <>
-          {renderCaptionString(row.latitude.toFixed(5), 'Latitude')}
-          <br />
-          {renderCaptionString(row.longitude.toFixed(5), 'Longitude')}
-        </>
-      ),
+      render: (row) => {
+        const { latitude: rowLatitude, longitude: rowLongitude } = row;
+        const latitude = Number.isFinite(rowLatitude) ? rowLatitude.toFixed(5) : null;
+        const longitude = Number.isFinite(rowLongitude) ? rowLongitude.toFixed(5) : null;
+        return (
+          <>
+            {renderCaptionString(latitude, 'Latitude')}
+            <br />
+            {renderCaptionString(longitude, 'Longitude')}
+          </>
+        );
+      },
+      csvRender: (row) => ([
+        Number.isFinite(row.latitude) ? row.latitude.toFixed(5) : null,
+        Number.isFinite(row.longitude) ? row.longitude.toFixed(5) : null,
+      ]),
     },
     latitude: {
       field: 'latitude',
       title: 'Latitude',
       sorting: true,
       filtering: false,
-      render: (row) => renderCaptionString(row.latitude.toFixed(5), 'Latitude'),
+      render: (row) => renderCaptionString(
+        Number.isFinite(row.latitude) ? row.latitude.toFixed(5) : null,
+        'Latitude',
+      ),
+      csvRender: (row) => (Number.isFinite(row.latitude) ? row.latitude.toFixed(5) : null),
     },
     longitude: {
       field: 'longitude',
       title: 'Longitude',
       sorting: true,
       filtering: false,
-      render: (row) => renderCaptionString(row.longitude.toFixed(5), 'Longitude'),
+      render: (row) => renderCaptionString(
+        Number.isFinite(row.longitude) ? row.longitude.toFixed(5) : null,
+        'Longitude',
+      ),
+      csvRender: (row) => (Number.isFinite(row.longitude) ? row.longitude.toFixed(5) : null),
     },
   };
 
@@ -671,10 +760,6 @@ const SiteMapTable = () => {
       commonColumns.domain,
       commonColumns.state,
       commonColumns.coordinates,
-      /*
-      commonColumns.latitude,
-      commonColumns.longitude,
-      */
     ];
   }
   if (focus === FEATURE_TYPES.LOCATIONS.KEY) {
@@ -685,16 +770,19 @@ const SiteMapTable = () => {
         sorting: true,
         defaultSort: 'desc',
         searchable: true,
-        render: (row) => (
-          <Link
-            component="button"
-            className={classes.linkButton}
-            onClick={() => jumpTo(row.name)}
-            title={`View ${row.name} on map`}
-          >
-            {row.name}
-          </Link>
-        ),
+        render: (row) => {
+          const { name } = row;
+          return (
+            <Link
+              component="button"
+              className={classes.linkButton}
+              onClick={() => jumpTo(name)}
+              title={`View ${name} on map`}
+            >
+              {name}
+            </Link>
+          );
+        },
       },
       { // Location Type
         field: 'featureKey',
@@ -723,9 +811,11 @@ const SiteMapTable = () => {
             </div>
           );
         },
+        csvRender: (row) => getFeatureName(row.featureKey),
       },
       { // Elevation
         field: 'elevation',
+        csvFields: ['elevation (m)'],
         title: 'Elevation',
         sorting: true,
         defaultSort: 'desc',
@@ -733,6 +823,9 @@ const SiteMapTable = () => {
         render: (row) => renderCaptionString(
           Number.isFinite(row.elevation) ? `${row.elevation.toFixed(2)}m` : '--',
           'Elevation',
+        ),
+        csvRender: (row) => (
+          Number.isFinite(row.elevation) ? row.elevation.toFixed(2) : null
         ),
       },
       { // NLCD Class
@@ -744,16 +837,14 @@ const SiteMapTable = () => {
         lookup: Object.fromEntries(
           Object.keys(NLCD_CLASSES)
             .filter((classKey) => rows.some((row) => row.nlcdClass === classKey))
+            .sort()
             .map((classKey) => [classKey, NLCD_CLASSES[classKey].name]),
         ),
         render: (row) => {
-          if (!row.nlcdClass) {
-            return renderCaptionString();
-          }
-          if (!NLCD_CLASSES[row.nlcdClass]) {
-            return renderCaptionString(row.nlcdClass, 'NLCD Class');
-          }
-          const { name: title, color: backgroundColor } = NLCD_CLASSES[row.nlcdClass];
+          const { nlcdClass } = row;
+          if (!nlcdClass) { return renderCaptionString(); }
+          if (!NLCD_CLASSES[nlcdClass]) { return renderCaptionString(nlcdClass, 'NLCD Class'); }
+          const { name: title, color: backgroundColor } = NLCD_CLASSES[nlcdClass];
           return (
             <div className={classes.nlcdClassContainer}>
               <div className={classes.nlcdClass} title={title} style={{ backgroundColor }} />
@@ -761,27 +852,46 @@ const SiteMapTable = () => {
             </div>
           );
         },
+        csvRender: (row) => {
+          const { nlcdClass } = row;
+          if (!nlcdClass) { return null; }
+          if (!NLCD_CLASSES[nlcdClass]) { return nlcdClass; }
+          return NLCD_CLASSES[nlcdClass].name;
+        },
       },
       { // Plot Size
         field: 'plotSize',
+        csvFields: ['plotDimensions', 'plotArea (m^2)'],
         title: 'Plot Size',
         sorting: true,
         deafultSort: 'asc',
         filtering: false,
-        render: (row) => (row.plotDimensions ? (
-          <>
-            {renderCaptionString(`${row.plotDimensions}`, 'Plot Size (Dimensions)')}
-            {Number.isFinite(row.plotSize) ? (
-              <>
-                <br />
-                {renderCaptionString(`(${row.plotSize.toFixed(0)}m\u00b2)`, 'Plot Size (Area)')}
-              </>
-            ) : null}
-          </>
-        ) : renderCaptionString()),
+        render: (row) => {
+          const { plotDimensions, plotSize } = row;
+          if (!plotDimensions) { return renderCaptionString(); }
+          return (
+            <>
+              {renderCaptionString(`${plotDimensions}`, 'Plot Size (Dimensions)')}
+              {Number.isFinite(plotSize) ? (
+                <>
+                  <br />
+                  {renderCaptionString(`(${plotSize.toFixed(0)}m\u00b2)`, 'Plot Size (Area)')}
+                </>
+              ) : null}
+            </>
+          );
+        },
+        csvRender: (row) => {
+          const { plotDimensions, plotSize } = row;
+          return [
+            plotDimensions || null,
+            Number.isFinite(plotSize) ? plotSize.toFixed(0) : null,
+          ];
+        },
       },
       { // Plot Slope Aspect
         field: 'slopeAspect',
+        csvFields: ['slopeAspect (deg)'],
         title: 'Slope Aspect',
         sorting: true,
         deafultSort: 'asc',
@@ -790,9 +900,11 @@ const SiteMapTable = () => {
           Number.isFinite(row.slopeAspect) ? `${row.slopeAspect.toFixed(2)}\u00b0` : '--',
           'Slope Aspect',
         ),
+        csvRender: (row) => (Number.isFinite(row.slopeAspect) ? row.slopeAspect.toFixed(2) : null),
       },
       { // Plot Slope Gradient
         field: 'slopeGradient',
+        csvFields: ['slopeGradient (%)'],
         title: 'Slope Gradient',
         sorting: true,
         deafultSort: 'asc',
@@ -801,9 +913,13 @@ const SiteMapTable = () => {
           Number.isFinite(row.slopeGradient) ? `${row.slopeGradient.toFixed(2)}%` : '--',
           'Slope Gradient',
         ),
+        csvRender: (row) => (
+          Number.isFinite(row.slopeGradient) ? row.slopeGradient.toFixed(2) : null
+        ),
       },
       { // Sampling Module Count
         field: 'samplingModules',
+        csvFields: 'samplingModulesCount',
         title: 'Potential Sampling Modules',
         filtering: false,
         sorting: true,
@@ -817,15 +933,17 @@ const SiteMapTable = () => {
           if (a !== null && b === null) { return -1; }
           return a > b ? 1 : -1;
         },
-        render: (row) => (
-          Array.isArray(row.samplingModules) ? (
+        render: (row) => {
+          const { samplingModules } = row;
+          if (!Array.isArray(samplingModules)) { return renderCaptionString(); }
+          return (
             <Tooltip
               interactive
               placement="left"
               title={
-                row.samplingModules.length ? (
+                samplingModules.length ? (
                   <ul style={{ marginLeft: Theme.spacing(-1) }}>
-                    {row.samplingModules.map((m) => (
+                    {samplingModules.map((m) => (
                       <li key={m}>{PLOT_SAMPLING_MODULES[m]}</li>
                     ))}
                   </ul>
@@ -833,7 +951,7 @@ const SiteMapTable = () => {
               }
             >
               <div className={classes.startFlex}>
-                {renderCaptionString(row.samplingModules.length, 'Potential Sampling Modules')}
+                {renderCaptionString(samplingModules.length, 'Potential Sampling Modules')}
                 <IconButton
                   size="small"
                   className={classes.iconButton}
@@ -843,19 +961,16 @@ const SiteMapTable = () => {
                 </IconButton>
               </div>
             </Tooltip>
-          ) : (
-            renderCaptionString()
-          )
+          );
+        },
+        csvRender: (row) => (
+          Array.isArray(row.samplingModules) ? row.samplingModules.length : null
         ),
       },
       commonColumns.site,
       commonColumns.domain,
       commonColumns.state,
       commonColumns.coordinates,
-      /*
-      commonColumns.latitude,
-      commonColumns.longitude,
-      */
     ];
   }
 
@@ -899,6 +1014,11 @@ const SiteMapTable = () => {
     },
     pageSize: 100,
     pageSizeOptions: [100, 200, 500],
+    exportButton: { csv: true },
+    exportCsv,
+    exportFileName: EXPORT_FILENAME,
+    emptyRowsWhenPaging: false,
+    thirdSortClick: false,
     rowStyle: (row) => {
       if (selectionActive) {
         if (!rowIsSelectable(row)) {
@@ -966,5 +1086,6 @@ export const getTestableItems = () => (
     searchOnAttribs,
     calculateMaxBodyHeight,
     getFeatureName,
+    exportCsv,
   }
 );

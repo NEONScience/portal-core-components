@@ -1,0 +1,2286 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TimeSeriesViewerSites PositionDetail Renders full detail when position history is present 1`] = `
+<div
+  className="makeStyles-startFlex-20"
+  style={
+    Object {
+      "alignItems": "center",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "marginRight": 24,
+      }
+    }
+  >
+    <p
+      className="MuiTypography-root MuiTypography-body1"
+      style={
+        Object {
+          "fontWeight": 600,
+        }
+      }
+    >
+      000.010
+    </p>
+    <p
+      className="MuiTypography-root MuiTypography-body2"
+      style={
+        Object {
+          "color": "#565a5c",
+        }
+      }
+    >
+      Elevation:
+    </p>
+    <div
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+        }
+      }
+    >
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+        focusable="false"
+        style={
+          Object {
+            "color": "#565a5c",
+            "marginRight": 4,
+          }
+        }
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"
+        />
+      </svg>
+      <p
+        className="MuiTypography-root MuiTypography-body2"
+        style={
+          Object {
+            "color": "#565a5c",
+          }
+        }
+      >
+        991.00m
+      </p>
+    </div>
+  </div>
+  <div
+    style={
+      Object {
+        "marginRight": 24,
+      }
+    }
+  >
+    <p
+      className="MuiTypography-root MuiTypography-body2"
+    >
+      <span
+        style={
+          Object {
+            "fontWeight": 600,
+            "marginRight": 8,
+          }
+        }
+      >
+        x:
+      </span>
+      5m
+      <br />
+      <span
+        style={
+          Object {
+            "fontWeight": 600,
+            "marginRight": 8,
+          }
+        }
+      >
+        y:
+      </span>
+      6m
+      <br />
+      <span
+        style={
+          Object {
+            "fontWeight": 600,
+            "marginRight": 8,
+          }
+        }
+      >
+        z:
+      </span>
+      1m
+    </p>
+  </div>
+  <div
+    style={
+      Object {
+        "textAlign": "right",
+      }
+    }
+  >
+    <button
+      className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+      disabled={false}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+      title="Click to show all changes to physical locations for this position over time"
+      type="button"
+    >
+      <span
+        className="MuiButton-label"
+      >
+        <span
+          className="MuiButton-startIcon MuiButton-iconSizeSmall"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"
+            />
+          </svg>
+        </span>
+        History (2)
+      </span>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`TimeSeriesViewerSites PositionDetail Renders full wide detail when position history is present 1`] = `
+<div>
+  <div
+    className="makeStyles-startFlex-20"
+    style={
+      Object {
+        "alignItems": "flex-end",
+      }
+    }
+  >
+    <p
+      className="MuiTypography-root MuiTypography-body1"
+      style={
+        Object {
+          "fontWeight": 600,
+          "marginRight": 24,
+        }
+      }
+    >
+      000.010
+    </p>
+    <div
+      className="makeStyles-startFlex-20"
+      style={
+        Object {
+          "alignItems": "center",
+          "color": "#565a5c",
+        }
+      }
+    >
+      <p
+        className="MuiTypography-root MuiTypography-body2"
+      >
+        Elevation:
+      </p>
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+        focusable="false"
+        style={
+          Object {
+            "margin": "0px 4px 0px 8px",
+          }
+        }
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"
+        />
+      </svg>
+      <p
+        className="MuiTypography-root MuiTypography-body2"
+      >
+        991.00m
+      </p>
+    </div>
+  </div>
+  <div
+    className="makeStyles-startFlex-20"
+  >
+    <p
+      className="MuiTypography-root MuiTypography-body2"
+    >
+      <span
+        style={
+          Object {
+            "fontWeight": 600,
+            "marginRight": 8,
+          }
+        }
+      >
+        x / y / z:
+      </span>
+      5m / 6m / 1m
+    </p>
+  </div>
+</div>
+`;
+
+exports[`TimeSeriesViewerSites PositionDetail Renders trimmed down detail when position not present in state 1`] = `
+<p
+  className="MuiTypography-root MuiTypography-body1"
+>
+  000.010
+</p>
+`;
+
+exports[`TimeSeriesViewerSites PositionHistoryButton Renders disabled when history has less than two entries 1`] = `
+<button
+  className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSizeSmall MuiButton-sizeSmall Mui-disabled Mui-disabled"
+  disabled={true}
+  onBlur={[Function]}
+  onDragLeave={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseDown={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  tabIndex={-1}
+  title="This position has had no changes to physical locations since its creation"
+  type="button"
+>
+  <span
+    className="MuiButton-label"
+  >
+    <span
+      className="MuiButton-startIcon MuiButton-iconSizeSmall"
+    >
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"
+        />
+      </svg>
+    </span>
+    No History
+  </span>
+</button>
+`;
+
+exports[`TimeSeriesViewerSites PositionHistoryButton Renders enabled when history has two or more entries 1`] = `
+<button
+  className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+  disabled={false}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onDragLeave={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseDown={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  tabIndex={0}
+  title="Click to show all changes to physical locations for this position over time"
+  type="button"
+>
+  <span
+    className="MuiButton-label"
+  >
+    <span
+      className="MuiButton-startIcon MuiButton-iconSizeSmall"
+    >
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"
+        />
+      </svg>
+    </span>
+    History (2)
+  </span>
+  <span
+    className="MuiTouchRipple-root"
+  />
+</button>
+`;
+
+exports[`TimeSeriesViewerSites SelectPositionsButton Renders as expected 1`] = `
+<button
+  className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+  disabled={false}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onDragLeave={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseDown={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  style={
+    Object {
+      "marginLeft": 32,
+    }
+  }
+  tabIndex={0}
+  type="button"
+>
+  <span
+    className="MuiButton-label"
+  >
+    <span
+      className="MuiButton-startIcon MuiButton-iconSizeSmall"
+    >
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74zm9.84 4.63l-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74c-3.6-.76-3.54-.75-3.67-.75-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2 0-.62-.38-1.16-.91-1.38z"
+        />
+      </svg>
+    </span>
+    Select Positions…
+  </span>
+  <span
+    className="MuiTouchRipple-root"
+  />
+</button>
+`;
+
+exports[`TimeSeriesViewerSites SelectedPosition Renders as expected 1`] = `
+<div
+  className="MuiPaper-root MuiCard-root makeStyles-positionCard-19 MuiPaper-outlined MuiPaper-rounded"
+>
+  <button
+    aria-label="remove position 000.010 from ABBY"
+    className="MuiButtonBase-root MuiIconButton-root"
+    disabled={false}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onDragLeave={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    onTouchMove={[Function]}
+    onTouchStart={[Function]}
+    style={
+      Object {
+        "marginLeft": 8,
+        "marginRight": 8,
+      }
+    }
+    tabIndex={0}
+    type="button"
+  >
+    <span
+      className="MuiIconButton-label"
+    >
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+        />
+      </svg>
+    </span>
+  </button>
+  <div
+    style={
+      Object {
+        "flexGrow": 1,
+      }
+    }
+  >
+    <p
+      className="MuiTypography-root MuiTypography-body1"
+    >
+      000.010
+    </p>
+  </div>
+</div>
+`;
+
+exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core) 1`] = `
+<div
+  className="MuiPaper-root MuiCard-root makeStyles-siteCard-10 MuiPaper-outlined MuiPaper-rounded"
+>
+  <div>
+    <div
+      className="makeStyles-siteTitleContainer-11"
+    >
+      <img
+        alt="Aquatic Core"
+        height={32}
+        src="icon-site-core-aquatic.svg"
+        style={
+          Object {
+            "flexGrow": 0,
+            "marginRight": 8,
+          }
+        }
+        title="Aquatic Core"
+        width={32}
+      />
+      <h6
+        className="MuiTypography-root MuiTypography-h6"
+        style={
+          Object {
+            "flexGrow": 1,
+            "lineHeight": "1.4rem",
+          }
+        }
+      >
+        Rio Cupeyes (CUPE)
+      </h6>
+      <button
+        className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        style={
+          Object {
+            "minWidth": 104,
+            "whiteSpace": "nowrap",
+          }
+        }
+        tabIndex={0}
+        type="button"
+      >
+        <span
+          className="MuiButton-label"
+        >
+          <span
+            className="MuiButton-startIcon MuiButton-iconSizeSmall"
+          >
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+              />
+            </svg>
+          </span>
+          Remove Site
+        </span>
+        <span
+          className="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div
+      className="makeStyles-siteDetailsRow-12"
+    >
+      <div
+        className="makeStyles-siteDetailsColumn-13"
+      >
+        <div
+          className="makeStyles-siteDetail-14"
+        >
+          <h6
+            className="MuiTypography-root MuiTypography-subtitle2"
+          >
+            Aquatic Core
+          </h6>
+          <p
+            className="MuiTypography-root MuiTypography-body2"
+            style={
+              Object {
+                "fontSize": "0.8rem",
+              }
+            }
+          >
+            <i>
+              water-based; fixed location
+            </i>
+          </p>
+        </div>
+        <div
+          className="makeStyles-siteDetail-14"
+        >
+          <div
+            className="makeStyles-startFlex-20"
+            style={
+              Object {
+                "alignItems": "center",
+              }
+            }
+          >
+            <button
+              aria-describedby={null}
+              aria-label="Latitude / Longitude (click to copy)"
+              className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+              disabled={false}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseOver={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              style={
+                Object {
+                  "marginRight": 4,
+                }
+              }
+              tabIndex={0}
+              title="Latitude / Longitude (click to copy)"
+              type="button"
+            >
+              <span
+                className="MuiIconButton-label"
+              >
+                <svg
+                  aria-hidden={true}
+                  className="MuiSvgIcon-root"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V1h-2v2.06C6.83 3.52 3.52 6.83 3.06 11H1v2h2.06c.46 4.17 3.77 7.48 7.94 7.94V23h2v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"
+                  />
+                </svg>
+              </span>
+              <span
+                className="MuiTouchRipple-root"
+              />
+            </button>
+            <span
+              aria-label="Latitude / Longitude"
+              className="MuiTypography-root MuiTypography-caption"
+              style={
+                Object {
+                  "fontFamily": "monospace",
+                  "fontSize": "0.85rem",
+                  "textAlign": "right",
+                }
+              }
+            >
+              18.11352
+              <br />
+              -66.98676
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        className="makeStyles-siteDetailsColumn-13"
+      >
+        <div
+          className="makeStyles-siteDetail-14"
+        >
+          <h6
+            className="MuiTypography-root MuiTypography-subtitle2"
+          >
+            Territory
+          </h6>
+          <p
+            className="MuiTypography-root MuiTypography-body2"
+          >
+            Puerto Rico
+          </p>
+        </div>
+        <div
+          className="makeStyles-siteDetail-14"
+        >
+          <h6
+            className="MuiTypography-root MuiTypography-subtitle2"
+          >
+            Domain
+          </h6>
+          <p
+            className="MuiTypography-root MuiTypography-body2"
+          >
+            D04 - Atlantic Neotropical
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div
+      className="makeStyles-positionsTitleContainer-17"
+    >
+      <h6
+        className="MuiTypography-root MuiTypography-subtitle2"
+      >
+        Position(s)
+      </h6>
+      <button
+        aria-describedby={null}
+        className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+        disabled={false}
+        onBlur={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseOver={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        style={
+          Object {
+            "marginLeft": 8,
+          }
+        }
+        tabIndex={0}
+        title={null}
+        type="button"
+      >
+        <span
+          className="MuiIconButton-label"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+            />
+          </svg>
+        </span>
+        <span
+          className="MuiTouchRipple-root"
+        />
+      </button>
+      <button
+        className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        style={
+          Object {
+            "marginLeft": 32,
+          }
+        }
+        tabIndex={0}
+        type="button"
+      >
+        <span
+          className="MuiButton-label"
+        >
+          <span
+            className="MuiButton-startIcon MuiButton-iconSizeSmall"
+          >
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74zm9.84 4.63l-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74c-3.6-.76-3.54-.75-3.67-.75-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2 0-.62-.38-1.16-.91-1.38z"
+              />
+            </svg>
+          </span>
+          Select Positions…
+        </span>
+        <span
+          className="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div
+      className="makeStyles-positionsCardContainer-18"
+    >
+      <div
+        className="MuiPaper-root MuiCard-root makeStyles-positionCard-19 MuiPaper-outlined MuiPaper-rounded"
+      >
+        <button
+          aria-label="remove position 000.010 from CUPE"
+          className="MuiButtonBase-root MuiIconButton-root Mui-disabled Mui-disabled"
+          disabled={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          style={
+            Object {
+              "marginLeft": 8,
+              "marginRight": 8,
+            }
+          }
+          tabIndex={-1}
+          type="button"
+        >
+          <span
+            className="MuiIconButton-label"
+          >
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+              />
+            </svg>
+          </span>
+        </button>
+        <div
+          style={
+            Object {
+              "flexGrow": 1,
+            }
+          }
+        >
+          <p
+            className="MuiTypography-root MuiTypography-body1"
+          >
+            000.010
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / relocatable) 1`] = `
+<div
+  className="MuiPaper-root MuiCard-root makeStyles-siteCard-10 MuiPaper-outlined MuiPaper-rounded"
+>
+  <div>
+    <div
+      className="makeStyles-siteTitleContainer-11"
+    >
+      <img
+        alt="Aquatic Relocatable"
+        height={32}
+        src="icon-site-relocatable-aquatic.svg"
+        style={
+          Object {
+            "flexGrow": 0,
+            "marginRight": 8,
+          }
+        }
+        title="Aquatic Relocatable"
+        width={32}
+      />
+      <h6
+        className="MuiTypography-root MuiTypography-h6"
+        style={
+          Object {
+            "flexGrow": 1,
+            "lineHeight": "1.4rem",
+          }
+        }
+      >
+        Upper Big Creek (BIGC)
+      </h6>
+      <button
+        className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        style={
+          Object {
+            "minWidth": 104,
+            "whiteSpace": "nowrap",
+          }
+        }
+        tabIndex={0}
+        type="button"
+      >
+        <span
+          className="MuiButton-label"
+        >
+          <span
+            className="MuiButton-startIcon MuiButton-iconSizeSmall"
+          >
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+              />
+            </svg>
+          </span>
+          Remove Site
+        </span>
+        <span
+          className="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div
+      className="makeStyles-siteDetailsRow-12"
+    >
+      <div
+        className="makeStyles-siteDetailsColumn-13"
+      >
+        <div
+          className="makeStyles-siteDetail-14"
+        >
+          <h6
+            className="MuiTypography-root MuiTypography-subtitle2"
+          >
+            Aquatic Relocatable
+          </h6>
+          <p
+            className="MuiTypography-root MuiTypography-body2"
+            style={
+              Object {
+                "fontSize": "0.8rem",
+              }
+            }
+          >
+            <i>
+              water-based; location may change
+            </i>
+          </p>
+        </div>
+        <div
+          className="makeStyles-siteDetail-14"
+        >
+          <div
+            className="makeStyles-startFlex-20"
+            style={
+              Object {
+                "alignItems": "center",
+              }
+            }
+          >
+            <button
+              aria-describedby={null}
+              aria-label="Latitude / Longitude (click to copy)"
+              className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+              disabled={false}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseOver={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              style={
+                Object {
+                  "marginRight": 4,
+                }
+              }
+              tabIndex={0}
+              title="Latitude / Longitude (click to copy)"
+              type="button"
+            >
+              <span
+                className="MuiIconButton-label"
+              >
+                <svg
+                  aria-hidden={true}
+                  className="MuiSvgIcon-root"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V1h-2v2.06C6.83 3.52 3.52 6.83 3.06 11H1v2h2.06c.46 4.17 3.77 7.48 7.94 7.94V23h2v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"
+                  />
+                </svg>
+              </span>
+              <span
+                className="MuiTouchRipple-root"
+              />
+            </button>
+            <span
+              aria-label="Latitude / Longitude"
+              className="MuiTypography-root MuiTypography-caption"
+              style={
+                Object {
+                  "fontFamily": "monospace",
+                  "fontSize": "0.85rem",
+                  "textAlign": "right",
+                }
+              }
+            >
+              37.059719
+              <br />
+              -119.257549
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        className="makeStyles-siteDetailsColumn-13"
+      >
+        <div
+          className="makeStyles-siteDetail-14"
+        >
+          <h6
+            className="MuiTypography-root MuiTypography-subtitle2"
+          >
+            State
+          </h6>
+          <p
+            className="MuiTypography-root MuiTypography-body2"
+          >
+            California
+          </p>
+        </div>
+        <div
+          className="makeStyles-siteDetail-14"
+        >
+          <h6
+            className="MuiTypography-root MuiTypography-subtitle2"
+          >
+            Domain
+          </h6>
+          <p
+            className="MuiTypography-root MuiTypography-body2"
+          >
+            D17 - Pacific Southwest
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div
+      className="makeStyles-positionsTitleContainer-17"
+    >
+      <h6
+        className="MuiTypography-root MuiTypography-subtitle2"
+      >
+        Position(s)
+      </h6>
+      <button
+        aria-describedby={null}
+        className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+        disabled={false}
+        onBlur={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseOver={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        style={
+          Object {
+            "marginLeft": 8,
+          }
+        }
+        tabIndex={0}
+        title={null}
+        type="button"
+      >
+        <span
+          className="MuiIconButton-label"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+            />
+          </svg>
+        </span>
+        <span
+          className="MuiTouchRipple-root"
+        />
+      </button>
+      <button
+        className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        style={
+          Object {
+            "marginLeft": 32,
+          }
+        }
+        tabIndex={0}
+        type="button"
+      >
+        <span
+          className="MuiButton-label"
+        >
+          <span
+            className="MuiButton-startIcon MuiButton-iconSizeSmall"
+          >
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74zm9.84 4.63l-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74c-3.6-.76-3.54-.75-3.67-.75-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2 0-.62-.38-1.16-.91-1.38z"
+              />
+            </svg>
+          </span>
+          Select Positions…
+        </span>
+        <span
+          className="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div
+      className="makeStyles-positionsCardContainer-18"
+    >
+      <div
+        className="MuiPaper-root MuiCard-root makeStyles-positionCard-19 MuiPaper-outlined MuiPaper-rounded"
+      >
+        <button
+          aria-label="remove position 000.030 from BIGC"
+          className="MuiButtonBase-root MuiIconButton-root"
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          style={
+            Object {
+              "marginLeft": 8,
+              "marginRight": 8,
+            }
+          }
+          tabIndex={0}
+          type="button"
+        >
+          <span
+            className="MuiIconButton-label"
+          >
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+              />
+            </svg>
+          </span>
+          <span
+            className="MuiTouchRipple-root"
+          />
+        </button>
+        <div
+          style={
+            Object {
+              "flexGrow": 1,
+            }
+          }
+        >
+          <p
+            className="MuiTypography-root MuiTypography-body1"
+          >
+            000.030
+          </p>
+        </div>
+      </div>
+      <div
+        className="MuiPaper-root MuiCard-root makeStyles-positionCard-19 MuiPaper-outlined MuiPaper-rounded"
+      >
+        <button
+          aria-label="remove position 000.010 from BIGC"
+          className="MuiButtonBase-root MuiIconButton-root"
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          style={
+            Object {
+              "marginLeft": 8,
+              "marginRight": 8,
+            }
+          }
+          tabIndex={0}
+          type="button"
+        >
+          <span
+            className="MuiIconButton-label"
+          >
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+              />
+            </svg>
+          </span>
+          <span
+            className="MuiTouchRipple-root"
+          />
+        </button>
+        <div
+          style={
+            Object {
+              "flexGrow": 1,
+            }
+          }
+        >
+          <p
+            className="MuiTypography-root MuiTypography-body1"
+          >
+            000.010
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / core) 1`] = `
+<div
+  className="MuiPaper-root MuiCard-root makeStyles-siteCard-10 MuiPaper-outlined MuiPaper-rounded"
+>
+  <div>
+    <div
+      className="makeStyles-siteTitleContainer-11"
+    >
+      <img
+        alt="Terrestrial Core"
+        height={32}
+        src="icon-site-core-terrestrial.svg"
+        style={
+          Object {
+            "flexGrow": 0,
+            "marginRight": 8,
+          }
+        }
+        title="Terrestrial Core"
+        width={32}
+      />
+      <h6
+        className="MuiTypography-root MuiTypography-h6"
+        style={
+          Object {
+            "flexGrow": 1,
+            "lineHeight": "1.4rem",
+          }
+        }
+      >
+        Central Plains Experimental Range (CPER)
+      </h6>
+      <button
+        className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        style={
+          Object {
+            "minWidth": 104,
+            "whiteSpace": "nowrap",
+          }
+        }
+        tabIndex={0}
+        type="button"
+      >
+        <span
+          className="MuiButton-label"
+        >
+          <span
+            className="MuiButton-startIcon MuiButton-iconSizeSmall"
+          >
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+              />
+            </svg>
+          </span>
+          Remove Site
+        </span>
+        <span
+          className="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div
+      className="makeStyles-siteDetailsRow-12"
+    >
+      <div
+        className="makeStyles-siteDetailsColumn-13"
+      >
+        <div
+          className="makeStyles-siteDetail-14"
+        >
+          <h6
+            className="MuiTypography-root MuiTypography-subtitle2"
+          >
+            Terrestrial Core
+          </h6>
+          <p
+            className="MuiTypography-root MuiTypography-body2"
+            style={
+              Object {
+                "fontSize": "0.8rem",
+              }
+            }
+          >
+            <i>
+              land-based; fixed location
+            </i>
+          </p>
+        </div>
+        <div
+          className="makeStyles-siteDetail-14"
+        >
+          <div
+            className="makeStyles-startFlex-20"
+            style={
+              Object {
+                "alignItems": "center",
+              }
+            }
+          >
+            <button
+              aria-describedby={null}
+              aria-label="Latitude / Longitude (click to copy)"
+              className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+              disabled={false}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseOver={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              style={
+                Object {
+                  "marginRight": 4,
+                }
+              }
+              tabIndex={0}
+              title="Latitude / Longitude (click to copy)"
+              type="button"
+            >
+              <span
+                className="MuiIconButton-label"
+              >
+                <svg
+                  aria-hidden={true}
+                  className="MuiSvgIcon-root"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V1h-2v2.06C6.83 3.52 3.52 6.83 3.06 11H1v2h2.06c.46 4.17 3.77 7.48 7.94 7.94V23h2v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"
+                  />
+                </svg>
+              </span>
+              <span
+                className="MuiTouchRipple-root"
+              />
+            </button>
+            <span
+              aria-label="Latitude / Longitude"
+              className="MuiTypography-root MuiTypography-caption"
+              style={
+                Object {
+                  "fontFamily": "monospace",
+                  "fontSize": "0.85rem",
+                  "textAlign": "right",
+                }
+              }
+            >
+              40.815536
+              <br />
+              -104.745591
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        className="makeStyles-siteDetailsColumn-13"
+      >
+        <div
+          className="makeStyles-siteDetail-14"
+        >
+          <h6
+            className="MuiTypography-root MuiTypography-subtitle2"
+          >
+            State
+          </h6>
+          <p
+            className="MuiTypography-root MuiTypography-body2"
+          >
+            Colorado
+          </p>
+        </div>
+        <div
+          className="makeStyles-siteDetail-14"
+        >
+          <h6
+            className="MuiTypography-root MuiTypography-subtitle2"
+          >
+            Domain
+          </h6>
+          <p
+            className="MuiTypography-root MuiTypography-body2"
+          >
+            D10 - Central Plains
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div
+      className="makeStyles-positionsTitleContainer-17"
+    >
+      <h6
+        className="MuiTypography-root MuiTypography-subtitle2"
+      >
+        Position(s)
+      </h6>
+      <button
+        aria-describedby={null}
+        className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+        disabled={false}
+        onBlur={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseOver={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        style={
+          Object {
+            "marginLeft": 8,
+          }
+        }
+        tabIndex={0}
+        title={null}
+        type="button"
+      >
+        <span
+          className="MuiIconButton-label"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+            />
+          </svg>
+        </span>
+        <span
+          className="MuiTouchRipple-root"
+        />
+      </button>
+      <button
+        className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        style={
+          Object {
+            "marginLeft": 32,
+          }
+        }
+        tabIndex={0}
+        type="button"
+      >
+        <span
+          className="MuiButton-label"
+        >
+          <span
+            className="MuiButton-startIcon MuiButton-iconSizeSmall"
+          >
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74zm9.84 4.63l-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74c-3.6-.76-3.54-.75-3.67-.75-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2 0-.62-.38-1.16-.91-1.38z"
+              />
+            </svg>
+          </span>
+          Select Positions…
+        </span>
+        <span
+          className="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div
+      className="makeStyles-positionsCardContainer-18"
+    >
+      <div
+        className="MuiPaper-root MuiCard-root makeStyles-positionCard-19 MuiPaper-outlined MuiPaper-rounded"
+      >
+        <button
+          aria-label="remove position 000.050 from CPER"
+          className="MuiButtonBase-root MuiIconButton-root"
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          style={
+            Object {
+              "marginLeft": 8,
+              "marginRight": 8,
+            }
+          }
+          tabIndex={0}
+          type="button"
+        >
+          <span
+            className="MuiIconButton-label"
+          >
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+              />
+            </svg>
+          </span>
+          <span
+            className="MuiTouchRipple-root"
+          />
+        </button>
+        <div
+          style={
+            Object {
+              "flexGrow": 1,
+            }
+          }
+        >
+          <p
+            className="MuiTypography-root MuiTypography-body1"
+          >
+            000.050
+          </p>
+        </div>
+      </div>
+      <div
+        className="MuiPaper-root MuiCard-root makeStyles-positionCard-19 MuiPaper-outlined MuiPaper-rounded"
+      >
+        <button
+          aria-label="remove position 000.040 from CPER"
+          className="MuiButtonBase-root MuiIconButton-root"
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          style={
+            Object {
+              "marginLeft": 8,
+              "marginRight": 8,
+            }
+          }
+          tabIndex={0}
+          type="button"
+        >
+          <span
+            className="MuiIconButton-label"
+          >
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+              />
+            </svg>
+          </span>
+          <span
+            className="MuiTouchRipple-root"
+          />
+        </button>
+        <div
+          style={
+            Object {
+              "flexGrow": 1,
+            }
+          }
+        >
+          <p
+            className="MuiTypography-root MuiTypography-body1"
+          >
+            000.040
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / relocatable) 1`] = `
+<div
+  className="MuiPaper-root MuiCard-root makeStyles-siteCard-10 MuiPaper-outlined MuiPaper-rounded"
+>
+  <div>
+    <div
+      className="makeStyles-siteTitleContainer-11"
+    >
+      <img
+        alt="Terrestrial Relocatable"
+        height={32}
+        src="icon-site-relocatable-terrestrial.svg"
+        style={
+          Object {
+            "flexGrow": 0,
+            "marginRight": 8,
+          }
+        }
+        title="Terrestrial Relocatable"
+        width={32}
+      />
+      <h6
+        className="MuiTypography-root MuiTypography-h6"
+        style={
+          Object {
+            "flexGrow": 1,
+            "lineHeight": "1.4rem",
+          }
+        }
+      >
+        Abby Road (ABBY)
+      </h6>
+      <button
+        className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        style={
+          Object {
+            "minWidth": 104,
+            "whiteSpace": "nowrap",
+          }
+        }
+        tabIndex={0}
+        type="button"
+      >
+        <span
+          className="MuiButton-label"
+        >
+          <span
+            className="MuiButton-startIcon MuiButton-iconSizeSmall"
+          >
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+              />
+            </svg>
+          </span>
+          Remove Site
+        </span>
+        <span
+          className="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div
+      className="makeStyles-siteDetailsRow-12"
+    >
+      <div
+        className="makeStyles-siteDetailsColumn-13"
+      >
+        <div
+          className="makeStyles-siteDetail-14"
+        >
+          <h6
+            className="MuiTypography-root MuiTypography-subtitle2"
+          >
+            Terrestrial Relocatable
+          </h6>
+          <p
+            className="MuiTypography-root MuiTypography-body2"
+            style={
+              Object {
+                "fontSize": "0.8rem",
+              }
+            }
+          >
+            <i>
+              land-based; location may change
+            </i>
+          </p>
+        </div>
+        <div
+          className="makeStyles-siteDetail-14"
+        >
+          <div
+            className="makeStyles-startFlex-20"
+            style={
+              Object {
+                "alignItems": "center",
+              }
+            }
+          >
+            <button
+              aria-describedby={null}
+              aria-label="Latitude / Longitude (click to copy)"
+              className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+              disabled={false}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseOver={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              style={
+                Object {
+                  "marginRight": 4,
+                }
+              }
+              tabIndex={0}
+              title="Latitude / Longitude (click to copy)"
+              type="button"
+            >
+              <span
+                className="MuiIconButton-label"
+              >
+                <svg
+                  aria-hidden={true}
+                  className="MuiSvgIcon-root"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V1h-2v2.06C6.83 3.52 3.52 6.83 3.06 11H1v2h2.06c.46 4.17 3.77 7.48 7.94 7.94V23h2v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"
+                  />
+                </svg>
+              </span>
+              <span
+                className="MuiTouchRipple-root"
+              />
+            </button>
+            <span
+              aria-label="Latitude / Longitude"
+              className="MuiTypography-root MuiTypography-caption"
+              style={
+                Object {
+                  "fontFamily": "monospace",
+                  "fontSize": "0.85rem",
+                  "textAlign": "right",
+                }
+              }
+            >
+              45.762439
+              <br />
+              -122.330317
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        className="makeStyles-siteDetailsColumn-13"
+      >
+        <div
+          className="makeStyles-siteDetail-14"
+        >
+          <h6
+            className="MuiTypography-root MuiTypography-subtitle2"
+          >
+            State
+          </h6>
+          <p
+            className="MuiTypography-root MuiTypography-body2"
+          >
+            Washington
+          </p>
+        </div>
+        <div
+          className="makeStyles-siteDetail-14"
+        >
+          <h6
+            className="MuiTypography-root MuiTypography-subtitle2"
+          >
+            Domain
+          </h6>
+          <p
+            className="MuiTypography-root MuiTypography-body2"
+          >
+            D16 - Pacific Northwest
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div
+      className="makeStyles-positionsTitleContainer-17"
+    >
+      <h6
+        className="MuiTypography-root MuiTypography-subtitle2"
+      >
+        Position(s)
+      </h6>
+      <button
+        aria-describedby={null}
+        className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+        disabled={false}
+        onBlur={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseOver={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        style={
+          Object {
+            "marginLeft": 8,
+          }
+        }
+        tabIndex={0}
+        title={null}
+        type="button"
+      >
+        <span
+          className="MuiIconButton-label"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+            />
+          </svg>
+        </span>
+        <span
+          className="MuiTouchRipple-root"
+        />
+      </button>
+      <button
+        className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        style={
+          Object {
+            "marginLeft": 32,
+          }
+        }
+        tabIndex={0}
+        type="button"
+      >
+        <span
+          className="MuiButton-label"
+        >
+          <span
+            className="MuiButton-startIcon MuiButton-iconSizeSmall"
+          >
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74zm9.84 4.63l-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74c-3.6-.76-3.54-.75-3.67-.75-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2 0-.62-.38-1.16-.91-1.38z"
+              />
+            </svg>
+          </span>
+          Select Positions…
+        </span>
+        <span
+          className="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div
+      className="makeStyles-positionsCardContainer-18"
+    >
+      <div
+        className="MuiPaper-root MuiCard-root makeStyles-positionCard-19 MuiPaper-outlined MuiPaper-rounded"
+      >
+        <button
+          aria-label="remove position 000.020 from ABBY"
+          className="MuiButtonBase-root MuiIconButton-root"
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          style={
+            Object {
+              "marginLeft": 8,
+              "marginRight": 8,
+            }
+          }
+          tabIndex={0}
+          type="button"
+        >
+          <span
+            className="MuiIconButton-label"
+          >
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+              />
+            </svg>
+          </span>
+          <span
+            className="MuiTouchRipple-root"
+          />
+        </button>
+        <div
+          style={
+            Object {
+              "flexGrow": 1,
+            }
+          }
+        >
+          <p
+            className="MuiTypography-root MuiTypography-body1"
+          >
+            000.020
+          </p>
+        </div>
+      </div>
+      <div
+        className="MuiPaper-root MuiCard-root makeStyles-positionCard-19 MuiPaper-outlined MuiPaper-rounded"
+      >
+        <button
+          aria-label="remove position 000.010 from ABBY"
+          className="MuiButtonBase-root MuiIconButton-root"
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          style={
+            Object {
+              "marginLeft": 8,
+              "marginRight": 8,
+            }
+          }
+          tabIndex={0}
+          type="button"
+        >
+          <span
+            className="MuiIconButton-label"
+          >
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+              />
+            </svg>
+          </span>
+          <span
+            className="MuiTouchRipple-root"
+          />
+        </button>
+        <div
+          style={
+            Object {
+              "flexGrow": 1,
+            }
+          }
+        >
+          <p
+            className="MuiTypography-root MuiTypography-body1"
+          >
+            000.010
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`TimeSeriesViewerSites SiteOption Renders as expected without stateCode 1`] = `
+<div
+  aria-disabled={false}
+  className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root Mui-selected MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button Mui-selected"
+  id="bar"
+  onBlur={[Function]}
+  onDragLeave={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseDown={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  role="menuitem"
+  style={
+    Object {
+      "alignItems": "flex-start",
+      "cursor": "pointer",
+      "display": "flex",
+      "flexDirection": "column",
+    }
+  }
+  tabIndex={2}
+>
+  <div
+    className="makeStyles-startFlex-20"
+  >
+    <img
+      alt="Terrestrial Relocatable"
+      height={24}
+      src="icon-site-relocatable-terrestrial.svg"
+      style={
+        Object {
+          "flexGrow": 0,
+          "marginRight": 12,
+          "marginTop": 4,
+        }
+      }
+      title="Terrestrial Relocatable"
+      width={24}
+    />
+    <div
+      style={
+        Object {
+          "flexGrow": 1,
+        }
+      }
+    >
+      <p
+        className="MuiTypography-root MuiTypography-body1"
+      >
+        ABBY - Abby Road, WA
+      </p>
+      <p
+        className="MuiTypography-root makeStyles-optionSubtitle-8 MuiTypography-body2 MuiTypography-gutterBottom"
+      >
+        Terrestrial Relocatable - Domain D16 (D16 Name) - Lat/Lon: 45.762439, -122.330317
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`TimeSeriesViewerSites SitesControl Renders as expected 1`] = `
+<div
+  className="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
+  data-textField="bar"
+>
+  <label
+    className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined"
+    data-shrink={false}
+  >
+    Add Sites
+  </label>
+  <div
+    className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd"
+    onClick={[Function]}
+  >
+    <div
+      aria-invalid={false}
+      autoFocus={false}
+      className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd MuiOutlinedInput-inputAdornedEnd"
+      data-inner="foo"
+      disabled={false}
+      onAnimationStart={[Function]}
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      onMouseDown={[Function]}
+      required={false}
+      type="text"
+    >
+      <div>
+        children
+      </div>
+    </div>
+    <div
+      className="MuiInputAdornment-root MuiInputAdornment-positionEnd"
+    >
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root MuiSvgIcon-colorDisabled"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+        />
+      </svg>
+    </div>
+    <fieldset
+      aria-hidden={true}
+      className="PrivateNotchedOutline-root-21 MuiOutlinedInput-notchedOutline"
+    >
+      <legend
+        className="PrivateNotchedOutline-legendLabelled-23"
+      >
+        <span>
+          Add Sites
+        </span>
+      </legend>
+    </fieldset>
+  </div>
+</div>
+`;

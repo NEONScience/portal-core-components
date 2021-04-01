@@ -81,7 +81,9 @@ describe('generateTimeSeriesGraphData worker', () => {
       expect(tickerToIso()).toBe(null);
       expect(tickerToIso('2020-01')).toBe(null);
       expect(tickerToIso(946684800000)).toBe('2000-01-01T00:00:00Z');
-      expect(tickerToIso(2077453337000)).toBe('2035-10-31T14:22:17Z');
+      expect(tickerToIso(2077453337000, true)).toBe('2035-10-31T14:22:17Z');
+      expect(tickerToIso(946684800000, false)).toBe('2000-01-01T00:00Z');
+      expect(tickerToIso(2077453337000, false)).toBe('2035-10-31T14:22Z');
     });
     test('getNextMonth()', () => {
       expect(getNextMonth()).toBe(null);

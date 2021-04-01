@@ -229,7 +229,7 @@ const NeonEnvironment = {
     const host = NeonEnvironment.getHost();
     const root = NeonEnvironment.getRootJsonLdPath();
     let appliedPath = '';
-    if (['products'].includes(path)) {
+    if (['products', 'prototype'].includes(path)) {
       appliedPath = NeonEnvironment.getApiPath[path]();
     } else if (typeof NeonEnvironment.getApiLdPath[path] === 'function') {
       appliedPath = NeonEnvironment.getApiLdPath[path]();

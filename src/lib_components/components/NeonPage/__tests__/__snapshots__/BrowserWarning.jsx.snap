@@ -1,0 +1,178 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NeonPage - BrowserWarning renders nothing if browser is found to be IE but ignore cookie is present 1`] = `null`;
+
+exports[`NeonPage - BrowserWarning renders nothing if browser is not IE 1`] = `null`;
+
+exports[`NeonPage - BrowserWarning renders warning if browser is found to be IE and ignore cookie is not set 1`] = `
+<div
+  ComponentPath="@material-ui/core/Snackbar"
+  prop-ContentProps="{\\"aria-describedby\\":\\"browser-warning\\"}"
+  prop-anchorOrigin="{\\"vertical\\":\\"bottom\\",\\"horizontal\\":\\"right\\"}"
+  prop-open={true}
+>
+  <div
+    className="MuiPaper-root MuiSnackbarContent-root makeStyles-browserWarning-1 MuiPaper-elevation6"
+    role="alert"
+  >
+    <div
+      className="MuiSnackbarContent-message"
+    >
+      <span
+        className="makeStyles-browserWarningMessage-2"
+        data-selenium="neon-page.browser-warning"
+        id="browser-warning"
+      >
+        <div>
+          <b>
+            Your browser has limited support on the NEON Data Portal.
+          </b>
+          <br />
+          Some parts of the portal will not work for you.
+          <br />
+          Please use a modern browser for full support.
+          <br />
+          <div
+            className="makeStyles-buttonRow-3"
+          >
+            <a
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-colorInherit"
+              href="https://www.mozilla.org/en-US/firefox/new/"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              tabIndex={0}
+              target="_blank"
+            >
+              <span
+                className="MuiButton-label"
+              >
+                Firefox
+              </span>
+            </a>
+            <a
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-colorInherit"
+              href="https://www.google.com/chrome/"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              tabIndex={0}
+              target="_blank"
+            >
+              <span
+                className="MuiButton-label"
+              >
+                Chrome
+              </span>
+            </a>
+            <a
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-colorInherit"
+              href="https://www.apple.com/safari/"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              tabIndex={0}
+              target="_blank"
+            >
+              <span
+                className="MuiButton-label"
+              >
+                Safari
+              </span>
+            </a>
+            <a
+              aria-disabled={false}
+              className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-colorInherit"
+              href="https://www.microsoft.com/en-us/windows/microsoft-edge"
+              onBlur={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              tabIndex={0}
+              target="_blank"
+            >
+              <span
+                className="MuiButton-label"
+              >
+                Edge
+              </span>
+            </a>
+          </div>
+        </div>
+      </span>
+    </div>
+    <div
+      className="MuiSnackbarContent-action"
+    >
+      <button
+        aria-label="close"
+        className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        tabIndex={0}
+        type="button"
+      >
+        <span
+          className="MuiIconButton-label"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+            />
+          </svg>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+`;

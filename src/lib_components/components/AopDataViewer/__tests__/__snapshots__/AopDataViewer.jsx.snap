@@ -164,26 +164,9 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
             ComponentPath="@material-ui/core/Select"
             prop-aria-labelledby="site-label"
             prop-data-selenium="aop-data-viewer.site-select"
-            prop-input="Non-renderable object (TypeError: Converting circular structure to JSON
-    --> starting at object with constructor 'Object'
-    |     property '_context' -> object with constructor 'Object'
-    --- property 'Provider' closes the circle)"
-            prop-onChange="function
-        /* istanbul ignore next */
-        onChange(event) {
-          /* istanbul ignore next */
-          cov_1pyg19vp3l.f[28]++;
-          cov_1pyg19vp3l.s[129]++;
-          return handleSiteChange(event.target.value);
-        }"
-            prop-renderValue="function
-        /* istanbul ignore next */
-        renderValue(value) {
-          /* istanbul ignore next */
-          cov_1pyg19vp3l.f[29]++;
-          cov_1pyg19vp3l.s[130]++;
-          return value;
-        }"
+            prop-input="Non-renderable object"
+            prop-onChange="[Function]"
+            prop-renderValue="[Function]"
             prop-value="BONA"
           >
             <li
@@ -467,25 +450,11 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
               prop-marks="[{\\"label\\":\\"2017\\",\\"value\\":\\"2017\\"},{\\"label\\":\\"2018\\",\\"value\\":\\"2018\\"}]"
               prop-max={2019}
               prop-min={2016}
-              prop-onChange="function
-        /* istanbul ignore next */
-        onChange(event, newYear) {
-          /* istanbul ignore next */
-          cov_1pyg19vp3l.f[33]++;
-          cov_1pyg19vp3l.s[137]++;
-          return handleSliderChange(parseInt(newYear, 10));
-        }"
+              prop-onChange="[Function]"
               prop-step="null"
               prop-value={2018}
               prop-valueLabelDisplay="auto"
-              prop-valueLabelFormat="function
-        /* istanbul ignore next */
-        valueLabelFormat(value) {
-          /* istanbul ignore next */
-          cov_1pyg19vp3l.f[32]++;
-          cov_1pyg19vp3l.s[136]++;
-          return value;
-        }"
+              prop-valueLabelFormat="[Function]"
             />
           </div>
           <div
@@ -595,26 +564,9 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
           prop-aria-labelledby="flight-label"
           prop-data-selenium="aop-data-viewer.flight-select"
           prop-disabled={true}
-          prop-input="Non-renderable object (TypeError: Converting circular structure to JSON
-    --> starting at object with constructor 'Object'
-    |     property '_context' -> object with constructor 'Object'
-    --- property 'Provider' closes the circle)"
-          prop-onChange="function
-        /* istanbul ignore next */
-        onChange(event) {
-          /* istanbul ignore next */
-          cov_1pyg19vp3l.f[37]++;
-          cov_1pyg19vp3l.s[147]++;
-          return handleFlightChange(parseInt(event.target.value, 10));
-        }"
-          prop-renderValue="function
-        /* istanbul ignore next */
-        renderValue(value) {
-          /* istanbul ignore next */
-          cov_1pyg19vp3l.f[38]++;
-          cov_1pyg19vp3l.s[148]++;
-          return getFlightLabel(value, data[site][year][value - 1].month);
-        }"
+          prop-input="Non-renderable object"
+          prop-onChange="[Function]"
+          prop-renderValue="[Function]"
           prop-value={1}
         >
           <li
@@ -817,26 +769,9 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
             ComponentPath="@material-ui/core/Select"
             prop-aria-labelledby="site-label"
             prop-data-selenium="aop-data-viewer.site-select"
-            prop-input="Non-renderable object (TypeError: Converting circular structure to JSON
-    --> starting at object with constructor 'Object'
-    |     property '_context' -> object with constructor 'Object'
-    --- property 'Provider' closes the circle)"
-            prop-onChange="function
-        /* istanbul ignore next */
-        onChange(event) {
-          /* istanbul ignore next */
-          cov_1pyg19vp3l.f[28]++;
-          cov_1pyg19vp3l.s[129]++;
-          return handleSiteChange(event.target.value);
-        }"
-            prop-renderValue="function
-        /* istanbul ignore next */
-        renderValue(value) {
-          /* istanbul ignore next */
-          cov_1pyg19vp3l.f[29]++;
-          cov_1pyg19vp3l.s[130]++;
-          return value;
-        }"
+            prop-input="Non-renderable object"
+            prop-onChange="[Function]"
+            prop-renderValue="[Function]"
             prop-value="HEAL"
           >
             <li
@@ -1117,25 +1052,11 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
               prop-marks="[{\\"label\\":\\"2017\\",\\"value\\":\\"2017\\"},{\\"label\\":\\"2018\\",\\"value\\":\\"2018\\"}]"
               prop-max={2019}
               prop-min={2016}
-              prop-onChange="function
-        /* istanbul ignore next */
-        onChange(event, newYear) {
-          /* istanbul ignore next */
-          cov_1pyg19vp3l.f[33]++;
-          cov_1pyg19vp3l.s[137]++;
-          return handleSliderChange(parseInt(newYear, 10));
-        }"
+              prop-onChange="[Function]"
               prop-step="null"
               prop-value={2017}
               prop-valueLabelDisplay="auto"
-              prop-valueLabelFormat="function
-        /* istanbul ignore next */
-        valueLabelFormat(value) {
-          /* istanbul ignore next */
-          cov_1pyg19vp3l.f[32]++;
-          cov_1pyg19vp3l.s[136]++;
-          return value;
-        }"
+              prop-valueLabelFormat="[Function]"
             />
           </div>
           <div
@@ -1248,26 +1169,9 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
           prop-aria-labelledby="flight-label"
           prop-data-selenium="aop-data-viewer.flight-select"
           prop-disabled={true}
-          prop-input="Non-renderable object (TypeError: Converting circular structure to JSON
-    --> starting at object with constructor 'Object'
-    |     property '_context' -> object with constructor 'Object'
-    --- property 'Provider' closes the circle)"
-          prop-onChange="function
-        /* istanbul ignore next */
-        onChange(event) {
-          /* istanbul ignore next */
-          cov_1pyg19vp3l.f[37]++;
-          cov_1pyg19vp3l.s[147]++;
-          return handleFlightChange(parseInt(event.target.value, 10));
-        }"
-          prop-renderValue="function
-        /* istanbul ignore next */
-        renderValue(value) {
-          /* istanbul ignore next */
-          cov_1pyg19vp3l.f[38]++;
-          cov_1pyg19vp3l.s[148]++;
-          return getFlightLabel(value, data[site][year][value - 1].month);
-        }"
+          prop-input="Non-renderable object"
+          prop-onChange="[Function]"
+          prop-renderValue="[Function]"
           prop-value={1}
         >
           <li
@@ -1470,26 +1374,9 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
             ComponentPath="@material-ui/core/Select"
             prop-aria-labelledby="site-label"
             prop-data-selenium="aop-data-viewer.site-select"
-            prop-input="Non-renderable object (TypeError: Converting circular structure to JSON
-    --> starting at object with constructor 'Object'
-    |     property '_context' -> object with constructor 'Object'
-    --- property 'Provider' closes the circle)"
-            prop-onChange="function
-        /* istanbul ignore next */
-        onChange(event) {
-          /* istanbul ignore next */
-          cov_1pyg19vp3l.f[28]++;
-          cov_1pyg19vp3l.s[129]++;
-          return handleSiteChange(event.target.value);
-        }"
-            prop-renderValue="function
-        /* istanbul ignore next */
-        renderValue(value) {
-          /* istanbul ignore next */
-          cov_1pyg19vp3l.f[29]++;
-          cov_1pyg19vp3l.s[130]++;
-          return value;
-        }"
+            prop-input="Non-renderable object"
+            prop-onChange="[Function]"
+            prop-renderValue="[Function]"
             prop-value="SJER"
           >
             <li
@@ -1770,25 +1657,11 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
               prop-marks="[{\\"label\\":\\"2017\\",\\"value\\":\\"2017\\"},{\\"label\\":\\"2018\\",\\"value\\":\\"2018\\"},{\\"label\\":\\"2019\\",\\"value\\":\\"2019\\"}]"
               prop-max={2020}
               prop-min={2016}
-              prop-onChange="function
-        /* istanbul ignore next */
-        onChange(event, newYear) {
-          /* istanbul ignore next */
-          cov_1pyg19vp3l.f[33]++;
-          cov_1pyg19vp3l.s[137]++;
-          return handleSliderChange(parseInt(newYear, 10));
-        }"
+              prop-onChange="[Function]"
               prop-step="null"
               prop-value={2017}
               prop-valueLabelDisplay="auto"
-              prop-valueLabelFormat="function
-        /* istanbul ignore next */
-        valueLabelFormat(value) {
-          /* istanbul ignore next */
-          cov_1pyg19vp3l.f[32]++;
-          cov_1pyg19vp3l.s[136]++;
-          return value;
-        }"
+              prop-valueLabelFormat="[Function]"
             />
           </div>
           <div
@@ -1901,26 +1774,9 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
           prop-aria-labelledby="flight-label"
           prop-data-selenium="aop-data-viewer.flight-select"
           prop-disabled={false}
-          prop-input="Non-renderable object (TypeError: Converting circular structure to JSON
-    --> starting at object with constructor 'Object'
-    |     property '_context' -> object with constructor 'Object'
-    --- property 'Provider' closes the circle)"
-          prop-onChange="function
-        /* istanbul ignore next */
-        onChange(event) {
-          /* istanbul ignore next */
-          cov_1pyg19vp3l.f[37]++;
-          cov_1pyg19vp3l.s[147]++;
-          return handleFlightChange(parseInt(event.target.value, 10));
-        }"
-          prop-renderValue="function
-        /* istanbul ignore next */
-        renderValue(value) {
-          /* istanbul ignore next */
-          cov_1pyg19vp3l.f[38]++;
-          cov_1pyg19vp3l.s[148]++;
-          return getFlightLabel(value, data[site][year][value - 1].month);
-        }"
+          prop-input="Non-renderable object"
+          prop-onChange="[Function]"
+          prop-renderValue="[Function]"
           prop-value={2}
         >
           <li
@@ -2146,26 +2002,9 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
             ComponentPath="@material-ui/core/Select"
             prop-aria-labelledby="site-label"
             prop-data-selenium="aop-data-viewer.site-select"
-            prop-input="Non-renderable object (TypeError: Converting circular structure to JSON
-    --> starting at object with constructor 'Object'
-    |     property '_context' -> object with constructor 'Object'
-    --- property 'Provider' closes the circle)"
-            prop-onChange="function
-        /* istanbul ignore next */
-        onChange(event) {
-          /* istanbul ignore next */
-          cov_1pyg19vp3l.f[28]++;
-          cov_1pyg19vp3l.s[129]++;
-          return handleSiteChange(event.target.value);
-        }"
-            prop-renderValue="function
-        /* istanbul ignore next */
-        renderValue(value) {
-          /* istanbul ignore next */
-          cov_1pyg19vp3l.f[29]++;
-          cov_1pyg19vp3l.s[130]++;
-          return value;
-        }"
+            prop-input="Non-renderable object"
+            prop-onChange="[Function]"
+            prop-renderValue="[Function]"
             prop-value="BONA"
           >
             <li
@@ -2449,25 +2288,11 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
               prop-marks="[{\\"label\\":\\"2017\\",\\"value\\":\\"2017\\"},{\\"label\\":\\"2018\\",\\"value\\":\\"2018\\"}]"
               prop-max={2019}
               prop-min={2016}
-              prop-onChange="function
-        /* istanbul ignore next */
-        onChange(event, newYear) {
-          /* istanbul ignore next */
-          cov_1pyg19vp3l.f[33]++;
-          cov_1pyg19vp3l.s[137]++;
-          return handleSliderChange(parseInt(newYear, 10));
-        }"
+              prop-onChange="[Function]"
               prop-step="null"
               prop-value={2018}
               prop-valueLabelDisplay="auto"
-              prop-valueLabelFormat="function
-        /* istanbul ignore next */
-        valueLabelFormat(value) {
-          /* istanbul ignore next */
-          cov_1pyg19vp3l.f[32]++;
-          cov_1pyg19vp3l.s[136]++;
-          return value;
-        }"
+              prop-valueLabelFormat="[Function]"
             />
           </div>
           <div
@@ -2577,26 +2402,9 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
           prop-aria-labelledby="flight-label"
           prop-data-selenium="aop-data-viewer.flight-select"
           prop-disabled={true}
-          prop-input="Non-renderable object (TypeError: Converting circular structure to JSON
-    --> starting at object with constructor 'Object'
-    |     property '_context' -> object with constructor 'Object'
-    --- property 'Provider' closes the circle)"
-          prop-onChange="function
-        /* istanbul ignore next */
-        onChange(event) {
-          /* istanbul ignore next */
-          cov_1pyg19vp3l.f[37]++;
-          cov_1pyg19vp3l.s[147]++;
-          return handleFlightChange(parseInt(event.target.value, 10));
-        }"
-          prop-renderValue="function
-        /* istanbul ignore next */
-        renderValue(value) {
-          /* istanbul ignore next */
-          cov_1pyg19vp3l.f[38]++;
-          cov_1pyg19vp3l.s[148]++;
-          return getFlightLabel(value, data[site][year][value - 1].month);
-        }"
+          prop-input="Non-renderable object"
+          prop-onChange="[Function]"
+          prop-renderValue="[Function]"
           prop-value={1}
         >
           <li
@@ -2794,26 +2602,9 @@ exports[`AopDataViewer renders with title disabled 1`] = `
             ComponentPath="@material-ui/core/Select"
             prop-aria-labelledby="site-label"
             prop-data-selenium="aop-data-viewer.site-select"
-            prop-input="Non-renderable object (TypeError: Converting circular structure to JSON
-    --> starting at object with constructor 'Object'
-    |     property '_context' -> object with constructor 'Object'
-    --- property 'Provider' closes the circle)"
-            prop-onChange="function
-        /* istanbul ignore next */
-        onChange(event) {
-          /* istanbul ignore next */
-          cov_1pyg19vp3l.f[28]++;
-          cov_1pyg19vp3l.s[129]++;
-          return handleSiteChange(event.target.value);
-        }"
-            prop-renderValue="function
-        /* istanbul ignore next */
-        renderValue(value) {
-          /* istanbul ignore next */
-          cov_1pyg19vp3l.f[29]++;
-          cov_1pyg19vp3l.s[130]++;
-          return value;
-        }"
+            prop-input="Non-renderable object"
+            prop-onChange="[Function]"
+            prop-renderValue="[Function]"
             prop-value="BONA"
           >
             <li
@@ -3097,25 +2888,11 @@ exports[`AopDataViewer renders with title disabled 1`] = `
               prop-marks="[{\\"label\\":\\"2017\\",\\"value\\":\\"2017\\"},{\\"label\\":\\"2018\\",\\"value\\":\\"2018\\"}]"
               prop-max={2019}
               prop-min={2016}
-              prop-onChange="function
-        /* istanbul ignore next */
-        onChange(event, newYear) {
-          /* istanbul ignore next */
-          cov_1pyg19vp3l.f[33]++;
-          cov_1pyg19vp3l.s[137]++;
-          return handleSliderChange(parseInt(newYear, 10));
-        }"
+              prop-onChange="[Function]"
               prop-step="null"
               prop-value={2018}
               prop-valueLabelDisplay="auto"
-              prop-valueLabelFormat="function
-        /* istanbul ignore next */
-        valueLabelFormat(value) {
-          /* istanbul ignore next */
-          cov_1pyg19vp3l.f[32]++;
-          cov_1pyg19vp3l.s[136]++;
-          return value;
-        }"
+              prop-valueLabelFormat="[Function]"
             />
           </div>
           <div
@@ -3225,26 +3002,9 @@ exports[`AopDataViewer renders with title disabled 1`] = `
           prop-aria-labelledby="flight-label"
           prop-data-selenium="aop-data-viewer.flight-select"
           prop-disabled={true}
-          prop-input="Non-renderable object (TypeError: Converting circular structure to JSON
-    --> starting at object with constructor 'Object'
-    |     property '_context' -> object with constructor 'Object'
-    --- property 'Provider' closes the circle)"
-          prop-onChange="function
-        /* istanbul ignore next */
-        onChange(event) {
-          /* istanbul ignore next */
-          cov_1pyg19vp3l.f[37]++;
-          cov_1pyg19vp3l.s[147]++;
-          return handleFlightChange(parseInt(event.target.value, 10));
-        }"
-          prop-renderValue="function
-        /* istanbul ignore next */
-        renderValue(value) {
-          /* istanbul ignore next */
-          cov_1pyg19vp3l.f[38]++;
-          cov_1pyg19vp3l.s[148]++;
-          return getFlightLabel(value, data[site][year][value - 1].month);
-        }"
+          prop-input="Non-renderable object"
+          prop-onChange="[Function]"
+          prop-renderValue="[Function]"
           prop-value={1}
         >
           <li
