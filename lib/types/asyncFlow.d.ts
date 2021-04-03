@@ -49,6 +49,7 @@ export interface AsyncCompletedAction extends AsyncAction {
 export interface AsyncErrorAction extends AsyncAction {
     error: any;
     message: Nullable<string>;
+    data?: any;
 }
 /**
  * Default action function declaration for async flow
@@ -61,7 +62,7 @@ export declare type AsyncActionCompletedFunction = (data: any) => AsyncCompleted
 /**
  * Error action function declaration for async flow
  */
-export declare type AsyncActionErrorFunction = (error: any, message: Nullable<string>) => AsyncErrorAction;
+export declare type AsyncActionErrorFunction = (error: any, message: Nullable<string>, data?: any) => AsyncErrorAction;
 /**
  * Parser function declaration for parsing the raw response to types result data
  */

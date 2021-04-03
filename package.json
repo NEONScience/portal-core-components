@@ -49,6 +49,7 @@
     "react-router-dom": "^5.2.0",
     "react-select": "^3.0.8",
     "redux": "^4.0.5",
+    "redux-observable": "^1.2.0",
     "rxjs": "6.3.3",
     "sockjs-client": "^1.4.0",
     "tinycolor2": "^1.4.1",

@@ -1880,13 +1880,16 @@ export const getMapStateForManualLocationData = (state) => {
   } else {
     newState.map.center = findCentroid(locationCenters);
     const phantomZoomMap = getPhantomLeafletMap(newState);
-    phantomZoomMap.fitBounds(bounds, { animate: false, padding: [50, 50] });
+    phantomZoomMap.fitBounds(bounds, { animate: false, padding: [10, 10] });
     newState.map.zoom = phantomZoomMap.getZoom();
     phantomZoomMap.remove();
   }
 
   // Regenerate icons and bounds if we have a valid zoom
   if (newState.map.zoom !== null) {
+    // Bound the minimum zoom level to prevent too wide of bounds
+    // from not filling the entirety of the map display
+    newState.map.zoom = Math.max(newState.map.zoom, 3);
     newState.map.zoomedIcons = getZoomedIcons(newState.map.zoom);
     const phantomMap = getPhantomLeafletMap(newState);
     const newBounds = phantomMap.getBounds() || null;
