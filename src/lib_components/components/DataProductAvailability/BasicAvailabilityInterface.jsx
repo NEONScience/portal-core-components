@@ -44,6 +44,7 @@ import AvailabilityPending from './AvailabilityPending';
 import BasicAvailabilityGrid from './BasicAvailabilityGrid';
 import BasicAvailabilityKey from './BasicAvailabilityKey';
 import { SVG, TIME, AvailabilityPropTypes } from './AvailabilityUtils';
+import { SvgDefs } from './AvailabilitySvgComponents';
 
 /**
    Setup: CSS classes
@@ -229,7 +230,7 @@ const BasicAvailabilityInterface = (props) => {
     dispatchSelection,
   ] = DownloadDataContext.useDownloadDataState();
 
-  const { disableSelection } = props;
+  const { disableSelection, delineateRelease } = props;
   const selectionEnabled = !disableSelection
     && requiredSteps.some((step) => step.key === 'sitesAndDateRange');
 
@@ -374,18 +375,31 @@ const BasicAvailabilityInterface = (props) => {
     siteCodes = contextSiteCodes;
   }
   siteCodes.forEach((site) => {
-    const { siteCode, availableMonths } = site;
+    const { siteCode, availableMonths, availableReleases } = site;
     if (!allSites[siteCode]) { return; }
     const { stateCode, domainCode } = allSites[siteCode];
     if (!downloadContextIsActive) { sites.validValues.push(siteCode); }
+    let provAvailableMonths = [];
+    if (delineateRelease && Array.isArray(availableReleases)) {
+      const provRelease = availableReleases.find((value) => value.release === 'PROVISIONAL');
+      if (provRelease) {
+        provAvailableMonths = provRelease.availableMonths;
+      }
+    }
     views.sites.rows[siteCode] = {};
     views.states.rows[stateCode] = views.states.rows[stateCode] || {};
     views.domains.rows[domainCode] = views.domains.rows[domainCode] || {};
     availableMonths.forEach((month) => {
-      views.summary.rows.summary[month] = 'available';
-      views.sites.rows[siteCode][month] = 'available';
-      views.states.rows[stateCode][month] = 'available';
-      views.domains.rows[domainCode][month] = 'available';
+      let status = 'available';
+      if (delineateRelease && provAvailableMonths && (provAvailableMonths.length > 0)) {
+        if (provAvailableMonths.includes(month)) {
+          status = 'available-provisional';
+        }
+      }
+      views.summary.rows.summary[month] = status;
+      views.sites.rows[siteCode][month] = status;
+      views.states.rows[stateCode][month] = status;
+      views.domains.rows[domainCode][month] = status;
     });
   });
   if (!downloadContextIsActive) {
@@ -692,6 +706,7 @@ const BasicAvailabilityInterface = (props) => {
       data-selenium="data-product-availability"
       {...other}
     >
+      <SvgDefs />
       <Grid
         container
         spacing={2}
@@ -720,7 +735,11 @@ const BasicAvailabilityInterface = (props) => {
           >
             Key:
           </Typography>
-          <BasicAvailabilityKey selectionEnabled={selectionEnabled} style={{ flexGrow: 1 }} />
+          <BasicAvailabilityKey
+            selectionEnabled={selectionEnabled}
+            delineateRelease={delineateRelease}
+            style={{ flexGrow: 1 }}
+          />
         </Grid>
       </Grid>
       <svg
@@ -740,6 +759,7 @@ BasicAvailabilityInterface.propTypes = {
   sortMethod: PropTypes.oneOf(['sites', 'states', 'domains']),
   sortDirection: PropTypes.oneOf(['ASC', 'DESC']),
   disableSelection: PropTypes.bool,
+  delineateRelease: PropTypes.bool,
 };
 
 BasicAvailabilityInterface.defaultProps = {
@@ -748,6 +768,7 @@ BasicAvailabilityInterface.defaultProps = {
   sortMethod: null,
   sortDirection: 'ASC',
   disableSelection: false,
+  delineateRelease: false,
 };
 
 export default BasicAvailabilityInterface;

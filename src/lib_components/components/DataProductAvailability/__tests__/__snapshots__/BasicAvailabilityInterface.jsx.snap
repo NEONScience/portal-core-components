@@ -10,6 +10,131 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
     }
   }
 >
+  <svg
+    height="0px"
+    width="0px"
+  >
+    <defs>
+      <pattern
+        height={3}
+        id="availableProvisionalPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#002c77"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#c5c6d9"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={3}
+        id="beingProcessedPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#002c77"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#ffffff"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={3}
+        id="delayedPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#f8bb32"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#ffffff"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={3}
+        id="partialSelectionPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#5ca6e3"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#b8d8f4"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedSomeAvailabilityPattern"
+        patternContentUnits="objectBoundingBox"
+        width={1}
+      >
+        <path
+          d="M 0 0 V 1 L 1 0 Z"
+          fill="#002c77"
+        />
+        <path
+          d="M 1 1 V 0 L 0 1 Z"
+          fill="#f8bb32"
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedNoAvailabilityPattern"
+        patternContentUnits="objectBoundingBox"
+        width={1}
+      >
+        <path
+          d="M 0 0 V 1 L 1 0 Z"
+          fill="#d7d9d9"
+        />
+        <path
+          d="M 1 1 V 0 L 0 1 Z"
+          fill="#f8bb32"
+        />
+      </pattern>
+    </defs>
+  </svg>
   <div
     className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-direction-xs-row-reverse"
     style={
@@ -528,7 +653,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
         <svg
           className="makeStyles-legendSvg-26"
           height={36}
-          width="90"
+          width={90}
         >
           <rect
             fill="#002c77"
@@ -652,6 +777,131 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
     }
   }
 >
+  <svg
+    height="0px"
+    width="0px"
+  >
+    <defs>
+      <pattern
+        height={3}
+        id="availableProvisionalPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#002c77"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#c5c6d9"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={3}
+        id="beingProcessedPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#002c77"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#ffffff"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={3}
+        id="delayedPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#f8bb32"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#ffffff"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={3}
+        id="partialSelectionPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#5ca6e3"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#b8d8f4"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedSomeAvailabilityPattern"
+        patternContentUnits="objectBoundingBox"
+        width={1}
+      >
+        <path
+          d="M 0 0 V 1 L 1 0 Z"
+          fill="#002c77"
+        />
+        <path
+          d="M 1 1 V 0 L 0 1 Z"
+          fill="#f8bb32"
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedNoAvailabilityPattern"
+        patternContentUnits="objectBoundingBox"
+        width={1}
+      >
+        <path
+          d="M 0 0 V 1 L 1 0 Z"
+          fill="#d7d9d9"
+        />
+        <path
+          d="M 1 1 V 0 L 0 1 Z"
+          fill="#f8bb32"
+        />
+      </pattern>
+    </defs>
+  </svg>
   <div
     className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-direction-xs-row-reverse"
     style={
@@ -1170,7 +1420,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
         <svg
           className="makeStyles-legendSvg-26"
           height={36}
-          width="90"
+          width={90}
         >
           <rect
             fill="#002c77"
@@ -1294,6 +1544,131 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
     }
   }
 >
+  <svg
+    height="0px"
+    width="0px"
+  >
+    <defs>
+      <pattern
+        height={3}
+        id="availableProvisionalPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#002c77"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#c5c6d9"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={3}
+        id="beingProcessedPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#002c77"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#ffffff"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={3}
+        id="delayedPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#f8bb32"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#ffffff"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={3}
+        id="partialSelectionPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#5ca6e3"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#b8d8f4"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedSomeAvailabilityPattern"
+        patternContentUnits="objectBoundingBox"
+        width={1}
+      >
+        <path
+          d="M 0 0 V 1 L 1 0 Z"
+          fill="#002c77"
+        />
+        <path
+          d="M 1 1 V 0 L 0 1 Z"
+          fill="#f8bb32"
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedNoAvailabilityPattern"
+        patternContentUnits="objectBoundingBox"
+        width={1}
+      >
+        <path
+          d="M 0 0 V 1 L 1 0 Z"
+          fill="#d7d9d9"
+        />
+        <path
+          d="M 1 1 V 0 L 0 1 Z"
+          fill="#f8bb32"
+        />
+      </pattern>
+    </defs>
+  </svg>
   <div
     className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-direction-xs-row-reverse"
     style={
@@ -1407,6 +1782,131 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
     }
   }
 >
+  <svg
+    height="0px"
+    width="0px"
+  >
+    <defs>
+      <pattern
+        height={3}
+        id="availableProvisionalPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#002c77"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#c5c6d9"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={3}
+        id="beingProcessedPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#002c77"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#ffffff"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={3}
+        id="delayedPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#f8bb32"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#ffffff"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={3}
+        id="partialSelectionPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#5ca6e3"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#b8d8f4"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedSomeAvailabilityPattern"
+        patternContentUnits="objectBoundingBox"
+        width={1}
+      >
+        <path
+          d="M 0 0 V 1 L 1 0 Z"
+          fill="#002c77"
+        />
+        <path
+          d="M 1 1 V 0 L 0 1 Z"
+          fill="#f8bb32"
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedNoAvailabilityPattern"
+        patternContentUnits="objectBoundingBox"
+        width={1}
+      >
+        <path
+          d="M 0 0 V 1 L 1 0 Z"
+          fill="#d7d9d9"
+        />
+        <path
+          d="M 1 1 V 0 L 0 1 Z"
+          fill="#f8bb32"
+        />
+      </pattern>
+    </defs>
+  </svg>
   <div
     className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-direction-xs-row-reverse"
     style={
@@ -1925,7 +2425,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
         <svg
           className="makeStyles-legendSvg-26"
           height={36}
-          width="90"
+          width={90}
         >
           <rect
             fill="#002c77"
@@ -2049,6 +2549,131 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
     }
   }
 >
+  <svg
+    height="0px"
+    width="0px"
+  >
+    <defs>
+      <pattern
+        height={3}
+        id="availableProvisionalPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#002c77"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#c5c6d9"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={3}
+        id="beingProcessedPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#002c77"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#ffffff"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={3}
+        id="delayedPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#f8bb32"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#ffffff"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={3}
+        id="partialSelectionPattern"
+        patternTransform="rotate(45)"
+        patternUnits="userSpaceOnUse"
+        width={7}
+      >
+        <rect
+          fill="#5ca6e3"
+          height={1.25}
+          width={7}
+          x={0}
+          y={0}
+        />
+        <rect
+          fill="#b8d8f4"
+          height={1.75}
+          width={7}
+          x={0}
+          y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedSomeAvailabilityPattern"
+        patternContentUnits="objectBoundingBox"
+        width={1}
+      >
+        <path
+          d="M 0 0 V 1 L 1 0 Z"
+          fill="#002c77"
+        />
+        <path
+          d="M 1 1 V 0 L 0 1 Z"
+          fill="#f8bb32"
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedNoAvailabilityPattern"
+        patternContentUnits="objectBoundingBox"
+        width={1}
+      >
+        <path
+          d="M 0 0 V 1 L 1 0 Z"
+          fill="#d7d9d9"
+        />
+        <path
+          d="M 1 1 V 0 L 0 1 Z"
+          fill="#f8bb32"
+        />
+      </pattern>
+    </defs>
+  </svg>
   <div
     className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-direction-xs-row-reverse"
     style={
@@ -2746,7 +3371,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
         <svg
           className="makeStyles-legendSvg-26"
           height={36}
-          width="90"
+          width={90}
         >
           <rect
             fill="#002c77"

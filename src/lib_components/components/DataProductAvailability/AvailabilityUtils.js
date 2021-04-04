@@ -22,6 +22,10 @@ export const VALID_ENHANCED_STATUSES = {
     title: 'Available',
     description: 'Data have been published and are available for download',
   },
+  'available-provisional': {
+    title: 'Provisional Available',
+    description: 'Provisional data have been published and are available for download',
+  },
   delayed: {
     title: 'Delayed',
     description: 'Data should be available for download but something has prevented publication',
@@ -73,6 +77,12 @@ export const AvailabilityPropTypes = {
     PropTypes.shape({
       siteCode: PropTypes.string.isRequired,
       availableMonths: PropTypes.arrayOf(PropTypes.string).isRequired,
+      availableReleases: PropTypes.arrayOf(
+        PropTypes.shape({
+          release: PropTypes.string.isRequired,
+          availableMonths: PropTypes.arrayOf(PropTypes.string).isRequired,
+        }),
+      ),
     }),
   ),
   enhancedSites: PropTypes.arrayOf(

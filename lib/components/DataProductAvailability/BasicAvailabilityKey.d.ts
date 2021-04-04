@@ -5,10 +5,13 @@ declare function BasicAvailabilityKey(props: any): JSX.Element;
 declare namespace BasicAvailabilityKey {
     export namespace propTypes {
         export const selectionEnabled: PropTypes.Requireable<boolean>;
+        export const delineateRelease: PropTypes.Requireable<boolean>;
     }
     export namespace defaultProps {
         const selectionEnabled_1: boolean;
         export { selectionEnabled_1 as selectionEnabled };
+        const delineateRelease_1: boolean;
+        export { delineateRelease_1 as delineateRelease };
     }
 }
 export default BasicAvailabilityKey;

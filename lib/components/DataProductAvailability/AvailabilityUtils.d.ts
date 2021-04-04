@@ -48,6 +48,10 @@ export namespace AvailabilityPropTypes {
     export const basicSiteCodes: PropTypes.Requireable<(PropTypes.InferProps<{
         siteCode: PropTypes.Validator<string>;
         availableMonths: PropTypes.Validator<import("../../types/core").Nullable<string>[]>;
+        availableReleases: PropTypes.Requireable<(PropTypes.InferProps<{
+            release: PropTypes.Validator<string>;
+            availableMonths: PropTypes.Validator<import("../../types/core").Nullable<string>[]>;
+        }> | null | undefined)[]>;
     }> | null | undefined)[]>;
     export const enhancedSites: PropTypes.Requireable<(PropTypes.InferProps<{
         siteCode: PropTypes.Validator<string>;

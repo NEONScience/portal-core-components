@@ -13,6 +13,19 @@ exports[`DataProductAvailability - AvailabilitySvgComponents renders JsxCell cor
 />
 `;
 
+exports[`DataProductAvailability - AvailabilitySvgComponents renders JsxCell correctly for every status JsxCell for status: available-provisional 1`] = `
+<rect
+  fill="url(#availableProvisionalPattern)"
+  height="10.5px"
+  rx="1px"
+  stroke="#002c77"
+  strokeWidth="1.5px"
+  width="5.5px"
+  x={10.75}
+  y={20.75}
+/>
+`;
+
 exports[`DataProductAvailability - AvailabilitySvgComponents renders JsxCell correctly for every status JsxCell for status: being processed 1`] = `
 <rect
   fill="url(#beingProcessedPattern)"
@@ -136,6 +149,28 @@ exports[`DataProductAvailability - AvailabilitySvgComponents renders SvgDefs cor
   width="0px"
 >
   <defs>
+    <pattern
+      height={3}
+      id="availableProvisionalPattern"
+      patternTransform="rotate(45)"
+      patternUnits="userSpaceOnUse"
+      width={7}
+    >
+      <rect
+        fill="#002c77"
+        height={1.25}
+        width={7}
+        x={0}
+        y={0}
+      />
+      <rect
+        fill="#c5c6d9"
+        height={1.75}
+        width={7}
+        x={0}
+        y={1.25}
+      />
+    </pattern>
     <pattern
       height={3}
       id="beingProcessedPattern"

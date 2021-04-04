@@ -8,6 +8,7 @@ import uniqueId from 'lodash/uniqueId';
 import Theme, { COLORS } from '../Theme/Theme';
 
 import { SVG, TIME, SVG_STYLES } from './AvailabilityUtils';
+import { CELL_ATTRS } from './AvailabilitySvgComponents';
 
 /**
  * BasicAvailabilityGrid generator function
@@ -587,24 +588,27 @@ export default function BasicAvailabilityGrid(config) {
       .attr('transform', getRowTranslation)
       .each((rowKey, rowIdx, gNodes) => {
         const rowData = data.rows[rowKey];
+        const getCellAttr = (month, attr) => {
+          const status = rowData[month];
+          return (
+            !CELL_ATTRS[status]
+              ? CELL_ATTRS['not available'][attr] || null
+              : CELL_ATTRS[status][attr] || null
+          );
+        };
         select(gNodes[rowIdx])
           .selectAll('rect')
           .data(() => getYearMonthsInView(svgWidth, getTimeOffset()))
           .join('rect')
-          .attr('x', (yearMonth) => getYearMonthStartX(yearMonth))
-          .attr('y', 0)
-          .attr('width', `${SVG.CELL_WIDTH}px`)
-          .attr('height', `${SVG.CELL_HEIGHT}px`)
-          .attr('rx', `${SVG.CELL_RX}px`)
           .attr('cursor', 'pointer')
-          .attr('fill', (d) => {
-            switch (rowData[d]) {
-              case 'available':
-                return Theme.palette.secondary.main;
-              default:
-                return Theme.palette.grey[200];
-            }
-          });
+          .attr('x', (month) => getYearMonthStartX(month) + (getCellAttr(month, 'nudge') || 0))
+          .attr('y', (month) => getCellAttr(month, 'nudge') || 0)
+          .attr('rx', `${SVG.CELL_RX}px`)
+          .attr('width', (month) => getCellAttr(month, 'width'))
+          .attr('height', (month) => getCellAttr(month, 'height'))
+          .attr('fill', (month) => getCellAttr(month, 'fill'))
+          .attr('stroke', (month) => getCellAttr(month, 'stroke'))
+          .attr('stroke-width', (month) => getCellAttr(month, 'strokeWidth'));
       });
   };
 
