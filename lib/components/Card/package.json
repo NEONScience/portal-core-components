@@ -2,5 +2,5 @@
   "private": true,
   "name": "base-card",
   "main": "./BaseCard.tsx",
-  "module": "./BaseCard.ts"
+  "module": "./BaseCard.tsx"
 }

@@ -111,7 +111,7 @@ const BasicAvailabilityInterface = (props) => {
   const atXs = useMediaQuery(Theme.breakpoints.only('xs'));
   const atSm = useMediaQuery(Theme.breakpoints.only('sm'));
   const siteChipClasses = useSiteChipStyles(Theme);
-  const { ...other } = props;
+  const { dataProducts, ...other } = props;
 
   const [
     { data: neonContextData, isFinal: neonContextIsFinal, hasError: neonContextHasError },
@@ -146,6 +146,11 @@ const BasicAvailabilityInterface = (props) => {
     },
   };
   const SORT_DIRECTIONS = ['ASC', 'DESC'];
+
+  const PRODUCT_LOOKUP = {};
+  dataProducts.forEach((product) => {
+    PRODUCT_LOOKUP[product.dataProductCode] = product.dataProductTitle;
+  });
 
   /**
      State: Views
@@ -216,7 +221,7 @@ const BasicAvailabilityInterface = (props) => {
       rows: {},
       getLabel: {
         text: (key) => key,
-        title: (key) => key,
+        title: (key) => PRODUCT_LOOKUP[key],
       },
     },
   };
@@ -412,7 +417,6 @@ const BasicAvailabilityInterface = (props) => {
       views.domains.rows[domainCode][month] = status;
     });
   });
-  const { dataProducts } = props;
   dataProducts.forEach((product) => {
     const { dataProductCode, availableMonths, availableReleases } = product;
     let provAvailableMonths = [];
