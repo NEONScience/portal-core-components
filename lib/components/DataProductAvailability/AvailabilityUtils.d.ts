@@ -14,6 +14,10 @@ export const VALID_ENHANCED_STATUSES: {
         title: string;
         description: string;
     };
+    'available-provisional': {
+        title: string;
+        description: string;
+    };
     delayed: {
         title: string;
         description: string;
@@ -62,6 +66,15 @@ export namespace AvailabilityPropTypes {
             months: PropTypes.Validator<{
                 [x: string]: import("../../types/core").Nullable<string>;
             }>;
+        }> | null | undefined)[]>;
+    }> | null | undefined)[]>;
+    export const dataProducts: PropTypes.Requireable<(PropTypes.InferProps<{
+        dataProductCode: PropTypes.Validator<string>;
+        dataProductTitle: PropTypes.Validator<string>;
+        availableMonths: PropTypes.Validator<import("../../types/core").Nullable<string>[]>;
+        availableReleases: PropTypes.Requireable<(PropTypes.InferProps<{
+            release: PropTypes.Validator<string>;
+            availableMonths: PropTypes.Validator<import("../../types/core").Nullable<string>[]>;
         }> | null | undefined)[]>;
     }> | null | undefined)[]>;
 }

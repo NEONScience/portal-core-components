@@ -10,8 +10,9 @@ export interface BaseCardClasses {
 }
 export interface BaseCardProps {
     type: CardType;
-    title: string;
     calloutClasses: BaseCardClasses;
+    title?: string;
+    titleContent?: React.ReactNode;
     message?: string;
 }
 declare const BaseCard: React.FC<BaseCardProps>;

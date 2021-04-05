@@ -120,9 +120,10 @@ export default function BasicAvailabilityGrid(config) {
      feed data to d3 selections in order to only draw what will actually
      be visible.
   */
-  const getLabelWidth = () => (
-    data.view === 'ungrouped' ? SVG.UNGROUPED_LABEL_WIDTH : SVG.GROUPED_LABEL_WIDTH
-  );
+  const getLabelWidth = () => {
+    if (data.view === 'products') return SVG.PRODUCT_LABEL_WIDTH;
+    return data.view === 'ungrouped' ? SVG.UNGROUPED_LABEL_WIDTH : SVG.GROUPED_LABEL_WIDTH;
+  };
   const getMinTimeOffset = () => 0 - (SVG.ABS_MAX_DATA_WIDTH - (svgWidth - getLabelWidth()));
   const getYearStartX = (year) => {
     const intYear = parseInt(year, 10);

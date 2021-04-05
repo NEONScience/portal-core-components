@@ -9,7 +9,7 @@
    import 'path/to/src/__mocks__/NeonContext';
 */
 
-import sitesJSON from '../lib_components/staticJSON/sites.json';
+import sitesJSON from '../sampleData/sites.json';
 import statesJSON from '../lib_components/staticJSON/states.json';
 import domainsJSON from '../lib_components/staticJSON/domains.json';
 import bundlesJSON from '../lib_components/staticJSON/bundles.json';

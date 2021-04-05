@@ -19,6 +19,7 @@ import DownloadDataContext from '../DownloadDataContext/DownloadDataContext';
 import Theme from '../Theme/Theme';
 
 import sampleProductData from '../../../sampleData/DP1.00001.001.json';
+import sampleSiteData from '../../../sampleData/CPER.json';
 
 import crunch from '../../../sampleData/DataProductAvailability/crunch';
 
@@ -222,6 +223,32 @@ const siteCodes = [...];
   view="ungrouped"
   sortMethod="domains"
   sortDirection="DESC"
+/>
+        `}
+      </CodeBlock>
+
+      <Divider className={classes.divider} />
+      <Typography variant="h6" component="h4" gutterBottom>Site Centric View</Typography>
+
+      <DocBlock>
+        The DataProductAvailability visualization can present data over time with
+        a site centric view, showing product availability at a particular site.
+      </DocBlock>
+      <ExampleBlock>
+        <DataProductAvailability
+          dataProducts={sampleSiteData.data.dataProducts}
+          view="products"
+        />
+      </ExampleBlock>
+      <CodeBlock>
+        {`
+import DataProductAvailability from 'portal-core-components/lib/components/DataProductAvailability';
+
+const dataProducts = [...];
+
+<DataProductAvailability
+  dataProducts={dataProducts}
+  view="products"
 />
         `}
       </CodeBlock>

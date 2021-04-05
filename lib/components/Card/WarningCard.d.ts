@@ -1,7 +1,5 @@
 import React from 'react';
-export interface WarningCardProps {
-    title: string;
-    message?: string;
-}
+import { BaseCardProps } from './BaseCard';
+export declare type WarningCardProps = Omit<BaseCardProps, 'type' | 'calloutClasses'>;
 declare const WarningCard: React.FC<WarningCardProps>;
 export default WarningCard;

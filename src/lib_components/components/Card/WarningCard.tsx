@@ -6,7 +6,7 @@ import {
   Theme as MuiTheme,
 } from '@material-ui/core/styles';
 
-import BaseCard, { CardType } from './BaseCard';
+import BaseCard, { CardType, BaseCardProps } from './BaseCard';
 import Theme from '../Theme/Theme';
 import { NeonTheme } from '../Theme/types';
 import { StylesHook } from '../../types/muiTypes';
@@ -25,23 +25,14 @@ const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
     },
   })) as StylesHook;
 
-export interface WarningCardProps {
-  title: string;
-  message?: string;
-}
+export type WarningCardProps = Omit<BaseCardProps, 'type' | 'calloutClasses'>;
 
 const WarningCard: React.FC<WarningCardProps> = (props: WarningCardProps): JSX.Element => {
   const classes = useStyles(Theme);
-  const {
-    title,
-    message,
-  }: WarningCardProps = props;
-
   return (
     <BaseCard
+      {...props}
       type={CardType.WARN}
-      title={title}
-      message={message}
       calloutClasses={{
         callout: classes.callout,
         calloutIcon: classes.calloutIcon,

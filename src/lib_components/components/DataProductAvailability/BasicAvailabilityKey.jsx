@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 */
 export default function BasicAvailabilityKey(props) {
   const classes = useStyles(Theme);
-  const { selectionEnabled, delineateRelease } = props;
+  const { orientation, selectionEnabled, delineateRelease } = props;
 
   /**
      Render: Cells (Vertical Orientation)
@@ -142,6 +142,15 @@ export default function BasicAvailabilityKey(props) {
   };
 
   /**
+     Render: Cell Legend
+  */
+  const renderCellLegend = (appliedOrientation) => {
+    const resultingOrientation = orientation === '' ? appliedOrientation : orientation;
+    if (resultingOrientation === 'horizontal') return renderHorizontalCellLegend();
+    return renderVerticalCellLegend();
+  };
+
+  /**
      Render: Selection
   */
   const renderSelectionLegend = () => {
@@ -181,24 +190,26 @@ export default function BasicAvailabilityKey(props) {
 
   return selectionEnabled || delineateRelease ? (
     <div className={classes.legendContainer}>
-      {renderVerticalCellLegend()}
+      {renderCellLegend('vertical')}
       {selectionEnabled ? (
         renderSelectionLegend()
       ) : null}
     </div>
   ) : (
     <div className={classes.legendContainer}>
-      {renderHorizontalCellLegend()}
+      {renderCellLegend('horizontal')}
     </div>
   );
 }
 
 BasicAvailabilityKey.propTypes = {
+  orientation: PropTypes.string,
   selectionEnabled: PropTypes.bool,
   delineateRelease: PropTypes.bool,
 };
 
 BasicAvailabilityKey.defaultProps = {
+  orientation: '',
   selectionEnabled: false,
   delineateRelease: false,
 };

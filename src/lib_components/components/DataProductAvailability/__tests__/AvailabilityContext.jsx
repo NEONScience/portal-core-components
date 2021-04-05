@@ -4,7 +4,7 @@ import { renderHook } from '@testing-library/react-hooks';
 
 import cloneDeep from 'lodash/cloneDeep';
 
-import sitesJSON from '../../../staticJSON/sites.json';
+import sitesJSON from '../../../../sampleData/sites.json';
 import statesJSON from '../../../staticJSON/states.json';
 import domainsJSON from '../../../staticJSON/domains.json';
 

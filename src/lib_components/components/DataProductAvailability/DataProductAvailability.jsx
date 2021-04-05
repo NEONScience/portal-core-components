@@ -29,7 +29,8 @@ const DataProductAvailability = (props) => {
 DataProductAvailability.propTypes = {
   sites: AvailabilityPropTypes.enhancedSites, // Enhanced availability data
   siteCodes: AvailabilityPropTypes.basicSiteCodes, // Basic availability data
-  view: PropTypes.oneOf(['summary', 'sites', 'states', 'domains', 'ungrouped']),
+  dataProducts: AvailabilityPropTypes.dataProducts,
+  view: PropTypes.oneOf(['summary', 'sites', 'states', 'domains', 'ungrouped', 'products']),
   sortMethod: PropTypes.oneOf(['sites', 'states', 'domains']),
   sortDirection: PropTypes.oneOf(['ASC', 'DESC']),
   disableSelection: PropTypes.bool,
@@ -39,6 +40,7 @@ DataProductAvailability.propTypes = {
 DataProductAvailability.defaultProps = {
   sites: [],
   siteCodes: [],
+  dataProducts: [],
   view: null,
   sortMethod: null,
   sortDirection: 'ASC',

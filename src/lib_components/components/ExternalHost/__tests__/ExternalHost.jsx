@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 
 import ExternalHost from '../ExternalHost';
-import sitesJSON from '../../../staticJSON/sites.json';
+import sitesJSON from '../../../../sampleData/sites.json';
 
 const { getByHostId, getByProductCode } = ExternalHost;
 

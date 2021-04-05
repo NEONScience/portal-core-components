@@ -16,7 +16,7 @@ import ErrorIcon from '@material-ui/icons/Error';
 
 import Theme from '../Theme/Theme';
 import { StylesHook } from '../../types/muiTypes';
-import { isStringNonEmpty } from '../../util/typeUtil';
+import { exists, isStringNonEmpty } from '../../util/typeUtil';
 
 const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
   // eslint-disable-next-line implicit-arrow-linebreak
@@ -47,8 +47,9 @@ export interface BaseCardClasses {
 
 export interface BaseCardProps {
   type: CardType;
-  title: string;
   calloutClasses: BaseCardClasses;
+  title?: string;
+  titleContent?: React.ReactNode;
   message?: string;
 }
 
@@ -57,8 +58,9 @@ const BaseCard: React.FC<BaseCardProps> = (props: BaseCardProps): JSX.Element =>
   const {
     type,
     title,
-    message,
     calloutClasses,
+    message,
+    titleContent,
   }: BaseCardProps = props;
 
   let iconContent: JSX.Element = (
@@ -80,13 +82,37 @@ const BaseCard: React.FC<BaseCardProps> = (props: BaseCardProps): JSX.Element =>
       break;
   }
 
-  const content = (
-    <>
-      <CardContent className={classes.startFlex}>
-        {iconContent}
+  const renderTitle = (): JSX.Element => {
+    let titleTextContent: JSX.Element = (<></>);
+    if (isStringNonEmpty(title)) {
+      titleTextContent = (
         <Typography variant="subtitle2" style={{ flexGrow: 1 }}>
           {title}
         </Typography>
+      );
+    }
+    let appliedTitleContent: JSX.Element = (<></>);
+    if (exists(titleContent)) {
+      appliedTitleContent = (
+        <div style={{ flexGrow: 1 }}>
+          {titleContent}
+        </div>
+      );
+    }
+
+    return (
+      <>
+        {iconContent}
+        {titleTextContent}
+        {appliedTitleContent}
+      </>
+    );
+  };
+
+  const content = (
+    <>
+      <CardContent className={classes.startFlex}>
+        {renderTitle()}
       </CardContent>
       {isStringNonEmpty(message) ? (
         <>
