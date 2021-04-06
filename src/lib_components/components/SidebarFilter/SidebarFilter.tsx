@@ -2,7 +2,6 @@ import React from 'react';
 
 import { useId } from 'react-id-generator';
 
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
@@ -171,17 +170,15 @@ const SidebarFilter: React.FC<SidebarFilterProps> = (props: SidebarFilterProps):
       aria-labelledby={labelId}
       disabled={optionCount < 2}
     >
-      {values.map((option: SidebarFilterOption): JSX.Element => {
-        return (
-          <MenuItem key={option.value} value={option.value}>
-            <div>
-              <Typography display="block">
-                {option.title}
-              </Typography>
-            </div>
-          </MenuItem>
-        );
-      })}
+      {values.map((option: SidebarFilterOption): JSX.Element => ((
+        <MenuItem key={option.value} value={option.value}>
+          <div>
+            <Typography display="block">
+              {option.title}
+            </Typography>
+          </div>
+        </MenuItem>
+      )))}
     </Select>
   );
 
