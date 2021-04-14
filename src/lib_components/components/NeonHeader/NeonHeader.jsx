@@ -161,7 +161,7 @@ const NeonHeader = forwardRef((props, headerRef) => {
   const injectAuth = !auth.useCore ? null : {
     replace: (domNode) => {
       const { attribs = {} } = domNode;
-      if (!attribs.id !== AUTH_ELEMENT_ID) { return null; }
+      if (attribs.id !== AUTH_ELEMENT_ID) { return null; }
       return (
         <div id={AUTH_ELEMENT_ID} className={classes.coreAuthContainer}>
           <NeonAuth

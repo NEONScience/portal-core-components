@@ -625,6 +625,10 @@ export default html = `
           <a href="https://www.neonscience.org/field-sites/explore-field-sites" class="menu__link" data-drupal-link-system-path="node/10899">Explore Field Sites</a>
 
                   </li>
+              <li  class="menu__item">
+          <a href="https://data.neonscience.org/data-products/DP1.10111.001" class="menu__link">Site Management Data Product</a>
+
+                  </li>
       
           </ul>
   
@@ -853,6 +857,10 @@ export default html = `
   
 
             
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/resources/funding-opportunities" class="menu__link" data-drupal-link-system-path="node/11327">Funding Opportunities </a>
 
                   </li>
               <li  class="menu__item">
