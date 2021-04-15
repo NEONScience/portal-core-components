@@ -432,7 +432,7 @@ Array [
     prop-open={true}
   >
     <div
-      className="MuiPaper-root MuiSnackbarContent-root makeStyles-notification-25 MuiPaper-elevation6"
+      className="MuiPaper-root MuiSnackbarContent-root makeStyles-notification-26 MuiPaper-elevation6"
       role="alert"
     >
       <div

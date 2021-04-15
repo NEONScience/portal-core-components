@@ -4,11 +4,13 @@ import React, {
   useLayoutEffect,
 } from 'react';
 import PropTypes from 'prop-types';
-import HTMLReactParser from 'html-react-parser';
+import HTMLReactParser, { domToReact } from 'html-react-parser';
 
 import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Skeleton from '@material-ui/lab/Skeleton';
+
+import camelCase from 'lodash/camelCase';
 
 import REMOTE_ASSETS from '../../remoteAssetsMap/remoteAssetsMap';
 import DRUPAL_HEADER_HTML_FALLBACK from '../../remoteAssets/drupal-header.html';
@@ -73,7 +75,191 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  // Injecting these styles as a means of fixing up the search display
+  // Ideally, this CSS comes from Drupal and is removed from here...
+  headerContainer: {
+    '& .header__search': {
+      background: '#f5f6f7',
+      position: 'relative',
+      zIndex: 1,
+      transition: 'all 0.2s ease-in-out',
+      opacity: 1,
+      visibility: 'visible',
+    },
+    '& .header__search.visually-hidden': {
+      visibility: 'hidden',
+      opacity: 0,
+      transition: 'all 0.2s ease-in-out',
+    },
+    '& .header__search > .header__search--inner': {
+      display: 'flex',
+      maxWidth: '1620px',
+      margin: '0 auto',
+    },
+    '& .header__inner.l--offset-wide': {
+      paddingLeft: 'calc(2/27*100%)',
+      paddingRight: 'calc(2/27*100%)',
+    },
+    '& .header__search--inner': {
+      display: 'flex',
+      '-ms-flex-pack': 'start',
+      justifyContent: 'flex-start',
+      '-ms-flex-align': 'center',
+      alignItems: 'center',
+    },
+    '& .header__search--inner > .header__search--title': {
+      fontWeight: '600 !important',
+      fontSize: '0.9rem !important',
+      margin: '0 2.6rem 0 0 !important',
+    },
+    [theme.breakpoints.up('lg')]: {
+      '& .header__search--inner > .header__search--title': {
+        fontSize: '1rem !important',
+      },
+    },
+    '& .header__search--inner > .form-item': {
+      width: '100%',
+      display: 'flex',
+      '-ms-flex-pack': 'start',
+      justifyContent: 'flex-start',
+      '-ms-flex-align': 'center',
+      alignItems: 'center',
+    },
+    '& .header__search--inner > form.search-form': {
+      display: 'flex',
+      '-ms-flex-pack': 'start',
+      justifyContent: 'flex-start',
+      '-ms-flex-align': 'center',
+      alignItems: 'center',
+      width: '100%',
+    },
+    '& .header__search--inner > form.search-form > .form-item': {
+      width: '100%',
+    },
+    '& .header__search--inner > form.search-form > .form-item > .search-form__input': {
+      width: '100%',
+      background: '#fff',
+      border: '1px solid #d7d9d9',
+      boxSizing: 'border-box',
+      borderRadius: '3px 0 0 3px',
+      padding: '14px',
+    },
+    '& .header__search--inner > form.search-form > .search-form__actions > .search-form__button': {
+      borderRadius: '0px 3px 3px 0px',
+      width: '60px',
+      background: '#0073cf',
+      border: '#0073cf 1px solid',
+      color: 'transparent !important',
+      backgroundImage: 'url("data:image/svg+xml,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M8%202a6%206%200%20100%2012A6%206%200%20008%202zM0%208a8%208%200%201114.32%204.906l5.387%205.387-1.414%201.414-5.387-5.387A8%208%200%20010%208z%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E")',
+      backgroundPosition: 'center center',
+      backgroundRepeat: 'no-repeat',
+      padding: '0.86rem 0',
+      transition: 'all 0.2s ease-in-out',
+    },
+    '& .header__search--inner > form.search-form > .search-form__actions > .search-form__button:hover': {
+      transition: 'all 0.2s ease-in-out',
+      backgroundColor: '#002c77',
+      border: '#002c77 1px solid',
+    },
+    '& .header__search--inner > form.search-form > label': {
+      fontWeight: 600,
+      fontSize: '20px',
+      margin: 'auto 2.6rem',
+    },
+    '& .header__search--inner > .header__search-close': {
+      margin: 'auto 2.5rem',
+    },
+    '& .header__search--inner > .header__search-close > button': {
+      background: 'none',
+      border: 'none',
+      width: '50px',
+    },
+    '& .header__search--inner > .header__search-close > button > svg': {
+      verticalAlign: 'middle',
+    },
+    '& .header__search--inner > .header__search-close > button > svg > path': {
+      transition: 'all 0.2s ease-in-out',
+    },
+    '& .header__search--inner > .header__search-close > button:hover > svg > path': {
+      fill: '#002c77',
+      transition: 'all 0.2s ease-in-out',
+    },
+    [theme.breakpoints.down('md')]: {
+      '& nav#block-neon-main-menu > ul > li.siteSearch': {
+        padding: '0 1.5rem 0.5rem 1.5rem',
+      },
+      '& .search-form-mobile': {
+        width: '100%',
+      },
+      '& form.search-form': {
+        display: 'flex',
+        '-ms-flex-pack': 'start',
+        justifyContent: 'flex-start',
+        '-ms-flex-align': 'center',
+        alignItems: 'center',
+        width: '100%',
+      },
+      '& form.search-form > .form-item': {
+        width: '100%',
+      },
+      '& form.search-form > .form-item > .search-form__input': {
+        width: '100%',
+        background: '#fff',
+        border: '1px solid #d7d9d9',
+        boxSizing: 'border-box',
+        borderRadius: '3px 0 0 3px',
+        padding: '0.88rem',
+      },
+      '& form.search-form > .search-form__actions > .search-form__button': {
+        borderRadius: '0px 3px 3px 0px',
+        width: '60px',
+        background: '#0073cf',
+        border: '#0073cf 1px solid',
+        color: 'transparent !important',
+        backgroundImage: 'url("data:image/svg+xml,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M8%202a6%206%200%20100%2012A6%206%200%20008%202zM0%208a8%208%200%201114.32%204.906l5.387%205.387-1.414%201.414-5.387-5.387A8%208%200%20010%208z%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E")',
+        backgroundPosition: 'center center',
+        backgroundRepeat: 'no-repeat',
+        padding: '14px 0',
+        transition: 'all 0.2s ease-in-out',
+      },
+      '& form.search-form > .search-form__actions > .search-form__button:hover': {
+        transition: 'all 0.2s ease-in-out',
+        backgroundColor: '#002c77',
+        border: '#002c77 1px solid',
+      },
+      '& form.search-form > .form-item > label': {
+        display: 'none !important',
+      },
+    },
+  },
 }));
+
+const buildSearchAction = (action) => {
+  const root = 'https://www.neonscience.org';
+  if (!action) return `${root}/search/site`;
+  if (action.startsWith('/')) {
+    return `${root}${action}`;
+  }
+  return `${root}/${action}`;
+};
+
+const applyAttribute = (nextAttribs, attribs, attr) => {
+  switch (attr) {
+    case 'class':
+      // eslint-disable-next-line no-param-reassign
+      nextAttribs.className = attribs[attr];
+      break;
+    default:
+      if (attr.includes('-')) {
+        // eslint-disable-next-line no-param-reassign
+        nextAttribs[camelCase(attr)] = attribs[attr];
+      } else {
+        // eslint-disable-next-line no-param-reassign
+        nextAttribs[attr] = attribs[attr];
+      }
+      break;
+  }
+};
 
 const NeonHeader = forwardRef((props, headerRef) => {
   const {
@@ -160,7 +346,18 @@ const NeonHeader = forwardRef((props, headerRef) => {
   // Render Drupal header
   const injectAuth = !auth.useCore ? null : {
     replace: (domNode) => {
-      const { attribs = {} } = domNode;
+      const { attribs = {}, name } = domNode;
+      if ((name === 'form') && (attribs.class === 'search-form')) {
+        const nextAttribs = {};
+        Object.keys(attribs).forEach((attr) => {
+          applyAttribute(nextAttribs, attribs, attr);
+        });
+        return (
+          <form {...nextAttribs} action={buildSearchAction(attribs.action)}>
+            {domToReact(domNode.children, injectAuth)}
+          </form>
+        );
+      }
       if (attribs.id !== AUTH_ELEMENT_ID) { return null; }
       return (
         <div id={AUTH_ELEMENT_ID} className={classes.coreAuthContainer}>
@@ -181,7 +378,9 @@ const NeonHeader = forwardRef((props, headerRef) => {
     <header
       ref={headerRef}
       id="header"
-      className={unstickyDrupalHeader ? classes.unstickyHeader : null}
+      className={unstickyDrupalHeader
+        ? `${classes.unstickyHeader} ${classes.headerContainer}`
+        : classes.headerContainer}
     >
       {HTMLReactParser(html, injectAuth)}
     </header>
