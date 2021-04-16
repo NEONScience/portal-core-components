@@ -1,8 +1,4 @@
-import React, {
-  forwardRef,
-  useState,
-  useLayoutEffect,
-} from 'react';
+import React, { forwardRef, useState, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import HTMLReactParser, { domToReact } from 'html-react-parser';
 
@@ -18,6 +14,7 @@ import Theme from '../Theme/Theme';
 import NeonAuth, { NeonAuthType, NeonAuthDisplayType } from '../NeonAuth/NeonAuth';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
+import ApplicationToolbar from './ApplicationToolbar';
 
 const DRUPAL_HEADER_HTML = REMOTE_ASSETS.DRUPAL_HEADER_HTML.KEY;
 
@@ -302,7 +299,7 @@ const NeonHeader = forwardRef((props, headerRef) => {
   useLayoutEffect(() => {
     if (
       !renderMode.includes('drupal') || headerJsStatus !== FETCH_STATUS.AWAITING_CALL
-        || !headerRenderDelayed || !drupalCssLoaded
+      || !headerRenderDelayed || !drupalCssLoaded
     ) { return; }
     setHeaderJsStatus(FETCH_STATUS.FETCHING);
     const script = document.createElement('script');
@@ -326,7 +323,7 @@ const NeonHeader = forwardRef((props, headerRef) => {
       const timeout = window.setTimeout(() => setHeaderRenderDelayed(true), 0);
       return () => window.clearTimeout(timeout);
     }
-    return () => {};
+    return () => { };
   }, [
     neonContextIsActive,
     headerHTML,
@@ -383,6 +380,7 @@ const NeonHeader = forwardRef((props, headerRef) => {
         : classes.headerContainer}
     >
       {HTMLReactParser(html, injectAuth)}
+      <ApplicationToolbar />
     </header>
   );
 });
