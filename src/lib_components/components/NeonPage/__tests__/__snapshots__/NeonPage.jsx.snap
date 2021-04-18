@@ -2,24 +2,24 @@
 
 exports[`NeonPage NeonErrorPage 1`] = `
 <div
-  className="MuiContainer-root makeStyles-outerPageContainer-449 MuiContainer-maxWidthLg"
+  className="MuiContainer-root makeStyles-outerPageContainer-450 MuiContainer-maxWidthLg"
 >
   <div
-    className="makeStyles-pageContent-450"
+    className="makeStyles-pageContent-451"
     data-selenium="neon-page.content"
   >
     <img
       alt="NEON Data Portal"
-      className="makeStyles-errorPageLogo-468"
+      className="makeStyles-errorPageLogo-469"
       src="NSF-NEON-logo.png"
       title="NEON Data Portal"
     />
     <h1
-      className="MuiTypography-root makeStyles-pageTitle-464 MuiTypography-h3"
+      className="MuiTypography-root makeStyles-pageTitle-465 MuiTypography-h3"
     >
       <svg
         aria-hidden={true}
-        className="MuiSvgIcon-root makeStyles-errorPageTitleIcon-466"
+        className="MuiSvgIcon-root makeStyles-errorPageTitleIcon-467"
         focusable="false"
         viewBox="0 0 24 24"
       >
@@ -31,7 +31,7 @@ exports[`NeonPage NeonErrorPage 1`] = `
     </h1>
     <div>
       <span
-        className="MuiTypography-root makeStyles-errorPageCaption-467 MuiTypography-caption"
+        className="MuiTypography-root makeStyles-errorPageCaption-468 MuiTypography-caption"
       >
         fail
       </span>
@@ -210,7 +210,7 @@ Array [
     />
   </header>,
   <div
-    className="MuiContainer-root makeStyles-outerPageContainer-344 MuiContainer-maxWidthLg"
+    className="MuiContainer-root makeStyles-outerPageContainer-345 MuiContainer-maxWidthLg"
     style={
       Object {
         "maxWidth": "calc(2000px - 348px)",
@@ -218,7 +218,7 @@ Array [
     }
   >
     <div
-      className="makeStyles-sidebarContainer-347"
+      className="makeStyles-sidebarContainer-348"
       style={
         Object {
           "width": "300px",
@@ -230,7 +230,7 @@ Array [
       </div>
     </div>
     <div
-      className="makeStyles-pageContent-345"
+      className="makeStyles-pageContent-346"
       data-selenium="neon-page.content"
       style={
         Object {
@@ -271,7 +271,7 @@ Array [
     prop-open={true}
   >
     <div
-      className="MuiPaper-root makeStyles-backdropPaper-358 MuiPaper-elevation1 MuiPaper-rounded"
+      className="MuiPaper-root makeStyles-backdropPaper-359 MuiPaper-elevation1 MuiPaper-rounded"
     >
       <h3
         className="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom"
@@ -304,7 +304,7 @@ Array [
         </svg>
       </div>
       <div
-        className="makeStyles-dismissOverlay-364"
+        className="makeStyles-dismissOverlay-365"
       >
         <button
           className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
@@ -358,7 +358,7 @@ Array [
     </div>
   </header>,
   <div
-    className="MuiContainer-root makeStyles-outerPageContainer-260 MuiContainer-maxWidthLg"
+    className="MuiContainer-root makeStyles-outerPageContainer-261 MuiContainer-maxWidthLg"
     style={
       Object {
         "maxWidth": "2000px",
@@ -366,7 +366,7 @@ Array [
     }
   >
     <div
-      className="makeStyles-pageContent-261"
+      className="makeStyles-pageContent-262"
       data-selenium="neon-page.content"
       style={
         Object {
@@ -404,7 +404,7 @@ Array [
     />
   </header>,
   <div
-    className="MuiContainer-root makeStyles-outerPageContainer-239 MuiContainer-maxWidthLg"
+    className="MuiContainer-root makeStyles-outerPageContainer-240 MuiContainer-maxWidthLg"
     style={
       Object {
         "maxWidth": "2000px",
@@ -412,7 +412,7 @@ Array [
     }
   >
     <div
-      className="makeStyles-pageContent-240"
+      className="makeStyles-pageContent-241"
       data-selenium="neon-page.content"
       style={
         Object {
@@ -526,7 +526,7 @@ Array [
     />
   </header>,
   <div
-    className="MuiContainer-root makeStyles-outerPageContainer-71 MuiContainer-maxWidthLg"
+    className="MuiContainer-root makeStyles-outerPageContainer-72 MuiContainer-maxWidthLg"
     style={
       Object {
         "maxWidth": "2000px",
@@ -534,7 +534,7 @@ Array [
     }
   >
     <div
-      className="makeStyles-pageContent-72"
+      className="makeStyles-pageContent-73"
       data-selenium="neon-page.content"
       style={
         Object {
@@ -543,13 +543,13 @@ Array [
       }
     >
       <h1
-        className="MuiTypography-root makeStyles-pageTitle-86 MuiTypography-h3"
+        className="MuiTypography-root makeStyles-pageTitle-87 MuiTypography-h3"
         data-selenium="neon-page.title"
       >
         Title
       </h1>
       <p
-        className="MuiTypography-root makeStyles-pageSubtitle-87 MuiTypography-subtitle1"
+        className="MuiTypography-root makeStyles-pageSubtitle-88 MuiTypography-subtitle1"
         data-selenium="neon-page.subtitle"
       >
         Subtitle
@@ -592,7 +592,7 @@ Array [
     />
   </header>,
   <div
-    className="MuiContainer-root makeStyles-outerPageContainer-176 MuiContainer-maxWidthLg"
+    className="MuiContainer-root makeStyles-outerPageContainer-177 MuiContainer-maxWidthLg"
     style={
       Object {
         "maxWidth": "2000px",
@@ -600,7 +600,7 @@ Array [
     }
   >
     <div
-      className="makeStyles-pageContent-177"
+      className="makeStyles-pageContent-178"
       data-selenium="neon-page.content"
       style={
         Object {
@@ -641,7 +641,7 @@ Array [
     prop-open={true}
   >
     <div
-      className="MuiPaper-root makeStyles-backdropPaper-190 MuiPaper-elevation1 MuiPaper-rounded"
+      className="MuiPaper-root makeStyles-backdropPaper-191 MuiPaper-elevation1 MuiPaper-rounded"
     >
       <svg
         aria-hidden={true}
@@ -664,7 +664,7 @@ Array [
         Fail
       </h3>
       <div
-        className="makeStyles-dismissOverlay-196"
+        className="makeStyles-dismissOverlay-197"
       >
         <button
           className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
@@ -727,7 +727,7 @@ Array [
     />
   </header>,
   <div
-    className="MuiContainer-root makeStyles-outerPageContainer-323 MuiContainer-maxWidthLg"
+    className="MuiContainer-root makeStyles-outerPageContainer-324 MuiContainer-maxWidthLg"
     style={
       Object {
         "maxWidth": "calc(2000px - 348px)",
@@ -735,7 +735,7 @@ Array [
     }
   >
     <div
-      className="makeStyles-sidebarContainer-326"
+      className="makeStyles-sidebarContainer-327"
       style={
         Object {
           "width": "300px",
@@ -747,7 +747,7 @@ Array [
       </div>
     </div>
     <div
-      className="makeStyles-pageContent-324"
+      className="makeStyles-pageContent-325"
       data-selenium="neon-page.content"
       style={
         Object {
@@ -793,7 +793,7 @@ Array [
     />
   </header>,
   <div
-    className="MuiContainer-root makeStyles-outerPageContainer-92 MuiContainer-maxWidthLg"
+    className="MuiContainer-root makeStyles-outerPageContainer-93 MuiContainer-maxWidthLg"
     style={
       Object {
         "maxWidth": "3333px",
@@ -801,7 +801,7 @@ Array [
     }
   >
     <div
-      className="makeStyles-pageContent-93"
+      className="makeStyles-pageContent-94"
       data-selenium="neon-page.content"
       style={
         Object {
@@ -842,7 +842,7 @@ Array [
     prop-open={true}
   >
     <div
-      className="MuiPaper-root makeStyles-backdropPaper-106 MuiPaper-elevation1 MuiPaper-rounded"
+      className="MuiPaper-root makeStyles-backdropPaper-107 MuiPaper-elevation1 MuiPaper-rounded"
     >
       <h3
         className="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom"
@@ -875,7 +875,7 @@ Array [
         </svg>
       </div>
       <div
-        className="makeStyles-dismissOverlay-112"
+        className="makeStyles-dismissOverlay-113"
       >
         <button
           className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
@@ -938,7 +938,7 @@ Array [
     />
   </header>,
   <div
-    className="MuiContainer-root makeStyles-outerPageContainer-155 MuiContainer-maxWidthLg"
+    className="MuiContainer-root makeStyles-outerPageContainer-156 MuiContainer-maxWidthLg"
     style={
       Object {
         "maxWidth": "2000px",
@@ -946,7 +946,7 @@ Array [
     }
   >
     <div
-      className="makeStyles-pageContent-156"
+      className="makeStyles-pageContent-157"
       data-selenium="neon-page.content"
       style={
         Object {
@@ -987,7 +987,7 @@ Array [
     prop-open={true}
   >
     <div
-      className="MuiPaper-root makeStyles-backdropPaper-169 MuiPaper-elevation1 MuiPaper-rounded"
+      className="MuiPaper-root makeStyles-backdropPaper-170 MuiPaper-elevation1 MuiPaper-rounded"
     >
       <h3
         className="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom"
@@ -1027,7 +1027,7 @@ Array [
         </svg>
       </div>
       <div
-        className="makeStyles-dismissOverlay-175"
+        className="makeStyles-dismissOverlay-176"
       >
         <button
           className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
@@ -1093,7 +1093,7 @@ Array [
     />
   </header>,
   <div
-    className="MuiContainer-root makeStyles-outerPageContainer-407 MuiContainer-maxWidthLg"
+    className="MuiContainer-root makeStyles-outerPageContainer-408 MuiContainer-maxWidthLg"
     style={
       Object {
         "maxWidth": "calc(2000px - 348px)",
@@ -1101,7 +1101,7 @@ Array [
     }
   >
     <div
-      className="makeStyles-sidebarContainer-410"
+      className="makeStyles-sidebarContainer-411"
       style={
         Object {
           "width": "300px",
@@ -1109,28 +1109,28 @@ Array [
       }
     >
       <div
-        className="makeStyles-sidebarInnerStickyContainer-411 neon__sidebar-sticky"
+        className="makeStyles-sidebarInnerStickyContainer-412 neon__sidebar-sticky"
       >
         <div
-          className="makeStyles-sidebarTitleContainer-412"
+          className="makeStyles-sidebarTitleContainer-413"
         >
           <div
-            className="makeStyles-sidebarTitlesContainer-415"
+            className="makeStyles-sidebarTitlesContainer-416"
           >
             <h3
-              className="MuiTypography-root makeStyles-sidebarTitle-413 MuiTypography-h5"
+              className="MuiTypography-root makeStyles-sidebarTitle-414 MuiTypography-h5"
             >
               foo
             </h3>
             <h4
-              className="MuiTypography-root makeStyles-sidebarSubtitle-414 MuiTypography-subtitle2"
+              className="MuiTypography-root makeStyles-sidebarSubtitle-415 MuiTypography-subtitle2"
             >
               bar
             </h4>
           </div>
         </div>
         <hr
-          className="MuiDivider-root makeStyles-sidebarDivider-420"
+          className="MuiDivider-root makeStyles-sidebarDivider-421"
           style={
             Object {
               "width": "236px",
@@ -1141,7 +1141,7 @@ Array [
           More
         </div>
         <hr
-          className="MuiDivider-root makeStyles-sidebarDivider-420"
+          className="MuiDivider-root makeStyles-sidebarDivider-421"
           style={
             Object {
               "width": "236px",
@@ -1149,10 +1149,10 @@ Array [
           }
         />
         <div
-          className="makeStyles-sidebarLinksContainer-419"
+          className="makeStyles-sidebarLinksContainer-420"
         >
           <a
-            className="MuiTypography-root MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-416 makeStyles-sidebarLinkCurrent-417 MuiTypography-colorPrimary"
+            className="MuiTypography-root MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-417 makeStyles-sidebarLinkCurrent-418 MuiTypography-colorPrimary"
             href="#"
             onBlur={[Function]}
             onClick={null}
@@ -1162,7 +1162,7 @@ Array [
             Section A
           </a>
           <a
-            className="MuiTypography-root MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-416 MuiTypography-colorPrimary"
+            className="MuiTypography-root MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-417 MuiTypography-colorPrimary"
             href="#sectionB"
             onBlur={[Function]}
             onClick={null}
@@ -1172,7 +1172,7 @@ Array [
             Section B
           </a>
           <a
-            className="MuiTypography-root MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-416 MuiTypography-colorPrimary"
+            className="MuiTypography-root MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-417 MuiTypography-colorPrimary"
             href="#sectionC"
             onBlur={[Function]}
             onClick={null}
@@ -1185,7 +1185,7 @@ Array [
             Section C
           </a>
           <a
-            className="MuiTypography-root MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-416 MuiTypography-colorPrimary"
+            className="MuiTypography-root MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-417 MuiTypography-colorPrimary"
             href="#sectionD"
             onBlur={[Function]}
             onClick={null}
@@ -1196,7 +1196,7 @@ Array [
           </a>
         </div>
         <hr
-          className="MuiDivider-root makeStyles-sidebarDivider-420"
+          className="MuiDivider-root makeStyles-sidebarDivider-421"
           style={
             Object {
               "marginBottom": "0px",
@@ -1207,7 +1207,7 @@ Array [
       </div>
     </div>
     <div
-      className="makeStyles-pageContent-408"
+      className="makeStyles-pageContent-409"
       data-selenium="neon-page.content"
       style={
         Object {
@@ -1253,7 +1253,7 @@ Array [
     />
   </header>,
   <div
-    className="MuiContainer-root makeStyles-outerPageContainer-428 MuiContainer-maxWidthLg"
+    className="MuiContainer-root makeStyles-outerPageContainer-429 MuiContainer-maxWidthLg"
     style={
       Object {
         "maxWidth": "calc(2000px - 470px)",
@@ -1261,7 +1261,7 @@ Array [
     }
   >
     <div
-      className="makeStyles-sidebarContainer-431 sidebarClassName"
+      className="makeStyles-sidebarContainer-432 sidebarClassName"
       style={
         Object {
           "width": "422px",
@@ -1272,10 +1272,10 @@ Array [
         className={null}
       >
         <div
-          className="makeStyles-sidebarTitleContainer-433"
+          className="makeStyles-sidebarTitleContainer-434"
         />
         <hr
-          className="MuiDivider-root makeStyles-sidebarDivider-441"
+          className="MuiDivider-root makeStyles-sidebarDivider-442"
           style={
             Object {
               "width": "358px",
@@ -1283,10 +1283,10 @@ Array [
           }
         />
         <div
-          className="makeStyles-sidebarLinksContainer-440"
+          className="makeStyles-sidebarLinksContainer-441"
         >
           <a
-            className="MuiTypography-root MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-437 makeStyles-sidebarLinkCurrent-438 MuiTypography-colorPrimary"
+            className="MuiTypography-root MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-438 makeStyles-sidebarLinkCurrent-439 MuiTypography-colorPrimary"
             href="#sectionA"
             onBlur={[Function]}
             onClick={[Function]}
@@ -1296,7 +1296,7 @@ Array [
             Section A
           </a>
           <a
-            className="MuiTypography-root MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-437 makeStyles-sidebarLinkCurrent-438 MuiTypography-colorPrimary"
+            className="MuiTypography-root MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-438 makeStyles-sidebarLinkCurrent-439 MuiTypography-colorPrimary"
             href="#sectionA"
             onBlur={[Function]}
             onClick={[Function]}
@@ -1307,7 +1307,7 @@ Array [
           </a>
         </div>
         <hr
-          className="MuiDivider-root makeStyles-sidebarDivider-441"
+          className="MuiDivider-root makeStyles-sidebarDivider-442"
           style={
             Object {
               "marginBottom": "0px",
@@ -1318,7 +1318,7 @@ Array [
       </div>
     </div>
     <div
-      className="makeStyles-pageContent-429"
+      className="makeStyles-pageContent-430"
       data-selenium="neon-page.content"
       style={
         Object {
@@ -1327,7 +1327,7 @@ Array [
       }
     >
       <h1
-        className="MuiTypography-root makeStyles-pageTitle-443 MuiTypography-h3"
+        className="MuiTypography-root makeStyles-pageTitle-444 MuiTypography-h3"
         data-selenium="neon-page.title"
       >
         Section B
