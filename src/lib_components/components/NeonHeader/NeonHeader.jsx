@@ -14,7 +14,7 @@ import Theme from '../Theme/Theme';
 import NeonAuth, { NeonAuthType, NeonAuthDisplayType } from '../NeonAuth/NeonAuth';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
-import ApplicationToolbar from './ApplicationToolbar';
+import ApplicationMenu from './ApplicationMenu';
 
 const DRUPAL_HEADER_HTML = REMOTE_ASSETS.DRUPAL_HEADER_HTML.KEY;
 
@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
   skeletonHeader: {
     boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.25), 0px 1px 1px rgba(0, 0, 0, 0.25)',
   },
+  // positioning of sign-in and sign-out buttons
   coreAuthContainer: {
     // common styles
     textAlign: 'right',
@@ -75,6 +76,11 @@ const useStyles = makeStyles((theme) => ({
   // Injecting these styles as a means of fixing up the search display
   // Ideally, this CSS comes from Drupal and is removed from here...
   headerContainer: {
+    // Added menu__link to more closely mimic Drupal site links.
+    '& .menu__link': {
+      fontSize: '1.1rem !important',
+      fontWeight: '700 !important',
+    },
     '& .header__search': {
       background: '#f5f6f7',
       position: 'relative',
@@ -82,6 +88,7 @@ const useStyles = makeStyles((theme) => ({
       transition: 'all 0.2s ease-in-out',
       opacity: 1,
       visibility: 'visible',
+      fontSize: '1.1rem', // Added, font sizes look bigger on Drupal site.
     },
     '& .header__search.visually-hidden': {
       visibility: 'hidden',
@@ -105,13 +112,13 @@ const useStyles = makeStyles((theme) => ({
       alignItems: 'center',
     },
     '& .header__search--inner > .header__search--title': {
-      fontWeight: '600 !important',
-      fontSize: '0.9rem !important',
+      fontWeight: '700 !important', // Changed from 600 to match Drupal site.
+      fontSize: '1.2rem !important', // Changed from 0.9 to match Drupal site.
       margin: '0 2.6rem 0 0 !important',
     },
     [theme.breakpoints.up('lg')]: {
       '& .header__search--inner > .header__search--title': {
-        fontSize: '1rem !important',
+        fontSize: '1.2rem !important', // Changed from 1.0 to match Drupal site.
       },
     },
     '& .header__search--inner > .form-item': {
@@ -372,16 +379,18 @@ const NeonHeader = forwardRef((props, headerRef) => {
   };
   const html = renderMode === 'drupal' ? headerHTML : DRUPAL_HEADER_HTML_FALLBACK;
   return (
-    <header
-      ref={headerRef}
-      id="header"
-      className={unstickyDrupalHeader
-        ? `${classes.unstickyHeader} ${classes.headerContainer}`
-        : classes.headerContainer}
-    >
-      {HTMLReactParser(html, injectAuth)}
-      <ApplicationToolbar />
-    </header>
+    <>
+      <header
+        ref={headerRef}
+        id="header"
+        className={unstickyDrupalHeader
+          ? `${classes.unstickyHeader} ${classes.headerContainer}`
+          : classes.headerContainer}
+      >
+        {HTMLReactParser(html, injectAuth)}
+      </header>
+      <ApplicationMenu />
+    </>
   );
 });
 
