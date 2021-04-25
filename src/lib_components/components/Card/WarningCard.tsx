@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 import React from 'react';
 
 import {
@@ -25,17 +26,32 @@ const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
     },
   })) as StylesHook;
 
-export type WarningCardProps = Omit<BaseCardProps, 'type' | 'calloutClasses'>;
+interface WarningCardClasses {
+  callout?: string;
+  calloutIcon?: string;
+}
+
+type BaseWarningCardProps = Omit<BaseCardProps, 'type' | 'calloutClasses'>;
+type WarningCardProps = BaseWarningCardProps & {
+  classes?: WarningCardClasses;
+};
 
 const WarningCard: React.FC<WarningCardProps> = (props: WarningCardProps): JSX.Element => {
   const classes = useStyles(Theme);
+  const { classes: calloutClasses }: WarningCardProps = props;
+  const injectedCallout: string|undefined = calloutClasses
+    ? calloutClasses.callout
+    : undefined;
+  const injectedCalloutIcon: string|undefined = calloutClasses
+    ? calloutClasses.calloutIcon
+    : undefined;
   return (
     <BaseCard
       {...props}
       type={CardType.WARN}
       calloutClasses={{
-        callout: classes.callout,
-        calloutIcon: classes.calloutIcon,
+        callout: injectedCallout || classes.callout,
+        calloutIcon: injectedCalloutIcon || classes.calloutIcon,
       }}
     />
   );

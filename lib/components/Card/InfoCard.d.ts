@@ -1,5 +1,12 @@
 import React from 'react';
 import { BaseCardProps } from './BaseCard';
-export declare type InfoCardProps = Omit<BaseCardProps, 'type' | 'calloutClasses'>;
+interface InfoCardClasses {
+    callout?: string;
+    calloutIcon?: string;
+}
+declare type BaseInfoCardProps = Omit<BaseCardProps, 'type' | 'calloutClasses'>;
+declare type InfoCardProps = BaseInfoCardProps & {
+    classes?: InfoCardClasses;
+};
 declare const InfoCard: React.FC<InfoCardProps>;
 export default InfoCard;
