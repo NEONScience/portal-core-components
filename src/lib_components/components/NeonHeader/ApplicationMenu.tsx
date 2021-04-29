@@ -1,56 +1,27 @@
 import React from 'react';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-// import Grow from '@material-ui/core/Grow';
 import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import Tooltip from '@material-ui/core/Tooltip';
 import AppsIcon from '@material-ui/icons/Apps';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Fade from '@material-ui/core/Fade';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import LaunchIcon from '@material-ui/icons/Launch';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import NeonContext from '../NeonContext/NeonContext';
 
-// TODO: Synthetic test data, remove this constant when real data is available.
-const applications = {
-  token: 'token',
-  data: {
-    apps: [
-      {
-        name: 'Neon Sign-In',
-        description: 'Access your applications.',
-        url: 'https://data-neonscience.auth0.com/login?state=hKFo2SBiSjg3dklhMnV6bXFzaUtFQ3dFTl9sdEM4TWI2T0h2N6FupWxvZ2luo3RpZNkgZ2I5Uk1TZm1ZZ0NuSVNYd2JOSUVCQjR1UEVYZktZaTWjY2lk2SBPbjdYRkdrZTROanRZQU03bnE1MUxCcFNFakdGNndtMg&client=On7XFGke4NjtYAM7nq51LBpSEjGF6wm2&protocol=oauth2&redirect_uri=https%3A%2F%2Fdata.neonscience.org%2Fauth0%2Fcallback&audience=https%3A%2F%2Fdata-neonscience.auth0.com%2Fapi%2Fv2%2F&scope=openid%20profile%20email%20read%3Acurrent_user%20create%3Acurrent_user_metadata%20update%3Acurrent_user_metadata&response_type=code',
-      },
-      {
-        name: 'Profile',
-        description: 'Edit your account settings after signing in.',
-        url: 'https://example.com/app3',
-      },
-      {
-        name: 'Data Explorer',
-        description: 'Explore the Neon data collection.',
-        url: 'https://data.neonscience.org/data-products/explore',
-      },
-      {
-        name: 'Sample Explorer',
-        description: 'Explore the Neon sample collection.',
-        url: 'https://data.neonscience.org/sample-explorer',
-      },
-      {
-        name: 'Application 3',
-        description: 'Another application.',
-        url: 'https://example.com/app3',
-      },
-    ],
-  },
-};
+// interface defining the user's applications.
+interface App {
+  name: string;
+  description: string;
+  url: string;
+}
 
-// Declare CSS.
+// declare styles
 const useStyles = makeStyles((theme: Theme) => createStyles({
   menuContainer: {
     zIndex: 1000, // Be sure to display menu over other elements
@@ -70,10 +41,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
   arrow: {
     color: theme.palette.common.black,
-  },
-  tooltip: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
   },
   paper: {
     padding: theme.spacing(4),
@@ -98,28 +65,24 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
 }));
 
-// TODO: Get the user's application from the context.
-// eslint-disable-next-line
-const getApplicationData = () => {
+const getApps = (): App[] => {
   const [{ auth: authData }] = NeonContext.useNeonContextState();
-  // eslint-disable-next-line no-unused-vars
-  const { userData } = authData;
-  return userData;
+  return authData?.userData?.data?.apps;
 };
 
-// The application menu component.
+// define the menu component
 export default function ApplicationMenu() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
-  const { apps } = applications.data;
+  const apps: App[] = getApps();
 
-  // Handle menu toggle.
+  // handle menu toggle
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
 
-  // Close the menu.
+  // close the menu
   const handleClose = (event: React.MouseEvent<EventTarget>) => {
     if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
       return;
@@ -127,21 +90,20 @@ export default function ApplicationMenu() {
     setOpen(false);
   };
 
-  // Open menu by tab key.
-  /*   function handleListKeyDown(event: React.KeyboardEvent) {
-      if (event.key === 'Tab') {
-        event.preventDefault();
-        setOpen(false);
-      }
-    } */
+  // open menu by tab key
+  function handleMenuKeyDown(event: React.KeyboardEvent) {
+    if (event.key === 'Tab') {
+      event.preventDefault();
+      setOpen(false);
+    }
+  }
 
-  // Handle a menu selection.
-  const handleMenuItemClick = (event: React.MouseEvent<EventTarget>, index: number) => {
-    const app = applications.data.apps[index];
-    window.location.href = app.url;
+  // handle a menu selection
+  const handleMenuItemClick = (event: React.MouseEvent<EventTarget>, url: string) => {
+    window.location.href = url;
   };
 
-  // Return focus to the button when we transitioned from !open -> open
+  // return focus to the button transitioning from !open -> open
   const prevOpen = React.useRef(open);
   React.useEffect(() => {
     if (prevOpen.current === true && open === false) {
@@ -156,9 +118,9 @@ export default function ApplicationMenu() {
         <Tooltip
           title="Neon Applications"
           aria-label="Neon Applications"
+          placement="left"
           TransitionComponent={Fade}
-          TransitionProps={{ timeout: 600 }}
-          classes={classes}
+          TransitionProps={{ timeout: 200 }}
           arrow
         >
           <IconButton
@@ -168,8 +130,9 @@ export default function ApplicationMenu() {
             aria-controls={open ? 'neon-application-menu' : undefined}
             aria-haspopup="true"
             onClick={handleToggle}
+            onKeyDown={handleMenuKeyDown}
           >
-            <AppsIcon fontSize="small" />
+            <AppsIcon />
           </IconButton>
         </Tooltip>
         <Popper
@@ -183,7 +146,7 @@ export default function ApplicationMenu() {
             <Fade
               {...TransitionProps}
               style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-              timeout={600}
+              timeout={200}
             >
               <Paper elevation={3} className={classes.paper}>
                 <ClickAwayListener onClickAway={handleClose}>
@@ -192,16 +155,20 @@ export default function ApplicationMenu() {
                     spacing={4}
                     alignItems="stretch"
                   >
-                    {apps.map((app, index) => (
-                      <Grid item xs={6} className={classes.gridItem}>
+                    {apps.map((app) => (
+                      <Grid
+                        item
+                        xs={(apps.length === 1) ? 12 : 6}
+                        className={classes.gridItem}
+                        key={app.name}
+                      >
                         <Card
-                          onClick={(event) => handleMenuItemClick(event, index)}
+                          onClick={(event) => handleMenuItemClick(event, app.url)}
                           key={app.url}
                           className={classes.card}
                         >
                           <CardContent className={classes.cardContent}>
-                            {index % 2 === 0 ? <InboxIcon fontSize="large" />
-                              : <MailIcon fontSize="large" />}
+                            <LaunchIcon fontSize="large" />
                             <Typography variant="h6">{app.name}</Typography>
                             {app.description}
                           </CardContent>
