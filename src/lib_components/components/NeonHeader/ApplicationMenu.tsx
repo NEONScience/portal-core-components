@@ -14,17 +14,22 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import NeonContext from '../NeonContext/NeonContext';
 
-// interface defining the user's applications.
-interface App {
+// interface for user applications
+interface UserApp {
   name: string;
   description: string;
   url: string;
 }
 
+// interface for the menu component props
+interface MenuProps {
+  apps: UserApp[];
+}
+
 // declare styles
 const useStyles = makeStyles((theme: Theme) => createStyles({
   menuContainer: {
-    zIndex: 1000, // Be sure to display menu over other elements
+    zIndex: 1000, // be sure to display the menu over other elements
   },
   toolbarContainer: {
     display: 'flex',
@@ -44,38 +49,53 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
   paper: {
     padding: theme.spacing(4),
-    maxWidth: '500px', // Limit width of menu
-    marginTop: theme.spacing(1), // Line top of menu up with divider
+    maxWidth: '500px', // limit width of menu
+    marginTop: theme.spacing(1), // line top of menu up with divider
+    overflowX: 'unset',
+    overflowY: 'unset',
+    '&::before': { // add tooltip like arrow to top of menu
+      content: '""',
+      position: 'absolute',
+      marginRight: theme.spacing(4), // center arrow point beneath menu button
+      top: 0,
+      right: 0,
+      width: theme.spacing(2), // width of arrow
+      height: theme.spacing(2), // height of arrow
+      backgroundColor: theme.palette.background.paper, // match paper background
+      boxShadow: theme.shadows[2], // add arrow shadow
+      transform: 'rotate(315deg)', // point arrow up toward menu button
+      clipPath: 'polygon(-5px -5px, calc(100% + 5px) -5px, calc(100% + 5px) calc(100% + 5px))',
+    },
   },
   card: {
-    transition: '0.4s', // Raised hover effect for Cards
+    transition: '0.4s', // raised hover effect for Cards
     '&:hover': {
       transform: 'translateY(-2px)',
       boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.45)',
     },
-    cursor: 'pointer', // Visually indicate Cards are links
-    width: '100%', // Ensure Cards are equal width
+    cursor: 'pointer', // visually indicate Cards are links
+    width: '100%', // ensure Cards are equal width
     border: 0,
   },
   cardContent: {
     textAlign: 'center',
   },
   gridItem: {
-    display: 'flex', // Help grid items stretch to equal height
+    display: 'flex', // so grid items stretch to equal height
   },
 }));
 
-const getApps = (): App[] => {
+const getApps = (): UserApp[] => {
   const [{ auth: authData }] = NeonContext.useNeonContextState();
   return authData?.userData?.data?.apps;
 };
 
 // define the menu component
-export default function ApplicationMenu() {
+const Menu = (props: MenuProps) => {
+  const { apps } = props;
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
-  const apps: App[] = getApps();
 
   // handle menu toggle
   const handleToggle = () => {
@@ -103,7 +123,7 @@ export default function ApplicationMenu() {
     window.location.href = url;
   };
 
-  // return focus to the button transitioning from !open -> open
+  // return focus to the button when toggling
   const prevOpen = React.useRef(open);
   React.useEffect(() => {
     if (prevOpen.current === true && open === false) {
@@ -155,7 +175,7 @@ export default function ApplicationMenu() {
                     spacing={4}
                     alignItems="stretch"
                   >
-                    {apps.map((app) => (
+                    {apps.map((app: { name: string, description: string, url: string }) => (
                       <Grid
                         item
                         xs={(apps.length === 1) ? 12 : 6}
@@ -184,4 +204,14 @@ export default function ApplicationMenu() {
       </div>
     </div>
   );
+};
+
+export default function ApplicationMenu() {
+  const apps: UserApp[] = getApps();
+  if (apps?.length > 0) {
+    return (
+      <Menu apps={apps} />
+    );
+  }
+  return (null);
 }
