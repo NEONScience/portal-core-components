@@ -34,18 +34,15 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   toolbarContainer: {
     display: 'flex',
     justifyContent: 'space-between',
-    boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.45)',
+    boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.45)', // match shadow of site header
     position: 'relative',
   },
   toolbarButtons: {
     display: 'flex',
-    marginLeft: 'auto',
+    marginLeft: 'auto', // align content right
     marginRight: theme.spacing(2.5),
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
-  },
-  arrow: {
-    color: theme.palette.common.black,
   },
   paper: {
     padding: theme.spacing(4),
@@ -68,14 +65,14 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     },
   },
   card: {
-    transition: '0.4s', // raised hover effect for Cards
-    '&:hover': {
-      transform: 'translateY(-2px)',
-      boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.45)',
+    transition: '0.4s',
+    '&:hover': { // raised hover effect for Cards
+      transform: 'translateY(-2px)', // raise Card
+      boxShadow: theme.shadows[2], // add shadow
     },
     cursor: 'pointer', // visually indicate Cards are links
     width: '100%', // ensure Cards are equal width
-    border: 0,
+    border: 0, // remove default Card border
   },
   cardContent: {
     textAlign: 'center',
@@ -124,13 +121,13 @@ const Menu = (props: MenuProps) => {
   };
 
   // return focus to the button when toggling
-  const prevOpen = React.useRef(open);
-  React.useEffect(() => {
-    if (prevOpen.current === true && open === false) {
-      anchorRef.current!.focus();
-    }
-    prevOpen.current = open;
-  }, [open]);
+  // const prevOpen = React.useRef(open);
+  // React.useEffect(() => {
+  //   if (prevOpen.current === true && open === false) {
+  //     anchorRef.current!.focus();
+  //   }
+  //   prevOpen.current = open;
+  // }, [open]);
 
   return (
     <div className={classes.toolbarContainer}>
