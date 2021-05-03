@@ -14,7 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import NeonContext from '../NeonContext/NeonContext';
 
-// interface for user applications
+// interface for user application data
 interface UserApp {
   name: string;
   description: string;
@@ -41,8 +41,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     display: 'flex',
     marginLeft: 'auto', // align content right
     marginRight: theme.spacing(2.5),
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
+    marginTop: theme.spacing(0.5),
+    marginBottom: theme.spacing(0.5),
   },
   paper: {
     padding: theme.spacing(4),
