@@ -120,15 +120,6 @@ const Menu = (props: MenuProps) => {
     window.location.href = url;
   };
 
-  // return focus to the button when toggling
-  // const prevOpen = React.useRef(open);
-  // React.useEffect(() => {
-  //   if (prevOpen.current === true && open === false) {
-  //     anchorRef.current!.focus();
-  //   }
-  //   prevOpen.current = open;
-  // }, [open]);
-
   return (
     <div className={classes.toolbarContainer}>
       <div className={classes.toolbarButtons}>
@@ -186,7 +177,7 @@ const Menu = (props: MenuProps) => {
                         >
                           <CardContent className={classes.cardContent}>
                             <LaunchIcon fontSize="large" />
-                            <Typography variant="h6">{app.name}</Typography>
+                            <Typography variant="subtitle1" gutterBottom style={{ lineHeight: 1 }}>{app.name}</Typography>
                             {app.description}
                           </CardContent>
                         </Card>
