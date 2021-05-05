@@ -113,7 +113,7 @@ const useStyles = (sidebarWidth) => makeStyles(() => ({
     },
   },
   pageContent: {
-    display: 'table-cell',
+    display: 'block',
     verticalAlign: 'top',
     position: 'relative',
     padding: Theme.spacing(4, 8, 12, 8),
@@ -141,7 +141,7 @@ const useStyles = (sidebarWidth) => makeStyles(() => ({
     },
   },
   sidebarContainer: {
-    display: 'table-cell',
+    display: 'block',
     verticalAlign: 'top',
     backgroundColor: COLORS.GREY[50],
     padding: Theme.spacing(5, 4),
