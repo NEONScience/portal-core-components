@@ -89,7 +89,7 @@ const isAtMaxScroll = () => {
 
 // Google Tag Manager Data Layer
 // Define if not already defined. This must be set in the public/index.html for any apps/pages that
-// would seek top use it. More info: https://developers.google.com/tag-manager/devguide
+// would seek to use it. More info: https://developers.google.com/tag-manager/devguide
 if (!window.gtmDataLayer) {
   window.gtmDataLayer = [];
 }
@@ -423,7 +423,7 @@ const NeonPage = (props) => {
      Effect - For sidebarLinks pages, on successful load, if hash is present then update the current
   */
   useLayoutEffect(() => {
-    if (error || loading || !hasSidebarLinks) { return () => {}; }
+    if (error || loading || !hasSidebarLinks) { return () => { }; }
     const handleHashChange = () => {
       const { hash } = document.location;
       if (currentSidebarHash === hash) { return; }
@@ -968,7 +968,7 @@ NeonPage.defaultProps = {
   notification: null,
   outerPageContainerMaxWidth: '2000px',
   progress: null,
-  resetStateAfterRuntimeError: () => {},
+  resetStateAfterRuntimeError: () => { },
   sidebarContent: null,
   sidebarContainerClassName: null,
   sidebarLinks: null,
