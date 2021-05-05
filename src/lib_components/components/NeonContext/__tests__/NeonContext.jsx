@@ -2,7 +2,7 @@ import { renderHook } from '@testing-library/react-hooks';
 
 import cloneDeep from 'lodash/cloneDeep';
 
-import statesJSON from '../../../staticJSON/sites.json';
+import statesJSON from '../../../../sampleData/sites.json';
 
 import NeonContext, { FETCH_STATUS, getTestableItems } from '../NeonContext';
 

@@ -6,7 +6,9 @@ declare namespace EnhancedAvailabilityInterface {
             siteCode: PropTypes.Validator<string>;
             tables: PropTypes.Validator<(PropTypes.InferProps<{
                 name: PropTypes.Validator<string>;
-                description: PropTypes.Validator<string>;
+                description: PropTypes.Validator<string>; /**
+                   Context-Derived Stuff
+                */
                 waitInterval: PropTypes.Validator<string>;
                 months: PropTypes.Validator<{
                     [x: string]: import("../../types/core").Nullable<string>;

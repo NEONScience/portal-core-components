@@ -63,6 +63,7 @@ HalfAndHalfPattern.defaultProps = {
 export const SvgDefs = () => (
   <svg width="0px" height="0px">
     <defs>
+      <DiagLinesPattern id="availableProvisionalPattern" color={COLORS.NEON_BLUE[700]} secondaryColor={COLORS.NEON_BLUE[100]} />
       <DiagLinesPattern id="beingProcessedPattern" color={COLORS.NEON_BLUE[700]} />
       <DiagLinesPattern id="delayedPattern" color={COLORS.GOLD[400]} />
       <DiagLinesPattern id="partialSelectionPattern" color={COLORS.LIGHT_BLUE[300]} secondaryColor={COLORS.LIGHT_BLUE[100]} />
@@ -101,6 +102,11 @@ export const CELL_ATTRS = {
   available: {
     fill: COLORS.NEON_BLUE[700],
     ...noStrokeAttrs,
+  },
+  'available-provisional': {
+    fill: 'url(#availableProvisionalPattern)',
+    stroke: COLORS.NEON_BLUE[700],
+    ...fatStrokeAttrs,
   },
   'not available': {
     fill: Theme.palette.grey[200],

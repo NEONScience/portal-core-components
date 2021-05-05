@@ -990,6 +990,7 @@ const Provider = (props) => {
 
   // Create an observable for manifests requests and subscribe to it to execute
   // the manifest fetch and dispatch results when updated.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const manifestRequest$ = new Subject();
   manifestRequest$.subscribe((request) => (
     getManifestAjaxObservable(request)

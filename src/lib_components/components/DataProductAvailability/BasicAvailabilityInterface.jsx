@@ -44,6 +44,7 @@ import AvailabilityPending from './AvailabilityPending';
 import BasicAvailabilityGrid from './BasicAvailabilityGrid';
 import BasicAvailabilityKey from './BasicAvailabilityKey';
 import { SVG, TIME, AvailabilityPropTypes } from './AvailabilityUtils';
+import { SvgDefs } from './AvailabilitySvgComponents';
 
 /**
    Setup: CSS classes
@@ -110,7 +111,7 @@ const BasicAvailabilityInterface = (props) => {
   const atXs = useMediaQuery(Theme.breakpoints.only('xs'));
   const atSm = useMediaQuery(Theme.breakpoints.only('sm'));
   const siteChipClasses = useSiteChipStyles(Theme);
-  const { ...other } = props;
+  const { dataProducts, ...other } = props;
 
   const [
     { data: neonContextData, isFinal: neonContextIsFinal, hasError: neonContextHasError },
@@ -146,11 +147,17 @@ const BasicAvailabilityInterface = (props) => {
   };
   const SORT_DIRECTIONS = ['ASC', 'DESC'];
 
+  const PRODUCT_LOOKUP = {};
+  dataProducts.forEach((product) => {
+    PRODUCT_LOOKUP[product.dataProductCode] = product.dataProductTitle;
+  });
+
   /**
      State: Views
      Contain and sort the availability data.
      Afford different methods for presenting/grouping data along the y-axis (geospatial)
   */
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const views = {
     summary: {
       view: 'summary',
@@ -208,6 +215,16 @@ const BasicAvailabilityInterface = (props) => {
         },
       },
     },
+    products: {
+      view: 'products',
+      name: 'Product',
+      selectable: false,
+      rows: {},
+      getLabel: {
+        text: (key) => key,
+        title: (key) => PRODUCT_LOOKUP[key],
+      },
+    },
   };
   views.ungrouped.rows = views.sites.rows;
   const selectableViewKeys = Object.keys(views).filter((key) => views[key].selectable);
@@ -229,7 +246,7 @@ const BasicAvailabilityInterface = (props) => {
     dispatchSelection,
   ] = DownloadDataContext.useDownloadDataState();
 
-  const { disableSelection } = props;
+  const { disableSelection, delineateRelease } = props;
   const selectionEnabled = !disableSelection
     && requiredSteps.some((step) => step.key === 'sitesAndDateRange');
 
@@ -315,6 +332,7 @@ const BasicAvailabilityInterface = (props) => {
     setCurrentView(newView);
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   let sortedSites = [];
   const applySort = () => {
     if (currentView !== 'ungrouped') { return; }
@@ -374,18 +392,51 @@ const BasicAvailabilityInterface = (props) => {
     siteCodes = contextSiteCodes;
   }
   siteCodes.forEach((site) => {
-    const { siteCode, availableMonths } = site;
+    const { siteCode, availableMonths, availableReleases } = site;
     if (!allSites[siteCode]) { return; }
     const { stateCode, domainCode } = allSites[siteCode];
     if (!downloadContextIsActive) { sites.validValues.push(siteCode); }
+    let provAvailableMonths = [];
+    if (delineateRelease && Array.isArray(availableReleases)) {
+      const provRelease = availableReleases.find((value) => value.release === 'PROVISIONAL');
+      if (provRelease) {
+        provAvailableMonths = provRelease.availableMonths;
+      }
+    }
     views.sites.rows[siteCode] = {};
     views.states.rows[stateCode] = views.states.rows[stateCode] || {};
     views.domains.rows[domainCode] = views.domains.rows[domainCode] || {};
     availableMonths.forEach((month) => {
-      views.summary.rows.summary[month] = 'available';
-      views.sites.rows[siteCode][month] = 'available';
-      views.states.rows[stateCode][month] = 'available';
-      views.domains.rows[domainCode][month] = 'available';
+      let status = 'available';
+      if (delineateRelease && provAvailableMonths && (provAvailableMonths.length > 0)) {
+        if (provAvailableMonths.includes(month)) {
+          status = 'available-provisional';
+        }
+      }
+      views.summary.rows.summary[month] = status;
+      views.sites.rows[siteCode][month] = status;
+      views.states.rows[stateCode][month] = status;
+      views.domains.rows[domainCode][month] = status;
+    });
+  });
+  dataProducts.forEach((product) => {
+    const { dataProductCode, availableMonths, availableReleases } = product;
+    let provAvailableMonths = [];
+    if (delineateRelease && Array.isArray(availableReleases)) {
+      const provRelease = availableReleases.find((value) => value.release === 'PROVISIONAL');
+      if (provRelease) {
+        provAvailableMonths = provRelease.availableMonths;
+      }
+    }
+    views.products.rows[dataProductCode] = {};
+    availableMonths.forEach((month) => {
+      let status = 'available';
+      if (delineateRelease && provAvailableMonths && (provAvailableMonths.length > 0)) {
+        if (provAvailableMonths.includes(month)) {
+          status = 'available-provisional';
+        }
+      }
+      views.products.rows[dataProductCode][month] = status;
     });
   });
   if (!downloadContextIsActive) {
@@ -445,7 +496,8 @@ const BasicAvailabilityInterface = (props) => {
      Render: NeonContext-related Loading and Error States
   */
   if (!neonContextIsFinal || neonContextHasError) {
-    return <AvailabilityPending />;
+    const message = (currentView === 'products') ? 'Loading Products...' : 'Loading Sites...';
+    return <AvailabilityPending message={message} />;
   }
 
   /**
@@ -557,6 +609,55 @@ const BasicAvailabilityInterface = (props) => {
       </div>
     </div>
   );
+
+  /**
+     Render: View Controls
+  */
+  const renderViewControls = () => {
+    if (currentView === 'products') {
+      return (<Grid item xs={12} />);
+    }
+    return (
+      <Grid item xs={12} sm={currentView === 'ungrouped' ? 12 : 5} md={6}>
+        {currentView === 'ungrouped' ? renderSortOptions() : renderViewOptions()}
+      </Grid>
+    );
+  };
+
+  /**
+     Render: Key
+  */
+  const renderKey = () => {
+    let smWidth = currentView === 'ungrouped' ? 12 : 7;
+    let mdWidth = 6;
+    if (currentView === 'products') {
+      smWidth = 12;
+      mdWidth = 12;
+    }
+    return (
+      <Grid
+        item
+        xs={12}
+        sm={smWidth}
+        md={mdWidth}
+        style={{ display: 'flex', alignItems: 'center' }}
+      >
+        <Typography
+          variant="h6"
+          className={classes.h6Small}
+          style={{ marginRight: Theme.spacing(1.5) }}
+        >
+          Key:
+        </Typography>
+        <BasicAvailabilityKey
+          orientation={currentView === 'products' ? 'horizontal' : ''}
+          selectionEnabled={selectionEnabled}
+          delineateRelease={delineateRelease}
+          style={{ flexGrow: 1 }}
+        />
+      </Grid>
+    );
+  };
 
   /**
      Render: Selection
@@ -692,6 +793,7 @@ const BasicAvailabilityInterface = (props) => {
       data-selenium="data-product-availability"
       {...other}
     >
+      <SvgDefs />
       <Grid
         container
         spacing={2}
@@ -703,25 +805,8 @@ const BasicAvailabilityInterface = (props) => {
             {renderSelection()}
           </Grid>
         ) : null}
-        <Grid item xs={12} sm={currentView === 'ungrouped' ? 12 : 5} md={6}>
-          {currentView === 'ungrouped' ? renderSortOptions() : renderViewOptions()}
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          sm={currentView === 'ungrouped' ? 12 : 7}
-          md={6}
-          style={{ display: 'flex', alignItems: 'center' }}
-        >
-          <Typography
-            variant="h6"
-            className={classes.h6Small}
-            style={{ marginRight: Theme.spacing(1.5) }}
-          >
-            Key:
-          </Typography>
-          <BasicAvailabilityKey selectionEnabled={selectionEnabled} style={{ flexGrow: 1 }} />
-        </Grid>
+        {renderViewControls()}
+        {renderKey()}
       </Grid>
       <svg
         id={uniqueId('dpa-')}
@@ -736,18 +821,22 @@ const BasicAvailabilityInterface = (props) => {
 BasicAvailabilityInterface.propTypes = {
   // eslint-disable-line react/no-unused-prop-types
   siteCodes: AvailabilityPropTypes.basicSiteCodes,
-  view: PropTypes.oneOf(['summary', 'sites', 'states', 'domains', 'ungrouped']),
+  dataProducts: AvailabilityPropTypes.dataProducts,
+  view: PropTypes.oneOf(['summary', 'sites', 'states', 'domains', 'ungrouped', 'products']),
   sortMethod: PropTypes.oneOf(['sites', 'states', 'domains']),
   sortDirection: PropTypes.oneOf(['ASC', 'DESC']),
   disableSelection: PropTypes.bool,
+  delineateRelease: PropTypes.bool,
 };
 
 BasicAvailabilityInterface.defaultProps = {
   siteCodes: [],
+  dataProducts: [],
   view: null,
   sortMethod: null,
   sortDirection: 'ASC',
   disableSelection: false,
+  delineateRelease: false,
 };
 
 export default BasicAvailabilityInterface;

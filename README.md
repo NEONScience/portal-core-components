@@ -229,7 +229,7 @@ For Windows users the `npm run lib` command may fail with complaint about 'NODE_
 
 ## Library Composition
 
-This package was originally onfigured with advice from [this article](https://medium.com/@lokhmakov/best-way-to-create-npm-packages-with-create-react-app-b24dd449c354).
+This package was originally configured with advice from [this article](https://medium.com/@lokhmakov/best-way-to-create-npm-packages-with-create-react-app-b24dd449c354).
 
 In summary, it began as a create-react-app app that was ejected. A `babel.config.json` was added with minor configuration and a script to invoke babel to run a library build was added.
 

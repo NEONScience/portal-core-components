@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "name": "sidebar-filter",
+  "main": "./SidebarFilter.tsx",
+  "module": "./SidebarFilter.tsx"
+}

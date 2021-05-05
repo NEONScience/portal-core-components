@@ -147,17 +147,19 @@ class AsyncFlowProvider implements IAsyncFlowProvider {
       });
     }
     return {
-      asyncWorkingAction: () => ({
+      asyncWorkingAction: (param?: any) => ({
         type: actionTypes.working,
+        param,
       }),
       asyncCompletedAction: (data: T) => ({
         type: actionTypes.completed,
         data,
       }),
-      asyncErrorAction: (error: any, message: Nullable<string>) => ({
+      asyncErrorAction: (error: any, message: Nullable<string>, data?: any) => ({
         type: actionTypes.error,
         error,
         message,
+        data,
       }),
       asyncResetAction: resetAction,
       parserFunction,

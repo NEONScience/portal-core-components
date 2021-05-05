@@ -9,6 +9,15 @@ export const CELL_ATTRS: {
         nudge: number;
         fill: string;
     };
+    'available-provisional': {
+        strokeWidth: string;
+        width: string;
+        height: string;
+        rx: string;
+        nudge: number;
+        fill: string;
+        stroke: string;
+    };
     'not available': {
         stroke: null;
         strokeWidth: null;

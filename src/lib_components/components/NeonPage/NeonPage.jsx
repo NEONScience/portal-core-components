@@ -55,6 +55,8 @@ import {
 
 import NeonLogo from '../../images/NSF-NEON-logo.png';
 
+import './styles.css';
+
 const DRUPAL_THEME_CSS = REMOTE_ASSETS.DRUPAL_THEME_CSS.KEY;
 
 const cookies = new Cookies();
@@ -97,28 +99,27 @@ if (!window.gtmDataLayer) {
 // NOTE: because these are defined outside the ThemeProvider any theme vars must come directly from
 // the Theme import, unlike most other useStyles() instances where the Theme import is passed to the
 // hook as an argument.
-const useStyles = makeStyles(() => ({
+const useStyles = (sidebarWidth) => makeStyles(() => ({
   outerPageContainer: {
+    display: 'flex',
     position: 'relative',
     minHeight: Theme.spacing(30),
     borderTop: '2px solid transparent',
     paddingLeft: '0px',
     paddingRight: '0px',
-    [Theme.breakpoints.up('md')]: {
-      display: 'table',
-      tableLayout: 'fixed',
-    },
     [Theme.breakpoints.down('sm')]: {
       paddingBottom: Theme.spacing(2.5),
       flexDirection: 'column',
     },
   },
   pageContent: {
-    display: 'table-cell',
+    display: 'block',
     verticalAlign: 'top',
     position: 'relative',
     padding: Theme.spacing(4, 8, 12, 8),
+    width: `calc(100% - ${sidebarWidth}px)`,
     [Theme.breakpoints.down('sm')]: {
+      width: '100%',
       display: 'block',
       padding: Theme.spacing(3, 5, 8, 5),
     },
@@ -140,7 +141,7 @@ const useStyles = makeStyles(() => ({
     },
   },
   sidebarContainer: {
-    display: 'table-cell',
+    display: 'block',
     verticalAlign: 'top',
     backgroundColor: COLORS.GREY[50],
     padding: Theme.spacing(5, 4),
@@ -159,7 +160,7 @@ const useStyles = makeStyles(() => ({
     },
   },
   sidebarInnerStickyContainer: {
-    position: 'sticky',
+    // Sticky properties injected via CSS to handle webkit position prop
     top: '40px',
   },
   sidebarTitleContainer: {
@@ -299,7 +300,7 @@ export const NeonErrorPage = (props) => {
     error: { message, stack },
     resetErrorBoundary,
   } = props;
-  const classes = useStyles();
+  const classes = useStyles(0)();
   // eslint-disable-next-line no-console
   console.error(stack);
   return (
@@ -378,7 +379,15 @@ const NeonPage = (props) => {
     children,
   } = props;
 
-  const classes = useStyles();
+  /**
+    Sidebar Setup
+  */
+  // Sidebar can have content OR links, not both. If both are set then content wins.
+  const hasSidebarContent = sidebarContent !== null;
+  const hasSidebarLinks = !sidebarContent && Array.isArray(sidebarLinks) && sidebarLinks.length > 0;
+  const hasSidebar = hasSidebarContent || hasSidebarLinks;
+
+  const classes = useStyles(hasSidebar ? sidebarWidth : 0)();
   const [{ isActive: neonContextIsActive }] = NeonContext.useNeonContextState();
   const headerRef = useRef(null);
   const contentRef = useRef(null);
@@ -391,16 +400,13 @@ const NeonPage = (props) => {
   const useSomeDrupalAssets = !(customHeader && customFooter);
 
   /**
-    Sidebar Setup
+    Continue Sidebar Setup
   */
-  // Sidebar can have content OR links, not both. If both are set then content wins.
-  const hasSidebarContent = sidebarContent !== null;
-  const hasSidebarLinks = !sidebarContent && Array.isArray(sidebarLinks) && sidebarLinks.length > 0;
-  const hasSidebar = hasSidebarContent || hasSidebarLinks;
   // sidebarLinksAsStandaloneChildren can only be true if all sidebar links have a defined component
   const sidebarLinksAsStandaloneChildren = hasSidebarLinks && sidebarLinksAsStandaloneChildrenProp
     ? sidebarLinks.every((link) => link.component)
     : false;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const sidebarHashMap = !hasSidebarLinks ? {} : Object.fromEntries(
     sidebarLinks.map((link, idx) => [link.hash || '#', idx]),
   );
@@ -789,7 +795,11 @@ const NeonPage = (props) => {
     );
     return (
       <div ref={sidebarRef} className={sidebarClassName} style={sidebarContainerStyle}>
-        <div className={!sidebarUnsticky && !belowMd ? classes.sidebarInnerStickyContainer : null}>
+        <div
+          className={!sidebarUnsticky && !belowMd
+            ? `${classes.sidebarInnerStickyContainer} neon__sidebar-sticky`
+            : null}
+        >
           <div className={classes.sidebarTitleContainer}>
             {renderSidebarTitle()}
             {!belowMd ? null : (

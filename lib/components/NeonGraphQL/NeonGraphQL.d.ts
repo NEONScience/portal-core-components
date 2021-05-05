@@ -9,13 +9,13 @@ export namespace DIMENSIONALITIES {
 }
 export default NeonGraphQL;
 declare namespace NeonGraphQL {
-    export function getDataProductByCode(productCode: any, release: any): import("rxjs").Observable<null> | import("rxjs").Observable<import("rxjs/ajax").AjaxResponse>;
-    export function getAllDataProducts(release: any): import("rxjs").Observable<null> | import("rxjs").Observable<import("rxjs/ajax").AjaxResponse>;
-    export function getSiteByCode(siteCode: any): import("rxjs").Observable<null> | import("rxjs").Observable<import("rxjs/ajax").AjaxResponse>;
-    export function getAllSites(): import("rxjs").Observable<null> | import("rxjs").Observable<import("rxjs/ajax").AjaxResponse>;
-    export function getLocationByName(locationName: any): import("rxjs").Observable<null> | import("rxjs").Observable<import("rxjs/ajax").AjaxResponse>;
-    export function getManyLocationsByName(locationNames?: any[]): import("rxjs").Observable<null> | import("rxjs").Observable<import("rxjs/ajax").AjaxResponse>;
-    export function getGraphqlQuery(query: string): import("rxjs").Observable<null> | import("rxjs").Observable<import("rxjs/ajax").AjaxResponse>;
+    export function getDataProductByCode(productCode: any, release: any): import("rxjs").Observable<import("rxjs/ajax").AjaxResponse> | import("rxjs").Observable<null>;
+    export function getAllDataProducts(release: any): import("rxjs").Observable<import("rxjs/ajax").AjaxResponse> | import("rxjs").Observable<null>;
+    export function getSiteByCode(siteCode: any): import("rxjs").Observable<import("rxjs/ajax").AjaxResponse> | import("rxjs").Observable<null>;
+    export function getAllSites(): import("rxjs").Observable<import("rxjs/ajax").AjaxResponse> | import("rxjs").Observable<null>;
+    export function getLocationByName(locationName: any): import("rxjs").Observable<import("rxjs/ajax").AjaxResponse> | import("rxjs").Observable<null>;
+    export function getManyLocationsByName(locationNames?: any[]): import("rxjs").Observable<import("rxjs/ajax").AjaxResponse> | import("rxjs").Observable<null>;
+    export function getGraphqlQuery(query: string): import("rxjs").Observable<import("rxjs/ajax").AjaxResponse> | import("rxjs").Observable<null>;
     export function getGraphqlAjaxRequest(query: string): {
         method: string;
         crossDomain: boolean;

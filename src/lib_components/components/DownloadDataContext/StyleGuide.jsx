@@ -109,6 +109,7 @@ const MyAppComponent = () => {
   // Don't forget to dispatch 'setBroadcastDone' at this level so that we stop
   // broadcasting updates at the top level after one time, until another update is
   // made in this component that explicitly triggers a subsequent broadcast.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const higherOrderSubject = new ReplaySubject(1);
   useEffect(() => {
     if (myAppState.downloadState.broadcast) {

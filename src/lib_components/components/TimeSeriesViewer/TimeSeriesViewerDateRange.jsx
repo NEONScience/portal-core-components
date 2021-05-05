@@ -91,9 +91,12 @@ const TimeSeriesViewerDateRange = (props) => {
   ]);
 
   // Derive site and availability values for the AvailabilityGrid
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const availabilityDateRange = { value: currentRange, validValues: selectableRange };
   const selectedSites = state.selection.sites.map((site) => site.siteCode);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const availabilitySites = { value: selectedSites, validValues: selectedSites };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const availabilityData = {
     view: 'sites',
     name: 'Site',

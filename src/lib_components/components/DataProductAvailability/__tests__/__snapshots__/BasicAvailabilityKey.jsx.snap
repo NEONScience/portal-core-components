@@ -7,7 +7,7 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
   <svg
     className="makeStyles-legendSvg-2"
     height={36}
-    width="90"
+    width={90}
   >
     <rect
       fill="#002c77"

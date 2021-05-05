@@ -162,7 +162,7 @@ const factory = {
   },
   createRxStompConfig: (): RxStompConfig => ({
     webSocketFactory: (): any => new SockJS(NeonEnvironment.getFullAuthApiPath('ws', false)),
-    reconnectDelay: 200,
+    reconnectDelay: 1000,
     connectHeaders: (NeonApi.getApiTokenHeader() as StompHeaders),
     disconnectHeaders: (NeonApi.getApiTokenHeader() as StompHeaders),
   }),

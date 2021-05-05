@@ -76,11 +76,11 @@ const useStyles = makeStyles((theme) => ({
   // Injecting these styles as a means of fixing up the search display
   // Ideally, this CSS comes from Drupal and is removed from here...
   headerContainer: {
-    // Added menu__link to more closely mimic Drupal site links.
-    '& .menu__link': {
-      fontSize: '1.1rem !important',
-      fontWeight: '700 !important',
-    },
+    // // Added menu__link to more closely mimic Drupal site links.
+    // '& .menu__link': {
+    //   fontSize: '1.1rem !important',
+    //   fontWeight: '700 !important',
+    // },
     '& .header__search': {
       background: '#f5f6f7',
       position: 'relative',
@@ -112,8 +112,8 @@ const useStyles = makeStyles((theme) => ({
       alignItems: 'center',
     },
     '& .header__search--inner > .header__search--title': {
-      fontWeight: '700 !important', // Changed from 600 to match Drupal site.
-      fontSize: '1.2rem !important', // Changed from 0.9 to match Drupal site.
+      fontWeight: '600 !important', // Changed from 600 to match Drupal site.
+      fontSize: '0.9rem !important', // Changed from 0.9 to match Drupal site.
       margin: '0 2.6rem 0 0 !important',
     },
     [theme.breakpoints.up('lg')]: {
