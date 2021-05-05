@@ -82,11 +82,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
 }));
 
-const getApps = (): UserApp[] => {
-  const [{ auth: authData }] = NeonContext.useNeonContextState();
-  return authData?.userData?.data?.apps;
-};
-
 // define the menu component
 const Menu = (props: MenuProps) => {
   const { apps } = props;
@@ -195,7 +190,8 @@ const Menu = (props: MenuProps) => {
 };
 
 export default function ApplicationMenu() {
-  const apps: UserApp[] = getApps();
+  const [{ auth: authData }] = NeonContext.useNeonContextState();
+  const apps: UserApp[] = authData?.userData?.data?.apps;
   if (apps?.length > 0) {
     return (
       <Menu apps={apps} />

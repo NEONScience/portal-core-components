@@ -23,12 +23,12 @@ exports[`ReleaseFilter Renders gracefully with an invalid selection 1`] = `
       aria-label={
         <div>
           A data release is a set of data files that is static (unchanging), always available to end users, and citable. See 
-          <ForwardRef(WithStyles)
+          <WithStyles(ForwardRef(Link))
             href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases"
             target="_blank"
           >
             Data Product Revisions and Releases
-          </ForwardRef(WithStyles)>
+          </WithStyles(ForwardRef(Link))>
            for more details.
         </div>
       }
@@ -181,12 +181,12 @@ exports[`ReleaseFilter Renders in skeleton mode 1`] = `
       aria-label={
         <div>
           A data release is a set of data files that is static (unchanging), always available to end users, and citable. See 
-          <ForwardRef(WithStyles)
+          <WithStyles(ForwardRef(Link))
             href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases"
             target="_blank"
           >
             Data Product Revisions and Releases
-          </ForwardRef(WithStyles)>
+          </WithStyles(ForwardRef(Link))>
            for more details.
         </div>
       }
@@ -280,12 +280,12 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
       aria-label={
         <div>
           A data release is a set of data files that is static (unchanging), always available to end users, and citable. See 
-          <ForwardRef(WithStyles)
+          <WithStyles(ForwardRef(Link))
             href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases"
             target="_blank"
           >
             Data Product Revisions and Releases
-          </ForwardRef(WithStyles)>
+          </WithStyles(ForwardRef(Link))>
            for more details.
         </div>
       }
@@ -520,12 +520,12 @@ exports[`ReleaseFilter Renders with a custom title 1`] = `
       aria-label={
         <div>
           A data release is a set of data files that is static (unchanging), always available to end users, and citable. See 
-          <ForwardRef(WithStyles)
+          <WithStyles(ForwardRef(Link))
             href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases"
             target="_blank"
           >
             Data Product Revisions and Releases
-          </ForwardRef(WithStyles)>
+          </WithStyles(ForwardRef(Link))>
            for more details.
         </div>
       }
@@ -679,12 +679,12 @@ exports[`ReleaseFilter Renders with a selected release 1`] = `
       aria-label={
         <div>
           A data release is a set of data files that is static (unchanging), always available to end users, and citable. See 
-          <ForwardRef(WithStyles)
+          <WithStyles(ForwardRef(Link))
             href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases"
             target="_blank"
           >
             Data Product Revisions and Releases
-          </ForwardRef(WithStyles)>
+          </WithStyles(ForwardRef(Link))>
            for more details.
         </div>
       }
@@ -916,12 +916,12 @@ exports[`ReleaseFilter Renders with custom layouts 1`] = `
         aria-label={
           <div>
             A data release is a set of data files that is static (unchanging), always available to end users, and citable. See 
-            <ForwardRef(WithStyles)
+            <WithStyles(ForwardRef(Link))
               href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases"
               target="_blank"
             >
               Data Product Revisions and Releases
-            </ForwardRef(WithStyles)>
+            </WithStyles(ForwardRef(Link))>
              for more details.
           </div>
         }
@@ -1092,12 +1092,12 @@ exports[`ReleaseFilter Renders with list of releases with DOIs 1`] = `
       aria-label={
         <div>
           A data release is a set of data files that is static (unchanging), always available to end users, and citable. See 
-          <ForwardRef(WithStyles)
+          <WithStyles(ForwardRef(Link))
             href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases"
             target="_blank"
           >
             Data Product Revisions and Releases
-          </ForwardRef(WithStyles)>
+          </WithStyles(ForwardRef(Link))>
            for more details.
         </div>
       }
@@ -1250,12 +1250,12 @@ exports[`ReleaseFilter Renders with list of releases without DOIs 1`] = `
       aria-label={
         <div>
           A data release is a set of data files that is static (unchanging), always available to end users, and citable. See 
-          <ForwardRef(WithStyles)
+          <WithStyles(ForwardRef(Link))
             href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases"
             target="_blank"
           >
             Data Product Revisions and Releases
-          </ForwardRef(WithStyles)>
+          </WithStyles(ForwardRef(Link))>
            for more details.
         </div>
       }
@@ -1408,12 +1408,12 @@ exports[`ReleaseFilter Renders with no props 1`] = `
       aria-label={
         <div>
           A data release is a set of data files that is static (unchanging), always available to end users, and citable. See 
-          <ForwardRef(WithStyles)
+          <WithStyles(ForwardRef(Link))
             href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases"
             target="_blank"
           >
             Data Product Revisions and Releases
-          </ForwardRef(WithStyles)>
+          </WithStyles(ForwardRef(Link))>
            for more details.
         </div>
       }
@@ -1567,12 +1567,12 @@ exports[`ReleaseFilter Renders with product counts (using data product codes) 1`
       aria-label={
         <div>
           A data release is a set of data files that is static (unchanging), always available to end users, and citable. See 
-          <ForwardRef(WithStyles)
+          <WithStyles(ForwardRef(Link))
             href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases"
             target="_blank"
           >
             Data Product Revisions and Releases
-          </ForwardRef(WithStyles)>
+          </WithStyles(ForwardRef(Link))>
            for more details.
         </div>
       }
@@ -1725,12 +1725,12 @@ exports[`ReleaseFilter Renders with product counts (using data product objects) 
       aria-label={
         <div>
           A data release is a set of data files that is static (unchanging), always available to end users, and citable. See 
-          <ForwardRef(WithStyles)
+          <WithStyles(ForwardRef(Link))
             href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases"
             target="_blank"
           >
             Data Product Revisions and Releases
-          </ForwardRef(WithStyles)>
+          </WithStyles(ForwardRef(Link))>
            for more details.
         </div>
       }

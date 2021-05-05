@@ -406,6 +406,7 @@ const NeonPage = (props) => {
   const sidebarLinksAsStandaloneChildren = hasSidebarLinks && sidebarLinksAsStandaloneChildrenProp
     ? sidebarLinks.every((link) => link.component)
     : false;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const sidebarHashMap = !hasSidebarLinks ? {} : Object.fromEntries(
     sidebarLinks.map((link, idx) => [link.hash || '#', idx]),
   );
