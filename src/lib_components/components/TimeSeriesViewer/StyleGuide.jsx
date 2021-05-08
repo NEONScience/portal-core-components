@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid */
 
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 
 import { of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
@@ -8,6 +8,7 @@ import { map, catchError } from 'rxjs/operators';
 import cloneDeep from 'lodash/cloneDeep';
 
 import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
@@ -17,11 +18,20 @@ import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 
+import DialogBase from '../DialogBase/DialogBase';
 import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
 import NeonContext from '../NeonContext/NeonContext';
 import Theme from '../Theme/Theme';
 
+import TimeSeriesViewerContext from './TimeSeriesViewerContext';
 import TimeSeriesViewer from './TimeSeriesViewer';
+import TimeSeriesViewerContainer from './TimeSeriesViewerContainer';
+
+import parseTimeSeriesData from '../../workers/parseTimeSeriesData';
+
+import DP1_00001_001_ABBY_BASIC_30MIN_2018_12 from '../../../sampleData/TimeSeries/D16.ABBY.DP1.00001.001.2018-12.30min.basic';
+
+import productJSON from '../../../sampleData/DP1.00001.001.json';
 
 const useStyles = makeStyles((theme) => ({
   divider: {
@@ -143,6 +153,132 @@ const AllProductsTimeSeries = () => {
   return <div>Loading...</div>;
 };
 
+const StaticTimeSeriesViewer = () => {
+  const [timeSeriesState, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
+  const { status, variables } = timeSeriesState;
+
+  useEffect(() => {
+    dispatch({
+      type: 'fetchSitePositionsSucceeded',
+      csv: DP1_00001_001_ABBY_BASIC_30MIN_2018_12.sensorPositions,
+      siteCode: 'ABBY',
+    });
+    dispatch({
+      type: 'fetchSiteVariablesSucceeded',
+      csv: DP1_00001_001_ABBY_BASIC_30MIN_2018_12.variables,
+      siteCode: 'ABBY',
+    });
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (status === 'READY_FOR_DATA') {
+      const input = {
+        csv: DP1_00001_001_ABBY_BASIC_30MIN_2018_12.data,
+        variables,
+      };
+      parseTimeSeriesData(input)
+        .then((series) => {
+          const actionProps = {
+            siteCode: 'ABBY',
+            position: '000.010',
+            month: '2018-12',
+            downloadPkg: 'basic',
+            timeStep: '30min',
+          };
+          dispatch({
+            type: 'fetchDataFileSucceeded',
+            series,
+            ...actionProps,
+          });
+          dispatch({ type: 'staticFetchDataFilesCompleted' });
+        });
+    }
+  }, [dispatch, status, variables]);
+
+  return (<TimeSeriesViewerContainer />);
+};
+
+const StaticTimeSeriesViewerDialog = () => {
+  const classes = useStyles(Theme);
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  return (
+    <>
+
+      <DocBlock>
+        The Time Series Viewer development environment for dialog presentation
+        with statically injected data.
+      </DocBlock>
+      <CodeBlock>
+        {`
+import Button from '@material-ui/core/Button';
+import DialogBase from '../DialogBase/DialogBase';
+import TimeSeriesViewerContext from 'portal-core-components/lib/components/TimeSeriesViewerContext/TimeSeriesViewerContext';
+import TimeSeriesViewerContainer from 'portal-core-components/lib/components/TimeSeriesViewerContainer/TimeSeriesViewerContainer';
+        `}
+      </CodeBlock>
+
+      <Typography variant="h5" component="h3" gutterBottom>Usage</Typography>
+
+      <CodeBlock>
+        {`
+const [dialogOpen, setDialogOpen] = useState(false);
+// API response for a product as productJSON
+return (
+  <>
+    <Button
+      color="primary"
+      variant="contained"
+      onClick={() => setDialogOpen(true)}
+    >
+      Open Time Series Dialog
+    </Button>
+    {!dialogOpen ? null : (
+      <DialogBase
+        open
+        nopaper
+        title="Time Series Viewer"
+        onClose={() => setDialogOpen(false)}
+      >
+        <TimeSeriesViewerContext.Provider mode="STATIC" productData={productJSON.data}>
+          <StaticTimeSeriesViewer />
+        </TimeSeriesViewerContext.Provider>
+      </DialogBase>
+    )}
+  </>
+);
+        `}
+      </CodeBlock>
+      <ExampleBlock>
+        <>
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={() => setDialogOpen(true)}
+          >
+            Open Time Series Dialog
+          </Button>
+          {!dialogOpen ? null : (
+            <DialogBase
+              open
+              nopaper
+              title="Time Series Viewer"
+              onClose={() => setDialogOpen(false)}
+            >
+              <TimeSeriesViewerContext.Provider mode="STATIC" productData={productJSON.data}>
+                <StaticTimeSeriesViewer />
+              </TimeSeriesViewerContext.Provider>
+            </DialogBase>
+          )}
+        </>
+      </ExampleBlock>
+
+      <Divider className={classes.divider} />
+
+    </>
+  );
+};
+
 export default function StyleGuide() {
   const classes = useStyles(Theme);
 
@@ -187,6 +323,92 @@ import TimeSeriesViewer from 'portal-core-components/lib/components/TimeSeriesVi
         ...
       </DocBlock>
       */}
+
+      <Typography variant="h4" component="h2" gutterBottom>Static Data</Typography>
+
+      <DocBlock>
+        The Time Series Viewer development environment with statically injected data.
+      </DocBlock>
+
+      <DocBlock>
+        Define higher order component to wrap the injection of static data:
+      </DocBlock>
+      <CodeBlock>
+        {`
+const StaticTimeSeriesViewer = () => {
+  const [timeSeriesState, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
+  const { status, variables } = timeSeriesState;
+
+  useEffect(() => {
+    dispatch({
+      type: 'fetchSitePositionsSucceeded',
+      csv: DP1_00001_001_ABBY_BASIC_30MIN_2018_12.sensorPositions,
+      siteCode: 'ABBY',
+    });
+    dispatch({
+      type: 'fetchSiteVariablesSucceeded',
+      csv: DP1_00001_001_ABBY_BASIC_30MIN_2018_12.variables,
+      siteCode: 'ABBY',
+    });
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (status === 'READY_FOR_DATA') {
+      const input = {
+        csv: DP1_00001_001_ABBY_BASIC_30MIN_2018_12.data,
+        variables,
+      };
+      parseTimeSeriesData(input)
+        .then((series) => {
+          const actionProps = {
+            siteCode: 'ABBY',
+            position: '000.010',
+            month: '2018-12',
+            downloadPkg: 'basic',
+            timeStep: '30min',
+          };
+          dispatch({
+            type: 'fetchDataFileSucceeded',
+            series,
+            ...actionProps,
+          });
+          dispatch({ type: 'staticFetchDataFilesCompleted' });
+        });
+    }
+  }, [dispatch, status, variables]);
+
+  return (<TimeSeriesViewerContainer />);
+};
+        `}
+      </CodeBlock>
+      <CodeBlock>
+        {`
+import TimeSeriesViewerContext from 'portal-core-components/lib/components/TimeSeriesViewerContext/TimeSeriesViewerContext';
+import TimeSeriesViewerContainer from 'portal-core-components/lib/components/TimeSeriesViewerContainer/TimeSeriesViewerContainer';
+        `}
+      </CodeBlock>
+
+      <Typography variant="h5" component="h3" gutterBottom>Usage</Typography>
+
+      <CodeBlock>
+        {`
+// API response for a product as productJSON
+<TimeSeriesViewerContext.Provider mode="STATIC" productData={productJSON.data}>
+  <StaticTimeSeriesViewer />
+</TimeSeriesViewerContext.Provider>
+        `}
+      </CodeBlock>
+      <ExampleBlock>
+        <TimeSeriesViewerContext.Provider mode="STATIC" productData={productJSON.data}>
+          <StaticTimeSeriesViewer />
+        </TimeSeriesViewerContext.Provider>
+      </ExampleBlock>
+
+      <Divider className={classes.divider} />
+
+      <Typography variant="h4" component="h2" gutterBottom>Static Data Dialog</Typography>
+
+      <StaticTimeSeriesViewerDialog />
 
     </>
   );

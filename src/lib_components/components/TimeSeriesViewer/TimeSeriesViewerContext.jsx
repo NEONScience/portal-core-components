@@ -34,6 +34,11 @@ import parseTimeSeriesData from '../../workers/parseTimeSeriesData';
 // 'get' is a reserved word so can't be imported with import
 const lodashGet = require('lodash/get.js');
 
+const VIEWER_MODE = {
+  DEFAULT: 'DEFAULT',
+  STATIC: 'STATIC',
+};
+
 // Every possible status a single fetch request can have
 const FETCH_STATUS = {
   AWAITING_CALL: 'AWAITING_CALL',
@@ -144,6 +149,7 @@ const DEFAULT_AXIS_STATE = {
   axisRange: [0, 0],
 };
 export const DEFAULT_STATE = {
+  mode: VIEWER_MODE.DEFAULT,
   status: TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT,
   displayError: null,
   fetchProduct: { status: FETCH_STATUS.AWAITING_CALL, error: null },
@@ -925,6 +931,15 @@ const reducer = (state, action) => {
       newState.status = TIME_SERIES_VIEWER_STATUS.READY_FOR_SERIES;
       return newState;
 
+    // Static data injection action, ignore fetches
+    case 'staticFetchDataFilesCompleted':
+      newState.status = TIME_SERIES_VIEWER_STATUS.READY_FOR_SERIES;
+      calcSelection();
+      if (!newState.selection.variables.length) {
+        return softFail('None of the variables for this product\'s default site/month/position have data. Please select a different site, month, or position.');
+      }
+      return newState;
+
     // Fetch Data Actions (Single File)
     case 'fetchDataFileFailed':
       newState.product
@@ -1122,6 +1137,7 @@ const reducer = (state, action) => {
 */
 const Provider = (props) => {
   const {
+    mode: modeProp,
     productCode: productCodeProp,
     productData: productDataProp,
     children,
@@ -1131,6 +1147,9 @@ const Provider = (props) => {
      Initial State and Reducer Setup
   */
   const initialState = cloneDeep(DEFAULT_STATE);
+  if ((typeof modeProp === 'string') && (modeProp !== VIEWER_MODE.DEFAULT)) {
+    initialState.mode = modeProp;
+  }
   initialState.status = productDataProp
     ? TIME_SERIES_VIEWER_STATUS.LOADING_META
     : TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT;
@@ -1147,15 +1166,19 @@ const Provider = (props) => {
      Effect - Reinitialize state if the product code prop changed
   */
   useEffect(() => {
+    // Ignore initialization when in static mode
+    if (state.mode === VIEWER_MODE.STATIC) { return; }
     if (productCodeProp !== state.product.productCode) {
       dispatch({ type: 'reinitialize', productCode: productCodeProp });
     }
-  }, [productCodeProp, state.product.productCode, dispatch]);
+  }, [state.mode, productCodeProp, state.product.productCode, dispatch]);
 
   /**
      Effect - Fetch product data if only a product code was provided in props
   */
   useEffect(() => {
+    // Ignore fetching product data when in static mode
+    if (state.mode === VIEWER_MODE.STATIC) { return; }
     if (state.status !== TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT) { return; }
     if (state.fetchProduct.status !== FETCH_STATUS.AWAITING_CALL) { return; }
     dispatch({ type: 'initFetchProductCalled' });
@@ -1176,7 +1199,7 @@ const Provider = (props) => {
         return of(false);
       }),
     ).subscribe();
-  }, [state.status, state.fetchProduct.status, state.product.productCode]);
+  }, [state.mode, state.status, state.fetchProduct.status, state.product.productCode]);
 
   /**
      Effect - Handle changes to selection
@@ -1329,26 +1352,38 @@ const Provider = (props) => {
       if (!state.product.sites[siteCode]) { return; }
       const { fetches } = state.product.sites[siteCode];
 
-      // Fetch variables for any sites in seleciton that haven't had variables fetched
-      if (fetches.variables.status === FETCH_STATUS.AWAITING_CALL && fetches.variables.url) {
-        fetchSiteVariables(siteCode, fetches.variables.url);
-        metaFetchTriggered = true;
-      }
+      switch (state.mode) {
+        case VIEWER_MODE.STATIC:
+          // Fetch any site months in selection that have not been fetched
+          fetchNeededSiteMonths(siteCode, fetches);
+          break;
+        case VIEWER_MODE.DEFAULT:
+        default:
+          // Fetch variables for any sites in seleciton that haven't had variables fetched
+          if (fetches.variables.status === FETCH_STATUS.AWAITING_CALL && fetches.variables.url) {
+            fetchSiteVariables(siteCode, fetches.variables.url);
+            metaFetchTriggered = true;
+          }
 
-      // Fetch positions for any site months in seleciton that haven't had positions fetched
-      if (fetches.positions.status === FETCH_STATUS.AWAITING_CALL && fetches.positions.url) {
-        fetchSitePositions(siteCode, fetches.positions.url);
-        metaFetchTriggered = true;
-      }
+          // Fetch positions for any site months in seleciton that haven't had positions fetched
+          if (fetches.positions.status === FETCH_STATUS.AWAITING_CALL && fetches.positions.url) {
+            fetchSitePositions(siteCode, fetches.positions.url);
+            metaFetchTriggered = true;
+          }
 
-      // Fetch any site months in selection that have not been fetched
-      fetchNeededSiteMonths(siteCode, fetches);
+          // Fetch any site months in selection that have not been fetched
+          fetchNeededSiteMonths(siteCode, fetches);
 
-      // Add any fetch observables for needed data to dataFetches and dataFetchTokens
-      if (state.status === TIME_SERIES_VIEWER_STATUS.READY_FOR_DATA && !metaFetchTriggered) {
-        prepareDataFetches(site);
+          // Add any fetch observables for needed data to dataFetches and dataFetchTokens
+          if (state.status === TIME_SERIES_VIEWER_STATUS.READY_FOR_DATA && !metaFetchTriggered) {
+            prepareDataFetches(site);
+          }
+          break;
       }
     });
+
+    // Ignore data fetches when in static mode
+    if (state.mode === VIEWER_MODE.STATIC) { return; }
 
     // Trigger all data fetches
     if (state.status === TIME_SERIES_VIEWER_STATUS.READY_FOR_DATA && !metaFetchTriggered) {
@@ -1377,6 +1412,7 @@ const Provider = (props) => {
       }
     }
   }, [
+    state.mode,
     state.status,
     state.selection,
     state.selection.digest,
@@ -1431,6 +1467,7 @@ const TimeSeriesViewerPropTypes = {
 };
 
 Provider.propTypes = {
+  mode: PropTypes.string,
   productCode: TimeSeriesViewerPropTypes.productCode,
   productData: TimeSeriesViewerPropTypes.productData,
   children: PropTypes.oneOfType([
@@ -1444,6 +1481,7 @@ Provider.propTypes = {
 };
 
 Provider.defaultProps = {
+  mode: VIEWER_MODE.DEFAULT,
   productCode: null,
   productData: null,
 };

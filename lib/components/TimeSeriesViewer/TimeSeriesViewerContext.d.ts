@@ -57,6 +57,8 @@ export namespace TabComponentPropTypes {
     }>;
 }
 export namespace DEFAULT_STATE {
+    import mode = DEFAULT;
+    export { mode };
     import status = INIT_PRODUCT;
     export { status };
     export const displayError: null;
@@ -177,6 +179,7 @@ export function getTestableItems(): {
     TimeSeriesViewerPropTypes?: undefined;
 } | {
     DEFAULT_STATE: {
+        mode: string;
         status: string;
         displayError: null;
         fetchProduct: {
@@ -268,6 +271,10 @@ export type ParseSiteVariablesReturn = {
     variablesObject: Object;
 };
 import PropTypes from "prop-types";
+declare namespace VIEWER_MODE {
+    export const DEFAULT: string;
+    export const STATIC: string;
+}
 declare namespace FETCH_STATUS {
     export const AWAITING_CALL: string;
     export const FETCHING: string;
@@ -286,6 +293,8 @@ declare namespace TimeSeriesViewerContext {
 declare function Provider(props: any): JSX.Element;
 declare namespace Provider {
     export namespace propTypes {
+        const mode_1: PropTypes.Requireable<string>;
+        export { mode_1 as mode };
         import productCode_1 = productCode;
         export { productCode_1 as productCode };
         import productData = productData;
@@ -293,6 +302,8 @@ declare namespace Provider {
         export const children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
     }
     export namespace defaultProps {
+        import mode_2 = DEFAULT;
+        export { mode_2 as mode };
         const productCode_2: null;
         export { productCode_2 as productCode };
         const productData_1: null;

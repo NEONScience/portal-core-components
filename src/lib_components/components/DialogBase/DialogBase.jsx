@@ -20,7 +20,7 @@ const Transition = forwardRef((props, ref) => (
   <Slide direction="up" ref={ref} {...props} />
 ));
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = (belowSm) => makeStyles((theme) => ({
   dialogTitle: {
     marginLeft: theme.spacing(2),
     flex: 1,
@@ -30,17 +30,17 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
   },
   noPaper: {
-    margin: theme.spacing(2),
+    margin: theme.spacing(10, 2, belowSm ? 9 : 2, 2),
   },
   contentPaper: {
-    margin: theme.spacing(2),
+    margin: theme.spacing(10, 2, belowSm ? 9 : 2, 2),
     padding: theme.spacing(3),
   },
 }));
 
 const DialogBase = (props) => {
-  const classes = useStyles(Theme);
   const belowSm = useMediaQuery(Theme.breakpoints.only('xs'));
+  const classes = useStyles(belowSm)(Theme);
 
   const {
     open,
@@ -62,10 +62,6 @@ const DialogBase = (props) => {
       fullScreen
       PaperProps={{
         className: classes.dialogPaper,
-        style: {
-          top: Theme.spacing(belowSm ? 0.5 : 4),
-          height: `calc(100% - ${Theme.spacing(belowSm ? 13 : 8)}px)`,
-        },
       }}
       style={{ ...style, zIndex: Theme.zIndex.fullScreenBackdrop }}
       {...other}

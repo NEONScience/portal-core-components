@@ -12,6 +12,16 @@
       "experimentalObjectRestSpread": true
     }
   },
+  "ignorePatterns": [
+    "src/registerServiceWorker.js",
+    "src/lib_components/components/**/*.d.ts",
+    "src/lib_components/remoteAssets",
+    "src/**/__tests__",
+    "src/**/__mocks__",
+    "lib/",
+    "config/",
+    "jest.config.js"
+  ],
   "rules": {
     "linebreak-style": 0,
     "react/jsx-props-no-spreading": 0,

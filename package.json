@@ -83,8 +83,8 @@
     "start": "react-scripts start",
     "start:prod": "npm run build && mv build core-components && mkdir build && mv core-components/ build/ && http-server build",
     "build": "react-scripts build",
-    "test": "node node_modules/jest/bin/jest.js",
-    "test:updateSnapshots": "node node_modules/jest/bin/jest.js --updateSnapshot",
+    "test": "node node_modules/jest/bin/jest.js --config jest.config.js",
+    "test:updateSnapshots": "node node_modules/jest/bin/jest.js --config jest.config.js --updateSnapshot",
     "lint": "(node_modules/eslint/bin/eslint.js src/ --ext .js,.jsx || true) && exit 0",
     "lint:fix": "(node_modules/eslint/bin/eslint.js --fix src/ --ext .js,.jsx,.ts,.tsx || true) && exit 0",
     "lib": "npm run lib:pre-process && npm run lib:babel-build && npm run lib:types && npm run lib:post-cleanup",
@@ -94,46 +94,6 @@
     "lib:types": "tsc --project tsconfig.d.json",
     "lib:pre-process": "node ./scripts/lib/lib-cache-remote-assets.js",
     "lib:post-cleanup": "rm ./lib/components/**/StyleGuide.* && rm -rf ./lib/components/SiteMap/png && rm -rf ./lib/*/__tests__ && rm -rf ./lib/*/*/__tests__ && node ./scripts/lib/lib-fix-worker-babel.js"
-  },
-  "jest": {
-    "verbose": true,
-    "moduleNameMapper": {
-      "typeface-inter": "<rootDir>/src/__mocks__/fileMock.js",
-      "\\.(css|less)$": "<rootDir>/src/__mocks__/styleMock.js"
-    },
-    "transform": {
-      "\\.(js|jsx|ts|tsx)$": "babel-jest",
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/__mocks__/fileTransformer.js"
-    },
-    "setupFiles": [
-      "jest-canvas-mock"
-    ],
-    "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.[jt]s?(x)"
-    ],
-    "collectCoverage": true,
-    "coverageReporters": [
-      "lcov",
-      "text"
-    ],
-    "coverageDirectory": "test-coverage",
-    "coverageThreshold": {
-      "global": {
-        "branches": 0,
-        "functions": 0,
-        "lines": 0,
-        "statements": 0
-      }
-    },
-    "coveragePathIgnorePatterns": [
-      "/node_modules/",
-      "/src/lib_components/remoteAssets/",
-      "/src/lib_components/types/",
-      "/src/lib_components/images/",
-      "/src/lib_components/components/SiteMap/svg/",
-      "src/sampleData",
-      "StyleGuide"
-    ]
   },
   "browserslist": [
     ">0.2%",
