@@ -258,7 +258,7 @@ const NeonEnvironment = {
   },
 
   getFullApiPath: (path = '') => {
-    const host = NeonEnvironment.getNeonApiPublicHost();
+    const host = NeonEnvironment.getNeonPublicApiHost();
     // Root path (e.g. '/api/v0') doesn't apply to legacy download/manifest-related paths.
     const root = ['aopDownload', 'download', 'manifest'].includes(path) ? '' : NeonEnvironment.getRootApiPath();
     return NeonEnvironment.getApiPath[path]
