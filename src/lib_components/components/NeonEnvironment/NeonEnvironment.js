@@ -1,6 +1,11 @@
 /* eslint-disable no-restricted-globals */
 import { AuthSilentType } from '../../types/core';
 
+// Default hosts
+const defaultHost = 'www.neonscience.org';
+const defaultPublicApiHost = 'https://data.neonscience.org';
+const validHostsRegex = new RegExp(/^(data|cert-data|int-data)\.neonscience\.org$/);
+
 // Names of all environment variables that MUST be explicitly defined for the
 // environment to be reported as "valid". These are evnironment variables
 // that are expected to be referenced by all apps. Standard vars present in all
@@ -151,7 +156,6 @@ const NeonEnvironment = {
   },
 
   getHost: () => {
-    const defaultHost = 'www.neonscience.org';
     if ((NeonEnvironment.isDevEnv)
       && NeonEnvironment.getHostOverride()) {
       return NeonEnvironment.getHostOverride();
@@ -185,19 +189,18 @@ const NeonEnvironment = {
   },
 
   /**
-   * Validate host names to include localhost testing and known NEON hosts
+   * Valid host names include localhost and known NEON hosts
    * @returns boolean, true if valid
    */
   isHostValid: (host) => {
     if ((typeof host !== 'string') || (host.length <= 0)) {
       return false;
     }
-    if (host === 'localhost') {
+    if (host.match('localhost') !== null) {
       return true;
     }
-    const regex = new RegExp(/^(data|cert-data|int-data)\.neonscience\.org$/);
-    if (!regex) return false;
-    const matches = regex.exec(host);
+    if (!validHostsRegex) return false;
+    const matches = validHostsRegex.exec(host);
     if (!matches) return false;
     return (matches.length > 0);
   },
@@ -206,13 +209,12 @@ const NeonEnvironment = {
   * Gets the Neon public API host
   * @return {string} The API host
   */
-  getNeonPublicApiHost: () => {
-    const defaultPublicApiHost = 'data.neonscience.org';
+  getPublicApiHost: () => {
     const serverData = NeonEnvironment.getNeonServerData();
     if (serverData && (typeof serverData.NeonPublicAPIHost === 'string')) {
-      const host = serverData.NeonPublicAPIHost;
-      if (NeonEnvironment.isHostValid(host)) {
-        return serverData.NeonPublicAPIHost;
+      const apiHost = serverData.NeonPublicAPIHost;
+      if (NeonEnvironment.isHostValid(new URL(apiHost).hostname)) {
+        return apiHost;
       }
     }
     return defaultPublicApiHost;
@@ -258,8 +260,8 @@ const NeonEnvironment = {
   },
 
   getFullApiPath: (path = '') => {
-    const host = NeonEnvironment.getNeonPublicApiHost();
-    // Root path (e.g. '/api/v0') doesn't apply to legacy download/manifest-related paths.
+    const host = NeonEnvironment.getPublicApiHost();
+    // Root path (e.g. '/api/v0') doesn't apply to legacy download and manifest related paths.
     const root = ['aopDownload', 'download', 'manifest'].includes(path) ? '' : NeonEnvironment.getRootApiPath();
     return NeonEnvironment.getApiPath[path]
       ? `${host}${root}${NeonEnvironment.getApiPath[path]()}`

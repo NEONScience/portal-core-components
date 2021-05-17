@@ -203,9 +203,9 @@ export const formatBytes = (bytes: number) => {
 
 export const getSizeEstimateFromManifestResponse = (response: any) => {
   if (typeof response !== 'object' || response === null
-      || typeof response.data !== 'object' || response.data === null
-      || !Array.isArray(response.data.manifestEntries)
-      || !response.data.manifestEntries.length) {
+    || typeof response.data !== 'object' || response.data === null
+    || !Array.isArray(response.data.manifestEntries)
+    || !response.data.manifestEntries.length) {
     return 0;
   }
   return response.data.manifestEntries.reduce((total: number, entry: any) => (
@@ -215,9 +215,9 @@ export const getSizeEstimateFromManifestResponse = (response: any) => {
 
 export const getSizeEstimateFromManifestRollupResponse = (response: any) => {
   if (typeof response !== 'object' || response === null
-      || typeof response.data !== 'object' || response.data === null
-      || typeof response.data.totalBytes !== 'number'
-      || response.data.totalBytes === null) {
+    || typeof response.data !== 'object' || response.data === null
+    || typeof response.data.totalBytes !== 'number'
+    || response.data.totalBytes === null) {
     return 0;
   }
   return response.data.totalBytes;

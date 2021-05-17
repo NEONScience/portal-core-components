@@ -12,7 +12,6 @@ describe('NeonEnvironment', () => {
       'isValid',
       'isDevEnv',
       'isProdEnv',
-      'isForeignEnv',
       'useGraphql',
       'showAopViewer',
       'authDisableWs',
