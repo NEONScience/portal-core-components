@@ -3,6 +3,7 @@ export const OBSERVATORY_CENTER: number[];
 export const MIN_CONTAINER_HEIGHT: 300;
 export const MIN_TABLE_MAX_BODY_HEIGHT: 100;
 export const KM2_TO_ACRES: 247.10538146717;
+export const LOCATION_BOUNDS_SAMPLING_MAX: 10000;
 export const SITE_LOCATION_HIERARCHIES_MIN_ZOOM: 9;
 export namespace SORT_DIRECTIONS {
     export const ASC: string;

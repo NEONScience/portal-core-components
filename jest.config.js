@@ -15,7 +15,7 @@ module.exports = {
     '<rootDir>/src/**/__tests__/**/*.[jt]s?(x)',
   ],
   testPathIgnorePatterns: [
-    '/lib/',
+    '<rootDir>/lib/',
   ],
   collectCoverage: true,
   coverageReporters: [

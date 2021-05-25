@@ -1,6 +1,6 @@
 {
   "name": "portal-core-components",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "main": "./lib/index.js",
   "private": true,
   "homepage": "http://localhost:3010/core-components",
@@ -76,12 +76,13 @@
     "node-fetch": "^2.6.1",
     "react-scripts": "^4.0.3",
     "react-test-renderer": "^16.13.1",
+    "serve": "^11.3.2",
     "typescript": "^3.7.5",
     "worker-loader": "^3.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
-    "start:prod": "npm run build && mv build core-components && mkdir build && mv core-components/ build/ && http-server build",
+    "start:prod": "mv build core-components && mkdir build && mv core-components/ build/ && node_modules/serve/bin/serve.js build",
     "build": "react-scripts build",
     "test": "node node_modules/jest/bin/jest.js --config jest.config.js",
     "test:updateSnapshots": "node node_modules/jest/bin/jest.js --config jest.config.js --updateSnapshot",
