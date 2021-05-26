@@ -175,17 +175,16 @@ const NeonEnvironment = {
   },
 
   getWebSocketHost: () => {
-    if (NeonEnvironment.getApiName) {
-      return NeonEnvironment.getApiName;
-    }
-    if (
-      (NeonEnvironment.isDevEnv)
+    if ((NeonEnvironment.isDevEnv)
       && NeonEnvironment.getWsHostOverride()) {
       return NeonEnvironment.getWsHostOverride();
     }
-    return window.location.protocol.startsWith('https')
-      ? `wss://${window.location.host}`
-      : `ws://${window.location.host}`;
+    const apiHost = NeonEnvironment.getPublicApiHost();
+    const hostUrl = new URL(apiHost);
+    const { protocol: apiProtocol, hostname: apiHostname } = hostUrl;
+    return apiProtocol.startsWith('https')
+      ? `wss://${apiHostname}`
+      : `ws://${apiHostname}`;
   },
 
   /**
