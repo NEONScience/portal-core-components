@@ -100,10 +100,17 @@ const useStyles = makeStyles((theme) => ({
   graphInnerContainer: {
     display: 'flex',
     alignItems: 'flex-start',
+    [theme.breakpoints.down('sm')]: {
+      flexWrap: 'wrap',
+    },
   },
   graphDiv: {
     minHeight: '320px',
     flexGrow: 1,
+    width: '50%',
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+    },
   },
   buttonsOuterContainer: {
     margin: theme.spacing(0, -0.5, 0, -0.5),
@@ -141,6 +148,10 @@ const useStyles = makeStyles((theme) => ({
   legendDiv: {
     flexShrink: 0,
     marginLeft: theme.spacing(1),
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+      marginTop: theme.spacing(2),
+    },
   },
   legendSeries: {
     display: 'flex',
@@ -253,7 +264,7 @@ export default function TimeSeriesViewerGraph() {
   const legendRef = useRef(null);
   const axisCountRef = useRef(1);
   const axisCountChangedRef = useRef(false);
-  const belowMd = useMediaQuery(Theme.breakpoints.down('sm'));
+  const belowSm = useMediaQuery(Theme.breakpoints.down('sm'));
   const {
     selectionDigest,
     logscale,
@@ -307,6 +318,41 @@ export default function TimeSeriesViewerGraph() {
     return seriesOption;
   };
 
+  const calcLegendHeight = () => {
+    // In order to support hover over coordinate value display for wrapped / small
+    // viewports, we need to give the legend a set height with enough padding to render the
+    // hover over value that causes the height of the element to expand. If we don't
+    // set the height explicitly here, it will cause a re-render of the chart container
+    // and cause flickering as it will constantly re-render and never show
+    // the hover value. Determine height based on number of legend items.
+    if (belowSm) {
+      const { series, qualityLabels } = state.graphData;
+      let appliedQualityLabels = [];
+      if (qualityFlags.length) {
+        appliedQualityLabels = qualityLabels.slice(2);
+      }
+      // Account for single legend item containing multiple labels
+      const hasQualityLabels = appliedQualityLabels.length > 0;
+      const qualityLabelsHeightPadding = hasQualityLabels && qualityFlags.length > 1
+        ? (qualityFlags.length - 1) * 16
+        : 0;
+      const numLegendItems = (series ? series.length : 0);
+      const qualityLabelHeight = ((hasQualityLabels ? 50 : 0) + qualityLabelsHeightPadding);
+      if (numLegendItems > 0) {
+        const appliedHeight = (numLegendItems * 50)
+          + (numLegendItems * 10)
+          + qualityLabelHeight
+          + 15;
+        // Sanity check
+        if (appliedHeight <= 0) {
+          return 'auto';
+        }
+        return `${appliedHeight}px`;
+      }
+    }
+    return 'auto';
+  };
+
   const legendFormatter = (graphData) => {
     const {
       series,
@@ -349,6 +395,12 @@ export default function TimeSeriesViewerGraph() {
             {s.label}
             <br />
             {yUnits}
+            {!belowSm || !s.isHighlighted ? null : (
+              <>
+                <br />
+                {moment.utc(graphData.x).format('YYYY-MM-DD HH:mm:ss')}
+              </>
+            )}
           </div>
         </Card>
       );
@@ -397,7 +449,7 @@ export default function TimeSeriesViewerGraph() {
     }
     // Date
     let dateLegend = null;
-    if (graphData.x) {
+    if (graphData.x && !belowSm) {
       dateLegend = (
         <Card variant="outlined" className={classes.legendSeriesX}>
           {moment.utc(graphData.x).format('YYYY-MM-DD HH:mm:ss')}
@@ -640,9 +692,9 @@ export default function TimeSeriesViewerGraph() {
       startIcon={graphState.hiddenSeries.size ? <ShowIcon /> : <HideIcon />}
     >
       {graphState.hiddenSeries.size ? (
-        `${belowMd ? '' : 'Show All'} Series`
+        `${belowSm ? '' : 'Show All'} Series`
       ) : (
-        `${belowMd ? '' : 'Hide All'} Series`
+        `${belowSm ? '' : 'Hide All'} Series`
       )}
     </Button>
   );
@@ -664,9 +716,9 @@ export default function TimeSeriesViewerGraph() {
       startIcon={graphState.hiddenQualityFlags.size ? <ShowIcon /> : <HideIcon />}
     >
       {graphState.hiddenQualityFlags.size ? (
-        `${belowMd ? '' : 'Show All'} Quality Flags`
+        `${belowSm ? '' : 'Show All'} Quality Flags`
       ) : (
-        `${belowMd ? '' : 'Hide All'} Quality Flags`
+        `${belowSm ? '' : 'Hide All'} Quality Flags`
       )}
     </Button>
   );
@@ -683,8 +735,12 @@ export default function TimeSeriesViewerGraph() {
             : state.product.productCode}
         </Typography>
         <div className={classes.graphInnerContainer} ref={graphInnerContainerRef}>
-          <div ref={dygraphDomRef} className={classes.graphDiv} style={{ width: '50% !important' }} />
-          <div ref={legendRef} className={classes.legendDiv} />
+          <div ref={dygraphDomRef} className={classes.graphDiv} />
+          <div
+            ref={legendRef}
+            className={classes.legendDiv}
+            style={{ height: calcLegendHeight() }}
+          />
         </div>
         <div className={classes.citationContainer}>
           <img

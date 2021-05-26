@@ -163,6 +163,10 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
+          <a href="https://data.neonscience.org/visualizations/data-availability" class="menu__link">Data Availability Charts</a>
+
+                  </li>
+              <li  class="menu__item">
           <a href="https://www.neonscience.org/data-samples/data/spatial-data-maps" class="menu__link" data-drupal-link-system-path="node/10547">Spatial Data &amp; Maps</a>
 
                   </li>
@@ -174,22 +178,8 @@ export default html = `
           <a href="https://data.neonscience.org/data-api" class="menu__link">API &amp; GraphQL</a>
 
                   </li>
-              <li  class="menu__item menu__item--expanded">
-          <a href="https://data.neonscience.org/prototype-search" class="menu__link">Prototype Data</a>
-
-          
-            
-                      <ul  class="menu menu--main" data-depth="3">
-
               <li  class="menu__item">
-          <a href="https://data.neonscience.org/prototype-ingest" class="menu__link">Prototype Data Ingest</a>
-
-                  </li>
-      
-          </ul>
-  
-
-            
+          <a href="https://data.neonscience.org/prototype-search" class="menu__link">Prototype Data</a>
 
                   </li>
               <li  class="menu__item">
@@ -911,7 +901,7 @@ export default html = `
           <a href="https://www.neonscience.org/get-involved/past-events" class="menu__link" data-drupal-link-system-path="node/10738">Past Events</a>
 
                   </li>
-              <li  class="menu__item menu__item--expanded">
+              <li  class="menu__item">
           <a href="https://www.neonscience.org/get-involved/engagement" class="menu__link" data-drupal-link-system-path="node/10556">Community Engagement</a>
 
                   </li>

@@ -72,6 +72,11 @@ export const MIN_TABLE_MAX_BODY_HEIGHT = 100;
 
 export const KM2_TO_ACRES = 247.10538146717;
 
+// Maximum number of points that will be used for determining whether or not
+// a location is within the current bounds of the viewport of the map.
+// This will control how a large set of coordinates is down sampled.
+export const LOCATION_BOUNDS_SAMPLING_MAX = 10_000;
+
 // Minimum zoom level at which location hierarchy fetches are done on a per-domain basis
 // We don't do per-site because hierarchy query performance is a function of number of immediate
 // children. Domains top out at 8 or so sites, while sites may have over a hundred children (plots)
@@ -1997,6 +2002,61 @@ export const boundsAreValid = (bounds) => (
     ))
 );
 
+// For large sets of coordinates, down sample to compute a general idea
+// of the location. A "good enough" approximation of the location's coordinates
+// such that a bounds calculation can be performed in a reasonable space and time
+// complexity and still yield a relevant result for the view port of the map.
+const downSample = (items) => {
+  if (items.length < LOCATION_BOUNDS_SAMPLING_MAX) return items;
+  const sampled = [];
+  const mod = Math.floor(items.length / LOCATION_BOUNDS_SAMPLING_MAX);
+  items.forEach((item, index) => {
+    if (index % mod === 0) {
+      sampled.push(item);
+    }
+  });
+  return sampled;
+};
+
+// This function flattens a geometry object to just coordinates so we can check if a boundary
+// is in the map. NOTE: extendPoints does not work with boundaries, only solitary points.
+const flatten = (items) => {
+  const flat = [];
+  items.forEach((item) => {
+    if (Array.isArray(item) && !isCoord(item)) {
+      flat.push(...flatten(downSample(item)));
+    } else {
+      flat.push(item);
+    }
+  });
+  return flat;
+};
+
+const isInBounds = (loc, extendedBounds, extendPoints = 0) => {
+  if (Number.isFinite(loc.latitude) && Number.isFinite(loc.longitude)) {
+    if (extendPoints > 0) {
+      const lats = [loc.latitude - extendPoints, loc.latitude + extendPoints];
+      const lngs = [loc.longitude - extendPoints, loc.longitude + extendPoints];
+      return (!(
+        lats[0] > extendedBounds.lat[1] || lats[1] < extendedBounds.lat[0]
+          || lngs[0] > extendedBounds.lng[1] || lngs[1] < extendedBounds.lng[0]
+      ));
+    }
+    return (
+      loc.latitude >= extendedBounds.lat[0] && loc.latitude <= extendedBounds.lat[1]
+        && loc.longitude >= extendedBounds.lng[0] && loc.longitude <= extendedBounds.lng[1]
+    );
+  }
+  if (loc.geometry && loc.geometry.coordinates) {
+    const flatCoords = flatten(loc.geometry.coordinates);
+    return flatCoords.some((coord) => (
+      coord[0] >= extendedBounds.lat[0] && coord[0] <= extendedBounds.lat[1]
+        && coord[1] >= extendedBounds.lng[0] && coord[1] <= extendedBounds.lng[1]
+    ));
+  }
+  return false;
+};
+
 export const calculateLocationsInBounds = (
   locations, // Keyed object of locations (e.g. sites)
   bounds = null, // Leaflet LatLngBounds object
@@ -2014,44 +2074,8 @@ export const calculateLocationsInBounds = (
           return [dir, [bounds[dir][0] - buffer, bounds[dir][1] + buffer]];
         }),
     );
-  // This function flattens a geometry object to just coordinates so we can check if a boundary
-  // is in the map. NOTE: extendPoints does not work with boundaries, only solitary points.
-  const flatten = (items) => {
-    const flat = [];
-    items.forEach((item) => {
-      if (Array.isArray(item) && !isCoord(item)) {
-        flat.push(...flatten(item));
-      } else {
-        flat.push(item);
-      }
-    });
-    return flat;
-  };
-  const isInBounds = (loc) => {
-    if (Number.isFinite(loc.latitude) && Number.isFinite(loc.longitude)) {
-      if (extendPoints > 0) {
-        const lats = [loc.latitude - extendPoints, loc.latitude + extendPoints];
-        const lngs = [loc.longitude - extendPoints, loc.longitude + extendPoints];
-        return (!(
-          lats[0] > extendedBounds.lat[1] || lats[1] < extendedBounds.lat[0]
-            || lngs[0] > extendedBounds.lng[1] || lngs[1] < extendedBounds.lng[0]
-        ));
-      }
-      return (
-        loc.latitude >= extendedBounds.lat[0] && loc.latitude <= extendedBounds.lat[1]
-          && loc.longitude >= extendedBounds.lng[0] && loc.longitude <= extendedBounds.lng[1]
-      );
-    }
-    if (loc.geometry && loc.geometry.coordinates) {
-      const flatCoords = flatten(loc.geometry.coordinates);
-      return flatCoords.some((coord) => (
-        coord[0] >= extendedBounds.lat[0] && coord[0] <= extendedBounds.lat[1]
-          && coord[1] >= extendedBounds.lng[0] && coord[1] <= extendedBounds.lng[1]
-      ));
-    }
-    return false;
-  };
-  return Object.keys(locations).filter((locId) => isInBounds(locations[locId]));
+  return Object.keys(locations)
+    .filter((locId) => isInBounds(locations[locId], extendedBounds, extendPoints));
 };
 
 export const deriveFullObservatoryZoomLevel = (mapRef) => {
