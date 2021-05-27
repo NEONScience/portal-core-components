@@ -1,6 +1,7 @@
 import NeonEnvironment, {
   requiredEnvironmentVars,
   optionalEnvironmentVars,
+  defaultPublicApiHost,
 } from '../NeonEnvironment';
 
 requiredEnvironmentVars.forEach((v) => { process.env[v] = v; });
@@ -67,10 +68,11 @@ describe('NeonEnvironment', () => {
     test('getFullApiPath()', () => {
       const host = NeonEnvironment.getHost();
       const fullPath1 = NeonEnvironment.getFullApiPath();
-      expect(fullPath1.startsWith(host)).toBe(true);
+      console.log(`fullApiPath: {$fullPath1}`);
+      expect(fullPath1.startsWith(defaultPublicApiHost)).toBe(true);
       const downloadPath = NeonEnvironment.getApiPath.download();
       const fullPath2 = NeonEnvironment.getFullApiPath('download');
-      expect(fullPath2.startsWith(host)).toBe(true);
+      expect(fullPath2.startsWith(defaultPublicApiHost)).toBe(true);
       expect(fullPath2.endsWith(downloadPath)).toBe(true);
     });
     test('getFullJsonLdApiPath()', () => {

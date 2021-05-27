@@ -189,7 +189,11 @@ const Menu = (props: MenuProps) => {
   );
 };
 
-export default function ApplicationMenu() {
+/**
+ * Return the application menu
+ * @returns The menu or null if the user has no applications to display.
+ */
+const ApplicationMenu = () => {
   const [{ auth: authData }] = NeonContext.useNeonContextState();
   const apps: UserApp[] = authData?.userData?.data?.apps;
   if (apps?.length > 0) {
@@ -198,4 +202,6 @@ export default function ApplicationMenu() {
     );
   }
   return (null);
-}
+};
+
+export default ApplicationMenu;

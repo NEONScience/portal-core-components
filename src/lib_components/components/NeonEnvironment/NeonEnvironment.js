@@ -3,7 +3,7 @@ import { AuthSilentType } from '../../types/core';
 
 // Default hosts
 const defaultHost = 'www.neonscience.org';
-const defaultPublicApiHost = 'https://data.neonscience.org';
+export const defaultPublicApiHost = 'https://data.neonscience.org';
 const validHostsRegex = new RegExp(/^(data|local-data|int-data|cert-data)\.neonscience\.org$/);
 
 // Names of all environment variables that MUST be explicitly defined for the
