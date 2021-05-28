@@ -66,7 +66,6 @@ describe('NeonEnvironment', () => {
 
   describe('get full path methods', () => {
     test('getFullApiPath()', () => {
-      const host = NeonEnvironment.getHost();
       const fullPath1 = NeonEnvironment.getFullApiPath();
       console.log(`fullApiPath: {$fullPath1}`);
       expect(fullPath1.startsWith(defaultPublicApiHost)).toBe(true);
