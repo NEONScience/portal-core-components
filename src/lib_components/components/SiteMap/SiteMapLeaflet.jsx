@@ -299,6 +299,28 @@ const SiteMapLeaflet = () => {
   }, [state.map.bounds, dispatch]);
 
   /**
+   * Effect for setting the initial zoom so that we can include the bounds
+   * of the map in the initial zoom setting to allow proper feature detection.
+   */
+  useLayoutEffect(() => {
+    const timeout = window.setTimeout(() => {
+      if (state.map.bounds !== null || state.map.zoom === null || !mapRefExists()) {
+        return;
+      }
+      const bounds = mapRef.current.leafletElement.getBounds();
+      dispatch({
+        type: 'setMapZoom',
+        zoom: state.map.zoom,
+        bounds: {
+          lat: [bounds._southWest.lat, bounds._northEast.lat],
+          lng: [bounds._southWest.lng, bounds._northEast.lng],
+        },
+      });
+    }, 0);
+    return () => window.clearTimeout(timeout);
+  }, [state.map.bounds, state.map.zoom, dispatch]);
+
+  /**
     Effect
     Visually distinguish unselectable markers in the marker pane while also changing the draw order
     of marker icons to put unselectable ones behind selectable ones. Use a 0-length setTimeout to

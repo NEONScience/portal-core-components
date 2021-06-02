@@ -853,10 +853,6 @@ export default html = `
           <a href="https://www.neonscience.org/resources/funding-opportunities" class="menu__link" data-drupal-link-system-path="node/11327">Funding Opportunities </a>
 
                   </li>
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/get-involved/neon-science-community-forum" class="menu__link" data-drupal-link-system-path="node/6761">Community Forum</a>
-
-                  </li>
       
           </ul>
   
@@ -899,6 +895,10 @@ export default html = `
                   </li>
               <li  class="menu__item">
           <a href="https://www.neonscience.org/get-involved/past-events" class="menu__link" data-drupal-link-system-path="node/10738">Past Events</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/efi-rcn-neon-ecological-forecasting-challenge" class="menu__link" data-drupal-link-system-path="node/11363">EFI-NEON Ecological Forecasting Challenges</a>
 
                   </li>
               <li  class="menu__item">
