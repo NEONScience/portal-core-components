@@ -20,6 +20,9 @@ export default html = `
       <svg class="nav-trigger__icon nav-trigger__icon--collapse" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path d="M1.636.222l14.142 14.142-1.414 1.414L.222 1.636 1.636.222zM.222 14.364L14.364.222l1.414 1.414L1.636 15.778.222 14.364z"/></svg>
 
     </label>
+    <div class="authContainer">
+              <a href="/user/login">Sign In</a>
+          </div>
     <div class="header__site-navigation">
       <div class="header__menu-main">
         <nav role="navigation" aria-labelledby="block-neon-main-menu-menu" id="block-neon-main-menu">
@@ -853,10 +856,6 @@ export default html = `
           <a href="https://www.neonscience.org/resources/funding-opportunities" class="menu__link" data-drupal-link-system-path="node/11327">Funding Opportunities </a>
 
                   </li>
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/get-involved/neon-science-community-forum" class="menu__link" data-drupal-link-system-path="node/6761">Community Forum</a>
-
-                  </li>
       
           </ul>
   
@@ -899,6 +898,10 @@ export default html = `
                   </li>
               <li  class="menu__item">
           <a href="https://www.neonscience.org/get-involved/past-events" class="menu__link" data-drupal-link-system-path="node/10738">Past Events</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/efi-rcn-neon-ecological-forecasting-challenge" class="menu__link" data-drupal-link-system-path="node/11363">EFI-NEON Ecological Forecasting Challenges</a>
 
                   </li>
               <li  class="menu__item">
