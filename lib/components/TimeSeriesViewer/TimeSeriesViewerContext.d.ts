@@ -80,6 +80,7 @@ export namespace DEFAULT_STATE {
         export const continuousDateRange: never[];
         export const sites: {};
     }
+    export const release: null;
     export namespace graphData {
         export const data: never[];
         export const qualityData: never[];
@@ -199,6 +200,7 @@ export function getTestableItems(): {
             continuousDateRange: never[];
             sites: {};
         };
+        release: null;
         graphData: {
             data: never[];
             qualityData: never[];
@@ -299,6 +301,8 @@ declare namespace Provider {
         export { productCode_1 as productCode };
         import productData = productData;
         export { productData };
+        const release_1: PropTypes.Requireable<string>;
+        export { release_1 as release };
         export const children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
     }
     export namespace defaultProps {
@@ -308,6 +312,8 @@ declare namespace Provider {
         export { productCode_2 as productCode };
         const productData_1: null;
         export { productData_1 as productData };
+        const release_2: null;
+        export { release_2 as release };
     }
 }
 declare function useTimeSeriesViewerState(): any;

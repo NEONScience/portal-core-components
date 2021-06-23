@@ -166,6 +166,7 @@ export const DEFAULT_STATE = {
     continuousDateRange: [],
     sites: {},
   },
+  release: null,
   graphData: {
     data: [],
     qualityData: [],
@@ -1140,6 +1141,7 @@ const Provider = (props) => {
     mode: modeProp,
     productCode: productCodeProp,
     productData: productDataProp,
+    release: releaseProp,
     children,
   } = props;
 
@@ -1159,6 +1161,7 @@ const Provider = (props) => {
   } else {
     initialState.product.productCode = productCodeProp;
   }
+  initialState.release = releaseProp;
   initialState.selection = applyDefaultsToSelection(initialState);
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -1182,7 +1185,7 @@ const Provider = (props) => {
     if (state.status !== TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT) { return; }
     if (state.fetchProduct.status !== FETCH_STATUS.AWAITING_CALL) { return; }
     dispatch({ type: 'initFetchProductCalled' });
-    NeonGraphQL.getDataProductByCode(state.product.productCode).pipe(
+    NeonGraphQL.getDataProductByCode(state.product.productCode, state.release).pipe(
       map((response) => {
         if (response.response && response.response.data && response.response.data.product) {
           dispatch({
@@ -1199,7 +1202,13 @@ const Provider = (props) => {
         return of(false);
       }),
     ).subscribe();
-  }, [state.mode, state.status, state.fetchProduct.status, state.product.productCode]);
+  }, [
+    state.mode,
+    state.status,
+    state.fetchProduct.status,
+    state.product.productCode,
+    state.release,
+  ]);
 
   /**
      Effect - Handle changes to selection
@@ -1208,7 +1217,13 @@ const Provider = (props) => {
   useEffect(() => {
     const getSiteMonthDataURL = (siteCode, month) => {
       const root = NeonEnvironment.getFullApiPath('data');
-      return `${root}/${state.product.productCode}/${siteCode}/${month}`;
+      const hasRelease = state.release
+        && (typeof state.release === 'string')
+        && (state.release.length > 0);
+      const releaseParam = hasRelease
+        ? `?release=${state.release}`
+        : '';
+      return `${root}/${state.product.productCode}/${siteCode}/${month}${releaseParam}`;
     };
     const { timeStep: selectedTimeStep, autoTimeStep } = state.selection;
     const timeStep = selectedTimeStep === 'auto' ? autoTimeStep : selectedTimeStep;
@@ -1418,6 +1433,7 @@ const Provider = (props) => {
     state.selection.digest,
     state.variables,
     state.product,
+    state.release,
   ]);
 
   /**
@@ -1470,6 +1486,7 @@ Provider.propTypes = {
   mode: PropTypes.string,
   productCode: TimeSeriesViewerPropTypes.productCode,
   productData: TimeSeriesViewerPropTypes.productData,
+  release: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.oneOfType([
       PropTypes.node,
@@ -1484,6 +1501,7 @@ Provider.defaultProps = {
   mode: VIEWER_MODE.DEFAULT,
   productCode: null,
   productData: null,
+  release: null,
 };
 
 /**

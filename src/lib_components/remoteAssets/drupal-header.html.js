@@ -845,6 +845,10 @@ export default html = `
           <a href="https://www.neonscience.org/samples/excess-samples" class="menu__link" data-drupal-link-system-path="node/10297">Excess Samples</a>
 
                   </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/resources/research-support/assignable-assets-faqs" class="menu__link" data-drupal-link-system-path="node/11535">Assignable Assets FAQs</a>
+
+                  </li>
       
           </ul>
   
