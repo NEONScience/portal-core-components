@@ -300,6 +300,8 @@ const Provider = (props) => {
               } else {
                 AuthService.loginSilently(dispatch, true);
               }
+            } else {
+              dispatch({ type: 'fetchAuthSucceeded', isAuthenticated, response });
             }
           } else {
             dispatch({ type: 'fetchAuthSucceeded', isAuthenticated, response });
