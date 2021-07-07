@@ -39,6 +39,7 @@ import ExternalHostInfo from '../ExternalHostInfo/ExternalHostInfo';
 import NeonContext from '../NeonContext/NeonContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import Theme, { COLORS } from '../Theme/Theme';
+import NeonSignin from './NeonSignin';
 
 import {
   buildManifestConfig,
@@ -424,9 +425,6 @@ export default function DownloadDataDialog() {
 
   const renderAuthSuggestion = () => {
     if (isAuthenticated) { return null; }
-    const signInLink = (
-      <Link target="_new" href={NeonEnvironment.getFullAuthPath('login')}>signing in</Link>
-    );
     const benefitsLink = (
       <Link target="_new" href="https://www.neonscience.org/about/user-accounts">here</Link>
     );
@@ -442,7 +440,7 @@ export default function DownloadDataDialog() {
             fontWeight: 600,
           }}
         >
-          Have an account? Consider {signInLink} before proceeding.
+          Have an account? Consider signing in before proceeding: <NeonSignin />.
         </Typography>
         <Typography
           variant="body2"
