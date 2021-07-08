@@ -1,12 +1,17 @@
 /* eslint-disable no-restricted-globals */
-
 import { AuthSilentType } from '../../types/core';
+
+// Default hosts
+const defaultHost = 'www.neonscience.org';
+export const defaultPublicApiHost = 'https://data.neonscience.org';
+const validHostsRegex = new RegExp(/^(data|local-data|int-data|cert-data)\.neonscience\.org$/);
 
 // Names of all environment variables that MUST be explicitly defined for the
 // environment to be reported as "valid". These are evnironment variables
 // that are expected to be referenced by all apps. Standard vars present in all
 // node environments (e.g. PORT, NODE_ENV, etc.) are not listed here.
 export const requiredEnvironmentVars = [
+  'REACT_APP_NEON_API_HOST',
   'REACT_APP_NEON_API_NAME',
   'REACT_APP_NEON_API_VERSION',
   'REACT_APP_NEON_AUTH_API',
@@ -45,7 +50,6 @@ export const optionalEnvironmentVars = [
   'REACT_APP_NEON_VISUS_IFRAME_BASE_URL',
   'REACT_APP_NEON_HOST_OVERRIDE',
   'REACT_APP_NEON_WS_HOST_OVERRIDE',
-  'REACT_APP_FOREIGN_LOCATION',
   'REACT_APP_NEON_AUTH_DISABLE_WS',
   'REACT_APP_NEON_ROUTER_NEON_HOME',
   'REACT_APP_NEON_ROUTER_NEON_MYACCOUNT',
@@ -63,7 +67,6 @@ const NeonEnvironment = {
   isValid: requiredEnvironmentVars.every((envVar) => typeof process.env[envVar] !== 'undefined'),
   isDevEnv: process.env.NODE_ENV === EnvType.DEV,
   isProdEnv: process.env.NODE_ENV === EnvType.PROD,
-  isForeignEnv: process.env.REACT_APP_FOREIGN_LOCATION === 'true',
   useGraphql: process.env.REACT_APP_NEON_USE_GRAPHQL === 'true',
   showAopViewer: process.env.REACT_APP_NEON_SHOW_AOP_VIEWER === 'true',
   authDisableWs: process.env.REACT_APP_NEON_AUTH_DISABLE_WS === 'true',
@@ -153,28 +156,67 @@ const NeonEnvironment = {
   },
 
   getHost: () => {
-    if (
-      (NeonEnvironment.isDevEnv || NeonEnvironment.isForeignEnv)
-        && NeonEnvironment.getHostOverride()) {
+    if ((NeonEnvironment.isDevEnv)
+      && NeonEnvironment.getHostOverride()) {
       return NeonEnvironment.getHostOverride();
     }
     /* eslint-disable */
     if (typeof WorkerGlobalScope === 'function' && typeof self.location === 'object') {
-      return `${self.location.protocol}//${self.location.host}`;
+      if (NeonEnvironment.isHostValid(self.location.host)) {
+        return `${self.location.protocol}//${self.location.host}`;
+      }
+      return `${self.location.protocol}//${defaultHost}`;
     }
     /* eslint-enable */
-    return `${window.location.protocol}//${window.location.host}`;
+    if (NeonEnvironment.isHostValid(window.location.host)) {
+      return `${window.location.protocol}//${window.location.host}`;
+    }
+    return `${window.location.protocol}//${defaultHost}`;
   },
 
   getWebSocketHost: () => {
-    if (
-      (NeonEnvironment.isDevEnv || NeonEnvironment.isForeignEnv)
-        && NeonEnvironment.getWsHostOverride()) {
+    if ((NeonEnvironment.isDevEnv)
+      && NeonEnvironment.getWsHostOverride()) {
       return NeonEnvironment.getWsHostOverride();
     }
-    return window.location.protocol.startsWith('https')
-      ? `wss://${window.location.host}`
-      : `ws://${window.location.host}`;
+    const apiHost = NeonEnvironment.getPublicApiHost();
+    const hostUrl = new URL(apiHost);
+    const { protocol: apiProtocol, hostname: apiHostname } = hostUrl;
+    return apiProtocol.startsWith('https')
+      ? `wss://${apiHostname}`
+      : `ws://${apiHostname}`;
+  },
+
+  /**
+   * Valid host names include localhost and known NEON hosts
+   * @returns boolean, true if valid
+   */
+  isHostValid: (host) => {
+    if ((typeof host !== 'string') || (host.length <= 0)) {
+      return false;
+    }
+    if (host.match('localhost') !== null) {
+      return true;
+    }
+    if (!validHostsRegex) return false;
+    const matches = validHostsRegex.exec(host);
+    if (!matches) return false;
+    return (matches.length > 0);
+  },
+
+  /**
+  * Gets the Neon public API host
+  * @return {string} The API host
+  */
+  getPublicApiHost: () => {
+    const serverData = NeonEnvironment.getNeonServerData();
+    if (serverData && (typeof serverData.NeonPublicAPIHost === 'string')) {
+      const apiHost = serverData.NeonPublicAPIHost;
+      if (NeonEnvironment.isHostValid(new URL(apiHost).hostname)) {
+        return apiHost;
+      }
+    }
+    return defaultPublicApiHost;
   },
 
   /**
@@ -209,16 +251,16 @@ const NeonEnvironment = {
   getAuthSilentType: () => {
     const serverData = NeonEnvironment.getNeonServerData();
     if (serverData
-        && (typeof serverData.NeonAuthSilentType === 'string')
-        && (serverData.NeonAuthSilentType.length > 0)) {
+      && (typeof serverData.NeonAuthSilentType === 'string')
+      && (serverData.NeonAuthSilentType.length > 0)) {
       return serverData.NeonAuthSilentType;
     }
     return AuthSilentType.DISABLED;
   },
 
   getFullApiPath: (path = '') => {
-    const host = NeonEnvironment.getHost();
-    // Root path (e.g. '/api/v0') doesn't apply to legacy download/manifest-related paths.
+    const host = NeonEnvironment.getPublicApiHost();
+    // Root path (e.g. '/api/v0') doesn't apply to legacy download and manifest related paths.
     const root = ['aopDownload', 'download', 'manifest'].includes(path) ? '' : NeonEnvironment.getRootApiPath();
     return NeonEnvironment.getApiPath[path]
       ? `${host}${root}${NeonEnvironment.getApiPath[path]()}`
