@@ -627,7 +627,7 @@ const SiteMapTable = () => {
               onClick={() => jumpTo(domain.domainCode)}
               title={`Click to view ${domain.domainCode} on the map`}
             >
-              {domain.domainCode}
+              {domain.domainCode || ''}
             </Link>
           </div>
         );
@@ -671,7 +671,7 @@ const SiteMapTable = () => {
               onClick={() => jumpTo(stateCode)}
               title={`Click to view ${stateCode} on the map`}
             >
-              {usstate.name}
+              {usstate.name || ''}
             </Link>
           </div>
         );
@@ -779,7 +779,7 @@ const SiteMapTable = () => {
               onClick={() => jumpTo(name)}
               title={`View ${name} on map`}
             >
-              {name}
+              {name || ''}
             </Link>
           );
         },

@@ -415,6 +415,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
           scrollButtons="auto"
         >
           <Tab label="Basic" />
+          <Tab label="Zoom" />
           <Tab label="Selection" />
           <Tab label="Focus Location" />
           <Tab label="Full Height Table" />
@@ -442,8 +443,26 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
         </div>
       )}
 
-      {/* 1: Selection */}
+      {/* 1: Basic */}
       {tabValue !== 1 ? null : (
+        <div role="tabpanel">
+          <Typography variant="h4" component="h2" gutterBottom>Zoom</Typography>
+          <DocBlock>
+            Preset zoom value via the mapZoom property.
+          </DocBlock>
+          <ExampleBlock>
+            <SiteMap mapZoom={13} mapCenter={[44.95011, -110.58715]} />
+          </ExampleBlock>
+          <CodeBlock>
+            {`
+<SiteMap mapZoom={13} mapCenter={[44.95011, -110.58715]} />
+          `}
+          </CodeBlock>
+        </div>
+      )}
+
+      {/* 2: Selection */}
+      {tabValue !== 2 ? null : (
         <div role="tabpanel">
           <Typography variant="h4" component="h2" gutterBottom>Selection</Typography>
           <DocBlock>
@@ -462,8 +481,8 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
         </div>
       )}
 
-      {/* 2: Focus Location */}
-      {tabValue !== 2 ? null : (
+      {/* 3: Focus Location */}
+      {tabValue !== 3 ? null : (
         <div role="tabpanel">
           <Typography variant="h4" component="h2" gutterBottom>Focus Location</Typography>
           <DocBlock>
@@ -483,8 +502,8 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
         </div>
       )}
 
-      {/* 3: Full Height Table */}
-      {tabValue !== 3 ? null : (
+      {/* 4: Full Height Table */}
+      {tabValue !== 4 ? null : (
         <div role="tabpanel">
           <Typography variant="h4" component="h2" gutterBottom>Full Height Table</Typography>
           <DocBlock>
@@ -504,8 +523,8 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
         </div>
       )}
 
-      {/* 4: Manual Locations */}
-      {tabValue !== 4 ? null : (
+      {/* 5: Manual Locations */}
+      {tabValue !== 5 ? null : (
         <div role="tabpanel">
           <Typography variant="h4" component="h2" gutterBottom>Manual Locations</Typography>
           <DocBlock>
@@ -559,8 +578,8 @@ return (
         </div>
       )}
 
-      {/* 5: Split View */}
-      {tabValue !== 5 ? null : (
+      {/* 6: Split View */}
+      {tabValue !== 6 ? null : (
         <div role="tabpanel">
           <Typography variant="h4" component="h2" gutterBottom>Split View</Typography>
           <DocBlock>
