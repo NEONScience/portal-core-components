@@ -19,11 +19,21 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
-    maxWidth: 500,
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
+    // backgroundColor: theme.palette.background.paper,
+    backgroundColor: '#1b67b3',
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    padding: theme.spacing(2),
+  },
+  signInButton: {
+    margin: theme.spacing(2),
+  },
+  signInBox: {
+    maxWidth: 400,
+    minHeight: 600,
+    margin: 0,
+    padding: 0,
+    border: 'none',
+    scrolling: 'yes',
   },
 }));
 
@@ -42,21 +52,24 @@ export default function SigninModal() {
   };
 
   return (
-    <div>
-      <Button type="button" variant="contained" onClick={handleOpen}>
+    <>
+      <Button type="button" variant="contained" onClick={handleOpen} className={classes.signInButton}>
         Sign In
       </Button>
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="login-modal-title"
-        aria-describedby="login-modal-description"
+        aria-label="Neon Sign In"
       >
         <div style={modalStyle} className={classes.paper}>
-          <h2 id="login-modal-title">Neon Sign In</h2>
-          <iframe title="Neon Sign In" src={NeonEnvironment.getFullAuthPath('login')} />
+          <iframe
+            id="signInBox"
+            className={classes.signInBox}
+            title="Neon Sign In"
+            src={NeonEnvironment.getFullAuthPath('login')}
+          />
         </div>
       </Modal>
-    </div>
+    </>
   );
 }

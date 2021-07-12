@@ -37,7 +37,6 @@ import DataThemeIcon from '../DataThemeIcon/DataThemeIcon';
 import ExternalHost from '../ExternalHost/ExternalHost';
 import ExternalHostInfo from '../ExternalHostInfo/ExternalHostInfo';
 import NeonContext from '../NeonContext/NeonContext';
-import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import Theme, { COLORS } from '../Theme/Theme';
 import NeonSignin from './NeonSignin';
 
@@ -426,7 +425,7 @@ export default function DownloadDataDialog() {
   const renderAuthSuggestion = () => {
     if (isAuthenticated) { return null; }
     const benefitsLink = (
-      <Link target="_new" href="https://www.neonscience.org/about/user-accounts">here</Link>
+      <Link target="_new" href="https://www.neonscience.org/about/user-accounts">more</Link>
     );
     /* eslint-disable react/jsx-one-expression-per-line */
     const authStyles = { color: COLORS.GOLD[800], textAlign: 'right', whiteSpace: 'nowrap' };
@@ -440,7 +439,7 @@ export default function DownloadDataDialog() {
             fontWeight: 600,
           }}
         >
-          Have an account? Consider signing in before proceeding: <NeonSignin />.
+          Consider signing in or creating an account before proceeding.
         </Typography>
         <Typography
           variant="body2"
@@ -450,8 +449,9 @@ export default function DownloadDataDialog() {
             fontSize: '0.8rem',
           }}
         >
-          Learn more about the benefits of signing in {benefitsLink}.
+          Learn {benefitsLink} about the benefits of having an account.
         </Typography>
+        <NeonSignin />
       </>
     );
     /* eslint-enable react/jsx-one-expression-per-line */
@@ -478,8 +478,8 @@ export default function DownloadDataDialog() {
           {showDownloadButton ? renderDownloadButton() : null}
         </div>
         {showDownloadButton && !allStepsComplete ? (
-          <Typography variant="body2" style={{ marginTop: Theme.spacing(1) }}>
-            Complete all steps to enable download
+          <Typography variant="body2" style={{ marginTop: Theme.spacing(2) }}>
+            Complete all steps to enable download.
           </Typography>
         ) : null}
         {renderAuthSuggestion()}
