@@ -104,6 +104,10 @@ const useStyles = makeStyles((theme) => ({
       paddingLeft: 'calc(2/27*100%)',
       paddingRight: 'calc(2/27*100%)',
     },
+    // Purely a quick-fix workaround for Drupal header auth container...
+    '& .header__inner.l--offset-wide > .authContainer': {
+      display: 'none !important',
+    },
     '& .header__search--inner': {
       display: 'flex',
       '-ms-flex-pack': 'start',

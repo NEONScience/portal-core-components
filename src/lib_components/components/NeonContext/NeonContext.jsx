@@ -127,12 +127,16 @@ const reducer = (state, action) => {
     case 'fetchSitesSucceeded':
       newState.fetches.sites.status = FETCH_STATUS.SUCCESS;
       newState.data.sites = action.sites;
-      newState.isFinal = true;
+      newState.isFinal = !newState.auth.useCore
+        || ((newState.fetches.auth.status === FETCH_STATUS.SUCCESS)
+          || (newState.fetches.auth.status === FETCH_STATUS.ERROR));
       return deriveRegionSites(newState);
     case 'fetchSitesFailed':
       newState.fetches.sites.status = FETCH_STATUS.ERROR;
       newState.fetches.sites.error = action.error;
-      newState.isFinal = true;
+      newState.isFinal = !newState.auth.useCore
+        || ((newState.fetches.auth.status === FETCH_STATUS.SUCCESS)
+          || (newState.fetches.auth.status === FETCH_STATUS.ERROR));
       newState.hasError = true;
       return newState;
 
@@ -150,12 +154,16 @@ const reducer = (state, action) => {
       newState.fetches.auth.status = FETCH_STATUS.SUCCESS;
       newState.auth.isAuthenticated = !!action.isAuthenticated;
       newState.auth.userData = AuthService.parseUserData(action.response);
+      newState.isFinal = (newState.fetches.sites.status === FETCH_STATUS.SUCCESS)
+        || (newState.fetches.sites.status === FETCH_STATUS.ERROR);
       return newState;
     case 'fetchAuthFailed':
       newState.fetches.auth.status = FETCH_STATUS.ERROR;
       newState.fetches.auth.error = action.error;
       newState.auth.isAuthenticated = false;
       newState.auth.userData = null;
+      newState.isFinal = (newState.fetches.sites.status === FETCH_STATUS.SUCCESS)
+        || (newState.fetches.sites.status === FETCH_STATUS.ERROR);
       return newState;
 
     // Actions for handling remote assets
@@ -293,7 +301,7 @@ const Provider = (props) => {
                 AuthService.loginSilently(dispatch, true);
               }
             } else {
-              AuthService.login();
+              dispatch({ type: 'fetchAuthSucceeded', isAuthenticated, response });
             }
           } else {
             dispatch({ type: 'fetchAuthSucceeded', isAuthenticated, response });
