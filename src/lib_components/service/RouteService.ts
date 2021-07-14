@@ -175,7 +175,7 @@ const RouteService: IRouteService = {
     `${NeonEnvironment.getWebHost()}/about/faq`
   ),
   getDownloadExplorePath: (): string => (
-    `${NeonEnvironment.getWebHost()}/download-explore-neon-data`
+    `${NeonEnvironment.getWebHost()}/resources/learning-hub/tutorials/download-explore-neon-data`
   ),
   getFileNamingConventionsPath: (): string => (
     `${NeonEnvironment.getWebHost()}/data-samples/data-management/data-formats-conventions`

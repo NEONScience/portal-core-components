@@ -3,9 +3,23 @@ import { AuthSilentType, Undef } from '../../types/core';
 // Default hosts
 export const DEFAULT_API_HOST = 'https://data.neonscience.org';
 export const DEFAULT_WEB_HOST = 'https://www.neonscience.org';
-export const API_HOST_REGEX = new RegExp(/^(data|cert-data|int-data|local-data)[.]neonscience[.]org$/);
-export const WEB_HOST_REGEX = new RegExp(/^(www|cert-www|int-www|local-www)[.](neonscience[.]org|.+[.]us-[0-9]{1}[.]platformsh[.]site)$/g);
-export const DATA_CITE_API_HOST_REGEX = new RegExp(/^(api|api[.]test)[.]datacite[.]org$/);
+
+interface IHostRegexService {
+  getApiHostRegex: () => RegExp;
+  getWebHostRegex: () => RegExp;
+  getDataCiteApiHostRegex: () => RegExp;
+}
+export const HostRegexService: IHostRegexService = {
+  getApiHostRegex: (): RegExp => (
+    new RegExp(/^(data|cert-data|int-data|local-data)[.]neonscience[.]org$/)
+  ),
+  getWebHostRegex: (): RegExp => (
+    new RegExp(/^(www|cert-www|int-www|local-www)[.](neonscience[.]org|.+[.]us-[0-9]{1}[.]platformsh[.]site)$/)
+  ),
+  getDataCiteApiHostRegex: (): RegExp => (
+    new RegExp(/^(api|api[.]test)[.]datacite[.]org$/)
+  ),
+};
 
 // Names of all environment variables that MUST be explicitly defined for the
 // environment to be reported as "valid". These are evnironment variables
@@ -377,8 +391,9 @@ const NeonEnvironment: INeonEnvironment = {
     if ((typeof host !== 'string') || (host.length <= 0)) {
       return false;
     }
-    if (!API_HOST_REGEX) return false;
-    const matches = API_HOST_REGEX.exec(host);
+    const regex = HostRegexService.getApiHostRegex();
+    if (!regex) return false;
+    const matches = regex.exec(host);
     if (!matches) return false;
     return (matches.length > 0);
   },
@@ -392,8 +407,9 @@ const NeonEnvironment: INeonEnvironment = {
     if ((typeof host !== 'string') || (host.length <= 0)) {
       return false;
     }
-    if (!WEB_HOST_REGEX) return false;
-    const matches = WEB_HOST_REGEX.exec(host);
+    const regex = HostRegexService.getWebHostRegex();
+    if (!regex) return false;
+    const matches = regex.exec(host);
     if (!matches) return false;
     return (matches.length > 0);
   },
@@ -407,8 +423,9 @@ const NeonEnvironment: INeonEnvironment = {
     if ((typeof host !== 'string') || (host.length <= 0)) {
       return false;
     }
-    if (!WEB_HOST_REGEX) return false;
-    const matches = DATA_CITE_API_HOST_REGEX.exec(host);
+    const regex = HostRegexService.getDataCiteApiHostRegex();
+    if (!regex) return false;
+    const matches = regex.exec(host);
     if (!matches) return false;
     return (matches.length > 0);
   },

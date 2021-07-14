@@ -845,7 +845,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
           <a
             className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
             data-gtm="download-data-dialog.download-and-explore-link"
-            href="https://www.neonscience.org/download-explore-neon-data"
+            href="https://www.neonscience.org/resources/learning-hub/tutorials/download-explore-neon-data"
             onBlur={[Function]}
             onFocus={[Function]}
             target="_blank"

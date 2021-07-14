@@ -1,9 +1,12 @@
 import { AuthSilentType, Undef } from '../../types/core';
 export declare const DEFAULT_API_HOST = "https://data.neonscience.org";
 export declare const DEFAULT_WEB_HOST = "https://www.neonscience.org";
-export declare const API_HOST_REGEX: RegExp;
-export declare const WEB_HOST_REGEX: RegExp;
-export declare const DATA_CITE_API_HOST_REGEX: RegExp;
+interface IHostRegexService {
+    getApiHostRegex: () => RegExp;
+    getWebHostRegex: () => RegExp;
+    getDataCiteApiHostRegex: () => RegExp;
+}
+export declare const HostRegexService: IHostRegexService;
 export declare const requiredEnvironmentVars: string[];
 export declare const optionalEnvironmentVars: string[];
 export interface NeonServerData {
