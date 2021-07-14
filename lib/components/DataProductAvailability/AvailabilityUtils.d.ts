@@ -51,10 +51,10 @@ export function calcRollupStatus(statuses?: any[]): any;
 export namespace AvailabilityPropTypes {
     export const basicSiteCodes: PropTypes.Requireable<(PropTypes.InferProps<{
         siteCode: PropTypes.Validator<string>;
-        availableMonths: PropTypes.Validator<import("../../types/core").Nullable<string>[]>;
+        availableMonths: PropTypes.Validator<(string | null | undefined)[]>;
         availableReleases: PropTypes.Requireable<(PropTypes.InferProps<{
             release: PropTypes.Validator<string>;
-            availableMonths: PropTypes.Validator<import("../../types/core").Nullable<string>[]>;
+            availableMonths: PropTypes.Validator<(string | null | undefined)[]>;
         }> | null | undefined)[]>;
     }> | null | undefined)[]>;
     export const enhancedSites: PropTypes.Requireable<(PropTypes.InferProps<{
@@ -64,17 +64,17 @@ export namespace AvailabilityPropTypes {
             description: PropTypes.Validator<string>;
             waitInterval: PropTypes.Validator<string>;
             months: PropTypes.Validator<{
-                [x: string]: import("../../types/core").Nullable<string>;
+                [x: string]: string | null | undefined;
             }>;
         }> | null | undefined)[]>;
     }> | null | undefined)[]>;
     export const dataProducts: PropTypes.Requireable<(PropTypes.InferProps<{
         dataProductCode: PropTypes.Validator<string>;
         dataProductTitle: PropTypes.Validator<string>;
-        availableMonths: PropTypes.Validator<import("../../types/core").Nullable<string>[]>;
+        availableMonths: PropTypes.Validator<(string | null | undefined)[]>;
         availableReleases: PropTypes.Requireable<(PropTypes.InferProps<{
             release: PropTypes.Validator<string>;
-            availableMonths: PropTypes.Validator<import("../../types/core").Nullable<string>[]>;
+            availableMonths: PropTypes.Validator<(string | null | undefined)[]>;
         }> | null | undefined)[]>;
     }> | null | undefined)[]>;
 }

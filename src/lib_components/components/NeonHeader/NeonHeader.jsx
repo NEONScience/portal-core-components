@@ -243,7 +243,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const buildSearchAction = (action) => {
-  const root = 'https://www.neonscience.org';
+  const root = NeonEnvironment.getWebHost();
   if (!action) return `${root}/search/site`;
   if (action.startsWith('/')) {
     return `${root}${action}`;

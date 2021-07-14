@@ -40,6 +40,7 @@ import NeonContext from '../NeonContext/NeonContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import Theme, { COLORS } from '../Theme/Theme';
 
+import RouteService from '../../service/RouteService';
 import {
   buildManifestConfig,
   buildManifestRequestBody,
@@ -318,21 +319,6 @@ export default function DownloadDataDialog() {
     const bytes = getSizeEstimateBytes();
     if (bytes < DOWNLOAD_SIZE_WARN) { return null; }
     const formattedBytes = formatBytes(bytes);
-    const aopHardDriveLink = (
-      <Link
-        target="_blank"
-        href="https://www.neonscience.org/data-collection/airborne-remote-sensing/aop-data-hard-drive-request"
-      >
-        AOP Data to Hard Drive Request
-      </Link>
-    );
-    const aopBlurb = (
-      <>
-        {/* eslint-disable react/jsx-one-expression-per-line */}
-        An alternate way to obtain lots of AOP data is to submit an {aopHardDriveLink}.
-        {/* eslint-enable react/jsx-one-expression-per-line */}
-      </>
-    );
     return (
       <Card className={classes.callout}>
         <CardContent className={classes.startFlex}>
@@ -345,7 +331,7 @@ export default function DownloadDataDialog() {
             </Typography>
             <Typography variant="body1">
               If needed, you can reduce the download size by selecting fewer sites
-              or a more restrictive date range. {fromAOPManifest ? aopBlurb : null}
+              or a more restrictive date range.
             </Typography>
             {/* eslint-enable react/jsx-one-expression-per-line */}
           </div>
@@ -428,7 +414,7 @@ export default function DownloadDataDialog() {
       <Link target="_new" href={NeonEnvironment.getFullAuthPath('login')}>signing in</Link>
     );
     const benefitsLink = (
-      <Link target="_new" href="https://www.neonscience.org/about/user-accounts">here</Link>
+      <Link target="_new" href={RouteService.getUserAccountsPath()}>here</Link>
     );
     /* eslint-disable react/jsx-one-expression-per-line */
     const authStyles = { color: COLORS.GOLD[800], textAlign: 'right', whiteSpace: 'nowrap' };

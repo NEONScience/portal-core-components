@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 
 import DocBlock from './DocBlock';
 
+import NeonEnvironment from '../lib_components/components/NeonEnvironment/NeonEnvironment';
 import Theme from '../lib_components/components/Theme/Theme';
 
 const useStyles = makeStyles((theme) => ({
@@ -25,7 +26,7 @@ export default function Home() {
 
       <DocBlock>
         NEON Data Portal Core Components is an open source library of <Link href="https://reactjs.org" target="_blank">React</Link> components
-        intended for use on <Link href="https://data.neonscience.org" target="_blank">NEON Data Portal</Link> pages.
+        intended for use on <Link href={`${NeonEnvironment.getWebHost()}`} target="_blank">NEON Data Portal</Link> pages.
       </DocBlock>
       <DocBlock>
         This page and component pages accessed through the navigation links provided here serves

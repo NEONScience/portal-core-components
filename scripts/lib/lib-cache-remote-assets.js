@@ -14,11 +14,33 @@ import fetch from 'node-fetch';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
-import REMOTE_ASSETS from '../../src/lib_components/remoteAssetsMap/remoteAssetsMap.js'
+import { REMOTE_ASSET_PATHS, REMOTE_ASSET_NAMES } from '../../src/lib_components/remoteAssetsMap/remoteAssets.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const CACHED_REMOTE_ASSETS_PATH = path.join(__dirname, '../../src/lib_components/remoteAssets');
+
+// When fetching cached remote assets, reference production
+const REMOTE_ASSETS_CACHE = {
+  DRUPAL_THEME_CSS: {
+    name: REMOTE_ASSET_NAMES.DRUPAL_THEME_CSS,
+    url: `https://www.neonscience.org${REMOTE_ASSET_PATHS.DRUPAL_THEME_CSS}`,
+  },
+  DRUPAL_HEADER_JS: {
+    name: REMOTE_ASSET_NAMES.DRUPAL_HEADER_JS,
+    url: `https://www.neonscience.org${REMOTE_ASSET_PATHS.DRUPAL_HEADER_JS}`,
+  },
+  DRUPAL_HEADER_HTML: {
+    name: REMOTE_ASSET_NAMES.DRUPAL_HEADER_HTML,
+    url: `https://www.neonscience.org${REMOTE_ASSET_PATHS.DRUPAL_HEADER_HTML}`,
+  },
+  DRUPAL_FOOTER_HTML: {
+    name: REMOTE_ASSET_NAMES.DRUPAL_FOOTER_HTML,
+    url: `https://www.neonscience.org${REMOTE_ASSET_PATHS.DRUPAL_FOOTER_HTML}`,
+  },
+};
+
+Object.keys(REMOTE_ASSETS_CACHE).forEach((key) => { REMOTE_ASSETS_CACHE[key].KEY = key; });
 
 console.log('Caching remote assets...\n');
 
@@ -27,7 +49,7 @@ const fetches = [];
 const sanitizeContent = (key, content) => {
   switch (key) {
     // DRUPAL_THEME_CSS - comment out all styles with relative path URLs (these will always fail)
-    case REMOTE_ASSETS.DRUPAL_THEME_CSS.KEY:
+    case REMOTE_ASSETS_CACHE.DRUPAL_THEME_CSS.KEY:
       content.match(/^(.*url\([\"\']((?!data)).*)$/mg).forEach((match) => {
         const replacement = match.endsWith('}')
           ? `/* ${match.slice(0, -1)} */ }`
@@ -37,8 +59,8 @@ const sanitizeContent = (key, content) => {
       return content;
     // HTML files - convert to JS module that exports a string of the HTML content
     // We do this so that apps consuming portal-core-components don't need to configure html-loader
-    case REMOTE_ASSETS.DRUPAL_HEADER_HTML.KEY:
-    case REMOTE_ASSETS.DRUPAL_FOOTER_HTML.KEY:
+    case REMOTE_ASSETS_CACHE.DRUPAL_HEADER_HTML.KEY:
+    case REMOTE_ASSETS_CACHE.DRUPAL_FOOTER_HTML.KEY:
       content = content.replace(/`/g, '\\`');
       return `let html;\nexport default html = \`${content}\`;`;
     default:
@@ -46,10 +68,10 @@ const sanitizeContent = (key, content) => {
   }
 };
 
-Object.keys(REMOTE_ASSETS)
+Object.keys(REMOTE_ASSETS_CACHE)
   .filter((key) => key !== 'default')
   .forEach((key) => {
-    const { name, url } = REMOTE_ASSETS[key];
+    const { name, url } = REMOTE_ASSETS_CACHE[key];
     console.log(`* Fetching: ${name}`);
     const promise = fetch(url)
       .then((res) => {

@@ -1,4 +1,4 @@
 {
   "type": "module",
-  "module": "./remoteAssetsMap.js"
+  "module": "./remoteAssets.js"
 }

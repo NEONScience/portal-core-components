@@ -197,7 +197,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
       >
         <a
           className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-          href="http://localhost/data-products/DP0.00000.000"
+          href="https://data.neonscience.org/data-products/DP0.00000.000"
           onBlur={[Function]}
           onFocus={[Function]}
           style={
@@ -370,7 +370,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
       >
         <a
           className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-          href="http://localhost/data-products/DP0.00000.000"
+          href="https://data.neonscience.org/data-products/DP0.00000.000"
           onBlur={[Function]}
           onFocus={[Function]}
           style={
@@ -527,7 +527,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
       >
         <a
           className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-          href="http://localhost/data-products/DP0.00000.000"
+          href="https://data.neonscience.org/data-products/DP0.00000.000"
           onBlur={[Function]}
           onFocus={[Function]}
           style={
@@ -821,7 +821,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
       >
         <a
           className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-          href="http://localhost/data-products/DP0.00000.000"
+          href="https://data.neonscience.org/data-products/DP0.00000.000"
           onBlur={[Function]}
           onFocus={[Function]}
           style={
@@ -972,7 +972,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
       >
         <a
           className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-          href="http://localhost/data-products/DP0.00000.000"
+          href="https://data.neonscience.org/data-products/DP0.00000.000"
           onBlur={[Function]}
           onFocus={[Function]}
           style={
@@ -1128,7 +1128,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
       >
         <a
           className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-          href="http://localhost/data-products/DP0.00000.000"
+          href="https://data.neonscience.org/data-products/DP0.00000.000"
           onBlur={[Function]}
           onFocus={[Function]}
           style={
@@ -1279,7 +1279,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
       >
         <a
           className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-          href="http://localhost/data-products/DP0.00000.000"
+          href="https://data.neonscience.org/data-products/DP0.00000.000"
           onBlur={[Function]}
           onFocus={[Function]}
           style={

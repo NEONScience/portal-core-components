@@ -202,7 +202,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
           <a
             className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
             data-gtm="download-data-dialog.neon-faq-link"
-            href="http://data.neonscience.org/faq"
+            href="https://www.neonscience.org/about/faq"
             onBlur={[Function]}
             onFocus={[Function]}
             target="_blank"
@@ -885,7 +885,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
           <a
             className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
             data-gtm="download-data-dialog.file-naming-conventions-link"
-            href="https://data.neonscience.org/file-naming-conventions"
+            href="https://www.neonscience.org/data-samples/data-management/data-formats-conventions"
             onBlur={[Function]}
             onFocus={[Function]}
             target="_blank"
@@ -1000,7 +1000,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
             }
           }
         >
-          National Ecological Observatory Network. 2019. Data Product undefined, undefined. Provisional data downloaded from http://data.neonscience.org on December 31, 2019. Battelle, Boulder, CO, USA NEON. 2019.
+          National Ecological Observatory Network. 2019. Data Product undefined, undefined. Provisional data downloaded from https://data.neonscience.org on December 31, 2019. Battelle, Boulder, CO, USA NEON. 2019.
         </p>
       </div>
     </div>

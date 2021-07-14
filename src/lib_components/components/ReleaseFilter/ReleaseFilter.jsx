@@ -23,6 +23,8 @@ import InfoIcon from '@material-ui/icons/InfoOutlined';
 
 import Theme from '../Theme/Theme';
 
+import RouteService from '../../service/RouteService';
+
 const useStyles = makeStyles((theme) => ({
   title: {
     fontWeight: 500,
@@ -92,7 +94,6 @@ const useStyles = makeStyles((theme) => ({
 const UNSPECIFIED_NAME = 'Latest and Provisional';
 const UNSPECIFIED_DESCRIPTION = 'Data in the latest release in addition to provisional data (not yet in any release)';
 const DOI_TITLE = 'Digital Object Identifier (DOI) - A citable permanent link to this this data product release';
-const INFO_URL = 'https://www.neonscience.org/data-samples/data-management/data-revisions-releases';
 
 const formatGenerationDate = (generationDate) => {
   const generationMoment = moment.utc(generationDate);
@@ -164,7 +165,7 @@ const ReleaseFilter = (props) => {
   );
 
   const releasesLink = (
-    <Link href={INFO_URL} target="_blank">
+    <Link href={RouteService.getDataRevisionsReleasePath()} target="_blank">
       Data Product Revisions and Releases
     </Link>
   );

@@ -1,78 +1,66 @@
-export const requiredEnvironmentVars: string[];
-export const optionalEnvironmentVars: string[];
-export default NeonEnvironment;
-declare namespace NeonEnvironment {
-    export const isValid: boolean;
-    export const isDevEnv: boolean;
-    export const isProdEnv: boolean;
-    export const isForeignEnv: boolean;
-    export const useGraphql: boolean;
-    export const showAopViewer: boolean;
-    export const authDisableWs: boolean;
-    export function getApiName(): string | undefined;
-    export function getApiVersion(): string | undefined;
-    export function getRootApiPath(): string;
-    export function getRootGraphqlPath(): string | undefined;
-    export function getRootJsonLdPath(): string;
-    export function getRootAuthApiPath(): string | undefined;
-    export namespace getApiPath {
-        export function aopDownload(): string | undefined;
-        export function data(): string | undefined;
-        export function documents(): string | undefined;
-        export function download(): string | undefined;
-        export function manifest(): string | undefined;
-        export function menu(): string | undefined;
-        export function products(): string | undefined;
-        export function releases(): string | undefined;
-        export function sites(): string | undefined;
-        export function locations(): string | undefined;
-        export function arcgisAssets(): string;
-    }
-    export namespace getApiLdPath {
-        export function repo(): string | undefined;
-    }
-    export namespace getPagePath {
-        export function fileNamingConventions(): string | undefined;
-    }
-    export namespace getAuthPath {
-        export function login(): string | undefined;
-        export function logout(): string | undefined;
-        export function userInfo(): string | undefined;
-        export function seamlessLogin(): string;
-        export function silentLogin(): string;
-        export function silentLogout(): string;
-    }
-    export namespace getAuthApiPath {
-        export function ws(): string | undefined;
-    }
-    export namespace authTopics {
-        export function getAuth0(): string | undefined;
-    }
-    export function getVisusProductsBaseUrl(): string | undefined;
-    export function getVisusIframeBaseUrl(): string | undefined;
-    export function getRouterBasePath(): string | undefined;
-    export function getRouterBaseHomePath(): string | undefined;
-    export function getHostOverride(): string | undefined;
-    export function getWsHostOverride(): string | undefined;
-    export namespace route {
-        export function home(): string;
-        export function account(): string;
-        export function getFullRoute(route?: string): string;
-        export function buildRouteFromHost(route?: string): string;
-        export function buildHomeRoute(): string;
-        export function buildAccountRoute(): string;
-    }
-    export function getNeonServerData(): Object;
-    export function getHost(): string | undefined;
-    export function getWebSocketHost(): string | undefined;
-    export function getApiTokenHeader(): string;
-    export function getApiToken(): string;
-    export function getAuthSilentType(): AuthSilentType;
-    export function getFullApiPath(path?: string): string;
-    export function getFullJsonLdApiPath(path?: string): string;
-    export function getFullPagePath(path?: string): string;
-    export function getFullAuthPath(path?: string): string;
-    export function getFullAuthApiPath(path?: string, useWs?: boolean): string;
-    export function getFullGraphqlPath(): string;
+import { AuthSilentType, Undef } from '../../types/core';
+export declare const DEFAULT_API_HOST = "https://data.neonscience.org";
+export declare const DEFAULT_WEB_HOST = "https://www.neonscience.org";
+export declare const API_HOST_REGEX: RegExp;
+export declare const WEB_HOST_REGEX: RegExp;
+export declare const DATA_CITE_API_HOST_REGEX: RegExp;
+export declare const requiredEnvironmentVars: string[];
+export declare const optionalEnvironmentVars: string[];
+export interface NeonServerData {
+    NeonPublicAPIHost: Undef<string>;
+    NeonWebHost: Undef<string>;
+    NeonPublicAPITokenHeader: Undef<string>;
+    NeonPublicAPIToken: Undef<string>;
+    NeonAuthSilentType: Undef<string>;
+    DataCiteAPIHost: Undef<string>;
 }
-import { AuthSilentType } from "../../types/core";
+export interface INeonEnvironment {
+    isValid: boolean;
+    isDevEnv: boolean;
+    isProdEnv: boolean;
+    useGraphql: boolean;
+    showAopViewer: boolean;
+    authDisableWs: boolean;
+    getApiName: () => Undef<string>;
+    getApiVersion: () => Undef<string>;
+    getRootApiPath: () => string;
+    getRootGraphqlPath: () => Undef<string>;
+    getRootJsonLdPath: () => string;
+    getRootAuthApiPath: () => Undef<string>;
+    getApiPath: Record<string, () => string>;
+    getApiLdPath: Record<string, () => string>;
+    getAuthApiPath: Record<string, () => string>;
+    getAuthPath: Record<string, () => string>;
+    authTopics: Record<string, () => string>;
+    getVisusProductsBaseUrl: () => Undef<string>;
+    getVisusIframeBaseUrl: () => Undef<string>;
+    getDataCiteApiHostDefault: () => string;
+    getRouterBasePath: () => string;
+    getRouterBaseHomePath: () => string;
+    getApiHostOverride: () => string;
+    getWebHostOverride: () => string;
+    getWsHostOverride: () => string;
+    getDataCiteApiHostOverride: () => Undef<string>;
+    route: Record<string, (p?: string) => string>;
+    getNeonServerData: () => NeonServerData | null;
+    getNeonServerDataWebHost: () => string | null;
+    getNeonServerDataApiHost: () => string | null;
+    getNeonServerDataDataCiteApiHost: () => string | null;
+    getWebHost: () => string;
+    getApiHost: () => string;
+    getWebSocketHost: () => string;
+    getDataCiteApiHost: () => string;
+    isApiHostValid: (host: string) => boolean;
+    isWebHostValid: (host: string) => boolean;
+    isDataCiteApiHostValid: (host: string) => boolean;
+    getApiTokenHeader: () => string;
+    getApiToken: () => string;
+    getAuthSilentType: () => AuthSilentType;
+    getFullApiPath: (path: string) => string;
+    getFullJsonLdApiPath: (path: string) => string;
+    getFullAuthApiPath: (path: string, useWs: boolean) => string;
+    getFullGraphqlPath: () => string;
+    getFullAuthPath: (path: string) => string;
+}
+declare const NeonEnvironment: INeonEnvironment;
+export default NeonEnvironment;
