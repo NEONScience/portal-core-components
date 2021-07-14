@@ -26,19 +26,12 @@ export const HostRegexService: IHostRegexService = {
 // that are expected to be referenced by all apps. Standard vars present in all
 // node environments (e.g. PORT, NODE_ENV, etc.) are not listed here.
 export const requiredEnvironmentVars = [
-  'REACT_APP_NEON_API_HOST',
-  'REACT_APP_NEON_API_NAME',
-  'REACT_APP_NEON_API_VERSION',
-  'REACT_APP_NEON_AUTH_API',
-  'REACT_APP_NEON_AUTH_WS_API',
-  'REACT_APP_NEON_AUTH_WS_TOPIC_AUTH0_API',
-  'REACT_APP_NEON_AUTH_LOGIN',
-  'REACT_APP_NEON_AUTH_LOGOUT',
-  'REACT_APP_NEON_AUTH_USERINFO',
+  'REACT_APP_NEON_PATH_API',
   'REACT_APP_NEON_PATH_PUBLIC_GRAPHQL',
+  'REACT_APP_NEON_PATH_AUTH_API',
+  'REACT_APP_NEON_PATH_AUTH0_API',
   'REACT_APP_NEON_ROUTER_BASE',
   'REACT_APP_NEON_ROUTER_BASE_HOME',
-  'REACT_APP_NEON_USE_GRAPHQL',
 ];
 
 // Names of additional environment variables that may be referenced by
@@ -47,17 +40,9 @@ export const requiredEnvironmentVars = [
 // this module will ever reference.
 export const optionalEnvironmentVars = [
   'REACT_APP_NEON_PATH_LD_API',
-  'REACT_APP_NEON_PATH_LD_REPO_API',
-  'REACT_APP_NEON_PATH_DATA_API',
-  'REACT_APP_NEON_PATH_DOCUMENTS_API',
   'REACT_APP_NEON_PATH_DOWNLOAD_API',
-  'REACT_APP_NEON_PATH_MANIFEST_API',
-  'REACT_APP_NEON_PATH_PRODUCTS_API',
-  'REACT_APP_NEON_PATH_PROTOTYPE_DATA_API',
-  'REACT_APP_NEON_PATH_RELEASES_API',
-  'REACT_APP_NEON_PATH_SITES_API',
-  'REACT_APP_NEON_PATH_LOCATIONS_API',
-  'REACT_APP_NEON_PATH_SAMPLES_API',
+  'REACT_APP_NEON_AUTH_DISABLE_WS',
+  'REACT_APP_NEON_USE_GRAPHQL',
   'REACT_APP_NEON_SHOW_AOP_VIEWER',
   'REACT_APP_NEON_VISUS_PRODUCTS_BASE_URL',
   'REACT_APP_NEON_VISUS_IFRAME_BASE_URL',
@@ -66,13 +51,7 @@ export const optionalEnvironmentVars = [
   'REACT_APP_NEON_WEB_HOST_OVERRIDE',
   'REACT_APP_NEON_WS_HOST_OVERRIDE',
   'REACT_APP_NEON_DATA_CITE_API_HOST_OVERRIDE',
-  'REACT_APP_NEON_AUTH_DISABLE_WS',
-  'REACT_APP_NEON_ROUTER_NEON_HOME',
-  'REACT_APP_NEON_ROUTER_NEON_MYACCOUNT',
 ];
-
-// Temporary paths that shouldn't need to propogate to environment files until made more permanent
-const REACT_APP_NEON_PATH_ARCGIS_ASSETS_API = '/arcgis-assets';
 
 const EnvType = {
   DEV: 'development',
@@ -96,16 +75,17 @@ export interface INeonEnvironment {
   showAopViewer: boolean;
   authDisableWs: boolean;
 
-  getApiName: () => Undef<string>;
-  getApiVersion: () => Undef<string>;
   getRootApiPath: () => string;
-  getRootGraphqlPath: () => Undef<string>;
+  getRootGraphqlPath: () => string;
   getRootJsonLdPath: () => string;
-  getRootAuthApiPath: () => Undef<string>;
+  getRootAuthApiPath: () => string;
+  getRootAuth0ApiPath: () => string;
+  getRootDownloadApiPath: () => string;
 
   getApiPath: Record<string, () => string>;
   getApiLdPath: Record<string, () => string>;
   getAuthApiPath: Record<string, () => string>;
+  getDownloadApiPath: Record<string, () => string>;
 
   getAuthPath: Record<string, () => string>;
 
@@ -146,6 +126,7 @@ export interface INeonEnvironment {
   getFullJsonLdApiPath: (path: string) => string;
   getFullAuthApiPath: (path: string, useWs: boolean) => string;
   getFullGraphqlPath: () => string;
+  getFullDownloadApiPath: (path: string) => string;
 
   getFullAuthPath: (path: string) => string;
 }
@@ -158,45 +139,52 @@ const NeonEnvironment: INeonEnvironment = {
   showAopViewer: process.env.REACT_APP_NEON_SHOW_AOP_VIEWER === 'true',
   authDisableWs: process.env.REACT_APP_NEON_AUTH_DISABLE_WS === 'true',
 
-  getApiName: () => process.env.REACT_APP_NEON_API_NAME,
-  getApiVersion: () => process.env.REACT_APP_NEON_API_VERSION,
-  getRootApiPath: () => `/${process.env.REACT_APP_NEON_API_NAME}/${process.env.REACT_APP_NEON_API_VERSION}`,
-  getRootGraphqlPath: () => process.env.REACT_APP_NEON_PATH_PUBLIC_GRAPHQL,
+  getRootApiPath: () => process.env.REACT_APP_NEON_PATH_API || '/api/v0',
+  getRootGraphqlPath: () => process.env.REACT_APP_NEON_PATH_PUBLIC_GRAPHQL || '/graphql',
   getRootJsonLdPath: () => `${NeonEnvironment.getRootApiPath()}${process.env.REACT_APP_NEON_PATH_LD_API}`,
-  getRootAuthApiPath: () => process.env.REACT_APP_NEON_AUTH_API,
+  getRootAuthApiPath: () => process.env.REACT_APP_NEON_PATH_AUTH_API || '/api/auth/v0',
+  getRootAuth0ApiPath: () => process.env.REACT_APP_NEON_PATH_AUTH0_API || '/auth0',
+  getRootDownloadApiPath: () => process.env.REACT_APP_NEON_PATH_DOWNLOAD_API || '/api/download/v0',
 
   getApiPath: {
-    data: (): string => process.env.REACT_APP_NEON_PATH_DATA_API || '',
-    prototype: (): string => process.env.REACT_APP_NEON_PATH_PROTOTYPE_DATA_API || '',
-    documents: (): string => process.env.REACT_APP_NEON_PATH_DOCUMENTS_API || '',
-    download: (): string => process.env.REACT_APP_NEON_PATH_DOWNLOAD_API || '',
-    manifest: (): string => process.env.REACT_APP_NEON_PATH_MANIFEST_API || '',
-    products: (): string => process.env.REACT_APP_NEON_PATH_PRODUCTS_API || '',
-    releases: (): string => process.env.REACT_APP_NEON_PATH_RELEASES_API || '',
-    sites: (): string => process.env.REACT_APP_NEON_PATH_SITES_API || '',
-    locations: (): string => process.env.REACT_APP_NEON_PATH_LOCATIONS_API || '',
-    samples: (): string => process.env.REACT_APP_NEON_PATH_SAMPLES_API || '',
-    arcgisAssets: (): string => REACT_APP_NEON_PATH_ARCGIS_ASSETS_API || '',
+    data: (): string => '/data',
+    prototype: (): string => '/prototype',
+    documents: (): string => '/documents',
+    products: (): string => '/products',
+    releases: (): string => '/releases',
+    sites: (): string => '/sites',
+    locations: (): string => '/locations',
+    samples: (): string => '/samples',
+    taxonomy: (): string => '/taxonomy',
+    taxonomyDownload: (): string => '/taxonomy/download',
+    arcgisAssets: (): string => '/arcgis-assets',
+  },
+
+  getDownloadApiPath: {
+    downloadStream: (): string => '/stream',
+    manifestRollup: (): string => '/manifest/rollup',
+    prototypeDownloadStream: (): string => '/prototype/stream',
+    prototypeManifestRollup: (): string => '/prototype/manifest/rollup',
   },
 
   getApiLdPath: {
-    repo: (): string => process.env.REACT_APP_NEON_PATH_LD_REPO_API || '',
+    repo: (): string => '/repository',
   },
 
   getAuthPath: {
-    login: () => process.env.REACT_APP_NEON_AUTH_LOGIN || '',
-    logout: () => process.env.REACT_APP_NEON_AUTH_LOGOUT || '',
-    userInfo: () => process.env.REACT_APP_NEON_AUTH_USERINFO || '',
+    login: () => `${NeonEnvironment.getRootAuth0ApiPath()}/login`,
+    logout: () => `${NeonEnvironment.getRootAuth0ApiPath()}/logout`,
+    userInfo: () => `${NeonEnvironment.getRootAuth0ApiPath()}/userinfo`,
     seamlessLogin: () => `${NeonEnvironment.getAuthPath.login()}?seamless=true`,
     silentLogin: () => `${NeonEnvironment.getAuthPath.login()}?silent=true`,
     silentLogout: () => `${NeonEnvironment.getAuthPath.logout()}?silent=true`,
-    notifications: () => '/auth0/liferaynotifications',
+    notifications: () => `${NeonEnvironment.getRootAuth0ApiPath()}/liferaynotifications`,
   },
   getAuthApiPath: {
-    ws: () => process.env.REACT_APP_NEON_AUTH_WS_API || '',
+    ws: () => '/ws',
   },
   authTopics: {
-    getAuth0: () => process.env.REACT_APP_NEON_AUTH_WS_TOPIC_AUTH0_API || '',
+    getAuth0: () => '/consumer/topic/auth0',
   },
 
   getVisusProductsBaseUrl: (): Undef<string> => process.env.REACT_APP_NEON_VISUS_PRODUCTS_BASE_URL,
@@ -223,8 +211,8 @@ const NeonEnvironment: INeonEnvironment = {
   ),
 
   route: {
-    home: () => process.env.REACT_APP_NEON_ROUTER_NEON_HOME || '/home',
-    account: () => process.env.REACT_APP_NEON_ROUTER_NEON_MYACCOUNT || '/myaccount',
+    home: () => '/home',
+    account: () => '/myaccount',
     getFullRoute: (route = '') => `${NeonEnvironment.getRouterBasePath()}${route}`,
     buildRouteFromHost: (route = '') => (
       `${NeonEnvironment.getWebHost()}${NeonEnvironment.route.getFullRoute(route)}`
@@ -476,6 +464,14 @@ const NeonEnvironment: INeonEnvironment = {
       : NeonEnvironment.getRootApiPath();
     return NeonEnvironment.getApiPath[path]
       ? `${host}${root}${NeonEnvironment.getApiPath[path]()}`
+      : `${host}${root}`;
+  },
+
+  getFullDownloadApiPath: (path: string = ''): string => {
+    const host = NeonEnvironment.getApiHost();
+    const root = NeonEnvironment.getRootDownloadApiPath();
+    return NeonEnvironment.getDownloadApiPath[path]
+      ? `${host}${root}${NeonEnvironment.getDownloadApiPath[path]()}`
       : `${host}${root}`;
   },
 

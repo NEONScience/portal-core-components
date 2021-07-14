@@ -62,7 +62,7 @@ export const buildManifestRequestUrl = (config: ManifestConfig, useBody = true):
     packageType,
     documentation,
   } = config;
-  let url = `${NeonEnvironment.getFullApiPath('manifest')}/manifest/rollup`;
+  let url = NeonEnvironment.getFullDownloadApiPath('manifestRollup');
   if (!useBody) {
     const siteCodesParam = buildSiteCodesParams(sites);
     const productCodeParam = productCode.startsWith('NEON.DOM.SITE')
@@ -124,7 +124,7 @@ export const buildS3FilesRequestUrl = (
 export const downloadManifest = (manifest: ManifestRequest) => {
   const form = document.createElement('form');
   form.style.display = 'none';
-  form.action = `${NeonEnvironment.getFullApiPath('download')}/stream`;
+  form.action = NeonEnvironment.getFullDownloadApiPath('downloadStream');
   form.method = 'POST';
 
   const input = document.createElement('input');

@@ -24,15 +24,16 @@ export interface INeonEnvironment {
     useGraphql: boolean;
     showAopViewer: boolean;
     authDisableWs: boolean;
-    getApiName: () => Undef<string>;
-    getApiVersion: () => Undef<string>;
     getRootApiPath: () => string;
-    getRootGraphqlPath: () => Undef<string>;
+    getRootGraphqlPath: () => string;
     getRootJsonLdPath: () => string;
-    getRootAuthApiPath: () => Undef<string>;
+    getRootAuthApiPath: () => string;
+    getRootAuth0ApiPath: () => string;
+    getRootDownloadApiPath: () => string;
     getApiPath: Record<string, () => string>;
     getApiLdPath: Record<string, () => string>;
     getAuthApiPath: Record<string, () => string>;
+    getDownloadApiPath: Record<string, () => string>;
     getAuthPath: Record<string, () => string>;
     authTopics: Record<string, () => string>;
     getVisusProductsBaseUrl: () => Undef<string>;
@@ -63,6 +64,7 @@ export interface INeonEnvironment {
     getFullJsonLdApiPath: (path: string) => string;
     getFullAuthApiPath: (path: string, useWs: boolean) => string;
     getFullGraphqlPath: () => string;
+    getFullDownloadApiPath: (path: string) => string;
     getFullAuthPath: (path: string) => string;
 }
 declare const NeonEnvironment: INeonEnvironment;

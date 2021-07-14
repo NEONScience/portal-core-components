@@ -24,12 +24,12 @@ describe('NeonEnvironment', () => {
 
   describe('simple string access methods', () => {
     [
-      'getApiName',
-      'getApiVersion',
       'getRootApiPath',
       'getRootGraphqlPath',
       'getRootJsonLdPath',
       'getRootAuthApiPath',
+      'getRootAuth0ApiPath',
+      'getRootDownloadApiPath',
       'getVisusProductsBaseUrl',
       'getVisusIframeBaseUrl',
       'getRouterBasePath',
@@ -49,6 +49,7 @@ describe('NeonEnvironment', () => {
       'getApiLdPath',
       'getAuthPath',
       'getAuthApiPath',
+      'getDownloadApiPath',
       'authTopics',
       'route',
     ].forEach((methodGroup) => {
@@ -67,10 +68,10 @@ describe('NeonEnvironment', () => {
       const host = NeonEnvironment.getApiHost();
       const fullPath1 = NeonEnvironment.getFullApiPath();
       expect(fullPath1.startsWith(host)).toBe(true);
-      const downloadPath = NeonEnvironment.getApiPath.download();
-      const fullPath2 = NeonEnvironment.getFullApiPath('download');
+      const productPath = NeonEnvironment.getApiPath.products();
+      const fullPath2 = NeonEnvironment.getFullApiPath('products');
       expect(fullPath2.startsWith(host)).toBe(true);
-      expect(fullPath2.endsWith(downloadPath)).toBe(true);
+      expect(fullPath2.endsWith(productPath)).toBe(true);
     });
     test('getFullJsonLdApiPath()', () => {
       const host = NeonEnvironment.getApiHost();
