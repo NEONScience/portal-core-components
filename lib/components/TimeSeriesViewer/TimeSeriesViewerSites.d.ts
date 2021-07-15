@@ -97,7 +97,7 @@ declare namespace SelectPositionsButton {
     export namespace propTypes_3 {
         export const selectedSite: PropTypes.Validator<PropTypes.InferProps<{
             siteCode: PropTypes.Validator<string>;
-            positions: PropTypes.Validator<import("../../types/core").Nullable<string>[]>;
+            positions: PropTypes.Validator<(string | null | undefined)[]>;
         }>>;
     }
     export { propTypes_3 as propTypes };
@@ -125,11 +125,11 @@ declare namespace SelectedSite {
     const propTypes_4: {
         setSelectedTab: PropTypes.Validator<(...args: any[]) => any>;
         TAB_IDS: PropTypes.Validator<{
-            [x: string]: import("../../types/core").Nullable<string>;
+            [x: string]: string | null | undefined;
         }>;
         site: PropTypes.Validator<PropTypes.InferProps<{
             siteCode: PropTypes.Validator<string>;
-            positions: PropTypes.Validator<import("../../types/core").Nullable<string>[]>;
+            positions: PropTypes.Validator<(string | null | undefined)[]>;
         }>>;
         disabled: PropTypes.Requireable<boolean>;
     };

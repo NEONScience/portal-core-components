@@ -6,6 +6,8 @@ import L from 'leaflet';
 
 import { COLORS } from '../Theme/Theme';
 
+import RouteService from '../../service/RouteService';
+
 // SVGs for all map icons
 import iconPlaceholderSVG from './svg/icon-placeholder.svg';
 
@@ -1188,7 +1190,7 @@ export const calculateFeatureAvailability = (state) => {
    Used to construction URLs when linking out to other pages
 */
 export const getHref = (key, arg = null) => {
-  const EXPLORE_DATA_PRODUCTS_BASE = 'https://data.neonscience.org/data-products/explore';
+  const EXPLORE_DATA_PRODUCTS_BASE = RouteService.getDataProductExplorePath();
   if ((arg || '').length === 0) { return '#'; }
   switch (key) {
     case 'EXPLORE_DATA_PRODUCTS_BY_SITE':
@@ -1198,9 +1200,9 @@ export const getHref = (key, arg = null) => {
     case 'EXPLORE_DATA_PRODUCTS_BY_DOMAIN':
       return `${EXPLORE_DATA_PRODUCTS_BASE}?domain=${arg}`;
     case 'SITE_DETAILS':
-      return `https://www.neonscience.org/field-sites/${arg}`;
+      return RouteService.getFieldSiteDetailPath(arg);
     case 'DOMAIN_DETAILS':
-      return `https://www.neonscience.org/domains/${arg}`;
+      return RouteService.getDomainDetailPath(arg);
     default:
       return '#';
   }

@@ -371,6 +371,24 @@ const updateMapTileWithZoom = (state) => {
   return newState;
 };
 
+/**
+ * Calculates the zoom state from the specified zoom
+ * @param {number} zoom
+ * @param {Object} newState
+ * @param {boolean} init
+ * @return The updated map state
+ */
+const calculateZoomState = (zoom, newState, init = false) => {
+  let appliedState = newState;
+  appliedState.map.zoomedIcons = getZoomedIcons(zoom);
+  appliedState = updateMapTileWithZoom(appliedState);
+  if (!init) {
+    appliedState = calculateFeatureAvailability(appliedState);
+    appliedState = calculateFeatureDataFetches(appliedState);
+  }
+  return appliedState;
+};
+
 // Increment the completed count for overall fetch and, if completed and expected are now equal,
 // reset both (so that subsequent batches of fetches can give an accurate progress metric).
 const completeOverallFetch = (state) => {
@@ -645,10 +663,7 @@ const reducer = (state, action) => {
       newState.map.zoom = action.zoom;
       if (centerIsValid(action.center)) { newState.map.center = action.center; }
       if (boundsAreValid(action.bounds)) { newState.map.bounds = action.bounds; }
-      newState.map.zoomedIcons = getZoomedIcons(newState.map.zoom);
-      newState = updateMapTileWithZoom(newState);
-      newState = calculateFeatureAvailability(newState);
-      newState = calculateFeatureDataFetches(newState);
+      newState = calculateZoomState(action.zoom, newState);
       return newState;
 
     case 'setMapBounds':
@@ -1055,6 +1070,10 @@ const Provider = (props) => {
   }
   if (neonContextIsFinal && !neonContextHasError) {
     initialState = hydrateNeonContextData(initialState, neonContextData);
+  }
+  const hasInitialZoom = (typeof mapZoom === 'number') && zoomIsValid(mapZoom);
+  if (hasInitialZoom) {
+    initialState = calculateZoomState(initialMapZoom, initialState, true);
   }
   const [state, dispatch] = useReducer(reducer, initialState);
 

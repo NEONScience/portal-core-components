@@ -12,7 +12,6 @@ describe('NeonEnvironment', () => {
       'isValid',
       'isDevEnv',
       'isProdEnv',
-      'isForeignEnv',
       'useGraphql',
       'showAopViewer',
       'authDisableWs',
@@ -25,17 +24,17 @@ describe('NeonEnvironment', () => {
 
   describe('simple string access methods', () => {
     [
-      'getApiName',
-      'getApiVersion',
       'getRootApiPath',
       'getRootGraphqlPath',
       'getRootJsonLdPath',
       'getRootAuthApiPath',
+      'getRootAuth0ApiPath',
+      'getRootDownloadApiPath',
       'getVisusProductsBaseUrl',
       'getVisusIframeBaseUrl',
       'getRouterBasePath',
       'getRouterBaseHomePath',
-      'getHostOverride',
+      'getApiHostOverride',
       'getWsHostOverride',
     ].forEach((method) => {
       test(`${method}()`, () => {
@@ -48,9 +47,9 @@ describe('NeonEnvironment', () => {
     [
       'getApiPath',
       'getApiLdPath',
-      'getPagePath',
       'getAuthPath',
       'getAuthApiPath',
+      'getDownloadApiPath',
       'authTopics',
       'route',
     ].forEach((methodGroup) => {
@@ -66,16 +65,16 @@ describe('NeonEnvironment', () => {
 
   describe('get full path methods', () => {
     test('getFullApiPath()', () => {
-      const host = NeonEnvironment.getHost();
+      const host = NeonEnvironment.getApiHost();
       const fullPath1 = NeonEnvironment.getFullApiPath();
       expect(fullPath1.startsWith(host)).toBe(true);
-      const downloadPath = NeonEnvironment.getApiPath.download();
-      const fullPath2 = NeonEnvironment.getFullApiPath('download');
+      const productPath = NeonEnvironment.getApiPath.products();
+      const fullPath2 = NeonEnvironment.getFullApiPath('products');
       expect(fullPath2.startsWith(host)).toBe(true);
-      expect(fullPath2.endsWith(downloadPath)).toBe(true);
+      expect(fullPath2.endsWith(productPath)).toBe(true);
     });
     test('getFullJsonLdApiPath()', () => {
-      const host = NeonEnvironment.getHost();
+      const host = NeonEnvironment.getApiHost();
       const fullPath1 = NeonEnvironment.getFullJsonLdApiPath();
       expect(fullPath1.startsWith(host)).toBe(true);
       const productsPath = NeonEnvironment.getApiPath.products();
@@ -87,17 +86,8 @@ describe('NeonEnvironment', () => {
       expect(fullPath3.startsWith(host)).toBe(true);
       expect(fullPath3.endsWith(repoPath)).toBe(true);
     });
-    test('getFullPagePath()', () => {
-      const host = NeonEnvironment.getHost();
-      const fullPath1 = NeonEnvironment.getFullPagePath();
-      expect(fullPath1.startsWith(host)).toBe(true);
-      const fileNamingConventionsPath = NeonEnvironment.getPagePath.fileNamingConventions();
-      const fullPath2 = NeonEnvironment.getFullPagePath('fileNamingConventions');
-      expect(fullPath2.startsWith(host)).toBe(true);
-      expect(fullPath2.endsWith(fileNamingConventionsPath)).toBe(true);
-    });
     test('getFullAuthPath()', () => {
-      const host = NeonEnvironment.getHost();
+      const host = NeonEnvironment.getApiHost();
       const fullPath1 = NeonEnvironment.getFullAuthPath();
       expect(fullPath1.startsWith(host)).toBe(true);
       const loginPath = NeonEnvironment.getAuthPath.login();
@@ -107,7 +97,7 @@ describe('NeonEnvironment', () => {
     });
     test('getFullAuthApiPath()', () => {
       const wsPath = NeonEnvironment.getAuthApiPath.ws();
-      const host1 = NeonEnvironment.getHost();
+      const host1 = NeonEnvironment.getApiHost();
       const fullPath1 = NeonEnvironment.getFullAuthApiPath();
       expect(fullPath1.startsWith(host1)).toBe(true);
       const fullPath2 = NeonEnvironment.getFullAuthApiPath('ws');
@@ -121,7 +111,7 @@ describe('NeonEnvironment', () => {
       expect(fullPath4.endsWith(wsPath)).toBe(true);
     });
     test('getFullGraphqlath()', () => {
-      const host = NeonEnvironment.getHost();
+      const host = NeonEnvironment.getApiHost();
       expect(NeonEnvironment.getFullGraphqlPath().startsWith(host)).toBe(true);
     });
   });

@@ -2,7 +2,7 @@ declare function ExternalHostProductSpecificLinks(props: any): JSX.Element | nul
 declare namespace ExternalHostProductSpecificLinks {
     export namespace propTypes {
         export const productCode: PropTypes.Requireable<string>;
-        export const siteCodes: PropTypes.Requireable<import("../../types/core").Nullable<string>[]>;
+        export const siteCodes: PropTypes.Requireable<(string | null | undefined)[]>;
     }
     export namespace defaultProps {
         const productCode_1: null;

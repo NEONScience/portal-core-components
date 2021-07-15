@@ -53,12 +53,12 @@ declare namespace Provider {
         tableFullHeight: PropTypes.Requireable<boolean>;
         location: PropTypes.Requireable<string>;
         selection: PropTypes.Requireable<string>;
-        selectedItems: PropTypes.Requireable<import("../../types/core").Nullable<string>[]>;
-        validItems: PropTypes.Requireable<import("../../types/core").Nullable<string>[]>;
+        selectedItems: PropTypes.Requireable<(string | null | undefined)[]>;
+        validItems: PropTypes.Requireable<(string | null | undefined)[]>;
         selectionLimit: (props: any, propName: any) => Error | null;
         onSelectionChange: PropTypes.Requireable<(...args: any[]) => any>;
         search: PropTypes.Requireable<string>;
-        features: PropTypes.Requireable<import("../../types/core").Nullable<string>[]>;
+        features: PropTypes.Requireable<(string | null | undefined)[]>;
         manualLocationData: PropTypes.Requireable<(PropTypes.InferProps<{
             manualLocationType: PropTypes.Validator<string>;
         }> | null | undefined)[]>;

@@ -1,21 +1,26 @@
 // A structure containing local filenames and remote URLs for all remote assets used in
+
+import NeonEnvironment from '../components/NeonEnvironment/NeonEnvironment';
+
+import { REMOTE_ASSET_PATHS, REMOTE_ASSET_NAMES } from './remoteAssets';
+
 // portal-core-components that we want to cache updated snapshots of at every lib build
 const REMOTE_ASSETS = {
   DRUPAL_THEME_CSS: {
-    name: 'drupal-theme.css',
-    url: 'https://www.neonscience.org/themes/custom/neon/build/components/theme/theme.css',
+    name: REMOTE_ASSET_NAMES.DRUPAL_THEME_CSS,
+    url: `${NeonEnvironment.getWebHost()}${REMOTE_ASSET_PATHS.DRUPAL_THEME_CSS}`,
   },
   DRUPAL_HEADER_JS: {
-    name: 'drupal-header.js',
-    url: 'https://www.neonscience.org/themes/custom/neon/build/components/header/header.js',
+    name: REMOTE_ASSET_NAMES.DRUPAL_HEADER_JS,
+    url: `${NeonEnvironment.getWebHost()}${REMOTE_ASSET_PATHS.DRUPAL_HEADER_JS}`,
   },
   DRUPAL_HEADER_HTML: {
-    name: 'drupal-header.html',
-    url: 'https://www.neonscience.org/neon-assets/partial/header',
+    name: REMOTE_ASSET_NAMES.DRUPAL_HEADER_HTML,
+    url: `${NeonEnvironment.getWebHost()}${REMOTE_ASSET_PATHS.DRUPAL_HEADER_HTML}`,
   },
   DRUPAL_FOOTER_HTML: {
-    name: 'drupal-footer.html',
-    url: 'https://www.neonscience.org/neon-assets/partial/footer',
+    name: REMOTE_ASSET_NAMES.DRUPAL_FOOTER_HTML,
+    url: `${NeonEnvironment.getWebHost()}${REMOTE_ASSET_PATHS.DRUPAL_FOOTER_HTML}`,
   },
 };
 

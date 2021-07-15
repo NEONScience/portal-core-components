@@ -45,7 +45,7 @@ declare namespace Provider {
                 description: PropTypes.Validator<string>;
                 waitInterval: PropTypes.Validator<string>;
                 months: PropTypes.Validator<{
-                    [x: string]: import("../../types/core").Nullable<string>;
+                    [x: string]: string | null | undefined;
                 }>;
             }> | null | undefined)[]>;
         }> | null | undefined)[]>;

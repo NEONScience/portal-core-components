@@ -1293,12 +1293,12 @@ export namespace SITE_MAP_PROP_TYPES {
     export const tableFullHeight: PropTypes.Requireable<boolean>;
     export const location: PropTypes.Requireable<string>;
     export const selection: PropTypes.Requireable<string>;
-    export const selectedItems: PropTypes.Requireable<import("../../types/core").Nullable<string>[]>;
-    export const validItems: PropTypes.Requireable<import("../../types/core").Nullable<string>[]>;
+    export const selectedItems: PropTypes.Requireable<(string | null | undefined)[]>;
+    export const validItems: PropTypes.Requireable<(string | null | undefined)[]>;
     export { SelectionLimitPropType as selectionLimit };
     export const onSelectionChange: PropTypes.Requireable<(...args: any[]) => any>;
     export const search: PropTypes.Requireable<string>;
-    export const features: PropTypes.Requireable<import("../../types/core").Nullable<string>[]>;
+    export const features: PropTypes.Requireable<(string | null | undefined)[]>;
     export const manualLocationData: PropTypes.Requireable<(PropTypes.InferProps<{
         manualLocationType: PropTypes.Validator<string>;
     }> | null | undefined)[]>;

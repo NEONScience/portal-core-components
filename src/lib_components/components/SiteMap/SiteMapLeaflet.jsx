@@ -262,6 +262,8 @@ const SiteMapLeaflet = () => {
       && state.focusLocation.fetch.status !== FETCH_STATUS.SUCCESS
   ) { canRender = false; }
 
+  const [mapRefReady, setMapRefReady] = useState(false);
+
   /**
      Effect
      If zoom was not set as a prop then attempt to set the initial zoom such that
@@ -285,18 +287,33 @@ const SiteMapLeaflet = () => {
     Effect
     If map bounds are null (as they will be when setting a focus location) then fill them in
     We have to do it this way as only the Leaflet Map instance can give us bounds
+
+    Effect for setting the initial zoom so that we can include the bounds
+    of the map in the initial zoom setting to allow proper feature detection.
   */
+  const mapRefExistsProp = mapRefExists();
   useEffect(() => {
-    if (state.map.bounds !== null || !mapRefExists()) { return; }
+    if (state.map.bounds !== null || !mapRefExistsProp) { return; }
     const bounds = mapRef.current.leafletElement.getBounds();
-    dispatch({
-      type: 'setMapBounds',
-      bounds: {
-        lat: [bounds._southWest.lat, bounds._northEast.lat],
-        lng: [bounds._southWest.lng, bounds._northEast.lng],
-      },
-    });
-  }, [state.map.bounds, dispatch]);
+    if (state.map.zoom === null) {
+      dispatch({
+        type: 'setMapBounds',
+        bounds: {
+          lat: [bounds._southWest.lat, bounds._northEast.lat],
+          lng: [bounds._southWest.lng, bounds._northEast.lng],
+        },
+      });
+    } else {
+      dispatch({
+        type: 'setMapZoom',
+        zoom: state.map.zoom,
+        bounds: {
+          lat: [bounds._southWest.lat, bounds._northEast.lat],
+          lng: [bounds._southWest.lng, bounds._northEast.lng],
+        },
+      });
+    }
+  }, [mapRefExistsProp, state.map.bounds, state.map.zoom, dispatch]);
 
   /**
     Effect
@@ -432,7 +449,6 @@ const SiteMapLeaflet = () => {
      as a prop. Thus we must track whether it has rendered with local state. We want to basically
      re-render the map immediately and only once when the mepRef is set through the first render.
   */
-  const [mapRefReady, setMapRefReady] = useState(false);
   useEffect(() => { // eslint-disable-line react-hooks/exhaustive-deps
     if (mapRefExists() && !mapRefReady) {
       setMapRefReady(true);
