@@ -13,7 +13,7 @@ import { Message, StompHeaders } from '@stomp/stompjs';
 import { RxStomp, RxStompConfig, RxStompState } from '@stomp/rx-stomp';
 
 import NeonApi from '../NeonApi';
-import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
+import NeonEnvironment, { INeonEnvironment } from '../NeonEnvironment/NeonEnvironment';
 
 import BrowserService from '../../util/browserUtil';
 import { getJson } from '../../util/rxUtil';
@@ -321,13 +321,13 @@ const AuthService: IAuthService = {
     );
   },
   logout: (path?: string, redirectUriPath?: string): void => {
-    const env: any = NeonEnvironment;
+    const env: INeonEnvironment = NeonEnvironment;
     const rootPath: string = exists(path)
-      ? path
+      ? (path as string)
       : env.getFullAuthPath('logout');
     const appliedRedirectUri = exists(redirectUriPath)
-      ? `${env.getHost()}${redirectUriPath}`
-      : `${env.getHost()}${env.route.getFullRoute(env.getRouterBaseHomePath())}`;
+      ? `${env.getApiHost()}${redirectUriPath}`
+      : `${env.getApiHost()}${env.route.getFullRoute(env.getRouterBaseHomePath())}`;
     const href = `${rootPath}?${REDIRECT_URI}=${appliedRedirectUri}`;
     window.location.href = href;
   },
