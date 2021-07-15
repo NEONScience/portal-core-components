@@ -217,10 +217,10 @@ const RouteService: IRouteService = {
   ),
 
   getDataApiPath: (): string => (
+    // TODO: replace with web host once switch over happens
     `${NeonEnvironment.getApiHost()}/data-api`
   ),
   getDataProductExploreSearchPath: (query: string): string => (
-    // TODO: replace with web host once switch over happens
     `${RouteService.getDataProductExplorePath()}?search=${encodeURIComponent(query)}`
   ),
   getDataProductExplorePath: (): string => (
@@ -233,6 +233,7 @@ const RouteService: IRouteService = {
     return `${NeonEnvironment.getApiHost()}/data-products/${productCode}${releasePath}`;
   },
   getPrototypeDatasetsPath: (): string => (
+    // TODO: replace with web host once switch over happens
     `${NeonEnvironment.getApiHost()}/prototype-datasets`
   ),
   getPrototypeDatasetDetailPath: (uuid: string): string => (

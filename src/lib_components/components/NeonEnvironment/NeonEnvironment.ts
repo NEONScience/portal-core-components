@@ -215,13 +215,14 @@ const NeonEnvironment: INeonEnvironment = {
     account: () => '/myaccount',
     getFullRoute: (route = '') => `${NeonEnvironment.getRouterBasePath()}${route}`,
     buildRouteFromHost: (route = '') => (
-      `${NeonEnvironment.getWebHost()}${NeonEnvironment.route.getFullRoute(route)}`
+      `${NeonEnvironment.getApiHost()}${NeonEnvironment.route.getFullRoute(route)}`
     ),
     buildHomeRoute: () => (
       `${NeonEnvironment.getWebHost()}${NeonEnvironment.route.home()}`
     ),
     buildAccountRoute: () => (
-      `${NeonEnvironment.getWebHost()}${NeonEnvironment.route.account()}`
+      // TODO: replace with web host once switch over happens
+      `${NeonEnvironment.getApiHost()}${NeonEnvironment.route.account()}`
     ),
   },
 
