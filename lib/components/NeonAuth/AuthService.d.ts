@@ -34,8 +34,9 @@ export interface IAuthService {
     /**
      * Initializes a login flow
      * @param {string} path - Optionally path to set for the root login URL
+     * @param {string} redirectUriPath - Optionally set the redirect path
      */
-    login: (path?: string) => void;
+    login: (path?: string, redirectUriPath?: string) => void;
     /**
      * Performs a silent login flow
      * @param {Dispatch} dispatch - The NeonContext dispatch function

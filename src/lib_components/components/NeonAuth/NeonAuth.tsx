@@ -61,7 +61,7 @@ const triggerAuth = (
   setTimeout(
     () => {
       if (login) {
-        AuthService.login(path);
+        AuthService.login(path, redirectUriPath);
       } else {
         AuthService.logout(path, redirectUriPath);
       }
@@ -93,13 +93,17 @@ const renderAuth = (
     if (!isAuthWsConnected) {
       appliedLoginType = NeonAuthType.REDIRECT;
     }
+    const appHomePath: string = NeonEnvironment.getRouterBaseHomePath();
+    const currentPath: string = window.location.pathname;
+    const hasPath: boolean = isStringNonEmpty(currentPath) && currentPath.includes(appHomePath);
+    const redirectUriPath: Undef<string> = hasPath ? currentPath : undefined;
     switch (appliedLoginType) {
       case NeonAuthType.SILENT:
         AuthService.loginSilently(dispatch, false);
         break;
       case NeonAuthType.REDIRECT:
       default:
-        triggerAuth(loginPath, true, dispatch);
+        triggerAuth(loginPath, true, dispatch, redirectUriPath);
         break;
     }
   };
