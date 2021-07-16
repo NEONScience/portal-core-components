@@ -1,3 +1,6 @@
+/**
+ * Interface to define a service for persisting state.
+ */
 export interface IStateService {
   /**
    * Adds the item to persistent storage.

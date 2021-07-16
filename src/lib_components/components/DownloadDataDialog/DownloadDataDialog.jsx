@@ -38,7 +38,8 @@ import ExternalHost from '../ExternalHost/ExternalHost';
 import ExternalHostInfo from '../ExternalHostInfo/ExternalHostInfo';
 import NeonContext from '../NeonContext/NeonContext';
 import Theme, { COLORS } from '../Theme/Theme';
-import NeonSignin from './NeonSignin';
+import NeonSigninButton from './NeonSigninButton';
+import NeonEnvironment from '../NeonEnvironment';
 
 import RouteService from '../../service/RouteService';
 import {
@@ -410,9 +411,6 @@ export default function DownloadDataDialog() {
 
   const renderAuthSuggestion = () => {
     if (isAuthenticated) { return null; }
-    const benefitsLink = (
-      <Link target="_new" href={RouteService.getUserAccountsPath()}>here</Link>
-    );
     /* eslint-disable react/jsx-one-expression-per-line */
     const authStyles = { color: COLORS.GOLD[800], textAlign: 'right', whiteSpace: 'nowrap' };
     return (
@@ -435,9 +433,9 @@ export default function DownloadDataDialog() {
             fontSize: '0.8rem',
           }}
         >
-          Learn {benefitsLink} about the benefits of having an account.
+          <Link target="_new" href={RouteService.getUserAccountsPath()}>Learn</Link> about the benefits of having an account.
         </Typography>
-        <NeonSignin />
+        <Link href={NeonEnvironment.getFullAuthPath('login')}><NeonSigninButton /></Link>
       </>
     );
     /* eslint-enable react/jsx-one-expression-per-line */

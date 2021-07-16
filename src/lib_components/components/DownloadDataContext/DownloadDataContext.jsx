@@ -192,9 +192,7 @@ const S3_PATTERN = {
   },
 };
 
-/**
-   VALIDATOR FUNCTIONS
-*/
+// validator functions
 // Naive check, replace with a more robust JSON schema check
 const productDataIsValid = (productData) => (
   typeof productData === 'object' && productData !== null
@@ -316,9 +314,9 @@ const mutateNewStateIntoRange = (key, value, validValues = []) => {
 };
 
 /**
-   Estimate a POST body size from a sile list and sites list for s3Files-based
-   downloads. Numbers here are based on the current POST API and what it requires
-   for form data keys, which is excessively verbose.
+* Estimate a POST body size from a sile list and sites list for s3Files-based
+* downloads. Numbers here are based on the current POST API and what it requires
+* for form data keys, which is excessively verbose.
 */
 const estimatePostSize = (s3FilesState, sitesState) => {
   const baseLength = 300;
@@ -328,9 +326,8 @@ const estimatePostSize = (s3FilesState, sitesState) => {
   return baseLength + sitesLength + filesLength;
 };
 
-/**
-   GETTER FUNCTIONS
-*/
+// getter functions
+
 const getValidValuesFromProductData = (productData, key) => {
   switch (key) {
     case 'release':
@@ -734,7 +731,7 @@ const getAndValidateNewState = (previousState, action, broadcast = false) => {
 };
 
 /**
-   REDUCER
+* The reducer function for changing state.
 */
 const reducer = (state, action) => {
   let newState = {};
@@ -941,12 +938,12 @@ const wrappedReducer = (state, action) => {
 };
 
 /**
-   CONTEXT
+* Context
 */
 const Context = createContext(DEFAULT_STATE);
 
 /**
-   HOOK
+* Hook
 */
 const useDownloadDataState = () => {
   const hookResponse = useContext(Context);
@@ -964,7 +961,7 @@ const useDownloadDataState = () => {
 };
 
 /**
-  OBSERVABLES
+* Observables
 */
 // Observable and getter for sharing whole state through a higher order component
 const stateSubject$ = new Subject();
@@ -977,7 +974,7 @@ const getManifestAjaxObservable = (request) => (
 );
 
 /**
-  <DownloadDataContext.Provider />
+* <DownloadDataContext.Provider />, the context provider definition.
 */
 const Provider = (props) => {
   const {
