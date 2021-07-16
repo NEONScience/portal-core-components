@@ -99,7 +99,7 @@ const renderAuth = (
     const redirectUriPath: Undef<string> = hasPath ? currentPath : undefined;
     switch (appliedLoginType) {
       case NeonAuthType.SILENT:
-        AuthService.loginSilently(dispatch, false);
+        AuthService.loginSilently(dispatch, false, loginPath, redirectUriPath);
         break;
       case NeonAuthType.REDIRECT:
       default:
@@ -126,7 +126,7 @@ const renderAuth = (
     }
     switch (appliedLogoutType) {
       case NeonAuthType.SILENT:
-        AuthService.logoutSilently(dispatch);
+        AuthService.logoutSilently(dispatch, logoutPath, redirectUriPath);
         break;
       case NeonAuthType.REDIRECT:
       default:
