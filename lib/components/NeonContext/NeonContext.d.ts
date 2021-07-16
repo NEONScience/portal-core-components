@@ -1,8 +1,8 @@
 export namespace FETCH_STATUS {
-    export const AWAITING_CALL: string;
-    export const FETCHING: string;
-    export const ERROR: string;
-    export const SUCCESS: string;
+    const AWAITING_CALL: string;
+    const FETCHING: string;
+    const ERROR: string;
+    const SUCCESS: string;
 }
 export default NeonContext;
 export function getTestableItems(): {
@@ -32,10 +32,10 @@ declare function Provider(props: any): JSX.Element;
 declare namespace Provider {
     export { ProviderPropTypes as propTypes };
     export namespace defaultProps {
-        export const children: null;
-        export const fetchPartials: boolean;
-        export const useCoreAuth: boolean;
-        export function whenFinal(): void;
+        const children: null;
+        const fetchPartials: boolean;
+        const useCoreAuth: boolean;
+        function whenFinal(): void;
     }
 }
 /**
@@ -1003,7 +1003,7 @@ declare function useNeonContextState(): ({
     whenFinalCalled: boolean;
 })[];
 declare namespace DEFAULT_STATE {
-    export namespace data {
+    namespace data {
         export const sites: {};
         export { statesJSON as states };
         export { domainsJSON as domains };
@@ -1012,10 +1012,10 @@ declare namespace DEFAULT_STATE {
         export const stateSites: {};
         export const domainSites: {};
     }
-    export const html: {
+    const html: {
         [x: number]: null;
     };
-    export const fetches: {
+    const fetches: {
         [x: number]: {
             status: null;
             error: null;
@@ -1029,17 +1029,17 @@ declare namespace DEFAULT_STATE {
             error: null;
         };
     };
-    export namespace auth {
-        export const useCore: boolean;
-        export const isAuthenticated: boolean;
-        export const isAuthWorking: boolean;
-        export const isAuthWsConnected: boolean;
-        export const userData: null;
+    namespace auth {
+        const useCore: boolean;
+        const isAuthenticated: boolean;
+        const isAuthWorking: boolean;
+        const isAuthWsConnected: boolean;
+        const userData: null;
     }
-    export const isActive: boolean;
-    export const isFinal: boolean;
-    export const hasError: boolean;
-    export const whenFinalCalled: boolean;
+    const isActive: boolean;
+    const isFinal: boolean;
+    const hasError: boolean;
+    const whenFinalCalled: boolean;
 }
 /**
    getWrappedComponent

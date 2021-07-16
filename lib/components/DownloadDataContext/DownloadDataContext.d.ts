@@ -120,9 +120,9 @@ declare namespace DownloadDataContext {
 */
 declare function Provider(props: any): JSX.Element;
 declare namespace Provider {
-    export namespace propTypes {
-        export const stateObservable: PropTypes.Requireable<(...args: any[]) => any>;
-        export const productData: PropTypes.Requireable<PropTypes.InferProps<{
+    namespace propTypes {
+        const stateObservable: PropTypes.Requireable<(...args: any[]) => any>;
+        const productData: PropTypes.Requireable<PropTypes.InferProps<{
             productCode: PropTypes.Validator<string>;
             productName: PropTypes.Validator<string>;
             siteCodes: PropTypes.Requireable<(PropTypes.InferProps<{
@@ -130,20 +130,20 @@ declare namespace Provider {
                 availableMonths: PropTypes.Validator<(string | null | undefined)[]>;
             }> | null | undefined)[]>;
         }>>;
-        export const availabilityView: PropTypes.Requireable<string>;
-        export const release: PropTypes.Requireable<string>;
-        export const sites: PropTypes.Requireable<(string | null | undefined)[]>;
-        export const dateRange: PropTypes.Requireable<(string | null | undefined)[]>;
-        export const documentation: PropTypes.Requireable<string>;
-        export const packageType: PropTypes.Requireable<string>;
-        export const children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+        const availabilityView: PropTypes.Requireable<string>;
+        const release: PropTypes.Requireable<string>;
+        const sites: PropTypes.Requireable<(string | null | undefined)[]>;
+        const dateRange: PropTypes.Requireable<(string | null | undefined)[]>;
+        const documentation: PropTypes.Requireable<string>;
+        const packageType: PropTypes.Requireable<string>;
+        const children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
     }
-    export namespace defaultProps {
+    namespace defaultProps {
         const stateObservable_1: null;
         export { stateObservable_1 as stateObservable };
         const productData_1: {};
         export { productData_1 as productData };
-        import availabilityView_1 = availabilityView;
+        import availabilityView_1 = DEFAULT_STATE.availabilityView;
         export { availabilityView_1 as availabilityView };
         import release_1 = value;
         export { release_1 as release };
@@ -329,9 +329,9 @@ declare namespace DEFAULT_STATE {
     export const fromAOPManifest: boolean;
     export const fromExternalHost: boolean;
     export namespace manifest {
-        export const status: string;
-        export const value: null;
-        export const error: null;
+        const status: string;
+        const value: null;
+        const error: null;
     }
     const availabilityView_2: null;
     export { availabilityView_2 as availabilityView };
@@ -348,18 +348,22 @@ declare namespace DEFAULT_STATE {
         export const estimatedPostSize: number;
         export const filteredFileCount: number;
         export const lastFilterChanged: null;
-        export const filters: {
-            site: never[];
-            type: never[];
-            visit: never[];
-            yearMonth: never[];
-        };
-        export const valueLookups: {
-            site: {};
-            type: {};
-            visit: {};
-            yearMonth: {};
-        };
+        export namespace filters {
+            const site: never[];
+            const type: never[];
+            const visit: never[];
+            const yearMonth: never[];
+        }
+        export namespace valueLookups {
+            const site_1: {};
+            export { site_1 as site };
+            const type_1: {};
+            export { type_1 as type };
+            const visit_1: {};
+            export { visit_1 as visit };
+            const yearMonth_1: {};
+            export { yearMonth_1 as yearMonth };
+        }
         export const visibleColumns: string[];
     }
     export const latestRelease: null;
@@ -419,9 +423,9 @@ declare namespace DEFAULT_STATE {
 }
 declare namespace ALL_STEPS {
     export namespace documentation_3 {
-        export const requiredStateKeys: string[];
-        export const label: string;
-        export const title: string;
+        const requiredStateKeys: string[];
+        const label: string;
+        const title: string;
     }
     export { documentation_3 as documentation };
     export namespace externalExclusive {

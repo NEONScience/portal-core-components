@@ -1,8 +1,8 @@
 export namespace REMOTE_ASSET_PATHS {
-    export const DRUPAL_THEME_CSS: string;
-    export const DRUPAL_HEADER_JS: string;
-    export const DRUPAL_HEADER_HTML: string;
-    export const DRUPAL_FOOTER_HTML: string;
+    const DRUPAL_THEME_CSS: string;
+    const DRUPAL_HEADER_JS: string;
+    const DRUPAL_HEADER_HTML: string;
+    const DRUPAL_FOOTER_HTML: string;
 }
 export namespace REMOTE_ASSET_NAMES {
     const DRUPAL_THEME_CSS_1: string;

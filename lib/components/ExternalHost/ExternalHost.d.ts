@@ -7,13 +7,13 @@ declare namespace ExternalHost {
     export { renderExternalHostLink };
 }
 declare namespace HOST_TYPES {
-    export const ADDITIONAL_DATA: string;
-    export const REFORMATTED_DATA: string;
-    export const EXCLUSIVE_DATA: string;
+    const ADDITIONAL_DATA: string;
+    const REFORMATTED_DATA: string;
+    const EXCLUSIVE_DATA: string;
 }
 declare namespace LINK_TYPES {
-    export const BY_SITE: string;
-    export const BY_PRODUCT: string;
+    const BY_SITE: string;
+    const BY_PRODUCT: string;
 }
 declare function getByHostId(hostId?: string): any;
 declare function getByProductCode(productCode?: string): any;

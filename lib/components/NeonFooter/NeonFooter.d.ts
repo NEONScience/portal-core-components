@@ -1,10 +1,10 @@
 export default NeonFooter;
 declare function NeonFooter(props: any): JSX.Element;
 declare namespace NeonFooter {
-    export namespace propTypes {
-        export const drupalCssLoaded: PropTypes.Requireable<boolean>;
+    namespace propTypes {
+        const drupalCssLoaded: PropTypes.Requireable<boolean>;
     }
-    export namespace defaultProps {
+    namespace defaultProps {
         const drupalCssLoaded_1: boolean;
         export { drupalCssLoaded_1 as drupalCssLoaded };
     }

@@ -102,12 +102,12 @@ export const CELL_ATTRS: {
 };
 export function JsxCell(props: any): JSX.Element;
 export namespace JsxCell {
-    export namespace propTypes {
-        export const status: PropTypes.Validator<string>;
-        export const x: PropTypes.Requireable<number>;
-        export const y: PropTypes.Requireable<number>;
+    namespace propTypes {
+        const status: PropTypes.Validator<string>;
+        const x: PropTypes.Requireable<number>;
+        const y: PropTypes.Requireable<number>;
     }
-    export namespace defaultProps {
+    namespace defaultProps {
         const x_1: number;
         export { x_1 as x };
         const y_1: number;
