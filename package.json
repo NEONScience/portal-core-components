@@ -82,7 +82,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start:prod": "mv build core-components && mkdir build && mv core-components/ build/ && node_modules/serve/bin/serve.js build",
+    "start:prod": "mv build core-components && mkdir build && mv core-components/ build/ && npx serve build",
     "build": "react-scripts build",
     "test": "npx jest --config jest.config.js",
     "test:updateSnapshots": "npx jest --config jest.config.js --updateSnapshot",
