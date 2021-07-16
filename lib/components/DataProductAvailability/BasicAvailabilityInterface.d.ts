@@ -4,31 +4,31 @@ export default BasicAvailabilityInterface;
 */
 declare function BasicAvailabilityInterface(props: any): JSX.Element;
 declare namespace BasicAvailabilityInterface {
-    export namespace propTypes {
-        export const siteCodes: PropTypes.Requireable<(PropTypes.InferProps<{
+    namespace propTypes {
+        const siteCodes: PropTypes.Requireable<(PropTypes.InferProps<{
             siteCode: PropTypes.Validator<string>;
-            availableMonths: PropTypes.Validator<import("../../types/core").Nullable<string>[]>;
+            availableMonths: PropTypes.Validator<(string | null | undefined)[]>;
             availableReleases: PropTypes.Requireable<(PropTypes.InferProps<{
                 release: PropTypes.Validator<string>;
-                availableMonths: PropTypes.Validator<import("../../types/core").Nullable<string>[]>;
+                availableMonths: PropTypes.Validator<(string | null | undefined)[]>;
             }> | null | undefined)[]>;
         }> | null | undefined)[]>;
-        export const dataProducts: PropTypes.Requireable<(PropTypes.InferProps<{
+        const dataProducts: PropTypes.Requireable<(PropTypes.InferProps<{
             dataProductCode: PropTypes.Validator<string>;
             dataProductTitle: PropTypes.Validator<string>;
-            availableMonths: PropTypes.Validator<import("../../types/core").Nullable<string>[]>;
+            availableMonths: PropTypes.Validator<(string | null | undefined)[]>;
             availableReleases: PropTypes.Requireable<(PropTypes.InferProps<{
                 release: PropTypes.Validator<string>;
-                availableMonths: PropTypes.Validator<import("../../types/core").Nullable<string>[]>;
+                availableMonths: PropTypes.Validator<(string | null | undefined)[]>;
             }> | null | undefined)[]>;
         }> | null | undefined)[]>;
-        export const view: PropTypes.Requireable<string>;
-        export const sortMethod: PropTypes.Requireable<string>;
-        export const sortDirection: PropTypes.Requireable<string>;
-        export const disableSelection: PropTypes.Requireable<boolean>;
-        export const delineateRelease: PropTypes.Requireable<boolean>;
+        const view: PropTypes.Requireable<string>;
+        const sortMethod: PropTypes.Requireable<string>;
+        const sortDirection: PropTypes.Requireable<string>;
+        const disableSelection: PropTypes.Requireable<boolean>;
+        const delineateRelease: PropTypes.Requireable<boolean>;
     }
-    export namespace defaultProps {
+    namespace defaultProps {
         const siteCodes_1: never[];
         export { siteCodes_1 as siteCodes };
         const dataProducts_1: never[];

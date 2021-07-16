@@ -1,11 +1,11 @@
 export function NeonErrorPage(props: any): JSX.Element;
 export namespace NeonErrorPage {
-    export namespace propTypes {
-        export const error: PropTypes.Validator<PropTypes.InferProps<{
+    namespace propTypes {
+        const error: PropTypes.Validator<PropTypes.InferProps<{
             message: PropTypes.Validator<string>;
             stack: PropTypes.Requireable<string>;
         }>>;
-        export const resetErrorBoundary: PropTypes.Validator<(...args: any[]) => any>;
+        const resetErrorBoundary: PropTypes.Validator<(...args: any[]) => any>;
     }
 }
 export default NeonPage;

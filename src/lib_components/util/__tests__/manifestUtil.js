@@ -19,6 +19,7 @@ jest.mock('../../components/NeonEnvironment/NeonEnvironment', () => ({
   __esModule: true,
   default: {
     getFullApiPath: jest.fn(),
+    getFullDownloadApiPath: jest.fn(),
   },
 }));
 
@@ -34,6 +35,7 @@ describe('Utils - manifestUtil', () => {
   beforeEach(() => {
     JSON.stringify.mockReset();
     NeonEnvironment.getFullApiPath.mockReset();
+    NeonEnvironment.getFullDownloadApiPath.mockReset();
   });
 
   describe.each([
@@ -133,15 +135,15 @@ describe('Utils - manifestUtil', () => {
       isError: false,
     };
     beforeEach(() => {
-      NeonEnvironment.getFullApiPath.mockReturnValue('MANIFEST_REQUEST_URL');
+      NeonEnvironment.getFullDownloadApiPath.mockReturnValue('MANIFEST_REQUEST_URL');
     });
     test('returns the rollup path if useBody is true (by default)', () => {
       const url = buildManifestRequestUrl(config);
-      expect(url).toBe('MANIFEST_REQUEST_URL/manifest/rollup');
+      expect(url).toBe('MANIFEST_REQUEST_URL');
     });
     test('returns the built url if useBody is false', () => {
       const url = buildManifestRequestUrl(config, false);
-      const expectedUrl = 'MANIFEST_REQUEST_URL/manifest/rollup?dpcode=NEON.DOM.SITE.DPx.xxxxx.xxx&startdate=2020-01&enddate=2020-06&pkgtype=expanded&includedocs=true&sitecode=JERC&sitecode=COMO';
+      const expectedUrl = 'MANIFEST_REQUEST_URL?dpcode=NEON.DOM.SITE.DPx.xxxxx.xxx&startdate=2020-01&enddate=2020-06&pkgtype=expanded&includedocs=true&sitecode=JERC&sitecode=COMO';
       expect(url).toBe(expectedUrl);
     });
     test('handles NEON.DOM.SITE already being in config', () => {
@@ -150,7 +152,7 @@ describe('Utils - manifestUtil', () => {
       configA.productCode = 'NEON.DOM.SITE.DP0.00000.000';
 
       const url = buildManifestRequestUrl(configA, false);
-      const expectedUrl = 'MANIFEST_REQUEST_URL/manifest/rollup?dpcode=NEON.DOM.SITE.DP0.00000.000&startdate=2020-01&enddate=2020-06&pkgtype=expanded&includedocs=false&sitecode=JERC&sitecode=COMO';
+      const expectedUrl = 'MANIFEST_REQUEST_URL?dpcode=NEON.DOM.SITE.DP0.00000.000&startdate=2020-01&enddate=2020-06&pkgtype=expanded&includedocs=false&sitecode=JERC&sitecode=COMO';
       expect(url).toBe(expectedUrl);
     });
   });

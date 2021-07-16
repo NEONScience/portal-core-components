@@ -34,14 +34,19 @@ export interface IAuthService {
     /**
      * Initializes a login flow
      * @param {string} path - Optionally path to set for the root login URL
+     * @param {string} redirectUriPath - Optionally set the redirect path
      */
-    login: (path?: string) => void;
+    login: (path?: string, redirectUriPath?: string) => void;
     /**
      * Performs a silent login flow
      * @param {Dispatch} dispatch - The NeonContext dispatch function
      * @param {boolean} isSsoCheck - Whether or not performaing an SSO check
+     * @param {string} path - Fallback to optionally path to set for the
+     *  root logout URL when defaulting to normal login flow.
+     * @param {string} redirectUriPath - Fallback to optionally set the
+     *  redirect path when defaulting to normal login flow.
      */
-    loginSilently: (dispatch: Dispatch<any>, isSsoCheck: boolean) => void;
+    loginSilently: (dispatch: Dispatch<any>, isSsoCheck: boolean, path?: string, redirectUriPath?: string) => void;
     /**
      * Initializes a logout flow
      * @param {string} path - Optionally path to set for the root logout URL
@@ -52,8 +57,12 @@ export interface IAuthService {
      * Performs a silent logout flow
      * @param {Dispatch} dispatch - The NeonContext dispatch function
      *  upon logout
+     * @param {string} path - Fallback to optionally path to set for the
+     *  root logout URL when defaulting to normal login flow.
+     * @param {string} redirectUriPath - Fallback to optionally set the
+     *  redirect path when defaulting to normal login flow.
      */
-    logoutSilently: (dispatch: Dispatch<any>) => void;
+    logoutSilently: (dispatch: Dispatch<any>, path?: string, redirectUriPath?: string) => void;
     /**
      * Cancels the user info request
      */

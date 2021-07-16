@@ -23,8 +23,9 @@ import DateRangeIcon from '@material-ui/icons/DateRange';
 import VariablesIcon from '@material-ui/icons/Timeline';
 import AxesIcon from '@material-ui/icons/BorderInner';
 
-import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import Theme, { COLORS } from '../Theme/Theme';
+
+import RouteService from '../../service/RouteService';
 
 import TimeSeriesViewerContext, {
   summarizeTimeSteps,
@@ -203,7 +204,7 @@ export function TimeSeriesViewerSummary() {
   };
 
   // Product
-  const productHref = `${NeonEnvironment.getHost()}/data-products/${state.product.productCode}`;
+  const productHref = RouteService.getProductDetailPath(state.product.productCode);
   let productSummaryTitle = (
     <div>
       <Typography variant="h6">Data Product</Typography>

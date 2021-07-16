@@ -31,10 +31,10 @@ import { TabComponentPropTypes } from "./TimeSeriesViewerContext";
 */
 declare function PositionHistoryButton(props: any): JSX.Element;
 declare namespace PositionHistoryButton {
-    export namespace propTypes {
-        export const siteCode: PropTypes.Validator<string>;
-        export const position: PropTypes.Validator<string>;
-        export const history: PropTypes.Validator<(PropTypes.InferProps<{
+    namespace propTypes {
+        const siteCode: PropTypes.Validator<string>;
+        const position: PropTypes.Validator<string>;
+        const history: PropTypes.Validator<(PropTypes.InferProps<{
             'HOR.VER': PropTypes.Validator<string>;
             azimuth: PropTypes.Validator<string>;
             pitch: PropTypes.Validator<string>;
@@ -95,9 +95,9 @@ declare namespace SelectedPosition {
 declare function SelectPositionsButton(props: any): JSX.Element;
 declare namespace SelectPositionsButton {
     export namespace propTypes_3 {
-        export const selectedSite: PropTypes.Validator<PropTypes.InferProps<{
+        const selectedSite: PropTypes.Validator<PropTypes.InferProps<{
             siteCode: PropTypes.Validator<string>;
-            positions: PropTypes.Validator<import("../../types/core").Nullable<string>[]>;
+            positions: PropTypes.Validator<(string | null | undefined)[]>;
         }>>;
     }
     export { propTypes_3 as propTypes };
@@ -125,11 +125,11 @@ declare namespace SelectedSite {
     const propTypes_4: {
         setSelectedTab: PropTypes.Validator<(...args: any[]) => any>;
         TAB_IDS: PropTypes.Validator<{
-            [x: string]: import("../../types/core").Nullable<string>;
+            [x: string]: string | null | undefined;
         }>;
         site: PropTypes.Validator<PropTypes.InferProps<{
             siteCode: PropTypes.Validator<string>;
-            positions: PropTypes.Validator<import("../../types/core").Nullable<string>[]>;
+            positions: PropTypes.Validator<(string | null | undefined)[]>;
         }>>;
         disabled: PropTypes.Requireable<boolean>;
     };
@@ -142,14 +142,14 @@ declare namespace SelectedSite {
 }
 import PropTypes from "prop-types";
 declare namespace ControlPropTypes {
-    export const children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
-    export const innerProps: PropTypes.Validator<PropTypes.InferProps<{
+    const children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+    const innerProps: PropTypes.Validator<PropTypes.InferProps<{
         onMouseDown: PropTypes.Validator<(...args: any[]) => any>;
     }>>;
-    export const innerRef: PropTypes.Validator<((...args: any[]) => any) | PropTypes.InferProps<{
+    const innerRef: PropTypes.Validator<((...args: any[]) => any) | PropTypes.InferProps<{
         current: PropTypes.Validator<any>;
     }>>;
-    export const selectProps: PropTypes.Validator<object>;
+    const selectProps: PropTypes.Validator<object>;
 }
 declare namespace OptionPropTypes {
     const children_1: PropTypes.Requireable<PropTypes.ReactNodeLike>;

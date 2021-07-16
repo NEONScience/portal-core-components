@@ -49,51 +49,63 @@ export const VALID_ENHANCED_STATUSES: {
 };
 export function calcRollupStatus(statuses?: any[]): any;
 export namespace AvailabilityPropTypes {
-    export const basicSiteCodes: PropTypes.Requireable<(PropTypes.InferProps<{
+    const basicSiteCodes: PropTypes.Requireable<(PropTypes.InferProps<{
         siteCode: PropTypes.Validator<string>;
-        availableMonths: PropTypes.Validator<import("../../types/core").Nullable<string>[]>;
+        availableMonths: PropTypes.Validator<(string | null | undefined)[]>;
         availableReleases: PropTypes.Requireable<(PropTypes.InferProps<{
             release: PropTypes.Validator<string>;
-            availableMonths: PropTypes.Validator<import("../../types/core").Nullable<string>[]>;
+            availableMonths: PropTypes.Validator<(string | null | undefined)[]>;
         }> | null | undefined)[]>;
     }> | null | undefined)[]>;
-    export const enhancedSites: PropTypes.Requireable<(PropTypes.InferProps<{
+    const enhancedSites: PropTypes.Requireable<(PropTypes.InferProps<{
         siteCode: PropTypes.Validator<string>;
         tables: PropTypes.Validator<(PropTypes.InferProps<{
             name: PropTypes.Validator<string>;
             description: PropTypes.Validator<string>;
             waitInterval: PropTypes.Validator<string>;
             months: PropTypes.Validator<{
-                [x: string]: import("../../types/core").Nullable<string>;
+                [x: string]: string | null | undefined;
             }>;
         }> | null | undefined)[]>;
     }> | null | undefined)[]>;
-    export const dataProducts: PropTypes.Requireable<(PropTypes.InferProps<{
+    const dataProducts: PropTypes.Requireable<(PropTypes.InferProps<{
         dataProductCode: PropTypes.Validator<string>;
         dataProductTitle: PropTypes.Validator<string>;
-        availableMonths: PropTypes.Validator<import("../../types/core").Nullable<string>[]>;
+        availableMonths: PropTypes.Validator<(string | null | undefined)[]>;
         availableReleases: PropTypes.Requireable<(PropTypes.InferProps<{
             release: PropTypes.Validator<string>;
-            availableMonths: PropTypes.Validator<import("../../types/core").Nullable<string>[]>;
+            availableMonths: PropTypes.Validator<(string | null | undefined)[]>;
         }> | null | undefined)[]>;
     }> | null | undefined)[]>;
 }
 export namespace SVG {
-    export const MIN_WIDTH: number;
-    export const MIN_HEIGHT: number;
-    export const YEAR_MONTH_WIDTH: number;
-    export const YEAR_WIDTH: number;
-    export const ABS_MAX_DATA_WIDTH: number;
+    const MIN_WIDTH: number;
+    const MIN_HEIGHT: number;
+    const YEAR_MONTH_WIDTH: number;
+    const YEAR_WIDTH: number;
+    const ABS_MAX_DATA_WIDTH: number;
 }
 export namespace TIME {
-    export const MIN_YEAR_MONTH: string;
-    export const MAX_YEAR_MONTH: string;
-    export const YEARS: number[];
-    export const MONTHS: string[];
-    export const YEAR_MONTHS: any;
+    const MIN_YEAR_MONTH: string;
+    const MAX_YEAR_MONTH: string;
+    const YEARS: number[];
+    const MONTHS: string[];
+    const YEAR_MONTHS: any;
 }
 export namespace SVG_STYLES {
-    export function apply(node: any, styleName: any): void;
-    export function touchRipple(selection: any, duration?: number): void;
+    /**
+       Function: apply
+       Parse an object literal style definition into d3 selection.style()
+       calls to apply styles defined in the styles object literal to a node
+    */
+    function apply(node: any, styleName: any): void;
+    /**
+       Function: touchRipple
+       For click interactions pass a d3 selection in and the fill will transition
+       from an "active" semi-transparent orange color to near-transparent. We don't go
+       full transparent as the ripple is typically followed by a delayed state update
+       that will trigger a rerender and thus a full style reset.
+    */
+    function touchRipple(selection: any, duration?: number): void;
 }
 import PropTypes from "prop-types";

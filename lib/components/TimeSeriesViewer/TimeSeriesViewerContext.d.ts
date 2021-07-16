@@ -1,12 +1,12 @@
 export namespace TIME_SERIES_VIEWER_STATUS {
-    export const INIT_PRODUCT: string;
-    export const LOADING_META: string;
-    export const READY_FOR_DATA: string;
-    export const LOADING_DATA: string;
-    export const ERROR: string;
-    export const WARNING: string;
-    export const READY_FOR_SERIES: string;
-    export const READY: string;
+    const INIT_PRODUCT: string;
+    const LOADING_META: string;
+    const READY_FOR_DATA: string;
+    const LOADING_DATA: string;
+    const ERROR: string;
+    const WARNING: string;
+    const READY_FOR_SERIES: string;
+    const READY: string;
 }
 export namespace TIME_SERIES_VIEWER_STATUS_TITLES {
     const INIT_PRODUCT_1: string;
@@ -25,14 +25,14 @@ export namespace TIME_SERIES_VIEWER_STATUS_TITLES {
     export { READY_1 as READY };
 }
 export namespace Y_AXIS_RANGE_MODES {
-    export const CENTERED: string;
-    export const FROM_ZERO: string;
-    export const CUSTOM: string;
+    const CENTERED: string;
+    const FROM_ZERO: string;
+    const CUSTOM: string;
 }
 export namespace Y_AXIS_RANGE_MODE_DETAILS {
     export namespace CENTERED_1 {
-        export const name: string;
-        export const description: string;
+        const name: string;
+        const description: string;
     }
     export { CENTERED_1 as CENTERED };
     export namespace FROM_ZERO_1 {
@@ -51,19 +51,19 @@ export namespace Y_AXIS_RANGE_MODE_DETAILS {
     export { CUSTOM_1 as CUSTOM };
 }
 export namespace TabComponentPropTypes {
-    export const setSelectedTab: PropTypes.Validator<(...args: any[]) => any>;
-    export const TAB_IDS: PropTypes.Validator<{
-        [x: string]: import("../../types/core").Nullable<string>;
+    const setSelectedTab: PropTypes.Validator<(...args: any[]) => any>;
+    const TAB_IDS: PropTypes.Validator<{
+        [x: string]: string | null | undefined;
     }>;
 }
 export namespace DEFAULT_STATE {
-    import mode = DEFAULT;
+    import mode = VIEWER_MODE.DEFAULT;
     export { mode };
-    import status = INIT_PRODUCT;
+    import status = TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT;
     export { status };
     export const displayError: null;
     export namespace fetchProduct {
-        import status_1 = AWAITING_CALL;
+        import status_1 = FETCH_STATUS.AWAITING_CALL;
         export { status_1 as status };
         export const error: null;
     }
@@ -72,22 +72,23 @@ export namespace DEFAULT_STATE {
     export const dataFetchProgress: number;
     export const variables: {};
     export namespace product {
-        export const productCode: null;
-        export const productName: null;
-        export const productDescription: null;
-        export const productSensor: null;
-        export const dateRange: null[];
-        export const continuousDateRange: never[];
-        export const sites: {};
+        const productCode: null;
+        const productName: null;
+        const productDescription: null;
+        const productSensor: null;
+        const dateRange: null[];
+        const continuousDateRange: never[];
+        const sites: {};
     }
+    export const release: null;
     export namespace graphData {
-        export const data: never[];
-        export const qualityData: never[];
-        export const monthOffsets: {};
-        export const timestampMap: {};
-        export const series: never[];
-        export const labels: string[];
-        export const qualityLabels: string[];
+        const data: never[];
+        const qualityData: never[];
+        const monthOffsets: {};
+        const timestampMap: {};
+        const series: never[];
+        const labels: string[];
+        const qualityLabels: string[];
     }
     export namespace selection {
         const dateRange_1: null[];
@@ -105,8 +106,8 @@ export namespace DEFAULT_STATE {
         export const rollPeriod: number;
         export const logscale: boolean;
         export namespace yAxes {
-            export const y1: any;
-            export const y2: any;
+            const y1: any;
+            const y2: any;
         }
         export const isDefault: boolean;
         export const invalidDefaultVariables: Set<any>;
@@ -199,6 +200,7 @@ export function getTestableItems(): {
             continuousDateRange: never[];
             sites: {};
         };
+        release: null;
         graphData: {
             data: never[];
             qualityData: never[];
@@ -272,8 +274,8 @@ export type ParseSiteVariablesReturn = {
 };
 import PropTypes from "prop-types";
 declare namespace VIEWER_MODE {
-    export const DEFAULT: string;
-    export const STATIC: string;
+    const DEFAULT: string;
+    const STATIC: string;
 }
 declare namespace FETCH_STATUS {
     export const AWAITING_CALL: string;
@@ -292,22 +294,26 @@ declare namespace TimeSeriesViewerContext {
 */
 declare function Provider(props: any): JSX.Element;
 declare namespace Provider {
-    export namespace propTypes {
+    namespace propTypes {
         const mode_1: PropTypes.Requireable<string>;
         export { mode_1 as mode };
-        import productCode_1 = productCode;
+        import productCode_1 = TimeSeriesViewerPropTypes.productCode;
         export { productCode_1 as productCode };
-        import productData = productData;
+        import productData = TimeSeriesViewerPropTypes.productData;
         export { productData };
+        const release_1: PropTypes.Requireable<string>;
+        export { release_1 as release };
         export const children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
     }
-    export namespace defaultProps {
-        import mode_2 = DEFAULT;
+    namespace defaultProps {
+        import mode_2 = VIEWER_MODE.DEFAULT;
         export { mode_2 as mode };
         const productCode_2: null;
         export { productCode_2 as productCode };
         const productData_1: null;
         export { productData_1 as productData };
+        const release_2: null;
+        export { release_2 as release };
     }
 }
 declare function useTimeSeriesViewerState(): any;

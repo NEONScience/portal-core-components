@@ -48,6 +48,7 @@ import MaterialTableIcons from '../MaterialTableIcons/MaterialTableIcons';
 import SiteChip from '../SiteChip/SiteChip';
 import Theme, { COLORS } from '../Theme/Theme';
 
+import RouteService from '../../service/RouteService';
 import { formatBytes, MAX_POST_BODY_SIZE } from '../../util/manifestUtil';
 
 const useStyles = makeStyles((theme) => ({
@@ -147,7 +148,7 @@ const useStyles = makeStyles((theme) => ({
 const dataUsageAndCitationPoliciesLink = (
   <Link
     target="_blank"
-    href="https://www.neonscience.org/data/about-data/data-policies"
+    href={RouteService.getDataPoliciesPath()}
     data-gtm="download-data-dialog.policies-link"
   >
     Data Usage and Citation Policies
@@ -236,7 +237,7 @@ export default function DownloadStepForm(props) {
       const neonFaqLink = (
         <Link
           target="_blank"
-          href="http://data.neonscience.org/faq"
+          href={RouteService.getFaqPath()}
           data-gtm="download-data-dialog.neon-faq-link"
         >
           NEON FAQ
@@ -733,7 +734,7 @@ export default function DownloadStepForm(props) {
       const downloadAndExploreLink = (
         <Link
           target="_blank"
-          href="https://www.neonscience.org/download-explore-neon-data"
+          href={RouteService.getDownloadExplorePath()}
           data-gtm="download-data-dialog.download-and-explore-link"
         >
           Download and Explore NEON Data
@@ -759,7 +760,7 @@ export default function DownloadStepForm(props) {
       const fileNamingConventionsLink = (
         <Link
           target="_blank"
-          href="https://data.neonscience.org/file-naming-conventions"
+          href={RouteService.getFileNamingConventionsPath()}
           data-gtm="download-data-dialog.file-naming-conventions-link"
         >
           NEON File Naming Conventions
@@ -784,7 +785,7 @@ export default function DownloadStepForm(props) {
       const year = moment().format('YYYY');
       const today = moment().format('MMMM D, YYYY');
       const maturity = 'Provisional';
-      const url = 'http://data.neonscience.org';
+      const url = RouteService.getDataProductCitationDownloadUrl();
       const citationText = `National Ecological Observatory Network. ${year}. Data Product ${productCode}, ${productName}. ${maturity} data downloaded from ${url} on ${today}. Battelle, Boulder, CO, USA NEON. ${year}.`;
       const citationCallout = (
         <Card

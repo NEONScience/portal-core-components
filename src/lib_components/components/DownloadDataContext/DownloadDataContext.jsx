@@ -222,7 +222,7 @@ const newStateIsAllowable = (key, value) => {
     case 'sites':
       return (
         Array.isArray(value)
-          && value.every((site) => (typeof site === 'string' && /^[A-Z]{4}$/.test(site)))
+        && value.every((site) => (typeof site === 'string' && /^[A-Z]{4}$/.test(site)))
       );
     case 'dateRange':
       return (
@@ -290,7 +290,7 @@ const newStateIsValid = (key, value, validValues = []) => {
     default:
       return (
         newStateIsAllowable(key, value)
-          && (!Array.isArray(validValues) || validValues.includes(value))
+        && (!Array.isArray(validValues) || validValues.includes(value))
       );
   }
 };
@@ -580,7 +580,7 @@ const getAndValidateNewS3FilesState = (previousState, action, broadcast = false)
   newState.s3Files.estimatedPostSize = estimatePostSize(newState.s3Files, newState.sites);
   newState.s3Files.isValid = (
     newState.s3Files.value.length > 0
-      && newState.s3Files.estimatedPostSize < MAX_POST_BODY_SIZE
+    && newState.s3Files.estimatedPostSize < MAX_POST_BODY_SIZE
   );
   if (s3FilesIdx !== -1) {
     newState.requiredSteps[s3FilesIdx].isComplete = newState.s3Files.isValid;
@@ -704,8 +704,8 @@ const getAndValidateNewState = (previousState, action, broadcast = false) => {
   // Trigger a new manifest request for file size estimate if this update warrants it
   if (
     previousState.fromManifest
-      && MANIFEST_TRIGGERING_STATE_KEYS.includes(action.key)
-      && broadcast
+    && MANIFEST_TRIGGERING_STATE_KEYS.includes(action.key)
+    && broadcast
   ) {
     newState.manifest.status = 'awaitingFetchCall';
   }
@@ -957,7 +957,7 @@ const useDownloadDataState = () => {
         requiredSteps: [],
         downloadContextIsActive: false,
       },
-      () => {},
+      () => { },
     ];
   }
   return hookResponse;

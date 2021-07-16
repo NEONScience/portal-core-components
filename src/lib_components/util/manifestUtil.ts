@@ -62,7 +62,7 @@ export const buildManifestRequestUrl = (config: ManifestConfig, useBody = true):
     packageType,
     documentation,
   } = config;
-  let url = `${NeonEnvironment.getFullApiPath('manifest')}/manifest/rollup`;
+  let url = NeonEnvironment.getFullDownloadApiPath('manifestRollup');
   if (!useBody) {
     const siteCodesParam = buildSiteCodesParams(sites);
     const productCodeParam = productCode.startsWith('NEON.DOM.SITE')
@@ -124,7 +124,7 @@ export const buildS3FilesRequestUrl = (
 export const downloadManifest = (manifest: ManifestRequest) => {
   const form = document.createElement('form');
   form.style.display = 'none';
-  form.action = `${NeonEnvironment.getFullApiPath('download')}/stream`;
+  form.action = NeonEnvironment.getFullDownloadApiPath('downloadStream');
   form.method = 'POST';
 
   const input = document.createElement('input');
@@ -203,9 +203,9 @@ export const formatBytes = (bytes: number) => {
 
 export const getSizeEstimateFromManifestResponse = (response: any) => {
   if (typeof response !== 'object' || response === null
-      || typeof response.data !== 'object' || response.data === null
-      || !Array.isArray(response.data.manifestEntries)
-      || !response.data.manifestEntries.length) {
+    || typeof response.data !== 'object' || response.data === null
+    || !Array.isArray(response.data.manifestEntries)
+    || !response.data.manifestEntries.length) {
     return 0;
   }
   return response.data.manifestEntries.reduce((total: number, entry: any) => (
@@ -215,9 +215,9 @@ export const getSizeEstimateFromManifestResponse = (response: any) => {
 
 export const getSizeEstimateFromManifestRollupResponse = (response: any) => {
   if (typeof response !== 'object' || response === null
-      || typeof response.data !== 'object' || response.data === null
-      || typeof response.data.totalBytes !== 'number'
-      || response.data.totalBytes === null) {
+    || typeof response.data !== 'object' || response.data === null
+    || typeof response.data.totalBytes !== 'number'
+    || response.data.totalBytes === null) {
     return 0;
   }
   return response.data.totalBytes;
