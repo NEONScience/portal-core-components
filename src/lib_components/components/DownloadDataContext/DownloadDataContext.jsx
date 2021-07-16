@@ -192,7 +192,9 @@ const S3_PATTERN = {
   },
 };
 
-// validator functions
+/**
+   VALIDATOR FUNCTIONS
+*/
 // Naive check, replace with a more robust JSON schema check
 const productDataIsValid = (productData) => (
   typeof productData === 'object' && productData !== null
@@ -314,9 +316,9 @@ const mutateNewStateIntoRange = (key, value, validValues = []) => {
 };
 
 /**
-* Estimate a POST body size from a sile list and sites list for s3Files-based
-* downloads. Numbers here are based on the current POST API and what it requires
-* for form data keys, which is excessively verbose.
+   Estimate a POST body size from a sile list and sites list for s3Files-based
+   downloads. Numbers here are based on the current POST API and what it requires
+   for form data keys, which is excessively verbose.
 */
 const estimatePostSize = (s3FilesState, sitesState) => {
   const baseLength = 300;
@@ -326,8 +328,9 @@ const estimatePostSize = (s3FilesState, sitesState) => {
   return baseLength + sitesLength + filesLength;
 };
 
-// getter functions
-
+/**
+   GETTER FUNCTIONS
+*/
 const getValidValuesFromProductData = (productData, key) => {
   switch (key) {
     case 'release':
@@ -731,7 +734,7 @@ const getAndValidateNewState = (previousState, action, broadcast = false) => {
 };
 
 /**
-* The reducer function for changing state.
+   REDUCER
 */
 const reducer = (state, action) => {
   let newState = {};
@@ -938,12 +941,12 @@ const wrappedReducer = (state, action) => {
 };
 
 /**
-* Context
+   CONTEXT
 */
 const Context = createContext(DEFAULT_STATE);
 
 /**
-* Hook
+   HOOK
 */
 const useDownloadDataState = () => {
   const hookResponse = useContext(Context);
@@ -961,7 +964,7 @@ const useDownloadDataState = () => {
 };
 
 /**
-* Observables
+  OBSERVABLES
 */
 // Observable and getter for sharing whole state through a higher order component
 const stateSubject$ = new Subject();
@@ -974,7 +977,7 @@ const getManifestAjaxObservable = (request) => (
 );
 
 /**
-* <DownloadDataContext.Provider />, the context provider definition.
+  <DownloadDataContext.Provider />
 */
 const Provider = (props) => {
   const {
