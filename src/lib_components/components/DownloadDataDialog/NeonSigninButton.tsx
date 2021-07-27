@@ -14,7 +14,7 @@ const buttonSubject = getSignInButtonSubject();
 
 const handleButtonClick = () => {
   // push to the subject to notify subscribers
-  buttonSubject.next('clicked');
+  buttonSubject.next();
   document.location.href = NeonEnvironment.getFullAuthPath('login');
 };
 
