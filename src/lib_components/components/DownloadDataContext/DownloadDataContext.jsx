@@ -33,6 +33,8 @@ import {
 } from '../../util/manifestUtil';
 
 import { forkJoinWithProgress } from '../../util/rxUtil';
+import { persistState, readState } from './StatePersistence';
+import { getSignInButtonObservable } from '../DownloadDataDialog/signInButtonState';
 
 const ALL_POSSIBLE_VALID_DATE_RANGE = [
   '2010-01',
@@ -976,6 +978,8 @@ const getManifestAjaxObservable = (request) => (
   NeonApi.postJsonObservable(request.url, request.body, null, false)
 );
 
+const signInButtonObservable = getSignInButtonObservable();
+
 /**
   <DownloadDataContext.Provider />
 */
@@ -985,8 +989,23 @@ const Provider = (props) => {
     children,
   } = props;
 
-  const initialState = getInitialStateFromProps(props);
+  // get the initial state from storage if present, else get from props.
+  const initialState = readState() ? readState() : getInitialStateFromProps(props);
+
   const [state, dispatch] = useReducer(wrappedReducer, initialState);
+
+  /**
+  * The current sign in process uses a separate domain. This function
+  * persists the current state so it may be reloaded when the page is
+  * reloaded after sign in.
+  */
+  useEffect(() => {
+    const subscription = signInButtonObservable.subscribe(() => {
+      persistState(state);
+    });
+    // eslint-disable-next-line no-console
+    return () => { console.log('Teardown called.'); subscription.unsubscribe(); };
+  });
 
   // Create an observable for manifests requests and subscribe to it to execute
   // the manifest fetch and dispatch results when updated.

@@ -1,15 +1,15 @@
 export default LiferayNotifications;
 declare function LiferayNotifications(props: any): JSX.Element | null;
 declare namespace LiferayNotifications {
-    export namespace propTypes {
-        export const notifications: PropTypes.Requireable<(PropTypes.InferProps<{
+    namespace propTypes {
+        const notifications: PropTypes.Requireable<(PropTypes.InferProps<{
             id: PropTypes.Validator<string>;
             message: PropTypes.Validator<string>;
             dismissed: PropTypes.Validator<boolean>;
         }> | null | undefined)[]>;
-        export const onHideNotifications: PropTypes.Requireable<(...args: any[]) => any>;
+        const onHideNotifications: PropTypes.Requireable<(...args: any[]) => any>;
     }
-    export namespace defaultProps {
+    namespace defaultProps {
         const notifications_1: never[];
         export { notifications_1 as notifications };
         const onHideNotifications_1: null;

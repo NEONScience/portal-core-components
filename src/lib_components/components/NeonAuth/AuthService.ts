@@ -70,14 +70,24 @@ export interface IAuthService {
   /**
    * Initializes a login flow
    * @param {string} path - Optionally path to set for the root login URL
+   * @param {string} redirectUriPath - Optionally set the redirect path
    */
-  login: (path?: string) => void;
+  login: (path?: string, redirectUriPath?: string) => void;
   /**
    * Performs a silent login flow
    * @param {Dispatch} dispatch - The NeonContext dispatch function
    * @param {boolean} isSsoCheck - Whether or not performaing an SSO check
+   * @param {string} path - Fallback to optionally path to set for the
+   *  root logout URL when defaulting to normal login flow.
+   * @param {string} redirectUriPath - Fallback to optionally set the
+   *  redirect path when defaulting to normal login flow.
    */
-  loginSilently: (dispatch: Dispatch<any>, isSsoCheck: boolean) => void;
+  loginSilently: (
+    dispatch: Dispatch<any>,
+    isSsoCheck: boolean,
+    path?: string,
+    redirectUriPath?: string,
+  ) => void;
   /**
    * Initializes a logout flow
    * @param {string} path - Optionally path to set for the root logout URL
@@ -88,8 +98,16 @@ export interface IAuthService {
    * Performs a silent logout flow
    * @param {Dispatch} dispatch - The NeonContext dispatch function
    *  upon logout
+   * @param {string} path - Fallback to optionally path to set for the
+   *  root logout URL when defaulting to normal login flow.
+   * @param {string} redirectUriPath - Fallback to optionally set the
+   *  redirect path when defaulting to normal login flow.
    */
-  logoutSilently: (dispatch: Dispatch<any>) => void;
+  logoutSilently: (
+    dispatch: Dispatch<any>,
+    path?: string,
+    redirectUriPath?: string,
+  ) => void;
   /**
    * Cancels the user info request
    */
@@ -272,16 +290,23 @@ const AuthService: IAuthService = {
       NeonEnvironment.route.account(),
     ].indexOf(NeonEnvironment.getRouterBaseHomePath() || '') >= 0
   ),
-  login: (path?: string): void => {
-    const env: any = NeonEnvironment;
+  login: (path?: string, redirectUriPath?: string): void => {
+    const env: INeonEnvironment = NeonEnvironment;
     const rootPath: string = exists(path)
-      ? path
+      ? (path as string)
       : env.getFullAuthPath('login');
-    const redirectUri = `${env.route.getFullRoute(env.getRouterBaseHomePath())}`;
-    const href = `${rootPath}?${REDIRECT_URI}=${redirectUri}`;
+    const appliedRedirectUri = exists(redirectUriPath)
+      ? redirectUriPath
+      : env.route.getFullRoute(env.getRouterBaseHomePath());
+    const href = `${rootPath}?${REDIRECT_URI}=${appliedRedirectUri}`;
     window.location.href = href;
   },
-  loginSilently: (dispatch: Dispatch<any>, isSsoCheck: boolean): void => {
+  loginSilently: (
+    dispatch: Dispatch<any>,
+    isSsoCheck: boolean,
+    path?: string,
+    redirectUriPath?: string,
+  ): void => {
     // Until custom domains are implemented,
     // Safari does not support silent auth flow
     const allowSilent: boolean = AuthService.allowSilentAuth();
@@ -289,7 +314,7 @@ const AuthService: IAuthService = {
       return;
     }
     if (!allowSilent) {
-      AuthService.login();
+      AuthService.login(path, redirectUriPath);
       return;
     }
     dispatch({ type: 'setAuthWorking', isAuthWorking: true });
@@ -331,12 +356,16 @@ const AuthService: IAuthService = {
     const href = `${rootPath}?${REDIRECT_URI}=${appliedRedirectUri}`;
     window.location.href = href;
   },
-  logoutSilently: (dispatch: Dispatch<any>): void => {
+  logoutSilently: (
+    dispatch: Dispatch<any>,
+    path?: string,
+    redirectUriPath?: string,
+  ): void => {
     // Until custom domains are implemented,
     // Safari does not support silent auth flow
     const allowSilent: boolean = AuthService.allowSilentAuth();
     if (!allowSilent) {
-      AuthService.logout();
+      AuthService.logout(path, redirectUriPath);
       return;
     }
     dispatch({ type: 'setAuthWorking', isAuthWorking: true });

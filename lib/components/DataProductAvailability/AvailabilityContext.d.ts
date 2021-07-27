@@ -37,8 +37,8 @@ declare namespace AvailabilityContext {
 */
 declare function Provider(props: any): JSX.Element;
 declare namespace Provider {
-    export namespace propTypes {
-        export const sites: PropTypes.Requireable<(PropTypes.InferProps<{
+    namespace propTypes {
+        const sites: PropTypes.Requireable<(PropTypes.InferProps<{
             siteCode: PropTypes.Validator<string>;
             tables: PropTypes.Validator<(PropTypes.InferProps<{
                 name: PropTypes.Validator<string>;
@@ -49,9 +49,9 @@ declare namespace Provider {
                 }>;
             }> | null | undefined)[]>;
         }> | null | undefined)[]>;
-        export const children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+        const children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
     }
-    export namespace defaultProps {
+    namespace defaultProps {
         const sites_1: never[];
         export { sites_1 as sites };
     }
@@ -73,7 +73,7 @@ declare function useAvailabilityState(): any[] | {
     };
 };
 declare namespace SORT_DIRECTIONS {
-    export const ASC: string;
-    export const DESC: string;
+    const ASC: string;
+    const DESC: string;
 }
 import PropTypes from "prop-types";

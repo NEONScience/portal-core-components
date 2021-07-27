@@ -3,11 +3,11 @@
 */
 declare function EnhancedAvailabilityKey(props: any): JSX.Element;
 declare namespace EnhancedAvailabilityKey {
-    export namespace propTypes {
-        export const selectionEnabled: PropTypes.Requireable<boolean>;
-        export const rollUpPresent: PropTypes.Requireable<boolean>;
+    namespace propTypes {
+        const selectionEnabled: PropTypes.Requireable<boolean>;
+        const rollUpPresent: PropTypes.Requireable<boolean>;
     }
-    export namespace defaultProps {
+    namespace defaultProps {
         const selectionEnabled_1: boolean;
         export { selectionEnabled_1 as selectionEnabled };
         const rollUpPresent_1: boolean;

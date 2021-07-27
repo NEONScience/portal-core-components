@@ -38,8 +38,7 @@ import ExternalHost from '../ExternalHost/ExternalHost';
 import ExternalHostInfo from '../ExternalHostInfo/ExternalHostInfo';
 import NeonContext from '../NeonContext/NeonContext';
 import Theme, { COLORS } from '../Theme/Theme';
-import NeonSigninButton from './NeonSigninButton';
-import NeonEnvironment from '../NeonEnvironment';
+import NeonSignInButton from './NeonSignInButton';
 
 import RouteService from '../../service/RouteService';
 import {
@@ -433,9 +432,9 @@ export default function DownloadDataDialog() {
             fontSize: '0.8rem',
           }}
         >
-          <Link target="_new" href={RouteService.getUserAccountsPath()}>Learn</Link> about the benefits of having an account.
+          <Link target="_new" href={RouteService.getUserAccountsPath()}>Learn</Link> the benefits of having an account.
         </Typography>
-        <Link href={NeonEnvironment.getFullAuthPath('login')}><NeonSigninButton /></Link>
+        <NeonSignInButton />
       </>
     );
     /* eslint-enable react/jsx-one-expression-per-line */

@@ -1,8 +1,8 @@
 export default EnhancedAvailabilityInterface;
 declare function EnhancedAvailabilityInterface(props: any): JSX.Element;
 declare namespace EnhancedAvailabilityInterface {
-    export namespace propTypes {
-        export const sites: PropTypes.Requireable<(PropTypes.InferProps<{
+    namespace propTypes {
+        const sites: PropTypes.Requireable<(PropTypes.InferProps<{
             siteCode: PropTypes.Validator<string>;
             tables: PropTypes.Validator<(PropTypes.InferProps<{
                 name: PropTypes.Validator<string>;
@@ -15,13 +15,13 @@ declare namespace EnhancedAvailabilityInterface {
                 }>;
             }> | null | undefined)[]>;
         }> | null | undefined)[]>;
-        export const view: PropTypes.Requireable<string>;
-        export const table: PropTypes.Requireable<string>;
-        export const sortMethod: PropTypes.Requireable<string>;
-        export const sortDirection: PropTypes.Requireable<string>;
-        export const disableSelection: PropTypes.Requireable<boolean>;
+        const view: PropTypes.Requireable<string>;
+        const table: PropTypes.Requireable<string>;
+        const sortMethod: PropTypes.Requireable<string>;
+        const sortDirection: PropTypes.Requireable<string>;
+        const disableSelection: PropTypes.Requireable<boolean>;
     }
-    export namespace defaultProps {
+    namespace defaultProps {
         const sites_1: never[];
         export { sites_1 as sites };
         const view_1: null;

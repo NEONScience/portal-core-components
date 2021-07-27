@@ -1,6 +1,6 @@
 import StateService from '../../service/StateService';
 
-const key = 'downloadContextState';
+const key = 'downloadDataContextState';
 
 export const persistState = (state: object) => {
   StateService.setObject(key, state);

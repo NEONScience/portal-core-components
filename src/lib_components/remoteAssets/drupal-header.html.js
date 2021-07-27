@@ -905,6 +905,10 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
+          <a href="https://www.neonscience.org/neon-ambassador-program" class="menu__link" data-drupal-link-system-path="node/11625">NEON Ambassador Program</a>
+
+                  </li>
+              <li  class="menu__item">
           <a href="https://www.neonscience.org/efi-rcn-neon-ecological-forecasting-challenge" class="menu__link" data-drupal-link-system-path="node/11363">EFI-NEON Ecological Forecasting Challenges</a>
 
                   </li>

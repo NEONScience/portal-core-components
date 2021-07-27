@@ -13,6 +13,7 @@ import Theme from '../Theme/Theme';
 import { StringPropsObject } from '../../types/objectTypes';
 import { StylesHook } from '../../types/muiTypes';
 import { Undef } from '../../types/core';
+import { isStringNonEmpty } from '../../util/typeUtil';
 
 export enum NeonAuthType {
   REDIRECT = 'REDIRECT',
@@ -60,7 +61,7 @@ const triggerAuth = (
   setTimeout(
     () => {
       if (login) {
-        AuthService.login(path);
+        AuthService.login(path, redirectUriPath);
       } else {
         AuthService.logout(path, redirectUriPath);
       }
@@ -92,13 +93,17 @@ const renderAuth = (
     if (!isAuthWsConnected) {
       appliedLoginType = NeonAuthType.REDIRECT;
     }
+    const appHomePath: string = NeonEnvironment.getRouterBaseHomePath();
+    const currentPath: string = window.location.pathname;
+    const hasPath: boolean = isStringNonEmpty(currentPath) && currentPath.includes(appHomePath);
+    const redirectUriPath: Undef<string> = hasPath ? currentPath : undefined;
     switch (appliedLoginType) {
       case NeonAuthType.SILENT:
-        AuthService.loginSilently(dispatch, false);
+        AuthService.loginSilently(dispatch, false, loginPath, redirectUriPath);
         break;
       case NeonAuthType.REDIRECT:
       default:
-        triggerAuth(loginPath, true, dispatch);
+        triggerAuth(loginPath, true, dispatch, redirectUriPath);
         break;
     }
   };
@@ -109,14 +114,19 @@ const renderAuth = (
     if (!isAuthWsConnected) {
       appliedLogoutType = NeonAuthType.REDIRECT;
     }
-    const appPath: string = NeonEnvironment.getRouterBaseHomePath() || '';
-    if (LOGOUT_REDIRECT_PATHS.indexOf(appPath) >= 0) {
+    const appHomePath: string = NeonEnvironment.getRouterBaseHomePath();
+    if (LOGOUT_REDIRECT_PATHS.indexOf(appHomePath) >= 0) {
       appliedLogoutType = NeonAuthType.REDIRECT;
       redirectUriPath = NeonEnvironment.route.home();
+    } else {
+      // If not a auto redirect path, redirect back to the current path
+      const currentPath: string = window.location.pathname;
+      const hasPath: boolean = isStringNonEmpty(currentPath) && currentPath.includes(appHomePath);
+      redirectUriPath = hasPath ? currentPath : appHomePath;
     }
     switch (appliedLogoutType) {
       case NeonAuthType.SILENT:
-        AuthService.logoutSilently(dispatch);
+        AuthService.logoutSilently(dispatch, logoutPath, redirectUriPath);
         break;
       case NeonAuthType.REDIRECT:
       default:
