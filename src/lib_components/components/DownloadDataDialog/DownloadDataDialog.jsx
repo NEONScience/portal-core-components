@@ -38,7 +38,7 @@ import ExternalHost from '../ExternalHost/ExternalHost';
 import ExternalHostInfo from '../ExternalHostInfo/ExternalHostInfo';
 import NeonContext from '../NeonContext/NeonContext';
 import Theme, { COLORS } from '../Theme/Theme';
-import NeonSignInButton from './NeonSignInButton';
+import NeonSignInButton from '../NeonSignInButton/NeonSignInButton';
 
 import RouteService from '../../service/RouteService';
 import {

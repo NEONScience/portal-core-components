@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
-import { getSignInButtonSubject } from './signInButtonState';
+import NeonSignInButtonState from './NeonSignInButtonState';
 
 const useStyles = makeStyles((theme) => ({
   signInButton: {
@@ -10,11 +10,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const buttonSubject = getSignInButtonSubject();
-
 const handleButtonClick = () => {
   // push to the subject to notify subscribers
-  buttonSubject.next();
+  NeonSignInButtonState.sendClickNotification();
   document.location.href = NeonEnvironment.getFullAuthPath('login');
 };
 

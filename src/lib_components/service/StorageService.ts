@@ -1,7 +1,7 @@
 /**
- * Interface to define a service for persisting state.
+ * Interface to define a service for data storage.
  */
-export interface IStateService {
+export interface IStorageService {
   /**
    * Adds the item to persistent storage.
    * @param key The item key.
@@ -50,7 +50,7 @@ export interface IStateService {
   length: (key: string) => number;
 }
 
-const StateService: IStateService = {
+const StorageService: IStorageService = {
   setItem: (key: string, value: string): void => sessionStorage.setItem(key, value),
   getItem: (key: string): string | null => sessionStorage.getItem(key),
   setObject: (key: string, object: object): void => (
@@ -69,6 +69,6 @@ const StateService: IStateService = {
   length: (): number => sessionStorage.length,
 };
 
-Object.freeze(StateService);
+Object.freeze(StorageService);
 
-export default StateService;
+export default StorageService;

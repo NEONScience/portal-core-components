@@ -33,8 +33,8 @@ import {
 } from '../../util/manifestUtil';
 
 import { forkJoinWithProgress } from '../../util/rxUtil';
-import { persistState, readState } from './StatePersistence';
-import { getSignInButtonObservable } from '../DownloadDataDialog/signInButtonState';
+import StateStorage from './DownloadDataContextStateStorage';
+import NeonSignInButtonState from '../NeonSignInButton/NeonSignInButtonState';
 
 const ALL_POSSIBLE_VALID_DATE_RANGE = [
   '2010-01',
@@ -978,7 +978,7 @@ const getManifestAjaxObservable = (request) => (
   NeonApi.postJsonObservable(request.url, request.body, null, false)
 );
 
-const signInButtonObservable = getSignInButtonObservable();
+const signInButtonObservable = NeonSignInButtonState.getSignInButtonObservable();
 
 /**
   <DownloadDataContext.Provider />
@@ -990,8 +990,8 @@ const Provider = (props) => {
   } = props;
 
   // get the initial state from storage if present, else get from props.
-  const initialState = readState() ? readState() : getInitialStateFromProps(props);
-
+  const savedState = StateStorage.readState();
+  const initialState = (savedState === null) ? getInitialStateFromProps(props) : savedState;
   const [state, dispatch] = useReducer(wrappedReducer, initialState);
 
   /**
@@ -1001,7 +1001,7 @@ const Provider = (props) => {
   */
   useEffect(() => {
     const subscription = signInButtonObservable.subscribe(() => {
-      persistState(state);
+      StateStorage.saveState(state);
     });
     // eslint-disable-next-line no-console
     return () => { console.log('Teardown called.'); subscription.unsubscribe(); };
