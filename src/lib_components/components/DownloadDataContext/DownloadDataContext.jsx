@@ -33,7 +33,7 @@ import {
 } from '../../util/manifestUtil';
 
 import { forkJoinWithProgress } from '../../util/rxUtil';
-import StateStorage from './DownloadDataContextStateStorage';
+import makeStateStorage from '../../service/StateStorageService';
 import NeonSignInButtonState from '../NeonSignInButton/NeonSignInButtonState';
 
 const ALL_POSSIBLE_VALID_DATE_RANGE = [
@@ -990,7 +990,8 @@ const Provider = (props) => {
   } = props;
 
   // get the initial state from storage if present, else get from props.
-  const savedState = StateStorage.readState();
+  const stateStorage = makeStateStorage('downloadDataContextState');
+  const savedState = stateStorage.readState();
   const initialState = (savedState === null) ? getInitialStateFromProps(props) : savedState;
   const [state, dispatch] = useReducer(wrappedReducer, initialState);
 
@@ -1001,7 +1002,7 @@ const Provider = (props) => {
   */
   useEffect(() => {
     const subscription = signInButtonObservable.subscribe(() => {
-      StateStorage.saveState(state);
+      stateStorage.saveState(state);
     });
     // eslint-disable-next-line no-console
     return () => { console.log('Teardown called.'); subscription.unsubscribe(); };

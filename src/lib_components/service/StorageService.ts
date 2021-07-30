@@ -33,13 +33,13 @@ export interface IStorageService {
    * @param index The index of the item in storage.
    * @returns The item's key.
    */
-  key: (index: number) => string | null;
+  getKey: (index: number) => string | null;
   /**
    * Removes the item with the given key.
    * @param key The item's key.
    * @returns void.
    */
-  removeItem: (key: string) => void;
+  remove: (key: string) => void;
   /**
    * Clears storage of all items.
    */
@@ -47,7 +47,7 @@ export interface IStorageService {
   /**
    * Returns the number of items in storage.
    */
-  length: (key: string) => number;
+  getLength: (key: string) => number;
 }
 
 const StorageService: IStorageService = {
@@ -63,12 +63,11 @@ const StorageService: IStorageService = {
     }
     return JSON.parse(value);
   },
-  key: (index: number): string | null => sessionStorage.key(index),
-  removeItem: (key: string): void => sessionStorage.removeItem(key),
+  getKey: (index: number): string | null => sessionStorage.key(index),
+  remove: (key: string): void => sessionStorage.removeItem(key),
   clear: (): void => sessionStorage.clear(),
-  length: (): number => sessionStorage.length,
+  getLength: (): number => sessionStorage.length,
 };
 
 Object.freeze(StorageService);
-
 export default StorageService;
