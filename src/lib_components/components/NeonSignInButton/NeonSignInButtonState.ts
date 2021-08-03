@@ -1,33 +1,34 @@
 import { Subject, Observable } from 'rxjs';
 
-// Instantiate the subject which is triggered without any.
-const buttonSubject = new Subject<void>();
+// Instantiate the subject and observable.
+const subject = new Subject<void>();
+const observable = subject.asObservable();
 
 /**
- * Interface with functions for sharing sign in button state with other components
+ * Interface for sharing sign in button state.
  */
 export interface INeonSignInButtonState {
   /**
-   * Get the button subject.
-   * @returns the button subject.
+   * Get the subject.
+   * @returns the subject.
    */
-  getSignInButtonSubject: () => Subject<void>;
+  getSubject: () => Subject<void>;
   /**
-   * Indicate to observers the button has been clicked.
+   * Tell all observers the button has been clicked.
    * @returns void
    */
-  sendClickNotification: () => void;
+  sendNotification: () => void;
   /**
-   * Get the button observable.
+   * Get the observable.
    * @returns the observable.
    */
-  getSignInButtonObservable: () => Observable<void>;
+  getObservable: () => Observable<void>;
 }
 
 const NeonSignInButtonState: INeonSignInButtonState = {
-  getSignInButtonSubject: () => buttonSubject,
-  sendClickNotification: () => buttonSubject.next(),
-  getSignInButtonObservable: () => buttonSubject.asObservable(),
+  getSubject: () => subject,
+  sendNotification: () => subject.next(),
+  getObservable: () => observable,
 };
 
 Object.freeze(NeonSignInButtonState);

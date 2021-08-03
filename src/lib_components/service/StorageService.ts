@@ -61,7 +61,11 @@ const StorageService: IStorageService = {
     if (!value) {
       return null;
     }
-    return JSON.parse(value);
+    try {
+      return JSON.parse(value);
+    } catch (e) {
+      return null;
+    }
   },
   getKey: (index: number): string | null => sessionStorage.key(index),
   remove: (key: string): void => sessionStorage.removeItem(key),

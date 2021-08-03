@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
 
 const handleButtonClick = () => {
   // push to the subject to notify subscribers
-  NeonSignInButtonState.sendClickNotification();
+  NeonSignInButtonState.sendNotification();
   document.location.href = NeonEnvironment.getFullAuthPath('login');
 };
 

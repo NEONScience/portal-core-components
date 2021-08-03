@@ -36,14 +36,9 @@ import { forkJoinWithProgress } from '../../util/rxUtil';
 import makeStateStorage from '../../service/StateStorageService';
 import NeonSignInButtonState from '../NeonSignInButton/NeonSignInButtonState';
 
-const ALL_POSSIBLE_VALID_DATE_RANGE = [
-  '2010-01',
-  moment().format('YYYY-MM'),
-];
-
+const ALL_POSSIBLE_VALID_DATE_RANGE = ['2010-01', moment().format('YYYY-MM')];
 const ALL_POSSIBLE_VALID_DOCUMENTATION = ['include', 'exclude'];
 const ALL_POSSIBLE_VALID_PACKAGE_TYPE = ['basic', 'expanded'];
-
 const AVAILABILITY_VIEW_MODES = ['summary', 'sites', 'states', 'domains'];
 
 const ALL_STEPS = {
@@ -194,9 +189,7 @@ const S3_PATTERN = {
   },
 };
 
-/**
-   VALIDATOR FUNCTIONS
-*/
+// VALIDATOR FUNCTIONS
 // Naive check, replace with a more robust JSON schema check
 const productDataIsValid = (productData) => (
   typeof productData === 'object' && productData !== null
@@ -317,11 +310,9 @@ const mutateNewStateIntoRange = (key, value, validValues = []) => {
   }
 };
 
-/**
-   Estimate a POST body size from a sile list and sites list for s3Files-based
-   downloads. Numbers here are based on the current POST API and what it requires
-   for form data keys, which is excessively verbose.
-*/
+// Estimate a POST body size from a sile list and sites list for s3Files-based
+// downloads. Numbers here are based on the current POST API and what it requires
+// for form data keys, which is excessively verbose.
 const estimatePostSize = (s3FilesState, sitesState) => {
   const baseLength = 300;
   const sitesLength = sitesState.value.length * 62;
@@ -330,9 +321,7 @@ const estimatePostSize = (s3FilesState, sitesState) => {
   return baseLength + sitesLength + filesLength;
 };
 
-/**
-   GETTER FUNCTIONS
-*/
+// GETTER FUNCTIONS
 const getValidValuesFromProductData = (productData, key) => {
   switch (key) {
     case 'release':
@@ -735,9 +724,7 @@ const getAndValidateNewState = (previousState, action, broadcast = false) => {
   return newState;
 };
 
-/**
-   REDUCER
-*/
+// REDUCER
 const reducer = (state, action) => {
   let newState = {};
   const getStateFromHigherOrderState = (newHigherOrderState) => HIGHER_ORDER_TRANSFERABLE_STATE_KEYS
@@ -936,20 +923,19 @@ const reducer = (state, action) => {
       return state;
   }
 };
-const wrappedReducer = (state, action) => {
-  const newState = reducer(state, action);
-  // console.log('ACTION', action, newState);
-  return newState;
-};
 
 /**
-   CONTEXT
-*/
+ * Wrapped reducer function
+ * @param {*} state The state.
+ * @param {*} action An action.
+ * @returns the new state.
+ */
+const wrappedReducer = (state, action) => reducer(state, action);
+
+// CONTEXT
 const Context = createContext(DEFAULT_STATE);
 
-/**
-   HOOK
-*/
+// HOOK
 const useDownloadDataState = () => {
   const hookResponse = useContext(Context);
   if (hookResponse.length !== 2) {
@@ -965,24 +951,17 @@ const useDownloadDataState = () => {
   return hookResponse;
 };
 
-/**
-  OBSERVABLES
-*/
+// OBSERVABLES
 // Observable and getter for sharing whole state through a higher order component
 const stateSubject$ = new Subject();
 const getStateObservable = () => stateSubject$.asObservable();
-
 // Observables and getters for making and canceling manifest requests
 const manifestCancelation$ = new Subject();
 const getManifestAjaxObservable = (request) => (
   NeonApi.postJsonObservable(request.url, request.body, null, false)
 );
 
-const signInButtonObservable = NeonSignInButtonState.getSignInButtonObservable();
-
-/**
-  <DownloadDataContext.Provider />
-*/
+// <DownloadDataContext.Provider />
 const Provider = (props) => {
   const {
     stateObservable,
@@ -995,17 +974,14 @@ const Provider = (props) => {
   const initialState = (savedState === null) ? getInitialStateFromProps(props) : savedState;
   const [state, dispatch] = useReducer(wrappedReducer, initialState);
 
-  /**
-  * The current sign in process uses a separate domain. This function
-  * persists the current state so it may be reloaded when the page is
-  * reloaded after sign in.
-  */
+  // The current sign in process uses a separate domain. This function
+  // persists the current state so it may be reloaded when the page is
+  // reloaded after sign in.
   useEffect(() => {
-    const subscription = signInButtonObservable.subscribe(() => {
-      stateStorage.saveState(state);
+    const subscription = NeonSignInButtonState.getObservable().subscribe({
+      next: () => stateStorage.saveState(state),
     });
-    // eslint-disable-next-line no-console
-    return () => { console.log('Teardown called.'); subscription.unsubscribe(); };
+    return () => subscription.unsubscribe();
   });
 
   // Create an observable for manifests requests and subscribe to it to execute
