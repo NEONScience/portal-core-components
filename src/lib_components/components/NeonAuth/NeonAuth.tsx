@@ -9,6 +9,7 @@ import AuthService, { LOGOUT_REDIRECT_PATHS } from './AuthService';
 import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import Theme from '../Theme/Theme';
+import NeonSignInButtonState from '../NeonSignInButton/NeonSignInButtonState';
 
 import { StringPropsObject } from '../../types/objectTypes';
 import { StylesHook } from '../../types/muiTypes';
@@ -88,6 +89,8 @@ const renderAuth = (
   }: NeonAuthProps = props;
 
   const handleLogin = (): void => {
+    // Notify observers the sign in button has been clicked.
+    NeonSignInButtonState.sendNotification();
     let appliedLoginType: NeonAuthType = loginType;
     // Default to redirect if WS isn't connected
     if (!isAuthWsConnected) {

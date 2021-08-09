@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const handleButtonClick = () => {
-  // push to the subject to notify subscribers
+  // Notify observers the sign in button has been clicked.
   NeonSignInButtonState.sendNotification();
   document.location.href = NeonEnvironment.getFullAuthPath('login');
 };

@@ -53,9 +53,11 @@ export interface IStorageService {
 const StorageService: IStorageService = {
   setItem: (key: string, value: string): void => sessionStorage.setItem(key, value),
   getItem: (key: string): string | null => sessionStorage.getItem(key),
-  setObject: (key: string, object: object): void => (
-    sessionStorage.setItem(key, JSON.stringify(object))
-  ),
+  setObject: (key: string, object: object): void => {
+    if (object) {
+      sessionStorage.setItem(key, JSON.stringify(object));
+    }
+  },
   getObject: (key: string): object | null => {
     const value = sessionStorage.getItem(key);
     if (!value) {

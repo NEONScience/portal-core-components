@@ -961,7 +961,7 @@ const getManifestAjaxObservable = (request) => (
   NeonApi.postJsonObservable(request.url, request.body, null, false)
 );
 
-// <DownloadDataContext.Provider />
+// Provider
 const Provider = (props) => {
   const {
     stateObservable,
@@ -975,13 +975,14 @@ const Provider = (props) => {
   const [state, dispatch] = useReducer(wrappedReducer, initialState);
 
   // The current sign in process uses a separate domain. This function
-  // persists the current state so it may be reloaded when the page is
-  // reloaded after sign in.
+  // persists the current state in storage when the button is clicked
+  // so the state may be reloaded when the page is reloaded after sign
+  // in.
   useEffect(() => {
     const subscription = NeonSignInButtonState.getObservable().subscribe({
       next: () => stateStorage.saveState(state),
     });
-    return () => subscription.unsubscribe();
+    return () => { stateStorage.removeState(); subscription.unsubscribe(); };
   });
 
   // Create an observable for manifests requests and subscribe to it to execute

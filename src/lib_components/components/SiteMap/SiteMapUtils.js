@@ -1608,6 +1608,7 @@ export const SITE_MAP_PROP_TYPES = {
   aspectRatio: PropTypes.number,
   fullscreen: PropTypes.bool,
   unusableVerticalSpace: PropTypes.number,
+  mapUniqueId: PropTypes.number,
   // Map props
   mapCenter: PropTypes.arrayOf(PropTypes.number),
   mapZoom: PropTypes.number,
@@ -1637,6 +1638,7 @@ export const SITE_MAP_DEFAULT_PROPS = {
   aspectRatio: null,
   fullscreen: false,
   unusableVerticalSpace: 0,
+  mapUniqueId: 0,
   // Map props
   mapCenter: OBSERVATORY_CENTER,
   mapZoom: null,
