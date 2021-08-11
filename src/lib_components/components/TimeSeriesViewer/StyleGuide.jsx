@@ -265,7 +265,7 @@ return (
               title="Time Series Viewer"
               onClose={() => setDialogOpen(false)}
             >
-              <TimeSeriesViewerContext.Provider mode="STATIC" productData={productJSON.data}>
+              <TimeSeriesViewerContext.Provider mode="STATIC" productData={productJSON.data} timeSeriesUniqueId={10}>
                 <StaticTimeSeriesViewer />
               </TimeSeriesViewerContext.Provider>
             </DialogBase>
@@ -399,7 +399,7 @@ import TimeSeriesViewerContainer from 'portal-core-components/lib/components/Tim
         `}
       </CodeBlock>
       <ExampleBlock>
-        <TimeSeriesViewerContext.Provider mode="STATIC" productData={productJSON.data}>
+        <TimeSeriesViewerContext.Provider mode="STATIC" productData={productJSON.data} timeSeriesUniqueId={100}>
           <StaticTimeSeriesViewer />
         </TimeSeriesViewerContext.Provider>
       </ExampleBlock>

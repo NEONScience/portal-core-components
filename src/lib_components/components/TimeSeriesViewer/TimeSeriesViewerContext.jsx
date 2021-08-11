@@ -4,7 +4,7 @@ import React, {
   useEffect,
   useReducer,
 } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { number } from 'prop-types';
 
 import moment from 'moment';
 import get from 'lodash/get';
@@ -30,6 +30,10 @@ import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import { forkJoinWithProgress } from '../../util/rxUtil';
 
 import parseTimeSeriesData from '../../workers/parseTimeSeriesData';
+
+import NeonSignInButtonState from '../NeonSignInButton/NeonSignInButtonState';
+import makeStateStorage from '../../service/StateStorageService';
+import { convertStateForStorage, convertStateFromStorage } from './StateStorageConverter';
 
 // 'get' is a reserved word so can't be imported with import
 const lodashGet = require('lodash/get.js');
@@ -1133,11 +1137,14 @@ const reducer = (state, action) => {
   }
 };
 
+let shouldRestoreState = true;
+
 /**
    Context Provider
 */
 const Provider = (props) => {
   const {
+    timeSeriesUniqueId,
     mode: modeProp,
     productCode: productCodeProp,
     productData: productDataProp,
@@ -1148,7 +1155,7 @@ const Provider = (props) => {
   /**
      Initial State and Reducer Setup
   */
-  const initialState = cloneDeep(DEFAULT_STATE);
+  let initialState = cloneDeep(DEFAULT_STATE);
   if ((typeof modeProp === 'string') && (modeProp !== VIEWER_MODE.DEFAULT)) {
     initialState.mode = modeProp;
   }
@@ -1163,7 +1170,34 @@ const Provider = (props) => {
   }
   initialState.release = releaseProp;
   initialState.selection = applyDefaultsToSelection(initialState);
+
+  // get the state from storage if present
+  const { productCode } = initialState.product;
+  const stateStorage = makeStateStorage(`timeSeriesContextState-${productCode}-${timeSeriesUniqueId}`);
+  const savedState = stateStorage.readState();
+  if (savedState && shouldRestoreState) {
+    shouldRestoreState = false;
+    const convertedState = convertStateFromStorage(savedState);
+    stateStorage.removeState();
+    initialState = convertedState;
+  }
+
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  // The current sign in process uses a separate domain. This function
+  // persists the current state in storage when the button is clicked
+  // so the state may be reloaded when the page is reloaded after sign
+  // in.
+  useEffect(() => {
+    const subscription = NeonSignInButtonState.getObservable().subscribe({
+      next: () => {
+        shouldRestoreState = false;
+        const convertedState = convertStateForStorage(state);
+        stateStorage.saveState(convertedState);
+      },
+    });
+    return () => { subscription.unsubscribe(); };
+  }, [state, stateStorage]);
 
   /**
      Effect - Reinitialize state if the product code prop changed
@@ -1483,6 +1517,7 @@ const TimeSeriesViewerPropTypes = {
 };
 
 Provider.propTypes = {
+  timeSeriesUniqueId: number,
   mode: PropTypes.string,
   productCode: TimeSeriesViewerPropTypes.productCode,
   productData: TimeSeriesViewerPropTypes.productData,
@@ -1498,6 +1533,7 @@ Provider.propTypes = {
 };
 
 Provider.defaultProps = {
+  timeSeriesUniqueId: 0,
   mode: VIEWER_MODE.DEFAULT,
   productCode: null,
   productData: null,

@@ -1076,14 +1076,11 @@ const Provider = (props) => {
   }
 
   // get the initial state from storage if present
-  // convert sets to arrays when writing and convert back to sets when reading.
   const stateStorage = makeStateStorage(`siteMapContextState-${mapUniqueId}`);
   const savedState = stateStorage.readState();
 
   if (neonContextIsFinal && !neonContextHasError && !savedState) {
     initialState = hydrateNeonContextData(initialState, neonContextData);
-    // eslint-disable-next-line no-console
-    console.log('initialState after hydrating: ', initialState);
   }
   const hasInitialZoom = (typeof mapZoom === 'number') && zoomIsValid(mapZoom);
   if (hasInitialZoom && !savedState) {
@@ -1094,12 +1091,6 @@ const Provider = (props) => {
     shouldRestoreState = false;
     const restoredState = convertStateFromStorage(savedState, initialState);
     stateStorage.removeState();
-    // eslint-disable-next-line no-console
-    console.log('restoredState: ', restoredState);
-    // eslint-disable-next-line no-console
-    console.log(`mapUniqueId: ${mapUniqueId}`);
-    // Reload NeonContext data on restore from storage.
-    // initialState = hydrateNeonContextData(restoredState, neonContextData);
     initialState = calculateZoomState(restoredState.map.zoom, restoredState, true);
   }
 
@@ -1109,15 +1100,10 @@ const Provider = (props) => {
   // persists the current state in storage when the button is clicked
   // so the state may be reloaded when the page is reloaded after sign
   // in.
-  // eslint-disable-next-line no-console
-  console.log('state: ', state);
-  // const stateJson = JSON.stringify(state);
   useEffect(() => {
     const subscription = NeonSignInButtonState.getObservable().subscribe({
       next: () => {
         shouldRestoreState = false;
-        // eslint-disable-next-line no-console
-        console.log('state to save: ', state);
         stateStorage.saveState(convertStateForStorage(state));
       },
     });

@@ -961,6 +961,8 @@ const getManifestAjaxObservable = (request) => (
   NeonApi.postJsonObservable(request.url, request.body, null, false)
 );
 
+let shouldRestoreState = true;
+
 // Provider
 const Provider = (props) => {
   const {
@@ -969,9 +971,13 @@ const Provider = (props) => {
   } = props;
 
   // get the initial state from storage if present, else get from props.
+  let initialState = getInitialStateFromProps(props);
   const stateStorage = makeStateStorage('downloadDataContextState');
   const savedState = stateStorage.readState();
-  const initialState = (savedState === null) ? getInitialStateFromProps(props) : savedState;
+  if (savedState && shouldRestoreState) {
+    shouldRestoreState = false;
+    initialState = savedState;
+  }
   const [state, dispatch] = useReducer(wrappedReducer, initialState);
 
   // The current sign in process uses a separate domain. This function
@@ -980,7 +986,10 @@ const Provider = (props) => {
   // in.
   useEffect(() => {
     const subscription = NeonSignInButtonState.getObservable().subscribe({
-      next: () => stateStorage.saveState(state),
+      next: () => {
+        shouldRestoreState = false;
+        stateStorage.saveState(state);
+      },
     });
     return () => { stateStorage.removeState(); subscription.unsubscribe(); };
   });
