@@ -106,8 +106,18 @@ export namespace DEFAULT_STATE {
         export const rollPeriod: number;
         export const logscale: boolean;
         export namespace yAxes {
-            const y1: any;
-            const y2: any;
+            namespace y1 {
+                export const units: null;
+                const logscale_1: boolean;
+                export { logscale_1 as logscale };
+                export const dataRange: null[];
+                export const precision: number;
+                export const standardDeviation: number;
+                import rangeMode = Y_AXIS_RANGE_MODES.CENTERED;
+                export { rangeMode };
+                export const axisRange: number[];
+            }
+            namespace y2 { }
         }
         export const isDefault: boolean;
         export const invalidDefaultVariables: Set<any>;
@@ -222,8 +232,24 @@ export function getTestableItems(): {
             rollPeriod: number;
             logscale: boolean;
             yAxes: {
-                y1: any;
-                y2: any;
+                y1: {
+                    units: null;
+                    logscale: boolean;
+                    dataRange: null[];
+                    precision: number;
+                    standardDeviation: number;
+                    rangeMode: string;
+                    axisRange: number[];
+                };
+                y2: {
+                    units: null;
+                    logscale: boolean;
+                    dataRange: null[];
+                    precision: number;
+                    standardDeviation: number;
+                    rangeMode: string;
+                    axisRange: number[];
+                };
             };
             isDefault: boolean;
             invalidDefaultVariables: Set<any>;
@@ -295,6 +321,7 @@ declare namespace TimeSeriesViewerContext {
 declare function Provider(props: any): JSX.Element;
 declare namespace Provider {
     namespace propTypes {
+        export { number as timeSeriesUniqueId };
         const mode_1: PropTypes.Requireable<string>;
         export { mode_1 as mode };
         import productCode_1 = TimeSeriesViewerPropTypes.productCode;
@@ -306,6 +333,7 @@ declare namespace Provider {
         export const children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
     }
     namespace defaultProps {
+        export const timeSeriesUniqueId: number;
         import mode_2 = VIEWER_MODE.DEFAULT;
         export { mode_2 as mode };
         const productCode_2: null;
@@ -316,10 +344,145 @@ declare namespace Provider {
         export { release_2 as release };
     }
 }
-declare function useTimeSeriesViewerState(): any;
+declare function useTimeSeriesViewerState(): {
+    mode: string;
+    status: string;
+    displayError: null;
+    fetchProduct: {
+        status: string;
+        error: null;
+    };
+    metaFetches: {};
+    dataFetches: {};
+    dataFetchProgress: number;
+    variables: {};
+    product: {
+        productCode: null;
+        productName: null;
+        productDescription: null;
+        productSensor: null;
+        dateRange: null[];
+        continuousDateRange: never[];
+        sites: {};
+    };
+    release: null;
+    graphData: {
+        data: never[];
+        qualityData: never[];
+        monthOffsets: {};
+        timestampMap: {};
+        series: never[];
+        labels: string[];
+        qualityLabels: string[];
+    };
+    selection: {
+        dateRange: null[];
+        continuousDateRange: never[];
+        variables: never[];
+        dateTimeVariable: null;
+        sites: never[];
+        timeStep: string;
+        autoTimeStep: null;
+        qualityFlags: never[];
+        rollPeriod: number;
+        logscale: boolean;
+        yAxes: {
+            y1: {
+                units: null;
+                logscale: boolean;
+                dataRange: null[];
+                precision: number;
+                standardDeviation: number;
+                rangeMode: string;
+                axisRange: number[];
+            };
+            y2: {
+                units: null;
+                logscale: boolean;
+                dataRange: null[];
+                precision: number;
+                standardDeviation: number;
+                rangeMode: string;
+                axisRange: number[];
+            };
+        };
+        isDefault: boolean;
+        invalidDefaultVariables: Set<any>;
+    };
+    availableQualityFlags: Set<any>;
+    availableTimeSteps: Set<string>;
+} | ({
+    mode: string;
+    status: string;
+    displayError: null;
+    fetchProduct: {
+        status: string;
+        error: null;
+    };
+    metaFetches: {};
+    dataFetches: {};
+    dataFetchProgress: number;
+    variables: {};
+    product: {
+        productCode: null;
+        productName: null;
+        productDescription: null;
+        productSensor: null;
+        dateRange: null[];
+        continuousDateRange: never[];
+        sites: {};
+    };
+    release: null;
+    graphData: {
+        data: never[];
+        qualityData: never[];
+        monthOffsets: {};
+        timestampMap: {};
+        series: never[];
+        labels: string[];
+        qualityLabels: string[];
+    };
+    selection: {
+        dateRange: null[];
+        continuousDateRange: never[];
+        variables: never[];
+        dateTimeVariable: null;
+        sites: never[];
+        timeStep: string;
+        autoTimeStep: null;
+        qualityFlags: never[];
+        rollPeriod: number;
+        logscale: boolean;
+        yAxes: {
+            y1: {
+                units: null;
+                logscale: boolean;
+                dataRange: null[];
+                precision: number;
+                standardDeviation: number;
+                rangeMode: string;
+                axisRange: number[];
+            };
+            y2: {
+                units: null;
+                logscale: boolean;
+                dataRange: null[];
+                precision: number;
+                standardDeviation: number;
+                rangeMode: string;
+                axisRange: number[];
+            };
+        };
+        isDefault: boolean;
+        invalidDefaultVariables: Set<any>;
+    };
+    availableQualityFlags: Set<any>;
+    availableTimeSteps: Set<string>;
+} | (() => void))[];
 declare namespace TimeSeriesViewerPropTypes {
     export function productCode_3(props: any, propName: any, componentName: any): Error | null;
     export { productCode_3 as productCode };
     export function productData_2(props: any, propName: any, componentName: any): Error | null;
     export { productData_2 as productData };
 }
+import { number } from "prop-types";

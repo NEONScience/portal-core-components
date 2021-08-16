@@ -115,12 +115,10 @@ declare namespace DownloadDataContext {
     export { ALL_STEPS };
     export { getStateObservable };
 }
-/**
-  <DownloadDataContext.Provider />
-*/
 declare function Provider(props: any): JSX.Element;
 declare namespace Provider {
     namespace propTypes {
+        const downloadDataContextUniqueId: PropTypes.Requireable<number>;
         const stateObservable: PropTypes.Requireable<(...args: any[]) => any>;
         const productData: PropTypes.Requireable<PropTypes.InferProps<{
             productCode: PropTypes.Validator<string>;
@@ -139,6 +137,8 @@ declare namespace Provider {
         const children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
     }
     namespace defaultProps {
+        const downloadDataContextUniqueId_1: number;
+        export { downloadDataContextUniqueId_1 as downloadDataContextUniqueId };
         const stateObservable_1: null;
         export { stateObservable_1 as stateObservable };
         const productData_1: {};
@@ -157,9 +157,6 @@ declare namespace Provider {
         export { packageType_1 as packageType };
     }
 }
-/**
-   HOOK
-*/
 declare function useDownloadDataState(): {
     downloadContextIsActive: boolean;
     broadcast: boolean;
@@ -311,9 +308,6 @@ declare function useDownloadDataState(): {
         isValid: boolean;
     };
 })[];
-/**
-   REDUCER
-*/
 declare function reducer(state: any, action: any): any;
 declare namespace DEFAULT_STATE {
     export const downloadContextIsActive: boolean;

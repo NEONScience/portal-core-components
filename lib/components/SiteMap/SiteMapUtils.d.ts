@@ -1791,6 +1791,7 @@ export namespace SITE_MAP_PROP_TYPES {
     export const aspectRatio: PropTypes.Requireable<number>;
     export const fullscreen: PropTypes.Requireable<boolean>;
     export const unusableVerticalSpace: PropTypes.Requireable<number>;
+    export const mapUniqueId: PropTypes.Requireable<number>;
     export const mapCenter: PropTypes.Requireable<(number | null | undefined)[]>;
     export const mapZoom: PropTypes.Requireable<number>;
     export const mapBaseLayer: PropTypes.Requireable<string>;
@@ -1816,6 +1817,8 @@ export namespace SITE_MAP_DEFAULT_PROPS {
     export { fullscreen_1 as fullscreen };
     const unusableVerticalSpace_1: number;
     export { unusableVerticalSpace_1 as unusableVerticalSpace };
+    const mapUniqueId_1: number;
+    export { mapUniqueId_1 as mapUniqueId };
     export { OBSERVATORY_CENTER as mapCenter };
     const mapZoom_1: null;
     export { mapZoom_1 as mapZoom };
