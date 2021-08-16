@@ -148,6 +148,7 @@ const MyAppComponent = () => {
         <div key={productData.productCode} style={{ marginBottom: '20px' }}>
           <hr />
           <DownloadDataContext.Provider
+            downloadDataContextUniqueId={0}
             productData={productData}
             stateObservable={() => higherOrderSubject.asObservable()}
           >
@@ -332,6 +333,7 @@ const productData = {
       </DocBlock>
       <ExampleBlock>
         <DownloadDataContext.Provider
+          downloadDataContextUniqueId={1}
           productData={sampleProductData3.data}
           release="test-tag-1"
           sites={['ARIK']}
@@ -341,6 +343,7 @@ const productData = {
           <DownloadDataButton />
         </DownloadDataContext.Provider>
         <DownloadDataContext.Provider
+          downloadDataContextUniqueId={2}
           productData={sampleProductData3.data}
         >
           <DownloadDataButton label="No Props" />

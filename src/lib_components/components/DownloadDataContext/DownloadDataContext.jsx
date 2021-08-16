@@ -966,13 +966,14 @@ let shouldRestoreState = true;
 // Provider
 const Provider = (props) => {
   const {
+    downloadDataContextUniqueId,
     stateObservable,
     children,
   } = props;
 
   // get the initial state from storage if present, else get from props.
   let initialState = getInitialStateFromProps(props);
-  const stateStorage = makeStateStorage('downloadDataContextState');
+  const stateStorage = makeStateStorage(`downloadDataContextState-${downloadDataContextUniqueId}`);
   const savedState = stateStorage.readState();
   if (savedState && shouldRestoreState) {
     shouldRestoreState = false;
@@ -1129,6 +1130,7 @@ const Provider = (props) => {
 };
 
 Provider.propTypes = {
+  downloadDataContextUniqueId: PropTypes.number,
   stateObservable: PropTypes.func,
   productData: PropTypes.shape({
     productCode: PropTypes.string.isRequired,
@@ -1159,6 +1161,7 @@ Provider.propTypes = {
 };
 
 Provider.defaultProps = {
+  downloadDataContextUniqueId: 0,
   stateObservable: null,
   productData: {},
   availabilityView: DEFAULT_STATE.availabilityView,

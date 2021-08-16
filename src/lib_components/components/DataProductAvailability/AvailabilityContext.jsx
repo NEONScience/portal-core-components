@@ -12,6 +12,11 @@ import NeonContext from '../NeonContext/NeonContext';
 
 import { AvailabilityPropTypes } from './AvailabilityUtils';
 
+import NeonSignInButtonState from '../NeonSignInButton/NeonSignInButtonState';
+import makeStateStorage from '../../service/StateStorageService';
+// eslint-disable-next-line import/extensions
+import { convertStateForStorage, convertStateFromStorage } from './StateStorageConverter';
+
 const SORT_DIRECTIONS = { ASC: 'ASC', DESC: 'DESC' };
 const DEFAULT_STATE = {
   sites: [],
@@ -195,25 +200,53 @@ const useAvailabilityState = () => {
   return hookResponse;
 };
 
+let shouldRestoreState = true;
+
 /**
    Context Provider
 */
 const Provider = (props) => {
-  const { sites, children } = props;
+  const { sites, dataAvailabilityUniqueId, children } = props;
 
   const [
     { data: neonContextData, isFinal: neonContextIsFinal, hasError: neonContextHasError },
   ] = NeonContext.useNeonContextState();
+
+  const stateStorage = makeStateStorage(`availabilityContextState-${dataAvailabilityUniqueId}`);
+  const savedState = stateStorage.readState();
 
   /**
      Initial State and Reducer Setup
   */
   let initialState = { ...cloneDeep(DEFAULT_STATE), sites };
   initialState.tables = extractTables(initialState);
-  if (neonContextIsFinal && !neonContextHasError) {
+  if (neonContextIsFinal && !neonContextHasError && !savedState) {
     initialState = hydrateNeonContextData(initialState, neonContextData);
   }
+
+  if (savedState && shouldRestoreState) {
+    shouldRestoreState = false;
+    const convertedState = convertStateFromStorage(savedState);
+    stateStorage.removeState();
+    initialState = convertedState;
+  }
+
   const [state, dispatch] = useReducer(reducer, calculateRows(initialState));
+
+  // The current sign in process uses a separate domain. This function
+  // persists the current state in storage when the button is clicked
+  // so the state may be reloaded when the page is reloaded after sign
+  // in.
+  useEffect(() => {
+    const subscription = NeonSignInButtonState.getObservable().subscribe({
+      next: () => {
+        shouldRestoreState = false;
+        const convertedState = convertStateForStorage(state);
+        stateStorage.saveState(convertedState);
+      },
+    });
+    return () => { subscription.unsubscribe(); };
+  }, [state, stateStorage]);
 
   /**
      Effect - Watch for changes to NeonContext data and push into local state
@@ -241,6 +274,7 @@ const Provider = (props) => {
 };
 
 Provider.propTypes = {
+  dataAvailabilityUniqueId: PropTypes.number,
   sites: AvailabilityPropTypes.enhancedSites,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.oneOfType([
@@ -253,6 +287,7 @@ Provider.propTypes = {
 };
 
 Provider.defaultProps = {
+  dataAvailabilityUniqueId: 0,
   sites: [],
 };
 
