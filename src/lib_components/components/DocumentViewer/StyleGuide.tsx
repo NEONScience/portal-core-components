@@ -40,8 +40,25 @@ import DocumentViewer from 'portal-core-components/lib/components/DocumentViewer
       <Divider className={classes.divider} />
       <Typography variant="h6" component="h4" gutterBottom>Example Document Viewer</Typography>
       <DocBlock>
-        Displays a single embeded document.
+        Displays a single embedded document.
       </DocBlock>
+      <CodeBlock>
+        {`
+import DocumentViewer from 'portal-core-components/lib/components/DocumentViewer';
+
+const exampleDoc: NeonDocument = {
+  name: 'NEON.DOC.000780vB.pdf',
+  type: 'application/pdf',
+  size: 993762,
+  description: 'NEON Algorithm Theoretical Basis Document (ATBD) – 2D Wind Speed and Direction',
+};
+
+<DocumentViewer
+  document={exampleDoc}
+  width={800}
+/>
+        `}
+      </CodeBlock>
       <ExampleBlock>
         <DocumentViewer
           document={exampleDoc}
