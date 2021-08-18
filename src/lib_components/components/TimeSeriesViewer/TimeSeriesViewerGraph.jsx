@@ -30,8 +30,9 @@ import HideIcon from '@material-ui/icons/VisibilityOff';
 
 import generateTimeSeriesGraphData from '../../workers/generateTimeSeriesGraphData';
 
-import TimeSeriesViewerContext, { TIME_SERIES_VIEWER_STATUS } from './TimeSeriesViewerContext';
+import TimeSeriesViewerContext from './TimeSeriesViewerContext';
 import Theme, { COLORS } from '../Theme/Theme';
+import { TIME_SERIES_VIEWER_STATUS } from './constants';
 
 import NeonLogo from '../../images/NSF-NEON-logo.png';
 
@@ -548,6 +549,7 @@ export default function TimeSeriesViewerGraph() {
 
   // Callback to refresh graph dimensions for current DOM
   const handleResize = useCallback(() => {
+    if (state.status !== TIME_SERIES_VIEWER_STATUS.READY) { return; }
     if (!dygraphRef.current || !legendRef.current || !graphInnerContainerRef.current) { return; }
     // Resize the graph relative to the legend width now that the legend is properly rendered
     const MIN_GRAPH_HEIGHT = 320;
@@ -575,6 +577,7 @@ export default function TimeSeriesViewerGraph() {
       }
     }
   }, [
+    state.status,
     dygraphRef,
     legendRef,
     graphInnerContainerRef,

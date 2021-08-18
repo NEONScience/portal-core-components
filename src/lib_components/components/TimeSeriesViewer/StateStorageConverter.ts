@@ -1,4 +1,5 @@
 import cloneDeep from 'lodash/cloneDeep';
+import { TIME_SERIES_VIEWER_STATUS } from './constants';
 
 /**
  * Alter the current state for valid JSON serialization.
@@ -6,6 +7,24 @@ import cloneDeep from 'lodash/cloneDeep';
  */
 const convertStateForStorage = (state: any): any => {
   const newState = cloneDeep(state);
+  switch (newState.status) {
+    case TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT:
+    case TIME_SERIES_VIEWER_STATUS.LOADING_META:
+    case TIME_SERIES_VIEWER_STATUS.READY_FOR_DATA:
+    case TIME_SERIES_VIEWER_STATUS.LOADING_DATA:
+    case TIME_SERIES_VIEWER_STATUS.WARNING:
+    case TIME_SERIES_VIEWER_STATUS.ERROR:
+      // TODO: determine if this should be reset to default state
+      // in case of an error, or intermediate state situation.
+      // eg. likely don't store state in that scenario
+      newState.status = TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT;
+      break;
+    case TIME_SERIES_VIEWER_STATUS.READY:
+      newState.status = TIME_SERIES_VIEWER_STATUS.READY_FOR_SERIES;
+      break;
+    default:
+      break;
+  }
   // variables
   const { variables: stateVariables } = state;
   Object.keys(stateVariables).forEach((variableKey, index) => {

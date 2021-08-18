@@ -146,7 +146,7 @@ const AllProductsTimeSeries = () => {
             );
           })}
         </Select>
-        <TimeSeriesViewer productCode={state.selectedProduct} />
+        <TimeSeriesViewer productCode={state.selectedProduct} timeSeriesUniqueId={1} />
       </div>
     );
   }

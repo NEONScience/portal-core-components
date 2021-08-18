@@ -9,9 +9,9 @@ import { mockAjaxResponse } from '../../../../__mocks__/ajax';
 import TimeSeriesViewerContext, {
   getTestableItems,
   summarizeTimeSteps,
-  TIME_SERIES_VIEWER_STATUS,
   Y_AXIS_RANGE_MODES,
 } from '../TimeSeriesViewerContext';
+import { TIME_SERIES_VIEWER_STATUS } from '../constants';
 
 const { Provider, useTimeSeriesViewerState } = TimeSeriesViewerContext;
 

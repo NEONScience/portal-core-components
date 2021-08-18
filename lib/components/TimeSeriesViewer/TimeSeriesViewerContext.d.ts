@@ -1,28 +1,11 @@
-export namespace TIME_SERIES_VIEWER_STATUS {
+export namespace TIME_SERIES_VIEWER_STATUS_TITLES {
     const INIT_PRODUCT: string;
     const LOADING_META: string;
     const READY_FOR_DATA: string;
     const LOADING_DATA: string;
-    const ERROR: string;
-    const WARNING: string;
     const READY_FOR_SERIES: string;
-    const READY: string;
-}
-export namespace TIME_SERIES_VIEWER_STATUS_TITLES {
-    const INIT_PRODUCT_1: string;
-    export { INIT_PRODUCT_1 as INIT_PRODUCT };
-    const LOADING_META_1: string;
-    export { LOADING_META_1 as LOADING_META };
-    const READY_FOR_DATA_1: string;
-    export { READY_FOR_DATA_1 as READY_FOR_DATA };
-    const LOADING_DATA_1: string;
-    export { LOADING_DATA_1 as LOADING_DATA };
-    const READY_FOR_SERIES_1: string;
-    export { READY_FOR_SERIES_1 as READY_FOR_SERIES };
-    const ERROR_1: null;
-    export { ERROR_1 as ERROR };
-    const READY_1: null;
-    export { READY_1 as READY };
+    const ERROR: null;
+    const READY: null;
 }
 export namespace Y_AXIS_RANGE_MODES {
     const CENTERED: string;
@@ -59,8 +42,7 @@ export namespace TabComponentPropTypes {
 export namespace DEFAULT_STATE {
     import mode = VIEWER_MODE.DEFAULT;
     export { mode };
-    import status = TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT;
-    export { status };
+    export const status: string;
     export const displayError: null;
     export namespace fetchProduct {
         import status_1 = FETCH_STATUS.AWAITING_CALL;
@@ -306,8 +288,8 @@ declare namespace VIEWER_MODE {
 declare namespace FETCH_STATUS {
     export const AWAITING_CALL: string;
     export const FETCHING: string;
-    const ERROR_2: string;
-    export { ERROR_2 as ERROR };
+    const ERROR_1: string;
+    export { ERROR_1 as ERROR };
     export const SUCCESS: string;
 }
 declare namespace TimeSeriesViewerContext {

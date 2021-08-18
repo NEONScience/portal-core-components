@@ -34,6 +34,7 @@ import parseTimeSeriesData from '../../workers/parseTimeSeriesData';
 import NeonSignInButtonState from '../NeonSignInButton/NeonSignInButtonState';
 import makeStateStorage from '../../service/StateStorageService';
 import { convertStateForStorage, convertStateFromStorage } from './StateStorageConverter';
+import { TIME_SERIES_VIEWER_STATUS } from './constants';
 
 // 'get' is a reserved word so can't be imported with import
 const lodashGet = require('lodash/get.js');
@@ -49,18 +50,6 @@ const FETCH_STATUS = {
   FETCHING: 'FETCHING',
   ERROR: 'ERROR',
   SUCCESS: 'SUCCESS',
-};
-
-// Every possible top-level status the TimeSeriesViewer component can have
-export const TIME_SERIES_VIEWER_STATUS = {
-  INIT_PRODUCT: 'INIT_PRODUCT', // Handling props; fetching product data if needed
-  LOADING_META: 'LOADING_META', // Actively loading meta data (sites, variables, and positions)
-  READY_FOR_DATA: 'READY_FOR_DATA', // Ready to trigger fetches for data
-  LOADING_DATA: 'LOADING_DATA', // Actively loading plottable series data
-  ERROR: 'ERROR', // Stop everything because problem, do not trigger new fetches no matter what
-  WARNING: 'WARNING', // Current selection/data makes a graph not possible; show warning
-  READY_FOR_SERIES: 'READY_FOR_SERIES', // Ready to re-calculate series data for the graph
-  READY: 'READY', // Ready for user input
 };
 
 export const TIME_SERIES_VIEWER_STATUS_TITLES = {
@@ -1136,8 +1125,14 @@ const reducer = (state, action) => {
       return state;
   }
 };
-
-let shouldRestoreState = true;
+/**
+ * Defines a lookup of state key to a boolean
+ * designating whether or not that instance of the context
+ * should pull the state from the session storage and restore.
+ * Keeping this lookup outside of the context provider function
+ * as to not incur lifecycle interference by storing with useState.
+ */
+const restoreStateLookup = {};
 
 /**
    Context Provider
@@ -1173,10 +1168,15 @@ const Provider = (props) => {
 
   // get the state from storage if present
   const { productCode } = initialState.product;
-  const stateStorage = makeStateStorage(`timeSeriesContextState-${productCode}-${timeSeriesUniqueId}`);
+  const key = `timeSeriesContextState-${productCode}-${timeSeriesUniqueId}`;
+  if (typeof restoreStateLookup[key] === 'undefined') {
+    restoreStateLookup[key] = true;
+  }
+  const shouldRestoreState = restoreStateLookup[key];
+  const stateStorage = makeStateStorage(key);
   const savedState = stateStorage.readState();
   if (savedState && shouldRestoreState) {
-    shouldRestoreState = false;
+    restoreStateLookup[key] = false;
     const convertedState = convertStateFromStorage(savedState);
     stateStorage.removeState();
     initialState = convertedState;
@@ -1191,13 +1191,13 @@ const Provider = (props) => {
   useEffect(() => {
     const subscription = NeonSignInButtonState.getObservable().subscribe({
       next: () => {
-        shouldRestoreState = false;
+        restoreStateLookup[key] = false;
         const convertedState = convertStateForStorage(state);
         stateStorage.saveState(convertedState);
       },
     });
     return () => { subscription.unsubscribe(); };
-  }, [state, stateStorage]);
+  }, [state, stateStorage, key]);
 
   /**
      Effect - Reinitialize state if the product code prop changed
