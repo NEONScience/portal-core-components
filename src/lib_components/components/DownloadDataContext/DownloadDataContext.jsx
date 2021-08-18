@@ -977,6 +977,7 @@ const Provider = (props) => {
   const savedState = stateStorage.readState();
   if (savedState && shouldRestoreState) {
     shouldRestoreState = false;
+    stateStorage.removeState();
     initialState = savedState;
   }
   const [state, dispatch] = useReducer(wrappedReducer, initialState);
