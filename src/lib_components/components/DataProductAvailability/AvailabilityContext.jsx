@@ -14,8 +14,6 @@ import { AvailabilityPropTypes } from './AvailabilityUtils';
 
 import NeonSignInButtonState from '../NeonSignInButton/NeonSignInButtonState';
 import makeStateStorage from '../../service/StateStorageService';
-// eslint-disable-next-line import/extensions
-import { convertStateForStorage, convertStateFromStorage } from './StateStorageConverter';
 
 const SORT_DIRECTIONS = { ASC: 'ASC', DESC: 'DESC' };
 const DEFAULT_STATE = {
@@ -226,9 +224,8 @@ const Provider = (props) => {
 
   if (savedState && shouldRestoreState) {
     shouldRestoreState = false;
-    const convertedState = convertStateFromStorage(savedState);
     stateStorage.removeState();
-    initialState = convertedState;
+    initialState = savedState;
   }
 
   const [state, dispatch] = useReducer(reducer, calculateRows(initialState));
@@ -241,8 +238,7 @@ const Provider = (props) => {
     const subscription = NeonSignInButtonState.getObservable().subscribe({
       next: () => {
         shouldRestoreState = false;
-        const convertedState = convertStateForStorage(state);
-        stateStorage.saveState(convertedState);
+        stateStorage.saveState(state);
       },
     });
     return () => { subscription.unsubscribe(); };
