@@ -198,7 +198,14 @@ const useAvailabilityState = () => {
   return hookResponse;
 };
 
-let shouldRestoreState = true;
+/**
+ * Defines a lookup of state key to a boolean
+ * designating whether or not that instance of the context
+ * should pull the state from the session storage and restore.
+ * Keeping this lookup outside of the context provider function
+ * as to not incur lifecycle interference by storing with useState.
+ */
+const restoreStateLookup = {};
 
 /**
    Context Provider
@@ -210,7 +217,12 @@ const Provider = (props) => {
     { data: neonContextData, isFinal: neonContextIsFinal, hasError: neonContextHasError },
   ] = NeonContext.useNeonContextState();
 
-  const stateStorage = makeStateStorage(`availabilityContextState-${dataAvailabilityUniqueId}`);
+  const key = `availabilityContextState-${dataAvailabilityUniqueId}`;
+  if (typeof restoreStateLookup[key] === 'undefined') {
+    restoreStateLookup[key] = true;
+  }
+  const shouldRestoreState = restoreStateLookup[key];
+  const stateStorage = makeStateStorage(key);
   const savedState = stateStorage.readState();
 
   /**
@@ -223,7 +235,7 @@ const Provider = (props) => {
   }
 
   if (savedState && shouldRestoreState) {
-    shouldRestoreState = false;
+    restoreStateLookup[key] = false;
     stateStorage.removeState();
     initialState = savedState;
   }
@@ -237,12 +249,12 @@ const Provider = (props) => {
   useEffect(() => {
     const subscription = NeonSignInButtonState.getObservable().subscribe({
       next: () => {
-        shouldRestoreState = false;
+        restoreStateLookup[key] = false;
         stateStorage.saveState(state);
       },
     });
     return () => { subscription.unsubscribe(); };
-  }, [state, stateStorage]);
+  }, [state, stateStorage, key]);
 
   /**
      Effect - Watch for changes to NeonContext data and push into local state

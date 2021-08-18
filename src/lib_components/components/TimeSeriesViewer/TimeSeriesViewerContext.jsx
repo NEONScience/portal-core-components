@@ -1125,6 +1125,7 @@ const reducer = (state, action) => {
       return state;
   }
 };
+
 /**
  * Defines a lookup of state key to a boolean
  * designating whether or not that instance of the context

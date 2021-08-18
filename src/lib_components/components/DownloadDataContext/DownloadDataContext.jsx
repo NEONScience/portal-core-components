@@ -961,7 +961,14 @@ const getManifestAjaxObservable = (request) => (
   NeonApi.postJsonObservable(request.url, request.body, null, false)
 );
 
-let shouldRestoreState = true;
+/**
+ * Defines a lookup of state key to a boolean
+ * designating whether or not that instance of the context
+ * should pull the state from the session storage and restore.
+ * Keeping this lookup outside of the context provider function
+ * as to not incur lifecycle interference by storing with useState.
+ */
+const restoreStateLookup = {};
 
 // Provider
 const Provider = (props) => {
@@ -973,10 +980,16 @@ const Provider = (props) => {
 
   // get the initial state from storage if present, else get from props.
   let initialState = getInitialStateFromProps(props);
-  const stateStorage = makeStateStorage(`downloadDataContextState-${downloadDataContextUniqueId}`);
+  const { productCode: product } = initialState.productData;
+  const stateKey = `downloadDataContextState-${product}-${downloadDataContextUniqueId}`;
+  if (typeof restoreStateLookup[stateKey] === 'undefined') {
+    restoreStateLookup[stateKey] = true;
+  }
+  const shouldRestoreState = restoreStateLookup[stateKey];
+  const stateStorage = makeStateStorage(stateKey);
   const savedState = stateStorage.readState();
   if (savedState && shouldRestoreState) {
-    shouldRestoreState = false;
+    restoreStateLookup[stateKey] = false;
     stateStorage.removeState();
     initialState = savedState;
   }
@@ -989,7 +1002,7 @@ const Provider = (props) => {
   useEffect(() => {
     const subscription = NeonSignInButtonState.getObservable().subscribe({
       next: () => {
-        shouldRestoreState = false;
+        restoreStateLookup[stateKey] = false;
         stateStorage.saveState(state);
       },
     });

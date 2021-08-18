@@ -977,9 +977,7 @@ const reducer = (state, action) => {
   }
 };
 
-/**
-   Context and Hook
-*/
+/** Context and Hook */
 const Context = createContext(DEFAULT_STATE);
 const useSiteMapContext = () => {
   const hookResponse = useContext(Context);
@@ -989,11 +987,16 @@ const useSiteMapContext = () => {
   return hookResponse;
 };
 
-let shouldRestoreState = true;
-
 /**
-   Context Provider
-*/
+ * Defines a lookup of state key to a boolean
+ * designating whether or not that instance of the context
+ * should pull the state from the session storage and restore.
+ * Keeping this lookup outside of the context provider function
+ * as to not incur lifecycle interference by storing with useState.
+ */
+const restoreStateLookup = {};
+
+/** Context Provider */
 const Provider = (props) => {
   const {
     view,
@@ -1076,7 +1079,12 @@ const Provider = (props) => {
   }
 
   // get the initial state from storage if present
-  const stateStorage = makeStateStorage(`siteMapContextState-${mapUniqueId}`);
+  const stateKey = `siteMapContextState-${mapUniqueId}`;
+  if (typeof restoreStateLookup[stateKey] === 'undefined') {
+    restoreStateLookup[stateKey] = true;
+  }
+  const shouldRestoreState = restoreStateLookup[stateKey];
+  const stateStorage = makeStateStorage(stateKey);
   const savedState = stateStorage.readState();
 
   if (neonContextIsFinal && !neonContextHasError && !savedState) {
@@ -1088,7 +1096,7 @@ const Provider = (props) => {
   }
 
   if (savedState && shouldRestoreState) {
-    shouldRestoreState = false;
+    restoreStateLookup[stateKey] = false;
     const restoredState = convertStateFromStorage(savedState, initialState);
     stateStorage.removeState();
     initialState = calculateZoomState(restoredState.map.zoom, restoredState, true);
@@ -1103,12 +1111,12 @@ const Provider = (props) => {
   useEffect(() => {
     const subscription = NeonSignInButtonState.getObservable().subscribe({
       next: () => {
-        shouldRestoreState = false;
+        restoreStateLookup[stateKey] = false;
         stateStorage.saveState(convertStateForStorage(state));
       },
     });
     return () => { subscription.unsubscribe(); };
-  }, [state, stateStorage]);
+  }, [state, stateStorage, stateKey]);
 
   const canFetchFeatureData = (
     state.neonContextHydrated
