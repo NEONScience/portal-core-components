@@ -51,8 +51,8 @@ import MapSelectionButton from '../MapSelectionButton/MapSelectionButton';
 
 import iconCoreTerrestrialSVG from '../SiteMap/svg/icon-site-core-terrestrial.svg';
 import iconCoreAquaticSVG from '../SiteMap/svg/icon-site-core-aquatic.svg';
-import iconRelocatableTerrestrialSVG from '../SiteMap/svg/icon-site-relocatable-terrestrial.svg';
-import iconRelocatableAquaticSVG from '../SiteMap/svg/icon-site-relocatable-aquatic.svg';
+import iconGradientTerrestrialSVG from '../SiteMap/svg/icon-site-gradient-terrestrial.svg';
+import iconGradientAquaticSVG from '../SiteMap/svg/icon-site-gradient-aquatic.svg';
 
 import TimeSeriesViewerContext, { TabComponentPropTypes } from './TimeSeriesViewerContext';
 
@@ -63,9 +63,9 @@ const ICON_SVGS = {
     AQUATIC: iconCoreAquaticSVG,
     TERRESTRIAL: iconCoreTerrestrialSVG,
   },
-  RELOCATABLE: {
-    AQUATIC: iconRelocatableAquaticSVG,
-    TERRESTRIAL: iconRelocatableTerrestrialSVG,
+  GRADIENT: {
+    AQUATIC: iconGradientAquaticSVG,
+    TERRESTRIAL: iconGradientTerrestrialSVG,
   },
 };
 
@@ -844,9 +844,9 @@ function SelectedSite(props) {
     } = allSites[siteCode];
     let typeTitle = 'Core';
     let typeSubtitle = 'fixed location';
-    if (type === 'RELOCATABLE') {
-      typeTitle = 'Relocatable';
-      typeSubtitle = 'location may change';
+    if (type === 'GRADIENT') {
+      typeTitle = 'Gradient';
+      typeSubtitle = 'gradient location';
     }
     let terrainTitle = 'Terrestrial';
     let terrainSubtitle = 'land-based';

@@ -33,7 +33,7 @@ jest.mock('leaflet', () => ({
 const neonContextData = {
   sites: {
     ABBY: {
-      type: 'RELOCATABLE', terrain: 'TERRESTRIAL', stateCode: 'WA', domainCode: 'D16',
+      type: 'GRADIENT', terrain: 'TERRESTRIAL', stateCode: 'WA', domainCode: 'D16',
     },
     CLBJ: {
       type: 'CORE', terrain: 'TERRESTRIAL', stateCode: 'TX', domainCode: 'D11',
@@ -42,7 +42,7 @@ const neonContextData = {
       type: 'CORE', terrain: 'AQUATIC', stateCode: 'FL', domainCode: 'D03',
     },
     WLOU: {
-      type: 'RELOCATABLE', terrain: 'AQUATIC', stateCode: 'CO', domainCode: 'D13',
+      type: 'GRADIENT', terrain: 'AQUATIC', stateCode: 'CO', domainCode: 'D13',
     },
   },
   states: {
@@ -309,8 +309,8 @@ describe('SiteMap - SiteMapUtils', () => {
           SITES: {
             TERRESTRIAL_CORE_SITES: {},
             AQUATIC_CORE_SITES: {},
-            TERRESTRIAL_RELOCATABLE_SITES: {},
-            AQUATIC_RELOCATABLE_SITES: {},
+            TERRESTRIAL_GRADIENT_SITES: {},
+            AQUATIC_GRADIENT_SITES: {},
           },
           STATES: { STATES: {} },
           DOMAINS: { DOMAINS: {} },
@@ -327,10 +327,10 @@ describe('SiteMap - SiteMapUtils', () => {
             AQUATIC_CORE_SITES: {
               SUGG: { ...neonContextData.sites.SUGG },
             },
-            TERRESTRIAL_RELOCATABLE_SITES: {
+            TERRESTRIAL_GRADIENT_SITES: {
               ABBY: { ...neonContextData.sites.ABBY },
             },
-            AQUATIC_RELOCATABLE_SITES: {
+            AQUATIC_GRADIENT_SITES: {
               WLOU: { ...neonContextData.sites.WLOU },
             },
           },
@@ -816,12 +816,12 @@ describe('SiteMap - SiteMapUtils', () => {
       });
     });
     test('Handles explicit highlight status', () => {
-      getZoomedIcon(FEATURES.TERRESTRIAL_RELOCATABLE_SITES.KEY, 7, HIGHLIGHT_STATUS.HIGHLIGHT);
+      getZoomedIcon(FEATURES.TERRESTRIAL_GRADIENT_SITES.KEY, 7, HIGHLIGHT_STATUS.HIGHLIGHT);
       expect(L.Icon.mock.calls.length).toBe(1);
       expect(L.Icon.mock.calls[0].length).toBe(1);
       expect(L.Icon.mock.calls[0][0]).toStrictEqual({
-        iconUrl: 'icon-site-relocatable-terrestrial.svg',
-        iconRetinaUrl: 'icon-site-relocatable-terrestrial.svg',
+        iconUrl: 'icon-site-gradient-terrestrial.svg',
+        iconRetinaUrl: 'icon-site-gradient-terrestrial.svg',
         iconSize: [34, 34],
         iconAnchor: [17, 17],
         popupAnchor: [0, -17],
@@ -832,7 +832,7 @@ describe('SiteMap - SiteMapUtils', () => {
     });
     test('Handles explicit selection status', () => {
       getZoomedIcon(
-        FEATURES.AQUATIC_RELOCATABLE_SITES.KEY,
+        FEATURES.AQUATIC_GRADIENT_SITES.KEY,
         15,
         HIGHLIGHT_STATUS.NONE,
         SELECTION_STATUS.SELECTED,
@@ -840,8 +840,8 @@ describe('SiteMap - SiteMapUtils', () => {
       expect(L.Icon.mock.calls.length).toBe(1);
       expect(L.Icon.mock.calls[0].length).toBe(1);
       expect(L.Icon.mock.calls[0][0]).toStrictEqual({
-        iconUrl: 'icon-site-relocatable-aquatic-selected.svg',
-        iconRetinaUrl: 'icon-site-relocatable-aquatic-selected.svg',
+        iconUrl: 'icon-site-gradient-aquatic-selected.svg',
+        iconRetinaUrl: 'icon-site-gradient-aquatic-selected.svg',
         iconSize: [79.75, 79.75],
         iconAnchor: [39.875, 39.875],
         popupAnchor: [0, -39.875],

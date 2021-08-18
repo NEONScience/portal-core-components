@@ -212,7 +212,7 @@ describe('TimeSeriesViewerSites', () => {
       const data = {
         siteCode: 'ABBY',
         description: 'Abby Road',
-        type: 'RELOCATABLE',
+        type: 'GRADIENT',
         stateCode: 'WA',
         domainCode: 'D16',
         domainName: 'D16 Name',
@@ -238,7 +238,7 @@ describe('TimeSeriesViewerSites', () => {
     beforeEach(() => {
       useTimeSeriesViewerState.mockReturnValue([cloneDeep(DEFAULT_STATE), () => {}]);
     });
-    test('Renders as expected (terrestrial / relocatable)', () => {
+    test('Renders as expected (terrestrial / gradient)', () => {
       const tree = renderer.create(
         <SelectedSite site={{ siteCode: 'ABBY', positions: ['000.020', '000.010'] }} />,
       ).toJSON();
@@ -250,7 +250,7 @@ describe('TimeSeriesViewerSites', () => {
       ).toJSON();
       expect(tree).toMatchSnapshot();
     });
-    test('Renders as expected (aquatic / relocatable)', () => {
+    test('Renders as expected (aquatic / gradient)', () => {
       const tree = renderer.create(
         <SelectedSite site={{ siteCode: 'BIGC', positions: ['000.030', '000.010'] }} />,
       ).toJSON();

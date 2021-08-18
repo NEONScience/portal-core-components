@@ -94,7 +94,8 @@
     "lib:clean-build": "npm run lib:clean && npm run lib",
     "lib:types": "npx tsc --project tsconfig.d.json",
     "lib:pre-process": "node ./scripts/lib/lib-cache-remote-assets.js",
-    "lib:post-cleanup": "rm ./lib/components/**/StyleGuide.* && rm -rf ./lib/components/SiteMap/png && rm -rf ./lib/*/__tests__ && rm -rf ./lib/*/*/__tests__ && node ./scripts/lib/lib-fix-worker-babel.js"
+    "lib:post-cleanup": "rm ./lib/components/**/StyleGuide.* && rm -rf ./lib/components/SiteMap/png && rm -rf ./lib/*/__tests__ && rm -rf ./lib/*/*/__tests__ && node ./scripts/lib/lib-fix-worker-babel.js",
+    "checks": "npm run lint && npm run test && npm run lib && npm run build"
   },
   "browserslist": [
     ">0.2%",

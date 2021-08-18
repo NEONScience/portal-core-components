@@ -3,6 +3,7 @@ import { ajax } from 'rxjs/ajax';
 
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonApi from '../NeonApi/NeonApi';
+import { isStringNonEmpty } from '../../util/typeUtil';
 
 export const TYPES = {
   DATA_PRODUCTS: 'DATA_PRODUCTS',
@@ -17,6 +18,19 @@ export const DIMENSIONALITIES = {
 
 const transformQuery = (query) => JSON.stringify({ query });
 
+const getAvailableReleaseClause = (args) => {
+  if (!args) return '';
+  const hasRelease = isStringNonEmpty(args.release);
+  let availableReleases = '';
+  if ((args.includeAvailableReleases === true) && !hasRelease) {
+    availableReleases = `availableReleases {
+      release
+      availableMonths
+    }`;
+  }
+  return availableReleases;
+};
+
 const getQueryBody = (type = '', dimensionality = '', args = {}) => {
   let query = '';
   switch (type) {
@@ -24,6 +38,7 @@ const getQueryBody = (type = '', dimensionality = '', args = {}) => {
       if (dimensionality === DIMENSIONALITIES.ONE) {
         // TODO: Add support for deeper product data when querying for one
         const releaseArgument = !args.release ? '' : `, release: "${args.release}"`;
+        const availableReleases = getAvailableReleaseClause(args);
         query = `query Products {
           product (productCode: "${args.productCode}"${releaseArgument}) {
             productCode
@@ -39,6 +54,7 @@ const getQueryBody = (type = '', dimensionality = '', args = {}) => {
             siteCodes {
               siteCode
               availableMonths
+              ${availableReleases}
             }
             releases {
               release
@@ -49,6 +65,7 @@ const getQueryBody = (type = '', dimensionality = '', args = {}) => {
         }`;
       } else {
         const releaseArgument = !args.release ? '' : `(release: "${args.release}")`;
+        const availableReleases = getAvailableReleaseClause(args);
         query = `query Products {
           products ${releaseArgument}{
             productCode
@@ -64,6 +81,7 @@ const getQueryBody = (type = '', dimensionality = '', args = {}) => {
             siteCodes {
               siteCode
               availableMonths
+              ${availableReleases}
             }
             releases {
               release
@@ -132,7 +150,7 @@ const getQueryBody = (type = '', dimensionality = '', args = {}) => {
       } else {
         query = `query findLocations {
           locations: findLocations(
-            query: { 
+            query: {
               locationNames: ${JSON.stringify(args.locationNames)}
             }
           ) {
@@ -209,10 +227,10 @@ const NeonGraphQL = {
     DIMENSIONALITIES.ONE,
     { productCode, release },
   ),
-  getAllDataProducts: (release) => getObservableWith(
+  getAllDataProducts: (release, includeAvailableReleases = false) => getObservableWith(
     TYPES.DATA_PRODUCTS,
     DIMENSIONALITIES.MANY,
-    { release },
+    { release, includeAvailableReleases },
   ),
   getSiteByCode: (siteCode) => getObservableWith(
     TYPES.SITES,

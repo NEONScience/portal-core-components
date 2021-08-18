@@ -1,7 +1,7 @@
 {
   "ABBY": {
     "description": "Abby Road",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "WA",
     "domainCode": "D16",
     "terrain": "TERRESTRIAL",
@@ -31,7 +31,7 @@
   },
   "BARR": {
     "description": "Utqiaġvik",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "AK",
     "domainCode": "D18",
     "terrain": "TERRESTRIAL",
@@ -41,7 +41,7 @@
   },
   "BART": {
     "description": "Bartlett Experimental Forest",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "NH",
     "domainCode": "D01",
     "terrain": "TERRESTRIAL",
@@ -51,7 +51,7 @@
   },
   "BIGC": {
     "description": "Upper Big Creek",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "CA",
     "domainCode": "D17",
     "terrain": "AQUATIC",
@@ -61,7 +61,7 @@
   },
   "BLAN": {
     "description": "Blandy Experimental Farm",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "VA",
     "domainCode": "D02",
     "terrain": "TERRESTRIAL",
@@ -81,7 +81,7 @@
   },
   "BLUE": {
     "description": "Blue River",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "OK",
     "domainCode": "D11",
     "terrain": "AQUATIC",
@@ -91,7 +91,7 @@
   },
   "BLWA": {
     "description": "Black Warrior River near Dead Lake",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "AL",
     "domainCode": "D08",
     "terrain": "AQUATIC",
@@ -171,7 +171,7 @@
   },
   "DCFS": {
     "description": "Dakota Coteau Field School",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "ND",
     "domainCode": "D09",
     "terrain": "TERRESTRIAL",
@@ -181,7 +181,7 @@
   },
   "DEJU": {
     "description": "Delta Junction",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "AK",
     "domainCode": "D19",
     "terrain": "TERRESTRIAL",
@@ -191,7 +191,7 @@
   },
   "DELA": {
     "description": "Dead Lake",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "AL",
     "domainCode": "D08",
     "terrain": "TERRESTRIAL",
@@ -201,7 +201,7 @@
   },
   "DSNY": {
     "description": "Disney Wilderness Preserve",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "FL",
     "domainCode": "D03",
     "terrain": "TERRESTRIAL",
@@ -211,7 +211,7 @@
   },
   "FLNT": {
     "description": "Flint River",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "GA",
     "domainCode": "D03",
     "terrain": "AQUATIC",
@@ -221,7 +221,7 @@
   },
   "GRSM": {
     "description": "Great Smoky Mountains National Park, Twin Creeks",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "TN",
     "domainCode": "D07",
     "terrain": "TERRESTRIAL",
@@ -241,7 +241,7 @@
   },
   "GUIL": {
     "description": "Rio Guilarte",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "PR",
     "domainCode": "D04",
     "terrain": "AQUATIC",
@@ -261,7 +261,7 @@
   },
   "HEAL": {
     "description": "Healy",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "AK",
     "domainCode": "D19",
     "terrain": "TERRESTRIAL",
@@ -281,7 +281,7 @@
   },
   "JERC": {
     "description": "Jones Ecological Research Center",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "GA",
     "domainCode": "D03",
     "terrain": "TERRESTRIAL",
@@ -291,7 +291,7 @@
   },
   "JORN": {
     "description": "Jornada LTER",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "NM",
     "domainCode": "D14",
     "terrain": "TERRESTRIAL",
@@ -310,8 +310,8 @@
     "zoom": 15
   },
   "KONA": {
-    "description": "Konza Prairie Biological Station - Relocatable",
-    "type": "RELOCATABLE",
+    "description": "Konza Prairie Biological Station - Gradient",
+    "type": "GRADIENT",
     "stateCode": "KS",
     "domainCode": "D06",
     "terrain": "TERRESTRIAL",
@@ -331,7 +331,7 @@
   },
   "LAJA": {
     "description": "Lajas Experimental Station",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "PR",
     "domainCode": "D04",
     "terrain": "TERRESTRIAL",
@@ -341,7 +341,7 @@
   },
   "LECO": {
     "description": "LeConte Creek",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "TN",
     "domainCode": "D07",
     "terrain": "AQUATIC",
@@ -351,7 +351,7 @@
   },
   "LENO": {
     "description": "Lenoir Landing",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "AL",
     "domainCode": "D08",
     "terrain": "TERRESTRIAL",
@@ -361,7 +361,7 @@
   },
   "LEWI": {
     "description": "Lewis Run",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "VA",
     "domainCode": "D02",
     "terrain": "AQUATIC",
@@ -371,7 +371,7 @@
   },
   "LIRO": {
     "description": "Little Rock Lake",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "WI",
     "domainCode": "D05",
     "terrain": "AQUATIC",
@@ -401,7 +401,7 @@
   },
   "MCDI": {
     "description": "McDiffett Creek",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "KS",
     "domainCode": "D06",
     "terrain": "AQUATIC",
@@ -411,7 +411,7 @@
   },
   "MCRA": {
     "description": "McRae Creek",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "OR",
     "domainCode": "D16",
     "terrain": "AQUATIC",
@@ -421,7 +421,7 @@
   },
   "MLBS": {
     "description": "Mountain Lake Biological Station",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "VA",
     "domainCode": "D07",
     "terrain": "TERRESTRIAL",
@@ -431,7 +431,7 @@
   },
   "MOAB": {
     "description": "Moab",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "UT",
     "domainCode": "D13",
     "terrain": "TERRESTRIAL",
@@ -451,7 +451,7 @@
   },
   "NOGP": {
     "description": "Northern Great Plains Research Laboratory",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "ND",
     "domainCode": "D09",
     "terrain": "TERRESTRIAL",
@@ -461,7 +461,7 @@
   },
   "OAES": {
     "description": "Klemme Range Research Station",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "OK",
     "domainCode": "D11",
     "terrain": "TERRESTRIAL",
@@ -531,7 +531,7 @@
   },
   "PRLA": {
     "description": "Prairie Lake at Dakota Coteau Field School",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "ND",
     "domainCode": "D09",
     "terrain": "AQUATIC",
@@ -571,7 +571,7 @@
   },
   "RMNP": {
     "description": "Rocky Mountain National Park, CASTNET",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "CO",
     "domainCode": "D10",
     "terrain": "TERRESTRIAL",
@@ -591,7 +591,7 @@
   },
   "SERC": {
     "description": "Smithsonian Environmental Research Center",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "MD",
     "domainCode": "D02",
     "terrain": "TERRESTRIAL",
@@ -611,7 +611,7 @@
   },
   "SOAP": {
     "description": "Soaproot Saddle",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "CA",
     "domainCode": "D17",
     "terrain": "TERRESTRIAL",
@@ -631,7 +631,7 @@
   },
   "STEI": {
     "description": "Steigerwaldt Land Services",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "WI",
     "domainCode": "D05",
     "terrain": "TERRESTRIAL",
@@ -641,7 +641,7 @@
   },
   "STER": {
     "description": "North Sterling, CO",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "CO",
     "domainCode": "D10",
     "terrain": "TERRESTRIAL",
@@ -681,7 +681,7 @@
   },
   "TEAK": {
     "description": "Lower Teakettle",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "CA",
     "domainCode": "D17",
     "terrain": "TERRESTRIAL",
@@ -701,7 +701,7 @@
   },
   "TOMB": {
     "description": "Lower Tombigbee River at Choctaw Refuge",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "AL",
     "domainCode": "D08",
     "terrain": "AQUATIC",
@@ -711,7 +711,7 @@
   },
   "TOOK": {
     "description": "Toolik Lake",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "AK",
     "domainCode": "D18",
     "terrain": "AQUATIC",
@@ -731,7 +731,7 @@
   },
   "TREE": {
     "description": "Treehaven",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "WI",
     "domainCode": "D05",
     "terrain": "TERRESTRIAL",
@@ -741,7 +741,7 @@
   },
   "UKFS": {
     "description": "The University of Kansas Field Station",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "KS",
     "domainCode": "D06",
     "terrain": "TERRESTRIAL",
@@ -771,7 +771,7 @@
   },
   "WLOU": {
     "description": "West St Louis Creek",
-    "type": "RELOCATABLE",
+    "type": "GRADIENT",
     "stateCode": "CO",
     "domainCode": "D13",
     "terrain": "AQUATIC",
