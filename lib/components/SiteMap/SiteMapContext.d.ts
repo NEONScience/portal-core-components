@@ -36,9 +36,7 @@ declare namespace SiteMapContext {
     export { SORT_DIRECTIONS };
     export { VIEWS };
 }
-/**
-   Context Provider
-*/
+/** Context Provider */
 declare function Provider(props: any): JSX.Element;
 declare namespace Provider {
     export const propTypes: {
