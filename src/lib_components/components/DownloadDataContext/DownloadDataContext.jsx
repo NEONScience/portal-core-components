@@ -35,6 +35,8 @@ import {
 import { forkJoinWithProgress } from '../../util/rxUtil';
 import makeStateStorage from '../../service/StateStorageService';
 import NeonSignInButtonState from '../NeonSignInButton/NeonSignInButtonState';
+// eslint-disable-next-line import/no-cycle
+import { convertStateForStorage, convertAOPInitialState } from './StateStorageConverter';
 
 const ALL_POSSIBLE_VALID_DATE_RANGE = ['2010-01', moment().format('YYYY-MM')];
 const ALL_POSSIBLE_VALID_DOCUMENTATION = ['include', 'exclude'];
@@ -991,7 +993,7 @@ const Provider = (props) => {
   if (savedState && shouldRestoreState) {
     restoreStateLookup[stateKey] = false;
     stateStorage.removeState();
-    initialState = savedState;
+    initialState = convertAOPInitialState(savedState, initialState);
   }
   const [state, dispatch] = useReducer(wrappedReducer, initialState);
 
@@ -1006,7 +1008,7 @@ const Provider = (props) => {
       next: () => {
         if (!downloadContextIsActive || !dialogOpen) return;
         restoreStateLookup[stateKey] = false;
-        stateStorage.saveState(state);
+        stateStorage.saveState(convertStateForStorage(state));
       },
     });
     return () => {
