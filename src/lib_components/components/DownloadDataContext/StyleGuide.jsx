@@ -148,7 +148,7 @@ const MyAppComponent = () => {
         <div key={productData.productCode} style={{ marginBottom: '20px' }}>
           <hr />
           <DownloadDataContext.Provider
-            downloadDataContextUniqueId={0}
+            downloadDataContextUniqueId={5}
             productData={productData}
             stateObservable={() => higherOrderSubject.asObservable()}
           >
@@ -184,20 +184,6 @@ const MyAppComponent = () => {
 
 export default function StyleGuide() {
   const classes = useStyles(Theme);
-  const downloadDataButtonLink = (
-    <Link
-      href="#DownloadDataButton"
-    >
-      Download Data Button
-    </Link>
-  );
-  const dataProductAvailabilityLink = (
-    <Link
-      href="#DataProductAvailability"
-    >
-      Data Product Availability
-    </Link>
-  );
   const useReducerLink = (
     <Link
       target="_new"
@@ -247,12 +233,12 @@ import DownloadDataContext from 'portal-core-components/lib/components/DownloadD
         and a <tt>siteCodes</tt> array of site availability objects.
       </DocBlock>
       <ExampleBlock>
-        <div />
-        {/*
-        <DownloadDataContext.Provider productData={sampleProductData1.data}>
+        <DownloadDataContext.Provider
+          downloadDataContextUniqueId={0}
+          productData={sampleProductData1.data}
+        >
           <DownloadDataButton />
         </DownloadDataContext.Provider>
-        */}
       </ExampleBlock>
       <CodeBlock>
         {`
@@ -384,10 +370,9 @@ const productData = {...};
         configuration state, out of which individual state values can be destructured.
       </DocBlock>
       <ExampleBlock>
-        <div />
-        {/*
         <div>
           <DownloadDataContext.Provider
+            downloadDataContextUniqueId={3}
             productData={sampleProductData1.data}
             sites={selectedSites}
           >
@@ -396,7 +381,6 @@ const productData = {...};
             <DataProductAvailability />
           </DownloadDataContext.Provider>
         </div>
-         */}
       </ExampleBlock>
       <CodeBlock>
         {`
@@ -439,10 +423,9 @@ const ListSitesComponent = () => {
         appropriate, new data to apply.
       </DocBlock>
       <ExampleBlock>
-        <div />
-        {/*
         <div>
           <DownloadDataContext.Provider
+            downloadDataContextUniqueId={4}
             productData={sampleProductData1.data}
             sites={selectedSites}
           >
@@ -451,7 +434,6 @@ const ListSitesComponent = () => {
             <DataProductAvailability />
           </DownloadDataContext.Provider>
         </div>
-        */}
       </ExampleBlock>
       <CodeBlock>
         {`
@@ -571,10 +553,7 @@ const AlphaSitesComponent = () => {
         to the higher order component.
       </DocBlock>
       <ExampleBlock>
-        <div />
-        {/*
         <MyAppComponent />
-        */}
       </ExampleBlock>
       <CodeBlock>
         {`

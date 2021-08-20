@@ -1169,21 +1169,23 @@ const Provider = (props) => {
 
   // get the state from storage if present
   const { productCode } = initialState.product;
-  const key = `timeSeriesContextState-${productCode}-${timeSeriesUniqueId}`;
-  if (typeof restoreStateLookup[key] === 'undefined') {
-    restoreStateLookup[key] = true;
+  const stateKey = `timeSeriesContextState-${productCode}-${timeSeriesUniqueId}`;
+  if (typeof restoreStateLookup[stateKey] === 'undefined') {
+    restoreStateLookup[stateKey] = true;
   }
-  const shouldRestoreState = restoreStateLookup[key];
-  const stateStorage = makeStateStorage(key);
+  const shouldRestoreState = restoreStateLookup[stateKey];
+  const stateStorage = makeStateStorage(stateKey);
   const savedState = stateStorage.readState();
   if (savedState && shouldRestoreState) {
-    restoreStateLookup[key] = false;
+    restoreStateLookup[stateKey] = false;
     const convertedState = convertStateFromStorage(savedState);
     stateStorage.removeState();
     initialState = convertedState;
   }
 
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  const { viewerStatus } = state;
 
   // The current sign in process uses a separate domain. This function
   // persists the current state in storage when the button is clicked
@@ -1192,13 +1194,16 @@ const Provider = (props) => {
   useEffect(() => {
     const subscription = NeonSignInButtonState.getObservable().subscribe({
       next: () => {
-        restoreStateLookup[key] = false;
+        if (viewerStatus !== TIME_SERIES_VIEWER_STATUS.READY) return;
+        restoreStateLookup[stateKey] = false;
         const convertedState = convertStateForStorage(state);
         stateStorage.saveState(convertedState);
       },
     });
-    return () => { subscription.unsubscribe(); };
-  }, [state, stateStorage, key]);
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [viewerStatus, state, stateStorage, stateKey]);
 
   /**
      Effect - Reinitialize state if the product code prop changed

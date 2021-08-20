@@ -1,6 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+
+import AuthService from '../NeonAuth/AuthService';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonSignInButtonState from './NeonSignInButtonState';
 
@@ -13,7 +15,10 @@ const useStyles = makeStyles((theme) => ({
 const handleButtonClick = () => {
   // Notify observers the sign in button has been clicked.
   NeonSignInButtonState.sendNotification();
-  document.location.href = NeonEnvironment.getFullAuthPath('login');
+  AuthService.login(
+    NeonEnvironment.getFullAuthPath('login'),
+    AuthService.getLoginRedirectUri(),
+  );
 };
 
 export default function NeonSignInButton() {

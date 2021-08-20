@@ -945,7 +945,7 @@ const useDownloadDataState = () => {
         requiredSteps: [],
         downloadContextIsActive: false,
       },
-      () => { },
+      () => {},
     ];
   }
   return hookResponse;
@@ -995,6 +995,8 @@ const Provider = (props) => {
   }
   const [state, dispatch] = useReducer(wrappedReducer, initialState);
 
+  const { downloadContextIsActive, dialogOpen } = state;
+
   // The current sign in process uses a separate domain. This function
   // persists the current state in storage when the button is clicked
   // so the state may be reloaded when the page is reloaded after sign
@@ -1002,12 +1004,15 @@ const Provider = (props) => {
   useEffect(() => {
     const subscription = NeonSignInButtonState.getObservable().subscribe({
       next: () => {
+        if (!downloadContextIsActive || !dialogOpen) return;
         restoreStateLookup[stateKey] = false;
         stateStorage.saveState(state);
       },
     });
-    return () => { stateStorage.removeState(); subscription.unsubscribe(); };
-  });
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [downloadContextIsActive, dialogOpen, state, stateKey, stateStorage]);
 
   // Create an observable for manifests requests and subscribe to it to execute
   // the manifest fetch and dispatch results when updated.

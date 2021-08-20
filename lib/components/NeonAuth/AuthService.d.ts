@@ -32,6 +32,11 @@ export interface IAuthService {
      */
     isAuthOnlyApp: () => boolean;
     /**
+     * Gets the redirect URI to send to the login endpoint.
+     * @return {Undef<string>}
+     */
+    getLoginRedirectUri: () => Undef<string>;
+    /**
      * Initializes a login flow
      * @param {string} path - Optionally path to set for the root login URL
      * @param {string} redirectUriPath - Optionally set the redirect path

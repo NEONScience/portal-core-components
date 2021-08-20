@@ -17,7 +17,7 @@ import NeonEnvironment, { INeonEnvironment } from '../NeonEnvironment/NeonEnviro
 
 import BrowserService from '../../util/browserUtil';
 import { getJson } from '../../util/rxUtil';
-import { exists } from '../../util/typeUtil';
+import { exists, isStringNonEmpty } from '../../util/typeUtil';
 import { AnyVoidFunc, Undef, AuthSilentType } from '../../types/core';
 
 const REDIRECT_URI: string = 'redirectUri';
@@ -67,6 +67,11 @@ export interface IAuthService {
    * @return {boolean}
    */
   isAuthOnlyApp: () => boolean;
+  /**
+   * Gets the redirect URI to send to the login endpoint.
+   * @return {Undef<string>}
+   */
+  getLoginRedirectUri: () => Undef<string>;
   /**
    * Initializes a login flow
    * @param {string} path - Optionally path to set for the root login URL
@@ -290,6 +295,12 @@ const AuthService: IAuthService = {
       NeonEnvironment.route.account(),
     ].indexOf(NeonEnvironment.getRouterBaseHomePath() || '') >= 0
   ),
+  getLoginRedirectUri: (): Undef<string> => {
+    const appHomePath: string = NeonEnvironment.getRouterBaseHomePath();
+    const currentPath: string = window.location.pathname;
+    const hasPath: boolean = isStringNonEmpty(currentPath) && currentPath.includes(appHomePath);
+    return hasPath ? currentPath : undefined;
+  },
   login: (path?: string, redirectUriPath?: string): void => {
     const env: INeonEnvironment = NeonEnvironment;
     const rootPath: string = exists(path)

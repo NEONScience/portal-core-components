@@ -14,9 +14,6 @@ const convertStateForStorage = (state: any): any => {
     case TIME_SERIES_VIEWER_STATUS.LOADING_DATA:
     case TIME_SERIES_VIEWER_STATUS.WARNING:
     case TIME_SERIES_VIEWER_STATUS.ERROR:
-      // TODO: determine if this should be reset to default state
-      // in case of an error, or intermediate state situation.
-      // eg. likely don't store state in that scenario
       newState.status = TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT;
       break;
     case TIME_SERIES_VIEWER_STATUS.READY:
