@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import cloneDeep from 'lodash/cloneDeep';
 
 import NeonContext from '../NeonContext/NeonContext';
+import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 
 import { AvailabilityPropTypes } from './AvailabilityUtils';
 
@@ -249,6 +250,7 @@ const Provider = (props) => {
   useEffect(() => {
     const subscription = NeonSignInButtonState.getObservable().subscribe({
       next: () => {
+        if (!NeonEnvironment.enableGlobalSignInState) return;
         restoreStateLookup[key] = false;
         stateStorage.saveState(state);
       },

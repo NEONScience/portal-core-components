@@ -1194,6 +1194,7 @@ const Provider = (props) => {
   useEffect(() => {
     const subscription = NeonSignInButtonState.getObservable().subscribe({
       next: () => {
+        if (!NeonEnvironment.enableGlobalSignInState) return;
         if (viewerStatus !== TIME_SERIES_VIEWER_STATUS.READY) return;
         restoreStateLookup[stateKey] = false;
         const convertedState = convertStateForStorage(state);

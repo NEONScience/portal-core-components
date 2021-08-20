@@ -14,6 +14,7 @@ import { map, catchError } from 'rxjs/operators';
 
 import NeonApi from '../NeonApi/NeonApi';
 import NeonContext from '../NeonContext/NeonContext';
+import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonSignInButtonState from '../NeonSignInButton/NeonSignInButtonState';
 import makeStateStorage from '../../service/StateStorageService';
 import { convertStateForStorage, convertStateFromStorage } from './StateStorageConverter';
@@ -1111,6 +1112,7 @@ const Provider = (props) => {
   useEffect(() => {
     const subscription = NeonSignInButtonState.getObservable().subscribe({
       next: () => {
+        if (!NeonEnvironment.enableGlobalSignInState) return;
         restoreStateLookup[stateKey] = false;
         stateStorage.saveState(convertStateForStorage(state));
       },
