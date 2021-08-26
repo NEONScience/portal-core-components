@@ -1222,7 +1222,7 @@ const SiteMapFeature = (props) => {
     AQUATIC_METEOROLOGICAL_STATIONS: renderLocationPopup,
     AQUATIC_PLANT_TRANSECTS: renderLocationPopup,
     AQUATIC_REACHES: renderBoundaryPopup,
-    AQUATIC_RELOCATABLE_SITES: renderSitePopup,
+    AQUATIC_GRADIENT_SITES: renderSitePopup,
     AQUATIC_RIPARIAN_ASSESSMENTS: renderLocationPopup,
     AQUATIC_SEDIMENT_POINTS: renderLocationPopup,
     AQUATIC_SENSOR_STATIONS: renderLocationPopup,
@@ -1310,7 +1310,7 @@ const SiteMapFeature = (props) => {
       );
     },
     TERRESTRIAL_CORE_SITES: renderSitePopup,
-    TERRESTRIAL_RELOCATABLE_SITES: renderSitePopup,
+    TERRESTRIAL_GRADIENT_SITES: renderSitePopup,
     TOWER_AIRSHEDS: renderBoundaryPopup,
     TOWER_BASE_PLOTS: (siteCode, location) => renderLocationPopup(siteCode, location, [
       renderPlotSizeAndSlope,

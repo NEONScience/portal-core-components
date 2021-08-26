@@ -11,6 +11,7 @@ import BasicComponents from './components/BasicComponents';
 import AopDataViewerStyleGuide from './lib_components/components/AopDataViewer/StyleGuide';
 import DataProductAvailabilityStyleGuide from './lib_components/components/DataProductAvailability/StyleGuide';
 import DataThemeIconStyleGuide from './lib_components/components/DataThemeIcon/StyleGuide';
+import DocumentViewerStyleGuide from './lib_components/components/DocumentViewer/StyleGuide';
 import DownloadDataButtonStyleGuide from './lib_components/components/DownloadDataButton/StyleGuide';
 import DownloadDataContextStyleGuide from './lib_components/components/DownloadDataContext/StyleGuide';
 import ExternalHostInfoStyleGuide from './lib_components/components/ExternalHostInfo/StyleGuide';
@@ -55,6 +56,11 @@ const sidebarLinks = [
     name: 'Data Theme Icon',
     hash: '#DataThemeIcon',
     component: DataThemeIconStyleGuide,
+  },
+  {
+    name: 'Document Viewer',
+    hash: '#DocumentViewer',
+    component: DocumentViewerStyleGuide,
   },
   {
     name: 'Download Data Button',

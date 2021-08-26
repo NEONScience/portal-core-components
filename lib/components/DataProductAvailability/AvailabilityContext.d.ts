@@ -38,6 +38,7 @@ declare namespace AvailabilityContext {
 declare function Provider(props: any): JSX.Element;
 declare namespace Provider {
     namespace propTypes {
+        const dataAvailabilityUniqueId: PropTypes.Requireable<number>;
         const sites: PropTypes.Requireable<(PropTypes.InferProps<{
             siteCode: PropTypes.Validator<string>;
             tables: PropTypes.Validator<(PropTypes.InferProps<{
@@ -52,11 +53,13 @@ declare namespace Provider {
         const children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
     }
     namespace defaultProps {
+        const dataAvailabilityUniqueId_1: number;
+        export { dataAvailabilityUniqueId_1 as dataAvailabilityUniqueId };
         const sites_1: never[];
         export { sites_1 as sites };
     }
 }
-declare function useAvailabilityState(): any[] | {
+declare function useAvailabilityState(): {
     sites: never[];
     tables: {};
     rows: {};
@@ -71,7 +74,22 @@ declare function useAvailabilityState(): any[] | {
         states: {};
         domains: {};
     };
-};
+} | ({
+    sites: never[];
+    tables: {};
+    rows: {};
+    rowTitles: {};
+    rowLabels: never[];
+    breakouts: never[];
+    validBreakouts: string[];
+    sortDirection: string;
+    neonContextHydrated: boolean;
+    reference: {
+        sites: {};
+        states: {};
+        domains: {};
+    };
+} | (() => void))[];
 declare namespace SORT_DIRECTIONS {
     const ASC: string;
     const DESC: string;

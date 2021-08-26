@@ -1,6 +1,6 @@
 {
   "name": "portal-core-components",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "main": "./lib/index.js",
   "private": true,
   "homepage": "http://localhost:3010/core-components",
@@ -13,6 +13,7 @@
     "@material-ui/styles": "^4.10.0",
     "@stomp/rx-stomp": "^0.3.5",
     "@stomp/stompjs": "^5.4.4",
+    "@types/lodash": "^4.14.172",
     "@types/react-router": "^5.1.8",
     "@types/react-router-dom": "^5.1.5",
     "@types/sockjs-client": "^1.1.1",
@@ -94,7 +95,8 @@
     "lib:clean-build": "npm run lib:clean && npm run lib",
     "lib:types": "npx tsc --project tsconfig.d.json",
     "lib:pre-process": "node ./scripts/lib/lib-cache-remote-assets.js",
-    "lib:post-cleanup": "rm ./lib/components/**/StyleGuide.* && rm -rf ./lib/components/SiteMap/png && rm -rf ./lib/*/__tests__ && rm -rf ./lib/*/*/__tests__ && node ./scripts/lib/lib-fix-worker-babel.js"
+    "lib:post-cleanup": "rm ./lib/components/**/StyleGuide.* && rm -rf ./lib/components/SiteMap/png && rm -rf ./lib/*/__tests__ && rm -rf ./lib/*/*/__tests__ && node ./scripts/lib/lib-fix-worker-babel.js",
+    "checks": "npm run lint && npm run test && npm run lib && npm run build"
   },
   "browserslist": [
     ">0.2%",

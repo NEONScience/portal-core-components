@@ -37,8 +37,8 @@ import DataThemeIcon from '../DataThemeIcon/DataThemeIcon';
 import ExternalHost from '../ExternalHost/ExternalHost';
 import ExternalHostInfo from '../ExternalHostInfo/ExternalHostInfo';
 import NeonContext from '../NeonContext/NeonContext';
-import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import Theme, { COLORS } from '../Theme/Theme';
+import NeonSignInButton from '../NeonSignInButton/NeonSignInButton';
 
 import RouteService from '../../service/RouteService';
 import {
@@ -410,12 +410,6 @@ export default function DownloadDataDialog() {
 
   const renderAuthSuggestion = () => {
     if (isAuthenticated) { return null; }
-    const signInLink = (
-      <Link target="_new" href={NeonEnvironment.getFullAuthPath('login')}>signing in</Link>
-    );
-    const benefitsLink = (
-      <Link target="_new" href={RouteService.getUserAccountsPath()}>here</Link>
-    );
     /* eslint-disable react/jsx-one-expression-per-line */
     const authStyles = { color: COLORS.GOLD[800], textAlign: 'right', whiteSpace: 'nowrap' };
     return (
@@ -428,7 +422,7 @@ export default function DownloadDataDialog() {
             fontWeight: 600,
           }}
         >
-          Have an account? Consider {signInLink} before proceeding.
+          Consider signing in or creating an account before proceeding.
         </Typography>
         <Typography
           variant="body2"
@@ -438,8 +432,9 @@ export default function DownloadDataDialog() {
             fontSize: '0.8rem',
           }}
         >
-          Learn more about the benefits of signing in {benefitsLink}.
+          <Link target="_new" href={RouteService.getUserAccountsPath()}>Learn</Link> the benefits of having an account.
         </Typography>
+        <NeonSignInButton />
       </>
     );
     /* eslint-enable react/jsx-one-expression-per-line */
@@ -466,8 +461,8 @@ export default function DownloadDataDialog() {
           {showDownloadButton ? renderDownloadButton() : null}
         </div>
         {showDownloadButton && !allStepsComplete ? (
-          <Typography variant="body2" style={{ marginTop: Theme.spacing(1) }}>
-            Complete all steps to enable download
+          <Typography variant="body2" style={{ marginTop: Theme.spacing(2) }}>
+            Complete all steps to enable download.
           </Typography>
         ) : null}
         {renderAuthSuggestion()}

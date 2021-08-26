@@ -28,10 +28,10 @@ import iconSiteCoreTerrestrialSVG from './svg/icon-site-core-terrestrial.svg';
 import iconSiteCoreTerrestrialSelectedSVG from './svg/icon-site-core-terrestrial-selected.svg';
 import iconSiteCoreAquaticSVG from './svg/icon-site-core-aquatic.svg';
 import iconSiteCoreAquaticSelectedSVG from './svg/icon-site-core-aquatic-selected.svg';
-import iconSiteRelocatableTerrestrialSVG from './svg/icon-site-relocatable-terrestrial.svg';
-import iconSiteRelocatableTerrestrialSelectedSVG from './svg/icon-site-relocatable-terrestrial-selected.svg';
-import iconSiteRelocatableAquaticSVG from './svg/icon-site-relocatable-aquatic.svg';
-import iconSiteRelocatableAquaticSelectedSVG from './svg/icon-site-relocatable-aquatic-selected.svg';
+import iconSiteGradientTerrestrialSVG from './svg/icon-site-gradient-terrestrial.svg';
+import iconSiteGradientTerrestrialSelectedSVG from './svg/icon-site-gradient-terrestrial-selected.svg';
+import iconSiteGradientAquaticSVG from './svg/icon-site-gradient-aquatic.svg';
+import iconSiteGradientAquaticSelectedSVG from './svg/icon-site-gradient-aquatic-selected.svg';
 import iconSiteDecommissionedSVG from './svg/icon-site-decommissioned.svg';
 
 import iconBenchmarkSVG from './svg/icon-benchmark.svg';
@@ -1030,19 +1030,19 @@ export const FEATURES = {
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
     maxZoom: 9,
   },
-  TERRESTRIAL_RELOCATABLE_SITES: {
-    name: 'Terrestrial Relocatable Sites',
-    nameSingular: 'Terrestrial Relocatable Site',
+  TERRESTRIAL_GRADIENT_SITES: {
+    name: 'Terrestrial Gradient Sites',
+    nameSingular: 'Terrestrial Gradient Site',
     type: FEATURE_TYPES.SITES.KEY,
-    description: 'Land-based; location may change',
+    description: 'Land-based; gradient location',
     parent: 'SITE_MARKERS',
-    attributes: { type: 'RELOCATABLE', terrain: 'TERRESTRIAL' },
+    attributes: { type: 'GRADIENT', terrain: 'TERRESTRIAL' },
     dataSource: FEATURE_DATA_SOURCES.NEON_CONTEXT,
     primaryIdOnly: true,
     featureShape: 'Marker',
     iconScale: 1,
-    iconSvg: iconSiteRelocatableTerrestrialSVG,
-    iconSelectedSvg: iconSiteRelocatableTerrestrialSelectedSVG,
+    iconSvg: iconSiteGradientTerrestrialSVG,
+    iconSelectedSvg: iconSiteGradientTerrestrialSelectedSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
     maxZoom: 9,
   },
@@ -1062,19 +1062,19 @@ export const FEATURES = {
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
     maxZoom: 9,
   },
-  AQUATIC_RELOCATABLE_SITES: {
-    name: 'Aquatic Relocatable Sites',
-    nameSingular: 'Aquatic Relocatable Site',
+  AQUATIC_GRADIENT_SITES: {
+    name: 'Aquatic Gradient Sites',
+    nameSingular: 'Aquatic Gradient Site',
     type: FEATURE_TYPES.SITES.KEY,
-    description: 'Water-based; location may change',
+    description: 'Water-based; gradient location',
     parent: 'SITE_MARKERS',
-    attributes: { type: 'RELOCATABLE', terrain: 'AQUATIC' },
+    attributes: { type: 'GRADIENT', terrain: 'AQUATIC' },
     dataSource: FEATURE_DATA_SOURCES.NEON_CONTEXT,
     primaryIdOnly: true,
     featureShape: 'Marker',
     iconScale: 1,
-    iconSvg: iconSiteRelocatableAquaticSVG,
-    iconSelectedSvg: iconSiteRelocatableAquaticSelectedSVG,
+    iconSvg: iconSiteGradientAquaticSVG,
+    iconSelectedSvg: iconSiteGradientAquaticSelectedSVG,
     iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
     maxZoom: 9,
   },
@@ -1608,6 +1608,7 @@ export const SITE_MAP_PROP_TYPES = {
   aspectRatio: PropTypes.number,
   fullscreen: PropTypes.bool,
   unusableVerticalSpace: PropTypes.number,
+  mapUniqueId: PropTypes.number,
   // Map props
   mapCenter: PropTypes.arrayOf(PropTypes.number),
   mapZoom: PropTypes.number,
@@ -1637,6 +1638,7 @@ export const SITE_MAP_DEFAULT_PROPS = {
   aspectRatio: null,
   fullscreen: false,
   unusableVerticalSpace: 0,
+  mapUniqueId: 0,
   // Map props
   mapCenter: OBSERVATORY_CENTER,
   mapZoom: null,

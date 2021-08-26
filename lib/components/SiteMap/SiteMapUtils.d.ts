@@ -1487,7 +1487,7 @@ export namespace FEATURES {
         const maxZoom_1: number;
         export { maxZoom_1 as maxZoom };
     }
-    export namespace TERRESTRIAL_RELOCATABLE_SITES {
+    export namespace TERRESTRIAL_GRADIENT_SITES {
         const name_67: string;
         export { name_67 as name };
         const nameSingular_37: string;
@@ -1513,8 +1513,8 @@ export namespace FEATURES {
         export { featureShape_38 as featureShape };
         const iconScale_17: number;
         export { iconScale_17 as iconScale };
-        export { iconSiteRelocatableTerrestrialSVG as iconSvg };
-        export { iconSiteRelocatableTerrestrialSelectedSVG as iconSelectedSvg };
+        export { iconSiteGradientTerrestrialSVG as iconSvg };
+        export { iconSiteGradientTerrestrialSelectedSVG as iconSelectedSvg };
         import iconShape_25 = KEY;
         export { iconShape_25 as iconShape };
         const maxZoom_2: number;
@@ -1553,7 +1553,7 @@ export namespace FEATURES {
         const maxZoom_3: number;
         export { maxZoom_3 as maxZoom };
     }
-    export namespace AQUATIC_RELOCATABLE_SITES {
+    export namespace AQUATIC_GRADIENT_SITES {
         const name_69: string;
         export { name_69 as name };
         const nameSingular_39: string;
@@ -1579,8 +1579,8 @@ export namespace FEATURES {
         export { featureShape_40 as featureShape };
         const iconScale_19: number;
         export { iconScale_19 as iconScale };
-        export { iconSiteRelocatableAquaticSVG as iconSvg };
-        export { iconSiteRelocatableAquaticSelectedSVG as iconSelectedSvg };
+        export { iconSiteGradientAquaticSVG as iconSvg };
+        export { iconSiteGradientAquaticSelectedSVG as iconSelectedSvg };
         import iconShape_27 = KEY;
         export { iconShape_27 as iconShape };
         const maxZoom_4: number;
@@ -1791,6 +1791,7 @@ export namespace SITE_MAP_PROP_TYPES {
     export const aspectRatio: PropTypes.Requireable<number>;
     export const fullscreen: PropTypes.Requireable<boolean>;
     export const unusableVerticalSpace: PropTypes.Requireable<number>;
+    export const mapUniqueId: PropTypes.Requireable<number>;
     export const mapCenter: PropTypes.Requireable<(number | null | undefined)[]>;
     export const mapZoom: PropTypes.Requireable<number>;
     export const mapBaseLayer: PropTypes.Requireable<string>;
@@ -1816,6 +1817,8 @@ export namespace SITE_MAP_DEFAULT_PROPS {
     export { fullscreen_1 as fullscreen };
     const unusableVerticalSpace_1: number;
     export { unusableVerticalSpace_1 as unusableVerticalSpace };
+    const mapUniqueId_1: number;
+    export { mapUniqueId_1 as mapUniqueId };
     export { OBSERVATORY_CENTER as mapCenter };
     const mapZoom_1: null;
     export { mapZoom_1 as mapZoom };

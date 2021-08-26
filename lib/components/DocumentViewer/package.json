@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "name": "document-viewer",
+  "main": "./DocumentViewer.tsx",
+  "module": "./DocumentViewer.tsx"
+}

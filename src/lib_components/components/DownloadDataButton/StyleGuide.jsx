@@ -20,7 +20,6 @@ import sampleProductDataAeronet from '../../../sampleData/DP1.00043.001.json';
 import sampleProductDataAop from '../../../sampleData/DP1.30010.001.json';
 import sampleProductDataAopOSPipeline from '../../../sampleData/DP1.30012.001.json';
 import sampleProductDataBold from '../../../sampleData/DP1.20105.001.json';
-import sampleProductDataMGRast from '../../../sampleData/DP1.10107.001.json';
 import sampleProductDataNPN from '../../../sampleData/DP1.10055.001.json';
 import sampleProductDataPhenocam from '../../../sampleData/DP1.00033.001.json';
 
@@ -146,10 +145,6 @@ const productData = {...};
           <br /><br />
           <DownloadDataContext.Provider productData={sampleProductDataBold.data}>
             <DownloadDataButton label="Download Bold Data" />
-          </DownloadDataContext.Provider>
-          <br /><br />
-          <DownloadDataContext.Provider productData={sampleProductDataMGRast.data}>
-            <DownloadDataButton label="Download MGRast Data" />
           </DownloadDataContext.Provider>
           <br /><br />
           <DownloadDataContext.Provider productData={sampleProductDataNPN.data}>

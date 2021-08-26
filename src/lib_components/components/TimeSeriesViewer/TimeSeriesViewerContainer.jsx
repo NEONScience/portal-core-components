@@ -29,10 +29,10 @@ import RouteService from '../../service/RouteService';
 
 import TimeSeriesViewerContext, {
   summarizeTimeSteps,
-  TIME_SERIES_VIEWER_STATUS,
   TIME_SERIES_VIEWER_STATUS_TITLES,
   Y_AXIS_RANGE_MODE_DETAILS,
 } from './TimeSeriesViewerContext';
+import { TIME_SERIES_VIEWER_STATUS } from './constants';
 import TimeSeriesViewerSites from './TimeSeriesViewerSites';
 import TimeSeriesViewerDateRange from './TimeSeriesViewerDateRange';
 import TimeSeriesViewerVariables from './TimeSeriesViewerVariables';

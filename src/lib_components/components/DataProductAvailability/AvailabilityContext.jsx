@@ -9,8 +9,12 @@ import PropTypes from 'prop-types';
 import cloneDeep from 'lodash/cloneDeep';
 
 import NeonContext from '../NeonContext/NeonContext';
+import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 
 import { AvailabilityPropTypes } from './AvailabilityUtils';
+
+import NeonSignInButtonState from '../NeonSignInButton/NeonSignInButtonState';
+import makeStateStorage from '../../service/StateStorageService';
 
 const SORT_DIRECTIONS = { ASC: 'ASC', DESC: 'DESC' };
 const DEFAULT_STATE = {
@@ -196,24 +200,63 @@ const useAvailabilityState = () => {
 };
 
 /**
+ * Defines a lookup of state key to a boolean
+ * designating whether or not that instance of the context
+ * should pull the state from the session storage and restore.
+ * Keeping this lookup outside of the context provider function
+ * as to not incur lifecycle interference by storing with useState.
+ */
+const restoreStateLookup = {};
+
+/**
    Context Provider
 */
 const Provider = (props) => {
-  const { sites, children } = props;
+  const { sites, dataAvailabilityUniqueId, children } = props;
 
   const [
     { data: neonContextData, isFinal: neonContextIsFinal, hasError: neonContextHasError },
   ] = NeonContext.useNeonContextState();
+
+  const key = `availabilityContextState-${dataAvailabilityUniqueId}`;
+  if (typeof restoreStateLookup[key] === 'undefined') {
+    restoreStateLookup[key] = true;
+  }
+  const shouldRestoreState = restoreStateLookup[key];
+  const stateStorage = makeStateStorage(key);
+  const savedState = stateStorage.readState();
 
   /**
      Initial State and Reducer Setup
   */
   let initialState = { ...cloneDeep(DEFAULT_STATE), sites };
   initialState.tables = extractTables(initialState);
-  if (neonContextIsFinal && !neonContextHasError) {
+  if (neonContextIsFinal && !neonContextHasError && !savedState) {
     initialState = hydrateNeonContextData(initialState, neonContextData);
   }
+
+  if (savedState && shouldRestoreState) {
+    restoreStateLookup[key] = false;
+    stateStorage.removeState();
+    initialState = savedState;
+  }
+
   const [state, dispatch] = useReducer(reducer, calculateRows(initialState));
+
+  // The current sign in process uses a separate domain. This function
+  // persists the current state in storage when the button is clicked
+  // so the state may be reloaded when the page is reloaded after sign
+  // in.
+  useEffect(() => {
+    const subscription = NeonSignInButtonState.getObservable().subscribe({
+      next: () => {
+        if (!NeonEnvironment.enableGlobalSignInState) return;
+        restoreStateLookup[key] = false;
+        stateStorage.saveState(state);
+      },
+    });
+    return () => { subscription.unsubscribe(); };
+  }, [state, stateStorage, key]);
 
   /**
      Effect - Watch for changes to NeonContext data and push into local state
@@ -241,6 +284,7 @@ const Provider = (props) => {
 };
 
 Provider.propTypes = {
+  dataAvailabilityUniqueId: PropTypes.number,
   sites: AvailabilityPropTypes.enhancedSites,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.oneOfType([
@@ -253,6 +297,7 @@ Provider.propTypes = {
 };
 
 Provider.defaultProps = {
+  dataAvailabilityUniqueId: 0,
   sites: [],
 };
 

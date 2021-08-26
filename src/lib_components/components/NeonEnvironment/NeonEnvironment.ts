@@ -74,6 +74,7 @@ export interface INeonEnvironment {
   useGraphql: boolean;
   showAopViewer: boolean;
   authDisableWs: boolean;
+  enableGlobalSignInState: boolean;
 
   getRootApiPath: () => string;
   getRootGraphqlPath: () => string;
@@ -138,6 +139,7 @@ const NeonEnvironment: INeonEnvironment = {
   useGraphql: process.env.REACT_APP_NEON_USE_GRAPHQL === 'true',
   showAopViewer: process.env.REACT_APP_NEON_SHOW_AOP_VIEWER === 'true',
   authDisableWs: process.env.REACT_APP_NEON_AUTH_DISABLE_WS === 'true',
+  enableGlobalSignInState: process.env.REACT_APP_NEON_ENABLE_GLOBAL_SIGNIN_STATE === 'true',
 
   getRootApiPath: () => process.env.REACT_APP_NEON_PATH_API || '/api/v0',
   getRootGraphqlPath: () => process.env.REACT_APP_NEON_PATH_PUBLIC_GRAPHQL || '/graphql',

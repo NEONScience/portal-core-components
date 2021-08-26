@@ -14,6 +14,10 @@ import { map, catchError } from 'rxjs/operators';
 
 import NeonApi from '../NeonApi/NeonApi';
 import NeonContext from '../NeonContext/NeonContext';
+import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
+import NeonSignInButtonState from '../NeonSignInButton/NeonSignInButtonState';
+import makeStateStorage from '../../service/StateStorageService';
+import { convertStateForStorage, convertStateFromStorage } from './StateStorageConverter';
 
 import {
   fetchManyLocationsGraphQL,
@@ -119,7 +123,7 @@ const validateSelection = (state) => {
     valid = true;
     if (
       (Number.isFinite(limit) && set.size !== limit)
-        || (Array.isArray(limit) && (set.size < limit[0] || set.size > limit[1]))
+      || (Array.isArray(limit) && (set.size < limit[0] || set.size > limit[1]))
     ) { valid = false; }
   }
   return {
@@ -146,8 +150,8 @@ const zoomIsValid = (zoom) => (
 );
 const centerIsValid = (center) => (
   Array.isArray(center)
-    && center.length === 2
-    && center.every((v) => (typeof v === 'number' && !Number.isNaN(v)))
+  && center.length === 2
+  && center.every((v) => (typeof v === 'number' && !Number.isNaN(v)))
 );
 
 // Creates fetch objects with an AWAITING_CALL status based on current state.
@@ -161,7 +165,7 @@ const calculateFeatureDataFetches = (state, requiredSites = []) => {
   // manualLocationData is non-empty and contains prototpye sites
   const fetchablePrototypeSites = (state.manualLocationData || []).filter((manualLocation) => (
     manualLocation.manualLocationType === MANUAL_LOCATION_TYPES.PROTOTYPE_SITE
-      && state.sites[manualLocation.siteCode]
+    && state.sites[manualLocation.siteCode]
   ));
   let sitesToConsider = state.sites;
   if (state.manualLocationData && fetchablePrototypeSites.length) {
@@ -207,8 +211,8 @@ const calculateFeatureDataFetches = (state, requiredSites = []) => {
   Object.keys(FEATURES)
     .filter((featureKey) => (
       FEATURES[featureKey].dataSource === FEATURE_DATA_SOURCES.ARCGIS_ASSETS_API
-        && state.filters.features.available[featureKey]
-        && state.filters.features.visible[featureKey]
+      && state.filters.features.available[featureKey]
+      && state.filters.features.visible[featureKey]
     ))
     .forEach((featureKey) => {
       const { dataSource } = FEATURES[featureKey];
@@ -225,9 +229,9 @@ const calculateFeatureDataFetches = (state, requiredSites = []) => {
     // Only look at available+visible features that get fetched and have a location type match
     .filter((featureKey) => (
       FEATURES[featureKey].dataSource === FEATURE_DATA_SOURCES.REST_LOCATIONS_API
-        && FEATURES[featureKey].matchLocationType
-        && state.filters.features.available[featureKey]
-        && state.filters.features.visible[featureKey]
+      && FEATURES[featureKey].matchLocationType
+      && state.filters.features.available[featureKey]
+      && state.filters.features.visible[featureKey]
     ))
     .forEach((featureKey) => {
       const { dataSource, matchLocationType } = FEATURES[featureKey];
@@ -325,7 +329,7 @@ const calculateFeatureDataFetches = (state, requiredSites = []) => {
             newState.featureDataFetches[dataSource][minZoom][siteCode].features[featureKey].fetchId = awaitingFetchKey;
             if (
               companionMinZoom && companionFeatureKey
-                && !newState.featureDataFetches[dataSource][companionMinZoom][siteCode].features[companionFeatureKey].fetchId
+              && !newState.featureDataFetches[dataSource][companionMinZoom][siteCode].features[companionFeatureKey].fetchId
             ) {
               newState.featureDataFetches[dataSource][companionMinZoom][siteCode].features[companionFeatureKey].fetchId = awaitingFetchKey;
             }
@@ -361,7 +365,7 @@ const updateMapTileWithZoom = (state) => {
   const newState = { ...state };
   if (
     newState.map.zoom <= 17 && state.map.baseLayer !== BASE_LAYERS.NATGEO_WORLD_MAP.KEY
-      && state.map.baseLayerAutoChangedAbove17) {
+    && state.map.baseLayerAutoChangedAbove17) {
     newState.map.baseLayer = BASE_LAYERS.NATGEO_WORLD_MAP.KEY;
     newState.map.baseLayerAutoChangedAbove17 = false;
   } else if (newState.map.zoom >= 17 && state.map.baseLayer === BASE_LAYERS.NATGEO_WORLD_MAP.KEY) {
@@ -446,8 +450,8 @@ const setFetchStatusFromAction = (state, action, status) => {
     if (!FEATURES[featureKey]) { return newState; }
     if (
       !newState.featureDataFetches[dataSource]
-        || !newState.featureDataFetches[dataSource][featureKey]
-        || !newState.featureDataFetches[dataSource][featureKey][siteCode]
+      || !newState.featureDataFetches[dataSource][featureKey]
+      || !newState.featureDataFetches[dataSource][featureKey][siteCode]
     ) { return newState; }
     newState.featureDataFetches[dataSource][featureKey][siteCode] = status;
     // If the status is SUCCESS and the action has data, also commit the data
@@ -470,9 +474,9 @@ const setFetchStatusFromAction = (state, action, status) => {
     const { type: featureType } = FEATURES[featureKey];
     if (
       !newState.featureDataFetches[dataSource]
-        || !newState.featureDataFetches[dataSource][featureKey]
-        || !newState.featureDataFetches[dataSource][featureKey][siteCode]
-        || !newState.featureDataFetches[dataSource][featureKey][siteCode][location]
+      || !newState.featureDataFetches[dataSource][featureKey]
+      || !newState.featureDataFetches[dataSource][featureKey][siteCode]
+      || !newState.featureDataFetches[dataSource][featureKey][siteCode][location]
     ) {
       return newState;
     }
@@ -504,9 +508,9 @@ const setFetchStatusFromAction = (state, action, status) => {
     } = action;
     if (
       !newState.featureDataFetches[dataSource]
-        || !newState.featureDataFetches[dataSource][minZoom]
-        || !newState.featureDataFetches[dataSource][minZoom][siteCode]
-        || !newState.featureDataFetches[dataSource][minZoom][siteCode].fetches[fetchId]
+      || !newState.featureDataFetches[dataSource][minZoom]
+      || !newState.featureDataFetches[dataSource][minZoom][siteCode]
+      || !newState.featureDataFetches[dataSource][minZoom][siteCode].fetches[fetchId]
     ) { return newState; }
     newState.featureDataFetches[dataSource][minZoom][siteCode].fetches[fetchId].status = status;
     // If the status is SUCCESS and the action has data, also commit the data
@@ -574,7 +578,7 @@ const setFetchStatusFromAction = (state, action, status) => {
         // Geometry may be loaded by another sub-location so look for that and don't blow it away!
         const geometry = (
           !newState.featureData[featureType][featureKey][siteCode][locName]
-            || !newState.featureData[featureType][featureKey][siteCode][locName].geometry
+          || !newState.featureData[featureType][featureKey][siteCode][locName].geometry
         ) ? null : { ...newState.featureData[featureType][featureKey][siteCode][locName].geometry }; // eslint-disable-line max-len
         newState.featureData[featureType][featureKey][siteCode][locName] = {
           ...data[locName],
@@ -854,7 +858,7 @@ const reducer = (state, action) => {
     case 'setDomainLocationHierarchyFetchSucceeded':
       if (
         !newState.featureDataFetches[hierarchiesSource][hierarchiesType][action.domainCode]
-          || !action.data
+        || !action.data
       ) { return state; }
       /* eslint-disable max-len */
       newState.featureDataFetches[hierarchiesSource][hierarchiesType][action.domainCode] = FETCH_STATUS.SUCCESS;
@@ -899,7 +903,7 @@ const reducer = (state, action) => {
     case 'updateSelectionSet':
       if (
         !action.selection || !action.selection.constructor
-          || action.selection.constructor.name !== 'Set'
+        || action.selection.constructor.name !== 'Set'
       ) { return state; }
       newState.selection.set = getSelectableSet(action.selection, validSet);
       newState.selection.changed = true;
@@ -974,26 +978,32 @@ const reducer = (state, action) => {
   }
 };
 
-/**
-   Context and Hook
-*/
+/** Context and Hook */
 const Context = createContext(DEFAULT_STATE);
 const useSiteMapContext = () => {
   const hookResponse = useContext(Context);
   if (hookResponse.length !== 2) {
-    return [cloneDeep(DEFAULT_STATE), () => {}];
+    return [cloneDeep(DEFAULT_STATE), () => { }];
   }
   return hookResponse;
 };
 
 /**
-   Context Provider
-*/
+ * Defines a lookup of state key to a boolean
+ * designating whether or not that instance of the context
+ * should pull the state from the session storage and restore.
+ * Keeping this lookup outside of the context provider function
+ * as to not incur lifecycle interference by storing with useState.
+ */
+const restoreStateLookup = {};
+
+/** Context Provider */
 const Provider = (props) => {
   const {
     view,
     aspectRatio,
     fullscreen,
+    mapUniqueId,
     mapZoom,
     mapCenter,
     mapBaseLayer,
@@ -1068,25 +1078,58 @@ const Provider = (props) => {
   if (Array.isArray(manualLocationData) && manualLocationData.length > 0) {
     initialState.manualLocationData = manualLocationData;
   }
-  if (neonContextIsFinal && !neonContextHasError) {
+
+  // get the initial state from storage if present
+  const stateKey = `siteMapContextState-${mapUniqueId}`;
+  if (typeof restoreStateLookup[stateKey] === 'undefined') {
+    restoreStateLookup[stateKey] = true;
+  }
+  const shouldRestoreState = restoreStateLookup[stateKey];
+  const stateStorage = makeStateStorage(stateKey);
+  const savedState = stateStorage.readState();
+
+  if (neonContextIsFinal && !neonContextHasError && !savedState) {
     initialState = hydrateNeonContextData(initialState, neonContextData);
   }
   const hasInitialZoom = (typeof mapZoom === 'number') && zoomIsValid(mapZoom);
-  if (hasInitialZoom) {
+  if (hasInitialZoom && !savedState) {
     initialState = calculateZoomState(initialMapZoom, initialState, true);
   }
+
+  if (savedState && shouldRestoreState) {
+    restoreStateLookup[stateKey] = false;
+    const restoredState = convertStateFromStorage(savedState, initialState);
+    stateStorage.removeState();
+    initialState = calculateZoomState(restoredState.map.zoom, restoredState, true);
+  }
+
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  // The current sign in process uses a separate domain. This function
+  // persists the current state in storage when the button is clicked
+  // so the state may be reloaded when the page is reloaded after sign
+  // in.
+  useEffect(() => {
+    const subscription = NeonSignInButtonState.getObservable().subscribe({
+      next: () => {
+        if (!NeonEnvironment.enableGlobalSignInState) return;
+        restoreStateLookup[stateKey] = false;
+        stateStorage.saveState(convertStateForStorage(state));
+      },
+    });
+    return () => { subscription.unsubscribe(); };
+  }, [state, stateStorage, stateKey]);
 
   const canFetchFeatureData = (
     state.neonContextHydrated
-      && !(state.focusLocation.current && state.focusLocation.fetch.status !== FETCH_STATUS.SUCCESS)
+    && !(state.focusLocation.current && state.focusLocation.fetch.status !== FETCH_STATUS.SUCCESS)
   );
 
   /**
      Effect - trigger focusLocation fetch or short circuit if found in NeonContext or manual data
   */
   useEffect(() => {
-    const noop = () => {};
+    const noop = () => { };
     const { current, fetch: { status: currentStatus } } = state.focusLocation;
     if (!current || currentStatus !== FETCH_STATUS.AWAITING_CALL || !state.neonContextHydrated) {
       return noop;

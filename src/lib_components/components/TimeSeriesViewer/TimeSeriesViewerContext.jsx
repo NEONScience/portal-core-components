@@ -4,7 +4,7 @@ import React, {
   useEffect,
   useReducer,
 } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { number } from 'prop-types';
 
 import moment from 'moment';
 import get from 'lodash/get';
@@ -31,6 +31,11 @@ import { forkJoinWithProgress } from '../../util/rxUtil';
 
 import parseTimeSeriesData from '../../workers/parseTimeSeriesData';
 
+import NeonSignInButtonState from '../NeonSignInButton/NeonSignInButtonState';
+import makeStateStorage from '../../service/StateStorageService';
+import { convertStateForStorage, convertStateFromStorage } from './StateStorageConverter';
+import { TIME_SERIES_VIEWER_STATUS } from './constants';
+
 // 'get' is a reserved word so can't be imported with import
 const lodashGet = require('lodash/get.js');
 
@@ -45,18 +50,6 @@ const FETCH_STATUS = {
   FETCHING: 'FETCHING',
   ERROR: 'ERROR',
   SUCCESS: 'SUCCESS',
-};
-
-// Every possible top-level status the TimeSeriesViewer component can have
-export const TIME_SERIES_VIEWER_STATUS = {
-  INIT_PRODUCT: 'INIT_PRODUCT', // Handling props; fetching product data if needed
-  LOADING_META: 'LOADING_META', // Actively loading meta data (sites, variables, and positions)
-  READY_FOR_DATA: 'READY_FOR_DATA', // Ready to trigger fetches for data
-  LOADING_DATA: 'LOADING_DATA', // Actively loading plottable series data
-  ERROR: 'ERROR', // Stop everything because problem, do not trigger new fetches no matter what
-  WARNING: 'WARNING', // Current selection/data makes a graph not possible; show warning
-  READY_FOR_SERIES: 'READY_FOR_SERIES', // Ready to re-calculate series data for the graph
-  READY: 'READY', // Ready for user input
 };
 
 export const TIME_SERIES_VIEWER_STATUS_TITLES = {
@@ -1134,10 +1127,20 @@ const reducer = (state, action) => {
 };
 
 /**
+ * Defines a lookup of state key to a boolean
+ * designating whether or not that instance of the context
+ * should pull the state from the session storage and restore.
+ * Keeping this lookup outside of the context provider function
+ * as to not incur lifecycle interference by storing with useState.
+ */
+const restoreStateLookup = {};
+
+/**
    Context Provider
 */
 const Provider = (props) => {
   const {
+    timeSeriesUniqueId,
     mode: modeProp,
     productCode: productCodeProp,
     productData: productDataProp,
@@ -1148,7 +1151,7 @@ const Provider = (props) => {
   /**
      Initial State and Reducer Setup
   */
-  const initialState = cloneDeep(DEFAULT_STATE);
+  let initialState = cloneDeep(DEFAULT_STATE);
   if ((typeof modeProp === 'string') && (modeProp !== VIEWER_MODE.DEFAULT)) {
     initialState.mode = modeProp;
   }
@@ -1163,7 +1166,45 @@ const Provider = (props) => {
   }
   initialState.release = releaseProp;
   initialState.selection = applyDefaultsToSelection(initialState);
+
+  // get the state from storage if present
+  const { productCode } = initialState.product;
+  const stateKey = `timeSeriesContextState-${productCode}-${timeSeriesUniqueId}`;
+  if (typeof restoreStateLookup[stateKey] === 'undefined') {
+    restoreStateLookup[stateKey] = true;
+  }
+  const shouldRestoreState = restoreStateLookup[stateKey];
+  const stateStorage = makeStateStorage(stateKey);
+  const savedState = stateStorage.readState();
+  if (savedState && shouldRestoreState) {
+    restoreStateLookup[stateKey] = false;
+    const convertedState = convertStateFromStorage(savedState);
+    stateStorage.removeState();
+    initialState = convertedState;
+  }
+
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  const { viewerStatus } = state;
+
+  // The current sign in process uses a separate domain. This function
+  // persists the current state in storage when the button is clicked
+  // so the state may be reloaded when the page is reloaded after sign
+  // in.
+  useEffect(() => {
+    const subscription = NeonSignInButtonState.getObservable().subscribe({
+      next: () => {
+        if (!NeonEnvironment.enableGlobalSignInState) return;
+        if (viewerStatus !== TIME_SERIES_VIEWER_STATUS.READY) return;
+        restoreStateLookup[stateKey] = false;
+        const convertedState = convertStateForStorage(state);
+        stateStorage.saveState(convertedState);
+      },
+    });
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [viewerStatus, state, stateStorage, stateKey]);
 
   /**
      Effect - Reinitialize state if the product code prop changed
@@ -1483,6 +1524,7 @@ const TimeSeriesViewerPropTypes = {
 };
 
 Provider.propTypes = {
+  timeSeriesUniqueId: number,
   mode: PropTypes.string,
   productCode: TimeSeriesViewerPropTypes.productCode,
   productData: TimeSeriesViewerPropTypes.productData,
@@ -1498,6 +1540,7 @@ Provider.propTypes = {
 };
 
 Provider.defaultProps = {
+  timeSeriesUniqueId: 0,
   mode: VIEWER_MODE.DEFAULT,
   productCode: null,
   productData: null,

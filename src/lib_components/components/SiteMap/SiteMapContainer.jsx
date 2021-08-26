@@ -313,7 +313,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SiteMapContainer = (props) => {
   const classes = useStyles(Theme);
-  const { unusableVerticalSpace = 0 } = props;
+  const { unusableVerticalSpace = 0, mapUniqueId } = props;
 
   const [neonContextState] = NeonContext.useNeonContextState();
 
@@ -500,6 +500,7 @@ const SiteMapContainer = (props) => {
     className: classes.outerContainer,
     'aria-busy': isLoading ? 'true' : 'false',
     'data-selenium': 'siteMap-container',
+    id: mapUniqueId,
   };
 
   /**
@@ -1292,10 +1293,12 @@ const SiteMapContainer = (props) => {
 
 SiteMapContainer.propTypes = {
   unusableVerticalSpace: PropTypes.number,
+  mapUniqueId: PropTypes.number,
 };
 
 SiteMapContainer.defaultProps = {
   unusableVerticalSpace: 0,
+  mapUniqueId: 0,
 };
 
 export default SiteMapContainer;

@@ -9,6 +9,7 @@ import AuthService, { LOGOUT_REDIRECT_PATHS } from './AuthService';
 import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import Theme from '../Theme/Theme';
+import NeonSignInButtonState from '../NeonSignInButton/NeonSignInButtonState';
 
 import { StringPropsObject } from '../../types/objectTypes';
 import { StylesHook } from '../../types/muiTypes';
@@ -88,15 +89,16 @@ const renderAuth = (
   }: NeonAuthProps = props;
 
   const handleLogin = (): void => {
+    if (NeonEnvironment.enableGlobalSignInState) {
+      // Notify observers the sign in button has been clicked.
+      NeonSignInButtonState.sendNotification();
+    }
     let appliedLoginType: NeonAuthType = loginType;
     // Default to redirect if WS isn't connected
     if (!isAuthWsConnected) {
       appliedLoginType = NeonAuthType.REDIRECT;
     }
-    const appHomePath: string = NeonEnvironment.getRouterBaseHomePath();
-    const currentPath: string = window.location.pathname;
-    const hasPath: boolean = isStringNonEmpty(currentPath) && currentPath.includes(appHomePath);
-    const redirectUriPath: Undef<string> = hasPath ? currentPath : undefined;
+    const redirectUriPath: Undef<string> = AuthService.getLoginRedirectUri();
     switch (appliedLoginType) {
       case NeonAuthType.SILENT:
         AuthService.loginSilently(dispatch, false, loginPath, redirectUriPath);

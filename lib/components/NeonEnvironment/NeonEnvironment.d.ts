@@ -24,6 +24,7 @@ export interface INeonEnvironment {
     useGraphql: boolean;
     showAopViewer: boolean;
     authDisableWs: boolean;
+    enableGlobalSignInState: boolean;
     getRootApiPath: () => string;
     getRootGraphqlPath: () => string;
     getRootJsonLdPath: () => string;

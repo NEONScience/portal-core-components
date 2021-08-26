@@ -207,54 +207,6 @@ describe('ExternalHost', () => {
   });
 
   /**
-     MGRAST
-  */
-  describe('MGRAST', () => {
-    test('getProductLinks with no arg', () => {
-      const tree = renderer
-        .create(getByHostId('MGRAST').getProductLinks())
-        .toJSON();
-      expect(tree).toMatchSnapshot();
-    });
-    test('getProductLinks with a valid productCode', () => {
-      const tree = renderer
-        .create((
-          <div>
-            {getByHostId('MGRAST').getProductLinks('DP1.10107.001').map((link) => (
-              <div key={link.key}>{link.node}</div>
-            ))}
-          </div>
-        ))
-        .toJSON();
-      expect(tree).toMatchSnapshot();
-    });
-    test('renderLink without productCode', () => {
-      const tree = renderer
-        .create(getByHostId('MGRAST').renderLink())
-        .toJSON();
-      expect(tree).toMatchSnapshot();
-    });
-    test('renderLink with productCode', () => {
-      const tree = renderer
-        .create(getByHostId('MGRAST').renderLink('DP1.10107.001'))
-        .toJSON();
-      expect(tree).toMatchSnapshot();
-    });
-    test('renderShortLink without productCode', () => {
-      const tree = renderer
-        .create(getByHostId('MGRAST').renderShortLink())
-        .toJSON();
-      expect(tree).toMatchSnapshot();
-    });
-    test('renderShortLink with productCode', () => {
-      const tree = renderer
-        .create(getByHostId('MGRAST').renderShortLink('DP1.10107.001'))
-        .toJSON();
-      expect(tree).toMatchSnapshot();
-    });
-  });
-
-  /**
      NPN
   */
   describe('NPN', () => {

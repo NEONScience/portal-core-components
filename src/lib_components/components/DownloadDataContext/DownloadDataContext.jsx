@@ -33,15 +33,14 @@ import {
 } from '../../util/manifestUtil';
 
 import { forkJoinWithProgress } from '../../util/rxUtil';
+import makeStateStorage from '../../service/StateStorageService';
+import NeonSignInButtonState from '../NeonSignInButton/NeonSignInButtonState';
+// eslint-disable-next-line import/no-cycle
+import { convertStateForStorage, convertAOPInitialState } from './StateStorageConverter';
 
-const ALL_POSSIBLE_VALID_DATE_RANGE = [
-  '2010-01',
-  moment().format('YYYY-MM'),
-];
-
+const ALL_POSSIBLE_VALID_DATE_RANGE = ['2010-01', moment().format('YYYY-MM')];
 const ALL_POSSIBLE_VALID_DOCUMENTATION = ['include', 'exclude'];
 const ALL_POSSIBLE_VALID_PACKAGE_TYPE = ['basic', 'expanded'];
-
 const AVAILABILITY_VIEW_MODES = ['summary', 'sites', 'states', 'domains'];
 
 const ALL_STEPS = {
@@ -192,9 +191,7 @@ const S3_PATTERN = {
   },
 };
 
-/**
-   VALIDATOR FUNCTIONS
-*/
+// VALIDATOR FUNCTIONS
 // Naive check, replace with a more robust JSON schema check
 const productDataIsValid = (productData) => (
   typeof productData === 'object' && productData !== null
@@ -315,11 +312,9 @@ const mutateNewStateIntoRange = (key, value, validValues = []) => {
   }
 };
 
-/**
-   Estimate a POST body size from a sile list and sites list for s3Files-based
-   downloads. Numbers here are based on the current POST API and what it requires
-   for form data keys, which is excessively verbose.
-*/
+// Estimate a POST body size from a sile list and sites list for s3Files-based
+// downloads. Numbers here are based on the current POST API and what it requires
+// for form data keys, which is excessively verbose.
 const estimatePostSize = (s3FilesState, sitesState) => {
   const baseLength = 300;
   const sitesLength = sitesState.value.length * 62;
@@ -328,9 +323,7 @@ const estimatePostSize = (s3FilesState, sitesState) => {
   return baseLength + sitesLength + filesLength;
 };
 
-/**
-   GETTER FUNCTIONS
-*/
+// GETTER FUNCTIONS
 const getValidValuesFromProductData = (productData, key) => {
   switch (key) {
     case 'release':
@@ -733,9 +726,7 @@ const getAndValidateNewState = (previousState, action, broadcast = false) => {
   return newState;
 };
 
-/**
-   REDUCER
-*/
+// REDUCER
 const reducer = (state, action) => {
   let newState = {};
   const getStateFromHigherOrderState = (newHigherOrderState) => HIGHER_ORDER_TRANSFERABLE_STATE_KEYS
@@ -934,20 +925,19 @@ const reducer = (state, action) => {
       return state;
   }
 };
-const wrappedReducer = (state, action) => {
-  const newState = reducer(state, action);
-  // console.log('ACTION', action, newState);
-  return newState;
-};
 
 /**
-   CONTEXT
-*/
+ * Wrapped reducer function
+ * @param {*} state The state.
+ * @param {*} action An action.
+ * @returns the new state.
+ */
+const wrappedReducer = (state, action) => reducer(state, action);
+
+// CONTEXT
 const Context = createContext(DEFAULT_STATE);
 
-/**
-   HOOK
-*/
+// HOOK
 const useDownloadDataState = () => {
   const hookResponse = useContext(Context);
   if (hookResponse.length !== 2) {
@@ -957,19 +947,16 @@ const useDownloadDataState = () => {
         requiredSteps: [],
         downloadContextIsActive: false,
       },
-      () => { },
+      () => {},
     ];
   }
   return hookResponse;
 };
 
-/**
-  OBSERVABLES
-*/
+// OBSERVABLES
 // Observable and getter for sharing whole state through a higher order component
 const stateSubject$ = new Subject();
 const getStateObservable = () => stateSubject$.asObservable();
-
 // Observables and getters for making and canceling manifest requests
 const manifestCancelation$ = new Subject();
 const getManifestAjaxObservable = (request) => (
@@ -977,16 +964,57 @@ const getManifestAjaxObservable = (request) => (
 );
 
 /**
-  <DownloadDataContext.Provider />
-*/
+ * Defines a lookup of state key to a boolean
+ * designating whether or not that instance of the context
+ * should pull the state from the session storage and restore.
+ * Keeping this lookup outside of the context provider function
+ * as to not incur lifecycle interference by storing with useState.
+ */
+const restoreStateLookup = {};
+
+// Provider
 const Provider = (props) => {
   const {
+    downloadDataContextUniqueId,
     stateObservable,
     children,
   } = props;
 
-  const initialState = getInitialStateFromProps(props);
+  // get the initial state from storage if present, else get from props.
+  let initialState = getInitialStateFromProps(props);
+  const { productCode: product } = initialState.productData;
+  const stateKey = `downloadDataContextState-${product}-${downloadDataContextUniqueId}`;
+  if (typeof restoreStateLookup[stateKey] === 'undefined') {
+    restoreStateLookup[stateKey] = true;
+  }
+  const shouldRestoreState = restoreStateLookup[stateKey];
+  const stateStorage = makeStateStorage(stateKey);
+  const savedState = stateStorage.readState();
+  if (savedState && shouldRestoreState) {
+    restoreStateLookup[stateKey] = false;
+    stateStorage.removeState();
+    initialState = convertAOPInitialState(savedState, initialState);
+  }
   const [state, dispatch] = useReducer(wrappedReducer, initialState);
+
+  const { downloadContextIsActive, dialogOpen } = state;
+
+  // The current sign in process uses a separate domain. This function
+  // persists the current state in storage when the button is clicked
+  // so the state may be reloaded when the page is reloaded after sign
+  // in.
+  useEffect(() => {
+    const subscription = NeonSignInButtonState.getObservable().subscribe({
+      next: () => {
+        if (!downloadContextIsActive || !dialogOpen) return;
+        restoreStateLookup[stateKey] = false;
+        stateStorage.saveState(convertStateForStorage(state));
+      },
+    });
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [downloadContextIsActive, dialogOpen, state, stateKey, stateStorage]);
 
   // Create an observable for manifests requests and subscribe to it to execute
   // the manifest fetch and dispatch results when updated.
@@ -1123,6 +1151,7 @@ const Provider = (props) => {
 };
 
 Provider.propTypes = {
+  downloadDataContextUniqueId: PropTypes.number,
   stateObservable: PropTypes.func,
   productData: PropTypes.shape({
     productCode: PropTypes.string.isRequired,
@@ -1153,6 +1182,7 @@ Provider.propTypes = {
 };
 
 Provider.defaultProps = {
+  downloadDataContextUniqueId: 0,
   stateObservable: null,
   productData: {},
   availabilityView: DEFAULT_STATE.availabilityView,

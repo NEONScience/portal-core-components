@@ -268,7 +268,7 @@ const dataProducts = [...];
         site and date range selection.
       </DocBlock>
       <ExampleBlock>
-        <DownloadDataContext.Provider productData={sampleProductData.data}>
+        <DownloadDataContext.Provider productData={sampleProductData.data} downloadDataContextUniqueId={0}>
           <DataProductAvailability />
         </DownloadDataContext.Provider>
       </ExampleBlock>
@@ -325,6 +325,7 @@ const productData = {
         <DownloadDataContext.Provider
           productData={sampleProductData.data}
           availabilityView="domains"
+          downloadDataContextUniqueId={1}
         >
           <DataProductAvailability />
         </DownloadDataContext.Provider>
@@ -358,6 +359,7 @@ const productData = {...};
           productData={sampleProductData.data}
           sites={sites}
           dateRange={dateRange}
+          downloadDataContextUniqueId={2}
         >
           <DataProductAvailability />
         </DownloadDataContext.Provider>
@@ -393,7 +395,7 @@ const dateRange: ['2018-01', '2018-12'];
         This can be achieved with the <tt>disableSelection</tt> boolean prop.
       </DocBlock>
       <ExampleBlock>
-        <DownloadDataContext.Provider productData={sampleProductData.data}>
+        <DownloadDataContext.Provider productData={sampleProductData.data} downloadDataContextUniqueId={3}>
           <DataProductAvailability disableSelection />
         </DownloadDataContext.Provider>
       </ExampleBlock>

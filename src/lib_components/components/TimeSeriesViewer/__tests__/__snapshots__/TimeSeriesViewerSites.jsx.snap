@@ -830,7 +830,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core)
 </div>
 `;
 
-exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / relocatable) 1`] = `
+exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradient) 1`] = `
 <div
   className="MuiPaper-root MuiCard-root makeStyles-siteCard-10 MuiPaper-outlined MuiPaper-rounded"
 >
@@ -839,16 +839,16 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / reloc
       className="makeStyles-siteTitleContainer-11"
     >
       <img
-        alt="Aquatic Relocatable"
+        alt="Aquatic Gradient"
         height={32}
-        src="icon-site-relocatable-aquatic.svg"
+        src="icon-site-gradient-aquatic.svg"
         style={
           Object {
             "flexGrow": 0,
             "marginRight": 8,
           }
         }
-        title="Aquatic Relocatable"
+        title="Aquatic Gradient"
         width={32}
       />
       <h6
@@ -922,7 +922,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / reloc
           <h6
             className="MuiTypography-root MuiTypography-subtitle2"
           >
-            Aquatic Relocatable
+            Aquatic Gradient
           </h6>
           <p
             className="MuiTypography-root MuiTypography-body2"
@@ -933,7 +933,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / reloc
             }
           >
             <i>
-              water-based; location may change
+              water-based; gradient location
             </i>
           </p>
         </div>
@@ -1714,7 +1714,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
 </div>
 `;
 
-exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / relocatable) 1`] = `
+exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / gradient) 1`] = `
 <div
   className="MuiPaper-root MuiCard-root makeStyles-siteCard-10 MuiPaper-outlined MuiPaper-rounded"
 >
@@ -1723,16 +1723,16 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / r
       className="makeStyles-siteTitleContainer-11"
     >
       <img
-        alt="Terrestrial Relocatable"
+        alt="Terrestrial Gradient"
         height={32}
-        src="icon-site-relocatable-terrestrial.svg"
+        src="icon-site-gradient-terrestrial.svg"
         style={
           Object {
             "flexGrow": 0,
             "marginRight": 8,
           }
         }
-        title="Terrestrial Relocatable"
+        title="Terrestrial Gradient"
         width={32}
       />
       <h6
@@ -1806,7 +1806,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / r
           <h6
             className="MuiTypography-root MuiTypography-subtitle2"
           >
-            Terrestrial Relocatable
+            Terrestrial Gradient
           </h6>
           <p
             className="MuiTypography-root MuiTypography-body2"
@@ -1817,7 +1817,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / r
             }
           >
             <i>
-              land-based; location may change
+              land-based; gradient location
             </i>
           </p>
         </div>
@@ -2187,9 +2187,9 @@ exports[`TimeSeriesViewerSites SiteOption Renders as expected without stateCode 
     className="makeStyles-startFlex-20"
   >
     <img
-      alt="Terrestrial Relocatable"
+      alt="Terrestrial Gradient"
       height={24}
-      src="icon-site-relocatable-terrestrial.svg"
+      src="icon-site-gradient-terrestrial.svg"
       style={
         Object {
           "flexGrow": 0,
@@ -2197,7 +2197,7 @@ exports[`TimeSeriesViewerSites SiteOption Renders as expected without stateCode 
           "marginTop": 4,
         }
       }
-      title="Terrestrial Relocatable"
+      title="Terrestrial Gradient"
       width={24}
     />
     <div
@@ -2215,7 +2215,7 @@ exports[`TimeSeriesViewerSites SiteOption Renders as expected without stateCode 
       <p
         className="MuiTypography-root makeStyles-optionSubtitle-8 MuiTypography-body2 MuiTypography-gutterBottom"
       >
-        Terrestrial Relocatable - Domain D16 (D16 Name) - Lat/Lon: 45.762439, -122.330317
+        Terrestrial Gradient - Domain D16 (D16 Name) - Lat/Lon: 45.762439, -122.330317
       </p>
     </div>
   </div>

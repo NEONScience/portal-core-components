@@ -433,7 +433,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
             automatic sizing and aspect ratio based on the current viewport.
           </DocBlock>
           <ExampleBlock>
-            <SiteMap />
+            <SiteMap mapUniqueId={1} />
           </ExampleBlock>
           <CodeBlock>
             {`
@@ -451,7 +451,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
             Preset zoom value via the mapZoom property.
           </DocBlock>
           <ExampleBlock>
-            <SiteMap mapZoom={13} mapCenter={[44.95011, -110.58715]} />
+            <SiteMap mapZoom={13} mapCenter={[44.95011, -110.58715]} mapUniqueId={2} />
           </ExampleBlock>
           <CodeBlock>
             {`
@@ -471,7 +471,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
             for details and more varied examples.
           </DocBlock>
           <ExampleBlock>
-            <SiteMap selection="SITES" />
+            <SiteMap selection="SITES" mapUniqueId={3} />
           </ExampleBlock>
           <CodeBlock>
             {`
@@ -492,7 +492,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
             codes are also supported.
           </DocBlock>
           <ExampleBlock>
-            <SiteMap location="D08" />
+            <SiteMap location="D08" mapUniqueId={4} />
           </ExampleBlock>
           <CodeBlock>
             {`
@@ -513,7 +513,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
             sizes are also afforded.
           </DocBlock>
           <ExampleBlock>
-            <SiteMap tableFullHeight />
+            <SiteMap tableFullHeight mapUniqueId={5} />
           </ExampleBlock>
           <CodeBlock>
             {`
@@ -536,7 +536,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
             supported.
           </DocBlock>
           <ExampleBlock>
-            <SiteMap manualLocationData={manualLocationData} />
+            <SiteMap manualLocationData={manualLocationData} mapUniqueId={6} />
           </ExampleBlock>
           <CodeBlock>
             {`
@@ -589,7 +589,7 @@ return (
             map will be visible in the table.
           </DocBlock>
           <ExampleBlock>
-            <SiteMap view="split" />
+            <SiteMap view="split" mapUniqueId={7} />
           </ExampleBlock>
           <CodeBlock>
             {`

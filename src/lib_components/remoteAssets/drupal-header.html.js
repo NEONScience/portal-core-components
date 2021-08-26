@@ -519,11 +519,33 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/data-policies-citation" class="menu__link" data-drupal-link-system-path="node/6294">Data Policies &amp; Citation Guidelines</a>
+          <a href="https://www.neonscience.org/data-samples/data-notifications" class="menu__link" data-drupal-link-system-path="node/10951">Data Notifications</a>
+
+                  </li>
+              <li  class="menu__item menu__item--expanded">
+          <a href="https://www.neonscience.org/data-samples/guidelines-policies" class="menu__link" data-drupal-link-system-path="node/11642">Data Guidelines and Policies</a>
+
+          
+            
+                      <ul  class="menu menu--main" data-depth="2">
+
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/data-samples/guidelines-policies/citing" class="menu__link" data-drupal-link-system-path="node/11644">Acknowledging and Citing NEON</a>
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/data-notifications" class="menu__link" data-drupal-link-system-path="node/10951">Data Notifications</a>
+          <a href="https://www.neonscience.org/data-samples/guidelines-policies/publishing-research-outputs" class="menu__link" data-drupal-link-system-path="node/11629">Publishing Research Outputs</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/data-samples/guidelines-policies/usage-policies" class="menu__link" data-drupal-link-system-path="node/11643">Usage Policies</a>
+
+                  </li>
+      
+          </ul>
+  
+
+            
 
                   </li>
               <li  class="menu__item menu__item--expanded">
@@ -905,7 +927,11 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/efi-rcn-neon-ecological-forecasting-challenge" class="menu__link" data-drupal-link-system-path="node/11363">EFI-NEON Ecological Forecasting Challenges</a>
+          <a href="https://www.neonscience.org/neon-ambassador-program" class="menu__link" data-drupal-link-system-path="node/11625">NEON Ambassador Program</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/efi-rcn-neon-ecological-forecasting-challenge" class="menu__link" data-drupal-link-system-path="node/11363">EFI-NEON Ecological Forecasting Challenge</a>
 
                   </li>
               <li  class="menu__item">
