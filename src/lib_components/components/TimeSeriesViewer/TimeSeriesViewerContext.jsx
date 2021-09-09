@@ -1051,6 +1051,7 @@ const reducer = (state, action) => {
     case 'selectNoneQualityFlags':
       newState.selection.isDefault = false;
       newState.selection.qualityFlags = [];
+      calcStatus();
       return newState;
     case 'selectToggleQualityFlag':
       newState.selection.isDefault = false;
