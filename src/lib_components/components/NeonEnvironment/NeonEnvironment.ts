@@ -88,6 +88,9 @@ export interface INeonEnvironment {
   getAuthApiPath: Record<string, () => string>;
   getDownloadApiPath: Record<string, () => string>;
 
+  getDataProductsTaxonTypesPath: () => string;
+  getTaxonTypeDataProductsPath: () => string;
+
   getAuthPath: Record<string, () => string>;
 
   authTopics: Record<string, () => string>;
@@ -188,6 +191,9 @@ const NeonEnvironment: INeonEnvironment = {
   authTopics: {
     getAuth0: () => '/consumer/topic/auth0',
   },
+
+  getDataProductsTaxonTypesPath: (): string => `${NeonEnvironment.getApiPath.taxonomy}/types`,
+  getTaxonTypeDataProductsPath: (): string => `${NeonEnvironment.getApiPath.taxonomy}/products`,
 
   getVisusProductsBaseUrl: (): Undef<string> => process.env.REACT_APP_NEON_VISUS_PRODUCTS_BASE_URL,
   getVisusIframeBaseUrl: (): Undef<string> => process.env.REACT_APP_NEON_VISUS_IFRAME_BASE_URL,
