@@ -144,6 +144,11 @@ export interface IRouteService {
      * @returns
      */
     getPrototypeDatasetDetailPath: (uuid: string) => string;
+    /**
+     * Gets the taxonomic lists page path
+     * @returns The path
+     */
+    getTaxonomicListsPath: () => string;
 }
 declare const RouteService: IRouteService;
 export default RouteService;

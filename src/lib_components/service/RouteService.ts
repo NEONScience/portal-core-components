@@ -149,6 +149,12 @@ export interface IRouteService {
    * @returns
    */
   getPrototypeDatasetDetailPath: (uuid: string) => string;
+
+  /**
+   * Gets the taxonomic lists page path
+   * @returns The path
+   */
+  getTaxonomicListsPath: () => string;
 }
 
 const RouteService: IRouteService = {
@@ -210,12 +216,14 @@ const RouteService: IRouteService = {
   getReleaseDetailPath: (release: string): string => (
     `${NeonEnvironment.getWebHost()}/data-samples/data-management/data-revisions-releases/${release}`
   ),
+  getTaxonomicListsPath: (): string => (
+    `${NeonEnvironment.getWebHost()}/taxonomic-lists`
+  ),
 
   getDataProductCitationDownloadUrl: (): string => (
     // TODO: replace with web host once switch over happens
     NeonEnvironment.getApiHost()
   ),
-
   getDataApiPath: (): string => (
     // TODO: replace with web host once switch over happens
     `${NeonEnvironment.getApiHost()}/data-api`

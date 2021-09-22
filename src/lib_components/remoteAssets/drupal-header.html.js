@@ -493,8 +493,22 @@ export default html = `
           <a href="https://www.neonscience.org/data-collection/sediments" class="menu__link" data-drupal-link-system-path="node/10541">Sediments</a>
 
                   </li>
-              <li  class="menu__item">
+              <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-collection/soils" class="menu__link" data-drupal-link-system-path="node/10549">Soils</a>
+
+          
+            
+                      <ul  class="menu menu--main" data-depth="5">
+
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/data-collection/soils/soil-descriptions" class="menu__link" data-drupal-link-system-path="node/11685">Soil Descriptions</a>
+
+                  </li>
+      
+          </ul>
+  
+
+            
 
                   </li>
       
@@ -932,6 +946,10 @@ export default html = `
                   </li>
               <li  class="menu__item">
           <a href="https://www.neonscience.org/efi-rcn-neon-ecological-forecasting-challenge" class="menu__link" data-drupal-link-system-path="node/11363">EFI-NEON Ecological Forecasting Challenge</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/ncar-neon-community-collaborations" class="menu__link" data-drupal-link-system-path="node/11843">NCAR-NEON-Community Collaborations</a>
 
                   </li>
               <li  class="menu__item">
