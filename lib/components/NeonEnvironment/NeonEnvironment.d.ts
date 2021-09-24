@@ -35,6 +35,8 @@ export interface INeonEnvironment {
     getApiLdPath: Record<string, () => string>;
     getAuthApiPath: Record<string, () => string>;
     getDownloadApiPath: Record<string, () => string>;
+    getDataProductsTaxonTypesPath: () => string;
+    getTaxonTypeDataProductsPath: () => string;
     getAuthPath: Record<string, () => string>;
     authTopics: Record<string, () => string>;
     getVisusProductsBaseUrl: () => Undef<string>;
