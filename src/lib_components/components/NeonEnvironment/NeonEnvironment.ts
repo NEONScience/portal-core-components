@@ -192,8 +192,8 @@ const NeonEnvironment: INeonEnvironment = {
     getAuth0: () => '/consumer/topic/auth0',
   },
 
-  getDataProductTaxonTypesPath: (): string => `${NeonEnvironment.getFullApiPath('taxonomy')}/types`,
-  getTaxonTypeDataProductsPath: (): string => `${NeonEnvironment.getFullApiPath('taxonomy')}/products`,
+  getDataProductTaxonTypesPath: (): string => `${NeonEnvironment.getApiHost()}/${NeonEnvironment.getApiPath.taxonomy()}/types`,
+  getTaxonTypeDataProductsPath: (): string => `${NeonEnvironment.getApiHost()}/${NeonEnvironment.getApiPath.taxonomy()}/products`,
 
   getVisusProductsBaseUrl: (): Undef<string> => process.env.REACT_APP_NEON_VISUS_PRODUCTS_BASE_URL,
   getVisusIframeBaseUrl: (): Undef<string> => process.env.REACT_APP_NEON_VISUS_IFRAME_BASE_URL,
