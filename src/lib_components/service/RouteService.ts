@@ -217,7 +217,7 @@ const RouteService: IRouteService = {
     `${NeonEnvironment.getWebHost()}/data-samples/data-management/data-revisions-releases/${release}`
   ),
   getTaxonomicListsPath: (): string => (
-    `${NeonEnvironment.getWebHost()}/taxonomic-lists`
+    `${NeonEnvironment.getApiHost()}/taxonomic-lists`
   ),
 
   getDataProductCitationDownloadUrl: (): string => (
