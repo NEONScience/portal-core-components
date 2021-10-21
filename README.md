@@ -44,19 +44,25 @@ And used like any other component in the containing render() method.
 ### Using Components Outside of a NEON Domain
 
 Portal Core Components are designed to be used throughout the NEON web application platform as well
-as on any third party platform. However, in order to work properly outside of NEON, two environment
-variable must be set so that components that generate links do so properly.
+as on any third party platform. However, in order to work properly outside of NEON, environment
+variables must be set to reference the appropriate API endpoints.
 
-**`REACT_APP_NEON_HOST_OVERRIDE`**
+#### Development
 
-Set this environment variable to your host without a trailing slash (e.g. "https://myhost.org").
+**`REACT_APP_NEON_API_HOST_OVERRIDE`**
 
-**`REACT_APP_FOREIGN_LOCATION`**
+Set this environment variable to the desired API host without a trailing slash (e.g. "https://data.neonscience.org"). Note that this is a build time environment variable and if set within `.env.production` will impact *all* deployments.
 
-Set this environment variable to `true`.
+#### Production
 
-The host envvar above is typically reserved for development purposes and will be ignored in
-production *unless* the foreign location env var is true.
+By default, the production build will use the appropriate production values for the API host. To customize based on runtime environment variables, will need to inject the following object into the DOM prior to the application's initialization (e.g. inject into the static HTML server side or equivalent):
+
+```javascript
+window.NEON_SERVER_DATA = {
+  NeonPublicAPIHost: 'https://data.neonscience.org',
+  NeonWebHost: 'https://www.neonscience.org',
+};
+```
 
 #### Theming and Contexts Outside of a NEON Domain
 
@@ -92,14 +98,14 @@ wrapping them in additional resources unless the documentation specifically stat
     * If the entry point is the _same pre- and post-compile_ then use only `main` to point to the common entry point
     * Use kebab-case for `name`
     * Use CamelCase for files
-6. Add the new component to `src/lib_components/index.ts`
+6. If desirable to export the component at the library level, add the new component to `src/lib_components/index.ts`
 7. Run `npm run lib` to have the new component picked up and exported with the library
 
 ### NOTE: Verify new dependencies!
 
 If you have added or modified third-party dependencies then it is important to verify they work from a fresh install before committing changes upstream.
 
-Run `rm -rf node_modules && npm install` and re-run the app to validate a fresh install. This mimics how other apps importing `portal-core-components` will see your changes.
+Run `rm -rf node_modules && npm ci` and re-run the app to validate a fresh install. This mimics how other apps importing `portal-core-components` will see your changes.
 
 ### Using Workers in Components
 
@@ -158,7 +164,7 @@ Have nodejs.
 
 Clone this project from git.  In the cloned directory, run:
 
-    npm install
+    npm ci
 
 This should pick up everything from the package-lock.json file via the npm repos.
 

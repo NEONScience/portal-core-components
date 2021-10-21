@@ -133,6 +133,8 @@ export interface INeonEnvironment {
   getFullDownloadApiPath: (path: string) => string;
 
   getFullAuthPath: (path: string) => string;
+
+  requireCors: () => boolean;
 }
 
 const NeonEnvironment: INeonEnvironment = {
@@ -532,6 +534,17 @@ const NeonEnvironment: INeonEnvironment = {
   getFullGraphqlPath: (): string => {
     const host = NeonEnvironment.getApiHost();
     return `${host}${NeonEnvironment.getRootGraphqlPath()}`;
+  },
+
+  /**
+   * Indicates when a CORS request is required
+   * @returns
+   */
+  requireCors: (): boolean => {
+    if (window.location.host.includes('localhost')) {
+      return false;
+    }
+    return !NeonEnvironment.isApiHostValid(window.location.host);
   },
 };
 

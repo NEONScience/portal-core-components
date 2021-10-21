@@ -309,7 +309,8 @@ const AuthService: IAuthService = {
     const appliedRedirectUri = exists(redirectUriPath)
       ? redirectUriPath
       : env.route.getFullRoute(env.getRouterBaseHomePath());
-    const href = `${rootPath}?${REDIRECT_URI}=${appliedRedirectUri}`;
+    const redirectUrl = `${window.location.protocol}//${window.location.host}${appliedRedirectUri}`;
+    const href = `${rootPath}?${REDIRECT_URI}=${encodeURIComponent(redirectUrl)}`;
     window.location.href = href;
   },
   loginSilently: (
@@ -354,6 +355,8 @@ const AuthService: IAuthService = {
         AuthService.cancelWorkingResolver();
       },
       state.loginCancellationSubject$,
+      undefined,
+      true,
     );
   },
   logout: (path?: string, redirectUriPath?: string): void => {
@@ -362,9 +365,10 @@ const AuthService: IAuthService = {
       ? (path as string)
       : env.getFullAuthPath('logout');
     const appliedRedirectUri = exists(redirectUriPath)
-      ? `${env.getApiHost()}${redirectUriPath}`
-      : `${env.getApiHost()}${env.route.getFullRoute(env.getRouterBaseHomePath())}`;
-    const href = `${rootPath}?${REDIRECT_URI}=${appliedRedirectUri}`;
+      ? redirectUriPath
+      : env.route.getFullRoute(env.getRouterBaseHomePath());
+    const redirectUrl = `${window.location.protocol}//${window.location.host}${appliedRedirectUri}`;
+    const href = `${rootPath}?${REDIRECT_URI}=${encodeURIComponent(redirectUrl)}`;
     window.location.href = href;
   },
   logoutSilently: (
@@ -405,6 +409,8 @@ const AuthService: IAuthService = {
         AuthService.cancelWorkingResolver();
       },
       state.logoutCancellationSubject$,
+      undefined,
+      true,
     );
   },
   cancellationEmitter: (): void => {
@@ -412,7 +418,14 @@ const AuthService: IAuthService = {
     state.cancellationSubject$.unsubscribe();
   },
   fetchUserInfo: (cb: AnyVoidFunc, errorCb: AnyVoidFunc): Subscription => (
-    getJson(NeonEnvironment.getFullAuthPath('userInfo'), cb, errorCb, state.cancellationSubject$)
+    getJson(
+      NeonEnvironment.getFullAuthPath('userInfo'),
+      cb,
+      errorCb,
+      state.cancellationSubject$,
+      undefined,
+      true,
+    )
   ),
   fetchUserInfoWithDispatch: (
     dispatch: Dispatch<any>,
