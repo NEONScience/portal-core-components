@@ -271,7 +271,12 @@ const NeonApi = {
    * @return The RxJS Ajax Observable
    */
   getArcgisAssetObservable: (feature, siteCode) => (
-    getJsonObservable(`${NeonEnvironment.getFullApiPath('arcgisAssets')}/${feature}/${siteCode}`)
+    getJsonObservable(
+      `${NeonEnvironment.getFullApiPath('arcgisAssets')}/${feature}/${siteCode}`,
+      undefined,
+      true,
+      false,
+    )
   ),
 };
 
