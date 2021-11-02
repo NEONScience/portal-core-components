@@ -14,12 +14,14 @@ import { ajax } from 'rxjs/ajax';
 
 import REMOTE_ASSETS from '../../remoteAssetsMap/remoteAssetsMap';
 import AuthService from '../NeonAuth/AuthService';
+import NeonApi from '../NeonApi/NeonApi';
 import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
 import sitesJSON from '../../staticJSON/sites.json';
 import statesJSON from '../../staticJSON/states.json';
 import domainsJSON from '../../staticJSON/domains.json';
-import bundlesJSON from '../../staticJSON/bundles.json';
 import timeSeriesDataProductsJSON from '../../staticJSON/timeSeriesDataProducts.json';
+import DataProductBundleParser from '../../parser/DataProductBundleParser';
+import { existsNonEmpty } from '../../util/typeUtil';
 
 const DRUPAL_HEADER_HTML = REMOTE_ASSETS.DRUPAL_HEADER_HTML.KEY;
 const DRUPAL_FOOTER_HTML = REMOTE_ASSETS.DRUPAL_FOOTER_HTML.KEY;
@@ -34,9 +36,17 @@ export const FETCH_STATUS = {
 const DEFAULT_STATE = {
   data: {
     sites: {},
+    // See for details: interface DataProductBundleContext
+    bundles: {
+      bundleProducts: {},
+      bundleProductsForwardAvailability: {},
+      bundleDoiLookup: {},
+      splitProducts: {},
+      allBundleProducts: {},
+      apiResponse: [],
+    },
     states: statesJSON,
     domains: domainsJSON,
-    bundles: bundlesJSON,
     timeSeriesDataProducts: timeSeriesDataProductsJSON,
     stateSites: {}, // derived when sites is fetched
     domainSites: {}, // derived when sites is fetched
@@ -47,6 +57,7 @@ const DEFAULT_STATE = {
   },
   fetches: {
     sites: { status: FETCH_STATUS.AWAITING_CALL, error: null },
+    bundles: { status: FETCH_STATUS.AWAITING_CALL, error: null },
     auth: { status: null, error: null },
     [DRUPAL_HEADER_HTML]: { status: null, error: null },
     [DRUPAL_FOOTER_HTML]: { status: null, error: null },
@@ -109,6 +120,17 @@ const useNeonContextState = () => {
   return hookResponse;
 };
 
+const determineContextFetchFinal = (state) => {
+  const authFinal = !state.auth.useCore
+    || ((state.fetches.auth.status === FETCH_STATUS.SUCCESS)
+      || (state.fetches.auth.status === FETCH_STATUS.ERROR));
+  const sitesFinal = (state.fetches.sites.status === FETCH_STATUS.SUCCESS)
+    || (state.fetches.sites.status === FETCH_STATUS.ERROR);
+  const bundlesFinal = (state.fetches.bundles.status === FETCH_STATUS.SUCCESS)
+    || (state.fetches.bundles.status === FETCH_STATUS.ERROR);
+  return authFinal && sitesFinal && bundlesFinal;
+};
+
 /**
    Reducer
 */
@@ -127,16 +149,25 @@ const reducer = (state, action) => {
     case 'fetchSitesSucceeded':
       newState.fetches.sites.status = FETCH_STATUS.SUCCESS;
       newState.data.sites = action.sites;
-      newState.isFinal = !newState.auth.useCore
-        || ((newState.fetches.auth.status === FETCH_STATUS.SUCCESS)
-          || (newState.fetches.auth.status === FETCH_STATUS.ERROR));
+      newState.isFinal = determineContextFetchFinal(newState);
       return deriveRegionSites(newState);
     case 'fetchSitesFailed':
       newState.fetches.sites.status = FETCH_STATUS.ERROR;
       newState.fetches.sites.error = action.error;
-      newState.isFinal = !newState.auth.useCore
-        || ((newState.fetches.auth.status === FETCH_STATUS.SUCCESS)
-          || (newState.fetches.auth.status === FETCH_STATUS.ERROR));
+      newState.isFinal = determineContextFetchFinal(newState);
+      newState.hasError = true;
+      return newState;
+
+    // Actions for handling bundles fetch
+    case 'fetchBundlesSucceeded':
+      newState.fetches.bundles.status = FETCH_STATUS.SUCCESS;
+      newState.data.bundles = action.bundles;
+      newState.isFinal = determineContextFetchFinal(newState);
+      return deriveRegionSites(newState);
+    case 'fetchBundlesFailed':
+      newState.fetches.bundles.status = FETCH_STATUS.ERROR;
+      newState.fetches.bundles.error = action.error;
+      newState.isFinal = determineContextFetchFinal(newState);
       newState.hasError = true;
       return newState;
 
@@ -154,16 +185,14 @@ const reducer = (state, action) => {
       newState.fetches.auth.status = FETCH_STATUS.SUCCESS;
       newState.auth.isAuthenticated = !!action.isAuthenticated;
       newState.auth.userData = AuthService.parseUserData(action.response);
-      newState.isFinal = (newState.fetches.sites.status === FETCH_STATUS.SUCCESS)
-        || (newState.fetches.sites.status === FETCH_STATUS.ERROR);
+      newState.isFinal = determineContextFetchFinal(newState);
       return newState;
     case 'fetchAuthFailed':
       newState.fetches.auth.status = FETCH_STATUS.ERROR;
       newState.fetches.auth.error = action.error;
       newState.auth.isAuthenticated = false;
       newState.auth.userData = null;
-      newState.isFinal = (newState.fetches.sites.status === FETCH_STATUS.SUCCESS)
-        || (newState.fetches.sites.status === FETCH_STATUS.ERROR);
+      newState.isFinal = determineContextFetchFinal(newState);
       return newState;
 
     // Actions for handling remote assets
@@ -282,6 +311,24 @@ const Provider = (props) => {
         }),
         catchError((error) => {
           dispatch({ type: 'fetchSitesFailed', error: error.message });
+          return of(false);
+        }),
+      ).subscribe();
+    },
+    bundles: () => {
+      NeonApi.getProductBundlesObservable().pipe(
+        map((response) => {
+          const bundles = DataProductBundleParser.parseBundlesResponse(response);
+          if (!existsNonEmpty(bundles)) {
+            dispatch({ type: 'fetchBundlesFailed', error: 'malformed response' });
+            return of(false);
+          }
+          const context = DataProductBundleParser.parseContext(bundles);
+          dispatch({ type: 'fetchBundlesSucceeded', bundles: context });
+          return of(true);
+        }),
+        catchError((error) => {
+          dispatch({ type: 'fetchBundlesFailed', error: error.message });
           return of(false);
         }),
       ).subscribe();

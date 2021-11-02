@@ -138,7 +138,7 @@ describe('NeonContext', () => {
       );
       expect(newState.fetches.sites.status).toBe(FETCH_STATUS.SUCCESS);
       expect(newState.data.sites).toStrictEqual(sites);
-      expect(newState.isFinal).toBe(true);
+      expect(newState.isFinal).toBe(false);
       expect(newState.hasError).toBe(false);
       expect(newState.data.stateSites.WA).toStrictEqual(new Set(['SITE_A']));
       expect(newState.data.domainSites).toStrictEqual({ D16: new Set(['SITE_A']) });
@@ -151,7 +151,7 @@ describe('NeonContext', () => {
       expect(newState.fetches.sites.status).toBe(FETCH_STATUS.ERROR);
       expect(newState.fetches.sites.error).toBe('BAD');
       expect(newState.data.sites).toStrictEqual({});
-      expect(newState.isFinal).toBe(true);
+      expect(newState.isFinal).toBe(false);
       expect(newState.hasError).toBe(true);
     });
     test('fetchHtmlSucceeded', () => {

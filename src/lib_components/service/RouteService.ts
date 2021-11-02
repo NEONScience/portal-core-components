@@ -216,17 +216,18 @@ const RouteService: IRouteService = {
   getReleaseDetailPath: (release: string): string => (
     `${NeonEnvironment.getWebHost()}/data-samples/data-management/data-revisions-releases/${release}`
   ),
-  getTaxonomicListsPath: (): string => (
-    `${NeonEnvironment.getApiHost()}/taxonomic-lists`
+
+  getDataApiPath: (): string => (
+    `${NeonEnvironment.getApiHost()}/data-api`
   ),
 
+  getTaxonomicListsPath: (): string => (
+    // TODO: replace with web host once switch over happens
+    `${NeonEnvironment.getApiHost()}/taxonomic-lists`
+  ),
   getDataProductCitationDownloadUrl: (): string => (
     // TODO: replace with web host once switch over happens
     NeonEnvironment.getApiHost()
-  ),
-  getDataApiPath: (): string => (
-    // TODO: replace with web host once switch over happens
-    `${NeonEnvironment.getApiHost()}/data-api`
   ),
   getDataProductExploreSearchPath: (query: string): string => (
     `${RouteService.getDataProductExplorePath()}?search=${encodeURIComponent(query)}`

@@ -44,6 +44,14 @@ declare namespace Provider {
 declare function useNeonContextState(): ({
     data: {
         sites: {};
+        bundles: {
+            bundleProducts: {};
+            bundleProductsForwardAvailability: {};
+            bundleDoiLookup: {};
+            splitProducts: {};
+            allBundleProducts: {};
+            apiResponse: never[];
+        };
         states: {
             AL: {
                 name: string;
@@ -218,6 +226,9 @@ declare function useNeonContextState(): ({
             ND: {
                 name: string;
                 center: number[];
+                /**
+                   CONTEXT
+                */
                 zoom: number;
             };
             OH: {
@@ -428,65 +439,6 @@ declare function useNeonContextState(): ({
                 zoom: number;
             };
         };
-        bundles: {
-            children: {
-                "DP1.00007.001": string;
-                "DP1.00010.001": string;
-                "DP1.00034.001": string;
-                "DP1.00035.001": string;
-                "DP1.00036.001": string;
-                "DP1.00037.001": string;
-                "DP4.00067.001": string;
-                "DP1.00099.001": string;
-                "DP1.00100.001": string;
-                "DP2.00008.001": string;
-                "DP2.00009.001": string;
-                "DP2.00024.001": string;
-                "DP3.00008.001": string;
-                "DP3.00009.001": string;
-                "DP3.00010.001": string;
-                "DP4.00002.001": string;
-                "DP4.00007.001": string;
-                "DP4.00137.001": string;
-                "DP4.00201.001": string;
-                "DP1.10102.001": string[];
-                "DP1.10099.001": string[];
-                "DP1.10053.001": string;
-                "DP1.10031.001": string;
-                "DP1.10101.001": string;
-                "DP1.10080.001": string;
-                "DP1.10078.001": string;
-                "DP1.10100.001": string;
-                "DP1.10008.001": string;
-                "DP1.00097.001": string;
-            };
-            parents: {
-                "DP4.00200.001": {
-                    forwardAvailability: boolean;
-                };
-                "DP1.10067.001": {
-                    forwardAvailability: boolean;
-                };
-                "DP1.10026.001": {
-                    forwardAvailability: boolean;
-                };
-                "DP1.10033.001": {
-                    forwardAvailability: boolean;
-                };
-                "DP1.10086.001": {
-                    forwardAvailability: boolean;
-                };
-                "DP1.10047.001": {
-                    forwardAvailability: boolean;
-                };
-                "DP1.00096.001": {
-                    forwardAvailability: boolean;
-                };
-                "DP1.10066.001": {
-                    forwardAvailability: boolean;
-                };
-            };
-        };
         timeSeriesDataProducts: {
             productCodes: string[];
         };
@@ -502,6 +454,10 @@ declare function useNeonContextState(): ({
             error: null;
         };
         sites: {
+            status: string;
+            error: null;
+        };
+        bundles: {
             status: string;
             error: null;
         };
@@ -524,6 +480,14 @@ declare function useNeonContextState(): ({
 } & any[]) | ((() => void) | {
     data: {
         sites: {};
+        bundles: {
+            bundleProducts: {};
+            bundleProductsForwardAvailability: {};
+            bundleDoiLookup: {};
+            splitProducts: {};
+            allBundleProducts: {};
+            apiResponse: never[];
+        };
         states: {
             AL: {
                 name: string;
@@ -698,6 +662,9 @@ declare function useNeonContextState(): ({
             ND: {
                 name: string;
                 center: number[];
+                /**
+                   CONTEXT
+                */
                 zoom: number;
             };
             OH: {
@@ -908,65 +875,6 @@ declare function useNeonContextState(): ({
                 zoom: number;
             };
         };
-        bundles: {
-            children: {
-                "DP1.00007.001": string;
-                "DP1.00010.001": string;
-                "DP1.00034.001": string;
-                "DP1.00035.001": string;
-                "DP1.00036.001": string;
-                "DP1.00037.001": string;
-                "DP4.00067.001": string;
-                "DP1.00099.001": string;
-                "DP1.00100.001": string;
-                "DP2.00008.001": string;
-                "DP2.00009.001": string;
-                "DP2.00024.001": string;
-                "DP3.00008.001": string;
-                "DP3.00009.001": string;
-                "DP3.00010.001": string;
-                "DP4.00002.001": string;
-                "DP4.00007.001": string;
-                "DP4.00137.001": string;
-                "DP4.00201.001": string;
-                "DP1.10102.001": string[];
-                "DP1.10099.001": string[];
-                "DP1.10053.001": string;
-                "DP1.10031.001": string;
-                "DP1.10101.001": string;
-                "DP1.10080.001": string;
-                "DP1.10078.001": string;
-                "DP1.10100.001": string;
-                "DP1.10008.001": string;
-                "DP1.00097.001": string;
-            };
-            parents: {
-                "DP4.00200.001": {
-                    forwardAvailability: boolean;
-                };
-                "DP1.10067.001": {
-                    forwardAvailability: boolean;
-                };
-                "DP1.10026.001": {
-                    forwardAvailability: boolean;
-                };
-                "DP1.10033.001": {
-                    forwardAvailability: boolean;
-                };
-                "DP1.10086.001": {
-                    forwardAvailability: boolean;
-                };
-                "DP1.10047.001": {
-                    forwardAvailability: boolean;
-                };
-                "DP1.00096.001": {
-                    forwardAvailability: boolean;
-                };
-                "DP1.10066.001": {
-                    forwardAvailability: boolean;
-                };
-            };
-        };
         timeSeriesDataProducts: {
             productCodes: string[];
         };
@@ -982,6 +890,10 @@ declare function useNeonContextState(): ({
             error: null;
         };
         sites: {
+            status: string;
+            error: null;
+        };
+        bundles: {
             status: string;
             error: null;
         };
@@ -1005,9 +917,16 @@ declare function useNeonContextState(): ({
 declare namespace DEFAULT_STATE {
     namespace data {
         export const sites: {};
+        export namespace bundles {
+            const bundleProducts: {};
+            const bundleProductsForwardAvailability: {};
+            const bundleDoiLookup: {};
+            const splitProducts: {};
+            const allBundleProducts: {};
+            const apiResponse: never[];
+        }
         export { statesJSON as states };
         export { domainsJSON as domains };
-        export { bundlesJSON as bundles };
         export { timeSeriesDataProductsJSON as timeSeriesDataProducts };
         export const stateSites: {};
         export const domainSites: {};
@@ -1021,6 +940,10 @@ declare namespace DEFAULT_STATE {
             error: null;
         };
         sites: {
+            status: string;
+            error: null;
+        };
+        bundles: {
             status: string;
             error: null;
         };
@@ -1057,6 +980,5 @@ declare namespace ProviderPropTypes {
 }
 import statesJSON from "../../staticJSON/states.json";
 import domainsJSON from "../../staticJSON/domains.json";
-import bundlesJSON from "../../staticJSON/bundles.json";
 import timeSeriesDataProductsJSON from "../../staticJSON/timeSeriesDataProducts.json";
 import PropTypes from "prop-types";

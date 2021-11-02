@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 
 import { getJson } from '../../util/rxUtil';
-import { exists } from '../../util/typeUtil';
+import { exists, isStringNonEmpty } from '../../util/typeUtil';
 
 /**
  * Gets the API Token header from the environment.
@@ -196,6 +196,19 @@ const NeonApi = {
   getProductObservable: (productCode, release = null) => {
     const root = NeonEnvironment.getFullApiPath('products');
     const path = release ? `${root}/${productCode}/${release}` : `${root}/${productCode}`;
+    return getJsonObservable(path);
+  },
+
+  /**
+   * Gets the product bundles endpoint RxJS Observable.
+   * @param {string} release An optional release to scope the bundles.
+   * @return The RxJS Ajax Observable
+   */
+  getProductBundlesObservable: (release = null) => {
+    const root = NeonEnvironment.getFullApiPath('productBundles');
+    const path = isStringNonEmpty(release)
+      ? `${root}?release=${release}`
+      : `${root}`;
     return getJsonObservable(path);
   },
 
