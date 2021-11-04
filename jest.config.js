@@ -1,5 +1,8 @@
 module.exports = {
   verbose: true,
+  roots: [
+    '<rootDir>/src/',
+  ],
   moduleNameMapper: {
     'typeface-inter': '<rootDir>/src/__mocks__/fileMock.js',
     '\\.(css|less)$': '<rootDir>/src/__mocks__/styleMock.js',
@@ -15,6 +18,9 @@ module.exports = {
     '<rootDir>/src/**/__tests__/**/*.[jt]s?(x)',
   ],
   testPathIgnorePatterns: [
+    '<rootDir>/lib/',
+  ],
+  modulePathIgnorePatterns: [
     '<rootDir>/lib/',
   ],
   collectCoverage: true,

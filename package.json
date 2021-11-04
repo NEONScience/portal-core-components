@@ -86,6 +86,7 @@
     "start:prod": "mv build core-components && mkdir build && mv core-components/ build/ && npx serve build",
     "build": "react-scripts build",
     "test": "npx jest --config jest.config.js",
+    "test:clear-cache": "npx jest --clearCache",
     "test:updateSnapshots": "npx jest --config jest.config.js --updateSnapshot",
     "lint": "(npx eslint src/ --ext .js,.jsx || true) && exit 0",
     "lint:fix": "(npx eslint --fix src/ --ext .js,.jsx,.ts,.tsx || true) && exit 0",
