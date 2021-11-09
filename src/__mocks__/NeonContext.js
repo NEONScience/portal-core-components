@@ -16,7 +16,7 @@ import domainsJSON from '../lib_components/staticJSON/domains.json';
 import timeSeriesDataProductsJSON from '../lib_components/staticJSON/timeSeriesDataProducts.json';
 
 import NeonContext from '../lib_components/components/NeonContext/NeonContext';
-import DataProductBundleParser from '../lib_components/parser/DataProductBundleParser';
+import BundleParser from '../lib_components/parser/BundleParser';
 
 jest.mock('../lib_components/components/NeonContext/NeonContext', () => (
   {
@@ -38,8 +38,8 @@ NeonContext.useNeonContextState.mockReturnValue([
       sites: sitesJSON,
       states: statesJSON,
       domains: domainsJSON,
-      bundles: DataProductBundleParser.parseContext(
-        DataProductBundleParser.parseBundlesResponse(bundlesJSON),
+      bundles: BundleParser.parseContext(
+        BundleParser.parseBundlesResponse(bundlesJSON),
       ),
       timeSeriesDataProducts: timeSeriesDataProductsJSON,
       stateSites: {}, // derived when sites is fetched, needs to be mocked here?

@@ -1,10 +1,10 @@
 import { AjaxResponse } from 'rxjs/ajax';
 
 import { BundledDataProduct, DataProductBundle, ReleaseDataProductBundles } from '../types/neonApi';
-import { DataProductBundleContext } from '../types/neonContext';
+import { BundleContext } from '../types/neonContext';
 import { exists, existsNonEmpty, resolveAny } from '../util/typeUtil';
 
-export interface IDataProductBundleParser {
+export interface IBundleParser {
   /**
    * Parse the NEON API response to typed internal interface.
    * @param response The AJAX response to parse from.
@@ -17,10 +17,10 @@ export interface IDataProductBundleParser {
    * @param bundles The NEON API bundle response shape.
    * @return The context shape for storing bundle information.
    */
-  parseContext: (bundles: ReleaseDataProductBundles[]) => DataProductBundleContext;
+  parseContext: (bundles: ReleaseDataProductBundles[]) => BundleContext;
 }
 
-const DataProductBundleParser: IDataProductBundleParser = {
+const BundleParser: IBundleParser = {
   parseBundlesResponse: (response: AjaxResponse): ReleaseDataProductBundles[] => {
     if (!exists(response)) {
       return [];
@@ -31,8 +31,8 @@ const DataProductBundleParser: IDataProductBundleParser = {
     }
     return data as ReleaseDataProductBundles[];
   },
-  parseContext: (bundlesResponse: ReleaseDataProductBundles[]): DataProductBundleContext => {
-    const bundles: DataProductBundleContext = {
+  parseContext: (bundlesResponse: ReleaseDataProductBundles[]): BundleContext => {
+    const bundles: BundleContext = {
       bundleProducts: {},
       bundleProductsForwardAvailability: {},
       bundleDoiLookup: {},
@@ -94,6 +94,6 @@ const DataProductBundleParser: IDataProductBundleParser = {
   },
 };
 
-Object.freeze(DataProductBundleParser);
+Object.freeze(BundleParser);
 
-export default DataProductBundleParser;
+export default BundleParser;

@@ -20,7 +20,7 @@ import sitesJSON from '../../staticJSON/sites.json';
 import statesJSON from '../../staticJSON/states.json';
 import domainsJSON from '../../staticJSON/domains.json';
 import timeSeriesDataProductsJSON from '../../staticJSON/timeSeriesDataProducts.json';
-import DataProductBundleParser from '../../parser/DataProductBundleParser';
+import BundleParser from '../../parser/BundleParser';
 import { existsNonEmpty } from '../../util/typeUtil';
 
 const DRUPAL_HEADER_HTML = REMOTE_ASSETS.DRUPAL_HEADER_HTML.KEY;
@@ -36,7 +36,7 @@ export const FETCH_STATUS = {
 const DEFAULT_STATE = {
   data: {
     sites: {},
-    // See for details: interface DataProductBundleContext
+    // See for details: interface BundleContext
     bundles: {
       bundleProducts: {},
       bundleProductsForwardAvailability: {},
@@ -318,12 +318,12 @@ const Provider = (props) => {
     bundles: () => {
       NeonApi.getProductBundlesObservable().pipe(
         map((response) => {
-          const bundles = DataProductBundleParser.parseBundlesResponse(response);
+          const bundles = BundleParser.parseBundlesResponse(response);
           if (!existsNonEmpty(bundles)) {
             dispatch({ type: 'fetchBundlesFailed', error: 'malformed response' });
             return of(false);
           }
-          const context = DataProductBundleParser.parseContext(bundles);
+          const context = BundleParser.parseContext(bundles);
           dispatch({ type: 'fetchBundlesSucceeded', bundles: context });
           return of(true);
         }),

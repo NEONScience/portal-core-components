@@ -3,7 +3,7 @@ import { ReleaseDataProductBundles } from './neonApi';
  * NeonContext specific utilization of bundles, derived for quick lookups
  * of key properties of bundles.
  */
-export interface DataProductBundleContext {
+export interface BundleContext {
     /**
      * Defines the set of container products that have bundled products,
      * keyed by { "RELEASE": { "BUNDLE_PRODUCT_CODE": ["PRODUCT_CODE"] } }

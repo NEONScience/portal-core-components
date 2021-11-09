@@ -226,9 +226,6 @@ declare function useNeonContextState(): ({
             ND: {
                 name: string;
                 center: number[];
-                /**
-                   CONTEXT
-                */
                 zoom: number;
             };
             OH: {
@@ -662,9 +659,6 @@ declare function useNeonContextState(): ({
             ND: {
                 name: string;
                 center: number[];
-                /**
-                   CONTEXT
-                */
                 zoom: number;
             };
             OH: {

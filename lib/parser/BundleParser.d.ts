@@ -1,7 +1,7 @@
 import { AjaxResponse } from 'rxjs/ajax';
 import { ReleaseDataProductBundles } from '../types/neonApi';
-import { DataProductBundleContext } from '../types/neonContext';
-export interface IDataProductBundleParser {
+import { BundleContext } from '../types/neonContext';
+export interface IBundleParser {
     /**
      * Parse the NEON API response to typed internal interface.
      * @param response The AJAX response to parse from.
@@ -14,7 +14,7 @@ export interface IDataProductBundleParser {
      * @param bundles The NEON API bundle response shape.
      * @return The context shape for storing bundle information.
      */
-    parseContext: (bundles: ReleaseDataProductBundles[]) => DataProductBundleContext;
+    parseContext: (bundles: ReleaseDataProductBundles[]) => BundleContext;
 }
-declare const DataProductBundleParser: IDataProductBundleParser;
-export default DataProductBundleParser;
+declare const BundleParser: IBundleParser;
+export default BundleParser;

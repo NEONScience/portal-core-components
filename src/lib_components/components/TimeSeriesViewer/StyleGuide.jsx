@@ -23,7 +23,7 @@ import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
 import NeonContext from '../NeonContext/NeonContext';
 import Theme from '../Theme/Theme';
 
-import DataProductBundleService from '../../service/DataProductBundleService';
+import BundleService from '../../service/BundleService';
 
 import TimeSeriesViewerContext from './TimeSeriesViewerContext';
 import TimeSeriesViewer from './TimeSeriesViewer';
@@ -90,7 +90,7 @@ const AllProductsTimeSeries = () => {
             product.siteCodes
               && product.siteCodes.length
               && productIsIS(product)
-              && !DataProductBundleService.isProductDefined(bundles, product.productCode)
+              && !BundleService.isProductDefined(bundles, product.productCode)
           ))
           .map((product) => ({
             productCode: product.productCode,
