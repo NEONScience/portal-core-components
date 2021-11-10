@@ -13,6 +13,9 @@ import {
   finalize,
 } from 'rxjs/operators';
 
+import NeonEnvironment from '../components/NeonEnvironment/NeonEnvironment';
+import { exists } from './typeUtil';
+
 /**
  * Convenience method for utiliizing RxJS ajax.getJSON
  * @param {string} url
@@ -20,6 +23,7 @@ import {
  * @param {any} errorCallback
  * @param {any} cancellationSubject$
  * @param {Object|undefined} headers
+ * @param {boolean} cors
  * @return RxJS subscription
  */
 export const getJson = (
@@ -28,13 +32,30 @@ export const getJson = (
   errorCallback,
   cancellationSubject$,
   headers = undefined,
+  cors = false,
 ) => {
-  const rxObs$ = ajax.getJSON(url, headers).pipe(
+  const request = {
+    method: 'GET',
+    url,
+    responseType: 'json',
+    headers: {
+      Accept: 'application/json',
+      ...headers,
+    },
+  };
+  if (cors && NeonEnvironment.requireCors()) {
+    request.crossDomain = true;
+    request.withCredentials = true;
+  }
+  const rxObs$ = ajax(request).pipe(
     map((response) => {
+      const appliedResponse = (exists(response) && exists(response.response))
+        ? response.response
+        : response;
       if (typeof callback === 'function') {
-        return of(callback(response));
+        return of(callback(appliedResponse));
       }
-      return of(response);
+      return of(appliedResponse);
     }),
     catchError((error) => {
       console.error(error); // eslint-disable-line no-console

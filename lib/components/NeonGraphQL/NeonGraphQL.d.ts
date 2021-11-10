@@ -19,6 +19,7 @@ declare namespace NeonGraphQL {
     function getGraphqlAjaxRequest(query: string): {
         method: string;
         crossDomain: boolean;
+        withCredentials: boolean;
         url: string;
         headers: {
             'Content-Type': string;

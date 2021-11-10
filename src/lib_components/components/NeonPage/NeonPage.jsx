@@ -590,6 +590,8 @@ const NeonPage = (props) => {
       handleFetchNotificationsSuccess,
       handleFetchNotificationsError,
       cancellationSubject$,
+      undefined,
+      true,
     );
   }, [fetchNotificationsStatus]); // eslint-disable-line react-hooks/exhaustive-deps
 

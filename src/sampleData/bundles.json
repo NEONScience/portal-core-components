@@ -1,0 +1,304 @@
+{
+  "data": [
+    {
+      "release": "RELEASE-2021",
+      "dataProductBundles": [
+        {
+          "productCode": "DP1.00096.001",
+          "forwardAvailability": false,
+          "bundledProducts": [
+            {
+              "productCode": "DP1.00097.001"
+            }
+          ]
+        },
+        {
+          "productCode": "DP1.10026.001",
+          "forwardAvailability": false,
+          "bundledProducts": [
+            {
+              "productCode": "DP1.10053.001"
+            }
+          ]
+        },
+        {
+          "productCode": "DP1.10033.001",
+          "forwardAvailability": false,
+          "bundledProducts": [
+            {
+              "productCode": "DP1.10031.001"
+            },
+            {
+              "productCode": "DP1.10101.001"
+            }
+          ]
+        },
+        {
+          "productCode": "DP1.10047.001",
+          "forwardAvailability": false,
+          "bundledProducts": [
+            {
+              "productCode": "DP1.10008.001"
+            }
+          ]
+        },
+        {
+          "productCode": "DP1.10066.001",
+          "forwardAvailability": false,
+          "bundledProducts": [
+            {
+              "productCode": "DP1.10102.001",
+              "isPrimaryBundle": true
+            },
+            {
+              "productCode": "DP1.10099.001",
+              "isPrimaryBundle": true
+            }
+          ]
+        },
+        {
+          "productCode": "DP1.10067.001",
+          "forwardAvailability": false,
+          "bundledProducts": [
+            {
+              "productCode": "DP1.10102.001",
+              "isPrimaryBundle": false
+            },
+            {
+              "productCode": "DP1.10099.001",
+              "isPrimaryBundle": false
+            }
+          ]
+        },
+        {
+          "productCode": "DP1.10086.001",
+          "forwardAvailability": false,
+          "bundledProducts": [
+            {
+              "productCode": "DP1.10080.001"
+            },
+            {
+              "productCode": "DP1.10078.001"
+            },
+            {
+              "productCode": "DP1.10100.001"
+            }
+          ]
+        },
+        {
+          "productCode": "DP4.00200.001",
+          "forwardAvailability": true,
+          "bundledProducts": [
+            {
+              "productCode": "DP1.00007.001"
+            },
+            {
+              "productCode": "DP1.00010.001"
+            },
+            {
+              "productCode": "DP1.00034.001"
+            },
+            {
+              "productCode": "DP1.00035.001"
+            },
+            {
+              "productCode": "DP1.00036.001"
+            },
+            {
+              "productCode": "DP1.00037.001"
+            },
+            {
+              "productCode": "DP4.00067.001"
+            },
+            {
+              "productCode": "DP1.00099.001"
+            },
+            {
+              "productCode": "DP1.00100.001"
+            },
+            {
+              "productCode": "DP2.00008.001"
+            },
+            {
+              "productCode": "DP2.00009.001"
+            },
+            {
+              "productCode": "DP2.00024.001"
+            },
+            {
+              "productCode": "DP3.00008.001"
+            },
+            {
+              "productCode": "DP3.00009.001"
+            },
+            {
+              "productCode": "DP3.00010.001"
+            },
+            {
+              "productCode": "DP4.00002.001"
+            },
+            {
+              "productCode": "DP4.00007.001"
+            },
+            {
+              "productCode": "DP4.00137.001"
+            },
+            {
+              "productCode": "DP4.00201.001"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "release": "PROVISIONAL",
+      "dataProductBundles": [
+        {
+          "productCode": "DP1.00096.001",
+          "forwardAvailability": false,
+          "bundledProducts": [
+            {
+              "productCode": "DP1.00097.001"
+            }
+          ]
+        },
+        {
+          "productCode": "DP1.10026.001",
+          "forwardAvailability": false,
+          "bundledProducts": [
+            {
+              "productCode": "DP1.10053.001"
+            }
+          ]
+        },
+        {
+          "productCode": "DP1.10033.001",
+          "forwardAvailability": false,
+          "bundledProducts": [
+            {
+              "productCode": "DP1.10031.001"
+            },
+            {
+              "productCode": "DP1.10101.001"
+            }
+          ]
+        },
+        {
+          "productCode": "DP1.10047.001",
+          "forwardAvailability": false,
+          "bundledProducts": [
+            {
+              "productCode": "DP1.10008.001"
+            }
+          ]
+        },
+        {
+          "productCode": "DP1.10066.001",
+          "forwardAvailability": false,
+          "bundledProducts": [
+            {
+              "productCode": "DP1.10102.001",
+              "isPrimaryBundle": true
+            },
+            {
+              "productCode": "DP1.10099.001",
+              "isPrimaryBundle": true
+            }
+          ]
+        },
+        {
+          "productCode": "DP1.10067.001",
+          "forwardAvailability": false,
+          "bundledProducts": [
+            {
+              "productCode": "DP1.10102.001",
+              "isPrimaryBundle": false
+            },
+            {
+              "productCode": "DP1.10099.001",
+              "isPrimaryBundle": false
+            }
+          ]
+        },
+        {
+          "productCode": "DP1.10086.001",
+          "forwardAvailability": false,
+          "bundledProducts": [
+            {
+              "productCode": "DP1.10080.001"
+            },
+            {
+              "productCode": "DP1.10078.001"
+            },
+            {
+              "productCode": "DP1.10100.001"
+            }
+          ]
+        },
+        {
+          "productCode": "DP4.00200.001",
+          "forwardAvailability": true,
+          "bundledProducts": [
+            {
+              "productCode": "DP1.00007.001"
+            },
+            {
+              "productCode": "DP1.00010.001"
+            },
+            {
+              "productCode": "DP1.00034.001"
+            },
+            {
+              "productCode": "DP1.00035.001"
+            },
+            {
+              "productCode": "DP1.00036.001"
+            },
+            {
+              "productCode": "DP1.00037.001"
+            },
+            {
+              "productCode": "DP4.00067.001"
+            },
+            {
+              "productCode": "DP1.00099.001"
+            },
+            {
+              "productCode": "DP1.00100.001"
+            },
+            {
+              "productCode": "DP2.00008.001"
+            },
+            {
+              "productCode": "DP2.00009.001"
+            },
+            {
+              "productCode": "DP2.00024.001"
+            },
+            {
+              "productCode": "DP3.00008.001"
+            },
+            {
+              "productCode": "DP3.00009.001"
+            },
+            {
+              "productCode": "DP3.00010.001"
+            },
+            {
+              "productCode": "DP4.00002.001"
+            },
+            {
+              "productCode": "DP4.00007.001"
+            },
+            {
+              "productCode": "DP4.00137.001"
+            },
+            {
+              "productCode": "DP4.00201.001"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

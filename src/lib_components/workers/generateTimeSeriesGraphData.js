@@ -62,6 +62,17 @@ function tickerToIso(ticker, includeSeconds = true) {
     : `${YYYY}-${MM}-${DD}T${hh}:${mm}Z`;
 }
 
+function dateTimeToFloorSeconds(dt) {
+  if ((typeof dt === 'undefined') || (dt === null)) { return null; }
+  const d = new Date(dt);
+  const YYYY = d.getUTCFullYear().toString();
+  const MM = (d.getUTCMonth() + 1).toString().padStart(2, '0');
+  const DD = d.getUTCDate().toString().padStart(2, '0');
+  const hh = d.getUTCHours().toString().padStart(2, '0');
+  const mm = d.getUTCMinutes().toString().padStart(2, '0');
+  return `${YYYY}-${MM}-${DD}T${hh}:${mm}:00Z`;
+}
+
 function getNextMonth(month) {
   if (!monthIsValid(month)) { return null; }
   let { y, m } = monthToNumbers(month);
@@ -105,6 +116,7 @@ export default function generateTimeSeriesGraphData(payload = {}) {
     .require(tickerIsValid)
     .require(tickerToMonth)
     .require(tickerToIso)
+    .require(dateTimeToFloorSeconds)
     .require(getNextMonth);
 
   return worker.spawn((inData) => {
@@ -125,9 +137,46 @@ export default function generateTimeSeriesGraphData(payload = {}) {
         variables: selectedVariables,
       },
     } = inData;
+    // Optionally toggle to allow a purely positional mapping
+    // of generated, contiguous timestamp values based on the
+    // aggregation level, and the actual timestamps coming back in the
+    // data. Setting this to true makes some inherent assumptions
+    // about the data that are likely OK in most cases and will be
+    // more efficient, but can produce incorrect results given irregular
+    // timestamps in the data.
+    // Turning this off will resolve to mapping the timestamps from the
+    // data to the matching timestamp in the generated,
+    // contiguous timestamp values.
+    const ALLOW_POSITIONAL_TS_MAPPING = false;
+    // Optionally toggle to allow truncating series values
+    // in the case where there are more timestamp values than expected
+    // based on the generated, contiguous timestamp values for the aggregation
+    // level.
+    const ALLOW_POSITIONAL_TS_TRUNCATION = false;
+
     const timeStep = selectedTimeStep === 'auto' ? autoTimeStep : selectedTimeStep;
     const getQFNullFill = () => (qualityFlags || []).map(() => null);
     const TIME_STEPS = getTimeSteps();
+
+    // Function to match the searchTime in milliseconds since epoch,
+    // against a timestamp in the dataset
+    const findTimestampIdx = (data, searchTime, startIdx) => {
+      const isodateS = tickerToIso(searchTime, true);
+      const isodateM = tickerToIso(searchTime, false);
+      let dateIdx = -1;
+      for (let i = startIdx; i < data.length; i += 1) {
+        const dateTimeVal = data[i];
+        const dateTimeValZeroS = dateTimeToFloorSeconds(dateTimeVal);
+        const matched = (dateTimeVal === isodateS)
+          || (dateTimeValZeroS === isodateS)
+          || (dateTimeVal === isodateM);
+        if (matched) {
+          dateIdx = i;
+          break;
+        }
+      }
+      return dateIdx;
+    };
 
     /**
        Validate input (return unmodified state.graphData if anything fails)
@@ -315,38 +364,53 @@ export default function generateTimeSeriesGraphData(payload = {}) {
             const seriesStepCount = posData[month][pkg][timeStep].series[variable].data.length;
             // Series and month data lengths are identical (as expected):
             // Stream values directly in without matching timestamps
-            if (seriesStepCount === monthStepCount) {
-              posData[month][pkg][timeStep].series[variable].data.forEach((d, datumIdx) => {
-                newData[datumIdx + monthIdx][columnIdx] = d;
-              });
-              return;
+            if (ALLOW_POSITIONAL_TS_MAPPING) {
+              if (seriesStepCount === monthStepCount) {
+                posData[month][pkg][timeStep].series[variable].data.forEach((d, datumIdx) => {
+                  newData[datumIdx + monthIdx][columnIdx] = d;
+                });
+                return;
+              }
             }
             // More series data than month data:
             // Stream values directly in without matching timestamps, truncate data so as not to
             // exceed month step count
-            if (seriesStepCount >= monthStepCount) {
-              posData[month][pkg][timeStep].series[variable].data.forEach((d, datumIdx) => {
-                if (datumIdx >= monthStepCount) { return; }
-                newData[datumIdx + monthIdx][columnIdx] = d;
-              });
-              return;
+            if (ALLOW_POSITIONAL_TS_TRUNCATION) {
+              if (seriesStepCount >= monthStepCount) {
+                posData[month][pkg][timeStep].series[variable].data.forEach((d, datumIdx) => {
+                  if (datumIdx >= monthStepCount) { return; }
+                  newData[datumIdx + monthIdx][columnIdx] = d;
+                });
+                return;
+              }
             }
-            // Series data length is shorter than expected month length:
+            // The series data length does not match the expected month length so
+            // loop through by month steps pulling in series values through timestamp matching
             // Add what data we have by going through each time step in the month and comparing to
             // start dates in the data set, null-filling any steps without a corresponding datum
             // Note that sometimes dates come back with seconds and sometimes without, so for
             // matching we look for either.
-            const setSeriesValueByTimestamp = (t) => {
-              const isodateS = tickerToIso(newData[t][0].getTime(), true);
-              const isodateM = tickerToIso(newData[t][0].getTime(), false);
-              const dataIdx = posData[month][pkg][timeStep].series[dateTimeVariable].data
-                .findIndex((dateTimeVal) => (dateTimeVal === isodateS || dateTimeVal === isodateM));
-              newData[t][columnIdx] = dataIdx !== -1
-                ? posData[month][pkg][timeStep].series[variable].data[dataIdx]
-                : null;
-            };
+            // This assumes a chronological ordering of timestamps in both
+            // the input series data and generated month ticker timestamps.
+            // Therefore, if we find a matching timestamp value, we can assume
+            // that the next value won't be found before the last found index in the series data,
+            // allowing us to optimize the search in this scenario.
+            let lastIdx = 0;
+            const dtVarData = posData[month][pkg][timeStep].series[dateTimeVariable].data;
             for (let t = monthIdx; t < monthIdx + monthStepCount; t += 1) {
-              setSeriesValueByTimestamp(t);
+              const dataIdx = findTimestampIdx(
+                dtVarData,
+                newData[t][0].getTime(),
+                lastIdx,
+              );
+              if (dataIdx === -1) {
+                newData[t][columnIdx] = null;
+              } else {
+                lastIdx = dataIdx + 1;
+                newData[t][columnIdx] = posData[month][pkg][timeStep]
+                  .series[variable]
+                  .data[dataIdx];
+              }
             }
           });
 
@@ -370,40 +434,66 @@ export default function generateTimeSeriesGraphData(payload = {}) {
             }
             // This site/position/month/qf series exists, so add it into the quality data set
             const seriesStepCount = posData[month][pkg][timeStep].series[qf].data.length;
-            if (seriesStepCount !== monthStepCount) {
-              // The series data length does not match the expected month length so
-              // loop through by month steps pulling in series values through timestamp matching
-              const setQualityValueByTimestamp = (t) => {
-                const isodate = tickerToIso(newQualityData[t][0].getTime());
-                const dataIdx = posData[month][pkg][timeStep].series[dateTimeVariable].data
-                  .findIndex((dateTimeVal) => dateTimeVal === isodate);
-                if (dataIdx === -1) {
-                  newQualityData[t][columnIdx] = getQFNullFill();
-                  return;
-                }
+            // Series and month data lengths are identical as expected so we can stream
+            // values directly in without matching timestamps
+            if (ALLOW_POSITIONAL_TS_MAPPING) {
+              if (seriesStepCount === monthStepCount) {
+                posData[month][pkg][timeStep].series[qf].data.forEach((d, datumIdx) => {
+                  const t = datumIdx + monthIdx;
+                  if (!Array.isArray(newQualityData[t][columnIdx])) {
+                    newQualityData[t][columnIdx] = [];
+                  }
+                  newQualityData[t][columnIdx][qfIdx] = d;
+                });
+                return;
+              }
+            }
+            // More series data than month data:
+            // Stream values directly in without matching timestamps, truncate data so as not to
+            // exceed month step count
+            if (ALLOW_POSITIONAL_TS_TRUNCATION) {
+              if (seriesStepCount > monthStepCount) {
+                posData[month][pkg][timeStep].series[qf].data.forEach((d, datumIdx) => {
+                  if (datumIdx >= monthStepCount) { return; }
+                  const t = datumIdx + monthIdx;
+                  if (!Array.isArray(newQualityData[t][columnIdx])) {
+                    newQualityData[t][columnIdx] = [];
+                  }
+                  newQualityData[t][columnIdx][qfIdx] = d;
+                });
+                return;
+              }
+            }
+            // The series data length does not match the expected month length so
+            // loop through by month steps pulling in series values through timestamp matching
+            // This assumes a chronological ordering of timestamps in both
+            // the input series data and generated month ticker timestamps.
+            // Therefore, if we find a matching timestamp value, we can assume
+            // that the next value won't be found before the last found index in the series data,
+            // allowing us to optimize the search in this scenario.
+            let lastIdx = 0;
+            const dtVarData = posData[month][pkg][timeStep].series[dateTimeVariable].data;
+            for (let t = monthIdx; t < monthIdx + monthStepCount; t += 1) {
+              const dataIdx = findTimestampIdx(
+                dtVarData,
+                newQualityData[t][0].getTime(),
+                lastIdx,
+              );
+              if (dataIdx === -1) {
+                newQualityData[t][columnIdx] = getQFNullFill();
+              } else {
+                lastIdx = dataIdx + 1;
                 const d = (
                   typeof posData[month][pkg][timeStep].series[qf].data[dataIdx] !== 'undefined'
-                    ? posData[month][pkg][timeStep].series[qf].data[dataIdx] : null
+                    ? posData[month][pkg][timeStep].series[qf].data[dataIdx]
+                    : null
                 );
                 if (!Array.isArray(newQualityData[t][columnIdx])) {
                   newQualityData[t][columnIdx] = [];
                 }
                 newQualityData[t][columnIdx][qfIdx] = d;
-              };
-              for (let t = monthIdx; t < monthIdx + monthStepCount; t += 1) {
-                setQualityValueByTimestamp(t);
               }
-              return;
             }
-            // Series and month data lengths are identical as expected so we can stream
-            // values directly in without matching timestamps
-            posData[month][pkg][timeStep].series[qf].data.forEach((d, datumIdx) => {
-              const t = datumIdx + monthIdx;
-              if (!Array.isArray(newQualityData[t][columnIdx])) {
-                newQualityData[t][columnIdx] = [];
-              }
-              newQualityData[t][columnIdx][qfIdx] = d;
-            });
           });
         });
       });

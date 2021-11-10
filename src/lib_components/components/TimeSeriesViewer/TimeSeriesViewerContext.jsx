@@ -1051,6 +1051,7 @@ const reducer = (state, action) => {
     case 'selectNoneQualityFlags':
       newState.selection.isDefault = false;
       newState.selection.qualityFlags = [];
+      calcStatus();
       return newState;
     case 'selectToggleQualityFlag':
       newState.selection.isDefault = false;
@@ -1320,35 +1321,36 @@ const Provider = (props) => {
         if (!state.product.sites[siteCode].availableMonths.includes(month)) { return; }
         metaFetchTriggered = true;
         dispatch({ type: 'fetchSiteMonth', siteCode, month });
-        ajax.getJSON(getSiteMonthDataURL(siteCode, month), NeonApi.getApiTokenHeader()).pipe(
-          map((response) => {
-            if (response && response.data && response.data.files) {
+        NeonApi.getJsonObservable(getSiteMonthDataURL(siteCode, month), NeonApi.getApiTokenHeader())
+          .pipe(
+            map((response) => {
+              if (response && response.data && response.data.files) {
+                dispatch({
+                  type: 'fetchSiteMonthSucceeded',
+                  files: response.data.files,
+                  siteCode,
+                  month,
+                });
+                return of(true);
+              }
               dispatch({
-                type: 'fetchSiteMonthSucceeded',
-                files: response.data.files,
+                type: 'fetchSiteMonthFailed',
+                error: 'malformed response',
                 siteCode,
                 month,
               });
-              return of(true);
-            }
-            dispatch({
-              type: 'fetchSiteMonthFailed',
-              error: 'malformed response',
-              siteCode,
-              month,
-            });
-            return of(false);
-          }),
-          catchError((error) => {
-            dispatch({
-              type: 'fetchSiteMonthFailed',
-              error: error.message,
-              siteCode,
-              month,
-            });
-            return of(false);
-          }),
-        ).subscribe();
+              return of(false);
+            }),
+            catchError((error) => {
+              dispatch({
+                type: 'fetchSiteMonthFailed',
+                error: error.message,
+                siteCode,
+                month,
+              });
+              return of(false);
+            }),
+          ).subscribe();
       });
     };
 

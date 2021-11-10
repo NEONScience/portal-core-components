@@ -50,6 +50,11 @@ export function mockAjaxResponse(response = {}) {
   mockGetJSONAjaxResponse(response);
 }
 
+export function mockAjaxResponseWrapper(response = {}) {
+  mockRawAjaxResponse({ response: { ...response }});
+  mockGetJSONAjaxResponse({ response: { ...response }});
+}
+
 export function mockAjaxError(error = '') {
   mockRawAjaxError(error);
   mockGetJSONAjaxError(error);

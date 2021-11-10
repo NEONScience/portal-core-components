@@ -69,6 +69,7 @@ export interface INeonEnvironment {
     getFullGraphqlPath: () => string;
     getFullDownloadApiPath: (path: string) => string;
     getFullAuthPath: (path: string) => string;
+    requireCors: () => boolean;
 }
 declare const NeonEnvironment: INeonEnvironment;
 export default NeonEnvironment;

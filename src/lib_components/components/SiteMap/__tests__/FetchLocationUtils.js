@@ -1,5 +1,6 @@
 import {
   mockAjaxResponse,
+  mockAjaxResponseWrapper,
   mockAjaxError,
 } from '../../../../__mocks__/ajax';
 
@@ -52,11 +53,11 @@ describe('SiteMap - FetchLocationUtils', () => {
       return expect(fetchDomainHierarchy('D01')).rejects.toBeInstanceOf(Error);
     });
     test('rejects if response from API is not an object with a data attribute', () => {
-      mockAjaxResponse('response');
+      mockAjaxResponseWrapper('response');
       return expect(fetchDomainHierarchy('D01')).rejects.toBeInstanceOf(Error);
     });
     test('resolves by passing the fetched response to parseDomainHierarchy', () => {
-      mockAjaxResponse({ data: 'foo' });
+      mockAjaxResponseWrapper({ data: 'foo' });
       parseDomainHierarchy.mockImplementation((input) => `parsed: ${input}`);
       return expect(fetchDomainHierarchy('D01')).resolves.toBe('parsed: foo');
     });
@@ -74,11 +75,11 @@ describe('SiteMap - FetchLocationUtils', () => {
       return expect(fetchSingleLocationREST('GUAN')).rejects.toBeInstanceOf(Error);
     });
     test('rejects if response from API is not an object with a data attribute', () => {
-      mockAjaxResponse('response');
+      mockAjaxResponseWrapper('response');
       return expect(fetchSingleLocationREST('GUAN')).rejects.toBeInstanceOf(Error);
     });
     test('resolves by passing the fetched response to parseLocationsArray', () => {
-      mockAjaxResponse({ data: 'foo' });
+      mockAjaxResponseWrapper({ data: 'foo' });
       parseLocationsArray.mockImplementation(
         (input) => ({ GUAN: `parsed: ${input[0]}` }),
       );

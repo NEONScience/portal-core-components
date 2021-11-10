@@ -44,7 +44,9 @@ const NeonContextStateComponent = () => {
       <div>Domains</div>
       <pre style={preStyle}>{JSON.stringify(domains, null, 2)}</pre>
       <div>Bundles</div>
-      <pre style={preStyle}>{JSON.stringify(bundles, null, 2)}</pre>
+      <pre style={preStyle}>
+        {fetches.bundles.status === 'SUCCESS' ? JSON.stringify(bundles, null, 2) : fetches.bundles.status}
+      </pre>
     </div>
   );
 };
@@ -222,7 +224,9 @@ const NeonContextStateComponent = () => {
       <div>Domains</div>
       <pre style={preStyle}>{JSON.stringify(domains, null, 2)}</pre>
       <div>Bundles</div>
-      <pre style={preStyle}>{JSON.stringify(bundles, null, 2)}</pre>
+      <pre style={preStyle}>
+        {fetches.bundles.status === 'SUCCESS' ? JSON.stringify(bundles, null, 2) : fetches.bundles.status}
+      </pre>
     </div>
   );
 };
