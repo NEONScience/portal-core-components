@@ -34,7 +34,7 @@ export default html = `
           <ul  class="menu menu--main" data-depth="0">
 
               <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/about" title="About Us" class="menu__link" data-drupal-link-system-path="node/6225">About Us</a>
+          <a href="https://www.neonscience.org/about" class="menu__link" title="About Us" data-drupal-link-system-path="node/8793">About Us</a>
 
           
                                         <button class='arrow visually-hidden focusable' tabindex='0' aria-label='Toggle Mega Menu'><svg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M9 1L5 5 1 1' stroke='#fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></button>
@@ -59,15 +59,15 @@ export default html = `
           <a href="https://www.neonscience.org/about/overview/history" class="menu__link" data-drupal-link-system-path="node/19">History</a>
 
                   </li>
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/about/overview/management" class="menu__link" data-drupal-link-system-path="node/10533">Management</a>
-
-                  </li>
       
           </ul>
   
 
             
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/about/visionandmanagement" class="menu__link" data-drupal-link-system-path="node/10533">Management</a>
 
                   </li>
               <li  class="menu__item menu__item--expanded">
@@ -596,6 +596,10 @@ export default html = `
           <a href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases/release-2021" class="menu__link" data-drupal-link-system-path="node/11212">Release 2021</a>
 
                   </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases/release-2022" class="menu__link" data-drupal-link-system-path="node/11956">Release 2022</a>
+
+                  </li>
       
           </ul>
   
@@ -777,6 +781,10 @@ export default html = `
                   </li>
               <li  class="menu__item">
           <a href="https://data.neonscience.org/documents" class="menu__link">Document Library</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/resources/communications-resources/outreach-materials" class="menu__link" data-drupal-link-system-path="node/10949">Outreach Materials</a>
 
                   </li>
       

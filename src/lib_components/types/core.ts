@@ -9,6 +9,14 @@ export type UnknownRecord = Record<string, unknown>;
 export type NullableRecord = UnknownRecord | null | undefined;
 export type StylesHook = (...props: unknown[]) => Record<string, string>;
 export type StringPropsObject = {[key: string]: string};
+export type HocFuncType<T extends JSX.IntrinsicAttributes> = ((props: T) => JSX.Element);
+
+export interface Action<T = string> {
+  type: T;
+}
+export interface AnyAction extends Action {
+  [props: string]: unknown;
+}
 
 /**
  * Type to encapsulate silent authentication allowance

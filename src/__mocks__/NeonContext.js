@@ -31,6 +31,7 @@ jest.mock('../lib_components/components/NeonContext/NeonContext', () => (
   }
 ));
 
+const mockDispatch = jest.fn();
 NeonContext.useNeonContextState.mockReturnValue([
   {
     ...NeonContext.DEFAULT_STATE,
@@ -47,4 +48,5 @@ NeonContext.useNeonContextState.mockReturnValue([
     },
     isFinal: true,
   },
+  mockDispatch,
 ]);

@@ -3,12 +3,19 @@ import renderer from 'react-test-renderer';
 
 import cloneDeep from 'lodash/cloneDeep';
 
+import '../../../../__mocks__/NeonContext';
 import mockReactComponent from '../../../../__mocks__/mockReactComponent';
 
 import DownloadDataContext from '../../DownloadDataContext/DownloadDataContext';
 import DownloadStepForm from '../DownloadStepForm';
 
 jest.mock('material-table', () => mockReactComponent('material-table'));
+jest.mock('../../DataProductAvailability/DataProductAvailability', () =>
+  mockReactComponent('../../DataProductAvailability/DataProductAvailability')
+);
+jest.mock('../../Citation/DataProductCitation', () =>
+  mockReactComponent('../../Citation/DataProductCitation')
+);
 
 // Mock the DownloadDataContext state
 jest.mock('../../DownloadDataContext/DownloadDataContext', () => ({

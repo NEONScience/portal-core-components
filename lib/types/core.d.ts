@@ -1,3 +1,4 @@
+/// <reference types="react" />
 /**
  * General convenience type definitions
  */
@@ -13,6 +14,13 @@ export declare type StylesHook = (...props: unknown[]) => Record<string, string>
 export declare type StringPropsObject = {
     [key: string]: string;
 };
+export declare type HocFuncType<T extends JSX.IntrinsicAttributes> = ((props: T) => JSX.Element);
+export interface Action<T = string> {
+    type: T;
+}
+export interface AnyAction extends Action {
+    [props: string]: unknown;
+}
 /**
  * Type to encapsulate silent authentication allowance
  */

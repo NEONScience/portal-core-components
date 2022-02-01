@@ -4,6 +4,7 @@ import moment from 'moment';
 import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Card from '@material-ui/core/Card';
+import Chip from '@material-ui/core/Chip';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Link from '@material-ui/core/Link';
 import Tab from '@material-ui/core/Tab';
@@ -12,6 +13,7 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
+import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
 import Skeleton from '@material-ui/lab/Skeleton';
@@ -22,6 +24,7 @@ import SitesIcon from '@material-ui/icons/Place';
 import DateRangeIcon from '@material-ui/icons/DateRange';
 import VariablesIcon from '@material-ui/icons/Timeline';
 import AxesIcon from '@material-ui/icons/BorderInner';
+import InfoIcon from '@material-ui/icons/InfoOutlined';
 
 import Theme, { COLORS } from '../Theme/Theme';
 
@@ -119,6 +122,22 @@ const useStyles = makeStyles((theme) => ({
   },
   warningIcon: {
     color: Theme.colors.GOLD[500],
+  },
+  releaseChip: {
+    color: Theme.colors.BROWN[500],
+    border: `1px solid ${Theme.colors.BROWN[500]}`,
+    backgroundColor: Theme.colors.BROWN[100],
+    fontWeight: 600,
+    marginTop: Theme.spacing(0.5),
+    cursor: 'help',
+    '& svg': {
+      margin: theme.spacing(0, -0.5, 0, 0.75),
+    },
+  },
+  startFlex: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
   },
 }));
 
@@ -247,6 +266,46 @@ export function TimeSeriesViewerSummary() {
     );
   }
 
+  // Release
+  const useReleaseChip = false;
+  let latestRelease = null;
+  if (state.releases && state.releases.length) {
+    const sortedReleases = [...state.releases].sort(
+      (a, b) => (a.generationDate > b.generationDate ? -1 : 1),
+    );
+    latestRelease = sortedReleases[0].release;
+  }
+  const latestReleaseClause = useReleaseChip
+    ? ''
+    : ` (release: ${latestRelease || 'unknown'})`;
+  const releaseTooltip = state.release === null
+    ? `You are viewing only the latest released and provisional data (release: ${latestRelease || 'unknown'}).`
+    : `You are viewing product data only from the ${state.release} release (no provisional data will be included).`;
+  const releaseChipLabel = state.release === null
+    ? `Latest released and provisional data${latestReleaseClause}`
+    : `${state.release}`;
+  const releaseSummary = !useReleaseChip
+    ? (
+      <Typography variant="body2" key={releaseChipLabel}>
+        {releaseChipLabel}
+      </Typography>
+    ) : (
+      <div>
+        <Tooltip placement="bottom-start" title={releaseTooltip}>
+          <Chip
+            size="small"
+            label={(
+              <div className={classes.startFlex}>
+                {releaseChipLabel}
+                <InfoIcon fontSize="small" />
+              </div>
+            )}
+            className={classes.releaseChip}
+          />
+        </Tooltip>
+      </div>
+    );
+
   // Sites
   const sitesSummary = !sites.length ? (
     <Skeleton {...skeletonProps} width={175} />
@@ -313,7 +372,7 @@ export function TimeSeriesViewerSummary() {
       axes[yAxis].push({ title: 'Scale', value: logscale ? 'Logarithmic' : 'Linear' });
       axes[yAxis].push({ title: 'Units', value: yAxes[yAxis].units });
       const rangeMode = Y_AXIS_RANGE_MODE_DETAILS[yAxes[yAxis].rangeMode].name;
-      const range = `${rangeMode} (${yAxes[yAxis].axisRange[0].toString()} – ${yAxes[yAxis].axisRange[1].toString()} ${yAxes[yAxis].units})`;
+      const range = `${rangeMode} (${yAxes[yAxis].axisRange[0].toString()} - ${yAxes[yAxis].axisRange[1].toString()} ${yAxes[yAxis].units})`;
       axes[yAxis].push({ title: 'Range', value: range });
     }
   });
@@ -353,6 +412,10 @@ export function TimeSeriesViewerSummary() {
       <div className={classes.summaryDiv}>
         {productSummaryTitle}
         {productSummaryDescription}
+      </div>
+      <div className={classes.summaryDiv}>
+        <Typography variant="subtitle2">Release</Typography>
+        {releaseSummary}
       </div>
       <div className={classes.summaryDiv}>
         <Typography variant="subtitle2">Sites & Positions</Typography>

@@ -10,8 +10,10 @@ import cloneDeep from 'lodash/cloneDeep';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
+import Grid from '@material-ui/core/Grid';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
+import Skeleton from '@material-ui/lab/Skeleton';
 import Typography from '@material-ui/core/Typography';
 
 import DocBlock from '../../../components/DocBlock';
@@ -19,8 +21,10 @@ import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 
 import DialogBase from '../DialogBase/DialogBase';
+import NeonApi from '../NeonApi';
 import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
 import NeonContext from '../NeonContext/NeonContext';
+import ReleaseFilter from '../ReleaseFilter/ReleaseFilter';
 import Theme from '../Theme/Theme';
 
 import BundleService from '../../service/BundleService';
@@ -43,32 +47,53 @@ const useStyles = makeStyles((theme) => ({
 
 // Set this to initialize the all products demo on a particular product
 const DEMO_PRODUCT_CODE = null;
+const DEMO_RELEASE_TAG = null;
 
 const allProductsInitialState = {
-  fetch: { status: 'AWAITING_CALL', error: null },
+  fetchProducts: { status: 'AWAITING_CALL', error: null },
   products: [],
   selectedProduct: null,
+  fetchReleases: { status: 'AWAITING_CALL', error: null },
+  releases: [],
+  selectedRelease: null,
 };
 const allProductsReducer = (state, action) => {
   const newState = { ...state };
   switch (action.type) {
-    case 'fetchCalled':
-      newState.fetch.status = 'FETCHING';
+    case 'fetchProductsCalled':
+      newState.fetchProducts.status = 'FETCHING';
       return newState;
-    case 'fetchSucceeded':
-      newState.fetch.status = 'SUCCESS';
+    case 'fetchProductsSucceeded':
+      newState.fetchProducts.status = 'SUCCESS';
       newState.products = action.products;
       newState.selectedProduct = DEMO_PRODUCT_CODE || action.products[0].productCode;
       return newState;
-    case 'fetchFailed':
-      newState.fetch.status = 'ERROR';
-      newState.fetch.error = action.error;
+    case 'fetchProductsFailed':
+      newState.fetchProducts.status = 'ERROR';
+      newState.fetchProducts.error = action.error;
       return newState;
     case 'selectProduct':
       if (!state.products.find((product) => product.productCode === action.productCode)) {
         return state;
       }
       newState.selectedProduct = action.productCode;
+      return newState;
+    case 'fetchReleasesCalled':
+      newState.fetchReleases.status = 'FETCHING';
+      return newState;
+    case 'fetchReleasesSucceeded':
+      newState.fetchReleases.status = 'SUCCESS';
+      newState.releases = action.releases;
+      if (DEMO_RELEASE_TAG !== null) {
+        newState.selectedRelease = DEMO_RELEASE_TAG;
+      }
+      return newState;
+    case 'fetchReleasesFailed':
+      newState.fetchReleases.status = 'ERROR';
+      newState.fetchReleases.error = action.error;
+      return newState;
+    case 'selectRelease':
+      newState.selectedRelease = action.release;
       return newState;
     default:
       return state;
@@ -97,61 +122,123 @@ const AllProductsTimeSeries = () => {
             productName: product.productName,
           }));
         if (!products.length) {
-          dispatch({ type: 'fetchFailed', error: 'fetch succeeded; no products found' });
+          dispatch({ type: 'fetchProductsFailed', error: 'fetch succeeded; no products found' });
           return of(false);
         }
-        dispatch({ type: 'fetchSucceeded', products });
+        dispatch({ type: 'fetchProductsSucceeded', products });
         return of(true);
       }
-      dispatch({ type: 'fetchFailed', error: 'malformed response' });
+      dispatch({ type: 'fetchProductsFailed', error: 'malformed response' });
       return of(false);
     }),
     catchError((error) => {
-      dispatch({ type: 'fetchFailed', error: error.message });
+      dispatch({ type: 'fetchProductsFailed', error: error.message });
+      return of(false);
+    }),
+  );
+  const fetchAllReleases$ = NeonApi.getReleasesObservable().pipe(
+    map((response) => {
+      if (response.data) {
+        const { data: releases } = response;
+        if (!releases.length) {
+          dispatch({ type: 'fetchReleasesFailed', error: 'fetch succeeded; no releases found' });
+          return of(false);
+        }
+        dispatch({ type: 'fetchReleasesSucceeded', releases });
+        return of(true);
+      }
+      dispatch({ type: 'fetchReleasesFailed', error: 'malformed response' });
+      return of(false);
+    }),
+    catchError((error) => {
+      dispatch({ type: 'fetchReleasesFailed', error: error.message });
       return of(false);
     }),
   );
   useEffect(() => {
-    if (state.fetch.status === 'AWAITING_CALL') {
-      dispatch({ type: 'fetchCalled' });
+    if (state.fetchProducts.status === 'AWAITING_CALL') {
+      dispatch({ type: 'fetchProductsCalled' });
       fetchAllProducts$.subscribe();
     }
+    if (state.fetchReleases.status === 'AWAITING_CALL') {
+      dispatch({ type: 'fetchReleasesCalled' });
+      fetchAllReleases$.subscribe();
+    }
   });
-  // Render
-  if (state.fetch.status === 'ERROR') {
-    return <div>{`Error: ${state.fetch.error}`}</div>;
-  }
-  if (state.fetch.status === 'SUCCESS') {
-    const handleChange = (event) => {
-      dispatch({ type: 'selectProduct', productCode: event.target.value });
-    };
+  const loadStatus = ['AWAITING_CALL', 'FETCHING'];
+  const isLoading = loadStatus.includes(state.fetchProducts.status)
+    || loadStatus.includes(state.fetchReleases.status);
+  const isError = state.fetchProducts.status === 'ERROR'
+    || state.fetchReleases.status === 'ERROR';
+  if (isLoading) {
     return (
-      <div style={{ width: '100%' }}>
-        <Typography variant="h6" id="all-products-time-series-select-label" gutterBottom>
-          Select Data Product
-        </Typography>
-        <Select
-          id="all-products-time-series-select"
-          aria-labelledby="all-products-time-series-select-label"
-          variant="outlined"
-          value={state.selectedProduct}
-          onChange={handleChange}
-          style={{ width: '100%', marginBottom: '32px' }}
-        >
-          {state.products.map((product) => {
-            const { productCode, productName } = product;
-            return (
-              <MenuItem key={productCode} value={productCode}>
-                {`${productCode} - ${productName}`}
-              </MenuItem>
-            );
-          })}
-        </Select>
-        <TimeSeriesViewer productCode={state.selectedProduct} timeSeriesUniqueId={1} />
+      <div>
+        <Skeleton variant="rect" width="100%" height={800} />
       </div>
     );
   }
-  return <div>Loading...</div>;
+  if (isError) {
+    return (
+      <div>
+        <div>
+          {`Error: ${state.fetchProducts.error}`}
+        </div>
+        <div>
+          {`Error: ${state.fetchReleases.error}`}
+        </div>
+      </div>
+    );
+  }
+  const handleChange = (event) => {
+    dispatch({ type: 'selectProduct', productCode: event.target.value });
+  };
+  const handleReleaseChange = (release) => {
+    dispatch({ type: 'selectRelease', release });
+  };
+  return (
+    <div style={{ width: '100%' }}>
+      <Grid container spacing={3}>
+        <Grid item xs={12} md={6}>
+          <Typography variant="h6" id="all-products-time-series-select-label" gutterBottom>
+            Select Data Product
+          </Typography>
+          <Select
+            id="all-products-time-series-select"
+            aria-labelledby="all-products-time-series-select-label"
+            variant="outlined"
+            value={state.selectedProduct}
+            onChange={handleChange}
+            style={{ width: '100%', marginBottom: '32px' }}
+          >
+            {state.products.map((product) => {
+              const { productCode, productName } = product;
+              return (
+                <MenuItem key={productCode} value={productCode}>
+                  {`${productCode} - ${productName}`}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <ReleaseFilter
+            showGenerationDate
+            showProductCount
+            releases={state.releases}
+            selected={state.selectedRelease}
+            onChange={handleReleaseChange}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TimeSeriesViewer
+            productCode={state.selectedProduct}
+            release={state.selectedRelease}
+            timeSeriesUniqueId={1}
+          />
+        </Grid>
+      </Grid>
+    </div>
+  );
 };
 
 const StaticTimeSeriesViewer = () => {
