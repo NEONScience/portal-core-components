@@ -653,7 +653,7 @@ export default function TimeSeriesViewerGraph() {
       ? `, ${state.release} `
       : '';
     return state.product.productName
-      ? `${state.product.productName}${releaseTitle} (${state.product.productCode})`
+      ? `${state.product.productName} (${state.product.productCode})${releaseTitle}`
       : `${state.product.productCode}${releaseTitle}`;
   };
 

@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-fragments */
 import React from 'react';
-import dateFormat from 'dateformat';
 
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
@@ -14,20 +13,18 @@ import Link from '@material-ui/core/Link';
 import Skeleton from '@material-ui/lab/Skeleton';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
-import { Variant } from '@material-ui/core/styles/createTypography';
 
 import CopyIcon from '@material-ui/icons/Assignment';
 import DownloadIcon from '@material-ui/icons/SaveAlt';
 import QuoteIcon from '@material-ui/icons/FormatQuote';
 
 import DataProductCitationContext from './Context';
+import Service from './Service';
 import ErrorCard from '../../Card/ErrorCard';
 import WarningCard from '../../Card/WarningCard';
 import Theme from '../../Theme/Theme';
 
-import { CONTEXT_STATUS } from './State';
-
-import BundleService from '../../../service/BundleService';
+import CitationService from '../../../service/CitationService';
 import DataCiteService, {
   CitationDownloadType,
 } from '../../../service/DataCiteService';
@@ -35,7 +32,19 @@ import RouteService from '../../../service/RouteService';
 import { exists, isStringNonEmpty } from '../../../util/typeUtil';
 
 import { NeonTheme } from '../../Theme/types';
-import { Nullable } from '../../../types/core';
+import {
+  CitationRelease,
+  ContextDataProduct,
+  ContextStatus,
+  PROVISIONAL_RELEASE,
+} from './State';
+import {
+  DataProductCitationViewState,
+  DataProductCitationViewProps,
+  DisplayType,
+  CitationTextOnlyProps,
+} from './ViewState';
+import { Nullable, UnknownRecord } from '../../../types/core';
 
 const useStyles = makeStyles((theme: NeonTheme) => ({
   cardActions: {
@@ -102,25 +111,11 @@ const useStyles = makeStyles((theme: NeonTheme) => ({
   },
 }));
 
-export interface CitationTextOnlyProps {
-  variant?: Variant | undefined;
-  cssClass?: string;
-}
-
-interface DataProductCitationViewProps {
-  showQuoteIcon?: boolean;
-  disableConditional?: boolean;
-  disableSkeleton?: boolean;
-  showTextOnly?: boolean;
-  textOnlyProps?: CitationTextOnlyProps;
-}
-
 const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
   props: DataProductCitationViewProps,
 ): JSX.Element => {
   const {
     showQuoteIcon,
-    disableConditional,
     disableSkeleton,
     showTextOnly,
     textOnlyProps,
@@ -136,206 +131,124 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     appliedTextOnly = textOnlyProps as CitationTextOnlyProps;
   }
 
-  const {
-    release: currentReleaseTag,
-    bundle,
-    component: {
-      status,
-    },
-    data: {
-      product: baseProduct,
-      productReleases,
-      bundleParents,
-      bundleParentReleases,
-      releases,
-    },
-    neonContextState: {
-      data: {
-        bundles: bundlesCtx,
-      },
-    },
-  } = state;
-
-  switch (status) {
-    case CONTEXT_STATUS.INITIALIZING:
-    case CONTEXT_STATUS.FETCHING:
-    case CONTEXT_STATUS.HAS_FETCHES_TO_TRIGGER:
-      if (disableSkeleton) {
-        return (<React.Fragment />);
-      }
-      return (
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Skeleton variant="rect" width="100%" height={40} />
-          </Grid>
-          {!showTextOnly ? (
-            <Grid item xs={12}>
-              <Skeleton variant="rect" width="100%" height={180} />
-            </Grid>
-          ) : null}
-        </Grid>
-      );
-    case CONTEXT_STATUS.ERROR:
-      return (
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <ErrorCard title="Data Product Citation Generation Error" />
-          </Grid>
-        </Grid>
-      );
-    case CONTEXT_STATUS.READY:
-    default:
-      break;
-  }
-
-  const latestRelease = (releases && releases.length)
-    ? releases.find((r: any) => r.showCitation)
-    : null;
-
-  const hasBundleCode = (bundle.parentCodes.length > 0) && isStringNonEmpty(bundle.doiProductCode);
-  const bundleParentCode = hasBundleCode
-    ? bundle.doiProductCode
-    : null;
-
-  const citableBaseProduct = hasBundleCode
-    ? bundleParents[bundleParentCode] || baseProduct
-    : baseProduct;
-
-  /**
-   * Determines if the latest release has a bundle defined for this product
-   * @returns True if the latest release has a bundle defined for this product
-   */
-  const hasLatestBundleRelease = () => {
-    if (!bundleParentReleases || !bundleParentCode) {
-      return false;
-    }
-    const latestReleaseTag = (latestRelease || {}).release;
-    if (!latestReleaseTag) {
-      return false;
-    }
-    return BundleService.isProductInBundle(
-      bundlesCtx,
-      latestReleaseTag,
-      baseProduct.productCode,
-    );
-  };
-
-  let citableReleaseProduct: Nullable<any> = null;
-  const citationReleaseTag = currentReleaseTag || (latestRelease || {}).release || null;
-  if (citationReleaseTag) {
-    // If we're referencing latest release and provisional, and there isn't a bundle
-    // defined for the latest release, use base product for release citation
-    if (!currentReleaseTag && !hasLatestBundleRelease()) {
-      citableReleaseProduct = baseProduct;
-    } else {
-      // When a bundled product code is available for the given release,
-      // get the product for the parent code and release.
-      // Otherwise, the citable product is the current product for the specified
-      // release when available.
-      citableReleaseProduct = bundleParentCode
-        ? (bundleParentReleases[bundleParentCode] || {})[citationReleaseTag] || null
-        : productReleases[citationReleaseTag] || null;
-    }
-  }
-
-  let bundleParentLink: JSX.Element|null = null;
-  if (bundleParentCode) {
-    const bundleParentName = currentReleaseTag && citableReleaseProduct
-      ? citableReleaseProduct.productName
-      : citableBaseProduct.productName;
-    let bundleParentHref = RouteService.getProductDetailPath(bundleParentCode);
-    if (currentReleaseTag) {
-      bundleParentHref = RouteService.getProductDetailPath(bundleParentCode, currentReleaseTag);
-    }
-    bundleParentLink = (
-      <Link href={bundleParentHref}>
-        {`${bundleParentName} (${bundleParentCode})`}
-      </Link>
-    );
-  }
-
-  const dataPolicyLink = (
-    <Link href={RouteService.getDataPoliciesCitationPath()}>
-      Data Policies &amp; Citation Guidelines
-    </Link>
-  );
-
-  const getReleaseObject = (release: any) => (
-    !release || release === 'provisional' ? null : (
-      releases.find((r: any) => r.release === release)
-    )
-  );
-
-  const currentReleaseObject = getReleaseObject(currentReleaseTag);
-  const hideCitation = currentReleaseObject && !currentReleaseObject.showCitation;
-
-  const getReleaseDoi = (release: any) => {
-    const releaseObject = getReleaseObject(release);
-    return releaseObject && releaseObject.productDoi && releaseObject.productDoi.url
-      ? releaseObject.productDoi.url
-      : null;
-  };
-
-  const getCitationText = (product: any, release: any) => {
-    if (!product) { return null; }
-    const releaseObject = getReleaseObject(release);
-    const citationDoi = (
-      releaseObject && releaseObject.productDoi && releaseObject.productDoi.url
-        ? releaseObject.productDoi.url
-        : null
-    );
-    const now = new Date();
-    const today = dateFormat(now, 'mmmm d, yyyy');
-    const neon = 'NEON (National Ecological Observatory Network)';
-    const productName = releaseObject === null
-      ? `${product.productName} (${product.productCode})`
-      : `${product.productName}, ${release} (${product.productCode})`;
-    const doiText = citationDoi ? `. ${citationDoi}` : '';
-    const url = RouteService.getDataProductCitationDownloadUrl();
-    const accessed = releaseObject === null
-      ? `${url} (accessed ${today})`
-      : `Dataset accessed from ${url} on ${today}`;
-    return `${neon}. ${productName}${doiText}. ${accessed}`;
-  };
+  const viewState: DataProductCitationViewState = Service.useViewState(state, props);
 
   // Click handler for initiating a citation download
-  const handleDownloadCitation = (release: any, format: any) => {
-    const provisional = release === 'provisional';
-    const citationProduct = provisional ? citableBaseProduct : citableReleaseProduct;
+  const handleDownloadCitation = (
+    release: string,
+    format: string,
+    provisional = true,
+  ): void => {
+    const citationProduct: Nullable<ContextDataProduct> = provisional
+      ? viewState.citableBaseProduct
+      : viewState.citableReleaseProduct;
+    if (!exists(citationProduct)) {
+      return;
+    }
+    const coercedTarget: UnknownRecord = {
+      ...citationProduct,
+    };
     // Release: fetch content from DataCite API to pipe into download
-    const fullDoi = getReleaseDoi(release);
+    const fullDoi: Nullable<string> = Service.getReleaseDoi(viewState.releases, release);
     DataCiteService.downloadCitation(
       format,
       CitationDownloadType.DATA_PRODUCT,
-      citationProduct,
-      fullDoi,
+      coercedTarget,
+      fullDoi as string,
       release,
     );
   };
 
-  const renderCitationBlurb = () => {
+  const renderSkeleton = (): JSX.Element => {
+    if (disableSkeleton) {
+      return (<React.Fragment />);
+    }
+    return (
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Skeleton variant="rect" width="100%" height={40} />
+        </Grid>
+        {!showTextOnly ? (
+          <Grid item xs={12}>
+            <Skeleton variant="rect" width="100%" height={180} />
+          </Grid>
+        ) : null}
+      </Grid>
+    );
+  };
+  const renderError = (): JSX.Element => {
+    const errorTitle = 'Data Product Citation Generation Error';
+    if (showTextOnly) {
+      return (
+        <Typography
+          variant={appliedTextOnly.variant}
+          component="h6"
+          className={appliedTextOnly.cssClass}
+        >
+          {errorTitle}
+        </Typography>
+      );
+    }
+    return (
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <ErrorCard title={errorTitle} />
+        </Grid>
+      </Grid>
+    );
+  };
+
+  const renderNotAvailable = (): JSX.Element => {
+    const errorTitle = 'Data Product Citation Not Available';
+    const errorMessage = 'A citation is not available for the specified data product and release.';
+    if (showTextOnly) {
+      return (
+        <div>
+          <Typography
+            variant={appliedTextOnly.variant}
+            component="h6"
+            className={appliedTextOnly.cssClass}
+          >
+            {`${errorTitle}: ${errorMessage}`}
+          </Typography>
+        </div>
+      );
+    }
+    return (
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <WarningCard title={errorTitle} message={errorMessage} />
+        </Grid>
+      </Grid>
+    );
+  };
+
+  const renderCitationBlurb = (): Nullable<JSX.Element> => {
     if (showTextOnly) {
       return (<React.Fragment />);
     }
-    let showCitationBlurb = true;
-    if (isStringNonEmpty(currentReleaseTag)) {
-      showCitationBlurb = getReleaseDoi(currentReleaseTag) !== null;
-    }
-    if (!showCitationBlurb) {
-      return (<React.Fragment />);
-    }
-    const quoteIcon: JSX.Element|null = showQuoteIcon
+    const showNonConditionalBlurb: boolean = [
+      DisplayType.RELEASE,
+      DisplayType.PROVISIONAL,
+    ].includes(viewState.displayType);
+    const quoteIcon: Nullable<JSX.Element> = showQuoteIcon
       ? (<QuoteIcon fontSize="large" className={classes.calloutIcon} />)
       : null;
+    let blurb = 'Please use the appropriate citation(s) from below in your publications. '
+      + 'If using both provisional and release data please include both citations. ';
+    if (showNonConditionalBlurb) {
+      blurb = 'Please use this citation in your publications. ';
+    }
+    const dataPolicyLink: JSX.Element = (
+      <Link href={RouteService.getDataPoliciesCitationPath()}>
+        Data Policies &amp; Citation Guidelines
+      </Link>
+    );
     return (
       <div className={classes.citationUseFlexContainer}>
         {quoteIcon}
         <Typography variant="subtitle2" className={classes.citationUseText}>
-          {(
-            currentReleaseTag || latestRelease === null
-              ? 'Please use this citation in your publications. '
-              : 'Please use the appropriate citation(s) from below in your publications. If using both provisional and release data please include both citations. '
-          )}
+          {blurb}
           {/* eslint-disable react/jsx-one-expression-per-line */}
           See {dataPolicyLink} for more info.
           {/* eslint-enable react/jsx-one-expression-per-line */}
@@ -344,8 +257,29 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     );
   };
 
-  const renderBundleParentLink = () => (
-    !bundleParentLink ? null : (
+  const renderBundleParentLink = (): Nullable<JSX.Element> => {
+    if (!isStringNonEmpty(viewState.bundleParentCode)) {
+      return null;
+    }
+    const isReleaseDisplay = (viewState.displayType === DisplayType.RELEASE);
+    const bundleParentName: string = isReleaseDisplay
+      ? (viewState.citableReleaseProduct as ContextDataProduct).productName
+      : (viewState.citableBaseProduct as ContextDataProduct).productName;
+    let bundleParentHref: string = RouteService.getProductDetailPath(
+      viewState.bundleParentCode as string,
+    );
+    if (isReleaseDisplay) {
+      bundleParentHref = RouteService.getProductDetailPath(
+        viewState.bundleParentCode as string,
+        (viewState.releaseObject as CitationRelease).release as string,
+      );
+    }
+    const bundleParentLink: JSX.Element = (
+      <Link href={bundleParentHref}>
+        {`${bundleParentName} (${viewState.bundleParentCode})`}
+      </Link>
+    );
+    return (
       <Card
         className={showTextOnly
           ? classes.bundleParentBlurbCardTextOnly
@@ -355,31 +289,26 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
           <Typography variant="body2" color="textSecondary" className={classes.bundleParentBlurb}>
             {/* eslint-disable react/jsx-one-expression-per-line, max-len */}
             <b>Note:</b> This product is bundled into {bundleParentLink}.
-            The {currentReleaseTag || !latestRelease ? 'citation below refers' : 'citations below refer'} to
+            The {isReleaseDisplay ? 'citation below refers' : 'citations below refer'} to
             that product as this sub-product is not directly citable.
             {/* eslint-enable react/jsx-one-expression-per-line, max-len */}
           </Typography>
         </CardContent>
       </Card>
-    )
-  );
+    );
+  };
 
-  const renderCitationCard = (release: any, conditional = false) => {
-    const provisional = (release === 'provisional') || hideCitation;
-    const citationProduct = provisional ? citableBaseProduct : citableReleaseProduct;
-    if (!citationProduct) { return null; }
-    const downloadEnabled = provisional || getReleaseDoi(release) !== null;
-    if (!downloadEnabled) {
-      return (
-        <WarningCard
-          title="Data Product Citation Not Available"
-          message="A citation is not available for the specified data product and release."
-        />
-      );
-    }
+  const renderCitationCard = (
+    release: string,
+    conditional = false,
+    provisional = false,
+  ): JSX.Element => {
+    const citationProduct: ContextDataProduct = provisional
+      ? viewState.citableBaseProduct as ContextDataProduct
+      : viewState.citableReleaseProduct as ContextDataProduct;
     let conditionalText = null;
     let citationClassName = classes.citationText;
-    if (conditional && !disableConditional) {
+    if (conditional) {
       const provReleaseText = provisional
         ? 'If Provisional data are used, include:'
         : 'If Released data are used, include:';
@@ -402,21 +331,26 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
       }
       citationClassName = classes.citationTextWithQualifier;
     }
-    const citationText = getCitationText(citationProduct, release);
+    let citationReleaseObject: Nullable<CitationRelease> = null;
+    if (!provisional) {
+      citationReleaseObject = (viewState.releaseObject as CitationRelease);
+    }
+    const citationText: string = CitationService.buildDataProductCitationText(
+      citationProduct,
+      citationReleaseObject,
+    );
     if (showTextOnly) {
       return (
-        <>
-          <div>
-            {conditionalText}
-            <Typography
-              variant={appliedTextOnly.variant}
-              component="h6"
-              className={appliedTextOnly.cssClass}
-            >
-              {citationText}
-            </Typography>
-          </div>
-        </>
+        <div>
+          {conditionalText}
+          <Typography
+            variant={appliedTextOnly.variant}
+            component="h6"
+            className={appliedTextOnly.cssClass}
+          >
+            {citationText}
+          </Typography>
+        </div>
       );
     }
     return (
@@ -432,7 +366,7 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
             placement="bottom-start"
             title="Click to copy the above plain text citation to the clipboard"
           >
-            <CopyToClipboard text={citationText || ''}>
+            <CopyToClipboard text={citationText}>
               <Button
                 size="small"
                 color="primary"
@@ -449,19 +383,19 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
               key={format.shortName}
               placement="bottom-start"
               title={(
-                downloadEnabled
-                  ? `Click to download the ${citationProduct.productCode}/${release} citation as a file in ${format.longName} format`
-                  : 'Citation format downloads are not available because this product release has no DOI'
+                  `Click to download the ${citationProduct.productCode}/${release} citation as a '`
+                    + `'file in ${format.longName} format`
               )}
             >
-              <span style={downloadEnabled ? {} : { cursor: 'no-drop' }}>
+              <span>
                 <Button
                   size="small"
                   color="primary"
                   variant="outlined"
                   className={classes.cardButton}
-                  onClick={() => { handleDownloadCitation(release, format.shortName); }}
-                  disabled={!downloadEnabled}
+                  onClick={() => {
+                    handleDownloadCitation(release, format.shortName, provisional);
+                  }}
                 >
                   <DownloadIcon fontSize="small" className={classes.cardButtonIcon} />
                   {`Download (${format.shortName})`}
@@ -474,22 +408,58 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     );
   };
 
-  return (
-    <div>
-      {renderCitationBlurb()}
-      {renderBundleParentLink()}
-      {currentReleaseTag ? (
-        renderCitationCard(currentReleaseTag)
-      ) : (
-        <>
-          {renderCitationCard('provisional', latestRelease !== null)}
-          {latestRelease && !disableConditional
-            ? renderCitationCard(latestRelease.release, true)
-            : null}
-        </>
-      )}
-    </div>
-  );
+  const renderCitationDisplay = (): JSX.Element => {
+    let citationCard: JSX.Element = (<React.Fragment />);
+    switch (viewState.displayType) {
+      case DisplayType.CONDITIONAL:
+        citationCard = (
+          <React.Fragment>
+            {renderCitationCard(PROVISIONAL_RELEASE, true, true)}
+            {renderCitationCard((viewState.releaseObject as CitationRelease).release, true, false)}
+          </React.Fragment>
+        );
+        break;
+      case DisplayType.PROVISIONAL:
+        citationCard = (
+          <React.Fragment>
+            {renderCitationCard(PROVISIONAL_RELEASE, false, true)}
+          </React.Fragment>
+        );
+        break;
+      case DisplayType.RELEASE:
+        citationCard = (
+          <React.Fragment>
+            {renderCitationCard((viewState.releaseObject as CitationRelease).release, false, false)}
+          </React.Fragment>
+        );
+        break;
+      case DisplayType.NOT_AVAILABLE:
+        return renderNotAvailable();
+      default:
+        // Invalid state, return error state.
+        return renderError();
+    }
+    return (
+      <div>
+        {renderCitationBlurb()}
+        {renderBundleParentLink()}
+        {citationCard}
+      </div>
+    );
+  };
+
+  switch (viewState.status) {
+    case ContextStatus.INITIALIZING:
+    case ContextStatus.FETCHING:
+    case ContextStatus.HAS_FETCHES_TO_TRIGGER:
+      return renderSkeleton();
+    case ContextStatus.ERROR:
+      return renderError();
+    case ContextStatus.READY:
+    default:
+      break;
+  }
+  return renderCitationDisplay();
 };
 
 DataProductCitationView.defaultProps = {

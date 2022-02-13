@@ -1,5 +1,5 @@
 import React from 'react';
-import { NeonDocument } from '../../types/neon';
+import { NeonDocument } from '../../types/neonApi';
 export interface DocumentViewerProps {
     document: NeonDocument;
     width: number;

@@ -1,19 +1,16 @@
-import { Nullable } from '../../../types/core';
+import { Nullable, UnknownRecord } from '../../../types/core';
+import { DataProductRelease } from '../../../types/neonApi';
+import { FetchStatusState, DataProductCitationState, CitationRelease } from './State';
+import { DataProductCitationViewProps, DataProductCitationViewState } from './ViewState';
 declare const Service: {
-    getProvReleaseRegex: () => RegExp;
-    fetchIsAwaitingCall: (fetchObject: Record<string, unknown>) => boolean;
-    stateHasFetchesInStatus: (state: any, status: string) => boolean;
-    calculateFetches: (state: any) => any;
-    calculateAppStatus: (state: any) => any;
-    sortReleases: (unsortedReleases: any) => any[];
-    withContextReleases: (neonContextState: any) => any;
-    applyUserRelease: (current: any, userReleases: any) => void;
-    applyReleasesGlobally: (state: any, releases: any) => any;
-    calculateBundles: (bundlesCtx: any, release: string, productCode: string) => {
-        parentCodes: string[];
-        doiProductCode: Nullable<string>;
-        forwardAvailabilityFromParent: boolean | null;
-    };
-    calculateContextState: (newState: any, neonContextState: any, release: string, productCode: string) => any;
+    fetchIsAwaitingCall: (fetchObject: Nullable<FetchStatusState>) => boolean;
+    stateHasFetchesInStatus: (state: DataProductCitationState, status: string) => boolean;
+    calculateFetches: (state: DataProductCitationState) => DataProductCitationState;
+    calculateAppStatus: (state: DataProductCitationState) => DataProductCitationState;
+    applyReleasesGlobally: (state: DataProductCitationState, releases: DataProductRelease[]) => DataProductCitationState;
+    calculateContextState: (newState: DataProductCitationState, neonContextState: UnknownRecord, release: Nullable<string>, productCode: Nullable<string>) => DataProductCitationState;
+    useViewState: (state: DataProductCitationState, props: DataProductCitationViewProps) => DataProductCitationViewState;
+    getReleaseObject: (releases: CitationRelease[], release: Nullable<string>) => Nullable<CitationRelease>;
+    getReleaseDoi: (releases: CitationRelease[], release: Nullable<string>) => Nullable<string>;
 };
 export default Service;

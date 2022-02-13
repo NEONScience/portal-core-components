@@ -20,6 +20,7 @@ import DocBlock from '../../../components/DocBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 
 import ActionCreator from './DataProductCitation/Actions';
+import ComponentErrorBoundary from '../Error/ComponentErrorBoundary';
 import DataProductCitation from './DataProductCitation';
 import DataProductCitationContext from './DataProductCitation/Context';
 import DataProductCitationView from './DataProductCitation/View';
@@ -27,7 +28,9 @@ import NeonApi from '../NeonApi';
 import NeonContext from '../NeonContext/NeonContext';
 import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
 import ReleaseFilter from '../ReleaseFilter/ReleaseFilter';
+import ReleaseService from '../../service/ReleaseService';
 import Theme from '../Theme/Theme';
+import { Release } from '../../types/internal';
 import { isStringNonEmpty } from '../../util/typeUtil';
 
 const useStyles = makeStyles((theme) => ({
@@ -87,9 +90,11 @@ const dataProductCitationReducer = (state: any, action: any) => {
 };
 
 const DataProductCitationDemoContainer = (): JSX.Element => ((
-  <DataProductCitationContext.Provider contextControlled>
-    <DataProductCitationDemo />
-  </DataProductCitationContext.Provider>
+  <ComponentErrorBoundary>
+    <DataProductCitationContext.Provider contextControlled>
+      <DataProductCitationDemo />
+    </DataProductCitationContext.Provider>
+  </ComponentErrorBoundary>
 ));
 
 const DataProductCitationDemo = (): JSX.Element => {
@@ -103,7 +108,12 @@ const DataProductCitationDemo = (): JSX.Element => {
   const {
     productCode: stateProductCode,
     release: stateRelease,
+    neonContextState,
   } = stateCtx;
+  const appliedReleases: Release[] = ReleaseService.applyUserReleases(
+    neonContextState,
+    stateReleases,
+  );
   // eslint-disable-next-line max-len
   const citationDispatch = DataProductCitationContext.useDataProductCitationContextDispatch() as Dispatch<any>;
   const fetchAllProducts$ = (NeonGraphQL.getAllDataProducts() as Observable<AjaxResponse>).pipe(
@@ -197,7 +207,7 @@ const DataProductCitationDemo = (): JSX.Element => {
     citationDispatch(ActionCreator.setProductCode(nextProduct.productCode));
   };
   const handleReleaseChange = (selectedRelease: string) => {
-    const nextRelease = stateReleases.find((release: any) => (
+    const nextRelease = appliedReleases.find((release: any) => (
       release.release === selectedRelease
     ));
     if (!nextRelease) {
@@ -240,7 +250,7 @@ const DataProductCitationDemo = (): JSX.Element => {
           <ReleaseFilter
             showGenerationDate
             showProductCount
-            releases={stateReleases}
+            releases={appliedReleases}
             selected={stateRelease}
             onChange={handleReleaseChange}
           />
@@ -435,6 +445,23 @@ import DataProductCitation from 'portal-core-components/lib/components/DataProdu
         </Paper>
       </ExampleBlock>
       <DocBlock>
+        DP1.10045.001 is available when using released data for this product
+        in the latest available release, RELEASE-2021, but not available
+        and bundled in the latest release.
+      </DocBlock>
+      <CodeBlock>
+        {`
+import DataProductCitation from 'portal-core-components/lib/components/DataProductCitation';
+
+<DataProductCitation productCode="DP1.10045.001" />
+        `}
+      </CodeBlock>
+      <ExampleBlock>
+        <Paper className={classes.paper}>
+          <DataProductCitation productCode="DP1.10045.001" />
+        </Paper>
+      </ExampleBlock>
+      <DocBlock>
         DP1.00030.001 is not available in RELEASE-2021.
       </DocBlock>
       <CodeBlock>
@@ -448,6 +475,39 @@ import DataProductCitation from 'portal-core-components/lib/components/DataProdu
         <Paper className={classes.paper}>
           <DataProductCitation productCode="DP1.00030.001" release="RELEASE-2021" />
         </Paper>
+      </ExampleBlock>
+      <DocBlock>
+        DP1.00030.001 is available in RELEASE-2022 as a bundle.
+      </DocBlock>
+      <CodeBlock>
+        {`
+import DataProductCitation from 'portal-core-components/lib/components/DataProductCitation';
+
+<DataProductCitation productCode="DP1.00030.001" release="RELEASE-2022" />
+        `}
+      </CodeBlock>
+      <ExampleBlock>
+        <Paper className={classes.paper}>
+          <DataProductCitation productCode="DP1.00030.001" release="RELEASE-2022" />
+        </Paper>
+      </ExampleBlock>
+
+      <Divider className={classes.divider} />
+      <Typography variant="h6" component="h4" gutterBottom>Not Available State</Typography>
+      <DocBlock>
+        When the product and release combination specified are both valid
+        but the specified product is not available with the release, a not
+        available message is displayed.
+      </DocBlock>
+      <CodeBlock>
+        {`
+import DataProductCitation from 'portal-core-components/lib/components/DataProductCitation';
+
+<DataProductCitation productCode="DP1.00030.001" release="RELEASE-2021" />
+        `}
+      </CodeBlock>
+      <ExampleBlock>
+        <DataProductCitation productCode="DP1.00030.001" release="RELEASE-2021" />
       </ExampleBlock>
 
       <Divider className={classes.divider} />

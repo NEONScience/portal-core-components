@@ -1,10 +1,12 @@
 import React from 'react';
 
+import ComponentErrorBoundary from '../Error/ComponentErrorBoundary';
 import DataProductCitationContext from './DataProductCitation/Context';
-import DataProductCitationView, { CitationTextOnlyProps } from './DataProductCitation/View';
+import DataProductCitationView from './DataProductCitation/View';
 import NeonContext from '../NeonContext/NeonContext';
 import Theme from '../Theme/Theme';
 
+import { CitationTextOnlyProps } from './DataProductCitation/ViewState';
 import { Nullable } from '../../types/core';
 
 interface DataProductCitationProps {
@@ -30,15 +32,17 @@ const DataProductCitation: React.FC<DataProductCitationProps> = (
     textOnlyProps,
   }: DataProductCitationProps = props;
   return (
-    <DataProductCitationContext.Provider productCode={productCode} release={release}>
-      <DataProductCitationView
-        showQuoteIcon={showQuoteIcon}
-        disableConditional={disableConditional}
-        disableSkeleton={disableSkeleton}
-        showTextOnly={showTextOnly}
-        textOnlyProps={textOnlyProps}
-      />
-    </DataProductCitationContext.Provider>
+    <ComponentErrorBoundary>
+      <DataProductCitationContext.Provider productCode={productCode} release={release}>
+        <DataProductCitationView
+          showQuoteIcon={showQuoteIcon}
+          disableConditional={disableConditional}
+          disableSkeleton={disableSkeleton}
+          showTextOnly={showTextOnly}
+          textOnlyProps={textOnlyProps}
+        />
+      </DataProductCitationContext.Provider>
+    </ComponentErrorBoundary>
   );
 };
 

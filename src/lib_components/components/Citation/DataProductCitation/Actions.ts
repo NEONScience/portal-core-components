@@ -1,4 +1,6 @@
-import { AnyAction, Nullable } from '../../../types/core';
+import { AjaxResponse } from 'rxjs/ajax';
+import { AnyAction, Nullable, UnknownRecord } from '../../../types/core';
+import { ContextDataProduct } from './State';
 
 export enum ActionTypes {
   REINITIALIZE = 'REINITIALIZE',
@@ -28,11 +30,11 @@ export enum ActionTypes {
 export interface ReinitializeAction extends AnyAction {
   type: typeof ActionTypes.REINITIALIZE;
   productCode: string;
-  release?: string;
+  release?: Nullable<string>;
 }
 export interface ErrorAction extends AnyAction {
   type: typeof ActionTypes.ERROR;
-  error: Record<string, unknown>|string;
+  error: Nullable<UnknownRecord|string>;
 }
 export interface SetProductCodeAction extends AnyAction {
   type: typeof ActionTypes.SET_PRODUCT_CODE;
@@ -49,18 +51,18 @@ export interface SetParamsAction extends AnyAction {
 }
 export interface StoreFinalizedNeonContextStateAction extends AnyAction {
   type: typeof ActionTypes.STORE_FINALIZED_NEON_CONTEXT_STATE;
-  neonContextState: any;
+  neonContextState: UnknownRecord;
 }
 export interface FetchProductStartedAction extends AnyAction {
   type: typeof ActionTypes.FETCH_PRODUCT_STARTED;
 }
 export interface FetchProductFailedAction extends AnyAction {
   type: typeof ActionTypes.FETCH_PRODUCT_FAILED;
-  error: any;
+  error: Nullable<AjaxResponse|string>;
 }
 export interface FetchProductSucceededAction extends AnyAction {
   type: typeof ActionTypes.FETCH_PRODUCT_SUCCEEDED;
-  data: any;
+  data: ContextDataProduct;
 }
 export interface FetchProductReleaseStartedAction extends AnyAction {
   type: typeof ActionTypes.FETCH_PRODUCT_RELEASE_STARTED;
@@ -69,12 +71,12 @@ export interface FetchProductReleaseStartedAction extends AnyAction {
 export interface FetchProductReleaseFailedAction extends AnyAction {
   type: typeof ActionTypes.FETCH_PRODUCT_RELEASE_FAILED;
   release: string;
-  error: any;
+  error: Nullable<AjaxResponse|string>;
 }
 export interface FetchProductReleaseSucceededAction extends AnyAction {
   type: typeof ActionTypes.FETCH_PRODUCT_RELEASE_SUCCEEDED;
   release: string;
-  data: any;
+  data: ContextDataProduct;
 }
 export interface FetchBundleParentStartedAction extends AnyAction {
   type: typeof ActionTypes.FETCH_BUNDLE_PARENT_STARTED;
@@ -83,12 +85,12 @@ export interface FetchBundleParentStartedAction extends AnyAction {
 export interface FetchBundleParentFailedAction extends AnyAction {
   type: typeof ActionTypes.FETCH_BUNDLE_PARENT_FAILED;
   bundleParent: string;
-  error: any;
+  error: Nullable<AjaxResponse|string>;
 }
 export interface FetchBundleParentSucceededAction extends AnyAction {
   type: typeof ActionTypes.FETCH_BUNDLE_PARENT_SUCCEEDED;
   bundleParent: string;
-  data: any;
+  data: ContextDataProduct;
 }
 export interface FetchBundleParentReleaseStartedAction extends AnyAction {
   type: typeof ActionTypes.FETCH_BUNDLE_PARENT_RELEASE_STARTED;
@@ -99,13 +101,13 @@ export interface FetchBundleParentReleaseFailedAction extends AnyAction {
   type: typeof ActionTypes.FETCH_BUNDLE_PARENT_RELEASE_FAILED;
   bundleParent: string;
   release: string;
-  error: any;
+  error: Nullable<AjaxResponse|string>;
 }
 export interface FetchBundleParentReleaseSucceededAction extends AnyAction {
   type: typeof ActionTypes.FETCH_BUNDLE_PARENT_RELEASE_SUCCEEDED;
   bundleParent: string;
   release: string;
-  data: any;
+  data: ContextDataProduct;
 }
 
 export type DataProducCitationActionTypes = (
@@ -130,13 +132,21 @@ export type DataProducCitationActionTypes = (
   | AnyAction
 );
 
+export type ErrorActionTypes = (
+  ErrorAction
+  | FetchProductFailedAction
+  | FetchProductReleaseFailedAction
+  | FetchBundleParentFailedAction
+  | FetchBundleParentReleaseFailedAction
+);
+
 const ActionCreator = {
-  reinitialize: (productCode: string, release?: string): ReinitializeAction => ({
+  reinitialize: (productCode: string, release?: Nullable<string>): ReinitializeAction => ({
     type: ActionTypes.REINITIALIZE,
     productCode,
     release,
   }),
-  error: (error: Record<string, unknown>|string): ErrorAction => ({
+  error: (error: Nullable<UnknownRecord|string>): ErrorAction => ({
     type: ActionTypes.ERROR,
     error,
   }),
@@ -154,7 +164,7 @@ const ActionCreator = {
     release,
   }),
   storeFinalizedNeonContextState: (
-    neonContextState: any,
+    neonContextState: UnknownRecord,
   ): StoreFinalizedNeonContextStateAction => ({
     type: ActionTypes.STORE_FINALIZED_NEON_CONTEXT_STATE,
     neonContextState,
@@ -162,11 +172,11 @@ const ActionCreator = {
   fetchProductStarted: (): FetchProductStartedAction => ({
     type: ActionTypes.FETCH_PRODUCT_STARTED,
   }),
-  fetchProductFailed: (error: any): FetchProductFailedAction => ({
+  fetchProductFailed: (error: Nullable<AjaxResponse|string>): FetchProductFailedAction => ({
     type: ActionTypes.FETCH_PRODUCT_FAILED,
     error,
   }),
-  fetchProductSucceeded: (data: any): FetchProductSucceededAction => ({
+  fetchProductSucceeded: (data: ContextDataProduct): FetchProductSucceededAction => ({
     type: ActionTypes.FETCH_PRODUCT_SUCCEEDED,
     data,
   }),
@@ -174,14 +184,17 @@ const ActionCreator = {
     type: ActionTypes.FETCH_PRODUCT_RELEASE_STARTED,
     release,
   }),
-  fetchProductReleaseFailed: (release: string, error: any): FetchProductReleaseFailedAction => ({
+  fetchProductReleaseFailed: (
+    release: string,
+    error: Nullable<AjaxResponse|string>,
+  ): FetchProductReleaseFailedAction => ({
     type: ActionTypes.FETCH_PRODUCT_RELEASE_FAILED,
     release,
     error,
   }),
   fetchProductReleaseSucceeded: (
     release: string,
-    data: any,
+    data: ContextDataProduct,
   ): FetchProductReleaseSucceededAction => ({
     type: ActionTypes.FETCH_PRODUCT_RELEASE_SUCCEEDED,
     release,
@@ -191,14 +204,17 @@ const ActionCreator = {
     type: ActionTypes.FETCH_BUNDLE_PARENT_STARTED,
     bundleParent,
   }),
-  fetchBundleParentFailed: (bundleParent: string, error: any): FetchBundleParentFailedAction => ({
+  fetchBundleParentFailed: (
+    bundleParent: string,
+    error: Nullable<AjaxResponse|string>,
+  ): FetchBundleParentFailedAction => ({
     type: ActionTypes.FETCH_BUNDLE_PARENT_FAILED,
     bundleParent,
     error,
   }),
   fetchBundleParentSucceeded: (
     bundleParent: string,
-    data: any,
+    data: ContextDataProduct,
   ): FetchBundleParentSucceededAction => ({
     type: ActionTypes.FETCH_BUNDLE_PARENT_SUCCEEDED,
     bundleParent,
@@ -215,7 +231,7 @@ const ActionCreator = {
   fetchBundleParentReleaseFailed: (
     bundleParent: string,
     release: string,
-    error: any,
+    error: Nullable<AjaxResponse|string>,
   ): FetchBundleParentReleaseFailedAction => ({
     type: ActionTypes.FETCH_BUNDLE_PARENT_RELEASE_FAILED,
     bundleParent,
@@ -225,7 +241,7 @@ const ActionCreator = {
   fetchBundleParentReleaseSucceeded: (
     bundleParent: string,
     release: string,
-    data: any,
+    data: ContextDataProduct,
   ): FetchBundleParentReleaseSucceededAction => ({
     type: ActionTypes.FETCH_BUNDLE_PARENT_RELEASE_SUCCEEDED,
     bundleParent,

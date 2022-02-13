@@ -6,7 +6,6 @@ import React, {
   Dispatch,
 } from 'react';
 
-import cloneDeep from 'lodash/cloneDeep';
 import { Observable } from 'rxjs';
 import { AjaxResponse } from 'rxjs/ajax';
 
@@ -16,22 +15,22 @@ import NeonGraphQL from '../../NeonGraphQL/NeonGraphQL';
 import ActionCreator from './Actions';
 import Reducer from './Reducer';
 import Service from './Service';
-import { CONTEXT_STATUS, DEFAULT_STATE } from './State';
+import { ContextStatus, DataProductCitationState, getDefaultState } from './State';
 
 import { exists, isStringNonEmpty } from '../../../util/typeUtil';
-import { Undef } from '../../../types/core';
+import { AnyAction, Nullable, Undef } from '../../../types/core';
 
-const StateContext = createContext<any>(DEFAULT_STATE);
-const DispatchContext = createContext<Undef<Dispatch<any>>>(undefined);
+const StateContext = createContext<DataProductCitationState>(getDefaultState());
+const DispatchContext = createContext<Undef<Dispatch<AnyAction>>>(undefined);
 
-const useDataProductCitationContextState = () => {
-  let state: any = useContext(StateContext);
+const useDataProductCitationContextState = (): DataProductCitationState => {
+  let state: DataProductCitationState = useContext(StateContext);
   if (!exists(state)) {
-    state = cloneDeep(DEFAULT_STATE);
+    state = getDefaultState();
   }
   return state;
 };
-const useDataProductCitationContextDispatch = () => {
+const useDataProductCitationContextDispatch = (): Undef<Dispatch<AnyAction>> => {
   const dispatchContext = useContext(DispatchContext);
   if (!exists(dispatchContext)) {
     throw new Error('Failed to initialize dispatch context');
@@ -67,13 +66,20 @@ const verifyProductResponse = (response: AjaxResponse): boolean => (
   && exists(response.response.data.product)
 );
 
-const Provider = (props: any) => {
+export interface ProviderProps {
+  productCode?: string;
+  release?: Nullable<string>;
+  contextControlled?: boolean;
+  children?: React.ReactNode | React.ReactNodeArray;
+}
+
+const Provider: React.FC<ProviderProps> = (props: ProviderProps): JSX.Element => {
   const {
     productCode: propsProductCode,
     release: propsRelease,
     contextControlled,
     children,
-  } = props;
+  }: ProviderProps = props;
 
   const [neonContextState] = NeonContext.useNeonContextState();
   const {
@@ -82,7 +88,7 @@ const Provider = (props: any) => {
   } = neonContextState;
 
   const initialState = {
-    ...cloneDeep(DEFAULT_STATE),
+    ...getDefaultState(),
     productCode: propsProductCode,
     release: propsRelease,
   };
@@ -95,10 +101,10 @@ const Provider = (props: any) => {
     productCode,
     release,
     fetches,
-  } = state;
+  }: DataProductCitationState = state;
 
   useEffect(() => {
-    if (status !== CONTEXT_STATUS.INITIALIZING) { return; }
+    if (status !== ContextStatus.INITIALIZING) { return; }
     if (!isStringNonEmpty(productCode)) {
       dispatch(ActionCreator.error('Data product not found'));
     }
@@ -107,9 +113,12 @@ const Provider = (props: any) => {
   // Respond to prop changes when not context controlled
   useEffect(() => {
     if (contextControlled) { return; }
-    if (status !== CONTEXT_STATUS.READY) { return; }
+    if (status !== ContextStatus.READY) { return; }
     if ((productCode !== propsProductCode) || (release !== propsRelease)) {
-      dispatch(ActionCreator.reinitialize(propsProductCode, propsRelease));
+      const initProductCode: string = isStringNonEmpty(propsProductCode)
+        ? propsProductCode as string
+        : '';
+      dispatch(ActionCreator.reinitialize(initProductCode, propsRelease));
     }
   }, [
     contextControlled,
@@ -134,33 +143,37 @@ const Provider = (props: any) => {
   useEffect(() => {
     // NeonContext is required to fetch data for the app due to bundles.
     if (!neonContextIsFinal) { return; }
-    if (status !== CONTEXT_STATUS.HAS_FETCHES_TO_TRIGGER) { return; }
+    if (status !== ContextStatus.HAS_FETCHES_TO_TRIGGER) { return; }
     // Base product fetch
     if (Service.fetchIsAwaitingCall(fetches.product)) {
       dispatch(ActionCreator.fetchProductStarted());
-      (NeonGraphQL.getGraphqlQuery(buildProductQuery(productCode)) as Observable<AjaxResponse>)
+      const queryProductCode: string = productCode as string;
+      (NeonGraphQL.getGraphqlQuery(buildProductQuery(queryProductCode)) as Observable<AjaxResponse>)
         .subscribe(
-          (response) => {
+          (response: AjaxResponse): void => {
             if (!verifyProductResponse(response)) {
               dispatch(ActionCreator.fetchProductFailed('Failed to fetch product'));
               return;
             }
             dispatch(ActionCreator.fetchProductSucceeded(response.response.data.product));
           },
-          (error) => {
+          (error: AjaxResponse): void => {
             dispatch(ActionCreator.fetchProductFailed(error));
           },
         );
     }
     // Product release fetches
     Object.keys(fetches.productReleases)
-      .filter((fetchRelease) => Service.fetchIsAwaitingCall(fetches.productReleases[fetchRelease]))
-      .forEach((fetchRelease) => {
+      .filter((fetchRelease: string): boolean => (
+        Service.fetchIsAwaitingCall(fetches.productReleases[fetchRelease])
+      ))
+      .forEach((fetchRelease: string): void => {
         dispatch(ActionCreator.fetchProductReleaseStarted(fetchRelease));
-        const query = buildProductQuery(productCode, fetchRelease);
+        const queryProductCode: string = productCode as string;
+        const query: string = buildProductQuery(queryProductCode, fetchRelease);
         (NeonGraphQL.getGraphqlQuery(query) as Observable<AjaxResponse>)
           .subscribe(
-            (response) => {
+            (response: AjaxResponse): void => {
               if (!verifyProductResponse(response)) {
                 dispatch(ActionCreator.fetchProductReleaseFailed(
                   fetchRelease,
@@ -173,7 +186,7 @@ const Provider = (props: any) => {
                 response.response.data.product,
               ));
             },
-            (error) => {
+            (error: AjaxResponse): void => {
               dispatch(ActionCreator.fetchProductReleaseFailed(
                 fetchRelease,
                 error,
@@ -183,12 +196,14 @@ const Provider = (props: any) => {
       });
     // Bundle parent fetches
     Object.keys(fetches.bundleParents)
-      .filter((bundleParent) => Service.fetchIsAwaitingCall(fetches.bundleParents[bundleParent]))
-      .forEach((bundleParent) => {
+      .filter((bundleParent: string): boolean => (
+        Service.fetchIsAwaitingCall(fetches.bundleParents[bundleParent])
+      ))
+      .forEach((bundleParent: string): void => {
         dispatch(ActionCreator.fetchBundleParentStarted(bundleParent));
         (NeonGraphQL.getGraphqlQuery(buildProductQuery(bundleParent)) as Observable<AjaxResponse>)
           .subscribe(
-            (response) => {
+            (response: AjaxResponse): void => {
               if (!verifyProductResponse(response)) {
                 dispatch(ActionCreator.fetchBundleParentFailed(
                   bundleParent,
@@ -201,27 +216,27 @@ const Provider = (props: any) => {
                 response.response.data.product,
               ));
             },
-            (error) => {
+            (error: AjaxResponse): void => {
               dispatch(ActionCreator.fetchBundleParentFailed(bundleParent, error));
             },
           );
       });
     // Bundle parent release fetches
     Object.keys(fetches.bundleParentReleases)
-      .forEach((bundleParent) => {
+      .forEach((bundleParent: string): void => {
         Object.keys(fetches.bundleParentReleases[bundleParent])
-          .filter((fetchRelease) => (
+          .filter((fetchRelease: string): boolean => (
             Service.fetchIsAwaitingCall(fetches.bundleParentReleases[bundleParent][fetchRelease])
           ))
-          .forEach((fetchRelease) => {
+          .forEach((fetchRelease: string): void => {
             dispatch(ActionCreator.fetchBundleParentReleaseStarted(
               bundleParent,
               fetchRelease,
             ));
-            const query = buildProductQuery(bundleParent, fetchRelease);
+            const query: string = buildProductQuery(bundleParent, fetchRelease);
             (NeonGraphQL.getGraphqlQuery(query) as Observable<AjaxResponse>)
               .subscribe(
-                (response) => {
+                (response: AjaxResponse): void => {
                   if (!verifyProductResponse(response)) {
                     dispatch(ActionCreator.fetchBundleParentReleaseFailed(
                       bundleParent,
@@ -236,7 +251,7 @@ const Provider = (props: any) => {
                     response.response.data.product,
                   ));
                 },
-                (error) => {
+                (error: AjaxResponse): void => {
                   dispatch(ActionCreator.fetchBundleParentReleaseFailed(
                     bundleParent,
                     fetchRelease,
@@ -265,7 +280,6 @@ const DataProductCitationContext = {
   Provider,
   useDataProductCitationContextState,
   useDataProductCitationContextDispatch,
-  DEFAULT_STATE,
 };
 
 export default DataProductCitationContext;

@@ -1,10 +1,9 @@
+import ReleaseService, { LATEST_AND_PROVISIONAL } from './ReleaseService';
+
 import { Nullable, Undef } from '../types/core';
 import { BundleContext } from '../types/neonContext';
 import { exists, isStringNonEmpty } from '../util/typeUtil';
-
-const LATEST_AND_PROVISIONAL = 'LATEST_AND_PROVISIONAL';
-
-const getProvReleaseRegex = (): RegExp => new RegExp(/^[A-Z]+$/);
+import { CitationBundleState } from '../types/internal';
 
 export interface IBundleService {
   /**
@@ -19,7 +18,7 @@ export interface IBundleService {
    * @param release The release to coerce.
    * @return The applicable bundle release.
    */
-  determineBundleRelease: (release: string) => string;
+  determineBundleRelease: (release: Nullable<string>) => string;
   /**
    * Gets the set of bundled (container) product codes for the specified release.
    * @param context The context to derive lookups from.
@@ -112,24 +111,39 @@ export interface IBundleService {
     release: string,
     bundleProductCode: string,
   ) => string[];
+  /**
+   * Determines the applicable bundle state for utilization in citations.
+   * @param context The context to derive lookups from.
+   * @param release The release to get bundles for.
+   * @param productCode The product code to query with.
+   * @return The applicable bundle status for citations.
+   */
+  determineCitationBundle: (
+    context: BundleContext,
+    release: Nullable<string>,
+    productCode: string,
+  ) => CitationBundleState;
 }
 
 const BundleService: IBundleService = {
   isProductDefined: (context: BundleContext, productCode: string): boolean => (
     context.allBundleProducts[productCode] === true
   ),
-  determineBundleRelease: (release: string): string => {
-    const regex = getProvReleaseRegex();
+  determineBundleRelease: (release: Nullable<string>): string => {
+    const regex = ReleaseService.getProvReleaseRegex();
     let isLatestProv = false;
-    if (!isStringNonEmpty(release) || (release.localeCompare(LATEST_AND_PROVISIONAL) === 0)) {
+    if (!isStringNonEmpty(release)
+        || ((release as string).localeCompare(LATEST_AND_PROVISIONAL) === 0)) {
       isLatestProv = true;
     } else if (regex) {
-      const matches = regex.exec(release);
+      const matches = regex.exec(release as string);
       isLatestProv = exists(matches) && ((matches as RegExpExecArray).length > 0);
     }
-    let appliedRelease = release;
+    let appliedRelease;
     if (isLatestProv) {
       appliedRelease = 'PROVISIONAL';
+    } else {
+      appliedRelease = release as string;
     }
     return appliedRelease;
   },
@@ -256,6 +270,49 @@ const BundleService: IBundleService = {
       return [];
     }
     return bundle;
+  },
+  determineCitationBundle: (
+    context: BundleContext,
+    release: Nullable<string>,
+    productCode: string,
+  ): CitationBundleState => {
+    let bundleParentCode: Nullable<string> = null;
+    let bundleParentCodes: string[] = [];
+    const bundleRelease = BundleService.determineBundleRelease(release);
+    const isBundleChild = BundleService.isProductInBundle(
+      context,
+      bundleRelease,
+      productCode,
+    );
+    if (isBundleChild) {
+      bundleParentCode = BundleService.getBundleProductCode(
+        context,
+        bundleRelease,
+        productCode,
+      );
+      const hasManyParents = isBundleChild
+        && BundleService.isSplitProduct(context, bundleRelease, productCode);
+      if (hasManyParents) {
+        bundleParentCodes = BundleService.getSplitProductBundles(
+          context,
+          bundleRelease,
+          productCode,
+        );
+      } else {
+        const bundleCode = BundleService.getBundleProductCode(
+          context,
+          bundleRelease,
+          productCode,
+        );
+        if (exists(bundleCode)) {
+          bundleParentCodes = [bundleCode as string];
+        }
+      }
+    }
+    return {
+      parentCodes: bundleParentCodes,
+      doiProductCode: bundleParentCode,
+    };
   },
 };
 
