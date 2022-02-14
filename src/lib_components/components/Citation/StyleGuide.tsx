@@ -342,12 +342,12 @@ import DataProductCitation from 'portal-core-components/lib/components/DataProdu
         {`
 import DataProductCitation from 'portal-core-components/lib/components/DataProductCitation';
 
-<DataProductCitation productCode="DP1.00001.001" release="RELEASE-2021" disableConditional />
+<DataProductCitation productCode="DP1.00001.001" release="RELEASE-2021" />
         `}
       </CodeBlock>
       <ExampleBlock>
         <Paper className={classes.paper}>
-          <DataProductCitation productCode="DP1.00001.001" release="RELEASE-2021" disableConditional />
+          <DataProductCitation productCode="DP1.00001.001" release="RELEASE-2021" />
         </Paper>
       </ExampleBlock>
       <CodeBlock>
@@ -489,6 +489,21 @@ import DataProductCitation from 'portal-core-components/lib/components/DataProdu
       <ExampleBlock>
         <Paper className={classes.paper}>
           <DataProductCitation productCode="DP1.00030.001" release="RELEASE-2022" />
+        </Paper>
+      </ExampleBlock>
+      <DocBlock>
+        DP4.00130.001 is not available in RELEASE-2021, not a bundled product.
+      </DocBlock>
+      <CodeBlock>
+        {`
+import DataProductCitation from 'portal-core-components/lib/components/DataProductCitation';
+
+<DataProductCitation productCode="DP4.00130.001" release="RELEASE-2021" />
+        `}
+      </CodeBlock>
+      <ExampleBlock>
+        <Paper className={classes.paper}>
+          <DataProductCitation productCode="DP4.00130.001" release="RELEASE-2021" />
         </Paper>
       </ExampleBlock>
 

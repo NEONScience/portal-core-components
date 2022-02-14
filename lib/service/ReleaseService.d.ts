@@ -13,6 +13,12 @@ export interface IReleaseService {
      */
     isLatestNonProv: (releaseTag: string) => boolean;
     /**
+     * Determines if the IReleaseLike object adheres to an InternalRelease object.
+     * @param release The release to check.
+     * @return True if the release is like an InternalRelease object.
+     */
+    isInternalReleaseLike: (release: IReleaseLike) => boolean;
+    /**
      * Sorts the set of release like objects by generationDate.
      * @param unsortedReleases The set of release like objects to sort.
      * @return The sorted set of release like objects.

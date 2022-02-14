@@ -202,7 +202,7 @@ const getReleaseObject = (
 ): Nullable<CitationRelease> => (
   !isStringNonEmpty(release) || (release === PROVISIONAL_RELEASE)
     ? null
-    : releases.find((r: any) => r.release === release)
+    : releases.find((r: CitationRelease): boolean => r.release === release)
 );
 const getReleaseDoi = (
   releases: CitationRelease[],
@@ -240,16 +240,15 @@ const useViewState = (
   } = state;
   const bundlesContext = (neonContextStateData as UnknownRecord).bundles as BundleContext;
   const { disableConditional }: DataProductCitationViewProps = props;
-
   const hasReleases: boolean = existsNonEmpty(releases);
   // Identify the latest release state.
   const latestReleaseObject: Nullable<CitationRelease> = hasReleases
-    ? releases.find((r: CitationRelease) => r.showCitation)
+    ? releases.find((r: CitationRelease) => r.showCitation === true)
     : null;
   const hasLatestRelease: boolean = exists(latestReleaseObject)
     && isStringNonEmpty((latestReleaseObject as CitationRelease).release);
   const hideLatestReleaseCitation: boolean = hasLatestRelease
-    ? !(latestReleaseObject as CitationRelease).showCitation
+    ? ((latestReleaseObject as CitationRelease).showCitation === false)
     : false;
   // Identify state of specified release.
   const hasSpecifiedRelease: boolean = isStringNonEmpty(specifiedReleaseTag);
@@ -258,7 +257,9 @@ const useViewState = (
     : null;
   const isSpecifiedReleaseValid: boolean = exists(specifiedReleaseObject)
     && isStringNonEmpty((specifiedReleaseObject as CitationRelease).release);
-
+  const isSpecifiedReleaseLatestNonProv: boolean = hasSpecifiedRelease
+    ? ReleaseService.isLatestNonProv(specifiedReleaseTag as string)
+    : false;
   // Determine the release tag to render for the citation, either for the
   // currently specified release or the latest release.
   let appliedReleaseObject: Nullable<CitationRelease> = null;
@@ -273,7 +274,7 @@ const useViewState = (
     appliedRenderedReleaseTag = (latestReleaseObject as CitationRelease).release;
   }
   const hasAppliedRelease: boolean = exists(appliedReleaseObject);
-  const isAppliedReleaseLatestNonProv = isStringNonEmpty(appliedRenderedReleaseTag)
+  const isAppliedReleaseLatestNonProv: boolean = isStringNonEmpty(appliedRenderedReleaseTag)
     ? ReleaseService.isLatestNonProv(appliedRenderedReleaseTag as string)
     : false;
   let appliedReleaseDoi: Nullable<string> = null;
@@ -283,10 +284,9 @@ const useViewState = (
       appliedReleaseDoi = aro.productDoi.url;
     }
   }
-  const hasAppliedReleaseDoi = isStringNonEmpty(appliedReleaseDoi);
-  const hideAppliedReleaseCitation = exists(appliedReleaseObject)
-    && !(appliedReleaseObject as CitationRelease).showCitation;
-
+  const hasAppliedReleaseDoi: boolean = isStringNonEmpty(appliedReleaseDoi);
+  const hideAppliedReleaseCitation: boolean = exists(appliedReleaseObject)
+    && ((appliedReleaseObject as CitationRelease).showCitation === false);
   // Identify whether or not viewing a bundled product with applicable DOI
   // and capture the bundle DOI product code.
   const hasBundleCode: boolean = existsNonEmpty(bundle.parentCodes)
@@ -308,7 +308,6 @@ const useViewState = (
       (baseProduct as ContextDataProduct).productCode,
     );
   }
-
   // Determine if the citable product should be the bundle container product
   // or the currently specified product.
   const citableBaseProduct: Nullable<ContextDataProduct> = hasBundleProduct
@@ -348,55 +347,62 @@ const useViewState = (
       }
     }
   }
-
   // Determine if there's a valid product to generate the citation with.
   const hasValidProduct: boolean = exists(citableBaseProduct);
-
   // Determine the overall citation display status.
   let appliedStatus: ContextStatus = status;
   let displayType: DisplayType = DisplayType.CONDITIONAL;
   const isReady: boolean = (status === ContextStatus.READY);
-  if (isReady && !hasValidProduct) {
-    // If the context is ready and no product is identified, error state.
-    appliedStatus = ContextStatus.ERROR;
-    displayType = DisplayType.NOT_AVAILABLE;
-  } else if (hasSpecifiedRelease) {
-    // A release has been specified, determine validity.
-    if (hideAppliedReleaseCitation) {
-      // If a release was specified but that release is configured to
-      // not show a release citation, show not available display state.
+  const isError: boolean = (status === ContextStatus.ERROR);
+  if (isReady) {
+    if (!hasValidProduct) {
+      // If the context is ready and no product is identified, error state.
+      appliedStatus = ContextStatus.ERROR;
       displayType = DisplayType.NOT_AVAILABLE;
-    } else if (hasAppliedReleaseDoi) {
-      if (exists(citableReleaseProduct)) {
-        displayType = DisplayType.RELEASE;
-      } else if (isReady) {
-        // If the component is ready and a release was specified but
-        // failed to resolve the appropriate citable release product,
-        // error state.
-        appliedStatus = ContextStatus.ERROR;
+    } else if (hasSpecifiedRelease) {
+      // A release has been specified, determine validity.
+      if (hideAppliedReleaseCitation && !isAppliedReleaseLatestNonProv) {
+        // If a release was specified but that release is configured to
+        // not show a release citation, show not available display state.
+        displayType = DisplayType.NOT_AVAILABLE;
+      } else if (hasAppliedReleaseDoi) {
+        if (exists(citableReleaseProduct)) {
+          displayType = DisplayType.RELEASE;
+        } else {
+          // If the component is ready and a release was specified but
+          // failed to resolve the appropriate citable release product,
+          // error state.
+          appliedStatus = ContextStatus.ERROR;
+          displayType = DisplayType.NOT_AVAILABLE;
+        }
+      } else if (isAppliedReleaseLatestNonProv) {
+        displayType = DisplayType.PROVISIONAL;
+      } else {
+        // If no valid DOI has been identified and it's not
+        // a special case, render as not available.
         displayType = DisplayType.NOT_AVAILABLE;
       }
-    } else if (isAppliedReleaseLatestNonProv) {
+    } else if (!hasLatestRelease || hideLatestReleaseCitation || disableConditional) {
+      // If display is determined to be conditional, but we haven't identified
+      // a valid latest release or it's set to hide the citation for that
+      // release, then display as provisional.
+      // If an override has been presented by the component, also
+      // display as provisional.
       displayType = DisplayType.PROVISIONAL;
-    } else {
-      // If no valid DOI has been identified and it's not
-      // a special case, render as not available.
+    } else if (!hasValidProduct || !exists(citableReleaseProduct)) {
+      // If the component is ready and the display state is conditional
+      // and a valid product and release product were not found, error state.
+      appliedStatus = ContextStatus.ERROR;
       displayType = DisplayType.NOT_AVAILABLE;
     }
-  } else if (!hasLatestRelease || hideLatestReleaseCitation || disableConditional) {
-    // If display is determined to be conditional, but we haven't identified
-    // a valid latest release or it's set to hide the citation for that
-    // release, then display as provisional.
-    // If an override has been presented by the component, also
-    // display as provisional.
-    displayType = DisplayType.PROVISIONAL;
-  } else if (isReady && (!hasValidProduct || !exists(citableReleaseProduct))) {
-    // If the component is ready and the display state is conditional
-    // and a valid product and release product were not found, error state.
-    appliedStatus = ContextStatus.ERROR;
-    displayType = DisplayType.NOT_AVAILABLE;
+  } else if (isError) {
+    if (hasSpecifiedRelease && isSpecifiedReleaseLatestNonProv) {
+      // If the component is in error state due to a special case release,
+      // convey the state of the component as not available instead of error.
+      appliedStatus = ContextStatus.READY;
+      displayType = DisplayType.NOT_AVAILABLE;
+    }
   }
-
   return {
     status: appliedStatus,
     releaseObject: appliedReleaseObject,

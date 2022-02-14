@@ -1,7 +1,7 @@
 import NeonContextService from './NeonContextService';
 import { exists, existsNonEmpty, isStringNonEmpty } from '../util/typeUtil';
 import { UserRelease } from '../types/neonContext';
-import { Release as InternalRelease, IReleaseLike } from '../types/internal';
+import { Release as InternalRelease, IReleaseLike, ReleaseProps } from '../types/internal';
 
 export const LATEST_AND_PROVISIONAL = 'LATEST_AND_PROVISIONAL';
 
@@ -17,6 +17,12 @@ export interface IReleaseService {
    * @return True if the release tag is latest non-provisional like.
    */
   isLatestNonProv: (releaseTag: string) => boolean;
+  /**
+   * Determines if the IReleaseLike object adheres to an InternalRelease object.
+   * @param release The release to check.
+   * @return True if the release is like an InternalRelease object.
+   */
+  isInternalReleaseLike: (release: IReleaseLike) => boolean;
   /**
    * Sorts the set of release like objects by generationDate.
    * @param unsortedReleases The set of release like objects to sort.
@@ -42,6 +48,18 @@ const ReleaseService: IReleaseService = {
     const matches: RegExpExecArray|null = ReleaseService.getProvReleaseRegex().exec(releaseTag);
     return exists(matches) && ((matches as RegExpExecArray).length > 0);
   },
+  isInternalReleaseLike: (release: IReleaseLike): boolean => {
+    let isLike = true;
+    for (const p in ReleaseProps) {
+      if (Object.prototype.hasOwnProperty.call(ReleaseProps, p)) {
+        if (!(p in release)) {
+          isLike = false;
+          break;
+        }
+      }
+    }
+    return isLike;
+  },
   sortReleases: <T extends IReleaseLike>(unsortedReleases: IReleaseLike[]): T[] => {
     const releases: IReleaseLike[] = [...unsortedReleases];
     if (existsNonEmpty(releases) && (releases.length > 1)) {
@@ -63,17 +81,30 @@ const ReleaseService: IReleaseService = {
     }
     const combinedReleases: IReleaseLike[] = [];
     currentReleases.forEach((release: IReleaseLike): void => {
-      const r: InternalRelease = {
-        ...release,
-        release: release.release,
-        description: release.release,
-        generationDate: exists(release.generationDate)
-          ? new Date(release.generationDate).toISOString()
-          : new Date().toISOString(),
-        showCitation: true,
-        showDoi: true,
-        showViz: true,
-      };
+      let r: IReleaseLike;
+      // Ensure we don't override any current releases that have been
+      // initialized as internal release representations.
+      if (ReleaseService.isInternalReleaseLike(release)) {
+        r = {
+          ...release,
+          release: release.release,
+          generationDate: exists(release.generationDate)
+            ? new Date(release.generationDate).toISOString()
+            : new Date().toISOString(),
+        } as IReleaseLike;
+      } else {
+        r = {
+          ...release,
+          release: release.release,
+          description: release.release,
+          generationDate: exists(release.generationDate)
+            ? new Date(release.generationDate).toISOString()
+            : new Date().toISOString(),
+          showCitation: true,
+          showDoi: true,
+          showViz: true,
+        } as IReleaseLike;
+      }
       combinedReleases.push(r);
     });
     userReleases.forEach((userRelease: UserRelease): void => {

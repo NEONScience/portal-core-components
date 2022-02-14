@@ -36,19 +36,29 @@ import { exists, isStringNonEmpty } from '../../../util/typeUtil';
 const reinitialize = (
   state: DataProductCitationState,
   action: ReinitializeAction|SetParamsAction,
-) => (
-  Service.calculateContextState(
+) => {
+  const defaultState: DataProductCitationState = getDefaultState();
+  // Calculate new initialized state, keep relevant
+  // computed values from context.
+  return Service.calculateContextState(
     {
-      ...getDefaultState(),
+      ...defaultState,
       productCode: action.productCode,
       release: action.release,
       neonContextState: state.neonContextState,
+      data: {
+        ...defaultState.data,
+        releases: ReleaseService.applyUserReleases<CitationRelease>(
+          state.neonContextState,
+          defaultState.data.releases,
+        ),
+      },
     },
     state.neonContextState,
     action.release,
     action.productCode,
-  )
-);
+  );
+};
 
 const isErrorTypeAction = (action: DataProducCitationActionTypes): boolean => (
   ('type' in action) && ('error' in action)
