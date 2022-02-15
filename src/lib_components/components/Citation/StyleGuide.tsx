@@ -1,4 +1,8 @@
-import React, { useReducer, useEffect, Dispatch } from 'react';
+import React, {
+  useReducer,
+  useEffect,
+  Dispatch,
+} from 'react';
 
 import { of, Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
@@ -90,7 +94,7 @@ const dataProductCitationReducer = (state: any, action: any) => {
 };
 
 const DataProductCitationDemoContainer = (): JSX.Element => ((
-  <ComponentErrorBoundary>
+  <ComponentErrorBoundary onReset={() => {}}>
     <DataProductCitationContext.Provider contextControlled>
       <DataProductCitationDemo />
     </DataProductCitationContext.Provider>

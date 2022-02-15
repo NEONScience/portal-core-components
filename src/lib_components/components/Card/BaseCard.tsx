@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Divider from '@material-ui/core/Divider';
@@ -13,6 +14,7 @@ import {
 import InfoIcon from '@material-ui/icons/Info';
 import WarnIcon from '@material-ui/icons/Warning';
 import ErrorIcon from '@material-ui/icons/Error';
+import ResetIcon from '@material-ui/icons/Autorenew';
 
 import Theme from '../Theme/Theme';
 import { StylesHook } from '../../types/muiTypes';
@@ -51,6 +53,8 @@ export interface BaseCardProps {
   title?: string;
   titleContent?: React.ReactNode;
   message?: string;
+  actionLabel?: string;
+  onActionClick?: () => void;
 }
 
 const BaseCard: React.FC<BaseCardProps> = (props: BaseCardProps): JSX.Element => {
@@ -61,6 +65,8 @@ const BaseCard: React.FC<BaseCardProps> = (props: BaseCardProps): JSX.Element =>
     calloutClasses,
     message,
     titleContent,
+    actionLabel,
+    onActionClick,
   }: BaseCardProps = props;
 
   let iconContent: JSX.Element = (
@@ -99,12 +105,25 @@ const BaseCard: React.FC<BaseCardProps> = (props: BaseCardProps): JSX.Element =>
         </div>
       );
     }
-
+    let action: JSX.Element|undefined;
+    const appliedLabel: string = isStringNonEmpty(actionLabel)
+      ? actionLabel as string
+      : 'Reset';
+    if (exists(onActionClick)) {
+      action = (
+        <div>
+          <Button variant="outlined" onClick={onActionClick} startIcon={<ResetIcon />}>
+            {appliedLabel}
+          </Button>
+        </div>
+      );
+    }
     return (
       <>
         {iconContent}
         {titleTextContent}
         {appliedTitleContent}
+        {action}
       </>
     );
   };

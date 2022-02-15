@@ -12,13 +12,18 @@ interface ComponentFallbackProps extends FallbackProps {
 const ComponentFallback: React.FC<ComponentFallbackProps> = (
   props: ComponentFallbackProps,
 ): JSX.Element => {
-  const { error }: ComponentFallbackProps = props;
+  const { error, resetErrorBoundary }: ComponentFallbackProps = props;
   // eslint-disable-next-line no-console
   console.error(error);
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <ErrorCard title="Something broke" message={error.message} />
+        <ErrorCard
+          title="Something broke"
+          message={error.message}
+          actionLabel="Reset"
+          onActionClick={resetErrorBoundary}
+        />
       </Grid>
     </Grid>
   );

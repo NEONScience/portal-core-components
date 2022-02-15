@@ -32,8 +32,11 @@ const DataProductCitation: React.FC<DataProductCitationProps> = (
     textOnlyProps,
   }: DataProductCitationProps = props;
   return (
-    <ComponentErrorBoundary>
-      <DataProductCitationContext.Provider productCode={productCode} release={release}>
+    <ComponentErrorBoundary onReset={() => { /* noop for boundary reset */ }}>
+      <DataProductCitationContext.Provider
+        productCode={productCode}
+        release={release}
+      >
         <DataProductCitationView
           showQuoteIcon={showQuoteIcon}
           disableConditional={disableConditional}

@@ -14,6 +14,8 @@ export interface BaseCardProps {
     title?: string;
     titleContent?: React.ReactNode;
     message?: string;
+    actionLabel?: string;
+    onActionClick?: () => void;
 }
 declare const BaseCard: React.FC<BaseCardProps>;
 export default BaseCard;
