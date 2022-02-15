@@ -1,6 +1,7 @@
-import { Nullable, UnknownRecord } from '../../../types/core';
+import { Dispatch } from 'react';
+import { AnyAction, Nullable, Undef, UnknownRecord } from '../../../types/core';
 import { DataProductRelease } from '../../../types/neonApi';
-import { FetchStatusState, DataProductCitationState, CitationRelease } from './State';
+import { FetchStatus, FetchStatusState, DataProductCitationState, CitationRelease, ContextDataProduct } from './State';
 import { DataProductCitationViewProps, DataProductCitationViewState } from './ViewState';
 declare const Service: {
     fetchIsAwaitingCall: (fetchObject: Nullable<FetchStatusState>) => boolean;
@@ -12,5 +13,8 @@ declare const Service: {
     useViewState: (state: DataProductCitationState, props: DataProductCitationViewProps) => DataProductCitationViewState;
     getReleaseObject: (releases: CitationRelease[], release: Nullable<string>) => Nullable<CitationRelease>;
     getReleaseDoi: (releases: CitationRelease[], release: Nullable<string>) => Nullable<string>;
+    buildCitationDownloadKey: (citationProduct: ContextDataProduct, releaseCb: string, formatCb: string, provisionalCb?: boolean) => string;
+    hasCitationDownloadStatus: (citationDownloadsFetchStatus: Record<string, FetchStatusState>, provisionalCb: boolean, statusCb: FetchStatus) => boolean;
+    handleResetCitationDownloads: (citationDownloadsFetchStatus: Record<string, FetchStatusState>, provisionalCb: boolean, dispatch: Undef<Dispatch<AnyAction>>) => void;
 };
 export default Service;

@@ -1,10 +1,17 @@
+import { Dispatch } from 'react';
 import BundleService from '../../../service/BundleService';
 import ReleaseService, { PROVISIONAL_RELEASE } from '../../../service/ReleaseService';
-import { Nullable, UnknownRecord } from '../../../types/core';
+import {
+  AnyAction,
+  Nullable,
+  Undef,
+  UnknownRecord,
+} from '../../../types/core';
 import { CitationBundleState } from '../../../types/internal';
 import { DataProductRelease } from '../../../types/neonApi';
 import { BundleContext } from '../../../types/neonContext';
 import { exists, existsNonEmpty, isStringNonEmpty } from '../../../util/typeUtil';
+import ActionCreator from './Actions';
 
 import {
   FetchStatus,
@@ -214,6 +221,71 @@ const getReleaseDoi = (
     return null;
   }
   return (releaseObject as CitationRelease).productDoi.url;
+};
+
+const buildCitationDownloadKey = (
+  citationProduct: ContextDataProduct,
+  releaseCb: string,
+  formatCb: string,
+  provisionalCb = true,
+): string => {
+  let key = `citation-download-${citationProduct.productCode}`;
+  if (isStringNonEmpty(releaseCb)) {
+    key = `${key}-${releaseCb}`;
+  } else if (provisionalCb) {
+    key = `${key}-${PROVISIONAL_RELEASE}`;
+  } else {
+    key = `${key}-RELEASE`;
+  }
+  if (isStringNonEmpty(formatCb)) {
+    key = `${key}-${formatCb}`;
+  } else {
+    key = `${key}-FORMAT`;
+  }
+  return key;
+};
+const hasCitationDownloadStatus = (
+  citationDownloadsFetchStatus: Record<string, FetchStatusState>,
+  provisionalCb: boolean,
+  statusCb: FetchStatus,
+): boolean => (
+  Object.keys(citationDownloadsFetchStatus).some((k: string): boolean => {
+    if (citationDownloadsFetchStatus[k]) {
+      let shouldConsider = true;
+      if (!provisionalCb && k.includes(PROVISIONAL_RELEASE)) {
+        shouldConsider = false;
+      } else if (provisionalCb && !k.includes(PROVISIONAL_RELEASE)) {
+        shouldConsider = false;
+      }
+      if (shouldConsider && (citationDownloadsFetchStatus[k].status === statusCb)) {
+        return true;
+      }
+    }
+    return false;
+  })
+);
+const handleResetCitationDownloads = (
+  citationDownloadsFetchStatus: Record<string, FetchStatusState>,
+  provisionalCb: boolean,
+  dispatch: Undef<Dispatch<AnyAction>>,
+): void => {
+  Object.keys(citationDownloadsFetchStatus).forEach((k: string): void => {
+    if (citationDownloadsFetchStatus[k]) {
+      let shouldReset = true;
+      if (!provisionalCb && k.includes(PROVISIONAL_RELEASE)) {
+        shouldReset = false;
+      } else if (provisionalCb && !k.includes(PROVISIONAL_RELEASE)) {
+        shouldReset = false;
+      }
+      if (shouldReset) {
+        if (citationDownloadsFetchStatus[k].status !== FetchStatus.IDLE) {
+          if (dispatch) {
+            dispatch(ActionCreator.fetchCitationDownloadReset(k));
+          }
+        }
+      }
+    }
+  });
 };
 
 const useViewState = (
@@ -428,6 +500,9 @@ const Service = {
   useViewState,
   getReleaseObject,
   getReleaseDoi,
+  buildCitationDownloadKey,
+  hasCitationDownloadStatus,
+  handleResetCitationDownloads,
 };
 
 export default Service;

@@ -148,61 +148,8 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     citationDownloadsFetchStatus,
   }: DataProductCitationViewState = viewState;
 
-  const buildCitationDownloadKey = (
-    citationProduct: ContextDataProduct,
-    releaseCb: string,
-    formatCb: string,
-    provisionalCb = true,
-  ): string => {
-    let key = `citation-download-${citationProduct.productCode}`;
-    if (isStringNonEmpty(releaseCb)) {
-      key = `${key}-${releaseCb}`;
-    } else if (provisionalCb) {
-      key = `${key}-${PROVISIONAL_RELEASE}`;
-    } else {
-      key = `${key}-RELEASE`;
-    }
-    if (isStringNonEmpty(formatCb)) {
-      key = `${key}-${formatCb}`;
-    } else {
-      key = `${key}-FORMAT`;
-    }
-    return key;
-  };
-  const hasCitationDownloadStatus = (provisionalCb: boolean, statusCb: FetchStatus): boolean => (
-    Object.keys(citationDownloadsFetchStatus).some((k: string): boolean => {
-      if (citationDownloadsFetchStatus[k]) {
-        let shouldConsider = true;
-        if (!provisionalCb && k.includes(PROVISIONAL_RELEASE)) {
-          shouldConsider = false;
-        } else if (provisionalCb && !k.includes(PROVISIONAL_RELEASE)) {
-          shouldConsider = false;
-        }
-        if (shouldConsider && (citationDownloadsFetchStatus[k].status === statusCb)) {
-          return true;
-        }
-      }
-      return false;
-    })
-  );
   const handleResetCitationDownloadsCb = useCallback((provisionalCb: boolean): void => {
-    Object.keys(citationDownloadsFetchStatus).forEach((k: string): void => {
-      if (citationDownloadsFetchStatus[k]) {
-        let shouldReset = true;
-        if (!provisionalCb && k.includes(PROVISIONAL_RELEASE)) {
-          shouldReset = false;
-        } else if (provisionalCb && !k.includes(PROVISIONAL_RELEASE)) {
-          shouldReset = false;
-        }
-        if (shouldReset) {
-          if (citationDownloadsFetchStatus[k].status !== FetchStatus.IDLE) {
-            if (dispatch) {
-              dispatch(ActionCreator.fetchCitationDownloadReset(k));
-            }
-          }
-        }
-      }
-    });
+    Service.handleResetCitationDownloads(citationDownloadsFetchStatus, provisionalCb, dispatch);
   }, [dispatch, citationDownloadsFetchStatus]);
   const handleCitationDownloadCb = useCallback((
     citationProduct: ContextDataProduct,
@@ -213,7 +160,7 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     const coercedTarget: UnknownRecord = {
       ...citationProduct,
     };
-    const key: string = buildCitationDownloadKey(
+    const key: string = Service.buildCitationDownloadKey(
       citationProduct,
       releaseCb,
       formatCb,
@@ -435,12 +382,19 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
         </div>
       );
     }
-    const isSectionDownloading: boolean = hasCitationDownloadStatus(
+    const isSectionDownloading: boolean = Service.hasCitationDownloadStatus(
+      citationDownloadsFetchStatus,
       provisional,
       FetchStatus.FETCHING,
     );
     let downloadStatus: Nullable<JSX.Element>;
-    if (hasCitationDownloadStatus(provisional, FetchStatus.ERROR)) {
+    if (
+      Service.hasCitationDownloadStatus(
+        citationDownloadsFetchStatus,
+        provisional,
+        FetchStatus.ERROR,
+      )
+    ) {
       downloadStatus = (
         <>
           <Alert severity="error" onClose={() => handleResetCitationDownloadsCb(provisional)}>
@@ -448,7 +402,13 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
           </Alert>
         </>
       );
-    } else if (hasCitationDownloadStatus(provisional, FetchStatus.SUCCESS)) {
+    } else if (
+      Service.hasCitationDownloadStatus(
+        citationDownloadsFetchStatus,
+        provisional,
+        FetchStatus.SUCCESS,
+      )
+    ) {
       downloadStatus = (
         <>
           <Alert severity="success" onClose={() => handleResetCitationDownloadsCb(provisional)}>
@@ -483,7 +443,7 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
             </CopyToClipboard>
           </Tooltip>
           {DataCiteService.getDataProductFormats().map((format: CitationFormat): JSX.Element => {
-            const key: string = buildCitationDownloadKey(
+            const key: string = Service.buildCitationDownloadKey(
               citationProduct,
               release,
               format.shortName,

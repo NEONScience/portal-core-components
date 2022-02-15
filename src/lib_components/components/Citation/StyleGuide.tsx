@@ -10,6 +10,7 @@ import { AjaxResponse } from 'rxjs/ajax';
 
 import cloneDeep from 'lodash/cloneDeep';
 
+import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -22,6 +23,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import CodeBlock from '../../../components/CodeBlock';
 import DocBlock from '../../../components/DocBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
+import PropsTable from '../../../components/PropsTable';
 
 import ActionCreator from './DataProductCitation/Actions';
 import ComponentErrorBoundary from '../Error/ComponentErrorBoundary';
@@ -50,6 +52,103 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: '8px',
   },
 }));
+
+const dataProductCitationPropRows = [
+  {
+    name: 'disableConditional',
+    type: 'boolean',
+    default: 'false',
+    description: (
+      <p>
+        Whether or not to prevent rendering the citation as a conditional citation.
+        Conditional citations include both the provisional and release citations
+        when applicable. Disabling conditional will display the provisional
+        section only by default with no release specified.
+      </p>
+    ),
+  },
+  {
+    name: 'disableSkeleton',
+    type: 'boolean',
+    default: 'false',
+    description: (
+      <p>
+        Whether or not to prevent rendering the skeleton loading display for the
+        component when loading its state.
+      </p>
+    ),
+  },
+  {
+    name: 'productCode',
+    type: 'string',
+    default: 'null',
+    examples: (
+      <div>
+        {/* @ts-ignore */}
+        <tt>DP1.00001.001</tt>
+      </div>
+    ),
+    description: (
+      <p>
+        The product code to build the citation for.
+      </p>
+    ),
+  },
+  {
+    name: 'release',
+    type: 'string',
+    default: 'undefined',
+    examples: (
+      <div>
+        {/* @ts-ignore */}
+        <tt>RELEASE-2021</tt>
+      </div>
+    ),
+    description: (
+      <p>
+        The release to build the citation for when defining a citation that is
+        specific to a particular release.
+      </p>
+    ),
+  },
+  {
+    name: 'showQuoteIcon',
+    type: 'boolean',
+    default: 'false',
+    description: (
+      <p>
+        Whether or not to render a quote icon with the citation component
+        header for utilization within various contexts. (eg, download summary).
+      </p>
+    ),
+  },
+  {
+    name: 'showTextOnly',
+    type: 'boolean',
+    default: 'false',
+    description: (
+      <p>
+        Whether or not to render the citation display as text only.
+      </p>
+    ),
+  },
+  {
+    name: 'textOnlyProps',
+    type: 'CitationTextOnlyProps',
+    default: 'undefined',
+    examples: (
+      <div>
+        {/* @ts-ignore */}
+        <tt>{"{ variant: 'caption', cssClass: classes.citationTextOnly }"}</tt>
+      </div>
+    ),
+    description: (
+      <p>
+        The properties to apply to the text only display version of the citation.
+      </p>
+    ),
+  },
+];
 
 const DATA_PRODUCT_CITATION_DEFAULT_STATE = {
   fetchProducts: {
@@ -285,7 +384,9 @@ import DataProductCitation from 'portal-core-components/lib/components/DataProdu
       </CodeBlock>
 
       <Divider className={classes.divider} />
-      <Typography variant="h6" component="h4" gutterBottom>Example Data Product Citation Viewer</Typography>
+      <Typography variant="h6" component="h4" gutterBottom>
+        Example Data Product Citation Viewer
+      </Typography>
       <DocBlock>
         Displays a data product citation.
       </DocBlock>
@@ -297,10 +398,23 @@ import DataProductCitation from 'portal-core-components/lib/components/DataProdu
         `}
       </CodeBlock>
       <ExampleBlock>
-        <DataProductCitation productCode="DP1.00024.001" />
+        <Container>
+          <DataProductCitation productCode="DP1.00024.001" />
+        </Container>
       </ExampleBlock>
 
       <Divider className={classes.divider} />
+      <Typography variant="h4" component="h2" gutterBottom>Data Product Citation Props</Typography>
+
+      <DocBlock>
+        <PropsTable props={dataProductCitationPropRows} />
+      </DocBlock>
+
+      <Divider className={classes.divider} />
+      <Typography variant="h4" component="h2" gutterBottom>
+        Data Product Citation Usage and Exmaples
+      </Typography>
+
       <Typography variant="h6" component="h4" gutterBottom>Demo Data Product Citation Viewer</Typography>
       <DocBlock>
         Demo data product citation component with product and release selection.
