@@ -19,7 +19,11 @@ export declare enum ActionTypes {
     FETCH_BUNDLE_PARENT_SUCCEEDED = "FETCH_BUNDLE_PARENT_SUCCEEDED",
     FETCH_BUNDLE_PARENT_RELEASE_STARTED = "FETCH_BUNDLE_PARENT_RELEASE_STARTED",
     FETCH_BUNDLE_PARENT_RELEASE_FAILED = "FETCH_BUNDLE_PARENT_RELEASE_FAILED",
-    FETCH_BUNDLE_PARENT_RELEASE_SUCCEEDED = "FETCH_BUNDLE_PARENT_RELEASE_SUCCEEDED"
+    FETCH_BUNDLE_PARENT_RELEASE_SUCCEEDED = "FETCH_BUNDLE_PARENT_RELEASE_SUCCEEDED",
+    FETCH_CITATION_DOWNLOAD_STARTED = "FETCH_CITATION_DOWNLOAD_STARTED",
+    FETCH_CITATION_DOWNLOAD_FAILED = "FETCH_CITATION_DOWNLOAD_FAILED",
+    FETCH_CITATION_DOWNLOAD_SUCCEEDED = "FETCH_CITATION_DOWNLOAD_SUCCEEDED",
+    FETCH_CITATION_DOWNLOAD_RESET = "FETCH_CITATION_DOWNLOAD_RESET"
 }
 export interface ReinitializeAction extends AnyAction {
     type: typeof ActionTypes.REINITIALIZE;
@@ -103,8 +107,25 @@ export interface FetchBundleParentReleaseSucceededAction extends AnyAction {
     release: string;
     data: ContextDataProduct;
 }
-export declare type DataProducCitationActionTypes = (ReinitializeAction | ErrorAction | SetProductCodeAction | SetReleaseAction | SetParamsAction | StoreFinalizedNeonContextStateAction | FetchProductStartedAction | FetchProductFailedAction | FetchProductSucceededAction | FetchProductReleaseStartedAction | FetchProductReleaseFailedAction | FetchProductReleaseSucceededAction | FetchBundleParentStartedAction | FetchBundleParentFailedAction | FetchBundleParentSucceededAction | FetchBundleParentReleaseStartedAction | FetchBundleParentReleaseFailedAction | FetchBundleParentReleaseSucceededAction | AnyAction);
-export declare type ErrorActionTypes = (ErrorAction | FetchProductFailedAction | FetchProductReleaseFailedAction | FetchBundleParentFailedAction | FetchBundleParentReleaseFailedAction);
+export interface FetchCitationDownloadStartedAction extends AnyAction {
+    type: typeof ActionTypes.FETCH_CITATION_DOWNLOAD_STARTED;
+    key: string;
+}
+export interface FetchCitationDownloadFailedAction extends AnyAction {
+    type: typeof ActionTypes.FETCH_CITATION_DOWNLOAD_FAILED;
+    key: string;
+    error: Nullable<string>;
+}
+export interface FetchCitationDownloadSucceededAction extends AnyAction {
+    type: typeof ActionTypes.FETCH_CITATION_DOWNLOAD_SUCCEEDED;
+    key: string;
+}
+export interface FetchCitationDownloadResetAction extends AnyAction {
+    type: typeof ActionTypes.FETCH_CITATION_DOWNLOAD_RESET;
+    key: string;
+}
+export declare type DataProducCitationActionTypes = (ReinitializeAction | ErrorAction | SetProductCodeAction | SetReleaseAction | SetParamsAction | StoreFinalizedNeonContextStateAction | FetchProductStartedAction | FetchProductFailedAction | FetchProductSucceededAction | FetchProductReleaseStartedAction | FetchProductReleaseFailedAction | FetchProductReleaseSucceededAction | FetchBundleParentStartedAction | FetchBundleParentFailedAction | FetchBundleParentSucceededAction | FetchBundleParentReleaseStartedAction | FetchBundleParentReleaseFailedAction | FetchBundleParentReleaseSucceededAction | FetchCitationDownloadStartedAction | FetchCitationDownloadFailedAction | FetchCitationDownloadSucceededAction | FetchCitationDownloadResetAction | AnyAction);
+export declare type ErrorActionTypes = (ErrorAction | FetchProductFailedAction | FetchProductReleaseFailedAction | FetchBundleParentFailedAction | FetchBundleParentReleaseFailedAction | FetchCitationDownloadFailedAction);
 declare const ActionCreator: {
     reinitialize: (productCode: string, release?: Nullable<string>) => ReinitializeAction;
     error: (error: Nullable<UnknownRecord | string>) => ErrorAction;
@@ -124,5 +145,9 @@ declare const ActionCreator: {
     fetchBundleParentReleaseStarted: (bundleParent: string, release: string) => FetchBundleParentReleaseStartedAction;
     fetchBundleParentReleaseFailed: (bundleParent: string, release: string, error: Nullable<AjaxResponse | string>) => FetchBundleParentReleaseFailedAction;
     fetchBundleParentReleaseSucceeded: (bundleParent: string, release: string, data: ContextDataProduct) => FetchBundleParentReleaseSucceededAction;
+    fetchCitationDownloadStarted: (key: string) => FetchCitationDownloadStartedAction;
+    fetchCitationDownloadFailed: (key: string, error: Nullable<string>) => FetchCitationDownloadFailedAction;
+    fetchCitationDownloadSucceeded: (key: string) => FetchCitationDownloadSucceededAction;
+    fetchCitationDownloadReset: (key: string) => FetchCitationDownloadResetAction;
 };
 export default ActionCreator;

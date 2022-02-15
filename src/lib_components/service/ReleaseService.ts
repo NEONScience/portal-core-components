@@ -4,6 +4,7 @@ import { UserRelease } from '../types/neonContext';
 import { Release as InternalRelease, IReleaseLike, ReleaseProps } from '../types/internal';
 
 export const LATEST_AND_PROVISIONAL = 'LATEST_AND_PROVISIONAL';
+export const PROVISIONAL_RELEASE = 'provisional';
 
 export interface IReleaseService {
   /**

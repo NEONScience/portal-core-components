@@ -1,5 +1,5 @@
 import BundleService from '../../../service/BundleService';
-import ReleaseService from '../../../service/ReleaseService';
+import ReleaseService, { PROVISIONAL_RELEASE } from '../../../service/ReleaseService';
 import { Nullable, UnknownRecord } from '../../../types/core';
 import { CitationBundleState } from '../../../types/internal';
 import { DataProductRelease } from '../../../types/neonApi';
@@ -13,7 +13,6 @@ import {
   DataProductCitationState,
   DataState,
   CitationRelease,
-  PROVISIONAL_RELEASE,
   ContextDataProduct,
 } from './State';
 import {
@@ -101,12 +100,12 @@ const calculateFetches = (state: DataProductCitationState): DataProductCitationS
 
 const calculateAppStatus = (state: DataProductCitationState): DataProductCitationState => {
   const updatedState: DataProductCitationState = { ...state };
-  if (stateHasFetchesInStatus(state, FetchStatus.AWAITING_CALL)) {
-    updatedState.component.status = ContextStatus.HAS_FETCHES_TO_TRIGGER;
+  if (stateHasFetchesInStatus(state, FetchStatus.ERROR) || state.neonContextState.hasError) {
+    updatedState.component.status = ContextStatus.ERROR;
     return updatedState;
   }
-  if (stateHasFetchesInStatus(state, FetchStatus.ERROR)) {
-    updatedState.component.status = ContextStatus.ERROR;
+  if (stateHasFetchesInStatus(state, FetchStatus.AWAITING_CALL)) {
+    updatedState.component.status = ContextStatus.HAS_FETCHES_TO_TRIGGER;
     return updatedState;
   }
   if (stateHasFetchesInStatus(state, FetchStatus.FETCHING) || !state.neonContextState.isFinal) {
@@ -227,6 +226,9 @@ const useViewState = (
     component: {
       status,
     },
+    fetches: {
+      citationDownloads: citationDownloadsFetchStatus,
+    },
     data: {
       product: baseProduct,
       productReleases,
@@ -237,7 +239,7 @@ const useViewState = (
     neonContextState: {
       data: neonContextStateData,
     },
-  } = state;
+  }: DataProductCitationState = state;
   const bundlesContext = (neonContextStateData as UnknownRecord).bundles as BundleContext;
   const { disableConditional }: DataProductCitationViewProps = props;
   const hasReleases: boolean = existsNonEmpty(releases);
@@ -412,6 +414,7 @@ const useViewState = (
     citableReleaseProduct,
     displayType,
     bundleParentCode,
+    citationDownloadsFetchStatus,
   };
 };
 

@@ -4,6 +4,7 @@ import {
   CitationRelease,
   ContextDataProduct,
   ContextStatus,
+  FetchStatusState,
 } from './State';
 
 export interface CitationTextOnlyProps {
@@ -35,4 +36,5 @@ export interface DataProductCitationViewState {
   citableBaseProduct: Nullable<ContextDataProduct>;
   citableReleaseProduct: Nullable<ContextDataProduct>;
   bundleParentCode: Nullable<string>;
+  citationDownloadsFetchStatus: Record<string, FetchStatusState>;
 }

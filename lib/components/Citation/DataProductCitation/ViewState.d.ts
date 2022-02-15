@@ -1,6 +1,6 @@
 import { Variant } from '@material-ui/core/styles/createTypography';
 import { Nullable } from '../../../types/core';
-import { CitationRelease, ContextDataProduct, ContextStatus } from './State';
+import { CitationRelease, ContextDataProduct, ContextStatus, FetchStatusState } from './State';
 export interface CitationTextOnlyProps {
     variant?: Variant | undefined;
     cssClass?: string;
@@ -27,4 +27,5 @@ export interface DataProductCitationViewState {
     citableBaseProduct: Nullable<ContextDataProduct>;
     citableReleaseProduct: Nullable<ContextDataProduct>;
     bundleParentCode: Nullable<string>;
+    citationDownloadsFetchStatus: Record<string, FetchStatusState>;
 }

@@ -92,7 +92,7 @@ const Provider: React.FC<ProviderProps> = (props: ProviderProps): JSX.Element =>
     productCode: propsProductCode,
     release: propsRelease,
   };
-  if (neonContextIsFinal && !neonContextHasError) {
+  if (neonContextIsFinal || neonContextHasError) {
     initialState.neonContextState = { ...neonContextState };
   }
   const [state, dispatch] = useReducer(Reducer, initialState);
@@ -130,7 +130,7 @@ const Provider: React.FC<ProviderProps> = (props: ProviderProps): JSX.Element =>
   ]);
 
   useEffect(() => {
-    if (neonContextIsFinal && !neonContextHasError) {
+    if (neonContextIsFinal || neonContextHasError) {
       dispatch(ActionCreator.storeFinalizedNeonContextState(neonContextState));
     }
   }, [

@@ -25,6 +25,11 @@ export enum ActionTypes {
   FETCH_BUNDLE_PARENT_RELEASE_STARTED = 'FETCH_BUNDLE_PARENT_RELEASE_STARTED',
   FETCH_BUNDLE_PARENT_RELEASE_FAILED = 'FETCH_BUNDLE_PARENT_RELEASE_FAILED',
   FETCH_BUNDLE_PARENT_RELEASE_SUCCEEDED = 'FETCH_BUNDLE_PARENT_RELEASE_SUCCEEDED',
+
+  FETCH_CITATION_DOWNLOAD_STARTED = 'FETCH_CITATION_DOWNLOAD_STARTED',
+  FETCH_CITATION_DOWNLOAD_FAILED = 'FETCH_CITATION_DOWNLOAD_FAILED',
+  FETCH_CITATION_DOWNLOAD_SUCCEEDED = 'FETCH_CITATION_DOWNLOAD_SUCCEEDED',
+  FETCH_CITATION_DOWNLOAD_RESET = 'FETCH_CITATION_DOWNLOAD_RESET',
 }
 
 export interface ReinitializeAction extends AnyAction {
@@ -109,6 +114,23 @@ export interface FetchBundleParentReleaseSucceededAction extends AnyAction {
   release: string;
   data: ContextDataProduct;
 }
+export interface FetchCitationDownloadStartedAction extends AnyAction {
+  type: typeof ActionTypes.FETCH_CITATION_DOWNLOAD_STARTED;
+  key: string;
+}
+export interface FetchCitationDownloadFailedAction extends AnyAction {
+  type: typeof ActionTypes.FETCH_CITATION_DOWNLOAD_FAILED;
+  key: string;
+  error: Nullable<string>;
+}
+export interface FetchCitationDownloadSucceededAction extends AnyAction {
+  type: typeof ActionTypes.FETCH_CITATION_DOWNLOAD_SUCCEEDED;
+  key: string;
+}
+export interface FetchCitationDownloadResetAction extends AnyAction {
+  type: typeof ActionTypes.FETCH_CITATION_DOWNLOAD_RESET;
+  key: string;
+}
 
 export type DataProducCitationActionTypes = (
   ReinitializeAction
@@ -129,6 +151,10 @@ export type DataProducCitationActionTypes = (
   | FetchBundleParentReleaseStartedAction
   | FetchBundleParentReleaseFailedAction
   | FetchBundleParentReleaseSucceededAction
+  | FetchCitationDownloadStartedAction
+  | FetchCitationDownloadFailedAction
+  | FetchCitationDownloadSucceededAction
+  | FetchCitationDownloadResetAction
   | AnyAction
 );
 
@@ -138,6 +164,7 @@ export type ErrorActionTypes = (
   | FetchProductReleaseFailedAction
   | FetchBundleParentFailedAction
   | FetchBundleParentReleaseFailedAction
+  | FetchCitationDownloadFailedAction
 );
 
 const ActionCreator = {
@@ -247,6 +274,26 @@ const ActionCreator = {
     bundleParent,
     release,
     data,
+  }),
+  fetchCitationDownloadStarted: (key: string): FetchCitationDownloadStartedAction => ({
+    type: ActionTypes.FETCH_CITATION_DOWNLOAD_STARTED,
+    key,
+  }),
+  fetchCitationDownloadFailed: (
+    key: string,
+    error: Nullable<string>,
+  ): FetchCitationDownloadFailedAction => ({
+    type: ActionTypes.FETCH_CITATION_DOWNLOAD_FAILED,
+    key,
+    error,
+  }),
+  fetchCitationDownloadSucceeded: (key: string): FetchCitationDownloadSucceededAction => ({
+    type: ActionTypes.FETCH_CITATION_DOWNLOAD_SUCCEEDED,
+    key,
+  }),
+  fetchCitationDownloadReset: (key: string): FetchCitationDownloadResetAction => ({
+    type: ActionTypes.FETCH_CITATION_DOWNLOAD_RESET,
+    key,
   }),
 };
 

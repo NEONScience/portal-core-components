@@ -1,5 +1,6 @@
 import { IReleaseLike } from '../types/internal';
 export declare const LATEST_AND_PROVISIONAL = "LATEST_AND_PROVISIONAL";
+export declare const PROVISIONAL_RELEASE = "provisional";
 export interface IReleaseService {
     /**
      * Gets a regex for determining if a release is latest non-provisional.

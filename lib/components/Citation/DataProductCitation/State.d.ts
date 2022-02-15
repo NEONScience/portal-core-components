@@ -1,12 +1,12 @@
 import { Nullable, UnknownRecord } from '../../../types/core';
 import { DataProductRelease } from '../../../types/neonApi';
 import { CitationBundleState, Release } from '../../../types/internal';
-export declare const PROVISIONAL_RELEASE = "provisional";
 export declare enum FetchStatus {
     AWAITING_CALL = "AWAITING_CALL",
     FETCHING = "FETCHING",
     ERROR = "ERROR",
-    SUCCESS = "SUCCESS"
+    SUCCESS = "SUCCESS",
+    IDLE = "IDLE"
 }
 export declare enum ContextStatus {
     INITIALIZING = "INITIALIZING",
@@ -28,6 +28,7 @@ export interface ContextFetchStatusState {
     productReleases: Record<string, FetchStatusState>;
     bundleParents: Record<string, FetchStatusState>;
     bundleParentReleases: Record<string, Record<string, FetchStatusState>>;
+    citationDownloads: Record<string, FetchStatusState>;
 }
 export declare type CitationRelease = DataProductRelease & Release;
 export interface ContextDataProduct {

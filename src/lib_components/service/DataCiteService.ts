@@ -1,8 +1,5 @@
-import { of } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
-import { ajax, AjaxResponse } from 'rxjs/ajax';
-
 import NeonEnvironment from '../components/NeonEnvironment/NeonEnvironment';
+import { PROVISIONAL_RELEASE } from './ReleaseService';
 import { isStringNonEmpty } from '../util/typeUtil';
 
 export enum CitationDownloadType {
@@ -34,8 +31,16 @@ export interface IDataCiteService {
     target: Record<string, unknown>,
     doi: string,
     release?: string,
+    onSuccessCb?: (data: string) => void,
+    onErrorCb?: (error: unknown) => void,
   ) => void;
-  executeDownload: (fileName: string, mimeType: string, payload: string) => void;
+  executeDownload: (
+    fileName: string,
+    mimeType: string,
+    payload: string,
+    onSuccessCb?: (data: string) => void,
+    onErrorCb?: (error: unknown) => void,
+  ) => void;
 }
 
 const DataCiteService: IDataCiteService = {
@@ -149,19 +154,24 @@ ER  - `;
     target: Record<string, unknown>,
     doi: string,
     release?: string,
+    onSuccessCb?: (data: string) => void,
+    onErrorCb?: (error: unknown) => void,
   ): void => {
-    const useProvisional: boolean = (release === 'provisional');
+    const useProvisional: boolean = (release === PROVISIONAL_RELEASE);
     const citationFormat: CitationFormat|undefined = DataCiteService.getCitationFormats()
       .find((value: CitationFormat): boolean => (
         value.shortName.localeCompare(formatShortName) === 0
       ));
     if (!citationFormat) {
+      if (onErrorCb) {
+        onErrorCb(`Unable to download citation for doi: ${doi}`);
+      }
       return;
     }
     let fileName: string = '';
     const appliedRelease = isStringNonEmpty(release)
       ? release
-      : 'provisional';
+      : PROVISIONAL_RELEASE;
     switch (type) {
       case CitationDownloadType.PROTOTYPE_DATASET:
         fileName = `NEON-Prototype-Dataset-${target.uuid as string}.${citationFormat.extension}`;
@@ -183,39 +193,87 @@ ER  - `;
           break;
       }
       if (!isStringNonEmpty(provCitation)) {
+        if (onErrorCb) {
+          onErrorCb(`Unable to download citation for doi: ${doi}`);
+        }
         return;
       }
-      DataCiteService.executeDownload(fileName, citationFormat.mime, provCitation);
+      DataCiteService.executeDownload(
+        fileName,
+        citationFormat.mime,
+        provCitation,
+        onSuccessCb,
+        onErrorCb,
+      );
       return;
     }
     const citationUrl = DataCiteService.getDoiUrl(doi, citationFormat);
-    ajax({
-      url: citationUrl,
+    const init: RequestInit = {
       method: 'GET',
-      responseType: 'text',
-    }).pipe(
-      map((citationContent: AjaxResponse) => {
-        DataCiteService.executeDownload(fileName, citationFormat.mime, citationContent.response);
-      }),
-      catchError((error) => {
+    };
+    fetch(citationUrl, init)
+      .then((response: Response): Promise<string> => {
+        if (!response.ok) {
+          const errMsg = 'Unable to download citation for '
+            + `doi: ${doi} and format: ${citationFormat}`;
+          throw new Error(errMsg);
+        }
+        return response.text();
+      })
+      .then((data: string): void => {
+        if (!isStringNonEmpty(data)) {
+          if (onErrorCb) {
+            const errMsg = 'Unable to download citation for '
+              + `doi: ${doi} and format: ${citationFormat}`;
+            onErrorCb(errMsg);
+          }
+          return;
+        }
+        DataCiteService.executeDownload(
+          fileName,
+          citationFormat.mime,
+          data,
+          onSuccessCb,
+          onErrorCb,
+        );
+      })
+      .catch((reason: unknown): void => {
         // eslint-disable-next-line no-console
-        console.error(`Unable to download citation ${fileName}`, error);
-        return of(error);
-      }),
-    ).subscribe();
+        console.error(`Unable to download citation ${fileName}`, reason);
+        if (onErrorCb) {
+          onErrorCb(reason);
+        }
+      });
   },
 
-  executeDownload: (fileName: string, mimeType: string, payload: string): void => {
-    const link = document.createElement('a');
-    if (URL) {
-      link.href = URL.createObjectURL(new Blob([payload], { type: mimeType }));
-    } else {
-      link.setAttribute('href', `data:${mimeType},${encodeURI(payload)}`);
+  executeDownload: (
+    fileName: string,
+    mimeType: string,
+    payload: string,
+    onSuccessCb?: (data: string) => void,
+    onErrorCb?: (error: unknown) => void,
+  ): void => {
+    try {
+      const link = document.createElement('a');
+      if (URL) {
+        link.href = URL.createObjectURL(new Blob([payload], { type: mimeType }));
+      } else {
+        link.setAttribute('href', `data:${mimeType},${encodeURI(payload)}`);
+      }
+      link.setAttribute('download', fileName);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      if (onSuccessCb) {
+        onSuccessCb(payload);
+      }
+    } catch (e: unknown) {
+      // eslint-disable-next-line no-console
+      console.error(e);
+      if (onErrorCb) {
+        onErrorCb(e);
+      }
     }
-    link.setAttribute('download', fileName);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
   },
 };
 

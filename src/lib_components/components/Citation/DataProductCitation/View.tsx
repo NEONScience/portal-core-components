@@ -1,13 +1,15 @@
 /* eslint-disable react/jsx-fragments */
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import { makeStyles } from '@material-ui/core/styles';
+import Alert from '@material-ui/lab/Alert';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import Skeleton from '@material-ui/lab/Skeleton';
@@ -26,17 +28,19 @@ import Theme from '../../Theme/Theme';
 
 import CitationService from '../../../service/CitationService';
 import DataCiteService, {
-  CitationDownloadType,
+  CitationDownloadType, CitationFormat,
 } from '../../../service/DataCiteService';
 import RouteService from '../../../service/RouteService';
+import { PROVISIONAL_RELEASE } from '../../../service/ReleaseService';
 import { exists, isStringNonEmpty } from '../../../util/typeUtil';
 
+import ActionCreator from './Actions';
 import { NeonTheme } from '../../Theme/types';
 import {
   CitationRelease,
   ContextDataProduct,
   ContextStatus,
-  PROVISIONAL_RELEASE,
+  FetchStatus,
 } from './State';
 import {
   DataProductCitationViewState,
@@ -122,6 +126,7 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
   }: DataProductCitationViewProps = props;
   const classes = useStyles(Theme);
   const state = DataProductCitationContext.useDataProductCitationContextState();
+  const dispatch = DataProductCitationContext.useDataProductCitationContextDispatch();
 
   let appliedTextOnly: CitationTextOnlyProps = {
     variant: 'caption',
@@ -132,32 +137,111 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
   }
 
   const viewState: DataProductCitationViewState = Service.useViewState(state, props);
+  const {
+    status,
+    displayType,
+    releases,
+    releaseObject,
+    citableBaseProduct,
+    citableReleaseProduct,
+    bundleParentCode,
+    citationDownloadsFetchStatus,
+  }: DataProductCitationViewState = viewState;
 
-  // Click handler for initiating a citation download
-  const handleDownloadCitation = (
-    release: string,
-    format: string,
-    provisional = true,
-  ): void => {
-    const citationProduct: Nullable<ContextDataProduct> = provisional
-      ? viewState.citableBaseProduct
-      : viewState.citableReleaseProduct;
-    if (!exists(citationProduct)) {
-      return;
+  const buildCitationDownloadKey = (
+    citationProduct: ContextDataProduct,
+    releaseCb: string,
+    formatCb: string,
+    provisionalCb = true,
+  ): string => {
+    let key = `citation-download-${citationProduct.productCode}`;
+    if (isStringNonEmpty(releaseCb)) {
+      key = `${key}-${releaseCb}`;
+    } else if (provisionalCb) {
+      key = `${key}-${PROVISIONAL_RELEASE}`;
+    } else {
+      key = `${key}-RELEASE`;
     }
+    if (isStringNonEmpty(formatCb)) {
+      key = `${key}-${formatCb}`;
+    } else {
+      key = `${key}-FORMAT`;
+    }
+    return key;
+  };
+  const hasCitationDownloadStatus = (provisionalCb: boolean, statusCb: FetchStatus): boolean => (
+    Object.keys(citationDownloadsFetchStatus).some((k: string): boolean => {
+      if (citationDownloadsFetchStatus[k]) {
+        let shouldConsider = true;
+        if (!provisionalCb && k.includes(PROVISIONAL_RELEASE)) {
+          shouldConsider = false;
+        } else if (provisionalCb && !k.includes(PROVISIONAL_RELEASE)) {
+          shouldConsider = false;
+        }
+        if (shouldConsider && (citationDownloadsFetchStatus[k].status === statusCb)) {
+          return true;
+        }
+      }
+      return false;
+    })
+  );
+  const handleResetCitationDownloadsCb = useCallback((provisionalCb: boolean): void => {
+    Object.keys(citationDownloadsFetchStatus).forEach((k: string): void => {
+      if (citationDownloadsFetchStatus[k]) {
+        let shouldReset = true;
+        if (!provisionalCb && k.includes(PROVISIONAL_RELEASE)) {
+          shouldReset = false;
+        } else if (provisionalCb && !k.includes(PROVISIONAL_RELEASE)) {
+          shouldReset = false;
+        }
+        if (shouldReset) {
+          if (citationDownloadsFetchStatus[k].status !== FetchStatus.IDLE) {
+            if (dispatch) {
+              dispatch(ActionCreator.fetchCitationDownloadReset(k));
+            }
+          }
+        }
+      }
+    });
+  }, [dispatch, citationDownloadsFetchStatus]);
+  const handleCitationDownloadCb = useCallback((
+    citationProduct: ContextDataProduct,
+    releaseCb: string,
+    formatCb: string,
+    provisionalCb = true,
+  ): void => {
     const coercedTarget: UnknownRecord = {
       ...citationProduct,
     };
-    // Release: fetch content from DataCite API to pipe into download
-    const fullDoi: Nullable<string> = Service.getReleaseDoi(viewState.releases, release);
+    const key: string = buildCitationDownloadKey(
+      citationProduct,
+      releaseCb,
+      formatCb,
+      provisionalCb,
+    );
+    const fullDoi: Nullable<string> = Service.getReleaseDoi(releases, releaseCb);
+    handleResetCitationDownloadsCb(provisionalCb);
+    if (dispatch) {
+      dispatch(ActionCreator.fetchCitationDownloadStarted(key));
+    }
     DataCiteService.downloadCitation(
-      format,
+      formatCb,
       CitationDownloadType.DATA_PRODUCT,
       coercedTarget,
       fullDoi as string,
-      release,
+      releaseCb,
+      (data: string): void => {
+        if (dispatch) {
+          dispatch(ActionCreator.fetchCitationDownloadSucceeded(key));
+        }
+      },
+      (error: unknown): void => {
+        if (dispatch) {
+          dispatch(ActionCreator.fetchCitationDownloadFailed(key, 'Citation download failed'));
+        }
+      },
     );
-  };
+  }, [dispatch, releases, handleResetCitationDownloadsCb]);
 
   const renderSkeleton = (): JSX.Element => {
     if (disableSkeleton) {
@@ -230,7 +314,7 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     const showNonConditionalBlurb: boolean = [
       DisplayType.RELEASE,
       DisplayType.PROVISIONAL,
-    ].includes(viewState.displayType);
+    ].includes(displayType);
     const quoteIcon: Nullable<JSX.Element> = showQuoteIcon
       ? (<QuoteIcon fontSize="large" className={classes.calloutIcon} />)
       : null;
@@ -258,25 +342,23 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
   };
 
   const renderBundleParentLink = (): Nullable<JSX.Element> => {
-    if (!isStringNonEmpty(viewState.bundleParentCode)) {
+    if (!isStringNonEmpty(bundleParentCode)) {
       return null;
     }
-    const isReleaseDisplay = (viewState.displayType === DisplayType.RELEASE);
+    const isReleaseDisplay = (displayType === DisplayType.RELEASE);
     const bundleParentName: string = isReleaseDisplay
-      ? (viewState.citableReleaseProduct as ContextDataProduct).productName
-      : (viewState.citableBaseProduct as ContextDataProduct).productName;
-    let bundleParentHref: string = RouteService.getProductDetailPath(
-      viewState.bundleParentCode as string,
-    );
+      ? (citableReleaseProduct as ContextDataProduct).productName
+      : (citableBaseProduct as ContextDataProduct).productName;
+    let bundleParentHref: string = RouteService.getProductDetailPath(bundleParentCode as string);
     if (isReleaseDisplay) {
       bundleParentHref = RouteService.getProductDetailPath(
-        viewState.bundleParentCode as string,
-        (viewState.releaseObject as CitationRelease).release as string,
+        bundleParentCode as string,
+        (releaseObject as CitationRelease).release as string,
       );
     }
     const bundleParentLink: JSX.Element = (
       <Link href={bundleParentHref}>
-        {`${bundleParentName} (${viewState.bundleParentCode})`}
+        {`${bundleParentName} (${bundleParentCode})`}
       </Link>
     );
     return (
@@ -304,8 +386,8 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     provisional = false,
   ): JSX.Element => {
     const citationProduct: ContextDataProduct = provisional
-      ? viewState.citableBaseProduct as ContextDataProduct
-      : viewState.citableReleaseProduct as ContextDataProduct;
+      ? citableBaseProduct as ContextDataProduct
+      : citableReleaseProduct as ContextDataProduct;
     let conditionalText = null;
     let citationClassName = classes.citationText;
     if (conditional) {
@@ -333,7 +415,7 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     }
     let citationReleaseObject: Nullable<CitationRelease> = null;
     if (!provisional) {
-      citationReleaseObject = (viewState.releaseObject as CitationRelease);
+      citationReleaseObject = (releaseObject as CitationRelease);
     }
     const citationText: string = CitationService.buildDataProductCitationText(
       citationProduct,
@@ -351,6 +433,28 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
             {citationText}
           </Typography>
         </div>
+      );
+    }
+    const isSectionDownloading: boolean = hasCitationDownloadStatus(
+      provisional,
+      FetchStatus.FETCHING,
+    );
+    let downloadStatus: Nullable<JSX.Element>;
+    if (hasCitationDownloadStatus(provisional, FetchStatus.ERROR)) {
+      downloadStatus = (
+        <>
+          <Alert severity="error" onClose={() => handleResetCitationDownloadsCb(provisional)}>
+            Citation download encountered a problem
+          </Alert>
+        </>
+      );
+    } else if (hasCitationDownloadStatus(provisional, FetchStatus.SUCCESS)) {
+      downloadStatus = (
+        <>
+          <Alert severity="success" onClose={() => handleResetCitationDownloadsCb(provisional)}>
+            Citation downloaded
+          </Alert>
+        </>
       );
     }
     return (
@@ -371,51 +475,71 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
                 size="small"
                 color="primary"
                 variant="outlined"
+                startIcon={<CopyIcon fontSize="small" className={classes.cardButtonIcon} />}
                 className={classes.cardButton}
               >
-                <CopyIcon fontSize="small" className={classes.cardButtonIcon} />
                 Copy
               </Button>
             </CopyToClipboard>
           </Tooltip>
-          {DataCiteService.getDataProductFormats().map((format) => (
-            <Tooltip
-              key={format.shortName}
-              placement="bottom-start"
-              title={(
-                  `Click to download the ${citationProduct.productCode}/${release} citation as a '`
-                    + `'file in ${format.longName} format`
-              )}
-            >
-              <span>
-                <Button
-                  size="small"
-                  color="primary"
-                  variant="outlined"
-                  className={classes.cardButton}
-                  onClick={() => {
-                    handleDownloadCitation(release, format.shortName, provisional);
-                  }}
-                >
-                  <DownloadIcon fontSize="small" className={classes.cardButtonIcon} />
-                  {`Download (${format.shortName})`}
-                </Button>
-              </span>
-            </Tooltip>
-          ))}
+          {DataCiteService.getDataProductFormats().map((format: CitationFormat): JSX.Element => {
+            const key: string = buildCitationDownloadKey(
+              citationProduct,
+              release,
+              format.shortName,
+              provisional,
+            );
+            const isDownloading: boolean = !exists(citationDownloadsFetchStatus[key])
+              ? false
+              : citationDownloadsFetchStatus[key].status === FetchStatus.FETCHING;
+            return (
+              <Tooltip
+                key={format.shortName}
+                placement="bottom-start"
+                title={(
+                  `Click to download the ${citationProduct.productCode}/${release} citation as a `
+                    + `file in ${format.longName} format`
+                )}
+              >
+                <span>
+                  <Button
+                    size="small"
+                    color="primary"
+                    variant="outlined"
+                    className={classes.cardButton}
+                    disabled={isDownloading || isSectionDownloading}
+                    startIcon={isDownloading
+                      ? <CircularProgress size={18} className={classes.cardButtonIcon} />
+                      : <DownloadIcon fontSize="small" className={classes.cardButtonIcon} />}
+                    onClick={() => {
+                      handleCitationDownloadCb(
+                        citationProduct,
+                        release,
+                        format.shortName,
+                        provisional,
+                      );
+                    }}
+                  >
+                    {`Download (${format.shortName})`}
+                  </Button>
+                </span>
+              </Tooltip>
+            );
+          })}
         </CardActions>
+        {downloadStatus}
       </Card>
     );
   };
 
   const renderCitationDisplay = (): JSX.Element => {
     let citationCard: JSX.Element = (<React.Fragment />);
-    switch (viewState.displayType) {
+    switch (displayType) {
       case DisplayType.CONDITIONAL:
         citationCard = (
           <React.Fragment>
             {renderCitationCard(PROVISIONAL_RELEASE, true, true)}
-            {renderCitationCard((viewState.releaseObject as CitationRelease).release, true, false)}
+            {renderCitationCard((releaseObject as CitationRelease).release, true, false)}
           </React.Fragment>
         );
         break;
@@ -429,7 +553,7 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
       case DisplayType.RELEASE:
         citationCard = (
           <React.Fragment>
-            {renderCitationCard((viewState.releaseObject as CitationRelease).release, false, false)}
+            {renderCitationCard((releaseObject as CitationRelease).release, false, false)}
           </React.Fragment>
         );
         break;
@@ -448,7 +572,7 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     );
   };
 
-  switch (viewState.status) {
+  switch (status) {
     case ContextStatus.INITIALIZING:
     case ContextStatus.FETCHING:
     case ContextStatus.HAS_FETCHES_TO_TRIGGER:

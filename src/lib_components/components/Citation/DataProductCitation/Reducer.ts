@@ -19,6 +19,10 @@ import ActionCreator, {
   FetchBundleParentReleaseStartedAction,
   FetchBundleParentReleaseFailedAction,
   FetchBundleParentReleaseSucceededAction,
+  FetchCitationDownloadStartedAction,
+  FetchCitationDownloadFailedAction,
+  FetchCitationDownloadSucceededAction,
+  FetchCitationDownloadResetAction,
 } from './Actions';
 import {
   CitationRelease,
@@ -95,6 +99,7 @@ const resolveError = (
   let fetchProductReleaseFailedAction: FetchProductReleaseFailedAction;
   let fetchBundleParentFailedAction: FetchBundleParentFailedAction;
   let fetchBundleParentReleaseFailedAction: FetchBundleParentReleaseFailedAction;
+  let fetchCitationDownloadFailedAction: FetchCitationDownloadFailedAction;
   switch (action.type) {
     case ActionTypes.FETCH_PRODUCT_FAILED:
       fetchProductFailedAction = (action as FetchProductFailedAction);
@@ -114,6 +119,10 @@ const resolveError = (
       result = `${result}: bundle parent product code `
         + `${fetchBundleParentReleaseFailedAction.bundleParent}; `
         + `release ${fetchBundleParentReleaseFailedAction.release}`;
+      break;
+    case ActionTypes.FETCH_CITATION_DOWNLOAD_FAILED:
+      fetchCitationDownloadFailedAction = (action as FetchCitationDownloadFailedAction);
+      result = `${result}: citation download key: ${fetchCitationDownloadFailedAction.key}`;
       break;
     case ActionTypes.ERROR:
     default:
@@ -147,6 +156,10 @@ const Reducer = (
   let fbprStartedAction: FetchBundleParentReleaseStartedAction;
   let fbprFailedAction: FetchBundleParentReleaseFailedAction;
   let fbprSucceededAction: FetchBundleParentReleaseSucceededAction;
+  let fcdStartedAction: FetchCitationDownloadStartedAction;
+  let fcdFailedAction: FetchCitationDownloadFailedAction;
+  let fcdSucceededAction: FetchCitationDownloadSucceededAction;
+  let fcdResetAction: FetchCitationDownloadResetAction;
   switch (action.type) {
     case ActionTypes.REINITIALIZE:
       // Reset the context state to default state, but keep the
@@ -294,6 +307,32 @@ const Reducer = (
       }
       newState.data.bundleParentReleases[bundleParent][release] = product;
       return Service.calculateAppStatus(newState);
+
+    case ActionTypes.FETCH_CITATION_DOWNLOAD_STARTED:
+      fcdStartedAction = (action as FetchCitationDownloadStartedAction);
+      newState.fetches.citationDownloads[fcdStartedAction.key] = {
+        status: FetchStatus.FETCHING,
+      };
+      return newState;
+    case ActionTypes.FETCH_CITATION_DOWNLOAD_FAILED:
+      fcdFailedAction = (action as FetchCitationDownloadFailedAction);
+      newState.fetches.citationDownloads[fcdFailedAction.key] = {
+        status: FetchStatus.ERROR,
+        error: errorResult,
+      };
+      return newState;
+    case ActionTypes.FETCH_CITATION_DOWNLOAD_SUCCEEDED:
+      fcdSucceededAction = (action as FetchCitationDownloadSucceededAction);
+      newState.fetches.citationDownloads[fcdSucceededAction.key] = {
+        status: FetchStatus.SUCCESS,
+      };
+      return newState;
+    case ActionTypes.FETCH_CITATION_DOWNLOAD_RESET:
+      fcdResetAction = (action as FetchCitationDownloadResetAction);
+      newState.fetches.citationDownloads[fcdResetAction.key] = {
+        status: FetchStatus.IDLE,
+      };
+      return newState;
 
     default:
       return state;
