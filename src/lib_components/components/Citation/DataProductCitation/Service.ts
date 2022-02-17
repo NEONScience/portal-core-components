@@ -156,6 +156,7 @@ const applyReleasesGlobally = (
         showViz: true,
       });
     });
+  updatedState.data.releases = ReleaseService.sortReleases(updatedState.data.releases);
   return updatedState;
 };
 

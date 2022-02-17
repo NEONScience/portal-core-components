@@ -580,6 +580,21 @@ import DataProductCitation from 'portal-core-components/lib/components/DataProdu
         </Paper>
       </ExampleBlock>
       <DocBlock>
+        DP1.00030.001 is not available in RELEASE-2021, bundled in RELEASE-2022.
+      </DocBlock>
+      <CodeBlock>
+        {`
+import DataProductCitation from 'portal-core-components/lib/components/DataProductCitation';
+
+<DataProductCitation productCode="DP1.00030.001" />
+        `}
+      </CodeBlock>
+      <ExampleBlock>
+        <Paper className={classes.paper}>
+          <DataProductCitation productCode="DP1.00030.001" />
+        </Paper>
+      </ExampleBlock>
+      <DocBlock>
         DP1.00030.001 is not available in RELEASE-2021.
       </DocBlock>
       <CodeBlock>
