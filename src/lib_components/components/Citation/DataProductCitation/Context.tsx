@@ -138,7 +138,9 @@ const Provider: React.FC<ProviderProps> = (props: ProviderProps): JSX.Element =>
     neonContextIsFinal,
     neonContextHasError,
   ]);
-
+  // Transform the object to a string to ensure the effect
+  // fires anytime the object changes for ensure it always resolves fetches.
+  const fetchesStringified: string = JSON.stringify(fetches);
   // Trigger any fetches that are awaiting call
   useEffect(() => {
     // NeonContext is required to fetch data for the app due to bundles.
@@ -261,7 +263,13 @@ const Provider: React.FC<ProviderProps> = (props: ProviderProps): JSX.Element =>
               );
           });
       });
-  }, [status, productCode, fetches, neonContextIsFinal]);
+  }, [
+    status,
+    productCode,
+    fetches,
+    neonContextIsFinal,
+    fetchesStringified,
+  ]);
 
   return (
     <StateContext.Provider value={state}>
