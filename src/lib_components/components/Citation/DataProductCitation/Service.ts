@@ -383,9 +383,18 @@ const useViewState = (
       (baseProduct as ContextDataProduct).productCode,
     );
   }
+  // Determine if the bundle product has data for the specified release.
+  let isBundleProductInRelease: boolean = true;
+  if (hasBundleProduct && hasSpecifiedRelease && !isAppliedReleaseLatestNonProv) {
+    const bundleHasRelease: Undef<DataProductRelease> = bundleProduct?.releases.find(
+      (r: DataProductRelease): boolean => r.release === appliedRenderedReleaseTag,
+    );
+    isBundleProductInRelease = exists(bundleHasRelease);
+  }
   // Determine if the citable product should be the bundle container product
   // or the currently specified product.
-  const citableBaseProduct: Nullable<ContextDataProduct> = hasBundleProduct
+  // eslint-disable-next-line max-len
+  const citableBaseProduct: Nullable<ContextDataProduct> = hasBundleProduct && isBundleProductInRelease
     ? bundleProduct
     : baseProduct;
   // Determine the product to use for citing within the applicable release
@@ -397,6 +406,7 @@ const useViewState = (
     if (!hasSpecifiedRelease && !hasLatestReleaseBundle) {
       citableReleaseProduct = baseProduct;
     } else {
+      // Has a specified release, or if not, has latest release bundle.
       // When a bundled product code is available for the given release,
       // get the product for the parent code and release.
       // Otherwise, the citable product is the current product for the specified
@@ -424,6 +434,18 @@ const useViewState = (
   }
   // Determine if there's a valid product to generate the citation with.
   const hasValidProduct: boolean = exists(citableBaseProduct);
+  const hasValidReleaseProduct: boolean = exists(citableReleaseProduct);
+  // Verify identified release product is in the applied release.
+  let isCitableReleaseProductInRelease: boolean = false;
+  // If looking at latest release non provisional, consider in release.
+  if (isAppliedReleaseLatestNonProv) {
+    isCitableReleaseProductInRelease = true;
+  } else if (hasValidReleaseProduct) {
+    const productHasRelease: Undef<DataProductRelease> = citableReleaseProduct?.releases.find(
+      (r: DataProductRelease): boolean => r.release === appliedRenderedReleaseTag,
+    );
+    isCitableReleaseProductInRelease = exists(productHasRelease);
+  }
   // Determine the overall citation display status.
   let appliedStatus: ContextStatus = status;
   let displayType: DisplayType = DisplayType.CONDITIONAL;
@@ -441,8 +463,15 @@ const useViewState = (
         // not show a release citation, show not available display state.
         displayType = DisplayType.NOT_AVAILABLE;
       } else if (hasAppliedReleaseDoi) {
-        if (exists(citableReleaseProduct)) {
-          displayType = DisplayType.RELEASE;
+        if (hasValidReleaseProduct) {
+          // If the identified release product doesn't have data in the
+          // release and we're viewing a specific release, report
+          // as not available for that release.
+          if (!isCitableReleaseProductInRelease) {
+            displayType = DisplayType.NOT_AVAILABLE;
+          } else {
+            displayType = DisplayType.RELEASE;
+          }
         } else {
           // If the component is ready and a release was specified but
           // failed to resolve the appropriate citable release product,
@@ -457,6 +486,10 @@ const useViewState = (
         // a special case, render as not available.
         displayType = DisplayType.NOT_AVAILABLE;
       }
+    } else if (!isCitableReleaseProductInRelease) {
+      // If the detected citable release product is not in the applied
+      // release, then consider the display as provisional.
+      displayType = DisplayType.PROVISIONAL;
     } else if (!hasLatestRelease || hideLatestReleaseCitation || disableConditional) {
       // If display is determined to be conditional, but we haven't identified
       // a valid latest release or it's set to hide the citation for that
@@ -464,7 +497,7 @@ const useViewState = (
       // If an override has been presented by the component, also
       // display as provisional.
       displayType = DisplayType.PROVISIONAL;
-    } else if (!hasValidProduct || !exists(citableReleaseProduct)) {
+    } else if (!hasValidProduct || !hasValidReleaseProduct) {
       // If the component is ready and the display state is conditional
       // and a valid product and release product were not found, error state.
       appliedStatus = ContextStatus.ERROR;

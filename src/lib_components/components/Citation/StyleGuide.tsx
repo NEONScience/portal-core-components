@@ -29,6 +29,7 @@ import ActionCreator from './DataProductCitation/Actions';
 import ComponentErrorBoundary from '../Error/ComponentErrorBoundary';
 import DataProductCitation from './DataProductCitation';
 import DataProductCitationContext from './DataProductCitation/Context';
+import DataProductCitationService from './DataProductCitation/Service';
 import DataProductCitationView from './DataProductCitation/View';
 import NeonApi from '../NeonApi';
 import NeonContext from '../NeonContext/NeonContext';
@@ -38,6 +39,10 @@ import ReleaseService from '../../service/ReleaseService';
 import Theme from '../Theme/Theme';
 import { Release } from '../../types/internal';
 import { isStringNonEmpty } from '../../util/typeUtil';
+import {
+  DataProductCitationViewProps,
+  DataProductCitationViewState,
+} from './DataProductCitation/ViewState';
 
 const useStyles = makeStyles((theme) => ({
   divider: {
@@ -217,6 +222,13 @@ const DataProductCitationDemo = (): JSX.Element => {
     neonContextState,
     stateReleases,
   );
+  const viewState: DataProductCitationViewState = DataProductCitationService.useViewState(
+    stateCtx,
+    DataProductCitationView.defaultProps as DataProductCitationViewProps,
+  );
+  const {
+    releaseObject: appliedCitationReleaseObject,
+  }: DataProductCitationViewState = viewState;
   // eslint-disable-next-line max-len
   const citationDispatch = DataProductCitationContext.useDataProductCitationContextDispatch() as Dispatch<any>;
   const fetchAllProducts$ = (NeonGraphQL.getAllDataProducts() as Observable<AjaxResponse>).pipe(
@@ -357,6 +369,15 @@ const DataProductCitationDemo = (): JSX.Element => {
             selected={stateRelease}
             onChange={handleReleaseChange}
           />
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant="subtitle2" className={classes.title}>
+            The citation context will determine the applied release based
+            on the available releases for the product, release, and bundle.
+            <br />
+            {`Applied Release: ${appliedCitationReleaseObject?.release}`}
+          </Typography>
+          <Divider className={classes.divider} />
         </Grid>
         <Grid item xs={12}>
           <DataProductCitationView />
