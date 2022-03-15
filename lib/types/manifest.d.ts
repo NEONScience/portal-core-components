@@ -12,7 +12,8 @@ export interface ManifestRequest {
 }
 export declare enum ChecksumAlgorithmType {
     MD5 = "MD5",
-    CRC32 = "CRC32"
+    CRC32 = "CRC32",
+    CRC32C = "CRC32C"
 }
 export interface ManifestFile {
     release: string;

@@ -1087,7 +1087,7 @@ export default html = `
 
         <label for="edit-keys--2" class="visually-hidden">Search</label>
       </div>
-<div class="search-form__actions form-actions js-form-wrapper form-wrapper" data-drupal-selector="edit-actions" id="edit-actions--2">
+<div class="search-form__actions form-actions js-form-wrapper form-wrapper" data-drupal-selector="edit-actions" id="edit-actions--3">
 
 <input class="search-form__button button js-form-submit form-submit button--search" data-drupal-selector="edit-submit" type="submit" id="edit-submit--2" value="Search" />
 </div>
