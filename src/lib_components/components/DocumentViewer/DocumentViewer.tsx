@@ -14,7 +14,7 @@ import {
 import NeonEnvironment from '../NeonEnvironment';
 import Theme from '../Theme/Theme';
 import { StylesHook } from '../../types/muiTypes';
-import { NeonDocument } from '../../types/neon';
+import { NeonDocument } from '../../types/neonApi';
 
 const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
   // eslint-disable-next-line implicit-arrow-linebreak

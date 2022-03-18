@@ -9,6 +9,7 @@ import NeonRouter from './lib_components/components/NeonRouter/NeonRouter';
 import Home from './components/Home';
 import BasicComponents from './components/BasicComponents';
 import AopDataViewerStyleGuide from './lib_components/components/AopDataViewer/StyleGuide';
+import CitationsStyleGuide from './lib_components/components/Citation/StyleGuide';
 import DataProductAvailabilityStyleGuide from './lib_components/components/DataProductAvailability/StyleGuide';
 import DataThemeIconStyleGuide from './lib_components/components/DataThemeIcon/StyleGuide';
 import DocumentViewerStyleGuide from './lib_components/components/DocumentViewer/StyleGuide';
@@ -46,6 +47,11 @@ const sidebarLinks = [
     name: 'AOP Data Viewer',
     hash: '#AopDataViewer',
     component: AopDataViewerStyleGuide,
+  },
+  {
+    name: 'Citations',
+    hash: '#Citations',
+    component: CitationsStyleGuide,
   },
   {
     name: 'Data Product Availability',

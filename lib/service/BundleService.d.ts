@@ -1,5 +1,6 @@
 import { Nullable } from '../types/core';
 import { BundleContext } from '../types/neonContext';
+import { CitationBundleState } from '../types/internal';
 export interface IBundleService {
     /**
      * Determines if the product is defined as a container or child within a bundle.
@@ -13,7 +14,7 @@ export interface IBundleService {
      * @param release The release to coerce.
      * @return The applicable bundle release.
      */
-    determineBundleRelease: (release: string) => string;
+    determineBundleRelease: (release: Nullable<string>) => string;
     /**
      * Gets the set of bundled (container) product codes for the specified release.
      * @param context The context to derive lookups from.
@@ -77,6 +78,14 @@ export interface IBundleService {
      * @return The bundle product code when available.
      */
     getBundledProducts: (context: BundleContext, release: string, bundleProductCode: string) => string[];
+    /**
+     * Determines the applicable bundle state for utilization in citations.
+     * @param context The context to derive lookups from.
+     * @param release The release to get bundles for.
+     * @param productCode The product code to query with.
+     * @return The applicable bundle status for citations.
+     */
+    determineCitationBundle: (context: BundleContext, release: Nullable<string>, productCode: string) => CitationBundleState;
 }
 declare const BundleService: IBundleService;
 export default BundleService;

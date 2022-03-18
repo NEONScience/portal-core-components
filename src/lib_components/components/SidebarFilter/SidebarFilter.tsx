@@ -106,6 +106,7 @@ const SidebarFilter: React.FC<SidebarFilterProps> = (props: SidebarFilterProps):
   }: SidebarFilterProps = props;
 
   const [instanceId] = useId();
+  const selectSeleniumId = `sidebar-filter-select-selenium-${instanceId}`;
   const inputId = `sidebar-filter-input-${instanceId}`;
   const labelId = `sidebar-filter-label-${instanceId}`;
 
@@ -163,7 +164,7 @@ const SidebarFilter: React.FC<SidebarFilterProps> = (props: SidebarFilterProps):
 
   const selectNode = (
     <Select
-      data-selenium="release-filter"
+      data-selenium={selectSeleniumId}
       value={selected}
       onChange={(event) => handleChange(event.target.value as string)}
       input={input}

@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "name": "component-error-boundary",
+  "main": "./ComponentErrorBoundary.tsx",
+  "module": "./ComponentErrorBoundary.tsx"
+}

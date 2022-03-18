@@ -321,7 +321,7 @@ const productData = {
         <DownloadDataContext.Provider
           downloadDataContextUniqueId={1}
           productData={sampleProductData3.data}
-          release="test-tag-1"
+          release="RELEASE-2021"
           sites={['ARIK']}
           documentation="exclude"
           packageType="basic"
@@ -344,7 +344,7 @@ const productData = {...};
 
 <DownloadDataContext.Provider
   productData={productData}
-  release="test-tag-1"
+  release="RELEASE-2021"
   sites={['ARIK']}
   documentation="exclude"
   packageType="basic"

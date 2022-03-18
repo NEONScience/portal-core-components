@@ -19,8 +19,8 @@ export interface IDataCiteService {
     getCitationFormats: () => CitationFormat[];
     getDataProductFormats: () => CitationFormat[];
     getPrototypeDatasetFormats: () => CitationFormat[];
-    downloadCitation: (formatShortName: string, type: CitationDownloadType, target: Record<string, unknown>, doi: string, release?: string) => void;
-    executeDownload: (fileName: string, mimeType: string, payload: string) => void;
+    downloadCitation: (formatShortName: string, type: CitationDownloadType, target: Record<string, unknown>, doi: string, release?: string, onSuccessCb?: (data: string) => void, onErrorCb?: (error: unknown) => void) => void;
+    executeDownload: (fileName: string, mimeType: string, payload: string, onSuccessCb?: (data: string) => void, onErrorCb?: (error: unknown) => void) => void;
 }
 declare const DataCiteService: IDataCiteService;
 export default DataCiteService;

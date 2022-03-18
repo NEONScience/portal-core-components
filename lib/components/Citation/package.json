@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "name": "data-product-citation",
+  "main": "./DataProductCitation.tsx",
+  "module": "./DataProductCitation.tsx"
+}

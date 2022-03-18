@@ -62,7 +62,14 @@ export namespace DEFAULT_STATE {
         const continuousDateRange: never[];
         const sites: {};
     }
+    export namespace fetchReleases {
+        import status_2 = FETCH_STATUS.AWAITING_CALL;
+        export { status_2 as status };
+        const error_1: null;
+        export { error_1 as error };
+    }
     export const release: null;
+    export const releases: never[];
     export namespace graphData {
         const data: never[];
         const qualityData: never[];
@@ -192,7 +199,12 @@ export function getTestableItems(): {
             continuousDateRange: never[];
             sites: {};
         };
+        fetchReleases: {
+            status: string;
+            error: null;
+        };
         release: null;
+        releases: never[];
         graphData: {
             data: never[];
             qualityData: never[];
@@ -347,7 +359,12 @@ declare function useTimeSeriesViewerState(): {
         continuousDateRange: never[];
         sites: {};
     };
+    fetchReleases: {
+        status: string;
+        error: null;
+    };
     release: null;
+    releases: never[];
     graphData: {
         data: never[];
         qualityData: never[];
@@ -414,7 +431,12 @@ declare function useTimeSeriesViewerState(): {
         continuousDateRange: never[];
         sites: {};
     };
+    fetchReleases: {
+        status: string;
+        error: null;
+    };
     release: null;
+    releases: never[];
     graphData: {
         data: never[];
         qualityData: never[];

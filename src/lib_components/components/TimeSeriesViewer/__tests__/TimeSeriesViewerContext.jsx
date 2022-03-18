@@ -865,9 +865,10 @@ HOR.VER,name,description,start,end,xOffset,yOffset,zOffset
     describe('reinitialize', () => {
       test('resets to default state and applies productCode', () => {
         const modifiedState = { ...state, otherStuff: 'bar' };
-        const newState = reducer(modifiedState, { type: 'reinitialize', productCode: 'foo' });
+        const newState = reducer(modifiedState, { type: 'reinitialize', productCode: 'foo', release: 'bar' });
         expect(newState).toStrictEqual({
           ...DEFAULT_STATE,
+          release: 'bar',
           product: {
             ...DEFAULT_STATE.product,
             productCode: 'foo',

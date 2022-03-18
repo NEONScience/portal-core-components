@@ -159,7 +159,9 @@ export const DEFAULT_STATE = {
     continuousDateRange: [],
     sites: {},
   },
+  fetchReleases: { status: FETCH_STATUS.AWAITING_CALL, error: null },
   release: null,
+  releases: [],
   graphData: {
     data: [],
     qualityData: [],
@@ -747,6 +749,7 @@ const reducer = (state, action) => {
     case 'reinitialize':
       newState = cloneDeep(DEFAULT_STATE);
       newState.product.productCode = action.productCode;
+      newState.release = action.release;
       return newState;
     // Fetch Product Actions
     case 'initFetchProductCalled':
@@ -763,6 +766,19 @@ const reducer = (state, action) => {
       newState.product = parseProductData(action.productData);
       calcSelection();
       newState.status = TIME_SERIES_VIEWER_STATUS.LOADING_META;
+      return newState;
+
+    // Fetch Releases Actions
+    case 'initFetchReleasesCalled':
+      newState.fetchReleases.status = FETCH_STATUS.FETCHING;
+      return newState;
+    case 'initFetchReleasesFailed':
+      newState.fetchReleases.status = FETCH_STATUS.ERROR;
+      newState.fetchReleases.error = action.error;
+      return newState;
+    case 'initFetchReleasesSucceeded':
+      newState.fetchReleases.status = FETCH_STATUS.SUCCESS;
+      newState.releases = action.releases;
       return newState;
 
     // Fetch Site Month Actions
@@ -1214,9 +1230,27 @@ const Provider = (props) => {
     // Ignore initialization when in static mode
     if (state.mode === VIEWER_MODE.STATIC) { return; }
     if (productCodeProp !== state.product.productCode) {
-      dispatch({ type: 'reinitialize', productCode: productCodeProp });
+      dispatch({
+        type: 'reinitialize',
+        productCode: productCodeProp,
+        release: state.release,
+      });
     }
-  }, [state.mode, productCodeProp, state.product.productCode, dispatch]);
+    if (releaseProp !== state.release) {
+      dispatch({
+        type: 'reinitialize',
+        productCode: state.product.productCode,
+        release: releaseProp,
+      });
+    }
+  }, [
+    state.mode,
+    productCodeProp,
+    releaseProp,
+    state.product.productCode,
+    state.release,
+    dispatch,
+  ]);
 
   /**
      Effect - Fetch product data if only a product code was provided in props
@@ -1250,6 +1284,38 @@ const Provider = (props) => {
     state.fetchProduct.status,
     state.product.productCode,
     state.release,
+  ]);
+
+  /**
+     Effect - Fetch releases
+  */
+  useEffect(() => {
+    // Ignore fetching releases data when in static mode
+    if (state.mode === VIEWER_MODE.STATIC) { return; }
+    if (state.status !== TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT) { return; }
+    if (state.fetchReleases.status !== FETCH_STATUS.AWAITING_CALL) { return; }
+    dispatch({ type: 'initFetchReleasesCalled' });
+    NeonApi.getReleasesObservable().pipe(
+      map((response) => {
+        if (response && response.data) {
+          dispatch({
+            type: 'initFetchReleasesSucceeded',
+            releases: response.data,
+          });
+          return of(true);
+        }
+        dispatch({ type: 'initFetchReleasesFailed', error: 'malformed response' });
+        return of(false);
+      }),
+      catchError((error) => {
+        dispatch({ type: 'initFetchReleasesFailed', error: error.message });
+        return of(false);
+      }),
+    ).subscribe();
+  }, [
+    state.mode,
+    state.status,
+    state.fetchReleases.status,
   ]);
 
   /**

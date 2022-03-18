@@ -10,7 +10,7 @@ import ExampleBlock from '../../../components/ExampleBlock';
 
 import DocumentViewer from './DocumentViewer';
 import Theme from '../Theme/Theme';
-import { NeonDocument } from '../../types/neon';
+import { NeonDocument } from '../../types/neonApi';
 
 const useStyles = makeStyles((theme) => ({
   divider: {

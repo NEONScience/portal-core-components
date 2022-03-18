@@ -1,6 +1,6 @@
 {
   "name": "portal-core-components",
-  "version": "1.10.0",
+  "version": "1.11.0",
   "main": "./lib/index.js",
   "private": true,
   "homepage": "http://localhost:3010/core-components",
@@ -13,7 +13,9 @@
     "@material-ui/styles": "^4.10.0",
     "@stomp/rx-stomp": "^0.3.5",
     "@stomp/stompjs": "^5.4.4",
+    "@types/dateformat": "^5.0.0",
     "@types/lodash": "^4.14.172",
+    "@types/react-copy-to-clipboard": "^5.0.2",
     "@types/react-router": "^5.1.8",
     "@types/react-router-dom": "^5.1.5",
     "@types/sockjs-client": "^1.1.1",

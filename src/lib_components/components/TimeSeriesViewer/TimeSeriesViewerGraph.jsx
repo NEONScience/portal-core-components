@@ -30,9 +30,11 @@ import HideIcon from '@material-ui/icons/VisibilityOff';
 
 import generateTimeSeriesGraphData from '../../workers/generateTimeSeriesGraphData';
 
+import DataProductCitation from '../Citation/DataProductCitation';
 import TimeSeriesViewerContext from './TimeSeriesViewerContext';
 import Theme, { COLORS } from '../Theme/Theme';
 import { TIME_SERIES_VIEWER_STATUS } from './constants';
+import { isStringNonEmpty } from '../../util/typeUtil';
 
 import NeonLogo from '../../images/NSF-NEON-logo.png';
 
@@ -646,6 +648,30 @@ export default function TimeSeriesViewerGraph() {
     return () => { document.removeEventListener('click', legendClickHandler); };
   }, [legendRef, graphDispatch]);
 
+  const buildGraphTitle = () => {
+    const releaseTitle = isStringNonEmpty(state.release)
+      ? `, ${state.release} `
+      : '';
+    return state.product.productName
+      ? `${state.product.productName} (${state.product.productCode})${releaseTitle}`
+      : `${state.product.productCode}${releaseTitle}`;
+  };
+
+  const renderCitation = () => {
+    if (!state.product || !state.product.productCode) {
+      return (<></>);
+    }
+    return (
+      <DataProductCitation
+        productCode={state.product.productCode}
+        release={state.release}
+        textOnly={{ variant: 'caption', cssClass: classes.citation }}
+        showTextOnly
+        disableConditional
+      />
+    );
+  };
+
   // Download Image Button
   const exportGraphImage = () => {
     if (downloadRef.current === null) { return; }
@@ -733,9 +759,7 @@ export default function TimeSeriesViewerGraph() {
     <>
       <div ref={downloadRef} className={classes.graphOuterContainer}>
         <Typography variant="h6" className={classes.title}>
-          {state.product.productName
-            ? `${state.product.productName} (${state.product.productCode})`
-            : state.product.productCode}
+          {buildGraphTitle()}
         </Typography>
         <div className={classes.graphInnerContainer} ref={graphInnerContainerRef}>
           <div ref={dygraphDomRef} className={classes.graphDiv} />
@@ -752,13 +776,7 @@ export default function TimeSeriesViewerGraph() {
             className={classes.neonLogo}
             src={NeonLogo}
           />
-          <Typography variant="caption" className={classes.citation}>
-            {/* eslint-disable react/jsx-one-expression-per-line */}
-            National Ecological Observatory Network. {(new Date()).getFullYear()}.
-            Data Product: {state.product.productCode}, {state.product.productName}.
-            Battelle, Boulder, CO, USA NEON.
-            {/* eslint-enable react/jsx-one-expression-per-line */}
-          </Typography>
+          {renderCitation()}
         </div>
       </div>
       <div className={classes.buttonsOuterContainer}>

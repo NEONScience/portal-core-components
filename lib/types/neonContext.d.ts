@@ -43,3 +43,8 @@ export interface BundleContext {
      */
     apiResponse: ReleaseDataProductBundles[];
 }
+export interface UserRelease {
+    releaseTag: string;
+    description: string;
+    generationDate: number;
+}

@@ -68,6 +68,20 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
     <h6
       className="MuiTypography-root MuiTypography-subtitle2"
     >
+      Release
+    </h6>
+    <p
+      className="MuiTypography-root MuiTypography-body2"
+    >
+      Latest released and provisional data (release: unknown)
+    </p>
+  </div>
+  <div
+    className="makeStyles-summaryDiv-9"
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
       Sites & Positions
     </h6>
     <span
@@ -241,6 +255,20 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
     <h6
       className="MuiTypography-root MuiTypography-subtitle2"
     >
+      Release
+    </h6>
+    <p
+      className="MuiTypography-root MuiTypography-body2"
+    >
+      Latest released and provisional data (release: unknown)
+    </p>
+  </div>
+  <div
+    className="makeStyles-summaryDiv-9"
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
       Sites & Positions
     </h6>
     <span
@@ -398,6 +426,20 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
     <h6
       className="MuiTypography-root MuiTypography-subtitle2"
     >
+      Release
+    </h6>
+    <p
+      className="MuiTypography-root MuiTypography-body2"
+    >
+      Latest released and provisional data (release: unknown)
+    </p>
+  </div>
+  <div
+    className="makeStyles-summaryDiv-9"
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
       Sites & Positions
     </h6>
     <span
@@ -548,6 +590,20 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         This is a product that products
       </p>
     </div>
+  </div>
+  <div
+    className="makeStyles-summaryDiv-9"
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Release
+    </h6>
+    <p
+      className="MuiTypography-root MuiTypography-body2"
+    >
+      Latest released and provisional data (release: unknown)
+    </p>
   </div>
   <div
     className="makeStyles-summaryDiv-9"
@@ -728,7 +784,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
               >
                 Range:
               </span>
-              From Zero (0 – 36.7 meters)
+              From Zero (0 - 36.7 meters)
             </div>
           </td>
         </tr>
@@ -789,7 +845,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
               >
                 Range:
               </span>
-              Centered (10 – 30 degrees)
+              Centered (10 - 30 degrees)
             </div>
           </td>
         </tr>
@@ -842,6 +898,20 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         This is a product that products
       </p>
     </div>
+  </div>
+  <div
+    className="makeStyles-summaryDiv-9"
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Release
+    </h6>
+    <p
+      className="MuiTypography-root MuiTypography-body2"
+    >
+      Latest released and provisional data (release: unknown)
+    </p>
   </div>
   <div
     className="makeStyles-summaryDiv-9"
@@ -993,6 +1063,20 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         This is a product that products
       </p>
     </div>
+  </div>
+  <div
+    className="makeStyles-summaryDiv-9"
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Release
+    </h6>
+    <p
+      className="MuiTypography-root MuiTypography-body2"
+    >
+      Latest released and provisional data (release: unknown)
+    </p>
   </div>
   <div
     className="makeStyles-summaryDiv-9"
@@ -1156,6 +1240,20 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     <h6
       className="MuiTypography-root MuiTypography-subtitle2"
     >
+      Release
+    </h6>
+    <p
+      className="MuiTypography-root MuiTypography-body2"
+    >
+      Latest released and provisional data (release: unknown)
+    </p>
+  </div>
+  <div
+    className="makeStyles-summaryDiv-9"
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
       Sites & Positions
     </h6>
     <span
@@ -1300,6 +1398,20 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         This is a product that products
       </p>
     </div>
+  </div>
+  <div
+    className="makeStyles-summaryDiv-9"
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-subtitle2"
+    >
+      Release
+    </h6>
+    <p
+      className="MuiTypography-root MuiTypography-body2"
+    >
+      Latest released and provisional data (release: unknown)
+    </p>
   </div>
   <div
     className="makeStyles-summaryDiv-9"

@@ -12,7 +12,6 @@ import CardContent from '@material-ui/core/CardContent';
 import Checkbox from '@material-ui/core/Checkbox';
 import Chip from '@material-ui/core/Chip';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Divider from '@material-ui/core/Divider';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
@@ -21,8 +20,6 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Typography from '@material-ui/core/Typography';
 import InfoIcon from '@material-ui/icons/Info';
-import QuoteIcon from '@material-ui/icons/FormatQuote';
-import CopyIcon from '@material-ui/icons/Assignment';
 import FileIcon from '@material-ui/icons/Description';
 import SelectAllIcon from '@material-ui/icons/DoneAll';
 import SelectNoneIcon from '@material-ui/icons/Clear';
@@ -31,8 +28,6 @@ import ClearFiltersIcon from '@material-ui/icons/DeleteSweep';
 import WarningIcon from '@material-ui/icons/Warning';
 import ExploreIcon from '@material-ui/icons/Explore';
 
-import { CopyToClipboard } from 'react-copy-to-clipboard';
-
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 
@@ -40,6 +35,7 @@ import moment from 'moment';
 
 import MaterialTable, { MTableToolbar, MTableFilterRow } from 'material-table';
 
+import DataProductCitation from '../Citation/DataProductCitation';
 import DownloadDataContext from '../DownloadDataContext/DownloadDataContext';
 import DataProductAvailability from '../DataProductAvailability/DataProductAvailability';
 import ExternalHost from '../ExternalHost/ExternalHost';
@@ -781,45 +777,25 @@ export default function DownloadStepForm(props) {
           </CardContent>
         </Card>
       );
-      const { productCode, productName } = state.productData;
-      const year = moment().format('YYYY');
-      const today = moment().format('MMMM D, YYYY');
-      const maturity = 'Provisional';
-      const url = RouteService.getDataProductCitationDownloadUrl();
-      const citationText = `National Ecological Observatory Network. ${year}. Data Product ${productCode}, ${productName}. ${maturity} data downloaded from ${url} on ${today}. Battelle, Boulder, CO, USA NEON. ${year}.`;
+      let citationProductCode = '';
+      let citationRelease;
+      if (state.productData && state.productData.productCode) {
+        citationProductCode = state.productData.productCode;
+      }
+      if (state.release && state.release.value) {
+        citationRelease = state.release.value;
+      }
       const citationCallout = (
         <Card
           style={{ margin: Theme.spacing(0.5, 0, 3, 0) }}
           data-selenium="download-data-dialog.step-form.summary.citation"
         >
           <CardContent>
-            <div className={classes.startFlex}>
-              <QuoteIcon fontSize="large" className={classes.calloutIcon} />
-              {/* eslint-disable react/jsx-one-expression-per-line */}
-              <Typography variant="subtitle2" style={{ flexGrow: 1 }}>
-                Please use this citation in your publications.
-                See {dataUsageAndCitationPoliciesLink} for more info.
-              </Typography>
-              {/* eslint-enable react/jsx-one-expression-per-line */}
-              <CopyToClipboard text={citationText}>
-                <Button
-                  color="primary"
-                  variant="outlined"
-                  size="small"
-                  className={classes.copyButton}
-                  startIcon={<CopyIcon />}
-                >
-                  Copy
-                </Button>
-              </CopyToClipboard>
-            </div>
-            <Divider style={{ margin: Theme.spacing(1.5, 0) }} />
-            <Typography
-              variant="body2"
-              style={{ backgroundColor: 'rgba(255, 255, 255, 0.01)' }} // For copy+paste
-            >
-              {citationText}
-            </Typography>
+            <DataProductCitation
+              showQuoteIcon
+              productCode={citationProductCode}
+              release={citationRelease}
+            />
           </CardContent>
         </Card>
       );
