@@ -187,7 +187,7 @@ const AopDataViewer = (props) => {
     if (site === null) {
       newSite = initialSite || Object.keys(data)[0];
     }
-    if (!Object.keys(data[newSite]).length) { return; }
+    if (!data[newSite] || !Object.keys(data[newSite]).length) { return; }
     let newYear = parseInt(Object.keys(data[newSite]).sort().reverse()[0], 10);
     if (site === null && initialYear && data[newSite][initialYear]) {
       newYear = initialYear;
@@ -256,9 +256,15 @@ const AopDataViewer = (props) => {
      Effect: fetch and parse available data
   */
   const handleFetchProductByCode = useCallback(() => ajax
-    .getJSON(`${NeonEnvironment.getVisusProductsBaseUrl()}${productCode}`)
+    .getJSON(`${NeonEnvironment.getVisusProductsBaseUrl()}/${productCode}`)
     .pipe(
       map((response) => {
+        if (!response
+            || !response.data
+            || !response.data.siteCodes
+            || (response.data.siteCodes.length <= 0)) {
+          throw Error('Product resposne contained no data');
+        }
         setData(parseFetchResponse(response));
         setFetchSucceeded(true);
       }),

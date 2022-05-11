@@ -1,0 +1,269 @@
+/* eslint react/jsx-one-expression-per-line: 0 */
+
+import React from 'react';
+
+import { makeStyles } from '@material-ui/core/styles';
+import Divider from '@material-ui/core/Divider';
+import Typography from '@material-ui/core/Typography';
+
+import DocBlock from '../../../components/DocBlock';
+import CodeBlock from '../../../components/CodeBlock';
+import ExampleBlock from '../../../components/ExampleBlock';
+
+import AopDataViewer from './AopDataViewer';
+import Theme from '../Theme/Theme';
+
+const useStyles = makeStyles((theme) => ({
+  divider: {
+    margin: theme.spacing(3, 0),
+  },
+  title: {
+    fontWeight: 500,
+    marginBottom: '8px',
+  },
+}));
+
+// const DEFAULT_STATE = {
+//   fetchProducts: {
+//     status: 'AWAITING_CALL',
+//     error: null,
+//   },
+//   products: [],
+//   selectedProduct: null,
+// };
+// const aopViewerReducer = (state: any, action: any) => {
+//   const newState = { ...state };
+//   switch (action.type) {
+//     case 'fetchProductsCalled':
+//       newState.fetchProducts.status = 'FETCHING';
+//       return newState;
+//     case 'fetchProductsSucceeded':
+//       newState.fetchProducts.status = 'SUCCESS';
+//       newState.products = action.products;
+//       // eslint-disable-next-line prefer-destructuring
+//       newState.selectedProduct = action.products[0];
+//       return newState;
+//     case 'fetchProductsFailed':
+//       newState.fetchProducts.status = 'ERROR';
+//       newState.fetchProducts.error = action.error;
+//       return newState;
+//     case 'selectProduct':
+//       if (!state.products.find((product: string) => product === action.productCode)) {
+//         return state;
+//       }
+//       newState.selectedProduct = action.productCode;
+//       return newState;
+//     default:
+//       return state;
+//   }
+// };
+
+// const AopViewerDemo = (): JSX.Element => {
+//   const classes = useStyles(Theme);
+//   const [state, dispatch] = useReducer(
+//     aopViewerReducer,
+//     cloneDeep(DEFAULT_STATE),
+//   );
+//   const fetchAllProducts$ = ajax.getJSON(`${NeonEnvironment.getVisusProductsBaseUrl()}`)
+//     .pipe(
+//       map((response: any) => {
+//         if (Array.isArray(response) && (response.length > 0)) {
+//           const products = response;
+//           if (!products.length) {
+//             dispatch({
+//               type: 'fetchProductsFailed',
+//               error: 'fetch succeeded; no products found',
+//             });
+//             return of(false);
+//           }
+//           dispatch({ type: 'fetchProductsSucceeded', products });
+//           return of(true);
+//         }
+//         dispatch({ type: 'fetchProductsFailed', error: 'malformed response' });
+//         return of(false);
+//       }),
+//       catchError((error: any) => {
+//         dispatch({ type: 'fetchProductsFailed', error: error.message });
+//         return of(false);
+//       }),
+//     );
+//   useEffect(() => {
+//     if (state.fetchProducts.status === 'AWAITING_CALL') {
+//       dispatch({ type: 'fetchProductsCalled' });
+//       fetchAllProducts$.subscribe();
+//     }
+//   });
+//   const loadStatus = ['AWAITING_CALL', 'FETCHING'];
+//   const isLoading = loadStatus.includes(state.fetchProducts.status);
+//   const isError = state.fetchProducts.status === 'ERROR';
+//   if (isLoading) {
+//     return (
+//       <div>
+//         <Skeleton variant="rect" width="100%" height={400} />
+//       </div>
+//     );
+//   }
+//   if (isError) {
+//     return (
+//       <div>
+//         <div>
+//           {`Error: ${state.fetchProducts.error}`}
+//         </div>
+//       </div>
+//     );
+//   }
+//   const handleChange = (event: any) => {
+//     const nextProduct = state.products.find((product: any) => (
+//       product === event.target.value
+//     ));
+//     if (!nextProduct) {
+//       return;
+//     }
+//     dispatch({ type: 'selectProduct', productCode: event.target.value });
+//   };
+//   return (
+//     <div style={{ width: '100%' }}>
+//       <Grid container spacing={3}>
+//         <Grid item xs={12}>
+//           <Typography
+//             variant="h5"
+//             component="h3"
+//             id="all-aop-products-select-label"
+//             className={classes.title}
+//           >
+//             Data Product
+//           </Typography>
+//           <Select
+//             id="all-aop-products-select"
+//             aria-labelledby="all-aop-products-select-label"
+//             variant="outlined"
+//             value={state.selectedProduct}
+//             onChange={handleChange}
+//             style={{ width: '100%', marginBottom: '32px' }}
+//           >
+//             {state.products.map((product: any) => ((
+//               <MenuItem key={product} value={product}>
+//                 {`${product}`}
+//               </MenuItem>
+//             )))}
+//           </Select>
+//         </Grid>
+//         <Grid item xs={12}>
+//           <AopDataViewer productCode={state.selectedProduct} />
+//         </Grid>
+//       </Grid>
+//     </div>
+//   );
+// };
+
+export default function StyleGuide() {
+  const classes = useStyles(Theme);
+
+  return (
+    <>
+
+      <DocBlock>
+        An interactive visualization of AOP data sets built and maintained by the
+        University of Utah.
+      </DocBlock>
+      <CodeBlock>
+        {`
+import AopDataViewer from 'portal-core-components/lib/components/AopDataViewer';
+        `}
+      </CodeBlock>
+
+      <Typography variant="h5" component="h3" gutterBottom>Usage</Typography>
+
+      <DocBlock>
+        { /* @ts-ignore */ }
+        Invoke an AOP Data Viewer with a <tt>productCode</tt> prop to generate
+        the basic integrated viewer. Site and time selector will be included and
+        the viewer itself will be loaded in an iframe. The whole package will
+        scale itself responsively to its parent container.
+      </DocBlock>
+      <ExampleBlock>
+        <AopDataViewer productCode="DP3.30026.001" />
+      </ExampleBlock>
+      <CodeBlock>
+        {`
+<AopDataViewer productCode="DP3.30026.001" />
+        `}
+      </CodeBlock>
+
+      <Divider className={classes.divider} />
+      {/* <Typography variant="h5" component="h3" gutterBottom>Demo</Typography>
+      <ExampleBlock>
+        <AopViewerDemo />
+      </ExampleBlock>
+
+      <Divider className={classes.divider} /> */}
+      <Typography variant="h6" component="h4" gutterBottom>Failure State</Typography>
+
+      <DocBlock>
+        { /* @ts-ignore */ }
+        If passed a <tt>productCode</tt> prop that does not resolve to streamable
+        AOP data then the component will load in a generic graceful error state,
+        still taking the full width of the container as if it loaded normally.
+      </DocBlock>
+      <ExampleBlock>
+        <AopDataViewer productCode="FAKE.PRODUCT.CODE" />
+      </ExampleBlock>
+      <CodeBlock>
+        {`
+<AopDataViewer productCode="FAKE.PRODUCT.CODE" />
+        `}
+      </CodeBlock>
+
+      <Divider className={classes.divider} />
+      <Typography variant="h6" component="h4" gutterBottom>Initial Site / Year / Flight</Typography>
+
+      <DocBlock>
+        There are three props that can be provided to dial into a particular site,
+        year, and/or flight:
+        <ul>
+          <li>
+            { /* @ts-ignore */ }
+            <tt>initialSite</tt>
+            <br />
+            Any valid site code string. If provided and not valid for the product
+            will revert to first site.
+          </li>
+          <li>
+            { /* @ts-ignore */ }
+            <tt>initialYear</tt>
+            <br />
+            Any 4-digit year as an integer. If provided and not valid for the product
+            and initial site will revert to latest year for the initial site.
+          </li>
+          <li>
+            { /* @ts-ignore */ }
+            <tt>initialFlight</tt>
+            <br />
+            Any integer. Flight numbers are indexed starting at 1. If provided and
+            not valid for the initial site and year for the product will revert to
+            the highest available flight number for the site/year.
+          </li>
+        </ul>
+      </DocBlock>
+      <ExampleBlock>
+        <AopDataViewer
+          productCode="DP3.30010.001"
+          initialSite="ORNL"
+          initialYear={2015}
+          initialFlight={1}
+        />
+      </ExampleBlock>
+      <CodeBlock>
+        {`
+<AopDataViewer
+  productCode="DP3.30010.001"
+  initialSite="ORNL"
+  initialYear={2015}
+  initialFlight={1}
+ />
+        `}
+      </CodeBlock>
+
+    </>
+  );
+}
