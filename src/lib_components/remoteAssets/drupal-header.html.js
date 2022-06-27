@@ -67,7 +67,7 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/about/visionandmanagement" class="menu__link" data-drupal-link-system-path="node/10533">Management</a>
+          <a href="https://www.neonscience.org/about/visionandmanagement" class="menu__link" data-drupal-link-system-path="node/10533">Vision and Management</a>
 
                   </li>
               <li  class="menu__item menu__item--expanded">
@@ -952,12 +952,26 @@ export default html = `
           <a href="https://www.neonscience.org/neon-ambassador-program" class="menu__link" data-drupal-link-system-path="node/11625">NEON Ambassador Program</a>
 
                   </li>
+              <li  class="menu__item menu__item--expanded">
+          <a href="https://www.neonscience.org/collaborative-works" class="menu__link" data-drupal-link-system-path="node/12059">Collaborative Works</a>
+
+          
+            
+                      <ul  class="menu menu--main" data-depth="2">
+
               <li  class="menu__item">
           <a href="https://www.neonscience.org/efi-rcn-neon-ecological-forecasting-challenge" class="menu__link" data-drupal-link-system-path="node/11363">EFI-NEON Ecological Forecasting Challenge</a>
 
                   </li>
               <li  class="menu__item">
           <a href="https://www.neonscience.org/ncar-neon-community-collaborations" class="menu__link" data-drupal-link-system-path="node/11843">NCAR-NEON-Community Collaborations</a>
+
+                  </li>
+      
+          </ul>
+  
+
+            
 
                   </li>
               <li  class="menu__item">
@@ -1048,21 +1062,25 @@ export default html = `
   id="block-searchform-mobile"
   role="search"
 >
-  <form class="search-form" action="/search/site" method="get" id="search-block-form" accept-charset="UTF-8">
-  <form class="search-form" data-drupal-selector="search-block-form" action="/search/site" method="get" id="search-block-form" accept-charset="UTF-8">
-  <div class="js-form-item form-item js-form-type-search form-item-keys js-form-item-keys form-no-label">
-        <input title="Enter the terms you wish to search for." class="search-form__input form-search" data-drupal-selector="edit-keys" type="search" id="edit-keys" name="keys" value="" size="15" maxlength="128" />
+  
 
-        <label for="edit-keys" class="visually-hidden">Search</label>
+<div class="search-api-form" data-drupal-selector="search-api-form" id="block-searchform">
+  
+    
+      <form action="/search/site" method="get" id="search-api-form" accept-charset="UTF-8">
+  <div class="js-form-item form-item js-form-type-search form-item-title js-form-item-title form-no-label">
+        <input title="Enter the terms you wish to search for." data-drupal-selector="edit-title" type="search" id="edit-title" name="title" value="" size="15" maxlength="128" class="form-search" />
+
+        <label for="edit-title" class="visually-hidden">Search</label>
       </div>
-<div class="search-form__actions form-actions js-form-wrapper form-wrapper" data-drupal-selector="edit-actions" id="edit-actions">
+<div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper" id="edit-actions">
 
-<input class="search-form__button button js-form-submit form-submit button--search" data-drupal-selector="edit-submit" type="submit" id="edit-submit" value="Search" />
+<input data-drupal-selector="edit-submit" type="submit" id="edit-submit" value="Search" class="button js-form-submit form-submit button--search" />
 </div>
 
 </form>
 
-</form>
+  </div>
 
 </div>
         </li>
@@ -1080,22 +1098,23 @@ export default html = `
         <h3 class="header__search--title">Search</h3>
         
 
-  <form class="search-form" action="/search/site" method="get" id="search-block-form--2" accept-charset="UTF-8">
-  <form action="/search/site" method="get" id="search-block-form--2" accept-charset="UTF-8">
-  <div class="js-form-item form-item js-form-type-search form-item-keys js-form-item-keys form-no-label">
-        <input title="Enter the terms you wish to search for." class="search-form__input form-search" data-drupal-selector="edit-keys" type="search" id="edit-keys--2" name="keys" value="" size="15" maxlength="128" />
+<div class="search-api-form" data-drupal-selector="search-api-form" id="block-searchform">
+  
+    
+      <form action="/search/site" method="get" id="search-api-form" accept-charset="UTF-8">
+  <div class="js-form-item form-item js-form-type-search form-item-title js-form-item-title form-no-label">
+        <input title="Enter the terms you wish to search for." data-drupal-selector="edit-title" type="search" id="edit-title" name="title" value="" size="15" maxlength="128" class="form-search" />
 
-        <label for="edit-keys--2" class="visually-hidden">Search</label>
+        <label for="edit-title" class="visually-hidden">Search</label>
       </div>
-<div class="search-form__actions form-actions js-form-wrapper form-wrapper" data-drupal-selector="edit-actions" id="edit-actions--3">
+<div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper" id="edit-actions">
 
-<input class="search-form__button button js-form-submit form-submit button--search" data-drupal-selector="edit-submit" type="submit" id="edit-submit--2" value="Search" />
+<input data-drupal-selector="edit-submit" type="submit" id="edit-submit" value="Search" class="button js-form-submit form-submit button--search" />
 </div>
 
 </form>
 
-</form>
-
+  </div>
 
         <div class="header__search-close">
           <button aria-label="Close Search" class="button__search-close">

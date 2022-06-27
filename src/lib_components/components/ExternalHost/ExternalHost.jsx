@@ -279,12 +279,12 @@ const externalHosts = {
     id: 'PHENOCAM',
     name: 'PhenoCam',
     projectTitle: 'The PhenoCam Network',
-    url: 'https://phenocam.sr.unh.edu/webcam/about/',
+    url: 'https://phenocam.nau.edu/webcam/about/',
     hostType: HOST_TYPES.EXCLUSIVE_DATA,
     linkType: LINK_TYPES.BY_SITE,
     getSiteLink: (allSites = {}, siteCode = '', productCode = '') => {
       if (!allSites[siteCode]) { return null; }
-      const hrefBase = 'https://phenocam.sr.unh.edu/webcam/sites';
+      const hrefBase = 'https://phenocam.nau.edu/webcam/sites';
       const hrefSite = `${allSites[siteCode].domainCode}.${siteCode}.${productCode.split('.').slice(0, 2).join('.')}`;
       const text = `${siteCode} - ${allSites[siteCode].description}`;
       return renderExternalHostLink(`${hrefBase}/NEON.${hrefSite}/`, text, 'PHENOCAM', productCode);
