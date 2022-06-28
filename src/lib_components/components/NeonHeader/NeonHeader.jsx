@@ -122,18 +122,10 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.up('lg')]: {
       '& .header__search--inner > .header__search--title': {
-        fontSize: '1.2rem !important', // Changed from 1.0 to match Drupal site.
+        fontSize: '1.25rem !important', // Changed from 1.0 to match Drupal site.
       },
     },
-    '& .header__search--inner > .form-item': {
-      width: '100%',
-      display: 'flex',
-      '-ms-flex-pack': 'start',
-      justifyContent: 'flex-start',
-      '-ms-flex-align': 'center',
-      alignItems: 'center',
-    },
-    '& .header__search--inner > form.search-form': {
+    '& .header__search--inner > div.search-api-form > form#search-api-form': {
       display: 'flex',
       '-ms-flex-pack': 'start',
       justifyContent: 'flex-start',
@@ -141,20 +133,34 @@ const useStyles = makeStyles((theme) => ({
       alignItems: 'center',
       width: '100%',
     },
-    '& .header__search--inner > form.search-form > .form-item': {
+    '& .header__search--inner > div.search-api-form > form#search-api-form > .form-item': {
+      width: '100%',
+      display: 'flex',
+      '-ms-flex-pack': 'start',
+      justifyContent: 'flex-start',
+      '-ms-flex-align': 'center',
+      alignItems: 'center',
+      margin: '20px 0',
+    },
+    '& .header__search--inner > div.search-api-form': {
       width: '100%',
     },
-    '& .header__search--inner > form.search-form > .form-item > .search-form__input': {
+    '& .header__search--inner > div.search-api-form > form#search-api-form > .form-actions.form-wrapper': {
+      display: 'flex',
+    },
+    '& .header__search--inner > div.search-api-form > form#search-api-form > .form-item > .form-search': {
       width: '100%',
+      height: '48px',
       background: '#fff',
       border: '1px solid #d7d9d9',
       boxSizing: 'border-box',
       borderRadius: '3px 0 0 3px',
-      padding: '14px',
+      padding: '12px 18px',
     },
-    '& .header__search--inner > form.search-form > .search-form__actions > .search-form__button': {
+    '& .header__search--inner > div.search-api-form > form#search-api-form > .form-actions > .form-submit.button--search': {
       borderRadius: '0px 3px 3px 0px',
-      width: '60px',
+      width: '48px',
+      height: '48px',
       background: '#0073cf',
       border: '#0073cf 1px solid',
       color: 'transparent !important',
@@ -164,12 +170,12 @@ const useStyles = makeStyles((theme) => ({
       padding: '0.86rem 0',
       transition: 'all 0.2s ease-in-out',
     },
-    '& .header__search--inner > form.search-form > .search-form__actions > .search-form__button:hover': {
+    '& .header__search--inner > div.search-api-form > form#search-api-form > .form-actions > .form-submit.button--search:hover': {
       transition: 'all 0.2s ease-in-out',
       backgroundColor: '#002c77',
       border: '#002c77 1px solid',
     },
-    '& .header__search--inner > form.search-form > label': {
+    '& .header__search--inner > div.search-api-form > form#search-api-form > .form-item > label': {
       fontWeight: 600,
       fontSize: '20px',
       margin: 'auto 2.6rem',
@@ -193,13 +199,20 @@ const useStyles = makeStyles((theme) => ({
       transition: 'all 0.2s ease-in-out',
     },
     [theme.breakpoints.down('md')]: {
-      '& nav#block-neon-main-menu > ul > li.siteSearch': {
-        padding: '0 1.5rem 0.5rem 1.5rem',
+      '& nav#block-neon-main-menu > ul.menu.menu--main > li.siteSearch': {
+        padding: '0 1.875rem 0.625rem 1.875rem !important',
+      },
+      '& .search-form-mobile.isMobile': {
+        display: 'flex',
+        '-ms-flex-pack': 'start',
+        justifyContent: 'flex-start',
+        '-ms-flex-align': 'center',
+        alignItems: 'center',
       },
       '& .search-form-mobile': {
         width: '100%',
       },
-      '& form.search-form': {
+      '& .search-form-mobile > div.search-api-form > form#search-api-form': {
         display: 'flex',
         '-ms-flex-pack': 'start',
         justifyContent: 'flex-start',
@@ -207,20 +220,29 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         width: '100%',
       },
-      '& form.search-form > .form-item': {
+      '& .search-form-mobile > div.search-api-form': {
         width: '100%',
       },
-      '& form.search-form > .form-item > .search-form__input': {
+      '& .search-form-mobile > div.search-api-form > form#search-api-form > .form-item': {
         width: '100%',
+        margin: '20px 0',
+      },
+      '& .search-form-mobile > div.search-api-form > form#search-api-form > .form-item > .form-search': {
+        width: '100%',
+        height: '48px',
         background: '#fff',
         border: '1px solid #d7d9d9',
         boxSizing: 'border-box',
         borderRadius: '3px 0 0 3px',
-        padding: '0.88rem',
+        padding: '0.75rem 1.125rem',
       },
-      '& form.search-form > .search-form__actions > .search-form__button': {
+      '& .search-form-mobile > div.search-api-form > form#search-api-form > .form-actions.form-wrapper': {
+        display: 'flex',
+      },
+      '& .search-form-mobile > div.search-api-form > form#search-api-form > .form-actions > .form-submit.button--search': {
         borderRadius: '0px 3px 3px 0px',
-        width: '60px',
+        width: '48px',
+        height: '48px',
         background: '#0073cf',
         border: '#0073cf 1px solid',
         color: 'transparent !important',
@@ -230,12 +252,12 @@ const useStyles = makeStyles((theme) => ({
         padding: '14px 0',
         transition: 'all 0.2s ease-in-out',
       },
-      '& form.search-form > .search-form__actions > .search-form__button:hover': {
+      '& .search-form-mobile > div.search-api-form > form#search-api-form > .form-actions > .form-submit.button--search:hover': {
         transition: 'all 0.2s ease-in-out',
         backgroundColor: '#002c77',
         border: '#002c77 1px solid',
       },
-      '& form.search-form > .form-item > label': {
+      '& .search-form-mobile > div.search-api-form > form#search-api-form > .form-item > label': {
         display: 'none !important',
       },
     },
@@ -355,7 +377,7 @@ const NeonHeader = forwardRef((props, headerRef) => {
   const injectAuth = !auth.useCore ? null : {
     replace: (domNode) => {
       const { attribs = {}, name } = domNode;
-      if ((name === 'form') && (attribs.class === 'search-form')) {
+      if ((name === 'form') && (attribs.id === 'search-api-form')) {
         const nextAttribs = {};
         Object.keys(attribs).forEach((attr) => {
           applyAttribute(nextAttribs, attribs, attr);
