@@ -86,6 +86,11 @@ export interface IRouteService {
    */
   getNeonUtilitiesDataStackRPath: () => string;
   /**
+   * Gets the path to the observatory status page
+   * @returns
+   */
+  getObservatoryStatusPath: () => string;
+  /**
    * Gets the path to the theme detail page
    * @param theme
    * @returns
@@ -203,6 +208,9 @@ const RouteService: IRouteService = {
   ),
   getNeonUtilitiesDataStackRPath: (): string => (
     `${NeonEnvironment.getWebHost()}/resources/learning-hub/tutorials/neondatastackr`
+  ),
+  getObservatoryStatusPath: (): string => (
+    `${NeonEnvironment.getWebHost()}/impact/observatory-blog/observatory-status`
   ),
   getThemeDetailPath: (theme: string): string => (
     `${NeonEnvironment.getWebHost()}/data/data-themes/${theme}`

@@ -83,6 +83,11 @@ export interface IRouteService {
      */
     getNeonUtilitiesDataStackRPath: () => string;
     /**
+     * Gets the path to the observatory status page
+     * @returns
+     */
+    getObservatoryStatusPath: () => string;
+    /**
      * Gets the path to the theme detail page
      * @param theme
      * @returns
