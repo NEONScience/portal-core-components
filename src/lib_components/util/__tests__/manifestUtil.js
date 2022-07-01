@@ -59,6 +59,7 @@ describe('Utils - manifestUtil', () => {
       sites: { value: ['JERC', 'COMO'], isValid: true },
       dateRange: { value: ['2020-01', '2020-06'], isValid: true },
       documentation: { value: 'exclude', isValid: true },
+      bundledProducts: { value: [], isValid: true },
       packageType: { value: 'basic', isValid: true },
     };
     test('returns a config with error if productData is invalid', () => {
@@ -103,6 +104,7 @@ describe('Utils - manifestUtil', () => {
         sites: ['JERC', 'COMO'],
         dateRange: ['2020-01', '2020-06'],
         documentation: false,
+        bundledProducts: [],
         packageType: 'basic',
         isError: false,
       });
@@ -131,6 +133,7 @@ describe('Utils - manifestUtil', () => {
       sites: ['JERC', 'COMO'],
       dateRange: ['2020-01', '2020-06'],
       documentation: true,
+      bundledProducts: [],
       packageType: 'expanded',
       isError: false,
     };
@@ -164,6 +167,7 @@ describe('Utils - manifestUtil', () => {
       sites: ['JERC', 'COMO'],
       dateRange: ['2020-01', '2020-06'],
       documentation: true,
+      bundledProducts: [],
       packageType: 'expanded',
       isError: false,
     };
@@ -176,6 +180,7 @@ describe('Utils - manifestUtil', () => {
         release: 'release-foo',
         pkgType: 'expanded',
         includeDocs: true,
+        bundledProducts: [],
         presign: true,
       });
     });
@@ -190,6 +195,7 @@ describe('Utils - manifestUtil', () => {
         release: 'release-foo',
         pkgType: 'expanded',
         includeDocs: true,
+        bundledProducts: [],
         presign: true,
       });
     });
@@ -278,6 +284,7 @@ describe('Utils - manifestUtil', () => {
         sites: ['JERC', 'COMO'],
         dateRange: ['2020-01', '2020-06'],
         documentation: true,
+        bundledProducts: [],
         packageType: 'expanded',
         isError: false,
       };
@@ -376,6 +383,7 @@ describe('Utils - manifestUtil', () => {
         ],
         siteCodes: ['JERC', 'BONA'],
         includeDocs: true,
+        bundledProducts: [],
       });
     });
   });

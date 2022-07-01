@@ -12,9 +12,11 @@ export function getTestableItems(): {
     getAndValidateNewS3FilesState?: undefined;
     regenerateS3FilesFiltersAndValidValues?: undefined;
     getAndValidateNewState?: undefined;
+    SITE_MANAGEMENT_DATA_PRODUCT_CODE?: undefined;
     ALL_POSSIBLE_VALID_DATE_RANGE?: undefined;
     ALL_POSSIBLE_VALID_DOCUMENTATION?: undefined;
     ALL_POSSIBLE_VALID_PACKAGE_TYPE?: undefined;
+    ALL_POSSIBLE_VALID_BUNDLED_PRODUCTS?: undefined;
 } | {
     productDataIsValid: (productData: any) => boolean;
     yearMonthIsValid: (yearMonth?: string) => boolean;
@@ -88,6 +90,11 @@ export function getTestableItems(): {
             validValues: string[];
             isValid: boolean;
         };
+        bundledProducts: {
+            value: never[];
+            validValues: string[];
+            isValid: boolean;
+        };
         packageType: {
             value: null;
             validValues: string[];
@@ -103,9 +110,11 @@ export function getTestableItems(): {
     getAndValidateNewS3FilesState: (previousState: any, action: any, broadcast?: boolean) => any;
     regenerateS3FilesFiltersAndValidValues: (state: any) => any;
     getAndValidateNewState: (previousState: any, action: any, broadcast?: boolean) => any;
+    SITE_MANAGEMENT_DATA_PRODUCT_CODE: string;
     ALL_POSSIBLE_VALID_DATE_RANGE: string[];
     ALL_POSSIBLE_VALID_DOCUMENTATION: string[];
     ALL_POSSIBLE_VALID_PACKAGE_TYPE: string[];
+    ALL_POSSIBLE_VALID_BUNDLED_PRODUCTS: string[];
 };
 declare namespace DownloadDataContext {
     export { Provider };
@@ -113,6 +122,7 @@ declare namespace DownloadDataContext {
     export { reducer };
     export { DEFAULT_STATE };
     export { ALL_STEPS };
+    export { SITE_MANAGEMENT_DATA_PRODUCT_CODE };
     export { getStateObservable };
 }
 declare function Provider(props: any): JSX.Element;
@@ -133,6 +143,7 @@ declare namespace Provider {
         const sites: PropTypes.Requireable<(string | null | undefined)[]>;
         const dateRange: PropTypes.Requireable<(string | null | undefined)[]>;
         const documentation: PropTypes.Requireable<string>;
+        const bundledProducts: PropTypes.Requireable<(string | null | undefined)[]>;
         const packageType: PropTypes.Requireable<string>;
         const children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
     }
@@ -153,6 +164,8 @@ declare namespace Provider {
         export { dateRange_1 as dateRange };
         import documentation_1 = value;
         export { documentation_1 as documentation };
+        import bundledProducts_1 = value;
+        export { bundledProducts_1 as bundledProducts };
         import packageType_1 = value;
         export { packageType_1 as packageType };
     }
@@ -219,6 +232,11 @@ declare function useDownloadDataState(): {
     };
     documentation: {
         value: string;
+        validValues: string[];
+        isValid: boolean;
+    };
+    bundledProducts: {
+        value: never[];
         validValues: string[];
         isValid: boolean;
     };
@@ -294,6 +312,11 @@ declare function useDownloadDataState(): {
     };
     documentation: {
         value: string;
+        validValues: string[];
+        isValid: boolean;
+    };
+    bundledProducts: {
+        value: never[];
         validValues: string[];
         isValid: boolean;
     };
@@ -397,31 +420,39 @@ declare namespace DEFAULT_STATE {
         export { isValid_4 as isValid };
     }
     export { documentation_2 as documentation };
-    export namespace packageType_2 {
-        const value_6: null;
+    export namespace bundledProducts_2 {
+        const value_6: never[];
         export { value_6 as value };
         const validValues_5: string[];
         export { validValues_5 as validValues };
         const isValid_5: boolean;
         export { isValid_5 as isValid };
     }
-    export { packageType_2 as packageType };
-    export namespace policies {
-        const value_7: boolean;
+    export { bundledProducts_2 as bundledProducts };
+    export namespace packageType_2 {
+        const value_7: null;
         export { value_7 as value };
-        const validValues_6: null;
+        const validValues_6: string[];
         export { validValues_6 as validValues };
         const isValid_6: boolean;
         export { isValid_6 as isValid };
     }
+    export { packageType_2 as packageType };
+    export namespace policies {
+        const value_8: boolean;
+        export { value_8 as value };
+        const validValues_7: null;
+        export { validValues_7 as validValues };
+        const isValid_7: boolean;
+        export { isValid_7 as isValid };
+    }
 }
 declare namespace ALL_STEPS {
-    export namespace documentation_3 {
+    export namespace options {
         const requiredStateKeys: string[];
         const label: string;
         const title: string;
     }
-    export { documentation_3 as documentation };
     export namespace externalExclusive {
         const requiredStateKeys_1: never[];
         export { requiredStateKeys_1 as requiredStateKeys };
@@ -472,5 +503,6 @@ declare namespace ALL_STEPS {
         export { title_5 as title };
     }
 }
+declare const SITE_MANAGEMENT_DATA_PRODUCT_CODE: "DP1.10111.001";
 declare function getStateObservable(): import("rxjs").Observable<any>;
 import PropTypes from "prop-types";

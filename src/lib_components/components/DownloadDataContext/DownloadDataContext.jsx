@@ -38,16 +38,19 @@ import NeonSignInButtonState from '../NeonSignInButton/NeonSignInButtonState';
 // eslint-disable-next-line import/no-cycle
 import { convertStateForStorage, convertAOPInitialState } from './StateStorageConverter';
 
+const SITE_MANAGEMENT_DATA_PRODUCT_CODE = 'DP1.10111.001';
+
 const ALL_POSSIBLE_VALID_DATE_RANGE = ['2010-01', moment().format('YYYY-MM')];
 const ALL_POSSIBLE_VALID_DOCUMENTATION = ['include', 'exclude'];
+const ALL_POSSIBLE_VALID_BUNDLED_PRODUCTS = [SITE_MANAGEMENT_DATA_PRODUCT_CODE];
 const ALL_POSSIBLE_VALID_PACKAGE_TYPE = ['basic', 'expanded'];
 const AVAILABILITY_VIEW_MODES = ['summary', 'sites', 'states', 'domains'];
 
 const ALL_STEPS = {
-  documentation: {
-    requiredStateKeys: ['documentation'],
-    label: 'Documentation',
-    title: 'Do you want to include documentation?',
+  options: {
+    requiredStateKeys: ['documentation', 'bundledProducts'],
+    label: 'Package Options',
+    title: 'Specify Download Package Options',
   },
   externalExclusive: {
     requiredStateKeys: [],
@@ -85,7 +88,7 @@ const ALL_STEPS = {
 // If null will be interpreted as purely informational and completion does not apply.
 const DEFAULT_REQUIRED_STEPS = [
   { key: 'sitesAndDateRange', isComplete: false },
-  { key: 'documentation', isComplete: true },
+  { key: 'options', isComplete: true },
   { key: 'packageType', isComplete: false },
   { key: 'policies', isComplete: false },
   { key: 'summary', isComplete: null },
@@ -156,6 +159,11 @@ const DEFAULT_STATE = {
     validValues: [...ALL_POSSIBLE_VALID_DOCUMENTATION],
     isValid: true,
   },
+  bundledProducts: {
+    value: [],
+    validValues: [...ALL_POSSIBLE_VALID_BUNDLED_PRODUCTS],
+    isValid: false,
+  },
   packageType: {
     value: null,
     validValues: [...ALL_POSSIBLE_VALID_PACKAGE_TYPE],
@@ -169,7 +177,16 @@ const DEFAULT_STATE = {
 };
 
 // State keys that have a common { value, validValues, isValid } shape and can be validated
-const VALIDATABLE_STATE_KEYS = ['release', 'sites', 'dateRange', 'documentation', 'packageType', 's3Files', 'policies'];
+const VALIDATABLE_STATE_KEYS = [
+  'release',
+  'sites',
+  'dateRange',
+  'documentation',
+  'bundledProducts',
+  'packageType',
+  's3Files',
+  'policies',
+];
 
 // State keys that can be transfered between contexts through higher order state
 // (must be a subset of VALIDATABLE_STATE_KEYS)
@@ -177,7 +194,14 @@ const HIGHER_ORDER_TRANSFERABLE_STATE_KEYS = ['release', 'sites', 'dateRange'];
 
 // State keys that should trigger a new manifest (file size estimate) request when updated
 // (must be a subset of VALIDATABLE_STATE_KEYS)
-const MANIFEST_TRIGGERING_STATE_KEYS = ['release', 'sites', 'dateRange', 'documentation', 'packageType'];
+const MANIFEST_TRIGGERING_STATE_KEYS = [
+  'release',
+  'sites',
+  'dateRange',
+  'documentation',
+  'bundledProducts',
+  'packageType',
+];
 
 // Regexes and associated capture group names for parse s3 file names and URLs
 const S3_PATTERN = {
@@ -235,6 +259,11 @@ const newStateIsAllowable = (key, value) => {
         ALL_POSSIBLE_VALID_DOCUMENTATION.includes(value)
         || value === null
       );
+    case 'bundledProducts':
+      return (
+        Array.isArray(value)
+        && value.every((p) => (typeof p === 'string' && /^DP[0-9]{1}[.][0-9]{5}[.][0-9]{3}$/.test(p)))
+      );
     case 'packageType':
       return (
         ALL_POSSIBLE_VALID_PACKAGE_TYPE.includes(value)
@@ -263,6 +292,14 @@ const newStateIsValid = (key, value, validValues = []) => {
         && Array.isArray(validValues)
         && value.length > 0
         && value.every((site) => validValues.includes(site))
+      );
+    case 'bundledProducts':
+      return (
+        newStateIsAllowable(key, value)
+        && Array.isArray(validValues)
+        && ((value.length <= 0)
+          || (value.length > 0
+            && value.every((p) => validValues.includes(p))))
       );
     case 'dateRange':
       return (
@@ -299,6 +336,8 @@ const mutateNewStateIntoRange = (key, value, validValues = []) => {
   switch (key) {
     case 'sites':
       return valueIsAllowable ? value.filter((site) => validValues.includes(site)) : [];
+    case 'bundledProducts':
+      return valueIsAllowable ? value.filter((p) => validValues.includes(p)) : [];
     case 'dateRange':
       valueIsDefault = valueIsAllowable
         && value[0] === ALL_POSSIBLE_VALID_DATE_RANGE[0]
@@ -312,9 +351,9 @@ const mutateNewStateIntoRange = (key, value, validValues = []) => {
   }
 };
 
-// Estimate a POST body size from a sile list and sites list for s3Files-based
+// Estimate a POST body size from a site list and sites list for s3Files-based
 // downloads. Numbers here are based on the current POST API and what it requires
-// for form data keys, which is excessively verbose.
+// for form data keys.
 const estimatePostSize = (s3FilesState, sitesState) => {
   const baseLength = 300;
   const sitesLength = sitesState.value.length * 62;
@@ -345,6 +384,8 @@ const getValidValuesFromProductData = (productData, key) => {
         }, [null, null]);
     case 'documentation':
       return [...ALL_POSSIBLE_VALID_DOCUMENTATION];
+    case 'bundledProducts':
+      return [...ALL_POSSIBLE_VALID_BUNDLED_PRODUCTS];
     case 'packageType':
       return [...ALL_POSSIBLE_VALID_PACKAGE_TYPE];
     case 'policies':
@@ -416,7 +457,7 @@ const getInitialStateFromProps = (props) => {
     requiredSteps = [
       { key: 'sitesAndDateRange', isComplete: false },
       { key: 's3Files', isComplete: false },
-      { key: 'documentation', isComplete: true },
+      { key: 'options', isComplete: true },
       { key: 'policies', isComplete: false },
       { key: 'summary', isComplete: null },
     ];
@@ -1169,6 +1210,7 @@ Provider.propTypes = {
   sites: PropTypes.arrayOf(PropTypes.string),
   dateRange: PropTypes.arrayOf(PropTypes.string),
   documentation: PropTypes.oneOf(ALL_POSSIBLE_VALID_DOCUMENTATION),
+  bundledProducts: PropTypes.arrayOf(PropTypes.string),
   packageType: PropTypes.oneOf(ALL_POSSIBLE_VALID_PACKAGE_TYPE),
   /* eslint-enable react/no-unused-prop-types */
   children: PropTypes.oneOfType([
@@ -1190,6 +1232,7 @@ Provider.defaultProps = {
   sites: DEFAULT_STATE.sites.value,
   dateRange: DEFAULT_STATE.dateRange.value,
   documentation: DEFAULT_STATE.documentation.value,
+  bundledProducts: DEFAULT_STATE.bundledProducts.value,
   packageType: DEFAULT_STATE.packageType.value,
 };
 
@@ -1199,6 +1242,7 @@ const DownloadDataContext = {
   reducer,
   DEFAULT_STATE,
   ALL_STEPS,
+  SITE_MANAGEMENT_DATA_PRODUCT_CODE,
   getStateObservable,
 };
 
@@ -1219,8 +1263,10 @@ export const getTestableItems = () => (
     getAndValidateNewS3FilesState,
     regenerateS3FilesFiltersAndValidValues,
     getAndValidateNewState,
+    SITE_MANAGEMENT_DATA_PRODUCT_CODE,
     ALL_POSSIBLE_VALID_DATE_RANGE,
     ALL_POSSIBLE_VALID_DOCUMENTATION,
     ALL_POSSIBLE_VALID_PACKAGE_TYPE,
+    ALL_POSSIBLE_VALID_BUNDLED_PRODUCTS,
   }
 );

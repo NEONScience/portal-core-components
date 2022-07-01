@@ -37,7 +37,7 @@ useDownloadDataState.mockReturnValue([{
   ...cloneDeep(DEFAULT_STATE),
   requiredSteps: [
     { key: 'sitesAndDateRange', isComplete: true },
-    { key: 'documentation', isComplete: true },
+    { key: 'options', isComplete: true },
     { key: 'packageType', isComplete: true },
     { key: 's3Files', isComplete: true },
     { key: 'policies', isComplete: false },

@@ -12,6 +12,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Checkbox from '@material-ui/core/Checkbox';
 import Chip from '@material-ui/core/Chip';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Divider from '@material-ui/core/Divider';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
@@ -190,12 +191,33 @@ export default function DownloadStepForm(props) {
         <SiteChip size="large" variant="default" label={siteChipLabel} />
       );
     },
-    documentation: () => {
+    options: () => {
       const { value: documentation } = state.documentation;
+      const { value: bundledProducts } = state.bundledProducts;
+      let bundledProductsLabel = 'Exclude the site management and event reporting data product';
+      if (Array.isArray(bundledProducts) && (bundledProducts.length > 0)) {
+        const hasProduct = bundledProducts.includes(
+          DownloadDataContext.SITE_MANAGEMENT_DATA_PRODUCT_CODE,
+        );
+        if (hasProduct) {
+          bundledProductsLabel = 'Include the site management and event reporting data product';
+        }
+      }
       return (
-        <Typography variant="body2" className={classes.summaryText}>
-          {`${documentation.charAt(0).toUpperCase()}${documentation.substring(1)}`}
-        </Typography>
+        <>
+          <ul>
+            <li>
+              <Typography variant="body2" className={classes.summaryText}>
+                {`${documentation.charAt(0).toUpperCase()}${documentation.substring(1)} Documentation`}
+              </Typography>
+            </li>
+            <li>
+              <Typography variant="body2" className={classes.summaryText}>
+                {bundledProductsLabel}
+              </Typography>
+            </li>
+          </ul>
+        </>
       );
     },
     packageType: () => {
@@ -227,9 +249,9 @@ export default function DownloadStepForm(props) {
     ),
 
     /**
-       DOCUMENTATION
+       DOWNLOAD PACKAGE OPTIONS
     */
-    documentation: () => {
+    options: () => {
       const neonFaqLink = (
         <Link
           target="_blank"
@@ -239,6 +261,17 @@ export default function DownloadStepForm(props) {
           NEON FAQ
         </Link>
       );
+      const siteManagementAndReportingLink = (
+        <Link
+          target="_blank"
+          href={RouteService.getProductDetailPath(
+            DownloadDataContext.SITE_MANAGEMENT_DATA_PRODUCT_CODE,
+          )}
+          data-gtm="download-data-dialog.neon-faq-link"
+        >
+          Site management and event reporting (DP1.10111.001)
+        </Link>
+      );
       const knbLink = ExternalHost.renderExternalHostLink(
         'https://eml.ecoinformatics.org',
         'KNB',
@@ -246,13 +279,22 @@ export default function DownloadStepForm(props) {
         state.productData.productCode,
       );
       const { value, validValues } = state.documentation;
+      const { value: bundledProductsValue } = state.bundledProducts;
+      const bundledProductDefaultValue = bundledProductsValue.includes(
+        DownloadDataContext.SITE_MANAGEMENT_DATA_PRODUCT_CODE,
+      ) || false;
       return (
         <Grid
           container
           spacing={2}
           alignItems="flex-start"
-          data-selenium="download-data-dialog.step-form.documentation"
+          data-selenium="download-data-dialog.step-form.options"
         >
+          <Grid item xs={12}>
+            <Typography variant="h6">
+              Do you want to include documentation?
+            </Typography>
+          </Grid>
           <Grid item xs={12} md={6}>
             <FormControl component="fieldset">
               <RadioGroup
@@ -261,7 +303,6 @@ export default function DownloadStepForm(props) {
                 value={value || ''}
                 onChange={(e) => {
                   setState('documentation', e.target.value);
-                  changeToNextUncompletedStep();
                 }}
               >
                 <FormControlLabel
@@ -301,6 +342,87 @@ export default function DownloadStepForm(props) {
                   {/* eslint-disable react/jsx-one-expression-per-line */}
                   EML files for this Data Product are included in all downloads.
                   Learn more about EML files in the {neonFaqLink} and at {knbLink}.
+                  {/* eslint-enable react/jsx-one-expression-per-line */}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={12}>
+            <Divider style={{ marginTop: '20px', marginBottom: '20px' }} />
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h6">
+              {/* eslint-disable react/jsx-one-expression-per-line */}
+              Do you want to include the {siteManagementAndReportingLink} data product?
+              {/* eslint-enable react/jsx-one-expression-per-line */}
+            </Typography>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <FormControl component="fieldset">
+              <RadioGroup
+                aria-label="Site management and reporting bundled product"
+                name="siteManagementAndReportingBundledProduct"
+                value={bundledProductDefaultValue}
+                onChange={(e) => {
+                  const selectedValue = e.target.value === 'true';
+                  const nextbundledProductsValue = [...bundledProductsValue];
+                  const hasProduct = nextbundledProductsValue.includes(
+                    DownloadDataContext.SITE_MANAGEMENT_DATA_PRODUCT_CODE,
+                  );
+                  if (selectedValue === true) {
+                    if (!hasProduct) {
+                      nextbundledProductsValue.push(
+                        DownloadDataContext.SITE_MANAGEMENT_DATA_PRODUCT_CODE,
+                      );
+                    }
+                  } else if (hasProduct) {
+                    const idx = nextbundledProductsValue.indexOf(
+                      DownloadDataContext.SITE_MANAGEMENT_DATA_PRODUCT_CODE,
+                    );
+                    nextbundledProductsValue.splice(idx, 1);
+                  }
+                  setState('bundledProducts', nextbundledProductsValue);
+                }}
+              >
+                <FormControlLabel
+                  className={classes.radio}
+                  // eslint-disable-next-line react/jsx-boolean-value
+                  value={true}
+                  control={<Radio />}
+                  label={(
+                    <div className={classes.radioLabel}>
+                      <Typography variant="h6">Include</Typography>
+                      <Typography variant="body2">
+                        Include the site management and reporting data product
+                      </Typography>
+                    </div>
+                  )}
+                />
+                <FormControlLabel
+                  className={classes.radio}
+                  value={false}
+                  control={<Radio />}
+                  label={(
+                    <div className={classes.radioLabel}>
+                      <Typography variant="h6">Exclude</Typography>
+                      <Typography variant="body2">
+                        Exclude the site management and reporting data product
+                      </Typography>
+                    </div>
+                  )}
+                />
+              </RadioGroup>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Card style={{ marginTop: Theme.spacing(1.5) }}>
+              <CardContent className={classes.startFlex}>
+                <InfoIcon fontSize="large" className={classes.calloutIcon} />
+                <Typography variant="body1">
+                  {/* eslint-disable react/jsx-one-expression-per-line */}
+                  For information about disturbances, land management activities, and other
+                  incidents that may impact data at NEON sites,
+                  include the {siteManagementAndReportingLink} data product in the download package.
                   {/* eslint-enable react/jsx-one-expression-per-line */}
                 </Typography>
               </CardContent>

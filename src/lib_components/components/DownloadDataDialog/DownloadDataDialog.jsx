@@ -132,6 +132,7 @@ export default function DownloadDataDialog() {
       fromManifest,
       fromAOPManifest,
       documentation,
+      bundledProducts,
       s3Files,
       release,
       latestRelease,
@@ -237,6 +238,7 @@ export default function DownloadDataDialog() {
       sites,
       dateRange,
       documentation,
+      bundledProducts,
       packageType,
     };
     if (fromAOPManifest) {
@@ -633,7 +635,7 @@ export default function DownloadDataDialog() {
   const getLZWCompressedConfig = () => {
     if (!allStepsComplete) { return ''; }
     // The subset of possible steps we actually want to persist in the GA event
-    const eventSteps = ['sites', 'dateRange'];
+    const eventSteps = ['sites', 'dateRange', 'bundledProducts'];
     if (requiredSteps.some((step) => step.key === 'documentation')) {
       eventSteps.push('documentation');
     }
@@ -642,7 +644,7 @@ export default function DownloadDataDialog() {
     }
     // Build the config for reporting
     const eventValues = {
-      sites, dateRange, documentation, packageType,
+      sites, dateRange, documentation, packageType, bundledProducts,
     };
     const eventConfig = { productCode: productData.productCode };
     eventSteps.forEach((step) => { eventConfig[step] = eventValues[step].value; });

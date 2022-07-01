@@ -19,6 +19,7 @@ export const buildManifestConfig = (
     sites: [],
     dateRange: [],
     documentation: false,
+    bundledProducts: [],
     packageType: '',
     isError: true,
   };
@@ -42,6 +43,7 @@ export const buildManifestConfig = (
   config.sites = selection.sites.value;
   config.dateRange = selection.dateRange.value;
   config.documentation = (selection.documentation.value === 'include');
+  config.bundledProducts = selection.bundledProducts.value;
   config.packageType = selection.packageType.value || defaultPackageType;
   return config;
 };
@@ -54,6 +56,14 @@ export const buildSiteCodesParams = (sites = new Array<string>(), camelCase = fa
   ), '');
 };
 
+// eslint-disable-next-line no-array-constructor
+export const buildBundledProductsParams = (bundledProducts = new Array<string>()): string => {
+  if (bundledProducts.length <= 0) { return ''; }
+  return bundledProducts.reduce((bpString, bp, index) => (
+    `${bpString}${index === 0 ? '' : '&'}bp=${bp}`
+  ), '');
+};
+
 export const buildManifestRequestUrl = (config: ManifestConfig, useBody = true): string => {
   const {
     productCode,
@@ -61,10 +71,12 @@ export const buildManifestRequestUrl = (config: ManifestConfig, useBody = true):
     dateRange,
     packageType,
     documentation,
+    bundledProducts,
   } = config;
   let url = NeonEnvironment.getFullDownloadApiPath('manifestRollup');
   if (!useBody) {
     const siteCodesParam = buildSiteCodesParams(sites);
+    const bundledProductsParam = buildBundledProductsParams(bundledProducts);
     const productCodeParam = productCode.startsWith('NEON.DOM.SITE')
       ? productCode
       : `NEON.DOM.SITE.${productCode}`;
@@ -75,8 +87,9 @@ export const buildManifestRequestUrl = (config: ManifestConfig, useBody = true):
       `pkgtype=${packageType}`,
       `includedocs=${documentation ? 'true' : 'false'}`,
       siteCodesParam,
+      bundledProductsParam,
     ];
-    url = `${url}?${params.join('&')}`;
+    url = `${url}?${params.filter((s: string) => (typeof s === 'string') && (s.length > 0)).join('&')}`;
   }
   return url;
 };
@@ -89,6 +102,7 @@ export const buildManifestRequestBody = (config: ManifestConfig): ManifestReques
     dateRange,
     packageType,
     documentation,
+    bundledProducts,
   } = config;
   const productCodeParam = productCode.startsWith('NEON.DOM.SITE')
     ? productCode
@@ -101,6 +115,7 @@ export const buildManifestRequestBody = (config: ManifestConfig): ManifestReques
     release,
     pkgType: packageType,
     includeDocs: documentation,
+    bundledProducts,
     presign: true,
   };
 };
@@ -182,6 +197,7 @@ export const downloadAopManifest = (
     manifestFiles: manifestS3Files,
     siteCodes,
     includeDocs,
+    bundledProducts: config.bundledProducts,
   };
 
   return downloadManifest(manifestRequest);

@@ -6,6 +6,7 @@ export interface ManifestRequest {
     endDateMonth: Nullable<string>;
     release: Nullable<string>;
     includeDocs: boolean;
+    bundledProducts: string[];
     pkgType: Nullable<string>;
     presign: boolean;
     manifestFiles?: ManifestFile[];
@@ -44,6 +45,7 @@ export interface ManifestConfig {
     sites: string[];
     dateRange: string[];
     documentation: boolean;
+    bundledProducts: string[];
     packageType: string;
     isError: boolean;
     errorMessage?: string;
@@ -54,6 +56,7 @@ export interface ManifestSelection {
     sites: SiteSelectionState;
     dateRange: DateRangeSelectionState;
     documentation: DocumentationSelectionState;
+    bundledProducts: BundledProductsSelectionState;
     packageType: PackageTypeSelectionState;
 }
 export interface ISelectionState {
@@ -70,6 +73,9 @@ export interface DateRangeSelectionState extends ISelectionState {
 }
 export interface DocumentationSelectionState extends ISelectionState {
     value: string;
+}
+export interface BundledProductsSelectionState extends ISelectionState {
+    value: string[];
 }
 export interface PackageTypeSelectionState extends ISelectionState {
     value: string;

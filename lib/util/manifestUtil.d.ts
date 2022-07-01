@@ -2,6 +2,7 @@ import { Nullable } from '../types/core';
 import { ManifestConfig, ManifestRequest, ManifestSelection } from '../types/manifest';
 export declare const buildManifestConfig: (selection: ManifestSelection, defaultPackageType?: string, isAop?: boolean) => ManifestConfig;
 export declare const buildSiteCodesParams: (sites?: string[], camelCase?: boolean) => string;
+export declare const buildBundledProductsParams: (bundledProducts?: string[]) => string;
 export declare const buildManifestRequestUrl: (config: ManifestConfig, useBody?: boolean) => string;
 export declare const buildManifestRequestBody: (config: ManifestConfig) => ManifestRequest;
 export declare const buildS3FilesRequestUrl: (productCode: string, site: string, yearMonth: string, release: Nullable<string>) => string;

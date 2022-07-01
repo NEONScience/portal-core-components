@@ -1,10 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DownloadStepForm Step documentation renders correctly 1`] = `
+exports[`DownloadStepForm Step externalExclusive renders correctly 1`] = `null`;
+
+exports[`DownloadStepForm Step options renders correctly 1`] = `
 <div
   className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-flex-start"
-  data-selenium="download-data-dialog.step-form.documentation"
+  data-selenium="download-data-dialog.step-form.options"
 >
+  <div
+    className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-h6"
+    >
+      Do you want to include documentation?
+    </h6>
+  </div>
   <div
     className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-6"
   >
@@ -227,10 +238,250 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
       </div>
     </div>
   </div>
+  <div
+    className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+  >
+    <hr
+      className="MuiDivider-root"
+      style={
+        Object {
+          "marginBottom": "20px",
+          "marginTop": "20px",
+        }
+      }
+    />
+  </div>
+  <div
+    className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+  >
+    <h6
+      className="MuiTypography-root MuiTypography-h6"
+    >
+      Do you want to include the 
+      <a
+        className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+        data-gtm="download-data-dialog.neon-faq-link"
+        href="https://data.neonscience.org/data-products/DP1.10111.001"
+        onBlur={[Function]}
+        onFocus={[Function]}
+        target="_blank"
+      >
+        Site management and event reporting (DP1.10111.001)
+      </a>
+       data product?
+    </h6>
+  </div>
+  <div
+    className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-6"
+  >
+    <fieldset
+      className="MuiFormControl-root"
+    >
+      <div
+        aria-label="Site management and reporting bundled product"
+        className="MuiFormGroup-root"
+        role="radiogroup"
+      >
+        <label
+          className="MuiFormControlLabel-root makeStyles-radio-8"
+        >
+          <span
+            aria-disabled={false}
+            className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-18 MuiRadio-root MuiRadio-colorSecondary MuiIconButton-colorSecondary"
+            onBlur={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex={null}
+          >
+            <span
+              className="MuiIconButton-label"
+            >
+              <input
+                checked={false}
+                className="PrivateSwitchBase-input-21"
+                disabled={false}
+                name="siteManagementAndReportingBundledProduct"
+                onChange={[Function]}
+                type="radio"
+                value={true}
+              />
+              <div
+                className="PrivateRadioButtonIcon-root-22"
+              >
+                <svg
+                  aria-hidden={true}
+                  className="MuiSvgIcon-root"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+                  />
+                </svg>
+                <svg
+                  aria-hidden={true}
+                  className="MuiSvgIcon-root PrivateRadioButtonIcon-layer-23"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M8.465 8.465C9.37 7.56 10.62 7 12 7C14.76 7 17 9.24 17 12C17 13.38 16.44 14.63 15.535 15.535C14.63 16.44 13.38 17 12 17C9.24 17 7 14.76 7 12C7 10.62 7.56 9.37 8.465 8.465Z"
+                  />
+                </svg>
+              </div>
+            </span>
+          </span>
+          <span
+            className="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+          >
+            <div
+              className="makeStyles-radioLabel-9"
+            >
+              <h6
+                className="MuiTypography-root MuiTypography-h6"
+              >
+                Include
+              </h6>
+              <p
+                className="MuiTypography-root MuiTypography-body2"
+              >
+                Include the site management and reporting data product
+              </p>
+            </div>
+          </span>
+        </label>
+        <label
+          className="MuiFormControlLabel-root makeStyles-radio-8"
+        >
+          <span
+            aria-disabled={false}
+            className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-18 MuiRadio-root MuiRadio-colorSecondary PrivateSwitchBase-checked-19 Mui-checked MuiIconButton-colorSecondary"
+            onBlur={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex={null}
+          >
+            <span
+              className="MuiIconButton-label"
+            >
+              <input
+                checked={true}
+                className="PrivateSwitchBase-input-21"
+                disabled={false}
+                name="siteManagementAndReportingBundledProduct"
+                onChange={[Function]}
+                type="radio"
+                value={false}
+              />
+              <div
+                className="PrivateRadioButtonIcon-root-22 PrivateRadioButtonIcon-checked-24"
+              >
+                <svg
+                  aria-hidden={true}
+                  className="MuiSvgIcon-root"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+                  />
+                </svg>
+                <svg
+                  aria-hidden={true}
+                  className="MuiSvgIcon-root PrivateRadioButtonIcon-layer-23"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M8.465 8.465C9.37 7.56 10.62 7 12 7C14.76 7 17 9.24 17 12C17 13.38 16.44 14.63 15.535 15.535C14.63 16.44 13.38 17 12 17C9.24 17 7 14.76 7 12C7 10.62 7.56 9.37 8.465 8.465Z"
+                  />
+                </svg>
+              </div>
+            </span>
+          </span>
+          <span
+            className="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+          >
+            <div
+              className="makeStyles-radioLabel-9"
+            >
+              <h6
+                className="MuiTypography-root MuiTypography-h6"
+              >
+                Exclude
+              </h6>
+              <p
+                className="MuiTypography-root MuiTypography-body2"
+              >
+                Exclude the site management and reporting data product
+              </p>
+            </div>
+          </span>
+        </label>
+      </div>
+    </fieldset>
+  </div>
+  <div
+    className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-6"
+  >
+    <div
+      className="MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded"
+      style={
+        Object {
+          "marginTop": 12,
+        }
+      }
+    >
+      <div
+        className="MuiCardContent-root makeStyles-startFlex-11"
+      >
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root makeStyles-calloutIcon-5 MuiSvgIcon-fontSizeLarge"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
+          />
+        </svg>
+        <p
+          className="MuiTypography-root MuiTypography-body1"
+        >
+          For information about disturbances, land management activities, and other incidents that may impact data at NEON sites, include the 
+          <a
+            className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+            data-gtm="download-data-dialog.neon-faq-link"
+            href="https://data.neonscience.org/data-products/DP1.10111.001"
+            onBlur={[Function]}
+            onFocus={[Function]}
+            target="_blank"
+          >
+            Site management and event reporting (DP1.10111.001)
+          </a>
+           data product in the download package.
+        </p>
+      </div>
+    </div>
+  </div>
 </div>
 `;
-
-exports[`DownloadStepForm Step externalExclusive renders correctly 1`] = `null`;
 
 exports[`DownloadStepForm Step packageType renders correctly 1`] = `
 <fieldset
@@ -663,17 +914,28 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
               }
             }
           >
-            Documentation
+            Package Options
           </h6>
         </div>
         <div
           className="makeStyles-stepSummaryContent-14"
         >
-          <p
-            className="MuiTypography-root makeStyles-summaryText-16 MuiTypography-body2"
-          >
-            Include
-          </p>
+          <ul>
+            <li>
+              <p
+                className="MuiTypography-root makeStyles-summaryText-16 MuiTypography-body2"
+              >
+                Include Documentation
+              </p>
+            </li>
+            <li>
+              <p
+                className="MuiTypography-root makeStyles-summaryText-16 MuiTypography-body2"
+              >
+                Exclude the site management and event reporting data product
+              </p>
+            </li>
+          </ul>
         </div>
       </div>
       <div
