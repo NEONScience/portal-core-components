@@ -157,6 +157,7 @@ const NeonEnvironment: INeonEnvironment = {
     data: (): string => '/data',
     prototype: (): string => '/prototype',
     documents: (): string => '/documents',
+    quickStartGuides: (): string => '/documents/quick-start-guides',
     products: (): string => '/products',
     productBundles: (): string => '/products/bundles',
     releases: (): string => '/releases',

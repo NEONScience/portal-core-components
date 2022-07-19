@@ -19,6 +19,13 @@ export interface ReleaseDataProductBundles {
 export interface Release extends IReleaseLike {
     dataProducts: UnknownRecord[];
 }
+export interface DataProductSpec {
+    specId: string;
+    specNumber: string;
+    specType: string;
+    specSize: number;
+    specDescription: string;
+}
 export interface NeonDocument {
     name: string;
     type: string;
