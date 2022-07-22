@@ -12,8 +12,9 @@ import Theme from '../Theme/Theme';
 import WarningCard from '../Card/WarningCard';
 
 import { StylesHook } from '../../types/muiTypes';
-import { NeonDocument } from '../../types/neonApi';
 import { existsNonEmpty } from '../../util/typeUtil';
+import { DocumentListItemModel } from './documentTypes';
+import { Nullable } from '../../types/core';
 
 const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
   // eslint-disable-next-line implicit-arrow-linebreak
@@ -24,12 +25,22 @@ const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
   })) as StylesHook;
 
 export interface DocumentListProps {
-  documents: NeonDocument[];
+  documents: DocumentListItemModel[];
+  makeDownloadableLink: Nullable<boolean>;
+  enableDownloadButton: Nullable<boolean>;
+  fetchVariants: Nullable<boolean>;
+  enableVariantChips: Nullable<boolean>;
 }
 
 const DocumentList: React.FC<DocumentListProps> = (props: DocumentListProps): JSX.Element => {
   const classes = useStyles(Theme);
-  const { documents }: DocumentListProps = props;
+  const {
+    documents,
+    makeDownloadableLink,
+    enableDownloadButton,
+    fetchVariants,
+    enableVariantChips,
+  }: DocumentListProps = props;
   if (!existsNonEmpty(documents)) {
     return (
       <div className={classes.container}>
@@ -41,12 +52,15 @@ const DocumentList: React.FC<DocumentListProps> = (props: DocumentListProps): JS
     );
   }
   const renderDocuments = (): JSX.Element[] => (
-    documents.map((document: NeonDocument, index: number): JSX.Element => ((
+    documents.map((document: DocumentListItemModel, index: number): JSX.Element => ((
       <DocumentListItem
         key={document.name}
-        makeDownloadableLink
         id={index}
         document={document}
+        makeDownloadableLink={makeDownloadableLink === true}
+        enableDownloadButton={enableDownloadButton}
+        fetchVariants={fetchVariants}
+        enableVariantChips={enableVariantChips}
       />
     )))
   );
@@ -59,4 +73,6 @@ const DocumentList: React.FC<DocumentListProps> = (props: DocumentListProps): JS
   );
 };
 
-export default DocumentList;
+const WrappedDocumentList = (Theme as any).getWrappedComponent(DocumentList);
+
+export default WrappedDocumentList;

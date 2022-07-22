@@ -175,4 +175,6 @@ const DocumentTabs: React.FC<DocumentTabsProps> = (props: DocumentTabsProps): JS
   );
 };
 
-export default DocumentTabs;
+const WrappedDocumentTabs = (Theme as any).getWrappedComponent(DocumentTabs);
+
+export default WrappedDocumentTabs;

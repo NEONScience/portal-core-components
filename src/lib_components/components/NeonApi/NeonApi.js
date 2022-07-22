@@ -291,6 +291,16 @@ const NeonApi = {
       false,
     )
   ),
+
+  /**
+   * Gets the RxJS Observable for the quick start guides endpoint for a given name
+   * @param {string} name The quick start guide name
+   * @param {string} version The quick start guide version
+   * @return The RxJS Ajax Observable
+   */
+  getQuickStartGuideDetailObservable: (name, version) => (
+    getJsonObservable(`${NeonEnvironment.getFullApiPath('quickStartGuides')}/details/${name}/${version}`)
+  ),
 };
 
 Object.freeze(NeonApi);

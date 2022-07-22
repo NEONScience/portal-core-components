@@ -49,3 +49,20 @@ export interface DataProductRelease extends IReleaseLike {
   url: string;
   productDoi: DataProductReleaseDoi;
 }
+
+export interface QuickStartGuideDocument {
+  name: string;
+  description: string;
+  type: string;
+  size: number;
+  md5: string;
+  generationDate: string;
+  url: string;
+}
+
+export interface QuickStartGuideVersion {
+  name: string;
+  version: number;
+  publishedDate: string;
+  documents: QuickStartGuideDocument[];
+}

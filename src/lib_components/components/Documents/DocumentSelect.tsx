@@ -124,4 +124,6 @@ const DocumentSelect: React.FC<DocumentSelectProps> = (props: DocumentSelectProp
   );
 };
 
-export default DocumentSelect;
+const WrappedDocumentSelect = (Theme as any).getWrappedComponent(DocumentSelect);
+
+export default WrappedDocumentSelect;

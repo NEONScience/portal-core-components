@@ -7,13 +7,21 @@ import PresentationIcon from '@material-ui/icons/Tv';
 import SpreadsheetIcon from '@material-ui/icons/GridOn';
 
 import { exists, existsNonEmpty, isStringNonEmpty } from '../util/typeUtil';
-import { DataProductSpec, NeonDocument } from '../types/neonApi';
+import { DataProductSpec, NeonDocument, QuickStartGuideDocument } from '../types/neonApi';
 import { Nullable } from '../types/core';
 
 export interface DocumentTypeListItemDef {
   match: (type: string) => boolean;
   title: (type?: string) => string;
   Icon: React.ReactNode;
+}
+
+export interface ParsedQsgNameResult {
+  name: string;
+  matchedName: string;
+  matchedVersion: string;
+  matchedExtension: string;
+  parsedVersion: number;
 }
 
 const documentTypes: Record<string, DocumentTypeListItemDef> = {
@@ -98,14 +106,24 @@ const defaultDocumentType: DocumentTypeListItemDef = {
 
 export interface IDocumentService {
   formatBytes: (bytes: number) => string;
+  resolveDocumentType: (document: NeonDocument) => DocumentTypeListItemDef;
+  getDocumentTypeTitle: (document: NeonDocument) => string;
+  findFirstByDocumentTypeTitle: (
+    documents: NeonDocument[],
+    typeTitle: string,
+  ) => Nullable<NeonDocument>;
   getDocumentTypeListItemDefs: () => Record<string, DocumentTypeListItemDef>;
   getDocumentTypeListItemDefKeys: () => string[];
   getDefaultDocumentTypeListItemDef: () => DocumentTypeListItemDef;
   isQuickStartGuide: (doc: NeonDocument) => boolean;
   isQuickStartGuideName: (name: Nullable<string>) => boolean;
+  getQuickStartGuideNameRegex: () => RegExp;
+  parseQuickStartGuideName: (name: string) => Nullable<ParsedQsgNameResult>;
   isViewerSupported: (doc: NeonDocument) => boolean;
   transformSpecs: (specs: DataProductSpec[]) => NeonDocument[];
   transformSpec: (spec: DataProductSpec) => NeonDocument;
+  transformQuickStartGuideDocuments: (documents: QuickStartGuideDocument[]) => NeonDocument[];
+  transformQuickStartGuideDocument: (document: QuickStartGuideDocument) => NeonDocument;
 }
 
 const DocumentService: IDocumentService = {
@@ -119,6 +137,34 @@ const DocumentService: IDocumentService = {
     const precision: number = Math.floor(3 - ((log - scale) * 3));
     return `${(bytes / (1024 ** scale)).toFixed(precision)} ${scales[scale]}`;
   },
+  resolveDocumentType: (document: NeonDocument): DocumentTypeListItemDef => {
+    let documentType: DocumentTypeListItemDef = DocumentService.getDefaultDocumentTypeListItemDef();
+    if (typeof document.type === 'string') {
+      const matchKey = DocumentService.getDocumentTypeListItemDefKeys()
+        .find((key) => DocumentService.getDocumentTypeListItemDefs()[key].match(document.type));
+      if (matchKey) {
+        documentType = DocumentService.getDocumentTypeListItemDefs()[matchKey];
+      }
+    }
+    return documentType;
+  },
+  getDocumentTypeTitle: (document: NeonDocument): string => {
+    const documentType: DocumentTypeListItemDef = DocumentService.resolveDocumentType(document);
+    const { title: typeTitle }: DocumentTypeListItemDef = documentType;
+    return typeTitle(document.type);
+  },
+  findFirstByDocumentTypeTitle: (
+    documents: NeonDocument[],
+    typeTitle: string,
+  ): Nullable<NeonDocument> => {
+    if (!existsNonEmpty(documents) || !isStringNonEmpty(typeTitle)) {
+      return null;
+    }
+    return documents.find((document: NeonDocument): boolean => {
+      const typeTitleString = DocumentService.getDocumentTypeTitle(document);
+      return typeTitle.localeCompare(typeTitleString) === 0;
+    });
+  },
   getDocumentTypeListItemDefs: (): Record<string, DocumentTypeListItemDef> => documentTypes,
   getDocumentTypeListItemDefKeys: (): string[] => documentTypeKeys,
   getDefaultDocumentTypeListItemDef: (): DocumentTypeListItemDef => defaultDocumentType,
@@ -128,10 +174,29 @@ const DocumentService: IDocumentService = {
   isQuickStartGuideName: (name: Nullable<string>): boolean => (
     isStringNonEmpty(name) && (name as string).startsWith('NEON.QSG.')
   ),
+  getQuickStartGuideNameRegex: (): RegExp => (
+    new RegExp(/^(?<name>NEON[.]QSG[.]DP[0-9]{1}[.][0-9]{5}[.][0-9]{3})(?<version>v(?<versionNumber>[0-9]+))*(?<extension>[.](?<extensionName>[a-z]+))*$/)
+  ),
+  parseQuickStartGuideName: (name: string): Nullable<ParsedQsgNameResult> => {
+    const regex = DocumentService.getQuickStartGuideNameRegex();
+    if (!regex) return null;
+    const matches: RegExpExecArray|null = regex.exec(name);
+    if (!matches) return null;
+    if (matches.length <= 0) return null;
+    return {
+      name,
+      matchedName: matches[1],
+      matchedVersion: matches[2],
+      matchedExtension: matches[4],
+      parsedVersion: isStringNonEmpty(matches[3])
+        ? parseInt(matches[3], 10)
+        : -1,
+    };
+  },
   isViewerSupported: (doc: NeonDocument): boolean => (
     exists(doc)
-      && isStringNonEmpty(doc.type)
-      && ['application/pdf'].includes(doc.type)
+    && isStringNonEmpty(doc.type)
+    && ['application/pdf'].includes(doc.type)
   ),
   transformSpecs: (specs: DataProductSpec[]): NeonDocument[] => {
     if (!existsNonEmpty(specs)) {
@@ -146,6 +211,20 @@ const DocumentService: IDocumentService = {
     type: spec.specType,
     size: spec.specSize,
     description: spec.specDescription,
+  }),
+  transformQuickStartGuideDocuments: (documents: QuickStartGuideDocument[]): NeonDocument[] => {
+    if (!existsNonEmpty(documents)) {
+      return [];
+    }
+    return documents.map((document: QuickStartGuideDocument): NeonDocument => (
+      DocumentService.transformQuickStartGuideDocument(document)
+    ));
+  },
+  transformQuickStartGuideDocument: (document: QuickStartGuideDocument): NeonDocument => ({
+    name: document.name,
+    type: document.type,
+    size: document.size,
+    description: document.description,
   }),
 };
 

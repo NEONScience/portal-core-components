@@ -27,4 +27,5 @@ declare namespace NeonApi {
     function getSiteLocationHierarchyObservable(siteCode: string): import("rxjs").Observable<any>;
     function getLocationObservable(location: string): import("rxjs").Observable<any>;
     function getArcgisAssetObservable(feature: string, siteCode: string): import("rxjs").Observable<any>;
+    function getQuickStartGuideDetailObservable(name: string, version: string): import("rxjs").Observable<any>;
 }

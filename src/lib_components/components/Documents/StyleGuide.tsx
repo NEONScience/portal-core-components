@@ -15,6 +15,7 @@ import DocumentTabs from './DocumentTabs';
 import DocumentViewer from './DocumentViewer';
 import Theme from '../Theme/Theme';
 import { NeonDocument } from '../../types/neonApi';
+import { DocumentListItemModel } from './documentTypes';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -55,6 +56,48 @@ export default function StyleGuide() {
       type: 'invalid',
       size: 0,
       description: 'Invalid document',
+    },
+  ];
+  const docsList: DocumentListItemModel[] = [
+    {
+      name: 'NEON.QSG.DP1.00001.001v1.pdf',
+      type: 'application/pdf',
+      size: 170516,
+      description: 'Quick Start Guide for 2D wind speed and direction (DP1.00001.001)',
+      variants: [
+        {
+          name: 'NEON.QSG.DP1.00001.001v1.pdf',
+          type: 'application/pdf',
+          size: 170516,
+          description: 'Quick Start Guide for 2D wind speed and direction (DP1.00001.001)',
+        },
+        {
+          name: 'NEON.QSG.DP1.00001.001v1.html',
+          description: 'HTML Quick Start Guide for 2D wind speed and direction (NEON.DOM.SITE.DP1.00001.001)',
+          type: 'text/html',
+          size: 4287380,
+        },
+        {
+          name: 'NEON.QSG.DP1.00001.001v1.md',
+          description: 'Markdown Quick Start Guide for 2D wind speed and direction (NEON.DOM.SITE.DP1.00001.001)',
+          type: 'text/markdown',
+          size: 3556,
+        },
+      ],
+    },
+    {
+      name: 'NEON.DOC.000230vA.pdf',
+      type: 'application/pdf',
+      size: 599913,
+      description: 'NEON sensor command, control and configuration – Barometric pressure',
+      variants: [],
+    },
+    {
+      name: 'invalid.pdf',
+      type: 'invalid',
+      size: 0,
+      description: 'Invalid document',
+      variants: [],
     },
   ];
   return (
@@ -127,12 +170,16 @@ const docs: NeonDocument[] = [
   },
 ];
 
-<DocumentList documents={docs} />
+<DocumentList documents={docs} makeDownloadableLink enableDownloadButton />
         `}
       </CodeBlock>
       <ExampleBlock>
         <Paper className={classes.paper}>
-          <DocumentList documents={docs} />
+          <DocumentList
+            documents={docsList}
+            enableDownloadButton
+            enableVariantChips
+          />
         </Paper>
       </ExampleBlock>
 

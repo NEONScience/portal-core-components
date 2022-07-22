@@ -1,9 +1,12 @@
-import React from 'react';
-import { NeonDocument } from '../../types/neonApi';
+import { Nullable } from '../../types/core';
+import { DocumentListItemModel } from './documentTypes';
 export interface DocumentListItemProps {
     id: number;
-    document: NeonDocument;
+    document: DocumentListItemModel;
     makeDownloadableLink: boolean;
+    enableDownloadButton: Nullable<boolean>;
+    fetchVariants: Nullable<boolean>;
+    enableVariantChips: Nullable<boolean>;
 }
-declare const DocumentListItem: React.FC<DocumentListItemProps>;
-export default DocumentListItem;
+declare const WrappedDocumentListItem: any;
+export default WrappedDocumentListItem;
