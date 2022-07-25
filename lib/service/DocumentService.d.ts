@@ -13,6 +13,7 @@ export interface ParsedQsgNameResult {
     matchedExtension: string;
     parsedVersion: number;
 }
+export declare type DocumentCallback = (document: NeonDocument) => void;
 export interface IDocumentService {
     formatBytes: (bytes: number) => string;
     resolveDocumentType: (document: NeonDocument) => DocumentTypeListItemDef;
@@ -30,6 +31,17 @@ export interface IDocumentService {
     transformSpec: (spec: DataProductSpec) => NeonDocument;
     transformQuickStartGuideDocuments: (documents: QuickStartGuideDocument[]) => NeonDocument[];
     transformQuickStartGuideDocument: (document: QuickStartGuideDocument) => NeonDocument;
+    downloadDocument: (document: NeonDocument, onSuccessCb?: DocumentCallback, onErrorCb?: DocumentCallback) => void;
+    /**
+     * Utilize save as APIs to trigger a document download.
+     * EXPERIMENTAL! Note that this utilizes not-yet-standard web APIs
+     * that will not work across all browsers.
+     * @param document
+     * @param onSuccessCb
+     * @param onErrorCb
+     * @return
+     */
+    saveDocument: (document: NeonDocument, onSuccessCb?: DocumentCallback, onErrorCb?: DocumentCallback) => void;
 }
 declare const DocumentService: IDocumentService;
 export default DocumentService;

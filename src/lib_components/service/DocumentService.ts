@@ -6,6 +6,7 @@ import ImageIcon from '@material-ui/icons/Photo';
 import PresentationIcon from '@material-ui/icons/Tv';
 import SpreadsheetIcon from '@material-ui/icons/GridOn';
 
+import NeonEnvironment from '../components/NeonEnvironment/NeonEnvironment';
 import { exists, existsNonEmpty, isStringNonEmpty } from '../util/typeUtil';
 import { DataProductSpec, NeonDocument, QuickStartGuideDocument } from '../types/neonApi';
 import { Nullable } from '../types/core';
@@ -104,6 +105,22 @@ const defaultDocumentType: DocumentTypeListItemDef = {
   Icon: FileIcon,
 };
 
+const getFilenameFromContentDisposition = (response: Response): Nullable<string> => {
+  let filename: Nullable<string> = null;
+  const contentDisposition: string|null = response.headers.get('content-disposition');
+  if (isStringNonEmpty(contentDisposition)) {
+    const filenameSplit: string[]|undefined = contentDisposition?.split('filename=');
+    const splitLength = (filenameSplit ? filenameSplit.length : -1);
+    if (existsNonEmpty(filenameSplit) && (splitLength >= 2)) {
+      const quotedFilename: string = (filenameSplit as string[])[1];
+      filename = quotedFilename.replaceAll('"', '');
+    }
+  }
+  return filename;
+};
+
+export type DocumentCallback = (document: NeonDocument) => void;
+
 export interface IDocumentService {
   formatBytes: (bytes: number) => string;
   resolveDocumentType: (document: NeonDocument) => DocumentTypeListItemDef;
@@ -124,6 +141,25 @@ export interface IDocumentService {
   transformSpec: (spec: DataProductSpec) => NeonDocument;
   transformQuickStartGuideDocuments: (documents: QuickStartGuideDocument[]) => NeonDocument[];
   transformQuickStartGuideDocument: (document: QuickStartGuideDocument) => NeonDocument;
+  downloadDocument: (
+    document: NeonDocument,
+    onSuccessCb?: DocumentCallback,
+    onErrorCb?: DocumentCallback,
+  ) => void;
+  /**
+   * Utilize save as APIs to trigger a document download.
+   * EXPERIMENTAL! Note that this utilizes not-yet-standard web APIs
+   * that will not work across all browsers.
+   * @param document
+   * @param onSuccessCb
+   * @param onErrorCb
+   * @return
+   */
+  saveDocument: (
+    document: NeonDocument,
+    onSuccessCb?: DocumentCallback,
+    onErrorCb?: DocumentCallback,
+  ) => void;
 }
 
 const DocumentService: IDocumentService = {
@@ -226,6 +262,142 @@ const DocumentService: IDocumentService = {
     size: document.size,
     description: document.description,
   }),
+  downloadDocument: (
+    document: NeonDocument,
+    onSuccessCb?: DocumentCallback,
+    onErrorCb?: DocumentCallback,
+  ): void => {
+    const apiPath = DocumentService.isQuickStartGuide(document)
+      ? `${NeonEnvironment.getFullApiPath('quickStartGuides')}/${document.name}`
+      : `${NeonEnvironment.getFullApiPath('documents')}/${document.name}`;
+    fetch(apiPath, { method: 'HEAD' })
+      .then((response: Response): void => {
+        if (!response.ok) {
+          throw new Error('Invalid HEAD response');
+        }
+        let filename: Nullable<string> = getFilenameFromContentDisposition(response);
+        if (!isStringNonEmpty(filename)) {
+          filename = document.name;
+        }
+        fetch(apiPath)
+          .then((downloadResponse: Response): Promise<Blob> => {
+            if (!downloadResponse.ok || !downloadResponse.body) {
+              throw new Error('Invalid download response');
+            }
+            return downloadResponse.blob();
+          })
+          .then((blob: Blob): void => {
+            try {
+              const link = window.document.createElement('a');
+              link.href = URL.createObjectURL(blob);
+              link.setAttribute('download', filename as string);
+              window.document.body.appendChild(link);
+              link.click();
+              window.document.body.removeChild(link);
+              if (onSuccessCb) {
+                onSuccessCb(document);
+              }
+            } catch (e: unknown) {
+              // eslint-disable-next-line no-console
+              console.error(e);
+              if (onErrorCb) {
+                onErrorCb(document);
+              }
+            }
+          })
+          .catch((err: unknown): void => {
+            // eslint-disable-next-line no-console
+            console.error(err);
+            if (onErrorCb) {
+              onErrorCb(document);
+            }
+          });
+      })
+      .catch((err: unknown): void => {
+        // eslint-disable-next-line no-console
+        console.error(err);
+        if (onErrorCb) {
+          onErrorCb(document);
+        }
+      });
+  },
+  /**
+   * Utilize save as APIs to trigger a document download.
+   * EXPERIMENTAL! Note that this utilizes not-yet-standard web APIs
+   * that will not work across all browsers.
+   * @param document
+   * @param onSuccessCb
+   * @param onErrorCb
+   * @return
+   */
+  saveDocument: (
+    document: NeonDocument,
+    onSuccessCb?: DocumentCallback,
+    onErrorCb?: DocumentCallback,
+  ): void => {
+    if (typeof window.showSaveFilePicker !== 'function') {
+      // eslint-disable-next-line no-console
+      console.error('Operation not supported');
+      if (onErrorCb) {
+        onErrorCb(document);
+      }
+    }
+    const apiPath = DocumentService.isQuickStartGuide(document)
+      ? `${NeonEnvironment.getFullApiPath('quickStartGuides')}/${document.name}`
+      : `${NeonEnvironment.getFullApiPath('documents')}/${document.name}`;
+    fetch(apiPath, { method: 'HEAD' })
+      .then((response: Response): void => {
+        if (!response.ok) {
+          throw new Error('Invalid HEAD response');
+        }
+        let filename: Nullable<string> = getFilenameFromContentDisposition(response);
+        if (!isStringNonEmpty(filename)) {
+          filename = document.name;
+        }
+        const saveOpts: SaveFilePickerOptions = {
+          suggestedName: filename as string,
+        };
+        window.showSaveFilePicker(saveOpts)
+          .then((fileHandle: FileSystemFileHandle): Promise<FileSystemWritableFileStream> => (
+            fileHandle.createWritable()
+          ))
+          .then((writable: FileSystemWritableFileStream): void => {
+            fetch(apiPath)
+              .then((downloadResponse: Response): Promise<void> => {
+                if (!downloadResponse.ok || !downloadResponse.body) {
+                  throw new Error('Invalid download response');
+                }
+                return downloadResponse.body.pipeTo(writable);
+              })
+              .then((value: void|never): void => {
+                if (onSuccessCb) {
+                  onSuccessCb(document);
+                }
+              })
+              .catch((err: unknown): void => {
+                // eslint-disable-next-line no-console
+                console.error(err);
+                if (onErrorCb) {
+                  onErrorCb(document);
+                }
+              });
+          })
+          .catch((err: unknown): void => {
+            // eslint-disable-next-line no-console
+            console.error(err);
+            if (onErrorCb) {
+              onErrorCb(document);
+            }
+          });
+      })
+      .catch((err: unknown): void => {
+        // eslint-disable-next-line no-console
+        console.error(err);
+        if (onErrorCb) {
+          onErrorCb(document);
+        }
+      });
+  },
 };
 
 Object.freeze(DocumentService);

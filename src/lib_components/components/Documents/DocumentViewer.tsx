@@ -112,7 +112,7 @@ const DocumentViewer: React.FC<DocumentViewerProps> = (props: DocumentViewerProp
       return (
         <ErrorCard
           title="Document Error"
-          message="This document type is not supported and could not be displayed"
+          message="This document type is not supported or could not be displayed"
         />
       );
     }

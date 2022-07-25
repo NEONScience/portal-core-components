@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 
+import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -9,6 +10,7 @@ import CodeBlock from '../../../components/CodeBlock';
 import DocBlock from '../../../components/DocBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 
+import DialogBase from '../DialogBase/DialogBase';
 import DocumentList from './DocumentList';
 import DocumentSelect from './DocumentSelect';
 import DocumentTabs from './DocumentTabs';
@@ -32,6 +34,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function StyleGuide() {
   const classes = useStyles(Theme);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [tabDialogOpen, setTabDialogOpen] = useState(false);
   const exampleDoc: NeonDocument = {
     name: 'NEON.DOC.000780vB.pdf',
     type: 'application/pdf',
@@ -64,26 +68,7 @@ export default function StyleGuide() {
       type: 'application/pdf',
       size: 170516,
       description: 'Quick Start Guide for 2D wind speed and direction (DP1.00001.001)',
-      variants: [
-        {
-          name: 'NEON.QSG.DP1.00001.001v1.pdf',
-          type: 'application/pdf',
-          size: 170516,
-          description: 'Quick Start Guide for 2D wind speed and direction (DP1.00001.001)',
-        },
-        {
-          name: 'NEON.QSG.DP1.00001.001v1.html',
-          description: 'HTML Quick Start Guide for 2D wind speed and direction (NEON.DOM.SITE.DP1.00001.001)',
-          type: 'text/html',
-          size: 4287380,
-        },
-        {
-          name: 'NEON.QSG.DP1.00001.001v1.md',
-          description: 'Markdown Quick Start Guide for 2D wind speed and direction (NEON.DOM.SITE.DP1.00001.001)',
-          type: 'text/markdown',
-          size: 3556,
-        },
-      ],
+      variants: [],
     },
     {
       name: 'NEON.DOC.000230vA.pdf',
@@ -149,28 +134,9 @@ const exampleDoc: NeonDocument = {
         {`
 import DocumentList from 'portal-core-components/lib/components/Documents/DocumentList';
 
-const docs: NeonDocument[] = [
-  {
-    name: 'NEON.QSG.DP1.00001.001v1.pdf',
-    type: 'application/pdf',
-    size: 170516,
-    description: 'Quick Start Guide for 2D wind speed and direction (DP1.00001.001)',
-  },
-  {
-    name: 'NEON.DOC.000230vA.pdf',
-    type: 'application/pdf',
-    size: 599913,
-    description: 'NEON sensor command, control and configuration – Barometric pressure',
-  },
-  {
-    name: 'invalid.pdf',
-    type: 'invalid',
-    size: 0,
-    description: 'Invalid document',
-  },
-];
+const docs: NeonDocument[] = [...];
 
-<DocumentList documents={docs} makeDownloadableLink enableDownloadButton />
+<DocumentList documents={docs} enableDownloadButton enableVariantChips fetchVariants />
         `}
       </CodeBlock>
       <ExampleBlock>
@@ -179,6 +145,7 @@ const docs: NeonDocument[] = [
             documents={docsList}
             enableDownloadButton
             enableVariantChips
+            fetchVariants
           />
         </Paper>
       </ExampleBlock>
@@ -192,26 +159,7 @@ const docs: NeonDocument[] = [
         {`
 import DocumentTabs from 'portal-core-components/lib/components/Documents/DocumentTabs';
 
-const docs: NeonDocument[] = [
-  {
-    name: 'NEON.QSG.DP1.00001.001v1.pdf',
-    type: 'application/pdf',
-    size: 170516,
-    description: 'Quick Start Guide for 2D wind speed and direction (DP1.00001.001)',
-  },
-  {
-    name: 'NEON.DOC.000230vA.pdf',
-    type: 'application/pdf',
-    size: 599913,
-    description: 'NEON sensor command, control and configuration – Barometric pressure',
-  },
-  {
-    name: 'invalid.pdf',
-    type: 'invalid',
-    size: 0,
-    description: 'Invalid document',
-  },
-];
+const docs: NeonDocument[] = [...];
 
 <DocumentTabs documents={docs} />
         `}
@@ -229,26 +177,7 @@ const docs: NeonDocument[] = [
         {`
 import DocumentSelect from 'portal-core-components/lib/components/Documents/DocumentSelect';
 
-const docs: NeonDocument[] = [
-  {
-    name: 'NEON.QSG.DP1.00001.001v1.pdf',
-    type: 'application/pdf',
-    size: 170516,
-    description: 'Quick Start Guide for 2D wind speed and direction (DP1.00001.001)',
-  },
-  {
-    name: 'NEON.DOC.000230vA.pdf',
-    type: 'application/pdf',
-    size: 599913,
-    description: 'NEON sensor command, control and configuration – Barometric pressure',
-  },
-  {
-    name: 'invalid.pdf',
-    type: 'invalid',
-    size: 0,
-    description: 'Invalid document',
-  },
-];
+const docs: NeonDocument[] = [...];
 
 <DocumentSelect documents={docs} />
         `}
@@ -257,6 +186,45 @@ const docs: NeonDocument[] = [
         <Paper className={classes.paper}>
           <DocumentSelect documents={docs} />
         </Paper>
+      </ExampleBlock>
+
+      <Divider className={classes.divider} />
+      <Typography variant="h6" component="h4" gutterBottom>Example Document Dialog</Typography>
+      <DocBlock>
+        Dialog for displaying documents.
+      </DocBlock>
+      <ExampleBlock>
+        <div style={{ textAlign: 'center' }}>
+          <Button variant="contained" onClick={() => setDialogOpen(true)}>
+            Open Document Dialog
+          </Button>
+          <br />
+          <br />
+          <Button variant="contained" onClick={() => setTabDialogOpen(true)}>
+            Open Document Tabs Dialog
+          </Button>
+          <DialogBase
+            open={dialogOpen}
+            title="View Document"
+            onClose={() => setDialogOpen(false)}
+            data-selenium="document-viewer-dialog"
+            nopaper
+          >
+            <DocumentViewer
+              document={exampleDoc}
+              width={800}
+            />
+          </DialogBase>
+          <DialogBase
+            open={tabDialogOpen}
+            title="View Documents"
+            onClose={() => setTabDialogOpen(false)}
+            data-selenium="document-tab-viewer-dialog"
+            nopaper
+          >
+            <DocumentTabs documents={docs} />
+          </DialogBase>
+        </div>
       </ExampleBlock>
     </>
   );

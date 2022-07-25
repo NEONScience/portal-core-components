@@ -280,6 +280,7 @@ export default function BasicComponents() {
           <SplitButton
             name="split-button-outlined-small"
             options={['One', 'Two', 'Three']}
+            selectedOption="One"
             // eslint-disable-next-line no-console
             onClick={(option) => console.log(`clicked ${option}`)}
             // eslint-disable-next-line no-console
@@ -290,6 +291,7 @@ export default function BasicComponents() {
           <SplitButton
             name="split-button-outlined"
             options={['One', 'Two', 'Three']}
+            selectedOption="One"
             // eslint-disable-next-line no-console
             onClick={(option) => console.log(`clicked ${option}`)}
             // eslint-disable-next-line no-console
@@ -300,6 +302,7 @@ export default function BasicComponents() {
           <SplitButton
             name="split-button-outlined-large"
             options={['One', 'Two', 'Three']}
+            selectedOption="One"
             // eslint-disable-next-line no-console
             onClick={(option) => console.log(`clicked ${option}`)}
             // eslint-disable-next-line no-console
@@ -312,6 +315,7 @@ export default function BasicComponents() {
           <SplitButton
             name="split-button-contained-small"
             options={['One', 'Two', 'Three']}
+            selectedOption="One"
             // eslint-disable-next-line no-console
             onClick={(option) => console.log(`clicked ${option}`)}
             // eslint-disable-next-line no-console
@@ -322,6 +326,7 @@ export default function BasicComponents() {
           <SplitButton
             name="split-button-contained"
             options={['One', 'Two', 'Three']}
+            selectedOption="One"
             // eslint-disable-next-line no-console
             onClick={(option) => console.log(`clicked ${option}`)}
             // eslint-disable-next-line no-console
@@ -332,6 +337,7 @@ export default function BasicComponents() {
           <SplitButton
             name="split-button-contained-large"
             options={['One', 'Two', 'Three']}
+            selectedOption="One"
             // eslint-disable-next-line no-console
             onClick={(option) => console.log(`clicked ${option}`)}
             // eslint-disable-next-line no-console

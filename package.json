@@ -19,6 +19,7 @@
     "@types/react-router": "^5.1.8",
     "@types/react-router-dom": "^5.1.5",
     "@types/sockjs-client": "^1.1.1",
+    "@types/wicg-file-system-access": "^2020.9.5",
     "clsx": "^1.1.0",
     "core-js": "^3.2.1",
     "d3-drag": "^1.2.3",

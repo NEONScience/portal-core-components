@@ -23,6 +23,7 @@ interface SplitButtonProps {
   onClick: (selectedOption: string) => void;
   onChange: (selectedOption: string) => void;
   buttonGroupProps: Nullable<ButtonGroupProps>;
+  buttonMenuProps: Nullable<ButtonProps>;
   buttonProps: Nullable<ButtonProps>;
   selectedOptionDisplayCallback: Nullable<(selectedOption: string) => string>;
 }
@@ -36,6 +37,7 @@ const SplitButton: React.FC<SplitButtonProps> = (props: SplitButtonProps): JSX.E
     onClick,
     onChange,
     buttonGroupProps,
+    buttonMenuProps,
     buttonProps,
   }: SplitButtonProps = props;
   const [open, setOpen] = useState(false);
@@ -54,6 +56,13 @@ const SplitButton: React.FC<SplitButtonProps> = (props: SplitButtonProps): JSX.E
   };
   if (exists(buttonProps)) {
     appliedButtonProps = buttonProps as ButtonProps;
+  }
+  let appliedButtonMenuProps: ButtonProps = {
+    color: 'primary',
+    size: 'small',
+  };
+  if (exists(buttonMenuProps)) {
+    appliedButtonMenuProps = buttonMenuProps as ButtonProps;
   }
 
   useEffect(() => {
@@ -98,13 +107,18 @@ const SplitButton: React.FC<SplitButtonProps> = (props: SplitButtonProps): JSX.E
           {...appliedButtonGroupProps}
           ref={anchorRef}
         >
-          <Button onClick={handleClick}>{renderSelectedOption()}</Button>
+          <Button
+            {...appliedButtonProps}
+            onClick={handleClick}
+          >
+            {renderSelectedOption()}
+          </Button>
           <Button
             aria-controls={open ? `${name}-split-button-menu` : undefined}
             aria-expanded={open ? 'true' : undefined}
             aria-label={`${name}-split-button-select`}
             aria-haspopup="menu"
-            {...appliedButtonProps}
+            {...appliedButtonMenuProps}
             onClick={handleToggle}
           >
             <ArrowDropDownIcon />

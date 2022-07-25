@@ -12,10 +12,12 @@ import cloneDeep from 'lodash/cloneDeep';
 
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import Typography from '@material-ui/core/Typography';
 
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import {
@@ -24,6 +26,9 @@ import {
   Theme as MuiTheme,
 } from '@material-ui/core/styles';
 
+import DownloadIcon from '@material-ui/icons/SaveAlt';
+
+import ErrorCard from '../Card/ErrorCard';
 import NeonApi from '../NeonApi';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import SplitButton from '../Button/SplitButton';
@@ -72,6 +77,16 @@ const useStyles = (
     marginRight: '5px',
     fontWeight: 500,
   },
+  variantFetchingLabel: {
+    lineHeight: '24px',
+  },
+  variantFetchingProgress: {
+    marginRight: '36px',
+    marginLeft: '36px',
+  },
+  downloadErrorContainer: {
+    marginTop: muiTheme.spacing(2),
+  },
 })) as StylesHook;
 
 enum ActionTypes {
@@ -80,6 +95,10 @@ enum ActionTypes {
   FETCH_VARIANTS_SUCCEEDED = 'FETCH_VARIANTS_SUCCEEDED',
 
   SET_SELECTED_VARIANT = 'SET_SELECTED_VARIANT',
+
+  DOWNLOAD_IDLE = 'DOWNLOAD_IDLE',
+  DOWNLOAD_STARTED = 'DOWNLOAD_STARTED',
+  DOWNLOAD_FAILED = 'DOWNLOAD_FAILED',
 }
 
 interface FetchVariantsStartedAction extends AnyAction {
@@ -97,12 +116,24 @@ interface SetSelectedVariantAction extends AnyAction {
   type: typeof ActionTypes.SET_SELECTED_VARIANT;
   variant: NeonDocument;
 }
+interface DownloadIdleAction extends AnyAction {
+  type: typeof ActionTypes.DOWNLOAD_IDLE;
+}
+interface DownloadStartedAction extends AnyAction {
+  type: typeof ActionTypes.DOWNLOAD_STARTED;
+}
+interface DownloadFailedAction extends AnyAction {
+  type: typeof ActionTypes.DOWNLOAD_FAILED;
+}
 
 type DocumentListItemActionTypes = (
   FetchVariantsStartedAction
   | FetchVariantsFailedAction
   | FetchVariantsSucceededAction
   | SetSelectedVariantAction
+  | DownloadIdleAction
+  | DownloadStartedAction
+  | DownloadFailedAction
 );
 
 const ActionCreator = {
@@ -120,6 +151,15 @@ const ActionCreator = {
   setSelectedVariant: (variant: NeonDocument): SetSelectedVariantAction => ({
     type: ActionTypes.SET_SELECTED_VARIANT,
     variant,
+  }),
+  downloadIdle: (): DownloadIdleAction => ({
+    type: ActionTypes.DOWNLOAD_IDLE,
+  }),
+  downloadStarted: (): DownloadStartedAction => ({
+    type: ActionTypes.DOWNLOAD_STARTED,
+  }),
+  downloadFailed: (): DownloadFailedAction => ({
+    type: ActionTypes.DOWNLOAD_FAILED,
   }),
 };
 
@@ -140,6 +180,7 @@ interface DocumentListItemState {
   fetchVariants: FetchStatusState;
   variants: NeonDocument[];
   selectedVariant: Nullable<NeonDocument>;
+  downloadStatus: FetchStatus;
 }
 
 const DEFAULT_STATE: DocumentListItemState = {
@@ -149,6 +190,7 @@ const DEFAULT_STATE: DocumentListItemState = {
   },
   variants: [],
   selectedVariant: null,
+  downloadStatus: FetchStatus.IDLE,
 };
 
 const documentListItemReducer = (
@@ -180,6 +222,15 @@ const documentListItemReducer = (
     case ActionTypes.SET_SELECTED_VARIANT:
       setSelectedVariantAction = (action as SetSelectedVariantAction);
       newState.selectedVariant = setSelectedVariantAction.variant;
+      return newState;
+    case ActionTypes.DOWNLOAD_IDLE:
+      newState.downloadStatus = FetchStatus.IDLE;
+      return newState;
+    case ActionTypes.DOWNLOAD_STARTED:
+      newState.downloadStatus = FetchStatus.FETCHING;
+      return newState;
+    case ActionTypes.DOWNLOAD_FAILED:
+      newState.downloadStatus = FetchStatus.ERROR;
       return newState;
     default:
       return newState;
@@ -219,6 +270,7 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
     },
     variants: stateVariants,
     selectedVariant: stateSelectedVariant,
+    downloadStatus,
   }: DocumentListItemState = state;
   const hasDocument = exists(document);
   const hasProvidedVariants = hasDocument && existsNonEmpty(document.variants);
@@ -277,10 +329,20 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
   const handleSelectedVariantChanged = useCallback((selectedVariantCb: NeonDocument): void => {
     dispatch(ActionCreator.setSelectedVariant(selectedVariantCb));
   }, [dispatch]);
+  const handleDownloadIdle = useCallback((): void => {
+    dispatch(ActionCreator.downloadIdle());
+  }, [dispatch]);
+  const handleDownloadStarted = useCallback((): void => {
+    dispatch(ActionCreator.downloadStarted());
+  }, [dispatch]);
+  const handleDownloadFailed = useCallback((): void => {
+    dispatch(ActionCreator.downloadFailed());
+  }, [dispatch]);
 
   if (!hasDocument) {
     return null;
   }
+  const isFetchingVariants = (fetchVariantStatus === FetchStatus.FETCHING);
   const appliedDocument: NeonDocument = exists(stateSelectedVariant)
     ? stateSelectedVariant as NeonDocument
     : document;
@@ -288,6 +350,9 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
     ? stateVariants
     : document.variants;
   const hasAppliedVariants = existsNonEmpty(appliedVariants);
+
+  const isDownloading = (downloadStatus === FetchStatus.FETCHING);
+  const isDownloadError = (downloadStatus === FetchStatus.ERROR);
 
   const apiPath = DocumentService.isQuickStartGuide(appliedDocument)
     ? `${NeonEnvironment.getFullApiPath('quickStartGuides')}/${appliedDocument.name}`
@@ -304,6 +369,13 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
   const renderTypes = (): JSX.Element => {
     if (!(enableVariantChips === true)) {
       return (<span title={`file type: ${typeTitleString}`}>{typeTitleString}</span>);
+    }
+    if (isFetchingVariants) {
+      return (
+        <Typography variant="caption" className={classes.variantFetchingLabel}>
+          Determining variants...
+        </Typography>
+      );
     }
     if (!hasAppliedVariants) {
       return (
@@ -333,6 +405,7 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
               component="span"
               size="small"
               label={variantTypeTitleString}
+              disabled={isDownloading || isDownloadError}
               onClick={(event: React.MouseEvent<HTMLElement>) => {
                 handleSelectedVariantChanged(variant);
               }}
@@ -376,11 +449,29 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
   const renderAction = (): JSX.Element|null => {
     if (!(enableDownloadButton === true)) return null;
     if (atXs) return null;
+    if (isFetchingVariants) {
+      return (
+        <ListItemSecondaryAction>
+          <CircularProgress size={36} className={classes.variantFetchingProgress} />
+        </ListItemSecondaryAction>
+      );
+    }
     const button = !hasAppliedVariants
       ? (
         <Button
           variant="outlined"
-          onClick={(): void => { window.location.href = apiPath; }}
+          disabled={isDownloading || isDownloadError}
+          startIcon={isDownloading
+            ? <CircularProgress size={18} />
+            : <DownloadIcon fontSize="small" />}
+          onClick={(): void => {
+            handleDownloadStarted();
+            DocumentService.downloadDocument(
+              appliedDocument,
+              (downloadDoc: NeonDocument): void => handleDownloadIdle(),
+              (downloadDoc: NeonDocument): void => handleDownloadFailed(),
+            );
+          }}
         >
           Download
         </Button>
@@ -399,10 +490,12 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
               .findFirstByDocumentTypeTitle(appliedVariants, option);
             if (exists(nextSelectedVariant)) {
               const coercedDownloadVariant = nextSelectedVariant as NeonDocument;
-              const downloadPath = DocumentService.isQuickStartGuide(coercedDownloadVariant)
-                ? `${NeonEnvironment.getFullApiPath('quickStartGuides')}/${coercedDownloadVariant.name}`
-                : `${NeonEnvironment.getFullApiPath('documents')}/${coercedDownloadVariant.name}`;
-              window.location.href = downloadPath;
+              handleDownloadStarted();
+              DocumentService.downloadDocument(
+                coercedDownloadVariant,
+                (downloadDoc: NeonDocument): void => handleDownloadIdle(),
+                (downloadDoc: NeonDocument): void => handleDownloadFailed(),
+              );
             }
           }}
           onChange={(option: string) => {
@@ -412,8 +505,24 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
               handleSelectedVariantChanged(nextSelectedVariant as NeonDocument);
             }
           }}
-          buttonGroupProps={{ size: 'small', variant: 'outlined', color: 'primary' }}
-          buttonProps={{ size: 'small', color: 'primary' }}
+          buttonGroupProps={{
+            size: 'small',
+            variant: 'outlined',
+            color: 'primary',
+          }}
+          buttonMenuProps={{
+            size: 'small',
+            color: 'primary',
+            disabled: isDownloading || isDownloadError,
+          }}
+          buttonProps={{
+            size: 'small',
+            color: 'primary',
+            disabled: isDownloading || isDownloadError,
+            startIcon: isDownloading
+              ? <CircularProgress size={18} />
+              : <DownloadIcon fontSize="small" />,
+          }}
         />
       );
     return (
@@ -422,23 +531,37 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
       </ListItemSecondaryAction>
     );
   };
+  const renderDownloadError = (): JSX.Element|null => {
+    if (!isDownloadError) return null;
+    return (
+      <div className={classes.downloadErrorContainer}>
+        <ErrorCard
+          title={`Document download unavailable for "${appliedDocument.name}"`}
+          onActionClick={() => handleDownloadIdle()}
+        />
+      </div>
+    );
+  };
   return (
-    <ListItem
-      key={id}
-      className={classes.listItem}
-      component={makeDownloadableLink ? 'a' : 'div'}
-      href={makeDownloadableLink ? apiPath : undefined}
-      title={makeDownloadableLink ? `Click to download ${document.name}` : `${document.name}`}
-      // @ts-ignore
-      button={makeDownloadableLink}
-    >
-      <ListItemIcon className={classes.listItemIcon}>
-        {/* @ts-ignore */}
-        <TypeIcon />
-      </ListItemIcon>
-      <ListItemText primary={primary} secondary={renderSecondaryItem()} />
-      {renderAction()}
-    </ListItem>
+    <>
+      <ListItem
+        key={id}
+        className={classes.listItem}
+        component={makeDownloadableLink ? 'a' : 'div'}
+        href={makeDownloadableLink ? apiPath : undefined}
+        title={makeDownloadableLink ? `Click to download ${document.name}` : `${document.name}`}
+        // @ts-ignore
+        button={makeDownloadableLink}
+      >
+        <ListItemIcon className={classes.listItemIcon}>
+          {/* @ts-ignore */}
+          <TypeIcon />
+        </ListItemIcon>
+        <ListItemText primary={primary} secondary={renderSecondaryItem()} />
+        {renderAction()}
+      </ListItem>
+      {renderDownloadError()}
+    </>
   );
 };
 
