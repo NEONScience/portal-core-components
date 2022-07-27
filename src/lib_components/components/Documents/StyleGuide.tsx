@@ -12,12 +12,12 @@ import ExampleBlock from '../../../components/ExampleBlock';
 
 import DialogBase from '../DialogBase/DialogBase';
 import DocumentList from './DocumentList';
+import DocumentListItem, { DocumentListItemModel } from './DocumentListItem';
 import DocumentSelect from './DocumentSelect';
 import DocumentTabs from './DocumentTabs';
 import DocumentViewer from './DocumentViewer';
 import Theme from '../Theme/Theme';
 import { NeonDocument } from '../../types/neonApi';
-import { DocumentListItemModel } from './documentTypes';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -42,46 +42,36 @@ export default function StyleGuide() {
     size: 993762,
     description: 'NEON Algorithm Theoretical Basis Document (ATBD) – 2D Wind Speed and Direction',
   };
-  const docs: NeonDocument[] = [
-    {
-      name: 'NEON.QSG.DP1.00001.001v1.pdf',
-      type: 'application/pdf',
-      size: 170516,
-      description: 'Quick Start Guide for 2D wind speed and direction (DP1.00001.001)',
-    },
-    {
-      name: 'NEON.DOC.000230vA.pdf',
-      type: 'application/pdf',
-      size: 599913,
-      description: 'NEON sensor command, control and configuration – Barometric pressure',
-    },
-    {
-      name: 'invalid.pdf',
-      type: 'invalid',
-      size: 0,
-      description: 'Invalid document',
-    },
-  ];
+  const qsgDoc = {
+    name: 'NEON.QSG.DP1.00001.001v1.pdf',
+    type: 'application/pdf',
+    size: 170516,
+    description: 'Quick Start Guide for 2D wind speed and direction (DP1.00001.001)',
+  };
+  const neonDoc = {
+    name: 'NEON.DOC.000230vA.pdf',
+    type: 'application/pdf',
+    size: 599913,
+    description: 'NEON sensor command, control and configuration – Barometric pressure',
+  };
+  const invalidDoc = {
+    name: 'invalid.pdf',
+    type: 'invalid',
+    size: 0,
+    description: 'Invalid document',
+  };
+  const docs: NeonDocument[] = [qsgDoc, neonDoc, invalidDoc];
   const docsList: DocumentListItemModel[] = [
     {
-      name: 'NEON.QSG.DP1.00001.001v1.pdf',
-      type: 'application/pdf',
-      size: 170516,
-      description: 'Quick Start Guide for 2D wind speed and direction (DP1.00001.001)',
+      ...qsgDoc,
       variants: [],
     },
     {
-      name: 'NEON.DOC.000230vA.pdf',
-      type: 'application/pdf',
-      size: 599913,
-      description: 'NEON sensor command, control and configuration – Barometric pressure',
+      ...neonDoc,
       variants: [],
     },
     {
-      name: 'invalid.pdf',
-      type: 'invalid',
-      size: 0,
-      description: 'Invalid document',
+      ...invalidDoc,
       variants: [],
     },
   ];
@@ -123,6 +113,48 @@ const exampleDoc: NeonDocument = {
           document={exampleDoc}
           width={800}
         />
+      </ExampleBlock>
+
+      <Divider className={classes.divider} />
+      <Typography variant="h6" component="h4" gutterBottom>Example Document Item</Typography>
+      <DocBlock>
+        Displays a single document item.
+      </DocBlock>
+      <CodeBlock>
+        {`
+import DocumentListItem from 'portal-core-components/lib/components/Documents/DocumentListItem';
+
+<DocumentListItem document={document} enableDownloadButton enableVariantChips fetchVariants />
+        `}
+      </CodeBlock>
+      <ExampleBlock>
+        <div style={{ width: '100%' }}>
+          <Paper className={classes.paper} style={{ marginBottom: '10px' }}>
+            <DocumentListItem
+              document={qsgDoc}
+              containerComponent="div"
+              enableDownloadButton
+              enableVariantChips
+              fetchVariants
+            />
+          </Paper>
+          <Paper className={classes.paper} style={{ marginBottom: '10px' }}>
+            <DocumentListItem
+              document={neonDoc}
+              containerComponent="div"
+              makeDownloadableLink
+              enableDownloadButton
+              enableVariantChips
+            />
+          </Paper>
+          <Paper className={classes.paper} style={{ marginBottom: '10px' }}>
+            <DocumentListItem
+              document={invalidDoc}
+              containerComponent="div"
+              enableDownloadButton
+            />
+          </Paper>
+        </div>
       </ExampleBlock>
 
       <Divider className={classes.divider} />

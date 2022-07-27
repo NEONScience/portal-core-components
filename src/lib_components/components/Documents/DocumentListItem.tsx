@@ -33,74 +33,90 @@ import {
 import DownloadIcon from '@material-ui/icons/SaveAlt';
 
 import NeonApi from '../NeonApi';
-import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import SplitButton from '../Button/SplitButton';
 import Theme from '../Theme/Theme';
 import WarningCard from '../Card/WarningCard';
 
 import DocumentParser from '../../parser/DocumentParser';
-import DocumentService, { DocumentTypeListItemDef, ParsedQsgNameResult } from '../../service/DocumentService';
+import DocumentService, {
+  DocumentTypeListItemDef,
+  ParsedQsgNameResult,
+} from '../../service/DocumentService';
 import { StylesHook } from '../../types/muiTypes';
 import { exists, existsNonEmpty, isStringNonEmpty } from '../../util/typeUtil';
-import { AnyAction, Nullable, UnknownRecord } from '../../types/core';
-import { DocumentListItemModel } from './documentTypes';
-import { NeonDocument, QuickStartGuideDocument, QuickStartGuideVersion } from '../../types/neonApi';
+import {
+  AnyAction,
+  Nullable,
+  Undef,
+  UnknownRecord,
+} from '../../types/core';
+import {
+  NeonDocument,
+  QuickStartGuideDocument,
+  QuickStartGuideVersion,
+} from '../../types/neonApi';
 
-const useStyles = (
-  enableDownloadButton: boolean,
-  atComponentXs: boolean,
-): StylesHook => {
-  let listItemPaddingRight = 'unset';
-  if (!atComponentXs) {
-    listItemPaddingRight = enableDownloadButton
-      ? '192px'
-      : 'unset';
-  }
-  return makeStyles((muiTheme: MuiTheme) => createStyles({
-    listItem: {
-      wordBreak: 'break-word',
-      paddingLeft: muiTheme.spacing(1),
-      paddingRight: listItemPaddingRight,
-      '& p': {
-        marginTop: muiTheme.spacing(0.5),
-        '& > span > span': {
-          whiteSpace: 'nowrap',
-        },
+const COMPONENT_XS_UPPER = 480;
+const COMPONENT_SM_UPPER = 805;
+
+const useStyles = makeStyles((muiTheme: MuiTheme) => createStyles({
+  listItemContainer: {
+    display: 'flex',
+  },
+  listItem: {
+    display: 'flex',
+    wordBreak: 'break-word',
+    paddingLeft: muiTheme.spacing(1),
+    '& p': {
+      marginTop: muiTheme.spacing(0.5),
+      '& > span > span': {
+        whiteSpace: 'nowrap',
       },
     },
-    listItemText: {
-      maxWidth: '540px',
+  },
+  listItemSecondarySpacer: {
+    margin: muiTheme.spacing(0, 2),
+    color: muiTheme.palette.grey[200],
+  },
+  listItemIcon: {
+    minWidth: muiTheme.spacing(4),
+    marginRight: muiTheme.spacing(1),
+  },
+  fileTypeChip: {
+    marginRight: '5px',
+    '&:last-child': {
+      marginRight: '0px',
     },
-    listItemSecondarySpacer: {
-      margin: muiTheme.spacing(0, 2),
-      color: muiTheme.palette.grey[200],
-    },
-    listItemIcon: {
-      minWidth: muiTheme.spacing(4),
-      marginRight: muiTheme.spacing(1),
-    },
-    fileTypeChip: {
-      marginRight: '5px',
-      '&:last-child': {
-        marginRight: '0px',
-      },
-    },
-    fileTypeChipSelected: {
-      marginRight: '5px',
-      fontWeight: 500,
-    },
-    variantFetchingLabel: {
-      lineHeight: '24px',
-    },
-    variantFetchingProgress: {
-      marginRight: '36px',
-      marginLeft: '36px',
-    },
-    downloadErrorContainer: {
-      marginTop: muiTheme.spacing(2),
+  },
+  fileTypeChipSelected: {
+    marginRight: '5px',
+    fontWeight: 500,
+  },
+  variantFetchingLabel: {
+    lineHeight: '24px',
+  },
+  variantFetchingProgress: {
+    marginRight: '36px',
+    marginLeft: '36px',
+  },
+  downloadErrorContainer: {
+    marginTop: muiTheme.spacing(2),
+  },
+})) as StylesHook;
+
+const useListItemSecondaryActionStyles = makeStyles((muiTheme: MuiTheme) =>
+  // eslint-disable-next-line implicit-arrow-linebreak
+  createStyles({
+    root: {
+      display: 'flex',
+      alignItems: 'center',
+      position: 'unset',
+      transform: 'unset',
+      top: 'unset',
+      right: 'unset',
+      whiteSpace: 'nowrap',
     },
   })) as StylesHook;
-};
 
 enum ActionTypes {
   FETCH_VARIANTS_STARTED = 'FETCH_VARIANTS_STARTED',
@@ -250,6 +266,10 @@ const documentListItemReducer = (
   }
 };
 
+export interface DocumentListItemModel extends NeonDocument {
+  variants: NeonDocument[];
+}
+
 export interface DocumentListItemProps {
   id: number;
   document: DocumentListItemModel;
@@ -257,6 +277,7 @@ export interface DocumentListItemProps {
   enableDownloadButton: Nullable<boolean>;
   fetchVariants: Nullable<boolean>;
   enableVariantChips: Nullable<boolean>;
+  containerComponent: Undef<React.ElementType<React.HTMLAttributes<HTMLDivElement>>>;
 }
 
 const DocumentListItem: React.FC<DocumentListItemProps> = (
@@ -269,7 +290,10 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
     enableDownloadButton,
     fetchVariants,
     enableVariantChips,
+    containerComponent,
   }: DocumentListItemProps = props;
+  const classes = useStyles(Theme);
+  const listItemSecondaryActionClasses = useListItemSecondaryActionStyles(Theme);
   const containerRef: React.MutableRefObject<HTMLDivElement|HTMLAnchorElement|undefined> = useRef();
   const [
     componentWidth,
@@ -278,12 +302,13 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
   let atComponentXs = false;
   let atComponentSm = false;
   if (componentWidth > 0) {
-    atComponentXs = (componentWidth <= 480);
-    atComponentSm = (componentWidth >= 480) && (componentWidth < 780);
+    atComponentXs = (componentWidth <= COMPONENT_XS_UPPER);
+    atComponentSm = (componentWidth >= COMPONENT_XS_UPPER) && (componentWidth < COMPONENT_SM_UPPER);
   }
-  const classes = useStyles(enableDownloadButton === true, atComponentXs)(Theme);
-  // eslint-disable-next-line max-len
-  const [state, dispatch]: [DocumentListItemState, Dispatch<DocumentListItemActionTypes>] = useReducer(
+  const [
+    state,
+    dispatch,
+  ]: [DocumentListItemState, Dispatch<DocumentListItemActionTypes>] = useReducer(
     documentListItemReducer,
     cloneDeep(DEFAULT_STATE),
   );
@@ -364,10 +389,7 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
 
   const handleResizeCb = useCallback((): void => {
     const container: HTMLDivElement|HTMLAnchorElement|undefined = containerRef.current;
-    // Do nothing if either container or viz references fail ot point to a DOM node
     if (!container) { return; }
-    // Do nothing if container and viz have the same width
-    // (resize event fired but no actual resize necessary)
     if (container.clientWidth === componentWidth) { return; }
     setComponentWidth(container.clientWidth);
   }, [containerRef, componentWidth, setComponentWidth]);
@@ -406,9 +428,6 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
   const isDownloading = (downloadStatus === FetchStatus.FETCHING);
   const isDownloadError = (downloadStatus === FetchStatus.ERROR);
 
-  const apiPath = DocumentService.isQuickStartGuide(appliedDocument)
-    ? `${NeonEnvironment.getFullApiPath('quickStartGuides')}/${appliedDocument.name}`
-    : `${NeonEnvironment.getFullApiPath('documents')}/${appliedDocument.name}`;
   const documentType: DocumentTypeListItemDef = DocumentService.resolveDocumentType(
     appliedDocument,
   );
@@ -520,36 +539,38 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
     if (!(enableDownloadButton === true)) return null;
     if (isFetchingVariants) {
       return (
-        <ListItemSecondaryAction>
+        <ListItemSecondaryAction classes={listItemSecondaryActionClasses}>
           <CircularProgress size={36} className={classes.variantFetchingProgress} />
         </ListItemSecondaryAction>
       );
     }
     if (atComponentXs) {
       return (
-        <Tooltip
-          placement="top"
-          title={`Download ${appliedDocument.name}`}
-        >
-          <div>
-            <IconButton
-              color="primary"
-              disabled={isDownloading || isDownloadError}
-              onClick={(): void => {
-                handleDownloadStarted();
-                DocumentService.downloadDocument(
-                  appliedDocument,
-                  (downloadDoc: NeonDocument): void => handleDownloadIdle(),
-                  (downloadDoc: NeonDocument): void => handleDownloadFailed(),
-                );
-              }}
-            >
-              {isDownloading
-                ? <CircularProgress size={18} />
-                : <DownloadIcon fontSize="small" />}
-            </IconButton>
-          </div>
-        </Tooltip>
+        <ListItemSecondaryAction classes={listItemSecondaryActionClasses}>
+          <Tooltip
+            placement="top"
+            title={`Download ${appliedDocument.name}`}
+          >
+            <div>
+              <IconButton
+                color="primary"
+                disabled={isDownloading || isDownloadError}
+                onClick={(): void => {
+                  handleDownloadStarted();
+                  DocumentService.downloadDocument(
+                    appliedDocument,
+                    (downloadDoc: NeonDocument): void => handleDownloadIdle(),
+                    (downloadDoc: NeonDocument): void => handleDownloadFailed(),
+                  );
+                }}
+              >
+                {isDownloading
+                  ? <CircularProgress size={18} />
+                  : <DownloadIcon fontSize="small" />}
+              </IconButton>
+            </div>
+          </Tooltip>
+        </ListItemSecondaryAction>
       );
     }
     const button = !hasAppliedVariants
@@ -622,7 +643,7 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
         />
       );
     return (
-      <ListItemSecondaryAction>
+      <ListItemSecondaryAction classes={listItemSecondaryActionClasses}>
         {button}
       </ListItemSecondaryAction>
     );
@@ -644,18 +665,26 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
         ref={containerRef as never}
         key={id}
         className={classes.listItem}
-        component={makeDownloadableLink ? 'a' : 'div'}
-        href={makeDownloadableLink ? apiPath : undefined}
+        component="div"
+        ContainerComponent={containerComponent}
+        ContainerProps={{ className: classes.listItemContainer }}
         title={makeDownloadableLink ? `Click to download ${document.name}` : undefined}
         // @ts-ignore
         button={makeDownloadableLink}
+        onClick={!makeDownloadableLink ? undefined : (): void => {
+          handleDownloadStarted();
+          DocumentService.downloadDocument(
+            appliedDocument,
+            (downloadDoc: NeonDocument): void => handleDownloadIdle(),
+            (downloadDoc: NeonDocument): void => handleDownloadFailed(),
+          );
+        }}
       >
         <ListItemIcon className={classes.listItemIcon}>
           {/* @ts-ignore */}
           <TypeIcon />
         </ListItemIcon>
         <ListItemText
-          className={classes.listItemText}
           primary={primary}
           secondary={renderSecondaryItem()}
         />

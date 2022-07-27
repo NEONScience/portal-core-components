@@ -7,13 +7,12 @@ import {
   Theme as MuiTheme,
 } from '@material-ui/core/styles';
 
-import DocumentListItem from './DocumentListItem';
+import DocumentListItem, { DocumentListItemModel } from './DocumentListItem';
 import Theme from '../Theme/Theme';
 import WarningCard from '../Card/WarningCard';
 
 import { StylesHook } from '../../types/muiTypes';
 import { existsNonEmpty } from '../../util/typeUtil';
-import { DocumentListItemModel } from './documentTypes';
 import { Nullable } from '../../types/core';
 
 const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>

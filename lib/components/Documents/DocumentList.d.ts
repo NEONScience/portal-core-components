@@ -1,4 +1,4 @@
-import { DocumentListItemModel } from './documentTypes';
+import { DocumentListItemModel } from './DocumentListItem';
 import { Nullable } from '../../types/core';
 export interface DocumentListProps {
     documents: DocumentListItemModel[];
