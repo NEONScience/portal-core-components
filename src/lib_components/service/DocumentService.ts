@@ -25,6 +25,13 @@ export interface ParsedQsgNameResult {
   parsedVersion: number;
 }
 
+export const VIEWER_SUPPORTED_DOC_TYPES: string[] = [
+  'application/pdf',
+  'text/html',
+  'text/markdown',
+  'text/plain',
+];
+
 const documentTypes: Record<string, DocumentTypeListItemDef> = {
   pdf: {
     match: (type: string): boolean => (type === 'application/pdf' || type.includes('pdf')),
@@ -141,6 +148,11 @@ export interface IDocumentService {
   transformSpec: (spec: DataProductSpec) => NeonDocument;
   transformQuickStartGuideDocuments: (documents: QuickStartGuideDocument[]) => NeonDocument[];
   transformQuickStartGuideDocument: (document: QuickStartGuideDocument) => NeonDocument;
+  applyDisplaySort: (
+    documents: NeonDocument[],
+    reverse?: boolean,
+    qsgPrecedence?: boolean,
+  ) => NeonDocument[];
   downloadDocument: (
     document: NeonDocument,
     onSuccessCb?: DocumentCallback,
@@ -232,7 +244,7 @@ const DocumentService: IDocumentService = {
   isViewerSupported: (doc: NeonDocument): boolean => (
     exists(doc)
     && isStringNonEmpty(doc.type)
-    && ['application/pdf'].includes(doc.type)
+    && VIEWER_SUPPORTED_DOC_TYPES.includes(doc.type)
   ),
   transformSpecs: (specs: DataProductSpec[]): NeonDocument[] => {
     if (!existsNonEmpty(specs)) {
@@ -262,6 +274,65 @@ const DocumentService: IDocumentService = {
     size: document.size,
     description: document.description,
   }),
+  applyDisplaySort: (
+    documents: NeonDocument[],
+    reverse?: boolean,
+    qsgPrecedence?: boolean,
+  ): NeonDocument[] => {
+    if (!existsNonEmpty(documents)) {
+      return [];
+    }
+    const appliedReverse: boolean = (reverse === true);
+    const appliedQsgPrecedence: boolean = (qsgPrecedence === true);
+    const sortedDocs: NeonDocument[] = [...documents];
+    sortedDocs.sort((a: NeonDocument, b: NeonDocument): number => {
+      if (!exists(a) && !exists(b)) {
+        return 0;
+      }
+      if (!exists(a)) {
+        return appliedReverse ? -1 : 1;
+      }
+      if (!exists(b)) {
+        return appliedReverse ? 1 : -1;
+      }
+      if (appliedQsgPrecedence) {
+        const aQsg = DocumentService.isQuickStartGuide(a);
+        const bQsg = DocumentService.isQuickStartGuide(b);
+        if (!aQsg || !bQsg) {
+          if (aQsg) {
+            return appliedReverse ? 1 : -1;
+          }
+          if (bQsg) {
+            return appliedReverse ? -1 : 1;
+          }
+        }
+      }
+      if (!isStringNonEmpty(a.description) && !isStringNonEmpty(b.description)) {
+        return 0;
+      }
+      if (!isStringNonEmpty(a.description)) {
+        return appliedReverse ? -1 : 1;
+      }
+      if (!isStringNonEmpty(b.description)) {
+        return appliedReverse ? 1 : -1;
+      }
+      const descriptionCompare = a.description.localeCompare(b.description);
+      if (descriptionCompare === 0) {
+        if (!isStringNonEmpty(a.name) && !isStringNonEmpty(b.name)) {
+          return 0;
+        }
+        if (!isStringNonEmpty(a.name)) {
+          return appliedReverse ? -1 : 1;
+        }
+        if (!isStringNonEmpty(b.name)) {
+          return appliedReverse ? 1 : -1;
+        }
+        return a.name.localeCompare(b.name);
+      }
+      return descriptionCompare;
+    });
+    return sortedDocs;
+  },
   downloadDocument: (
     document: NeonDocument,
     onSuccessCb?: DocumentCallback,

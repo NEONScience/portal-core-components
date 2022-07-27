@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
+import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
+import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import {
@@ -29,6 +31,9 @@ const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
     selectContainer: {
       width: '100%',
       padding: muiTheme.spacing(3, 0),
+    },
+    selectFormControl: {
+      width: '100%',
     },
   })) as StylesHook;
 
@@ -88,33 +93,42 @@ const DocumentSelect: React.FC<DocumentSelectProps> = (props: DocumentSelectProp
     <div className={classes.container}>
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <Select
-            fullWidth
-            id="document-select"
-            aria-labelledby="document-select-label"
-            variant="outlined"
-            value={selectedDoc}
-            onChange={(event: React.ChangeEvent<{ value: unknown }>): void => {
-              const nextDoc: Nullable<NeonDocument> = documents.find(
-                (doc: NeonDocument): boolean => (
-                  doc.name.localeCompare((event.target.value as string)) === 0
-                ),
-              );
-              if (exists(nextDoc)) {
-                setSelectedDoc((nextDoc as NeonDocument).name);
-              }
-            }}
-          >
-            {documents.map((doc: NeonDocument, index: number): JSX.Element => ((
-              <MenuItem key={doc.name} value={doc.name}>
-                <DocumentListItem
-                  id={index}
-                  document={doc}
-                  makeDownloadableLink={false}
-                />
-              </MenuItem>
-            )))}
-          </Select>
+          <FormControl variant="outlined" className={classes.selectFormControl}>
+            <InputLabel htmlFor="document-select-input">
+              Select Document to View
+            </InputLabel>
+            <Select
+              fullWidth
+              id="document-select"
+              inputProps={{
+                name: 'Select Document to View',
+                id: 'document-select-input',
+              }}
+              label="Select Document to View"
+              aria-labelledby="document-select-label"
+              value={selectedDoc}
+              onChange={(event: React.ChangeEvent<{ value: unknown }>): void => {
+                const nextDoc: Nullable<NeonDocument> = documents.find(
+                  (doc: NeonDocument): boolean => (
+                    doc.name.localeCompare((event.target.value as string)) === 0
+                  ),
+                );
+                if (exists(nextDoc)) {
+                  setSelectedDoc((nextDoc as NeonDocument).name);
+                }
+              }}
+            >
+              {documents.map((doc: NeonDocument, index: number): JSX.Element => ((
+                <MenuItem key={doc.name} value={doc.name}>
+                  <DocumentListItem
+                    id={index}
+                    document={doc}
+                    makeDownloadableLink={false}
+                  />
+                </MenuItem>
+              )))}
+            </Select>
+          </FormControl>
         </Grid>
         <Grid item xs={12}>
           {renderSelectedDocument()}

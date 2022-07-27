@@ -13,6 +13,7 @@ export interface ParsedQsgNameResult {
     matchedExtension: string;
     parsedVersion: number;
 }
+export declare const VIEWER_SUPPORTED_DOC_TYPES: string[];
 export declare type DocumentCallback = (document: NeonDocument) => void;
 export interface IDocumentService {
     formatBytes: (bytes: number) => string;
@@ -31,6 +32,7 @@ export interface IDocumentService {
     transformSpec: (spec: DataProductSpec) => NeonDocument;
     transformQuickStartGuideDocuments: (documents: QuickStartGuideDocument[]) => NeonDocument[];
     transformQuickStartGuideDocument: (document: QuickStartGuideDocument) => NeonDocument;
+    applyDisplaySort: (documents: NeonDocument[], reverse?: boolean, qsgPrecedence?: boolean) => NeonDocument[];
     downloadDocument: (document: NeonDocument, onSuccessCb?: DocumentCallback, onErrorCb?: DocumentCallback) => void;
     /**
      * Utilize save as APIs to trigger a document download.

@@ -2,6 +2,9 @@ import React, {
   useReducer,
   useEffect,
   useCallback,
+  useRef,
+  useLayoutEffect,
+  useState,
   Dispatch,
 } from 'react';
 
@@ -13,13 +16,14 @@ import cloneDeep from 'lodash/cloneDeep';
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import IconButton from '@material-ui/core/IconButton';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 import {
   makeStyles,
   createStyles,
@@ -28,11 +32,11 @@ import {
 
 import DownloadIcon from '@material-ui/icons/SaveAlt';
 
-import ErrorCard from '../Card/ErrorCard';
 import NeonApi from '../NeonApi';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import SplitButton from '../Button/SplitButton';
 import Theme from '../Theme/Theme';
+import WarningCard from '../Card/WarningCard';
 
 import DocumentParser from '../../parser/DocumentParser';
 import DocumentService, { DocumentTypeListItemDef, ParsedQsgNameResult } from '../../service/DocumentService';
@@ -44,50 +48,59 @@ import { NeonDocument, QuickStartGuideDocument, QuickStartGuideVersion } from '.
 
 const useStyles = (
   enableDownloadButton: boolean,
-): StylesHook => makeStyles((muiTheme: MuiTheme) => createStyles({
-  listItem: {
-    wordBreak: 'break-word',
-    paddingLeft: muiTheme.spacing(1),
-    paddingRight: enableDownloadButton ? muiTheme.spacing(18) : 'unset',
-    [muiTheme.breakpoints.down('xs')]: {
-      paddingRight: 'unset',
-    },
-    '& p': {
-      marginTop: muiTheme.spacing(0.5),
-      '& > span > span': {
-        whiteSpace: 'nowrap',
+  atComponentXs: boolean,
+): StylesHook => {
+  let listItemPaddingRight = 'unset';
+  if (!atComponentXs) {
+    listItemPaddingRight = enableDownloadButton
+      ? '192px'
+      : 'unset';
+  }
+  return makeStyles((muiTheme: MuiTheme) => createStyles({
+    listItem: {
+      wordBreak: 'break-word',
+      paddingLeft: muiTheme.spacing(1),
+      paddingRight: listItemPaddingRight,
+      '& p': {
+        marginTop: muiTheme.spacing(0.5),
+        '& > span > span': {
+          whiteSpace: 'nowrap',
+        },
       },
     },
-  },
-  listItemSecondarySpacer: {
-    margin: muiTheme.spacing(0, 2),
-    color: muiTheme.palette.grey[200],
-  },
-  listItemIcon: {
-    minWidth: muiTheme.spacing(4),
-    marginRight: muiTheme.spacing(1),
-  },
-  fileTypeChip: {
-    marginRight: '5px',
-    '&:last-child': {
-      marginRight: '0px',
+    listItemText: {
+      maxWidth: '540px',
     },
-  },
-  fileTypeChipSelected: {
-    marginRight: '5px',
-    fontWeight: 500,
-  },
-  variantFetchingLabel: {
-    lineHeight: '24px',
-  },
-  variantFetchingProgress: {
-    marginRight: '36px',
-    marginLeft: '36px',
-  },
-  downloadErrorContainer: {
-    marginTop: muiTheme.spacing(2),
-  },
-})) as StylesHook;
+    listItemSecondarySpacer: {
+      margin: muiTheme.spacing(0, 2),
+      color: muiTheme.palette.grey[200],
+    },
+    listItemIcon: {
+      minWidth: muiTheme.spacing(4),
+      marginRight: muiTheme.spacing(1),
+    },
+    fileTypeChip: {
+      marginRight: '5px',
+      '&:last-child': {
+        marginRight: '0px',
+      },
+    },
+    fileTypeChipSelected: {
+      marginRight: '5px',
+      fontWeight: 500,
+    },
+    variantFetchingLabel: {
+      lineHeight: '24px',
+    },
+    variantFetchingProgress: {
+      marginRight: '36px',
+      marginLeft: '36px',
+    },
+    downloadErrorContainer: {
+      marginTop: muiTheme.spacing(2),
+    },
+  })) as StylesHook;
+};
 
 enum ActionTypes {
   FETCH_VARIANTS_STARTED = 'FETCH_VARIANTS_STARTED',
@@ -257,8 +270,18 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
     fetchVariants,
     enableVariantChips,
   }: DocumentListItemProps = props;
-  const classes = useStyles(enableDownloadButton === true)(Theme);
-  const atXs = useMediaQuery(Theme.breakpoints.down('xs'));
+  const containerRef: React.MutableRefObject<HTMLDivElement|HTMLAnchorElement|undefined> = useRef();
+  const [
+    componentWidth,
+    setComponentWidth,
+  ]: [number, React.Dispatch<React.SetStateAction<number>>] = useState<number>(0);
+  let atComponentXs = false;
+  let atComponentSm = false;
+  if (componentWidth > 0) {
+    atComponentXs = (componentWidth <= 480);
+    atComponentSm = (componentWidth >= 480) && (componentWidth < 780);
+  }
+  const classes = useStyles(enableDownloadButton === true, atComponentXs)(Theme);
   // eslint-disable-next-line max-len
   const [state, dispatch]: [DocumentListItemState, Dispatch<DocumentListItemActionTypes>] = useReducer(
     documentListItemReducer,
@@ -339,6 +362,35 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
     dispatch(ActionCreator.downloadFailed());
   }, [dispatch]);
 
+  const handleResizeCb = useCallback((): void => {
+    const container: HTMLDivElement|HTMLAnchorElement|undefined = containerRef.current;
+    // Do nothing if either container or viz references fail ot point to a DOM node
+    if (!container) { return; }
+    // Do nothing if container and viz have the same width
+    // (resize event fired but no actual resize necessary)
+    if (container.clientWidth === componentWidth) { return; }
+    setComponentWidth(container.clientWidth);
+  }, [containerRef, componentWidth, setComponentWidth]);
+
+  useLayoutEffect(() => {
+    const element = containerRef.current;
+    if (!element) { return () => {}; }
+    handleResizeCb();
+    if (typeof ResizeObserver !== 'function') {
+      window.addEventListener('resize', handleResizeCb);
+      return () => {
+        window.removeEventListener('resize', handleResizeCb);
+      };
+    }
+    let resizeObserver: ResizeObserver|null = new ResizeObserver(handleResizeCb);
+    resizeObserver.observe(element);
+    return () => {
+      if (!resizeObserver) { return; }
+      resizeObserver.disconnect();
+      resizeObserver = null;
+    };
+  }, [containerRef, handleResizeCb]);
+
   if (!hasDocument) {
     return null;
   }
@@ -416,31 +468,49 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
     );
   };
   const renderSecondaryItem = (): JSX.Element => {
-    const typeAndSize = (
-      <>
-        {renderTypes()}
-        {!appliedDocument.size ? null : (
-          <>
-            {spacer}
-            <span title={`file size: ${DocumentService.formatBytes(appliedDocument.size)}`}>
-              {DocumentService.formatBytes(appliedDocument.size)}
-            </span>
-          </>
-        )}
-      </>
-    );
+    let sizeDisplay = (<span><i>n/a</i></span>);
+    if (appliedDocument.size) {
+      sizeDisplay = (
+        <span title={`file size: ${DocumentService.formatBytes(appliedDocument.size)}`}>
+          {DocumentService.formatBytes(appliedDocument.size)}
+        </span>
+      );
+    }
     const fileNumber = (
-      <span title={`file number: ${appliedDocument.name}`}>{appliedDocument.name}</span>
-    );
-    return atXs ? (
-      <span>
-        {fileNumber}
-        <br />
-        {typeAndSize}
+      <span
+        style={{ whiteSpace: 'break-spaces' }}
+        title={`file number: ${appliedDocument.name}`}
+      >
+        {appliedDocument.name}
       </span>
-    ) : (
+    );
+    if (atComponentSm || atComponentXs) {
+      if (hasAppliedVariants) {
+        return (
+          <span>
+            {fileNumber}
+            <span style={{ height: '5px', display: 'block' }} />
+            {renderTypes()}
+            <span style={{ height: '5px', display: 'block' }} />
+            {sizeDisplay}
+          </span>
+        );
+      }
+      return (
+        <span>
+          {fileNumber}
+          <span style={{ height: '5px', display: 'block' }} />
+          {renderTypes()}
+          {spacer}
+          {sizeDisplay}
+        </span>
+      );
+    }
+    return (
       <span>
-        {typeAndSize}
+        {renderTypes()}
+        {spacer}
+        {sizeDisplay}
         {spacer}
         {fileNumber}
       </span>
@@ -448,12 +518,38 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
   };
   const renderAction = (): JSX.Element|null => {
     if (!(enableDownloadButton === true)) return null;
-    if (atXs) return null;
     if (isFetchingVariants) {
       return (
         <ListItemSecondaryAction>
           <CircularProgress size={36} className={classes.variantFetchingProgress} />
         </ListItemSecondaryAction>
+      );
+    }
+    if (atComponentXs) {
+      return (
+        <Tooltip
+          placement="top"
+          title={`Download ${appliedDocument.name}`}
+        >
+          <div>
+            <IconButton
+              color="primary"
+              disabled={isDownloading || isDownloadError}
+              onClick={(): void => {
+                handleDownloadStarted();
+                DocumentService.downloadDocument(
+                  appliedDocument,
+                  (downloadDoc: NeonDocument): void => handleDownloadIdle(),
+                  (downloadDoc: NeonDocument): void => handleDownloadFailed(),
+                );
+              }}
+            >
+              {isDownloading
+                ? <CircularProgress size={18} />
+                : <DownloadIcon fontSize="small" />}
+            </IconButton>
+          </div>
+        </Tooltip>
       );
     }
     const button = !hasAppliedVariants
@@ -535,8 +631,8 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
     if (!isDownloadError) return null;
     return (
       <div className={classes.downloadErrorContainer}>
-        <ErrorCard
-          title={`Document download unavailable for "${appliedDocument.name}"`}
+        <WarningCard
+          title={`Document download is currently unavailable for "${appliedDocument.name}."`}
           onActionClick={() => handleDownloadIdle()}
         />
       </div>
@@ -545,11 +641,12 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
   return (
     <>
       <ListItem
+        ref={containerRef as never}
         key={id}
         className={classes.listItem}
         component={makeDownloadableLink ? 'a' : 'div'}
         href={makeDownloadableLink ? apiPath : undefined}
-        title={makeDownloadableLink ? `Click to download ${document.name}` : `${document.name}`}
+        title={makeDownloadableLink ? `Click to download ${document.name}` : undefined}
         // @ts-ignore
         button={makeDownloadableLink}
       >
@@ -557,7 +654,11 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
           {/* @ts-ignore */}
           <TypeIcon />
         </ListItemIcon>
-        <ListItemText primary={primary} secondary={renderSecondaryItem()} />
+        <ListItemText
+          className={classes.listItemText}
+          primary={primary}
+          secondary={renderSecondaryItem()}
+        />
         {renderAction()}
       </ListItem>
       {renderDownloadError()}
