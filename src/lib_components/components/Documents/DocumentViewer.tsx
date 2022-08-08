@@ -60,7 +60,7 @@ const DocumentViewer: React.FC<DocumentViewerProps> = (props: DocumentViewerProp
   const appliedUrlPath = isStringNonEmpty(fullUrlPath)
     ? fullUrlPath
     : NeonEnvironment.getFullApiPath('documents');
-  const dataUrl: string = `${appliedUrlPath}/${document.name}?inline=true`;
+  const dataUrl: string = `${appliedUrlPath}/${document.name}?inline=true&t=${Date.now()}`;
 
   const containerRef: React.MutableRefObject<HTMLDivElement|undefined> = useRef();
   const objectRef: React.MutableRefObject<HTMLObjectElement|undefined> = useRef();
