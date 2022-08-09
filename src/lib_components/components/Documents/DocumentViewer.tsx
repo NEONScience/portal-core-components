@@ -25,6 +25,9 @@ const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
     container: {
       width: '100%',
     },
+    iframe: {
+      border: 'none',
+    },
   })) as StylesHook;
 
 export interface DocumentViewerProps {
@@ -60,10 +63,10 @@ const DocumentViewer: React.FC<DocumentViewerProps> = (props: DocumentViewerProp
   const appliedUrlPath = isStringNonEmpty(fullUrlPath)
     ? fullUrlPath
     : NeonEnvironment.getFullApiPath('documents');
-  const dataUrl: string = `${appliedUrlPath}/${document.name}?inline=true&t=${Date.now()}`;
+  const dataUrl: string = `${appliedUrlPath}/${document.name}?inline=true&fallback=html`;
 
   const containerRef: React.MutableRefObject<HTMLDivElement|undefined> = useRef();
-  const objectRef: React.MutableRefObject<HTMLObjectElement|undefined> = useRef();
+  const iframeRef: React.MutableRefObject<HTMLIFrameElement|undefined> = useRef();
   const [
     viewerWidth,
     setViewerWidth,
@@ -71,23 +74,23 @@ const DocumentViewer: React.FC<DocumentViewerProps> = (props: DocumentViewerProp
 
   const handleResizeCb = useCallback((): void => {
     const container: HTMLDivElement|undefined = containerRef.current;
-    const objectElement: HTMLObjectElement|undefined = objectRef.current;
+    const iframeElement: HTMLIFrameElement|undefined = iframeRef.current;
     // Do nothing if either container or viz references fail ot point to a DOM node
-    if (!container || !objectElement) { return; }
+    if (!container || !iframeElement) { return; }
     // Do nothing if either refs have no offset parent
     // (meaning they're hidden from rendering anyway)
-    if ((container.offsetParent === null) || (objectElement.offsetParent === null)) { return; }
+    if ((container.offsetParent === null) || (iframeElement.offsetParent === null)) { return; }
     // Do nothing if container and viz have the same width
     // (resize event fired but no actual resize necessary)
     if (container.clientWidth === viewerWidth) { return; }
     const newWidth: number = container.clientWidth;
     setViewerWidth(newWidth);
-    objectElement.setAttribute('width', `${newWidth}`);
-    objectElement.setAttribute('height', `${calcAutoHeight(newWidth)}`);
-  }, [containerRef, objectRef, viewerWidth, setViewerWidth]);
+    iframeElement.setAttribute('width', `${newWidth}`);
+    iframeElement.setAttribute('height', `${calcAutoHeight(newWidth)}`);
+  }, [containerRef, iframeRef, viewerWidth, setViewerWidth]);
 
   useLayoutEffect(() => {
-    const element = objectRef.current;
+    const element = iframeRef.current;
     if (!element) { return noop; }
     const parent: HTMLElement|null = element.parentElement;
     if (!parent) { return noop; }
@@ -105,7 +108,7 @@ const DocumentViewer: React.FC<DocumentViewerProps> = (props: DocumentViewerProp
       resizeObserver.disconnect();
       resizeObserver = null;
     };
-  }, [objectRef, handleResizeCb]);
+  }, [iframeRef, handleResizeCb]);
 
   const renderObject = (): JSX.Element => {
     if (!DocumentService.isViewerSupported(document)) {
@@ -117,13 +120,14 @@ const DocumentViewer: React.FC<DocumentViewerProps> = (props: DocumentViewerProp
       );
     }
     return (
-      <object
-        ref={objectRef as React.MutableRefObject<HTMLObjectElement>}
-        type={document.type}
-        data={dataUrl}
+      <iframe
+        ref={iframeRef as React.MutableRefObject<HTMLIFrameElement>}
+        src={dataUrl}
         aria-label={document.description}
+        title={document.description}
         width={viewerWidth}
         height={calcAutoHeight(viewerWidth)}
+        className={classes.iframe}
       />
     );
   };
