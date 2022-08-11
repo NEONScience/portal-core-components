@@ -11,29 +11,35 @@ import {
   Theme as MuiTheme,
 } from '@material-ui/core/styles';
 
+import DocumentService from '../../service/DocumentService';
+import ErrorCard from '../Card/ErrorCard';
 import NeonEnvironment from '../NeonEnvironment';
 import Theme from '../Theme/Theme';
 import { StylesHook } from '../../types/muiTypes';
 import { NeonDocument } from '../../types/neonApi';
+import { isStringNonEmpty } from '../../util/typeUtil';
 
 const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
   // eslint-disable-next-line implicit-arrow-linebreak
   createStyles({
     container: {
       width: '100%',
-      margin: muiTheme.spacing(3, 3, 3, 3),
+    },
+    iframe: {
+      border: 'none',
     },
   })) as StylesHook;
 
 export interface DocumentViewerProps {
   document: NeonDocument;
   width: number;
+  fullUrlPath?: string;
 }
 
 const noop = () => {};
 
 const breakpoints: number[] = [0, 675, 900, 1200];
-const ratios: string[] = ['8:11', '3:4', '3:4', '3:4'];
+const ratios: string[] = ['8:11', '3:4', '4:4', '4:3'];
 
 const calcAutoHeight = (width: number): number => {
   const breakIdx: number = breakpoints.reduce(
@@ -52,10 +58,15 @@ const DocumentViewer: React.FC<DocumentViewerProps> = (props: DocumentViewerProp
   const {
     document,
     width,
+    fullUrlPath,
   }: DocumentViewerProps = props;
+  const appliedUrlPath = isStringNonEmpty(fullUrlPath)
+    ? fullUrlPath
+    : NeonEnvironment.getFullApiPath('documents');
+  const dataUrl: string = `${appliedUrlPath}/${document.name}?inline=true&fallback=html`;
 
   const containerRef: React.MutableRefObject<HTMLDivElement|undefined> = useRef();
-  const embedRef: React.MutableRefObject<HTMLEmbedElement|undefined> = useRef();
+  const iframeRef: React.MutableRefObject<HTMLIFrameElement|undefined> = useRef();
   const [
     viewerWidth,
     setViewerWidth,
@@ -63,23 +74,23 @@ const DocumentViewer: React.FC<DocumentViewerProps> = (props: DocumentViewerProp
 
   const handleResizeCb = useCallback((): void => {
     const container: HTMLDivElement|undefined = containerRef.current;
-    const embed: HTMLEmbedElement|undefined = embedRef.current;
+    const iframeElement: HTMLIFrameElement|undefined = iframeRef.current;
     // Do nothing if either container or viz references fail ot point to a DOM node
-    if (!container || !embed) { return; }
+    if (!container || !iframeElement) { return; }
     // Do nothing if either refs have no offset parent
     // (meaning they're hidden from rendering anyway)
-    if ((container.offsetParent === null) || (embed.offsetParent === null)) { return; }
+    if ((container.offsetParent === null) || (iframeElement.offsetParent === null)) { return; }
     // Do nothing if container and viz have the same width
     // (resize event fired but no actual resize necessary)
     if (container.clientWidth === viewerWidth) { return; }
     const newWidth: number = container.clientWidth;
     setViewerWidth(newWidth);
-    embed.setAttribute('width', `${newWidth}`);
-    embed.setAttribute('height', `${calcAutoHeight(newWidth)}`);
-  }, [containerRef, embedRef, viewerWidth, setViewerWidth]);
+    iframeElement.setAttribute('width', `${newWidth}`);
+    iframeElement.setAttribute('height', `${calcAutoHeight(newWidth)}`);
+  }, [containerRef, iframeRef, viewerWidth, setViewerWidth]);
 
   useLayoutEffect(() => {
-    const element = embedRef.current;
+    const element = iframeRef.current;
     if (!element) { return noop; }
     const parent: HTMLElement|null = element.parentElement;
     if (!parent) { return noop; }
@@ -97,21 +108,36 @@ const DocumentViewer: React.FC<DocumentViewerProps> = (props: DocumentViewerProp
       resizeObserver.disconnect();
       resizeObserver = null;
     };
-  }, [embedRef, handleResizeCb]);
+  }, [iframeRef, handleResizeCb]);
+
+  const renderObject = (): JSX.Element => {
+    if (!DocumentService.isViewerSupported(document)) {
+      return (
+        <ErrorCard
+          title="Document Error"
+          message="This document type is not supported or could not be displayed"
+        />
+      );
+    }
+    return (
+      <iframe
+        ref={iframeRef as React.MutableRefObject<HTMLIFrameElement>}
+        src={dataUrl}
+        aria-label={document.description}
+        title={document.description}
+        width={viewerWidth}
+        height={calcAutoHeight(viewerWidth)}
+        className={classes.iframe}
+      />
+    );
+  };
 
   return (
     <div
       ref={containerRef as React.MutableRefObject<HTMLDivElement>}
       className={classes.container}
     >
-      <embed
-        ref={embedRef as React.MutableRefObject<HTMLEmbedElement>}
-        type={document.type}
-        src={`${NeonEnvironment.getFullApiPath('documents')}/${document.name}?inline=true`}
-        title={document.description}
-        width={viewerWidth}
-        height={calcAutoHeight(viewerWidth)}
-      />
+      {renderObject()}
     </div>
   );
 };

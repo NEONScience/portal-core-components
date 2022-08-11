@@ -34,6 +34,7 @@ import RightIcon from '@material-ui/icons/ChevronRight';
 
 import DocBlock from './DocBlock';
 
+import SplitButton from '../lib_components/components/Button/SplitButton';
 import Theme from '../lib_components/components/Theme/Theme';
 
 const useStyles = makeStyles((theme) => ({
@@ -268,6 +269,82 @@ export default function BasicComponents() {
           <Button variant="contained" size="large" disabled>
             Contained
           </Button>
+        </div>
+      </div>
+
+      {/* Split Button */}
+      <Divider className={classes.divider} />
+      <Typography variant="h4" component="h2" gutterBottom>SplitButton</Typography>
+      <div className={classes.row}>
+        <div className={classes.block}>
+          <SplitButton
+            name="split-button-outlined-small"
+            options={['One', 'Two', 'Three']}
+            selectedOption="One"
+            // eslint-disable-next-line no-console
+            onClick={(option) => console.log(`clicked ${option}`)}
+            // eslint-disable-next-line no-console
+            onChange={(option) => console.log(`selected ${option}`)}
+            buttonGroupProps={{ size: 'small', variant: 'outlined', color: 'primary' }}
+            buttonProps={{ size: 'small', color: 'primary' }}
+          />
+          <SplitButton
+            name="split-button-outlined"
+            options={['One', 'Two', 'Three']}
+            selectedOption="One"
+            // eslint-disable-next-line no-console
+            onClick={(option) => console.log(`clicked ${option}`)}
+            // eslint-disable-next-line no-console
+            onChange={(option) => console.log(`selected ${option}`)}
+            buttonGroupProps={{ variant: 'outlined', color: 'primary' }}
+            buttonProps={{ color: 'primary' }}
+          />
+          <SplitButton
+            name="split-button-outlined-large"
+            options={['One', 'Two', 'Three']}
+            selectedOption="One"
+            // eslint-disable-next-line no-console
+            onClick={(option) => console.log(`clicked ${option}`)}
+            // eslint-disable-next-line no-console
+            onChange={(option) => console.log(`selected ${option}`)}
+            buttonGroupProps={{ size: 'large', variant: 'outlined', color: 'primary' }}
+            buttonProps={{ size: 'large', color: 'primary' }}
+          />
+        </div>
+        <div className={classes.block}>
+          <SplitButton
+            name="split-button-contained-small"
+            options={['One', 'Two', 'Three']}
+            selectedOption="One"
+            // eslint-disable-next-line no-console
+            onClick={(option) => console.log(`clicked ${option}`)}
+            // eslint-disable-next-line no-console
+            onChange={(option) => console.log(`selected ${option}`)}
+            buttonGroupProps={{ size: 'small', variant: 'contained', color: 'primary' }}
+            buttonProps={{ size: 'small', color: 'primary', variant: 'contained' }}
+          />
+          <SplitButton
+            name="split-button-contained"
+            options={['One', 'Two', 'Three']}
+            selectedOption="One"
+            // eslint-disable-next-line no-console
+            onClick={(option) => console.log(`clicked ${option}`)}
+            // eslint-disable-next-line no-console
+            onChange={(option) => console.log(`selected ${option}`)}
+            buttonGroupProps={{ variant: 'contained', color: 'primary' }}
+            buttonProps={{ color: 'primary', variant: 'contained' }}
+          />
+          <SplitButton
+            name="split-button-contained-large"
+            options={['One', 'Two', 'Three']}
+            selectedOption="One"
+            // eslint-disable-next-line no-console
+            onClick={(option) => console.log(`clicked ${option}`)}
+            // eslint-disable-next-line no-console
+            onChange={(option) => console.log(`selected ${option}`)}
+            buttonGroupProps={{ size: 'large', variant: 'contained', color: 'primary' }}
+            buttonProps={{ size: 'large', color: 'primary', variant: 'contained' }}
+          />
         </div>
       </div>
 

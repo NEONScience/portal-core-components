@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "name": "neon-buttons",
+  "main": "./SplitButton.tsx",
+  "module": "./SplitButton.tsx"
+}

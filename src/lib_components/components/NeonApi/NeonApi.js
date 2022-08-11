@@ -97,6 +97,57 @@ const getJsonObservable = (
 };
 
 /**
+ * Gets the RxJS HEAD AjaxRequest
+ * @param {string} url The URL to make the API request to
+ * @param {Object|undefined} headers The headers to add to the request
+ * @param {boolean} includeToken Option to include the API token in the request
+ * @param {boolean} withCredentials Option to include credentials with a CORS request
+ * @return The RxJS HEAD AjaxRequest
+ */
+const headJsonAjaxRequest = (
+  url,
+  headers = undefined,
+  includeToken = true,
+  withCredentials = undefined,
+) => {
+  let appliedHeaders = headers || {};
+  if (includeToken) {
+    appliedHeaders = getApiTokenHeader(appliedHeaders);
+  }
+  const appliedWithCredentials = getAppliedWithCredentials(withCredentials);
+  return {
+    url,
+    method: 'HEAD',
+    responseType: 'json',
+    crossDomain: true,
+    withCredentials: appliedWithCredentials,
+    headers: {
+      ...appliedHeaders,
+    },
+  };
+};
+
+/**
+ * Gets the RxJS observable for making an API request to the specified URL
+ * with optional headers.
+ * @param {string} url The URL to make the API request to
+ * @param {Object|undefined} headers The headers to add to the request
+ * @param {boolean} includeToken Option to include the API token in the request
+ * @param {boolean} withCredentials Option to include credentials with a CORS request
+ * @return The RxJS Ajax Observable
+ */
+const headJsonObservable = (
+  url,
+  headers = undefined,
+  includeToken = true,
+  withCredentials = undefined,
+) => {
+  if (typeof url !== 'string' || !url.length) { return of(null); }
+  const request = headJsonAjaxRequest(url, headers, includeToken, withCredentials);
+  return ajax(request);
+};
+
+/**
  * Gets the RxJS observable for making a POST API request to the specified URL
  * with body and optional headers.
  * @param {string} url The URL to make the API request to
@@ -165,6 +216,17 @@ const NeonApi = {
    */
   postJsonObservable: (url, body, headers = undefined, includeToken = true) => (
     postJsonObservable(url, body, headers, includeToken)
+  ),
+  /**
+   * Gets the RxJS observable for making a HEAD API request to the specified URL
+   * with optional headers.
+   * @param {string} url The URL to make the API request to
+   * @param {Object|undefined} headers The headers to add to the request
+   * @param {boolean} includeToken Option to include the API token in the request
+   * @return The RxJS Ajax Observable
+   */
+  headJsonObservable: (url, headers = undefined, includeToken = true) => (
+    headJsonObservable(url, headers, includeToken)
   ),
 
   /**
@@ -290,6 +352,32 @@ const NeonApi = {
       true,
       false,
     )
+  ),
+
+  /**
+   * Gets the RxJS Observable for the document HEAD endpoint for a given name
+   * @param {string} name The document name
+   * @return The RxJS Ajax Observable
+   */
+  headDocumentObservable: (name) => (
+    headJsonObservable(`${NeonEnvironment.getFullApiPath('documents')}/${name}`)
+  ),
+  /**
+   * Gets the RxJS Observable for the quick start guides endpoint for a given name
+   * @param {string} name The quick start guide name
+   * @param {string} version The quick start guide version
+   * @return The RxJS Ajax Observable
+   */
+  getQuickStartGuideDetailObservable: (name, version) => (
+    getJsonObservable(`${NeonEnvironment.getFullApiPath('quickStartGuides')}/details/${name}/${version}`)
+  ),
+  /**
+   * Gets the RxJS Observable for the quick start guides HEAD endpoint for a given name
+   * @param {string} name The document name
+   * @return The RxJS Ajax Observable
+   */
+  headQuickStartGuideObservable: (name) => (
+    headJsonObservable(`${NeonEnvironment.getFullApiPath('quickStartGuides')}/${name}`)
   ),
 };
 
