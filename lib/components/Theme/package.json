@@ -1,6 +1,6 @@
 {
   "private": true,
   "name": "theme",
-  "main": "./Theme.js",
+  "main": "./Theme.jsx",
   "module": "./index.js"
 }

@@ -22,6 +22,7 @@
     "./src/**/StyleGuide.*",
     "./src/components/*",
     "./src/lib_components/remoteAssets/*",
+    "./src/lib_components/vendor/**/*",
     "./src/favicon/*",
     "./src/sampleData/*",
     "./src/*.js",

@@ -1630,7 +1630,7 @@ export namespace BOUNDARY_COLORS {
     const hover: string;
 }
 export function calculateFeatureAvailability(state: any): any;
-export function getHref(key: any, arg?: any): string;
+export function getHref(key: any, arg?: null): string;
 export namespace BASE_LAYERS {
     namespace NATGEO_WORLD_MAP {
         const title: string;
@@ -1844,7 +1844,7 @@ export namespace SITE_MAP_DEFAULT_PROPS {
     const manualLocationData_1: null;
     export { manualLocationData_1 as manualLocationData };
 }
-export function getZoomedIcon(featureKey?: any, zoom?: number, highlight?: string, selection?: string): any;
+export function getZoomedIcon(featureKey?: null, zoom?: number, highlight?: string, selection?: string): any;
 export function getZoomedIcons(zoom: any): {};
 export function getPhantomLeafletMap(state: any): any;
 export function mapIsAtFocusLocation(state?: {}): any;
@@ -1855,7 +1855,7 @@ export function parseManualLocationFeatureData(state: any): any;
 export function hydrateNeonContextData(state: any, neonContextData: any): any;
 export function getDynamicAspectRatio(unusableVerticalSpace?: number): number;
 export function boundsAreValid(bounds: any): boolean;
-export function calculateLocationsInBounds(locations: any, bounds?: any, extendMap?: boolean, extendPoints?: number): string[];
+export function calculateLocationsInBounds(locations: any, bounds?: null, extendMap?: boolean, extendPoints?: number): string[];
 export function deriveFullObservatoryZoomLevel(mapRef: any): number;
 /**
    GRAPHQL_LOCATIONS_API Constants

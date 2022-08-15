@@ -462,7 +462,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core)
       <img
         alt="Aquatic Core"
         height={32}
-        src="icon-site-core-aquatic.svg"
+        src="svg-file.svg"
         style={
           Object {
             "flexGrow": 0,
@@ -841,7 +841,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
       <img
         alt="Aquatic Gradient"
         height={32}
-        src="icon-site-gradient-aquatic.svg"
+        src="svg-file.svg"
         style={
           Object {
             "flexGrow": 0,
@@ -1283,7 +1283,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
       <img
         alt="Terrestrial Core"
         height={32}
-        src="icon-site-core-terrestrial.svg"
+        src="svg-file.svg"
         style={
           Object {
             "flexGrow": 0,
@@ -1725,7 +1725,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
       <img
         alt="Terrestrial Gradient"
         height={32}
-        src="icon-site-gradient-terrestrial.svg"
+        src="svg-file.svg"
         style={
           Object {
             "flexGrow": 0,
@@ -2189,7 +2189,7 @@ exports[`TimeSeriesViewerSites SiteOption Renders as expected without stateCode 
     <img
       alt="Terrestrial Gradient"
       height={24}
-      src="icon-site-gradient-terrestrial.svg"
+      src="svg-file.svg"
       style={
         Object {
           "flexGrow": 0,

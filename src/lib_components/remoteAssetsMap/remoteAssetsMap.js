@@ -1,8 +1,9 @@
 // A structure containing local filenames and remote URLs for all remote assets used in
 
-import NeonEnvironment from '../components/NeonEnvironment/NeonEnvironment';
-
-import { REMOTE_ASSET_PATHS, REMOTE_ASSET_NAMES } from './remoteAssets';
+// eslint-disable-next-line import/extensions
+import NeonEnvironment from '../components/NeonEnvironment/NeonEnvironment.ts';
+// eslint-disable-next-line import/extensions
+import { REMOTE_ASSET_PATHS, REMOTE_ASSET_NAMES } from './remoteAssets.js';
 
 // portal-core-components that we want to cache updated snapshots of at every lib build
 const REMOTE_ASSETS = {

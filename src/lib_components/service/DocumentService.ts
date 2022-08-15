@@ -223,6 +223,7 @@ const DocumentService: IDocumentService = {
     isStringNonEmpty(name) && (name as string).startsWith('NEON.QSG.')
   ),
   getQuickStartGuideNameRegex: (): RegExp => (
+    // eslint-disable-next-line prefer-regex-literals
     new RegExp(/^(?<name>NEON[.]QSG[.]DP[0-9]{1}[.][0-9]{5}[.][0-9]{3})(?<version>v(?<versionNumber>[0-9]+))*(?<extension>[.](?<extensionName>[a-z]+))*$/)
   ),
   parseQuickStartGuideName: (name: string): Nullable<ParsedQsgNameResult> => {

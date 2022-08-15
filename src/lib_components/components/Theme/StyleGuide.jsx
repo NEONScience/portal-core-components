@@ -94,7 +94,7 @@ const myComponent = () => {
         <b>One should never need to hard-code hex values in components.</b>
         &nbsp;These are the colors currently defined in the theme:
       </DocBlock>
-      <CodeBlock>
+      <CodeBlock language="json">
         {`
 ${JSON.stringify(Theme.palette, null, 2)}
 

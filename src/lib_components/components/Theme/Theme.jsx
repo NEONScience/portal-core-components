@@ -1,9 +1,9 @@
 import React from 'react';
-import 'typeface-inter';
+import '@fontsource/inter/latin.css';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/styles';
-import { useTheme, createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
+import { useTheme, createTheme, responsiveFontSizes } from '@material-ui/core/styles';
 
 // Values defined here are based on the NEON Style Guide,
 // expanded out through color scale generators.
@@ -129,7 +129,7 @@ const COLOR_TEXT_PRIMARY = 'rgba(0, 0, 0, 0.9)';
 // See all customizable Material UI theme keys here:
 // https://material-ui.com/customization/default-theme/#explore
 
-const baseTheme = createMuiTheme({
+const baseTheme = createTheme({
   breakpoints: {
     values: {
       xs: 0,

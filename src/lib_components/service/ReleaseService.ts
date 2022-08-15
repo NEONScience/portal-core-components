@@ -44,6 +44,7 @@ export interface IReleaseService {
 }
 
 const ReleaseService: IReleaseService = {
+  // eslint-disable-next-line prefer-regex-literals
   getProvReleaseRegex: (): RegExp => new RegExp(/^[A-Z]+$/),
   isLatestNonProv: (releaseTag: string): boolean => {
     const matches: RegExpExecArray|null = ReleaseService.getProvReleaseRegex().exec(releaseTag);

@@ -159,7 +159,7 @@ export const TIME_STEPS: {
         seconds: number;
     };
 };
-export function summarizeTimeSteps(steps: any, timeStep?: any, pluralize?: boolean): string;
+export function summarizeTimeSteps(steps: any, timeStep?: null, pluralize?: boolean): string;
 export default TimeSeriesViewerContext;
 export function getTestableItems(): {
     DEFAULT_STATE?: undefined;
@@ -324,7 +324,7 @@ declare namespace Provider {
         export { productData };
         const release_1: PropTypes.Requireable<string>;
         export { release_1 as release };
-        export const children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+        export const children: PropTypes.Validator<string | number | boolean | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
     }
     namespace defaultProps {
         export const timeSeriesUniqueId: number;

@@ -16,8 +16,8 @@ export function getTestableItems(): {
     reducer?: undefined;
 } | {
     deriveRegionSelections: (state: any) => any;
-    isSelectable: (item: any, validSet?: any) => boolean;
-    getSelectableSet: (setArg: any, validSet?: any) => Set<any>;
+    isSelectable: (item: any, validSet?: null) => any;
+    getSelectableSet: (setArg: any, validSet?: null) => Set<any>;
     validateSelection: (state: any) => any;
     isBasePlot: (featureKey: any) => boolean;
     zoomIsValid: (zoom: any) => boolean;
@@ -40,7 +40,7 @@ declare namespace SiteMapContext {
 declare function Provider(props: any): JSX.Element;
 declare namespace Provider {
     export const propTypes: {
-        children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+        children: PropTypes.Validator<string | number | boolean | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
         view: PropTypes.Requireable<string>;
         aspectRatio: PropTypes.Requireable<number>;
         fullscreen: PropTypes.Requireable<boolean>;

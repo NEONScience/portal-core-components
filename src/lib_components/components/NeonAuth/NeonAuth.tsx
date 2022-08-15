@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-prop-types */
 import React, { useCallback, Dispatch } from 'react';
 
 import Button from '@material-ui/core/Button';
@@ -136,6 +137,7 @@ const renderAuth = (
         break;
     }
   };
+  // eslint-disable-next-line react/jsx-no-useless-fragment
   let authContent: JSX.Element = <></>;
   switch (displayType) {
     case NeonAuthDisplayType.MENU:

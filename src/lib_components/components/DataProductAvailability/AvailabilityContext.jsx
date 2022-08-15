@@ -277,6 +277,7 @@ const Provider = (props) => {
      Render
   */
   return (
+    // eslint-disable-next-line react/jsx-no-constructed-context-values
     <Context.Provider value={[state, dispatch]}>
       {children}
     </Context.Provider>

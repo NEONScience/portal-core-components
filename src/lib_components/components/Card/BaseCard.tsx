@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 import React from 'react';
 
 import Button from '@material-ui/core/Button';
@@ -89,7 +90,7 @@ const BaseCard: React.FC<BaseCardProps> = (props: BaseCardProps): JSX.Element =>
   }
 
   const renderTitle = (): JSX.Element => {
-    let titleTextContent: JSX.Element = (<></>);
+    let titleTextContent: JSX.Element|null = null;
     if (isStringNonEmpty(title)) {
       titleTextContent = (
         <Typography variant="subtitle2" style={{ flexGrow: 1 }}>
@@ -97,7 +98,7 @@ const BaseCard: React.FC<BaseCardProps> = (props: BaseCardProps): JSX.Element =>
         </Typography>
       );
     }
-    let appliedTitleContent: JSX.Element = (<></>);
+    let appliedTitleContent: JSX.Element|null = null;
     if (exists(titleContent)) {
       appliedTitleContent = (
         <div style={{ flexGrow: 1 }}>

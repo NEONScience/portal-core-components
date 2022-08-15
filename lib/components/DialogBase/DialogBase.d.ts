@@ -5,8 +5,8 @@ declare namespace DialogBase {
         const open: PropTypes.Requireable<boolean>;
         const onClose: PropTypes.Validator<(...args: any[]) => any>;
         const title: PropTypes.Validator<string>;
-        const toolbarChildren: PropTypes.Requireable<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
-        const children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+        const toolbarChildren: PropTypes.Requireable<string | number | boolean | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+        const children: PropTypes.Validator<string | number | boolean | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
         const closeButtonProps: PropTypes.Requireable<{
             [x: string]: string | number | null | undefined;
         }>;

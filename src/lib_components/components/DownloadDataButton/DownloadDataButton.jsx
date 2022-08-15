@@ -43,6 +43,7 @@ const DownloadDataButton = (props) => {
       <Button
         color="primary"
         variant="contained"
+        // eslint-disable-next-line react/jsx-no-bind
         onClick={handleOpenDialog}
         data-selenium="download-data-button"
         endIcon={<DownloadIcon />}

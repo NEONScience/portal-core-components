@@ -37,7 +37,7 @@ exports[`NeonAuth - UserCard Renders with a lastLogin prop 1`] = `
         onKeyUp={[Function]}
       >
         <div
-          className="MuiAvatar-root MuiAvatar-circle MuiChip-avatar MuiChip-avatarColorPrimary MuiAvatar-colorDefault"
+          className="MuiAvatar-root MuiAvatar-circular MuiChip-avatar MuiChip-avatarColorPrimary MuiAvatar-colorDefault"
           color="primary"
         >
           <svg
@@ -134,7 +134,7 @@ exports[`NeonAuth - UserCard Renders without a lastLogin prop 1`] = `
         onKeyUp={[Function]}
       >
         <div
-          className="MuiAvatar-root MuiAvatar-circle MuiChip-avatar MuiChip-avatarColorPrimary MuiAvatar-colorDefault"
+          className="MuiAvatar-root MuiAvatar-circular MuiChip-avatar MuiChip-avatarColorPrimary MuiAvatar-colorDefault"
           color="primary"
         >
           <svg

@@ -192,7 +192,8 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
 
   const renderSkeleton = (): JSX.Element => {
     if (disableSkeleton) {
-      return (<React.Fragment />);
+      // eslint-disable-next-line react/jsx-no-useless-fragment
+      return (<></>);
     }
     return (
       <Grid container spacing={2}>
@@ -256,7 +257,7 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
 
   const renderCitationBlurb = (): Nullable<JSX.Element> => {
     if (showTextOnly) {
-      return (<React.Fragment />);
+      return null;
     }
     const showNonConditionalBlurb: boolean = [
       DisplayType.RELEASE,
@@ -396,11 +397,9 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
       )
     ) {
       downloadStatus = (
-        <>
-          <Alert severity="error" onClose={() => handleResetCitationDownloadsCb(provisional)}>
-            Citation download encountered a problem
-          </Alert>
-        </>
+        <Alert severity="error" onClose={() => handleResetCitationDownloadsCb(provisional)}>
+          Citation download encountered a problem
+        </Alert>
       );
     } else if (
       Service.hasCitationDownloadStatus(
@@ -410,11 +409,9 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
       )
     ) {
       downloadStatus = (
-        <>
-          <Alert severity="success" onClose={() => handleResetCitationDownloadsCb(provisional)}>
-            Citation downloaded
-          </Alert>
-        </>
+        <Alert severity="success" onClose={() => handleResetCitationDownloadsCb(provisional)}>
+          Citation downloaded
+        </Alert>
       );
     }
     return (
@@ -493,7 +490,7 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
   };
 
   const renderCitationDisplay = (): JSX.Element => {
-    let citationCard: JSX.Element = (<React.Fragment />);
+    let citationCard: JSX.Element;
     switch (displayType) {
       case DisplayType.CONDITIONAL:
         citationCard = (

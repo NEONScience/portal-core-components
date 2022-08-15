@@ -605,7 +605,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
             }
           >
             <div
-              className="MuiAvatar-root MuiAvatar-circle MuiChip-avatar makeStyles-avatarLarge-25 MuiChip-avatarColorSecondary MuiAvatar-colorDefault"
+              className="MuiAvatar-root MuiAvatar-circular MuiChip-avatar makeStyles-avatarLarge-25 MuiChip-avatarColorSecondary MuiAvatar-colorDefault"
               style={
                 Object {
                   "backgroundColor": "#002c77",

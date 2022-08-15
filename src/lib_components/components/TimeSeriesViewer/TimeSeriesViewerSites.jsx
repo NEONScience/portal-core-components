@@ -49,10 +49,12 @@ import Theme from '../Theme/Theme';
 import NeonContext from '../NeonContext/NeonContext';
 import MapSelectionButton from '../MapSelectionButton/MapSelectionButton';
 
-import iconCoreTerrestrialSVG from '../SiteMap/svg/icon-site-core-terrestrial.svg';
-import iconCoreAquaticSVG from '../SiteMap/svg/icon-site-core-aquatic.svg';
-import iconGradientTerrestrialSVG from '../SiteMap/svg/icon-site-gradient-terrestrial.svg';
-import iconGradientAquaticSVG from '../SiteMap/svg/icon-site-gradient-aquatic.svg';
+/* eslint-disable import/no-webpack-loader-syntax, import/no-unresolved */
+import iconCoreTerrestrialSVG from '!file-loader?name=static/media/[name].[hash].[ext]!../SiteMap/svg/icon-site-core-terrestrial.svg';
+import iconCoreAquaticSVG from '!file-loader?name=static/media/[name].[hash].[ext]!../SiteMap/svg/icon-site-core-aquatic.svg';
+import iconGradientTerrestrialSVG from '!file-loader?name=static/media/[name].[hash].[ext]!../SiteMap/svg/icon-site-gradient-terrestrial.svg';
+import iconGradientAquaticSVG from '!file-loader?name=static/media/[name].[hash].[ext]!../SiteMap/svg/icon-site-gradient-aquatic.svg';
+/* eslint-enable import/no-webpack-loader-syntax, import/no-unresolved */
 
 import TimeSeriesViewerContext, { TabComponentPropTypes } from './TimeSeriesViewerContext';
 

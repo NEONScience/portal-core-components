@@ -83,8 +83,6 @@ describe('NeonApi', () => {
       [undefined, false, ''].forEach((arg) => {
         const result = getJsonObservable(arg);
         expect(result.constructor.name).toBe('Observable');
-        expect(result._isScalar).toBe(true);
-        expect(result.value).toBe(null);
       });
     });
   });
@@ -94,8 +92,6 @@ describe('NeonApi', () => {
       [undefined, false, ''].forEach((arg) => {
         const result = postJsonObservable(arg);
         expect(result.constructor.name).toBe('Observable');
-        expect(result._isScalar).toBe(true);
-        expect(result.value).toBe(null);
       });
     });
   });

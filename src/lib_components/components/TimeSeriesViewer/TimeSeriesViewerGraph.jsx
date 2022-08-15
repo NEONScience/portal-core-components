@@ -40,7 +40,9 @@ import NeonLogo from '../../images/NSF-NEON-logo.png';
 
 // Load Dygraph plugins. These are not built as modules and require a global Dygraph instance. =(
 if (!window.Dygraph) { window.Dygraph = Dygraph; }
+// eslint-disable-next-line import/extensions
 require('dygraphs/src/extras/shapes.js');
+// eslint-disable-next-line import/extensions
 require('dygraphs/src/extras/crosshair.js');
 
 const SERIES_COLORS = [
@@ -659,7 +661,7 @@ export default function TimeSeriesViewerGraph() {
 
   const renderCitation = () => {
     if (!state.product || !state.product.productCode) {
-      return (<></>);
+      return null;
     }
     return (
       <DataProductCitation

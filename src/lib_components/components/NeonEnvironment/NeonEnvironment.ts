@@ -1,3 +1,4 @@
+/* eslint-disable prefer-regex-literals */
 import { AuthSilentType, Undef } from '../../types/core';
 
 // Default hosts

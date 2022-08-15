@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 import React, {
   useCallback,
   useRef,
@@ -42,9 +43,9 @@ const breakpoints: number[] = [0, 675, 900, 1200];
 const ratios: string[] = ['8:11', '3:4', '4:4', '4:3'];
 
 const calcAutoHeight = (width: number): number => {
-  const breakIdx: number = breakpoints.reduce(
-    (acc, breakpoint, idx) => (width >= breakpoint ? idx : acc), 0,
-  );
+  const breakIdx: number = breakpoints.reduce((acc, breakpoint, idx) => (
+    width >= breakpoint ? idx : acc
+  ), 0);
   const ratio: RegExpExecArray|null = /^([\d.]+):([\d.]+)$/.exec(ratios[breakIdx]);
   let mult: number = 4 / 3;
   if (ratio) {

@@ -27,10 +27,11 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": [
-    "./src/**/*"
+    "./src/**/*",
+    "react-app-env.d.ts"
   ],
   "exclude": [
-    "**/*.d.ts",
+    "src/**/*.d.ts",
     "node_modules",
     "dist",
     "test",

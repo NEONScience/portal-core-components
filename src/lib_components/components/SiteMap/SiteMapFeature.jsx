@@ -1274,6 +1274,7 @@ const SiteMapFeature = (props) => {
     FLIGHT_BOX_BOUNDARIES: renderBoundaryPopup,
     HUTS: renderLocationPopup,
     MEGAPITS: renderLocationPopup,
+    // eslint-disable-next-line react/no-unstable-nested-components
     POUR_POINTS: (siteCode) => (
       <Popup {...popupProps}>
         {renderPopupTitle(`${siteCode} Watershed Pour Point`)}

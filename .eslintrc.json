@@ -16,6 +16,8 @@
     "src/registerServiceWorker.js",
     "src/lib_components/components/**/*.d.ts",
     "src/lib_components/remoteAssets",
+    "src/lib_components/vendor/",
+    "src/*.d.ts",
     "src/**/__tests__",
     "src/**/__mocks__",
     "lib/",
@@ -23,15 +25,9 @@
     "jest.config.js"
   ],
   "rules": {
-    "linebreak-style": 0,
-    "react/jsx-props-no-spreading": 0,
-    "eslint linebreak-style": [0, "error", "windows"],
-    "import/no-extraneous-dependencies": ["error", {"packageDir": "./"}],
-    "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
-    "no-use-before-define": "off",
-    "@typescript-eslint/no-use-before-define": ["warn"],
-    "no-shadow": "off",
     "@typescript-eslint/no-shadow": ["error"],
+    "@typescript-eslint/no-use-before-define": ["warn"],
+    "eslint linebreak-style": [0, "error", "windows"],
     "import/extensions": [
       "error",
       "ignorePackages",
@@ -41,7 +37,16 @@
         "ts": "never",
         "tsx": "never"
       }
-    ]
+    ],
+    "import/no-extraneous-dependencies": ["error", {"packageDir": "./"}],
+    "import/no-relative-packages": 0,
+    "linebreak-style": 0,
+    "react/function-component-definition": 0,
+    "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+    "react/jsx-props-no-spreading": 0,
+    "no-restricted-exports": 0,
+    "no-shadow": "off",
+    "no-use-before-define": "off"
   },
   "overrides": [
     {

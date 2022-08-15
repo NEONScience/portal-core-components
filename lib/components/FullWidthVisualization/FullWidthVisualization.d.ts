@@ -7,7 +7,7 @@ declare namespace FullWidthVisualization {
         const minWidth: PropTypes.Requireable<number>;
         const handleRedraw: PropTypes.Requireable<(...args: any[]) => any>;
         const deriveHeightFromWidth: PropTypes.Requireable<string | ((...args: any[]) => any)>;
-        const children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+        const children: PropTypes.Validator<string | number | boolean | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
     }
     namespace defaultProps {
         const minWidth_1: number;

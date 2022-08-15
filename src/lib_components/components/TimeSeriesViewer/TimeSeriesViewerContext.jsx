@@ -37,6 +37,7 @@ import { convertStateForStorage, convertStateFromStorage } from './StateStorageC
 import { TIME_SERIES_VIEWER_STATUS } from './constants';
 
 // 'get' is a reserved word so can't be imported with import
+// eslint-disable-next-line import/extensions
 const lodashGet = require('lodash/get.js');
 
 const VIEWER_MODE = {
@@ -619,7 +620,8 @@ const applyDefaultsToSelection = (state) => {
             monthMeans.push(series.sum / series.count);
             monthVariances.push(series.variance);
             selection.yAxes[yAxis].dataRange = getUpdatedValueRange(
-              selection.yAxes[yAxis].dataRange, series.range,
+              selection.yAxes[yAxis].dataRange,
+              series.range,
             );
           });
         });
@@ -912,7 +914,8 @@ const reducer = (state, action) => {
       delete newState.metaFetches[`fetchSitePositions.${action.siteCode}`];
       newState.product.sites[action.siteCode].fetches.positions.status = FETCH_STATUS.SUCCESS;
       newState.product.sites[action.siteCode] = parseSitePositions(
-        newState.product.sites[action.siteCode], action.csv,
+        newState.product.sites[action.siteCode],
+        action.csv,
       );
       calcSelection();
       calcStatus();
@@ -1549,6 +1552,7 @@ const Provider = (props) => {
      Render
   */
   return (
+    // eslint-disable-next-line react/jsx-no-constructed-context-values
     <Context.Provider value={[state, dispatch]}>
       {children}
     </Context.Provider>

@@ -979,11 +979,13 @@ const SiteMapTable = () => {
     : `${classes.toolbarContainer} ${classes.toolbarContainerNoSplit}`;
   const components = {
     Container: Box,
+    // eslint-disable-next-line react/no-unstable-nested-components
     Toolbar: (toolbarProps) => (
       <div className={toolbarClassName} data-selenium="sitemap-table-toolbar">
         <MTableToolbar {...toolbarProps} classes={{ title: classes.tableTitle }} />
       </div>
     ),
+    // eslint-disable-next-line react/no-unstable-nested-components
     FilterRow: (filterRowProps) => (
       <MTableFilterRow
         {...filterRowProps}

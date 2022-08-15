@@ -1,10 +1,10 @@
 /* eslint-disable react/require-default-props */
 import React from 'react';
 import {
-  Router,
+  BrowserRouter,
   Route,
-  Switch,
-  Redirect,
+  Routes,
+  Navigate,
 } from 'react-router-dom';
 
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
@@ -25,24 +25,25 @@ const NeonRouter = (props: NeonRouterProps): JSX.Element => {
   if (cleanPath !== false) {
     HistoryService.cleanPath();
   }
+  const renderFallthrough = () => {
+    if (disableRedirect === true) {
+      return children;
+    }
+    return <Navigate to={NeonEnvironment.getRouterBaseHomePath() as string} />;
+  };
   return (
-    <Router history={HistoryService.history}>
-      <Switch>
+    <BrowserRouter>
+      <Routes>
         <Route
-          exact
           path={NeonEnvironment.getRouterBaseHomePath()}
-          render={() => children}
+          element={children}
         />
         <Route
-          render={() => {
-            if (disableRedirect === true) {
-              return children;
-            }
-            return <Redirect to={NeonEnvironment.getRouterBaseHomePath() as string} />;
-          }}
+          path="*"
+          element={renderFallthrough()}
         />
-      </Switch>
-    </Router>
+      </Routes>
+    </BrowserRouter>
   );
 };
 

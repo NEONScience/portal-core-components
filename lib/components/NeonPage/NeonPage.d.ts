@@ -42,16 +42,16 @@ declare namespace NeonPage {
         export const sidebarTitle: PropTypes.Requireable<string>;
         export const sidebarWidth: PropTypes.Requireable<number>;
         export const sidebarUnsticky: PropTypes.Requireable<boolean>;
-        export const subtitle: PropTypes.Requireable<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
-        export const title: PropTypes.Requireable<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+        export const subtitle: PropTypes.Requireable<string | number | boolean | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+        export const title: PropTypes.Requireable<string | number | boolean | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
         export const unstickyDrupalHeader: PropTypes.Requireable<boolean>;
         export const NeonContextProviderProps: PropTypes.Requireable<PropTypes.InferProps<{
-            children: PropTypes.Requireable<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+            children: PropTypes.Requireable<string | number | boolean | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
             fetchPartials: PropTypes.Requireable<boolean>;
             useCoreAuth: PropTypes.Requireable<boolean>;
             whenFinal: PropTypes.Requireable<(...args: any[]) => any>;
         }>>;
-        const children_1: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+        const children_1: PropTypes.Validator<string | number | boolean | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
         export { children_1 as children };
     }
     export { propTypes_1 as propTypes };
@@ -102,4 +102,4 @@ declare namespace NeonPage {
         export { NeonContextProviderProps_1 as NeonContextProviderProps };
     }
 }
-declare const children: PropTypes.Requireable<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+declare const children: PropTypes.Requireable<string | number | boolean | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;

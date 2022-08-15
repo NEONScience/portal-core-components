@@ -79,9 +79,12 @@ const isAtMaxScroll = () => {
   const windowHeight = window.innerHeight
     || (document.documentElement || document.body).clientHeight;
   const documentHeight = Math.max(
-    document.body.scrollHeight, document.documentElement.scrollHeight,
-    document.body.offsetHeight, document.documentElement.offsetHeight,
-    document.body.clientHeight, document.documentElement.clientHeight,
+    document.body.scrollHeight,
+    document.documentElement.scrollHeight,
+    document.body.offsetHeight,
+    document.documentElement.offsetHeight,
+    document.body.clientHeight,
+    document.documentElement.clientHeight,
   );
   const scrollTop = window.pageYOffset
     || (document.documentElement || document.body.parentNode || document.body).scrollTop;
@@ -703,11 +706,9 @@ const NeonPage = (props) => {
     // Arbitrary Content Sidebar (no automatic skeleton)
     if (hasSidebarContent) {
       return (
-        <>
-          <div ref={sidebarRef} className={sidebarClassName} style={sidebarContainerStyle}>
-            {sidebarContent}
-          </div>
-        </>
+        <div ref={sidebarRef} className={sidebarClassName} style={sidebarContainerStyle}>
+          {sidebarContent}
+        </div>
       );
     }
     // Render Sidebar Title

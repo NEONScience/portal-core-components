@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
@@ -493,7 +494,8 @@ export default function DownloadStepForm(props) {
           <MTableFilterRow
             {...filterRowProps}
             onFilterChanged={(columnId, value) => {
-              filterRowProps.onFilterChanged(columnId, value);
+              const { onFilterChanged } = filterRowProps;
+              onFilterChanged(columnId, value);
               const filter = columns[columnId].field;
               const current = filters[filter];
               if (filter === 'name' && value !== current) {

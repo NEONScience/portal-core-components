@@ -14,9 +14,9 @@ import PropTypes from 'prop-types';
 const autoVizHeight = (width) => {
   const breakpoints = [0, 675, 900, 1200];
   const ratios = ['3:2', '16:9', '2:1', '2.5:1'];
-  const breakIdx = breakpoints.reduce(
-    (acc, breakpoint, idx) => (width >= breakpoint ? idx : acc), 0,
-  );
+  const breakIdx = breakpoints.reduce((acc, breakpoint, idx) => (
+    width >= breakpoint ? idx : acc
+  ), 0);
   const ratio = /^([\d.]+):([\d.]+)$/.exec(ratios[breakIdx]);
   const mult = (parseFloat(ratio[2], 10) || 1) / (parseFloat(ratio[1], 10) || 1);
   return Math.floor(width * mult);

@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /* eslint-disable arrow-parens */
 
 import { Reducer } from 'redux';
@@ -101,7 +102,7 @@ class AsyncFlowProvider implements IAsyncFlowProvider {
         break;
     }
     return update;
-  }
+  };
 
   /**
    * Creates the reducer for handling all async actions within the flow
@@ -128,7 +129,7 @@ class AsyncFlowProvider implements IAsyncFlowProvider {
         break;
     }
     return update;
-  })
+  });
 
   /**
    * Creates the set of async flow action creators to dispatch
@@ -164,7 +165,7 @@ class AsyncFlowProvider implements IAsyncFlowProvider {
       asyncResetAction: resetAction,
       parserFunction,
     };
-  }
+  };
 
   /**
    * Creates an async flow handler for unifying asynchronous flows within redux
@@ -195,7 +196,7 @@ class AsyncFlowProvider implements IAsyncFlowProvider {
       reducer,
       ...this.createCoreAsyncFlowActions<T>(actionTypes, parserFunction),
     };
-  }
+  };
 
   /**
    * Handles the reduction of an asynchronous flow by propagating the
@@ -234,7 +235,7 @@ class AsyncFlowProvider implements IAsyncFlowProvider {
       default:
         return update;
     }
-  }
+  };
 }
 
 const AsyncFlow: IAsyncFlowProvider = new AsyncFlowProvider();

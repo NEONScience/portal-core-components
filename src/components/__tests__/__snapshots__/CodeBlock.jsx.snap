@@ -1,21 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CodeBlock renders with a string 1`] = `
-<div
-  ComponentPath="react-highlight.js"
-  prop-className="makeStyles-root-1"
-  prop-language="typescript"
+<pre
+  className="makeStyles-root-2"
 >
-  var code = 'block';
-</div>
+  <code
+    className="typescript"
+  >
+    var code = 'block';
+  </code>
+</pre>
 `;
 
 exports[`CodeBlock renders with a string and a specified language 1`] = `
-<div
-  ComponentPath="react-highlight.js"
-  prop-className="makeStyles-root-1"
-  prop-language="php"
+<pre
+  className="makeStyles-root-2"
 >
-  $code = "block";
-</div>
+  <code
+    className="javascript"
+  >
+    $code = "block";
+  </code>
+</pre>
 `;

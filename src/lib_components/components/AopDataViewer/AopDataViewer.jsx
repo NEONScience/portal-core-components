@@ -75,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
    into an object keyed by sites each containing an object keyed by years
    each containing an array of flights. Each flight contains the month and URL.
 */
-/* eslint-disable no-param-reassign */
+/* eslint-disable no-param-reassign, function-paren-newline */
 const parseFetchResponse = (response) => response.data.siteCodes.reduce(
   (obj, site) => {
     obj[site.siteCode] = site.availableMonths.reduce(
@@ -93,7 +93,7 @@ const parseFetchResponse = (response) => response.data.siteCodes.reduce(
     return obj;
   }, {},
 );
-/* eslint-enable no-param-reassign */
+/* eslint-enable no-param-reassign, function-paren-newline */
 
 /**
    Functions to get slider marks and bounds

@@ -1,5 +1,4 @@
-/* eslint-disable no-unreachable */
-import Parallel from 'paralleljs';
+import Parallel from '../vendor/paralleljs';
 
 /**
    Worker - Parse Time Series Data

@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 
+import Grid from '@material-ui/core/Grid';
+import Skeleton from '@material-ui/lab/Skeleton';
 import HomeIcon from '@material-ui/icons/Home';
 import BasicComponentsIcon from '@material-ui/icons/ViewModule';
 
@@ -7,28 +9,95 @@ import NeonPage from './lib_components/components/NeonPage/NeonPage';
 import NeonRouter from './lib_components/components/NeonRouter/NeonRouter';
 
 import Home from './components/Home';
-import BasicComponents from './components/BasicComponents';
-import AopDataViewerStyleGuide from './lib_components/components/AopDataViewer/StyleGuide';
-import CitationsStyleGuide from './lib_components/components/Citation/StyleGuide';
-import DataProductAvailabilityStyleGuide from './lib_components/components/DataProductAvailability/StyleGuide';
-import DataThemeIconStyleGuide from './lib_components/components/DataThemeIcon/StyleGuide';
-import DocumentsStyleGuide from './lib_components/components/Documents/StyleGuide';
-import DownloadDataButtonStyleGuide from './lib_components/components/DownloadDataButton/StyleGuide';
-import DownloadDataContextStyleGuide from './lib_components/components/DownloadDataContext/StyleGuide';
-import ExternalHostInfoStyleGuide from './lib_components/components/ExternalHostInfo/StyleGuide';
-import FullWidthVisualizationStyleGuide from './lib_components/components/FullWidthVisualization/StyleGuide';
-import MapSelectionButtonStyleGuide from './lib_components/components/MapSelectionButton/StyleGuide';
-import NeonAuthStyleGuide from './lib_components/components/NeonAuth/StyleGuide';
-import NeonContextStyleGuide from './lib_components/components/NeonContext/StyleGuide';
-import NeonEnvironmentStyleGuide from './lib_components/components/NeonEnvironment/StyleGuide';
-import NeonGraphQLStyleGuide from './lib_components/components/NeonGraphQL/StyleGuide';
-import NeonPageStyleGuide from './lib_components/components/NeonPage/StyleGuide';
-import ReleaseFilterStyleGuide from './lib_components/components/ReleaseFilter/StyleGuide';
-import SiteChipStyleGuide from './lib_components/components/SiteChip/StyleGuide';
-import SiteMapStyleGuide from './lib_components/components/SiteMap/StyleGuide';
-import StoryMapStyleGuide from './lib_components/components/StoryMap/StyleGuide';
-import ThemeStyleGuide from './lib_components/components/Theme/StyleGuide';
-import TimeSeriesViewerStyleGuide from './lib_components/components/TimeSeriesViewer/StyleGuide';
+
+const BasicComponents = React.lazy(
+  () => import('./components/BasicComponents'),
+);
+const AopDataViewerStyleGuide = React.lazy(
+  () => import('./lib_components/components/AopDataViewer/StyleGuide'),
+);
+const CitationsStyleGuide = React.lazy(
+  () => import('./lib_components/components/Citation/StyleGuide'),
+);
+const DataProductAvailabilityStyleGuide = React.lazy(
+  () => import('./lib_components/components/DataProductAvailability/StyleGuide'),
+);
+const DataThemeIconStyleGuide = React.lazy(
+  () => import('./lib_components/components/DataThemeIcon/StyleGuide'),
+);
+const DocumentsStyleGuide = React.lazy(
+  () => import('./lib_components/components/Documents/StyleGuide'),
+);
+const DownloadDataButtonStyleGuide = React.lazy(
+  () => import('./lib_components/components/DownloadDataButton/StyleGuide'),
+);
+const DownloadDataContextStyleGuide = React.lazy(
+  () => import('./lib_components/components/DownloadDataContext/StyleGuide'),
+);
+const ExternalHostInfoStyleGuide = React.lazy(
+  () => import('./lib_components/components/ExternalHostInfo/StyleGuide'),
+);
+const FullWidthVisualizationStyleGuide = React.lazy(
+  () => import('./lib_components/components/FullWidthVisualization/StyleGuide'),
+);
+const MapSelectionButtonStyleGuide = React.lazy(
+  () => import('./lib_components/components/MapSelectionButton/StyleGuide'),
+);
+const NeonAuthStyleGuide = React.lazy(
+  () => import('./lib_components/components/NeonAuth/StyleGuide'),
+);
+const NeonContextStyleGuide = React.lazy(
+  () => import('./lib_components/components/NeonContext/StyleGuide'),
+);
+const NeonEnvironmentStyleGuide = React.lazy(
+  () => import('./lib_components/components/NeonEnvironment/StyleGuide'),
+);
+const NeonGraphQLStyleGuide = React.lazy(
+  () => import('./lib_components/components/NeonGraphQL/StyleGuide'),
+);
+const NeonPageStyleGuide = React.lazy(
+  () => import('./lib_components/components/NeonPage/StyleGuide'),
+);
+const ReleaseFilterStyleGuide = React.lazy(
+  () => import('./lib_components/components/ReleaseFilter/StyleGuide'),
+);
+const SiteChipStyleGuide = React.lazy(
+  () => import('./lib_components/components/SiteChip/StyleGuide'),
+);
+const SiteMapStyleGuide = React.lazy(
+  () => import('./lib_components/components/SiteMap/StyleGuide'),
+);
+const StoryMapStyleGuide = React.lazy(
+  () => import('./lib_components/components/StoryMap/StyleGuide'),
+);
+const ThemeStyleGuide = React.lazy(
+  () => import('./lib_components/components/Theme/StyleGuide'),
+);
+const TimeSeriesViewerStyleGuide = React.lazy(
+  () => import('./lib_components/components/TimeSeriesViewer/StyleGuide'),
+);
+
+const SuspenseFallback = () => (
+  <Grid container spacing={3}>
+    <Grid item xs={12}>
+      <Skeleton variant="text" width="50%" height={32} />
+      <br />
+      <Skeleton variant="rect" width="100%" height={100} />
+    </Grid>
+    <Grid item xs={12}>
+      <Skeleton variant="text" width="25%" height={48} />
+      <br />
+      <Skeleton variant="text" width="100%" height={24} />
+      <Skeleton variant="text" width="100%" height={24} />
+      <Skeleton variant="text" width="100%" height={24} />
+      <br />
+      <Skeleton variant="rect" width="100%" height={100} />
+    </Grid>
+    <Grid item xs={12}>
+      <Skeleton variant="rect" width="100%" height={400} />
+    </Grid>
+  </Grid>
+);
 
 const sidebarLinks = [
   {
@@ -40,113 +109,201 @@ const sidebarLinks = [
   {
     name: 'Basic Components',
     hash: '#BasicComponents',
-    component: BasicComponents,
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
+        <BasicComponents />
+      </Suspense>
+    ),
     icon: BasicComponentsIcon,
   },
   {
     name: 'AOP Data Viewer',
     hash: '#AopDataViewer',
-    component: AopDataViewerStyleGuide,
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
+        <AopDataViewerStyleGuide />
+      </Suspense>
+    ),
   },
   {
     name: 'Citations',
     hash: '#Citations',
-    component: CitationsStyleGuide,
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
+        <CitationsStyleGuide />
+      </Suspense>
+    ),
   },
   {
     name: 'Data Product Availability',
     hash: '#DataProductAvailability',
-    component: DataProductAvailabilityStyleGuide,
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
+        <DataProductAvailabilityStyleGuide />
+      </Suspense>
+    ),
   },
   {
     name: 'Data Theme Icon',
     hash: '#DataThemeIcon',
-    component: DataThemeIconStyleGuide,
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
+        <DataThemeIconStyleGuide />
+      </Suspense>
+    ),
   },
   {
     name: 'Documents',
     hash: '#Documents',
-    component: DocumentsStyleGuide,
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
+        <DocumentsStyleGuide />
+      </Suspense>
+    ),
   },
   {
     name: 'Download Data Button',
     hash: '#DownloadDataButton',
-    component: DownloadDataButtonStyleGuide,
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
+        <DownloadDataButtonStyleGuide />
+      </Suspense>
+    ),
   },
   {
     name: 'Download Data Context',
     hash: '#DownloadDataContext',
-    component: DownloadDataContextStyleGuide,
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
+        <DownloadDataContextStyleGuide />
+      </Suspense>
+    ),
   },
   {
     name: 'External Host Info',
     hash: '#ExternalHostInfo',
-    component: ExternalHostInfoStyleGuide,
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
+        <ExternalHostInfoStyleGuide />
+      </Suspense>
+    ),
   },
   {
     name: 'Full Width Visualization',
     hash: '#FullWidthVisualization',
-    component: FullWidthVisualizationStyleGuide,
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
+        <FullWidthVisualizationStyleGuide />
+      </Suspense>
+    ),
   },
   {
     name: 'Map Selection Button',
     hash: '#MapSelectionButton',
-    component: MapSelectionButtonStyleGuide,
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
+        <MapSelectionButtonStyleGuide />
+      </Suspense>
+    ),
   },
   {
     name: 'Neon Authentication',
     hash: '#NeonAuth',
-    component: NeonAuthStyleGuide,
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
+        <NeonAuthStyleGuide />
+      </Suspense>
+    ),
   },
   {
     name: 'Neon Context',
     hash: '#NeonContext',
-    component: NeonContextStyleGuide,
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
+        <NeonContextStyleGuide />
+      </Suspense>
+    ),
   },
   {
     name: 'Neon GraphQL',
     hash: '#NeonGraphQL',
-    component: NeonGraphQLStyleGuide,
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
+        <NeonGraphQLStyleGuide />
+      </Suspense>
+    ),
   },
   {
     name: 'Neon Environment',
     hash: '#NeonEnvironment',
-    component: NeonEnvironmentStyleGuide,
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
+        <NeonEnvironmentStyleGuide />
+      </Suspense>
+    ),
   },
   {
     name: 'Neon Page',
     hash: '#NeonPage',
-    component: NeonPageStyleGuide,
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
+        <NeonPageStyleGuide />
+      </Suspense>
+    ),
   },
   {
     name: 'Release Filter',
     hash: '#ReleaseFilter',
-    component: ReleaseFilterStyleGuide,
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
+        <ReleaseFilterStyleGuide />
+      </Suspense>
+    ),
   },
   {
     name: 'Site Chip',
     hash: '#SiteChip',
-    component: SiteChipStyleGuide,
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
+        <SiteChipStyleGuide />
+      </Suspense>
+    ),
   },
   {
     name: 'Site Map',
     hash: '#SiteMap',
-    component: SiteMapStyleGuide,
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
+        <SiteMapStyleGuide />
+      </Suspense>
+    ),
   },
   {
     name: 'Story Map',
     hash: '#StoryMap',
-    component: StoryMapStyleGuide,
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
+        <StoryMapStyleGuide />
+      </Suspense>
+    ),
   },
   {
     name: 'Theme',
     hash: '#Theme',
-    component: ThemeStyleGuide,
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
+        <ThemeStyleGuide />
+      </Suspense>
+    ),
   },
   {
     name: 'Time Series Viewer',
     hash: '#TimeSeriesViewer',
-    component: TimeSeriesViewerStyleGuide,
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
+        <TimeSeriesViewerStyleGuide />
+      </Suspense>
+    ),
   },
 ];
 

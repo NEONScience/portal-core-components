@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 
-import Highlight from 'react-highlight.js';
-import '../../node_modules/highlight.js/styles/zenburn.css';
-
+import SyntaxHighlight from '../lib_components/components/SyntaxHighlight';
 import Theme from '../lib_components/components/Theme/Theme';
+
+import 'highlight.js/styles/github-dark-dimmed.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,9 +20,9 @@ export default function CodeBlock(props) {
   const classes = useStyles(Theme);
   const { language, children, ...other } = props;
   return (
-    <Highlight language={language} className={classes.root} {...other}>
+    <SyntaxHighlight language={language} className={classes.root} {...other}>
       {children}
-    </Highlight>
+    </SyntaxHighlight>
   );
 }
 

@@ -142,7 +142,7 @@ declare namespace SelectedSite {
 }
 import PropTypes from "prop-types";
 declare namespace ControlPropTypes {
-    const children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+    const children: PropTypes.Validator<string | number | boolean | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
     const innerProps: PropTypes.Validator<PropTypes.InferProps<{
         onMouseDown: PropTypes.Validator<(...args: any[]) => any>;
     }>>;

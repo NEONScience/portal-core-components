@@ -6,8 +6,6 @@ import mockReactComponent from '../../__mocks__/mockReactComponent';
 
 import CodeBlock from '../CodeBlock';
 
-jest.mock('react-highlight.js', () => mockReactComponent('react-highlight.js'));
-
 describe('CodeBlock', () => {
   test('renders with a string', () => {
     const tree = renderer
@@ -21,7 +19,7 @@ describe('CodeBlock', () => {
   test('renders with a string and a specified language', () => {
     const tree = renderer
       .create(
-        <CodeBlock language="php">
+        <CodeBlock language="javascript">
           $code = "block";
         </CodeBlock>,
       ).toJSON();

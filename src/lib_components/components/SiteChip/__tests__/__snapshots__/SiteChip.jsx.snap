@@ -15,7 +15,7 @@ exports[`SiteChip Preserves MUI chip props 1`] = `
   }
 >
   <div
-    className="MuiAvatar-root MuiAvatar-circle MuiChip-avatar makeStyles-avatarLarge-1 MuiChip-avatarColorPrimary MuiAvatar-colorDefault"
+    className="MuiAvatar-root MuiAvatar-circular MuiChip-avatar makeStyles-avatarLarge-1 MuiChip-avatarColorPrimary MuiAvatar-colorDefault"
     style={
       Object {
         "backgroundColor": "#0073cf",
@@ -53,7 +53,7 @@ exports[`SiteChip Renders correctly with only a label 1`] = `
   style={Object {}}
 >
   <div
-    className="MuiAvatar-root MuiAvatar-circle MuiChip-avatar MuiChip-avatarSmall MuiChip-avatarColorSecondary MuiAvatar-colorDefault"
+    className="MuiAvatar-root MuiAvatar-circular MuiChip-avatar MuiChip-avatarSmall MuiChip-avatarColorSecondary MuiAvatar-colorDefault"
     style={
       Object {
         "backgroundColor": "#002c77",
