@@ -478,7 +478,7 @@ exports[`DownloadStepForm Step s3Files renders correctly 1`] = `
   <div
     ComponentPath="material-table"
     prop-columns="[{\\"title\\":\\"Site\\",\\"field\\":\\"site\\",\\"lookup\\":{},\\"defaultFilter\\":[],\\"hidden\\":false},{\\"title\\":\\"Date\\",\\"field\\":\\"yearMonth\\",\\"lookup\\":{},\\"defaultFilter\\":[],\\"hidden\\":false},{\\"title\\":\\"Visit\\",\\"field\\":\\"visit\\",\\"lookup\\":{},\\"defaultFilter\\":[],\\"hidden\\":false},{\\"title\\":\\"Name\\",\\"field\\":\\"name\\",\\"defaultFilter\\":\\"\\",\\"hidden\\":false},{\\"title\\":\\"Type\\",\\"field\\":\\"type\\",\\"lookup\\":{},\\"defaultFilter\\":[],\\"hidden\\":false},{\\"title\\":\\"Size\\",\\"field\\":\\"size\\",\\"filtering\\":false,\\"removable\\":false}]"
-    prop-components="{\\"Container\\":{\\"propTypes\\":{},\\"displayName\\":\\"Styled(MuiBox)\\"}}"
+    prop-components="{\\"Container\\":{\\"propTypes\\":{}}}"
     prop-data="[{\\"url\\":\\"f1\\",\\"tableData\\":\\"f1\\"},{\\"url\\":\\"f2\\",\\"tableData\\":\\"f2\\"},{\\"url\\":\\"f3\\",\\"tableData\\":\\"f3\\"}]"
     prop-icons="{\\"Add\\":{},\\"Check\\":{},\\"Clear\\":{},\\"Delete\\":{},\\"DetailPanel\\":{},\\"Edit\\":{},\\"Export\\":{},\\"Filter\\":{},\\"FirstPage\\":{},\\"LastPage\\":{},\\"NextPage\\":{},\\"PreviousPage\\":{},\\"ResetSearch\\":{},\\"Search\\":{},\\"SortArrow\\":{},\\"ThirdStateCheck\\":{},\\"ViewColumn\\":{}}"
     prop-localization="{\\"pagination\\":{\\"labelRowsSelect\\":\\"files\\"},\\"toolbar\\":{\\"nRowsSelected\\":\\"{0} files selected (12.1 KB uncompressed)\\"},\\"body\\":{\\"emptyDataSourceMessage\\":\\"No files to display. Select more sites, broaden date range, or broaden search / filters.\\"}}"
