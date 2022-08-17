@@ -437,8 +437,10 @@ Parallel.prototype.then = function(cb, errCb) {
   return this;
 };
 
-if (isCommonJS) {
-  module.exports = Parallel;
-} else {
-  self.Parallel = Parallel;
-}
+// if (isCommonJS) {
+//   module.exports = Parallel;
+// } else {
+//   self.Parallel = Parallel;
+// }
+
+module.exports = Parallel;

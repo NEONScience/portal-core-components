@@ -16,7 +16,7 @@ module.exports = {
   // The dateformat module is in ES6 format and needs to be transformed.
   // Set Jest transform to ignore all node modules that aren't dateformat.
   transformIgnorePatterns: [
-    "node_modules/(?!dateformat)",
+    "node_modules/(?!dateformat|d3-[a-z]+)",
   ],
   setupFiles: [
     'jest-canvas-mock',

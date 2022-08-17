@@ -1,6 +1,6 @@
 import { debounce } from 'lodash';
 
-import { select, event } from 'd3-selection';
+import { select } from 'd3-selection';
 import { drag } from 'd3-drag';
 
 import uniqueId from 'lodash/uniqueId';
@@ -490,17 +490,17 @@ export default function BasicAvailabilityGrid(config) {
       .attr('y', -1 * (SVG.CELL_PADDING / 2))
       .attr('width', getLabelWidth())
       .attr('height', SVG.CELL_HEIGHT + SVG.CELL_PADDING)
-      .on('mouseover', () => rowHighlightHover(rowKey))
-      .on('focus', () => rowHighlightHover(rowKey))
-      .on('mouseout', rowHighlightReset)
-      .on('blur', rowHighlightReset);
+      .on('mouseover', (event, d) => rowHighlightHover(rowKey))
+      .on('focus', (event, d) => rowHighlightHover(rowKey))
+      .on('mouseout', (event, d) => rowHighlightReset(true))
+      .on('blur', (event, d) => rowHighlightReset(true));
     SVG_STYLES.apply(mask, 'rowLabelMask');
     // Fill the mask and delay the selection to emulate a touch ripple.
     // Re-render to show the selection will reset the style.
-    const maskClick = selectionEnabled && setSitesValue ? () => {
+    const maskClick = selectionEnabled && setSitesValue ? (event, d) => {
       SVG_STYLES.touchRipple(mask, 15);
       setTimeout(() => toggleSelection(rowKey), 15);
-    } : () => {};
+    } : (event, d) => {};
     mask.on('click', maskClick);
     mask.append('svg:title').text(data.getLabel.title(rowKey));
   });
@@ -574,14 +574,14 @@ export default function BasicAvailabilityGrid(config) {
       .attr('fill', 'transparent')
       .style('cursor', selectionEnabled && setSitesValue ? 'pointer' : 'grab')
       .style('outline', 'none')
-      .on('mouseover', rowHighlightHover)
-      .on('focus', rowHighlightHover)
-      .on('mouseout', rowHighlightReset)
-      .on('blur', rowHighlightReset)
-      .on('click', selectionEnabled && setSitesValue ? (rowKey, idx, nodes) => {
-        SVG_STYLES.touchRipple(select(nodes[idx]), 15);
-        setTimeout(() => toggleSelection(rowKey), 15);
-      } : () => {});
+      .on('mouseover', (event, d) => rowHighlightHover(d))
+      .on('focus', (event, d) => rowHighlightHover(d))
+      .on('mouseout', (event, d) => rowHighlightReset(true))
+      .on('blur', (event, d) => rowHighlightReset(true))
+      .on('click', selectionEnabled && setSitesValue ? (event, d) => {
+        SVG_STYLES.touchRipple(select(event.currentTarget), 15);
+        setTimeout(() => toggleSelection(d), 15);
+      } : (event, d) => {});
     // Cells
     dataG.selectAll('g')
       .data(rowKeys)
@@ -780,7 +780,7 @@ export default function BasicAvailabilityGrid(config) {
 
   let cellDragTime = null;
   const dragCells = drag()
-    .on('start', () => {
+    .on('start', (event, d) => {
       draggingCells = true;
       rowHighlightReset(false);
       dataMasksG.selectAll('rect').style('cursor', 'grabbing');
@@ -788,12 +788,12 @@ export default function BasicAvailabilityGrid(config) {
       SVG_STYLES.apply(timeAxis.highlight, 'timeHighlightDrag');
       cellDragTime = (new Date()).getTime();
     })
-    .on('drag', () => {
+    .on('drag', (event, d) => {
       setTimeOffset(getTimeOffset() + event.dx);
       redrawData();
       redrawDateRangeHandleMasks();
     })
-    .on('end', () => {
+    .on('end', (event, d) => {
       draggingCells = false;
       rowHighlightHover(rowHoverKey);
       timeHighlightReset();
@@ -803,7 +803,7 @@ export default function BasicAvailabilityGrid(config) {
       // Perform a select action if selection is enabled to keep the end user happy. =)
       cellDragTime = (new Date()).getTime() - cellDragTime;
       if (selectionEnabled && setSitesValue && cellDragTime < 100) {
-        SVG_STYLES.touchRipple(dataMasksG.selectAll('rect').filter((d) => d === rowHoverKey), 15);
+        SVG_STYLES.touchRipple(dataMasksG.selectAll('rect').filter((filterD) => filterD === rowHoverKey), 15);
         setTimeout(() => toggleSelection(rowHoverKey), 15);
       }
     });
@@ -811,19 +811,18 @@ export default function BasicAvailabilityGrid(config) {
   dragCells(dataMasksG.selectAll('rect'));
 
   timeAxis.mask
-    /*
-    .on('wheel', () => {
+    .on('wheel', (event, d) => {
       event.preventDefault();
       const step = (SVG.CELL_WIDTH + SVG.CELL_PADDING) * 3;
       const delta = (event.wheelDelta > 0 ? -1 : 1) * step;
       setTimeOffset(getTimeOffset() + delta);
-      debouncedRedraw();
+      redraw();
+      redrawDateRangeHandleMasks();
     })
-    */
-    .on('mouseover', timeHighlightHover)
-    .on('focus', timeHighlightHover)
-    .on('mouseout', timeHighlightReset)
-    .on('blur', timeHighlightReset);
+    .on('mouseover', (event, d) => timeHighlightHover())
+    .on('focus', (event, d) => timeHighlightHover())
+    .on('mouseout', (event, d) => timeHighlightReset())
+    .on('blur', (event, d) => timeHighlightReset());
 
   if (selectionEnabled) {
     const dateRangeHandleReset = debounce(() => {
@@ -854,17 +853,17 @@ export default function BasicAvailabilityGrid(config) {
     // Interactions for Date Range START Handle
     const dragDateRangeStartMask = dateRangeMasksG.select('.dateRangeStartMaskRect');
     dragDateRangeStartMask
-      .on('mouseover', () => dateRangeHandleHover(0))
-      .on('focus', () => dateRangeHandleHover(0))
-      .on('mouseout', dateRangeHandleReset)
-      .on('blur', dateRangeHandleReset);
+      .on('mouseover', (event, d) => dateRangeHandleHover(0))
+      .on('focus', (event, d) => dateRangeHandleHover(0))
+      .on('mouseout', (event, d) => dateRangeHandleReset())
+      .on('blur', (event, d) => dateRangeHandleReset());
     const dragDateRangeStart = drag()
-      .on('start', () => {
+      .on('start', (event, d) => {
         draggingDateRange[0].dragging = true;
         draggingDateRange[0].centerDragX = parseFloat(dragDateRangeStartMask.attr('x'), 10)
           + (SVG.DATE_RANGE_MASK_WIDTH / 2);
       })
-      .on('drag', () => {
+      .on('drag', (event, d) => {
         draggingDateRange[0].centerDragX += event.dx;
         const { centerDragX } = draggingDateRange[0];
         dragDateRangeStartMask.attr('x', centerDragX - (SVG.DATE_RANGE_MASK_WIDTH / 2));
@@ -879,7 +878,7 @@ export default function BasicAvailabilityGrid(config) {
           redrawSelections();
         }
       })
-      .on('end', () => {
+      .on('end', (event, d) => {
         draggingDateRange[0].dragging = false;
         draggingDateRange[0].centerDragX = 0;
         // Recenter mask as it is likely off a few pixels due to snap-to-gutter behavior
@@ -896,17 +895,17 @@ export default function BasicAvailabilityGrid(config) {
     // Interactions for Date Range END Handle
     const dragDateRangeEndMask = dateRangeMasksG.select('.dateRangeEndMaskRect');
     dragDateRangeEndMask
-      .on('mouseover', () => dateRangeHandleHover(1))
-      .on('focus', () => dateRangeHandleHover(1))
-      .on('mouseout', dateRangeHandleReset)
-      .on('blur', dateRangeHandleReset);
+      .on('mouseover', (event, d) => dateRangeHandleHover(1))
+      .on('focus', (event, d) => dateRangeHandleHover(1))
+      .on('mouseout', (event, d) => dateRangeHandleReset())
+      .on('blur', (event, d) => dateRangeHandleReset());
     const dragDateRangeEnd = drag()
-      .on('start', () => {
+      .on('start', (event, d) => {
         draggingDateRange[1].dragging = true;
         draggingDateRange[1].centerDragX = parseFloat(dragDateRangeEndMask.attr('x'), 10)
           + (SVG.DATE_RANGE_MASK_WIDTH / 2);
       })
-      .on('drag', () => {
+      .on('drag', (event, d) => {
         draggingDateRange[1].centerDragX += event.dx;
         const { centerDragX } = draggingDateRange[1];
         dragDateRangeEndMask.attr('x', centerDragX - (SVG.DATE_RANGE_MASK_WIDTH / 2));
@@ -921,7 +920,7 @@ export default function BasicAvailabilityGrid(config) {
           redrawSelections();
         }
       })
-      .on('end', () => {
+      .on('end', (event, d) => {
         draggingDateRange[1].dragging = false;
         draggingDateRange[1].centerDragX = 0;
         // Recenter mask as it is likely off a few pixels due to snap-to-gutter behavior
