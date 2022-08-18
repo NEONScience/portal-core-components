@@ -49,6 +49,8 @@ import Theme from '../Theme/Theme';
 import NeonContext from '../NeonContext/NeonContext';
 import MapSelectionButton from '../MapSelectionButton/MapSelectionButton';
 
+import { exists, isStringNonEmpty } from '../../util/typeUtil';
+
 /* eslint-disable import/no-webpack-loader-syntax, import/no-unresolved */
 import iconCoreTerrestrialSVG from '!file-loader?name=static/media/[name].[hash].[ext]!../SiteMap/svg/icon-site-core-terrestrial.svg';
 import iconCoreAquaticSVG from '!file-loader?name=static/media/[name].[hash].[ext]!../SiteMap/svg/icon-site-core-aquatic.svg';
@@ -174,7 +176,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1, 2, 1, 0.5),
     backgroundColor: theme.palette.grey[100],
     marginTop: theme.spacing(1.5),
-    marginRight: theme.spacing(3),
+    width: '100%',
   },
   startFlex: {
     display: 'flex',
@@ -295,7 +297,7 @@ const OptionDefaultProps = {
 
 const positionsDescription = `
   Positions are distinct physical sensor locations at a given site. The x, y, and z coordinates
-  describe where the sensor is located relative to the ground-level reference point for the site.
+  describe where the sensor is located relative to the ground-level reference location.
   Positions may change over time.
 `;
 
@@ -374,9 +376,20 @@ function PositionHistoryButton(props) {
                     zOffset,
                     referenceElevation,
                   } = row;
-                  const elevation = referenceElevation === null || zOffset === null
-                    ? 'unknown'
-                    : `${(parseFloat(referenceElevation, 10) + parseFloat(zOffset, 10)).toFixed(2).toString()}m`; // eslint-disable-line max-len
+                  const hasReferenceElevation = exists(referenceElevation) && (referenceElevation !== '');
+                  const hasZOffset = exists(zOffset) && (zOffset !== '');
+                  const parsedReferenceElevation = hasReferenceElevation
+                    ? parseFloat(referenceElevation, 10)
+                    : NaN;
+                  const parsedZOffset = hasZOffset ? parseFloat(zOffset, 10) : NaN;
+                  let elevation = 'unknown';
+                  if (!isNaN(parsedReferenceElevation)) {
+                    if (!isNaN(hasZOffset)) {
+                      elevation = `${(parsedReferenceElevation + parsedZOffset).toFixed(2).toString()}`;
+                    } else {
+                      elevation = `${parsedReferenceElevation}`;
+                    }
+                  }
                   const end = rawEnd === '' ? 'Current' : rawEnd;
                   const cellStyle = idx !== history.length - 1 ? {}
                     : { fontWeight: '600', borderBottom: 'none' };
@@ -440,15 +453,93 @@ function PositionDetail(props) {
   const { history } = state.product.sites[siteCode].positions[position];
   const current = history.length - 1 || 0;
   const {
+    name,
+    description,
+    referenceName,
+    referenceDescription,
     referenceElevation = '--',
     xOffset = '--',
     yOffset = '--',
     zOffset = '--',
   } = history[current] || {};
-  const elevation = referenceElevation === '--' ? '--'
-    : (parseFloat(referenceElevation, 10) + parseFloat(zOffset, 10)).toFixed(2).toString();
+  const hasReferenceElevation = exists(referenceElevation) && (referenceElevation !== '');
+  const hasZOffset = exists(zOffset) && (zOffset !== '') && (zOffset !== '--');
+  const parsedReferenceElevation = hasReferenceElevation
+    ? parseFloat(referenceElevation, 10)
+    : NaN;
+  const parsedZOffset = hasZOffset ? parseFloat(zOffset, 10) : NaN;
+  let elevation = '--';
+  if (!isNaN(parsedReferenceElevation)) {
+    if (!isNaN(hasZOffset)) {
+      elevation = `${(parsedReferenceElevation + parsedZOffset).toFixed(2).toString()}`;
+    } else {
+      elevation = `${parsedReferenceElevation}`;
+    }
+  }
   const fadeStyle = { color: Theme.palette.grey[500] };
   const axisStyle = { marginRight: Theme.spacing(1), fontWeight: 600 };
+  const renderDescription = () => {
+    const hasName = isStringNonEmpty(name);
+    const hasDescription = isStringNonEmpty(description);
+    const hasReferenceName = isStringNonEmpty(referenceName);
+    const hasReferenceDescription = isStringNonEmpty(referenceDescription);
+    const appliedName = hasName ? name : 'N/A';
+    const appliedDescription = hasDescription ? description : 'N/A';
+    const includeReference = hasReferenceName || hasReferenceDescription;
+    const appliedReferenceName = hasReferenceName ? referenceName : 'N/A';
+    const appliedReferenceDescription = hasReferenceDescription ? referenceDescription : 'N/A';
+    return wide ? (
+      <>
+        <div
+          className={classes.startFlex}
+          style={{ ...fadeStyle, marginRight: Theme.spacing(3), marginTop: Theme.spacing(0.5) }}
+        >
+          <Typography variant="caption">
+            <span style={{ fontWeight: 600 }}>Location: </span>
+            {`${appliedDescription} (${appliedName})`}
+          </Typography>
+        </div>
+        {!includeReference ? null : (
+          <div
+            className={classes.startFlex}
+            style={{ ...fadeStyle, marginRight: Theme.spacing(3) }}
+          >
+            <Typography variant="caption">
+              <span style={{ fontWeight: 600 }}>Reference Location: </span>
+              {`${appliedReferenceDescription} (${appliedReferenceName})`}
+            </Typography>
+          </div>
+        )}
+      </>
+    ) : (
+      <div style={{ marginRight: Theme.spacing(3), marginTop: Theme.spacing(0.5) }}>
+        <div>
+          <Typography variant="body2" style={{ fontWeight: 600 }}>
+            Location:
+          </Typography>
+        </div>
+        <div style={{ ...fadeStyle }}>
+          <Typography variant="body2">
+            {`${appliedDescription} (${appliedName})`}
+          </Typography>
+        </div>
+        {!includeReference ? null : (
+          <>
+            <div>
+              <Typography variant="body2" style={{ fontWeight: 600 }}>
+                Reference Location:
+              </Typography>
+            </div>
+            <div style={{ ...fadeStyle }}>
+              <Typography variant="body2">
+                {`${appliedReferenceDescription} (${appliedReferenceName})`}
+              </Typography>
+            </div>
+          </>
+        )}
+      </div>
+    );
+  };
   return wide ? (
     <div>
       <div className={classes.startFlex} style={{ alignItems: 'flex-end' }}>
@@ -467,37 +558,43 @@ function PositionDetail(props) {
           {`${xOffset}m / ${yOffset}m / ${zOffset}m`}
         </Typography>
       </div>
+      {renderDescription()}
     </div>
   ) : (
-    <div className={classes.startFlex} style={{ alignItems: 'center' }}>
-      <div style={{ marginRight: Theme.spacing(3) }}>
-        <Typography variant="body1" style={{ fontWeight: 600 }}>
-          {position}
-        </Typography>
-        <Typography variant="body2" style={{ ...fadeStyle }}>
-          Elevation:
-        </Typography>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <ElevationIcon
-            fontSize="small"
-            style={{ marginRight: Theme.spacing(0.5), ...fadeStyle }}
-          />
-          <Typography variant="body2" style={{ ...fadeStyle }}>
-            {`${elevation}m`}
-          </Typography>
+    <div className={classes.startFlex} style={{ alignItems: 'center', justifyContent: 'space-between' }}>
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <div className={classes.startFlex} style={{ alignItems: 'center' }}>
+          <div style={{ marginRight: Theme.spacing(3) }}>
+            <Typography variant="body1" style={{ fontWeight: 600 }}>
+              {position}
+            </Typography>
+            <Typography variant="body2" style={{ ...fadeStyle }}>
+              Elevation:
+            </Typography>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <ElevationIcon
+                fontSize="small"
+                style={{ marginRight: Theme.spacing(0.5), ...fadeStyle }}
+              />
+              <Typography variant="body2" style={{ ...fadeStyle }}>
+                {`${elevation}m`}
+              </Typography>
+            </div>
+          </div>
+          <div style={{ marginRight: Theme.spacing(3) }}>
+            <Typography variant="body2">
+              <span style={{ ...axisStyle }}>x:</span>
+              {`${xOffset}m`}
+              <br />
+              <span style={{ ...axisStyle }}>y:</span>
+              {`${yOffset}m`}
+              <br />
+              <span style={{ ...axisStyle }}>z:</span>
+              {`${zOffset}m`}
+            </Typography>
+          </div>
         </div>
-      </div>
-      <div style={{ marginRight: Theme.spacing(3) }}>
-        <Typography variant="body2">
-          <span style={{ ...axisStyle }}>x:</span>
-          {`${xOffset}m`}
-          <br />
-          <span style={{ ...axisStyle }}>y:</span>
-          {`${yOffset}m`}
-          <br />
-          <span style={{ ...axisStyle }}>z:</span>
-          {`${zOffset}m`}
-        </Typography>
+        {renderDescription()}
       </div>
       <div style={{ textAlign: 'right' }}>
         <PositionHistoryButton siteCode={siteCode} position={position} history={history} />

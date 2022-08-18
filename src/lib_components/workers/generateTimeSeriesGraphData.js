@@ -241,8 +241,8 @@ export default function generateTimeSeriesGraphData(payload = {}) {
     ) {
       return outSanityCheckData;
     }
-    // All selected sites must have positions, and all site/position combinations must be
-    // represented in the product with some data
+    // All selected sites must have positions, and at least one site/position
+    // combinations must be represented in the product with some data
     let productSitesAreValid = true;
     sites.forEach((site) => {
       const { siteCode, positions } = site;
@@ -254,17 +254,21 @@ export default function generateTimeSeriesGraphData(payload = {}) {
         productSitesAreValid = false;
         return;
       }
+      // Ensure at least one selected position has data to display
+      let foundValidPositionData = false;
       positions.forEach((position) => {
-        if (
-          typeof product.sites[siteCode].positions[position] !== 'object'
-            || product.sites[siteCode].positions[position] === null
-            || typeof product.sites[siteCode].positions[position].data !== 'object'
-            || product.sites[siteCode].positions[position].data === null
-            || Object.keys(product.sites[siteCode].positions[position].data).length < 1
-        ) {
-          productSitesAreValid = false;
+        const invalidPositionData = (typeof product.sites[siteCode].positions[position] !== 'object')
+          || (product.sites[siteCode].positions[position] === null)
+          || (typeof product.sites[siteCode].positions[position].data !== 'object')
+          || (product.sites[siteCode].positions[position].data === null)
+          || (Object.keys(product.sites[siteCode].positions[position].data).length < 1);
+        if (!invalidPositionData) {
+          foundValidPositionData = true;
         }
       });
+      if (!foundValidPositionData) {
+        productSitesAreValid = false;
+      }
     });
     if (!productSitesAreValid) { return outSanityCheckData; }
 

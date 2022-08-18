@@ -635,7 +635,7 @@ export default function TimeSeriesViewerGraph() {
     axisCountChangedRef,
   ]);
 
-  // Effect to register a click handler to the legend for sereis visibility toggling
+  // Effect to register a click handler to the legend for series visibility toggling
   useEffect(() => {
     if (!legendRef.current) { return () => {}; }
     const legendClickHandler = ({ target }) => {
