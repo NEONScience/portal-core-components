@@ -13,6 +13,7 @@ export interface ParsedQsgNameResult {
     matchedExtension: string;
     parsedVersion: number;
 }
+export declare const PDF_VIEWER_SUPPORTED_DOC_TYPES: string[];
 export declare const VIEWER_SUPPORTED_DOC_TYPES: string[];
 export declare type DocumentCallback = (document: NeonDocument) => void;
 export interface IDocumentService {
@@ -28,6 +29,7 @@ export interface IDocumentService {
     getQuickStartGuideNameRegex: () => RegExp;
     parseQuickStartGuideName: (name: string) => Nullable<ParsedQsgNameResult>;
     isViewerSupported: (doc: NeonDocument) => boolean;
+    isPdfViewerSupported: (doc: NeonDocument) => boolean;
     transformSpecs: (specs: DataProductSpec[]) => NeonDocument[];
     transformSpec: (spec: DataProductSpec) => NeonDocument;
     transformQuickStartGuideDocuments: (documents: QuickStartGuideDocument[]) => NeonDocument[];

@@ -16,6 +16,7 @@ import DocumentListItem, { DocumentListItemModel } from './DocumentListItem';
 import DocumentSelect from './DocumentSelect';
 import DocumentTabs from './DocumentTabs';
 import DocumentViewer from './DocumentViewer';
+import PdfDocumentViewer from './PdfDocumentViewer';
 import Theme from '../Theme/Theme';
 import { NeonDocument } from '../../types/neonApi';
 
@@ -257,6 +258,35 @@ const docs: NeonDocument[] = [...];
             <DocumentTabs documents={docs} />
           </DialogBase>
         </div>
+      </ExampleBlock>
+
+      <Divider className={classes.divider} />
+      <Typography variant="h6" component="h4" gutterBottom>Example PDF.js based Document Viewer</Typography>
+      <DocBlock>
+        Displays a single PDF document.
+      </DocBlock>
+      <CodeBlock>
+        {`
+import PdfDocumentViewer from 'portal-core-components/lib/components/Documents/PdfDocumentViewer';
+
+const exampleDoc: NeonDocument = {
+  name: 'NEON.DOC.000780vB.pdf',
+  type: 'application/pdf',
+  size: 993762,
+  description: 'NEON Algorithm Theoretical Basis Document (ATBD) – 2D Wind Speed and Direction',
+};
+
+<PdfDocumentViewer
+  document={exampleDoc}
+  width={800}
+/>
+        `}
+      </CodeBlock>
+      <ExampleBlock>
+        <PdfDocumentViewer
+          document={exampleDoc}
+          width={800}
+        />
       </ExampleBlock>
     </>
   );
