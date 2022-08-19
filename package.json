@@ -62,10 +62,14 @@
     "universal-cookie": "^4.0.2"
   },
   "peerDependencies": {
-    "pdfjs-dist": "~2.15.0"
+    "pdfjs-dist": "~2.15.0",
+    "worker-loader": "~3.0.0"
   },
   "peerDependenciesMeta": {
     "pdfjs-dist": {
+      "optional": true
+    },
+    "worker-loader": {
       "optional": true
     }
   },
