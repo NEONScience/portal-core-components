@@ -6,6 +6,7 @@ module.exports = {
   ],
   moduleNameMapper: {
     '@fontsource/inter': '<rootDir>/src/__mocks__/fileMock.js',
+    '(pdfjs-dist/legacy/build/pdf.worker)': '<rootDir>/src/__mocks__/constructorMock.js',
     '\\.(css|less)$': '<rootDir>/src/__mocks__/styleMock.js',
     '\\.(svg)$': '<rootDir>/src/__mocks__/svgMock.js',
   },

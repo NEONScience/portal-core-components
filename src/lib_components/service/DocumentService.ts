@@ -25,6 +25,9 @@ export interface ParsedQsgNameResult {
   parsedVersion: number;
 }
 
+export const PDF_VIEWER_SUPPORTED_DOC_TYPES: string[] = [
+  'application/pdf',
+];
 export const VIEWER_SUPPORTED_DOC_TYPES: string[] = [
   'application/pdf',
   'text/html',
@@ -144,6 +147,7 @@ export interface IDocumentService {
   getQuickStartGuideNameRegex: () => RegExp;
   parseQuickStartGuideName: (name: string) => Nullable<ParsedQsgNameResult>;
   isViewerSupported: (doc: NeonDocument) => boolean;
+  isPdfViewerSupported: (doc: NeonDocument) => boolean;
   transformSpecs: (specs: DataProductSpec[]) => NeonDocument[];
   transformSpec: (spec: DataProductSpec) => NeonDocument;
   transformQuickStartGuideDocuments: (documents: QuickStartGuideDocument[]) => NeonDocument[];
@@ -246,6 +250,11 @@ const DocumentService: IDocumentService = {
     exists(doc)
     && isStringNonEmpty(doc.type)
     && VIEWER_SUPPORTED_DOC_TYPES.includes(doc.type)
+  ),
+  isPdfViewerSupported: (doc: NeonDocument): boolean => (
+    exists(doc)
+    && isStringNonEmpty(doc.type)
+    && PDF_VIEWER_SUPPORTED_DOC_TYPES.includes(doc.type)
   ),
   transformSpecs: (specs: DataProductSpec[]): NeonDocument[] => {
     if (!existsNonEmpty(specs)) {
