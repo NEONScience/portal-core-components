@@ -1,4 +1,3 @@
-/* eslint-disable react/require-default-props */
 import React, {
   useCallback,
   useRef,
@@ -141,6 +140,10 @@ const DocumentViewer: React.FC<DocumentViewerProps> = (props: DocumentViewerProp
       {renderObject()}
     </div>
   );
+};
+
+DocumentViewer.defaultProps = {
+  fullUrlPath: undefined,
 };
 
 export default DocumentViewer;

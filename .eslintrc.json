@@ -27,7 +27,6 @@
   "rules": {
     "@typescript-eslint/no-shadow": ["error"],
     "@typescript-eslint/no-use-before-define": ["warn"],
-    "eslint linebreak-style": [0, "error", "windows"],
     "import/extensions": [
       "error",
       "ignorePackages",
@@ -40,7 +39,7 @@
     ],
     "import/no-extraneous-dependencies": ["error", {"packageDir": "./"}],
     "import/no-relative-packages": 0,
-    "linebreak-style": 0,
+    "linebreak-style": ["error", "unix"],
     "react/function-component-definition": 0,
     "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     "react/jsx-props-no-spreading": 0,
@@ -65,7 +64,7 @@
     ],
     "import/resolver": {
       "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        "extensions": [".js", ".jsx", ".ts", ".tsx", ".d.ts"]
       }
     }
   }

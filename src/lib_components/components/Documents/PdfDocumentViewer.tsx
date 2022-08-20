@@ -1,4 +1,3 @@
-/* eslint-disable react/require-default-props */
 import React, {
   useCallback,
   useRef,
@@ -7,14 +6,12 @@ import React, {
   useState,
 } from 'react';
 
-/* eslint-disable import/no-unresolved */
 import * as PDFJSViewer from 'pdfjs-dist/legacy/web/pdf_viewer';
-import { DocumentInitParameters } from 'pdfjs-dist/types/src/display/api';
 import { PDFDocumentProxy } from 'pdfjs-dist';
-import { PDFViewerOptions } from 'pdfjs-dist/types/web/base_viewer';
 import { EventBus, PDFLinkService, PDFViewer } from 'pdfjs-dist/legacy/web/pdf_viewer';
+import { DocumentInitParameters } from 'pdfjs-dist/types/src/display/api';
+import { PDFViewerOptions } from 'pdfjs-dist/types/web/base_viewer';
 import { PDFLinkServiceOptions } from 'pdfjs-dist/types/web/pdf_link_service';
-/* eslint-enable import/no-unresolved */
 
 import {
   makeStyles,
@@ -52,8 +49,12 @@ const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
       top: 0,
       left: 0,
       overflow: 'auto',
+      backgroundColor: 'rgb(82, 86, 89, 0.9)',
       '& .pdfViewer > .page': {
         margin: '20px',
+        boxShadow: `0px 2px 1px -1px rgb(0 0 0 / 20%),
+          0px 1px 1px 0px rgb(0 0 0 / 14%),
+          0px 1px 3px 0px rgb(0 0 0 / 12%)`,
       },
     },
   })) as StylesHook;
@@ -215,6 +216,10 @@ const PdfDocumentViewer: React.FC<DocumentViewerProps> = (
       </div>
     </div>
   );
+};
+
+PdfDocumentViewer.defaultProps = {
+  fullUrlPath: undefined,
 };
 
 export default PdfDocumentViewer;
