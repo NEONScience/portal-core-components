@@ -30,6 +30,7 @@ export interface IDocumentService {
     parseQuickStartGuideName: (name: string) => Nullable<ParsedQsgNameResult>;
     isViewerSupported: (doc: NeonDocument) => boolean;
     isPdfViewerSupported: (doc: NeonDocument) => boolean;
+    isViewerDeviceSupported: () => boolean;
     transformSpecs: (specs: DataProductSpec[]) => NeonDocument[];
     transformSpec: (spec: DataProductSpec) => NeonDocument;
     transformQuickStartGuideDocuments: (documents: QuickStartGuideDocument[]) => NeonDocument[];

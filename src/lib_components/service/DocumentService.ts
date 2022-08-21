@@ -6,6 +6,8 @@ import ImageIcon from '@material-ui/icons/Photo';
 import PresentationIcon from '@material-ui/icons/Tv';
 import SpreadsheetIcon from '@material-ui/icons/GridOn';
 
+import UAParser, { IDevice, UAParserInstance } from 'ua-parser-js';
+
 import NeonEnvironment from '../components/NeonEnvironment/NeonEnvironment';
 import { exists, existsNonEmpty, isStringNonEmpty } from '../util/typeUtil';
 import { DataProductSpec, NeonDocument, QuickStartGuideDocument } from '../types/neonApi';
@@ -33,6 +35,16 @@ export const VIEWER_SUPPORTED_DOC_TYPES: string[] = [
   'text/html',
   'text/markdown',
   'text/plain',
+];
+// See full list of device types here:
+// https://github.com/faisalman/ua-parser-js#methods
+const VIEWER_NOT_SUPPORTED_DEVICE_TYPES: string[] = [
+  'console',
+  'mobile',
+  'tablet',
+  'smarttv',
+  'wearable',
+  'embedded',
 ];
 
 const documentTypes: Record<string, DocumentTypeListItemDef> = {
@@ -148,6 +160,7 @@ export interface IDocumentService {
   parseQuickStartGuideName: (name: string) => Nullable<ParsedQsgNameResult>;
   isViewerSupported: (doc: NeonDocument) => boolean;
   isPdfViewerSupported: (doc: NeonDocument) => boolean;
+  isViewerDeviceSupported: () => boolean;
   transformSpecs: (specs: DataProductSpec[]) => NeonDocument[];
   transformSpec: (spec: DataProductSpec) => NeonDocument;
   transformQuickStartGuideDocuments: (documents: QuickStartGuideDocument[]) => NeonDocument[];
@@ -256,6 +269,16 @@ const DocumentService: IDocumentService = {
     && isStringNonEmpty(doc.type)
     && PDF_VIEWER_SUPPORTED_DOC_TYPES.includes(doc.type)
   ),
+  isViewerDeviceSupported: (): boolean => {
+    const uaParser: UAParserInstance = new UAParser();
+    const device: IDevice = uaParser.getDevice();
+    let isSupported = true;
+    if (isStringNonEmpty(device.type)
+        && VIEWER_NOT_SUPPORTED_DEVICE_TYPES.includes(device.type as string)) {
+      isSupported = false;
+    }
+    return isSupported;
+  },
   transformSpecs: (specs: DataProductSpec[]): NeonDocument[] => {
     if (!existsNonEmpty(specs)) {
       return [];

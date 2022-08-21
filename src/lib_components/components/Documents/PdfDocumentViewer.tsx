@@ -23,6 +23,7 @@ import DocumentService from '../../service/DocumentService';
 import ErrorCard from '../Card/ErrorCard';
 import NeonEnvironment from '../NeonEnvironment';
 import Theme from '../Theme/Theme';
+import WarningCard from '../Card/WarningCard';
 import { StylesHook } from '../../types/muiTypes';
 import { NeonDocument } from '../../types/neonApi';
 import { isStringNonEmpty } from '../../util/typeUtil';
@@ -59,7 +60,7 @@ const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
     },
   })) as StylesHook;
 
-export interface DocumentViewerProps {
+export interface PdfDocumentViewerProps {
   document: NeonDocument;
   width: number;
   fullUrlPath?: string;
@@ -84,15 +85,15 @@ const calcAutoHeight = (width: number): number => {
   return Math.floor(width * mult);
 };
 
-const PdfDocumentViewer: React.FC<DocumentViewerProps> = (
-  props: DocumentViewerProps,
+const PdfDocumentViewer: React.FC<PdfDocumentViewerProps> = (
+  props: PdfDocumentViewerProps,
 ): JSX.Element => {
   const classes = useStyles(Theme);
   const {
     document,
     width,
     fullUrlPath,
-  }: DocumentViewerProps = props;
+  }: PdfDocumentViewerProps = props;
   const appliedUrlPath = isStringNonEmpty(fullUrlPath)
     ? fullUrlPath
     : NeonEnvironment.getFullApiPath('documents');
@@ -190,13 +191,20 @@ const PdfDocumentViewer: React.FC<DocumentViewerProps> = (
     });
   }, [dataUrl, pdfContainerRef, isErrorState, handleSetErrorStateCb]);
 
-  if (isErrorState || !DocumentService.isPdfViewerSupported(document)) {
+  if (isErrorState) {
     return (
       <div className={classes.parentContainer}>
         <ErrorCard
           title="Document Error"
           message="This document type is not supported or could not be displayed"
         />
+      </div>
+    );
+  }
+  if (!DocumentService.isPdfViewerSupported(document)) {
+    return (
+      <div className={classes.parentContainer}>
+        <WarningCard title="This document type is not supported" />
       </div>
     );
   }

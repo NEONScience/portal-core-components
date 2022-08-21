@@ -62,6 +62,7 @@ const COMPONENT_SM_UPPER = 805;
 const useStyles = makeStyles((muiTheme: MuiTheme) => createStyles({
   listItemContainer: {
     display: 'flex',
+    overflow: 'auto',
   },
   listItem: {
     display: 'flex',

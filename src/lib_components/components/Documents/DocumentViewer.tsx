@@ -15,9 +15,11 @@ import DocumentService from '../../service/DocumentService';
 import ErrorCard from '../Card/ErrorCard';
 import NeonEnvironment from '../NeonEnvironment';
 import Theme from '../Theme/Theme';
+import WarningCard from '../Card/WarningCard';
 import { StylesHook } from '../../types/muiTypes';
 import { NeonDocument } from '../../types/neonApi';
 import { isStringNonEmpty } from '../../util/typeUtil';
+import PdfDocumentViewer from './PdfDocumentViewer';
 
 const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
   // eslint-disable-next-line implicit-arrow-linebreak
@@ -65,6 +67,10 @@ const DocumentViewer: React.FC<DocumentViewerProps> = (props: DocumentViewerProp
     : NeonEnvironment.getFullApiPath('documents');
   const dataUrl: string = `${appliedUrlPath}/${document.name}?inline=true&fallback=html`;
 
+  const isViewerDeviceSupported: boolean = DocumentService.isViewerDeviceSupported();
+  const isPdfViewerSupported: boolean = DocumentService.isPdfViewerSupported(document);
+  const isDocSupported: boolean = isViewerDeviceSupported || isPdfViewerSupported;
+
   const containerRef: React.MutableRefObject<HTMLDivElement|undefined> = useRef();
   const iframeRef: React.MutableRefObject<HTMLIFrameElement|undefined> = useRef();
   const [
@@ -75,13 +81,8 @@ const DocumentViewer: React.FC<DocumentViewerProps> = (props: DocumentViewerProp
   const handleResizeCb = useCallback((): void => {
     const container: HTMLDivElement|undefined = containerRef.current;
     const iframeElement: HTMLIFrameElement|undefined = iframeRef.current;
-    // Do nothing if either container or viz references fail ot point to a DOM node
     if (!container || !iframeElement) { return; }
-    // Do nothing if either refs have no offset parent
-    // (meaning they're hidden from rendering anyway)
     if ((container.offsetParent === null) || (iframeElement.offsetParent === null)) { return; }
-    // Do nothing if container and viz have the same width
-    // (resize event fired but no actual resize necessary)
     if (container.clientWidth === viewerWidth) { return; }
     const newWidth: number = container.clientWidth;
     setViewerWidth(newWidth);
@@ -109,6 +110,19 @@ const DocumentViewer: React.FC<DocumentViewerProps> = (props: DocumentViewerProp
       resizeObserver = null;
     };
   }, [iframeRef, handleResizeCb]);
+
+  if (!isDocSupported) {
+    return (
+      <div className={classes.container}>
+        <WarningCard title="This document type is not supported" />
+      </div>
+    );
+  }
+  if (!isViewerDeviceSupported && isPdfViewerSupported) {
+    return (
+      <PdfDocumentViewer {...props} />
+    );
+  }
 
   const renderObject = (): JSX.Element => {
     if (!DocumentService.isViewerSupported(document)) {
