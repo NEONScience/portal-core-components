@@ -63,6 +63,7 @@
     "universal-cookie": "^4.0.4"
   },
   "peerDependencies": {
+    "@fontsource/inter": "^4.5.12",
     "pdfjs-dist": "~2.15.0",
     "worker-loader": "~3.0.0"
   },

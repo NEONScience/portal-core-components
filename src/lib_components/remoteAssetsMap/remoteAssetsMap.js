@@ -1,7 +1,6 @@
 // A structure containing local filenames and remote URLs for all remote assets used in
 
-// eslint-disable-next-line import/extensions
-import NeonEnvironment from '../components/NeonEnvironment/NeonEnvironment.ts';
+import NeonEnvironment from '../components/NeonEnvironment/NeonEnvironment';
 // eslint-disable-next-line import/extensions
 import { REMOTE_ASSET_PATHS, REMOTE_ASSET_NAMES } from './remoteAssets.js';
 
