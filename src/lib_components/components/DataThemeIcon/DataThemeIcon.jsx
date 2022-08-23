@@ -5,13 +5,11 @@ import Avatar from '@material-ui/core/Avatar';
 
 import Theme from '../Theme/Theme';
 
-/* eslint-disable import/no-webpack-loader-syntax, import/no-unresolved */
-import AtmosphereSVG from '!file-loader?name=static/media/[name].[hash].[ext]!./svg_optimized/atmosphere.svg';
-import BiogeochemistrySVG from '!file-loader?name=static/media/[name].[hash].[ext]!./svg_optimized/biogeochemistry.svg';
-import EcohydrologySVG from '!file-loader?name=static/media/[name].[hash].[ext]!./svg_optimized/ecohydrology.svg';
-import LandCoverSVG from '!file-loader?name=static/media/[name].[hash].[ext]!./svg_optimized/landcover.svg';
-import OrganismsSVG from '!file-loader?name=static/media/[name].[hash].[ext]!./svg_optimized/organisms.svg';
-/* eslint-enable import/no-webpack-loader-syntax, import/no-unresolved */
+import AtmosphereSVG from './svg_optimized/atmosphere.svg';
+import BiogeochemistrySVG from './svg_optimized/biogeochemistry.svg';
+import EcohydrologySVG from './svg_optimized/ecohydrology.svg';
+import LandCoverSVG from './svg_optimized/landcover.svg';
+import OrganismsSVG from './svg_optimized/organisms.svg';
 
 const dataThemes = {
   atmosphere: {

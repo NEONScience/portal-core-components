@@ -2,57 +2,13 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="100"
    height="100"
    viewBox="0 0 26.458333 26.458334"
    version="1.1"
-   id="svg17343"
-   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
-   sodipodi:docname="icon-hut.svg">
-  <defs
-     id="defs17337" />
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="1.979899"
-     inkscape:cx="64.002384"
-     inkscape:cy="56.648604"
-     inkscape:document-units="px"
-     inkscape:current-layer="layer1"
-     showgrid="false"
-     units="px"
-     inkscape:pagecheckerboard="true"
-     inkscape:window-width="1043"
-     inkscape:window-height="656"
-     inkscape:window-x="182"
-     inkscape:window-y="370"
-     inkscape:window-maximized="0" />
-  <metadata
-     id="metadata17340">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+   id="svg17343">
   <g
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0,-270.54165)">
     <rect
@@ -66,9 +22,7 @@
     <path
        style="display:inline;opacity:1;fill:#808080;fill-opacity:1;stroke:none;stroke-width:0.16491526;stroke-opacity:1"
        d="m 13.22917,272.52606 -11.2447921,11.2448 4.630209,4.6302 v -5.95312 -1.85208 h 3.175 v -2.11667 h 1.3229171 v 2.11667 h 8.73125 v 1.85208 5.95312 l 4.630208,-4.6302 z m -5.0270831,9.6573 v 7.14375 h 1.5875 v -5.29167 h 2.3812501 v 5.29167 h 6.085417 v -7.14375 z m 0.926041,8.73125 4.1010421,4.10104 4.101042,-4.10104 z"
-       id="rect4518-8-4-5-38-6"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccccccccccccccccccccccccccc" />
+       id="rect4518-8-4-5-38-6" />
     <rect
        style="display:inline;opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.06666873;stroke-opacity:1"
        id="rect8773-0-7-7-7-4-2"
@@ -86,16 +40,12 @@
        y="-16.801044"
        transform="rotate(90)" />
     <path
-       inkscape:connector-curvature="0"
        style="display:inline;opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.16330439;stroke-opacity:1"
        d="m 15.74788,289.72811 -4.328935,4.32944 0.561209,0.56121 4.328934,-4.32944 z"
-       id="rect8773-0-4-6-2-3-7"
-       sodipodi:nodetypes="ccccc" />
+       id="rect8773-0-4-6-2-3-7" />
     <path
-       inkscape:connector-curvature="0"
        style="display:inline;opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.16330439;stroke-opacity:1"
        d="m 12.628692,289.85368 -2.7068131,2.70681 0.5612061,0.5612 2.706812,-2.7068 z"
-       id="rect8773-0-4-6-2-8-1-4"
-       sodipodi:nodetypes="ccccc" />
+       id="rect8773-0-4-6-2-8-1-4" />
   </g>
 </svg>

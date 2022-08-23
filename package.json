@@ -63,14 +63,9 @@
     "universal-cookie": "^4.0.4"
   },
   "peerDependencies": {
-    "@fontsource/inter": "^4.5.12",
-    "pdfjs-dist": "~2.15.0",
     "worker-loader": "~3.0.0"
   },
   "peerDependenciesMeta": {
-    "pdfjs-dist": {
-      "optional": true
-    },
     "worker-loader": {
       "optional": true
     }
@@ -92,18 +87,18 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.6.1",
     "eslint-plugin-react": "^7.30.1",
+    "express": "^4.18.1",
     "html-loader": "^4.1.0",
     "jest-canvas-mock": "^2.4.0",
     "node-fetch": "^3.2.10",
     "react-scripts": "^5.0.1",
     "react-test-renderer": "^17.0.2",
-    "serve": "^14.0.1",
     "typescript": "^4.7.4",
     "worker-loader": "^3.0.8"
   },
   "scripts": {
     "start": "react-scripts start",
-    "start:prod": "mv build core-components && mkdir build && mv core-components/ build/ && npx serve build",
+    "start:prod": "node server.js",
     "build": "react-scripts build",
     "test": "npx jest --config jest.config.js",
     "test:clear-cache": "npx jest --clearCache",
@@ -116,9 +111,9 @@
     "lib:clean-build": "npm run lib:clean && npm run lib",
     "lib:types": "npx tsc --project tsconfig.d.json",
     "lib:pre-process": "node ./scripts/lib/lib-cache-remote-assets.js",
-    "lib:post-cleanup": "npm run lib:post-clean-styleGuides && npm run lib:post-clean-siteMap && npm run lib:post-clean-tests && node ./scripts/lib/lib-fix-worker-babel.js",
+    "lib:post-cleanup": "npm run lib:post-clean-styleGuides && npm run lib:post-clean-img && npm run lib:post-clean-tests && node ./scripts/lib/lib-fix-worker-babel.js",
     "lib:post-clean-styleGuides": "rm ./lib/components/**/StyleGuide.*",
-    "lib:post-clean-siteMap": "rm -r ./lib/components/SiteMap/png",
+    "lib:post-clean-img": "rm -r ./lib/components/SiteMap/png && rm -r ./lib/components/SiteMap/svg_source && rm -r ./lib/components/DataThemeIcon/svg_source",
     "lib:post-clean-tests": "rm -r ./lib/*/__tests__ && rm -r ./lib/*/*/__tests__",
     "checks": "npm run lint && npm run test && npm run lib && npm run build"
   },

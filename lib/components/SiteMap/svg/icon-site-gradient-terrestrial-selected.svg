@@ -2,57 +2,13 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="110"
    height="110"
    viewBox="0 0 29.104166 29.104167"
    version="1.1"
-   id="svg19093"
-   sodipodi:docname="icon-gradient-terrestrial-selected.svg"
-   inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
-  <defs
-     id="defs19087" />
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="1.979899"
-     inkscape:cx="17.237622"
-     inkscape:cy="29.665768"
-     inkscape:document-units="px"
-     inkscape:current-layer="layer1"
-     showgrid="false"
-     units="px"
-     inkscape:pagecheckerboard="true"
-     inkscape:window-width="1504"
-     inkscape:window-height="972"
-     inkscape:window-x="3229"
-     inkscape:window-y="269"
-     inkscape:window-maximized="0" />
-  <metadata
-     id="metadata19090">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+   id="svg19093">
   <g
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0,-267.89582)">
     <rect
@@ -94,8 +50,6 @@
     <path
        style="display:inline;opacity:1;fill:#8abfec;fill-opacity:1;stroke:none;stroke-width:0.23597811;stroke-opacity:1"
        d="m 15.385656,278.58903 c -0.841123,0 -2.171989,2.26517 -2.173511,2.78239 -0.0015,0.51721 1.557047,1.67028 1.557047,2.0176 0,0.34731 -0.03874,0.65704 -0.474943,0.65704 -0.436195,0 -1.959014,-3.09711 -2.420007,-3.09709 -0.460993,1e-5 -3.6982813,3.45989 -3.2753803,4.19237 0.422901,0.73249 11.5916323,0.54493 11.9062493,0 0.314618,-0.54493 -4.278334,-6.55231 -5.119455,-6.55231 z"
-       id="rect4563"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="zzzzzzzz" />
+       id="rect4563" />
   </g>
 </svg>
