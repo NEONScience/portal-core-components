@@ -1,5 +1,10 @@
 /* eslint-disable react/forbid-prop-types */
-import React, { useState } from 'react';
+import React, {
+  useState,
+  useLayoutEffect,
+  useCallback,
+  useRef,
+} from 'react';
 
 import PropTypes from 'prop-types';
 import Select from 'react-select';
@@ -175,6 +180,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.grey[100],
     marginTop: theme.spacing(1.5),
     width: '100%',
+    maxWidth: '800px',
   },
   startFlex: {
     display: 'flex',
@@ -309,12 +315,18 @@ const positionsSeriesDescription = `
 */
 function PositionHistoryButton(props) {
   const classes = useStyles(Theme);
-  const { siteCode, position, history } = props;
+  const {
+    siteCode,
+    position,
+    history,
+    fullWidth,
+  } = props;
   const disabled = history.length < 2;
   const [historyDialogOpen, setHistoryDialogOpen] = useState(false);
   if (disabled) {
     return (
       <Button
+        fullWidth={fullWidth}
         size="small"
         variant="outlined"
         title="This position has had no changes to physical locations since its creation"
@@ -328,6 +340,7 @@ function PositionHistoryButton(props) {
   return (
     <>
       <Button
+        fullWidth={fullWidth}
         size="small"
         variant="outlined"
         onClick={() => { setHistoryDialogOpen(true); }}
@@ -383,9 +396,9 @@ function PositionHistoryButton(props) {
                   let elevation = 'unknown';
                   if (!isNaN(parsedReferenceElevation)) {
                     if (!isNaN(hasZOffset)) {
-                      elevation = `${(parsedReferenceElevation + parsedZOffset).toFixed(2).toString()}`;
+                      elevation = `${(parsedReferenceElevation + parsedZOffset).toFixed(2).toString()}m`;
                     } else {
-                      elevation = `${parsedReferenceElevation}`;
+                      elevation = `${parsedReferenceElevation}m`;
                     }
                   }
                   const end = rawEnd === '' ? 'Current' : rawEnd;
@@ -399,7 +412,7 @@ function PositionHistoryButton(props) {
                       <TableCell align="right" style={cellStyle}>{`${xOffset}m`}</TableCell>
                       <TableCell align="right" style={cellStyle}>{`${yOffset}m`}</TableCell>
                       <TableCell align="right" style={cellStyle}>{`${zOffset}m`}</TableCell>
-                      <TableCell align="right" style={cellStyle}>{`${elevation}m`}</TableCell>
+                      <TableCell align="right" style={cellStyle}>{elevation}</TableCell>
                     </TableRow>
                   );
                 })}
@@ -420,6 +433,7 @@ function PositionHistoryButton(props) {
 PositionHistoryButton.propTypes = {
   siteCode: PropTypes.string.isRequired,
   position: PropTypes.string.isRequired,
+  fullWidth: PropTypes.bool,
   history: PropTypes.arrayOf(PropTypes.shape({
     'HOR.VER': PropTypes.string.isRequired,
     azimuth: PropTypes.string.isRequired,
@@ -438,6 +452,13 @@ PositionHistoryButton.propTypes = {
   })).isRequired,
 };
 
+PositionHistoryButton.defaultProps = {
+  fullWidth: false,
+};
+
+const POSITION_DETAIL_COMPONENT_XS_UPPER = 300;
+const POSITION_DETAIL_COMPONENT_MD_LOWER = 600;
+
 /**
    PositionDetail - Component to display neatly-formatted position content
 */
@@ -445,6 +466,38 @@ function PositionDetail(props) {
   const { siteCode, position, wide } = props;
   const classes = useStyles(Theme);
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
+  const containerRef = useRef();
+  const [componentWidth, setComponentWidth] = useState(0);
+  let atComponentXs = false;
+  let atComponentMd = false;
+  if (componentWidth > 0) {
+    atComponentXs = (componentWidth <= POSITION_DETAIL_COMPONENT_XS_UPPER);
+    atComponentMd = (componentWidth > POSITION_DETAIL_COMPONENT_MD_LOWER);
+  }
+  const handleResizeCb = useCallback(() => {
+    const container = containerRef.current;
+    if (!container) { return; }
+    if (container.clientWidth === componentWidth) { return; }
+    setComponentWidth(container.clientWidth);
+  }, [containerRef, componentWidth, setComponentWidth]);
+  useLayoutEffect(() => {
+    const element = containerRef.current;
+    if (!element) { return () => {}; }
+    handleResizeCb();
+    if (typeof ResizeObserver !== 'function') {
+      window.addEventListener('resize', handleResizeCb);
+      return () => {
+        window.removeEventListener('resize', handleResizeCb);
+      };
+    }
+    let resizeObserver = new ResizeObserver(handleResizeCb);
+    resizeObserver.observe(element);
+    return () => {
+      if (!resizeObserver) { return; }
+      resizeObserver.disconnect();
+      resizeObserver = null;
+    };
+  }, [containerRef, handleResizeCb]);
   if (!state.product.sites[siteCode] || !state.product.sites[siteCode].positions[position]) {
     return <Typography variant="body1">{position}</Typography>;
   }
@@ -469,9 +522,9 @@ function PositionDetail(props) {
   let elevation = '--';
   if (!isNaN(parsedReferenceElevation)) {
     if (!isNaN(hasZOffset)) {
-      elevation = `${(parsedReferenceElevation + parsedZOffset).toFixed(2).toString()}`;
+      elevation = `${(parsedReferenceElevation + parsedZOffset).toFixed(2).toString()}m`;
     } else {
-      elevation = `${parsedReferenceElevation}`;
+      elevation = `${parsedReferenceElevation}m`;
     }
   }
   const fadeStyle = { color: Theme.palette.grey[500] };
@@ -538,8 +591,38 @@ function PositionDetail(props) {
       </div>
     );
   };
+  let positionContainerStyle = {
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  };
+  let positionSectionsContainerStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+  };
+  let historyButtonContainerStyle = {
+    textAlign: 'right',
+  };
+  if (atComponentXs) {
+    positionContainerStyle = {
+      ...positionContainerStyle,
+      alignItems: 'flex-start',
+      flexDirection: 'column',
+    };
+    historyButtonContainerStyle = {
+      ...historyButtonContainerStyle,
+      textAlign: 'unset',
+      marginTop: Theme.spacing(1),
+      width: '100%',
+    };
+  }
+  if (atComponentMd) {
+    positionSectionsContainerStyle = {
+      ...positionSectionsContainerStyle,
+      flexDirection: 'row',
+    };
+  }
   return wide ? (
-    <div>
+    <div ref={containerRef}>
       <div className={classes.startFlex} style={{ alignItems: 'flex-end' }}>
         <Typography variant="body1" style={{ fontWeight: 600, marginRight: Theme.spacing(3) }}>
           {position}
@@ -547,7 +630,7 @@ function PositionDetail(props) {
         <div className={classes.startFlex} style={{ alignItems: 'center', ...fadeStyle }}>
           <Typography variant="body2">Elevation:</Typography>
           <ElevationIcon fontSize="small" style={{ margin: Theme.spacing(0, 0.5, 0, 1) }} />
-          <Typography variant="body2">{`${elevation}m`}</Typography>
+          <Typography variant="body2">{elevation}</Typography>
         </div>
       </div>
       <div className={classes.startFlex}>
@@ -559,8 +642,12 @@ function PositionDetail(props) {
       {renderDescription()}
     </div>
   ) : (
-    <div className={classes.startFlex} style={{ alignItems: 'center', justifyContent: 'space-between' }}>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
+    <div
+      ref={containerRef}
+      className={classes.startFlex}
+      style={positionContainerStyle}
+    >
+      <div style={positionSectionsContainerStyle}>
         <div className={classes.startFlex} style={{ alignItems: 'center' }}>
           <div style={{ marginRight: Theme.spacing(3) }}>
             <Typography variant="body1" style={{ fontWeight: 600 }}>
@@ -575,7 +662,7 @@ function PositionDetail(props) {
                 style={{ marginRight: Theme.spacing(0.5), ...fadeStyle }}
               />
               <Typography variant="body2" style={{ ...fadeStyle }}>
-                {`${elevation}m`}
+                {elevation}
               </Typography>
             </div>
           </div>
@@ -594,8 +681,13 @@ function PositionDetail(props) {
         </div>
         {renderDescription()}
       </div>
-      <div style={{ textAlign: 'right' }}>
-        <PositionHistoryButton siteCode={siteCode} position={position} history={history} />
+      <div style={historyButtonContainerStyle}>
+        <PositionHistoryButton
+          siteCode={siteCode}
+          position={position}
+          history={history}
+          fullWidth={atComponentXs}
+        />
       </div>
     </div>
   );
