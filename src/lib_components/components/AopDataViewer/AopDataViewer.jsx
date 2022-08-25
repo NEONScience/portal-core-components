@@ -263,7 +263,7 @@ const AopDataViewer = (props) => {
             || !response.data
             || !response.data.siteCodes
             || (response.data.siteCodes.length <= 0)) {
-          throw Error('Product resposne contained no data');
+          throw Error('Product response contained no data');
         }
         setData(parseFetchResponse(response));
         setFetchSucceeded(true);
