@@ -238,9 +238,14 @@ const AopDataViewer = (props) => {
     if (!site || !year || !flight) { return ''; }
     const flightIdx = flight - 1;
     if (!data[site] || !data[site][year] || !data[site][year][flightIdx]) { return ''; }
+    const yearData = data[site][year];
+    if (!yearData[flightIdx].month) { return ''; }
+    const yearFlightMonth = yearData[flightIdx].month;
     const currentDataUrl = data[site][year][flightIdx].url;
+    const queryParams = `&dataproduct=${productCode}&site=${site}&month=${year}-${yearFlightMonth}`;
+    const appliedDataUrl = `${currentDataUrl}${queryParams}`;
     const title = encodeURIComponent(getDataSetTitle(currentSelection, data));
-    return `${NeonEnvironment.getVisusIframeBaseUrl()}?${currentDataUrl}&title=${title}`;
+    return `${NeonEnvironment.getVisusIframeBaseUrl()}?${appliedDataUrl}&title=${title}`;
   };
 
   /**
