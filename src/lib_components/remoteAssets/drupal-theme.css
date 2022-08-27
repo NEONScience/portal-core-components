@@ -3891,12 +3891,17 @@
     position: absolute;
     z-index: 10;
     border: 1px solid #0073cf; }
+    #header .authContainer .openid-connect-login-form form > div, #footer .authContainer .openid-connect-login-form form > div {
+      border: none; }
+    #header .authContainer .openid-connect-login-form .form-submit, #footer .authContainer .openid-connect-login-form .form-submit {
+      border: none;
+      background: none; }
   @media (max-width: 1199.95px) {
     #header .authContainer, #footer .authContainer {
       top: 13px;
       right: 72px;
       border: 1px solid #0073cf; }
-      #header .authContainer a, #footer .authContainer a {
+      #header .authContainer a, #header .authContainer .form-submit, #footer .authContainer a, #footer .authContainer .form-submit {
         display: inline-block;
         color: #0073cf !important;
         font-size: 0.55rem !important;
@@ -3907,7 +3912,7 @@
         text-transform: uppercase !important;
         text-decoration: none;
         padding: 5px 10px; }
-        #header .authContainer a:hover, #footer .authContainer a:hover {
+        #header .authContainer a:hover, #header .authContainer .form-submit:hover, #footer .authContainer a:hover, #footer .authContainer .form-submit:hover {
           text-decoration: underline; }
     #header .authContainer *:first-child, #footer .authContainer *:first-child {
       border-right: 1px solid;
@@ -3922,7 +3927,7 @@
       top: -1px;
       right: 0px;
       border: 1px solid #0073cf; }
-      #header .authContainer a, #footer .authContainer a {
+      #header .authContainer a, #header .authContainer .form-submit, #footer .authContainer a, #footer .authContainer .form-submit {
         display: inline-block;
         color: #0073cf !important;
         font-size: 0.55rem !important;
@@ -3933,7 +3938,7 @@
         text-transform: uppercase !important;
         text-decoration: none;
         padding: 5px 10px; }
-        #header .authContainer a:hover, #footer .authContainer a:hover {
+        #header .authContainer a:hover, #header .authContainer .form-submit:hover, #footer .authContainer a:hover, #footer .authContainer .form-submit:hover {
           text-decoration: underline; }
     #header .authContainer *:first-child, #footer .authContainer *:first-child {
       border-right: 1px solid;

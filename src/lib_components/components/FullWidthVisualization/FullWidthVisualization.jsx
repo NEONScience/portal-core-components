@@ -27,7 +27,9 @@ export default function FullWidthVisualization(props) {
     vizRef,
     minWidth,
     handleRedraw,
+    allowHeightResize,
     deriveHeightFromWidth,
+    containerStyle,
     children,
     ...other
   } = props;
@@ -46,21 +48,29 @@ export default function FullWidthVisualization(props) {
     if (container.offsetParent === null || viz.offsetParent === null) { return; }
     // Do nothing if container and viz have the same width
     // (resize event fired but no actual resize necessary)
-    if (container.clientWidth === vizWidth) { return; }
+    if ((container.clientWidth === vizWidth) && !allowHeightResize) { return; }
     const newWidth = container.clientWidth;
     setVizWidth(newWidth);
     viz.setAttribute('width', `${newWidth}px`);
     if (deriveHeightFromWidth !== null) {
       const newHeight = deriveHeightFromWidth === 'auto'
         ? autoVizHeight(newWidth)
-        : deriveHeightFromWidth(newWidth);
+        : deriveHeightFromWidth(newWidth, container, viz);
       viz.setAttribute('height', `${newHeight}px`);
       viz.style.height = `${newHeight}px`;
     }
     if (handleRedraw) {
       handleRedraw();
     }
-  }, [vizRef, containerRef, vizWidth, setVizWidth, handleRedraw, deriveHeightFromWidth]);
+  }, [
+    vizRef,
+    containerRef,
+    vizWidth,
+    setVizWidth,
+    allowHeightResize,
+    handleRedraw,
+    deriveHeightFromWidth,
+  ]);
 
   useLayoutEffect(() => {
     const element = vizRef.current;
@@ -87,6 +97,9 @@ export default function FullWidthVisualization(props) {
     ref: containerRef,
     style: { width: '100%', minWidth: `${minWidth}px` },
   };
+  if (containerStyle) {
+    divProps.style = containerStyle;
+  }
   if (other['data-selenium']) { divProps['data-selenium'] = other['data-selenium']; }
 
   return (
@@ -102,10 +115,15 @@ FullWidthVisualization.propTypes = {
   }).isRequired,
   minWidth: PropTypes.number,
   handleRedraw: PropTypes.func,
+  allowHeightResize: PropTypes.bool,
   deriveHeightFromWidth: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.oneOf(['auto']),
   ]),
+  containerStyle: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ])),
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.oneOfType([
       PropTypes.node,
@@ -120,4 +138,6 @@ FullWidthVisualization.defaultProps = {
   minWidth: 1,
   handleRedraw: null,
   deriveHeightFromWidth: null,
+  allowHeightResize: false,
+  containerStyle: null,
 };

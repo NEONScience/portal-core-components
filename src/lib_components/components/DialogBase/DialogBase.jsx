@@ -49,10 +49,15 @@ const DialogBase = (props) => {
     toolbarChildren,
     children,
     closeButtonProps,
+    customClasses,
     nopaper,
     style,
     ...other
   } = props;
+
+  const appliedPaperClass = (customClasses && customClasses.contentPaper)
+    ? customClasses.contentPaper
+    : classes.contentPaper;
 
   return (
     <Dialog
@@ -89,7 +94,7 @@ const DialogBase = (props) => {
           {children}
         </div>
       ) : (
-        <Paper className={classes.contentPaper}>
+        <Paper className={appliedPaperClass}>
           {children}
         </Paper>
       )}
@@ -123,6 +128,11 @@ DialogBase.propTypes = {
       PropTypes.number,
     ]),
   ),
+  customClasses: PropTypes.objectOf(
+    PropTypes.oneOfType([
+      PropTypes.string,
+    ]),
+  ),
   nopaper: PropTypes.bool,
   style: PropTypes.object, // eslint-disable-line react/forbid-prop-types
 };
@@ -131,6 +141,7 @@ DialogBase.defaultProps = {
   open: true,
   toolbarChildren: null,
   closeButtonProps: {},
+  customClasses: {},
   nopaper: false,
   style: {},
 };

@@ -1,6 +1,6 @@
 /* eslint react/jsx-one-expression-per-line: 0 */
 
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect, useState } from 'react';
 
 import { of } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
@@ -8,6 +8,7 @@ import { map, catchError } from 'rxjs/operators';
 import cloneDeep from 'lodash/cloneDeep';
 
 import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -21,6 +22,7 @@ import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 
 import AopDataViewer from './AopDataViewer';
+import DialogBase from '../DialogBase/DialogBase';
 import NeonEnvironment from '../NeonEnvironment';
 import Theme from '../Theme/Theme';
 
@@ -31,6 +33,21 @@ const useStyles = makeStyles((theme) => ({
   title: {
     fontWeight: 500,
     marginBottom: '8px',
+  },
+}));
+
+const useDialogBaseStyles = makeStyles((theme) => ({
+  contentPaper: {
+    margin: theme.spacing(10, 2, 2, 2),
+    padding: theme.spacing(3),
+    height: '100%',
+    position: 'relative',
+    width: `calc(100% - ${theme.spacing(2) * 2}px)`,
+    minWidth: '400px',
+    minHeight: '600px',
+    [Theme.breakpoints.down('xs')]: {
+      minHeight: '700px',
+    },
   },
 }));
 
@@ -179,6 +196,8 @@ const AopViewerDemo = (): JSX.Element => {
 
 export default function StyleGuide() {
   const classes = useStyles(Theme);
+  const dialogBaseClasses = useDialogBaseStyles(Theme);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
     <>
@@ -284,6 +303,34 @@ import AopDataViewer from 'portal-core-components/lib/components/AopDataViewer';
  />
         `}
       </CodeBlock>
+
+      <Divider className={classes.divider} />
+      <Typography variant="h6" component="h4" gutterBottom>Viewer in Dialog</Typography>
+
+      <ExampleBlock>
+        <div style={{ textAlign: 'center' }}>
+          <Button variant="contained" onClick={() => setDialogOpen(true)}>
+            Open AOP Viewer Dialog
+          </Button>
+          <br />
+          <br />
+          <DialogBase
+            open={dialogOpen}
+            title="AOP Viewer"
+            customClasses={dialogBaseClasses}
+            onClose={() => setDialogOpen(false)}
+            data-selenium="aop-viewer-dialog"
+          >
+            <AopDataViewer
+              fillContainer
+              productCode="DP3.30012.001"
+              initialSite="ABBY"
+              initialYear={2021}
+              initialFlight={1}
+            />
+          </DialogBase>
+        </div>
+      </ExampleBlock>
 
     </>
   );

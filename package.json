@@ -25,7 +25,7 @@
     "@types/ua-parser-js": "^0.7.36",
     "@types/wicg-file-system-access": "^2020.9.5",
     "clsx": "^1.2.1",
-    "core-js": "^3.24.1",
+    "core-js": "^3.25.0",
     "d3-drag": "^3.0.0",
     "d3-selection": "^3.0.0",
     "d3-transition": "^3.0.1",
@@ -35,7 +35,7 @@
     "file-saver": "^2.0.5",
     "highlight.js": "^11.6.0",
     "history": "^5.3.0",
-    "html-react-parser": "^3.0.3",
+    "html-react-parser": "^3.0.4",
     "leaflet": "~1.6.0",
     "lodash": "^4.17.21",
     "material-table": "^1.69.3",
@@ -63,7 +63,7 @@
     "universal-cookie": "^4.0.4"
   },
   "peerDependencies": {
-    "worker-loader": "~3.0.0"
+    "worker-loader": "^3.0.8"
   },
   "peerDependenciesMeta": {
     "worker-loader": {
@@ -72,7 +72,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.18.10",
-    "@babel/core": "^7.18.10",
+    "@babel/core": "^7.18.13",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
     "@babel/plugin-proposal-object-rest-spread": "^7.18.9",
     "@babel/plugin-transform-object-assign": "^7.18.6",
@@ -81,19 +81,19 @@
     "@babel/preset-typescript": "^7.18.6",
     "@jest/globals": "^28.1.3",
     "@testing-library/react-hooks": "^8.0.1",
-    "@typescript-eslint/parser": "^5.33.1",
+    "@typescript-eslint/parser": "^5.35.1",
     "eslint": "^8.22.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.6.1",
-    "eslint-plugin-react": "^7.30.1",
+    "eslint-plugin-react": "^7.31.1",
     "express": "^4.18.1",
     "html-loader": "^4.1.0",
     "jest-canvas-mock": "^2.4.0",
     "node-fetch": "^3.2.10",
     "react-scripts": "^5.0.1",
     "react-test-renderer": "^17.0.2",
-    "typescript": "^4.7.4",
+    "typescript": "~4.7.4",
     "worker-loader": "^3.0.8"
   },
   "scripts": {

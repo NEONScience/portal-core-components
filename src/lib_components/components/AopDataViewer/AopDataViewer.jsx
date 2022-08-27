@@ -30,6 +30,7 @@ import Typography from '@material-ui/core/Typography';
 import BackYearIcon from '@material-ui/icons/KeyboardArrowLeft';
 import ForwardYearIcon from '@material-ui/icons/KeyboardArrowRight';
 import InfoIcon from '@material-ui/icons/InfoOutlined';
+import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import WarningIcon from '@material-ui/icons/Warning';
 
 import Theme from '../Theme/Theme';
@@ -49,8 +50,8 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
   },
   iframe: {
-    minWidth: `${MIN_IFRAME_WIDTH}`,
-    minHeight: `${MIN_IFRAME_WIDTH}`,
+    minWidth: `${MIN_IFRAME_WIDTH}px`,
+    minHeight: `${MIN_IFRAME_WIDTH}px`,
     border: `1px solid ${theme.palette.grey[700]}`,
   },
   divider: {
@@ -67,6 +68,17 @@ const useStyles = makeStyles((theme) => ({
   tooltipIconButton: {
     marginTop: theme.spacing(-0.5),
     marginLeft: theme.spacing(0.5),
+  },
+  openInNewLink: {
+    display: 'block',
+    width: '100%',
+    textAlign: 'right',
+    marginTop: theme.spacing(0.5),
+    fontSize: '0.8rem',
+  },
+  openInNewIcon: {
+    fontSize: '0.95rem',
+    margin: theme.spacing(0, 0.5, -0.25, 0),
   },
 }));
 
@@ -121,7 +133,12 @@ const getCurrentSliderBounds = (currentYears) => {
 */
 const AopDataViewer = (props) => {
   const classes = useStyles(Theme);
-  const { productCode, showTitle } = props;
+  const {
+    productCode,
+    showTitle,
+    fillContainer,
+    showOpenInNewWindow,
+  } = props;
 
   const [{ data: neonContextData }] = NeonContext.useNeonContextState();
   const { sites, states } = neonContextData;
@@ -469,17 +486,17 @@ const AopDataViewer = (props) => {
       {belowSm
         ? (
           <>
-            <Grid container spacing={2} justify="center" style={{ marginBottom: Theme.spacing(1) }}>
+            <Grid container spacing={2} justifyContent="center" style={{ marginBottom: Theme.spacing(1) }}>
               <Grid item xs={2}>{renderInputLabel('site', tooltips.site)}</Grid>
               <Grid item xs={10}>
                 {renderSiteSelect()}
               </Grid>
             </Grid>
-            <Grid container spacing={2} justify="center" style={{ marginBottom: Theme.spacing(1) }}>
+            <Grid container spacing={2} justifyContent="center" style={{ marginBottom: Theme.spacing(1) }}>
               <Grid item xs={2}>{renderInputLabel('year', tooltips.year)}</Grid>
               <Grid item xs={10}>{renderYearSlider()}</Grid>
             </Grid>
-            <Grid container spacing={2} justify="center" style={{ marginBottom: Theme.spacing(1) }}>
+            <Grid container spacing={2} justifyContent="center" style={{ marginBottom: Theme.spacing(1) }}>
               <Grid item xs={2}>{renderInputLabel('flight', tooltips.flight)}</Grid>
               <Grid item xs={10}>{renderFlightSelect()}</Grid>
             </Grid>
@@ -519,21 +536,47 @@ const AopDataViewer = (props) => {
     );
   }
 
+  const srcUrl = getCurrentIframeSrc();
+
   return (
     <FullWidthVisualization
       vizRef={iframeRef}
       minWidth={MIN_IFRAME_WIDTH}
-      deriveHeightFromWidth="auto"
+      allowHeightResize={fillContainer}
+      deriveHeightFromWidth={!fillContainer ? 'auto' : (width, container, viz) => (
+        (container.clientHeight - viz.offsetTop) - 10
+      )}
+      containerStyle={!fillContainer ? null : {
+        minWidth: `${MIN_IFRAME_WIDTH}px`,
+        position: 'absolute',
+        top: Theme.spacing(3),
+        left: Theme.spacing(3),
+        right: Theme.spacing(3),
+        bottom: Theme.spacing(3),
+        overflowX: 'hidden',
+        overflowY: 'auto',
+      }}
       data-selenium="aop-data-viewer"
     >
       {renderSelectionForm()}
       <iframe
-        src={getCurrentIframeSrc()}
+        src={srcUrl}
         title={getDataSetTitle(currentSelection)}
         ref={iframeRef}
         scrolling="no"
         className={classes.iframe}
       />
+      {!showOpenInNewWindow ? null : (
+        <Link
+          href={srcUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={classes.openInNewLink}
+        >
+          <OpenInNewIcon className={classes.openInNewIcon} />
+          Open in New Window
+        </Link>
+      )}
     </FullWidthVisualization>
   );
 };
@@ -544,6 +587,8 @@ AopDataViewer.propTypes = {
   initialSite: PropTypes.string,
   initialYear: PropTypes.number,
   initialFlight: PropTypes.number,
+  fillContainer: PropTypes.bool,
+  showOpenInNewWindow: PropTypes.bool,
 };
 
 AopDataViewer.defaultProps = {
@@ -551,6 +596,8 @@ AopDataViewer.defaultProps = {
   initialSite: null,
   initialYear: null,
   initialFlight: null,
+  fillContainer: false,
+  showOpenInNewWindow: false,
 };
 
 const WrappedAopDataViewer = Theme.getWrappedComponent(

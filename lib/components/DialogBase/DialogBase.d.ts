@@ -10,6 +10,9 @@ declare namespace DialogBase {
         const closeButtonProps: PropTypes.Requireable<{
             [x: string]: string | number | null | undefined;
         }>;
+        const customClasses: PropTypes.Requireable<{
+            [x: string]: string | null | undefined;
+        }>;
         const nopaper: PropTypes.Requireable<boolean>;
         const style: PropTypes.Requireable<object>;
     }
@@ -20,6 +23,8 @@ declare namespace DialogBase {
         export { toolbarChildren_1 as toolbarChildren };
         const closeButtonProps_1: {};
         export { closeButtonProps_1 as closeButtonProps };
+        const customClasses_1: {};
+        export { customClasses_1 as customClasses };
         const nopaper_1: boolean;
         export { nopaper_1 as nopaper };
         const style_1: {};
