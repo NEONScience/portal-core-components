@@ -63,7 +63,7 @@ export interface FetchProductStartedAction extends AnyAction {
 }
 export interface FetchProductFailedAction extends AnyAction {
   type: typeof ActionTypes.FETCH_PRODUCT_FAILED;
-  error: Nullable<AjaxResponse|string>;
+  error: Nullable<AjaxResponse<unknown>|string>;
 }
 export interface FetchProductSucceededAction extends AnyAction {
   type: typeof ActionTypes.FETCH_PRODUCT_SUCCEEDED;
@@ -76,7 +76,7 @@ export interface FetchProductReleaseStartedAction extends AnyAction {
 export interface FetchProductReleaseFailedAction extends AnyAction {
   type: typeof ActionTypes.FETCH_PRODUCT_RELEASE_FAILED;
   release: string;
-  error: Nullable<AjaxResponse|string>;
+  error: Nullable<AjaxResponse<unknown>|string>;
 }
 export interface FetchProductReleaseSucceededAction extends AnyAction {
   type: typeof ActionTypes.FETCH_PRODUCT_RELEASE_SUCCEEDED;
@@ -90,7 +90,7 @@ export interface FetchBundleParentStartedAction extends AnyAction {
 export interface FetchBundleParentFailedAction extends AnyAction {
   type: typeof ActionTypes.FETCH_BUNDLE_PARENT_FAILED;
   bundleParent: string;
-  error: Nullable<AjaxResponse|string>;
+  error: Nullable<AjaxResponse<unknown>|string>;
 }
 export interface FetchBundleParentSucceededAction extends AnyAction {
   type: typeof ActionTypes.FETCH_BUNDLE_PARENT_SUCCEEDED;
@@ -106,7 +106,7 @@ export interface FetchBundleParentReleaseFailedAction extends AnyAction {
   type: typeof ActionTypes.FETCH_BUNDLE_PARENT_RELEASE_FAILED;
   bundleParent: string;
   release: string;
-  error: Nullable<AjaxResponse|string>;
+  error: Nullable<AjaxResponse<unknown>|string>;
 }
 export interface FetchBundleParentReleaseSucceededAction extends AnyAction {
   type: typeof ActionTypes.FETCH_BUNDLE_PARENT_RELEASE_SUCCEEDED;
@@ -199,7 +199,9 @@ const ActionCreator = {
   fetchProductStarted: (): FetchProductStartedAction => ({
     type: ActionTypes.FETCH_PRODUCT_STARTED,
   }),
-  fetchProductFailed: (error: Nullable<AjaxResponse|string>): FetchProductFailedAction => ({
+  fetchProductFailed: (
+    error: Nullable<AjaxResponse<unknown>|string>,
+  ): FetchProductFailedAction => ({
     type: ActionTypes.FETCH_PRODUCT_FAILED,
     error,
   }),
@@ -213,7 +215,7 @@ const ActionCreator = {
   }),
   fetchProductReleaseFailed: (
     release: string,
-    error: Nullable<AjaxResponse|string>,
+    error: Nullable<AjaxResponse<unknown>|string>,
   ): FetchProductReleaseFailedAction => ({
     type: ActionTypes.FETCH_PRODUCT_RELEASE_FAILED,
     release,
@@ -233,7 +235,7 @@ const ActionCreator = {
   }),
   fetchBundleParentFailed: (
     bundleParent: string,
-    error: Nullable<AjaxResponse|string>,
+    error: Nullable<AjaxResponse<unknown>|string>,
   ): FetchBundleParentFailedAction => ({
     type: ActionTypes.FETCH_BUNDLE_PARENT_FAILED,
     bundleParent,
@@ -258,7 +260,7 @@ const ActionCreator = {
   fetchBundleParentReleaseFailed: (
     bundleParent: string,
     release: string,
-    error: Nullable<AjaxResponse|string>,
+    error: Nullable<AjaxResponse<unknown>|string>,
   ): FetchBundleParentReleaseFailedAction => ({
     type: ActionTypes.FETCH_BUNDLE_PARENT_RELEASE_FAILED,
     bundleParent,

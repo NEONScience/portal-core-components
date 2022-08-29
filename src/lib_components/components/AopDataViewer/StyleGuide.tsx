@@ -25,6 +25,7 @@ import AopDataViewer from './AopDataViewer';
 import DialogBase from '../DialogBase/DialogBase';
 import NeonEnvironment from '../NeonEnvironment';
 import Theme from '../Theme/Theme';
+import { exists } from '../../util/typeUtil';
 
 const useStyles = makeStyles((theme) => ({
   divider: {
@@ -97,29 +98,34 @@ const AopViewerDemo = (): JSX.Element => {
     aopViewerReducer,
     cloneDeep(DEFAULT_STATE),
   );
-  const fetchAllProducts$ = ajax.getJSON(`${NeonEnvironment.getVisusProductsBaseUrl()}`)
-    .pipe(
-      map((response: any) => {
-        if (Array.isArray(response) && (response.length > 0)) {
-          const products = response;
-          if (!products.length) {
-            dispatch({
-              type: 'fetchProductsFailed',
-              error: 'fetch succeeded; no products found',
-            });
-            return of(false);
-          }
-          dispatch({ type: 'fetchProductsSucceeded', products });
-          return of(true);
+  const fetchAllProducts$ = ajax({
+    method: 'GET',
+    url: `${NeonEnvironment.getVisusProductsBaseUrl()}`,
+    crossDomain: true,
+  }).pipe(
+    map((response: any) => {
+      if (exists(response)
+          && Array.isArray(response.response)
+          && (response.response.length > 0)) {
+        const products = response.response;
+        if (!products.length) {
+          dispatch({
+            type: 'fetchProductsFailed',
+            error: 'fetch succeeded; no products found',
+          });
+          return of(false);
         }
-        dispatch({ type: 'fetchProductsFailed', error: 'malformed response' });
-        return of(false);
-      }),
-      catchError((error: any) => {
-        dispatch({ type: 'fetchProductsFailed', error: error.message });
-        return of(false);
-      }),
-    );
+        dispatch({ type: 'fetchProductsSucceeded', products });
+        return of(true);
+      }
+      dispatch({ type: 'fetchProductsFailed', error: 'malformed response' });
+      return of(false);
+    }),
+    catchError((error: any) => {
+      dispatch({ type: 'fetchProductsFailed', error: error.message });
+      return of(false);
+    }),
+  );
   useEffect(() => {
     if (state.fetchProducts.status === 'AWAITING_CALL') {
       dispatch({ type: 'fetchProductsCalled' });

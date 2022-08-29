@@ -231,48 +231,50 @@ const DataProductCitationDemo = (): JSX.Element => {
   }: DataProductCitationViewState = viewState;
   // eslint-disable-next-line max-len
   const citationDispatch = DataProductCitationContext.useDataProductCitationContextDispatch() as Dispatch<any>;
-  const fetchAllProducts$ = (NeonGraphQL.getAllDataProducts() as Observable<AjaxResponse>).pipe(
-    map((response: any) => {
-      if (response.response && response.response.data && response.response.data.products) {
-        const products = response.response.data.products
-          .map((product: any) => ({
-            productCode: product.productCode,
-            productName: product.productName,
-          }));
-        if (!products.length) {
-          dispatch({ type: 'fetchProductsFailed', error: 'fetch succeeded; no products found' });
-          return of(false);
+  const fetchAllProducts$ = (NeonGraphQL.getAllDataProducts() as Observable<AjaxResponse<unknown>>)
+    .pipe(
+      map((response: any) => {
+        if (response.response && response.response.data && response.response.data.products) {
+          const products = response.response.data.products
+            .map((product: any) => ({
+              productCode: product.productCode,
+              productName: product.productName,
+            }));
+          if (!products.length) {
+            dispatch({ type: 'fetchProductsFailed', error: 'fetch succeeded; no products found' });
+            return of(false);
+          }
+          dispatch({ type: 'fetchProductsSucceeded', products });
+          return of(true);
         }
-        dispatch({ type: 'fetchProductsSucceeded', products });
-        return of(true);
-      }
-      dispatch({ type: 'fetchProductsFailed', error: 'malformed response' });
-      return of(false);
-    }),
-    catchError((error: any) => {
-      dispatch({ type: 'fetchProductsFailed', error: error.message });
-      return of(false);
-    }),
-  );
-  const fetchAllReleases$ = (NeonApi.getReleasesObservable() as Observable<AjaxResponse>).pipe(
-    map((response: any) => {
-      if (response.data) {
-        const { data: releases } = response;
-        if (!releases.length) {
-          dispatch({ type: 'fetchReleasesFailed', error: 'fetch succeeded; no releases found' });
-          return of(false);
+        dispatch({ type: 'fetchProductsFailed', error: 'malformed response' });
+        return of(false);
+      }),
+      catchError((error: any) => {
+        dispatch({ type: 'fetchProductsFailed', error: error.message });
+        return of(false);
+      }),
+    );
+  const fetchAllReleases$ = (NeonApi.getReleasesObservable() as Observable<AjaxResponse<unknown>>)
+    .pipe(
+      map((response: any) => {
+        if (response.data) {
+          const { data: releases } = response;
+          if (!releases.length) {
+            dispatch({ type: 'fetchReleasesFailed', error: 'fetch succeeded; no releases found' });
+            return of(false);
+          }
+          dispatch({ type: 'fetchReleasesSucceeded', releases });
+          return of(true);
         }
-        dispatch({ type: 'fetchReleasesSucceeded', releases });
-        return of(true);
-      }
-      dispatch({ type: 'fetchReleasesFailed', error: 'malformed response' });
-      return of(false);
-    }),
-    catchError((error: any) => {
-      dispatch({ type: 'fetchReleasesFailed', error: error.message });
-      return of(false);
-    }),
-  );
+        dispatch({ type: 'fetchReleasesFailed', error: 'malformed response' });
+        return of(false);
+      }),
+      catchError((error: any) => {
+        dispatch({ type: 'fetchReleasesFailed', error: error.message });
+        return of(false);
+      }),
+    );
   useEffect(() => {
     if (!isStringNonEmpty(stateProductCode) && (state.fetchProducts.status === 'SUCCESS')) {
       citationDispatch(ActionCreator.setProductCode(state.products[0].productCode));

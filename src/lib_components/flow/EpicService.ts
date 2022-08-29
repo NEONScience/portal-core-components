@@ -7,10 +7,10 @@ import {
   MonoTypeOperatorFunction,
 } from 'rxjs';
 import {
-  AjaxCreationMethod,
+  AjaxConfig,
   AjaxResponse,
-  AjaxRequest,
-} from 'rxjs/internal/observable/dom/AjaxObservable';
+  ajax as AjaxCreationMethod,
+} from 'rxjs/ajax';
 import {
   switchMap,
   mergeMap,
@@ -36,7 +36,7 @@ export interface IEpicService {
   /**
    * Creator to decorate an EpicCreator function that creates the Epic
    * @param ofTypeFilter
-   * @param ajaxRequest
+   * @param ajaxConfig
    * @param workingAction
    * @param successAction
    * @param errorAction
@@ -49,7 +49,7 @@ export interface IEpicService {
    */
   createEpic: <A extends AnyAction, S extends AnyObject>(
     ofTypeFilter: string | string[],
-    ajaxRequest: AjaxRequest | AjaxRequest[],
+    ajaxConfig: AjaxConfig | AjaxConfig[],
     workingAction: WorkingAction,
     successAction: SuccessAction<A>,
     errorAction: ErrorAction<A>,
@@ -61,7 +61,7 @@ export interface IEpicService {
   /**
    * Creator to decorate an EpicCreator function that creates the Epic
    * @param ofTypeFilter
-   * @param ajaxRequest
+   * @param ajaxConfig
    * @param workingAction
    * @param successAction
    * @param errorAction
@@ -74,7 +74,7 @@ export interface IEpicService {
    */
   createMergeEpic: <A extends AnyAction, S extends AnyObject>(
     ofTypeFilter: string | string[],
-    ajaxRequest: AjaxRequest | AjaxRequest[],
+    ajaxConfig: AjaxConfig | AjaxConfig[],
     workingAction: WorkingAction,
     successAction: SuccessAction<A>,
     errorAction: ErrorAction<A>,
@@ -104,7 +104,7 @@ export interface IEpicService {
   /**
    * Creator to decorate an AJAX observable
    * @param ajax
-   * @param ajaxRequest
+   * @param ajaxConfig
    * @param successAction
    * @param errorAction
    * @param action
@@ -115,8 +115,8 @@ export interface IEpicService {
    * @type A The type of action
    */
   createAjaxObservable: <A extends AnyAction>(
-    ajax: AjaxCreationMethod,
-    ajaxRequest: AjaxRequest | AjaxRequest[],
+    ajax: typeof AjaxCreationMethod,
+    ajaxConfig: AjaxConfig | AjaxConfig[],
     successAction: SuccessAction<A>,
     errorAction: ErrorAction<A>,
     action?: A,
@@ -128,14 +128,14 @@ export interface IEpicService {
 }
 
 const transformRequest = <A extends AnyAction>(
-  ajax: AjaxCreationMethod,
-  request: AjaxRequest,
+  ajax: typeof AjaxCreationMethod,
+  request: AjaxConfig,
   action?: A,
   ajaxBodyCreator?: AjaxBodyCreator<A>,
   ajaxRequestInjector?: AjaxRequestInjector<A>,
   index?: number,
-): Observable<AjaxResponse> => {
-  let transformed: AjaxRequest = request;
+): Observable<AjaxResponse<unknown>> => {
+  let transformed: AjaxConfig = request;
   if (exists(action)) {
     if (exists(ajaxRequestInjector)) {
       transformed = (ajaxRequestInjector as AjaxRequestInjector<A>)(
@@ -152,28 +152,28 @@ const transformRequest = <A extends AnyAction>(
 };
 
 const transformRequests = <A extends AnyAction>(
-  ajax: AjaxCreationMethod,
-  requests: AjaxRequest[],
+  ajax: typeof AjaxCreationMethod,
+  requests: AjaxConfig[],
   action?: A,
   ajaxBodyCreator?: AjaxBodyCreator<A>,
   ajaxRequestInjector?: AjaxRequestInjector<A>,
-): Observable<AjaxResponse>[] => (
-    requests.map((request: AjaxRequest, index: number): Observable<AjaxResponse> => (
+): Observable<AjaxResponse<unknown>>[] => (
+    requests.map((request: AjaxConfig, index: number): Observable<AjaxResponse<unknown>> => (
       transformRequest(ajax, request, action, ajaxBodyCreator, ajaxRequestInjector, index)
     ))
   );
 
 const createSingleAjaxObservable = <A extends AnyAction>(
-  ajax: AjaxCreationMethod,
-  ajaxRequest: AjaxRequest,
+  ajax: typeof AjaxCreationMethod,
+  ajaxConfig: AjaxConfig,
   operators: any,
   action?: A,
   ajaxBodyCreator?: AjaxBodyCreator<A>,
   ajaxRequestInjector?: AjaxRequestInjector<A>,
 ): Observable<A> => {
-  const observable: Observable<AjaxResponse> = transformRequest(
+  const observable: Observable<AjaxResponse<unknown>> = transformRequest(
     ajax,
-    ajaxRequest,
+    ajaxConfig,
     action,
     ajaxBodyCreator,
     ajaxRequestInjector,
@@ -192,16 +192,16 @@ const createSingleAjaxObservable = <A extends AnyAction>(
 };
 
 const createMultiAjaxObservable = <A extends AnyAction>(
-  ajax: AjaxCreationMethod,
-  ajaxRequests: AjaxRequest[],
+  ajax: typeof AjaxCreationMethod,
+  ajaxConfigs: AjaxConfig[],
   operators: any,
   action?: A,
   ajaxBodyCreator?: AjaxBodyCreator<A>,
   ajaxRequestInjector?: AjaxRequestInjector<A>,
 ): Observable<A> => {
-  const observables: Observable<AjaxResponse>[] = transformRequests(
+  const observables: Observable<AjaxResponse<unknown>>[] = transformRequests(
     ajax,
-    ajaxRequests,
+    ajaxConfigs,
     action,
     ajaxBodyCreator,
     ajaxRequestInjector,
@@ -220,16 +220,16 @@ const createMultiAjaxObservable = <A extends AnyAction>(
 };
 
 const createForkJoinAjaxObservable = <A extends AnyAction>(
-  ajax: AjaxCreationMethod,
-  ajaxRequests: AjaxRequest[],
+  ajax: typeof AjaxCreationMethod,
+  ajaxConfigs: AjaxConfig[],
   operators: any,
   action?: A,
   ajaxBodyCreator?: AjaxBodyCreator<A>,
   ajaxRequestInjector?: AjaxRequestInjector<A>,
 ): Observable<A> => {
-  const observables: Observable<AjaxResponse>[] = transformRequests(
+  const observables: Observable<AjaxResponse<unknown>>[] = transformRequests(
     ajax,
-    ajaxRequests,
+    ajaxConfigs,
     action,
     ajaxBodyCreator,
     ajaxRequestInjector,
@@ -250,7 +250,7 @@ const createForkJoinAjaxObservable = <A extends AnyAction>(
 const EpicService: IEpicService = {
   createEpic: <A extends AnyAction, S extends AnyObject>(
     ofTypeFilter: string | string[],
-    ajaxRequest: AjaxRequest | AjaxRequest[],
+    ajaxConfig: AjaxConfig | AjaxConfig[],
     workingAction: WorkingAction,
     successAction: SuccessAction<A>,
     errorAction: ErrorAction<A>,
@@ -271,12 +271,12 @@ const EpicService: IEpicService = {
       takeUntilOperator = takeUntil(action$.ofType(takeUntilTypeFilter));
     }
     return action$.pipe(
-      ofType.apply(ofType, ofTypeFilters),
+      ofType(ofTypeFilters),
       switchMap((action: A) => concat(
         of(workingAction({ action })),
         EpicService.createAjaxObservable(
           ajax,
-          ajaxRequest,
+          ajaxConfig,
           successAction,
           errorAction,
           action,
@@ -290,7 +290,7 @@ const EpicService: IEpicService = {
   }),
   createMergeEpic: <A extends AnyAction, S extends AnyObject>(
     ofTypeFilter: string | string[],
-    ajaxRequest: AjaxRequest | AjaxRequest[],
+    ajaxConfig: AjaxConfig | AjaxConfig[],
     workingAction: WorkingAction,
     successAction: SuccessAction<A>,
     errorAction: ErrorAction<A>,
@@ -311,12 +311,12 @@ const EpicService: IEpicService = {
       takeUntilOperator = takeUntil(action$.ofType(takeUntilTypeFilter));
     }
     return action$.pipe(
-      ofType.apply(ofType, ofTypeFilters),
+      ofType(ofTypeFilters),
       mergeMap((action: A) => concat(
         of(workingAction({ action })),
         EpicService.createAjaxObservable(
           ajax,
-          ajaxRequest,
+          ajaxConfig,
           successAction,
           errorAction,
           action,
@@ -355,8 +355,8 @@ const EpicService: IEpicService = {
     props.useForkJoin,
   ),
   createAjaxObservable: <A extends AnyAction>(
-    ajax: AjaxCreationMethod,
-    ajaxRequest: AjaxRequest | AjaxRequest[],
+    ajax: typeof AjaxCreationMethod,
+    ajaxConfig: AjaxConfig | AjaxConfig[],
     successAction: SuccessAction<A>,
     errorAction: ErrorAction<A>,
     action?: A,
@@ -366,7 +366,7 @@ const EpicService: IEpicService = {
     useForkJoin?: boolean,
   ): Observable<A> => {
     const operators: any = {
-      successOp: mergeMap((response: AjaxResponse | AjaxResponse[]) => (
+      successOp: mergeMap((response: AjaxResponse<unknown> | AjaxResponse<unknown>[]) => (
         successAction(response, action)
       )),
       errorOp: catchError((error: any) => {
@@ -377,11 +377,11 @@ const EpicService: IEpicService = {
       }),
       takeUntilOp: takeUntilOperator,
     };
-    const isArrayRequest: boolean = Array.isArray(ajaxRequest);
+    const isArrayRequest: boolean = Array.isArray(ajaxConfig);
     if (isArrayRequest && useForkJoin) {
       return createForkJoinAjaxObservable(
         ajax,
-        ajaxRequest as AjaxRequest[],
+        ajaxConfig as AjaxConfig[],
         operators,
         action,
         ajaxBodyCreator,
@@ -391,7 +391,7 @@ const EpicService: IEpicService = {
     if (isArrayRequest) {
       return createMultiAjaxObservable(
         ajax,
-        ajaxRequest as AjaxRequest[],
+        ajaxConfig as AjaxConfig[],
         operators,
         action,
         ajaxBodyCreator,
@@ -400,7 +400,7 @@ const EpicService: IEpicService = {
     }
     return createSingleAjaxObservable(
       ajax,
-      ajaxRequest as AjaxRequest,
+      ajaxConfig as AjaxConfig,
       operators,
       action,
       ajaxBodyCreator,

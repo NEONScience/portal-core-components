@@ -1026,17 +1026,17 @@ const Provider = (props) => {
         switchMap((resp) => of(request.body ? resp.response : resp)),
         takeUntil(manifestCancelation$),
       )
-      .subscribe(
-        (resp) => dispatch({
+      .subscribe({
+        next: (resp) => dispatch({
           type: 'setFetchManifestSucceeded',
           body: resp,
           sizeEstimate: getSizeEstimateFromManifestRollupResponse(resp),
         }),
-        (err) => dispatch({
+        error: (err) => dispatch({
           type: 'setFetchManifestFailed',
           error: err,
         }),
-      )
+      })
   ));
 
   const handleFetchS3Files = (currentState) => {

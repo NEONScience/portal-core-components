@@ -277,24 +277,27 @@ const AopDataViewer = (props) => {
   /**
      Effect: fetch and parse available data
   */
-  const handleFetchProductByCode = useCallback(() => ajax
-    .getJSON(`${NeonEnvironment.getVisusProductsBaseUrl()}/${productCode}`)
-    .pipe(
-      map((response) => {
-        if (!response
-            || !response.data
-            || !response.data.siteCodes
-            || (response.data.siteCodes.length <= 0)) {
-          throw Error('Product response contained no data');
-        }
-        setData(parseFetchResponse(response));
-        setFetchSucceeded(true);
-      }),
-      catchError(() => {
-        setFetchFailed(true);
-        return of('Product not found');
-      }),
-    ).subscribe(), [productCode]);
+  const handleFetchProductByCode = useCallback(() => ajax({
+    method: 'GET',
+    url: `${NeonEnvironment.getVisusProductsBaseUrl()}/${productCode}`,
+    crossDomain: true,
+  }).pipe(
+    map((response) => {
+      if (!response
+          || !response.response
+          || !response.response.data
+          || !response.response.data.siteCodes
+          || (response.response.data.siteCodes.length <= 0)) {
+        throw Error('Product response contained no data');
+      }
+      setData(parseFetchResponse(response.response));
+      setFetchSucceeded(true);
+    }),
+    catchError(() => {
+      setFetchFailed(true);
+      return of('Product not found');
+    }),
+  ).subscribe(), [productCode]);
 
   useEffect(() => {
     if (!fetchCalled) {

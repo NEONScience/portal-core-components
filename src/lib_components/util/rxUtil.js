@@ -68,11 +68,11 @@ export const getJson = (
   );
 
   // Placeholders for subscriber events, handled upstream in observable
-  return rxObs$.subscribe(
-    (response) => response,
-    (error) => error,
-    (complete) => complete,
-  );
+  return rxObs$.subscribe({
+    next: (response) => response,
+    error: (error) => error,
+    complete: (complete) => complete,
+  });
 };
 
 export default getJson;
