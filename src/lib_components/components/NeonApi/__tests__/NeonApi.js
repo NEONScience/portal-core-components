@@ -5,9 +5,9 @@ import { getTestableItems } from '../NeonApi';
 import NeonEnvironment from '../../NeonEnvironment/NeonEnvironment';
 
 jest.mock('rxjs/ajax', () => {
-  const RxAjax = require('rxjs/internal/observable/dom/AjaxObservable');
+  const Rx = require('rxjs');
   return {
-    ajax: jest.fn().mockImplementation((arg1) => new RxAjax.AjaxObservable(arg1)),
+    ajax: jest.fn().mockImplementation((arg1) => new Rx.Observable(() => { return () => {}; })),
   };
 });
 ajax.getJSON = jest.fn().mockImplementation((arg1, arg2) => [arg1, arg2]);

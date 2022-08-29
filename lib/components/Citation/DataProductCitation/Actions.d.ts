@@ -56,7 +56,7 @@ export interface FetchProductStartedAction extends AnyAction {
 }
 export interface FetchProductFailedAction extends AnyAction {
     type: typeof ActionTypes.FETCH_PRODUCT_FAILED;
-    error: Nullable<AjaxResponse | string>;
+    error: Nullable<AjaxResponse<unknown> | string>;
 }
 export interface FetchProductSucceededAction extends AnyAction {
     type: typeof ActionTypes.FETCH_PRODUCT_SUCCEEDED;
@@ -69,7 +69,7 @@ export interface FetchProductReleaseStartedAction extends AnyAction {
 export interface FetchProductReleaseFailedAction extends AnyAction {
     type: typeof ActionTypes.FETCH_PRODUCT_RELEASE_FAILED;
     release: string;
-    error: Nullable<AjaxResponse | string>;
+    error: Nullable<AjaxResponse<unknown> | string>;
 }
 export interface FetchProductReleaseSucceededAction extends AnyAction {
     type: typeof ActionTypes.FETCH_PRODUCT_RELEASE_SUCCEEDED;
@@ -83,7 +83,7 @@ export interface FetchBundleParentStartedAction extends AnyAction {
 export interface FetchBundleParentFailedAction extends AnyAction {
     type: typeof ActionTypes.FETCH_BUNDLE_PARENT_FAILED;
     bundleParent: string;
-    error: Nullable<AjaxResponse | string>;
+    error: Nullable<AjaxResponse<unknown> | string>;
 }
 export interface FetchBundleParentSucceededAction extends AnyAction {
     type: typeof ActionTypes.FETCH_BUNDLE_PARENT_SUCCEEDED;
@@ -99,7 +99,7 @@ export interface FetchBundleParentReleaseFailedAction extends AnyAction {
     type: typeof ActionTypes.FETCH_BUNDLE_PARENT_RELEASE_FAILED;
     bundleParent: string;
     release: string;
-    error: Nullable<AjaxResponse | string>;
+    error: Nullable<AjaxResponse<unknown> | string>;
 }
 export interface FetchBundleParentReleaseSucceededAction extends AnyAction {
     type: typeof ActionTypes.FETCH_BUNDLE_PARENT_RELEASE_SUCCEEDED;
@@ -134,16 +134,16 @@ declare const ActionCreator: {
     setParams: (productCode: Nullable<string>, release: Nullable<string>) => SetParamsAction;
     storeFinalizedNeonContextState: (neonContextState: UnknownRecord) => StoreFinalizedNeonContextStateAction;
     fetchProductStarted: () => FetchProductStartedAction;
-    fetchProductFailed: (error: Nullable<AjaxResponse | string>) => FetchProductFailedAction;
+    fetchProductFailed: (error: Nullable<AjaxResponse<unknown> | string>) => FetchProductFailedAction;
     fetchProductSucceeded: (data: ContextDataProduct) => FetchProductSucceededAction;
     fetchProductReleaseStarted: (release: string) => FetchProductReleaseStartedAction;
-    fetchProductReleaseFailed: (release: string, error: Nullable<AjaxResponse | string>) => FetchProductReleaseFailedAction;
+    fetchProductReleaseFailed: (release: string, error: Nullable<AjaxResponse<unknown> | string>) => FetchProductReleaseFailedAction;
     fetchProductReleaseSucceeded: (release: string, data: ContextDataProduct) => FetchProductReleaseSucceededAction;
     fetchBundleParentStarted: (bundleParent: string) => FetchBundleParentStartedAction;
-    fetchBundleParentFailed: (bundleParent: string, error: Nullable<AjaxResponse | string>) => FetchBundleParentFailedAction;
+    fetchBundleParentFailed: (bundleParent: string, error: Nullable<AjaxResponse<unknown> | string>) => FetchBundleParentFailedAction;
     fetchBundleParentSucceeded: (bundleParent: string, data: ContextDataProduct) => FetchBundleParentSucceededAction;
     fetchBundleParentReleaseStarted: (bundleParent: string, release: string) => FetchBundleParentReleaseStartedAction;
-    fetchBundleParentReleaseFailed: (bundleParent: string, release: string, error: Nullable<AjaxResponse | string>) => FetchBundleParentReleaseFailedAction;
+    fetchBundleParentReleaseFailed: (bundleParent: string, release: string, error: Nullable<AjaxResponse<unknown> | string>) => FetchBundleParentReleaseFailedAction;
     fetchBundleParentReleaseSucceeded: (bundleParent: string, release: string, data: ContextDataProduct) => FetchBundleParentReleaseSucceededAction;
     fetchCitationDownloadStarted: (key: string) => FetchCitationDownloadStartedAction;
     fetchCitationDownloadFailed: (key: string, error: Nullable<string>) => FetchCitationDownloadFailedAction;

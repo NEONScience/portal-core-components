@@ -32,7 +32,7 @@ export function mockRawAjaxResponse(response = {}) {
 
 export function mockRawAjaxError(error = '') {
   ajax.mockReset();
-  ajax.mockImplementation(() => throwError(new Error(error)));
+  ajax.mockImplementation(() => throwError(() => new Error(error)));
 }
 
 export function mockGetJSONAjaxResponse(response = {}) {
@@ -42,7 +42,7 @@ export function mockGetJSONAjaxResponse(response = {}) {
 
 export function mockGetJSONAjaxError(error = '') {
   ajax.getJSON.mockReset();
-  ajax.getJSON.mockImplementation(() => throwError(new Error(error)));
+  ajax.getJSON.mockImplementation(() => throwError(() => new Error(error)));
 }
 
 export function mockAjaxResponse(response = {}) {

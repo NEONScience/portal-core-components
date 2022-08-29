@@ -1,7 +1,7 @@
 import { UnknownRecord } from './core';
 import { IReleaseLike } from './internal';
-export interface NeonApiResponse {
-    data: unknown;
+export interface NeonApiResponse<T> {
+    data: T;
 }
 export interface BundledDataProduct {
     productCode: string;
