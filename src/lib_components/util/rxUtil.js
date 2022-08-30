@@ -2,16 +2,14 @@ import {
   of,
   defer,
   forkJoin,
-  Subject,
-} from 'rxjs';
-import { ajax } from 'rxjs/ajax';
-import {
   map,
   tap,
   catchError,
   takeUntil,
   finalize,
-} from 'rxjs/operators';
+  Subject,
+} from 'rxjs';
+import { ajax } from 'rxjs/ajax';
 
 import NeonEnvironment from '../components/NeonEnvironment/NeonEnvironment';
 import { exists } from './typeUtil';

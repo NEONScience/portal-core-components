@@ -13,16 +13,17 @@ import cloneDeep from 'lodash/cloneDeep';
 
 import { parse } from 'papaparse';
 
-import { of, merge } from 'rxjs';
-import { ajax } from 'rxjs/ajax';
 import {
+  of,
+  merge,
   map,
   tap,
   mergeMap,
   switchMap,
   catchError,
   ignoreElements,
-} from 'rxjs/operators';
+} from 'rxjs';
+import { ajax } from 'rxjs/ajax';
 
 import NeonApi from '../NeonApi/NeonApi';
 import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';

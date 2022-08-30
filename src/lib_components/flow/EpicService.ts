@@ -3,6 +3,10 @@ import {
   concat,
   merge,
   forkJoin,
+  switchMap,
+  mergeMap,
+  catchError,
+  takeUntil,
   Observable,
   MonoTypeOperatorFunction,
 } from 'rxjs';
@@ -11,12 +15,6 @@ import {
   AjaxResponse,
   ajax as AjaxCreationMethod,
 } from 'rxjs/ajax';
-import {
-  switchMap,
-  mergeMap,
-  catchError,
-  takeUntil,
-} from 'rxjs/operators';
 import { AnyAction } from 'redux';
 import { ofType, Epic } from 'redux-observable';
 import {

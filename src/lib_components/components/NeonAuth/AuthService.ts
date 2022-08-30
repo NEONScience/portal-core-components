@@ -1,12 +1,14 @@
 import { Dispatch } from 'react';
 
-import { Subscription, Subject, of } from 'rxjs';
 import {
+  Subscription,
+  Subject,
+  of,
   map,
   catchError,
   delay,
   tap,
-} from 'rxjs/operators';
+} from 'rxjs';
 
 import SockJS from 'sockjs-client';
 import { Message, StompHeaders } from '@stomp/stompjs';

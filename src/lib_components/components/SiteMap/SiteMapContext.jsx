@@ -9,8 +9,7 @@ import PropTypes from 'prop-types';
 import cloneDeep from 'lodash/cloneDeep';
 import uniqueId from 'lodash/uniqueId';
 
-import { of } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { of, map, catchError } from 'rxjs';
 
 import NeonApi from '../NeonApi/NeonApi';
 import NeonContext from '../NeonContext/NeonContext';

@@ -4,8 +4,12 @@ import React, {
   Dispatch,
 } from 'react';
 
-import { of, Observable } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import {
+  of,
+  map,
+  catchError,
+  Observable,
+} from 'rxjs';
 import { AjaxResponse } from 'rxjs/ajax';
 
 import cloneDeep from 'lodash/cloneDeep';

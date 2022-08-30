@@ -10,8 +10,9 @@ import PropTypes from 'prop-types';
 
 import moment from 'moment';
 
-import { of, merge, Subject } from 'rxjs';
 import {
+  of,
+  merge,
   map,
   mergeMap,
   switchMap,
@@ -19,7 +20,8 @@ import {
   tap,
   ignoreElements,
   takeUntil,
-} from 'rxjs/operators';
+  Subject,
+} from 'rxjs';
 
 import NeonApi from '../NeonApi/NeonApi';
 import ExternalHost from '../ExternalHost/ExternalHost';

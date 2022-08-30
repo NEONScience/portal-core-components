@@ -6,9 +6,8 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 
-import { of } from 'rxjs';
+import { of, map, catchError } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
-import { map, catchError } from 'rxjs/operators';
 
 import dateFormat from 'dateformat';
 

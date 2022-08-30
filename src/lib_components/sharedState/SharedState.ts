@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BehaviorSubject } from 'rxjs';
-import { skip } from 'rxjs/operators';
+import { skip, BehaviorSubject } from 'rxjs';
 
 /**
  * A function to use a distributed shared state for sharing state between components outside
