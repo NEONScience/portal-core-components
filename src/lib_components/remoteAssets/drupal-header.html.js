@@ -28,7 +28,7 @@ export default html = `
   <div>
 
 <input data-drupal-selector="edit-openid-connect-client-auth0-login" type="submit" id="edit-openid-connect-client-auth0-login" name="auth0" value="Sign In" class="button js-form-submit form-submit button--search" />
-</div><input autocomplete="off" data-drupal-selector="form-fziqjlsi18mevjbocma6npju8dvtei0-jp1lxp2yy7s" type="hidden" name="form_build_id" value="form-fZiqjlSI18MeVJbOcma6NpJu8dvTEI0_Jp1LXP2YY7s" />
+</div><input autocomplete="off" data-drupal-selector="form-bok0kdvykjk1jikltswqgby-u2xp7zfvorkauyxz0y" type="hidden" name="form_build_id" value="form--bok0KdVykjK1JiKlTSwqgBY_u2XP7ZfvorKauyXZ0Y" />
 <input data-drupal-selector="edit-openid-connect-login-form" type="hidden" name="form_id" value="openid_connect_login_form" />
 
 </form>
@@ -1098,7 +1098,7 @@ export default html = `
 
         <label for="edit-title" class="visually-hidden">Search</label>
       </div>
-<div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper" id="edit-actions">
+<div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper" id="edit-actions--2">
 
 <input data-drupal-selector="edit-submit" type="submit" id="edit-submit" value="Search" class="button js-form-submit form-submit button--search" />
 </div>
@@ -1132,7 +1132,7 @@ export default html = `
 
         <label for="edit-title" class="visually-hidden">Search</label>
       </div>
-<div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper" id="edit-actions">
+<div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper" id="edit-actions--2">
 
 <input data-drupal-selector="edit-submit" type="submit" id="edit-submit" value="Search" class="button js-form-submit form-submit button--search" />
 </div>

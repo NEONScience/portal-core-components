@@ -16,14 +16,13 @@ import {
   ajax as AjaxCreationMethod,
 } from 'rxjs/ajax';
 import { AnyAction } from 'redux';
-import { ofType, Epic } from 'redux-observable';
+import { ofType, Epic, StateObservable } from 'redux-observable';
 import {
   EpicDependencies,
   WorkingAction,
   SuccessAction,
   ErrorAction,
   AjaxBodyCreator,
-  EpicCreator,
   AjaxRequestInjector,
   EpicCreationProps,
 } from '../types/epic';
@@ -55,7 +54,7 @@ export interface IEpicService {
     ajaxBodyCreator?: AjaxBodyCreator<A>,
     ajaxRequestInjector?: AjaxRequestInjector<A>,
     useForkJoin?: boolean,
-  ) => EpicCreator<A, S>;
+  ) => Epic<A, A, S, EpicDependencies>;
   /**
    * Creator to decorate an EpicCreator function that creates the Epic
    * @param ofTypeFilter
@@ -80,7 +79,7 @@ export interface IEpicService {
     ajaxBodyCreator?: AjaxBodyCreator<A>,
     ajaxRequestInjector?: AjaxRequestInjector<A>,
     useForkJoin?: boolean,
-  ) => EpicCreator<A, S>;
+  ) => Epic<A, A, S, EpicDependencies>;
   /**
    * Creator to decorate an EpicCreator function that creates the Epic
    * @param props
@@ -89,7 +88,7 @@ export interface IEpicService {
    */
   createEpicFromProps: <A extends AnyAction, S extends AnyObject>(
     props: EpicCreationProps<A>,
-  ) => EpicCreator<A, S>;
+  ) => Epic<A, A, S, EpicDependencies>;
   /**
    * Creator to decorate an EpicCreator function that creates the Epic
    * @param props
@@ -98,7 +97,7 @@ export interface IEpicService {
    */
   createMergeEpicFromProps: <A extends AnyAction, S extends AnyObject>(
     props: EpicCreationProps<A>,
-  ) => EpicCreator<A, S>;
+  ) => Epic<A, A, S, EpicDependencies>;
   /**
    * Creator to decorate an AJAX observable
    * @param ajax
@@ -256,17 +255,17 @@ const EpicService: IEpicService = {
     ajaxBodyCreator?: AjaxBodyCreator<A>,
     ajaxRequestInjector?: AjaxRequestInjector<A>,
     useForkJoin?: boolean,
-  ): EpicCreator<A, S> => ((
-    action$: A,
-    state$: S,
+  ): Epic<A, A, S, EpicDependencies> => ((
+    action$: Observable<A>,
+    state$: StateObservable<S>,
     { ajax }: EpicDependencies,
-  ): Epic<A, A, S, EpicDependencies> => {
+  ) => {
     const ofTypeFilters: string[] = !Array.isArray(ofTypeFilter)
       ? [ofTypeFilter]
       : (ofTypeFilter as string[]);
     let takeUntilOperator: MonoTypeOperatorFunction<any>;
     if (exists(takeUntilTypeFilter)) {
-      takeUntilOperator = takeUntil(action$.ofType(takeUntilTypeFilter));
+      takeUntilOperator = takeUntil(action$.pipe(ofType(takeUntilTypeFilter)));
     }
     return action$.pipe(
       ofType(ofTypeFilters),
@@ -296,17 +295,17 @@ const EpicService: IEpicService = {
     ajaxBodyCreator?: AjaxBodyCreator<A>,
     ajaxRequestInjector?: AjaxRequestInjector<A>,
     useForkJoin?: boolean,
-  ): EpicCreator<A, S> => ((
-    action$: A,
-    state$: S,
+  ): Epic<A, A, S, EpicDependencies> => ((
+    action$: Observable<A>,
+    state$: StateObservable<S>,
     { ajax }: EpicDependencies,
-  ): Epic<A, A, S, EpicDependencies> => {
+  ) => {
     const ofTypeFilters: string[] = !Array.isArray(ofTypeFilter)
       ? [ofTypeFilter]
       : (ofTypeFilter as string[]);
     let takeUntilOperator: MonoTypeOperatorFunction<any>;
     if (exists(takeUntilTypeFilter)) {
-      takeUntilOperator = takeUntil(action$.ofType(takeUntilTypeFilter));
+      takeUntilOperator = takeUntil(action$.pipe(ofType(takeUntilTypeFilter)));
     }
     return action$.pipe(
       ofType(ofTypeFilters),
@@ -328,7 +327,7 @@ const EpicService: IEpicService = {
   }),
   createEpicFromProps: <A extends AnyAction, S extends AnyObject>(
     props: EpicCreationProps<A>,
-  ): EpicCreator<A, S> => EpicService.createEpic(
+  ): Epic<A, A, S, EpicDependencies> => EpicService.createEpic(
     props.ofTypeFilter,
     props.request,
     props.workingAction,
@@ -341,7 +340,7 @@ const EpicService: IEpicService = {
   ),
   createMergeEpicFromProps: <A extends AnyAction, S extends AnyObject>(
     props: EpicCreationProps<A>,
-  ): EpicCreator<A, S> => EpicService.createMergeEpic(
+  ): Epic<A, A, S, EpicDependencies> => EpicService.createMergeEpic(
     props.ofTypeFilter,
     props.request,
     props.workingAction,
