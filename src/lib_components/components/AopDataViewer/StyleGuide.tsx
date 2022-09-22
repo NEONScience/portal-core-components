@@ -43,7 +43,7 @@ const useDialogBaseStyles = makeStyles((theme) => ({
     height: '100%',
     position: 'relative',
     width: `calc(100% - ${theme.spacing(2) * 2}px)`,
-    minWidth: '400px',
+    minWidth: '340px',
     minHeight: '600px',
     [Theme.breakpoints.down('xs')]: {
       minHeight: '700px',
