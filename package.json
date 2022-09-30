@@ -24,7 +24,7 @@
     "core-js": "^3.2.1",
     "d3-drag": "^1.2.3",
     "d3-selection": "^1.4.0",
-    "d3-transition": "^1.2.0",
+    "d3-transition": "^3.0.1",
     "dateformat": "^3.0.3",
     "dom-to-image": "^2.6.0",
     "dygraphs": "^2.1.0",
