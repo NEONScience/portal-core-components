@@ -3083,6 +3083,11 @@
         -ms-flex-align: center;
             align-items: center;
         height: 60px; } }
+  #header [id], #footer [id] {
+    scroll-margin-top: 120px; }
+    @media (max-width: 74.9375em) {
+      #header [id], #footer [id] {
+        scroll-margin-top: 60px; } }
   #header .header__logo, #footer .header__logo {
     -ms-flex-align: center;
         align-items: center;

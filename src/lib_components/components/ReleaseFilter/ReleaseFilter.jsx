@@ -43,6 +43,9 @@ const useStyles = makeStyles((theme) => ({
   descriptionContainer: {
     marginTop: theme.spacing(0.5),
   },
+  releaseLinkDescriptionContainer: {
+    marginTop: theme.spacing(0.7),
+  },
   descriptionFlexInnerContainer: {
     display: 'flex',
     alignItems: 'flex-start',
@@ -113,6 +116,7 @@ const ReleaseFilter = (props) => {
     showDoi,
     showGenerationDate,
     showProductCount,
+    showReleaseLink,
     skeleton,
     title,
     ...otherProps
@@ -246,6 +250,26 @@ const ReleaseFilter = (props) => {
     }
   }
 
+  let releaseLinkNode = null;
+  if (showReleaseLink && (selectedRelease !== null)) {
+    const releaseLink = (
+      <Link
+        href={RouteService.getReleaseDetailPath(selectedRelease)}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {selectedRelease}
+      </Link>
+    );
+    /* eslint-disable react/jsx-one-expression-per-line */
+    releaseLinkNode = (
+      <div className={classes.releaseLinkDescriptionContainer}>
+        {releaseLink}
+      </div>
+    );
+    /* eslint-enable react/jsx-one-expression-per-line */
+  }
+
   // DOI Node
   let doiNode = null;
   if (showDoi && selectedRelease !== null) {
@@ -364,6 +388,7 @@ const ReleaseFilter = (props) => {
           {unspecifiedNode}
           {generationDateNode}
           {productCountNode}
+          {releaseLinkNode}
           {doiNode}
         </div>
       </div>
@@ -375,6 +400,7 @@ const ReleaseFilter = (props) => {
       {unspecifiedNode}
       {generationDateNode}
       {productCountNode}
+      {releaseLinkNode}
       {doiNode}
     </div>
   );
@@ -401,6 +427,7 @@ ReleaseFilter.propTypes = {
   showDoi: PropTypes.bool,
   showGenerationDate: PropTypes.bool,
   showProductCount: PropTypes.bool,
+  showReleaseLink: PropTypes.bool,
   skeleton: PropTypes.bool,
   title: PropTypes.string,
 };
@@ -416,6 +443,7 @@ ReleaseFilter.defaultProps = {
   showDoi: false,
   showGenerationDate: false,
   showProductCount: false,
+  showReleaseLink: false,
   skeleton: false,
   title: 'Release',
 };

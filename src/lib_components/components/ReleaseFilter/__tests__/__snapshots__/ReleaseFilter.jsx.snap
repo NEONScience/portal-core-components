@@ -121,7 +121,7 @@ exports[`ReleaseFilter Renders gracefully with an invalid selection 1`] = `
     </svg>
     <fieldset
       aria-hidden={true}
-      className="PrivateNotchedOutline-root-13 MuiOutlinedInput-notchedOutline"
+      className="PrivateNotchedOutline-root-14 MuiOutlinedInput-notchedOutline"
       style={
         Object {
           "paddingLeft": 8,
@@ -129,7 +129,7 @@ exports[`ReleaseFilter Renders gracefully with an invalid selection 1`] = `
       }
     >
       <legend
-        className="PrivateNotchedOutline-legend-14"
+        className="PrivateNotchedOutline-legend-15"
         style={
           Object {
             "width": 0.01,
@@ -150,7 +150,7 @@ exports[`ReleaseFilter Renders gracefully with an invalid selection 1`] = `
     className="makeStyles-descriptionContainer-4"
   >
     <span
-      className="MuiTypography-root makeStyles-description-6 MuiTypography-caption"
+      className="MuiTypography-root makeStyles-description-7 MuiTypography-caption"
     >
       Data in the latest release in addition to provisional data (not yet in any release)
     </span>
@@ -378,7 +378,7 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
     </svg>
     <fieldset
       aria-hidden={true}
-      className="PrivateNotchedOutline-root-13 MuiOutlinedInput-notchedOutline"
+      className="PrivateNotchedOutline-root-14 MuiOutlinedInput-notchedOutline"
       style={
         Object {
           "paddingLeft": 8,
@@ -386,7 +386,7 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
       }
     >
       <legend
-        className="PrivateNotchedOutline-legend-14"
+        className="PrivateNotchedOutline-legend-15"
         style={
           Object {
             "width": 0.01,
@@ -407,7 +407,7 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
     className="makeStyles-descriptionContainer-4"
   >
     <span
-      className="MuiTypography-root makeStyles-description-6 MuiTypography-caption"
+      className="MuiTypography-root makeStyles-description-7 MuiTypography-caption"
     >
       Generated: January 15, 2021
     </span>
@@ -416,7 +416,7 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
     className="makeStyles-descriptionContainer-4"
   >
     <span
-      className="MuiTypography-root makeStyles-description-6 MuiTypography-caption"
+      className="MuiTypography-root makeStyles-description-7 MuiTypography-caption"
     >
       2 data products
     </span>
@@ -425,10 +425,10 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
     className="makeStyles-descriptionContainer-4"
   >
     <div
-      className="makeStyles-descriptionFlexInnerContainer-5"
+      className="makeStyles-descriptionFlexInnerContainer-6"
     >
       <span
-        className="MuiTypography-root makeStyles-description-6 MuiTypography-caption"
+        className="MuiTypography-root makeStyles-description-7 MuiTypography-caption"
         style={
           Object {
             "marginRight": "4px",
@@ -440,7 +440,7 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
       </span>
       <span
         aria-label="doi"
-        className="MuiTypography-root makeStyles-description-6 MuiTypography-caption"
+        className="MuiTypography-root makeStyles-description-7 MuiTypography-caption"
         style={
           Object {
             "overflowWrap": "anywhere",
@@ -451,7 +451,7 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
       </span>
     </div>
     <button
-      className="MuiButtonBase-root MuiButton-root MuiButton-outlined makeStyles-copyButton-8 MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+      className="MuiButtonBase-root MuiButton-root MuiButton-outlined makeStyles-copyButton-9 MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
       disabled={false}
       onBlur={[Function]}
       onClick={[Function]}
@@ -619,7 +619,7 @@ exports[`ReleaseFilter Renders with a custom title 1`] = `
     </svg>
     <fieldset
       aria-hidden={true}
-      className="PrivateNotchedOutline-root-13 MuiOutlinedInput-notchedOutline"
+      className="PrivateNotchedOutline-root-14 MuiOutlinedInput-notchedOutline"
       style={
         Object {
           "paddingLeft": 8,
@@ -627,7 +627,7 @@ exports[`ReleaseFilter Renders with a custom title 1`] = `
       }
     >
       <legend
-        className="PrivateNotchedOutline-legend-14"
+        className="PrivateNotchedOutline-legend-15"
         style={
           Object {
             "width": 0.01,
@@ -648,7 +648,7 @@ exports[`ReleaseFilter Renders with a custom title 1`] = `
     className="makeStyles-descriptionContainer-4"
   >
     <span
-      className="MuiTypography-root makeStyles-description-6 MuiTypography-caption"
+      className="MuiTypography-root makeStyles-description-7 MuiTypography-caption"
     >
       Data in the latest release in addition to provisional data (not yet in any release)
     </span>
@@ -777,7 +777,7 @@ exports[`ReleaseFilter Renders with a selected release 1`] = `
     </svg>
     <fieldset
       aria-hidden={true}
-      className="PrivateNotchedOutline-root-13 MuiOutlinedInput-notchedOutline"
+      className="PrivateNotchedOutline-root-14 MuiOutlinedInput-notchedOutline"
       style={
         Object {
           "paddingLeft": 8,
@@ -785,7 +785,7 @@ exports[`ReleaseFilter Renders with a selected release 1`] = `
       }
     >
       <legend
-        className="PrivateNotchedOutline-legend-14"
+        className="PrivateNotchedOutline-legend-15"
         style={
           Object {
             "width": 0.01,
@@ -862,7 +862,7 @@ exports[`ReleaseFilter Renders with blank title 1`] = `
     </svg>
     <fieldset
       aria-hidden={true}
-      className="PrivateNotchedOutline-root-13 MuiOutlinedInput-notchedOutline"
+      className="PrivateNotchedOutline-root-14 MuiOutlinedInput-notchedOutline"
       style={
         Object {
           "paddingLeft": 8,
@@ -870,7 +870,7 @@ exports[`ReleaseFilter Renders with blank title 1`] = `
       }
     >
       <legend
-        className="PrivateNotchedOutline-legend-14"
+        className="PrivateNotchedOutline-legend-15"
         style={
           Object {
             "width": 0.01,
@@ -891,7 +891,7 @@ exports[`ReleaseFilter Renders with blank title 1`] = `
     className="makeStyles-descriptionContainer-4"
   >
     <span
-      className="MuiTypography-root makeStyles-description-6 MuiTypography-caption"
+      className="MuiTypography-root makeStyles-description-7 MuiTypography-caption"
     >
       Data in the latest release in addition to provisional data (not yet in any release)
     </span>
@@ -969,7 +969,7 @@ exports[`ReleaseFilter Renders with custom layouts 1`] = `
     </div>
   </div>
   <div
-    className="makeStyles-horizontalFlex-11"
+    className="makeStyles-horizontalFlex-12"
   >
     <div
       style={
@@ -1026,7 +1026,7 @@ exports[`ReleaseFilter Renders with custom layouts 1`] = `
         </svg>
         <fieldset
           aria-hidden={true}
-          className="PrivateNotchedOutline-root-13 MuiOutlinedInput-notchedOutline"
+          className="PrivateNotchedOutline-root-14 MuiOutlinedInput-notchedOutline"
           style={
             Object {
               "paddingLeft": 8,
@@ -1034,7 +1034,7 @@ exports[`ReleaseFilter Renders with custom layouts 1`] = `
           }
         >
           <legend
-            className="PrivateNotchedOutline-legend-14"
+            className="PrivateNotchedOutline-legend-15"
             style={
               Object {
                 "width": 0.01,
@@ -1053,13 +1053,13 @@ exports[`ReleaseFilter Renders with custom layouts 1`] = `
       </div>
     </div>
     <div
-      className="makeStyles-horizontalDescriptions-12"
+      className="makeStyles-horizontalDescriptions-13"
     >
       <div
         className="makeStyles-descriptionContainer-4"
       >
         <span
-          className="MuiTypography-root makeStyles-description-6 MuiTypography-caption"
+          className="MuiTypography-root makeStyles-description-7 MuiTypography-caption"
         >
           Data in the latest release in addition to provisional data (not yet in any release)
         </span>
@@ -1190,7 +1190,7 @@ exports[`ReleaseFilter Renders with list of releases with DOIs 1`] = `
     </svg>
     <fieldset
       aria-hidden={true}
-      className="PrivateNotchedOutline-root-13 MuiOutlinedInput-notchedOutline"
+      className="PrivateNotchedOutline-root-14 MuiOutlinedInput-notchedOutline"
       style={
         Object {
           "paddingLeft": 8,
@@ -1198,7 +1198,7 @@ exports[`ReleaseFilter Renders with list of releases with DOIs 1`] = `
       }
     >
       <legend
-        className="PrivateNotchedOutline-legend-14"
+        className="PrivateNotchedOutline-legend-15"
         style={
           Object {
             "width": 0.01,
@@ -1219,7 +1219,7 @@ exports[`ReleaseFilter Renders with list of releases with DOIs 1`] = `
     className="makeStyles-descriptionContainer-4"
   >
     <span
-      className="MuiTypography-root makeStyles-description-6 MuiTypography-caption"
+      className="MuiTypography-root makeStyles-description-7 MuiTypography-caption"
     >
       Data in the latest release in addition to provisional data (not yet in any release)
     </span>
@@ -1348,7 +1348,7 @@ exports[`ReleaseFilter Renders with list of releases without DOIs 1`] = `
     </svg>
     <fieldset
       aria-hidden={true}
-      className="PrivateNotchedOutline-root-13 MuiOutlinedInput-notchedOutline"
+      className="PrivateNotchedOutline-root-14 MuiOutlinedInput-notchedOutline"
       style={
         Object {
           "paddingLeft": 8,
@@ -1356,7 +1356,7 @@ exports[`ReleaseFilter Renders with list of releases without DOIs 1`] = `
       }
     >
       <legend
-        className="PrivateNotchedOutline-legend-14"
+        className="PrivateNotchedOutline-legend-15"
         style={
           Object {
             "width": 0.01,
@@ -1377,7 +1377,7 @@ exports[`ReleaseFilter Renders with list of releases without DOIs 1`] = `
     className="makeStyles-descriptionContainer-4"
   >
     <span
-      className="MuiTypography-root makeStyles-description-6 MuiTypography-caption"
+      className="MuiTypography-root makeStyles-description-7 MuiTypography-caption"
     >
       Data in the latest release in addition to provisional data (not yet in any release)
     </span>
@@ -1507,7 +1507,7 @@ exports[`ReleaseFilter Renders with no props 1`] = `
     </svg>
     <fieldset
       aria-hidden={true}
-      className="PrivateNotchedOutline-root-13 MuiOutlinedInput-notchedOutline"
+      className="PrivateNotchedOutline-root-14 MuiOutlinedInput-notchedOutline"
       style={
         Object {
           "paddingLeft": 8,
@@ -1515,7 +1515,7 @@ exports[`ReleaseFilter Renders with no props 1`] = `
       }
     >
       <legend
-        className="PrivateNotchedOutline-legend-14"
+        className="PrivateNotchedOutline-legend-15"
         style={
           Object {
             "width": 0.01,
@@ -1536,7 +1536,7 @@ exports[`ReleaseFilter Renders with no props 1`] = `
     className="makeStyles-descriptionContainer-4"
   >
     <span
-      className="MuiTypography-root makeStyles-description-6 MuiTypography-caption"
+      className="MuiTypography-root makeStyles-description-7 MuiTypography-caption"
     >
       Data in the latest release in addition to provisional data (not yet in any release)
     </span>
@@ -1665,7 +1665,7 @@ exports[`ReleaseFilter Renders with product counts (using data product codes) 1`
     </svg>
     <fieldset
       aria-hidden={true}
-      className="PrivateNotchedOutline-root-13 MuiOutlinedInput-notchedOutline"
+      className="PrivateNotchedOutline-root-14 MuiOutlinedInput-notchedOutline"
       style={
         Object {
           "paddingLeft": 8,
@@ -1673,7 +1673,7 @@ exports[`ReleaseFilter Renders with product counts (using data product codes) 1`
       }
     >
       <legend
-        className="PrivateNotchedOutline-legend-14"
+        className="PrivateNotchedOutline-legend-15"
         style={
           Object {
             "width": 0.01,
@@ -1694,7 +1694,7 @@ exports[`ReleaseFilter Renders with product counts (using data product codes) 1`
     className="makeStyles-descriptionContainer-4"
   >
     <span
-      className="MuiTypography-root makeStyles-description-6 MuiTypography-caption"
+      className="MuiTypography-root makeStyles-description-7 MuiTypography-caption"
     >
       3 data products
     </span>
@@ -1823,7 +1823,7 @@ exports[`ReleaseFilter Renders with product counts (using data product objects) 
     </svg>
     <fieldset
       aria-hidden={true}
-      className="PrivateNotchedOutline-root-13 MuiOutlinedInput-notchedOutline"
+      className="PrivateNotchedOutline-root-14 MuiOutlinedInput-notchedOutline"
       style={
         Object {
           "paddingLeft": 8,
@@ -1831,7 +1831,7 @@ exports[`ReleaseFilter Renders with product counts (using data product objects) 
       }
     >
       <legend
-        className="PrivateNotchedOutline-legend-14"
+        className="PrivateNotchedOutline-legend-15"
         style={
           Object {
             "width": 0.01,
@@ -1852,7 +1852,7 @@ exports[`ReleaseFilter Renders with product counts (using data product objects) 
     className="makeStyles-descriptionContainer-4"
   >
     <span
-      className="MuiTypography-root makeStyles-description-6 MuiTypography-caption"
+      className="MuiTypography-root makeStyles-description-7 MuiTypography-caption"
     >
       Data in the latest release in addition to provisional data (not yet in any release)
     </span>
@@ -1861,7 +1861,7 @@ exports[`ReleaseFilter Renders with product counts (using data product objects) 
     className="makeStyles-descriptionContainer-4"
   >
     <span
-      className="MuiTypography-root makeStyles-description-6 MuiTypography-caption"
+      className="MuiTypography-root makeStyles-description-7 MuiTypography-caption"
     >
       5 data products
     </span>
