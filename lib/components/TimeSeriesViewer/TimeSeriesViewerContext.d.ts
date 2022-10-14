@@ -109,7 +109,6 @@ export namespace DEFAULT_STATE {
             namespace y2 { }
         }
         export const isDefault: boolean;
-        export const invalidDefaultVariables: Set<any>;
     }
     export const availableQualityFlags: Set<any>;
     export const availableTimeSteps: Set<string>;
@@ -246,7 +245,6 @@ export function getTestableItems(): {
                 };
             };
             isDefault: boolean;
-            invalidDefaultVariables: Set<any>;
         };
         availableQualityFlags: Set<any>;
         availableTimeSteps: Set<string>;
@@ -257,7 +255,7 @@ export function getTestableItems(): {
         ERROR: string;
         SUCCESS: string;
     };
-    applyDefaultsToSelection: (state: Object) => Object;
+    applyDefaultsToSelection: (state: Object, invalidDefaultVariables?: Set<any>) => Object;
     generateYAxisRange: (axis?: {}) => any;
     getTimeStep: (input?: string) => string | null;
     getUpdatedValueRange: (existingRange: any, newValue: any) => any;
@@ -406,7 +404,6 @@ declare function useTimeSeriesViewerState(): {
             };
         };
         isDefault: boolean;
-        invalidDefaultVariables: Set<any>;
     };
     availableQualityFlags: Set<any>;
     availableTimeSteps: Set<string>;
@@ -478,7 +475,6 @@ declare function useTimeSeriesViewerState(): {
             };
         };
         isDefault: boolean;
-        invalidDefaultVariables: Set<any>;
     };
     availableQualityFlags: Set<any>;
     availableTimeSteps: Set<string>;

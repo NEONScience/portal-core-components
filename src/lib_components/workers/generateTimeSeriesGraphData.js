@@ -225,10 +225,10 @@ export default function generateTimeSeriesGraphData(payload = {}) {
     if (!Array.isArray(selectedVariables) || selectedVariables.some((v) => !stateVariables[v])) {
       return outSanityCheckData;
     }
-    // Must have a non-empty selected sites array with all proper structure
+    // Must have a non-empty selected sites array with at least one with proper structure
     if (
       !Array.isArray(sites) || !sites.length
-        || sites.some((site) => (
+        || sites.every((site) => (
           !site.siteCode || !Array.isArray(site.positions) || !site.positions.length
         ))
     ) {
@@ -241,33 +241,31 @@ export default function generateTimeSeriesGraphData(payload = {}) {
     ) {
       return outSanityCheckData;
     }
-    // All selected sites must have positions, and at least one site/position
+    // At least one selected site must have positions, and at least one site/position
     // combinations must be represented in the product with some data
-    let productSitesAreValid = true;
+    let productSitesAreValid = false;
     sites.forEach((site) => {
       const { siteCode, positions } = site;
       if (
-        typeof product.sites[siteCode] !== 'object' || product.sites[siteCode] === null
-          || typeof product.sites[siteCode].positions !== 'object'
-          || product.sites[siteCode].positions === null
+        typeof product.sites[siteCode] === 'object' && product.sites[siteCode] !== null
+          && typeof product.sites[siteCode].positions === 'object'
+          && product.sites[siteCode].positions !== null
       ) {
-        productSitesAreValid = false;
-        return;
-      }
-      // Ensure at least one selected position has data to display
-      let foundValidPositionData = false;
-      positions.forEach((position) => {
-        const invalidPositionData = (typeof product.sites[siteCode].positions[position] !== 'object')
-          || (product.sites[siteCode].positions[position] === null)
-          || (typeof product.sites[siteCode].positions[position].data !== 'object')
-          || (product.sites[siteCode].positions[position].data === null)
-          || (Object.keys(product.sites[siteCode].positions[position].data).length < 1);
-        if (!invalidPositionData) {
-          foundValidPositionData = true;
+        // Ensure at least one selected position has data to display
+        let foundValidPositionData = false;
+        positions.forEach((position) => {
+          const invalidPositionData = (typeof product.sites[siteCode].positions[position] !== 'object')
+            || (product.sites[siteCode].positions[position] === null)
+            || (typeof product.sites[siteCode].positions[position].data !== 'object')
+            || (product.sites[siteCode].positions[position].data === null)
+            || (Object.keys(product.sites[siteCode].positions[position].data).length < 1);
+          if (!invalidPositionData) {
+            foundValidPositionData = true;
+          }
+        });
+        if (foundValidPositionData) {
+          productSitesAreValid = true;
         }
-      });
-      if (!foundValidPositionData) {
-        productSitesAreValid = false;
       }
     });
     if (!productSitesAreValid) { return outSanityCheckData; }
