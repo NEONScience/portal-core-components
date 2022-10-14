@@ -179,6 +179,16 @@ const propRows = [
     ),
   },
   {
+    name: 'releaseLinkDisplayType',
+    type: 'one of [Link, Button, ListItem]',
+    default: 'Button',
+    description: (
+      <p>
+        When set to show the release link, sets the display type.
+      </p>
+    ),
+  },
+  {
     name: 'skeleton',
     type: 'boolean',
     default: 'false',
@@ -323,6 +333,9 @@ import ReleaseFilter from 'portal-core-components/lib/components/ReleaseFilter';
       <ExampleBlock>
         <ReleaseFilter releases={releases} selected="test-tag-1" showGenerationDate showProductCount showReleaseLink />
       </ExampleBlock>
+      <ExampleBlock>
+        <ReleaseFilter releases={releases} selected="test-tag-1" showGenerationDate showProductCount showReleaseLink releaseLinkDisplayType="Link" />
+      </ExampleBlock>
       <CodeBlock>
         {`
 const releases = [
@@ -361,7 +374,8 @@ const onChange = (newRelease) => {
 <ReleaseFilter releases={releases} selected="test-tag-1" showGenerationDate />
 <ReleaseFilter releases={releases} selected="test-tag-3" showGenerationDate showDoi />
 <ReleaseFilter releases={releases} title={null} excludeNullRelease />
-<ReleaseFilter releases={releases} showGenerationDate showReleaseLink />
+<ReleaseFilter releases={releases} showGenerationDate showProductCount showReleaseLink />
+<ReleaseFilter releases={releases} selected="test-tag-1" showGenerationDate showProductCount showReleaseLink releaseLinkDisplayType="Link" />
         `}
       </CodeBlock>
 
