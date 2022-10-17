@@ -26,6 +26,12 @@ export interface IReleaseService {
      */
     sortReleases: <T extends IReleaseLike>(unsortedReleases: IReleaseLike[]) => T[];
     /**
+     * Gets the most recently available release tag from the set of releases.
+     * @param releases The set of releases to work from.
+     * @return The most recently available release tag when applicable.
+     */
+    getMostRecentReleaseTag: (releases: IReleaseLike[]) => string | null;
+    /**
      * Applies the set of user accessible releases for the currently
      * authenticated user with the set of current releases.
      * @param neonContextState The context state to build from

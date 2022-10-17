@@ -3,7 +3,6 @@ import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
-import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 
 import DocBlock from '../../../components/DocBlock';
@@ -46,7 +45,7 @@ const propRows = [
   {
     name: 'maxWidth',
     type: 'number',
-    default: '236',
+    default: 'null',
     examples: (
       <div>
         <tt>250</tt>
@@ -56,10 +55,7 @@ const propRows = [
     ),
     description: (
       <p>
-        CSS maxWidth value to apply to the the select element and its container. Note the default
-        value is <tt>236</tt> as this lines up with the inner content width of the sidebar for
-        the <Link href="#NeonPage">NeonPage</Link> component, a common location where ReleaseFilter
-        may be used.
+        CSS maxWidth value to apply to the the select element and its container.
       </p>
     ),
   },
@@ -180,7 +176,7 @@ const propRows = [
   },
   {
     name: 'releaseLinkDisplayType',
-    type: 'one of [Link, Button, ListItem]',
+    type: 'one of [Link, Button]',
     default: 'Button',
     description: (
       <p>
@@ -313,28 +309,28 @@ import ReleaseFilter from 'portal-core-components/lib/components/ReleaseFilter';
       <Typography variant="h4" component="h2" gutterBottom>Usage and Exmaples</Typography>
 
       <ExampleBlock>
-        <ReleaseFilter skeleton />
+        <ReleaseFilter skeleton maxWidth={276} />
       </ExampleBlock>
       <ExampleBlock>
-        <ReleaseFilter releases={releases} onChange={onChange} />
+        <ReleaseFilter maxWidth={276} releases={releases} onChange={onChange} />
       </ExampleBlock>
       <ExampleBlock>
         <ReleaseFilter releases={releases} maxWidth={400} selected="test-tag-2" />
       </ExampleBlock>
       <ExampleBlock>
-        <ReleaseFilter releases={releases} selected="test-tag-1" showGenerationDate horizontal />
+        <ReleaseFilter maxWidth={276} releases={releases} selected="test-tag-1" showGenerationDate horizontal />
       </ExampleBlock>
       <ExampleBlock>
-        <ReleaseFilter releases={releases} selected="test-tag-3" showGenerationDate showDoi />
+        <ReleaseFilter maxWidth={276} releases={releases} selected="test-tag-3" showGenerationDate showDoi />
       </ExampleBlock>
       <ExampleBlock>
-        <ReleaseFilter releases={releases} title={null} excludeNullRelease />
+        <ReleaseFilter maxWidth={276} releases={releases} title={null} excludeNullRelease />
       </ExampleBlock>
       <ExampleBlock>
-        <ReleaseFilter releases={releases} selected="test-tag-1" showGenerationDate showProductCount showReleaseLink />
+        <ReleaseFilter maxWidth={276} releases={releases} selected="test-tag-1" showGenerationDate showProductCount showReleaseLink />
       </ExampleBlock>
       <ExampleBlock>
-        <ReleaseFilter releases={releases} selected="test-tag-1" showGenerationDate showProductCount showReleaseLink releaseLinkDisplayType="Link" />
+        <ReleaseFilter maxWidth={276} releases={releases} selected="test-tag-1" showGenerationDate showProductCount showReleaseLink releaseLinkDisplayType="Link" />
       </ExampleBlock>
       <CodeBlock>
         {`
@@ -384,6 +380,7 @@ const onChange = (newRelease) => {
 
       <ExampleBlock>
         <ReleaseFilter
+          maxWidth={276}
           releases={releasesWithCounts}
           showGenerationDate
           showProductCount
@@ -392,6 +389,7 @@ const onChange = (newRelease) => {
       </ExampleBlock>
       <ExampleBlock>
         <ReleaseFilter
+          maxWidth={276}
           releases={releasesWithCounts}
           selected="test-tag-B"
           showGenerationDate

@@ -31,6 +31,12 @@ export interface IReleaseService {
    */
   sortReleases: <T extends IReleaseLike>(unsortedReleases: IReleaseLike[]) => T[];
   /**
+   * Gets the most recently available release tag from the set of releases.
+   * @param releases The set of releases to work from.
+   * @return The most recently available release tag when applicable.
+   */
+  getMostRecentReleaseTag: (releases: IReleaseLike[]) => string|null;
+  /**
    * Applies the set of user accessible releases for the currently
    * authenticated user with the set of current releases.
    * @param neonContextState The context state to build from
@@ -70,6 +76,21 @@ const ReleaseService: IReleaseService = {
       ));
     }
     return releases as T[];
+  },
+  getMostRecentReleaseTag: (releases: IReleaseLike[]): string|null => {
+    if (!existsNonEmpty(releases)) {
+      return null;
+    }
+    const sorted: IReleaseLike[] = ReleaseService.sortReleases(releases)
+      .filter((releaseLike: IReleaseLike): boolean => (
+        !ReleaseService.isLatestNonProv(releaseLike.release)
+          && !(LATEST_AND_PROVISIONAL.localeCompare(releaseLike.release) === 0)
+          && !(PROVISIONAL_RELEASE.localeCompare(releaseLike.release) === 0)
+      ));
+    if (!existsNonEmpty(sorted)) {
+      return null;
+    }
+    return sorted[0].release;
   },
   applyUserReleases: <T extends IReleaseLike>(
     neonContextState: any,

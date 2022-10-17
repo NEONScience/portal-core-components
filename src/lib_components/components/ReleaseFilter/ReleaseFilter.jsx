@@ -259,45 +259,51 @@ const ReleaseFilter = (props) => {
   }
 
   let releaseLinkNode = null;
-  if (showReleaseLink
-      && (selectedRelease !== null)
-      && !ReleaseService.isLatestNonProv(selectedRelease)
-  ) {
-    const releaseLinkTooltip = 'Click to view general information about all data products in the '
-      + `${selectedRelease} release`;
-    switch (releaseLinkDisplayType) {
-      case 'Link':
-        releaseLinkNode = (
-          <div className={classes.releaseLinkDescriptionContainer}>
-            <Link
-              href={RouteService.getReleaseDetailPath(selectedRelease)}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {selectedRelease}
-            </Link>
-          </div>
-        );
-        break;
-      case 'Button':
-      default:
-        releaseLinkNode = (
-          <div className={classes.releaseLinkAltDescriptionContainer}>
-            <Tooltip placement="right" title={releaseLinkTooltip}>
-              <Button
-                href={RouteService.getReleaseDetailPath(selectedRelease)}
+  if (showReleaseLink && !ReleaseService.isLatestNonProv(selectedRelease)) {
+    let appliedRelease = null;
+    const hasSelectedRelease = (selectedRelease !== null);
+    if (!hasSelectedRelease) {
+      appliedRelease = ReleaseService.getMostRecentReleaseTag(releases);
+    } else {
+      appliedRelease = selectedRelease;
+    }
+    if (appliedRelease !== null) {
+      const releaseLinkTooltip = 'Click to view general information about all data products in the '
+        + `${appliedRelease} release`;
+      switch (releaseLinkDisplayType) {
+        case 'Link':
+          releaseLinkNode = (
+            <div className={classes.releaseLinkDescriptionContainer}>
+              <Link
+                href={RouteService.getReleaseDetailPath(appliedRelease)}
                 target="_blank"
                 rel="noopener noreferrer"
-                variant="outlined"
-                className={classes.releaseLinkButton}
-                endIcon={<InfoIcon />}
               >
-                Release Details
-              </Button>
-            </Tooltip>
-          </div>
-        );
-        break;
+                {appliedRelease}
+              </Link>
+            </div>
+          );
+          break;
+        case 'Button':
+        default:
+          releaseLinkNode = (
+            <div className={classes.releaseLinkAltDescriptionContainer}>
+              <Tooltip placement="right" title={releaseLinkTooltip}>
+                <Button
+                  href={RouteService.getReleaseDetailPath(appliedRelease)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  variant="outlined"
+                  className={classes.releaseLinkButton}
+                  endIcon={<InfoIcon />}
+                >
+                  Release Details
+                </Button>
+              </Tooltip>
+            </div>
+          );
+          break;
+      }
     }
   }
 
@@ -467,7 +473,7 @@ ReleaseFilter.propTypes = {
 ReleaseFilter.defaultProps = {
   excludeNullRelease: false,
   horizontal: false,
-  maxWidth: 236,
+  maxWidth: null,
   nullReleaseProductCount: null,
   onChange: () => {},
   releases: [],
