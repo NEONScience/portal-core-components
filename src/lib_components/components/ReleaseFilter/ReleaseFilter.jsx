@@ -164,7 +164,7 @@ const ReleaseFilter = (props) => {
     onChange(validatedNewRelease);
   };
 
-  const maxWidthStyle = maxWidth ? { maxWidth: `${maxWidth}px` } : {};
+  const maxWidthStyle = maxWidth ? { maxWidth: `${maxWidth}px` } : { width: '100%' };
 
   const input = (
     <OutlinedInput
@@ -206,9 +206,9 @@ const ReleaseFilter = (props) => {
   if (skeleton) {
     const skeletonStyle = { marginBottom: Theme.spacing(1) };
     return (
-      <div {...otherProps} style={{ maxWidth: `${maxWidth}px`, overflow: 'hidden' }}>
+      <div {...otherProps} style={{ ...maxWidthStyle, overflow: 'hidden' }}>
         {titleNode}
-        <Skeleton variant="rect" width={maxWidth} height={36} style={skeletonStyle} />
+        <Skeleton variant="rect" width={maxWidth || '100%'} height={36} style={skeletonStyle} />
         <Skeleton width="70%" height={16} style={skeletonStyle} />
       </div>
     );

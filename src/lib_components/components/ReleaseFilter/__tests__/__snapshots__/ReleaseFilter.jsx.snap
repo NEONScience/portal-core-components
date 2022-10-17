@@ -78,7 +78,11 @@ exports[`ReleaseFilter Renders gracefully with an invalid selection 1`] = `
     className="MuiInputBase-root MuiOutlinedInput-root makeStyles-selectInput-3 MuiInputBase-marginDense MuiOutlinedInput-marginDense"
     data-selenium="release-filter"
     onClick={[Function]}
-    style={Object {}}
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
   >
     <div
       aria-haspopup="listbox"
@@ -157,8 +161,8 @@ exports[`ReleaseFilter Renders in skeleton mode 1`] = `
 <div
   style={
     Object {
-      "maxWidth": "nullpx",
       "overflow": "hidden",
+      "width": "100%",
     }
   }
 >
@@ -233,7 +237,7 @@ exports[`ReleaseFilter Renders in skeleton mode 1`] = `
       Object {
         "height": 36,
         "marginBottom": 8,
-        "width": null,
+        "width": "100%",
       }
     }
   />
@@ -330,7 +334,11 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
     className="MuiInputBase-root MuiOutlinedInput-root makeStyles-selectInput-3 MuiInputBase-marginDense MuiOutlinedInput-marginDense"
     data-selenium="release-filter"
     onClick={[Function]}
-    style={Object {}}
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
   >
     <div
       aria-haspopup="listbox"
@@ -565,7 +573,11 @@ exports[`ReleaseFilter Renders with a custom title 1`] = `
     className="MuiInputBase-root MuiOutlinedInput-root makeStyles-selectInput-3 Mui-disabled Mui-disabled MuiInputBase-marginDense MuiOutlinedInput-marginDense"
     data-selenium="release-filter"
     onClick={[Function]}
-    style={Object {}}
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
   >
     <div
       aria-disabled="true"
@@ -719,7 +731,11 @@ exports[`ReleaseFilter Renders with a selected release 1`] = `
     className="MuiInputBase-root MuiOutlinedInput-root makeStyles-selectInput-3 MuiInputBase-marginDense MuiOutlinedInput-marginDense"
     data-selenium="release-filter"
     onClick={[Function]}
-    style={Object {}}
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
   >
     <div
       aria-haspopup="listbox"
@@ -798,7 +814,11 @@ exports[`ReleaseFilter Renders with blank title 1`] = `
     className="MuiInputBase-root MuiOutlinedInput-root makeStyles-selectInput-3 Mui-disabled Mui-disabled MuiInputBase-marginDense MuiOutlinedInput-marginDense"
     data-selenium="release-filter"
     onClick={[Function]}
-    style={Object {}}
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
   >
     <div
       aria-disabled="true"
@@ -1122,7 +1142,11 @@ exports[`ReleaseFilter Renders with list of releases with DOIs 1`] = `
     className="MuiInputBase-root MuiOutlinedInput-root makeStyles-selectInput-3 MuiInputBase-marginDense MuiOutlinedInput-marginDense"
     data-selenium="release-filter"
     onClick={[Function]}
-    style={Object {}}
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
   >
     <div
       aria-haspopup="listbox"
@@ -1275,7 +1299,11 @@ exports[`ReleaseFilter Renders with list of releases without DOIs 1`] = `
     className="MuiInputBase-root MuiOutlinedInput-root makeStyles-selectInput-3 MuiInputBase-marginDense MuiOutlinedInput-marginDense"
     data-selenium="release-filter"
     onClick={[Function]}
-    style={Object {}}
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
   >
     <div
       aria-haspopup="listbox"
@@ -1428,7 +1456,11 @@ exports[`ReleaseFilter Renders with no props 1`] = `
     className="MuiInputBase-root MuiOutlinedInput-root makeStyles-selectInput-3 Mui-disabled Mui-disabled MuiInputBase-marginDense MuiOutlinedInput-marginDense"
     data-selenium="release-filter"
     onClick={[Function]}
-    style={Object {}}
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
   >
     <div
       aria-disabled="true"
@@ -1582,7 +1614,11 @@ exports[`ReleaseFilter Renders with product counts (using data product codes) 1`
     className="MuiInputBase-root MuiOutlinedInput-root makeStyles-selectInput-3 MuiInputBase-marginDense MuiOutlinedInput-marginDense"
     data-selenium="release-filter"
     onClick={[Function]}
-    style={Object {}}
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
   >
     <div
       aria-haspopup="listbox"
@@ -1735,7 +1771,11 @@ exports[`ReleaseFilter Renders with product counts (using data product objects) 
     className="MuiInputBase-root MuiOutlinedInput-root makeStyles-selectInput-3 MuiInputBase-marginDense MuiOutlinedInput-marginDense"
     data-selenium="release-filter"
     onClick={[Function]}
-    style={Object {}}
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
   >
     <div
       aria-haspopup="listbox"
