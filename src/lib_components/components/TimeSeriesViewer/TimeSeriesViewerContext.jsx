@@ -395,6 +395,9 @@ const parseSiteMonthData = (site, files) => {
       if (!newSite.fetches.positions.url) { newSite.fetches.positions.url = url; }
       return;
     }
+    if (name.includes('science_review_flags')) {
+      return;
+    }
     // Split file name by (.); all DATA_FILE_PARTS validators must point to a valid part
     const parts = name.split('.');
     if (Object.keys(DATA_FILE_PARTS).some((part) => {
@@ -451,10 +454,11 @@ const parseSiteVariables = (previousVariables, siteCode, csv) => {
     tablesWithUid[table] = tablesWithUid[table] || fieldName === 'uid';
   });
   const validTables = new Set(Object.keys(tablesWithUid).filter((k) => !tablesWithUid[k]));
+  const ignoreTables = new Set(['sensor_positions', 'science_review_flags']);
   // Build the set of variables using only the valid tables
   const variablesSet = new Set();
   variables.data
-    .filter((variable) => validTables.has(variable.table))
+    .filter((variable) => validTables.has(variable.table) && !ignoreTables.has(variable.table))
     .forEach((variable) => {
       const {
         table,

@@ -370,7 +370,7 @@ const productData = {...};
         configuration state, out of which individual state values can be destructured.
       </DocBlock>
       <ExampleBlock>
-        <div>
+        <div style={{ width: '100%' }}>
           <DownloadDataContext.Provider
             downloadDataContextUniqueId={3}
             productData={sampleProductData1.data}
@@ -423,7 +423,7 @@ const ListSitesComponent = () => {
         appropriate, new data to apply.
       </DocBlock>
       <ExampleBlock>
-        <div>
+        <div style={{ width: '100%' }}>
           <DownloadDataContext.Provider
             downloadDataContextUniqueId={4}
             productData={sampleProductData1.data}

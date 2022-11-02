@@ -577,9 +577,9 @@ const getAndValidateNewS3FilesState = (previousState, action, broadcast = false)
     newState.s3Files.value.length > 0
     && newState.s3Files.estimatedPostSize < MAX_POST_BODY_SIZE
   );
-  if (s3FilesIdx !== -1) {
-    newState.requiredSteps[s3FilesIdx].isComplete = newState.s3Files.isValid;
-  }
+  newState.requiredSteps[s3FilesIdx].isComplete = newState.s3Files.isValid;
+  newState.allStepsComplete = newState.requiredSteps
+    .every((step) => step.isComplete || step.isComplete === null);
 
   return newState;
 };
@@ -792,7 +792,7 @@ const reducer = (state, action) => {
         return {
           ...state,
           manifest: {
-            status: 'error',
+            status: 'no-data',
             body: null,
             sizeEstimate: null,
             error: 'NaN',
@@ -813,6 +813,16 @@ const reducer = (state, action) => {
         ...state,
         manifest: {
           status: 'error',
+          body: null,
+          sizeEstimate: null,
+          error: action.error,
+        },
+      };
+    case 'setManifestStatus':
+      return {
+        ...state,
+        manifest: {
+          status: action.status,
           body: null,
           sizeEstimate: null,
           error: action.error,
@@ -1126,7 +1136,8 @@ const Provider = (props) => {
     );
     if (config.isError && config.errorMessage) {
       dispatch({
-        type: 'setFetchManifestFailed',
+        type: 'setManifestStatus',
+        status: 'invalid-config',
         error: config.errorMessage,
       });
     } else {
