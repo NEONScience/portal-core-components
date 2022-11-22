@@ -2,6 +2,8 @@ import NeonContextService from './NeonContextService';
 import { exists, existsNonEmpty, isStringNonEmpty } from '../util/typeUtil';
 import { UserRelease } from '../types/neonContext';
 import { Release as InternalRelease, IReleaseLike, ReleaseProps } from '../types/internal';
+import { DataProductDoiStatus, DataProductRelease } from '../types/neonApi';
+import { Nullable } from '../types/core';
 
 export const LATEST_AND_PROVISIONAL = 'LATEST_AND_PROVISIONAL';
 export const PROVISIONAL_RELEASE = 'provisional';
@@ -47,6 +49,12 @@ export interface IReleaseService {
     neonContextState: any,
     currentReleases: IReleaseLike[],
   ) => T[];
+  /**
+   * Transforms the DOI status into a release like object
+   * @param doiStatus The DOI status representation
+   * @return The transformed release like representation
+   */
+  transformDoiStatusRelease: (doiStatus: DataProductDoiStatus) => Nullable<IReleaseLike>;
 }
 
 const ReleaseService: IReleaseService = {
@@ -153,6 +161,25 @@ const ReleaseService: IReleaseService = {
       }
     });
     return combinedReleases as T[];
+  },
+  transformDoiStatusRelease: (doiStatus: DataProductDoiStatus): Nullable<IReleaseLike> => {
+    if (!exists(doiStatus)) {
+      return null;
+    }
+    const transformed: DataProductRelease & InternalRelease = {
+      url: '',
+      productDoi: {
+        url: doiStatus.url,
+        generationDate: doiStatus.generationDate,
+      },
+      release: doiStatus.release,
+      generationDate: doiStatus.releaseGenerationDate,
+      description: doiStatus.release,
+      showCitation: true,
+      showDoi: true,
+      showViz: false,
+    };
+    return transformed as IReleaseLike;
   },
 };
 

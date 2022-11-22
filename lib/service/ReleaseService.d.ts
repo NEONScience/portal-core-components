@@ -1,4 +1,6 @@
 import { IReleaseLike } from '../types/internal';
+import { DataProductDoiStatus } from '../types/neonApi';
+import { Nullable } from '../types/core';
 export declare const LATEST_AND_PROVISIONAL = "LATEST_AND_PROVISIONAL";
 export declare const PROVISIONAL_RELEASE = "provisional";
 export interface IReleaseService {
@@ -39,6 +41,12 @@ export interface IReleaseService {
      * @return The combined set of accessible releases for the current user
      */
     applyUserReleases: <T extends IReleaseLike>(neonContextState: any, currentReleases: IReleaseLike[]) => T[];
+    /**
+     * Transforms the DOI status into a release like object
+     * @param doiStatus The DOI status representation
+     * @return The transformed release like representation
+     */
+    transformDoiStatusRelease: (doiStatus: DataProductDoiStatus) => Nullable<IReleaseLike>;
 }
 declare const ReleaseService: IReleaseService;
 export default ReleaseService;

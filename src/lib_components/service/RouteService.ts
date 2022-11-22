@@ -46,6 +46,11 @@ export interface IRouteService {
    */
   getFaqPath: () => string;
   /**
+   * Gets the path to the NEON Contact Us information page
+   * @returns
+   */
+  getContactUsPath: () => string;
+  /**
    * Gets the path to the NEON download and explore information page
    * @returns
    */
@@ -184,6 +189,9 @@ const RouteService: IRouteService = {
   ),
   getFaqPath: (): string => (
     `${NeonEnvironment.getWebHost()}/about/faq`
+  ),
+  getContactUsPath: (): string => (
+    `${NeonEnvironment.getWebHost()}/about/contact-us`
   ),
   getDownloadExplorePath: (): string => (
     `${NeonEnvironment.getWebHost()}/resources/learning-hub/tutorials/download-explore-neon-data`

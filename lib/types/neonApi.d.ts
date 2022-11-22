@@ -55,3 +55,15 @@ export interface QuickStartGuideVersion {
     publishedDate: string;
     documents: QuickStartGuideDocument[];
 }
+export declare enum DoiStatusType {
+    FINDABLE = "FINDABLE",
+    TOMBSTONED = "TOMBSTONED"
+}
+export interface DataProductDoiStatus {
+    productCode: string;
+    release: string;
+    generationDate: string;
+    releaseGenerationDate: string;
+    url: string;
+    status: DoiStatusType;
+}

@@ -4,7 +4,6 @@ export declare const DEFAULT_WEB_HOST = "https://www.neonscience.org";
 interface IHostRegexService {
     getApiHostRegex: () => RegExp;
     getWebHostRegex: () => RegExp;
-    getDataCiteApiHostRegex: () => RegExp;
 }
 export declare const HostRegexService: IHostRegexService;
 export declare const requiredEnvironmentVars: string[];
@@ -15,7 +14,6 @@ export interface NeonServerData {
     NeonPublicAPITokenHeader: Undef<string>;
     NeonPublicAPIToken: Undef<string>;
     NeonAuthSilentType: Undef<string>;
-    DataCiteAPIHost: Undef<string>;
 }
 export interface INeonEnvironment {
     isValid: boolean;
@@ -41,25 +39,20 @@ export interface INeonEnvironment {
     authTopics: Record<string, () => string>;
     getVisusProductsBaseUrl: () => Undef<string>;
     getVisusIframeBaseUrl: () => Undef<string>;
-    getDataCiteApiHostDefault: () => string;
     getRouterBasePath: () => string;
     getRouterBaseHomePath: () => string;
     getApiHostOverride: () => string;
     getWebHostOverride: () => string;
     getWsHostOverride: () => string;
-    getDataCiteApiHostOverride: () => Undef<string>;
     route: Record<string, (p?: string) => string>;
     getNeonServerData: () => NeonServerData | null;
     getNeonServerDataWebHost: () => string | null;
     getNeonServerDataApiHost: () => string | null;
-    getNeonServerDataDataCiteApiHost: () => string | null;
     getWebHost: () => string;
     getApiHost: () => string;
     getWebSocketHost: () => string;
-    getDataCiteApiHost: () => string;
     isApiHostValid: (host: string) => boolean;
     isWebHostValid: (host: string) => boolean;
-    isDataCiteApiHostValid: (host: string) => boolean;
     getApiTokenHeader: () => string;
     getApiToken: () => string;
     getAuthSilentType: () => AuthSilentType;

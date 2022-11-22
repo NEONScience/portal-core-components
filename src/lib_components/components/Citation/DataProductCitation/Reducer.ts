@@ -8,11 +8,14 @@ import ActionCreator, {
   FetchProductSucceededAction,
   FetchProductFailedAction,
   FetchProductReleaseFailedAction,
+  FetchProductReleaseDoiFailedAction,
   SetProductCodeAction,
   SetReleaseAction,
   StoreFinalizedNeonContextStateAction,
   FetchProductReleaseStartedAction,
   FetchProductReleaseSucceededAction,
+  FetchProductReleaseDoiStartedAction,
+  FetchProductReleaseDoiSucceededAction,
   FetchBundleParentStartedAction,
   FetchBundleParentFailedAction,
   FetchBundleParentSucceededAction,
@@ -36,6 +39,7 @@ import {
 import ReleaseService from '../../../service/ReleaseService';
 import { Nullable, UnknownRecord } from '../../../types/core';
 import { exists, isStringNonEmpty } from '../../../util/typeUtil';
+import { DataProductDoiStatus } from '../../../types/neonApi';
 
 const reinitialize = (
   state: DataProductCitationState,
@@ -97,6 +101,7 @@ const resolveError = (
   }
   let fetchProductFailedAction: FetchProductFailedAction;
   let fetchProductReleaseFailedAction: FetchProductReleaseFailedAction;
+  let fetchProductReleaseDoiFailedAction: FetchProductReleaseDoiFailedAction;
   let fetchBundleParentFailedAction: FetchBundleParentFailedAction;
   let fetchBundleParentReleaseFailedAction: FetchBundleParentReleaseFailedAction;
   let fetchCitationDownloadFailedAction: FetchCitationDownloadFailedAction;
@@ -108,6 +113,10 @@ const resolveError = (
     case ActionTypes.FETCH_PRODUCT_RELEASE_FAILED:
       fetchProductReleaseFailedAction = (action as FetchProductReleaseFailedAction);
       result = `${result}: ${fetchProductReleaseFailedAction.release}`;
+      break;
+    case ActionTypes.FETCH_PRODUCT_RELEASE_DOI_FAILED:
+      fetchProductReleaseDoiFailedAction = (action as FetchProductReleaseDoiFailedAction);
+      result = `${result}: ${fetchProductReleaseDoiFailedAction.release}`;
       break;
     case ActionTypes.FETCH_BUNDLE_PARENT_FAILED:
       fetchBundleParentFailedAction = (action as FetchBundleParentFailedAction);
@@ -141,6 +150,7 @@ const Reducer = (
     errorResult = resolveError(action as ErrorActionTypes, newState);
   }
   let product: ContextDataProduct;
+  let productReleaseDoiStatus: DataProductDoiStatus;
   let release: string;
   let bundleParent: string;
   let fetchStatusState: FetchStatusState;
@@ -150,6 +160,9 @@ const Reducer = (
   let fprStartedAction: FetchProductReleaseStartedAction;
   let fprFailedAction: FetchProductReleaseFailedAction;
   let fprSucceededAction: FetchProductReleaseSucceededAction;
+  let fprdStartedAction: FetchProductReleaseDoiStartedAction;
+  let fprdFailedAction: FetchProductReleaseDoiFailedAction;
+  let fprdSucceededAction: FetchProductReleaseDoiSucceededAction;
   let fbpStartedAction: FetchBundleParentStartedAction;
   let fbpFailedAction: FetchBundleParentFailedAction;
   let fbpSucceededAction: FetchBundleParentSucceededAction;
@@ -251,6 +264,28 @@ const Reducer = (
       newState.fetches.productReleases[release].status = FetchStatus.SUCCESS;
       newState.data.productReleases[release] = product;
       return Service.calculateAppStatus(newState);
+
+    case ActionTypes.FETCH_PRODUCT_RELEASE_DOI_STARTED:
+      fprdStartedAction = (action as FetchProductReleaseDoiStartedAction);
+      release = fprdStartedAction.release;
+      newState.fetches.productReleaseDois[release].status = FetchStatus.FETCHING;
+      return Service.calculateAppStatus(newState);
+    case ActionTypes.FETCH_PRODUCT_RELEASE_DOI_FAILED:
+      fprdFailedAction = (action as FetchProductReleaseDoiFailedAction);
+      release = fprdFailedAction.release;
+      newState.fetches.productReleaseDois[release].status = FetchStatus.ERROR;
+      newState.fetches.productReleaseDois[release].error = errorResult;
+      newState.component.error = errorResult;
+      return Service.calculateAppStatus(newState);
+    case ActionTypes.FETCH_PRODUCT_RELEASE_DOI_SUCCEEDED:
+      fprdSucceededAction = (action as FetchProductReleaseDoiSucceededAction);
+      release = fprdSucceededAction.release;
+      productReleaseDoiStatus = fprdSucceededAction.data;
+      newState.fetches.productReleaseDois[release].status = FetchStatus.SUCCESS;
+      newState.data.productReleaseDois[release] = productReleaseDoiStatus;
+      return Service.calculateAppStatus(
+        Service.applyDoiStatusReleaseGlobally(newState, productReleaseDoiStatus),
+      );
 
     case ActionTypes.FETCH_BUNDLE_PARENT_STARTED:
       fbpStartedAction = (action as FetchBundleParentStartedAction);

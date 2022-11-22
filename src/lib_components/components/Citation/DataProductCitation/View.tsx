@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
+import CardHeader from '@material-ui/core/CardHeader';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
@@ -49,6 +50,7 @@ import {
   CitationTextOnlyProps,
 } from './ViewState';
 import { Nullable, UnknownRecord } from '../../../types/core';
+import { DataProductRelease } from '../../../types/neonApi';
 
 const useStyles = makeStyles((theme: NeonTheme) => ({
   cardActions: {
@@ -113,6 +115,28 @@ const useStyles = makeStyles((theme: NeonTheme) => ({
     fontStyle: 'italic',
     fontSize: '0.8rem',
   },
+  tombstoneBlurbCard: {
+    backgroundColor: (Theme as NeonTheme).colors.BROWN[50],
+    borderColor: (Theme as NeonTheme).colors.BROWN[300],
+    marginTop: theme.spacing(1),
+  },
+  tombstoneBlurbCardTextOnly: {
+    backgroundColor: (Theme as NeonTheme).colors.GOLD[50],
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(2),
+  },
+  tombstoneBlurbCardHeader: {
+    padding: theme.spacing(2),
+    paddingBottom: 0,
+  },
+  tombstoneBlurbCardContent: {
+    padding: theme.spacing(2),
+    paddingTop: theme.spacing(1),
+    paddingBottom: '20px !important',
+  },
+  tombstoneBlurb: {
+    fontSize: '0.8rem',
+  },
 }));
 
 const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
@@ -140,6 +164,7 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
   const {
     status,
     displayType,
+    isTombstoned,
     releases,
     releaseObject,
     citableBaseProduct,
@@ -286,6 +311,68 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
           {/* eslint-enable react/jsx-one-expression-per-line */}
         </Typography>
       </div>
+    );
+  };
+
+  const renderTombstoneNotice = (): Nullable<JSX.Element> => {
+    if (!isTombstoned) {
+      return null;
+    }
+    const citationRelease: CitationRelease = (releaseObject as CitationRelease);
+    let doiDisplay = ' ';
+    if (citationRelease.productDoi.url) {
+      const doiId: string = citationRelease.productDoi.url.split('/').slice(-2).join('/');
+      doiDisplay = ` (DOI:${doiId}) `;
+    }
+    let latestAvailableReleaseBlurb: JSX.Element|null = null;
+    if (citableBaseProduct?.releases && (citableBaseProduct?.releases.length > 0)) {
+      const latestAvailableProductRelease: DataProductRelease = citableBaseProduct?.releases[0];
+      if (latestAvailableProductRelease.release.localeCompare(citationRelease.release) !== 0) {
+        const dataProductDetailLink: JSX.Element = (
+          <Link href={RouteService.getProductDetailPath(citableBaseProduct.productCode)}>
+            newer release
+          </Link>
+        );
+        latestAvailableReleaseBlurb = (
+          <>
+            {/* eslint-disable react/jsx-one-expression-per-line, max-len */}
+            has been replaced by a {dataProductDetailLink} and&nbsp;
+            {/* eslint-enable react/jsx-one-expression-per-line, max-len */}
+          </>
+        );
+      }
+    }
+    const contactUsLink: JSX.Element = (
+      <Link href={RouteService.getContactUsPath()}>
+        Contact Us
+      </Link>
+    );
+    const tombstoneNote: JSX.Element = (
+      <>
+        {/* eslint-disable react/jsx-one-expression-per-line, max-len */}
+        {citationRelease.release} of this data product
+        {doiDisplay} {latestAvailableReleaseBlurb}is no longer available for download.
+        If this specific release is needed for research purposes, please fill out
+        the {contactUsLink} form.
+        {/* eslint-enable react/jsx-one-expression-per-line, max-len */}
+      </>
+    );
+    return (
+      <Card
+        className={showTextOnly
+          ? classes.tombstoneBlurbCardTextOnly
+          : classes.tombstoneBlurbCard}
+      >
+        <CardHeader
+          className={classes.tombstoneBlurbCardHeader}
+          title={(<Typography variant="h6" component="h6">Release Notice</Typography>)}
+        />
+        <CardContent className={classes.tombstoneBlurbCardContent}>
+          <Typography variant="body2" color="textSecondary" className={classes.tombstoneBlurb}>
+            {tombstoneNote}
+          </Typography>
+        </CardContent>
+      </Card>
     );
   };
 
@@ -523,6 +610,7 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     return (
       <div>
         {renderCitationBlurb()}
+        {renderTombstoneNotice()}
         {renderBundleParentLink()}
         {citationCard}
       </div>

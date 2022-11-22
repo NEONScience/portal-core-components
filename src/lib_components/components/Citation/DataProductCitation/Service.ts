@@ -7,8 +7,8 @@ import {
   Undef,
   UnknownRecord,
 } from '../../../types/core';
-import { CitationBundleState } from '../../../types/internal';
-import { DataProductRelease } from '../../../types/neonApi';
+import { CitationBundleState, IReleaseLike } from '../../../types/internal';
+import { DataProductDoiStatus, DataProductRelease, DoiStatusType } from '../../../types/neonApi';
 import { BundleContext } from '../../../types/neonContext';
 import { exists, existsNonEmpty, isStringNonEmpty } from '../../../util/typeUtil';
 import ActionCreator from './Actions';
@@ -40,6 +40,9 @@ const stateHasFetchesInStatus = (state: DataProductCitationState, status: string
   fetchIsInStatus(state.fetches.product, status)
   || Object.keys(state.fetches.productReleases).some(
     (f: string): boolean => fetchIsInStatus(state.fetches.productReleases[f], status),
+  )
+  || Object.keys(state.fetches.productReleaseDois).some(
+    (f: string): boolean => fetchIsInStatus(state.fetches.productReleaseDois[f], status),
   )
   || Object.keys(state.fetches.bundleParents).some(
     (f: string): boolean => fetchIsInStatus(state.fetches.bundleParents[f], status),
@@ -78,6 +81,12 @@ const calculateFetches = (state: DataProductCitationState): DataProductCitationS
   // Fetch the release-specific product
   if (fetchRelease && !state.fetches.productReleases[fetchRelease]) {
     newState.fetches.productReleases[fetchRelease] = {
+      status: FetchStatus.AWAITING_CALL,
+    };
+  }
+  // Fetch the release specific doi state
+  if (fetchRelease && !state.fetches.productReleaseDois[fetchRelease]) {
+    newState.fetches.productReleaseDois[fetchRelease] = {
       status: FetchStatus.AWAITING_CALL,
     };
   }
@@ -156,6 +165,31 @@ const applyReleasesGlobally = (
         showViz: true,
       });
     });
+  updatedState.data.releases = ReleaseService.sortReleases(updatedState.data.releases);
+  return updatedState;
+};
+
+const applyDoiStatusReleaseGlobally = (
+  state: DataProductCitationState,
+  doiStatus: DataProductDoiStatus,
+): DataProductCitationState => {
+  const updatedState: DataProductCitationState = { ...state };
+  const transformedRelease: Nullable<IReleaseLike> = ReleaseService.transformDoiStatusRelease(
+    doiStatus,
+  );
+  if (!exists(transformedRelease)) {
+    return updatedState;
+  }
+  const citationRelease: CitationRelease = transformedRelease as CitationRelease;
+  const hasRelease: boolean = updatedState.data.releases.some((value: IReleaseLike): boolean => (
+    exists(value)
+    && isStringNonEmpty(value.release)
+    && isStringNonEmpty(citationRelease.release)
+    && (value.release.localeCompare(citationRelease.release) === 0)
+  ));
+  if (!hasRelease) {
+    updatedState.data.releases.push(citationRelease);
+  }
   updatedState.data.releases = ReleaseService.sortReleases(updatedState.data.releases);
   return updatedState;
 };
@@ -305,6 +339,7 @@ const useViewState = (
     data: {
       product: baseProduct,
       productReleases,
+      productReleaseDois,
       bundleParents,
       bundleParentReleases,
       releases,
@@ -362,6 +397,17 @@ const useViewState = (
   const hasAppliedReleaseDoi: boolean = isStringNonEmpty(appliedReleaseDoi);
   const hideAppliedReleaseCitation: boolean = exists(appliedReleaseObject)
     && ((appliedReleaseObject as CitationRelease).showCitation === false);
+  // Determine tombstoned state
+  let isTombstoned: boolean = false;
+  if (exists(productReleaseDois)
+      && isStringNonEmpty(appliedRenderedReleaseTag)
+      && exists(productReleaseDois[appliedRenderedReleaseTag as string])) {
+    const dataProductDoiStatus: Nullable<DataProductDoiStatus> = productReleaseDois[
+      appliedRenderedReleaseTag as string
+    ];
+    const doiStatusType: Nullable<DoiStatusType> = dataProductDoiStatus?.status;
+    isTombstoned = (exists(doiStatusType) && doiStatusType === DoiStatusType.TOMBSTONED) || false;
+  }
   // Identify whether or not viewing a bundled product with applicable DOI
   // and capture the bundle DOI product code.
   const hasBundleCode: boolean = existsNonEmpty(bundle.parentCodes)
@@ -444,7 +490,7 @@ const useViewState = (
     const productHasRelease: Undef<DataProductRelease> = citableReleaseProduct?.releases.find(
       (r: DataProductRelease): boolean => r.release === appliedRenderedReleaseTag,
     );
-    isCitableReleaseProductInRelease = exists(productHasRelease);
+    isCitableReleaseProductInRelease = exists(productHasRelease) || isTombstoned;
   }
   // Determine the overall citation display status.
   let appliedStatus: ContextStatus = status;
@@ -519,6 +565,7 @@ const useViewState = (
     citableBaseProduct,
     citableReleaseProduct,
     displayType,
+    isTombstoned,
     bundleParentCode,
     citationDownloadsFetchStatus,
   };
@@ -530,6 +577,7 @@ const Service = {
   calculateFetches,
   calculateAppStatus,
   applyReleasesGlobally,
+  applyDoiStatusReleaseGlobally,
   calculateContextState,
   useViewState,
   getReleaseObject,

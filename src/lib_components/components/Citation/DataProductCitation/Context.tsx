@@ -10,6 +10,7 @@ import React, {
 import { Observable } from 'rxjs';
 import { AjaxResponse } from 'rxjs/ajax';
 
+import NeonApi from '../../NeonApi/NeonApi';
 import NeonContext from '../../NeonContext/NeonContext';
 import NeonGraphQL from '../../NeonGraphQL/NeonGraphQL';
 
@@ -25,7 +26,7 @@ import {
 
 import { exists, isStringNonEmpty } from '../../../util/typeUtil';
 import { AnyAction, Nullable, Undef } from '../../../types/core';
-import { NeonApiResponse } from '../../../types/neonApi';
+import { DataProductDoiStatus, NeonApiResponse } from '../../../types/neonApi';
 
 const StateContext = createContext<DataProductCitationState>(getDefaultState());
 const DispatchContext = createContext<Undef<Dispatch<AnyAction>>>(undefined);
@@ -75,6 +76,14 @@ const verifyProductResponse = (
   && exists(response.response)
   && exists(response.response.data)
   && exists(response.response.data.product)
+);
+
+const verifyProductReleaseDoiResponse = (
+  response: NeonApiResponse<DataProductDoiStatus>,
+): boolean => (
+  exists(response)
+  && exists(response.data)
+  && exists(response.data.status)
 );
 
 export interface ProviderProps {
@@ -203,6 +212,38 @@ const Provider: React.FC<ProviderProps> = (props: ProviderProps): JSX.Element =>
             },
             error: (error: AjaxResponse<unknown>): void => {
               dispatch(ActionCreator.fetchProductReleaseFailed(
+                fetchRelease,
+                error,
+              ));
+            },
+          });
+      });
+    // Product release doi fetches
+    Object.keys(fetches.productReleaseDois)
+      .filter((fetchRelease: string): boolean => (
+        Service.fetchIsAwaitingCall(fetches.productReleaseDois[fetchRelease])
+      ))
+      .forEach((fetchRelease: string): void => {
+        dispatch(ActionCreator.fetchProductReleaseDoiStarted(fetchRelease));
+        const queryProductCode: string = productCode as string;
+        // eslint-disable-next-line max-len
+        (NeonApi.getProductDoisObservable(queryProductCode, fetchRelease) as Observable<NeonApiResponse<DataProductDoiStatus>>)
+          .subscribe({
+            next: (response: NeonApiResponse<DataProductDoiStatus>): void => {
+              if (!verifyProductReleaseDoiResponse(response)) {
+                dispatch(ActionCreator.fetchProductReleaseDoiFailed(
+                  fetchRelease,
+                  'Failed to fetch product release doi status',
+                ));
+                return;
+              }
+              dispatch(ActionCreator.fetchProductReleaseDoiSucceeded(
+                fetchRelease,
+                response.data,
+              ));
+            },
+            error: (error: AjaxResponse<unknown>): void => {
+              dispatch(ActionCreator.fetchProductReleaseDoiFailed(
                 fetchRelease,
                 error,
               ));

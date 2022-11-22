@@ -16,6 +16,7 @@ declare namespace NeonApi {
     function getJson(url: string, callback: any, errorCallback: any, cancellationSubject$: any, headers?: Object | undefined): import("rxjs").Subscription;
     function getProductsObservable(): import("rxjs").Observable<any>;
     function getProductObservable(productCode: string, release?: string): import("rxjs").Observable<any>;
+    function getProductDoisObservable(productCode: string, release: string): import("rxjs").Observable<any>;
     function getProductBundlesObservable(release?: string): import("rxjs").Observable<any>;
     function getPrototypeDatasetsObservable(): import("rxjs").Observable<any>;
     function getPrototypeDatasetObservable(uuid: any): import("rxjs").Observable<any>;

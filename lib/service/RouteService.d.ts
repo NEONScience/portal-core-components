@@ -43,6 +43,11 @@ export interface IRouteService {
      */
     getFaqPath: () => string;
     /**
+     * Gets the path to the NEON Contact Us information page
+     * @returns
+     */
+    getContactUsPath: () => string;
+    /**
      * Gets the path to the NEON download and explore information page
      * @returns
      */
