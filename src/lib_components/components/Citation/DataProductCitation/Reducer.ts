@@ -282,7 +282,11 @@ const Reducer = (
       release = fprdSucceededAction.release;
       productReleaseDoiStatus = fprdSucceededAction.data;
       newState.fetches.productReleaseDois[release].status = FetchStatus.SUCCESS;
-      newState.data.productReleaseDois[release] = productReleaseDoiStatus;
+      if (exists(productReleaseDoiStatus) && exists(productReleaseDoiStatus.status)) {
+        newState.data.productReleaseDois[release] = productReleaseDoiStatus;
+      } else {
+        newState.data.productReleaseDois[release] = null;
+      }
       return Service.calculateAppStatus(
         Service.applyDoiStatusReleaseGlobally(newState, productReleaseDoiStatus),
       );

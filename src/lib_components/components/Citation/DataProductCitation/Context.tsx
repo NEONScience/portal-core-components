@@ -82,8 +82,6 @@ const verifyProductReleaseDoiResponse = (
   response: NeonApiResponse<DataProductDoiStatus>,
 ): boolean => (
   exists(response)
-  && exists(response.data)
-  && exists(response.data.status)
 );
 
 export interface ProviderProps {
