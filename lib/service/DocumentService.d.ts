@@ -15,7 +15,7 @@ export interface ParsedQsgNameResult {
 }
 export declare const PDF_VIEWER_SUPPORTED_DOC_TYPES: string[];
 export declare const VIEWER_SUPPORTED_DOC_TYPES: string[];
-export declare type DocumentCallback = (document: NeonDocument) => void;
+export type DocumentCallback = (document: NeonDocument) => void;
 export interface IDocumentService {
     formatBytes: (bytes: number) => string;
     resolveDocumentType: (document: NeonDocument) => DocumentTypeListItemDef;

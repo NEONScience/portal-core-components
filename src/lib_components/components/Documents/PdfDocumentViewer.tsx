@@ -10,7 +10,7 @@ import * as PDFJSViewer from 'pdfjs-dist/legacy/web/pdf_viewer';
 import { PDFDocumentProxy } from 'pdfjs-dist';
 import { EventBus, PDFLinkService, PDFViewer } from 'pdfjs-dist/legacy/web/pdf_viewer';
 import { DocumentInitParameters } from 'pdfjs-dist/types/src/display/api';
-import { PDFViewerOptions } from 'pdfjs-dist/types/web/base_viewer';
+import { PDFViewerOptions } from 'pdfjs-dist/types/web/pdf_viewer';
 import { PDFLinkServiceOptions } from 'pdfjs-dist/types/web/pdf_link_service';
 
 import {
@@ -172,6 +172,7 @@ const PdfDocumentViewer: React.FC<PdfDocumentViewerProps> = (
       eventBus,
     };
     pdfViewerRef.current = new PDFJSViewer.PDFViewer(pdfViewerOptions);
+    pdfLinkService.setViewer(pdfViewerRef.current);
     eventBus.on('pagesinit', () => {
       if (pdfViewerRef.current) {
         pdfViewerRef.current.currentScaleValue = 'page-width';

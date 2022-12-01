@@ -31,7 +31,7 @@ export interface ContextFetchStatusState {
     bundleParentReleases: Record<string, Record<string, FetchStatusState>>;
     citationDownloads: Record<string, FetchStatusState>;
 }
-export declare type CitationRelease = DataProductRelease & Release;
+export type CitationRelease = DataProductRelease & Release;
 export interface ContextDataProduct {
     productCode: string;
     productName: string;

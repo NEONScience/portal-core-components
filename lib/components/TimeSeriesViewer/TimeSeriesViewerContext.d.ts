@@ -322,7 +322,7 @@ declare namespace Provider {
         export { productData };
         const release_1: PropTypes.Requireable<string>;
         export { release_1 as release };
-        export const children: PropTypes.Validator<string | number | boolean | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+        export const children: PropTypes.Validator<NonNullable<NonNullable<PropTypes.ReactNodeLike>>>;
     }
     namespace defaultProps {
         export const timeSeriesUniqueId: number;

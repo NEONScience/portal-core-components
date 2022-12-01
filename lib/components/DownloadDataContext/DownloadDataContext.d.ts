@@ -134,7 +134,7 @@ declare namespace Provider {
         const dateRange: PropTypes.Requireable<(string | null | undefined)[]>;
         const documentation: PropTypes.Requireable<string>;
         const packageType: PropTypes.Requireable<string>;
-        const children: PropTypes.Validator<string | number | boolean | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+        const children: PropTypes.Validator<NonNullable<NonNullable<PropTypes.ReactNodeLike>>>;
     }
     namespace defaultProps {
         const downloadDataContextUniqueId_1: number;

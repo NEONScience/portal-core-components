@@ -101,10 +101,10 @@ declare namespace SelectedPosition {
 declare function SelectPositionsButton(props: any): JSX.Element;
 declare namespace SelectPositionsButton {
     export namespace propTypes_3 {
-        const selectedSite: PropTypes.Validator<PropTypes.InferProps<{
+        const selectedSite: PropTypes.Validator<NonNullable<PropTypes.InferProps<{
             siteCode: PropTypes.Validator<string>;
             positions: PropTypes.Validator<(string | null | undefined)[]>;
-        }>>;
+        }>>>;
     }
     export { propTypes_3 as propTypes };
 }
@@ -133,10 +133,10 @@ declare namespace SelectedSite {
         TAB_IDS: PropTypes.Validator<{
             [x: string]: string | null | undefined;
         }>;
-        site: PropTypes.Validator<PropTypes.InferProps<{
+        site: PropTypes.Validator<NonNullable<PropTypes.InferProps<{
             siteCode: PropTypes.Validator<string>;
             positions: PropTypes.Validator<(string | null | undefined)[]>;
-        }>>;
+        }>>>;
         disabled: PropTypes.Requireable<boolean>;
     };
     export { propTypes_4 as propTypes };
@@ -148,13 +148,13 @@ declare namespace SelectedSite {
 }
 import PropTypes from "prop-types";
 declare namespace ControlPropTypes {
-    const children: PropTypes.Validator<string | number | boolean | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
-    const innerProps: PropTypes.Validator<PropTypes.InferProps<{
+    const children: PropTypes.Validator<NonNullable<PropTypes.ReactNodeLike>>;
+    const innerProps: PropTypes.Validator<NonNullable<PropTypes.InferProps<{
         onMouseDown: PropTypes.Validator<(...args: any[]) => any>;
-    }>>;
-    const innerRef: PropTypes.Validator<((...args: any[]) => any) | PropTypes.InferProps<{
+    }>>>;
+    const innerRef: PropTypes.Validator<NonNullable<NonNullable<((...args: any[]) => any) | PropTypes.InferProps<{
         current: PropTypes.Validator<any>;
-    }>>;
+    }> | null | undefined>>>;
     const selectProps: PropTypes.Validator<object>;
 }
 declare namespace OptionPropTypes {
@@ -169,9 +169,9 @@ declare namespace OptionPropTypes {
         tabIndex: PropTypes.Validator<number>;
     }>>;
     export { innerProps_1 as innerProps };
-    const innerRef_1: PropTypes.Requireable<((...args: any[]) => any) | PropTypes.InferProps<{
+    const innerRef_1: PropTypes.Requireable<NonNullable<((...args: any[]) => any) | PropTypes.InferProps<{
         current: PropTypes.Validator<any>;
-    }>>;
+    }> | null | undefined>>;
     export { innerRef_1 as innerRef };
     export const isFocused: PropTypes.Validator<boolean>;
     export const isSelected: PropTypes.Validator<boolean>;

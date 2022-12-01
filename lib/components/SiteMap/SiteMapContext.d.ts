@@ -40,7 +40,7 @@ declare namespace SiteMapContext {
 declare function Provider(props: any): JSX.Element;
 declare namespace Provider {
     export const propTypes: {
-        children: PropTypes.Validator<string | number | boolean | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+        children: PropTypes.Validator<NonNullable<NonNullable<PropTypes.ReactNodeLike>>>;
         view: PropTypes.Requireable<string>;
         aspectRatio: PropTypes.Requireable<number>;
         fullscreen: PropTypes.Requireable<boolean>;

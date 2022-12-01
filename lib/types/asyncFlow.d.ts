@@ -24,7 +24,7 @@ export declare enum AsyncStateType {
 /**
  * Action type union
  */
-export declare type AsyncActionType = AsyncAction | AsyncParamAction | AsyncCompletedAction | AsyncErrorAction;
+export type AsyncActionType = AsyncAction | AsyncParamAction | AsyncCompletedAction | AsyncErrorAction;
 /**
  * Async action definitions.
  */
@@ -54,19 +54,19 @@ export interface AsyncErrorAction extends AsyncAction {
 /**
  * Default action function declaration for async flow
  */
-export declare type AsyncActionFunction = (param?: any) => AsyncParamAction;
+export type AsyncActionFunction = (param?: any) => AsyncParamAction;
 /**
  * Completed action function declaration for async flow
  */
-export declare type AsyncActionCompletedFunction = (data: any) => AsyncCompletedAction;
+export type AsyncActionCompletedFunction = (data: any) => AsyncCompletedAction;
 /**
  * Error action function declaration for async flow
  */
-export declare type AsyncActionErrorFunction = (error: any, message: Nullable<string>, data?: any) => AsyncErrorAction;
+export type AsyncActionErrorFunction = (error: any, message: Nullable<string>, data?: any) => AsyncErrorAction;
 /**
  * Parser function declaration for parsing the raw response to types result data
  */
-export declare type ParserFunction<T extends any> = (data: any) => T;
+export type ParserFunction<T extends any> = (data: any) => T;
 /**
  * Core set of flow actions
  */
@@ -76,7 +76,7 @@ export interface CoreAsyncFlowActionTypes {
     error: string;
     reset: Nullable<string>;
 }
-export declare type FlowActionTypes = {
+export type FlowActionTypes = {
     [key: string]: AsyncFlowActionTypes;
 };
 /**

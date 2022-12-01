@@ -2,19 +2,19 @@
 /**
  * General convenience type definitions
  */
-export declare type Nullable<T> = T | null | undefined;
-export declare type AnyObject = {
+export type Nullable<T> = T | null | undefined;
+export type AnyObject = {
     [key: string]: any;
 };
-export declare type Undef<T> = T | undefined;
-export declare type AnyVoidFunc = (p?: any) => void;
-export declare type UnknownRecord = Record<string, unknown>;
-export declare type NullableRecord = UnknownRecord | null | undefined;
-export declare type StylesHook = (...props: unknown[]) => Record<string, string>;
-export declare type StringPropsObject = {
+export type Undef<T> = T | undefined;
+export type AnyVoidFunc = (p?: any) => void;
+export type UnknownRecord = Record<string, unknown>;
+export type NullableRecord = UnknownRecord | null | undefined;
+export type StylesHook = (...props: unknown[]) => Record<string, string>;
+export type StringPropsObject = {
     [key: string]: string;
 };
-export declare type HocFuncType<T extends JSX.IntrinsicAttributes> = ((props: T) => JSX.Element);
+export type HocFuncType<T extends JSX.IntrinsicAttributes> = ((props: T) => JSX.Element);
 export interface Action<T = string> {
     type: T;
 }

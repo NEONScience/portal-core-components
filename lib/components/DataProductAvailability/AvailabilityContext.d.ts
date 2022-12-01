@@ -50,7 +50,7 @@ declare namespace Provider {
                 }>;
             }> | null | undefined)[]>;
         }> | null | undefined)[]>;
-        const children: PropTypes.Validator<string | number | boolean | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+        const children: PropTypes.Validator<NonNullable<NonNullable<PropTypes.ReactNodeLike>>>;
     }
     namespace defaultProps {
         const dataAvailabilityUniqueId_1: number;
