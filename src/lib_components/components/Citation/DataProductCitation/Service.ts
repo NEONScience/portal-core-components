@@ -406,7 +406,7 @@ const useViewState = (
       appliedRenderedReleaseTag as string
     ];
     const doiStatusType: Nullable<DoiStatusType> = dataProductDoiStatus?.status;
-    isTombstoned = (exists(doiStatusType) && doiStatusType === DoiStatusType.TOMBSTONED) || false;
+    isTombstoned = (exists(doiStatusType) && (doiStatusType === DoiStatusType.TOMBSTONED));
   }
   // Identify whether or not viewing a bundled product with applicable DOI
   // and capture the bundle DOI product code.

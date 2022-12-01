@@ -1378,7 +1378,7 @@
   #header .form-no-label .visually-hidden, #footer .form-no-label .visually-hidden {
     clip: initial;
     overflow: initial;
-    text-indent: -1000px;
+    text-indent: -10000px;
     height: auto;
     width: auto; }
   #header input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(:checked), #header input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):checked, #footer input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(:checked), #footer input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):checked {

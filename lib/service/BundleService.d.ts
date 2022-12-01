@@ -10,6 +10,15 @@ export interface IBundleService {
      */
     isProductDefined: (context: BundleContext, productCode: string) => boolean;
     /**
+     * Determines if the product is defined as a container or child within a bundle
+     * for the specified release.
+     * @param context The context to derive lookups from.
+     * @param productCode The product code to search for.
+     * @param release The release to lookup from.
+     * @return True if the product is defined within bundles for the release.
+     */
+    isProductDefinedForRelease: (context: BundleContext, productCode: string, release: string) => boolean;
+    /**
      * Determine the currently active bundle based on release.
      * @param release The release to coerce.
      * @return The applicable bundle release.
