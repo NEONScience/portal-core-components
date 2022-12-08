@@ -50,7 +50,7 @@ export default function BasicAvailabilityKey(props) {
     const cellOffset = SVG.CELL_WIDTH + (2 * SVG.CELL_PADDING);
     const renderProvisionalCell = () => {
       if (!delineateRelease) {
-        return (<></>);
+        return null;
       }
       const provCell = CELL_ATTRS['available-provisional'];
       /* eslint-disable max-len */
@@ -102,7 +102,7 @@ export default function BasicAvailabilityKey(props) {
     const cellOffset = SVG.CELL_WIDTH + (2 * SVG.CELL_PADDING);
     const renderProvisionalCell = () => {
       if (!delineateRelease) {
-        return (<></>);
+        return null;
       }
       const provCell = CELL_ATTRS['available-provisional'];
       /* eslint-disable max-len */

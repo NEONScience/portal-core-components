@@ -110,6 +110,7 @@ export interface UserCardProps {
   email: string;
   fullName: string;
   providers: string;
+  // eslint-disable-next-line react/require-default-props
   lastLogin?: string;
 }
 

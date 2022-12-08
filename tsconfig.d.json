@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "rootDir": "./src/lib_components",
@@ -16,12 +17,13 @@
     "./src/lib_components/*.js",
     "./src/lib_components/*.jsx",
     "./src/lib_components/*.ts",
-    "./src/lib_components/*.tsx",
+    "./src/lib_components/*.tsx"
   ],
   "exclude": [
     "./src/**/StyleGuide.*",
     "./src/components/*",
     "./src/lib_components/remoteAssets/*",
+    "./src/lib_components/vendor/**/*",
     "./src/favicon/*",
     "./src/sampleData/*",
     "./src/*.js",

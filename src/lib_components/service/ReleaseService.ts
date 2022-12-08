@@ -2,6 +2,8 @@ import NeonContextService from './NeonContextService';
 import { exists, existsNonEmpty, isStringNonEmpty } from '../util/typeUtil';
 import { UserRelease } from '../types/neonContext';
 import { Release as InternalRelease, IReleaseLike, ReleaseProps } from '../types/internal';
+import { DataProductDoiStatus, DataProductRelease } from '../types/neonApi';
+import { Nullable } from '../types/core';
 
 export const LATEST_AND_PROVISIONAL = 'LATEST_AND_PROVISIONAL';
 export const PROVISIONAL_RELEASE = 'provisional';
@@ -31,6 +33,12 @@ export interface IReleaseService {
    */
   sortReleases: <T extends IReleaseLike>(unsortedReleases: IReleaseLike[]) => T[];
   /**
+   * Gets the most recently available release tag from the set of releases.
+   * @param releases The set of releases to work from.
+   * @return The most recently available release tag when applicable.
+   */
+  getMostRecentReleaseTag: (releases: IReleaseLike[]) => string|null;
+  /**
    * Applies the set of user accessible releases for the currently
    * authenticated user with the set of current releases.
    * @param neonContextState The context state to build from
@@ -41,9 +49,16 @@ export interface IReleaseService {
     neonContextState: any,
     currentReleases: IReleaseLike[],
   ) => T[];
+  /**
+   * Transforms the DOI status into a release like object
+   * @param doiStatus The DOI status representation
+   * @return The transformed release like representation
+   */
+  transformDoiStatusRelease: (doiStatus: DataProductDoiStatus) => Nullable<IReleaseLike>;
 }
 
 const ReleaseService: IReleaseService = {
+  // eslint-disable-next-line prefer-regex-literals
   getProvReleaseRegex: (): RegExp => new RegExp(/^[A-Z]+$/),
   isLatestNonProv: (releaseTag: string): boolean => {
     const matches: RegExpExecArray|null = ReleaseService.getProvReleaseRegex().exec(releaseTag);
@@ -69,6 +84,21 @@ const ReleaseService: IReleaseService = {
       ));
     }
     return releases as T[];
+  },
+  getMostRecentReleaseTag: (releases: IReleaseLike[]): string|null => {
+    if (!existsNonEmpty(releases)) {
+      return null;
+    }
+    const sorted: IReleaseLike[] = ReleaseService.sortReleases(releases)
+      .filter((releaseLike: IReleaseLike): boolean => (
+        !ReleaseService.isLatestNonProv(releaseLike.release)
+          && !(LATEST_AND_PROVISIONAL.localeCompare(releaseLike.release) === 0)
+          && !(PROVISIONAL_RELEASE.localeCompare(releaseLike.release) === 0)
+      ));
+    if (!existsNonEmpty(sorted)) {
+      return null;
+    }
+    return sorted[0].release;
   },
   applyUserReleases: <T extends IReleaseLike>(
     neonContextState: any,
@@ -131,6 +161,25 @@ const ReleaseService: IReleaseService = {
       }
     });
     return combinedReleases as T[];
+  },
+  transformDoiStatusRelease: (doiStatus: DataProductDoiStatus): Nullable<IReleaseLike> => {
+    if (!exists(doiStatus)) {
+      return null;
+    }
+    const transformed: DataProductRelease & InternalRelease = {
+      url: '',
+      productDoi: {
+        url: doiStatus.url,
+        generationDate: doiStatus.generationDate,
+      },
+      release: doiStatus.release,
+      generationDate: doiStatus.releaseGenerationDate,
+      description: doiStatus.release,
+      showCitation: true,
+      showDoi: true,
+      showViz: false,
+    };
+    return transformed as IReleaseLike;
   },
 };
 

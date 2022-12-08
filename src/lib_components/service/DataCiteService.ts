@@ -47,7 +47,7 @@ const DataCiteService: IDataCiteService = {
   getDoiUrl: (doi: string, format: CitationFormat): string => {
     const { mime }: CitationFormat = format;
     const doiId: string = doi?.split('/').slice(-2).join('/') || '';
-    return `${NeonEnvironment.getDataCiteApiHost()}/dois/${mime}/${doiId}`;
+    return `${NeonEnvironment.getFullApiPath('doiCitations')}/${mime}/${doiId}`;
   },
 
   getCitationFormats: (): CitationFormat[] => ([

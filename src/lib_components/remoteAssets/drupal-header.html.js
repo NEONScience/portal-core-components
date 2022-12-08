@@ -21,7 +21,20 @@ export default html = `
 
     </label>
     <div class="authContainer">
-              <a href="/user/login">Sign In</a>
+              <div class="openid-connect-login-form" data-drupal-selector="openid-connect-login-form" id="block-openid-connect-login">
+  
+    
+      <form action="/neon-assets/partial/header" method="post" id="openid-connect-login-form" accept-charset="UTF-8">
+  <div>
+
+<input data-drupal-selector="edit-openid-connect-client-auth0-login" type="submit" id="edit-openid-connect-client-auth0-login" name="auth0" value="Sign In" class="button js-form-submit form-submit button--search" />
+</div><input autocomplete="off" data-drupal-selector="form-sxdzuvne6eckv-rb9pgncjknnwofaoseup045md3v1y" type="hidden" name="form_build_id" value="form-SXDzUvne6ECkv_rb9PGnCJKnNwOfaosEUP045MD3V1Y" />
+<input data-drupal-selector="edit-openid-connect-login-form" type="hidden" name="form_id" value="openid_connect_login_form" />
+
+</form>
+
+  </div>
+
           </div>
     <div class="header__site-navigation">
       <div class="header__menu-main">
@@ -608,6 +621,10 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
+          <a href="https://www.neonscience.org/data-samples/data-management/neon-google" class="menu__link" data-drupal-link-system-path="node/12531">NEON and Google</a>
+
+                  </li>
+              <li  class="menu__item">
           <a href="https://www.neonscience.org/data-samples/data-management/externally-hosted-data" class="menu__link" data-drupal-link-system-path="node/10552">Externally Hosted Data</a>
 
                   </li>
@@ -971,6 +988,10 @@ export default html = `
           <a href="https://www.neonscience.org/neon-science-summit" class="menu__link" data-drupal-link-system-path="node/12057">NEON Science Summit</a>
 
                   </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/neon-great-lakes-user-group" class="menu__link" data-drupal-link-system-path="node/12371">NEON Great Lakes User Group</a>
+
+                  </li>
       
           </ul>
   
@@ -980,6 +1001,10 @@ export default html = `
                   </li>
               <li  class="menu__item">
           <a href="https://www.neonscience.org/get-involved/engagement" class="menu__link" data-drupal-link-system-path="node/10556">Community Engagement</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/science-seminars-and-data-skills-webinars" class="menu__link" data-drupal-link-system-path="node/12373">Science Seminars and Data Skills Webinars</a>
 
                   </li>
               <li  class="menu__item menu__item--expanded">

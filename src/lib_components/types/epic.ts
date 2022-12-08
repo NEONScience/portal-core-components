@@ -1,8 +1,8 @@
 import {
-  AjaxCreationMethod,
-  AjaxRequest,
+  AjaxConfig,
   AjaxResponse,
-} from 'rxjs/internal/observable/dom/AjaxObservable';
+  ajax as AjaxCreationMethod,
+} from 'rxjs/ajax';
 import { AnyAction } from 'redux';
 import { Epic } from 'redux-observable';
 import {
@@ -12,7 +12,7 @@ import {
 import { AnyObject } from './core';
 
 export interface EpicDependencies {
-  ajax: AjaxCreationMethod;
+  ajax: typeof AjaxCreationMethod;
 }
 
 export type EpicCreator<A extends AnyAction, S extends AnyObject> = (
@@ -22,8 +22,8 @@ export type EpicCreator<A extends AnyAction, S extends AnyObject> = (
 ) => Epic<A, A, S, EpicDependencies>;
 
 export type AjaxObservableCreator<A extends AnyAction> = (
-  ajax: AjaxCreationMethod,
-  ajaxRequest: AjaxRequest | AjaxRequest[],
+  ajax: typeof AjaxCreationMethod,
+  ajaxRequest: AjaxConfig | AjaxConfig[],
   successAction: SuccessAction<A>,
   errorAction: ErrorAction<A>,
   action?: A,
@@ -34,7 +34,7 @@ export type AjaxObservableCreator<A extends AnyAction> = (
 
 export type WorkingAction = (data?: any) => any;
 export type SuccessAction<A extends AnyAction> = (
-  response: AjaxResponse | AjaxResponse[],
+  response: AjaxResponse<unknown> | AjaxResponse<unknown>[],
   action?: A,
 ) => any;
 export type ErrorAction<A extends AnyAction> = (error: any, action?: A) => any;
@@ -48,7 +48,7 @@ export type AjaxRequestInjector<A extends AnyAction> = (
 
 export interface EpicCreationProps<A extends AnyAction> {
   ofTypeFilter: string | string[];
-  request: AjaxRequest | AjaxRequest[];
+  request: AjaxConfig | AjaxConfig[];
   workingAction: WorkingAction;
   successAction: SuccessAction<A>;
   errorAction: ErrorAction<A>;

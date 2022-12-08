@@ -1,13 +1,14 @@
 import { Observable, MonoTypeOperatorFunction } from 'rxjs';
-import { AjaxCreationMethod, AjaxRequest } from 'rxjs/internal/observable/dom/AjaxObservable';
+import { AjaxConfig, ajax as AjaxCreationMethod } from 'rxjs/ajax';
 import { AnyAction } from 'redux';
-import { WorkingAction, SuccessAction, ErrorAction, AjaxBodyCreator, EpicCreator, AjaxRequestInjector, EpicCreationProps } from '../types/epic';
+import { Epic } from 'redux-observable';
+import { EpicDependencies, WorkingAction, SuccessAction, ErrorAction, AjaxBodyCreator, AjaxRequestInjector, EpicCreationProps } from '../types/epic';
 import { AnyObject } from '../types/core';
 export interface IEpicService {
     /**
      * Creator to decorate an EpicCreator function that creates the Epic
      * @param ofTypeFilter
-     * @param ajaxRequest
+     * @param ajaxConfig
      * @param workingAction
      * @param successAction
      * @param errorAction
@@ -18,11 +19,11 @@ export interface IEpicService {
      * @type A The type of action
      * @type S The type of state
      */
-    createEpic: <A extends AnyAction, S extends AnyObject>(ofTypeFilter: string | string[], ajaxRequest: AjaxRequest | AjaxRequest[], workingAction: WorkingAction, successAction: SuccessAction<A>, errorAction: ErrorAction<A>, takeUntilTypeFilter?: string, ajaxBodyCreator?: AjaxBodyCreator<A>, ajaxRequestInjector?: AjaxRequestInjector<A>, useForkJoin?: boolean) => EpicCreator<A, S>;
+    createEpic: <A extends AnyAction, S extends AnyObject>(ofTypeFilter: string | string[], ajaxConfig: AjaxConfig | AjaxConfig[], workingAction: WorkingAction, successAction: SuccessAction<A>, errorAction: ErrorAction<A>, takeUntilTypeFilter?: string, ajaxBodyCreator?: AjaxBodyCreator<A>, ajaxRequestInjector?: AjaxRequestInjector<A>, useForkJoin?: boolean) => Epic<A, A, S, EpicDependencies>;
     /**
      * Creator to decorate an EpicCreator function that creates the Epic
      * @param ofTypeFilter
-     * @param ajaxRequest
+     * @param ajaxConfig
      * @param workingAction
      * @param successAction
      * @param errorAction
@@ -33,25 +34,25 @@ export interface IEpicService {
      * @type A The type of action
      * @type S The type of state
      */
-    createMergeEpic: <A extends AnyAction, S extends AnyObject>(ofTypeFilter: string | string[], ajaxRequest: AjaxRequest | AjaxRequest[], workingAction: WorkingAction, successAction: SuccessAction<A>, errorAction: ErrorAction<A>, takeUntilTypeFilter?: string, ajaxBodyCreator?: AjaxBodyCreator<A>, ajaxRequestInjector?: AjaxRequestInjector<A>, useForkJoin?: boolean) => EpicCreator<A, S>;
+    createMergeEpic: <A extends AnyAction, S extends AnyObject>(ofTypeFilter: string | string[], ajaxConfig: AjaxConfig | AjaxConfig[], workingAction: WorkingAction, successAction: SuccessAction<A>, errorAction: ErrorAction<A>, takeUntilTypeFilter?: string, ajaxBodyCreator?: AjaxBodyCreator<A>, ajaxRequestInjector?: AjaxRequestInjector<A>, useForkJoin?: boolean) => Epic<A, A, S, EpicDependencies>;
     /**
      * Creator to decorate an EpicCreator function that creates the Epic
      * @param props
      * @type A The type of action
      * @type S The type of state
      */
-    createEpicFromProps: <A extends AnyAction, S extends AnyObject>(props: EpicCreationProps<A>) => EpicCreator<A, S>;
+    createEpicFromProps: <A extends AnyAction, S extends AnyObject>(props: EpicCreationProps<A>) => Epic<A, A, S, EpicDependencies>;
     /**
      * Creator to decorate an EpicCreator function that creates the Epic
      * @param props
      * @type A The type of action
      * @type S The type of state
      */
-    createMergeEpicFromProps: <A extends AnyAction, S extends AnyObject>(props: EpicCreationProps<A>) => EpicCreator<A, S>;
+    createMergeEpicFromProps: <A extends AnyAction, S extends AnyObject>(props: EpicCreationProps<A>) => Epic<A, A, S, EpicDependencies>;
     /**
      * Creator to decorate an AJAX observable
      * @param ajax
-     * @param ajaxRequest
+     * @param ajaxConfig
      * @param successAction
      * @param errorAction
      * @param action
@@ -61,7 +62,7 @@ export interface IEpicService {
      * @param useForkJoin
      * @type A The type of action
      */
-    createAjaxObservable: <A extends AnyAction>(ajax: AjaxCreationMethod, ajaxRequest: AjaxRequest | AjaxRequest[], successAction: SuccessAction<A>, errorAction: ErrorAction<A>, action?: A, takeUntilOperator?: MonoTypeOperatorFunction<any>, ajaxBodyCreator?: AjaxBodyCreator<A>, ajaxRequestInjector?: AjaxRequestInjector<A>, useForkJoin?: boolean) => Observable<A>;
+    createAjaxObservable: <A extends AnyAction>(ajax: typeof AjaxCreationMethod, ajaxConfig: AjaxConfig | AjaxConfig[], successAction: SuccessAction<A>, errorAction: ErrorAction<A>, action?: A, takeUntilOperator?: MonoTypeOperatorFunction<any>, ajaxBodyCreator?: AjaxBodyCreator<A>, ajaxRequestInjector?: AjaxRequestInjector<A>, useForkJoin?: boolean) => Observable<A>;
 }
 declare const EpicService: IEpicService;
 export default EpicService;

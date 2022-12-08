@@ -2,24 +2,15 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="121"
    height="131"
    viewBox="0 0 32.014583 34.660418"
    version="1.1"
-   id="svg20973"
-   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
-   sodipodi:docname="icon-homeplate-highlight.svg">
+   id="svg20973">
   <defs
      id="defs20967">
     <filter
-       inkscape:collect="always"
        style="color-interpolation-filters:sRGB"
        id="filter8914"
        x="-0.10167822"
@@ -27,54 +18,17 @@
        y="-0.090854725"
        height="1.1817094">
       <feGaussianBlur
-         inkscape:collect="always"
          stdDeviation="0.94126328"
          id="feGaussianBlur8916" />
     </filter>
   </defs>
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="2.8"
-     inkscape:cx="-65.253928"
-     inkscape:cy="85.357808"
-     inkscape:document-units="px"
-     inkscape:current-layer="layer1"
-     showgrid="false"
-     units="px"
-     inkscape:pagecheckerboard="true"
-     inkscape:window-width="1920"
-     inkscape:window-height="1147"
-     inkscape:window-x="1912"
-     inkscape:window-y="-8"
-     inkscape:window-maximized="1" />
-  <metadata
-     id="metadata20970">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
   <g
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0,-262.33957)">
     <path
        style="display:inline;opacity:0.7;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.21950619;stroke-opacity:1;filter:url(#filter8914)"
        d="m 0,272.13583 22.217461,-10e-6 v 8.98916 L 11.108782,297.00004 0,281.12499 Z"
        id="rect4518-85-9-8-1-0-9"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cccccc"
        transform="matrix(1.1974506,0,0,1.1796328,2.7051346,-56.015897)" />
   </g>
 </svg>

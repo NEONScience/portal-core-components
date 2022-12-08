@@ -1,1 +1,1 @@
-export declare type StylesHook = (...props: unknown[]) => Record<string, string>;
+export type StylesHook = (...props: unknown[]) => Record<string, string>;

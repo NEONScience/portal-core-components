@@ -5,10 +5,13 @@ declare namespace DialogBase {
         const open: PropTypes.Requireable<boolean>;
         const onClose: PropTypes.Validator<(...args: any[]) => any>;
         const title: PropTypes.Validator<string>;
-        const toolbarChildren: PropTypes.Requireable<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
-        const children: PropTypes.Validator<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+        const toolbarChildren: PropTypes.Requireable<NonNullable<PropTypes.ReactNodeLike>>;
+        const children: PropTypes.Validator<NonNullable<NonNullable<PropTypes.ReactNodeLike>>>;
         const closeButtonProps: PropTypes.Requireable<{
-            [x: string]: string | number | null | undefined;
+            [x: string]: NonNullable<string | number | null | undefined> | null | undefined;
+        }>;
+        const customClasses: PropTypes.Requireable<{
+            [x: string]: string | null | undefined;
         }>;
         const nopaper: PropTypes.Requireable<boolean>;
         const style: PropTypes.Requireable<object>;
@@ -20,6 +23,8 @@ declare namespace DialogBase {
         export { toolbarChildren_1 as toolbarChildren };
         const closeButtonProps_1: {};
         export { closeButtonProps_1 as closeButtonProps };
+        const customClasses_1: {};
+        export { customClasses_1 as customClasses };
         const nopaper_1: boolean;
         export { nopaper_1 as nopaper };
         const style_1: {};

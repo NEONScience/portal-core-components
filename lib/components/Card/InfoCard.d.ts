@@ -4,8 +4,8 @@ interface InfoCardClasses {
     callout?: string;
     calloutIcon?: string;
 }
-declare type BaseInfoCardProps = Omit<BaseCardProps, 'type' | 'calloutClasses'>;
-declare type InfoCardProps = BaseInfoCardProps & {
+type BaseInfoCardProps = Omit<BaseCardProps, 'type' | 'calloutClasses'>;
+type InfoCardProps = BaseInfoCardProps & {
     classes?: InfoCardClasses;
 };
 declare const InfoCard: React.FC<InfoCardProps>;

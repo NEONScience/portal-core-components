@@ -1,3 +1,4 @@
+/* eslint-disable prefer-regex-literals */
 import { AuthSilentType, Undef } from '../../types/core';
 
 // Default hosts
@@ -7,7 +8,6 @@ export const DEFAULT_WEB_HOST = 'https://www.neonscience.org';
 interface IHostRegexService {
   getApiHostRegex: () => RegExp;
   getWebHostRegex: () => RegExp;
-  getDataCiteApiHostRegex: () => RegExp;
 }
 export const HostRegexService: IHostRegexService = {
   getApiHostRegex: (): RegExp => (
@@ -15,9 +15,6 @@ export const HostRegexService: IHostRegexService = {
   ),
   getWebHostRegex: (): RegExp => (
     new RegExp(/^(www|cert-www|int-www|local-www)[.](neonscience[.]org|.+[.]us-[0-9]{1}[.]platformsh[.]site)$/)
-  ),
-  getDataCiteApiHostRegex: (): RegExp => (
-    new RegExp(/^(api|api[.]test)[.]datacite[.]org$/)
   ),
 };
 
@@ -46,11 +43,9 @@ export const optionalEnvironmentVars = [
   'REACT_APP_NEON_SHOW_AOP_VIEWER',
   'REACT_APP_NEON_VISUS_PRODUCTS_BASE_URL',
   'REACT_APP_NEON_VISUS_IFRAME_BASE_URL',
-  'REACT_APP_NEON_DEFAULT_DATA_CITE_API_HOST',
   'REACT_APP_NEON_API_HOST_OVERRIDE',
   'REACT_APP_NEON_WEB_HOST_OVERRIDE',
   'REACT_APP_NEON_WS_HOST_OVERRIDE',
-  'REACT_APP_NEON_DATA_CITE_API_HOST_OVERRIDE',
 ];
 
 const EnvType = {
@@ -64,7 +59,6 @@ export interface NeonServerData {
   NeonPublicAPITokenHeader: Undef<string>;
   NeonPublicAPIToken: Undef<string>;
   NeonAuthSilentType: Undef<string>;
-  DataCiteAPIHost: Undef<string>;
 }
 
 export interface INeonEnvironment {
@@ -97,7 +91,6 @@ export interface INeonEnvironment {
 
   getVisusProductsBaseUrl: () => Undef<string>;
   getVisusIframeBaseUrl: () => Undef<string>;
-  getDataCiteApiHostDefault: () => string;
 
   getRouterBasePath: () => string;
   getRouterBaseHomePath: () => string;
@@ -105,22 +98,18 @@ export interface INeonEnvironment {
   getApiHostOverride: () => string;
   getWebHostOverride: () => string;
   getWsHostOverride: () => string;
-  getDataCiteApiHostOverride: () => Undef<string>;
 
   route: Record<string, (p?: string) => string>;
 
   getNeonServerData: () => NeonServerData|null;
   getNeonServerDataWebHost: () => string|null;
   getNeonServerDataApiHost: () => string|null;
-  getNeonServerDataDataCiteApiHost: () => string|null;
   getWebHost: () => string;
   getApiHost: () => string;
   getWebSocketHost: () => string;
-  getDataCiteApiHost: () => string;
 
   isApiHostValid: (host: string) => boolean;
   isWebHostValid: (host: string) => boolean;
-  isDataCiteApiHostValid: (host: string) => boolean;
 
   getApiTokenHeader: () => string;
   getApiToken: () => string;
@@ -167,6 +156,7 @@ const NeonEnvironment: INeonEnvironment = {
     taxonomy: (): string => '/taxonomy',
     taxonomyDownload: (): string => '/taxonomy/download',
     arcgisAssets: (): string => '/arcgis-assets',
+    doiCitations: (): string => '/dois/citations',
   },
 
   getDownloadApiPath: {
@@ -202,10 +192,6 @@ const NeonEnvironment: INeonEnvironment = {
   getVisusProductsBaseUrl: (): Undef<string> => process.env.REACT_APP_NEON_VISUS_PRODUCTS_BASE_URL,
   getVisusIframeBaseUrl: (): Undef<string> => process.env.REACT_APP_NEON_VISUS_IFRAME_BASE_URL,
 
-  getDataCiteApiHostDefault: (): string => (
-    process.env.REACT_APP_NEON_DEFAULT_DATA_CITE_API_HOST || ''
-  ),
-
   getRouterBasePath: (): string => process.env.REACT_APP_NEON_ROUTER_BASE || '',
   getRouterBaseHomePath: (): string => process.env.REACT_APP_NEON_ROUTER_BASE_HOME || '',
 
@@ -217,9 +203,6 @@ const NeonEnvironment: INeonEnvironment = {
   ),
   getWsHostOverride: (): string => (
     process.env.REACT_APP_NEON_WS_HOST_OVERRIDE || DEFAULT_API_HOST
-  ),
-  getDataCiteApiHostOverride: (): Undef<string> => (
-    process.env.REACT_APP_NEON_DATA_CITE_API_HOST_OVERRIDE
   ),
 
   route: {
@@ -291,23 +274,6 @@ const NeonEnvironment: INeonEnvironment = {
     return null;
   },
 
-  getNeonServerDataDataCiteApiHost: (): string|null => {
-    const serverData = NeonEnvironment.getNeonServerData();
-    if (serverData && (typeof serverData.DataCiteAPIHost === 'string')) {
-      const apiHost = serverData.DataCiteAPIHost;
-      try {
-        const { hostname: apiHostname } = new URL(apiHost);
-        if (NeonEnvironment.isDataCiteApiHostValid(apiHostname)) {
-          return apiHost;
-        }
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error('Failed to parse DataCite API host as URL', [e]);
-      }
-    }
-    return null;
-  },
-
   getWebHost: (): string => {
     // Check for local override
     if (NeonEnvironment.isDevEnv && NeonEnvironment.getWebHostOverride()) {
@@ -370,19 +336,6 @@ const NeonEnvironment: INeonEnvironment = {
       : `ws://${apiHostname}`;
   },
 
-  getDataCiteApiHost: (): string => {
-    // Check for local override
-    if (NeonEnvironment.isDevEnv && NeonEnvironment.getDataCiteApiHostOverride()) {
-      return NeonEnvironment.getDataCiteApiHostOverride() as string;
-    }
-    // Check for server data env var
-    const apiHost: string|null = NeonEnvironment.getNeonServerDataDataCiteApiHost();
-    if (apiHost !== null) {
-      return apiHost;
-    }
-    return NeonEnvironment.getDataCiteApiHostDefault();
-  },
-
   /**
    * Valid host names include localhost and known NEON hosts
    * @param host
@@ -409,22 +362,6 @@ const NeonEnvironment: INeonEnvironment = {
       return false;
     }
     const regex = HostRegexService.getWebHostRegex();
-    if (!regex) return false;
-    const matches = regex.exec(host);
-    if (!matches) return false;
-    return (matches.length > 0);
-  },
-
-  /**
-   * Validate the data cite API host
-   * @param host
-   * @returns
-   */
-  isDataCiteApiHostValid: (host: string): boolean => {
-    if ((typeof host !== 'string') || (host.length <= 0)) {
-      return false;
-    }
-    const regex = HostRegexService.getDataCiteApiHostRegex();
     if (!regex) return false;
     const matches = regex.exec(host);
     if (!matches) return false;

@@ -2,16 +2,14 @@ import {
   of,
   defer,
   forkJoin,
-  Subject,
-} from 'rxjs';
-import { ajax } from 'rxjs/ajax';
-import {
   map,
   tap,
   catchError,
   takeUntil,
   finalize,
-} from 'rxjs/operators';
+  Subject,
+} from 'rxjs';
+import { ajax } from 'rxjs/ajax';
 
 import NeonEnvironment from '../components/NeonEnvironment/NeonEnvironment';
 import { exists } from './typeUtil';
@@ -68,11 +66,11 @@ export const getJson = (
   );
 
   // Placeholders for subscriber events, handled upstream in observable
-  return rxObs$.subscribe(
-    (response) => response,
-    (error) => error,
-    (complete) => complete,
-  );
+  return rxObs$.subscribe({
+    next: (response) => response,
+    error: (error) => error,
+    complete: (complete) => complete,
+  });
 };
 
 export default getJson;

@@ -1,0 +1,12 @@
+{
+  "name": "paralleljs",
+  "version": "1.1.0",
+  "description": "parallel.js enables easy multi-thread processing in javascript",
+  "author": "Adam Savitzky <adam.savitzky@gmail.com>",
+  "contributors": [
+    "Sebastian Mayr <sebmaster16@gmail.com> (http://s3bmaster.blogspot.co.at/)",
+    "Amila Welihinda <amilajack@gmail.com> (https://amilajack.com/)"
+  ],
+  "license": "MIT",
+  "main": "lib/parallel.js"
+}

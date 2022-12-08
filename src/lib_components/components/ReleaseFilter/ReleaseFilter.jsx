@@ -24,6 +24,7 @@ import InfoIcon from '@material-ui/icons/InfoOutlined';
 import Theme from '../Theme/Theme';
 
 import RouteService from '../../service/RouteService';
+import ReleaseService from '../../service/ReleaseService';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -42,6 +43,12 @@ const useStyles = makeStyles((theme) => ({
   },
   descriptionContainer: {
     marginTop: theme.spacing(0.5),
+  },
+  releaseLinkDescriptionContainer: {
+    marginTop: theme.spacing(0.7),
+  },
+  releaseLinkAltDescriptionContainer: {
+    marginTop: theme.spacing(1.2),
   },
   descriptionFlexInnerContainer: {
     display: 'flex',
@@ -89,6 +96,9 @@ const useStyles = makeStyles((theme) => ({
       marginTop: '-2px !important',
     },
   },
+  releaseLinkButton: {
+    width: '100%',
+  },
 }));
 
 const UNSPECIFIED_NAME = 'Latest and Provisional';
@@ -113,6 +123,8 @@ const ReleaseFilter = (props) => {
     showDoi,
     showGenerationDate,
     showProductCount,
+    showReleaseLink,
+    releaseLinkDisplayType,
     skeleton,
     title,
     ...otherProps
@@ -152,7 +164,7 @@ const ReleaseFilter = (props) => {
     onChange(validatedNewRelease);
   };
 
-  const maxWidthStyle = maxWidth ? { maxWidth: `${maxWidth}px` } : {};
+  const maxWidthStyle = maxWidth ? { maxWidth: `${maxWidth}px` } : { width: '100%' };
 
   const input = (
     <OutlinedInput
@@ -194,9 +206,9 @@ const ReleaseFilter = (props) => {
   if (skeleton) {
     const skeletonStyle = { marginBottom: Theme.spacing(1) };
     return (
-      <div {...otherProps} style={{ maxWidth: `${maxWidth}px`, overflow: 'hidden' }}>
+      <div {...otherProps} style={{ ...maxWidthStyle, overflow: 'hidden' }}>
         {titleNode}
-        <Skeleton variant="rect" width={maxWidth} height={36} style={skeletonStyle} />
+        <Skeleton variant="rect" width={maxWidth || '100%'} height={36} style={skeletonStyle} />
         <Skeleton width="70%" height={16} style={skeletonStyle} />
       </div>
     );
@@ -243,6 +255,55 @@ const ReleaseFilter = (props) => {
           </Typography>
         </div>
       );
+    }
+  }
+
+  let releaseLinkNode = null;
+  if (showReleaseLink && !ReleaseService.isLatestNonProv(selectedRelease)) {
+    let appliedRelease = null;
+    const hasSelectedRelease = (selectedRelease !== null);
+    if (!hasSelectedRelease) {
+      appliedRelease = ReleaseService.getMostRecentReleaseTag(releases);
+    } else {
+      appliedRelease = selectedRelease;
+    }
+    if (appliedRelease !== null) {
+      const releaseLinkTooltip = 'Click to view general information about all data products in the '
+        + `${appliedRelease} release`;
+      switch (releaseLinkDisplayType) {
+        case 'Link':
+          releaseLinkNode = (
+            <div className={classes.releaseLinkDescriptionContainer}>
+              <Link
+                href={RouteService.getReleaseDetailPath(appliedRelease)}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {appliedRelease}
+              </Link>
+            </div>
+          );
+          break;
+        case 'Button':
+        default:
+          releaseLinkNode = (
+            <div className={classes.releaseLinkAltDescriptionContainer}>
+              <Tooltip placement="right" title={releaseLinkTooltip}>
+                <Button
+                  href={RouteService.getReleaseDetailPath(appliedRelease)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  variant="outlined"
+                  className={classes.releaseLinkButton}
+                  endIcon={<InfoIcon />}
+                >
+                  Release Details
+                </Button>
+              </Tooltip>
+            </div>
+          );
+          break;
+      }
     }
   }
 
@@ -364,6 +425,7 @@ const ReleaseFilter = (props) => {
           {unspecifiedNode}
           {generationDateNode}
           {productCountNode}
+          {releaseLinkNode}
           {doiNode}
         </div>
       </div>
@@ -375,6 +437,7 @@ const ReleaseFilter = (props) => {
       {unspecifiedNode}
       {generationDateNode}
       {productCountNode}
+      {releaseLinkNode}
       {doiNode}
     </div>
   );
@@ -401,6 +464,8 @@ ReleaseFilter.propTypes = {
   showDoi: PropTypes.bool,
   showGenerationDate: PropTypes.bool,
   showProductCount: PropTypes.bool,
+  showReleaseLink: PropTypes.bool,
+  releaseLinkDisplayType: PropTypes.oneOf(['Link', 'Button']),
   skeleton: PropTypes.bool,
   title: PropTypes.string,
 };
@@ -408,7 +473,7 @@ ReleaseFilter.propTypes = {
 ReleaseFilter.defaultProps = {
   excludeNullRelease: false,
   horizontal: false,
-  maxWidth: 236,
+  maxWidth: null,
   nullReleaseProductCount: null,
   onChange: () => {},
   releases: [],
@@ -416,6 +481,8 @@ ReleaseFilter.defaultProps = {
   showDoi: false,
   showGenerationDate: false,
   showProductCount: false,
+  showReleaseLink: false,
+  releaseLinkDisplayType: 'Button',
   skeleton: false,
   title: 'Release',
 };

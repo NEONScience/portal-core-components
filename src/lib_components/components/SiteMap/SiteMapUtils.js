@@ -476,6 +476,8 @@ export const FEATURES = {
     dataSource: FEATURE_DATA_SOURCES.NEON_CONTEXT,
     primaryIdOnly: true,
     featureShape: 'Polygon',
+    matchLocationType: 'DOMAIN',
+    amplifyHighlighted: true,
     style: { color: '#885eba', weight: 8 },
   },
   // Various Boundary Types

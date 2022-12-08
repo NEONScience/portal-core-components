@@ -775,12 +775,12 @@ describe('SiteMap - SiteMapUtils', () => {
       expect(L.Icon.mock.calls.length).toBe(1);
       expect(L.Icon.mock.calls[0].length).toBe(1);
       expect(L.Icon.mock.calls[0][0]).toStrictEqual({
-        iconUrl: 'icon-placeholder.svg',
-        iconRetinaUrl: 'icon-placeholder.svg',
+        iconUrl: 'svg-file.svg',
+        iconRetinaUrl: 'svg-file.svg',
         iconSize: [15, 15],
         iconAnchor: [7.5, 7.5],
         popupAnchor: [0, -7.5],
-        shadowUrl: 'icon-shape-square-shadow.svg',
+        shadowUrl: 'svg-file.svg',
         shadowSize: [18.8, 18.8],
         shadowAnchor: [9.4, 9.4],
       });
@@ -790,12 +790,12 @@ describe('SiteMap - SiteMapUtils', () => {
       expect(L.Icon.mock.calls.length).toBe(1);
       expect(L.Icon.mock.calls[0].length).toBe(1);
       expect(L.Icon.mock.calls[0][0]).toStrictEqual({
-        iconUrl: 'icon-pour-point.svg',
-        iconRetinaUrl: 'icon-pour-point.svg',
+        iconUrl: 'svg-file.svg',
+        iconRetinaUrl: 'svg-file.svg',
         iconSize: [16, 18],
         iconAnchor: [8, 9],
         popupAnchor: [0, -9],
-        shadowUrl: 'icon-shape-homeplate-shadow.svg',
+        shadowUrl: 'svg-file.svg',
         shadowSize: [20.2, 22.2],
         shadowAnchor: [10.1, 11.1],
       });
@@ -805,12 +805,12 @@ describe('SiteMap - SiteMapUtils', () => {
       expect(L.Icon.mock.calls.length).toBe(1);
       expect(L.Icon.mock.calls[0].length).toBe(1);
       expect(L.Icon.mock.calls[0][0]).toStrictEqual({
-        iconUrl: 'icon-tower.svg',
-        iconRetinaUrl: 'icon-tower.svg',
+        iconUrl: 'svg-file.svg',
+        iconRetinaUrl: 'svg-file.svg',
         iconSize: [48, 48],
         iconAnchor: [24, 24],
         popupAnchor: [0, -24],
-        shadowUrl: 'icon-shape-diamond-shadow.svg',
+        shadowUrl: 'svg-file.svg',
         shadowSize: [59.52, 59.52],
         shadowAnchor: [29.76, 29.76],
       });
@@ -820,12 +820,12 @@ describe('SiteMap - SiteMapUtils', () => {
       expect(L.Icon.mock.calls.length).toBe(1);
       expect(L.Icon.mock.calls[0].length).toBe(1);
       expect(L.Icon.mock.calls[0][0]).toStrictEqual({
-        iconUrl: 'icon-site-gradient-terrestrial.svg',
-        iconRetinaUrl: 'icon-site-gradient-terrestrial.svg',
+        iconUrl: 'svg-file.svg',
+        iconRetinaUrl: 'svg-file.svg',
         iconSize: [34, 34],
         iconAnchor: [17, 17],
         popupAnchor: [0, -17],
-        shadowUrl: 'icon-shape-circle-highlight.svg',
+        shadowUrl: 'svg-file.svg',
         shadowSize: [51, 51],
         shadowAnchor: [25.5, 25.5],
       });
@@ -840,12 +840,12 @@ describe('SiteMap - SiteMapUtils', () => {
       expect(L.Icon.mock.calls.length).toBe(1);
       expect(L.Icon.mock.calls[0].length).toBe(1);
       expect(L.Icon.mock.calls[0][0]).toStrictEqual({
-        iconUrl: 'icon-site-gradient-aquatic-selected.svg',
-        iconRetinaUrl: 'icon-site-gradient-aquatic-selected.svg',
+        iconUrl: 'svg-file.svg',
+        iconRetinaUrl: 'svg-file.svg',
         iconSize: [79.75, 79.75],
         iconAnchor: [39.875, 39.875],
         popupAnchor: [0, -39.875],
-        shadowUrl: 'icon-shape-circle-shadow.svg',
+        shadowUrl: 'svg-file.svg',
         shadowSize: [94.25, 94.25],
         shadowAnchor: [47.125, 47.125],
       });

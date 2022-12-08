@@ -1,6 +1,6 @@
 import { Dispatch } from 'react';
 import { AnyAction, Nullable, Undef, UnknownRecord } from '../../../types/core';
-import { DataProductRelease } from '../../../types/neonApi';
+import { DataProductDoiStatus, DataProductRelease } from '../../../types/neonApi';
 import { FetchStatus, FetchStatusState, DataProductCitationState, CitationRelease, ContextDataProduct } from './State';
 import { DataProductCitationViewProps, DataProductCitationViewState } from './ViewState';
 declare const Service: {
@@ -9,6 +9,7 @@ declare const Service: {
     calculateFetches: (state: DataProductCitationState) => DataProductCitationState;
     calculateAppStatus: (state: DataProductCitationState) => DataProductCitationState;
     applyReleasesGlobally: (state: DataProductCitationState, releases: DataProductRelease[]) => DataProductCitationState;
+    applyDoiStatusReleaseGlobally: (state: DataProductCitationState, doiStatus: DataProductDoiStatus) => DataProductCitationState;
     calculateContextState: (newState: DataProductCitationState, neonContextState: UnknownRecord, release: Nullable<string>, productCode: Nullable<string>) => DataProductCitationState;
     useViewState: (state: DataProductCitationState, props: DataProductCitationViewProps) => DataProductCitationViewState;
     getReleaseObject: (releases: CitationRelease[], release: Nullable<string>) => Nullable<CitationRelease>;

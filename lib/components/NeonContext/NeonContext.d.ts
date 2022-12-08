@@ -963,7 +963,7 @@ declare namespace DEFAULT_STATE {
 */
 declare function getWrappedComponent(Component: any): (props: any) => JSX.Element;
 declare namespace ProviderPropTypes {
-    const children_1: PropTypes.Requireable<string | number | boolean | {} | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
+    const children_1: PropTypes.Requireable<NonNullable<PropTypes.ReactNodeLike>>;
     export { children_1 as children };
     const fetchPartials_1: PropTypes.Requireable<boolean>;
     export { fetchPartials_1 as fetchPartials };

@@ -3,8 +3,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// import { select } from 'd3-selection';
-
 import { SVG, VALID_ENHANCED_STATUSES } from './AvailabilityUtils';
 
 import Theme, { COLORS } from '../Theme/Theme';

@@ -1,8 +1,8 @@
 import { UnknownRecord } from './core';
 import { IReleaseLike } from './internal';
 
-export interface NeonApiResponse {
-  data: unknown;
+export interface NeonApiResponse<T> {
+  data: T;
 }
 
 export interface BundledDataProduct {
@@ -65,4 +65,18 @@ export interface QuickStartGuideVersion {
   version: number;
   publishedDate: string;
   documents: QuickStartGuideDocument[];
+}
+
+export enum DoiStatusType {
+  FINDABLE = 'FINDABLE',
+  TOMBSTONED = 'TOMBSTONED',
+}
+
+export interface DataProductDoiStatus {
+  productCode: string;
+  release: string;
+  generationDate: string;
+  releaseGenerationDate: string;
+  url: string;
+  status: DoiStatusType;
 }

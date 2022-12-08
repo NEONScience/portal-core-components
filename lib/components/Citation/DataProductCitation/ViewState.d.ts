@@ -21,6 +21,7 @@ export declare enum DisplayType {
 export interface DataProductCitationViewState {
     status: ContextStatus;
     displayType: DisplayType;
+    isTombstoned: boolean;
     releases: CitationRelease[];
     releaseObject: Nullable<CitationRelease>;
     doiUrl: Nullable<string>;

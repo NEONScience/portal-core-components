@@ -3,7 +3,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import NeonContext from '../../NeonContext/NeonContext';
 
 import { Nullable, UnknownRecord } from '../../../types/core';
-import { DataProductRelease } from '../../../types/neonApi';
+import { DataProductDoiStatus, DataProductRelease } from '../../../types/neonApi';
 import { CitationBundleState, Release } from '../../../types/internal';
 
 export enum FetchStatus {
@@ -35,6 +35,7 @@ export interface FetchStatusState {
 export interface ContextFetchStatusState {
   product: Nullable<FetchStatusState>;
   productReleases: Record<string, FetchStatusState>;
+  productReleaseDois: Record<string, FetchStatusState>;
   bundleParents: Record<string, FetchStatusState>;
   bundleParentReleases: Record<string, Record<string, FetchStatusState>>;
   citationDownloads: Record<string, FetchStatusState>;
@@ -54,6 +55,7 @@ export interface ContextDataProduct {
 export interface DataState {
   product: Nullable<ContextDataProduct>;
   productReleases: Record<string, Nullable<ContextDataProduct>>;
+  productReleaseDois: Record<string, Nullable<DataProductDoiStatus>>;
   bundleParents: Record<string, ContextDataProduct>;
   bundleParentReleases: Record<string, Record<string, ContextDataProduct>>;
   releases: CitationRelease[];
@@ -79,6 +81,7 @@ const DEFAULT_STATE: DataProductCitationState = {
   fetches: {
     product: null,
     productReleases: {},
+    productReleaseDois: {},
     bundleParents: {},
     bundleParentReleases: {},
     citationDownloads: {},
@@ -92,6 +95,8 @@ const DEFAULT_STATE: DataProductCitationState = {
     product: null,
     // Product metadata on a per-release basis
     productReleases: {},
+    // Product / release DOI status
+    productReleaseDois: {},
     // Latest and provisional bundle parent product metadata
     bundleParents: {},
     // Bundle parent product metadata on a per-release basis

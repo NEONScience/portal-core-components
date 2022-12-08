@@ -11,4 +11,5 @@
      ...
    }
 */
-export default function parseLocationsArray(locationsArray?: any[]): any;
+export default function parseLocationsArray(locationsArray?: any[]): Parallel;
+import Parallel from "../vendor/paralleljs";

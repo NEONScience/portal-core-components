@@ -1,57 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="75"
    height="75"
    viewBox="0 0 19.84375 19.843751"
    version="1.1"
-   id="svg15374"
-   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
-   sodipodi:docname="icon-tower-soil-plot.svg">
-  <defs
-     id="defs15368" />
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="1.979899"
-     inkscape:cx="-9.3377525"
-     inkscape:cy="32.199778"
-     inkscape:document-units="px"
-     inkscape:current-layer="layer1"
-     showgrid="false"
-     units="px"
-     inkscape:pagecheckerboard="true"
-     inkscape:window-width="1238"
-     inkscape:window-height="640"
-     inkscape:window-x="274"
-     inkscape:window-y="271"
-     inkscape:window-maximized="0"
-     inkscape:document-rotation="0" />
-  <metadata
-     id="metadata15371">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+   id="svg15374">
   <g
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0,-277.15624)">
     <rect
@@ -69,49 +24,36 @@
        x="1.3229218"
        y="278.47919" />
     <path
-       inkscape:connector-curvature="0"
        style="display:inline;opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.16330439;stroke-opacity:1"
        d="m 15.950966,289.47538 -3.15898,3.15898 h 1.123445 l 2.035535,-2.03554 z"
        id="rect8773-0-3-33" />
     <path
        style="display:inline;opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.16330439;stroke-opacity:1"
        d="m 12.195639,281.25726 -8.0945962,8.0946 v 1.12241 l 9.2170092,-9.21701 z"
-       id="rect8773-0-3-4-3"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccccc" />
+       id="rect8773-0-3-4-3" />
     <path
        style="display:inline;opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.16330439;stroke-opacity:1"
        d="M 14.660087,281.78643 3.8116548,292.63435 h 1.123445 L 15.7825,281.78643 Z"
-       id="rect8773-0-3-5-23-8"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccccc" />
+       id="rect8773-0-3-5-23-8" />
     <path
-       inkscape:connector-curvature="0"
        style="display:inline;opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.16330439;stroke-opacity:1"
        d="m 15.950966,283.48918 -9.1451782,9.14518 h 1.12241 l 8.0227682,-8.02277 z"
        id="rect8773-0-3-5-2-7-5" />
     <path
-       inkscape:connector-curvature="0"
        style="display:inline;opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.16330439;stroke-opacity:1"
        d="m 15.950966,286.48228 -6.1520792,6.15208 h 1.1224102 l 5.029669,-5.02967 z"
        id="rect8773-0-3-5-6-4-9" />
     <path
        style="display:inline;opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.16330439;stroke-opacity:1"
        d="m 6.2084068,281.25726 -2.107364,2.10736 v 1.12242 l 3.230292,-3.22978 z"
-       id="rect8773-0-3-5-23-2-1"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccccc" />
+       id="rect8773-0-3-5-23-2-1" />
     <path
        style="display:inline;opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.16330439;stroke-opacity:1"
        d="m 9.2025398,281.25726 -5.101497,5.1015 v 1.12241 l 6.2239102,-6.22391 z"
-       id="rect8773-0-3-5-2-7-2-1"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccccc" />
+       id="rect8773-0-3-5-2-7-2-1" />
     <path
        style="display:inline;opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.50760341;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 3.8364588,280.99269 v 12.17084 H 16.007293 v -12.17084 z m 1.322917,1.32292 h 9.5250002 v 9.525 H 5.1593758 Z"
-       id="rect14634"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cccccccccc" />
+       id="rect14634" />
   </g>
 </svg>

@@ -57,11 +57,9 @@ const propRows = [
       </div>
     ),
     description: (
-      <>
-        <p>
-          Controls the login flow type.
-        </p>
-      </>
+      <p>
+        Controls the login flow type.
+      </p>
     ),
   },
   {
@@ -76,11 +74,9 @@ const propRows = [
       </div>
     ),
     description: (
-      <>
-        <p>
-          Controls the logout flow type.
-        </p>
-      </>
+      <p>
+        Controls the logout flow type.
+      </p>
     ),
   },
   {
@@ -93,17 +89,16 @@ const propRows = [
       </div>
     ),
     description: (
-      <>
-        <p>
-          Controls the display of the authentication component.
-        </p>
-      </>
+      <p>
+        Controls the display of the authentication component.
+      </p>
     ),
   },
 ];
 
 const renderUserCard = (isAuthenticated: boolean, userData: any): JSX.Element => {
   if (!isAuthenticated || !userData?.data?.user) {
+    // eslint-disable-next-line react/jsx-no-useless-fragment
     return (<></>);
   }
   const {
@@ -149,6 +144,7 @@ const renderSilentAuthSection = (
   classes: Record<string, string>,
   containerStyle: CSSProperties,
 ): JSX.Element => {
+  // eslint-disable-next-line react/jsx-no-useless-fragment
   let ssoToggleContent: JSX.Element = (<></>);
   if (ALLOW_SSO_TOGGLE) {
     ssoToggleContent = (

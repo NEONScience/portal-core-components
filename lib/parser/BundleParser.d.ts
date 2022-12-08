@@ -7,7 +7,7 @@ export interface IBundleParser {
      * @param response The AJAX response to parse from.
      * @return The types internal representation of the API response shape.
      */
-    parseBundlesResponse: (response: AjaxResponse) => ReleaseDataProductBundles[];
+    parseBundlesResponse: (response: AjaxResponse<unknown>) => ReleaseDataProductBundles[];
     /**
      * Parse the NEON API response shape to the context specific shape
      * with helper lookups.

@@ -2,8 +2,7 @@
 
 import React, { useEffect, useReducer, useState } from 'react';
 
-import { of } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { of, map, catchError } from 'rxjs';
 
 import cloneDeep from 'lodash/cloneDeep';
 

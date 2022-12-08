@@ -4,8 +4,8 @@ interface WarningCardClasses {
     callout?: string;
     calloutIcon?: string;
 }
-declare type BaseWarningCardProps = Omit<BaseCardProps, 'type' | 'calloutClasses'>;
-declare type WarningCardProps = BaseWarningCardProps & {
+type BaseWarningCardProps = Omit<BaseCardProps, 'type' | 'calloutClasses'>;
+type WarningCardProps = BaseWarningCardProps & {
     classes?: WarningCardClasses;
 };
 declare const WarningCard: React.FC<WarningCardProps>;

@@ -1,6 +1,5 @@
-import { of } from 'rxjs';
+import { of, map } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
-import { map } from 'rxjs/operators';
 
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 
@@ -258,6 +257,18 @@ const NeonApi = {
   getProductObservable: (productCode, release = null) => {
     const root = NeonEnvironment.getFullApiPath('products');
     const path = release ? `${root}/${productCode}/${release}` : `${root}/${productCode}`;
+    return getJsonObservable(path);
+  },
+
+  /**
+   * Gets the product DOI endpoint RxJS Observable for the specified product code and release.
+   * @param {string} productCode The product code to get for.
+   * @param {string} release An optional release to scope the product DOI.
+   * @return The RxJS Ajax Observable
+   */
+  getProductDoisObservable: (productCode, release) => {
+    const root = NeonEnvironment.getFullApiPath('products');
+    const path = `${root}/${productCode}/dois/${release}`;
     return getJsonObservable(path);
   },
 

@@ -8,8 +8,7 @@ import PropTypes from 'prop-types';
 
 import cloneDeep from 'lodash/cloneDeep';
 
-import { of } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { of, map, catchError } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 
 import REMOTE_ASSETS from '../../remoteAssetsMap/remoteAssetsMap';
@@ -390,6 +389,7 @@ const Provider = (props) => {
      Render
   */
   return (
+    // eslint-disable-next-line react/jsx-no-constructed-context-values
     <Context.Provider value={[state, dispatch]}>
       {children}
     </Context.Provider>

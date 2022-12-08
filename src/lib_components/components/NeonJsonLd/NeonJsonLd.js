@@ -1,8 +1,4 @@
-import { of } from 'rxjs';
-import {
-  map,
-  catchError,
-} from 'rxjs/operators';
+import { of, map, catchError } from 'rxjs';
 
 import NeonApi from '../NeonApi/NeonApi';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';

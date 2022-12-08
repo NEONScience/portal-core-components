@@ -1454,22 +1454,198 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
         expect(newState.status).toBe(TIME_SERIES_VIEWER_STATUS.WARNING);
         expect(newState.selection.sites).toStrictEqual([{ siteCode: 'S1', positions: [] }]);
       });
-      test('ends on ready for series status if able', () => {
+      test('ensure returns to ready when given a valid state', () => {
         state.dataFetches = { foo: true };
-        state.product.sites = { S1: { ...cloneDeep(expectedInitialSite) } };
-        state.selection.isDefault = false;
+        state.product.continuousDateRange = ['2021-06'];
+        state.product.sites = {
+          ABBY: {
+            ...cloneDeep(expectedInitialSite),
+            ...{
+              availableMonths: ['2021-06'],
+              positions: {
+                '000.010': {
+                  data: {
+                    '2021-06': {
+                      basic: {
+                        '30min': {
+                          url: '',
+                          status: 'SUCCESS',
+                          error: null,
+                          series: {
+                            startDateTime: {
+                              data: [
+                                '2021-06-01T00:00:00Z',
+                              ],
+                              range: [
+                                null,
+                                null
+                              ],
+                              sum: 0,
+                              count: 0,
+                              variance: 0
+                            },
+                            endDateTime: {
+                              data: [
+                                '2021-06-01T00:30:00Z',
+                              ],
+                              range: [
+                                null,
+                                null
+                              ],
+                              sum: 0,
+                              count: 0,
+                              variance: 0
+                            },
+                            windSpeedMean: {
+                              data: [
+                                0.18,
+                              ],
+                              range: [
+                                0.03,
+                                0.38
+                              ],
+                              sum: 174.07999999999996,
+                              count: 1440,
+                              variance: 0.004028793209876535
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
+                  history: [
+                    {
+                      'HOR.VER': '000.010',
+                      name: 'CFGLOC102010',
+                      description: 'Abby Road 2D Wind L1',
+                      start: '2010-01-01T00:00:00Z',
+                      end: '',
+                      referenceName: 'TOWER102005',
+                      referenceDescription: 'Abby Road Tower',
+                      referenceStart: '2010-01-01T00:00:00Z',
+                      referenceEnd: '',
+                      xOffset: '2.36',
+                      yOffset: '6.25',
+                      zOffset: '0.22',
+                      pitch: '0.00',
+                      roll: '0.00',
+                      azimuth: '180.00',
+                      referenceLatitude: '45.762439',
+                      referenceLongitude: '-122.330317',
+                      referenceElevation: '364.55',
+                      eastOffset: '-2.36',
+                      northOffset: '-6.25',
+                      xAzimuth: '270.00',
+                      yAzimuth: '180.00',
+                    },
+                  ],
+                },
+              },
+            },
+          },
+        };
         state.variables = {
-          foo: {
-            canBeDefault: true, isDateTime: false, downloadPkg: 'basic', units: 'foos',
+          startDateTime: {
+            dataType: 'dateTime',
+            description: 'Date and time at which a sampling is initiated',
+            downloadPkg: 'basic',
+            units: 'NA',
+            tables: {},
+            timeSteps: {},
+            sites: {},
+            isSelectable: false,
+            canBeDefault: false,
+            isDateTime: true
           },
-          startDate: {
-            canBeDefault: false, isDateTime: true, downloadPkg: 'basic', units: 'NA',
+          endDateTime: {
+            dataType: 'dateTime',
+            description: 'Date and time at which a sampling is completed',
+            downloadPkg: 'basic',
+            units: 'NA',
+            tables: {},
+            timeSteps: {},
+            sites: {},
+            isSelectable: false,
+            canBeDefault: false,
+            isDateTime: true
           },
+          windSpeedMean: {
+            dataType: 'real',
+            description: 'Arithmetic mean of wind speed',
+            downloadPkg: 'basic',
+            units: 'metersPerSecond',
+            tables: {},
+            timeSteps: {},
+            sites: {},
+            isSelectable: true,
+            canBeDefault: true,
+            isDateTime: false
+          },
+        };
+        state.selection = {
+          dateRange: [
+            '2021-06',
+            '2021-06'
+          ],
+          continuousDateRange: [
+            '2021-06'
+          ],
+          variables: [
+            'windSpeedMean'
+          ],
+          dateTimeVariable: 'startDateTime',
+          sites: [
+            {
+              siteCode: 'ABBY',
+              positions: [
+                '000.010'
+              ]
+            }
+          ],
+          timeStep: 'auto',
+          autoTimeStep: '30min',
+          qualityFlags: [],
+          rollPeriod: 1,
+          logscale: false,
+          yAxes: {
+            y1: {
+              units: 'metersPerSecond',
+              logscale: false,
+              dataRange: [
+                0.03,
+                0.38
+              ],
+              precision: 3,
+              standardDeviation: 0.063,
+              rangeMode: 'CENTERED',
+              axisRange: [
+                -0.033,
+                0.443
+              ]
+            },
+            y2: {
+              units: null,
+              logscale: false,
+              dataRange: [
+                null,
+                null
+              ],
+              precision: 0,
+              standardDeviation: 0,
+              rangeMode: 'CENTERED',
+              axisRange: [
+                0,
+                0
+              ]
+            },
+          },
+          isDefault: true,
+          digest: '{\"sites\":[{\"siteCode\":\"ABBY\",\"positions\":[\"000.010\"]}],\"dateRange\":[\"2021-06\",\"2021-06\"],\"variables\":[\"windSpeedMean\"]}',
         };
         const newState = reducer(state, { type: 'fetchDataFilesCompleted', token: 'foo' });
         expect(newState.dataFetches).toStrictEqual({});
         expect(newState.status).toBe(TIME_SERIES_VIEWER_STATUS.READY_FOR_SERIES);
-        expect(newState.selection.sites).toStrictEqual([{ siteCode: 'S1', positions: [] }]);
+        expect(newState.selection.sites.length).toStrictEqual(1);
       });
     });
     describe('noDataFilesFetchNecessary', () => {

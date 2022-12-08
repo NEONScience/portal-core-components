@@ -1,4 +1,4 @@
-import Parallel from 'paralleljs';
+import Parallel from '../vendor/paralleljs';
 
 /**
    Worker - Parse Locations Array

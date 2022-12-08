@@ -13,16 +13,17 @@ import cloneDeep from 'lodash/cloneDeep';
 
 import { parse } from 'papaparse';
 
-import { of, merge } from 'rxjs';
-import { ajax } from 'rxjs/ajax';
 import {
+  of,
+  merge,
   map,
   tap,
   mergeMap,
   switchMap,
   catchError,
   ignoreElements,
-} from 'rxjs/operators';
+} from 'rxjs';
+import { ajax } from 'rxjs/ajax';
 
 import NeonApi from '../NeonApi/NeonApi';
 import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
@@ -37,6 +38,7 @@ import { convertStateForStorage, convertStateFromStorage } from './StateStorageC
 import { TIME_SERIES_VIEWER_STATUS } from './constants';
 
 // 'get' is a reserved word so can't be imported with import
+// eslint-disable-next-line import/extensions
 const lodashGet = require('lodash/get.js');
 
 const VIEWER_MODE = {
@@ -187,7 +189,6 @@ export const DEFAULT_STATE = {
       y2: cloneDeep(DEFAULT_AXIS_STATE),
     },
     isDefault: true,
-    invalidDefaultVariables: new Set(), // canBeDefault vars found to have no series data after load
   },
   availableQualityFlags: new Set(),
   availableTimeSteps: new Set(['auto']),
@@ -394,6 +395,9 @@ const parseSiteMonthData = (site, files) => {
       if (!newSite.fetches.positions.url) { newSite.fetches.positions.url = url; }
       return;
     }
+    if (name.includes('science_review_flags')) {
+      return;
+    }
     // Split file name by (.); all DATA_FILE_PARTS validators must point to a valid part
     const parts = name.split('.');
     if (Object.keys(DATA_FILE_PARTS).some((part) => {
@@ -450,10 +454,11 @@ const parseSiteVariables = (previousVariables, siteCode, csv) => {
     tablesWithUid[table] = tablesWithUid[table] || fieldName === 'uid';
   });
   const validTables = new Set(Object.keys(tablesWithUid).filter((k) => !tablesWithUid[k]));
+  const ignoreTables = new Set(['sensor_positions', 'science_review_flags']);
   // Build the set of variables using only the valid tables
   const variablesSet = new Set();
   variables.data
-    .filter((variable) => validTables.has(variable.table))
+    .filter((variable) => validTables.has(variable.table) && !ignoreTables.has(variable.table))
     .forEach((variable) => {
       const {
         table,
@@ -527,9 +532,10 @@ const parseSitePositions = (site, csv) => {
  * state, and therefore should be idempotent. It also generates a new digest (stringified portion
  * of selection) to ensure the selection change effect is triggered on every meainingful change.
  * @param {Object} state - current state object
+ * @param {Set} invalidDefaultVariables - set of invalid default variables (null data)
  * @return {Object} updated object to apply to state.selection
  */
-const applyDefaultsToSelection = (state) => {
+const applyDefaultsToSelection = (state, invalidDefaultVariables = new Set()) => {
   const {
     status,
     product,
@@ -559,11 +565,13 @@ const applyDefaultsToSelection = (state) => {
     selection.sites[idx].positions.push(positions[0]);
   });
   // Variables
+  const hasVariablesSelected = Array.isArray(selection.variables)
+    && (selection.variables.length > 0);
   if (Object.keys(variables).length) {
     // Ensure the selection has at least one variable
-    if (!selection.variables.length) {
+    if (!hasVariablesSelected) {
       const defaultVar = Object.keys(variables)
-        .find((v) => (variables[v].canBeDefault && !selection.invalidDefaultVariables.has(v)));
+        .find((v) => (variables[v].canBeDefault && !invalidDefaultVariables.has(v)));
       if (defaultVar) {
         selection.variables.push(defaultVar);
         selection.yAxes.y1.units = variables[defaultVar].units;
@@ -619,7 +627,8 @@ const applyDefaultsToSelection = (state) => {
             monthMeans.push(series.sum / series.count);
             monthVariances.push(series.variance);
             selection.yAxes[yAxis].dataRange = getUpdatedValueRange(
-              selection.yAxes[yAxis].dataRange, series.range,
+              selection.yAxes[yAxis].dataRange,
+              series.range,
             );
           });
         });
@@ -650,17 +659,15 @@ const applyDefaultsToSelection = (state) => {
   // invalidDefaultVariables set, remove the variable from the selection, and run again.
   // We'll recurse through the variables available for the site/month/position until we find one
   // that works or show a meaningful error instructing the user to select a different site,
-  // month, or position. Note that as soon as the user makes an active selection of any kind
-  // isDefault will be false for the lifetime of the time series viewer instance, so this automated
-  // removal of a selected variable can only happen before any user selection happens.
+  // month, or position.
   if (
     status === TIME_SERIES_VIEWER_STATUS.READY_FOR_SERIES
-      && selection.isDefault && selection.variables.length
+      && !hasVariablesSelected && selection.variables.length
       && selection.yAxes.y1.dataRange.every((x) => x === null)
   ) {
-    selection.invalidDefaultVariables.add(selection.variables[0]);
+    invalidDefaultVariables.add(selection.variables[0]);
     selection.variables = [];
-    return applyDefaultsToSelection({ ...state, selection });
+    return applyDefaultsToSelection({ ...state, selection }, invalidDefaultVariables);
   }
   // Generate a new digest for effect comparison
   selection.digest = JSON.stringify({
@@ -912,7 +919,8 @@ const reducer = (state, action) => {
       delete newState.metaFetches[`fetchSitePositions.${action.siteCode}`];
       newState.product.sites[action.siteCode].fetches.positions.status = FETCH_STATUS.SUCCESS;
       newState.product.sites[action.siteCode] = parseSitePositions(
-        newState.product.sites[action.siteCode], action.csv,
+        newState.product.sites[action.siteCode],
+        action.csv,
       );
       calcSelection();
       calcStatus();
@@ -1549,6 +1557,7 @@ const Provider = (props) => {
      Render
   */
   return (
+    // eslint-disable-next-line react/jsx-no-constructed-context-values
     <Context.Provider value={[state, dispatch]}>
       {children}
     </Context.Provider>

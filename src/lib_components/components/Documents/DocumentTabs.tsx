@@ -156,7 +156,9 @@ const DocumentTabs: React.FC<DocumentTabsProps> = (props: DocumentTabsProps): JS
         style={{ display: selectedTab === index ? 'block' : 'none' }}
         className={classes.tabContentContainer}
       >
-        <DocumentViewer document={document} width={600} fullUrlPath={fullUrlPath} />
+        {selectedTab !== index ? null : (
+          <DocumentViewer document={document} width={600} fullUrlPath={fullUrlPath} />
+        )}
       </div>
     );
   };

@@ -185,7 +185,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
               tabIndex={0}
             >
               <div
-                className="MuiAvatar-root MuiAvatar-circle MuiChip-avatar makeStyles-avatarLarge-11 MuiChip-avatarColorPrimary MuiAvatar-colorDefault"
+                className="MuiAvatar-root MuiAvatar-circular MuiChip-avatar makeStyles-avatarLarge-11 MuiChip-avatarColorPrimary MuiAvatar-colorDefault"
                 style={
                   Object {
                     "backgroundColor": "#0073cf",
@@ -952,7 +952,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
               tabIndex={0}
             >
               <div
-                className="MuiAvatar-root MuiAvatar-circle MuiChip-avatar makeStyles-avatarLarge-11 MuiChip-avatarColorPrimary MuiAvatar-colorDefault"
+                className="MuiAvatar-root MuiAvatar-circular MuiChip-avatar makeStyles-avatarLarge-11 MuiChip-avatarColorPrimary MuiAvatar-colorDefault"
                 style={
                   Object {
                     "backgroundColor": "#0073cf",
@@ -1957,7 +1957,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
               tabIndex={0}
             >
               <div
-                className="MuiAvatar-root MuiAvatar-circle MuiChip-avatar makeStyles-avatarLarge-11 MuiChip-avatarColorPrimary MuiAvatar-colorDefault"
+                className="MuiAvatar-root MuiAvatar-circular MuiChip-avatar makeStyles-avatarLarge-11 MuiChip-avatarColorPrimary MuiAvatar-colorDefault"
                 style={
                   Object {
                     "backgroundColor": "#0073cf",
@@ -2724,7 +2724,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
               tabIndex={0}
             >
               <div
-                className="MuiAvatar-root MuiAvatar-circle MuiChip-avatar makeStyles-avatarLarge-11 MuiChip-avatarColorPrimary MuiAvatar-colorDefault"
+                className="MuiAvatar-root MuiAvatar-circular MuiChip-avatar makeStyles-avatarLarge-11 MuiChip-avatarColorPrimary MuiAvatar-colorDefault"
                 style={
                   Object {
                     "backgroundColor": "#0073cf",

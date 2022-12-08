@@ -342,7 +342,7 @@ const NeonHeader = forwardRef((props, headerRef) => {
     });
     script.onerror = (() => {
       setHeaderJsStatus(FETCH_STATUS.ERROR);
-      // eslint-disable-next-line no-unused-expressions
+      // eslint-disable-next-line no-unused-expressions, import/extensions
       import('../../remoteAssets/drupal-header.js');
     });
     document.body.appendChild(script);
@@ -375,6 +375,7 @@ const NeonHeader = forwardRef((props, headerRef) => {
 
   // Render Drupal header
   const injectAuth = !auth.useCore ? null : {
+    // eslint-disable-next-line react/no-unstable-nested-components
     replace: (domNode) => {
       const { attribs = {}, name } = domNode;
       if ((name === 'form') && (attribs.id === 'search-api-form')) {

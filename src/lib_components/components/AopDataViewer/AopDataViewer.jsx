@@ -6,9 +6,8 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 
-import { of } from 'rxjs';
+import { of, map, catchError } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
-import { map, catchError } from 'rxjs/operators';
 
 import dateFormat from 'dateformat';
 
@@ -30,6 +29,7 @@ import Typography from '@material-ui/core/Typography';
 import BackYearIcon from '@material-ui/icons/KeyboardArrowLeft';
 import ForwardYearIcon from '@material-ui/icons/KeyboardArrowRight';
 import InfoIcon from '@material-ui/icons/InfoOutlined';
+import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import WarningIcon from '@material-ui/icons/Warning';
 
 import Theme from '../Theme/Theme';
@@ -49,8 +49,8 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
   },
   iframe: {
-    minWidth: `${MIN_IFRAME_WIDTH}`,
-    minHeight: `${MIN_IFRAME_WIDTH}`,
+    minWidth: `${MIN_IFRAME_WIDTH}px`,
+    minHeight: `${MIN_IFRAME_WIDTH}px`,
     border: `1px solid ${theme.palette.grey[700]}`,
   },
   divider: {
@@ -68,6 +68,17 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(-0.5),
     marginLeft: theme.spacing(0.5),
   },
+  openInNewLink: {
+    display: 'block',
+    width: '100%',
+    textAlign: 'right',
+    marginTop: theme.spacing(0.5),
+    fontSize: '0.8rem',
+  },
+  openInNewIcon: {
+    fontSize: '0.95rem',
+    margin: theme.spacing(0, 0.5, -0.25, 0),
+  },
 }));
 
 /**
@@ -75,7 +86,7 @@ const useStyles = makeStyles((theme) => ({
    into an object keyed by sites each containing an object keyed by years
    each containing an array of flights. Each flight contains the month and URL.
 */
-/* eslint-disable no-param-reassign */
+/* eslint-disable no-param-reassign, function-paren-newline */
 const parseFetchResponse = (response) => response.data.siteCodes.reduce(
   (obj, site) => {
     obj[site.siteCode] = site.availableMonths.reduce(
@@ -93,7 +104,7 @@ const parseFetchResponse = (response) => response.data.siteCodes.reduce(
     return obj;
   }, {},
 );
-/* eslint-enable no-param-reassign */
+/* eslint-enable no-param-reassign, function-paren-newline */
 
 /**
    Functions to get slider marks and bounds
@@ -121,7 +132,12 @@ const getCurrentSliderBounds = (currentYears) => {
 */
 const AopDataViewer = (props) => {
   const classes = useStyles(Theme);
-  const { productCode, showTitle } = props;
+  const {
+    productCode,
+    showTitle,
+    fillContainer,
+    showOpenInNewWindow,
+  } = props;
 
   const [{ data: neonContextData }] = NeonContext.useNeonContextState();
   const { sites, states } = neonContextData;
@@ -187,7 +203,7 @@ const AopDataViewer = (props) => {
     if (site === null) {
       newSite = initialSite || Object.keys(data)[0];
     }
-    if (!Object.keys(data[newSite]).length) { return; }
+    if (!data[newSite] || !Object.keys(data[newSite]).length) { return; }
     let newYear = parseInt(Object.keys(data[newSite]).sort().reverse()[0], 10);
     if (site === null && initialYear && data[newSite][initialYear]) {
       newYear = initialYear;
@@ -238,9 +254,14 @@ const AopDataViewer = (props) => {
     if (!site || !year || !flight) { return ''; }
     const flightIdx = flight - 1;
     if (!data[site] || !data[site][year] || !data[site][year][flightIdx]) { return ''; }
+    const yearData = data[site][year];
+    if (!yearData[flightIdx].month) { return ''; }
+    const yearFlightMonth = yearData[flightIdx].month;
     const currentDataUrl = data[site][year][flightIdx].url;
+    const queryParams = `&dataproduct=${productCode}&site=${site}&month=${year}-${yearFlightMonth}`;
+    const appliedDataUrl = `${currentDataUrl}${queryParams}`;
     const title = encodeURIComponent(getDataSetTitle(currentSelection, data));
-    return `${NeonEnvironment.getVisusIframeBaseUrl()}?${currentDataUrl}&title=${title}`;
+    return `${NeonEnvironment.getVisusIframeBaseUrl()}?${appliedDataUrl}&title=${title}`;
   };
 
   /**
@@ -255,18 +276,27 @@ const AopDataViewer = (props) => {
   /**
      Effect: fetch and parse available data
   */
-  const handleFetchProductByCode = useCallback(() => ajax
-    .getJSON(`${NeonEnvironment.getVisusProductsBaseUrl()}${productCode}`)
-    .pipe(
-      map((response) => {
-        setData(parseFetchResponse(response));
-        setFetchSucceeded(true);
-      }),
-      catchError(() => {
-        setFetchFailed(true);
-        return of('Product not found');
-      }),
-    ).subscribe(), [productCode]);
+  const handleFetchProductByCode = useCallback(() => ajax({
+    method: 'GET',
+    url: `${NeonEnvironment.getVisusProductsBaseUrl()}/${productCode}`,
+    crossDomain: true,
+  }).pipe(
+    map((response) => {
+      if (!response
+          || !response.response
+          || !response.response.data
+          || !response.response.data.siteCodes
+          || (response.response.data.siteCodes.length <= 0)) {
+        throw Error('Product response contained no data');
+      }
+      setData(parseFetchResponse(response.response));
+      setFetchSucceeded(true);
+    }),
+    catchError(() => {
+      setFetchFailed(true);
+      return of('Product not found');
+    }),
+  ).subscribe(), [productCode]);
 
   useEffect(() => {
     if (!fetchCalled) {
@@ -458,17 +488,17 @@ const AopDataViewer = (props) => {
       {belowSm
         ? (
           <>
-            <Grid container spacing={2} justify="center" style={{ marginBottom: Theme.spacing(1) }}>
+            <Grid container spacing={2} justifyContent="center" style={{ marginBottom: Theme.spacing(1) }}>
               <Grid item xs={2}>{renderInputLabel('site', tooltips.site)}</Grid>
               <Grid item xs={10}>
                 {renderSiteSelect()}
               </Grid>
             </Grid>
-            <Grid container spacing={2} justify="center" style={{ marginBottom: Theme.spacing(1) }}>
+            <Grid container spacing={2} justifyContent="center" style={{ marginBottom: Theme.spacing(1) }}>
               <Grid item xs={2}>{renderInputLabel('year', tooltips.year)}</Grid>
               <Grid item xs={10}>{renderYearSlider()}</Grid>
             </Grid>
-            <Grid container spacing={2} justify="center" style={{ marginBottom: Theme.spacing(1) }}>
+            <Grid container spacing={2} justifyContent="center" style={{ marginBottom: Theme.spacing(1) }}>
               <Grid item xs={2}>{renderInputLabel('flight', tooltips.flight)}</Grid>
               <Grid item xs={10}>{renderFlightSelect()}</Grid>
             </Grid>
@@ -508,21 +538,47 @@ const AopDataViewer = (props) => {
     );
   }
 
+  const srcUrl = getCurrentIframeSrc();
+
   return (
     <FullWidthVisualization
       vizRef={iframeRef}
       minWidth={MIN_IFRAME_WIDTH}
-      deriveHeightFromWidth="auto"
+      allowHeightResize={fillContainer}
+      deriveHeightFromWidth={!fillContainer ? 'auto' : (width, container, viz) => (
+        (container.clientHeight - viz.offsetTop) - 10
+      )}
+      containerStyle={!fillContainer ? null : {
+        minWidth: `${MIN_IFRAME_WIDTH}px`,
+        position: 'absolute',
+        top: Theme.spacing(3),
+        left: Theme.spacing(3),
+        right: Theme.spacing(3),
+        bottom: Theme.spacing(3),
+        overflowX: 'hidden',
+        overflowY: 'auto',
+      }}
       data-selenium="aop-data-viewer"
     >
       {renderSelectionForm()}
       <iframe
-        src={getCurrentIframeSrc()}
+        src={srcUrl}
         title={getDataSetTitle(currentSelection)}
         ref={iframeRef}
         scrolling="no"
         className={classes.iframe}
       />
+      {!showOpenInNewWindow ? null : (
+        <Link
+          href={srcUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={classes.openInNewLink}
+        >
+          <OpenInNewIcon className={classes.openInNewIcon} />
+          Open in New Window
+        </Link>
+      )}
     </FullWidthVisualization>
   );
 };
@@ -533,6 +589,8 @@ AopDataViewer.propTypes = {
   initialSite: PropTypes.string,
   initialYear: PropTypes.number,
   initialFlight: PropTypes.number,
+  fillContainer: PropTypes.bool,
+  showOpenInNewWindow: PropTypes.bool,
 };
 
 AopDataViewer.defaultProps = {
@@ -540,6 +598,8 @@ AopDataViewer.defaultProps = {
   initialSite: null,
   initialYear: null,
   initialFlight: null,
+  fillContainer: false,
+  showOpenInNewWindow: false,
 };
 
 const WrappedAopDataViewer = Theme.getWrappedComponent(

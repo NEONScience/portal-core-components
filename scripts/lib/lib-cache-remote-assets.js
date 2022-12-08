@@ -14,11 +14,23 @@ import fetch from 'node-fetch';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
-import { REMOTE_ASSET_PATHS, REMOTE_ASSET_NAMES } from '../../src/lib_components/remoteAssetsMap/remoteAssets.js';
-
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const CACHED_REMOTE_ASSETS_PATH = path.join(__dirname, '../../src/lib_components/remoteAssets');
+
+const REMOTE_ASSET_PATHS = {
+  DRUPAL_THEME_CSS: '/themes/custom/neon/build/components/theme/theme.css',
+  DRUPAL_HEADER_JS: '/themes/custom/neon/build/components/header/header.js',
+  DRUPAL_HEADER_HTML: '/neon-assets/partial/header',
+  DRUPAL_FOOTER_HTML: '/neon-assets/partial/footer',
+};
+
+const REMOTE_ASSET_NAMES = {
+  DRUPAL_THEME_CSS: 'drupal-theme.css',
+  DRUPAL_HEADER_JS: 'drupal-header.js',
+  DRUPAL_HEADER_HTML: 'drupal-header.html',
+  DRUPAL_FOOTER_HTML: 'drupal-footer.html',
+};
 
 // When fetching cached remote assets, reference production
 const REMOTE_ASSETS_CACHE = {

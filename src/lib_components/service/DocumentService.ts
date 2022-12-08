@@ -6,6 +6,8 @@ import ImageIcon from '@material-ui/icons/Photo';
 import PresentationIcon from '@material-ui/icons/Tv';
 import SpreadsheetIcon from '@material-ui/icons/GridOn';
 
+import UAParser, { IDevice, UAParserInstance } from 'ua-parser-js';
+
 import NeonEnvironment from '../components/NeonEnvironment/NeonEnvironment';
 import { exists, existsNonEmpty, isStringNonEmpty } from '../util/typeUtil';
 import { DataProductSpec, NeonDocument, QuickStartGuideDocument } from '../types/neonApi';
@@ -25,11 +27,24 @@ export interface ParsedQsgNameResult {
   parsedVersion: number;
 }
 
+export const PDF_VIEWER_SUPPORTED_DOC_TYPES: string[] = [
+  'application/pdf',
+];
 export const VIEWER_SUPPORTED_DOC_TYPES: string[] = [
   'application/pdf',
   'text/html',
   'text/markdown',
   'text/plain',
+];
+// See full list of device types here:
+// https://github.com/faisalman/ua-parser-js#methods
+const VIEWER_NOT_SUPPORTED_DEVICE_TYPES: string[] = [
+  'console',
+  'mobile',
+  'tablet',
+  'smarttv',
+  'wearable',
+  'embedded',
 ];
 
 const documentTypes: Record<string, DocumentTypeListItemDef> = {
@@ -144,6 +159,8 @@ export interface IDocumentService {
   getQuickStartGuideNameRegex: () => RegExp;
   parseQuickStartGuideName: (name: string) => Nullable<ParsedQsgNameResult>;
   isViewerSupported: (doc: NeonDocument) => boolean;
+  isPdfViewerSupported: (doc: NeonDocument) => boolean;
+  isViewerDeviceSupported: () => boolean;
   transformSpecs: (specs: DataProductSpec[]) => NeonDocument[];
   transformSpec: (spec: DataProductSpec) => NeonDocument;
   transformQuickStartGuideDocuments: (documents: QuickStartGuideDocument[]) => NeonDocument[];
@@ -223,6 +240,7 @@ const DocumentService: IDocumentService = {
     isStringNonEmpty(name) && (name as string).startsWith('NEON.QSG.')
   ),
   getQuickStartGuideNameRegex: (): RegExp => (
+    // eslint-disable-next-line prefer-regex-literals
     new RegExp(/^(?<name>NEON[.]QSG[.]DP[0-9]{1}[.][0-9]{5}[.][0-9]{3})(?<version>v(?<versionNumber>[0-9]+))*(?<extension>[.](?<extensionName>[a-z]+))*$/)
   ),
   parseQuickStartGuideName: (name: string): Nullable<ParsedQsgNameResult> => {
@@ -246,6 +264,21 @@ const DocumentService: IDocumentService = {
     && isStringNonEmpty(doc.type)
     && VIEWER_SUPPORTED_DOC_TYPES.includes(doc.type)
   ),
+  isPdfViewerSupported: (doc: NeonDocument): boolean => (
+    exists(doc)
+    && isStringNonEmpty(doc.type)
+    && PDF_VIEWER_SUPPORTED_DOC_TYPES.includes(doc.type)
+  ),
+  isViewerDeviceSupported: (): boolean => {
+    const uaParser: UAParserInstance = new UAParser();
+    const device: IDevice = uaParser.getDevice();
+    let isSupported = true;
+    if (isStringNonEmpty(device.type)
+        && VIEWER_NOT_SUPPORTED_DEVICE_TYPES.includes(device.type as string)) {
+      isSupported = false;
+    }
+    return isSupported;
+  },
   transformSpecs: (specs: DataProductSpec[]): NeonDocument[] => {
     if (!existsNonEmpty(specs)) {
       return [];

@@ -5,9 +5,9 @@ import { getTestableItems } from '../NeonApi';
 import NeonEnvironment from '../../NeonEnvironment/NeonEnvironment';
 
 jest.mock('rxjs/ajax', () => {
-  const RxAjax = require('rxjs/internal/observable/dom/AjaxObservable');
+  const Rx = require('rxjs');
   return {
-    ajax: jest.fn().mockImplementation((arg1) => new RxAjax.AjaxObservable(arg1)),
+    ajax: jest.fn().mockImplementation((arg1) => new Rx.Observable(() => { return () => {}; })),
   };
 });
 ajax.getJSON = jest.fn().mockImplementation((arg1, arg2) => [arg1, arg2]);
@@ -83,8 +83,6 @@ describe('NeonApi', () => {
       [undefined, false, ''].forEach((arg) => {
         const result = getJsonObservable(arg);
         expect(result.constructor.name).toBe('Observable');
-        expect(result._isScalar).toBe(true);
-        expect(result.value).toBe(null);
       });
     });
   });
@@ -94,8 +92,6 @@ describe('NeonApi', () => {
       [undefined, false, ''].forEach((arg) => {
         const result = postJsonObservable(arg);
         expect(result.constructor.name).toBe('Observable');
-        expect(result._isScalar).toBe(true);
-        expect(result.value).toBe(null);
       });
     });
   });

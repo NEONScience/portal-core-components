@@ -6,118 +6,171 @@ exports[`TimeSeriesViewerSites PositionDetail Renders full detail when position 
   style={
     Object {
       "alignItems": "center",
+      "justifyContent": "space-between",
     }
   }
 >
   <div
     style={
       Object {
-        "marginRight": 24,
+        "display": "flex",
+        "flexDirection": "column",
       }
     }
   >
-    <p
-      className="MuiTypography-root MuiTypography-body1"
-      style={
-        Object {
-          "fontWeight": 600,
-        }
-      }
-    >
-      000.010
-    </p>
-    <p
-      className="MuiTypography-root MuiTypography-body2"
-      style={
-        Object {
-          "color": "#565a5c",
-        }
-      }
-    >
-      Elevation:
-    </p>
     <div
+      className="makeStyles-startFlex-20"
       style={
         Object {
           "alignItems": "center",
-          "display": "flex",
         }
       }
     >
-      <svg
-        aria-hidden={true}
-        className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-        focusable="false"
+      <div
         style={
           Object {
-            "color": "#565a5c",
-            "marginRight": 4,
-          }
-        }
-        viewBox="0 0 24 24"
-      >
-        <path
-          d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"
-        />
-      </svg>
-      <p
-        className="MuiTypography-root MuiTypography-body2"
-        style={
-          Object {
-            "color": "#565a5c",
+            "marginRight": 24,
           }
         }
       >
-        991.00m
-      </p>
+        <p
+          className="MuiTypography-root MuiTypography-body1"
+          style={
+            Object {
+              "fontWeight": 600,
+            }
+          }
+        >
+          000.010
+        </p>
+        <p
+          className="MuiTypography-root MuiTypography-body2"
+          style={
+            Object {
+              "color": "#565a5c",
+            }
+          }
+        >
+          Elevation:
+        </p>
+        <div
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+            }
+          }
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+            focusable="false"
+            style={
+              Object {
+                "color": "#565a5c",
+                "marginRight": 4,
+              }
+            }
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"
+            />
+          </svg>
+          <p
+            className="MuiTypography-root MuiTypography-body2"
+            style={
+              Object {
+                "color": "#565a5c",
+              }
+            }
+          >
+            991.00m
+          </p>
+        </div>
+      </div>
+      <div
+        style={
+          Object {
+            "marginRight": 24,
+          }
+        }
+      >
+        <p
+          className="MuiTypography-root MuiTypography-body2"
+        >
+          <span
+            style={
+              Object {
+                "fontWeight": 600,
+                "marginRight": 8,
+              }
+            }
+          >
+            x:
+          </span>
+          5m
+          <br />
+          <span
+            style={
+              Object {
+                "fontWeight": 600,
+                "marginRight": 8,
+              }
+            }
+          >
+            y:
+          </span>
+          6m
+          <br />
+          <span
+            style={
+              Object {
+                "fontWeight": 600,
+                "marginRight": 8,
+              }
+            }
+          >
+            z:
+          </span>
+          1m
+        </p>
+      </div>
     </div>
-  </div>
-  <div
-    style={
-      Object {
-        "marginRight": 24,
+    <div
+      style={
+        Object {
+          "marginRight": 24,
+          "marginTop": 4,
+        }
       }
-    }
-  >
-    <p
-      className="MuiTypography-root MuiTypography-body2"
     >
-      <span
+      <div>
+        <p
+          className="MuiTypography-root MuiTypography-body2"
+          style={
+            Object {
+              "fontWeight": 600,
+            }
+          }
+        >
+          Location:
+        </p>
+      </div>
+      <div
         style={
           Object {
-            "fontWeight": 600,
-            "marginRight": 8,
+            "color": "#565a5c",
           }
         }
       >
-        x:
-      </span>
-      5m
-      <br />
-      <span
-        style={
-          Object {
-            "fontWeight": 600,
-            "marginRight": 8,
-          }
-        }
-      >
-        y:
-      </span>
-      6m
-      <br />
-      <span
-        style={
-          Object {
-            "fontWeight": 600,
-            "marginRight": 8,
-          }
-        }
-      >
-        z:
-      </span>
-      1m
-    </p>
+        <p
+          className="MuiTypography-root MuiTypography-body2"
+        >
+          N/A (N/A)
+        </p>
+      </div>
+    </div>
   </div>
   <div
     style={
@@ -244,6 +297,31 @@ exports[`TimeSeriesViewerSites PositionDetail Renders full wide detail when posi
       </span>
       5m / 6m / 1m
     </p>
+  </div>
+  <div
+    className="makeStyles-startFlex-20"
+    style={
+      Object {
+        "color": "#565a5c",
+        "marginRight": 24,
+        "marginTop": 4,
+      }
+    }
+  >
+    <span
+      className="MuiTypography-root MuiTypography-caption"
+    >
+      <span
+        style={
+          Object {
+            "fontWeight": 600,
+          }
+        }
+      >
+        Location: 
+      </span>
+      N/A (N/A)
+    </span>
   </div>
 </div>
 `;
@@ -462,7 +540,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core)
       <img
         alt="Aquatic Core"
         height={32}
-        src="icon-site-core-aquatic.svg"
+        src="svg-file.svg"
         style={
           Object {
             "flexGrow": 0,
@@ -841,7 +919,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
       <img
         alt="Aquatic Gradient"
         height={32}
-        src="icon-site-gradient-aquatic.svg"
+        src="svg-file.svg"
         style={
           Object {
             "flexGrow": 0,
@@ -1283,7 +1361,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
       <img
         alt="Terrestrial Core"
         height={32}
-        src="icon-site-core-terrestrial.svg"
+        src="svg-file.svg"
         style={
           Object {
             "flexGrow": 0,
@@ -1725,7 +1803,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
       <img
         alt="Terrestrial Gradient"
         height={32}
-        src="icon-site-gradient-terrestrial.svg"
+        src="svg-file.svg"
         style={
           Object {
             "flexGrow": 0,
@@ -2189,7 +2267,7 @@ exports[`TimeSeriesViewerSites SiteOption Renders as expected without stateCode 
     <img
       alt="Terrestrial Gradient"
       height={24}
-      src="icon-site-gradient-terrestrial.svg"
+      src="svg-file.svg"
       style={
         Object {
           "flexGrow": 0,

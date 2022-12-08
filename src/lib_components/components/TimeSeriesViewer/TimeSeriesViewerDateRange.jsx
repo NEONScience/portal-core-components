@@ -238,6 +238,7 @@ const TimeSeriesViewerDateRange = (props) => {
                   data-selenium="time-series-viewer.date-range.start-input"
                   inputVariant="outlined"
                   margin="dense"
+                  orientation="portrait"
                   value={getYearMonthMoment(currentRange[0] || displayRange[sliderMin])}
                   onChange={(value) => handleChangeDatePicker(0, value)}
                   views={['month', 'year']}
@@ -252,6 +253,7 @@ const TimeSeriesViewerDateRange = (props) => {
                   data-selenium="time-series-viewer.date-range.end-input"
                   inputVariant="outlined"
                   margin="dense"
+                  orientation="portrait"
                   value={getYearMonthMoment(currentRange[1] || displayRange[sliderMax])}
                   onChange={(value) => handleChangeDatePicker(1, value)}
                   views={['month', 'year']}

@@ -599,7 +599,7 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
   <iframe
     className="makeStyles-iframe-2"
     scrolling="no"
-    src="undefined?server=https://roma.chpc.utah.edu:7070/mod_visus?&dataset=DP3.30010.001-D19-2018_BONA_2-L3-Camera-Mosaic-V01&title=Caribou-Poker%20Creeks%20Research%20Watershed%2C%20AK%20--%20August%202018%20--%20Flight%201%2F1"
+    src="undefined?server=https://roma.chpc.utah.edu:7070/mod_visus?&dataset=DP3.30010.001-D19-2018_BONA_2-L3-Camera-Mosaic-V01&dataproduct=DP3.30010.001&site=BONA&month=2018-08&title=Caribou-Poker%20Creeks%20Research%20Watershed%2C%20AK%20--%20August%202018%20--%20Flight%201%2F1"
     title=""
   />
 </div>
@@ -1204,7 +1204,7 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
   <iframe
     className="makeStyles-iframe-2"
     scrolling="no"
-    src="undefined?server=https://roma.chpc.utah.edu:7070/mod_visus?&dataset=DP3.30010.001-D19-2017_HEAL_1-L3-Camera-Mosaic-V01&title=Healy%2C%20AK%20--%20July%202017%20--%20Flight%201%2F1"
+    src="undefined?server=https://roma.chpc.utah.edu:7070/mod_visus?&dataset=DP3.30010.001-D19-2017_HEAL_1-L3-Camera-Mosaic-V01&dataproduct=DP3.30010.001&site=HEAL&month=2017-07&title=Healy%2C%20AK%20--%20July%202017%20--%20Flight%201%2F1"
     title=""
   />
 </div>
@@ -1832,7 +1832,7 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
   <iframe
     className="makeStyles-iframe-2"
     scrolling="no"
-    src="undefined?server=https://roma.chpc.utah.edu:7070/mod_visus?&dataset=DP3.30010.001-D17-2017_SJER_2-L3-Camera-Mosaic-V02&title=San%20Joaquin%20Experimental%20Range%2C%20CA%20--%20March%202017%20--%20Flight%202%2F2"
+    src="undefined?server=https://roma.chpc.utah.edu:7070/mod_visus?&dataset=DP3.30010.001-D17-2017_SJER_2-L3-Camera-Mosaic-V02&dataproduct=DP3.30010.001&site=SJER&month=2017-03&title=San%20Joaquin%20Experimental%20Range%2C%20CA%20--%20March%202017%20--%20Flight%202%2F2"
     title=""
   />
 </div>
@@ -2437,7 +2437,7 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
   <iframe
     className="makeStyles-iframe-2"
     scrolling="no"
-    src="undefined?server=https://roma.chpc.utah.edu:7070/mod_visus?&dataset=DP3.30010.001-D19-2018_BONA_2-L3-Camera-Mosaic-V01&title=Caribou-Poker%20Creeks%20Research%20Watershed%2C%20AK%20--%20August%202018%20--%20Flight%201%2F1"
+    src="undefined?server=https://roma.chpc.utah.edu:7070/mod_visus?&dataset=DP3.30010.001-D19-2018_BONA_2-L3-Camera-Mosaic-V01&dataproduct=DP3.30010.001&site=BONA&month=2018-08&title=Caribou-Poker%20Creeks%20Research%20Watershed%2C%20AK%20--%20August%202018%20--%20Flight%201%2F1"
     title=""
   />
 </div>
@@ -3037,7 +3037,7 @@ exports[`AopDataViewer renders with title disabled 1`] = `
   <iframe
     className="makeStyles-iframe-2"
     scrolling="no"
-    src="undefined?server=https://roma.chpc.utah.edu:7070/mod_visus?&dataset=DP3.30010.001-D19-2018_BONA_2-L3-Camera-Mosaic-V01&title=Caribou-Poker%20Creeks%20Research%20Watershed%2C%20AK%20--%20August%202018%20--%20Flight%201%2F1"
+    src="undefined?server=https://roma.chpc.utah.edu:7070/mod_visus?&dataset=DP3.30010.001-D19-2018_BONA_2-L3-Camera-Mosaic-V01&dataproduct=DP3.30010.001&site=BONA&month=2018-08&title=Caribou-Poker%20Creeks%20Research%20Watershed%2C%20AK%20--%20August%202018%20--%20Flight%201%2F1"
     title=""
   />
 </div>

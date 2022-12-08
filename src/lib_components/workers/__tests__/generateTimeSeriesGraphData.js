@@ -269,37 +269,38 @@ describe('generateTimeSeriesGraphData worker', () => {
           },
         },
       ],
-      [
-        'requires includes product have nested data for all selected sites and positions (2)',
-        {
-          selection: {
-            autoTimeStep: '1day',
-            timeStep: 'auto',
-            dateRange: ['2015-04', '2015-06'],
-            continuousDateRange: ['2015-04', '2015-05', '2015-06'],
-            qualityFlags: [],
-            dateTimeVariable: 'v1',
-            variables: ['v2'],
-            sites: [
-              { siteCode: 'BLUE', positions: ['050.070', '040.010'] },
-            ],
-          },
-          variables: {
-            v1: { units: 'bar', downloadPkg: 'basic' },
-            v2: { units: 'foo', downloadPkg: 'expanded' },
-          },
-          product: {
-            sites: {
-              BLUE: {
-                positions: {
-                  '050.070': { data: { '2015-04': true, '2015-05': true } },
-                  '040.010': { data: {} },
-                },
-              },
-            },
-          },
-        },
-      ],
+      //TODO: turn this into a verification that we get data back from this scenario
+      // [
+      //   'requires includes product have nested data for at least one selected site and position',
+      //   {
+      //     selection: {
+      //       autoTimeStep: '1day',
+      //       timeStep: 'auto',
+      //       dateRange: ['2015-04', '2015-06'],
+      //       continuousDateRange: ['2015-04', '2015-05', '2015-06'],
+      //       qualityFlags: [],
+      //       dateTimeVariable: 'v1',
+      //       variables: ['v2'],
+      //       sites: [
+      //         { siteCode: 'BLUE', positions: ['050.070', '040.010'] },
+      //       ],
+      //     },
+      //     variables: {
+      //       v1: { units: 'bar', downloadPkg: 'basic' },
+      //       v2: { units: 'foo', downloadPkg: 'expanded' },
+      //     },
+      //     product: {
+      //       sites: {
+      //         BLUE: {
+      //           positions: {
+      //             '050.070': { data: { '2015-04': true, '2015-05': true } },
+      //             '040.010': { data: {} },
+      //           },
+      //         },
+      //       },
+      //     },
+      //   },
+      // ],
     ])('input validation', (rule, inData) => {
       test(rule, (done) => {
         generateTimeSeriesGraphData(inData).then((outData) => {

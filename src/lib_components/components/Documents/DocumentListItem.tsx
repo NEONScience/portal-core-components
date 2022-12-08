@@ -8,8 +8,12 @@ import React, {
   Dispatch,
 } from 'react';
 
-import { of, Observable } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import {
+  of,
+  map,
+  catchError,
+  Observable,
+} from 'rxjs';
 
 import cloneDeep from 'lodash/cloneDeep';
 
@@ -62,6 +66,7 @@ const COMPONENT_SM_UPPER = 805;
 const useStyles = makeStyles((muiTheme: MuiTheme) => createStyles({
   listItemContainer: {
     display: 'flex',
+    overflow: 'auto',
   },
   listItem: {
     display: 'flex',

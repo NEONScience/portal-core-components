@@ -715,6 +715,7 @@ const BasicAvailabilityInterface = (props) => {
                 {...datePickerProps}
                 label="Start"
                 data-selenium="data-product-availability.date-range-start"
+                orientation="portrait"
                 value={TIME.getYearMonthMoment(dateRange.value[0])}
                 onChange={(newDate) => handleChangeStartDate(newDate)}
                 minDate={TIME.getYearMonthMoment(dateRange.validValues[0])}
@@ -725,6 +726,7 @@ const BasicAvailabilityInterface = (props) => {
                 {...datePickerProps}
                 label="End"
                 data-selenium="data-product-availability.date-range-end"
+                orientation="portrait"
                 value={TIME.getYearMonthMoment(dateRange.value[1])}
                 onChange={(newDate) => handleChangeEndDate(newDate)}
                 minDate={TIME.getYearMonthMoment(dateRange.value[0])}

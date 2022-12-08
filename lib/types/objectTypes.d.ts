@@ -1,3 +1,3 @@
-export declare type StringPropsObject = {
+export type StringPropsObject = {
     [key: string]: string;
 };

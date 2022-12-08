@@ -1,6 +1,10 @@
 /* eslint react/jsx-one-expression-per-line: 0 */
-import { of } from 'rxjs';
-import { map, switchMap, catchError } from 'rxjs/operators';
+import {
+  of,
+  map,
+  switchMap,
+  catchError,
+} from 'rxjs';
 
 import React, { useState } from 'react';
 
@@ -445,7 +449,7 @@ import NeonGraphQL from 'portal-core-components/lib/components/NeonGraphQL';
       </ExampleBlock>
       <CodeBlock>
         {`
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError } from 'rxjs';
 import React, { useState } from 'react';
 import NeonGraphQL from 'portal-core-components/lib/components/NeonGraphQL';
 
@@ -553,8 +557,12 @@ const myComponent = () => {
       </ExampleBlock>
       <CodeBlock>
         {`
-import { of } from 'rxjs';
-import { map, switchMap, catchError } from 'rxjs/operators';
+import {
+  of,
+  map,
+  switchMap,
+  catchError,
+} from 'rxjs';
 import React, { useState } from 'react';
 import NeonGraphQL from 'portal-core-components/lib/components/NeonGraphQL';
 
@@ -662,7 +670,7 @@ const myComponent = () => {
       </ExampleBlock>
       <CodeBlock>
         {`
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError } from 'rxjs';
 import React, { useState } from 'react';
 import NeonGraphQL from 'portal-core-components/lib/components/NeonGraphQL';
 
@@ -748,8 +756,12 @@ const myComponent = () => {
       </ExampleBlock>
       <CodeBlock>
         {`
-import { of } from 'rxjs';
-import { map, switchMap, catchError } from 'rxjs/operators';
+import {
+  of,
+  map,
+  switchMap,
+  catchError,
+} from 'rxjs';
 import React, { useState } from 'react';
 import NeonGraphQL from 'portal-core-components/lib/components/NeonGraphQL';
 

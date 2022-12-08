@@ -50,7 +50,7 @@ import {
   DOWNLOAD_SIZE_WARN,
 } from '../../util/manifestUtil';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = (belowSm, belowSmMd) => makeStyles((theme) => ({
   stepChip: {
     marginRight: theme.spacing(1),
     fontSize: '1rem',
@@ -75,6 +75,8 @@ const useStyles = makeStyles((theme) => ({
     '& svg': {
       margin: theme.spacing(0, -0.5, 0, 0.75),
     },
+    height: belowSmMd && !belowSm ? 'auto' : undefined,
+    padding: belowSmMd && !belowSm ? '5px 0px' : undefined,
   },
   startFlex: {
     display: 'flex',
@@ -115,9 +117,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const useDialogBaseStyles = (belowSm) => makeStyles((theme) => ({
+  contentPaper: {
+    margin: theme.spacing(10, 2, belowSm ? 9 : 2, 2),
+    padding: theme.spacing(3),
+    minWidth: '340px',
+  },
+}));
+
 export default function DownloadDataDialog() {
-  const classes = useStyles(Theme);
   const belowSm = useMediaQuery(Theme.breakpoints.only('xs'));
+  const belowSmMd = useMediaQuery('(max-width: 750px)');
+  const classes = useStyles(belowSm, belowSmMd)(Theme);
+  const dialogBaseClasses = useDialogBaseStyles(belowSm)(Theme);
 
   /**
      State (from DownloadDataContext)
@@ -308,11 +320,27 @@ export default function DownloadDataDialog() {
       );
       /* eslint-enable react/jsx-one-expression-per-line */
     }
-    return (
-      <Typography variant="body2" color="error">
-        Unable to estimate size
-      </Typography>
-    );
+    if ((fromManifest
+        && (manifest.status === 'fetched' || manifest.status === 'no-data')
+        && !(manifest.sizeEstimate > 0))
+      || (fromAOPManifest && !(s3Files.totalSize > 0))
+    ) {
+      return (
+        <Typography variant="body2" color="error">
+          No data selected
+        </Typography>
+      );
+    }
+    if ((fromManifest && (manifest.status === 'error'))
+      || (fromAOPManifest && !s3Files.isValid)
+    ) {
+      return (
+        <Typography variant="body2" color="error">
+          Unable to estimate size
+        </Typography>
+      );
+    }
+    return null;
   };
 
   const renderDownloadSizeWarning = () => {
@@ -341,7 +369,17 @@ export default function DownloadDataDialog() {
   };
 
   const renderFileType = () => {
-    if (manifest.status !== 'fetched') { return null; }
+    if (!fromManifest) { return null; }
+    if ((manifest.status !== 'fetched')
+      || ((manifest.status === 'fetched') && !(manifest.sizeEstimate > 0))
+    ) {
+      return (
+        <Typography variant="body2" data-selenium="download-data-dialog.file-type">
+          File Type:&nbsp;
+          <b>Not available</b>
+        </Typography>
+      );
+    }
     // TODO: Do other file types ever come back in the manifest response?
     const fileTypes = {
       'application/zip': 'ZIP (Compressed Text)',
@@ -377,28 +415,45 @@ export default function DownloadDataDialog() {
       if (fromManifest) {
         switch (manifest.status) {
           case 'fetched':
-            disabled = false;
+            disabled = !(manifest.sizeEstimate > 0);
             break;
           case 'fetching':
             buttonText = 'Fetching File List...';
             icon = <CircularProgress size={16} color="inherit" {...iconProps} />;
             break;
-          default:
+          case 'error':
             buttonText = 'Download Unavailable';
             icon = <ErrorIcon {...iconProps} />;
+            break;
+          case 'awaitingFetchCall':
+            break;
+          case 'no-data':
+          case 'invalid-config':
+          default:
+            buttonText = 'Download Unavailable';
             break;
         }
       }
     }
+    let appliedDownloadButtonStyle = {
+      whiteSpace: 'nowrap',
+    };
+    if (belowSmMd) {
+      appliedDownloadButtonStyle = {
+        ...appliedDownloadButtonStyle,
+        width: '100%',
+      };
+    }
     return (
       <Button
+        fullWidth={belowSm}
         data-selenium="download-data-dialog.download-button"
         data-gtm="download-data-dialog.download-button"
         size="large"
         color="primary"
         variant="contained"
         onClick={handleDownload}
-        style={{ whiteSpace: 'nowrap' }}
+        style={appliedDownloadButtonStyle}
         disabled={disabled}
         className={classes.gtmCaptureButton}
       >
@@ -411,9 +466,9 @@ export default function DownloadDataDialog() {
   const renderAuthSuggestion = () => {
     if (isAuthenticated) { return null; }
     /* eslint-disable react/jsx-one-expression-per-line */
-    const authStyles = { color: COLORS.GOLD[800], textAlign: 'right', whiteSpace: 'nowrap' };
+    const authStyles = { color: COLORS.GOLD[800], textAlign: 'right' };
     return (
-      <>
+      <div style={{ textAlign: 'right' }}>
         <Typography
           variant="body2"
           style={{
@@ -435,17 +490,89 @@ export default function DownloadDataDialog() {
           <Link target="_new" href={RouteService.getUserAccountsPath()}>Learn</Link> the benefits of having an account.
         </Typography>
         <NeonSignInButton />
-      </>
+      </div>
     );
     /* eslint-enable react/jsx-one-expression-per-line */
+  };
+
+  const renderDownloadButtonStepNote = () => {
+    const showDownloadButton = fromManifest || fromAOPManifest;
+    if (!showDownloadButton) { return null; }
+    const completableSteps = requiredSteps.filter((step) => step.key !== 'summary');
+    const completedSteps = requiredSteps.filter((step) => (
+      step.key !== 'summary' && step.isComplete
+    ));
+    const noDataAvailable = (fromManifest
+        && (manifest.status === 'fetched' || manifest.status === 'no-data')
+        && !(manifest.sizeEstimate > 0))
+      || (fromAOPManifest && !(s3Files.totalSize > 0));
+    if (!allStepsComplete) {
+      return (
+        <Typography variant="body2" style={{ marginTop: Theme.spacing(2), textAlign: 'right' }}>
+          {`Complete all steps to enable download. ${completedSteps.length} of ${completableSteps.length} completed.`}
+        </Typography>
+      );
+    }
+    return (
+      <Typography variant="body2" style={{ marginTop: Theme.spacing(2), textAlign: 'right' }}>
+        {noDataAvailable ? 'No data selected.' : 'All steps completed.'}
+      </Typography>
+    );
   };
 
   const renderActions = () => {
     const divClass = belowSm ? classes.startFlex : classes.endFlex;
     const showDownloadButton = fromManifest || fromAOPManifest;
+    if (belowSm) {
+      return (
+        <div>
+          <Grid container spacing={2}>
+            {showDownloadButton ? (
+              <Grid item xs={12} sm={12} md={8}>
+                {renderDownloadButton()}
+              </Grid>
+            ) : null}
+            <Grid item xs={12} sm={12} md={showDownloadButton ? 4 : 12}>
+              <Button
+                fullWidth
+                data-selenium="download-data-dialog.cancel-button"
+                data-gtm="download-data-dialog.cancel-button"
+                size="large"
+                color="primary"
+                variant="outlined"
+                onClick={handleCancel}
+                style={{ marginRight: Theme.spacing(showDownloadButton ? 1 : 0) }}
+                className={classes.gtmCaptureButton}
+              >
+                {showDownloadButton ? 'Cancel' : 'Done'}
+              </Button>
+            </Grid>
+          </Grid>
+          <div className={divClass} style={{ flexDirection: 'column', alignItems: 'flex-end' }}>
+            {renderDownloadButtonStepNote()}
+            {renderAuthSuggestion()}
+          </div>
+        </div>
+      );
+    }
+    let appliedActionsContainerStyles = {};
+    let appliedDismissActionStyle = {
+      marginRight: Theme.spacing(showDownloadButton ? 1 : 0),
+    };
+    if (showDownloadButton && belowSmMd) {
+      appliedActionsContainerStyles = {
+        flexDirection: 'column-reverse',
+        width: '100%',
+      };
+      appliedDismissActionStyle = {
+        marginRight: '0px',
+        marginTop: '10px',
+        width: '100%',
+      };
+    }
     return (
       <div className={divClass} style={{ flexDirection: 'column', alignItems: 'flex-end' }}>
-        <div className={divClass}>
+        <div className={divClass} style={appliedActionsContainerStyles}>
           <Button
             data-selenium="download-data-dialog.cancel-button"
             data-gtm="download-data-dialog.cancel-button"
@@ -453,18 +580,14 @@ export default function DownloadDataDialog() {
             color="primary"
             variant="outlined"
             onClick={handleCancel}
-            style={{ marginRight: Theme.spacing(showDownloadButton ? 1 : 0) }}
+            style={appliedDismissActionStyle}
             className={classes.gtmCaptureButton}
           >
             {showDownloadButton ? 'Cancel' : 'Done'}
           </Button>
           {showDownloadButton ? renderDownloadButton() : null}
         </div>
-        {showDownloadButton && !allStepsComplete ? (
-          <Typography variant="body2" style={{ marginTop: Theme.spacing(2) }}>
-            Complete all steps to enable download.
-          </Typography>
-        ) : null}
+        {renderDownloadButtonStepNote()}
         {renderAuthSuggestion()}
       </div>
     );
@@ -669,11 +792,13 @@ export default function DownloadDataDialog() {
   const releaseChipLabel = release.value === null
     ? 'Latest released and provisional data'
     : `Release: ${release.value}`;
+  const releaseChipLabelStyle = belowSmMd && !belowSm ? { whiteSpace: 'break-spaces' } : {};
   return (
     <DialogBase
       data-selenium="download-data-dialog"
       open={dialogOpen}
       onClose={handleCancel}
+      customClasses={dialogBaseClasses}
       title={fromManifest || fromAOPManifest ? 'Configure Data for Download' : 'Download Data from External Host'}
       closeButtonProps={{
         'data-gtm': 'download-data-dialog.cancel-button',
@@ -689,7 +814,7 @@ export default function DownloadDataDialog() {
     >
       {renderGtmTags()}
       <Grid container spacing={2} alignItems="flex-start" style={{ marginBottom: Theme.spacing(2) }}>
-        <Grid item xs={12} sm={6} md={8} data-selenium="download-data-dialog.product-info">
+        <Grid item xs={12} sm={6} md={6} lg={8} data-selenium="download-data-dialog.product-info">
           <Typography variant="h5" style={{ marginBottom: Theme.spacing(1.5) }}>
             {productData.productName}
           </Typography>
@@ -710,7 +835,7 @@ export default function DownloadDataDialog() {
             <Tooltip placement="bottom-start" title={releaseTooltip}>
               <Chip
                 label={(
-                  <div className={classes.startFlex}>
+                  <div className={classes.startFlex} style={releaseChipLabelStyle}>
                     {releaseChipLabel}
                     <InfoIcon fontSize="small" />
                   </div>
@@ -720,7 +845,7 @@ export default function DownloadDataDialog() {
             </Tooltip>
           </div>
         </Grid>
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid item xs={12} sm={6} md={6} lg={4}>
           {fromManifest || fromAOPManifest ? (
             <Hidden smUp>
               <div style={{ marginBottom: Theme.spacing(2) }}>

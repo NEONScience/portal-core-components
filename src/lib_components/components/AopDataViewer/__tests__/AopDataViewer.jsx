@@ -11,36 +11,38 @@ jest.mock('@material-ui/core/Select', () => mockReactComponent('@material-ui/cor
 jest.mock('@material-ui/core/Slider', () => mockReactComponent('@material-ui/core/Slider'));
 
 mockAjaxResponse({
-  data: {
-    productCode: 'DP3.30010.001',
-    siteCodes: [
-      {
-        siteCode: 'BONA',
-        availableMonths: ['2018-08', '2017-08'],
-        availableDataUrls: [
-          'server=https://roma.chpc.utah.edu:7070/mod_visus?&dataset=DP3.30010.001-D19-2018_BONA_2-L3-Camera-Mosaic-V01',
-          'server=https://roma.chpc.utah.edu:7070/mod_visus?&dataset=DP3.30010.001-D19-2017_BONA_1-L3-Camera-Mosaic-V01',
-        ],
-      },
-      {
-        siteCode: 'HEAL',
-        availableMonths: ['2018-08', '2017-07'],
-        availableDataUrls: [
-          'server=https://roma.chpc.utah.edu:7070/mod_visus?&dataset=DP3.30010.001-D19-2018_HEAL_2-L3-Camera-Mosaic-V01',
-          'server=https://roma.chpc.utah.edu:7070/mod_visus?&dataset=DP3.30010.001-D19-2017_HEAL_1-L3-Camera-Mosaic-V01',
-        ],
-      },
-      {
-        siteCode: 'SJER',
-        availableMonths: ['2019-03', '2018-03', '2017-03', '2017-03'],
-        availableDataUrls: [
-          'server=https://roma.chpc.utah.edu:7070/mod_visus?&dataset=DP3.30010.001-D17-2019_SJER_4-L3-Camera-Mosaic',
-          'server=https://roma.chpc.utah.edu:7070/mod_visus?&dataset=DP3.30010.001-D17-2018_SJER_3-L3-Camera-Mosaic-V01',
-          'server=https://roma.chpc.utah.edu:7070/mod_visus?&dataset=DP3.30010.001-D17-2017_SJER_2-L3-Camera-Mosaic-V01',
-          'server=https://roma.chpc.utah.edu:7070/mod_visus?&dataset=DP3.30010.001-D17-2017_SJER_2-L3-Camera-Mosaic-V02',
-        ],
-      },
-    ],
+  response: {
+    data: {
+      productCode: 'DP3.30010.001',
+      siteCodes: [
+        {
+          siteCode: 'BONA',
+          availableMonths: ['2018-08', '2017-08'],
+          availableDataUrls: [
+            'server=https://roma.chpc.utah.edu:7070/mod_visus?&dataset=DP3.30010.001-D19-2018_BONA_2-L3-Camera-Mosaic-V01',
+            'server=https://roma.chpc.utah.edu:7070/mod_visus?&dataset=DP3.30010.001-D19-2017_BONA_1-L3-Camera-Mosaic-V01',
+          ],
+        },
+        {
+          siteCode: 'HEAL',
+          availableMonths: ['2018-08', '2017-07'],
+          availableDataUrls: [
+            'server=https://roma.chpc.utah.edu:7070/mod_visus?&dataset=DP3.30010.001-D19-2018_HEAL_2-L3-Camera-Mosaic-V01',
+            'server=https://roma.chpc.utah.edu:7070/mod_visus?&dataset=DP3.30010.001-D19-2017_HEAL_1-L3-Camera-Mosaic-V01',
+          ],
+        },
+        {
+          siteCode: 'SJER',
+          availableMonths: ['2019-03', '2018-03', '2017-03', '2017-03'],
+          availableDataUrls: [
+            'server=https://roma.chpc.utah.edu:7070/mod_visus?&dataset=DP3.30010.001-D17-2019_SJER_4-L3-Camera-Mosaic',
+            'server=https://roma.chpc.utah.edu:7070/mod_visus?&dataset=DP3.30010.001-D17-2018_SJER_3-L3-Camera-Mosaic-V01',
+            'server=https://roma.chpc.utah.edu:7070/mod_visus?&dataset=DP3.30010.001-D17-2017_SJER_2-L3-Camera-Mosaic-V01',
+            'server=https://roma.chpc.utah.edu:7070/mod_visus?&dataset=DP3.30010.001-D17-2017_SJER_2-L3-Camera-Mosaic-V02',
+          ],
+        },
+      ],
+    },
   },
 });
 
