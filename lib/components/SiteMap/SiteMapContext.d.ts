@@ -78,7 +78,9 @@ declare function useSiteMapContext(): {
         pendingHierarchy: number;
     };
     focusLocation: {
-        current: null;
+        current: null; /**
+           Effect - trigger onChange for selection whenever selection has changed
+        */
         data: null;
         fetch: {
             status: null;
@@ -168,7 +170,9 @@ declare function useSiteMapContext(): {
         pendingHierarchy: number;
     };
     focusLocation: {
-        current: null;
+        current: null; /**
+           Effect - trigger onChange for selection whenever selection has changed
+        */
         data: null;
         fetch: {
             status: null;

@@ -56,6 +56,7 @@ import {
 } from './SiteMapUtils';
 
 import Theme, { COLORS } from '../Theme/Theme';
+import { exists } from '../../util/typeUtil';
 
 const useStyles = makeStyles((theme) => ({
   selectionSnackbar: {
@@ -219,6 +220,7 @@ const SiteMapFeature = (props) => {
     featureShape,
     iconSvg,
     primaryIdOnly = false,
+    amplifyHighlighted = false,
     parentDataFeatureKey,
   } = feature;
   const featureName = nameSingular || name || featureKey;
@@ -1429,6 +1431,28 @@ const SiteMapFeature = (props) => {
             e.target._path.setAttribute('stroke', darkenedBaseColor);
             e.target._path.setAttribute('fill', darkenedBaseColor);
           };
+        } else if (exists(focusLocation) && amplifyHighlighted) {
+          // Determine if the feature type of the focus location
+          // is set to amplify highlighted for this feature type (eg, same type)
+          const amplifyFeatureKeys = Object.keys(FEATURES)
+            .filter((k) => FEATURES[k].amplifyHighlighted && FEATURES[k].matchLocationType);
+          const isFocusAmplifiable = amplifyFeatureKeys.find((amplifyFeatureKey) => {
+            if (exists(state.focusLocation)
+              && exists(state.focusLocation.data)
+              && exists(state.focusLocation.data.type)
+            ) {
+              return new RegExp(FEATURES[amplifyFeatureKey].matchLocationType)
+                .test(state.focusLocation.data.type);
+            }
+            return false;
+          });
+          if (isFocusAmplifiable) {
+            shapeProps.color = ghostedHoverColor;
+            shapeProps.onMouseOut = (e) => {
+              e.target._path.setAttribute('stroke', ghostedHoverColor);
+              e.target._path.setAttribute('fill', ghostedHoverColor);
+            };
+          }
         }
         if (selectionActive) {
           let returnColor = isHighlighted ? darkenedBaseColor : featureStyle.color;
