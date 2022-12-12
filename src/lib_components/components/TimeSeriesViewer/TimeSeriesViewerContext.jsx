@@ -29,9 +29,11 @@ import NeonApi from '../NeonApi/NeonApi';
 import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import { forkJoinWithProgress } from '../../util/rxUtil';
+import { exists } from '../../util/typeUtil';
 
 import parseTimeSeriesData from '../../workers/parseTimeSeriesData';
 
+import DataPackageParser from '../../parser/DataPackageParser';
 import NeonSignInButtonState from '../NeonSignInButton/NeonSignInButtonState';
 import makeStateStorage from '../../service/StateStorageService';
 import { convertStateForStorage, convertStateFromStorage } from './StateStorageConverter';
@@ -497,6 +499,11 @@ const parseSiteVariables = (previousVariables, siteCode, csv) => {
   return { variablesSet, variablesObject: newStateVariables };
 };
 
+const parsePosition = (position) => {
+  if (!exists(position)) return position;
+  return DataPackageParser.parseSensorPosition(position);
+};
+
 /**
  * Build an object for state.product.sites[{site}] from a product/site positions fetch response
  * The site object should already have site position ids from the product/site/month fetch, so the
@@ -509,15 +516,18 @@ const parseSitePositions = (site, csv) => {
   const newSite = { ...site };
   const positions = parseCSV(csv, true); // Duplicated lines have been unintentionally seen here!
   positions.data.forEach((position) => {
-    const posId = position['HOR.VER'];
-    if (!newSite.positions[posId]) { newSite.positions[posId] = { data: {}, history: [] }; }
-    newSite.positions[posId].history.push(position);
+    const parsedPosition = parsePosition(position);
+    if (exists(parsedPosition)) {
+      const posId = parsedPosition.horVer;
+      if (!newSite.positions[posId]) { newSite.positions[posId] = { data: {}, history: [] }; }
+      newSite.positions[posId].history.push(parsedPosition);
+    }
   });
   // Sort position history by start/end time descending
   Object.keys(newSite.positions).forEach((posId) => {
     newSite.positions[posId].history.sort((a, b) => {
-      if (!a.end) { return 1; }
-      return (a.end < b.start) ? -1 : 1;
+      if (!a.sensorEndDateTime) { return 1; }
+      return (a.sensorEndDateTime < b.sensorStartDateTime) ? -1 : 1;
     });
   });
   return newSite;

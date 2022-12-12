@@ -36,20 +36,20 @@ declare namespace PositionHistoryButton {
         const position: PropTypes.Validator<string>;
         const fullWidth: PropTypes.Requireable<boolean>;
         const history: PropTypes.Validator<(PropTypes.InferProps<{
-            'HOR.VER': PropTypes.Validator<string>;
-            azimuth: PropTypes.Validator<string>;
-            pitch: PropTypes.Validator<string>;
-            roll: PropTypes.Validator<string>;
-            start: PropTypes.Requireable<string>;
-            end: PropTypes.Requireable<string>;
-            xOffset: PropTypes.Validator<string>;
-            yOffset: PropTypes.Validator<string>;
-            zOffset: PropTypes.Validator<string>;
-            referenceStart: PropTypes.Requireable<string>;
-            referenceEnd: PropTypes.Requireable<string>;
-            referenceLatitude: PropTypes.Validator<string>;
-            referenceLongitude: PropTypes.Validator<string>;
-            referenceElevation: PropTypes.Validator<string>;
+            horVer: PropTypes.Validator<string>;
+            azimuth: PropTypes.Requireable<number>;
+            pitch: PropTypes.Requireable<number>;
+            roll: PropTypes.Requireable<number>;
+            sensorStartDateTime: PropTypes.Requireable<string>;
+            sensorEndDateTime: PropTypes.Requireable<string>;
+            xOffset: PropTypes.Requireable<number>;
+            yOffset: PropTypes.Requireable<number>;
+            zOffset: PropTypes.Requireable<number>;
+            referenceLocationStartDateTime: PropTypes.Requireable<string>;
+            referenceLocationEndDateTime: PropTypes.Requireable<string>;
+            referenceLocationLatitude: PropTypes.Requireable<number>;
+            referenceLocationLongitude: PropTypes.Requireable<number>;
+            referenceLocationElevation: PropTypes.Requireable<number>;
         }> | null | undefined)[]>;
     }
     namespace defaultProps {

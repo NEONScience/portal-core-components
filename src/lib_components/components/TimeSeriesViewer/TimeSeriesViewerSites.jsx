@@ -381,38 +381,46 @@ function PositionHistoryButton(props) {
               <TableBody>
                 {history.map((row, idx) => {
                   const {
-                    start = '',
-                    end: rawEnd = '',
+                    sensorStartDateTime = '',
+                    sensorEndDateTime: rawEnd = '',
                     xOffset,
                     yOffset,
                     zOffset,
-                    referenceElevation,
+                    referenceLocationElevation,
                   } = row;
-                  const hasReferenceElevation = exists(referenceElevation) && (referenceElevation !== '');
-                  const hasZOffset = exists(zOffset) && (zOffset !== '');
+                  const hasReferenceElevation = exists(referenceLocationElevation)
+                    && !isNaN(referenceLocationElevation);
+                  const hasXOffset = exists(xOffset) && !isNaN(xOffset);
+                  const hasYOffset = exists(yOffset) && !isNaN(yOffset);
+                  const hasZOffset = exists(zOffset) && !isNaN(zOffset);
                   const parsedReferenceElevation = hasReferenceElevation
-                    ? parseFloat(referenceElevation, 10)
+                    ? referenceLocationElevation
                     : NaN;
-                  const parsedZOffset = hasZOffset ? parseFloat(zOffset, 10) : NaN;
+                  const parsedXOffset = hasXOffset ? xOffset : NaN;
+                  const parsedYOffset = hasYOffset ? yOffset : NaN;
+                  const parsedZOffset = hasZOffset ? zOffset : NaN;
                   let elevation = 'unknown';
                   if (!isNaN(parsedReferenceElevation)) {
-                    if (!isNaN(hasZOffset)) {
+                    if (!isNaN(parsedZOffset)) {
                       elevation = `${(parsedReferenceElevation + parsedZOffset).toFixed(2).toString()}m`;
                     } else {
                       elevation = `${parsedReferenceElevation}m`;
                     }
                   }
+                  const displayXOffset = hasXOffset ? `${xOffset}m` : '--';
+                  const displayYOffset = hasYOffset ? `${yOffset}m` : '--';
+                  const displayZOffset = hasZOffset ? `${zOffset}m` : '--';
                   const end = rawEnd === '' ? 'Current' : rawEnd;
                   const cellStyle = idx !== history.length - 1 ? {}
                     : { fontWeight: '600', borderBottom: 'none' };
-                  const key = `${start}${end}${xOffset}${yOffset}${zOffset}`;
+                  const key = `${sensorStartDateTime}${end}${parsedXOffset}${parsedYOffset}${parsedZOffset}`;
                   return (
                     <TableRow key={key}>
-                      <TableCell component="th" scope="row" style={cellStyle}>{start}</TableCell>
+                      <TableCell component="th" scope="row" style={cellStyle}>{sensorStartDateTime}</TableCell>
                       <TableCell component="th" scope="row" style={cellStyle}>{end}</TableCell>
-                      <TableCell align="right" style={cellStyle}>{`${xOffset}m`}</TableCell>
-                      <TableCell align="right" style={cellStyle}>{`${yOffset}m`}</TableCell>
-                      <TableCell align="right" style={cellStyle}>{`${zOffset}m`}</TableCell>
+                      <TableCell align="right" style={cellStyle}>{displayXOffset}</TableCell>
+                      <TableCell align="right" style={cellStyle}>{displayYOffset}</TableCell>
+                      <TableCell align="right" style={cellStyle}>{displayZOffset}</TableCell>
                       <TableCell align="right" style={cellStyle}>{elevation}</TableCell>
                     </TableRow>
                   );
@@ -436,20 +444,20 @@ PositionHistoryButton.propTypes = {
   position: PropTypes.string.isRequired,
   fullWidth: PropTypes.bool,
   history: PropTypes.arrayOf(PropTypes.shape({
-    'HOR.VER': PropTypes.string.isRequired,
-    azimuth: PropTypes.string.isRequired,
-    pitch: PropTypes.string.isRequired,
-    roll: PropTypes.string.isRequired,
-    start: PropTypes.string,
-    end: PropTypes.string,
-    xOffset: PropTypes.string.isRequired,
-    yOffset: PropTypes.string.isRequired,
-    zOffset: PropTypes.string.isRequired,
-    referenceStart: PropTypes.string,
-    referenceEnd: PropTypes.string,
-    referenceLatitude: PropTypes.string.isRequired,
-    referenceLongitude: PropTypes.string.isRequired,
-    referenceElevation: PropTypes.string.isRequired,
+    horVer: PropTypes.string.isRequired,
+    azimuth: PropTypes.number,
+    pitch: PropTypes.number,
+    roll: PropTypes.number,
+    sensorStartDateTime: PropTypes.string,
+    sensorEndDateTime: PropTypes.string,
+    xOffset: PropTypes.number,
+    yOffset: PropTypes.number,
+    zOffset: PropTypes.number,
+    referenceLocationStartDateTime: PropTypes.string,
+    referenceLocationEndDateTime: PropTypes.string,
+    referenceLocationLatitude: PropTypes.number,
+    referenceLocationLongitude: PropTypes.number,
+    referenceLocationElevation: PropTypes.number,
   })).isRequired,
 };
 
@@ -505,24 +513,30 @@ function PositionDetail(props) {
   const { history } = state.product.sites[siteCode].positions[position];
   const current = history.length - 1 || 0;
   const {
-    name,
-    description,
-    referenceName,
-    referenceDescription,
-    referenceElevation = '--',
-    xOffset = '--',
-    yOffset = '--',
-    zOffset = '--',
+    sensorName,
+    sensorDescription,
+    referenceLocationName,
+    referenceLocationDescription,
+    referenceLocationElevation,
+    xOffset,
+    yOffset,
+    zOffset,
   } = history[current] || {};
-  const hasReferenceElevation = exists(referenceElevation) && (referenceElevation !== '');
-  const hasZOffset = exists(zOffset) && (zOffset !== '') && (zOffset !== '--');
+  const hasReferenceElevation = exists(referenceLocationElevation)
+    && !isNaN(referenceLocationElevation);
+  const hasXOffset = exists(xOffset) && !isNaN(xOffset);
+  const hasYOffset = exists(yOffset) && !isNaN(yOffset);
+  const hasZOffset = exists(zOffset) && !isNaN(zOffset);
   const parsedReferenceElevation = hasReferenceElevation
-    ? parseFloat(referenceElevation, 10)
+    ? referenceLocationElevation
     : NaN;
-  const parsedZOffset = hasZOffset ? parseFloat(zOffset, 10) : NaN;
+  const parsedZOffset = hasZOffset ? zOffset : NaN;
+  const displayXOffset = hasXOffset ? `${xOffset}m` : '--';
+  const displayYOffset = hasYOffset ? `${yOffset}m` : '--';
+  const displayZOffset = hasZOffset ? `${zOffset}m` : '--';
   let elevation = '--';
   if (!isNaN(parsedReferenceElevation)) {
-    if (!isNaN(hasZOffset)) {
+    if (!isNaN(parsedZOffset)) {
       elevation = `${(parsedReferenceElevation + parsedZOffset).toFixed(2).toString()}m`;
     } else {
       elevation = `${parsedReferenceElevation}m`;
@@ -531,15 +545,17 @@ function PositionDetail(props) {
   const fadeStyle = { color: Theme.palette.grey[500] };
   const axisStyle = { marginRight: Theme.spacing(1), fontWeight: 600 };
   const renderDescription = () => {
-    const hasName = isStringNonEmpty(name);
-    const hasDescription = isStringNonEmpty(description);
-    const hasReferenceName = isStringNonEmpty(referenceName);
-    const hasReferenceDescription = isStringNonEmpty(referenceDescription);
-    const appliedName = hasName ? name : 'N/A';
-    const appliedDescription = hasDescription ? description : 'N/A';
+    const hasName = isStringNonEmpty(sensorName);
+    const hasDescription = isStringNonEmpty(sensorDescription);
+    const hasReferenceName = isStringNonEmpty(referenceLocationName);
+    const hasReferenceDescription = isStringNonEmpty(referenceLocationDescription);
+    const appliedName = hasName ? sensorName : 'N/A';
+    const appliedDescription = hasDescription ? sensorDescription : 'N/A';
     const includeReference = hasReferenceName || hasReferenceDescription;
-    const appliedReferenceName = hasReferenceName ? referenceName : 'N/A';
-    const appliedReferenceDescription = hasReferenceDescription ? referenceDescription : 'N/A';
+    const appliedReferenceName = hasReferenceName ? referenceLocationName : 'N/A';
+    const appliedReferenceDescription = hasReferenceDescription
+      ? referenceLocationDescription
+      : 'N/A';
     return wide ? (
       <>
         <div
@@ -637,7 +653,7 @@ function PositionDetail(props) {
       <div className={classes.startFlex}>
         <Typography variant="body2">
           <span style={{ ...axisStyle }}>x / y / z:</span>
-          {`${xOffset}m / ${yOffset}m / ${zOffset}m`}
+          {`${displayXOffset} / ${displayYOffset} / ${displayZOffset}`}
         </Typography>
       </div>
       {renderDescription()}
@@ -670,13 +686,13 @@ function PositionDetail(props) {
           <div style={{ marginRight: Theme.spacing(3) }}>
             <Typography variant="body2">
               <span style={{ ...axisStyle }}>x:</span>
-              {`${xOffset}m`}
+              {`${displayXOffset}`}
               <br />
               <span style={{ ...axisStyle }}>y:</span>
-              {`${yOffset}m`}
+              {`${displayYOffset}`}
               <br />
               <span style={{ ...axisStyle }}>z:</span>
-              {`${zOffset}m`}
+              {`${displayZOffset}`}
             </Typography>
           </div>
         </div>

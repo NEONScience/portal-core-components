@@ -23,3 +23,28 @@ export interface CitationBundleState {
   parentCodes: string[];
   doiProductCode: Nullable<string>;
 }
+
+export interface SensorPosition {
+  horVer: string;
+  sensorName: string;
+  sensorDescription: Nullable<string>;
+  sensorStartDateTime: Nullable<string>;
+  sensorEndDateTime: Nullable<string>;
+  referenceLocationName: Nullable<string>;
+  referenceLocationDescription: Nullable<string>;
+  referenceLocationStartDateTime: Nullable<string>;
+  referenceLocationEndDateTime: Nullable<string>;
+  xOffset: Nullable<number>;
+  yOffset: Nullable<number>;
+  zOffset: Nullable<number>;
+  pitch: Nullable<number>;
+  roll: Nullable<number>;
+  azimuth: Nullable<number>;
+  referenceLocationLatitude: Nullable<number>;
+  referenceLocationLongitude: Nullable<number>;
+  referenceLocationElevation: Nullable<number>;
+  eastOffset: Nullable<number>;
+  northOffset: Nullable<number>;
+  xAzimuth: Nullable<number>;
+  yAzimuth: Nullable<number>;
+}
