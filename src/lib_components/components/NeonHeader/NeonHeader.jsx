@@ -16,6 +16,8 @@ import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
 import ApplicationMenu from './ApplicationMenu';
 
+import HeaderSearchSvg from '../../images/svg/header-search.svg';
+
 const DRUPAL_HEADER_HTML = REMOTE_ASSETS.DRUPAL_HEADER_HTML.KEY;
 
 const AUTH_ELEMENT_ID = 'header__authentication-ui';
@@ -71,6 +73,11 @@ const useStyles = makeStyles((theme) => ({
           display: 'block',
         },
       },
+    },
+  },
+  headerContainerFallback: {
+    '& li.siteSearch > a': {
+      background: `url('${HeaderSearchSvg}') center center no-repeat !important`,
     },
   },
   // Injecting these styles as a means of fixing up the search display
@@ -337,29 +344,42 @@ const NeonHeader = forwardRef((props, headerRef) => {
     setHeaderJsStatus(FETCH_STATUS.FETCHING);
     const script = document.createElement('script');
     script.src = REMOTE_ASSETS.DRUPAL_HEADER_JS.url;
-    script.onload = (() => {
+    script.onload = () => {
       setHeaderJsStatus(FETCH_STATUS.SUCCESS);
-    });
-    script.onerror = (() => {
-      setHeaderJsStatus(FETCH_STATUS.ERROR);
-      // eslint-disable-next-line no-unused-expressions, import/extensions
-      import('../../remoteAssets/drupal-header.js');
-    });
+    };
+    script.onerror = () => {
+      (async () => {
+        // eslint-disable-next-line no-unused-expressions, import/extensions
+        await import('../../remoteAssets/drupal-header.js');
+        setHeaderJsStatus(FETCH_STATUS.SUCCESS);
+      })();
+    };
     document.body.appendChild(script);
-    // TODO: verify header.js loaded and if not load the fallback
   }, [headerJsStatus, drupalCssLoaded, headerRenderDelayed, setHeaderJsStatus, renderMode]);
 
   // Delay the rendering of the drupal header one render cycle to allow the CSS to propogate into
   // the environment. This prevents a "flash" of the unstyled menu in the drupal header on page load
+  let appliedHtmlCheck = headerHTML;
+  switch (renderMode) {
+    case 'drupal':
+      appliedHtmlCheck = headerHTML;
+      break;
+    case 'drupal-fallback':
+      appliedHtmlCheck = DRUPAL_HEADER_HTML_FALLBACK;
+      break;
+    case 'loading':
+    default:
+      break;
+  }
   useLayoutEffect(() => {
-    if (neonContextIsActive && headerHTML && drupalCssLoaded && !headerRenderDelayed) {
+    if (neonContextIsActive && appliedHtmlCheck && drupalCssLoaded && !headerRenderDelayed) {
       const timeout = window.setTimeout(() => setHeaderRenderDelayed(true), 0);
       return () => window.clearTimeout(timeout);
     }
     return () => { };
   }, [
     neonContextIsActive,
-    headerHTML,
+    appliedHtmlCheck,
     drupalCssLoaded,
     headerRenderDelayed,
   ]);
@@ -368,7 +388,7 @@ const NeonHeader = forwardRef((props, headerRef) => {
   if (renderMode === 'loading') {
     return (
       <header ref={headerRef} id="header" className={classes.skeletonHeader}>
-        <Skeleton variant="rect" height={`${belowLg ? 60 : 125}px`} width="100%" />
+        <Skeleton variant="rect" height={`${belowLg ? 60 : 120}px`} width="100%" />
       </header>
     );
   }
@@ -404,15 +424,20 @@ const NeonHeader = forwardRef((props, headerRef) => {
       );
     },
   };
+  let appliedClassName = classes.headerContainer;
+  if (unstickyDrupalHeader) {
+    appliedClassName = `${classes.unstickyHeader} ${classes.headerContainer}`;
+  }
+  if (renderMode === 'drupal-fallback') {
+    appliedClassName = `${appliedClassName} ${classes.headerContainerFallback}`;
+  }
   const html = renderMode === 'drupal' ? headerHTML : DRUPAL_HEADER_HTML_FALLBACK;
   return (
     <>
       <header
         ref={headerRef}
         id="header"
-        className={unstickyDrupalHeader
-          ? `${classes.unstickyHeader} ${classes.headerContainer}`
-          : classes.headerContainer}
+        className={appliedClassName}
       >
         {HTMLReactParser(html, injectAuth)}
       </header>

@@ -2,7 +2,7 @@
 
 exports[`NeonHeader renders fallback with drupalCSSLoaded prop and error NeonContext state 1`] = `
 <header
-  className="makeStyles-unstickyHeader-3 makeStyles-headerContainer-4"
+  className="makeStyles-unstickyHeader-3 makeStyles-headerContainer-5 makeStyles-headerContainerFallback-4"
   id="header"
 >
   <div>
@@ -13,7 +13,7 @@ exports[`NeonHeader renders fallback with drupalCSSLoaded prop and error NeonCon
 
 exports[`NeonHeader renders with drupalCssLoaded prop and success NeonContext state 1`] = `
 <header
-  className="makeStyles-unstickyHeader-3 makeStyles-headerContainer-4"
+  className="makeStyles-unstickyHeader-3 makeStyles-headerContainer-5"
   id="header"
 >
   <div>
@@ -24,7 +24,7 @@ exports[`NeonHeader renders with drupalCssLoaded prop and success NeonContext st
 
 exports[`NeonHeader renders with drupalCssLoaded prop, success NeonContext state, and core auth 1`] = `
 <header
-  className="makeStyles-unstickyHeader-3 makeStyles-headerContainer-4"
+  className="makeStyles-unstickyHeader-3 makeStyles-headerContainer-5"
   id="header"
 >
   <div>
@@ -42,7 +42,7 @@ exports[`NeonHeader renders with no props and active/fetching NeonContext state 
     className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
     style={
       Object {
-        "height": "125px",
+        "height": "120px",
         "width": "100%",
       }
     }
@@ -59,7 +59,7 @@ exports[`NeonHeader renders with no props and error NeonContext state 1`] = `
     className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
     style={
       Object {
-        "height": "125px",
+        "height": "120px",
         "width": "100%",
       }
     }
@@ -76,7 +76,7 @@ exports[`NeonHeader renders with no props and inactive NeonContext state 1`] = `
     className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
     style={
       Object {
-        "height": "125px",
+        "height": "120px",
         "width": "100%",
       }
     }
@@ -93,7 +93,7 @@ exports[`NeonHeader renders with no props and success NeonContext state 1`] = `
     className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
     style={
       Object {
-        "height": "125px",
+        "height": "120px",
         "width": "100%",
       }
     }

@@ -2,16 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import HTMLReactParser from 'html-react-parser';
 
+import { makeStyles } from '@material-ui/core/styles';
 import Skeleton from '@material-ui/lab/Skeleton';
 
 import REMOTE_ASSETS from '../../remoteAssetsMap/remoteAssetsMap';
 import DRUPAL_FOOTER_HTML_FALLBACK from '../../remoteAssets/drupal-footer.html';
 import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
+import Theme from '../Theme/Theme';
 
 const DRUPAL_FOOTER_HTML = REMOTE_ASSETS.DRUPAL_FOOTER_HTML.KEY;
 
+const useStyles = makeStyles((theme) => ({
+  footerContainer: {
+    '& .footer-bottom__wrapper': {
+      background: '#4B372E',
+    },
+  },
+}));
+
 const NeonFooter = (props) => {
   const { drupalCssLoaded } = props;
+  const classes = useStyles(Theme);
   const [{
     isActive: neonContextIsActive,
     fetches: { [DRUPAL_FOOTER_HTML]: footerFetch },
@@ -51,7 +62,7 @@ const NeonFooter = (props) => {
     case 'drupal-fallback':
     default:
       return (
-        <footer id="footer">
+        <footer id="footer" className={classes.footerContainer}>
           {HTMLReactParser(DRUPAL_FOOTER_HTML_FALLBACK)}
         </footer>
       );

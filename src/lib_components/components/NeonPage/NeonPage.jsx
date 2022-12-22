@@ -516,18 +516,20 @@ const NeonPage = (props) => {
     link.rel = 'stylesheet';
     link.href = REMOTE_ASSETS[DRUPAL_THEME_CSS].url;
     link.crossOrigin = 'anonymous';
-    link.onload = (() => {
+    link.onload = () => {
       setDrupalCssStatus(FETCH_STATUS.SUCCESS);
-    });
-    link.onerror = (() => {
-      // eslint-disable-next-line no-unused-expressions
-      import('../../remoteAssets/drupal-theme.css');
-      // Assume this local import worked and still report the load as successful
-      // We do this because props on header and footer express whether the CSS is loaded and we want
-      // to simplify that as a boolean. The header and footer don't care where the CSS came from
-      // so long as it's there.
-      setDrupalCssStatus(FETCH_STATUS.SUCCESS);
-    });
+    };
+    link.onerror = () => {
+      (async () => {
+        // eslint-disable-next-line no-unused-expressions
+        await import('../../remoteAssets/drupal-theme.css');
+        // Assume this local import worked and still report the load as successful
+        // We do this because props on header and footer express whether the CSS is
+        // loaded and we want to simplify that as a boolean. The header and footer
+        // don't care where the CSS came from so long as it's there.
+        setDrupalCssStatus(FETCH_STATUS.SUCCESS);
+      })();
+    };
     document.body.appendChild(link);
   }, [useSomeDrupalAssets, drupalCssStatus, setDrupalCssStatus]);
 

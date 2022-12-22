@@ -788,11 +788,13 @@
   #header input[type="password"]:not(.MuiInputBase-input),
   #header input[type="date"]:not(.MuiInputBase-input),
   #header input[type="email"]:not(.MuiInputBase-input),
-  #header input[type="number"]:not(.MuiInputBase-input), #footer input[type="text"]:not(.MuiInputBase-input),
+  #header input[type="number"]:not(.MuiInputBase-input),
+  #header input[type="time"]:not(.MuiInputBase-input), #footer input[type="text"]:not(.MuiInputBase-input),
   #footer input[type="password"]:not(.MuiInputBase-input),
   #footer input[type="date"]:not(.MuiInputBase-input),
   #footer input[type="email"]:not(.MuiInputBase-input),
-  #footer input[type="number"]:not(.MuiInputBase-input) {
+  #footer input[type="number"]:not(.MuiInputBase-input),
+  #footer input[type="time"]:not(.MuiInputBase-input) {
     height: 3rem;
     background: #fff;
     border: 1px solid #D7D9D9;
@@ -808,21 +810,25 @@
       #header input[type="password"]:not(.MuiInputBase-input),
       #header input[type="date"]:not(.MuiInputBase-input),
       #header input[type="email"]:not(.MuiInputBase-input),
-      #header input[type="number"]:not(.MuiInputBase-input), #footer input[type="text"]:not(.MuiInputBase-input),
+      #header input[type="number"]:not(.MuiInputBase-input),
+      #header input[type="time"]:not(.MuiInputBase-input), #footer input[type="text"]:not(.MuiInputBase-input),
       #footer input[type="password"]:not(.MuiInputBase-input),
       #footer input[type="date"]:not(.MuiInputBase-input),
       #footer input[type="email"]:not(.MuiInputBase-input),
-      #footer input[type="number"]:not(.MuiInputBase-input) {
+      #footer input[type="number"]:not(.MuiInputBase-input),
+      #footer input[type="time"]:not(.MuiInputBase-input) {
         font-size: 1rem; } }
     #header input[type="text"]:not(.MuiInputBase-input):hover,
     #header input[type="password"]:not(.MuiInputBase-input):hover,
     #header input[type="date"]:not(.MuiInputBase-input):hover,
     #header input[type="email"]:not(.MuiInputBase-input):hover,
-    #header input[type="number"]:not(.MuiInputBase-input):hover, #footer input[type="text"]:not(.MuiInputBase-input):hover,
+    #header input[type="number"]:not(.MuiInputBase-input):hover,
+    #header input[type="time"]:not(.MuiInputBase-input):hover, #footer input[type="text"]:not(.MuiInputBase-input):hover,
     #footer input[type="password"]:not(.MuiInputBase-input):hover,
     #footer input[type="date"]:not(.MuiInputBase-input):hover,
     #footer input[type="email"]:not(.MuiInputBase-input):hover,
-    #footer input[type="number"]:not(.MuiInputBase-input):hover {
+    #footer input[type="number"]:not(.MuiInputBase-input):hover,
+    #footer input[type="time"]:not(.MuiInputBase-input):hover {
       box-shadow: none;
       transition: all 0.25s;
       border: 1px solid #0073CF !important; }
@@ -834,7 +840,9 @@
     #header input[type="email"]:not(.MuiInputBase-input):active,
     #header input[type="email"]:not(.MuiInputBase-input):focus,
     #header input[type="number"]:not(.MuiInputBase-input):active,
-    #header input[type="number"]:not(.MuiInputBase-input):focus, #footer input[type="text"]:not(.MuiInputBase-input):active, #footer input[type="text"]:not(.MuiInputBase-input):focus,
+    #header input[type="number"]:not(.MuiInputBase-input):focus,
+    #header input[type="time"]:not(.MuiInputBase-input):active,
+    #header input[type="time"]:not(.MuiInputBase-input):focus, #footer input[type="text"]:not(.MuiInputBase-input):active, #footer input[type="text"]:not(.MuiInputBase-input):focus,
     #footer input[type="password"]:not(.MuiInputBase-input):active,
     #footer input[type="password"]:not(.MuiInputBase-input):focus,
     #footer input[type="date"]:not(.MuiInputBase-input):active,
@@ -842,7 +850,9 @@
     #footer input[type="email"]:not(.MuiInputBase-input):active,
     #footer input[type="email"]:not(.MuiInputBase-input):focus,
     #footer input[type="number"]:not(.MuiInputBase-input):active,
-    #footer input[type="number"]:not(.MuiInputBase-input):focus {
+    #footer input[type="number"]:not(.MuiInputBase-input):focus,
+    #footer input[type="time"]:not(.MuiInputBase-input):active,
+    #footer input[type="time"]:not(.MuiInputBase-input):focus {
       transition: all 0.25s;
       border: 1px solid #0073CF !important;
       box-shadow: 0px 0px 0px 4px #C4C4C4;
@@ -851,16 +861,21 @@
     #header input[type="password"]:not(.MuiInputBase-input):disabled,
     #header input[type="date"]:not(.MuiInputBase-input):disabled,
     #header input[type="email"]:not(.MuiInputBase-input):disabled,
-    #header input[type="number"]:not(.MuiInputBase-input):disabled, #footer input[type="text"]:not(.MuiInputBase-input):disabled,
+    #header input[type="number"]:not(.MuiInputBase-input):disabled,
+    #header input[type="time"]:not(.MuiInputBase-input):disabled, #footer input[type="text"]:not(.MuiInputBase-input):disabled,
     #footer input[type="password"]:not(.MuiInputBase-input):disabled,
     #footer input[type="date"]:not(.MuiInputBase-input):disabled,
     #footer input[type="email"]:not(.MuiInputBase-input):disabled,
-    #footer input[type="number"]:not(.MuiInputBase-input):disabled {
+    #footer input[type="number"]:not(.MuiInputBase-input):disabled,
+    #footer input[type="time"]:not(.MuiInputBase-input):disabled {
       color: #A2A4A3;
       background: #F5F6F7;
       border: 1px solid #D7D9D9;
       box-sizing: border-box;
       box-shadow: inset 0px 1px 0px #7C7F80; }
+  #header .time-start, #footer .time-start {
+    display: -ms-flexbox;
+    display: flex; }
   #header textarea, #footer textarea {
     background: #fff;
     border: 1px solid #D7D9D9;
@@ -1376,24 +1391,23 @@
   #header form:not(.layout-paragraphs-component-form) input[type="radio"]:not(.rlglc-input) + label:hover:before, #footer form:not(.layout-paragraphs-component-form) input[type="radio"]:not(.rlglc-input) + label:hover:before {
     border: 1px solid #0073CF !important; }
   #header .form-no-label .visually-hidden, #footer .form-no-label .visually-hidden {
-    clip: initial;
     overflow: initial;
     text-indent: -10000px;
     height: auto;
     width: auto; }
-  #header input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(:checked), #header input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):checked, #footer input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(:checked), #footer input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):checked {
+  #header input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(.allday):not(:checked), #header input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(.allday):checked, #footer input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(.allday):not(:checked), #footer input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(.allday):checked {
     position: absolute;
     left: -9999px; }
-  #header input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(:checked) + label,
-  #header input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):checked + label, #footer input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(:checked) + label,
-  #footer input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):checked + label {
+  #header input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(.allday):not(:checked) + label,
+  #header input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(.allday):checked + label, #footer input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(.allday):not(:checked) + label,
+  #footer input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(.allday):checked + label {
     position: relative;
     padding-left: 1.95em;
     cursor: pointer;
     z-index: 1; }
-  #header input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(:checked) + label:before,
-  #header input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):checked + label:before, #footer input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(:checked) + label:before,
-  #footer input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):checked + label:before {
+  #header input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(.allday):not(:checked) + label:before,
+  #header input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(.allday):checked + label:before, #footer input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(.allday):not(:checked) + label:before,
+  #footer input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(.allday):checked + label:before {
     content: '';
     position: absolute;
     left: 0;
@@ -1403,9 +1417,9 @@
     border: 1px solid #D7D9D9;
     background: #fff;
     border-radius: 2px; }
-  #header input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(:checked) + label:after,
-  #header input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):checked + label:after, #footer input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(:checked) + label:after,
-  #footer input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):checked + label:after {
+  #header input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(.allday):not(:checked) + label:after,
+  #header input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(.allday):checked + label:after, #footer input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(.allday):not(:checked) + label:after,
+  #footer input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(.allday):checked + label:after {
     content: '';
     background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2211%22%20height%3D%228%22%20viewBox%3D%220%200%2011%208%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M1%204l3%203%206-6%22%20stroke%3D%22%23000%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E");
     background-position: center center;
@@ -1416,24 +1430,24 @@
     width: 11px;
     display: block;
     position: absolute; }
-  #header input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(:checked) + label:after, #footer input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(:checked) + label:after {
+  #header input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(.allday):not(:checked) + label:after, #footer input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(.allday):not(:checked) + label:after {
     opacity: 0;
     transform: scale(0); }
-  #header input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):checked + label:after, #footer input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):checked + label:after {
+  #header input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(.allday):checked + label:after, #footer input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(.allday):checked + label:after {
     opacity: 1;
     transform: scale(1); }
-  #header input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):disabled:not(:checked) + label:before,
-  #header input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):disabled:checked + label:before, #footer input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):disabled:not(:checked) + label:before,
-  #footer input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):disabled:checked + label:before {
+  #header input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(.allday):disabled:not(:checked) + label:before,
+  #header input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(.allday):disabled:checked + label:before, #footer input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(.allday):disabled:not(:checked) + label:before,
+  #footer input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(.allday):disabled:checked + label:before {
     box-shadow: none;
     border-color: #D7D9D9;
     background-color: #fff; }
-  #header input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):checked:focus + label:before,
-  #header input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(:checked):focus + label:before, #footer input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):checked:focus + label:before,
-  #footer input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(:checked):focus + label:before {
+  #header input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(.allday):checked:focus + label:before,
+  #header input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(.allday):not(:checked):focus + label:before, #footer input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(.allday):checked:focus + label:before,
+  #footer input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(.allday):not(:checked):focus + label:before {
     box-shadow: 0px 0px 0px 4px #C4C4C4;
     border: 1px solid #0073CF; }
-  #header input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input) + label:hover:before, #footer input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input) + label:hover:before {
+  #header input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(.allday) + label:hover:before, #footer input[type="checkbox"]:not(.nav-trigger):not(.rlglc-input):not(.allday) + label:hover:before {
     border: 1px solid #0073CF !important; }
   #header .webform-element-description, #footer .webform-element-description {
     font-size: 0.875rem;
@@ -1443,6 +1457,20 @@
         font-size: 0.9375rem; } }
   #header #linkit-editor-dialog-form, #footer #linkit-editor-dialog-form {
     min-height: 400px; }
+  #header .smartdate--time-inline, #footer .smartdate--time-inline {
+    display: -ms-flexbox;
+    display: flex;
+    grid-column-gap: 0.5em;
+    -ms-flex-direction: row;
+        flex-direction: row;
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+    -ms-flex-line-pack: center;
+        align-content: center;
+    -ms-flex-align: baseline;
+        align-items: baseline;
+    -ms-flex-pack: start;
+        justify-content: flex-start; }
   #header .table-wrapper, #footer .table-wrapper {
     display: -ms-grid;
     display: grid;

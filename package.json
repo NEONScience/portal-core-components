@@ -61,7 +61,7 @@
     "tinycolor2": "^1.4.2",
     "ua-parser-js": "^1.0.32",
     "universal-cookie": "^4.0.4",
-    "zod": "^3.20.0"
+    "zod": "^3.20.2"
   },
   "peerDependencies": {
     "worker-loader": "^3.0.8"
