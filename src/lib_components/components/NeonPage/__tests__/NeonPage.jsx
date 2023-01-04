@@ -13,6 +13,12 @@ import NeonPage, { NeonErrorPage } from '../NeonPage';
 describe('NeonPage', () => {
   beforeAll(() => {
     console.error = jest.fn();
+    fetch = jest.fn(() =>
+      Promise.resolve({
+        json: () => Promise.resolve({}),
+        text: () => Promise.resolve(''),
+      })
+    );
   });
   afterEach(() => {
     console.error.mockReset();
@@ -22,7 +28,7 @@ describe('NeonPage', () => {
   });
   test('renders a basic functional page with no props', () => {
     const tree = renderer.create(
-      <NeonPage>
+      <NeonPage showHeaderSkeleton showFooterSkeleton>
         <div>content</div>
       </NeonPage>,
     ).toJSON();
@@ -30,7 +36,7 @@ describe('NeonPage', () => {
   });
   test('renders with a title and subtitle', () => {
     const tree = renderer.create(
-      <NeonPage title="Title" subtitle="Subtitle">
+      <NeonPage title="Title" subtitle="Subtitle" showHeaderSkeleton showFooterSkeleton>
         <div>content</div>
       </NeonPage>,
     ).toJSON();
@@ -38,7 +44,7 @@ describe('NeonPage', () => {
   });
   test('renders with loading message', () => {
     const tree = renderer.create(
-      <NeonPage loading="Loading" outerPageContainerMaxWidth="3333px">
+      <NeonPage loading="Loading" outerPageContainerMaxWidth="3333px" showHeaderSkeleton showFooterSkeleton>
         <div>content</div>
       </NeonPage>,
     ).toJSON();
@@ -46,7 +52,7 @@ describe('NeonPage', () => {
   });
   test('renders with loading message and progress', () => {
     const tree = renderer.create(
-      <NeonPage loading="Loading" progress={62}>
+      <NeonPage loading="Loading" progress={62} showHeaderSkeleton showFooterSkeleton>
         <div>content</div>
       </NeonPage>,
     ).toJSON();
@@ -54,7 +60,7 @@ describe('NeonPage', () => {
   });
   test('renders with an error', () => {
     const tree = renderer.create(
-      <NeonPage error="Fail">
+      <NeonPage error="Fail" showHeaderSkeleton showFooterSkeleton>
         <div>content</div>
       </NeonPage>,
     ).toJSON();
@@ -62,7 +68,7 @@ describe('NeonPage', () => {
   });
   test('renders with a notification', () => {
     const tree = renderer.create(
-      <NeonPage notification="Notification">
+      <NeonPage notification="Notification" showHeaderSkeleton showFooterSkeleton>
         <div>content</div>
       </NeonPage>,
     ).toJSON();
@@ -70,7 +76,7 @@ describe('NeonPage', () => {
   });
   test('renders with a custom header/footer', () => {
     const tree = renderer.create(
-      <NeonPage customHeader={<div>Header</div>} customFooter={<div>Header</div>}>
+      <NeonPage customHeader={<div>Header</div>} customFooter={<div>Header</div>} showHeaderSkeleton showFooterSkeleton>
         <div>content</div>
       </NeonPage>,
     ).toJSON();
@@ -78,7 +84,7 @@ describe('NeonPage', () => {
   });
   test('renders with custom sidebar content', () => {
     const tree = renderer.create(
-      <NeonPage sidebarContent={<div>Sidebar</div>}>
+      <NeonPage sidebarContent={<div>Sidebar</div>} showHeaderSkeleton showFooterSkeleton>
         <div>content</div>
       </NeonPage>,
     ).toJSON();
@@ -86,7 +92,7 @@ describe('NeonPage', () => {
   });
   test('renders sidebar items as skeletons when in appropriate state', () => {
     const tree = renderer.create(
-      <NeonPage sidebarContent={<div>Sidebar</div>} sidebarTitle="foo" loading="Loading">
+      <NeonPage sidebarContent={<div>Sidebar</div>} sidebarTitle="foo" loading="Loading" showHeaderSkeleton showFooterSkeleton>
         <div>content</div>
       </NeonPage>,
     ).toJSON();
@@ -107,6 +113,8 @@ describe('NeonPage', () => {
         sidebarTitle="foo"
         sidebarSubtitle="bar"
         sidebarLinksAdditionalContent={<div>More</div>}
+        showHeaderSkeleton
+        showFooterSkeleton
       >
         <div>content</div>
       </NeonPage>,
@@ -127,6 +135,8 @@ describe('NeonPage', () => {
         sidebarUnsticky
         sidebarContainerClassName="sidebarClassName"
         sidebarLinksAsStandaloneChildren
+        showHeaderSkeleton
+        showFooterSkeleton
       >
         <div>content</div>
       </NeonPage>,

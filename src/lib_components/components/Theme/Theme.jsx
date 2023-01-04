@@ -1,5 +1,4 @@
 import React from 'react';
-import '@fontsource/inter/latin.css';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/styles';

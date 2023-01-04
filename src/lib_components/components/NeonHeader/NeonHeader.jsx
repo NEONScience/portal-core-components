@@ -17,6 +17,7 @@ import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
 import ApplicationMenu from './ApplicationMenu';
 
 import HeaderSearchSvg from '../../images/svg/header-search.svg';
+import HeaderSearchHoverSvg from '../../images/svg/header-search-hover.svg';
 
 const DRUPAL_HEADER_HTML = REMOTE_ASSETS.DRUPAL_HEADER_HTML.KEY;
 
@@ -78,6 +79,9 @@ const useStyles = makeStyles((theme) => ({
   headerContainerFallback: {
     '& li.siteSearch > a': {
       background: `url('${HeaderSearchSvg}') center center no-repeat !important`,
+    },
+    '& li.siteSearch > a:hover': {
+      background: `url('${HeaderSearchHoverSvg}') center center no-repeat !important`,
     },
   },
   // Injecting these styles as a means of fixing up the search display
@@ -302,6 +306,7 @@ const NeonHeader = forwardRef((props, headerRef) => {
   const {
     drupalCssLoaded,
     unstickyDrupalHeader,
+    showSkeleton,
   } = props;
   const classes = useStyles(Theme);
   const belowLg = useMediaQuery(Theme.breakpoints.down('md'));
@@ -349,6 +354,7 @@ const NeonHeader = forwardRef((props, headerRef) => {
     };
     script.onerror = () => {
       (async () => {
+        script.remove();
         // eslint-disable-next-line no-unused-expressions, import/extensions
         await import('../../remoteAssets/drupal-header.js');
         setHeaderJsStatus(FETCH_STATUS.SUCCESS);
@@ -385,7 +391,7 @@ const NeonHeader = forwardRef((props, headerRef) => {
   ]);
 
   // Render Loading
-  if (renderMode === 'loading') {
+  if ((renderMode === 'loading') && showSkeleton) {
     return (
       <header ref={headerRef} id="header" className={classes.skeletonHeader}>
         <Skeleton variant="rect" height={`${belowLg ? 60 : 120}px`} width="100%" />
@@ -428,7 +434,7 @@ const NeonHeader = forwardRef((props, headerRef) => {
   if (unstickyDrupalHeader) {
     appliedClassName = `${classes.unstickyHeader} ${classes.headerContainer}`;
   }
-  if (renderMode === 'drupal-fallback') {
+  if ((renderMode === 'drupal-fallback') || ((renderMode === 'loading') && !showSkeleton)) {
     appliedClassName = `${appliedClassName} ${classes.headerContainerFallback}`;
   }
   const html = renderMode === 'drupal' ? headerHTML : DRUPAL_HEADER_HTML_FALLBACK;
@@ -449,11 +455,13 @@ const NeonHeader = forwardRef((props, headerRef) => {
 NeonHeader.propTypes = {
   drupalCssLoaded: PropTypes.bool,
   unstickyDrupalHeader: PropTypes.bool,
+  showSkeleton: PropTypes.bool,
 };
 
 NeonHeader.defaultProps = {
   drupalCssLoaded: false,
   unstickyDrupalHeader: true,
+  showSkeleton: false,
 };
 
 export default NeonHeader;

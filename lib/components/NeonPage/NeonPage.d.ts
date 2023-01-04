@@ -20,6 +20,8 @@ declare namespace NeonPage {
         }> | null | undefined)[]>;
         export const customHeader: PropTypes.Requireable<PropTypes.ReactNodeLike>;
         export const customFooter: PropTypes.Requireable<PropTypes.ReactNodeLike>;
+        export const showHeaderSkeleton: PropTypes.Requireable<boolean>;
+        export const showFooterSkeleton: PropTypes.Requireable<boolean>;
         const error_1: PropTypes.Requireable<string>;
         export { error_1 as error };
         export const loading: PropTypes.Requireable<string>;
@@ -64,6 +66,10 @@ declare namespace NeonPage {
         export { customHeader_1 as customHeader };
         const customFooter_1: null;
         export { customFooter_1 as customFooter };
+        const showHeaderSkeleton_1: boolean;
+        export { showHeaderSkeleton_1 as showHeaderSkeleton };
+        const showFooterSkeleton_1: boolean;
+        export { showFooterSkeleton_1 as showFooterSkeleton };
         const error_2: null;
         export { error_2 as error };
         const loading_1: null;

@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const NeonFooter = (props) => {
-  const { drupalCssLoaded } = props;
+  const { drupalCssLoaded, showSkeleton } = props;
   const classes = useStyles(Theme);
   const [{
     isActive: neonContextIsActive,
@@ -44,8 +44,17 @@ const NeonFooter = (props) => {
     }
   }
 
+  const renderFallback = () => ((
+    <footer id="footer" className={classes.footerContainer}>
+      {HTMLReactParser(DRUPAL_FOOTER_HTML_FALLBACK)}
+    </footer>
+  ));
+
   switch (renderMode) {
     case 'loading':
+      if (!showSkeleton) {
+        return renderFallback();
+      }
       return (
         <footer id="footer">
           <Skeleton variant="rect" height="300px" width="100%" />
@@ -61,20 +70,18 @@ const NeonFooter = (props) => {
 
     case 'drupal-fallback':
     default:
-      return (
-        <footer id="footer" className={classes.footerContainer}>
-          {HTMLReactParser(DRUPAL_FOOTER_HTML_FALLBACK)}
-        </footer>
-      );
+      return renderFallback();
   }
 };
 
 NeonFooter.propTypes = {
   drupalCssLoaded: PropTypes.bool,
+  showSkeleton: PropTypes.bool,
 };
 
 NeonFooter.defaultProps = {
   drupalCssLoaded: false,
+  showSkeleton: false,
 };
 
 export default NeonFooter;
