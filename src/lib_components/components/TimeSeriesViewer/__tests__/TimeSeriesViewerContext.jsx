@@ -344,10 +344,12 @@ describe('TimeSeriesViewerContext', () => {
               '2001-01': {
                 expanded: {
                   '2min': {
-                    url: 'https://bar/qux',
-                    status: FETCH_STATUS.AWAITING_CALL,
-                    error: null,
-                    series: {},
+                    '2DWSD_2min': {
+                      url: 'https://bar/qux',
+                      status: FETCH_STATUS.AWAITING_CALL,
+                      error: null,
+                      series: {},
+                    },
                   },
                 },
               },
@@ -359,10 +361,12 @@ describe('TimeSeriesViewerContext', () => {
               '2001-02': {
                 basic: {
                   '30min': {
-                    url: 'https://foo/bar',
-                    status: FETCH_STATUS.AWAITING_CALL,
-                    error: null,
-                    series: {},
+                    '2DWSD_30min': {
+                      url: 'https://foo/bar',
+                      status: FETCH_STATUS.AWAITING_CALL,
+                      error: null,
+                      series: {},
+                    },
                   },
                 },
               },
@@ -730,25 +734,25 @@ HOR.VER,name,description,start,end,xOffset,yOffset,zOffset
       };
       state.variables = {
         foo: {
-          canBeDefault: false, isDateTime: false, downloadPkg: 'basic', units: 'foos',
+          canBeDefault: false, isDateTime: false, downloadPkg: 'basic', units: 'foos', tables: ['TABLE_30min'],
         },
         endDate: {
-          canBeDefault: false, isDateTime: true, downloadPkg: 'basic', units: 'NA',
+          canBeDefault: false, isDateTime: true, downloadPkg: 'basic', units: 'NA', tables: ['TABLE_30min'],
         },
         zux: {
-          canBeDefault: false, isDateTime: false, downloadPkg: 'expanded', units: 'zuxs',
+          canBeDefault: false, isDateTime: false, downloadPkg: 'expanded', units: 'zuxs', tables: ['TABLE_30min'],
         },
         bar: {
-          canBeDefault: true, isDateTime: false, downloadPkg: 'basic', units: 'bars',
+          canBeDefault: true, isDateTime: false, downloadPkg: 'basic', units: 'bars', tables: ['TABLE_30min'],
         },
         startDate: {
-          canBeDefault: false, isDateTime: true, downloadPkg: 'basic', units: 'NA',
+          canBeDefault: false, isDateTime: true, downloadPkg: 'basic', units: 'NA', tables: ['TABLE_30min'],
         },
         startDateTime: {
-          canBeDefault: false, isDateTime: true, downloadPkg: 'basic', units: 'NA',
+          canBeDefault: false, isDateTime: true, downloadPkg: 'basic', units: 'NA', tables: ['TABLE_30min'],
         },
         endDateTime: {
-          canBeDefault: false, isDateTime: true, downloadPkg: 'basic', units: 'NA',
+          canBeDefault: false, isDateTime: true, downloadPkg: 'basic', units: 'NA', tables: ['TABLE_30min'],
         },
       };
     });
@@ -805,20 +809,22 @@ HOR.VER,name,description,start,end,xOffset,yOffset,zOffset
       state.product.sites.S2.positions['000.050'].data['2012-10'] = {
         basic: {
           '30min': {
-            series: {
-              bar: {
-                data: [17, 15, 23, 7, 9, 13],
-                range: [7, 23],
-                count: 6,
-                sum: 84,
-                variance: 33.2,
-              },
-              startDateTime: {
-                data: [1, 2, 3, 4, 5, 6],
-                range: [null, null],
-                count: 0,
-                sum: 0,
-                variance: 0,
+            'TABLE_30min': {
+              series: {
+                bar: {
+                  data: [17, 15, 23, 7, 9, 13],
+                  range: [7, 23],
+                  count: 6,
+                  sum: 84,
+                  variance: 33.2,
+                },
+                startDateTime: {
+                  data: [1, 2, 3, 4, 5, 6],
+                  range: [null, null],
+                  count: 0,
+                  sum: 0,
+                  variance: 0,
+                },
               },
             },
           },
@@ -877,8 +883,8 @@ HOR.VER,name,description,start,end,xOffset,yOffset,zOffset
                 positions: {
                   A: {
                     data: {
-                      X: { basic: { '1min': { status: FETCH_STATUS.AWAITING_CALL } } },
-                      Y: { basic: { '1min': { status: FETCH_STATUS.AWAITING_CALL } } },
+                      X: { basic: { '1min': { 'TABLE_1min': { status: FETCH_STATUS.AWAITING_CALL } } } },
+                      Y: { basic: { '1min': { 'TABLE_1min': { status: FETCH_STATUS.AWAITING_CALL } } } },
                     },
                   },
                 },
@@ -887,8 +893,8 @@ HOR.VER,name,description,start,end,xOffset,yOffset,zOffset
                 positions: {
                   B: {
                     data: {
-                      X: { basic: { '1min': { status: FETCH_STATUS.AWAITING_CALL } } },
-                      Y: { basic: { '1min': { status: FETCH_STATUS.AWAITING_CALL } } },
+                      X: { basic: { '1min': { 'TABLE_1min': { status: FETCH_STATUS.AWAITING_CALL } } } },
+                      Y: { basic: { '1min': { 'TABLE_1min': { status: FETCH_STATUS.AWAITING_CALL } } } },
                     },
                   },
                 },
@@ -899,27 +905,27 @@ HOR.VER,name,description,start,end,xOffset,yOffset,zOffset
         // fetches argument
         [
           {
-            siteCode: 'BLUE', position: 'A', month: 'X', downloadPkg: 'basic', timeStep: '1min',
+            siteCode: 'BLUE', position: 'A', month: 'X', downloadPkg: 'basic', timeStep: '1min', table: 'TABLE_1min',
           },
           {
-            siteCode: 'HARV', position: 'B', month: 'Y', downloadPkg: 'basic', timeStep: '1min',
+            siteCode: 'HARV', position: 'B', month: 'Y', downloadPkg: 'basic', timeStep: '1min', table: 'TABLE_1min',
           },
           {
-            siteCode: 'HARV', position: 'B', month: 'X', downloadPkg: 'basic', timeStep: '10min',
+            siteCode: 'HARV', position: 'B', month: 'X', downloadPkg: 'basic', timeStep: '10min', table: 'TABLE_1min',
           },
         ],
       );
       expect(
-        newState.product.sites.BLUE.positions.A.data.X.basic['1min'].status,
+        newState.product.sites.BLUE.positions.A.data.X.basic['1min']['TABLE_1min'].status,
       ).toBe(FETCH_STATUS.FETCHING);
       expect(
-        newState.product.sites.BLUE.positions.A.data.Y.basic['1min'].status,
+        newState.product.sites.BLUE.positions.A.data.Y.basic['1min']['TABLE_1min'].status,
       ).toBe(FETCH_STATUS.AWAITING_CALL);
       expect(
-        newState.product.sites.HARV.positions.B.data.X.basic['1min'].status,
+        newState.product.sites.HARV.positions.B.data.X.basic['1min']['TABLE_1min'].status,
       ).toBe(FETCH_STATUS.AWAITING_CALL);
       expect(
-        newState.product.sites.HARV.positions.B.data.Y.basic['1min'].status,
+        newState.product.sites.HARV.positions.B.data.Y.basic['1min']['TABLE_1min'].status,
       ).toBe(FETCH_STATUS.FETCHING);
     });
   });
@@ -1127,7 +1133,7 @@ HOR.VER,name,description,start,end,xOffset,yOffset,zOffset
           status: FETCH_STATUS.SUCCESS, error: null,
         });
         expect(
-          newState.product.sites.JERC.positions['000.030'].data['2020-01'].basic['2min'],
+          newState.product.sites.JERC.positions['000.030'].data['2020-01'].basic['2min']['2DWSD_2min'],
         ).toStrictEqual({
           url: 'https://bar/qux',
           status: FETCH_STATUS.AWAITING_CALL,
@@ -1522,8 +1528,8 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
             positions: {
               A: {
                 data: {
-                  X: { basic: { '1min': { status: FETCH_STATUS.AWAITING_CALL } } },
-                  Y: { basic: { '1min': { status: FETCH_STATUS.AWAITING_CALL } } },
+                  X: { basic: { '1min': { 'TABLE_1min': { status: FETCH_STATUS.AWAITING_CALL } } } },
+                  Y: { basic: { '1min': { 'TABLE_1min': { status: FETCH_STATUS.AWAITING_CALL } } } },
                 },
               },
             },
@@ -1531,18 +1537,18 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
         };
         const fetches = [
           {
-            siteCode: 'BLUE', position: 'A', month: 'X', downloadPkg: 'basic', timeStep: '1min',
+            siteCode: 'BLUE', position: 'A', month: 'X', downloadPkg: 'basic', timeStep: '1min', table: 'TABLE_1min',
           },
           {
-            siteCode: 'BLUE', position: 'A', month: 'Y', downloadPkg: 'basic', timeStep: '1min',
+            siteCode: 'BLUE', position: 'A', month: 'Y', downloadPkg: 'basic', timeStep: '1min',table: 'TABLE_1min',
           },
         ];
         const newState = reducer(state, { type: 'fetchDataFiles', token: 'foo', fetches });
         expect(
-          newState.product.sites.BLUE.positions.A.data.X.basic['1min'].status,
+          newState.product.sites.BLUE.positions.A.data.X.basic['1min']['TABLE_1min'].status,
         ).toBe(FETCH_STATUS.FETCHING);
         expect(
-          newState.product.sites.BLUE.positions.A.data.Y.basic['1min'].status,
+          newState.product.sites.BLUE.positions.A.data.Y.basic['1min']['TABLE_1min'].status,
         ).toBe(FETCH_STATUS.FETCHING);
         expect(newState.dataFetches).toStrictEqual({ foo: true });
         expect(newState.dataFetchProgress).toBe(0);
@@ -1584,45 +1590,47 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
                     '2021-06': {
                       basic: {
                         '30min': {
-                          url: '',
-                          status: 'SUCCESS',
-                          error: null,
-                          series: {
-                            startDateTime: {
-                              data: [
-                                '2021-06-01T00:00:00Z',
-                              ],
-                              range: [
-                                null,
-                                null
-                              ],
-                              sum: 0,
-                              count: 0,
-                              variance: 0
-                            },
-                            endDateTime: {
-                              data: [
-                                '2021-06-01T00:30:00Z',
-                              ],
-                              range: [
-                                null,
-                                null
-                              ],
-                              sum: 0,
-                              count: 0,
-                              variance: 0
-                            },
-                            windSpeedMean: {
-                              data: [
-                                0.18,
-                              ],
-                              range: [
-                                0.03,
-                                0.38
-                              ],
-                              sum: 174.07999999999996,
-                              count: 1440,
-                              variance: 0.004028793209876535
+                          'TABLE_30min': {
+                            url: '',
+                            status: 'SUCCESS',
+                            error: null,
+                            series: {
+                              startDateTime: {
+                                data: [
+                                  '2021-06-01T00:00:00Z',
+                                ],
+                                range: [
+                                  null,
+                                  null
+                                ],
+                                sum: 0,
+                                count: 0,
+                                variance: 0
+                              },
+                              endDateTime: {
+                                data: [
+                                  '2021-06-01T00:30:00Z',
+                                ],
+                                range: [
+                                  null,
+                                  null
+                                ],
+                                sum: 0,
+                                count: 0,
+                                variance: 0
+                              },
+                              windSpeedMean: {
+                                data: [
+                                  0.18,
+                                ],
+                                range: [
+                                  0.03,
+                                  0.38
+                                ],
+                                sum: 174.07999999999996,
+                                count: 1440,
+                                variance: 0.004028793209876535
+                              },
                             },
                           },
                         },
@@ -1666,9 +1674,9 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
             description: 'Date and time at which a sampling is initiated',
             downloadPkg: 'basic',
             units: 'NA',
-            tables: {},
-            timeSteps: {},
-            sites: {},
+            tables: new Set(['TABLE_30min']),
+            timeSteps: new Set(['30min']),
+            sites: new Set(['ABBY']),
             isSelectable: false,
             canBeDefault: false,
             isDateTime: true
@@ -1678,9 +1686,9 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
             description: 'Date and time at which a sampling is completed',
             downloadPkg: 'basic',
             units: 'NA',
-            tables: {},
-            timeSteps: {},
-            sites: {},
+            tables: new Set(['TABLE_30min']),
+            timeSteps: new Set(['30min']),
+            sites: new Set(['ABBY']),
             isSelectable: false,
             canBeDefault: false,
             isDateTime: true
@@ -1690,9 +1698,9 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
             description: 'Arithmetic mean of wind speed',
             downloadPkg: 'basic',
             units: 'metersPerSecond',
-            tables: {},
-            timeSteps: {},
-            sites: {},
+            tables: new Set(['TABLE_30min']),
+            timeSteps: new Set(['30min']),
+            sites: new Set(['ABBY']),
             isSelectable: true,
             canBeDefault: true,
             isDateTime: false
@@ -1777,7 +1785,7 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
             positions: {
               A: {
                 data: {
-                  X: { basic: { '1min': { status: FETCH_STATUS.FETCHING, error: null } } },
+                  X: { basic: { '1min': { 'TABLE_1min': { status: FETCH_STATUS.FETCHING, error: null } } } },
                 },
               },
             },
@@ -1790,13 +1798,14 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
           month: 'X',
           downloadPkg: 'basic',
           timeStep: '1min',
+          table: 'TABLE_1min',
           error: 'foo',
         });
         expect(
-          newState.product.sites.BLUE.positions.A.data.X.basic['1min'].status,
+          newState.product.sites.BLUE.positions.A.data.X.basic['1min']['TABLE_1min'].status,
         ).toBe(FETCH_STATUS.ERROR);
         expect(
-          newState.product.sites.BLUE.positions.A.data.X.basic['1min'].error,
+          newState.product.sites.BLUE.positions.A.data.X.basic['1min']['TABLE_1min'].error,
         ).toBe('foo');
       });
     });
@@ -1807,7 +1816,7 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
             positions: {
               A: {
                 data: {
-                  X: { basic: { '1min': { status: FETCH_STATUS.FETCHING, error: null } } },
+                  X: { basic: { '1min': { 'TABLE_1min': { status: FETCH_STATUS.FETCHING, error: null } } } },
                 },
               },
             },
@@ -1821,15 +1830,16 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
           downloadPkg: 'basic',
           timeStep: '1min',
           series: [1, 2, 3],
+          table: 'TABLE_1min',
         });
         expect(
-          newState.product.sites.BLUE.positions.A.data.X.basic['1min'].status,
+          newState.product.sites.BLUE.positions.A.data.X.basic['1min']['TABLE_1min'].status,
         ).toBe(FETCH_STATUS.SUCCESS);
         expect(
-          newState.product.sites.BLUE.positions.A.data.X.basic['1min'].error,
+          newState.product.sites.BLUE.positions.A.data.X.basic['1min']['TABLE_1min'].error,
         ).toBe(null);
         expect(
-          newState.product.sites.BLUE.positions.A.data.X.basic['1min'].series,
+          newState.product.sites.BLUE.positions.A.data.X.basic['1min']['TABLE_1min'].series,
         ).toStrictEqual([1, 2, 3]);
       });
     });
