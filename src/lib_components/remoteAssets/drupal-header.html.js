@@ -3,11 +3,11 @@ export default html = `
 <header class="header" role="banner">
   <div class="header__inner l--offset-wide">
     <div class="header__logo">
-      <a href="/" title="Home" rel="home"     
-  
-  
-  
-  
+      <a href="/" title="Home" rel="home"
+
+
+
+
  class="logo"
 >
       <img src="https://www.neonscience.org/themes/custom/neon/logo.png" alt=" logo" class="logo__image">
@@ -22,13 +22,13 @@ export default html = `
     </label>
     <div class="authContainer">
               <div class="openid-connect-login-form" data-drupal-selector="openid-connect-login-form" id="block-openid-connect-login">
-  
-    
+
+
       <form action="/neon-assets/partial/header" method="post" id="openid-connect-login-form" accept-charset="UTF-8">
   <div>
 
 <input data-drupal-selector="edit-openid-connect-client-auth0-login" type="submit" id="edit-openid-connect-client-auth0-login" name="auth0" value="Sign In" class="button js-form-submit form-submit button--search" />
-</div><input autocomplete="off" data-drupal-selector="form-yzr6do6st7lco0a-pietui5wgroxs0jafvodyxrrhug" type="hidden" name="form_build_id" value="form-YZr6dO6St7lCO0a-PietUi5wGRoxs0JafVODYXRRhUg" />
+</div><input autocomplete="off" data-drupal-selector="form-iqy0kowm-3rt-ntrlkr3j1ex0mvm8kvn22hzltugyv4" type="hidden" name="form_build_id" value="form-IqY0kOWm-3RT-NTrlKr3J1EX0MvM8KVn22HzlTugyv4" />
 <input data-drupal-selector="edit-openid-connect-login-form" type="hidden" name="form_id" value="openid_connect_login_form" />
 
 </form>
@@ -39,29 +39,29 @@ export default html = `
     <div class="header__site-navigation">
       <div class="header__menu-main">
         <nav role="navigation" aria-labelledby="block-neon-main-menu-menu" id="block-neon-main-menu">
-            
-  <h2 class="visually-hidden" id="block-neon-main-menu-menu">Main navigation</h2>
-  
 
-        
+  <h2 class="visually-hidden" id="block-neon-main-menu-menu">Main navigation</h2>
+
+
+
           <ul  class="menu menu--main" data-depth="0">
 
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/about" class="menu__link" title="About Us" data-drupal-link-system-path="node/8793">About Us</a>
 
-          
+
                                         <button class='arrow visually-hidden focusable' tabindex='0' aria-label='Toggle Mega Menu'><svg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M9 1L5 5 1 1' stroke='#fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></button>
 
                             <div class='subNavWrapper'>
                             <div class='innerSubNavWrapper'>
-            
+
                       <ul  class="menu menu--main" data-depth="1">
 
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/about/overview" class="menu__link" data-drupal-link-system-path="node/10531">Overview</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
@@ -72,11 +72,11 @@ export default html = `
           <a href="https://www.neonscience.org/about/overview/history" class="menu__link" data-drupal-link-system-path="node/19">History</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item">
@@ -86,8 +86,8 @@ export default html = `
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/about/advisory-groups" class="menu__link" data-drupal-link-system-path="node/10534">Advisory Groups</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
@@ -98,11 +98,11 @@ export default html = `
           <a href="https://www.neonscience.org/about/advisory-groups/twgs" class="menu__link" data-drupal-link-system-path="node/6273">Technical Working Groups (TWGs)</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item">
@@ -112,19 +112,19 @@ export default html = `
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/about/contact-us" class="menu__link" data-drupal-link-system-path="node/24">Contact Us</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
           <a href="https://www.neonscience.org/about/contact-us/field-offices" class="menu__link" data-drupal-link-system-path="node/7874">Field Offices</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item">
@@ -135,9 +135,9 @@ export default html = `
           <a href="https://www.neonscience.org/about/staff" class="menu__link" data-drupal-link-system-path="node/8802">Staff</a>
 
                   </li>
-      
+
           </ul>
-  
+
 
                           </div>
 
@@ -153,25 +153,25 @@ export default html = `
               </div>
                             </div>
 
-            
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-samples" class="menu__link" data-drupal-link-system-path="node/1">Data &amp; Samples</a>
 
-          
+
                                         <button class='arrow visually-hidden focusable' tabindex='0' aria-label='Toggle Mega Menu'><svg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M9 1L5 5 1 1' stroke='#fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></button>
 
                             <div class='subNavWrapper'>
                             <div class='innerSubNavWrapper'>
-            
+
                       <ul  class="menu menu--main" data-depth="1">
 
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data" class="menu__link" data-drupal-link-system-path="node/8858">Data Portal</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
@@ -202,25 +202,25 @@ export default html = `
           <a href="https://data.neonscience.org/web/external-lab-ingest" class="menu__link">External Lab Data Ingest (restricted)</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/samples" class="menu__link" data-drupal-link-system-path="node/10295">Samples &amp; Specimens</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/samples/find-samples" class="menu__link" data-drupal-link-system-path="node/8174">Discover and Use NEON Samples</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="3">
 
               <li  class="menu__item">
@@ -243,11 +243,11 @@ export default html = `
           <a href="https://www.neonscience.org/samples/excess-samples" class="menu__link" data-drupal-link-system-path="node/10297">Excess Samples</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item">
@@ -262,18 +262,18 @@ export default html = `
           <a href="https://data.neonscience.org/taxonomic-lists" class="menu__link">Taxonomic Lists</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-collection" class="menu__link" data-drupal-link-system-path="node/4776">Collection Methods</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
@@ -283,8 +283,8 @@ export default html = `
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-collection/airborne-remote-sensing" class="menu__link" data-drupal-link-system-path="node/3821">AIrborne Remote Sensing</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="3">
 
               <li  class="menu__item">
@@ -311,18 +311,18 @@ export default html = `
           <a href="https://www.neonscience.org/data-collection/lidar" class="menu__link" data-drupal-link-system-path="node/10551">Lidar</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-collection/automated-instruments" class="menu__link" data-drupal-link-system-path="node/7819">Automated Instruments</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="3">
 
               <li  class="menu__item">
@@ -336,8 +336,8 @@ export default html = `
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-collection/instrumented-collection-types" class="menu__link" data-drupal-link-system-path="node/10900">Instrumented Collection Types</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="4">
 
               <li  class="menu__item">
@@ -360,25 +360,25 @@ export default html = `
           <a href="https://www.neonscience.org/data-collection/surface-water" class="menu__link" data-drupal-link-system-path="node/7840">Surface Water</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-collection/observational-sampling" class="menu__link" data-drupal-link-system-path="node/7820">Observational Sampling</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="3">
 
               <li  class="menu__item">
@@ -392,15 +392,15 @@ export default html = `
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-collection/observation-types" class="menu__link" data-drupal-link-system-path="node/10535">Observation Types</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="4">
 
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-collection/aquatic-organisms" class="menu__link" data-drupal-link-system-path="node/3277">Aquatic Organisms</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="5">
 
               <li  class="menu__item">
@@ -419,18 +419,18 @@ export default html = `
           <a href="https://www.neonscience.org/data-collection/algae-aquatic-plants" class="menu__link" data-drupal-link-system-path="node/8278">Periphyton, Phytoplankton, and Aquatic Plants</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-collection/terrestrial-organisms" class="menu__link" data-drupal-link-system-path="node/3278">Terrestrial Organisms</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="5">
 
               <li  class="menu__item">
@@ -461,18 +461,18 @@ export default html = `
           <a href="https://www.neonscience.org/data-collection/ticks" class="menu__link" data-drupal-link-system-path="node/8615">Ticks</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-collection/hydrology-geomorphology" class="menu__link" data-drupal-link-system-path="node/10536">Hydrology &amp; Geomorphology</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="5">
 
               <li  class="menu__item">
@@ -483,11 +483,11 @@ export default html = `
           <a href="https://www.neonscience.org/data-collection/geomorphology" class="menu__link" data-drupal-link-system-path="node/7917">Geomorphology</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item">
@@ -509,40 +509,40 @@ export default html = `
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-collection/soils" class="menu__link" data-drupal-link-system-path="node/10549">Soils</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="5">
 
               <li  class="menu__item">
           <a href="https://www.neonscience.org/data-collection/soils/soil-descriptions" class="menu__link" data-drupal-link-system-path="node/11685">Soil Descriptions</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item">
@@ -552,8 +552,8 @@ export default html = `
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-samples/guidelines-policies" class="menu__link" data-drupal-link-system-path="node/11642">Data Guidelines and Policies</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
@@ -568,18 +568,18 @@ export default html = `
           <a href="https://www.neonscience.org/data-samples/guidelines-policies/usage-policies" class="menu__link" data-drupal-link-system-path="node/11643">Usage Policies</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-samples/data-management" class="menu__link" data-drupal-link-system-path="node/10557">Data Management</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
@@ -601,8 +601,8 @@ export default html = `
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases" class="menu__link" data-drupal-link-system-path="node/10559">Data Product Revisions and Releases</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="3">
 
               <li  class="menu__item">
@@ -617,11 +617,11 @@ export default html = `
           <a href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases/release-2023" class="menu__link" data-drupal-link-system-path="node/12583">Release 2023</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item">
@@ -632,16 +632,16 @@ export default html = `
           <a href="https://www.neonscience.org/data-samples/data-management/externally-hosted-data" class="menu__link" data-drupal-link-system-path="node/10552">Externally Hosted Data</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
-      
+
           </ul>
-  
+
 
                           </div>
 
@@ -657,18 +657,18 @@ export default html = `
               </div>
                             </div>
 
-            
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/field-sites" class="menu__link" data-drupal-link-system-path="node/11376">Field Sites</a>
 
-          
+
                                         <button class='arrow visually-hidden focusable' tabindex='0' aria-label='Toggle Mega Menu'><svg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M9 1L5 5 1 1' stroke='#fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></button>
 
                             <div class='subNavWrapper'>
                             <div class='innerSubNavWrapper'>
-            
+
                       <ul  class="menu menu--main" data-depth="1">
 
               <li  class="menu__item">
@@ -683,9 +683,9 @@ export default html = `
           <a href="https://data.neonscience.org/data-products/DP1.10111.001" class="menu__link">Site Management Data Product</a>
 
                   </li>
-      
+
           </ul>
-  
+
 
                           </div>
 
@@ -701,18 +701,18 @@ export default html = `
               </div>
                             </div>
 
-            
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/impact" title="Impact" class="menu__link" data-drupal-link-system-path="node/8795">Impact</a>
 
-          
+
                                         <button class='arrow visually-hidden focusable' tabindex='0' aria-label='Toggle Mega Menu'><svg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M9 1L5 5 1 1' stroke='#fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></button>
 
                             <div class='subNavWrapper'>
                             <div class='innerSubNavWrapper'>
-            
+
                       <ul  class="menu menu--main" data-depth="1">
 
               <li  class="menu__item">
@@ -734,8 +734,8 @@ export default html = `
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/impact/newsroom" class="menu__link" data-drupal-link-system-path="node/10890">Newsroom</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
@@ -750,16 +750,16 @@ export default html = `
           <a href="https://www.neonscience.org/neon-newsletter-sign" class="menu__link" data-drupal-link-system-path="node/12590">Newsletter Sign Up</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
-      
+
           </ul>
-  
+
 
                           </div>
 
@@ -775,18 +775,18 @@ export default html = `
               </div>
                             </div>
 
-            
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/resources" class="menu__link" data-drupal-link-system-path="node/6228">Resources</a>
 
-          
+
                                         <button class='arrow visually-hidden focusable' tabindex='0' aria-label='Toggle Mega Menu'><svg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M9 1L5 5 1 1' stroke='#fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></button>
 
                             <div class='subNavWrapper'>
                             <div class='innerSubNavWrapper'>
-            
+
                       <ul  class="menu menu--main" data-depth="1">
 
               <li  class="menu__item">
@@ -796,8 +796,8 @@ export default html = `
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/resources/communication-resources" class="menu__link" data-drupal-link-system-path="node/6316">Documents and Communication Resources</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
@@ -812,18 +812,18 @@ export default html = `
           <a href="https://www.neonscience.org/resources/communications-resources/outreach-materials" class="menu__link" data-drupal-link-system-path="node/10949">Outreach Materials</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/resources/code-hub" class="menu__link" data-drupal-link-system-path="node/7076">Code Hub</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
@@ -838,18 +838,18 @@ export default html = `
           <a href="https://github.com/neonscience" class="menu__link">NEON&#039;s GitHub Organization Homepage</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/resources/learning-hub" class="menu__link" data-drupal-link-system-path="node/6136">Learning Hub</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
@@ -876,18 +876,18 @@ export default html = `
           <a href="https://www.neonscience.org/resources/learning-hub/data-education-fellows" class="menu__link" data-drupal-link-system-path="node/7828">Data Education Fellows</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/resources/research-support" class="menu__link" data-drupal-link-system-path="node/10764">Research Support and Assignable Assets</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
@@ -918,20 +918,20 @@ export default html = `
           <a href="https://www.neonscience.org/resources/research-support/assignable-assets-faqs" class="menu__link" data-drupal-link-system-path="node/11535">Assignable Assets FAQs</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item">
           <a href="https://www.neonscience.org/resources/funding-opportunities" class="menu__link" data-drupal-link-system-path="node/11327">Funding Opportunities </a>
 
                   </li>
-      
+
           </ul>
-  
+
 
                           </div>
 
@@ -947,25 +947,25 @@ export default html = `
               </div>
                             </div>
 
-            
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/get-involved" class="menu__link" data-drupal-link-system-path="node/6753">Get Involved</a>
 
-          
+
                                         <button class='arrow visually-hidden focusable' tabindex='0' aria-label='Toggle Mega Menu'><svg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M9 1L5 5 1 1' stroke='#fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></button>
 
                             <div class='subNavWrapper'>
                             <div class='innerSubNavWrapper'>
-            
+
                       <ul  class="menu menu--main" data-depth="1">
 
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/about/advisory-groups" class="menu__link" data-drupal-link-system-path="node/10534">Advisory Groups</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
@@ -976,11 +976,11 @@ export default html = `
           <a href="https://www.neonscience.org/about/advisory-groups/twgs" class="menu__link" data-drupal-link-system-path="node/6273">Technical Working Groups</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item">
@@ -998,8 +998,8 @@ export default html = `
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/collaborative-works" class="menu__link" data-drupal-link-system-path="node/12059">Collaborative Works</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
@@ -1018,11 +1018,11 @@ export default html = `
           <a href="https://www.neonscience.org/neon-great-lakes-user-group" class="menu__link" data-drupal-link-system-path="node/12371">NEON Great Lakes User Group</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item">
@@ -1036,8 +1036,8 @@ export default html = `
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/get-involved/work-opportunities" class="menu__link" data-drupal-link-system-path="node/6229">Work Opportunities</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
@@ -1055,35 +1055,35 @@ export default html = `
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/get-involved/work-opportunities/internships" class="menu__link" data-drupal-link-system-path="node/16">Internships</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="3">
 
               <li  class="menu__item">
           <a href="https://www.neonscience.org/get-involved/work-opportunities/internships/intern-alumni" class="menu__link" data-drupal-link-system-path="node/10553">Intern Alumni</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item">
           <a href="https://www.neonscience.org/get-involved/partners" class="menu__link" data-drupal-link-system-path="node/8094">Partners</a>
 
                   </li>
-      
+
           </ul>
-  
+
 
                           </div>
 
@@ -1099,10 +1099,10 @@ export default html = `
               </div>
                             </div>
 
-            
+
 
                   </li>
-      
+
                       <li class="myAccount">
           <a href="/user/login" title="My Account" class="menu__link">My Account</a>
         </li>
@@ -1111,17 +1111,17 @@ export default html = `
           <a href="/search/site" title="Search" class="menu__link">Search</a>
         </li>
                 <li class="siteSearch isMobile">
-          
+
 <div
   class="search-form-mobile isMobile"
   id="block-searchform-mobile"
   role="search"
 >
-  
+
 
 <div class="search-api-form" data-drupal-selector="search-api-form" id="block-searchform">
-  
-    
+
+
       <form action="/search/site" method="get" id="search-api-form" accept-charset="UTF-8">
   <div class="js-form-item form-item js-form-type-search form-item-title js-form-item-title form-no-label">
         <input title="Enter the terms you wish to search for." data-drupal-selector="edit-title" type="search" id="edit-title" name="title" value="" size="15" maxlength="128" class="form-search" />
@@ -1140,7 +1140,7 @@ export default html = `
 </div>
         </li>
           </ul>
-  
+
 
 
   </nav>
@@ -1151,11 +1151,11 @@ export default html = `
   <div class="l--offset isDesktop header__search visually-hidden">
     <div class="header__search--inner">
         <h3 class="header__search--title">Search</h3>
-        
+
 
 <div class="search-api-form" data-drupal-selector="search-api-form" id="block-searchform">
-  
-    
+
+
       <form action="/search/site" method="get" id="search-api-form" accept-charset="UTF-8">
   <div class="js-form-item form-item js-form-type-search form-item-title js-form-item-title form-no-label">
         <input title="Enter the terms you wish to search for." data-drupal-selector="edit-title" type="search" id="edit-title" name="title" value="" size="15" maxlength="128" class="form-search" />
