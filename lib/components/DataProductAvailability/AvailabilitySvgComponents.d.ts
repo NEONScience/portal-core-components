@@ -27,6 +27,15 @@ export const CELL_ATTRS: {
         nudge: number;
         fill: string;
     };
+    tombstoned: {
+        stroke: null;
+        strokeWidth: null;
+        width: string;
+        height: string;
+        rx: string;
+        nudge: number;
+        fill: string;
+    };
     'not collected': {
         stroke: null;
         strokeWidth: null;

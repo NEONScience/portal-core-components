@@ -143,6 +143,19 @@ exports[`DataProductAvailability - AvailabilitySvgComponents renders JsxCell cor
 />
 `;
 
+exports[`DataProductAvailability - AvailabilitySvgComponents renders JsxCell correctly for every status JsxCell for status: tombstoned 1`] = `
+<rect
+  fill="rgba(39, 39, 39, 0.9)"
+  height="12px"
+  rx="2px"
+  stroke={null}
+  strokeWidth={null}
+  width="7px"
+  x={10}
+  y={20}
+/>
+`;
+
 exports[`DataProductAvailability - AvailabilitySvgComponents renders SvgDefs correctly 1`] = `
 <svg
   height="0px"
