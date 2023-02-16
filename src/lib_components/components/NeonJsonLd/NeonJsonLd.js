@@ -73,49 +73,39 @@ const NeonJsonLd = {
   injectReleaseMeta: (data) => {
     if (!data) return;
     try {
-      const currentDoiBlock = document.head.querySelector('meta[name="citation_doi"]');
-      const doiUrl = new URL(data.identifier);
-      const doiBlock = document.createElement('meta');
-      doiBlock.setAttribute('name', 'citation_doi');
-      doiBlock.setAttribute('content', doiUrl.pathname.slice(1, doiUrl.pathname.length));
-      if ((typeof currentDoiBlock !== 'undefined') && (currentDoiBlock !== null)) {
-        document.head.replaceChild(doiBlock, currentDoiBlock);
+      let metadataObjects = [];
+      if (Array.isArray(data)) {
+        metadataObjects = data;
       } else {
+        metadataObjects = [data];
+      }
+      NeonJsonLd.removeReleaseMeta();
+      metadataObjects.forEach((metadataObject) => {
+        const doiUrl = new URL(metadataObject.identifier);
+        const doiBlock = document.createElement('meta');
+        doiBlock.setAttribute('name', 'citation_doi');
+        doiBlock.setAttribute('content', doiUrl.pathname.slice(1, doiUrl.pathname.length));
+        const titleBlock = document.createElement('meta');
+        titleBlock.setAttribute('name', 'citation_title');
+        let addTitle = false;
+        if ((typeof metadataObject.name === 'string') && (metadataObject.name.length > 0)) {
+          if (metadataObject.name.indexOf(NeonJsonLd.CITATION_AUTHOR) >= 0) {
+            const titleContent = metadataObject.name.replace(NeonJsonLd.CITATION_AUTHOR, '').trim();
+            titleBlock.setAttribute('content', titleContent);
+          } else {
+            titleBlock.setAttribute('content', metadataObject.name);
+          }
+          addTitle = true;
+        }
+        const authorBlock = document.createElement('meta');
+        authorBlock.setAttribute('name', 'citation_author');
+        authorBlock.setAttribute('content', NeonJsonLd.CITATION_AUTHOR);
         document.head.appendChild(doiBlock);
-      }
-
-      const currentTitleBlock = document.head.querySelector('meta[name="citation_title"]');
-      const titleBlock = document.createElement('meta');
-      titleBlock.setAttribute('name', 'citation_title');
-      let addTitle = false;
-      if ((typeof data.name === 'string') && (data.name.length > 0)) {
-        if (data.name.indexOf(NeonJsonLd.CITATION_AUTHOR) >= 0) {
-          const titleContent = data.name.replace(NeonJsonLd.CITATION_AUTHOR, '').trim();
-          titleBlock.setAttribute('content', titleContent);
-        } else {
-          titleBlock.setAttribute('content', data.name);
+        if (addTitle) {
+          document.head.appendChild(titleBlock);
         }
-        addTitle = true;
-      }
-      if (!addTitle) {
-        if ((typeof currentTitleBlock !== 'undefined') && (currentTitleBlock !== null)) {
-          currentTitleBlock.remove();
-        }
-      } else if ((typeof currentTitleBlock !== 'undefined') && (currentTitleBlock !== null)) {
-        document.head.replaceChild(titleBlock, currentTitleBlock);
-      } else {
-        document.head.appendChild(titleBlock);
-      }
-
-      const currentAuthorBlock = document.head.querySelector('meta[name="citation_author"]');
-      const authorBlock = document.createElement('meta');
-      authorBlock.setAttribute('name', 'citation_author');
-      authorBlock.setAttribute('content', NeonJsonLd.CITATION_AUTHOR);
-      if ((typeof currentAuthorBlock !== 'undefined') && (currentAuthorBlock !== null)) {
-        document.head.replaceChild(authorBlock, currentAuthorBlock);
-      } else {
         document.head.appendChild(authorBlock);
-      }
+      });
     } catch (e) {
       console.error(e); // eslint-disable-line no-console
     }
@@ -148,17 +138,17 @@ const NeonJsonLd = {
    */
   removeReleaseMeta: () => {
     try {
-      const currentDoiBlock = document.head.querySelector('meta[name="citation_doi"]');
-      if ((typeof currentDoiBlock !== 'undefined') && (currentDoiBlock !== null)) {
-        currentDoiBlock.remove();
+      const currentDoiBlocks = document.head.querySelectorAll('meta[name="citation_doi"]');
+      if ((typeof currentDoiBlocks !== 'undefined') && (currentDoiBlocks !== null)) {
+        currentDoiBlocks.forEach((currentDoiBlock) => currentDoiBlock?.remove());
       }
-      const currentTitleBlock = document.head.querySelector('meta[name="citation_title"]');
-      if ((typeof currentTitleBlock !== 'undefined') && (currentTitleBlock !== null)) {
-        currentTitleBlock.remove();
+      const currentTitleBlocks = document.head.querySelectorAll('meta[name="citation_title"]');
+      if ((typeof currentTitleBlocks !== 'undefined') && (currentTitleBlocks !== null)) {
+        currentTitleBlocks.forEach((currentTitleBlock) => currentTitleBlock?.remove());
       }
-      const currentAuthorBlock = document.head.querySelector('meta[name="citation_author"]');
-      if ((typeof currentAuthorBlock !== 'undefined') && (currentAuthorBlock !== null)) {
-        currentAuthorBlock.remove();
+      const currentAuthorBlocks = document.head.querySelectorAll('meta[name="citation_author"]');
+      if ((typeof currentAuthorBlocks !== 'undefined') && (currentAuthorBlocks !== null)) {
+        currentAuthorBlocks.forEach((currentAuthorBlock) => currentAuthorBlock?.remove());
       }
     } catch (e) {
       console.error(e); // eslint-disable-line no-console

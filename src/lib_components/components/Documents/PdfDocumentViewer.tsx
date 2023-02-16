@@ -66,7 +66,7 @@ export interface PdfDocumentViewerProps {
   fullUrlPath?: string;
 }
 
-const noop = () => {};
+const noop = () => { /* NOOP */ };
 
 const MIN_PDF_VIEWER_WIDTH = 800;
 

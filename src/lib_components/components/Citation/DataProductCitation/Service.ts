@@ -26,6 +26,7 @@ import {
   DataProductCitationViewProps,
   DataProductCitationViewState,
   DisplayType,
+  DataProductCitationItem,
 } from './ViewState';
 
 const fetchIsInStatus = (fetchObject: Nullable<FetchStatusState>, status: string): boolean => (
@@ -171,11 +172,23 @@ const applyReleasesGlobally = (
 
 const applyDoiStatusReleaseGlobally = (
   state: DataProductCitationState,
-  doiStatus: DataProductDoiStatus,
+  productCode: string,
+  release: string,
+  doiStatus: Nullable<DataProductDoiStatus|DataProductDoiStatus[]>,
 ): DataProductCitationState => {
+  if (!exists(doiStatus)) {
+    return state;
+  }
   const updatedState: DataProductCitationState = { ...state };
-  const transformedRelease: Nullable<IReleaseLike> = ReleaseService.transformDoiStatusRelease(
+  // eslint-disable-next-line max-len
+  const appliedDoiStatus: Nullable<DataProductDoiStatus> = BundleService.determineAppliedBundleRelease(
+    ((updatedState.neonContextState?.data as UnknownRecord || {})).bundles as BundleContext,
+    release,
+    productCode,
     doiStatus,
+  );
+  const transformedRelease: Nullable<IReleaseLike> = ReleaseService.transformDoiStatusRelease(
+    appliedDoiStatus,
   );
   if (!exists(transformedRelease)) {
     return updatedState;
@@ -282,14 +295,16 @@ const buildCitationDownloadKey = (
 const hasCitationDownloadStatus = (
   citationDownloadsFetchStatus: Record<string, FetchStatusState>,
   provisionalCb: boolean,
+  productCode: string,
   statusCb: FetchStatus,
 ): boolean => (
   Object.keys(citationDownloadsFetchStatus).some((k: string): boolean => {
     if (citationDownloadsFetchStatus[k]) {
       let shouldConsider = true;
-      if (!provisionalCb && k.includes(PROVISIONAL_RELEASE)) {
-        shouldConsider = false;
-      } else if (provisionalCb && !k.includes(PROVISIONAL_RELEASE)) {
+      if (!k.includes(productCode)
+          || (!provisionalCb && k.includes(PROVISIONAL_RELEASE))
+          || (provisionalCb && !k.includes(PROVISIONAL_RELEASE))
+      ) {
         shouldConsider = false;
       }
       if (shouldConsider && (citationDownloadsFetchStatus[k].status === statusCb)) {
@@ -302,14 +317,16 @@ const hasCitationDownloadStatus = (
 const handleResetCitationDownloads = (
   citationDownloadsFetchStatus: Record<string, FetchStatusState>,
   provisionalCb: boolean,
+  productCode: string,
   dispatch: Undef<Dispatch<AnyAction>>,
 ): void => {
   Object.keys(citationDownloadsFetchStatus).forEach((k: string): void => {
     if (citationDownloadsFetchStatus[k]) {
       let shouldReset = true;
-      if (!provisionalCb && k.includes(PROVISIONAL_RELEASE)) {
-        shouldReset = false;
-      } else if (provisionalCb && !k.includes(PROVISIONAL_RELEASE)) {
+      if (!k.includes(productCode)
+          || (!provisionalCb && k.includes(PROVISIONAL_RELEASE))
+          || (provisionalCb && !k.includes(PROVISIONAL_RELEASE))
+      ) {
         shouldReset = false;
       }
       if (shouldReset) {
@@ -397,111 +414,211 @@ const useViewState = (
   const hasAppliedReleaseDoi: boolean = isStringNonEmpty(appliedReleaseDoi);
   const hideAppliedReleaseCitation: boolean = exists(appliedReleaseObject)
     && ((appliedReleaseObject as CitationRelease).showCitation === false);
-  // Determine tombstoned state
+  // Determine tombstoned state for entire citation
+  const hasProductReleaseDois: boolean = exists(productReleaseDois)
+    && isStringNonEmpty(appliedRenderedReleaseTag)
+    && exists(productReleaseDois[appliedRenderedReleaseTag as string]);
+  let dataProductDoiStatus: Nullable<DataProductDoiStatus|DataProductDoiStatus[]> = null;
   let isTombstoned: boolean = false;
-  if (exists(productReleaseDois)
-      && isStringNonEmpty(appliedRenderedReleaseTag)
-      && exists(productReleaseDois[appliedRenderedReleaseTag as string])) {
-    const dataProductDoiStatus: Nullable<DataProductDoiStatus> = productReleaseDois[
-      appliedRenderedReleaseTag as string
-    ];
-    const doiStatusType: Nullable<DoiStatusType> = dataProductDoiStatus?.status;
-    isTombstoned = (exists(doiStatusType) && (doiStatusType === DoiStatusType.TOMBSTONED));
-  }
-  // Identify whether or not viewing a bundled product with applicable DOI
-  // and capture the bundle DOI product code.
-  const hasBundleCode: boolean = existsNonEmpty(bundle.parentCodes)
-    && isStringNonEmpty(bundle.doiProductCode);
-  const bundleParentCode: Nullable<string> = hasBundleCode
-    ? bundle.doiProductCode
-    : null;
-  let bundleProduct: Nullable<ContextDataProduct> = null;
-  if (hasBundleCode && exists(bundleParents[bundleParentCode as string])) {
-    bundleProduct = bundleParents[bundleParentCode as string];
-  }
-  const hasBundleProduct: boolean = exists(bundleProduct);
-  // Determines if the latest release has a bundle defined for this product.
-  let hasLatestReleaseBundle: boolean = false;
-  if (hasLatestRelease && exists(baseProduct)) {
-    hasLatestReleaseBundle = BundleService.isProductInBundle(
-      bundlesContext,
-      (latestReleaseObject as CitationRelease).release,
-      (baseProduct as ContextDataProduct).productCode,
-    );
-  }
-  // Determine if the bundle product has data for the specified release.
-  let isBundleProductInRelease: boolean = true;
-  if (hasBundleProduct && hasSpecifiedRelease && !isAppliedReleaseLatestNonProv) {
-    const bundleHasRelease: Undef<DataProductRelease> = bundleProduct?.releases.find(
-      (r: DataProductRelease): boolean => r.release === appliedRenderedReleaseTag,
-    );
-    isBundleProductInRelease = exists(bundleHasRelease);
-  }
-  // Determine if the citable product should be the bundle container product
-  // or the currently specified product.
-  // eslint-disable-next-line max-len
-  const citableBaseProduct: Nullable<ContextDataProduct> = hasBundleProduct && isBundleProductInRelease
-    ? bundleProduct
-    : baseProduct;
-  // Determine the product to use for citing within the applicable release
-  // and within the context of bundles.
-  let citableReleaseProduct: Nullable<ContextDataProduct> = null;
-  if (hasAppliedReleaseDoi && !hideAppliedReleaseCitation) {
-    // If we're referencing latest release and provisional, and there isn't a bundle
-    // defined for the latest release, use base product for release citation
-    if (!hasSpecifiedRelease && !hasLatestReleaseBundle) {
-      citableReleaseProduct = baseProduct;
+  const determineDoiStatusTombstone = (
+    dpds: DataProductDoiStatus|DataProductDoiStatus[],
+  ): boolean => {
+    let tsResult = false;
+    if (!Array.isArray(dpds)) {
+      // eslint-disable-next-line max-len
+      const doiStatusType: Nullable<DoiStatusType> = (dpds as Nullable<DataProductDoiStatus>)?.status;
+      tsResult = (exists(doiStatusType) && (doiStatusType === DoiStatusType.TOMBSTONED));
     } else {
-      // Has a specified release, or if not, has latest release bundle.
-      // When a bundled product code is available for the given release,
-      // get the product for the parent code and release.
-      // Otherwise, the citable product is the current product for the specified
-      // release when available.
-      // eslint-disable-next-line no-lonely-if
-      if (hasBundleCode) {
-        const bpr: Record<string, Nullable<ContextDataProduct>> = bundleParentReleases[
-          bundleParentCode as string
-        ];
-        if (exists(bpr)) {
-          const product: Nullable<ContextDataProduct> = bpr[appliedRenderedReleaseTag as string];
+      tsResult = dpds.every((ds: DataProductDoiStatus): boolean => {
+        if (!exists(ds)) return false;
+        return (ds.status === DoiStatusType.TOMBSTONED);
+      });
+    }
+    return tsResult;
+  };
+  if (hasProductReleaseDois) {
+    dataProductDoiStatus = productReleaseDois[appliedRenderedReleaseTag as string];
+    isTombstoned = determineDoiStatusTombstone(
+      dataProductDoiStatus as DataProductDoiStatus|DataProductDoiStatus[],
+    );
+  }
+  // Identify whether or not viewing a bundled product with applicable DOI.
+  const hasBundleCode: boolean = existsNonEmpty(bundle.parentCodes)
+    && (isStringNonEmpty(bundle.doiProductCode)
+      || (Array.isArray(bundle.doiProductCode) && existsNonEmpty(bundle.doiProductCode)));
+  // Builds a citation item based on current state
+  // of release, specified bundle code when applicable.
+  const buildCitationItem = (
+    bundleParentCode?: string,
+    bundleDpds?: DataProductDoiStatus,
+  ): DataProductCitationItem => {
+    const item: DataProductCitationItem = {
+      releaseObject: null,
+      doiUrl: null,
+      citableBaseProduct: null,
+      citableReleaseProduct: null,
+      bundleParentCode: null,
+      isTombstoned: false,
+    };
+    let bundleProduct: Nullable<ContextDataProduct> = null;
+    if (hasBundleCode
+        && isStringNonEmpty(bundleParentCode)
+        && exists(bundleParents[bundleParentCode as string])) {
+      bundleProduct = bundleParents[bundleParentCode as string];
+    }
+    const hasBundleProduct: boolean = exists(bundleProduct);
+    // Determines if the latest release has a bundle defined for this product.
+    let hasLatestReleaseBundle: boolean = false;
+    if (hasLatestRelease && exists(baseProduct)) {
+      hasLatestReleaseBundle = BundleService.isProductInBundle(
+        bundlesContext,
+        (latestReleaseObject as CitationRelease).release,
+        (baseProduct as ContextDataProduct).productCode,
+      );
+    }
+    // Determine if the bundle product has data for the specified release.
+    let isBundleProductInRelease: boolean = true;
+    if (hasBundleProduct && hasSpecifiedRelease && !isAppliedReleaseLatestNonProv) {
+      const bundleHasRelease: Undef<DataProductRelease> = bundleProduct?.releases.find(
+        (r: DataProductRelease): boolean => r.release === appliedRenderedReleaseTag,
+      );
+      isBundleProductInRelease = exists(bundleHasRelease);
+    }
+    let itemReleaseObject: Nullable<CitationRelease> = appliedReleaseObject;
+    let itemDoiUrl: Nullable<string> = appliedReleaseDoi;
+    let itemIsTombstoned: boolean = false;
+    // Determine if the citable product should be the bundle container product
+    // or the currently specified product.
+    // eslint-disable-next-line max-len
+    const citableBaseProduct: Nullable<ContextDataProduct> = hasBundleProduct && isBundleProductInRelease
+      ? bundleProduct
+      : baseProduct;
+    // Determine the product to use for citing within the applicable release
+    // and within the context of bundles.
+    let citableReleaseProduct: Nullable<ContextDataProduct> = null;
+    if (hasAppliedReleaseDoi && !hideAppliedReleaseCitation) {
+      // If we're referencing latest release and provisional, and there isn't a bundle
+      // defined for the latest release, use base product for release citation.
+      if (!hasSpecifiedRelease && !hasLatestReleaseBundle) {
+        citableReleaseProduct = baseProduct;
+      } else {
+        // Has a specified release, or if not, has latest release bundle.
+        // When a bundled product code is available for the given release,
+        // get the product for the parent code and release.
+        // Otherwise, the citable product is the current product for the specified
+        // release when available.
+        // eslint-disable-next-line no-lonely-if
+        if (hasBundleCode) {
+          const bpr: Record<string, Nullable<ContextDataProduct>> = bundleParentReleases[
+            bundleParentCode as string
+          ];
+          if (exists(bpr)) {
+            const product: Nullable<ContextDataProduct> = bpr[appliedRenderedReleaseTag as string];
+            if (exists(product)) {
+              citableReleaseProduct = product;
+            }
+          }
+        } else {
+          const product: Nullable<ContextDataProduct> = productReleases[
+            appliedRenderedReleaseTag as string
+          ];
           if (exists(product)) {
             citableReleaseProduct = product;
           }
         }
-      } else {
-        const product: Nullable<ContextDataProduct> = productReleases[
-          appliedRenderedReleaseTag as string
-        ];
-        if (exists(product)) {
-          citableReleaseProduct = product;
-        }
       }
+    }
+    // Determine release property states from current bundle.
+    if (hasBundleCode
+        && isStringNonEmpty(bundleParentCode)
+        && exists(bundleDpds)) {
+      const bundleCitationRelease: CitationRelease = ReleaseService.transformDoiStatusRelease(
+        bundleDpds,
+      ) as CitationRelease;
+      itemReleaseObject = bundleCitationRelease;
+      itemDoiUrl = bundleCitationRelease.productDoi.url;
+      itemIsTombstoned = determineDoiStatusTombstone(bundleDpds as DataProductDoiStatus);
+    }
+    item.releaseObject = itemReleaseObject;
+    item.doiUrl = itemDoiUrl;
+    item.isTombstoned = itemIsTombstoned;
+    item.citableBaseProduct = citableBaseProduct;
+    item.citableReleaseProduct = citableReleaseProduct;
+    item.bundleParentCode = bundleParentCode;
+    return item;
+  };
+  // Build set of applicable citation items for product, bundle
+  const items: DataProductCitationItem[] = [];
+  if (!hasBundleCode) {
+    const nonBundleItem: DataProductCitationItem = buildCitationItem();
+    items.push(nonBundleItem);
+  } else if (isStringNonEmpty(bundle.doiProductCode)) {
+    const bundleParentCode: string = bundle.doiProductCode as string;
+    const singleBundleItem: DataProductCitationItem = buildCitationItem(bundleParentCode);
+    items.push(singleBundleItem);
+  } else if (Array.isArray(bundle.doiProductCode) && existsNonEmpty(bundle.doiProductCode)) {
+    const bundleParentCodes: string[] = bundle.doiProductCode;
+    if (hasProductReleaseDois && !Array.isArray(dataProductDoiStatus)) {
+      const bundleParentCode: string = bundle.doiProductCode[0];
+      const singleBundleItem: DataProductCitationItem = buildCitationItem(bundleParentCode);
+      items.push(singleBundleItem);
+    } else {
+      bundleParentCodes.forEach((bundleParentCode: string): void => {
+        let bundleDpds: Undef<DataProductDoiStatus>;
+        if (hasProductReleaseDois && Array.isArray(dataProductDoiStatus)) {
+          bundleDpds = dataProductDoiStatus.find((ds: DataProductDoiStatus): boolean => {
+            if (!exists(ds)) return false;
+            return ds.productCode.localeCompare(bundleParentCode) === 0;
+          });
+        }
+        // If we could not identify a matching DOI record for the bundle parent
+        // code, it is an invalid state, do not capture.
+        // This should not occur if bundles and DOIs are properly
+        // configured and data come across properly in API calls.
+        if (exists(bundleDpds)) {
+          const bundleItem: DataProductCitationItem = buildCitationItem(
+            bundleParentCode,
+            bundleDpds,
+          );
+          items.push(bundleItem);
+        }
+      });
     }
   }
   // Determine if there's a valid product to generate the citation with.
-  const hasValidProduct: boolean = exists(citableBaseProduct);
-  const hasValidReleaseProduct: boolean = exists(citableReleaseProduct);
+  const hasValidProduct: boolean = items.some(
+    (item: DataProductCitationItem): boolean => exists(item.citableBaseProduct),
+  );
+  const hasValidReleaseProduct: boolean = items.some(
+    (item: DataProductCitationItem): boolean => exists(item.citableReleaseProduct),
+  );
   // Verify identified release product is in the applied release.
   let isCitableReleaseProductInRelease: boolean = false;
   // If looking at latest release non provisional, consider in release.
   if (isAppliedReleaseLatestNonProv) {
     isCitableReleaseProductInRelease = true;
   } else if (hasValidReleaseProduct) {
-    const productHasRelease: Undef<DataProductRelease> = citableReleaseProduct?.releases.find(
-      (r: DataProductRelease): boolean => r.release === appliedRenderedReleaseTag,
-    );
-    isCitableReleaseProductInRelease = exists(productHasRelease) || isTombstoned;
+    const productHasRelease: boolean = items.some((item: DataProductCitationItem): boolean => {
+      const dpr: Undef<DataProductRelease> = item.citableReleaseProduct?.releases.find(
+        (r: DataProductRelease): boolean => r.release === appliedRenderedReleaseTag,
+      );
+      return exists(dpr) || item.isTombstoned;
+    });
+    isCitableReleaseProductInRelease = productHasRelease || isTombstoned;
   }
   // Determine the overall citation display status.
   let appliedStatus: ContextStatus = status;
   let displayType: DisplayType = DisplayType.CONDITIONAL;
   const isReady: boolean = (status === ContextStatus.READY);
   const isError: boolean = (status === ContextStatus.ERROR);
+  const setErrorNotAvailable = (): void => {
+    appliedStatus = ContextStatus.ERROR;
+    displayType = DisplayType.NOT_AVAILABLE;
+  };
   if (isReady) {
     if (!hasValidProduct) {
       // If the context is ready and no product is identified, error state.
-      appliedStatus = ContextStatus.ERROR;
-      displayType = DisplayType.NOT_AVAILABLE;
+      setErrorNotAvailable();
     } else if (hasSpecifiedRelease) {
       // A release has been specified, determine validity.
       if (hideAppliedReleaseCitation && !isAppliedReleaseLatestNonProv) {
@@ -522,8 +639,7 @@ const useViewState = (
           // If the component is ready and a release was specified but
           // failed to resolve the appropriate citable release product,
           // error state.
-          appliedStatus = ContextStatus.ERROR;
-          displayType = DisplayType.NOT_AVAILABLE;
+          setErrorNotAvailable();
         }
       } else if (isAppliedReleaseLatestNonProv) {
         displayType = DisplayType.PROVISIONAL;
@@ -546,8 +662,7 @@ const useViewState = (
     } else if (!hasValidProduct || !hasValidReleaseProduct) {
       // If the component is ready and the display state is conditional
       // and a valid product and release product were not found, error state.
-      appliedStatus = ContextStatus.ERROR;
-      displayType = DisplayType.NOT_AVAILABLE;
+      setErrorNotAvailable();
     }
   } else if (isError) {
     if (hasSpecifiedRelease && isSpecifiedReleaseLatestNonProv) {
@@ -559,14 +674,10 @@ const useViewState = (
   }
   return {
     status: appliedStatus,
-    releaseObject: appliedReleaseObject,
-    doiUrl: appliedReleaseDoi,
+    citationItems: items,
     releases,
-    citableBaseProduct,
-    citableReleaseProduct,
     displayType,
     isTombstoned,
-    bundleParentCode,
     citationDownloadsFetchStatus,
   };
 };

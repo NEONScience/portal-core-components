@@ -54,7 +54,7 @@ export interface IReleaseService {
    * @param doiStatus The DOI status representation
    * @return The transformed release like representation
    */
-  transformDoiStatusRelease: (doiStatus: DataProductDoiStatus) => Nullable<IReleaseLike>;
+  transformDoiStatusRelease: (doiStatus: Nullable<DataProductDoiStatus>) => Nullable<IReleaseLike>;
 }
 
 const ReleaseService: IReleaseService = {
@@ -162,19 +162,22 @@ const ReleaseService: IReleaseService = {
     });
     return combinedReleases as T[];
   },
-  transformDoiStatusRelease: (doiStatus: DataProductDoiStatus): Nullable<IReleaseLike> => {
+  transformDoiStatusRelease: (
+    doiStatus: Nullable<DataProductDoiStatus>,
+  ): Nullable<IReleaseLike> => {
     if (!exists(doiStatus)) {
       return null;
     }
+    const appliedDoiStatus: DataProductDoiStatus = doiStatus as DataProductDoiStatus;
     const transformed: DataProductRelease & InternalRelease = {
       url: '',
       productDoi: {
-        url: doiStatus.url,
-        generationDate: doiStatus.generationDate,
+        url: appliedDoiStatus.url,
+        generationDate: appliedDoiStatus.generationDate,
       },
-      release: doiStatus.release,
-      generationDate: doiStatus.releaseGenerationDate,
-      description: doiStatus.release,
+      release: appliedDoiStatus.release,
+      generationDate: appliedDoiStatus.releaseGenerationDate,
+      description: appliedDoiStatus.release,
       showCitation: true,
       showDoi: true,
       showViz: false,

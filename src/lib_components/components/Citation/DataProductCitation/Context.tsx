@@ -88,7 +88,7 @@ export interface ProviderProps {
   productCode?: string;
   release?: Nullable<string>;
   contextControlled?: boolean;
-  children?: React.ReactNode | React.ReactNodeArray;
+  children?: React.ReactNode | React.ReactNode[];
 }
 
 const Provider: React.FC<ProviderProps> = (props: ProviderProps): JSX.Element => {
@@ -236,6 +236,7 @@ const Provider: React.FC<ProviderProps> = (props: ProviderProps): JSX.Element =>
                 return;
               }
               dispatch(ActionCreator.fetchProductReleaseDoiSucceeded(
+                queryProductCode,
                 fetchRelease,
                 response.data,
               ));

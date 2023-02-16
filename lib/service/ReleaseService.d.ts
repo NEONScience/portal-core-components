@@ -46,7 +46,7 @@ export interface IReleaseService {
      * @param doiStatus The DOI status representation
      * @return The transformed release like representation
      */
-    transformDoiStatusRelease: (doiStatus: DataProductDoiStatus) => Nullable<IReleaseLike>;
+    transformDoiStatusRelease: (doiStatus: Nullable<DataProductDoiStatus>) => Nullable<IReleaseLike>;
 }
 declare const ReleaseService: IReleaseService;
 export default ReleaseService;

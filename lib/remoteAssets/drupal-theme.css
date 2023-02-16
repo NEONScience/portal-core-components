@@ -1910,6 +1910,38 @@
 @font-face {
   #header, #footer {
     font-family: "Inter";
+/*     src: url("../../../fonts/Inter/Inter-100.woff2") format("woff2"), url("../../../fonts/Inter/Inter-100.woff") format("woff"); */
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap; } }
+
+@font-face {
+  #header, #footer {
+    font-family: "Inter";
+/*     src: url("../../../fonts/Inter/Inter-100-Italic.woff2") format("woff2"), url("../../../fonts/Inter/Inter-100-Italic.woff") format("woff"); */
+    font-weight: 100;
+    font-style: italic;
+    font-display: swap; } }
+
+@font-face {
+  #header, #footer {
+    font-family: "Inter";
+/*     src: url("../../../fonts/Inter/Inter-200.woff2") format("woff2"), url("../../../fonts/Inter/Inter-200.woff") format("woff"); */
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap; } }
+
+@font-face {
+  #header, #footer {
+    font-family: "Inter";
+/*     src: url("../../../fonts/Inter/Inter-200-Italic.woff2") format("woff2"), url("../../../fonts/Inter/Inter-200-Italic.woff") format("woff"); */
+    font-weight: 200;
+    font-style: italic;
+    font-display: swap; } }
+
+@font-face {
+  #header, #footer {
+    font-family: "Inter";
 /*     src: url("../../../fonts/Inter/Inter-300.woff2") format("woff2"), url("../../../fonts/Inter/Inter-300.woff") format("woff"); */
     font-weight: 300;
     font-style: normal;
@@ -1925,6 +1957,14 @@
     font-display: swap;
   }
 }
+@font-face {
+  #header, #footer {
+    font-family: "Inter";
+/*     src: url("../../../fonts/Inter/Inter-300-Italic.woff2") format("woff2"), url("../../../fonts/Inter/Inter-300-Italic.woff") format("woff"); */
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap; } }
+
 @font-face {
   #header, #footer {
     font-family: "Inter";
@@ -1964,8 +2004,16 @@
 @font-face {
   #header, #footer {
     font-family: "Inter";
-/*     src: url("../../../fonts/Inter/Inter-600.woff2") format("woff2"), url("../../../fonts/Inter/Inter-600.woff") format("woff"); */
-    font-weight: 600;
+/*     src: url("../../../fonts/Inter/Inter-400-Italic.woff2") format("woff2"), url("../../../fonts/Inter/Inter-400-Italic.woff") format("woff"); */
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap; } }
+
+@font-face {
+  #header, #footer {
+    font-family: "Inter";
+/*     src: url("../../../fonts/Inter/Inter-500.woff2") format("woff2"), url("../../../fonts/Inter/Inter-500.woff") format("woff"); */
+    font-weight: 500;
     font-style: normal;
     font-display: swap;
   }
@@ -1982,219 +2030,184 @@
 @font-face {
   #header, #footer {
     font-family: "Inter";
+/*     src: url("../../../fonts/Inter/Inter-500-Italic.woff2") format("woff2"), url("../../../fonts/Inter/Inter-500-Italic.woff") format("woff"); */
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap; } }
+
+@font-face {
+  #header, #footer {
+    font-family: "Inter";
+/*     src: url("../../../fonts/Inter/Inter-600.woff2") format("woff2"), url("../../../fonts/Inter/Inter-600.woff") format("woff"); */
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap; } }
+
+@font-face {
+  #header, #footer {
+    font-family: "Inter";
+/*     src: url("../../../fonts/Inter/Inter-600-Italic.woff2") format("woff2"), url("../../../fonts/Inter/Inter-600-Italic.woff") format("woff"); */
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap; } }
+
+@font-face {
+  #header, #footer {
+    font-family: "Inter";
 /*     src: url("../../../fonts/Inter/Inter-700.woff2") format("woff2"), url("../../../fonts/Inter/Inter-700.woff") format("woff"); */
     font-weight: 700;
     font-style: normal;
-    font-display: swap;
-  }
-}
+    font-display: swap; } }
+
 @font-face {
   #header, #footer {
     font-family: "Inter";
 /*     src: url("../../../fonts/Inter/Inter-700-Italic.woff2") format("woff2"), url("../../../fonts/Inter/Inter-700-Italic.woff") format("woff"); */
     font-weight: 700;
     font-style: italic;
-    font-display: swap;
-  }
-}
+    font-display: swap; } }
+
 @font-face {
   #header, #footer {
     font-family: "Inter";
 /*     src: url("../../../fonts/Inter/Inter-800.woff2") format("woff2"), url("../../../fonts/Inter/Inter-800.woff") format("woff"); */
     font-weight: 800;
     font-style: normal;
-    font-display: swap;
-  }
-}
+    font-display: swap; } }
+
 @font-face {
   #header, #footer {
     font-family: "Inter";
 /*     src: url("../../../fonts/Inter/Inter-800-Italic.woff2") format("woff2"), url("../../../fonts/Inter/Inter-800-Italic.woff") format("woff"); */
     font-weight: 800;
     font-style: italic;
-    font-display: swap;
-  }
-}
+    font-display: swap; } }
+
 @font-face {
   #header, #footer {
     font-family: "Inter";
 /*     src: url("../../../fonts/Inter/Inter-900.woff2") format("woff2"), url("../../../fonts/Inter/Inter-900.woff") format("woff"); */
     font-weight: 900;
     font-style: normal;
-    font-display: swap;
-  }
-}
+    font-display: swap; } }
+
 @font-face {
   #header, #footer {
     font-family: "Inter";
 /*     src: url("../../../fonts/Inter/Inter-900-Italic.woff2") format("woff2"), url("../../../fonts/Inter/Inter-900-Italic.woff") format("woff"); */
     font-weight: 900;
     font-style: italic;
-    font-display: swap;
-  }
-}
-#header *,
-#header *:before,
-#header *:after, #footer *,
-#footer *:before,
-#footer *:after {
-  box-sizing: border-box;
-}
-#header html, #footer html {
-  font-size: 100%;
-}
-#header body, #footer body {
-  color: #141516;
-  font-family: "Inter", sans-serif;
-  font-feature-settings: "ss01", "ss03", "ss04";
-  background: #fff !important;
-  overflow-x: hidden;
-}
-@media (min-width: 0px) {
+    font-display: swap; } }
+  #header *,
+  #header *:before,
+  #header *:after, #footer *,
+  #footer *:before,
+  #footer *:after {
+    box-sizing: border-box; }
+  #header html, #footer html {
+    font-size: 100%; }
   #header body, #footer body {
     font-size: 1.125rem;
-  }
-}
-@media (min-width: 600px) {
-  #header body, #footer body {
-    font-size: 1.25rem;
-  }
-}
-#header :focus, #footer :focus {
-  outline: 1px dashed rgba(253, 196, 0, 0.6);
-}
-#header :active, #footer :active {
-  outline: 0;
-}
-#header h1, #footer h1 {
-  font-weight: normal;
-  line-height: 1;
-  color: #000;
-  font-family: "Inter", sans-serif;
-  font-feature-settings: "ss01", "ss03", "ss04";
-  margin: 1em 0;
-}
-@media (min-width: 0px) {
+    color: #141516;
+    font-family: "Inter", sans-serif;
+    font-feature-settings: "ss01", "ss02", "ss03";
+    background: #fff !important;
+    overflow-x: hidden; }
+    @media (min-width: 37.5em) {
+      #header body, #footer body {
+        font-size: 1.25rem; } }
   #header h1, #footer h1 {
     font-size: 2.125rem;
-  }
-}
-@media (min-width: 600px) {
-  #header h1, #footer h1 {
-    font-size: 3.375rem;
-  }
-}
-#header h2, #footer h2 {
-  font-weight: normal;
-  line-height: 1;
-  color: #000;
-  font-family: "Inter", sans-serif;
-  font-feature-settings: "ss01", "ss03", "ss04";
-  margin: 1em 0;
-}
-@media (min-width: 0px) {
+    font-weight: normal;
+    line-height: 1;
+    color: #000;
+    font-family: "Inter", sans-serif;
+    font-feature-settings: "ss01", "ss02", "ss03";
+    margin: 1em 0; }
+    @media (min-width: 37.5em) {
+      #header h1, #footer h1 {
+        font-size: 3.375rem; } }
   #header h2, #footer h2 {
     font-size: 1.375rem;
-  }
-}
-@media (min-width: 600px) {
-  #header h2, #footer h2 {
-    font-size: 1.875rem;
-  }
-}
-#header h3, #footer h3 {
-  font-weight: normal;
-  color: #000;
-  font-family: "Inter", sans-serif;
-  font-feature-settings: "ss01", "ss03", "ss04";
-  margin: 1em 0;
-}
-@media (min-width: 0px) {
+    font-weight: normal;
+    line-height: 1;
+    color: #000;
+    font-family: "Inter", sans-serif;
+    font-feature-settings: "ss01", "ss02", "ss03";
+    margin: 1em 0; }
+    @media (min-width: 37.5em) {
+      #header h2, #footer h2 {
+        font-size: 1.875rem; } }
   #header h3, #footer h3 {
     font-size: 1.25rem;
-  }
-}
-@media (min-width: 600px) {
-  #header h3, #footer h3 {
-    font-size: 1.5rem;
-  }
-}
-#header h4, #footer h4 {
-  font-weight: normal;
-  line-height: 1;
-  color: #000;
-  font-family: "Inter", sans-serif;
-  font-feature-settings: "ss01", "ss03", "ss04";
-  margin: 1em 0;
-}
-@media (min-width: 0px) {
+    font-weight: normal;
+    line-height: 1;
+    color: #000;
+    font-family: "Inter", sans-serif;
+    font-feature-settings: "ss01", "ss02", "ss03";
+    margin: 1em 0; }
+    @media (min-width: 37.5em) {
+      #header h3, #footer h3 {
+        font-size: 1.5rem; } }
   #header h4, #footer h4 {
     font-size: 1.125rem;
-  }
-}
-@media (min-width: 600px) {
-  #header h4, #footer h4 {
-    font-size: 1.25rem;
-  }
-}
-#header h5, #footer h5 {
-  font-weight: normal;
-  line-height: 1;
-  color: #000;
-  font-family: "Inter", sans-serif;
-  font-feature-settings: "ss01", "ss03", "ss04";
-  margin: 1em 0;
-}
-@media (min-width: 0px) {
+    font-weight: normal;
+    line-height: 1;
+    color: #000;
+    font-family: "Inter", sans-serif;
+    font-feature-settings: "ss01", "ss02", "ss03";
+    margin: 1em 0; }
+    @media (min-width: 37.5em) {
+      #header h4, #footer h4 {
+        font-size: 1.25rem; } }
   #header h5, #footer h5 {
     font-size: 1rem;
-  }
-}
-@media (min-width: 600px) {
-  #header h5, #footer h5 {
-    font-size: 1.125rem;
-  }
-}
-#header h6, #footer h6 {
-  font-weight: normal;
-  line-height: 1;
-  color: #000;
-  font-family: "Inter", sans-serif;
-  font-feature-settings: "ss01", "ss03", "ss04";
-  margin: 1em 0;
-}
-@media (min-width: 0px) {
+    font-weight: normal;
+    line-height: 1;
+    color: #000;
+    font-family: "Inter", sans-serif;
+    font-feature-settings: "ss01", "ss02", "ss03";
+    margin: 1em 0; }
+    @media (min-width: 37.5em) {
+      #header h5, #footer h5 {
+        font-size: 1.125rem; } }
   #header h6, #footer h6 {
     font-size: 0.9375rem;
-  }
-}
-@media (min-width: 600px) {
-  #header h6, #footer h6 {
-    font-size: 1rem;
-  }
-}
-#header body.page-node-type-page .layout-content h1, #footer body.page-node-type-page .layout-content h1 {
-  margin: 0 0 1.875rem 0;
-}
-@media (min-width: 768px) {
-  #header body.page-node-type-page .layout-content h1, #footer body.page-node-type-page .layout-content h1 {
-    margin: 0 0 3.75rem 0;
-  }
-}
-#header body.page-node-type-update .layout-content h1, #footer body.page-node-type-update .layout-content h1 {
-  margin: 0 0 1.125rem 0;
-}
-@media (min-width: 768px) {
-  #header body.page-node-type-update .layout-content h1, #footer body.page-node-type-update .layout-content h1 {
-    margin: 0 0 1.5rem 0;
-  }
-}
-#header p, #footer p {
-  line-height: 1.6;
-  color: #000;
-  margin: 1em 0;
-}
-@media (min-width: 0px) {
+    font-weight: normal;
+    line-height: 1;
+    color: #000;
+    font-family: "Inter", sans-serif;
+    font-feature-settings: "ss01", "ss02", "ss03";
+    margin: 1em 0; }
+    @media (min-width: 37.5em) {
+      #header h6, #footer h6 {
+        font-size: 1rem; } }
+  #header hr:not([class]), #footer hr:not([class]) {
+    border: 0;
+    border-bottom: 1px solid #E4E6E7; }
+  #header a:not([class]), #footer a:not([class]) {
+    color: #0073CF; }
+    #header a:not([class]):active, #header a:not([class]):focus, #header a:not([class]):hover, #footer a:not([class]):active, #footer a:not([class]):focus, #footer a:not([class]):hover {
+      color: #0092E2; }
+    h1 > #header a:not([class]),
+    h2 > #header a:not([class]),
+    h3 > #header a:not([class]),
+    h4 > #header a:not([class]),
+    h5 > #header a:not([class]),
+    h6 > #header a:not([class]), h1 > #footer a:not([class]),
+    h2 > #footer a:not([class]),
+    h3 > #footer a:not([class]),
+    h4 > #footer a:not([class]),
+    h5 > #footer a:not([class]),
+    h6 > #footer a:not([class]) {
+      text-decoration: none; }
+    @media (max-width: 47.9375em) {
+      #header a:not([class]), #footer a:not([class]) {
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        -ms-word-break: break-all;
+        word-break: break-all;
+        word-break: break-word; } }
   #header p, #footer p {
     font-size: 1rem;
   }

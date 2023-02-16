@@ -41,7 +41,7 @@ export interface ContextDataProduct {
 export interface DataState {
     product: Nullable<ContextDataProduct>;
     productReleases: Record<string, Nullable<ContextDataProduct>>;
-    productReleaseDois: Record<string, Nullable<DataProductDoiStatus>>;
+    productReleaseDois: Record<string, Nullable<DataProductDoiStatus | DataProductDoiStatus[]>>;
     bundleParents: Record<string, ContextDataProduct>;
     bundleParentReleases: Record<string, Record<string, ContextDataProduct>>;
     releases: CitationRelease[];

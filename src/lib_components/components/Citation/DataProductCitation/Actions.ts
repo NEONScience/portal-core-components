@@ -99,6 +99,7 @@ export interface FetchProductReleaseDoiFailedAction extends AnyAction {
 }
 export interface FetchProductReleaseDoiSucceededAction extends AnyAction {
   type: typeof ActionTypes.FETCH_PRODUCT_RELEASE_DOI_SUCCEEDED;
+  productCode: string;
   release: string;
   data: DataProductDoiStatus;
 }
@@ -265,10 +266,12 @@ const ActionCreator = {
     error,
   }),
   fetchProductReleaseDoiSucceeded: (
+    productCode: string,
     release: string,
     data: DataProductDoiStatus,
   ): FetchProductReleaseDoiSucceededAction => ({
     type: ActionTypes.FETCH_PRODUCT_RELEASE_DOI_SUCCEEDED,
+    productCode,
     release,
     data,
   }),

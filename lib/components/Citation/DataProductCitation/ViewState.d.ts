@@ -12,21 +12,29 @@ export interface DataProductCitationViewProps {
     showTextOnly?: boolean;
     textOnlyProps?: CitationTextOnlyProps;
 }
+export interface DataProductCitationItemViewProps extends DataProductCitationViewProps {
+    citationItem: DataProductCitationItem;
+    viewState: DataProductCitationViewState;
+}
 export declare enum DisplayType {
     PROVISIONAL = "PROVISIONAL",
     RELEASE = "RELEASE",
     CONDITIONAL = "CONDITIONAL",
     NOT_AVAILABLE = "NOT_AVAILABLE"
 }
-export interface DataProductCitationViewState {
-    status: ContextStatus;
-    displayType: DisplayType;
-    isTombstoned: boolean;
-    releases: CitationRelease[];
+export interface DataProductCitationItem {
     releaseObject: Nullable<CitationRelease>;
     doiUrl: Nullable<string>;
     citableBaseProduct: Nullable<ContextDataProduct>;
     citableReleaseProduct: Nullable<ContextDataProduct>;
     bundleParentCode: Nullable<string>;
+    isTombstoned: boolean;
+}
+export interface DataProductCitationViewState {
+    status: ContextStatus;
+    displayType: DisplayType;
+    isTombstoned: boolean;
+    releases: CitationRelease[];
+    citationItems: DataProductCitationItem[];
     citationDownloadsFetchStatus: Record<string, FetchStatusState>;
 }

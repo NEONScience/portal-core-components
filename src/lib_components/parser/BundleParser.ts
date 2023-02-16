@@ -47,7 +47,7 @@ const BundleParser: IBundleParser = {
     bundles.apiResponse.forEach((releaseBundles: ReleaseDataProductBundles): void => {
       const bundleProducts: Record<string, string[]> = {};
       const bundleProductForwardAvailability: Record<string, boolean> = {};
-      const doiLookup: Record<string, string> = {};
+      const doiLookup: Record<string, string|string[]> = {};
       const splitLookup: Record<string, string[]> = {};
       const { release, dataProductBundles } = releaseBundles;
       dataProductBundles.forEach((bundle: DataProductBundle): void => {
@@ -67,9 +67,21 @@ const BundleParser: IBundleParser = {
           bundleProducts[bundleProductCode].push(productCode);
           if (!exists(isPrimaryBundle)) {
             doiLookup[productCode] = bundleProductCode;
-          } else if (isPrimaryBundle === true) {
+          } else {
             // Type check guard for positive boolean value, not non falsey
-            doiLookup[productCode] = bundleProductCode;
+            const primary = (isPrimaryBundle === true);
+            let bundleParents = [];
+            if (exists(doiLookup[productCode]) && Array.isArray(doiLookup[productCode])) {
+              bundleParents = doiLookup[productCode] as string[];
+              if (primary) {
+                bundleParents.unshift(bundleProductCode);
+              } else {
+                bundleParents.push(bundleProductCode);
+              }
+            } else {
+              bundleParents.push(bundleProductCode);
+            }
+            doiLookup[productCode] = bundleParents;
           }
           // Indicate we've seen this product in more than one bundle
           // Must contain a previous entry that's set to false.

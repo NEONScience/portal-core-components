@@ -9,13 +9,13 @@ declare const Service: {
     calculateFetches: (state: DataProductCitationState) => DataProductCitationState;
     calculateAppStatus: (state: DataProductCitationState) => DataProductCitationState;
     applyReleasesGlobally: (state: DataProductCitationState, releases: DataProductRelease[]) => DataProductCitationState;
-    applyDoiStatusReleaseGlobally: (state: DataProductCitationState, doiStatus: DataProductDoiStatus) => DataProductCitationState;
+    applyDoiStatusReleaseGlobally: (state: DataProductCitationState, productCode: string, release: string, doiStatus: Nullable<DataProductDoiStatus | DataProductDoiStatus[]>) => DataProductCitationState;
     calculateContextState: (newState: DataProductCitationState, neonContextState: UnknownRecord, release: Nullable<string>, productCode: Nullable<string>) => DataProductCitationState;
     useViewState: (state: DataProductCitationState, props: DataProductCitationViewProps) => DataProductCitationViewState;
     getReleaseObject: (releases: CitationRelease[], release: Nullable<string>) => Nullable<CitationRelease>;
     getReleaseDoi: (releases: CitationRelease[], release: Nullable<string>) => Nullable<string>;
     buildCitationDownloadKey: (citationProduct: ContextDataProduct, releaseCb: string, formatCb: string, provisionalCb?: boolean) => string;
-    hasCitationDownloadStatus: (citationDownloadsFetchStatus: Record<string, FetchStatusState>, provisionalCb: boolean, statusCb: FetchStatus) => boolean;
-    handleResetCitationDownloads: (citationDownloadsFetchStatus: Record<string, FetchStatusState>, provisionalCb: boolean, dispatch: Undef<Dispatch<AnyAction>>) => void;
+    hasCitationDownloadStatus: (citationDownloadsFetchStatus: Record<string, FetchStatusState>, provisionalCb: boolean, productCode: string, statusCb: FetchStatus) => boolean;
+    handleResetCitationDownloads: (citationDownloadsFetchStatus: Record<string, FetchStatusState>, provisionalCb: boolean, productCode: string, dispatch: Undef<Dispatch<AnyAction>>) => void;
 };
 export default Service;
