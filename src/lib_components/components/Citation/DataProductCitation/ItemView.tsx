@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme: NeonTheme) => ({
     fontFamily: 'monospace',
   },
   citationTextOnly: {
-    color: Theme.palette.grey[400],
+    color: theme.palette.grey[400],
   },
   citationTextWithQualifier: {
     marginTop: theme.spacing(1.5),
@@ -82,19 +82,20 @@ const useStyles = makeStyles((theme: NeonTheme) => ({
   },
   bundleParentBlurbCard: {
     backgroundColor: (Theme as NeonTheme).colors.GOLD[50],
+    borderColor: (Theme as NeonTheme).colors.GOLD[300],
     marginTop: theme.spacing(1),
   },
   bundleParentBlurbCardTextOnly: {
     backgroundColor: (Theme as NeonTheme).colors.GOLD[50],
+    borderColor: (Theme as NeonTheme).colors.GOLD[300],
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(2),
   },
   bundleParentBlurbCardContent: {
     padding: theme.spacing(2),
-    paddingBottom: '20px !important',
+    paddingBottom: `${theme.spacing(2)}px !important`,
   },
   bundleParentBlurb: {
-    fontStyle: 'italic',
     fontSize: '0.8rem',
   },
   tombstoneBlurbCard: {
@@ -103,7 +104,8 @@ const useStyles = makeStyles((theme: NeonTheme) => ({
     marginTop: theme.spacing(1),
   },
   tombstoneBlurbCardTextOnly: {
-    backgroundColor: (Theme as NeonTheme).colors.GOLD[50],
+    backgroundColor: (Theme as NeonTheme).colors.BROWN[50],
+    borderColor: (Theme as NeonTheme).colors.BROWN[300],
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(2),
   },
@@ -266,7 +268,7 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
           title={(<Typography variant="h6" component="h6">Release Notice</Typography>)}
         />
         <CardContent className={classes.tombstoneBlurbCardContent}>
-          <Typography variant="body2" color="textSecondary" className={classes.tombstoneBlurb}>
+          <Typography variant="body2" className={classes.tombstoneBlurb}>
             {tombstoneNote}
           </Typography>
         </CardContent>
@@ -301,12 +303,16 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
           : classes.bundleParentBlurbCard}
       >
         <CardContent className={classes.bundleParentBlurbCardContent}>
-          <Typography variant="body2" color="textSecondary" className={classes.bundleParentBlurb}>
-            {/* eslint-disable react/jsx-one-expression-per-line, max-len */}
-            <b>Note:</b> This product is bundled into {bundleParentLink}.
+          <Typography variant="subtitle2">
+            {/* eslint-disable react/jsx-one-expression-per-line */}
+            This data product is bundled into {bundleParentLink}
+            {/* eslint-enable react/jsx-one-expression-per-line */}
+          </Typography>
+          <Typography variant="body2" className={classes.bundleParentBlurb}>
+            {/* eslint-disable react/jsx-one-expression-per-line */}
             The {isReleaseDisplay ? 'citation below refers' : 'citations below refer'} to
-            that product as this sub-product is not directly citable.
-            {/* eslint-enable react/jsx-one-expression-per-line, max-len */}
+            that data product as this sub-product is not directly citable.
+            {/* eslint-enable react/jsx-one-expression-per-line */}
           </Typography>
         </CardContent>
       </Card>

@@ -28,7 +28,7 @@ export default html = `
   <div>
 
 <input data-drupal-selector="edit-openid-connect-client-auth0-login" type="submit" id="edit-openid-connect-client-auth0-login" name="auth0" value="Sign In" class="button js-form-submit form-submit button--search" />
-</div><input autocomplete="off" data-drupal-selector="form-2k0x1tzvvdplklqy3d-is1oc2ahmcyain4gm9-oopu" type="hidden" name="form_build_id" value="form-2K0X1tZvVDPlkLQy3d_is1Oc2AHmCyAIn4gm9--ooPU" />
+</div><input autocomplete="off" data-drupal-selector="form-yzr6do6st7lco0a-pietui5wgroxs0jafvodyxrrhug" type="hidden" name="form_build_id" value="form-YZr6dO6St7lCO0a-PietUi5wGRoxs0JafVODYXRRhUg" />
 <input data-drupal-selector="edit-openid-connect-login-form" type="hidden" name="form_id" value="openid_connect_login_form" />
 
 </form>
@@ -748,6 +748,13 @@ export default html = `
                   </li>
               <li  class="menu__item">
           <a href="https://www.neonscience.org/neon-newsletter-sign" class="menu__link" data-drupal-link-system-path="node/12590">Newsletter Sign Up</a>
+
+                  </li>
+
+          </ul>
+
+
+
 
                   </li>
 

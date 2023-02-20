@@ -9,7 +9,6 @@ import Link from '@material-ui/core/Link';
 import Skeleton from '@material-ui/lab/Skeleton';
 import Typography from '@material-ui/core/Typography';
 
-import BundleIcon from '@material-ui/icons/Archive';
 import QuoteIcon from '@material-ui/icons/FormatQuote';
 
 import DataProductCitationContext from './Context';
@@ -35,7 +34,7 @@ import { Nullable } from '../../../types/core';
 
 const useStyles = makeStyles((theme: NeonTheme) => ({
   citationTextOnly: {
-    color: Theme.palette.grey[400],
+    color: theme.palette.grey[400],
   },
   calloutIcon: {
     color: theme.palette.grey[300],
@@ -52,11 +51,13 @@ const useStyles = makeStyles((theme: NeonTheme) => ({
   },
   bundleParentBlurbCard: {
     backgroundColor: (Theme as NeonTheme).colors.GOLD[50],
+    borderColor: (Theme as NeonTheme).colors.GOLD[300],
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(2),
   },
   bundleParentBlurbCardTextOnly: {
     backgroundColor: (Theme as NeonTheme).colors.GOLD[50],
+    borderColor: (Theme as NeonTheme).colors.GOLD[300],
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(2),
   },
@@ -64,10 +65,9 @@ const useStyles = makeStyles((theme: NeonTheme) => ({
     display: 'flex',
     alignItems: 'center',
     padding: theme.spacing(2),
-    paddingBottom: '20px !important',
+    paddingBottom: `${theme.spacing(2)}px !important`,
   },
   bundleParentBlurb: {
-    fontStyle: 'italic',
     fontSize: '0.8rem',
   },
   cardIcon: {
@@ -261,23 +261,17 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
         </ul>
       </>
     );
-    const bundleIcon: JSX.Element|null = showTextOnly
-      ? null
-      : <BundleIcon fontSize="medium" className={classes.cardIcon} />;
     return (
       <Card className={showTextOnly
         ? classes.bundleParentBlurbCardTextOnly
         : classes.bundleParentBlurbCard}
       >
         <CardContent className={classes.bundleParentBlurbCardContent}>
-          {bundleIcon}
-          <div style={{ flexGrow: 1 }}>
-            {bundleParentLink}
-            <Typography variant="body2" color="textSecondary" className={classes.bundleParentBlurb}>
-              The citations below may refer to these parent products when applicable
-              as this sub-product is not directly citable.
-            </Typography>
-          </div>
+          {bundleParentLink}
+          <Typography variant="body2" className={classes.bundleParentBlurb}>
+            The citations below may refer to these parent products when applicable
+            as this sub-product is not directly citable.
+          </Typography>
         </CardContent>
       </Card>
     );
