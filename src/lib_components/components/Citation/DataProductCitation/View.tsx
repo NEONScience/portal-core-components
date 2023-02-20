@@ -62,8 +62,6 @@ const useStyles = makeStyles((theme: NeonTheme) => ({
     marginBottom: theme.spacing(2),
   },
   bundleParentBlurbCardContent: {
-    display: 'flex',
-    alignItems: 'center',
     padding: theme.spacing(2),
     paddingBottom: `${theme.spacing(2)}px !important`,
   },
