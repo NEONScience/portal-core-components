@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "name": "bundles",
+  "main": "./DataProductBundleCard.tsx",
+  "module": "./DataProductBundleCard.tsx"
+}

@@ -1,9 +1,6 @@
-/* eslint-disable react/jsx-fragments */
 import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import Skeleton from '@material-ui/lab/Skeleton';
@@ -31,6 +28,9 @@ import {
   DataProductCitationItem,
 } from './ViewState';
 import { Nullable } from '../../../types/core';
+import DataProductBundleCard, {
+  buildDefaultSplitTitleContent,
+} from '../../Bundles/DataProductBundleCard';
 
 const useStyles = makeStyles((theme: NeonTheme) => ({
   citationTextOnly: {
@@ -49,29 +49,6 @@ const useStyles = makeStyles((theme: NeonTheme) => ({
   citationUseText: {
     flexGrow: 1,
   },
-  bundleParentBlurbCard: {
-    backgroundColor: (Theme as NeonTheme).colors.GOLD[50],
-    borderColor: (Theme as NeonTheme).colors.GOLD[300],
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(2),
-  },
-  bundleParentBlurbCardTextOnly: {
-    backgroundColor: (Theme as NeonTheme).colors.GOLD[50],
-    borderColor: (Theme as NeonTheme).colors.GOLD[300],
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(2),
-  },
-  bundleParentBlurbCardContent: {
-    padding: theme.spacing(2),
-    paddingBottom: `${theme.spacing(2)}px !important`,
-  },
-  bundleParentBlurb: {
-    fontSize: '0.8rem',
-  },
-  cardIcon: {
-    color: theme.colors.GOLD[700],
-    marginRight: theme.spacing(2),
-  },
   itemContainer: {
     marginBottom: theme.spacing(2),
   },
@@ -85,6 +62,7 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     disableSkeleton,
     showTextOnly,
     textOnlyProps,
+    showManyParents,
   }: DataProductCitationViewProps = props;
   const classes = useStyles(Theme);
   const state = DataProductCitationContext.useDataProductCitationContextState();
@@ -104,6 +82,7 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     citationItems,
   }: DataProductCitationViewState = viewState;
   const bundleParentCodes: Record<string, Record<string, Nullable<string>>> = {};
+  const hasManyParents = (citationItems.length > 1);
   citationItems.forEach((item: DataProductCitationItem): void => {
     if (!exists(item) || !isStringNonEmpty(item.bundleParentCode)) {
       return;
@@ -228,50 +207,52 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     if (!existsNonEmpty(filteredCitationItems) || (filteredCitationItems.length <= 1)) {
       return null;
     }
-    const bundleParentLink: JSX.Element = (
-      <>
-        <Typography variant="subtitle2">
-          This data product has been split and bundled into more than one parent data product:
-        </Typography>
-        <ul style={{ margin: Theme.spacing(1, 0) }}>
-          {filteredCitationItems.map((item: DataProductCitationItem): JSX.Element => {
-            const isReleaseDisplay = (displayType === DisplayType.RELEASE);
-            const bundleParentName: string = isReleaseDisplay
-              ? (item.citableReleaseProduct as ContextDataProduct).productName
-              : (item.citableBaseProduct as ContextDataProduct).productName;
-            let bundleParentHref: string = RouteService.getProductDetailPath(
+    const bundleNoteTerminalChar = !showManyParents
+      ? '.'
+      : ':';
+    const titleContent: JSX.Element = buildDefaultSplitTitleContent(bundleNoteTerminalChar);
+    const additionalTitleContent = !showManyParents ? undefined : (
+      <ul style={{ margin: Theme.spacing(1, 0) }}>
+        {filteredCitationItems.map((item: DataProductCitationItem): JSX.Element => {
+          const isReleaseDisplay = (displayType === DisplayType.RELEASE);
+          const bundleParentName: string = isReleaseDisplay
+            ? (item.citableReleaseProduct as ContextDataProduct).productName
+            : (item.citableBaseProduct as ContextDataProduct).productName;
+          let bundleParentHref: string = RouteService.getProductDetailPath(
+            item.bundleParentCode as string,
+          );
+          if (isReleaseDisplay) {
+            bundleParentHref = RouteService.getProductDetailPath(
               item.bundleParentCode as string,
+              (item.releaseObject as CitationRelease).release as string,
             );
-            if (isReleaseDisplay) {
-              bundleParentHref = RouteService.getProductDetailPath(
-                item.bundleParentCode as string,
-                (item.releaseObject as CitationRelease).release as string,
-              );
-            }
-            return (
-              <li key={bundleParentHref}>
-                <Link href={bundleParentHref}>
-                  {`${bundleParentName} (${item.bundleParentCode})`}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+          }
+          return (
+            <li key={bundleParentHref}>
+              <Link href={bundleParentHref} target="_blank">
+                {`${bundleParentName} (${item.bundleParentCode})`}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    );
+    const subTitleContent = !showManyParents ? undefined : (
+      <>
+        The citations below may refer to these parent products when
+        applicable as this sub-product is not directly citable.
       </>
     );
     return (
-      <Card className={showTextOnly
-        ? classes.bundleParentBlurbCardTextOnly
-        : classes.bundleParentBlurbCard}
-      >
-        <CardContent className={classes.bundleParentBlurbCardContent}>
-          {bundleParentLink}
-          <Typography variant="body2" className={classes.bundleParentBlurb}>
-            The citations below may refer to these parent products when applicable
-            as this sub-product is not directly citable.
-          </Typography>
-        </CardContent>
-      </Card>
+      <div className={classes.itemContainer}>
+        <DataProductBundleCard
+          showIcon
+          isSplit={hasManyParents}
+          titleContent={titleContent}
+          additionalTitleContent={additionalTitleContent}
+          subTitleContent={subTitleContent}
+        />
+      </div>
     );
   };
 
@@ -286,6 +267,7 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
           {...props}
           citationItem={item}
           viewState={viewState}
+          hasManyParents={hasManyParents}
         />
       </div>
     ))
@@ -332,6 +314,7 @@ DataProductCitationView.defaultProps = {
   disableSkeleton: false,
   showTextOnly: false,
   textOnlyProps: undefined,
+  showManyParents: true,
 };
 
 export default DataProductCitationView;

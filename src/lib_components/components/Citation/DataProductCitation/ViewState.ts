@@ -18,11 +18,13 @@ export interface DataProductCitationViewProps {
   disableSkeleton?: boolean;
   showTextOnly?: boolean;
   textOnlyProps?: CitationTextOnlyProps;
+  showManyParents?: boolean;
 }
 
 export interface DataProductCitationItemViewProps extends DataProductCitationViewProps {
   citationItem: DataProductCitationItem;
   viewState: DataProductCitationViewState;
+  hasManyParents: boolean;
 }
 
 export enum DisplayType {

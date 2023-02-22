@@ -1,4 +1,8 @@
 import { Nullable } from './core';
+export interface IDataProductLike {
+    productCode: string;
+    productName: string;
+}
 export interface IReleaseLike {
     release: string;
     generationDate: string;

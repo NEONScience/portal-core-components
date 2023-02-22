@@ -44,8 +44,10 @@ import {
   CitationTextOnlyProps,
   DataProductCitationItem,
 } from './ViewState';
-import { Nullable, UnknownRecord } from '../../../types/core';
+import { Nullable, Undef, UnknownRecord } from '../../../types/core';
 import { DataProductRelease } from '../../../types/neonApi';
+import DataProductBundleCard, { buildDefaultTitleContent, getParentProductLink } from '../../Bundles/DataProductBundleCard';
+import { IDataProductLike } from '../../../types/internal';
 
 const useStyles = makeStyles((theme: NeonTheme) => ({
   cardActions: {
@@ -80,23 +82,8 @@ const useStyles = makeStyles((theme: NeonTheme) => ({
     marginTop: theme.spacing(1.5),
     fontFamily: 'monospace',
   },
-  bundleParentBlurbCard: {
-    backgroundColor: (Theme as NeonTheme).colors.GOLD[50],
-    borderColor: (Theme as NeonTheme).colors.GOLD[300],
-    marginTop: theme.spacing(1),
-  },
-  bundleParentBlurbCardTextOnly: {
-    backgroundColor: (Theme as NeonTheme).colors.GOLD[50],
-    borderColor: (Theme as NeonTheme).colors.GOLD[300],
-    marginTop: theme.spacing(1),
+  bundleTextOnlySpacer: {
     marginBottom: theme.spacing(2),
-  },
-  bundleParentBlurbCardContent: {
-    padding: theme.spacing(2),
-    paddingBottom: `${theme.spacing(2)}px !important`,
-  },
-  bundleParentBlurb: {
-    fontSize: '0.8rem',
   },
   tombstoneBlurbCard: {
     backgroundColor: (Theme as NeonTheme).colors.BROWN[50],
@@ -131,6 +118,7 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
     textOnlyProps,
     citationItem,
     viewState,
+    hasManyParents,
   }: DataProductCitationItemViewProps = props;
   const classes = useStyles(Theme);
   const dispatch = DataProductCitationContext.useDataProductCitationContextDispatch();
@@ -268,7 +256,7 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
           title={(<Typography variant="h6" component="h6">Release Notice</Typography>)}
         />
         <CardContent className={classes.tombstoneBlurbCardContent}>
-          <Typography variant="body2" className={classes.tombstoneBlurb}>
+          <Typography variant="body2" color="textSecondary" className={classes.tombstoneBlurb}>
             {tombstoneNote}
           </Typography>
         </CardContent>
@@ -284,38 +272,49 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
     const bundleParentName: string = isReleaseDisplay
       ? (citableReleaseProduct as ContextDataProduct).productName
       : (citableBaseProduct as ContextDataProduct).productName;
-    let bundleParentHref: string = RouteService.getProductDetailPath(bundleParentCode as string);
-    if (isReleaseDisplay) {
-      bundleParentHref = RouteService.getProductDetailPath(
-        bundleParentCode as string,
-        (releaseObject as CitationRelease).release as string,
+    let titleContent;
+    let subTitleContent;
+    const dataProductLike: IDataProductLike = {
+      productCode: bundleParentCode as string,
+      productName: bundleParentName,
+    };
+    const appliedRelease: Undef<string> = isReleaseDisplay
+      ? (releaseObject as CitationRelease).release as string
+      : undefined;
+    if (hasManyParents) {
+      const bundleParentLink = getParentProductLink(dataProductLike, appliedRelease);
+      subTitleContent = (
+        <>
+          {/* eslint-disable react/jsx-one-expression-per-line */}
+          The {isReleaseDisplay ? 'citation below refers ' : 'citations below refer '}
+          to {bundleParentLink}
+          {/* eslint-enable react/jsx-one-expression-per-line */}
+        </>
+      );
+    } else {
+      if (isReleaseDisplay) {
+        titleContent = buildDefaultTitleContent(dataProductLike, appliedRelease);
+      } else {
+        titleContent = buildDefaultTitleContent(dataProductLike);
+      }
+      subTitleContent = (
+        <>
+          {/* eslint-disable react/jsx-one-expression-per-line */}
+          The {isReleaseDisplay ? 'citation below refers' : 'citations below refer'} to
+          that data product as this sub-product is not directly citable.
+          {/* eslint-enable react/jsx-one-expression-per-line */}
+        </>
       );
     }
-    const bundleParentLink: JSX.Element = (
-      <Link href={bundleParentHref}>
-        {`${bundleParentName} (${bundleParentCode})`}
-      </Link>
-    );
     return (
-      <Card
-        className={showTextOnly
-          ? classes.bundleParentBlurbCardTextOnly
-          : classes.bundleParentBlurbCard}
-      >
-        <CardContent className={classes.bundleParentBlurbCardContent}>
-          <Typography variant="subtitle2">
-            {/* eslint-disable react/jsx-one-expression-per-line */}
-            This data product is bundled into {bundleParentLink}
-            {/* eslint-enable react/jsx-one-expression-per-line */}
-          </Typography>
-          <Typography variant="body2" className={classes.bundleParentBlurb}>
-            {/* eslint-disable react/jsx-one-expression-per-line */}
-            The {isReleaseDisplay ? 'citation below refers' : 'citations below refer'} to
-            that data product as this sub-product is not directly citable.
-            {/* eslint-enable react/jsx-one-expression-per-line */}
-          </Typography>
-        </CardContent>
-      </Card>
+      <div className={showTextOnly ? classes.bundleTextOnlySpacer : undefined}>
+        <DataProductBundleCard
+          showIcon={!hasManyParents}
+          isSplit={hasManyParents}
+          titleContent={titleContent}
+          subTitleContent={subTitleContent}
+        />
+      </div>
     );
   };
 
