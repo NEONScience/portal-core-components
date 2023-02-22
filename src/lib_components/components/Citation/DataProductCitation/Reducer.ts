@@ -1,3 +1,8 @@
+import ReleaseService from '../../../service/ReleaseService';
+import { Nullable, UnknownRecord } from '../../../types/core';
+import { exists, existsNonEmpty, isStringNonEmpty } from '../../../util/typeUtil';
+import { DataProductDoiStatus } from '../../../types/neonApi';
+
 import Service from './Service';
 import ActionCreator, {
   ActionTypes,
@@ -36,10 +41,6 @@ import {
   FetchStatusState,
   getDefaultState,
 } from './State';
-import ReleaseService from '../../../service/ReleaseService';
-import { Nullable, UnknownRecord } from '../../../types/core';
-import { exists, existsNonEmpty, isStringNonEmpty } from '../../../util/typeUtil';
-import { DataProductDoiStatus } from '../../../types/neonApi';
 
 const reinitialize = (
   state: DataProductCitationState,

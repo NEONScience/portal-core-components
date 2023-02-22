@@ -2,17 +2,15 @@ import React from 'react';
 
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Link from '@material-ui/core/Link';
+
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBox, faBoxesStacked } from '@fortawesome/free-solid-svg-icons';
 
-import RouteService from '../../service/RouteService';
 import Theme from '../Theme/Theme';
 import { NeonTheme } from '../Theme/types';
-import { IDataProductLike } from '../../types/internal';
 import { exists } from '../../util/typeUtil';
 
 const useStyles = makeStyles((theme: NeonTheme) => ({
@@ -57,83 +55,13 @@ export interface DataProductBundleCardClasses {
 
 export interface DataProductBundleCardProps {
   titleContent?: React.ReactNode;
-  additionalTitleContent?: React.ReactNode;
+  detailContent?: React.ReactNode;
   subTitleContent?: React.ReactNode;
   customContent?: React.ReactNode;
   isSplit?: boolean;
   showIcon?: boolean;
   classes?: DataProductBundleCardClasses;
 }
-
-export const getParentProductLink = (
-  dataProduct: IDataProductLike,
-  release?: string,
-): JSX.Element => ((
-  <Link
-    href={RouteService.getProductDetailPath(dataProduct.productCode, release)}
-    target="_blank"
-  >
-    {`${dataProduct.productName} (${dataProduct.productCode})`}
-  </Link>
-));
-
-export const buildManyParentsAdditionalContent = (
-  dataProducts: IDataProductLike[],
-): JSX.Element => ((
-  <ul style={{ margin: Theme.spacing(1, 0) }}>
-    {dataProducts.map((dataProduct: IDataProductLike) => (
-      <li key={dataProduct.productCode}>
-        {getParentProductLink(dataProduct)}
-      </li>
-    ))}
-  </ul>
-));
-
-export const buildDefaultTitleContent = (
-  dataProduct: IDataProductLike,
-  release?: string,
-): JSX.Element => {
-  const bundleParentLink: JSX.Element = getParentProductLink(dataProduct, release);
-  return (
-    <>
-      {/* eslint-disable react/jsx-one-expression-per-line */}
-      This data product is bundled into {bundleParentLink}
-      {/* eslint-enable react/jsx-one-expression-per-line */}
-    </>
-  );
-};
-
-export const buildDefaultSplitTitleContent = (terminalChar?: string): JSX.Element => ((
-  <>
-    {/* eslint-disable react/jsx-one-expression-per-line */}
-    This data product has been split and bundled into more
-    than one parent data product{`${terminalChar}`}
-    {/* eslint-enable react/jsx-one-expression-per-line */}
-  </>
-));
-
-export const buildDefaultSubTitleContent = (
-  forwardAvailability: boolean,
-  hasManyParents: boolean,
-): JSX.Element => ((
-  // eslint-disable-next-line react/jsx-no-useless-fragment
-  <>
-    {forwardAvailability ? (
-      <>
-        It is not available as a standalone download. Data availability shown
-        below reflects availability of the entire bundle.
-      </>
-    ) : (
-      <>
-        {/* eslint-disable react/jsx-one-expression-per-line */}
-        It is not available as a standalone download.
-        Data availability information and data product download is only available through
-        the parent {hasManyParents ? 'products' : 'product'}.
-        {/* eslint-enable react/jsx-one-expression-per-line */}
-      </>
-    )}
-  </>
-));
 
 const DataProductBundleCard: React.FC<DataProductBundleCardProps> = (
   props: DataProductBundleCardProps,
@@ -142,7 +70,7 @@ const DataProductBundleCard: React.FC<DataProductBundleCardProps> = (
   const {
     titleContent,
     subTitleContent,
-    additionalTitleContent,
+    detailContent,
     customContent,
     isSplit,
     showIcon,
@@ -176,9 +104,9 @@ const DataProductBundleCard: React.FC<DataProductBundleCardProps> = (
             {titleContent}
           </Typography>
         )}
-        {!exists(additionalTitleContent) ? null : (
+        {!exists(detailContent) ? null : (
           // eslint-disable-next-line react/jsx-no-useless-fragment
-          <>{additionalTitleContent}</>
+          <>{detailContent}</>
         )}
         {!exists(subTitleContent) ? null : (
           <Typography variant="body2">
@@ -223,7 +151,7 @@ const DataProductBundleCard: React.FC<DataProductBundleCardProps> = (
 
 DataProductBundleCard.defaultProps = {
   titleContent: undefined,
-  additionalTitleContent: undefined,
+  detailContent: undefined,
   subTitleContent: undefined,
   customContent: undefined,
   isSplit: false,

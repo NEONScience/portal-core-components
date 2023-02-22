@@ -1,6 +1,6 @@
 import React, { Dispatch } from 'react';
-import { DataProductCitationState } from './State';
 import { AnyAction, Nullable, Undef } from '../../../types/core';
+import { DataProductCitationState } from './State';
 export interface ProviderProps {
     productCode?: string;
     release?: Nullable<string>;

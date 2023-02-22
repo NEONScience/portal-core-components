@@ -1,4 +1,5 @@
 import { Dispatch } from 'react';
+
 import BundleService from '../../../service/BundleService';
 import ReleaseService, { PROVISIONAL_RELEASE } from '../../../service/ReleaseService';
 import {
@@ -11,8 +12,8 @@ import { CitationBundleState, IReleaseLike } from '../../../types/internal';
 import { DataProductDoiStatus, DataProductRelease, DoiStatusType } from '../../../types/neonApi';
 import { BundleContext } from '../../../types/neonContext';
 import { exists, existsNonEmpty, isStringNonEmpty } from '../../../util/typeUtil';
-import ActionCreator from './Actions';
 
+import ActionCreator from './Actions';
 import {
   FetchStatus,
   ContextStatus,

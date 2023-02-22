@@ -8,18 +8,29 @@ import Typography from '@material-ui/core/Typography';
 
 import QuoteIcon from '@material-ui/icons/FormatQuote';
 
-import DataProductCitationContext from './Context';
-import Service from './Service';
+import BundleContentBuilder from '../../Bundles/BundleContentBuilder';
+import DataProductBundleCard from '../../Bundles/DataProductBundleCard';
 import ErrorCard from '../../Card/ErrorCard';
 import WarningCard from '../../Card/WarningCard';
 import Theme from '../../Theme/Theme';
 
 import RouteService from '../../../service/RouteService';
-import { exists, existsNonEmpty, isStringNonEmpty } from '../../../util/typeUtil';
-
-import DataProductCitationItemView from './ItemView';
 import { NeonTheme } from '../../Theme/types';
-import { CitationRelease, ContextDataProduct, ContextStatus } from './State';
+import { Nullable } from '../../../types/core';
+import {
+  exists,
+  existsNonEmpty,
+  isStringNonEmpty,
+} from '../../../util/typeUtil';
+
+import DataProductCitationContext from './Context';
+import DataProductCitationItemView from './ItemView';
+import Service from './Service';
+import {
+  CitationRelease,
+  ContextDataProduct,
+  ContextStatus,
+} from './State';
 import {
   DataProductCitationViewState,
   DataProductCitationViewProps,
@@ -27,10 +38,6 @@ import {
   CitationTextOnlyProps,
   DataProductCitationItem,
 } from './ViewState';
-import { Nullable } from '../../../types/core';
-import DataProductBundleCard, {
-  buildDefaultSplitTitleContent,
-} from '../../Bundles/DataProductBundleCard';
 
 const useStyles = makeStyles((theme: NeonTheme) => ({
   citationTextOnly: {
@@ -210,8 +217,10 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     const bundleNoteTerminalChar = !showManyParents
       ? '.'
       : ':';
-    const titleContent: JSX.Element = buildDefaultSplitTitleContent(bundleNoteTerminalChar);
-    const additionalTitleContent = !showManyParents ? undefined : (
+    const titleContent: JSX.Element = BundleContentBuilder.buildDefaultSplitTitleContent(
+      bundleNoteTerminalChar,
+    );
+    const detailContent = !showManyParents ? undefined : (
       <ul style={{ margin: Theme.spacing(1, 0) }}>
         {filteredCitationItems.map((item: DataProductCitationItem): JSX.Element => {
           const isReleaseDisplay = (displayType === DisplayType.RELEASE);
@@ -249,7 +258,7 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
           showIcon
           isSplit={hasManyParents}
           titleContent={titleContent}
-          additionalTitleContent={additionalTitleContent}
+          detailContent={detailContent}
           subTitleContent={subTitleContent}
         />
       </div>

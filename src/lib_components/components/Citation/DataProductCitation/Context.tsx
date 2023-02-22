@@ -14,6 +14,10 @@ import NeonApi from '../../NeonApi/NeonApi';
 import NeonContext from '../../NeonContext/NeonContext';
 import NeonGraphQL from '../../NeonGraphQL/NeonGraphQL';
 
+import { exists, isStringNonEmpty } from '../../../util/typeUtil';
+import { AnyAction, Nullable, Undef } from '../../../types/core';
+import { DataProductDoiStatus, NeonApiResponse } from '../../../types/neonApi';
+
 import ActionCreator from './Actions';
 import Reducer from './Reducer';
 import Service from './Service';
@@ -23,10 +27,6 @@ import {
   DataProductCitationState,
   getDefaultState,
 } from './State';
-
-import { exists, isStringNonEmpty } from '../../../util/typeUtil';
-import { AnyAction, Nullable, Undef } from '../../../types/core';
-import { DataProductDoiStatus, NeonApiResponse } from '../../../types/neonApi';
 
 const StateContext = createContext<DataProductCitationState>(getDefaultState());
 const DispatchContext = createContext<Undef<Dispatch<AnyAction>>>(undefined);

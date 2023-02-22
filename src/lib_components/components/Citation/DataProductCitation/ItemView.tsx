@@ -18,20 +18,24 @@ import Typography from '@material-ui/core/Typography';
 import CopyIcon from '@material-ui/icons/Assignment';
 import DownloadIcon from '@material-ui/icons/SaveAlt';
 
-import DataProductCitationContext from './Context';
-import Service from './Service';
-import Theme from '../../Theme/Theme';
-
+import BundleContentBuilder from '../../Bundles/BundleContentBuilder';
+import DataProductBundleCard from '../../Bundles/DataProductBundleCard';
 import CitationService from '../../../service/CitationService';
 import DataCiteService, {
   CitationDownloadType, CitationFormat,
 } from '../../../service/DataCiteService';
 import RouteService from '../../../service/RouteService';
+import Theme from '../../Theme/Theme';
 import { PROVISIONAL_RELEASE } from '../../../service/ReleaseService';
 import { exists, isStringNonEmpty } from '../../../util/typeUtil';
+import { Nullable, Undef, UnknownRecord } from '../../../types/core';
+import { DataProductRelease } from '../../../types/neonApi';
+import { IDataProductLike } from '../../../types/internal';
+import { NeonTheme } from '../../Theme/types';
 
 import ActionCreator from './Actions';
-import { NeonTheme } from '../../Theme/types';
+import DataProductCitationContext from './Context';
+import Service from './Service';
 import {
   CitationRelease,
   ContextDataProduct,
@@ -44,10 +48,6 @@ import {
   CitationTextOnlyProps,
   DataProductCitationItem,
 } from './ViewState';
-import { Nullable, Undef, UnknownRecord } from '../../../types/core';
-import { DataProductRelease } from '../../../types/neonApi';
-import DataProductBundleCard, { buildDefaultTitleContent, getParentProductLink } from '../../Bundles/DataProductBundleCard';
-import { IDataProductLike } from '../../../types/internal';
 
 const useStyles = makeStyles((theme: NeonTheme) => ({
   cardActions: {
@@ -282,7 +282,10 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
       ? (releaseObject as CitationRelease).release as string
       : undefined;
     if (hasManyParents) {
-      const bundleParentLink = getParentProductLink(dataProductLike, appliedRelease);
+      const bundleParentLink = BundleContentBuilder.getParentProductLink(
+        dataProductLike,
+        appliedRelease,
+      );
       subTitleContent = (
         <>
           {/* eslint-disable react/jsx-one-expression-per-line */}
@@ -293,9 +296,12 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
       );
     } else {
       if (isReleaseDisplay) {
-        titleContent = buildDefaultTitleContent(dataProductLike, appliedRelease);
+        titleContent = BundleContentBuilder.buildDefaultTitleContent(
+          dataProductLike,
+          appliedRelease,
+        );
       } else {
-        titleContent = buildDefaultTitleContent(dataProductLike);
+        titleContent = BundleContentBuilder.buildDefaultTitleContent(dataProductLike);
       }
       subTitleContent = (
         <>
