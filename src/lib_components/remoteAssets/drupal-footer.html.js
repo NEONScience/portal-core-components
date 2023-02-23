@@ -27,7 +27,7 @@ export default html = `
         <p>Get updates on events, opportunities, and how NEON is being used today.</p>
       </div>
       <div class="footer-top__newsletter-btn">
-        <a href="https://lp.constantcontactpages.com/su/fsUZ1gX/neonnews">Subscribe Now
+        <a href="https://www.neonscience.org/neon-newsletter-sign">Subscribe Now
         <svg width="13px" height="10px" viewBox="0 0 13 10" xmlns="http://www.w3.org/2000/svg"><g class="chevronGroup" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" stroke="#FFFFFF" stroke-width="2" transform="translate(1.000000, 1.000000)"><path d="M11,4 L7,8" class="bottom"></path><path d="M11,4 L7,0" class="top"></path><path d="M11,4 L0,4" class="line"></path></g></svg>
                 </a>
       </div>

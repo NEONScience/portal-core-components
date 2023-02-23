@@ -28,7 +28,7 @@ export default html = `
   <div>
 
 <input data-drupal-selector="edit-openid-connect-client-auth0-login" type="submit" id="edit-openid-connect-client-auth0-login" name="auth0" value="Sign In" class="button js-form-submit form-submit button--search" />
-</div><input autocomplete="off" data-drupal-selector="form-wrq-tlwbcbo67phfsjpigy0gty-glpp9eni8dhuvjwo" type="hidden" name="form_build_id" value="form-wRq_tLwbCbO67PHFSjPigy0GtY-GlPp9eNi8dHuVJWo" />
+</div><input autocomplete="off" data-drupal-selector="form-yzr6do6st7lco0a-pietui5wgroxs0jafvodyxrrhug" type="hidden" name="form_build_id" value="form-YZr6dO6St7lCO0a-PietUi5wGRoxs0JafVODYXRRhUg" />
 <input data-drupal-selector="edit-openid-connect-login-form" type="hidden" name="form_id" value="openid_connect_login_form" />
 
 </form>
@@ -91,7 +91,7 @@ export default html = `
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/about/advisory-groups/steac" class="menu__link" data-drupal-link-system-path="node/7563">Advisory Committee: STEAC</a>
+          <a href="https://www.neonscience.org/about/advisory-groups/steac" class="menu__link" data-drupal-link-system-path="node/7563">Science, Technology &amp; Education Advisory Committee</a>
 
                   </li>
               <li  class="menu__item">
@@ -613,6 +613,10 @@ export default html = `
           <a href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases/release-2022" class="menu__link" data-drupal-link-system-path="node/11956">Release 2022</a>
 
                   </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases/release-2023" class="menu__link" data-drupal-link-system-path="node/12583">Release 2023</a>
+
+                  </li>
       
           </ul>
   
@@ -740,6 +744,10 @@ export default html = `
                   </li>
               <li  class="menu__item">
           <a href="https://www.neonscience.org/impact/newsroom/newsletter-archive" class="menu__link" data-drupal-link-system-path="node/7826">Newsletter Archive</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/neon-newsletter-sign" class="menu__link" data-drupal-link-system-path="node/12590">Newsletter Sign Up</a>
 
                   </li>
       
@@ -953,8 +961,26 @@ export default html = `
             
                       <ul  class="menu menu--main" data-depth="1">
 
-              <li  class="menu__item">
+              <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/about/advisory-groups" class="menu__link" data-drupal-link-system-path="node/10534">Advisory Groups</a>
+
+          
+            
+                      <ul  class="menu menu--main" data-depth="2">
+
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/about/advisory-groups/steac" class="menu__link" data-drupal-link-system-path="node/7563">Science, Technology &amp; Education Advisory Committee</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/about/advisory-groups/twgs" class="menu__link" data-drupal-link-system-path="node/6273">Technical Working Groups</a>
+
+                  </li>
+      
+          </ul>
+  
+
+            
 
                   </li>
               <li  class="menu__item">

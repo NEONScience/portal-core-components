@@ -19,8 +19,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const CACHED_REMOTE_ASSETS_PATH = path.join(__dirname, '../../src/lib_components/remoteAssets');
 
 const REMOTE_ASSET_PATHS = {
-  DRUPAL_THEME_CSS: '/themes/custom/neon/build/components/theme/theme.css',
-  DRUPAL_HEADER_JS: '/themes/custom/neon/build/components/header/header.js',
+  DRUPAL_THEME_CSS: '/themes/custom/neon/dist/css/components/theme/theme.css',
+  DRUPAL_HEADER_JS: '/themes/custom/neon/dist/js/header/header.js',
   DRUPAL_HEADER_HTML: '/neon-assets/partial/header',
   DRUPAL_FOOTER_HTML: '/neon-assets/partial/footer',
 };
