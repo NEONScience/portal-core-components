@@ -38,6 +38,10 @@ export const VALID_ENHANCED_STATUSES: {
         title: string;
         description: string;
     };
+    tombstoned: {
+        title: string;
+        description: string;
+    };
     'mixed some availability': {
         title: string;
         description: string;
