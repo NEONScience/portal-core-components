@@ -254,7 +254,7 @@ const processContent = async (key, name, res, resolve) => {
         break;
     }
   }
-  writeContent(key, sanitizedContent, cachedFileName);
+  await writeContent(key, sanitizedContent, cachedFileName);
   console.log(`* Completed: ${name} (saved as ${cachedFileName})`);
   resolve(true);
 };

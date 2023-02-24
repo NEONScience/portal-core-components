@@ -516,7 +516,12 @@ const NeonPage = (props) => {
     if (drupalCssStatus !== FETCH_STATUS.AWAITING_CALL) { return; }
     setDrupalCssStatus(FETCH_STATUS.FETCHING);
     fetch(REMOTE_ASSETS[DRUPAL_THEME_CSS].url)
-      .then((response) => response.text())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch Drupal theme CSS');
+        }
+        return response.text();
+      })
       .then((data) => {
         const drupalStyle = document.createElement('style');
         const appliedData = DrupalAssetService.cleanCss(data, true);
