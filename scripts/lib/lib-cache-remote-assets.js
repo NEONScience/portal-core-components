@@ -102,7 +102,7 @@ const sanitizeContent = (key, content) => {
       content.match(/^(.*url\([\"\']((?!data)).*)$/mg).forEach((match) => {
         let shouldCommentMatch = true;
         if (config.cssReplaceRelativeUrls) {
-          const relativeUrlRegex = /(?<relative>url\(["']\.\.\/\.\.\/\.\.\/(?<path>images\/.+)["']\))/;
+          const relativeUrlRegex = /(?<relative>url\(["']\.\.\/\.\.\/\.\.\/\.\.\/(?<path>images\/.+)["']\))/;
           const matchesRelative = relativeUrlRegex.exec(match);
           if (matchesRelative
             && (matchesRelative.length > 0)
@@ -254,7 +254,7 @@ const processContent = async (key, name, res, resolve) => {
         break;
     }
   }
-  await writeContent(key, sanitizedContent, cachedFileName);
+  writeContent(key, sanitizedContent, cachedFileName);
   console.log(`* Completed: ${name} (saved as ${cachedFileName})`);
   resolve(true);
 };

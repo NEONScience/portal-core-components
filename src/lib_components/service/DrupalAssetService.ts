@@ -24,7 +24,7 @@ const DrupalAssetService: IDrupalAssetService = {
     (matches as RegExpMatchArray).forEach((match: string): void => {
       let shouldCommentMatch = true;
       if (replaceRelativeUrlsWithRoot) {
-        const relativeUrlRegex = /(?<relative>url\(["']\.\.\/\.\.\/\.\.\/(?<path>images\/.+)["']\))/;
+        const relativeUrlRegex = /(?<relative>url\(["']\.\.\/\.\.\/\.\.\/\.\.\/(?<path>images\/.+)["']\))/;
         const matchesRelative: RegExpExecArray|null = relativeUrlRegex.exec(match);
         if (exists(matchesRelative)
           && ((matchesRelative as RegExpExecArray).length > 0)
