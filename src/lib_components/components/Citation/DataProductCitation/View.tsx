@@ -247,11 +247,14 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
         })}
       </ul>
     );
-    const subTitleContent = !showManyParents ? undefined : (
-      <>
-        Use either or both citations as appropriate.
-      </>
+    let subTitleContent = !showManyParents ? undefined : (
+      <>Use either or both citations as appropriate.</>
     );
+    if (showManyParents && (filteredCitationItems.length > 2)) {
+      subTitleContent = (
+        <>Use citations as appropriate.</>
+      );
+    }
     return (
       <div className={classes.itemContainer}>
         <DataProductBundleCard
