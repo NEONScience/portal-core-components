@@ -214,16 +214,17 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     if (!existsNonEmpty(filteredCitationItems) || (filteredCitationItems.length <= 1)) {
       return null;
     }
+    const isReleaseDisplay = (displayType === DisplayType.RELEASE);
     const bundleNoteTerminalChar = !showManyParents
       ? '.'
       : ':';
     const titleContent: JSX.Element = BundleContentBuilder.buildDefaultSplitTitleContent(
+      isReleaseDisplay,
       bundleNoteTerminalChar,
     );
     const detailContent = !showManyParents ? undefined : (
       <ul style={{ margin: Theme.spacing(1, 0) }}>
         {filteredCitationItems.map((item: DataProductCitationItem): JSX.Element => {
-          const isReleaseDisplay = (displayType === DisplayType.RELEASE);
           const bundleParentName: string = isReleaseDisplay
             ? (item.citableReleaseProduct as ContextDataProduct).productName
             : (item.citableBaseProduct as ContextDataProduct).productName;
@@ -248,8 +249,7 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     );
     const subTitleContent = !showManyParents ? undefined : (
       <>
-        The citations below may refer to these parent products when
-        applicable as this sub-product is not directly citable.
+        Use either or both citations as appropriate.
       </>
     );
     return (

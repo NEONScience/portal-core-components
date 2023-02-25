@@ -5,23 +5,17 @@ import Link from '@material-ui/core/Link';
 import RouteService from '../../service/RouteService';
 import Theme from '../Theme/Theme';
 import { IDataProductLike } from '../../types/internal';
+import { isStringNonEmpty } from '../../util/typeUtil';
+import { LATEST_AND_PROVISIONAL } from '../../service/ReleaseService';
 
 export interface IBundleContentBuilder {
-  getParentProductLink: (
-    dataProduct: IDataProductLike,
-    release?: string,
-  ) => JSX.Element;
+  getParentProductLink: (dataProduct: IDataProductLike, release?: string,) => JSX.Element;
 
-  buildManyParentsMainContent: (
-    dataProducts: IDataProductLike[],
-  ) => JSX.Element;
+  buildManyParentsMainContent: (dataProducts: IDataProductLike[], release?: string) => JSX.Element;
 
-  buildDefaultTitleContent: (
-    dataProduct: IDataProductLike,
-    release?: string,
-  ) => JSX.Element;
+  buildDefaultTitleContent: (dataProduct: IDataProductLike, release?: string) => JSX.Element;
 
-  buildDefaultSplitTitleContent: (terminalChar?: string) => JSX.Element;
+  buildDefaultSplitTitleContent: (isRelease: boolean, terminalChar?: string) => JSX.Element;
 
   buildDefaultSubTitleContent: (
     forwardAvailability: boolean,
@@ -30,52 +24,55 @@ export interface IBundleContentBuilder {
 }
 
 const BundleContentBuilder: IBundleContentBuilder = {
-  getParentProductLink: (
-    dataProduct: IDataProductLike,
-    release?: string,
-  ): JSX.Element => ((
-    <Link
-      href={RouteService.getProductDetailPath(dataProduct.productCode, release)}
-      target="_blank"
-    >
-      {`${dataProduct.productName} (${dataProduct.productCode})`}
-    </Link>
-  )),
+  getParentProductLink: (dataProduct: IDataProductLike, release?: string): JSX.Element => {
+    const isRelease = isStringNonEmpty(release) && (release !== LATEST_AND_PROVISIONAL);
+    const href = RouteService.getProductDetailPath(
+      dataProduct.productCode,
+      isRelease ? release : undefined,
+    );
+    return (
+      <Link
+        href={href}
+        target="_blank"
+      >
+        {`${dataProduct.productName} (${dataProduct.productCode})`}
+      </Link>
+    );
+  },
 
   buildManyParentsMainContent: (
     dataProducts: IDataProductLike[],
+    release?: string,
   ): JSX.Element => ((
     <ul style={{ margin: Theme.spacing(1, 0) }}>
       {dataProducts.map((dataProduct: IDataProductLike) => (
         <li key={dataProduct.productCode}>
-          {BundleContentBuilder.getParentProductLink(dataProduct)}
+          {BundleContentBuilder.getParentProductLink(dataProduct, release)}
         </li>
       ))}
     </ul>
   )),
 
-  buildDefaultTitleContent: (
-    dataProduct: IDataProductLike,
-    release?: string,
-  ): JSX.Element => {
+  buildDefaultTitleContent: (dataProduct: IDataProductLike, release?: string): JSX.Element => {
+    const isRelease = isStringNonEmpty(release) && (release !== LATEST_AND_PROVISIONAL);
     const bundleParentLink: JSX.Element = BundleContentBuilder.getParentProductLink(
       dataProduct,
-      release,
+      isRelease ? release : undefined,
     );
     return (
       <>
         {/* eslint-disable react/jsx-one-expression-per-line */}
-        This data product is bundled into {bundleParentLink}
+        This data product {isRelease ? 'release ' : ''}is bundled into {bundleParentLink}
         {/* eslint-enable react/jsx-one-expression-per-line */}
       </>
     );
   },
 
-  buildDefaultSplitTitleContent: (terminalChar?: string): JSX.Element => ((
+  buildDefaultSplitTitleContent: (isRelease: boolean, terminalChar?: string): JSX.Element => ((
     <>
       {/* eslint-disable react/jsx-one-expression-per-line */}
-      This data product has been split and bundled into more
-      than one parent data product{`${terminalChar}`}
+      This data product {isRelease ? 'release ' : ''}is a sub-product of the
+      following data product{isRelease ? ' releases' : 's'}{`${terminalChar}`}
       {/* eslint-enable react/jsx-one-expression-per-line */}
     </>
   )),

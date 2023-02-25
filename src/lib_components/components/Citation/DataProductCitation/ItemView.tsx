@@ -265,7 +265,7 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
   };
 
   const renderBundleParentLink = (): Nullable<JSX.Element> => {
-    if (!isStringNonEmpty(bundleParentCode)) {
+    if (!isStringNonEmpty(bundleParentCode) || hasManyParents) {
       return null;
     }
     const isReleaseDisplay = (displayType === DisplayType.RELEASE);
@@ -273,7 +273,6 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
       ? (citableReleaseProduct as ContextDataProduct).productName
       : (citableBaseProduct as ContextDataProduct).productName;
     let titleContent;
-    let subTitleContent;
     const dataProductLike: IDataProductLike = {
       productCode: bundleParentCode as string,
       productName: bundleParentName,
@@ -281,37 +280,22 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
     const appliedRelease: Undef<string> = isReleaseDisplay
       ? (releaseObject as CitationRelease).release as string
       : undefined;
-    if (hasManyParents) {
-      const bundleParentLink = BundleContentBuilder.getParentProductLink(
+    if (isReleaseDisplay) {
+      titleContent = BundleContentBuilder.buildDefaultTitleContent(
         dataProductLike,
         appliedRelease,
       );
-      subTitleContent = (
-        <>
-          {/* eslint-disable react/jsx-one-expression-per-line */}
-          The {isReleaseDisplay ? 'citation below refers ' : 'citations below refer '}
-          to {bundleParentLink}
-          {/* eslint-enable react/jsx-one-expression-per-line */}
-        </>
-      );
     } else {
-      if (isReleaseDisplay) {
-        titleContent = BundleContentBuilder.buildDefaultTitleContent(
-          dataProductLike,
-          appliedRelease,
-        );
-      } else {
-        titleContent = BundleContentBuilder.buildDefaultTitleContent(dataProductLike);
-      }
-      subTitleContent = (
-        <>
-          {/* eslint-disable react/jsx-one-expression-per-line */}
-          The {isReleaseDisplay ? 'citation below refers' : 'citations below refer'} to
-          that data product as this sub-product is not directly citable.
-          {/* eslint-enable react/jsx-one-expression-per-line */}
-        </>
-      );
+      titleContent = BundleContentBuilder.buildDefaultTitleContent(dataProductLike);
     }
+    const subTitleContent = (
+      <>
+        {/* eslint-disable react/jsx-one-expression-per-line */}
+        The {isReleaseDisplay ? 'citation below refers' : 'citations below refer'} to
+        that data product as this sub-product is not directly citable.
+        {/* eslint-enable react/jsx-one-expression-per-line */}
+      </>
+    );
     return (
       <div className={showTextOnly ? classes.bundleTextOnlySpacer : undefined}>
         <DataProductBundleCard
