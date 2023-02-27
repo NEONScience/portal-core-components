@@ -29,7 +29,7 @@ program.usage('Usage: node lib-cache-remote-assets.js [options]')
   .version(packageJson.version)
   .option(
     '--prettify-index',
-    'option to minimize css file',
+    'option to prettify css file',
   )
   .option(
     '--css-replace-relative-urls',
@@ -45,7 +45,7 @@ program.usage('Usage: node lib-cache-remote-assets.js [options]')
   )
   .option(
     '--generate-public-assets-only',
-    'option to generate a source map file for CSS file',
+    'option to generate public folder assets only',
   )
   .option(
     '--use-current-working-dir',
