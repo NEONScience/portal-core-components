@@ -23,6 +23,7 @@ export interface INeonEnvironment {
     showAopViewer: boolean;
     authDisableWs: boolean;
     enableGlobalSignInState: boolean;
+    fetchDrupalAssets: boolean;
     getRootApiPath: () => string;
     getRootGraphqlPath: () => string;
     getRootJsonLdPath: () => string;

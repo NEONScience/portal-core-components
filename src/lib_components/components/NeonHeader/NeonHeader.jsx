@@ -335,13 +335,25 @@ const NeonHeader = forwardRef((props, headerRef) => {
         renderMode = drupalCssLoaded ? 'drupal-fallback' : 'loading';
         break;
       default:
-        renderMode = 'loading';
+        if (!NeonEnvironment.fetchDrupalAssets) {
+          renderMode = 'drupal-fallback';
+        } else {
+          renderMode = 'loading';
+        }
         break;
     }
   }
 
   // Load header.js only after initial delayed render of the drupal header is complete
   useLayoutEffect(() => {
+    if (!NeonEnvironment.fetchDrupalAssets) {
+      (async () => {
+        // eslint-disable-next-line no-unused-expressions, import/extensions
+        await import('../../remoteAssets/drupal-header.js');
+        setHeaderJsStatus(FETCH_STATUS.SUCCESS);
+      })();
+      return;
+    }
     if (
       !renderMode.includes('drupal') || headerJsStatus !== FETCH_STATUS.AWAITING_CALL
       || !headerRenderDelayed || !drupalCssLoaded

@@ -67,12 +67,22 @@
     "zod": "^3.20.2"
   },
   "peerDependencies": {
+    "commander": "^9.4.1",
+    "cssnano": "^5.1.14",
+    "jsdom": "^20.0.3",
+    "node-fetch": "^3.3.0",
+    "postcss": "^8.4.20",
+    "prettier": "^2.8.1",
     "worker-loader": "^3.0.8"
   },
   "peerDependenciesMeta": {
-    "worker-loader": {
-      "optional": true
-    }
+    "commander": { "optional": true },
+    "cssnano": { "optional": true },
+    "jsdom": { "optional": true },
+    "node-fetch": { "optional": true },
+    "postcss": { "optional": true },
+    "prettier": { "optional": true },
+    "worker-loader": { "optional": true }
   },
   "devDependencies": {
     "@babel/cli": "^7.19.3",

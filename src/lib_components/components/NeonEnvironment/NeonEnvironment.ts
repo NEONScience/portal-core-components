@@ -46,6 +46,7 @@ export const optionalEnvironmentVars = [
   'REACT_APP_NEON_API_HOST_OVERRIDE',
   'REACT_APP_NEON_WEB_HOST_OVERRIDE',
   'REACT_APP_NEON_WS_HOST_OVERRIDE',
+  'REACT_APP_NEON_FETCH_DRUPAL_ASSETS',
 ];
 
 const EnvType = {
@@ -69,6 +70,7 @@ export interface INeonEnvironment {
   showAopViewer: boolean;
   authDisableWs: boolean;
   enableGlobalSignInState: boolean;
+  fetchDrupalAssets: boolean;
 
   getRootApiPath: () => string;
   getRootGraphqlPath: () => string;
@@ -134,6 +136,7 @@ const NeonEnvironment: INeonEnvironment = {
   showAopViewer: process.env.REACT_APP_NEON_SHOW_AOP_VIEWER === 'true',
   authDisableWs: process.env.REACT_APP_NEON_AUTH_DISABLE_WS === 'true',
   enableGlobalSignInState: process.env.REACT_APP_NEON_ENABLE_GLOBAL_SIGNIN_STATE === 'true',
+  fetchDrupalAssets: process.env.REACT_APP_NEON_FETCH_DRUPAL_ASSETS !== 'false',
 
   getRootApiPath: () => process.env.REACT_APP_NEON_PATH_API || '/api/v0',
   getRootGraphqlPath: () => process.env.REACT_APP_NEON_PATH_PUBLIC_GRAPHQL || '/graphql',

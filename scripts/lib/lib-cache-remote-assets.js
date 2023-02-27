@@ -24,9 +24,77 @@ import packageJson from '../../package.json' assert { type: 'json' };
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const CACHED_REMOTE_ASSETS_PATH = path.join(__dirname, '../../src/lib_components/remoteAssets');
-const PUBLIC_OUTPUT_PATH = path.join(__dirname, '../../public');
-const PUBLIC_ASSETS_CSS_OUTPUT_PATH = path.join(__dirname, '../../public/assets/css');
+const program = new Command();
+program.usage('Usage: node lib-cache-remote-assets.js [options]')
+  .version(packageJson.version)
+  .option(
+    '--prettify-index',
+    'option to minimize css file',
+  )
+  .option(
+    '--css-replace-relative-urls',
+    'option to replace relative urls when appropriate',
+  )
+  .option(
+    '--css-prevent-minify',
+    'option to prevent minifying css file',
+  )
+  .option(
+    '--css-generate-source-map',
+    'option to generate a source map file for CSS file',
+  )
+  .option(
+    '--generate-public-assets-only',
+    'option to generate a source map file for CSS file',
+  )
+  .option(
+    '--use-current-working-dir',
+    'option to utilize the current working directory to derive paths',
+  )
+  .option(
+    '--cwd-relative-remote-assets-path <value>',
+    'when --use-current-working-dir is specified, and not --generate-public-assets-only, '
+      + 'a current working directory relative path must be specified for non-public remote assets',
+  )
+  .option(
+    '--cwd-relative-public-dir-path <value>',
+    'when --use-current-working-dir is specified, a current working directory relative '
+      + 'path must be specified for public assets',
+  );
+program.parse(process.argv);
+const config = program.opts();
+
+let CACHED_REMOTE_ASSETS_PATH = path.join(__dirname, '../../src/lib_components/remoteAssets');
+let PUBLIC_OUTPUT_PATH = path.join(__dirname, '../../public');
+let PUBLIC_ASSETS_CSS_OUTPUT_PATH = path.join(PUBLIC_OUTPUT_PATH, 'assets/css');
+
+if (config.useCurrentWorkingDir) {
+  if (!config.generatePublicAssetsOnly) {
+    if ((config.cwdRelativeRemoteAssetsPath === null)
+        || (config.cwdRelativeRemoteAssetsPath === undefined)
+        || (config.cwdRelativeRemoteAssetsPath.length <= 0)) {
+      console.error('Invalid command arguments. --cwd-relative-remote-assets-path must be specified');
+      process.exit(9);
+    }
+    CACHED_REMOTE_ASSETS_PATH = path.join(process.cwd(), config.cwdRelativeRemoteAssetsPath);
+  }
+  if ((config.cwdRelativePublicDirPath === null)
+      || (config.cwdRelativePublicDirPath === undefined)
+      || (config.cwdRelativePublicDirPath.length <= 0)) {
+    console.error('Invalid command arguments. --cwd-relative-public-dir-path must be specified');
+    process.exit(9);
+  }
+  PUBLIC_OUTPUT_PATH = path.join(process.cwd(), config.cwdRelativePublicDirPath);
+  PUBLIC_ASSETS_CSS_OUTPUT_PATH = path.join(PUBLIC_OUTPUT_PATH, 'assets/css');
+}
+
+if (config.useCurrentWorkingDir) {
+  console.log(`Current working directory:\n\t${process.cwd()}`);
+}
+if (!config.generatePublicAssetsOnly) {
+  console.log(`Remote assets path:\n\t${CACHED_REMOTE_ASSETS_PATH}`);
+}
+console.log(`Public directory path:\n\t${PUBLIC_OUTPUT_PATH}\n`);
 
 const REMOTE_ASSET_PATHS = {
   DRUPAL_THEME_CSS: '/themes/custom/neon/dist/css/components/theme/theme.css',
@@ -52,44 +120,26 @@ const REMOTE_ASSETS_CACHE = {
   DRUPAL_THEME_CSS: {
     name: REMOTE_ASSET_NAMES.DRUPAL_THEME_CSS,
     url: `${WEB_HOST_URL}${REMOTE_ASSET_PATHS.DRUPAL_THEME_CSS}`,
+    public: true,
   },
   DRUPAL_HEADER_JS: {
     name: REMOTE_ASSET_NAMES.DRUPAL_HEADER_JS,
     url: `${WEB_HOST_URL}${REMOTE_ASSET_PATHS.DRUPAL_HEADER_JS}`,
+    public: false,
   },
   DRUPAL_HEADER_HTML: {
     name: REMOTE_ASSET_NAMES.DRUPAL_HEADER_HTML,
     url: `${WEB_HOST_URL}${REMOTE_ASSET_PATHS.DRUPAL_HEADER_HTML}`,
+    public: false,
   },
   DRUPAL_FOOTER_HTML: {
     name: REMOTE_ASSET_NAMES.DRUPAL_FOOTER_HTML,
     url: `${WEB_HOST_URL}${REMOTE_ASSET_PATHS.DRUPAL_FOOTER_HTML}`,
+    public: false,
   },
 };
 
 Object.keys(REMOTE_ASSETS_CACHE).forEach((key) => { REMOTE_ASSETS_CACHE[key].KEY = key; });
-
-const program = new Command();
-program.usage('Usage: node lib-cache-remote-assets.js [options]')
-  .version(packageJson.version)
-  .option(
-    '--prettify-index',
-    'option to minimize css file',
-  )
-  .option(
-    '--css-replace-relative-urls',
-    'option to replace relative urls when appropriate',
-  )
-  .option(
-    '--css-prevent-minify',
-    'option to prevent minifying css file',
-  )
-  .option(
-    '--css-generate-source-map',
-    'option to generate a source map file for CSS file',
-  );
-program.parse(process.argv);
-const config = program.opts();
 
 console.log('Caching remote assets...\n');
 
@@ -261,6 +311,12 @@ const processContent = async (key, name, res, resolve) => {
 
 Object.keys(REMOTE_ASSETS_CACHE)
   .filter((key) => key !== 'default')
+  .filter((key) => {
+    if (!config.generatePublicAssetsOnly) {
+      return true;
+    }
+    return REMOTE_ASSETS_CACHE[key].public;
+  })
   .forEach((key) => {
     const { name, url } = REMOTE_ASSETS_CACHE[key];
     console.log(`* Fetching: ${name}`);

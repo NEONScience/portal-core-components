@@ -43,6 +43,7 @@ import REMOTE_ASSETS from '../../remoteAssetsMap/remoteAssetsMap';
 import Theme, { COLORS } from '../Theme/Theme';
 import NeonHeader from '../NeonHeader/NeonHeader';
 import NeonFooter from '../NeonFooter/NeonFooter';
+import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
 import BrowserWarning from './BrowserWarning';
 import LiferayNotifications from './LiferayNotifications';
@@ -403,7 +404,7 @@ const NeonPage = (props) => {
   const [overlayDismissed, setOverlayDismissed] = useState(false);
 
   // Boolean - whether any Drupal assets are used; only false if both header and footer are custom
-  const useSomeDrupalAssets = !(customHeader && customFooter);
+  const useSomeDrupalAssets = NeonEnvironment.fetchDrupalAssets && !(customHeader && customFooter);
 
   /**
     Continue Sidebar Setup
@@ -512,7 +513,10 @@ const NeonPage = (props) => {
   */
   const [drupalCssStatus, setDrupalCssStatus] = useState(FETCH_STATUS.AWAITING_CALL);
   useEffect(() => {
-    if (!useSomeDrupalAssets) { return; }
+    if (!useSomeDrupalAssets) {
+      setDrupalCssStatus(FETCH_STATUS.SUCCESS);
+      return;
+    }
     if (drupalCssStatus !== FETCH_STATUS.AWAITING_CALL) { return; }
     setDrupalCssStatus(FETCH_STATUS.FETCHING);
     fetch(REMOTE_ASSETS[DRUPAL_THEME_CSS].url)
