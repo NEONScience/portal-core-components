@@ -582,6 +582,11 @@ const useViewState = (
             bundleDpds,
           );
           items.push(bundleItem);
+        } else if (hasSpecifiedRelease && isAppliedReleaseLatestNonProv) {
+          const bundleItem: DataProductCitationItem = buildCitationItem(
+            bundleParentCode,
+          );
+          items.push(bundleItem);
         }
       });
     }
