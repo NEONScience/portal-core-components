@@ -69,13 +69,19 @@ const NeonJsonLd = {
    * JSON-LD object.
    * Assumes the object is a valid JSON object.
    * @param {Object|null|undefined} data The JSON-LD object to inject.
+   * @param {boolean|undefined} metadataUseMultiParent Optionally inject multi
+   *  parent DOIs.
    */
-  injectReleaseMeta: (data) => {
+  injectReleaseMeta: (data, metadataUseMultiParent = false) => {
     if (!data) return;
     try {
       let metadataObjects = [];
       if (Array.isArray(data)) {
-        metadataObjects = data;
+        if (!metadataUseMultiParent && (data.length >= 1)) {
+          metadataObjects = [data[0]];
+        } else {
+          metadataObjects = data;
+        }
       } else {
         metadataObjects = [data];
       }
