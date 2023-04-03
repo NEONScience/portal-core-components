@@ -35,6 +35,7 @@ DataProductAvailability.propTypes = {
   sortDirection: PropTypes.oneOf(['ASC', 'DESC']),
   disableSelection: PropTypes.bool,
   delineateRelease: PropTypes.bool,
+  availabilityStatusType: PropTypes.oneOf(['available', 'tombstoned']),
 };
 
 DataProductAvailability.defaultProps = {
@@ -46,6 +47,7 @@ DataProductAvailability.defaultProps = {
   sortDirection: 'ASC',
   disableSelection: false,
   delineateRelease: false,
+  availabilityStatusType: null,
 };
 
 const WrappedDataProductAvailability = Theme.getWrappedComponent(

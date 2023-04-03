@@ -21,6 +21,7 @@
     "src/**/__tests__",
     "src/**/__mocks__",
     "lib/",
+    "scripts/*.js",
     "config/",
     "jest.config.js",
     "server.js"

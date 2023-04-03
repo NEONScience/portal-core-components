@@ -261,6 +261,19 @@ const NeonApi = {
   },
 
   /**
+   * Gets the product tombstone availability endpoint
+   * RxJS Observable for the specified product code and release.
+   * @param {string} productCode The product code to get for.
+   * @param {string} release A release to scope the product.
+   * @return The RxJS Ajax Observable
+   */
+  getProductTombstoneAvailabilityObservable: (productCode, release) => {
+    const root = NeonEnvironment.getFullApiPath('products');
+    const path = `${root}/${productCode}/${release}/tombstone-data-availability`;
+    return getJsonObservable(path);
+  },
+
+  /**
    * Gets the product DOI endpoint RxJS Observable for the specified product code and release.
    * @param {string} productCode The product code to get for.
    * @param {string} release An optional release to scope the product DOI.

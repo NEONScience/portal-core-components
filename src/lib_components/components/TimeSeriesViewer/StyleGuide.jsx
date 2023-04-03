@@ -34,6 +34,8 @@ import TimeSeriesViewerContainer from './TimeSeriesViewerContainer';
 
 import parseTimeSeriesData from '../../workers/parseTimeSeriesData';
 
+import timeSeriesDataProductsJSON from '../../staticJSON/timeSeriesDataProducts.json';
+
 import DP1_00001_001_ABBY_BASIC_30MIN_2018_12 from '../../../sampleData/TimeSeries/D16.ABBY.DP1.00001.001.2018-12.30min.basic';
 
 import productJSON from '../../../sampleData/DP1.00001.001.json';
@@ -102,9 +104,13 @@ const AllProductsTimeSeries = () => {
   const [state, dispatch] = useReducer(allProductsReducer, cloneDeep(allProductsInitialState));
   const [{ data: neonContextData }] = NeonContext.useNeonContextState();
   const { bundles } = neonContextData;
-  const productIsIS = (product) => (
-    product.productScienceTeam.includes('AIS') || product.productScienceTeam.includes('TIS')
-  );
+  const includeOnlyTs = true;
+  const productIsTs = (product) => {
+    if (includeOnlyTs) {
+      return timeSeriesDataProductsJSON.productCodes.includes(product.productCode);
+    }
+    return product.productScienceTeam.includes('AIS') || product.productScienceTeam.includes('TIS');
+  };
   // Subject and effect to perform and manage the sites GraphQL fetch
   const fetchAllProducts$ = NeonGraphQL.getAllDataProducts().pipe(
     map((response) => {
@@ -113,7 +119,7 @@ const AllProductsTimeSeries = () => {
           .filter((product) => (
             product.siteCodes
               && product.siteCodes.length
-              && productIsIS(product)
+              && productIsTs(product)
               && !BundleService.isProductDefined(bundles, product.productCode)
           ))
           .map((product) => ({
@@ -271,6 +277,7 @@ const StaticTimeSeriesViewer = () => {
             month: '2018-12',
             downloadPkg: 'basic',
             timeStep: '30min',
+            table: '2DWSD_30min',
           };
           dispatch({
             type: 'fetchDataFileSucceeded',
@@ -453,6 +460,7 @@ const StaticTimeSeriesViewer = () => {
             month: '2018-12',
             downloadPkg: 'basic',
             timeStep: '30min',
+            table: '2DWSD_30min',
           };
           dispatch({
             type: 'fetchDataFileSucceeded',
@@ -486,7 +494,11 @@ import TimeSeriesViewerContainer from 'portal-core-components/lib/components/Tim
         `}
       </CodeBlock>
       <ExampleBlock>
-        <TimeSeriesViewerContext.Provider mode="STATIC" productData={productJSON.data} timeSeriesUniqueId={100}>
+        <TimeSeriesViewerContext.Provider
+          mode="STATIC"
+          productData={productJSON.data}
+          timeSeriesUniqueId={100}
+        >
           <StaticTimeSeriesViewer />
         </TimeSeriesViewerContext.Provider>
       </ExampleBlock>

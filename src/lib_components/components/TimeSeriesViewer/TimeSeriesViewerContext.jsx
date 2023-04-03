@@ -179,6 +179,7 @@ export const DEFAULT_STATE = {
     dateRange: [null, null],
     continuousDateRange: [],
     variables: [],
+    derivedVariableTable: {},
     dateTimeVariable: null,
     sites: [],
     timeStep: 'auto', // The visible selected timeStep, as per what's available, or 'auto'
@@ -208,20 +209,66 @@ const useTimeSeriesViewerState = () => {
    Time Step Definitions and Functions
 */
 export const TIME_STEPS = {
-  '1min': { key: '1min', tmi: '001', seconds: 60 },
-  '2min': { key: '2min', tmi: '002', seconds: 120 },
-  '5min': { key: '5min', tmi: '005', seconds: 300 },
-  '15min': { key: '15min', tmi: '015', seconds: 900 },
-  '30min': { key: '30min', tmi: '030', seconds: 1800 },
-  '60min': { key: '60min', tmi: '060', seconds: 3600 },
-  '0AQ': { key: '0AQ', tmi: '100', seconds: 60 },
-  '1day': { key: '1day', tmi: '01D', seconds: 86400 },
+  '1min': {
+    key: '1min',
+    matchFileTableSuffix: ['1min', '1_min', '1minute', '1_minute'],
+    tmi: '001',
+    seconds: 60,
+  },
+  '2min': {
+    key: '2min',
+    matchFileTableSuffix: ['2min', '2_min', '2minute', '2_minute', '2minutes', '2_minutes'],
+    tmi: '002',
+    seconds: 120,
+  },
+  '5min': {
+    key: '5min',
+    matchFileTableSuffix: ['5min', '5_min', '5minute', '5_minute', '5minutes', '5_minutes'],
+    tmi: '005',
+    seconds: 300,
+  },
+  '15min': {
+    key: '15min',
+    matchFileTableSuffix: ['15min', '15_min', '15minute', '15_minute', '15minutes', '15_minutes'],
+    tmi: '015',
+    seconds: 900,
+  },
+  '30min': {
+    key: '30min',
+    matchFileTableSuffix: ['30min', '30_min', '30minute', '30_minute', '30minutes', '30_minutes'],
+    tmi: '030',
+    seconds: 1800,
+  },
+  '60min': {
+    key: '60min',
+    matchFileTableSuffix: ['60min', '60_min', '60minute', '60_minute', '60minutes', '60_minutes'],
+    tmi: '060',
+    seconds: 3600,
+  },
+  '0AQ': {
+    key: '0AQ',
+    matchFileTableSuffix: ['0AQ', '0_AQ'],
+    tmi: '100',
+    seconds: 60,
+  },
+  '1day': {
+    key: '1day',
+    matchFileTableSuffix: ['1day', '1_day'],
+    tmi: '01D',
+    seconds: 86400,
+  },
 };
 const getTimeStep = (input = '') => (
   Object.keys(TIME_STEPS).find((key) => TIME_STEPS[key].tmi === input) || null
 );
-const getTimeStepForTableName = (tableName = '') => (
-  Object.keys(TIME_STEPS).find((key) => tableName.endsWith(`_${key}`)) || null
+const matchTimeStepForTableName = (key, tableName = '', allowDefaultFallthrough = false) => (
+  tableName.endsWith(`_${key}`)
+    || TIME_STEPS[key].matchFileTableSuffix.some((suffix) => tableName.endsWith(`_${suffix}`))
+    || allowDefaultFallthrough
+);
+const getTimeStepForTableName = (tableName = '', useDefault = false) => (
+  Object.keys(TIME_STEPS)
+    .find((key) => matchTimeStepForTableName(key, tableName)) || (useDefault ? 'default' : null)
 );
 export const summarizeTimeSteps = (steps, timeStep = null, pluralize = true) => {
   if (steps === 1) { return 'none'; }
@@ -249,6 +296,13 @@ const DATA_FILE_PARTS = {
   TIME_STEP: {
     offset: 8,
     isValid: (p) => Object.keys(TIME_STEPS).some((t) => TIME_STEPS[t].tmi === p),
+  },
+  TABLE: {
+    offset: 9,
+    isValid: (p) => (
+      /^[\w]+$/.test(p)
+        && Object.keys(TIME_STEPS).some((key) => matchTimeStepForTableName(key, p, true))
+    ),
   },
   MONTH: {
     offset: 10,
@@ -411,6 +465,7 @@ const parseSiteMonthData = (site, files) => {
     const month = parts[DATA_FILE_PARTS.MONTH.offset];
     const packageType = parts[DATA_FILE_PARTS.PACKAGE_TYPE.offset];
     const timeStep = getTimeStep(parts[DATA_FILE_PARTS.TIME_STEP.offset]);
+    const tableName = parts[DATA_FILE_PARTS.TABLE.offset];
     // Timestep must be valid
     if (timeStep === null) { return; }
     // All is good, add the timestep and add file information to the site object
@@ -420,7 +475,10 @@ const parseSiteMonthData = (site, files) => {
     if (!newSite.positions[position].data[month][packageType]) {
       newSite.positions[position].data[month][packageType] = {};
     }
-    newSite.positions[position].data[month][packageType][timeStep] = {
+    if (!newSite.positions[position].data[month][packageType][timeStep]) {
+      newSite.positions[position].data[month][packageType][timeStep] = {};
+    }
+    newSite.positions[position].data[month][packageType][timeStep][tableName] = {
       url,
       status: FETCH_STATUS.AWAITING_CALL,
       error: null,
@@ -470,7 +528,7 @@ const parseSiteVariables = (previousVariables, siteCode, csv) => {
         units,
         downloadPkg,
       } = variable;
-      const timeStep = getTimeStepForTableName(table);
+      const timeStep = getTimeStepForTableName(table, true);
       const isSelectable = variable.dataType !== 'dateTime'
         && variable.units !== 'NA'
         && !/QF$/.test(fieldName);
@@ -575,6 +633,8 @@ const applyDefaultsToSelection = (state, invalidDefaultVariables = new Set()) =>
     selection.sites[idx].positions.push(positions[0]);
   });
   // Variables
+  selection.derivedVariableTable = {};
+  let foundVarWithData = false;
   const hasVariablesSelected = Array.isArray(selection.variables)
     && (selection.variables.length > 0);
   if (Object.keys(variables).length) {
@@ -626,11 +686,39 @@ const applyDefaultsToSelection = (state, invalidDefaultVariables = new Set()) =>
         const { siteCode, positions } = site;
         positions.forEach((position) => {
           selection.continuousDateRange.forEach((month) => {
-            const series = lodashGet(
+            if (!variables[variable].tables) {
+              return;
+            }
+            const timeStepTables = lodashGet(
               product.sites[siteCode].positions[position],
-              `data['${month}']['${pkg}']['${dataTimeStep}'].series['${variable}']`,
+              `data['${month}']['${pkg}']['${dataTimeStep}']`,
+              {},
             );
-            if (!series || !series.count) { return; }
+            // Attempt to find a table with data for the specified
+            // variable (associated tables) and time step
+            const tableWithSeries = Array.from(variables[variable].tables).find((table) => {
+              const timeStepTable = timeStepTables[table];
+              const variableTableTimeStep = getTimeStepForTableName(table, true);
+              if (timeStepTable && timeStepTable.series) {
+                if (variableTableTimeStep
+                    && (variableTableTimeStep.localeCompare(dataTimeStep) === 0)) {
+                  const checkSeries = timeStepTable.series[variable];
+                  return checkSeries && checkSeries.count;
+                }
+                if (variableTableTimeStep === 'default') {
+                  return true;
+                }
+              }
+              return false;
+            });
+            const series = tableWithSeries
+              ? timeStepTables[tableWithSeries].series[variable]
+              : null;
+            if (!series || !series.count) {
+              return;
+            }
+            foundVarWithData = true;
+            selection.derivedVariableTable[variable] = tableWithSeries;
             combinedSum += series.sum;
             combinedCount += series.count;
             monthCounts.push(series.count);
@@ -672,18 +760,24 @@ const applyDefaultsToSelection = (state, invalidDefaultVariables = new Set()) =>
   // month, or position.
   if (
     status === TIME_SERIES_VIEWER_STATUS.READY_FOR_SERIES
-      && !hasVariablesSelected && selection.variables.length
+      && (!hasVariablesSelected || (!foundVarWithData && selection.isDefault))
+      && selection.variables.length
       && selection.yAxes.y1.dataRange.every((x) => x === null)
   ) {
-    invalidDefaultVariables.add(selection.variables[0]);
-    selection.variables = [];
-    return applyDefaultsToSelection({ ...state, selection }, invalidDefaultVariables);
+    const allowedDefaultVars = Object.keys(variables).filter((v) => (variables[v].canBeDefault));
+    if (allowedDefaultVars.length > invalidDefaultVariables.size) {
+      invalidDefaultVariables.add(selection.variables[0]);
+      selection.variables = [];
+      return applyDefaultsToSelection({ ...state, selection }, invalidDefaultVariables);
+    }
   }
   // Generate a new digest for effect comparison
   selection.digest = JSON.stringify({
     sites: selection.sites,
     dateRange: selection.dateRange,
     variables: selection.variables,
+    qualityFlags: selection.qualityFlags,
+    timeStep: selection.timeStep,
   });
   return selection;
 };
@@ -712,6 +806,7 @@ const setDataFileFetchStatuses = (state, fetches) => {
       month,
       downloadPkg,
       timeStep,
+      table,
     } = fetch;
     if (
       !newState.product || !newState.product.sites || !newState.product.sites[siteCode]
@@ -721,11 +816,13 @@ const setDataFileFetchStatuses = (state, fetches) => {
         || !newState.product.sites[siteCode].positions[position].data[month]
         || !newState.product.sites[siteCode].positions[position].data[month][downloadPkg]
         || !newState.product.sites[siteCode].positions[position].data[month][downloadPkg][timeStep]
+        // eslint-disable-next-line max-len
+        || !newState.product.sites[siteCode].positions[position].data[month][downloadPkg][timeStep][table]
     ) { return; }
     newState.product
       .sites[siteCode]
       .positions[position]
-      .data[month][downloadPkg][timeStep]
+      .data[month][downloadPkg][timeStep][table]
       .status = FETCH_STATUS.FETCHING;
   });
   return newState;
@@ -973,24 +1070,24 @@ const reducer = (state, action) => {
       newState.product
         .sites[action.siteCode]
         .positions[action.position]
-        .data[action.month][action.downloadPkg][action.timeStep]
+        .data[action.month][action.downloadPkg][action.timeStep][action.table]
         .status = FETCH_STATUS.ERROR;
       newState.product
         .sites[action.siteCode]
         .positions[action.position]
-        .data[action.month][action.downloadPkg][action.timeStep]
+        .data[action.month][action.downloadPkg][action.timeStep][action.table]
         .error = action.error;
       return newState;
     case 'fetchDataFileSucceeded':
       newState.product
         .sites[action.siteCode]
         .positions[action.position]
-        .data[action.month][action.downloadPkg][action.timeStep]
+        .data[action.month][action.downloadPkg][action.timeStep][action.table]
         .status = FETCH_STATUS.SUCCESS;
       newState.product
         .sites[action.siteCode]
         .positions[action.position]
-        .data[action.month][action.downloadPkg][action.timeStep]
+        .data[action.month][action.downloadPkg][action.timeStep][action.table]
         .series = action.series;
       return newState;
 
@@ -1080,11 +1177,13 @@ const reducer = (state, action) => {
     case 'selectAllQualityFlags':
       newState.selection.isDefault = false;
       newState.selection.qualityFlags = Array.from(state.availableQualityFlags);
+      calcSelection();
       calcStatus();
       return newState;
     case 'selectNoneQualityFlags':
       newState.selection.isDefault = false;
       newState.selection.qualityFlags = [];
+      calcSelection();
       calcStatus();
       return newState;
     case 'selectToggleQualityFlag':
@@ -1095,12 +1194,14 @@ const reducer = (state, action) => {
         newState.selection.qualityFlags = [...state.selection.qualityFlags]
           .filter((qf) => qf !== action.qualityFlag);
       }
+      calcSelection();
       calcStatus();
       return newState;
     case 'selectTimeStep':
       newState.selection.isDefault = false;
       if (!state.availableTimeSteps.has(action.timeStep)) { return state; }
       newState.selection.timeStep = action.timeStep;
+      calcSelection();
       calcStatus();
       return newState;
     case 'selectAddSite':
@@ -1445,44 +1546,50 @@ const Provider = (props) => {
         const { downloadPkg } = state.variables[variable];
         positions.forEach((position) => {
           continuousDateRange.forEach((month) => {
-            const actionProps = {
-              siteCode,
-              position,
-              month,
-              downloadPkg,
-              timeStep,
-            };
             // eslint-disable-next-line max-len
             const path = `sites['${siteCode}'].positions['${position}'].data['${month}']['${downloadPkg}']['${timeStep}']`;
-            const { url, status } = get(state.product, path, {});
-            // If the file isn't awaiting a fetch call then don't fetch it
-            if (!url || status !== FETCH_STATUS.AWAITING_CALL) { return; }
-            // Use the dataFetchTokens set to make sure we don't somehow add the same fetch twice
-            const previousSize = dataFetchTokens.size;
-            const token = `${siteCode};${position};${month};${downloadPkg};${timeStep}`;
-            dataFetchTokens.add(token);
-            if (dataFetchTokens.size === previousSize) { return; }
-            // Save the action props to pass to the fetchDataFiles action to set all fetch statuses
-            dataActions.push(actionProps);
-            // Add a file fetch observable to the main list
-            dataFetches.push(
-              fetchCSV(url).pipe(
-                map((response) => response.response),
-                switchMap((csv) => (
-                  parseTimeSeriesData({ csv, variables: state.variables }).then((series) => {
-                    dispatch({
-                      type: 'fetchDataFileSucceeded',
-                      series,
-                      ...actionProps,
-                    });
-                  })
-                )),
-                catchError((error) => {
-                  dispatch({ type: 'fetchDataFileFailed', error: error.message, ...actionProps });
-                  return of(false);
-                }),
-              ),
-            );
+            const timeStepTables = get(state.product, path, {});
+            Object.keys(timeStepTables).forEach((tableName) => {
+              const timeStepTable = timeStepTables[tableName];
+              const { url, status } = timeStepTable;
+              // If the file isn't awaiting a fetch call then don't fetch it
+              if (!url || status !== FETCH_STATUS.AWAITING_CALL) { return; }
+              // Use the dataFetchTokens set to make sure we don't somehow add the same fetch twice
+              const previousSize = dataFetchTokens.size;
+              const token = `${siteCode};${position};${month};${downloadPkg};${timeStep};${tableName}`;
+              dataFetchTokens.add(token);
+              if (dataFetchTokens.size === previousSize) { return; }
+              // Save the action props to pass to the fetchDataFiles
+              // action to set all fetch statuses
+              const actionProps = {
+                siteCode,
+                position,
+                month,
+                downloadPkg,
+                timeStep,
+                table: tableName,
+              };
+              dataActions.push(actionProps);
+              // Add a file fetch observable to the main list
+              dataFetches.push(
+                fetchCSV(url).pipe(
+                  map((response) => response.response),
+                  switchMap((csv) => (
+                    parseTimeSeriesData({ csv, variables: state.variables }).then((series) => {
+                      dispatch({
+                        type: 'fetchDataFileSucceeded',
+                        series,
+                        ...actionProps,
+                      });
+                    })
+                  )),
+                  catchError((error) => {
+                    dispatch({ type: 'fetchDataFileFailed', error: error.message, ...actionProps });
+                    return of(false);
+                  }),
+                ),
+              );
+            });
           });
         });
       });

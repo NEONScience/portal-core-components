@@ -86,6 +86,7 @@ export namespace DEFAULT_STATE {
         export { continuousDateRange_1 as continuousDateRange };
         const variables_1: never[];
         export { variables_1 as variables };
+        export const derivedVariableTable: {};
         export const dateTimeVariable: null;
         const sites_1: never[];
         export { sites_1 as sites };
@@ -119,41 +120,49 @@ export namespace DEFAULT_STATE {
 export const TIME_STEPS: {
     '1min': {
         key: string;
+        matchFileTableSuffix: string[];
         tmi: string;
         seconds: number;
     };
     '2min': {
         key: string;
+        matchFileTableSuffix: string[];
         tmi: string;
         seconds: number;
     };
     '5min': {
         key: string;
+        matchFileTableSuffix: string[];
         tmi: string;
         seconds: number;
     };
     '15min': {
         key: string;
+        matchFileTableSuffix: string[];
         tmi: string;
         seconds: number;
     };
     '30min': {
         key: string;
+        matchFileTableSuffix: string[];
         tmi: string;
         seconds: number;
     };
     '60min': {
         key: string;
+        matchFileTableSuffix: string[];
         tmi: string;
         seconds: number;
     };
     '0AQ': {
         key: string;
+        matchFileTableSuffix: string[];
         tmi: string;
         seconds: number;
     };
     '1day': {
         key: string;
+        matchFileTableSuffix: string[];
         tmi: string;
         seconds: number;
     };
@@ -217,6 +226,7 @@ export function getTestableItems(): {
             dateRange: null[];
             continuousDateRange: never[];
             variables: never[];
+            derivedVariableTable: {};
             dateTimeVariable: null;
             sites: never[];
             timeStep: string;
@@ -376,6 +386,7 @@ declare function useTimeSeriesViewerState(): {
         dateRange: null[];
         continuousDateRange: never[];
         variables: never[];
+        derivedVariableTable: {};
         dateTimeVariable: null;
         sites: never[];
         timeStep: string;
@@ -447,6 +458,7 @@ declare function useTimeSeriesViewerState(): {
         dateRange: null[];
         continuousDateRange: never[];
         variables: never[];
+        derivedVariableTable: {};
         dateTimeVariable: null;
         sites: never[];
         timeStep: string;

@@ -483,7 +483,7 @@ export default function TimeSeriesViewerGraph() {
       h /= qualitySeriesCount;
       for (let c = 2; c < row.length; c += 1) {
         if (!graphState.hiddenQualityFlags.has(qualityLabels[c])) {
-          if (row[c] && row[c].some((v) => v !== 0)) {
+          if (row[c] && row[c].some((v) => v !== 0 && v !== null)) {
             canvas.fillStyle = QUALITY_COLORS[(c - 2) % 12]; // eslint-disable-line no-param-reassign, max-len
             canvas.fillRect(startX, y, endX - startX, h);
           }

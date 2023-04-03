@@ -83,6 +83,11 @@ export interface IRouteService {
      */
     getDataAvailabilityPath: () => string;
     /**
+     * Gets the path to the data product bundles information page
+     * @returns
+     */
+    getDataProductBundlesPath: () => string;
+    /**
      * Gets the path to the NEONUtilities data stack in R page
      * @returns
      */

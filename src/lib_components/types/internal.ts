@@ -1,5 +1,10 @@
 import { Nullable } from './core';
 
+export interface IDataProductLike {
+  productCode: string;
+  productName: string;
+}
+
 export interface IReleaseLike {
   release: string;
   generationDate: string;
@@ -21,7 +26,7 @@ export interface Release extends IReleaseLike {
 
 export interface CitationBundleState {
   parentCodes: string[];
-  doiProductCode: Nullable<string>;
+  doiProductCode: Nullable<string|string[]>;
 }
 
 export interface SensorPosition {

@@ -1,6 +1,7 @@
 import { Nullable } from '../types/core';
 import { BundleContext } from '../types/neonContext';
 import { CitationBundleState } from '../types/internal';
+import { DataProductDoiStatus } from '../types/neonApi';
 export interface IBundleService {
     /**
      * Determines if the product is defined as a container or child within a bundle.
@@ -61,7 +62,7 @@ export interface IBundleService {
      * @param productCode The product code to query with.
      * @return The bundle product code when available.
      */
-    getBundleProductCode: (context: BundleContext, release: string, productCode: string) => Nullable<string>;
+    getBundleProductCode: (context: BundleContext, release: string, productCode: string) => Nullable<string | string[]>;
     /**
      * Determines if the product should forward availability for the bundle.
      * @param context The context to derive lookups from.
@@ -72,11 +73,11 @@ export interface IBundleService {
      */
     shouldForwardAvailability: (context: BundleContext, release: string, productCode: string, bundleProductCode: string) => boolean;
     /**
-     * Gets the owning split bundle product code.
+     * Gets the owning split bundle product codes.
      * @param context The context to derive lookups from.
      * @param release The release to get bundles for.
      * @param productCode The product code to query with.
-     * @return The bundle product code when available.
+     * @return The bundle product codes when available.
      */
     getSplitProductBundles: (context: BundleContext, release: string, productCode: string) => string[];
     /**
@@ -95,6 +96,15 @@ export interface IBundleService {
      * @return The applicable bundle status for citations.
      */
     determineCitationBundle: (context: BundleContext, release: Nullable<string>, productCode: string) => CitationBundleState;
+    /**
+     * Determines the applicable bundle release.
+     * @param context The context to derive from.
+     * @param release The release to get bundles for.
+     * @param productCode The product code to query with.
+     * @param doiStatus The DOI status for the product, release.
+     * @returns The applicable bundle release.
+     */
+    determineAppliedBundleRelease: (context: BundleContext, release: string, productCode: string, doiStatus: Nullable<DataProductDoiStatus | DataProductDoiStatus[]>) => Nullable<DataProductDoiStatus>;
 }
 declare const BundleService: IBundleService;
 export default BundleService;

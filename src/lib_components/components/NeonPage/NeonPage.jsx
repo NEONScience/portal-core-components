@@ -43,9 +43,11 @@ import REMOTE_ASSETS from '../../remoteAssetsMap/remoteAssetsMap';
 import Theme, { COLORS } from '../Theme/Theme';
 import NeonHeader from '../NeonHeader/NeonHeader';
 import NeonFooter from '../NeonFooter/NeonFooter';
+import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
 import BrowserWarning from './BrowserWarning';
 import LiferayNotifications from './LiferayNotifications';
+import DrupalAssetService from '../../service/DrupalAssetService';
 
 import { getJson } from '../../util/rxUtil';
 import {
@@ -360,6 +362,8 @@ const NeonPage = (props) => {
     breadcrumbs,
     customHeader,
     customFooter,
+    showHeaderSkeleton,
+    showFooterSkeleton,
     error,
     loading,
     notification,
@@ -400,7 +404,7 @@ const NeonPage = (props) => {
   const [overlayDismissed, setOverlayDismissed] = useState(false);
 
   // Boolean - whether any Drupal assets are used; only false if both header and footer are custom
-  const useSomeDrupalAssets = !(customHeader && customFooter);
+  const useSomeDrupalAssets = NeonEnvironment.fetchDrupalAssets && !(customHeader && customFooter);
 
   /**
     Continue Sidebar Setup
@@ -509,28 +513,39 @@ const NeonPage = (props) => {
   */
   const [drupalCssStatus, setDrupalCssStatus] = useState(FETCH_STATUS.AWAITING_CALL);
   useEffect(() => {
-    if (!useSomeDrupalAssets) { return; }
+    if (!useSomeDrupalAssets) {
+      setDrupalCssStatus(FETCH_STATUS.SUCCESS);
+      return;
+    }
     if (drupalCssStatus !== FETCH_STATUS.AWAITING_CALL) { return; }
     setDrupalCssStatus(FETCH_STATUS.FETCHING);
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = REMOTE_ASSETS[DRUPAL_THEME_CSS].url;
-    link.crossOrigin = 'anonymous';
-    link.onload = () => {
-      setDrupalCssStatus(FETCH_STATUS.SUCCESS);
-    };
-    link.onerror = () => {
-      (async () => {
-        // eslint-disable-next-line no-unused-expressions
-        await import('../../remoteAssets/drupal-theme.css');
-        // Assume this local import worked and still report the load as successful
-        // We do this because props on header and footer express whether the CSS is
-        // loaded and we want to simplify that as a boolean. The header and footer
-        // don't care where the CSS came from so long as it's there.
+    fetch(REMOTE_ASSETS[DRUPAL_THEME_CSS].url)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch Drupal theme CSS');
+        }
+        return response.text();
+      })
+      .then((data) => {
+        const drupalStyle = document.createElement('style');
+        const appliedData = DrupalAssetService.cleanCss(data, true);
+        drupalStyle.textContent = appliedData;
+        document.head.appendChild(drupalStyle);
+        try {
+          const existingBlock = document.head.querySelector('link[data-meta="drupal-theme"]');
+          if ((typeof existingBlock !== 'undefined') && (existingBlock !== null)) {
+            existingBlock.remove();
+          }
+        } catch (e) {
+          console.error(e); // eslint-disable-line no-console
+        }
         setDrupalCssStatus(FETCH_STATUS.SUCCESS);
-      })();
-    };
-    document.body.appendChild(link);
+      })
+      .catch((err) => {
+        // eslint-disable-next-line no-console
+        console.error(err);
+        setDrupalCssStatus(FETCH_STATUS.SUCCESS);
+      });
   }, [useSomeDrupalAssets, drupalCssStatus, setDrupalCssStatus]);
 
   /**
@@ -857,6 +872,7 @@ const NeonPage = (props) => {
             notifications={notifications}
             onShowNotifications={handleShowNotifications}
             drupalCssLoaded={drupalCssStatus === FETCH_STATUS.SUCCESS}
+            showSkeleton={showHeaderSkeleton}
           />
         )}
         <Container className={classes.outerPageContainer} style={outerPageContainerStyles}>
@@ -884,6 +900,7 @@ const NeonPage = (props) => {
         ) : (
           <NeonFooter
             drupalCssLoaded={drupalCssStatus === FETCH_STATUS.SUCCESS}
+            showSkeleton={showFooterSkeleton}
           />
         )}
         {renderLoading()}
@@ -931,6 +948,8 @@ NeonPage.propTypes = {
   ),
   customHeader: PropTypes.node,
   customFooter: PropTypes.node,
+  showHeaderSkeleton: PropTypes.bool,
+  showFooterSkeleton: PropTypes.bool,
   error: PropTypes.string,
   loading: PropTypes.string,
   notification: PropTypes.string,
@@ -978,6 +997,8 @@ NeonPage.defaultProps = {
   breadcrumbs: [],
   customHeader: null,
   customFooter: null,
+  showHeaderSkeleton: false,
+  showFooterSkeleton: false,
   error: null,
   loading: null,
   notification: null,

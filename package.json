@@ -1,12 +1,15 @@
 {
   "name": "portal-core-components",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "main": "./lib/index.js",
   "private": true,
   "homepage": "http://localhost:3010/core-components",
   "dependencies": {
     "@date-io/moment": "^1.3.13",
-    "@fontsource/inter": "^4.5.14",
+    "@fortawesome/fontawesome-svg-core": "^6.3.0",
+    "@fortawesome/free-regular-svg-icons": "^6.3.0",
+    "@fortawesome/free-solid-svg-icons": "^6.3.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.11.3",
     "@material-ui/lab": "~4.0.0-alpha.61",
@@ -64,12 +67,22 @@
     "zod": "^3.20.2"
   },
   "peerDependencies": {
+    "commander": "^9.4.1",
+    "cssnano": "^5.1.14",
+    "jsdom": "^20.0.3",
+    "node-fetch": "^3.3.0",
+    "postcss": "^8.4.20",
+    "prettier": "^2.8.1",
     "worker-loader": "^3.0.8"
   },
   "peerDependenciesMeta": {
-    "worker-loader": {
-      "optional": true
-    }
+    "commander": { "optional": true },
+    "cssnano": { "optional": true },
+    "jsdom": { "optional": true },
+    "node-fetch": { "optional": true },
+    "postcss": { "optional": true },
+    "prettier": { "optional": true },
+    "worker-loader": { "optional": true }
   },
   "devDependencies": {
     "@babel/cli": "^7.19.3",
@@ -83,6 +96,8 @@
     "@jest/globals": "^29.3.1",
     "@testing-library/react-hooks": "^8.0.1",
     "@typescript-eslint/parser": "^5.45.0",
+    "commander": "^9.4.1",
+    "cssnano": "^5.1.14",
     "eslint": "^8.28.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.26.0",
@@ -91,7 +106,10 @@
     "express": "^4.18.2",
     "html-loader": "^4.2.0",
     "jest-canvas-mock": "^2.4.0",
+    "jsdom": "^20.0.3",
     "node-fetch": "^3.3.0",
+    "postcss": "^8.4.20",
+    "prettier": "^2.8.1",
     "react-scripts": "^5.0.1",
     "react-test-renderer": "^17.0.2",
     "typescript": "~4.9.3",
@@ -111,7 +129,7 @@
     "lib:clean": "(rm -r ./lib || true) && (rm -r ./src/lib_components/remoteAssets/* || true)",
     "lib:clean-build": "npm run lib:clean && npm run lib",
     "lib:types": "npx tsc --project tsconfig.d.json",
-    "lib:pre-process": "node ./scripts/lib/lib-cache-remote-assets.js",
+    "lib:pre-process": "node ./scripts/lib/lib-cache-remote-assets.js --prettify-index --css-replace-relative-urls",
     "lib:post-cleanup": "npm run lib:post-clean-styleGuides && npm run lib:post-clean-img && npm run lib:post-clean-tests && node ./scripts/lib/lib-fix-worker-babel.js",
     "lib:post-clean-styleGuides": "rm ./lib/components/**/StyleGuide.*",
     "lib:post-clean-img": "rm -r ./lib/components/SiteMap/png && rm -r ./lib/components/SiteMap/svg_source && rm -r ./lib/components/DataThemeIcon/svg_source",

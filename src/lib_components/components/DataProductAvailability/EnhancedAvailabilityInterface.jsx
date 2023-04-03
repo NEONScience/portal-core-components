@@ -4,7 +4,6 @@ import React, {
   useCallback,
   useEffect,
   useRef,
-  useState,
 } from 'react';
 import PropTypes from 'prop-types';
 
@@ -14,12 +13,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Hidden from '@material-ui/core/Hidden';
 import MenuItem from '@material-ui/core/MenuItem';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
 import Select from '@material-ui/core/Select';
-import Switch from '@material-ui/core/Switch';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import Typography from '@material-ui/core/Typography';
@@ -30,13 +25,12 @@ import DescIcon from '@material-ui/icons/KeyboardArrowUp';
 import AvailabilityContext from './AvailabilityContext';
 import AvailabilityPending from './AvailabilityPending';
 import FullWidthVisualization from '../FullWidthVisualization/FullWidthVisualization';
-import DownloadDataContext from '../DownloadDataContext/DownloadDataContext';
 import NeonContext from '../NeonContext/NeonContext';
 import Theme from '../Theme/Theme';
 
 import EnhancedAvailabilityKey from './EnhancedAvailabilityKey';
 import EnhancedAvailabilityGrid from './EnhancedAvailabilityGrid';
-import { SVG, TIME, AvailabilityPropTypes } from './AvailabilityUtils';
+import { SVG, AvailabilityPropTypes } from './AvailabilityUtils';
 import { SvgDefs } from './AvailabilitySvgComponents';
 
 const preStyle = {
@@ -83,14 +77,10 @@ const EnhancedAvailabilityInterface = (props) => {
   const { sites: availabilitySites, ...other } = props;
 
   const classes = useStyles(Theme);
-  const atXs = useMediaQuery(Theme.breakpoints.only('xs'));
-  const atSm = useMediaQuery(Theme.breakpoints.only('sm'));
 
   const [
-    { data: neonContextData, isFinal: neonContextIsFinal, hasError: neonContextHasError },
+    { isFinal: neonContextIsFinal, hasError: neonContextHasError },
   ] = NeonContext.useNeonContextState();
-  const { sites: allSites, states: allStates, domains: allDomains } = neonContextData;
-
   const { SORT_DIRECTIONS, useAvailabilityState } = AvailabilityContext;
   const [availabilityState, availabilityDispatch] = useAvailabilityState();
   const {
@@ -106,7 +96,6 @@ const EnhancedAvailabilityInterface = (props) => {
   /**
      Context-Derived Stuff
   */
-  const downloadContextIsActive = false;
   const selectionEnabled = false;
 
   /**

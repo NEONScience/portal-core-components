@@ -35,68 +35,44 @@ exports[`NeonHeader renders with drupalCssLoaded prop, success NeonContext state
 
 exports[`NeonHeader renders with no props and active/fetching NeonContext state 1`] = `
 <header
-  className="makeStyles-skeletonHeader-1"
+  className="makeStyles-unstickyHeader-3 makeStyles-headerContainer-5 makeStyles-headerContainerFallback-4"
   id="header"
 >
-  <span
-    className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-    style={
-      Object {
-        "height": "120px",
-        "width": "100%",
-      }
-    }
-  />
+  <div>
+    MOCK-FALLBACK-DRUPAL-HEADER-HTML
+  </div>
 </header>
 `;
 
 exports[`NeonHeader renders with no props and error NeonContext state 1`] = `
 <header
-  className="makeStyles-skeletonHeader-1"
+  className="makeStyles-unstickyHeader-3 makeStyles-headerContainer-5 makeStyles-headerContainerFallback-4"
   id="header"
 >
-  <span
-    className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-    style={
-      Object {
-        "height": "120px",
-        "width": "100%",
-      }
-    }
-  />
+  <div>
+    MOCK-FALLBACK-DRUPAL-HEADER-HTML
+  </div>
 </header>
 `;
 
 exports[`NeonHeader renders with no props and inactive NeonContext state 1`] = `
 <header
-  className="makeStyles-skeletonHeader-1"
+  className="makeStyles-unstickyHeader-3 makeStyles-headerContainer-5 makeStyles-headerContainerFallback-4"
   id="header"
 >
-  <span
-    className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-    style={
-      Object {
-        "height": "120px",
-        "width": "100%",
-      }
-    }
-  />
+  <div>
+    MOCK-FALLBACK-DRUPAL-HEADER-HTML
+  </div>
 </header>
 `;
 
 exports[`NeonHeader renders with no props and success NeonContext state 1`] = `
 <header
-  className="makeStyles-skeletonHeader-1"
+  className="makeStyles-unstickyHeader-3 makeStyles-headerContainer-5 makeStyles-headerContainerFallback-4"
   id="header"
 >
-  <span
-    className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-    style={
-      Object {
-        "height": "120px",
-        "width": "100%",
-      }
-    }
-  />
+  <div>
+    MOCK-FALLBACK-DRUPAL-HEADER-HTML
+  </div>
 </header>
 `;

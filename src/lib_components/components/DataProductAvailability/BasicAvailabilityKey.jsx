@@ -8,6 +8,8 @@ import { CELL_ATTRS } from './AvailabilitySvgComponents';
 
 import Theme, { COLORS } from '../Theme/Theme';
 
+const VERTICAL_STATUS_TYPES = ['tombstoned'];
+
 /**
    Setup: CSS classes
 */
@@ -35,19 +37,65 @@ const useStyles = makeStyles((theme) => ({
 */
 export default function BasicAvailabilityKey(props) {
   const classes = useStyles(Theme);
-  const { orientation, selectionEnabled, delineateRelease } = props;
+  const {
+    orientation,
+    selectionEnabled,
+    delineateRelease,
+    availabilityStatusType,
+  } = props;
 
   /**
      Render: Cells (Vertical Orientation)
   */
   const renderVerticalCellLegend = () => {
     const totalRows = delineateRelease ? 3 : 2;
-    const totalWidth = delineateRelease ? 180 : 90;
+    const totalWidth = delineateRelease || VERTICAL_STATUS_TYPES.includes(availabilityStatusType)
+      ? 180
+      : 90;
     const rowHeight = SVG.CELL_HEIGHT + (2 * SVG.CELL_PADDING);
     const totalHeight = (rowHeight * totalRows) - SVG.CELL_PADDING;
     const rowY = (row) => row * rowHeight;
     const rowLabelY = (row) => rowY(row) + (SVG.LABEL_FONT_SIZE - SVG.CELL_PADDING + 1);
     const cellOffset = SVG.CELL_WIDTH + (2 * SVG.CELL_PADDING);
+    const renderAvailabilityStatusCell = () => {
+      const tombstonedCell = CELL_ATTRS.tombstoned;
+      switch (availabilityStatusType) {
+        case 'tombstoned':
+          return (
+            <>
+              <rect
+                x={0}
+                y={rowY(0)}
+                width={SVG.CELL_WIDTH}
+                height={SVG.CELL_HEIGHT}
+                rx={SVG.CELL_RX}
+                fill={tombstonedCell.fill}
+              />
+              <text className={classes.legendText} x={cellOffset} y={rowLabelY(0)}>
+                No Longer Available
+              </text>
+            </>
+          );
+        case 'available':
+        default:
+          /* eslint-disable max-len */
+          return (
+            <>
+              <rect
+                x={0}
+                y={rowY(0)}
+                width={SVG.CELL_WIDTH}
+                height={SVG.CELL_HEIGHT}
+                rx={SVG.CELL_RX}
+                fill={Theme.palette.secondary.main}
+              />
+              <text className={classes.legendText} x={cellOffset} y={rowLabelY(0)}>
+                Available
+              </text>
+            </>
+          );
+      }
+    };
     const renderProvisionalCell = () => {
       if (!delineateRelease) {
         return null;
@@ -75,10 +123,7 @@ export default function BasicAvailabilityKey(props) {
     /* eslint-disable max-len */
     return (
       <svg width={totalWidth} height={totalHeight} className={classes.legendSvg}>
-        <rect x={0} y={rowY(0)} width={SVG.CELL_WIDTH} height={SVG.CELL_HEIGHT} rx={SVG.CELL_RX} fill={Theme.palette.secondary.main} />
-        <text className={classes.legendText} x={cellOffset} y={rowLabelY(0)}>
-          Available
-        </text>
+        {renderAvailabilityStatusCell()}
         {renderProvisionalCell()}
         <rect x={0} y={rowY(delineateRelease ? 2 : 1)} width={SVG.CELL_WIDTH} height={SVG.CELL_HEIGHT} rx={SVG.CELL_RX} fill={Theme.palette.grey[200]} />
         <text className={classes.legendText} x={cellOffset} y={rowLabelY(delineateRelease ? 2 : 1)}>
@@ -100,6 +145,45 @@ export default function BasicAvailabilityKey(props) {
     const columnX = (col) => col * columnWidth;
     const rowLabelY = (SVG.LABEL_FONT_SIZE - SVG.CELL_PADDING + 1);
     const cellOffset = SVG.CELL_WIDTH + (2 * SVG.CELL_PADDING);
+    const renderAvailabilityStatusCell = () => {
+      const tombstonedCell = CELL_ATTRS.tombstoned;
+      switch (availabilityStatusType) {
+        case 'tombstoned':
+          return (
+            <>
+              <rect
+                x={columnX(0)}
+                y={0}
+                width={SVG.CELL_WIDTH}
+                height={SVG.CELL_HEIGHT}
+                rx={SVG.CELL_RX}
+                fill={tombstonedCell.fill}
+              />
+              <text className={classes.legendText} x={columnX(0) + cellOffset} y={rowLabelY}>
+                No Longer Available
+              </text>
+            </>
+          );
+        case 'available':
+        default:
+          /* eslint-disable max-len */
+          return (
+            <>
+              <rect
+                x={columnX(0)}
+                y={0}
+                width={SVG.CELL_WIDTH}
+                height={SVG.CELL_HEIGHT}
+                rx={SVG.CELL_RX}
+                fill={Theme.palette.secondary.main}
+              />
+              <text className={classes.legendText} x={columnX(0) + cellOffset} y={rowLabelY}>
+                Available
+              </text>
+            </>
+          );
+      }
+    };
     const renderProvisionalCell = () => {
       if (!delineateRelease) {
         return null;
@@ -127,10 +211,7 @@ export default function BasicAvailabilityKey(props) {
     /* eslint-disable max-len */
     return (
       <svg width={totalWidth} height={totalHeight} className={classes.legendSvg}>
-        <rect x={columnX(0)} y={0} width={SVG.CELL_WIDTH} height={SVG.CELL_HEIGHT} rx={SVG.CELL_RX} fill={Theme.palette.secondary.main} />
-        <text className={classes.legendText} x={columnX(0) + cellOffset} y={rowLabelY}>
-          Available
-        </text>
+        {renderAvailabilityStatusCell()}
         {renderProvisionalCell()}
         <rect x={columnX(delineateRelease ? 2 : 1)} y={0} width={SVG.CELL_WIDTH} height={SVG.CELL_HEIGHT} rx={SVG.CELL_RX} fill={Theme.palette.grey[200]} />
         <text className={classes.legendText} x={columnX(delineateRelease ? 2 : 1) + cellOffset} y={rowLabelY}>
@@ -187,8 +268,10 @@ export default function BasicAvailabilityKey(props) {
     );
     /* eslint-enable max-len */
   };
-
-  return selectionEnabled || delineateRelease ? (
+  const renderVerticalLegend = selectionEnabled
+    || delineateRelease
+    || VERTICAL_STATUS_TYPES.includes(availabilityStatusType);
+  return renderVerticalLegend ? (
     <div className={classes.legendContainer}>
       {renderCellLegend('vertical')}
       {selectionEnabled ? (
@@ -206,10 +289,12 @@ BasicAvailabilityKey.propTypes = {
   orientation: PropTypes.string,
   selectionEnabled: PropTypes.bool,
   delineateRelease: PropTypes.bool,
+  availabilityStatusType: PropTypes.oneOf(['available', 'tombstoned']),
 };
 
 BasicAvailabilityKey.defaultProps = {
   orientation: '',
   selectionEnabled: false,
   delineateRelease: false,
+  availabilityStatusType: null,
 };

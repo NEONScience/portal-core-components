@@ -91,6 +91,7 @@ export interface FetchProductReleaseDoiFailedAction extends AnyAction {
 }
 export interface FetchProductReleaseDoiSucceededAction extends AnyAction {
     type: typeof ActionTypes.FETCH_PRODUCT_RELEASE_DOI_SUCCEEDED;
+    productCode: string;
     release: string;
     data: DataProductDoiStatus;
 }
@@ -159,7 +160,7 @@ declare const ActionCreator: {
     fetchProductReleaseSucceeded: (release: string, data: ContextDataProduct) => FetchProductReleaseSucceededAction;
     fetchProductReleaseDoiStarted: (release: string) => FetchProductReleaseDoiStartedAction;
     fetchProductReleaseDoiFailed: (release: string, error: Nullable<AjaxResponse<unknown> | string>) => FetchProductReleaseDoiFailedAction;
-    fetchProductReleaseDoiSucceeded: (release: string, data: DataProductDoiStatus) => FetchProductReleaseDoiSucceededAction;
+    fetchProductReleaseDoiSucceeded: (productCode: string, release: string, data: DataProductDoiStatus) => FetchProductReleaseDoiSucceededAction;
     fetchBundleParentStarted: (bundleParent: string) => FetchBundleParentStartedAction;
     fetchBundleParentFailed: (bundleParent: string, error: Nullable<AjaxResponse<unknown> | string>) => FetchBundleParentFailedAction;
     fetchBundleParentSucceeded: (bundleParent: string, data: ContextDataProduct) => FetchBundleParentSucceededAction;

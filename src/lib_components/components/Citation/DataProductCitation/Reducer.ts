@@ -1,3 +1,8 @@
+import ReleaseService from '../../../service/ReleaseService';
+import { Nullable, UnknownRecord } from '../../../types/core';
+import { exists, existsNonEmpty, isStringNonEmpty } from '../../../util/typeUtil';
+import { DataProductDoiStatus } from '../../../types/neonApi';
+
 import Service from './Service';
 import ActionCreator, {
   ActionTypes,
@@ -36,10 +41,6 @@ import {
   FetchStatusState,
   getDefaultState,
 } from './State';
-import ReleaseService from '../../../service/ReleaseService';
-import { Nullable, UnknownRecord } from '../../../types/core';
-import { exists, isStringNonEmpty } from '../../../util/typeUtil';
-import { DataProductDoiStatus } from '../../../types/neonApi';
 
 const reinitialize = (
   state: DataProductCitationState,
@@ -150,7 +151,7 @@ const Reducer = (
     errorResult = resolveError(action as ErrorActionTypes, newState);
   }
   let product: ContextDataProduct;
-  let productReleaseDoiStatus: DataProductDoiStatus;
+  let productReleaseDoiStatus: DataProductDoiStatus|DataProductDoiStatus[];
   let release: string;
   let bundleParent: string;
   let fetchStatusState: FetchStatusState;
@@ -282,13 +283,30 @@ const Reducer = (
       release = fprdSucceededAction.release;
       productReleaseDoiStatus = fprdSucceededAction.data;
       newState.fetches.productReleaseDois[release].status = FetchStatus.SUCCESS;
-      if (exists(productReleaseDoiStatus) && exists(productReleaseDoiStatus.status)) {
-        newState.data.productReleaseDois[release] = productReleaseDoiStatus;
+      if (!exists(productReleaseDoiStatus)) {
+        newState.data.productReleaseDois[release] = null;
+      } else if (Array.isArray(productReleaseDoiStatus)) {
+        if (existsNonEmpty(productReleaseDoiStatus)) {
+          // eslint-disable-next-line max-len
+          newState.data.productReleaseDois[release] = (productReleaseDoiStatus as DataProductDoiStatus[])
+            .filter((dpds: DataProductDoiStatus): boolean => (
+              exists(dpds) && exists(dpds.status)
+            ));
+        } else {
+          newState.data.productReleaseDois[release] = null;
+        }
+      } else if (exists(productReleaseDoiStatus.status)) {
+        newState.data.productReleaseDois[release] = productReleaseDoiStatus as DataProductDoiStatus;
       } else {
         newState.data.productReleaseDois[release] = null;
       }
       return Service.calculateAppStatus(
-        Service.applyDoiStatusReleaseGlobally(newState, productReleaseDoiStatus),
+        Service.applyDoiStatusReleaseGlobally(
+          newState,
+          fprdSucceededAction.productCode,
+          release,
+          newState.data.productReleaseDois[release],
+        ),
       );
 
     case ActionTypes.FETCH_BUNDLE_PARENT_STARTED:

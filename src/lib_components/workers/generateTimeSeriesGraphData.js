@@ -132,6 +132,7 @@ export default function generateTimeSeriesGraphData(payload = {}) {
         dateTimeVariable,
         qualityFlags,
         sites,
+        derivedVariableTable,
         timeStep: selectedTimeStep,
         variables: selectedVariables,
       },
@@ -301,6 +302,14 @@ export default function generateTimeSeriesGraphData(payload = {}) {
       currentMonth = tickerToMonth(ticker);
     }
 
+    const derivedVariableTables = [];
+    Object.keys(derivedVariableTable).forEach((k) => {
+      const v = derivedVariableTable[k];
+      if (!derivedVariableTables.includes(v)) {
+        derivedVariableTables.push(v);
+      }
+    });
+
     /**
        Build the rest of the data structure and labels using selection values
     */
@@ -346,6 +355,7 @@ export default function generateTimeSeriesGraphData(payload = {}) {
             const columnIdx = newLabels.indexOf(label);
             if (!columnIdx) { return; } // 0 is x, so this should always be 1 or greater
             const { downloadPkg: pkg } = stateVariables[variable];
+            const derivedTableName = derivedVariableTable[variable];
             const posData = product.sites[siteCode].positions[position].data;
             // Null-fill if this site/position/month/variable has
             // neither series data nor dateTime data
@@ -353,8 +363,9 @@ export default function generateTimeSeriesGraphData(payload = {}) {
               !posData[month]
                 || !posData[month][pkg]
                 || !posData[month][pkg][timeStep]
-                || !posData[month][pkg][timeStep].series[variable]
-                || !posData[month][pkg][timeStep].series[dateTimeVariable]
+                || !posData[month][pkg][timeStep][derivedTableName]
+                || !posData[month][pkg][timeStep][derivedTableName].series[variable]
+                || !posData[month][pkg][timeStep][derivedTableName].series[dateTimeVariable]
             ) {
               for (let t = monthIdx; t < monthIdx + monthStepCount; t += 1) {
                 newData[t][columnIdx] = null;
@@ -362,14 +373,16 @@ export default function generateTimeSeriesGraphData(payload = {}) {
               return;
             }
             // This site/position/month/variable series exists, so add it into the data set
-            const seriesStepCount = posData[month][pkg][timeStep].series[variable].data.length;
+            // eslint-disable-next-line max-len
+            const seriesStepCount = posData[month][pkg][timeStep][derivedTableName].series[variable].data.length;
             // Series and month data lengths are identical (as expected):
             // Stream values directly in without matching timestamps
             if (ALLOW_POSITIONAL_TS_MAPPING) {
               if (seriesStepCount === monthStepCount) {
-                posData[month][pkg][timeStep].series[variable].data.forEach((d, datumIdx) => {
-                  newData[datumIdx + monthIdx][columnIdx] = d;
-                });
+                posData[month][pkg][timeStep][derivedTableName].series[variable].data
+                  .forEach((d, datumIdx) => {
+                    newData[datumIdx + monthIdx][columnIdx] = d;
+                  });
                 return;
               }
             }
@@ -378,10 +391,11 @@ export default function generateTimeSeriesGraphData(payload = {}) {
             // exceed month step count
             if (ALLOW_POSITIONAL_TS_TRUNCATION) {
               if (seriesStepCount >= monthStepCount) {
-                posData[month][pkg][timeStep].series[variable].data.forEach((d, datumIdx) => {
-                  if (datumIdx >= monthStepCount) { return; }
-                  newData[datumIdx + monthIdx][columnIdx] = d;
-                });
+                posData[month][pkg][timeStep][derivedTableName].series[variable].data
+                  .forEach((d, datumIdx) => {
+                    if (datumIdx >= monthStepCount) { return; }
+                    newData[datumIdx + monthIdx][columnIdx] = d;
+                  });
                 return;
               }
             }
@@ -397,7 +411,8 @@ export default function generateTimeSeriesGraphData(payload = {}) {
             // that the next value won't be found before the last found index in the series data,
             // allowing us to optimize the search in this scenario.
             let lastIdx = 0;
-            const dtVarData = posData[month][pkg][timeStep].series[dateTimeVariable].data;
+            // eslint-disable-next-line max-len
+            const dtVarData = posData[month][pkg][timeStep][derivedTableName].series[dateTimeVariable].data;
             for (let t = monthIdx; t < monthIdx + monthStepCount; t += 1) {
               const dataIdx = findTimestampIdx(
                 dtVarData,
@@ -408,7 +423,7 @@ export default function generateTimeSeriesGraphData(payload = {}) {
                 newData[t][columnIdx] = null;
               } else {
                 lastIdx = dataIdx + 1;
-                newData[t][columnIdx] = posData[month][pkg][timeStep]
+                newData[t][columnIdx] = posData[month][pkg][timeStep][derivedTableName]
                   .series[variable]
                   .data[dataIdx];
               }
@@ -419,14 +434,18 @@ export default function generateTimeSeriesGraphData(payload = {}) {
           qualityFlags.forEach((qf, qfIdx) => {
             const columnIdx = newQualityLabels.indexOf(qualityLabel);
             if (columnIdx < 2) { return; } // 0 is start and 1 is end
-            const { downloadPkg: pkg } = stateVariables[qf];
+            const { downloadPkg: pkg, tables: qfTables } = stateVariables[qf];
+            const derivedTableName = !qfTables
+              ? null
+              : Array.from(qfTables).find((qfTable) => derivedVariableTables.includes(qfTable));
             const posData = product.sites[siteCode].positions[position].data;
             // If this site/position/month/variable has no series data then fill with nulls
             if (
               !posData[month]
                 || !posData[month][pkg]
                 || !posData[month][pkg][timeStep]
-                || !posData[month][pkg][timeStep].series[qf]
+                || !posData[month][pkg][timeStep][derivedTableName]
+                || !posData[month][pkg][timeStep][derivedTableName].series[qf]
             ) {
               for (let t = monthIdx; t < monthIdx + monthStepCount; t += 1) {
                 newQualityData[t][columnIdx] = getQFNullFill();
@@ -434,18 +453,20 @@ export default function generateTimeSeriesGraphData(payload = {}) {
               return;
             }
             // This site/position/month/qf series exists, so add it into the quality data set
-            const seriesStepCount = posData[month][pkg][timeStep].series[qf].data.length;
+            // eslint-disable-next-line max-len
+            const seriesStepCount = posData[month][pkg][timeStep][derivedTableName].series[qf].data.length;
             // Series and month data lengths are identical as expected so we can stream
             // values directly in without matching timestamps
             if (ALLOW_POSITIONAL_TS_MAPPING) {
               if (seriesStepCount === monthStepCount) {
-                posData[month][pkg][timeStep].series[qf].data.forEach((d, datumIdx) => {
-                  const t = datumIdx + monthIdx;
-                  if (!Array.isArray(newQualityData[t][columnIdx])) {
-                    newQualityData[t][columnIdx] = [];
-                  }
-                  newQualityData[t][columnIdx][qfIdx] = d;
-                });
+                posData[month][pkg][timeStep][derivedTableName].series[qf].data
+                  .forEach((d, datumIdx) => {
+                    const t = datumIdx + monthIdx;
+                    if (!Array.isArray(newQualityData[t][columnIdx])) {
+                      newQualityData[t][columnIdx] = [];
+                    }
+                    newQualityData[t][columnIdx][qfIdx] = d;
+                  });
                 return;
               }
             }
@@ -454,14 +475,15 @@ export default function generateTimeSeriesGraphData(payload = {}) {
             // exceed month step count
             if (ALLOW_POSITIONAL_TS_TRUNCATION) {
               if (seriesStepCount > monthStepCount) {
-                posData[month][pkg][timeStep].series[qf].data.forEach((d, datumIdx) => {
-                  if (datumIdx >= monthStepCount) { return; }
-                  const t = datumIdx + monthIdx;
-                  if (!Array.isArray(newQualityData[t][columnIdx])) {
-                    newQualityData[t][columnIdx] = [];
-                  }
-                  newQualityData[t][columnIdx][qfIdx] = d;
-                });
+                posData[month][pkg][timeStep][derivedTableName].series[qf].data
+                  .forEach((d, datumIdx) => {
+                    if (datumIdx >= monthStepCount) { return; }
+                    const t = datumIdx + monthIdx;
+                    if (!Array.isArray(newQualityData[t][columnIdx])) {
+                      newQualityData[t][columnIdx] = [];
+                    }
+                    newQualityData[t][columnIdx][qfIdx] = d;
+                  });
                 return;
               }
             }
@@ -473,7 +495,8 @@ export default function generateTimeSeriesGraphData(payload = {}) {
             // that the next value won't be found before the last found index in the series data,
             // allowing us to optimize the search in this scenario.
             let lastIdx = 0;
-            const dtVarData = posData[month][pkg][timeStep].series[dateTimeVariable].data;
+            // eslint-disable-next-line max-len
+            const dtVarData = posData[month][pkg][timeStep][derivedTableName].series[dateTimeVariable].data;
             for (let t = monthIdx; t < monthIdx + monthStepCount; t += 1) {
               const dataIdx = findTimestampIdx(
                 dtVarData,
@@ -485,8 +508,8 @@ export default function generateTimeSeriesGraphData(payload = {}) {
               } else {
                 lastIdx = dataIdx + 1;
                 const d = (
-                  typeof posData[month][pkg][timeStep].series[qf].data[dataIdx] !== 'undefined'
-                    ? posData[month][pkg][timeStep].series[qf].data[dataIdx]
+                  typeof posData[month][pkg][timeStep][derivedTableName].series[qf].data[dataIdx] !== 'undefined'
+                    ? posData[month][pkg][timeStep][derivedTableName].series[qf].data[dataIdx]
                     : null
                 );
                 if (!Array.isArray(newQualityData[t][columnIdx])) {

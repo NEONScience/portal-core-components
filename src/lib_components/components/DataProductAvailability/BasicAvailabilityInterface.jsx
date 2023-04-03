@@ -246,7 +246,7 @@ const BasicAvailabilityInterface = (props) => {
     dispatchSelection,
   ] = DownloadDataContext.useDownloadDataState();
 
-  const { disableSelection, delineateRelease } = props;
+  const { disableSelection, delineateRelease, availabilityStatusType } = props;
   const selectionEnabled = !disableSelection
     && requiredSteps.some((step) => step.key === 'sitesAndDateRange');
 
@@ -407,7 +407,7 @@ const BasicAvailabilityInterface = (props) => {
     views.states.rows[stateCode] = views.states.rows[stateCode] || {};
     views.domains.rows[domainCode] = views.domains.rows[domainCode] || {};
     availableMonths.forEach((month) => {
-      let status = 'available';
+      let status = availabilityStatusType || 'available';
       if (delineateRelease && provAvailableMonths && (provAvailableMonths.length > 0)) {
         if (provAvailableMonths.includes(month)) {
           status = 'available-provisional';
@@ -430,7 +430,7 @@ const BasicAvailabilityInterface = (props) => {
     }
     views.products.rows[dataProductCode] = {};
     availableMonths.forEach((month) => {
-      let status = 'available';
+      let status = availabilityStatusType || 'available';
       if (delineateRelease && provAvailableMonths && (provAvailableMonths.length > 0)) {
         if (provAvailableMonths.includes(month)) {
           status = 'available-provisional';
@@ -653,6 +653,7 @@ const BasicAvailabilityInterface = (props) => {
           orientation={currentView === 'products' ? 'horizontal' : ''}
           selectionEnabled={selectionEnabled}
           delineateRelease={delineateRelease}
+          availabilityStatusType={availabilityStatusType}
           style={{ flexGrow: 1 }}
         />
       </Grid>
@@ -829,6 +830,7 @@ BasicAvailabilityInterface.propTypes = {
   sortDirection: PropTypes.oneOf(['ASC', 'DESC']),
   disableSelection: PropTypes.bool,
   delineateRelease: PropTypes.bool,
+  availabilityStatusType: PropTypes.oneOf(['available', 'tombstoned']),
 };
 
 BasicAvailabilityInterface.defaultProps = {
@@ -839,6 +841,7 @@ BasicAvailabilityInterface.defaultProps = {
   sortDirection: 'ASC',
   disableSelection: false,
   delineateRelease: false,
+  availabilityStatusType: null,
 };
 
 export default BasicAvailabilityInterface;

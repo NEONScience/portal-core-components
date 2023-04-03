@@ -7,6 +7,7 @@ declare namespace BasicAvailabilityKey {
         const orientation: PropTypes.Requireable<string>;
         const selectionEnabled: PropTypes.Requireable<boolean>;
         const delineateRelease: PropTypes.Requireable<boolean>;
+        const availabilityStatusType: PropTypes.Requireable<string>;
     }
     namespace defaultProps {
         const orientation_1: string;
@@ -15,6 +16,8 @@ declare namespace BasicAvailabilityKey {
         export { selectionEnabled_1 as selectionEnabled };
         const delineateRelease_1: boolean;
         export { delineateRelease_1 as delineateRelease };
+        const availabilityStatusType_1: null;
+        export { availabilityStatusType_1 as availabilityStatusType };
     }
 }
 export default BasicAvailabilityKey;

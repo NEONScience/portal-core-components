@@ -413,6 +413,47 @@ const productData = {...};
       </CodeBlock>
 
       <Divider className={classes.divider} />
+      <Typography variant="h6" component="h4" gutterBottom>Availability Status Types</Typography>
+
+      <DocBlock>
+        The DataProductAvailability visualization can show various status types
+        to adapt to different kinds of availability displays.
+      </DocBlock>
+      <DocBlock>
+        Valid status types: <tt>available</tt>, <tt>tombstoned</tt>
+      </DocBlock>
+      <DocBlock>
+        Default view: <tt>available</tt>
+      </DocBlock>
+      <DocBlock>
+        The availability status type shown below is <tt>tombstoned</tt>
+      </DocBlock>
+      <ExampleBlock>
+        <DataProductAvailability
+          siteCodes={sampleProductData.data.siteCodes}
+          availabilityStatusType="tombstoned"
+          view="ungrouped"
+          sortMethod="sites"
+          sortDirection="DESC"
+        />
+      </ExampleBlock>
+      <CodeBlock>
+        {`
+import DataProductAvailability from 'portal-core-components/lib/components/DataProductAvailability';
+
+const siteCodes = [...];
+
+<DataProductAvailability
+  siteCodes={siteCodes}
+  availabilityStatusType="tombstoned"
+  view="ungrouped"
+  sortMethod="sites"
+  sortDirection="DESC"
+/>
+        `}
+      </CodeBlock>
+
+      <Divider className={classes.divider} />
       <Typography variant="h6" component="h4" gutterBottom>
         Enhanced Data Product Availability Chart
       </Typography>

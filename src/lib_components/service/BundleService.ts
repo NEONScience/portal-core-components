@@ -4,6 +4,7 @@ import { Nullable, Undef } from '../types/core';
 import { BundleContext } from '../types/neonContext';
 import { exists, existsNonEmpty, isStringNonEmpty } from '../util/typeUtil';
 import { CitationBundleState } from '../types/internal';
+import { DataProductDoiStatus } from '../types/neonApi';
 
 export interface IBundleService {
   /**
@@ -85,7 +86,7 @@ export interface IBundleService {
     context: BundleContext,
     release: string,
     productCode: string,
-  ) => Nullable<string>;
+  ) => Nullable<string|string[]>;
   /**
    * Determines if the product should forward availability for the bundle.
    * @param context The context to derive lookups from.
@@ -101,11 +102,11 @@ export interface IBundleService {
     bundleProductCode: string,
   ) => boolean;
   /**
-   * Gets the owning split bundle product code.
+   * Gets the owning split bundle product codes.
    * @param context The context to derive lookups from.
    * @param release The release to get bundles for.
    * @param productCode The product code to query with.
-   * @return The bundle product code when available.
+   * @return The bundle product codes when available.
    */
   getSplitProductBundles: (
     context: BundleContext,
@@ -136,6 +137,20 @@ export interface IBundleService {
     release: Nullable<string>,
     productCode: string,
   ) => CitationBundleState;
+  /**
+   * Determines the applicable bundle release.
+   * @param context The context to derive from.
+   * @param release The release to get bundles for.
+   * @param productCode The product code to query with.
+   * @param doiStatus The DOI status for the product, release.
+   * @returns The applicable bundle release.
+   */
+  determineAppliedBundleRelease: (
+    context: BundleContext,
+    release: string,
+    productCode: string,
+    doiStatus: Nullable<DataProductDoiStatus|DataProductDoiStatus[]>,
+  ) => Nullable<DataProductDoiStatus>;
 }
 
 const BundleService: IBundleService = {
@@ -201,6 +216,9 @@ const BundleService: IBundleService = {
         || !exists(context.bundleDoiLookup[release])) {
       return false;
     }
+    if (Array.isArray(context.bundleDoiLookup[release][productCode])) {
+      return existsNonEmpty(context.bundleDoiLookup[release][productCode] as string[]);
+    }
     return isStringNonEmpty(context.bundleDoiLookup[release][productCode]);
   },
   isBundledProduct: (
@@ -226,14 +244,17 @@ const BundleService: IBundleService = {
     context: BundleContext,
     release: string,
     productCode: string,
-  ): Nullable<string> => {
+  ): Nullable<string|string[]> => {
     if (!exists(context)
         || !exists(context.bundleDoiLookup)
         || !exists(context.bundleDoiLookup[release])) {
       return null;
     }
     const bundledProductCode = context.bundleDoiLookup[release][productCode];
-    if (!isStringNonEmpty(bundledProductCode)) {
+    if (Array.isArray(bundledProductCode) && !existsNonEmpty(bundledProductCode)) {
+      return null;
+    }
+    if (!Array.isArray(bundledProductCode) && !isStringNonEmpty(bundledProductCode)) {
       return null;
     }
     return bundledProductCode;
@@ -253,7 +274,7 @@ const BundleService: IBundleService = {
           || !exists(context.bundleProductsForwardAvailability[release])) {
         return false;
       }
-      return context.splitProducts[release][productCode].every(
+      return context.splitProducts[release][productCode].some(
         (splitToProduct: string): boolean => (
           context.bundleProductsForwardAvailability[release][splitToProduct]
         ),
@@ -312,7 +333,7 @@ const BundleService: IBundleService = {
     release: Nullable<string>,
     productCode: string,
   ): CitationBundleState => {
-    let bundleParentCode: Nullable<string> = null;
+    let bundleParentCode: Nullable<string|string[]> = null;
     let bundleParentCodes: string[] = [];
     const bundleRelease = BundleService.determineBundleRelease(release);
     const isBundleChild = BundleService.isProductInBundle(
@@ -326,8 +347,7 @@ const BundleService: IBundleService = {
         bundleRelease,
         productCode,
       );
-      const hasManyParents = isBundleChild
-        && BundleService.isSplitProduct(context, bundleRelease, productCode);
+      const hasManyParents = BundleService.isSplitProduct(context, bundleRelease, productCode);
       if (hasManyParents) {
         bundleParentCodes = BundleService.getSplitProductBundles(
           context,
@@ -349,6 +369,64 @@ const BundleService: IBundleService = {
       parentCodes: bundleParentCodes,
       doiProductCode: bundleParentCode,
     };
+  },
+  determineAppliedBundleRelease: (
+    context: Nullable<BundleContext>,
+    release: string,
+    productCode: string,
+    doiStatus: Nullable<DataProductDoiStatus|DataProductDoiStatus[]>,
+  ): Nullable<DataProductDoiStatus> => {
+    if (!exists(doiStatus)) {
+      return null;
+    }
+    let appliedDoiStatus: Nullable<DataProductDoiStatus>;
+    let bundleParentCodes: Nullable<string|string[]> = null;
+    if (exists(context)) {
+      bundleParentCodes = BundleService.getBundleProductCode(
+        context as BundleContext,
+        release,
+        productCode,
+      );
+    }
+    if (!Array.isArray(doiStatus)) {
+      if (!exists(bundleParentCodes)) {
+        appliedDoiStatus = doiStatus as DataProductDoiStatus;
+      } else {
+        let checkProductCode: string;
+        if (Array.isArray(bundleParentCodes)) {
+          // eslint-disable-next-line prefer-destructuring
+          checkProductCode = bundleParentCodes[0];
+        } else {
+          checkProductCode = bundleParentCodes as string;
+        }
+        const checkDoiStatus = doiStatus as DataProductDoiStatus;
+        if (exists(doiStatus)
+            && (checkProductCode.localeCompare(checkDoiStatus.productCode) === 0)
+            && (release.localeCompare(checkDoiStatus.release) === 0)) {
+          appliedDoiStatus = doiStatus as DataProductDoiStatus;
+        }
+      }
+    } else if (!exists(bundleParentCodes)) {
+      appliedDoiStatus = doiStatus.find((ds: DataProductDoiStatus): boolean => (
+        exists(ds)
+          && (productCode.localeCompare(ds.productCode) === 0)
+          && (release.localeCompare(ds.release) === 0)
+      ));
+    } else {
+      let checkProductCode: string;
+      if (Array.isArray(bundleParentCodes)) {
+        // eslint-disable-next-line prefer-destructuring
+        checkProductCode = bundleParentCodes[0];
+      } else {
+        checkProductCode = bundleParentCodes as string;
+      }
+      appliedDoiStatus = doiStatus.find((ds: DataProductDoiStatus): boolean => (
+        exists(ds)
+          && (checkProductCode.localeCompare(ds.productCode) === 0)
+          && (release.localeCompare(ds.release) === 0)
+      ));
+    }
+    return appliedDoiStatus;
   },
 };
 

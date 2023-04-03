@@ -42,11 +42,14 @@ import ReleaseFilter from '../ReleaseFilter/ReleaseFilter';
 import ReleaseService from '../../service/ReleaseService';
 import Theme from '../Theme/Theme';
 import { Release } from '../../types/internal';
-import { isStringNonEmpty } from '../../util/typeUtil';
+import { exists, existsNonEmpty, isStringNonEmpty } from '../../util/typeUtil';
 import {
+  DataProductCitationItem,
   DataProductCitationViewProps,
   DataProductCitationViewState,
 } from './DataProductCitation/ViewState';
+import { Nullable } from '../../types/core';
+import { CitationRelease } from './DataProductCitation/State';
 
 const useStyles = makeStyles((theme) => ({
   divider: {
@@ -230,9 +233,14 @@ const DataProductCitationDemo = (): JSX.Element => {
     stateCtx,
     DataProductCitationView.defaultProps as DataProductCitationViewProps,
   );
-  const {
-    releaseObject: appliedCitationReleaseObject,
-  }: DataProductCitationViewState = viewState;
+  const { citationItems }: DataProductCitationViewState = viewState;
+  const appliedItem: Nullable<DataProductCitationItem> = existsNonEmpty(citationItems)
+    ? citationItems[0]
+    : null;
+  let appliedCitationReleaseObject: Nullable<CitationRelease> = null;
+  if (exists(appliedItem)) {
+    appliedCitationReleaseObject = (appliedItem as DataProductCitationItem).releaseObject;
+  }
   // eslint-disable-next-line max-len
   const citationDispatch = DataProductCitationContext.useDataProductCitationContextDispatch() as Dispatch<any>;
   const fetchAllProducts$ = (NeonGraphQL.getAllDataProducts() as Observable<AjaxResponse<unknown>>)

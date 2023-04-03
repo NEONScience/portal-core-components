@@ -27,6 +27,7 @@ declare namespace BasicAvailabilityInterface {
         const sortDirection: PropTypes.Requireable<string>;
         const disableSelection: PropTypes.Requireable<boolean>;
         const delineateRelease: PropTypes.Requireable<boolean>;
+        const availabilityStatusType: PropTypes.Requireable<string>;
     }
     namespace defaultProps {
         const siteCodes_1: never[];
@@ -43,6 +44,8 @@ declare namespace BasicAvailabilityInterface {
         export { disableSelection_1 as disableSelection };
         const delineateRelease_1: boolean;
         export { delineateRelease_1 as delineateRelease };
+        const availabilityStatusType_1: null;
+        export { availabilityStatusType_1 as availabilityStatusType };
     }
 }
 import PropTypes from "prop-types";

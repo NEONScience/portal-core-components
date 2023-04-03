@@ -38,7 +38,7 @@ export interface DocumentViewerProps {
   fullUrlPath?: string;
 }
 
-const noop = () => {};
+const noop = () => { /* NOOP */ };
 
 const breakpoints: number[] = [0, 675, 900, 1200];
 const ratios: string[] = ['8:11', '3:4', '4:4', '4:3'];
