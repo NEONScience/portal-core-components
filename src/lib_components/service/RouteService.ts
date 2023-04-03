@@ -86,6 +86,11 @@ export interface IRouteService {
    */
   getDataAvailabilityPath: () => string;
   /**
+   * Gets the path to the data product bundles information page
+   * @returns
+   */
+  getDataProductBundlesPath: () => string;
+  /**
    * Gets the path to the NEONUtilities data stack in R page
    * @returns
    */
@@ -213,6 +218,9 @@ const RouteService: IRouteService = {
   ),
   getDataAvailabilityPath: (): string => (
     `${NeonEnvironment.getWebHost()}/data-samples/data-management/data-availability`
+  ),
+  getDataProductBundlesPath: (): string => (
+    `${NeonEnvironment.getWebHost()}/data-samples/data-management/data-product-bundles`
   ),
   getNeonUtilitiesDataStackRPath: (): string => (
     `${NeonEnvironment.getWebHost()}/resources/learning-hub/tutorials/neondatastackr`

@@ -28,7 +28,7 @@ export default html = `
   <div>
 
 <input data-drupal-selector="edit-openid-connect-client-auth0-login" type="submit" id="edit-openid-connect-client-auth0-login" name="auth0" value="Sign In" class="button js-form-submit form-submit button--search" />
-</div><input autocomplete="off" data-drupal-selector="form-7lcmeu8yfmhgocualuexvkv709uf2gjcvtfs-yfzxqs" type="hidden" name="form_build_id" value="form-7lCmEU8yfMHGOcualuEXvKv709uf2GjCVtFs_YFzXQs" />
+</div><input autocomplete="off" data-drupal-selector="form-zqheh98gtkspr5bylbcwzggmtvc0k6srpafbdiitlbq" type="hidden" name="form_build_id" value="form-Zqheh98gtkSpR5BYLbCwZGGmtVC0K6SrPafbdIItLBQ" />
 <input data-drupal-selector="edit-openid-connect-login-form" type="hidden" name="form_id" value="openid_connect_login_form" />
 
 </form>
@@ -281,7 +281,7 @@ export default html = `
 
                   </li>
               <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/data-collection/airborne-remote-sensing" class="menu__link" data-drupal-link-system-path="node/3821">AIrborne Remote Sensing</a>
+          <a href="https://www.neonscience.org/data-collection/airborne-remote-sensing" class="menu__link" data-drupal-link-system-path="node/3821">Airborne Remote Sensing</a>
 
           
             
@@ -295,8 +295,22 @@ export default html = `
           <a href="https://www.neonscience.org/data-collection/flight-schedules-coverage" class="menu__link" data-drupal-link-system-path="node/7871">Flight Schedules and Coverage</a>
 
                   </li>
-              <li  class="menu__item">
+              <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-collection/daily-flight-reports" class="menu__link" data-drupal-link-system-path="node/10542">Daily Flight Reports</a>
+
+          
+            
+                      <ul  class="menu menu--main" data-depth="4">
+
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/aop-flight-report-sign" class="menu__link" data-drupal-link-system-path="node/12625">AOP Flight Report Sign Up</a>
+
+                  </li>
+      
+          </ul>
+  
+
+            
 
                   </li>
               <li  class="menu__item">
@@ -1124,7 +1138,7 @@ export default html = `
     
       <form action="/search/site" method="get" id="search-api-form" accept-charset="UTF-8">
   <div class="js-form-item form-item js-form-type-search form-item-title js-form-item-title form-no-label">
-        <input title="Enter the terms you wish to search for." data-drupal-selector="edit-title" type="search" id="edit-title" name="title" value="" size="15" maxlength="128" class="form-search" />
+        <input title="Enter the terms you wish to search for." data-drupal-selector="edit-title" type="search" id="edit-title" name="title" value="" size="15" maxlength="128" placeholder="" class="form-search" />
 
         <label for="edit-title" class="visually-hidden">Search</label>
       </div>
@@ -1158,7 +1172,7 @@ export default html = `
     
       <form action="/search/site" method="get" id="search-api-form" accept-charset="UTF-8">
   <div class="js-form-item form-item js-form-type-search form-item-title js-form-item-title form-no-label">
-        <input title="Enter the terms you wish to search for." data-drupal-selector="edit-title" type="search" id="edit-title" name="title" value="" size="15" maxlength="128" class="form-search" />
+        <input title="Enter the terms you wish to search for." data-drupal-selector="edit-title" type="search" id="edit-title" name="title" value="" size="15" maxlength="128" placeholder="" class="form-search" />
 
         <label for="edit-title" class="visually-hidden">Search</label>
       </div>

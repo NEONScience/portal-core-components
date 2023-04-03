@@ -9,7 +9,9 @@ import { isStringNonEmpty } from '../../util/typeUtil';
 import { LATEST_AND_PROVISIONAL } from '../../service/ReleaseService';
 
 export interface IBundleContentBuilder {
-  getParentProductLink: (dataProduct: IDataProductLike, release?: string,) => JSX.Element;
+  getParentProductLink: (dataProduct: IDataProductLike, release?: string) => JSX.Element;
+
+  getBundledLink: () => JSX.Element;
 
   buildManyParentsMainContent: (dataProducts: IDataProductLike[], release?: string) => JSX.Element;
 
@@ -40,6 +42,18 @@ const BundleContentBuilder: IBundleContentBuilder = {
     );
   },
 
+  getBundledLink: (): JSX.Element => {
+    const href = RouteService.getDataProductBundlesPath();
+    return (
+      <Link
+        href={href}
+        target="_blank"
+      >
+        bundled
+      </Link>
+    );
+  },
+
   buildManyParentsMainContent: (
     dataProducts: IDataProductLike[],
     release?: string,
@@ -59,23 +73,27 @@ const BundleContentBuilder: IBundleContentBuilder = {
       dataProduct,
       isRelease ? release : undefined,
     );
+    const bundledLink: JSX.Element = BundleContentBuilder.getBundledLink();
     return (
       <>
         {/* eslint-disable react/jsx-one-expression-per-line */}
-        This data product {isRelease ? 'release ' : ''}is bundled into {bundleParentLink}
+        This data product {isRelease ? 'release ' : ''}is {bundledLink} into {bundleParentLink}
         {/* eslint-enable react/jsx-one-expression-per-line */}
       </>
     );
   },
 
-  buildDefaultSplitTitleContent: (isRelease: boolean, terminalChar?: string): JSX.Element => ((
-    <>
-      {/* eslint-disable react/jsx-one-expression-per-line */}
-      This data product {isRelease ? 'release ' : ''}is a sub-product of the
-      following data product{isRelease ? ' releases' : 's'}{`${terminalChar}`}
-      {/* eslint-enable react/jsx-one-expression-per-line */}
-    </>
-  )),
+  buildDefaultSplitTitleContent: (isRelease: boolean, terminalChar?: string): JSX.Element => {
+    const bundledLink: JSX.Element = BundleContentBuilder.getBundledLink();
+    return (
+      <>
+        {/* eslint-disable react/jsx-one-expression-per-line */}
+        This data product {isRelease ? 'release ' : ''}is {bundledLink} into the
+        following data product{isRelease ? ' releases' : 's'}{`${terminalChar}`}
+        {/* eslint-enable react/jsx-one-expression-per-line */}
+      </>
+    );
+  },
 
   buildDefaultSubTitleContent: (
     forwardAvailability: boolean,

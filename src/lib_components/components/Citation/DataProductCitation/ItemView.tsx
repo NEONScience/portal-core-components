@@ -292,7 +292,7 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
       <>
         {/* eslint-disable react/jsx-one-expression-per-line */}
         The {isReleaseDisplay ? 'citation below refers' : 'citations below refer'} to
-        that data product as this sub-product is not directly citable.
+        that data product as this data product is not directly citable.
         {/* eslint-enable react/jsx-one-expression-per-line */}
       </>
     );

@@ -2,6 +2,7 @@
 import { IDataProductLike } from '../../types/internal';
 export interface IBundleContentBuilder {
     getParentProductLink: (dataProduct: IDataProductLike, release?: string) => JSX.Element;
+    getBundledLink: () => JSX.Element;
     buildManyParentsMainContent: (dataProducts: IDataProductLike[], release?: string) => JSX.Element;
     buildDefaultTitleContent: (dataProduct: IDataProductLike, release?: string) => JSX.Element;
     buildDefaultSplitTitleContent: (isRelease: boolean, terminalChar?: string) => JSX.Element;
