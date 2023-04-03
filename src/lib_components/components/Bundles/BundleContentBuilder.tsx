@@ -111,7 +111,7 @@ const BundleContentBuilder: IBundleContentBuilder = {
           {/* eslint-disable react/jsx-one-expression-per-line */}
           It is not available as a standalone download.
           Data availability information and data product download is only available through
-          the parent {hasManyParents ? 'products' : 'product'}.
+          the bundle data {hasManyParents ? 'products' : 'product'}.
           {/* eslint-enable react/jsx-one-expression-per-line */}
         </>
       )}
