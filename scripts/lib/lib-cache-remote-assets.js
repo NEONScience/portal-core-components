@@ -277,6 +277,7 @@ const writeContent = async (key, content, fileName) => {
         fs.writeFileSync(indexFilePath, indexFileOutput, { encoding: 'utf8' });
       }
       break;
+    case REMOTE_ASSETS_CACHE.DRUPAL_HEADER_JS.KEY:
     case REMOTE_ASSETS_CACHE.DRUPAL_HEADER_HTML.KEY:
     case REMOTE_ASSETS_CACHE.DRUPAL_FOOTER_HTML.KEY:
     default:

@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
 
-import { useErrorHandler } from 'react-error-boundary';
+import { useErrorBoundary } from 'react-error-boundary';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -392,7 +392,7 @@ export default function StyleGuide() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [lifecycleRunTimeError, setLifecycleRunTimeError] = useState(false);
-  const handleRunTimeError = useErrorHandler();
+  const { showBoundary } = useErrorBoundary();
 
   const breadcrumbs = [
     { name: 'Breadcrumb 1', href: '/bc1' },
@@ -870,7 +870,7 @@ export default function MyNeonPage() {
         </Button>
         <Button
           variant="outlined"
-          onClick={() => { handleRunTimeError(new Error('Event run-time error triggered!')); }}
+          onClick={() => { showBoundary(new Error('Event run-time error triggered!')); }}
         >
           Trigger Run-Time Error (Event)
         </Button>
@@ -878,13 +878,13 @@ export default function MyNeonPage() {
       <CodeBlock>
         {`
 import React, { useState } from 'react';
-import { useErrorHandler } from 'react-error-boundary';
+import { useErrorBoundary } from 'react-error-boundary';
 
 import Button from '@material-ui/core/Button';
 
 export default function TriggerRunTimeErrorButtons() {
   const [lifecycleRunTimeError, setLifecycleRunTimeError] = useState(false);
-  const handleRunTimeError = useErrorHandler();
+  const { showBoundary } = useErrorBoundary();
   return (
     <div>
 
@@ -893,7 +893,7 @@ export default function TriggerRunTimeErrorButtons() {
         {!lifecycleRunTimeError ? null : lifecycleRunTimeError.triggered()}
       </Button>
 
-      <Button onClick={() => { handleRunTimeError(new Error('Event run-time error triggered!')); }}>
+      <Button onClick={() => { showBoundary(new Error('Event run-time error triggered!')); }}>
         Trigger Run-Time Error (Event)
       </Button>
 
