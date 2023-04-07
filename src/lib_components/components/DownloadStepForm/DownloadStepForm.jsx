@@ -39,6 +39,7 @@ import MaterialTable, { MTableToolbar, MTableFilterRow } from 'material-table';
 import DataProductCitation from '../Citation/DataProductCitation';
 import DownloadDataContext from '../DownloadDataContext/DownloadDataContext';
 import DataProductAvailability from '../DataProductAvailability/DataProductAvailability';
+import InfoMessageCard from '../Card/InfoMessageCard';
 import ExternalHost from '../ExternalHost/ExternalHost';
 import ExternalHostProductSpecificLinks from '../ExternalHostProductSpecificLinks/ExternalHostProductSpecificLinks';
 import MaterialTableIcons from '../MaterialTableIcons/MaterialTableIcons';
@@ -80,15 +81,6 @@ const useStyles = makeStyles((theme) => ({
   calloutIcon: {
     color: theme.palette.grey[300],
     marginRight: theme.spacing(2),
-  },
-  calloutIconBrown: {
-    color: Theme.colors.BROWN[300],
-    marginRight: theme.spacing(2),
-  },
-  calloutBrown: {
-    marginBottom: theme.spacing(3),
-    backgroundColor: Theme.colors.BROWN[50],
-    borderColor: Theme.colors.BROWN[300],
   },
   radio: {
     marginBottom: theme.spacing(1),
@@ -633,9 +625,9 @@ export default function DownloadStepForm(props) {
       const availableSiteCodes = (state.productData.siteCodes || []).map((site) => site.siteCode);
       return (
         <div data-selenium={`download-data-dialog.step-form.external-links.${externalHost.id.toLowerCase()}`}>
-          <Card className={classes.calloutBrown}>
-            <CardContent className={classes.startFlex}>
-              <InfoIcon fontSize="large" className={classes.calloutIconBrown} />
+          <InfoMessageCard
+            title="External Host"
+            messageContent={(
               <Typography variant="subtitle2">
                 {/* eslint-disable react/jsx-one-expression-per-line */}
                 Data for this product is not currently available for download through
@@ -643,8 +635,8 @@ export default function DownloadStepForm(props) {
                 this product for a particular site from the {hostLink}.
                 {/* eslint-enable react/jsx-one-expression-per-line */}
               </Typography>
-            </CardContent>
-          </Card>
+            )}
+          />
           <ExternalHostProductSpecificLinks
             productCode={state.productData.productCode}
             siteCodes={availableSiteCodes}

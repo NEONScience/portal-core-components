@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -11,11 +9,11 @@ import Typography from '@material-ui/core/Typography';
 
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import InfoIcon from '@material-ui/icons/Info';
 
-import Theme from '../Theme/Theme';
+import InfoMessageCard from '../Card/InfoMessageCard';
 import ExternalHost from '../ExternalHost/ExternalHost';
 import ExternalHostProductSpecificLinks from '../ExternalHostProductSpecificLinks/ExternalHostProductSpecificLinks';
+import Theme from '../Theme/Theme';
 
 const useStyles = makeStyles((theme) => ({
   startFlex: {
@@ -23,17 +21,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
-  callout: {
-    margin: theme.spacing(0.5, 0, 3, 0),
-    backgroundColor: Theme.colors.BROWN[50],
-    borderColor: Theme.colors.BROWN[300],
-  },
-  calloutIcon: {
-    color: Theme.colors.BROWN[300],
-    marginRight: theme.spacing(2),
-  },
-  specificLinksContainer: {
-    padding: theme.spacing(0, 3, 3, 3),
+  cardDivider: {
+    margin: theme.spacing(0, 0, 2, 0),
   },
 }));
 
@@ -99,40 +88,37 @@ const ExternalHostInfo = (props) => {
     );
   }
 
-  const content = (
-    <>
-      <CardContent className={classes.startFlex}>
-        <InfoIcon fontSize="large" className={classes.calloutIcon} />
-        <Typography variant="subtitle2" style={{ flexGrow: 1 }}>
-          {blurb}
-        </Typography>
-        {hasSpecificLinks && expandable ? (
-          <Tooltip title={expandTitle}>
-            <IconButton
-              aria-label={expandTitle}
-              onClick={() => setExpanded(!expanded)}
-              style={{ marginLeft: Theme.spacing(2) }}
-            >
-              {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-            </IconButton>
-          </Tooltip>
-        ) : null}
-      </CardContent>
-      <div
-        className={classes.specificLinksContainer}
-        style={{ display: hasSpecificLinks && expanded ? 'block' : 'none' }}
-      >
-        <Divider />
-        <ExternalHostProductSpecificLinks productCode={productCode} siteCodes={siteCodes} />
-      </div>
-    </>
-  );
-
   return (
     <div {...rootProps}>
-      <Card className={classes.callout}>
-        {content}
-      </Card>
+      <InfoMessageCard
+        title="External Host"
+        messageContent={(
+          <>
+            <Divider className={classes.cardDivider} />
+            <div className={classes.startFlex}>
+              <Typography variant="subtitle2" style={{ flexGrow: 1 }}>
+                {blurb}
+              </Typography>
+              {hasSpecificLinks && expandable ? (
+                <Tooltip title={expandTitle}>
+                  <IconButton
+                    aria-label={expandTitle}
+                    onClick={() => setExpanded(!expanded)}
+                    style={{ marginLeft: Theme.spacing(2) }}
+                  >
+                    {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                  </IconButton>
+                </Tooltip>
+              ) : null}
+            </div>
+            <div
+              style={{ display: hasSpecificLinks && expanded ? 'block' : 'none' }}
+            >
+              <ExternalHostProductSpecificLinks productCode={productCode} siteCodes={siteCodes} />
+            </div>
+          </>
+        )}
+      />
     </div>
   );
 };

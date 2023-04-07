@@ -9,8 +9,8 @@ import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardHeader from '@material-ui/core/CardHeader';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Divider from '@material-ui/core/Divider';
 import Link from '@material-ui/core/Link';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
@@ -20,6 +20,7 @@ import DownloadIcon from '@material-ui/icons/SaveAlt';
 
 import BundleContentBuilder from '../../Bundles/BundleContentBuilder';
 import DataProductBundleCard from '../../Bundles/DataProductBundleCard';
+import ReleaseNoticeCard from '../../Card/ReleaseNoticeCard';
 import CitationService from '../../../service/CitationService';
 import DataCiteService, {
   CitationDownloadType, CitationFormat,
@@ -85,28 +86,11 @@ const useStyles = makeStyles((theme: NeonTheme) => ({
   bundleTextOnlySpacer: {
     marginBottom: theme.spacing(2),
   },
-  tombstoneBlurbCard: {
-    backgroundColor: (Theme as NeonTheme).colors.BROWN[50],
-    borderColor: (Theme as NeonTheme).colors.BROWN[300],
-    marginTop: theme.spacing(1),
-  },
-  tombstoneBlurbCardTextOnly: {
-    backgroundColor: (Theme as NeonTheme).colors.BROWN[50],
-    borderColor: (Theme as NeonTheme).colors.BROWN[300],
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(2),
-  },
-  tombstoneBlurbCardHeader: {
-    padding: theme.spacing(2),
-    paddingBottom: 0,
-  },
-  tombstoneBlurbCardContent: {
-    padding: theme.spacing(2),
-    paddingTop: theme.spacing(1),
-    paddingBottom: '20px !important',
-  },
   tombstoneBlurb: {
     fontSize: '0.8rem',
+  },
+  noticeCardDivider: {
+    margin: theme.spacing(0, 0, 2, 0),
   },
 }));
 
@@ -238,7 +222,7 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
     const tombstoneNote: JSX.Element = (
       <>
         {/* eslint-disable react/jsx-one-expression-per-line, max-len */}
-        {citationRelease.release} of this data product
+        <b>{citationRelease.release}</b> of this data product
         {doiDisplay} {latestAvailableReleaseBlurb}is no longer available for download.
         If this specific release is needed for research purposes, please fill out
         the {contactUsLink} form.
@@ -246,21 +230,16 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
       </>
     );
     return (
-      <Card
-        className={showTextOnly
-          ? classes.tombstoneBlurbCardTextOnly
-          : classes.tombstoneBlurbCard}
-      >
-        <CardHeader
-          className={classes.tombstoneBlurbCardHeader}
-          title={(<Typography variant="h6" component="h6">Release Notice</Typography>)}
-        />
-        <CardContent className={classes.tombstoneBlurbCardContent}>
-          <Typography variant="body2" color="textSecondary" className={classes.tombstoneBlurb}>
-            {tombstoneNote}
-          </Typography>
-        </CardContent>
-      </Card>
+      <ReleaseNoticeCard
+        messageContent={(
+          <>
+            <Divider className={classes.noticeCardDivider} />
+            <Typography variant="body2" color="textPrimary" className={classes.tombstoneBlurb}>
+              {tombstoneNote}
+            </Typography>
+          </>
+        )}
+      />
     );
   };
 
