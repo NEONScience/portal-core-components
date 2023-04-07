@@ -25,7 +25,7 @@ const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
       alignItems: 'center',
     },
     titleContentContainer: {
-      padding: muiTheme.spacing(2, 2.75, 1.5, 2.5),
+      padding: muiTheme.spacing(2, 2.5, 1.5, 2.5),
     },
     textTitleContent: {
       flexGrow: 1,

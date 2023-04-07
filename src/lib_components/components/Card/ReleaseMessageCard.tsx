@@ -17,11 +17,6 @@ import { NeonTheme } from '../Theme/types';
 const useStyles: StylesHook = makeStyles((theme: NeonTheme) =>
   // eslint-disable-next-line implicit-arrow-linebreak
   createStyles({
-    cardSecondaryIcon: {
-      color: 'rgba(138, 191, 236, 0.9)', // theme.colors.LIGHT_BLUE[200] with 'a' value applied
-      marginLeft: theme.spacing(2),
-      fontSize: '1.875rem !important',
-    },
     customIcon: {
       color: 'rgba(0, 0, 0, 0.9)',
       padding: '5px',
@@ -30,15 +25,14 @@ const useStyles: StylesHook = makeStyles((theme: NeonTheme) =>
     },
   })) as StylesHook;
 
-const InfoCard: React.FC<InfoMessageCardProps> = (props: InfoMessageCardProps): JSX.Element => {
+const ReleaseMessageCard: React.FC<InfoMessageCardProps> = (
+  props: InfoMessageCardProps,
+): JSX.Element => {
   const classes = useStyles(Theme);
   return (
     <InfoMessageCard
       {...props}
       title="Data Product Release"
-      classes={{
-        secondaryIcon: classes.secondaryIcon,
-      }}
       icon={(
         <FontAwesomeIcon
           icon={faTag}
@@ -50,4 +44,4 @@ const InfoCard: React.FC<InfoMessageCardProps> = (props: InfoMessageCardProps): 
   );
 };
 
-export default InfoCard;
+export default ReleaseMessageCard;
