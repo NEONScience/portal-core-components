@@ -1,9 +1,5 @@
 import React from 'react';
 export interface DataProductBundleCardClasses {
-    card?: string;
-    cardContent?: string;
-    cardContentFlexContainer?: string;
-    cardContentContainer?: string;
     cardIcon?: string;
 }
 export interface DataProductBundleCardProps {
@@ -12,7 +8,6 @@ export interface DataProductBundleCardProps {
     subTitleContent?: React.ReactNode;
     customContent?: React.ReactNode;
     isSplit?: boolean;
-    showIcon?: boolean;
     classes?: DataProductBundleCardClasses;
 }
 declare const DataProductBundleCard: React.FC<DataProductBundleCardProps>;

@@ -258,7 +258,6 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     return (
       <div className={classes.itemContainer}>
         <DataProductBundleCard
-          showIcon
           isSplit={hasManyParents}
           titleContent={titleContent}
           detailContent={detailContent}

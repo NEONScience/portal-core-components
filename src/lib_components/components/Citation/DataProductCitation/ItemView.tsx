@@ -299,7 +299,6 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
     return (
       <div className={showTextOnly ? classes.bundleTextOnlySpacer : undefined}>
         <DataProductBundleCard
-          showIcon={!hasManyParents}
           isSplit={hasManyParents}
           titleContent={titleContent}
           subTitleContent={subTitleContent}

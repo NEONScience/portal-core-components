@@ -16,6 +16,12 @@ const BasicComponents = React.lazy(
 const AopDataViewerStyleGuide = React.lazy(
   () => import('./lib_components/components/AopDataViewer/StyleGuide'),
 );
+const CardStyleGuide = React.lazy(
+  () => import('./lib_components/components/Card/StyleGuide'),
+);
+const ChipStyleGuide = React.lazy(
+  () => import('./lib_components/components/Chip/StyleGuide'),
+);
 const CitationsStyleGuide = React.lazy(
   () => import('./lib_components/components/Citation/StyleGuide'),
 );
@@ -122,6 +128,24 @@ const sidebarLinks = [
     component: () => (
       <Suspense fallback={<SuspenseFallback />}>
         <AopDataViewerStyleGuide />
+      </Suspense>
+    ),
+  },
+  {
+    name: 'Cards',
+    hash: '#Cards',
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
+        <CardStyleGuide />
+      </Suspense>
+    ),
+  },
+  {
+    name: 'Chips',
+    hash: '#Chips',
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
+        <ChipStyleGuide />
       </Suspense>
     ),
   },
