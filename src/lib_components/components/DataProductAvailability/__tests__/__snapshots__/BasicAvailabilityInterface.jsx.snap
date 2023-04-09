@@ -30,11 +30,58 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
           y={0}
         />
         <rect
-          fill="#c5c6d9"
+          fill="#e1e3ea"
           height={1.75}
           width={7}
           x={0}
           y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedAvailableProvisionalPattern"
+        patternContentUnits="userSpaceOnUse"
+        width={1}
+      >
+        <polygon
+          fill="#ffffff"
+          points="0,12 7,0 7,12"
+        />
+        <line
+          stroke="#002c77"
+          strokeWidth={1}
+          x1="4.46"
+          x2="8.00"
+          y1="-1.00"
+          y2="2.54"
+        />
+        <line
+          stroke="#002c77"
+          strokeWidth={1}
+          x1="0.44"
+          x2="8.00"
+          y1="-1.00"
+          y2="6.56"
+        />
+        <line
+          stroke="#002c77"
+          strokeWidth={1}
+          x1="-1.00"
+          x2="8.00"
+          y1="1.59"
+          y2="10.59"
+        />
+        <line
+          stroke="#002c77"
+          strokeWidth={1}
+          x1="-1.00"
+          x2="6.38"
+          y1="5.62"
+          y2="13.00"
+        />
+        <polygon
+          fill="#002c77"
+          points="0,0 7,0 0,12"
         />
       </pattern>
       <pattern
@@ -660,7 +707,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
             height={12}
             rx={1}
             width={7}
-            x={0}
+            x={0.75}
             y={0}
           />
           <text
@@ -675,7 +722,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
             height={12}
             rx={1}
             width={7}
-            x={0}
+            x={0.75}
             y={20}
           />
           <text
@@ -797,11 +844,58 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
           y={0}
         />
         <rect
-          fill="#c5c6d9"
+          fill="#e1e3ea"
           height={1.75}
           width={7}
           x={0}
           y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedAvailableProvisionalPattern"
+        patternContentUnits="userSpaceOnUse"
+        width={1}
+      >
+        <polygon
+          fill="#ffffff"
+          points="0,12 7,0 7,12"
+        />
+        <line
+          stroke="#002c77"
+          strokeWidth={1}
+          x1="4.46"
+          x2="8.00"
+          y1="-1.00"
+          y2="2.54"
+        />
+        <line
+          stroke="#002c77"
+          strokeWidth={1}
+          x1="0.44"
+          x2="8.00"
+          y1="-1.00"
+          y2="6.56"
+        />
+        <line
+          stroke="#002c77"
+          strokeWidth={1}
+          x1="-1.00"
+          x2="8.00"
+          y1="1.59"
+          y2="10.59"
+        />
+        <line
+          stroke="#002c77"
+          strokeWidth={1}
+          x1="-1.00"
+          x2="6.38"
+          y1="5.62"
+          y2="13.00"
+        />
+        <polygon
+          fill="#002c77"
+          points="0,0 7,0 0,12"
         />
       </pattern>
       <pattern
@@ -1427,7 +1521,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
             height={12}
             rx={1}
             width={7}
-            x={0}
+            x={0.75}
             y={0}
           />
           <text
@@ -1442,7 +1536,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
             height={12}
             rx={1}
             width={7}
-            x={0}
+            x={0.75}
             y={20}
           />
           <text
@@ -1564,11 +1658,58 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
           y={0}
         />
         <rect
-          fill="#c5c6d9"
+          fill="#e1e3ea"
           height={1.75}
           width={7}
           x={0}
           y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedAvailableProvisionalPattern"
+        patternContentUnits="userSpaceOnUse"
+        width={1}
+      >
+        <polygon
+          fill="#ffffff"
+          points="0,12 7,0 7,12"
+        />
+        <line
+          stroke="#002c77"
+          strokeWidth={1}
+          x1="4.46"
+          x2="8.00"
+          y1="-1.00"
+          y2="2.54"
+        />
+        <line
+          stroke="#002c77"
+          strokeWidth={1}
+          x1="0.44"
+          x2="8.00"
+          y1="-1.00"
+          y2="6.56"
+        />
+        <line
+          stroke="#002c77"
+          strokeWidth={1}
+          x1="-1.00"
+          x2="8.00"
+          y1="1.59"
+          y2="10.59"
+        />
+        <line
+          stroke="#002c77"
+          strokeWidth={1}
+          x1="-1.00"
+          x2="6.38"
+          y1="5.62"
+          y2="13.00"
+        />
+        <polygon
+          fill="#002c77"
+          points="0,0 7,0 0,12"
         />
       </pattern>
       <pattern
@@ -1802,11 +1943,58 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
           y={0}
         />
         <rect
-          fill="#c5c6d9"
+          fill="#e1e3ea"
           height={1.75}
           width={7}
           x={0}
           y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedAvailableProvisionalPattern"
+        patternContentUnits="userSpaceOnUse"
+        width={1}
+      >
+        <polygon
+          fill="#ffffff"
+          points="0,12 7,0 7,12"
+        />
+        <line
+          stroke="#002c77"
+          strokeWidth={1}
+          x1="4.46"
+          x2="8.00"
+          y1="-1.00"
+          y2="2.54"
+        />
+        <line
+          stroke="#002c77"
+          strokeWidth={1}
+          x1="0.44"
+          x2="8.00"
+          y1="-1.00"
+          y2="6.56"
+        />
+        <line
+          stroke="#002c77"
+          strokeWidth={1}
+          x1="-1.00"
+          x2="8.00"
+          y1="1.59"
+          y2="10.59"
+        />
+        <line
+          stroke="#002c77"
+          strokeWidth={1}
+          x1="-1.00"
+          x2="6.38"
+          y1="5.62"
+          y2="13.00"
+        />
+        <polygon
+          fill="#002c77"
+          points="0,0 7,0 0,12"
         />
       </pattern>
       <pattern
@@ -2432,7 +2620,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
             height={12}
             rx={1}
             width={7}
-            x={0}
+            x={0.75}
             y={0}
           />
           <text
@@ -2447,7 +2635,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
             height={12}
             rx={1}
             width={7}
-            x={0}
+            x={0.75}
             y={20}
           />
           <text
@@ -2569,11 +2757,58 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
           y={0}
         />
         <rect
-          fill="#c5c6d9"
+          fill="#e1e3ea"
           height={1.75}
           width={7}
           x={0}
           y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedAvailableProvisionalPattern"
+        patternContentUnits="userSpaceOnUse"
+        width={1}
+      >
+        <polygon
+          fill="#ffffff"
+          points="0,12 7,0 7,12"
+        />
+        <line
+          stroke="#002c77"
+          strokeWidth={1}
+          x1="4.46"
+          x2="8.00"
+          y1="-1.00"
+          y2="2.54"
+        />
+        <line
+          stroke="#002c77"
+          strokeWidth={1}
+          x1="0.44"
+          x2="8.00"
+          y1="-1.00"
+          y2="6.56"
+        />
+        <line
+          stroke="#002c77"
+          strokeWidth={1}
+          x1="-1.00"
+          x2="8.00"
+          y1="1.59"
+          y2="10.59"
+        />
+        <line
+          stroke="#002c77"
+          strokeWidth={1}
+          x1="-1.00"
+          x2="6.38"
+          y1="5.62"
+          y2="13.00"
+        />
+        <polygon
+          fill="#002c77"
+          points="0,0 7,0 0,12"
         />
       </pattern>
       <pattern
@@ -3378,7 +3613,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
             height={12}
             rx={1}
             width={7}
-            x={0}
+            x={0.75}
             y={0}
           />
           <text
@@ -3393,7 +3628,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
             height={12}
             rx={1}
             width={7}
-            x={0}
+            x={0.75}
             y={20}
           />
           <text

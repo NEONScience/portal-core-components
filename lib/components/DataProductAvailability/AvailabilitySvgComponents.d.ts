@@ -18,6 +18,15 @@ export const CELL_ATTRS: {
         fill: string;
         stroke: string;
     };
+    'mixed-available-provisional': {
+        strokeWidth: string;
+        width: string;
+        height: string;
+        rx: string;
+        nudge: number;
+        fill: string;
+        stroke: string;
+    };
     'not available': {
         stroke: null;
         strokeWidth: null;

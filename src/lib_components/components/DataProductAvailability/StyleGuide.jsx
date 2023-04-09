@@ -20,6 +20,7 @@ import Theme from '../Theme/Theme';
 
 import sampleProductData from '../../../sampleData/DP1.00001.001.json';
 import sampleSiteData from '../../../sampleData/CPER.json';
+import sampleAvaProvData from '../../../sampleData/DP4.00130.001.release.prov.json';
 
 import crunch from '../../../sampleData/DataProductAvailability/crunch';
 
@@ -409,6 +410,32 @@ const productData = {...};
 <DownloadDataContext.Provider productData={productData}>
   <DataProductAvailability disableSelection />
 </DownloadDataContext.Provider>
+        `}
+      </CodeBlock>
+
+      <Divider className={classes.divider} />
+      <Typography variant="h6" component="h4" gutterBottom>Availability Provisional Rollup</Typography>
+
+      <DocBlock>
+        The DataProductAvailability visualization can show various status types
+        for provisional and released available data and provide a rollup status when grouped.
+      </DocBlock>
+      <ExampleBlock>
+        <DataProductAvailability
+          delineateRelease
+          siteCodes={sampleAvaProvData.data.siteCodes}
+        />
+      </ExampleBlock>
+      <CodeBlock>
+        {`
+import DataProductAvailability from 'portal-core-components/lib/components/DataProductAvailability';
+
+const siteCodes = [...];
+
+<DataProductAvailability
+  delineateRelease
+  siteCodes={siteCodes}
+/>
         `}
       </CodeBlock>
 

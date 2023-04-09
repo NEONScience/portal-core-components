@@ -48,7 +48,7 @@ export default function BasicAvailabilityKey(props) {
      Render: Cells (Vertical Orientation)
   */
   const renderVerticalCellLegend = () => {
-    const totalRows = delineateRelease ? 3 : 2;
+    const totalRows = delineateRelease ? 4 : 2;
     const totalWidth = delineateRelease || VERTICAL_STATUS_TYPES.includes(availabilityStatusType)
       ? 180
       : 90;
@@ -64,7 +64,7 @@ export default function BasicAvailabilityKey(props) {
           return (
             <>
               <rect
-                x={0}
+                x={0.75}
                 y={rowY(0)}
                 width={SVG.CELL_WIDTH}
                 height={SVG.CELL_HEIGHT}
@@ -78,11 +78,10 @@ export default function BasicAvailabilityKey(props) {
           );
         case 'available':
         default:
-          /* eslint-disable max-len */
           return (
             <>
               <rect
-                x={0}
+                x={0.75}
                 y={rowY(0)}
                 width={SVG.CELL_WIDTH}
                 height={SVG.CELL_HEIGHT}
@@ -101,7 +100,6 @@ export default function BasicAvailabilityKey(props) {
         return null;
       }
       const provCell = CELL_ATTRS['available-provisional'];
-      /* eslint-disable max-len */
       return (
         <>
           <rect
@@ -120,13 +118,37 @@ export default function BasicAvailabilityKey(props) {
         </>
       );
     };
+    const renderMixedAvaProvisionalCell = () => {
+      if (!delineateRelease) {
+        return null;
+      }
+      const provCell = CELL_ATTRS['mixed-available-provisional'];
+      return (
+        <>
+          <rect
+            x={0.75}
+            y={rowY(2)}
+            width={SVG.CELL_WIDTH}
+            height={SVG.CELL_HEIGHT}
+            rx={SVG.CELL_RX}
+            fill={provCell.fill}
+            stroke={provCell.stroke}
+            strokeWidth={provCell.strokeWidth}
+          />
+          <text className={classes.legendText} x={cellOffset} y={rowLabelY(2)}>
+            Release and Provisional Available
+          </text>
+        </>
+      );
+    };
     /* eslint-disable max-len */
     return (
       <svg width={totalWidth} height={totalHeight} className={classes.legendSvg}>
         {renderAvailabilityStatusCell()}
+        {renderMixedAvaProvisionalCell()}
         {renderProvisionalCell()}
-        <rect x={0} y={rowY(delineateRelease ? 2 : 1)} width={SVG.CELL_WIDTH} height={SVG.CELL_HEIGHT} rx={SVG.CELL_RX} fill={Theme.palette.grey[200]} />
-        <text className={classes.legendText} x={cellOffset} y={rowLabelY(delineateRelease ? 2 : 1)}>
+        <rect x={0.75} y={rowY(delineateRelease ? 3 : 1)} width={SVG.CELL_WIDTH} height={SVG.CELL_HEIGHT} rx={SVG.CELL_RX} fill={Theme.palette.grey[200]} />
+        <text className={classes.legendText} x={cellOffset} y={rowLabelY(delineateRelease ? 3 : 1)}>
           No data
         </text>
       </svg>
@@ -138,7 +160,7 @@ export default function BasicAvailabilityKey(props) {
      Render: Cells (Horizontal Orientation)
   */
   const renderHorizontalCellLegend = () => {
-    const totalColumns = delineateRelease ? 3 : 2;
+    const totalColumns = delineateRelease ? 4 : 2;
     const columnWidth = SVG.CELL_WIDTH + (2 * SVG.CELL_PADDING) + 100;
     const totalWidth = columnWidth * totalColumns;
     const totalHeight = SVG.CELL_HEIGHT + SVG.CELL_PADDING;
@@ -166,7 +188,6 @@ export default function BasicAvailabilityKey(props) {
           );
         case 'available':
         default:
-          /* eslint-disable max-len */
           return (
             <>
               <rect
@@ -189,7 +210,6 @@ export default function BasicAvailabilityKey(props) {
         return null;
       }
       const provCell = CELL_ATTRS['available-provisional'];
-      /* eslint-disable max-len */
       return (
         <>
           <rect
@@ -208,13 +228,37 @@ export default function BasicAvailabilityKey(props) {
         </>
       );
     };
+    const renderMixedAvaProvisionalCell = () => {
+      if (!delineateRelease) {
+        return null;
+      }
+      const provCell = CELL_ATTRS['mixed-available-provisional'];
+      return (
+        <>
+          <rect
+            x={columnX(2)}
+            y={0.75}
+            width={SVG.CELL_WIDTH}
+            height={SVG.CELL_HEIGHT}
+            rx={SVG.CELL_RX}
+            fill={provCell.fill}
+            stroke={provCell.stroke}
+            strokeWidth={provCell.strokeWidth}
+          />
+          <text className={classes.legendText} x={columnX(2) + cellOffset} y={rowLabelY}>
+            Release and Provisional
+          </text>
+        </>
+      );
+    };
     /* eslint-disable max-len */
     return (
       <svg width={totalWidth} height={totalHeight} className={classes.legendSvg}>
         {renderAvailabilityStatusCell()}
+        {renderMixedAvaProvisionalCell()}
         {renderProvisionalCell()}
-        <rect x={columnX(delineateRelease ? 2 : 1)} y={0} width={SVG.CELL_WIDTH} height={SVG.CELL_HEIGHT} rx={SVG.CELL_RX} fill={Theme.palette.grey[200]} />
-        <text className={classes.legendText} x={columnX(delineateRelease ? 2 : 1) + cellOffset} y={rowLabelY}>
+        <rect x={columnX(delineateRelease ? 3 : 1)} y={0} width={SVG.CELL_WIDTH} height={SVG.CELL_HEIGHT} rx={SVG.CELL_RX} fill={Theme.palette.grey[200]} />
+        <text className={classes.legendText} x={columnX(delineateRelease ? 3 : 1) + cellOffset} y={rowLabelY}>
           No data
         </text>
       </svg>

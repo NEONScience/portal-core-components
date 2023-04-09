@@ -14,7 +14,7 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
       height={12}
       rx={1}
       width={7}
-      x={0}
+      x={0.75}
       y={0}
     />
     <text
@@ -29,7 +29,7 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
       height={12}
       rx={1}
       width={7}
-      x={0}
+      x={0.75}
       y={20}
     />
     <text
