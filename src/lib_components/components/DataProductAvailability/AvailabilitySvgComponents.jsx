@@ -62,6 +62,7 @@ const DiagHalfAndHalfPattern = (props) => {
     id,
     color,
     diagColor,
+    diagColorFillOpacity,
     secondaryDiagColor,
   } = props;
   const cellW = SVG.CELL_WIDTH;
@@ -74,7 +75,7 @@ const DiagHalfAndHalfPattern = (props) => {
   // Setting this to 0 will disable to the extension and map directly
   // onto the bounding box of the rectangle.
   // When divided by 2, should result in a rational number.
-  const extendBoundsPadding = 2;
+  const extendBoundsPadding = 0;
   const w = SVG.CELL_WIDTH + extendBoundsPadding;
   const h = SVG.CELL_HEIGHT + extendBoundsPadding;
   // Nudge the half fill color to prevent background from initial
@@ -82,18 +83,20 @@ const DiagHalfAndHalfPattern = (props) => {
   // viewing levels. Ensures it looks visually appropriate for half color
   // fill and half diag line pattern.
   // Will be based on initDist
-  const nudgeDiagFill = 0;
+  const nudgeDiagFill = 1;
   const numLines = 4;
+  // Distance of the diagonal of the rectangle
+  const diagLengthRaw = Math.sqrt((cellW ** 2) + (cellH ** 2));
   // Distance of initial line to top right corner, as opposed to starting
   // at point (0, w)
-  const initDist = 2.5;
+  const initDist = (diagLengthRaw * 0.18);
   // Distance of furthest potential end line to bottom left corner
-  const trailingDist = 0;
+  const trailingDist = (diagLengthRaw * 0.1);
   // Distance of the diagonal of the rectangle
-  const diagLength = Math.sqrt((cellW ** 2) + (cellH ** 2)) - (initDist + trailingDist);
+  const diagLength = diagLengthRaw - (initDist + trailingDist);
   // Distance between parallel lines
   const diagLineGap = (diagLength / numLines);
-  const diagLineStrokeWidth = 1;
+  const diagLineStrokeWidth = (diagLength * 0.1).toFixed(2);
   // Compute the initial x coordinate of the first line based on specified
   // initial distance from top right corner
   // 45 degree lines means perpendicular line to top right corner
@@ -135,26 +138,35 @@ const DiagHalfAndHalfPattern = (props) => {
   return (
     <pattern
       id={id}
+      x={0}
+      y={0}
       width={1}
       height={1}
+      patternUnits="objectBoundingBox"
       patternContentUnits="userSpaceOnUse"
     >
       {/* Diagonal lines background */}
-      <polygon points={`0,${cellH} ${cellW},0 ${cellW},${cellH}`} fill={secondaryDiagColor} />
+      <polygon
+        points="0,0 0,1 1,1 1,0"
+        fill={secondaryDiagColor}
+        fillOpacity={diagColorFillOpacity}
+      />
       {/* Diagonal lines, top right to bottom left, 45 degree angle (slope = 1) */}
-      {coords.map((coord) => (
+      {coords.map((coord, idx) => (
         <line
-          key={`DiagHalfAndHalfPatternKey-${coord.x1}-${coord.y1}-${coord.x2}-${coord.y2}`}
+          // eslint-disable-next-line react/no-array-index-key
+          key={`DiagHalfAndHalfPatternKey-${coord.x1}-${coord.y1}-${coord.x2}-${coord.y2}-${idx}`}
           x1={coord.x1}
           y1={coord.y1}
           x2={coord.x2}
           y2={coord.y2}
           stroke={diagColor}
           strokeWidth={diagLineStrokeWidth}
+          strokeLinecap="square"
         />
       ))}
       {/* Half solid fill foreground */}
-      <polygon points={`0,0 ${cellW - nudgeDiagFill},0 0,${cellH - nudgeDiagFill}`} fill={color} />
+      <polygon points={`0,0 ${cellW - nudgeDiagFill},0 ${0},${cellH}`} fill={color} />
     </pattern>
   );
 };
@@ -162,6 +174,7 @@ DiagHalfAndHalfPattern.propTypes = {
   id: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
   diagColor: PropTypes.string.isRequired,
+  diagColorFillOpacity: PropTypes.number.isRequired,
   secondaryDiagColor: PropTypes.string,
 };
 DiagHalfAndHalfPattern.defaultProps = {
@@ -176,7 +189,8 @@ export const SvgDefs = () => (
         id="mixedAvailableProvisionalPattern"
         color={COLORS.NEON_BLUE[700]}
         diagColor={COLORS.NEON_BLUE[700]}
-        secondaryDiagColor="#ffffff"
+        diagColorFillOpacity={0.25}
+        secondaryDiagColor={COLORS.NEON_BLUE[50]}
       />
       <DiagLinesPattern id="beingProcessedPattern" color={COLORS.NEON_BLUE[700]} />
       <DiagLinesPattern id="delayedPattern" color={COLORS.GOLD[400]} />

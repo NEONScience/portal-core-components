@@ -41,47 +41,55 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
         height={1}
         id="mixedAvailableProvisionalPattern"
         patternContentUnits="userSpaceOnUse"
+        patternUnits="objectBoundingBox"
         width={1}
+        x={0}
+        y={0}
       >
         <polygon
-          fill="#ffffff"
-          points="0,12 7,0 7,12"
+          fill="#e1e3ea"
+          fillOpacity={0.25}
+          points="0,0 0,1 1,1 1,0"
         />
         <line
           stroke="#002c77"
-          strokeWidth={1}
-          x1="4.46"
-          x2="8.00"
-          y1="-1.00"
-          y2="2.54"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="3.46"
+          x2="7.00"
+          y1="0.00"
+          y2="3.54"
         />
         <line
           stroke="#002c77"
-          strokeWidth={1}
-          x1="0.44"
-          x2="8.00"
-          y1="-1.00"
-          y2="6.56"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="7.00"
+          y1="0.07"
+          y2="7.07"
         />
         <line
           stroke="#002c77"
-          strokeWidth={1}
-          x1="-1.00"
-          x2="8.00"
-          y1="1.59"
-          y2="10.59"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="7.00"
+          y1="3.61"
+          y2="10.61"
         />
         <line
           stroke="#002c77"
-          strokeWidth={1}
-          x1="-1.00"
-          x2="6.38"
-          y1="5.62"
-          y2="13.00"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="4.85"
+          y1="7.15"
+          y2="12.00"
         />
         <polygon
           fill="#002c77"
-          points="0,0 7,0 0,12"
+          points="0,0 6,0 0,12"
         />
       </pattern>
       <pattern
@@ -1066,47 +1074,55 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
         height={1}
         id="mixedAvailableProvisionalPattern"
         patternContentUnits="userSpaceOnUse"
+        patternUnits="objectBoundingBox"
         width={1}
+        x={0}
+        y={0}
       >
         <polygon
-          fill="#ffffff"
-          points="0,12 7,0 7,12"
+          fill="#e1e3ea"
+          fillOpacity={0.25}
+          points="0,0 0,1 1,1 1,0"
         />
         <line
           stroke="#002c77"
-          strokeWidth={1}
-          x1="4.46"
-          x2="8.00"
-          y1="-1.00"
-          y2="2.54"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="3.46"
+          x2="7.00"
+          y1="0.00"
+          y2="3.54"
         />
         <line
           stroke="#002c77"
-          strokeWidth={1}
-          x1="0.44"
-          x2="8.00"
-          y1="-1.00"
-          y2="6.56"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="7.00"
+          y1="0.07"
+          y2="7.07"
         />
         <line
           stroke="#002c77"
-          strokeWidth={1}
-          x1="-1.00"
-          x2="8.00"
-          y1="1.59"
-          y2="10.59"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="7.00"
+          y1="3.61"
+          y2="10.61"
         />
         <line
           stroke="#002c77"
-          strokeWidth={1}
-          x1="-1.00"
-          x2="6.38"
-          y1="5.62"
-          y2="13.00"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="4.85"
+          y1="7.15"
+          y2="12.00"
         />
         <polygon
           fill="#002c77"
-          points="0,0 7,0 0,12"
+          points="0,0 6,0 0,12"
         />
       </pattern>
       <pattern
@@ -2091,47 +2107,55 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
         height={1}
         id="mixedAvailableProvisionalPattern"
         patternContentUnits="userSpaceOnUse"
+        patternUnits="objectBoundingBox"
         width={1}
+        x={0}
+        y={0}
       >
         <polygon
-          fill="#ffffff"
-          points="0,12 7,0 7,12"
+          fill="#e1e3ea"
+          fillOpacity={0.25}
+          points="0,0 0,1 1,1 1,0"
         />
         <line
           stroke="#002c77"
-          strokeWidth={1}
-          x1="4.46"
-          x2="8.00"
-          y1="-1.00"
-          y2="2.54"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="3.46"
+          x2="7.00"
+          y1="0.00"
+          y2="3.54"
         />
         <line
           stroke="#002c77"
-          strokeWidth={1}
-          x1="0.44"
-          x2="8.00"
-          y1="-1.00"
-          y2="6.56"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="7.00"
+          y1="0.07"
+          y2="7.07"
         />
         <line
           stroke="#002c77"
-          strokeWidth={1}
-          x1="-1.00"
-          x2="8.00"
-          y1="1.59"
-          y2="10.59"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="7.00"
+          y1="3.61"
+          y2="10.61"
         />
         <line
           stroke="#002c77"
-          strokeWidth={1}
-          x1="-1.00"
-          x2="6.38"
-          y1="5.62"
-          y2="13.00"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="4.85"
+          y1="7.15"
+          y2="12.00"
         />
         <polygon
           fill="#002c77"
-          points="0,0 7,0 0,12"
+          points="0,0 6,0 0,12"
         />
       </pattern>
       <pattern
@@ -3116,47 +3140,55 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
         height={1}
         id="mixedAvailableProvisionalPattern"
         patternContentUnits="userSpaceOnUse"
+        patternUnits="objectBoundingBox"
         width={1}
+        x={0}
+        y={0}
       >
         <polygon
-          fill="#ffffff"
-          points="0,12 7,0 7,12"
+          fill="#e1e3ea"
+          fillOpacity={0.25}
+          points="0,0 0,1 1,1 1,0"
         />
         <line
           stroke="#002c77"
-          strokeWidth={1}
-          x1="4.46"
-          x2="8.00"
-          y1="-1.00"
-          y2="2.54"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="3.46"
+          x2="7.00"
+          y1="0.00"
+          y2="3.54"
         />
         <line
           stroke="#002c77"
-          strokeWidth={1}
-          x1="0.44"
-          x2="8.00"
-          y1="-1.00"
-          y2="6.56"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="7.00"
+          y1="0.07"
+          y2="7.07"
         />
         <line
           stroke="#002c77"
-          strokeWidth={1}
-          x1="-1.00"
-          x2="8.00"
-          y1="1.59"
-          y2="10.59"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="7.00"
+          y1="3.61"
+          y2="10.61"
         />
         <line
           stroke="#002c77"
-          strokeWidth={1}
-          x1="-1.00"
-          x2="6.38"
-          y1="5.62"
-          y2="13.00"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="4.85"
+          y1="7.15"
+          y2="12.00"
         />
         <polygon
           fill="#002c77"
-          points="0,0 7,0 0,12"
+          points="0,0 6,0 0,12"
         />
       </pattern>
       <pattern
@@ -4168,47 +4200,55 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
         height={1}
         id="mixedAvailableProvisionalPattern"
         patternContentUnits="userSpaceOnUse"
+        patternUnits="objectBoundingBox"
         width={1}
+        x={0}
+        y={0}
       >
         <polygon
-          fill="#ffffff"
-          points="0,12 7,0 7,12"
+          fill="#e1e3ea"
+          fillOpacity={0.25}
+          points="0,0 0,1 1,1 1,0"
         />
         <line
           stroke="#002c77"
-          strokeWidth={1}
-          x1="4.46"
-          x2="8.00"
-          y1="-1.00"
-          y2="2.54"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="3.46"
+          x2="7.00"
+          y1="0.00"
+          y2="3.54"
         />
         <line
           stroke="#002c77"
-          strokeWidth={1}
-          x1="0.44"
-          x2="8.00"
-          y1="-1.00"
-          y2="6.56"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="7.00"
+          y1="0.07"
+          y2="7.07"
         />
         <line
           stroke="#002c77"
-          strokeWidth={1}
-          x1="-1.00"
-          x2="8.00"
-          y1="1.59"
-          y2="10.59"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="7.00"
+          y1="3.61"
+          y2="10.61"
         />
         <line
           stroke="#002c77"
-          strokeWidth={1}
-          x1="-1.00"
-          x2="6.38"
-          y1="5.62"
-          y2="13.00"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="4.85"
+          y1="7.15"
+          y2="12.00"
         />
         <polygon
           fill="#002c77"
-          points="0,0 7,0 0,12"
+          points="0,0 6,0 0,12"
         />
       </pattern>
       <pattern
