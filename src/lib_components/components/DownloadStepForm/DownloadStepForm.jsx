@@ -216,6 +216,7 @@ export default function DownloadStepForm(props) {
     sitesAndDateRange: () => (
       <DataProductAvailability
         data-selenium="download-data-dialog.step-form.sites-and-date-range"
+        delineateRelease
       />
     ),
 
