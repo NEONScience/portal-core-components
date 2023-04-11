@@ -17,11 +17,11 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
         role="radiogroup"
       >
         <label
-          className="MuiFormControlLabel-root makeStyles-radio-8"
+          className="MuiFormControlLabel-root makeStyles-radio-6"
         >
           <span
             aria-disabled={false}
-            className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-18 MuiRadio-root MuiRadio-colorSecondary PrivateSwitchBase-checked-19 Mui-checked MuiIconButton-colorSecondary"
+            className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-16 MuiRadio-root MuiRadio-colorSecondary PrivateSwitchBase-checked-17 Mui-checked MuiIconButton-colorSecondary"
             onBlur={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
@@ -40,7 +40,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
             >
               <input
                 checked={true}
-                className="PrivateSwitchBase-input-21"
+                className="PrivateSwitchBase-input-19"
                 disabled={false}
                 name="documentation"
                 onChange={[Function]}
@@ -48,7 +48,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
                 value="include"
               />
               <div
-                className="PrivateRadioButtonIcon-root-22 PrivateRadioButtonIcon-checked-24"
+                className="PrivateRadioButtonIcon-root-20 PrivateRadioButtonIcon-checked-22"
               >
                 <svg
                   aria-hidden={true}
@@ -62,7 +62,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
                 </svg>
                 <svg
                   aria-hidden={true}
-                  className="MuiSvgIcon-root PrivateRadioButtonIcon-layer-23"
+                  className="MuiSvgIcon-root PrivateRadioButtonIcon-layer-21"
                   focusable="false"
                   viewBox="0 0 24 24"
                 >
@@ -77,7 +77,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
             className="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
           >
             <div
-              className="makeStyles-radioLabel-9"
+              className="makeStyles-radioLabel-7"
             >
               <h6
                 className="MuiTypography-root MuiTypography-h6"
@@ -93,11 +93,11 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
           </span>
         </label>
         <label
-          className="MuiFormControlLabel-root makeStyles-radio-8"
+          className="MuiFormControlLabel-root makeStyles-radio-6"
         >
           <span
             aria-disabled={false}
-            className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-18 MuiRadio-root MuiRadio-colorSecondary MuiIconButton-colorSecondary"
+            className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-16 MuiRadio-root MuiRadio-colorSecondary MuiIconButton-colorSecondary"
             onBlur={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
@@ -116,7 +116,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
             >
               <input
                 checked={false}
-                className="PrivateSwitchBase-input-21"
+                className="PrivateSwitchBase-input-19"
                 disabled={false}
                 name="documentation"
                 onChange={[Function]}
@@ -124,7 +124,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
                 value="exclude"
               />
               <div
-                className="PrivateRadioButtonIcon-root-22"
+                className="PrivateRadioButtonIcon-root-20"
               >
                 <svg
                   aria-hidden={true}
@@ -138,7 +138,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
                 </svg>
                 <svg
                   aria-hidden={true}
-                  className="MuiSvgIcon-root PrivateRadioButtonIcon-layer-23"
+                  className="MuiSvgIcon-root PrivateRadioButtonIcon-layer-21"
                   focusable="false"
                   viewBox="0 0 24 24"
                 >
@@ -153,7 +153,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
             className="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
           >
             <div
-              className="makeStyles-radioLabel-9"
+              className="makeStyles-radioLabel-7"
             >
               <h6
                 className="MuiTypography-root MuiTypography-h6"
@@ -183,7 +183,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
       }
     >
       <div
-        className="MuiCardContent-root makeStyles-startFlex-11"
+        className="MuiCardContent-root makeStyles-startFlex-9"
       >
         <svg
           aria-hidden={true}
@@ -243,11 +243,11 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
     role="radiogroup"
   >
     <label
-      className="MuiFormControlLabel-root makeStyles-radio-8"
+      className="MuiFormControlLabel-root makeStyles-radio-6"
     >
       <span
         aria-disabled={false}
-        className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-18 MuiRadio-root MuiRadio-colorSecondary MuiIconButton-colorSecondary"
+        className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-16 MuiRadio-root MuiRadio-colorSecondary MuiIconButton-colorSecondary"
         onBlur={[Function]}
         onDragLeave={[Function]}
         onFocus={[Function]}
@@ -266,7 +266,7 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
         >
           <input
             checked={false}
-            className="PrivateSwitchBase-input-21"
+            className="PrivateSwitchBase-input-19"
             disabled={false}
             name="package-type"
             onChange={[Function]}
@@ -274,7 +274,7 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
             value="basic"
           />
           <div
-            className="PrivateRadioButtonIcon-root-22"
+            className="PrivateRadioButtonIcon-root-20"
           >
             <svg
               aria-hidden={true}
@@ -288,7 +288,7 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
             </svg>
             <svg
               aria-hidden={true}
-              className="MuiSvgIcon-root PrivateRadioButtonIcon-layer-23"
+              className="MuiSvgIcon-root PrivateRadioButtonIcon-layer-21"
               focusable="false"
               viewBox="0 0 24 24"
             >
@@ -303,7 +303,7 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
         className="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
       >
         <div
-          className="makeStyles-radioLabel-9"
+          className="makeStyles-radioLabel-7"
         >
           <h6
             className="MuiTypography-root MuiTypography-h6"
@@ -319,11 +319,11 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
       </span>
     </label>
     <label
-      className="MuiFormControlLabel-root makeStyles-radio-8"
+      className="MuiFormControlLabel-root makeStyles-radio-6"
     >
       <span
         aria-disabled={false}
-        className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-18 MuiRadio-root MuiRadio-colorSecondary PrivateSwitchBase-checked-19 Mui-checked MuiIconButton-colorSecondary"
+        className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-16 MuiRadio-root MuiRadio-colorSecondary PrivateSwitchBase-checked-17 Mui-checked MuiIconButton-colorSecondary"
         onBlur={[Function]}
         onDragLeave={[Function]}
         onFocus={[Function]}
@@ -342,7 +342,7 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
         >
           <input
             checked={true}
-            className="PrivateSwitchBase-input-21"
+            className="PrivateSwitchBase-input-19"
             disabled={false}
             name="package-type"
             onChange={[Function]}
@@ -350,7 +350,7 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
             value="expanded"
           />
           <div
-            className="PrivateRadioButtonIcon-root-22 PrivateRadioButtonIcon-checked-24"
+            className="PrivateRadioButtonIcon-root-20 PrivateRadioButtonIcon-checked-22"
           >
             <svg
               aria-hidden={true}
@@ -364,7 +364,7 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
             </svg>
             <svg
               aria-hidden={true}
-              className="MuiSvgIcon-root PrivateRadioButtonIcon-layer-23"
+              className="MuiSvgIcon-root PrivateRadioButtonIcon-layer-21"
               focusable="false"
               viewBox="0 0 24 24"
             >
@@ -379,7 +379,7 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
         className="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
       >
         <div
-          className="makeStyles-radioLabel-9"
+          className="makeStyles-radioLabel-7"
         >
           <h6
             className="MuiTypography-root MuiTypography-h6"
@@ -423,7 +423,7 @@ exports[`DownloadStepForm Step policies renders correctly 1`] = `
   >
     <span
       aria-disabled={false}
-      className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-18 MuiCheckbox-root MuiCheckbox-colorPrimary MuiIconButton-colorPrimary"
+      className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-16 MuiCheckbox-root MuiCheckbox-colorPrimary MuiIconButton-colorPrimary"
       onBlur={[Function]}
       onDragLeave={[Function]}
       onFocus={[Function]}
@@ -442,7 +442,7 @@ exports[`DownloadStepForm Step policies renders correctly 1`] = `
       >
         <input
           checked={false}
-          className="PrivateSwitchBase-input-21"
+          className="PrivateSwitchBase-input-19"
           data-indeterminate={false}
           disabled={false}
           onChange={[Function]}
@@ -557,17 +557,17 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
       data-selenium="download-data-dialog.step-form.summary"
     >
       <div
-        className="makeStyles-stepSummary-12"
+        className="makeStyles-stepSummary-10"
       >
         <div
-          className="makeStyles-stepSummaryHeader-13"
+          className="makeStyles-stepSummaryHeader-11"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="button"
           tabIndex={0}
         >
           <div
-            className="MuiChip-root makeStyles-summaryChip-15 MuiChip-colorPrimary"
+            className="MuiChip-root makeStyles-summaryChip-13 MuiChip-colorPrimary"
             onKeyDown={[Function]}
             onKeyUp={[Function]}
           >
@@ -589,7 +589,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
           </h6>
         </div>
         <div
-          className="makeStyles-stepSummaryContent-14"
+          className="makeStyles-stepSummaryContent-12"
         >
           <div
             className="MuiChip-root MuiChip-colorSecondary"
@@ -605,7 +605,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
             }
           >
             <div
-              className="MuiAvatar-root MuiAvatar-circular MuiChip-avatar makeStyles-avatarLarge-25 MuiChip-avatarColorSecondary MuiAvatar-colorDefault"
+              className="MuiAvatar-root MuiAvatar-circular MuiChip-avatar makeStyles-avatarLarge-23 MuiChip-avatarColorSecondary MuiAvatar-colorDefault"
               style={
                 Object {
                   "backgroundColor": "#002c77",
@@ -635,17 +635,17 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
         </div>
       </div>
       <div
-        className="makeStyles-stepSummary-12"
+        className="makeStyles-stepSummary-10"
       >
         <div
-          className="makeStyles-stepSummaryHeader-13"
+          className="makeStyles-stepSummaryHeader-11"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="button"
           tabIndex={0}
         >
           <div
-            className="MuiChip-root makeStyles-summaryChip-15 MuiChip-colorPrimary"
+            className="MuiChip-root makeStyles-summaryChip-13 MuiChip-colorPrimary"
             onKeyDown={[Function]}
             onKeyUp={[Function]}
           >
@@ -667,27 +667,27 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
           </h6>
         </div>
         <div
-          className="makeStyles-stepSummaryContent-14"
+          className="makeStyles-stepSummaryContent-12"
         >
           <p
-            className="MuiTypography-root makeStyles-summaryText-16 MuiTypography-body2"
+            className="MuiTypography-root makeStyles-summaryText-14 MuiTypography-body2"
           >
             Include
           </p>
         </div>
       </div>
       <div
-        className="makeStyles-stepSummary-12"
+        className="makeStyles-stepSummary-10"
       >
         <div
-          className="makeStyles-stepSummaryHeader-13"
+          className="makeStyles-stepSummaryHeader-11"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="button"
           tabIndex={0}
         >
           <div
-            className="MuiChip-root makeStyles-summaryChip-15 MuiChip-colorPrimary"
+            className="MuiChip-root makeStyles-summaryChip-13 MuiChip-colorPrimary"
             onKeyDown={[Function]}
             onKeyUp={[Function]}
           >
@@ -709,27 +709,27 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
           </h6>
         </div>
         <div
-          className="makeStyles-stepSummaryContent-14"
+          className="makeStyles-stepSummaryContent-12"
         >
           <p
-            className="MuiTypography-root makeStyles-summaryText-16 MuiTypography-body2"
+            className="MuiTypography-root makeStyles-summaryText-14 MuiTypography-body2"
           >
             Expanded
           </p>
         </div>
       </div>
       <div
-        className="makeStyles-stepSummary-12"
+        className="makeStyles-stepSummary-10"
       >
         <div
-          className="makeStyles-stepSummaryHeader-13"
+          className="makeStyles-stepSummaryHeader-11"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="button"
           tabIndex={0}
         >
           <div
-            className="MuiChip-root makeStyles-summaryChip-15 MuiChip-colorPrimary"
+            className="MuiChip-root makeStyles-summaryChip-13 MuiChip-colorPrimary"
             onKeyDown={[Function]}
             onKeyUp={[Function]}
           >
@@ -751,17 +751,17 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
           </h6>
         </div>
         <div
-          className="makeStyles-stepSummaryContent-14"
+          className="makeStyles-stepSummaryContent-12"
         >
           <p
-            className="MuiTypography-root makeStyles-summaryText-16 MuiTypography-body2"
+            className="MuiTypography-root makeStyles-summaryText-14 MuiTypography-body2"
           >
             3 files (12.1 KB uncompressed)
           </p>
         </div>
       </div>
       <div
-        className="makeStyles-stepSummary-12"
+        className="makeStyles-stepSummary-10"
       />
     </div>
   </div>
@@ -778,7 +778,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
       }
     >
       <div
-        className="MuiCardContent-root makeStyles-startFlex-11"
+        className="MuiCardContent-root makeStyles-startFlex-9"
       >
         <svg
           aria-hidden={true}
@@ -818,7 +818,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
       }
     >
       <div
-        className="MuiCardContent-root makeStyles-startFlex-11"
+        className="MuiCardContent-root makeStyles-startFlex-9"
       >
         <svg
           aria-hidden={true}

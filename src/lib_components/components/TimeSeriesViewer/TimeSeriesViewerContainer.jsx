@@ -4,7 +4,6 @@ import moment from 'moment';
 import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Card from '@material-ui/core/Card';
-import Chip from '@material-ui/core/Chip';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Link from '@material-ui/core/Link';
 import Tab from '@material-ui/core/Tab';
@@ -13,7 +12,6 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
 import Skeleton from '@material-ui/lab/Skeleton';
@@ -24,8 +22,8 @@ import SitesIcon from '@material-ui/icons/Place';
 import DateRangeIcon from '@material-ui/icons/DateRange';
 import VariablesIcon from '@material-ui/icons/Timeline';
 import AxesIcon from '@material-ui/icons/BorderInner';
-import InfoIcon from '@material-ui/icons/InfoOutlined';
 
+import ReleaseChip from '../Chip/ReleaseChip';
 import Theme, { COLORS } from '../Theme/Theme';
 
 import RouteService from '../../service/RouteService';
@@ -124,15 +122,12 @@ const useStyles = makeStyles((theme) => ({
     color: Theme.colors.GOLD[500],
   },
   releaseChip: {
-    color: Theme.colors.BROWN[500],
-    border: `1px solid ${Theme.colors.BROWN[500]}`,
-    backgroundColor: Theme.colors.BROWN[100],
+    color: Theme.colors.LIGHT_BLUE[600],
+    border: `1px solid ${Theme.colors.LIGHT_BLUE[600]}`,
+    backgroundColor: Theme.colors.LIGHT_BLUE[50],
     fontWeight: 600,
-    marginTop: Theme.spacing(0.5),
     cursor: 'help',
-    '& svg': {
-      margin: theme.spacing(0, -0.5, 0, 0.75),
-    },
+    marginTop: Theme.spacing(0.5),
   },
   startFlex: {
     display: 'flex',
@@ -267,7 +262,7 @@ export function TimeSeriesViewerSummary() {
   }
 
   // Release
-  const useReleaseChip = false;
+  const useReleaseChip = state.release !== null;
   let latestRelease = null;
   if (state.releases && state.releases.length) {
     const sortedReleases = [...state.releases].sort(
@@ -291,18 +286,16 @@ export function TimeSeriesViewerSummary() {
       </Typography>
     ) : (
       <div>
-        <Tooltip placement="bottom-start" title={releaseTooltip}>
-          <Chip
-            size="small"
-            label={(
-              <div className={classes.startFlex}>
-                {releaseChipLabel}
-                <InfoIcon fontSize="small" />
-              </div>
-            )}
-            className={classes.releaseChip}
-          />
-        </Tooltip>
+        <ReleaseChip
+          chipLabel={releaseChipLabel}
+          classes={{
+            chip: classes.releaseChip,
+          }}
+          tooltipTitle={releaseTooltip}
+          tooltipProps={{
+            placement: 'bottom-start',
+          }}
+        />
       </div>
     );
 

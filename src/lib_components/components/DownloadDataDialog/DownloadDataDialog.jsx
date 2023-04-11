@@ -25,7 +25,6 @@ import Typography from '@material-ui/core/Typography';
 import CircleStarIcon from '@material-ui/icons/Stars';
 import DownloadIcon from '@material-ui/icons/SaveAlt';
 import ErrorIcon from '@material-ui/icons/ErrorOutline';
-import InfoIcon from '@material-ui/icons/InfoOutlined';
 import LeftIcon from '@material-ui/icons/ChevronLeft';
 import RightIcon from '@material-ui/icons/ChevronRight';
 import WarningIcon from '@material-ui/icons/Warning';
@@ -37,6 +36,7 @@ import DataThemeIcon from '../DataThemeIcon/DataThemeIcon';
 import ExternalHost from '../ExternalHost/ExternalHost';
 import ExternalHostInfo from '../ExternalHostInfo/ExternalHostInfo';
 import NeonContext from '../NeonContext/NeonContext';
+import ReleaseChip from '../Chip/ReleaseChip';
 import Theme, { COLORS } from '../Theme/Theme';
 import NeonSignInButton from '../NeonSignInButton/NeonSignInButton';
 
@@ -66,17 +66,14 @@ const useStyles = (belowSm, belowSmMd) => makeStyles((theme) => ({
     margin: theme.spacing(-0.5, 1.5, 0, 0),
   },
   releaseChip: {
-    color: Theme.colors.BROWN[500],
-    border: `1px solid ${Theme.colors.BROWN[500]}`,
-    backgroundColor: Theme.colors.BROWN[100],
+    color: Theme.colors.LIGHT_BLUE[600],
+    border: `1px solid ${Theme.colors.LIGHT_BLUE[600]}`,
+    backgroundColor: Theme.colors.LIGHT_BLUE[50],
     fontWeight: 600,
     fontSize: '0.9rem',
     cursor: 'help',
-    '& svg': {
-      margin: theme.spacing(0, -0.5, 0, 0.75),
-    },
     height: belowSmMd && !belowSm ? 'auto' : undefined,
-    padding: belowSmMd && !belowSm ? '5px 0px' : undefined,
+    padding: theme.spacing(2, 1, 2, 1),
   },
   startFlex: {
     display: 'flex',
@@ -832,17 +829,20 @@ export default function DownloadDataDialog() {
             ))}
           </div>
           <div>
-            <Tooltip placement="bottom-start" title={releaseTooltip}>
-              <Chip
-                label={(
-                  <div className={classes.startFlex} style={releaseChipLabelStyle}>
-                    {releaseChipLabel}
-                    <InfoIcon fontSize="small" />
-                  </div>
-                )}
-                className={classes.releaseChip}
-              />
-            </Tooltip>
+            <ReleaseChip
+              chipLabel={(
+                <span style={releaseChipLabelStyle}>
+                  {releaseChipLabel}
+                </span>
+              )}
+              classes={{
+                chip: classes.releaseChip,
+              }}
+              tooltipTitle={releaseTooltip}
+              tooltipProps={{
+                placement: 'bottom-start',
+              }}
+            />
           </div>
         </Grid>
         <Grid item xs={12} sm={6} md={6} lg={4}>

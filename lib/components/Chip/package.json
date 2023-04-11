@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "name": "release-chip",
+  "main": "./ReleaseChip.tsx",
+  "module": "./ReleaseChip.tsx"
+}
