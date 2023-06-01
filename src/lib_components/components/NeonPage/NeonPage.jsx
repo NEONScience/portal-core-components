@@ -100,8 +100,8 @@ const isAtMaxScroll = () => {
 if (!window.gtmDataLayer) {
   window.gtmDataLayer = [];
 }
-if (!window.gtmDataLayer) {
-  window.gtmDataLayer = [];
+if (!window.gtmDataLayerGA4) {
+  window.gtmDataLayerGA4 = [];
 }
 
 // NOTE: because these are defined outside the ThemeProvider any theme vars must come directly from
