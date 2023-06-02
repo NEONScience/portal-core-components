@@ -4,6 +4,11 @@ import { exists, isStringNonEmpty } from '../util/typeUtil';
 
 const debouncedGaExploreSearchEvent = debounce((searchTerm: string): void => {
   // @ts-ignore
+  window.gtmDataLayer.push({
+    event: 'dataProductSearch',
+    dataProductSearchTerm: searchTerm,
+  });
+  // @ts-ignore
   window.gtag(
     'event',
     'explore_data_products_search',
@@ -13,6 +18,11 @@ const debouncedGaExploreSearchEvent = debounce((searchTerm: string): void => {
 
 const debouncedGaPrototypeDataSearchEvent = debounce((searchTerm: string): void => {
   // @ts-ignore
+  window.gtmDataLayer.push({
+    event: 'prototypeDatasetSearch',
+    datasetSearchTerm: searchTerm,
+  });
+  // @ts-ignore
   window.gtag(
     'event',
     'prototype_data_search',
@@ -21,6 +31,11 @@ const debouncedGaPrototypeDataSearchEvent = debounce((searchTerm: string): void 
 }, 1000);
 
 const gaPortalHomeSearchEvent = (searchTerm: string): void => {
+  // @ts-ignore
+  window.gtmDataLayer.push({
+    event: 'portalHomeSearch',
+    portalHomeSearchTerm: searchTerm,
+  });
   // @ts-ignore
   window.gtag(
     'event',
@@ -51,7 +66,7 @@ export interface IAnalyticsService {
 
 const checkValid = (searchTerm: string): boolean => {
   // @ts-ignore
-  if (!exists(window.gtmDataLayerGA4) || !exists(window.gtag)) {
+  if (!exists(window.gtmDataLayer) || !exists(window.gtmDataLayerGA4) || !exists(window.gtag)) {
     return false;
   }
   if (!isStringNonEmpty(searchTerm)) {
