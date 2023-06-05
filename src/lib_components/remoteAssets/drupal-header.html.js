@@ -80,7 +80,7 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/about/visionandmanagement" class="menu__link">Vision and Management</a>
+          <a href="https://www.neonscience.org/about/visionandmanagement" class="menu__link" data-drupal-link-system-path="node/10533">Vision and Management</a>
 
                   </li>
               <li  class="menu__item menu__item--expanded">
@@ -175,7 +175,7 @@ export default html = `
 
                   </li>
               <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/data-samples" class="menu__link">Data &amp; Samples</a>
+          <a href="https://www.neonscience.org/data-samples" class="menu__link" data-drupal-link-system-path="node/1">Data &amp; Samples</a>
 
           
                                         <button class='arrow visually-hidden focusable' tabindex='0' aria-label='Toggle Mega Menu'><svg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M9 1L5 5 1 1' stroke='#fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></button>
@@ -546,7 +546,7 @@ export default html = `
                       <ul  class="menu menu--main" data-depth="5">
 
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-collection/soils/soil-descriptions" class="menu__link">Soil Descriptions</a>
+          <a href="https://www.neonscience.org/data-collection/soils/soil-descriptions" class="menu__link" data-drupal-link-system-path="node/11685">Soil Descriptions</a>
 
                   </li>
       
@@ -697,7 +697,7 @@ export default html = `
 
                   </li>
               <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/field-sites" class="menu__link">Field Sites</a>
+          <a href="https://www.neonscience.org/field-sites" class="menu__link" data-drupal-link-system-path="node/11376">Field Sites</a>
 
           
                                         <button class='arrow visually-hidden focusable' tabindex='0' aria-label='Toggle Mega Menu'><svg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M9 1L5 5 1 1' stroke='#fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></button>
@@ -741,7 +741,7 @@ export default html = `
 
                   </li>
               <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/impact" title="Impact" class="menu__link">Impact</a>
+          <a href="https://www.neonscience.org/impact" title="Impact" class="menu__link" data-drupal-link-system-path="node/8795">Impact</a>
 
           
                                         <button class='arrow visually-hidden focusable' tabindex='0' aria-label='Toggle Mega Menu'><svg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M9 1L5 5 1 1' stroke='#fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></button>
@@ -1027,8 +1027,22 @@ export default html = `
           <a href="https://www.neonscience.org/get-involved/past-events" class="menu__link" data-drupal-link-system-path="node/10738">Past Events</a>
 
                   </li>
-              <li  class="menu__item">
+              <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/neon-ambassador-program" class="menu__link" data-drupal-link-system-path="node/11625">NEON Ambassador Program</a>
+
+          
+            
+                      <ul  class="menu menu--main" data-depth="2">
+
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/workshop-series-exploring-neon-derived-data-products" class="menu__link" data-drupal-link-system-path="node/12804">Exploring NEON-Derived Data Products Workshop Series</a>
+
+                  </li>
+      
+          </ul>
+  
+
+            
 
                   </li>
               <li  class="menu__item menu__item--expanded">

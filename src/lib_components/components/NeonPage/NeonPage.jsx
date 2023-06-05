@@ -100,9 +100,6 @@ const isAtMaxScroll = () => {
 if (!window.gtmDataLayer) {
   window.gtmDataLayer = [];
 }
-if (!window.gtmDataLayerGA4) {
-  window.gtmDataLayerGA4 = [];
-}
 
 // NOTE: because these are defined outside the ThemeProvider any theme vars must come directly from
 // the Theme import, unlike most other useStyles() instances where the Theme import is passed to the
