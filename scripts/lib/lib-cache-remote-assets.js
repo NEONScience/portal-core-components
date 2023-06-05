@@ -179,10 +179,10 @@ const sanitizeContent = (key, content) => {
     // We do this so that apps consuming portal-core-components don't need to configure html-loader
     case REMOTE_ASSETS_CACHE.DRUPAL_HEADER_HTML.KEY:
     case REMOTE_ASSETS_CACHE.DRUPAL_FOOTER_HTML.KEY:
-      // Ensure we always product a valid, backtick quoted JavaScript string
+      // Ensure we always produce a valid, backtick quoted JavaScript string
       // by escaping any backticks, ignore already escaped backticks,
       // and only matching on even number of backslashes prior to backtick
-      // as those would product strings that are not properly escaped.
+      // as those would produce strings that are not properly escaped.
       content = content.replace(/(?<!\\)(?:\\\\)*`/g, '\\`');
       return `let html;\nexport default html = \`${content}\`;`;
     default:
