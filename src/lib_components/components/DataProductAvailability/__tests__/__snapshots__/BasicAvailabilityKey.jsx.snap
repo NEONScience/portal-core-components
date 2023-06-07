@@ -159,7 +159,7 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
         width={194}
       >
         <rect
-          fill="url(#partialSelectionPattern)"
+          fill="#8abfec"
           height={10}
           width={30}
           x={0.5}

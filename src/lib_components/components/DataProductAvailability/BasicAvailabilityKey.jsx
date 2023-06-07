@@ -124,7 +124,7 @@ const SelectionLegendElement = (props) => {
   const labelY = SVG.LABEL_FONT_SIZE - SVG.CELL_PADDING + 2;
   const selectionSvgHeight = SVG.CELL_HEIGHT + 2;
   const label = variant === 'all' ? 'All sites selected' : 'Some sites selected';
-  const fill = variant === 'all' ? Theme.palette.primary.main : 'url(#partialSelectionPattern)';
+  const fill = variant === 'all' ? Theme.palette.primary.main : COLORS.LIGHT_BLUE[200];
   const description = variant === 'all' ? ALL_SELECTED_TITLE : SOME_SELECTED_TITLE;
   const selectionWidth = 30;
   const selectionLabelX = selectionWidth + (3 * SVG.CELL_PADDING);

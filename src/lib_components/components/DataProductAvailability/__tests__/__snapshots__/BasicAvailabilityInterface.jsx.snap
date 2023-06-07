@@ -850,7 +850,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
               width={194}
             >
               <rect
-                fill="url(#partialSelectionPattern)"
+                fill="#8abfec"
                 height={10}
                 width={30}
                 x={0.5}
@@ -1745,7 +1745,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
               width={194}
             >
               <rect
-                fill="url(#partialSelectionPattern)"
+                fill="#8abfec"
                 height={10}
                 width={30}
                 x={0.5}
@@ -2992,7 +2992,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
               width={194}
             >
               <rect
-                fill="url(#partialSelectionPattern)"
+                fill="#8abfec"
                 height={10}
                 width={30}
                 x={0.5}
@@ -4066,7 +4066,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
               width={194}
             >
               <rect
-                fill="url(#partialSelectionPattern)"
+                fill="#8abfec"
                 height={10}
                 width={30}
                 x={0.5}
