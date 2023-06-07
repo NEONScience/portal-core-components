@@ -3,6 +3,7 @@
 exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when selection is enabled 1`] = `
 <div
   className="makeStyles-legendContainer-1"
+  style={Object {}}
 >
   <div
     className="makeStyles-legendTitleContainer-4"
@@ -199,6 +200,7 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
 exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when selection is not enabled (default) 1`] = `
 <div
   className="makeStyles-legendContainer-1"
+  style={Object {}}
 >
   <div
     className="makeStyles-legendTitleContainer-4"

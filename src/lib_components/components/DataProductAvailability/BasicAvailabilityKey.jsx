@@ -55,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const CONTAINER_WIDTH_BREAKPOINT_XS_FLEX_COL = 250;
 const CONTAINER_WIDTH_BREAKPOINT_XS = 345;
 const CONTAINER_WIDTH_BREAKPOINT_XS_SELECTION = 200;
 const CONTAINER_WIDTH_BREAKPOINT_SM_SELECTION = 425;
@@ -271,14 +272,19 @@ const BasicAvailabilityKey = (props) => {
   const containerRef = useRef();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [componentWidth, setComponentWidth] = useState(0);
+  let atContainerWidthXsFlexCol = false;
   let atContainerWidthXs = false;
   let atContainerWidthSelectionXs = false;
   let atContainerWidthSelectionSm = false;
   if (componentWidth > 0) {
+    atContainerWidthXsFlexCol = (componentWidth <= CONTAINER_WIDTH_BREAKPOINT_XS_FLEX_COL);
     atContainerWidthXs = (componentWidth <= CONTAINER_WIDTH_BREAKPOINT_XS);
     atContainerWidthSelectionXs = (componentWidth <= CONTAINER_WIDTH_BREAKPOINT_XS_SELECTION);
     atContainerWidthSelectionSm = (componentWidth <= CONTAINER_WIDTH_BREAKPOINT_SM_SELECTION);
   }
+  const containerStyleProps = atContainerWidthXsFlexCol
+    ? { flexDirection: 'column' }
+    : {};
   const handleResizeCb = useCallback(() => {
     const container = containerRef.current;
     if (!container) { return; }
@@ -366,7 +372,11 @@ const BasicAvailabilityKey = (props) => {
 
   return (
     <>
-      <div ref={containerRef} className={classes.legendContainer}>
+      <div
+        ref={containerRef}
+        className={classes.legendContainer}
+        style={containerStyleProps}
+      >
         <div className={classes.legendTitleContainer}>
           <Typography variant="h6" className={classes.legendTitle}>
             Key:

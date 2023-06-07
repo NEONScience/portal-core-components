@@ -694,6 +694,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
     >
       <div
         className="makeStyles-legendContainer-25"
+        style={Object {}}
       >
         <div
           className="makeStyles-legendTitleContainer-28"
@@ -1589,6 +1590,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
     >
       <div
         className="makeStyles-legendContainer-25"
+        style={Object {}}
       >
         <div
           className="makeStyles-legendTitleContainer-28"
@@ -2025,6 +2027,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
     >
       <div
         className="makeStyles-legendContainer-25"
+        style={Object {}}
       >
         <div
           className="makeStyles-legendTitleContainer-28"
@@ -2836,6 +2839,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
     >
       <div
         className="makeStyles-legendContainer-25"
+        style={Object {}}
       >
         <div
           className="makeStyles-legendTitleContainer-28"
@@ -3910,6 +3914,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
     >
       <div
         className="makeStyles-legendContainer-25"
+        style={Object {}}
       >
         <div
           className="makeStyles-legendTitleContainer-28"
