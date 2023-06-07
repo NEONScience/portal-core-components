@@ -412,6 +412,7 @@ const parseProductData = (productData = {}) => {
         variables: { status: FETCH_STATUS.AWAITING_CALL, error: null, url: null },
       },
       availableMonths: site.availableMonths,
+      availableReleases: site.availableReleases,
       variables: new Set(),
       positions: {},
     };
@@ -1380,9 +1381,9 @@ const Provider = (props) => {
     if (state.status !== TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT) { return; }
     if (state.fetchProduct.status !== FETCH_STATUS.AWAITING_CALL) { return; }
     dispatch({ type: 'initFetchProductCalled' });
-    NeonGraphQL.getDataProductByCode(state.product.productCode, state.release).pipe(
+    NeonGraphQL.getDataProductByCode(state.product.productCode, state.release, true).pipe(
       map((response) => {
-        if (response.response && response.response.data && response.response.data.product) {
+        if (response?.response?.data?.product) {
           dispatch({
             type: 'initFetchProductSucceeded',
             productData: response.response.data.product,

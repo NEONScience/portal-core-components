@@ -362,7 +362,7 @@ const productData = {...};
           dateRange={dateRange}
           downloadDataContextUniqueId={2}
         >
-          <DataProductAvailability />
+          <DataProductAvailability delineateRelease />
         </DownloadDataContext.Provider>
       </ExampleBlock>
       <CodeBlock>

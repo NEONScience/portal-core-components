@@ -657,13 +657,6 @@ const BasicAvailabilityInterface = (props) => {
         md={mdWidth}
         style={{ display: 'flex', alignItems: 'center' }}
       >
-        <Typography
-          variant="h6"
-          className={classes.h6Small}
-          style={{ marginRight: Theme.spacing(1.5) }}
-        >
-          Key:
-        </Typography>
         <BasicAvailabilityKey
           orientation={currentView === 'products' ? 'horizontal' : ''}
           selectionEnabled={selectionEnabled}

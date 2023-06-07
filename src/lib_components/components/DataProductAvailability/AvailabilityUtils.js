@@ -19,16 +19,16 @@ export const VALID_ENHANCED_STATUSES = {
     description: 'Data have been collected and will be published after processing has completed',
   },
   available: {
-    title: 'Available',
-    description: 'Data have been published and are available for download',
+    title: 'Release Available',
+    description: 'Data have been published and released. Data are available for download',
   },
   'available-provisional': {
-    title: 'Provisional Available',
+    title: 'Provisional',
     description: 'Provisional data have been published and are available for download',
   },
   'mixed-available-provisional': {
-    title: 'Mixed Provisional Available',
-    description: 'Data are available for download. Some data are released and some data are provisional.',
+    title: 'Mixed',
+    description: 'Data have been published and are available for download. Some data are released and some data are provisional.',
   },
   delayed: {
     title: 'Delayed',

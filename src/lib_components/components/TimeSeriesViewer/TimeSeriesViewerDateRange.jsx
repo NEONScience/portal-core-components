@@ -16,6 +16,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import MomentUtils from '@date-io/moment';
 import moment from 'moment';
 
+import { SvgDefs } from '../DataProductAvailability/AvailabilitySvgComponents';
 import { SVG } from '../DataProductAvailability/AvailabilityUtils';
 import BasicAvailabilityGrid from '../DataProductAvailability/BasicAvailabilityGrid';
 import BasicAvailabilityKey from '../DataProductAvailability/BasicAvailabilityKey';
@@ -108,9 +109,26 @@ const TimeSeriesViewerDateRange = (props) => {
     },
   };
   selectedSites.forEach((siteCode) => {
+    let provAvailableMonths = [];
+    const avaReleases = state.product.sites[siteCode].availableReleases;
+    if (Array.isArray(avaReleases)) {
+      const provRelease = avaReleases.find((value) => value.release === 'PROVISIONAL');
+      if (provRelease) {
+        provAvailableMonths = provRelease.availableMonths;
+      }
+    }
     availabilityData.rows[siteCode] = {};
     state.product.sites[siteCode].availableMonths.forEach((month) => {
-      availabilityData.rows[siteCode][month] = 'available';
+      let status = 'available';
+      if (provAvailableMonths && (provAvailableMonths.length > 0)) {
+        if (provAvailableMonths.includes(month)) {
+          status = 'available-provisional';
+        }
+      }
+      if (!availabilityData.rows[siteCode][month]) {
+        availabilityData.rows[siteCode][month] = new Set();
+      }
+      availabilityData.rows[siteCode][month].add(status);
     });
   });
   const svgHeight = SVG.CELL_PADDING
@@ -269,6 +287,7 @@ const TimeSeriesViewerDateRange = (props) => {
         </div>
       </div>
       <div className={classes.optionContainer} style={{ minWidth: Theme.spacing(50) }}>
+        <SvgDefs />
         <Typography variant="h6" gutterBottom>Select by Data Product Availability</Typography>
         <FullWidthVisualization
           vizRef={svgRef}
@@ -280,7 +299,7 @@ const TimeSeriesViewerDateRange = (props) => {
             className={classes.svg}
           />
         </FullWidthVisualization>
-        <BasicAvailabilityKey style={{ flexGrow: 1 }} />
+        <BasicAvailabilityKey delineateRelease style={{ flexGrow: 1 }} />
       </div>
     </div>
   );

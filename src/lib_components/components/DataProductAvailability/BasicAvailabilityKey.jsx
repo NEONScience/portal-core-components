@@ -1,28 +1,51 @@
-import React from 'react';
+import React, {
+  useState,
+  useRef,
+  useLayoutEffect,
+  useCallback,
+} from 'react';
 import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
 
-import { SVG } from './AvailabilityUtils';
-import { CELL_ATTRS } from './AvailabilitySvgComponents';
+import CloseIcon from '@material-ui/icons/Close';
+import HelpIcon from '@material-ui/icons/HelpOutline';
+
+import { SVG, VALID_ENHANCED_STATUSES } from './AvailabilityUtils';
+import { JsxCell } from './AvailabilitySvgComponents';
 
 import Theme, { COLORS } from '../Theme/Theme';
+import { exists } from '../../util/typeUtil';
 
-const VERTICAL_STATUS_TYPES = ['tombstoned'];
-
-/**
-   Setup: CSS classes
-*/
 const useStyles = makeStyles((theme) => ({
   legendContainer: {
-    marginLeft: SVG.LABEL_WIDTH,
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    flexWrap: 'wrap',
     marginTop: theme.spacing(1),
+    width: '100%',
   },
-  legendSvg: {
-    display: 'inline-block',
-    marginRight: theme.spacing(1.5),
+  legendTitle: {
+    fontSize: '0.95rem',
+    display: 'inline-flex',
   },
-  legendText: {
+  legendTitleIcon: {
+    marginTop: theme.spacing(-0.25),
+  },
+  legendTitleContainer: {
+    margin: theme.spacing(-1, 1, 0.5, 0),
+  },
+  legendElement: {
+    margin: theme.spacing(0, 0, 0, 0),
+  },
+  legendElementText: {
     textAnchor: 'start',
     whiteSpace: 'pre',
     fontFamily: '"Cutive Mono","Lucida Console",Monaco,monospace',
@@ -32,313 +55,358 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-/**
-   Main Function
-*/
-export default function BasicAvailabilityKey(props) {
+const CONTAINER_WIDTH_BREAKPOINT_XS = 345;
+const CONTAINER_WIDTH_BREAKPOINT_XS_SELECTION = 200;
+const CONTAINER_WIDTH_BREAKPOINT_SM_SELECTION = 425;
+
+const ALL_SELECTED_TITLE = 'If the chart is presenting a roll-up (e.g. view by state) then all sites rolled into a given row are selected';
+const SOME_SELECTED_TITLE = 'If the chart is presenting a roll-up (e.g. view by state) then one or more but not all of the sites rolled into a given row are selected';
+
+const StatusLegendElement = (props) => {
   const classes = useStyles(Theme);
+  const { status, dialog } = props;
+  if (!exists(status) || !VALID_ENHANCED_STATUSES[status]) {
+    return null;
+  }
+  const statusSvgHeight = SVG.CELL_HEIGHT + 2;
+  const labelLetterWidth = 8;
+  const labelY = SVG.LABEL_FONT_SIZE - SVG.CELL_PADDING + 2;
+  const statusLabelX = SVG.CELL_WIDTH + (2 * SVG.CELL_PADDING);
+  const { title, description } = VALID_ENHANCED_STATUSES[status];
+  const statusSvgWidth = (title.length * labelLetterWidth) + statusLabelX;
+  return dialog ? (
+    <div style={{ marginBottom: Theme.spacing(2.5) }}>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <svg
+          width={Math.ceil(SVG.CELL_WIDTH * 1.25)}
+          height={Math.ceil(SVG.CELL_HEIGHT * 1.25)}
+          viewBox={`0 0 ${SVG.CELL_WIDTH} ${SVG.CELL_HEIGHT}`}
+          style={{ marginRight: Theme.spacing(1) }}
+        >
+          <JsxCell status={status} />
+        </svg>
+        <Typography variant="subtitle2" style={{ fontSize: '0.95rem', marginTop: '2px' }}>
+          {title}
+        </Typography>
+      </div>
+      <Typography variant="body2">{description}</Typography>
+    </div>
+  ) : (
+    <div className={classes.legendElement} title={description}>
+      <svg width={statusSvgWidth} height={statusSvgHeight}>
+        <JsxCell status={status} />
+        <text className={classes.legendElementText} x={statusLabelX} y={labelY}>
+          {title}
+        </text>
+      </svg>
+    </div>
+  );
+};
+
+StatusLegendElement.propTypes = {
+  status: PropTypes.oneOf(Object.keys(VALID_ENHANCED_STATUSES)),
+  dialog: PropTypes.bool,
+};
+
+StatusLegendElement.defaultProps = {
+  status: null,
+  dialog: false,
+};
+
+const SelectionLegendElement = (props) => {
+  const classes = useStyles(Theme);
+  const { variant, dialog } = props;
+  if (!['all', 'some'].includes(variant)) {
+    return null;
+  }
+  const statusSvgHeight = SVG.CELL_HEIGHT + 2;
+  const labelLetterWidth = 8;
+  const labelY = SVG.LABEL_FONT_SIZE - SVG.CELL_PADDING + 2;
+  const selectionSvgHeight = SVG.CELL_HEIGHT + 2;
+  const label = variant === 'all' ? 'All sites selected' : 'Some sites selected';
+  const fill = variant === 'all' ? Theme.palette.primary.main : 'url(#partialSelectionPattern)';
+  const description = variant === 'all' ? ALL_SELECTED_TITLE : SOME_SELECTED_TITLE;
+  const selectionWidth = 30;
+  const selectionLabelX = selectionWidth + (3 * SVG.CELL_PADDING);
+  const selectionSvgWidth = (label.length * labelLetterWidth) + selectionLabelX;
+  const handleAttribs = {
+    width: SVG.DATE_RANGE_HANDLE_WIDTH,
+    height: SVG.CELL_HEIGHT,
+    fill: COLORS.LIGHT_BLUE[300],
+    stroke: Theme.palette.primary.main,
+    strokeWidth: 1.5,
+  };
+  const graphic = (
+    <>
+      <rect x={0.5} y={1.5} width={selectionWidth} height={SVG.CELL_HEIGHT - 2} fill={fill} />
+      <rect x={0.5} y={0.5} {...handleAttribs} />
+      <rect x={selectionWidth - SVG.DATE_RANGE_HANDLE_WIDTH} y={0.5} {...handleAttribs} />
+    </>
+  );
+  return dialog ? (
+    <div style={{ marginBottom: Theme.spacing(2) }}>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <svg
+          width={Math.ceil(selectionWidth * 1.25)}
+          height={Math.ceil(selectionSvgHeight * 1.25)}
+          viewBox={`0 0 ${selectionWidth} ${selectionSvgHeight}`}
+          style={{ marginRight: Theme.spacing(1) }}
+        >
+          {graphic}
+        </svg>
+        <Typography variant="subtitle2" style={{ fontSize: '1.05rem' }}>{label}</Typography>
+      </div>
+      <Typography variant="body2">{description}</Typography>
+    </div>
+  ) : (
+    <div className={classes.legendElement} title={description}>
+      <svg width={selectionSvgWidth} height={statusSvgHeight}>
+        {graphic}
+        <text className={classes.legendElementText} x={selectionLabelX} y={labelY}>
+          {label}
+        </text>
+      </svg>
+    </div>
+  );
+};
+
+SelectionLegendElement.propTypes = {
+  variant: PropTypes.oneOf(['all', 'some']).isRequired,
+  dialog: PropTypes.bool,
+};
+
+SelectionLegendElement.defaultProps = {
+  dialog: false,
+};
+
+const LegendDialog = (props) => {
   const {
-    orientation,
+    dialogOpen,
+    setDialogOpen,
     selectionEnabled,
     delineateRelease,
     availabilityStatusType,
   } = props;
-
-  /**
-     Render: Cells (Vertical Orientation)
-  */
-  const renderVerticalCellLegend = () => {
-    const totalRows = delineateRelease ? 4 : 2;
-    const totalWidth = delineateRelease || VERTICAL_STATUS_TYPES.includes(availabilityStatusType)
-      ? 180
-      : 90;
-    const rowHeight = SVG.CELL_HEIGHT + (2 * SVG.CELL_PADDING);
-    const totalHeight = (rowHeight * totalRows) - SVG.CELL_PADDING;
-    const rowY = (row) => row * rowHeight;
-    const rowLabelY = (row) => rowY(row) + (SVG.LABEL_FONT_SIZE - SVG.CELL_PADDING + 1);
-    const cellOffset = SVG.CELL_WIDTH + (2 * SVG.CELL_PADDING);
-    const renderAvailabilityStatusCell = () => {
-      const tombstonedCell = CELL_ATTRS.tombstoned;
-      switch (availabilityStatusType) {
-        case 'tombstoned':
-          return (
+  return (
+    <Dialog
+      open={dialogOpen}
+      maxWidth="md"
+      onClose={() => setDialogOpen(false)}
+      aria-labelledby="availability-key-dialog-title"
+    >
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <DialogTitle id="availability-key-dialog-title">
+          <span style={{ fontSize: '1.4rem', fontWeight: '600' }}>
+            Data Availability Chart Key
+          </span>
+        </DialogTitle>
+        <IconButton
+          title="Close"
+          aria-label="Close"
+          onClick={() => setDialogOpen(false)}
+          style={{ marginRight: Theme.spacing(1) }}
+        >
+          <CloseIcon fontSize="inherit" />
+        </IconButton>
+      </div>
+      <DialogContent style={{ marginBottom: Theme.spacing(2) }}>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6}>
+            <StatusLegendElement status={availabilityStatusType} dialog />
+          </Grid>
+          {!delineateRelease ? null : (
+            <Grid item xs={12} sm={6}>
+              <StatusLegendElement status="available-provisional" dialog />
+            </Grid>
+          )}
+          <Grid item xs={12} sm={6}>
+            <StatusLegendElement status="not available" dialog />
+          </Grid>
+          {!delineateRelease ? null : (
+            <Grid item xs={12} sm={6}>
+              <StatusLegendElement status="mixed-available-provisional" dialog />
+            </Grid>
+          )}
+          {!selectionEnabled ? null : (
             <>
-              <rect
-                x={0.75}
-                y={rowY(0)}
-                width={SVG.CELL_WIDTH}
-                height={SVG.CELL_HEIGHT}
-                rx={SVG.CELL_RX}
-                fill={tombstonedCell.fill}
-              />
-              <text className={classes.legendText} x={cellOffset} y={rowLabelY(0)}>
-                No Longer Available
-              </text>
+              <Grid item xs={12} sm={6}>
+                <SelectionLegendElement variant="all" dialog />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <SelectionLegendElement variant="some" dialog />
+              </Grid>
             </>
-          );
-        case 'available':
-        default:
-          return (
-            <>
-              <rect
-                x={0.75}
-                y={rowY(0)}
-                width={SVG.CELL_WIDTH}
-                height={SVG.CELL_HEIGHT}
-                rx={SVG.CELL_RX}
-                fill={Theme.palette.secondary.main}
-              />
-              <text className={classes.legendText} x={cellOffset} y={rowLabelY(0)}>
-                Available
-              </text>
-            </>
-          );
-      }
-    };
-    const renderProvisionalCell = () => {
-      if (!delineateRelease) {
-        return null;
-      }
-      const provCell = CELL_ATTRS['available-provisional'];
-      return (
-        <>
-          <rect
-            x={0.75}
-            y={rowY(1)}
-            width={SVG.CELL_WIDTH}
-            height={SVG.CELL_HEIGHT}
-            rx={SVG.CELL_RX}
-            fill={provCell.fill}
-            stroke={provCell.stroke}
-            strokeWidth={provCell.strokeWidth}
-          />
-          <text className={classes.legendText} x={cellOffset} y={rowLabelY(1)}>
-            Provisional Available
-          </text>
-        </>
-      );
-    };
-    const renderMixedAvaProvisionalCell = () => {
-      if (!delineateRelease) {
-        return null;
-      }
-      const provCell = CELL_ATTRS['mixed-available-provisional'];
-      return (
-        <>
-          <rect
-            x={0.75}
-            y={rowY(2)}
-            width={SVG.CELL_WIDTH}
-            height={SVG.CELL_HEIGHT}
-            rx={SVG.CELL_RX}
-            fill={provCell.fill}
-            stroke={provCell.stroke}
-            strokeWidth={provCell.strokeWidth}
-          />
-          <text className={classes.legendText} x={cellOffset} y={rowLabelY(2)}>
-            Release and Provisional Available
-          </text>
-        </>
-      );
-    };
-    /* eslint-disable max-len */
-    return (
-      <svg width={totalWidth} height={totalHeight} className={classes.legendSvg}>
-        {renderAvailabilityStatusCell()}
-        {renderMixedAvaProvisionalCell()}
-        {renderProvisionalCell()}
-        <rect x={0.75} y={rowY(delineateRelease ? 3 : 1)} width={SVG.CELL_WIDTH} height={SVG.CELL_HEIGHT} rx={SVG.CELL_RX} fill={Theme.palette.grey[200]} />
-        <text className={classes.legendText} x={cellOffset} y={rowLabelY(delineateRelease ? 3 : 1)}>
-          No data
-        </text>
-      </svg>
-    );
-    /* eslint-enable max-len */
-  };
-
-  /**
-     Render: Cells (Horizontal Orientation)
-  */
-  const renderHorizontalCellLegend = () => {
-    const totalColumns = delineateRelease ? 4 : 2;
-    const columnWidth = SVG.CELL_WIDTH + (2 * SVG.CELL_PADDING) + 100;
-    const totalWidth = columnWidth * totalColumns;
-    const totalHeight = SVG.CELL_HEIGHT + SVG.CELL_PADDING;
-    const columnX = (col) => col * columnWidth;
-    const rowLabelY = (SVG.LABEL_FONT_SIZE - SVG.CELL_PADDING + 1);
-    const cellOffset = SVG.CELL_WIDTH + (2 * SVG.CELL_PADDING);
-    const renderAvailabilityStatusCell = () => {
-      const tombstonedCell = CELL_ATTRS.tombstoned;
-      switch (availabilityStatusType) {
-        case 'tombstoned':
-          return (
-            <>
-              <rect
-                x={columnX(0)}
-                y={0}
-                width={SVG.CELL_WIDTH}
-                height={SVG.CELL_HEIGHT}
-                rx={SVG.CELL_RX}
-                fill={tombstonedCell.fill}
-              />
-              <text className={classes.legendText} x={columnX(0) + cellOffset} y={rowLabelY}>
-                No Longer Available
-              </text>
-            </>
-          );
-        case 'available':
-        default:
-          return (
-            <>
-              <rect
-                x={columnX(0)}
-                y={0}
-                width={SVG.CELL_WIDTH}
-                height={SVG.CELL_HEIGHT}
-                rx={SVG.CELL_RX}
-                fill={Theme.palette.secondary.main}
-              />
-              <text className={classes.legendText} x={columnX(0) + cellOffset} y={rowLabelY}>
-                Available
-              </text>
-            </>
-          );
-      }
-    };
-    const renderProvisionalCell = () => {
-      if (!delineateRelease) {
-        return null;
-      }
-      const provCell = CELL_ATTRS['available-provisional'];
-      return (
-        <>
-          <rect
-            x={columnX(1)}
-            y={0.75}
-            width={SVG.CELL_WIDTH}
-            height={SVG.CELL_HEIGHT}
-            rx={SVG.CELL_RX}
-            fill={provCell.fill}
-            stroke={provCell.stroke}
-            strokeWidth={provCell.strokeWidth}
-          />
-          <text className={classes.legendText} x={columnX(1) + cellOffset} y={rowLabelY}>
-            Provisional
-          </text>
-        </>
-      );
-    };
-    const renderMixedAvaProvisionalCell = () => {
-      if (!delineateRelease) {
-        return null;
-      }
-      const provCell = CELL_ATTRS['mixed-available-provisional'];
-      return (
-        <>
-          <rect
-            x={columnX(2)}
-            y={0.75}
-            width={SVG.CELL_WIDTH}
-            height={SVG.CELL_HEIGHT}
-            rx={SVG.CELL_RX}
-            fill={provCell.fill}
-            stroke={provCell.stroke}
-            strokeWidth={provCell.strokeWidth}
-          />
-          <text className={classes.legendText} x={columnX(2) + cellOffset} y={rowLabelY}>
-            Release and Provisional
-          </text>
-        </>
-      );
-    };
-    /* eslint-disable max-len */
-    return (
-      <svg width={totalWidth} height={totalHeight} className={classes.legendSvg}>
-        {renderAvailabilityStatusCell()}
-        {renderMixedAvaProvisionalCell()}
-        {renderProvisionalCell()}
-        <rect x={columnX(delineateRelease ? 3 : 1)} y={0} width={SVG.CELL_WIDTH} height={SVG.CELL_HEIGHT} rx={SVG.CELL_RX} fill={Theme.palette.grey[200]} />
-        <text className={classes.legendText} x={columnX(delineateRelease ? 3 : 1) + cellOffset} y={rowLabelY}>
-          No data
-        </text>
-      </svg>
-    );
-    /* eslint-enable max-len */
-  };
-
-  /**
-     Render: Cell Legend
-  */
-  const renderCellLegend = (appliedOrientation) => {
-    const resultingOrientation = orientation === '' ? appliedOrientation : orientation;
-    if (resultingOrientation === 'horizontal') return renderHorizontalCellLegend();
-    return renderVerticalCellLegend();
-  };
-
-  /**
-     Render: Selection
-  */
-  const renderSelectionLegend = () => {
-    const totalRows = 2;
-    const rowHeight = SVG.CELL_HEIGHT + (2 * SVG.CELL_PADDING);
-    const totalHeight = (rowHeight * totalRows) - SVG.CELL_PADDING;
-    const rowY = (row) => row * rowHeight;
-    const rowLabelY = (row) => rowY(row) + (SVG.LABEL_FONT_SIZE - SVG.CELL_PADDING + 1);
-    const selectionWidth = 45;
-    const selectionLabelOffset = selectionWidth + (2 * SVG.CELL_PADDING);
-    const handleAttribs = {
-      width: SVG.DATE_RANGE_HANDLE_WIDTH,
-      height: SVG.CELL_HEIGHT,
-      fill: COLORS.LIGHT_BLUE[300],
-      stroke: Theme.palette.primary.main,
-      strokeWidth: 1.5,
-    };
-    /* eslint-disable max-len */
-    return (
-      <svg width="210" height={totalHeight} className={classes.legendSvg}>
-        <rect x={0.5} y={rowY(0) + 1.5} width={selectionWidth} height={SVG.CELL_HEIGHT - 2} fill={Theme.palette.primary.main} />
-        <rect x={0.5} y={rowY(0) + 0.5} {...handleAttribs} />
-        <rect x={selectionWidth - SVG.DATE_RANGE_HANDLE_WIDTH} y={rowY(0) + 0.5} {...handleAttribs} />
-        <text className={classes.legendText} x={selectionLabelOffset} y={rowLabelY(0)}>
-          All sites selected
-        </text>
-        <rect x={0.5} y={rowY(1) + 1.5} width={selectionWidth} height={SVG.CELL_HEIGHT - 2} fill={COLORS.LIGHT_BLUE[200]} />
-        <rect x={0.5} y={rowY(1) + 0.5} {...handleAttribs} />
-        <rect x={selectionWidth - SVG.DATE_RANGE_HANDLE_WIDTH} y={rowY(1) + 0.5} {...handleAttribs} />
-        <text className={classes.legendText} x={selectionLabelOffset} y={rowLabelY(1)}>
-          Some sites selected
-        </text>
-      </svg>
-    );
-    /* eslint-enable max-len */
-  };
-  const renderVerticalLegend = selectionEnabled
-    || delineateRelease
-    || VERTICAL_STATUS_TYPES.includes(availabilityStatusType);
-  return renderVerticalLegend ? (
-    <div className={classes.legendContainer}>
-      {renderCellLegend('vertical')}
-      {selectionEnabled ? (
-        renderSelectionLegend()
-      ) : null}
-    </div>
-  ) : (
-    <div className={classes.legendContainer}>
-      {renderCellLegend('horizontal')}
-    </div>
+          )}
+        </Grid>
+      </DialogContent>
+    </Dialog>
   );
-}
+};
 
-BasicAvailabilityKey.propTypes = {
-  orientation: PropTypes.string,
+LegendDialog.propTypes = {
+  dialogOpen: PropTypes.bool.isRequired,
+  setDialogOpen: PropTypes.func.isRequired,
   selectionEnabled: PropTypes.bool,
   delineateRelease: PropTypes.bool,
   availabilityStatusType: PropTypes.oneOf(['available', 'tombstoned']),
 };
 
-BasicAvailabilityKey.defaultProps = {
-  orientation: '',
+LegendDialog.defaultProps = {
   selectionEnabled: false,
   delineateRelease: false,
-  availabilityStatusType: null,
+  availabilityStatusType: 'available',
 };
+
+const BasicAvailabilityKey = (props) => {
+  const classes = useStyles(Theme);
+  const {
+    selectionEnabled,
+    delineateRelease,
+    availabilityStatusType,
+    dialogOnly,
+  } = props;
+  const appliedAvaStatusType = !exists(availabilityStatusType)
+    ? 'available'
+    : availabilityStatusType;
+  const containerRef = useRef();
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [componentWidth, setComponentWidth] = useState(0);
+  let atContainerWidthXs = false;
+  let atContainerWidthSelectionXs = false;
+  let atContainerWidthSelectionSm = false;
+  if (componentWidth > 0) {
+    atContainerWidthXs = (componentWidth <= CONTAINER_WIDTH_BREAKPOINT_XS);
+    atContainerWidthSelectionXs = (componentWidth <= CONTAINER_WIDTH_BREAKPOINT_XS_SELECTION);
+    atContainerWidthSelectionSm = (componentWidth <= CONTAINER_WIDTH_BREAKPOINT_SM_SELECTION);
+  }
+  const handleResizeCb = useCallback(() => {
+    const container = containerRef.current;
+    if (!container) { return; }
+    if (container.clientWidth === componentWidth) { return; }
+    setComponentWidth(container.clientWidth);
+  }, [containerRef, componentWidth, setComponentWidth]);
+  useLayoutEffect(() => {
+    const element = containerRef.current;
+    if (!element) { return () => {}; }
+    handleResizeCb();
+    if (typeof ResizeObserver !== 'function') {
+      window.addEventListener('resize', handleResizeCb);
+      return () => {
+        window.removeEventListener('resize', handleResizeCb);
+      };
+    }
+    let resizeObserver = new ResizeObserver(handleResizeCb);
+    resizeObserver.observe(element);
+    return () => {
+      if (!resizeObserver) { return; }
+      resizeObserver.disconnect();
+      resizeObserver = null;
+    };
+  }, [containerRef, handleResizeCb]);
+
+  const renderLegendItems = () => {
+    if (dialogOnly) return null;
+    if (selectionEnabled) {
+      return (
+        <>
+          <div>
+            <StatusLegendElement status={appliedAvaStatusType} dialog={false} />
+            {!delineateRelease ? null : (
+              <StatusLegendElement status="available-provisional" dialog={false} />
+            )}
+            <StatusLegendElement status="not available" dialog={false} />
+            {!delineateRelease ? null : (
+              <StatusLegendElement status="mixed-available-provisional" dialog={false} />
+            )}
+          </div>
+          {!selectionEnabled ? null : (
+            <div>
+              <SelectionLegendElement variant="all" dialog={false} />
+              <SelectionLegendElement variant="some" dialog={false} />
+            </div>
+          )}
+        </>
+      );
+    }
+    return (
+      <>
+        <div>
+          <StatusLegendElement status={appliedAvaStatusType} dialog={false} />
+          {!delineateRelease ? null : (
+            <StatusLegendElement status="available-provisional" dialog={false} />
+          )}
+        </div>
+        <div>
+          <StatusLegendElement status="not available" dialog={false} />
+          {!delineateRelease ? null : (
+            <StatusLegendElement status="mixed-available-provisional" dialog={false} />
+          )}
+        </div>
+      </>
+    );
+  };
+
+  const renderLegendItemsContainer = () => {
+    if (dialogOnly || atContainerWidthSelectionXs) return null;
+    if (selectionEnabled) {
+      if (atContainerWidthSelectionSm) {
+        // If at sm selection container width, wrap in containing div
+        // to display all statuses vertically in single row
+        return (<div>{renderLegendItems()}</div>);
+      }
+      return renderLegendItems();
+    }
+    // If at xs container width, wrap in containing div
+    // to display all statuses vertically in single row
+    if (atContainerWidthXs) {
+      return (<div>{renderLegendItems()}</div>);
+    }
+    return renderLegendItems();
+  };
+
+  return (
+    <>
+      <div ref={containerRef} className={classes.legendContainer}>
+        <div className={classes.legendTitleContainer}>
+          <Typography variant="h6" className={classes.legendTitle}>
+            Key:
+          </Typography>
+          <IconButton
+            size="small"
+            color="primary"
+            title="Help - Data Availability Chart Key"
+            aria-label="Help - Data Availability Chart Key"
+            onClick={() => setDialogOpen(true)}
+            className={classes.legendTitleIcon}
+          >
+            <HelpIcon fontSize="small" />
+          </IconButton>
+        </div>
+        {renderLegendItemsContainer()}
+      </div>
+      <LegendDialog
+        dialogOpen={dialogOpen}
+        setDialogOpen={setDialogOpen}
+        selectionEnabled={selectionEnabled}
+        delineateRelease={delineateRelease}
+        availabilityStatusType={appliedAvaStatusType}
+      />
+    </>
+  );
+};
+
+BasicAvailabilityKey.propTypes = {
+  selectionEnabled: PropTypes.bool,
+  delineateRelease: PropTypes.bool,
+  availabilityStatusType: PropTypes.oneOf(['available', 'tombstoned']),
+  dialogOnly: PropTypes.bool,
+};
+
+BasicAvailabilityKey.defaultProps = {
+  selectionEnabled: false,
+  delineateRelease: false,
+  availabilityStatusType: 'available',
+  dialogOnly: false,
+};
+
+export default BasicAvailabilityKey;

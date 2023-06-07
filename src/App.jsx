@@ -340,6 +340,7 @@ export default function App() {
     <NeonRouter>
       <NeonPage
         title="NEON Data Portal Core Components"
+        outerPageContainerMaxWidth="3000px"
         sidebarSubtitle={sidebarSubtitle}
         sidebarLinks={sidebarLinks}
         sidebarLinksAsStandaloneChildren
