@@ -22,6 +22,7 @@ import BasicAvailabilityGrid from '../DataProductAvailability/BasicAvailabilityG
 import BasicAvailabilityKey from '../DataProductAvailability/BasicAvailabilityKey';
 import FullWidthVisualization from '../FullWidthVisualization/FullWidthVisualization';
 import NeonContext from '../NeonContext/NeonContext';
+import ReleaseService from '../../service/ReleaseService';
 import Theme from '../Theme/Theme';
 
 import TimeSeriesViewerContext from './TimeSeriesViewerContext';
@@ -299,7 +300,10 @@ const TimeSeriesViewerDateRange = (props) => {
             className={classes.svg}
           />
         </FullWidthVisualization>
-        <BasicAvailabilityKey delineateRelease style={{ flexGrow: 1 }} />
+        <BasicAvailabilityKey
+          style={{ flexGrow: 1 }}
+          delineateRelease={ReleaseService.determineDelineateAvaRelease(state.release)}
+        />
       </div>
     </div>
   );
