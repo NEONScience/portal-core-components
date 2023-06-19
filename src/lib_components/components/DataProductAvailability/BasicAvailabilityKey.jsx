@@ -210,7 +210,7 @@ const LegendDialog = (props) => {
           <CloseIcon fontSize="inherit" />
         </IconButton>
       </div>
-      <DialogContent style={{ marginBottom: Theme.spacing(2) }}>
+      <DialogContent dividers>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             <StatusLegendElement status={availabilityStatusType} dialog />

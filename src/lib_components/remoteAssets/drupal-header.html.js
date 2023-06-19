@@ -28,7 +28,7 @@ export default html = `
   <div>
 
 <input data-drupal-selector="edit-openid-connect-client-auth0-login" type="submit" id="edit-openid-connect-client-auth0-login" name="auth0" value="Sign In" class="button js-form-submit form-submit button--search" />
-</div><input autocomplete="off" data-drupal-selector="form-8pvtlcfb6nnqrbnpmmfdtaqv3d8nrod7hhc20lnb2du" type="hidden" name="form_build_id" value="form-8pVTLcfb6NnQrBNPMmFDTAqV3D8NRod7HHc20lNB2DU" />
+</div><input autocomplete="off" data-drupal-selector="form-cl8piyacigjt2vuo9fc12hj15aciid-9ndua0s2h5by" type="hidden" name="form_build_id" value="form-cL8piyacIGJT2vUO9fc12hj15aCiId_9nduA0S2H5bY" />
 <input data-drupal-selector="edit-openid-connect-login-form" type="hidden" name="form_id" value="openid_connect_login_form" />
 
 </form>
@@ -1174,9 +1174,9 @@ export default html = `
 
         <label for="edit-title" class="visually-hidden">Search</label>
       </div>
-<div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper" id="edit-actions">
+<div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper" id="edit-actions--2">
 
-<input data-drupal-selector="edit-submit" type="submit" id="edit-submit" value="Search" class="button js-form-submit form-submit button--search" />
+<input data-drupal-selector="edit-submit" type="submit" id="edit-submit--2" value="Search" class="button js-form-submit form-submit button--search" />
 </div>
 
 </form>
@@ -1208,9 +1208,9 @@ export default html = `
 
         <label for="edit-title" class="visually-hidden">Search</label>
       </div>
-<div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper" id="edit-actions">
+<div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper" id="edit-actions--2">
 
-<input data-drupal-selector="edit-submit" type="submit" id="edit-submit" value="Search" class="button js-form-submit form-submit button--search" />
+<input data-drupal-selector="edit-submit" type="submit" id="edit-submit--2" value="Search" class="button js-form-submit form-submit button--search" />
 </div>
 
 </form>
