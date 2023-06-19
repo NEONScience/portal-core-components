@@ -543,6 +543,7 @@ exports[`DownloadStepForm Step sitesAndDateRange renders correctly 1`] = `
 <div
   ComponentPath="../../DataProductAvailability/DataProductAvailability"
   prop-data-selenium="download-data-dialog.step-form.sites-and-date-range"
+  prop-delineateRelease={true}
 />
 `;
 

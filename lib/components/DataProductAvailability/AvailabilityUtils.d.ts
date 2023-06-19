@@ -18,6 +18,10 @@ export const VALID_ENHANCED_STATUSES: {
         title: string;
         description: string;
     };
+    'mixed-available-provisional': {
+        title: string;
+        description: string;
+    };
     delayed: {
         title: string;
         description: string;
@@ -51,6 +55,7 @@ export const VALID_ENHANCED_STATUSES: {
         description: string;
     };
 };
+export function calcBasicRollupStatus(statuses: any): any;
 export function calcRollupStatus(statuses?: any[]): any;
 export namespace AvailabilityPropTypes {
     const basicSiteCodes: PropTypes.Requireable<(PropTypes.InferProps<{

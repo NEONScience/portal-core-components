@@ -16,13 +16,13 @@ exports[`DataProductAvailability - AvailabilitySvgComponents renders JsxCell cor
 exports[`DataProductAvailability - AvailabilitySvgComponents renders JsxCell correctly for every status JsxCell for status: available-provisional 1`] = `
 <rect
   fill="url(#availableProvisionalPattern)"
-  height="10.5px"
-  rx="1px"
+  height="10.85px"
+  rx="1.25px"
   stroke="#002c77"
-  strokeWidth="1.5px"
-  width="5.5px"
-  x={10.75}
-  y={20.75}
+  strokeWidth="1.15px"
+  width="5.85px"
+  x={10.6}
+  y={20.6}
 />
 `;
 
@@ -81,6 +81,19 @@ exports[`DataProductAvailability - AvailabilitySvgComponents renders JsxCell cor
 exports[`DataProductAvailability - AvailabilitySvgComponents renders JsxCell correctly for every status JsxCell for status: mixed some availability 1`] = `
 <rect
   fill="url(#mixedSomeAvailabilityPattern)"
+  height="11.2px"
+  rx="1.5px"
+  stroke="#002c77"
+  strokeWidth="0.8px"
+  width="6.2px"
+  x={10.4}
+  y={20.4}
+/>
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents renders JsxCell correctly for every status JsxCell for status: mixed-available-provisional 1`] = `
+<rect
+  fill="url(#mixedAvailableProvisionalPattern)"
   height="11.2px"
   rx="1.5px"
   stroke="#002c77"
@@ -177,11 +190,66 @@ exports[`DataProductAvailability - AvailabilitySvgComponents renders SvgDefs cor
         y={0}
       />
       <rect
-        fill="#c5c6d9"
+        fill="#e1e3ea"
         height={1.75}
         width={7}
         x={0}
         y={1.25}
+      />
+    </pattern>
+    <pattern
+      height={1}
+      id="mixedAvailableProvisionalPattern"
+      patternContentUnits="userSpaceOnUse"
+      patternUnits="objectBoundingBox"
+      width={1}
+      x={0}
+      y={0}
+    >
+      <polygon
+        fill="#e1e3ea"
+        fillOpacity={0.25}
+        points="0,0 0,1 1,1 1,0"
+      />
+      <line
+        stroke="#002c77"
+        strokeLinecap="square"
+        strokeWidth="1.00"
+        x1="3.46"
+        x2="7.00"
+        y1="0.00"
+        y2="3.54"
+      />
+      <line
+        stroke="#002c77"
+        strokeLinecap="square"
+        strokeWidth="1.00"
+        x1="0.00"
+        x2="7.00"
+        y1="0.07"
+        y2="7.07"
+      />
+      <line
+        stroke="#002c77"
+        strokeLinecap="square"
+        strokeWidth="1.00"
+        x1="0.00"
+        x2="7.00"
+        y1="3.61"
+        y2="10.61"
+      />
+      <line
+        stroke="#002c77"
+        strokeLinecap="square"
+        strokeWidth="1.00"
+        x1="0.00"
+        x2="4.85"
+        y1="7.15"
+        y2="12.00"
+      />
+      <polygon
+        fill="#002c77"
+        points="0,0 6,0 0,12"
       />
     </pattern>
     <pattern

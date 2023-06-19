@@ -28,7 +28,7 @@ export default html = `
   <div>
 
 <input data-drupal-selector="edit-openid-connect-client-auth0-login" type="submit" id="edit-openid-connect-client-auth0-login" name="auth0" value="Sign In" class="button js-form-submit form-submit button--search" />
-</div><input autocomplete="off" data-drupal-selector="form-b6-feqah5o7-arrcxwluhniv5yr-yrylqmy2khsj8tw" type="hidden" name="form_build_id" value="form-b6_feQaH5o7-ArRcxwLUhniv5Yr_YRYlqMy2KhSj8Tw" />
+</div><input autocomplete="off" data-drupal-selector="form-cl8piyacigjt2vuo9fc12hj15aciid-9ndua0s2h5by" type="hidden" name="form_build_id" value="form-cL8piyacIGJT2vUO9fc12hj15aCiId_9nduA0S2H5bY" />
 <input data-drupal-selector="edit-openid-connect-login-form" type="hidden" name="form_id" value="openid_connect_login_form" />
 
 </form>
@@ -81,6 +81,24 @@ export default html = `
                   </li>
               <li  class="menu__item">
           <a href="https://www.neonscience.org/about/visionandmanagement" class="menu__link" data-drupal-link-system-path="node/10533">Vision and Management</a>
+
+                  </li>
+              <li  class="menu__item menu__item--expanded">
+          <a href="https://www.neonscience.org/diversity-equity-inclusion-accessibility" class="menu__link" data-drupal-link-system-path="node/11556">Diversity, Equity, Inclusion, and Accessibility (DEIA)</a>
+
+          
+            
+                      <ul  class="menu menu--main" data-depth="2">
+
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/neon-code-conduct" class="menu__link" data-drupal-link-system-path="node/12759">Code of Conduct</a>
+
+                  </li>
+      
+          </ul>
+  
+
+            
 
                   </li>
               <li  class="menu__item menu__item--expanded">
@@ -612,6 +630,10 @@ export default html = `
           <a href="https://www.neonscience.org/data-samples/data-management/data-quality-program" class="menu__link" data-drupal-link-system-path="node/10299">Data Quality</a>
 
                   </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/data-samples/data-management/data-product-bundles" class="menu__link" data-drupal-link-system-path="node/12601">Data Product Bundles</a>
+
+                  </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases" class="menu__link" data-drupal-link-system-path="node/10559">Data Product Revisions and Releases</a>
 
@@ -1005,8 +1027,22 @@ export default html = `
           <a href="https://www.neonscience.org/get-involved/past-events" class="menu__link" data-drupal-link-system-path="node/10738">Past Events</a>
 
                   </li>
-              <li  class="menu__item">
+              <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/neon-ambassador-program" class="menu__link" data-drupal-link-system-path="node/11625">NEON Ambassador Program</a>
+
+          
+            
+                      <ul  class="menu menu--main" data-depth="2">
+
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/workshop-series-exploring-neon-derived-data-products" class="menu__link" data-drupal-link-system-path="node/12804">Exploring NEON-Derived Data Products Workshop Series</a>
+
+                  </li>
+      
+          </ul>
+  
+
+            
 
                   </li>
               <li  class="menu__item menu__item--expanded">
@@ -1060,10 +1096,6 @@ export default html = `
                   </li>
               <li  class="menu__item">
           <a href="https://www.neonscience.org/get-involved/work-opportunities/seasonal-fieldwork" class="menu__link" data-drupal-link-system-path="node/6131">Seasonal Fieldwork</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/get-involved/work-opportunities/postdoctoral-fellows" class="menu__link" data-drupal-link-system-path="node/8729">Postdoctoral Fellows</a>
 
                   </li>
               <li  class="menu__item menu__item--expanded">
@@ -1142,9 +1174,9 @@ export default html = `
 
         <label for="edit-title" class="visually-hidden">Search</label>
       </div>
-<div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper" id="edit-actions">
+<div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper" id="edit-actions--2">
 
-<input data-drupal-selector="edit-submit" type="submit" id="edit-submit" value="Search" class="button js-form-submit form-submit button--search" />
+<input data-drupal-selector="edit-submit" type="submit" id="edit-submit--2" value="Search" class="button js-form-submit form-submit button--search" />
 </div>
 
 </form>
@@ -1176,9 +1208,9 @@ export default html = `
 
         <label for="edit-title" class="visually-hidden">Search</label>
       </div>
-<div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper" id="edit-actions">
+<div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper" id="edit-actions--2">
 
-<input data-drupal-selector="edit-submit" type="submit" id="edit-submit" value="Search" class="button js-form-submit form-submit button--search" />
+<input data-drupal-selector="edit-submit" type="submit" id="edit-submit--2" value="Search" class="button js-form-submit form-submit button--search" />
 </div>
 
 </form>

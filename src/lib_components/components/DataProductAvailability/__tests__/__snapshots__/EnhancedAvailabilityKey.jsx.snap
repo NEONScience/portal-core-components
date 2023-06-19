@@ -64,11 +64,11 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
       className="makeStyles-keyElement-2"
       onClick={[Function]}
       role="button"
-      title="Data have been published and are available for download"
+      title="Data have been published and released. Data are available for download"
     >
       <svg
         height={14}
-        width={87}
+        width={151}
       >
         <rect
           fill="#002c77"
@@ -85,7 +85,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           x={15}
           y={9}
         >
-          Available
+          Release Available
         </text>
       </svg>
     </div>
@@ -449,11 +449,11 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
       className="makeStyles-keyElement-2"
       onClick={[Function]}
       role="button"
-      title="Data have been published and are available for download"
+      title="Data have been published and released. Data are available for download"
     >
       <svg
         height={14}
-        width={87}
+        width={151}
       >
         <rect
           fill="#002c77"
@@ -470,7 +470,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           x={15}
           y={9}
         >
-          Available
+          Release Available
         </text>
       </svg>
     </div>

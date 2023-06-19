@@ -46,6 +46,7 @@ import MaterialTableIcons from '../MaterialTableIcons/MaterialTableIcons';
 import SiteChip from '../SiteChip/SiteChip';
 import Theme, { COLORS } from '../Theme/Theme';
 
+import ReleaseService from '../../service/ReleaseService';
 import RouteService from '../../service/RouteService';
 import { formatBytes, MAX_POST_BODY_SIZE } from '../../util/manifestUtil';
 
@@ -154,6 +155,8 @@ export default function DownloadStepForm(props) {
     renderDownloadButton,
   } = props;
   const [state, dispatch] = DownloadDataContext.useDownloadDataState();
+  const { release } = state;
+  const delineateAvaRelease = ReleaseService.determineDelineateAvaRelease(release.value);
 
   // Effect to keep focus on the file name search field if it was the last filter updated
   useEffect(() => {
@@ -216,6 +219,7 @@ export default function DownloadStepForm(props) {
     sitesAndDateRange: () => (
       <DataProductAvailability
         data-selenium="download-data-dialog.step-form.sites-and-date-range"
+        delineateRelease={delineateAvaRelease}
       />
     ),
 

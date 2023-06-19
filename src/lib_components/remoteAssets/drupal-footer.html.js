@@ -66,6 +66,9 @@ export default html = `
           <li  class="menu__item">
         <a href="https://www.neonscience.org/get-involved/work-opportunities/careers" class="menu__link">Careers</a>
               </li>
+          <li  class="menu__item">
+        <a href="https://www.neonscience.org/neon-code-conduct" class="menu__link" data-drupal-link-system-path="node/12759">Code of Conduct</a>
+              </li>
         </ul>
   
 

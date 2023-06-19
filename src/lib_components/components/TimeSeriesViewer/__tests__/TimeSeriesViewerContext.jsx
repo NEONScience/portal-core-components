@@ -264,10 +264,12 @@ describe('TimeSeriesViewerContext', () => {
         ABBY: {
           ...cloneDeep(expectedInitialSite),
           availableMonths: ['2001-01', '2001-02'],
+          availableReleases: undefined,
         },
         BONA: {
           ...cloneDeep(expectedInitialSite),
           availableMonths: ['2001-05', '2001-07'],
+          availableReleases: undefined,
         },
       },
       continuousDateRange: [

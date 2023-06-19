@@ -57,11 +57,141 @@ HalfAndHalfPattern.propTypes = {
 HalfAndHalfPattern.defaultProps = {
   secondaryColor: '#ffffff',
 };
+const DiagHalfAndHalfPattern = (props) => {
+  const {
+    id,
+    color,
+    diagColor,
+    diagColorFillOpacity,
+    secondaryDiagColor,
+  } = props;
+  const cellW = SVG.CELL_WIDTH;
+  const cellH = SVG.CELL_HEIGHT;
+  // Extends the bounds of the applied rectangle dimensions
+  // when computing coordinates. This will overlay the
+  // computed coordinate such that they extend beyond the actual bounds
+  // of the rectangle, to account for squared stroke end of line points
+  // so that there's no gaps with a sufficiently heavy stroke width.
+  // Setting this to 0 will disable to the extension and map directly
+  // onto the bounding box of the rectangle.
+  // When divided by 2, should result in a rational number.
+  const extendBoundsPadding = 0;
+  const w = SVG.CELL_WIDTH + extendBoundsPadding;
+  const h = SVG.CELL_HEIGHT + extendBoundsPadding;
+  // Nudge the half fill color to prevent background from initial
+  // line from top right corner consuming the color at normal
+  // viewing levels. Ensures it looks visually appropriate for half color
+  // fill and half diag line pattern.
+  // Will be based on initDist
+  const nudgeDiagFill = 1;
+  const numLines = 4;
+  // Distance of the diagonal of the rectangle
+  const diagLengthRaw = Math.sqrt((cellW ** 2) + (cellH ** 2));
+  // Distance of initial line to top right corner, as opposed to starting
+  // at point (0, w)
+  const initDist = (diagLengthRaw * 0.18);
+  // Distance of furthest potential end line to bottom left corner
+  const trailingDist = (diagLengthRaw * 0.1);
+  // Distance of the diagonal of the rectangle
+  const diagLength = diagLengthRaw - (initDist + trailingDist);
+  // Distance between parallel lines
+  const diagLineGap = (diagLength / numLines);
+  const diagLineStrokeWidth = (diagLength * 0.1).toFixed(2);
+  // Compute the initial x coordinate of the first line based on specified
+  // initial distance from top right corner
+  // 45 degree lines means perpendicular line to top right corner
+  // c^2 = a^2 + b^2 where a == b
+  // Find the initial x coordinate (y == 0) to derive linear function from
+  const initXCoordDist = (w - Math.sqrt(2 * (initDist ** 2)));
+  const coords = [];
+  // eslint-disable-next-line no-plusplus
+  for (let i = 0; i < numLines; i++) {
+    // Vertical transformation of linear function scalar value
+    // As m == 1, use distance between parallel lines to compute hypotenuse
+    // of equilateral triangle which will be the vertical transformation scalar
+    // to apply to the linear function
+    // Then scale by line index for each line
+    const v = Math.sqrt(2 * (diagLineGap ** 2)) * i;
+    // Linear functions derived from initial X coordinate, known slope
+    const findY = (x) => ((x - initXCoordDist) + v);
+    const findX = (y) => ((y + initXCoordDist) - v);
+    let x1 = 0;
+    let y1 = findY(x1);
+    let x2 = w;
+    let y2 = findY(x2);
+    // Snap coordinates to bounding box
+    if (y1 < 0) {
+      x1 = findX(0);
+      y1 = 0;
+    }
+    if (y2 > h) {
+      x2 = findX(h);
+      y2 = h;
+    }
+    coords.push({
+      x1: (x1 - (extendBoundsPadding / 2)).toFixed(2),
+      y1: (y1 - (extendBoundsPadding / 2)).toFixed(2),
+      x2: (x2 - (extendBoundsPadding / 2)).toFixed(2),
+      y2: (y2 - (extendBoundsPadding / 2)).toFixed(2),
+    });
+  }
+  return (
+    <pattern
+      id={id}
+      x={0}
+      y={0}
+      width={1}
+      height={1}
+      patternUnits="objectBoundingBox"
+      patternContentUnits="userSpaceOnUse"
+    >
+      {/* Diagonal lines background */}
+      <polygon
+        points="0,0 0,1 1,1 1,0"
+        fill={secondaryDiagColor}
+        fillOpacity={diagColorFillOpacity}
+      />
+      {/* Diagonal lines, top right to bottom left, 45 degree angle (slope = 1) */}
+      {coords.map((coord, idx) => (
+        <line
+          // eslint-disable-next-line react/no-array-index-key
+          key={`DiagHalfAndHalfPatternKey-${coord.x1}-${coord.y1}-${coord.x2}-${coord.y2}-${idx}`}
+          x1={coord.x1}
+          y1={coord.y1}
+          x2={coord.x2}
+          y2={coord.y2}
+          stroke={diagColor}
+          strokeWidth={diagLineStrokeWidth}
+          strokeLinecap="square"
+        />
+      ))}
+      {/* Half solid fill foreground */}
+      <polygon points={`0,0 ${cellW - nudgeDiagFill},0 ${0},${cellH}`} fill={color} />
+    </pattern>
+  );
+};
+DiagHalfAndHalfPattern.propTypes = {
+  id: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  diagColor: PropTypes.string.isRequired,
+  diagColorFillOpacity: PropTypes.number.isRequired,
+  secondaryDiagColor: PropTypes.string,
+};
+DiagHalfAndHalfPattern.defaultProps = {
+  secondaryDiagColor: '#ffffff',
+};
 
 export const SvgDefs = () => (
   <svg width="0px" height="0px">
     <defs>
-      <DiagLinesPattern id="availableProvisionalPattern" color={COLORS.NEON_BLUE[700]} secondaryColor={COLORS.NEON_BLUE[100]} />
+      <DiagLinesPattern id="availableProvisionalPattern" color={COLORS.NEON_BLUE[700]} secondaryColor={COLORS.NEON_BLUE[50]} />
+      <DiagHalfAndHalfPattern
+        id="mixedAvailableProvisionalPattern"
+        color={COLORS.NEON_BLUE[700]}
+        diagColor={COLORS.NEON_BLUE[700]}
+        diagColorFillOpacity={0.25}
+        secondaryDiagColor={COLORS.NEON_BLUE[50]}
+      />
       <DiagLinesPattern id="beingProcessedPattern" color={COLORS.NEON_BLUE[700]} />
       <DiagLinesPattern id="delayedPattern" color={COLORS.GOLD[400]} />
       <DiagLinesPattern id="partialSelectionPattern" color={COLORS.LIGHT_BLUE[300]} secondaryColor={COLORS.LIGHT_BLUE[100]} />
@@ -80,6 +210,13 @@ const thinStrokeAttrs = {
   height: `${SVG.CELL_HEIGHT - 0.8}px`,
   rx: `${SVG.CELL_RX * 1.5}px`,
   nudge: 0.4,
+};
+const midStrokeAttrs = {
+  strokeWidth: '1.15px',
+  width: `${SVG.CELL_WIDTH - 1.15}px`,
+  height: `${SVG.CELL_HEIGHT - 1.15}px`,
+  rx: `${SVG.CELL_RX * 1.25}px`,
+  nudge: 0.60,
 };
 const fatStrokeAttrs = {
   strokeWidth: '1.5px',
@@ -104,7 +241,12 @@ export const CELL_ATTRS = {
   'available-provisional': {
     fill: 'url(#availableProvisionalPattern)',
     stroke: COLORS.NEON_BLUE[700],
-    ...fatStrokeAttrs,
+    ...midStrokeAttrs,
+  },
+  'mixed-available-provisional': {
+    fill: 'url(#mixedAvailableProvisionalPattern)',
+    stroke: COLORS.NEON_BLUE[700],
+    ...thinStrokeAttrs,
   },
   'not available': {
     fill: Theme.palette.grey[200],

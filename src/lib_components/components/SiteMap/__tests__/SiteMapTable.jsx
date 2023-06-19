@@ -137,7 +137,7 @@ describe('SiteMap - SiteMapTable', () => {
         { siteCode: 'BARR', domainCode: 'D12', elevation: 'n/a' },
         { siteName: 'Some "site"', domainCode: null, elevation: 45.678 },
       ];
-      const expectedHref = 'data:text/csv;charset=utf-8,siteCode,siteName,domainCode,elevation%20(m)%0AABBY,%22Abbey,%20Road%22,D16,123.46%0ABARR,,D12,%0A,%22Some%20%5C%22site%22%22,,45.68';
+      const expectedHref = 'data:text/csv;charset=utf-8,siteCode,siteName,domainCode,elevation%20(m)%0AABBY,%22Abbey,%20Road%22,D16,123.46%0ABARR,,D12,%0A,%22Some%20%22%22site%22%22%22,,45.68';
       const expectedFilename = 'NEON-SiteMap-Table.csv';
       exportCsv(columns, rows);
       expect(createElementMock).toHaveBeenCalled();

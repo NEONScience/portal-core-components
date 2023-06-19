@@ -7,8 +7,13 @@ import uniqueId from 'lodash/uniqueId';
 
 import Theme, { COLORS } from '../Theme/Theme';
 
-import { SVG, TIME, SVG_STYLES } from './AvailabilityUtils';
 import { CELL_ATTRS } from './AvailabilitySvgComponents';
+import {
+  SVG,
+  TIME,
+  SVG_STYLES,
+  calcBasicRollupStatus,
+} from './AvailabilityUtils';
 
 /**
  * BasicAvailabilityGrid generator function
@@ -590,7 +595,7 @@ export default function BasicAvailabilityGrid(config) {
       .each((rowKey, rowIdx, gNodes) => {
         const rowData = data.rows[rowKey];
         const getCellAttr = (month, attr) => {
-          const status = rowData[month];
+          const status = calcBasicRollupStatus(rowData[month]);
           return (
             !CELL_ATTRS[status]
               ? CELL_ATTRS['not available'][attr] || null

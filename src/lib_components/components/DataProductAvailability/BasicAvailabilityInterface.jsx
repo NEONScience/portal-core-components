@@ -413,10 +413,22 @@ const BasicAvailabilityInterface = (props) => {
           status = 'available-provisional';
         }
       }
-      views.summary.rows.summary[month] = status;
-      views.sites.rows[siteCode][month] = status;
-      views.states.rows[stateCode][month] = status;
-      views.domains.rows[domainCode][month] = status;
+      if (!views.summary.rows.summary[month]) {
+        views.summary.rows.summary[month] = new Set();
+      }
+      if (!views.sites.rows[siteCode][month]) {
+        views.sites.rows[siteCode][month] = new Set();
+      }
+      if (!views.states.rows[stateCode][month]) {
+        views.states.rows[stateCode][month] = new Set();
+      }
+      if (!views.domains.rows[domainCode][month]) {
+        views.domains.rows[domainCode][month] = new Set();
+      }
+      views.summary.rows.summary[month].add(status);
+      views.sites.rows[siteCode][month].add(status);
+      views.states.rows[stateCode][month].add(status);
+      views.domains.rows[domainCode][month].add(status);
     });
   });
   dataProducts.forEach((product) => {
@@ -436,7 +448,10 @@ const BasicAvailabilityInterface = (props) => {
           status = 'available-provisional';
         }
       }
-      views.products.rows[dataProductCode][month] = status;
+      if (!views.products.rows[dataProductCode][month]) {
+        views.products.rows[dataProductCode][month] = new Set();
+      }
+      views.products.rows[dataProductCode][month].add(status);
     });
   });
   if (!downloadContextIsActive) {
@@ -642,13 +657,6 @@ const BasicAvailabilityInterface = (props) => {
         md={mdWidth}
         style={{ display: 'flex', alignItems: 'center' }}
       >
-        <Typography
-          variant="h6"
-          className={classes.h6Small}
-          style={{ marginRight: Theme.spacing(1.5) }}
-        >
-          Key:
-        </Typography>
         <BasicAvailabilityKey
           orientation={currentView === 'products' ? 'horizontal' : ''}
           selectionEnabled={selectionEnabled}

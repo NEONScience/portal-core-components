@@ -55,6 +55,13 @@ export interface IReleaseService {
    * @return The transformed release like representation
    */
   transformDoiStatusRelease: (doiStatus: Nullable<DataProductDoiStatus>) => Nullable<IReleaseLike>;
+  /**
+   * Determines if the release tag indicates that the data availability
+   * chart should delineate release data
+   * @param releaseTag The tag to check against
+   * @returns True if the release should be delineated
+   */
+  determineDelineateAvaRelease: (releaseTag: Nullable<string>) => boolean;
 }
 
 const ReleaseService: IReleaseService = {
@@ -184,6 +191,11 @@ const ReleaseService: IReleaseService = {
     };
     return transformed as IReleaseLike;
   },
+  determineDelineateAvaRelease: (releaseTag: Nullable<string>): boolean => (
+    !isStringNonEmpty(releaseTag)
+      || (releaseTag === LATEST_AND_PROVISIONAL)
+      || ReleaseService.isLatestNonProv(releaseTag as string)
+  ),
 };
 
 export default ReleaseService;
