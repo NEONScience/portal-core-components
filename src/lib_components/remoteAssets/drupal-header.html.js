@@ -28,7 +28,7 @@ export default html = `
   <div>
 
 <input data-drupal-selector="edit-openid-connect-client-auth0-login" type="submit" id="edit-openid-connect-client-auth0-login" name="auth0" value="Sign In" class="button js-form-submit form-submit button--search" />
-</div><input autocomplete="off" data-drupal-selector="form-cl8piyacigjt2vuo9fc12hj15aciid-9ndua0s2h5by" type="hidden" name="form_build_id" value="form-cL8piyacIGJT2vUO9fc12hj15aCiId_9nduA0S2H5bY" />
+</div><input autocomplete="off" data-drupal-selector="form-3w83tcxfvhiajgqebkgkb059eoisclswcrqslqfsea8" type="hidden" name="form_build_id" value="form-3w83TcXFVhiAjgQEBKGkB059EoiscLsWcrQSLqFseA8" />
 <input data-drupal-selector="edit-openid-connect-login-form" type="hidden" name="form_id" value="openid_connect_login_form" />
 
 </form>
@@ -80,7 +80,7 @@ export default html = `
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/about/visionandmanagement" class="menu__link" data-drupal-link-system-path="node/10533">Vision and Management</a>
+          <a href="https://www.neonscience.org/about/visionandmanagement" class="menu__link">Vision and Management</a>
 
                   </li>
               <li  class="menu__item menu__item--expanded">
@@ -175,7 +175,7 @@ export default html = `
 
                   </li>
               <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/data-samples" class="menu__link" data-drupal-link-system-path="node/1">Data &amp; Samples</a>
+          <a href="https://www.neonscience.org/data-samples" class="menu__link">Data &amp; Samples</a>
 
           
                                         <button class='arrow visually-hidden focusable' tabindex='0' aria-label='Toggle Mega Menu'><svg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M9 1L5 5 1 1' stroke='#fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></button>
@@ -218,6 +218,40 @@ export default html = `
                   </li>
               <li  class="menu__item">
           <a href="https://data.neonscience.org/web/external-lab-ingest" class="menu__link">External Lab Data Ingest (restricted)</a>
+
+                  </li>
+      
+          </ul>
+  
+
+            
+
+                  </li>
+              <li  class="menu__item menu__item--expanded">
+          <a href="https://www.neonscience.org/data-samples/data-themes" class="menu__link" data-drupal-link-system-path="node/12907">Data Themes</a>
+
+          
+            
+                      <ul  class="menu menu--main" data-depth="2">
+
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/data-samples/data-themes/atmosphere-data-theme" class="menu__link" data-drupal-link-system-path="node/12904">Atmosphere</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/data-samples/data-themes/biogeochemistry-data-theme" class="menu__link" data-drupal-link-system-path="node/12902">Biogeochemistry</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/data-samples/data-themes/ecohydrology-data-theme" class="menu__link" data-drupal-link-system-path="node/12901">Ecohydrology</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/data-samples/data-themes/land-cover-and-processes-data-theme" class="menu__link" data-drupal-link-system-path="node/12900">Land Cover and Processes</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/data-samples/data-themes/organismal-data-theme" class="menu__link" data-drupal-link-system-path="node/12905">Organisms, Populations, and Communities</a>
 
                   </li>
       
@@ -546,7 +580,7 @@ export default html = `
                       <ul  class="menu menu--main" data-depth="5">
 
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-collection/soils/soil-descriptions" class="menu__link" data-drupal-link-system-path="node/11685">Soil Descriptions</a>
+          <a href="https://www.neonscience.org/data-collection/soils/soil-descriptions" class="menu__link">Soil Descriptions</a>
 
                   </li>
       
@@ -697,7 +731,7 @@ export default html = `
 
                   </li>
               <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/field-sites" class="menu__link" data-drupal-link-system-path="node/11376">Field Sites</a>
+          <a href="https://www.neonscience.org/field-sites" class="menu__link">Field Sites</a>
 
           
                                         <button class='arrow visually-hidden focusable' tabindex='0' aria-label='Toggle Mega Menu'><svg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M9 1L5 5 1 1' stroke='#fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></button>
@@ -741,7 +775,7 @@ export default html = `
 
                   </li>
               <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/impact" title="Impact" class="menu__link" data-drupal-link-system-path="node/8795">Impact</a>
+          <a href="https://www.neonscience.org/impact" title="Impact" class="menu__link">Impact</a>
 
           
                                         <button class='arrow visually-hidden focusable' tabindex='0' aria-label='Toggle Mega Menu'><svg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M9 1L5 5 1 1' stroke='#fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></button>
@@ -1079,8 +1113,22 @@ export default html = `
           <a href="https://www.neonscience.org/get-involved/engagement" class="menu__link" data-drupal-link-system-path="node/10556">Community Engagement</a>
 
                   </li>
-              <li  class="menu__item">
+              <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/science-seminars-and-data-skills-webinars" class="menu__link" data-drupal-link-system-path="node/12373">Science Seminars and Data Skills Webinars</a>
+
+          
+            
+                      <ul  class="menu menu--main" data-depth="2">
+
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/past-years-science-seminars-and-data-skills-webinars" class="menu__link" data-drupal-link-system-path="node/12997">Past Years</a>
+
+                  </li>
+      
+          </ul>
+  
+
+            
 
                   </li>
               <li  class="menu__item menu__item--expanded">
@@ -1174,9 +1222,9 @@ export default html = `
 
         <label for="edit-title" class="visually-hidden">Search</label>
       </div>
-<div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper" id="edit-actions--2">
+<div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper" id="edit-actions">
 
-<input data-drupal-selector="edit-submit" type="submit" id="edit-submit--2" value="Search" class="button js-form-submit form-submit button--search" />
+<input data-drupal-selector="edit-submit" type="submit" id="edit-submit" value="Search" class="button js-form-submit form-submit button--search" />
 </div>
 
 </form>
@@ -1208,9 +1256,9 @@ export default html = `
 
         <label for="edit-title" class="visually-hidden">Search</label>
       </div>
-<div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper" id="edit-actions--2">
+<div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper" id="edit-actions">
 
-<input data-drupal-selector="edit-submit" type="submit" id="edit-submit--2" value="Search" class="button js-form-submit form-submit button--search" />
+<input data-drupal-selector="edit-submit" type="submit" id="edit-submit" value="Search" class="button js-form-submit form-submit button--search" />
 </div>
 
 </form>

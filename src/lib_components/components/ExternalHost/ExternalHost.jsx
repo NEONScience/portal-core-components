@@ -120,6 +120,18 @@ const externalProducts = {
       { query: 'FSHN', title: 'Fish sequences DNA barcode' },
     ],
   },
+  'DP2.00006.001': {
+    host: 'AMERIFLUX',
+    allowNoAvailability: true,
+  },
+  'DP2.00020.001': {
+    host: 'AMERIFLUX',
+    allowNoAvailability: true,
+  },
+  'DP2.00023.001': {
+    host: 'AMERIFLUX',
+    allowNoAvailability: true,
+  },
   'DP4.00002.001': {
     host: 'AMERIFLUX',
   },
@@ -314,11 +326,16 @@ const getByProductCode = (productCode = '') => (
   externalProducts[productCode] ? externalHosts[externalProducts[productCode].host] : null
 );
 
+const getProductSpecificInfo = (productCode = '') => (
+  externalProducts[productCode] ? externalProducts[productCode] : null
+);
+
 const ExternalHost = {
   HOST_TYPES,
   LINK_TYPES,
   getByHostId,
   getByProductCode,
+  getProductSpecificInfo,
   renderExternalHostLink,
 };
 

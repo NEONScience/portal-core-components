@@ -49,6 +49,7 @@ import Theme, { COLORS } from '../Theme/Theme';
 import ReleaseService from '../../service/ReleaseService';
 import RouteService from '../../service/RouteService';
 import { formatBytes, MAX_POST_BODY_SIZE } from '../../util/manifestUtil';
+import { exists, existsNonEmpty } from '../../util/typeUtil';
 
 const useStyles = makeStyles((theme) => ({
   copyButton: {
@@ -627,24 +628,51 @@ export default function DownloadStepForm(props) {
       if (!externalHost) { return null; }
       const hostLink = externalHost.renderLink(state.productData.productCode);
       const availableSiteCodes = (state.productData.siteCodes || []).map((site) => site.siteCode);
+      const externalHostProduct = ExternalHost.getProductSpecificInfo(
+        state.productData.productCode,
+      );
+      const allowNoAvailability = exists(externalHostProduct)
+        && (externalHostProduct.allowNoAvailability === true);
+      const noData = !existsNonEmpty(availableSiteCodes);
+      const noLinks = allowNoAvailability && noData;
+      let blurb;
+      if (noLinks) {
+        blurb = (
+          <>
+            {/* eslint-disable react/jsx-one-expression-per-line */}
+            Data for this product is not currently available for download through
+            the NEON Data Portal. Please use this link to access data for
+            this product for a particular site from {hostLink}.
+            {/* eslint-enable react/jsx-one-expression-per-line */}
+          </>
+        );
+      } else {
+        blurb = (
+          <>
+            {/* eslint-disable react/jsx-one-expression-per-line */}
+            Data for this product is not currently available for download through
+            the NEON Data Portal. Please use the links below to access data for
+            this product for a particular site from the {hostLink}.
+            {/* eslint-enable react/jsx-one-expression-per-line */}
+          </>
+        );
+      }
       return (
         <div data-selenium={`download-data-dialog.step-form.external-links.${externalHost.id.toLowerCase()}`}>
           <InfoMessageCard
             title="External Host"
             messageContent={(
               <Typography variant="subtitle2">
-                {/* eslint-disable react/jsx-one-expression-per-line */}
-                Data for this product is not currently available for download through
-                the NEON Data Portal. Please use the links below to access data for
-                this product for a particular site from the {hostLink}.
-                {/* eslint-enable react/jsx-one-expression-per-line */}
+                {blurb}
               </Typography>
             )}
           />
-          <ExternalHostProductSpecificLinks
-            productCode={state.productData.productCode}
-            siteCodes={availableSiteCodes}
-          />
+          {noLinks ? null : (
+            <ExternalHostProductSpecificLinks
+              productCode={state.productData.productCode}
+              siteCodes={availableSiteCodes}
+            />
+          )}
         </div>
       );
     },

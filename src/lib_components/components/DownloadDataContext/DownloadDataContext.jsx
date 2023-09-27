@@ -39,6 +39,7 @@ import makeStateStorage from '../../service/StateStorageService';
 import NeonSignInButtonState from '../NeonSignInButton/NeonSignInButtonState';
 // eslint-disable-next-line import/no-cycle
 import { convertStateForStorage, convertAOPInitialState } from './StateStorageConverter';
+import { exists, existsNonEmpty } from '../../util/typeUtil';
 
 const ALL_POSSIBLE_VALID_DATE_RANGE = ['2010-01', moment().format('YYYY-MM')];
 const ALL_POSSIBLE_VALID_DOCUMENTATION = ['include', 'exclude'];
@@ -195,11 +196,23 @@ const S3_PATTERN = {
 
 // VALIDATOR FUNCTIONS
 // Naive check, replace with a more robust JSON schema check
-const productDataIsValid = (productData) => (
-  typeof productData === 'object' && productData !== null
-  && typeof productData.productName === 'string'
-  && Array.isArray(productData.siteCodes)
-);
+const productDataIsValid = (productData) => {
+  if ((typeof productData !== 'object')
+      || (productData === null)
+      || (typeof productData.productName !== 'string')) {
+    return false;
+  }
+  const hasSiteCodes = Array.isArray(productData.siteCodes);
+  if (!hasSiteCodes) {
+    const externalHost = ExternalHost.getByProductCode(productData.productCode);
+    if (exists(externalHost)) {
+      const externalHostProduct = ExternalHost.getProductSpecificInfo(productData.productCode);
+      return exists(externalHostProduct)
+        && (externalHostProduct.allowNoAvailability === true);
+    }
+  }
+  return hasSiteCodes;
+};
 
 const yearMonthIsValid = (yearMonth = '') => {
   if (typeof yearMonth !== 'string') { return false; }
@@ -399,18 +412,17 @@ const getInitialStateFromProps = (props) => {
   let fromAOPManifest = false;
   let fromExternalHost = false;
   const externalHost = ExternalHost.getByProductCode(productData.productCode);
+  const externalHostProduct = ExternalHost.getProductSpecificInfo(productData.productCode);
   if (externalHost) {
-    switch (externalHost.hostType) {
-      case 'EXCLUSIVE_DATA':
-        fromManifest = false;
-        fromExternalHost = true;
-        requiredSteps = [
-          { key: 'externalExclusive', isComplete: null },
-        ];
-        break;
-      default:
-        fromExternalHost = true;
-        break;
+    fromExternalHost = true;
+    const allowNoAvailability = (externalHostProduct.allowNoAvailability === true);
+    const useExternalExclusiveData = (externalHost.hostType === ExternalHost.HOST_TYPES.EXCLUSIVE_DATA)
+      || (allowNoAvailability && !existsNonEmpty(productData.siteCodes));
+    if (useExternalExclusiveData) {
+      fromManifest = false;
+      requiredSteps = [
+        { key: 'externalExclusive', isComplete: null },
+      ];
     }
   } else if (isAOPPipeline) {
     fromManifest = false;
