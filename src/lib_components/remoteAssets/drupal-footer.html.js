@@ -52,16 +52,16 @@ export default html = `
         <a href="https://www.neonscience.org/user/login" title="My Account" class="menu__link" data-drupal-link-system-path="user/login">My Account</a>
               </li>
           <li  class="menu__item">
-        <a href="https://www.neonscience.org/about" title="About Us" class="menu__link">About Us</a>
+        <a href="https://www.neonscience.org/about" title="About Us" class="menu__link" data-drupal-link-system-path="node/8793">About Us</a>
               </li>
           <li  class="menu__item">
         <a href="https://www.neonscience.org/impact/newsroom" class="menu__link" data-drupal-link-system-path="node/10890">Newsroom</a>
               </li>
           <li  class="menu__item">
-        <a href="https://www.neonscience.org/about/contact-us" title="Contact Us" class="menu__link">Contact Us</a>
+        <a href="https://www.neonscience.org/about/contact-us" title="Contact Us" class="menu__link" data-drupal-link-system-path="node/24">Contact Us</a>
               </li>
           <li  class="menu__item">
-        <a href="https://www.neonscience.org/terms-use" title="Terms &amp; Conditions" class="menu__link">Terms &amp; Conditions</a>
+        <a href="https://www.neonscience.org/terms-use" title="Terms &amp; Conditions" class="menu__link" data-drupal-link-system-path="node/31">Terms &amp; Conditions</a>
               </li>
           <li  class="menu__item">
         <a href="https://www.neonscience.org/get-involved/work-opportunities/careers" class="menu__link">Careers</a>
