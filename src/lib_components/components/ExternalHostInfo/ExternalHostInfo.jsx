@@ -14,6 +14,7 @@ import InfoMessageCard from '../Card/InfoMessageCard';
 import ExternalHost from '../ExternalHost/ExternalHost';
 import ExternalHostProductSpecificLinks from '../ExternalHostProductSpecificLinks/ExternalHostProductSpecificLinks';
 import Theme from '../Theme/Theme';
+import { existsNonEmpty } from '../../util/typeUtil';
 
 const useStyles = makeStyles((theme) => ({
   startFlex: {
@@ -38,6 +39,7 @@ const ExternalHostInfo = (props) => {
   const [expanded, setExpanded] = useState(!expandable);
 
   const externalHost = ExternalHost.getByProductCode(productCode);
+  const externalHostProduct = ExternalHost.getProductSpecificInfo(productCode);
   if (!externalHost) { return null; }
 
   // Not only _should_ the info have specific links (links in addition to the top-level
@@ -46,6 +48,10 @@ const ExternalHostInfo = (props) => {
     externalHost.linkType === ExternalHost.LINK_TYPES.BY_PRODUCT
       && externalHost.getProductLinks(productCode).length
   ) || externalHost.linkType === ExternalHost.LINK_TYPES.BY_SITE;
+
+  const allowNoLinks = hasSpecificLinks
+    && (externalHostProduct.allowNoAvailability === true)
+    && !existsNonEmpty(siteCodes);
 
   // Remaining setup
   const externalGeneralLink = externalHost.renderLink(productCode);
@@ -66,7 +72,8 @@ const ExternalHostInfo = (props) => {
       </>
     );
   }
-  if (externalHost.hostType === ExternalHost.HOST_TYPES.EXCLUSIVE_DATA) {
+  if ((externalHost.hostType === ExternalHost.HOST_TYPES.EXCLUSIVE_DATA)
+      || allowNoLinks) {
     blurb = (
       <>
         {`${dataVariety} for this product are only available from`}
@@ -99,7 +106,7 @@ const ExternalHostInfo = (props) => {
               <Typography variant="subtitle2" style={{ flexGrow: 1 }}>
                 {blurb}
               </Typography>
-              {hasSpecificLinks && expandable ? (
+              {hasSpecificLinks && expandable && !allowNoLinks ? (
                 <Tooltip title={expandTitle}>
                   <IconButton
                     aria-label={expandTitle}
@@ -112,7 +119,7 @@ const ExternalHostInfo = (props) => {
               ) : null}
             </div>
             <div
-              style={{ display: hasSpecificLinks && expanded ? 'block' : 'none' }}
+              style={{ display: hasSpecificLinks && expanded && !allowNoLinks ? 'block' : 'none' }}
             >
               <ExternalHostProductSpecificLinks productCode={productCode} siteCodes={siteCodes} />
             </div>

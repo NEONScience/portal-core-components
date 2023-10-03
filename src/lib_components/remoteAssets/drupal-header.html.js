@@ -28,7 +28,7 @@ export default html = `
   <div>
 
 <input data-drupal-selector="edit-openid-connect-client-auth0-login" type="submit" id="edit-openid-connect-client-auth0-login" name="auth0" value="Sign In" class="button js-form-submit form-submit button--search" />
-</div><input autocomplete="off" data-drupal-selector="form-cl8piyacigjt2vuo9fc12hj15aciid-9ndua0s2h5by" type="hidden" name="form_build_id" value="form-cL8piyacIGJT2vUO9fc12hj15aCiId_9nduA0S2H5bY" />
+</div><input autocomplete="off" data-drupal-selector="form-q-cjdheujbsltu3kevrz3ms5tidmm6lvjka-rctfjo0" type="hidden" name="form_build_id" value="form-Q-CJDHEUjbSLtU3kEvRz3MS5tIdMM6lvJkA-RCtFjO0" />
 <input data-drupal-selector="edit-openid-connect-login-form" type="hidden" name="form_id" value="openid_connect_login_form" />
 
 </form>
@@ -218,6 +218,40 @@ export default html = `
                   </li>
               <li  class="menu__item">
           <a href="https://data.neonscience.org/web/external-lab-ingest" class="menu__link">External Lab Data Ingest (restricted)</a>
+
+                  </li>
+      
+          </ul>
+  
+
+            
+
+                  </li>
+              <li  class="menu__item menu__item--expanded">
+          <a href="https://www.neonscience.org/data-samples/data-themes" class="menu__link" data-drupal-link-system-path="node/12907">Data Themes</a>
+
+          
+            
+                      <ul  class="menu menu--main" data-depth="2">
+
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/data-samples/data-themes/atmosphere-data-theme" class="menu__link" data-drupal-link-system-path="node/12904">Atmosphere</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/data-samples/data-themes/biogeochemistry-data-theme" class="menu__link" data-drupal-link-system-path="node/12902">Biogeochemistry</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/data-samples/data-themes/ecohydrology-data-theme" class="menu__link" data-drupal-link-system-path="node/12901">Ecohydrology</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/data-samples/data-themes/land-cover-and-processes-data-theme" class="menu__link" data-drupal-link-system-path="node/12900">Land Cover and Processes</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/data-samples/data-themes/organismal-data-theme" class="menu__link" data-drupal-link-system-path="node/12905">Organisms, Populations, and Communities</a>
 
                   </li>
       
@@ -1079,8 +1113,22 @@ export default html = `
           <a href="https://www.neonscience.org/get-involved/engagement" class="menu__link" data-drupal-link-system-path="node/10556">Community Engagement</a>
 
                   </li>
-              <li  class="menu__item">
+              <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/science-seminars-and-data-skills-webinars" class="menu__link" data-drupal-link-system-path="node/12373">Science Seminars and Data Skills Webinars</a>
+
+          
+            
+                      <ul  class="menu menu--main" data-depth="2">
+
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/past-years-science-seminars-and-data-skills-webinars" class="menu__link" data-drupal-link-system-path="node/12997">Past Years</a>
+
+                  </li>
+      
+          </ul>
+  
+
+            
 
                   </li>
               <li  class="menu__item menu__item--expanded">
@@ -1174,9 +1222,9 @@ export default html = `
 
         <label for="edit-title" class="visually-hidden">Search</label>
       </div>
-<div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper" id="edit-actions--2">
+<div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper" id="edit-actions">
 
-<input data-drupal-selector="edit-submit" type="submit" id="edit-submit--2" value="Search" class="button js-form-submit form-submit button--search" />
+<input data-drupal-selector="edit-submit" type="submit" id="edit-submit" value="Search" class="button js-form-submit form-submit button--search" />
 </div>
 
 </form>
@@ -1208,9 +1256,9 @@ export default html = `
 
         <label for="edit-title" class="visually-hidden">Search</label>
       </div>
-<div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper" id="edit-actions--2">
+<div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper" id="edit-actions">
 
-<input data-drupal-selector="edit-submit" type="submit" id="edit-submit--2" value="Search" class="button js-form-submit form-submit button--search" />
+<input data-drupal-selector="edit-submit" type="submit" id="edit-submit" value="Search" class="button js-form-submit form-submit button--search" />
 </div>
 
 </form>
