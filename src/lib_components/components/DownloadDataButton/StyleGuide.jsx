@@ -24,6 +24,7 @@ import sampleProductDataNPN from '../../../sampleData/DP1.10055.001.json';
 import sampleProductDataPhenocam from '../../../sampleData/DP1.00033.001.json';
 import sampleProductDataRelease from '../../../sampleData/DP1.00001.001.release.json';
 import sampleProductDataReleaseProv from '../../../sampleData/DP4.00130.001.release.prov.json';
+import sampleProductDataAopReleaseProv from '../../../sampleData/DP3.30011.001.json';
 
 const useStyles = makeStyles((theme) => ({
   divider: {
@@ -137,6 +138,10 @@ const productData = {...};
         <div>
           <DownloadDataContext.Provider productData={sampleProductDataAop.data}>
             <DownloadDataButton label="Download AOP Data" />
+          </DownloadDataContext.Provider>
+          <br /><br />
+          <DownloadDataContext.Provider productData={sampleProductDataAopReleaseProv.data}>
+            <DownloadDataButton label="Download AOP Data Release and Provisional" />
           </DownloadDataContext.Provider>
           <br /><br />
           <DownloadDataContext.Provider productData={sampleProductDataAopOSPipeline.data}>

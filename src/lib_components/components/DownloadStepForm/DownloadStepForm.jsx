@@ -49,7 +49,7 @@ import Theme, { COLORS } from '../Theme/Theme';
 import ReleaseService from '../../service/ReleaseService';
 import RouteService from '../../service/RouteService';
 import { formatBytes, MAX_POST_BODY_SIZE } from '../../util/manifestUtil';
-import { exists, existsNonEmpty } from '../../util/typeUtil';
+import { exists, existsNonEmpty, isStringNonEmpty } from '../../util/typeUtil';
 
 const useStyles = makeStyles((theme) => ({
   copyButton: {
@@ -398,9 +398,12 @@ export default function DownloadStepForm(props) {
        S3 Files
     */
     s3Files: () => {
-      const { s3FileFetches, s3FileFetchProgress } = state;
-      const isLoading = Object.keys(s3FileFetches)
-        .some((key) => ['awaitingFetchCall', 'fetching'].includes(s3FileFetches[key]));
+      const {
+        s3FileFetches,
+        s3FileFetchProgress,
+        requiredSteps,
+        provisionalData,
+      } = state;
       const {
         value: selection,
         validValues,
@@ -411,6 +414,24 @@ export default function DownloadStepForm(props) {
         filteredFileCount,
         visibleColumns,
       } = state.s3Files;
+      const isLoading = Object.keys(s3FileFetches)
+        .some((key) => ['awaitingFetchCall', 'fetching'].includes(s3FileFetches[key]));
+      const hasProvisionalDataStep = requiredSteps.some((step) => (
+        (step.key === 'provisionalData')
+      ));
+      const excludeProvisionalData = hasProvisionalDataStep && (provisionalData.value === 'exclude');
+      let appliedValidValues = validValues;
+      let areProvDataExcluded = false;
+      if (excludeProvisionalData) {
+        appliedValidValues = appliedValidValues.filter((value) => {
+          const includeValue = isStringNonEmpty(value.release)
+            && !ReleaseService.isLatestNonProv(value.release);
+          if (!includeValue) {
+            areProvDataExcluded = true;
+          }
+          return includeValue;
+        });
+      }
       const columns = [
         {
           title: 'Site',
@@ -521,11 +542,11 @@ export default function DownloadStepForm(props) {
                   color="primary"
                   variant="outlined"
                   onClick={() => { dispatch({ type: 'setS3FilesValueSelectAll' }); }}
-                  disabled={isLoading || !validValues.length}
+                  disabled={isLoading || !appliedValidValues.length}
                   style={{ whiteSpace: 'nowrap' }}
                 >
                   <SelectAllIcon fontSize="small" style={{ marginRight: Theme.spacing(1) }} />
-                  Select All ({isLoading ? '…' : validValues.length})
+                  Select All ({isLoading ? '…' : appliedValidValues.length})
                 </Button>
                 <Button
                   data-selenium="download-data-dialog.s3-files.select-none-button"
@@ -533,7 +554,7 @@ export default function DownloadStepForm(props) {
                   color="primary"
                   variant="outlined"
                   onClick={() => { dispatch({ type: 'setS3FilesValueSelectNone' }); }}
-                  disabled={isLoading || !validValues.length}
+                  disabled={isLoading || !appliedValidValues.length}
                   style={{ marginLeft: Theme.spacing(1), whiteSpace: 'nowrap' }}
                 >
                   <SelectNoneIcon fontSize="small" style={{ marginRight: Theme.spacing(1) }} />
@@ -607,13 +628,13 @@ export default function DownloadStepForm(props) {
           emptyDataSourceMessage: 'No files to display. Select more sites, broaden date range, or broaden search / filters.',
         },
       };
-      return (validValues.length || isLoading) ? (
+      return (appliedValidValues.length || isLoading) ? (
         <div className={classes.fileTable} id="s3Files-selection-table-container">
           <MaterialTable
             icons={MaterialTableIcons}
             components={components}
             columns={columns}
-            data={validValues}
+            data={appliedValidValues}
             localization={localization}
             options={{
               selection: true,
@@ -643,9 +664,23 @@ export default function DownloadStepForm(props) {
           </div>
         </div>
       ) : (
-        <Typography variant="subtitle1" style={{ marginTop: Theme.spacing(3) }}>
-          Select sites and date range in order to generate a list of files to choose from.
-        </Typography>
+        <>
+          {!excludeProvisionalData || !areProvDataExcluded ? null : (
+            <InfoMessageCard
+              title="Provisional Data"
+              messageContent={(
+                <Typography variant="body1">
+                  Provisional data are currently being excluded from selection.
+                  To make those data available for selection, include those data from within the
+                  Provisional Data step.
+                </Typography>
+              )}
+            />
+          )}
+          <Typography variant="subtitle1" style={{ marginTop: Theme.spacing(3) }}>
+            Select sites and date range in order to generate a list of files to choose from.
+          </Typography>
+        </>
       );
     },
 
