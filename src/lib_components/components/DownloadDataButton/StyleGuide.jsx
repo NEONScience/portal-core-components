@@ -22,6 +22,8 @@ import sampleProductDataAopOSPipeline from '../../../sampleData/DP1.30012.001.js
 import sampleProductDataBold from '../../../sampleData/DP1.20105.001.json';
 import sampleProductDataNPN from '../../../sampleData/DP1.10055.001.json';
 import sampleProductDataPhenocam from '../../../sampleData/DP1.00033.001.json';
+import sampleProductDataRelease from '../../../sampleData/DP1.00001.001.release.json';
+import sampleProductDataReleaseProv from '../../../sampleData/DP4.00130.001.release.prov.json';
 
 const useStyles = makeStyles((theme) => ({
   divider: {
@@ -62,6 +64,12 @@ import DownloadDataButton from 'portal-core-components/lib/components/DownloadDa
       <ExampleBlock>
         <DownloadDataContext.Provider productData={sampleProductData.data}>
           <DownloadDataButton />
+        </DownloadDataContext.Provider>
+        <DownloadDataContext.Provider productData={sampleProductDataReleaseProv.data}>
+          <DownloadDataButton label="Release and Provisional Data" />
+        </DownloadDataContext.Provider>
+        <DownloadDataContext.Provider productData={sampleProductDataRelease.data} release="test-tag-32">
+          <DownloadDataButton label="Release Data" />
         </DownloadDataContext.Provider>
       </ExampleBlock>
       <CodeBlock>

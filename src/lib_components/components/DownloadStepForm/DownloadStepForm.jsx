@@ -203,6 +203,14 @@ export default function DownloadStepForm(props) {
         </Typography>
       );
     },
+    provisionalData: () => {
+      const { value: provisionalData } = state.provisionalData;
+      return (
+        <Typography variant="body2" className={classes.summaryText}>
+          {`${provisionalData.charAt(0).toUpperCase()}${provisionalData.substring(1)}`}
+        </Typography>
+      );
+    },
     s3Files: () => {
       const { value: files, totalSize } = state.s3Files;
       return (
@@ -299,6 +307,84 @@ export default function DownloadStepForm(props) {
                   {/* eslint-disable react/jsx-one-expression-per-line */}
                   EML files for this Data Product are included in all downloads.
                   Learn more about EML files in the {neonFaqLink} and at {knbLink}.
+                  {/* eslint-enable react/jsx-one-expression-per-line */}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+      );
+    },
+
+    /**
+       PROVISIONAL DATA
+    */
+    provisionalData: () => {
+      const neonDataRevisionReleaseLink = (
+        <Link
+          target="_blank"
+          href={RouteService.getDataRevisionsReleasePath()}
+          data-gtm="download-data-dialog.neon-data-revisions-releases-link"
+        >
+          NEON Data Revisions and Releases
+        </Link>
+      );
+      const { value, validValues } = state.provisionalData;
+      return (
+        <Grid
+          container
+          spacing={2}
+          alignItems="flex-start"
+          data-selenium="download-data-dialog.step-form.provisional-data"
+        >
+          <Grid item xs={12} md={6}>
+            <FormControl component="fieldset">
+              <RadioGroup
+                aria-label="Provisional Data"
+                name="provisional-data"
+                value={value || ''}
+                onChange={(e) => {
+                  setState('provisionalData', e.target.value);
+                  changeToNextUncompletedStep();
+                }}
+              >
+                <FormControlLabel
+                  className={classes.radio}
+                  value={validValues[0]}
+                  control={<Radio />}
+                  label={(
+                    <div className={classes.radioLabel}>
+                      <Typography variant="h6">Include</Typography>
+                      <Typography variant="body2">
+                        Include provisional data in this download package
+                      </Typography>
+                    </div>
+                  )}
+                />
+                <FormControlLabel
+                  className={classes.radio}
+                  value={validValues[1]}
+                  control={<Radio />}
+                  label={(
+                    <div className={classes.radioLabel}>
+                      <Typography variant="h6">Exclude</Typography>
+                      <Typography variant="body2">
+                        Release data only, no provisional data included in this download package
+                      </Typography>
+                    </div>
+                  )}
+                />
+              </RadioGroup>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Card style={{ marginTop: Theme.spacing(1.5) }}>
+              <CardContent className={classes.startFlex}>
+                <InfoIcon fontSize="large" className={classes.calloutIcon} />
+                <Typography variant="body1">
+                  {/* eslint-disable react/jsx-one-expression-per-line */}
+                  Learn more about data product revisions, releases and provisional data
+                  at the {neonDataRevisionReleaseLink} page.
                   {/* eslint-enable react/jsx-one-expression-per-line */}
                 </Typography>
               </CardContent>

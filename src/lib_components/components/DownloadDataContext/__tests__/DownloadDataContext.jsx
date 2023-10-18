@@ -143,6 +143,12 @@ describe('DownloadDataContext', () => {
       expect(newStateIsAllowable('dateRange', ['2017-12', '2014-09'])).toBe(false);
       expect(newStateIsAllowable('dateRange', ['2012-12', '2014-09'])).toBe(true);
     });
+    test('provisionalData', () => {
+      expect(newStateIsAllowable('provisionalData')).toBe(false);
+      expect(newStateIsAllowable('provisionalData', 'foo')).toBe(false);
+      expect(newStateIsAllowable('provisionalData', 'exclude')).toBe(true);
+      expect(newStateIsAllowable('provisionalData', null)).toBe(true);
+    });
     test('documentation', () => {
       expect(newStateIsAllowable('documentation')).toBe(false);
       expect(newStateIsAllowable('documentation', 'foo')).toBe(false);
@@ -376,6 +382,7 @@ describe('DownloadDataContext', () => {
       expect(initialState.fromExternalHost).toBe(false);
       expect(initialState.requiredSteps).toStrictEqual([
         { key: 'sitesAndDateRange', isComplete: false },
+        { key: 'provisionalData', isComplete: true },
         { key: 's3Files', isComplete: false },
         { key: 'documentation', isComplete: true },
         { key: 'policies', isComplete: false },
@@ -412,6 +419,7 @@ describe('DownloadDataContext', () => {
       expect(initialState.fromExternalHost).toBe(false);
       expect(initialState.requiredSteps).toStrictEqual([
         { key: 'sitesAndDateRange', isComplete: false },
+        { key: 'provisionalData', isComplete: true },
         { key: 'documentation', isComplete: true },
         { key: 'policies', isComplete: false },
         { key: 'summary', isComplete: null },
@@ -439,8 +447,9 @@ describe('DownloadDataContext', () => {
       expect(initialState.fromExternalHost).toBe(false);
       expect(initialState.requiredSteps).toStrictEqual([
         { key: 'sitesAndDateRange', isComplete: false },
-        { key: 'documentation', isComplete: true },
+        { key: 'provisionalData', isComplete: true },
         { key: 'packageType', isComplete: false },
+        { key: 'documentation', isComplete: true },
         { key: 'policies', isComplete: false },
         { key: 'summary', isComplete: null },
       ]);
@@ -468,8 +477,9 @@ describe('DownloadDataContext', () => {
       expect(initialState.fromExternalHost).toBe(true);
       expect(initialState.requiredSteps).toStrictEqual([
         { key: 'sitesAndDateRange', isComplete: false },
-        { key: 'documentation', isComplete: true },
+        { key: 'provisionalData', isComplete: true },
         { key: 'packageType', isComplete: false },
+        { key: 'documentation', isComplete: true },
         { key: 'policies', isComplete: false },
         { key: 'summary', isComplete: null },
       ]);

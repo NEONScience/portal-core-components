@@ -8,6 +8,7 @@ export interface ManifestRequest {
   release: Nullable<string>;
   includeDocs: boolean;
   pkgType: Nullable<string>;
+  includeProvisional: boolean;
   presign: boolean;
   manifestFiles?: ManifestFile[];
 }
@@ -51,6 +52,7 @@ export interface ManifestConfig {
   dateRange: string[];
   documentation: boolean;
   packageType: string;
+  provisionalData: boolean;
   isError: boolean;
   errorMessage?: string;
 }
@@ -62,6 +64,7 @@ export interface ManifestSelection {
   dateRange: DateRangeSelectionState;
   documentation: DocumentationSelectionState;
   packageType: PackageTypeSelectionState;
+  provisionalData: ProvisionalDataSelectionState;
 }
 
 export interface ISelectionState {
@@ -81,5 +84,8 @@ export interface DocumentationSelectionState extends ISelectionState {
   value: string;
 }
 export interface PackageTypeSelectionState extends ISelectionState {
+  value: string;
+}
+export interface ProvisionalDataSelectionState extends ISelectionState {
   value: string;
 }
