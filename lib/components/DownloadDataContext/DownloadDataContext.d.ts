@@ -133,6 +133,10 @@ declare namespace Provider {
             siteCodes: PropTypes.Requireable<(PropTypes.InferProps<{
                 siteCode: PropTypes.Validator<string>;
                 availableMonths: PropTypes.Validator<(string | null | undefined)[]>;
+                availableReleases: PropTypes.Requireable<(PropTypes.InferProps<{
+                    release: PropTypes.Validator<string>;
+                    availableMonths: PropTypes.Validator<(string | null | undefined)[]>;
+                }> | null | undefined)[]>;
             }> | null | undefined)[]>;
         }>>;
         const availabilityView: PropTypes.Requireable<string>;

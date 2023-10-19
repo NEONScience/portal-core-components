@@ -481,7 +481,20 @@ const getInitialStateFromProps = (props) => {
   const hasRelease = isStringNonEmpty(release);
   const excludeProvisionalStep = hasRelease && !ReleaseService.isNonRelease(release);
   const hasProvisionalDataStep = requiredSteps.some((step) => step.key === 'provisionalData');
-  if (hasProvisionalDataStep && excludeProvisionalStep) {
+  let hasProvisionalData = false;
+  if (exists(productData) && existsNonEmpty(productData.siteCodes)) {
+    hasProvisionalData = productData.siteCodes.some((siteCode) => {
+      if (!existsNonEmpty(siteCode.availableReleases)) {
+        return false;
+      }
+      return siteCode.availableReleases.some((availableRelease) => (
+        ReleaseService.isProv(availableRelease.release)
+          && existsNonEmpty(availableRelease.availableMonths)
+      ));
+    });
+  }
+  if ((hasProvisionalDataStep && excludeProvisionalStep)
+      || (hasProvisionalDataStep && !hasProvisionalData)) {
     requiredSteps.splice(requiredSteps.findIndex((step) => step.key === 'provisionalData'), 1);
   }
   initialState.requiredSteps = requiredSteps;
@@ -1231,6 +1244,12 @@ Provider.propTypes = {
       PropTypes.shape({
         siteCode: PropTypes.string.isRequired,
         availableMonths: PropTypes.arrayOf(PropTypes.string).isRequired,
+        availableReleases: PropTypes.arrayOf(
+          PropTypes.shape({
+            release: PropTypes.string.isRequired,
+            availableMonths: PropTypes.arrayOf(PropTypes.string).isRequired,
+          }),
+        ),
       }),
     ),
   }),
