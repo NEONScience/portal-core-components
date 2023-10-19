@@ -225,12 +225,33 @@ export default function DownloadStepForm(props) {
     /**
        SITES AND DATE RANGE
     */
-    sitesAndDateRange: () => (
-      <DataProductAvailability
-        data-selenium="download-data-dialog.step-form.sites-and-date-range"
-        delineateRelease={delineateAvaRelease}
-      />
-    ),
+    sitesAndDateRange: () => {
+      const { requiredSteps, provisionalData } = state;
+      const hasProvisionalDataStep = requiredSteps.some((step) => (
+        (step.key === 'provisionalData')
+      ));
+      const excludeProvisionalData = hasProvisionalDataStep && (provisionalData.value === 'exclude');
+      return (
+        <>
+          {!excludeProvisionalData ? null : (
+            <InfoMessageCard
+              title="Provisional Data"
+              messageContent={(
+                <Typography variant="body1">
+                  Provisional data are currently being excluded from the download package.
+                  To make those data available, include those data from within the
+                  Provisional Data step.
+                </Typography>
+              )}
+            />
+          )}
+          <DataProductAvailability
+            data-selenium="download-data-dialog.step-form.sites-and-date-range"
+            delineateRelease={delineateAvaRelease}
+          />
+        </>
+      );
+    },
 
     /**
        DOCUMENTATION
