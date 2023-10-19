@@ -377,7 +377,10 @@ export default function DownloadStepForm(props) {
                     <div className={classes.radioLabel}>
                       <Typography variant="h6">Include</Typography>
                       <Typography variant="body2">
+                        {/* eslint-disable react/jsx-one-expression-per-line */}
                         Include provisional data in this download package
+                        (<b>Warning:</b> subject to change and not reproducible)
+                        {/* eslint-enable react/jsx-one-expression-per-line */}
                       </Typography>
                     </div>
                   )}

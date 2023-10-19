@@ -560,7 +560,11 @@ exports[`DownloadStepForm Step provisionalData renders correctly 1`] = `
               <p
                 className="MuiTypography-root MuiTypography-body2"
               >
-                Include provisional data in this download package
+                Include provisional data in this download package (
+                <b>
+                  Warning:
+                </b>
+                 subject to change and not reproducible)
               </p>
             </div>
           </span>
