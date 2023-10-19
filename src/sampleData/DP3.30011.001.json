@@ -1,0 +1,1307 @@
+{
+  "data": {
+    "productCodeLong": "NEON.DOM.SITE.DP3.30011.001",
+    "productCode": "DP3.30011.001",
+    "productCodePresentation": "NEON.DP3.30011",
+    "productName": "Albedo - spectrometer - mosaic",
+    "productDescription": "Total amount of solar radiation in the 0.4 to 2.5 micron band reflected by the Earth’s surface into an upward hemisphere divided by the total amount incident from this hemisphere",
+    "productStatus": "ACTIVE",
+    "productCategory": "Level 3 Data Product",
+    "productHasExpanded": false,
+    "productScienceTeamAbbr": "AOP",
+    "productScienceTeam": "Airborne Observation Platform (AOP)",
+    "productPublicationFormatType": "AOP Data Product Type",
+    "productAbstract": "Albedo, the ratio of a surface’s reflected energy to its incident energy, is an important measurement for characterizing earth system energy balance. Light and dark surfaces correspond to high and low albedo, respectively. An opaque surface’s difference in energy reflected as compared to the energy incident on it is absorbed by the surface, increasing its temperature. (Sabins, Jr., 1978). Albedo values depend on wavelength, illumination sources and geometry, sensor viewing geometry, reflectance as a function of angle and wavelength, as well as the scattering, absorbing, and re-radiating effects of the atmosphere. These factors are modeled/accounted for to best approximate a bi-hemispherical reflectance as would be measured in a laboratory setting. To this end, the wavelength-integrated surface reflectance, weighted with the global flux on the ground, is produced as the best practically achievable albedo measurement. (Richter & Schlapfer, 2017) L3 Albedo is distributed in 1km by 1km tiles created by taking the most-nadir pixels from the flightlines acquired in the best weather conditions.\n\nLatency:\nAOP data will be available 60 days after the final collection day at a site.",
+    "productDesignDescription": "Albedo data products are derived from NEON Airborne Observation Platform (AOP) Imaging Spectrometer (NIS) data collected in North-South oriented flight lines to reduce BRDF effects. These data are processed to orthorectified directional surface reflectance and then to Albedo as best practically approximated by wavelength-integrated surface reflectance, weighted with the global flux on the ground. L3 Albedo is distributed in 1 km by 1 km tiles at a 1 m spatial resolution.",
+    "productStudyDescription": "NEON AOP data are planned for yearly collects at all NEON sites at 90% of maximum greenness or greater. Coverage is planned to include at least 95% of NIS Tower Airshed area as well as at least 80% of a minimum 10km x 10 km box around that. All acquisitions are subject to change due to weather conditions as well as program planning changes.",
+    "productBasicDescription": "Includes the data product as a 1 km by 1 km mosaic tile in a single band orthorectified GeoTIFF. There is no expanded package for this product.",
+    "productExpandedDescription": "",
+    "productSensor": "NEON Airborne Observation Platform (AOP) Imaging Spectrometer (NIS) - NASA/JPL AVIRIS-NG",
+    "productRemarks": "",
+    "themes": ["Atmosphere", "Land Use, Land Cover, and Land Processes"],
+    "changeLogs": null,
+    "specs": [
+      {
+        "specId": "8004",
+        "specNumber": "NEON.DOC.001290vD",
+        "specType": null,
+        "specSize": null,
+        "specDescription": null,
+        "specUrl": "https://int-data.neonscience.org/api/v0/documents/NEON.DOC.001290vD"
+      },
+      {
+        "specId": "8005",
+        "specNumber": "NEON.DOC.004365vB",
+        "specType": null,
+        "specSize": null,
+        "specDescription": null,
+        "specUrl": "https://int-data.neonscience.org/api/v0/documents/NEON.DOC.004365vB"
+      },
+      {
+        "specId": "8157",
+        "specNumber": "NEON.DOC.004326vB",
+        "specType": null,
+        "specSize": null,
+        "specDescription": null,
+        "specUrl": "https://int-data.neonscience.org/api/v0/documents/NEON.DOC.004326vB"
+      },
+      {
+        "specId": "QSG:315",
+        "specNumber": "NEON.QSG.DP3.30011.001v1",
+        "specType": "application/pdf",
+        "specSize": 159931,
+        "specDescription": "Quick Start Guide for Albedo - spectrometer - mosaic (DP3.30011.001)",
+        "specUrl": "https://int-data.neonscience.org/api/v0/documents/quick-start-guides/NEON.QSG.DP3.30011.001v1"
+      }
+    ],
+    "keywords": [
+      "reflectance",
+      "flight line",
+      "albedo",
+      "airborne",
+      "aerial",
+      "remote sensing",
+      "spectrometer"
+    ],
+    "biorepositoryCollections": null,
+    "releases": [
+      {
+        "release": "RELEASE-2023",
+        "generationDate": "2023-01-27T12:07:53Z",
+        "url": "https://int-data.neonscience.org/api/v0/releases/RELEASE-2023",
+        "productDoi": {
+          "generationDate": "2023-01-27T15:41:36Z",
+          "url": "https://doi.org/10.48443/1zt0-p584"
+        }
+      },
+      {
+        "release": "test20230811",
+        "generationDate": "2023-08-14T21:07:52Z",
+        "url": "https://int-data.neonscience.org/api/v0/releases/test20230811",
+        "productDoi": {
+          "generationDate": "2023-08-15T17:27:09Z",
+          "url": "https://handle.stage.datacite.org/10.80606/wp3c-sw66"
+        }
+      }
+    ],
+    "siteCodes": [
+      {
+        "siteCode": "ABBY",
+        "availableMonths": ["2017-06", "2018-07", "2019-07", "2021-07"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/ABBY/2017-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/ABBY/2018-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/ABBY/2019-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/ABBY/2021-07"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": ["2017-06", "2018-07", "2019-07", "2021-07"]
+          }
+        ]
+      },
+      {
+        "siteCode": "ARIK",
+        "availableMonths": ["2017-05", "2020-06", "2021-06"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/ARIK/2017-05",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/ARIK/2020-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/ARIK/2021-06"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": ["2017-05", "2020-06", "2021-06"]
+          }
+        ]
+      },
+      {
+        "siteCode": "BARR",
+        "availableMonths": ["2017-07", "2018-07", "2019-07"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/BARR/2017-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/BARR/2018-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/BARR/2019-07"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": ["2017-07", "2018-07", "2019-07"]
+          }
+        ]
+      },
+      {
+        "siteCode": "BART",
+        "availableMonths": [
+          "2014-06",
+          "2016-08",
+          "2017-08",
+          "2018-08",
+          "2019-08"
+        ],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/BART/2014-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/BART/2016-08",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/BART/2017-08",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/BART/2018-08",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/BART/2019-08"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": [
+              "2014-06",
+              "2016-08",
+              "2017-08",
+              "2018-08",
+              "2019-08"
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "BLAN",
+        "availableMonths": ["2016-08", "2017-07", "2019-06", "2021-08"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/BLAN/2016-08",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/BLAN/2017-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/BLAN/2019-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/BLAN/2021-08"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": ["2016-08", "2017-07", "2019-06", "2021-08"]
+          }
+        ]
+      },
+      {
+        "siteCode": "BLUE",
+        "availableMonths": ["2017-05"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/BLUE/2017-05"
+        ],
+        "availableReleases": [
+          { "release": "test20230811", "availableMonths": ["2017-05"] }
+        ]
+      },
+      {
+        "siteCode": "BONA",
+        "availableMonths": ["2017-08", "2018-08", "2019-08", "2021-08"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/BONA/2017-08",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/BONA/2018-08",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/BONA/2019-08",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/BONA/2021-08"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": ["2017-08", "2018-08", "2019-08", "2021-08"]
+          }
+        ]
+      },
+      {
+        "siteCode": "CLBJ",
+        "availableMonths": [
+          "2016-04",
+          "2017-05",
+          "2018-04",
+          "2019-04",
+          "2021-06"
+        ],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/CLBJ/2016-04",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/CLBJ/2017-05",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/CLBJ/2018-04",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/CLBJ/2019-04",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/CLBJ/2021-06"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": [
+              "2016-04",
+              "2017-05",
+              "2018-04",
+              "2019-04",
+              "2021-06"
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "CPER",
+        "availableMonths": [
+          "2013-06",
+          "2017-05",
+          "2020-06",
+          "2020-09",
+          "2021-06"
+        ],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/CPER/2013-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/CPER/2017-05",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/CPER/2020-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/CPER/2020-09",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/CPER/2021-06"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": [
+              "2013-06",
+              "2017-05",
+              "2020-06",
+              "2020-09",
+              "2021-06"
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "CUPE",
+        "availableMonths": ["2018-05"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/CUPE/2018-05"
+        ],
+        "availableReleases": [
+          { "release": "test20230811", "availableMonths": ["2018-05"] }
+        ]
+      },
+      {
+        "siteCode": "DCFS",
+        "availableMonths": [
+          "2016-06",
+          "2017-06",
+          "2019-07",
+          "2020-06",
+          "2021-06"
+        ],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/DCFS/2016-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/DCFS/2017-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/DCFS/2019-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/DCFS/2020-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/DCFS/2021-06"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": [
+              "2016-06",
+              "2017-06",
+              "2019-07",
+              "2020-06",
+              "2021-06"
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "DEJU",
+        "availableMonths": ["2017-07", "2018-08", "2019-08", "2021-07"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/DEJU/2017-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/DEJU/2018-08",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/DEJU/2019-08",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/DEJU/2021-07"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": ["2017-07", "2018-08", "2019-08", "2021-07"]
+          }
+        ]
+      },
+      {
+        "siteCode": "DELA",
+        "availableMonths": [
+          "2015-07",
+          "2016-05",
+          "2017-05",
+          "2018-04",
+          "2019-04",
+          "2021-05"
+        ],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/DELA/2015-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/DELA/2016-05",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/DELA/2017-05",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/DELA/2018-04",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/DELA/2019-04",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/DELA/2021-05"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": [
+              "2015-07",
+              "2016-05",
+              "2017-05",
+              "2018-04",
+              "2019-04",
+              "2021-05"
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "DSNY",
+        "availableMonths": [
+          "2014-05",
+          "2016-09",
+          "2017-09",
+          "2018-10",
+          "2019-04",
+          "2021-09"
+        ],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/DSNY/2014-05",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/DSNY/2016-09",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/DSNY/2017-09",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/DSNY/2018-10",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/DSNY/2019-04",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/DSNY/2021-09"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": [
+              "2014-05",
+              "2016-09",
+              "2017-09",
+              "2018-10",
+              "2019-04",
+              "2021-09"
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "GRSM",
+        "availableMonths": [
+          "2015-08",
+          "2016-06",
+          "2017-10",
+          "2018-05",
+          "2021-06"
+        ],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/GRSM/2015-08",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/GRSM/2016-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/GRSM/2017-10",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/GRSM/2018-05",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/GRSM/2021-06"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": [
+              "2015-08",
+              "2016-06",
+              "2017-10",
+              "2018-05",
+              "2021-06"
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "GUAN",
+        "availableMonths": ["2018-05"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/GUAN/2018-05"
+        ],
+        "availableReleases": [
+          { "release": "test20230811", "availableMonths": ["2018-05"] }
+        ]
+      },
+      {
+        "siteCode": "GUIL",
+        "availableMonths": ["2018-05"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/GUIL/2018-05"
+        ],
+        "availableReleases": [
+          { "release": "test20230811", "availableMonths": ["2018-05"] }
+        ]
+      },
+      {
+        "siteCode": "HARV",
+        "availableMonths": [
+          "2014-06",
+          "2016-08",
+          "2017-08",
+          "2018-09",
+          "2019-08"
+        ],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/HARV/2014-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/HARV/2016-08",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/HARV/2017-08",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/HARV/2018-09",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/HARV/2019-08"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": [
+              "2014-06",
+              "2016-08",
+              "2017-08",
+              "2018-09",
+              "2019-08"
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "HEAL",
+        "availableMonths": ["2017-07", "2018-08", "2019-08", "2021-07"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/HEAL/2017-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/HEAL/2018-08",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/HEAL/2019-08",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/HEAL/2021-07"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": ["2017-07", "2018-08", "2019-08", "2021-07"]
+          }
+        ]
+      },
+      {
+        "siteCode": "HOPB",
+        "availableMonths": ["2016-08", "2017-08", "2019-08"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/HOPB/2016-08",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/HOPB/2017-08",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/HOPB/2019-08"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": ["2016-08", "2017-08", "2019-08"]
+          }
+        ]
+      },
+      {
+        "siteCode": "JERC",
+        "availableMonths": [
+          "2014-05",
+          "2016-09",
+          "2017-09",
+          "2018-09",
+          "2019-09",
+          "2021-09"
+        ],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/JERC/2014-05",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/JERC/2016-09",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/JERC/2017-09",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/JERC/2018-09",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/JERC/2019-09",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/JERC/2021-09"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": [
+              "2014-05",
+              "2016-09",
+              "2017-09",
+              "2018-09",
+              "2019-09",
+              "2021-09"
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "JORN",
+        "availableMonths": ["2017-08", "2018-08", "2019-08", "2021-08"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/JORN/2017-08",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/JORN/2018-08",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/JORN/2019-08",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/JORN/2021-08"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": ["2017-08", "2018-08", "2019-08", "2021-08"]
+          }
+        ]
+      },
+      {
+        "siteCode": "KONA",
+        "availableMonths": [
+          "2016-07",
+          "2017-06",
+          "2018-06",
+          "2019-05",
+          "2019-07",
+          "2020-07"
+        ],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/KONA/2016-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/KONA/2017-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/KONA/2018-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/KONA/2019-05",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/KONA/2019-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/KONA/2020-07"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": [
+              "2016-07",
+              "2017-06",
+              "2018-06",
+              "2019-05",
+              "2019-07",
+              "2020-07"
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "KONZ",
+        "availableMonths": [
+          "2016-07",
+          "2017-06",
+          "2018-06",
+          "2019-05",
+          "2019-07",
+          "2020-07"
+        ],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/KONZ/2016-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/KONZ/2017-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/KONZ/2018-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/KONZ/2019-05",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/KONZ/2019-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/KONZ/2020-07"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": [
+              "2016-07",
+              "2017-06",
+              "2018-06",
+              "2019-05",
+              "2019-07",
+              "2020-07"
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "LAJA",
+        "availableMonths": ["2018-05"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/LAJA/2018-05"
+        ],
+        "availableReleases": [
+          { "release": "test20230811", "availableMonths": ["2018-05"] }
+        ]
+      },
+      {
+        "siteCode": "LENO",
+        "availableMonths": [
+          "2015-07",
+          "2016-05",
+          "2017-05",
+          "2018-04",
+          "2019-05",
+          "2021-05"
+        ],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/LENO/2015-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/LENO/2016-05",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/LENO/2017-05",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/LENO/2018-04",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/LENO/2019-05",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/LENO/2021-05"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": [
+              "2015-07",
+              "2016-05",
+              "2017-05",
+              "2018-04",
+              "2019-05",
+              "2021-05"
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "LIRO",
+        "availableMonths": ["2017-09", "2020-08"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/LIRO/2017-09",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/LIRO/2020-08"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": ["2017-09", "2020-08"]
+          }
+        ]
+      },
+      {
+        "siteCode": "MCDI",
+        "availableMonths": ["2017-06", "2020-07"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/MCDI/2017-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/MCDI/2020-07"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": ["2017-06", "2020-07"]
+          }
+        ]
+      },
+      {
+        "siteCode": "MCRA",
+        "availableMonths": ["2018-07", "2021-07"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/MCRA/2018-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/MCRA/2021-07"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": ["2018-07", "2021-07"]
+          }
+        ]
+      },
+      {
+        "siteCode": "MLBS",
+        "availableMonths": ["2015-08", "2017-08", "2018-05", "2021-06"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/MLBS/2015-08",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/MLBS/2017-08",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/MLBS/2018-05",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/MLBS/2021-06"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": ["2015-08", "2017-08", "2018-05", "2021-06"]
+          }
+        ]
+      },
+      {
+        "siteCode": "MOAB",
+        "availableMonths": [
+          "2017-09",
+          "2018-08",
+          "2019-08",
+          "2020-07",
+          "2021-04"
+        ],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/MOAB/2017-09",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/MOAB/2018-08",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/MOAB/2019-08",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/MOAB/2020-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/MOAB/2021-04"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": [
+              "2017-09",
+              "2018-08",
+              "2019-08",
+              "2020-07",
+              "2021-04"
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "NIWO",
+        "availableMonths": ["2017-09", "2018-08", "2019-08", "2020-08"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/NIWO/2017-09",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/NIWO/2018-08",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/NIWO/2019-08",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/NIWO/2020-08"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": ["2017-09", "2018-08", "2019-08", "2020-08"]
+          }
+        ]
+      },
+      {
+        "siteCode": "NOGP",
+        "availableMonths": [
+          "2016-07",
+          "2017-06",
+          "2019-07",
+          "2020-06",
+          "2021-06"
+        ],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/NOGP/2016-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/NOGP/2017-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/NOGP/2019-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/NOGP/2020-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/NOGP/2021-06"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": [
+              "2016-07",
+              "2017-06",
+              "2019-07",
+              "2020-06",
+              "2021-06"
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "OAES",
+        "availableMonths": [
+          "2016-04",
+          "2017-05",
+          "2018-04",
+          "2019-04",
+          "2021-06"
+        ],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/OAES/2016-04",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/OAES/2017-05",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/OAES/2018-04",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/OAES/2019-04",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/OAES/2021-06"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": [
+              "2016-04",
+              "2017-05",
+              "2018-04",
+              "2019-04",
+              "2021-06"
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "ONAQ",
+        "availableMonths": ["2017-06", "2019-05", "2021-05"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/ONAQ/2017-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/ONAQ/2019-05",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/ONAQ/2021-05"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": ["2017-06", "2019-05", "2021-05"]
+          }
+        ]
+      },
+      {
+        "siteCode": "ORNL",
+        "availableMonths": ["2015-08", "2016-06", "2017-09", "2018-05"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/ORNL/2015-08",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/ORNL/2016-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/ORNL/2017-09",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/ORNL/2018-05"
+        ],
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "availableMonths": ["2015-08", "2016-06", "2017-09", "2018-05"]
+          }
+        ]
+      },
+      {
+        "siteCode": "OSBS",
+        "availableMonths": [
+          "2014-05",
+          "2016-09",
+          "2017-09",
+          "2018-09",
+          "2019-04",
+          "2021-09"
+        ],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/OSBS/2014-05",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/OSBS/2016-09",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/OSBS/2017-09",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/OSBS/2018-09",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/OSBS/2019-04",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/OSBS/2021-09"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": [
+              "2014-05",
+              "2016-09",
+              "2017-09",
+              "2018-09",
+              "2019-04",
+              "2021-09"
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "PRIN",
+        "availableMonths": ["2016-04", "2017-05", "2021-06"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/PRIN/2016-04",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/PRIN/2017-05",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/PRIN/2021-06"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": ["2016-04", "2017-05", "2021-06"]
+          }
+        ]
+      },
+      {
+        "siteCode": "PUUM",
+        "availableMonths": ["2019-01", "2020-01"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/PUUM/2019-01",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/PUUM/2020-01"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": ["2019-01", "2020-01"]
+          }
+        ]
+      },
+      {
+        "siteCode": "REDB",
+        "availableMonths": ["2017-05", "2019-05", "2021-05"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/REDB/2017-05",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/REDB/2019-05",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/REDB/2021-05"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": ["2017-05", "2019-05", "2021-05"]
+          }
+        ]
+      },
+      {
+        "siteCode": "RMNP",
+        "availableMonths": ["2017-07", "2018-09", "2020-07"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/RMNP/2017-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/RMNP/2018-09",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/RMNP/2020-07"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": ["2017-07", "2018-09", "2020-07"]
+          }
+        ]
+      },
+      {
+        "siteCode": "SCBI",
+        "availableMonths": ["2016-07", "2017-07", "2019-06", "2021-08"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/SCBI/2016-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/SCBI/2017-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/SCBI/2019-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/SCBI/2021-08"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": ["2016-07", "2017-07", "2019-06", "2021-08"]
+          }
+        ]
+      },
+      {
+        "siteCode": "SERC",
+        "availableMonths": [
+          "2016-07",
+          "2017-07",
+          "2017-08",
+          "2019-05",
+          "2021-08"
+        ],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/SERC/2016-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/SERC/2017-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/SERC/2017-08",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/SERC/2019-05",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/SERC/2021-08"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": [
+              "2016-07",
+              "2017-07",
+              "2017-08",
+              "2019-05",
+              "2021-08"
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "SJER",
+        "availableMonths": [
+          "2013-06",
+          "2017-03",
+          "2018-03",
+          "2019-03",
+          "2021-03"
+        ],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/SJER/2013-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/SJER/2017-03",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/SJER/2018-03",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/SJER/2019-03",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/SJER/2021-03"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": [
+              "2013-06",
+              "2017-03",
+              "2018-03",
+              "2019-03",
+              "2021-03"
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "SOAP",
+        "availableMonths": [
+          "2013-06",
+          "2017-07",
+          "2018-06",
+          "2019-06",
+          "2021-07"
+        ],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/SOAP/2013-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/SOAP/2017-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/SOAP/2018-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/SOAP/2019-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/SOAP/2021-07"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": [
+              "2013-06",
+              "2017-07",
+              "2018-06",
+              "2019-06",
+              "2021-07"
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "SRER",
+        "availableMonths": ["2017-08", "2018-08", "2019-09", "2021-09"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/SRER/2017-08",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/SRER/2018-08",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/SRER/2019-09",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/SRER/2021-09"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": ["2017-08", "2018-08", "2019-09", "2021-09"]
+          }
+        ]
+      },
+      {
+        "siteCode": "STEI",
+        "availableMonths": ["2016-09", "2017-08", "2019-06", "2020-08"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/STEI/2016-09",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/STEI/2017-08",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/STEI/2019-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/STEI/2020-08"
+        ],
+        "availableReleases": [
+          { "release": "PROVISIONAL", "availableMonths": ["2017-08"] },
+          {
+            "release": "test20230811",
+            "availableMonths": ["2016-09", "2019-06", "2020-08"]
+          }
+        ]
+      },
+      {
+        "siteCode": "STER",
+        "availableMonths": ["2017-07", "2021-06"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/STER/2017-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/STER/2021-06"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": ["2017-07", "2021-06"]
+          }
+        ]
+      },
+      {
+        "siteCode": "SYCA",
+        "availableMonths": ["2019-09", "2021-04"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/SYCA/2019-09",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/SYCA/2021-04"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": ["2019-09", "2021-04"]
+          }
+        ]
+      },
+      {
+        "siteCode": "TALL",
+        "availableMonths": [
+          "2015-07",
+          "2016-05",
+          "2017-05",
+          "2018-04",
+          "2019-04",
+          "2021-05"
+        ],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/TALL/2015-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/TALL/2016-05",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/TALL/2017-05",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/TALL/2018-04",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/TALL/2019-04",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/TALL/2021-05"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": [
+              "2015-07",
+              "2016-05",
+              "2017-05",
+              "2018-04",
+              "2019-04",
+              "2021-05"
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "TEAK",
+        "availableMonths": [
+          "2013-06",
+          "2017-06",
+          "2018-06",
+          "2019-06",
+          "2021-07"
+        ],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/TEAK/2013-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/TEAK/2017-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/TEAK/2018-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/TEAK/2019-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/TEAK/2021-07"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": [
+              "2013-06",
+              "2017-06",
+              "2018-06",
+              "2019-06",
+              "2021-07"
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "TOOL",
+        "availableMonths": ["2017-07", "2018-07", "2019-07"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/TOOL/2017-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/TOOL/2018-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/TOOL/2019-07"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": ["2017-07", "2018-07", "2019-07"]
+          }
+        ]
+      },
+      {
+        "siteCode": "TREE",
+        "availableMonths": ["2016-09", "2017-08", "2019-06", "2020-08"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/TREE/2016-09",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/TREE/2017-08",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/TREE/2019-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/TREE/2020-08"
+        ],
+        "availableReleases": [
+          { "release": "PROVISIONAL", "availableMonths": ["2017-08"] },
+          {
+            "release": "test20230811",
+            "availableMonths": ["2016-09", "2019-06", "2020-08"]
+          }
+        ]
+      },
+      {
+        "siteCode": "UKFS",
+        "availableMonths": [
+          "2016-07",
+          "2017-06",
+          "2018-06",
+          "2019-05",
+          "2020-07"
+        ],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/UKFS/2016-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/UKFS/2017-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/UKFS/2018-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/UKFS/2019-05",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/UKFS/2020-07"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": [
+              "2016-07",
+              "2017-06",
+              "2018-06",
+              "2019-05",
+              "2020-07"
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "UNDE",
+        "availableMonths": ["2016-09", "2017-09", "2019-06", "2020-08"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/UNDE/2016-09",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/UNDE/2017-09",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/UNDE/2019-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/UNDE/2020-08"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": ["2016-09", "2017-09", "2019-06", "2020-08"]
+          }
+        ]
+      },
+      {
+        "siteCode": "WLOU",
+        "availableMonths": ["2017-09", "2019-08", "2020-08"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/WLOU/2017-09",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/WLOU/2019-08",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/WLOU/2020-08"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": ["2017-09", "2019-08", "2020-08"]
+          }
+        ]
+      },
+      {
+        "siteCode": "WOOD",
+        "availableMonths": [
+          "2016-06",
+          "2017-06",
+          "2019-07",
+          "2020-06",
+          "2021-06"
+        ],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/WOOD/2016-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/WOOD/2017-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/WOOD/2019-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/WOOD/2020-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/WOOD/2021-06"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": [
+              "2016-06",
+              "2017-06",
+              "2019-07",
+              "2020-06",
+              "2021-06"
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "WREF",
+        "availableMonths": ["2017-06", "2018-07", "2019-07", "2021-07"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/WREF/2017-06",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/WREF/2018-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/WREF/2019-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/WREF/2021-07"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": ["2017-06", "2018-07", "2019-07", "2021-07"]
+          }
+        ]
+      },
+      {
+        "siteCode": "YELL",
+        "availableMonths": ["2018-07", "2019-07", "2020-07"],
+        "availableDataUrls": [
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/YELL/2018-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/YELL/2019-07",
+          "https://int-data.neonscience.org/api/v0/data/DP3.30011.001/YELL/2020-07"
+        ],
+        "availableReleases": [
+          {
+            "release": "test20230811",
+            "availableMonths": ["2018-07", "2019-07", "2020-07"]
+          }
+        ]
+      }
+    ]
+  }
+}

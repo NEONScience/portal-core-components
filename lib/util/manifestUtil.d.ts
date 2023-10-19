@@ -6,7 +6,7 @@ export declare const buildManifestRequestUrl: (config: ManifestConfig, useBody?:
 export declare const buildManifestRequestBody: (config: ManifestConfig) => ManifestRequest;
 export declare const buildS3FilesRequestUrl: (productCode: string, site: string, yearMonth: string, release: Nullable<string>) => string;
 export declare const downloadManifest: (manifest: ManifestRequest) => void;
-export declare const downloadAopManifest: (config: ManifestConfig, s3Files: Record<string, unknown>, documentation?: string) => void;
+export declare const downloadAopManifest: (config: ManifestConfig, s3Files: Record<string, unknown>, documentation?: string, provisionalData?: string) => void;
 export declare const MAX_POST_BODY_SIZE: number;
 export declare const DOWNLOAD_SIZE_WARN = 42949672960;
 export declare const formatBytes: (bytes: number) => string;

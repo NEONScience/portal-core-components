@@ -37,13 +37,15 @@ import {
 import { forkJoinWithProgress } from '../../util/rxUtil';
 import makeStateStorage from '../../service/StateStorageService';
 import NeonSignInButtonState from '../NeonSignInButton/NeonSignInButtonState';
+import ReleaseService from '../../service/ReleaseService';
 // eslint-disable-next-line import/no-cycle
 import { convertStateForStorage, convertAOPInitialState } from './StateStorageConverter';
-import { exists, existsNonEmpty } from '../../util/typeUtil';
+import { exists, existsNonEmpty, isStringNonEmpty } from '../../util/typeUtil';
 
 const ALL_POSSIBLE_VALID_DATE_RANGE = ['2010-01', moment().format('YYYY-MM')];
 const ALL_POSSIBLE_VALID_DOCUMENTATION = ['include', 'exclude'];
 const ALL_POSSIBLE_VALID_PACKAGE_TYPE = ['basic', 'expanded'];
+const ALL_POSSIBLE_VALID_PROVISIONAL_DATA = ['include', 'exclude'];
 const AVAILABILITY_VIEW_MODES = ['summary', 'sites', 'states', 'domains'];
 
 const ALL_STEPS = {
@@ -65,6 +67,11 @@ const ALL_STEPS = {
     requiredStateKeys: ['packageType'],
     label: 'Package Type',
     title: 'Which package type do you want?',
+  },
+  provisionalData: {
+    requiredStateKeys: ['provisionalData'],
+    label: 'Provisional Data',
+    title: 'Do you want to include provisional data?',
   },
   sitesAndDateRange: {
     requiredStateKeys: ['sites', 'dateRange'],
@@ -88,8 +95,9 @@ const ALL_STEPS = {
 // If null will be interpreted as purely informational and completion does not apply.
 const DEFAULT_REQUIRED_STEPS = [
   { key: 'sitesAndDateRange', isComplete: false },
-  { key: 'documentation', isComplete: true },
+  { key: 'provisionalData', isComplete: true },
   { key: 'packageType', isComplete: false },
+  { key: 'documentation', isComplete: true },
   { key: 'policies', isComplete: false },
   { key: 'summary', isComplete: null },
 ];
@@ -164,6 +172,11 @@ const DEFAULT_STATE = {
     validValues: [...ALL_POSSIBLE_VALID_PACKAGE_TYPE],
     isValid: false,
   },
+  provisionalData: {
+    value: 'exclude',
+    validValues: [...ALL_POSSIBLE_VALID_PROVISIONAL_DATA],
+    isValid: true,
+  },
   policies: {
     value: false,
     validValues: null,
@@ -172,7 +185,16 @@ const DEFAULT_STATE = {
 };
 
 // State keys that have a common { value, validValues, isValid } shape and can be validated
-const VALIDATABLE_STATE_KEYS = ['release', 'sites', 'dateRange', 'documentation', 'packageType', 's3Files', 'policies'];
+const VALIDATABLE_STATE_KEYS = [
+  'release',
+  'sites',
+  'dateRange',
+  'documentation',
+  'packageType',
+  'provisionalData',
+  's3Files',
+  'policies',
+];
 
 // State keys that can be transfered between contexts through higher order state
 // (must be a subset of VALIDATABLE_STATE_KEYS)
@@ -180,7 +202,14 @@ const HIGHER_ORDER_TRANSFERABLE_STATE_KEYS = ['release', 'sites', 'dateRange'];
 
 // State keys that should trigger a new manifest (file size estimate) request when updated
 // (must be a subset of VALIDATABLE_STATE_KEYS)
-const MANIFEST_TRIGGERING_STATE_KEYS = ['release', 'sites', 'dateRange', 'documentation', 'packageType'];
+const MANIFEST_TRIGGERING_STATE_KEYS = [
+  'release',
+  'sites',
+  'dateRange',
+  'documentation',
+  'packageType',
+  'provisionalData',
+];
 
 // Regexes and associated capture group names for parse s3 file names and URLs
 const S3_PATTERN = {
@@ -253,6 +282,11 @@ const newStateIsAllowable = (key, value) => {
     case 'packageType':
       return (
         ALL_POSSIBLE_VALID_PACKAGE_TYPE.includes(value)
+        || value === null
+      );
+    case 'provisionalData':
+      return (
+        ALL_POSSIBLE_VALID_PROVISIONAL_DATA.includes(value)
         || value === null
       );
     case 's3Files':
@@ -362,6 +396,8 @@ const getValidValuesFromProductData = (productData, key) => {
       return [...ALL_POSSIBLE_VALID_DOCUMENTATION];
     case 'packageType':
       return [...ALL_POSSIBLE_VALID_PACKAGE_TYPE];
+    case 'provisionalData':
+      return [...ALL_POSSIBLE_VALID_PROVISIONAL_DATA];
     case 'policies':
       return null;
     default:
@@ -377,6 +413,7 @@ const getInitialStateFromProps = (props) => {
   const {
     productData,
     availabilityView,
+    release,
   } = props;
   if (!productDataIsValid(productData)) {
     return {
@@ -429,6 +466,7 @@ const getInitialStateFromProps = (props) => {
     fromAOPManifest = true;
     requiredSteps = [
       { key: 'sitesAndDateRange', isComplete: false },
+      { key: 'provisionalData', isComplete: true },
       { key: 's3Files', isComplete: false },
       { key: 'documentation', isComplete: true },
       { key: 'policies', isComplete: false },
@@ -438,6 +476,26 @@ const getInitialStateFromProps = (props) => {
   // Remove package type step if product does not offer expanded data
   if (productData.productHasExpanded === false && requiredSteps.some((step) => step.key === 'packageType')) {
     requiredSteps.splice(requiredSteps.findIndex((step) => step.key === 'packageType'), 1);
+  }
+  // Remove provisional data step if release specified and is not a non-release
+  const hasRelease = isStringNonEmpty(release);
+  const excludeProvisionalStep = hasRelease && !ReleaseService.isNonRelease(release);
+  const hasProvisionalDataStep = requiredSteps.some((step) => step.key === 'provisionalData');
+  let hasProvisionalData = false;
+  if (exists(productData) && existsNonEmpty(productData.siteCodes)) {
+    hasProvisionalData = productData.siteCodes.some((siteCode) => {
+      if (!existsNonEmpty(siteCode.availableReleases)) {
+        return false;
+      }
+      return siteCode.availableReleases.some((availableRelease) => (
+        ReleaseService.isProv(availableRelease.release)
+          && existsNonEmpty(availableRelease.availableMonths)
+      ));
+    });
+  }
+  if ((hasProvisionalDataStep && excludeProvisionalStep)
+      || (hasProvisionalDataStep && !hasProvisionalData)) {
+    requiredSteps.splice(requiredSteps.findIndex((step) => step.key === 'provisionalData'), 1);
   }
   initialState.requiredSteps = requiredSteps;
   initialState.fromManifest = fromManifest;
@@ -1186,6 +1244,12 @@ Provider.propTypes = {
       PropTypes.shape({
         siteCode: PropTypes.string.isRequired,
         availableMonths: PropTypes.arrayOf(PropTypes.string).isRequired,
+        availableReleases: PropTypes.arrayOf(
+          PropTypes.shape({
+            release: PropTypes.string.isRequired,
+            availableMonths: PropTypes.arrayOf(PropTypes.string).isRequired,
+          }),
+        ),
       }),
     ),
   }),
@@ -1196,6 +1260,7 @@ Provider.propTypes = {
   dateRange: PropTypes.arrayOf(PropTypes.string),
   documentation: PropTypes.oneOf(ALL_POSSIBLE_VALID_DOCUMENTATION),
   packageType: PropTypes.oneOf(ALL_POSSIBLE_VALID_PACKAGE_TYPE),
+  provisionalData: PropTypes.oneOf(ALL_POSSIBLE_VALID_PROVISIONAL_DATA),
   /* eslint-enable react/no-unused-prop-types */
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.oneOfType([
@@ -1217,6 +1282,7 @@ Provider.defaultProps = {
   dateRange: DEFAULT_STATE.dateRange.value,
   documentation: DEFAULT_STATE.documentation.value,
   packageType: DEFAULT_STATE.packageType.value,
+  provisionalData: DEFAULT_STATE.provisionalData.value,
 };
 
 const DownloadDataContext = {
@@ -1248,5 +1314,6 @@ export const getTestableItems = () => (
     ALL_POSSIBLE_VALID_DATE_RANGE,
     ALL_POSSIBLE_VALID_DOCUMENTATION,
     ALL_POSSIBLE_VALID_PACKAGE_TYPE,
+    ALL_POSSIBLE_VALID_PROVISIONAL_DATA,
   }
 );

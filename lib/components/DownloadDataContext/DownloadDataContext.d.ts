@@ -15,6 +15,7 @@ export function getTestableItems(): {
     ALL_POSSIBLE_VALID_DATE_RANGE?: undefined;
     ALL_POSSIBLE_VALID_DOCUMENTATION?: undefined;
     ALL_POSSIBLE_VALID_PACKAGE_TYPE?: undefined;
+    ALL_POSSIBLE_VALID_PROVISIONAL_DATA?: undefined;
 } | {
     productDataIsValid: (productData: any) => boolean;
     yearMonthIsValid: (yearMonth?: string) => boolean;
@@ -93,6 +94,11 @@ export function getTestableItems(): {
             validValues: string[];
             isValid: boolean;
         };
+        provisionalData: {
+            value: string;
+            validValues: string[];
+            isValid: boolean;
+        };
         policies: {
             value: boolean;
             validValues: null;
@@ -106,6 +112,7 @@ export function getTestableItems(): {
     ALL_POSSIBLE_VALID_DATE_RANGE: string[];
     ALL_POSSIBLE_VALID_DOCUMENTATION: string[];
     ALL_POSSIBLE_VALID_PACKAGE_TYPE: string[];
+    ALL_POSSIBLE_VALID_PROVISIONAL_DATA: string[];
 };
 declare namespace DownloadDataContext {
     export { Provider };
@@ -126,6 +133,10 @@ declare namespace Provider {
             siteCodes: PropTypes.Requireable<(PropTypes.InferProps<{
                 siteCode: PropTypes.Validator<string>;
                 availableMonths: PropTypes.Validator<(string | null | undefined)[]>;
+                availableReleases: PropTypes.Requireable<(PropTypes.InferProps<{
+                    release: PropTypes.Validator<string>;
+                    availableMonths: PropTypes.Validator<(string | null | undefined)[]>;
+                }> | null | undefined)[]>;
             }> | null | undefined)[]>;
         }>>;
         const availabilityView: PropTypes.Requireable<string>;
@@ -134,6 +145,7 @@ declare namespace Provider {
         const dateRange: PropTypes.Requireable<(string | null | undefined)[]>;
         const documentation: PropTypes.Requireable<string>;
         const packageType: PropTypes.Requireable<string>;
+        const provisionalData: PropTypes.Requireable<string>;
         const children: PropTypes.Validator<NonNullable<NonNullable<PropTypes.ReactNodeLike>>>;
     }
     namespace defaultProps {
@@ -155,6 +167,8 @@ declare namespace Provider {
         export { documentation_1 as documentation };
         import packageType_1 = value;
         export { packageType_1 as packageType };
+        import provisionalData_1 = value;
+        export { provisionalData_1 as provisionalData };
     }
 }
 declare function useDownloadDataState(): {
@@ -224,6 +238,11 @@ declare function useDownloadDataState(): {
     };
     packageType: {
         value: null;
+        validValues: string[];
+        isValid: boolean;
+    };
+    provisionalData: {
+        value: string;
         validValues: string[];
         isValid: boolean;
     };
@@ -299,6 +318,11 @@ declare function useDownloadDataState(): {
     };
     packageType: {
         value: null;
+        validValues: string[];
+        isValid: boolean;
+    };
+    provisionalData: {
+        value: string;
         validValues: string[];
         isValid: boolean;
     };
@@ -406,13 +430,22 @@ declare namespace DEFAULT_STATE {
         export { isValid_5 as isValid };
     }
     export { packageType_2 as packageType };
-    export namespace policies {
-        const value_7: boolean;
+    export namespace provisionalData_2 {
+        const value_7: string;
         export { value_7 as value };
-        const validValues_6: null;
+        const validValues_6: string[];
         export { validValues_6 as validValues };
         const isValid_6: boolean;
         export { isValid_6 as isValid };
+    }
+    export { provisionalData_2 as provisionalData };
+    export namespace policies {
+        const value_8: boolean;
+        export { value_8 as value };
+        const validValues_7: null;
+        export { validValues_7 as validValues };
+        const isValid_7: boolean;
+        export { isValid_7 as isValid };
     }
 }
 declare namespace ALL_STEPS {
@@ -446,7 +479,7 @@ declare namespace ALL_STEPS {
         export { title_2 as title };
     }
     export { packageType_3 as packageType };
-    export namespace sitesAndDateRange {
+    export namespace provisionalData_3 {
         const requiredStateKeys_4: string[];
         export { requiredStateKeys_4 as requiredStateKeys };
         const label_4: string;
@@ -454,7 +487,8 @@ declare namespace ALL_STEPS {
         const title_3: string;
         export { title_3 as title };
     }
-    export namespace policies_1 {
+    export { provisionalData_3 as provisionalData };
+    export namespace sitesAndDateRange {
         const requiredStateKeys_5: string[];
         export { requiredStateKeys_5 as requiredStateKeys };
         const label_5: string;
@@ -462,14 +496,22 @@ declare namespace ALL_STEPS {
         const title_4: string;
         export { title_4 as title };
     }
-    export { policies_1 as policies };
-    export namespace summary {
-        const requiredStateKeys_6: never[];
+    export namespace policies_1 {
+        const requiredStateKeys_6: string[];
         export { requiredStateKeys_6 as requiredStateKeys };
         const label_6: string;
         export { label_6 as label };
         const title_5: string;
         export { title_5 as title };
+    }
+    export { policies_1 as policies };
+    export namespace summary {
+        const requiredStateKeys_7: never[];
+        export { requiredStateKeys_7 as requiredStateKeys };
+        const label_7: string;
+        export { label_7 as label };
+        const title_6: string;
+        export { title_6 as title };
     }
 }
 declare function getStateObservable(): import("rxjs").Observable<any>;

@@ -125,6 +125,8 @@ const useDialogBaseStyles = (belowSm) => makeStyles((theme) => ({
 export default function DownloadDataDialog() {
   const belowSm = useMediaQuery(Theme.breakpoints.only('xs'));
   const belowSmMd = useMediaQuery('(max-width: 750px)');
+  const belowSmMdStepper = useMediaQuery('(max-width: 700px)');
+  const belowMdStepper = useMediaQuery('(max-width: 800px)');
   const classes = useStyles(belowSm, belowSmMd)(Theme);
   const dialogBaseClasses = useDialogBaseStyles(belowSm)(Theme);
 
@@ -147,6 +149,7 @@ export default function DownloadDataDialog() {
       sites,
       dateRange,
       packageType,
+      provisionalData,
     },
     dispatch,
   ] = DownloadDataContext.useDownloadDataState();
@@ -247,6 +250,7 @@ export default function DownloadDataDialog() {
       dateRange,
       documentation,
       packageType,
+      provisionalData,
     };
     if (fromAOPManifest) {
       const config = buildManifestConfig(manifestSelection, null, true);
@@ -322,9 +326,14 @@ export default function DownloadDataDialog() {
         && !(manifest.sizeEstimate > 0))
       || (fromAOPManifest && !(s3Files.totalSize > 0))
     ) {
+      const hasProvisionalDataStep = requiredSteps.some((step) => (
+        (step.key === 'provisionalData')
+      ));
+      const excludeProvisionalData = hasProvisionalDataStep && (provisionalData.value === 'exclude');
+      const showNoReleaseData = hasProvisionalDataStep && excludeProvisionalData;
       return (
         <Typography variant="body2" color="error">
-          No data selected
+          {showNoReleaseData ? 'No release data selected' : 'No data selected'}
         </Typography>
       );
     }
@@ -618,6 +627,8 @@ export default function DownloadDataDialog() {
 
   const renderStepper = () => {
     if (requiredSteps.length < 2) { return null; }
+    const hideLabel = ((requiredSteps.length > 5) && belowMdStepper)
+      || ((requiredSteps.length <= 5) && belowSmMdStepper);
     if (belowSm) {
       const maxSteps = requiredSteps.length;
       const buttonProps = {
@@ -678,15 +689,21 @@ export default function DownloadDataDialog() {
               );
             }
             return (
-              <Step
+              <Tooltip
                 key={label}
-                active={activeStepIndex === index}
-                completed={step.isComplete === true}
+                placement="top"
+                title={label}
               >
-                <StepButton {...buttonProps}>
-                  {label}
-                </StepButton>
-              </Step>
+                <Step
+                  key={label}
+                  active={activeStepIndex === index}
+                  completed={step.isComplete === true}
+                >
+                  <StepButton {...buttonProps}>
+                    {hideLabel ? null : label}
+                  </StepButton>
+                </Step>
+              </Tooltip>
             );
           })}
         </Stepper>
@@ -760,9 +777,16 @@ export default function DownloadDataDialog() {
     if (requiredSteps.some((step) => step.key === 'packageType')) {
       eventSteps.push('packageType');
     }
+    if (requiredSteps.some((step) => step.key === 'provisionalData')) {
+      eventSteps.push('provisionalData');
+    }
     // Build the config for reporting
     const eventValues = {
-      sites, dateRange, documentation, packageType,
+      sites,
+      dateRange,
+      documentation,
+      packageType,
+      provisionalData,
     };
     const eventConfig = { productCode: productData.productCode };
     eventSteps.forEach((step) => { eventConfig[step] = eventValues[step].value; });

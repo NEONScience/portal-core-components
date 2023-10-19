@@ -49,7 +49,7 @@ import Theme, { COLORS } from '../Theme/Theme';
 import ReleaseService from '../../service/ReleaseService';
 import RouteService from '../../service/RouteService';
 import { formatBytes, MAX_POST_BODY_SIZE } from '../../util/manifestUtil';
-import { exists, existsNonEmpty } from '../../util/typeUtil';
+import { exists, existsNonEmpty, isStringNonEmpty } from '../../util/typeUtil';
 
 const useStyles = makeStyles((theme) => ({
   copyButton: {
@@ -203,6 +203,14 @@ export default function DownloadStepForm(props) {
         </Typography>
       );
     },
+    provisionalData: () => {
+      const { value: provisionalData } = state.provisionalData;
+      return (
+        <Typography variant="body2" className={classes.summaryText}>
+          {`${provisionalData.charAt(0).toUpperCase()}${provisionalData.substring(1)}`}
+        </Typography>
+      );
+    },
     s3Files: () => {
       const { value: files, totalSize } = state.s3Files;
       return (
@@ -217,12 +225,33 @@ export default function DownloadStepForm(props) {
     /**
        SITES AND DATE RANGE
     */
-    sitesAndDateRange: () => (
-      <DataProductAvailability
-        data-selenium="download-data-dialog.step-form.sites-and-date-range"
-        delineateRelease={delineateAvaRelease}
-      />
-    ),
+    sitesAndDateRange: () => {
+      const { requiredSteps, provisionalData } = state;
+      const hasProvisionalDataStep = requiredSteps.some((step) => (
+        (step.key === 'provisionalData')
+      ));
+      const excludeProvisionalData = hasProvisionalDataStep && (provisionalData.value === 'exclude');
+      return (
+        <>
+          {!excludeProvisionalData ? null : (
+            <InfoMessageCard
+              title="Provisional Data"
+              messageContent={(
+                <Typography variant="body1">
+                  Provisional data are currently being excluded from the download package.
+                  To make those data available, include those data from within the
+                  Provisional Data step.
+                </Typography>
+              )}
+            />
+          )}
+          <DataProductAvailability
+            data-selenium="download-data-dialog.step-form.sites-and-date-range"
+            delineateRelease={delineateAvaRelease}
+          />
+        </>
+      );
+    },
 
     /**
        DOCUMENTATION
@@ -309,12 +338,93 @@ export default function DownloadStepForm(props) {
     },
 
     /**
+       PROVISIONAL DATA
+    */
+    provisionalData: () => {
+      const neonDataRevisionReleaseLink = (
+        <Link
+          target="_blank"
+          href={RouteService.getDataRevisionsReleasePath()}
+          data-gtm="download-data-dialog.neon-data-revisions-releases-link"
+        >
+          NEON Data Revisions and Releases
+        </Link>
+      );
+      const { value, validValues } = state.provisionalData;
+      return (
+        <Grid
+          container
+          spacing={2}
+          alignItems="flex-start"
+          data-selenium="download-data-dialog.step-form.provisional-data"
+        >
+          <Grid item xs={12} md={6}>
+            <FormControl component="fieldset">
+              <RadioGroup
+                aria-label="Provisional Data"
+                name="provisional-data"
+                value={value || ''}
+                onChange={(e) => {
+                  setState('provisionalData', e.target.value);
+                  changeToNextUncompletedStep();
+                }}
+              >
+                <FormControlLabel
+                  className={classes.radio}
+                  value={validValues[0]}
+                  control={<Radio />}
+                  label={(
+                    <div className={classes.radioLabel}>
+                      <Typography variant="h6">Include</Typography>
+                      <Typography variant="body2">
+                        Include provisional data in this download package
+                      </Typography>
+                    </div>
+                  )}
+                />
+                <FormControlLabel
+                  className={classes.radio}
+                  value={validValues[1]}
+                  control={<Radio />}
+                  label={(
+                    <div className={classes.radioLabel}>
+                      <Typography variant="h6">Exclude</Typography>
+                      <Typography variant="body2">
+                        Release data only, no provisional data included in this download package
+                      </Typography>
+                    </div>
+                  )}
+                />
+              </RadioGroup>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Card style={{ marginTop: Theme.spacing(1.5) }}>
+              <CardContent className={classes.startFlex}>
+                <InfoIcon fontSize="large" className={classes.calloutIcon} />
+                <Typography variant="body1">
+                  {/* eslint-disable react/jsx-one-expression-per-line */}
+                  Learn more about data product revisions, releases and provisional data
+                  at the {neonDataRevisionReleaseLink} page.
+                  {/* eslint-enable react/jsx-one-expression-per-line */}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+      );
+    },
+
+    /**
        S3 Files
     */
     s3Files: () => {
-      const { s3FileFetches, s3FileFetchProgress } = state;
-      const isLoading = Object.keys(s3FileFetches)
-        .some((key) => ['awaitingFetchCall', 'fetching'].includes(s3FileFetches[key]));
+      const {
+        s3FileFetches,
+        s3FileFetchProgress,
+        requiredSteps,
+        provisionalData,
+      } = state;
       const {
         value: selection,
         validValues,
@@ -325,6 +435,24 @@ export default function DownloadStepForm(props) {
         filteredFileCount,
         visibleColumns,
       } = state.s3Files;
+      const isLoading = Object.keys(s3FileFetches)
+        .some((key) => ['awaitingFetchCall', 'fetching'].includes(s3FileFetches[key]));
+      const hasProvisionalDataStep = requiredSteps.some((step) => (
+        (step.key === 'provisionalData')
+      ));
+      const excludeProvisionalData = hasProvisionalDataStep && (provisionalData.value === 'exclude');
+      let appliedValidValues = validValues;
+      let areProvDataExcluded = false;
+      if (excludeProvisionalData) {
+        appliedValidValues = appliedValidValues.filter((value) => {
+          const includeValue = isStringNonEmpty(value.release)
+            && !ReleaseService.isNonRelease(value.release);
+          if (!includeValue) {
+            areProvDataExcluded = true;
+          }
+          return includeValue;
+        });
+      }
       const columns = [
         {
           title: 'Site',
@@ -435,11 +563,11 @@ export default function DownloadStepForm(props) {
                   color="primary"
                   variant="outlined"
                   onClick={() => { dispatch({ type: 'setS3FilesValueSelectAll' }); }}
-                  disabled={isLoading || !validValues.length}
+                  disabled={isLoading || !appliedValidValues.length}
                   style={{ whiteSpace: 'nowrap' }}
                 >
                   <SelectAllIcon fontSize="small" style={{ marginRight: Theme.spacing(1) }} />
-                  Select All ({isLoading ? '…' : validValues.length})
+                  Select All ({isLoading ? '…' : appliedValidValues.length})
                 </Button>
                 <Button
                   data-selenium="download-data-dialog.s3-files.select-none-button"
@@ -447,7 +575,7 @@ export default function DownloadStepForm(props) {
                   color="primary"
                   variant="outlined"
                   onClick={() => { dispatch({ type: 'setS3FilesValueSelectNone' }); }}
-                  disabled={isLoading || !validValues.length}
+                  disabled={isLoading || !appliedValidValues.length}
                   style={{ marginLeft: Theme.spacing(1), whiteSpace: 'nowrap' }}
                 >
                   <SelectNoneIcon fontSize="small" style={{ marginRight: Theme.spacing(1) }} />
@@ -521,13 +649,13 @@ export default function DownloadStepForm(props) {
           emptyDataSourceMessage: 'No files to display. Select more sites, broaden date range, or broaden search / filters.',
         },
       };
-      return (validValues.length || isLoading) ? (
+      return (appliedValidValues.length || isLoading) ? (
         <div className={classes.fileTable} id="s3Files-selection-table-container">
           <MaterialTable
             icons={MaterialTableIcons}
             components={components}
             columns={columns}
-            data={validValues}
+            data={appliedValidValues}
             localization={localization}
             options={{
               selection: true,
@@ -557,9 +685,23 @@ export default function DownloadStepForm(props) {
           </div>
         </div>
       ) : (
-        <Typography variant="subtitle1" style={{ marginTop: Theme.spacing(3) }}>
-          Select sites and date range in order to generate a list of files to choose from.
-        </Typography>
+        <>
+          {!excludeProvisionalData || !areProvDataExcluded ? null : (
+            <InfoMessageCard
+              title="Provisional Data"
+              messageContent={(
+                <Typography variant="body1">
+                  Provisional data are currently being excluded from selection.
+                  To make those data available for selection, include those data from within the
+                  Provisional Data step.
+                </Typography>
+              )}
+            />
+          )}
+          <Typography variant="subtitle1" style={{ marginTop: Theme.spacing(3) }}>
+            Select sites and date range in order to generate a list of files to choose from.
+          </Typography>
+        </>
       );
     },
 
