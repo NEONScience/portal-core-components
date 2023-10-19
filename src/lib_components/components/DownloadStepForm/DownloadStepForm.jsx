@@ -425,7 +425,7 @@ export default function DownloadStepForm(props) {
       if (excludeProvisionalData) {
         appliedValidValues = appliedValidValues.filter((value) => {
           const includeValue = isStringNonEmpty(value.release)
-            && !ReleaseService.isLatestNonProv(value.release);
+            && !ReleaseService.isNonRelease(value.release);
           if (!includeValue) {
             areProvDataExcluded = true;
           }

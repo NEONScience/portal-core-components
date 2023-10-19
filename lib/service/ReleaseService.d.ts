@@ -16,6 +16,13 @@ export interface IReleaseService {
      */
     isLatestNonProv: (releaseTag: string) => boolean;
     /**
+     * Determines if the specified release tag represents a "non" release.
+     * (eg. provisional)
+     * @param releaseTag The release tag to inspect.
+     * @return True if the release tag is a non-release.
+     */
+    isNonRelease: (releaseTag: string) => boolean;
+    /**
      * Determines if the IReleaseLike object adheres to an InternalRelease object.
      * @param release The release to check.
      * @return True if the release is like an InternalRelease object.

@@ -477,11 +477,11 @@ const getInitialStateFromProps = (props) => {
   if (productData.productHasExpanded === false && requiredSteps.some((step) => step.key === 'packageType')) {
     requiredSteps.splice(requiredSteps.findIndex((step) => step.key === 'packageType'), 1);
   }
+  // Remove provisional data step if release specified and is not a non-release
   const hasRelease = isStringNonEmpty(release);
-  const allowProvisional = !hasRelease || ReleaseService.isLatestNonProv(release);
+  const excludeProvisionalStep = hasRelease && !ReleaseService.isNonRelease(release);
   const hasProvisionalDataStep = requiredSteps.some((step) => step.key === 'provisionalData');
-  // Remove provisional data step if release specified
-  if (!allowProvisional && hasProvisionalDataStep) {
+  if (hasProvisionalDataStep && excludeProvisionalStep) {
     requiredSteps.splice(requiredSteps.findIndex((step) => step.key === 'provisionalData'), 1);
   }
   initialState.requiredSteps = requiredSteps;

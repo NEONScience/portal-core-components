@@ -21,6 +21,13 @@ export interface IReleaseService {
    */
   isLatestNonProv: (releaseTag: string) => boolean;
   /**
+   * Determines if the specified release tag represents a "non" release.
+   * (eg. provisional)
+   * @param releaseTag The release tag to inspect.
+   * @return True if the release tag is a non-release.
+   */
+  isNonRelease: (releaseTag: string) => boolean;
+  /**
    * Determines if the IReleaseLike object adheres to an InternalRelease object.
    * @param release The release to check.
    * @return True if the release is like an InternalRelease object.
@@ -70,6 +77,19 @@ const ReleaseService: IReleaseService = {
   isLatestNonProv: (releaseTag: string): boolean => {
     const matches: RegExpExecArray|null = ReleaseService.getProvReleaseRegex().exec(releaseTag);
     return exists(matches) && ((matches as RegExpExecArray).length > 0);
+  },
+  isNonRelease: (releaseTag: string): boolean => {
+    // eslint-disable-next-line prefer-regex-literals
+    const regexLatestProv: RegExp = new RegExp(`^${LATEST_AND_PROVISIONAL}$`, 'i');
+    // eslint-disable-next-line prefer-regex-literals
+    const regexProv: RegExp = new RegExp(`^${PROVISIONAL_RELEASE}$`, 'i');
+    const matchesLatestProv: RegExpExecArray|null = regexLatestProv.exec(releaseTag);
+    const matchesProv: RegExpExecArray|null = regexProv.exec(releaseTag);
+    const isLatestProv = exists(matchesLatestProv)
+      && ((matchesLatestProv as RegExpExecArray).length > 0);
+    const isProv = exists(matchesProv)
+      && ((matchesProv as RegExpExecArray).length > 0);
+    return isLatestProv || isProv;
   },
   isInternalReleaseLike: (release: IReleaseLike): boolean => {
     let isLike = true;
