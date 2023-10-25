@@ -1,4 +1,5 @@
-declare function DownloadStepForm(props: any): any;
+export default DownloadStepForm;
+declare function DownloadStepForm(props: any): JSX.Element | null;
 declare namespace DownloadStepForm {
     namespace propTypes {
         const stepKey: PropTypes.Validator<string>;
@@ -15,5 +16,4 @@ declare namespace DownloadStepForm {
         export { renderDownloadButton_1 as renderDownloadButton };
     }
 }
-export default DownloadStepForm;
 import PropTypes from "prop-types";
