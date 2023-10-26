@@ -745,21 +745,19 @@ const regenerateS3FilesFiltersAndValidValues = (state) => {
   // If cachedValues and validValues differ in size then rebuild valueLookups for
   // filters, adjust filter selections to suit, and regenerate filtered file count.
   const filterKeys = Object.keys(updated.s3Files.valueLookups || {});
-  if (updated.s3Files.validValues.length < updated.s3Files.cachedValues.length) {
-    filterKeys.forEach((key) => {
-      updated.s3Files.valueLookups[key] = {};
+  filterKeys.forEach((key) => {
+    updated.s3Files.valueLookups[key] = {};
+  });
+  updated.s3Files.validValues.forEach((file) => {
+    filterKeys.forEach((lookup) => {
+      if (typeof file[lookup] === 'undefined') { return; }
+      updated.s3Files.valueLookups[lookup][file[lookup]] = file[lookup] || '(none)';
     });
-    updated.s3Files.validValues.forEach((file) => {
-      filterKeys.forEach((lookup) => {
-        if (typeof file[lookup] === 'undefined') { return; }
-        updated.s3Files.valueLookups[lookup][file[lookup]] = file[lookup] || '(none)';
-      });
-    });
-    filterKeys.forEach((key) => {
-      updated.s3Files.filters[key] = updated.s3Files.filters[key]
-        .filter((filterVal) => Object.keys(updated.s3Files.valueLookups[key]).includes(filterVal));
-    });
-  }
+  });
+  filterKeys.forEach((key) => {
+    updated.s3Files.filters[key] = updated.s3Files.filters[key]
+      .filter((filterVal) => Object.keys(updated.s3Files.valueLookups[key]).includes(filterVal));
+  });
   updated.s3Files.filteredFileCount = getS3FilesFilteredFileCount(updated);
   // Create an action to send to the reducer helper to set an updated value and revalidate.
   const action = {

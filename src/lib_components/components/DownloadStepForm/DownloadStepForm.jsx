@@ -455,6 +455,7 @@ const DownloadStepForm = (props) => {
         lookup: valueLookups.site,
         defaultFilter: filters.site || [],
         hidden: !visibleColumns.includes('site'),
+        render: (row) => row.site,
       },
       {
         title: 'Date',
@@ -462,6 +463,7 @@ const DownloadStepForm = (props) => {
         lookup: valueLookups.yearMonth,
         defaultFilter: filters.yearMonth || [],
         hidden: !visibleColumns.includes('date'),
+        render: (row) => row.yearMonth,
       },
       {
         title: 'Visit',
@@ -469,12 +471,14 @@ const DownloadStepForm = (props) => {
         lookup: valueLookups.visit,
         defaultFilter: filters.visit || [],
         hidden: !visibleColumns.includes('visit'),
+        render: (row) => row.visit,
       },
       {
         title: 'Name',
         field: 'name',
         defaultFilter: filters.name || '',
         hidden: !visibleColumns.includes('name'),
+        render: (row) => row.name,
       },
       {
         title: 'Type',
@@ -482,6 +486,7 @@ const DownloadStepForm = (props) => {
         lookup: valueLookups.type,
         defaultFilter: filters.type || [],
         hidden: !visibleColumns.includes('type'),
+        render: (row) => row.type,
       },
       {
         title: 'Size',
@@ -630,6 +635,20 @@ const DownloadStepForm = (props) => {
           </Grid>
           {postSizeError}
           {tooManyFilesWarning}
+          {!excludeProvisionalData || !areProvDataExcluded ? null : (
+            <div style={{ marginLeft: '8px', marginRight: '8px' }}>
+              <InfoMessageCard
+                title="Provisional Data"
+                messageContent={(
+                  <Typography variant="body1">
+                    Provisional data are currently being excluded from selection.
+                    To make those data available for selection, include those data from within the
+                    Provisional Data step.
+                  </Typography>
+                )}
+              />
+            </div>
+          )}
         </Grid>
       ),
       FilterRow: (filterRowProps) => (
@@ -702,23 +721,9 @@ const DownloadStepForm = (props) => {
         </div>
       </div>
     ) : (
-      <>
-        {!excludeProvisionalData || !areProvDataExcluded ? null : (
-          <InfoMessageCard
-            title="Provisional Data"
-            messageContent={(
-              <Typography variant="body1">
-                Provisional data are currently being excluded from selection.
-                To make those data available for selection, include those data from within the
-                Provisional Data step.
-              </Typography>
-            )}
-          />
-        )}
-        <Typography variant="subtitle1" style={{ marginTop: Theme.spacing(3) }}>
-          Select sites and date range in order to generate a list of files to choose from.
-        </Typography>
-      </>
+      <Typography variant="subtitle1" style={{ marginTop: Theme.spacing(3) }}>
+        Select sites and date range in order to generate a list of files to choose from.
+      </Typography>
     );
   };
 
