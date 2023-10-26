@@ -636,7 +636,7 @@ const DownloadStepForm = (props) => {
           {postSizeError}
           {tooManyFilesWarning}
           {!excludeProvisionalData || !areProvDataExcluded ? null : (
-            <div style={{ marginLeft: '8px', marginRight: '8px' }}>
+            <div style={{ marginLeft: '8px', marginRight: '8px', width: '100%' }}>
               <InfoMessageCard
                 title="Provisional Data"
                 messageContent={(
