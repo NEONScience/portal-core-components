@@ -45,7 +45,9 @@ export function getTestableItems(): {
         s3FileFetches: {};
         s3FileFetchProgress: number;
         s3Files: {
+            maxNumFilesSelected: number;
             value: never[];
+            valueMap: {};
             cachedValues: never[];
             validValues: never[];
             isValid: boolean;
@@ -192,7 +194,9 @@ declare function useDownloadDataState(): {
     s3FileFetches: {};
     s3FileFetchProgress: number;
     s3Files: {
+        maxNumFilesSelected: number;
         value: never[];
+        valueMap: {};
         cachedValues: never[];
         validValues: never[];
         isValid: boolean;
@@ -272,7 +276,9 @@ declare function useDownloadDataState(): {
     s3FileFetches: {};
     s3FileFetchProgress: number;
     s3Files: {
+        maxNumFilesSelected: number;
         value: never[];
+        valueMap: {};
         cachedValues: never[];
         validValues: never[];
         isValid: boolean;
@@ -356,8 +362,10 @@ declare namespace DEFAULT_STATE {
     export const s3FileFetches: {};
     export const s3FileFetchProgress: number;
     export namespace s3Files {
+        export const maxNumFilesSelected: number;
         const value_1: never[];
         export { value_1 as value };
+        export const valueMap: {};
         export const cachedValues: never[];
         export const validValues: never[];
         export const isValid: boolean;
