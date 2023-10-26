@@ -742,8 +742,6 @@ const regenerateS3FilesFiltersAndValidValues = (state) => {
       ...file,
       tableData: { checked: updated.s3Files.valueMap[file.url] || false },
     }));
-  // If cachedValues and validValues differ in size then rebuild valueLookups for
-  // filters, adjust filter selections to suit, and regenerate filtered file count.
   const filterKeys = Object.keys(updated.s3Files.valueLookups || {});
   filterKeys.forEach((key) => {
     updated.s3Files.valueLookups[key] = {};
