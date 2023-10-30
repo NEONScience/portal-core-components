@@ -37,14 +37,17 @@ const CitationService: ICitationService = {
       : null;
     const today = CitationService.getDateFormatted();
     const productName = !hasRelease
-      ? `${product.productName} (${product.productCode})`
+      ? `${product.productName} (${product.productCode}), provisional data`
       : `${product.productName} (${product.productCode}), `
           + `${(productReleaseObject as DataProductRelease).release}`;
     const doiText = citationDoi ? `. ${citationDoi}` : '';
-    const url = RouteService.getDataProductCitationDownloadUrl();
+    const url = RouteService.getProductDetailPath(
+      product.productCode,
+      hasRelease ? (productReleaseObject as DataProductRelease).release : undefined,
+    );
     const accessed = !hasRelease
-      ? `${url} (accessed ${today})`
-      : `Dataset accessed from ${url} on ${today}`;
+      ? `Dataset accessed from ${url} on ${today}. Data archived at [your DOI].`
+      : `Dataset accessed from ${url} on ${today}.`;
     return `${NEON}. ${productName}${doiText}. ${accessed}`;
   },
   buildPrototypeDatasetCitationText: (dataset: any): string => {
@@ -63,9 +66,8 @@ const CitationService: ICitationService = {
     const url = hasDoi
       ? `${doi.url}.`
       : `${RouteService.getPrototypeDatasetDetailPath(uuid)}`;
-    const accessed = hasDoi
-      ? `Dataset accessed from ${RouteService.getDataProductCitationDownloadUrl()} on ${today}`
-      : `(accessed ${today})`;
+    const accessed = 'Dataset accessed from '
+      + `${RouteService.getPrototypeDatasetDetailPath(uuid)} on ${today}.`;
     const title = version
       ? `${projectTitle}, ${version}`
       : projectTitle;
