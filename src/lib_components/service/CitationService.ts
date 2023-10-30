@@ -46,8 +46,8 @@ const CitationService: ICitationService = {
       hasRelease ? (productReleaseObject as DataProductRelease).release : undefined,
     );
     const accessed = !hasRelease
-      ? `Dataset accessed from ${url} on ${today}.`
-      : `Dataset accessed from ${url} on ${today}. Data archived at [your DOI].`;
+      ? `Dataset accessed from ${url} on ${today}. Data archived at [your DOI].`
+      : `Dataset accessed from ${url} on ${today}.`;
     return `${NEON}. ${productName}${doiText}. ${accessed}`;
   },
   buildPrototypeDatasetCitationText: (dataset: any): string => {
