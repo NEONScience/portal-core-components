@@ -72,6 +72,9 @@ export interface INeonEnvironment {
   enableGlobalSignInState: boolean;
   fetchDrupalAssets: boolean;
 
+  getReactAppName: () => string;
+  getReactAppVersion: () => string;
+
   getRootApiPath: () => string;
   getRootGraphqlPath: () => string;
   getRootJsonLdPath: () => string;
@@ -137,6 +140,9 @@ const NeonEnvironment: INeonEnvironment = {
   authDisableWs: process.env.REACT_APP_NEON_AUTH_DISABLE_WS === 'true',
   enableGlobalSignInState: process.env.REACT_APP_NEON_ENABLE_GLOBAL_SIGNIN_STATE === 'true',
   fetchDrupalAssets: process.env.REACT_APP_NEON_FETCH_DRUPAL_ASSETS !== 'false',
+
+  getReactAppName: () => process.env.REACT_APP_NAME || '',
+  getReactAppVersion: () => process.env.REACT_APP_VERSION || '',
 
   getRootApiPath: () => process.env.REACT_APP_NEON_PATH_API || '/api/v0',
   getRootGraphqlPath: () => process.env.REACT_APP_NEON_PATH_PUBLIC_GRAPHQL || '/graphql',
