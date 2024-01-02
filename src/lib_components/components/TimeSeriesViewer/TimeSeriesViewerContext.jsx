@@ -37,6 +37,7 @@ import DataPackageParser from '../../parser/DataPackageParser';
 import NeonSignInButtonState from '../NeonSignInButton/NeonSignInButtonState';
 import makeStateStorage from '../../service/StateStorageService';
 import { convertStateForStorage, convertStateFromStorage } from './StateStorageConverter';
+import { getUserAgentHeader } from '../../util/requestUtil';
 import { TIME_SERIES_VIEWER_STATUS } from './constants';
 
 // 'get' is a reserved word so can't be imported with import
@@ -326,6 +327,9 @@ const fetchCSV = (url) => ajax({
   method: 'GET',
   crossDomain: true,
   responseType: 'text',
+  headers: {
+    'User-Agent': getUserAgentHeader('Time Series Viewer'),
+  },
   url,
 });
 const parseCSV = (rawCsv, dedupeLines = false) => {
@@ -984,7 +988,7 @@ const reducer = (state, action) => {
       ]);
       newState.availableQualityFlags = new Set([
         ...state.availableQualityFlags,
-        ...Object.keys(newState.variables).filter((v) => /QF$/.test(v)),
+        ...Object.keys(newState.variables).filter((v) => /QF$/.test(v) || /QFSciRvw$/.test(v)),
       ]);
       // A valid dateTime variable must be present otherwise we have no x-axis
       if (Object.keys(newState.variables).every((v) => !newState.variables[v].isDateTime)) {

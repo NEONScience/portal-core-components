@@ -276,7 +276,13 @@ const writeContent = async (key, content, fileName) => {
         }
         let indexFileOutput = dom.serialize();
         if (config.prettifyIndex) {
-          indexFileOutput = prettier.format(indexFileOutput, { parser: 'html', printWidth: 100 });
+          indexFileOutput = await prettier.format(
+            indexFileOutput,
+            {
+              parser: 'html',
+              printWidth: 100,
+            },
+          );
         }
         fs.writeFileSync(indexFilePath, indexFileOutput, { encoding: 'utf8' });
       }
