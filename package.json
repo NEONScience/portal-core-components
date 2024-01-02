@@ -1,6 +1,6 @@
 {
   "name": "portal-core-components",
-  "version": "2.6.0",
+  "version": "2.7.0",
   "main": "./lib/index.js",
   "private": true,
   "homepage": "http://localhost:3010/core-components",
