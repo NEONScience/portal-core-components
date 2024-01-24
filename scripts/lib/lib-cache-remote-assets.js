@@ -149,10 +149,10 @@ const sanitizeContent = (key, content) => {
   switch (key) {
     // DRUPAL_THEME_CSS - comment out all styles with relative path URLs (these will always fail)
     case REMOTE_ASSETS_CACHE.DRUPAL_THEME_CSS.KEY:
-      content.match(/^(.*url\([\"\']((?!data)).*)$/mg).forEach((match) => {
+      content.match(/^(.*url\(["']((?!data|https)).*)$/mg).forEach((match) => {
         let shouldCommentMatch = true;
         if (config.cssReplaceRelativeUrls) {
-          const relativeUrlRegex = /(?<relative>url\(["']\.\.\/\.\.\/\.\.\/\.\.\/(?<path>images\/.+)["']\))/;
+          const relativeUrlRegex = /(?<relative>url\(["'](?<relativePathSegments>\.\.\/\.\.\/\.\.\/\.\.\/|\.\.\/\.\.\/\.\.\/|\.\.\/\.\.\/|\.\.\/)(?<path>images\/.+)["']\))/;
           const matchesRelative = relativeUrlRegex.exec(match);
           if (matchesRelative
             && (matchesRelative.length > 0)
