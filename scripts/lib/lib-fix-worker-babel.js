@@ -52,7 +52,7 @@ workers.forEach((worker) => {
     // Store lines before entering the worker and note when we do enter it
     if (!workerEntered) {
       preLines.push(line);
-      if (/^\s*return [_a-zA-Z0-9]+\.spawn\(function \(.*\) \{$/.test(line)) {
+      if (/^\s*return [_a-zA-Z0-9]+\.spawn\((?<funcDef>function \(.*\)|.+ \=\>) \{$/.test(line)) {
         workerEntered = true;
       }
       return;
@@ -67,7 +67,7 @@ workers.forEach((worker) => {
   }
   if (polyfillLines.length === 2) {
     console.log(`* ${worker} - SKIPPED - no polyfills in need of moving`);
-    return;    
+    return;
   }
   // Write the updated file back out to lib
   const outSource = [...preLines, ...polyfillLines, ...postLines].join('\n').replace(/[\n]{2,}/g, '\n\n');

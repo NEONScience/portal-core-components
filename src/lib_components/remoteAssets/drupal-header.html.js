@@ -23,7 +23,7 @@ export default html = `<header class="header" role="banner">
   <div>
 
 <input data-drupal-selector="edit-openid-connect-client-auth0-login" type="submit" id="edit-openid-connect-client-auth0-login" name="auth0" value="Sign In" class="button js-form-submit form-submit button--search" />
-</div><input autocomplete="off" data-drupal-selector="form-liywez-fnvzgohroeub4bzx5kp1fuaqppuzu5hssdvy" type="hidden" name="form_build_id" value="form-LiYWez-FnvzGohROeuB4BzX5KP1FUaQppUZU5HSsdvY" />
+</div><input autocomplete="off" data-drupal-selector="form-anzkv-urlfhy0ga6junjk5oqahtew4rmwybq7k-9cjw" type="hidden" name="form_build_id" value="form-ANZkv-UrLfHY0ga6junJk5oqAhTEW4rMWYbQ7K-9cjw" />
 <input data-drupal-selector="edit-openid-connect-login-form" type="hidden" name="form_id" value="openid_connect_login_form" />
 
 </form>
@@ -284,10 +284,6 @@ export default html = `<header class="header" role="banner">
                   </li>
               <li  class="menu__item">
           <a href="https://www.neonscience.org/samples/soil-archive" class="menu__link" data-plugin-id="menu_link_content:dd42ebeb-0ce1-4e61-8a71-839b285a7f12" data-drupal-link-system-path="node/5">Megapit and Distributed Initial Characterization Soil Archives</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/samples/excess-samples" class="menu__link" data-plugin-id="menu_link_content:f0c99796-5787-4567-bfb3-a7ee2fe5e118" data-drupal-link-system-path="node/10297">Excess Samples</a>
 
                   </li>
       
@@ -590,6 +586,10 @@ export default html = `<header class="header" role="banner">
   
 
             
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/optimizing-observational-sampling-designs" class="menu__link" data-plugin-id="menu_link_content:0f4cdaa4-35fa-40dd-9a25-61aa940a2d55" data-drupal-link-system-path="node/13121">Optimizing the Observational Sampling Designs</a>
 
                   </li>
       
@@ -933,14 +933,6 @@ export default html = `<header class="header" role="banner">
           <a href="https://www.neonscience.org/resources/learning-hub/teaching-modules" class="menu__link" data-plugin-id="menu_link_content:6ecaa3eb-6d78-4ec6-a4c9-2564154470db" data-drupal-link-system-path="node/10909">Teaching Modules</a>
 
                   </li>
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/resources/learning-hub/faculty-mentoring-networks" class="menu__link" data-plugin-id="menu_link_content:dd60ddac-f785-40ec-bf93-cdde6fdeb164" data-drupal-link-system-path="node/7463">Faculty Mentoring Networks</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/resources/learning-hub/data-education-fellows" class="menu__link" data-plugin-id="menu_link_content:307296a0-d431-4325-8375-e50fa2f33dc4" data-drupal-link-system-path="node/7828">Data Education Fellows</a>
-
-                  </li>
       
           </ul>
   
@@ -976,11 +968,11 @@ export default html = `<header class="header" role="banner">
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/samples/excess-samples" class="menu__link" data-plugin-id="menu_link_content:f4a5f612-88bf-409c-9871-f54b3e9ced7c" data-drupal-link-system-path="node/10297">Excess Samples</a>
+          <a href="https://www.neonscience.org/resources/research-support/assignable-assets-faqs" class="menu__link" data-plugin-id="menu_link_content:0020dd25-ba69-4a65-becb-0198653429db" data-drupal-link-system-path="node/11535">Assignable Assets FAQs</a>
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/resources/research-support/assignable-assets-faqs" class="menu__link" data-plugin-id="menu_link_content:0020dd25-ba69-4a65-becb-0198653429db" data-drupal-link-system-path="node/11535">Assignable Assets FAQs</a>
+          <a href="https://www.neonscience.org/resources/research-support/aa-projects" class="menu__link" data-plugin-id="menu_link_content:f54d6f1b-0ebf-46be-be4c-47c6de77c7fc" data-drupal-link-system-path="node/13119">Assignable Assets Projects</a>
 
                   </li>
       
@@ -1075,12 +1067,16 @@ export default html = `<header class="header" role="banner">
 
                   </li>
               <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/collaborative-works" class="menu__link" data-plugin-id="menu_link_content:7ad2b09c-c124-4a91-84b1-4b2ff93bd594" data-drupal-link-system-path="node/12059">Collaborative Works</a>
+          <a href="https://www.neonscience.org/collaborative-works" class="menu__link" data-plugin-id="menu_link_content:7ad2b09c-c124-4a91-84b1-4b2ff93bd594" data-drupal-link-system-path="node/12059">Research and Collaborations</a>
 
           
             
                       <ul  class="menu menu--main" data-depth="2">
 
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/resources/research-support/aa-projects" class="menu__link" data-plugin-id="menu_link_content:2a6ba982-e1fc-4033-95b2-22c5b94a5a87" data-drupal-link-system-path="node/13119">Assignable Assets Projects</a>
+
+                  </li>
               <li  class="menu__item">
           <a href="https://www.neonscience.org/efi-rcn-neon-ecological-forecasting-challenge" class="menu__link" data-plugin-id="menu_link_content:bece2b5c-bfc9-474f-b5f0-dc4d64a5bbf4" data-drupal-link-system-path="node/11363">EFI-NEON Ecological Forecasting Challenge</a>
 

@@ -1,6 +1,5 @@
 let html;
 export default html = `
-
 <footer class="footer-top__wrapper" role="contentinfo">
   <div class="footer-top__inner l--offset-wide l--wrapper">
   <div class="footer-top__logo-social">
@@ -36,7 +35,6 @@ export default html = `
 
       </div>
 </footer>
-
 
 <footer class="footer-bottom__wrapper" role="contentinfo">
   <div class="footer-bottom__inner l--offset-wide l--wrapper">
@@ -80,7 +78,7 @@ export default html = `
 
     </div>
     <div class="footer-bottom__copyright">
-      <p>Copyright &copy; Battelle, 2023</p>
+      <p>Copyright &copy; Battelle, 2024</p>
     </div>
     <div class="footer-bottom__message">
       <p>The National Ecological Observatory Network is a major facility fully funded by the National Science Foundation.</p><p>Any opinions, findings and conclusions or recommendations expressed in this material do not necessarily reflect the views of the National Science Foundation.</p>
