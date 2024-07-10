@@ -1,4 +1,4 @@
-export function NeonErrorPage(props: any): JSX.Element;
+export function NeonErrorPage(props: any): import("react/jsx-runtime").JSX.Element;
 export namespace NeonErrorPage {
     namespace propTypes {
         const error: PropTypes.Validator<NonNullable<PropTypes.InferProps<{
@@ -10,7 +10,7 @@ export namespace NeonErrorPage {
 }
 export default NeonPage;
 import PropTypes from "prop-types";
-declare function NeonPage(props: any): JSX.Element;
+declare function NeonPage(props: any): import("react/jsx-runtime").JSX.Element;
 declare namespace NeonPage {
     export namespace propTypes_1 {
         export const breadcrumbHomeHref: PropTypes.Requireable<string>;

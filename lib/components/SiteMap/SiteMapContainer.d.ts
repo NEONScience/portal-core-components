@@ -1,5 +1,5 @@
 export default SiteMapContainer;
-declare function SiteMapContainer(props: any): JSX.Element;
+declare function SiteMapContainer(props: any): import("react/jsx-runtime").JSX.Element;
 declare namespace SiteMapContainer {
     namespace propTypes {
         const unusableVerticalSpace: PropTypes.Requireable<number>;

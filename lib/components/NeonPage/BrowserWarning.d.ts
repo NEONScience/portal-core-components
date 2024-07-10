@@ -1,2 +1,2 @@
 export default BrowserWarning;
-declare function BrowserWarning(): JSX.Element | null;
+declare function BrowserWarning(): import("react/jsx-runtime").JSX.Element | null;

@@ -1,5 +1,5 @@
 export default BasicAvailabilityKey;
-declare function BasicAvailabilityKey(props: any): JSX.Element;
+declare function BasicAvailabilityKey(props: any): import("react/jsx-runtime").JSX.Element;
 declare namespace BasicAvailabilityKey {
     namespace propTypes {
         const selectionEnabled: PropTypes.Requireable<boolean>;

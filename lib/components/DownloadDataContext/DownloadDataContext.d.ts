@@ -124,7 +124,7 @@ declare namespace DownloadDataContext {
     export { ALL_STEPS };
     export { getStateObservable };
 }
-declare function Provider(props: any): JSX.Element;
+declare function Provider(props: any): import("react/jsx-runtime").JSX.Element;
 declare namespace Provider {
     namespace propTypes {
         const downloadDataContextUniqueId: PropTypes.Requireable<number>;

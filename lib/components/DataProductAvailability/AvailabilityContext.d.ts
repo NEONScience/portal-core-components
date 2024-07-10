@@ -35,7 +35,7 @@ declare namespace AvailabilityContext {
 /**
    Context Provider
 */
-declare function Provider(props: any): JSX.Element;
+declare function Provider(props: any): import("react/jsx-runtime").JSX.Element;
 declare namespace Provider {
     namespace propTypes {
         const dataAvailabilityUniqueId: PropTypes.Requireable<number>;

@@ -37,7 +37,7 @@ declare namespace SiteMapContext {
     export { VIEWS };
 }
 /** Context Provider */
-declare function Provider(props: any): JSX.Element;
+declare function Provider(props: any): import("react/jsx-runtime").JSX.Element;
 declare namespace Provider {
     export const propTypes: {
         children: PropTypes.Validator<NonNullable<NonNullable<PropTypes.ReactNodeLike>>>;

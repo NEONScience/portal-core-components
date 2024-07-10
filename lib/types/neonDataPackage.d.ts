@@ -25,9 +25,10 @@ declare const sensorPositionV1Schema: z.ZodObject<{
 }, "strip", z.ZodTypeAny, {
     'HOR.VER': string;
     name?: string | null | undefined;
-    description?: string | null | undefined;
-    start?: string | null | undefined;
+    azimuth?: number | null | undefined;
     end?: string | null | undefined;
+    start?: string | null | undefined;
+    description?: string | null | undefined;
     referenceName?: string | null | undefined;
     referenceDescription?: string | null | undefined;
     referenceStart?: string | null | undefined;
@@ -37,7 +38,6 @@ declare const sensorPositionV1Schema: z.ZodObject<{
     zOffset?: number | null | undefined;
     pitch?: number | null | undefined;
     roll?: number | null | undefined;
-    azimuth?: number | null | undefined;
     referenceLatitude?: number | null | undefined;
     referenceLongitude?: number | null | undefined;
     referenceElevation?: number | null | undefined;
@@ -48,9 +48,10 @@ declare const sensorPositionV1Schema: z.ZodObject<{
 }, {
     'HOR.VER': string;
     name?: string | null | undefined;
-    description?: string | null | undefined;
-    start?: string | null | undefined;
+    azimuth?: string | null | undefined;
     end?: string | null | undefined;
+    start?: string | null | undefined;
+    description?: string | null | undefined;
     referenceName?: string | null | undefined;
     referenceDescription?: string | null | undefined;
     referenceStart?: string | null | undefined;
@@ -60,7 +61,6 @@ declare const sensorPositionV1Schema: z.ZodObject<{
     zOffset?: string | null | undefined;
     pitch?: string | null | undefined;
     roll?: string | null | undefined;
-    azimuth?: string | null | undefined;
     referenceLatitude?: string | null | undefined;
     referenceLongitude?: string | null | undefined;
     referenceElevation?: string | null | undefined;
@@ -98,23 +98,23 @@ declare const sensorPositionV2Schema: z.ZodObject<{
     sensorLocationDescription: string | null;
     positionStartDateTime: string | null;
     positionEndDateTime: string | null;
-    referenceLocationID?: string | null | undefined;
-    referenceLocationIDDescription?: string | null | undefined;
-    referenceLocationIDStartDateTime?: string | null | undefined;
-    referenceLocationIDEndDateTime?: string | null | undefined;
+    azimuth?: number | null | undefined;
     xOffset?: number | null | undefined;
     yOffset?: number | null | undefined;
     zOffset?: number | null | undefined;
     pitch?: number | null | undefined;
     roll?: number | null | undefined;
-    azimuth?: number | null | undefined;
-    locationReferenceLatitude?: number | null | undefined;
-    locationReferenceLongitude?: number | null | undefined;
-    locationReferenceElevation?: number | null | undefined;
     eastOffset?: number | null | undefined;
     northOffset?: number | null | undefined;
     xAzimuth?: number | null | undefined;
     yAzimuth?: number | null | undefined;
+    referenceLocationID?: string | null | undefined;
+    referenceLocationIDDescription?: string | null | undefined;
+    referenceLocationIDStartDateTime?: string | null | undefined;
+    referenceLocationIDEndDateTime?: string | null | undefined;
+    locationReferenceLatitude?: number | null | undefined;
+    locationReferenceLongitude?: number | null | undefined;
+    locationReferenceElevation?: number | null | undefined;
 }, {
     azimuth: string | null;
     'HOR.VER': string;
@@ -127,6 +127,10 @@ declare const sensorPositionV2Schema: z.ZodObject<{
     sensorLocationDescription: string | null;
     positionStartDateTime: string | null;
     positionEndDateTime: string | null;
+    eastOffset?: string | null | undefined;
+    northOffset?: string | null | undefined;
+    xAzimuth?: string | null | undefined;
+    yAzimuth?: string | null | undefined;
     referenceLocationID?: string | null | undefined;
     referenceLocationIDDescription?: string | null | undefined;
     referenceLocationIDStartDateTime?: string | null | undefined;
@@ -134,10 +138,6 @@ declare const sensorPositionV2Schema: z.ZodObject<{
     locationReferenceLatitude?: string | null | undefined;
     locationReferenceLongitude?: string | null | undefined;
     locationReferenceElevation?: string | null | undefined;
-    eastOffset?: string | null | undefined;
-    northOffset?: string | null | undefined;
-    xAzimuth?: string | null | undefined;
-    yAzimuth?: string | null | undefined;
 }>;
 export type SensorPositionV1Type = z.infer<typeof sensorPositionV1Schema>;
 export type SensorPositionV2Type = z.infer<typeof sensorPositionV2Schema>;

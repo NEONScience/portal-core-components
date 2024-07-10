@@ -2,4 +2,4 @@ export default SiteMapLeaflet;
 /**
    Main Component
 */
-declare function SiteMapLeaflet(): JSX.Element | null;
+declare function SiteMapLeaflet(): import("react/jsx-runtime").JSX.Element | null;

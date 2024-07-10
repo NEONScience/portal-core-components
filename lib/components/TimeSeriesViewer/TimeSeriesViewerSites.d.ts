@@ -1,7 +1,7 @@
 /**
    Primary Component
 */
-declare function TimeSeriesViewerSites(props: any): JSX.Element;
+declare function TimeSeriesViewerSites(props: any): import("react/jsx-runtime").JSX.Element;
 declare namespace TimeSeriesViewerSites {
     export { TabComponentPropTypes as propTypes };
 }
@@ -29,7 +29,7 @@ import { TabComponentPropTypes } from "./TimeSeriesViewerContext";
 /**
    PositionHistoryButton - button that opens a dialog to show all history for a given position
 */
-declare function PositionHistoryButton(props: any): JSX.Element;
+declare function PositionHistoryButton(props: any): import("react/jsx-runtime").JSX.Element;
 declare namespace PositionHistoryButton {
     namespace propTypes {
         const siteCode: PropTypes.Validator<string>;
@@ -60,7 +60,7 @@ declare namespace PositionHistoryButton {
 /**
    PositionDetail - Component to display neatly-formatted position content
 */
-declare function PositionDetail(props: any): JSX.Element;
+declare function PositionDetail(props: any): import("react/jsx-runtime").JSX.Element;
 declare namespace PositionDetail {
     export namespace propTypes_1 {
         const siteCode_1: PropTypes.Validator<string>;
@@ -79,7 +79,7 @@ declare namespace PositionDetail {
 /**
    Selected Position - Component for a single deletable position paper to show within a SelectedSite
 */
-declare function SelectedPosition(props: any): JSX.Element;
+declare function SelectedPosition(props: any): import("react/jsx-runtime").JSX.Element;
 declare namespace SelectedPosition {
     export namespace propTypes_2 {
         const siteCode_2: PropTypes.Validator<string>;
@@ -98,7 +98,7 @@ declare namespace SelectedPosition {
 /**
    SelectPositionsButton - button that opens a dialog for position selection
 */
-declare function SelectPositionsButton(props: any): JSX.Element;
+declare function SelectPositionsButton(props: any): import("react/jsx-runtime").JSX.Element;
 declare namespace SelectPositionsButton {
     export namespace propTypes_3 {
         const selectedSite: PropTypes.Validator<NonNullable<PropTypes.InferProps<{
@@ -111,14 +111,14 @@ declare namespace SelectPositionsButton {
 /**
    SitesControl - Component for the top-level Sites search field
 */
-declare function SitesControl(props: any): JSX.Element;
+declare function SitesControl(props: any): import("react/jsx-runtime").JSX.Element;
 declare namespace SitesControl {
     export { ControlPropTypes as propTypes };
 }
 /**
    SiteOption - Component for a single site as it appears in the drop-down menu
 */
-declare function SiteOption(props: any): JSX.Element;
+declare function SiteOption(props: any): import("react/jsx-runtime").JSX.Element;
 declare namespace SiteOption {
     export { OptionPropTypes as propTypes };
     export { OptionDefaultProps as defaultProps };
@@ -126,7 +126,7 @@ declare namespace SiteOption {
 /**
    Selected Site - Component for a single deletable site paper to show below the search box
 */
-declare function SelectedSite(props: any): JSX.Element;
+declare function SelectedSite(props: any): import("react/jsx-runtime").JSX.Element;
 declare namespace SelectedSite {
     const propTypes_4: {
         setSelectedTab: PropTypes.Validator<(...args: any[]) => any>;

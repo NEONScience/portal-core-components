@@ -36,6 +36,11 @@ import moment from 'moment';
 
 import MaterialTable, { MTableToolbar, MTableFilterRow } from 'material-table';
 
+import Markdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+
+import ComponentErrorBoundary from '../Error/ComponentErrorBoundary';
+import CustomComponentFallback from '../Error/CustomComponentFallback';
 import DataProductCitation from '../Citation/DataProductCitation';
 import DownloadDataContext from '../DownloadDataContext/DownloadDataContext';
 import DataProductAvailability from '../DataProductAvailability/DataProductAvailability';
@@ -134,7 +139,34 @@ const useStyles = makeStyles((theme) => ({
     fontStyle: 'italic',
     color: theme.palette.error.main,
   },
+  markdownWrapper: {
+    '& p': {
+      margin: 0,
+    },
+  },
 }));
+
+const TextComponent = (props) => {
+  const { content } = props;
+  return (
+    <Typography variant="body2" component="p">
+      {content}
+    </Typography>
+  );
+};
+TextComponent.propTypes = {
+  content: PropTypes.string,
+};
+TextComponent.defaultProps = {
+  content: null,
+};
+
+const MarkdownFallbackComponent = (props) => ((
+  <CustomComponentFallback
+    // eslint-disable-next-line react/no-unstable-nested-components
+    FallbackComponent={() => ((<TextComponent {...props} />))}
+  />
+));
 
 const dataUsageAndCitationPoliciesLink = (
   <Link
@@ -757,9 +789,20 @@ const DownloadStepForm = (props) => {
             label={(
               <div className={classes.radioLabel}>
                 <Typography variant="h6">Basic</Typography>
-                <Typography variant="body2">
-                  {productBasicDescription}
-                </Typography>
+                <ComponentErrorBoundary
+                  // eslint-disable-next-line react/no-unstable-nested-components
+                  fallbackComponent={() => ((
+                    <MarkdownFallbackComponent content={productBasicDescription} />
+                  ))}
+                  onReset={() => { /* noop for boundary reset */ }}
+                >
+                  <Markdown
+                    remarkPlugins={[remarkGfm]}
+                    className={`${classes.markdownWrapper} MuiTypography-root MuiTypography-body2`}
+                  >
+                    {productBasicDescription}
+                  </Markdown>
+                </ComponentErrorBoundary>
               </div>
             )}
           />
@@ -770,9 +813,20 @@ const DownloadStepForm = (props) => {
             label={(
               <div className={classes.radioLabel}>
                 <Typography variant="h6">Expanded</Typography>
-                <Typography variant="body2">
-                  {productExpandedDescription}
-                </Typography>
+                <ComponentErrorBoundary
+                  // eslint-disable-next-line react/no-unstable-nested-components
+                  fallbackComponent={() => ((
+                    <MarkdownFallbackComponent content={productExpandedDescription} />
+                  ))}
+                  onReset={() => { /* noop for boundary reset */ }}
+                >
+                  <Markdown
+                    remarkPlugins={[remarkGfm]}
+                    className={`${classes.markdownWrapper} MuiTypography-root MuiTypography-body2`}
+                  >
+                    {productExpandedDescription}
+                  </Markdown>
+                </ComponentErrorBoundary>
               </div>
             )}
           />
