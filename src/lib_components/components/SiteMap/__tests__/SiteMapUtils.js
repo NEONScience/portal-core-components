@@ -2,6 +2,7 @@ import cloneDeep from 'lodash/cloneDeep';
 
 import L from 'leaflet';
 import {
+  getDefaultState,
   boundsAreValid,
   calculateLocationsInBounds,
   deriveFullObservatoryZoomLevel,
@@ -16,7 +17,6 @@ import {
   getMapStateForFocusLocation,
   getMapStateForManualLocationData,
   parseManualLocationFeatureData,
-  DEFAULT_STATE,
   FEATURES,
   FEATURE_TYPES,
   MANUAL_LOCATION_TYPES,
@@ -449,7 +449,7 @@ describe('SiteMap - SiteMapUtils', () => {
     describe('getMapStateForFocusLocation()', () => {
       test('returns previous map state if no focus location is present', () => {
         const state = {
-          map: { ...cloneDeep(DEFAULT_STATE.map) },
+          map: { ...getDefaultState().map },
           aspectRatio: { currentValue: 0.6, widthReference: 640 },
         };
         const newMapState = getMapStateForFocusLocation(state);
@@ -457,7 +457,7 @@ describe('SiteMap - SiteMapUtils', () => {
       });
       test('returns previous map state if focus location is present but has invalid lat/lon', () => {
         const state = {
-          map: { ...cloneDeep(DEFAULT_STATE.map) },
+          map: { ...getDefaultState().map },
           aspectRatio: { currentValue: 0.6, widthReference: 640 },
           focusLocation: {
             current: 'Foo',
@@ -469,7 +469,7 @@ describe('SiteMap - SiteMapUtils', () => {
       });
       test('properly handles type SITE', () => {
         const state = {
-          map: { ...cloneDeep(DEFAULT_STATE.map) },
+          map: { ...getDefaultState().map },
           aspectRatio: { currentValue: 0.6, widthReference: 640 },
           focusLocation: {
             current: 'FOO',
@@ -488,7 +488,7 @@ describe('SiteMap - SiteMapUtils', () => {
       });
       test('properly handles type DOMAIN', () => {
         const state = {
-          map: { ...cloneDeep(DEFAULT_STATE.map) },
+          map: { ...getDefaultState().map },
           aspectRatio: { currentValue: 0.6, widthReference: 640 },
           focusLocation: {
             current: 'D18',
@@ -511,7 +511,7 @@ describe('SiteMap - SiteMapUtils', () => {
       });
       test('properly handles type STATE', () => {
         const state = {
-          map: { ...cloneDeep(DEFAULT_STATE.map) },
+          map: { ...getDefaultState().map },
           aspectRatio: { currentValue: 0.6, widthReference: 640 },
           focusLocation: {
             current: 'CO',
@@ -534,7 +534,7 @@ describe('SiteMap - SiteMapUtils', () => {
       });
       test('properly handles other feature type with set focusZoom', () => {
         const state = {
-          map: { ...cloneDeep(DEFAULT_STATE.map) },
+          map: { ...getDefaultState().map },
           aspectRatio: { currentValue: 0.6, widthReference: 640 },
           focusLocation: {
             current: 'plotABC',
@@ -557,7 +557,7 @@ describe('SiteMap - SiteMapUtils', () => {
       });
       test('properly handles other feature type without set focusZoom', () => {
         const state = {
-          map: { ...cloneDeep(DEFAULT_STATE.map) },
+          map: { ...getDefaultState().map },
           aspectRatio: { currentValue: 0.6, widthReference: 640 },
           focusLocation: {
             current: 'buoyABC',
@@ -587,7 +587,7 @@ describe('SiteMap - SiteMapUtils', () => {
         neonContextHydrated: false,
         sites: {},
         featureData: { SITES: { DECOMMISSIONED_SITES: {} } },
-        map: { ...cloneDeep(DEFAULT_STATE.map) },
+        map: { ...getDefaultState().map },
         manualLocationData: [
           {
             manualLocationType: MANUAL_LOCATION_TYPES.PROTOTYPE_SITE,
@@ -605,7 +605,7 @@ describe('SiteMap - SiteMapUtils', () => {
         neonContextHydrated: true,
         sites: { ...neonContextData.sites },
         featureData: { SITES: { DECOMMISSIONED_SITES: {} } },
-        map: { ...cloneDeep(DEFAULT_STATE.map) },
+        map: { ...getDefaultState().map },
         manualLocationData: [
           {
             manualLocationType: MANUAL_LOCATION_TYPES.PROTOTYPE_SITE,
@@ -627,7 +627,7 @@ describe('SiteMap - SiteMapUtils', () => {
             DECOMMISSIONED_SITES: {},
           },
         },
-        map: { ...cloneDeep(DEFAULT_STATE.map) },
+        map: { ...getDefaultState().map },
         manualLocationData: [
           {
             manualLocationType: MANUAL_LOCATION_TYPES.PROTOTYPE_SITE,
@@ -655,7 +655,7 @@ describe('SiteMap - SiteMapUtils', () => {
       expect(parseManualLocationFeatureData(initialState)).toStrictEqual({
         neonContextHydrated: true,
         sites: { ...neonContextData.sites },
-        map: { ...DEFAULT_STATE.map, center: [52.68, -110.75] },
+        map: { ...getDefaultState().map, center: [52.68, -110.75] },
         manualLocationData: [
           {
             manualLocationType: MANUAL_LOCATION_TYPES.PROTOTYPE_SITE,
@@ -955,7 +955,7 @@ describe('SiteMap - SiteMapUtils', () => {
 
   describe('DEFAULT_STATE construction', () => {
     test('view - all VIEWS present and uninitialized', () => {
-      expect(DEFAULT_STATE.view).toStrictEqual({
+      expect(getDefaultState().view).toStrictEqual({
         current: null,
         initialized: {
           MAP: false,
@@ -964,7 +964,7 @@ describe('SiteMap - SiteMapUtils', () => {
       });
     });
     describe('featureDataFetches - initialized for all fetchable in FEATURE_DATA_SOURCES', () => {
-      expect(DEFAULT_STATE.featureDataFetches).toStrictEqual({
+      expect(getDefaultState().featureDataFetches).toStrictEqual({
         REST_LOCATIONS_API: {
           SITE_LOCATION_HIERARCHIES: {},
           TOWERS: {},

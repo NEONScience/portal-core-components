@@ -16,9 +16,9 @@ import GlobeIcon from '@material-ui/icons/Language';
 
 import Theme from '../Theme/Theme';
 import {
-  DEFAULT_STATE,
   FEATURE_TYPES,
   SITE_MAP_PROP_TYPES,
+  getDefaultState,
 } from '../SiteMap/SiteMapUtils';
 
 const SiteMap = React.lazy(() => import('../SiteMap/SiteMap'));
@@ -76,7 +76,7 @@ const MapSelectionButton = (props) => {
   const classes = useStyles(Theme);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogEntered, setDialogEntered] = useState(false);
-  const [selection, setSelection] = useState(DEFAULT_STATE.selection);
+  const [selection, setSelection] = useState(getDefaultState().selection);
 
   let unit = '';
   let units = '';
