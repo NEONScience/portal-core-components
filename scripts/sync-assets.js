@@ -16,7 +16,7 @@ import prettier from 'prettier';
 import { Command } from 'commander';
 import { fileURLToPath } from 'url';
 
-import packageJson from '../package.json' assert { type: 'json' };
+import packageJson from '../package.json' with { type: 'json' };
 
 const program = new Command();
 program.usage('Usage: node sync-assets.js [options]')
