@@ -1,5 +1,5 @@
 export default DialogBase;
-declare function DialogBase(props: any): JSX.Element;
+declare function DialogBase(props: any): import("react/jsx-runtime").JSX.Element;
 declare namespace DialogBase {
     namespace propTypes {
         const open: PropTypes.Requireable<boolean>;

@@ -412,7 +412,7 @@ const NeonHeader = forwardRef((props, headerRef) => {
   }
 
   // Render Drupal header
-  const injectAuth = !auth.useCore ? null : {
+  const injectAuth = !auth.useCore ? undefined : {
     // eslint-disable-next-line react/no-unstable-nested-components
     replace: (domNode) => {
       const { attribs = {}, name } = domNode;

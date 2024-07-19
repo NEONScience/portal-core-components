@@ -1,5 +1,5 @@
 export default DownloadStepForm;
-declare function DownloadStepForm(props: any): JSX.Element | null;
+declare function DownloadStepForm(props: any): import("react/jsx-runtime").JSX.Element | null;
 declare namespace DownloadStepForm {
     namespace propTypes {
         const stepKey: PropTypes.Validator<string>;

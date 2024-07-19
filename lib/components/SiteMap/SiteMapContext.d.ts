@@ -37,7 +37,7 @@ declare namespace SiteMapContext {
     export { VIEWS };
 }
 /** Context Provider */
-declare function Provider(props: any): JSX.Element;
+declare function Provider(props: any): import("react/jsx-runtime").JSX.Element;
 declare namespace Provider {
     export const propTypes: {
         children: PropTypes.Validator<NonNullable<NonNullable<PropTypes.ReactNodeLike>>>;
@@ -78,9 +78,7 @@ declare function useSiteMapContext(): {
         pendingHierarchy: number;
     };
     focusLocation: {
-        current: null; /**
-           Effect - trigger onChange for selection whenever selection has changed
-        */
+        current: null;
         data: null;
         fetch: {
             status: null;
@@ -170,9 +168,7 @@ declare function useSiteMapContext(): {
         pendingHierarchy: number;
     };
     focusLocation: {
-        current: null; /**
-           Effect - trigger onChange for selection whenever selection has changed
-        */
+        current: null;
         data: null;
         fetch: {
             status: null;

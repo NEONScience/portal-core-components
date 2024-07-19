@@ -63,7 +63,7 @@ workers.forEach((worker) => {
   // Final sanity checks
   if (!workerEntered) {
     console.log(`* ${worker} - SKIPPED - no worker entrypoint found (not good! go fix it!)`);
-    return;
+    throw Error('Worker entrypoint not found');
   }
   if (polyfillLines.length === 2) {
     console.log(`* ${worker} - SKIPPED - no polyfills in need of moving`);

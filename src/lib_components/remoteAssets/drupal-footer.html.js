@@ -4,7 +4,7 @@ export default html = `
   <div class="footer-top__inner l--offset-wide l--wrapper">
   <div class="footer-top__logo-social">
     <div class="footer-top__logo">
-      <img src="https://www.neonscience.org/themes/custom/neon/images/neon-white-logo.svg" alt="NEON Logo" />
+      <img height="60" width="167" src="https://www.neonscience.org/themes/custom/neon/logo-white.svg" alt="" />
     </div>
     <div class="footer-top__social">
       <h4>Follow Us:</h4>

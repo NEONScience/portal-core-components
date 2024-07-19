@@ -1,5 +1,5 @@
 /**
    Summary Component
 */
-export function TimeSeriesViewerSummary(): JSX.Element;
-export default function TimeSeriesViewerContainer(): JSX.Element;
+export function TimeSeriesViewerSummary(): import("react/jsx-runtime").JSX.Element;
+export default function TimeSeriesViewerContainer(): import("react/jsx-runtime").JSX.Element;

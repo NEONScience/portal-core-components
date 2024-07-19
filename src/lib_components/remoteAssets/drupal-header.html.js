@@ -2,11 +2,11 @@ let html;
 export default html = `<header class="header" role="banner">
   <div class="header__inner l--offset-wide">
     <div class="header__logo">
-      <a href="/" title="Home" rel="home"  data-component-id="neon:logo" class="logo">
-      <img src="https://www.neonscience.org/themes/custom/neon/logo.png" alt=" logo" class="logo__image">
+  <a href="/" title="Home" rel="home"  id="block-neon-site-branding" class="logo">
+    <img src="https://www.neonscience.org/themes/custom/neon/logo.svg" alt="NSF NEON, Operated by Battelle" class="logo__image">
   </a>
+</div>
 
-    </div>
     <input type="checkbox" id="nav-trigger" class="nav-trigger js-mobile-nav-trigger" aria-label="Mobile Navigation Trigger" value="expanded" />
     <label for="nav-trigger">
 
@@ -23,7 +23,7 @@ export default html = `<header class="header" role="banner">
   <div>
 
 <input data-drupal-selector="edit-openid-connect-client-auth0-login" type="submit" id="edit-openid-connect-client-auth0-login" name="auth0" value="Sign In" class="button js-form-submit form-submit button--search" />
-</div><input autocomplete="off" data-drupal-selector="form-anzkv-urlfhy0ga6junjk5oqahtew4rmwybq7k-9cjw" type="hidden" name="form_build_id" value="form-ANZkv-UrLfHY0ga6junJk5oqAhTEW4rMWYbQ7K-9cjw" />
+</div><input autocomplete="off" data-drupal-selector="form-epxjxpdfwxnvptsekjvtousgknrlj2wcmaloerlrdnu" type="hidden" name="form_build_id" value="form-ePxJXpdfWxnVptsEKJvToUsGkNRlj2WCMAloErLRdNU" />
 <input data-drupal-selector="edit-openid-connect-login-form" type="hidden" name="form_id" value="openid_connect_login_form" />
 
 </form>
@@ -682,6 +682,10 @@ export default html = `<header class="header" role="banner">
           <a href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases/release-2023" class="menu__link" data-plugin-id="menu_link_content:46256cea-0878-48a4-b4b5-038a432ce163" data-drupal-link-system-path="node/12583">Release 2023</a>
 
                   </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases/release-2024" class="menu__link" data-plugin-id="menu_link_content:0b6be74a-0e52-4351-958f-f86a8092282b" data-drupal-link-system-path="node/13469">Release 2024</a>
+
+                  </li>
       
           </ul>
   
@@ -941,7 +945,7 @@ export default html = `<header class="header" role="banner">
 
                   </li>
               <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/resources/research-support" class="menu__link" data-plugin-id="menu_link_content:5af53ebb-9351-4942-989b-0c78514721c1" data-drupal-link-system-path="node/10764">Research Support and Assignable Assets</a>
+          <a href="https://www.neonscience.org/resources/research-support" class="menu__link" data-plugin-id="menu_link_content:5af53ebb-9351-4942-989b-0c78514721c1" data-drupal-link-system-path="node/10764">Research Support Services</a>
 
           
             
@@ -968,11 +972,11 @@ export default html = `<header class="header" role="banner">
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/resources/research-support/assignable-assets-faqs" class="menu__link" data-plugin-id="menu_link_content:0020dd25-ba69-4a65-becb-0198653429db" data-drupal-link-system-path="node/11535">Assignable Assets FAQs</a>
+          <a href="https://www.neonscience.org/resources/research-support/research-support-faqs" class="menu__link" data-plugin-id="menu_link_content:0020dd25-ba69-4a65-becb-0198653429db" data-drupal-link-system-path="node/11535">Research Support FAQs</a>
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/resources/research-support/aa-projects" class="menu__link" data-plugin-id="menu_link_content:f54d6f1b-0ebf-46be-be4c-47c6de77c7fc" data-drupal-link-system-path="node/13119">Assignable Assets Projects</a>
+          <a href="https://www.neonscience.org/resources/research-support/nrss-projects" class="menu__link" data-plugin-id="menu_link_content:f54d6f1b-0ebf-46be-be4c-47c6de77c7fc" data-drupal-link-system-path="node/13119">Research Support Projects</a>
 
                   </li>
       
@@ -1067,14 +1071,18 @@ export default html = `<header class="header" role="banner">
 
                   </li>
               <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/collaborative-works" class="menu__link" data-plugin-id="menu_link_content:7ad2b09c-c124-4a91-84b1-4b2ff93bd594" data-drupal-link-system-path="node/12059">Research and Collaborations</a>
+          <a href="https://www.neonscience.org/research-and-collaborations" class="menu__link" data-plugin-id="menu_link_content:7ad2b09c-c124-4a91-84b1-4b2ff93bd594" data-drupal-link-system-path="node/12059">Research and Collaborations</a>
 
           
             
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/resources/research-support/aa-projects" class="menu__link" data-plugin-id="menu_link_content:2a6ba982-e1fc-4033-95b2-22c5b94a5a87" data-drupal-link-system-path="node/13119">Assignable Assets Projects</a>
+          <a href="https://www.neonscience.org/environmental-data-science-innovation-and-inclusion-lab" class="menu__link" data-plugin-id="menu_link_content:a0404736-a121-4da1-9e2b-6b29189a32a4" data-drupal-link-system-path="node/13683"> Environmental Data Science Innovation and Inclusion Lab</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/collaboration-doe-ber-user-facilities-programs" class="menu__link" data-plugin-id="menu_link_content:9a65aec8-984c-4198-8e79-219e3cf3143d" data-drupal-link-system-path="node/13684">Collaboration with DOE BER User Facilities &amp; Programs</a>
 
                   </li>
               <li  class="menu__item">
@@ -1082,15 +1090,29 @@ export default html = `<header class="header" role="banner">
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/ncar-neon-community-collaborations" class="menu__link" data-plugin-id="menu_link_content:2bc3207d-fc3c-4d83-a352-5842f74b01bf" data-drupal-link-system-path="node/11843">NCAR-NEON-Community Collaborations</a>
+          <a href="https://www.neonscience.org/neon-great-lakes-user-group" class="menu__link" data-plugin-id="menu_link_content:4c1299dd-fb77-413b-bb3d-547392ad3d6c" data-drupal-link-system-path="node/12371">NEON Great Lakes User Group</a>
 
                   </li>
               <li  class="menu__item">
           <a href="https://www.neonscience.org/neon-science-summit" class="menu__link" data-plugin-id="menu_link_content:34724630-c4b2-4c5f-a3b4-a956586c7f73" data-drupal-link-system-path="node/12057">NEON Science Summit</a>
 
                   </li>
+              <li  class="menu__item menu__item--expanded">
+          <a href="https://www.neonscience.org/ncar-neon-community-collaborations" class="menu__link" data-plugin-id="menu_link_content:2bc3207d-fc3c-4d83-a352-5842f74b01bf" data-drupal-link-system-path="node/11843">NCAR-NEON-Community Collaborations</a>
+
+          
+            
+                      <ul  class="menu menu--main" data-depth="3">
+
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/neon-great-lakes-user-group" class="menu__link" data-plugin-id="menu_link_content:4c1299dd-fb77-413b-bb3d-547392ad3d6c" data-drupal-link-system-path="node/12371">NEON Great Lakes User Group</a>
+          <a href="https://www.neonscience.org/ncar-neon-community-steering-committee" class="menu__link" data-plugin-id="menu_link_content:0cad2c2e-e83b-498c-aa34-4cc68ded2cb7" data-drupal-link-system-path="node/13474">NCAR-NEON Community Steering Committee</a>
+
+                  </li>
+      
+          </ul>
+  
+
+            
 
                   </li>
       

@@ -1,3 +1,4 @@
+export function isCoord(c: any): boolean;
 export const MAP_ZOOM_RANGE: number[];
 export const OBSERVATORY_CENTER: number[];
 export const MIN_CONTAINER_HEIGHT: 300;
@@ -1782,13 +1783,97 @@ export namespace OVERLAYS {
         export { components_1 as components };
     }
 }
-export namespace DEFAULT_STATE {
-    namespace filters {
-        namespace features {
-            const available: any;
-        }
-    }
-}
+export function getDefaultState(): {
+    view: {
+        current: null;
+        initialized: {
+            [x: string]: boolean;
+        };
+    };
+    neonContextHydrated: boolean;
+    overallFetch: {
+        expected: number;
+        completed: number;
+        pendingHierarchy: number;
+    };
+    focusLocation: {
+        current: null;
+        data: null;
+        fetch: {
+            status: null;
+            error: null;
+        };
+        map: {
+            zoom: null;
+            center: never[];
+        };
+    };
+    aspectRatio: {
+        currentValue: null;
+        isDynamic: boolean;
+        resizeEventListenerInitialized: boolean;
+        widthReference: number;
+    };
+    table: {
+        focus: any;
+        availableFeatureTypes: {
+            [x: number]: boolean;
+        };
+        fullHeight: boolean;
+        maxBodyHeight: null;
+        maxBodyHeightUpdateFromAspectRatio: boolean;
+    };
+    map: {
+        zoom: null;
+        center: never[];
+        bounds: null;
+        baseLayer: null;
+        baseLayerAutoChangedAbove17: boolean;
+        overlays: Set<any>;
+        mouseMode: string;
+        zoomedIcons: {};
+        repositionOpenPopupFunc: null;
+        isDraggingAreaSelection: boolean;
+    };
+    selection: {
+        active: null;
+        limit: null;
+        valid: boolean;
+        set: Set<any>;
+        validSet: null;
+        hideUnselectable: boolean;
+        showSummary: boolean;
+        changed: boolean;
+        onChange: () => void;
+        derived: {
+            [x: number]: {};
+        };
+    };
+    featureDataFetchesHasAwaiting: boolean;
+    featureDataFetches: {
+        [k: string]: {};
+    };
+    featureData: {
+        [k: string]: {};
+    };
+    sites: {};
+    filters: {
+        search: null;
+        legendOpen: boolean;
+        features: {
+            available: {};
+            visible: {
+                [k: string]: boolean;
+            };
+            collapsed: Set<any>;
+        };
+        overlays: {
+            expanded: Set<any>;
+        };
+    };
+    fullscreen: boolean;
+    manualLocationData: null;
+};
 export namespace SITE_MAP_PROP_TYPES {
     export const view: PropTypes.Requireable<string>;
     export const aspectRatio: PropTypes.Requireable<number>;

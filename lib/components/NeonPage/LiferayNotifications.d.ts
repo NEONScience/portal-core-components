@@ -1,5 +1,5 @@
 export default LiferayNotifications;
-declare function LiferayNotifications(props: any): JSX.Element | null;
+declare function LiferayNotifications(props: any): import("react/jsx-runtime").JSX.Element | null;
 declare namespace LiferayNotifications {
     namespace propTypes {
         const notifications: PropTypes.Requireable<(PropTypes.InferProps<{

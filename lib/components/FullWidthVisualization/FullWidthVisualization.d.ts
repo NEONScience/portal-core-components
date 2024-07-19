@@ -1,4 +1,4 @@
-declare function FullWidthVisualization(props: any): JSX.Element;
+declare function FullWidthVisualization(props: any): import("react/jsx-runtime").JSX.Element;
 declare namespace FullWidthVisualization {
     namespace propTypes {
         const vizRef: PropTypes.Validator<NonNullable<PropTypes.InferProps<{

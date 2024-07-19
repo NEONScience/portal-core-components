@@ -1,5 +1,5 @@
 export default SiteMapFeature;
-declare function SiteMapFeature(props: any): JSX.Element | null;
+declare function SiteMapFeature(props: any): import("react/jsx-runtime").JSX.Element | null;
 declare namespace SiteMapFeature {
     namespace propTypes {
         const mapRef: PropTypes.Validator<NonNullable<PropTypes.InferProps<{

@@ -320,7 +320,7 @@ declare namespace TimeSeriesViewerContext {
 /**
    Context Provider
 */
-declare function Provider(props: any): JSX.Element;
+declare function Provider(props: any): import("react/jsx-runtime").JSX.Element;
 declare namespace Provider {
     namespace propTypes {
         export { number as timeSeriesUniqueId };

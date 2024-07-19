@@ -20,7 +20,7 @@ import prettier from 'prettier';
 import { Command } from 'commander';
 import { fileURLToPath } from 'url';
 
-import packageJson from '../../package.json' assert { type: 'json' };
+import packageJson from '../../package.json' with { type: 'json' };
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -149,7 +149,7 @@ const sanitizeContent = (key, content) => {
   switch (key) {
     // DRUPAL_THEME_CSS - comment out all styles with relative path URLs (these will always fail)
     case REMOTE_ASSETS_CACHE.DRUPAL_THEME_CSS.KEY:
-      content.match(/^(.*url\(["']((?!data|https)).*)$/mg).forEach((match) => {
+      (content.match(/^(.*url\(["']((?!data|https)).*)$/mg) || []).forEach((match) => {
         let shouldCommentMatch = true;
         if (config.cssReplaceRelativeUrls) {
           const relativeUrlRegex = /(?<relative>url\(["'](?<relativePathSegments>\.\.\/\.\.\/\.\.\/\.\.\/|\.\.\/\.\.\/\.\.\/|\.\.\/\.\.\/|\.\.\/)(?<path>images\/.+)["']\))/;

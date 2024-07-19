@@ -28,7 +28,7 @@ declare namespace NeonContext {
 /**
    Context Provider
 */
-declare function Provider(props: any): JSX.Element;
+declare function Provider(props: any): import("react/jsx-runtime").JSX.Element;
 declare namespace Provider {
     export { ProviderPropTypes as propTypes };
     export namespace defaultProps {
@@ -961,7 +961,7 @@ declare namespace DEFAULT_STATE {
 /**
    getWrappedComponent
 */
-declare function getWrappedComponent(Component: any): (props: any) => JSX.Element;
+declare function getWrappedComponent(Component: any): (props: any) => import("react/jsx-runtime").JSX.Element;
 declare namespace ProviderPropTypes {
     const children_1: PropTypes.Requireable<NonNullable<PropTypes.ReactNodeLike>>;
     export { children_1 as children };

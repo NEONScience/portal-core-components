@@ -1,4 +1,4 @@
-declare function ExternalHostProductSpecificLinks(props: any): JSX.Element | null;
+declare function ExternalHostProductSpecificLinks(props: any): import("react/jsx-runtime").JSX.Element | null;
 declare namespace ExternalHostProductSpecificLinks {
     namespace propTypes {
         const productCode: PropTypes.Requireable<string>;

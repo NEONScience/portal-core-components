@@ -9,9 +9,6 @@ https://data.neonscience.org/core-components
 
 ## Using Components
 
-You don't need a copy of this project to use it!
-(You _will_ need your git credentials to be up to date from the "git" command line, but they should be anyway.)
-
 In the target project directory, preferentially install this package with a versioned release tag:
 
     npm install github:NEONScience/portal-core-components#tag

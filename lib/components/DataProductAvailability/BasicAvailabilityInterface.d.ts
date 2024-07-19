@@ -2,7 +2,7 @@ export default BasicAvailabilityInterface;
 /**
    Main Function
 */
-declare function BasicAvailabilityInterface(props: any): JSX.Element;
+declare function BasicAvailabilityInterface(props: any): import("react/jsx-runtime").JSX.Element;
 declare namespace BasicAvailabilityInterface {
     namespace propTypes {
         const siteCodes: PropTypes.Requireable<(PropTypes.InferProps<{
