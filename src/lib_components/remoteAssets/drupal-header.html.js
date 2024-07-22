@@ -1082,7 +1082,7 @@ export default html = `<header class="header" role="banner">
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/collaboration-doe-ber-user-facilities-programs" class="menu__link" data-plugin-id="menu_link_content:9a65aec8-984c-4198-8e79-219e3cf3143d" data-drupal-link-system-path="node/13684">Collaboration with DOE BER User Facilities &amp; Programs</a>
+          <a href="https://www.neonscience.org/collaboration-doe-ber-user-facilities-and-programs" class="menu__link" data-plugin-id="menu_link_content:0935ec96-6ac5-4e5c-8352-6af4e6678e90" data-drupal-link-system-path="node/13669">Collaboration with DOE BER User Facilities and Programs</a>
 
                   </li>
               <li  class="menu__item">

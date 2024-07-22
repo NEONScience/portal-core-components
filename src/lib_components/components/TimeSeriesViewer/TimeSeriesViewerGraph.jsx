@@ -616,6 +616,29 @@ export default function TimeSeriesViewerGraph() {
       dygraphRef.current = new Dygraph(dygraphDomRef.current, state.graphData.data, graphOptions);
     } else {
       dygraphRef.current.updateOptions({ file: state.graphData.data, ...graphOptions });
+      // Detecting an out of bounds date window requires the data
+      // to have been updated prior to getting the current axes
+      // xAxisRange is the current date window selected by the range selector
+      // xAxisExtremes is the date window bounds of the current data
+      // If the range selector window no long applies to the viewable data,
+      // reset the range selector bounds to the current data
+      const xAxisRange = dygraphRef.current.xAxisRange();
+      const xAxisExtremes = dygraphRef.current.xAxisExtremes();
+      const isLeftBoundValid = (xAxisRange[0] >= xAxisExtremes[0])
+        && (xAxisRange[0] <= xAxisExtremes[1]);
+      const isRightBoundValid = (xAxisRange[1] >= xAxisExtremes[0])
+        && (xAxisRange[1] <= xAxisExtremes[1]);
+      if (!isLeftBoundValid || !isRightBoundValid) {
+        let updatedDateWindow;
+        if (!isLeftBoundValid && !isRightBoundValid) {
+          updatedDateWindow = [...xAxisExtremes];
+        } else if (!isLeftBoundValid) {
+          updatedDateWindow = [xAxisExtremes[0], xAxisRange[1]];
+        } else if (!isRightBoundValid) {
+          updatedDateWindow = [xAxisRange[0], xAxisExtremes[1]];
+        }
+        dygraphRef.current.updateOptions({ dateWindow: updatedDateWindow });
+      }
       // Dygraphs has a bug where the canvas isn't cleared properly when dynamically changing
       // the y-axis count. We can force a canvas refresh by cycling the range selector. This
       // is not clean, but it is at least minimally invasive.
