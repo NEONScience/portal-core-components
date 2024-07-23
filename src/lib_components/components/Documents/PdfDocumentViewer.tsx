@@ -6,9 +6,10 @@ import React, {
   useState,
 } from 'react';
 
-import * as PDFJSViewer from 'pdfjs-dist/legacy/web/pdf_viewer';
+import * as pdfjs from 'pdfjs-dist';
+import * as PDFJSViewer from 'pdfjs-dist/web/pdf_viewer.mjs';
 import { PDFDocumentProxy } from 'pdfjs-dist';
-import { EventBus, PDFLinkService, PDFViewer } from 'pdfjs-dist/legacy/web/pdf_viewer';
+import { EventBus, PDFLinkService, PDFViewer } from 'pdfjs-dist/web/pdf_viewer.mjs';
 import { DocumentInitParameters } from 'pdfjs-dist/types/src/display/api';
 import { PDFViewerOptions } from 'pdfjs-dist/types/web/pdf_viewer';
 import { PDFLinkServiceOptions } from 'pdfjs-dist/types/web/pdf_link_service';
@@ -29,11 +30,10 @@ import { NeonDocument } from '../../types/neonApi';
 import { isStringNonEmpty } from '../../util/typeUtil';
 
 // Pull in PDF JS and set up a reference to the worker source
-const pdfjs = require('pdfjs-dist/legacy/build/pdf');
-// eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
-const PdfjsWorker = require('worker-loader?esModule=false&filename=static/js/workers/[name].[contenthash].js!pdfjs-dist/legacy/build/pdf.worker');
-
-pdfjs.GlobalWorkerOptions.workerPort = new PdfjsWorker();
+pdfjs.GlobalWorkerOptions.workerPort = new Worker(
+  new URL('pdfjs-dist/build/pdf.worker.mjs', import.meta.url),
+  { type: 'module' },
+);
 
 const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
   // eslint-disable-next-line implicit-arrow-linebreak
@@ -167,7 +167,6 @@ const PdfDocumentViewer: React.FC<PdfDocumentViewerProps> = (
     const pdfViewerOptions: PDFViewerOptions = {
       container: pdfContainerElement,
       linkService: pdfLinkService,
-      l10n: PDFJSViewer.NullL10n,
       textLayerMode: 0,
       eventBus,
     };
