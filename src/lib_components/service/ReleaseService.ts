@@ -2,7 +2,7 @@ import NeonContextService from './NeonContextService';
 import { exists, existsNonEmpty, isStringNonEmpty } from '../util/typeUtil';
 import { UserRelease } from '../types/neonContext';
 import { Release as InternalRelease, IReleaseLike, ReleaseProps } from '../types/internal';
-import { DataProductDoiStatus, DataProductRelease } from '../types/neonApi';
+import { DataProductDoiStatus, DataProductRelease, DoiStatusType } from '../types/neonApi';
 import { Nullable } from '../types/core';
 
 export const LATEST_AND_PROVISIONAL = 'LATEST_AND_PROVISIONAL';
@@ -223,7 +223,8 @@ const ReleaseService: IReleaseService = {
       description: appliedDoiStatus.release,
       showCitation: true,
       showDoi: true,
-      showViz: false,
+      showViz: exists(appliedDoiStatus.status)
+        && (appliedDoiStatus.status === DoiStatusType.FINDABLE),
     };
     return transformed as IReleaseLike;
   },
