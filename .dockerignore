@@ -1,0 +1,4 @@
+# Ignore any local npm build artifacts
+node_modules
+build
+.git
