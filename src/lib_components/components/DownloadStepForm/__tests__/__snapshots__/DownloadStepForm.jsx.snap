@@ -861,7 +861,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
             <span
               className="MuiChip-label"
             >
-              3 sites — Dec 2019 - Dec 2019
+              3 sites — Jan 2020 - Jan 2020
             </span>
           </div>
         </div>

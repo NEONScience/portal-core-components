@@ -212,6 +212,19 @@ const propRows = [
       </p>
     ),
   },
+  // sidebarContentResponsive
+  {
+    name: 'sidebarContentResponsive',
+    type: 'boolean',
+    default: 'false',
+    description: (
+      <p>
+        When the <tt>sidebarContent</tt> is set and the responsive behavior of the sidebar
+        is desired, set this property to true. Otherwise, by default, the behavior
+        of the sidebar is up to the implementation of the <tt>sidebarContent</tt>.
+      </p>
+    ),
+  },
   // sidebarContainerClassName
   {
     name: 'sidebarContainerClassName',
@@ -521,6 +534,39 @@ import NeonPage from 'portal-core-components/lib/components/NeonPage';
       <CodeBlock>
         {`
 <NeonPage title="My Neon Page">
+  <Typography>Content</Typography>
+</NeonPage>
+        `}
+      </CodeBlock>
+
+      <Divider className={classes.divider} />
+      <Typography variant="h5" component="h3" gutterBottom>Sidebar Content</Typography>
+
+      <DocBlock>
+        Use the <tt>sidebarContent</tt> prop to set custom sidebar content.
+      </DocBlock>
+      <ExampleBlock>
+        <div className={classes.example}>
+          <NeonPage
+            title="My Neon Page"
+            sidebarTitle="Sidebar Title"
+            sidebarSubtitle="Sidebar Subtitle"
+            sidebarContent={(<Typography>Sidebar Content</Typography>)}
+            sidebarContentResponsive
+          >
+            <Typography>Content</Typography>
+          </NeonPage>
+        </div>
+      </ExampleBlock>
+      <CodeBlock>
+        {`
+<NeonPage
+  title="My Neon Page"
+  sidebarTitle="Sidebar Title"
+  sidebarSubtitle="Sidebar Subtitle"
+  sidebarContent={(<Typography>Sidebar Content</Typography>)}
+  sidebarContentResponsive
+>
   <Typography>Content</Typography>
 </NeonPage>
         `}
