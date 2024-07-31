@@ -158,7 +158,7 @@
     "build:docker-clean": "docker image rm portal-core-components:latest-builder",
     "build:docker-build-image": "docker buildx build --no-cache --tag portal-core-components:latest-builder --file ./build.Dockerfile .",
     "build:docker-image": "(npm run build:docker-clean || true) && npm run build:docker-build-image",
-    "build:docker": "docker run --rm --tty --interactive --volume=/$(pwd):/app/src --volume=/app/src/node_modules --workdir=/app/src portal-core-components:latest-builder npm run build",
+    "build:docker": "docker run --rm --tty --interactive --env GENERATE_SOURCEMAP=false --env NODE_OPTIONS=--max_old_space_size=4096 --volume=/$(pwd):/app/src --volume=/app/src/node_modules --workdir=/app/src portal-core-components:latest-builder npm run build",
     "lib:docker": "docker run --rm --tty --interactive --volume=/$(pwd):/app/src --volume=/app/src/node_modules --workdir=/app/src portal-core-components:latest-builder npm run lib",
     "test:docker": "docker run --rm --tty --interactive --volume=/$(pwd):/app/src --volume=/app/src/node_modules --workdir=/app/src portal-core-components:latest-builder npm run test:docker-command",
     "test:docker-update-snapshots": "docker run --rm --tty --interactive --volume=/$(pwd):/app/src --volume=/app/src/node_modules --workdir=/app/src portal-core-components:latest-builder npm run test:docker-command-update-snapshots",
