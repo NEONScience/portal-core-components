@@ -30,6 +30,7 @@ declare namespace NeonPage {
         export const progress: PropTypes.Requireable<number>;
         export const resetStateAfterRuntimeError: PropTypes.Requireable<(...args: any[]) => any>;
         export { children as sidebarContent };
+        export const sidebarContentResponsive: PropTypes.Requireable<boolean>;
         export const sidebarContainerClassName: PropTypes.Requireable<string>;
         export const sidebarLinks: PropTypes.Requireable<(PropTypes.InferProps<{
             name: PropTypes.Validator<string>;
@@ -83,6 +84,8 @@ declare namespace NeonPage {
         export function resetStateAfterRuntimeError_1(): void;
         export { resetStateAfterRuntimeError_1 as resetStateAfterRuntimeError };
         export const sidebarContent: null;
+        const sidebarContentResponsive_1: boolean;
+        export { sidebarContentResponsive_1 as sidebarContentResponsive };
         const sidebarContainerClassName_1: null;
         export { sidebarContainerClassName_1 as sidebarContainerClassName };
         const sidebarLinks_1: null;
