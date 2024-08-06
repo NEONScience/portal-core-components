@@ -1,12 +1,8 @@
-import React from 'react';
+import React, { ErrorInfo } from 'react';
 
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 
 import ComponentFallback from './ComponentFallback';
-
-interface ErrorInfo {
-  componentStack: string;
-}
 
 interface ComponentErrorBoundaryProps {
   children: React.ReactNode | React.ReactNode[];
@@ -17,7 +13,7 @@ interface ComponentErrorBoundaryProps {
 
 const ComponentErrorBoundary: React.FC<ComponentErrorBoundaryProps> = (
   props: ComponentErrorBoundaryProps,
-): JSX.Element => {
+): React.JSX.Element => {
   const {
     children,
     onReset,

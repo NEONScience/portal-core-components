@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Link from '@material-ui/core/Link';
+import Link from '@mui/material/Link';
 
 const HOST_TYPES = {
   ADDITIONAL_DATA: 'ADDITIONAL_DATA', // NEON and host offer different / complementary data

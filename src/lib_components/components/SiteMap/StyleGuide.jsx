@@ -2,13 +2,13 @@
 
 import React, { useState } from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Divider from '@material-ui/core/Divider';
-import Link from '@material-ui/core/Link';
-import Tab from '@material-ui/core/Tab';
-import Tabs from '@material-ui/core/Tabs';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@mui/styles';
+import AppBar from '@mui/material/AppBar';
+import Divider from '@mui/material/Divider';
+import Link from '@mui/material/Link';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
+import Typography from '@mui/material/Typography';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';

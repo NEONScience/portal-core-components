@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Link from '@material-ui/core/Link';
-import OpenInNewIcon from '@material-ui/icons/OpenInNew';
+import { makeStyles } from '@mui/styles';
+import Link from '@mui/material/Link';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 import Theme from '../Theme/Theme';
 import FullWidthVisualization from '../FullWidthVisualization/FullWidthVisualization';

@@ -1,18 +1,18 @@
 import React, { Suspense, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import IconButton from '@material-ui/core/IconButton';
-import Toolbar from '@material-ui/core/Toolbar';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@mui/styles';
+import AppBar from '@mui/material/AppBar';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import IconButton from '@mui/material/IconButton';
+import Toolbar from '@mui/material/Toolbar';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 
-import CloseIcon from '@material-ui/icons/Close';
-import DoneIcon from '@material-ui/icons/Done';
-import GlobeIcon from '@material-ui/icons/Language';
+import CloseIcon from '@mui/icons-material/Close';
+import DoneIcon from '@mui/icons-material/Done';
+import GlobeIcon from '@mui/icons-material/Language';
 
 import Theme from '../Theme/Theme';
 import {
@@ -222,7 +222,7 @@ MapSelectionButton.defaultProps = {
   dialogTitle: null,
   buttonProps: {},
   siteMapProps: null,
-  tooltipProps: {},
+  tooltipProps: { children: <div /> },
   validItems: null,
   selectedItems: [],
   selectionLimit: null,

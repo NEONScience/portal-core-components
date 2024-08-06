@@ -1,7 +1,7 @@
 /* eslint max-len: 0 */
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react';
 
 import uniqueId from 'lodash/uniqueId';
 

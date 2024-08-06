@@ -46,7 +46,7 @@ variables must be set to reference the appropriate API endpoints.
 
 #### Development
 
-**`REACT_APP_NEON_API_HOST_OVERRIDE`**
+**`NEXT_PUBLIC_NEON_API_HOST_OVERRIDE`**
 
 Set this environment variable to the desired API host without a trailing slash (e.g. "https://data.neonscience.org"). Note that this is a build time environment variable and if set within `.env.production` will impact *all* deployments.
 

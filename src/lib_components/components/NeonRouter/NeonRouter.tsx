@@ -16,7 +16,7 @@ interface NeonRouterProps {
   children?: React.ReactNode;
 }
 
-const NeonRouter = (props: NeonRouterProps): JSX.Element => {
+const NeonRouter = (props: NeonRouterProps): React.JSX.Element => {
   const {
     cleanPath,
     disableRedirect,

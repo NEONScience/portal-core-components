@@ -5,7 +5,7 @@ import Cookies from 'universal-cookie'; // eslint-disable-line no-unused-vars
 
 import mockReactComponent from '../../../../__mocks__/mockReactComponent';
 
-jest.mock('@material-ui/core/Snackbar', () => mockReactComponent('@material-ui/core/Snackbar'));
+jest.mock('@mui/material/Snackbar', () => mockReactComponent('@mui/material/Snackbar'));
 
 // eslint-disable-next-line import/first
 import BrowserWarning from '../BrowserWarning';

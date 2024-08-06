@@ -6,15 +6,15 @@ import { of, map, catchError } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 import cloneDeep from 'lodash/cloneDeep';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
-import Grid from '@material-ui/core/Grid';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@mui/styles';
+import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
+import Grid from '@mui/material/Grid';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import Typography from '@mui/material/Typography';
 
-import Skeleton from '@material-ui/lab/Skeleton';
+import Skeleton from '@mui/lab/Skeleton';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
@@ -42,10 +42,11 @@ const useDialogBaseStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
     height: '100%',
     position: 'relative',
+    // @ts-ignore
     width: `calc(100% - ${theme.spacing(2) * 2}px)`,
     minWidth: '340px',
     minHeight: '600px',
-    [Theme.breakpoints.down('xs')]: {
+    [Theme.breakpoints.down('sm')]: {
       minHeight: '700px',
     },
   },
@@ -91,7 +92,7 @@ const aopViewerReducer = (state: any, action: any) => {
   }
 };
 
-const AopViewerDemo = (): JSX.Element => {
+const AopViewerDemo = (): React.JSX.Element => {
   const classes = useStyles(Theme);
   const [state, dispatch] = useReducer(
     aopViewerReducer,
@@ -137,7 +138,7 @@ const AopViewerDemo = (): JSX.Element => {
   if (isLoading) {
     return (
       <div>
-        <Skeleton variant="rect" width="100%" height={400} />
+        <Skeleton variant="rectangular" width="100%" height={400} />
       </div>
     );
   }
@@ -190,7 +191,7 @@ const AopViewerDemo = (): JSX.Element => {
           </Select>
         </Grid>
         <Grid item xs={12}>
-          {state.isProductLoading ? (<Skeleton variant="rect" width="100%" height={600} />) : (
+          {state.isProductLoading ? (<Skeleton variant="rectangular" width="100%" height={600} />) : (
             <AopDataViewer productCode={state.selectedProduct} />
           )}
         </Grid>

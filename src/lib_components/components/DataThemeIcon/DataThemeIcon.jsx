@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Avatar from '@material-ui/core/Avatar';
+import Avatar from '@mui/material/Avatar';
 
 import Theme from '../Theme/Theme';
 
@@ -15,27 +15,27 @@ const dataThemes = {
   atmosphere: {
     title: 'Atmosphere',
     aliases: ['atmos'],
-    src: AtmosphereSVG,
+    src: AtmosphereSVG.src,
   },
   biogeochemistry: {
     title: 'Biogeochemistry',
     aliases: ['biogeo'],
-    src: BiogeochemistrySVG,
+    src: BiogeochemistrySVG.src,
   },
   ecohydrology: {
     title: 'Ecohydrology',
     aliases: ['ecohydro'],
-    src: EcohydrologySVG,
+    src: EcohydrologySVG.src,
   },
   landcover: {
     title: 'Land Cover & Processes',
     aliases: ['landuse', 'Land Cover and Processes', 'Land Use, Land Cover, and Land Processes'],
-    src: LandCoverSVG,
+    src: LandCoverSVG.src,
   },
   organisms: {
     title: 'Organisms, Populations, and Communities',
     aliases: [],
-    src: OrganismsSVG,
+    src: OrganismsSVG.src,
   },
 };
 

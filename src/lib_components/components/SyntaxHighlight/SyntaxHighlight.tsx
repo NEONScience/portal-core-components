@@ -3,8 +3,8 @@ import React, { useEffect, useRef } from 'react';
 import {
   makeStyles,
   createStyles,
-  Theme as MuiTheme,
-} from '@material-ui/core/styles';
+} from '@mui/styles';
+import { Theme as MuiTheme } from '@mui/material';
 
 import hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/javascript';
@@ -41,7 +41,7 @@ export interface SyntaxHighlightProps {
  */
 const SyntaxHighlight: React.FC<SyntaxHighlightProps> = (
   props: SyntaxHighlightProps,
-): JSX.Element => {
+): React.JSX.Element => {
   const classes = useStyles(Theme);
   const {
     children,

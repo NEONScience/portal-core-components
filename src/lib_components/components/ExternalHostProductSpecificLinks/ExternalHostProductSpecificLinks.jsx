@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Typography from '@material-ui/core/Typography';
-import WarningIcon from '@material-ui/icons/Warning';
+import { makeStyles } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import CircularProgress from '@mui/material/CircularProgress';
+import Typography from '@mui/material/Typography';
+import WarningIcon from '@mui/icons-material/Warning';
 
 import Theme from '../Theme/Theme';
 import NeonContext from '../NeonContext/NeonContext';
@@ -45,8 +45,8 @@ export default function ExternalHostProductSpecificLinks(props) {
   const { sites: allSites, states: allStates } = neonContextData;
 
   const belowSm = useMediaQuery(Theme.breakpoints.only('xs'));
-  const belowMd = useMediaQuery(Theme.breakpoints.down('sm'));
-  const belowLg = useMediaQuery(Theme.breakpoints.down('md'));
+  const belowMd = useMediaQuery(Theme.breakpoints.down('ms'));
+  const belowLg = useMediaQuery(Theme.breakpoints.down('lg'));
 
   const externalHost = ExternalHost.getByProductCode(productCode);
   if (!externalHost || !Object.keys(ExternalHost.LINK_TYPES).includes(externalHost.linkType)) {

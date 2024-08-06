@@ -15,29 +15,29 @@ import { Subject } from 'rxjs';
 
 import { ErrorBoundary } from 'react-error-boundary';
 
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import Backdrop from '@material-ui/core/Backdrop';
-import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-import Button from '@material-ui/core/Button';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Container from '@material-ui/core/Container';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import Link from '@material-ui/core/Link';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles, withStyles } from '@mui/styles';
+import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import Backdrop from '@mui/material/Backdrop';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
+import Container from '@mui/material/Container';
+import CssBaseline from '@mui/material/CssBaseline';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import Link from '@mui/material/Link';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
 
-import ClearIcon from '@material-ui/icons/Clear';
-import CollapseIcon from '@material-ui/icons/ExpandLess';
-import ErrorIcon from '@material-ui/icons/Warning';
-import ExpandIcon from '@material-ui/icons/ExpandMore';
-import HomeIcon from '@material-ui/icons/Home';
-import ResetIcon from '@material-ui/icons/Autorenew';
+import ClearIcon from '@mui/icons-material/Clear';
+import CollapseIcon from '@mui/icons-material/ExpandLess';
+import ErrorIcon from '@mui/icons-material/Warning';
+import ExpandIcon from '@mui/icons-material/ExpandMore';
+import HomeIcon from '@mui/icons-material/Home';
+import ResetIcon from '@mui/icons-material/Autorenew';
 
-import Skeleton from '@material-ui/lab/Skeleton';
+import Skeleton from '@mui/lab/Skeleton';
 
 import REMOTE_ASSETS from '../../remoteAssetsMap/remoteAssetsMap';
 import Theme, { COLORS } from '../Theme/Theme';
@@ -95,7 +95,7 @@ const isAtMaxScroll = () => {
 };
 
 // Google Tag Manager Data Layer
-// Define if not already defined. This must be set in the public/index.html for any apps/pages that
+// Define if not already defined. This must be set in the index.html for any apps/pages that
 // would seek to use it. More info: https://developers.google.com/tag-manager/devguide
 if (!window.gtmDataLayer) {
   window.gtmDataLayer = [];
@@ -112,7 +112,7 @@ const useStyles = (sidebarWidth) => makeStyles(() => ({
     borderTop: '2px solid transparent',
     paddingLeft: '0px',
     paddingRight: '0px',
-    [Theme.breakpoints.down('sm')]: {
+    [Theme.breakpoints.down('md')]: {
       paddingBottom: Theme.spacing(2.5),
       flexDirection: 'column',
     },
@@ -123,7 +123,7 @@ const useStyles = (sidebarWidth) => makeStyles(() => ({
     position: 'relative',
     padding: Theme.spacing(4, 8, 12, 8),
     width: `calc(100% - ${sidebarWidth}px)`,
-    [Theme.breakpoints.down('sm')]: {
+    [Theme.breakpoints.down('md')]: {
       width: '100%',
       display: 'block',
       padding: Theme.spacing(3, 5, 8, 5),
@@ -141,7 +141,7 @@ const useStyles = (sidebarWidth) => makeStyles(() => ({
   },
   breadcrumbs: {
     margin: Theme.spacing(2, 0, 4, 0),
-    [Theme.breakpoints.down('sm')]: {
+    [Theme.breakpoints.down('md')]: {
       margin: Theme.spacing(1, 0, 2, 0),
     },
   },
@@ -150,7 +150,7 @@ const useStyles = (sidebarWidth) => makeStyles(() => ({
     verticalAlign: 'top',
     backgroundColor: COLORS.GREY[50],
     padding: Theme.spacing(5, 4),
-    [Theme.breakpoints.down('sm')]: {
+    [Theme.breakpoints.down('md')]: {
       display: 'inline-block',
       width: '100%',
       maxHeight: 'calc(100vh - 84px)',
@@ -160,7 +160,7 @@ const useStyles = (sidebarWidth) => makeStyles(() => ({
       boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.25), 0px 1px 1px rgba(0, 0, 0, 0.25)',
       zIndex: 2,
     },
-    [Theme.breakpoints.down('xs')]: {
+    [Theme.breakpoints.down('sm')]: {
       padding: Theme.spacing(1.5),
     },
   },
@@ -175,7 +175,7 @@ const useStyles = (sidebarWidth) => makeStyles(() => ({
   },
   sidebarTitle: {
     fontWeight: 700,
-    [Theme.breakpoints.down('sm')]: {
+    [Theme.breakpoints.down('md')]: {
       overflow: 'hidden',
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
@@ -187,13 +187,13 @@ const useStyles = (sidebarWidth) => makeStyles(() => ({
   sidebarSubtitle: {
     color: COLORS.GREY[300],
     marginTop: Theme.spacing(1),
-    [Theme.breakpoints.down('sm')]: {
+    [Theme.breakpoints.down('md')]: {
       overflow: 'hidden',
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
       marginTop: '0px',
     },
-    [Theme.breakpoints.down('xs')]: {
+    [Theme.breakpoints.down('sm')]: {
       display: 'none',
     },
   },
@@ -232,10 +232,10 @@ const useStyles = (sidebarWidth) => makeStyles(() => ({
   },
   sidebarDivider: {
     margin: '24px 0px',
-    [Theme.breakpoints.down('sm')]: {
+    [Theme.breakpoints.down('md')]: {
       margin: '16px 0px',
     },
-    [Theme.breakpoints.down('xs')]: {
+    [Theme.breakpoints.down('sm')]: {
       margin: '8px 0px 12px 0px',
     },
   },
@@ -309,42 +309,44 @@ export const NeonErrorPage = (props) => {
   // eslint-disable-next-line no-console
   console.error(stack);
   return (
-    <ThemeProvider theme={Theme}>
-      <CssBaseline />
-      <GlobalCss />
-      <Container className={classes.outerPageContainer}>
-        <div className={classes.pageContent} data-selenium="neon-page.content">
-          <img
-            title="NEON Data Portal"
-            alt="NEON Data Portal"
-            className={classes.errorPageLogo}
-            src={NeonLogo}
-          />
-          <Typography variant="h3" component="h1" className={classes.pageTitle}>
-            <ErrorIcon className={classes.errorPageTitleIcon} />
-            Something broke.
-          </Typography>
-          <div>
-            <Typography variant="caption" className={classes.errorPageCaption}>
-              {message}
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={Theme}>
+        <CssBaseline />
+        <GlobalCss />
+        <Container className={classes.outerPageContainer}>
+          <div className={classes.pageContent} data-selenium="neon-page.content">
+            <img
+              title="NEON Data Portal"
+              alt="NEON Data Portal"
+              className={classes.errorPageLogo}
+              src={NeonLogo.src}
+            />
+            <Typography variant="h3" component="h1" className={classes.pageTitle}>
+              <ErrorIcon className={classes.errorPageTitleIcon} />
+              Something broke.
             </Typography>
+            <div>
+              <Typography variant="caption" className={classes.errorPageCaption}>
+                {message}
+              </Typography>
+            </div>
+            <div style={{ display: 'flex' }}>
+              <Button startIcon={<ResetIcon />} variant="outlined" onClick={resetErrorBoundary}>
+                Reset and Try Again
+              </Button>
+              <Button startIcon={<HomeIcon />} href="/" style={{ marginLeft: Theme.spacing(4) }}>
+                Return Home
+              </Button>
+            </div>
           </div>
-          <div style={{ display: 'flex' }}>
-            <Button startIcon={<ResetIcon />} variant="outlined" onClick={resetErrorBoundary}>
-              Reset and Try Again
-            </Button>
-            <Button startIcon={<HomeIcon />} href="/" style={{ marginLeft: Theme.spacing(4) }}>
-              Return Home
-            </Button>
-          </div>
-        </div>
-        <input
-          type="hidden"
-          data-gtm="react-page-run-time-error.stack"
-          value={`${stack}`}
-        />
-      </Container>
-    </ThemeProvider>
+          <input
+            type="hidden"
+            data-gtm="react-page-run-time-error.stack"
+            value={`${stack}`}
+          />
+        </Container>
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 };
 
@@ -401,7 +403,7 @@ const NeonPage = (props) => {
   const contentRef = useRef(null);
   const sidebarRef = useRef(null);
   const sidebarLinksContainerRef = useRef(null);
-  const belowMd = useMediaQuery(Theme.breakpoints.down('sm'));
+  const belowMd = useMediaQuery(Theme.breakpoints.down('md'));
   const [overlayDismissed, setOverlayDismissed] = useState(false);
 
   // Boolean - whether any Drupal assets are used; only false if both header and footer are custom
@@ -529,6 +531,8 @@ const NeonPage = (props) => {
       })
       .then((data) => {
         const drupalStyle = document.createElement('style');
+        drupalStyle.setAttribute('data-meta', 'drupal-theme');
+        drupalStyle.setAttribute('data-meta-runtime', 'drupal-theme');
         const appliedData = DrupalAssetService.cleanCss(data, true);
         drupalStyle.textContent = appliedData;
         document.head.appendChild(drupalStyle);
@@ -717,7 +721,7 @@ const NeonPage = (props) => {
   const renderSidebar = () => {
     if (!hasSidebar) { return null; }
     const sidebarContainerStyle = belowMd ? {} : { width: `${sidebarWidth}px` };
-    const dividerStyle = !belowMd ? { width: `${sidebarWidth - Theme.spacing(8)}px` } : {};
+    const dividerStyle = !belowMd ? { width: `${sidebarWidth - Theme.spacing(8)}` } : {};
     const sidebarClassName = sidebarContainerClassNameProp
       ? `${classes.sidebarContainer} ${sidebarContainerClassNameProp}`
       : classes.sidebarContainer;
@@ -890,54 +894,56 @@ const NeonPage = (props) => {
       content = <CurrentComponent />;
     }
     return (
-      <ThemeProvider theme={Theme}>
-        <CssBaseline />
-        <GlobalCss />
-        {customHeader ? (
-          <header ref={headerRef}>
-            {customHeader}
-          </header>
-        ) : (
-          <NeonHeader
-            ref={headerRef}
-            unstickyDrupalHeader={unstickyDrupalHeader}
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={Theme}>
+          <CssBaseline />
+          <GlobalCss />
+          {customHeader ? (
+            <header ref={headerRef}>
+              {customHeader}
+            </header>
+          ) : (
+            <NeonHeader
+              ref={headerRef}
+              unstickyDrupalHeader={unstickyDrupalHeader}
+              notifications={notifications}
+              onShowNotifications={handleShowNotifications}
+              drupalCssLoaded={drupalCssStatus === FETCH_STATUS.SUCCESS}
+              showSkeleton={showHeaderSkeleton}
+            />
+          )}
+          <Container className={classes.outerPageContainer} style={outerPageContainerStyles}>
+            {renderSidebar()}
+            <div
+              className={classes.pageContent}
+              style={{ top: hasSidebar && !breadcrumbs.length ? '12px' : '0px' }}
+              data-selenium="neon-page.content"
+              ref={contentRef}
+            >
+              {renderBreadcrumbs()}
+              {renderTitle()}
+              {content}
+            </div>
+          </Container>
+          <LiferayNotifications
             notifications={notifications}
-            onShowNotifications={handleShowNotifications}
-            drupalCssLoaded={drupalCssStatus === FETCH_STATUS.SUCCESS}
-            showSkeleton={showHeaderSkeleton}
+            onHideNotifications={handleHideNotifications}
           />
-        )}
-        <Container className={classes.outerPageContainer} style={outerPageContainerStyles}>
-          {renderSidebar()}
-          <div
-            className={classes.pageContent}
-            style={{ top: hasSidebar && !breadcrumbs.length ? '12px' : '0px' }}
-            data-selenium="neon-page.content"
-            ref={contentRef}
-          >
-            {renderBreadcrumbs()}
-            {renderTitle()}
-            {content}
-          </div>
-        </Container>
-        <LiferayNotifications
-          notifications={notifications}
-          onHideNotifications={handleHideNotifications}
-        />
-        <BrowserWarning />
-        {customFooter ? (
-          <footer>
-            {customFooter}
-          </footer>
-        ) : (
-          <NeonFooter
-            drupalCssLoaded={drupalCssStatus === FETCH_STATUS.SUCCESS}
-            showSkeleton={showFooterSkeleton}
-          />
-        )}
-        {renderLoading()}
-        {renderError()}
-      </ThemeProvider>
+          <BrowserWarning />
+          {customFooter ? (
+            <footer>
+              {customFooter}
+            </footer>
+          ) : (
+            <NeonFooter
+              drupalCssLoaded={drupalCssStatus === FETCH_STATUS.SUCCESS}
+              showSkeleton={showFooterSkeleton}
+            />
+          )}
+          {renderLoading()}
+          {renderError()}
+        </ThemeProvider>
+      </StyledEngineProvider>
     );
   };
 

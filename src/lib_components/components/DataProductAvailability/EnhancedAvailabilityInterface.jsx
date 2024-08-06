@@ -9,18 +9,18 @@ import PropTypes from 'prop-types';
 
 import { uniqueId } from 'lodash';
 
-import { makeStyles } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { makeStyles } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
-import FormControl from '@material-ui/core/FormControl';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-import Typography from '@material-ui/core/Typography';
+import FormControl from '@mui/material/FormControl';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import ToggleButton from '@mui/lab/ToggleButton';
+import ToggleButtonGroup from '@mui/lab/ToggleButtonGroup';
+import Typography from '@mui/material/Typography';
 
-import AscIcon from '@material-ui/icons/KeyboardArrowDown';
-import DescIcon from '@material-ui/icons/KeyboardArrowUp';
+import AscIcon from '@mui/icons-material/KeyboardArrowDown';
+import DescIcon from '@mui/icons-material/KeyboardArrowUp';
 
 import AvailabilityContext from './AvailabilityContext';
 import AvailabilityPending from './AvailabilityPending';

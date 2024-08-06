@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Grid from '@material-ui/core/Grid';
+import Grid from '@mui/material/Grid';
 
 import ComponentErrorBoundary from '../Error/ComponentErrorBoundary';
 import CustomComponentFallback from '../Error/CustomComponentFallback';

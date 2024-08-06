@@ -3,10 +3,10 @@ import React, { useReducer, useEffect } from 'react';
 
 import { ReplaySubject } from 'rxjs';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Link from '@material-ui/core/Link';
-import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@mui/styles';
+import Link from '@mui/material/Link';
+import Divider from '@mui/material/Divider';
+import Typography from '@mui/material/Typography';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';

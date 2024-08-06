@@ -2,32 +2,32 @@ import React, { useState } from 'react';
 
 import lzw from 'node-lzw';
 
-import { makeStyles } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { makeStyles } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Chip from '@material-ui/core/Chip';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Divider from '@material-ui/core/Divider';
-import Grid from '@material-ui/core/Grid';
-import Hidden from '@material-ui/core/Hidden';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import Link from '@material-ui/core/Link';
-import MobileStepper from '@material-ui/core/MobileStepper';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepButton from '@material-ui/core/StepButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Chip from '@mui/material/Chip';
+import CircularProgress from '@mui/material/CircularProgress';
+import Divider from '@mui/material/Divider';
+import Grid from '@mui/material/Grid';
+import Hidden from '@mui/material/Hidden';
+import LinearProgress from '@mui/material/LinearProgress';
+import Link from '@mui/material/Link';
+import MobileStepper from '@mui/material/MobileStepper';
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepButton from '@mui/material/StepButton';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 
-import CircleStarIcon from '@material-ui/icons/Stars';
-import DownloadIcon from '@material-ui/icons/SaveAlt';
-import ErrorIcon from '@material-ui/icons/ErrorOutline';
-import LeftIcon from '@material-ui/icons/ChevronLeft';
-import RightIcon from '@material-ui/icons/ChevronRight';
-import WarningIcon from '@material-ui/icons/Warning';
+import CircleStarIcon from '@mui/icons-material/Stars';
+import DownloadIcon from '@mui/icons-material/SaveAlt';
+import ErrorIcon from '@mui/icons-material/ErrorOutline';
+import LeftIcon from '@mui/icons-material/ChevronLeft';
+import RightIcon from '@mui/icons-material/ChevronRight';
+import WarningIcon from '@mui/icons-material/Warning';
 
 import DialogBase from '../DialogBase/DialogBase';
 import DownloadStepForm from '../DownloadStepForm/DownloadStepForm';
@@ -826,7 +826,7 @@ export default function DownloadDataDialog() {
         className: classes.gtmCaptureButton,
       }}
       toolbarChildren={fromManifest || fromAOPManifest ? (
-        <Hidden xsDown>
+        <Hidden smDown>
           <div data-selenium="download-data-dialog.size-estimate">
             {renderSizeEstimate()}
           </div>
@@ -882,7 +882,7 @@ export default function DownloadDataDialog() {
           ) : null}
           {renderActions()}
           {fromManifest || fromAOPManifest ? (
-            <Hidden xsDown>
+            <Hidden smDown>
               <div style={{ marginTop: Theme.spacing(1), textAlign: 'right' }}>
                 {renderFileType()}
               </div>

@@ -13,26 +13,26 @@ import { useId } from 'react-id-generator';
 
 import L from 'leaflet';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import IconButton from '@material-ui/core/IconButton';
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@mui/styles';
+import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
+import IconButton from '@mui/material/IconButton';
+import ToggleButton from '@mui/lab/ToggleButton';
+import ToggleButtonGroup from '@mui/lab/ToggleButtonGroup';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 
-import MapPanIcon from '@material-ui/icons/PanTool';
-import MapAreaSelectIcon from '@material-ui/icons/CropFree';
-import ObservatoryIcon from '@material-ui/icons/Public';
-import FocusLocationIcon from '@material-ui/icons/Place';
+import MapPanIcon from '@mui/icons-material/PanTool';
+import MapAreaSelectIcon from '@mui/icons-material/CropFree';
+import ObservatoryIcon from '@mui/icons-material/Public';
+import FocusLocationIcon from '@mui/icons-material/Place';
 
 import 'leaflet/dist/leaflet.css';
 import './SiteMap.css';
 
 import {
   LayerGroup,
-  Map,
+  MapContainer,
   ScaleControl,
   TileLayer,
   WMSTileLayer,
@@ -612,6 +612,7 @@ const SiteMapLeaflet = () => {
             if (mapRefExists()) { mapRef.current.leafletElement.invalidateSize(); }
             dispatch({ type: 'showFullObservatory', mapRef });
           }}
+          size="large"
         >
           <ObservatoryIcon fontSize="small" />
         </IconButton>
@@ -634,6 +635,7 @@ const SiteMapLeaflet = () => {
             className={classes.mapNavButton}
             onClick={() => { dispatch({ type: 'returnToFocusLocation' }); }}
             disabled={mapIsAtFocusLocation(state)}
+            size="large"
           >
             <FocusLocationIcon fontSize="small" />
           </IconButton>
@@ -876,7 +878,7 @@ const SiteMapLeaflet = () => {
   if (areaSelection.isDragging) { className = `${className} ${classes.mapNoMarkerPointerEvents}`; }
   return (
     <>
-      <Map
+      <MapContainer
         id={`sitemap-${mapInstanceId}`}
         ref={mapRef}
         className={className}
@@ -917,7 +919,7 @@ const SiteMapLeaflet = () => {
           .filter((key) => state.filters.features.available[key])
           .filter((key) => state.filters.features.visible[key])
           .map((key) => <SiteMapFeature key={key} featureKey={key} mapRef={mapRef} />)}
-      </Map>
+      </MapContainer>
       {renderAreaSelection()}
       {renderShowFullObservatoryButton()}
       {renderReturnToFocusLocationButton()}

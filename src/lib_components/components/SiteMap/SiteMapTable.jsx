@@ -1,14 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useRef, useEffect, useLayoutEffect } from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import Link from '@material-ui/core/Link';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@mui/styles';
+import Box from '@mui/material/Box';
+import Link from '@mui/material/Link';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 
-import InfoIcon from '@material-ui/icons/InfoOutlined';
+import InfoIcon from '@mui/icons-material/InfoOutlined';
 
 import MaterialTable, { MTableToolbar, MTableFilterRow } from 'material-table';
 
@@ -190,7 +190,7 @@ const useStyles = makeStyles((theme) => ({
   },
   toolbarContainer: {
     backgroundColor: theme.palette.grey[50],
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(4.5),
     },
     '& div.MuiToolbar-root': {
@@ -458,7 +458,7 @@ const SiteMapTable = () => {
     const style = unselectable ? { filter: UNSELECTABLE_MARKER_FILTER } : {};
     return (
       <img
-        src={iconSvg}
+        src={iconSvg.src}
         alt={getFeatureName(featureKey)}
         className={classes.featureIcon}
         style={style}

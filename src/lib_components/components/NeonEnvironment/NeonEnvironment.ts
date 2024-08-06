@@ -23,12 +23,12 @@ export const HostRegexService: IHostRegexService = {
 // that are expected to be referenced by all apps. Standard vars present in all
 // node environments (e.g. PORT, NODE_ENV, etc.) are not listed here.
 export const requiredEnvironmentVars = [
-  'REACT_APP_NEON_PATH_API',
-  'REACT_APP_NEON_PATH_PUBLIC_GRAPHQL',
-  'REACT_APP_NEON_PATH_AUTH_API',
-  'REACT_APP_NEON_PATH_AUTH0_API',
-  'REACT_APP_NEON_ROUTER_BASE',
-  'REACT_APP_NEON_ROUTER_BASE_HOME',
+  'NEXT_PUBLIC_NEON_PATH_API',
+  'NEXT_PUBLIC_NEON_PATH_PUBLIC_GRAPHQL',
+  'NEXT_PUBLIC_NEON_PATH_AUTH_API',
+  'NEXT_PUBLIC_NEON_PATH_AUTH0_API',
+  'NEXT_PUBLIC_NEON_ROUTER_BASE',
+  'NEXT_PUBLIC_NEON_ROUTER_BASE_HOME',
 ];
 
 // Names of additional environment variables that may be referenced by
@@ -36,17 +36,17 @@ export const requiredEnvironmentVars = [
 // required list this makes a complete set of all environment variables
 // this module will ever reference.
 export const optionalEnvironmentVars = [
-  'REACT_APP_NEON_PATH_LD_API',
-  'REACT_APP_NEON_PATH_DOWNLOAD_API',
-  'REACT_APP_NEON_AUTH_DISABLE_WS',
-  'REACT_APP_NEON_USE_GRAPHQL',
-  'REACT_APP_NEON_SHOW_AOP_VIEWER',
-  'REACT_APP_NEON_VISUS_PRODUCTS_BASE_URL',
-  'REACT_APP_NEON_VISUS_IFRAME_BASE_URL',
-  'REACT_APP_NEON_API_HOST_OVERRIDE',
-  'REACT_APP_NEON_WEB_HOST_OVERRIDE',
-  'REACT_APP_NEON_WS_HOST_OVERRIDE',
-  'REACT_APP_NEON_FETCH_DRUPAL_ASSETS',
+  'NEXT_PUBLIC_NEON_PATH_LD_API',
+  'NEXT_PUBLIC_NEON_PATH_DOWNLOAD_API',
+  'NEXT_PUBLIC_NEON_AUTH_DISABLE_WS',
+  'NEXT_PUBLIC_NEON_USE_GRAPHQL',
+  'NEXT_PUBLIC_NEON_SHOW_AOP_VIEWER',
+  'NEXT_PUBLIC_NEON_VISUS_PRODUCTS_BASE_URL',
+  'NEXT_PUBLIC_NEON_VISUS_IFRAME_BASE_URL',
+  'NEXT_PUBLIC_NEON_API_HOST_OVERRIDE',
+  'NEXT_PUBLIC_NEON_WEB_HOST_OVERRIDE',
+  'NEXT_PUBLIC_NEON_WS_HOST_OVERRIDE',
+  'NEXT_PUBLIC_NEON_FETCH_DRUPAL_ASSETS',
 ];
 
 const EnvType = {
@@ -135,21 +135,21 @@ const NeonEnvironment: INeonEnvironment = {
   isValid: requiredEnvironmentVars.every((envVar) => typeof process.env[envVar] !== 'undefined'),
   isDevEnv: process.env.NODE_ENV === EnvType.DEV,
   isProdEnv: process.env.NODE_ENV === EnvType.PROD,
-  useGraphql: process.env.REACT_APP_NEON_USE_GRAPHQL === 'true',
-  showAopViewer: process.env.REACT_APP_NEON_SHOW_AOP_VIEWER === 'true',
-  authDisableWs: process.env.REACT_APP_NEON_AUTH_DISABLE_WS === 'true',
-  enableGlobalSignInState: process.env.REACT_APP_NEON_ENABLE_GLOBAL_SIGNIN_STATE === 'true',
-  fetchDrupalAssets: process.env.REACT_APP_NEON_FETCH_DRUPAL_ASSETS !== 'false',
+  useGraphql: process.env.NEXT_PUBLIC_NEON_USE_GRAPHQL === 'true',
+  showAopViewer: process.env.NEXT_PUBLIC_NEON_SHOW_AOP_VIEWER === 'true',
+  authDisableWs: process.env.NEXT_PUBLIC_NEON_AUTH_DISABLE_WS === 'true',
+  enableGlobalSignInState: process.env.NEXT_PUBLIC_NEON_ENABLE_GLOBAL_SIGNIN_STATE === 'true',
+  fetchDrupalAssets: process.env.NEXT_PUBLIC_NEON_FETCH_DRUPAL_ASSETS !== 'false',
 
-  getReactAppName: () => process.env.REACT_APP_NAME || '',
-  getReactAppVersion: () => process.env.REACT_APP_VERSION || '',
+  getReactAppName: () => process.env.NEXT_PUBLIC_NAME || '',
+  getReactAppVersion: () => process.env.NEXT_PUBLIC_VERSION || '',
 
-  getRootApiPath: () => process.env.REACT_APP_NEON_PATH_API || '/api/v0',
-  getRootGraphqlPath: () => process.env.REACT_APP_NEON_PATH_PUBLIC_GRAPHQL || '/graphql',
-  getRootJsonLdPath: () => `${NeonEnvironment.getRootApiPath()}${process.env.REACT_APP_NEON_PATH_LD_API}`,
-  getRootAuthApiPath: () => process.env.REACT_APP_NEON_PATH_AUTH_API || '/api/auth/v0',
-  getRootAuth0ApiPath: () => process.env.REACT_APP_NEON_PATH_AUTH0_API || '/auth0',
-  getRootDownloadApiPath: () => process.env.REACT_APP_NEON_PATH_DOWNLOAD_API || '/api/download/v0',
+  getRootApiPath: () => process.env.NEXT_PUBLIC_NEON_PATH_API || '/api/v0',
+  getRootGraphqlPath: () => process.env.NEXT_PUBLIC_NEON_PATH_PUBLIC_GRAPHQL || '/graphql',
+  getRootJsonLdPath: () => `${NeonEnvironment.getRootApiPath()}${process.env.NEXT_PUBLIC_NEON_PATH_LD_API}`,
+  getRootAuthApiPath: () => process.env.NEXT_PUBLIC_NEON_PATH_AUTH_API || '/api/auth/v0',
+  getRootAuth0ApiPath: () => process.env.NEXT_PUBLIC_NEON_PATH_AUTH0_API || '/auth0',
+  getRootDownloadApiPath: () => process.env.NEXT_PUBLIC_NEON_PATH_DOWNLOAD_API || '/api/download/v0',
 
   getApiPath: {
     data: (): string => '/data',
@@ -198,20 +198,20 @@ const NeonEnvironment: INeonEnvironment = {
   getDataProductTaxonTypesPath: (): string => `${NeonEnvironment.getFullApiPath('taxonomy')}/types`,
   getTaxonTypeDataProductsPath: (): string => `${NeonEnvironment.getFullApiPath('taxonomy')}/products`,
 
-  getVisusProductsBaseUrl: (): Undef<string> => process.env.REACT_APP_NEON_VISUS_PRODUCTS_BASE_URL,
-  getVisusIframeBaseUrl: (): Undef<string> => process.env.REACT_APP_NEON_VISUS_IFRAME_BASE_URL,
+  getVisusProductsBaseUrl: (): Undef<string> => process.env.NEXT_PUBLIC_NEON_VISUS_PRODUCTS_BASE_URL,
+  getVisusIframeBaseUrl: (): Undef<string> => process.env.NEXT_PUBLIC_NEON_VISUS_IFRAME_BASE_URL,
 
-  getRouterBasePath: (): string => process.env.REACT_APP_NEON_ROUTER_BASE || '',
-  getRouterBaseHomePath: (): string => process.env.REACT_APP_NEON_ROUTER_BASE_HOME || '',
+  getRouterBasePath: (): string => process.env.NEXT_PUBLIC_NEON_ROUTER_BASE || '',
+  getRouterBaseHomePath: (): string => process.env.NEXT_PUBLIC_NEON_ROUTER_BASE_HOME || '',
 
   getApiHostOverride: (): string => (
-    process.env.REACT_APP_NEON_API_HOST_OVERRIDE || DEFAULT_API_HOST
+    process.env.NEXT_PUBLIC_NEON_API_HOST_OVERRIDE || DEFAULT_API_HOST
   ),
   getWebHostOverride: (): string => (
-    process.env.REACT_APP_NEON_WEB_HOST_OVERRIDE || DEFAULT_WEB_HOST
+    process.env.NEXT_PUBLIC_NEON_WEB_HOST_OVERRIDE || DEFAULT_WEB_HOST
   ),
   getWsHostOverride: (): string => (
-    process.env.REACT_APP_NEON_WS_HOST_OVERRIDE || DEFAULT_API_HOST
+    process.env.NEXT_PUBLIC_NEON_WS_HOST_OVERRIDE || DEFAULT_API_HOST
   ),
 
   route: {

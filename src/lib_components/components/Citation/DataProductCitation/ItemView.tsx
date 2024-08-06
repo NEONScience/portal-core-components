@@ -3,20 +3,20 @@ import React, { useCallback } from 'react';
 
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Alert from '@material-ui/lab/Alert';
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Divider from '@material-ui/core/Divider';
-import Link from '@material-ui/core/Link';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@mui/styles';
+import Alert from '@mui/lab/Alert';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CircularProgress from '@mui/material/CircularProgress';
+import Divider from '@mui/material/Divider';
+import Link from '@mui/material/Link';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 
-import CopyIcon from '@material-ui/icons/Assignment';
-import DownloadIcon from '@material-ui/icons/SaveAlt';
+import CopyIcon from '@mui/icons-material/Assignment';
+import DownloadIcon from '@mui/icons-material/SaveAlt';
 
 import BundleContentBuilder from '../../Bundles/BundleContentBuilder';
 import DataProductBundleCard from '../../Bundles/DataProductBundleCard';
@@ -96,7 +96,7 @@ const useStyles = makeStyles((theme: NeonTheme) => ({
 
 const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = (
   props: DataProductCitationItemViewProps,
-): JSX.Element => {
+): React.JSX.Element => {
   const {
     showTextOnly,
     textOnlyProps,
@@ -186,7 +186,7 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
     );
   }, [dispatch, releases, doiUrl, handleResetCitationDownloadsCb]);
 
-  const renderTombstoneNotice = (): Nullable<JSX.Element> => {
+  const renderTombstoneNotice = (): Nullable<React.JSX.Element> => {
     if (!isTombstoned) {
       return null;
     }
@@ -196,11 +196,11 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
       const doiId: string = citationRelease.productDoi.url.split('/').slice(-2).join('/');
       doiDisplay = ` (DOI:${doiId}) `;
     }
-    let latestAvailableReleaseBlurb: JSX.Element|null = null;
+    let latestAvailableReleaseBlurb: React.JSX.Element|null = null;
     if (citableBaseProduct?.releases && (citableBaseProduct?.releases.length > 0)) {
       const latestAvailableProductRelease: DataProductRelease = citableBaseProduct?.releases[0];
       if (latestAvailableProductRelease.release.localeCompare(citationRelease.release) !== 0) {
-        const dataProductDetailLink: JSX.Element = (
+        const dataProductDetailLink: React.JSX.Element = (
           <Link href={RouteService.getProductDetailPath(citableBaseProduct.productCode)}>
             newer release
           </Link>
@@ -214,12 +214,12 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
         );
       }
     }
-    const contactUsLink: JSX.Element = (
+    const contactUsLink: React.JSX.Element = (
       <Link href={RouteService.getContactUsPath()}>
         Contact Us
       </Link>
     );
-    const tombstoneNote: JSX.Element = (
+    const tombstoneNote: React.JSX.Element = (
       <>
         {/* eslint-disable react/jsx-one-expression-per-line, max-len */}
         <b>{citationRelease.release}</b> of this data product
@@ -243,7 +243,7 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
     );
   };
 
-  const renderBundleParentLink = (): Nullable<JSX.Element> => {
+  const renderBundleParentLink = (): Nullable<React.JSX.Element> => {
     if (!isStringNonEmpty(bundleParentCode) || hasManyParents) {
       return null;
     }
@@ -290,7 +290,7 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
     release: string,
     conditional = false,
     provisional = false,
-  ): JSX.Element => {
+  ): React.JSX.Element => {
     const citationProduct: ContextDataProduct = provisional
       ? citableBaseProduct as ContextDataProduct
       : citableReleaseProduct as ContextDataProduct;
@@ -347,7 +347,7 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
       citationProduct.productCode,
       FetchStatus.FETCHING,
     );
-    let downloadStatus: Nullable<JSX.Element>;
+    let downloadStatus: Nullable<React.JSX.Element>;
     if (
       Service.hasCitationDownloadStatus(
         citationDownloadsFetchStatus,
@@ -406,7 +406,7 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
               </Button>
             </CopyToClipboard>
           </Tooltip>
-          {DataCiteService.getDataProductFormats().map((format: CitationFormat): JSX.Element => {
+          {DataCiteService.getDataProductFormats().map((format: CitationFormat): React.JSX.Element => {
             const key: string = Service.buildCitationDownloadKey(
               citationProduct,
               release,
@@ -456,7 +456,7 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
     );
   };
 
-  let citationCard: JSX.Element;
+  let citationCard: React.JSX.Element;
   switch (displayType) {
     case DisplayType.CONDITIONAL:
       citationCard = (

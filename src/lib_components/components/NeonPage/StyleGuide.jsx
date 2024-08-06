@@ -3,13 +3,13 @@ import React, { useState } from 'react';
 
 import { useErrorBoundary } from 'react-error-boundary';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
-import Grid from '@material-ui/core/Grid';
-import Link from '@material-ui/core/Link';
-import Typography from '@material-ui/core/Typography';
-import Skeleton from '@material-ui/lab/Skeleton';
+import { makeStyles } from '@mui/styles';
+import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
+import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography';
+import Skeleton from '@mui/lab/Skeleton';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
@@ -246,7 +246,7 @@ const propRows = [
     examples: (
       <CodeBlock>
         {`
-import FooIcon from '@material-ui/icons/Foo';
+import FooIcon from '@mui/icons-material/Foo';
 import MyComponent from './MyComponent';
 
 const sidebarLinks = [
@@ -417,11 +417,11 @@ export default function StyleGuide() {
 
   const skeletionGrid = (
     <Grid item xs={4}>
-      <Skeleton variant="rect" width="100%" height={100} />
+      <Skeleton variant="rectangular" width="100%" height={100} />
       <br />
-      <Skeleton variant="rect" width="100%" height={16} />
+      <Skeleton variant="rectangular" width="100%" height={16} />
       <br />
-      <Skeleton variant="rect" width="60%" height={16} />
+      <Skeleton variant="rectangular" width="60%" height={16} />
     </Grid>
   );
 
@@ -926,7 +926,7 @@ export default function MyNeonPage() {
 import React, { useState } from 'react';
 import { useErrorBoundary } from 'react-error-boundary';
 
-import Button from '@material-ui/core/Button';
+import Button from '@mui/material/Button';
 
 export default function TriggerRunTimeErrorButtons() {
   const [lifecycleRunTimeError, setLifecycleRunTimeError] = useState(false);

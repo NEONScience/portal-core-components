@@ -4,21 +4,21 @@ import React from 'react';
 
 import { useId } from 'react-id-generator';
 
-import IconButton from '@material-ui/core/IconButton';
-import MenuItem from '@material-ui/core/MenuItem';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import Select from '@material-ui/core/Select';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
+import IconButton from '@mui/material/IconButton';
+import MenuItem from '@mui/material/MenuItem';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import Select from '@mui/material/Select';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 import {
   makeStyles,
   createStyles,
-  Theme as MuiTheme,
-} from '@material-ui/core/styles';
+} from '@mui/styles';
+import { Theme as MuiTheme } from '@mui/material';
 
-import Skeleton from '@material-ui/lab/Skeleton';
+import Skeleton from '@mui/lab/Skeleton';
 
-import InfoIcon from '@material-ui/icons/InfoOutlined';
+import InfoIcon from '@mui/icons-material/InfoOutlined';
 
 import Theme from '../Theme/Theme';
 import { StylesHook } from '../../types/muiTypes';
@@ -92,7 +92,7 @@ export interface SidebarFilterProps {
   helperText?: string;
 }
 
-const SidebarFilter: React.FC<SidebarFilterProps> = (props: SidebarFilterProps): JSX.Element => {
+const SidebarFilter: React.FC<SidebarFilterProps> = (props: SidebarFilterProps): React.JSX.Element => {
   const classes = useStyles(Theme);
   const {
     title,
@@ -120,7 +120,7 @@ const SidebarFilter: React.FC<SidebarFilterProps> = (props: SidebarFilterProps):
 
   const maxWidthStyle = maxWidth ? { maxWidth: `${maxWidth}px` } : {};
 
-  const input: JSX.Element = (
+  const input: React.JSX.Element = (
     <OutlinedInput
       id={inputId}
       name={inputId}
@@ -144,7 +144,7 @@ const SidebarFilter: React.FC<SidebarFilterProps> = (props: SidebarFilterProps):
       <Typography variant="h5" component="h3" className={classes.title} id={labelId}>
         {title}
       </Typography>
-      <Tooltip placement="right" title={tooltip} interactive>
+      <Tooltip placement="right" title={tooltip}>
         <IconButton size="small" style={{ marginLeft: Theme.spacing(0.5) }}>
           <InfoIcon fontSize="small" />
         </IconButton>
@@ -158,7 +158,7 @@ const SidebarFilter: React.FC<SidebarFilterProps> = (props: SidebarFilterProps):
     return (
       <div {...otherProps} style={{ maxWidth: `${maxWidth}px`, overflow: 'hidden' }}>
         {titleNode}
-        <Skeleton variant="rect" width={maxWidth} height={36} style={skeletonStyle} />
+        <Skeleton variant="rectangular" width={maxWidth} height={36} style={skeletonStyle} />
         <Skeleton width="70%" height={16} style={skeletonStyle} />
       </div>
     );
@@ -173,7 +173,7 @@ const SidebarFilter: React.FC<SidebarFilterProps> = (props: SidebarFilterProps):
       aria-labelledby={labelId}
       disabled={optionCount < 2}
     >
-      {values.map((option: SidebarFilterOption): JSX.Element => ((
+      {values.map((option: SidebarFilterOption): React.JSX.Element => ((
         <MenuItem key={option.value} value={option.value}>
           <div>
             <Typography display="block">
@@ -185,7 +185,7 @@ const SidebarFilter: React.FC<SidebarFilterProps> = (props: SidebarFilterProps):
     </Select>
   );
 
-  const renderHelperText = (): JSX.Element => {
+  const renderHelperText = (): React.JSX.Element => {
     if (!isStringNonEmpty(helperText)) {
       return (<></>);
     }

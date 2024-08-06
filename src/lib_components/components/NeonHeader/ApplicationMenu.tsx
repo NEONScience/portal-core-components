@@ -1,17 +1,18 @@
 import React from 'react';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Paper from '@material-ui/core/Paper';
-import Popper from '@material-ui/core/Popper';
-import Tooltip from '@material-ui/core/Tooltip';
-import AppsIcon from '@material-ui/icons/Apps';
-import Fade from '@material-ui/core/Fade';
-import LaunchIcon from '@material-ui/icons/Launch';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, createStyles } from '@mui/styles';
+import { Theme } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+import Paper from '@mui/material/Paper';
+import Popper from '@mui/material/Popper';
+import Tooltip from '@mui/material/Tooltip';
+import AppsIcon from '@mui/icons-material/Apps';
+import Fade from '@mui/material/Fade';
+import LaunchIcon from '@mui/icons-material/Launch';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
 import NeonContext from '../NeonContext/NeonContext';
 
 // interface for user application data
@@ -95,7 +96,7 @@ const Menu = (props: MenuProps) => {
   };
 
   // close the menu
-  const handleClose = (event: React.MouseEvent<EventTarget>) => {
+  const handleClose = (event: MouseEvent | TouchEvent): void => {
     if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
       return;
     }
@@ -134,6 +135,7 @@ const Menu = (props: MenuProps) => {
             aria-haspopup="true"
             onClick={handleToggle}
             onKeyDown={handleMenuKeyDown}
+            size="large"
           >
             <AppsIcon />
           </IconButton>

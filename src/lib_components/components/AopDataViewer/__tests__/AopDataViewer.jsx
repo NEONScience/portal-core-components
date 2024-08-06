@@ -7,8 +7,8 @@ import '../../../../__mocks__/NeonContext';
 
 import AopDataViewer from '../AopDataViewer';
 
-jest.mock('@material-ui/core/Select', () => mockReactComponent('@material-ui/core/Select'));
-jest.mock('@material-ui/core/Slider', () => mockReactComponent('@material-ui/core/Slider'));
+jest.mock('@mui/material/Select', () => mockReactComponent('@mui/material/Select'));
+jest.mock('@mui/material/Slider', () => mockReactComponent('@mui/material/Slider'));
 
 mockAjaxResponse({
   response: {

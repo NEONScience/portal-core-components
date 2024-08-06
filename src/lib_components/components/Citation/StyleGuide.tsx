@@ -14,15 +14,15 @@ import { AjaxResponse } from 'rxjs/ajax';
 
 import cloneDeep from 'lodash/cloneDeep';
 
-import Container from '@material-ui/core/Container';
-import Divider from '@material-ui/core/Divider';
-import Grid from '@material-ui/core/Grid';
-import MenuItem from '@material-ui/core/MenuItem';
-import Paper from '@material-ui/core/Paper';
-import Select from '@material-ui/core/Select';
-import Skeleton from '@material-ui/lab/Skeleton';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import Container from '@mui/material/Container';
+import Divider from '@mui/material/Divider';
+import Grid from '@mui/material/Grid';
+import MenuItem from '@mui/material/MenuItem';
+import Paper from '@mui/material/Paper';
+import Select from '@mui/material/Select';
+import Skeleton from '@mui/lab/Skeleton';
+import Typography from '@mui/material/Typography';
+import { makeStyles } from '@mui/styles';
 
 import CodeBlock from '../../../components/CodeBlock';
 import DocBlock from '../../../components/DocBlock';
@@ -204,15 +204,7 @@ const dataProductCitationReducer = (state: any, action: any) => {
   }
 };
 
-const DataProductCitationDemoContainer = (): JSX.Element => ((
-  <ComponentErrorBoundary onReset={() => {}}>
-    <DataProductCitationContext.Provider contextControlled>
-      <DataProductCitationDemo />
-    </DataProductCitationContext.Provider>
-  </ComponentErrorBoundary>
-));
-
-const DataProductCitationDemo = (): JSX.Element => {
+const DataProductCitationDemo = (): React.JSX.Element => {
   const classes = useStyles(Theme);
   const [state, dispatch] = useReducer(
     dataProductCitationReducer,
@@ -310,7 +302,7 @@ const DataProductCitationDemo = (): JSX.Element => {
   if (isLoading) {
     return (
       <div>
-        <Skeleton variant="rect" width="100%" height={400} />
+        <Skeleton variant="rectangular" width="100%" height={400} />
       </div>
     );
   }
@@ -400,6 +392,14 @@ const DataProductCitationDemo = (): JSX.Element => {
     </div>
   );
 };
+
+const DataProductCitationDemoContainer = (): React.JSX.Element => ((
+  <ComponentErrorBoundary onReset={() => {}}>
+    <DataProductCitationContext.Provider contextControlled>
+      <DataProductCitationDemo />
+    </DataProductCitationContext.Provider>
+  </ComponentErrorBoundary>
+));
 
 const WrappedDataProductCitationDemo = (Theme as any).getWrappedComponent(
   NeonContext.getWrappedComponent(DataProductCitationDemoContainer),

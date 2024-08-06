@@ -7,7 +7,7 @@ import React, {
 import PropTypes, { number } from 'prop-types';
 
 import moment from 'moment';
-import get from 'lodash/get';
+import lodashGet from 'lodash/get';
 import uniqueId from 'lodash/uniqueId';
 import cloneDeep from 'lodash/cloneDeep';
 
@@ -39,10 +39,6 @@ import makeStateStorage from '../../service/StateStorageService';
 import { convertStateForStorage, convertStateFromStorage } from './StateStorageConverter';
 import { getUserAgentHeader } from '../../util/requestUtil';
 import { TIME_SERIES_VIEWER_STATUS } from './constants';
-
-// 'get' is a reserved word so can't be imported with import
-// eslint-disable-next-line import/extensions
-const lodashGet = require('lodash/get.js');
 
 const VIEWER_MODE = {
   DEFAULT: 'DEFAULT',
@@ -1691,7 +1687,7 @@ const Provider = (props) => {
           continuousDateRange.forEach((month) => {
             // eslint-disable-next-line max-len
             const path = `sites['${siteCode}'].positions['${position}'].data['${month}']['${downloadPkg}']['${timeStep}']`;
-            const timeStepTables = get(state.product, path, {});
+            const timeStepTables = lodashGet(state.product, path, {});
             Object.keys(timeStepTables).forEach((tableName) => {
               const timeStepTable = timeStepTables[tableName];
               const { url, status } = timeStepTable;

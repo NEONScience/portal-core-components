@@ -4,7 +4,7 @@ import React from 'react';
 import {
   makeStyles,
   createStyles,
-} from '@material-ui/core/styles';
+} from '@mui/styles';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTag } from '@fortawesome/free-solid-svg-icons';
@@ -27,7 +27,7 @@ const useStyles: StylesHook = makeStyles((theme: NeonTheme) =>
 
 const ReleaseMessageCard: React.FC<InfoMessageCardProps> = (
   props: InfoMessageCardProps,
-): JSX.Element => {
+): React.JSX.Element => {
   const classes = useStyles(Theme);
   return (
     <InfoMessageCard

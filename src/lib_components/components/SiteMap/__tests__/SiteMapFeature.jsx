@@ -30,7 +30,7 @@ const mockMap = class Map {
 };
 jest.mock('react-leaflet', () => ({
   ...jest.requireActual('react-leaflet'),
-  Map: jest.fn().mockImplementation(mockMap),
+  MapContainer: jest.fn().mockImplementation(mockMap),
 }));
 
 // Mock the SiteMapContext state

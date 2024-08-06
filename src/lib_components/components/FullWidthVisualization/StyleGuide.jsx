@@ -2,10 +2,10 @@
 
 import React, { useRef, useState } from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@mui/styles';
+import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
+import Typography from '@mui/material/Typography';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
@@ -249,7 +249,7 @@ const getHeight = width => Math.floor(width / 2);
         {`
 import { useRef, useState } from 'react';
 
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 
 export default function MyVizApp() {
   const myVizRef = useRef(null);

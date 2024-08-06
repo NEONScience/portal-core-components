@@ -17,24 +17,24 @@ import {
 
 import cloneDeep from 'lodash/cloneDeep';
 
-import Button from '@material-ui/core/Button';
-import Chip from '@material-ui/core/Chip';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import IconButton from '@material-ui/core/IconButton';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
+import Button from '@mui/material/Button';
+import Chip from '@mui/material/Chip';
+import CircularProgress from '@mui/material/CircularProgress';
+import IconButton from '@mui/material/IconButton';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 
 import {
   makeStyles,
   createStyles,
-  Theme as MuiTheme,
-} from '@material-ui/core/styles';
+} from '@mui/styles';
+import { Theme as MuiTheme } from '@mui/material';
 
-import DownloadIcon from '@material-ui/icons/SaveAlt';
+import DownloadIcon from '@mui/icons-material/SaveAlt';
 
 import NeonApi from '../NeonApi';
 import SplitButton from '../Button/SplitButton';
@@ -287,7 +287,7 @@ export interface DocumentListItemProps {
 
 const DocumentListItem: React.FC<DocumentListItemProps> = (
   props: DocumentListItemProps,
-): JSX.Element|null => {
+): React.JSX.Element|null => {
   const {
     id,
     document,
@@ -442,7 +442,7 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
     ? appliedDocument.description
     : <i>No description</i>;
   const spacer = <span className={classes.listItemSecondarySpacer}>|</span>;
-  const renderTypes = (): JSX.Element => {
+  const renderTypes = (): React.JSX.Element => {
     if (!(enableVariantChips === true)) {
       return (<span title={`file type: ${typeTitleString}`}>{typeTitleString}</span>);
     }
@@ -468,7 +468,7 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
     }
     return (
       <>
-        {appliedVariants.map((variant: NeonDocument, index: number): JSX.Element => {
+        {appliedVariants.map((variant: NeonDocument, index: number): React.JSX.Element => {
           const variantTypeTitleString = DocumentService.getDocumentTypeTitle(variant);
           const isSelected = (appliedDocument.name === variant.name);
           const isLast = (index === (appliedVariants.length - 1));
@@ -491,7 +491,7 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
       </>
     );
   };
-  const renderSecondaryItem = (): JSX.Element => {
+  const renderSecondaryItem = (): React.JSX.Element => {
     let sizeDisplay = (<span><i>n/a</i></span>);
     if (appliedDocument.size) {
       sizeDisplay = (
@@ -540,7 +540,7 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
       </span>
     );
   };
-  const renderAction = (): JSX.Element|null => {
+  const renderAction = (): React.JSX.Element|null => {
     if (!(enableDownloadButton === true)) return null;
     if (isFetchingVariants) {
       return (
@@ -568,6 +568,7 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
                     (downloadDoc: NeonDocument): void => handleDownloadFailed(),
                   );
                 }}
+                size="large"
               >
                 {isDownloading
                   ? <CircularProgress size={18} />
@@ -653,7 +654,7 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
       </ListItemSecondaryAction>
     );
   };
-  const renderDownloadError = (): JSX.Element|null => {
+  const renderDownloadError = (): React.JSX.Element|null => {
     if (!isDownloadError) return null;
     return (
       <div className={classes.downloadErrorContainer}>

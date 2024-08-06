@@ -11,26 +11,26 @@ import { ajax } from 'rxjs/ajax';
 
 import dateFormat from 'dateformat';
 
-import { makeStyles } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { makeStyles } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
-import Divider from '@material-ui/core/Divider';
-import Grid from '@material-ui/core/Grid';
-import IconButton from '@material-ui/core/IconButton';
-import Link from '@material-ui/core/Link';
-import MenuItem from '@material-ui/core/MenuItem';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import Select from '@material-ui/core/Select';
-import Slider from '@material-ui/core/Slider';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
+import Divider from '@mui/material/Divider';
+import Grid from '@mui/material/Grid';
+import IconButton from '@mui/material/IconButton';
+import Link from '@mui/material/Link';
+import MenuItem from '@mui/material/MenuItem';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import Select from '@mui/material/Select';
+import Slider from '@mui/material/Slider';
+import SnackbarContent from '@mui/material/SnackbarContent';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 
-import BackYearIcon from '@material-ui/icons/KeyboardArrowLeft';
-import ForwardYearIcon from '@material-ui/icons/KeyboardArrowRight';
-import InfoIcon from '@material-ui/icons/InfoOutlined';
-import OpenInNewIcon from '@material-ui/icons/OpenInNew';
-import WarningIcon from '@material-ui/icons/Warning';
+import BackYearIcon from '@mui/icons-material/KeyboardArrowLeft';
+import ForwardYearIcon from '@mui/icons-material/KeyboardArrowRight';
+import InfoIcon from '@mui/icons-material/InfoOutlined';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import WarningIcon from '@mui/icons-material/Warning';
 
 import Theme from '../Theme/Theme';
 import NeonContext from '../NeonContext/NeonContext';

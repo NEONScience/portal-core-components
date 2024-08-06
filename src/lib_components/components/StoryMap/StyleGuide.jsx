@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid */
 import React from 'react';
 
-import Link from '@material-ui/core/Link';
-import Typography from '@material-ui/core/Typography';
+import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';

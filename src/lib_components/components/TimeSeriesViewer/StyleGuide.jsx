@@ -6,14 +6,14 @@ import { of, map, catchError } from 'rxjs';
 
 import cloneDeep from 'lodash/cloneDeep';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
-import Grid from '@material-ui/core/Grid';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import Skeleton from '@material-ui/lab/Skeleton';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@mui/styles';
+import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
+import Grid from '@mui/material/Grid';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import Skeleton from '@mui/lab/Skeleton';
+import Typography from '@mui/material/Typography';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
@@ -178,7 +178,7 @@ const AllProductsTimeSeries = () => {
   if (isLoading) {
     return (
       <div>
-        <Skeleton variant="rect" width="100%" height={800} />
+        <Skeleton variant="rectangular" width="100%" height={800} />
       </div>
     );
   }
@@ -305,7 +305,7 @@ const StaticTimeSeriesViewerDialog = () => {
       </DocBlock>
       <CodeBlock>
         {`
-import Button from '@material-ui/core/Button';
+import Button from '@mui/material/Button';
 import DialogBase from '../DialogBase/DialogBase';
 import TimeSeriesViewerContext from 'portal-core-components/lib/components/TimeSeriesViewerContext/TimeSeriesViewerContext';
 import TimeSeriesViewerContainer from 'portal-core-components/lib/components/TimeSeriesViewerContainer/TimeSeriesViewerContainer';

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import { makeStyles } from '@mui/styles';
 
 import CodeBlock from '../../../components/CodeBlock';
 import DocBlock from '../../../components/DocBlock';

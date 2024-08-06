@@ -1,8 +1,14 @@
 import React from 'react';
 
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { ThemeProvider } from '@material-ui/styles';
-import { useTheme, createTheme, responsiveFontSizes } from '@material-ui/core/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import {
+  adaptV4Theme,
+  createTheme,
+  responsiveFontSizes,
+  StyledEngineProvider,
+  ThemeProvider,
+} from '@mui/material/styles';
+import { useTheme } from '@mui/styles';
 
 // Values defined here are based on the NEON Style Guide,
 // expanded out through color scale generators.
@@ -128,7 +134,7 @@ const COLOR_TEXT_PRIMARY = 'rgba(0, 0, 0, 0.9)';
 // See all customizable Material UI theme keys here:
 // https://material-ui.com/customization/default-theme/#explore
 
-const baseTheme = createTheme({
+const baseTheme = createTheme(adaptV4Theme({
   breakpoints: {
     values: {
       xs: 0,
@@ -797,7 +803,7 @@ const baseTheme = createTheme({
       },
     },
   },
-});
+}));
 
 const theme = responsiveFontSizes(baseTheme);
 theme.isNeonTheme = true;
@@ -811,12 +817,14 @@ theme.colors = COLORS;
 theme.getWrappedComponent = (Component) => (props) => {
   const currentTheme = useTheme();
   const isJsdom = navigator.userAgent.includes('Node.js') || navigator.userAgent.includes('jsdom');
-  if (!currentTheme.isNeonTheme && !isJsdom) {
+  if ((!currentTheme || !currentTheme.isNeonTheme) && !isJsdom) {
     return (
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Component {...props} />
-      </ThemeProvider>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Component {...props} />
+        </ThemeProvider>
+      </StyledEngineProvider>
     );
   }
   return <Component {...props} />;

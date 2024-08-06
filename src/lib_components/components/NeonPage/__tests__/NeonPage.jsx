@@ -4,8 +4,8 @@ import renderer from 'react-test-renderer';
 import '../../../../__mocks__/ajax';
 import mockReactComponent from '../../../../__mocks__/mockReactComponent';
 
-jest.mock('@material-ui/core/Backdrop', () => mockReactComponent('@material-ui/core/Backdrop'));
-jest.mock('@material-ui/core/Snackbar', () => mockReactComponent('@material-ui/core/Snackbar'));
+jest.mock('@mui/material/Backdrop', () => mockReactComponent('@mui/material/Backdrop'));
+jest.mock('@mui/material/Snackbar', () => mockReactComponent('@mui/material/Snackbar'));
 
 // eslint-disable-next-line import/first
 import NeonPage, { NeonErrorPage } from '../NeonPage';

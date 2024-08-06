@@ -1,12 +1,12 @@
 /* eslint-disable react/require-default-props */
 import React from 'react';
 
-import Chip from '@material-ui/core/Chip';
-import Tooltip, { TooltipProps } from '@material-ui/core/Tooltip';
+import Chip from '@mui/material/Chip';
+import Tooltip, { TooltipProps } from '@mui/material/Tooltip';
 import {
   makeStyles,
   createStyles,
-} from '@material-ui/core/styles';
+} from '@mui/styles';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTag } from '@fortawesome/free-solid-svg-icons';
@@ -47,7 +47,7 @@ interface ReleaseChipProps {
   tooltipProps?: ReleaseChipTooltipProps;
 }
 
-const ReleaseChip: React.FC<ReleaseChipProps> = (props: ReleaseChipProps): JSX.Element => {
+const ReleaseChip: React.FC<ReleaseChipProps> = (props: ReleaseChipProps): React.JSX.Element => {
   const classes = useStyles(Theme);
   const {
     tooltipTitle,

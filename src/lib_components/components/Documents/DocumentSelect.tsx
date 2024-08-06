@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 
-import FormControl from '@material-ui/core/FormControl';
-import Grid from '@material-ui/core/Grid';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Grid from '@mui/material/Grid';
+import InputLabel from '@mui/material/InputLabel';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 import {
   makeStyles,
   createStyles,
-  Theme as MuiTheme,
-} from '@material-ui/core/styles';
+} from '@mui/styles';
+import { Theme as MuiTheme } from '@mui/material';
 
 import DocumentListItem from './DocumentListItem';
 import DocumentService from '../../service/DocumentService';
@@ -41,7 +41,7 @@ export interface DocumentSelectProps {
   documents: NeonDocument[];
 }
 
-const DocumentSelect: React.FC<DocumentSelectProps> = (props: DocumentSelectProps): JSX.Element => {
+const DocumentSelect: React.FC<DocumentSelectProps> = (props: DocumentSelectProps): React.JSX.Element => {
   const classes = useStyles(Theme);
   const { documents }: DocumentSelectProps = props;
 
@@ -66,7 +66,7 @@ const DocumentSelect: React.FC<DocumentSelectProps> = (props: DocumentSelectProp
     );
   }
 
-  const renderSelectedDocument = (): JSX.Element => {
+  const renderSelectedDocument = (): React.JSX.Element => {
     const matchedDoc: Nullable<NeonDocument> = documents.find((doc: NeonDocument): boolean => (
       exists(doc)
         && isStringNonEmpty(doc.name)
@@ -107,7 +107,7 @@ const DocumentSelect: React.FC<DocumentSelectProps> = (props: DocumentSelectProp
               label="Select Document to View"
               aria-labelledby="document-select-label"
               value={selectedDoc}
-              onChange={(event: React.ChangeEvent<{ value: unknown }>): void => {
+              onChange={(event: SelectChangeEvent<string>, child: React.ReactNode): void => {
                 const nextDoc: Nullable<NeonDocument> = documents.find(
                   (doc: NeonDocument): boolean => (
                     doc.name.localeCompare((event.target.value as string)) === 0
@@ -118,7 +118,7 @@ const DocumentSelect: React.FC<DocumentSelectProps> = (props: DocumentSelectProp
                 }
               }}
             >
-              {documents.map((doc: NeonDocument, index: number): JSX.Element => ((
+              {documents.map((doc: NeonDocument, index: number): React.JSX.Element => ((
                 <MenuItem key={doc.name} value={doc.name}>
                   <DocumentListItem
                     id={index}

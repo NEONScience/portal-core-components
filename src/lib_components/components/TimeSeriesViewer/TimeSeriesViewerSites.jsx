@@ -11,44 +11,44 @@ import Select from 'react-select';
 
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import Checkbox from '@material-ui/core/Checkbox';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import IconButton from '@material-ui/core/IconButton';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import MenuItem from '@material-ui/core/MenuItem';
-import NoSsr from '@material-ui/core/NoSsr';
-import Paper from '@material-ui/core/Paper';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import TextField from '@material-ui/core/TextField';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@mui/styles';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import Checkbox from '@mui/material/Checkbox';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import MenuItem from '@mui/material/MenuItem';
+import NoSsr from '@mui/material/NoSsr';
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import TextField from '@mui/material/TextField';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 
-import Skeleton from '@material-ui/lab/Skeleton';
+import Skeleton from '@mui/lab/Skeleton';
 
-import ClearIcon from '@material-ui/icons/Clear';
-import ElevationIcon from '@material-ui/icons/Terrain';
-import HistoryIcon from '@material-ui/icons/History';
-import InfoIcon from '@material-ui/icons/InfoOutlined';
-import LocationIcon from '@material-ui/icons/MyLocation';
-import NoneIcon from '@material-ui/icons/NotInterested';
-import SearchIcon from '@material-ui/icons/Search';
-import SelectIcon from '@material-ui/icons/TouchApp';
+import ClearIcon from '@mui/icons-material/Clear';
+import ElevationIcon from '@mui/icons-material/Terrain';
+import HistoryIcon from '@mui/icons-material/History';
+import InfoIcon from '@mui/icons-material/InfoOutlined';
+import LocationIcon from '@mui/icons-material/MyLocation';
+import NoneIcon from '@mui/icons-material/NotInterested';
+import SearchIcon from '@mui/icons-material/Search';
+import SelectIcon from '@mui/icons-material/TouchApp';
 
 import Theme from '../Theme/Theme';
 import NeonContext from '../NeonContext/NeonContext';
@@ -357,7 +357,7 @@ function PositionHistoryButton(props) {
         aria-labelledby="position-history-dialog-title"
         aria-describedby="position-history-dialog-description"
       >
-        <DialogTitle id="position-history-dialog-title" disableTypography>
+        <DialogTitle id="position-history-dialog-title">
           <Typography variant="h6" id="position-history-dialog-title">
             {`Position History: ${siteCode} - ${position}`}
           </Typography>
@@ -389,10 +389,10 @@ function PositionHistoryButton(props) {
                     referenceLocationElevation,
                   } = row;
                   const hasReferenceElevation = exists(referenceLocationElevation)
-                    && !isNaN(referenceLocationElevation);
-                  const hasXOffset = exists(xOffset) && !isNaN(xOffset);
-                  const hasYOffset = exists(yOffset) && !isNaN(yOffset);
-                  const hasZOffset = exists(zOffset) && !isNaN(zOffset);
+                    && !Number.isNaN(referenceLocationElevation);
+                  const hasXOffset = exists(xOffset) && !Number.isNaN(xOffset);
+                  const hasYOffset = exists(yOffset) && !Number.isNaN(yOffset);
+                  const hasZOffset = exists(zOffset) && !Number.isNaN(zOffset);
                   const parsedReferenceElevation = hasReferenceElevation
                     ? referenceLocationElevation
                     : NaN;
@@ -400,8 +400,8 @@ function PositionHistoryButton(props) {
                   const parsedYOffset = hasYOffset ? yOffset : NaN;
                   const parsedZOffset = hasZOffset ? zOffset : NaN;
                   let elevation = 'unknown';
-                  if (!isNaN(parsedReferenceElevation)) {
-                    if (!isNaN(parsedZOffset)) {
+                  if (!Number.isNaN(parsedReferenceElevation)) {
+                    if (!Number.isNaN(parsedZOffset)) {
                       elevation = `${(parsedReferenceElevation + parsedZOffset).toFixed(2).toString()}m`;
                     } else {
                       elevation = `${parsedReferenceElevation}m`;
@@ -523,10 +523,10 @@ function PositionDetail(props) {
     zOffset,
   } = history[current] || {};
   const hasReferenceElevation = exists(referenceLocationElevation)
-    && !isNaN(referenceLocationElevation);
-  const hasXOffset = exists(xOffset) && !isNaN(xOffset);
-  const hasYOffset = exists(yOffset) && !isNaN(yOffset);
-  const hasZOffset = exists(zOffset) && !isNaN(zOffset);
+    && !Number.isNaN(referenceLocationElevation);
+  const hasXOffset = exists(xOffset) && !Number.isNaN(xOffset);
+  const hasYOffset = exists(yOffset) && !Number.isNaN(yOffset);
+  const hasZOffset = exists(zOffset) && !Number.isNaN(zOffset);
   const parsedReferenceElevation = hasReferenceElevation
     ? referenceLocationElevation
     : NaN;
@@ -535,8 +535,8 @@ function PositionDetail(props) {
   const displayYOffset = hasYOffset ? `${yOffset}m` : '--';
   const displayZOffset = hasZOffset ? `${zOffset}m` : '--';
   let elevation = '--';
-  if (!isNaN(parsedReferenceElevation)) {
-    if (!isNaN(parsedZOffset)) {
+  if (!Number.isNaN(parsedReferenceElevation)) {
+    if (!Number.isNaN(parsedZOffset)) {
       elevation = `${(parsedReferenceElevation + parsedZOffset).toFixed(2).toString()}m`;
     } else {
       elevation = `${parsedReferenceElevation}m`;
@@ -739,6 +739,7 @@ function SelectedPosition(props) {
             .filter((p) => p !== position);
           dispatch({ type: 'selectSitePositions', positions, siteCode });
         }}
+        size="large"
       >
         <ClearIcon fontSize="small" />
       </IconButton>
@@ -804,7 +805,7 @@ function SelectPositionsButton(props) {
         aria-labelledby="add-positions-dialog-title"
         aria-describedby="add-positions-dialog-description"
       >
-        <DialogTitle id="add-positions-dialog-title" disableTypography>
+        <DialogTitle id="add-positions-dialog-title">
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <Typography variant="h6" id="add-positions-dialog-title">Select Positions</Typography>
             <Typography
@@ -948,7 +949,7 @@ function SiteOption(props) {
       <div className={classes.startFlex}>
         {iconSvg ? (
           <img
-            src={iconSvg}
+            src={iconSvg.src}
             alt={terrainTypeTitle}
             title={terrainTypeTitle}
             width={Theme.spacing(3)}
@@ -1068,7 +1069,7 @@ function SelectedSite(props) {
     const iconSvg = ICON_SVGS[type] && ICON_SVGS[type][terrain] ? ICON_SVGS[type][terrain] : null;
     const terrainIcon = iconSvg ? (
       <img
-        src={iconSvg}
+        src={iconSvg.src}
         alt={terrainTypeTitle}
         title={terrainTypeTitle}
         width={Theme.spacing(4)}
@@ -1304,9 +1305,7 @@ export default function TimeSeriesViewerSites(props) {
   const { sites: allSites } = neonContextData;
 
   if (!state.selection.sites.length || !Object.keys(allSites).length) {
-    return (
-      <Skeleton variant="rect" width="100%" height={56} />
-    );
+    return <Skeleton variant="rectangular" width="100%" height={56} />;
   }
 
   const selectedItems = state.selection.sites.map((site) => site.siteCode);

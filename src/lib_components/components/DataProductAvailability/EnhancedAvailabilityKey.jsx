@@ -3,15 +3,15 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@mui/styles';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
 
-import CloseIcon from '@material-ui/icons/Close';
-import HelpIcon from '@material-ui/icons/HelpOutline';
+import CloseIcon from '@mui/icons-material/Close';
+import HelpIcon from '@mui/icons-material/HelpOutline';
 
 import { SVG, VALID_ENHANCED_STATUSES } from './AvailabilityUtils';
 import { JsxCell } from './AvailabilitySvgComponents';
@@ -175,6 +175,7 @@ export default function EnhancedAvailabilityKey(props) {
             aria-label="Close"
             onClick={() => setDialogOpen(false)}
             style={{ marginRight: Theme.spacing(1) }}
+            size="large"
           >
             <CloseIcon fontSize="inherit" />
           </IconButton>

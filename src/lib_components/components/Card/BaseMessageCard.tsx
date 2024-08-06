@@ -1,16 +1,16 @@
 /* eslint-disable react/require-default-props */
 import React from 'react';
 
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
 import {
   makeStyles,
   createStyles,
-  Theme as MuiTheme,
-} from '@material-ui/core/styles';
+} from '@mui/styles';
+import { Theme as MuiTheme } from '@mui/material';
 
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
 import Theme from '../Theme/Theme';
 import { StylesHook } from '../../types/muiTypes';
@@ -61,7 +61,7 @@ export interface BaseMessageCardProps {
 
 const BaseMessageCard: React.FC<BaseMessageCardProps> = (
   props: BaseMessageCardProps,
-): JSX.Element => {
+): React.JSX.Element => {
   const classes = useStyles(Theme);
   const {
     type,
@@ -76,10 +76,10 @@ const BaseMessageCard: React.FC<BaseMessageCardProps> = (
   if (messageCardClasses && messageCardClasses.cardTitleContentContainer) {
     appliedTitleContentContainer = messageCardClasses.cardTitleContentContainer;
   }
-  let iconContent: JSX.Element = (
+  let iconContent: React.JSX.Element = (
     <InfoOutlinedIcon fontSize="small" className={messageCardClasses.primaryIcon} />
   );
-  let secondaryIconContent: JSX.Element|null = null;
+  let secondaryIconContent: React.JSX.Element|null = null;
   switch (type) {
     case MessageCardType.INFO:
       if (exists(icon)) {
@@ -94,8 +94,8 @@ const BaseMessageCard: React.FC<BaseMessageCardProps> = (
       break;
   }
 
-  const renderTitle = (): JSX.Element => {
-    let titleTextContent: JSX.Element|null = null;
+  const renderTitle = (): React.JSX.Element => {
+    let titleTextContent: React.JSX.Element|null = null;
     if (isStringNonEmpty(title)) {
       titleTextContent = (
         <Typography variant="subtitle2" className={classes.textTitleContent}>
@@ -103,7 +103,7 @@ const BaseMessageCard: React.FC<BaseMessageCardProps> = (
         </Typography>
       );
     }
-    let appliedTitleContent: JSX.Element|null = null;
+    let appliedTitleContent: React.JSX.Element|null = null;
     if (exists(titleContent)) {
       appliedTitleContent = (
         <div style={{ flexGrow: 1 }}>
@@ -121,7 +121,7 @@ const BaseMessageCard: React.FC<BaseMessageCardProps> = (
     );
   };
 
-  const renderMessage = (): JSX.Element|null => {
+  const renderMessage = (): React.JSX.Element|null => {
     const hasCustomClass = (messageCardClasses && messageCardClasses.messageContentContainer);
     const injectedMessageContainerClass: string|undefined = hasCustomClass
       ? messageCardClasses.messageContentContainer

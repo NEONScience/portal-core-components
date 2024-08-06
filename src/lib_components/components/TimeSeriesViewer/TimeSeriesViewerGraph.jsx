@@ -18,15 +18,15 @@ import cloneDeep from 'lodash/cloneDeep';
 import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
 
-import { makeStyles } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import Typography from '@mui/material/Typography';
 
-import ImageIcon from '@material-ui/icons/Image';
-import ShowIcon from '@material-ui/icons/Visibility';
-import HideIcon from '@material-ui/icons/VisibilityOff';
+import ImageIcon from '@mui/icons-material/Image';
+import ShowIcon from '@mui/icons-material/Visibility';
+import HideIcon from '@mui/icons-material/VisibilityOff';
 
 import generateTimeSeriesGraphData from '../../workers/generateTimeSeriesGraphData';
 
@@ -40,10 +40,10 @@ import NeonLogo from '../../images/NSF-NEON-logo.png';
 
 // Load Dygraph plugins. These are not built as modules and require a global Dygraph instance. =(
 if (!window.Dygraph) { window.Dygraph = Dygraph; }
-// eslint-disable-next-line import/extensions
-require('dygraphs/src/extras/shapes.js');
-// eslint-disable-next-line import/extensions
-require('dygraphs/src/extras/crosshair.js');
+// eslint-disable-next-line import/extensions, import/first
+import 'dygraphs/src/extras/shapes.js';
+// eslint-disable-next-line import/extensions, import/first
+import 'dygraphs/src/extras/crosshair.js';
 
 const SERIES_COLORS = [
   '#4e79a7',
@@ -105,7 +105,7 @@ const useStyles = makeStyles((theme) => ({
   graphInnerContainer: {
     display: 'flex',
     alignItems: 'flex-start',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       flexWrap: 'wrap',
     },
   },
@@ -113,7 +113,7 @@ const useStyles = makeStyles((theme) => ({
     minHeight: '320px',
     flexGrow: 1,
     width: '50%',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       width: '100%',
     },
   },
@@ -153,7 +153,7 @@ const useStyles = makeStyles((theme) => ({
   legendDiv: {
     flexShrink: 0,
     marginLeft: theme.spacing(1),
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       width: '100%',
       marginTop: theme.spacing(2),
     },
@@ -269,7 +269,7 @@ export default function TimeSeriesViewerGraph() {
   const legendRef = useRef(null);
   const axisCountRef = useRef(1);
   const axisCountChangedRef = useRef(false);
-  const belowSm = useMediaQuery(Theme.breakpoints.down('sm'));
+  const belowSm = useMediaQuery(Theme.breakpoints.down('md'));
   const {
     selectionDigest,
     logscale,
@@ -799,7 +799,7 @@ export default function TimeSeriesViewerGraph() {
             title="NEON"
             alt="NEON Logo"
             className={classes.neonLogo}
-            src={NeonLogo}
+            src={NeonLogo.src}
           />
           {renderCitation()}
         </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import { makeStyles } from '@material-ui/core/styles';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import { makeStyles } from '@mui/styles';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBox, faBoxesStacked } from '@fortawesome/free-solid-svg-icons';
@@ -22,7 +22,7 @@ export interface BundleListItemIconProps {
 
 const BundleListItemIcon: React.FC<BundleListItemIconProps> = (
   props: BundleListItemIconProps,
-): JSX.Element => {
+): React.JSX.Element => {
   const classes = useStyles(Theme);
   const { isSplit }: BundleListItemIconProps = props;
   return (

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@mui/styles';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import InfoMessageCard from '../Card/InfoMessageCard';
 import ExternalHost from '../ExternalHost/ExternalHost';
@@ -112,6 +112,7 @@ const ExternalHostInfo = (props) => {
                     aria-label={expandTitle}
                     onClick={() => setExpanded(!expanded)}
                     style={{ marginLeft: Theme.spacing(2) }}
+                    size="large"
                   >
                     {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
                   </IconButton>

@@ -3,14 +3,14 @@
 
 import React, { CSSProperties } from 'react';
 
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Divider from '@material-ui/core/Divider';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import Divider from '@mui/material/Divider';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
+import Typography from '@mui/material/Typography';
+import { makeStyles } from '@mui/styles';
 
 import CodeBlock from '../../../components/CodeBlock';
 import DocBlock from '../../../components/DocBlock';
@@ -96,7 +96,7 @@ const propRows = [
   },
 ];
 
-const renderUserCard = (isAuthenticated: boolean, userData: any): JSX.Element => {
+const renderUserCard = (isAuthenticated: boolean, userData: any): React.JSX.Element => {
   if (!isAuthenticated || !userData?.data?.user) {
     // eslint-disable-next-line react/jsx-no-useless-fragment
     return (<></>);
@@ -143,9 +143,9 @@ const renderSilentAuthSection = (
   handleSsoCookieToggle: (enable: boolean) => void,
   classes: Record<string, string>,
   containerStyle: CSSProperties,
-): JSX.Element => {
+): React.JSX.Element => {
   // eslint-disable-next-line react/jsx-no-useless-fragment
-  let ssoToggleContent: JSX.Element = (<></>);
+  let ssoToggleContent: React.JSX.Element = (<></>);
   if (ALLOW_SSO_TOGGLE) {
     ssoToggleContent = (
       <ExampleBlock>
@@ -164,7 +164,7 @@ const renderSilentAuthSection = (
       </ExampleBlock>
     );
   }
-  let silentAuthExampleContent: JSX.Element = (
+  let silentAuthExampleContent: React.JSX.Element = (
     <>
       <ExampleBlock>
         <Grid container spacing={1}>

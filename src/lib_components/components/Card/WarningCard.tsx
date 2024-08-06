@@ -4,8 +4,8 @@ import React from 'react';
 import {
   makeStyles,
   createStyles,
-  Theme as MuiTheme,
-} from '@material-ui/core/styles';
+} from '@mui/styles';
+import { Theme as MuiTheme } from '@mui/material';
 
 import BaseCard, { CardType, BaseCardProps } from './BaseCard';
 import Theme from '../Theme/Theme';
@@ -36,7 +36,7 @@ type WarningCardProps = BaseWarningCardProps & {
   classes?: WarningCardClasses;
 };
 
-const WarningCard: React.FC<WarningCardProps> = (props: WarningCardProps): JSX.Element => {
+const WarningCard: React.FC<WarningCardProps> = (props: WarningCardProps): React.JSX.Element => {
   const classes = useStyles(Theme);
   const { classes: calloutClasses }: WarningCardProps = props;
   const injectedCallout: string|undefined = calloutClasses
