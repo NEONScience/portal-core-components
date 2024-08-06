@@ -22,6 +22,7 @@
   "exclude": [
     "./src/**/StyleGuide.*",
     "./src/components/*",
+    "./src/components/app/*",
     "./src/lib_components/remoteAssets/*",
     "./src/lib_components/vendor/**/*",
     "./src/favicon/*",

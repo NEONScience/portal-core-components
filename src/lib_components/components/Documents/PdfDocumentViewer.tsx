@@ -17,8 +17,8 @@ import { PDFLinkServiceOptions } from 'pdfjs-dist/types/web/pdf_link_service';
 import {
   makeStyles,
   createStyles,
-  Theme as MuiTheme,
-} from '@material-ui/core/styles';
+} from '@mui/styles';
+import { Theme as MuiTheme } from '@mui/material';
 
 import DocumentService from '../../service/DocumentService';
 import ErrorCard from '../Card/ErrorCard';
@@ -87,7 +87,7 @@ const calcAutoHeight = (width: number): number => {
 
 const PdfDocumentViewer: React.FC<PdfDocumentViewerProps> = (
   props: PdfDocumentViewerProps,
-): JSX.Element => {
+): React.JSX.Element => {
   const classes = useStyles(Theme);
   const {
     document,

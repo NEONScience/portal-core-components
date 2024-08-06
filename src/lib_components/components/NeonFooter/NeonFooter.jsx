@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import HTMLReactParser from 'html-react-parser';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Skeleton from '@material-ui/lab/Skeleton';
+import { makeStyles } from '@mui/styles';
+import Skeleton from '@mui/lab/Skeleton';
 
 import REMOTE_ASSETS from '../../remoteAssetsMap/remoteAssetsMap';
 import DRUPAL_FOOTER_HTML_FALLBACK from '../../remoteAssets/drupal-footer.html';
@@ -62,7 +62,7 @@ const NeonFooter = (props) => {
       }
       return (
         <footer id="footer">
-          <Skeleton variant="rect" height="300px" width="100%" />
+          <Skeleton variant="rectangular" height="300px" width="100%" />
         </footer>
       );
 

@@ -8,7 +8,7 @@ interface CustomComponentFallbackProps extends FallbackProps {
 
 const CustomComponentFallback: React.FC<CustomComponentFallbackProps> = (
   props: CustomComponentFallbackProps,
-): JSX.Element => {
+): React.JSX.Element => {
   const { FallbackComponent }: CustomComponentFallbackProps = props;
   return (
     <FallbackComponent {...props} />

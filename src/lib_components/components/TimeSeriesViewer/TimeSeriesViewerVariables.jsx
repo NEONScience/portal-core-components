@@ -4,26 +4,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormGroup from '@material-ui/core/FormGroup';
-import IconButton from '@material-ui/core/IconButton';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import Typography from '@material-ui/core/Typography';
-import NoSsr from '@material-ui/core/NoSsr';
-import TextField from '@material-ui/core/TextField';
-import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@mui/styles';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormGroup from '@mui/material/FormGroup';
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
+import Typography from '@mui/material/Typography';
+import NoSsr from '@mui/material/NoSsr';
+import TextField from '@mui/material/TextField';
+import Paper from '@mui/material/Paper';
 
-import Skeleton from '@material-ui/lab/Skeleton';
+import Skeleton from '@mui/lab/Skeleton';
 
-import ClearIcon from '@material-ui/icons/Clear';
-import MenuItem from '@material-ui/core/MenuItem';
-import NoneIcon from '@material-ui/icons/NotInterested';
-import SearchIcon from '@material-ui/icons/Search';
-import SelectAllIcon from '@material-ui/icons/DoneAll';
+import ClearIcon from '@mui/icons-material/Clear';
+import MenuItem from '@mui/material/MenuItem';
+import NoneIcon from '@mui/icons-material/NotInterested';
+import SearchIcon from '@mui/icons-material/Search';
+import SelectAllIcon from '@mui/icons-material/DoneAll';
 
 import Theme from '../Theme/Theme';
 import TimeSeriesViewerContext from './TimeSeriesViewerContext';
@@ -439,9 +439,7 @@ export default function TimeSeriesViewerVariables() {
     });
 
   if (!selectableVariablesCount) {
-    return (
-      <Skeleton variant="rect" width="100%" height={56} />
-    );
+    return <Skeleton variant="rectangular" width="100%" height={56} />;
   }
 
   return (
@@ -485,6 +483,7 @@ export default function TimeSeriesViewerVariables() {
                     variables: state.selection.variables.filter((v) => v !== variable),
                   });
                 }}
+                size="large"
               >
                 <ClearIcon fontSize="small" />
               </IconButton>

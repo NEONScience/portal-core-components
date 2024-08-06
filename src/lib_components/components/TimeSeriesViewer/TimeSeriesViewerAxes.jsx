@@ -3,17 +3,17 @@ import PropTypes from 'prop-types';
 
 import { debounce } from 'lodash';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Slider from '@material-ui/core/Slider';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@mui/styles';
+import Button from '@mui/material/Button';
+import Slider from '@mui/material/Slider';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 
-import Skeleton from '@material-ui/lab/Skeleton';
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import Skeleton from '@mui/lab/Skeleton';
+import ToggleButton from '@mui/lab/ToggleButton';
+import ToggleButtonGroup from '@mui/lab/ToggleButtonGroup';
 
-import SwapIcon from '@material-ui/icons/SwapHoriz';
+import SwapIcon from '@mui/icons-material/SwapHoriz';
 
 import Theme from '../Theme/Theme';
 import TimeSeriesViewerContext, {
@@ -108,7 +108,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '0.75rem',
   },
   horizSlider: {
-    width: `calc(100% - ${theme.spacing(6)}px)`,
+    width: `calc(100% - ${theme.spacing(6)})`,
     marginLeft: theme.spacing(3),
     marginBottom: '24px !important',
   },
@@ -265,12 +265,12 @@ const YAxisRangeOption = (props) => {
   return !render ? (
     <div className={classes.yAxisRangeOuterContainer}>
       <div className={classes.yAxisRangeOptions}>
-        <Skeleton variant="rect" width={200} height={30} style={{ margin: Theme.spacing(0.5, 0) }} />
+        <Skeleton variant="rectangular" width={200} height={30} style={{ margin: Theme.spacing(0.5, 0) }} />
       </div>
       <div className={classes.yAxisRangeInnerContainer}>
         <div className={classes.yAxisRangeTextfieldContainer}>
-          <Skeleton variant="rect" width={96} height={36} style={{ margin: Theme.spacing(1, 0) }} />
-          <Skeleton variant="rect" width={96} height={36} style={{ margin: Theme.spacing(1, 0) }} />
+          <Skeleton variant="rectangular" width={96} height={36} style={{ margin: Theme.spacing(1, 0) }} />
+          <Skeleton variant="rectangular" width={96} height={36} style={{ margin: Theme.spacing(1, 0) }} />
         </div>
       </div>
     </div>
@@ -427,7 +427,7 @@ const RollPeriodOption = () => {
   }));
 
   return !currentTimeStep ? (
-    <Skeleton variant="rect" width="100%" height={56} />
+    <Skeleton variant="rectangular" width="100%" height={56} />
   ) : (
     <div style={{ width: '100%', minWidth: Theme.spacing(40) }}>
       <Slider

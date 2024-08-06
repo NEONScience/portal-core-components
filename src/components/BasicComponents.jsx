@@ -2,35 +2,35 @@
 
 import React from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionActions from '@material-ui/core/AccordionActions';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Checkbox from '@material-ui/core/Checkbox';
-import Divider from '@material-ui/core/Divider';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import IconButton from '@material-ui/core/IconButton';
-import Link from '@material-ui/core/Link';
-import Radio from '@material-ui/core/Radio';
-import Slider from '@material-ui/core/Slider';
-import Switch from '@material-ui/core/Switch';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@mui/styles';
+import Accordion from '@mui/material/Accordion';
+import AccordionActions from '@mui/material/AccordionActions';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Checkbox from '@mui/material/Checkbox';
+import Divider from '@mui/material/Divider';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import IconButton from '@mui/material/IconButton';
+import Link from '@mui/material/Link';
+import Radio from '@mui/material/Radio';
+import Slider from '@mui/material/Slider';
+import Switch from '@mui/material/Switch';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import ToggleButton from '@mui/lab/ToggleButton';
+import ToggleButtonGroup from '@mui/lab/ToggleButtonGroup';
 
-import DownloadIcon from '@material-ui/icons/SaveAlt';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import InfoIcon from '@material-ui/icons/Info';
-import LeftIcon from '@material-ui/icons/ChevronLeft';
-import RightIcon from '@material-ui/icons/ChevronRight';
+import DownloadIcon from '@mui/icons-material/SaveAlt';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import InfoIcon from '@mui/icons-material/Info';
+import LeftIcon from '@mui/icons-material/ChevronLeft';
+import RightIcon from '@mui/icons-material/ChevronRight';
 
 import DocBlock from './DocBlock';
 
@@ -457,13 +457,13 @@ export default function BasicComponents() {
           <IconButton size="small">
             <DownloadIcon />
           </IconButton>
-          <IconButton>
+          <IconButton size="large">
             <DownloadIcon fontSize="small" />
           </IconButton>
-          <IconButton>
+          <IconButton size="large">
             <DownloadIcon />
           </IconButton>
-          <IconButton>
+          <IconButton size="large">
             <DownloadIcon fontSize="large" />
           </IconButton>
         </div>
@@ -471,13 +471,13 @@ export default function BasicComponents() {
           <IconButton disabled size="small">
             <DownloadIcon />
           </IconButton>
-          <IconButton disabled>
+          <IconButton disabled size="large">
             <DownloadIcon fontSize="small" />
           </IconButton>
-          <IconButton disabled>
+          <IconButton disabled size="large">
             <DownloadIcon />
           </IconButton>
-          <IconButton disabled>
+          <IconButton disabled size="large">
             <DownloadIcon fontSize="large" />
           </IconButton>
         </div>
@@ -580,7 +580,7 @@ export default function BasicComponents() {
         <Tooltip
           title="A basic short tooltip"
         >
-          <IconButton aria-label="tooltip">
+          <IconButton aria-label="tooltip" size="large">
             <InfoIcon />
           </IconButton>
         </Tooltip>
@@ -588,7 +588,7 @@ export default function BasicComponents() {
           placement="right"
           title="A longer-form tooltip with a few sentences. There is more info here but no HTML. Still there is plenty of text to read."
         >
-          <IconButton aria-label="tooltip">
+          <IconButton aria-label="tooltip" size="large">
             <InfoIcon />
           </IconButton>
         </Tooltip>
@@ -614,7 +614,7 @@ export default function BasicComponents() {
           )}
           interactive
         >
-          <IconButton aria-label="tooltip">
+          <IconButton aria-label="tooltip" size="large">
             <InfoIcon />
           </IconButton>
         </Tooltip>

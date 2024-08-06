@@ -1,11 +1,11 @@
 import React from 'react';
 
-import List from '@material-ui/core/List';
+import List from '@mui/material/List';
 import {
   makeStyles,
   createStyles,
-  Theme as MuiTheme,
-} from '@material-ui/core/styles';
+} from '@mui/styles';
+import { Theme as MuiTheme } from '@mui/material';
 
 import DocumentListItem, { DocumentListItemModel } from './DocumentListItem';
 import Theme from '../Theme/Theme';
@@ -31,7 +31,7 @@ export interface DocumentListProps {
   enableVariantChips: Nullable<boolean>;
 }
 
-const DocumentList: React.FC<DocumentListProps> = (props: DocumentListProps): JSX.Element => {
+const DocumentList: React.FC<DocumentListProps> = (props: DocumentListProps): React.JSX.Element => {
   const classes = useStyles(Theme);
   const {
     documents,
@@ -50,8 +50,8 @@ const DocumentList: React.FC<DocumentListProps> = (props: DocumentListProps): JS
       </div>
     );
   }
-  const renderDocuments = (): JSX.Element[] => (
-    documents.map((document: DocumentListItemModel, index: number): JSX.Element => ((
+  const renderDocuments = (): React.JSX.Element[] => (
+    documents.map((document: DocumentListItemModel, index: number): React.JSX.Element => ((
       <DocumentListItem
         key={document.name}
         id={index}

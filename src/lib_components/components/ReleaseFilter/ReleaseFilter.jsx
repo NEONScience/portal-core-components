@@ -6,20 +6,20 @@ import moment from 'moment';
 import { useId } from 'react-id-generator';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import Link from '@material-ui/core/Link';
-import MenuItem from '@material-ui/core/MenuItem';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import Select from '@material-ui/core/Select';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@mui/styles';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import Link from '@mui/material/Link';
+import MenuItem from '@mui/material/MenuItem';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import Select from '@mui/material/Select';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 
-import Skeleton from '@material-ui/lab/Skeleton';
+import Skeleton from '@mui/lab/Skeleton';
 
-import CopyIcon from '@material-ui/icons/Assignment';
-import InfoIcon from '@material-ui/icons/InfoOutlined';
+import CopyIcon from '@mui/icons-material/Assignment';
+import InfoIcon from '@mui/icons-material/InfoOutlined';
 
 import Theme from '../Theme/Theme';
 
@@ -208,7 +208,7 @@ const ReleaseFilter = (props) => {
     return (
       <div {...otherProps} style={{ ...maxWidthStyle, overflow: 'hidden' }}>
         {titleNode}
-        <Skeleton variant="rect" width={maxWidth || '100%'} height={36} style={skeletonStyle} />
+        <Skeleton variant="rectangular" width={maxWidth || '100%'} height={36} style={skeletonStyle} />
         <Skeleton width="70%" height={16} style={skeletonStyle} />
       </div>
     );

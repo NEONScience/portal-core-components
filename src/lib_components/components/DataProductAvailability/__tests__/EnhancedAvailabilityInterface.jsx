@@ -9,7 +9,7 @@ import mockReactComponent from '../../../../__mocks__/mockReactComponent';
 import DownloadDataContext from '../../DownloadDataContext/DownloadDataContext';
 import EnhancedAvailabilityInterface from '../EnhancedAvailabilityInterface';
 
-jest.mock('@material-ui/core/Select', () => mockReactComponent('@material-ui/core/Select'));
+jest.mock('@mui/material/Select', () => mockReactComponent('@mui/material/Select'));
 
 // Mock the DownloadDataContext state
 jest.mock('../../DownloadDataContext/DownloadDataContext', () => ({

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 
 import SyntaxHighlight from '../lib_components/components/SyntaxHighlight';
 import Theme from '../lib_components/components/Theme/Theme';

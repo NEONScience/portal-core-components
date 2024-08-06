@@ -1,3 +1,5 @@
+import React from 'react';
+
 /**
  * General convenience type definitions
  */
@@ -9,7 +11,7 @@ export type UnknownRecord = Record<string, unknown>;
 export type NullableRecord = UnknownRecord | null | undefined;
 export type StylesHook = (...props: unknown[]) => Record<string, string>;
 export type StringPropsObject = {[key: string]: string};
-export type HocFuncType<T extends JSX.IntrinsicAttributes> = ((props: T) => JSX.Element);
+export type HocFuncType<T extends React.JSX.IntrinsicAttributes> = ((props: T) => React.JSX.Element);
 
 export interface Action<T = string> {
   type: T;

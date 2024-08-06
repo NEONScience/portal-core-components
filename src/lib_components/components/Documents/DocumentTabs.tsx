@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
-import Tab from '@material-ui/core/Tab';
-import Tabs from '@material-ui/core/Tabs';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
+import { Theme as MuiTheme } from '@mui/material';
 import {
   makeStyles,
   createStyles,
-  Theme as MuiTheme,
-} from '@material-ui/core/styles';
+} from '@mui/styles';
 
 import DocumentListItem from './DocumentListItem';
 import DocumentService from '../../service/DocumentService';
@@ -81,7 +81,7 @@ export interface DocumentTabsProps {
   documents: NeonDocument[];
 }
 
-const DocumentTabs: React.FC<DocumentTabsProps> = (props: DocumentTabsProps): JSX.Element => {
+const DocumentTabs: React.FC<DocumentTabsProps> = (props: DocumentTabsProps): React.JSX.Element => {
   const classes = useStyles(Theme);
   const tabClasses = useTabStyles(Theme);
   const tabsClasses = useTabsStyles(Theme);
@@ -111,18 +111,19 @@ const DocumentTabs: React.FC<DocumentTabsProps> = (props: DocumentTabsProps): JS
     }),
   );
 
-  const renderTabs = (): JSX.Element => ((
+  const renderTabs = (): React.JSX.Element => ((
     <Tabs
       orientation="horizontal"
-      scrollButtons="on"
+      scrollButtons
       variant="scrollable"
       value={selectedTab}
       aria-label="Document Tabs"
       classes={tabsClasses}
       onChange={(event, newTab) => { setSelectedTab(newTab); }}
       TabIndicatorProps={{ style: { display: 'none' } }}
+      allowScrollButtonsMobile
     >
-      {docTabs.map((docTab: DocumentTabModel): JSX.Element => ((
+      {docTabs.map((docTab: DocumentTabModel): React.JSX.Element => ((
         <Tab
           key={docTab.index}
           value={docTab.index}
@@ -142,7 +143,7 @@ const DocumentTabs: React.FC<DocumentTabsProps> = (props: DocumentTabsProps): JS
     </Tabs>
   ));
 
-  const renderTabContent = (documentTab: DocumentTabModel): JSX.Element => {
+  const renderTabContent = (documentTab: DocumentTabModel): React.JSX.Element => {
     const { document, index }: DocumentTabModel = documentTab;
     const fullUrlPath = DocumentService.isQuickStartGuide(document)
       ? `${NeonEnvironment.getFullApiPath('quickStartGuides')}`
@@ -163,9 +164,9 @@ const DocumentTabs: React.FC<DocumentTabsProps> = (props: DocumentTabsProps): JS
     );
   };
 
-  const renderTabPanels = (): JSX.Element => (
+  const renderTabPanels = (): React.JSX.Element => (
     <div className={classes.tabPanels}>
-      {docTabs.map((docTab: DocumentTabModel): JSX.Element => renderTabContent(docTab))}
+      {docTabs.map((docTab: DocumentTabModel): React.JSX.Element => renderTabContent(docTab))}
     </div>
   );
 

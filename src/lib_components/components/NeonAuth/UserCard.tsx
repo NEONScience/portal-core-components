@@ -2,16 +2,16 @@
 
 import React from 'react';
 
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import Chip from '@material-ui/core/Chip';
-import Avatar from '@material-ui/core/Avatar';
-import EmailIcon from '@material-ui/icons/Email';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+import Chip from '@mui/material/Chip';
+import Avatar from '@mui/material/Avatar';
+import EmailIcon from '@mui/icons-material/Email';
 import {
   makeStyles,
   createStyles,
-  Theme as MuiThemeType,
-} from '@material-ui/core/styles';
+} from '@mui/styles';
+import { Theme as MuiThemeType } from '@mui/material';
 
 import moment, { Moment } from 'moment';
 
@@ -114,7 +114,7 @@ export interface UserCardProps {
   lastLogin?: string;
 }
 
-const UserCard = (props: UserCardProps): JSX.Element => {
+const UserCard = (props: UserCardProps): React.JSX.Element => {
   const {
     pictureUrl,
     email,

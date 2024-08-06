@@ -4,8 +4,8 @@ import React from 'react';
 import {
   makeStyles,
   createStyles,
-  Theme as MuiTheme,
-} from '@material-ui/core/styles';
+} from '@mui/styles';
+import { Theme as MuiTheme } from '@mui/material';
 
 import BaseCard, { CardType, BaseCardProps } from './BaseCard';
 import Theme from '../Theme/Theme';
@@ -36,7 +36,7 @@ type InfoCardProps = BaseInfoCardProps & {
   classes?: InfoCardClasses;
 };
 
-const InfoCard: React.FC<InfoCardProps> = (props: InfoCardProps): JSX.Element => {
+const InfoCard: React.FC<InfoCardProps> = (props: InfoCardProps): React.JSX.Element => {
   const classes = useStyles(Theme);
   const { classes: calloutClasses }: InfoCardProps = props;
   const injectedCallout: string|undefined = calloutClasses

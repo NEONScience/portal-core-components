@@ -1,16 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-import Grid from '@material-ui/core/Grid';
-import Button, { ButtonProps } from '@material-ui/core/Button';
-import ButtonGroup, { ButtonGroupProps } from '@material-ui/core/ButtonGroup';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Grow from '@material-ui/core/Grow';
-import Paper from '@material-ui/core/Paper';
-import Popper from '@material-ui/core/Popper';
-import MenuItem from '@material-ui/core/MenuItem';
-import MenuList from '@material-ui/core/MenuList';
+import Grid from '@mui/material/Grid';
+import Button, { ButtonProps } from '@mui/material/Button';
+import ButtonGroup, { ButtonGroupProps } from '@mui/material/ButtonGroup';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+import Grow from '@mui/material/Grow';
+import Paper from '@mui/material/Paper';
+import Popper from '@mui/material/Popper';
+import MenuItem from '@mui/material/MenuItem';
+import MenuList from '@mui/material/MenuList';
 
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 import Theme from '../Theme/Theme';
 import { Nullable } from '../../types/core';
@@ -28,7 +28,7 @@ interface SplitButtonProps {
   selectedOptionDisplayCallback: Nullable<(selectedOption: string) => string>;
 }
 
-const SplitButton: React.FC<SplitButtonProps> = (props: SplitButtonProps): JSX.Element => {
+const SplitButton: React.FC<SplitButtonProps> = (props: SplitButtonProps): React.JSX.Element => {
   const {
     name,
     options,
@@ -84,7 +84,7 @@ const SplitButton: React.FC<SplitButtonProps> = (props: SplitButtonProps): JSX.E
   const handleToggle = (): void => {
     setOpen((prevOpen) => !prevOpen);
   };
-  const handleClose = (event: React.MouseEvent<Document, MouseEvent>): void => {
+  const handleClose = (event: MouseEvent | TouchEvent): void => {
     if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
       return;
     }
@@ -142,7 +142,7 @@ const SplitButton: React.FC<SplitButtonProps> = (props: SplitButtonProps): JSX.E
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList id={`${name}-split-button-menu`}>
-                    {options.map((option: string, index: number): JSX.Element => ((
+                    {options.map((option: string, index: number): React.JSX.Element => ((
                       <MenuItem
                         key={option}
                         selected={option === stateSelectedOption}

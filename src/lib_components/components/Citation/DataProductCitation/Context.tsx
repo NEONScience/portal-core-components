@@ -91,7 +91,7 @@ export interface ProviderProps {
   children?: React.ReactNode | React.ReactNode[];
 }
 
-const Provider: React.FC<ProviderProps> = (props: ProviderProps): JSX.Element => {
+const Provider: React.FC<ProviderProps> = (props: ProviderProps): React.JSX.Element => {
   const {
     productCode: propsProductCode,
     release: propsRelease,

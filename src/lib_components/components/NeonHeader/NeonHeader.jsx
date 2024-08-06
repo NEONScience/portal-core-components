@@ -2,9 +2,9 @@ import React, { forwardRef, useState, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import HTMLReactParser, { domToReact } from 'html-react-parser';
 
-import { makeStyles } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import Skeleton from '@material-ui/lab/Skeleton';
+import { makeStyles } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import Skeleton from '@mui/lab/Skeleton';
 
 import camelCase from 'lodash/camelCase';
 
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
         borderTopLeftRadius: '0px',
       },
     },
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down('lg')]: {
       padding: theme.spacing(1, 2),
       top: theme.spacing(1),
       right: theme.spacing(9),
@@ -66,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
       '& div.header__site-navigation': {
         zIndex: '8 !important',
       },
-      [theme.breakpoints.down('sm')]: {
+      [theme.breakpoints.down('md')]: {
         '& .header__site-navigation': {
           display: 'none',
         },
@@ -209,7 +209,7 @@ const useStyles = makeStyles((theme) => ({
       fill: '#002c77',
       transition: 'all 0.2s ease-in-out',
     },
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down('lg')]: {
       '& nav#block-neon-main-menu > ul.menu.menu--main > li.siteSearch': {
         padding: '0 1.875rem 0.625rem 1.875rem !important',
       },
@@ -406,7 +406,7 @@ const NeonHeader = forwardRef((props, headerRef) => {
   if ((renderMode === 'loading') && showSkeleton) {
     return (
       <header ref={headerRef} id="header" className={classes.skeletonHeader}>
-        <Skeleton variant="rect" height={`${belowLg ? 60 : 120}px`} width="100%" />
+        <Skeleton variant="rectangular" height={`${belowLg ? 60 : 120}px`} width="100%" />
       </header>
     );
   }

@@ -6,14 +6,15 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@material-ui/core/styles';
-import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
-import Slider from '@material-ui/core/Slider';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@mui/styles';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import Slider from '@mui/material/Slider';
+import Typography from '@mui/material/Typography';
 
-import Skeleton from '@material-ui/lab/Skeleton';
+import Skeleton from '@mui/lab/Skeleton';
 
-import MomentUtils from '@date-io/moment';
 import moment from 'moment';
 
 import { SvgDefs } from '../DataProductAvailability/AvailabilitySvgComponents';
@@ -52,7 +53,7 @@ const useStyles = makeStyles(() => ({
   },
   slider: {
     minWidth: Theme.spacing(40),
-    width: `calc(100% - ${Theme.spacing(6)}px)`,
+    width: `calc(100% - ${Theme.spacing(6)})`,
     marginLeft: Theme.spacing(3),
     marginBottom: Theme.spacing(4),
   },
@@ -166,16 +167,16 @@ const TimeSeriesViewerDateRange = (props) => {
   if (!displayRange.length || !selectedSites.length) {
     return (
       <div>
-        <Skeleton variant="rect" width="100%" height={56} />
+        <Skeleton variant="rectangular" width="100%" height={56} />
         <br />
         <div style={{ display: 'flex', marginBottom: Theme.spacing(3) }}>
-          <Skeleton variant="rect" width="100%" height={40} />
+          <Skeleton variant="rectangular" width="100%" height={40} />
           <div style={{ width: '40px' }} />
-          <Skeleton variant="rect" width="100%" height={40} />
+          <Skeleton variant="rectangular" width="100%" height={40} />
         </div>
-        <Skeleton variant="rect" width={300} height={28} />
+        <Skeleton variant="rectangular" width={300} height={28} />
         <br />
-        <Skeleton variant="rect" width="100%" height={80} />
+        <Skeleton variant="rectangular" width="100%" height={80} />
       </div>
     );
   }
@@ -250,7 +251,7 @@ const TimeSeriesViewerDateRange = (props) => {
       <div className={classes.optionContainer}>
         <Typography variant="h6" gutterBottom>Select by Date</Typography>
         <div style={{ marginBottom: Theme.spacing(2) }}>
-          <MuiPickersUtilsProvider utils={MomentUtils}>
+          <LocalizationProvider dateAdapter={AdapterMoment}>
             <div className={classes.optionsContainer} style={{ marginBottom: Theme.spacing(3) }}>
               <div style={{ marginRight: Theme.spacing(3) }}>
                 <DatePicker
@@ -283,7 +284,7 @@ const TimeSeriesViewerDateRange = (props) => {
                 />
               </div>
             </div>
-          </MuiPickersUtilsProvider>
+          </LocalizationProvider>
           {renderedSlider}
         </div>
       </div>

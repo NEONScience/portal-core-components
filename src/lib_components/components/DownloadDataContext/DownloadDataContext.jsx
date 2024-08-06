@@ -263,10 +263,8 @@ const newStateIsAllowable = (key, value) => {
     case 'release':
       return (value === null || (typeof value === 'string' && value.length > 0));
     case 'sites':
-      return (
-        Array.isArray(value)
-        && value.every((site) => (typeof site === 'string' && /^[A-Z]{4}$/.test(site)))
-      );
+      return Array.isArray(value)
+      && value.every((site) => (typeof site === 'string' && /^[A-Z]{4}$/.test(site)));
     case 'dateRange':
       return (
         Array.isArray(value)

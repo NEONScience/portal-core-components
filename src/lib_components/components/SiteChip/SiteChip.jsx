@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Chip from '@material-ui/core/Chip';
-import Avatar from '@material-ui/core/Avatar';
-import PlaceIcon from '@material-ui/icons/Place';
-import DeleteIcon from '@material-ui/icons/Cancel';
+import { makeStyles } from '@mui/styles';
+import Chip from '@mui/material/Chip';
+import Avatar from '@mui/material/Avatar';
+import PlaceIcon from '@mui/icons-material/Place';
+import DeleteIcon from '@mui/icons-material/Cancel';
 
 import Theme from '../Theme/Theme';
 
@@ -71,7 +71,6 @@ const SiteChip = (props) => {
   const deleteIconStyle = {};
   let avatarClass = null;
   if (otherProps.size === 'large') {
-    otherProps.size = null; // to prevent a PropTypes error in Mui/Chip
     avatarClass = classes.avatarLarge;
     chipStyle.fontSize = '1rem';
     chipStyle.borderRadius = '20px';

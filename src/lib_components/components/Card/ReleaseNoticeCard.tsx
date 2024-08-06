@@ -4,7 +4,7 @@ import React from 'react';
 import {
   makeStyles,
   createStyles,
-} from '@material-ui/core/styles';
+} from '@mui/styles';
 
 import InfoMessageCard, { InfoMessageCardProps } from './InfoMessageCard';
 import Theme from '../Theme/Theme';
@@ -27,7 +27,7 @@ const useStyles: StylesHook = makeStyles((theme: NeonTheme) =>
 
 const ReleaseNoticeCard: React.FC<InfoMessageCardProps> = (
   props: InfoMessageCardProps,
-): JSX.Element => {
+): React.JSX.Element => {
   const classes = useStyles(Theme);
   return (
     <InfoMessageCard

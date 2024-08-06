@@ -1,27 +1,27 @@
 import React, { useRef, useState, useEffect } from 'react';
 import moment from 'moment';
 
-import { makeStyles } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import Card from '@material-ui/core/Card';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Link from '@material-ui/core/Link';
-import Tab from '@material-ui/core/Tab';
-import Tabs from '@material-ui/core/Tabs';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import Card from '@mui/material/Card';
+import CircularProgress from '@mui/material/CircularProgress';
+import Link from '@mui/material/Link';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableRow from '@mui/material/TableRow';
+import Typography from '@mui/material/Typography';
 
-import Skeleton from '@material-ui/lab/Skeleton';
+import Skeleton from '@mui/lab/Skeleton';
 
-import ErrorIcon from '@material-ui/icons/Error';
-import SummaryIcon from '@material-ui/icons/Toc';
-import SitesIcon from '@material-ui/icons/Place';
-import DateRangeIcon from '@material-ui/icons/DateRange';
-import VariablesIcon from '@material-ui/icons/Timeline';
-import AxesIcon from '@material-ui/icons/BorderInner';
+import ErrorIcon from '@mui/icons-material/Error';
+import SummaryIcon from '@mui/icons-material/Toc';
+import SitesIcon from '@mui/icons-material/Place';
+import DateRangeIcon from '@mui/icons-material/DateRange';
+import VariablesIcon from '@mui/icons-material/Timeline';
+import AxesIcon from '@mui/icons-material/BorderInner';
 
 import ReleaseChip from '../Chip/ReleaseChip';
 import Theme, { COLORS } from '../Theme/Theme';
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   tabsContainer: {
     display: 'flex',
     margin: theme.spacing(0, -0.5, -0.5, -0.5),
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       flexDirection: 'column',
     },
   },
@@ -155,7 +155,7 @@ const useTabStyles = makeStyles((theme) => ({
         marginTop: '-1.5px',
       },
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       paddingRight: theme.spacing(2.5),
       '&:not(:first-child)': {
         marginLeft: '-1.5px',
@@ -167,7 +167,7 @@ const useTabStyles = makeStyles((theme) => ({
   labelIcon: {
     minHeight: theme.spacing(8),
     minWidth: theme.spacing(15),
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       minHeight: theme.spacing(6),
       minWidth: theme.spacing(17),
     },
@@ -182,7 +182,7 @@ const useTabStyles = makeStyles((theme) => ({
     },
   },
   selected: {
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       borderBottom: 'none',
     },
     [theme.breakpoints.up('md')]: {
@@ -481,7 +481,7 @@ export default function TimeSeriesViewerContainer() {
   const tabClasses = useTabStyles(Theme);
   const tabsClasses = useTabsStyles(Theme);
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
-  const belowMd = useMediaQuery(Theme.breakpoints.down('sm'));
+  const belowMd = useMediaQuery(Theme.breakpoints.down('md'));
 
   // console.log('TIME SERIES VIEWER STATE:', state);
 

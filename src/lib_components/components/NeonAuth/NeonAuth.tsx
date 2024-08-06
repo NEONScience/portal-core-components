@@ -1,10 +1,11 @@
 /* eslint-disable react/no-unused-prop-types */
 import React, { useCallback, Dispatch } from 'react';
 
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { makeStyles, Theme as MuiThemeType } from '@material-ui/core/styles';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import CircularProgress from '@mui/material/CircularProgress';
+import { makeStyles } from '@mui/styles';
+import { Theme as MuiThemeType } from '@mui/material';
 
 import AuthService, { LOGOUT_REDIRECT_PATHS } from './AuthService';
 import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
@@ -79,7 +80,7 @@ const renderAuth = (
   showAuthWorking: boolean,
   isAuthWsConnected: boolean,
   dispatch: Dispatch<any>,
-): JSX.Element => {
+): React.JSX.Element => {
   const {
     loginType,
     logoutType,
@@ -138,7 +139,7 @@ const renderAuth = (
     }
   };
   // eslint-disable-next-line react/jsx-no-useless-fragment
-  let authContent: JSX.Element = <></>;
+  let authContent: React.JSX.Element = <></>;
   switch (displayType) {
     case NeonAuthDisplayType.MENU:
     default:
@@ -193,7 +194,7 @@ const renderAuth = (
   return authContent;
 };
 
-const NeonAuth = (props: NeonAuthProps): JSX.Element => {
+const NeonAuth = (props: NeonAuthProps): React.JSX.Element => {
   const [
     {
       auth: {

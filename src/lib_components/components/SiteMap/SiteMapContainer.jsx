@@ -10,42 +10,42 @@ import PropTypes from 'prop-types';
 import debounce from 'lodash/debounce';
 import uniqueId from 'lodash/uniqueId';
 
-import { makeStyles } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import Button from '@material-ui/core/Button';
-import Chip from '@material-ui/core/Chip';
-import Checkbox from '@material-ui/core/Checkbox';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import IconButton from '@material-ui/core/IconButton';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
-import Paper from '@material-ui/core/Paper';
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
-import Zoom from '@material-ui/core/Zoom';
+import { makeStyles } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import Button from '@mui/material/Button';
+import Chip from '@mui/material/Chip';
+import Checkbox from '@mui/material/Checkbox';
+import CircularProgress from '@mui/material/CircularProgress';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import IconButton from '@mui/material/IconButton';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
+import ListItemText from '@mui/material/ListItemText';
+import Paper from '@mui/material/Paper';
+import ToggleButton from '@mui/lab/ToggleButton';
+import ToggleButtonGroup from '@mui/lab/ToggleButtonGroup';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
+import Zoom from '@mui/material/Zoom';
 
-import HelpIcon from '@material-ui/icons/HelpOutline';
-import WarningIcon from '@material-ui/icons/Warning';
-import ErrorIcon from '@material-ui/icons/Error';
-import ExpandUpIcon from '@material-ui/icons/ExpandLess';
-import ExpandDownIcon from '@material-ui/icons/ExpandMore';
-import HideIcon from '@material-ui/icons/VisibilityOff';
-import ShowIcon from '@material-ui/icons/Visibility';
-import DownArrowIcon from '@material-ui/icons/ArrowDropDown';
-import LeftArrowIcon from '@material-ui/icons/ArrowLeft';
-import VertResizeIcon from '@material-ui/icons/Height';
-import LegendIcon from '@material-ui/icons/Toc';
-import UnselectableIcon from '@material-ui/icons/NotInterested';
-import DoneIcon from '@material-ui/icons/Done';
-import CancelIcon from '@material-ui/icons/Cancel';
-import NoneSelectedIcon from '@material-ui/icons/Remove';
-import DeleteIcon from '@material-ui/icons/Delete';
+import HelpIcon from '@mui/icons-material/HelpOutline';
+import WarningIcon from '@mui/icons-material/Warning';
+import ErrorIcon from '@mui/icons-material/Error';
+import ExpandUpIcon from '@mui/icons-material/ExpandLess';
+import ExpandDownIcon from '@mui/icons-material/ExpandMore';
+import HideIcon from '@mui/icons-material/VisibilityOff';
+import ShowIcon from '@mui/icons-material/Visibility';
+import DownArrowIcon from '@mui/icons-material/ArrowDropDown';
+import LeftArrowIcon from '@mui/icons-material/ArrowLeft';
+import VertResizeIcon from '@mui/icons-material/Height';
+import LegendIcon from '@mui/icons-material/Toc';
+import UnselectableIcon from '@mui/icons-material/NotInterested';
+import DoneIcon from '@mui/icons-material/Done';
+import CancelIcon from '@mui/icons-material/Cancel';
+import NoneSelectedIcon from '@mui/icons-material/Remove';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 import NeonContext from '../NeonContext/NeonContext';
 import Theme from '../Theme/Theme';
@@ -355,7 +355,7 @@ const SiteMapContainer = (props) => {
   const resizeBorderRef = useRef(null);
   const resizeButtonRef = useRef(null);
 
-  const belowMd = useMediaQuery(Theme.breakpoints.down('sm'));
+  const belowMd = useMediaQuery(Theme.breakpoints.down('md'));
 
   /**
      Vertical Resize Hooks
@@ -741,7 +741,7 @@ const SiteMapContainer = (props) => {
                   <ListItem key={selectedItem}>
                     {!src ? null : (
                       <ListItemIcon>
-                        <img alt={selectedItem} src={src} className={classes.summaryFeatureIcon} />
+                        <img alt={selectedItem} src={src.src} className={classes.summaryFeatureIcon} />
                       </ListItemIcon>
                     )}
                     <ListItemText
@@ -759,6 +759,7 @@ const SiteMapContainer = (props) => {
                           edge="end"
                           aria-label={remove}
                           onClick={() => dispatch({ type: 'toggleItemSelected', item: selectedItem })}
+                          size="large"
                         >
                           <DeleteIcon />
                         </IconButton>
@@ -812,6 +813,7 @@ const SiteMapContainer = (props) => {
           onDragStart={resizeVerticallyDragStart}
           onDrag={resizeVerticallyDrag}
           onDragEnd={resizeVerticallyDragEnd}
+          size="large"
         >
           <VertResizeIcon fontSize="small" />
         </IconButton>
@@ -849,7 +851,7 @@ const SiteMapContainer = (props) => {
     };
     let icon = null;
     if (iconSvg) {
-      icon = <img alt={featureName} src={iconSvg} className={classes.featureIcon} />;
+      icon = <img alt={featureName} src={iconSvg.src} className={classes.featureIcon} />;
     } else if (featureShape === 'Circle') {
       const circleProps = {
         cx: 14,

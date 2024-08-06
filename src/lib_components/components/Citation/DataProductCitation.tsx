@@ -21,7 +21,7 @@ interface DataProductCitationProps {
 
 const DataProductCitation: React.FC<DataProductCitationProps> = (
   props: DataProductCitationProps,
-): JSX.Element => {
+): React.JSX.Element => {
   const {
     productCode,
     release,

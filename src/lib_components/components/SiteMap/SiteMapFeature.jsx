@@ -6,31 +6,31 @@ import tinycolor from 'tinycolor2';
 
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import IconButton from '@material-ui/core/IconButton';
-import Link from '@material-ui/core/Link';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@mui/styles';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import IconButton from '@mui/material/IconButton';
+import Link from '@mui/material/Link';
+import SnackbarContent from '@mui/material/SnackbarContent';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 
-import HelpIcon from '@material-ui/icons/HelpOutline';
-import ClickIcon from '@material-ui/icons/TouchApp';
-import ElevationIcon from '@material-ui/icons/Terrain';
-import ExploreDataProductsIcon from '@material-ui/icons/InsertChartOutlined';
-import LocationIcon from '@material-ui/icons/MyLocation';
-import MarkerIcon from '@material-ui/icons/Place';
-import SiteDetailsIcon from '@material-ui/icons/InfoOutlined';
-import UnselectableIcon from '@material-ui/icons/NotInterested';
+import HelpIcon from '@mui/icons-material/HelpOutline';
+import ClickIcon from '@mui/icons-material/TouchApp';
+import ElevationIcon from '@mui/icons-material/Terrain';
+import ExploreDataProductsIcon from '@mui/icons-material/InsertChartOutlined';
+import LocationIcon from '@mui/icons-material/MyLocation';
+import MarkerIcon from '@mui/icons-material/Place';
+import SiteDetailsIcon from '@mui/icons-material/InfoOutlined';
+import UnselectableIcon from '@mui/icons-material/NotInterested';
 
-import SelectedIcon from '@material-ui/icons/DoneOutline';
-import UnselectedIcon from '@material-ui/icons/Remove';
+import SelectedIcon from '@mui/icons-material/DoneOutline';
+import UnselectedIcon from '@mui/icons-material/Remove';
 
 import 'leaflet/dist/leaflet.css';
 import {
   CircleMarker,
-  Map,
+  MapContainer,
   FeatureGroup,
   Marker,
   Polygon,
@@ -367,7 +367,7 @@ const SiteMapFeature = (props) => {
     ) : title;
     let icon = null;
     if (iconSvg) {
-      icon = <img alt={feature.name} src={feature.iconSvg} className={classes.popupFeatureIcon} />;
+      icon = <img alt={feature.name} src={feature.iconSvg.src} className={classes.popupFeatureIcon} />;
     } else if (featureShape === 'Circle') {
       const circleProps = {
         cx: 12,
@@ -476,7 +476,7 @@ const SiteMapFeature = (props) => {
     const internal = (
       <>
         {selectedIcon}
-        <img src={siteIcon} alt={siteCode} className={classes.popupSiteIcon} style={markerStyle} />
+        <img src={siteIcon.src} alt={siteCode} className={classes.popupSiteIcon} style={markerStyle} />
         <Typography variant="caption" style={{ textAlign: 'left' }}>
           {`${site.description} (${site.siteCode})`}
         </Typography>
@@ -521,6 +521,7 @@ const SiteMapFeature = (props) => {
               {...iconButtonProps}
               aria-label="Latitude / Longitude"
               disabled={selectionActive}
+              size="large"
             >
               <LocationIcon />
             </IconButton>
@@ -530,6 +531,7 @@ const SiteMapFeature = (props) => {
                 {...iconButtonProps}
                 aria-label="Latitude / Longitude (click to copy)"
                 disabled={selectionActive}
+                size="large"
               >
                 <LocationIcon />
               </IconButton>
@@ -1410,7 +1412,7 @@ const SiteMapFeature = (props) => {
       // Polyline
       if (featureShape === 'Polyline') {
         shapeProps = {
-          ...featureStyle || {},
+          ...(featureStyle || {}),
           onMouseOver: (e) => {
             e.target._path.setAttribute('stroke', hoverColor);
           },
@@ -1426,7 +1428,7 @@ const SiteMapFeature = (props) => {
         // feature is still visible, resulting in an always-on popup with no context otherwise
         if (!calculateLocationsInBounds({ X: shapeData }, mapBounds).length) { return null; }
         shapeProps = {
-          ...featureStyle || {},
+          ...(featureStyle || {}),
           ...polygonInteractionProps,
         };
         // ReactLeaflet does not suport the mask prop, so add it as an unused class.
@@ -1687,7 +1689,7 @@ const SiteMapFeature = (props) => {
 
 SiteMapFeature.propTypes = {
   mapRef: PropTypes.shape({
-    current: PropTypes.instanceOf(Map),
+    current: PropTypes.instanceOf(MapContainer),
   }).isRequired,
   featureKey: PropTypes.oneOf(Object.keys(FEATURES)).isRequired,
 };

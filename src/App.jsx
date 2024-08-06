@@ -1,9 +1,9 @@
 import React, { Suspense } from 'react';
 
-import Grid from '@material-ui/core/Grid';
-import Skeleton from '@material-ui/lab/Skeleton';
-import HomeIcon from '@material-ui/icons/Home';
-import BasicComponentsIcon from '@material-ui/icons/ViewModule';
+import Grid from '@mui/material/Grid';
+import Skeleton from '@mui/lab/Skeleton';
+import HomeIcon from '@mui/icons-material/Home';
+import BasicComponentsIcon from '@mui/icons-material/ViewModule';
 
 import NeonPage from './lib_components/components/NeonPage/NeonPage';
 import NeonRouter from './lib_components/components/NeonRouter/NeonRouter';
@@ -90,7 +90,7 @@ const SuspenseFallback = () => (
     <Grid item xs={12}>
       <Skeleton variant="text" width="50%" height={32} />
       <br />
-      <Skeleton variant="rect" width="100%" height={100} />
+      <Skeleton variant="rectangular" width="100%" height={100} />
     </Grid>
     <Grid item xs={12}>
       <Skeleton variant="text" width="25%" height={48} />
@@ -99,10 +99,10 @@ const SuspenseFallback = () => (
       <Skeleton variant="text" width="100%" height={24} />
       <Skeleton variant="text" width="100%" height={24} />
       <br />
-      <Skeleton variant="rect" width="100%" height={100} />
+      <Skeleton variant="rectangular" width="100%" height={100} />
     </Grid>
     <Grid item xs={12}>
-      <Skeleton variant="rect" width="100%" height={400} />
+      <Skeleton variant="rectangular" width="100%" height={400} />
     </Grid>
   </Grid>
 );

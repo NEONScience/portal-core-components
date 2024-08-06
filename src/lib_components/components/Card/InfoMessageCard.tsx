@@ -4,8 +4,8 @@ import React from 'react';
 import {
   makeStyles,
   createStyles,
-  Theme as MuiTheme,
-} from '@material-ui/core/styles';
+} from '@mui/styles';
+import { Theme as MuiTheme } from '@mui/material';
 
 import BaseMessageCard, { MessageCardType, BaseMessageCardProps } from './BaseMessageCard';
 import Theme from '../Theme/Theme';
@@ -41,7 +41,7 @@ export type InfoMessageCardProps = BaseInfoMessageCardProps & {
   classes?: InfoMessageCardClasses;
 };
 
-const InfoCard: React.FC<InfoMessageCardProps> = (props: InfoMessageCardProps): JSX.Element => {
+const InfoCard: React.FC<InfoMessageCardProps> = (props: InfoMessageCardProps): React.JSX.Element => {
   const classes = useStyles(Theme);
   const { classes: messageCardClasses }: InfoMessageCardProps = props;
   const injectedCard: string|undefined = messageCardClasses

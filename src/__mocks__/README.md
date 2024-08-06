@@ -60,8 +60,8 @@ Use this mock when snapshot tests are too complex and not due to what is actuall
 ```
 import 'path/to/__mocks__/mockReactComponent';
 
-jest.mock('@material-ui/core/Select', () => mockReactComponent('@material-ui/core/Select'));
-jest.mock('@material-ui/core/Slider', () => mockReactComponent('@material-ui/core/Slider'));
+jest.mock('@mui/material/Select', () => mockReactComponent('@mui/material/Select'));
+jest.mock('@mui/material/Slider', () => mockReactComponent('@mui/material/Slider'));
 ```
 
 In the tree that renders for such a component the Select and Slider subtrees will be simple `<div>` tags with props and children intact. Props that cannot be rendered to strings cleanly (e.g. functions, objects with circular references, etc.) will be safely rendered out to a stub. All other props will render to strings to make for a meaningful snapshot tree.

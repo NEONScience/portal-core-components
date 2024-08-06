@@ -8,8 +8,8 @@ import React, {
 import {
   makeStyles,
   createStyles,
-  Theme as MuiTheme,
-} from '@material-ui/core/styles';
+} from '@mui/styles';
+import { Theme as MuiTheme } from '@mui/material';
 
 import DocumentService from '../../service/DocumentService';
 import ErrorCard from '../Card/ErrorCard';
@@ -55,7 +55,7 @@ const calcAutoHeight = (width: number): number => {
   return Math.floor(width * mult);
 };
 
-const DocumentViewer: React.FC<DocumentViewerProps> = (props: DocumentViewerProps): JSX.Element => {
+const DocumentViewer: React.FC<DocumentViewerProps> = (props: DocumentViewerProps): React.JSX.Element => {
   const classes = useStyles(Theme);
   const {
     document,
@@ -124,7 +124,7 @@ const DocumentViewer: React.FC<DocumentViewerProps> = (props: DocumentViewerProp
     );
   }
 
-  const renderObject = (): JSX.Element => {
+  const renderObject = (): React.JSX.Element => {
     if (!DocumentService.isViewerSupported(document)) {
       return (
         <ErrorCard

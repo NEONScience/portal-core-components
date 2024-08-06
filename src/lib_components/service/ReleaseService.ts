@@ -109,6 +109,7 @@ const ReleaseService: IReleaseService = {
   },
   isInternalReleaseLike: (release: IReleaseLike): boolean => {
     let isLike = true;
+    // eslint-disable-next-line no-restricted-syntax
     for (const p in ReleaseProps) {
       if (Object.prototype.hasOwnProperty.call(ReleaseProps, p)) {
         if (!(p in release)) {

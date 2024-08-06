@@ -1,10 +1,13 @@
-import ArchiveIcon from '@material-ui/icons/Archive';
-import CodeIcon from '@material-ui/icons/Code';
-import DocumentIcon from '@material-ui/icons/DescriptionOutlined';
-import FileIcon from '@material-ui/icons/InsertDriveFile';
-import ImageIcon from '@material-ui/icons/Photo';
-import PresentationIcon from '@material-ui/icons/Tv';
-import SpreadsheetIcon from '@material-ui/icons/GridOn';
+import React from 'react';
+
+import ArchiveIcon from '@mui/icons-material/Archive';
+import CodeIcon from '@mui/icons-material/Code';
+import DocumentIcon from '@mui/icons-material/DescriptionOutlined';
+import FileIcon from '@mui/icons-material/InsertDriveFile';
+import ImageIcon from '@mui/icons-material/Photo';
+import PresentationIcon from '@mui/icons-material/Tv';
+import SpreadsheetIcon from '@mui/icons-material/GridOn';
+import { SvgIconComponent } from '@mui/icons-material';
 
 import UAParser, { IDevice, UAParserInstance } from 'ua-parser-js';
 
@@ -17,7 +20,7 @@ import { getUserAgentHeader } from '../util/requestUtil';
 export interface DocumentTypeListItemDef {
   match: (type: string) => boolean;
   title: (type?: string) => string;
-  Icon: React.ReactNode;
+  Icon: SvgIconComponent;
 }
 
 export interface ParsedQsgNameResult {
@@ -462,6 +465,7 @@ const DocumentService: IDocumentService = {
         if (!isStringNonEmpty(filename)) {
           filename = document.name;
         }
+        // eslint-disable-next-line no-undef
         const saveOpts: SaveFilePickerOptions = {
           suggestedName: filename as string,
         };

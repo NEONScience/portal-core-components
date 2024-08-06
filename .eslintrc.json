@@ -1,11 +1,21 @@
 {
-  "extends": ["airbnb", "react-app", "plugin:jsx-a11y/recommended"],
-  "plugins": ["react", "jsx-a11y"],
+  "root": true,
+  "env": {
+    "browser": true
+  },
+  "extends": [
+    "next",
+    "next/core-web-vitals",
+    "airbnb",
+    "airbnb/hooks",
+    "plugin:jsx-a11y/recommended"
+  ],
+  "plugins": ["@typescript-eslint", "react", "jsx-a11y"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": "./tsconfig.json",
     "sourceType": "module",
-    "ecmaVersion": 6,
+    "ecmaVersion": 2020,
     "ecmaFeatures": {
       "impliedStrict": true,
       "jsx": true,
@@ -24,11 +34,12 @@
     "scripts/*.js",
     "config/",
     "jest.config.js",
-    "server.js"
+    "server.js",
+    "next.config.*"
   ],
   "rules": {
-    "@typescript-eslint/no-shadow": ["error"],
-    "@typescript-eslint/no-use-before-define": ["warn"],
+    "@typescript-eslint/no-shadow": "error",
+    "@typescript-eslint/no-use-before-define": "warn",
     "import/extensions": [
       "error",
       "ignorePackages",
@@ -45,9 +56,11 @@
     "react/function-component-definition": 0,
     "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     "react/jsx-props-no-spreading": 0,
+    "max-len": "off",
     "no-restricted-exports": 0,
     "no-shadow": "off",
-    "no-use-before-define": "off"
+    "no-use-before-define": "off",
+    "no-unused-vars": "off"
   },
   "overrides": [
     {

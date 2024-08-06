@@ -8,30 +8,31 @@ import PropTypes from 'prop-types';
 
 import { uniqueId } from 'lodash';
 
-import { makeStyles } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { makeStyles } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import FormControl from '@material-ui/core/FormControl';
-import Grid from '@material-ui/core/Grid';
-import Hidden from '@material-ui/core/Hidden';
-import MenuItem from '@material-ui/core/MenuItem';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import Select from '@material-ui/core/Select';
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-import Typography from '@material-ui/core/Typography';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import FormControl from '@mui/material/FormControl';
+import Grid from '@mui/material/Grid';
+import Hidden from '@mui/material/Hidden';
+import MenuItem from '@mui/material/MenuItem';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import Select from '@mui/material/Select';
+import ToggleButton from '@mui/lab/ToggleButton';
+import ToggleButtonGroup from '@mui/lab/ToggleButtonGroup';
+import Typography from '@mui/material/Typography';
 
-import AscIcon from '@material-ui/icons/KeyboardArrowDown';
-import DescIcon from '@material-ui/icons/KeyboardArrowUp';
-import ClickIcon from '@material-ui/icons/TouchApp';
-import DragIcon from '@material-ui/icons/VerticalAlignCenter';
-import PanIcon from '@material-ui/icons/PanTool';
+import AscIcon from '@mui/icons-material/KeyboardArrowDown';
+import DescIcon from '@mui/icons-material/KeyboardArrowUp';
+import ClickIcon from '@mui/icons-material/TouchApp';
+import DragIcon from '@mui/icons-material/VerticalAlignCenter';
+import PanIcon from '@mui/icons-material/PanTool';
 
-import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
-import MomentUtils from '@date-io/moment';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 import FullWidthVisualization from '../FullWidthVisualization/FullWidthVisualization';
 import DownloadDataContext from '../DownloadDataContext/DownloadDataContext';
@@ -530,7 +531,7 @@ const BasicAvailabilityInterface = (props) => {
       >
         View By:
       </Typography>
-      <Hidden smDown key="viewMdUp">
+      <Hidden mdDown key="viewMdUp">
         <ToggleButtonGroup
           exclusive
           color="primary"
@@ -718,7 +719,7 @@ const BasicAvailabilityInterface = (props) => {
         </Grid>
         <Grid item xs={12} sm={7} md={6}>
           <Typography variant="h6" className={classes.h6Small}>Date Range</Typography>
-          <MuiPickersUtilsProvider utils={MomentUtils}>
+          <LocalizationProvider dateAdapter={AdapterMoment}>
             <div style={{ display: 'flex', flexWrap: 'nowrap' }}>
               <DatePicker
                 {...datePickerProps}
@@ -742,7 +743,7 @@ const BasicAvailabilityInterface = (props) => {
                 maxDate={TIME.getYearMonthMoment(dateRange.validValues[1])}
               />
             </div>
-          </MuiPickersUtilsProvider>
+          </LocalizationProvider>
           <div style={{ display: 'flex', marginTop: Theme.spacing(1) }}>
             <Button
               {...selectionButtonProps}
