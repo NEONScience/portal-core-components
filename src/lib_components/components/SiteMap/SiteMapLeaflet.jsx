@@ -12,13 +12,21 @@ import ReactDOMServer from 'react-dom/server';
 import { useId } from 'react-id-generator';
 
 import L from 'leaflet';
+import {
+  LayerGroup,
+  MapContainer,
+  ScaleControl,
+  TileLayer,
+  WMSTileLayer,
+  useMapEvents,
+} from 'react-leaflet';
 
 import { makeStyles } from '@mui/styles';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import IconButton from '@mui/material/IconButton';
-import ToggleButton from '@mui/lab/ToggleButton';
-import ToggleButtonGroup from '@mui/lab/ToggleButtonGroup';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 
@@ -27,18 +35,7 @@ import MapAreaSelectIcon from '@mui/icons-material/CropFree';
 import ObservatoryIcon from '@mui/icons-material/Public';
 import FocusLocationIcon from '@mui/icons-material/Place';
 
-import 'leaflet/dist/leaflet.css';
-import './SiteMap.css';
-
-import {
-  LayerGroup,
-  MapContainer,
-  ScaleControl,
-  TileLayer,
-  WMSTileLayer,
-} from 'react-leaflet';
-
-import { ReactLeafletGroupedLayerControl } from 'react-leaflet-grouped-layer-control';
+import LeafletGroupedLayerControl from './LeafletGroupedLayerControl';
 
 import Theme from '../Theme/Theme';
 
@@ -47,6 +44,7 @@ import SiteMapFeature from './SiteMapFeature';
 import {
   VIEWS,
   BASE_LAYERS,
+  OBSERVATORY_CENTER,
   OVERLAYS,
   OVERLAY_GROUPS,
   MAP_ZOOM_RANGE,
@@ -55,10 +53,14 @@ import {
   FETCH_STATUS,
   MAP_MOUSE_MODES,
   UNSELECTABLE_MARKER_FILTER,
+  LEAFLET_ATTR_PREFIX,
   mapIsAtFocusLocation,
   calculateLocationsInBounds,
   deriveFullObservatoryZoomLevel,
 } from './SiteMapUtils';
+
+import 'leaflet/dist/leaflet.css';
+import './SiteMap.css';
 
 const useStyles = makeStyles((theme) => ({
   map: {
@@ -106,10 +108,10 @@ const useStyles = makeStyles((theme) => ({
     '& div.leaflet-control-zoom': {
       border: 'none',
     },
-    '& div.leaflet-top.leaflet-right': {
-      right: 'unset !important',
-      left: '0px',
-    },
+    // '& div.leaflet-top.leaflet-right': {
+    //   right: 'unset !important',
+    //   left: '0px',
+    // },
     '& div.leaflet-bar': {
       top: '54px',
       left: '8px',
@@ -241,6 +243,68 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const handleBaseLayerChange = (dispatch, key) => {
+  if (key === null) { return; }
+  const isNone = key === 'none';
+  if (!isNone && !BASE_LAYERS[key]) { return; }
+  const appliedKey = isNone ? null : key;
+  dispatch({ type: 'setMapBaseLayer', baseLayer: appliedKey });
+};
+
+const LeafletMapManager = () => {
+  const [state, dispatch] = SiteMapContext.useSiteMapContext();
+  const {
+    aspectRatio: { currentValue: aspectRatioValue },
+  } = state;
+  const handleMoveEnd = (event) => {
+    const targetCenter = event.target.getCenter();
+    const targetBounds = event.target.getBounds();
+    dispatch({
+      type: 'setMapCenter',
+      center: [targetCenter.lat, targetCenter.lng],
+      bounds: {
+        lat: [targetBounds._southWest.lat, targetBounds._northEast.lat],
+        lng: [targetBounds._southWest.lng, targetBounds._northEast.lng],
+      },
+    });
+    if (typeof state.map.repositionOpenPopupFunc === 'function') {
+      state.map.repositionOpenPopupFunc();
+    }
+  };
+  const handleZoomEnd = (event) => {
+    const targetZoom = event.target.getZoom();
+    const targetCenter = event.target.getCenter();
+    const targetBounds = event.target.getBounds();
+    dispatch({
+      type: 'setMapZoom',
+      zoom: targetZoom,
+      center: [targetCenter.lat, targetCenter.lng],
+      bounds: {
+        lat: [targetBounds._southWest.lat, targetBounds._northEast.lat],
+        lng: [targetBounds._southWest.lng, targetBounds._northEast.lng],
+      },
+    });
+    if (typeof state.map.repositionOpenPopupFunc === 'function') {
+      state.map.repositionOpenPopupFunc();
+    }
+  };
+  const handleBaseLayerChangeLeaflet = (event) => {
+    handleBaseLayerChange(dispatch, event.name);
+  };
+  const map = useMapEvents({
+    zoomend: (event) => handleZoomEnd(event),
+    moveend: (event) => handleMoveEnd(event),
+    baselayerchange: (event) => handleBaseLayerChangeLeaflet(event),
+  });
+  useEffect(() => {
+    map.attributionControl.setPrefix(LEAFLET_ATTR_PREFIX);
+  }, [map]);
+  useEffect(() => {
+    map._container.style.paddingBottom = `${(aspectRatioValue || 0.75) * 100}%`;
+  }, [map, aspectRatioValue]);
+  return null;
+};
+
 /**
    Main Component
 */
@@ -250,8 +314,8 @@ const SiteMapLeaflet = () => {
   const [mapInstanceId] = useId();
 
   const mapRefExists = () => (
-    mapRef && mapRef.current && mapRef.current.container && mapRef.current.leafletElement
-      && mapRef.current.leafletElement._panes && mapRef.current.leafletElement._layers
+    mapRef && mapRef.current && mapRef.current._container
+      && mapRef.current._panes && mapRef.current._layers
   );
 
   // State, Dispatch, and other stuff from SiteMapContext
@@ -260,7 +324,9 @@ const SiteMapLeaflet = () => {
   if (
     state.focusLocation.current
       && state.focusLocation.fetch.status !== FETCH_STATUS.SUCCESS
-  ) { canRender = false; }
+  ) {
+    canRender = false;
+  }
 
   const [mapRefReady, setMapRefReady] = useState(false);
 
@@ -294,7 +360,7 @@ const SiteMapLeaflet = () => {
   const mapRefExistsProp = mapRefExists();
   useEffect(() => {
     if (state.map.bounds !== null || !mapRefExistsProp) { return; }
-    const bounds = mapRef.current.leafletElement.getBounds();
+    const bounds = mapRef.current.getBounds();
     if (state.map.zoom === null) {
       dispatch({
         type: 'setMapBounds',
@@ -330,7 +396,7 @@ const SiteMapLeaflet = () => {
           || !state.selection.active || !state.selection.validSet
           || state.selection.active !== FEATURE_TYPES.SITES.KEY
       ) { return; }
-      const { markerPane } = mapRef.current.leafletElement._panes;
+      const { markerPane } = mapRef.current._panes;
       if (markerPane && markerPane.children && markerPane.children.length) {
         // Unselectables: apply CSS filters to appear ghosted
         [...markerPane.children]
@@ -341,13 +407,13 @@ const SiteMapLeaflet = () => {
           });
         // Selecatbles: Uniformly bump the zIndexOffset to put them all on top
         state.selection.validSet.forEach((item) => {
-          const layerIdx = Object.keys(mapRef.current.leafletElement._layers).find((k) => (
-            mapRef.current.leafletElement._layers[k].options
-              && mapRef.current.leafletElement._layers[k].options.title === item
+          const layerIdx = Object.keys(mapRef.current._layers).find((k) => (
+            mapRef.current._layers[k].options
+              && mapRef.current._layers[k].options.title === item
           ));
-          if (layerIdx !== -1 && mapRef.current.leafletElement._layers[layerIdx]) {
-            const zIndex = (mapRef.current.leafletElement._layers[layerIdx] || {})._zIndex || 0;
-            mapRef.current.leafletElement._layers[layerIdx].setZIndexOffset(zIndex + 1000);
+          if (layerIdx !== -1 && mapRef.current._layers[layerIdx]) {
+            const zIndex = (mapRef.current._layers[layerIdx] || {})._zIndex || 0;
+            mapRef.current._layers[layerIdx].setZIndexOffset(zIndex + 1000);
           }
         });
       }
@@ -372,7 +438,7 @@ const SiteMapLeaflet = () => {
     // setTimeout of 0 to fire after map render cycle completes
     window.setTimeout(() => {
       if (!mapRefExists()) { return; }
-      mapRef.current.leafletElement.invalidateSize();
+      mapRef.current.invalidateSize();
     }, 0);
   }, []);
 
@@ -383,7 +449,7 @@ const SiteMapLeaflet = () => {
   */
   useEffect(() => {
     if (!mapRefExists() || state.view.current !== VIEWS.MAP) { return; }
-    mapRef.current.leafletElement.invalidateSize();
+    mapRef.current.invalidateSize();
     if (!state.view.initialized[VIEWS.MAP]) {
       dispatch({ type: 'setViewInitialized' });
     }
@@ -452,7 +518,7 @@ const SiteMapLeaflet = () => {
   useEffect(() => { // eslint-disable-line react-hooks/exhaustive-deps
     if (mapRefExists() && !mapRefReady) {
       setMapRefReady(true);
-      mapRef.current.leafletElement.invalidateSize();
+      mapRef.current.invalidateSize();
     }
   });
 
@@ -462,20 +528,20 @@ const SiteMapLeaflet = () => {
   */
   useEffect(() => {
     if (
-      !mapRef || !mapRef.current || !mapRef.current.container || !mapRef.current.leafletElement
+      !mapRef || !mapRef.current || !mapRef.current._container
         || state.map.mouseMode !== MAP_MOUSE_MODES.AREA_SELECT
     ) { return () => {}; }
-    const { leafletElement } = mapRef.current;
+    const leafletElement = mapRef.current;
     const { isDragging, center, shiftPressed } = areaSelection;
-    mapRef.current.container.onmousedown = (event) => {
+    mapRef.current._container.onmousedown = (event) => {
       if (isDragging) { return; }
       areaSelectionDispatch({ type: 'start', x: event.offsetX, y: event.offsetY });
     };
-    mapRef.current.container.onmousemove = (event) => {
+    mapRef.current._container.onmousemove = (event) => {
       if (!isDragging) { return; }
       areaSelectionDispatch({ type: 'move', x: event.offsetX, y: event.offsetY });
     };
-    mapRef.current.container.onmouseup = (event) => {
+    mapRef.current._container.onmouseup = (event) => {
       if (!isDragging) { return; }
       const reach = { x: event.offsetX, y: event.offsetY };
       const centerLatLng = leafletElement.containerPointToLatLng(L.point(center.x, center.y));
@@ -536,12 +602,12 @@ const SiteMapLeaflet = () => {
     window.setTimeout(() => {
       // Only continue if the map is in a ready / fully rendered state.
       if (
-        !mapRef || !mapRef.current || !mapRef.current.leafletElement
+        !mapRef || !mapRef.current || !mapRef.current
           || !mapRef.current._ready || mapRef.current._updating
-          || !mapRef.current.leafletElement._panes
-          || !mapRef.current.leafletElement._panes.overlayPane
-          || !mapRef.current.leafletElement._panes.overlayPane.children.length
-          || mapRef.current.leafletElement._panes.overlayPane.children[0].nodeName !== 'svg'
+          || !mapRef.current._panes
+          || !mapRef.current._panes.overlayPane
+          || !mapRef.current._panes.overlayPane.children.length
+          || mapRef.current._panes.overlayPane.children[0].nodeName !== 'svg'
       ) { return; }
       // Only continue if DOMAINS and/or STATES are showing
       if (
@@ -549,7 +615,7 @@ const SiteMapLeaflet = () => {
           && !state.filters.features.visible[FEATURES.STATES.KEY]
       ) { return; }
       // Only continue if the overlay pane has child nodes (rendered feature data)
-      const svg = mapRef.current.leafletElement._panes.overlayPane.children[0];
+      const svg = mapRef.current._panes.overlayPane.children[0];
       if (!svg.children.length) { return; }
       // Remove any existing <defs> node (it's only created by this effect, never by Leaflet)
       if (svg.children[0].nodeName.toLowerCase() === 'defs') {
@@ -609,8 +675,11 @@ const SiteMapLeaflet = () => {
           type="button"
           className={classes.mapNavButton}
           onClick={() => {
-            if (mapRefExists()) { mapRef.current.leafletElement.invalidateSize(); }
-            dispatch({ type: 'showFullObservatory', mapRef });
+            if (mapRefExists()) {
+              // mapRef.current.invalidateSize();
+              const nextZoom = deriveFullObservatoryZoomLevel(mapRef);
+              mapRef.current.setView(OBSERVATORY_CENTER, nextZoom);
+            }
           }}
           size="large"
         >
@@ -758,49 +827,46 @@ const SiteMapLeaflet = () => {
     return <div className={classes.areaSelection} style={style} />;
   };
 
-  /**
-     Interaction Handlers
-  */
-  const handleMoveEnd = (event) => {
-    const center = event.target.getCenter();
-    const bounds = event.target.getBounds();
-    dispatch({
-      type: 'setMapCenter',
-      center: [center.lat, center.lng],
-      bounds: {
-        lat: [bounds._southWest.lat, bounds._northEast.lat],
-        lng: [bounds._southWest.lng, bounds._northEast.lng],
-      },
-    });
-    if (typeof state.map.repositionOpenPopupFunc === 'function') {
-      state.map.repositionOpenPopupFunc();
-    }
-  };
-  const handleZoomEnd = (event) => {
-    const center = event.target.getCenter();
-    const bounds = event.target.getBounds();
-    dispatch({
-      type: 'setMapZoom',
-      zoom: event.target.getZoom(),
-      center: [center.lat, center.lng],
-      bounds: {
-        lat: [bounds._southWest.lat, bounds._northEast.lat],
-        lng: [bounds._southWest.lng, bounds._northEast.lng],
-      },
-    });
-    if (typeof state.map.repositionOpenPopupFunc === 'function') {
-      state.map.repositionOpenPopupFunc();
-    }
-  };
-  const handleBaseLayerChange = (key) => {
-    if (key !== null && !BASE_LAYERS[key]) { return; }
-    dispatch({ type: 'setMapBaseLayer', baseLayer: key });
-  };
   const handleOverlayChange = (overlays) => {
     dispatch({
       type: 'setMapOverlays',
       overlays: overlays.filter((o) => o.checked).map((o) => o.name),
     });
+  };
+
+  const renderGroupedLayerControl = () => {
+    const groupedLayerControlBaseLayers = Object.keys(BASE_LAYERS).map((key) => ({
+      name: key,
+      title: BASE_LAYERS[key].title,
+    })).concat([{
+      name: 'none',
+      title: <span style={{ color: Theme.palette.grey[300], fontStyle: 'italic' }}>none</span>,
+    }]);
+    const groupedLayerControlOverlays = Object.keys(OVERLAYS).map((key) => {
+      const { KEY: name, title, group } = OVERLAYS[key];
+      const checked = state.map.overlays.has(key);
+      let groupTitle = null;
+      if (group && OVERLAY_GROUPS[group]) { groupTitle = OVERLAY_GROUPS[group].title; }
+      return {
+        name,
+        title,
+        groupTitle,
+        checked,
+      };
+    });
+    const checkedBaseLayer = (state.map.baseLayer === null)
+      ? 'none'
+      : state.map.baseLayer;
+    return (
+      <LeafletGroupedLayerControl
+        position="topleft"
+        baseLayers={groupedLayerControlBaseLayers}
+        checkedBaseLayer={checkedBaseLayer}
+        overlays={groupedLayerControlOverlays}
+        onBaseLayerChange={(key) => handleBaseLayerChange(dispatch, key)}
+        onOverlayChange={handleOverlayChange}
+      />
+    );
   };
 
   /**
@@ -849,21 +915,6 @@ const SiteMapLeaflet = () => {
   /**
      Render: Map
   */
-  const groupedLayerControlBaseLayers = Object.keys(BASE_LAYERS).map((key) => ({
-    name: key,
-    title: BASE_LAYERS[key].title,
-  })).concat([{
-    name: null,
-    title: <span style={{ color: Theme.palette.grey[300], fontStyle: 'italic' }}>none</span>,
-  }]);
-  const groupedLayerControlOverlays = Object.keys(OVERLAYS).map((key) => {
-    const { KEY: name, title, group } = OVERLAYS[key];
-    const checked = state.map.overlays.has(key);
-    let groupTitle = null;
-    if (group && OVERLAY_GROUPS[group]) { groupTitle = OVERLAY_GROUPS[group].title; }
-    return { name, title, groupTitle, checked }; // eslint-disable-line object-curly-newline
-  });
-  const canRenderGroupedLayerControl = mapRef && mapRef.current && mapRef.current.leafletElement;
   const mouseModeCursors = {
     [MAP_MOUSE_MODES.PAN]: 'grab',
     [MAP_MOUSE_MODES.AREA_SELECT]: 'crosshair',
@@ -890,35 +941,22 @@ const SiteMapLeaflet = () => {
         zoom={state.map.zoom}
         minZoom={MAP_ZOOM_RANGE[0]}
         maxZoom={MAP_ZOOM_RANGE[1]}
-        onMoveEnd={handleMoveEnd}
-        onZoomEnd={handleZoomEnd}
         whenReady={invalidateSize}
-        onBaseLayerChange={handleBaseLayerChange}
         worldCopyJump
         data-component="SiteMap"
         data-selenium="sitemap-content-map"
         tap={false}
         {...mouseModeProps}
       >
+        <LeafletMapManager />
         <ScaleControl imperial metric updateWhenIdle />
         {renderBaseLayer()}
         {Array.from(state.map.overlays).map(renderOverlay)}
-        {!canRenderGroupedLayerControl ? null : (
-          <ReactLeafletGroupedLayerControl
-            position="topright"
-            baseLayers={groupedLayerControlBaseLayers}
-            checkedBaseLayer={state.map.baseLayer}
-            exclusiveGroups={[]}
-            overlays={groupedLayerControlOverlays}
-            onBaseLayerChange={handleBaseLayerChange}
-            onOverlayChange={handleOverlayChange}
-            leaflet={{ map: mapRef.current.leafletElement }}
-          />
-        )}
+        {renderGroupedLayerControl()}
         {Object.keys(FEATURES)
           .filter((key) => state.filters.features.available[key])
           .filter((key) => state.filters.features.visible[key])
-          .map((key) => <SiteMapFeature key={key} featureKey={key} mapRef={mapRef} />)}
+          .map((key) => <SiteMapFeature key={key} featureKey={key} />)}
       </MapContainer>
       {renderAreaSelection()}
       {renderShowFullObservatoryButton()}

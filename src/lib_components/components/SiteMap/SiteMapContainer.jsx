@@ -741,7 +741,7 @@ const SiteMapContainer = (props) => {
                   <ListItem key={selectedItem}>
                     {!src ? null : (
                       <ListItemIcon>
-                        <img alt={selectedItem} src={src.src} className={classes.summaryFeatureIcon} />
+                        <img alt={selectedItem} src={src} className={classes.summaryFeatureIcon} />
                       </ListItemIcon>
                     )}
                     <ListItemText
@@ -851,7 +851,7 @@ const SiteMapContainer = (props) => {
     };
     let icon = null;
     if (iconSvg) {
-      icon = <img alt={featureName} src={iconSvg.src} className={classes.featureIcon} />;
+      icon = <img alt={featureName} src={iconSvg} className={classes.featureIcon} />;
     } else if (featureShape === 'Circle') {
       const circleProps = {
         cx: 14,
@@ -1263,7 +1263,7 @@ const SiteMapContainer = (props) => {
     viewLegendButtonsContainerClassName = `${classes.viewLegendButtonsContainer} ${classes.viewLegendButtonsContainerFullscreen}`;
     /* eslint-enable max-len */
   }
-  const ret = (
+  return (
     <div {...containerProps} aria-describedby={progressId}>
       <div ref={contentDivRef} {...contentDivProps}>
         {view === VIEWS.MAP || view === VIEWS.SPLIT ? <SiteMapLeaflet /> : null }
@@ -1289,7 +1289,6 @@ const SiteMapContainer = (props) => {
       {view === VIEWS.SPLIT ? <SiteMapTable /> : null }
     </div>
   );
-  return ret;
 };
 
 SiteMapContainer.propTypes = {

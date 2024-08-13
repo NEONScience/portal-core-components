@@ -20,6 +20,7 @@
     "resolveJsonModule": true,
     "noEmit": true,
     "jsx": "preserve",
+    "jsxImportSource": "@emotion/react",
     "allowJs": true,
     "isolatedModules": true,
     "noFallthroughCasesInSwitch": true,

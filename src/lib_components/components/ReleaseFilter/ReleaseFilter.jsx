@@ -194,7 +194,7 @@ const ReleaseFilter = (props) => {
       <Typography variant="h5" component="h3" className={classes.title} id={labelId}>
         {title}
       </Typography>
-      <Tooltip placement="right" title={tooltip} interactive>
+      <Tooltip placement="right" title={tooltip}>
         <IconButton size="small" aria-label={tooltip} style={{ marginLeft: Theme.spacing(0.5) }}>
           <InfoIcon fontSize="small" />
         </IconButton>

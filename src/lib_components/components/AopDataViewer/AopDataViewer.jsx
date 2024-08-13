@@ -443,7 +443,7 @@ const AopDataViewer = (props) => {
     <Typography className={classes.label} id={`${input}-label`}>
       {`${input.substr(0, 1).toUpperCase()}${input.substr(1)}`}
       {tooltip ? (
-        <Tooltip placement="right" title={tooltip} interactive>
+        <Tooltip placement="right" title={tooltip}>
           <IconButton size="small" className={classes.tooltipIconButton} aria-label={tooltip}>
             <InfoIcon fontSize="inherit" />
           </IconButton>

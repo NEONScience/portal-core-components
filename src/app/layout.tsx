@@ -25,13 +25,13 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta name="theme-color" content="#000000" />
-        <link rel="manifest" href="/core-components/manifest.json" />
-        <link rel="shortcut icon" href="/core-components/favicon.ico?v=201912" />
+        <link rel="manifest" href="/core-components-next/manifest.json" />
+        <link rel="shortcut icon" href="/core-components-next/favicon.ico?v=201912" />
         <link rel="preconnect" href="https://www.neonscience.org" crossOrigin="anonymous" />
         <link
           rel="stylesheet"
           data-meta="drupal-theme"
-          href="/core-components/assets/css/drupal-theme.51c2458ac1eebddc67c3a916baf5ee23.min.css"
+          href="/core-components-next/assets/css/drupal-theme.51c2458ac1eebddc67c3a916baf5ee23.min.css"
         />
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
         <script
@@ -63,8 +63,8 @@ export default function RootLayout({
         </script>
         <script dangerouslySetInnerHTML={{
           __html: `window.NEON_SERVER_DATA = "__NEON_SERVER_DATA__";`,
-        }}>
-        </script>
+        }}
+        ></script>
       </head>
       <body>
         <noscript> You need to enable JavaScript to run this app. </noscript>

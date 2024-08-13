@@ -70,6 +70,7 @@ export const isCoord = (c) => Array.isArray(c)
 
 export const MAP_ZOOM_RANGE = [1, 19];
 export const OBSERVATORY_CENTER = [52.68, -110.75];
+export const MAP_ZOOM_DEFAULT = 3;
 
 export const MIN_CONTAINER_HEIGHT = 300;
 export const MIN_TABLE_MAX_BODY_HEIGHT = 100;
@@ -100,6 +101,10 @@ export const SITE_TERRAINS = { AQUATIC: 'AQUATIC', TERRESTRIAL: 'TERRESTRIAL' };
 
 // For consistency in expressing the types of manual location data fed in through props
 export const MANUAL_LOCATION_TYPES = { PROTOTYPE_SITE: 'PROTOTYPE_SITE' };
+
+export const LEAFLET_ATTR_PREFIX = `
+<a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>
+`;
 
 // For consistency in differentiating discrete sets of data that can be tabulated together.
 // e.g. all LOCATIONS type feature data can coexist in a single table view with a
@@ -364,17 +369,17 @@ export const LOCATION_ICON_SVG_SHAPES = {
     popupAnchor: [0, -40],
     shadow: {
       [HIGHLIGHT_STATUS.NONE]: {
-        svg: iconShapeCircleShadowSVG,
+        svg: iconShapeCircleShadowSVG.src,
         size: [100, 100],
         anchor: [50, 50],
       },
       [HIGHLIGHT_STATUS.HIGHLIGHT]: {
-        svg: iconShapeCircleHighlightSVG,
+        svg: iconShapeCircleHighlightSVG.src,
         size: [120, 120],
         anchor: [60, 60],
       },
       [HIGHLIGHT_STATUS.SELECT]: {
-        svg: iconShapeCircleSelectSVG,
+        svg: iconShapeCircleSelectSVG.src,
         size: [120, 120],
         anchor: [60, 60],
       },
@@ -387,17 +392,17 @@ export const LOCATION_ICON_SVG_SHAPES = {
     popupAnchor: [0, -50],
     shadow: {
       [HIGHLIGHT_STATUS.NONE]: {
-        svg: iconShapeDiamondShadowSVG,
+        svg: iconShapeDiamondShadowSVG.src,
         size: [124, 124],
         anchor: [62, 62],
       },
       [HIGHLIGHT_STATUS.HIGHLIGHT]: {
-        svg: iconShapeDiamondHighlightSVG,
+        svg: iconShapeDiamondHighlightSVG.src,
         size: [144, 144],
         anchor: [72, 72],
       },
       [HIGHLIGHT_STATUS.SELECT]: {
-        svg: iconShapeDiamondSelectSVG,
+        svg: iconShapeDiamondSelectSVG.src,
         size: [144, 144],
         anchor: [72, 72],
       },
@@ -410,17 +415,17 @@ export const LOCATION_ICON_SVG_SHAPES = {
     popupAnchor: [0, -45],
     shadow: {
       [HIGHLIGHT_STATUS.NONE]: {
-        svg: iconShapeHomeplateShadowSVG,
+        svg: iconShapeHomeplateShadowSVG.src,
         size: [101, 111],
         anchor: [50.5, 55.5],
       },
       [HIGHLIGHT_STATUS.HIGHLIGHT]: {
-        svg: iconShapeHomeplateHighlightSVG,
+        svg: iconShapeHomeplateHighlightSVG.src,
         size: [121, 131],
         anchor: [60.5, 65.5],
       },
       [HIGHLIGHT_STATUS.SELECT]: {
-        svg: iconShapeHomeplateSelectSVG,
+        svg: iconShapeHomeplateSelectSVG.src,
         size: [121, 131],
         anchor: [60.5, 65.5],
       },
@@ -433,17 +438,17 @@ export const LOCATION_ICON_SVG_SHAPES = {
     popupAnchor: [0, -37.5],
     shadow: {
       [HIGHLIGHT_STATUS.NONE]: {
-        svg: iconShapeSquareShadowSVG,
+        svg: iconShapeSquareShadowSVG.src,
         size: [94, 94],
         anchor: [47, 47],
       },
       [HIGHLIGHT_STATUS.HIGHLIGHT]: {
-        svg: iconShapeSquareHighlightSVG,
+        svg: iconShapeSquareHighlightSVG.src,
         size: [114, 114],
         anchor: [57, 57],
       },
       [HIGHLIGHT_STATUS.SELECT]: {
-        svg: iconShapeSquareSelectSVG,
+        svg: iconShapeSquareSelectSVG.src,
         size: [114, 114],
         anchor: [57, 57],
       },
@@ -525,7 +530,7 @@ export const FEATURES = {
     dataSource: FEATURE_DATA_SOURCES.ARCGIS_ASSETS_API,
     parent: 'AQUATIC_WATERSHEDS',
     featureShape: 'Marker',
-    iconSvg: iconPourPointSVG,
+    iconSvg: iconPourPointSVG.src,
     iconShape: LOCATION_ICON_SVG_SHAPES.HOMEPLATE.KEY,
   },
   SAMPLING_BOUNDARIES: {
@@ -578,7 +583,7 @@ export const FEATURES = {
     parent: 'TERRESTRIAL_SITE_FEATURES',
     featureShape: 'Marker',
     iconScale: 1.8,
-    iconSvg: iconTowerSVG,
+    iconSvg: iconTowerSVG.src,
     iconShape: LOCATION_ICON_SVG_SHAPES.DIAMOND.KEY,
     siteTerrain: SITE_TERRAINS.TERRESTRIAL,
   },
@@ -592,7 +597,7 @@ export const FEATURES = {
     parent: 'TERRESTRIAL_SITE_FEATURES',
     featureShape: 'Marker',
     iconScale: 1.4,
-    iconSvg: iconHutSVG,
+    iconSvg: iconHutSVG.src,
     iconShape: LOCATION_ICON_SVG_SHAPES.DIAMOND.KEY,
     siteTerrain: SITE_TERRAINS.TERRESTRIAL,
   },
@@ -606,7 +611,7 @@ export const FEATURES = {
     parent: 'TERRESTRIAL_SITE_FEATURES',
     featureShape: 'Marker',
     iconScale: 1.8,
-    iconSvg: iconMegapitSVG,
+    iconSvg: iconMegapitSVG.src,
     iconShape: LOCATION_ICON_SVG_SHAPES.DIAMOND.KEY,
     siteTerrain: SITE_TERRAINS.TERRESTRIAL,
   },
@@ -615,7 +620,7 @@ export const FEATURES = {
     name: 'Tower Plots',
     type: FEATURE_TYPES.GROUP.KEY,
     minZoom: 13,
-    description: 'Tower plots provide a direct link between NEON’s Terrestrial Observation System and Terrestrial Instrument System. Tower Plots are located in and around the NEON tower primary and secondary airsheds.',
+    description: "Tower plots provide a direct link between NEON's Terrestrial Observation System and Terrestrial Instrument System. Tower Plots are located in and around the NEON tower primary and secondary airsheds.",
     parent: 'TERRESTRIAL_SITE_FEATURES',
   },
   TOWER_PHENOLOGY_PLOTS: {
@@ -630,7 +635,7 @@ export const FEATURES = {
     minZoom: 13,
     focusZoom: 16,
     iconScale: 1.5,
-    iconSvg: iconTowerPhenologyPlotSVG,
+    iconSvg: iconTowerPhenologyPlotSVG.src,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
     siteTerrain: SITE_TERRAINS.TERRESTRIAL,
   },
@@ -645,7 +650,7 @@ export const FEATURES = {
     featureShape: 'Marker',
     minZoom: 14,
     focusZoom: 18,
-    iconSvg: iconTowerBasePlotSVG,
+    iconSvg: iconTowerBasePlotSVG.src,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
     siteTerrain: SITE_TERRAINS.TERRESTRIAL,
   },
@@ -661,7 +666,7 @@ export const FEATURES = {
     minZoom: 14,
     focusZoom: 18,
     iconScale: 0.7,
-    iconSvg: iconTowerSoilPlotSVG,
+    iconSvg: iconTowerSoilPlotSVG.src,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
     siteTerrain: SITE_TERRAINS.TERRESTRIAL,
   },
@@ -684,7 +689,7 @@ export const FEATURES = {
     featureShape: 'Marker',
     iconScale: 1.8,
     focusZoom: 16,
-    iconSvg: iconDistributedBirdGridSVG,
+    iconSvg: iconDistributedBirdGridSVG.src,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
     siteTerrain: SITE_TERRAINS.TERRESTRIAL,
   },
@@ -699,7 +704,7 @@ export const FEATURES = {
     featureShape: 'Marker',
     iconScale: 1.4,
     focusZoom: 17,
-    iconSvg: iconDistributedMammalGridSVG,
+    iconSvg: iconDistributedMammalGridSVG.src,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
     siteTerrain: SITE_TERRAINS.TERRESTRIAL,
   },
@@ -714,7 +719,7 @@ export const FEATURES = {
     matchLocationType: 'OS Plot - all',
     iconScale: 1.2,
     focusZoom: 17,
-    iconSvg: iconDistributedBasePlotSVG,
+    iconSvg: iconDistributedBasePlotSVG.src,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
     siteTerrain: SITE_TERRAINS.TERRESTRIAL,
   },
@@ -729,7 +734,7 @@ export const FEATURES = {
     featureShape: 'Marker',
     iconScale: 1.2,
     focusZoom: 17,
-    iconSvg: iconDistributedTickPlotSVG,
+    iconSvg: iconDistributedTickPlotSVG.src,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
     siteTerrain: SITE_TERRAINS.TERRESTRIAL,
   },
@@ -741,7 +746,7 @@ export const FEATURES = {
     parent: 'DISTRIBUTED_PLOTS',
     dataSource: FEATURE_DATA_SOURCES.GRAPHQL_LOCATIONS_API,
     matchLocationType: 'OS Plot - mos',
-    iconSvg: iconDistributedMosquitoPointSVG,
+    iconSvg: iconDistributedMosquitoPointSVG.src,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
     featureShape: 'Marker',
     focusZoom: 18,
@@ -842,7 +847,7 @@ export const FEATURES = {
     parent: 'AQUATIC_SITE_FEATURES',
     featureShape: 'Marker',
     iconScale: 1.3,
-    iconSvg: iconBenchmarkSVG,
+    iconSvg: iconBenchmarkSVG.src,
     iconShape: LOCATION_ICON_SVG_SHAPES.DIAMOND.KEY,
     siteTerrain: SITE_TERRAINS.AQUATIC,
   },
@@ -868,7 +873,7 @@ export const FEATURES = {
     description: 'Number of locations for assessment of riparian vegetation composition and physical structure vary by site type. Lakes and non-wadeable rivers have ten locations. Wadeable streams have 20 locations and also include assessment of riparian vegetation percent cover in wadeable streams.',
     parent: 'AQUATIC_OBSERVATIONAL_SAMPLING',
     featureShape: 'Marker',
-    iconSvg: iconRiparianAssessmentSVG,
+    iconSvg: iconRiparianAssessmentSVG.src,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
     siteTerrain: SITE_TERRAINS.AQUATIC,
   },
@@ -882,7 +887,7 @@ export const FEATURES = {
     parent: 'AQUATIC_OBSERVATIONAL_SAMPLING',
     featureShape: 'Marker',
     iconScale: 1.2,
-    iconSvg: iconWetDepositionPointSVG,
+    iconSvg: iconWetDepositionPointSVG.src,
     iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
     siteTerrain: SITE_TERRAINS.AQUATIC,
   },
@@ -897,7 +902,7 @@ export const FEATURES = {
     parent: 'AQUATIC_AUTOMATED_INSTRUMENTS',
     featureShape: 'Marker',
     iconScale: 1.2,
-    iconSvg: iconGroundwaterWellSVG,
+    iconSvg: iconGroundwaterWellSVG.src,
     iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
     siteTerrain: SITE_TERRAINS.AQUATIC,
   },
@@ -912,7 +917,7 @@ export const FEATURES = {
     parent: 'AQUATIC_AUTOMATED_INSTRUMENTS',
     featureShape: 'Marker',
     iconScale: 1.5,
-    iconSvg: iconMeteorologicalStationSVG,
+    iconSvg: iconMeteorologicalStationSVG.src,
     iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
     siteTerrain: SITE_TERRAINS.AQUATIC,
   },
@@ -925,7 +930,7 @@ export const FEATURES = {
     matchLocationType: 'AOS discharge named location type',
     parent: 'AQUATIC_OBSERVATIONAL_SAMPLING',
     featureShape: 'Marker',
-    iconSvg: iconDischargePointSVG,
+    iconSvg: iconDischargePointSVG.src,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
     siteTerrain: SITE_TERRAINS.AQUATIC,
   },
@@ -938,7 +943,7 @@ export const FEATURES = {
     matchLocationType: 'AOS fish named location type',
     parent: 'AQUATIC_OBSERVATIONAL_SAMPLING',
     featureShape: 'Marker',
-    iconSvg: iconFishPointSVG,
+    iconSvg: iconFishPointSVG.src,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
     siteTerrain: SITE_TERRAINS.AQUATIC,
   },
@@ -952,7 +957,7 @@ export const FEATURES = {
     parent: 'AQUATIC_OBSERVATIONAL_SAMPLING',
     featureShape: 'Marker',
     iconScale: 1.3,
-    iconSvg: iconPlantTransectSVG,
+    iconSvg: iconPlantTransectSVG.src,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
     siteTerrain: SITE_TERRAINS.AQUATIC,
   },
@@ -965,7 +970,7 @@ export const FEATURES = {
     matchLocationType: 'AOS sediment named location type',
     parent: 'AQUATIC_OBSERVATIONAL_SAMPLING',
     featureShape: 'Marker',
-    iconSvg: iconSedimentPointSVG,
+    iconSvg: iconSedimentPointSVG.src,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
     siteTerrain: SITE_TERRAINS.AQUATIC,
   },
@@ -979,7 +984,7 @@ export const FEATURES = {
     description: 'The staff gauge measures gauge height, in meters, measured at lakes, wadeable rivers and non-wadeable streams. A phenocam is installed near most gauges. It collects RGB and IR images of the lake, river, or stream vegetation, stream surface, and stream gauge every 15 minutes.',
     parent: 'AQUATIC_AUTOMATED_INSTRUMENTS',
     featureShape: 'Marker',
-    iconSvg: iconStaffGaugeSVG,
+    iconSvg: iconStaffGaugeSVG.src,
     iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
     siteTerrain: SITE_TERRAINS.AQUATIC,
   },
@@ -994,7 +999,7 @@ export const FEATURES = {
     parent: 'AQUATIC_AUTOMATED_INSTRUMENTS',
     featureShape: 'Marker',
     iconScale: 1.1,
-    iconSvg: iconSensorStationSVG,
+    iconSvg: iconSensorStationSVG.src,
     iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
     siteTerrain: SITE_TERRAINS.AQUATIC,
   },
@@ -1008,7 +1013,7 @@ export const FEATURES = {
     parent: 'AQUATIC_AUTOMATED_INSTRUMENTS',
     featureShape: 'Marker',
     iconScale: 1.2,
-    iconSvg: iconBuoySVG,
+    iconSvg: iconBuoySVG.src,
     iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
     siteTerrain: SITE_TERRAINS.AQUATIC,
   },
@@ -1029,8 +1034,8 @@ export const FEATURES = {
     primaryIdOnly: true,
     featureShape: 'Marker',
     iconScale: 1,
-    iconSvg: iconSiteCoreTerrestrialSVG,
-    iconSelectedSvg: iconSiteCoreTerrestrialSelectedSVG,
+    iconSvg: iconSiteCoreTerrestrialSVG.src,
+    iconSelectedSvg: iconSiteCoreTerrestrialSelectedSVG.src,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
     maxZoom: 9,
   },
@@ -1045,8 +1050,8 @@ export const FEATURES = {
     primaryIdOnly: true,
     featureShape: 'Marker',
     iconScale: 1,
-    iconSvg: iconSiteGradientTerrestrialSVG,
-    iconSelectedSvg: iconSiteGradientTerrestrialSelectedSVG,
+    iconSvg: iconSiteGradientTerrestrialSVG.src,
+    iconSelectedSvg: iconSiteGradientTerrestrialSelectedSVG.src,
     iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
     maxZoom: 9,
   },
@@ -1061,8 +1066,8 @@ export const FEATURES = {
     primaryIdOnly: true,
     featureShape: 'Marker',
     iconScale: 1,
-    iconSvg: iconSiteCoreAquaticSVG,
-    iconSelectedSvg: iconSiteCoreAquaticSelectedSVG,
+    iconSvg: iconSiteCoreAquaticSVG.src,
+    iconSelectedSvg: iconSiteCoreAquaticSelectedSVG.src,
     iconShape: LOCATION_ICON_SVG_SHAPES.SQUARE.KEY,
     maxZoom: 9,
   },
@@ -1077,8 +1082,8 @@ export const FEATURES = {
     primaryIdOnly: true,
     featureShape: 'Marker',
     iconScale: 1,
-    iconSvg: iconSiteGradientAquaticSVG,
-    iconSelectedSvg: iconSiteGradientAquaticSelectedSVG,
+    iconSvg: iconSiteGradientAquaticSVG.src,
+    iconSelectedSvg: iconSiteGradientAquaticSelectedSVG.src,
     iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
     maxZoom: 9,
   },
@@ -1093,8 +1098,8 @@ export const FEATURES = {
     primaryIdOnly: true,
     featureShape: 'Marker',
     iconScale: 1,
-    iconSvg: iconSiteDecommissionedSVG,
-    iconSelectedSvg: iconSiteDecommissionedSVG,
+    iconSvg: iconSiteDecommissionedSVG.src,
+    iconSelectedSvg: iconSiteDecommissionedSVG.src,
     iconShape: LOCATION_ICON_SVG_SHAPES.CIRCLE.KEY,
     maxZoom: 19,
   },
@@ -1451,8 +1456,8 @@ const DEFAULT_STATE = {
     maxBodyHeightUpdateFromAspectRatio: false,
   },
   map: { // Settings that ONLY apply to the map
-    zoom: null,
-    center: [],
+    zoom: MAP_ZOOM_DEFAULT,
+    center: OBSERVATORY_CENTER,
     bounds: null,
     baseLayer: null,
     baseLayerAutoChangedAbove17: false,
@@ -1647,7 +1652,7 @@ export const SITE_MAP_DEFAULT_PROPS = {
   mapUniqueId: 0,
   // Map props
   mapCenter: OBSERVATORY_CENTER,
-  mapZoom: null,
+  mapZoom: MAP_ZOOM_DEFAULT,
   mapBaseLayer: Object.keys(BASE_LAYERS)[0],
   // Table props
   tableFullHeight: false,
@@ -1685,7 +1690,7 @@ export const getZoomedIcon = (
     feature && feature.iconSvg
       && feature.iconShape && LOCATION_ICON_SVG_SHAPES[feature.iconShape]
   );
-  let iconUrl = featureHasIcon ? feature.iconSvg : iconPlaceholderSVG;
+  let iconUrl = featureHasIcon ? feature.iconSvg : iconPlaceholderSVG.src;
   const iconShape = featureHasIcon ? feature.iconShape : LOCATION_ICON_SVG_SHAPES.SQUARE.KEY;
   const iconScale = featureHasIcon ? feature.iconScale || 1 : 1;
   const minZoom = feature.minZoom || (FEATURES[feature.parent] || {}).minZoom || MAP_ZOOM_RANGE[0];
@@ -2089,9 +2094,10 @@ export const calculateLocationsInBounds = (
 };
 
 export const deriveFullObservatoryZoomLevel = (mapRef) => {
-  const FALLBACK_ZOOM = 2;
+  const FALLBACK_ZOOM = MAP_ZOOM_DEFAULT;
   if (typeof mapRef !== 'object' || mapRef === null || !mapRef.current) { return FALLBACK_ZOOM; }
-  const container = mapRef.current.container.parentElement;
+  // eslint-disable-next-line no-underscore-dangle
+  const container = mapRef.current._container.parentElement;
   if (!container.clientWidth || !container.clientHeight) { return FALLBACK_ZOOM; }
   const divisor = (23 * 8);
   const minorDim = Math.min(container.clientWidth / divisor, container.clientHeight / divisor);

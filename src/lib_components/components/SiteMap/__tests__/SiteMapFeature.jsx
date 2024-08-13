@@ -15,15 +15,13 @@ import SiteMapFeature from '../SiteMapFeature';
 // Mock the Leaflet Map class
 const mockMap = class Map {
   constructor() {
-    this.leafletElement = {
-      latLngToContainerPoint: () => ({ x: 0, y: 0 }),
-      container: {
-        clientHeight: 100,
-        clientWidth: 200,
-        parentNode: {
-          clientHeight: 500,
-          clientWidth: 600,
-        },
+    this.latLngToContainerPoint = () => ({ x: 0, y: 0 });
+    this._container = {
+      clientHeight: 100,
+      clientWidth: 200,
+      parentNode: {
+        clientHeight: 500,
+        clientWidth: 600,
       },
     };
   }
