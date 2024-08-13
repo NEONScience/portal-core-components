@@ -9,7 +9,7 @@ const nextConfig = {
   reactStrictMode: false,
   trailingSlash: true,
   experimental: {
-    forceSwcTransforms: !isProduction && !isTest,
+    // forceSwcTransforms: !isProduction && !isTest,
   },
 };
 
