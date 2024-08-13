@@ -11,7 +11,9 @@
   "include": [
     "./src/lib_components/components/**/*",
     "./src/lib_components/flow/**/*",
+    "./src/lib_components/parser/**/*",
     "./src/lib_components/service/**/*",
+    "./src/lib_components/sharedState/**/*",
     "./src/lib_components/types/**/*",
     "./src/lib_components/util/**/*",
     "./src/lib_components/*.js",

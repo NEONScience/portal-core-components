@@ -20,7 +20,6 @@
     "resolveJsonModule": true,
     "noEmit": true,
     "jsx": "preserve",
-    "jsxImportSource": "@emotion/react",
     "allowJs": true,
     "isolatedModules": true,
     "noFallthroughCasesInSwitch": true,
@@ -37,6 +36,7 @@
   "include": [
     "./src/**/*",
     "next-env.d.ts",
+    "mui-env.d.ts",
     ".next/types/**/*.ts",
     "build/types/**/*.ts"
   ],

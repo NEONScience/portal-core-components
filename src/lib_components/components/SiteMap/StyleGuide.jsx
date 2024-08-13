@@ -14,10 +14,10 @@ import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 import PropsTable from '../../../components/PropsTable';
+import BasicLeafletMap, { Provider } from '../../../components/BasicLeafletMap';
 
 import Theme from '../Theme/Theme';
 import SiteMap from './SiteMap';
-// import BasicLeafletMap, { Provider } from './Leaflet/BasicLeafletMap';
 
 import {
   MAP_ZOOM_RANGE,
@@ -607,7 +607,7 @@ return (
         <PropsTable props={propRows} fullHeight />
       </DocBlock>
 
-      {/* <Divider className={classes.divider} />
+      <Divider className={classes.divider} />
       <Typography variant="h4" component="h2" gutterBottom>Basic Leaflet</Typography>
       <DocBlock>
         Simple leaflet map.
@@ -616,7 +616,7 @@ return (
         <Provider>
           <BasicLeafletMap />
         </Provider>
-      </ExampleBlock> */}
+      </ExampleBlock>
     </>
   );
 }

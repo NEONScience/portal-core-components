@@ -403,7 +403,8 @@ const updateMapTileWithZoom = (state) => {
   const newState = { ...state };
   if (
     newState.map.zoom <= 17 && state.map.baseLayer !== BASE_LAYERS.NATGEO_WORLD_MAP.KEY
-    && state.map.baseLayerAutoChangedAbove17) {
+    && state.map.baseLayerAutoChangedAbove17
+  ) {
     newState.map.baseLayer = BASE_LAYERS.NATGEO_WORLD_MAP.KEY;
     newState.map.baseLayerAutoChangedAbove17 = false;
   } else if (newState.map.zoom >= 17 && state.map.baseLayer === BASE_LAYERS.NATGEO_WORLD_MAP.KEY) {
@@ -892,6 +893,9 @@ const reducer = (state, action) => {
         newState.filters.features.visible[FEATURES.STATES.KEY] = false;
       }
       newState.map = getMapStateForFocusLocation(state);
+      if (action.mapRef && action.mapRef.current) {
+        action.mapRef.current.setView(newState.map.center, newState.map.zoom);
+      }
       newState = updateMapTileWithZoom(newState);
       newState = calculateFeatureAvailability(newState);
       newState = calculateFeatureDataFetches(
