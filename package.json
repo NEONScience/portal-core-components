@@ -188,17 +188,5 @@
     "test:docker-update-snapshots": "docker run --rm --tty --interactive --volume=/$(pwd):/app/src --volume=/app/src/node_modules --workdir=/app/src portal-core-components:latest-builder npm run test:docker-command-update-snapshots",
     "test:docker-command": "npm run lint && npm run test",
     "test:docker-command-update-snapshots": "npm run lint && npm run test:updateSnapshots"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   }
 }
