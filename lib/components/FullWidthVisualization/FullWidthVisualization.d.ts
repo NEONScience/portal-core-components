@@ -1,30 +1,31 @@
-declare function FullWidthVisualization(props: any): import("react/jsx-runtime").JSX.Element;
+declare function FullWidthVisualization(props: any): React.JSX.Element;
 declare namespace FullWidthVisualization {
     namespace propTypes {
-        const vizRef: PropTypes.Validator<NonNullable<PropTypes.InferProps<{
+        let vizRef: PropTypes.Validator<NonNullable<PropTypes.InferProps<{
             current: PropTypes.Requireable<Element>;
         }>>>;
-        const minWidth: PropTypes.Requireable<number>;
-        const handleRedraw: PropTypes.Requireable<(...args: any[]) => any>;
-        const allowHeightResize: PropTypes.Requireable<boolean>;
-        const deriveHeightFromWidth: PropTypes.Requireable<NonNullable<string | ((...args: any[]) => any) | null | undefined>>;
-        const containerStyle: PropTypes.Requireable<{
+        let minWidth: PropTypes.Requireable<number>;
+        let handleRedraw: PropTypes.Requireable<(...args: any[]) => any>;
+        let allowHeightResize: PropTypes.Requireable<boolean>;
+        let deriveHeightFromWidth: PropTypes.Requireable<NonNullable<string | ((...args: any[]) => any) | null | undefined>>;
+        let containerStyle: PropTypes.Requireable<{
             [x: string]: NonNullable<string | number | null | undefined> | null | undefined;
         }>;
-        const children: PropTypes.Validator<NonNullable<NonNullable<PropTypes.ReactNodeLike>>>;
+        let children: PropTypes.Validator<NonNullable<NonNullable<PropTypes.ReactNodeLike>>>;
     }
     namespace defaultProps {
-        const minWidth_1: number;
+        let minWidth_1: number;
         export { minWidth_1 as minWidth };
-        const handleRedraw_1: null;
+        let handleRedraw_1: null;
         export { handleRedraw_1 as handleRedraw };
-        const deriveHeightFromWidth_1: null;
+        let deriveHeightFromWidth_1: null;
         export { deriveHeightFromWidth_1 as deriveHeightFromWidth };
-        const allowHeightResize_1: boolean;
+        let allowHeightResize_1: boolean;
         export { allowHeightResize_1 as allowHeightResize };
-        const containerStyle_1: null;
+        let containerStyle_1: null;
         export { containerStyle_1 as containerStyle };
     }
 }
 export default FullWidthVisualization;
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';

@@ -1,11 +1,11 @@
 export namespace TYPES {
-    const DATA_PRODUCTS: string;
-    const SITES: string;
-    const LOCATIONS: string;
+    let DATA_PRODUCTS: string;
+    let SITES: string;
+    let LOCATIONS: string;
 }
 export namespace DIMENSIONALITIES {
-    const ONE: string;
-    const MANY: string;
+    let ONE: string;
+    let MANY: string;
 }
 export default NeonGraphQL;
 declare namespace NeonGraphQL {

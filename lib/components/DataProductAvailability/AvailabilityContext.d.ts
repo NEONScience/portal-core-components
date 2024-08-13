@@ -35,11 +35,11 @@ declare namespace AvailabilityContext {
 /**
    Context Provider
 */
-declare function Provider(props: any): import("react/jsx-runtime").JSX.Element;
+declare function Provider(props: any): React.JSX.Element;
 declare namespace Provider {
     namespace propTypes {
-        const dataAvailabilityUniqueId: PropTypes.Requireable<number>;
-        const sites: PropTypes.Requireable<(PropTypes.InferProps<{
+        let dataAvailabilityUniqueId: PropTypes.Requireable<number>;
+        let sites: PropTypes.Requireable<(PropTypes.InferProps<{
             siteCode: PropTypes.Validator<string>;
             tables: PropTypes.Validator<(PropTypes.InferProps<{
                 name: PropTypes.Validator<string>;
@@ -50,12 +50,12 @@ declare namespace Provider {
                 }>;
             }> | null | undefined)[]>;
         }> | null | undefined)[]>;
-        const children: PropTypes.Validator<NonNullable<NonNullable<PropTypes.ReactNodeLike>>>;
+        let children: PropTypes.Validator<NonNullable<NonNullable<PropTypes.ReactNodeLike>>>;
     }
     namespace defaultProps {
-        const dataAvailabilityUniqueId_1: number;
+        let dataAvailabilityUniqueId_1: number;
         export { dataAvailabilityUniqueId_1 as dataAvailabilityUniqueId };
-        const sites_1: never[];
+        let sites_1: never[];
         export { sites_1 as sites };
     }
 }
@@ -91,7 +91,8 @@ declare function useAvailabilityState(): {
     };
 } | (() => void))[];
 declare namespace SORT_DIRECTIONS {
-    const ASC: string;
-    const DESC: string;
+    let ASC: string;
+    let DESC: string;
 }
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';

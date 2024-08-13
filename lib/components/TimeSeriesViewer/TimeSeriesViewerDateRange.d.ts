@@ -1,10 +1,11 @@
 export default TimeSeriesViewerDateRange;
-declare function TimeSeriesViewerDateRange(props: any): import("react/jsx-runtime").JSX.Element;
+declare function TimeSeriesViewerDateRange(props: any): React.JSX.Element;
 declare namespace TimeSeriesViewerDateRange {
     namespace propTypes {
-        const dateRangeSliderRef: PropTypes.Validator<NonNullable<PropTypes.InferProps<{
+        let dateRangeSliderRef: PropTypes.Validator<NonNullable<PropTypes.InferProps<{
             current: PropTypes.Requireable<Element>;
         }>>>;
     }
 }
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';

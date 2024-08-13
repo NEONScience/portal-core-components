@@ -1,5 +1,5 @@
 import React from 'react';
-import { TooltipProps } from '@material-ui/core/Tooltip';
+import { TooltipProps } from '@mui/material/Tooltip';
 interface ReleaseChipClasses {
     chip?: string;
     icon?: string;

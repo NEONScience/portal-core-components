@@ -1,18 +1,19 @@
 /**
    Main Function
 */
-declare function EnhancedAvailabilityKey(props: any): import("react/jsx-runtime").JSX.Element;
+declare function EnhancedAvailabilityKey(props: any): React.JSX.Element;
 declare namespace EnhancedAvailabilityKey {
     namespace propTypes {
-        const selectionEnabled: PropTypes.Requireable<boolean>;
-        const rollUpPresent: PropTypes.Requireable<boolean>;
+        let selectionEnabled: PropTypes.Requireable<boolean>;
+        let rollUpPresent: PropTypes.Requireable<boolean>;
     }
     namespace defaultProps {
-        const selectionEnabled_1: boolean;
+        let selectionEnabled_1: boolean;
         export { selectionEnabled_1 as selectionEnabled };
-        const rollUpPresent_1: boolean;
+        let rollUpPresent_1: boolean;
         export { rollUpPresent_1 as rollUpPresent };
     }
 }
 export default EnhancedAvailabilityKey;
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';

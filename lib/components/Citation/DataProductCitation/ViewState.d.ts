@@ -1,4 +1,4 @@
-import { Variant } from '@material-ui/core/styles/createTypography';
+import { Variant } from '@mui/material/styles/createTypography';
 import { Nullable } from '../../../types/core';
 import { CitationRelease, ContextDataProduct, ContextStatus, FetchStatusState } from './State';
 export interface CitationTextOnlyProps {

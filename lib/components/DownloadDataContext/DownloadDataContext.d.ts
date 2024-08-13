@@ -124,12 +124,12 @@ declare namespace DownloadDataContext {
     export { ALL_STEPS };
     export { getStateObservable };
 }
-declare function Provider(props: any): import("react/jsx-runtime").JSX.Element;
+declare function Provider(props: any): React.JSX.Element;
 declare namespace Provider {
     namespace propTypes {
-        const downloadDataContextUniqueId: PropTypes.Requireable<number>;
-        const stateObservable: PropTypes.Requireable<(...args: any[]) => any>;
-        const productData: PropTypes.Requireable<PropTypes.InferProps<{
+        let downloadDataContextUniqueId: PropTypes.Requireable<number>;
+        let stateObservable: PropTypes.Requireable<(...args: any[]) => any>;
+        let productData: PropTypes.Requireable<PropTypes.InferProps<{
             productCode: PropTypes.Validator<string>;
             productName: PropTypes.Validator<string>;
             siteCodes: PropTypes.Requireable<(PropTypes.InferProps<{
@@ -141,21 +141,21 @@ declare namespace Provider {
                 }> | null | undefined)[]>;
             }> | null | undefined)[]>;
         }>>;
-        const availabilityView: PropTypes.Requireable<string>;
-        const release: PropTypes.Requireable<string>;
-        const sites: PropTypes.Requireable<(string | null | undefined)[]>;
-        const dateRange: PropTypes.Requireable<(string | null | undefined)[]>;
-        const documentation: PropTypes.Requireable<string>;
-        const packageType: PropTypes.Requireable<string>;
-        const provisionalData: PropTypes.Requireable<string>;
-        const children: PropTypes.Validator<NonNullable<NonNullable<PropTypes.ReactNodeLike>>>;
+        let availabilityView: PropTypes.Requireable<string>;
+        let release: PropTypes.Requireable<string>;
+        let sites: PropTypes.Requireable<(string | null | undefined)[]>;
+        let dateRange: PropTypes.Requireable<(string | null | undefined)[]>;
+        let documentation: PropTypes.Requireable<string>;
+        let packageType: PropTypes.Requireable<string>;
+        let provisionalData: PropTypes.Requireable<string>;
+        let children: PropTypes.Validator<NonNullable<NonNullable<PropTypes.ReactNodeLike>>>;
     }
     namespace defaultProps {
-        const downloadDataContextUniqueId_1: number;
+        let downloadDataContextUniqueId_1: number;
         export { downloadDataContextUniqueId_1 as downloadDataContextUniqueId };
-        const stateObservable_1: null;
+        let stateObservable_1: null;
         export { stateObservable_1 as stateObservable };
-        const productData_1: {};
+        let productData_1: {};
         export { productData_1 as productData };
         import availabilityView_1 = DEFAULT_STATE.availabilityView;
         export { availabilityView_1 as availabilityView };
@@ -340,187 +340,188 @@ declare function useDownloadDataState(): {
 })[];
 declare function reducer(state: any, action: any): any;
 declare namespace DEFAULT_STATE {
-    export const downloadContextIsActive: boolean;
-    export const broadcast: boolean;
-    export const dialogOpen: boolean;
-    export const awaitingHigherOrderUpdateWhenDialogOpens: boolean;
-    export const cachedHigherOrderState: {};
-    const productData_2: {};
+    export let downloadContextIsActive: boolean;
+    export let broadcast: boolean;
+    export let dialogOpen: boolean;
+    export let awaitingHigherOrderUpdateWhenDialogOpens: boolean;
+    export let cachedHigherOrderState: {};
+    let productData_2: {};
     export { productData_2 as productData };
-    export const requiredSteps: never[];
-    export const allStepsComplete: boolean;
-    export const fromManifest: boolean;
-    export const fromAOPManifest: boolean;
-    export const fromExternalHost: boolean;
+    export let requiredSteps: never[];
+    export let allStepsComplete: boolean;
+    export let fromManifest: boolean;
+    export let fromAOPManifest: boolean;
+    export let fromExternalHost: boolean;
     export namespace manifest {
-        const status: string;
-        const value: null;
-        const error: null;
+        let status: string;
+        let value: null;
+        let error: null;
     }
-    const availabilityView_2: null;
+    let availabilityView_2: null;
     export { availabilityView_2 as availabilityView };
-    export const s3FileFetches: {};
-    export const s3FileFetchProgress: number;
+    export let s3FileFetches: {};
+    export let s3FileFetchProgress: number;
     export namespace s3Files {
-        export const maxNumFilesSelected: number;
-        const value_1: never[];
+        export let maxNumFilesSelected: number;
+        let value_1: never[];
         export { value_1 as value };
-        export const valueMap: {};
-        export const cachedValues: never[];
-        export const validValues: never[];
-        export const isValid: boolean;
-        export const bytesByUrl: {};
-        export const totalSize: number;
-        export const estimatedPostSize: number;
-        export const filteredFileCount: number;
-        export const lastFilterChanged: null;
+        export let valueMap: {};
+        export let cachedValues: never[];
+        export let validValues: never[];
+        export let isValid: boolean;
+        export let bytesByUrl: {};
+        export let totalSize: number;
+        export let estimatedPostSize: number;
+        export let filteredFileCount: number;
+        export let lastFilterChanged: null;
         export namespace filters {
-            const site: never[];
-            const type: never[];
-            const visit: never[];
-            const yearMonth: never[];
+            let site: never[];
+            let type: never[];
+            let visit: never[];
+            let yearMonth: never[];
         }
         export namespace valueLookups {
-            const site_1: {};
+            let site_1: {};
             export { site_1 as site };
-            const type_1: {};
+            let type_1: {};
             export { type_1 as type };
-            const visit_1: {};
+            let visit_1: {};
             export { visit_1 as visit };
-            const yearMonth_1: {};
+            let yearMonth_1: {};
             export { yearMonth_1 as yearMonth };
         }
-        export const visibleColumns: string[];
+        export let visibleColumns: string[];
     }
-    export const latestRelease: null;
+    export let latestRelease: null;
     export namespace release_2 {
-        const value_2: null;
+        let value_2: null;
         export { value_2 as value };
-        const validValues_1: never[];
+        let validValues_1: never[];
         export { validValues_1 as validValues };
-        const isValid_1: boolean;
+        let isValid_1: boolean;
         export { isValid_1 as isValid };
     }
     export { release_2 as release };
     export namespace sites_2 {
-        const value_3: never[];
+        let value_3: never[];
         export { value_3 as value };
-        const validValues_2: never[];
+        let validValues_2: never[];
         export { validValues_2 as validValues };
-        const isValid_2: boolean;
+        let isValid_2: boolean;
         export { isValid_2 as isValid };
     }
     export { sites_2 as sites };
     export namespace dateRange_2 {
-        const value_4: string[];
+        let value_4: string[];
         export { value_4 as value };
-        const validValues_3: string[];
+        let validValues_3: string[];
         export { validValues_3 as validValues };
-        const isValid_3: boolean;
+        let isValid_3: boolean;
         export { isValid_3 as isValid };
     }
     export { dateRange_2 as dateRange };
     export namespace documentation_2 {
-        const value_5: string;
+        let value_5: string;
         export { value_5 as value };
-        const validValues_4: string[];
+        let validValues_4: string[];
         export { validValues_4 as validValues };
-        const isValid_4: boolean;
+        let isValid_4: boolean;
         export { isValid_4 as isValid };
     }
     export { documentation_2 as documentation };
     export namespace packageType_2 {
-        const value_6: null;
+        let value_6: null;
         export { value_6 as value };
-        const validValues_5: string[];
+        let validValues_5: string[];
         export { validValues_5 as validValues };
-        const isValid_5: boolean;
+        let isValid_5: boolean;
         export { isValid_5 as isValid };
     }
     export { packageType_2 as packageType };
     export namespace provisionalData_2 {
-        const value_7: string;
+        let value_7: string;
         export { value_7 as value };
-        const validValues_6: string[];
+        let validValues_6: string[];
         export { validValues_6 as validValues };
-        const isValid_6: boolean;
+        let isValid_6: boolean;
         export { isValid_6 as isValid };
     }
     export { provisionalData_2 as provisionalData };
     export namespace policies {
-        const value_8: boolean;
+        let value_8: boolean;
         export { value_8 as value };
-        const validValues_7: null;
+        let validValues_7: null;
         export { validValues_7 as validValues };
-        const isValid_7: boolean;
+        let isValid_7: boolean;
         export { isValid_7 as isValid };
     }
 }
 declare namespace ALL_STEPS {
     export namespace documentation_3 {
-        const requiredStateKeys: string[];
-        const label: string;
-        const title: string;
+        let requiredStateKeys: string[];
+        let label: string;
+        let title: string;
     }
     export { documentation_3 as documentation };
     export namespace externalExclusive {
-        const requiredStateKeys_1: never[];
+        let requiredStateKeys_1: never[];
         export { requiredStateKeys_1 as requiredStateKeys };
-        const label_1: string;
+        let label_1: string;
         export { label_1 as label };
     }
     export namespace s3Files_1 {
-        const requiredStateKeys_2: string[];
+        let requiredStateKeys_2: string[];
         export { requiredStateKeys_2 as requiredStateKeys };
-        const label_2: string;
+        let label_2: string;
         export { label_2 as label };
-        const title_1: string;
+        let title_1: string;
         export { title_1 as title };
     }
     export { s3Files_1 as s3Files };
     export namespace packageType_3 {
-        const requiredStateKeys_3: string[];
+        let requiredStateKeys_3: string[];
         export { requiredStateKeys_3 as requiredStateKeys };
-        const label_3: string;
+        let label_3: string;
         export { label_3 as label };
-        const title_2: string;
+        let title_2: string;
         export { title_2 as title };
     }
     export { packageType_3 as packageType };
     export namespace provisionalData_3 {
-        const requiredStateKeys_4: string[];
+        let requiredStateKeys_4: string[];
         export { requiredStateKeys_4 as requiredStateKeys };
-        const label_4: string;
+        let label_4: string;
         export { label_4 as label };
-        const title_3: string;
+        let title_3: string;
         export { title_3 as title };
     }
     export { provisionalData_3 as provisionalData };
     export namespace sitesAndDateRange {
-        const requiredStateKeys_5: string[];
+        let requiredStateKeys_5: string[];
         export { requiredStateKeys_5 as requiredStateKeys };
-        const label_5: string;
+        let label_5: string;
         export { label_5 as label };
-        const title_4: string;
+        let title_4: string;
         export { title_4 as title };
     }
     export namespace policies_1 {
-        const requiredStateKeys_6: string[];
+        let requiredStateKeys_6: string[];
         export { requiredStateKeys_6 as requiredStateKeys };
-        const label_6: string;
+        let label_6: string;
         export { label_6 as label };
-        const title_5: string;
+        let title_5: string;
         export { title_5 as title };
     }
     export { policies_1 as policies };
     export namespace summary {
-        const requiredStateKeys_7: never[];
+        let requiredStateKeys_7: never[];
         export { requiredStateKeys_7 as requiredStateKeys };
-        const label_7: string;
+        let label_7: string;
         export { label_7 as label };
-        const title_6: string;
+        let title_6: string;
         export { title_6 as title };
     }
 }
 declare function getStateObservable(): import("rxjs").Observable<any>;
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';

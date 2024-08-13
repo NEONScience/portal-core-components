@@ -6,7 +6,11 @@
     "outDir": "./lib",
     "noEmit": false,
     "emitDeclarationOnly": true,
-    "newLine": "lf"
+    "newLine": "lf",
+    "types": [
+      "node",
+      "@types/wicg-file-system-access"
+    ]
   },
   "include": [
     "./src/lib_components/components/**/*",

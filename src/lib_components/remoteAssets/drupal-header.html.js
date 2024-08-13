@@ -23,7 +23,7 @@ export default html = `<header class="header" role="banner">
   <div>
 
 <input data-drupal-selector="edit-openid-connect-client-auth0-login" type="submit" id="edit-openid-connect-client-auth0-login" name="auth0" value="Sign In" class="button js-form-submit form-submit button--search" />
-</div><input autocomplete="off" data-drupal-selector="form-epxjxpdfwxnvptsekjvtousgknrlj2wcmaloerlrdnu" type="hidden" name="form_build_id" value="form-ePxJXpdfWxnVptsEKJvToUsGkNRlj2WCMAloErLRdNU" />
+</div><input autocomplete="off" data-drupal-selector="form-ckufrvhpmbhumuyr2px7y4hlmfn6rtmiryiqt4baxt0" type="hidden" name="form_build_id" value="form-cKUfrVhpMBhumuYR2Px7y4hlmFn6RtMIrYIqT4BAxT0" />
 <input data-drupal-selector="edit-openid-connect-login-form" type="hidden" name="form_id" value="openid_connect_login_form" />
 
 </form>

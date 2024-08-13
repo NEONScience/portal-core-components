@@ -8,14 +8,14 @@ declare class Parallel {
     requiredScripts: any[];
     requiredFunctions: any[];
     getWorkerSource(cb: any, env: any): string;
-    require(...args: any[]): Parallel;
+    require(...args: any[]): this;
     _spawnWorker(cb: any, env: any): Worker | undefined;
-    spawn(cb: any, env: any): Parallel;
+    spawn(cb: any, env: any): this;
     _spawnMapWorker(i: any, cb: any, done: any, env: any, wrk: any): void;
-    map(cb: any, env: any): Parallel;
+    map(cb: any, env: any): this;
     _spawnReduceWorker(data: any, cb: any, done: any, env: any, wrk: any): void;
-    reduce(cb: any, env: any): Parallel;
-    then(cb: any, errCb: any): Parallel;
+    reduce(cb: any, env: any): this;
+    then(cb: any, errCb: any): this;
 }
 declare namespace Parallel {
     function isSupported(): boolean;
@@ -27,5 +27,5 @@ declare class Operation {
     _resolved: number;
     _result: any;
     resolve(err: any, res: any): void;
-    then(cb: any, errCb: any): Operation | undefined;
+    then(cb: any, errCb: any): this | undefined;
 }

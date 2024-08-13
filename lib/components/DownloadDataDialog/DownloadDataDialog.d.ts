@@ -1,1 +1,2 @@
-export default function DownloadDataDialog(): import("react/jsx-runtime").JSX.Element;
+export default function DownloadDataDialog(): React.JSX.Element;
+import React from 'react';

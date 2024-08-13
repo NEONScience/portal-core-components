@@ -1,11 +1,11 @@
 export default DownloadStepForm;
-declare function DownloadStepForm(props: any): import("react/jsx-runtime").JSX.Element | null;
+declare function DownloadStepForm(props: any): React.JSX.Element | null;
 declare namespace DownloadStepForm {
     namespace propTypes {
-        const stepKey: PropTypes.Validator<string>;
-        const changeToStep: PropTypes.Requireable<(...args: any[]) => any>;
-        const changeToNextUncompletedStep: PropTypes.Requireable<(...args: any[]) => any>;
-        const renderDownloadButton: PropTypes.Requireable<(...args: any[]) => any>;
+        let stepKey: PropTypes.Validator<string>;
+        let changeToStep: PropTypes.Requireable<(...args: any[]) => any>;
+        let changeToNextUncompletedStep: PropTypes.Requireable<(...args: any[]) => any>;
+        let renderDownloadButton: PropTypes.Requireable<(...args: any[]) => any>;
     }
     namespace defaultProps {
         export function changeToStep_1(): void;
@@ -16,4 +16,5 @@ declare namespace DownloadStepForm {
         export { renderDownloadButton_1 as renderDownloadButton };
     }
 }
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';

@@ -1,6 +1,6 @@
 export default NeonJsonLd;
 declare namespace NeonJsonLd {
-    const CITATION_AUTHOR: string;
+    let CITATION_AUTHOR: string;
     function getJsonLdObservable(url: string): import("rxjs").Observable<any>;
     function getRepoJsonLdObservable(): import("rxjs").Observable<any>;
     function getProductJsonLdObservable(productCode: string, release: string): import("rxjs").Observable<any>;

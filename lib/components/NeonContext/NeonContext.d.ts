@@ -1,8 +1,8 @@
 export namespace FETCH_STATUS {
-    const AWAITING_CALL: string;
-    const FETCHING: string;
-    const ERROR: string;
-    const SUCCESS: string;
+    let AWAITING_CALL: string;
+    let FETCHING: string;
+    let ERROR: string;
+    let SUCCESS: string;
 }
 export default NeonContext;
 export function getTestableItems(): {
@@ -28,13 +28,13 @@ declare namespace NeonContext {
 /**
    Context Provider
 */
-declare function Provider(props: any): import("react/jsx-runtime").JSX.Element;
+declare function Provider(props: any): React.JSX.Element;
 declare namespace Provider {
     export { ProviderPropTypes as propTypes };
     export namespace defaultProps {
-        const children: null;
-        const fetchPartials: boolean;
-        const useCoreAuth: boolean;
+        let children: null;
+        let fetchPartials: boolean;
+        let useCoreAuth: boolean;
         function whenFinal(): void;
     }
 }
@@ -910,25 +910,25 @@ declare function useNeonContextState(): ({
 })[];
 declare namespace DEFAULT_STATE {
     namespace data {
-        export const sites: {};
+        export let sites: {};
         export namespace bundles {
-            const bundleProducts: {};
-            const bundleProductsForwardAvailability: {};
-            const bundleDoiLookup: {};
-            const splitProducts: {};
-            const allBundleProducts: {};
-            const apiResponse: never[];
+            let bundleProducts: {};
+            let bundleProductsForwardAvailability: {};
+            let bundleDoiLookup: {};
+            let splitProducts: {};
+            let allBundleProducts: {};
+            let apiResponse: never[];
         }
         export { statesJSON as states };
         export { domainsJSON as domains };
         export { timeSeriesDataProductsJSON as timeSeriesDataProducts };
-        export const stateSites: {};
-        export const domainSites: {};
+        export let stateSites: {};
+        export let domainSites: {};
     }
-    const html: {
+    let html: {
         [x: number]: null;
     };
-    const fetches: {
+    let fetches: {
         [x: number]: {
             status: null;
             error: null;
@@ -947,32 +947,33 @@ declare namespace DEFAULT_STATE {
         };
     };
     namespace auth {
-        const useCore: boolean;
-        const isAuthenticated: boolean;
-        const isAuthWorking: boolean;
-        const isAuthWsConnected: boolean;
-        const userData: null;
+        let useCore: boolean;
+        let isAuthenticated: boolean;
+        let isAuthWorking: boolean;
+        let isAuthWsConnected: boolean;
+        let userData: null;
     }
-    const isActive: boolean;
-    const isFinal: boolean;
-    const hasError: boolean;
-    const whenFinalCalled: boolean;
+    let isActive: boolean;
+    let isFinal: boolean;
+    let hasError: boolean;
+    let whenFinalCalled: boolean;
 }
 /**
    getWrappedComponent
 */
-declare function getWrappedComponent(Component: any): (props: any) => import("react/jsx-runtime").JSX.Element;
+declare function getWrappedComponent(Component: any): (props: any) => React.JSX.Element;
 declare namespace ProviderPropTypes {
-    const children_1: PropTypes.Requireable<NonNullable<PropTypes.ReactNodeLike>>;
+    let children_1: PropTypes.Requireable<NonNullable<PropTypes.ReactNodeLike>>;
     export { children_1 as children };
-    const fetchPartials_1: PropTypes.Requireable<boolean>;
+    let fetchPartials_1: PropTypes.Requireable<boolean>;
     export { fetchPartials_1 as fetchPartials };
-    const useCoreAuth_1: PropTypes.Requireable<boolean>;
+    let useCoreAuth_1: PropTypes.Requireable<boolean>;
     export { useCoreAuth_1 as useCoreAuth };
-    const whenFinal_1: PropTypes.Requireable<(...args: any[]) => any>;
+    let whenFinal_1: PropTypes.Requireable<(...args: any[]) => any>;
     export { whenFinal_1 as whenFinal };
 }
-import statesJSON from "../../staticJSON/states.json";
-import domainsJSON from "../../staticJSON/domains.json";
-import timeSeriesDataProductsJSON from "../../staticJSON/timeSeriesDataProducts.json";
-import PropTypes from "prop-types";
+import React from 'react';
+import statesJSON from '../../staticJSON/states.json';
+import domainsJSON from '../../staticJSON/domains.json';
+import timeSeriesDataProductsJSON from '../../staticJSON/timeSeriesDataProducts.json';
+import PropTypes from 'prop-types';

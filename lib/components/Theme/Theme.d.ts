@@ -1,5 +1,5 @@
 export namespace COLORS {
-    const NEON_BLUE: {
+    let NEON_BLUE: {
         50: string;
         100: string;
         200: string;
@@ -11,7 +11,7 @@ export namespace COLORS {
         800: string;
         900: string;
     };
-    const LIGHT_BLUE: {
+    let LIGHT_BLUE: {
         50: string;
         100: string;
         200: string;
@@ -23,7 +23,7 @@ export namespace COLORS {
         800: string;
         900: string;
     };
-    const GOLD: {
+    let GOLD: {
         50: string;
         100: string;
         200: string;
@@ -35,7 +35,7 @@ export namespace COLORS {
         800: string;
         900: string;
     };
-    const BROWN: {
+    let BROWN: {
         50: string;
         100: string;
         200: string;
@@ -47,7 +47,7 @@ export namespace COLORS {
         800: string;
         900: string;
     };
-    const GREEN: {
+    let GREEN: {
         50: string;
         100: string;
         200: string;
@@ -59,7 +59,7 @@ export namespace COLORS {
         800: string;
         900: string;
     };
-    const RED: {
+    let RED: {
         50: string;
         100: string;
         200: string;
@@ -71,7 +71,7 @@ export namespace COLORS {
         800: string;
         900: string;
     };
-    const GREY: {
+    let GREY: {
         50: string;
         100: string;
         200: string;
@@ -89,4 +89,4 @@ export namespace COLORS {
     };
 }
 export default theme;
-declare const theme: import("@material-ui/core/styles").Theme;
+declare const theme: import("@mui/material/styles").Theme;

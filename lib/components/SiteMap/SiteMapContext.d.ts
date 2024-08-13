@@ -37,9 +37,9 @@ declare namespace SiteMapContext {
     export { VIEWS };
 }
 /** Context Provider */
-declare function Provider(props: any): import("react/jsx-runtime").JSX.Element;
+declare function Provider(props: any): React.JSX.Element;
 declare namespace Provider {
-    export const propTypes: {
+    export let propTypes: {
         children: PropTypes.Validator<NonNullable<NonNullable<PropTypes.ReactNodeLike>>>;
         view: PropTypes.Requireable<string>;
         aspectRatio: PropTypes.Requireable<number>;
@@ -105,8 +105,8 @@ declare function useSiteMapContext(): {
         maxBodyHeightUpdateFromAspectRatio: boolean;
     };
     map: {
-        zoom: null;
-        center: never[];
+        zoom: number;
+        center: number[];
         bounds: null;
         baseLayer: null;
         baseLayerAutoChangedAbove17: boolean;
@@ -195,8 +195,8 @@ declare function useSiteMapContext(): {
         maxBodyHeightUpdateFromAspectRatio: boolean;
     };
     map: {
-        zoom: null;
-        center: never[];
+        zoom: number;
+        center: number[];
         bounds: null;
         baseLayer: null;
         baseLayerAutoChangedAbove17: boolean;
@@ -245,7 +245,8 @@ declare function useSiteMapContext(): {
     fullscreen: boolean;
     manualLocationData: null;
 } | (() => void))[];
-import { SORT_DIRECTIONS } from "./SiteMapUtils";
-import { VIEWS } from "./SiteMapUtils";
-import PropTypes from "prop-types";
-import { SITE_MAP_DEFAULT_PROPS } from "./SiteMapUtils";
+import { SORT_DIRECTIONS } from './SiteMapUtils';
+import { VIEWS } from './SiteMapUtils';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { SITE_MAP_DEFAULT_PROPS } from './SiteMapUtils';
