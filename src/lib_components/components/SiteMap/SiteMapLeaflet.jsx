@@ -673,6 +673,7 @@ const SiteMapLeaflet = () => {
       <div className={`${classes.mapNavButtonContainer} ${classes.observatoryButton}`}>
         <IconButton
           type="button"
+          size="large"
           className={classes.mapNavButton}
           onClick={() => {
             if (mapRefExists()) {
@@ -681,7 +682,6 @@ const SiteMapLeaflet = () => {
               mapRef.current.setView(OBSERVATORY_CENTER, nextZoom);
             }
           }}
-          size="large"
         >
           <ObservatoryIcon fontSize="small" />
         </IconButton>
@@ -701,10 +701,10 @@ const SiteMapLeaflet = () => {
         <div className={`${classes.mapNavButtonContainer} ${classes.focusLocationButton}`}>
           <IconButton
             type="button"
-            className={classes.mapNavButton}
-            onClick={() => { dispatch({ type: 'returnToFocusLocation' }); }}
-            disabled={mapIsAtFocusLocation(state)}
             size="large"
+            className={classes.mapNavButton}
+            onClick={() => { dispatch({ type: 'returnToFocusLocation', mapRef }); }}
+            disabled={mapIsAtFocusLocation(state)}
           >
             <FocusLocationIcon fontSize="small" />
           </IconButton>

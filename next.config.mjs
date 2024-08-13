@@ -1,6 +1,3 @@
-const isProduction = (process.env.NODE_ENV === 'production');
-const isTest = (process.env.NODE_ENV === 'test');
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
@@ -8,8 +5,11 @@ const nextConfig = {
   basePath: '/core-components-next',
   reactStrictMode: false,
   trailingSlash: true,
+  compiler: {
+    emotion: true,
+  },
   experimental: {
-    // forceSwcTransforms: !isProduction && !isTest,
+    forceSwcTransforms: true,
   },
 };
 

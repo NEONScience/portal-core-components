@@ -30,8 +30,8 @@ import MarkerIcon2xPng from 'leaflet/dist/images/marker-icon-2x.png';
 import MarkerIconPng from 'leaflet/dist/images/marker-icon.png';
 import MarkerIconShadowPng from 'leaflet/dist/images/marker-shadow.png';
 
-import { NeonTheme } from '../../Theme/types';
-import { AnyAction, Nullable, Undef } from '../../../types/core';
+import { NeonTheme } from '../lib_components/components/Theme/types';
+import { AnyAction, Nullable, Undef } from '../lib_components/types/core';
 
 import 'leaflet/dist/leaflet.css';
 
