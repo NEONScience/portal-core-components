@@ -706,12 +706,12 @@ const baseTheme = createTheme(adaptV4Theme({
           color: COLORS.LIGHT_BLUE[100],
           textDecoration: 'underline',
         },
-      },
-      active: {
-        color: `${COLORS.LIGHT_BLUE[100]} !important`,
-        textDecoration: 'underline',
-        '& svg': {
+        '&.Mui-active': {
           color: `${COLORS.LIGHT_BLUE[100]} !important`,
+          textDecoration: 'underline',
+          '& svg': {
+            color: `${COLORS.LIGHT_BLUE[100]} !important`,
+          },
         },
       },
     },

@@ -458,7 +458,7 @@ const SiteMapTable = () => {
     const style = unselectable ? { filter: UNSELECTABLE_MARKER_FILTER } : {};
     return (
       <img
-        src={iconSvg.src}
+        src={iconSvg}
         alt={getFeatureName(featureKey)}
         className={classes.featureIcon}
         style={style}
@@ -938,7 +938,6 @@ const SiteMapTable = () => {
           if (!Array.isArray(samplingModules)) { return renderCaptionString(); }
           return (
             <Tooltip
-              interactive
               placement="left"
               title={
                 samplingModules.length ? (

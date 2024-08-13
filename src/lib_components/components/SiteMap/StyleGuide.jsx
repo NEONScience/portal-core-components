@@ -17,6 +17,7 @@ import PropsTable from '../../../components/PropsTable';
 
 import Theme from '../Theme/Theme';
 import SiteMap from './SiteMap';
+// import BasicLeafletMap, { Provider } from './Leaflet/BasicLeafletMap';
 
 import {
   MAP_ZOOM_RANGE,
@@ -605,6 +606,17 @@ return (
       <DocBlock>
         <PropsTable props={propRows} fullHeight />
       </DocBlock>
+
+      {/* <Divider className={classes.divider} />
+      <Typography variant="h4" component="h2" gutterBottom>Basic Leaflet</Typography>
+      <DocBlock>
+        Simple leaflet map.
+      </DocBlock>
+      <ExampleBlock>
+        <Provider>
+          <BasicLeafletMap />
+        </Provider>
+      </ExampleBlock> */}
     </>
   );
 }

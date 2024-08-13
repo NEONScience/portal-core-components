@@ -30,12 +30,12 @@ import UnselectedIcon from '@mui/icons-material/Remove';
 import 'leaflet/dist/leaflet.css';
 import {
   CircleMarker,
-  MapContainer,
   FeatureGroup,
   Marker,
   Polygon,
   Polyline,
   Popup,
+  useMap,
 } from 'react-leaflet';
 
 import SiteMapContext from './SiteMapContext';
@@ -212,7 +212,8 @@ const checkValidPositions = (positions, checkAllCoords = false) => {
 
 const SiteMapFeature = (props) => {
   const classes = useStyles(Theme);
-  const { mapRef, featureKey } = props;
+  const { featureKey } = props;
+  const map = useMap();
 
   const feature = FEATURES[featureKey] || {};
 
@@ -232,7 +233,7 @@ const SiteMapFeature = (props) => {
   } = feature;
   const featureName = nameSingular || name || featureKey;
 
-  if (!FEATURES[featureKey] || !mapRef.current) { return null; }
+  if (!FEATURES[featureKey]) { return null; }
 
   let featureDescription = description;
   let parentFeature = null;
@@ -303,10 +304,11 @@ const SiteMapFeature = (props) => {
      parent element dynamcally based on which direction has the most room to render.
   */
   const positionPopup = (target = null, latlng = null, hideCloseButton = false) => {
-    if (!target || !latlng || !mapRef.current || !mapRef.current.leafletElement) { return; }
+    if (!target || !latlng || !map) { return; }
     const { _popup: popup, _icon: icon } = target;
+    if (!popup) { return; }
     popup.setLatLng(latlng);
-    const containerPoint = mapRef.current.leafletElement.latLngToContainerPoint(latlng);
+    const containerPoint = map.latLngToContainerPoint(latlng);
     const iconHeight = icon ? icon.height : 0;
     const {
       _container: containerNode,
@@ -316,7 +318,7 @@ const SiteMapFeature = (props) => {
     } = popup;
     containerNode.style.marginBottom = '0px';
     // Leaflet popups always open above; open below if mouse event is in the top half of the map
-    if (containerPoint.y < (mapRef.current.container.clientHeight / 2)) {
+    if (containerPoint.y < (map._container.clientHeight / 2)) {
       const contentHeight = containerNode.clientHeight;
       const tipHeight = tipNode.clientHeight;
       const contentBottom = 0 - iconHeight - contentHeight - tipHeight - (1.5 * containerBottom);
@@ -329,7 +331,7 @@ const SiteMapFeature = (props) => {
     }
     // For left/right we move the popup horizontally as needed while keeping the tip stationary
     const contentWidth = containerNode.clientWidth;
-    const mapWidth = mapRef.current.container.parentNode.clientWidth || 0;
+    const mapWidth = map._container.parentNode.clientWidth || 0;
     const nudgeBuffer = 40;
     const nudgeLimit = (contentWidth / 2) - (nudgeBuffer / 2);
     let overlap = 0;
@@ -367,7 +369,7 @@ const SiteMapFeature = (props) => {
     ) : title;
     let icon = null;
     if (iconSvg) {
-      icon = <img alt={feature.name} src={feature.iconSvg.src} className={classes.popupFeatureIcon} />;
+      icon = <img alt={feature.name} src={feature.iconSvg} className={classes.popupFeatureIcon} />;
     } else if (featureShape === 'Circle') {
       const circleProps = {
         cx: 12,
@@ -476,21 +478,21 @@ const SiteMapFeature = (props) => {
     const internal = (
       <>
         {selectedIcon}
-        <img src={siteIcon.src} alt={siteCode} className={classes.popupSiteIcon} style={markerStyle} />
+        <img src={siteIcon} alt={siteCode} className={classes.popupSiteIcon} style={markerStyle} />
         <Typography variant="caption" style={{ textAlign: 'left' }}>
           {`${site.description} (${site.siteCode})`}
         </Typography>
       </>
     );
     const containerProps = {
-      key: siteCode,
       className: classes.popupSiteContainer,
       style: { marginTop: Theme.spacing(0.5) },
     };
     return selectionActive ? (
-      <div {...containerProps}>{internal}</div>
+      <div key={siteCode} {...containerProps}>{internal}</div>
     ) : (
       <Link
+        key={siteCode}
         variant="caption"
         component="button"
         onClick={() => jumpTo(site.siteCode)}
@@ -1369,13 +1371,15 @@ const SiteMapFeature = (props) => {
   };
   const renderShape = (primaryId, secondaryId = null) => {
     const polygonInteractionProps = {
-      onMouseOver: (e) => {
-        e.target._path.setAttribute('stroke', hoverColor);
-        e.target._path.setAttribute('fill', hoverColor);
-      },
-      onMouseOut: (e) => {
-        e.target._path.setAttribute('stroke', featureStyle.color);
-        e.target._path.setAttribute('fill', featureStyle.color);
+      eventHandlers: {
+        mouseover: (e) => {
+          e.target._path.setAttribute('stroke', hoverColor);
+          e.target._path.setAttribute('fill', hoverColor);
+        },
+        mouseout: (e) => {
+          e.target._path.setAttribute('stroke', featureStyle.color);
+          e.target._path.setAttribute('fill', featureStyle.color);
+        },
       },
     };
     const shapeData = secondaryId && featureData[primaryId][secondaryId]
@@ -1413,11 +1417,13 @@ const SiteMapFeature = (props) => {
       if (featureShape === 'Polyline') {
         shapeProps = {
           ...(featureStyle || {}),
-          onMouseOver: (e) => {
-            e.target._path.setAttribute('stroke', hoverColor);
-          },
-          onMouseOut: (e) => {
-            e.target._path.setAttribute('stroke', baseColor);
+          eventHandlers: {
+            mouseover: (e) => {
+              e.target._path.setAttribute('stroke', hoverColor);
+            },
+            mouseout: (e) => {
+              e.target._path.setAttribute('stroke', baseColor);
+            },
           },
         };
       }
@@ -1429,7 +1435,9 @@ const SiteMapFeature = (props) => {
         if (!calculateLocationsInBounds({ X: shapeData }, mapBounds).length) { return null; }
         shapeProps = {
           ...(featureStyle || {}),
-          ...polygonInteractionProps,
+          eventHandlers: {
+            ...polygonInteractionProps.eventHandlers,
+          },
         };
         // ReactLeaflet does not suport the mask prop, so add it as an unused class.
         // The LayoutEffect in SiteMapLeaflet.jsx then applies it as a mask attribute.
@@ -1438,7 +1446,7 @@ const SiteMapFeature = (props) => {
         }
         if (isHighlighted) {
           shapeProps.color = darkenedBaseColor;
-          shapeProps.onMouseOut = (e) => {
+          shapeProps.eventHandlers.mouseout = (e) => {
             e.target._path.setAttribute('stroke', darkenedBaseColor);
             e.target._path.setAttribute('fill', darkenedBaseColor);
           };
@@ -1459,7 +1467,7 @@ const SiteMapFeature = (props) => {
           });
           if (isFocusAmplifiable) {
             shapeProps.color = ghostedHoverColor;
-            shapeProps.onMouseOut = (e) => {
+            shapeProps.eventHandlers.mouseout = (e) => {
               e.target._path.setAttribute('stroke', ghostedHoverColor);
               e.target._path.setAttribute('fill', ghostedHoverColor);
             };
@@ -1489,7 +1497,7 @@ const SiteMapFeature = (props) => {
             }
           }
           shapeProps.color = returnColor;
-          shapeProps.onMouseOver = (e) => {
+          shapeProps.eventHandlers.mouseover = (e) => {
             e.target._path.setAttribute('stroke', useHoverColor);
             e.target._path.setAttribute('fill', useHoverColor);
             if (hasPopup) {
@@ -1497,21 +1505,22 @@ const SiteMapFeature = (props) => {
               positionPopup(e.target, e.latlng, true);
             }
           };
-          shapeProps.onMouseMove = (e) => {
+          shapeProps.eventHandlers.mousemove = (e) => {
             if (hasPopup) {
               positionPopup(e.target, e.latlng, true);
             }
           };
-          shapeProps.onMouseOut = (e) => {
+          shapeProps.eventHandlers.mouseout = (e) => {
             e.target._path.setAttribute('stroke', returnColor);
             e.target._path.setAttribute('fill', returnColor);
             if (hasPopup) {
               e.target.closePopup();
+              dispatch({ type: 'setMapRepositionOpenPopupFunc', func: null });
             }
           };
           // Onclick to select sites by way of clicking a state or domain to capture sites within
           if (selectingActiveTypeByProxy && selectionLimit !== 1) {
-            shapeProps.onClick = () => {
+            shapeProps.eventHandlers.click = () => {
               if (featureKey === FEATURES.DOMAINS.KEY) {
                 dispatch({ type: 'toggleSitesSelectedForDomain', domainCode: primaryId });
               }
@@ -1522,7 +1531,7 @@ const SiteMapFeature = (props) => {
           }
           // Onclick to select states or domains directly
           if (selectionType === featureType) {
-            shapeProps.onClick = () => {
+            shapeProps.eventHandlers.click = () => {
               if (isSelectable) {
                 dispatch({ type: 'toggleItemSelected', item: primaryId });
               }
@@ -1548,42 +1557,45 @@ const SiteMapFeature = (props) => {
         if (baseIcon && baseIcon[selection]) {
           icon = baseIcon[selection][initialHighlight];
           interaction = {
-            onMouseOver: (e) => {
-              let highlight = HIGHLIGHT_STATUS.HIGHLIGHT;
-              if (selectionActive && selectingCurrentFeatureType && isSelectable) {
-                highlight = HIGHLIGHT_STATUS[isSelected ? 'HIGHLIGHT' : 'SELECT'];
-              }
-              e.target.setIcon(baseIcon[selection][highlight]);
-              e.target._bringToFront();
-              if (hasPopup && selectionActive) {
-                e.target.openPopup();
-                positionPopup(e.target, e.latlng, selectionActive);
-              }
-            },
-            onMouseOut: (e) => {
-              e.target.setIcon(baseIcon[selection][initialHighlight]);
-              if (hasPopup && selectionActive) {
-                e.target.closePopup();
-              }
-            },
-            onClick: (e) => {
-              if (!selectionActive && hasPopup) {
-                const popupOpen = e.target._popup.isOpen();
-                const func = () => positionPopup(e.target, e.latlng, selectionActive);
-                dispatch({ type: 'setMapRepositionOpenPopupFunc', func });
-                if (popupOpen) { func(); }
-              }
-              if (selectionActive && selectingCurrentFeatureType && isSelectable) {
-                switch (selectionType) {
-                  case FEATURE_TYPES.SITES.KEY:
-                    if (shapeData.siteCode) {
-                      dispatch({ type: 'toggleItemSelected', item: shapeData.siteCode });
-                    }
-                    break;
-                  default:
-                    break;
+            eventHandlers: {
+              mouseover: (e) => {
+                let highlight = HIGHLIGHT_STATUS.HIGHLIGHT;
+                if (selectionActive && selectingCurrentFeatureType && isSelectable) {
+                  highlight = HIGHLIGHT_STATUS[isSelected ? 'HIGHLIGHT' : 'SELECT'];
                 }
-              }
+                e.target.setIcon(baseIcon[selection][highlight]);
+                e.target._bringToFront();
+                if (hasPopup && selectionActive) {
+                  e.target.openPopup();
+                  positionPopup(e.target, e.latlng, selectionActive);
+                }
+              },
+              mouseout: (e) => {
+                e.target.setIcon(baseIcon[selection][initialHighlight]);
+                if (hasPopup && selectionActive) {
+                  e.target.closePopup();
+                  dispatch({ type: 'setMapRepositionOpenPopupFunc', func: null });
+                }
+              },
+              click: (e) => {
+                if (!selectionActive && hasPopup) {
+                  const popupOpen = e.target._popup.isOpen();
+                  const func = () => positionPopup(e.target, e.latlng, selectionActive);
+                  dispatch({ type: 'setMapRepositionOpenPopupFunc', func });
+                  if (popupOpen) { func(); }
+                }
+                if (selectionActive && selectingCurrentFeatureType && isSelectable) {
+                  switch (selectionType) {
+                    case FEATURE_TYPES.SITES.KEY:
+                      if (shapeData.siteCode) {
+                        dispatch({ type: 'toggleItemSelected', item: shapeData.siteCode });
+                      }
+                      break;
+                    default:
+                      break;
+                  }
+                }
+              },
             },
           };
         }
@@ -1627,9 +1639,11 @@ const SiteMapFeature = (props) => {
             key={`${key}-polygon`}
             positions={positions}
             {...shapeProps}
-            onMouseOver={null}
-            onMouseMove={null}
-            onMouseOut={null}
+            eventHandlers={{
+              mouseover: null,
+              mousemove: null,
+              mouseout: null,
+            }}
           />
         ) : (
           <Polygon key={`${key}-polygon`} positions={positions} {...shapeProps}>
@@ -1688,9 +1702,6 @@ const SiteMapFeature = (props) => {
 };
 
 SiteMapFeature.propTypes = {
-  mapRef: PropTypes.shape({
-    current: PropTypes.instanceOf(MapContainer),
-  }).isRequired,
   featureKey: PropTypes.oneOf(Object.keys(FEATURES)).isRequired,
 };
 

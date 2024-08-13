@@ -390,11 +390,11 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
           </Typography>
         </CardContent>
         <CardActions className={classes.cardActions}>
-          <Tooltip
-            placement="bottom-start"
-            title="Click to copy the above plain text citation to the clipboard"
-          >
-            <CopyToClipboard text={citationText}>
+          <CopyToClipboard text={citationText}>
+            <Tooltip
+              placement="bottom-start"
+              title="Click to copy the above plain text citation to the clipboard"
+            >
               <Button
                 size="small"
                 color="primary"
@@ -404,8 +404,8 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
               >
                 Copy
               </Button>
-            </CopyToClipboard>
-          </Tooltip>
+            </Tooltip>
+          </CopyToClipboard>
           {DataCiteService.getDataProductFormats().map((format: CitationFormat): React.JSX.Element => {
             const key: string = Service.buildCitationDownloadKey(
               citationProduct,

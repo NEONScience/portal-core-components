@@ -78,10 +78,10 @@ const useStyles = makeStyles((theme) => ({
   },
   headerContainerFallback: {
     '& li.siteSearch > a': {
-      background: `url('${HeaderSearchSvg}') center center no-repeat !important`,
+      background: `url('${HeaderSearchSvg.src}') center center no-repeat !important`,
     },
     '& li.siteSearch > a:hover': {
-      background: `url('${HeaderSearchHoverSvg}') center center no-repeat !important`,
+      background: `url('${HeaderSearchHoverSvg.src}') center center no-repeat !important`,
     },
   },
   // Injecting these styles as a means of fixing up the search display

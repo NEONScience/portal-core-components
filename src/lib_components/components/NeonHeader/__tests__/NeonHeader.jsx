@@ -3,6 +3,7 @@ import renderer from 'react-test-renderer';
 
 import '../../../../__mocks__/ajax';
 import '../../../../__mocks__/NeonContext';
+import MockTheme from '../../../../__mocks__/MockTheme';
 import NeonContext, { FETCH_STATUS } from '../../NeonContext/NeonContext';
 
 import NeonHeader from '../NeonHeader';
@@ -34,7 +35,7 @@ describe('NeonHeader', () => {
       auth: defaultAuth,
     }]);
     const tree = renderer
-      .create(<NeonHeader />)
+      .create(<MockTheme><NeonHeader /></MockTheme>)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -46,7 +47,7 @@ describe('NeonHeader', () => {
       auth: defaultAuth,
     }]);
     const tree = renderer
-      .create(<NeonHeader />)
+      .create(<MockTheme><NeonHeader /></MockTheme>)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -58,7 +59,7 @@ describe('NeonHeader', () => {
       auth: defaultAuth,
     }]);
     const tree = renderer
-      .create(<NeonHeader />)
+      .create(<MockTheme><NeonHeader /></MockTheme>)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -70,7 +71,7 @@ describe('NeonHeader', () => {
       auth: defaultAuth,
     }]);
     const tree = renderer
-      .create(<NeonHeader />)
+      .create(<MockTheme><NeonHeader /></MockTheme>)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -82,7 +83,7 @@ describe('NeonHeader', () => {
       auth: defaultAuth,
     }]);
     const tree = renderer
-      .create(<NeonHeader drupalCssLoaded />)
+      .create(<MockTheme><NeonHeader drupalCssLoaded /></MockTheme>)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -94,7 +95,7 @@ describe('NeonHeader', () => {
       auth: defaultAuth,
     }]);
     const tree = renderer
-      .create(<NeonHeader drupalCssLoaded unstickyDrupalHeader />)
+      .create(<MockTheme><NeonHeader drupalCssLoaded unstickyDrupalHeader /></MockTheme>)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -108,7 +109,7 @@ describe('NeonHeader', () => {
     let tree;
     setTimeout(() => {
       renderer.act(() => {
-        tree = renderer.create(<NeonHeader drupalCssLoaded />);
+        tree = renderer.create(<MockTheme><NeonHeader drupalCssLoaded /></MockTheme>);
       });
       expect(tree.toJSON()).toMatchSnapshot();
       done();

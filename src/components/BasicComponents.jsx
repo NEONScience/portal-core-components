@@ -612,7 +612,6 @@ export default function BasicComponents() {
               </div>
             </>
           )}
-          interactive
         >
           <IconButton aria-label="tooltip" size="large">
             <InfoIcon />
