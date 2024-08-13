@@ -1,8 +1,8 @@
 export default EnhancedAvailabilityInterface;
-declare function EnhancedAvailabilityInterface(props: any): import("react/jsx-runtime").JSX.Element;
+declare function EnhancedAvailabilityInterface(props: any): React.JSX.Element;
 declare namespace EnhancedAvailabilityInterface {
     namespace propTypes {
-        const sites: PropTypes.Requireable<(PropTypes.InferProps<{
+        let sites: PropTypes.Requireable<(PropTypes.InferProps<{
             siteCode: PropTypes.Validator<string>;
             tables: PropTypes.Validator<(PropTypes.InferProps<{
                 name: PropTypes.Validator<string>;
@@ -13,25 +13,26 @@ declare namespace EnhancedAvailabilityInterface {
                 }>;
             }> | null | undefined)[]>;
         }> | null | undefined)[]>;
-        const view: PropTypes.Requireable<string>;
-        const table: PropTypes.Requireable<string>;
-        const sortMethod: PropTypes.Requireable<string>;
-        const sortDirection: PropTypes.Requireable<string>;
-        const disableSelection: PropTypes.Requireable<boolean>;
+        let view: PropTypes.Requireable<string>;
+        let table: PropTypes.Requireable<string>;
+        let sortMethod: PropTypes.Requireable<string>;
+        let sortDirection: PropTypes.Requireable<string>;
+        let disableSelection: PropTypes.Requireable<boolean>;
     }
     namespace defaultProps {
-        const sites_1: never[];
+        let sites_1: never[];
         export { sites_1 as sites };
-        const view_1: null;
+        let view_1: null;
         export { view_1 as view };
-        const table_1: string;
+        let table_1: string;
         export { table_1 as table };
-        const sortMethod_1: null;
+        let sortMethod_1: null;
         export { sortMethod_1 as sortMethod };
-        const sortDirection_1: string;
+        let sortDirection_1: string;
         export { sortDirection_1 as sortDirection };
-        const disableSelection_1: boolean;
+        let disableSelection_1: boolean;
         export { disableSelection_1 as disableSelection };
     }
 }
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';

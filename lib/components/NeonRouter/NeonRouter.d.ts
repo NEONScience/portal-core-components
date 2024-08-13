@@ -4,5 +4,5 @@ interface NeonRouterProps {
     disableRedirect?: boolean;
     children?: React.ReactNode;
 }
-declare const NeonRouter: (props: NeonRouterProps) => JSX.Element;
+declare const NeonRouter: (props: NeonRouterProps) => React.JSX.Element;
 export default NeonRouter;

@@ -1,2 +1,3 @@
-export default function SvgPatterns(): import("react/jsx-runtime").JSX.Element;
+export default function SvgPatterns(): React.JSX.Element;
 export function SvgPatternsString(): string;
+import React from 'react';

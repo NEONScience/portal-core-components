@@ -1,115 +1,115 @@
 export namespace TIME_SERIES_VIEWER_STATUS_TITLES {
-    const INIT_PRODUCT: string;
-    const LOADING_META: string;
-    const READY_FOR_DATA: string;
-    const LOADING_DATA: string;
-    const READY_FOR_SERIES: string;
-    const ERROR: null;
-    const READY: null;
+    let INIT_PRODUCT: string;
+    let LOADING_META: string;
+    let READY_FOR_DATA: string;
+    let LOADING_DATA: string;
+    let READY_FOR_SERIES: string;
+    let ERROR: null;
+    let READY: null;
 }
 export namespace Y_AXIS_RANGE_MODES {
-    const CENTERED: string;
-    const FROM_ZERO: string;
-    const CUSTOM: string;
+    let CENTERED: string;
+    let FROM_ZERO: string;
+    let CUSTOM: string;
 }
 export namespace Y_AXIS_RANGE_MODE_DETAILS {
     export namespace CENTERED_1 {
-        const name: string;
-        const description: string;
+        let name: string;
+        let description: string;
     }
     export { CENTERED_1 as CENTERED };
     export namespace FROM_ZERO_1 {
-        const name_1: string;
+        let name_1: string;
         export { name_1 as name };
-        const description_1: string;
+        let description_1: string;
         export { description_1 as description };
     }
     export { FROM_ZERO_1 as FROM_ZERO };
     export namespace CUSTOM_1 {
-        const name_2: string;
+        let name_2: string;
         export { name_2 as name };
-        const description_2: string;
+        let description_2: string;
         export { description_2 as description };
     }
     export { CUSTOM_1 as CUSTOM };
 }
 export namespace TabComponentPropTypes {
-    const setSelectedTab: PropTypes.Validator<(...args: any[]) => any>;
-    const TAB_IDS: PropTypes.Validator<{
+    let setSelectedTab: PropTypes.Validator<(...args: any[]) => any>;
+    let TAB_IDS: PropTypes.Validator<{
         [x: string]: string | null | undefined;
     }>;
 }
 export namespace DEFAULT_STATE {
     import mode = VIEWER_MODE.DEFAULT;
     export { mode };
-    export const status: string;
-    export const displayError: null;
+    export let status: string;
+    export let displayError: null;
     export namespace fetchProduct {
         import status_1 = FETCH_STATUS.AWAITING_CALL;
         export { status_1 as status };
-        export const error: null;
+        export let error: null;
     }
-    export const metaFetches: {};
-    export const dataFetches: {};
-    export const dataFetchProgress: number;
-    export const variables: {};
+    export let metaFetches: {};
+    export let dataFetches: {};
+    export let dataFetchProgress: number;
+    export let variables: {};
     export namespace product {
-        const productCode: null;
-        const productName: null;
-        const productDescription: null;
-        const productSensor: null;
-        const dateRange: null[];
-        const continuousDateRange: never[];
-        const sites: {};
+        let productCode: null;
+        let productName: null;
+        let productDescription: null;
+        let productSensor: null;
+        let dateRange: null[];
+        let continuousDateRange: never[];
+        let sites: {};
     }
     export namespace fetchReleases {
         import status_2 = FETCH_STATUS.AWAITING_CALL;
         export { status_2 as status };
-        const error_1: null;
+        let error_1: null;
         export { error_1 as error };
     }
-    export const release: null;
-    export const releases: never[];
+    export let release: null;
+    export let releases: never[];
     export namespace graphData {
-        const data: never[];
-        const qualityData: never[];
-        const monthOffsets: {};
-        const timestampMap: {};
-        const series: never[];
-        const labels: string[];
-        const qualityLabels: string[];
+        let data: never[];
+        let qualityData: never[];
+        let monthOffsets: {};
+        let timestampMap: {};
+        let series: never[];
+        let labels: string[];
+        let qualityLabels: string[];
     }
     export namespace selection {
-        const dateRange_1: null[];
+        let dateRange_1: null[];
         export { dateRange_1 as dateRange };
-        const continuousDateRange_1: never[];
+        let continuousDateRange_1: never[];
         export { continuousDateRange_1 as continuousDateRange };
-        const variables_1: never[];
+        let variables_1: never[];
         export { variables_1 as variables };
-        export const derivedVariableTable: {};
-        export const dateTimeVariable: null;
-        const sites_1: never[];
+        export let derivedVariableTable: {};
+        export let dateTimeVariable: null;
+        let sites_1: never[];
         export { sites_1 as sites };
-        export const timeStep: string;
-        export const autoTimeStep: null;
-        export const qualityFlags: never[];
-        export const rollPeriod: number;
-        export const logscale: boolean;
+        export let timeStep: string;
+        export let autoTimeStep: null;
+        export let qualityFlags: never[];
+        export let rollPeriod: number;
+        export let logscale: boolean;
         export namespace yAxes {
             namespace y1 {
-                export const units: null;
-                const logscale_1: boolean;
+                export let units: null;
+                let logscale_1: boolean;
                 export { logscale_1 as logscale };
-                export const dataRange: null[];
-                export const precision: number;
-                export const standardDeviation: number;
+                export let dataRange: null[];
+                export let precision: number;
+                export let standardDeviation: number;
                 import rangeMode = Y_AXIS_RANGE_MODES.CENTERED;
                 export { rangeMode };
-                export const axisRange: number[];
+                export let axisRange: number[];
             }
             namespace y2 { }
         }
-        export const isDefault: boolean;
+        export let isDefault: boolean;
     }
     export const availableQualityFlags: Set<any>;
     export namespace timeStep_1 {
@@ -303,23 +303,29 @@ export type ParseSiteVariablesReturn = {
     /**
      * - set of all variable names to be stored in state at the site level
      */
+    /**
+     * - set of all variable names to be stored in state at the site level
+     */
     variablesSet: Set<any>;
+    /**
+     * - updated object to be applied at state.variables
+     */
     /**
      * - updated object to be applied at state.variables
      */
     variablesObject: Object;
 };
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 declare namespace VIEWER_MODE {
-    const DEFAULT: string;
-    const STATIC: string;
+    let DEFAULT: string;
+    let STATIC: string;
 }
 declare namespace FETCH_STATUS {
-    export const AWAITING_CALL: string;
-    export const FETCHING: string;
-    const ERROR_1: string;
+    export let AWAITING_CALL: string;
+    export let FETCHING: string;
+    let ERROR_1: string;
     export { ERROR_1 as ERROR };
-    export const SUCCESS: string;
+    export let SUCCESS: string;
 }
 declare namespace TimeSeriesViewerContext {
     export { Provider };
@@ -329,29 +335,29 @@ declare namespace TimeSeriesViewerContext {
 /**
    Context Provider
 */
-declare function Provider(props: any): import("react/jsx-runtime").JSX.Element;
+declare function Provider(props: any): React.JSX.Element;
 declare namespace Provider {
     namespace propTypes {
         export { number as timeSeriesUniqueId };
-        const mode_1: PropTypes.Requireable<string>;
+        let mode_1: PropTypes.Requireable<string>;
         export { mode_1 as mode };
         import productCode_1 = TimeSeriesViewerPropTypes.productCode;
         export { productCode_1 as productCode };
         import productData = TimeSeriesViewerPropTypes.productData;
         export { productData };
-        const release_1: PropTypes.Requireable<string>;
+        let release_1: PropTypes.Requireable<string>;
         export { release_1 as release };
-        export const children: PropTypes.Validator<NonNullable<NonNullable<PropTypes.ReactNodeLike>>>;
+        export let children: PropTypes.Validator<NonNullable<NonNullable<PropTypes.ReactNodeLike>>>;
     }
     namespace defaultProps {
-        export const timeSeriesUniqueId: number;
+        export let timeSeriesUniqueId: number;
         import mode_2 = VIEWER_MODE.DEFAULT;
         export { mode_2 as mode };
-        const productCode_2: null;
+        let productCode_2: null;
         export { productCode_2 as productCode };
-        const productData_1: null;
+        let productData_1: null;
         export { productData_1 as productData };
-        const release_2: null;
+        let release_2: null;
         export { release_2 as release };
     }
 }
@@ -512,4 +518,5 @@ declare namespace TimeSeriesViewerPropTypes {
     export function productData_2(props: any, propName: any, componentName: any): Error | null;
     export { productData_2 as productData };
 }
-import { number } from "prop-types";
+import React from 'react';
+import { number } from 'prop-types';

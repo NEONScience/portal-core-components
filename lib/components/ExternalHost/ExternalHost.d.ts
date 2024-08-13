@@ -8,15 +8,16 @@ declare namespace ExternalHost {
     export { renderExternalHostLink };
 }
 declare namespace HOST_TYPES {
-    const ADDITIONAL_DATA: string;
-    const REFORMATTED_DATA: string;
-    const EXCLUSIVE_DATA: string;
+    let ADDITIONAL_DATA: string;
+    let REFORMATTED_DATA: string;
+    let EXCLUSIVE_DATA: string;
 }
 declare namespace LINK_TYPES {
-    const BY_SITE: string;
-    const BY_PRODUCT: string;
+    let BY_SITE: string;
+    let BY_PRODUCT: string;
 }
 declare function getByHostId(hostId?: string): any;
 declare function getByProductCode(productCode?: string): any;
 declare function getProductSpecificInfo(productCode?: string): any;
-declare function renderExternalHostLink(href?: string, text?: string, host?: string, productCode?: string): import("react/jsx-runtime").JSX.Element;
+declare function renderExternalHostLink(href?: string, text?: string, host?: string, productCode?: string): React.JSX.Element;
+import React from 'react';

@@ -1,10 +1,10 @@
-/// <reference types="react" />
+import { SvgIconComponent } from '@mui/icons-material';
 import { DataProductSpec, NeonDocument, QuickStartGuideDocument } from '../types/neonApi';
 import { Nullable } from '../types/core';
 export interface DocumentTypeListItemDef {
     match: (type: string) => boolean;
     title: (type?: string) => string;
-    Icon: React.ReactNode;
+    Icon: SvgIconComponent;
 }
 export interface ParsedQsgNameResult {
     name: string;

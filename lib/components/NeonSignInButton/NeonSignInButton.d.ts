@@ -1,1 +1,2 @@
-export default function NeonSignInButton(): import("react/jsx-runtime").JSX.Element;
+import React from 'react';
+export default function NeonSignInButton(): React.JSX.Element;

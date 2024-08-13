@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from 'react';
 export interface UserCardProps {
     pictureUrl: string;
     email: string;
@@ -6,5 +6,5 @@ export interface UserCardProps {
     providers: string;
     lastLogin?: string;
 }
-declare const UserCard: (props: UserCardProps) => JSX.Element;
+declare const UserCard: (props: UserCardProps) => React.JSX.Element;
 export default UserCard;

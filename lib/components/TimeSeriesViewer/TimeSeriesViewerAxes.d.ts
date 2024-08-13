@@ -1,4 +1,5 @@
 /**
    Main Component
 */
-export default function TimeSeriesViewerAxes(): import("react/jsx-runtime").JSX.Element;
+export default function TimeSeriesViewerAxes(): React.JSX.Element;
+import React from 'react';

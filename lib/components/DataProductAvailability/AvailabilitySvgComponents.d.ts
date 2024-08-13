@@ -1,4 +1,4 @@
-export function SvgDefs(): import("react/jsx-runtime").JSX.Element;
+export function SvgDefs(): React.JSX.Element;
 export const CELL_ATTRS: {
     available: {
         stroke: null;
@@ -118,18 +118,19 @@ export const CELL_ATTRS: {
         stroke: string;
     };
 };
-export function JsxCell(props: any): import("react/jsx-runtime").JSX.Element;
+export function JsxCell(props: any): React.JSX.Element;
 export namespace JsxCell {
     namespace propTypes {
-        const status: PropTypes.Validator<string>;
-        const x: PropTypes.Requireable<number>;
-        const y: PropTypes.Requireable<number>;
+        let status: PropTypes.Validator<string>;
+        let x: PropTypes.Requireable<number>;
+        let y: PropTypes.Requireable<number>;
     }
     namespace defaultProps {
-        const x_1: number;
+        let x_1: number;
         export { x_1 as x };
-        const y_1: number;
+        let y_1: number;
         export { y_1 as y };
     }
 }
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';

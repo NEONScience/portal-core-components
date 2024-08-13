@@ -17,8 +17,8 @@ export default html = `<header class="header" role="banner">
     </label>
     <div class="authContainer">
               <div class="openid-connect-login-form" data-drupal-selector="openid-connect-login-form" id="block-openid-connect-login">
-  
-    
+
+
       <form action="/neon-assets/partial/header" method="post" id="openid-connect-login-form" accept-charset="UTF-8">
   <div>
 
@@ -34,29 +34,29 @@ export default html = `<header class="header" role="banner">
     <div class="header__site-navigation">
       <div class="header__menu-main">
         <nav role="navigation" aria-labelledby="block-neon-main-menu-menu" id="block-neon-main-menu">
-            
-  <h2 class="visually-hidden" id="block-neon-main-menu-menu">Main navigation</h2>
-  
 
-        
+  <h2 class="visually-hidden" id="block-neon-main-menu-menu">Main navigation</h2>
+
+
+
           <ul  class="menu menu--main" data-depth="0">
 
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/about" class="menu__link" title="About Us" data-plugin-id="menu_link_content:cf5cd374-1932-49b4-84fb-c84373c74a2e" data-drupal-link-system-path="node/8793">About Us</a>
 
-          
+
                                         <button class='arrow visually-hidden focusable' tabindex='0' aria-label='Toggle Mega Menu'><svg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M9 1L5 5 1 1' stroke='#fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></button>
 
                             <div class='subNavWrapper'>
                             <div class='innerSubNavWrapper'>
-            
+
                       <ul  class="menu menu--main" data-depth="1">
 
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/about/overview" class="menu__link" data-plugin-id="menu_link_content:6becd40c-e404-4c45-86a7-b9e351526149" data-drupal-link-system-path="node/10531">Overview</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
@@ -67,11 +67,11 @@ export default html = `<header class="header" role="banner">
           <a href="https://www.neonscience.org/about/overview/history" class="menu__link" data-plugin-id="menu_link_content:a6cad402-12cf-4d6d-8908-0f84d8fdcc32" data-drupal-link-system-path="node/19">History</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item">
@@ -81,26 +81,26 @@ export default html = `<header class="header" role="banner">
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/diversity-equity-inclusion-accessibility" class="menu__link" data-plugin-id="menu_link_content:f69eb71a-7b87-4982-b572-1eb7e7f6022a" data-drupal-link-system-path="node/11556">Diversity, Equity, Inclusion, and Accessibility (DEIA)</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
           <a href="https://www.neonscience.org/neon-code-conduct" class="menu__link" data-plugin-id="menu_link_content:bc4a11ea-ed09-4faf-97e2-3d90fb4400ba" data-drupal-link-system-path="node/12759">Code of Conduct</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/about/advisory-groups" class="menu__link" data-plugin-id="menu_link_content:7d3b1161-a0d0-4e64-9379-8898b249458e" data-drupal-link-system-path="node/10534">Advisory Groups</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
@@ -111,11 +111,11 @@ export default html = `<header class="header" role="banner">
           <a href="https://www.neonscience.org/about/advisory-groups/twgs" class="menu__link" data-plugin-id="menu_link_content:60269894-fe67-449d-ae3c-b8e5c8332cd5" data-drupal-link-system-path="node/6273">Technical Working Groups (TWGs)</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item">
@@ -125,8 +125,8 @@ export default html = `<header class="header" role="banner">
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/about/contact-us" class="menu__link" data-plugin-id="menu_link_content:8af9dbd6-f100-467c-aedb-03e8436af553" data-drupal-link-system-path="node/24">Contact Us</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
@@ -137,11 +137,11 @@ export default html = `<header class="header" role="banner">
           <a href="https://www.neonscience.org/about/contact-us/field-offices" class="menu__link" data-plugin-id="menu_link_content:4a00dcaf-25f1-4972-9011-197d08a6d57d" data-drupal-link-system-path="node/7874">Field Offices</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item">
@@ -152,9 +152,9 @@ export default html = `<header class="header" role="banner">
           <a href="https://www.neonscience.org/about/staff" class="menu__link" data-plugin-id="menu_link_content:4abe0e55-92f6-4a6b-80f8-bbe802ba5df4" data-drupal-link-system-path="node/8802">Staff</a>
 
                   </li>
-      
+
           </ul>
-  
+
 
                           </div>
 
@@ -170,25 +170,25 @@ export default html = `<header class="header" role="banner">
               </div>
                             </div>
 
-            
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-samples" class="menu__link" data-plugin-id="menu_link_content:f20b3a84-1e6a-4e28-8360-b1c56a8678de" data-drupal-link-system-path="node/1">Data &amp; Samples</a>
 
-          
+
                                         <button class='arrow visually-hidden focusable' tabindex='0' aria-label='Toggle Mega Menu'><svg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M9 1L5 5 1 1' stroke='#fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></button>
 
                             <div class='subNavWrapper'>
                             <div class='innerSubNavWrapper'>
-            
+
                       <ul  class="menu menu--main" data-depth="1">
 
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data" class="menu__link" data-plugin-id="menu_link_content:b3fed72f-4451-475a-aaed-5afc65fa5b44" data-drupal-link-system-path="node/8858">Data Portal</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
@@ -219,18 +219,18 @@ export default html = `<header class="header" role="banner">
           <a href="https://data.neonscience.org/web/external-lab-ingest" class="menu__link" data-plugin-id="menu_link_content:22ee6087-e223-40f3-8b5d-bd64df368c00">External Lab Data Ingest (restricted)</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-samples/data-themes" class="menu__link" data-plugin-id="menu_link_content:26671658-c210-44f9-befe-b80dc033466d" data-drupal-link-system-path="node/12907">Data Themes</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
@@ -253,25 +253,25 @@ export default html = `<header class="header" role="banner">
           <a href="https://www.neonscience.org/data-samples/data-themes/organismal-data-theme" class="menu__link" data-plugin-id="menu_link_content:a92082bc-534f-48c7-b67a-2c9edb91f3f9" data-drupal-link-system-path="node/12905">Organisms, Populations, and Communities</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/samples" class="menu__link" data-plugin-id="menu_link_content:209fc9e1-01d3-4e02-8fc7-30ee57a8a644" data-drupal-link-system-path="node/10295">Samples &amp; Specimens</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/samples/find-samples" class="menu__link" data-plugin-id="menu_link_content:3eb13091-f5c2-4504-907f-c08efdda5cf0" data-drupal-link-system-path="node/8174">Discover and Use NEON Samples</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="3">
 
               <li  class="menu__item">
@@ -290,11 +290,11 @@ export default html = `<header class="header" role="banner">
           <a href="https://www.neonscience.org/samples/soil-archive" class="menu__link" data-plugin-id="menu_link_content:dd42ebeb-0ce1-4e61-8a71-839b285a7f12" data-drupal-link-system-path="node/5">Megapit and Distributed Initial Characterization Soil Archives</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item">
@@ -309,18 +309,18 @@ export default html = `<header class="header" role="banner">
           <a href="https://data.neonscience.org/taxonomic-lists" class="menu__link" data-plugin-id="menu_link_content:4a328a5d-d8ff-453c-9453-8d7d37240bbc">Taxonomic Lists</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-collection" class="menu__link" data-plugin-id="menu_link_content:72722bb5-d146-4d66-805f-0da30e1d5658" data-drupal-link-system-path="node/4776">Collection Methods</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
@@ -330,8 +330,8 @@ export default html = `<header class="header" role="banner">
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-collection/airborne-remote-sensing" class="menu__link" data-plugin-id="menu_link_content:41b5a0e4-975c-4c08-a67c-0eca84b67ae6" data-drupal-link-system-path="node/3821">Airborne Remote Sensing</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="3">
 
               <li  class="menu__item">
@@ -345,19 +345,19 @@ export default html = `<header class="header" role="banner">
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-collection/daily-flight-reports" class="menu__link" data-plugin-id="menu_link_content:0be4facc-f958-4e94-aa01-44dad176c37c" data-drupal-link-system-path="node/10542">Daily Flight Reports</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="4">
 
               <li  class="menu__item">
           <a href="https://www.neonscience.org/aop-flight-report-sign" class="menu__link" data-plugin-id="menu_link_content:cf86300b-51b1-43cb-9da3-ded6764ec9e7" data-drupal-link-system-path="node/12625">AOP Flight Report Sign Up</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item">
@@ -372,18 +372,18 @@ export default html = `<header class="header" role="banner">
           <a href="https://www.neonscience.org/data-collection/lidar" class="menu__link" data-plugin-id="menu_link_content:753af91d-f86f-495d-aea5-943db9660a98" data-drupal-link-system-path="node/10551">Lidar</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-collection/automated-instruments" class="menu__link" data-plugin-id="menu_link_content:393dc0bd-ecea-40be-a9b4-afcdfcc6c328" data-drupal-link-system-path="node/7819">Automated Instruments</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="3">
 
               <li  class="menu__item">
@@ -397,8 +397,8 @@ export default html = `<header class="header" role="banner">
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-collection/instrumented-collection-types" class="menu__link" data-plugin-id="menu_link_content:6e8e91a9-749e-4a1d-ac52-cf8f5c0a4cac" data-drupal-link-system-path="node/10900">Instrumented Collection Types</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="4">
 
               <li  class="menu__item">
@@ -421,25 +421,25 @@ export default html = `<header class="header" role="banner">
           <a href="https://www.neonscience.org/data-collection/surface-water" class="menu__link" data-plugin-id="menu_link_content:e7ba717e-e605-43eb-b9c9-78ffda14eb5e" data-drupal-link-system-path="node/7840">Surface Water</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-collection/observational-sampling" class="menu__link" data-plugin-id="menu_link_content:e6368031-4425-41eb-8ebc-b7b4ec924bc6" data-drupal-link-system-path="node/7820">Observational Sampling</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="3">
 
               <li  class="menu__item">
@@ -453,15 +453,15 @@ export default html = `<header class="header" role="banner">
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-collection/observation-types" class="menu__link" data-plugin-id="menu_link_content:87627456-39bd-4415-a2f7-37c0f67bb854" data-drupal-link-system-path="node/10535">Observation Types</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="4">
 
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-collection/aquatic-organisms" class="menu__link" data-plugin-id="menu_link_content:516deb93-cdb1-4a2e-8f7b-63f9ad07197a" data-drupal-link-system-path="node/3277">Aquatic Organisms</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="5">
 
               <li  class="menu__item">
@@ -480,18 +480,18 @@ export default html = `<header class="header" role="banner">
           <a href="https://www.neonscience.org/data-collection/algae-aquatic-plants" class="menu__link" data-plugin-id="menu_link_content:c70b3110-19fe-4dee-abb7-a348c764810f" data-drupal-link-system-path="node/8278">Periphyton, Phytoplankton, and Aquatic Plants</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-collection/terrestrial-organisms" class="menu__link" data-plugin-id="menu_link_content:16da5ab4-b9d0-4612-8434-71a2afee4c7a" data-drupal-link-system-path="node/3278">Terrestrial Organisms</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="5">
 
               <li  class="menu__item">
@@ -522,18 +522,18 @@ export default html = `<header class="header" role="banner">
           <a href="https://www.neonscience.org/data-collection/ticks" class="menu__link" data-plugin-id="menu_link_content:729bc1f4-c6d2-4d44-8ac1-e16067e8c1d7" data-drupal-link-system-path="node/8615">Ticks</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-collection/hydrology-geomorphology" class="menu__link" data-plugin-id="menu_link_content:12e97bd1-71bc-49d3-9390-24f622275f1d" data-drupal-link-system-path="node/10536">Hydrology &amp; Geomorphology</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="5">
 
               <li  class="menu__item">
@@ -544,11 +544,11 @@ export default html = `<header class="header" role="banner">
           <a href="https://www.neonscience.org/data-collection/geomorphology" class="menu__link" data-plugin-id="menu_link_content:93725a97-68b1-411b-95b0-4adf9ad53994" data-drupal-link-system-path="node/7917">Geomorphology</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item">
@@ -570,44 +570,44 @@ export default html = `<header class="header" role="banner">
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-collection/soils" class="menu__link" data-plugin-id="menu_link_content:2ebade6e-2943-484d-8866-56d9757209fa" data-drupal-link-system-path="node/10549">Soils</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="5">
 
               <li  class="menu__item">
           <a href="https://www.neonscience.org/data-collection/soils/soil-descriptions" class="menu__link" data-plugin-id="menu_link_content:a2ac2127-3b05-46dc-9f7b-099a70593074" data-drupal-link-system-path="node/11685">Soil Descriptions</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item">
           <a href="https://www.neonscience.org/optimizing-observational-sampling-designs" class="menu__link" data-plugin-id="menu_link_content:0f4cdaa4-35fa-40dd-9a25-61aa940a2d55" data-drupal-link-system-path="node/13121">Optimizing the Observational Sampling Designs</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item">
@@ -617,8 +617,8 @@ export default html = `<header class="header" role="banner">
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-samples/guidelines-policies" class="menu__link" data-plugin-id="menu_link_content:dfbf44da-4c25-48ab-83c6-1e7bcbd5e7f1" data-drupal-link-system-path="node/11642">Data Guidelines and Policies</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
@@ -633,18 +633,18 @@ export default html = `<header class="header" role="banner">
           <a href="https://www.neonscience.org/data-samples/guidelines-policies/usage-policies" class="menu__link" data-plugin-id="menu_link_content:4492166d-5a94-4851-a5a8-0e9d65d5212b" data-drupal-link-system-path="node/11643">Usage Policies</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-samples/data-management" class="menu__link" data-plugin-id="menu_link_content:514fa833-7231-4f27-9e3f-b881c6d5ad62" data-drupal-link-system-path="node/10557">Data Management</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
@@ -670,8 +670,8 @@ export default html = `<header class="header" role="banner">
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases" class="menu__link" data-plugin-id="menu_link_content:dc7e1b39-d62b-4195-8330-817b7ea7ba24" data-drupal-link-system-path="node/10559">Data Product Revisions and Releases</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="3">
 
               <li  class="menu__item">
@@ -690,11 +690,11 @@ export default html = `<header class="header" role="banner">
           <a href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases/release-2024" class="menu__link" data-plugin-id="menu_link_content:0b6be74a-0e52-4351-958f-f86a8092282b" data-drupal-link-system-path="node/13469">Release 2024</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item">
@@ -705,16 +705,16 @@ export default html = `<header class="header" role="banner">
           <a href="https://www.neonscience.org/data-samples/data-management/externally-hosted-data" class="menu__link" data-plugin-id="menu_link_content:1c31d8a5-f543-4481-bc5c-b42102679e1c" data-drupal-link-system-path="node/10552">Externally Hosted Data</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
-      
+
           </ul>
-  
+
 
                           </div>
 
@@ -730,18 +730,18 @@ export default html = `<header class="header" role="banner">
               </div>
                             </div>
 
-            
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/field-sites" class="menu__link" data-plugin-id="menu_link_content:8c902e85-3057-4872-8758-5191bb971f53" data-drupal-link-system-path="node/11376">Field Sites</a>
 
-          
+
                                         <button class='arrow visually-hidden focusable' tabindex='0' aria-label='Toggle Mega Menu'><svg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M9 1L5 5 1 1' stroke='#fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></button>
 
                             <div class='subNavWrapper'>
                             <div class='innerSubNavWrapper'>
-            
+
                       <ul  class="menu menu--main" data-depth="1">
 
               <li  class="menu__item">
@@ -760,9 +760,9 @@ export default html = `<header class="header" role="banner">
           <a href="https://data.neonscience.org/data-products/DP1.10111.001" class="menu__link" data-plugin-id="menu_link_content:7c8d57da-a8ba-4c2e-a89f-ab71c319b33d">Site Management Data Product</a>
 
                   </li>
-      
+
           </ul>
-  
+
 
                           </div>
 
@@ -778,18 +778,18 @@ export default html = `<header class="header" role="banner">
               </div>
                             </div>
 
-            
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/impact" title="Impact" class="menu__link" data-plugin-id="menu_link_content:4878b38c-97fc-4a8b-9477-8e4ee7737dcc" data-drupal-link-system-path="node/8795">Impact</a>
 
-          
+
                                         <button class='arrow visually-hidden focusable' tabindex='0' aria-label='Toggle Mega Menu'><svg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M9 1L5 5 1 1' stroke='#fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></button>
 
                             <div class='subNavWrapper'>
                             <div class='innerSubNavWrapper'>
-            
+
                       <ul  class="menu menu--main" data-depth="1">
 
               <li  class="menu__item">
@@ -811,8 +811,8 @@ export default html = `<header class="header" role="banner">
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/impact/newsroom" class="menu__link" data-plugin-id="menu_link_content:a37d89e0-5437-4f0f-8a94-76bb6f9de92c" data-drupal-link-system-path="node/10890">Newsroom</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
@@ -827,16 +827,16 @@ export default html = `<header class="header" role="banner">
           <a href="https://www.neonscience.org/neon-newsletter-sign" class="menu__link" data-plugin-id="menu_link_content:4c3d8b65-97ca-4671-9162-c8f3b6b3b76a" data-drupal-link-system-path="node/12590">Newsletter Sign Up</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
-      
+
           </ul>
-  
+
 
                           </div>
 
@@ -852,18 +852,18 @@ export default html = `<header class="header" role="banner">
               </div>
                             </div>
 
-            
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/resources" class="menu__link" data-plugin-id="menu_link_content:a857cb6b-7d79-46c7-9be7-7c5f265721ae" data-drupal-link-system-path="node/6228">Resources</a>
 
-          
+
                                         <button class='arrow visually-hidden focusable' tabindex='0' aria-label='Toggle Mega Menu'><svg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M9 1L5 5 1 1' stroke='#fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></button>
 
                             <div class='subNavWrapper'>
                             <div class='innerSubNavWrapper'>
-            
+
                       <ul  class="menu menu--main" data-depth="1">
 
               <li  class="menu__item">
@@ -873,8 +873,8 @@ export default html = `<header class="header" role="banner">
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/resources/communication-resources" class="menu__link" data-plugin-id="menu_link_content:d816ca2b-6706-4aa4-b4ae-6baaf730a0a1" data-drupal-link-system-path="node/6316">Documents and Communication Resources</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
@@ -889,18 +889,18 @@ export default html = `<header class="header" role="banner">
           <a href="https://www.neonscience.org/resources/communications-resources/outreach-materials" class="menu__link" data-plugin-id="menu_link_content:0aaa9598-5e0d-4452-bec0-624658905ff7" data-drupal-link-system-path="node/10949">Outreach Materials</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/resources/code-hub" class="menu__link" data-plugin-id="menu_link_content:4b099d06-3a5a-4bba-bbd9-ef4efc17094e" data-drupal-link-system-path="node/7076">Code Hub</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
@@ -915,18 +915,18 @@ export default html = `<header class="header" role="banner">
           <a href="https://github.com/neonscience" class="menu__link" data-plugin-id="menu_link_content:b4fa71b6-2b86-42bb-a619-8948decccf4c">NEON&#039;s GitHub Organization Homepage</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/resources/learning-hub" class="menu__link" data-plugin-id="menu_link_content:cb7780e6-23a7-4605-b3da-c94c7a3b7de7" data-drupal-link-system-path="node/6136">Learning Hub</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
@@ -945,18 +945,18 @@ export default html = `<header class="header" role="banner">
           <a href="https://www.neonscience.org/resources/learning-hub/teaching-modules" class="menu__link" data-plugin-id="menu_link_content:6ecaa3eb-6d78-4ec6-a4c9-2564154470db" data-drupal-link-system-path="node/10909">Teaching Modules</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/resources/research-support" class="menu__link" data-plugin-id="menu_link_content:5af53ebb-9351-4942-989b-0c78514721c1" data-drupal-link-system-path="node/10764">Research Support Services</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
@@ -987,20 +987,20 @@ export default html = `<header class="header" role="banner">
           <a href="https://www.neonscience.org/resources/research-support/nrss-projects" class="menu__link" data-plugin-id="menu_link_content:f54d6f1b-0ebf-46be-be4c-47c6de77c7fc" data-drupal-link-system-path="node/13119">Research Support Projects</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item">
           <a href="https://www.neonscience.org/resources/funding-opportunities" class="menu__link" data-plugin-id="menu_link_content:67efc63f-fc52-491c-a9be-4b1c66225712" data-drupal-link-system-path="node/11327">Funding Opportunities </a>
 
                   </li>
-      
+
           </ul>
-  
+
 
                           </div>
 
@@ -1016,25 +1016,25 @@ export default html = `<header class="header" role="banner">
               </div>
                             </div>
 
-            
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/get-involved" class="menu__link" data-plugin-id="menu_link_content:d5bd0f4f-d783-4405-b899-1e7680f1f88f" data-drupal-link-system-path="node/6753">Get Involved</a>
 
-          
+
                                         <button class='arrow visually-hidden focusable' tabindex='0' aria-label='Toggle Mega Menu'><svg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M9 1L5 5 1 1' stroke='#fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></button>
 
                             <div class='subNavWrapper'>
                             <div class='innerSubNavWrapper'>
-            
+
                       <ul  class="menu menu--main" data-depth="1">
 
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/about/advisory-groups" class="menu__link" data-plugin-id="menu_link_content:05c66823-e082-4444-a52e-dfba3e2a4396" data-drupal-link-system-path="node/10534">Advisory Groups</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
@@ -1045,11 +1045,11 @@ export default html = `<header class="header" role="banner">
           <a href="https://www.neonscience.org/about/advisory-groups/twgs" class="menu__link" data-plugin-id="menu_link_content:8badae4b-878e-4ed6-9369-27630c59049d" data-drupal-link-system-path="node/6273">Technical Working Groups</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item">
@@ -1063,26 +1063,26 @@ export default html = `<header class="header" role="banner">
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/neon-ambassador-program" class="menu__link" data-plugin-id="menu_link_content:c7e5c1a7-f0e7-440e-a410-4aaca896b64b" data-drupal-link-system-path="node/11625">NEON Ambassador Program</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
           <a href="https://www.neonscience.org/workshop-series-exploring-neon-derived-data-products" class="menu__link" data-plugin-id="menu_link_content:f23464a6-0005-45c9-a8e8-65e44fd1f580" data-drupal-link-system-path="node/12804">Exploring NEON-Derived Data Products Workshop Series</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/research-and-collaborations" class="menu__link" data-plugin-id="menu_link_content:7ad2b09c-c124-4a91-84b1-4b2ff93bd594" data-drupal-link-system-path="node/12059">Research and Collaborations</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
@@ -1108,69 +1108,69 @@ export default html = `<header class="header" role="banner">
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/ncar-neon-community-collaborations" class="menu__link" data-plugin-id="menu_link_content:2bc3207d-fc3c-4d83-a352-5842f74b01bf" data-drupal-link-system-path="node/11843">NCAR-NEON-Community Collaborations</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="3">
 
               <li  class="menu__item">
           <a href="https://www.neonscience.org/ncar-neon-community-steering-committee" class="menu__link" data-plugin-id="menu_link_content:0cad2c2e-e83b-498c-aa34-4cc68ded2cb7" data-drupal-link-system-path="node/13474">NCAR-NEON Community Steering Committee</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/get-involved/engagement" class="menu__link" data-plugin-id="menu_link_content:32ac66ec-e6bb-4590-ad08-5c16f174f3b8" data-drupal-link-system-path="node/10556">Community Engagement</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
           <a href="https://www.neonscience.org/how-community-feedback-impacts-neon-operations" class="menu__link" data-plugin-id="menu_link_content:5d01343d-0325-4607-9467-31626840164a" data-drupal-link-system-path="node/14028">How Community Feedback Impacts NEON Operations</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/science-seminars-and-data-skills-webinars" class="menu__link" data-plugin-id="menu_link_content:72575261-4a4a-4e78-a936-2094fc3ba1c6" data-drupal-link-system-path="node/12373">Science Seminars and Data Skills Webinars</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
           <a href="https://www.neonscience.org/past-years-science-seminars-and-data-skills-webinars" class="menu__link" data-plugin-id="menu_link_content:bf68301d-8f19-4a9d-a118-5bac4657920d" data-drupal-link-system-path="node/12997">Past Years</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/get-involved/work-opportunities" class="menu__link" data-plugin-id="menu_link_content:01967027-b778-4bf5-ae89-7f0616c6ef68" data-drupal-link-system-path="node/6229">Work Opportunities</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
@@ -1184,35 +1184,35 @@ export default html = `<header class="header" role="banner">
               <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/get-involved/work-opportunities/internships" class="menu__link" data-plugin-id="menu_link_content:3b6d3456-22c5-48b6-a553-c84e5535a0a9" data-drupal-link-system-path="node/16">Internships</a>
 
-          
-            
+
+
                       <ul  class="menu menu--main" data-depth="3">
 
               <li  class="menu__item">
           <a href="https://www.neonscience.org/get-involved/work-opportunities/internships/intern-alumni" class="menu__link" data-plugin-id="menu_link_content:19e4645b-8092-4eb7-8ca2-8003844b6247" data-drupal-link-system-path="node/10553">Intern Alumni</a>
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
-      
-          </ul>
-  
 
-            
+          </ul>
+
+
+
 
                   </li>
               <li  class="menu__item">
           <a href="https://www.neonscience.org/get-involved/partners" class="menu__link" data-plugin-id="menu_link_content:bbf150a7-d1e4-4cfa-a8b0-847989c52745" data-drupal-link-system-path="node/8094">Partners</a>
 
                   </li>
-      
+
           </ul>
-  
+
 
                           </div>
 
@@ -1228,10 +1228,10 @@ export default html = `<header class="header" role="banner">
               </div>
                             </div>
 
-            
+
 
                   </li>
-      
+
                       <li class="myAccount">
           <a href="/user/login" title="My Account" class="menu__link">My Account</a>
         </li>
@@ -1240,17 +1240,17 @@ export default html = `<header class="header" role="banner">
           <a href="/search/site" title="Search" class="menu__link">Search</a>
         </li>
                 <li class="siteSearch isMobile">
-          
+
 <div
   class="search-form-mobile isMobile"
   id="block-searchform-mobile"
   role="search"
 >
-  
+
 
 <div class="search-api-form" data-drupal-selector="search-api-form" id="block-searchform">
-  
-    
+
+
       <form action="/search/site" method="get" id="search-api-form" accept-charset="UTF-8">
   <div class="js-form-item form-item js-form-type-search form-item-title js-form-item-title form-no-label">
         <input title="Enter the terms you wish to search for." data-drupal-selector="edit-title" type="search" id="edit-title" name="title" value="" size="15" maxlength="128" placeholder="" class="form-search" />
@@ -1269,7 +1269,7 @@ export default html = `<header class="header" role="banner">
 </div>
         </li>
           </ul>
-  
+
 
 
   </nav>
@@ -1280,11 +1280,11 @@ export default html = `<header class="header" role="banner">
   <div class="l--offset isDesktop header__search visually-hidden">
     <div class="header__search--inner">
         <h3 class="header__search--title">Search</h3>
-        
+
 
 <div class="search-api-form" data-drupal-selector="search-api-form" id="block-searchform">
-  
-    
+
+
       <form action="/search/site" method="get" id="search-api-form" accept-charset="UTF-8">
   <div class="js-form-item form-item js-form-type-search form-item-title js-form-item-title form-no-label">
         <input title="Enter the terms you wish to search for." data-drupal-selector="edit-title" type="search" id="edit-title" name="title" value="" size="15" maxlength="128" placeholder="" class="form-search" />

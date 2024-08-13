@@ -21,4 +21,4 @@
    }
 */
 export default function parseDomainHierarchy(rawHierarchy: any): Parallel;
-import Parallel from "../vendor/paralleljs";
+import Parallel from '../vendor/paralleljs';

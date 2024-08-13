@@ -1,1 +1,2 @@
-export default function TimeSeriesViewerGraph(): import("react/jsx-runtime").JSX.Element;
+export default function TimeSeriesViewerGraph(): React.JSX.Element;
+import React from 'react';

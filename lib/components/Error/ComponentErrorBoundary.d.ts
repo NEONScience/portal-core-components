@@ -1,8 +1,5 @@
-import React from 'react';
+import React, { ErrorInfo } from 'react';
 import { FallbackProps } from 'react-error-boundary';
-interface ErrorInfo {
-    componentStack: string;
-}
 interface ComponentErrorBoundaryProps {
     children: React.ReactNode | React.ReactNode[];
     onReset?: (...args: Array<unknown>) => void;

@@ -58,7 +58,7 @@ export const VALID_ENHANCED_STATUSES: {
 export function calcBasicRollupStatus(statuses: any): any;
 export function calcRollupStatus(statuses?: any[]): any;
 export namespace AvailabilityPropTypes {
-    const basicSiteCodes: PropTypes.Requireable<(PropTypes.InferProps<{
+    let basicSiteCodes: PropTypes.Requireable<(PropTypes.InferProps<{
         siteCode: PropTypes.Validator<string>;
         availableMonths: PropTypes.Validator<(string | null | undefined)[]>;
         availableReleases: PropTypes.Requireable<(PropTypes.InferProps<{
@@ -66,7 +66,7 @@ export namespace AvailabilityPropTypes {
             availableMonths: PropTypes.Validator<(string | null | undefined)[]>;
         }> | null | undefined)[]>;
     }> | null | undefined)[]>;
-    const enhancedSites: PropTypes.Requireable<(PropTypes.InferProps<{
+    let enhancedSites: PropTypes.Requireable<(PropTypes.InferProps<{
         siteCode: PropTypes.Validator<string>;
         tables: PropTypes.Validator<(PropTypes.InferProps<{
             name: PropTypes.Validator<string>;
@@ -77,7 +77,7 @@ export namespace AvailabilityPropTypes {
             }>;
         }> | null | undefined)[]>;
     }> | null | undefined)[]>;
-    const dataProducts: PropTypes.Requireable<(PropTypes.InferProps<{
+    let dataProducts: PropTypes.Requireable<(PropTypes.InferProps<{
         dataProductCode: PropTypes.Validator<string>;
         dataProductTitle: PropTypes.Validator<string>;
         availableMonths: PropTypes.Validator<(string | null | undefined)[]>;
@@ -88,18 +88,18 @@ export namespace AvailabilityPropTypes {
     }> | null | undefined)[]>;
 }
 export namespace SVG {
-    const MIN_WIDTH: number;
-    const MIN_HEIGHT: number;
-    const YEAR_MONTH_WIDTH: number;
-    const YEAR_WIDTH: number;
-    const ABS_MAX_DATA_WIDTH: number;
+    let MIN_WIDTH: number;
+    let MIN_HEIGHT: number;
+    let YEAR_MONTH_WIDTH: number;
+    let YEAR_WIDTH: number;
+    let ABS_MAX_DATA_WIDTH: number;
 }
 export namespace TIME {
-    const MIN_YEAR_MONTH: string;
-    const MAX_YEAR_MONTH: string;
-    const YEARS: number[];
-    const MONTHS: string[];
-    const YEAR_MONTHS: any;
+    let MIN_YEAR_MONTH: string;
+    let MAX_YEAR_MONTH: string;
+    let YEARS: number[];
+    let MONTHS: string[];
+    let YEAR_MONTHS: any;
 }
 export namespace SVG_STYLES {
     /**
@@ -117,4 +117,4 @@ export namespace SVG_STYLES {
     */
     function touchRipple(selection: any, duration?: number): void;
 }
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
