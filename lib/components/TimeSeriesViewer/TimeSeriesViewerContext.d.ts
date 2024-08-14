@@ -303,13 +303,7 @@ export type ParseSiteVariablesReturn = {
     /**
      * - set of all variable names to be stored in state at the site level
      */
-    /**
-     * - set of all variable names to be stored in state at the site level
-     */
     variablesSet: Set<any>;
-    /**
-     * - updated object to be applied at state.variables
-     */
     /**
      * - updated object to be applied at state.variables
      */

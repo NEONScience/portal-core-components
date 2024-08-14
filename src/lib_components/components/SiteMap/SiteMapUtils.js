@@ -70,7 +70,7 @@ export const isCoord = (c) => Array.isArray(c)
 
 export const MAP_ZOOM_RANGE = [1, 19];
 export const OBSERVATORY_CENTER = [52.68, -110.75];
-export const MAP_ZOOM_DEFAULT = 3;
+export const MAP_ZOOM_DEFAULT = 2;
 
 export const MIN_CONTAINER_HEIGHT = 300;
 export const MIN_TABLE_MAX_BODY_HEIGHT = 100;
