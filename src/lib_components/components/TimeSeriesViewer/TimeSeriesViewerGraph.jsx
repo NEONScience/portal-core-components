@@ -73,7 +73,7 @@ const QUALITY_COLORS = [
   '#ffed6f',
 ];
 
-const BASE_GRAPH_OPTIONS = {
+const getBaseGraphOptions = () => ({
   includeZero: true,
   labelsUTC: true,
   labelsKMB: false,
@@ -95,7 +95,7 @@ const BASE_GRAPH_OPTIONS = {
   plugins: [
     new Dygraph.Plugins.Crosshair({ direction: 'vertical' }),
   ],
-};
+});
 
 const useStyles = makeStyles((theme) => ({
   graphOuterContainer: {
@@ -279,7 +279,7 @@ export default function TimeSeriesViewerGraph() {
   } = state.selection;
 
   // let data = cloneDeep(NULL_DATA);
-  let graphOptions = cloneDeep(BASE_GRAPH_OPTIONS);
+  let graphOptions = cloneDeep(getBaseGraphOptions());
 
   // Build the axes option
   const buildAxesOption = (axes = []) => {
@@ -532,7 +532,7 @@ export default function TimeSeriesViewerGraph() {
     // Build graphOptions
     const { series, labels } = state.graphData;
     graphOptions = {
-      ...cloneDeep(BASE_GRAPH_OPTIONS),
+      ...cloneDeep(getBaseGraphOptions()),
       labels,
       axes: buildAxesOption(axes),
       series: buildSeriesOption(axes),

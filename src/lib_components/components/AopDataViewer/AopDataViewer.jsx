@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import { of, map, catchError } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 
-import dateFormat from 'dateformat';
+import moment from 'moment';
 
 import { makeStyles } from '@mui/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -164,7 +164,7 @@ const AopDataViewer = (props) => {
     if (!data[site] || !data[site][year] || !data[site][year][flightIdx]) { return ''; }
     const parts = {
       site: getSiteDescription(site),
-      date: dateFormat(new Date(`${year}-${data[site][year][flightIdx].month}-02`), 'mmmm yyyy'),
+      date: moment(new Date(`${year}-${data[site][year][flightIdx].month}-02`)).format('MMMM YYYY'),
       flight: `Flight ${flight}/${data[site][year].length}`,
     };
     return `${parts.site} -- ${parts.date} -- ${parts.flight}`;
@@ -418,7 +418,7 @@ const AopDataViewer = (props) => {
     if (!flight || !data[site] || !data[site][year] || !data[site][year].length) { return null; }
     const total = data[site][year].length;
     const getFlightLabel = (flightNumber, month) => (
-      `${flightNumber}/${total} (${dateFormat(new Date(`2000-${month}-02`), 'mmmm')})`
+      `${flightNumber}/${total} (${moment(new Date(`2000-${month}-02`)).format('MMMM')})`
     );
     return (
       <Select

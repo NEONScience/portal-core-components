@@ -1,7 +1,7 @@
 export function isCoord(c: any): boolean;
 export const MAP_ZOOM_RANGE: number[];
 export const OBSERVATORY_CENTER: number[];
-export const MAP_ZOOM_DEFAULT: 3;
+export const MAP_ZOOM_DEFAULT: 2;
 export const MIN_CONTAINER_HEIGHT: 300;
 export const MIN_TABLE_MAX_BODY_HEIGHT: 100;
 export const KM2_TO_ACRES: 247.10538146717;

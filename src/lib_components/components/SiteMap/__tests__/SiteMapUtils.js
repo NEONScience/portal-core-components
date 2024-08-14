@@ -184,11 +184,11 @@ describe('SiteMap - SiteMapUtils', () => {
 
   describe('deriveFullObservatoryZoomLevel()', () => {
     test('returns FALLBACK_ZOOM if provided mapRef is not valid', () => {
-      expect(deriveFullObservatoryZoomLevel()).toBe(3);
-      expect(deriveFullObservatoryZoomLevel({ current: null })).toBe(3);
+      expect(deriveFullObservatoryZoomLevel()).toBe(2);
+      expect(deriveFullObservatoryZoomLevel({ current: null })).toBe(2);
     });
     test('returns appropriate zoom levels for various container sizes', () => {
-      const mapRef = { current: { container: { parentElement: {} } } };
+      const mapRef = { current: { _container: { parentElement: {} } } };
       [
         [10, 0, 2],
         [0, 10, 2],
@@ -202,8 +202,8 @@ describe('SiteMap - SiteMapUtils', () => {
         [1200, 600, 2],
       ].forEach((test) => {
         /* eslint-disable prefer-destructuring */
-        mapRef.current.container.parentElement.clientWidth = test[0];
-        mapRef.current.container.parentElement.clientHeight = test[1];
+        mapRef.current._container.parentElement.clientWidth = test[0];
+        mapRef.current._container.parentElement.clientHeight = test[1];
         expect(deriveFullObservatoryZoomLevel(mapRef)).toBe(test[2]);
         /* eslint-enable prefer-destructuring */
       });

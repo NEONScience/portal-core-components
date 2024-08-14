@@ -3,6 +3,7 @@ import renderer from 'react-test-renderer';
 
 import cloneDeep from 'lodash/cloneDeep';
 
+import MockTheme from '../../../../__mocks__/MockTheme';
 import TimeSeriesViewerContext, { DEFAULT_STATE } from '../TimeSeriesViewerContext';
 import { TimeSeriesViewerSummary } from '../TimeSeriesViewerContainer';
 
@@ -24,7 +25,7 @@ describe('TimeSeriesViewerContainer', () => {
         ...cloneDeep(DEFAULT_STATE),
       }]);
       const tree = renderer
-        .create(<TimeSeriesViewerSummary />)
+        .create(<MockTheme><TimeSeriesViewerSummary /></MockTheme>)
         .toJSON();
       expect(tree).toMatchSnapshot();
     });
@@ -38,7 +39,7 @@ describe('TimeSeriesViewerContainer', () => {
         },
       }]);
       const tree = renderer
-        .create(<TimeSeriesViewerSummary />)
+        .create(<MockTheme><TimeSeriesViewerSummary /></MockTheme>)
         .toJSON();
       expect(tree).toMatchSnapshot();
     });
@@ -53,7 +54,7 @@ describe('TimeSeriesViewerContainer', () => {
         },
       }]);
       const tree = renderer
-        .create(<TimeSeriesViewerSummary />)
+        .create(<MockTheme><TimeSeriesViewerSummary /></MockTheme>)
         .toJSON();
       expect(tree).toMatchSnapshot();
     });
@@ -74,7 +75,7 @@ describe('TimeSeriesViewerContainer', () => {
         },
       }]);
       const tree = renderer
-        .create(<TimeSeriesViewerSummary />)
+        .create(<MockTheme><TimeSeriesViewerSummary /></MockTheme>)
         .toJSON();
       expect(tree).toMatchSnapshot();
     });
@@ -92,7 +93,7 @@ describe('TimeSeriesViewerContainer', () => {
         },
       }]);
       const tree = renderer
-        .create(<TimeSeriesViewerSummary />)
+        .create(<MockTheme><TimeSeriesViewerSummary /></MockTheme>)
         .toJSON();
       expect(tree).toMatchSnapshot();
     });
@@ -110,7 +111,7 @@ describe('TimeSeriesViewerContainer', () => {
         },
       }]);
       const tree = renderer
-        .create(<TimeSeriesViewerSummary />)
+        .create(<MockTheme><TimeSeriesViewerSummary /></MockTheme>)
         .toJSON();
       expect(tree).toMatchSnapshot();
     });
@@ -129,7 +130,7 @@ describe('TimeSeriesViewerContainer', () => {
         },
       }]);
       const tree = renderer
-        .create(<TimeSeriesViewerSummary />)
+        .create(<MockTheme><TimeSeriesViewerSummary /></MockTheme>)
         .toJSON();
       expect(tree).toMatchSnapshot();
     });
@@ -152,7 +153,7 @@ describe('TimeSeriesViewerContainer', () => {
         },
       }]);
       const tree = renderer
-        .create(<TimeSeriesViewerSummary />)
+        .create(<MockTheme><TimeSeriesViewerSummary /></MockTheme>)
         .toJSON();
       expect(tree).toMatchSnapshot();
     });

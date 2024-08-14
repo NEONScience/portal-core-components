@@ -7,19 +7,19 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
   >
     <div>
       <h6
-        className="MuiTypography-root MuiTypography-h6"
+        className="MuiTypography-root MuiTypography-h6 css-134ad2t-MuiTypography-root"
       >
         Data Product
       </h6>
       <p
-        className="MuiTypography-root MuiTypography-body2"
+        className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
       />
     </div>
     <div>
       <span
-        className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+        className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
         style={
-          Object {
+          {
             "height": 10,
             "marginBottom": "12px",
             "marginTop": "4px",
@@ -28,9 +28,9 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
         }
       />
       <span
-        className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+        className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
         style={
-          Object {
+          {
             "height": 10,
             "marginBottom": "12px",
             "marginTop": "4px",
@@ -39,9 +39,9 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
         }
       />
       <span
-        className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+        className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
         style={
-          Object {
+          {
             "height": 10,
             "marginBottom": "12px",
             "marginTop": "4px",
@@ -50,9 +50,9 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
         }
       />
       <span
-        className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+        className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
         style={
-          Object {
+          {
             "height": 10,
             "marginBottom": "12px",
             "marginTop": "4px",
@@ -66,12 +66,12 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
     className="makeStyles-summaryDiv-9"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       Release
     </h6>
     <p
-      className="MuiTypography-root MuiTypography-body2"
+      className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
     >
       Latest released and provisional data (release: unknown)
     </p>
@@ -80,14 +80,14 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
     className="makeStyles-summaryDiv-9"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       Sites & Positions
     </h6>
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": 10,
           "marginBottom": "12px",
           "marginTop": "4px",
@@ -100,14 +100,14 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
     className="makeStyles-summaryDiv-9"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       Date Range
     </h6>
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": 10,
           "marginBottom": "12px",
           "marginTop": "4px",
@@ -120,14 +120,14 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
     className="makeStyles-summaryDiv-9"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       Variables
     </h6>
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": 10,
           "marginBottom": "12px",
           "marginTop": "4px",
@@ -140,36 +140,36 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
     className="makeStyles-summaryDiv-9"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       x/y Axes
     </h6>
     <table
-      className="MuiTable-root"
+      className="MuiTable-root css-x9dllz-MuiTable-root"
       role={null}
     >
       <tbody
-        className="MuiTableBody-root"
+        className="MuiTableBody-root css-apqrd9-MuiTableBody-root"
         role={null}
       >
         <tr
-          className="MuiTableRow-root"
+          className="MuiTableRow-root css-1egrlw9-MuiTableRow-root"
           role={null}
         >
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisTitle-10 MuiTableCell-sizeSmall"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisTitle-10 css-ezqyqq-MuiTableCell-root"
           >
             x
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisSettings-11 MuiTableCell-sizeSmall"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisSettings-11 css-ezqyqq-MuiTableCell-root"
           >
             <div
               style={
-                Object {
-                  "marginRight": 16,
+                {
+                  "marginRight": "16px",
                   "whiteSpace": "nowrap",
                 }
               }
@@ -192,30 +192,30 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
 exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined product with sensor / with default selection 1`] = `
 <div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-41"
   >
     <div
       style={
-        Object {
-          "marginRight": 8,
+        {
+          "marginRight": "8px",
         }
       }
     >
       <h6
-        className="MuiTypography-root MuiTypography-subtitle2"
+        className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
       >
         Data Product
       </h6>
       <p
-        className="MuiTypography-root MuiTypography-body2"
+        className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
       >
         <a
-          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
           href="https://data.neonscience.org/data-products/DP0.00000.000"
           onBlur={[Function]}
           onFocus={[Function]}
           style={
-            Object {
+            {
               "fontWeight": 600,
             }
           }
@@ -227,20 +227,20 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
     </div>
     <div>
       <p
-        className="MuiTypography-root MuiTypography-body2"
+        className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
       >
         This is a product that products
       </p>
       <p
-        className="MuiTypography-root MuiTypography-body2"
+        className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
       >
         <b>
           Sensor:
         </b>
         <span
           style={
-            Object {
-              "marginLeft": 4,
+            {
+              "marginLeft": "4px",
             }
           }
         >
@@ -250,31 +250,31 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
     </div>
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-41"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       Release
     </h6>
     <p
-      className="MuiTypography-root MuiTypography-body2"
+      className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
     >
       Latest released and provisional data (release: unknown)
     </p>
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-41"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       Sites & Positions
     </h6>
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": 10,
           "marginBottom": "12px",
           "marginTop": "4px",
@@ -284,17 +284,17 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-41"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       Date Range
     </h6>
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": 10,
           "marginBottom": "12px",
           "marginTop": "4px",
@@ -304,17 +304,17 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-41"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       Variables
     </h6>
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": 10,
           "marginBottom": "12px",
           "marginTop": "4px",
@@ -324,45 +324,45 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-41"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       x/y Axes
     </h6>
     <table
-      className="MuiTable-root"
+      className="MuiTable-root css-x9dllz-MuiTable-root"
       role={null}
     >
       <tbody
-        className="MuiTableBody-root"
+        className="MuiTableBody-root css-apqrd9-MuiTableBody-root"
         role={null}
       >
         <tr
-          className="MuiTableRow-root"
+          className="MuiTableRow-root css-1egrlw9-MuiTableRow-root"
           role={null}
         >
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisTitle-10 MuiTableCell-sizeSmall"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisTitle-42 css-ezqyqq-MuiTableCell-root"
           >
             x
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisSettings-11 MuiTableCell-sizeSmall"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisSettings-43 css-ezqyqq-MuiTableCell-root"
           >
             <div
               style={
-                Object {
-                  "marginRight": 16,
+                {
+                  "marginRight": "16px",
                   "whiteSpace": "nowrap",
                 }
               }
             >
               <span
-                className="makeStyles-axisSettingTitle-12"
+                className="makeStyles-axisSettingTitle-44"
               >
                 Time step:
               </span>
@@ -379,30 +379,30 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
 exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined product without sensor / with default selection 1`] = `
 <div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-25"
   >
     <div
       style={
-        Object {
-          "marginRight": 8,
+        {
+          "marginRight": "8px",
         }
       }
     >
       <h6
-        className="MuiTypography-root MuiTypography-subtitle2"
+        className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
       >
         Data Product
       </h6>
       <p
-        className="MuiTypography-root MuiTypography-body2"
+        className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
       >
         <a
-          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
           href="https://data.neonscience.org/data-products/DP0.00000.000"
           onBlur={[Function]}
           onFocus={[Function]}
           style={
-            Object {
+            {
               "fontWeight": 600,
             }
           }
@@ -414,38 +414,38 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
     </div>
     <div>
       <p
-        className="MuiTypography-root MuiTypography-body2"
+        className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
       >
         This is a product that products
       </p>
     </div>
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-25"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       Release
     </h6>
     <p
-      className="MuiTypography-root MuiTypography-body2"
+      className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
     >
       Latest released and provisional data (release: unknown)
     </p>
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-25"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       Sites & Positions
     </h6>
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": 10,
           "marginBottom": "12px",
           "marginTop": "4px",
@@ -455,17 +455,17 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-25"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       Date Range
     </h6>
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": 10,
           "marginBottom": "12px",
           "marginTop": "4px",
@@ -475,17 +475,17 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-25"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       Variables
     </h6>
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": 10,
           "marginBottom": "12px",
           "marginTop": "4px",
@@ -495,45 +495,45 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-25"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       x/y Axes
     </h6>
     <table
-      className="MuiTable-root"
+      className="MuiTable-root css-x9dllz-MuiTable-root"
       role={null}
     >
       <tbody
-        className="MuiTableBody-root"
+        className="MuiTableBody-root css-apqrd9-MuiTableBody-root"
         role={null}
       >
         <tr
-          className="MuiTableRow-root"
+          className="MuiTableRow-root css-1egrlw9-MuiTableRow-root"
           role={null}
         >
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisTitle-10 MuiTableCell-sizeSmall"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisTitle-26 css-ezqyqq-MuiTableCell-root"
           >
             x
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisSettings-11 MuiTableCell-sizeSmall"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisSettings-27 css-ezqyqq-MuiTableCell-root"
           >
             <div
               style={
-                Object {
-                  "marginRight": 16,
+                {
+                  "marginRight": "16px",
                   "whiteSpace": "nowrap",
                 }
               }
             >
               <span
-                className="makeStyles-axisSettingTitle-12"
+                className="makeStyles-axisSettingTitle-28"
               >
                 Time step:
               </span>
@@ -550,30 +550,30 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
 exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection with axes 1`] = `
 <div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-121"
   >
     <div
       style={
-        Object {
-          "marginRight": 8,
+        {
+          "marginRight": "8px",
         }
       }
     >
       <h6
-        className="MuiTypography-root MuiTypography-subtitle2"
+        className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
       >
         Data Product
       </h6>
       <p
-        className="MuiTypography-root MuiTypography-body2"
+        className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
       >
         <a
-          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
           href="https://data.neonscience.org/data-products/DP0.00000.000"
           onBlur={[Function]}
           onFocus={[Function]}
           style={
-            Object {
+            {
               "fontWeight": 600,
             }
           }
@@ -585,38 +585,38 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     </div>
     <div>
       <p
-        className="MuiTypography-root MuiTypography-body2"
+        className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
       >
         This is a product that products
       </p>
     </div>
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-121"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       Release
     </h6>
     <p
-      className="MuiTypography-root MuiTypography-body2"
+      className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
     >
       Latest released and provisional data (release: unknown)
     </p>
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-121"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       Sites & Positions
     </h6>
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": 10,
           "marginBottom": "12px",
           "marginTop": "4px",
@@ -626,17 +626,17 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-121"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       Date Range
     </h6>
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": 10,
           "marginBottom": "12px",
           "marginTop": "4px",
@@ -646,17 +646,17 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-121"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       Variables
     </h6>
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": 10,
           "marginBottom": "12px",
           "marginTop": "4px",
@@ -666,45 +666,45 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-121"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       x/y Axes
     </h6>
     <table
-      className="MuiTable-root"
+      className="MuiTable-root css-x9dllz-MuiTable-root"
       role={null}
     >
       <tbody
-        className="MuiTableBody-root"
+        className="MuiTableBody-root css-apqrd9-MuiTableBody-root"
         role={null}
       >
         <tr
-          className="MuiTableRow-root"
+          className="MuiTableRow-root css-1egrlw9-MuiTableRow-root"
           role={null}
         >
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisTitle-10 MuiTableCell-sizeSmall"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisTitle-122 css-ezqyqq-MuiTableCell-root"
           >
             x
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisSettings-11 MuiTableCell-sizeSmall"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisSettings-123 css-ezqyqq-MuiTableCell-root"
           >
             <div
               style={
-                Object {
-                  "marginRight": 16,
+                {
+                  "marginRight": "16px",
                   "whiteSpace": "nowrap",
                 }
               }
             >
               <span
-                className="makeStyles-axisSettingTitle-12"
+                className="makeStyles-axisSettingTitle-124"
               >
                 Time step:
               </span>
@@ -712,14 +712,14 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
             </div>
             <div
               style={
-                Object {
-                  "marginRight": 16,
+                {
+                  "marginRight": "16px",
                   "whiteSpace": "nowrap",
                 }
               }
             >
               <span
-                className="makeStyles-axisSettingTitle-12"
+                className="makeStyles-axisSettingTitle-124"
               >
                 Roll period:
               </span>
@@ -728,29 +728,29 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           </td>
         </tr>
         <tr
-          className="MuiTableRow-root"
+          className="MuiTableRow-root css-1egrlw9-MuiTableRow-root"
           role={null}
         >
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisTitle-10 MuiTableCell-sizeSmall"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisTitle-122 css-ezqyqq-MuiTableCell-root"
           >
             y1
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisSettings-11 MuiTableCell-sizeSmall"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisSettings-123 css-ezqyqq-MuiTableCell-root"
           >
             <div
               style={
-                Object {
-                  "marginRight": 16,
+                {
+                  "marginRight": "16px",
                   "whiteSpace": "nowrap",
                 }
               }
             >
               <span
-                className="makeStyles-axisSettingTitle-12"
+                className="makeStyles-axisSettingTitle-124"
               >
                 Scale:
               </span>
@@ -758,14 +758,14 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
             </div>
             <div
               style={
-                Object {
-                  "marginRight": 16,
+                {
+                  "marginRight": "16px",
                   "whiteSpace": "nowrap",
                 }
               }
             >
               <span
-                className="makeStyles-axisSettingTitle-12"
+                className="makeStyles-axisSettingTitle-124"
               >
                 Units:
               </span>
@@ -773,14 +773,14 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
             </div>
             <div
               style={
-                Object {
-                  "marginRight": 16,
+                {
+                  "marginRight": "16px",
                   "whiteSpace": "nowrap",
                 }
               }
             >
               <span
-                className="makeStyles-axisSettingTitle-12"
+                className="makeStyles-axisSettingTitle-124"
               >
                 Range:
               </span>
@@ -789,29 +789,29 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           </td>
         </tr>
         <tr
-          className="MuiTableRow-root"
+          className="MuiTableRow-root css-1egrlw9-MuiTableRow-root"
           role={null}
         >
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisTitle-10 MuiTableCell-sizeSmall"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisTitle-122 css-ezqyqq-MuiTableCell-root"
           >
             y2
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisSettings-11 MuiTableCell-sizeSmall"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisSettings-123 css-ezqyqq-MuiTableCell-root"
           >
             <div
               style={
-                Object {
-                  "marginRight": 16,
+                {
+                  "marginRight": "16px",
                   "whiteSpace": "nowrap",
                 }
               }
             >
               <span
-                className="makeStyles-axisSettingTitle-12"
+                className="makeStyles-axisSettingTitle-124"
               >
                 Scale:
               </span>
@@ -819,14 +819,14 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
             </div>
             <div
               style={
-                Object {
-                  "marginRight": 16,
+                {
+                  "marginRight": "16px",
                   "whiteSpace": "nowrap",
                 }
               }
             >
               <span
-                className="makeStyles-axisSettingTitle-12"
+                className="makeStyles-axisSettingTitle-124"
               >
                 Units:
               </span>
@@ -834,14 +834,14 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
             </div>
             <div
               style={
-                Object {
-                  "marginRight": 16,
+                {
+                  "marginRight": "16px",
                   "whiteSpace": "nowrap",
                 }
               }
             >
               <span
-                className="makeStyles-axisSettingTitle-12"
+                className="makeStyles-axisSettingTitle-124"
               >
                 Range:
               </span>
@@ -858,30 +858,30 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
 exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection with only date range 1`] = `
 <div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-73"
   >
     <div
       style={
-        Object {
-          "marginRight": 8,
+        {
+          "marginRight": "8px",
         }
       }
     >
       <h6
-        className="MuiTypography-root MuiTypography-subtitle2"
+        className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
       >
         Data Product
       </h6>
       <p
-        className="MuiTypography-root MuiTypography-body2"
+        className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
       >
         <a
-          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
           href="https://data.neonscience.org/data-products/DP0.00000.000"
           onBlur={[Function]}
           onFocus={[Function]}
           style={
-            Object {
+            {
               "fontWeight": 600,
             }
           }
@@ -893,38 +893,38 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     </div>
     <div>
       <p
-        className="MuiTypography-root MuiTypography-body2"
+        className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
       >
         This is a product that products
       </p>
     </div>
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-73"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       Release
     </h6>
     <p
-      className="MuiTypography-root MuiTypography-body2"
+      className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
     >
       Latest released and provisional data (release: unknown)
     </p>
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-73"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       Sites & Positions
     </h6>
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": 10,
           "marginBottom": "12px",
           "marginTop": "4px",
@@ -934,31 +934,31 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-73"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       Date Range
     </h6>
     <p
-      className="MuiTypography-root MuiTypography-body2"
+      className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
     >
       Apr 2018 - Jan 2020 (1 year, 10 months)
     </p>
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-73"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       Variables
     </h6>
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": 10,
           "marginBottom": "12px",
           "marginTop": "4px",
@@ -968,45 +968,45 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-73"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       x/y Axes
     </h6>
     <table
-      className="MuiTable-root"
+      className="MuiTable-root css-x9dllz-MuiTable-root"
       role={null}
     >
       <tbody
-        className="MuiTableBody-root"
+        className="MuiTableBody-root css-apqrd9-MuiTableBody-root"
         role={null}
       >
         <tr
-          className="MuiTableRow-root"
+          className="MuiTableRow-root css-1egrlw9-MuiTableRow-root"
           role={null}
         >
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisTitle-10 MuiTableCell-sizeSmall"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisTitle-74 css-ezqyqq-MuiTableCell-root"
           >
             x
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisSettings-11 MuiTableCell-sizeSmall"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisSettings-75 css-ezqyqq-MuiTableCell-root"
           >
             <div
               style={
-                Object {
-                  "marginRight": 16,
+                {
+                  "marginRight": "16px",
                   "whiteSpace": "nowrap",
                 }
               }
             >
               <span
-                className="makeStyles-axisSettingTitle-12"
+                className="makeStyles-axisSettingTitle-76"
               >
                 Time step:
               </span>
@@ -1023,30 +1023,30 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
 exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection with only sites 1`] = `
 <div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-57"
   >
     <div
       style={
-        Object {
-          "marginRight": 8,
+        {
+          "marginRight": "8px",
         }
       }
     >
       <h6
-        className="MuiTypography-root MuiTypography-subtitle2"
+        className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
       >
         Data Product
       </h6>
       <p
-        className="MuiTypography-root MuiTypography-body2"
+        className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
       >
         <a
-          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
           href="https://data.neonscience.org/data-products/DP0.00000.000"
           onBlur={[Function]}
           onFocus={[Function]}
           style={
-            Object {
+            {
               "fontWeight": 600,
             }
           }
@@ -1058,57 +1058,57 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     </div>
     <div>
       <p
-        className="MuiTypography-root MuiTypography-body2"
+        className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
       >
         This is a product that products
       </p>
     </div>
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-57"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       Release
     </h6>
     <p
-      className="MuiTypography-root MuiTypography-body2"
+      className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
     >
       Latest released and provisional data (release: unknown)
     </p>
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-57"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       Sites & Positions
     </h6>
     <p
-      className="MuiTypography-root MuiTypography-body2"
+      className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
     >
       ABBY - 000.010, 000.020
     </p>
     <p
-      className="MuiTypography-root MuiTypography-body2"
+      className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
     >
       BARR - 000.030
     </p>
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-57"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       Date Range
     </h6>
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": 10,
           "marginBottom": "12px",
           "marginTop": "4px",
@@ -1118,17 +1118,17 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-57"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       Variables
     </h6>
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": 10,
           "marginBottom": "12px",
           "marginTop": "4px",
@@ -1138,45 +1138,45 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-57"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       x/y Axes
     </h6>
     <table
-      className="MuiTable-root"
+      className="MuiTable-root css-x9dllz-MuiTable-root"
       role={null}
     >
       <tbody
-        className="MuiTableBody-root"
+        className="MuiTableBody-root css-apqrd9-MuiTableBody-root"
         role={null}
       >
         <tr
-          className="MuiTableRow-root"
+          className="MuiTableRow-root css-1egrlw9-MuiTableRow-root"
           role={null}
         >
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisTitle-10 MuiTableCell-sizeSmall"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisTitle-58 css-ezqyqq-MuiTableCell-root"
           >
             x
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisSettings-11 MuiTableCell-sizeSmall"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisSettings-59 css-ezqyqq-MuiTableCell-root"
           >
             <div
               style={
-                Object {
-                  "marginRight": 16,
+                {
+                  "marginRight": "16px",
                   "whiteSpace": "nowrap",
                 }
               }
             >
               <span
-                className="makeStyles-axisSettingTitle-12"
+                className="makeStyles-axisSettingTitle-60"
               >
                 Time step:
               </span>
@@ -1193,30 +1193,30 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
 exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection with only variables 1`] = `
 <div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-89"
   >
     <div
       style={
-        Object {
-          "marginRight": 8,
+        {
+          "marginRight": "8px",
         }
       }
     >
       <h6
-        className="MuiTypography-root MuiTypography-subtitle2"
+        className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
       >
         Data Product
       </h6>
       <p
-        className="MuiTypography-root MuiTypography-body2"
+        className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
       >
         <a
-          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
           href="https://data.neonscience.org/data-products/DP0.00000.000"
           onBlur={[Function]}
           onFocus={[Function]}
           style={
-            Object {
+            {
               "fontWeight": 600,
             }
           }
@@ -1228,38 +1228,38 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     </div>
     <div>
       <p
-        className="MuiTypography-root MuiTypography-body2"
+        className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
       >
         This is a product that products
       </p>
     </div>
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-89"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       Release
     </h6>
     <p
-      className="MuiTypography-root MuiTypography-body2"
+      className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
     >
       Latest released and provisional data (release: unknown)
     </p>
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-89"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       Sites & Positions
     </h6>
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": 10,
           "marginBottom": "12px",
           "marginTop": "4px",
@@ -1269,17 +1269,17 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-89"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       Date Range
     </h6>
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": 10,
           "marginBottom": "12px",
           "marginTop": "4px",
@@ -1289,59 +1289,59 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-89"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       Variables
     </h6>
     <p
-      className="MuiTypography-root MuiTypography-body2"
+      className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
     >
       var1, var2
     </p>
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-89"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       x/y Axes
     </h6>
     <table
-      className="MuiTable-root"
+      className="MuiTable-root css-x9dllz-MuiTable-root"
       role={null}
     >
       <tbody
-        className="MuiTableBody-root"
+        className="MuiTableBody-root css-apqrd9-MuiTableBody-root"
         role={null}
       >
         <tr
-          className="MuiTableRow-root"
+          className="MuiTableRow-root css-1egrlw9-MuiTableRow-root"
           role={null}
         >
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisTitle-10 MuiTableCell-sizeSmall"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisTitle-90 css-ezqyqq-MuiTableCell-root"
           >
             x
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisSettings-11 MuiTableCell-sizeSmall"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisSettings-91 css-ezqyqq-MuiTableCell-root"
           >
             <div
               style={
-                Object {
-                  "marginRight": 16,
+                {
+                  "marginRight": "16px",
                   "whiteSpace": "nowrap",
                 }
               }
             >
               <span
-                className="makeStyles-axisSettingTitle-12"
+                className="makeStyles-axisSettingTitle-92"
               >
                 Time step:
               </span>
@@ -1358,30 +1358,30 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
 exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection with variables and qualityFlags 1`] = `
 <div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-105"
   >
     <div
       style={
-        Object {
-          "marginRight": 8,
+        {
+          "marginRight": "8px",
         }
       }
     >
       <h6
-        className="MuiTypography-root MuiTypography-subtitle2"
+        className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
       >
         Data Product
       </h6>
       <p
-        className="MuiTypography-root MuiTypography-body2"
+        className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
       >
         <a
-          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
           href="https://data.neonscience.org/data-products/DP0.00000.000"
           onBlur={[Function]}
           onFocus={[Function]}
           style={
-            Object {
+            {
               "fontWeight": 600,
             }
           }
@@ -1393,38 +1393,38 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     </div>
     <div>
       <p
-        className="MuiTypography-root MuiTypography-body2"
+        className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
       >
         This is a product that products
       </p>
     </div>
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-105"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       Release
     </h6>
     <p
-      className="MuiTypography-root MuiTypography-body2"
+      className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
     >
       Latest released and provisional data (release: unknown)
     </p>
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-105"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       Sites & Positions
     </h6>
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": 10,
           "marginBottom": "12px",
           "marginTop": "4px",
@@ -1434,17 +1434,17 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-105"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       Date Range
     </h6>
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": 10,
           "marginBottom": "12px",
           "marginTop": "4px",
@@ -1454,64 +1454,64 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-105"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       Variables
     </h6>
     <p
-      className="MuiTypography-root MuiTypography-body2"
+      className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
     >
       var1, var2
     </p>
     <p
-      className="MuiTypography-root MuiTypography-body2"
+      className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
     >
       Quality flags: qfA, qfB, qfC
     </p>
   </div>
   <div
-    className="makeStyles-summaryDiv-9"
+    className="makeStyles-summaryDiv-105"
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
     >
       x/y Axes
     </h6>
     <table
-      className="MuiTable-root"
+      className="MuiTable-root css-x9dllz-MuiTable-root"
       role={null}
     >
       <tbody
-        className="MuiTableBody-root"
+        className="MuiTableBody-root css-apqrd9-MuiTableBody-root"
         role={null}
       >
         <tr
-          className="MuiTableRow-root"
+          className="MuiTableRow-root css-1egrlw9-MuiTableRow-root"
           role={null}
         >
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisTitle-10 MuiTableCell-sizeSmall"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisTitle-106 css-ezqyqq-MuiTableCell-root"
           >
             x
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisSettings-11 MuiTableCell-sizeSmall"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisSettings-107 css-ezqyqq-MuiTableCell-root"
           >
             <div
               style={
-                Object {
-                  "marginRight": 16,
+                {
+                  "marginRight": "16px",
                   "whiteSpace": "nowrap",
                 }
               }
             >
               <span
-                className="makeStyles-axisSettingTitle-12"
+                className="makeStyles-axisSettingTitle-108"
               >
                 Time step:
               </span>
