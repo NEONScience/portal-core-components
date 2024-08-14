@@ -10,12 +10,12 @@ process.on('unhandledRejection', err => {
 });
 
 import fs from 'fs';
+import readline from 'readline';
 import fetch from 'node-fetch';
 import path, { dirname } from 'path';
 import crypto from 'crypto';
 import postcss from 'postcss';
 import cssnano from 'cssnano';
-import jsdom from 'jsdom';
 import prettier from 'prettier';
 import { Command } from 'commander';
 import { fileURLToPath } from 'url';
@@ -29,7 +29,7 @@ program.usage('Usage: node lib-cache-remote-assets.js [options]')
   .version(packageJson.version)
   .option(
     '--prettify-index',
-    'option to prettify css file',
+    'option to prettify index file',
   )
   .option(
     '--css-replace-relative-urls',
@@ -66,7 +66,10 @@ const config = program.opts();
 
 let CACHED_REMOTE_ASSETS_PATH = path.join(__dirname, '../../src/lib_components/remoteAssets');
 let PUBLIC_OUTPUT_PATH = path.join(__dirname, '../../public');
+let APP_OUTPUT_PATH = path.join(__dirname, '../../src/app');
 let PUBLIC_ASSETS_CSS_OUTPUT_PATH = path.join(PUBLIC_OUTPUT_PATH, 'assets/css');
+
+const APP_FILE_LINE_REPLACE = 'const DRUPAL_THEME_CSS_ASSET_HASH =';
 
 if (config.useCurrentWorkingDir) {
   if (!config.generatePublicAssetsOnly) {
@@ -217,7 +220,10 @@ const makeHashedFilename = (name, content, algo = 'md5') => {
   const hexDigest = hash.digest('hex');
   const nameParts = name.split('.');
   const ext = nameParts.pop();
-  return `${nameParts.join('.')}.${hexDigest}.${ext}`;
+  return {
+    fileName: `${nameParts.join('.')}.${hexDigest}.${ext}`,
+    hash: hexDigest,
+  };
 };
 
 /**
@@ -232,7 +238,8 @@ const makeMinimizedFilename = (name) => {
   return `${nameParts.join('.')}.min.${ext}`;
 };
 
-const writeContent = async (key, content, fileName) => {
+const writeContent = async (key, content, fileNameResult) => {
+  const { fileName, hash } = fileNameResult;
   const destination = path.join(CACHED_REMOTE_ASSETS_PATH, fileName);
   switch (key) {
     case REMOTE_ASSETS_CACHE.DRUPAL_THEME_CSS.KEY:
@@ -265,26 +272,36 @@ const writeContent = async (key, content, fileName) => {
         fs.writeFileSync(cssAssetDesMap, minContentResultMap.toString(), { encoding: 'utf8' });
       }
       fs.rmSync(destination);
-      const indexFilePath = path.join(PUBLIC_OUTPUT_PATH, 'index.html');
-      if (fs.existsSync(indexFilePath)) {
-        const indexFileData = fs.readFileSync(indexFilePath);
-        const dom = new jsdom.JSDOM(indexFileData);
-        const drupalThemeNode = dom.window.document.head
-          .querySelector('link[data-meta="drupal-theme"]');
-        if (drupalThemeNode) {
-          drupalThemeNode.setAttribute('href', `%PUBLIC_URL%/assets/css/${fileName}`)
+      const appFilePath = path.join(APP_OUTPUT_PATH, 'layout.tsx');
+      if (fs.existsSync(appFilePath)) {
+        const rl = readline.createInterface({
+          input: fs.createReadStream(appFilePath),
+          // Considers \r and \n as a single newline.
+          // https://nodejs.org/api/readline.html#readlinepromisescreateinterfaceoptions
+          crlfDelay: Infinity,
+        });
+        const lines = [];
+        for await (const line of rl) {
+          if (line.startsWith(APP_FILE_LINE_REPLACE)) {
+            const updatedHashLine = `${APP_FILE_LINE_REPLACE} '${fileNameResult.hash}';`;
+            lines.push(updatedHashLine);
+          } else {
+            lines.push(line);
+          }
         }
-        let indexFileOutput = dom.serialize();
+        rl.close();
+        let appFileOutput = lines.join('\n');
         if (config.prettifyIndex) {
-          indexFileOutput = await prettier.format(
-            indexFileOutput,
+          appFileOutput = await prettier.format(
+            appFileOutput,
             {
-              parser: 'html',
+              parser: 'babel-ts',
               printWidth: 100,
+              singleQuote: true,
             },
           );
         }
-        fs.writeFileSync(indexFilePath, indexFileOutput, { encoding: 'utf8' });
+        fs.writeFileSync(appFilePath, appFileOutput, { encoding: 'utf8' });
       }
       break;
     case REMOTE_ASSETS_CACHE.DRUPAL_HEADER_JS.KEY:
@@ -298,25 +315,28 @@ const writeContent = async (key, content, fileName) => {
 
 const processContent = async (key, name, res, resolve) => {
   const sanitizedContent = sanitizeContent(key, res);
-  let cachedFileName = name;
-  if (cachedFileName.endsWith('.html')) {
-    cachedFileName = `${cachedFileName}.js`;
+  let cachedFileNameResult = {
+    fileName: name,
+    hash: null,
+  };
+  if (cachedFileNameResult.fileName.endsWith('.html')) {
+    cachedFileNameResult.fileName = `${cachedFileNameResult.fileName}.js`;
   } else if (MAKE_HASHED_FILENAMES.includes(name)) {
-    cachedFileName = makeHashedFilename(cachedFileName, sanitizedContent);
+    cachedFileNameResult = makeHashedFilename(cachedFileNameResult.fileName, sanitizedContent);
   }
   if (MAKE_MINIMIZED_FILENAMES.includes(name)) {
     switch (key) {
       case REMOTE_ASSETS_CACHE.DRUPAL_THEME_CSS.KEY:
         if (!config.cssPreventMinify) {
-          cachedFileName = makeMinimizedFilename(cachedFileName);
+          cachedFileNameResult.fileName = makeMinimizedFilename(cachedFileNameResult.fileName);
         }
         break;
       default:
         break;
     }
   }
-  writeContent(key, sanitizedContent, cachedFileName);
-  console.log(`* Completed: ${name} (saved as ${cachedFileName})`);
+  writeContent(key, sanitizedContent, cachedFileNameResult);
+  console.log(`* Completed: ${name} (saved as ${cachedFileNameResult.fileName})`);
   resolve(true);
 };
 
