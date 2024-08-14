@@ -1,17 +1,14 @@
 import React from 'react';
 
 import CssBaseline from '@mui/material/CssBaseline';
-import {
-  createTheme,
-  StyledEngineProvider,
-  ThemeProvider,
-} from '@mui/material/styles';
+import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
+
+import Theme from '../lib_components/components/Theme/Theme';
 
 const MockTheme = ({ children }) => {
-  const theme = createTheme({});
   return (
     <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={Theme}>
         <CssBaseline />
         {children}
       </ThemeProvider>

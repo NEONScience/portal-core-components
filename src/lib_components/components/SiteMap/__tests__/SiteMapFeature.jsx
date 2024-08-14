@@ -12,24 +12,26 @@ import SiteMapContext from '../SiteMapContext';
 
 import SiteMapFeature from '../SiteMapFeature';
 
-// Mock the Leaflet Map class
-const mockMap = class Map {
-  constructor() {
-    this.latLngToContainerPoint = () => ({ x: 0, y: 0 });
-    this._container = {
-      clientHeight: 100,
-      clientWidth: 200,
-      parentNode: {
-        clientHeight: 500,
-        clientWidth: 600,
-      },
-    };
-  }
-};
-jest.mock('react-leaflet', () => ({
-  ...jest.requireActual('react-leaflet'),
-  MapContainer: jest.fn().mockImplementation(mockMap),
-}));
+jest.mock('react-leaflet', () => {
+  // Mock the Leaflet Map class
+  const mockMap = class MapContainer {
+    constructor() {
+      this.latLngToContainerPoint = () => ({ x: 0, y: 0 });
+      this._container = {
+        clientHeight: 100,
+        clientWidth: 200,
+        parentNode: {
+          clientHeight: 500,
+          clientWidth: 600,
+        },
+      };
+    }
+  };
+  return {
+    ...jest.requireActual('react-leaflet'),
+    MapContainer: jest.fn().mockImplementation(mockMap),
+  };
+});
 
 // Mock the SiteMapContext state
 jest.mock('../SiteMapContext', () => ({

@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
+import MockTheme from '../../../../__mocks__/MockTheme';
 import '../../../../__mocks__/NeonContext';
 import NeonContext, { FETCH_STATUS } from '../../NeonContext/NeonContext';
 
@@ -24,7 +25,7 @@ describe('NeonFooter', () => {
       html: { [DRUPAL_FOOTER_HTML]: null },
     }]);
     const tree = renderer
-      .create(<NeonFooter />)
+      .create(<MockTheme><NeonFooter /></MockTheme>)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -35,7 +36,7 @@ describe('NeonFooter', () => {
       html: { [DRUPAL_FOOTER_HTML]: null },
     }]);
     const tree = renderer
-      .create(<NeonFooter />)
+      .create(<MockTheme><NeonFooter /></MockTheme>)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -46,7 +47,7 @@ describe('NeonFooter', () => {
       html: { [DRUPAL_FOOTER_HTML]: null },
     }]);
     const tree = renderer
-      .create(<NeonFooter />)
+      .create(<MockTheme><NeonFooter /></MockTheme>)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -57,7 +58,7 @@ describe('NeonFooter', () => {
       html: { [DRUPAL_FOOTER_HTML]: '<div>test drupal html</div>' },
     }]);
     const tree = renderer
-      .create(<NeonFooter />)
+      .create(<MockTheme><NeonFooter /></MockTheme>)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -68,7 +69,7 @@ describe('NeonFooter', () => {
       html: { [DRUPAL_FOOTER_HTML]: null },
     }]);
     const tree = renderer
-      .create(<NeonFooter drupalCssLoaded />)
+      .create(<MockTheme><NeonFooter drupalCssLoaded /></MockTheme>)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -79,7 +80,7 @@ describe('NeonFooter', () => {
       html: { [DRUPAL_FOOTER_HTML]: '<div>test drupal html</div>' },
     }]);
     const tree = renderer
-      .create(<NeonFooter drupalCssLoaded />)
+      .create(<MockTheme><NeonFooter drupalCssLoaded /></MockTheme>)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });

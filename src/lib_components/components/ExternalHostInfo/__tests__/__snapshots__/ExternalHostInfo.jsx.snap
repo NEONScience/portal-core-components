@@ -6,50 +6,52 @@ exports[`ExternalHostInfo renders with valid product code and no sites 1`] = `
 <div>
   <div>
     <div
-      className="MuiPaper-root MuiCard-root makeStyles-card-3 MuiPaper-elevation1 MuiPaper-rounded"
+      className="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-5 css-s384l0-MuiPaper-root-MuiCard-root"
     >
       <div
-        className="MuiCardContent-root makeStyles-startFlex-6 makeStyles-titleContentContainer-7"
+        className="MuiCardContent-root makeStyles-startFlex-8 makeStyles-titleContentContainer-9 css-ojcnvm-MuiCardContent-root"
       >
         <svg
           aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-primaryIcon-4 MuiSvgIcon-fontSizeSmall"
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-6 css-ptiqhd-MuiSvgIcon-root"
+          data-testid="InfoOutlinedIcon"
           focusable="false"
           viewBox="0 0 24 24"
         >
           <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
           />
         </svg>
         <h6
-          className="MuiTypography-root makeStyles-textTitleContent-8 MuiTypography-subtitle2"
+          className="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-10 css-g2luyu-MuiTypography-root"
         >
           External Host
         </h6>
         <svg
           aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-secondaryIcon-5 MuiSvgIcon-fontSizeLarge"
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-7 css-tzssek-MuiSvgIcon-root"
+          data-testid="InfoOutlinedIcon"
           focusable="false"
           viewBox="0 0 24 24"
         >
           <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
           />
         </svg>
       </div>
       <div
-        className="makeStyles-messageContainer-9"
+        className="makeStyles-messageContainer-11"
       >
         <hr
-          className="MuiDivider-root makeStyles-cardDivider-2"
+          className="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-4 css-9mgopn-MuiDivider-root"
         />
         <div
-          className="makeStyles-startFlex-1"
+          className="makeStyles-startFlex-3"
         >
           <h6
-            className="MuiTypography-root MuiTypography-subtitle2"
+            className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
             style={
-              Object {
+              {
                 "flexGrow": 1,
               }
             }
@@ -57,7 +59,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 1`] = `
             Data for this product are available in other formats from
              
             <a
-              className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+              className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
               data-gtm-external-host="AMERIFLUX"
               data-gtm-product-code="DP1.00001.001"
               href="https://ameriflux.lbl.gov"
@@ -72,19 +74,19 @@ exports[`ExternalHostInfo renders with valid product code and no sites 1`] = `
         </div>
         <div
           style={
-            Object {
+            {
               "display": "block",
             }
           }
         >
           <div
-            className="makeStyles-siteLinksLoadingContainer-11"
+            className="makeStyles-siteLinksLoadingContainer-13"
           >
-            <div
-              className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+            <span
+              className="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-w2h3to-MuiCircularProgress-root"
               role="progressbar"
               style={
-                Object {
+                {
                   "height": 36,
                   "margin": "32px 0px",
                   "width": 36,
@@ -92,25 +94,25 @@ exports[`ExternalHostInfo renders with valid product code and no sites 1`] = `
               }
             >
               <svg
-                className="MuiCircularProgress-svg"
+                className="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
                 viewBox="22 22 44 44"
               >
                 <circle
-                  className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+                  className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
                   cx={44}
                   cy={44}
                   fill="none"
                   r={20.2}
                   strokeWidth={3.6}
-                  style={Object {}}
+                  style={{}}
                 />
               </svg>
-            </div>
+            </span>
             <p
-              className="MuiTypography-root MuiTypography-body1"
+              className="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
               style={
-                Object {
-                  "marginBottom": 32,
+                {
+                  "marginBottom": "32px",
                 }
               }
             >
@@ -128,50 +130,52 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
 <div>
   <div>
     <div
-      className="MuiPaper-root MuiCard-root makeStyles-card-3 MuiPaper-elevation1 MuiPaper-rounded"
+      className="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-17 css-s384l0-MuiPaper-root-MuiCard-root"
     >
       <div
-        className="MuiCardContent-root makeStyles-startFlex-6 makeStyles-titleContentContainer-7"
+        className="MuiCardContent-root makeStyles-startFlex-20 makeStyles-titleContentContainer-21 css-ojcnvm-MuiCardContent-root"
       >
         <svg
           aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-primaryIcon-4 MuiSvgIcon-fontSizeSmall"
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-18 css-ptiqhd-MuiSvgIcon-root"
+          data-testid="InfoOutlinedIcon"
           focusable="false"
           viewBox="0 0 24 24"
         >
           <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
           />
         </svg>
         <h6
-          className="MuiTypography-root makeStyles-textTitleContent-8 MuiTypography-subtitle2"
+          className="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-22 css-g2luyu-MuiTypography-root"
         >
           External Host
         </h6>
         <svg
           aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-secondaryIcon-5 MuiSvgIcon-fontSizeLarge"
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-19 css-tzssek-MuiSvgIcon-root"
+          data-testid="InfoOutlinedIcon"
           focusable="false"
           viewBox="0 0 24 24"
         >
           <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
           />
         </svg>
       </div>
       <div
-        className="makeStyles-messageContainer-9"
+        className="makeStyles-messageContainer-23"
       >
         <hr
-          className="MuiDivider-root makeStyles-cardDivider-2"
+          className="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-16 css-9mgopn-MuiDivider-root"
         />
         <div
-          className="makeStyles-startFlex-1"
+          className="makeStyles-startFlex-15"
         >
           <h6
-            className="MuiTypography-root MuiTypography-subtitle2"
+            className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
             style={
-              Object {
+              {
                 "flexGrow": 1,
               }
             }
@@ -179,7 +183,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
             Raw sequence data associated with this product are available from
              
             <a
-              className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+              className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
               data-gtm-external-host="BOLD"
               data-gtm-product-code="DP1.10020.001"
               href="http://www.barcodinglife.com/"
@@ -194,22 +198,22 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
         </div>
         <div
           style={
-            Object {
+            {
               "display": "block",
             }
           }
         >
           <ul
             style={
-              Object {
-                "marginBottom": 6,
-                "marginTop": 24,
+              {
+                "marginBottom": "6px",
+                "marginTop": "24px",
               }
             }
           >
             <li>
               <a
-                className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
                 data-gtm-external-host="BOLD"
                 data-gtm-product-code="DP1.10020.001"
                 href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETN"
@@ -223,7 +227,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
             </li>
             <li>
               <a
-                className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
                 data-gtm-external-host="BOLD"
                 data-gtm-product-code="DP1.10020.001"
                 href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETP"
@@ -249,50 +253,52 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
 >
   <div>
     <div
-      className="MuiPaper-root MuiCard-root makeStyles-card-3 MuiPaper-elevation1 MuiPaper-rounded"
+      className="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-29 css-s384l0-MuiPaper-root-MuiCard-root"
     >
       <div
-        className="MuiCardContent-root makeStyles-startFlex-6 makeStyles-titleContentContainer-7"
+        className="MuiCardContent-root makeStyles-startFlex-32 makeStyles-titleContentContainer-33 css-ojcnvm-MuiCardContent-root"
       >
         <svg
           aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-primaryIcon-4 MuiSvgIcon-fontSizeSmall"
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-30 css-ptiqhd-MuiSvgIcon-root"
+          data-testid="InfoOutlinedIcon"
           focusable="false"
           viewBox="0 0 24 24"
         >
           <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
           />
         </svg>
         <h6
-          className="MuiTypography-root makeStyles-textTitleContent-8 MuiTypography-subtitle2"
+          className="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-34 css-g2luyu-MuiTypography-root"
         >
           External Host
         </h6>
         <svg
           aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-secondaryIcon-5 MuiSvgIcon-fontSizeLarge"
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-31 css-tzssek-MuiSvgIcon-root"
+          data-testid="InfoOutlinedIcon"
           focusable="false"
           viewBox="0 0 24 24"
         >
           <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
           />
         </svg>
       </div>
       <div
-        className="makeStyles-messageContainer-9"
+        className="makeStyles-messageContainer-35"
       >
         <hr
-          className="MuiDivider-root makeStyles-cardDivider-2"
+          className="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-28 css-9mgopn-MuiDivider-root"
         />
         <div
-          className="makeStyles-startFlex-1"
+          className="makeStyles-startFlex-27"
         >
           <h6
-            className="MuiTypography-root MuiTypography-subtitle2"
+            className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
             style={
-              Object {
+              {
                 "flexGrow": 1,
               }
             }
@@ -300,7 +306,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
             Data for this product are only available from
              
             <a
-              className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+              className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
               data-gtm-external-host="PHENOCAM"
               data-gtm-product-code="DP1.00033.001"
               href="https://phenocam.nau.edu/webcam/about/"
@@ -315,19 +321,19 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
         </div>
         <div
           style={
-            Object {
+            {
               "display": "block",
             }
           }
         >
           <div
-            className="makeStyles-siteLinksLoadingContainer-11"
+            className="makeStyles-siteLinksLoadingContainer-37"
           >
-            <div
-              className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+            <span
+              className="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-w2h3to-MuiCircularProgress-root"
               role="progressbar"
               style={
-                Object {
+                {
                   "height": 36,
                   "margin": "32px 0px",
                   "width": 36,
@@ -335,25 +341,25 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
               }
             >
               <svg
-                className="MuiCircularProgress-svg"
+                className="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
                 viewBox="22 22 44 44"
               >
                 <circle
-                  className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+                  className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
                   cx={44}
                   cy={44}
                   fill="none"
                   r={20.2}
                   strokeWidth={3.6}
-                  style={Object {}}
+                  style={{}}
                 />
               </svg>
-            </div>
+            </span>
             <p
-              className="MuiTypography-root MuiTypography-body1"
+              className="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
               style={
-                Object {
-                  "marginBottom": 32,
+                {
+                  "marginBottom": "32px",
                 }
               }
             >
@@ -371,50 +377,52 @@ exports[`ExternalHostInfo renders with valid product code and sites 1`] = `
 <div>
   <div>
     <div
-      className="MuiPaper-root MuiCard-root makeStyles-card-3 MuiPaper-elevation1 MuiPaper-rounded"
+      className="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-41 css-s384l0-MuiPaper-root-MuiCard-root"
     >
       <div
-        className="MuiCardContent-root makeStyles-startFlex-6 makeStyles-titleContentContainer-7"
+        className="MuiCardContent-root makeStyles-startFlex-44 makeStyles-titleContentContainer-45 css-ojcnvm-MuiCardContent-root"
       >
         <svg
           aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-primaryIcon-4 MuiSvgIcon-fontSizeSmall"
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-42 css-ptiqhd-MuiSvgIcon-root"
+          data-testid="InfoOutlinedIcon"
           focusable="false"
           viewBox="0 0 24 24"
         >
           <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
           />
         </svg>
         <h6
-          className="MuiTypography-root makeStyles-textTitleContent-8 MuiTypography-subtitle2"
+          className="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-46 css-g2luyu-MuiTypography-root"
         >
           External Host
         </h6>
         <svg
           aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-secondaryIcon-5 MuiSvgIcon-fontSizeLarge"
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-43 css-tzssek-MuiSvgIcon-root"
+          data-testid="InfoOutlinedIcon"
           focusable="false"
           viewBox="0 0 24 24"
         >
           <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
           />
         </svg>
       </div>
       <div
-        className="makeStyles-messageContainer-9"
+        className="makeStyles-messageContainer-47"
       >
         <hr
-          className="MuiDivider-root makeStyles-cardDivider-2"
+          className="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-40 css-9mgopn-MuiDivider-root"
         />
         <div
-          className="makeStyles-startFlex-1"
+          className="makeStyles-startFlex-39"
         >
           <h6
-            className="MuiTypography-root MuiTypography-subtitle2"
+            className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
             style={
-              Object {
+              {
                 "flexGrow": 1,
               }
             }
@@ -422,7 +430,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 1`] = `
             Data for this product are available in other formats from
              
             <a
-              className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+              className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
               data-gtm-external-host="AMERIFLUX"
               data-gtm-product-code="DP1.00001.001"
               href="https://ameriflux.lbl.gov"
@@ -437,19 +445,19 @@ exports[`ExternalHostInfo renders with valid product code and sites 1`] = `
         </div>
         <div
           style={
-            Object {
+            {
               "display": "block",
             }
           }
         >
           <div
-            className="makeStyles-siteLinksLoadingContainer-11"
+            className="makeStyles-siteLinksLoadingContainer-49"
           >
-            <div
-              className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+            <span
+              className="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-w2h3to-MuiCircularProgress-root"
               role="progressbar"
               style={
-                Object {
+                {
                   "height": 36,
                   "margin": "32px 0px",
                   "width": 36,
@@ -457,25 +465,25 @@ exports[`ExternalHostInfo renders with valid product code and sites 1`] = `
               }
             >
               <svg
-                className="MuiCircularProgress-svg"
+                className="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
                 viewBox="22 22 44 44"
               >
                 <circle
-                  className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+                  className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
                   cx={44}
                   cy={44}
                   fill="none"
                   r={20.2}
                   strokeWidth={3.6}
-                  style={Object {}}
+                  style={{}}
                 />
               </svg>
-            </div>
+            </span>
             <p
-              className="MuiTypography-root MuiTypography-body1"
+              className="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
               style={
-                Object {
-                  "marginBottom": 32,
+                {
+                  "marginBottom": "32px",
                 }
               }
             >
@@ -493,50 +501,52 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
 <div>
   <div>
     <div
-      className="MuiPaper-root MuiCard-root makeStyles-card-3 MuiPaper-elevation1 MuiPaper-rounded"
+      className="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-53 css-s384l0-MuiPaper-root-MuiCard-root"
     >
       <div
-        className="MuiCardContent-root makeStyles-startFlex-6 makeStyles-titleContentContainer-7"
+        className="MuiCardContent-root makeStyles-startFlex-56 makeStyles-titleContentContainer-57 css-ojcnvm-MuiCardContent-root"
       >
         <svg
           aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-primaryIcon-4 MuiSvgIcon-fontSizeSmall"
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-54 css-ptiqhd-MuiSvgIcon-root"
+          data-testid="InfoOutlinedIcon"
           focusable="false"
           viewBox="0 0 24 24"
         >
           <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
           />
         </svg>
         <h6
-          className="MuiTypography-root makeStyles-textTitleContent-8 MuiTypography-subtitle2"
+          className="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-58 css-g2luyu-MuiTypography-root"
         >
           External Host
         </h6>
         <svg
           aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-secondaryIcon-5 MuiSvgIcon-fontSizeLarge"
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-55 css-tzssek-MuiSvgIcon-root"
+          data-testid="InfoOutlinedIcon"
           focusable="false"
           viewBox="0 0 24 24"
         >
           <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
           />
         </svg>
       </div>
       <div
-        className="makeStyles-messageContainer-9"
+        className="makeStyles-messageContainer-59"
       >
         <hr
-          className="MuiDivider-root makeStyles-cardDivider-2"
+          className="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-52 css-9mgopn-MuiDivider-root"
         />
         <div
-          className="makeStyles-startFlex-1"
+          className="makeStyles-startFlex-51"
         >
           <h6
-            className="MuiTypography-root MuiTypography-subtitle2"
+            className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
             style={
-              Object {
+              {
                 "flexGrow": 1,
               }
             }
@@ -544,7 +554,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
             Raw sequence data associated with this product are available from
              
             <a
-              className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+              className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
               data-gtm-external-host="BOLD"
               data-gtm-product-code="DP1.10020.001"
               href="http://www.barcodinglife.com/"
@@ -559,22 +569,22 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
         </div>
         <div
           style={
-            Object {
+            {
               "display": "block",
             }
           }
         >
           <ul
             style={
-              Object {
-                "marginBottom": 6,
-                "marginTop": 24,
+              {
+                "marginBottom": "6px",
+                "marginTop": "24px",
               }
             }
           >
             <li>
               <a
-                className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
                 data-gtm-external-host="BOLD"
                 data-gtm-product-code="DP1.10020.001"
                 href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETN"
@@ -588,7 +598,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
             </li>
             <li>
               <a
-                className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
                 data-gtm-external-host="BOLD"
                 data-gtm-product-code="DP1.10020.001"
                 href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETP"
@@ -612,50 +622,52 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
 <div>
   <div>
     <div
-      className="MuiPaper-root MuiCard-root makeStyles-card-3 MuiPaper-elevation1 MuiPaper-rounded"
+      className="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-65 css-s384l0-MuiPaper-root-MuiCard-root"
     >
       <div
-        className="MuiCardContent-root makeStyles-startFlex-6 makeStyles-titleContentContainer-7"
+        className="MuiCardContent-root makeStyles-startFlex-68 makeStyles-titleContentContainer-69 css-ojcnvm-MuiCardContent-root"
       >
         <svg
           aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-primaryIcon-4 MuiSvgIcon-fontSizeSmall"
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-66 css-ptiqhd-MuiSvgIcon-root"
+          data-testid="InfoOutlinedIcon"
           focusable="false"
           viewBox="0 0 24 24"
         >
           <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
           />
         </svg>
         <h6
-          className="MuiTypography-root makeStyles-textTitleContent-8 MuiTypography-subtitle2"
+          className="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-70 css-g2luyu-MuiTypography-root"
         >
           External Host
         </h6>
         <svg
           aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-secondaryIcon-5 MuiSvgIcon-fontSizeLarge"
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-67 css-tzssek-MuiSvgIcon-root"
+          data-testid="InfoOutlinedIcon"
           focusable="false"
           viewBox="0 0 24 24"
         >
           <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
           />
         </svg>
       </div>
       <div
-        className="makeStyles-messageContainer-9"
+        className="makeStyles-messageContainer-71"
       >
         <hr
-          className="MuiDivider-root makeStyles-cardDivider-2"
+          className="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-64 css-9mgopn-MuiDivider-root"
         />
         <div
-          className="makeStyles-startFlex-1"
+          className="makeStyles-startFlex-63"
         >
           <h6
-            className="MuiTypography-root MuiTypography-subtitle2"
+            className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
             style={
-              Object {
+              {
                 "flexGrow": 1,
               }
             }
@@ -663,7 +675,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
             Data for this product are only available from
              
             <a
-              className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+              className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
               data-gtm-external-host="PHENOCAM"
               data-gtm-product-code="DP1.00033.001"
               href="https://phenocam.nau.edu/webcam/about/"
@@ -678,19 +690,19 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
         </div>
         <div
           style={
-            Object {
+            {
               "display": "block",
             }
           }
         >
           <div
-            className="makeStyles-siteLinksLoadingContainer-11"
+            className="makeStyles-siteLinksLoadingContainer-73"
           >
-            <div
-              className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+            <span
+              className="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-w2h3to-MuiCircularProgress-root"
               role="progressbar"
               style={
-                Object {
+                {
                   "height": 36,
                   "margin": "32px 0px",
                   "width": 36,
@@ -698,25 +710,25 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
               }
             >
               <svg
-                className="MuiCircularProgress-svg"
+                className="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
                 viewBox="22 22 44 44"
               >
                 <circle
-                  className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+                  className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
                   cx={44}
                   cy={44}
                   fill="none"
                   r={20.2}
                   strokeWidth={3.6}
-                  style={Object {}}
+                  style={{}}
                 />
               </svg>
-            </div>
+            </span>
             <p
-              className="MuiTypography-root MuiTypography-body1"
+              className="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
               style={
-                Object {
-                  "marginBottom": 32,
+                {
+                  "marginBottom": "32px",
                 }
               }
             >
@@ -734,50 +746,52 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
 <div>
   <div>
     <div
-      className="MuiPaper-root MuiCard-root makeStyles-card-3 MuiPaper-elevation1 MuiPaper-rounded"
+      className="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-77 css-s384l0-MuiPaper-root-MuiCard-root"
     >
       <div
-        className="MuiCardContent-root makeStyles-startFlex-6 makeStyles-titleContentContainer-7"
+        className="MuiCardContent-root makeStyles-startFlex-80 makeStyles-titleContentContainer-81 css-ojcnvm-MuiCardContent-root"
       >
         <svg
           aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-primaryIcon-4 MuiSvgIcon-fontSizeSmall"
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-78 css-ptiqhd-MuiSvgIcon-root"
+          data-testid="InfoOutlinedIcon"
           focusable="false"
           viewBox="0 0 24 24"
         >
           <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
           />
         </svg>
         <h6
-          className="MuiTypography-root makeStyles-textTitleContent-8 MuiTypography-subtitle2"
+          className="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-82 css-g2luyu-MuiTypography-root"
         >
           External Host
         </h6>
         <svg
           aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-secondaryIcon-5 MuiSvgIcon-fontSizeLarge"
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-79 css-tzssek-MuiSvgIcon-root"
+          data-testid="InfoOutlinedIcon"
           focusable="false"
           viewBox="0 0 24 24"
         >
           <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
           />
         </svg>
       </div>
       <div
-        className="makeStyles-messageContainer-9"
+        className="makeStyles-messageContainer-83"
       >
         <hr
-          className="MuiDivider-root makeStyles-cardDivider-2"
+          className="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-76 css-9mgopn-MuiDivider-root"
         />
         <div
-          className="makeStyles-startFlex-1"
+          className="makeStyles-startFlex-75"
         >
           <h6
-            className="MuiTypography-root MuiTypography-subtitle2"
+            className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
             style={
-              Object {
+              {
                 "flexGrow": 1,
               }
             }
@@ -785,7 +799,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
             Data for this product are available in other formats from
              
             <a
-              className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+              className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
               data-gtm-external-host="AMERIFLUX"
               data-gtm-product-code="DP1.00001.001"
               href="https://ameriflux.lbl.gov"
@@ -798,12 +812,14 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
             </a>
           </h6>
           <button
-            aria-describedby={null}
             aria-label="Show links to externally hosted data"
-            className="MuiButtonBase-root MuiIconButton-root"
+            aria-labelledby={null}
+            className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1wx42p0-MuiButtonBase-root-MuiIconButton-root"
+            data-mui-internal-clone-element={true}
             disabled={false}
             onBlur={[Function]}
             onClick={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -816,48 +832,44 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
             onTouchMove={[Function]}
             onTouchStart={[Function]}
             style={
-              Object {
-                "marginLeft": 16,
+              {
+                "marginLeft": "16px",
               }
             }
             tabIndex={0}
-            title="Show links to externally hosted data"
             type="button"
           >
-            <span
-              className="MuiIconButton-label"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+              data-testid="ExpandMoreIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
+              />
+            </svg>
             <span
-              className="MuiTouchRipple-root"
+              className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </button>
         </div>
         <div
           style={
-            Object {
+            {
               "display": "none",
             }
           }
         >
           <div
-            className="makeStyles-siteLinksLoadingContainer-11"
+            className="makeStyles-siteLinksLoadingContainer-85"
           >
-            <div
-              className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+            <span
+              className="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-w2h3to-MuiCircularProgress-root"
               role="progressbar"
               style={
-                Object {
+                {
                   "height": 36,
                   "margin": "32px 0px",
                   "width": 36,
@@ -865,25 +877,25 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               }
             >
               <svg
-                className="MuiCircularProgress-svg"
+                className="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
                 viewBox="22 22 44 44"
               >
                 <circle
-                  className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+                  className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
                   cx={44}
                   cy={44}
                   fill="none"
                   r={20.2}
                   strokeWidth={3.6}
-                  style={Object {}}
+                  style={{}}
                 />
               </svg>
-            </div>
+            </span>
             <p
-              className="MuiTypography-root MuiTypography-body1"
+              className="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
               style={
-                Object {
-                  "marginBottom": 32,
+                {
+                  "marginBottom": "32px",
                 }
               }
             >
@@ -901,50 +913,52 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
 <div>
   <div>
     <div
-      className="MuiPaper-root MuiCard-root makeStyles-card-3 MuiPaper-elevation1 MuiPaper-rounded"
+      className="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-89 css-s384l0-MuiPaper-root-MuiCard-root"
     >
       <div
-        className="MuiCardContent-root makeStyles-startFlex-6 makeStyles-titleContentContainer-7"
+        className="MuiCardContent-root makeStyles-startFlex-92 makeStyles-titleContentContainer-93 css-ojcnvm-MuiCardContent-root"
       >
         <svg
           aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-primaryIcon-4 MuiSvgIcon-fontSizeSmall"
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-90 css-ptiqhd-MuiSvgIcon-root"
+          data-testid="InfoOutlinedIcon"
           focusable="false"
           viewBox="0 0 24 24"
         >
           <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
           />
         </svg>
         <h6
-          className="MuiTypography-root makeStyles-textTitleContent-8 MuiTypography-subtitle2"
+          className="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-94 css-g2luyu-MuiTypography-root"
         >
           External Host
         </h6>
         <svg
           aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-secondaryIcon-5 MuiSvgIcon-fontSizeLarge"
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-91 css-tzssek-MuiSvgIcon-root"
+          data-testid="InfoOutlinedIcon"
           focusable="false"
           viewBox="0 0 24 24"
         >
           <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
           />
         </svg>
       </div>
       <div
-        className="makeStyles-messageContainer-9"
+        className="makeStyles-messageContainer-95"
       >
         <hr
-          className="MuiDivider-root makeStyles-cardDivider-2"
+          className="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-88 css-9mgopn-MuiDivider-root"
         />
         <div
-          className="makeStyles-startFlex-1"
+          className="makeStyles-startFlex-87"
         >
           <h6
-            className="MuiTypography-root MuiTypography-subtitle2"
+            className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
             style={
-              Object {
+              {
                 "flexGrow": 1,
               }
             }
@@ -952,7 +966,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
             Raw sequence data associated with this product are available from
              
             <a
-              className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+              className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
               data-gtm-external-host="BOLD"
               data-gtm-product-code="DP1.10020.001"
               href="http://www.barcodinglife.com/"
@@ -965,12 +979,14 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
             </a>
           </h6>
           <button
-            aria-describedby={null}
             aria-label="Show links to externally hosted data"
-            className="MuiButtonBase-root MuiIconButton-root"
+            aria-labelledby={null}
+            className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1wx42p0-MuiButtonBase-root-MuiIconButton-root"
+            data-mui-internal-clone-element={true}
             disabled={false}
             onBlur={[Function]}
             onClick={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -983,51 +999,47 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
             onTouchMove={[Function]}
             onTouchStart={[Function]}
             style={
-              Object {
-                "marginLeft": 16,
+              {
+                "marginLeft": "16px",
               }
             }
             tabIndex={0}
-            title="Show links to externally hosted data"
             type="button"
           >
-            <span
-              className="MuiIconButton-label"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+              data-testid="ExpandMoreIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
+              />
+            </svg>
             <span
-              className="MuiTouchRipple-root"
+              className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </button>
         </div>
         <div
           style={
-            Object {
+            {
               "display": "none",
             }
           }
         >
           <ul
             style={
-              Object {
-                "marginBottom": 6,
-                "marginTop": 24,
+              {
+                "marginBottom": "6px",
+                "marginTop": "24px",
               }
             }
           >
             <li>
               <a
-                className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
                 data-gtm-external-host="BOLD"
                 data-gtm-product-code="DP1.10020.001"
                 href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETN"
@@ -1041,7 +1053,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
             </li>
             <li>
               <a
-                className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
                 data-gtm-external-host="BOLD"
                 data-gtm-product-code="DP1.10020.001"
                 href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETP"
@@ -1065,50 +1077,52 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
 <div>
   <div>
     <div
-      className="MuiPaper-root MuiCard-root makeStyles-card-3 MuiPaper-elevation1 MuiPaper-rounded"
+      className="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-101 css-s384l0-MuiPaper-root-MuiCard-root"
     >
       <div
-        className="MuiCardContent-root makeStyles-startFlex-6 makeStyles-titleContentContainer-7"
+        className="MuiCardContent-root makeStyles-startFlex-104 makeStyles-titleContentContainer-105 css-ojcnvm-MuiCardContent-root"
       >
         <svg
           aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-primaryIcon-4 MuiSvgIcon-fontSizeSmall"
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-102 css-ptiqhd-MuiSvgIcon-root"
+          data-testid="InfoOutlinedIcon"
           focusable="false"
           viewBox="0 0 24 24"
         >
           <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
           />
         </svg>
         <h6
-          className="MuiTypography-root makeStyles-textTitleContent-8 MuiTypography-subtitle2"
+          className="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-106 css-g2luyu-MuiTypography-root"
         >
           External Host
         </h6>
         <svg
           aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-secondaryIcon-5 MuiSvgIcon-fontSizeLarge"
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-103 css-tzssek-MuiSvgIcon-root"
+          data-testid="InfoOutlinedIcon"
           focusable="false"
           viewBox="0 0 24 24"
         >
           <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
           />
         </svg>
       </div>
       <div
-        className="makeStyles-messageContainer-9"
+        className="makeStyles-messageContainer-107"
       >
         <hr
-          className="MuiDivider-root makeStyles-cardDivider-2"
+          className="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-100 css-9mgopn-MuiDivider-root"
         />
         <div
-          className="makeStyles-startFlex-1"
+          className="makeStyles-startFlex-99"
         >
           <h6
-            className="MuiTypography-root MuiTypography-subtitle2"
+            className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
             style={
-              Object {
+              {
                 "flexGrow": 1,
               }
             }
@@ -1116,7 +1130,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
             Data for this product are only available from
              
             <a
-              className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+              className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
               data-gtm-external-host="PHENOCAM"
               data-gtm-product-code="DP1.00033.001"
               href="https://phenocam.nau.edu/webcam/about/"
@@ -1129,12 +1143,14 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
             </a>
           </h6>
           <button
-            aria-describedby={null}
             aria-label="Show links to externally hosted data"
-            className="MuiButtonBase-root MuiIconButton-root"
+            aria-labelledby={null}
+            className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1wx42p0-MuiButtonBase-root-MuiIconButton-root"
+            data-mui-internal-clone-element={true}
             disabled={false}
             onBlur={[Function]}
             onClick={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -1147,48 +1163,44 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
             onTouchMove={[Function]}
             onTouchStart={[Function]}
             style={
-              Object {
-                "marginLeft": 16,
+              {
+                "marginLeft": "16px",
               }
             }
             tabIndex={0}
-            title="Show links to externally hosted data"
             type="button"
           >
-            <span
-              className="MuiIconButton-label"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+              data-testid="ExpandMoreIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
+              />
+            </svg>
             <span
-              className="MuiTouchRipple-root"
+              className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </button>
         </div>
         <div
           style={
-            Object {
+            {
               "display": "none",
             }
           }
         >
           <div
-            className="makeStyles-siteLinksLoadingContainer-11"
+            className="makeStyles-siteLinksLoadingContainer-109"
           >
-            <div
-              className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+            <span
+              className="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-w2h3to-MuiCircularProgress-root"
               role="progressbar"
               style={
-                Object {
+                {
                   "height": 36,
                   "margin": "32px 0px",
                   "width": 36,
@@ -1196,25 +1208,25 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               }
             >
               <svg
-                className="MuiCircularProgress-svg"
+                className="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
                 viewBox="22 22 44 44"
               >
                 <circle
-                  className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+                  className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
                   cx={44}
                   cy={44}
                   fill="none"
                   r={20.2}
                   strokeWidth={3.6}
-                  style={Object {}}
+                  style={{}}
                 />
               </svg>
-            </div>
+            </span>
             <p
-              className="MuiTypography-root MuiTypography-body1"
+              className="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
               style={
-                Object {
-                  "marginBottom": 32,
+                {
+                  "marginBottom": "32px",
                 }
               }
             >

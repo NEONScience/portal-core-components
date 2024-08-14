@@ -2,6 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import DownloadDataContext from '../../DownloadDataContext/DownloadDataContext';
 
+import MockTheme from '../../../../__mocks__/MockTheme';
 import DownloadDataButton from '../DownloadDataButton';
 
 jest.mock('../../DownloadDataContext/DownloadDataContext', () => ({
@@ -20,21 +21,23 @@ describe('DownloadDataButton', () => {
   });
   test('Renders correctly with only a label', () => {
     const tree = renderer
-      .create(<DownloadDataButton label="foo" />)
+      .create(<MockTheme><DownloadDataButton label="foo" /></MockTheme>)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
   test('Preserves MUI button props', () => {
     const tree = renderer
-      .create((
-        <DownloadDataButton
-          label="foo"
-          size="large"
-          color="primary"
-          variant="outlined"
-          data-selenium="download"
-        />
-      ))
+      .create(
+        <MockTheme>
+          <DownloadDataButton
+            label="foo"
+            size="large"
+            color="primary"
+            variant="outlined"
+            data-selenium="download"
+          />
+        </MockTheme>
+      )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -45,7 +48,7 @@ describe('DownloadDataButton', () => {
       dialogOpen: true,
     }]);
     const tree = renderer
-      .create(<DownloadDataButton label="foo" />)
+      .create(<MockTheme><DownloadDataButton label="foo" /></MockTheme>)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -58,7 +61,7 @@ describe('DownloadDataButton', () => {
       },
     }]);
     const tree = renderer
-      .create(<DownloadDataButton label="foo" />)
+      .create(<MockTheme><DownloadDataButton label="foo" /></MockTheme>)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });

@@ -4,7 +4,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
 <div
   data-selenium="data-product-availability"
   style={
-    Object {
+    {
       "minWidth": "153px",
       "width": "100%",
     }
@@ -191,47 +191,57 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
     </defs>
   </svg>
   <div
-    className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-direction-xs-row-reverse"
+    className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-direction-xs-row-reverse css-toppl3-MuiGrid-root"
     style={
-      Object {
-        "marginBottom": 8,
+      {
+        "marginBottom": "8px",
       }
     }
   >
     <div
-      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12"
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 css-1alq691-MuiGrid-root"
     >
       <div
-        className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+        className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 css-zow5z4-MuiGrid-root"
       >
         <div
-          className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-5 MuiGrid-grid-md-6"
+          className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-5 MuiGrid-grid-md-6 css-14zr6yi-MuiGrid-root"
         >
           <div
-            className="makeStyles-topFormHeader-2"
+            className="makeStyles-topFormHeader-54"
           >
             <h6
-              className="MuiTypography-root makeStyles-h6Small-4 MuiTypography-h6"
+              className="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-56 css-134ad2t-MuiTypography-root"
             >
               Sites
             </h6>
           </div>
           <div
             style={
-              Object {
-                "marginBottom": 12,
-                "marginTop": 8,
+              {
+                "marginBottom": "12px",
+                "marginTop": "8px",
               }
             }
           >
             <div
-              className="MuiChip-root MuiChip-colorPrimary MuiChip-deletableColorPrimary MuiChip-deletable"
+              className="MuiButtonBase-root MuiChip-root MuiChip-default MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-defaultPrimary css-1a51hnm-MuiButtonBase-root-MuiChip-root"
               data-selenium="site-chip"
+              onBlur={[Function]}
+              onContextMenu={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
               onKeyDown={[Function]}
               onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
               role="button"
               style={
-                Object {
+                {
                   "borderRadius": "20px",
                   "fontSize": "1rem",
                   "height": "40px",
@@ -240,9 +250,9 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
               tabIndex={0}
             >
               <div
-                className="MuiAvatar-root MuiAvatar-circular MuiChip-avatar makeStyles-avatarLarge-11 MuiChip-avatarColorPrimary MuiAvatar-colorDefault"
+                className="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar MuiChip-avatarLarge MuiChip-avatarColorPrimary makeStyles-avatarLarge-63 css-18uepp3-MuiAvatar-root"
                 style={
-                  Object {
+                  {
                     "backgroundColor": "#0073cf",
                     "height": "40px",
                     "marginLeft": "0px",
@@ -252,27 +262,29 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
               >
                 <svg
                   aria-hidden={true}
-                  className="MuiSvgIcon-root"
+                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                  data-testid="PlaceIcon"
                   focusable="false"
                   viewBox="0 0 24 24"
                 >
                   <path
-                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7m0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5"
                   />
                 </svg>
               </div>
               <span
-                className="MuiChip-label"
+                className="MuiChip-label MuiChip-labelLarge css-1dybbl5-MuiChip-label"
               >
                 3 sites
               </span>
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root MuiChip-deleteIcon MuiChip-deleteIconColorPrimary"
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiChip-deleteIcon MuiChip-deleteIconLarge MuiChip-deleteIconColorPrimary MuiChip-deleteIconDefaultColorPrimary css-i4bv87-MuiSvgIcon-root"
+                data-testid="CancelIcon"
                 focusable="false"
                 onClick={[Function]}
                 style={
-                  Object {
+                  {
                     "height": "32px",
                     "margin": "0 6px 0 0",
                     "width": "32px",
@@ -281,24 +293,25 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 viewBox="0 0 24 24"
               >
                 <path
-                  d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"
+                  d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2m5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12z"
                 />
               </svg>
             </div>
           </div>
           <div
             style={
-              Object {
+              {
                 "display": "flex",
               }
             }
           >
             <button
-              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
               data-selenium="data-product-availability.select-all-sites-button"
               disabled={false}
               onBlur={[Function]}
               onClick={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -312,24 +325,22 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
               tabIndex={0}
               type="button"
             >
+              Select All Sites
               <span
-                className="MuiButton-label"
-              >
-                Select All Sites
-              </span>
-              <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </button>
             <div>
               <button
-                aria-describedby={null}
                 aria-label="Select sites using the observatory map"
-                className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+                aria-labelledby={null}
+                className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+                data-mui-internal-clone-element={true}
                 data-selenium="map-selection-button"
                 disabled={false}
                 onBlur={[Function]}
                 onClick={[Function]}
+                onContextMenu={[Function]}
                 onDragLeave={[Function]}
                 onFocus={[Function]}
                 onKeyDown={[Function]}
@@ -342,98 +353,133 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 onTouchMove={[Function]}
                 onTouchStart={[Function]}
                 style={
-                  Object {
-                    "marginLeft": 8,
+                  {
+                    "marginLeft": "8px",
                   }
                 }
                 tabIndex={0}
-                title="Select sites using the observatory map"
                 type="button"
               >
                 <span
-                  className="MuiButton-label"
+                  className="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-x6r74k-MuiButton-startIcon"
                 >
-                  <span
-                    className="MuiButton-startIcon MuiButton-iconSizeSmall"
+                  <svg
+                    aria-hidden={true}
+                    className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    data-testid="LanguageIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
                   >
-                    <svg
-                      aria-hidden={true}
-                      className="MuiSvgIcon-root"
-                      focusable="false"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"
-                      />
-                    </svg>
-                  </span>
-                  Map
+                    <path
+                      d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2m6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56M12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96M4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56m2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8M12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96M14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2m.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56M16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2z"
+                    />
+                  </svg>
                 </span>
+                Map
                 <span
-                  className="MuiTouchRipple-root"
+                  className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                 />
               </button>
             </div>
           </div>
         </div>
         <div
-          className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6"
+          className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-1yb9ffm-MuiGrid-root"
         >
           <h6
-            className="MuiTypography-root makeStyles-h6Small-4 MuiTypography-h6"
+            className="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-56 css-134ad2t-MuiTypography-root"
           >
             Date Range
           </h6>
           <div
             style={
-              Object {
+              {
                 "display": "flex",
                 "flexWrap": "nowrap",
               }
             }
           >
             <div
-              className="MuiFormControl-root MuiTextField-root MuiFormControl-marginDense"
-              data-selenium="data-product-availability.date-range-start"
-              format="MMMM YYYY"
+              className="MuiFormControl-root MuiTextField-root css-z3c6am-MuiFormControl-root-MuiTextField-root"
               onClick={[Function]}
-              onKeyDown={[Function]}
-              style={
-                Object {
-                  "marginRight": 12,
-                }
-              }
             >
               <label
-                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined"
-                data-shrink={false}
+                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-8j8psp-MuiFormLabel-root-MuiInputLabel-root"
+                data-shrink={true}
+                htmlFor=":rg:"
+                id=":rg:-label"
               >
                 Start
               </label>
               <div
-                className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+                className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-adornedEnd css-14gf2zb-MuiInputBase-root-MuiOutlinedInput-root"
                 onClick={[Function]}
               >
                 <input
                   aria-invalid={false}
+                  autoComplete="off"
                   autoFocus={false}
-                  className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+                  className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd css-7053f3-MuiInputBase-input-MuiOutlinedInput-input"
                   disabled={false}
+                  id=":rg:"
+                  inputMode="text"
                   onAnimationStart={[Function]}
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
-                  readOnly={true}
+                  onKeyDown={[Function]}
+                  onPaste={[Function]}
+                  placeholder="MMMM YYYY"
+                  readOnly={false}
                   required={false}
                   type="text"
                   value="February 2020"
                 />
+                <div
+                  className="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeMedium css-1laqsz7-MuiInputAdornment-root"
+                >
+                  <button
+                    aria-label="Choose date, selected date is Feb 1, 2020"
+                    className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1eo8ysb-MuiButtonBase-root-MuiIconButton-root"
+                    disabled={false}
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onContextMenu={[Function]}
+                    onDragLeave={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onKeyUp={[Function]}
+                    onMouseDown={[Function]}
+                    onMouseLeave={[Function]}
+                    onMouseUp={[Function]}
+                    onTouchEnd={[Function]}
+                    onTouchMove={[Function]}
+                    onTouchStart={[Function]}
+                    tabIndex={0}
+                    type="button"
+                  >
+                    <svg
+                      aria-hidden={true}
+                      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                      data-testid="CalendarIcon"
+                      focusable="false"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
+                      />
+                    </svg>
+                    <span
+                      className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
                 <fieldset
                   aria-hidden={true}
-                  className="PrivateNotchedOutline-root-21 MuiOutlinedInput-notchedOutline"
+                  className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
                 >
                   <legend
-                    className="PrivateNotchedOutline-legendLabelled-23"
+                    className="css-14lo706"
                   >
                     <span>
                       Start
@@ -441,45 +487,88 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                   </legend>
                 </fieldset>
               </div>
-              
             </div>
             <div
-              className="MuiFormControl-root MuiTextField-root MuiFormControl-marginDense"
-              data-selenium="data-product-availability.date-range-end"
-              format="MMMM YYYY"
+              className="MuiFormControl-root MuiTextField-root css-z3c6am-MuiFormControl-root-MuiTextField-root"
               onClick={[Function]}
-              onKeyDown={[Function]}
             >
               <label
-                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined"
-                data-shrink={false}
+                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-8j8psp-MuiFormLabel-root-MuiInputLabel-root"
+                data-shrink={true}
+                htmlFor=":ri:"
+                id=":ri:-label"
               >
                 End
               </label>
               <div
-                className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+                className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-adornedEnd css-14gf2zb-MuiInputBase-root-MuiOutlinedInput-root"
                 onClick={[Function]}
               >
                 <input
                   aria-invalid={false}
+                  autoComplete="off"
                   autoFocus={false}
-                  className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+                  className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd css-7053f3-MuiInputBase-input-MuiOutlinedInput-input"
                   disabled={false}
+                  id=":ri:"
+                  inputMode="text"
                   onAnimationStart={[Function]}
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
-                  readOnly={true}
+                  onKeyDown={[Function]}
+                  onPaste={[Function]}
+                  placeholder="MMMM YYYY"
+                  readOnly={false}
                   required={false}
                   type="text"
                   value="May 2020"
                 />
+                <div
+                  className="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeMedium css-1laqsz7-MuiInputAdornment-root"
+                >
+                  <button
+                    aria-label="Choose date, selected date is May 1, 2020"
+                    className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1eo8ysb-MuiButtonBase-root-MuiIconButton-root"
+                    disabled={false}
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onContextMenu={[Function]}
+                    onDragLeave={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onKeyUp={[Function]}
+                    onMouseDown={[Function]}
+                    onMouseLeave={[Function]}
+                    onMouseUp={[Function]}
+                    onTouchEnd={[Function]}
+                    onTouchMove={[Function]}
+                    onTouchStart={[Function]}
+                    tabIndex={0}
+                    type="button"
+                  >
+                    <svg
+                      aria-hidden={true}
+                      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                      data-testid="CalendarIcon"
+                      focusable="false"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
+                      />
+                    </svg>
+                    <span
+                      className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
                 <fieldset
                   aria-hidden={true}
-                  className="PrivateNotchedOutline-root-21 MuiOutlinedInput-notchedOutline"
+                  className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
                 >
                   <legend
-                    className="PrivateNotchedOutline-legendLabelled-23"
+                    className="css-14lo706"
                   >
                     <span>
                       End
@@ -487,23 +576,23 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                   </legend>
                 </fieldset>
               </div>
-              
             </div>
           </div>
           <div
             style={
-              Object {
+              {
                 "display": "flex",
-                "marginTop": 8,
+                "marginTop": "8px",
               }
             }
           >
             <button
-              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
               data-selenium="data-product-availability.all-years-button"
               disabled={false}
               onBlur={[Function]}
               onClick={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -517,21 +606,18 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
               tabIndex={0}
               type="button"
             >
+              Select All Years
               <span
-                className="MuiButton-label"
-              >
-                Select All Years
-              </span>
-              <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </button>
             <button
-              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
               data-selenium="data-product-availability.latest-year-button"
               disabled={false}
               onBlur={[Function]}
               onClick={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -543,55 +629,52 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
               onTouchMove={[Function]}
               onTouchStart={[Function]}
               style={
-                Object {
-                  "marginLeft": 8,
+                {
+                  "marginLeft": "8px",
                 }
               }
               tabIndex={0}
               type="button"
             >
+              Select Latest Year
               <span
-                className="MuiButton-label"
-              >
-                Select Latest Year
-              </span>
-              <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </button>
           </div>
         </div>
         <div
-          className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+          className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-1alq691-MuiGrid-root"
           style={
-            Object {
-              "marginBottom": 8,
+            {
+              "marginBottom": "8px",
             }
           }
         >
           <div
-            className="MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded"
+            className="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-s384l0-MuiPaper-root-MuiCard-root"
           >
             <div
-              className="MuiCardContent-root makeStyles-helpGridContainer-8"
+              className="MuiCardContent-root makeStyles-helpGridContainer-60 css-ojcnvm-MuiCardContent-root"
             >
               <div
-                className="makeStyles-helpGrid-9"
+                className="makeStyles-helpGrid-61"
               >
                 <svg
                   aria-hidden={true}
-                  className="MuiSvgIcon-root makeStyles-helpIcon-7"
+                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium makeStyles-helpIcon-59 css-i4bv87-MuiSvgIcon-root"
+                  data-testid="PanToolIcon"
                   focusable="false"
                   viewBox="0 0 24 24"
                 >
                   <path
-                    d="M23 5.5V20c0 2.2-1.8 4-4 4h-7.3c-1.08 0-2.1-.43-2.85-1.19L1 14.83s1.26-1.23 1.3-1.25c.22-.19.49-.29.79-.29.22 0 .42.06.6.16.04.01 4.31 2.46 4.31 2.46V4c0-.83.67-1.5 1.5-1.5S11 3.17 11 4v7h1V1.5c0-.83.67-1.5 1.5-1.5S15 .67 15 1.5V11h1V2.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5V11h1V5.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5z"
+                    d="M23 5.5V20c0 2.2-1.8 4-4 4h-7.3c-1.08 0-2.1-.43-2.85-1.19L1 14.83s1.26-1.23 1.3-1.25c.22-.19.49-.29.79-.29.22 0 .42.06.6.16.04.01 4.31 2.46 4.31 2.46V4c0-.83.67-1.5 1.5-1.5S11 3.17 11 4v7h1V1.5c0-.83.67-1.5 1.5-1.5S15 .67 15 1.5V11h1V2.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5V11h1V5.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5"
                   />
                 </svg>
                 <div
-                  className="MuiTypography-root MuiTypography-body1"
+                  className="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
                   style={
-                    Object {
+                    {
                       "flexGrow": 1,
                     }
                   }
@@ -600,22 +683,23 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 </div>
               </div>
               <div
-                className="makeStyles-helpGrid-9"
+                className="makeStyles-helpGrid-61"
               >
                 <svg
                   aria-hidden={true}
-                  className="MuiSvgIcon-root makeStyles-helpIcon-7"
+                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium makeStyles-helpIcon-59 css-i4bv87-MuiSvgIcon-root"
+                  data-testid="TouchAppIcon"
                   focusable="false"
                   viewBox="0 0 24 24"
                 >
                   <path
-                    d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74zm9.84 4.63l-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74c-3.6-.76-3.54-.75-3.67-.75-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2 0-.62-.38-1.16-.91-1.38z"
+                    d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74m9.84 4.63-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74c-3.6-.76-3.54-.75-3.67-.75-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2 0-.62-.38-1.16-.91-1.38"
                   />
                 </svg>
                 <div
-                  className="MuiTypography-root MuiTypography-body1"
+                  className="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
                   style={
-                    Object {
+                    {
                       "flexGrow": 1,
                     }
                   }
@@ -624,27 +708,28 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 </div>
               </div>
               <div
-                className="makeStyles-helpGrid-9"
+                className="makeStyles-helpGrid-61"
               >
                 <svg
                   aria-hidden={true}
-                  className="MuiSvgIcon-root makeStyles-helpIcon-7"
+                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium makeStyles-helpIcon-59 css-i4bv87-MuiSvgIcon-root"
+                  data-testid="VerticalAlignCenterIcon"
                   focusable="false"
                   style={
-                    Object {
+                    {
                       "transform": "rotate(90deg)",
                     }
                   }
                   viewBox="0 0 24 24"
                 >
                   <path
-                    d="M8 19h3v4h2v-4h3l-4-4-4 4zm8-14h-3V1h-2v4H8l4 4 4-4zM4 11v2h16v-2H4z"
+                    d="M8 19h3v4h2v-4h3l-4-4zm8-14h-3V1h-2v4H8l4 4zM4 11v2h16v-2z"
                   />
                 </svg>
                 <div
-                  className="MuiTypography-root MuiTypography-body1"
+                  className="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
                   style={
-                    Object {
+                    {
                       "flexGrow": 1,
                     }
                   }
@@ -658,12 +743,12 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
       </div>
     </div>
     <div
-      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-5 MuiGrid-grid-md-6"
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-5 MuiGrid-grid-md-6 css-14zr6yi-MuiGrid-root"
     >
       <div
         data-selenium="data-product-availability.view-options"
         style={
-          Object {
+          {
             "alignItems": "center",
             "display": "flex",
             "justifyContent": "flex-end",
@@ -671,10 +756,10 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
         }
       >
         <h6
-          className="MuiTypography-root makeStyles-h6Small-4 MuiTypography-h6"
+          className="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-56 css-134ad2t-MuiTypography-root"
           style={
-            Object {
-              "marginRight": 12,
+            {
+              "marginRight": "12px",
               "whiteSpace": "nowrap",
             }
           }
@@ -684,32 +769,33 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
       </div>
     </div>
     <div
-      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6"
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-1yb9ffm-MuiGrid-root"
       style={
-        Object {
+        {
           "alignItems": "center",
           "display": "flex",
         }
       }
     >
       <div
-        className="makeStyles-legendContainer-25"
-        style={Object {}}
+        className="makeStyles-legendContainer-73"
+        style={{}}
       >
         <div
-          className="makeStyles-legendTitleContainer-28"
+          className="makeStyles-legendTitleContainer-76"
         >
           <h6
-            className="MuiTypography-root makeStyles-legendTitle-26 MuiTypography-h6"
+            className="MuiTypography-root MuiTypography-h6 makeStyles-legendTitle-74 css-134ad2t-MuiTypography-root"
           >
             Key:
           </h6>
           <button
             aria-label="Help - Data Availability Chart Key"
-            className="MuiButtonBase-root MuiIconButton-root makeStyles-legendTitleIcon-27 MuiIconButton-colorPrimary MuiIconButton-sizeSmall"
+            className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall makeStyles-legendTitleIcon-75 css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
             disabled={false}
             onBlur={[Function]}
             onClick={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -724,28 +810,25 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
             title="Help - Data Availability Chart Key"
             type="button"
           >
-            <span
-              className="MuiIconButton-label"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              data-testid="HelpOutlineIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M11 18h2v-2h-2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4"
+              />
+            </svg>
             <span
-              className="MuiTouchRipple-root"
+              className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </button>
         </div>
         <div>
           <div
-            className="makeStyles-legendElement-29"
+            className="makeStyles-legendElement-77"
             title="Data have been published and released. Data are available for download"
           >
             <svg
@@ -763,7 +846,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 y={0}
               />
               <text
-                className="makeStyles-legendElementText-30"
+                className="makeStyles-legendElementText-78"
                 x={15}
                 y={10}
               >
@@ -772,7 +855,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
             </svg>
           </div>
           <div
-            className="makeStyles-legendElement-29"
+            className="makeStyles-legendElement-77"
             title="Data was neither expected nor collected"
           >
             <svg
@@ -790,7 +873,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 y={0}
               />
               <text
-                className="makeStyles-legendElementText-30"
+                className="makeStyles-legendElementText-78"
                 x={15}
                 y={10}
               >
@@ -801,7 +884,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
         </div>
         <div>
           <div
-            className="makeStyles-legendElement-29"
+            className="makeStyles-legendElement-77"
             title="If the chart is presenting a roll-up (e.g. view by state) then all sites rolled into a given row are selected"
           >
             <svg
@@ -834,7 +917,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 y={0.5}
               />
               <text
-                className="makeStyles-legendElementText-30"
+                className="makeStyles-legendElementText-78"
                 x={42}
                 y={10}
               >
@@ -843,7 +926,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
             </svg>
           </div>
           <div
-            className="makeStyles-legendElement-29"
+            className="makeStyles-legendElement-77"
             title="If the chart is presenting a roll-up (e.g. view by state) then one or more but not all of the sites rolled into a given row are selected"
           >
             <svg
@@ -876,7 +959,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 y={0.5}
               />
               <text
-                className="makeStyles-legendElementText-30"
+                className="makeStyles-legendElementText-78"
                 x={42}
                 y={10}
               >
@@ -889,7 +972,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
     </div>
   </div>
   <svg
-    className="makeStyles-svg-1"
+    className="makeStyles-svg-53"
     height={68}
     id="dpa-3"
   />
@@ -900,7 +983,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
 <div
   data-selenium="data-product-availability"
   style={
-    Object {
+    {
       "minWidth": "153px",
       "width": "100%",
     }
@@ -1087,47 +1170,57 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
     </defs>
   </svg>
   <div
-    className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-direction-xs-row-reverse"
+    className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-direction-xs-row-reverse css-toppl3-MuiGrid-root"
     style={
-      Object {
-        "marginBottom": 8,
+      {
+        "marginBottom": "8px",
       }
     }
   >
     <div
-      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12"
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 css-1alq691-MuiGrid-root"
     >
       <div
-        className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+        className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 css-zow5z4-MuiGrid-root"
       >
         <div
-          className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-5 MuiGrid-grid-md-6"
+          className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-5 MuiGrid-grid-md-6 css-14zr6yi-MuiGrid-root"
         >
           <div
             className="makeStyles-topFormHeader-2"
           >
             <h6
-              className="MuiTypography-root makeStyles-h6Small-4 MuiTypography-h6"
+              className="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-4 css-134ad2t-MuiTypography-root"
             >
               Sites
             </h6>
           </div>
           <div
             style={
-              Object {
-                "marginBottom": 12,
-                "marginTop": 8,
+              {
+                "marginBottom": "12px",
+                "marginTop": "8px",
               }
             }
           >
             <div
-              className="MuiChip-root MuiChip-colorPrimary MuiChip-deletableColorPrimary MuiChip-deletable"
+              className="MuiButtonBase-root MuiChip-root MuiChip-default MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-defaultPrimary css-1a51hnm-MuiButtonBase-root-MuiChip-root"
               data-selenium="site-chip"
+              onBlur={[Function]}
+              onContextMenu={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
               onKeyDown={[Function]}
               onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
               role="button"
               style={
-                Object {
+                {
                   "borderRadius": "20px",
                   "fontSize": "1rem",
                   "height": "40px",
@@ -1136,9 +1229,9 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
               tabIndex={0}
             >
               <div
-                className="MuiAvatar-root MuiAvatar-circular MuiChip-avatar makeStyles-avatarLarge-11 MuiChip-avatarColorPrimary MuiAvatar-colorDefault"
+                className="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar MuiChip-avatarLarge MuiChip-avatarColorPrimary makeStyles-avatarLarge-11 css-18uepp3-MuiAvatar-root"
                 style={
-                  Object {
+                  {
                     "backgroundColor": "#0073cf",
                     "height": "40px",
                     "marginLeft": "0px",
@@ -1148,27 +1241,29 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
               >
                 <svg
                   aria-hidden={true}
-                  className="MuiSvgIcon-root"
+                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                  data-testid="PlaceIcon"
                   focusable="false"
                   viewBox="0 0 24 24"
                 >
                   <path
-                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7m0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5"
                   />
                 </svg>
               </div>
               <span
-                className="MuiChip-label"
+                className="MuiChip-label MuiChip-labelLarge css-1dybbl5-MuiChip-label"
               >
                 3 sites
               </span>
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root MuiChip-deleteIcon MuiChip-deleteIconColorPrimary"
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiChip-deleteIcon MuiChip-deleteIconLarge MuiChip-deleteIconColorPrimary MuiChip-deleteIconDefaultColorPrimary css-i4bv87-MuiSvgIcon-root"
+                data-testid="CancelIcon"
                 focusable="false"
                 onClick={[Function]}
                 style={
-                  Object {
+                  {
                     "height": "32px",
                     "margin": "0 6px 0 0",
                     "width": "32px",
@@ -1177,24 +1272,25 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                 viewBox="0 0 24 24"
               >
                 <path
-                  d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"
+                  d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2m5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12z"
                 />
               </svg>
             </div>
           </div>
           <div
             style={
-              Object {
+              {
                 "display": "flex",
               }
             }
           >
             <button
-              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
               data-selenium="data-product-availability.select-all-sites-button"
               disabled={false}
               onBlur={[Function]}
               onClick={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -1208,24 +1304,22 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
               tabIndex={0}
               type="button"
             >
+              Select All Sites
               <span
-                className="MuiButton-label"
-              >
-                Select All Sites
-              </span>
-              <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </button>
             <div>
               <button
-                aria-describedby={null}
                 aria-label="Select sites using the observatory map"
-                className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+                aria-labelledby={null}
+                className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+                data-mui-internal-clone-element={true}
                 data-selenium="map-selection-button"
                 disabled={false}
                 onBlur={[Function]}
                 onClick={[Function]}
+                onContextMenu={[Function]}
                 onDragLeave={[Function]}
                 onFocus={[Function]}
                 onKeyDown={[Function]}
@@ -1238,98 +1332,133 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                 onTouchMove={[Function]}
                 onTouchStart={[Function]}
                 style={
-                  Object {
-                    "marginLeft": 8,
+                  {
+                    "marginLeft": "8px",
                   }
                 }
                 tabIndex={0}
-                title="Select sites using the observatory map"
                 type="button"
               >
                 <span
-                  className="MuiButton-label"
+                  className="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-x6r74k-MuiButton-startIcon"
                 >
-                  <span
-                    className="MuiButton-startIcon MuiButton-iconSizeSmall"
+                  <svg
+                    aria-hidden={true}
+                    className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    data-testid="LanguageIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
                   >
-                    <svg
-                      aria-hidden={true}
-                      className="MuiSvgIcon-root"
-                      focusable="false"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"
-                      />
-                    </svg>
-                  </span>
-                  Map
+                    <path
+                      d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2m6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56M12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96M4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56m2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8M12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96M14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2m.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56M16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2z"
+                    />
+                  </svg>
                 </span>
+                Map
                 <span
-                  className="MuiTouchRipple-root"
+                  className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                 />
               </button>
             </div>
           </div>
         </div>
         <div
-          className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6"
+          className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-1yb9ffm-MuiGrid-root"
         >
           <h6
-            className="MuiTypography-root makeStyles-h6Small-4 MuiTypography-h6"
+            className="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-4 css-134ad2t-MuiTypography-root"
           >
             Date Range
           </h6>
           <div
             style={
-              Object {
+              {
                 "display": "flex",
                 "flexWrap": "nowrap",
               }
             }
           >
             <div
-              className="MuiFormControl-root MuiTextField-root MuiFormControl-marginDense"
-              data-selenium="data-product-availability.date-range-start"
-              format="MMMM YYYY"
+              className="MuiFormControl-root MuiTextField-root css-z3c6am-MuiFormControl-root-MuiTextField-root"
               onClick={[Function]}
-              onKeyDown={[Function]}
-              style={
-                Object {
-                  "marginRight": 12,
-                }
-              }
             >
               <label
-                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined"
-                data-shrink={false}
+                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-8j8psp-MuiFormLabel-root-MuiInputLabel-root"
+                data-shrink={true}
+                htmlFor=":r2:"
+                id=":r2:-label"
               >
                 Start
               </label>
               <div
-                className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+                className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-adornedEnd css-14gf2zb-MuiInputBase-root-MuiOutlinedInput-root"
                 onClick={[Function]}
               >
                 <input
                   aria-invalid={false}
+                  autoComplete="off"
                   autoFocus={false}
-                  className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+                  className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd css-7053f3-MuiInputBase-input-MuiOutlinedInput-input"
                   disabled={false}
+                  id=":r2:"
+                  inputMode="text"
                   onAnimationStart={[Function]}
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
-                  readOnly={true}
+                  onKeyDown={[Function]}
+                  onPaste={[Function]}
+                  placeholder="MMMM YYYY"
+                  readOnly={false}
                   required={false}
                   type="text"
                   value="February 2020"
                 />
+                <div
+                  className="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeMedium css-1laqsz7-MuiInputAdornment-root"
+                >
+                  <button
+                    aria-label="Choose date, selected date is Feb 1, 2020"
+                    className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1eo8ysb-MuiButtonBase-root-MuiIconButton-root"
+                    disabled={false}
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onContextMenu={[Function]}
+                    onDragLeave={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onKeyUp={[Function]}
+                    onMouseDown={[Function]}
+                    onMouseLeave={[Function]}
+                    onMouseUp={[Function]}
+                    onTouchEnd={[Function]}
+                    onTouchMove={[Function]}
+                    onTouchStart={[Function]}
+                    tabIndex={0}
+                    type="button"
+                  >
+                    <svg
+                      aria-hidden={true}
+                      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                      data-testid="CalendarIcon"
+                      focusable="false"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
+                      />
+                    </svg>
+                    <span
+                      className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
                 <fieldset
                   aria-hidden={true}
-                  className="PrivateNotchedOutline-root-21 MuiOutlinedInput-notchedOutline"
+                  className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
                 >
                   <legend
-                    className="PrivateNotchedOutline-legendLabelled-23"
+                    className="css-14lo706"
                   >
                     <span>
                       Start
@@ -1337,45 +1466,88 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                   </legend>
                 </fieldset>
               </div>
-              
             </div>
             <div
-              className="MuiFormControl-root MuiTextField-root MuiFormControl-marginDense"
-              data-selenium="data-product-availability.date-range-end"
-              format="MMMM YYYY"
+              className="MuiFormControl-root MuiTextField-root css-z3c6am-MuiFormControl-root-MuiTextField-root"
               onClick={[Function]}
-              onKeyDown={[Function]}
             >
               <label
-                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined"
-                data-shrink={false}
+                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-8j8psp-MuiFormLabel-root-MuiInputLabel-root"
+                data-shrink={true}
+                htmlFor=":r4:"
+                id=":r4:-label"
               >
                 End
               </label>
               <div
-                className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+                className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-adornedEnd css-14gf2zb-MuiInputBase-root-MuiOutlinedInput-root"
                 onClick={[Function]}
               >
                 <input
                   aria-invalid={false}
+                  autoComplete="off"
                   autoFocus={false}
-                  className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+                  className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd css-7053f3-MuiInputBase-input-MuiOutlinedInput-input"
                   disabled={false}
+                  id=":r4:"
+                  inputMode="text"
                   onAnimationStart={[Function]}
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
-                  readOnly={true}
+                  onKeyDown={[Function]}
+                  onPaste={[Function]}
+                  placeholder="MMMM YYYY"
+                  readOnly={false}
                   required={false}
                   type="text"
                   value="May 2020"
                 />
+                <div
+                  className="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeMedium css-1laqsz7-MuiInputAdornment-root"
+                >
+                  <button
+                    aria-label="Choose date, selected date is May 1, 2020"
+                    className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1eo8ysb-MuiButtonBase-root-MuiIconButton-root"
+                    disabled={false}
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onContextMenu={[Function]}
+                    onDragLeave={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onKeyUp={[Function]}
+                    onMouseDown={[Function]}
+                    onMouseLeave={[Function]}
+                    onMouseUp={[Function]}
+                    onTouchEnd={[Function]}
+                    onTouchMove={[Function]}
+                    onTouchStart={[Function]}
+                    tabIndex={0}
+                    type="button"
+                  >
+                    <svg
+                      aria-hidden={true}
+                      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                      data-testid="CalendarIcon"
+                      focusable="false"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
+                      />
+                    </svg>
+                    <span
+                      className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
                 <fieldset
                   aria-hidden={true}
-                  className="PrivateNotchedOutline-root-21 MuiOutlinedInput-notchedOutline"
+                  className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
                 >
                   <legend
-                    className="PrivateNotchedOutline-legendLabelled-23"
+                    className="css-14lo706"
                   >
                     <span>
                       End
@@ -1383,23 +1555,23 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                   </legend>
                 </fieldset>
               </div>
-              
             </div>
           </div>
           <div
             style={
-              Object {
+              {
                 "display": "flex",
-                "marginTop": 8,
+                "marginTop": "8px",
               }
             }
           >
             <button
-              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
               data-selenium="data-product-availability.all-years-button"
               disabled={false}
               onBlur={[Function]}
               onClick={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -1413,21 +1585,18 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
               tabIndex={0}
               type="button"
             >
+              Select All Years
               <span
-                className="MuiButton-label"
-              >
-                Select All Years
-              </span>
-              <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </button>
             <button
-              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
               data-selenium="data-product-availability.latest-year-button"
               disabled={false}
               onBlur={[Function]}
               onClick={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -1439,55 +1608,52 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
               onTouchMove={[Function]}
               onTouchStart={[Function]}
               style={
-                Object {
-                  "marginLeft": 8,
+                {
+                  "marginLeft": "8px",
                 }
               }
               tabIndex={0}
               type="button"
             >
+              Select Latest Year
               <span
-                className="MuiButton-label"
-              >
-                Select Latest Year
-              </span>
-              <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </button>
           </div>
         </div>
         <div
-          className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+          className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-1alq691-MuiGrid-root"
           style={
-            Object {
-              "marginBottom": 8,
+            {
+              "marginBottom": "8px",
             }
           }
         >
           <div
-            className="MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded"
+            className="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-s384l0-MuiPaper-root-MuiCard-root"
           >
             <div
-              className="MuiCardContent-root makeStyles-helpGridContainer-8"
+              className="MuiCardContent-root makeStyles-helpGridContainer-8 css-ojcnvm-MuiCardContent-root"
             >
               <div
                 className="makeStyles-helpGrid-9"
               >
                 <svg
                   aria-hidden={true}
-                  className="MuiSvgIcon-root makeStyles-helpIcon-7"
+                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium makeStyles-helpIcon-7 css-i4bv87-MuiSvgIcon-root"
+                  data-testid="PanToolIcon"
                   focusable="false"
                   viewBox="0 0 24 24"
                 >
                   <path
-                    d="M23 5.5V20c0 2.2-1.8 4-4 4h-7.3c-1.08 0-2.1-.43-2.85-1.19L1 14.83s1.26-1.23 1.3-1.25c.22-.19.49-.29.79-.29.22 0 .42.06.6.16.04.01 4.31 2.46 4.31 2.46V4c0-.83.67-1.5 1.5-1.5S11 3.17 11 4v7h1V1.5c0-.83.67-1.5 1.5-1.5S15 .67 15 1.5V11h1V2.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5V11h1V5.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5z"
+                    d="M23 5.5V20c0 2.2-1.8 4-4 4h-7.3c-1.08 0-2.1-.43-2.85-1.19L1 14.83s1.26-1.23 1.3-1.25c.22-.19.49-.29.79-.29.22 0 .42.06.6.16.04.01 4.31 2.46 4.31 2.46V4c0-.83.67-1.5 1.5-1.5S11 3.17 11 4v7h1V1.5c0-.83.67-1.5 1.5-1.5S15 .67 15 1.5V11h1V2.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5V11h1V5.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5"
                   />
                 </svg>
                 <div
-                  className="MuiTypography-root MuiTypography-body1"
+                  className="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
                   style={
-                    Object {
+                    {
                       "flexGrow": 1,
                     }
                   }
@@ -1500,18 +1666,19 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
               >
                 <svg
                   aria-hidden={true}
-                  className="MuiSvgIcon-root makeStyles-helpIcon-7"
+                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium makeStyles-helpIcon-7 css-i4bv87-MuiSvgIcon-root"
+                  data-testid="TouchAppIcon"
                   focusable="false"
                   viewBox="0 0 24 24"
                 >
                   <path
-                    d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74zm9.84 4.63l-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74c-3.6-.76-3.54-.75-3.67-.75-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2 0-.62-.38-1.16-.91-1.38z"
+                    d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74m9.84 4.63-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74c-3.6-.76-3.54-.75-3.67-.75-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2 0-.62-.38-1.16-.91-1.38"
                   />
                 </svg>
                 <div
-                  className="MuiTypography-root MuiTypography-body1"
+                  className="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
                   style={
-                    Object {
+                    {
                       "flexGrow": 1,
                     }
                   }
@@ -1524,23 +1691,24 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
               >
                 <svg
                   aria-hidden={true}
-                  className="MuiSvgIcon-root makeStyles-helpIcon-7"
+                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium makeStyles-helpIcon-7 css-i4bv87-MuiSvgIcon-root"
+                  data-testid="VerticalAlignCenterIcon"
                   focusable="false"
                   style={
-                    Object {
+                    {
                       "transform": "rotate(90deg)",
                     }
                   }
                   viewBox="0 0 24 24"
                 >
                   <path
-                    d="M8 19h3v4h2v-4h3l-4-4-4 4zm8-14h-3V1h-2v4H8l4 4 4-4zM4 11v2h16v-2H4z"
+                    d="M8 19h3v4h2v-4h3l-4-4zm8-14h-3V1h-2v4H8l4 4zM4 11v2h16v-2z"
                   />
                 </svg>
                 <div
-                  className="MuiTypography-root MuiTypography-body1"
+                  className="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
                   style={
-                    Object {
+                    {
                       "flexGrow": 1,
                     }
                   }
@@ -1554,12 +1722,12 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
       </div>
     </div>
     <div
-      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-5 MuiGrid-grid-md-6"
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-5 MuiGrid-grid-md-6 css-14zr6yi-MuiGrid-root"
     >
       <div
         data-selenium="data-product-availability.view-options"
         style={
-          Object {
+          {
             "alignItems": "center",
             "display": "flex",
             "justifyContent": "flex-end",
@@ -1567,10 +1735,10 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
         }
       >
         <h6
-          className="MuiTypography-root makeStyles-h6Small-4 MuiTypography-h6"
+          className="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-4 css-134ad2t-MuiTypography-root"
           style={
-            Object {
-              "marginRight": 12,
+            {
+              "marginRight": "12px",
               "whiteSpace": "nowrap",
             }
           }
@@ -1580,32 +1748,33 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
       </div>
     </div>
     <div
-      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6"
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-1yb9ffm-MuiGrid-root"
       style={
-        Object {
+        {
           "alignItems": "center",
           "display": "flex",
         }
       }
     >
       <div
-        className="makeStyles-legendContainer-25"
-        style={Object {}}
+        className="makeStyles-legendContainer-21"
+        style={{}}
       >
         <div
-          className="makeStyles-legendTitleContainer-28"
+          className="makeStyles-legendTitleContainer-24"
         >
           <h6
-            className="MuiTypography-root makeStyles-legendTitle-26 MuiTypography-h6"
+            className="MuiTypography-root MuiTypography-h6 makeStyles-legendTitle-22 css-134ad2t-MuiTypography-root"
           >
             Key:
           </h6>
           <button
             aria-label="Help - Data Availability Chart Key"
-            className="MuiButtonBase-root MuiIconButton-root makeStyles-legendTitleIcon-27 MuiIconButton-colorPrimary MuiIconButton-sizeSmall"
+            className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall makeStyles-legendTitleIcon-23 css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
             disabled={false}
             onBlur={[Function]}
             onClick={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -1620,28 +1789,25 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
             title="Help - Data Availability Chart Key"
             type="button"
           >
-            <span
-              className="MuiIconButton-label"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              data-testid="HelpOutlineIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M11 18h2v-2h-2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4"
+              />
+            </svg>
             <span
-              className="MuiTouchRipple-root"
+              className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </button>
         </div>
         <div>
           <div
-            className="makeStyles-legendElement-29"
+            className="makeStyles-legendElement-25"
             title="Data have been published and released. Data are available for download"
           >
             <svg
@@ -1659,7 +1825,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                 y={0}
               />
               <text
-                className="makeStyles-legendElementText-30"
+                className="makeStyles-legendElementText-26"
                 x={15}
                 y={10}
               >
@@ -1668,7 +1834,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
             </svg>
           </div>
           <div
-            className="makeStyles-legendElement-29"
+            className="makeStyles-legendElement-25"
             title="Data was neither expected nor collected"
           >
             <svg
@@ -1686,7 +1852,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                 y={0}
               />
               <text
-                className="makeStyles-legendElementText-30"
+                className="makeStyles-legendElementText-26"
                 x={15}
                 y={10}
               >
@@ -1697,7 +1863,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
         </div>
         <div>
           <div
-            className="makeStyles-legendElement-29"
+            className="makeStyles-legendElement-25"
             title="If the chart is presenting a roll-up (e.g. view by state) then all sites rolled into a given row are selected"
           >
             <svg
@@ -1730,7 +1896,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                 y={0.5}
               />
               <text
-                className="makeStyles-legendElementText-30"
+                className="makeStyles-legendElementText-26"
                 x={42}
                 y={10}
               >
@@ -1739,7 +1905,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
             </svg>
           </div>
           <div
-            className="makeStyles-legendElement-29"
+            className="makeStyles-legendElement-25"
             title="If the chart is presenting a roll-up (e.g. view by state) then one or more but not all of the sites rolled into a given row are selected"
           >
             <svg
@@ -1772,7 +1938,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                 y={0.5}
               />
               <text
-                className="makeStyles-legendElementText-30"
+                className="makeStyles-legendElementText-26"
                 x={42}
                 y={10}
               >
@@ -1796,7 +1962,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
 <div
   data-selenium="data-product-availability"
   style={
-    Object {
+    {
       "minWidth": "153px",
       "width": "100%",
     }
@@ -1983,20 +2149,20 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
     </defs>
   </svg>
   <div
-    className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-direction-xs-row-reverse"
+    className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-direction-xs-row-reverse css-toppl3-MuiGrid-root"
     style={
-      Object {
-        "marginBottom": 8,
+      {
+        "marginBottom": "8px",
       }
     }
   >
     <div
-      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-5 MuiGrid-grid-md-6"
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-5 MuiGrid-grid-md-6 css-14zr6yi-MuiGrid-root"
     >
       <div
         data-selenium="data-product-availability.view-options"
         style={
-          Object {
+          {
             "alignItems": "center",
             "display": "flex",
             "justifyContent": "flex-end",
@@ -2004,10 +2170,10 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
         }
       >
         <h6
-          className="MuiTypography-root makeStyles-h6Small-4 MuiTypography-h6"
+          className="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-108 css-134ad2t-MuiTypography-root"
           style={
-            Object {
-              "marginRight": 12,
+            {
+              "marginRight": "12px",
               "whiteSpace": "nowrap",
             }
           }
@@ -2017,32 +2183,33 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
       </div>
     </div>
     <div
-      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6"
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-1yb9ffm-MuiGrid-root"
       style={
-        Object {
+        {
           "alignItems": "center",
           "display": "flex",
         }
       }
     >
       <div
-        className="makeStyles-legendContainer-25"
-        style={Object {}}
+        className="makeStyles-legendContainer-115"
+        style={{}}
       >
         <div
-          className="makeStyles-legendTitleContainer-28"
+          className="makeStyles-legendTitleContainer-118"
         >
           <h6
-            className="MuiTypography-root makeStyles-legendTitle-26 MuiTypography-h6"
+            className="MuiTypography-root MuiTypography-h6 makeStyles-legendTitle-116 css-134ad2t-MuiTypography-root"
           >
             Key:
           </h6>
           <button
             aria-label="Help - Data Availability Chart Key"
-            className="MuiButtonBase-root MuiIconButton-root makeStyles-legendTitleIcon-27 MuiIconButton-colorPrimary MuiIconButton-sizeSmall"
+            className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall makeStyles-legendTitleIcon-117 css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
             disabled={false}
             onBlur={[Function]}
             onClick={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -2057,28 +2224,25 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
             title="Help - Data Availability Chart Key"
             type="button"
           >
-            <span
-              className="MuiIconButton-label"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              data-testid="HelpOutlineIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M11 18h2v-2h-2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4"
+              />
+            </svg>
             <span
-              className="MuiTouchRipple-root"
+              className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </button>
         </div>
         <div>
           <div
-            className="makeStyles-legendElement-29"
+            className="makeStyles-legendElement-119"
             title="Data have been published and released. Data are available for download"
           >
             <svg
@@ -2096,7 +2260,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
                 y={0}
               />
               <text
-                className="makeStyles-legendElementText-30"
+                className="makeStyles-legendElementText-120"
                 x={15}
                 y={10}
               >
@@ -2107,7 +2271,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
         </div>
         <div>
           <div
-            className="makeStyles-legendElement-29"
+            className="makeStyles-legendElement-119"
             title="Data was neither expected nor collected"
           >
             <svg
@@ -2125,7 +2289,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
                 y={0}
               />
               <text
-                className="makeStyles-legendElementText-30"
+                className="makeStyles-legendElementText-120"
                 x={15}
                 y={10}
               >
@@ -2138,7 +2302,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
     </div>
   </div>
   <svg
-    className="makeStyles-svg-1"
+    className="makeStyles-svg-105"
     height={68}
     id="dpa-5"
   />
@@ -2149,7 +2313,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
 <div
   data-selenium="data-product-availability"
   style={
-    Object {
+    {
       "minWidth": "153px",
       "width": "100%",
     }
@@ -2336,47 +2500,57 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
     </defs>
   </svg>
   <div
-    className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-direction-xs-row-reverse"
+    className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-direction-xs-row-reverse css-toppl3-MuiGrid-root"
     style={
-      Object {
-        "marginBottom": 8,
+      {
+        "marginBottom": "8px",
       }
     }
   >
     <div
-      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12"
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 css-1alq691-MuiGrid-root"
     >
       <div
-        className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+        className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 css-zow5z4-MuiGrid-root"
       >
         <div
-          className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-5 MuiGrid-grid-md-6"
+          className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-5 MuiGrid-grid-md-6 css-14zr6yi-MuiGrid-root"
         >
           <div
-            className="makeStyles-topFormHeader-2"
+            className="makeStyles-topFormHeader-28"
           >
             <h6
-              className="MuiTypography-root makeStyles-h6Small-4 MuiTypography-h6"
+              className="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-30 css-134ad2t-MuiTypography-root"
             >
               Sites
             </h6>
           </div>
           <div
             style={
-              Object {
-                "marginBottom": 12,
-                "marginTop": 8,
+              {
+                "marginBottom": "12px",
+                "marginTop": "8px",
               }
             }
           >
             <div
-              className="MuiChip-root MuiChip-colorPrimary MuiChip-deletableColorPrimary MuiChip-deletable"
+              className="MuiButtonBase-root MuiChip-root MuiChip-default MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-defaultPrimary css-1a51hnm-MuiButtonBase-root-MuiChip-root"
               data-selenium="site-chip"
+              onBlur={[Function]}
+              onContextMenu={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
               onKeyDown={[Function]}
               onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
               role="button"
               style={
-                Object {
+                {
                   "borderRadius": "20px",
                   "fontSize": "1rem",
                   "height": "40px",
@@ -2385,9 +2559,9 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
               tabIndex={0}
             >
               <div
-                className="MuiAvatar-root MuiAvatar-circular MuiChip-avatar makeStyles-avatarLarge-11 MuiChip-avatarColorPrimary MuiAvatar-colorDefault"
+                className="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar MuiChip-avatarLarge MuiChip-avatarColorPrimary makeStyles-avatarLarge-37 css-18uepp3-MuiAvatar-root"
                 style={
-                  Object {
+                  {
                     "backgroundColor": "#0073cf",
                     "height": "40px",
                     "marginLeft": "0px",
@@ -2397,27 +2571,29 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
               >
                 <svg
                   aria-hidden={true}
-                  className="MuiSvgIcon-root"
+                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                  data-testid="PlaceIcon"
                   focusable="false"
                   viewBox="0 0 24 24"
                 >
                   <path
-                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7m0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5"
                   />
                 </svg>
               </div>
               <span
-                className="MuiChip-label"
+                className="MuiChip-label MuiChip-labelLarge css-1dybbl5-MuiChip-label"
               >
                 3 sites
               </span>
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root MuiChip-deleteIcon MuiChip-deleteIconColorPrimary"
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiChip-deleteIcon MuiChip-deleteIconLarge MuiChip-deleteIconColorPrimary MuiChip-deleteIconDefaultColorPrimary css-i4bv87-MuiSvgIcon-root"
+                data-testid="CancelIcon"
                 focusable="false"
                 onClick={[Function]}
                 style={
-                  Object {
+                  {
                     "height": "32px",
                     "margin": "0 6px 0 0",
                     "width": "32px",
@@ -2426,24 +2602,25 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 viewBox="0 0 24 24"
               >
                 <path
-                  d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"
+                  d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2m5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12z"
                 />
               </svg>
             </div>
           </div>
           <div
             style={
-              Object {
+              {
                 "display": "flex",
               }
             }
           >
             <button
-              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
               data-selenium="data-product-availability.select-all-sites-button"
               disabled={false}
               onBlur={[Function]}
               onClick={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -2457,24 +2634,22 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
               tabIndex={0}
               type="button"
             >
+              Select All Sites
               <span
-                className="MuiButton-label"
-              >
-                Select All Sites
-              </span>
-              <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </button>
             <div>
               <button
-                aria-describedby={null}
                 aria-label="Select sites using the observatory map"
-                className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+                aria-labelledby={null}
+                className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+                data-mui-internal-clone-element={true}
                 data-selenium="map-selection-button"
                 disabled={false}
                 onBlur={[Function]}
                 onClick={[Function]}
+                onContextMenu={[Function]}
                 onDragLeave={[Function]}
                 onFocus={[Function]}
                 onKeyDown={[Function]}
@@ -2487,98 +2662,133 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 onTouchMove={[Function]}
                 onTouchStart={[Function]}
                 style={
-                  Object {
-                    "marginLeft": 8,
+                  {
+                    "marginLeft": "8px",
                   }
                 }
                 tabIndex={0}
-                title="Select sites using the observatory map"
                 type="button"
               >
                 <span
-                  className="MuiButton-label"
+                  className="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-x6r74k-MuiButton-startIcon"
                 >
-                  <span
-                    className="MuiButton-startIcon MuiButton-iconSizeSmall"
+                  <svg
+                    aria-hidden={true}
+                    className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    data-testid="LanguageIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
                   >
-                    <svg
-                      aria-hidden={true}
-                      className="MuiSvgIcon-root"
-                      focusable="false"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"
-                      />
-                    </svg>
-                  </span>
-                  Map
+                    <path
+                      d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2m6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56M12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96M4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56m2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8M12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96M14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2m.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56M16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2z"
+                    />
+                  </svg>
                 </span>
+                Map
                 <span
-                  className="MuiTouchRipple-root"
+                  className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                 />
               </button>
             </div>
           </div>
         </div>
         <div
-          className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6"
+          className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-1yb9ffm-MuiGrid-root"
         >
           <h6
-            className="MuiTypography-root makeStyles-h6Small-4 MuiTypography-h6"
+            className="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-30 css-134ad2t-MuiTypography-root"
           >
             Date Range
           </h6>
           <div
             style={
-              Object {
+              {
                 "display": "flex",
                 "flexWrap": "nowrap",
               }
             }
           >
             <div
-              className="MuiFormControl-root MuiTextField-root MuiFormControl-marginDense"
-              data-selenium="data-product-availability.date-range-start"
-              format="MMMM YYYY"
+              className="MuiFormControl-root MuiTextField-root css-z3c6am-MuiFormControl-root-MuiTextField-root"
               onClick={[Function]}
-              onKeyDown={[Function]}
-              style={
-                Object {
-                  "marginRight": 12,
-                }
-              }
             >
               <label
-                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined"
-                data-shrink={false}
+                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-8j8psp-MuiFormLabel-root-MuiInputLabel-root"
+                data-shrink={true}
+                htmlFor=":r9:"
+                id=":r9:-label"
               >
                 Start
               </label>
               <div
-                className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+                className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-adornedEnd css-14gf2zb-MuiInputBase-root-MuiOutlinedInput-root"
                 onClick={[Function]}
               >
                 <input
                   aria-invalid={false}
+                  autoComplete="off"
                   autoFocus={false}
-                  className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+                  className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd css-7053f3-MuiInputBase-input-MuiOutlinedInput-input"
                   disabled={false}
+                  id=":r9:"
+                  inputMode="text"
                   onAnimationStart={[Function]}
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
-                  readOnly={true}
+                  onKeyDown={[Function]}
+                  onPaste={[Function]}
+                  placeholder="MMMM YYYY"
+                  readOnly={false}
                   required={false}
                   type="text"
                   value="February 2020"
                 />
+                <div
+                  className="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeMedium css-1laqsz7-MuiInputAdornment-root"
+                >
+                  <button
+                    aria-label="Choose date, selected date is Feb 1, 2020"
+                    className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1eo8ysb-MuiButtonBase-root-MuiIconButton-root"
+                    disabled={false}
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onContextMenu={[Function]}
+                    onDragLeave={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onKeyUp={[Function]}
+                    onMouseDown={[Function]}
+                    onMouseLeave={[Function]}
+                    onMouseUp={[Function]}
+                    onTouchEnd={[Function]}
+                    onTouchMove={[Function]}
+                    onTouchStart={[Function]}
+                    tabIndex={0}
+                    type="button"
+                  >
+                    <svg
+                      aria-hidden={true}
+                      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                      data-testid="CalendarIcon"
+                      focusable="false"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
+                      />
+                    </svg>
+                    <span
+                      className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
                 <fieldset
                   aria-hidden={true}
-                  className="PrivateNotchedOutline-root-21 MuiOutlinedInput-notchedOutline"
+                  className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
                 >
                   <legend
-                    className="PrivateNotchedOutline-legendLabelled-23"
+                    className="css-14lo706"
                   >
                     <span>
                       Start
@@ -2586,45 +2796,88 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                   </legend>
                 </fieldset>
               </div>
-              
             </div>
             <div
-              className="MuiFormControl-root MuiTextField-root MuiFormControl-marginDense"
-              data-selenium="data-product-availability.date-range-end"
-              format="MMMM YYYY"
+              className="MuiFormControl-root MuiTextField-root css-z3c6am-MuiFormControl-root-MuiTextField-root"
               onClick={[Function]}
-              onKeyDown={[Function]}
             >
               <label
-                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined"
-                data-shrink={false}
+                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-8j8psp-MuiFormLabel-root-MuiInputLabel-root"
+                data-shrink={true}
+                htmlFor=":rb:"
+                id=":rb:-label"
               >
                 End
               </label>
               <div
-                className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+                className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-adornedEnd css-14gf2zb-MuiInputBase-root-MuiOutlinedInput-root"
                 onClick={[Function]}
               >
                 <input
                   aria-invalid={false}
+                  autoComplete="off"
                   autoFocus={false}
-                  className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+                  className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd css-7053f3-MuiInputBase-input-MuiOutlinedInput-input"
                   disabled={false}
+                  id=":rb:"
+                  inputMode="text"
                   onAnimationStart={[Function]}
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
-                  readOnly={true}
+                  onKeyDown={[Function]}
+                  onPaste={[Function]}
+                  placeholder="MMMM YYYY"
+                  readOnly={false}
                   required={false}
                   type="text"
                   value="May 2020"
                 />
+                <div
+                  className="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeMedium css-1laqsz7-MuiInputAdornment-root"
+                >
+                  <button
+                    aria-label="Choose date, selected date is May 1, 2020"
+                    className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1eo8ysb-MuiButtonBase-root-MuiIconButton-root"
+                    disabled={false}
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onContextMenu={[Function]}
+                    onDragLeave={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onKeyUp={[Function]}
+                    onMouseDown={[Function]}
+                    onMouseLeave={[Function]}
+                    onMouseUp={[Function]}
+                    onTouchEnd={[Function]}
+                    onTouchMove={[Function]}
+                    onTouchStart={[Function]}
+                    tabIndex={0}
+                    type="button"
+                  >
+                    <svg
+                      aria-hidden={true}
+                      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                      data-testid="CalendarIcon"
+                      focusable="false"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
+                      />
+                    </svg>
+                    <span
+                      className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
                 <fieldset
                   aria-hidden={true}
-                  className="PrivateNotchedOutline-root-21 MuiOutlinedInput-notchedOutline"
+                  className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
                 >
                   <legend
-                    className="PrivateNotchedOutline-legendLabelled-23"
+                    className="css-14lo706"
                   >
                     <span>
                       End
@@ -2632,23 +2885,23 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                   </legend>
                 </fieldset>
               </div>
-              
             </div>
           </div>
           <div
             style={
-              Object {
+              {
                 "display": "flex",
-                "marginTop": 8,
+                "marginTop": "8px",
               }
             }
           >
             <button
-              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
               data-selenium="data-product-availability.all-years-button"
               disabled={false}
               onBlur={[Function]}
               onClick={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -2662,21 +2915,18 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
               tabIndex={0}
               type="button"
             >
+              Select All Years
               <span
-                className="MuiButton-label"
-              >
-                Select All Years
-              </span>
-              <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </button>
             <button
-              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
               data-selenium="data-product-availability.latest-year-button"
               disabled={false}
               onBlur={[Function]}
               onClick={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -2688,55 +2938,52 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
               onTouchMove={[Function]}
               onTouchStart={[Function]}
               style={
-                Object {
-                  "marginLeft": 8,
+                {
+                  "marginLeft": "8px",
                 }
               }
               tabIndex={0}
               type="button"
             >
+              Select Latest Year
               <span
-                className="MuiButton-label"
-              >
-                Select Latest Year
-              </span>
-              <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </button>
           </div>
         </div>
         <div
-          className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+          className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-1alq691-MuiGrid-root"
           style={
-            Object {
-              "marginBottom": 8,
+            {
+              "marginBottom": "8px",
             }
           }
         >
           <div
-            className="MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded"
+            className="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-s384l0-MuiPaper-root-MuiCard-root"
           >
             <div
-              className="MuiCardContent-root makeStyles-helpGridContainer-8"
+              className="MuiCardContent-root makeStyles-helpGridContainer-34 css-ojcnvm-MuiCardContent-root"
             >
               <div
-                className="makeStyles-helpGrid-9"
+                className="makeStyles-helpGrid-35"
               >
                 <svg
                   aria-hidden={true}
-                  className="MuiSvgIcon-root makeStyles-helpIcon-7"
+                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium makeStyles-helpIcon-33 css-i4bv87-MuiSvgIcon-root"
+                  data-testid="PanToolIcon"
                   focusable="false"
                   viewBox="0 0 24 24"
                 >
                   <path
-                    d="M23 5.5V20c0 2.2-1.8 4-4 4h-7.3c-1.08 0-2.1-.43-2.85-1.19L1 14.83s1.26-1.23 1.3-1.25c.22-.19.49-.29.79-.29.22 0 .42.06.6.16.04.01 4.31 2.46 4.31 2.46V4c0-.83.67-1.5 1.5-1.5S11 3.17 11 4v7h1V1.5c0-.83.67-1.5 1.5-1.5S15 .67 15 1.5V11h1V2.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5V11h1V5.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5z"
+                    d="M23 5.5V20c0 2.2-1.8 4-4 4h-7.3c-1.08 0-2.1-.43-2.85-1.19L1 14.83s1.26-1.23 1.3-1.25c.22-.19.49-.29.79-.29.22 0 .42.06.6.16.04.01 4.31 2.46 4.31 2.46V4c0-.83.67-1.5 1.5-1.5S11 3.17 11 4v7h1V1.5c0-.83.67-1.5 1.5-1.5S15 .67 15 1.5V11h1V2.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5V11h1V5.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5"
                   />
                 </svg>
                 <div
-                  className="MuiTypography-root MuiTypography-body1"
+                  className="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
                   style={
-                    Object {
+                    {
                       "flexGrow": 1,
                     }
                   }
@@ -2745,22 +2992,23 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 </div>
               </div>
               <div
-                className="makeStyles-helpGrid-9"
+                className="makeStyles-helpGrid-35"
               >
                 <svg
                   aria-hidden={true}
-                  className="MuiSvgIcon-root makeStyles-helpIcon-7"
+                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium makeStyles-helpIcon-33 css-i4bv87-MuiSvgIcon-root"
+                  data-testid="TouchAppIcon"
                   focusable="false"
                   viewBox="0 0 24 24"
                 >
                   <path
-                    d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74zm9.84 4.63l-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74c-3.6-.76-3.54-.75-3.67-.75-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2 0-.62-.38-1.16-.91-1.38z"
+                    d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74m9.84 4.63-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74c-3.6-.76-3.54-.75-3.67-.75-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2 0-.62-.38-1.16-.91-1.38"
                   />
                 </svg>
                 <div
-                  className="MuiTypography-root MuiTypography-body1"
+                  className="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
                   style={
-                    Object {
+                    {
                       "flexGrow": 1,
                     }
                   }
@@ -2769,27 +3017,28 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 </div>
               </div>
               <div
-                className="makeStyles-helpGrid-9"
+                className="makeStyles-helpGrid-35"
               >
                 <svg
                   aria-hidden={true}
-                  className="MuiSvgIcon-root makeStyles-helpIcon-7"
+                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium makeStyles-helpIcon-33 css-i4bv87-MuiSvgIcon-root"
+                  data-testid="VerticalAlignCenterIcon"
                   focusable="false"
                   style={
-                    Object {
+                    {
                       "transform": "rotate(90deg)",
                     }
                   }
                   viewBox="0 0 24 24"
                 >
                   <path
-                    d="M8 19h3v4h2v-4h3l-4-4-4 4zm8-14h-3V1h-2v4H8l4 4 4-4zM4 11v2h16v-2H4z"
+                    d="M8 19h3v4h2v-4h3l-4-4zm8-14h-3V1h-2v4H8l4 4zM4 11v2h16v-2z"
                   />
                 </svg>
                 <div
-                  className="MuiTypography-root MuiTypography-body1"
+                  className="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
                   style={
-                    Object {
+                    {
                       "flexGrow": 1,
                     }
                   }
@@ -2803,12 +3052,12 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
       </div>
     </div>
     <div
-      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-5 MuiGrid-grid-md-6"
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-5 MuiGrid-grid-md-6 css-14zr6yi-MuiGrid-root"
     >
       <div
         data-selenium="data-product-availability.view-options"
         style={
-          Object {
+          {
             "alignItems": "center",
             "display": "flex",
             "justifyContent": "flex-end",
@@ -2816,10 +3065,10 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
         }
       >
         <h6
-          className="MuiTypography-root makeStyles-h6Small-4 MuiTypography-h6"
+          className="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-30 css-134ad2t-MuiTypography-root"
           style={
-            Object {
-              "marginRight": 12,
+            {
+              "marginRight": "12px",
               "whiteSpace": "nowrap",
             }
           }
@@ -2829,32 +3078,33 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
       </div>
     </div>
     <div
-      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6"
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-1yb9ffm-MuiGrid-root"
       style={
-        Object {
+        {
           "alignItems": "center",
           "display": "flex",
         }
       }
     >
       <div
-        className="makeStyles-legendContainer-25"
-        style={Object {}}
+        className="makeStyles-legendContainer-47"
+        style={{}}
       >
         <div
-          className="makeStyles-legendTitleContainer-28"
+          className="makeStyles-legendTitleContainer-50"
         >
           <h6
-            className="MuiTypography-root makeStyles-legendTitle-26 MuiTypography-h6"
+            className="MuiTypography-root MuiTypography-h6 makeStyles-legendTitle-48 css-134ad2t-MuiTypography-root"
           >
             Key:
           </h6>
           <button
             aria-label="Help - Data Availability Chart Key"
-            className="MuiButtonBase-root MuiIconButton-root makeStyles-legendTitleIcon-27 MuiIconButton-colorPrimary MuiIconButton-sizeSmall"
+            className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall makeStyles-legendTitleIcon-49 css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
             disabled={false}
             onBlur={[Function]}
             onClick={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -2869,28 +3119,25 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
             title="Help - Data Availability Chart Key"
             type="button"
           >
-            <span
-              className="MuiIconButton-label"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              data-testid="HelpOutlineIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M11 18h2v-2h-2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4"
+              />
+            </svg>
             <span
-              className="MuiTouchRipple-root"
+              className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </button>
         </div>
         <div>
           <div
-            className="makeStyles-legendElement-29"
+            className="makeStyles-legendElement-51"
             title="Data have been published and released. Data are available for download"
           >
             <svg
@@ -2908,7 +3155,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 y={0}
               />
               <text
-                className="makeStyles-legendElementText-30"
+                className="makeStyles-legendElementText-52"
                 x={15}
                 y={10}
               >
@@ -2917,7 +3164,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
             </svg>
           </div>
           <div
-            className="makeStyles-legendElement-29"
+            className="makeStyles-legendElement-51"
             title="Data was neither expected nor collected"
           >
             <svg
@@ -2935,7 +3182,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 y={0}
               />
               <text
-                className="makeStyles-legendElementText-30"
+                className="makeStyles-legendElementText-52"
                 x={15}
                 y={10}
               >
@@ -2946,7 +3193,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
         </div>
         <div>
           <div
-            className="makeStyles-legendElement-29"
+            className="makeStyles-legendElement-51"
             title="If the chart is presenting a roll-up (e.g. view by state) then all sites rolled into a given row are selected"
           >
             <svg
@@ -2979,7 +3226,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 y={0.5}
               />
               <text
-                className="makeStyles-legendElementText-30"
+                className="makeStyles-legendElementText-52"
                 x={42}
                 y={10}
               >
@@ -2988,7 +3235,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
             </svg>
           </div>
           <div
-            className="makeStyles-legendElement-29"
+            className="makeStyles-legendElement-51"
             title="If the chart is presenting a roll-up (e.g. view by state) then one or more but not all of the sites rolled into a given row are selected"
           >
             <svg
@@ -3021,7 +3268,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 y={0.5}
               />
               <text
-                className="makeStyles-legendElementText-30"
+                className="makeStyles-legendElementText-52"
                 x={42}
                 y={10}
               >
@@ -3034,7 +3281,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
     </div>
   </div>
   <svg
-    className="makeStyles-svg-1"
+    className="makeStyles-svg-27"
     height={68}
     id="dpa-2"
   />
@@ -3045,7 +3292,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
 <div
   data-selenium="data-product-availability"
   style={
-    Object {
+    {
       "minWidth": "153px",
       "width": "100%",
     }
@@ -3232,47 +3479,57 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
     </defs>
   </svg>
   <div
-    className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-direction-xs-row-reverse"
+    className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-direction-xs-row-reverse css-toppl3-MuiGrid-root"
     style={
-      Object {
-        "marginBottom": 8,
+      {
+        "marginBottom": "8px",
       }
     }
   >
     <div
-      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12"
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 css-1alq691-MuiGrid-root"
     >
       <div
-        className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+        className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 css-zow5z4-MuiGrid-root"
       >
         <div
-          className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-5 MuiGrid-grid-md-6"
+          className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-5 MuiGrid-grid-md-6 css-14zr6yi-MuiGrid-root"
         >
           <div
-            className="makeStyles-topFormHeader-2"
+            className="makeStyles-topFormHeader-80"
           >
             <h6
-              className="MuiTypography-root makeStyles-h6Small-4 MuiTypography-h6"
+              className="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-82 css-134ad2t-MuiTypography-root"
             >
               Sites
             </h6>
           </div>
           <div
             style={
-              Object {
-                "marginBottom": 12,
-                "marginTop": 8,
+              {
+                "marginBottom": "12px",
+                "marginTop": "8px",
               }
             }
           >
             <div
-              className="MuiChip-root MuiChip-colorPrimary MuiChip-deletableColorPrimary MuiChip-deletable"
+              className="MuiButtonBase-root MuiChip-root MuiChip-default MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-defaultPrimary css-1a51hnm-MuiButtonBase-root-MuiChip-root"
               data-selenium="site-chip"
+              onBlur={[Function]}
+              onContextMenu={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
               onKeyDown={[Function]}
               onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
               role="button"
               style={
-                Object {
+                {
                   "borderRadius": "20px",
                   "fontSize": "1rem",
                   "height": "40px",
@@ -3281,9 +3538,9 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
               tabIndex={0}
             >
               <div
-                className="MuiAvatar-root MuiAvatar-circular MuiChip-avatar makeStyles-avatarLarge-11 MuiChip-avatarColorPrimary MuiAvatar-colorDefault"
+                className="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar MuiChip-avatarLarge MuiChip-avatarColorPrimary makeStyles-avatarLarge-89 css-18uepp3-MuiAvatar-root"
                 style={
-                  Object {
+                  {
                     "backgroundColor": "#0073cf",
                     "height": "40px",
                     "marginLeft": "0px",
@@ -3293,27 +3550,29 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
               >
                 <svg
                   aria-hidden={true}
-                  className="MuiSvgIcon-root"
+                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                  data-testid="PlaceIcon"
                   focusable="false"
                   viewBox="0 0 24 24"
                 >
                   <path
-                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7m0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5"
                   />
                 </svg>
               </div>
               <span
-                className="MuiChip-label"
+                className="MuiChip-label MuiChip-labelLarge css-1dybbl5-MuiChip-label"
               >
                 3 sites
               </span>
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root MuiChip-deleteIcon MuiChip-deleteIconColorPrimary"
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiChip-deleteIcon MuiChip-deleteIconLarge MuiChip-deleteIconColorPrimary MuiChip-deleteIconDefaultColorPrimary css-i4bv87-MuiSvgIcon-root"
+                data-testid="CancelIcon"
                 focusable="false"
                 onClick={[Function]}
                 style={
-                  Object {
+                  {
                     "height": "32px",
                     "margin": "0 6px 0 0",
                     "width": "32px",
@@ -3322,24 +3581,25 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                 viewBox="0 0 24 24"
               >
                 <path
-                  d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"
+                  d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2m5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12z"
                 />
               </svg>
             </div>
           </div>
           <div
             style={
-              Object {
+              {
                 "display": "flex",
               }
             }
           >
             <button
-              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
               data-selenium="data-product-availability.select-all-sites-button"
               disabled={false}
               onBlur={[Function]}
               onClick={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -3353,24 +3613,22 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
               tabIndex={0}
               type="button"
             >
+              Select All Sites
               <span
-                className="MuiButton-label"
-              >
-                Select All Sites
-              </span>
-              <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </button>
             <div>
               <button
-                aria-describedby={null}
                 aria-label="Select sites using the observatory map"
-                className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+                aria-labelledby={null}
+                className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+                data-mui-internal-clone-element={true}
                 data-selenium="map-selection-button"
                 disabled={false}
                 onBlur={[Function]}
                 onClick={[Function]}
+                onContextMenu={[Function]}
                 onDragLeave={[Function]}
                 onFocus={[Function]}
                 onKeyDown={[Function]}
@@ -3383,98 +3641,133 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                 onTouchMove={[Function]}
                 onTouchStart={[Function]}
                 style={
-                  Object {
-                    "marginLeft": 8,
+                  {
+                    "marginLeft": "8px",
                   }
                 }
                 tabIndex={0}
-                title="Select sites using the observatory map"
                 type="button"
               >
                 <span
-                  className="MuiButton-label"
+                  className="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-x6r74k-MuiButton-startIcon"
                 >
-                  <span
-                    className="MuiButton-startIcon MuiButton-iconSizeSmall"
+                  <svg
+                    aria-hidden={true}
+                    className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    data-testid="LanguageIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
                   >
-                    <svg
-                      aria-hidden={true}
-                      className="MuiSvgIcon-root"
-                      focusable="false"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"
-                      />
-                    </svg>
-                  </span>
-                  Map
+                    <path
+                      d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2m6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56M12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96M4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56m2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8M12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96M14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2m.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56M16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2z"
+                    />
+                  </svg>
                 </span>
+                Map
                 <span
-                  className="MuiTouchRipple-root"
+                  className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                 />
               </button>
             </div>
           </div>
         </div>
         <div
-          className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6"
+          className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-1yb9ffm-MuiGrid-root"
         >
           <h6
-            className="MuiTypography-root makeStyles-h6Small-4 MuiTypography-h6"
+            className="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-82 css-134ad2t-MuiTypography-root"
           >
             Date Range
           </h6>
           <div
             style={
-              Object {
+              {
                 "display": "flex",
                 "flexWrap": "nowrap",
               }
             }
           >
             <div
-              className="MuiFormControl-root MuiTextField-root MuiFormControl-marginDense"
-              data-selenium="data-product-availability.date-range-start"
-              format="MMMM YYYY"
+              className="MuiFormControl-root MuiTextField-root css-z3c6am-MuiFormControl-root-MuiTextField-root"
               onClick={[Function]}
-              onKeyDown={[Function]}
-              style={
-                Object {
-                  "marginRight": 12,
-                }
-              }
             >
               <label
-                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined"
-                data-shrink={false}
+                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-8j8psp-MuiFormLabel-root-MuiInputLabel-root"
+                data-shrink={true}
+                htmlFor=":rn:"
+                id=":rn:-label"
               >
                 Start
               </label>
               <div
-                className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+                className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-adornedEnd css-14gf2zb-MuiInputBase-root-MuiOutlinedInput-root"
                 onClick={[Function]}
               >
                 <input
                   aria-invalid={false}
+                  autoComplete="off"
                   autoFocus={false}
-                  className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+                  className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd css-7053f3-MuiInputBase-input-MuiOutlinedInput-input"
                   disabled={false}
+                  id=":rn:"
+                  inputMode="text"
                   onAnimationStart={[Function]}
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
-                  readOnly={true}
+                  onKeyDown={[Function]}
+                  onPaste={[Function]}
+                  placeholder="MMMM YYYY"
+                  readOnly={false}
                   required={false}
                   type="text"
                   value="February 2020"
                 />
+                <div
+                  className="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeMedium css-1laqsz7-MuiInputAdornment-root"
+                >
+                  <button
+                    aria-label="Choose date, selected date is Feb 1, 2020"
+                    className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1eo8ysb-MuiButtonBase-root-MuiIconButton-root"
+                    disabled={false}
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onContextMenu={[Function]}
+                    onDragLeave={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onKeyUp={[Function]}
+                    onMouseDown={[Function]}
+                    onMouseLeave={[Function]}
+                    onMouseUp={[Function]}
+                    onTouchEnd={[Function]}
+                    onTouchMove={[Function]}
+                    onTouchStart={[Function]}
+                    tabIndex={0}
+                    type="button"
+                  >
+                    <svg
+                      aria-hidden={true}
+                      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                      data-testid="CalendarIcon"
+                      focusable="false"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
+                      />
+                    </svg>
+                    <span
+                      className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
                 <fieldset
                   aria-hidden={true}
-                  className="PrivateNotchedOutline-root-21 MuiOutlinedInput-notchedOutline"
+                  className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
                 >
                   <legend
-                    className="PrivateNotchedOutline-legendLabelled-23"
+                    className="css-14lo706"
                   >
                     <span>
                       Start
@@ -3482,45 +3775,88 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                   </legend>
                 </fieldset>
               </div>
-              
             </div>
             <div
-              className="MuiFormControl-root MuiTextField-root MuiFormControl-marginDense"
-              data-selenium="data-product-availability.date-range-end"
-              format="MMMM YYYY"
+              className="MuiFormControl-root MuiTextField-root css-z3c6am-MuiFormControl-root-MuiTextField-root"
               onClick={[Function]}
-              onKeyDown={[Function]}
             >
               <label
-                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined"
-                data-shrink={false}
+                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-8j8psp-MuiFormLabel-root-MuiInputLabel-root"
+                data-shrink={true}
+                htmlFor=":rp:"
+                id=":rp:-label"
               >
                 End
               </label>
               <div
-                className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+                className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-adornedEnd css-14gf2zb-MuiInputBase-root-MuiOutlinedInput-root"
                 onClick={[Function]}
               >
                 <input
                   aria-invalid={false}
+                  autoComplete="off"
                   autoFocus={false}
-                  className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+                  className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd css-7053f3-MuiInputBase-input-MuiOutlinedInput-input"
                   disabled={false}
+                  id=":rp:"
+                  inputMode="text"
                   onAnimationStart={[Function]}
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
-                  readOnly={true}
+                  onKeyDown={[Function]}
+                  onPaste={[Function]}
+                  placeholder="MMMM YYYY"
+                  readOnly={false}
                   required={false}
                   type="text"
                   value="May 2020"
                 />
+                <div
+                  className="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeMedium css-1laqsz7-MuiInputAdornment-root"
+                >
+                  <button
+                    aria-label="Choose date, selected date is May 1, 2020"
+                    className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1eo8ysb-MuiButtonBase-root-MuiIconButton-root"
+                    disabled={false}
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onContextMenu={[Function]}
+                    onDragLeave={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onKeyUp={[Function]}
+                    onMouseDown={[Function]}
+                    onMouseLeave={[Function]}
+                    onMouseUp={[Function]}
+                    onTouchEnd={[Function]}
+                    onTouchMove={[Function]}
+                    onTouchStart={[Function]}
+                    tabIndex={0}
+                    type="button"
+                  >
+                    <svg
+                      aria-hidden={true}
+                      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                      data-testid="CalendarIcon"
+                      focusable="false"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
+                      />
+                    </svg>
+                    <span
+                      className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
                 <fieldset
                   aria-hidden={true}
-                  className="PrivateNotchedOutline-root-21 MuiOutlinedInput-notchedOutline"
+                  className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
                 >
                   <legend
-                    className="PrivateNotchedOutline-legendLabelled-23"
+                    className="css-14lo706"
                   >
                     <span>
                       End
@@ -3528,23 +3864,23 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                   </legend>
                 </fieldset>
               </div>
-              
             </div>
           </div>
           <div
             style={
-              Object {
+              {
                 "display": "flex",
-                "marginTop": 8,
+                "marginTop": "8px",
               }
             }
           >
             <button
-              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
               data-selenium="data-product-availability.all-years-button"
               disabled={false}
               onBlur={[Function]}
               onClick={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -3558,21 +3894,18 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
               tabIndex={0}
               type="button"
             >
+              Select All Years
               <span
-                className="MuiButton-label"
-              >
-                Select All Years
-              </span>
-              <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </button>
             <button
-              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
               data-selenium="data-product-availability.latest-year-button"
               disabled={false}
               onBlur={[Function]}
               onClick={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -3584,55 +3917,52 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
               onTouchMove={[Function]}
               onTouchStart={[Function]}
               style={
-                Object {
-                  "marginLeft": 8,
+                {
+                  "marginLeft": "8px",
                 }
               }
               tabIndex={0}
               type="button"
             >
+              Select Latest Year
               <span
-                className="MuiButton-label"
-              >
-                Select Latest Year
-              </span>
-              <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </button>
           </div>
         </div>
         <div
-          className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+          className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-1alq691-MuiGrid-root"
           style={
-            Object {
-              "marginBottom": 8,
+            {
+              "marginBottom": "8px",
             }
           }
         >
           <div
-            className="MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded"
+            className="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-s384l0-MuiPaper-root-MuiCard-root"
           >
             <div
-              className="MuiCardContent-root makeStyles-helpGridContainer-8"
+              className="MuiCardContent-root makeStyles-helpGridContainer-86 css-ojcnvm-MuiCardContent-root"
             >
               <div
-                className="makeStyles-helpGrid-9"
+                className="makeStyles-helpGrid-87"
               >
                 <svg
                   aria-hidden={true}
-                  className="MuiSvgIcon-root makeStyles-helpIcon-7"
+                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium makeStyles-helpIcon-85 css-i4bv87-MuiSvgIcon-root"
+                  data-testid="PanToolIcon"
                   focusable="false"
                   viewBox="0 0 24 24"
                 >
                   <path
-                    d="M23 5.5V20c0 2.2-1.8 4-4 4h-7.3c-1.08 0-2.1-.43-2.85-1.19L1 14.83s1.26-1.23 1.3-1.25c.22-.19.49-.29.79-.29.22 0 .42.06.6.16.04.01 4.31 2.46 4.31 2.46V4c0-.83.67-1.5 1.5-1.5S11 3.17 11 4v7h1V1.5c0-.83.67-1.5 1.5-1.5S15 .67 15 1.5V11h1V2.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5V11h1V5.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5z"
+                    d="M23 5.5V20c0 2.2-1.8 4-4 4h-7.3c-1.08 0-2.1-.43-2.85-1.19L1 14.83s1.26-1.23 1.3-1.25c.22-.19.49-.29.79-.29.22 0 .42.06.6.16.04.01 4.31 2.46 4.31 2.46V4c0-.83.67-1.5 1.5-1.5S11 3.17 11 4v7h1V1.5c0-.83.67-1.5 1.5-1.5S15 .67 15 1.5V11h1V2.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5V11h1V5.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5"
                   />
                 </svg>
                 <div
-                  className="MuiTypography-root MuiTypography-body1"
+                  className="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
                   style={
-                    Object {
+                    {
                       "flexGrow": 1,
                     }
                   }
@@ -3641,22 +3971,23 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                 </div>
               </div>
               <div
-                className="makeStyles-helpGrid-9"
+                className="makeStyles-helpGrid-87"
               >
                 <svg
                   aria-hidden={true}
-                  className="MuiSvgIcon-root makeStyles-helpIcon-7"
+                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium makeStyles-helpIcon-85 css-i4bv87-MuiSvgIcon-root"
+                  data-testid="TouchAppIcon"
                   focusable="false"
                   viewBox="0 0 24 24"
                 >
                   <path
-                    d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74zm9.84 4.63l-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74c-3.6-.76-3.54-.75-3.67-.75-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2 0-.62-.38-1.16-.91-1.38z"
+                    d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74m9.84 4.63-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74c-3.6-.76-3.54-.75-3.67-.75-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2 0-.62-.38-1.16-.91-1.38"
                   />
                 </svg>
                 <div
-                  className="MuiTypography-root MuiTypography-body1"
+                  className="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
                   style={
-                    Object {
+                    {
                       "flexGrow": 1,
                     }
                   }
@@ -3665,27 +3996,28 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                 </div>
               </div>
               <div
-                className="makeStyles-helpGrid-9"
+                className="makeStyles-helpGrid-87"
               >
                 <svg
                   aria-hidden={true}
-                  className="MuiSvgIcon-root makeStyles-helpIcon-7"
+                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium makeStyles-helpIcon-85 css-i4bv87-MuiSvgIcon-root"
+                  data-testid="VerticalAlignCenterIcon"
                   focusable="false"
                   style={
-                    Object {
+                    {
                       "transform": "rotate(90deg)",
                     }
                   }
                   viewBox="0 0 24 24"
                 >
                   <path
-                    d="M8 19h3v4h2v-4h3l-4-4-4 4zm8-14h-3V1h-2v4H8l4 4 4-4zM4 11v2h16v-2H4z"
+                    d="M8 19h3v4h2v-4h3l-4-4zm8-14h-3V1h-2v4H8l4 4zM4 11v2h16v-2z"
                   />
                 </svg>
                 <div
-                  className="MuiTypography-root MuiTypography-body1"
+                  className="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
                   style={
-                    Object {
+                    {
                       "flexGrow": 1,
                     }
                   }
@@ -3699,12 +4031,12 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
       </div>
     </div>
     <div
-      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-6"
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-6 css-1xp0d6e-MuiGrid-root"
     >
       <div
         data-selenium="data-product-availability.sort-options"
         style={
-          Object {
+          {
             "alignItems": "center",
             "display": "flex",
             "justifyContent": "flex-end",
@@ -3712,10 +4044,10 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
         }
       >
         <h6
-          className="MuiTypography-root makeStyles-h6Small-4 MuiTypography-h6"
+          className="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-82 css-134ad2t-MuiTypography-root"
           style={
-            Object {
-              "marginRight": 12,
+            {
+              "marginRight": "12px",
               "whiteSpace": "nowrap",
             }
           }
@@ -3724,27 +4056,27 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
         </h6>
         <div
           style={
-            Object {
+            {
               "display": "flex",
               "justifyContent": "flex-end",
             }
           }
         >
           <div
-            className="MuiFormControl-root"
+            className="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
           >
             <div
-              ComponentPath="@material-ui/core/Select"
+              ComponentPath="@mui/material/Select"
               prop-aria-label="Sort Method"
-              prop-className="makeStyles-sortSelect-6"
+              prop-className="makeStyles-sortSelect-84"
               prop-data-selenium="data-product-availability.sort-options.method"
               prop-onChange="[Function]"
               prop-value="states"
             >
               <li
-                aria-disabled={false}
-                className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+                className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
                 onBlur={[Function]}
+                onContextMenu={[Function]}
                 onDragLeave={[Function]}
                 onFocus={[Function]}
                 onKeyDown={[Function]}
@@ -3761,13 +4093,13 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
               >
                 by State
                 <span
-                  className="MuiTouchRipple-root"
+                  className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                 />
               </li>
               <li
-                aria-disabled={false}
-                className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+                className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
                 onBlur={[Function]}
+                onContextMenu={[Function]}
                 onDragLeave={[Function]}
                 onFocus={[Function]}
                 onKeyDown={[Function]}
@@ -3784,13 +4116,13 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
               >
                 by Domain
                 <span
-                  className="MuiTouchRipple-root"
+                  className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                 />
               </li>
               <li
-                aria-disabled={false}
-                className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+                className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
                 onBlur={[Function]}
+                onContextMenu={[Function]}
                 onDragLeave={[Function]}
                 onFocus={[Function]}
                 onKeyDown={[Function]}
@@ -3807,24 +4139,25 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
               >
                 by Site
                 <span
-                  className="MuiTouchRipple-root"
+                  className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                 />
               </li>
             </div>
           </div>
           <div
-            className="MuiToggleButtonGroup-root"
+            className="MuiToggleButtonGroup-root css-kavg8e-MuiToggleButtonGroup-root"
             data-selenium="data-product-availability.sort-options.direction"
             role="group"
           >
             <button
               aria-label="Sort Ascending (A-Z)"
               aria-pressed={true}
-              className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal Mui-selected MuiToggleButton-sizeSmall"
+              className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-a8ej1-MuiButtonBase-root-MuiToggleButton-root"
               disabled={false}
               onBlur={[Function]}
               onChange={[Function]}
               onClick={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -3840,32 +4173,30 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
               type="button"
               value="ASC"
             >
-              <span
-                className="MuiToggleButton-label"
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+                data-testid="KeyboardArrowDownIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
               >
-                <svg
-                  aria-hidden={true}
-                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-                  focusable="false"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"
-                  />
-                </svg>
-              </span>
+                <path
+                  d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z"
+                />
+              </svg>
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </button>
             <button
               aria-label="Sort Descending (Z-A)"
               aria-pressed={false}
-              className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+              className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-a8ej1-MuiButtonBase-root-MuiToggleButton-root"
               disabled={false}
               onBlur={[Function]}
               onChange={[Function]}
               onClick={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -3881,22 +4212,19 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
               type="button"
               value="DESC"
             >
-              <span
-                className="MuiToggleButton-label"
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+                data-testid="KeyboardArrowUpIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
               >
-                <svg
-                  aria-hidden={true}
-                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-                  focusable="false"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
-                  />
-                </svg>
-              </span>
+                <path
+                  d="M7.41 15.41 12 10.83l4.59 4.58L18 14l-6-6-6 6z"
+                />
+              </svg>
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </button>
           </div>
@@ -3904,32 +4232,33 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
       </div>
     </div>
     <div
-      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-6"
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-6 css-1xp0d6e-MuiGrid-root"
       style={
-        Object {
+        {
           "alignItems": "center",
           "display": "flex",
         }
       }
     >
       <div
-        className="makeStyles-legendContainer-25"
-        style={Object {}}
+        className="makeStyles-legendContainer-99"
+        style={{}}
       >
         <div
-          className="makeStyles-legendTitleContainer-28"
+          className="makeStyles-legendTitleContainer-102"
         >
           <h6
-            className="MuiTypography-root makeStyles-legendTitle-26 MuiTypography-h6"
+            className="MuiTypography-root MuiTypography-h6 makeStyles-legendTitle-100 css-134ad2t-MuiTypography-root"
           >
             Key:
           </h6>
           <button
             aria-label="Help - Data Availability Chart Key"
-            className="MuiButtonBase-root MuiIconButton-root makeStyles-legendTitleIcon-27 MuiIconButton-colorPrimary MuiIconButton-sizeSmall"
+            className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall makeStyles-legendTitleIcon-101 css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
             disabled={false}
             onBlur={[Function]}
             onClick={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -3944,28 +4273,25 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
             title="Help - Data Availability Chart Key"
             type="button"
           >
-            <span
-              className="MuiIconButton-label"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              data-testid="HelpOutlineIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M11 18h2v-2h-2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4"
+              />
+            </svg>
             <span
-              className="MuiTouchRipple-root"
+              className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </button>
         </div>
         <div>
           <div
-            className="makeStyles-legendElement-29"
+            className="makeStyles-legendElement-103"
             title="Data have been published and released. Data are available for download"
           >
             <svg
@@ -3983,7 +4309,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                 y={0}
               />
               <text
-                className="makeStyles-legendElementText-30"
+                className="makeStyles-legendElementText-104"
                 x={15}
                 y={10}
               >
@@ -3992,7 +4318,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
             </svg>
           </div>
           <div
-            className="makeStyles-legendElement-29"
+            className="makeStyles-legendElement-103"
             title="Data was neither expected nor collected"
           >
             <svg
@@ -4010,7 +4336,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                 y={0}
               />
               <text
-                className="makeStyles-legendElementText-30"
+                className="makeStyles-legendElementText-104"
                 x={15}
                 y={10}
               >
@@ -4021,7 +4347,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
         </div>
         <div>
           <div
-            className="makeStyles-legendElement-29"
+            className="makeStyles-legendElement-103"
             title="If the chart is presenting a roll-up (e.g. view by state) then all sites rolled into a given row are selected"
           >
             <svg
@@ -4054,7 +4380,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                 y={0.5}
               />
               <text
-                className="makeStyles-legendElementText-30"
+                className="makeStyles-legendElementText-104"
                 x={42}
                 y={10}
               >
@@ -4063,7 +4389,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
             </svg>
           </div>
           <div
-            className="makeStyles-legendElement-29"
+            className="makeStyles-legendElement-103"
             title="If the chart is presenting a roll-up (e.g. view by state) then one or more but not all of the sites rolled into a given row are selected"
           >
             <svg
@@ -4096,7 +4422,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                 y={0.5}
               />
               <text
-                className="makeStyles-legendElementText-30"
+                className="makeStyles-legendElementText-104"
                 x={42}
                 y={10}
               >
@@ -4109,7 +4435,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
     </div>
   </div>
   <svg
-    className="makeStyles-svg-1"
+    className="makeStyles-svg-79"
     height={68}
     id="dpa-4"
   />

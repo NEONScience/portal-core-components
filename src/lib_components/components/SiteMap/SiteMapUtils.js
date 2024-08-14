@@ -2095,7 +2095,12 @@ export const calculateLocationsInBounds = (
 
 export const deriveFullObservatoryZoomLevel = (mapRef) => {
   const FALLBACK_ZOOM = MAP_ZOOM_DEFAULT;
-  if (typeof mapRef !== 'object' || mapRef === null || !mapRef.current) { return FALLBACK_ZOOM; }
+  if (typeof mapRef !== 'object' || mapRef === null || !mapRef.current
+    // eslint-disable-next-line no-underscore-dangle
+    || !mapRef.current._container || !mapRef.current._container.parentElement
+  ) {
+    return FALLBACK_ZOOM;
+  }
   // eslint-disable-next-line no-underscore-dangle
   const container = mapRef.current._container.parentElement;
   if (!container.clientWidth || !container.clientHeight) { return FALLBACK_ZOOM; }

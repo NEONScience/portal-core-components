@@ -184,8 +184,8 @@ describe('SiteMap - SiteMapUtils', () => {
 
   describe('deriveFullObservatoryZoomLevel()', () => {
     test('returns FALLBACK_ZOOM if provided mapRef is not valid', () => {
-      expect(deriveFullObservatoryZoomLevel()).toBe(2);
-      expect(deriveFullObservatoryZoomLevel({ current: null })).toBe(2);
+      expect(deriveFullObservatoryZoomLevel()).toBe(3);
+      expect(deriveFullObservatoryZoomLevel({ current: null })).toBe(3);
     });
     test('returns appropriate zoom levels for various container sizes', () => {
       const mapRef = { current: { container: { parentElement: {} } } };
@@ -655,7 +655,7 @@ describe('SiteMap - SiteMapUtils', () => {
       expect(parseManualLocationFeatureData(initialState)).toStrictEqual({
         neonContextHydrated: true,
         sites: { ...neonContextData.sites },
-        map: { ...getDefaultState().map, center: [52.68, -110.75] },
+        map: { ...getDefaultState().map, center: [52.68, -110.75], zoom: null },
         manualLocationData: [
           {
             manualLocationType: MANUAL_LOCATION_TYPES.PROTOTYPE_SITE,

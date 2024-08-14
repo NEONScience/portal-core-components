@@ -1,1 +1,1 @@
-module.exports = 'svg-file.svg';
+module.exports = { src: 'svg-file.svg' };

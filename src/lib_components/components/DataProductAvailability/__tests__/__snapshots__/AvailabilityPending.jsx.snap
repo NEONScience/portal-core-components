@@ -2,17 +2,17 @@
 
 exports[`DataProductAvailability - AvailabilityPending renders correctly for NeonContext that is final with error 1`] = `
 <div
-  className="MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded"
+  className="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-s384l0-MuiPaper-root-MuiCard-root"
   style={
-    Object {
+    {
       "width": "100%",
     }
   }
 >
   <div
-    className="MuiCardContent-root"
+    className="MuiCardContent-root css-ojcnvm-MuiCardContent-root"
     style={
-      Object {
+      {
         "alignItems": "center",
         "display": "flex",
         "flexDirection": "column",
@@ -23,18 +23,19 @@ exports[`DataProductAvailability - AvailabilityPending renders correctly for Neo
   >
     <svg
       aria-hidden={true}
-      className="MuiSvgIcon-root MuiSvgIcon-colorError MuiSvgIcon-fontSizeLarge"
+      className="MuiSvgIcon-root MuiSvgIcon-colorError MuiSvgIcon-fontSizeLarge css-28yyoa-MuiSvgIcon-root"
+      data-testid="WarningIcon"
       focusable="false"
       viewBox="0 0 24 24"
     >
       <path
-        d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"
+        d="M1 21h22L12 2zm12-3h-2v-2h2zm0-4h-2v-4h2z"
       />
     </svg>
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
+      className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
       style={
-        Object {
+        {
           "marginTop": "8px",
         }
       }
@@ -49,17 +50,17 @@ exports[`DataProductAvailability - AvailabilityPending renders correctly for Neo
 
 exports[`DataProductAvailability - AvailabilityPending renders correctly for NeonContext that is neither error nor final 1`] = `
 <div
-  className="MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded"
+  className="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-s384l0-MuiPaper-root-MuiCard-root"
   style={
-    Object {
+    {
       "width": "100%",
     }
   }
 >
   <div
-    className="MuiCardContent-root"
+    className="MuiCardContent-root css-ojcnvm-MuiCardContent-root"
     style={
-      Object {
+      {
         "alignItems": "center",
         "display": "flex",
         "flexDirection": "column",
@@ -69,35 +70,35 @@ exports[`DataProductAvailability - AvailabilityPending renders correctly for Neo
     }
   >
     <h6
-      className="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom"
+      className="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom css-j14d78-MuiTypography-root"
     >
       Loading Sites...
     </h6>
-    <div
-      className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+    <span
+      className="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-w2h3to-MuiCircularProgress-root"
       role="progressbar"
       style={
-        Object {
+        {
           "height": 40,
           "width": 40,
         }
       }
     >
       <svg
-        className="MuiCircularProgress-svg"
+        className="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
         viewBox="22 22 44 44"
       >
         <circle
-          className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+          className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
           cx={44}
           cy={44}
           fill="none"
           r={20.2}
           strokeWidth={3.6}
-          style={Object {}}
+          style={{}}
         />
       </svg>
-    </div>
+    </span>
   </div>
 </div>
 `;

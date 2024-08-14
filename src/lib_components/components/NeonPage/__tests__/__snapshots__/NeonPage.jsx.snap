@@ -2,52 +2,53 @@
 
 exports[`NeonPage NeonErrorPage 1`] = `
 <div
-  className="MuiContainer-root makeStyles-outerPageContainer-663 MuiContainer-maxWidthLg"
+  className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-765 css-1oqqzyl-MuiContainer-root"
 >
   <div
-    className="makeStyles-pageContent-664"
+    className="makeStyles-pageContent-766"
     data-selenium="neon-page.content"
   >
     <img
       alt="NEON Data Portal"
-      className="makeStyles-errorPageLogo-682"
-      src="NSF-NEON-logo.png"
+      className="makeStyles-errorPageLogo-784"
       title="NEON Data Portal"
     />
     <h1
-      className="MuiTypography-root makeStyles-pageTitle-678 MuiTypography-h3"
+      className="MuiTypography-root MuiTypography-h3 makeStyles-pageTitle-780 css-scgx7b-MuiTypography-root"
     >
       <svg
         aria-hidden={true}
-        className="MuiSvgIcon-root makeStyles-errorPageTitleIcon-680"
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium makeStyles-errorPageTitleIcon-782 css-i4bv87-MuiSvgIcon-root"
+        data-testid="WarningIcon"
         focusable="false"
         viewBox="0 0 24 24"
       >
         <path
-          d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"
+          d="M1 21h22L12 2zm12-3h-2v-2h2zm0-4h-2v-4h2z"
         />
       </svg>
       Something broke.
     </h1>
     <div>
       <span
-        className="MuiTypography-root makeStyles-errorPageCaption-681 MuiTypography-caption"
+        className="MuiTypography-root MuiTypography-caption makeStyles-errorPageCaption-783 css-287k3z-MuiTypography-root"
       >
         fail
       </span>
     </div>
     <div
       style={
-        Object {
+        {
           "display": "flex",
         }
       }
     >
       <button
-        className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary"
+        className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary css-l1djc-MuiButtonBase-root-MuiButton-root"
         disabled={false}
         onBlur={[Function]}
         onClick={[Function]}
+        onContextMenu={[Function]}
         onDragLeave={[Function]}
         onFocus={[Function]}
         onKeyDown={[Function]}
@@ -62,33 +63,30 @@ exports[`NeonPage NeonErrorPage 1`] = `
         type="button"
       >
         <span
-          className="MuiButton-label"
+          className="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeMedium css-1ei49fk-MuiButton-startIcon"
         >
-          <span
-            className="MuiButton-startIcon MuiButton-iconSizeMedium"
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="AutorenewIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
           >
-            <svg
-              aria-hidden={true}
-              className="MuiSvgIcon-root"
-              focusable="false"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"
-              />
-            </svg>
-          </span>
-          Reset and Try Again
+            <path
+              d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6m6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26"
+            />
+          </svg>
         </span>
+        Reset and Try Again
         <span
-          className="MuiTouchRipple-root"
+          className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
         />
       </button>
       <a
-        aria-disabled={false}
-        className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary"
+        className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-np7eoe-MuiButtonBase-root-MuiButton-root"
         href="/"
         onBlur={[Function]}
+        onContextMenu={[Function]}
         onDragLeave={[Function]}
         onFocus={[Function]}
         onKeyDown={[Function]}
@@ -100,33 +98,30 @@ exports[`NeonPage NeonErrorPage 1`] = `
         onTouchMove={[Function]}
         onTouchStart={[Function]}
         style={
-          Object {
-            "marginLeft": 32,
+          {
+            "marginLeft": "32px",
           }
         }
         tabIndex={0}
       >
         <span
-          className="MuiButton-label"
+          className="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeMedium css-1ei49fk-MuiButton-startIcon"
         >
-          <span
-            className="MuiButton-startIcon MuiButton-iconSizeMedium"
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="HomeIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
           >
-            <svg
-              aria-hidden={true}
-              className="MuiSvgIcon-root"
-              focusable="false"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"
-              />
-            </svg>
-          </span>
-          Return Home
+            <path
+              d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"
+            />
+          </svg>
         </span>
+        Return Home
         <span
-          className="MuiTouchRipple-root"
+          className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
         />
       </a>
     </div>
@@ -140,15 +135,15 @@ exports[`NeonPage NeonErrorPage 1`] = `
 `;
 
 exports[`NeonPage renders a basic functional page with no props 1`] = `
-Array [
+[
   <header
     className="makeStyles-skeletonHeader-22"
     id="header"
   >
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": "120px",
           "width": "100%",
         }
@@ -156,9 +151,9 @@ Array [
     />
   </header>,
   <div
-    className="MuiContainer-root makeStyles-outerPageContainer-1 MuiContainer-maxWidthLg"
+    className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-1 css-1oqqzyl-MuiContainer-root"
     style={
-      Object {
+      {
         "maxWidth": "2000px",
       }
     }
@@ -167,7 +162,7 @@ Array [
       className="makeStyles-pageContent-2"
       data-selenium="neon-page.content"
       style={
-        Object {
+        {
           "top": "0px",
         }
       }
@@ -181,9 +176,9 @@ Array [
     id="footer"
   >
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": "300px",
           "width": "100%",
         }
@@ -194,15 +189,15 @@ Array [
 `;
 
 exports[`NeonPage renders sidebar items as skeletons when in appropriate state 1`] = `
-Array [
+[
   <header
-    className="makeStyles-skeletonHeader-22"
+    className="makeStyles-skeletonHeader-607"
     id="header"
   >
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": "120px",
           "width": "100%",
         }
@@ -210,17 +205,17 @@ Array [
     />
   </header>,
   <div
-    className="MuiContainer-root makeStyles-outerPageContainer-516 MuiContainer-maxWidthLg"
+    className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-586 css-1oqqzyl-MuiContainer-root"
     style={
-      Object {
+      {
         "maxWidth": "calc(2000px - 348px)",
       }
     }
   >
     <div
-      className="makeStyles-sidebarContainer-519"
+      className="makeStyles-sidebarContainer-589"
       style={
-        Object {
+        {
           "width": "300px",
         }
       }
@@ -230,18 +225,18 @@ Array [
       </div>
     </div>
     <div
-      className="makeStyles-pageContent-517"
+      className="makeStyles-pageContent-587"
       data-selenium="neon-page.content"
       style={
-        Object {
+        {
           "top": "12px",
         }
       }
     >
       <span
-        className="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse"
+        className="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse css-18hkvsx-MuiSkeleton-root"
         style={
-          Object {
+          {
             "height": 24,
             "margin": "16px 0px 32px 0px",
             "width": "45%",
@@ -257,9 +252,9 @@ Array [
     id="footer"
   >
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": "300px",
           "width": "100%",
         }
@@ -267,50 +262,51 @@ Array [
     />
   </footer>,
   <div
-    ComponentPath="@material-ui/core/Backdrop"
+    ComponentPath="@mui/material/Backdrop"
     prop-open={true}
   >
     <div
-      className="MuiPaper-root makeStyles-backdropPaper-530 MuiPaper-elevation1 MuiPaper-rounded"
+      className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-backdropPaper-600 css-zuyt79-MuiPaper-root"
     >
       <h3
-        className="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom"
+        className="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-18xtj6i-MuiTypography-root"
       >
         Loading
       </h3>
-      <div
-        className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+      <span
+        className="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-w2h3to-MuiCircularProgress-root"
         role="progressbar"
         style={
-          Object {
+          {
             "height": 40,
             "width": 40,
           }
         }
       >
         <svg
-          className="MuiCircularProgress-svg"
+          className="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
           viewBox="22 22 44 44"
         >
           <circle
-            className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+            className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
             cx={44}
             cy={44}
             fill="none"
             r={20.2}
             strokeWidth={3.6}
-            style={Object {}}
+            style={{}}
           />
         </svg>
-      </div>
+      </span>
       <div
-        className="makeStyles-dismissOverlay-536"
+        className="makeStyles-dismissOverlay-606"
       >
         <button
-          className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+          className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
           disabled={false}
           onBlur={[Function]}
           onClick={[Function]}
+          onContextMenu={[Function]}
           onDragLeave={[Function]}
           onFocus={[Function]}
           onKeyDown={[Function]}
@@ -325,24 +321,21 @@ Array [
           type="button"
         >
           <span
-            className="MuiButton-label"
+            className="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-x6r74k-MuiButton-startIcon"
           >
-            <span
-              className="MuiButton-startIcon MuiButton-iconSizeSmall"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+              data-testid="ClearIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-                />
-              </svg>
-            </span>
-            Dismiss
+              <path
+                d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+              />
+            </svg>
           </span>
+          Dismiss
         </button>
       </div>
     </div>
@@ -351,25 +344,25 @@ Array [
 `;
 
 exports[`NeonPage renders with a custom header/footer 1`] = `
-Array [
+[
   <header>
     <div>
       Header
     </div>
   </header>,
   <div
-    className="MuiContainer-root makeStyles-outerPageContainer-390 MuiContainer-maxWidthLg"
+    className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-445 css-1oqqzyl-MuiContainer-root"
     style={
-      Object {
+      {
         "maxWidth": "2000px",
       }
     }
   >
     <div
-      className="makeStyles-pageContent-391"
+      className="makeStyles-pageContent-446"
       data-selenium="neon-page.content"
       style={
-        Object {
+        {
           "top": "0px",
         }
       }
@@ -384,19 +377,20 @@ Array [
       Header
     </div>
   </footer>,
+  ",",
 ]
 `;
 
 exports[`NeonPage renders with a notification 1`] = `
-Array [
+[
   <header
-    className="makeStyles-skeletonHeader-22"
+    className="makeStyles-skeletonHeader-349"
     id="header"
   >
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": "120px",
           "width": "100%",
         }
@@ -404,18 +398,18 @@ Array [
     />
   </header>,
   <div
-    className="MuiContainer-root makeStyles-outerPageContainer-327 MuiContainer-maxWidthLg"
+    className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-380 css-1oqqzyl-MuiContainer-root"
     style={
-      Object {
+      {
         "maxWidth": "2000px",
       }
     }
   >
     <div
-      className="makeStyles-pageContent-328"
+      className="makeStyles-pageContent-381"
       data-selenium="neon-page.content"
       style={
-        Object {
+        {
           "top": "0px",
         }
       }
@@ -426,24 +420,24 @@ Array [
     </div>
   </div>,
   <div
-    ComponentPath="@material-ui/core/Snackbar"
-    prop-ContentProps="{\\"aria-describedby\\":\\"neon-data-portal-notifications\\"}"
-    prop-anchorOrigin="{\\"vertical\\":\\"bottom\\",\\"horizontal\\":\\"right\\"}"
+    ComponentPath="@mui/material/Snackbar"
+    prop-ContentProps="{"aria-describedby":"neon-data-portal-notifications"}"
+    prop-anchorOrigin="{"vertical":"bottom","horizontal":"right"}"
     prop-open={true}
   >
     <div
-      className="MuiPaper-root MuiSnackbarContent-root makeStyles-notification-27 MuiPaper-elevation6"
+      className="MuiPaper-root MuiPaper-elevation MuiPaper-elevation6 MuiSnackbarContent-root makeStyles-notification-354 css-3em1l5-MuiPaper-root-MuiSnackbarContent-root"
       role="alert"
     >
       <div
-        className="MuiSnackbarContent-message"
+        className="MuiSnackbarContent-message css-1exqwzz-MuiSnackbarContent-message"
       >
         <div
           id="neon-data-portal-notifications"
         >
           <div
             dangerouslySetInnerHTML={
-              Object {
+              {
                 "__html": "Notification",
               }
             }
@@ -451,14 +445,15 @@ Array [
         </div>
       </div>
       <div
-        className="MuiSnackbarContent-action"
+        className="MuiSnackbarContent-action css-1kr9x0n-MuiSnackbarContent-action"
       >
         <button
           aria-label="close"
-          className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+          className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-wwtaoh-MuiButtonBase-root-MuiIconButton-root"
           disabled={false}
           onBlur={[Function]}
           onClick={[Function]}
+          onContextMenu={[Function]}
           onDragLeave={[Function]}
           onFocus={[Function]}
           onKeyDown={[Function]}
@@ -472,22 +467,19 @@ Array [
           tabIndex={0}
           type="button"
         >
-          <span
-            className="MuiIconButton-label"
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="CloseIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
           >
-            <svg
-              aria-hidden={true}
-              className="MuiSvgIcon-root"
-              focusable="false"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-              />
-            </svg>
-          </span>
+            <path
+              d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+            />
+          </svg>
           <span
-            className="MuiTouchRipple-root"
+            className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </button>
       </div>
@@ -497,9 +489,9 @@ Array [
     id="footer"
   >
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": "300px",
           "width": "100%",
         }
@@ -510,15 +502,15 @@ Array [
 `;
 
 exports[`NeonPage renders with a title and subtitle 1`] = `
-Array [
+[
   <header
-    className="makeStyles-skeletonHeader-22"
+    className="makeStyles-skeletonHeader-53"
     id="header"
   >
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": "120px",
           "width": "100%",
         }
@@ -526,30 +518,30 @@ Array [
     />
   </header>,
   <div
-    className="MuiContainer-root makeStyles-outerPageContainer-74 MuiContainer-maxWidthLg"
+    className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-84 css-1oqqzyl-MuiContainer-root"
     style={
-      Object {
+      {
         "maxWidth": "2000px",
       }
     }
   >
     <div
-      className="makeStyles-pageContent-75"
+      className="makeStyles-pageContent-85"
       data-selenium="neon-page.content"
       style={
-        Object {
+        {
           "top": "0px",
         }
       }
     >
       <h1
-        className="MuiTypography-root makeStyles-pageTitle-89 MuiTypography-h3"
+        className="MuiTypography-root MuiTypography-h3 makeStyles-pageTitle-99 css-scgx7b-MuiTypography-root"
         data-selenium="neon-page.title"
       >
         Title
       </h1>
       <p
-        className="MuiTypography-root makeStyles-pageSubtitle-90 MuiTypography-subtitle1"
+        className="MuiTypography-root MuiTypography-subtitle1 makeStyles-pageSubtitle-100 css-1fq4phv-MuiTypography-root"
         data-selenium="neon-page.subtitle"
       >
         Subtitle
@@ -563,9 +555,9 @@ Array [
     id="footer"
   >
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": "300px",
           "width": "100%",
         }
@@ -576,15 +568,15 @@ Array [
 `;
 
 exports[`NeonPage renders with an error 1`] = `
-Array [
+[
   <header
-    className="makeStyles-skeletonHeader-22"
+    className="makeStyles-skeletonHeader-318"
     id="header"
   >
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": "120px",
           "width": "100%",
         }
@@ -592,26 +584,26 @@ Array [
     />
   </header>,
   <div
-    className="MuiContainer-root makeStyles-outerPageContainer-264 MuiContainer-maxWidthLg"
+    className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-297 css-1oqqzyl-MuiContainer-root"
     style={
-      Object {
+      {
         "maxWidth": "2000px",
       }
     }
   >
     <div
-      className="makeStyles-pageContent-265"
+      className="makeStyles-pageContent-298"
       data-selenium="neon-page.content"
       style={
-        Object {
+        {
           "top": "0px",
         }
       }
     >
       <span
-        className="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse"
+        className="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse css-18hkvsx-MuiSkeleton-root"
         style={
-          Object {
+          {
             "height": 24,
             "margin": "16px 0px 32px 0px",
             "width": "45%",
@@ -627,9 +619,9 @@ Array [
     id="footer"
   >
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": "300px",
           "width": "100%",
         }
@@ -637,40 +629,42 @@ Array [
     />
   </footer>,
   <div
-    ComponentPath="@material-ui/core/Backdrop"
+    ComponentPath="@mui/material/Backdrop"
     prop-open={true}
   >
     <div
-      className="MuiPaper-root makeStyles-backdropPaper-278 MuiPaper-elevation1 MuiPaper-rounded"
+      className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-backdropPaper-311 css-zuyt79-MuiPaper-root"
     >
       <svg
         aria-hidden={true}
-        className="MuiSvgIcon-root MuiSvgIcon-colorError MuiSvgIcon-fontSizeLarge"
+        className="MuiSvgIcon-root MuiSvgIcon-colorError MuiSvgIcon-fontSizeLarge css-28yyoa-MuiSvgIcon-root"
+        data-testid="WarningIcon"
         focusable="false"
         viewBox="0 0 24 24"
       >
         <path
-          d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"
+          d="M1 21h22L12 2zm12-3h-2v-2h2zm0-4h-2v-4h2z"
         />
       </svg>
       <h3
-        className="MuiTypography-root MuiTypography-h5"
+        className="MuiTypography-root MuiTypography-h5 css-1v75lyw-MuiTypography-root"
         style={
-          Object {
-            "marginTop": 8,
+          {
+            "marginTop": "8px",
           }
         }
       >
         Fail
       </h3>
       <div
-        className="makeStyles-dismissOverlay-284"
+        className="makeStyles-dismissOverlay-317"
       >
         <button
-          className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+          className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
           disabled={false}
           onBlur={[Function]}
           onClick={[Function]}
+          onContextMenu={[Function]}
           onDragLeave={[Function]}
           onFocus={[Function]}
           onKeyDown={[Function]}
@@ -685,24 +679,21 @@ Array [
           type="button"
         >
           <span
-            className="MuiButton-label"
+            className="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-x6r74k-MuiButton-startIcon"
           >
-            <span
-              className="MuiButton-startIcon MuiButton-iconSizeSmall"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+              data-testid="ClearIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-                />
-              </svg>
-            </span>
-            Dismiss
+              <path
+                d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+              />
+            </svg>
           </span>
+          Dismiss
         </button>
       </div>
     </div>
@@ -711,15 +702,15 @@ Array [
 `;
 
 exports[`NeonPage renders with custom sidebar content 1`] = `
-Array [
+[
   <header
-    className="makeStyles-skeletonHeader-22"
+    className="makeStyles-skeletonHeader-491"
     id="header"
   >
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": "120px",
           "width": "100%",
         }
@@ -727,17 +718,17 @@ Array [
     />
   </header>,
   <div
-    className="MuiContainer-root makeStyles-outerPageContainer-453 MuiContainer-maxWidthLg"
+    className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-522 css-1oqqzyl-MuiContainer-root"
     style={
-      Object {
+      {
         "maxWidth": "calc(2000px - 348px)",
       }
     }
   >
     <div
-      className="makeStyles-sidebarContainer-456"
+      className="makeStyles-sidebarContainer-525"
       style={
-        Object {
+        {
           "width": "300px",
         }
       }
@@ -747,10 +738,10 @@ Array [
       </div>
     </div>
     <div
-      className="makeStyles-pageContent-454"
+      className="makeStyles-pageContent-523"
       data-selenium="neon-page.content"
       style={
-        Object {
+        {
           "top": "12px",
         }
       }
@@ -764,9 +755,9 @@ Array [
     id="footer"
   >
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": "300px",
           "width": "100%",
         }
@@ -777,15 +768,15 @@ Array [
 `;
 
 exports[`NeonPage renders with loading message 1`] = `
-Array [
+[
   <header
-    className="makeStyles-skeletonHeader-22"
+    className="makeStyles-skeletonHeader-170"
     id="header"
   >
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": "120px",
           "width": "100%",
         }
@@ -793,26 +784,26 @@ Array [
     />
   </header>,
   <div
-    className="MuiContainer-root makeStyles-outerPageContainer-138 MuiContainer-maxWidthLg"
+    className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-149 css-1oqqzyl-MuiContainer-root"
     style={
-      Object {
+      {
         "maxWidth": "3333px",
       }
     }
   >
     <div
-      className="makeStyles-pageContent-139"
+      className="makeStyles-pageContent-150"
       data-selenium="neon-page.content"
       style={
-        Object {
+        {
           "top": "0px",
         }
       }
     >
       <span
-        className="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse"
+        className="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse css-18hkvsx-MuiSkeleton-root"
         style={
-          Object {
+          {
             "height": 24,
             "margin": "16px 0px 32px 0px",
             "width": "45%",
@@ -828,9 +819,9 @@ Array [
     id="footer"
   >
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": "300px",
           "width": "100%",
         }
@@ -838,50 +829,51 @@ Array [
     />
   </footer>,
   <div
-    ComponentPath="@material-ui/core/Backdrop"
+    ComponentPath="@mui/material/Backdrop"
     prop-open={true}
   >
     <div
-      className="MuiPaper-root makeStyles-backdropPaper-152 MuiPaper-elevation1 MuiPaper-rounded"
+      className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-backdropPaper-163 css-zuyt79-MuiPaper-root"
     >
       <h3
-        className="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom"
+        className="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-18xtj6i-MuiTypography-root"
       >
         Loading
       </h3>
-      <div
-        className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+      <span
+        className="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-w2h3to-MuiCircularProgress-root"
         role="progressbar"
         style={
-          Object {
+          {
             "height": 40,
             "width": 40,
           }
         }
       >
         <svg
-          className="MuiCircularProgress-svg"
+          className="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
           viewBox="22 22 44 44"
         >
           <circle
-            className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+            className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
             cx={44}
             cy={44}
             fill="none"
             r={20.2}
             strokeWidth={3.6}
-            style={Object {}}
+            style={{}}
           />
         </svg>
-      </div>
+      </span>
       <div
-        className="makeStyles-dismissOverlay-158"
+        className="makeStyles-dismissOverlay-169"
       >
         <button
-          className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+          className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
           disabled={false}
           onBlur={[Function]}
           onClick={[Function]}
+          onContextMenu={[Function]}
           onDragLeave={[Function]}
           onFocus={[Function]}
           onKeyDown={[Function]}
@@ -896,24 +888,21 @@ Array [
           type="button"
         >
           <span
-            className="MuiButton-label"
+            className="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-x6r74k-MuiButton-startIcon"
           >
-            <span
-              className="MuiButton-startIcon MuiButton-iconSizeSmall"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+              data-testid="ClearIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-                />
-              </svg>
-            </span>
-            Dismiss
+              <path
+                d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+              />
+            </svg>
           </span>
+          Dismiss
         </button>
       </div>
     </div>
@@ -922,15 +911,15 @@ Array [
 `;
 
 exports[`NeonPage renders with loading message and progress 1`] = `
-Array [
+[
   <header
-    className="makeStyles-skeletonHeader-22"
+    className="makeStyles-skeletonHeader-201"
     id="header"
   >
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": "120px",
           "width": "100%",
         }
@@ -938,26 +927,26 @@ Array [
     />
   </header>,
   <div
-    className="MuiContainer-root makeStyles-outerPageContainer-201 MuiContainer-maxWidthLg"
+    className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-232 css-1oqqzyl-MuiContainer-root"
     style={
-      Object {
+      {
         "maxWidth": "2000px",
       }
     }
   >
     <div
-      className="makeStyles-pageContent-202"
+      className="makeStyles-pageContent-233"
       data-selenium="neon-page.content"
       style={
-        Object {
+        {
           "top": "0px",
         }
       }
     >
       <span
-        className="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse"
+        className="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse css-18hkvsx-MuiSkeleton-root"
         style={
-          Object {
+          {
             "height": 24,
             "margin": "16px 0px 32px 0px",
             "width": "45%",
@@ -973,9 +962,9 @@ Array [
     id="footer"
   >
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": "300px",
           "width": "100%",
         }
@@ -983,23 +972,23 @@ Array [
     />
   </footer>,
   <div
-    ComponentPath="@material-ui/core/Backdrop"
+    ComponentPath="@mui/material/Backdrop"
     prop-open={true}
   >
     <div
-      className="MuiPaper-root makeStyles-backdropPaper-215 MuiPaper-elevation1 MuiPaper-rounded"
+      className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-backdropPaper-246 css-zuyt79-MuiPaper-root"
     >
       <h3
-        className="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom"
+        className="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-18xtj6i-MuiTypography-root"
       >
         Loading
       </h3>
-      <div
+      <span
         aria-valuenow={62}
-        className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-determinate"
+        className="MuiCircularProgress-root MuiCircularProgress-determinate MuiCircularProgress-colorPrimary css-21zp0h-MuiCircularProgress-root"
         role="progressbar"
         style={
-          Object {
+          {
             "height": 40,
             "transform": "rotate(-90deg)",
             "width": 40,
@@ -1007,33 +996,34 @@ Array [
         }
       >
         <svg
-          className="MuiCircularProgress-svg"
+          className="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
           viewBox="22 22 44 44"
         >
           <circle
-            className="MuiCircularProgress-circle MuiCircularProgress-circleDeterminate"
+            className="MuiCircularProgress-circle MuiCircularProgress-circleDeterminate css-oxts8u-MuiCircularProgress-circle"
             cx={44}
             cy={44}
             fill="none"
             r={20.2}
             strokeWidth={3.6}
             style={
-              Object {
+              {
                 "strokeDasharray": "126.920",
                 "strokeDashoffset": "48.230px",
               }
             }
           />
         </svg>
-      </div>
+      </span>
       <div
-        className="makeStyles-dismissOverlay-221"
+        className="makeStyles-dismissOverlay-252"
       >
         <button
-          className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+          className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
           disabled={false}
           onBlur={[Function]}
           onClick={[Function]}
+          onContextMenu={[Function]}
           onDragLeave={[Function]}
           onFocus={[Function]}
           onKeyDown={[Function]}
@@ -1048,26 +1038,23 @@ Array [
           type="button"
         >
           <span
-            className="MuiButton-label"
+            className="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-x6r74k-MuiButton-startIcon"
           >
-            <span
-              className="MuiButton-startIcon MuiButton-iconSizeSmall"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+              data-testid="ClearIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-                />
-              </svg>
-            </span>
-            Dismiss
+              <path
+                d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+              />
+            </svg>
           </span>
+          Dismiss
           <span
-            className="MuiTouchRipple-root"
+            className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </button>
       </div>
@@ -1077,15 +1064,15 @@ Array [
 `;
 
 exports[`NeonPage renders with sidebar links 1`] = `
-Array [
+[
   <header
-    className="makeStyles-skeletonHeader-22"
+    className="makeStyles-skeletonHeader-638"
     id="header"
   >
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": "120px",
           "width": "100%",
         }
@@ -1093,47 +1080,47 @@ Array [
     />
   </header>,
   <div
-    className="MuiContainer-root makeStyles-outerPageContainer-579 MuiContainer-maxWidthLg"
+    className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-669 css-1oqqzyl-MuiContainer-root"
     style={
-      Object {
+      {
         "maxWidth": "calc(2000px - 348px)",
       }
     }
   >
     <div
-      className="makeStyles-sidebarContainer-582"
+      className="makeStyles-sidebarContainer-672"
       style={
-        Object {
+        {
           "width": "300px",
         }
       }
     >
       <div
-        className="makeStyles-sidebarInnerStickyContainer-583 neon__sidebar-sticky"
+        className="makeStyles-sidebarInnerStickyContainer-673 neon__sidebar-sticky"
       >
         <div
-          className="makeStyles-sidebarTitleContainer-584"
+          className="makeStyles-sidebarTitleContainer-674"
         >
           <div
-            className="makeStyles-sidebarTitlesContainer-587"
+            className="makeStyles-sidebarTitlesContainer-677"
           >
             <h3
-              className="MuiTypography-root makeStyles-sidebarTitle-585 MuiTypography-h5"
+              className="MuiTypography-root MuiTypography-h5 makeStyles-sidebarTitle-675 css-1v75lyw-MuiTypography-root"
             >
               foo
             </h3>
             <h4
-              className="MuiTypography-root makeStyles-sidebarSubtitle-586 MuiTypography-subtitle2"
+              className="MuiTypography-root MuiTypography-subtitle2 makeStyles-sidebarSubtitle-676 css-g2luyu-MuiTypography-root"
             >
               bar
             </h4>
           </div>
         </div>
         <hr
-          className="MuiDivider-root makeStyles-sidebarDivider-592"
+          className="MuiDivider-root MuiDivider-fullWidth makeStyles-sidebarDivider-682 css-9mgopn-MuiDivider-root"
           style={
-            Object {
-              "width": "236px",
+            {
+              "width": "NaN",
             }
           }
         />
@@ -1141,43 +1128,43 @@ Array [
           More
         </div>
         <hr
-          className="MuiDivider-root makeStyles-sidebarDivider-592"
+          className="MuiDivider-root MuiDivider-fullWidth makeStyles-sidebarDivider-682 css-9mgopn-MuiDivider-root"
           style={
-            Object {
-              "width": "236px",
+            {
+              "width": "NaN",
             }
           }
         />
         <div
-          className="makeStyles-sidebarLinksContainer-591"
+          className="makeStyles-sidebarLinksContainer-681"
         >
           <a
-            className="MuiTypography-root MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-588 makeStyles-sidebarLinkCurrent-589 MuiTypography-colorPrimary"
+            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-678 makeStyles-sidebarLinkCurrent-679 css-duangj-MuiTypography-root-MuiLink-root"
             href="#"
             onBlur={[Function]}
             onClick={null}
             onFocus={[Function]}
-            style={Object {}}
+            style={{}}
           >
             Section A
           </a>
           <a
-            className="MuiTypography-root MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-588 MuiTypography-colorPrimary"
+            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-678 css-duangj-MuiTypography-root-MuiLink-root"
             href="#sectionB"
             onBlur={[Function]}
             onClick={null}
             onFocus={[Function]}
-            style={Object {}}
+            style={{}}
           >
             Section B
           </a>
           <a
-            className="MuiTypography-root MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-588 MuiTypography-colorPrimary"
+            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-678 css-duangj-MuiTypography-root-MuiLink-root"
             href="#sectionC"
             onBlur={[Function]}
             onClick={null}
             onFocus={[Function]}
-            style={Object {}}
+            style={{}}
           >
             <div>
               stub icon
@@ -1185,32 +1172,32 @@ Array [
             Section C
           </a>
           <a
-            className="MuiTypography-root MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-588 MuiTypography-colorPrimary"
+            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-678 css-duangj-MuiTypography-root-MuiLink-root"
             href="#sectionD"
             onBlur={[Function]}
             onClick={null}
             onFocus={[Function]}
-            style={Object {}}
+            style={{}}
           >
             Section D
           </a>
         </div>
         <hr
-          className="MuiDivider-root makeStyles-sidebarDivider-592"
+          className="MuiDivider-root MuiDivider-fullWidth makeStyles-sidebarDivider-682 css-9mgopn-MuiDivider-root"
           style={
-            Object {
+            {
               "marginBottom": "0px",
-              "width": "236px",
+              "width": "NaN",
             }
           }
         />
       </div>
     </div>
     <div
-      className="makeStyles-pageContent-580"
+      className="makeStyles-pageContent-670"
       data-selenium="neon-page.content"
       style={
-        Object {
+        {
           "top": "12px",
         }
       }
@@ -1224,9 +1211,9 @@ Array [
     id="footer"
   >
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": "300px",
           "width": "100%",
         }
@@ -1237,15 +1224,15 @@ Array [
 `;
 
 exports[`NeonPage renders with sidebar links as standlone children 1`] = `
-Array [
+[
   <header
-    className="makeStyles-skeletonHeader-22"
+    className="makeStyles-skeletonHeader-755"
     id="header"
   >
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": "120px",
           "width": "100%",
         }
@@ -1253,17 +1240,17 @@ Array [
     />
   </header>,
   <div
-    className="MuiContainer-root makeStyles-outerPageContainer-642 MuiContainer-maxWidthLg"
+    className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-734 css-1oqqzyl-MuiContainer-root"
     style={
-      Object {
+      {
         "maxWidth": "calc(2000px - 470px)",
       }
     }
   >
     <div
-      className="makeStyles-sidebarContainer-645 sidebarClassName"
+      className="makeStyles-sidebarContainer-737 sidebarClassName"
       style={
-        Object {
+        {
           "width": "422px",
         }
       }
@@ -1272,62 +1259,62 @@ Array [
         className={null}
       >
         <div
-          className="makeStyles-sidebarTitleContainer-647"
+          className="makeStyles-sidebarTitleContainer-739"
         />
         <hr
-          className="MuiDivider-root makeStyles-sidebarDivider-655"
+          className="MuiDivider-root MuiDivider-fullWidth makeStyles-sidebarDivider-747 css-9mgopn-MuiDivider-root"
           style={
-            Object {
-              "width": "358px",
+            {
+              "width": "NaN",
             }
           }
         />
         <div
-          className="makeStyles-sidebarLinksContainer-654"
+          className="makeStyles-sidebarLinksContainer-746"
         >
           <a
-            className="MuiTypography-root MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-651 makeStyles-sidebarLinkCurrent-652 MuiTypography-colorPrimary"
+            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-743 makeStyles-sidebarLinkCurrent-744 css-duangj-MuiTypography-root-MuiLink-root"
             href="#sectionA"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
-            style={Object {}}
+            style={{}}
           >
             Section A
           </a>
           <a
-            className="MuiTypography-root MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-651 makeStyles-sidebarLinkCurrent-652 MuiTypography-colorPrimary"
+            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-743 makeStyles-sidebarLinkCurrent-744 css-duangj-MuiTypography-root-MuiLink-root"
             href="#sectionA"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
-            style={Object {}}
+            style={{}}
           >
             Section B
           </a>
         </div>
         <hr
-          className="MuiDivider-root makeStyles-sidebarDivider-655"
+          className="MuiDivider-root MuiDivider-fullWidth makeStyles-sidebarDivider-747 css-9mgopn-MuiDivider-root"
           style={
-            Object {
+            {
               "marginBottom": "0px",
-              "width": "358px",
+              "width": "NaN",
             }
           }
         />
       </div>
     </div>
     <div
-      className="makeStyles-pageContent-643"
+      className="makeStyles-pageContent-735"
       data-selenium="neon-page.content"
       style={
-        Object {
+        {
           "top": "12px",
         }
       }
     >
       <h1
-        className="MuiTypography-root makeStyles-pageTitle-657 MuiTypography-h3"
+        className="MuiTypography-root MuiTypography-h3 makeStyles-pageTitle-749 css-scgx7b-MuiTypography-root"
         data-selenium="neon-page.title"
       >
         Section B
@@ -1341,9 +1328,9 @@ Array [
     id="footer"
   >
     <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+      className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
       style={
-        Object {
+        {
           "height": "300px",
           "width": "100%",
         }

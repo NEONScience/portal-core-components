@@ -4,7 +4,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
 <div
   data-selenium="data-product-availability"
   style={
-    Object {
+    {
       "minWidth": "153px",
       "width": "100%",
     }
@@ -191,24 +191,24 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
     </defs>
   </svg>
   <div
-    className="makeStyles-viewAndSortOptionsContainer-5"
+    className="makeStyles-viewAndSortOptionsContainer-23"
   >
     <div
       data-selenium="data-product-availability.breakout-options"
       style={
-        Object {
+        {
           "alignItems": "center",
           "display": "flex",
           "justifyContent": "flex-start",
-          "marginRight": 24,
+          "marginRight": "24px",
         }
       }
     >
       <h6
-        className="MuiTypography-root makeStyles-h6Small-2 MuiTypography-h6"
+        className="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-20 css-134ad2t-MuiTypography-root"
         style={
-          Object {
-            "marginRight": 12,
+          {
+            "marginRight": "12px",
             "whiteSpace": "nowrap",
           }
         }
@@ -216,18 +216,18 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
         View By:
       </h6>
       <div
-        className="MuiToggleButtonGroup-root"
-        color="primary"
+        className="MuiToggleButtonGroup-root css-kavg8e-MuiToggleButtonGroup-root"
         role="group"
         variant="outlined"
       >
         <button
           aria-pressed={false}
-          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-ijzjdu-MuiButtonBase-root-MuiToggleButton-root"
           disabled={false}
           onBlur={[Function]}
           onChange={[Function]}
           onClick={[Function]}
+          onContextMenu={[Function]}
           onDragLeave={[Function]}
           onFocus={[Function]}
           onKeyDown={[Function]}
@@ -242,19 +242,16 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
           type="button"
           value="states"
         >
-          <span
-            className="MuiToggleButton-label"
-          >
-            states
-          </span>
+          states
         </button>
         <button
           aria-pressed={false}
-          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-ijzjdu-MuiButtonBase-root-MuiToggleButton-root"
           disabled={false}
           onBlur={[Function]}
           onChange={[Function]}
           onClick={[Function]}
+          onContextMenu={[Function]}
           onDragLeave={[Function]}
           onFocus={[Function]}
           onKeyDown={[Function]}
@@ -269,19 +266,16 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
           type="button"
           value="domains"
         >
-          <span
-            className="MuiToggleButton-label"
-          >
-            domains
-          </span>
+          domains
         </button>
         <button
           aria-pressed={false}
-          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-ijzjdu-MuiButtonBase-root-MuiToggleButton-root"
           disabled={false}
           onBlur={[Function]}
           onChange={[Function]}
           onClick={[Function]}
+          onContextMenu={[Function]}
           onDragLeave={[Function]}
           onFocus={[Function]}
           onKeyDown={[Function]}
@@ -296,19 +290,16 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
           type="button"
           value="sites"
         >
-          <span
-            className="MuiToggleButton-label"
-          >
-            sites
-          </span>
+          sites
         </button>
         <button
           aria-pressed={false}
-          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-ijzjdu-MuiButtonBase-root-MuiToggleButton-root"
           disabled={false}
           onBlur={[Function]}
           onChange={[Function]}
           onClick={[Function]}
+          onContextMenu={[Function]}
           onDragLeave={[Function]}
           onFocus={[Function]}
           onKeyDown={[Function]}
@@ -323,18 +314,14 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
           type="button"
           value="tables"
         >
-          <span
-            className="MuiToggleButton-label"
-          >
-            tables
-          </span>
+          tables
         </button>
       </div>
     </div>
     <div
       data-selenium="data-product-availability.sort-options"
       style={
-        Object {
+        {
           "alignItems": "center",
           "display": "flex",
           "justifyContent": "flex-start",
@@ -342,10 +329,10 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
       }
     >
       <h6
-        className="MuiTypography-root makeStyles-h6Small-2 MuiTypography-h6"
+        className="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-20 css-134ad2t-MuiTypography-root"
         style={
-          Object {
-            "marginRight": 12,
+          {
+            "marginRight": "12px",
             "whiteSpace": "nowrap",
           }
         }
@@ -354,27 +341,28 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
       </h6>
       <div
         style={
-          Object {
+          {
             "display": "flex",
             "justifyContent": "flex-end",
           }
         }
       >
         <div
-          className="MuiFormControl-root"
+          className="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
         >
           <div
-            ComponentPath="@material-ui/core/Select"
+            ComponentPath="@mui/material/Select"
             prop-aria-label="Sort By"
-            prop-className="makeStyles-sortSelect-4"
+            prop-className="makeStyles-sortSelect-22"
             prop-data-selenium="data-product-availability.sort-options.method"
             prop-onChange="[Function]"
             prop-value="n/a"
           >
             <li
               aria-disabled={true}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters Mui-disabled MuiListItem-button Mui-disabled"
+              className="MuiButtonBase-root MuiMenuItem-root Mui-disabled MuiMenuItem-gutters Mui-disabled MuiMenuItem-root Mui-disabled MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -392,9 +380,9 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
               --
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -412,9 +400,9 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
               States
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -432,9 +420,9 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
               Domains
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -452,9 +440,9 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
               Sites
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -474,18 +462,19 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
           </div>
         </div>
         <div
-          className="MuiToggleButtonGroup-root"
+          className="MuiToggleButtonGroup-root css-kavg8e-MuiToggleButtonGroup-root"
           data-selenium="data-product-availability.sort-options.direction"
           role="group"
         >
           <button
             aria-label="Sort Ascending (A-Z)"
             aria-pressed={false}
-            className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal Mui-disabled MuiToggleButton-sizeSmall Mui-disabled"
+            className="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-a8ej1-MuiButtonBase-root-MuiToggleButton-root"
             disabled={true}
             onBlur={[Function]}
             onChange={[Function]}
             onClick={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -497,7 +486,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
             onTouchMove={[Function]}
             onTouchStart={[Function]}
             style={
-              Object {
+              {
                 "borderColor": "unset",
               }
             }
@@ -506,29 +495,27 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
             type="button"
             value="ASC"
           >
-            <span
-              className="MuiToggleButton-label"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              data-testid="KeyboardArrowDownIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z"
+              />
+            </svg>
           </button>
           <button
             aria-label="Sort Descending (Z-A)"
             aria-pressed={false}
-            className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal Mui-disabled MuiToggleButton-sizeSmall Mui-disabled"
+            className="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-a8ej1-MuiButtonBase-root-MuiToggleButton-root"
             disabled={true}
             onBlur={[Function]}
             onChange={[Function]}
             onClick={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -540,7 +527,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
             onTouchMove={[Function]}
             onTouchStart={[Function]}
             style={
-              Object {
+              {
                 "borderColor": "unset",
               }
             }
@@ -549,33 +536,30 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
             type="button"
             value="DESC"
           >
-            <span
-              className="MuiToggleButton-label"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              data-testid="KeyboardArrowUpIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M7.41 15.41 12 10.83l4.59 4.58L18 14l-6-6-6 6z"
+              />
+            </svg>
           </button>
         </div>
       </div>
     </div>
   </div>
   <div
-    className="makeStyles-keyContainer-6"
+    className="makeStyles-keyContainer-24"
   >
     <div>
       <h6
-        className="MuiTypography-root makeStyles-h6Small-9 MuiTypography-h6"
+        className="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-27 css-134ad2t-MuiTypography-root"
         style={
-          Object {
+          {
             "margin": "-6px 24px 4px 0px",
           }
         }
@@ -584,10 +568,11 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
       </h6>
       <button
         aria-label="Help - Data Availability Chart Key"
-        className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall"
+        className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
         disabled={false}
         onBlur={[Function]}
         onClick={[Function]}
+        onContextMenu={[Function]}
         onDragLeave={[Function]}
         onFocus={[Function]}
         onKeyDown={[Function]}
@@ -599,7 +584,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
         onTouchMove={[Function]}
         onTouchStart={[Function]}
         style={
-          Object {
+          {
             "marginLeft": "-3px",
           }
         }
@@ -607,25 +592,22 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
         title="Help - Data Availability Chart Key"
         type="button"
       >
-        <span
-          className="MuiIconButton-label"
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+          data-testid="HelpOutlineIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
         >
-          <svg
-            aria-hidden={true}
-            className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-            focusable="false"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"
-            />
-          </svg>
-        </span>
+          <path
+            d="M11 18h2v-2h-2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4"
+          />
+        </svg>
       </button>
     </div>
     <div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-25"
         onClick={[Function]}
         role="button"
         title="Data have been published and released. Data are available for download"
@@ -645,7 +627,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
             y={0}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-26"
             x={15}
             y={9}
           >
@@ -654,7 +636,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-25"
         onClick={[Function]}
         role="button"
         title="Data have been collected and will be published after processing has completed"
@@ -674,7 +656,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
             y={0.75}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-26"
             x={15}
             y={9}
           >
@@ -683,7 +665,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-25"
         onClick={[Function]}
         role="button"
         title="Data collection is scheduled to happen"
@@ -703,7 +685,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
             y={0.75}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-26"
             x={15}
             y={9}
           >
@@ -712,7 +694,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-25"
         onClick={[Function]}
         role="button"
         title="No data collection is scheduled"
@@ -732,7 +714,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
             y={0.75}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-26"
             x={15}
             y={9}
           >
@@ -743,7 +725,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
     </div>
     <div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-25"
         onClick={[Function]}
         role="button"
         title="Data was neither expected nor collected"
@@ -763,7 +745,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
             y={0}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-26"
             x={15}
             y={9}
           >
@@ -772,7 +754,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-25"
         onClick={[Function]}
         role="button"
         title="Data collection was expected but collection could not take place; no data will be published"
@@ -792,7 +774,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
             y={0}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-26"
             x={15}
             y={9}
           >
@@ -801,7 +783,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-25"
         onClick={[Function]}
         role="button"
         title="Data should be available for download but something has prevented publication"
@@ -821,7 +803,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
             y={0.75}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-26"
             x={15}
             y={9}
           >
@@ -830,7 +812,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-25"
         onClick={[Function]}
         role="button"
         title="Data collection is desired but not expected until other conditions are met"
@@ -850,7 +832,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
             y={0.75}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-26"
             x={15}
             y={9}
           >
@@ -861,10 +843,10 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
     </div>
     <div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-25"
         onClick={[Function]}
         role="button"
-        title="More than one status including at least one \\"Available\\" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)"
+        title="More than one status including at least one "Available" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)"
       >
         <svg
           height={14}
@@ -881,7 +863,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
             y={0.4}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-26"
             x={15}
             y={9}
           >
@@ -890,10 +872,10 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-25"
         onClick={[Function]}
         role="button"
-        title="More than one status with none \\"Available\\" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)"
+        title="More than one status with none "Available" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)"
       >
         <svg
           height={14}
@@ -910,7 +892,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
             y={0.4}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-26"
             x={15}
             y={9}
           >
@@ -919,7 +901,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-25"
         onClick={[Function]}
         role="button"
         title="If the chart is presenting a roll-up (e.g. view by state) then all sites rolled into a given row are selected"
@@ -954,7 +936,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
             y={0.5}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-26"
             x={57}
             y={9}
           >
@@ -963,7 +945,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-25"
         onClick={[Function]}
         role="button"
         title="If the chart is presenting a roll-up (e.g. view by state) then one or more but not all of the sites rolled into a given row are selected"
@@ -998,7 +980,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
             y={0.5}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-26"
             x={57}
             y={9}
           >
@@ -1010,7 +992,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
   </div>
   <br />
   <svg
-    className="makeStyles-svg-1"
+    className="makeStyles-svg-19"
     height={20}
     id="dpa-3"
   />
@@ -1019,7 +1001,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
   <br />
   <pre
     style={
-      Object {
+      {
         "border": "1px dotted black",
         "height": "50vh",
         "overflowY": "scroll",
@@ -1037,7 +1019,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
 <div
   data-selenium="data-product-availability"
   style={
-    Object {
+    {
       "minWidth": "153px",
       "width": "100%",
     }
@@ -1229,19 +1211,19 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
     <div
       data-selenium="data-product-availability.breakout-options"
       style={
-        Object {
+        {
           "alignItems": "center",
           "display": "flex",
           "justifyContent": "flex-start",
-          "marginRight": 24,
+          "marginRight": "24px",
         }
       }
     >
       <h6
-        className="MuiTypography-root makeStyles-h6Small-2 MuiTypography-h6"
+        className="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-2 css-134ad2t-MuiTypography-root"
         style={
-          Object {
-            "marginRight": 12,
+          {
+            "marginRight": "12px",
             "whiteSpace": "nowrap",
           }
         }
@@ -1249,18 +1231,18 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
         View By:
       </h6>
       <div
-        className="MuiToggleButtonGroup-root"
-        color="primary"
+        className="MuiToggleButtonGroup-root css-kavg8e-MuiToggleButtonGroup-root"
         role="group"
         variant="outlined"
       >
         <button
           aria-pressed={false}
-          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-ijzjdu-MuiButtonBase-root-MuiToggleButton-root"
           disabled={false}
           onBlur={[Function]}
           onChange={[Function]}
           onClick={[Function]}
+          onContextMenu={[Function]}
           onDragLeave={[Function]}
           onFocus={[Function]}
           onKeyDown={[Function]}
@@ -1275,19 +1257,16 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
           type="button"
           value="states"
         >
-          <span
-            className="MuiToggleButton-label"
-          >
-            states
-          </span>
+          states
         </button>
         <button
           aria-pressed={false}
-          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-ijzjdu-MuiButtonBase-root-MuiToggleButton-root"
           disabled={false}
           onBlur={[Function]}
           onChange={[Function]}
           onClick={[Function]}
+          onContextMenu={[Function]}
           onDragLeave={[Function]}
           onFocus={[Function]}
           onKeyDown={[Function]}
@@ -1302,19 +1281,16 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
           type="button"
           value="domains"
         >
-          <span
-            className="MuiToggleButton-label"
-          >
-            domains
-          </span>
+          domains
         </button>
         <button
           aria-pressed={false}
-          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-ijzjdu-MuiButtonBase-root-MuiToggleButton-root"
           disabled={false}
           onBlur={[Function]}
           onChange={[Function]}
           onClick={[Function]}
+          onContextMenu={[Function]}
           onDragLeave={[Function]}
           onFocus={[Function]}
           onKeyDown={[Function]}
@@ -1329,19 +1305,16 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
           type="button"
           value="sites"
         >
-          <span
-            className="MuiToggleButton-label"
-          >
-            sites
-          </span>
+          sites
         </button>
         <button
           aria-pressed={false}
-          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-ijzjdu-MuiButtonBase-root-MuiToggleButton-root"
           disabled={false}
           onBlur={[Function]}
           onChange={[Function]}
           onClick={[Function]}
+          onContextMenu={[Function]}
           onDragLeave={[Function]}
           onFocus={[Function]}
           onKeyDown={[Function]}
@@ -1356,18 +1329,14 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
           type="button"
           value="tables"
         >
-          <span
-            className="MuiToggleButton-label"
-          >
-            tables
-          </span>
+          tables
         </button>
       </div>
     </div>
     <div
       data-selenium="data-product-availability.sort-options"
       style={
-        Object {
+        {
           "alignItems": "center",
           "display": "flex",
           "justifyContent": "flex-start",
@@ -1375,10 +1344,10 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
       }
     >
       <h6
-        className="MuiTypography-root makeStyles-h6Small-2 MuiTypography-h6"
+        className="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-2 css-134ad2t-MuiTypography-root"
         style={
-          Object {
-            "marginRight": 12,
+          {
+            "marginRight": "12px",
             "whiteSpace": "nowrap",
           }
         }
@@ -1387,17 +1356,17 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
       </h6>
       <div
         style={
-          Object {
+          {
             "display": "flex",
             "justifyContent": "flex-end",
           }
         }
       >
         <div
-          className="MuiFormControl-root"
+          className="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
         >
           <div
-            ComponentPath="@material-ui/core/Select"
+            ComponentPath="@mui/material/Select"
             prop-aria-label="Sort By"
             prop-className="makeStyles-sortSelect-4"
             prop-data-selenium="data-product-availability.sort-options.method"
@@ -1406,8 +1375,9 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
           >
             <li
               aria-disabled={true}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters Mui-disabled MuiListItem-button Mui-disabled"
+              className="MuiButtonBase-root MuiMenuItem-root Mui-disabled MuiMenuItem-gutters Mui-disabled MuiMenuItem-root Mui-disabled MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -1425,9 +1395,9 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
               --
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -1445,9 +1415,9 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
               States
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -1465,9 +1435,9 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
               Domains
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -1485,9 +1455,9 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
               Sites
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -1507,18 +1477,19 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
           </div>
         </div>
         <div
-          className="MuiToggleButtonGroup-root"
+          className="MuiToggleButtonGroup-root css-kavg8e-MuiToggleButtonGroup-root"
           data-selenium="data-product-availability.sort-options.direction"
           role="group"
         >
           <button
             aria-label="Sort Ascending (A-Z)"
             aria-pressed={false}
-            className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal Mui-disabled MuiToggleButton-sizeSmall Mui-disabled"
+            className="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-a8ej1-MuiButtonBase-root-MuiToggleButton-root"
             disabled={true}
             onBlur={[Function]}
             onChange={[Function]}
             onClick={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -1530,7 +1501,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
             onTouchMove={[Function]}
             onTouchStart={[Function]}
             style={
-              Object {
+              {
                 "borderColor": "unset",
               }
             }
@@ -1539,29 +1510,27 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
             type="button"
             value="ASC"
           >
-            <span
-              className="MuiToggleButton-label"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              data-testid="KeyboardArrowDownIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z"
+              />
+            </svg>
           </button>
           <button
             aria-label="Sort Descending (Z-A)"
             aria-pressed={false}
-            className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal Mui-disabled MuiToggleButton-sizeSmall Mui-disabled"
+            className="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-a8ej1-MuiButtonBase-root-MuiToggleButton-root"
             disabled={true}
             onBlur={[Function]}
             onChange={[Function]}
             onClick={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -1573,7 +1542,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
             onTouchMove={[Function]}
             onTouchStart={[Function]}
             style={
-              Object {
+              {
                 "borderColor": "unset",
               }
             }
@@ -1582,20 +1551,17 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
             type="button"
             value="DESC"
           >
-            <span
-              className="MuiToggleButton-label"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              data-testid="KeyboardArrowUpIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M7.41 15.41 12 10.83l4.59 4.58L18 14l-6-6-6 6z"
+              />
+            </svg>
           </button>
         </div>
       </div>
@@ -1606,9 +1572,9 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
   >
     <div>
       <h6
-        className="MuiTypography-root makeStyles-h6Small-9 MuiTypography-h6"
+        className="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-9 css-134ad2t-MuiTypography-root"
         style={
-          Object {
+          {
             "margin": "-6px 24px 4px 0px",
           }
         }
@@ -1617,10 +1583,11 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
       </h6>
       <button
         aria-label="Help - Data Availability Chart Key"
-        className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall"
+        className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
         disabled={false}
         onBlur={[Function]}
         onClick={[Function]}
+        onContextMenu={[Function]}
         onDragLeave={[Function]}
         onFocus={[Function]}
         onKeyDown={[Function]}
@@ -1632,7 +1599,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
         onTouchMove={[Function]}
         onTouchStart={[Function]}
         style={
-          Object {
+          {
             "marginLeft": "-3px",
           }
         }
@@ -1640,20 +1607,17 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
         title="Help - Data Availability Chart Key"
         type="button"
       >
-        <span
-          className="MuiIconButton-label"
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+          data-testid="HelpOutlineIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
         >
-          <svg
-            aria-hidden={true}
-            className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-            focusable="false"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"
-            />
-          </svg>
-        </span>
+          <path
+            d="M11 18h2v-2h-2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4"
+          />
+        </svg>
       </button>
     </div>
     <div>
@@ -1897,7 +1861,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
         className="makeStyles-keyElement-7"
         onClick={[Function]}
         role="button"
-        title="More than one status including at least one \\"Available\\" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)"
+        title="More than one status including at least one "Available" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)"
       >
         <svg
           height={14}
@@ -1926,7 +1890,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
         className="makeStyles-keyElement-7"
         onClick={[Function]}
         role="button"
-        title="More than one status with none \\"Available\\" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)"
+        title="More than one status with none "Available" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)"
       >
         <svg
           height={14}
@@ -2052,7 +2016,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
   <br />
   <pre
     style={
-      Object {
+      {
         "border": "1px dotted black",
         "height": "50vh",
         "overflowY": "scroll",
@@ -2070,7 +2034,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
 <div
   data-selenium="data-product-availability"
   style={
-    Object {
+    {
       "minWidth": "153px",
       "width": "100%",
     }
@@ -2257,24 +2221,24 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
     </defs>
   </svg>
   <div
-    className="makeStyles-viewAndSortOptionsContainer-5"
+    className="makeStyles-viewAndSortOptionsContainer-41"
   >
     <div
       data-selenium="data-product-availability.breakout-options"
       style={
-        Object {
+        {
           "alignItems": "center",
           "display": "flex",
           "justifyContent": "flex-start",
-          "marginRight": 24,
+          "marginRight": "24px",
         }
       }
     >
       <h6
-        className="MuiTypography-root makeStyles-h6Small-2 MuiTypography-h6"
+        className="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-38 css-134ad2t-MuiTypography-root"
         style={
-          Object {
-            "marginRight": 12,
+          {
+            "marginRight": "12px",
             "whiteSpace": "nowrap",
           }
         }
@@ -2282,18 +2246,18 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
         View By:
       </h6>
       <div
-        className="MuiToggleButtonGroup-root"
-        color="primary"
+        className="MuiToggleButtonGroup-root css-kavg8e-MuiToggleButtonGroup-root"
         role="group"
         variant="outlined"
       >
         <button
           aria-pressed={false}
-          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-ijzjdu-MuiButtonBase-root-MuiToggleButton-root"
           disabled={false}
           onBlur={[Function]}
           onChange={[Function]}
           onClick={[Function]}
+          onContextMenu={[Function]}
           onDragLeave={[Function]}
           onFocus={[Function]}
           onKeyDown={[Function]}
@@ -2308,19 +2272,16 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
           type="button"
           value="states"
         >
-          <span
-            className="MuiToggleButton-label"
-          >
-            states
-          </span>
+          states
         </button>
         <button
           aria-pressed={false}
-          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-ijzjdu-MuiButtonBase-root-MuiToggleButton-root"
           disabled={false}
           onBlur={[Function]}
           onChange={[Function]}
           onClick={[Function]}
+          onContextMenu={[Function]}
           onDragLeave={[Function]}
           onFocus={[Function]}
           onKeyDown={[Function]}
@@ -2335,19 +2296,16 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
           type="button"
           value="domains"
         >
-          <span
-            className="MuiToggleButton-label"
-          >
-            domains
-          </span>
+          domains
         </button>
         <button
           aria-pressed={false}
-          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-ijzjdu-MuiButtonBase-root-MuiToggleButton-root"
           disabled={false}
           onBlur={[Function]}
           onChange={[Function]}
           onClick={[Function]}
+          onContextMenu={[Function]}
           onDragLeave={[Function]}
           onFocus={[Function]}
           onKeyDown={[Function]}
@@ -2362,19 +2320,16 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
           type="button"
           value="sites"
         >
-          <span
-            className="MuiToggleButton-label"
-          >
-            sites
-          </span>
+          sites
         </button>
         <button
           aria-pressed={false}
-          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-ijzjdu-MuiButtonBase-root-MuiToggleButton-root"
           disabled={false}
           onBlur={[Function]}
           onChange={[Function]}
           onClick={[Function]}
+          onContextMenu={[Function]}
           onDragLeave={[Function]}
           onFocus={[Function]}
           onKeyDown={[Function]}
@@ -2389,18 +2344,14 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
           type="button"
           value="tables"
         >
-          <span
-            className="MuiToggleButton-label"
-          >
-            tables
-          </span>
+          tables
         </button>
       </div>
     </div>
     <div
       data-selenium="data-product-availability.sort-options"
       style={
-        Object {
+        {
           "alignItems": "center",
           "display": "flex",
           "justifyContent": "flex-start",
@@ -2408,10 +2359,10 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
       }
     >
       <h6
-        className="MuiTypography-root makeStyles-h6Small-2 MuiTypography-h6"
+        className="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-38 css-134ad2t-MuiTypography-root"
         style={
-          Object {
-            "marginRight": 12,
+          {
+            "marginRight": "12px",
             "whiteSpace": "nowrap",
           }
         }
@@ -2420,27 +2371,28 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
       </h6>
       <div
         style={
-          Object {
+          {
             "display": "flex",
             "justifyContent": "flex-end",
           }
         }
       >
         <div
-          className="MuiFormControl-root"
+          className="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
         >
           <div
-            ComponentPath="@material-ui/core/Select"
+            ComponentPath="@mui/material/Select"
             prop-aria-label="Sort By"
-            prop-className="makeStyles-sortSelect-4"
+            prop-className="makeStyles-sortSelect-40"
             prop-data-selenium="data-product-availability.sort-options.method"
             prop-onChange="[Function]"
             prop-value="n/a"
           >
             <li
               aria-disabled={true}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters Mui-disabled MuiListItem-button Mui-disabled"
+              className="MuiButtonBase-root MuiMenuItem-root Mui-disabled MuiMenuItem-gutters Mui-disabled MuiMenuItem-root Mui-disabled MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -2458,9 +2410,9 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
               --
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -2478,9 +2430,9 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
               States
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -2498,9 +2450,9 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
               Domains
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -2518,9 +2470,9 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
               Sites
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -2540,18 +2492,19 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
           </div>
         </div>
         <div
-          className="MuiToggleButtonGroup-root"
+          className="MuiToggleButtonGroup-root css-kavg8e-MuiToggleButtonGroup-root"
           data-selenium="data-product-availability.sort-options.direction"
           role="group"
         >
           <button
             aria-label="Sort Ascending (A-Z)"
             aria-pressed={false}
-            className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal Mui-disabled MuiToggleButton-sizeSmall Mui-disabled"
+            className="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-a8ej1-MuiButtonBase-root-MuiToggleButton-root"
             disabled={true}
             onBlur={[Function]}
             onChange={[Function]}
             onClick={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -2563,7 +2516,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
             onTouchMove={[Function]}
             onTouchStart={[Function]}
             style={
-              Object {
+              {
                 "borderColor": "unset",
               }
             }
@@ -2572,29 +2525,27 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
             type="button"
             value="ASC"
           >
-            <span
-              className="MuiToggleButton-label"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              data-testid="KeyboardArrowDownIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z"
+              />
+            </svg>
           </button>
           <button
             aria-label="Sort Descending (Z-A)"
             aria-pressed={false}
-            className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal Mui-disabled MuiToggleButton-sizeSmall Mui-disabled"
+            className="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-a8ej1-MuiButtonBase-root-MuiToggleButton-root"
             disabled={true}
             onBlur={[Function]}
             onChange={[Function]}
             onClick={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -2606,7 +2557,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
             onTouchMove={[Function]}
             onTouchStart={[Function]}
             style={
-              Object {
+              {
                 "borderColor": "unset",
               }
             }
@@ -2615,33 +2566,30 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
             type="button"
             value="DESC"
           >
-            <span
-              className="MuiToggleButton-label"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              data-testid="KeyboardArrowUpIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M7.41 15.41 12 10.83l4.59 4.58L18 14l-6-6-6 6z"
+              />
+            </svg>
           </button>
         </div>
       </div>
     </div>
   </div>
   <div
-    className="makeStyles-keyContainer-6"
+    className="makeStyles-keyContainer-42"
   >
     <div>
       <h6
-        className="MuiTypography-root makeStyles-h6Small-9 MuiTypography-h6"
+        className="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-45 css-134ad2t-MuiTypography-root"
         style={
-          Object {
+          {
             "margin": "-6px 24px 4px 0px",
           }
         }
@@ -2650,10 +2598,11 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
       </h6>
       <button
         aria-label="Help - Data Availability Chart Key"
-        className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall"
+        className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
         disabled={false}
         onBlur={[Function]}
         onClick={[Function]}
+        onContextMenu={[Function]}
         onDragLeave={[Function]}
         onFocus={[Function]}
         onKeyDown={[Function]}
@@ -2665,7 +2614,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
         onTouchMove={[Function]}
         onTouchStart={[Function]}
         style={
-          Object {
+          {
             "marginLeft": "-3px",
           }
         }
@@ -2673,25 +2622,22 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
         title="Help - Data Availability Chart Key"
         type="button"
       >
-        <span
-          className="MuiIconButton-label"
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+          data-testid="HelpOutlineIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
         >
-          <svg
-            aria-hidden={true}
-            className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-            focusable="false"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"
-            />
-          </svg>
-        </span>
+          <path
+            d="M11 18h2v-2h-2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4"
+          />
+        </svg>
       </button>
     </div>
     <div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-43"
         onClick={[Function]}
         role="button"
         title="Data have been published and released. Data are available for download"
@@ -2711,7 +2657,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
             y={0}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-44"
             x={15}
             y={9}
           >
@@ -2720,7 +2666,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-43"
         onClick={[Function]}
         role="button"
         title="Data have been collected and will be published after processing has completed"
@@ -2740,7 +2686,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
             y={0.75}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-44"
             x={15}
             y={9}
           >
@@ -2749,7 +2695,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-43"
         onClick={[Function]}
         role="button"
         title="Data collection is scheduled to happen"
@@ -2769,7 +2715,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
             y={0.75}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-44"
             x={15}
             y={9}
           >
@@ -2778,7 +2724,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-43"
         onClick={[Function]}
         role="button"
         title="No data collection is scheduled"
@@ -2798,7 +2744,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
             y={0.75}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-44"
             x={15}
             y={9}
           >
@@ -2809,7 +2755,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
     </div>
     <div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-43"
         onClick={[Function]}
         role="button"
         title="Data was neither expected nor collected"
@@ -2829,7 +2775,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
             y={0}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-44"
             x={15}
             y={9}
           >
@@ -2838,7 +2784,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-43"
         onClick={[Function]}
         role="button"
         title="Data collection was expected but collection could not take place; no data will be published"
@@ -2858,7 +2804,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
             y={0}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-44"
             x={15}
             y={9}
           >
@@ -2867,7 +2813,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-43"
         onClick={[Function]}
         role="button"
         title="Data should be available for download but something has prevented publication"
@@ -2887,7 +2833,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
             y={0.75}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-44"
             x={15}
             y={9}
           >
@@ -2896,7 +2842,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-43"
         onClick={[Function]}
         role="button"
         title="Data collection is desired but not expected until other conditions are met"
@@ -2916,7 +2862,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
             y={0.75}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-44"
             x={15}
             y={9}
           >
@@ -2927,10 +2873,10 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
     </div>
     <div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-43"
         onClick={[Function]}
         role="button"
-        title="More than one status including at least one \\"Available\\" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)"
+        title="More than one status including at least one "Available" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)"
       >
         <svg
           height={14}
@@ -2947,7 +2893,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
             y={0.4}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-44"
             x={15}
             y={9}
           >
@@ -2956,10 +2902,10 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-43"
         onClick={[Function]}
         role="button"
-        title="More than one status with none \\"Available\\" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)"
+        title="More than one status with none "Available" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)"
       >
         <svg
           height={14}
@@ -2976,7 +2922,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
             y={0.4}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-44"
             x={15}
             y={9}
           >
@@ -2985,7 +2931,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-43"
         onClick={[Function]}
         role="button"
         title="If the chart is presenting a roll-up (e.g. view by state) then all sites rolled into a given row are selected"
@@ -3020,7 +2966,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
             y={0.5}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-44"
             x={57}
             y={9}
           >
@@ -3029,7 +2975,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-43"
         onClick={[Function]}
         role="button"
         title="If the chart is presenting a roll-up (e.g. view by state) then one or more but not all of the sites rolled into a given row are selected"
@@ -3064,7 +3010,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
             y={0.5}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-44"
             x={57}
             y={9}
           >
@@ -3076,7 +3022,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
   </div>
   <br />
   <svg
-    className="makeStyles-svg-1"
+    className="makeStyles-svg-37"
     height={20}
     id="dpa-5"
   />
@@ -3085,7 +3031,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
   <br />
   <pre
     style={
-      Object {
+      {
         "border": "1px dotted black",
         "height": "50vh",
         "overflowY": "scroll",
@@ -3103,7 +3049,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
 <div
   data-selenium="data-product-availability"
   style={
-    Object {
+    {
       "minWidth": "153px",
       "width": "100%",
     }
@@ -3290,24 +3236,24 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
     </defs>
   </svg>
   <div
-    className="makeStyles-viewAndSortOptionsContainer-5"
+    className="makeStyles-viewAndSortOptionsContainer-14"
   >
     <div
       data-selenium="data-product-availability.breakout-options"
       style={
-        Object {
+        {
           "alignItems": "center",
           "display": "flex",
           "justifyContent": "flex-start",
-          "marginRight": 24,
+          "marginRight": "24px",
         }
       }
     >
       <h6
-        className="MuiTypography-root makeStyles-h6Small-2 MuiTypography-h6"
+        className="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-11 css-134ad2t-MuiTypography-root"
         style={
-          Object {
-            "marginRight": 12,
+          {
+            "marginRight": "12px",
             "whiteSpace": "nowrap",
           }
         }
@@ -3315,18 +3261,18 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
         View By:
       </h6>
       <div
-        className="MuiToggleButtonGroup-root"
-        color="primary"
+        className="MuiToggleButtonGroup-root css-kavg8e-MuiToggleButtonGroup-root"
         role="group"
         variant="outlined"
       >
         <button
           aria-pressed={false}
-          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-ijzjdu-MuiButtonBase-root-MuiToggleButton-root"
           disabled={false}
           onBlur={[Function]}
           onChange={[Function]}
           onClick={[Function]}
+          onContextMenu={[Function]}
           onDragLeave={[Function]}
           onFocus={[Function]}
           onKeyDown={[Function]}
@@ -3341,22 +3287,19 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
           type="button"
           value="states"
         >
+          states
           <span
-            className="MuiToggleButton-label"
-          >
-            states
-          </span>
-          <span
-            className="MuiTouchRipple-root"
+            className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </button>
         <button
           aria-pressed={false}
-          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-ijzjdu-MuiButtonBase-root-MuiToggleButton-root"
           disabled={false}
           onBlur={[Function]}
           onChange={[Function]}
           onClick={[Function]}
+          onContextMenu={[Function]}
           onDragLeave={[Function]}
           onFocus={[Function]}
           onKeyDown={[Function]}
@@ -3371,22 +3314,19 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
           type="button"
           value="domains"
         >
+          domains
           <span
-            className="MuiToggleButton-label"
-          >
-            domains
-          </span>
-          <span
-            className="MuiTouchRipple-root"
+            className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </button>
         <button
           aria-pressed={false}
-          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-ijzjdu-MuiButtonBase-root-MuiToggleButton-root"
           disabled={false}
           onBlur={[Function]}
           onChange={[Function]}
           onClick={[Function]}
+          onContextMenu={[Function]}
           onDragLeave={[Function]}
           onFocus={[Function]}
           onKeyDown={[Function]}
@@ -3401,22 +3341,19 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
           type="button"
           value="sites"
         >
+          sites
           <span
-            className="MuiToggleButton-label"
-          >
-            sites
-          </span>
-          <span
-            className="MuiTouchRipple-root"
+            className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </button>
         <button
           aria-pressed={false}
-          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-ijzjdu-MuiButtonBase-root-MuiToggleButton-root"
           disabled={false}
           onBlur={[Function]}
           onChange={[Function]}
           onClick={[Function]}
+          onContextMenu={[Function]}
           onDragLeave={[Function]}
           onFocus={[Function]}
           onKeyDown={[Function]}
@@ -3431,13 +3368,9 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
           type="button"
           value="tables"
         >
+          tables
           <span
-            className="MuiToggleButton-label"
-          >
-            tables
-          </span>
-          <span
-            className="MuiTouchRipple-root"
+            className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </button>
       </div>
@@ -3445,7 +3378,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
     <div
       data-selenium="data-product-availability.sort-options"
       style={
-        Object {
+        {
           "alignItems": "center",
           "display": "flex",
           "justifyContent": "flex-start",
@@ -3453,10 +3386,10 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
       }
     >
       <h6
-        className="MuiTypography-root makeStyles-h6Small-2 MuiTypography-h6"
+        className="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-11 css-134ad2t-MuiTypography-root"
         style={
-          Object {
-            "marginRight": 12,
+          {
+            "marginRight": "12px",
             "whiteSpace": "nowrap",
           }
         }
@@ -3465,27 +3398,28 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
       </h6>
       <div
         style={
-          Object {
+          {
             "display": "flex",
             "justifyContent": "flex-end",
           }
         }
       >
         <div
-          className="MuiFormControl-root"
+          className="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
         >
           <div
-            ComponentPath="@material-ui/core/Select"
+            ComponentPath="@mui/material/Select"
             prop-aria-label="Sort By"
-            prop-className="makeStyles-sortSelect-4"
+            prop-className="makeStyles-sortSelect-13"
             prop-data-selenium="data-product-availability.sort-options.method"
             prop-onChange="[Function]"
             prop-value="n/a"
           >
             <li
               aria-disabled={true}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters Mui-disabled MuiListItem-button Mui-disabled"
+              className="MuiButtonBase-root MuiMenuItem-root Mui-disabled MuiMenuItem-gutters Mui-disabled MuiMenuItem-root Mui-disabled MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -3503,9 +3437,9 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
               --
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -3522,13 +3456,13 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
             >
               States
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -3545,13 +3479,13 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
             >
               Domains
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -3568,13 +3502,13 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
             >
               Sites
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -3591,24 +3525,25 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
             >
               Tables
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </li>
           </div>
         </div>
         <div
-          className="MuiToggleButtonGroup-root"
+          className="MuiToggleButtonGroup-root css-kavg8e-MuiToggleButtonGroup-root"
           data-selenium="data-product-availability.sort-options.direction"
           role="group"
         >
           <button
             aria-label="Sort Ascending (A-Z)"
             aria-pressed={false}
-            className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal Mui-disabled MuiToggleButton-sizeSmall Mui-disabled"
+            className="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-a8ej1-MuiButtonBase-root-MuiToggleButton-root"
             disabled={true}
             onBlur={[Function]}
             onChange={[Function]}
             onClick={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -3620,7 +3555,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
             onTouchMove={[Function]}
             onTouchStart={[Function]}
             style={
-              Object {
+              {
                 "borderColor": "unset",
               }
             }
@@ -3629,29 +3564,27 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
             type="button"
             value="ASC"
           >
-            <span
-              className="MuiToggleButton-label"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              data-testid="KeyboardArrowDownIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z"
+              />
+            </svg>
           </button>
           <button
             aria-label="Sort Descending (Z-A)"
             aria-pressed={false}
-            className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal Mui-disabled MuiToggleButton-sizeSmall Mui-disabled"
+            className="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-a8ej1-MuiButtonBase-root-MuiToggleButton-root"
             disabled={true}
             onBlur={[Function]}
             onChange={[Function]}
             onClick={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -3663,7 +3596,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
             onTouchMove={[Function]}
             onTouchStart={[Function]}
             style={
-              Object {
+              {
                 "borderColor": "unset",
               }
             }
@@ -3672,33 +3605,30 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
             type="button"
             value="DESC"
           >
-            <span
-              className="MuiToggleButton-label"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              data-testid="KeyboardArrowUpIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M7.41 15.41 12 10.83l4.59 4.58L18 14l-6-6-6 6z"
+              />
+            </svg>
           </button>
         </div>
       </div>
     </div>
   </div>
   <div
-    className="makeStyles-keyContainer-6"
+    className="makeStyles-keyContainer-15"
   >
     <div>
       <h6
-        className="MuiTypography-root makeStyles-h6Small-9 MuiTypography-h6"
+        className="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-18 css-134ad2t-MuiTypography-root"
         style={
-          Object {
+          {
             "margin": "-6px 24px 4px 0px",
           }
         }
@@ -3707,10 +3637,11 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
       </h6>
       <button
         aria-label="Help - Data Availability Chart Key"
-        className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall"
+        className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
         disabled={false}
         onBlur={[Function]}
         onClick={[Function]}
+        onContextMenu={[Function]}
         onDragLeave={[Function]}
         onFocus={[Function]}
         onKeyDown={[Function]}
@@ -3722,7 +3653,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
         onTouchMove={[Function]}
         onTouchStart={[Function]}
         style={
-          Object {
+          {
             "marginLeft": "-3px",
           }
         }
@@ -3730,28 +3661,25 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
         title="Help - Data Availability Chart Key"
         type="button"
       >
-        <span
-          className="MuiIconButton-label"
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+          data-testid="HelpOutlineIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
         >
-          <svg
-            aria-hidden={true}
-            className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-            focusable="false"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"
-            />
-          </svg>
-        </span>
+          <path
+            d="M11 18h2v-2h-2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4"
+          />
+        </svg>
         <span
-          className="MuiTouchRipple-root"
+          className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
         />
       </button>
     </div>
     <div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-16"
         onClick={[Function]}
         role="button"
         title="Data have been published and released. Data are available for download"
@@ -3771,7 +3699,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
             y={0}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-17"
             x={15}
             y={9}
           >
@@ -3780,7 +3708,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-16"
         onClick={[Function]}
         role="button"
         title="Data have been collected and will be published after processing has completed"
@@ -3800,7 +3728,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
             y={0.75}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-17"
             x={15}
             y={9}
           >
@@ -3809,7 +3737,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-16"
         onClick={[Function]}
         role="button"
         title="Data collection is scheduled to happen"
@@ -3829,7 +3757,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
             y={0.75}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-17"
             x={15}
             y={9}
           >
@@ -3838,7 +3766,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-16"
         onClick={[Function]}
         role="button"
         title="No data collection is scheduled"
@@ -3858,7 +3786,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
             y={0.75}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-17"
             x={15}
             y={9}
           >
@@ -3869,7 +3797,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
     </div>
     <div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-16"
         onClick={[Function]}
         role="button"
         title="Data was neither expected nor collected"
@@ -3889,7 +3817,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
             y={0}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-17"
             x={15}
             y={9}
           >
@@ -3898,7 +3826,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-16"
         onClick={[Function]}
         role="button"
         title="Data collection was expected but collection could not take place; no data will be published"
@@ -3918,7 +3846,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
             y={0}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-17"
             x={15}
             y={9}
           >
@@ -3927,7 +3855,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-16"
         onClick={[Function]}
         role="button"
         title="Data should be available for download but something has prevented publication"
@@ -3947,7 +3875,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
             y={0.75}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-17"
             x={15}
             y={9}
           >
@@ -3956,7 +3884,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-16"
         onClick={[Function]}
         role="button"
         title="Data collection is desired but not expected until other conditions are met"
@@ -3976,7 +3904,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
             y={0.75}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-17"
             x={15}
             y={9}
           >
@@ -3987,10 +3915,10 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
     </div>
     <div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-16"
         onClick={[Function]}
         role="button"
-        title="More than one status including at least one \\"Available\\" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)"
+        title="More than one status including at least one "Available" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)"
       >
         <svg
           height={14}
@@ -4007,7 +3935,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
             y={0.4}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-17"
             x={15}
             y={9}
           >
@@ -4016,10 +3944,10 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-16"
         onClick={[Function]}
         role="button"
-        title="More than one status with none \\"Available\\" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)"
+        title="More than one status with none "Available" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)"
       >
         <svg
           height={14}
@@ -4036,7 +3964,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
             y={0.4}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-17"
             x={15}
             y={9}
           >
@@ -4045,7 +3973,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-16"
         onClick={[Function]}
         role="button"
         title="If the chart is presenting a roll-up (e.g. view by state) then all sites rolled into a given row are selected"
@@ -4080,7 +4008,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
             y={0.5}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-17"
             x={57}
             y={9}
           >
@@ -4089,7 +4017,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-16"
         onClick={[Function]}
         role="button"
         title="If the chart is presenting a roll-up (e.g. view by state) then one or more but not all of the sites rolled into a given row are selected"
@@ -4124,7 +4052,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
             y={0.5}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-17"
             x={57}
             y={9}
           >
@@ -4136,7 +4064,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
   </div>
   <br />
   <svg
-    className="makeStyles-svg-1"
+    className="makeStyles-svg-10"
     height={20}
     id="dpa-2"
   />
@@ -4145,7 +4073,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
   <br />
   <pre
     style={
-      Object {
+      {
         "border": "1px dotted black",
         "height": "50vh",
         "overflowY": "scroll",
@@ -4163,7 +4091,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
 <div
   data-selenium="data-product-availability"
   style={
-    Object {
+    {
       "minWidth": "153px",
       "width": "100%",
     }
@@ -4350,24 +4278,24 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
     </defs>
   </svg>
   <div
-    className="makeStyles-viewAndSortOptionsContainer-5"
+    className="makeStyles-viewAndSortOptionsContainer-32"
   >
     <div
       data-selenium="data-product-availability.breakout-options"
       style={
-        Object {
+        {
           "alignItems": "center",
           "display": "flex",
           "justifyContent": "flex-start",
-          "marginRight": 24,
+          "marginRight": "24px",
         }
       }
     >
       <h6
-        className="MuiTypography-root makeStyles-h6Small-2 MuiTypography-h6"
+        className="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-29 css-134ad2t-MuiTypography-root"
         style={
-          Object {
-            "marginRight": 12,
+          {
+            "marginRight": "12px",
             "whiteSpace": "nowrap",
           }
         }
@@ -4375,18 +4303,18 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
         View By:
       </h6>
       <div
-        className="MuiToggleButtonGroup-root"
-        color="primary"
+        className="MuiToggleButtonGroup-root css-kavg8e-MuiToggleButtonGroup-root"
         role="group"
         variant="outlined"
       >
         <button
           aria-pressed={false}
-          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-ijzjdu-MuiButtonBase-root-MuiToggleButton-root"
           disabled={false}
           onBlur={[Function]}
           onChange={[Function]}
           onClick={[Function]}
+          onContextMenu={[Function]}
           onDragLeave={[Function]}
           onFocus={[Function]}
           onKeyDown={[Function]}
@@ -4401,22 +4329,19 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
           type="button"
           value="states"
         >
+          states
           <span
-            className="MuiToggleButton-label"
-          >
-            states
-          </span>
-          <span
-            className="MuiTouchRipple-root"
+            className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </button>
         <button
           aria-pressed={false}
-          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-ijzjdu-MuiButtonBase-root-MuiToggleButton-root"
           disabled={false}
           onBlur={[Function]}
           onChange={[Function]}
           onClick={[Function]}
+          onContextMenu={[Function]}
           onDragLeave={[Function]}
           onFocus={[Function]}
           onKeyDown={[Function]}
@@ -4431,22 +4356,19 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
           type="button"
           value="domains"
         >
+          domains
           <span
-            className="MuiToggleButton-label"
-          >
-            domains
-          </span>
-          <span
-            className="MuiTouchRipple-root"
+            className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </button>
         <button
           aria-pressed={false}
-          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-ijzjdu-MuiButtonBase-root-MuiToggleButton-root"
           disabled={false}
           onBlur={[Function]}
           onChange={[Function]}
           onClick={[Function]}
+          onContextMenu={[Function]}
           onDragLeave={[Function]}
           onFocus={[Function]}
           onKeyDown={[Function]}
@@ -4461,22 +4383,19 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
           type="button"
           value="sites"
         >
+          sites
           <span
-            className="MuiToggleButton-label"
-          >
-            sites
-          </span>
-          <span
-            className="MuiTouchRipple-root"
+            className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </button>
         <button
           aria-pressed={false}
-          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-sizeSmall"
+          className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-ijzjdu-MuiButtonBase-root-MuiToggleButton-root"
           disabled={false}
           onBlur={[Function]}
           onChange={[Function]}
           onClick={[Function]}
+          onContextMenu={[Function]}
           onDragLeave={[Function]}
           onFocus={[Function]}
           onKeyDown={[Function]}
@@ -4491,13 +4410,9 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
           type="button"
           value="tables"
         >
+          tables
           <span
-            className="MuiToggleButton-label"
-          >
-            tables
-          </span>
-          <span
-            className="MuiTouchRipple-root"
+            className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </button>
       </div>
@@ -4505,7 +4420,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
     <div
       data-selenium="data-product-availability.sort-options"
       style={
-        Object {
+        {
           "alignItems": "center",
           "display": "flex",
           "justifyContent": "flex-start",
@@ -4513,10 +4428,10 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
       }
     >
       <h6
-        className="MuiTypography-root makeStyles-h6Small-2 MuiTypography-h6"
+        className="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-29 css-134ad2t-MuiTypography-root"
         style={
-          Object {
-            "marginRight": 12,
+          {
+            "marginRight": "12px",
             "whiteSpace": "nowrap",
           }
         }
@@ -4525,27 +4440,28 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
       </h6>
       <div
         style={
-          Object {
+          {
             "display": "flex",
             "justifyContent": "flex-end",
           }
         }
       >
         <div
-          className="MuiFormControl-root"
+          className="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
         >
           <div
-            ComponentPath="@material-ui/core/Select"
+            ComponentPath="@mui/material/Select"
             prop-aria-label="Sort By"
-            prop-className="makeStyles-sortSelect-4"
+            prop-className="makeStyles-sortSelect-31"
             prop-data-selenium="data-product-availability.sort-options.method"
             prop-onChange="[Function]"
             prop-value="n/a"
           >
             <li
               aria-disabled={true}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters Mui-disabled MuiListItem-button Mui-disabled"
+              className="MuiButtonBase-root MuiMenuItem-root Mui-disabled MuiMenuItem-gutters Mui-disabled MuiMenuItem-root Mui-disabled MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -4563,9 +4479,9 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
               --
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -4582,13 +4498,13 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
             >
               States
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -4605,13 +4521,13 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
             >
               Domains
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -4628,13 +4544,13 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
             >
               Sites
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -4651,24 +4567,25 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
             >
               Tables
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </li>
           </div>
         </div>
         <div
-          className="MuiToggleButtonGroup-root"
+          className="MuiToggleButtonGroup-root css-kavg8e-MuiToggleButtonGroup-root"
           data-selenium="data-product-availability.sort-options.direction"
           role="group"
         >
           <button
             aria-label="Sort Ascending (A-Z)"
             aria-pressed={false}
-            className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal Mui-disabled MuiToggleButton-sizeSmall Mui-disabled"
+            className="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-a8ej1-MuiButtonBase-root-MuiToggleButton-root"
             disabled={true}
             onBlur={[Function]}
             onChange={[Function]}
             onClick={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -4680,7 +4597,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
             onTouchMove={[Function]}
             onTouchStart={[Function]}
             style={
-              Object {
+              {
                 "borderColor": "unset",
               }
             }
@@ -4689,29 +4606,27 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
             type="button"
             value="ASC"
           >
-            <span
-              className="MuiToggleButton-label"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              data-testid="KeyboardArrowDownIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z"
+              />
+            </svg>
           </button>
           <button
             aria-label="Sort Descending (Z-A)"
             aria-pressed={false}
-            className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal Mui-disabled MuiToggleButton-sizeSmall Mui-disabled"
+            className="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-a8ej1-MuiButtonBase-root-MuiToggleButton-root"
             disabled={true}
             onBlur={[Function]}
             onChange={[Function]}
             onClick={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -4723,7 +4638,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
             onTouchMove={[Function]}
             onTouchStart={[Function]}
             style={
-              Object {
+              {
                 "borderColor": "unset",
               }
             }
@@ -4732,33 +4647,30 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
             type="button"
             value="DESC"
           >
-            <span
-              className="MuiToggleButton-label"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              data-testid="KeyboardArrowUpIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M7.41 15.41 12 10.83l4.59 4.58L18 14l-6-6-6 6z"
+              />
+            </svg>
           </button>
         </div>
       </div>
     </div>
   </div>
   <div
-    className="makeStyles-keyContainer-6"
+    className="makeStyles-keyContainer-33"
   >
     <div>
       <h6
-        className="MuiTypography-root makeStyles-h6Small-9 MuiTypography-h6"
+        className="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-36 css-134ad2t-MuiTypography-root"
         style={
-          Object {
+          {
             "margin": "-6px 24px 4px 0px",
           }
         }
@@ -4767,10 +4679,11 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
       </h6>
       <button
         aria-label="Help - Data Availability Chart Key"
-        className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall"
+        className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
         disabled={false}
         onBlur={[Function]}
         onClick={[Function]}
+        onContextMenu={[Function]}
         onDragLeave={[Function]}
         onFocus={[Function]}
         onKeyDown={[Function]}
@@ -4782,7 +4695,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
         onTouchMove={[Function]}
         onTouchStart={[Function]}
         style={
-          Object {
+          {
             "marginLeft": "-3px",
           }
         }
@@ -4790,28 +4703,25 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
         title="Help - Data Availability Chart Key"
         type="button"
       >
-        <span
-          className="MuiIconButton-label"
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+          data-testid="HelpOutlineIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
         >
-          <svg
-            aria-hidden={true}
-            className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-            focusable="false"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"
-            />
-          </svg>
-        </span>
+          <path
+            d="M11 18h2v-2h-2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4"
+          />
+        </svg>
         <span
-          className="MuiTouchRipple-root"
+          className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
         />
       </button>
     </div>
     <div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-34"
         onClick={[Function]}
         role="button"
         title="Data have been published and released. Data are available for download"
@@ -4831,7 +4741,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
             y={0}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-35"
             x={15}
             y={9}
           >
@@ -4840,7 +4750,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-34"
         onClick={[Function]}
         role="button"
         title="Data have been collected and will be published after processing has completed"
@@ -4860,7 +4770,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
             y={0.75}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-35"
             x={15}
             y={9}
           >
@@ -4869,7 +4779,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-34"
         onClick={[Function]}
         role="button"
         title="Data collection is scheduled to happen"
@@ -4889,7 +4799,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
             y={0.75}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-35"
             x={15}
             y={9}
           >
@@ -4898,7 +4808,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-34"
         onClick={[Function]}
         role="button"
         title="No data collection is scheduled"
@@ -4918,7 +4828,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
             y={0.75}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-35"
             x={15}
             y={9}
           >
@@ -4929,7 +4839,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
     </div>
     <div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-34"
         onClick={[Function]}
         role="button"
         title="Data was neither expected nor collected"
@@ -4949,7 +4859,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
             y={0}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-35"
             x={15}
             y={9}
           >
@@ -4958,7 +4868,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-34"
         onClick={[Function]}
         role="button"
         title="Data collection was expected but collection could not take place; no data will be published"
@@ -4978,7 +4888,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
             y={0}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-35"
             x={15}
             y={9}
           >
@@ -4987,7 +4897,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-34"
         onClick={[Function]}
         role="button"
         title="Data should be available for download but something has prevented publication"
@@ -5007,7 +4917,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
             y={0.75}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-35"
             x={15}
             y={9}
           >
@@ -5016,7 +4926,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-34"
         onClick={[Function]}
         role="button"
         title="Data collection is desired but not expected until other conditions are met"
@@ -5036,7 +4946,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
             y={0.75}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-35"
             x={15}
             y={9}
           >
@@ -5047,10 +4957,10 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
     </div>
     <div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-34"
         onClick={[Function]}
         role="button"
-        title="More than one status including at least one \\"Available\\" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)"
+        title="More than one status including at least one "Available" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)"
       >
         <svg
           height={14}
@@ -5067,7 +4977,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
             y={0.4}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-35"
             x={15}
             y={9}
           >
@@ -5076,10 +4986,10 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-34"
         onClick={[Function]}
         role="button"
-        title="More than one status with none \\"Available\\" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)"
+        title="More than one status with none "Available" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)"
       >
         <svg
           height={14}
@@ -5096,7 +5006,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
             y={0.4}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-35"
             x={15}
             y={9}
           >
@@ -5105,7 +5015,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-34"
         onClick={[Function]}
         role="button"
         title="If the chart is presenting a roll-up (e.g. view by state) then all sites rolled into a given row are selected"
@@ -5140,7 +5050,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
             y={0.5}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-35"
             x={57}
             y={9}
           >
@@ -5149,7 +5059,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
         </svg>
       </div>
       <div
-        className="makeStyles-keyElement-7"
+        className="makeStyles-keyElement-34"
         onClick={[Function]}
         role="button"
         title="If the chart is presenting a roll-up (e.g. view by state) then one or more but not all of the sites rolled into a given row are selected"
@@ -5184,7 +5094,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
             y={0.5}
           />
           <text
-            className="makeStyles-keyElementText-8"
+            className="makeStyles-keyElementText-35"
             x={57}
             y={9}
           >
@@ -5196,7 +5106,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
   </div>
   <br />
   <svg
-    className="makeStyles-svg-1"
+    className="makeStyles-svg-28"
     height={20}
     id="dpa-4"
   />
@@ -5205,7 +5115,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
   <br />
   <pre
     style={
-      Object {
+      {
         "border": "1px dotted black",
         "height": "50vh",
         "overflowY": "scroll",

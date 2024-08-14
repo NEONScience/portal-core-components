@@ -2,13 +2,13 @@
 
 exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly when selection is enabled 1`] = `
 <div
-  className="makeStyles-keyContainer-1"
+  className="makeStyles-keyContainer-5"
 >
   <div>
     <h6
-      className="MuiTypography-root makeStyles-h6Small-4 MuiTypography-h6"
+      className="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-8 css-134ad2t-MuiTypography-root"
       style={
-        Object {
+        {
           "margin": "-6px 24px 4px 0px",
         }
       }
@@ -17,10 +17,11 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
     </h6>
     <button
       aria-label="Help - Data Availability Chart Key"
-      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall"
+      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
       disabled={false}
       onBlur={[Function]}
       onClick={[Function]}
+      onContextMenu={[Function]}
       onDragLeave={[Function]}
       onFocus={[Function]}
       onKeyDown={[Function]}
@@ -32,7 +33,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
       onTouchMove={[Function]}
       onTouchStart={[Function]}
       style={
-        Object {
+        {
           "marginLeft": "-3px",
         }
       }
@@ -40,28 +41,25 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
       title="Help - Data Availability Chart Key"
       type="button"
     >
-      <span
-        className="MuiIconButton-label"
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+        data-testid="HelpOutlineIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
       >
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"
-          />
-        </svg>
-      </span>
+        <path
+          d="M11 18h2v-2h-2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4"
+        />
+      </svg>
       <span
-        className="MuiTouchRipple-root"
+        className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
     </button>
   </div>
   <div>
     <div
-      className="makeStyles-keyElement-2"
+      className="makeStyles-keyElement-6"
       onClick={[Function]}
       role="button"
       title="Data have been published and released. Data are available for download"
@@ -81,7 +79,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           y={0}
         />
         <text
-          className="makeStyles-keyElementText-3"
+          className="makeStyles-keyElementText-7"
           x={15}
           y={9}
         >
@@ -90,7 +88,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
       </svg>
     </div>
     <div
-      className="makeStyles-keyElement-2"
+      className="makeStyles-keyElement-6"
       onClick={[Function]}
       role="button"
       title="Data have been collected and will be published after processing has completed"
@@ -110,7 +108,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           y={0.75}
         />
         <text
-          className="makeStyles-keyElementText-3"
+          className="makeStyles-keyElementText-7"
           x={15}
           y={9}
         >
@@ -119,7 +117,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
       </svg>
     </div>
     <div
-      className="makeStyles-keyElement-2"
+      className="makeStyles-keyElement-6"
       onClick={[Function]}
       role="button"
       title="Data collection is scheduled to happen"
@@ -139,7 +137,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           y={0.75}
         />
         <text
-          className="makeStyles-keyElementText-3"
+          className="makeStyles-keyElementText-7"
           x={15}
           y={9}
         >
@@ -148,7 +146,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
       </svg>
     </div>
     <div
-      className="makeStyles-keyElement-2"
+      className="makeStyles-keyElement-6"
       onClick={[Function]}
       role="button"
       title="No data collection is scheduled"
@@ -168,7 +166,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           y={0.75}
         />
         <text
-          className="makeStyles-keyElementText-3"
+          className="makeStyles-keyElementText-7"
           x={15}
           y={9}
         >
@@ -179,7 +177,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
   </div>
   <div>
     <div
-      className="makeStyles-keyElement-2"
+      className="makeStyles-keyElement-6"
       onClick={[Function]}
       role="button"
       title="Data was neither expected nor collected"
@@ -199,7 +197,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           y={0}
         />
         <text
-          className="makeStyles-keyElementText-3"
+          className="makeStyles-keyElementText-7"
           x={15}
           y={9}
         >
@@ -208,7 +206,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
       </svg>
     </div>
     <div
-      className="makeStyles-keyElement-2"
+      className="makeStyles-keyElement-6"
       onClick={[Function]}
       role="button"
       title="Data collection was expected but collection could not take place; no data will be published"
@@ -228,7 +226,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           y={0}
         />
         <text
-          className="makeStyles-keyElementText-3"
+          className="makeStyles-keyElementText-7"
           x={15}
           y={9}
         >
@@ -237,7 +235,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
       </svg>
     </div>
     <div
-      className="makeStyles-keyElement-2"
+      className="makeStyles-keyElement-6"
       onClick={[Function]}
       role="button"
       title="Data should be available for download but something has prevented publication"
@@ -257,7 +255,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           y={0.75}
         />
         <text
-          className="makeStyles-keyElementText-3"
+          className="makeStyles-keyElementText-7"
           x={15}
           y={9}
         >
@@ -266,7 +264,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
       </svg>
     </div>
     <div
-      className="makeStyles-keyElement-2"
+      className="makeStyles-keyElement-6"
       onClick={[Function]}
       role="button"
       title="Data collection is desired but not expected until other conditions are met"
@@ -286,7 +284,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           y={0.75}
         />
         <text
-          className="makeStyles-keyElementText-3"
+          className="makeStyles-keyElementText-7"
           x={15}
           y={9}
         >
@@ -297,7 +295,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
   </div>
   <div>
     <div
-      className="makeStyles-keyElement-2"
+      className="makeStyles-keyElement-6"
       onClick={[Function]}
       role="button"
       title="If the chart is presenting a roll-up (e.g. view by state) then all sites rolled into a given row are selected"
@@ -332,7 +330,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           y={0.5}
         />
         <text
-          className="makeStyles-keyElementText-3"
+          className="makeStyles-keyElementText-7"
           x={57}
           y={9}
         >
@@ -341,7 +339,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
       </svg>
     </div>
     <div
-      className="makeStyles-keyElement-2"
+      className="makeStyles-keyElement-6"
       onClick={[Function]}
       role="button"
       title="If the chart is presenting a roll-up (e.g. view by state) then one or more but not all of the sites rolled into a given row are selected"
@@ -376,7 +374,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           y={0.5}
         />
         <text
-          className="makeStyles-keyElementText-3"
+          className="makeStyles-keyElementText-7"
           x={57}
           y={9}
         >
@@ -394,9 +392,9 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
 >
   <div>
     <h6
-      className="MuiTypography-root makeStyles-h6Small-4 MuiTypography-h6"
+      className="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-4 css-134ad2t-MuiTypography-root"
       style={
-        Object {
+        {
           "margin": "-6px 24px 4px 0px",
         }
       }
@@ -405,10 +403,11 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
     </h6>
     <button
       aria-label="Help - Data Availability Chart Key"
-      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall"
+      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
       disabled={false}
       onBlur={[Function]}
       onClick={[Function]}
+      onContextMenu={[Function]}
       onDragLeave={[Function]}
       onFocus={[Function]}
       onKeyDown={[Function]}
@@ -420,7 +419,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
       onTouchMove={[Function]}
       onTouchStart={[Function]}
       style={
-        Object {
+        {
           "marginLeft": "-3px",
         }
       }
@@ -428,20 +427,17 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
       title="Help - Data Availability Chart Key"
       type="button"
     >
-      <span
-        className="MuiIconButton-label"
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+        data-testid="HelpOutlineIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
       >
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"
-          />
-        </svg>
-      </span>
+        <path
+          d="M11 18h2v-2h-2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4"
+        />
+      </svg>
     </button>
   </div>
   <div>
