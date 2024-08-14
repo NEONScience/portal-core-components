@@ -3,37 +3,39 @@
 exports[`ReleaseFilter Renders gracefully with an invalid selection 1`] = `
 <div
   style={
-    Object {
+    {
       "width": "100%",
     }
   }
 >
   <div
-    className="makeStyles-titleContainer-2"
+    className="makeStyles-titleContainer-62"
   >
     <h3
-      className="MuiTypography-root makeStyles-title-1 MuiTypography-h5"
+      className="MuiTypography-root MuiTypography-h5 makeStyles-title-61 css-1v75lyw-MuiTypography-root"
       id="release-filter-label-id5"
     >
       Release
     </h3>
     <button
-      aria-describedby={null}
       aria-label={
         <div>
           A data release is a set of data files that is static (unchanging), always available to end users, and citable. See 
-          <WithStyles(ForwardRef(Link))
+          <ForwardRef(Link)
             href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases"
             target="_blank"
           >
             Data Product Revisions and Releases
-          </WithStyles(ForwardRef(Link))>
+          </ForwardRef(Link)>
            for more details.
         </div>
       }
-      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+      aria-labelledby={null}
+      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+      data-mui-internal-clone-element={true}
       disabled={false}
       onBlur={[Function]}
+      onContextMenu={[Function]}
       onDragLeave={[Function]}
       onFocus={[Function]}
       onKeyDown={[Function]}
@@ -46,61 +48,61 @@ exports[`ReleaseFilter Renders gracefully with an invalid selection 1`] = `
       onTouchMove={[Function]}
       onTouchStart={[Function]}
       style={
-        Object {
-          "marginLeft": 4,
+        {
+          "marginLeft": "4px",
         }
       }
       tabIndex={0}
-      title={null}
       type="button"
     >
-      <span
-        className="MuiIconButton-label"
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+        data-testid="InfoOutlinedIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
       >
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-          />
-        </svg>
-      </span>
+        <path
+          d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+        />
+      </svg>
       <span
-        className="MuiTouchRipple-root"
+        className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
     </button>
   </div>
   <div
     aria-labelledby="release-filter-label-id5"
-    className="MuiInputBase-root MuiOutlinedInput-root makeStyles-selectInput-3 MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+    className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary makeStyles-selectInput-63 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
     data-selenium="release-filter"
     onClick={[Function]}
     style={
-      Object {
+      {
         "width": "100%",
       }
     }
   >
     <div
+      aria-controls=":r8:"
+      aria-expanded="false"
       aria-haspopup="listbox"
       aria-labelledby="mui-component-select-release-filter-input-id5"
-      className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+      className="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1vbq6j2-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
       id="mui-component-select-release-filter-input-id5"
       onBlur={[Function]}
       onFocus={[Function]}
       onKeyDown={[Function]}
       onMouseDown={[Function]}
-      role="button"
+      role="combobox"
       tabIndex={0}
     >
       Latest and Provisional
     </div>
     <input
       aria-hidden={true}
-      className="MuiSelect-nativeInput"
+      aria-invalid={false}
+      className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+      disabled={false}
       id="release-filter-input-id5"
       name="release-filter-input-id5"
       onAnimationStart={[Function]}
@@ -110,7 +112,8 @@ exports[`ReleaseFilter Renders gracefully with an invalid selection 1`] = `
     />
     <svg
       aria-hidden={true}
-      className="MuiSvgIcon-root MuiSelect-icon"
+      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+      data-testid="ArrowDropDownIcon"
       focusable="false"
       viewBox="0 0 24 24"
     >
@@ -120,36 +123,24 @@ exports[`ReleaseFilter Renders gracefully with an invalid selection 1`] = `
     </svg>
     <fieldset
       aria-hidden={true}
-      className="PrivateNotchedOutline-root-16 MuiOutlinedInput-notchedOutline"
-      style={
-        Object {
-          "paddingLeft": 8,
-        }
-      }
+      className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
     >
       <legend
-        className="PrivateNotchedOutline-legend-17"
-        style={
-          Object {
-            "width": 0.01,
-          }
-        }
+        className="css-ihdtdm"
       >
         <span
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "&#8203;",
-            }
-          }
-        />
+          className="notranslate"
+        >
+          ​
+        </span>
       </legend>
     </fieldset>
   </div>
   <div
-    className="makeStyles-descriptionContainer-4"
+    className="makeStyles-descriptionContainer-64"
   >
     <span
-      className="MuiTypography-root makeStyles-description-8 MuiTypography-caption"
+      className="MuiTypography-root MuiTypography-caption makeStyles-description-68 css-287k3z-MuiTypography-root"
     >
       Data in the latest release in addition to provisional data (not yet in any release)
     </span>
@@ -160,38 +151,40 @@ exports[`ReleaseFilter Renders gracefully with an invalid selection 1`] = `
 exports[`ReleaseFilter Renders in skeleton mode 1`] = `
 <div
   style={
-    Object {
+    {
       "overflow": "hidden",
       "width": "100%",
     }
   }
 >
   <div
-    className="makeStyles-titleContainer-2"
+    className="makeStyles-titleContainer-17"
   >
     <h3
-      className="MuiTypography-root makeStyles-title-1 MuiTypography-h5"
+      className="MuiTypography-root MuiTypography-h5 makeStyles-title-16 css-1v75lyw-MuiTypography-root"
       id="release-filter-label-id2"
     >
       Release
     </h3>
     <button
-      aria-describedby={null}
       aria-label={
         <div>
           A data release is a set of data files that is static (unchanging), always available to end users, and citable. See 
-          <WithStyles(ForwardRef(Link))
+          <ForwardRef(Link)
             href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases"
             target="_blank"
           >
             Data Product Revisions and Releases
-          </WithStyles(ForwardRef(Link))>
+          </ForwardRef(Link)>
            for more details.
         </div>
       }
-      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+      aria-labelledby={null}
+      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+      data-mui-internal-clone-element={true}
       disabled={false}
       onBlur={[Function]}
+      onContextMenu={[Function]}
       onDragLeave={[Function]}
       onFocus={[Function]}
       onKeyDown={[Function]}
@@ -204,49 +197,45 @@ exports[`ReleaseFilter Renders in skeleton mode 1`] = `
       onTouchMove={[Function]}
       onTouchStart={[Function]}
       style={
-        Object {
-          "marginLeft": 4,
+        {
+          "marginLeft": "4px",
         }
       }
       tabIndex={0}
-      title={null}
       type="button"
     >
-      <span
-        className="MuiIconButton-label"
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+        data-testid="InfoOutlinedIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
       >
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-          />
-        </svg>
-      </span>
+        <path
+          d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+        />
+      </svg>
       <span
-        className="MuiTouchRipple-root"
+        className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
     </button>
   </div>
   <span
-    className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
+    className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
     style={
-      Object {
+      {
         "height": 36,
-        "marginBottom": 8,
+        "marginBottom": "8px",
         "width": "100%",
       }
     }
   />
   <span
-    className="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse"
+    className="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse css-18hkvsx-MuiSkeleton-root"
     style={
-      Object {
+      {
         "height": 16,
-        "marginBottom": 8,
+        "marginBottom": "8px",
         "width": "70%",
       }
     }
@@ -259,37 +248,39 @@ exports[`ReleaseFilter Renders nothing with no releases and an excluded null rel
 exports[`ReleaseFilter Renders product counts without a defined null release count 1`] = `
 <div
   style={
-    Object {
+    {
       "width": "100%",
     }
   }
 >
   <div
-    className="makeStyles-titleContainer-2"
+    className="makeStyles-titleContainer-167"
   >
     <h3
-      className="MuiTypography-root makeStyles-title-1 MuiTypography-h5"
+      className="MuiTypography-root MuiTypography-h5 makeStyles-title-166 css-1v75lyw-MuiTypography-root"
       id="release-filter-label-id12"
     >
       Release
     </h3>
     <button
-      aria-describedby={null}
       aria-label={
         <div>
           A data release is a set of data files that is static (unchanging), always available to end users, and citable. See 
-          <WithStyles(ForwardRef(Link))
+          <ForwardRef(Link)
             href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases"
             target="_blank"
           >
             Data Product Revisions and Releases
-          </WithStyles(ForwardRef(Link))>
+          </ForwardRef(Link)>
            for more details.
         </div>
       }
-      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+      aria-labelledby={null}
+      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+      data-mui-internal-clone-element={true}
       disabled={false}
       onBlur={[Function]}
+      onContextMenu={[Function]}
       onDragLeave={[Function]}
       onFocus={[Function]}
       onKeyDown={[Function]}
@@ -302,61 +293,61 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
       onTouchMove={[Function]}
       onTouchStart={[Function]}
       style={
-        Object {
-          "marginLeft": 4,
+        {
+          "marginLeft": "4px",
         }
       }
       tabIndex={0}
-      title={null}
       type="button"
     >
-      <span
-        className="MuiIconButton-label"
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+        data-testid="InfoOutlinedIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
       >
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-          />
-        </svg>
-      </span>
+        <path
+          d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+        />
+      </svg>
       <span
-        className="MuiTouchRipple-root"
+        className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
     </button>
   </div>
   <div
     aria-labelledby="release-filter-label-id12"
-    className="MuiInputBase-root MuiOutlinedInput-root makeStyles-selectInput-3 MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+    className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary makeStyles-selectInput-168 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
     data-selenium="release-filter"
     onClick={[Function]}
     style={
-      Object {
+      {
         "width": "100%",
       }
     }
   >
     <div
+      aria-controls=":rl:"
+      aria-expanded="false"
       aria-haspopup="listbox"
       aria-labelledby="mui-component-select-release-filter-input-id12"
-      className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+      className="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1vbq6j2-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
       id="mui-component-select-release-filter-input-id12"
       onBlur={[Function]}
       onFocus={[Function]}
       onKeyDown={[Function]}
       onMouseDown={[Function]}
-      role="button"
+      role="combobox"
       tabIndex={0}
     >
       TEST-TAG-2
     </div>
     <input
       aria-hidden={true}
-      className="MuiSelect-nativeInput"
+      aria-invalid={false}
+      className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+      disabled={false}
       id="release-filter-input-id12"
       name="release-filter-input-id12"
       onAnimationStart={[Function]}
@@ -366,7 +357,8 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
     />
     <svg
       aria-hidden={true}
-      className="MuiSvgIcon-root MuiSelect-icon"
+      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+      data-testid="ArrowDropDownIcon"
       focusable="false"
       viewBox="0 0 24 24"
     >
@@ -376,59 +368,47 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
     </svg>
     <fieldset
       aria-hidden={true}
-      className="PrivateNotchedOutline-root-16 MuiOutlinedInput-notchedOutline"
-      style={
-        Object {
-          "paddingLeft": 8,
-        }
-      }
+      className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
     >
       <legend
-        className="PrivateNotchedOutline-legend-17"
-        style={
-          Object {
-            "width": 0.01,
-          }
-        }
+        className="css-ihdtdm"
       >
         <span
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "&#8203;",
-            }
-          }
-        />
+          className="notranslate"
+        >
+          ​
+        </span>
       </legend>
     </fieldset>
   </div>
   <div
-    className="makeStyles-descriptionContainer-4"
+    className="makeStyles-descriptionContainer-169"
   >
     <span
-      className="MuiTypography-root makeStyles-description-8 MuiTypography-caption"
+      className="MuiTypography-root MuiTypography-caption makeStyles-description-173 css-287k3z-MuiTypography-root"
     >
       Generated: January 15, 2021
     </span>
   </div>
   <div
-    className="makeStyles-descriptionContainer-4"
+    className="makeStyles-descriptionContainer-169"
   >
     <span
-      className="MuiTypography-root makeStyles-description-8 MuiTypography-caption"
+      className="MuiTypography-root MuiTypography-caption makeStyles-description-173 css-287k3z-MuiTypography-root"
     >
       2 data products
     </span>
   </div>
   <div
-    className="makeStyles-descriptionContainer-4"
+    className="makeStyles-descriptionContainer-169"
   >
     <div
-      className="makeStyles-descriptionFlexInnerContainer-7"
+      className="makeStyles-descriptionFlexInnerContainer-172"
     >
       <span
-        className="MuiTypography-root makeStyles-description-8 MuiTypography-caption"
+        className="MuiTypography-root MuiTypography-caption makeStyles-description-173 css-287k3z-MuiTypography-root"
         style={
-          Object {
+          {
             "marginRight": "4px",
           }
         }
@@ -438,9 +418,9 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
       </span>
       <span
         aria-label="doi"
-        className="MuiTypography-root makeStyles-description-8 MuiTypography-caption"
+        className="MuiTypography-root MuiTypography-caption makeStyles-description-173 css-287k3z-MuiTypography-root"
         style={
-          Object {
+          {
             "overflowWrap": "anywhere",
           }
         }
@@ -449,10 +429,11 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
       </span>
     </div>
     <button
-      className="MuiButtonBase-root MuiButton-root MuiButton-outlined makeStyles-copyButton-10 MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+      className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary makeStyles-copyButton-175 css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
       disabled={false}
       onBlur={[Function]}
       onClick={[Function]}
+      onContextMenu={[Function]}
       onDragLeave={[Function]}
       onFocus={[Function]}
       onKeyDown={[Function]}
@@ -467,28 +448,25 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
       title="Copy DOI: http://data.cite/bar"
       type="button"
     >
-      <span
-        className="MuiButton-label"
-      >
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-          focusable="false"
-          style={
-            Object {
-              "marginRight": 8,
-            }
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+        data-testid="AssignmentIcon"
+        focusable="false"
+        style={
+          {
+            "marginRight": "8px",
           }
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"
-          />
-        </svg>
-        Copy DOI
-      </span>
+        }
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2m-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1m2 14H7v-2h7zm3-4H7v-2h10zm0-4H7V7h10z"
+        />
+      </svg>
+      Copy DOI
       <span
-        className="MuiTouchRipple-root"
+        className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
     </button>
   </div>
@@ -498,37 +476,39 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
 exports[`ReleaseFilter Renders with a custom title 1`] = `
 <div
   style={
-    Object {
+    {
       "width": "100%",
     }
   }
 >
   <div
-    className="makeStyles-titleContainer-2"
+    className="makeStyles-titleContainer-107"
   >
     <h3
-      className="MuiTypography-root makeStyles-title-1 MuiTypography-h5"
+      className="MuiTypography-root MuiTypography-h5 makeStyles-title-106 css-1v75lyw-MuiTypography-root"
       id="release-filter-label-id8"
     >
       Foo
     </h3>
     <button
-      aria-describedby={null}
       aria-label={
         <div>
           A data release is a set of data files that is static (unchanging), always available to end users, and citable. See 
-          <WithStyles(ForwardRef(Link))
+          <ForwardRef(Link)
             href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases"
             target="_blank"
           >
             Data Product Revisions and Releases
-          </WithStyles(ForwardRef(Link))>
+          </ForwardRef(Link)>
            for more details.
         </div>
       }
-      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+      aria-labelledby={null}
+      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+      data-mui-internal-clone-element={true}
       disabled={false}
       onBlur={[Function]}
+      onContextMenu={[Function]}
       onDragLeave={[Function]}
       onFocus={[Function]}
       onKeyDown={[Function]}
@@ -541,62 +521,62 @@ exports[`ReleaseFilter Renders with a custom title 1`] = `
       onTouchMove={[Function]}
       onTouchStart={[Function]}
       style={
-        Object {
-          "marginLeft": 4,
+        {
+          "marginLeft": "4px",
         }
       }
       tabIndex={0}
-      title={null}
       type="button"
     >
-      <span
-        className="MuiIconButton-label"
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+        data-testid="InfoOutlinedIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
       >
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-          />
-        </svg>
-      </span>
+        <path
+          d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+        />
+      </svg>
       <span
-        className="MuiTouchRipple-root"
+        className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
     </button>
   </div>
   <div
     aria-labelledby="release-filter-label-id8"
-    className="MuiInputBase-root MuiOutlinedInput-root makeStyles-selectInput-3 Mui-disabled Mui-disabled MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+    className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled makeStyles-selectInput-108 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
     data-selenium="release-filter"
     onClick={[Function]}
     style={
-      Object {
+      {
         "width": "100%",
       }
     }
   >
     <div
+      aria-controls=":re:"
       aria-disabled="true"
+      aria-expanded="false"
       aria-haspopup="listbox"
       aria-labelledby="mui-component-select-release-filter-input-id8"
-      className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiOutlinedInput-input Mui-disabled Mui-disabled MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense Mui-disabled"
+      className="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled css-1vbq6j2-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
       id="mui-component-select-release-filter-input-id8"
       onBlur={[Function]}
       onFocus={[Function]}
       onKeyDown={[Function]}
       onMouseDown={null}
-      role="button"
+      role="combobox"
       tabIndex={null}
     >
       Latest and Provisional
     </div>
     <input
       aria-hidden={true}
-      className="MuiSelect-nativeInput"
+      aria-invalid={false}
+      className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+      disabled={true}
       id="release-filter-input-id8"
       name="release-filter-input-id8"
       onAnimationStart={[Function]}
@@ -606,7 +586,8 @@ exports[`ReleaseFilter Renders with a custom title 1`] = `
     />
     <svg
       aria-hidden={true}
-      className="MuiSvgIcon-root MuiSelect-icon Mui-disabled"
+      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined Mui-disabled css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+      data-testid="ArrowDropDownIcon"
       focusable="false"
       viewBox="0 0 24 24"
     >
@@ -616,36 +597,24 @@ exports[`ReleaseFilter Renders with a custom title 1`] = `
     </svg>
     <fieldset
       aria-hidden={true}
-      className="PrivateNotchedOutline-root-16 MuiOutlinedInput-notchedOutline"
-      style={
-        Object {
-          "paddingLeft": 8,
-        }
-      }
+      className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
     >
       <legend
-        className="PrivateNotchedOutline-legend-17"
-        style={
-          Object {
-            "width": 0.01,
-          }
-        }
+        className="css-ihdtdm"
       >
         <span
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "&#8203;",
-            }
-          }
-        />
+          className="notranslate"
+        >
+          ​
+        </span>
       </legend>
     </fieldset>
   </div>
   <div
-    className="makeStyles-descriptionContainer-4"
+    className="makeStyles-descriptionContainer-109"
   >
     <span
-      className="MuiTypography-root makeStyles-description-8 MuiTypography-caption"
+      className="MuiTypography-root MuiTypography-caption makeStyles-description-113 css-287k3z-MuiTypography-root"
     >
       Data in the latest release in addition to provisional data (not yet in any release)
     </span>
@@ -656,37 +625,39 @@ exports[`ReleaseFilter Renders with a custom title 1`] = `
 exports[`ReleaseFilter Renders with a selected release 1`] = `
 <div
   style={
-    Object {
+    {
       "width": "100%",
     }
   }
 >
   <div
-    className="makeStyles-titleContainer-2"
+    className="makeStyles-titleContainer-47"
   >
     <h3
-      className="MuiTypography-root makeStyles-title-1 MuiTypography-h5"
+      className="MuiTypography-root MuiTypography-h5 makeStyles-title-46 css-1v75lyw-MuiTypography-root"
       id="release-filter-label-id4"
     >
       Release
     </h3>
     <button
-      aria-describedby={null}
       aria-label={
         <div>
           A data release is a set of data files that is static (unchanging), always available to end users, and citable. See 
-          <WithStyles(ForwardRef(Link))
+          <ForwardRef(Link)
             href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases"
             target="_blank"
           >
             Data Product Revisions and Releases
-          </WithStyles(ForwardRef(Link))>
+          </ForwardRef(Link)>
            for more details.
         </div>
       }
-      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+      aria-labelledby={null}
+      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+      data-mui-internal-clone-element={true}
       disabled={false}
       onBlur={[Function]}
+      onContextMenu={[Function]}
       onDragLeave={[Function]}
       onFocus={[Function]}
       onKeyDown={[Function]}
@@ -699,61 +670,61 @@ exports[`ReleaseFilter Renders with a selected release 1`] = `
       onTouchMove={[Function]}
       onTouchStart={[Function]}
       style={
-        Object {
-          "marginLeft": 4,
+        {
+          "marginLeft": "4px",
         }
       }
       tabIndex={0}
-      title={null}
       type="button"
     >
-      <span
-        className="MuiIconButton-label"
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+        data-testid="InfoOutlinedIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
       >
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-          />
-        </svg>
-      </span>
+        <path
+          d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+        />
+      </svg>
       <span
-        className="MuiTouchRipple-root"
+        className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
     </button>
   </div>
   <div
     aria-labelledby="release-filter-label-id4"
-    className="MuiInputBase-root MuiOutlinedInput-root makeStyles-selectInput-3 MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+    className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary makeStyles-selectInput-48 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
     data-selenium="release-filter"
     onClick={[Function]}
     style={
-      Object {
+      {
         "width": "100%",
       }
     }
   >
     <div
+      aria-controls=":r6:"
+      aria-expanded="false"
       aria-haspopup="listbox"
       aria-labelledby="mui-component-select-release-filter-input-id4"
-      className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+      className="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1vbq6j2-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
       id="mui-component-select-release-filter-input-id4"
       onBlur={[Function]}
       onFocus={[Function]}
       onKeyDown={[Function]}
       onMouseDown={[Function]}
-      role="button"
+      role="combobox"
       tabIndex={0}
     >
       TEST-TAG-2
     </div>
     <input
       aria-hidden={true}
-      className="MuiSelect-nativeInput"
+      aria-invalid={false}
+      className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+      disabled={false}
       id="release-filter-input-id4"
       name="release-filter-input-id4"
       onAnimationStart={[Function]}
@@ -763,7 +734,8 @@ exports[`ReleaseFilter Renders with a selected release 1`] = `
     />
     <svg
       aria-hidden={true}
-      className="MuiSvgIcon-root MuiSelect-icon"
+      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+      data-testid="ArrowDropDownIcon"
       focusable="false"
       viewBox="0 0 24 24"
     >
@@ -773,28 +745,16 @@ exports[`ReleaseFilter Renders with a selected release 1`] = `
     </svg>
     <fieldset
       aria-hidden={true}
-      className="PrivateNotchedOutline-root-16 MuiOutlinedInput-notchedOutline"
-      style={
-        Object {
-          "paddingLeft": 8,
-        }
-      }
+      className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
     >
       <legend
-        className="PrivateNotchedOutline-legend-17"
-        style={
-          Object {
-            "width": 0.01,
-          }
-        }
+        className="css-ihdtdm"
       >
         <span
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "&#8203;",
-            }
-          }
-        />
+          className="notranslate"
+        >
+          ​
+        </span>
       </legend>
     </fieldset>
   </div>
@@ -804,40 +764,44 @@ exports[`ReleaseFilter Renders with a selected release 1`] = `
 exports[`ReleaseFilter Renders with blank title 1`] = `
 <div
   style={
-    Object {
+    {
       "width": "100%",
     }
   }
 >
   <div
     aria-labelledby="release-filter-label-id9"
-    className="MuiInputBase-root MuiOutlinedInput-root makeStyles-selectInput-3 Mui-disabled Mui-disabled MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+    className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled makeStyles-selectInput-123 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
     data-selenium="release-filter"
     onClick={[Function]}
     style={
-      Object {
+      {
         "width": "100%",
       }
     }
   >
     <div
+      aria-controls=":rf:"
       aria-disabled="true"
+      aria-expanded="false"
       aria-haspopup="listbox"
       aria-labelledby="mui-component-select-release-filter-input-id9"
-      className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiOutlinedInput-input Mui-disabled Mui-disabled MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense Mui-disabled"
+      className="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled css-1vbq6j2-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
       id="mui-component-select-release-filter-input-id9"
       onBlur={[Function]}
       onFocus={[Function]}
       onKeyDown={[Function]}
       onMouseDown={null}
-      role="button"
+      role="combobox"
       tabIndex={null}
     >
       Latest and Provisional
     </div>
     <input
       aria-hidden={true}
-      className="MuiSelect-nativeInput"
+      aria-invalid={false}
+      className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+      disabled={true}
       id="release-filter-input-id9"
       name="release-filter-input-id9"
       onAnimationStart={[Function]}
@@ -847,7 +811,8 @@ exports[`ReleaseFilter Renders with blank title 1`] = `
     />
     <svg
       aria-hidden={true}
-      className="MuiSvgIcon-root MuiSelect-icon Mui-disabled"
+      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined Mui-disabled css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+      data-testid="ArrowDropDownIcon"
       focusable="false"
       viewBox="0 0 24 24"
     >
@@ -857,36 +822,24 @@ exports[`ReleaseFilter Renders with blank title 1`] = `
     </svg>
     <fieldset
       aria-hidden={true}
-      className="PrivateNotchedOutline-root-16 MuiOutlinedInput-notchedOutline"
-      style={
-        Object {
-          "paddingLeft": 8,
-        }
-      }
+      className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
     >
       <legend
-        className="PrivateNotchedOutline-legend-17"
-        style={
-          Object {
-            "width": 0.01,
-          }
-        }
+        className="css-ihdtdm"
       >
         <span
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "&#8203;",
-            }
-          }
-        />
+          className="notranslate"
+        >
+          ​
+        </span>
       </legend>
     </fieldset>
   </div>
   <div
-    className="makeStyles-descriptionContainer-4"
+    className="makeStyles-descriptionContainer-124"
   >
     <span
-      className="MuiTypography-root makeStyles-description-8 MuiTypography-caption"
+      className="MuiTypography-root MuiTypography-caption makeStyles-description-128 css-287k3z-MuiTypography-root"
     >
       Data in the latest release in addition to provisional data (not yet in any release)
     </span>
@@ -898,31 +851,33 @@ exports[`ReleaseFilter Renders with custom layouts 1`] = `
 <div>
   <div>
     <div
-      className="makeStyles-titleContainer-2"
+      className="makeStyles-titleContainer-92"
     >
       <h3
-        className="MuiTypography-root makeStyles-title-1 MuiTypography-h5"
+        className="MuiTypography-root MuiTypography-h5 makeStyles-title-91 css-1v75lyw-MuiTypography-root"
         id="release-filter-label-id7"
       >
         Release
       </h3>
       <button
-        aria-describedby={null}
         aria-label={
           <div>
             A data release is a set of data files that is static (unchanging), always available to end users, and citable. See 
-            <WithStyles(ForwardRef(Link))
+            <ForwardRef(Link)
               href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases"
               target="_blank"
             >
               Data Product Revisions and Releases
-            </WithStyles(ForwardRef(Link))>
+            </ForwardRef(Link)>
              for more details.
           </div>
         }
-        className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+        aria-labelledby={null}
+        className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+        data-mui-internal-clone-element={true}
         disabled={false}
         onBlur={[Function]}
+        onContextMenu={[Function]}
         onDragLeave={[Function]}
         onFocus={[Function]}
         onKeyDown={[Function]}
@@ -935,73 +890,73 @@ exports[`ReleaseFilter Renders with custom layouts 1`] = `
         onTouchMove={[Function]}
         onTouchStart={[Function]}
         style={
-          Object {
-            "marginLeft": 4,
+          {
+            "marginLeft": "4px",
           }
         }
         tabIndex={0}
-        title={null}
         type="button"
       >
-        <span
-          className="MuiIconButton-label"
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+          data-testid="InfoOutlinedIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
         >
-          <svg
-            aria-hidden={true}
-            className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-            focusable="false"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-            />
-          </svg>
-        </span>
+          <path
+            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+          />
+        </svg>
         <span
-          className="MuiTouchRipple-root"
+          className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
         />
       </button>
     </div>
   </div>
   <div
-    className="makeStyles-horizontalFlex-13"
+    className="makeStyles-horizontalFlex-103"
   >
     <div
       style={
-        Object {
+        {
           "width": "300px",
         }
       }
     >
       <div
         aria-labelledby="release-filter-label-id7"
-        className="MuiInputBase-root MuiOutlinedInput-root makeStyles-selectInput-3 Mui-disabled Mui-disabled MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+        className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled makeStyles-selectInput-93 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
         data-selenium="release-filter"
         onClick={[Function]}
         style={
-          Object {
+          {
             "maxWidth": "300px",
           }
         }
       >
         <div
+          aria-controls=":rc:"
           aria-disabled="true"
+          aria-expanded="false"
           aria-haspopup="listbox"
           aria-labelledby="mui-component-select-release-filter-input-id7"
-          className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiOutlinedInput-input Mui-disabled Mui-disabled MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense Mui-disabled"
+          className="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled css-1vbq6j2-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
           id="mui-component-select-release-filter-input-id7"
           onBlur={[Function]}
           onFocus={[Function]}
           onKeyDown={[Function]}
           onMouseDown={null}
-          role="button"
+          role="combobox"
           tabIndex={null}
         >
           Latest and Provisional
         </div>
         <input
           aria-hidden={true}
-          className="MuiSelect-nativeInput"
+          aria-invalid={false}
+          className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+          disabled={true}
           id="release-filter-input-id7"
           name="release-filter-input-id7"
           onAnimationStart={[Function]}
@@ -1011,7 +966,8 @@ exports[`ReleaseFilter Renders with custom layouts 1`] = `
         />
         <svg
           aria-hidden={true}
-          className="MuiSvgIcon-root MuiSelect-icon Mui-disabled"
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined Mui-disabled css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+          data-testid="ArrowDropDownIcon"
           focusable="false"
           viewBox="0 0 24 24"
         >
@@ -1021,40 +977,28 @@ exports[`ReleaseFilter Renders with custom layouts 1`] = `
         </svg>
         <fieldset
           aria-hidden={true}
-          className="PrivateNotchedOutline-root-16 MuiOutlinedInput-notchedOutline"
-          style={
-            Object {
-              "paddingLeft": 8,
-            }
-          }
+          className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
         >
           <legend
-            className="PrivateNotchedOutline-legend-17"
-            style={
-              Object {
-                "width": 0.01,
-              }
-            }
+            className="css-ihdtdm"
           >
             <span
-              dangerouslySetInnerHTML={
-                Object {
-                  "__html": "&#8203;",
-                }
-              }
-            />
+              className="notranslate"
+            >
+              ​
+            </span>
           </legend>
         </fieldset>
       </div>
     </div>
     <div
-      className="makeStyles-horizontalDescriptions-14"
+      className="makeStyles-horizontalDescriptions-104"
     >
       <div
-        className="makeStyles-descriptionContainer-4"
+        className="makeStyles-descriptionContainer-94"
       >
         <span
-          className="MuiTypography-root makeStyles-description-8 MuiTypography-caption"
+          className="MuiTypography-root MuiTypography-caption makeStyles-description-98 css-287k3z-MuiTypography-root"
         >
           Data in the latest release in addition to provisional data (not yet in any release)
         </span>
@@ -1067,37 +1011,39 @@ exports[`ReleaseFilter Renders with custom layouts 1`] = `
 exports[`ReleaseFilter Renders with list of releases with DOIs 1`] = `
 <div
   style={
-    Object {
+    {
       "width": "100%",
     }
   }
 >
   <div
-    className="makeStyles-titleContainer-2"
+    className="makeStyles-titleContainer-77"
   >
     <h3
-      className="MuiTypography-root makeStyles-title-1 MuiTypography-h5"
+      className="MuiTypography-root MuiTypography-h5 makeStyles-title-76 css-1v75lyw-MuiTypography-root"
       id="release-filter-label-id6"
     >
       Release
     </h3>
     <button
-      aria-describedby={null}
       aria-label={
         <div>
           A data release is a set of data files that is static (unchanging), always available to end users, and citable. See 
-          <WithStyles(ForwardRef(Link))
+          <ForwardRef(Link)
             href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases"
             target="_blank"
           >
             Data Product Revisions and Releases
-          </WithStyles(ForwardRef(Link))>
+          </ForwardRef(Link)>
            for more details.
         </div>
       }
-      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+      aria-labelledby={null}
+      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+      data-mui-internal-clone-element={true}
       disabled={false}
       onBlur={[Function]}
+      onContextMenu={[Function]}
       onDragLeave={[Function]}
       onFocus={[Function]}
       onKeyDown={[Function]}
@@ -1110,61 +1056,61 @@ exports[`ReleaseFilter Renders with list of releases with DOIs 1`] = `
       onTouchMove={[Function]}
       onTouchStart={[Function]}
       style={
-        Object {
-          "marginLeft": 4,
+        {
+          "marginLeft": "4px",
         }
       }
       tabIndex={0}
-      title={null}
       type="button"
     >
-      <span
-        className="MuiIconButton-label"
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+        data-testid="InfoOutlinedIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
       >
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-          />
-        </svg>
-      </span>
+        <path
+          d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+        />
+      </svg>
       <span
-        className="MuiTouchRipple-root"
+        className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
     </button>
   </div>
   <div
     aria-labelledby="release-filter-label-id6"
-    className="MuiInputBase-root MuiOutlinedInput-root makeStyles-selectInput-3 MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+    className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary makeStyles-selectInput-78 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
     data-selenium="release-filter"
     onClick={[Function]}
     style={
-      Object {
+      {
         "width": "100%",
       }
     }
   >
     <div
+      aria-controls=":ra:"
+      aria-expanded="false"
       aria-haspopup="listbox"
       aria-labelledby="mui-component-select-release-filter-input-id6"
-      className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+      className="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1vbq6j2-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
       id="mui-component-select-release-filter-input-id6"
       onBlur={[Function]}
       onFocus={[Function]}
       onKeyDown={[Function]}
       onMouseDown={[Function]}
-      role="button"
+      role="combobox"
       tabIndex={0}
     >
       Latest and Provisional
     </div>
     <input
       aria-hidden={true}
-      className="MuiSelect-nativeInput"
+      aria-invalid={false}
+      className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+      disabled={false}
       id="release-filter-input-id6"
       name="release-filter-input-id6"
       onAnimationStart={[Function]}
@@ -1174,7 +1120,8 @@ exports[`ReleaseFilter Renders with list of releases with DOIs 1`] = `
     />
     <svg
       aria-hidden={true}
-      className="MuiSvgIcon-root MuiSelect-icon"
+      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+      data-testid="ArrowDropDownIcon"
       focusable="false"
       viewBox="0 0 24 24"
     >
@@ -1184,36 +1131,24 @@ exports[`ReleaseFilter Renders with list of releases with DOIs 1`] = `
     </svg>
     <fieldset
       aria-hidden={true}
-      className="PrivateNotchedOutline-root-16 MuiOutlinedInput-notchedOutline"
-      style={
-        Object {
-          "paddingLeft": 8,
-        }
-      }
+      className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
     >
       <legend
-        className="PrivateNotchedOutline-legend-17"
-        style={
-          Object {
-            "width": 0.01,
-          }
-        }
+        className="css-ihdtdm"
       >
         <span
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "&#8203;",
-            }
-          }
-        />
+          className="notranslate"
+        >
+          ​
+        </span>
       </legend>
     </fieldset>
   </div>
   <div
-    className="makeStyles-descriptionContainer-4"
+    className="makeStyles-descriptionContainer-79"
   >
     <span
-      className="MuiTypography-root makeStyles-description-8 MuiTypography-caption"
+      className="MuiTypography-root MuiTypography-caption makeStyles-description-83 css-287k3z-MuiTypography-root"
     >
       Data in the latest release in addition to provisional data (not yet in any release)
     </span>
@@ -1224,37 +1159,39 @@ exports[`ReleaseFilter Renders with list of releases with DOIs 1`] = `
 exports[`ReleaseFilter Renders with list of releases without DOIs 1`] = `
 <div
   style={
-    Object {
+    {
       "width": "100%",
     }
   }
 >
   <div
-    className="makeStyles-titleContainer-2"
+    className="makeStyles-titleContainer-32"
   >
     <h3
-      className="MuiTypography-root makeStyles-title-1 MuiTypography-h5"
+      className="MuiTypography-root MuiTypography-h5 makeStyles-title-31 css-1v75lyw-MuiTypography-root"
       id="release-filter-label-id3"
     >
       Release
     </h3>
     <button
-      aria-describedby={null}
       aria-label={
         <div>
           A data release is a set of data files that is static (unchanging), always available to end users, and citable. See 
-          <WithStyles(ForwardRef(Link))
+          <ForwardRef(Link)
             href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases"
             target="_blank"
           >
             Data Product Revisions and Releases
-          </WithStyles(ForwardRef(Link))>
+          </ForwardRef(Link)>
            for more details.
         </div>
       }
-      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+      aria-labelledby={null}
+      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+      data-mui-internal-clone-element={true}
       disabled={false}
       onBlur={[Function]}
+      onContextMenu={[Function]}
       onDragLeave={[Function]}
       onFocus={[Function]}
       onKeyDown={[Function]}
@@ -1267,61 +1204,61 @@ exports[`ReleaseFilter Renders with list of releases without DOIs 1`] = `
       onTouchMove={[Function]}
       onTouchStart={[Function]}
       style={
-        Object {
-          "marginLeft": 4,
+        {
+          "marginLeft": "4px",
         }
       }
       tabIndex={0}
-      title={null}
       type="button"
     >
-      <span
-        className="MuiIconButton-label"
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+        data-testid="InfoOutlinedIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
       >
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-          />
-        </svg>
-      </span>
+        <path
+          d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+        />
+      </svg>
       <span
-        className="MuiTouchRipple-root"
+        className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
     </button>
   </div>
   <div
     aria-labelledby="release-filter-label-id3"
-    className="MuiInputBase-root MuiOutlinedInput-root makeStyles-selectInput-3 MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+    className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary makeStyles-selectInput-33 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
     data-selenium="release-filter"
     onClick={[Function]}
     style={
-      Object {
+      {
         "width": "100%",
       }
     }
   >
     <div
+      aria-controls=":r4:"
+      aria-expanded="false"
       aria-haspopup="listbox"
       aria-labelledby="mui-component-select-release-filter-input-id3"
-      className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+      className="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1vbq6j2-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
       id="mui-component-select-release-filter-input-id3"
       onBlur={[Function]}
       onFocus={[Function]}
       onKeyDown={[Function]}
       onMouseDown={[Function]}
-      role="button"
+      role="combobox"
       tabIndex={0}
     >
       Latest and Provisional
     </div>
     <input
       aria-hidden={true}
-      className="MuiSelect-nativeInput"
+      aria-invalid={false}
+      className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+      disabled={false}
       id="release-filter-input-id3"
       name="release-filter-input-id3"
       onAnimationStart={[Function]}
@@ -1331,7 +1268,8 @@ exports[`ReleaseFilter Renders with list of releases without DOIs 1`] = `
     />
     <svg
       aria-hidden={true}
-      className="MuiSvgIcon-root MuiSelect-icon"
+      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+      data-testid="ArrowDropDownIcon"
       focusable="false"
       viewBox="0 0 24 24"
     >
@@ -1341,36 +1279,24 @@ exports[`ReleaseFilter Renders with list of releases without DOIs 1`] = `
     </svg>
     <fieldset
       aria-hidden={true}
-      className="PrivateNotchedOutline-root-16 MuiOutlinedInput-notchedOutline"
-      style={
-        Object {
-          "paddingLeft": 8,
-        }
-      }
+      className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
     >
       <legend
-        className="PrivateNotchedOutline-legend-17"
-        style={
-          Object {
-            "width": 0.01,
-          }
-        }
+        className="css-ihdtdm"
       >
         <span
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "&#8203;",
-            }
-          }
-        />
+          className="notranslate"
+        >
+          ​
+        </span>
       </legend>
     </fieldset>
   </div>
   <div
-    className="makeStyles-descriptionContainer-4"
+    className="makeStyles-descriptionContainer-34"
   >
     <span
-      className="MuiTypography-root makeStyles-description-8 MuiTypography-caption"
+      className="MuiTypography-root MuiTypography-caption makeStyles-description-38 css-287k3z-MuiTypography-root"
     >
       Data in the latest release in addition to provisional data (not yet in any release)
     </span>
@@ -1381,7 +1307,7 @@ exports[`ReleaseFilter Renders with list of releases without DOIs 1`] = `
 exports[`ReleaseFilter Renders with no props 1`] = `
 <div
   style={
-    Object {
+    {
       "width": "100%",
     }
   }
@@ -1390,28 +1316,30 @@ exports[`ReleaseFilter Renders with no props 1`] = `
     className="makeStyles-titleContainer-2"
   >
     <h3
-      className="MuiTypography-root makeStyles-title-1 MuiTypography-h5"
+      className="MuiTypography-root MuiTypography-h5 makeStyles-title-1 css-1v75lyw-MuiTypography-root"
       id="release-filter-label-id1"
     >
       Release
     </h3>
     <button
-      aria-describedby={null}
       aria-label={
         <div>
           A data release is a set of data files that is static (unchanging), always available to end users, and citable. See 
-          <WithStyles(ForwardRef(Link))
+          <ForwardRef(Link)
             href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases"
             target="_blank"
           >
             Data Product Revisions and Releases
-          </WithStyles(ForwardRef(Link))>
+          </ForwardRef(Link)>
            for more details.
         </div>
       }
-      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+      aria-labelledby={null}
+      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+      data-mui-internal-clone-element={true}
       disabled={false}
       onBlur={[Function]}
+      onContextMenu={[Function]}
       onDragLeave={[Function]}
       onFocus={[Function]}
       onKeyDown={[Function]}
@@ -1424,62 +1352,62 @@ exports[`ReleaseFilter Renders with no props 1`] = `
       onTouchMove={[Function]}
       onTouchStart={[Function]}
       style={
-        Object {
-          "marginLeft": 4,
+        {
+          "marginLeft": "4px",
         }
       }
       tabIndex={0}
-      title={null}
       type="button"
     >
-      <span
-        className="MuiIconButton-label"
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+        data-testid="InfoOutlinedIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
       >
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-          />
-        </svg>
-      </span>
+        <path
+          d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+        />
+      </svg>
       <span
-        className="MuiTouchRipple-root"
+        className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
     </button>
   </div>
   <div
     aria-labelledby="release-filter-label-id1"
-    className="MuiInputBase-root MuiOutlinedInput-root makeStyles-selectInput-3 Mui-disabled Mui-disabled MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+    className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled makeStyles-selectInput-3 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
     data-selenium="release-filter"
     onClick={[Function]}
     style={
-      Object {
+      {
         "width": "100%",
       }
     }
   >
     <div
+      aria-controls=":r1:"
       aria-disabled="true"
+      aria-expanded="false"
       aria-haspopup="listbox"
       aria-labelledby="mui-component-select-release-filter-input-id1"
-      className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiOutlinedInput-input Mui-disabled Mui-disabled MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense Mui-disabled"
+      className="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled css-1vbq6j2-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
       id="mui-component-select-release-filter-input-id1"
       onBlur={[Function]}
       onFocus={[Function]}
       onKeyDown={[Function]}
       onMouseDown={null}
-      role="button"
+      role="combobox"
       tabIndex={null}
     >
       Latest and Provisional
     </div>
     <input
       aria-hidden={true}
-      className="MuiSelect-nativeInput"
+      aria-invalid={false}
+      className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+      disabled={true}
       id="release-filter-input-id1"
       name="release-filter-input-id1"
       onAnimationStart={[Function]}
@@ -1489,7 +1417,8 @@ exports[`ReleaseFilter Renders with no props 1`] = `
     />
     <svg
       aria-hidden={true}
-      className="MuiSvgIcon-root MuiSelect-icon Mui-disabled"
+      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined Mui-disabled css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+      data-testid="ArrowDropDownIcon"
       focusable="false"
       viewBox="0 0 24 24"
     >
@@ -1499,28 +1428,16 @@ exports[`ReleaseFilter Renders with no props 1`] = `
     </svg>
     <fieldset
       aria-hidden={true}
-      className="PrivateNotchedOutline-root-16 MuiOutlinedInput-notchedOutline"
-      style={
-        Object {
-          "paddingLeft": 8,
-        }
-      }
+      className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
     >
       <legend
-        className="PrivateNotchedOutline-legend-17"
-        style={
-          Object {
-            "width": 0.01,
-          }
-        }
+        className="css-ihdtdm"
       >
         <span
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "&#8203;",
-            }
-          }
-        />
+          className="notranslate"
+        >
+          ​
+        </span>
       </legend>
     </fieldset>
   </div>
@@ -1528,7 +1445,7 @@ exports[`ReleaseFilter Renders with no props 1`] = `
     className="makeStyles-descriptionContainer-4"
   >
     <span
-      className="MuiTypography-root makeStyles-description-8 MuiTypography-caption"
+      className="MuiTypography-root MuiTypography-caption makeStyles-description-8 css-287k3z-MuiTypography-root"
     >
       Data in the latest release in addition to provisional data (not yet in any release)
     </span>
@@ -1539,37 +1456,39 @@ exports[`ReleaseFilter Renders with no props 1`] = `
 exports[`ReleaseFilter Renders with product counts (using data product codes) 1`] = `
 <div
   style={
-    Object {
+    {
       "width": "100%",
     }
   }
 >
   <div
-    className="makeStyles-titleContainer-2"
+    className="makeStyles-titleContainer-152"
   >
     <h3
-      className="MuiTypography-root makeStyles-title-1 MuiTypography-h5"
+      className="MuiTypography-root MuiTypography-h5 makeStyles-title-151 css-1v75lyw-MuiTypography-root"
       id="release-filter-label-id11"
     >
       Release
     </h3>
     <button
-      aria-describedby={null}
       aria-label={
         <div>
           A data release is a set of data files that is static (unchanging), always available to end users, and citable. See 
-          <WithStyles(ForwardRef(Link))
+          <ForwardRef(Link)
             href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases"
             target="_blank"
           >
             Data Product Revisions and Releases
-          </WithStyles(ForwardRef(Link))>
+          </ForwardRef(Link)>
            for more details.
         </div>
       }
-      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+      aria-labelledby={null}
+      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+      data-mui-internal-clone-element={true}
       disabled={false}
       onBlur={[Function]}
+      onContextMenu={[Function]}
       onDragLeave={[Function]}
       onFocus={[Function]}
       onKeyDown={[Function]}
@@ -1582,61 +1501,61 @@ exports[`ReleaseFilter Renders with product counts (using data product codes) 1`
       onTouchMove={[Function]}
       onTouchStart={[Function]}
       style={
-        Object {
-          "marginLeft": 4,
+        {
+          "marginLeft": "4px",
         }
       }
       tabIndex={0}
-      title={null}
       type="button"
     >
-      <span
-        className="MuiIconButton-label"
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+        data-testid="InfoOutlinedIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
       >
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-          />
-        </svg>
-      </span>
+        <path
+          d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+        />
+      </svg>
       <span
-        className="MuiTouchRipple-root"
+        className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
     </button>
   </div>
   <div
     aria-labelledby="release-filter-label-id11"
-    className="MuiInputBase-root MuiOutlinedInput-root makeStyles-selectInput-3 MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+    className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary makeStyles-selectInput-153 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
     data-selenium="release-filter"
     onClick={[Function]}
     style={
-      Object {
+      {
         "width": "100%",
       }
     }
   >
     <div
+      aria-controls=":rj:"
+      aria-expanded="false"
       aria-haspopup="listbox"
       aria-labelledby="mui-component-select-release-filter-input-id11"
-      className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+      className="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1vbq6j2-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
       id="mui-component-select-release-filter-input-id11"
       onBlur={[Function]}
       onFocus={[Function]}
       onKeyDown={[Function]}
       onMouseDown={[Function]}
-      role="button"
+      role="combobox"
       tabIndex={0}
     >
       TEST-TAG-1
     </div>
     <input
       aria-hidden={true}
-      className="MuiSelect-nativeInput"
+      aria-invalid={false}
+      className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+      disabled={false}
       id="release-filter-input-id11"
       name="release-filter-input-id11"
       onAnimationStart={[Function]}
@@ -1646,7 +1565,8 @@ exports[`ReleaseFilter Renders with product counts (using data product codes) 1`
     />
     <svg
       aria-hidden={true}
-      className="MuiSvgIcon-root MuiSelect-icon"
+      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+      data-testid="ArrowDropDownIcon"
       focusable="false"
       viewBox="0 0 24 24"
     >
@@ -1656,36 +1576,24 @@ exports[`ReleaseFilter Renders with product counts (using data product codes) 1`
     </svg>
     <fieldset
       aria-hidden={true}
-      className="PrivateNotchedOutline-root-16 MuiOutlinedInput-notchedOutline"
-      style={
-        Object {
-          "paddingLeft": 8,
-        }
-      }
+      className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
     >
       <legend
-        className="PrivateNotchedOutline-legend-17"
-        style={
-          Object {
-            "width": 0.01,
-          }
-        }
+        className="css-ihdtdm"
       >
         <span
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "&#8203;",
-            }
-          }
-        />
+          className="notranslate"
+        >
+          ​
+        </span>
       </legend>
     </fieldset>
   </div>
   <div
-    className="makeStyles-descriptionContainer-4"
+    className="makeStyles-descriptionContainer-154"
   >
     <span
-      className="MuiTypography-root makeStyles-description-8 MuiTypography-caption"
+      className="MuiTypography-root MuiTypography-caption makeStyles-description-158 css-287k3z-MuiTypography-root"
     >
       3 data products
     </span>
@@ -1696,37 +1604,39 @@ exports[`ReleaseFilter Renders with product counts (using data product codes) 1`
 exports[`ReleaseFilter Renders with product counts (using data product objects) 1`] = `
 <div
   style={
-    Object {
+    {
       "width": "100%",
     }
   }
 >
   <div
-    className="makeStyles-titleContainer-2"
+    className="makeStyles-titleContainer-137"
   >
     <h3
-      className="MuiTypography-root makeStyles-title-1 MuiTypography-h5"
+      className="MuiTypography-root MuiTypography-h5 makeStyles-title-136 css-1v75lyw-MuiTypography-root"
       id="release-filter-label-id10"
     >
       Release
     </h3>
     <button
-      aria-describedby={null}
       aria-label={
         <div>
           A data release is a set of data files that is static (unchanging), always available to end users, and citable. See 
-          <WithStyles(ForwardRef(Link))
+          <ForwardRef(Link)
             href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases"
             target="_blank"
           >
             Data Product Revisions and Releases
-          </WithStyles(ForwardRef(Link))>
+          </ForwardRef(Link)>
            for more details.
         </div>
       }
-      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+      aria-labelledby={null}
+      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+      data-mui-internal-clone-element={true}
       disabled={false}
       onBlur={[Function]}
+      onContextMenu={[Function]}
       onDragLeave={[Function]}
       onFocus={[Function]}
       onKeyDown={[Function]}
@@ -1739,61 +1649,61 @@ exports[`ReleaseFilter Renders with product counts (using data product objects) 
       onTouchMove={[Function]}
       onTouchStart={[Function]}
       style={
-        Object {
-          "marginLeft": 4,
+        {
+          "marginLeft": "4px",
         }
       }
       tabIndex={0}
-      title={null}
       type="button"
     >
-      <span
-        className="MuiIconButton-label"
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+        data-testid="InfoOutlinedIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
       >
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-          />
-        </svg>
-      </span>
+        <path
+          d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+        />
+      </svg>
       <span
-        className="MuiTouchRipple-root"
+        className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
     </button>
   </div>
   <div
     aria-labelledby="release-filter-label-id10"
-    className="MuiInputBase-root MuiOutlinedInput-root makeStyles-selectInput-3 MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+    className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary makeStyles-selectInput-138 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
     data-selenium="release-filter"
     onClick={[Function]}
     style={
-      Object {
+      {
         "width": "100%",
       }
     }
   >
     <div
+      aria-controls=":rh:"
+      aria-expanded="false"
       aria-haspopup="listbox"
       aria-labelledby="mui-component-select-release-filter-input-id10"
-      className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+      className="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1vbq6j2-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
       id="mui-component-select-release-filter-input-id10"
       onBlur={[Function]}
       onFocus={[Function]}
       onKeyDown={[Function]}
       onMouseDown={[Function]}
-      role="button"
+      role="combobox"
       tabIndex={0}
     >
       Latest and Provisional
     </div>
     <input
       aria-hidden={true}
-      className="MuiSelect-nativeInput"
+      aria-invalid={false}
+      className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+      disabled={false}
       id="release-filter-input-id10"
       name="release-filter-input-id10"
       onAnimationStart={[Function]}
@@ -1803,7 +1713,8 @@ exports[`ReleaseFilter Renders with product counts (using data product objects) 
     />
     <svg
       aria-hidden={true}
-      className="MuiSvgIcon-root MuiSelect-icon"
+      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+      data-testid="ArrowDropDownIcon"
       focusable="false"
       viewBox="0 0 24 24"
     >
@@ -1813,45 +1724,33 @@ exports[`ReleaseFilter Renders with product counts (using data product objects) 
     </svg>
     <fieldset
       aria-hidden={true}
-      className="PrivateNotchedOutline-root-16 MuiOutlinedInput-notchedOutline"
-      style={
-        Object {
-          "paddingLeft": 8,
-        }
-      }
+      className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
     >
       <legend
-        className="PrivateNotchedOutline-legend-17"
-        style={
-          Object {
-            "width": 0.01,
-          }
-        }
+        className="css-ihdtdm"
       >
         <span
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "&#8203;",
-            }
-          }
-        />
+          className="notranslate"
+        >
+          ​
+        </span>
       </legend>
     </fieldset>
   </div>
   <div
-    className="makeStyles-descriptionContainer-4"
+    className="makeStyles-descriptionContainer-139"
   >
     <span
-      className="MuiTypography-root makeStyles-description-8 MuiTypography-caption"
+      className="MuiTypography-root MuiTypography-caption makeStyles-description-143 css-287k3z-MuiTypography-root"
     >
       Data in the latest release in addition to provisional data (not yet in any release)
     </span>
   </div>
   <div
-    className="makeStyles-descriptionContainer-4"
+    className="makeStyles-descriptionContainer-139"
   >
     <span
-      className="MuiTypography-root makeStyles-description-8 MuiTypography-caption"
+      className="MuiTypography-root MuiTypography-caption makeStyles-description-143 css-287k3z-MuiTypography-root"
     >
       5 data products
     </span>

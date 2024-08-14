@@ -14,7 +14,7 @@ exports[`CodeBlock renders with a string 1`] = `
 
 exports[`CodeBlock renders with a string and a specified language 1`] = `
 <pre
-  className="makeStyles-root-2"
+  className="makeStyles-root-4"
 >
   <code
     className="javascript"

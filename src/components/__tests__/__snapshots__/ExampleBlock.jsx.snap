@@ -2,9 +2,9 @@
 
 exports[`ExampleBlock renders with a single child 1`] = `
 <div
-  className="MuiContainer-root makeStyles-root-1 MuiContainer-maxWidthLg"
+  className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-root-1 css-1oqqzyl-MuiContainer-root"
   style={
-    Object {
+    {
       "flexDirection": "row",
     }
   }
@@ -17,9 +17,9 @@ exports[`ExampleBlock renders with a single child 1`] = `
 
 exports[`ExampleBlock renders with many children (column) 1`] = `
 <div
-  className="MuiContainer-root makeStyles-root-1 MuiContainer-maxWidthLg"
+  className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-root-3 css-1oqqzyl-MuiContainer-root"
   style={
-    Object {
+    {
       "flexDirection": "column",
     }
   }
@@ -38,9 +38,9 @@ exports[`ExampleBlock renders with many children (column) 1`] = `
 
 exports[`ExampleBlock renders with many children (row) 1`] = `
 <div
-  className="MuiContainer-root makeStyles-root-1 MuiContainer-maxWidthLg"
+  className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-root-2 css-1oqqzyl-MuiContainer-root"
   style={
-    Object {
+    {
       "flexDirection": "row",
     }
   }

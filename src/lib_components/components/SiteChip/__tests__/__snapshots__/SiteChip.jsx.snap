@@ -2,12 +2,12 @@
 
 exports[`SiteChip Preserves MUI chip props 1`] = `
 <div
-  className="MuiChip-root MuiChip-colorPrimary"
+  className="MuiChip-root MuiChip-default MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-defaultPrimary css-nqomul-MuiChip-root"
   data-selenium="chip"
   onKeyDown={[Function]}
   onKeyUp={[Function]}
   style={
-    Object {
+    {
       "borderRadius": "20px",
       "fontSize": "1rem",
       "height": "40px",
@@ -15,9 +15,9 @@ exports[`SiteChip Preserves MUI chip props 1`] = `
   }
 >
   <div
-    className="MuiAvatar-root MuiAvatar-circular MuiChip-avatar makeStyles-avatarLarge-1 MuiChip-avatarColorPrimary MuiAvatar-colorDefault"
+    className="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar MuiChip-avatarLarge MuiChip-avatarColorPrimary makeStyles-avatarLarge-5 css-18uepp3-MuiAvatar-root"
     style={
-      Object {
+      {
         "backgroundColor": "#0073cf",
         "height": "40px",
         "marginLeft": "0px",
@@ -27,17 +27,18 @@ exports[`SiteChip Preserves MUI chip props 1`] = `
   >
     <svg
       aria-hidden={true}
-      className="MuiSvgIcon-root"
+      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+      data-testid="PlaceIcon"
       focusable="false"
       viewBox="0 0 24 24"
     >
       <path
-        d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+        d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7m0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5"
       />
     </svg>
   </div>
   <span
-    className="MuiChip-label"
+    className="MuiChip-label MuiChip-labelLarge css-1dybbl5-MuiChip-label"
   >
     foo
   </span>
@@ -46,16 +47,16 @@ exports[`SiteChip Preserves MUI chip props 1`] = `
 
 exports[`SiteChip Renders correctly with only a label 1`] = `
 <div
-  className="MuiChip-root MuiChip-colorSecondary MuiChip-outlined makeStyles-outlined-2 MuiChip-outlinedSecondary makeStyles-outlinedSecondary-4 MuiChip-sizeSmall"
+  className="MuiChip-root MuiChip-outlined makeStyles-outlined-2 MuiChip-sizeSmall MuiChip-colorSecondary MuiChip-outlinedSecondary makeStyles-outlinedSecondary-4 css-1juegg2-MuiChip-root"
   data-selenium="site-chip"
   onKeyDown={[Function]}
   onKeyUp={[Function]}
-  style={Object {}}
+  style={{}}
 >
   <div
-    className="MuiAvatar-root MuiAvatar-circular MuiChip-avatar MuiChip-avatarSmall MuiChip-avatarColorSecondary MuiAvatar-colorDefault"
+    className="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar MuiChip-avatarSmall MuiChip-avatarColorSecondary css-18uepp3-MuiAvatar-root"
     style={
-      Object {
+      {
         "backgroundColor": "#002c77",
         "height": "24px",
         "marginLeft": "0px",
@@ -65,17 +66,18 @@ exports[`SiteChip Renders correctly with only a label 1`] = `
   >
     <svg
       aria-hidden={true}
-      className="MuiSvgIcon-root"
+      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+      data-testid="PlaceIcon"
       focusable="false"
       viewBox="0 0 24 24"
     >
       <path
-        d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+        d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7m0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5"
       />
     </svg>
   </div>
   <span
-    className="MuiChip-label MuiChip-labelSmall"
+    className="MuiChip-label MuiChip-labelSmall css-gbf2tt-MuiChip-label"
   >
     foo
   </span>

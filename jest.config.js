@@ -1,6 +1,44 @@
+const modulesToTransform = [
+  'dygraphs',
+  '@react-leaflet',
+  'react-leaflet',
+  'dateformat',
+  'remark-gfm',
+  'micromark-.+',
+  'decode-named-character-reference',
+  'character-entities',
+  'mdast-.*',
+  'escape-string-regexp',
+  'unist-util-.*',
+  'markdown-.*',
+  'ccount',
+  'd3-[a-z]+'
+].join('|');
+
+const fileTypesToMockTransform = [
+  'jpg',
+  'jpeg',
+  'png',
+  'gif',
+  'eot',
+  'otf',
+  'webp',
+  'svg',
+  'ttf',
+  'woff',
+  'woff2',
+  'mp4',
+  'webm',
+  'wav',
+  'mp3',
+  'm4a',
+  'aac',
+  'oga'
+].join('|');
+
 module.exports = {
   verbose: true,
-  testEnvironment: 'jsdom',
+  testEnvironment: '<rootDir>/test/jest-environment.js',
   roots: [
     '<rootDir>/src/',
   ],
@@ -16,15 +54,14 @@ module.exports = {
     ],
   },
   transform: {
-    '\\.(js|jsx|ts|tsx)$': ["babel-jest", { "configFile": "./babel.config.test.json" }],
-    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': '<rootDir>/src/__mocks__/fileTransformer.js',
+    '\\.(js|jsx|ts|tsx)$': ["babel-jest", { "configFile": "./test/babel.config.test.json" }],
+    ['\\.(' + fileTypesToMockTransform + ')$']: '<rootDir>/src/__mocks__/fileTransformer.js',
   },
-  // The dateformat module is in ES6 format and needs to be transformed.
-  // Set Jest transform to ignore all node modules that aren't dateformat.
+  // Transform modules that are in ES6 format.
   transformIgnorePatterns: [
-    "node_modules/(?!(dateformat|remark-gfm|micromark-.+|decode-named-character-reference|character-entities|mdast-.*|escape-string-regexp|unist-util-.*|markdown-.*|ccount|d3-[a-z]+)/)",
+    "node_modules/(?!(" + modulesToTransform + ")/)",
   ],
-  globalSetup: '<rootDir>/scripts/jest-global-setup.js',
+  globalSetup: '<rootDir>/test/jest-global-setup.js',
   setupFiles: [
     'jest-canvas-mock',
   ],
@@ -53,6 +90,7 @@ module.exports = {
   },
   coveragePathIgnorePatterns: [
     '/lib/',
+    '/test/',
     '/node_modules/',
     '/src/lib_components/remoteAssets/',
     '/src/lib_components/types/',

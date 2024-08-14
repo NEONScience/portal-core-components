@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
+import MockTheme from '../../__mocks__/MockTheme';
 import PropsTable from '../PropsTable';
 
 describe('PropsTable', () => {
@@ -11,7 +12,7 @@ describe('PropsTable', () => {
         type: 'string',
       },
     ];
-    const tree = renderer.create(<PropsTable props={props} />).toJSON();
+    const tree = renderer.create(<MockTheme><PropsTable props={props} /></MockTheme>).toJSON();
     expect(tree).toMatchSnapshot();
   });
   test('renders a multiple rows with optional strings', () => {
@@ -29,7 +30,7 @@ describe('PropsTable', () => {
         required: true,
       },
     ];
-    const tree = renderer.create(<PropsTable props={props} />).toJSON();
+    const tree = renderer.create(<MockTheme><PropsTable props={props} /></MockTheme>).toJSON();
     expect(tree).toMatchSnapshot();
   });
   test('renders a multiple rows with optional nodes', () => {
@@ -45,7 +46,7 @@ describe('PropsTable', () => {
         description: <div>description node</div>,
       },
     ];
-    const tree = renderer.create(<PropsTable props={props} />).toJSON();
+    const tree = renderer.create(<MockTheme><PropsTable props={props} /></MockTheme>).toJSON();
     expect(tree).toMatchSnapshot();
   });
   test('renders at full height', () => {
@@ -63,7 +64,7 @@ describe('PropsTable', () => {
         description: <div>description node</div>,
       },
     ];
-    const tree = renderer.create(<PropsTable props={props} fullHeight />).toJSON();
+    const tree = renderer.create(<MockTheme><PropsTable props={props} fullHeight /></MockTheme>).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

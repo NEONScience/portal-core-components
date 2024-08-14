@@ -2,50 +2,50 @@
 
 exports[`PropsTable renders a minimal single row 1`] = `
 <div
-  className="MuiPaper-root MuiTableContainer-root MuiPaper-elevation1 MuiPaper-rounded"
+  className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiTableContainer-root css-14x80hb-MuiPaper-root-MuiTableContainer-root"
   style={
-    Object {
+    {
       "maxHeight": "70vh",
     }
   }
 >
   <table
     aria-label="props"
-    className="MuiTable-root MuiTable-stickyHeader"
+    className="MuiTable-root MuiTable-stickyHeader css-1bhvjkm-MuiTable-root"
     role={null}
   >
     <thead
-      className="MuiTableHead-root"
+      className="MuiTableHead-root css-15wwp11-MuiTableHead-root"
       role={null}
     >
       <tr
-        className="MuiTableRow-root MuiTableRow-head"
+        className="MuiTableRow-root MuiTableRow-head css-1egrlw9-MuiTableRow-root"
         role={null}
       >
         <th
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader"
+          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader MuiTableCell-sizeMedium css-fzt42r-MuiTableCell-root"
           scope="col"
         >
           Prop
         </th>
         <th
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader"
+          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader MuiTableCell-sizeMedium css-fzt42r-MuiTableCell-root"
           scope="col"
         >
           Type
         </th>
         <th
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader"
+          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader MuiTableCell-sizeMedium css-fzt42r-MuiTableCell-root"
           scope="col"
         >
           Default
         </th>
         <th
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader"
+          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader MuiTableCell-sizeMedium css-fzt42r-MuiTableCell-root"
           scope="col"
         >
           Examples
@@ -53,17 +53,16 @@ exports[`PropsTable renders a minimal single row 1`] = `
       </tr>
     </thead>
     <tbody
-      className="MuiTableBody-root"
+      className="MuiTableBody-root css-apqrd9-MuiTableBody-root"
       role={null}
     >
       <tr
-        className="MuiTableRow-root"
+        className="MuiTableRow-root css-1egrlw9-MuiTableRow-root"
         role={null}
       >
         <th
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
-          role="cell"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
           rowSpan={2}
           scope="row"
         >
@@ -73,30 +72,30 @@ exports[`PropsTable renders a minimal single row 1`] = `
         </th>
         <td
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
         >
           string
         </td>
         <td
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
         >
           <tt />
         </td>
         <td
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
         >
           --
         </td>
       </tr>
       <tr
-        className="MuiTableRow-root"
+        className="MuiTableRow-root css-1egrlw9-MuiTableRow-root"
         role={null}
       >
         <td
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
           colSpan={4}
         />
       </tr>
@@ -107,50 +106,50 @@ exports[`PropsTable renders a minimal single row 1`] = `
 
 exports[`PropsTable renders a multiple rows with optional nodes 1`] = `
 <div
-  className="MuiPaper-root MuiTableContainer-root MuiPaper-elevation1 MuiPaper-rounded"
+  className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiTableContainer-root css-14x80hb-MuiPaper-root-MuiTableContainer-root"
   style={
-    Object {
+    {
       "maxHeight": "70vh",
     }
   }
 >
   <table
     aria-label="props"
-    className="MuiTable-root MuiTable-stickyHeader"
+    className="MuiTable-root MuiTable-stickyHeader css-1bhvjkm-MuiTable-root"
     role={null}
   >
     <thead
-      className="MuiTableHead-root"
+      className="MuiTableHead-root css-15wwp11-MuiTableHead-root"
       role={null}
     >
       <tr
-        className="MuiTableRow-root MuiTableRow-head"
+        className="MuiTableRow-root MuiTableRow-head css-1egrlw9-MuiTableRow-root"
         role={null}
       >
         <th
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader"
+          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader MuiTableCell-sizeMedium css-fzt42r-MuiTableCell-root"
           scope="col"
         >
           Prop
         </th>
         <th
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader"
+          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader MuiTableCell-sizeMedium css-fzt42r-MuiTableCell-root"
           scope="col"
         >
           Type
         </th>
         <th
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader"
+          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader MuiTableCell-sizeMedium css-fzt42r-MuiTableCell-root"
           scope="col"
         >
           Default
         </th>
         <th
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader"
+          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader MuiTableCell-sizeMedium css-fzt42r-MuiTableCell-root"
           scope="col"
         >
           Examples
@@ -158,17 +157,16 @@ exports[`PropsTable renders a multiple rows with optional nodes 1`] = `
       </tr>
     </thead>
     <tbody
-      className="MuiTableBody-root"
+      className="MuiTableBody-root css-apqrd9-MuiTableBody-root"
       role={null}
     >
       <tr
-        className="MuiTableRow-root"
+        className="MuiTableRow-root css-1egrlw9-MuiTableRow-root"
         role={null}
       >
         <th
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
-          role="cell"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
           rowSpan={2}
           scope="row"
         >
@@ -178,19 +176,19 @@ exports[`PropsTable renders a multiple rows with optional nodes 1`] = `
         </th>
         <td
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
         >
           string
         </td>
         <td
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
         >
           <tt />
         </td>
         <td
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
         >
           <div>
             example node
@@ -198,23 +196,22 @@ exports[`PropsTable renders a multiple rows with optional nodes 1`] = `
         </td>
       </tr>
       <tr
-        className="MuiTableRow-root"
+        className="MuiTableRow-root css-1egrlw9-MuiTableRow-root"
         role={null}
       >
         <td
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
           colSpan={4}
         />
       </tr>
       <tr
-        className="MuiTableRow-root makeStyles-propTableRowGrey-1"
+        className="MuiTableRow-root makeStyles-propTableRowGrey-5 css-1egrlw9-MuiTableRow-root"
         role={null}
       >
         <th
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
-          role="cell"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
           rowSpan={2}
           scope="row"
         >
@@ -224,7 +221,7 @@ exports[`PropsTable renders a multiple rows with optional nodes 1`] = `
         </th>
         <td
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
         >
           <div>
             type node
@@ -232,24 +229,24 @@ exports[`PropsTable renders a multiple rows with optional nodes 1`] = `
         </td>
         <td
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
         >
           <tt />
         </td>
         <td
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
         >
           --
         </td>
       </tr>
       <tr
-        className="MuiTableRow-root makeStyles-propTableRowGrey-1"
+        className="MuiTableRow-root makeStyles-propTableRowGrey-5 css-1egrlw9-MuiTableRow-root"
         role={null}
       >
         <td
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
           colSpan={4}
         >
           <div>
@@ -264,50 +261,50 @@ exports[`PropsTable renders a multiple rows with optional nodes 1`] = `
 
 exports[`PropsTable renders a multiple rows with optional strings 1`] = `
 <div
-  className="MuiPaper-root MuiTableContainer-root MuiPaper-elevation1 MuiPaper-rounded"
+  className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiTableContainer-root css-14x80hb-MuiPaper-root-MuiTableContainer-root"
   style={
-    Object {
+    {
       "maxHeight": "70vh",
     }
   }
 >
   <table
     aria-label="props"
-    className="MuiTable-root MuiTable-stickyHeader"
+    className="MuiTable-root MuiTable-stickyHeader css-1bhvjkm-MuiTable-root"
     role={null}
   >
     <thead
-      className="MuiTableHead-root"
+      className="MuiTableHead-root css-15wwp11-MuiTableHead-root"
       role={null}
     >
       <tr
-        className="MuiTableRow-root MuiTableRow-head"
+        className="MuiTableRow-root MuiTableRow-head css-1egrlw9-MuiTableRow-root"
         role={null}
       >
         <th
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader"
+          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader MuiTableCell-sizeMedium css-fzt42r-MuiTableCell-root"
           scope="col"
         >
           Prop
         </th>
         <th
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader"
+          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader MuiTableCell-sizeMedium css-fzt42r-MuiTableCell-root"
           scope="col"
         >
           Type
         </th>
         <th
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader"
+          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader MuiTableCell-sizeMedium css-fzt42r-MuiTableCell-root"
           scope="col"
         >
           Default
         </th>
         <th
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader"
+          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader MuiTableCell-sizeMedium css-fzt42r-MuiTableCell-root"
           scope="col"
         >
           Examples
@@ -315,17 +312,16 @@ exports[`PropsTable renders a multiple rows with optional strings 1`] = `
       </tr>
     </thead>
     <tbody
-      className="MuiTableBody-root"
+      className="MuiTableBody-root css-apqrd9-MuiTableBody-root"
       role={null}
     >
       <tr
-        className="MuiTableRow-root"
+        className="MuiTableRow-root css-1egrlw9-MuiTableRow-root"
         role={null}
       >
         <th
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
-          role="cell"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
           rowSpan={2}
           scope="row"
         >
@@ -335,13 +331,13 @@ exports[`PropsTable renders a multiple rows with optional strings 1`] = `
         </th>
         <td
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
         >
           string
         </td>
         <td
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
         >
           <tt>
             abc
@@ -349,29 +345,28 @@ exports[`PropsTable renders a multiple rows with optional strings 1`] = `
         </td>
         <td
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
         >
           --
         </td>
       </tr>
       <tr
-        className="MuiTableRow-root"
+        className="MuiTableRow-root css-1egrlw9-MuiTableRow-root"
         role={null}
       >
         <td
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
           colSpan={4}
         />
       </tr>
       <tr
-        className="MuiTableRow-root makeStyles-propTableRowGrey-1"
+        className="MuiTableRow-root makeStyles-propTableRowGrey-3 css-1egrlw9-MuiTableRow-root"
         role={null}
       >
         <th
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
-          role="cell"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
           rowSpan={2}
           scope="row"
         >
@@ -379,37 +374,37 @@ exports[`PropsTable renders a multiple rows with optional strings 1`] = `
             bar
           </tt>
           <div
-            className="makeStyles-required-2"
+            className="makeStyles-required-4"
           >
             REQUIRED
           </div>
         </th>
         <td
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
         >
           string
         </td>
         <td
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
         >
           <tt />
         </td>
         <td
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
         >
           "abc", "def"
         </td>
       </tr>
       <tr
-        className="MuiTableRow-root makeStyles-propTableRowGrey-1"
+        className="MuiTableRow-root makeStyles-propTableRowGrey-3 css-1egrlw9-MuiTableRow-root"
         role={null}
       >
         <td
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
           colSpan={4}
         >
           lorem ipsum
@@ -422,46 +417,46 @@ exports[`PropsTable renders a multiple rows with optional strings 1`] = `
 
 exports[`PropsTable renders at full height 1`] = `
 <div
-  className="MuiPaper-root MuiTableContainer-root MuiPaper-elevation1 MuiPaper-rounded"
-  style={Object {}}
+  className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiTableContainer-root css-14x80hb-MuiPaper-root-MuiTableContainer-root"
+  style={{}}
 >
   <table
     aria-label="props"
-    className="MuiTable-root MuiTable-stickyHeader"
+    className="MuiTable-root MuiTable-stickyHeader css-1bhvjkm-MuiTable-root"
     role={null}
   >
     <thead
-      className="MuiTableHead-root"
+      className="MuiTableHead-root css-15wwp11-MuiTableHead-root"
       role={null}
     >
       <tr
-        className="MuiTableRow-root MuiTableRow-head"
+        className="MuiTableRow-root MuiTableRow-head css-1egrlw9-MuiTableRow-root"
         role={null}
       >
         <th
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader"
+          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader MuiTableCell-sizeMedium css-fzt42r-MuiTableCell-root"
           scope="col"
         >
           Prop
         </th>
         <th
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader"
+          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader MuiTableCell-sizeMedium css-fzt42r-MuiTableCell-root"
           scope="col"
         >
           Type
         </th>
         <th
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader"
+          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader MuiTableCell-sizeMedium css-fzt42r-MuiTableCell-root"
           scope="col"
         >
           Default
         </th>
         <th
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader"
+          className="MuiTableCell-root MuiTableCell-head MuiTableCell-stickyHeader MuiTableCell-sizeMedium css-fzt42r-MuiTableCell-root"
           scope="col"
         >
           Examples
@@ -469,17 +464,16 @@ exports[`PropsTable renders at full height 1`] = `
       </tr>
     </thead>
     <tbody
-      className="MuiTableBody-root"
+      className="MuiTableBody-root css-apqrd9-MuiTableBody-root"
       role={null}
     >
       <tr
-        className="MuiTableRow-root"
+        className="MuiTableRow-root css-1egrlw9-MuiTableRow-root"
         role={null}
       >
         <th
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
-          role="cell"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
           rowSpan={2}
           scope="row"
         >
@@ -487,50 +481,49 @@ exports[`PropsTable renders at full height 1`] = `
             foo
           </tt>
           <div
-            className="makeStyles-required-2"
+            className="makeStyles-required-8"
           >
             REQUIRED
           </div>
         </th>
         <td
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
         >
           string
         </td>
         <td
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
         >
           <tt />
         </td>
         <td
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
         >
           "abc", "def"
         </td>
       </tr>
       <tr
-        className="MuiTableRow-root"
+        className="MuiTableRow-root css-1egrlw9-MuiTableRow-root"
         role={null}
       >
         <td
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
           colSpan={4}
         >
           lorem ipsum
         </td>
       </tr>
       <tr
-        className="MuiTableRow-root makeStyles-propTableRowGrey-1"
+        className="MuiTableRow-root makeStyles-propTableRowGrey-7 css-1egrlw9-MuiTableRow-root"
         role={null}
       >
         <th
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
-          role="cell"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
           rowSpan={2}
           scope="row"
         >
@@ -540,7 +533,7 @@ exports[`PropsTable renders at full height 1`] = `
         </th>
         <td
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
         >
           <div>
             type node
@@ -548,24 +541,24 @@ exports[`PropsTable renders at full height 1`] = `
         </td>
         <td
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
         >
           <tt />
         </td>
         <td
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
         >
           --
         </td>
       </tr>
       <tr
-        className="MuiTableRow-root makeStyles-propTableRowGrey-1"
+        className="MuiTableRow-root makeStyles-propTableRowGrey-7 css-1egrlw9-MuiTableRow-root"
         role={null}
       >
         <td
           aria-sort={null}
-          className="MuiTableCell-root MuiTableCell-body"
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-q9jt60-MuiTableCell-root"
           colSpan={4}
         >
           <div>

@@ -3,6 +3,7 @@ import renderer from 'react-test-renderer';
 
 import cloneDeep from 'lodash/cloneDeep';
 
+import MockTheme from '../../../../__mocks__/MockTheme';
 import '../../../../__mocks__/NeonContext';
 import mockReactComponent from '../../../../__mocks__/mockReactComponent';
 
@@ -47,31 +48,43 @@ const siteCodes = [
 describe('DataProductAvailability - BasicAvailabilityInterface', () => {
   test('renders with no props', () => {
     const tree = renderer
-      .create(<BasicAvailabilityInterface />)
+      .create(<MockTheme><BasicAvailabilityInterface /></MockTheme>)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
   test('renders with siteCodes and view', () => {
     const tree = renderer
-      .create(<BasicAvailabilityInterface siteCodes={siteCodes} view="sites" />)
+      .create(<MockTheme><BasicAvailabilityInterface siteCodes={siteCodes} view="sites" /></MockTheme>)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
   test('renders with explicit sort method', () => {
     const tree = renderer
-      .create(<BasicAvailabilityInterface siteCodes={siteCodes} view="sites" sortMethod="sites" />)
+      .create(
+        <MockTheme>
+          <BasicAvailabilityInterface siteCodes={siteCodes} view="sites" sortMethod="sites" />
+        </MockTheme>
+      )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
   test('renders with ungrouped view', () => {
     const tree = renderer
-      .create(<BasicAvailabilityInterface siteCodes={siteCodes} view="ungrouped" />)
+      .create(
+        <MockTheme>
+          <BasicAvailabilityInterface siteCodes={siteCodes} view="ungrouped" />
+        </MockTheme>
+      )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
   test('renders with selection disabled', () => {
     const tree = renderer
-      .create(<BasicAvailabilityInterface siteCodes={siteCodes} view="sites" disableSelection />)
+      .create(
+        <MockTheme>
+          <BasicAvailabilityInterface siteCodes={siteCodes} view="sites" disableSelection />
+        </MockTheme>
+      )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });

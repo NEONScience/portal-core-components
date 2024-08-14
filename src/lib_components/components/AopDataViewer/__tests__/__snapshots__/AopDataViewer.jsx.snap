@@ -4,7 +4,7 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
 <div
   data-selenium="aop-data-viewer"
   style={
-    Object {
+    {
       "minWidth": "240px",
       "width": "100%",
     }
@@ -12,19 +12,19 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
 >
   <form
     autoComplete="off"
-    className="makeStyles-selectionForm-1"
+    className="makeStyles-selectionForm-29"
   >
     <h5
-      className="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom"
+      className="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-18xtj6i-MuiTypography-root"
     >
       AOP Data Viewer
     </h5>
     <span
-      className="MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom"
+      className="MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom css-1c3b9zl-MuiTypography-root"
     >
       This viewer allows for interactive exploration of remotely sensed data from the Airborne Observation Platform (AOP). Change the field site and flight for this data product using the tools below to stream different data into view. Pan and zoom in the view to stream higher resolution imagery. This pilot data viewer is provided through a collaboration with the 
       <a
-        className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+        className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
         data-external="VISUS"
         href="https://visus.org/"
         onBlur={[Function]}
@@ -37,11 +37,11 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
        and more updates are planned for the future.
     </span>
     <hr
-      className="MuiDivider-root makeStyles-divider-3"
+      className="MuiDivider-root MuiDivider-fullWidth makeStyles-divider-31 css-9mgopn-MuiDivider-root"
     />
     <div
       style={
-        Object {
+        {
           "display": "flex",
           "width": "100%",
         }
@@ -49,22 +49,24 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
     >
       <div
         style={
-          Object {
+          {
             "flexGrow": 0,
           }
         }
       >
         <p
-          className="MuiTypography-root makeStyles-label-4 MuiTypography-body1"
+          className="MuiTypography-root MuiTypography-body1 makeStyles-label-32 css-1nggj6-MuiTypography-root"
           id="site-label"
         >
           Site
           <button
-            aria-describedby={null}
             aria-label="Use the map or the menu below to select a site to display. Only one site can be viewed at a time."
-            className="MuiButtonBase-root MuiIconButton-root makeStyles-tooltipIconButton-6 MuiIconButton-sizeSmall"
+            aria-labelledby={null}
+            className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall makeStyles-tooltipIconButton-34 css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            data-mui-internal-clone-element={true}
             disabled={false}
             onBlur={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -77,31 +79,27 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
             onTouchMove={[Function]}
             onTouchStart={[Function]}
             tabIndex={0}
-            title="Use the map or the menu below to select a site to display. Only one site can be viewed at a time."
             type="button"
           >
-            <span
-              className="MuiIconButton-label"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
             <span
-              className="MuiTouchRipple-root"
+              className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </button>
         </p>
         <div
           style={
-            Object {
+            {
               "display": "flex",
               "flexWrap": "nowrap",
             }
@@ -109,13 +107,15 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
         >
           <div>
             <button
-              aria-describedby={null}
               aria-label="Select a site using the observatory map"
-              className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+              aria-labelledby={null}
+              className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-r0d1wz-MuiButtonBase-root-MuiButton-root"
+              data-mui-internal-clone-element={true}
               data-selenium="map-selection-button"
               disabled={false}
               onBlur={[Function]}
               onClick={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -128,40 +128,36 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
               onTouchMove={[Function]}
               onTouchStart={[Function]}
               style={
-                Object {
-                  "marginRight": 8,
+                {
+                  "marginRight": "8px",
                 }
               }
               tabIndex={0}
-              title="Select a site using the observatory map"
               type="button"
             >
               <span
-                className="MuiButton-label"
+                className="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeMedium css-1ei49fk-MuiButton-startIcon"
               >
-                <span
-                  className="MuiButton-startIcon MuiButton-iconSizeMedium"
+                <svg
+                  aria-hidden={true}
+                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                  data-testid="LanguageIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
                 >
-                  <svg
-                    aria-hidden={true}
-                    className="MuiSvgIcon-root"
-                    focusable="false"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"
-                    />
-                  </svg>
-                </span>
-                Map
+                  <path
+                    d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2m6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56M12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96M4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56m2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8M12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96M14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2m.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56M16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2z"
+                  />
+                </svg>
               </span>
+              Map
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </button>
           </div>
           <div
-            ComponentPath="@material-ui/core/Select"
+            ComponentPath="@mui/material/Select"
             prop-aria-labelledby="site-label"
             prop-data-selenium="aop-data-viewer.site-select"
             prop-input="Non-renderable object"
@@ -171,8 +167,9 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
           >
             <li
               aria-disabled={true}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root makeStyles-optgroup-5 MuiMenuItem-gutters MuiListItem-gutters Mui-disabled MuiListItem-button Mui-disabled"
+              className="MuiButtonBase-root MuiMenuItem-root Mui-disabled MuiMenuItem-gutters Mui-disabled MuiMenuItem-root Mui-disabled MuiMenuItem-gutters makeStyles-optgroup-33 css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -185,7 +182,7 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
               onTouchStart={[Function]}
               role="menuitem"
               style={
-                Object {
+                {
                   "opacity": 1,
                 }
               }
@@ -195,9 +192,9 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
               Alaska
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -214,24 +211,24 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
             >
               <div>
                 <p
-                  className="MuiTypography-root MuiTypography-body1 MuiTypography-displayBlock"
+                  className="MuiTypography-root MuiTypography-body1 css-3mx8qf-MuiTypography-root"
                 >
                   BONA
                 </p>
                 <span
-                  className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
+                  className="MuiTypography-root MuiTypography-caption css-10h70uh-MuiTypography-root"
                 >
                   Caribou-Poker Creeks Research Watershed
                 </span>
               </div>
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -248,24 +245,25 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
             >
               <div>
                 <p
-                  className="MuiTypography-root MuiTypography-body1 MuiTypography-displayBlock"
+                  className="MuiTypography-root MuiTypography-body1 css-3mx8qf-MuiTypography-root"
                 >
                   HEAL
                 </p>
                 <span
-                  className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
+                  className="MuiTypography-root MuiTypography-caption css-10h70uh-MuiTypography-root"
                 >
                   Healy
                 </span>
               </div>
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </li>
             <li
               aria-disabled={true}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root makeStyles-optgroup-5 MuiMenuItem-gutters MuiListItem-gutters Mui-disabled MuiListItem-button Mui-disabled"
+              className="MuiButtonBase-root MuiMenuItem-root Mui-disabled MuiMenuItem-gutters Mui-disabled MuiMenuItem-root Mui-disabled MuiMenuItem-gutters makeStyles-optgroup-33 css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -278,7 +276,7 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
               onTouchStart={[Function]}
               role="menuitem"
               style={
-                Object {
+                {
                   "opacity": 1,
                 }
               }
@@ -288,9 +286,9 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
               California
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -307,18 +305,18 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
             >
               <div>
                 <p
-                  className="MuiTypography-root MuiTypography-body1 MuiTypography-displayBlock"
+                  className="MuiTypography-root MuiTypography-body1 css-3mx8qf-MuiTypography-root"
                 >
                   SJER
                 </p>
                 <span
-                  className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
+                  className="MuiTypography-root MuiTypography-caption css-10h70uh-MuiTypography-root"
                 >
                   San Joaquin Experimental Range
                 </span>
               </div>
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </li>
           </div>
@@ -326,23 +324,25 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
       </div>
       <div
         style={
-          Object {
+          {
             "flexGrow": 1,
             "margin": "0px 16px",
           }
         }
       >
         <p
-          className="MuiTypography-root makeStyles-label-4 MuiTypography-body1"
+          className="MuiTypography-root MuiTypography-body1 makeStyles-label-32 css-1nggj6-MuiTypography-root"
           id="year-label"
         >
           Year
           <button
-            aria-describedby={null}
             aria-label="This slider can be used to move back and forth through time for a given site."
-            className="MuiButtonBase-root MuiIconButton-root makeStyles-tooltipIconButton-6 MuiIconButton-sizeSmall"
+            aria-labelledby={null}
+            className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall makeStyles-tooltipIconButton-34 css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            data-mui-internal-clone-element={true}
             disabled={false}
             onBlur={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -355,31 +355,27 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
             onTouchMove={[Function]}
             onTouchStart={[Function]}
             tabIndex={0}
-            title="This slider can be used to move back and forth through time for a given site."
             type="button"
           >
-            <span
-              className="MuiIconButton-label"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
             <span
-              className="MuiTouchRipple-root"
+              className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </button>
         </p>
         <div
           style={
-            Object {
+            {
               "display": "flex",
               "width": "100%",
             }
@@ -387,18 +383,19 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
         >
           <div
             style={
-              Object {
+              {
                 "flexGrow": 0,
               }
             }
           >
             <button
               aria-label="previous year"
-              className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall"
+              className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
               data-selenium="aop-data-viewer.previous-year-button"
               disabled={false}
               onBlur={[Function]}
               onClick={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -410,44 +407,41 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
               onTouchMove={[Function]}
               onTouchStart={[Function]}
               style={
-                Object {
-                  "marginRight": 4,
+                {
+                  "marginRight": "4px",
                 }
               }
               tabIndex={0}
               type="button"
             >
-              <span
-                className="MuiIconButton-label"
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                data-testid="KeyboardArrowLeftIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
               >
-                <svg
-                  aria-hidden={true}
-                  className="MuiSvgIcon-root"
-                  focusable="false"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"
-                  />
-                </svg>
-              </span>
+                <path
+                  d="M15.41 16.59 10.83 12l4.58-4.59L14 6l-6 6 6 6z"
+                />
+              </svg>
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </button>
           </div>
           <div
             style={
-              Object {
+              {
                 "flexGrow": 1,
               }
             }
           >
             <div
-              ComponentPath="@material-ui/core/Slider"
+              ComponentPath="@mui/material/Slider"
               prop-aria-labelledby="year-label"
               prop-data-selenium="aop-data-viewer.year-slider"
-              prop-marks="[{\\"label\\":\\"2017\\",\\"value\\":\\"2017\\"},{\\"label\\":\\"2018\\",\\"value\\":\\"2018\\"}]"
+              prop-marks="[{"label":"2017","value":"2017"},{"label":"2018","value":"2018"}]"
               prop-max={2019}
               prop-min={2016}
               prop-onChange="[Function]"
@@ -459,18 +453,19 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
           </div>
           <div
             style={
-              Object {
+              {
                 "flexGrow": 0,
               }
             }
           >
             <button
               aria-label="next year"
-              className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary Mui-disabled MuiIconButton-sizeSmall Mui-disabled"
+              className="MuiButtonBase-root Mui-disabled MuiIconButton-root Mui-disabled MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
               data-selenium="aop-data-viewer.next-year-button"
               disabled={true}
               onBlur={[Function]}
               onClick={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -482,49 +477,48 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
               onTouchMove={[Function]}
               onTouchStart={[Function]}
               style={
-                Object {
-                  "marginLeft": 4,
+                {
+                  "marginLeft": "4px",
                 }
               }
               tabIndex={-1}
               type="button"
             >
-              <span
-                className="MuiIconButton-label"
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                data-testid="KeyboardArrowRightIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
               >
-                <svg
-                  aria-hidden={true}
-                  className="MuiSvgIcon-root"
-                  focusable="false"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"
-                  />
-                </svg>
-              </span>
+                <path
+                  d="M8.59 16.59 13.17 12 8.59 7.41 10 6l6 6-6 6z"
+                />
+              </svg>
             </button>
           </div>
         </div>
       </div>
       <div
         style={
-          Object {
+          {
             "flexGrow": 0,
           }
         }
       >
         <p
-          className="MuiTypography-root makeStyles-label-4 MuiTypography-body1"
+          className="MuiTypography-root MuiTypography-body1 makeStyles-label-32 css-1nggj6-MuiTypography-root"
           id="flight-label"
         >
           Flight
           <button
-            aria-describedby={null}
             aria-label="Most sites are visited once per year, but sometimes subsequent flights are necessary to get complete data for that year. If more than one flight is available for a given site/year then this field can be used to select particular flights of interest."
-            className="MuiButtonBase-root MuiIconButton-root makeStyles-tooltipIconButton-6 MuiIconButton-sizeSmall"
+            aria-labelledby={null}
+            className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall makeStyles-tooltipIconButton-34 css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            data-mui-internal-clone-element={true}
             disabled={false}
             onBlur={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -537,30 +531,26 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
             onTouchMove={[Function]}
             onTouchStart={[Function]}
             tabIndex={0}
-            title="Most sites are visited once per year, but sometimes subsequent flights are necessary to get complete data for that year. If more than one flight is available for a given site/year then this field can be used to select particular flights of interest."
             type="button"
           >
-            <span
-              className="MuiIconButton-label"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
             <span
-              className="MuiTouchRipple-root"
+              className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </button>
         </p>
         <div
-          ComponentPath="@material-ui/core/Select"
+          ComponentPath="@mui/material/Select"
           prop-aria-labelledby="flight-label"
           prop-data-selenium="aop-data-viewer.flight-select"
           prop-disabled={true}
@@ -570,9 +560,9 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
           prop-value={1}
         >
           <li
-            aria-disabled={false}
-            className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+            className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
             onBlur={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -589,7 +579,7 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
           >
             1/1 (August)
             <span
-              className="MuiTouchRipple-root"
+              className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </li>
         </div>
@@ -597,7 +587,7 @@ exports[`AopDataViewer renders with a specified initial site 1`] = `
     </div>
   </form>
   <iframe
-    className="makeStyles-iframe-2"
+    className="makeStyles-iframe-30"
     scrolling="no"
     src="undefined?server=https://roma.chpc.utah.edu:7070/mod_visus?&dataset=DP3.30010.001-D19-2018_BONA_2-L3-Camera-Mosaic-V01&dataproduct=DP3.30010.001&site=BONA&month=2018-08&title=Caribou-Poker%20Creeks%20Research%20Watershed%2C%20AK%20--%20August%202018%20--%20Flight%201%2F1"
     title=""
@@ -609,7 +599,7 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
 <div
   data-selenium="aop-data-viewer"
   style={
-    Object {
+    {
       "minWidth": "240px",
       "width": "100%",
     }
@@ -617,19 +607,19 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
 >
   <form
     autoComplete="off"
-    className="makeStyles-selectionForm-1"
+    className="makeStyles-selectionForm-43"
   >
     <h5
-      className="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom"
+      className="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-18xtj6i-MuiTypography-root"
     >
       AOP Data Viewer
     </h5>
     <span
-      className="MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom"
+      className="MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom css-1c3b9zl-MuiTypography-root"
     >
       This viewer allows for interactive exploration of remotely sensed data from the Airborne Observation Platform (AOP). Change the field site and flight for this data product using the tools below to stream different data into view. Pan and zoom in the view to stream higher resolution imagery. This pilot data viewer is provided through a collaboration with the 
       <a
-        className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+        className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
         data-external="VISUS"
         href="https://visus.org/"
         onBlur={[Function]}
@@ -642,11 +632,11 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
        and more updates are planned for the future.
     </span>
     <hr
-      className="MuiDivider-root makeStyles-divider-3"
+      className="MuiDivider-root MuiDivider-fullWidth makeStyles-divider-45 css-9mgopn-MuiDivider-root"
     />
     <div
       style={
-        Object {
+        {
           "display": "flex",
           "width": "100%",
         }
@@ -654,22 +644,24 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
     >
       <div
         style={
-          Object {
+          {
             "flexGrow": 0,
           }
         }
       >
         <p
-          className="MuiTypography-root makeStyles-label-4 MuiTypography-body1"
+          className="MuiTypography-root MuiTypography-body1 makeStyles-label-46 css-1nggj6-MuiTypography-root"
           id="site-label"
         >
           Site
           <button
-            aria-describedby={null}
             aria-label="Use the map or the menu below to select a site to display. Only one site can be viewed at a time."
-            className="MuiButtonBase-root MuiIconButton-root makeStyles-tooltipIconButton-6 MuiIconButton-sizeSmall"
+            aria-labelledby={null}
+            className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall makeStyles-tooltipIconButton-48 css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            data-mui-internal-clone-element={true}
             disabled={false}
             onBlur={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -682,31 +674,27 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
             onTouchMove={[Function]}
             onTouchStart={[Function]}
             tabIndex={0}
-            title="Use the map or the menu below to select a site to display. Only one site can be viewed at a time."
             type="button"
           >
-            <span
-              className="MuiIconButton-label"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
             <span
-              className="MuiTouchRipple-root"
+              className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </button>
         </p>
         <div
           style={
-            Object {
+            {
               "display": "flex",
               "flexWrap": "nowrap",
             }
@@ -714,13 +702,15 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
         >
           <div>
             <button
-              aria-describedby={null}
               aria-label="Select a site using the observatory map"
-              className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+              aria-labelledby={null}
+              className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-r0d1wz-MuiButtonBase-root-MuiButton-root"
+              data-mui-internal-clone-element={true}
               data-selenium="map-selection-button"
               disabled={false}
               onBlur={[Function]}
               onClick={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -733,40 +723,36 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
               onTouchMove={[Function]}
               onTouchStart={[Function]}
               style={
-                Object {
-                  "marginRight": 8,
+                {
+                  "marginRight": "8px",
                 }
               }
               tabIndex={0}
-              title="Select a site using the observatory map"
               type="button"
             >
               <span
-                className="MuiButton-label"
+                className="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeMedium css-1ei49fk-MuiButton-startIcon"
               >
-                <span
-                  className="MuiButton-startIcon MuiButton-iconSizeMedium"
+                <svg
+                  aria-hidden={true}
+                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                  data-testid="LanguageIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
                 >
-                  <svg
-                    aria-hidden={true}
-                    className="MuiSvgIcon-root"
-                    focusable="false"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"
-                    />
-                  </svg>
-                </span>
-                Map
+                  <path
+                    d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2m6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56M12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96M4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56m2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8M12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96M14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2m.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56M16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2z"
+                  />
+                </svg>
               </span>
+              Map
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </button>
           </div>
           <div
-            ComponentPath="@material-ui/core/Select"
+            ComponentPath="@mui/material/Select"
             prop-aria-labelledby="site-label"
             prop-data-selenium="aop-data-viewer.site-select"
             prop-input="Non-renderable object"
@@ -776,8 +762,9 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
           >
             <li
               aria-disabled={true}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root makeStyles-optgroup-5 MuiMenuItem-gutters MuiListItem-gutters Mui-disabled MuiListItem-button Mui-disabled"
+              className="MuiButtonBase-root MuiMenuItem-root Mui-disabled MuiMenuItem-gutters Mui-disabled MuiMenuItem-root Mui-disabled MuiMenuItem-gutters makeStyles-optgroup-47 css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -790,7 +777,7 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
               onTouchStart={[Function]}
               role="menuitem"
               style={
-                Object {
+                {
                   "opacity": 1,
                 }
               }
@@ -800,9 +787,9 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
               Alaska
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -819,24 +806,24 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
             >
               <div>
                 <p
-                  className="MuiTypography-root MuiTypography-body1 MuiTypography-displayBlock"
+                  className="MuiTypography-root MuiTypography-body1 css-3mx8qf-MuiTypography-root"
                 >
                   BONA
                 </p>
                 <span
-                  className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
+                  className="MuiTypography-root MuiTypography-caption css-10h70uh-MuiTypography-root"
                 >
                   Caribou-Poker Creeks Research Watershed
                 </span>
               </div>
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -853,24 +840,25 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
             >
               <div>
                 <p
-                  className="MuiTypography-root MuiTypography-body1 MuiTypography-displayBlock"
+                  className="MuiTypography-root MuiTypography-body1 css-3mx8qf-MuiTypography-root"
                 >
                   HEAL
                 </p>
                 <span
-                  className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
+                  className="MuiTypography-root MuiTypography-caption css-10h70uh-MuiTypography-root"
                 >
                   Healy
                 </span>
               </div>
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </li>
             <li
               aria-disabled={true}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root makeStyles-optgroup-5 MuiMenuItem-gutters MuiListItem-gutters Mui-disabled MuiListItem-button Mui-disabled"
+              className="MuiButtonBase-root MuiMenuItem-root Mui-disabled MuiMenuItem-gutters Mui-disabled MuiMenuItem-root Mui-disabled MuiMenuItem-gutters makeStyles-optgroup-47 css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -883,7 +871,7 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
               onTouchStart={[Function]}
               role="menuitem"
               style={
-                Object {
+                {
                   "opacity": 1,
                 }
               }
@@ -893,9 +881,9 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
               California
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -912,18 +900,18 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
             >
               <div>
                 <p
-                  className="MuiTypography-root MuiTypography-body1 MuiTypography-displayBlock"
+                  className="MuiTypography-root MuiTypography-body1 css-3mx8qf-MuiTypography-root"
                 >
                   SJER
                 </p>
                 <span
-                  className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
+                  className="MuiTypography-root MuiTypography-caption css-10h70uh-MuiTypography-root"
                 >
                   San Joaquin Experimental Range
                 </span>
               </div>
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </li>
           </div>
@@ -931,23 +919,25 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
       </div>
       <div
         style={
-          Object {
+          {
             "flexGrow": 1,
             "margin": "0px 16px",
           }
         }
       >
         <p
-          className="MuiTypography-root makeStyles-label-4 MuiTypography-body1"
+          className="MuiTypography-root MuiTypography-body1 makeStyles-label-46 css-1nggj6-MuiTypography-root"
           id="year-label"
         >
           Year
           <button
-            aria-describedby={null}
             aria-label="This slider can be used to move back and forth through time for a given site."
-            className="MuiButtonBase-root MuiIconButton-root makeStyles-tooltipIconButton-6 MuiIconButton-sizeSmall"
+            aria-labelledby={null}
+            className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall makeStyles-tooltipIconButton-48 css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            data-mui-internal-clone-element={true}
             disabled={false}
             onBlur={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -960,31 +950,27 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
             onTouchMove={[Function]}
             onTouchStart={[Function]}
             tabIndex={0}
-            title="This slider can be used to move back and forth through time for a given site."
             type="button"
           >
-            <span
-              className="MuiIconButton-label"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
             <span
-              className="MuiTouchRipple-root"
+              className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </button>
         </p>
         <div
           style={
-            Object {
+            {
               "display": "flex",
               "width": "100%",
             }
@@ -992,18 +978,19 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
         >
           <div
             style={
-              Object {
+              {
                 "flexGrow": 0,
               }
             }
           >
             <button
               aria-label="previous year"
-              className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary Mui-disabled MuiIconButton-sizeSmall Mui-disabled"
+              className="MuiButtonBase-root Mui-disabled MuiIconButton-root Mui-disabled MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
               data-selenium="aop-data-viewer.previous-year-button"
               disabled={true}
               onBlur={[Function]}
               onClick={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -1015,41 +1002,38 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
               onTouchMove={[Function]}
               onTouchStart={[Function]}
               style={
-                Object {
-                  "marginRight": 4,
+                {
+                  "marginRight": "4px",
                 }
               }
               tabIndex={-1}
               type="button"
             >
-              <span
-                className="MuiIconButton-label"
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                data-testid="KeyboardArrowLeftIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
               >
-                <svg
-                  aria-hidden={true}
-                  className="MuiSvgIcon-root"
-                  focusable="false"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"
-                  />
-                </svg>
-              </span>
+                <path
+                  d="M15.41 16.59 10.83 12l4.58-4.59L14 6l-6 6 6 6z"
+                />
+              </svg>
             </button>
           </div>
           <div
             style={
-              Object {
+              {
                 "flexGrow": 1,
               }
             }
           >
             <div
-              ComponentPath="@material-ui/core/Slider"
+              ComponentPath="@mui/material/Slider"
               prop-aria-labelledby="year-label"
               prop-data-selenium="aop-data-viewer.year-slider"
-              prop-marks="[{\\"label\\":\\"2017\\",\\"value\\":\\"2017\\"},{\\"label\\":\\"2018\\",\\"value\\":\\"2018\\"}]"
+              prop-marks="[{"label":"2017","value":"2017"},{"label":"2018","value":"2018"}]"
               prop-max={2019}
               prop-min={2016}
               prop-onChange="[Function]"
@@ -1061,18 +1045,19 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
           </div>
           <div
             style={
-              Object {
+              {
                 "flexGrow": 0,
               }
             }
           >
             <button
               aria-label="next year"
-              className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall"
+              className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
               data-selenium="aop-data-viewer.next-year-button"
               disabled={false}
               onBlur={[Function]}
               onClick={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -1084,29 +1069,26 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
               onTouchMove={[Function]}
               onTouchStart={[Function]}
               style={
-                Object {
-                  "marginLeft": 4,
+                {
+                  "marginLeft": "4px",
                 }
               }
               tabIndex={0}
               type="button"
             >
-              <span
-                className="MuiIconButton-label"
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                data-testid="KeyboardArrowRightIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
               >
-                <svg
-                  aria-hidden={true}
-                  className="MuiSvgIcon-root"
-                  focusable="false"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"
-                  />
-                </svg>
-              </span>
+                <path
+                  d="M8.59 16.59 13.17 12 8.59 7.41 10 6l6 6-6 6z"
+                />
+              </svg>
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </button>
           </div>
@@ -1114,22 +1096,24 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
       </div>
       <div
         style={
-          Object {
+          {
             "flexGrow": 0,
           }
         }
       >
         <p
-          className="MuiTypography-root makeStyles-label-4 MuiTypography-body1"
+          className="MuiTypography-root MuiTypography-body1 makeStyles-label-46 css-1nggj6-MuiTypography-root"
           id="flight-label"
         >
           Flight
           <button
-            aria-describedby={null}
             aria-label="Most sites are visited once per year, but sometimes subsequent flights are necessary to get complete data for that year. If more than one flight is available for a given site/year then this field can be used to select particular flights of interest."
-            className="MuiButtonBase-root MuiIconButton-root makeStyles-tooltipIconButton-6 MuiIconButton-sizeSmall"
+            aria-labelledby={null}
+            className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall makeStyles-tooltipIconButton-48 css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            data-mui-internal-clone-element={true}
             disabled={false}
             onBlur={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -1142,30 +1126,26 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
             onTouchMove={[Function]}
             onTouchStart={[Function]}
             tabIndex={0}
-            title="Most sites are visited once per year, but sometimes subsequent flights are necessary to get complete data for that year. If more than one flight is available for a given site/year then this field can be used to select particular flights of interest."
             type="button"
           >
-            <span
-              className="MuiIconButton-label"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
             <span
-              className="MuiTouchRipple-root"
+              className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </button>
         </p>
         <div
-          ComponentPath="@material-ui/core/Select"
+          ComponentPath="@mui/material/Select"
           prop-aria-labelledby="flight-label"
           prop-data-selenium="aop-data-viewer.flight-select"
           prop-disabled={true}
@@ -1175,9 +1155,9 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
           prop-value={1}
         >
           <li
-            aria-disabled={false}
-            className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+            className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
             onBlur={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -1194,7 +1174,7 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
           >
             1/1 (July)
             <span
-              className="MuiTouchRipple-root"
+              className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </li>
         </div>
@@ -1202,7 +1182,7 @@ exports[`AopDataViewer renders with a specified initial site and year 1`] = `
     </div>
   </form>
   <iframe
-    className="makeStyles-iframe-2"
+    className="makeStyles-iframe-44"
     scrolling="no"
     src="undefined?server=https://roma.chpc.utah.edu:7070/mod_visus?&dataset=DP3.30010.001-D19-2017_HEAL_1-L3-Camera-Mosaic-V01&dataproduct=DP3.30010.001&site=HEAL&month=2017-07&title=Healy%2C%20AK%20--%20July%202017%20--%20Flight%201%2F1"
     title=""
@@ -1214,7 +1194,7 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
 <div
   data-selenium="aop-data-viewer"
   style={
-    Object {
+    {
       "minWidth": "240px",
       "width": "100%",
     }
@@ -1222,19 +1202,19 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
 >
   <form
     autoComplete="off"
-    className="makeStyles-selectionForm-1"
+    className="makeStyles-selectionForm-57"
   >
     <h5
-      className="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom"
+      className="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-18xtj6i-MuiTypography-root"
     >
       AOP Data Viewer
     </h5>
     <span
-      className="MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom"
+      className="MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom css-1c3b9zl-MuiTypography-root"
     >
       This viewer allows for interactive exploration of remotely sensed data from the Airborne Observation Platform (AOP). Change the field site and flight for this data product using the tools below to stream different data into view. Pan and zoom in the view to stream higher resolution imagery. This pilot data viewer is provided through a collaboration with the 
       <a
-        className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+        className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
         data-external="VISUS"
         href="https://visus.org/"
         onBlur={[Function]}
@@ -1247,11 +1227,11 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
        and more updates are planned for the future.
     </span>
     <hr
-      className="MuiDivider-root makeStyles-divider-3"
+      className="MuiDivider-root MuiDivider-fullWidth makeStyles-divider-59 css-9mgopn-MuiDivider-root"
     />
     <div
       style={
-        Object {
+        {
           "display": "flex",
           "width": "100%",
         }
@@ -1259,22 +1239,24 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
     >
       <div
         style={
-          Object {
+          {
             "flexGrow": 0,
           }
         }
       >
         <p
-          className="MuiTypography-root makeStyles-label-4 MuiTypography-body1"
+          className="MuiTypography-root MuiTypography-body1 makeStyles-label-60 css-1nggj6-MuiTypography-root"
           id="site-label"
         >
           Site
           <button
-            aria-describedby={null}
             aria-label="Use the map or the menu below to select a site to display. Only one site can be viewed at a time."
-            className="MuiButtonBase-root MuiIconButton-root makeStyles-tooltipIconButton-6 MuiIconButton-sizeSmall"
+            aria-labelledby={null}
+            className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall makeStyles-tooltipIconButton-62 css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            data-mui-internal-clone-element={true}
             disabled={false}
             onBlur={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -1287,31 +1269,27 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
             onTouchMove={[Function]}
             onTouchStart={[Function]}
             tabIndex={0}
-            title="Use the map or the menu below to select a site to display. Only one site can be viewed at a time."
             type="button"
           >
-            <span
-              className="MuiIconButton-label"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
             <span
-              className="MuiTouchRipple-root"
+              className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </button>
         </p>
         <div
           style={
-            Object {
+            {
               "display": "flex",
               "flexWrap": "nowrap",
             }
@@ -1319,13 +1297,15 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
         >
           <div>
             <button
-              aria-describedby={null}
               aria-label="Select a site using the observatory map"
-              className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+              aria-labelledby={null}
+              className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-r0d1wz-MuiButtonBase-root-MuiButton-root"
+              data-mui-internal-clone-element={true}
               data-selenium="map-selection-button"
               disabled={false}
               onBlur={[Function]}
               onClick={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -1338,40 +1318,36 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
               onTouchMove={[Function]}
               onTouchStart={[Function]}
               style={
-                Object {
-                  "marginRight": 8,
+                {
+                  "marginRight": "8px",
                 }
               }
               tabIndex={0}
-              title="Select a site using the observatory map"
               type="button"
             >
               <span
-                className="MuiButton-label"
+                className="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeMedium css-1ei49fk-MuiButton-startIcon"
               >
-                <span
-                  className="MuiButton-startIcon MuiButton-iconSizeMedium"
+                <svg
+                  aria-hidden={true}
+                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                  data-testid="LanguageIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
                 >
-                  <svg
-                    aria-hidden={true}
-                    className="MuiSvgIcon-root"
-                    focusable="false"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"
-                    />
-                  </svg>
-                </span>
-                Map
+                  <path
+                    d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2m6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56M12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96M4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56m2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8M12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96M14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2m.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56M16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2z"
+                  />
+                </svg>
               </span>
+              Map
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </button>
           </div>
           <div
-            ComponentPath="@material-ui/core/Select"
+            ComponentPath="@mui/material/Select"
             prop-aria-labelledby="site-label"
             prop-data-selenium="aop-data-viewer.site-select"
             prop-input="Non-renderable object"
@@ -1381,8 +1357,9 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
           >
             <li
               aria-disabled={true}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root makeStyles-optgroup-5 MuiMenuItem-gutters MuiListItem-gutters Mui-disabled MuiListItem-button Mui-disabled"
+              className="MuiButtonBase-root MuiMenuItem-root Mui-disabled MuiMenuItem-gutters Mui-disabled MuiMenuItem-root Mui-disabled MuiMenuItem-gutters makeStyles-optgroup-61 css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -1395,7 +1372,7 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
               onTouchStart={[Function]}
               role="menuitem"
               style={
-                Object {
+                {
                   "opacity": 1,
                 }
               }
@@ -1405,9 +1382,9 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
               Alaska
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -1424,24 +1401,24 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
             >
               <div>
                 <p
-                  className="MuiTypography-root MuiTypography-body1 MuiTypography-displayBlock"
+                  className="MuiTypography-root MuiTypography-body1 css-3mx8qf-MuiTypography-root"
                 >
                   BONA
                 </p>
                 <span
-                  className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
+                  className="MuiTypography-root MuiTypography-caption css-10h70uh-MuiTypography-root"
                 >
                   Caribou-Poker Creeks Research Watershed
                 </span>
               </div>
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -1458,24 +1435,25 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
             >
               <div>
                 <p
-                  className="MuiTypography-root MuiTypography-body1 MuiTypography-displayBlock"
+                  className="MuiTypography-root MuiTypography-body1 css-3mx8qf-MuiTypography-root"
                 >
                   HEAL
                 </p>
                 <span
-                  className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
+                  className="MuiTypography-root MuiTypography-caption css-10h70uh-MuiTypography-root"
                 >
                   Healy
                 </span>
               </div>
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </li>
             <li
               aria-disabled={true}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root makeStyles-optgroup-5 MuiMenuItem-gutters MuiListItem-gutters Mui-disabled MuiListItem-button Mui-disabled"
+              className="MuiButtonBase-root MuiMenuItem-root Mui-disabled MuiMenuItem-gutters Mui-disabled MuiMenuItem-root Mui-disabled MuiMenuItem-gutters makeStyles-optgroup-61 css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -1488,7 +1466,7 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
               onTouchStart={[Function]}
               role="menuitem"
               style={
-                Object {
+                {
                   "opacity": 1,
                 }
               }
@@ -1498,9 +1476,9 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
               California
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -1517,18 +1495,18 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
             >
               <div>
                 <p
-                  className="MuiTypography-root MuiTypography-body1 MuiTypography-displayBlock"
+                  className="MuiTypography-root MuiTypography-body1 css-3mx8qf-MuiTypography-root"
                 >
                   SJER
                 </p>
                 <span
-                  className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
+                  className="MuiTypography-root MuiTypography-caption css-10h70uh-MuiTypography-root"
                 >
                   San Joaquin Experimental Range
                 </span>
               </div>
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </li>
           </div>
@@ -1536,23 +1514,25 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
       </div>
       <div
         style={
-          Object {
+          {
             "flexGrow": 1,
             "margin": "0px 16px",
           }
         }
       >
         <p
-          className="MuiTypography-root makeStyles-label-4 MuiTypography-body1"
+          className="MuiTypography-root MuiTypography-body1 makeStyles-label-60 css-1nggj6-MuiTypography-root"
           id="year-label"
         >
           Year
           <button
-            aria-describedby={null}
             aria-label="This slider can be used to move back and forth through time for a given site."
-            className="MuiButtonBase-root MuiIconButton-root makeStyles-tooltipIconButton-6 MuiIconButton-sizeSmall"
+            aria-labelledby={null}
+            className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall makeStyles-tooltipIconButton-62 css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            data-mui-internal-clone-element={true}
             disabled={false}
             onBlur={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -1565,31 +1545,27 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
             onTouchMove={[Function]}
             onTouchStart={[Function]}
             tabIndex={0}
-            title="This slider can be used to move back and forth through time for a given site."
             type="button"
           >
-            <span
-              className="MuiIconButton-label"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
             <span
-              className="MuiTouchRipple-root"
+              className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </button>
         </p>
         <div
           style={
-            Object {
+            {
               "display": "flex",
               "width": "100%",
             }
@@ -1597,18 +1573,19 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
         >
           <div
             style={
-              Object {
+              {
                 "flexGrow": 0,
               }
             }
           >
             <button
               aria-label="previous year"
-              className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary Mui-disabled MuiIconButton-sizeSmall Mui-disabled"
+              className="MuiButtonBase-root Mui-disabled MuiIconButton-root Mui-disabled MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
               data-selenium="aop-data-viewer.previous-year-button"
               disabled={true}
               onBlur={[Function]}
               onClick={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -1620,41 +1597,38 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
               onTouchMove={[Function]}
               onTouchStart={[Function]}
               style={
-                Object {
-                  "marginRight": 4,
+                {
+                  "marginRight": "4px",
                 }
               }
               tabIndex={-1}
               type="button"
             >
-              <span
-                className="MuiIconButton-label"
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                data-testid="KeyboardArrowLeftIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
               >
-                <svg
-                  aria-hidden={true}
-                  className="MuiSvgIcon-root"
-                  focusable="false"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"
-                  />
-                </svg>
-              </span>
+                <path
+                  d="M15.41 16.59 10.83 12l4.58-4.59L14 6l-6 6 6 6z"
+                />
+              </svg>
             </button>
           </div>
           <div
             style={
-              Object {
+              {
                 "flexGrow": 1,
               }
             }
           >
             <div
-              ComponentPath="@material-ui/core/Slider"
+              ComponentPath="@mui/material/Slider"
               prop-aria-labelledby="year-label"
               prop-data-selenium="aop-data-viewer.year-slider"
-              prop-marks="[{\\"label\\":\\"2017\\",\\"value\\":\\"2017\\"},{\\"label\\":\\"2018\\",\\"value\\":\\"2018\\"},{\\"label\\":\\"2019\\",\\"value\\":\\"2019\\"}]"
+              prop-marks="[{"label":"2017","value":"2017"},{"label":"2018","value":"2018"},{"label":"2019","value":"2019"}]"
               prop-max={2020}
               prop-min={2016}
               prop-onChange="[Function]"
@@ -1666,18 +1640,19 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
           </div>
           <div
             style={
-              Object {
+              {
                 "flexGrow": 0,
               }
             }
           >
             <button
               aria-label="next year"
-              className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall"
+              className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
               data-selenium="aop-data-viewer.next-year-button"
               disabled={false}
               onBlur={[Function]}
               onClick={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -1689,29 +1664,26 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
               onTouchMove={[Function]}
               onTouchStart={[Function]}
               style={
-                Object {
-                  "marginLeft": 4,
+                {
+                  "marginLeft": "4px",
                 }
               }
               tabIndex={0}
               type="button"
             >
-              <span
-                className="MuiIconButton-label"
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                data-testid="KeyboardArrowRightIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
               >
-                <svg
-                  aria-hidden={true}
-                  className="MuiSvgIcon-root"
-                  focusable="false"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"
-                  />
-                </svg>
-              </span>
+                <path
+                  d="M8.59 16.59 13.17 12 8.59 7.41 10 6l6 6-6 6z"
+                />
+              </svg>
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </button>
           </div>
@@ -1719,22 +1691,24 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
       </div>
       <div
         style={
-          Object {
+          {
             "flexGrow": 0,
           }
         }
       >
         <p
-          className="MuiTypography-root makeStyles-label-4 MuiTypography-body1"
+          className="MuiTypography-root MuiTypography-body1 makeStyles-label-60 css-1nggj6-MuiTypography-root"
           id="flight-label"
         >
           Flight
           <button
-            aria-describedby={null}
             aria-label="Most sites are visited once per year, but sometimes subsequent flights are necessary to get complete data for that year. If more than one flight is available for a given site/year then this field can be used to select particular flights of interest."
-            className="MuiButtonBase-root MuiIconButton-root makeStyles-tooltipIconButton-6 MuiIconButton-sizeSmall"
+            aria-labelledby={null}
+            className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall makeStyles-tooltipIconButton-62 css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            data-mui-internal-clone-element={true}
             disabled={false}
             onBlur={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -1747,30 +1721,26 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
             onTouchMove={[Function]}
             onTouchStart={[Function]}
             tabIndex={0}
-            title="Most sites are visited once per year, but sometimes subsequent flights are necessary to get complete data for that year. If more than one flight is available for a given site/year then this field can be used to select particular flights of interest."
             type="button"
           >
-            <span
-              className="MuiIconButton-label"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
             <span
-              className="MuiTouchRipple-root"
+              className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </button>
         </p>
         <div
-          ComponentPath="@material-ui/core/Select"
+          ComponentPath="@mui/material/Select"
           prop-aria-labelledby="flight-label"
           prop-data-selenium="aop-data-viewer.flight-select"
           prop-disabled={false}
@@ -1780,9 +1750,9 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
           prop-value={2}
         >
           <li
-            aria-disabled={false}
-            className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+            className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
             onBlur={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -1799,13 +1769,13 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
           >
             1/2 (March)
             <span
-              className="MuiTouchRipple-root"
+              className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </li>
           <li
-            aria-disabled={false}
-            className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+            className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
             onBlur={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -1822,7 +1792,7 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
           >
             2/2 (March)
             <span
-              className="MuiTouchRipple-root"
+              className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </li>
         </div>
@@ -1830,7 +1800,7 @@ exports[`AopDataViewer renders with a specified initial site, year, and flight 1
     </div>
   </form>
   <iframe
-    className="makeStyles-iframe-2"
+    className="makeStyles-iframe-58"
     scrolling="no"
     src="undefined?server=https://roma.chpc.utah.edu:7070/mod_visus?&dataset=DP3.30010.001-D17-2017_SJER_2-L3-Camera-Mosaic-V02&dataproduct=DP3.30010.001&site=SJER&month=2017-03&title=San%20Joaquin%20Experimental%20Range%2C%20CA%20--%20March%202017%20--%20Flight%202%2F2"
     title=""
@@ -1842,7 +1812,7 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
 <div
   data-selenium="aop-data-viewer"
   style={
-    Object {
+    {
       "minWidth": "240px",
       "width": "100%",
     }
@@ -1853,16 +1823,16 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
     className="makeStyles-selectionForm-1"
   >
     <h5
-      className="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom"
+      className="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-18xtj6i-MuiTypography-root"
     >
       AOP Data Viewer
     </h5>
     <span
-      className="MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom"
+      className="MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom css-1c3b9zl-MuiTypography-root"
     >
       This viewer allows for interactive exploration of remotely sensed data from the Airborne Observation Platform (AOP). Change the field site and flight for this data product using the tools below to stream different data into view. Pan and zoom in the view to stream higher resolution imagery. This pilot data viewer is provided through a collaboration with the 
       <a
-        className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+        className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
         data-external="VISUS"
         href="https://visus.org/"
         onBlur={[Function]}
@@ -1875,11 +1845,11 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
        and more updates are planned for the future.
     </span>
     <hr
-      className="MuiDivider-root makeStyles-divider-3"
+      className="MuiDivider-root MuiDivider-fullWidth makeStyles-divider-3 css-9mgopn-MuiDivider-root"
     />
     <div
       style={
-        Object {
+        {
           "display": "flex",
           "width": "100%",
         }
@@ -1887,22 +1857,24 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
     >
       <div
         style={
-          Object {
+          {
             "flexGrow": 0,
           }
         }
       >
         <p
-          className="MuiTypography-root makeStyles-label-4 MuiTypography-body1"
+          className="MuiTypography-root MuiTypography-body1 makeStyles-label-4 css-1nggj6-MuiTypography-root"
           id="site-label"
         >
           Site
           <button
-            aria-describedby={null}
             aria-label="Use the map or the menu below to select a site to display. Only one site can be viewed at a time."
-            className="MuiButtonBase-root MuiIconButton-root makeStyles-tooltipIconButton-6 MuiIconButton-sizeSmall"
+            aria-labelledby={null}
+            className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall makeStyles-tooltipIconButton-6 css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            data-mui-internal-clone-element={true}
             disabled={false}
             onBlur={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -1915,31 +1887,27 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
             onTouchMove={[Function]}
             onTouchStart={[Function]}
             tabIndex={0}
-            title="Use the map or the menu below to select a site to display. Only one site can be viewed at a time."
             type="button"
           >
-            <span
-              className="MuiIconButton-label"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
             <span
-              className="MuiTouchRipple-root"
+              className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </button>
         </p>
         <div
           style={
-            Object {
+            {
               "display": "flex",
               "flexWrap": "nowrap",
             }
@@ -1947,13 +1915,15 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
         >
           <div>
             <button
-              aria-describedby={null}
               aria-label="Select a site using the observatory map"
-              className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+              aria-labelledby={null}
+              className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-r0d1wz-MuiButtonBase-root-MuiButton-root"
+              data-mui-internal-clone-element={true}
               data-selenium="map-selection-button"
               disabled={false}
               onBlur={[Function]}
               onClick={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -1966,40 +1936,36 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
               onTouchMove={[Function]}
               onTouchStart={[Function]}
               style={
-                Object {
-                  "marginRight": 8,
+                {
+                  "marginRight": "8px",
                 }
               }
               tabIndex={0}
-              title="Select a site using the observatory map"
               type="button"
             >
               <span
-                className="MuiButton-label"
+                className="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeMedium css-1ei49fk-MuiButton-startIcon"
               >
-                <span
-                  className="MuiButton-startIcon MuiButton-iconSizeMedium"
+                <svg
+                  aria-hidden={true}
+                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                  data-testid="LanguageIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
                 >
-                  <svg
-                    aria-hidden={true}
-                    className="MuiSvgIcon-root"
-                    focusable="false"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"
-                    />
-                  </svg>
-                </span>
-                Map
+                  <path
+                    d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2m6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56M12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96M4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56m2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8M12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96M14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2m.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56M16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2z"
+                  />
+                </svg>
               </span>
+              Map
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </button>
           </div>
           <div
-            ComponentPath="@material-ui/core/Select"
+            ComponentPath="@mui/material/Select"
             prop-aria-labelledby="site-label"
             prop-data-selenium="aop-data-viewer.site-select"
             prop-input="Non-renderable object"
@@ -2009,8 +1975,9 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
           >
             <li
               aria-disabled={true}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root makeStyles-optgroup-5 MuiMenuItem-gutters MuiListItem-gutters Mui-disabled MuiListItem-button Mui-disabled"
+              className="MuiButtonBase-root MuiMenuItem-root Mui-disabled MuiMenuItem-gutters Mui-disabled MuiMenuItem-root Mui-disabled MuiMenuItem-gutters makeStyles-optgroup-5 css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -2023,7 +1990,7 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
               onTouchStart={[Function]}
               role="menuitem"
               style={
-                Object {
+                {
                   "opacity": 1,
                 }
               }
@@ -2033,9 +2000,9 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
               Alaska
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -2052,24 +2019,24 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
             >
               <div>
                 <p
-                  className="MuiTypography-root MuiTypography-body1 MuiTypography-displayBlock"
+                  className="MuiTypography-root MuiTypography-body1 css-3mx8qf-MuiTypography-root"
                 >
                   BONA
                 </p>
                 <span
-                  className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
+                  className="MuiTypography-root MuiTypography-caption css-10h70uh-MuiTypography-root"
                 >
                   Caribou-Poker Creeks Research Watershed
                 </span>
               </div>
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -2086,24 +2053,25 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
             >
               <div>
                 <p
-                  className="MuiTypography-root MuiTypography-body1 MuiTypography-displayBlock"
+                  className="MuiTypography-root MuiTypography-body1 css-3mx8qf-MuiTypography-root"
                 >
                   HEAL
                 </p>
                 <span
-                  className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
+                  className="MuiTypography-root MuiTypography-caption css-10h70uh-MuiTypography-root"
                 >
                   Healy
                 </span>
               </div>
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </li>
             <li
               aria-disabled={true}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root makeStyles-optgroup-5 MuiMenuItem-gutters MuiListItem-gutters Mui-disabled MuiListItem-button Mui-disabled"
+              className="MuiButtonBase-root MuiMenuItem-root Mui-disabled MuiMenuItem-gutters Mui-disabled MuiMenuItem-root Mui-disabled MuiMenuItem-gutters makeStyles-optgroup-5 css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -2116,7 +2084,7 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
               onTouchStart={[Function]}
               role="menuitem"
               style={
-                Object {
+                {
                   "opacity": 1,
                 }
               }
@@ -2126,9 +2094,9 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
               California
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -2145,18 +2113,18 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
             >
               <div>
                 <p
-                  className="MuiTypography-root MuiTypography-body1 MuiTypography-displayBlock"
+                  className="MuiTypography-root MuiTypography-body1 css-3mx8qf-MuiTypography-root"
                 >
                   SJER
                 </p>
                 <span
-                  className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
+                  className="MuiTypography-root MuiTypography-caption css-10h70uh-MuiTypography-root"
                 >
                   San Joaquin Experimental Range
                 </span>
               </div>
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </li>
           </div>
@@ -2164,23 +2132,25 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
       </div>
       <div
         style={
-          Object {
+          {
             "flexGrow": 1,
             "margin": "0px 16px",
           }
         }
       >
         <p
-          className="MuiTypography-root makeStyles-label-4 MuiTypography-body1"
+          className="MuiTypography-root MuiTypography-body1 makeStyles-label-4 css-1nggj6-MuiTypography-root"
           id="year-label"
         >
           Year
           <button
-            aria-describedby={null}
             aria-label="This slider can be used to move back and forth through time for a given site."
-            className="MuiButtonBase-root MuiIconButton-root makeStyles-tooltipIconButton-6 MuiIconButton-sizeSmall"
+            aria-labelledby={null}
+            className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall makeStyles-tooltipIconButton-6 css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            data-mui-internal-clone-element={true}
             disabled={false}
             onBlur={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -2193,31 +2163,27 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
             onTouchMove={[Function]}
             onTouchStart={[Function]}
             tabIndex={0}
-            title="This slider can be used to move back and forth through time for a given site."
             type="button"
           >
-            <span
-              className="MuiIconButton-label"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
             <span
-              className="MuiTouchRipple-root"
+              className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </button>
         </p>
         <div
           style={
-            Object {
+            {
               "display": "flex",
               "width": "100%",
             }
@@ -2225,18 +2191,19 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
         >
           <div
             style={
-              Object {
+              {
                 "flexGrow": 0,
               }
             }
           >
             <button
               aria-label="previous year"
-              className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall"
+              className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
               data-selenium="aop-data-viewer.previous-year-button"
               disabled={false}
               onBlur={[Function]}
               onClick={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -2248,44 +2215,41 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
               onTouchMove={[Function]}
               onTouchStart={[Function]}
               style={
-                Object {
-                  "marginRight": 4,
+                {
+                  "marginRight": "4px",
                 }
               }
               tabIndex={0}
               type="button"
             >
-              <span
-                className="MuiIconButton-label"
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                data-testid="KeyboardArrowLeftIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
               >
-                <svg
-                  aria-hidden={true}
-                  className="MuiSvgIcon-root"
-                  focusable="false"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"
-                  />
-                </svg>
-              </span>
+                <path
+                  d="M15.41 16.59 10.83 12l4.58-4.59L14 6l-6 6 6 6z"
+                />
+              </svg>
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </button>
           </div>
           <div
             style={
-              Object {
+              {
                 "flexGrow": 1,
               }
             }
           >
             <div
-              ComponentPath="@material-ui/core/Slider"
+              ComponentPath="@mui/material/Slider"
               prop-aria-labelledby="year-label"
               prop-data-selenium="aop-data-viewer.year-slider"
-              prop-marks="[{\\"label\\":\\"2017\\",\\"value\\":\\"2017\\"},{\\"label\\":\\"2018\\",\\"value\\":\\"2018\\"}]"
+              prop-marks="[{"label":"2017","value":"2017"},{"label":"2018","value":"2018"}]"
               prop-max={2019}
               prop-min={2016}
               prop-onChange="[Function]"
@@ -2297,18 +2261,19 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
           </div>
           <div
             style={
-              Object {
+              {
                 "flexGrow": 0,
               }
             }
           >
             <button
               aria-label="next year"
-              className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary Mui-disabled MuiIconButton-sizeSmall Mui-disabled"
+              className="MuiButtonBase-root Mui-disabled MuiIconButton-root Mui-disabled MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
               data-selenium="aop-data-viewer.next-year-button"
               disabled={true}
               onBlur={[Function]}
               onClick={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -2320,49 +2285,48 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
               onTouchMove={[Function]}
               onTouchStart={[Function]}
               style={
-                Object {
-                  "marginLeft": 4,
+                {
+                  "marginLeft": "4px",
                 }
               }
               tabIndex={-1}
               type="button"
             >
-              <span
-                className="MuiIconButton-label"
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                data-testid="KeyboardArrowRightIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
               >
-                <svg
-                  aria-hidden={true}
-                  className="MuiSvgIcon-root"
-                  focusable="false"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"
-                  />
-                </svg>
-              </span>
+                <path
+                  d="M8.59 16.59 13.17 12 8.59 7.41 10 6l6 6-6 6z"
+                />
+              </svg>
             </button>
           </div>
         </div>
       </div>
       <div
         style={
-          Object {
+          {
             "flexGrow": 0,
           }
         }
       >
         <p
-          className="MuiTypography-root makeStyles-label-4 MuiTypography-body1"
+          className="MuiTypography-root MuiTypography-body1 makeStyles-label-4 css-1nggj6-MuiTypography-root"
           id="flight-label"
         >
           Flight
           <button
-            aria-describedby={null}
             aria-label="Most sites are visited once per year, but sometimes subsequent flights are necessary to get complete data for that year. If more than one flight is available for a given site/year then this field can be used to select particular flights of interest."
-            className="MuiButtonBase-root MuiIconButton-root makeStyles-tooltipIconButton-6 MuiIconButton-sizeSmall"
+            aria-labelledby={null}
+            className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall makeStyles-tooltipIconButton-6 css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            data-mui-internal-clone-element={true}
             disabled={false}
             onBlur={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -2375,30 +2339,26 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
             onTouchMove={[Function]}
             onTouchStart={[Function]}
             tabIndex={0}
-            title="Most sites are visited once per year, but sometimes subsequent flights are necessary to get complete data for that year. If more than one flight is available for a given site/year then this field can be used to select particular flights of interest."
             type="button"
           >
-            <span
-              className="MuiIconButton-label"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
             <span
-              className="MuiTouchRipple-root"
+              className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </button>
         </p>
         <div
-          ComponentPath="@material-ui/core/Select"
+          ComponentPath="@mui/material/Select"
           prop-aria-labelledby="flight-label"
           prop-data-selenium="aop-data-viewer.flight-select"
           prop-disabled={true}
@@ -2408,9 +2368,9 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
           prop-value={1}
         >
           <li
-            aria-disabled={false}
-            className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+            className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
             onBlur={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -2427,7 +2387,7 @@ exports[`AopDataViewer renders with only a productCode 1`] = `
           >
             1/1 (August)
             <span
-              className="MuiTouchRipple-root"
+              className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </li>
         </div>
@@ -2447,7 +2407,7 @@ exports[`AopDataViewer renders with title disabled 1`] = `
 <div
   data-selenium="aop-data-viewer"
   style={
-    Object {
+    {
       "minWidth": "240px",
       "width": "100%",
     }
@@ -2455,14 +2415,14 @@ exports[`AopDataViewer renders with title disabled 1`] = `
 >
   <form
     autoComplete="off"
-    className="makeStyles-selectionForm-1"
+    className="makeStyles-selectionForm-15"
   >
     <span
-      className="MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom"
+      className="MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom css-1c3b9zl-MuiTypography-root"
     >
       This viewer allows for interactive exploration of remotely sensed data from the Airborne Observation Platform (AOP). Change the field site and flight for this data product using the tools below to stream different data into view. Pan and zoom in the view to stream higher resolution imagery. This pilot data viewer is provided through a collaboration with the 
       <a
-        className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+        className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
         data-external="VISUS"
         href="https://visus.org/"
         onBlur={[Function]}
@@ -2475,11 +2435,11 @@ exports[`AopDataViewer renders with title disabled 1`] = `
        and more updates are planned for the future.
     </span>
     <hr
-      className="MuiDivider-root makeStyles-divider-3"
+      className="MuiDivider-root MuiDivider-fullWidth makeStyles-divider-17 css-9mgopn-MuiDivider-root"
     />
     <div
       style={
-        Object {
+        {
           "display": "flex",
           "width": "100%",
         }
@@ -2487,22 +2447,24 @@ exports[`AopDataViewer renders with title disabled 1`] = `
     >
       <div
         style={
-          Object {
+          {
             "flexGrow": 0,
           }
         }
       >
         <p
-          className="MuiTypography-root makeStyles-label-4 MuiTypography-body1"
+          className="MuiTypography-root MuiTypography-body1 makeStyles-label-18 css-1nggj6-MuiTypography-root"
           id="site-label"
         >
           Site
           <button
-            aria-describedby={null}
             aria-label="Use the map or the menu below to select a site to display. Only one site can be viewed at a time."
-            className="MuiButtonBase-root MuiIconButton-root makeStyles-tooltipIconButton-6 MuiIconButton-sizeSmall"
+            aria-labelledby={null}
+            className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall makeStyles-tooltipIconButton-20 css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            data-mui-internal-clone-element={true}
             disabled={false}
             onBlur={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -2515,31 +2477,27 @@ exports[`AopDataViewer renders with title disabled 1`] = `
             onTouchMove={[Function]}
             onTouchStart={[Function]}
             tabIndex={0}
-            title="Use the map or the menu below to select a site to display. Only one site can be viewed at a time."
             type="button"
           >
-            <span
-              className="MuiIconButton-label"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
             <span
-              className="MuiTouchRipple-root"
+              className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </button>
         </p>
         <div
           style={
-            Object {
+            {
               "display": "flex",
               "flexWrap": "nowrap",
             }
@@ -2547,13 +2505,15 @@ exports[`AopDataViewer renders with title disabled 1`] = `
         >
           <div>
             <button
-              aria-describedby={null}
               aria-label="Select a site using the observatory map"
-              className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+              aria-labelledby={null}
+              className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-r0d1wz-MuiButtonBase-root-MuiButton-root"
+              data-mui-internal-clone-element={true}
               data-selenium="map-selection-button"
               disabled={false}
               onBlur={[Function]}
               onClick={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -2566,40 +2526,36 @@ exports[`AopDataViewer renders with title disabled 1`] = `
               onTouchMove={[Function]}
               onTouchStart={[Function]}
               style={
-                Object {
-                  "marginRight": 8,
+                {
+                  "marginRight": "8px",
                 }
               }
               tabIndex={0}
-              title="Select a site using the observatory map"
               type="button"
             >
               <span
-                className="MuiButton-label"
+                className="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeMedium css-1ei49fk-MuiButton-startIcon"
               >
-                <span
-                  className="MuiButton-startIcon MuiButton-iconSizeMedium"
+                <svg
+                  aria-hidden={true}
+                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                  data-testid="LanguageIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
                 >
-                  <svg
-                    aria-hidden={true}
-                    className="MuiSvgIcon-root"
-                    focusable="false"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"
-                    />
-                  </svg>
-                </span>
-                Map
+                  <path
+                    d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2m6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56M12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96M4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56m2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8M12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96M14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2m.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56M16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2z"
+                  />
+                </svg>
               </span>
+              Map
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </button>
           </div>
           <div
-            ComponentPath="@material-ui/core/Select"
+            ComponentPath="@mui/material/Select"
             prop-aria-labelledby="site-label"
             prop-data-selenium="aop-data-viewer.site-select"
             prop-input="Non-renderable object"
@@ -2609,8 +2565,9 @@ exports[`AopDataViewer renders with title disabled 1`] = `
           >
             <li
               aria-disabled={true}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root makeStyles-optgroup-5 MuiMenuItem-gutters MuiListItem-gutters Mui-disabled MuiListItem-button Mui-disabled"
+              className="MuiButtonBase-root MuiMenuItem-root Mui-disabled MuiMenuItem-gutters Mui-disabled MuiMenuItem-root Mui-disabled MuiMenuItem-gutters makeStyles-optgroup-19 css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -2623,7 +2580,7 @@ exports[`AopDataViewer renders with title disabled 1`] = `
               onTouchStart={[Function]}
               role="menuitem"
               style={
-                Object {
+                {
                   "opacity": 1,
                 }
               }
@@ -2633,9 +2590,9 @@ exports[`AopDataViewer renders with title disabled 1`] = `
               Alaska
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -2652,24 +2609,24 @@ exports[`AopDataViewer renders with title disabled 1`] = `
             >
               <div>
                 <p
-                  className="MuiTypography-root MuiTypography-body1 MuiTypography-displayBlock"
+                  className="MuiTypography-root MuiTypography-body1 css-3mx8qf-MuiTypography-root"
                 >
                   BONA
                 </p>
                 <span
-                  className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
+                  className="MuiTypography-root MuiTypography-caption css-10h70uh-MuiTypography-root"
                 >
                   Caribou-Poker Creeks Research Watershed
                 </span>
               </div>
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -2686,24 +2643,25 @@ exports[`AopDataViewer renders with title disabled 1`] = `
             >
               <div>
                 <p
-                  className="MuiTypography-root MuiTypography-body1 MuiTypography-displayBlock"
+                  className="MuiTypography-root MuiTypography-body1 css-3mx8qf-MuiTypography-root"
                 >
                   HEAL
                 </p>
                 <span
-                  className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
+                  className="MuiTypography-root MuiTypography-caption css-10h70uh-MuiTypography-root"
                 >
                   Healy
                 </span>
               </div>
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </li>
             <li
               aria-disabled={true}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root makeStyles-optgroup-5 MuiMenuItem-gutters MuiListItem-gutters Mui-disabled MuiListItem-button Mui-disabled"
+              className="MuiButtonBase-root MuiMenuItem-root Mui-disabled MuiMenuItem-gutters Mui-disabled MuiMenuItem-root Mui-disabled MuiMenuItem-gutters makeStyles-optgroup-19 css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -2716,7 +2674,7 @@ exports[`AopDataViewer renders with title disabled 1`] = `
               onTouchStart={[Function]}
               role="menuitem"
               style={
-                Object {
+                {
                   "opacity": 1,
                 }
               }
@@ -2726,9 +2684,9 @@ exports[`AopDataViewer renders with title disabled 1`] = `
               California
             </li>
             <li
-              aria-disabled={false}
-              className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+              className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
               onBlur={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -2745,18 +2703,18 @@ exports[`AopDataViewer renders with title disabled 1`] = `
             >
               <div>
                 <p
-                  className="MuiTypography-root MuiTypography-body1 MuiTypography-displayBlock"
+                  className="MuiTypography-root MuiTypography-body1 css-3mx8qf-MuiTypography-root"
                 >
                   SJER
                 </p>
                 <span
-                  className="MuiTypography-root MuiTypography-caption MuiTypography-displayBlock"
+                  className="MuiTypography-root MuiTypography-caption css-10h70uh-MuiTypography-root"
                 >
                   San Joaquin Experimental Range
                 </span>
               </div>
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </li>
           </div>
@@ -2764,23 +2722,25 @@ exports[`AopDataViewer renders with title disabled 1`] = `
       </div>
       <div
         style={
-          Object {
+          {
             "flexGrow": 1,
             "margin": "0px 16px",
           }
         }
       >
         <p
-          className="MuiTypography-root makeStyles-label-4 MuiTypography-body1"
+          className="MuiTypography-root MuiTypography-body1 makeStyles-label-18 css-1nggj6-MuiTypography-root"
           id="year-label"
         >
           Year
           <button
-            aria-describedby={null}
             aria-label="This slider can be used to move back and forth through time for a given site."
-            className="MuiButtonBase-root MuiIconButton-root makeStyles-tooltipIconButton-6 MuiIconButton-sizeSmall"
+            aria-labelledby={null}
+            className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall makeStyles-tooltipIconButton-20 css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            data-mui-internal-clone-element={true}
             disabled={false}
             onBlur={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -2793,31 +2753,27 @@ exports[`AopDataViewer renders with title disabled 1`] = `
             onTouchMove={[Function]}
             onTouchStart={[Function]}
             tabIndex={0}
-            title="This slider can be used to move back and forth through time for a given site."
             type="button"
           >
-            <span
-              className="MuiIconButton-label"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
             <span
-              className="MuiTouchRipple-root"
+              className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </button>
         </p>
         <div
           style={
-            Object {
+            {
               "display": "flex",
               "width": "100%",
             }
@@ -2825,18 +2781,19 @@ exports[`AopDataViewer renders with title disabled 1`] = `
         >
           <div
             style={
-              Object {
+              {
                 "flexGrow": 0,
               }
             }
           >
             <button
               aria-label="previous year"
-              className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall"
+              className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
               data-selenium="aop-data-viewer.previous-year-button"
               disabled={false}
               onBlur={[Function]}
               onClick={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -2848,44 +2805,41 @@ exports[`AopDataViewer renders with title disabled 1`] = `
               onTouchMove={[Function]}
               onTouchStart={[Function]}
               style={
-                Object {
-                  "marginRight": 4,
+                {
+                  "marginRight": "4px",
                 }
               }
               tabIndex={0}
               type="button"
             >
-              <span
-                className="MuiIconButton-label"
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                data-testid="KeyboardArrowLeftIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
               >
-                <svg
-                  aria-hidden={true}
-                  className="MuiSvgIcon-root"
-                  focusable="false"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"
-                  />
-                </svg>
-              </span>
+                <path
+                  d="M15.41 16.59 10.83 12l4.58-4.59L14 6l-6 6 6 6z"
+                />
+              </svg>
               <span
-                className="MuiTouchRipple-root"
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
             </button>
           </div>
           <div
             style={
-              Object {
+              {
                 "flexGrow": 1,
               }
             }
           >
             <div
-              ComponentPath="@material-ui/core/Slider"
+              ComponentPath="@mui/material/Slider"
               prop-aria-labelledby="year-label"
               prop-data-selenium="aop-data-viewer.year-slider"
-              prop-marks="[{\\"label\\":\\"2017\\",\\"value\\":\\"2017\\"},{\\"label\\":\\"2018\\",\\"value\\":\\"2018\\"}]"
+              prop-marks="[{"label":"2017","value":"2017"},{"label":"2018","value":"2018"}]"
               prop-max={2019}
               prop-min={2016}
               prop-onChange="[Function]"
@@ -2897,18 +2851,19 @@ exports[`AopDataViewer renders with title disabled 1`] = `
           </div>
           <div
             style={
-              Object {
+              {
                 "flexGrow": 0,
               }
             }
           >
             <button
               aria-label="next year"
-              className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary Mui-disabled MuiIconButton-sizeSmall Mui-disabled"
+              className="MuiButtonBase-root Mui-disabled MuiIconButton-root Mui-disabled MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
               data-selenium="aop-data-viewer.next-year-button"
               disabled={true}
               onBlur={[Function]}
               onClick={[Function]}
+              onContextMenu={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -2920,49 +2875,48 @@ exports[`AopDataViewer renders with title disabled 1`] = `
               onTouchMove={[Function]}
               onTouchStart={[Function]}
               style={
-                Object {
-                  "marginLeft": 4,
+                {
+                  "marginLeft": "4px",
                 }
               }
               tabIndex={-1}
               type="button"
             >
-              <span
-                className="MuiIconButton-label"
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                data-testid="KeyboardArrowRightIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
               >
-                <svg
-                  aria-hidden={true}
-                  className="MuiSvgIcon-root"
-                  focusable="false"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"
-                  />
-                </svg>
-              </span>
+                <path
+                  d="M8.59 16.59 13.17 12 8.59 7.41 10 6l6 6-6 6z"
+                />
+              </svg>
             </button>
           </div>
         </div>
       </div>
       <div
         style={
-          Object {
+          {
             "flexGrow": 0,
           }
         }
       >
         <p
-          className="MuiTypography-root makeStyles-label-4 MuiTypography-body1"
+          className="MuiTypography-root MuiTypography-body1 makeStyles-label-18 css-1nggj6-MuiTypography-root"
           id="flight-label"
         >
           Flight
           <button
-            aria-describedby={null}
             aria-label="Most sites are visited once per year, but sometimes subsequent flights are necessary to get complete data for that year. If more than one flight is available for a given site/year then this field can be used to select particular flights of interest."
-            className="MuiButtonBase-root MuiIconButton-root makeStyles-tooltipIconButton-6 MuiIconButton-sizeSmall"
+            aria-labelledby={null}
+            className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall makeStyles-tooltipIconButton-20 css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            data-mui-internal-clone-element={true}
             disabled={false}
             onBlur={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -2975,30 +2929,26 @@ exports[`AopDataViewer renders with title disabled 1`] = `
             onTouchMove={[Function]}
             onTouchStart={[Function]}
             tabIndex={0}
-            title="Most sites are visited once per year, but sometimes subsequent flights are necessary to get complete data for that year. If more than one flight is available for a given site/year then this field can be used to select particular flights of interest."
             type="button"
           >
-            <span
-              className="MuiIconButton-label"
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
             >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-                />
-              </svg>
-            </span>
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
             <span
-              className="MuiTouchRipple-root"
+              className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </button>
         </p>
         <div
-          ComponentPath="@material-ui/core/Select"
+          ComponentPath="@mui/material/Select"
           prop-aria-labelledby="flight-label"
           prop-data-selenium="aop-data-viewer.flight-select"
           prop-disabled={true}
@@ -3008,9 +2958,9 @@ exports[`AopDataViewer renders with title disabled 1`] = `
           prop-value={1}
         >
           <li
-            aria-disabled={false}
-            className="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+            className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
             onBlur={[Function]}
+            onContextMenu={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -3027,7 +2977,7 @@ exports[`AopDataViewer renders with title disabled 1`] = `
           >
             1/1 (August)
             <span
-              className="MuiTouchRipple-root"
+              className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </li>
         </div>
@@ -3035,7 +2985,7 @@ exports[`AopDataViewer renders with title disabled 1`] = `
     </div>
   </form>
   <iframe
-    className="makeStyles-iframe-2"
+    className="makeStyles-iframe-16"
     scrolling="no"
     src="undefined?server=https://roma.chpc.utah.edu:7070/mod_visus?&dataset=DP3.30010.001-D19-2018_BONA_2-L3-Camera-Mosaic-V01&dataproduct=DP3.30010.001&site=BONA&month=2018-08&title=Caribou-Poker%20Creeks%20Research%20Watershed%2C%20AK%20--%20August%202018%20--%20Flight%201%2F1"
     title=""

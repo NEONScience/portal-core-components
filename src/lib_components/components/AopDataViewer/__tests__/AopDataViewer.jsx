@@ -3,6 +3,7 @@ import renderer from 'react-test-renderer';
 
 import { mockAjaxResponse } from '../../../../__mocks__/ajax';
 import mockReactComponent from '../../../../__mocks__/mockReactComponent';
+import MockTheme from '../../../../__mocks__/MockTheme';
 import '../../../../__mocks__/NeonContext';
 
 import AopDataViewer from '../AopDataViewer';
@@ -50,7 +51,7 @@ describe('AopDataViewer', () => {
   test('renders with only a productCode', (done) => {
     setTimeout(() => {
       const tree = renderer
-        .create(<AopDataViewer productCode="DP3.30010.001" />)
+        .create(<MockTheme><AopDataViewer productCode="DP3.30010.001" /></MockTheme>)
         .toJSON();
       expect(tree).toMatchSnapshot();
       done();
@@ -59,7 +60,7 @@ describe('AopDataViewer', () => {
   test('renders with title disabled', (done) => {
     setTimeout(() => {
       const tree = renderer
-        .create(<AopDataViewer productCode="DP3.30010.001" showTitle={false} />)
+        .create(<MockTheme><AopDataViewer productCode="DP3.30010.001" showTitle={false} /></MockTheme>)
         .toJSON();
       expect(tree).toMatchSnapshot();
       done();
@@ -68,7 +69,7 @@ describe('AopDataViewer', () => {
   test('renders with a specified initial site', (done) => {
     setTimeout(() => {
       const tree = renderer
-        .create(<AopDataViewer productCode="DP3.30010.001" initialSite="BONA" />)
+        .create(<MockTheme><AopDataViewer productCode="DP3.30010.001" initialSite="BONA" /></MockTheme>)
         .toJSON();
       expect(tree).toMatchSnapshot();
       done();
@@ -78,11 +79,13 @@ describe('AopDataViewer', () => {
     setTimeout(() => {
       const tree = renderer
         .create((
-          <AopDataViewer
-            productCode="DP3.30010.001"
-            initialSite="HEAL"
-            initialYear={2017}
-          />
+          <MockTheme>
+            <AopDataViewer
+              productCode="DP3.30010.001"
+              initialSite="HEAL"
+              initialYear={2017}
+            />
+          </MockTheme>
         ))
         .toJSON();
       expect(tree).toMatchSnapshot();
@@ -93,12 +96,14 @@ describe('AopDataViewer', () => {
     setTimeout(() => {
       const tree = renderer
         .create((
-          <AopDataViewer
-            productCode="DP3.30010.001"
-            initialSite="SJER"
-            initialYear={2017}
-            initialFlight={2}
-          />
+          <MockTheme>
+            <AopDataViewer
+              productCode="DP3.30010.001"
+              initialSite="SJER"
+              initialYear={2017}
+              initialFlight={2}
+            />
+          </MockTheme>
         ))
         .toJSON();
       expect(tree).toMatchSnapshot();

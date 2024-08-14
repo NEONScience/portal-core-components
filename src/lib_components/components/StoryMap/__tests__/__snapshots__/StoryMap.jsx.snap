@@ -4,7 +4,7 @@ exports[`StoryMap Renders correctly with a custom title 1`] = `
 <div
   data-selenium="story-map-container"
   style={
-    Object {
+    {
       "minWidth": "240px",
       "width": "100%",
     }
@@ -16,7 +16,7 @@ exports[`StoryMap Renders correctly with a custom title 1`] = `
     marginWidth="0"
     src="https://foo.bar"
     style={
-      Object {
+      {
         "minHeight": "240px",
         "minWidth": "240px",
       }
@@ -24,7 +24,7 @@ exports[`StoryMap Renders correctly with a custom title 1`] = `
     title="Foo"
   />
   <a
-    className="MuiTypography-root MuiLink-root MuiLink-underlineHover makeStyles-openInNewLink-1 MuiTypography-colorPrimary"
+    className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-openInNewLink-3 css-duangj-MuiTypography-root-MuiLink-root"
     href="https://foo.bar"
     onBlur={[Function]}
     onFocus={[Function]}
@@ -32,12 +32,13 @@ exports[`StoryMap Renders correctly with a custom title 1`] = `
   >
     <svg
       aria-hidden={true}
-      className="MuiSvgIcon-root makeStyles-openInNewIcon-2"
+      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium makeStyles-openInNewIcon-4 css-i4bv87-MuiSvgIcon-root"
+      data-testid="OpenInNewIcon"
       focusable="false"
       viewBox="0 0 24 24"
     >
       <path
-        d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
+        d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3z"
       />
     </svg>
     Open in New Window
@@ -49,7 +50,7 @@ exports[`StoryMap Renders correctly with no title 1`] = `
 <div
   data-selenium="story-map-container"
   style={
-    Object {
+    {
       "minWidth": "240px",
       "width": "100%",
     }
@@ -61,7 +62,7 @@ exports[`StoryMap Renders correctly with no title 1`] = `
     marginWidth="0"
     src="https://foo.bar"
     style={
-      Object {
+      {
         "minHeight": "240px",
         "minWidth": "240px",
       }
@@ -69,7 +70,7 @@ exports[`StoryMap Renders correctly with no title 1`] = `
     title="Neon Story Map"
   />
   <a
-    className="MuiTypography-root MuiLink-root MuiLink-underlineHover makeStyles-openInNewLink-1 MuiTypography-colorPrimary"
+    className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-openInNewLink-1 css-duangj-MuiTypography-root-MuiLink-root"
     href="https://foo.bar"
     onBlur={[Function]}
     onFocus={[Function]}
@@ -77,12 +78,13 @@ exports[`StoryMap Renders correctly with no title 1`] = `
   >
     <svg
       aria-hidden={true}
-      className="MuiSvgIcon-root makeStyles-openInNewIcon-2"
+      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium makeStyles-openInNewIcon-2 css-i4bv87-MuiSvgIcon-root"
+      data-testid="OpenInNewIcon"
       focusable="false"
       viewBox="0 0 24 24"
     >
       <path
-        d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
+        d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3z"
       />
     </svg>
     Open in New Window

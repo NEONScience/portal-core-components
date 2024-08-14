@@ -2,7 +2,7 @@
 
 exports[`ExternalHost AERONET getSiteLink with no args 1`] = `
 <a
-  className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+  className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
   data-gtm-external-host="AERONET"
   data-gtm-product-code="n/a"
   href="https://aeronet.gsfc.nasa.gov/cgi-bin/data_display_aod_v3?site=NEON_"
@@ -10,14 +10,12 @@ exports[`ExternalHost AERONET getSiteLink with no args 1`] = `
   onFocus={[Function]}
   rel="noopener noreferrer"
   target="_blank"
->
-  
-</a>
+/>
 `;
 
 exports[`ExternalHost AERONET getSiteLink with productCode 1`] = `
 <a
-  className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+  className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
   data-gtm-external-host="AERONET"
   data-gtm-product-code="DP1.00043.001"
   href="https://aeronet.gsfc.nasa.gov/cgi-bin/data_display_aod_v3?site=NEON_ABBY"
@@ -32,7 +30,7 @@ exports[`ExternalHost AERONET getSiteLink with productCode 1`] = `
 
 exports[`ExternalHost AERONET getSiteLink without productCode 1`] = `
 <a
-  className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+  className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
   data-gtm-external-host="AERONET"
   data-gtm-product-code="n/a"
   href="https://aeronet.gsfc.nasa.gov/cgi-bin/data_display_aod_v3?site=NEON_ABBY"
@@ -47,7 +45,7 @@ exports[`ExternalHost AERONET getSiteLink without productCode 1`] = `
 
 exports[`ExternalHost AERONET renderLink with productCode 1`] = `
 <a
-  className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+  className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
   data-gtm-external-host="AERONET"
   data-gtm-product-code="DP1.00043.001"
   href="https://aeronet.gsfc.nasa.gov"
@@ -62,7 +60,7 @@ exports[`ExternalHost AERONET renderLink with productCode 1`] = `
 
 exports[`ExternalHost AERONET renderLink without productCode 1`] = `
 <a
-  className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+  className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
   data-gtm-external-host="AERONET"
   data-gtm-product-code="n/a"
   href="https://aeronet.gsfc.nasa.gov"
@@ -77,7 +75,7 @@ exports[`ExternalHost AERONET renderLink without productCode 1`] = `
 
 exports[`ExternalHost AERONET renderShortLink with productCode 1`] = `
 <a
-  className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+  className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
   data-gtm-external-host="AERONET"
   data-gtm-product-code="DP1.00043.001"
   href="https://aeronet.gsfc.nasa.gov"
@@ -92,7 +90,7 @@ exports[`ExternalHost AERONET renderShortLink with productCode 1`] = `
 
 exports[`ExternalHost AERONET renderShortLink without productCode 1`] = `
 <a
-  className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+  className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
   data-gtm-external-host="AERONET"
   data-gtm-product-code="n/a"
   href="https://aeronet.gsfc.nasa.gov"
@@ -109,7 +107,7 @@ exports[`ExternalHost AMERIFLUX getSiteLink with no args 1`] = `null`;
 
 exports[`ExternalHost AMERIFLUX getSiteLink with productCode 1`] = `
 <a
-  className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+  className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
   data-gtm-external-host="AMERIFLUX"
   data-gtm-product-code="DP1.00001.001"
   href="https://ameriflux.lbl.gov/sites/siteinfo/US-xAB/"
@@ -124,7 +122,7 @@ exports[`ExternalHost AMERIFLUX getSiteLink with productCode 1`] = `
 
 exports[`ExternalHost AMERIFLUX getSiteLink without productCode 1`] = `
 <a
-  className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+  className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
   data-gtm-external-host="AMERIFLUX"
   data-gtm-product-code="n/a"
   href="https://ameriflux.lbl.gov/sites/siteinfo/US-xAB/"
@@ -139,7 +137,7 @@ exports[`ExternalHost AMERIFLUX getSiteLink without productCode 1`] = `
 
 exports[`ExternalHost AMERIFLUX renderLink with productCode 1`] = `
 <a
-  className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+  className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
   data-gtm-external-host="AMERIFLUX"
   data-gtm-product-code="DP1.00001.001"
   href="https://ameriflux.lbl.gov"
@@ -154,7 +152,7 @@ exports[`ExternalHost AMERIFLUX renderLink with productCode 1`] = `
 
 exports[`ExternalHost AMERIFLUX renderLink without productCode 1`] = `
 <a
-  className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+  className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
   data-gtm-external-host="AMERIFLUX"
   data-gtm-product-code="n/a"
   href="https://ameriflux.lbl.gov"
@@ -169,7 +167,7 @@ exports[`ExternalHost AMERIFLUX renderLink without productCode 1`] = `
 
 exports[`ExternalHost AMERIFLUX renderShortLink with productCode 1`] = `
 <a
-  className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+  className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
   data-gtm-external-host="AMERIFLUX"
   data-gtm-product-code="DP1.00001.001"
   href="https://ameriflux.lbl.gov"
@@ -184,7 +182,7 @@ exports[`ExternalHost AMERIFLUX renderShortLink with productCode 1`] = `
 
 exports[`ExternalHost AMERIFLUX renderShortLink without productCode 1`] = `
 <a
-  className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+  className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
   data-gtm-external-host="AMERIFLUX"
   data-gtm-product-code="n/a"
   href="https://ameriflux.lbl.gov"
@@ -201,7 +199,7 @@ exports[`ExternalHost BOLD getProductLinks with a valid productCode 1`] = `
 <div>
   <div>
     <a
-      className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+      className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
       data-gtm-external-host="BOLD"
       data-gtm-product-code="DP1.10020.001"
       href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETN"
@@ -215,7 +213,7 @@ exports[`ExternalHost BOLD getProductLinks with a valid productCode 1`] = `
   </div>
   <div>
     <a
-      className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+      className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
       data-gtm-external-host="BOLD"
       data-gtm-product-code="DP1.10020.001"
       href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETP"
@@ -234,7 +232,7 @@ exports[`ExternalHost BOLD getProductLinks with no arg 1`] = `null`;
 
 exports[`ExternalHost BOLD renderLink with productCode 1`] = `
 <a
-  className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+  className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
   data-gtm-external-host="BOLD"
   data-gtm-product-code="DP1.10020.001"
   href="http://www.barcodinglife.com/"
@@ -249,7 +247,7 @@ exports[`ExternalHost BOLD renderLink with productCode 1`] = `
 
 exports[`ExternalHost BOLD renderLink without productCode 1`] = `
 <a
-  className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+  className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
   data-gtm-external-host="BOLD"
   data-gtm-product-code="n/a"
   href="http://www.barcodinglife.com/"
@@ -264,7 +262,7 @@ exports[`ExternalHost BOLD renderLink without productCode 1`] = `
 
 exports[`ExternalHost BOLD renderShortLink with productCode 1`] = `
 <a
-  className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+  className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
   data-gtm-external-host="BOLD"
   data-gtm-product-code="DP1.10020.001"
   href="http://www.barcodinglife.com/"
@@ -279,7 +277,7 @@ exports[`ExternalHost BOLD renderShortLink with productCode 1`] = `
 
 exports[`ExternalHost BOLD renderShortLink without productCode 1`] = `
 <a
-  className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+  className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
   data-gtm-external-host="BOLD"
   data-gtm-product-code="n/a"
   href="http://www.barcodinglife.com/"
@@ -294,7 +292,7 @@ exports[`ExternalHost BOLD renderShortLink without productCode 1`] = `
 
 exports[`ExternalHost NPN renderLink with productCode 1`] = `
 <a
-  className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+  className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
   data-gtm-external-host="NPN"
   data-gtm-product-code="DP1.10055.001"
   href="https://www.usanpn.org/usa-national-phenology-network"
@@ -309,7 +307,7 @@ exports[`ExternalHost NPN renderLink with productCode 1`] = `
 
 exports[`ExternalHost NPN renderLink without productCode 1`] = `
 <a
-  className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+  className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
   data-gtm-external-host="NPN"
   data-gtm-product-code="n/a"
   href="https://www.usanpn.org/usa-national-phenology-network"
@@ -324,7 +322,7 @@ exports[`ExternalHost NPN renderLink without productCode 1`] = `
 
 exports[`ExternalHost NPN renderShortLink with productCode 1`] = `
 <a
-  className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+  className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
   data-gtm-external-host="NPN"
   data-gtm-product-code="DP1.10055.001"
   href="https://www.usanpn.org/usa-national-phenology-network"
@@ -339,7 +337,7 @@ exports[`ExternalHost NPN renderShortLink with productCode 1`] = `
 
 exports[`ExternalHost NPN renderShortLink without productCode 1`] = `
 <a
-  className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+  className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
   data-gtm-external-host="NPN"
   data-gtm-product-code="n/a"
   href="https://www.usanpn.org/usa-national-phenology-network"
@@ -356,7 +354,7 @@ exports[`ExternalHost PHENOCAM getSiteLink with no args 1`] = `null`;
 
 exports[`ExternalHost PHENOCAM getSiteLink with productCode 1`] = `
 <a
-  className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+  className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
   data-gtm-external-host="PHENOCAM"
   data-gtm-product-code="DP1.00033.001"
   href="https://phenocam.nau.edu/webcam/sites/NEON.D16.ABBY.DP1.00033/"
@@ -371,7 +369,7 @@ exports[`ExternalHost PHENOCAM getSiteLink with productCode 1`] = `
 
 exports[`ExternalHost PHENOCAM getSiteLink without productCode 1`] = `
 <a
-  className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+  className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
   data-gtm-external-host="PHENOCAM"
   data-gtm-product-code=""
   href="https://phenocam.nau.edu/webcam/sites/NEON.D16.ABBY./"
@@ -386,7 +384,7 @@ exports[`ExternalHost PHENOCAM getSiteLink without productCode 1`] = `
 
 exports[`ExternalHost PHENOCAM renderLink with productCode 1`] = `
 <a
-  className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+  className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
   data-gtm-external-host="PHENOCAM"
   data-gtm-product-code="DP1.00033.001"
   href="https://phenocam.nau.edu/webcam/about/"
@@ -401,7 +399,7 @@ exports[`ExternalHost PHENOCAM renderLink with productCode 1`] = `
 
 exports[`ExternalHost PHENOCAM renderLink without productCode 1`] = `
 <a
-  className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+  className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
   data-gtm-external-host="PHENOCAM"
   data-gtm-product-code="n/a"
   href="https://phenocam.nau.edu/webcam/about/"
@@ -416,7 +414,7 @@ exports[`ExternalHost PHENOCAM renderLink without productCode 1`] = `
 
 exports[`ExternalHost PHENOCAM renderShortLink with productCode 1`] = `
 <a
-  className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+  className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
   data-gtm-external-host="PHENOCAM"
   data-gtm-product-code="DP1.00033.001"
   href="https://phenocam.nau.edu/webcam/about/"
@@ -431,7 +429,7 @@ exports[`ExternalHost PHENOCAM renderShortLink with productCode 1`] = `
 
 exports[`ExternalHost PHENOCAM renderShortLink without productCode 1`] = `
 <a
-  className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+  className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
   data-gtm-external-host="PHENOCAM"
   data-gtm-product-code="n/a"
   href="https://phenocam.nau.edu/webcam/about/"

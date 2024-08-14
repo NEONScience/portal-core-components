@@ -3,6 +3,7 @@ import renderer from 'react-test-renderer';
 
 import cloneDeep from 'lodash/cloneDeep';
 
+import MockTheme from '../../../../__mocks__/MockTheme';
 import '../../../../__mocks__/NeonContext';
 import mockReactComponent from '../../../../__mocks__/mockReactComponent';
 
@@ -78,7 +79,7 @@ describe('DownloadStepForm', () => {
     .forEach((stepKey) => {
       test(`Step ${stepKey} renders correctly`, () => {
         const tree = renderer
-          .create(<DownloadStepForm stepKey={stepKey} />)
+          .create(<MockTheme><DownloadStepForm stepKey={stepKey} /></MockTheme>)
           .toJSON();
         expect(tree).toMatchSnapshot();
       });

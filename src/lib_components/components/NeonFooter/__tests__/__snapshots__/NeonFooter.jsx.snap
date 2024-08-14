@@ -2,7 +2,7 @@
 
 exports[`NeonFooter renders fallback with drupalCSSLoaded prop and error NeonContext state 1`] = `
 <footer
-  className="makeStyles-footerContainer-1"
+  className="makeStyles-footerContainer-5"
   id="footer"
 >
   <div>
@@ -23,7 +23,7 @@ exports[`NeonFooter renders with drupalCssLoaded prop and success NeonContext st
 
 exports[`NeonFooter renders with no props and active/fetching NeonContext state 1`] = `
 <footer
-  className="makeStyles-footerContainer-1"
+  className="makeStyles-footerContainer-2"
   id="footer"
 >
   <div>
@@ -34,7 +34,7 @@ exports[`NeonFooter renders with no props and active/fetching NeonContext state 
 
 exports[`NeonFooter renders with no props and error NeonContext state 1`] = `
 <footer
-  className="makeStyles-footerContainer-1"
+  className="makeStyles-footerContainer-3"
   id="footer"
 >
   <div>
@@ -56,7 +56,7 @@ exports[`NeonFooter renders with no props and inactive NeonContext state 1`] = `
 
 exports[`NeonFooter renders with no props and success NeonContext state 1`] = `
 <footer
-  className="makeStyles-footerContainer-1"
+  className="makeStyles-footerContainer-4"
   id="footer"
 >
   <div>

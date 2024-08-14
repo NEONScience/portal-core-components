@@ -2,12 +2,13 @@
 
 exports[`DownloadDataButton Automatically includes data-gtm props from product in context state 1`] = `
 <button
-  className="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-gtmCaptureButton-1 MuiButton-containedPrimary"
+  className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary makeStyles-gtmCaptureButton-20 css-r0d1wz-MuiButtonBase-root-MuiButton-root"
   data-gtm-product-code="DPX.XXXXX.XXX"
   data-selenium="download-data-button"
   disabled={false}
   onBlur={[Function]}
   onClick={[Function]}
+  onContextMenu={[Function]}
   onDragLeave={[Function]}
   onFocus={[Function]}
   onKeyDown={[Function]}
@@ -21,38 +22,36 @@ exports[`DownloadDataButton Automatically includes data-gtm props from product i
   tabIndex={0}
   type="button"
 >
+  foo
   <span
-    className="MuiButton-label"
+    className="MuiButton-icon MuiButton-endIcon MuiButton-iconSizeMedium css-yaa4uj-MuiButton-endIcon"
   >
-    foo
-    <span
-      className="MuiButton-endIcon MuiButton-iconSizeMedium"
+    <svg
+      aria-hidden={true}
+      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+      data-testid="SaveAltIcon"
+      focusable="false"
+      viewBox="0 0 24 24"
     >
-      <svg
-        aria-hidden={true}
-        className="MuiSvgIcon-root"
-        focusable="false"
-        viewBox="0 0 24 24"
-      >
-        <path
-          d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z"
-        />
-      </svg>
-    </span>
+      <path
+        d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7zm-6 .67 2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z"
+      />
+    </svg>
   </span>
   <span
-    className="MuiTouchRipple-root"
+    className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
   />
 </button>
 `;
 
 exports[`DownloadDataButton Preserves MUI button props 1`] = `
 <button
-  className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeLarge MuiButton-sizeLarge"
+  className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeLarge MuiButton-outlinedSizeLarge MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeLarge MuiButton-outlinedSizeLarge MuiButton-colorPrimary css-1h64btz-MuiButtonBase-root-MuiButton-root"
   data-selenium="download"
   disabled={false}
   onBlur={[Function]}
   onClick={[Function]}
+  onContextMenu={[Function]}
   onDragLeave={[Function]}
   onFocus={[Function]}
   onKeyDown={[Function]}
@@ -66,38 +65,36 @@ exports[`DownloadDataButton Preserves MUI button props 1`] = `
   tabIndex={0}
   type="button"
 >
+  foo
   <span
-    className="MuiButton-label"
+    className="MuiButton-icon MuiButton-endIcon MuiButton-iconSizeLarge css-1cnbqr6-MuiButton-endIcon"
   >
-    foo
-    <span
-      className="MuiButton-endIcon MuiButton-iconSizeLarge"
+    <svg
+      aria-hidden={true}
+      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+      data-testid="SaveAltIcon"
+      focusable="false"
+      viewBox="0 0 24 24"
     >
-      <svg
-        aria-hidden={true}
-        className="MuiSvgIcon-root"
-        focusable="false"
-        viewBox="0 0 24 24"
-      >
-        <path
-          d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z"
-        />
-      </svg>
-    </span>
+      <path
+        d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7zm-6 .67 2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z"
+      />
+    </svg>
   </span>
   <span
-    className="MuiTouchRipple-root"
+    className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
   />
 </button>
 `;
 
 exports[`DownloadDataButton Renders correctly with only a label 1`] = `
 <button
-  className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+  className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-r0d1wz-MuiButtonBase-root-MuiButton-root"
   data-selenium="download-data-button"
   disabled={false}
   onBlur={[Function]}
   onClick={[Function]}
+  onContextMenu={[Function]}
   onDragLeave={[Function]}
   onFocus={[Function]}
   onKeyDown={[Function]}
@@ -111,35 +108,33 @@ exports[`DownloadDataButton Renders correctly with only a label 1`] = `
   tabIndex={0}
   type="button"
 >
+  foo
   <span
-    className="MuiButton-label"
+    className="MuiButton-icon MuiButton-endIcon MuiButton-iconSizeMedium css-yaa4uj-MuiButton-endIcon"
   >
-    foo
-    <span
-      className="MuiButton-endIcon MuiButton-iconSizeMedium"
+    <svg
+      aria-hidden={true}
+      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+      data-testid="SaveAltIcon"
+      focusable="false"
+      viewBox="0 0 24 24"
     >
-      <svg
-        aria-hidden={true}
-        className="MuiSvgIcon-root"
-        focusable="false"
-        viewBox="0 0 24 24"
-      >
-        <path
-          d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z"
-        />
-      </svg>
-    </span>
+      <path
+        d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7zm-6 .67 2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z"
+      />
+    </svg>
   </span>
 </button>
 `;
 
 exports[`DownloadDataButton Renders with the dialog open from context state 1`] = `
 <button
-  className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+  className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-r0d1wz-MuiButtonBase-root-MuiButton-root"
   data-selenium="download-data-button"
   disabled={false}
   onBlur={[Function]}
   onClick={[Function]}
+  onContextMenu={[Function]}
   onDragLeave={[Function]}
   onFocus={[Function]}
   onKeyDown={[Function]}
@@ -153,24 +148,21 @@ exports[`DownloadDataButton Renders with the dialog open from context state 1`] 
   tabIndex={0}
   type="button"
 >
+  foo
   <span
-    className="MuiButton-label"
+    className="MuiButton-icon MuiButton-endIcon MuiButton-iconSizeMedium css-yaa4uj-MuiButton-endIcon"
   >
-    foo
-    <span
-      className="MuiButton-endIcon MuiButton-iconSizeMedium"
+    <svg
+      aria-hidden={true}
+      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+      data-testid="SaveAltIcon"
+      focusable="false"
+      viewBox="0 0 24 24"
     >
-      <svg
-        aria-hidden={true}
-        className="MuiSvgIcon-root"
-        focusable="false"
-        viewBox="0 0 24 24"
-      >
-        <path
-          d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z"
-        />
-      </svg>
-    </span>
+      <path
+        d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7zm-6 .67 2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z"
+      />
+    </svg>
   </span>
 </button>
 `;

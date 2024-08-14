@@ -3,6 +3,7 @@ import renderer from 'react-test-renderer';
 
 import Cookies from 'universal-cookie'; // eslint-disable-line no-unused-vars
 
+import MockTheme from '../../../../__mocks__/MockTheme';
 import mockReactComponent from '../../../../__mocks__/mockReactComponent';
 
 jest.mock('@mui/material/Snackbar', () => mockReactComponent('@mui/material/Snackbar'));
@@ -10,11 +11,10 @@ jest.mock('@mui/material/Snackbar', () => mockReactComponent('@mui/material/Snac
 // eslint-disable-next-line import/first
 import BrowserWarning from '../BrowserWarning';
 
-let mockCookieGet;
+const mockCookieGet = jest.fn();
 jest.mock('universal-cookie', () => {
-  mockCookieGet = jest.fn();
   return jest.fn().mockImplementation(() => ({
-    get: mockCookieGet,
+    get: () => mockCookieGet(),
     set: jest.fn(),
   }));
 });
@@ -35,7 +35,9 @@ describe('NeonPage - BrowserWarning', () => {
   });
   test('renders nothing if browser is not IE', () => {
     const tree = renderer.create(
-      <BrowserWarning />,
+      <MockTheme>
+        <BrowserWarning />
+      </MockTheme>
     ).toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -43,7 +45,9 @@ describe('NeonPage - BrowserWarning', () => {
     global.navigator.userAgent = 'foo MSIE qux';
     mockCookieGet.mockReturnValue(true);
     const tree = renderer.create(
-      <BrowserWarning />,
+      <MockTheme>
+        <BrowserWarning />
+      </MockTheme>
     ).toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -51,7 +55,9 @@ describe('NeonPage - BrowserWarning', () => {
     global.navigator.appVersion = 'bar Trident/qux';
     mockCookieGet.mockReturnValue(false);
     const tree = renderer.create(
-      <BrowserWarning />,
+      <MockTheme>
+        <BrowserWarning />
+      </MockTheme>
     ).toJSON();
     expect(tree).toMatchSnapshot();
   });
