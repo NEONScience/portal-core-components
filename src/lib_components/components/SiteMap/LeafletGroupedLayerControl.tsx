@@ -164,6 +164,7 @@ const LeafletGroupedLayerControl: React.FC<LeafletGroupedLayerControlProps> = (
         >
           {baseLayers.map((baseLayer: BaseLayer) => ((
             <FormControlLabel
+              key={`baselayer-${baseLayer.name}`}
               value={baseLayer.name}
               control={<Radio size="small" />}
               label={baseLayer.title}
@@ -210,6 +211,7 @@ const LeafletGroupedLayerControl: React.FC<LeafletGroupedLayerControlProps> = (
               }
               return (
                 <FormControlLabel
+                  key={`${groupTitle}-${overlay.name}`}
                   value={overlay.name}
                   control={<Radio size="small" />}
                   label={overlay.title}
@@ -218,6 +220,7 @@ const LeafletGroupedLayerControl: React.FC<LeafletGroupedLayerControlProps> = (
             }
             return (
               <FormControlLabel
+                key={`${groupTitle}-${overlay.name}`}
                 label={overlay.title}
                 control={(
                   <Checkbox
@@ -312,7 +315,7 @@ const LeafletGroupedLayerControl: React.FC<LeafletGroupedLayerControlProps> = (
         {open ? null : (
           // eslint-disable-next-line jsx-a11y/anchor-is-valid
           <Link className="rlglc-a" component="button">
-            <FontAwesomeIcon style={{ marginTop: '6px' }} size="2x" icon={faLayerGroup} />
+            <FontAwesomeIcon style={{ verticalAlign: 'middle' }} size="2x" icon={faLayerGroup} />
           </Link>
         )}
         <div
