@@ -7,7 +7,19 @@ import { useMap } from 'react-leaflet';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLayerGroup } from '@fortawesome/free-solid-svg-icons';
 
+import Checkbox from '@mui/material/Checkbox';
+import Divider from '@mui/material/Divider';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormGroup from '@mui/material/FormGroup';
+import Link from '@mui/material/Link';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import Typography from '@mui/material/Typography';
+
+import Theme from '../Theme/Theme';
 import { exists } from '../../util/typeUtil';
+import { type NeonTheme } from '../Theme/types';
 
 import './leaflet-grouped-layer-control.css';
 
@@ -41,14 +53,6 @@ export interface LeafletGroupedLayerControlProps extends ControlOptions {
   onOverlayChange?: (newOverlays: Overlay[]) => void;
 }
 
-interface ListItemProps {
-  groupName: string;
-  item: BaseLayer|Overlay;
-  type: string;
-  checked: boolean;
-  onClick: (event: React.MouseEvent<HTMLInputElement>, item: BaseLayer|Overlay) => void;
-}
-
 interface LeafletPositionClasses {
   bottomleft: string;
   bottomright: string;
@@ -66,38 +70,6 @@ const getControlClassFromPosition = (position?: ControlPosition): string => {
     return POSITION_CLASSES.topright;
   }
   return POSITION_CLASSES[position as ControlPosition];
-};
-
-const ListItem: React.FC<ListItemProps> = (props: ListItemProps): React.JSX.Element => {
-  const {
-    groupName,
-    item,
-    type,
-    checked,
-    onClick,
-  } = props;
-  const handleOnClick = (event: React.MouseEvent<HTMLInputElement>): void => {
-    if ((type === 'radio') && !checked) {
-      onClick(event, item);
-    } else {
-      onClick(event, item);
-    }
-  };
-  return (
-    <label htmlFor={item.name} className="rlglc-option">
-      <input
-        id={item.name}
-        value={item.name}
-        name={groupName}
-        className="rlglc-input"
-        type={type}
-        checked={checked}
-        readOnly
-        onClick={handleOnClick || (() => {})}
-      />
-      <span className="rlglc-title">{item.title}</span>
-    </label>
-  );
 };
 
 const LeafletGroupedLayerControl: React.FC<LeafletGroupedLayerControlProps> = (
@@ -126,23 +98,21 @@ const LeafletGroupedLayerControl: React.FC<LeafletGroupedLayerControlProps> = (
   const handleMainDivMouseLeave = () => {
     setOpen(false);
   };
-  const handleBaseLayerChange = (
-    event: React.MouseEvent<HTMLInputElement>,
-    layer: BaseLayer,
-  ): void => {
+  const handleBaseLayerChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     if (onBaseLayerChange) {
-      onBaseLayerChange(layer.name);
+      onBaseLayerChange((event.target as HTMLInputElement).value);
     }
   };
   const handleOverlayChanged = (
-    event: React.MouseEvent<HTMLInputElement>,
+    event: React.ChangeEvent<HTMLInputElement>,
     selectedOverlay: Overlay,
+    selectedGroup: string,
     exclusive: GroupExclusiveType,
   ) => {
     const targetElement = (event.target as HTMLInputElement);
     const isExclusive = (exclusive === 'exclusive');
     const newOverlays: Overlay[] = (overlays || []).map((overlay) => {
-      const groupMatches = (overlay.groupTitle === targetElement.name);
+      const groupMatches = (overlay.groupTitle === selectedGroup);
       const nameMatchesSelected = (overlay.name === selectedOverlay.name);
       const determineChecked = isExclusive
         ? groupMatches
@@ -175,20 +145,32 @@ const LeafletGroupedLayerControl: React.FC<LeafletGroupedLayerControlProps> = (
 
   const renderBaseLayerGroup = () => ((
     <div key="baselayer" className="rlglc-group">
-      <span key="title-baselayer" className="rlglc-grouptitle">
+      <Typography key="title-baselayer" className="rlglc-groupTitle" variant="h6">
         Base Layers
-      </span>
-      {baseLayers.map((baseLayer: BaseLayer, index: number) => ((
-        <ListItem
-          // eslint-disable-next-line react/no-array-index-key
-          key={`${baseLayer.name}-${index}`}
-          type="radio"
-          groupName="baselayer"
-          item={baseLayer}
-          checked={(baseLayer.name === checkedBaseLayer)}
-          onClick={handleBaseLayerChange}
-        />
-      )))}
+      </Typography>
+      <FormControl
+        fullWidth
+        size="small"
+        margin="dense"
+        style={{
+          marginTop: '4px',
+          marginBottom: '0px',
+        }}
+      >
+        <RadioGroup
+          name="baselayer"
+          value={checkedBaseLayer}
+          onChange={handleBaseLayerChange}
+        >
+          {baseLayers.map((baseLayer: BaseLayer) => ((
+            <FormControlLabel
+              value={baseLayer.name}
+              control={<Radio size="small" />}
+              label={baseLayer.title}
+            />
+          )))}
+        </RadioGroup>
+      </FormControl>
     </div>
   ));
 
@@ -219,28 +201,83 @@ const LeafletGroupedLayerControl: React.FC<LeafletGroupedLayerControlProps> = (
         const { groupItems } = groups[groupTitle];
         const isExclusiveGroup = exclusiveGroups && exclusiveGroups.includes(groupTitle);
         const exclusiveParam = isExclusiveGroup ? 'exclusive' : 'nonExclusive';
-        const listItemType = isExclusiveGroup ? 'radio' : 'checkbox';
+        let selectedOverlay: Overlay;
         const groupElements: React.ReactNode[] = groupItems.map(
-          (overlay: Overlay, index: number): React.ReactNode => ((
-            <ListItem
-              // eslint-disable-next-line react/no-array-index-key
-              key={`${groupTitle}=${overlay.name}-${index}`}
-              type={listItemType}
-              groupName={groupTitle}
-              item={overlay}
-              checked={overlay.checked}
-              onClick={(event, item) => (
-                handleOverlayChanged(event, item as Overlay, exclusiveParam)
-              )}
-            />
-          )),
+          (overlay: Overlay): React.ReactNode => {
+            if (isExclusiveGroup) {
+              if (overlay.checked) {
+                selectedOverlay = overlay;
+              }
+              return (
+                <FormControlLabel
+                  value={overlay.name}
+                  control={<Radio size="small" />}
+                  label={overlay.title}
+                />
+              );
+            }
+            return (
+              <FormControlLabel
+                label={overlay.title}
+                control={(
+                  <Checkbox
+                    size="small"
+                    checked={overlay.checked}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>): void => {
+                      handleOverlayChanged(event, overlay, groupTitle, exclusiveParam);
+                    }}
+                  />
+                )}
+              />
+            );
+          },
         );
+        const renderControlGroup = () => {
+          if (isExclusiveGroup) {
+            return (
+              <FormControl
+                fullWidth
+                size="small"
+                margin="dense"
+                style={{
+                  marginTop: '4px',
+                  marginBottom: '0px',
+                }}
+              >
+                <RadioGroup
+                  name={groupTitle}
+                  value={selectedOverlay?.name || null}
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>): void => {
+                    const nextSelected = groupItems.find((overlay: Overlay) => (
+                      overlay.name === (event.target as HTMLInputElement).value
+                    ));
+                    if (nextSelected) {
+                      handleOverlayChanged(event, nextSelected, groupTitle, exclusiveParam);
+                    }
+                  }}
+                >
+                  {groupElements}
+                </RadioGroup>
+              </FormControl>
+            );
+          }
+          return (
+            <FormGroup
+              style={{
+                marginTop: '4px',
+                marginBottom: '0px',
+              }}
+            >
+              {groupElements}
+            </FormGroup>
+          );
+        };
         const groupContainer = (
           <div key={groupTitle} className="rlglc-group">
-            <span key={`title-${groupTitle}`} className="rlglc-grouptitle">
+            <Typography key={`title-${groupTitle}`} className="rlglc-groupTitle" variant="h6">
               {groupTitle}
-            </span>
-            {groupElements}
+            </Typography>
+            {renderControlGroup()}
           </div>
         );
         return [...groupNodes, groupContainer];
@@ -249,7 +286,7 @@ const LeafletGroupedLayerControl: React.FC<LeafletGroupedLayerControlProps> = (
     );
     return (
       <>
-        <div className="rlglc-seperator" />
+        <Divider style={{ margin: '10px 0px' }} />
         {renderedGroups}
       </>
     );
@@ -258,24 +295,33 @@ const LeafletGroupedLayerControl: React.FC<LeafletGroupedLayerControlProps> = (
   const containerNode = map.getContainer();
   const portalNodes: HTMLCollectionOf<Element> = containerNode.getElementsByClassName(controlPositionClass);
   const hasPortalNode = exists(portalNodes) && (portalNodes.length > 0) && exists(portalNodes[0]);
+  const borderStyle = open
+    ? `1px solid ${Theme.palette.grey[300]}`
+    : `1px solid ${(Theme as NeonTheme).colors.LIGHT_BLUE[500]}`;
   const renderContent = (): React.ReactNode => ((
     <div className="rlglc-wrap leaflet-control">
       <div
         ref={divRef}
         className={`rlglc${open ? ' rlglc-active' : ''}`}
+        style={{
+          border: borderStyle,
+        }}
         onMouseEnter={handleMainDivMouseEnter}
         onMouseLeave={handleMainDivMouseLeave}
       >
-        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-        <a className="rlglc-a">
-          {open ? null : (
+        {open ? null : (
+          // eslint-disable-next-line jsx-a11y/anchor-is-valid
+          <Link className="rlglc-a" component="button">
             <FontAwesomeIcon style={{ marginTop: '6px' }} size="2x" icon={faLayerGroup} />
-          )}
-          <div className={open ? 'rlglc-open' : 'rlglc-close'}>
-            {renderBaseLayerGroup()}
-            {renderOverlayGroups()}
-          </div>
-        </a>
+          </Link>
+        )}
+        <div
+          className={open ? 'rlglc-controls rlglc-open' : 'rlglc-controls rlglc-close'}
+          style={{ padding: Theme.spacing(2) }}
+        >
+          {renderBaseLayerGroup()}
+          {renderOverlayGroups()}
+        </div>
       </div>
     </div>
   ));
