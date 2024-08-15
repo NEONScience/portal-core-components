@@ -68,43 +68,6 @@ const useStyles = makeStyles((theme) => ({
     height: '0px', // Necessary to set a fixed aspect ratio from props (using paddingBottom)
     overflow: 'hidden',
     background: theme.palette.grey[50],
-    '& div.rlglc-wrap': {
-      boxShadow: 'unset',
-      margin: '0px',
-      left: '8px',
-      top: '8px',
-      '& .rlglc': {
-        border: `1px solid ${Theme.colors.LIGHT_BLUE[500]}`,
-        borderRadius: '2px',
-      },
-      '& .rlglc-active': {
-        border: `1px solid ${Theme.palette.grey[300]}`,
-      },
-      '& .rlglc:not(.rlglc-active) .rlglc-a': {
-        width: '36px',
-        height: '36px !important',
-      },
-      '& .rlglc.rlglc-active .rlglc-a': {
-        width: 'auto !important',
-        height: 'auto !important',
-        padding: '12px',
-      },
-      '& .rlglc-open': {
-        '& .rlglc-input': {
-          width: '14px',
-          height: '14px',
-          margin: '3px 0px 0px 0px',
-          cursor: 'pointer',
-        },
-        '& .rlglc-title': {
-          fontFamily: '"Inter",Helvetica,Arial,sans-serif',
-        },
-        '& .rlglc-groupTitle': {
-          fontFamily: '"Inter",Helvetica,Arial,sans-serif',
-          fontSize: '13px',
-        },
-      },
-    },
     '& div.leaflet-control-zoom': {
       border: 'none',
     },
