@@ -60,6 +60,8 @@
     "react/jsx-props-no-spreading": 0,
     "react/no-unknown-property": ["error", { "ignore": ["css"] }],
     "react/require-default-props": "off",
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
     "max-len": "off",
     "no-restricted-exports": 0,
     "no-shadow": "off",
