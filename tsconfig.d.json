@@ -7,6 +7,7 @@
     "noEmit": false,
     "emitDeclarationOnly": true,
     "newLine": "lf",
+    "incremental": false,
     "types": [
       "node",
       "@types/wicg-file-system-access"
@@ -28,7 +29,7 @@
   "exclude": [
     "./src/**/StyleGuide.*",
     "./src/components/*",
-    "./src/components/app/*",
+    "./src/app/*",
     "./src/lib_components/remoteAssets/*",
     "./src/lib_components/vendor/**/*",
     "./src/favicon/*",

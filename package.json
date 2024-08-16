@@ -156,7 +156,7 @@
     "lint": "(npx eslint src/ --ext .js,.jsx,.ts,.tsx || true) && exit 0",
     "lint:fix": "(npx eslint --fix src/ --ext .js,.jsx,.ts,.tsx || true) && exit 0",
     "lib": "npm run lib:pre-process && npm run lib:babel-build && npm run lib:types && npm run lib:post-cleanup",
-    "lib:babel-build": "NODE_ENV=production && babel ./src/lib_components --out-dir lib --extensions \".js,.jsx,.ts,.tsx\" --copy-files --no-copy-ignored",
+    "lib:babel-build": "NODE_ENV=production && babel ./src/lib_components --config-file ./babel.config.json --out-dir lib --extensions \".js,.jsx,.ts,.tsx\" --copy-files --no-copy-ignored",
     "lib:clean": "(rm -r ./lib || true) && (rm -r ./src/lib_components/remoteAssets/* || true)",
     "lib:clean-build": "npm run lib:clean && npm run lib",
     "lib:types": "npx tsc --project tsconfig.d.json",
