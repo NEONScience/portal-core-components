@@ -35,22 +35,20 @@
   },
   "include": [
     "./src/**/*",
-    "next-env.d.ts",
-    "mui-env.d.ts",
+    "./src/*.d.ts",
+    "./next-env.d.ts",
+    "./next.config.mjs",
+    "./scripts/**/*",
+    "./test/**/*",
+    "./jest.config.mjs",
+    "./server.mjs",
     ".next/types/**/*.ts",
     "build/types/**/*.ts"
   ],
   "exclude": [
-    "src/**/*.d.ts",
-    "node_modules",
-    "dist",
-    "test",
-    "build",
-    "lib",
-    "scripts",
-    "acceptance-tests",
-    "webpack",
-    "jest",
-    "src/setupTests.ts"
+    "./src/lib_components/**/*.d.ts",
+    "./node_modules",
+    "./lib",
+    "./test-coverage"
   ]
 }

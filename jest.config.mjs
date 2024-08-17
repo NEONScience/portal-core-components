@@ -28,7 +28,7 @@ const modulesToTransform = [
   'unist-util-.+',
   'markdown-.+',
   'ccount',
-  'd3-[a-z]+'
+  'd3-[a-z]+',
 ].join('|');
 
 const fileTypesToMockTransform = [
@@ -49,10 +49,11 @@ const fileTypesToMockTransform = [
   'mp3',
   'm4a',
   'aac',
-  'oga'
+  'oga',
 ].join('|');
 
-module.exports = {
+/** @type {import('jest').Config} */
+const jestConfig = {
   verbose: true,
   testEnvironment: '<rootDir>/test/jest-environment.js',
   roots: [
@@ -66,12 +67,12 @@ module.exports = {
     '\\.(svg)$': '<rootDir>/src/__mocks__/svgMock.js',
   },
   transform: {
-    '\\.(js|jsx|ts|tsx)$': ["babel-jest", { "configFile": "./test/babel.config.test.json" }],
-    ['\\.(' + fileTypesToMockTransform + ')$']: '<rootDir>/src/__mocks__/fileTransformer.js',
+    '\\.(js|jsx|ts|tsx)$': ['babel-jest', { configFile: './test/babel.config.test.json' }],
+    [`\\.(${fileTypesToMockTransform} )$`]: '<rootDir>/src/__mocks__/fileTransformer.js',
   },
   // Transform modules that are in ES6 format.
   transformIgnorePatterns: [
-    "node_modules/(?!(" + modulesToTransform + ")/)",
+    `node_modules/(?!(${modulesToTransform})/)`,
   ],
   globalSetup: '<rootDir>/test/jest-global-setup.js',
   setupFiles: [
@@ -112,3 +113,5 @@ module.exports = {
     'StyleGuide',
   ],
 };
+
+export default jestConfig;

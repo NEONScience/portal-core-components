@@ -27,6 +27,11 @@
     "./src/lib_components/*.tsx"
   ],
   "exclude": [
+    "./scripts",
+    "./test",
+    "./node_modules",
+    "./lib",
+    "./test-coverage",
     "./src/**/StyleGuide.*",
     "./src/components/*",
     "./src/app/*",

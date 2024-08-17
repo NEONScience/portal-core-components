@@ -1,14 +1,4 @@
-'use strict';
-
-process.env.NODE_ENV = 'DEVELOPMENT';
-
-// Makes the script crash on unhandled rejections instead of silently
-// ignoring them. In the future, promise rejections that are not handled will
-// terminate the Node.js process with a non-zero exit code.
-process.on('unhandledRejection', err => {
-  throw err;
-});
-
+/* eslint-disable no-console */
 import fs from 'fs';
 import readline from 'readline';
 import path, { dirname } from 'path';
@@ -17,6 +7,15 @@ import { Command } from 'commander';
 import { fileURLToPath } from 'url';
 
 import packageJson from '../package.json' with { type: 'json' };
+
+process.env.NODE_ENV = 'DEVELOPMENT';
+
+// Makes the script crash on unhandled rejections instead of silently
+// ignoring them. In the future, promise rejections that are not handled will
+// terminate the Node.js process with a non-zero exit code.
+process.on('unhandledRejection', (err) => {
+  throw err;
+});
 
 const program = new Command();
 program.usage('Usage: node sync-assets.js [options]')
@@ -51,9 +50,9 @@ if ((config.cwdRelativeAppDirPath === null)
   process.exit(9);
 }
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const fileDirName = dirname(fileURLToPath(import.meta.url));
 
-const CORE_COMPONENTS_PUBLIC_CSS_ASSETS_PATH = path.join(__dirname, '../public/assets/css');
+const CORE_COMPONENTS_PUBLIC_CSS_ASSETS_PATH = path.join(fileDirName, '../public/assets/css');
 
 const PUBLIC_OUTPUT_PATH = path.join(process.cwd(), config.cwdRelativePublicDirPath);
 const APP_OUTPUT_PATH = path.join(process.cwd(), config.cwdRelativeAppDirPath);
@@ -112,6 +111,7 @@ const syncCssAssets = () => {
             crlfDelay: Infinity,
           });
           const lines = [];
+          // eslint-disable-next-line no-restricted-syntax
           for await (const line of rl) {
             if (line.startsWith(APP_FILE_LINE_REPLACE)) {
               const updatedHashLine = `${APP_FILE_LINE_REPLACE} '${fileNameHash}';`;

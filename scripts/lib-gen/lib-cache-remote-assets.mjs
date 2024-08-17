@@ -1,14 +1,5 @@
-'use strict';
-
-process.env.NODE_ENV = 'DEVELOPMENT';
-
-// Makes the script crash on unhandled rejections instead of silently
-// ignoring them. In the future, promise rejections that are not handled will
-// terminate the Node.js process with a non-zero exit code.
-process.on('unhandledRejection', err => {
-  throw err;
-});
-
+/* eslint-disable no-case-declarations */
+/* eslint-disable no-console */
 import fs from 'fs';
 import readline from 'readline';
 import fetch from 'node-fetch';
@@ -22,7 +13,16 @@ import { fileURLToPath } from 'url';
 
 import packageJson from '../../package.json' with { type: 'json' };
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+process.env.NODE_ENV = 'DEVELOPMENT';
+
+// Makes the script crash on unhandled rejections instead of silently
+// ignoring them. In the future, promise rejections that are not handled will
+// terminate the Node.js process with a non-zero exit code.
+process.on('unhandledRejection', (err) => {
+  throw err;
+});
+
+const fileDirName = dirname(fileURLToPath(import.meta.url));
 
 const program = new Command();
 program.usage('Usage: node lib-cache-remote-assets.js [options]')
@@ -64,10 +64,10 @@ program.usage('Usage: node lib-cache-remote-assets.js [options]')
 program.parse(process.argv);
 const config = program.opts();
 
-let CACHED_REMOTE_ASSETS_PATH = path.join(__dirname, '../../src/lib_components/remoteAssets');
-let PUBLIC_OUTPUT_PATH = path.join(__dirname, '../../public');
-let APP_OUTPUT_PATH = path.join(__dirname, '../../src/app');
+let CACHED_REMOTE_ASSETS_PATH = path.join(fileDirName, '../../src/lib_components/remoteAssets');
+let PUBLIC_OUTPUT_PATH = path.join(fileDirName, '../../public');
 let PUBLIC_ASSETS_CSS_OUTPUT_PATH = path.join(PUBLIC_OUTPUT_PATH, 'assets/css');
+const APP_OUTPUT_PATH = path.join(fileDirName, '../../src/app');
 
 const APP_FILE_LINE_REPLACE = 'const DRUPAL_THEME_CSS_ASSET_HASH =';
 
@@ -149,10 +149,11 @@ console.log('Caching remote assets...\n');
 const fetches = [];
 
 const sanitizeContent = (key, content) => {
+  let workingContent = content;
   switch (key) {
     // DRUPAL_THEME_CSS - comment out all styles with relative path URLs (these will always fail)
     case REMOTE_ASSETS_CACHE.DRUPAL_THEME_CSS.KEY:
-      (content.match(/^(.*url\(["']((?!data|https)).*)$/mg) || []).forEach((match) => {
+      (workingContent.match(/^(.*url\(["']((?!data|https)).*)$/mg) || []).forEach((match) => {
         let shouldCommentMatch = true;
         if (config.cssReplaceRelativeUrls) {
           const relativeUrlRegex = /(?<relative>url\(["'](?<relativePathSegments>\.\.\/\.\.\/\.\.\/\.\.\/|\.\.\/\.\.\/\.\.\/|\.\.\/\.\.\/|\.\.\/)(?<path>images\/.+)["']\))/;
@@ -166,7 +167,7 @@ const sanitizeContent = (key, content) => {
             const replaceRelative = matchesRelative.groups?.relative;
             const replaceRelativePath = matchesRelative.groups?.path;
             const replaceWith = `url("${WEB_HOST_URL}/themes/custom/neon/${replaceRelativePath}")`;
-            content = content.replace(replaceRelative, replaceWith);
+            workingContent = workingContent.replace(replaceRelative, replaceWith);
             shouldCommentMatch = false;
           }
         }
@@ -174,10 +175,10 @@ const sanitizeContent = (key, content) => {
           const replacement = match.endsWith('}')
             ? `/* ${match.slice(0, -1)} */ }`
             : `/* ${match} */`;
-          content = content.replace(match, replacement);
+          workingContent = workingContent.replace(match, replacement);
         }
       });
-      return content;
+      return workingContent;
     // HTML files - convert to JS module that exports a string of the HTML content
     // We do this so that apps consuming portal-core-components don't need to configure html-loader
     case REMOTE_ASSETS_CACHE.DRUPAL_HEADER_HTML.KEY:
@@ -186,10 +187,10 @@ const sanitizeContent = (key, content) => {
       // by escaping any backticks, ignore already escaped backticks,
       // and only matching on even number of backslashes prior to backtick
       // as those would produce strings that are not properly escaped.
-      content = content.replace(/(?<!\\)(?:\\\\)*`/g, '\\`');
-      return `let html;\nexport default html = \`${content}\`;`;
+      workingContent = workingContent.replace(/(?<!\\)(?:\\\\)*`/g, '\\`');
+      return `let html;\nexport default html = \`${workingContent}\`;`;
     default:
-      return content;
+      return workingContent;
   }
 };
 
@@ -281,6 +282,7 @@ const writeContent = async (key, content, fileNameResult) => {
           crlfDelay: Infinity,
         });
         const lines = [];
+        // eslint-disable-next-line no-restricted-syntax
         for await (const line of rl) {
           if (line.startsWith(APP_FILE_LINE_REPLACE)) {
             const updatedHashLine = `${APP_FILE_LINE_REPLACE} '${fileNameResult.hash}';`;
@@ -358,11 +360,11 @@ Object.keys(REMOTE_ASSETS_CACHE)
         }
         return res.text();
       })
-      .then((res) => {
-        return new Promise((resolve, reject) => {
+      .then((res) => (
+        new Promise((resolve, reject) => {
           processContent(key, name, res, resolve);
-        });
-      })
+        })
+      ))
       .catch((error) => {
         console.log(`* Failed: ${name} -- ${error}`);
       });
@@ -371,6 +373,6 @@ Object.keys(REMOTE_ASSETS_CACHE)
 
 Promise.allSettled(fetches).then((results) => {
   const total = results.length;
-  const completed = results.filter(res => res.value).length;
+  const completed = results.filter((res) => res.value).length;
   console.log(`\nCached ${completed}/${total} remote assets.\n`);
 });
