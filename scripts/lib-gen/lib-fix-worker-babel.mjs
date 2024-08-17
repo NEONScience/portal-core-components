@@ -1,20 +1,18 @@
-'use strict';
+/* eslint-disable no-console */
+import fs from 'fs';
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
 process.env.NODE_ENV = 'DEVELOPMENT';
 
 // Makes the script crash on unhandled rejections instead of silently
 // ignoring them. In the future, promise rejections that are not handled will
 // terminate the Node.js process with a non-zero exit code.
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
   throw err;
 });
 
-import fs from 'fs';
-import path, { dirname } from 'path';
-import { fileURLToPath } from 'url';
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
+const fileDirName = dirname(fileURLToPath(import.meta.url));
 const WORKERS_PATH = '../../lib/workers/';
 
 /**
@@ -32,11 +30,11 @@ const WORKERS_PATH = '../../lib/workers/';
 
 console.log('Adjusting babel polyfills for workers...');
 
-const workers = fs.readdirSync(path.resolve(__dirname, WORKERS_PATH));
+const workers = fs.readdirSync(path.resolve(fileDirName, WORKERS_PATH));
 workers.forEach((worker) => {
   // Only look at .js files
   if (!/\.js$/.test(worker)) { return; }
-  const uri = path.resolve(__dirname, WORKERS_PATH, worker);
+  const uri = path.resolve(fileDirName, WORKERS_PATH, worker);
   const inSource = fs.readFileSync(uri, 'utf8');
   let workerEntered = false;
   const preLines = [];
@@ -52,7 +50,7 @@ workers.forEach((worker) => {
     // Store lines before entering the worker and note when we do enter it
     if (!workerEntered) {
       preLines.push(line);
-      if (/^\s*return [_a-zA-Z0-9]+\.spawn\((?<funcDef>function \(.*\)|.+ \=\>) \{$/.test(line)) {
+      if (/^\s*return [_a-zA-Z0-9]+\.spawn\((?<funcDef>function \(.*\)|.+ =>) \{$/.test(line)) {
         workerEntered = true;
       }
       return;

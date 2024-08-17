@@ -23,20 +23,16 @@
     }
   },
   "ignorePatterns": [
-    "src/registerServiceWorker.js",
-    "src/lib_components/components/**/*.d.ts",
+    "src/lib_components/**/*.d.ts",
     "src/lib_components/remoteAssets",
     "src/lib_components/vendor/",
-    "src/*.d.ts",
     "src/**/__tests__",
     "src/**/__mocks__",
     "lib/",
-    "test/",
-    "scripts/*.js",
-    "config/",
-    "jest.config.js",
-    "server.js",
-    "next.config.*"
+    ".next/",
+    "build/",
+    "node_modules/",
+    "test-coverage/"
   ],
   "rules": {
     "@next/next/no-img-element": "off",
