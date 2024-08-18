@@ -6,14 +6,14 @@ import { makeStyles } from '@mui/styles';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 
-import DocBlock from '../../../components/DocBlock';
-import CodeBlock from '../../../components/CodeBlock';
-
-import Theme from '../Theme/Theme';
+import Theme from '@/components/Theme/Theme';
 import NeonEnvironment, {
   requiredEnvironmentVars,
   optionalEnvironmentVars,
-} from './NeonEnvironment';
+} from '@/components/NeonEnvironment/NeonEnvironment';
+
+import DocBlock from '../../../components/DocBlock';
+import CodeBlock from '../../../components/CodeBlock';
 
 const useStyles = makeStyles((theme) => ({
   divider: {

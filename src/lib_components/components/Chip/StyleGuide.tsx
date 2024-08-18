@@ -5,15 +5,14 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import { makeStyles } from '@mui/styles';
 
+import ReleaseChip from '@/components/Chip/ReleaseChip';
+import Theme from '@/components/Theme/Theme';
+import { NeonTheme } from '@/components/Theme/types';
+
 import CodeBlock from '../../../components/CodeBlock';
 import DocBlock from '../../../components/DocBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 import PropsTable from '../../../components/PropsTable';
-
-import ReleaseChip from './ReleaseChip';
-import Theme from '../Theme/Theme';
-
-import { NeonTheme } from '../Theme/types';
 
 const useStyles = makeStyles((theme: NeonTheme) => ({
   divider: {

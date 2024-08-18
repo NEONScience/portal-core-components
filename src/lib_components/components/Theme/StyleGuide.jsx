@@ -6,11 +6,10 @@ import Link from '@mui/material/Link';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 
+import Theme from '@/components/Theme/Theme';
+
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
-// import ExampleBlock from '../../../components/ExampleBlock';
-
-import Theme from './Theme';
 
 const useStyles = makeStyles((theme) => ({
   divider: {

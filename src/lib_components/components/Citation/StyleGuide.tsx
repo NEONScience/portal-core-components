@@ -20,36 +20,36 @@ import Grid from '@mui/material/Grid';
 import MenuItem from '@mui/material/MenuItem';
 import Paper from '@mui/material/Paper';
 import Select from '@mui/material/Select';
-import Skeleton from '@mui/lab/Skeleton';
+import Skeleton from '@mui/material/Skeleton';
 import Typography from '@mui/material/Typography';
 import { makeStyles } from '@mui/styles';
+
+import ActionCreator from '@/components/Citation/DataProductCitation/Actions';
+import ComponentErrorBoundary from '@/components/Error/ComponentErrorBoundary';
+import DataProductCitation from '@/components/Citation/DataProductCitation';
+import DataProductCitationContext from '@/components/Citation/DataProductCitation/Context';
+import DataProductCitationService from '@/components/Citation/DataProductCitation/Service';
+import DataProductCitationView from '@/components/Citation/DataProductCitation/View';
+import NeonApi from '@/components/NeonApi';
+import NeonContext from '@/components/NeonContext/NeonContext';
+import NeonGraphQL from '@/components/NeonGraphQL/NeonGraphQL';
+import ReleaseFilter from '@/components/ReleaseFilter/ReleaseFilter';
+import ReleaseService from '@/service/ReleaseService';
+import Theme from '@/components/Theme/Theme';
+import { Release } from '@/types/internal';
+import { exists, existsNonEmpty, isStringNonEmpty } from '@/util/typeUtil';
+import {
+  DataProductCitationItem,
+  DataProductCitationViewProps,
+  DataProductCitationViewState,
+} from '@/components/Citation/DataProductCitation/ViewState';
+import { Nullable } from '@/types/core';
+import { CitationRelease } from '@/components/Citation/DataProductCitation/State';
 
 import CodeBlock from '../../../components/CodeBlock';
 import DocBlock from '../../../components/DocBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 import PropsTable from '../../../components/PropsTable';
-
-import ActionCreator from './DataProductCitation/Actions';
-import ComponentErrorBoundary from '../Error/ComponentErrorBoundary';
-import DataProductCitation from './DataProductCitation';
-import DataProductCitationContext from './DataProductCitation/Context';
-import DataProductCitationService from './DataProductCitation/Service';
-import DataProductCitationView from './DataProductCitation/View';
-import NeonApi from '../NeonApi';
-import NeonContext from '../NeonContext/NeonContext';
-import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
-import ReleaseFilter from '../ReleaseFilter/ReleaseFilter';
-import ReleaseService from '../../service/ReleaseService';
-import Theme from '../Theme/Theme';
-import { Release } from '../../types/internal';
-import { exists, existsNonEmpty, isStringNonEmpty } from '../../util/typeUtil';
-import {
-  DataProductCitationItem,
-  DataProductCitationViewProps,
-  DataProductCitationViewState,
-} from './DataProductCitation/ViewState';
-import { Nullable } from '../../types/core';
-import { CitationRelease } from './DataProductCitation/State';
 
 const useStyles = makeStyles((theme) => ({
   divider: {

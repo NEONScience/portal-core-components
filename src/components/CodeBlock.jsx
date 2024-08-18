@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
 
-import SyntaxHighlight from '../lib_components/components/SyntaxHighlight';
-import Theme from '../lib_components/components/Theme/Theme';
+import SyntaxHighlight from '@/components/SyntaxHighlight';
+import Theme from '@/components/Theme/Theme';
 
 import 'highlight.js/styles/github-dark-dimmed.css';
 

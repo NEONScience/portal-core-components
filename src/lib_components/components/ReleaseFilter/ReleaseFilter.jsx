@@ -16,7 +16,7 @@ import Select from '@mui/material/Select';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 
-import Skeleton from '@mui/lab/Skeleton';
+import Skeleton from '@mui/material/Skeleton';
 
 import CopyIcon from '@mui/icons-material/Assignment';
 import InfoIcon from '@mui/icons-material/InfoOutlined';

@@ -1,16 +1,16 @@
 import React, { Suspense } from 'react';
 
 import Grid from '@mui/material/Grid';
-import Skeleton from '@mui/lab/Skeleton';
+import Skeleton from '@mui/material/Skeleton';
 import HomeIcon from '@mui/icons-material/Home';
 import BasicComponentsIcon from '@mui/icons-material/ViewModule';
 
-import NeonPage from './lib_components/components/NeonPage/NeonPage';
-import NeonRouter from './lib_components/components/NeonRouter/NeonRouter';
+import NeonPage from '@/components/NeonPage/NeonPage';
+import NeonRouter from '@/components/NeonRouter/NeonRouter';
+import NeonEnvironment from '@/components/NeonEnvironment/NeonEnvironment';
+import { isStringNonEmpty } from '@/util/typeUtil';
 
 import Home from './components/Home';
-import NeonEnvironment from './lib_components/components/NeonEnvironment/NeonEnvironment';
-import { isStringNonEmpty } from './lib_components/util/typeUtil';
 
 const BasicComponents = React.lazy(
   () => import('./components/BasicComponents'),

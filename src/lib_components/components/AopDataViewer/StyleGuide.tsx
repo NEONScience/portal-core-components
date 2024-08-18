@@ -14,17 +14,17 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Typography from '@mui/material/Typography';
 
-import Skeleton from '@mui/lab/Skeleton';
+import Skeleton from '@mui/material/Skeleton';
+
+import AopDataViewer from '@/components/AopDataViewer/AopDataViewer';
+import DialogBase from '@/components/DialogBase/DialogBase';
+import NeonEnvironment from '@/components/NeonEnvironment';
+import Theme from '@/components/Theme/Theme';
+import { exists } from '@/util/typeUtil';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
-
-import AopDataViewer from './AopDataViewer';
-import DialogBase from '../DialogBase/DialogBase';
-import NeonEnvironment from '../NeonEnvironment';
-import Theme from '../Theme/Theme';
-import { exists } from '../../util/typeUtil';
 
 const useStyles = makeStyles((theme) => ({
   divider: {

@@ -10,13 +10,13 @@ import Paper from '@mui/material/Paper';
 import Select from '@mui/material/Select';
 import Typography from '@mui/material/Typography';
 
+import DataProductAvailability from '@/components/DataProductAvailability/DataProductAvailability';
+import DownloadDataContext from '@/components/DownloadDataContext/DownloadDataContext';
+import Theme from '@/components/Theme/Theme';
+
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
-
-import DataProductAvailability from './DataProductAvailability';
-import DownloadDataContext from '../DownloadDataContext/DownloadDataContext';
-import Theme from '../Theme/Theme';
 
 import sampleProductData from '../../../sampleData/DP1.00001.001.json';
 import sampleSiteData from '../../../sampleData/CPER.json';

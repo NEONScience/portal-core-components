@@ -7,13 +7,12 @@ import Divider from '@mui/material/Divider';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 
+import Theme from '@/components/Theme/Theme';
+import ExternalHostInfo from '@/components/ExternalHostInfo/ExternalHostInfo';
+
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
-
-import Theme from '../Theme/Theme';
-
-import ExternalHostInfo from './ExternalHostInfo';
 
 const useStyles = makeStyles((theme) => ({
   divider: {

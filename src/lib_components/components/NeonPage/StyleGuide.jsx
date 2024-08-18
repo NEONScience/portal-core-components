@@ -9,15 +9,15 @@ import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
-import Skeleton from '@mui/lab/Skeleton';
+import Skeleton from '@mui/material/Skeleton';
+
+import NeonPage from '@/components/NeonPage/NeonPage';
+import Theme from '@/components/Theme/Theme';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 import PropsTable from '../../../components/PropsTable';
-
-import NeonPage from './NeonPage';
-import Theme from '../Theme/Theme';
 
 const useStyles = makeStyles((theme) => ({
   divider: {

@@ -6,10 +6,10 @@ import Link from '@mui/material/Link';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 
-import DocBlock from './DocBlock';
+import NeonEnvironment from '@/components/NeonEnvironment/NeonEnvironment';
+import Theme from '@/components/Theme/Theme';
 
-import NeonEnvironment from '../lib_components/components/NeonEnvironment/NeonEnvironment';
-import Theme from '../lib_components/components/Theme/Theme';
+import DocBlock from './DocBlock';
 
 const useStyles = makeStyles((theme) => ({
   divider: {

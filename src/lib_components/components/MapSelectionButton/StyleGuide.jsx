@@ -6,16 +6,14 @@ import Link from '@mui/material/Link';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 
+import { FEATURE_TYPES } from '@/components/SiteMap/SiteMapUtils';
+import MapSelectionButton from '@/components/MapSelectionButton/MapSelectionButton';
+import Theme from '@/components/Theme/Theme';
+
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 import PropsTable from '../../../components/PropsTable';
-
-import { FEATURE_TYPES } from '../SiteMap/SiteMapUtils';
-
-import MapSelectionButton from './MapSelectionButton';
-
-import Theme from '../Theme/Theme';
 
 const useStyles = makeStyles((theme) => ({
   divider: {

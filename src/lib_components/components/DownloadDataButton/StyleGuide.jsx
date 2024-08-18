@@ -6,14 +6,13 @@ import Link from '@mui/material/Link';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 
+import DownloadDataButton from '@/components/DownloadDataButton/DownloadDataButton';
+import DownloadDataContext from '@/components/DownloadDataContext/DownloadDataContext';
+import Theme from '@/components/Theme/Theme';
+
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
-
-import DownloadDataButton from './DownloadDataButton';
-
-import DownloadDataContext from '../DownloadDataContext/DownloadDataContext';
-import Theme from '../Theme/Theme';
 
 import sampleProductData from '../../../sampleData/DP1.10017.001.json';
 import sampleProductDataAeronet from '../../../sampleData/DP1.00043.001.json';

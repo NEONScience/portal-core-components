@@ -16,7 +16,7 @@ import {
 } from '@mui/styles';
 import { Theme as MuiTheme } from '@mui/material';
 
-import Skeleton from '@mui/lab/Skeleton';
+import Skeleton from '@mui/material/Skeleton';
 
 import InfoIcon from '@mui/icons-material/InfoOutlined';
 

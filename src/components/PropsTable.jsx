@@ -10,7 +10,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
-import Theme, { COLORS } from '../lib_components/components/Theme/Theme';
+import Theme, { COLORS } from '@/components/Theme/Theme';
 
 const useStyles = makeStyles((theme) => ({
   propTableRowGrey: {

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import HTMLReactParser from 'html-react-parser';
 
 import { makeStyles } from '@mui/styles';
-import Skeleton from '@mui/lab/Skeleton';
+import Skeleton from '@mui/material/Skeleton';
 
 import REMOTE_ASSETS from '../../remoteAssetsMap/remoteAssetsMap';
 import DRUPAL_FOOTER_HTML_FALLBACK from '../../remoteAssets/drupal-footer.html';

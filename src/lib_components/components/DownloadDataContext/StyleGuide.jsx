@@ -8,15 +8,14 @@ import Link from '@mui/material/Link';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 
+import DownloadDataContext from '@/components/DownloadDataContext/DownloadDataContext';
+import DownloadDataButton from '@/components/DownloadDataButton/DownloadDataButton';
+import DataProductAvailability from '@/components/DataProductAvailability/DataProductAvailability';
+import Theme from '@/components/Theme/Theme';
+
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
-
-import DownloadDataContext from './DownloadDataContext';
-
-import DownloadDataButton from '../DownloadDataButton/DownloadDataButton';
-import DataProductAvailability from '../DataProductAvailability/DataProductAvailability';
-import Theme from '../Theme/Theme';
 
 import sampleProductData1 from '../../../sampleData/DP1.00001.001.json';
 import sampleProductData2 from '../../../sampleData/DP1.00004.001.json';

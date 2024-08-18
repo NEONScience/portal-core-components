@@ -4,7 +4,7 @@ import HTMLReactParser, { domToReact } from 'html-react-parser';
 
 import { makeStyles } from '@mui/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import Skeleton from '@mui/lab/Skeleton';
+import Skeleton from '@mui/material/Skeleton';
 
 import camelCase from 'lodash/camelCase';
 

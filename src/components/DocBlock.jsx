@@ -4,7 +4,7 @@ import { makeStyles } from '@mui/styles';
 
 import Typography from '@mui/material/Typography';
 
-import Theme from '../lib_components/components/Theme/Theme';
+import Theme from '@/components/Theme/Theme';
 
 const useStyles = makeStyles((theme) => ({
   root: {

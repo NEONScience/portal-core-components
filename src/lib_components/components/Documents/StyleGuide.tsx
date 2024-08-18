@@ -6,19 +6,19 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import { makeStyles } from '@mui/styles';
 
+import DialogBase from '@/components/DialogBase/DialogBase';
+import DocumentList from '@/components/Documents/DocumentList';
+import DocumentListItem, { DocumentListItemModel } from '@/components/Documents/DocumentListItem';
+import DocumentSelect from '@/components/Documents/DocumentSelect';
+import DocumentTabs from '@/components/Documents/DocumentTabs';
+import DocumentViewer from '@/components/Documents/DocumentViewer';
+import PdfDocumentViewer from '@/components/Documents/PdfDocumentViewer';
+import Theme from '@/components/Theme/Theme';
+import { NeonDocument } from '@/types/neonApi';
+
 import CodeBlock from '../../../components/CodeBlock';
 import DocBlock from '../../../components/DocBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
-
-import DialogBase from '../DialogBase/DialogBase';
-import DocumentList from './DocumentList';
-import DocumentListItem, { DocumentListItemModel } from './DocumentListItem';
-import DocumentSelect from './DocumentSelect';
-import DocumentTabs from './DocumentTabs';
-import DocumentViewer from './DocumentViewer';
-import PdfDocumentViewer from './PdfDocumentViewer';
-import Theme from '../Theme/Theme';
-import { NeonDocument } from '../../types/neonApi';
 
 const useStyles = makeStyles((theme) => ({
   container: {

@@ -1,6 +1,6 @@
+/** @jsxImportSource @emotion/react */
 import React from 'react';
 import { type ControlOptions } from 'leaflet';
-import './leaflet-grouped-layer-control.css';
 export interface BaseLayer {
     name: string;
     title: string;

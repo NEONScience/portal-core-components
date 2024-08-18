@@ -1,3 +1,5 @@
+const isLibTarget = (process.env.PORTAL_CORE_COMPONENTS_TARGET === 'lib');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
@@ -7,6 +9,9 @@ const nextConfig = {
   trailingSlash: true,
   compiler: {
     emotion: true,
+  },
+  typescript: {
+    tsconfigPath: isLibTarget ? './tsconfig.lib.json' : './tsconfig.json',
   },
   experimental: {
     forceSwcTransforms: true,
