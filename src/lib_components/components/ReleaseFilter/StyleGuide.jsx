@@ -5,13 +5,13 @@ import { makeStyles } from '@mui/styles';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 
+import ReleaseFilter from '@/components/ReleaseFilter/ReleaseFilter';
+import Theme from '@/components/Theme/Theme';
+
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 import PropsTable from '../../../components/PropsTable';
-
-import ReleaseFilter from './ReleaseFilter';
-import Theme from '../Theme/Theme';
 
 const useStyles = makeStyles((theme) => ({
   divider: {

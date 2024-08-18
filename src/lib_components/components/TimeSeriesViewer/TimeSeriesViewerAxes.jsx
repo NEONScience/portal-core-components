@@ -9,7 +9,7 @@ import Slider from '@mui/material/Slider';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
-import Skeleton from '@mui/lab/Skeleton';
+import Skeleton from '@mui/material/Skeleton';
 import ToggleButton from '@mui/lab/ToggleButton';
 import ToggleButtonGroup from '@mui/lab/ToggleButtonGroup';
 

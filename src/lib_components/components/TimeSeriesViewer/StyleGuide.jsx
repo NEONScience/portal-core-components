@@ -12,29 +12,27 @@ import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-import Skeleton from '@mui/lab/Skeleton';
+import Skeleton from '@mui/material/Skeleton';
 import Typography from '@mui/material/Typography';
+
+import DialogBase from '@/components/DialogBase/DialogBase';
+import NeonApi from '@/components/NeonApi';
+import NeonGraphQL from '@/components/NeonGraphQL/NeonGraphQL';
+import NeonContext from '@/components/NeonContext/NeonContext';
+import ReleaseFilter from '@/components/ReleaseFilter/ReleaseFilter';
+import Theme from '@/components/Theme/Theme';
+
+import BundleService from '@/service/BundleService';
+import parseTimeSeriesData from '@/workers/parseTimeSeriesData';
+import timeSeriesDataProductsJSON from '@/staticJSON/timeSeriesDataProducts.json';
+
+import TimeSeriesViewerContext from '@/components/TimeSeriesViewer/TimeSeriesViewerContext';
+import TimeSeriesViewer from '@/components/TimeSeriesViewer/TimeSeriesViewer';
+import TimeSeriesViewerContainer from '@/components/TimeSeriesViewer/TimeSeriesViewerContainer';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
-
-import DialogBase from '../DialogBase/DialogBase';
-import NeonApi from '../NeonApi';
-import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
-import NeonContext from '../NeonContext/NeonContext';
-import ReleaseFilter from '../ReleaseFilter/ReleaseFilter';
-import Theme from '../Theme/Theme';
-
-import BundleService from '../../service/BundleService';
-
-import TimeSeriesViewerContext from './TimeSeriesViewerContext';
-import TimeSeriesViewer from './TimeSeriesViewer';
-import TimeSeriesViewerContainer from './TimeSeriesViewerContainer';
-
-import parseTimeSeriesData from '../../workers/parseTimeSeriesData';
-
-import timeSeriesDataProductsJSON from '../../staticJSON/timeSeriesDataProducts.json';
 
 import DP1_00001_001_ABBY_BASIC_30MIN_2018_12 from '../../../sampleData/TimeSeries/D16.ABBY.DP1.00001.001.2018-12.30min.basic';
 

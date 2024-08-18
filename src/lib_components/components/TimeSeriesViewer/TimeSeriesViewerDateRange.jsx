@@ -13,7 +13,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Slider from '@mui/material/Slider';
 import Typography from '@mui/material/Typography';
 
-import Skeleton from '@mui/lab/Skeleton';
+import Skeleton from '@mui/material/Skeleton';
 
 import moment from 'moment';
 

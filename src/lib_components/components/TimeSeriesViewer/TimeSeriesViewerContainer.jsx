@@ -14,7 +14,7 @@ import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 
-import Skeleton from '@mui/lab/Skeleton';
+import Skeleton from '@mui/material/Skeleton';
 
 import ErrorIcon from '@mui/icons-material/Error';
 import SummaryIcon from '@mui/icons-material/Toc';

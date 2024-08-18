@@ -20,13 +20,12 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 
+import NeonGraphQL from '@/components/NeonGraphQL/NeonGraphQL';
+import Theme from '@/components/Theme/Theme';
+
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
-
-import NeonGraphQL from './NeonGraphQL';
-
-import Theme from '../Theme/Theme';
 
 const useStyles = makeStyles((theme) => ({
   divider: {

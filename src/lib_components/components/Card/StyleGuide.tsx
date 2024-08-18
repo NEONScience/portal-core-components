@@ -11,16 +11,16 @@ import ReleaseIconOutlined from '@mui/icons-material/LocalOfferOutlined';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBox, faBoxesStacked, faTag } from '@fortawesome/free-solid-svg-icons';
 
+import InfoCard from '@/components/Card/InfoCard';
+import WarningCard from '@/components/Card/WarningCard';
+import ErrorCard from '@/components/Card/ErrorCard';
+import InfoMessageCard from '@/components/Card/InfoMessageCard';
+import Theme from '@/components/Theme/Theme';
+
 import CodeBlock from '../../../components/CodeBlock';
 import DocBlock from '../../../components/DocBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 import PropsTable from '../../../components/PropsTable';
-
-import InfoCard from './InfoCard';
-import WarningCard from './WarningCard';
-import ErrorCard from './ErrorCard';
-import InfoMessageCard from './InfoMessageCard';
-import Theme from '../Theme/Theme';
 
 import { NeonTheme } from '../Theme/types';
 

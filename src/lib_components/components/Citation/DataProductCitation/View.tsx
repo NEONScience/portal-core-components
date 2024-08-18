@@ -3,7 +3,7 @@ import React from 'react';
 import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
-import Skeleton from '@mui/lab/Skeleton';
+import Skeleton from '@mui/material/Skeleton';
 import Typography from '@mui/material/Typography';
 
 import QuoteIcon from '@mui/icons-material/FormatQuote';

@@ -7,12 +7,12 @@ import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 
+import FullWidthVisualization from '@/components/FullWidthVisualization/FullWidthVisualization';
+import Theme from '@/components/Theme/Theme';
+
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
-
-import FullWidthVisualization from './FullWidthVisualization';
-import Theme from '../Theme/Theme';
 
 // Pattern borrowed from here: https://leaverou.github.io/css3patterns/#japanese-cube
 const makeVizClass = (base, dark, light) => ({

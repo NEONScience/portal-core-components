@@ -39,7 +39,7 @@ import TextField from '@mui/material/TextField';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 
-import Skeleton from '@mui/lab/Skeleton';
+import Skeleton from '@mui/material/Skeleton';
 
 import ClearIcon from '@mui/icons-material/Clear';
 import ElevationIcon from '@mui/icons-material/Terrain';

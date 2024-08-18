@@ -4,11 +4,11 @@ import React from 'react';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 
+import StoryMap from '@/components/StoryMap/StoryMap';
+
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
-
-import StoryMap from './StoryMap';
 
 export default function StyleGuide() {
   const FullWidthVisualizationLink = (

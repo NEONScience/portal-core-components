@@ -10,21 +10,20 @@ import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import Typography from '@mui/material/Typography';
 
-import DocBlock from '../../../components/DocBlock';
-import CodeBlock from '../../../components/CodeBlock';
-import ExampleBlock from '../../../components/ExampleBlock';
-import PropsTable from '../../../components/PropsTable';
-import BasicLeafletMap, { Provider } from '../../../components/BasicLeafletMap';
-
-import Theme from '../Theme/Theme';
-import SiteMap from './SiteMap';
-
+import SiteMap from '@/components/SiteMap/SiteMap';
+import Theme from '@/components/Theme/Theme';
 import {
   MAP_ZOOM_RANGE,
   FEATURE_TYPES,
   BASE_LAYERS,
   VIEWS,
-} from './SiteMapUtils';
+} from '@/components/SiteMap/SiteMapUtils';
+
+import DocBlock from '../../../components/DocBlock';
+import CodeBlock from '../../../components/CodeBlock';
+import ExampleBlock from '../../../components/ExampleBlock';
+import PropsTable from '../../../components/PropsTable';
+import BasicLeafletMap, { Provider } from '../../../components/BasicLeafletMap';
 
 const useStyles = makeStyles((theme) => ({
   divider: {

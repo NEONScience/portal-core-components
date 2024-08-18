@@ -24,14 +24,14 @@ import { css, useTheme } from '@mui/material/styles';
 
 import ObservatoryIcon from '@mui/icons-material/Public';
 
-import { SerializedStyles } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
 
 import MarkerIcon2xPng from 'leaflet/dist/images/marker-icon-2x.png';
 import MarkerIconPng from 'leaflet/dist/images/marker-icon.png';
 import MarkerIconShadowPng from 'leaflet/dist/images/marker-shadow.png';
 
-import { NeonTheme } from '../lib_components/components/Theme/types';
-import { AnyAction, Nullable, Undef } from '../lib_components/types/core';
+import { NeonTheme } from '@/components/Theme/types';
+import { AnyAction, Nullable, Undef } from '@/types/core';
 
 import 'leaflet/dist/leaflet.css';
 

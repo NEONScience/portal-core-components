@@ -32,10 +32,10 @@ import InfoIcon from '@mui/icons-material/Info';
 import LeftIcon from '@mui/icons-material/ChevronLeft';
 import RightIcon from '@mui/icons-material/ChevronRight';
 
-import DocBlock from './DocBlock';
+import SplitButton from '@/components/Button/SplitButton';
+import Theme from '@/components/Theme/Theme';
 
-import SplitButton from '../lib_components/components/Button/SplitButton';
-import Theme from '../lib_components/components/Theme/Theme';
+import DocBlock from './DocBlock';
 
 const useStyles = makeStyles((theme) => ({
   divider: {

@@ -17,7 +17,7 @@ import NoSsr from '@mui/material/NoSsr';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 
-import Skeleton from '@mui/lab/Skeleton';
+import Skeleton from '@mui/material/Skeleton';
 
 import ClearIcon from '@mui/icons-material/Clear';
 import MenuItem from '@mui/material/MenuItem';

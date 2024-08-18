@@ -70,6 +70,19 @@
       "rules": {
         "prefer-object-spread": 0
       }
+    },
+    {
+      "files": [
+        "./src/lib_components/**/*/StyleGuide.*",
+        "./src/App.jsx",
+        "./src/components/*",
+        "./src/__mocks__/*"
+      ],
+      "rules": {
+        "import/extensions": "off",
+        "import/no-unresolved": "off",
+        "import/no-extraneous-dependencies": "off"
+      }
     }
   ],
   "settings": {

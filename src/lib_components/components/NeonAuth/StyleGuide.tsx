@@ -12,17 +12,17 @@ import Switch from '@mui/material/Switch';
 import Typography from '@mui/material/Typography';
 import { makeStyles } from '@mui/styles';
 
+import AuthService from '@/components/NeonAuth/AuthService';
+import NeonAuth, { NeonAuthType, NeonAuthDisplayType } from '@/components/NeonAuth/NeonAuth';
+import NeonContext from '@/components/NeonContext/NeonContext';
+import NeonEnvironment from '@/components/NeonEnvironment/NeonEnvironment';
+import Theme from '@/components/Theme/Theme';
+import UserCard from '@/components/NeonAuth/UserCard';
+
 import CodeBlock from '../../../components/CodeBlock';
 import DocBlock from '../../../components/DocBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 import PropsTable from '../../../components/PropsTable';
-
-import AuthService from './AuthService';
-import NeonAuth, { NeonAuthType, NeonAuthDisplayType } from './NeonAuth';
-import NeonContext from '../NeonContext/NeonContext';
-import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
-import Theme from '../Theme/Theme';
-import UserCard from './UserCard';
 
 const NEON_SSO_COOKIE_NAME: string = 'X-NEON-SSO';
 const ALLOW_SSO_TOGGLE: boolean = false;
