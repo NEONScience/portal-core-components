@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import React, {
+  useId,
   useRef,
   useState,
   useEffect,
@@ -8,8 +9,6 @@ import React, {
   useLayoutEffect,
 } from 'react';
 import ReactDOMServer from 'react-dom/server';
-
-import { useId } from 'react-id-generator';
 
 import L from 'leaflet';
 import {
@@ -274,7 +273,7 @@ const LeafletMapManager = () => {
 const SiteMapLeaflet = () => {
   const classes = useStyles(Theme);
   const mapRef = useRef(null);
-  const [mapInstanceId] = useId();
+  const mapInstanceId = useId();
 
   const mapRefExists = () => (
     mapRef && mapRef.current && mapRef.current._container

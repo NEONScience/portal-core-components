@@ -1,8 +1,6 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable react/require-default-props */
-import React from 'react';
-
-import { useId } from 'react-id-generator';
+import React, { useId } from 'react';
 
 import IconButton from '@mui/material/IconButton';
 import MenuItem from '@mui/material/MenuItem';
@@ -107,7 +105,7 @@ const SidebarFilter: React.FC<SidebarFilterProps> = (props: SidebarFilterProps):
     ...otherProps
   }: SidebarFilterProps = props;
 
-  const [instanceId] = useId();
+  const instanceId = useId();
   const selectSeleniumId = `sidebar-filter-select-selenium-${instanceId}`;
   const inputId = `sidebar-filter-input-${instanceId}`;
   const labelId = `sidebar-filter-label-${instanceId}`;

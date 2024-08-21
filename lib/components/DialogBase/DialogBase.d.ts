@@ -1,5 +1,5 @@
 export default DialogBase;
-declare function DialogBase(props: any): React.JSX.Element;
+declare function DialogBase(inProps: any): React.JSX.Element;
 declare namespace DialogBase {
     namespace propTypes {
         let open: PropTypes.Requireable<boolean>;
@@ -15,20 +15,6 @@ declare namespace DialogBase {
         }>;
         let nopaper: PropTypes.Requireable<boolean>;
         let style: PropTypes.Requireable<object>;
-    }
-    namespace defaultProps {
-        let open_1: boolean;
-        export { open_1 as open };
-        let toolbarChildren_1: null;
-        export { toolbarChildren_1 as toolbarChildren };
-        let closeButtonProps_1: {};
-        export { closeButtonProps_1 as closeButtonProps };
-        let customClasses_1: {};
-        export { customClasses_1 as customClasses };
-        let nopaper_1: boolean;
-        export { nopaper_1 as nopaper };
-        let style_1: {};
-        export { style_1 as style };
     }
 }
 import React from 'react';

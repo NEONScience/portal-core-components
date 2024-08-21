@@ -20,6 +20,7 @@ import {
   SITE_MAP_PROP_TYPES,
   getDefaultState,
 } from '../SiteMap/SiteMapUtils';
+import { resolveProps } from '../../util/defaultProps';
 
 const SiteMap = React.lazy(() => import('../SiteMap/SiteMap'));
 
@@ -58,7 +59,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MapSelectionButton = (props) => {
+const defaultProps = {
+  label: 'Map',
+  icon: true,
+  dialogTitle: null,
+  buttonProps: {},
+  siteMapProps: null,
+  tooltipProps: { children: <div /> },
+  validItems: null,
+  selectedItems: [],
+  selectionLimit: null,
+  onSave: () => {},
+};
+
+const MapSelectionButton = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
   const {
     label,
     icon,
@@ -214,19 +229,6 @@ MapSelectionButton.propTypes = {
   selectedItems: SITE_MAP_PROP_TYPES.selectedItems,
   selectionLimit: SITE_MAP_PROP_TYPES.selectionLimit,
   onSave: PropTypes.func,
-};
-
-MapSelectionButton.defaultProps = {
-  label: 'Map',
-  icon: true,
-  dialogTitle: null,
-  buttonProps: {},
-  siteMapProps: null,
-  tooltipProps: { children: <div /> },
-  validItems: null,
-  selectedItems: [],
-  selectionLimit: null,
-  onSave: () => {},
 };
 
 const WrappedMapSelectionButton = Theme.getWrappedComponent(MapSelectionButton);

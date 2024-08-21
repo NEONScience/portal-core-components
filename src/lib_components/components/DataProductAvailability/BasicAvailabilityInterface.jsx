@@ -20,8 +20,8 @@ import Hidden from '@mui/material/Hidden';
 import MenuItem from '@mui/material/MenuItem';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Select from '@mui/material/Select';
-import ToggleButton from '@mui/lab/ToggleButton';
-import ToggleButtonGroup from '@mui/lab/ToggleButtonGroup';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Typography from '@mui/material/Typography';
 
 import AscIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -40,6 +40,7 @@ import NeonContext from '../NeonContext/NeonContext';
 import MapSelectionButton from '../MapSelectionButton/MapSelectionButton';
 import SiteChip from '../SiteChip/SiteChip';
 import Theme from '../Theme/Theme';
+import { resolveProps } from '../../util/defaultProps';
 
 import AvailabilityPending from './AvailabilityPending';
 import BasicAvailabilityGrid from './BasicAvailabilityGrid';
@@ -104,10 +105,22 @@ const useSiteChipStyles = makeStyles((theme) => ({
   },
 }));
 
+const defaultProps = {
+  siteCodes: [],
+  dataProducts: [],
+  view: null,
+  sortMethod: null,
+  sortDirection: 'ASC',
+  disableSelection: false,
+  delineateRelease: false,
+  availabilityStatusType: null,
+};
+
 /**
    Main Function
 */
-const BasicAvailabilityInterface = (props) => {
+const BasicAvailabilityInterface = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
   const classes = useStyles(Theme);
   const atXs = useMediaQuery(Theme.breakpoints.only('xs'));
   const atSm = useMediaQuery(Theme.breakpoints.only('sm'));
@@ -840,17 +853,6 @@ BasicAvailabilityInterface.propTypes = {
   disableSelection: PropTypes.bool,
   delineateRelease: PropTypes.bool,
   availabilityStatusType: PropTypes.oneOf(['available', 'tombstoned']),
-};
-
-BasicAvailabilityInterface.defaultProps = {
-  siteCodes: [],
-  dataProducts: [],
-  view: null,
-  sortMethod: null,
-  sortDirection: 'ASC',
-  disableSelection: false,
-  delineateRelease: false,
-  availabilityStatusType: null,
 };
 
 export default BasicAvailabilityInterface;

@@ -8,6 +8,7 @@ import CustomComponentFallback from '../Error/CustomComponentFallback';
 import ErrorCard from '../Card/ErrorCard';
 import NeonContext from '../NeonContext/NeonContext';
 import Theme from '../Theme/Theme';
+import { resolveProps } from '../../util/defaultProps';
 
 import SiteMapContext from './SiteMapContext';
 import SiteMapContainer from './SiteMapContainer';
@@ -38,7 +39,8 @@ SiteMapFallbackComponent.propTypes = {
   resetErrorBoundary: PropTypes.func.isRequired,
 };
 
-const SiteMap = (props) => {
+const SiteMap = (inProps) => {
+  const props = resolveProps(SITE_MAP_DEFAULT_PROPS, inProps);
   // no need to store this in state, just pass it thru
   const { unusableVerticalSpace = 0, mapUniqueId = 0 } = props;
   return (
@@ -54,7 +56,6 @@ const SiteMap = (props) => {
 };
 
 SiteMap.propTypes = SITE_MAP_PROP_TYPES;
-SiteMap.defaultProps = SITE_MAP_DEFAULT_PROPS;
 
 const WrappedSiteMap = Theme.getWrappedComponent(
   NeonContext.getWrappedComponent(SiteMap),

@@ -6,11 +6,17 @@ import PropTypes from 'prop-types';
 import { SVG, VALID_ENHANCED_STATUSES } from './AvailabilityUtils';
 
 import Theme, { COLORS } from '../Theme/Theme';
+import { resolveProps } from '../../util/defaultProps';
+
+const diagLinesPatternDefaultProps = {
+  secondaryColor: '#ffffff',
+};
 
 /**
    SVG_DEFS
 */
-const DiagLinesPattern = (props) => {
+const DiagLinesPattern = (inProps) => {
+  const props = resolveProps(diagLinesPatternDefaultProps, inProps);
   const { id, color, secondaryColor } = props;
   const width = SVG.CELL_WIDTH;
   const height = SVG.CELL_HEIGHT / 4;
@@ -32,10 +38,12 @@ DiagLinesPattern.propTypes = {
   color: PropTypes.string.isRequired,
   secondaryColor: PropTypes.string,
 };
-DiagLinesPattern.defaultProps = {
+
+const halfAndHalfPatternDefaultProps = {
   secondaryColor: '#ffffff',
 };
-const HalfAndHalfPattern = (props) => {
+const HalfAndHalfPattern = (inProps) => {
+  const props = resolveProps(halfAndHalfPatternDefaultProps, inProps);
   const { id, color, secondaryColor } = props;
   return (
     <pattern
@@ -54,10 +62,12 @@ HalfAndHalfPattern.propTypes = {
   color: PropTypes.string.isRequired,
   secondaryColor: PropTypes.string,
 };
-HalfAndHalfPattern.defaultProps = {
-  secondaryColor: '#ffffff',
+
+const diagHalfAndHalfPatternDefaultProps = {
+  secondaryDiagColor: '#ffffff',
 };
-const DiagHalfAndHalfPattern = (props) => {
+const DiagHalfAndHalfPattern = (inProps) => {
+  const props = resolveProps(diagHalfAndHalfPatternDefaultProps, inProps);
   const {
     id,
     color,
@@ -176,9 +186,6 @@ DiagHalfAndHalfPattern.propTypes = {
   diagColor: PropTypes.string.isRequired,
   diagColorFillOpacity: PropTypes.number.isRequired,
   secondaryDiagColor: PropTypes.string,
-};
-DiagHalfAndHalfPattern.defaultProps = {
-  secondaryDiagColor: '#ffffff',
 };
 
 export const SvgDefs = () => (
@@ -302,7 +309,10 @@ export const CELL_ATTRS = {
   },
 };
 
-export const JsxCell = (props) => {
+const jsxCellDefaultProps = { x: 0, y: 0 };
+
+export const JsxCell = (inProps) => {
+  const props = resolveProps(jsxCellDefaultProps, inProps);
   const { status, x, y } = props;
   const { nudge = 0, ...attrs } = CELL_ATTRS[status];
   return (
@@ -314,4 +324,3 @@ JsxCell.propTypes = {
   x: PropTypes.number,
   y: PropTypes.number,
 };
-JsxCell.defaultProps = { x: 0, y: 0 };

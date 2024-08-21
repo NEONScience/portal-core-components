@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Avatar from '@mui/material/Avatar';
 
 import Theme from '../Theme/Theme';
+import { resolveProps } from '../../util/defaultProps';
 
 import AtmosphereSVG from './svg_optimized/atmosphere.svg';
 import BiogeochemistrySVG from './svg_optimized/biogeochemistry.svg';
@@ -39,7 +40,14 @@ const dataThemes = {
   },
 };
 
-const DataThemeIcon = (props) => {
+const defaultProps = {
+  size: 5,
+  avatar: false,
+  className: null,
+};
+
+const DataThemeIcon = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
   const {
     theme,
     size,
@@ -92,12 +100,6 @@ DataThemeIcon.propTypes = {
   size: PropTypes.number,
   avatar: PropTypes.bool,
   className: PropTypes.string,
-};
-
-DataThemeIcon.defaultProps = {
-  size: 5,
-  avatar: false,
-  className: null,
 };
 
 const WrappedDataThemeIcon = Theme.getWrappedComponent(DataThemeIcon);

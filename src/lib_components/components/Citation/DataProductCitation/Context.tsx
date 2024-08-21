@@ -14,6 +14,7 @@ import NeonApi from '../../NeonApi/NeonApi';
 import NeonContext from '../../NeonContext/NeonContext';
 import NeonGraphQL from '../../NeonGraphQL/NeonGraphQL';
 
+import { resolveProps } from '../../../util/defaultProps';
 import { exists, isStringNonEmpty } from '../../../util/typeUtil';
 import { AnyAction, Nullable, Undef } from '../../../types/core';
 import { DataProductDoiStatus, NeonApiResponse } from '../../../types/neonApi';
@@ -91,7 +92,12 @@ export interface ProviderProps {
   children?: React.ReactNode | React.ReactNode[];
 }
 
-const Provider: React.FC<ProviderProps> = (props: ProviderProps): React.JSX.Element => {
+const defaultProps: ProviderProps = {
+  contextControlled: false,
+};
+
+const Provider: React.FC<ProviderProps> = (inProps: ProviderProps): React.JSX.Element => {
+  const props = resolveProps(defaultProps, inProps);
   const {
     productCode: propsProductCode,
     release: propsRelease,
@@ -334,10 +340,6 @@ const Provider: React.FC<ProviderProps> = (props: ProviderProps): React.JSX.Elem
       </DispatchContext.Provider>
     </StateContext.Provider>
   );
-};
-
-Provider.defaultProps = {
-  contextControlled: false,
 };
 
 const DataProductCitationContext = {

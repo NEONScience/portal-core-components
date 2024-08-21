@@ -6,6 +6,8 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 
+import { resolveProps } from '../../util/defaultProps';
+
 /**
    Function: Generate an appropriate height for the visualization given its width.
    Maintain a more square aspect ratio for smaller widths and prefer a 16:9
@@ -22,7 +24,16 @@ const autoVizHeight = (width) => {
   return Math.floor(width * mult);
 };
 
-export default function FullWidthVisualization(props) {
+const defaultProps = {
+  minWidth: 1,
+  handleRedraw: null,
+  deriveHeightFromWidth: null,
+  allowHeightResize: false,
+  containerStyle: null,
+};
+
+export default function FullWidthVisualization(inProps) {
+  const props = resolveProps(defaultProps, inProps);
   const {
     vizRef,
     minWidth,
@@ -132,12 +143,4 @@ FullWidthVisualization.propTypes = {
     PropTypes.node,
     PropTypes.string,
   ]).isRequired,
-};
-
-FullWidthVisualization.defaultProps = {
-  minWidth: 1,
-  handleRedraw: null,
-  deriveHeightFromWidth: null,
-  allowHeightResize: false,
-  containerStyle: null,
 };

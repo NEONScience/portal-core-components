@@ -21,6 +21,7 @@ import { SVG, VALID_ENHANCED_STATUSES } from './AvailabilityUtils';
 import { JsxCell } from './AvailabilitySvgComponents';
 
 import Theme, { COLORS } from '../Theme/Theme';
+import { resolveProps } from '../../util/defaultProps';
 import { exists } from '../../util/typeUtil';
 
 const useStyles = makeStyles((theme) => ({
@@ -63,7 +64,13 @@ const CONTAINER_WIDTH_BREAKPOINT_SM_SELECTION = 425;
 const ALL_SELECTED_TITLE = 'If the chart is presenting a roll-up (e.g. view by state) then all sites rolled into a given row are selected';
 const SOME_SELECTED_TITLE = 'If the chart is presenting a roll-up (e.g. view by state) then one or more but not all of the sites rolled into a given row are selected';
 
-const StatusLegendElement = (props) => {
+const statusLegendElementDefaultProps = {
+  status: null,
+  dialog: false,
+};
+
+const StatusLegendElement = (inProps) => {
+  const props = resolveProps(statusLegendElementDefaultProps, inProps);
   const classes = useStyles(Theme);
   const { status, dialog } = props;
   if (!exists(status) || !VALID_ENHANCED_STATUSES[status]) {
@@ -109,12 +116,12 @@ StatusLegendElement.propTypes = {
   dialog: PropTypes.bool,
 };
 
-StatusLegendElement.defaultProps = {
-  status: null,
+const selectionLegendElementDefaultProps = {
   dialog: false,
 };
 
-const SelectionLegendElement = (props) => {
+const SelectionLegendElement = (inProps) => {
+  const props = resolveProps(selectionLegendElementDefaultProps, inProps);
   const classes = useStyles(Theme);
   const { variant, dialog } = props;
   if (!['all', 'some'].includes(variant)) {
@@ -176,11 +183,14 @@ SelectionLegendElement.propTypes = {
   dialog: PropTypes.bool,
 };
 
-SelectionLegendElement.defaultProps = {
-  dialog: false,
+const legendDialogDefaultProps = {
+  selectionEnabled: false,
+  delineateRelease: false,
+  availabilityStatusType: 'available',
 };
 
-const LegendDialog = (props) => {
+const LegendDialog = (inProps) => {
+  const props = resolveProps(legendDialogDefaultProps, inProps);
   const {
     dialogOpen,
     setDialogOpen,
@@ -253,13 +263,15 @@ LegendDialog.propTypes = {
   availabilityStatusType: PropTypes.oneOf(['available', 'tombstoned']),
 };
 
-LegendDialog.defaultProps = {
+const basicAvailabilityKeyDefaultProps = {
   selectionEnabled: false,
   delineateRelease: false,
   availabilityStatusType: 'available',
+  dialogOnly: false,
 };
 
-const BasicAvailabilityKey = (props) => {
+const BasicAvailabilityKey = (inProps) => {
+  const props = resolveProps(basicAvailabilityKeyDefaultProps, inProps);
   const classes = useStyles(Theme);
   const {
     selectionEnabled,
@@ -411,13 +423,6 @@ BasicAvailabilityKey.propTypes = {
   delineateRelease: PropTypes.bool,
   availabilityStatusType: PropTypes.oneOf(['available', 'tombstoned']),
   dialogOnly: PropTypes.bool,
-};
-
-BasicAvailabilityKey.defaultProps = {
-  selectionEnabled: false,
-  delineateRelease: false,
-  availabilityStatusType: 'available',
-  dialogOnly: false,
 };
 
 export default BasicAvailabilityKey;

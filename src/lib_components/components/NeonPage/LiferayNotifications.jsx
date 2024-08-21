@@ -9,6 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
 import Theme, { COLORS } from '../Theme/Theme';
+import { resolveProps } from '../../util/defaultProps';
 
 const useStyles = makeStyles((theme) => ({
   notification: {
@@ -29,7 +30,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LiferayNotifications = (props) => {
+const defaultProps = {
+  notifications: [],
+  onHideNotifications: null,
+};
+
+const LiferayNotifications = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
   const classes = useStyles(Theme);
   const { notifications, onHideNotifications } = props;
 
@@ -81,11 +88,6 @@ LiferayNotifications.propTypes = {
     }),
   ),
   onHideNotifications: PropTypes.func,
-};
-
-LiferayNotifications.defaultProps = {
-  notifications: [],
-  onHideNotifications: null,
 };
 
 export default LiferayNotifications;

@@ -28,15 +28,9 @@ declare namespace NeonContext {
 /**
    Context Provider
 */
-declare function Provider(props: any): React.JSX.Element;
+declare function Provider(inProps: any): React.JSX.Element;
 declare namespace Provider {
     export { ProviderPropTypes as propTypes };
-    export namespace defaultProps {
-        let children: null;
-        let fetchPartials: boolean;
-        let useCoreAuth: boolean;
-        function whenFinal(): void;
-    }
 }
 /**
    HOOK
@@ -963,14 +957,10 @@ declare namespace DEFAULT_STATE {
 */
 declare function getWrappedComponent(Component: any): (props: any) => React.JSX.Element;
 declare namespace ProviderPropTypes {
-    let children_1: PropTypes.Requireable<NonNullable<PropTypes.ReactNodeLike>>;
-    export { children_1 as children };
-    let fetchPartials_1: PropTypes.Requireable<boolean>;
-    export { fetchPartials_1 as fetchPartials };
-    let useCoreAuth_1: PropTypes.Requireable<boolean>;
-    export { useCoreAuth_1 as useCoreAuth };
-    let whenFinal_1: PropTypes.Requireable<(...args: any[]) => any>;
-    export { whenFinal_1 as whenFinal };
+    let children: PropTypes.Requireable<NonNullable<PropTypes.ReactNodeLike>>;
+    let fetchPartials: PropTypes.Requireable<boolean>;
+    let useCoreAuth: PropTypes.Requireable<boolean>;
+    let whenFinal: PropTypes.Requireable<(...args: any[]) => any>;
 }
 import React from 'react';
 import statesJSON from '../../staticJSON/states.json';

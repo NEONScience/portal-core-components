@@ -15,6 +15,7 @@ import ExternalHost from '../ExternalHost/ExternalHost';
 import ExternalHostProductSpecificLinks from '../ExternalHostProductSpecificLinks/ExternalHostProductSpecificLinks';
 import Theme from '../Theme/Theme';
 import { existsNonEmpty } from '../../util/typeUtil';
+import { resolveProps } from '../../util/defaultProps';
 
 const useStyles = makeStyles((theme) => ({
   startFlex: {
@@ -27,7 +28,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ExternalHostInfo = (props) => {
+const defaultProps = {
+  expandable: false,
+  siteCodes: null,
+};
+
+const ExternalHostInfo = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
   const classes = useStyles(Theme);
   const {
     productCode,
@@ -135,11 +142,6 @@ ExternalHostInfo.propTypes = {
   productCode: PropTypes.string.isRequired,
   expandable: PropTypes.bool,
   siteCodes: PropTypes.arrayOf(PropTypes.string),
-};
-
-ExternalHostInfo.defaultProps = {
-  expandable: false,
-  siteCodes: null,
 };
 
 const WrappedExternalHostInfo = Theme.getWrappedComponent(ExternalHostInfo);

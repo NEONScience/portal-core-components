@@ -15,6 +15,7 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 
 import Theme from '../Theme/Theme';
+import { resolveProps } from '../../util/defaultProps';
 
 const Transition = forwardRef((props, ref) => (
   <Slide direction="up" ref={ref} {...props} />
@@ -38,7 +39,17 @@ const useStyles = (belowSm) => makeStyles((theme) => ({
   },
 }));
 
-const DialogBase = (props) => {
+const defaultProps = {
+  open: true,
+  toolbarChildren: null,
+  closeButtonProps: {},
+  customClasses: {},
+  nopaper: false,
+  style: {},
+};
+
+const DialogBase = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
   const belowSm = useMediaQuery(Theme.breakpoints.only('xs'));
   const classes = useStyles(belowSm)(Theme);
 
@@ -136,15 +147,6 @@ DialogBase.propTypes = {
   ),
   nopaper: PropTypes.bool,
   style: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-};
-
-DialogBase.defaultProps = {
-  open: true,
-  toolbarChildren: null,
-  closeButtonProps: {},
-  customClasses: {},
-  nopaper: false,
-  style: {},
 };
 
 export default DialogBase;

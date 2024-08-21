@@ -7,6 +7,7 @@ import DownloadIcon from '@mui/icons-material/SaveAlt';
 
 import DownloadDataContext from '../DownloadDataContext/DownloadDataContext';
 import Theme from '../Theme/Theme';
+import { resolveProps } from '../../util/defaultProps';
 
 const DownloadDataDialog = React.lazy(() => import('../DownloadDataDialog/DownloadDataDialog'));
 
@@ -18,7 +19,12 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const DownloadDataButton = (props) => {
+const defaultProps = {
+  label: 'Download Data',
+};
+
+const DownloadDataButton = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
   const {
     label,
     ...other
@@ -63,10 +69,6 @@ const DownloadDataButton = (props) => {
 
 DownloadDataButton.propTypes = {
   label: PropTypes.string,
-};
-
-DownloadDataButton.defaultProps = {
-  label: 'Download Data',
 };
 
 const WrappedDownloadDataButton = Theme.getWrappedComponent(DownloadDataButton);

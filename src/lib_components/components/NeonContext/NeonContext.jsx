@@ -21,6 +21,7 @@ import domainsJSON from '../../staticJSON/domains.json';
 import timeSeriesDataProductsJSON from '../../staticJSON/timeSeriesDataProducts.json';
 import BundleParser from '../../parser/BundleParser';
 import { existsNonEmpty } from '../../util/typeUtil';
+import { resolveProps } from '../../util/defaultProps';
 
 const DRUPAL_HEADER_HTML = REMOTE_ASSETS.DRUPAL_HEADER_HTML.KEY;
 const DRUPAL_FOOTER_HTML = REMOTE_ASSETS.DRUPAL_FOOTER_HTML.KEY;
@@ -239,10 +240,18 @@ const parseSitesFetchResponse = (sitesArray = []) => {
   return sitesObj;
 };
 
+const defaultProps = {
+  children: null,
+  fetchPartials: false,
+  useCoreAuth: false,
+  whenFinal: () => {},
+};
+
 /**
    Context Provider
 */
-const Provider = (props) => {
+const Provider = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
   const {
     children,
     fetchPartials,
@@ -410,13 +419,6 @@ const ProviderPropTypes = {
   whenFinal: PropTypes.func,
 };
 Provider.propTypes = ProviderPropTypes;
-
-Provider.defaultProps = {
-  children: null,
-  fetchPartials: false,
-  useCoreAuth: false,
-  whenFinal: () => {},
-};
 
 /**
    getWrappedComponent

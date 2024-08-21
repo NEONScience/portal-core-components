@@ -35,7 +35,7 @@ declare namespace AvailabilityContext {
 /**
    Context Provider
 */
-declare function Provider(props: any): React.JSX.Element;
+declare function Provider(inProps: any): React.JSX.Element;
 declare namespace Provider {
     namespace propTypes {
         let dataAvailabilityUniqueId: PropTypes.Requireable<number>;
@@ -51,12 +51,6 @@ declare namespace Provider {
             }> | null | undefined)[]>;
         }> | null | undefined)[]>;
         let children: PropTypes.Validator<NonNullable<NonNullable<PropTypes.ReactNodeLike>>>;
-    }
-    namespace defaultProps {
-        let dataAvailabilityUniqueId_1: number;
-        export { dataAvailabilityUniqueId_1 as dataAvailabilityUniqueId };
-        let sites_1: never[];
-        export { sites_1 as sites };
     }
 }
 declare function useAvailabilityState(): {

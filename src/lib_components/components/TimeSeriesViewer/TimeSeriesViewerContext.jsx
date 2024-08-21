@@ -30,6 +30,7 @@ import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import { forkJoinWithProgress } from '../../util/rxUtil';
 import { exists } from '../../util/typeUtil';
+import { resolveProps } from '../../util/defaultProps';
 
 import parseTimeSeriesData from '../../workers/parseTimeSeriesData';
 
@@ -1272,10 +1273,19 @@ const reducer = (state, action) => {
  */
 const restoreStateLookup = {};
 
+export const defaultProps = {
+  timeSeriesUniqueId: 0,
+  mode: VIEWER_MODE.DEFAULT,
+  productCode: null,
+  productData: null,
+  release: null,
+};
+
 /**
    Context Provider
 */
-const Provider = (props) => {
+const Provider = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
   const {
     timeSeriesUniqueId,
     mode: modeProp,
@@ -1732,14 +1742,6 @@ Provider.propTypes = {
     PropTypes.node,
     PropTypes.string,
   ]).isRequired,
-};
-
-Provider.defaultProps = {
-  timeSeriesUniqueId: 0,
-  mode: VIEWER_MODE.DEFAULT,
-  productCode: null,
-  productData: null,
-  release: null,
 };
 
 /**

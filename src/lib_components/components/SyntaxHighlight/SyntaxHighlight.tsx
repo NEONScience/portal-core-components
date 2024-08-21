@@ -13,6 +13,7 @@ import typescript from 'highlight.js/lib/languages/typescript';
 
 import Theme from '../Theme/Theme';
 import { StylesHook } from '../../types/muiTypes';
+import { resolveProps } from '../../util/defaultProps';
 
 hljs.registerLanguage('javascript', javascript);
 hljs.registerLanguage('json', json);
@@ -35,13 +36,19 @@ export interface SyntaxHighlightProps {
   style?: React.CSSProperties,
 }
 
+const defaultProps = {
+  language: 'typescript',
+  style: undefined,
+};
+
 /**
  * Syntax highlighter component based on:
  * https://github.com/bvaughn/react-highlight.js
  */
 const SyntaxHighlight: React.FC<SyntaxHighlightProps> = (
-  props: SyntaxHighlightProps,
+  inProps: SyntaxHighlightProps,
 ): React.JSX.Element => {
+  const props = resolveProps(defaultProps, inProps) as SyntaxHighlightProps;
   const classes = useStyles(Theme);
   const {
     children,
@@ -63,11 +70,6 @@ const SyntaxHighlight: React.FC<SyntaxHighlightProps> = (
       </code>
     </pre>
   );
-};
-
-SyntaxHighlight.defaultProps = {
-  language: 'typescript',
-  style: undefined,
 };
 
 export default SyntaxHighlight;

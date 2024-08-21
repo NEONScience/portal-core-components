@@ -3,10 +3,9 @@ import React, {
   useContext,
   createContext,
   useReducer,
+  useId,
   Dispatch,
 } from 'react';
-
-import { useId } from 'react-id-generator';
 
 import L from 'leaflet';
 import {
@@ -226,7 +225,7 @@ const LeafletMapManager: React.FC = (): React.JSX.Element => {
 
 const BasicLeafletMap: React.FC = (): React.JSX.Element => {
   const state: BasicLeafletMapState = useContext(StateContext);
-  const [mapInstanceId] = useId();
+  const mapInstanceId = useId();
   const theme: NeonTheme = useTheme();
   const classes: Record<string, SerializedStyles> = useStyles(theme);
   const {

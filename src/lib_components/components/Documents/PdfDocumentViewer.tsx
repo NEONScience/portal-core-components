@@ -28,6 +28,7 @@ import WarningCard from '../Card/WarningCard';
 import { StylesHook } from '../../types/muiTypes';
 import { NeonDocument } from '../../types/neonApi';
 import { isStringNonEmpty } from '../../util/typeUtil';
+import { resolveProps } from '../../util/defaultProps';
 
 // Pull in PDF JS and set up a reference to the worker source
 pdfjs.GlobalWorkerOptions.workerPort = new Worker(
@@ -85,9 +86,14 @@ const calcAutoHeight = (width: number): number => {
   return Math.floor(width * mult);
 };
 
+const defaultProps = {
+  fullUrlPath: undefined,
+};
+
 const PdfDocumentViewer: React.FC<PdfDocumentViewerProps> = (
-  props: PdfDocumentViewerProps,
+  inProps: PdfDocumentViewerProps,
 ): React.JSX.Element => {
+  const props = resolveProps(defaultProps, inProps) as PdfDocumentViewerProps;
   const classes = useStyles(Theme);
   const {
     document,
@@ -224,10 +230,6 @@ const PdfDocumentViewer: React.FC<PdfDocumentViewerProps> = (
       </div>
     </div>
   );
-};
-
-PdfDocumentViewer.defaultProps = {
-  fullUrlPath: undefined,
 };
 
 export default PdfDocumentViewer;

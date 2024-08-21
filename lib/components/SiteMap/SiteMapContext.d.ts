@@ -37,9 +37,9 @@ declare namespace SiteMapContext {
     export { VIEWS };
 }
 /** Context Provider */
-declare function Provider(props: any): React.JSX.Element;
+declare function Provider(inProps: any): React.JSX.Element;
 declare namespace Provider {
-    export let propTypes: {
+    let propTypes: {
         children: PropTypes.Validator<NonNullable<NonNullable<PropTypes.ReactNodeLike>>>;
         view: PropTypes.Requireable<string>;
         aspectRatio: PropTypes.Requireable<number>;
@@ -62,7 +62,6 @@ declare namespace Provider {
             manualLocationType: PropTypes.Validator<string>;
         }> | null | undefined)[]>;
     };
-    export { SITE_MAP_DEFAULT_PROPS as defaultProps };
 }
 declare function useSiteMapContext(): {
     view: {
@@ -249,4 +248,3 @@ import { SORT_DIRECTIONS } from './SiteMapUtils';
 import { VIEWS } from './SiteMapUtils';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SITE_MAP_DEFAULT_PROPS } from './SiteMapUtils';

@@ -29,8 +29,8 @@ import ClearFiltersIcon from '@mui/icons-material/DeleteSweep';
 import WarningIcon from '@mui/icons-material/Warning';
 import ExploreIcon from '@mui/icons-material/Explore';
 
-import ToggleButton from '@mui/lab/ToggleButton';
-import ToggleButtonGroup from '@mui/lab/ToggleButtonGroup';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 import moment from 'moment';
 
@@ -50,6 +50,7 @@ import ExternalHostProductSpecificLinks from '../ExternalHostProductSpecificLink
 import MaterialTableIcons from '../MaterialTableIcons/MaterialTableIcons';
 import SiteChip from '../SiteChip/SiteChip';
 import Theme, { COLORS } from '../Theme/Theme';
+import { resolveProps } from '../../util/defaultProps';
 
 import ReleaseService from '../../service/ReleaseService';
 import RouteService from '../../service/RouteService';
@@ -146,7 +147,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TextComponent = (props) => {
+const textComponentDefaultProps = {
+  content: null,
+};
+
+const TextComponent = (inProps) => {
+  const props = resolveProps(textComponentDefaultProps, inProps);
   const { content } = props;
   return (
     <Typography variant="body2" component="p">
@@ -156,9 +162,6 @@ const TextComponent = (props) => {
 };
 TextComponent.propTypes = {
   content: PropTypes.string,
-};
-TextComponent.defaultProps = {
-  content: null,
 };
 
 const MarkdownFallbackComponent = (props) => ((
@@ -226,7 +229,14 @@ const renderStepSummary = {
   },
 };
 
-const DownloadStepForm = (props) => {
+const downloadStepFormDefaultProps = {
+  changeToStep: () => {},
+  changeToNextUncompletedStep: () => {},
+  renderDownloadButton: () => null,
+};
+
+const DownloadStepForm = (inProps) => {
+  const props = resolveProps(downloadStepFormDefaultProps, inProps);
   const classes = useStyles(Theme);
 
   const {
@@ -1080,12 +1090,6 @@ DownloadStepForm.propTypes = {
   changeToStep: PropTypes.func,
   changeToNextUncompletedStep: PropTypes.func,
   renderDownloadButton: PropTypes.func,
-};
-
-DownloadStepForm.defaultProps = {
-  changeToStep: () => {},
-  changeToNextUncompletedStep: () => {},
-  renderDownloadButton: () => null,
 };
 
 export default DownloadStepForm;
