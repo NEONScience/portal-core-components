@@ -10,8 +10,14 @@ import Typography from '@mui/material/Typography';
 import ErrorIcon from '@mui/icons-material/Warning';
 
 import NeonContext from '../NeonContext/NeonContext';
+import { resolveProps } from '../../util/defaultProps';
 
-export default function AvailabilityPending(props) {
+const defaultProps = {
+  message: 'Loading Sites...',
+};
+
+export default function AvailabilityPending(inProps) {
+  const props = resolveProps(defaultProps, inProps);
   const [
     { isFinal: neonContextIsFinal, hasError: neonContextHasError },
   ] = NeonContext.useNeonContextState();
@@ -56,8 +62,4 @@ export default function AvailabilityPending(props) {
 
 AvailabilityPending.propTypes = {
   message: PropTypes.string,
-};
-
-AvailabilityPending.defaultProps = {
-  message: 'Loading Sites...',
 };

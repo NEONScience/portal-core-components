@@ -17,6 +17,7 @@ import { SVG, VALID_ENHANCED_STATUSES } from './AvailabilityUtils';
 import { JsxCell } from './AvailabilitySvgComponents';
 
 import Theme, { COLORS } from '../Theme/Theme';
+import { resolveProps } from '../../util/defaultProps';
 
 /**
    Setup: CSS classes
@@ -48,10 +49,16 @@ const useStyles = makeStyles((theme) => ({
 const ALL_SELECTED_TITLE = 'If the chart is presenting a roll-up (e.g. view by state) then all sites rolled into a given row are selected';
 const SOME_SELECTED_TITLE = 'If the chart is presenting a roll-up (e.g. view by state) then one or more but not all of the sites rolled into a given row are selected';
 
+const defaultProps = {
+  selectionEnabled: false,
+  rollUpPresent: false,
+};
+
 /**
    Main Function
 */
-export default function EnhancedAvailabilityKey(props) {
+export default function EnhancedAvailabilityKey(inProps) {
+  const props = resolveProps(defaultProps, inProps);
   const classes = useStyles(Theme);
   const [dialogOpen, setDialogOpen] = useState(false);
   const { selectionEnabled, rollUpPresent } = props;
@@ -275,9 +282,4 @@ export default function EnhancedAvailabilityKey(props) {
 EnhancedAvailabilityKey.propTypes = {
   selectionEnabled: PropTypes.bool,
   rollUpPresent: PropTypes.bool,
-};
-
-EnhancedAvailabilityKey.defaultProps = {
-  selectionEnabled: false,
-  rollUpPresent: false,
 };

@@ -29,7 +29,9 @@ import ComponentErrorBoundary from '@/components/Error/ComponentErrorBoundary';
 import DataProductCitation from '@/components/Citation/DataProductCitation';
 import DataProductCitationContext from '@/components/Citation/DataProductCitation/Context';
 import DataProductCitationService from '@/components/Citation/DataProductCitation/Service';
-import DataProductCitationView from '@/components/Citation/DataProductCitation/View';
+import DataProductCitationView, {
+  defaultProps as viewDefaultProps,
+} from '@/components/Citation/DataProductCitation/View';
 import NeonApi from '@/components/NeonApi';
 import NeonContext from '@/components/NeonContext/NeonContext';
 import NeonGraphQL from '@/components/NeonGraphQL/NeonGraphQL';
@@ -223,7 +225,7 @@ const DataProductCitationDemo = (): React.JSX.Element => {
   );
   const viewState: DataProductCitationViewState = DataProductCitationService.useViewState(
     stateCtx,
-    DataProductCitationView.defaultProps as DataProductCitationViewProps,
+    viewDefaultProps as DataProductCitationViewProps,
   );
   const { citationItems }: DataProductCitationViewState = viewState;
   const appliedItem: Nullable<DataProductCitationItem> = existsNonEmpty(citationItems)

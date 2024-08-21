@@ -1,5 +1,5 @@
 /* eslint-disable react/forbid-prop-types */
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import PropTypes from 'prop-types';
 import Select from 'react-select';
@@ -26,6 +26,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import SelectAllIcon from '@mui/icons-material/DoneAll';
 
 import Theme from '../Theme/Theme';
+import { resolveProps } from '../../util/defaultProps';
 import TimeSeriesViewerContext from './TimeSeriesViewerContext';
 
 const useStyles = makeStyles((theme) => ({
@@ -110,18 +111,9 @@ const useStyles = makeStyles((theme) => ({
 
 const ucWord = (word) => `${word.slice(0, 1).toUpperCase()}${word.slice(1).toLowerCase()}`;
 
-function inputComponent({ inputRef, ...props }) {
-  return <div ref={inputRef} {...props} />;
-}
-
-inputComponent.propTypes = {
-  inputRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({
-      current: PropTypes.any.isRequired,
-    }),
-  ]).isRequired,
-};
+const inputComponent = forwardRef((props, ref) => (
+  <div ref={ref} {...props} />
+));
 
 function Control(props) {
   const {
@@ -169,7 +161,15 @@ Control.propTypes = {
   selectProps: PropTypes.object.isRequired,
 };
 
-function Option(props) {
+const optionDefaultProps = {
+  children: null,
+  innerProps: null,
+  innerRef: null,
+  isDisabled: false,
+};
+
+function Option(inProps) {
+  const props = resolveProps(optionDefaultProps, inProps);
   const classes = useStyles(Theme);
   const {
     innerRef,
@@ -241,12 +241,6 @@ Option.propTypes = {
   isSelected: PropTypes.bool.isRequired,
   isDisabled: PropTypes.bool,
   data: PropTypes.object.isRequired,
-};
-Option.defaultProps = {
-  children: null,
-  innerProps: null,
-  innerRef: null,
-  isDisabled: false,
 };
 
 function ValueContainer(props) {

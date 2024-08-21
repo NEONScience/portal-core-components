@@ -4,6 +4,8 @@ import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 
 import ComponentFallback from './ComponentFallback';
 
+import { resolveProps } from '../../util/defaultProps';
+
 interface ComponentErrorBoundaryProps {
   children: React.ReactNode | React.ReactNode[];
   onReset?: (...args: Array<unknown>) => void;
@@ -11,9 +13,16 @@ interface ComponentErrorBoundaryProps {
   fallbackComponent?: React.ComponentType<FallbackProps>;
 }
 
+const defaultProps = {
+  onReset: (...args: Array<unknown>): void => {},
+  onError: (error: Error, info: ErrorInfo): void => {},
+  fallbackComponent: undefined,
+};
+
 const ComponentErrorBoundary: React.FC<ComponentErrorBoundaryProps> = (
-  props: ComponentErrorBoundaryProps,
+  inProps: ComponentErrorBoundaryProps,
 ): React.JSX.Element => {
+  const props = resolveProps(defaultProps, inProps) as ComponentErrorBoundaryProps;
   const {
     children,
     onReset,
@@ -29,12 +38,6 @@ const ComponentErrorBoundary: React.FC<ComponentErrorBoundaryProps> = (
       {children}
     </ErrorBoundary>
   );
-};
-
-ComponentErrorBoundary.defaultProps = {
-  onReset: (...args: Array<unknown>): void => {},
-  onError: (error: Error, info: ErrorInfo): void => {},
-  fallbackComponent: undefined,
 };
 
 export default ComponentErrorBoundary;

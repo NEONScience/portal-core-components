@@ -49,6 +49,7 @@ import BrowserWarning from './BrowserWarning';
 import LiferayNotifications from './LiferayNotifications';
 import DrupalAssetService from '../../service/DrupalAssetService';
 
+import { resolveProps } from '../../util/defaultProps';
 import { getJson } from '../../util/rxUtil';
 import {
   generateNotificationId,
@@ -358,7 +359,37 @@ NeonErrorPage.propTypes = {
   resetErrorBoundary: PropTypes.func.isRequired,
 };
 
-const NeonPage = (props) => {
+const defaultProps = {
+  breadcrumbHomeHref: '/',
+  breadcrumbs: [],
+  customHeader: null,
+  customFooter: null,
+  showHeaderSkeleton: false,
+  showFooterSkeleton: false,
+  error: null,
+  loading: null,
+  notification: null,
+  outerPageContainerMaxWidth: '2000px',
+  progress: null,
+  resetStateAfterRuntimeError: () => { },
+  sidebarContent: null,
+  sidebarContentResponsive: false,
+  sidebarContainerClassName: null,
+  sidebarLinks: null,
+  sidebarLinksAdditionalContent: null,
+  sidebarLinksAsStandaloneChildren: false,
+  sidebarSubtitle: null,
+  sidebarTitle: null,
+  sidebarWidth: 300,
+  sidebarUnsticky: false,
+  subtitle: null,
+  title: null,
+  unstickyDrupalHeader: true,
+  NeonContextProviderProps: {},
+};
+
+const NeonPage = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
   const {
     breadcrumbHomeHref,
     breadcrumbs,
@@ -1029,35 +1060,6 @@ NeonPage.propTypes = {
   unstickyDrupalHeader: PropTypes.bool,
   NeonContextProviderProps: PropTypes.shape(NeonContext.ProviderPropTypes),
   children: children.isRequired,
-};
-
-NeonPage.defaultProps = {
-  breadcrumbHomeHref: '/',
-  breadcrumbs: [],
-  customHeader: null,
-  customFooter: null,
-  showHeaderSkeleton: false,
-  showFooterSkeleton: false,
-  error: null,
-  loading: null,
-  notification: null,
-  outerPageContainerMaxWidth: '2000px',
-  progress: null,
-  resetStateAfterRuntimeError: () => { },
-  sidebarContent: null,
-  sidebarContentResponsive: false,
-  sidebarContainerClassName: null,
-  sidebarLinks: null,
-  sidebarLinksAdditionalContent: null,
-  sidebarLinksAsStandaloneChildren: false,
-  sidebarSubtitle: null,
-  sidebarTitle: null,
-  sidebarWidth: 300,
-  sidebarUnsticky: false,
-  subtitle: null,
-  title: null,
-  unstickyDrupalHeader: true,
-  NeonContextProviderProps: {},
 };
 
 export default NeonPage;

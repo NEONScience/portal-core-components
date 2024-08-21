@@ -41,6 +41,7 @@ import ReleaseService from '../../service/ReleaseService';
 // eslint-disable-next-line import/no-cycle
 import { convertStateForStorage, convertAOPInitialState } from './StateStorageConverter';
 import { exists, existsNonEmpty, isStringNonEmpty } from '../../util/typeUtil';
+import { resolveProps } from '../../util/defaultProps';
 
 const ALL_POSSIBLE_VALID_DATE_RANGE = ['2010-01', moment().format('YYYY-MM')];
 const ALL_POSSIBLE_VALID_DOCUMENTATION = ['include', 'exclude'];
@@ -1125,8 +1126,22 @@ const getManifestAjaxObservable = (request) => (
  */
 const restoreStateLookup = {};
 
+const defaultProps = {
+  downloadDataContextUniqueId: 0,
+  stateObservable: null,
+  productData: {},
+  availabilityView: DEFAULT_STATE.availabilityView,
+  release: DEFAULT_STATE.release.value,
+  sites: DEFAULT_STATE.sites.value,
+  dateRange: DEFAULT_STATE.dateRange.value,
+  documentation: DEFAULT_STATE.documentation.value,
+  packageType: DEFAULT_STATE.packageType.value,
+  provisionalData: DEFAULT_STATE.provisionalData.value,
+};
+
 // Provider
-const Provider = (props) => {
+const Provider = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
   const {
     downloadDataContextUniqueId,
     stateObservable,
@@ -1341,19 +1356,6 @@ Provider.propTypes = {
     PropTypes.node,
     PropTypes.string,
   ]).isRequired,
-};
-
-Provider.defaultProps = {
-  downloadDataContextUniqueId: 0,
-  stateObservable: null,
-  productData: {},
-  availabilityView: DEFAULT_STATE.availabilityView,
-  release: DEFAULT_STATE.release.value,
-  sites: DEFAULT_STATE.sites.value,
-  dateRange: DEFAULT_STATE.dateRange.value,
-  documentation: DEFAULT_STATE.documentation.value,
-  packageType: DEFAULT_STATE.packageType.value,
-  provisionalData: DEFAULT_STATE.provisionalData.value,
 };
 
 const DownloadDataContext = {

@@ -124,7 +124,7 @@ declare namespace DownloadDataContext {
     export { ALL_STEPS };
     export { getStateObservable };
 }
-declare function Provider(props: any): React.JSX.Element;
+declare function Provider(inProps: any): React.JSX.Element;
 declare namespace Provider {
     namespace propTypes {
         let downloadDataContextUniqueId: PropTypes.Requireable<number>;
@@ -149,28 +149,6 @@ declare namespace Provider {
         let packageType: PropTypes.Requireable<string>;
         let provisionalData: PropTypes.Requireable<string>;
         let children: PropTypes.Validator<NonNullable<NonNullable<PropTypes.ReactNodeLike>>>;
-    }
-    namespace defaultProps {
-        let downloadDataContextUniqueId_1: number;
-        export { downloadDataContextUniqueId_1 as downloadDataContextUniqueId };
-        let stateObservable_1: null;
-        export { stateObservable_1 as stateObservable };
-        let productData_1: {};
-        export { productData_1 as productData };
-        import availabilityView_1 = DEFAULT_STATE.availabilityView;
-        export { availabilityView_1 as availabilityView };
-        import release_1 = value;
-        export { release_1 as release };
-        import sites_1 = value;
-        export { sites_1 as sites };
-        import dateRange_1 = value;
-        export { dateRange_1 as dateRange };
-        import documentation_1 = value;
-        export { documentation_1 as documentation };
-        import packageType_1 = value;
-        export { packageType_1 as packageType };
-        import provisionalData_1 = value;
-        export { provisionalData_1 as provisionalData };
     }
 }
 declare function useDownloadDataState(): {
@@ -345,8 +323,8 @@ declare namespace DEFAULT_STATE {
     export let dialogOpen: boolean;
     export let awaitingHigherOrderUpdateWhenDialogOpens: boolean;
     export let cachedHigherOrderState: {};
-    let productData_2: {};
-    export { productData_2 as productData };
+    let productData_1: {};
+    export { productData_1 as productData };
     export let requiredSteps: never[];
     export let allStepsComplete: boolean;
     export let fromManifest: boolean;
@@ -357,8 +335,8 @@ declare namespace DEFAULT_STATE {
         let value: null;
         let error: null;
     }
-    let availabilityView_2: null;
-    export { availabilityView_2 as availabilityView };
+    let availabilityView_1: null;
+    export { availabilityView_1 as availabilityView };
     export let s3FileFetches: {};
     export let s3FileFetchProgress: number;
     export namespace s3Files {
@@ -393,7 +371,7 @@ declare namespace DEFAULT_STATE {
         export let visibleColumns: string[];
     }
     export let latestRelease: null;
-    export namespace release_2 {
+    export namespace release_1 {
         let value_2: null;
         export { value_2 as value };
         let validValues_1: never[];
@@ -401,8 +379,8 @@ declare namespace DEFAULT_STATE {
         let isValid_1: boolean;
         export { isValid_1 as isValid };
     }
-    export { release_2 as release };
-    export namespace sites_2 {
+    export { release_1 as release };
+    export namespace sites_1 {
         let value_3: never[];
         export { value_3 as value };
         let validValues_2: never[];
@@ -410,8 +388,8 @@ declare namespace DEFAULT_STATE {
         let isValid_2: boolean;
         export { isValid_2 as isValid };
     }
-    export { sites_2 as sites };
-    export namespace dateRange_2 {
+    export { sites_1 as sites };
+    export namespace dateRange_1 {
         let value_4: string[];
         export { value_4 as value };
         let validValues_3: string[];
@@ -419,8 +397,8 @@ declare namespace DEFAULT_STATE {
         let isValid_3: boolean;
         export { isValid_3 as isValid };
     }
-    export { dateRange_2 as dateRange };
-    export namespace documentation_2 {
+    export { dateRange_1 as dateRange };
+    export namespace documentation_1 {
         let value_5: string;
         export { value_5 as value };
         let validValues_4: string[];
@@ -428,8 +406,8 @@ declare namespace DEFAULT_STATE {
         let isValid_4: boolean;
         export { isValid_4 as isValid };
     }
-    export { documentation_2 as documentation };
-    export namespace packageType_2 {
+    export { documentation_1 as documentation };
+    export namespace packageType_1 {
         let value_6: null;
         export { value_6 as value };
         let validValues_5: string[];
@@ -437,8 +415,8 @@ declare namespace DEFAULT_STATE {
         let isValid_5: boolean;
         export { isValid_5 as isValid };
     }
-    export { packageType_2 as packageType };
-    export namespace provisionalData_2 {
+    export { packageType_1 as packageType };
+    export namespace provisionalData_1 {
         let value_7: string;
         export { value_7 as value };
         let validValues_6: string[];
@@ -446,7 +424,7 @@ declare namespace DEFAULT_STATE {
         let isValid_6: boolean;
         export { isValid_6 as isValid };
     }
-    export { provisionalData_2 as provisionalData };
+    export { provisionalData_1 as provisionalData };
     export namespace policies {
         let value_8: boolean;
         export { value_8 as value };
@@ -457,12 +435,12 @@ declare namespace DEFAULT_STATE {
     }
 }
 declare namespace ALL_STEPS {
-    export namespace documentation_3 {
+    export namespace documentation_2 {
         let requiredStateKeys: string[];
         let label: string;
         let title: string;
     }
-    export { documentation_3 as documentation };
+    export { documentation_2 as documentation };
     export namespace externalExclusive {
         let requiredStateKeys_1: never[];
         export { requiredStateKeys_1 as requiredStateKeys };
@@ -478,7 +456,7 @@ declare namespace ALL_STEPS {
         export { title_1 as title };
     }
     export { s3Files_1 as s3Files };
-    export namespace packageType_3 {
+    export namespace packageType_2 {
         let requiredStateKeys_3: string[];
         export { requiredStateKeys_3 as requiredStateKeys };
         let label_3: string;
@@ -486,8 +464,8 @@ declare namespace ALL_STEPS {
         let title_2: string;
         export { title_2 as title };
     }
-    export { packageType_3 as packageType };
-    export namespace provisionalData_3 {
+    export { packageType_2 as packageType };
+    export namespace provisionalData_2 {
         let requiredStateKeys_4: string[];
         export { requiredStateKeys_4 as requiredStateKeys };
         let label_4: string;
@@ -495,7 +473,7 @@ declare namespace ALL_STEPS {
         let title_3: string;
         export { title_3 as title };
     }
-    export { provisionalData_3 as provisionalData };
+    export { provisionalData_2 as provisionalData };
     export namespace sitesAndDateRange {
         let requiredStateKeys_5: string[];
         export { requiredStateKeys_5 as requiredStateKeys };

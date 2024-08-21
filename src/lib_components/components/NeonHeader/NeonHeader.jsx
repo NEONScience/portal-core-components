@@ -15,6 +15,7 @@ import NeonAuth, { NeonAuthType, NeonAuthDisplayType } from '../NeonAuth/NeonAut
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
 import ApplicationMenu from './ApplicationMenu';
+import { resolveProps } from '../../util/defaultProps';
 
 import HeaderSearchSvg from '../../images/svg/header-search.svg';
 import HeaderSearchHoverSvg from '../../images/svg/header-search-hover.svg';
@@ -302,7 +303,14 @@ const applyAttribute = (nextAttribs, attribs, attr) => {
   }
 };
 
-const NeonHeader = forwardRef((props, headerRef) => {
+const defaultProps = {
+  drupalCssLoaded: false,
+  unstickyDrupalHeader: true,
+  showSkeleton: false,
+};
+
+const NeonHeader = forwardRef((inProps, headerRef) => {
+  const props = resolveProps(defaultProps, inProps);
   const {
     drupalCssLoaded,
     unstickyDrupalHeader,
@@ -468,12 +476,6 @@ NeonHeader.propTypes = {
   drupalCssLoaded: PropTypes.bool,
   unstickyDrupalHeader: PropTypes.bool,
   showSkeleton: PropTypes.bool,
-};
-
-NeonHeader.defaultProps = {
-  drupalCssLoaded: false,
-  unstickyDrupalHeader: true,
-  showSkeleton: false,
 };
 
 export default NeonHeader;

@@ -8,6 +8,7 @@ import { faBox, faBoxesStacked } from '@fortawesome/free-solid-svg-icons';
 
 import InfoMessageCard from '../Card/InfoMessageCard';
 import Theme from '../Theme/Theme';
+import { resolveProps } from '../../util/defaultProps';
 import { NeonTheme } from '../Theme/types';
 import { exists } from '../../util/typeUtil';
 
@@ -44,9 +45,19 @@ export interface DataProductBundleCardProps {
   classes?: DataProductBundleCardClasses;
 }
 
+const defaultProps: DataProductBundleCardProps = {
+  titleContent: undefined,
+  detailContent: undefined,
+  subTitleContent: undefined,
+  customContent: undefined,
+  isSplit: false,
+  classes: undefined,
+};
+
 const DataProductBundleCard: React.FC<DataProductBundleCardProps> = (
-  props: DataProductBundleCardProps,
+  inProps: DataProductBundleCardProps,
 ): React.JSX.Element => {
+  const props = resolveProps(defaultProps, inProps);
   const classes = useStyles(Theme);
   const {
     titleContent,
@@ -103,15 +114,6 @@ const DataProductBundleCard: React.FC<DataProductBundleCardProps> = (
       }}
     />
   );
-};
-
-DataProductBundleCard.defaultProps = {
-  titleContent: undefined,
-  detailContent: undefined,
-  subTitleContent: undefined,
-  customContent: undefined,
-  isSplit: false,
-  classes: undefined,
 };
 
 export default DataProductBundleCard;

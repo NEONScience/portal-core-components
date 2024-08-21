@@ -4,6 +4,7 @@ import React, {
   useLayoutEffect,
   useCallback,
   useRef,
+  forwardRef,
 } from 'react';
 
 import PropTypes from 'prop-types';
@@ -55,6 +56,7 @@ import NeonContext from '../NeonContext/NeonContext';
 import MapSelectionButton from '../MapSelectionButton/MapSelectionButton';
 
 import { exists, isStringNonEmpty } from '../../util/typeUtil';
+import { resolveProps } from '../../util/defaultProps';
 
 import iconCoreTerrestrialSVG from '../SiteMap/svg/icon-site-core-terrestrial.svg';
 import iconCoreAquaticSVG from '../SiteMap/svg/icon-site-core-aquatic.svg';
@@ -212,18 +214,9 @@ const selectStyles = {
 /**
    Common React-Select Components - used by both site-specific and position-specific react-selects
 */
-function inputComponent({ inputRef, ...props }) {
-  return <div ref={inputRef} {...props} />;
-}
-
-inputComponent.propTypes = {
-  inputRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({
-      current: PropTypes.any.isRequired,
-    }),
-  ]).isRequired,
-};
+const inputComponent = forwardRef((props, ref) => (
+  <div ref={ref} {...props} />
+));
 
 function ValueContainer(props) {
   const { selectProps, children } = props;
@@ -311,10 +304,15 @@ const positionsSeriesDescription = `
   positions × 3 variables = 6 distinct series).
 `;
 
+const positionHistoryButtonDefaultProps = {
+  fullWidth: false,
+};
+
 /**
    PositionHistoryButton - button that opens a dialog to show all history for a given position
 */
-function PositionHistoryButton(props) {
+function PositionHistoryButton(inProps) {
+  const props = resolveProps(positionHistoryButtonDefaultProps, inProps);
   const classes = useStyles(Theme);
   const {
     siteCode,
@@ -461,17 +459,16 @@ PositionHistoryButton.propTypes = {
   })).isRequired,
 };
 
-PositionHistoryButton.defaultProps = {
-  fullWidth: false,
-};
-
 const POSITION_DETAIL_COMPONENT_XS_UPPER = 300;
 const POSITION_DETAIL_COMPONENT_MD_LOWER = 600;
+
+const positionDetailDefaultProps = { wide: false };
 
 /**
    PositionDetail - Component to display neatly-formatted position content
 */
-function PositionDetail(props) {
+function PositionDetail(inProps) {
+  const props = resolveProps(positionDetailDefaultProps, inProps);
   const { siteCode, position, wide } = props;
   const classes = useStyles(Theme);
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
@@ -716,12 +713,13 @@ PositionDetail.propTypes = {
   wide: PropTypes.bool,
 };
 
-PositionDetail.defaultProps = { wide: false };
+const selectedPositionDefaultProps = { disabled: false };
 
 /**
    Selected Position - Component for a single deletable position paper to show within a SelectedSite
 */
-function SelectedPosition(props) {
+function SelectedPosition(inProps) {
+  const props = resolveProps(selectedPositionDefaultProps, inProps);
   const classes = useStyles(Theme);
   const { siteCode, position, disabled } = props;
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
@@ -755,8 +753,6 @@ SelectedPosition.propTypes = {
   position: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
 };
-
-SelectedPosition.defaultProps = { disabled: false };
 
 /**
    SelectPositionsButton - button that opens a dialog for position selection
@@ -918,10 +914,13 @@ function SitesControl(props) {
 
 SitesControl.propTypes = ControlPropTypes;
 
+const siteOptionDefaultProps = OptionDefaultProps;
+
 /**
    SiteOption - Component for a single site as it appears in the drop-down menu
 */
-function SiteOption(props) {
+function SiteOption(inProps) {
+  const props = resolveProps(siteOptionDefaultProps, inProps);
   const classes = useStyles(Theme);
   const {
     innerRef,
@@ -988,12 +987,14 @@ function SiteOption(props) {
 }
 
 SiteOption.propTypes = OptionPropTypes;
-SiteOption.defaultProps = OptionDefaultProps;
+
+const selectedSiteDefaultProps = { disabled: false };
 
 /**
    Selected Site - Component for a single deletable site paper to show below the search box
 */
-function SelectedSite(props) {
+function SelectedSite(inProps) {
+  const props = resolveProps(selectedSiteDefaultProps, inProps);
   const classes = useStyles(Theme);
   const {
     site,
@@ -1205,7 +1206,6 @@ SelectedSite.propTypes = {
   disabled: PropTypes.bool,
   ...TabComponentPropTypes,
 };
-SelectedSite.defaultProps = { disabled: false };
 
 /**
    Complete Select for Sites

@@ -24,8 +24,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import ListItemText from '@mui/material/ListItemText';
 import Paper from '@mui/material/Paper';
-import ToggleButton from '@mui/lab/ToggleButton';
-import ToggleButtonGroup from '@mui/lab/ToggleButtonGroup';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import Zoom from '@mui/material/Zoom';
@@ -49,6 +49,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 import NeonContext from '../NeonContext/NeonContext';
 import Theme from '../Theme/Theme';
+import { resolveProps } from '../../util/defaultProps';
 
 import SiteMapContext from './SiteMapContext';
 import SiteMapLeaflet from './SiteMapLeaflet';
@@ -311,7 +312,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SiteMapContainer = (props) => {
+const defaultProps = {
+  unusableVerticalSpace: 0,
+  mapUniqueId: 0,
+};
+
+const SiteMapContainer = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
   const classes = useStyles(Theme);
   const { unusableVerticalSpace = 0, mapUniqueId } = props;
 
@@ -1294,11 +1301,6 @@ const SiteMapContainer = (props) => {
 SiteMapContainer.propTypes = {
   unusableVerticalSpace: PropTypes.number,
   mapUniqueId: PropTypes.number,
-};
-
-SiteMapContainer.defaultProps = {
-  unusableVerticalSpace: 0,
-  mapUniqueId: 0,
 };
 
 export default SiteMapContainer;

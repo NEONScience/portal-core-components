@@ -30,7 +30,7 @@ import { TabComponentPropTypes } from './TimeSeriesViewerContext';
 /**
    PositionHistoryButton - button that opens a dialog to show all history for a given position
 */
-declare function PositionHistoryButton(props: any): React.JSX.Element;
+declare function PositionHistoryButton(inProps: any): React.JSX.Element;
 declare namespace PositionHistoryButton {
     namespace propTypes {
         let siteCode: PropTypes.Validator<string>;
@@ -53,15 +53,11 @@ declare namespace PositionHistoryButton {
             referenceLocationElevation: PropTypes.Requireable<number>;
         }> | null | undefined)[]>;
     }
-    namespace defaultProps {
-        let fullWidth_1: boolean;
-        export { fullWidth_1 as fullWidth };
-    }
 }
 /**
    PositionDetail - Component to display neatly-formatted position content
 */
-declare function PositionDetail(props: any): React.JSX.Element;
+declare function PositionDetail(inProps: any): React.JSX.Element;
 declare namespace PositionDetail {
     export namespace propTypes_1 {
         let siteCode_1: PropTypes.Validator<string>;
@@ -71,16 +67,11 @@ declare namespace PositionDetail {
         export let wide: PropTypes.Requireable<boolean>;
     }
     export { propTypes_1 as propTypes };
-    export namespace defaultProps_1 {
-        let wide_1: boolean;
-        export { wide_1 as wide };
-    }
-    export { defaultProps_1 as defaultProps };
 }
 /**
    Selected Position - Component for a single deletable position paper to show within a SelectedSite
 */
-declare function SelectedPosition(props: any): React.JSX.Element;
+declare function SelectedPosition(inProps: any): React.JSX.Element;
 declare namespace SelectedPosition {
     export namespace propTypes_2 {
         let siteCode_2: PropTypes.Validator<string>;
@@ -90,11 +81,6 @@ declare namespace SelectedPosition {
         export let disabled: PropTypes.Requireable<boolean>;
     }
     export { propTypes_2 as propTypes };
-    export namespace defaultProps_2 {
-        let disabled_1: boolean;
-        export { disabled_1 as disabled };
-    }
-    export { defaultProps_2 as defaultProps };
 }
 /**
    SelectPositionsButton - button that opens a dialog for position selection
@@ -119,15 +105,14 @@ declare namespace SitesControl {
 /**
    SiteOption - Component for a single site as it appears in the drop-down menu
 */
-declare function SiteOption(props: any): React.JSX.Element;
+declare function SiteOption(inProps: any): React.JSX.Element;
 declare namespace SiteOption {
     export { OptionPropTypes as propTypes };
-    export { OptionDefaultProps as defaultProps };
 }
 /**
    Selected Site - Component for a single deletable site paper to show below the search box
 */
-declare function SelectedSite(props: any): React.JSX.Element;
+declare function SelectedSite(inProps: any): React.JSX.Element;
 declare namespace SelectedSite {
     let propTypes_4: {
         setSelectedTab: PropTypes.Validator<(...args: any[]) => any>;
@@ -141,11 +126,6 @@ declare namespace SelectedSite {
         disabled: PropTypes.Requireable<boolean>;
     };
     export { propTypes_4 as propTypes };
-    export namespace defaultProps_3 {
-        let disabled_2: boolean;
-        export { disabled_2 as disabled };
-    }
-    export { defaultProps_3 as defaultProps };
 }
 import PropTypes from 'prop-types';
 declare namespace ControlPropTypes {
@@ -178,14 +158,4 @@ declare namespace OptionPropTypes {
     export let isSelected: PropTypes.Validator<boolean>;
     export let isDisabled: PropTypes.Requireable<boolean>;
     export let data: PropTypes.Validator<object>;
-}
-declare namespace OptionDefaultProps {
-    let children_2: null;
-    export { children_2 as children };
-    let innerProps_2: null;
-    export { innerProps_2 as innerProps };
-    let innerRef_2: null;
-    export { innerRef_2 as innerRef };
-    let isDisabled_1: boolean;
-    export { isDisabled_1 as isDisabled };
 }

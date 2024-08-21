@@ -16,6 +16,7 @@ import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonSignInButtonState from '../NeonSignInButton/NeonSignInButtonState';
 import makeStateStorage from '../../service/StateStorageService';
 import { convertStateForStorage, convertStateFromStorage } from './StateStorageConverter';
+import { resolveProps } from '../../util/defaultProps';
 
 import {
   fetchManyLocationsGraphQL,
@@ -1076,7 +1077,8 @@ const useSiteMapContext = () => {
 const restoreStateLookup = {};
 
 /** Context Provider */
-const Provider = (props) => {
+const Provider = (inProps) => {
+  const props = resolveProps(SITE_MAP_DEFAULT_PROPS, inProps);
   const {
     view,
     aspectRatio,
@@ -1480,7 +1482,6 @@ Provider.propTypes = {
     PropTypes.string,
   ]).isRequired,
 };
-Provider.defaultProps = SITE_MAP_DEFAULT_PROPS;
 
 /**
    Export

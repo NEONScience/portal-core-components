@@ -15,6 +15,7 @@ import WarningCard from '../../Card/WarningCard';
 import Theme from '../../Theme/Theme';
 
 import RouteService from '../../../service/RouteService';
+import { withDefaultProps } from '../../../util/defaultProps';
 import { NeonTheme } from '../../Theme/types';
 import { Nullable } from '../../../types/core';
 import {
@@ -60,6 +61,15 @@ const useStyles = makeStyles((theme: NeonTheme) => ({
     marginBottom: theme.spacing(2),
   },
 }));
+
+export const defaultProps: DataProductCitationViewProps = {
+  showQuoteIcon: false,
+  disableConditional: false,
+  disableSkeleton: false,
+  showTextOnly: false,
+  textOnlyProps: undefined,
+  showManyParents: true,
+};
 
 const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
   props: DataProductCitationViewProps,
@@ -319,13 +329,4 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
   return renderCitationDisplay();
 };
 
-DataProductCitationView.defaultProps = {
-  showQuoteIcon: false,
-  disableConditional: false,
-  disableSkeleton: false,
-  showTextOnly: false,
-  textOnlyProps: undefined,
-  showManyParents: true,
-};
-
-export default DataProductCitationView;
+export default withDefaultProps(DataProductCitationView, defaultProps);

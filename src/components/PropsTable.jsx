@@ -11,6 +11,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
 import Theme, { COLORS } from '@/components/Theme/Theme';
+import { resolveProps } from '@/util/defaultProps';
 
 const useStyles = makeStyles((theme) => ({
   propTableRowGrey: {
@@ -24,7 +25,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PropsTable = (props) => {
+const defaultProps = {
+  fullHeight: false,
+};
+
+const PropsTable = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
   const { props: propRows, fullHeight } = props;
   const classes = useStyles(Theme);
 
@@ -75,10 +81,6 @@ PropsTable.propTypes = {
     }),
   ).isRequired,
   fullHeight: PropTypes.bool,
-};
-
-PropsTable.defaultProps = {
-  fullHeight: false,
 };
 
 export default PropsTable;

@@ -174,6 +174,16 @@ export const TIME_STEPS: {
     };
 };
 export function summarizeTimeSteps(steps: any, timeStep?: null, pluralize?: boolean): string;
+export namespace defaultProps {
+    export let timeSeriesUniqueId: number;
+    import mode_1 = VIEWER_MODE.DEFAULT;
+    export { mode_1 as mode };
+    let productCode_1: null;
+    export { productCode_1 as productCode };
+    export let productData: null;
+    let release_1: null;
+    export { release_1 as release };
+}
 export default TimeSeriesViewerContext;
 export function getTestableItems(): {
     DEFAULT_STATE?: undefined;
@@ -329,30 +339,19 @@ declare namespace TimeSeriesViewerContext {
 /**
    Context Provider
 */
-declare function Provider(props: any): React.JSX.Element;
+declare function Provider(inProps: any): React.JSX.Element;
 declare namespace Provider {
     namespace propTypes {
         export { number as timeSeriesUniqueId };
-        let mode_1: PropTypes.Requireable<string>;
-        export { mode_1 as mode };
-        import productCode_1 = TimeSeriesViewerPropTypes.productCode;
-        export { productCode_1 as productCode };
-        import productData = TimeSeriesViewerPropTypes.productData;
-        export { productData };
-        let release_1: PropTypes.Requireable<string>;
-        export { release_1 as release };
-        export let children: PropTypes.Validator<NonNullable<NonNullable<PropTypes.ReactNodeLike>>>;
-    }
-    namespace defaultProps {
-        export let timeSeriesUniqueId: number;
-        import mode_2 = VIEWER_MODE.DEFAULT;
+        let mode_2: PropTypes.Requireable<string>;
         export { mode_2 as mode };
-        let productCode_2: null;
+        import productCode_2 = TimeSeriesViewerPropTypes.productCode;
         export { productCode_2 as productCode };
-        let productData_1: null;
+        import productData_1 = TimeSeriesViewerPropTypes.productData;
         export { productData_1 as productData };
-        let release_2: null;
+        let release_2: PropTypes.Requireable<string>;
         export { release_2 as release };
+        export let children: PropTypes.Validator<NonNullable<NonNullable<PropTypes.ReactNodeLike>>>;
     }
 }
 declare function useTimeSeriesViewerState(): {

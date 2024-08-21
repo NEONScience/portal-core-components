@@ -3,13 +3,27 @@ import PropTypes from 'prop-types';
 
 import NeonContext from '../NeonContext/NeonContext';
 import Theme from '../Theme/Theme';
+import { resolveProps } from '../../util/defaultProps';
 
 import AvailabilityContext from './AvailabilityContext';
 import BasicAvailabilityInterface from './BasicAvailabilityInterface';
 import EnhancedAvailabilityInterface from './EnhancedAvailabilityInterface';
 import { AvailabilityPropTypes } from './AvailabilityUtils';
 
-const DataProductAvailability = (props) => {
+const defaultProps = {
+  sites: [],
+  siteCodes: [],
+  dataProducts: [],
+  view: null,
+  sortMethod: null,
+  sortDirection: 'ASC',
+  disableSelection: false,
+  delineateRelease: false,
+  availabilityStatusType: null,
+};
+
+const DataProductAvailability = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
   const {
     sites: enhancedSites,
     siteCodes: basicSiteCodes,
@@ -36,18 +50,6 @@ DataProductAvailability.propTypes = {
   disableSelection: PropTypes.bool,
   delineateRelease: PropTypes.bool,
   availabilityStatusType: PropTypes.oneOf(['available', 'tombstoned']),
-};
-
-DataProductAvailability.defaultProps = {
-  sites: [],
-  siteCodes: [],
-  dataProducts: [],
-  view: null,
-  sortMethod: null,
-  sortDirection: 'ASC',
-  disableSelection: false,
-  delineateRelease: false,
-  availabilityStatusType: null,
 };
 
 const WrappedDataProductAvailability = Theme.getWrappedComponent(

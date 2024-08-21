@@ -10,6 +10,7 @@ import WarningIcon from '@mui/icons-material/Warning';
 import Theme from '../Theme/Theme';
 import NeonContext from '../NeonContext/NeonContext';
 import ExternalHost from '../ExternalHost/ExternalHost';
+import { resolveProps } from '../../util/defaultProps';
 
 const useStyles = makeStyles((theme) => ({
   siteLinksContainer: {
@@ -33,7 +34,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ExternalHostProductSpecificLinks(props) {
+const defaultProps = {
+  productCode: null,
+  siteCodes: null,
+};
+
+export default function ExternalHostProductSpecificLinks(inProps) {
+  const props = resolveProps(defaultProps, inProps);
   const classes = useStyles(Theme);
 
   const { productCode, siteCodes } = props;
@@ -157,9 +164,4 @@ export default function ExternalHostProductSpecificLinks(props) {
 ExternalHostProductSpecificLinks.propTypes = {
   productCode: PropTypes.string,
   siteCodes: PropTypes.arrayOf(PropTypes.string),
-};
-
-ExternalHostProductSpecificLinks.defaultProps = {
-  productCode: null,
-  siteCodes: null,
 };

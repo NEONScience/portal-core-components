@@ -15,6 +15,7 @@ import { AvailabilityPropTypes } from './AvailabilityUtils';
 
 import NeonSignInButtonState from '../NeonSignInButton/NeonSignInButtonState';
 import makeStateStorage from '../../service/StateStorageService';
+import { resolveProps } from '../../util/defaultProps';
 
 const SORT_DIRECTIONS = { ASC: 'ASC', DESC: 'DESC' };
 const DEFAULT_STATE = {
@@ -208,10 +209,16 @@ const useAvailabilityState = () => {
  */
 const restoreStateLookup = {};
 
+const defaultProps = {
+  dataAvailabilityUniqueId: 0,
+  sites: [],
+};
+
 /**
    Context Provider
 */
-const Provider = (props) => {
+const Provider = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
   const { sites, dataAvailabilityUniqueId, children } = props;
 
   const [
@@ -295,11 +302,6 @@ Provider.propTypes = {
     PropTypes.node,
     PropTypes.string,
   ]).isRequired,
-};
-
-Provider.defaultProps = {
-  dataAvailabilityUniqueId: 0,
-  sites: [],
 };
 
 /**

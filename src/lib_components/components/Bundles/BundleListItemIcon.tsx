@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBox, faBoxesStacked } from '@fortawesome/free-solid-svg-icons';
 
 import Theme from '../Theme/Theme';
+import { resolveProps } from '../../util/defaultProps';
 import { NeonTheme } from '../Theme/types';
 
 const useStyles = makeStyles((theme: NeonTheme) => ({
@@ -20,9 +21,14 @@ export interface BundleListItemIconProps {
   isSplit?: boolean;
 }
 
+const defaultProps: BundleListItemIconProps = {
+  isSplit: false,
+};
+
 const BundleListItemIcon: React.FC<BundleListItemIconProps> = (
-  props: BundleListItemIconProps,
+  inProps: BundleListItemIconProps,
 ): React.JSX.Element => {
+  const props = resolveProps(defaultProps, inProps);
   const classes = useStyles(Theme);
   const { isSplit }: BundleListItemIconProps = props;
   return (
@@ -34,10 +40,6 @@ const BundleListItemIcon: React.FC<BundleListItemIconProps> = (
       />
     </ListItemIcon>
   );
-};
-
-BundleListItemIcon.defaultProps = {
-  isSplit: false,
 };
 
 export default BundleListItemIcon;

@@ -19,6 +19,7 @@ import WarningCard from '../Card/WarningCard';
 import { StylesHook } from '../../types/muiTypes';
 import { NeonDocument } from '../../types/neonApi';
 import { isStringNonEmpty } from '../../util/typeUtil';
+import { resolveProps } from '../../util/defaultProps';
 import PdfDocumentViewer from './PdfDocumentViewer';
 
 const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
@@ -55,7 +56,12 @@ const calcAutoHeight = (width: number): number => {
   return Math.floor(width * mult);
 };
 
-const DocumentViewer: React.FC<DocumentViewerProps> = (props: DocumentViewerProps): React.JSX.Element => {
+const defaultProps = {
+  fullUrlPath: undefined,
+};
+
+const DocumentViewer: React.FC<DocumentViewerProps> = (inProps: DocumentViewerProps): React.JSX.Element => {
+  const props = resolveProps(defaultProps, inProps) as DocumentViewerProps;
   const classes = useStyles(Theme);
   const {
     document,
@@ -154,10 +160,6 @@ const DocumentViewer: React.FC<DocumentViewerProps> = (props: DocumentViewerProp
       {renderObject()}
     </div>
   );
-};
-
-DocumentViewer.defaultProps = {
-  fullUrlPath: undefined,
 };
 
 export default DocumentViewer;

@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useId } from 'react';
 import PropTypes from 'prop-types';
 
 import moment from 'moment';
 
-import { useId } from 'react-id-generator';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import { makeStyles } from '@mui/styles';
@@ -25,6 +24,7 @@ import Theme from '../Theme/Theme';
 
 import RouteService from '../../service/RouteService';
 import ReleaseService from '../../service/ReleaseService';
+import { resolveProps } from '../../util/defaultProps';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -110,7 +110,25 @@ const formatGenerationDate = (generationDate) => {
   return generationMoment.isValid() ? generationMoment.format('MMMM D, YYYY') : null;
 };
 
-const ReleaseFilter = (props) => {
+const defaultProps = {
+  excludeNullRelease: false,
+  horizontal: false,
+  maxWidth: null,
+  nullReleaseProductCount: null,
+  onChange: () => {},
+  releases: [],
+  selected: null,
+  showDoi: false,
+  showGenerationDate: false,
+  showProductCount: false,
+  showReleaseLink: false,
+  releaseLinkDisplayType: 'Button',
+  skeleton: false,
+  title: 'Release',
+};
+
+const ReleaseFilter = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
   const classes = useStyles(Theme);
   const {
     excludeNullRelease,
@@ -130,7 +148,7 @@ const ReleaseFilter = (props) => {
     ...otherProps
   } = props;
 
-  const [instanceId] = useId();
+  const instanceId = useId();
   const inputId = `release-filter-input-${instanceId}`;
   const labelId = `release-filter-label-${instanceId}`;
 
@@ -468,23 +486,6 @@ ReleaseFilter.propTypes = {
   releaseLinkDisplayType: PropTypes.oneOf(['Link', 'Button']),
   skeleton: PropTypes.bool,
   title: PropTypes.string,
-};
-
-ReleaseFilter.defaultProps = {
-  excludeNullRelease: false,
-  horizontal: false,
-  maxWidth: null,
-  nullReleaseProductCount: null,
-  onChange: () => {},
-  releases: [],
-  selected: null,
-  showDoi: false,
-  showGenerationDate: false,
-  showProductCount: false,
-  showReleaseLink: false,
-  releaseLinkDisplayType: 'Button',
-  skeleton: false,
-  title: 'Release',
 };
 
 const WrappedReleaseFilter = Theme.getWrappedComponent(ReleaseFilter);

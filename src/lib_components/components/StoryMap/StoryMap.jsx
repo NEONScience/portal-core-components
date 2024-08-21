@@ -7,6 +7,7 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 import Theme from '../Theme/Theme';
 import FullWidthVisualization from '../FullWidthVisualization/FullWidthVisualization';
+import { resolveProps } from '../../util/defaultProps';
 
 const MIN_IFRAME_WIDTH = 240;
 
@@ -24,7 +25,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const StoryMap = (props) => {
+const defaultProps = {
+  title: null,
+};
+
+const StoryMap = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
   const { url, title } = props;
 
   const classes = useStyles(Theme);
@@ -57,10 +63,6 @@ const StoryMap = (props) => {
 StoryMap.propTypes = {
   url: PropTypes.string.isRequired,
   title: PropTypes.string,
-};
-
-StoryMap.defaultProps = {
-  title: null,
 };
 
 const WrappedStoryMap = Theme.getWrappedComponent(StoryMap);

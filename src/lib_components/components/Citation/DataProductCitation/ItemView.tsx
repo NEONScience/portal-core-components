@@ -27,6 +27,7 @@ import DataCiteService, {
 } from '../../../service/DataCiteService';
 import RouteService from '../../../service/RouteService';
 import Theme from '../../Theme/Theme';
+import { withDefaultProps } from '../../../util/defaultProps';
 import { PROVISIONAL_RELEASE } from '../../../service/ReleaseService';
 import { exists, isStringNonEmpty } from '../../../util/typeUtil';
 import { Nullable, Undef, UnknownRecord } from '../../../types/core';
@@ -93,6 +94,17 @@ const useStyles = makeStyles((theme: NeonTheme) => ({
     margin: theme.spacing(0, 0, 2, 0),
   },
 }));
+
+const defaultProps: Omit<
+  DataProductCitationItemViewProps,
+  'citationItem'|'viewState'|'hasManyParents'
+> = {
+  showQuoteIcon: false,
+  disableConditional: false,
+  disableSkeleton: false,
+  showTextOnly: false,
+  textOnlyProps: undefined,
+};
 
 const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = (
   props: DataProductCitationItemViewProps,
@@ -494,12 +506,4 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
   );
 };
 
-DataProductCitationItemView.defaultProps = {
-  showQuoteIcon: false,
-  disableConditional: false,
-  disableSkeleton: false,
-  showTextOnly: false,
-  textOnlyProps: undefined,
-};
-
-export default DataProductCitationItemView;
+export default withDefaultProps(DataProductCitationItemView, defaultProps);

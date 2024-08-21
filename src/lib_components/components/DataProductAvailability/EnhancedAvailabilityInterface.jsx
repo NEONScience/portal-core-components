@@ -10,13 +10,12 @@ import PropTypes from 'prop-types';
 import { uniqueId } from 'lodash';
 
 import { makeStyles } from '@mui/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
 
 import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-import ToggleButton from '@mui/lab/ToggleButton';
-import ToggleButtonGroup from '@mui/lab/ToggleButtonGroup';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Typography from '@mui/material/Typography';
 
 import AscIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -27,6 +26,7 @@ import AvailabilityPending from './AvailabilityPending';
 import FullWidthVisualization from '../FullWidthVisualization/FullWidthVisualization';
 import NeonContext from '../NeonContext/NeonContext';
 import Theme from '../Theme/Theme';
+import { resolveProps } from '../../util/defaultProps';
 
 import EnhancedAvailabilityKey from './EnhancedAvailabilityKey';
 import EnhancedAvailabilityGrid from './EnhancedAvailabilityGrid';
@@ -73,7 +73,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const EnhancedAvailabilityInterface = (props) => {
+const defaultProps = {
+  sites: [],
+  view: null,
+  table: 'ALL',
+  sortMethod: null,
+  sortDirection: 'ASC',
+  disableSelection: false,
+};
+
+const EnhancedAvailabilityInterface = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
   const { sites: availabilitySites, ...other } = props;
 
   const classes = useStyles(Theme);
@@ -286,15 +296,6 @@ EnhancedAvailabilityInterface.propTypes = {
   sortMethod: PropTypes.oneOf(['sites', 'states', 'domains']),
   sortDirection: PropTypes.oneOf(['ASC', 'DESC']),
   disableSelection: PropTypes.bool,
-};
-
-EnhancedAvailabilityInterface.defaultProps = {
-  sites: [],
-  view: null,
-  table: 'ALL',
-  sortMethod: null,
-  sortDirection: 'ASC',
-  disableSelection: false,
 };
 
 export default EnhancedAvailabilityInterface;

@@ -118,18 +118,12 @@ export const CELL_ATTRS: {
         stroke: string;
     };
 };
-export function JsxCell(props: any): React.JSX.Element;
+export function JsxCell(inProps: any): React.JSX.Element;
 export namespace JsxCell {
     namespace propTypes {
         let status: PropTypes.Validator<string>;
         let x: PropTypes.Requireable<number>;
         let y: PropTypes.Requireable<number>;
-    }
-    namespace defaultProps {
-        let x_1: number;
-        export { x_1 as x };
-        let y_1: number;
-        export { y_1 as y };
     }
 }
 import React from 'react';

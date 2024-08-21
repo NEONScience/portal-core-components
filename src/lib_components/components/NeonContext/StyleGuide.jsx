@@ -247,15 +247,18 @@ export default NeonContextStateComponent;
       <CodeBlock>
         {`
 import NeonContext from 'portal-core-components/lib/components/NeonContext';
+import { resolveProps } from 'portal-core-components/lib/util/defaultProps';
 
-const Foo = (props) => {
+const defaultProps = { ... };
+
+const Foo = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
   const [{ data: neonContextData }] = NeonContext.useNeonContextState();
   ...
   return (...);
 }
 
 Foo.propTypes = { ... };
-Foo.defaultProps = { ... };
 
 const WrappedFoo = NeonContext.getWrappedComponent(Foo);
 

@@ -1,4 +1,5 @@
 import React from 'react';
 import { DataProductCitationViewProps } from './ViewState';
-declare const DataProductCitationView: React.FC<DataProductCitationViewProps>;
-export default DataProductCitationView;
+export declare const defaultProps: DataProductCitationViewProps;
+declare const _default: React.ComponentType<DataProductCitationViewProps>;
+export default _default;

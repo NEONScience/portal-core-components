@@ -37,6 +37,7 @@ import NeonContext from '../NeonContext/NeonContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import FullWidthVisualization from '../FullWidthVisualization/FullWidthVisualization';
 import MapSelectionButton from '../MapSelectionButton/MapSelectionButton';
+import { resolveProps } from '../../util/defaultProps';
 
 const MIN_IFRAME_WIDTH = 240;
 
@@ -127,10 +128,20 @@ const getCurrentSliderBounds = (currentYears) => {
   };
 };
 
+const defaultProps = {
+  showTitle: true,
+  initialSite: null,
+  initialYear: null,
+  initialFlight: null,
+  fillContainer: false,
+  showOpenInNewWindow: false,
+};
+
 /**
    Main Function
 */
-const AopDataViewer = (props) => {
+const AopDataViewer = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
   const classes = useStyles(Theme);
   const {
     productCode,
@@ -591,15 +602,6 @@ AopDataViewer.propTypes = {
   initialFlight: PropTypes.number,
   fillContainer: PropTypes.bool,
   showOpenInNewWindow: PropTypes.bool,
-};
-
-AopDataViewer.defaultProps = {
-  showTitle: true,
-  initialSite: null,
-  initialYear: null,
-  initialFlight: null,
-  fillContainer: false,
-  showOpenInNewWindow: false,
 };
 
 const WrappedAopDataViewer = Theme.getWrappedComponent(

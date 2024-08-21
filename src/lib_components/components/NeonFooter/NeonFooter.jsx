@@ -10,6 +10,7 @@ import DRUPAL_FOOTER_HTML_FALLBACK from '../../remoteAssets/drupal-footer.html';
 import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import Theme from '../Theme/Theme';
+import { resolveProps } from '../../util/defaultProps';
 
 const DRUPAL_FOOTER_HTML = REMOTE_ASSETS.DRUPAL_FOOTER_HTML.KEY;
 
@@ -21,7 +22,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NeonFooter = (props) => {
+const defaultProps = {
+  drupalCssLoaded: false,
+  showSkeleton: false,
+};
+
+const NeonFooter = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
   const { drupalCssLoaded, showSkeleton } = props;
   const classes = useStyles(Theme);
   const [{
@@ -82,11 +89,6 @@ const NeonFooter = (props) => {
 NeonFooter.propTypes = {
   drupalCssLoaded: PropTypes.bool,
   showSkeleton: PropTypes.bool,
-};
-
-NeonFooter.defaultProps = {
-  drupalCssLoaded: false,
-  showSkeleton: false,
 };
 
 export default NeonFooter;

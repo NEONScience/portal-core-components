@@ -5,6 +5,7 @@ import { makeStyles } from '@mui/styles';
 import Container from '@mui/material/Container';
 
 import Theme from '@/components/Theme/Theme';
+import { resolveProps } from '@/util/defaultProps';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,7 +19,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ExampleBlock(props) {
+const defaultProps = {
+  column: false,
+};
+
+export default function ExampleBlock(inProps) {
+  const props = resolveProps(defaultProps, inProps);
   const classes = useStyles(Theme);
   const { column, children } = props;
   return (
@@ -41,8 +47,4 @@ ExampleBlock.propTypes = {
     PropTypes.node,
     PropTypes.string,
   ]).isRequired,
-};
-
-ExampleBlock.defaultProps = {
-  column: false,
 };
