@@ -2,7 +2,7 @@
 
 exports[`DownloadDataButton Automatically includes data-gtm props from product in context state 1`] = `
 <button
-  className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary makeStyles-gtmCaptureButton-20 css-r0d1wz-MuiButtonBase-root-MuiButton-root"
+  className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary makeStyles-gtmCaptureButton-20 css-pbr1h0-MuiButtonBase-root-MuiButton-root"
   data-gtm-product-code="DPX.XXXXX.XXX"
   data-selenium="download-data-button"
   disabled={false}
@@ -46,7 +46,7 @@ exports[`DownloadDataButton Automatically includes data-gtm props from product i
 
 exports[`DownloadDataButton Preserves MUI button props 1`] = `
 <button
-  className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeLarge MuiButton-outlinedSizeLarge MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeLarge MuiButton-outlinedSizeLarge MuiButton-colorPrimary css-1h64btz-MuiButtonBase-root-MuiButton-root"
+  className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeLarge MuiButton-outlinedSizeLarge MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeLarge MuiButton-outlinedSizeLarge MuiButton-colorPrimary css-cn9fhd-MuiButtonBase-root-MuiButton-root"
   data-selenium="download"
   disabled={false}
   onBlur={[Function]}
@@ -89,7 +89,7 @@ exports[`DownloadDataButton Preserves MUI button props 1`] = `
 
 exports[`DownloadDataButton Renders correctly with only a label 1`] = `
 <button
-  className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-r0d1wz-MuiButtonBase-root-MuiButton-root"
+  className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-pbr1h0-MuiButtonBase-root-MuiButton-root"
   data-selenium="download-data-button"
   disabled={false}
   onBlur={[Function]}
@@ -129,7 +129,7 @@ exports[`DownloadDataButton Renders correctly with only a label 1`] = `
 
 exports[`DownloadDataButton Renders with the dialog open from context state 1`] = `
 <button
-  className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-r0d1wz-MuiButtonBase-root-MuiButton-root"
+  className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-pbr1h0-MuiButtonBase-root-MuiButton-root"
   data-selenium="download-data-button"
   disabled={false}
   onBlur={[Function]}

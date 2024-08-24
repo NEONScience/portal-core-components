@@ -36,7 +36,7 @@ exports[`NeonPage - BrowserWarning renders warning if browser is found to be IE 
             className="makeStyles-buttonRow-9"
           >
             <a
-              className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1tvghku-MuiButtonBase-root-MuiButton-root"
+              className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1jr73wj-MuiButtonBase-root-MuiButton-root"
               href="https://www.mozilla.org/en-US/firefox/new/"
               onBlur={[Function]}
               onContextMenu={[Function]}
@@ -56,7 +56,7 @@ exports[`NeonPage - BrowserWarning renders warning if browser is found to be IE 
               Firefox
             </a>
             <a
-              className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1tvghku-MuiButtonBase-root-MuiButton-root"
+              className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1jr73wj-MuiButtonBase-root-MuiButton-root"
               href="https://www.google.com/chrome/"
               onBlur={[Function]}
               onContextMenu={[Function]}
@@ -76,7 +76,7 @@ exports[`NeonPage - BrowserWarning renders warning if browser is found to be IE 
               Chrome
             </a>
             <a
-              className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1tvghku-MuiButtonBase-root-MuiButton-root"
+              className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1jr73wj-MuiButtonBase-root-MuiButton-root"
               href="https://www.apple.com/safari/"
               onBlur={[Function]}
               onContextMenu={[Function]}
@@ -96,7 +96,7 @@ exports[`NeonPage - BrowserWarning renders warning if browser is found to be IE 
               Safari
             </a>
             <a
-              className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1tvghku-MuiButtonBase-root-MuiButton-root"
+              className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1jr73wj-MuiButtonBase-root-MuiButton-root"
               href="https://www.microsoft.com/en-us/windows/microsoft-edge"
               onBlur={[Function]}
               onContextMenu={[Function]}

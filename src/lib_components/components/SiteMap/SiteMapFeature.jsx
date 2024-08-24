@@ -210,6 +210,92 @@ const checkValidPositions = (positions, checkAllCoords = false) => {
   return isCoord(positions);
 };
 
+/**
+  Util: Position Popup
+  Leaflet's AutoPan for popups does a "transition" of map center to ensure a new popup renders
+  in view. This poses a problem when in selection mode and we want the mouseover evenr to trigger
+  the popup instead of click. We get around this by solving the same root problem (want
+  popups to render in view) in a different way... specifically by positioning them around their
+  parent element dynamcally based on which direction has the most room to render.
+*/
+const positionPopup = (
+  map,
+  target = null,
+  latlng = null,
+  hideCloseButton = false,
+  isOpening = false,
+  isOverlay = false,
+) => {
+  if (!target || !latlng || !map) { return; }
+  const { _popup: popup, _icon: icon } = target;
+  if (!popup) { return; }
+  // Render the changes in an animation frame to prevent jumping around
+  window.requestAnimationFrame(() => {
+    if (isOpening) {
+      target.openPopup();
+      if (popup._container) {
+        popup._container.classList.add('leaflet-popup-selection-visually-hidden');
+      }
+    }
+  });
+  // Wrap rendering updates in a timeout to allow leaflet to finish
+  // making changes to the popup elements and push to the UI
+  // so they do not override or conflict with our positioning updates.
+  window.setTimeout(() => {
+    window.requestAnimationFrame(() => {
+      if (!popup || !popup.isOpen()) { return; }
+      const {
+        _container: containerNode,
+        _containerLeft: containerLeft,
+        _containerBottom: containerBottom,
+        _tipContainer: tipNode,
+      } = popup;
+      popup.setLatLng(latlng);
+      const containerPoint = map.latLngToContainerPoint(latlng);
+      const iconHeight = icon ? icon.height : 0;
+      containerNode.style.marginBottom = '0px';
+      // Leaflet popups always open above; open below if mouse event is in the top half of the map
+      if (containerPoint.y < (map._container.clientHeight / 2)) {
+        const contentHeight = containerNode.clientHeight;
+        const tipHeight = tipNode.clientHeight;
+        const contentBottom = 0 - iconHeight - contentHeight - tipHeight - (1.5 * containerBottom);
+        const tipBottom = contentHeight + tipHeight - 1;
+        const nudgeBottom = isOverlay ? 10 : 0;
+        containerNode.style.bottom = `${contentBottom - nudgeBottom}px`;
+        tipNode.style.transform = `rotate(0.5turn) translate(0px, ${tipBottom}px)`;
+      } else {
+        const nudgeBottom = isOverlay ? 10 : 0;
+        containerNode.style.bottom = `${-1.5 * containerBottom + nudgeBottom}px`;
+        popup._tipContainer.style.transform = 'translate(0px, -1px)';
+      }
+      // For left/right we move the popup horizontally as needed while keeping the tip stationary
+      const contentWidth = containerNode.clientWidth;
+      const mapWidth = map._container.parentNode.clientWidth || 0;
+      const nudgeBuffer = 40;
+      const nudgeLimit = (contentWidth / 2) - (nudgeBuffer / 2);
+      let overlap = 0;
+      if (mapWidth > (contentWidth + (nudgeBuffer * 3))) {
+        let nudge = 0;
+        if (containerPoint.x - (contentWidth / 2) < 0) {
+          overlap = containerPoint.x - (contentWidth / 2);
+          nudge = Math.min((0 - overlap) + nudgeBuffer, nudgeLimit);
+        } else if (containerPoint.x + (contentWidth / 2) > mapWidth) {
+          overlap = mapWidth - containerPoint.x - (contentWidth / 2);
+          nudge = Math.min(overlap - nudgeBuffer, nudgeLimit);
+        }
+        if (nudge !== 0) {
+          containerNode.style.left = `${containerLeft + nudge}px`;
+        }
+        tipNode.style.left = `${(0 - containerLeft) - nudge}px`;
+      }
+      if (hideCloseButton) {
+        popup._closeButton.style.display = 'none';
+      }
+      containerNode.classList.remove('leaflet-popup-selection-visually-hidden');
+    });
+  }, 200);
+};
+
 const SiteMapFeature = (props) => {
   const classes = useStyles(Theme);
   const { featureKey } = props;
@@ -292,66 +378,6 @@ const SiteMapFeature = (props) => {
   // Jump-To function to afford map navigation where appropriate
   const jumpTo = (locationCode = '') => {
     dispatch({ type: 'setNewFocusLocation', location: locationCode });
-  };
-
-  /**
-     Util: Position Popup
-     Leaflet's AutoPan for popups does a "transition" of map center to ensure a new popup renders
-     in view. This poses a problem when the center is in the main context state - every micro-step
-     of the AutoPan transition is a state update. The transition appears to run recursively as it
-     causes a max update depth crash. We get around this by solving the same root problem (want
-     popups to render in view) in a different way... specifically by positioning them around their
-     parent element dynamcally based on which direction has the most room to render.
-  */
-  const positionPopup = (target = null, latlng = null, hideCloseButton = false) => {
-    if (!target || !latlng || !map) { return; }
-    const { _popup: popup, _icon: icon } = target;
-    if (!popup) { return; }
-    popup.setLatLng(latlng);
-    const containerPoint = map.latLngToContainerPoint(latlng);
-    const iconHeight = icon ? icon.height : 0;
-    const {
-      _container: containerNode,
-      _containerLeft: containerLeft,
-      _containerBottom: containerBottom,
-      _tipContainer: tipNode,
-    } = popup;
-    containerNode.style.marginBottom = '0px';
-    // Leaflet popups always open above; open below if mouse event is in the top half of the map
-    if (containerPoint.y < (map._container.clientHeight / 2)) {
-      const contentHeight = containerNode.clientHeight;
-      const tipHeight = tipNode.clientHeight;
-      const contentBottom = 0 - iconHeight - contentHeight - tipHeight - (1.5 * containerBottom);
-      const tipBottom = contentHeight + tipHeight - 1;
-      containerNode.style.bottom = `${contentBottom}px`;
-      tipNode.style.transform = `rotate(0.5turn) translate(0px, ${tipBottom}px)`;
-    } else {
-      containerNode.style.bottom = `${-1.5 * containerBottom}px`;
-      popup._tipContainer.style.transform = 'translate(0px, -1px)';
-    }
-    // For left/right we move the popup horizontally as needed while keeping the tip stationary
-    const contentWidth = containerNode.clientWidth;
-    const mapWidth = map._container.parentNode.clientWidth || 0;
-    const nudgeBuffer = 40;
-    const nudgeLimit = (contentWidth / 2) - (nudgeBuffer / 2);
-    let overlap = 0;
-    if (mapWidth > (contentWidth + (nudgeBuffer * 3))) {
-      let nudge = 0;
-      if (containerPoint.x - (contentWidth / 2) < 0) {
-        overlap = containerPoint.x - (contentWidth / 2);
-        nudge = Math.min((0 - overlap) + nudgeBuffer, nudgeLimit);
-      } else if (containerPoint.x + (contentWidth / 2) > mapWidth) {
-        overlap = mapWidth - containerPoint.x - (contentWidth / 2);
-        nudge = Math.min(overlap - nudgeBuffer, nudgeLimit);
-      }
-      if (nudge !== 0) {
-        containerNode.style.left = `${containerLeft + nudge}px`;
-      }
-      tipNode.style.left = `${(0 - containerLeft) - nudge}px`;
-    }
-    if (hideCloseButton) {
-      popup._closeButton.style.display = 'none';
-    }
   };
 
   const markerIcon = <MarkerIcon className={classes.markerIcon} />;
@@ -843,8 +869,8 @@ const SiteMapFeature = (props) => {
   };
 
   const popupProps = {
-    className: classes.popup,
-    autoPan: false,
+    className: !selectionActive ? classes.popup : `${classes.popup} leaflet-popup-selection-visually-hidden`,
+    autoPan: !selectionActive,
     id: 'sitemap-map-popup',
   };
 
@@ -897,6 +923,10 @@ const SiteMapFeature = (props) => {
     if (
       !selectionActive || !state.selection.derived[boundaryFeatureKey] || selectionLimit === 1
     ) { return null; }
+    const isAreaSelect = state.map.mouseMode === MAP_MOUSE_MODES.AREA_SELECT;
+    if (isAreaSelect) {
+      return null;
+    }
     const { sites: boundarySites = new Set() } = featureData[boundaryKey];
     if (!boundarySites.size) { return null; }
     const selectionPortion = state.selection.derived[boundaryFeatureKey][boundaryKey] || null;
@@ -962,7 +992,8 @@ const SiteMapFeature = (props) => {
      (Only for selecting the item directly; selection by proxy action snackbars are different)
   */
   const renderItemSelectionActionSnackbar = (item) => {
-    if (!selectionActive) { return null; }
+    const isAreaSelect = state.map.mouseMode === MAP_MOUSE_MODES.AREA_SELECT;
+    if (!selectionActive || isAreaSelect) { return null; }
     const unit = FEATURE_TYPES[selectionType].unit || 'item';
     const isSelectable = !validItems || validItems.has(item);
     const isSelected = selectedItems.has(item);
@@ -1474,6 +1505,7 @@ const SiteMapFeature = (props) => {
           }
         }
         if (selectionActive) {
+          const isAreaSelect = state.map.mouseMode === MAP_MOUSE_MODES.AREA_SELECT;
           let returnColor = isHighlighted ? darkenedBaseColor : featureStyle.color;
           let useHoverColor = hoverColor;
           if (selectingCurrentFeatureType) {
@@ -1501,13 +1533,12 @@ const SiteMapFeature = (props) => {
             e.target._path.setAttribute('stroke', useHoverColor);
             e.target._path.setAttribute('fill', useHoverColor);
             if (hasPopup) {
-              e.target.openPopup();
-              positionPopup(e.target, e.latlng, true);
+              positionPopup(map, e.target, e.latlng, true, true, true);
             }
           };
           shapeProps.eventHandlers.mousemove = (e) => {
             if (hasPopup) {
-              positionPopup(e.target, e.latlng, true);
+              positionPopup(map, e.target, e.latlng, true, false, true);
             }
           };
           shapeProps.eventHandlers.mouseout = (e) => {
@@ -1515,11 +1546,10 @@ const SiteMapFeature = (props) => {
             e.target._path.setAttribute('fill', returnColor);
             if (hasPopup) {
               e.target.closePopup();
-              dispatch({ type: 'setMapRepositionOpenPopupFunc', func: null });
             }
           };
           // Onclick to select sites by way of clicking a state or domain to capture sites within
-          if (selectingActiveTypeByProxy && selectionLimit !== 1) {
+          if (!isAreaSelect && selectingActiveTypeByProxy && selectionLimit !== 1) {
             shapeProps.eventHandlers.click = () => {
               if (featureKey === FEATURES.DOMAINS.KEY) {
                 dispatch({ type: 'toggleSitesSelectedForDomain', domainCode: primaryId });
@@ -1530,7 +1560,7 @@ const SiteMapFeature = (props) => {
             };
           }
           // Onclick to select states or domains directly
-          if (selectionType === featureType) {
+          if (!isAreaSelect && selectionType === featureType) {
             shapeProps.eventHandlers.click = () => {
               if (isSelectable) {
                 dispatch({ type: 'toggleItemSelected', item: primaryId });
@@ -1554,6 +1584,7 @@ const SiteMapFeature = (props) => {
           ? SELECTION_STATUS.SELECTED
           : SELECTION_STATUS.UNSELECTED;
         const initialHighlight = isHighlighted ? HIGHLIGHT_STATUS.HIGHLIGHT : HIGHLIGHT_STATUS.NONE;
+        const isAreaSelect = state.map.mouseMode === MAP_MOUSE_MODES.AREA_SELECT;
         if (baseIcon && baseIcon[selection]) {
           icon = baseIcon[selection][initialHighlight];
           interaction = {
@@ -1566,33 +1597,27 @@ const SiteMapFeature = (props) => {
                 e.target.setIcon(baseIcon[selection][highlight]);
                 e.target._bringToFront();
                 if (hasPopup && selectionActive) {
-                  e.target.openPopup();
-                  positionPopup(e.target, e.latlng, selectionActive);
+                  positionPopup(map, e.target, e.latlng, selectionActive, true);
                 }
               },
               mouseout: (e) => {
                 e.target.setIcon(baseIcon[selection][initialHighlight]);
                 if (hasPopup && selectionActive) {
                   e.target.closePopup();
-                  dispatch({ type: 'setMapRepositionOpenPopupFunc', func: null });
                 }
               },
               click: (e) => {
-                if (!selectionActive && hasPopup) {
-                  const popupOpen = e.target._popup.isOpen();
-                  const func = () => positionPopup(e.target, e.latlng, selectionActive);
-                  dispatch({ type: 'setMapRepositionOpenPopupFunc', func });
-                  if (popupOpen) { func(); }
-                }
-                if (selectionActive && selectingCurrentFeatureType && isSelectable) {
-                  switch (selectionType) {
-                    case FEATURE_TYPES.SITES.KEY:
-                      if (shapeData.siteCode) {
-                        dispatch({ type: 'toggleItemSelected', item: shapeData.siteCode });
-                      }
-                      break;
-                    default:
-                      break;
+                if (!isAreaSelect) {
+                  if (selectionActive && selectingCurrentFeatureType && isSelectable) {
+                    switch (selectionType) {
+                      case FEATURE_TYPES.SITES.KEY:
+                        if (shapeData.siteCode) {
+                          dispatch({ type: 'toggleItemSelected', item: shapeData.siteCode });
+                        }
+                        break;
+                      default:
+                        break;
+                    }
                   }
                 }
               },
@@ -1639,11 +1664,6 @@ const SiteMapFeature = (props) => {
             key={`${key}-polygon`}
             positions={positions}
             {...shapeProps}
-            eventHandlers={{
-              mouseover: null,
-              mousemove: null,
-              mouseout: null,
-            }}
           />
         ) : (
           <Polygon key={`${key}-polygon`} positions={positions} {...shapeProps}>

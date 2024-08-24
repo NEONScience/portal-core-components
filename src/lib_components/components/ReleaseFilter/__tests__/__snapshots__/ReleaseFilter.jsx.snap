@@ -73,7 +73,7 @@ exports[`ReleaseFilter Renders gracefully with an invalid selection 1`] = `
   </div>
   <div
     aria-labelledby="release-filter-label-:rb:"
-    className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary makeStyles-selectInput-63 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
+    className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall makeStyles-selectInput-63 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
     data-selenium="release-filter"
     onClick={[Function]}
     style={
@@ -87,7 +87,7 @@ exports[`ReleaseFilter Renders gracefully with an invalid selection 1`] = `
       aria-expanded="false"
       aria-haspopup="listbox"
       aria-labelledby="mui-component-select-release-filter-input-:rb:"
-      className="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1vbq6j2-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+      className="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-z4chdf-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
       id="mui-component-select-release-filter-input-:rb:"
       onBlur={[Function]}
       onFocus={[Function]}
@@ -318,7 +318,7 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
   </div>
   <div
     aria-labelledby="release-filter-label-:rv:"
-    className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary makeStyles-selectInput-168 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
+    className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall makeStyles-selectInput-168 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
     data-selenium="release-filter"
     onClick={[Function]}
     style={
@@ -332,7 +332,7 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
       aria-expanded="false"
       aria-haspopup="listbox"
       aria-labelledby="mui-component-select-release-filter-input-:rv:"
-      className="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1vbq6j2-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+      className="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-z4chdf-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
       id="mui-component-select-release-filter-input-:rv:"
       onBlur={[Function]}
       onFocus={[Function]}
@@ -429,7 +429,7 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
       </span>
     </div>
     <button
-      className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary makeStyles-copyButton-175 css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+      className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary makeStyles-copyButton-175 css-j1wr89-MuiButtonBase-root-MuiButton-root"
       disabled={false}
       onBlur={[Function]}
       onClick={[Function]}
@@ -546,7 +546,7 @@ exports[`ReleaseFilter Renders with a custom title 1`] = `
   </div>
   <div
     aria-labelledby="release-filter-label-:rk:"
-    className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled makeStyles-selectInput-108 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
+    className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall makeStyles-selectInput-108 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
     data-selenium="release-filter"
     onClick={[Function]}
     style={
@@ -561,7 +561,7 @@ exports[`ReleaseFilter Renders with a custom title 1`] = `
       aria-expanded="false"
       aria-haspopup="listbox"
       aria-labelledby="mui-component-select-release-filter-input-:rk:"
-      className="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled css-1vbq6j2-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+      className="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled MuiInputBase-inputSizeSmall css-z4chdf-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
       id="mui-component-select-release-filter-input-:rk:"
       onBlur={[Function]}
       onFocus={[Function]}
@@ -695,7 +695,7 @@ exports[`ReleaseFilter Renders with a selected release 1`] = `
   </div>
   <div
     aria-labelledby="release-filter-label-:r8:"
-    className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary makeStyles-selectInput-48 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
+    className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall makeStyles-selectInput-48 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
     data-selenium="release-filter"
     onClick={[Function]}
     style={
@@ -709,7 +709,7 @@ exports[`ReleaseFilter Renders with a selected release 1`] = `
       aria-expanded="false"
       aria-haspopup="listbox"
       aria-labelledby="mui-component-select-release-filter-input-:r8:"
-      className="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1vbq6j2-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+      className="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-z4chdf-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
       id="mui-component-select-release-filter-input-:r8:"
       onBlur={[Function]}
       onFocus={[Function]}
@@ -771,7 +771,7 @@ exports[`ReleaseFilter Renders with blank title 1`] = `
 >
   <div
     aria-labelledby="release-filter-label-:rn:"
-    className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled makeStyles-selectInput-123 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
+    className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall makeStyles-selectInput-123 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
     data-selenium="release-filter"
     onClick={[Function]}
     style={
@@ -786,7 +786,7 @@ exports[`ReleaseFilter Renders with blank title 1`] = `
       aria-expanded="false"
       aria-haspopup="listbox"
       aria-labelledby="mui-component-select-release-filter-input-:rn:"
-      className="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled css-1vbq6j2-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+      className="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled MuiInputBase-inputSizeSmall css-z4chdf-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
       id="mui-component-select-release-filter-input-:rn:"
       onBlur={[Function]}
       onFocus={[Function]}
@@ -926,7 +926,7 @@ exports[`ReleaseFilter Renders with custom layouts 1`] = `
     >
       <div
         aria-labelledby="release-filter-label-:rh:"
-        className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled makeStyles-selectInput-93 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
+        className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall makeStyles-selectInput-93 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
         data-selenium="release-filter"
         onClick={[Function]}
         style={
@@ -941,7 +941,7 @@ exports[`ReleaseFilter Renders with custom layouts 1`] = `
           aria-expanded="false"
           aria-haspopup="listbox"
           aria-labelledby="mui-component-select-release-filter-input-:rh:"
-          className="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled css-1vbq6j2-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          className="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled MuiInputBase-inputSizeSmall css-z4chdf-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
           id="mui-component-select-release-filter-input-:rh:"
           onBlur={[Function]}
           onFocus={[Function]}
@@ -1081,7 +1081,7 @@ exports[`ReleaseFilter Renders with list of releases with DOIs 1`] = `
   </div>
   <div
     aria-labelledby="release-filter-label-:re:"
-    className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary makeStyles-selectInput-78 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
+    className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall makeStyles-selectInput-78 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
     data-selenium="release-filter"
     onClick={[Function]}
     style={
@@ -1095,7 +1095,7 @@ exports[`ReleaseFilter Renders with list of releases with DOIs 1`] = `
       aria-expanded="false"
       aria-haspopup="listbox"
       aria-labelledby="mui-component-select-release-filter-input-:re:"
-      className="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1vbq6j2-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+      className="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-z4chdf-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
       id="mui-component-select-release-filter-input-:re:"
       onBlur={[Function]}
       onFocus={[Function]}
@@ -1229,7 +1229,7 @@ exports[`ReleaseFilter Renders with list of releases without DOIs 1`] = `
   </div>
   <div
     aria-labelledby="release-filter-label-:r5:"
-    className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary makeStyles-selectInput-33 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
+    className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall makeStyles-selectInput-33 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
     data-selenium="release-filter"
     onClick={[Function]}
     style={
@@ -1243,7 +1243,7 @@ exports[`ReleaseFilter Renders with list of releases without DOIs 1`] = `
       aria-expanded="false"
       aria-haspopup="listbox"
       aria-labelledby="mui-component-select-release-filter-input-:r5:"
-      className="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1vbq6j2-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+      className="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-z4chdf-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
       id="mui-component-select-release-filter-input-:r5:"
       onBlur={[Function]}
       onFocus={[Function]}
@@ -1377,7 +1377,7 @@ exports[`ReleaseFilter Renders with no props 1`] = `
   </div>
   <div
     aria-labelledby="release-filter-label-:r0:"
-    className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled makeStyles-selectInput-3 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
+    className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall makeStyles-selectInput-3 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
     data-selenium="release-filter"
     onClick={[Function]}
     style={
@@ -1392,7 +1392,7 @@ exports[`ReleaseFilter Renders with no props 1`] = `
       aria-expanded="false"
       aria-haspopup="listbox"
       aria-labelledby="mui-component-select-release-filter-input-:r0:"
-      className="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled css-1vbq6j2-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+      className="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled MuiInputBase-inputSizeSmall css-z4chdf-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
       id="mui-component-select-release-filter-input-:r0:"
       onBlur={[Function]}
       onFocus={[Function]}
@@ -1526,7 +1526,7 @@ exports[`ReleaseFilter Renders with product counts (using data product codes) 1`
   </div>
   <div
     aria-labelledby="release-filter-label-:rs:"
-    className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary makeStyles-selectInput-153 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
+    className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall makeStyles-selectInput-153 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
     data-selenium="release-filter"
     onClick={[Function]}
     style={
@@ -1540,7 +1540,7 @@ exports[`ReleaseFilter Renders with product counts (using data product codes) 1`
       aria-expanded="false"
       aria-haspopup="listbox"
       aria-labelledby="mui-component-select-release-filter-input-:rs:"
-      className="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1vbq6j2-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+      className="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-z4chdf-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
       id="mui-component-select-release-filter-input-:rs:"
       onBlur={[Function]}
       onFocus={[Function]}
@@ -1674,7 +1674,7 @@ exports[`ReleaseFilter Renders with product counts (using data product objects) 
   </div>
   <div
     aria-labelledby="release-filter-label-:rp:"
-    className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary makeStyles-selectInput-138 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
+    className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall makeStyles-selectInput-138 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
     data-selenium="release-filter"
     onClick={[Function]}
     style={
@@ -1688,7 +1688,7 @@ exports[`ReleaseFilter Renders with product counts (using data product objects) 
       aria-expanded="false"
       aria-haspopup="listbox"
       aria-labelledby="mui-component-select-release-filter-input-:rp:"
-      className="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1vbq6j2-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+      className="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-z4chdf-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
       id="mui-component-select-release-filter-input-:rp:"
       onBlur={[Function]}
       onFocus={[Function]}

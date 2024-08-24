@@ -188,7 +188,7 @@ const ReleaseFilter = (inProps) => {
     <OutlinedInput
       id={inputId}
       name={inputId}
-      margin="dense"
+      size="small"
       className={classes.selectInput}
       style={maxWidthStyle}
     />

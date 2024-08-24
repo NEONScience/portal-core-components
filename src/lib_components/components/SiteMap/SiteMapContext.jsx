@@ -44,6 +44,7 @@ import {
   MIN_TABLE_MAX_BODY_HEIGHT,
   MANUAL_LOCATION_TYPES,
   GRAPHQL_LOCATIONS_API_CONSTANTS,
+  MAP_STATE_STATUS_TYPE,
   getDefaultState,
   getZoomedIcons,
   mapIsAtFocusLocation,
@@ -52,7 +53,10 @@ import {
   calculateFeatureAvailability,
   boundsAreValid,
   calculateLocationsInBounds,
+  zoomIsValid,
+  centerIsValid,
   deriveFullObservatoryZoomLevel,
+  determineMapStatus,
 } from './SiteMapUtils';
 
 import { exists, existsNonEmpty } from '../../util/typeUtil';
@@ -146,14 +150,6 @@ const isBasePlot = (featureKey) => basePlots.includes(featureKey);
 /**
    Reducer Helpers (functions used exclusively by the reducer)
 */
-const zoomIsValid = (zoom) => (
-  Number.isInteger(zoom) && zoom >= MAP_ZOOM_RANGE[0] && zoom <= MAP_ZOOM_RANGE[1]
-);
-const centerIsValid = (center) => (
-  Array.isArray(center)
-  && center.length === 2
-  && center.every((v) => (typeof v === 'number' && !Number.isNaN(v)))
-);
 
 const calculateSitesInBounds = (state) => {
   const sites = [];
@@ -424,9 +420,10 @@ const updateMapTileWithZoom = (state) => {
  */
 const calculateZoomState = (zoom, newState, init = false) => {
   let appliedState = newState;
-  appliedState.map.zoomedIcons = getZoomedIcons(zoom);
+  appliedState.map.status = determineMapStatus(newState);
   appliedState = updateMapTileWithZoom(appliedState);
-  if (!init) {
+  if (!init && (appliedState.map.status === MAP_STATE_STATUS_TYPE.READY)) {
+    appliedState.map.zoomedIcons = getZoomedIcons(zoom);
     appliedState = calculateFeatureAvailability(appliedState);
     appliedState = calculateFeatureDataFetches(appliedState);
   }
@@ -743,19 +740,42 @@ const reducer = (state, action) => {
       newState.map.zoom = action.zoom;
       if (centerIsValid(action.center)) { newState.map.center = action.center; }
       if (boundsAreValid(action.bounds)) { newState.map.bounds = action.bounds; }
-      newState = calculateZoomState(action.zoom, newState);
+      newState.map.status = determineMapStatus(newState);
+      if (newState.map.status === MAP_STATE_STATUS_TYPE.READY) {
+        newState = calculateZoomState(newState.map.zoom, newState);
+      }
       return newState;
 
     case 'setMapBounds':
       if (!boundsAreValid(action.bounds)) { return state; }
+      // eslint-disable-next-line no-case-declarations
+      const currentMapBoundsMapStatus = newState.map.status;
       newState.map.bounds = action.bounds;
-      return calculateFeatureDataFetches(newState);
+      newState.map.status = determineMapStatus(newState);
+      if (currentMapBoundsMapStatus === MAP_STATE_STATUS_TYPE.INIT
+          && newState.map.status === MAP_STATE_STATUS_TYPE.READY
+      ) {
+        newState = calculateZoomState(newState.map.zoom, newState);
+      } else {
+        newState = calculateFeatureDataFetches(newState);
+      }
+      return newState;
 
     case 'setMapCenter':
       if (!centerIsValid(action.center)) { return state; }
       if (boundsAreValid(action.bounds)) { newState.map.bounds = action.bounds; }
+      // eslint-disable-next-line no-case-declarations
+      const currentMapCenterMapStatus = newState.map.status;
       newState.map.center = [...action.center];
-      return calculateFeatureDataFetches(newState);
+      newState.map.status = determineMapStatus(newState);
+      if (currentMapCenterMapStatus === MAP_STATE_STATUS_TYPE.INIT
+          && newState.map.status === MAP_STATE_STATUS_TYPE.READY
+      ) {
+        newState = calculateZoomState(newState.map.zoom, newState);
+      } else {
+        newState = calculateFeatureDataFetches(newState);
+      }
+      return newState;
 
     case 'setMapBaseLayer':
       if (action.baseLayer !== null && !Object.keys(BASE_LAYERS).includes(action.baseLayer)) {
@@ -783,13 +803,9 @@ const reducer = (state, action) => {
       newState.filters.overlays.expanded = new Set(action.overlays);
       return newState;
 
-    case 'setMapRepositionOpenPopupFunc':
-      newState.map.repositionOpenPopupFunc = typeof action.func === 'function' ? action.func : null;
-      return newState;
-
     case 'showFullObservatory':
       newState.map.center = OBSERVATORY_CENTER;
-      newState.map.zoom = deriveFullObservatoryZoomLevel(action.mapRef);
+      newState.map.zoom = deriveFullObservatoryZoomLevel(action.mapRef.current);
       return newState;
 
     case 'setMapMouseMode':
@@ -1106,7 +1122,7 @@ const Provider = (inProps) => {
   /**
      Initial State and Reducer Setup
   */
-  const initialMapZoom = mapZoom === null ? null
+  const initialMapZoom = (mapZoom === null) ? null
     : Math.max(Math.min(mapZoom, MAP_ZOOM_RANGE[1]), MAP_ZOOM_RANGE[0]);
   let initialState = getDefaultState();
   initialState.view.current = (

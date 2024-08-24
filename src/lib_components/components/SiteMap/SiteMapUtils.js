@@ -1418,6 +1418,11 @@ const featureIsHiddenByDefault = (key) => {
   if (FEATURES[key].parent && !hidden) { hidden = featureIsHiddenByDefault(FEATURES[key].parent); }
   return hidden;
 };
+
+export const MAP_STATE_STATUS_TYPE = {
+  INIT: 'INIT',
+  READY: 'READY',
+};
 const DEFAULT_STATE = {
   view: {
     current: null,
@@ -1456,15 +1461,20 @@ const DEFAULT_STATE = {
     maxBodyHeightUpdateFromAspectRatio: false,
   },
   map: { // Settings that ONLY apply to the map
-    zoom: MAP_ZOOM_DEFAULT,
+    status: MAP_STATE_STATUS_TYPE.INIT,
+    zoom: null,
     center: OBSERVATORY_CENTER,
+    // Initial props so that we can initialize the react-leaflet
+    // map and we still want initialize the actual zoom level
+    // we want after we have access to the leaflet map object.
+    initialZoom: MAP_ZOOM_DEFAULT,
+    initialCenter: OBSERVATORY_CENTER,
     bounds: null,
     baseLayer: null,
     baseLayerAutoChangedAbove17: false,
     overlays: new Set(),
     mouseMode: MAP_MOUSE_MODES.PAN,
     zoomedIcons: {},
-    repositionOpenPopupFunc: null,
     isDraggingAreaSelection: false,
   },
   selection: {
@@ -1652,7 +1662,7 @@ export const SITE_MAP_DEFAULT_PROPS = {
   mapUniqueId: 0,
   // Map props
   mapCenter: OBSERVATORY_CENTER,
-  mapZoom: MAP_ZOOM_DEFAULT,
+  mapZoom: null,
   mapBaseLayer: Object.keys(BASE_LAYERS)[0],
   // Table props
   tableFullHeight: false,
@@ -1669,6 +1679,34 @@ export const SITE_MAP_DEFAULT_PROPS = {
   features: null,
   // Manual Location Data
   manualLocationData: null,
+};
+
+export const zoomIsValid = (zoom) => (
+  Number.isInteger(zoom) && (zoom >= MAP_ZOOM_RANGE[0]) && (zoom <= MAP_ZOOM_RANGE[1])
+);
+export const centerIsValid = (center) => (
+  Array.isArray(center)
+    && center.length === 2
+    && center.every((v) => (typeof v === 'number' && !Number.isNaN(v)))
+);
+export const boundsAreValid = (bounds) => (
+  typeof bounds === 'object' && bounds !== null
+    && Object.keys(bounds).every((key) => (
+      ['lat', 'lng'].includes(key) && Array.isArray(bounds[key]) && bounds[key].length === 2
+        && bounds[key].every((v) => typeof v === 'number') && bounds[key][1] > bounds[key][0]
+    ))
+);
+
+export const determineMapStatus = (state) => {
+  if (!state.map) {
+    return false;
+  }
+  const isMapReady = zoomIsValid(state.map.zoom)
+    && centerIsValid(state.map.center)
+    && boundsAreValid(state.map.bounds);
+  return isMapReady
+    ? MAP_STATE_STATUS_TYPE.READY
+    : MAP_STATE_STATUS_TYPE.INIT;
 };
 
 /**
@@ -1833,7 +1871,6 @@ export const getMapStateForFocusLocation = (state = {}) => {
 
   if (newState.map.zoom !== null) {
     // Regenerate icons
-    newState.map.zoomedIcons = getZoomedIcons(newState.map.zoom);
     const phantomMap = getPhantomLeafletMap(newState);
     const newBounds = phantomMap.getBounds() || null;
     newState.map.bounds = !newBounds ? null : {
@@ -1843,6 +1880,10 @@ export const getMapStateForFocusLocation = (state = {}) => {
       /* eslint-enable no-underscore-dangle */
     };
     phantomMap.remove();
+  }
+  newState.map.status = determineMapStatus(newState);
+  if (newState.map.status === MAP_STATE_STATUS_TYPE.READY) {
+    newState.map.zoomedIcons = getZoomedIcons(newState.map.zoom);
   }
 
   // Done
@@ -1910,7 +1951,6 @@ export const getMapStateForManualLocationData = (state) => {
     // Bound the minimum zoom level to prevent too wide of bounds
     // from not filling the entirety of the map display
     newState.map.zoom = Math.max(newState.map.zoom, 3);
-    newState.map.zoomedIcons = getZoomedIcons(newState.map.zoom);
     const phantomMap = getPhantomLeafletMap(newState);
     const newBounds = phantomMap.getBounds() || null;
     newState.map.bounds = !newBounds ? null : {
@@ -1920,6 +1960,11 @@ export const getMapStateForManualLocationData = (state) => {
       /* eslint-enable no-underscore-dangle */
     };
     phantomMap.remove();
+  }
+
+  newState.map.status = determineMapStatus(newState);
+  if (newState.map.status === MAP_STATE_STATUS_TYPE.READY) {
+    newState.map.zoomedIcons = getZoomedIcons(newState.map.zoom);
   }
 
   // Done
@@ -2009,14 +2054,6 @@ export const getDynamicAspectRatio = (unusableVerticalSpace = 0) => {
     : dynamicAspectRatios[arIdx];
 };
 
-export const boundsAreValid = (bounds) => (
-  typeof bounds === 'object' && bounds !== null
-    && Object.keys(bounds).every((key) => (
-      ['lat', 'lng'].includes(key) && Array.isArray(bounds[key]) && bounds[key].length === 2
-        && bounds[key].every((v) => typeof v === 'number') && bounds[key][1] > bounds[key][0]
-    ))
-);
-
 // For large sets of coordinates, down sample to compute a general idea
 // of the location. A "good enough" approximation of the location's coordinates
 // such that a bounds calculation can be performed in a reasonable space and time
@@ -2093,16 +2130,16 @@ export const calculateLocationsInBounds = (
     .filter((locId) => isInBounds(locations[locId], extendedBounds, extendPoints));
 };
 
-export const deriveFullObservatoryZoomLevel = (mapRef) => {
+export const deriveFullObservatoryZoomLevel = (map) => {
   const FALLBACK_ZOOM = MAP_ZOOM_DEFAULT;
-  if (typeof mapRef !== 'object' || mapRef === null || !mapRef.current
+  if (typeof map !== 'object' || map === null || !map
     // eslint-disable-next-line no-underscore-dangle
-    || !mapRef.current._container || !mapRef.current._container.parentElement
+    || !map._container || !map._container.parentElement
   ) {
     return FALLBACK_ZOOM;
   }
   // eslint-disable-next-line no-underscore-dangle
-  const container = mapRef.current._container.parentElement;
+  const container = map._container.parentElement;
   if (!container.clientWidth || !container.clientHeight) { return FALLBACK_ZOOM; }
   const divisor = (23 * 8);
   const minorDim = Math.min(container.clientWidth / divisor, container.clientHeight / divisor);

@@ -25,7 +25,7 @@ export default function Home() {
     <>
 
       <DocBlock>
-        NEON Data Portal Core Components is an open source library of <Link href="https://reactjs.org" target="_blank">React</Link> components
+        NEON Data Portal Core Components is an open source library of <Link color="primary" href="https://reactjs.org" target="_blank">React</Link> components
         intended for use on <Link href={`${NeonEnvironment.getWebHost()}`} target="_blank">NEON Data Portal</Link> pages.
       </DocBlock>
       <DocBlock>

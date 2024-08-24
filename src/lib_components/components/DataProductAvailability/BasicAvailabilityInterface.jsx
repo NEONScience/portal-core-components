@@ -11,12 +11,12 @@ import { uniqueId } from 'lodash';
 import { makeStyles } from '@mui/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import FormControl from '@mui/material/FormControl';
 import Grid from '@mui/material/Grid';
-import Hidden from '@mui/material/Hidden';
 import MenuItem from '@mui/material/MenuItem';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Select from '@mui/material/Select';
@@ -544,7 +544,7 @@ const BasicAvailabilityInterface = (inProps) => {
       >
         View By:
       </Typography>
-      <Hidden mdDown key="viewMdUp">
+      <Box key="viewMdUp" sx={{ display: { sm: 'none', md: 'block' } }}>
         <ToggleButtonGroup
           exclusive
           color="primary"
@@ -559,13 +559,13 @@ const BasicAvailabilityInterface = (inProps) => {
             </ToggleButton>
           ))}
         </ToggleButtonGroup>
-      </Hidden>
-      <Hidden mdUp key="viewSmDown">
+      </Box>
+      <Box sx={{ display: { sn: 'block', md: 'none' } }}>
         <FormControl variant="filled">
           <Select
             value={currentView}
             onChange={(event) => handleChangeView(event, event.target.value)}
-            input={<OutlinedInput margin="dense" className={selectionEnabled ? null : classes.xsSelect} />}
+            input={<OutlinedInput size="small" className={selectionEnabled ? null : classes.xsSelect} />}
             variant="filled"
           >
             {selectableViewKeys.map((key) => (
@@ -573,7 +573,7 @@ const BasicAvailabilityInterface = (inProps) => {
             ))}
           </Select>
         </FormControl>
-      </Hidden>
+      </Box>
     </div>
   );
 
@@ -697,6 +697,10 @@ const BasicAvailabilityInterface = (inProps) => {
       onDelete: sites.value.length ? handleSelectNoneSites : null,
     };
     const selectionButtonProps = { size: 'small', color: 'primary', variant: 'outlined' };
+    const datePickerContainerStyleProps = {
+      marginTop: '8px',
+      marginBottom: '4px',
+    };
     const datePickerProps = {
       inputVariant: 'outlined',
       margin: 'dense',
@@ -734,27 +738,45 @@ const BasicAvailabilityInterface = (inProps) => {
           <Typography variant="h6" className={classes.h6Small}>Date Range</Typography>
           <LocalizationProvider dateAdapter={AdapterMoment}>
             <div style={{ display: 'flex', flexWrap: 'nowrap' }}>
-              <DatePicker
-                {...datePickerProps}
-                label="Start"
-                data-selenium="data-product-availability.date-range-start"
-                orientation="portrait"
-                value={TIME.getYearMonthMoment(dateRange.value[0])}
-                onChange={(newDate) => handleChangeStartDate(newDate)}
-                minDate={TIME.getYearMonthMoment(dateRange.validValues[0])}
-                maxDate={TIME.getYearMonthMoment(dateRange.value[1])}
-                style={{ marginRight: Theme.spacing(1.5) }}
-              />
-              <DatePicker
-                {...datePickerProps}
-                label="End"
-                data-selenium="data-product-availability.date-range-end"
-                orientation="portrait"
-                value={TIME.getYearMonthMoment(dateRange.value[1])}
-                onChange={(newDate) => handleChangeEndDate(newDate)}
-                minDate={TIME.getYearMonthMoment(dateRange.value[0])}
-                maxDate={TIME.getYearMonthMoment(dateRange.validValues[1])}
-              />
+              <div
+                style={{
+                  ...datePickerContainerStyleProps,
+                  marginRight: Theme.spacing(1.5),
+                }}
+              >
+                <DatePicker
+                  {...datePickerProps}
+                  label="Start"
+                  data-selenium="data-product-availability.date-range-start"
+                  orientation="portrait"
+                  value={TIME.getYearMonthMoment(dateRange.value[0])}
+                  onChange={(newDate) => handleChangeStartDate(newDate)}
+                  minDate={TIME.getYearMonthMoment(dateRange.validValues[0])}
+                  maxDate={TIME.getYearMonthMoment(dateRange.value[1])}
+                  slotProps={{
+                    textField: {
+                      size: 'small',
+                    },
+                  }}
+                />
+              </div>
+              <div style={datePickerContainerStyleProps}>
+                <DatePicker
+                  {...datePickerProps}
+                  label="End"
+                  data-selenium="data-product-availability.date-range-end"
+                  orientation="portrait"
+                  value={TIME.getYearMonthMoment(dateRange.value[1])}
+                  onChange={(newDate) => handleChangeEndDate(newDate)}
+                  minDate={TIME.getYearMonthMoment(dateRange.value[0])}
+                  maxDate={TIME.getYearMonthMoment(dateRange.validValues[1])}
+                  slotProps={{
+                    textField: {
+                      size: 'small',
+                    },
+                  }}
+                />
+              </div>
             </div>
           </LocalizationProvider>
           <div style={{ display: 'flex', marginTop: Theme.spacing(1) }}>

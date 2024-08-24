@@ -1817,6 +1817,10 @@ export namespace OVERLAYS {
         export { components_1 as components };
     }
 }
+export namespace MAP_STATE_STATUS_TYPE {
+    let INIT: string;
+    let READY: string;
+}
 export function getDefaultState(): {
     view: {
         current: null;
@@ -1858,15 +1862,17 @@ export function getDefaultState(): {
         maxBodyHeightUpdateFromAspectRatio: boolean;
     };
     map: {
-        zoom: number;
+        status: string;
+        zoom: null;
         center: number[];
+        initialZoom: number;
+        initialCenter: number[];
         bounds: null;
         baseLayer: null;
         baseLayerAutoChangedAbove17: boolean;
         overlays: Set<any>;
         mouseMode: string;
         zoomedIcons: {};
-        repositionOpenPopupFunc: null;
         isDraggingAreaSelection: boolean;
     };
     selection: {
@@ -1942,7 +1948,8 @@ export namespace SITE_MAP_DEFAULT_PROPS {
     let mapUniqueId_1: number;
     export { mapUniqueId_1 as mapUniqueId };
     export { OBSERVATORY_CENTER as mapCenter };
-    export { MAP_ZOOM_DEFAULT as mapZoom };
+    let mapZoom_1: null;
+    export { mapZoom_1 as mapZoom };
     let mapBaseLayer_1: string;
     export { mapBaseLayer_1 as mapBaseLayer };
     let tableFullHeight_1: boolean;
@@ -1965,6 +1972,10 @@ export namespace SITE_MAP_DEFAULT_PROPS {
     let manualLocationData_1: null;
     export { manualLocationData_1 as manualLocationData };
 }
+export function zoomIsValid(zoom: any): boolean;
+export function centerIsValid(center: any): boolean;
+export function boundsAreValid(bounds: any): boolean;
+export function determineMapStatus(state: any): string | false;
 export function getZoomedIcon(featureKey?: null, zoom?: number, highlight?: string, selection?: string): L.Icon<{
     iconUrl: any;
     iconRetinaUrl: any;
@@ -1981,9 +1992,8 @@ export function getMapStateForManualLocationData(state: any): any;
 export function parseManualLocationFeatureData(state: any): any;
 export function hydrateNeonContextData(state: any, neonContextData: any): any;
 export function getDynamicAspectRatio(unusableVerticalSpace?: number): number;
-export function boundsAreValid(bounds: any): boolean;
 export function calculateLocationsInBounds(locations: any, bounds?: null, extendMap?: boolean, extendPoints?: number): string[];
-export function deriveFullObservatoryZoomLevel(mapRef: any): number;
+export function deriveFullObservatoryZoomLevel(map: any): number;
 /**
    GRAPHQL_LOCATIONS_API Constants
    The Locations API groups fetchable assets by minZoom (i.e. all assets for all locations features

@@ -199,7 +199,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
         >
           EML files for this Data Product are included in all downloads. Learn more about EML files in the 
           <a
-            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
+            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
             data-gtm="download-data-dialog.neon-faq-link"
             href="https://www.neonscience.org/about/faq"
             onBlur={[Function]}
@@ -210,7 +210,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
           </a>
            and at 
           <a
-            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
+            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
             data-gtm-external-host="KNB"
             data-gtm-product-code="n/a"
             href="https://eml.ecoinformatics.org"
@@ -408,7 +408,7 @@ exports[`DownloadStepForm Step policies renders correctly 1`] = `
   >
     In order to proceed to download NEON data you must agree to the 
     <a
-      className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
+      className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
       data-gtm="download-data-dialog.policies-link"
       href="https://www.neonscience.org/data/about-data/data-policies"
       onBlur={[Function]}
@@ -678,7 +678,7 @@ exports[`DownloadStepForm Step provisionalData renders correctly 1`] = `
         >
           Learn more about data product revisions, releases and provisional data at 
           <a
-            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
+            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
             data-gtm="download-data-dialog.neon-data-revisions-releases-link"
             href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases"
             onBlur={[Function]}
@@ -818,12 +818,13 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
           className="makeStyles-stepSummaryContent-124"
         >
           <div
-            className="MuiChip-root MuiChip-default MuiChip-sizeLarge MuiChip-colorSecondary MuiChip-defaultSecondary css-y4yqg9-MuiChip-root"
+            className="MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorSecondary MuiChip-filledSecondary css-y4yqg9-MuiChip-root"
             data-selenium="site-chip"
             onKeyDown={[Function]}
             onKeyUp={[Function]}
             style={
               {
+                "backgroundColor": "#002c77",
                 "borderRadius": "20px",
                 "fontSize": "1rem",
                 "height": "40px",
@@ -1023,7 +1024,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
         >
           Tip: Check out our 
           <a
-            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
+            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
             data-gtm="download-data-dialog.download-and-explore-link"
             href="https://www.neonscience.org/resources/learning-hub/tutorials/download-explore-neon-data"
             onBlur={[Function]}
@@ -1064,7 +1065,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
         >
           Files in this download will follow 
           <a
-            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
+            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
             data-gtm="download-data-dialog.file-naming-conventions-link"
             href="https://www.neonscience.org/data-samples/data-management/data-formats-conventions"
             onBlur={[Function]}

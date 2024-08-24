@@ -309,7 +309,7 @@ const YAxisRangeOption = (props) => {
           <TextField
             label="Max"
             type="number"
-            margin="dense"
+            size="small"
             inputProps={{ step }}
             InputLabelProps={{ shrink: true }}
             variant="outlined"
@@ -329,7 +329,7 @@ const YAxisRangeOption = (props) => {
           <TextField
             label="Min"
             type="number"
-            margin="dense"
+            size="small"
             inputProps={{ step }}
             InputLabelProps={{ shrink: true }}
             variant="outlined"

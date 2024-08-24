@@ -701,10 +701,13 @@ const SiteMapContainer = (inProps) => {
     const title = `${selection.size ? selection.size.toString() : 'No'} ${plural ? units : unit} selected`;
     let icon = <NoneSelectedIcon />;
     let color = 'default';
+    // eslint-disable-next-line no-undef-init
+    let backgroundColor = undefined;
     if (selection.size) {
       if (selectionValid) {
         icon = <DoneIcon />;
         color = 'secondary';
+        backgroundColor = Theme.palette.secondary.main;
       } else {
         icon = <ErrorIcon />;
       }
@@ -725,6 +728,10 @@ const SiteMapContainer = (inProps) => {
     const chipClassName = !selection.size || selectionValid
       ? classes.selectionChip
       : `${classes.selectionChip} ${classes.selectionChipError}`;
+    const otherChipStyles = {};
+    if (backgroundColor) {
+      otherChipStyles.backgroundColor = backgroundColor;
+    }
     const summaryValidClass = selection.size && selectionValid
       ? classes.selectionSummaryValid
       : classes.selectionSummaryInvalid;
@@ -784,6 +791,7 @@ const SiteMapContainer = (inProps) => {
           label={limit ? `${title} (${limit})` : title}
           aria-label="Current selection status"
           className={chipClassName}
+          style={otherChipStyles}
           onClick={() => dispatch({ type: 'toggleSelectionSummary', showSummary: !showSummary })}
           deleteIcon={(
             <Tooltip enterDelay={500} enterNextDelay={200} title="Deselect all">

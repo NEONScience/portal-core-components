@@ -181,7 +181,7 @@ exports[`TimeSeriesViewerSites PositionDetail Renders full detail when position 
     }
   >
     <button
-      className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+      className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
       disabled={false}
       onBlur={[Function]}
       onClick={[Function]}
@@ -336,7 +336,7 @@ exports[`TimeSeriesViewerSites PositionDetail Renders trimmed down detail when p
 
 exports[`TimeSeriesViewerSites PositionHistoryButton Renders disabled when history has less than two entries 1`] = `
 <button
-  className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary Mui-disabled MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+  className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary Mui-disabled MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
   disabled={true}
   onBlur={[Function]}
   onContextMenu={[Function]}
@@ -375,7 +375,7 @@ exports[`TimeSeriesViewerSites PositionHistoryButton Renders disabled when histo
 
 exports[`TimeSeriesViewerSites PositionHistoryButton Renders enabled when history has two or more entries 1`] = `
 <button
-  className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+  className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
   disabled={false}
   onBlur={[Function]}
   onClick={[Function]}
@@ -418,7 +418,7 @@ exports[`TimeSeriesViewerSites PositionHistoryButton Renders enabled when histor
 
 exports[`TimeSeriesViewerSites SelectPositionsButton Renders as expected 1`] = `
 <button
-  className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+  className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
   disabled={false}
   onBlur={[Function]}
   onClick={[Function]}
@@ -554,7 +554,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core)
         Rio Cupeyes (CUPE)
       </h6>
       <button
-        className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+        className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
         disabled={false}
         onBlur={[Function]}
         onClick={[Function]}
@@ -784,7 +784,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core)
         />
       </button>
       <button
-        className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+        className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
         disabled={false}
         onBlur={[Function]}
         onClick={[Function]}
@@ -924,7 +924,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
         Upper Big Creek (BIGC)
       </h6>
       <button
-        className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+        className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
         disabled={false}
         onBlur={[Function]}
         onClick={[Function]}
@@ -1154,7 +1154,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
         />
       </button>
       <button
-        className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+        className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
         disabled={false}
         onBlur={[Function]}
         onClick={[Function]}
@@ -1355,7 +1355,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
         Central Plains Experimental Range (CPER)
       </h6>
       <button
-        className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+        className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
         disabled={false}
         onBlur={[Function]}
         onClick={[Function]}
@@ -1585,7 +1585,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
         />
       </button>
       <button
-        className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+        className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
         disabled={false}
         onBlur={[Function]}
         onClick={[Function]}
@@ -1786,7 +1786,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
         Abby Road (ABBY)
       </h6>
       <button
-        className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+        className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
         disabled={false}
         onBlur={[Function]}
         onClick={[Function]}
@@ -2016,7 +2016,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
         />
       </button>
       <button
-        className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+        className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
         disabled={false}
         onBlur={[Function]}
         onClick={[Function]}

@@ -24,7 +24,7 @@ exports[`StoryMap Renders correctly with a custom title 1`] = `
     title="Foo"
   />
   <a
-    className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-openInNewLink-3 css-duangj-MuiTypography-root-MuiLink-root"
+    className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-openInNewLink-3 css-zuor1v-MuiTypography-root-MuiLink-root"
     href="https://foo.bar"
     onBlur={[Function]}
     onFocus={[Function]}
@@ -70,7 +70,7 @@ exports[`StoryMap Renders correctly with no title 1`] = `
     title="Neon Story Map"
   />
   <a
-    className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-openInNewLink-1 css-duangj-MuiTypography-root-MuiLink-root"
+    className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-openInNewLink-1 css-zuor1v-MuiTypography-root-MuiLink-root"
     href="https://foo.bar"
     onBlur={[Function]}
     onFocus={[Function]}

@@ -163,6 +163,13 @@ const useTabStyles = makeStyles((theme) => ({
     },
     textTransform: 'none',
     opacity: 1,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    '& svg': {
+      margin: `${theme.spacing(0, 1, 0, 0)} !important`,
+    },
   },
   labelIcon: {
     minHeight: theme.spacing(8),
@@ -170,15 +177,6 @@ const useTabStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('md')]: {
       minHeight: theme.spacing(6),
       minWidth: theme.spacing(17),
-    },
-  },
-  wrapper: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    '& svg': {
-      margin: `${theme.spacing(0, 1, 0, 0)} !important`,
     },
   },
   selected: {
@@ -505,7 +503,7 @@ export default function TimeSeriesViewerContainer() {
   const renderTabs = () => (
     <Tabs
       orientation={belowMd ? 'horizontal' : 'vertical'}
-      scrollButtons={belowMd ? 'on' : 'auto'}
+      scrollButtons={belowMd ? true : 'auto'}
       variant="scrollable"
       value={selectedTab}
       className={belowMd ? classes.tabsHorizontal : classes.tabsVertical}

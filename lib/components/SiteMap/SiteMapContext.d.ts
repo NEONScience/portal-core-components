@@ -104,15 +104,17 @@ declare function useSiteMapContext(): {
         maxBodyHeightUpdateFromAspectRatio: boolean;
     };
     map: {
-        zoom: number;
+        status: string;
+        zoom: null;
         center: number[];
+        initialZoom: number;
+        initialCenter: number[];
         bounds: null;
         baseLayer: null;
         baseLayerAutoChangedAbove17: boolean;
         overlays: Set<any>;
         mouseMode: string;
         zoomedIcons: {};
-        repositionOpenPopupFunc: null;
         isDraggingAreaSelection: boolean;
     };
     selection: {
@@ -194,15 +196,17 @@ declare function useSiteMapContext(): {
         maxBodyHeightUpdateFromAspectRatio: boolean;
     };
     map: {
-        zoom: number;
+        status: string;
+        zoom: null;
         center: number[];
+        initialZoom: number;
+        initialCenter: number[];
         bounds: null;
         baseLayer: null;
         baseLayerAutoChangedAbove17: boolean;
         overlays: Set<any>;
         mouseMode: string;
         zoomedIcons: {};
-        repositionOpenPopupFunc: null;
         isDraggingAreaSelection: boolean;
     };
     selection: {

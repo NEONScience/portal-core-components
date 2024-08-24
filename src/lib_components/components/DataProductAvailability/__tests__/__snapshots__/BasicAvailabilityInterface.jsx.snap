@@ -225,7 +225,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
             }
           >
             <div
-              className="MuiButtonBase-root MuiChip-root MuiChip-default MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-defaultPrimary css-1a51hnm-MuiButtonBase-root-MuiChip-root"
+              className="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-1a51hnm-MuiButtonBase-root-MuiChip-root"
               data-selenium="site-chip"
               onBlur={[Function]}
               onContextMenu={[Function]}
@@ -242,6 +242,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
               role="button"
               style={
                 {
+                  "backgroundColor": "#0073cf",
                   "borderRadius": "20px",
                   "fontSize": "1rem",
                   "height": "40px",
@@ -279,7 +280,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
               </span>
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiChip-deleteIcon MuiChip-deleteIconLarge MuiChip-deleteIconColorPrimary MuiChip-deleteIconDefaultColorPrimary css-i4bv87-MuiSvgIcon-root"
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiChip-deleteIcon MuiChip-deleteIconLarge MuiChip-deleteIconColorPrimary MuiChip-deleteIconFilledColorPrimary css-i4bv87-MuiSvgIcon-root"
                 data-testid="CancelIcon"
                 focusable="false"
                 onClick={[Function]}
@@ -306,7 +307,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
             }
           >
             <button
-              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
               data-selenium="data-product-availability.select-all-sites-button"
               disabled={false}
               onBlur={[Function]}
@@ -334,7 +335,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
               <button
                 aria-label="Select sites using the observatory map"
                 aria-labelledby={null}
-                className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+                className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
                 data-mui-internal-clone-element={true}
                 data-selenium="map-selection-button"
                 disabled={false}
@@ -400,181 +401,200 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
             }
           >
             <div
-              className="MuiFormControl-root MuiTextField-root css-z3c6am-MuiFormControl-root-MuiTextField-root"
-              onClick={[Function]}
+              style={
+                {
+                  "marginBottom": "4px",
+                  "marginRight": "12px",
+                  "marginTop": "8px",
+                }
+              }
             >
-              <label
-                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-8j8psp-MuiFormLabel-root-MuiInputLabel-root"
-                data-shrink={true}
-                htmlFor=":rg:"
-                id=":rg:-label"
-              >
-                Start
-              </label>
               <div
-                className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-adornedEnd css-14gf2zb-MuiInputBase-root-MuiOutlinedInput-root"
+                className="MuiFormControl-root MuiTextField-root css-z3c6am-MuiFormControl-root-MuiTextField-root"
                 onClick={[Function]}
               >
-                <input
-                  aria-invalid={false}
-                  autoComplete="off"
-                  autoFocus={false}
-                  className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd css-7053f3-MuiInputBase-input-MuiOutlinedInput-input"
-                  disabled={false}
-                  id=":rg:"
-                  inputMode="text"
-                  onAnimationStart={[Function]}
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  onKeyDown={[Function]}
-                  onPaste={[Function]}
-                  placeholder="MMMM YYYY"
-                  readOnly={false}
-                  required={false}
-                  type="text"
-                  value="February 2020"
-                />
-                <div
-                  className="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeMedium css-1laqsz7-MuiInputAdornment-root"
+                <label
+                  className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-8j8psp-MuiFormLabel-root-MuiInputLabel-root"
+                  data-shrink={true}
+                  htmlFor=":rg:"
+                  id=":rg:-label"
                 >
-                  <button
-                    aria-label="Choose date, selected date is Feb 1, 2020"
-                    className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1eo8ysb-MuiButtonBase-root-MuiIconButton-root"
+                  Start
+                </label>
+                <div
+                  className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-sizeSmall MuiInputBase-adornedEnd css-14gf2zb-MuiInputBase-root-MuiOutlinedInput-root"
+                  onClick={[Function]}
+                >
+                  <input
+                    aria-invalid={false}
+                    autoComplete="off"
+                    autoFocus={false}
+                    className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall MuiInputBase-inputAdornedEnd css-1jcm0yw-MuiInputBase-input-MuiOutlinedInput-input"
                     disabled={false}
+                    id=":rg:"
+                    inputMode="text"
+                    onAnimationStart={[Function]}
                     onBlur={[Function]}
-                    onClick={[Function]}
-                    onContextMenu={[Function]}
-                    onDragLeave={[Function]}
+                    onChange={[Function]}
                     onFocus={[Function]}
                     onKeyDown={[Function]}
-                    onKeyUp={[Function]}
-                    onMouseDown={[Function]}
-                    onMouseLeave={[Function]}
-                    onMouseUp={[Function]}
-                    onTouchEnd={[Function]}
-                    onTouchMove={[Function]}
-                    onTouchStart={[Function]}
-                    tabIndex={0}
-                    type="button"
+                    onPaste={[Function]}
+                    placeholder="MMMM YYYY"
+                    readOnly={false}
+                    required={false}
+                    type="text"
+                    value="February 2020"
+                  />
+                  <div
+                    className="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeSmall css-1laqsz7-MuiInputAdornment-root"
                   >
-                    <svg
-                      aria-hidden={true}
-                      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
-                      data-testid="CalendarIcon"
-                      focusable="false"
-                      viewBox="0 0 24 24"
+                    <button
+                      aria-label="Choose date, selected date is Feb 1, 2020"
+                      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1eo8ysb-MuiButtonBase-root-MuiIconButton-root"
+                      disabled={false}
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onContextMenu={[Function]}
+                      onDragLeave={[Function]}
+                      onFocus={[Function]}
+                      onKeyDown={[Function]}
+                      onKeyUp={[Function]}
+                      onMouseDown={[Function]}
+                      onMouseLeave={[Function]}
+                      onMouseUp={[Function]}
+                      onTouchEnd={[Function]}
+                      onTouchMove={[Function]}
+                      onTouchStart={[Function]}
+                      tabIndex={0}
+                      type="button"
                     >
-                      <path
-                        d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
+                      <svg
+                        aria-hidden={true}
+                        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                        data-testid="CalendarIcon"
+                        focusable="false"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
+                        />
+                      </svg>
+                      <span
+                        className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                       />
-                    </svg>
-                    <span
-                      className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
-                <fieldset
-                  aria-hidden={true}
-                  className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
-                >
-                  <legend
-                    className="css-14lo706"
+                    </button>
+                  </div>
+                  <fieldset
+                    aria-hidden={true}
+                    className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
                   >
-                    <span>
-                      Start
-                    </span>
-                  </legend>
-                </fieldset>
+                    <legend
+                      className="css-14lo706"
+                    >
+                      <span>
+                        Start
+                      </span>
+                    </legend>
+                  </fieldset>
+                </div>
               </div>
             </div>
             <div
-              className="MuiFormControl-root MuiTextField-root css-z3c6am-MuiFormControl-root-MuiTextField-root"
-              onClick={[Function]}
+              style={
+                {
+                  "marginBottom": "4px",
+                  "marginTop": "8px",
+                }
+              }
             >
-              <label
-                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-8j8psp-MuiFormLabel-root-MuiInputLabel-root"
-                data-shrink={true}
-                htmlFor=":ri:"
-                id=":ri:-label"
-              >
-                End
-              </label>
               <div
-                className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-adornedEnd css-14gf2zb-MuiInputBase-root-MuiOutlinedInput-root"
+                className="MuiFormControl-root MuiTextField-root css-z3c6am-MuiFormControl-root-MuiTextField-root"
                 onClick={[Function]}
               >
-                <input
-                  aria-invalid={false}
-                  autoComplete="off"
-                  autoFocus={false}
-                  className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd css-7053f3-MuiInputBase-input-MuiOutlinedInput-input"
-                  disabled={false}
-                  id=":ri:"
-                  inputMode="text"
-                  onAnimationStart={[Function]}
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  onKeyDown={[Function]}
-                  onPaste={[Function]}
-                  placeholder="MMMM YYYY"
-                  readOnly={false}
-                  required={false}
-                  type="text"
-                  value="May 2020"
-                />
-                <div
-                  className="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeMedium css-1laqsz7-MuiInputAdornment-root"
+                <label
+                  className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-8j8psp-MuiFormLabel-root-MuiInputLabel-root"
+                  data-shrink={true}
+                  htmlFor=":ri:"
+                  id=":ri:-label"
                 >
-                  <button
-                    aria-label="Choose date, selected date is May 1, 2020"
-                    className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1eo8ysb-MuiButtonBase-root-MuiIconButton-root"
+                  End
+                </label>
+                <div
+                  className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-sizeSmall MuiInputBase-adornedEnd css-14gf2zb-MuiInputBase-root-MuiOutlinedInput-root"
+                  onClick={[Function]}
+                >
+                  <input
+                    aria-invalid={false}
+                    autoComplete="off"
+                    autoFocus={false}
+                    className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall MuiInputBase-inputAdornedEnd css-1jcm0yw-MuiInputBase-input-MuiOutlinedInput-input"
                     disabled={false}
+                    id=":ri:"
+                    inputMode="text"
+                    onAnimationStart={[Function]}
                     onBlur={[Function]}
-                    onClick={[Function]}
-                    onContextMenu={[Function]}
-                    onDragLeave={[Function]}
+                    onChange={[Function]}
                     onFocus={[Function]}
                     onKeyDown={[Function]}
-                    onKeyUp={[Function]}
-                    onMouseDown={[Function]}
-                    onMouseLeave={[Function]}
-                    onMouseUp={[Function]}
-                    onTouchEnd={[Function]}
-                    onTouchMove={[Function]}
-                    onTouchStart={[Function]}
-                    tabIndex={0}
-                    type="button"
+                    onPaste={[Function]}
+                    placeholder="MMMM YYYY"
+                    readOnly={false}
+                    required={false}
+                    type="text"
+                    value="May 2020"
+                  />
+                  <div
+                    className="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeSmall css-1laqsz7-MuiInputAdornment-root"
                   >
-                    <svg
-                      aria-hidden={true}
-                      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
-                      data-testid="CalendarIcon"
-                      focusable="false"
-                      viewBox="0 0 24 24"
+                    <button
+                      aria-label="Choose date, selected date is May 1, 2020"
+                      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1eo8ysb-MuiButtonBase-root-MuiIconButton-root"
+                      disabled={false}
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onContextMenu={[Function]}
+                      onDragLeave={[Function]}
+                      onFocus={[Function]}
+                      onKeyDown={[Function]}
+                      onKeyUp={[Function]}
+                      onMouseDown={[Function]}
+                      onMouseLeave={[Function]}
+                      onMouseUp={[Function]}
+                      onTouchEnd={[Function]}
+                      onTouchMove={[Function]}
+                      onTouchStart={[Function]}
+                      tabIndex={0}
+                      type="button"
                     >
-                      <path
-                        d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
+                      <svg
+                        aria-hidden={true}
+                        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                        data-testid="CalendarIcon"
+                        focusable="false"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
+                        />
+                      </svg>
+                      <span
+                        className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                       />
-                    </svg>
-                    <span
-                      className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
-                <fieldset
-                  aria-hidden={true}
-                  className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
-                >
-                  <legend
-                    className="css-14lo706"
+                    </button>
+                  </div>
+                  <fieldset
+                    aria-hidden={true}
+                    className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
                   >
-                    <span>
-                      End
-                    </span>
-                  </legend>
-                </fieldset>
+                    <legend
+                      className="css-14lo706"
+                    >
+                      <span>
+                        End
+                      </span>
+                    </legend>
+                  </fieldset>
+                </div>
               </div>
             </div>
           </div>
@@ -587,7 +607,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
             }
           >
             <button
-              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
               data-selenium="data-product-availability.all-years-button"
               disabled={false}
               onBlur={[Function]}
@@ -612,7 +632,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
               />
             </button>
             <button
-              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
               data-selenium="data-product-availability.latest-year-button"
               disabled={false}
               onBlur={[Function]}
@@ -766,6 +786,232 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
         >
           View By:
         </h6>
+        <div
+          className="MuiBox-root css-1b5a289"
+        >
+          <div
+            className="MuiToggleButtonGroup-root css-kavg8e-MuiToggleButtonGroup-root"
+            role="group"
+            variant="outlined"
+          >
+            <button
+              aria-pressed={false}
+              className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-yye3i3-MuiButtonBase-root-MuiToggleButton-root"
+              disabled={false}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onClick={[Function]}
+              onContextMenu={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              tabIndex={0}
+              type="button"
+              value="summary"
+            >
+              Summary
+              <span
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+            <button
+              aria-pressed={true}
+              className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-yye3i3-MuiButtonBase-root-MuiToggleButton-root"
+              disabled={false}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onClick={[Function]}
+              onContextMenu={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              tabIndex={0}
+              type="button"
+              value="sites"
+            >
+              Site
+              <span
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+            <button
+              aria-pressed={false}
+              className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-yye3i3-MuiButtonBase-root-MuiToggleButton-root"
+              disabled={false}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onClick={[Function]}
+              onContextMenu={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              tabIndex={0}
+              type="button"
+              value="states"
+            >
+              State
+              <span
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+            <button
+              aria-pressed={false}
+              className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-yye3i3-MuiButtonBase-root-MuiToggleButton-root"
+              disabled={false}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onClick={[Function]}
+              onContextMenu={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              tabIndex={0}
+              type="button"
+              value="domains"
+            >
+              Domain
+              <span
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+        </div>
+        <div
+          className="MuiBox-root css-o17jj2"
+        >
+          <div
+            className="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
+          >
+            <div
+              ComponentPath="@mui/material/Select"
+              prop-input="Non-renderable object"
+              prop-onChange="[Function]"
+              prop-value="sites"
+              prop-variant="filled"
+            >
+              <li
+                className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
+                onBlur={[Function]}
+                onContextMenu={[Function]}
+                onDragLeave={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseLeave={[Function]}
+                onMouseUp={[Function]}
+                onTouchEnd={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                role="menuitem"
+                tabIndex={-1}
+                value="summary"
+              >
+                Summary
+                <span
+                  className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </li>
+              <li
+                className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
+                onBlur={[Function]}
+                onContextMenu={[Function]}
+                onDragLeave={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseLeave={[Function]}
+                onMouseUp={[Function]}
+                onTouchEnd={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                role="menuitem"
+                tabIndex={-1}
+                value="sites"
+              >
+                Site
+                <span
+                  className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </li>
+              <li
+                className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
+                onBlur={[Function]}
+                onContextMenu={[Function]}
+                onDragLeave={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseLeave={[Function]}
+                onMouseUp={[Function]}
+                onTouchEnd={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                role="menuitem"
+                tabIndex={-1}
+                value="states"
+              >
+                State
+                <span
+                  className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </li>
+              <li
+                className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
+                onBlur={[Function]}
+                onContextMenu={[Function]}
+                onDragLeave={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseLeave={[Function]}
+                onMouseUp={[Function]}
+                onTouchEnd={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                role="menuitem"
+                tabIndex={-1}
+                value="domains"
+              >
+                Domain
+                <span
+                  className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </li>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div
@@ -1204,7 +1450,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
             }
           >
             <div
-              className="MuiButtonBase-root MuiChip-root MuiChip-default MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-defaultPrimary css-1a51hnm-MuiButtonBase-root-MuiChip-root"
+              className="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-1a51hnm-MuiButtonBase-root-MuiChip-root"
               data-selenium="site-chip"
               onBlur={[Function]}
               onContextMenu={[Function]}
@@ -1221,6 +1467,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
               role="button"
               style={
                 {
+                  "backgroundColor": "#0073cf",
                   "borderRadius": "20px",
                   "fontSize": "1rem",
                   "height": "40px",
@@ -1258,7 +1505,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
               </span>
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiChip-deleteIcon MuiChip-deleteIconLarge MuiChip-deleteIconColorPrimary MuiChip-deleteIconDefaultColorPrimary css-i4bv87-MuiSvgIcon-root"
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiChip-deleteIcon MuiChip-deleteIconLarge MuiChip-deleteIconColorPrimary MuiChip-deleteIconFilledColorPrimary css-i4bv87-MuiSvgIcon-root"
                 data-testid="CancelIcon"
                 focusable="false"
                 onClick={[Function]}
@@ -1285,7 +1532,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
             }
           >
             <button
-              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
               data-selenium="data-product-availability.select-all-sites-button"
               disabled={false}
               onBlur={[Function]}
@@ -1313,7 +1560,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
               <button
                 aria-label="Select sites using the observatory map"
                 aria-labelledby={null}
-                className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+                className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
                 data-mui-internal-clone-element={true}
                 data-selenium="map-selection-button"
                 disabled={false}
@@ -1379,181 +1626,200 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
             }
           >
             <div
-              className="MuiFormControl-root MuiTextField-root css-z3c6am-MuiFormControl-root-MuiTextField-root"
-              onClick={[Function]}
+              style={
+                {
+                  "marginBottom": "4px",
+                  "marginRight": "12px",
+                  "marginTop": "8px",
+                }
+              }
             >
-              <label
-                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-8j8psp-MuiFormLabel-root-MuiInputLabel-root"
-                data-shrink={true}
-                htmlFor=":r2:"
-                id=":r2:-label"
-              >
-                Start
-              </label>
               <div
-                className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-adornedEnd css-14gf2zb-MuiInputBase-root-MuiOutlinedInput-root"
+                className="MuiFormControl-root MuiTextField-root css-z3c6am-MuiFormControl-root-MuiTextField-root"
                 onClick={[Function]}
               >
-                <input
-                  aria-invalid={false}
-                  autoComplete="off"
-                  autoFocus={false}
-                  className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd css-7053f3-MuiInputBase-input-MuiOutlinedInput-input"
-                  disabled={false}
-                  id=":r2:"
-                  inputMode="text"
-                  onAnimationStart={[Function]}
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  onKeyDown={[Function]}
-                  onPaste={[Function]}
-                  placeholder="MMMM YYYY"
-                  readOnly={false}
-                  required={false}
-                  type="text"
-                  value="February 2020"
-                />
-                <div
-                  className="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeMedium css-1laqsz7-MuiInputAdornment-root"
+                <label
+                  className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-8j8psp-MuiFormLabel-root-MuiInputLabel-root"
+                  data-shrink={true}
+                  htmlFor=":r2:"
+                  id=":r2:-label"
                 >
-                  <button
-                    aria-label="Choose date, selected date is Feb 1, 2020"
-                    className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1eo8ysb-MuiButtonBase-root-MuiIconButton-root"
+                  Start
+                </label>
+                <div
+                  className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-sizeSmall MuiInputBase-adornedEnd css-14gf2zb-MuiInputBase-root-MuiOutlinedInput-root"
+                  onClick={[Function]}
+                >
+                  <input
+                    aria-invalid={false}
+                    autoComplete="off"
+                    autoFocus={false}
+                    className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall MuiInputBase-inputAdornedEnd css-1jcm0yw-MuiInputBase-input-MuiOutlinedInput-input"
                     disabled={false}
+                    id=":r2:"
+                    inputMode="text"
+                    onAnimationStart={[Function]}
                     onBlur={[Function]}
-                    onClick={[Function]}
-                    onContextMenu={[Function]}
-                    onDragLeave={[Function]}
+                    onChange={[Function]}
                     onFocus={[Function]}
                     onKeyDown={[Function]}
-                    onKeyUp={[Function]}
-                    onMouseDown={[Function]}
-                    onMouseLeave={[Function]}
-                    onMouseUp={[Function]}
-                    onTouchEnd={[Function]}
-                    onTouchMove={[Function]}
-                    onTouchStart={[Function]}
-                    tabIndex={0}
-                    type="button"
+                    onPaste={[Function]}
+                    placeholder="MMMM YYYY"
+                    readOnly={false}
+                    required={false}
+                    type="text"
+                    value="February 2020"
+                  />
+                  <div
+                    className="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeSmall css-1laqsz7-MuiInputAdornment-root"
                   >
-                    <svg
-                      aria-hidden={true}
-                      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
-                      data-testid="CalendarIcon"
-                      focusable="false"
-                      viewBox="0 0 24 24"
+                    <button
+                      aria-label="Choose date, selected date is Feb 1, 2020"
+                      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1eo8ysb-MuiButtonBase-root-MuiIconButton-root"
+                      disabled={false}
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onContextMenu={[Function]}
+                      onDragLeave={[Function]}
+                      onFocus={[Function]}
+                      onKeyDown={[Function]}
+                      onKeyUp={[Function]}
+                      onMouseDown={[Function]}
+                      onMouseLeave={[Function]}
+                      onMouseUp={[Function]}
+                      onTouchEnd={[Function]}
+                      onTouchMove={[Function]}
+                      onTouchStart={[Function]}
+                      tabIndex={0}
+                      type="button"
                     >
-                      <path
-                        d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
+                      <svg
+                        aria-hidden={true}
+                        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                        data-testid="CalendarIcon"
+                        focusable="false"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
+                        />
+                      </svg>
+                      <span
+                        className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                       />
-                    </svg>
-                    <span
-                      className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
-                <fieldset
-                  aria-hidden={true}
-                  className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
-                >
-                  <legend
-                    className="css-14lo706"
+                    </button>
+                  </div>
+                  <fieldset
+                    aria-hidden={true}
+                    className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
                   >
-                    <span>
-                      Start
-                    </span>
-                  </legend>
-                </fieldset>
+                    <legend
+                      className="css-14lo706"
+                    >
+                      <span>
+                        Start
+                      </span>
+                    </legend>
+                  </fieldset>
+                </div>
               </div>
             </div>
             <div
-              className="MuiFormControl-root MuiTextField-root css-z3c6am-MuiFormControl-root-MuiTextField-root"
-              onClick={[Function]}
+              style={
+                {
+                  "marginBottom": "4px",
+                  "marginTop": "8px",
+                }
+              }
             >
-              <label
-                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-8j8psp-MuiFormLabel-root-MuiInputLabel-root"
-                data-shrink={true}
-                htmlFor=":r4:"
-                id=":r4:-label"
-              >
-                End
-              </label>
               <div
-                className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-adornedEnd css-14gf2zb-MuiInputBase-root-MuiOutlinedInput-root"
+                className="MuiFormControl-root MuiTextField-root css-z3c6am-MuiFormControl-root-MuiTextField-root"
                 onClick={[Function]}
               >
-                <input
-                  aria-invalid={false}
-                  autoComplete="off"
-                  autoFocus={false}
-                  className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd css-7053f3-MuiInputBase-input-MuiOutlinedInput-input"
-                  disabled={false}
-                  id=":r4:"
-                  inputMode="text"
-                  onAnimationStart={[Function]}
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  onKeyDown={[Function]}
-                  onPaste={[Function]}
-                  placeholder="MMMM YYYY"
-                  readOnly={false}
-                  required={false}
-                  type="text"
-                  value="May 2020"
-                />
-                <div
-                  className="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeMedium css-1laqsz7-MuiInputAdornment-root"
+                <label
+                  className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-8j8psp-MuiFormLabel-root-MuiInputLabel-root"
+                  data-shrink={true}
+                  htmlFor=":r4:"
+                  id=":r4:-label"
                 >
-                  <button
-                    aria-label="Choose date, selected date is May 1, 2020"
-                    className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1eo8ysb-MuiButtonBase-root-MuiIconButton-root"
+                  End
+                </label>
+                <div
+                  className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-sizeSmall MuiInputBase-adornedEnd css-14gf2zb-MuiInputBase-root-MuiOutlinedInput-root"
+                  onClick={[Function]}
+                >
+                  <input
+                    aria-invalid={false}
+                    autoComplete="off"
+                    autoFocus={false}
+                    className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall MuiInputBase-inputAdornedEnd css-1jcm0yw-MuiInputBase-input-MuiOutlinedInput-input"
                     disabled={false}
+                    id=":r4:"
+                    inputMode="text"
+                    onAnimationStart={[Function]}
                     onBlur={[Function]}
-                    onClick={[Function]}
-                    onContextMenu={[Function]}
-                    onDragLeave={[Function]}
+                    onChange={[Function]}
                     onFocus={[Function]}
                     onKeyDown={[Function]}
-                    onKeyUp={[Function]}
-                    onMouseDown={[Function]}
-                    onMouseLeave={[Function]}
-                    onMouseUp={[Function]}
-                    onTouchEnd={[Function]}
-                    onTouchMove={[Function]}
-                    onTouchStart={[Function]}
-                    tabIndex={0}
-                    type="button"
+                    onPaste={[Function]}
+                    placeholder="MMMM YYYY"
+                    readOnly={false}
+                    required={false}
+                    type="text"
+                    value="May 2020"
+                  />
+                  <div
+                    className="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeSmall css-1laqsz7-MuiInputAdornment-root"
                   >
-                    <svg
-                      aria-hidden={true}
-                      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
-                      data-testid="CalendarIcon"
-                      focusable="false"
-                      viewBox="0 0 24 24"
+                    <button
+                      aria-label="Choose date, selected date is May 1, 2020"
+                      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1eo8ysb-MuiButtonBase-root-MuiIconButton-root"
+                      disabled={false}
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onContextMenu={[Function]}
+                      onDragLeave={[Function]}
+                      onFocus={[Function]}
+                      onKeyDown={[Function]}
+                      onKeyUp={[Function]}
+                      onMouseDown={[Function]}
+                      onMouseLeave={[Function]}
+                      onMouseUp={[Function]}
+                      onTouchEnd={[Function]}
+                      onTouchMove={[Function]}
+                      onTouchStart={[Function]}
+                      tabIndex={0}
+                      type="button"
                     >
-                      <path
-                        d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
+                      <svg
+                        aria-hidden={true}
+                        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                        data-testid="CalendarIcon"
+                        focusable="false"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
+                        />
+                      </svg>
+                      <span
+                        className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                       />
-                    </svg>
-                    <span
-                      className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
-                <fieldset
-                  aria-hidden={true}
-                  className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
-                >
-                  <legend
-                    className="css-14lo706"
+                    </button>
+                  </div>
+                  <fieldset
+                    aria-hidden={true}
+                    className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
                   >
-                    <span>
-                      End
-                    </span>
-                  </legend>
-                </fieldset>
+                    <legend
+                      className="css-14lo706"
+                    >
+                      <span>
+                        End
+                      </span>
+                    </legend>
+                  </fieldset>
+                </div>
               </div>
             </div>
           </div>
@@ -1566,7 +1832,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
             }
           >
             <button
-              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
               data-selenium="data-product-availability.all-years-button"
               disabled={false}
               onBlur={[Function]}
@@ -1591,7 +1857,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
               />
             </button>
             <button
-              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
               data-selenium="data-product-availability.latest-year-button"
               disabled={false}
               onBlur={[Function]}
@@ -1745,6 +2011,232 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
         >
           View By:
         </h6>
+        <div
+          className="MuiBox-root css-1b5a289"
+        >
+          <div
+            className="MuiToggleButtonGroup-root css-kavg8e-MuiToggleButtonGroup-root"
+            role="group"
+            variant="outlined"
+          >
+            <button
+              aria-pressed={false}
+              className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-yye3i3-MuiButtonBase-root-MuiToggleButton-root"
+              disabled={false}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onClick={[Function]}
+              onContextMenu={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              tabIndex={0}
+              type="button"
+              value="summary"
+            >
+              Summary
+              <span
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+            <button
+              aria-pressed={true}
+              className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-yye3i3-MuiButtonBase-root-MuiToggleButton-root"
+              disabled={false}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onClick={[Function]}
+              onContextMenu={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              tabIndex={0}
+              type="button"
+              value="sites"
+            >
+              Site
+              <span
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+            <button
+              aria-pressed={false}
+              className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-yye3i3-MuiButtonBase-root-MuiToggleButton-root"
+              disabled={false}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onClick={[Function]}
+              onContextMenu={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              tabIndex={0}
+              type="button"
+              value="states"
+            >
+              State
+              <span
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+            <button
+              aria-pressed={false}
+              className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-yye3i3-MuiButtonBase-root-MuiToggleButton-root"
+              disabled={false}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onClick={[Function]}
+              onContextMenu={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              tabIndex={0}
+              type="button"
+              value="domains"
+            >
+              Domain
+              <span
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+        </div>
+        <div
+          className="MuiBox-root css-o17jj2"
+        >
+          <div
+            className="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
+          >
+            <div
+              ComponentPath="@mui/material/Select"
+              prop-input="Non-renderable object"
+              prop-onChange="[Function]"
+              prop-value="sites"
+              prop-variant="filled"
+            >
+              <li
+                className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
+                onBlur={[Function]}
+                onContextMenu={[Function]}
+                onDragLeave={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseLeave={[Function]}
+                onMouseUp={[Function]}
+                onTouchEnd={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                role="menuitem"
+                tabIndex={-1}
+                value="summary"
+              >
+                Summary
+                <span
+                  className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </li>
+              <li
+                className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
+                onBlur={[Function]}
+                onContextMenu={[Function]}
+                onDragLeave={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseLeave={[Function]}
+                onMouseUp={[Function]}
+                onTouchEnd={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                role="menuitem"
+                tabIndex={-1}
+                value="sites"
+              >
+                Site
+                <span
+                  className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </li>
+              <li
+                className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
+                onBlur={[Function]}
+                onContextMenu={[Function]}
+                onDragLeave={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseLeave={[Function]}
+                onMouseUp={[Function]}
+                onTouchEnd={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                role="menuitem"
+                tabIndex={-1}
+                value="states"
+              >
+                State
+                <span
+                  className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </li>
+              <li
+                className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
+                onBlur={[Function]}
+                onContextMenu={[Function]}
+                onDragLeave={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseLeave={[Function]}
+                onMouseUp={[Function]}
+                onTouchEnd={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                role="menuitem"
+                tabIndex={-1}
+                value="domains"
+              >
+                Domain
+                <span
+                  className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </li>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div
@@ -2180,6 +2672,208 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
         >
           View By:
         </h6>
+        <div
+          className="MuiBox-root css-1b5a289"
+        >
+          <div
+            className="MuiToggleButtonGroup-root css-kavg8e-MuiToggleButtonGroup-root"
+            role="group"
+            variant="outlined"
+          >
+            <button
+              aria-pressed={false}
+              className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-yye3i3-MuiButtonBase-root-MuiToggleButton-root"
+              disabled={false}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onClick={[Function]}
+              onContextMenu={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              tabIndex={0}
+              type="button"
+              value="summary"
+            >
+              Summary
+            </button>
+            <button
+              aria-pressed={true}
+              className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-yye3i3-MuiButtonBase-root-MuiToggleButton-root"
+              disabled={false}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onClick={[Function]}
+              onContextMenu={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              tabIndex={0}
+              type="button"
+              value="sites"
+            >
+              Site
+            </button>
+            <button
+              aria-pressed={false}
+              className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-yye3i3-MuiButtonBase-root-MuiToggleButton-root"
+              disabled={false}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onClick={[Function]}
+              onContextMenu={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              tabIndex={0}
+              type="button"
+              value="states"
+            >
+              State
+            </button>
+            <button
+              aria-pressed={false}
+              className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-yye3i3-MuiButtonBase-root-MuiToggleButton-root"
+              disabled={false}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onClick={[Function]}
+              onContextMenu={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              tabIndex={0}
+              type="button"
+              value="domains"
+            >
+              Domain
+            </button>
+          </div>
+        </div>
+        <div
+          className="MuiBox-root css-o17jj2"
+        >
+          <div
+            className="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
+          >
+            <div
+              ComponentPath="@mui/material/Select"
+              prop-input="Non-renderable object"
+              prop-onChange="[Function]"
+              prop-value="sites"
+              prop-variant="filled"
+            >
+              <li
+                className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
+                onBlur={[Function]}
+                onContextMenu={[Function]}
+                onDragLeave={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseLeave={[Function]}
+                onMouseUp={[Function]}
+                onTouchEnd={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                role="menuitem"
+                tabIndex={-1}
+                value="summary"
+              >
+                Summary
+              </li>
+              <li
+                className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
+                onBlur={[Function]}
+                onContextMenu={[Function]}
+                onDragLeave={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseLeave={[Function]}
+                onMouseUp={[Function]}
+                onTouchEnd={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                role="menuitem"
+                tabIndex={-1}
+                value="sites"
+              >
+                Site
+              </li>
+              <li
+                className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
+                onBlur={[Function]}
+                onContextMenu={[Function]}
+                onDragLeave={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseLeave={[Function]}
+                onMouseUp={[Function]}
+                onTouchEnd={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                role="menuitem"
+                tabIndex={-1}
+                value="states"
+              >
+                State
+              </li>
+              <li
+                className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
+                onBlur={[Function]}
+                onContextMenu={[Function]}
+                onDragLeave={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseLeave={[Function]}
+                onMouseUp={[Function]}
+                onTouchEnd={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                role="menuitem"
+                tabIndex={-1}
+                value="domains"
+              >
+                Domain
+              </li>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div
@@ -2235,9 +2929,6 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
                 d="M11 18h2v-2h-2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4"
               />
             </svg>
-            <span
-              className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-            />
           </button>
         </div>
         <div>
@@ -2534,7 +3225,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
             }
           >
             <div
-              className="MuiButtonBase-root MuiChip-root MuiChip-default MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-defaultPrimary css-1a51hnm-MuiButtonBase-root-MuiChip-root"
+              className="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-1a51hnm-MuiButtonBase-root-MuiChip-root"
               data-selenium="site-chip"
               onBlur={[Function]}
               onContextMenu={[Function]}
@@ -2551,6 +3242,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
               role="button"
               style={
                 {
+                  "backgroundColor": "#0073cf",
                   "borderRadius": "20px",
                   "fontSize": "1rem",
                   "height": "40px",
@@ -2588,7 +3280,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
               </span>
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiChip-deleteIcon MuiChip-deleteIconLarge MuiChip-deleteIconColorPrimary MuiChip-deleteIconDefaultColorPrimary css-i4bv87-MuiSvgIcon-root"
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiChip-deleteIcon MuiChip-deleteIconLarge MuiChip-deleteIconColorPrimary MuiChip-deleteIconFilledColorPrimary css-i4bv87-MuiSvgIcon-root"
                 data-testid="CancelIcon"
                 focusable="false"
                 onClick={[Function]}
@@ -2615,7 +3307,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
             }
           >
             <button
-              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
               data-selenium="data-product-availability.select-all-sites-button"
               disabled={false}
               onBlur={[Function]}
@@ -2643,7 +3335,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
               <button
                 aria-label="Select sites using the observatory map"
                 aria-labelledby={null}
-                className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+                className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
                 data-mui-internal-clone-element={true}
                 data-selenium="map-selection-button"
                 disabled={false}
@@ -2709,181 +3401,200 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
             }
           >
             <div
-              className="MuiFormControl-root MuiTextField-root css-z3c6am-MuiFormControl-root-MuiTextField-root"
-              onClick={[Function]}
+              style={
+                {
+                  "marginBottom": "4px",
+                  "marginRight": "12px",
+                  "marginTop": "8px",
+                }
+              }
             >
-              <label
-                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-8j8psp-MuiFormLabel-root-MuiInputLabel-root"
-                data-shrink={true}
-                htmlFor=":r9:"
-                id=":r9:-label"
-              >
-                Start
-              </label>
               <div
-                className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-adornedEnd css-14gf2zb-MuiInputBase-root-MuiOutlinedInput-root"
+                className="MuiFormControl-root MuiTextField-root css-z3c6am-MuiFormControl-root-MuiTextField-root"
                 onClick={[Function]}
               >
-                <input
-                  aria-invalid={false}
-                  autoComplete="off"
-                  autoFocus={false}
-                  className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd css-7053f3-MuiInputBase-input-MuiOutlinedInput-input"
-                  disabled={false}
-                  id=":r9:"
-                  inputMode="text"
-                  onAnimationStart={[Function]}
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  onKeyDown={[Function]}
-                  onPaste={[Function]}
-                  placeholder="MMMM YYYY"
-                  readOnly={false}
-                  required={false}
-                  type="text"
-                  value="February 2020"
-                />
-                <div
-                  className="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeMedium css-1laqsz7-MuiInputAdornment-root"
+                <label
+                  className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-8j8psp-MuiFormLabel-root-MuiInputLabel-root"
+                  data-shrink={true}
+                  htmlFor=":r9:"
+                  id=":r9:-label"
                 >
-                  <button
-                    aria-label="Choose date, selected date is Feb 1, 2020"
-                    className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1eo8ysb-MuiButtonBase-root-MuiIconButton-root"
+                  Start
+                </label>
+                <div
+                  className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-sizeSmall MuiInputBase-adornedEnd css-14gf2zb-MuiInputBase-root-MuiOutlinedInput-root"
+                  onClick={[Function]}
+                >
+                  <input
+                    aria-invalid={false}
+                    autoComplete="off"
+                    autoFocus={false}
+                    className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall MuiInputBase-inputAdornedEnd css-1jcm0yw-MuiInputBase-input-MuiOutlinedInput-input"
                     disabled={false}
+                    id=":r9:"
+                    inputMode="text"
+                    onAnimationStart={[Function]}
                     onBlur={[Function]}
-                    onClick={[Function]}
-                    onContextMenu={[Function]}
-                    onDragLeave={[Function]}
+                    onChange={[Function]}
                     onFocus={[Function]}
                     onKeyDown={[Function]}
-                    onKeyUp={[Function]}
-                    onMouseDown={[Function]}
-                    onMouseLeave={[Function]}
-                    onMouseUp={[Function]}
-                    onTouchEnd={[Function]}
-                    onTouchMove={[Function]}
-                    onTouchStart={[Function]}
-                    tabIndex={0}
-                    type="button"
+                    onPaste={[Function]}
+                    placeholder="MMMM YYYY"
+                    readOnly={false}
+                    required={false}
+                    type="text"
+                    value="February 2020"
+                  />
+                  <div
+                    className="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeSmall css-1laqsz7-MuiInputAdornment-root"
                   >
-                    <svg
-                      aria-hidden={true}
-                      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
-                      data-testid="CalendarIcon"
-                      focusable="false"
-                      viewBox="0 0 24 24"
+                    <button
+                      aria-label="Choose date, selected date is Feb 1, 2020"
+                      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1eo8ysb-MuiButtonBase-root-MuiIconButton-root"
+                      disabled={false}
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onContextMenu={[Function]}
+                      onDragLeave={[Function]}
+                      onFocus={[Function]}
+                      onKeyDown={[Function]}
+                      onKeyUp={[Function]}
+                      onMouseDown={[Function]}
+                      onMouseLeave={[Function]}
+                      onMouseUp={[Function]}
+                      onTouchEnd={[Function]}
+                      onTouchMove={[Function]}
+                      onTouchStart={[Function]}
+                      tabIndex={0}
+                      type="button"
                     >
-                      <path
-                        d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
+                      <svg
+                        aria-hidden={true}
+                        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                        data-testid="CalendarIcon"
+                        focusable="false"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
+                        />
+                      </svg>
+                      <span
+                        className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                       />
-                    </svg>
-                    <span
-                      className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
-                <fieldset
-                  aria-hidden={true}
-                  className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
-                >
-                  <legend
-                    className="css-14lo706"
+                    </button>
+                  </div>
+                  <fieldset
+                    aria-hidden={true}
+                    className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
                   >
-                    <span>
-                      Start
-                    </span>
-                  </legend>
-                </fieldset>
+                    <legend
+                      className="css-14lo706"
+                    >
+                      <span>
+                        Start
+                      </span>
+                    </legend>
+                  </fieldset>
+                </div>
               </div>
             </div>
             <div
-              className="MuiFormControl-root MuiTextField-root css-z3c6am-MuiFormControl-root-MuiTextField-root"
-              onClick={[Function]}
+              style={
+                {
+                  "marginBottom": "4px",
+                  "marginTop": "8px",
+                }
+              }
             >
-              <label
-                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-8j8psp-MuiFormLabel-root-MuiInputLabel-root"
-                data-shrink={true}
-                htmlFor=":rb:"
-                id=":rb:-label"
-              >
-                End
-              </label>
               <div
-                className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-adornedEnd css-14gf2zb-MuiInputBase-root-MuiOutlinedInput-root"
+                className="MuiFormControl-root MuiTextField-root css-z3c6am-MuiFormControl-root-MuiTextField-root"
                 onClick={[Function]}
               >
-                <input
-                  aria-invalid={false}
-                  autoComplete="off"
-                  autoFocus={false}
-                  className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd css-7053f3-MuiInputBase-input-MuiOutlinedInput-input"
-                  disabled={false}
-                  id=":rb:"
-                  inputMode="text"
-                  onAnimationStart={[Function]}
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  onKeyDown={[Function]}
-                  onPaste={[Function]}
-                  placeholder="MMMM YYYY"
-                  readOnly={false}
-                  required={false}
-                  type="text"
-                  value="May 2020"
-                />
-                <div
-                  className="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeMedium css-1laqsz7-MuiInputAdornment-root"
+                <label
+                  className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-8j8psp-MuiFormLabel-root-MuiInputLabel-root"
+                  data-shrink={true}
+                  htmlFor=":rb:"
+                  id=":rb:-label"
                 >
-                  <button
-                    aria-label="Choose date, selected date is May 1, 2020"
-                    className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1eo8ysb-MuiButtonBase-root-MuiIconButton-root"
+                  End
+                </label>
+                <div
+                  className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-sizeSmall MuiInputBase-adornedEnd css-14gf2zb-MuiInputBase-root-MuiOutlinedInput-root"
+                  onClick={[Function]}
+                >
+                  <input
+                    aria-invalid={false}
+                    autoComplete="off"
+                    autoFocus={false}
+                    className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall MuiInputBase-inputAdornedEnd css-1jcm0yw-MuiInputBase-input-MuiOutlinedInput-input"
                     disabled={false}
+                    id=":rb:"
+                    inputMode="text"
+                    onAnimationStart={[Function]}
                     onBlur={[Function]}
-                    onClick={[Function]}
-                    onContextMenu={[Function]}
-                    onDragLeave={[Function]}
+                    onChange={[Function]}
                     onFocus={[Function]}
                     onKeyDown={[Function]}
-                    onKeyUp={[Function]}
-                    onMouseDown={[Function]}
-                    onMouseLeave={[Function]}
-                    onMouseUp={[Function]}
-                    onTouchEnd={[Function]}
-                    onTouchMove={[Function]}
-                    onTouchStart={[Function]}
-                    tabIndex={0}
-                    type="button"
+                    onPaste={[Function]}
+                    placeholder="MMMM YYYY"
+                    readOnly={false}
+                    required={false}
+                    type="text"
+                    value="May 2020"
+                  />
+                  <div
+                    className="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeSmall css-1laqsz7-MuiInputAdornment-root"
                   >
-                    <svg
-                      aria-hidden={true}
-                      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
-                      data-testid="CalendarIcon"
-                      focusable="false"
-                      viewBox="0 0 24 24"
+                    <button
+                      aria-label="Choose date, selected date is May 1, 2020"
+                      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1eo8ysb-MuiButtonBase-root-MuiIconButton-root"
+                      disabled={false}
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onContextMenu={[Function]}
+                      onDragLeave={[Function]}
+                      onFocus={[Function]}
+                      onKeyDown={[Function]}
+                      onKeyUp={[Function]}
+                      onMouseDown={[Function]}
+                      onMouseLeave={[Function]}
+                      onMouseUp={[Function]}
+                      onTouchEnd={[Function]}
+                      onTouchMove={[Function]}
+                      onTouchStart={[Function]}
+                      tabIndex={0}
+                      type="button"
                     >
-                      <path
-                        d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
+                      <svg
+                        aria-hidden={true}
+                        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                        data-testid="CalendarIcon"
+                        focusable="false"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
+                        />
+                      </svg>
+                      <span
+                        className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                       />
-                    </svg>
-                    <span
-                      className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
-                <fieldset
-                  aria-hidden={true}
-                  className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
-                >
-                  <legend
-                    className="css-14lo706"
+                    </button>
+                  </div>
+                  <fieldset
+                    aria-hidden={true}
+                    className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
                   >
-                    <span>
-                      End
-                    </span>
-                  </legend>
-                </fieldset>
+                    <legend
+                      className="css-14lo706"
+                    >
+                      <span>
+                        End
+                      </span>
+                    </legend>
+                  </fieldset>
+                </div>
               </div>
             </div>
           </div>
@@ -2896,7 +3607,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
             }
           >
             <button
-              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
               data-selenium="data-product-availability.all-years-button"
               disabled={false}
               onBlur={[Function]}
@@ -2921,7 +3632,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
               />
             </button>
             <button
-              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
               data-selenium="data-product-availability.latest-year-button"
               disabled={false}
               onBlur={[Function]}
@@ -3075,6 +3786,232 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
         >
           View By:
         </h6>
+        <div
+          className="MuiBox-root css-1b5a289"
+        >
+          <div
+            className="MuiToggleButtonGroup-root css-kavg8e-MuiToggleButtonGroup-root"
+            role="group"
+            variant="outlined"
+          >
+            <button
+              aria-pressed={false}
+              className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-yye3i3-MuiButtonBase-root-MuiToggleButton-root"
+              disabled={false}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onClick={[Function]}
+              onContextMenu={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              tabIndex={0}
+              type="button"
+              value="summary"
+            >
+              Summary
+              <span
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+            <button
+              aria-pressed={true}
+              className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-yye3i3-MuiButtonBase-root-MuiToggleButton-root"
+              disabled={false}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onClick={[Function]}
+              onContextMenu={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              tabIndex={0}
+              type="button"
+              value="sites"
+            >
+              Site
+              <span
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+            <button
+              aria-pressed={false}
+              className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-yye3i3-MuiButtonBase-root-MuiToggleButton-root"
+              disabled={false}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onClick={[Function]}
+              onContextMenu={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              tabIndex={0}
+              type="button"
+              value="states"
+            >
+              State
+              <span
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+            <button
+              aria-pressed={false}
+              className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-yye3i3-MuiButtonBase-root-MuiToggleButton-root"
+              disabled={false}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onClick={[Function]}
+              onContextMenu={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              tabIndex={0}
+              type="button"
+              value="domains"
+            >
+              Domain
+              <span
+                className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+        </div>
+        <div
+          className="MuiBox-root css-o17jj2"
+        >
+          <div
+            className="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
+          >
+            <div
+              ComponentPath="@mui/material/Select"
+              prop-input="Non-renderable object"
+              prop-onChange="[Function]"
+              prop-value="sites"
+              prop-variant="filled"
+            >
+              <li
+                className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
+                onBlur={[Function]}
+                onContextMenu={[Function]}
+                onDragLeave={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseLeave={[Function]}
+                onMouseUp={[Function]}
+                onTouchEnd={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                role="menuitem"
+                tabIndex={-1}
+                value="summary"
+              >
+                Summary
+                <span
+                  className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </li>
+              <li
+                className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
+                onBlur={[Function]}
+                onContextMenu={[Function]}
+                onDragLeave={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseLeave={[Function]}
+                onMouseUp={[Function]}
+                onTouchEnd={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                role="menuitem"
+                tabIndex={-1}
+                value="sites"
+              >
+                Site
+                <span
+                  className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </li>
+              <li
+                className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
+                onBlur={[Function]}
+                onContextMenu={[Function]}
+                onDragLeave={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseLeave={[Function]}
+                onMouseUp={[Function]}
+                onTouchEnd={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                role="menuitem"
+                tabIndex={-1}
+                value="states"
+              >
+                State
+                <span
+                  className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </li>
+              <li
+                className="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
+                onBlur={[Function]}
+                onContextMenu={[Function]}
+                onDragLeave={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseLeave={[Function]}
+                onMouseUp={[Function]}
+                onTouchEnd={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                role="menuitem"
+                tabIndex={-1}
+                value="domains"
+              >
+                Domain
+                <span
+                  className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </li>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div
@@ -3513,7 +4450,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
             }
           >
             <div
-              className="MuiButtonBase-root MuiChip-root MuiChip-default MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-defaultPrimary css-1a51hnm-MuiButtonBase-root-MuiChip-root"
+              className="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-1a51hnm-MuiButtonBase-root-MuiChip-root"
               data-selenium="site-chip"
               onBlur={[Function]}
               onContextMenu={[Function]}
@@ -3530,6 +4467,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
               role="button"
               style={
                 {
+                  "backgroundColor": "#0073cf",
                   "borderRadius": "20px",
                   "fontSize": "1rem",
                   "height": "40px",
@@ -3567,7 +4505,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
               </span>
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiChip-deleteIcon MuiChip-deleteIconLarge MuiChip-deleteIconColorPrimary MuiChip-deleteIconDefaultColorPrimary css-i4bv87-MuiSvgIcon-root"
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiChip-deleteIcon MuiChip-deleteIconLarge MuiChip-deleteIconColorPrimary MuiChip-deleteIconFilledColorPrimary css-i4bv87-MuiSvgIcon-root"
                 data-testid="CancelIcon"
                 focusable="false"
                 onClick={[Function]}
@@ -3594,7 +4532,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
             }
           >
             <button
-              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
               data-selenium="data-product-availability.select-all-sites-button"
               disabled={false}
               onBlur={[Function]}
@@ -3622,7 +4560,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
               <button
                 aria-label="Select sites using the observatory map"
                 aria-labelledby={null}
-                className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+                className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
                 data-mui-internal-clone-element={true}
                 data-selenium="map-selection-button"
                 disabled={false}
@@ -3688,181 +4626,200 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
             }
           >
             <div
-              className="MuiFormControl-root MuiTextField-root css-z3c6am-MuiFormControl-root-MuiTextField-root"
-              onClick={[Function]}
+              style={
+                {
+                  "marginBottom": "4px",
+                  "marginRight": "12px",
+                  "marginTop": "8px",
+                }
+              }
             >
-              <label
-                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-8j8psp-MuiFormLabel-root-MuiInputLabel-root"
-                data-shrink={true}
-                htmlFor=":rn:"
-                id=":rn:-label"
-              >
-                Start
-              </label>
               <div
-                className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-adornedEnd css-14gf2zb-MuiInputBase-root-MuiOutlinedInput-root"
+                className="MuiFormControl-root MuiTextField-root css-z3c6am-MuiFormControl-root-MuiTextField-root"
                 onClick={[Function]}
               >
-                <input
-                  aria-invalid={false}
-                  autoComplete="off"
-                  autoFocus={false}
-                  className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd css-7053f3-MuiInputBase-input-MuiOutlinedInput-input"
-                  disabled={false}
-                  id=":rn:"
-                  inputMode="text"
-                  onAnimationStart={[Function]}
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  onKeyDown={[Function]}
-                  onPaste={[Function]}
-                  placeholder="MMMM YYYY"
-                  readOnly={false}
-                  required={false}
-                  type="text"
-                  value="February 2020"
-                />
-                <div
-                  className="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeMedium css-1laqsz7-MuiInputAdornment-root"
+                <label
+                  className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-8j8psp-MuiFormLabel-root-MuiInputLabel-root"
+                  data-shrink={true}
+                  htmlFor=":rn:"
+                  id=":rn:-label"
                 >
-                  <button
-                    aria-label="Choose date, selected date is Feb 1, 2020"
-                    className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1eo8ysb-MuiButtonBase-root-MuiIconButton-root"
+                  Start
+                </label>
+                <div
+                  className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-sizeSmall MuiInputBase-adornedEnd css-14gf2zb-MuiInputBase-root-MuiOutlinedInput-root"
+                  onClick={[Function]}
+                >
+                  <input
+                    aria-invalid={false}
+                    autoComplete="off"
+                    autoFocus={false}
+                    className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall MuiInputBase-inputAdornedEnd css-1jcm0yw-MuiInputBase-input-MuiOutlinedInput-input"
                     disabled={false}
+                    id=":rn:"
+                    inputMode="text"
+                    onAnimationStart={[Function]}
                     onBlur={[Function]}
-                    onClick={[Function]}
-                    onContextMenu={[Function]}
-                    onDragLeave={[Function]}
+                    onChange={[Function]}
                     onFocus={[Function]}
                     onKeyDown={[Function]}
-                    onKeyUp={[Function]}
-                    onMouseDown={[Function]}
-                    onMouseLeave={[Function]}
-                    onMouseUp={[Function]}
-                    onTouchEnd={[Function]}
-                    onTouchMove={[Function]}
-                    onTouchStart={[Function]}
-                    tabIndex={0}
-                    type="button"
+                    onPaste={[Function]}
+                    placeholder="MMMM YYYY"
+                    readOnly={false}
+                    required={false}
+                    type="text"
+                    value="February 2020"
+                  />
+                  <div
+                    className="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeSmall css-1laqsz7-MuiInputAdornment-root"
                   >
-                    <svg
-                      aria-hidden={true}
-                      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
-                      data-testid="CalendarIcon"
-                      focusable="false"
-                      viewBox="0 0 24 24"
+                    <button
+                      aria-label="Choose date, selected date is Feb 1, 2020"
+                      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1eo8ysb-MuiButtonBase-root-MuiIconButton-root"
+                      disabled={false}
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onContextMenu={[Function]}
+                      onDragLeave={[Function]}
+                      onFocus={[Function]}
+                      onKeyDown={[Function]}
+                      onKeyUp={[Function]}
+                      onMouseDown={[Function]}
+                      onMouseLeave={[Function]}
+                      onMouseUp={[Function]}
+                      onTouchEnd={[Function]}
+                      onTouchMove={[Function]}
+                      onTouchStart={[Function]}
+                      tabIndex={0}
+                      type="button"
                     >
-                      <path
-                        d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
+                      <svg
+                        aria-hidden={true}
+                        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                        data-testid="CalendarIcon"
+                        focusable="false"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
+                        />
+                      </svg>
+                      <span
+                        className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                       />
-                    </svg>
-                    <span
-                      className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
-                <fieldset
-                  aria-hidden={true}
-                  className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
-                >
-                  <legend
-                    className="css-14lo706"
+                    </button>
+                  </div>
+                  <fieldset
+                    aria-hidden={true}
+                    className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
                   >
-                    <span>
-                      Start
-                    </span>
-                  </legend>
-                </fieldset>
+                    <legend
+                      className="css-14lo706"
+                    >
+                      <span>
+                        Start
+                      </span>
+                    </legend>
+                  </fieldset>
+                </div>
               </div>
             </div>
             <div
-              className="MuiFormControl-root MuiTextField-root css-z3c6am-MuiFormControl-root-MuiTextField-root"
-              onClick={[Function]}
+              style={
+                {
+                  "marginBottom": "4px",
+                  "marginTop": "8px",
+                }
+              }
             >
-              <label
-                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-8j8psp-MuiFormLabel-root-MuiInputLabel-root"
-                data-shrink={true}
-                htmlFor=":rp:"
-                id=":rp:-label"
-              >
-                End
-              </label>
               <div
-                className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-adornedEnd css-14gf2zb-MuiInputBase-root-MuiOutlinedInput-root"
+                className="MuiFormControl-root MuiTextField-root css-z3c6am-MuiFormControl-root-MuiTextField-root"
                 onClick={[Function]}
               >
-                <input
-                  aria-invalid={false}
-                  autoComplete="off"
-                  autoFocus={false}
-                  className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd css-7053f3-MuiInputBase-input-MuiOutlinedInput-input"
-                  disabled={false}
-                  id=":rp:"
-                  inputMode="text"
-                  onAnimationStart={[Function]}
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  onKeyDown={[Function]}
-                  onPaste={[Function]}
-                  placeholder="MMMM YYYY"
-                  readOnly={false}
-                  required={false}
-                  type="text"
-                  value="May 2020"
-                />
-                <div
-                  className="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeMedium css-1laqsz7-MuiInputAdornment-root"
+                <label
+                  className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-8j8psp-MuiFormLabel-root-MuiInputLabel-root"
+                  data-shrink={true}
+                  htmlFor=":rp:"
+                  id=":rp:-label"
                 >
-                  <button
-                    aria-label="Choose date, selected date is May 1, 2020"
-                    className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1eo8ysb-MuiButtonBase-root-MuiIconButton-root"
+                  End
+                </label>
+                <div
+                  className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-sizeSmall MuiInputBase-adornedEnd css-14gf2zb-MuiInputBase-root-MuiOutlinedInput-root"
+                  onClick={[Function]}
+                >
+                  <input
+                    aria-invalid={false}
+                    autoComplete="off"
+                    autoFocus={false}
+                    className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall MuiInputBase-inputAdornedEnd css-1jcm0yw-MuiInputBase-input-MuiOutlinedInput-input"
                     disabled={false}
+                    id=":rp:"
+                    inputMode="text"
+                    onAnimationStart={[Function]}
                     onBlur={[Function]}
-                    onClick={[Function]}
-                    onContextMenu={[Function]}
-                    onDragLeave={[Function]}
+                    onChange={[Function]}
                     onFocus={[Function]}
                     onKeyDown={[Function]}
-                    onKeyUp={[Function]}
-                    onMouseDown={[Function]}
-                    onMouseLeave={[Function]}
-                    onMouseUp={[Function]}
-                    onTouchEnd={[Function]}
-                    onTouchMove={[Function]}
-                    onTouchStart={[Function]}
-                    tabIndex={0}
-                    type="button"
+                    onPaste={[Function]}
+                    placeholder="MMMM YYYY"
+                    readOnly={false}
+                    required={false}
+                    type="text"
+                    value="May 2020"
+                  />
+                  <div
+                    className="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeSmall css-1laqsz7-MuiInputAdornment-root"
                   >
-                    <svg
-                      aria-hidden={true}
-                      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
-                      data-testid="CalendarIcon"
-                      focusable="false"
-                      viewBox="0 0 24 24"
+                    <button
+                      aria-label="Choose date, selected date is May 1, 2020"
+                      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1eo8ysb-MuiButtonBase-root-MuiIconButton-root"
+                      disabled={false}
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onContextMenu={[Function]}
+                      onDragLeave={[Function]}
+                      onFocus={[Function]}
+                      onKeyDown={[Function]}
+                      onKeyUp={[Function]}
+                      onMouseDown={[Function]}
+                      onMouseLeave={[Function]}
+                      onMouseUp={[Function]}
+                      onTouchEnd={[Function]}
+                      onTouchMove={[Function]}
+                      onTouchStart={[Function]}
+                      tabIndex={0}
+                      type="button"
                     >
-                      <path
-                        d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
+                      <svg
+                        aria-hidden={true}
+                        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                        data-testid="CalendarIcon"
+                        focusable="false"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
+                        />
+                      </svg>
+                      <span
+                        className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                       />
-                    </svg>
-                    <span
-                      className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
-                <fieldset
-                  aria-hidden={true}
-                  className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
-                >
-                  <legend
-                    className="css-14lo706"
+                    </button>
+                  </div>
+                  <fieldset
+                    aria-hidden={true}
+                    className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
                   >
-                    <span>
-                      End
-                    </span>
-                  </legend>
-                </fieldset>
+                    <legend
+                      className="css-14lo706"
+                    >
+                      <span>
+                        End
+                      </span>
+                    </legend>
+                  </fieldset>
+                </div>
               </div>
             </div>
           </div>
@@ -3875,7 +4832,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
             }
           >
             <button
-              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
               data-selenium="data-product-availability.all-years-button"
               disabled={false}
               onBlur={[Function]}
@@ -3900,7 +4857,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
               />
             </button>
             <button
-              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+              className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
               data-selenium="data-product-availability.latest-year-button"
               disabled={false}
               onBlur={[Function]}
@@ -4152,7 +5109,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
             <button
               aria-label="Sort Ascending (A-Z)"
               aria-pressed={true}
-              className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-a8ej1-MuiButtonBase-root-MuiToggleButton-root"
+              className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-1sjl1k2-MuiButtonBase-root-MuiToggleButton-root"
               disabled={false}
               onBlur={[Function]}
               onChange={[Function]}
@@ -4191,7 +5148,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
             <button
               aria-label="Sort Descending (Z-A)"
               aria-pressed={false}
-              className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-a8ej1-MuiButtonBase-root-MuiToggleButton-root"
+              className="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-1sjl1k2-MuiButtonBase-root-MuiToggleButton-root"
               disabled={false}
               onBlur={[Function]}
               onChange={[Function]}

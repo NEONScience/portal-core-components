@@ -40,6 +40,11 @@ const SiteChip = (props) => {
   if (!otherProps.size) { otherProps.size = 'small'; }
   if (!otherProps['data-selenium']) { otherProps['data-selenium'] = 'site-chip'; }
 
+  // Backwards compatible with MUI v4
+  if (otherProps.variant === 'default') {
+    otherProps.variant = 'filled';
+  }
+
   /*
     Avatar style overrides
     Material UI has a bug where Avatars in chips do not inherit styles correctly
@@ -68,6 +73,13 @@ const SiteChip = (props) => {
     use cases for large (see DataProductAvailability).
   */
   const chipStyle = {};
+  if (otherProps.variant === 'outlined') {
+    chipStyle.backgroundColor = 'transparent';
+  } else if ((otherProps.variant === 'filled') && (otherProps.color === 'secondary')) {
+    chipStyle.backgroundColor = Theme.palette.secondary.main;
+  } else if ((otherProps.variant === 'filled') && (otherProps.color === 'primary')) {
+    chipStyle.backgroundColor = Theme.palette.primary.main;
+  }
   const deleteIconStyle = {};
   let avatarClass = null;
   if (otherProps.size === 'large') {

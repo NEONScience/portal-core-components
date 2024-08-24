@@ -59,7 +59,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 1`] = `
             Data for this product are available in other formats from
              
             <a
-              className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
+              className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
               data-gtm-external-host="AMERIFLUX"
               data-gtm-product-code="DP1.00001.001"
               href="https://ameriflux.lbl.gov"
@@ -183,7 +183,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
             Raw sequence data associated with this product are available from
              
             <a
-              className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
+              className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
               data-gtm-external-host="BOLD"
               data-gtm-product-code="DP1.10020.001"
               href="http://www.barcodinglife.com/"
@@ -213,7 +213,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
           >
             <li>
               <a
-                className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
+                className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
                 data-gtm-external-host="BOLD"
                 data-gtm-product-code="DP1.10020.001"
                 href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETN"
@@ -227,7 +227,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
             </li>
             <li>
               <a
-                className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
+                className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
                 data-gtm-external-host="BOLD"
                 data-gtm-product-code="DP1.10020.001"
                 href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETP"
@@ -306,7 +306,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
             Data for this product are only available from
              
             <a
-              className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
+              className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
               data-gtm-external-host="PHENOCAM"
               data-gtm-product-code="DP1.00033.001"
               href="https://phenocam.nau.edu/webcam/about/"
@@ -430,7 +430,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 1`] = `
             Data for this product are available in other formats from
              
             <a
-              className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
+              className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
               data-gtm-external-host="AMERIFLUX"
               data-gtm-product-code="DP1.00001.001"
               href="https://ameriflux.lbl.gov"
@@ -554,7 +554,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
             Raw sequence data associated with this product are available from
              
             <a
-              className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
+              className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
               data-gtm-external-host="BOLD"
               data-gtm-product-code="DP1.10020.001"
               href="http://www.barcodinglife.com/"
@@ -584,7 +584,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
           >
             <li>
               <a
-                className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
+                className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
                 data-gtm-external-host="BOLD"
                 data-gtm-product-code="DP1.10020.001"
                 href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETN"
@@ -598,7 +598,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
             </li>
             <li>
               <a
-                className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
+                className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
                 data-gtm-external-host="BOLD"
                 data-gtm-product-code="DP1.10020.001"
                 href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETP"
@@ -675,7 +675,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
             Data for this product are only available from
              
             <a
-              className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
+              className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
               data-gtm-external-host="PHENOCAM"
               data-gtm-product-code="DP1.00033.001"
               href="https://phenocam.nau.edu/webcam/about/"
@@ -799,7 +799,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
             Data for this product are available in other formats from
              
             <a
-              className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
+              className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
               data-gtm-external-host="AMERIFLUX"
               data-gtm-product-code="DP1.00001.001"
               href="https://ameriflux.lbl.gov"
@@ -966,7 +966,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
             Raw sequence data associated with this product are available from
              
             <a
-              className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
+              className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
               data-gtm-external-host="BOLD"
               data-gtm-product-code="DP1.10020.001"
               href="http://www.barcodinglife.com/"
@@ -1039,7 +1039,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
           >
             <li>
               <a
-                className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
+                className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
                 data-gtm-external-host="BOLD"
                 data-gtm-product-code="DP1.10020.001"
                 href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETN"
@@ -1053,7 +1053,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
             </li>
             <li>
               <a
-                className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
+                className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
                 data-gtm-external-host="BOLD"
                 data-gtm-product-code="DP1.10020.001"
                 href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETP"
@@ -1130,7 +1130,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
             Data for this product are only available from
              
             <a
-              className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
+              className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
               data-gtm-external-host="PHENOCAM"
               data-gtm-product-code="DP1.00033.001"
               href="https://phenocam.nau.edu/webcam/about/"

@@ -246,6 +246,11 @@ const TimeSeriesViewerDateRange = (props) => {
     />
   );
 
+  const datePickerContainerStyleProps = {
+    marginTop: '8px',
+    marginBottom: '4px',
+  };
+
   return (
     <div className={classes.optionsContainer}>
       <div className={classes.optionContainer}>
@@ -253,7 +258,7 @@ const TimeSeriesViewerDateRange = (props) => {
         <div style={{ marginBottom: Theme.spacing(2) }}>
           <LocalizationProvider dateAdapter={AdapterMoment}>
             <div className={classes.optionsContainer} style={{ marginBottom: Theme.spacing(3) }}>
-              <div style={{ marginRight: Theme.spacing(3) }}>
+              <div style={{ ...datePickerContainerStyleProps, marginRight: Theme.spacing(3) }}>
                 <DatePicker
                   data-selenium="time-series-viewer.date-range.start-input"
                   inputVariant="outlined"
@@ -266,9 +271,14 @@ const TimeSeriesViewerDateRange = (props) => {
                   openTo="month"
                   minDate={getYearMonthMoment(displayRange[sliderMin], 10)}
                   maxDate={getYearMonthMoment(currentRange[1] || displayRange[sliderMax], 20)}
+                  slotProps={{
+                    textField: {
+                      size: 'small',
+                    },
+                  }}
                 />
               </div>
-              <div>
+              <div style={datePickerContainerStyleProps}>
                 <DatePicker
                   data-selenium="time-series-viewer.date-range.end-input"
                   inputVariant="outlined"
@@ -281,6 +291,11 @@ const TimeSeriesViewerDateRange = (props) => {
                   openTo="month"
                   minDate={getYearMonthMoment(currentRange[0] || displayRange[sliderMin], 10)}
                   maxDate={getYearMonthMoment(displayRange[sliderMax], 20)}
+                  slotProps={{
+                    textField: {
+                      size: 'small',
+                    },
+                  }}
                 />
               </div>
             </div>

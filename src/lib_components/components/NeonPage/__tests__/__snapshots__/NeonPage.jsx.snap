@@ -44,7 +44,7 @@ exports[`NeonPage NeonErrorPage 1`] = `
       }
     >
       <button
-        className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary css-l1djc-MuiButtonBase-root-MuiButton-root"
+        className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary css-1ocb0yi-MuiButtonBase-root-MuiButton-root"
         disabled={false}
         onBlur={[Function]}
         onClick={[Function]}
@@ -83,7 +83,7 @@ exports[`NeonPage NeonErrorPage 1`] = `
         />
       </button>
       <a
-        className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-np7eoe-MuiButtonBase-root-MuiButton-root"
+        className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-14682vj-MuiButtonBase-root-MuiButton-root"
         href="/"
         onBlur={[Function]}
         onContextMenu={[Function]}
@@ -302,7 +302,7 @@ exports[`NeonPage renders sidebar items as skeletons when in appropriate state 1
         className="makeStyles-dismissOverlay-606"
       >
         <button
-          className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+          className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
           disabled={false}
           onBlur={[Function]}
           onClick={[Function]}
@@ -660,7 +660,7 @@ exports[`NeonPage renders with an error 1`] = `
         className="makeStyles-dismissOverlay-317"
       >
         <button
-          className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+          className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
           disabled={false}
           onBlur={[Function]}
           onClick={[Function]}
@@ -869,7 +869,7 @@ exports[`NeonPage renders with loading message 1`] = `
         className="makeStyles-dismissOverlay-169"
       >
         <button
-          className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+          className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
           disabled={false}
           onBlur={[Function]}
           onClick={[Function]}
@@ -1019,7 +1019,7 @@ exports[`NeonPage renders with loading message and progress 1`] = `
         className="makeStyles-dismissOverlay-252"
       >
         <button
-          className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1cgu8v8-MuiButtonBase-root-MuiButton-root"
+          className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
           disabled={false}
           onBlur={[Function]}
           onClick={[Function]}
@@ -1139,7 +1139,7 @@ exports[`NeonPage renders with sidebar links 1`] = `
           className="makeStyles-sidebarLinksContainer-681"
         >
           <a
-            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-678 makeStyles-sidebarLinkCurrent-679 css-duangj-MuiTypography-root-MuiLink-root"
+            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-678 makeStyles-sidebarLinkCurrent-679 css-zuor1v-MuiTypography-root-MuiLink-root"
             href="#"
             onBlur={[Function]}
             onClick={null}
@@ -1149,7 +1149,7 @@ exports[`NeonPage renders with sidebar links 1`] = `
             Section A
           </a>
           <a
-            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-678 css-duangj-MuiTypography-root-MuiLink-root"
+            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-678 css-zuor1v-MuiTypography-root-MuiLink-root"
             href="#sectionB"
             onBlur={[Function]}
             onClick={null}
@@ -1159,7 +1159,7 @@ exports[`NeonPage renders with sidebar links 1`] = `
             Section B
           </a>
           <a
-            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-678 css-duangj-MuiTypography-root-MuiLink-root"
+            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-678 css-zuor1v-MuiTypography-root-MuiLink-root"
             href="#sectionC"
             onBlur={[Function]}
             onClick={null}
@@ -1172,7 +1172,7 @@ exports[`NeonPage renders with sidebar links 1`] = `
             Section C
           </a>
           <a
-            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-678 css-duangj-MuiTypography-root-MuiLink-root"
+            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-678 css-zuor1v-MuiTypography-root-MuiLink-root"
             href="#sectionD"
             onBlur={[Function]}
             onClick={null}
@@ -1273,7 +1273,7 @@ exports[`NeonPage renders with sidebar links as standlone children 1`] = `
           className="makeStyles-sidebarLinksContainer-746"
         >
           <a
-            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-743 makeStyles-sidebarLinkCurrent-744 css-duangj-MuiTypography-root-MuiLink-root"
+            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-743 makeStyles-sidebarLinkCurrent-744 css-zuor1v-MuiTypography-root-MuiLink-root"
             href="#sectionA"
             onBlur={[Function]}
             onClick={[Function]}
@@ -1283,7 +1283,7 @@ exports[`NeonPage renders with sidebar links as standlone children 1`] = `
             Section A
           </a>
           <a
-            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-743 makeStyles-sidebarLinkCurrent-744 css-duangj-MuiTypography-root-MuiLink-root"
+            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-743 makeStyles-sidebarLinkCurrent-744 css-zuor1v-MuiTypography-root-MuiLink-root"
             href="#sectionA"
             onBlur={[Function]}
             onClick={[Function]}
