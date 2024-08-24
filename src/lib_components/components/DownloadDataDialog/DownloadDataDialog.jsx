@@ -5,6 +5,7 @@ import lzw from 'node-lzw';
 import { makeStyles } from '@mui/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -12,7 +13,6 @@ import Chip from '@mui/material/Chip';
 import CircularProgress from '@mui/material/CircularProgress';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
-import Hidden from '@mui/material/Hidden';
 import LinearProgress from '@mui/material/LinearProgress';
 import Link from '@mui/material/Link';
 import MobileStepper from '@mui/material/MobileStepper';
@@ -826,15 +826,15 @@ export default function DownloadDataDialog() {
         className: classes.gtmCaptureButton,
       }}
       toolbarChildren={fromManifest || fromAOPManifest ? (
-        <Hidden smDown>
+        <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
           <div data-selenium="download-data-dialog.size-estimate">
             {renderSizeEstimate()}
           </div>
-        </Hidden>
+        </Box>
       ) : null}
     >
       {renderGtmTags()}
-      <Grid container spacing={2} alignItems="flex-start" style={{ marginBottom: Theme.spacing(2) }}>
+      <Grid container spacing={2} alignItems="flex-start" style={{ marginBottom: Theme.spacing(3) }}>
         <Grid item xs={12} sm={6} md={6} lg={8} data-selenium="download-data-dialog.product-info">
           <Typography variant="h5" style={{ marginBottom: Theme.spacing(1.5) }}>
             {productData.productName}
@@ -871,22 +871,22 @@ export default function DownloadDataDialog() {
         </Grid>
         <Grid item xs={12} sm={6} md={6} lg={4}>
           {fromManifest || fromAOPManifest ? (
-            <Hidden smUp>
+            <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
               <div style={{ marginBottom: Theme.spacing(2) }}>
                 {renderFileType()}
                 <div data-selenium="download-data-dialog.size-estimate">
                   {renderSizeEstimate()}
                 </div>
               </div>
-            </Hidden>
+            </Box>
           ) : null}
           {renderActions()}
           {fromManifest || fromAOPManifest ? (
-            <Hidden smDown>
+            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
               <div style={{ marginTop: Theme.spacing(1), textAlign: 'right' }}>
                 {renderFileType()}
               </div>
-            </Hidden>
+            </Box>
           ) : null}
         </Grid>
       </Grid>

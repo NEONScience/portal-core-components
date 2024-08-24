@@ -122,7 +122,7 @@ const SidebarFilter: React.FC<SidebarFilterProps> = (props: SidebarFilterProps):
     <OutlinedInput
       id={inputId}
       name={inputId}
-      margin="dense"
+      size="small"
       className={classes.selectInput}
       style={maxWidthStyle}
     />

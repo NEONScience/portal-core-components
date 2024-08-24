@@ -10,6 +10,10 @@ import {
 } from '@mui/material/styles';
 import { useTheme } from '@mui/styles';
 
+import { iconButtonClasses } from '@mui/material/IconButton';
+import { sliderClasses } from '@mui/material/Slider';
+import { typographyClasses } from '@mui/material/Typography';
+
 // Values defined here are based on the NEON Style Guide,
 // expanded out through color scale generators.
 // Examples:
@@ -236,8 +240,8 @@ const baseTheme = createTheme(adaptV4Theme({
       size: 'small',
     },
   },
+  // We have lots of overrides. Please keep them alphabetized for easier maintenance!
   overrides: {
-    // We have lots of overrides. Please keep them alphabetized for easier maintenance!
     MuiAccordion: {
       root: {
         border: `1px solid ${COLORS.GREY[300]}`,
@@ -246,7 +250,7 @@ const baseTheme = createTheme(adaptV4Theme({
           border: `1px solid ${COLORS.LIGHT_BLUE[400]}`,
           backgroundColor: `${COLORS.LIGHT_BLUE[500]}08`,
         },
-        '&$expanded': {
+        '&.Mui-expanded': {
           margin: '0px',
           border: `1px solid ${COLORS.LIGHT_BLUE[400]}`,
           '&:hover, &:active': {
@@ -322,7 +326,7 @@ const baseTheme = createTheme(adaptV4Theme({
         padding: '8px 16px',
       },
       contained: {
-        '&$disabled': {
+        '&.Mui-disabled': {
           color: COLORS.GREY[300],
           backgroundColor: COLORS.GREY[100],
         },
@@ -334,7 +338,7 @@ const baseTheme = createTheme(adaptV4Theme({
         },
       },
       outlined: {
-        '&$disabled': {
+        '&.Mui-disabled': {
           color: COLORS.GREY[300],
           borderColor: COLORS.GREY[300],
         },
@@ -349,7 +353,7 @@ const baseTheme = createTheme(adaptV4Theme({
         },
       },
       text: {
-        '&$disabled': {
+        '&.Mui-disabled': {
           color: COLORS.GREY[300],
         },
       },
@@ -444,6 +448,12 @@ const baseTheme = createTheme(adaptV4Theme({
         backgroundColor: COLORS.GREY[200],
       },
     },
+    MuiCssBaseline: {
+      body: {
+        fontSize: '0.8rem',
+        lineHeight: 1.43,
+      },
+    },
     MuiDialog: {
       root: {
         zIndex: 105,
@@ -491,6 +501,7 @@ const baseTheme = createTheme(adaptV4Theme({
     },
     MuiLink: {
       root: {
+        textDecorationColor: COLORS.LIGHT_BLUE[500],
         '&:hover, &:active': {
           color: COLORS.LIGHT_BLUE[400],
         },
@@ -503,83 +514,74 @@ const baseTheme = createTheme(adaptV4Theme({
     },
     MuiSlider: {
       root: {
-        '&$disabled': {
-          '& $rail': {
+        '&.Mui-disabled': {
+          [`& .${sliderClasses.rail}`]: {
             backgroundColor: COLORS.GREY[300],
           },
-          '& $track': {
+          [`& .${sliderClasses.track}`]: {
             backgroundColor: COLORS.GREY[300],
           },
-          '& $mark': {
+          [`& .${sliderClasses.mark}`]: {
             backgroundColor: COLORS.GREY[300],
           },
-          '& $markLabel': {
+          [`& .${sliderClasses.markLabel}`]: {
             color: `${COLORS.GREY[300]} !important`,
           },
-          '& $markLabelActive': {
+          [`& .${sliderClasses.markActive}`]: {
             color: `${COLORS.GREY[300]} !important`,
           },
         },
       },
       rail: {
-        height: 2,
         opacity: 1,
         backgroundColor: COLORS.LIGHT_BLUE[300],
-        '&$disabled': {
+        borderRadius: 0,
+        '&.Mui-disabled': {
           backgroundColor: COLORS.GREY[300],
         },
       },
       track: {
-        height: 7,
-        marginTop: -2.5,
-        '&$disabled': {
+        borderRadius: 0,
+        '&.Mui-disabled': {
           backgroundColor: COLORS.GREY[300],
         },
-      },
-      marked: {
-        marginBottom: 26,
       },
       mark: {
         width: 2,
         height: 12,
-        marginTop: -5,
         backgroundColor: COLORS.LIGHT_BLUE[300],
       },
       markActive: {
         width: 3,
         height: 12,
-        marginTop: -5,
-        marginLeft: -1,
         backgroundColor: COLORS.LIGHT_BLUE[500],
       },
       markLabel: {
-        marginTop: 12,
+        marginTop: 10,
       },
       thumb: {
         height: 28,
         width: 12,
-        marginTop: -13,
-        marginLeft: -6,
         borderRadius: 2,
         backgroundColor: COLORS.GREY[50],
         border: `2px solid ${COLORS.LIGHT_BLUE[500]}`,
-        '&$disabled': {
+        '&.Mui-disabled': {
           height: 28,
           width: 12,
-          marginTop: -13,
-          marginLeft: -6,
           border: `2px solid ${COLORS.GREY[300]}`,
         },
       },
       valueLabel: {
-        left: 'initial',
         fontWeight: 600,
-        top: -28,
+        backgroundColor: COLORS.LIGHT_BLUE[500],
+        color: '#fff',
         whiteSpace: 'nowrap',
+        '&::before': {
+          display: 'none',
+        },
         '& span': {
           width: 'auto',
           height: 'auto',
-          padding: '4px 8px',
           borderRadius: 2,
           transform: 'none',
           '& span': {
@@ -590,43 +592,30 @@ const baseTheme = createTheme(adaptV4Theme({
         },
       },
       vertical: {
-        '& $track': {
-          width: '7px !important',
-          marginLeft: -2,
-          left: 20,
+        [`& .${sliderClasses.track}`]: {
+          borderRadius: 0,
         },
-        '& $marked': {
-          marginRight: 34,
-        },
-        '& $mark': {
+        [`& .${sliderClasses.mark}`]: {
           height: 2,
           width: 12,
-          marginLeft: 2,
         },
-        '& $markActive': {
+        [`& .${sliderClasses.markActive}`]: {
           height: 3,
           width: 12,
-          marginLeft: 2,
-          marginTop: -1,
         },
-        '& $markLabel': {
+        [`& .${sliderClasses.markLabel}`]: {
           marginTop: 0,
-          left: '46px !important',
+          marginLeft: 6,
         },
-        '& $rail': {
-          width: '2px !important',
-          left: 20,
+        [`& .${sliderClasses.rail}`]: {
+          borderRadius: 0,
         },
-        '& $thumb': {
+        [`& .${sliderClasses.thumb}`]: {
           height: 12,
           width: 27,
-          marginTop: -6,
-          marginLeft: -14,
-          '&$disabled': {
+          '&.Mui-disabled': {
             height: 12,
             width: 27,
-            marginTop: -6,
-            marginLeft: '-5px !important',
           },
         },
       },
@@ -634,6 +623,11 @@ const baseTheme = createTheme(adaptV4Theme({
     MuiSnackbar: {
       root: {
         borderRadius: '4px',
+      },
+    },
+    MuiStepper: {
+      root: {
+        padding: '24px',
       },
     },
     MuiSwitch: {
@@ -649,7 +643,7 @@ const baseTheme = createTheme(adaptV4Theme({
         border: `1.5px solid ${COLORS.GREY[200]}`,
         borderRadius: '0px',
         fontSize: '0.75rem',
-        '&$selected': {
+        '&.Mui-selected': {
           zIndex: 1,
           backgroundColor: '#fff',
           borderColor: COLORS.LIGHT_BLUE[500],
@@ -717,14 +711,14 @@ const baseTheme = createTheme(adaptV4Theme({
     },
     MuiTablePagination: {
       toolbar: {
-        '& .MuiIconButton-root': {
+        [`& .${iconButtonClasses.root}`]: {
           borderRadius: '2px',
           padding: '4px',
           '& svg': {
             fontSize: '1.4rem',
           },
         },
-        '& .MuiTypography-caption': {
+        [`& .${typographyClasses.caption}`]: {
           margin: '0px 8px',
         },
       },
@@ -737,7 +731,7 @@ const baseTheme = createTheme(adaptV4Theme({
         fontSize: '0.7rem',
         padding: '8px 16px !important',
         whiteSpace: 'nowrap',
-        '&$selected': {
+        '&.Mui-selected': {
           color: '#fff !important',
           backgroundColor: `${COLORS.LIGHT_BLUE[500]} !important`,
           textDecoration: 'none !important',

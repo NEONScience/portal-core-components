@@ -16,6 +16,8 @@ import {
   useMapEvents,
 } from 'react-leaflet';
 
+import debounce from 'lodash/debounce';
+
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
@@ -31,6 +33,7 @@ import MarkerIconShadowPng from 'leaflet/dist/images/marker-shadow.png';
 
 import { NeonTheme } from '@/components/Theme/types';
 import { AnyAction, Nullable, Undef } from '@/types/core';
+import { exists } from '@/util/typeUtil';
 
 import 'leaflet/dist/leaflet.css';
 
@@ -185,10 +188,19 @@ export const Provider: React.FC<ProviderProps> = (
   );
 };
 
+interface LeafletMapStates {
+  isAutoPanning: boolean;
+}
+const LEAFLET_MAP_STATES: LeafletMapStates = {
+  isAutoPanning: false,
+};
+
 const LeafletMapManager: React.FC = (): React.JSX.Element => {
+  const state: BasicLeafletMapState = useContext(StateContext);
   const dispatch: Dispatch<AnyAction> = useContextDispatch();
   const theme: NeonTheme = useTheme();
   const classes: Record<string, SerializedStyles> = useStyles(theme);
+  const { center }: BasicLeafletMapState = state;
   const map: L.Map = useMapEvents({
     zoomend: (event: L.LeafletEvent): void => {
       const targetZoom: number = event.target.getZoom();
@@ -199,7 +211,34 @@ const LeafletMapManager: React.FC = (): React.JSX.Element => {
     moveend: (event: L.LeafletEvent): void => {
       const targetCenter: L.LatLngLiteral = event.target.getCenter();
       const appliedCenter: L.LatLngExpression = [targetCenter.lat, targetCenter.lng];
+      const isCenterUpdated = (): boolean => {
+        if (!exists(center)) {
+          return true;
+        }
+        const coercedCenter = center as L.LatLngTuple;
+        if ((appliedCenter[0] === coercedCenter[0])
+            && (appliedCenter[1] === coercedCenter[1])) {
+          return false;
+        }
+        return true;
+      };
+      if (LEAFLET_MAP_STATES.isAutoPanning) {
+        const debouncedSetCenter = debounce(() => {
+          if (isCenterUpdated()) {
+            dispatch(ActionCreator.setCenter(appliedCenter));
+          }
+          LEAFLET_MAP_STATES.isAutoPanning = false;
+        }, 500);
+        debouncedSetCenter();
+        return;
+      }
+      if (!isCenterUpdated()) {
+        return;
+      }
       dispatch(ActionCreator.setCenter(appliedCenter));
+    },
+    autopanstart: (event: L.LeafletEvent): void => {
+      LEAFLET_MAP_STATES.isAutoPanning = true;
     },
   });
   useEffect(() => {
@@ -231,13 +270,15 @@ const BasicLeafletMap: React.FC = (): React.JSX.Element => {
   const {
     initialZoom,
     initialCenter,
+    zoom,
+    center,
   } = state;
   return (
     <div css={classes.mapContainer}>
       <MapContainer
         id={`sitemap-${mapInstanceId}`}
-        center={initialCenter}
-        zoom={initialZoom}
+        center={exists(center) ? center as L.LatLngExpression : initialCenter}
+        zoom={exists(zoom) ? zoom as number : initialZoom}
         minZoom={1}
         maxZoom={19}
         style={{

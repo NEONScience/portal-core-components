@@ -2,12 +2,13 @@
 
 exports[`SiteChip Preserves MUI chip props 1`] = `
 <div
-  className="MuiChip-root MuiChip-default MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-defaultPrimary css-nqomul-MuiChip-root"
+  className="MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-filledPrimary css-nqomul-MuiChip-root"
   data-selenium="chip"
   onKeyDown={[Function]}
   onKeyUp={[Function]}
   style={
     {
+      "backgroundColor": "#0073cf",
       "borderRadius": "20px",
       "fontSize": "1rem",
       "height": "40px",
@@ -51,7 +52,11 @@ exports[`SiteChip Renders correctly with only a label 1`] = `
   data-selenium="site-chip"
   onKeyDown={[Function]}
   onKeyUp={[Function]}
-  style={{}}
+  style={
+    {
+      "backgroundColor": "transparent",
+    }
+  }
 >
   <div
     className="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar MuiChip-avatarSmall MuiChip-avatarColorSecondary css-18uepp3-MuiAvatar-root"

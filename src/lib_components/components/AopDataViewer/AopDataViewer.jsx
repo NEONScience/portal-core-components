@@ -366,7 +366,7 @@ const AopDataViewer = (inProps) => {
           data-selenium="aop-data-viewer.site-select"
           value={currentSelection.site || ''}
           onChange={(event) => handleSiteChange(event.target.value)}
-          input={<OutlinedInput name="site" id="site" margin="dense" />}
+          input={<OutlinedInput name="site" id="site" size="small" />}
           aria-labelledby="site-label"
           renderValue={(value) => value}
         >
@@ -436,7 +436,7 @@ const AopDataViewer = (inProps) => {
         data-selenium="aop-data-viewer.flight-select"
         value={flight}
         onChange={(event) => handleFlightChange(parseInt(event.target.value, 10))}
-        input={<OutlinedInput name="flight" id="flight" margin="dense" />}
+        input={<OutlinedInput name="flight" id="flight" size="small" />}
         aria-labelledby="flight-label"
         renderValue={(value) => getFlightLabel(value, data[site][year][value - 1].month)}
         disabled={total === 1}

@@ -7,9 +7,15 @@ import MockTheme from '../../../../__mocks__/MockTheme';
 import '../../../../__mocks__/NeonContext';
 
 import AopDataViewer from '../AopDataViewer';
+import { sliderClasses } from '@mui/material';
 
 jest.mock('@mui/material/Select', () => mockReactComponent('@mui/material/Select'));
-jest.mock('@mui/material/Slider', () => mockReactComponent('@mui/material/Slider'));
+jest.mock('@mui/material/Slider', () => ({
+  ...jest.requireActual('@mui/material/Slider'),
+  __esModule: true,
+  default: mockReactComponent('@mui/material/Slider'),
+  sliderClasses: jest.fn(),
+}))
 
 mockAjaxResponse({
   response: {

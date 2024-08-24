@@ -210,7 +210,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
         className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
       >
         <a
-          className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
+          className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
           href="https://data.neonscience.org/data-products/DP0.00000.000"
           onBlur={[Function]}
           onFocus={[Function]}
@@ -397,7 +397,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
         className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
       >
         <a
-          className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
+          className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
           href="https://data.neonscience.org/data-products/DP0.00000.000"
           onBlur={[Function]}
           onFocus={[Function]}
@@ -568,7 +568,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
       >
         <a
-          className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
+          className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
           href="https://data.neonscience.org/data-products/DP0.00000.000"
           onBlur={[Function]}
           onFocus={[Function]}
@@ -876,7 +876,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
       >
         <a
-          className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
+          className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
           href="https://data.neonscience.org/data-products/DP0.00000.000"
           onBlur={[Function]}
           onFocus={[Function]}
@@ -1041,7 +1041,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
       >
         <a
-          className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
+          className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
           href="https://data.neonscience.org/data-products/DP0.00000.000"
           onBlur={[Function]}
           onFocus={[Function]}
@@ -1211,7 +1211,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
       >
         <a
-          className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
+          className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
           href="https://data.neonscience.org/data-products/DP0.00000.000"
           onBlur={[Function]}
           onFocus={[Function]}
@@ -1376,7 +1376,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         className="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
       >
         <a
-          className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-duangj-MuiTypography-root-MuiLink-root"
+          className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
           href="https://data.neonscience.org/data-products/DP0.00000.000"
           onBlur={[Function]}
           onFocus={[Function]}

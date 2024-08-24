@@ -5,7 +5,7 @@ exports[`MapSelectionButton Renders correctly with array selection limit (min >1
   <button
     aria-label="Select 2-5 domains using the observatory map"
     aria-labelledby={null}
-    className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-r0d1wz-MuiButtonBase-root-MuiButton-root"
+    className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-pbr1h0-MuiButtonBase-root-MuiButton-root"
     data-mui-internal-clone-element={true}
     data-selenium="map-selection-button"
     disabled={false}
@@ -39,7 +39,7 @@ exports[`MapSelectionButton Renders correctly with array selection limit (min 1)
   <button
     aria-label="Select up to 4 sites using the observatory map"
     aria-labelledby={null}
-    className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-r0d1wz-MuiButtonBase-root-MuiButton-root"
+    className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-pbr1h0-MuiButtonBase-root-MuiButton-root"
     data-mui-internal-clone-element={true}
     data-selenium="map-selection-button"
     disabled={false}
@@ -88,7 +88,7 @@ exports[`MapSelectionButton Renders correctly with numerical selection limit (>1
   <button
     aria-label="Select 4 states using the observatory map"
     aria-labelledby={null}
-    className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-r0d1wz-MuiButtonBase-root-MuiButton-root"
+    className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-pbr1h0-MuiButtonBase-root-MuiButton-root"
     data-mui-internal-clone-element={true}
     data-selenium="map-selection-button"
     disabled={false}
@@ -137,7 +137,7 @@ exports[`MapSelectionButton Renders correctly with numerical selection limit (1)
   <button
     aria-label="Select a state using the observatory map"
     aria-labelledby={null}
-    className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-r0d1wz-MuiButtonBase-root-MuiButton-root"
+    className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-pbr1h0-MuiButtonBase-root-MuiButton-root"
     data-mui-internal-clone-element={true}
     data-selenium="map-selection-button"
     disabled={false}
@@ -186,7 +186,7 @@ exports[`MapSelectionButton Renders correctly with only a selection 1`] = `
   <button
     aria-label="Select sites using the observatory map"
     aria-labelledby={null}
-    className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-r0d1wz-MuiButtonBase-root-MuiButton-root"
+    className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-pbr1h0-MuiButtonBase-root-MuiButton-root"
     data-mui-internal-clone-element={true}
     data-selenium="map-selection-button"
     disabled={false}
