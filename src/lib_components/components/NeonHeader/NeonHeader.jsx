@@ -83,7 +83,7 @@ const useStyles = (customize) => {
         ...viewportStyles,
       },
       [theme.breakpoints.down('lg')]: {
-        padding: theme.spacing(1, 2),
+        padding: customize ? theme.spacing(1, 1.5) : theme.spacing(1, 2),
         top: theme.spacing(1),
         right: theme.spacing(9),
       },
