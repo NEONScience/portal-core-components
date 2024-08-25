@@ -3,7 +3,8 @@ export declare enum NeonAuthType {
     SILENT = "SILENT"
 }
 export declare enum NeonAuthDisplayType {
-    MENU = "MENU"
+    MENU = "MENU",
+    MENU_CUSTOM = "MENU_CUSTOM"
 }
 export interface NeonAuthProps {
     loginType: NeonAuthType;
@@ -12,6 +13,10 @@ export interface NeonAuthProps {
     loginPath: string;
     logoutPath: string;
     accountPath: string;
+}
+export interface AccountMenuProps {
+    accountPath: string;
+    handleLogout: () => void;
 }
 declare const WrappedNeonAuth: any;
 export default WrappedNeonAuth;

@@ -2,7 +2,7 @@
 
 exports[`NeonHeader renders fallback with drupalCSSLoaded prop and error NeonContext state 1`] = `
 <header
-  className="makeStyles-unstickyHeader-23 makeStyles-headerContainer-25 makeStyles-headerContainerFallback-24"
+  className="makeStyles-unstickyHeader-28 makeStyles-headerContainer-30 makeStyles-headerContainerFallback-29"
   id="header"
 >
   <div>
@@ -13,7 +13,7 @@ exports[`NeonHeader renders fallback with drupalCSSLoaded prop and error NeonCon
 
 exports[`NeonHeader renders with drupalCssLoaded prop and success NeonContext state 1`] = `
 <header
-  className="makeStyles-unstickyHeader-28 makeStyles-headerContainer-30"
+  className="makeStyles-unstickyHeader-38 makeStyles-headerContainer-40"
   id="header"
 >
   <div>
@@ -24,7 +24,7 @@ exports[`NeonHeader renders with drupalCssLoaded prop and success NeonContext st
 
 exports[`NeonHeader renders with drupalCssLoaded prop, success NeonContext state, and core auth 1`] = `
 <header
-  className="makeStyles-unstickyHeader-33 makeStyles-headerContainer-35"
+  className="makeStyles-unstickyHeader-48 makeStyles-headerContainer-50"
   id="header"
 >
   <div>

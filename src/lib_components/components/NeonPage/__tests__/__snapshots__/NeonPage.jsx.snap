@@ -2,23 +2,23 @@
 
 exports[`NeonPage NeonErrorPage 1`] = `
 <div
-  className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-765 css-1oqqzyl-MuiContainer-root"
+  className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-972 css-1oqqzyl-MuiContainer-root"
 >
   <div
-    className="makeStyles-pageContent-766"
+    className="makeStyles-pageContent-973"
     data-selenium="neon-page.content"
   >
     <img
       alt="NEON Data Portal"
-      className="makeStyles-errorPageLogo-784"
+      className="makeStyles-errorPageLogo-991"
       title="NEON Data Portal"
     />
     <h1
-      className="MuiTypography-root MuiTypography-h3 makeStyles-pageTitle-780 css-scgx7b-MuiTypography-root"
+      className="MuiTypography-root MuiTypography-h3 makeStyles-pageTitle-987 css-scgx7b-MuiTypography-root"
     >
       <svg
         aria-hidden={true}
-        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium makeStyles-errorPageTitleIcon-782 css-i4bv87-MuiSvgIcon-root"
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium makeStyles-errorPageTitleIcon-989 css-i4bv87-MuiSvgIcon-root"
         data-testid="WarningIcon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -31,7 +31,7 @@ exports[`NeonPage NeonErrorPage 1`] = `
     </h1>
     <div>
       <span
-        className="MuiTypography-root MuiTypography-caption makeStyles-errorPageCaption-783 css-287k3z-MuiTypography-root"
+        className="MuiTypography-root MuiTypography-caption makeStyles-errorPageCaption-990 css-287k3z-MuiTypography-root"
       >
         fail
       </span>
@@ -191,7 +191,7 @@ exports[`NeonPage renders a basic functional page with no props 1`] = `
 exports[`NeonPage renders sidebar items as skeletons when in appropriate state 1`] = `
 [
   <header
-    className="makeStyles-skeletonHeader-607"
+    className="makeStyles-skeletonHeader-768"
     id="header"
   >
     <span
@@ -205,7 +205,7 @@ exports[`NeonPage renders sidebar items as skeletons when in appropriate state 1
     />
   </header>,
   <div
-    className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-586 css-1oqqzyl-MuiContainer-root"
+    className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-747 css-1oqqzyl-MuiContainer-root"
     style={
       {
         "maxWidth": "calc(2000px - 348px)",
@@ -213,7 +213,7 @@ exports[`NeonPage renders sidebar items as skeletons when in appropriate state 1
     }
   >
     <div
-      className="makeStyles-sidebarContainer-589"
+      className="makeStyles-sidebarContainer-750"
       style={
         {
           "width": "300px",
@@ -225,7 +225,7 @@ exports[`NeonPage renders sidebar items as skeletons when in appropriate state 1
       </div>
     </div>
     <div
-      className="makeStyles-pageContent-587"
+      className="makeStyles-pageContent-748"
       data-selenium="neon-page.content"
       style={
         {
@@ -266,7 +266,7 @@ exports[`NeonPage renders sidebar items as skeletons when in appropriate state 1
     prop-open={true}
   >
     <div
-      className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-backdropPaper-600 css-zuyt79-MuiPaper-root"
+      className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-backdropPaper-761 css-zuyt79-MuiPaper-root"
     >
       <h3
         className="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-18xtj6i-MuiTypography-root"
@@ -299,7 +299,7 @@ exports[`NeonPage renders sidebar items as skeletons when in appropriate state 1
         </svg>
       </span>
       <div
-        className="makeStyles-dismissOverlay-606"
+        className="makeStyles-dismissOverlay-767"
       >
         <button
           className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
@@ -351,7 +351,7 @@ exports[`NeonPage renders with a custom header/footer 1`] = `
     </div>
   </header>,
   <div
-    className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-445 css-1oqqzyl-MuiContainer-root"
+    className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-583 css-1oqqzyl-MuiContainer-root"
     style={
       {
         "maxWidth": "2000px",
@@ -359,7 +359,7 @@ exports[`NeonPage renders with a custom header/footer 1`] = `
     }
   >
     <div
-      className="makeStyles-pageContent-446"
+      className="makeStyles-pageContent-584"
       data-selenium="neon-page.content"
       style={
         {
@@ -384,7 +384,7 @@ exports[`NeonPage renders with a custom header/footer 1`] = `
 exports[`NeonPage renders with a notification 1`] = `
 [
   <header
-    className="makeStyles-skeletonHeader-349"
+    className="makeStyles-skeletonHeader-508"
     id="header"
   >
     <span
@@ -398,7 +398,7 @@ exports[`NeonPage renders with a notification 1`] = `
     />
   </header>,
   <div
-    className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-380 css-1oqqzyl-MuiContainer-root"
+    className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-477 css-1oqqzyl-MuiContainer-root"
     style={
       {
         "maxWidth": "2000px",
@@ -406,7 +406,7 @@ exports[`NeonPage renders with a notification 1`] = `
     }
   >
     <div
-      className="makeStyles-pageContent-381"
+      className="makeStyles-pageContent-478"
       data-selenium="neon-page.content"
       style={
         {
@@ -426,7 +426,7 @@ exports[`NeonPage renders with a notification 1`] = `
     prop-open={true}
   >
     <div
-      className="MuiPaper-root MuiPaper-elevation MuiPaper-elevation6 MuiSnackbarContent-root makeStyles-notification-354 css-3em1l5-MuiPaper-root-MuiSnackbarContent-root"
+      className="MuiPaper-root MuiPaper-elevation MuiPaper-elevation6 MuiSnackbarContent-root makeStyles-notification-446 css-3em1l5-MuiPaper-root-MuiSnackbarContent-root"
       role="alert"
     >
       <div
@@ -504,7 +504,7 @@ exports[`NeonPage renders with a notification 1`] = `
 exports[`NeonPage renders with a title and subtitle 1`] = `
 [
   <header
-    className="makeStyles-skeletonHeader-53"
+    className="makeStyles-skeletonHeader-120"
     id="header"
   >
     <span
@@ -518,7 +518,7 @@ exports[`NeonPage renders with a title and subtitle 1`] = `
     />
   </header>,
   <div
-    className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-84 css-1oqqzyl-MuiContainer-root"
+    className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-89 css-1oqqzyl-MuiContainer-root"
     style={
       {
         "maxWidth": "2000px",
@@ -526,7 +526,7 @@ exports[`NeonPage renders with a title and subtitle 1`] = `
     }
   >
     <div
-      className="makeStyles-pageContent-85"
+      className="makeStyles-pageContent-90"
       data-selenium="neon-page.content"
       style={
         {
@@ -535,13 +535,13 @@ exports[`NeonPage renders with a title and subtitle 1`] = `
       }
     >
       <h1
-        className="MuiTypography-root MuiTypography-h3 makeStyles-pageTitle-99 css-scgx7b-MuiTypography-root"
+        className="MuiTypography-root MuiTypography-h3 makeStyles-pageTitle-104 css-scgx7b-MuiTypography-root"
         data-selenium="neon-page.title"
       >
         Title
       </h1>
       <p
-        className="MuiTypography-root MuiTypography-subtitle1 makeStyles-pageSubtitle-100 css-1fq4phv-MuiTypography-root"
+        className="MuiTypography-root MuiTypography-subtitle1 makeStyles-pageSubtitle-105 css-1fq4phv-MuiTypography-root"
         data-selenium="neon-page.subtitle"
       >
         Subtitle
@@ -570,7 +570,7 @@ exports[`NeonPage renders with a title and subtitle 1`] = `
 exports[`NeonPage renders with an error 1`] = `
 [
   <header
-    className="makeStyles-skeletonHeader-318"
+    className="makeStyles-skeletonHeader-410"
     id="header"
   >
     <span
@@ -584,7 +584,7 @@ exports[`NeonPage renders with an error 1`] = `
     />
   </header>,
   <div
-    className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-297 css-1oqqzyl-MuiContainer-root"
+    className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-389 css-1oqqzyl-MuiContainer-root"
     style={
       {
         "maxWidth": "2000px",
@@ -592,7 +592,7 @@ exports[`NeonPage renders with an error 1`] = `
     }
   >
     <div
-      className="makeStyles-pageContent-298"
+      className="makeStyles-pageContent-390"
       data-selenium="neon-page.content"
       style={
         {
@@ -633,7 +633,7 @@ exports[`NeonPage renders with an error 1`] = `
     prop-open={true}
   >
     <div
-      className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-backdropPaper-311 css-zuyt79-MuiPaper-root"
+      className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-backdropPaper-403 css-zuyt79-MuiPaper-root"
     >
       <svg
         aria-hidden={true}
@@ -657,7 +657,7 @@ exports[`NeonPage renders with an error 1`] = `
         Fail
       </h3>
       <div
-        className="makeStyles-dismissOverlay-317"
+        className="makeStyles-dismissOverlay-409"
       >
         <button
           className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
@@ -704,7 +704,7 @@ exports[`NeonPage renders with an error 1`] = `
 exports[`NeonPage renders with custom sidebar content 1`] = `
 [
   <header
-    className="makeStyles-skeletonHeader-491"
+    className="makeStyles-skeletonHeader-707"
     id="header"
   >
     <span
@@ -718,7 +718,7 @@ exports[`NeonPage renders with custom sidebar content 1`] = `
     />
   </header>,
   <div
-    className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-522 css-1oqqzyl-MuiContainer-root"
+    className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-660 css-1oqqzyl-MuiContainer-root"
     style={
       {
         "maxWidth": "calc(2000px - 348px)",
@@ -726,7 +726,7 @@ exports[`NeonPage renders with custom sidebar content 1`] = `
     }
   >
     <div
-      className="makeStyles-sidebarContainer-525"
+      className="makeStyles-sidebarContainer-663"
       style={
         {
           "width": "300px",
@@ -738,7 +738,7 @@ exports[`NeonPage renders with custom sidebar content 1`] = `
       </div>
     </div>
     <div
-      className="makeStyles-pageContent-523"
+      className="makeStyles-pageContent-661"
       data-selenium="neon-page.content"
       style={
         {
@@ -770,7 +770,7 @@ exports[`NeonPage renders with custom sidebar content 1`] = `
 exports[`NeonPage renders with loading message 1`] = `
 [
   <header
-    className="makeStyles-skeletonHeader-170"
+    className="makeStyles-skeletonHeader-216"
     id="header"
   >
     <span
@@ -784,7 +784,7 @@ exports[`NeonPage renders with loading message 1`] = `
     />
   </header>,
   <div
-    className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-149 css-1oqqzyl-MuiContainer-root"
+    className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-195 css-1oqqzyl-MuiContainer-root"
     style={
       {
         "maxWidth": "3333px",
@@ -792,7 +792,7 @@ exports[`NeonPage renders with loading message 1`] = `
     }
   >
     <div
-      className="makeStyles-pageContent-150"
+      className="makeStyles-pageContent-196"
       data-selenium="neon-page.content"
       style={
         {
@@ -833,7 +833,7 @@ exports[`NeonPage renders with loading message 1`] = `
     prop-open={true}
   >
     <div
-      className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-backdropPaper-163 css-zuyt79-MuiPaper-root"
+      className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-backdropPaper-209 css-zuyt79-MuiPaper-root"
     >
       <h3
         className="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-18xtj6i-MuiTypography-root"
@@ -866,7 +866,7 @@ exports[`NeonPage renders with loading message 1`] = `
         </svg>
       </span>
       <div
-        className="makeStyles-dismissOverlay-169"
+        className="makeStyles-dismissOverlay-215"
       >
         <button
           className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
@@ -913,7 +913,7 @@ exports[`NeonPage renders with loading message 1`] = `
 exports[`NeonPage renders with loading message and progress 1`] = `
 [
   <header
-    className="makeStyles-skeletonHeader-201"
+    className="makeStyles-skeletonHeader-314"
     id="header"
   >
     <span
@@ -927,7 +927,7 @@ exports[`NeonPage renders with loading message and progress 1`] = `
     />
   </header>,
   <div
-    className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-232 css-1oqqzyl-MuiContainer-root"
+    className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-283 css-1oqqzyl-MuiContainer-root"
     style={
       {
         "maxWidth": "2000px",
@@ -935,7 +935,7 @@ exports[`NeonPage renders with loading message and progress 1`] = `
     }
   >
     <div
-      className="makeStyles-pageContent-233"
+      className="makeStyles-pageContent-284"
       data-selenium="neon-page.content"
       style={
         {
@@ -976,7 +976,7 @@ exports[`NeonPage renders with loading message and progress 1`] = `
     prop-open={true}
   >
     <div
-      className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-backdropPaper-246 css-zuyt79-MuiPaper-root"
+      className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-backdropPaper-297 css-zuyt79-MuiPaper-root"
     >
       <h3
         className="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-18xtj6i-MuiTypography-root"
@@ -1016,7 +1016,7 @@ exports[`NeonPage renders with loading message and progress 1`] = `
         </svg>
       </span>
       <div
-        className="makeStyles-dismissOverlay-252"
+        className="makeStyles-dismissOverlay-303"
       >
         <button
           className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
@@ -1066,7 +1066,7 @@ exports[`NeonPage renders with loading message and progress 1`] = `
 exports[`NeonPage renders with sidebar links 1`] = `
 [
   <header
-    className="makeStyles-skeletonHeader-638"
+    className="makeStyles-skeletonHeader-866"
     id="header"
   >
     <span
@@ -1080,7 +1080,7 @@ exports[`NeonPage renders with sidebar links 1`] = `
     />
   </header>,
   <div
-    className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-669 css-1oqqzyl-MuiContainer-root"
+    className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-835 css-1oqqzyl-MuiContainer-root"
     style={
       {
         "maxWidth": "calc(2000px - 348px)",
@@ -1088,7 +1088,7 @@ exports[`NeonPage renders with sidebar links 1`] = `
     }
   >
     <div
-      className="makeStyles-sidebarContainer-672"
+      className="makeStyles-sidebarContainer-838"
       style={
         {
           "width": "300px",
@@ -1096,28 +1096,28 @@ exports[`NeonPage renders with sidebar links 1`] = `
       }
     >
       <div
-        className="makeStyles-sidebarInnerStickyContainer-673 neon__sidebar-sticky"
+        className="makeStyles-sidebarInnerStickyContainer-839 neon__sidebar-sticky"
       >
         <div
-          className="makeStyles-sidebarTitleContainer-674"
+          className="makeStyles-sidebarTitleContainer-840"
         >
           <div
-            className="makeStyles-sidebarTitlesContainer-677"
+            className="makeStyles-sidebarTitlesContainer-843"
           >
             <h3
-              className="MuiTypography-root MuiTypography-h5 makeStyles-sidebarTitle-675 css-1v75lyw-MuiTypography-root"
+              className="MuiTypography-root MuiTypography-h5 makeStyles-sidebarTitle-841 css-1v75lyw-MuiTypography-root"
             >
               foo
             </h3>
             <h4
-              className="MuiTypography-root MuiTypography-subtitle2 makeStyles-sidebarSubtitle-676 css-g2luyu-MuiTypography-root"
+              className="MuiTypography-root MuiTypography-subtitle2 makeStyles-sidebarSubtitle-842 css-g2luyu-MuiTypography-root"
             >
               bar
             </h4>
           </div>
         </div>
         <hr
-          className="MuiDivider-root MuiDivider-fullWidth makeStyles-sidebarDivider-682 css-9mgopn-MuiDivider-root"
+          className="MuiDivider-root MuiDivider-fullWidth makeStyles-sidebarDivider-848 css-9mgopn-MuiDivider-root"
           style={
             {
               "width": "NaN",
@@ -1128,7 +1128,7 @@ exports[`NeonPage renders with sidebar links 1`] = `
           More
         </div>
         <hr
-          className="MuiDivider-root MuiDivider-fullWidth makeStyles-sidebarDivider-682 css-9mgopn-MuiDivider-root"
+          className="MuiDivider-root MuiDivider-fullWidth makeStyles-sidebarDivider-848 css-9mgopn-MuiDivider-root"
           style={
             {
               "width": "NaN",
@@ -1136,10 +1136,10 @@ exports[`NeonPage renders with sidebar links 1`] = `
           }
         />
         <div
-          className="makeStyles-sidebarLinksContainer-681"
+          className="makeStyles-sidebarLinksContainer-847"
         >
           <a
-            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-678 makeStyles-sidebarLinkCurrent-679 css-zuor1v-MuiTypography-root-MuiLink-root"
+            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-844 makeStyles-sidebarLinkCurrent-845 css-zuor1v-MuiTypography-root-MuiLink-root"
             href="#"
             onBlur={[Function]}
             onClick={null}
@@ -1149,7 +1149,7 @@ exports[`NeonPage renders with sidebar links 1`] = `
             Section A
           </a>
           <a
-            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-678 css-zuor1v-MuiTypography-root-MuiLink-root"
+            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-844 css-zuor1v-MuiTypography-root-MuiLink-root"
             href="#sectionB"
             onBlur={[Function]}
             onClick={null}
@@ -1159,7 +1159,7 @@ exports[`NeonPage renders with sidebar links 1`] = `
             Section B
           </a>
           <a
-            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-678 css-zuor1v-MuiTypography-root-MuiLink-root"
+            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-844 css-zuor1v-MuiTypography-root-MuiLink-root"
             href="#sectionC"
             onBlur={[Function]}
             onClick={null}
@@ -1172,7 +1172,7 @@ exports[`NeonPage renders with sidebar links 1`] = `
             Section C
           </a>
           <a
-            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-678 css-zuor1v-MuiTypography-root-MuiLink-root"
+            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-844 css-zuor1v-MuiTypography-root-MuiLink-root"
             href="#sectionD"
             onBlur={[Function]}
             onClick={null}
@@ -1183,7 +1183,7 @@ exports[`NeonPage renders with sidebar links 1`] = `
           </a>
         </div>
         <hr
-          className="MuiDivider-root MuiDivider-fullWidth makeStyles-sidebarDivider-682 css-9mgopn-MuiDivider-root"
+          className="MuiDivider-root MuiDivider-fullWidth makeStyles-sidebarDivider-848 css-9mgopn-MuiDivider-root"
           style={
             {
               "marginBottom": "0px",
@@ -1194,7 +1194,7 @@ exports[`NeonPage renders with sidebar links 1`] = `
       </div>
     </div>
     <div
-      className="makeStyles-pageContent-670"
+      className="makeStyles-pageContent-836"
       data-selenium="neon-page.content"
       style={
         {
@@ -1226,7 +1226,7 @@ exports[`NeonPage renders with sidebar links 1`] = `
 exports[`NeonPage renders with sidebar links as standlone children 1`] = `
 [
   <header
-    className="makeStyles-skeletonHeader-755"
+    className="makeStyles-skeletonHeader-962"
     id="header"
   >
     <span
@@ -1240,7 +1240,7 @@ exports[`NeonPage renders with sidebar links as standlone children 1`] = `
     />
   </header>,
   <div
-    className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-734 css-1oqqzyl-MuiContainer-root"
+    className="MuiContainer-root MuiContainer-maxWidthLg makeStyles-outerPageContainer-941 css-1oqqzyl-MuiContainer-root"
     style={
       {
         "maxWidth": "calc(2000px - 470px)",
@@ -1248,7 +1248,7 @@ exports[`NeonPage renders with sidebar links as standlone children 1`] = `
     }
   >
     <div
-      className="makeStyles-sidebarContainer-737 sidebarClassName"
+      className="makeStyles-sidebarContainer-944 sidebarClassName"
       style={
         {
           "width": "422px",
@@ -1259,10 +1259,10 @@ exports[`NeonPage renders with sidebar links as standlone children 1`] = `
         className={null}
       >
         <div
-          className="makeStyles-sidebarTitleContainer-739"
+          className="makeStyles-sidebarTitleContainer-946"
         />
         <hr
-          className="MuiDivider-root MuiDivider-fullWidth makeStyles-sidebarDivider-747 css-9mgopn-MuiDivider-root"
+          className="MuiDivider-root MuiDivider-fullWidth makeStyles-sidebarDivider-954 css-9mgopn-MuiDivider-root"
           style={
             {
               "width": "NaN",
@@ -1270,10 +1270,10 @@ exports[`NeonPage renders with sidebar links as standlone children 1`] = `
           }
         />
         <div
-          className="makeStyles-sidebarLinksContainer-746"
+          className="makeStyles-sidebarLinksContainer-953"
         >
           <a
-            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-743 makeStyles-sidebarLinkCurrent-744 css-zuor1v-MuiTypography-root-MuiLink-root"
+            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-950 makeStyles-sidebarLinkCurrent-951 css-zuor1v-MuiTypography-root-MuiLink-root"
             href="#sectionA"
             onBlur={[Function]}
             onClick={[Function]}
@@ -1283,7 +1283,7 @@ exports[`NeonPage renders with sidebar links as standlone children 1`] = `
             Section A
           </a>
           <a
-            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-743 makeStyles-sidebarLinkCurrent-744 css-zuor1v-MuiTypography-root-MuiLink-root"
+            className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-950 makeStyles-sidebarLinkCurrent-951 css-zuor1v-MuiTypography-root-MuiLink-root"
             href="#sectionA"
             onBlur={[Function]}
             onClick={[Function]}
@@ -1294,7 +1294,7 @@ exports[`NeonPage renders with sidebar links as standlone children 1`] = `
           </a>
         </div>
         <hr
-          className="MuiDivider-root MuiDivider-fullWidth makeStyles-sidebarDivider-747 css-9mgopn-MuiDivider-root"
+          className="MuiDivider-root MuiDivider-fullWidth makeStyles-sidebarDivider-954 css-9mgopn-MuiDivider-root"
           style={
             {
               "marginBottom": "0px",
@@ -1305,7 +1305,7 @@ exports[`NeonPage renders with sidebar links as standlone children 1`] = `
       </div>
     </div>
     <div
-      className="makeStyles-pageContent-735"
+      className="makeStyles-pageContent-942"
       data-selenium="neon-page.content"
       style={
         {
@@ -1314,7 +1314,7 @@ exports[`NeonPage renders with sidebar links as standlone children 1`] = `
       }
     >
       <h1
-        className="MuiTypography-root MuiTypography-h3 makeStyles-pageTitle-749 css-scgx7b-MuiTypography-root"
+        className="MuiTypography-root MuiTypography-h3 makeStyles-pageTitle-956 css-scgx7b-MuiTypography-root"
         data-selenium="neon-page.title"
       >
         Section B
