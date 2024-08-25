@@ -2,7 +2,6 @@ import React from 'react';
 
 import CssBaseline from '@mui/material/CssBaseline';
 import {
-  adaptV4Theme,
   createTheme,
   responsiveFontSizes,
   StyledEngineProvider,
@@ -419,7 +418,7 @@ const baseTheme = createTheme({
           borderRadius: '4px',
           border: `1px solid ${COLORS.GREY[200]}`,
         },
-      }
+      },
     },
     MuiCardContent: {
       styleOverrides: {

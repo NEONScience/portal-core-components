@@ -348,6 +348,7 @@ export default function App() {
         sidebarLinks={sidebarLinks}
         sidebarLinksAsStandaloneChildren
         useCoreAuth
+        customizeAuthContainer
       >
         <Home />
       </NeonPage>

@@ -364,7 +364,7 @@ const defaultProps = {
   breadcrumbs: [],
   customHeader: null,
   customFooter: null,
-  customizeAuthContainer: true,
+  customizeAuthContainer: false,
   showHeaderSkeleton: false,
   showFooterSkeleton: false,
   error: null,
