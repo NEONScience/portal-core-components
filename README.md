@@ -232,11 +232,7 @@ For Windows users the `npm run lib` command may fail with complaint about 'NODE_
 
 ## Library Composition
 
-This package was originally configured with advice from [this article](https://medium.com/@lokhmakov/best-way-to-create-npm-packages-with-create-react-app-b24dd449c354).
-
-In summary, it began as a create-react-app app that was ejected. A `babel.config.json` was added with minor configuration and a script to invoke babel to run a library build was added.
-
-Components are then created in `src/lib_components/components`, each with its own `package.json` to "publish itself" within the library. Babel generates a `lib` directory with each component and a single `index.js` entry point that exports each individual component's entry point.
+The library code is created within the `src/lib_components` directory. Babel publishes the code to a `lib` directory that matches the directory structure within `src/lib_components`.
 
 
 ## Scripts Overview
