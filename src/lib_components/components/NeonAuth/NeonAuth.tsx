@@ -13,6 +13,7 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { makeStyles } from '@mui/styles';
 import { Theme as MuiThemeType } from '@mui/material';
 
@@ -96,6 +97,7 @@ const AccountMenu = (props: AccountMenuProps) => {
   ] = NeonContext.useNeonContextState();
   const user = userData?.data?.user;
   const containerRef = React.useRef<null | HTMLDivElement>(null);
+  const belowLg = useMediaQuery(Theme.breakpoints.down('lg'));
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>): void => {
@@ -116,17 +118,20 @@ const AccountMenu = (props: AccountMenuProps) => {
       avatarAlt = user.email;
     }
   }
+  const avatarContainerSx = {
+    display: 'block',
+    width: '64px',
+    alignItems: 'center',
+    textAlign: 'center',
+    marginTop: '-4px',
+  };
+  if (belowLg) {
+    avatarContainerSx.marginTop = '-3px';
+    avatarContainerSx.textAlign = 'right';
+  }
   return (
     <>
-      <Box
-        sx={{
-          display: 'block',
-          width: '64px',
-          alignItems: 'center',
-          textAlign: 'center',
-          marginTop: '-4px',
-        }}
-      >
+      <Box sx={avatarContainerSx}>
         <Tooltip title="My Account">
           <IconButton
             onClick={handleClick}
@@ -300,17 +305,7 @@ const renderAuth = (
     case NeonAuthDisplayType.MENU_CUSTOM:
     case NeonAuthDisplayType.MENU:
     default:
-      authContent = (
-        <Button
-          size="small"
-          variant="outlined"
-          className={classes.button}
-          data-selenium="neon-menu.sign-in-button"
-          onClick={() => handleLogin()}
-        >
-          Sign In
-        </Button>
-      );
+      authContent = <AccountMenu accountPath={accountPath} handleLogout={handleLogout} />;
       if (showAuthWorking) {
         authContent = (
           <div className={classes.loadingContainer}>
