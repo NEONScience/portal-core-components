@@ -364,6 +364,7 @@ const defaultProps = {
   breadcrumbs: [],
   customHeader: null,
   customFooter: null,
+  customizeAuthContainer: true,
   showHeaderSkeleton: false,
   showFooterSkeleton: false,
   error: null,
@@ -395,6 +396,7 @@ const NeonPage = (inProps) => {
     breadcrumbs,
     customHeader,
     customFooter,
+    customizeAuthContainer,
     showHeaderSkeleton,
     showFooterSkeleton,
     error,
@@ -935,6 +937,7 @@ const NeonPage = (inProps) => {
             </header>
           ) : (
             <NeonHeader
+              customizeAuthContainer={customizeAuthContainer}
               ref={headerRef}
               unstickyDrupalHeader={unstickyDrupalHeader}
               notifications={notifications}
@@ -1017,6 +1020,7 @@ NeonPage.propTypes = {
   ),
   customHeader: PropTypes.node,
   customFooter: PropTypes.node,
+  customizeAuthContainer: PropTypes.bool,
   showHeaderSkeleton: PropTypes.bool,
   showFooterSkeleton: PropTypes.bool,
   error: PropTypes.string,

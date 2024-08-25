@@ -21,6 +21,7 @@ declare namespace NeonPage {
         }> | null | undefined)[]>;
         export let customHeader: PropTypes.Requireable<PropTypes.ReactNodeLike>;
         export let customFooter: PropTypes.Requireable<PropTypes.ReactNodeLike>;
+        export let customizeAuthContainer: PropTypes.Requireable<boolean>;
         export let showHeaderSkeleton: PropTypes.Requireable<boolean>;
         export let showFooterSkeleton: PropTypes.Requireable<boolean>;
         let error_1: PropTypes.Requireable<string>;
