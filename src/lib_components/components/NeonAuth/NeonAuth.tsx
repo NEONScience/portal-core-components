@@ -305,7 +305,17 @@ const renderAuth = (
     case NeonAuthDisplayType.MENU_CUSTOM:
     case NeonAuthDisplayType.MENU:
     default:
-      authContent = <AccountMenu accountPath={accountPath} handleLogout={handleLogout} />;
+      authContent = (
+        <Button
+          size="small"
+          variant="outlined"
+          className={classes.button}
+          data-selenium="neon-menu.sign-in-button"
+          onClick={() => handleLogin()}
+        >
+          Sign In
+        </Button>
+      );
       if (showAuthWorking) {
         authContent = (
           <div className={classes.loadingContainer}>
