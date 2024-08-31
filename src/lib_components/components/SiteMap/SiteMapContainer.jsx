@@ -1018,7 +1018,6 @@ const SiteMapContainer = (inProps) => {
             enterDelay={500}
             enterNextDelay={200}
             placement="bottom-start"
-            TransitionComponent={({ children }) => children} // set no transition by mock component
           >
             {formControl}
           </Tooltip>
@@ -1067,7 +1066,6 @@ const SiteMapContainer = (inProps) => {
           enterDelay={500}
           enterNextDelay={200}
           placement="left"
-          TransitionComponent={({ children }) => children}
         >
           {itemLabel}
         </Tooltip>
@@ -1187,7 +1185,6 @@ const SiteMapContainer = (inProps) => {
             enterDelay={500}
             enterNextDelay={200}
             placement="bottom-start"
-            TransitionComponent={({ children }) => children} // set no transition by mock component
           >
             {formControl}
           </Tooltip>

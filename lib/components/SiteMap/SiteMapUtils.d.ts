@@ -1739,6 +1739,8 @@ export namespace OVERLAYS {
             props: {
                 url: string;
                 layers: string;
+                version: string;
+                uppercase: boolean;
             };
         }[];
     }
@@ -1812,6 +1814,8 @@ export namespace OVERLAYS {
             props: {
                 url: string;
                 layers: string;
+                version: string;
+                uppercase: boolean;
             };
         }[];
         export { components_1 as components };
