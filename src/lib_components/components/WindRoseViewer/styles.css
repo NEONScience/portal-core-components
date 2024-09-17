@@ -1,0 +1,166 @@
+.popup__wind-rose__container .popup__base {
+  width: 100% !important;
+  top: 0 !important;
+  left: 0 !important;
+  margin-left: 0 !important;
+}
+
+.popup-wind-rose {
+  position: relative;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  padding: 25px;
+  height: 100vh;
+  overflow: auto;
+  z-index: 300;
+}
+
+.popup-wind-rose__background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: black;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  z-index: 202;
+}
+
+.popup-wind-rose__row {
+  width: 100%;
+  min-height: min-content;
+  padding-bottom: 4px;
+}
+
+.popup-wind-rose__row--padding-bottom {
+  padding-bottom: 18px;
+}
+
+.popup-wind-rose__row--flexrow {
+  display: flex;
+  flex-direction: row;
+}
+
+.popup-wind-rose__header {
+  font-size: 28px;
+  font-weight: 650;
+  border-bottom: 1px solid black;
+  padding: 8px;
+}
+
+.popup-wind-rose__name {
+  font-size: 22px;
+  font-weight: 550;
+  color: rgb(27, 103, 179);
+  padding: 8px;
+}
+
+.popup-wind-rose__dpidq {
+  font-size: 16px;
+  padding: 4px 8px 8px 8px;
+}
+
+.popup-wind-rose__div {
+  height: auto;
+  padding-bottom: 10px;
+}
+
+.popup-wind-rose__close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.popup-wind-rose .wind-rose-selector-container {
+  display: inline-block;
+  padding-bottom: 4px;
+  text-align: left;
+  font-size: 16px;
+}
+.popup-wind-rose .wind-rose-selector-container-parameters,
+.popup-wind-rose .wind-rose-selector-container-positions {
+  display: block;
+  padding-bottom: 4px;
+  text-align: left;
+  font-size: 16px;
+}
+.popup-wind-rose .wind-rose-selector {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+.popup-wind-rose .wind-rose-selector-label {
+  display: inline-block;
+  margin-left: 10px;
+}
+.popup-wind-rose .wind-rose-selector-label-positions {
+  display: inline-block;
+  margin-left: 10px;
+  width: 70px;
+}
+.popup-wind-rose .wind-rose-selector-positions {
+  display: inline-block;
+  margin-left: 36px;
+  width: 86%;
+}
+.popup-wind-rose .wind-rose-selector-sites {
+  width: 456px;
+  margin-left: 74px;
+}
+.popup-wind-rose .wind-rose-selector-month {
+  width: 120px;
+  margin-left: 17px;
+}
+.popup-wind-rose .wind-rose-selector-parameters {
+  width: 86%;
+  margin-left: 36px;
+}
+
+.wind-rose-container {
+  padding-bottom: 20px;
+}
+
+.wind-rose-container .loading-container-background {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  color: rgb(27, 103, 179);
+}
+.wind-rose-container .loading-container {
+  border: 1px solid #cccccc;
+  width: 240px;
+  height: 70px;
+  text-align: center;
+  border-radius: 10px;
+  font-size: 18px;
+  padding: 20px;
+}
+.wind-rose-container .loading-container.loading-container-failed p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.wind-rose-container .loading-container i {
+  margin-top: 10px;
+}
+
+.svg-responsive-container {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  padding-bottom: 60%;
+  vertical-align: middle;
+  overflow: hidden;
+}
+
+.svg-responsive {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
