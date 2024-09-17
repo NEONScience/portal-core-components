@@ -84,6 +84,9 @@ const ThemeStyleGuide = React.lazy(
 const TimeSeriesViewerStyleGuide = React.lazy(
   () => import('./lib_components/components/TimeSeriesViewer/StyleGuide'),
 );
+const WindRoseViewerStyleGuide = React.lazy(
+  () => import('./lib_components/components/WindRoseViewer/StyleGuide'),
+);
 
 const SuspenseFallback = () => (
   <Grid container spacing={3}>
@@ -328,6 +331,15 @@ const sidebarLinks = [
     component: () => (
       <Suspense fallback={<SuspenseFallback />}>
         <TimeSeriesViewerStyleGuide />
+      </Suspense>
+    ),
+  },
+  {
+    name: 'Wind Rose Viewer',
+    hash: '#WindRoseViewer',
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
+        <WindRoseViewerStyleGuide />
       </Suspense>
     ),
   },
