@@ -461,7 +461,7 @@ const RollPeriodOption = () => {
 const TimeStepOption = () => {
   const classes = useStyles(Theme);
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
-  const { availableTimeSteps } = state;
+  const { availableTimeSteps } = state.timeStep;
   const { timeStep: selectedTimeStep } = state.selection;
   const handleChangeTimeStep = (event, timeStep) => {
     dispatch({ type: 'selectTimeStep', timeStep });
@@ -574,7 +574,7 @@ export default function TimeSeriesViewerAxes() {
       <div>
         <Typography variant="h6" style={{ marginBottom: Theme.spacing(2) }}>x Axis (Time)</Typography>
         <div className={classes.optionsContainer}>
-          {state.availableTimeSteps.size < 3 ? null : (
+          {state.timeStep.availableTimeSteps.size < 3 ? null : (
             <div style={{ marginRight: Theme.spacing(4) }}>{renderOption('TIME_STEP')}</div>
           )}
           {renderOption('ROLL_PERIOD')}

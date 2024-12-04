@@ -23,7 +23,7 @@ export default html = `<header class="header" role="banner">
   <div>
 
 <input data-drupal-selector="edit-openid-connect-client-auth0-login" type="submit" id="edit-openid-connect-client-auth0-login" name="auth0" value="Sign In" class="button js-form-submit form-submit button--search" />
-</div><input autocomplete="off" data-drupal-selector="form-epxjxpdfwxnvptsekjvtousgknrlj2wcmaloerlrdnu" type="hidden" name="form_build_id" value="form-ePxJXpdfWxnVptsEKJvToUsGkNRlj2WCMAloErLRdNU" />
+</div><input data-drupal-selector="form-o2lb7sdycvjwddknwswmx7wxok-lv1bn4u-8likh73i" type="hidden" name="form_build_id" value="form-o2lb7sdyCvJwDdKNwsWmX7WXOk_LV1bn4U_8lIKH73I" />
 <input data-drupal-selector="edit-openid-connect-login-form" type="hidden" name="form_id" value="openid_connect_login_form" />
 
 </form>
@@ -129,6 +129,10 @@ export default html = `<header class="header" role="banner">
             
                       <ul  class="menu menu--main" data-depth="2">
 
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/about/contact-neon-biorepository" class="menu__link" data-plugin-id="menu_link_content:bd98cf22-22b2-4eb3-941b-0fbf2538f85e" data-drupal-link-system-path="node/14006">Contact NEON Biorepository</a>
+
+                  </li>
               <li  class="menu__item">
           <a href="https://www.neonscience.org/about/contact-us/field-offices" class="menu__link" data-plugin-id="menu_link_content:4a00dcaf-25f1-4972-9011-197d08a6d57d" data-drupal-link-system-path="node/7874">Field Offices</a>
 
@@ -745,6 +749,10 @@ export default html = `<header class="header" role="banner">
 
                   </li>
               <li  class="menu__item">
+          <a href="https://www.neonscience.org/field-sites/site-access-info" class="menu__link" data-plugin-id="views_view:views.site_access_info.page_1" data-drupal-link-system-path="field-sites/site-access-info">Field Site Access Info</a>
+
+                  </li>
+              <li  class="menu__item">
           <a href="https://www.neonscience.org/field-sites/explore-field-sites" class="menu__link" data-plugin-id="menu_link_content:e0a81e3e-ae32-43c7-85e9-2a643c7d0121" data-drupal-link-system-path="node/10899">Explore Field Sites</a>
 
                   </li>
@@ -1122,8 +1130,22 @@ export default html = `<header class="header" role="banner">
             
 
                   </li>
-              <li  class="menu__item">
+              <li  class="menu__item menu__item--expanded">
           <a href="https://www.neonscience.org/get-involved/engagement" class="menu__link" data-plugin-id="menu_link_content:32ac66ec-e6bb-4590-ad08-5c16f174f3b8" data-drupal-link-system-path="node/10556">Community Engagement</a>
+
+          
+            
+                      <ul  class="menu menu--main" data-depth="2">
+
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/how-community-feedback-impacts-neon-operations" class="menu__link" data-plugin-id="menu_link_content:5d01343d-0325-4607-9467-31626840164a" data-drupal-link-system-path="node/14028">How Community Feedback Impacts NEON Operations</a>
+
+                  </li>
+      
+          </ul>
+  
+
+            
 
                   </li>
               <li  class="menu__item menu__item--expanded">

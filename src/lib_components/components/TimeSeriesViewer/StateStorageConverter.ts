@@ -60,12 +60,26 @@ const convertStateForStorage = (state: any): any => {
     newState.availableQualityFlags = [];
   }
   // available time steps
-  const { availableTimeSteps } = state;
+  const { availableTimeSteps } = state.timeStep;
   if (availableTimeSteps instanceof Set) {
-    newState.availableTimeSteps = Array.from(availableTimeSteps);
+    newState.timeStep.availableTimeSteps = Array.from(availableTimeSteps);
   } else {
-    newState.availableTimeSteps = [];
+    newState.timeStep.availableTimeSteps = [];
   }
+  const { variables: timeStepVariables } = state.timeStep;
+  Object.keys(timeStepVariables).forEach((key, index) => {
+    const { variables: timeStepVariablesSet, dateTimeVariables } = timeStepVariables[key];
+    if (timeStepVariablesSet instanceof Set && timeStepVariablesSet.size > 0) {
+      newState.timeStep.variables[key].variables = Array.from(timeStepVariablesSet);
+    } else {
+      newState.timeStep.variables[key].variables = [];
+    }
+    if (dateTimeVariables instanceof Set && dateTimeVariables.size > 0) {
+      newState.timeStep.variables[key].dateTimeVariables = Array.from(dateTimeVariables);
+    } else {
+      newState.timeStep.variables[key].dateTimeVariables = [];
+    }
+  });
   return newState;
 };
 
@@ -116,13 +130,27 @@ const convertStateFromStorage = (state: any): any => {
   } else {
     newState.availableQualityFlags = new Set();
   }
-  // available quality flags
-  const { availableTimeSteps } = state;
+  // available time steps
+  const { availableTimeSteps } = state.timeStep;
   if (Array.isArray(availableTimeSteps)) {
-    newState.availableTimeSteps = new Set(availableTimeSteps);
+    newState.timeStep.availableTimeSteps = new Set(availableTimeSteps);
   } else {
-    newState.availableTimeSteps = new Set();
+    newState.timeStep.availableTimeSteps = new Set();
   }
+  const { variables: timeStepVariables } = state.timeStep;
+  Object.keys(timeStepVariables).forEach((key, index) => {
+    const { variables: timeStepVariablesSet, dateTimeVariables } = timeStepVariables[key];
+    if (Array.isArray(timeStepVariablesSet)) {
+      newState.timeStep.variables[key].variables = new Set(timeStepVariablesSet);
+    } else {
+      newState.timeStep.variables[key].variables = new Set();
+    }
+    if (Array.isArray(dateTimeVariables)) {
+      newState.timeStep.variables[key].dateTimeVariables = new Set(dateTimeVariables);
+    } else {
+      newState.timeStep.variables[key].dateTimeVariables = new Set();
+    }
+  });
   return newState;
 };
 
