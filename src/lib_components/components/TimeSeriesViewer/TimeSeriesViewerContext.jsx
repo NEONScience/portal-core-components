@@ -67,10 +67,9 @@ export const TIME_SERIES_VIEWER_STATUS_TITLES = {
   READY: null,
 };
 
-// Option to choose the datetime variable by order of variables file
-const VARIABLES_FILE_DERIVED_ORDER_PREFERENCE = true;
-
-// List of common date-time variable names to use for the x axis ordered by preference
+// List of common date-time variable names to verify against
+// The variables file ultimately controls the datetime variable that will
+// be utilized, this allows us to check for informational purposes
 const PREFERRED_DATETIME_VARIABLES = [
   'startDateTime',
   'endDateTime',
@@ -410,6 +409,17 @@ const getContinuousDatesArray = (dateRange, roundToYears = false) => {
 };
 
 /**
+ * Checks the date time variable against known preferred variables
+ * @param {string} dateTimeVariable
+ */
+const checkDateTimeVariable = (dateTimeVariable) => {
+  if (!PREFERRED_DATETIME_VARIABLES.includes(dateTimeVariable)) {
+    // eslint-disable-next-line no-console
+    console.debug(`Determined datetime variable does not match known preferred: ${dateTimeVariable}`);
+  }
+};
+
+/**
  * Sorts the datetime variables by order specified in the variables file
  * @param {Object} variables
  * @param {Object} a
@@ -417,18 +427,11 @@ const getContinuousDatesArray = (dateRange, roundToYears = false) => {
  * @returns
  */
 const sortDateTimeVariables = (variables, a, b) => {
-  let aIdx;
-  let bIdx;
-  if (VARIABLES_FILE_DERIVED_ORDER_PREFERENCE === true) {
-    aIdx = variables[a].order;
-    bIdx = variables[b].order;
-  } else {
-    aIdx = PREFERRED_DATETIME_VARIABLES.indexOf(a);
-    bIdx = PREFERRED_DATETIME_VARIABLES.indexOf(b);
+  const aIdx = variables[a].order;
+  const bIdx = variables[b].order;
+  if (aIdx === bIdx) {
+    return 0;
   }
-  if (aIdx === bIdx) { return 0; }
-  if (aIdx === -1 && bIdx !== -1) { return 1; }
-  if (aIdx !== -1 && bIdx === -1) { return -1; }
   return aIdx < bIdx ? -1 : 1;
 };
 
@@ -450,7 +453,9 @@ const determineDateTimeVariable = (variables, timeStep) => {
   }
   if (dateTimeVars.length > 0) {
     dateTimeVars.sort((a, b) => sortDateTimeVariables(variables, a, b));
-    return dateTimeVars[0]; // eslint-disable-line prefer-destructuring
+    const determinedDateTimeVar = dateTimeVars[0]; // eslint-disable-line prefer-destructuring
+    checkDateTimeVariable(determinedDateTimeVar);
+    return determinedDateTimeVar;
   }
   return null;
 };
@@ -479,6 +484,7 @@ const determineAutoTimeStep = (
   }
   dateTimeVars.sort((a, b) => sortDateTimeVariables(variables, a, b));
   const dateTimeVariable = dateTimeVars[0];
+  checkDateTimeVariable(dateTimeVariable);
   // Of the derived available time steps based on data files,
   // find the set of time steps that include the first datetime
   // variable found in the variables file
