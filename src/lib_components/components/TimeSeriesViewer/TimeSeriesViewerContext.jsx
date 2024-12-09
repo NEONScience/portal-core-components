@@ -29,7 +29,7 @@ import NeonApi from '../NeonApi/NeonApi';
 import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import { forkJoinWithProgress } from '../../util/rxUtil';
-import { exists } from '../../util/typeUtil';
+import { exists, existsNonEmpty } from '../../util/typeUtil';
 
 import parseTimeSeriesData from '../../workers/parseTimeSeriesData';
 
@@ -67,12 +67,15 @@ export const TIME_SERIES_VIEWER_STATUS_TITLES = {
   READY: null,
 };
 
-// List of common date-time variable names to use for the x axis ordered by preference
+// List of common date-time variable names to verify against
+// The variables file ultimately controls the datetime variable that will
+// be utilized, this allows us to check for informational purposes
 const PREFERRED_DATETIME_VARIABLES = [
   'startDateTime',
   'endDateTime',
   'startDate',
   'endDate',
+  'date',
 ];
 
 // Keys, details, and supporting functions for all possible Y-axis range modes
@@ -195,7 +198,12 @@ export const DEFAULT_STATE = {
     isDefault: true,
   },
   availableQualityFlags: new Set(),
-  availableTimeSteps: new Set(['auto']),
+  timeStep: {
+    availableTimeSteps: new Set(['auto']),
+    // Lookup of time step to variables as specified by the variables file
+    // { 'timeStep': { variables: Set<string>, dateTimeVariables: Set<string> } }
+    variables: {},
+  },
 };
 const Context = createContext(cloneDeep(DEFAULT_STATE));
 const useTimeSeriesViewerState = () => {
@@ -205,6 +213,8 @@ const useTimeSeriesViewerState = () => {
   }
   return hookResponse;
 };
+
+const DEFAULT_FALLBACK_TMI = 'default';
 
 /**
    Time Step Definitions and Functions
@@ -254,7 +264,10 @@ export const TIME_STEPS = {
   },
   '1day': {
     key: '1day',
-    matchFileTableSuffix: ['1day', '1_day'],
+    matchFileTableSuffix: ['1day', '1_day', 'daily'],
+    // DP4.00001.001 includes table names where the tmi is not the suffix:
+    // ex: wss_daily_humid, wss_daily_pres, etc
+    matchFileTableIncludes: ['_daily_'],
     tmi: '01D',
     seconds: 86400,
   },
@@ -265,11 +278,14 @@ const getTimeStep = (input = '') => (
 const matchTimeStepForTableName = (key, tableName = '', allowDefaultFallthrough = false) => (
   tableName.endsWith(`_${key}`)
     || TIME_STEPS[key].matchFileTableSuffix.some((suffix) => tableName.endsWith(`_${suffix}`))
+    || (existsNonEmpty(TIME_STEPS[key].matchFileTableIncludes)
+      && (TIME_STEPS[key].matchFileTableIncludes.some((testStr) => tableName.includes(testStr))))
     || allowDefaultFallthrough
 );
 const getTimeStepForTableName = (tableName = '', useDefault = false) => (
   Object.keys(TIME_STEPS)
-    .find((key) => matchTimeStepForTableName(key, tableName)) || (useDefault ? 'default' : null)
+    .find((key) => matchTimeStepForTableName(key, tableName))
+      || (useDefault ? DEFAULT_FALLBACK_TMI : null)
 );
 export const summarizeTimeSteps = (steps, timeStep = null, pluralize = true) => {
   if (steps === 1) { return 'none'; }
@@ -390,6 +406,115 @@ const getContinuousDatesArray = (dateRange, roundToYears = false) => {
     months += 1;
   }
   return continuousRange;
+};
+
+/**
+ * Checks the date time variable against known preferred variables
+ * @param {string} dateTimeVariable
+ */
+const checkDateTimeVariable = (dateTimeVariable) => {
+  if (!PREFERRED_DATETIME_VARIABLES.includes(dateTimeVariable)) {
+    // eslint-disable-next-line no-console
+    console.debug(`Determined datetime variable does not match known preferred: ${dateTimeVariable}`);
+  }
+};
+
+/**
+ * Sorts the datetime variables by order specified in the variables file
+ * @param {Object} variables
+ * @param {Object} a
+ * @param {Object} b
+ * @returns
+ */
+const sortDateTimeVariables = (variables, a, b) => {
+  const aIdx = variables[a].order;
+  const bIdx = variables[b].order;
+  if (aIdx === bIdx) {
+    return 0;
+  }
+  return aIdx < bIdx ? -1 : 1;
+};
+
+/**
+ * Determine the datetime variable for the specified time step
+ * @param {Object} variables
+ * @param {string} timeStep
+ * @returns
+ */
+const determineDateTimeVariable = (variables, timeStep) => {
+  // Find the datetime variables for the specified time step
+  let dateTimeVars = Object.keys(variables)
+    .filter((v) => variables[v].isDateTime && variables[v].timeSteps.has(timeStep));
+  if (dateTimeVars.length <= 0) {
+    // If we could not find by defined time step, check for default
+    // in case we could not parse the variables file tables
+    dateTimeVars = Object.keys(variables)
+      .filter((v) => variables[v].isDateTime && variables[v].timeSteps.has(DEFAULT_FALLBACK_TMI));
+  }
+  if (dateTimeVars.length > 0) {
+    dateTimeVars.sort((a, b) => sortDateTimeVariables(variables, a, b));
+    const determinedDateTimeVar = dateTimeVars[0]; // eslint-disable-line prefer-destructuring
+    checkDateTimeVariable(determinedDateTimeVar);
+    return determinedDateTimeVar;
+  }
+  return null;
+};
+
+/**
+ * Determine the auto time step for the detected available time steps
+ * based on data files, the variables and the order of defined datetime
+ * variables in the file, and the set of variables available for each
+ * derived time step from the variables file.
+ * Finds the first available datetime variable in the variables file
+ * and find the lowest resolution time step that applies to the
+ * identified datetime variable.
+ * @param {Object} availableTimeSteps
+ * @param {Object} timeStepVariables
+ * @param {Object} variables
+ * @returns
+ */
+const determineAutoTimeStep = (
+  availableTimeSteps,
+  timeStepVariables,
+  variables,
+) => {
+  const dateTimeVars = Object.keys(variables).filter((v) => variables[v].isDateTime);
+  if (dateTimeVars.length <= 0) {
+    return null;
+  }
+  dateTimeVars.sort((a, b) => sortDateTimeVariables(variables, a, b));
+  const dateTimeVariable = dateTimeVars[0];
+  checkDateTimeVariable(dateTimeVariable);
+  // Of the derived available time steps based on data files,
+  // find the set of time steps that include the first datetime
+  // variable found in the variables file
+  let dateTimeVariableTimeSteps = Array.from(availableTimeSteps)
+    .filter((timeStep) => (
+      exists(timeStepVariables[timeStep])
+        && timeStepVariables[timeStep].dateTimeVariables.has(dateTimeVariable)
+    ));
+  if (dateTimeVariableTimeSteps.length <= 0) {
+    // If we could not find by defined time step and datetime variable
+    // check for default in case we could not parse the variables file
+    // tables
+    const hasDefault = exists(timeStepVariables[DEFAULT_FALLBACK_TMI])
+      && timeStepVariables[DEFAULT_FALLBACK_TMI].dateTimeVariables.has(dateTimeVariable);
+    if (hasDefault) {
+      dateTimeVariableTimeSteps = Array.from(availableTimeSteps);
+    }
+  }
+  // Find the time step that has the lowest resolution for the
+  // current datetime variable
+  return Array.from(dateTimeVariableTimeSteps)
+    .reduce((acc, cur) => {
+      if (cur === 'auto') {
+        return acc;
+      }
+      if (acc === null) {
+        return cur;
+      }
+      return (TIME_STEPS[cur].seconds > TIME_STEPS[acc].seconds) ? cur : acc;
+    }, null);
 };
 
 /**
@@ -522,9 +647,10 @@ const parseSiteVariables = (previousVariables, siteCode, csv) => {
   const ignoreTables = new Set(['sensor_positions', 'science_review_flags']);
   // Build the set of variables using only the valid tables
   const variablesSet = new Set();
+  const timeStepVariables = {};
   variables.data
     .filter((variable) => validTables.has(variable.table) && !ignoreTables.has(variable.table))
-    .forEach((variable) => {
+    .forEach((variable, idx) => {
       const {
         table,
         fieldName,
@@ -541,6 +667,7 @@ const parseSiteVariables = (previousVariables, siteCode, csv) => {
         && variable.downloadPkg !== 'expanded'
         && !/QM$/.test(fieldName);
       variablesSet.add(fieldName);
+      const isDateTime = (variable.dataType === 'dateTime');
       if (!newStateVariables[fieldName]) {
         newStateVariables[fieldName] = {
           dataType,
@@ -552,14 +679,29 @@ const parseSiteVariables = (previousVariables, siteCode, csv) => {
           sites: new Set(),
           isSelectable,
           canBeDefault,
-          isDateTime: variable.dataType === 'dateTime',
+          isDateTime,
+          order: idx,
         };
+      }
+      if (!timeStepVariables[timeStep]) {
+        timeStepVariables[timeStep] = {
+          variables: new Set(),
+          dateTimeVariables: new Set(),
+        };
+      }
+      timeStepVariables[timeStep].variables.add(fieldName);
+      if (isDateTime) {
+        timeStepVariables[timeStep].dateTimeVariables.add(fieldName);
       }
       newStateVariables[fieldName].tables.add(table);
       newStateVariables[fieldName].timeSteps.add(timeStep);
       newStateVariables[fieldName].sites.add(siteCode);
     });
-  return { variablesSet, variablesObject: newStateVariables };
+  return {
+    variablesSet,
+    variablesObject: newStateVariables,
+    timeStepVariables,
+  };
 };
 
 const parsePosition = (position) => {
@@ -614,6 +756,7 @@ const applyDefaultsToSelection = (state, invalidDefaultVariables = new Set()) =>
     product,
     variables,
     selection,
+    timeStep: stateTimeStep,
   } = state;
   if (!Object.keys(product.sites).length) { return selection; }
   // Sites - Ensure the selection has at least one site (default to first in list)
@@ -637,6 +780,17 @@ const applyDefaultsToSelection = (state, invalidDefaultVariables = new Set()) =>
     positions.sort();
     selection.sites[idx].positions.push(positions[0]);
   });
+  // Determine the auto time step for initial selection
+  const { timeStep } = selection;
+  const isAutoTimeStep = (timeStep === 'auto');
+  if (isAutoTimeStep && (selection.autoTimeStep === null)) {
+    selection.autoTimeStep = determineAutoTimeStep(
+      stateTimeStep.availableTimeSteps,
+      stateTimeStep.variables,
+      variables,
+    );
+  }
+  const dataTimeStep = isAutoTimeStep ? selection.autoTimeStep : timeStep;
   // Variables
   selection.derivedVariableTable = {};
   let foundVarWithData = false;
@@ -652,28 +806,12 @@ const applyDefaultsToSelection = (state, invalidDefaultVariables = new Set()) =>
         selection.yAxes.y1.units = variables[defaultVar].units;
       }
     }
-    // Ensure the selection has at least one dateTime variable. Use the PREFERRED_DATETIME_VARIABLES
-    // list to sort the existing date time variables in order of preference and take the first one.
-    if (!selection.dateTimeVariable) {
-      const dateTimeVars = Object.keys(variables).filter((v) => variables[v].isDateTime);
-      if (dateTimeVars.length) {
-        dateTimeVars.sort((a, b) => {
-          const aIdx = PREFERRED_DATETIME_VARIABLES.indexOf(a);
-          const bIdx = PREFERRED_DATETIME_VARIABLES.indexOf(b);
-          if (aIdx === bIdx) { return 0; }
-          if (aIdx === -1 && bIdx !== -1) { return 1; }
-          if (aIdx !== -1 && bIdx === -1) { return -1; }
-          return aIdx < bIdx ? -1 : 1;
-        });
-        selection.dateTimeVariable = dateTimeVars[0]; // eslint-disable-line prefer-destructuring
-      }
-    }
+    // Ensure the selection has at least one dateTime variable
+    selection.dateTimeVariable = determineDateTimeVariable(variables, dataTimeStep);
   }
   // Generate a new continuous date range from the dateRange (which only contains bounds)
   selection.continuousDateRange = getContinuousDatesArray(selection.dateRange);
   // Generate new cumulative data ranges and standard deviations for all applicable y axes.
-  const { timeStep, autoTimeStep } = selection;
-  const dataTimeStep = timeStep === 'auto' ? autoTimeStep : timeStep;
   Object.keys(selection.yAxes).forEach((yAxis) => {
     if (selection.yAxes[yAxis].units === null) { return; }
     let combinedSum = 0;
@@ -710,7 +848,7 @@ const applyDefaultsToSelection = (state, invalidDefaultVariables = new Set()) =>
                   const checkSeries = timeStepTable.series[variable];
                   return checkSeries && checkSeries.count;
                 }
-                if (variableTableTimeStep === 'default') {
+                if (variableTableTimeStep === DEFAULT_FALLBACK_TMI) {
                   return true;
                 }
               }
@@ -936,19 +1074,12 @@ const reducer = (state, action) => {
         action.files,
       );
       newState.product.sites[action.siteCode] = parsedContent.siteObject;
-      newState.availableTimeSteps = new Set([
-        ...state.availableTimeSteps,
+      newState.timeStep.availableTimeSteps = new Set([
+        ...state.timeStep.availableTimeSteps,
         ...parsedContent.availableTimeSteps,
       ]);
-      if (newState.availableTimeSteps.size === 1) { // Need more than just 'auto'
+      if (newState.timeStep.availableTimeSteps.size === 1) { // Need more than just 'auto'
         return fail('This data product is not compatible with the Time Series Viewer (no valid time step found)');
-      }
-      if (state.selection.autoTimeStep === null) {
-        newState.selection.autoTimeStep = Array.from(newState.availableTimeSteps)
-          .reduce((acc, cur) => {
-            if (cur === 'auto') { return acc; }
-            return (acc === null || TIME_STEPS[cur].seconds > TIME_STEPS[acc].seconds) ? cur : acc;
-          }, null);
       }
       calcSelection();
       if (
@@ -986,6 +1117,13 @@ const reducer = (state, action) => {
         ...state.product.sites[action.siteCode].variables,
         ...parsedContent.variablesSet,
       ]);
+      newState.timeStep = {
+        ...state.timeStep,
+        variables: {
+          ...state.timeStep.variables,
+          ...parsedContent.timeStepVariables,
+        },
+      };
       newState.availableQualityFlags = new Set([
         ...state.availableQualityFlags,
         ...Object.keys(newState.variables).filter((v) => /QF$/.test(v) || /QFSciRvw$/.test(v)),
@@ -1204,7 +1342,7 @@ const reducer = (state, action) => {
       return newState;
     case 'selectTimeStep':
       newState.selection.isDefault = false;
-      if (!state.availableTimeSteps.has(action.timeStep)) { return state; }
+      if (!state.timeStep.availableTimeSteps.has(action.timeStep)) { return state; }
       newState.selection.timeStep = action.timeStep;
       calcSelection();
       calcStatus();

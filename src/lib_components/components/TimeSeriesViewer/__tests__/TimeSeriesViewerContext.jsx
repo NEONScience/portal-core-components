@@ -421,6 +421,7 @@ table,fieldName,description,dataType,units,downloadPkg,pubFormat
           isSelectable: false,
           canBeDefault: false,
           isDateTime: true,
+          order: 0,
         },
         windSpeedMean: {
           dataType: 'real',
@@ -433,6 +434,7 @@ table,fieldName,description,dataType,units,downloadPkg,pubFormat
           isSelectable: true,
           canBeDefault: true,
           isDateTime: false,
+          order: 1,
         },
         rangeFailQM: {
           dataType: 'real',
@@ -445,6 +447,7 @@ table,fieldName,description,dataType,units,downloadPkg,pubFormat
           isSelectable: true,
           canBeDefault: false,
           isDateTime: false,
+          order: 2,
         },
         calmWindQF: {
           dataType: 'signed integer',
@@ -457,6 +460,21 @@ table,fieldName,description,dataType,units,downloadPkg,pubFormat
           isSelectable: false,
           canBeDefault: false,
           isDateTime: false,
+          order: 4,
+        },
+      },
+      timeStepVariables: {
+        '15min': {
+          dateTimeVariables: new Set(),
+          variables: new Set(['calmWindQF']),
+        },
+        '2min': {
+          dateTimeVariables: new Set(['startDateTime']),
+          variables: new Set(['startDateTime', 'windSpeedMean', 'rangeFailQM']),
+        },
+        '30min': {
+          dateTimeVariables: new Set(),
+          variables: new Set(['rangeFailQM']),
         },
       },
     };
@@ -734,27 +752,36 @@ HOR.VER,name,description,start,end,xOffset,yOffset,zOffset
           positions: {},
         },
       };
+      state.timeStep = {
+        availableTimeSteps: new Set(['auto', '30min']),
+        variables: {
+          '30min': {
+            variables: new Set(['startDateTime', 'foo', 'endDate', 'zux', 'bar', 'startDate', 'endDateTime']),
+            dateTimeVariables: new Set(['startDateTime', 'startDate', 'endDate', 'endDateTime']),
+          }
+        },
+      };
       state.variables = {
         foo: {
-          canBeDefault: false, isDateTime: false, downloadPkg: 'basic', units: 'foos', tables: ['TABLE_30min'],
+          canBeDefault: false, isDateTime: false, downloadPkg: 'basic', units: 'foos', tables: ['TABLE_30min'], timeSteps: new Set(['30min']), order: 4,
         },
         endDate: {
-          canBeDefault: false, isDateTime: true, downloadPkg: 'basic', units: 'NA', tables: ['TABLE_30min'],
+          canBeDefault: false, isDateTime: true, downloadPkg: 'basic', units: 'NA', tables: ['TABLE_30min'], timeSteps: new Set(['30min']), order: 3,
         },
         zux: {
-          canBeDefault: false, isDateTime: false, downloadPkg: 'expanded', units: 'zuxs', tables: ['TABLE_30min'],
+          canBeDefault: false, isDateTime: false, downloadPkg: 'expanded', units: 'zuxs', tables: ['TABLE_30min'], timeSteps: new Set(['30min']), order: 5,
         },
         bar: {
-          canBeDefault: true, isDateTime: false, downloadPkg: 'basic', units: 'bars', tables: ['TABLE_30min'],
+          canBeDefault: true, isDateTime: false, downloadPkg: 'basic', units: 'bars', tables: ['TABLE_30min'], timeSteps: new Set(['30min']), order: 6,
         },
         startDate: {
-          canBeDefault: false, isDateTime: true, downloadPkg: 'basic', units: 'NA', tables: ['TABLE_30min'],
+          canBeDefault: false, isDateTime: true, downloadPkg: 'basic', units: 'NA', tables: ['TABLE_30min'], timeSteps: new Set(['30min']), order: 2,
         },
         startDateTime: {
-          canBeDefault: false, isDateTime: true, downloadPkg: 'basic', units: 'NA', tables: ['TABLE_30min'],
+          canBeDefault: false, isDateTime: true, downloadPkg: 'basic', units: 'NA', tables: ['TABLE_30min'], timeSteps: new Set(['30min']), order: 0,
         },
         endDateTime: {
-          canBeDefault: false, isDateTime: true, downloadPkg: 'basic', units: 'NA', tables: ['TABLE_30min'],
+          canBeDefault: false, isDateTime: true, downloadPkg: 'basic', units: 'NA', tables: ['TABLE_30min'], timeSteps: new Set(['30min']), order: 1,
         },
       };
     });
@@ -1107,10 +1134,10 @@ HOR.VER,name,description,start,end,xOffset,yOffset,zOffset
         expect(newState.product.sites.JERC.fetches.siteMonths['2020-01']).toStrictEqual({
           status: FETCH_STATUS.SUCCESS, error: null,
         });
-        expect(newState.availableTimeSteps).toStrictEqual(new Set(['auto']));
+        expect(newState.timeStep.availableTimeSteps).toStrictEqual(new Set(['auto']));
         expect(newState.status).toBe(TIME_SERIES_VIEWER_STATUS.ERROR);
       });
-      test('stores results and sets the autoTimeStep if not yet set', () => {
+      test('stores results and sets the available time steps from parsed file names', () => {
         const files = [
           { // invalid data file (timestep '75min' is not valid)
             name: 'NEON.D16.JERC.DP1.00001.001.000.030.002.2DWSD_2min.2020-01.basic.20210105T140638Z.csv',
@@ -1142,8 +1169,7 @@ HOR.VER,name,description,start,end,xOffset,yOffset,zOffset
           error: null,
           series: {},
         });
-        expect(newState.availableTimeSteps).toStrictEqual(new Set(['auto', '2min']));
-        expect(newState.selection.autoTimeStep).toBe('2min');
+        expect(newState.timeStep.availableTimeSteps).toStrictEqual(new Set(['auto', '2min']));
         expect(newState.status).toBe(TIME_SERIES_VIEWER_STATUS.LOADING_META);
       });
     });
@@ -1246,6 +1272,7 @@ t3_60min,v7QF,v7QFdesc,real,NA,basic,*
             tables: new Set(['t1_2min']),
             sites: new Set(['JERC']),
             timeSteps: new Set(['2min']),
+            order: 0,
           },
           v2: {
             canBeDefault: true,
@@ -1258,6 +1285,7 @@ t3_60min,v7QF,v7QFdesc,real,NA,basic,*
             tables: new Set(['t1_2min']),
             sites: new Set(['JERC']),
             timeSteps: new Set(['2min']),
+            order: 1,
           },
           v3QM: {
             canBeDefault: false,
@@ -1270,6 +1298,7 @@ t3_60min,v7QF,v7QFdesc,real,NA,basic,*
             tables: new Set(['t1_2min']),
             sites: new Set(['JERC']),
             timeSteps: new Set(['2min']),
+            order: 2,
           },
           v6: {
             canBeDefault: false,
@@ -1282,6 +1311,7 @@ t3_60min,v7QF,v7QFdesc,real,NA,basic,*
             tables: new Set(['t3_60min']),
             sites: new Set(['JERC']),
             timeSteps: new Set(['60min']),
+            order: 3,
           },
           v7QF: {
             canBeDefault: false,
@@ -1294,6 +1324,7 @@ t3_60min,v7QF,v7QFdesc,real,NA,basic,*
             tables: new Set(['t3_60min']),
             sites: new Set(['JERC']),
             timeSteps: new Set(['60min']),
+            order: 4,
           },
         });
         expect(newState.product.sites.JERC.variables)
@@ -1330,6 +1361,7 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
             tables: new Set(['t1_2min']),
             sites: new Set(['JERC']),
             timeSteps: new Set(['2min']),
+            order: 0,
           },
           v3QM: {
             canBeDefault: false,
@@ -1342,6 +1374,7 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
             tables: new Set(['t1_2min']),
             sites: new Set(['JERC']),
             timeSteps: new Set(['2min']),
+            order: 1,
           },
         });
         expect(newState.product.sites.JERC.variables)
@@ -2083,12 +2116,12 @@ t1_2min,v3QM,v3QMdesc,real,percent,basic,*
 
     describe('selectTimeStep', () => {
       test('does nothing if action time step is not available', () => {
-        state.availableTimeSteps = new Set(['auto', '2min', '30min']);
+        state.timeStep.availableTimeSteps = new Set(['auto', '2min', '30min']);
         const newState = reducer(state, { type: 'selectTimeStep', timeStep: '15min' });
         expect(newState).toStrictEqual(state);
       });
       test('applies action time step if available', () => {
-        state.availableTimeSteps = new Set(['auto', '2min', '30min']);
+        state.timeStep.availableTimeSteps = new Set(['auto', '2min', '30min']);
         state.selection.timeStep = 'auto';
         const newState = reducer(state, { type: 'selectTimeStep', timeStep: '30min' });
         expect(newState.selection.timeStep).toBe('30min');
