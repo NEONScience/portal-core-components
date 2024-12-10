@@ -17,7 +17,7 @@ import './assets/css/drupal-fonts.css';
 // This hash will be updated whenever fresh cached
 // assets are fetched.
 // -----------------------------------------------------------------------------
-const DRUPAL_THEME_CSS_ASSET_HASH = '51c2458ac1eebddc67c3a916baf5ee23';
+const DRUPAL_THEME_CSS_ASSET_HASH = 'e26dccb4b915a92adb9c77ae139e9824';
 // -----------------------------------------------------------------------------
 
 export const metadata: Metadata = {

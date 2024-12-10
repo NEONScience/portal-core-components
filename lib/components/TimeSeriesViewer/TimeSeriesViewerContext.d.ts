@@ -111,10 +111,10 @@ export namespace DEFAULT_STATE {
         }
         export let isDefault: boolean;
     }
-    export const availableQualityFlags: Set<any>;
+    export let availableQualityFlags: Set<any>;
     export namespace timeStep_1 {
-        export const availableTimeSteps: Set<string>;
-        const variables_2: {};
+        export let availableTimeSteps: Set<string>;
+        let variables_2: {};
         export { variables_2 as variables };
     }
     export { timeStep_1 as timeStep };

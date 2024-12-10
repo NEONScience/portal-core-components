@@ -335,7 +335,6 @@ const reducer = (
   state: WindRoseViewerState,
   action: WindRoseViewerActionTypes,
 ): WindRoseViewerState => {
-  console.log(action);
   const newState: WindRoseViewerState = { ...state };
   let wrfAction: FetchWindRoseFullfilledAction;
   let wrFailedAction: FetchWindRoseFailedAction;
@@ -639,7 +638,6 @@ const Provider: React.FC<ProviderProps> = (inProps: ProviderProps): React.JSX.El
     initialState.neonContextState = { ...neonContextState };
   }
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log(JSON.parse(JSON.stringify(state)));
   const {
     productCode,
     release,
