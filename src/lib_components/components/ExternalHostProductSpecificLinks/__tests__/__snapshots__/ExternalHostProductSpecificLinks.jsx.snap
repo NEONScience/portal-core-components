@@ -1099,7 +1099,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and no
       className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
       data-gtm-external-host="BOLD"
       data-gtm-product-code="DP1.10020.001"
-      href="http://v4.portal.boldsystems.org/result?query=BETN"
+      href="http://portal.boldsystems.org/result?query=BETN[recordsetcode]"
       onBlur={[Function]}
       onFocus={[Function]}
       rel="noopener noreferrer"
@@ -1113,7 +1113,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and no
       className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
       data-gtm-external-host="BOLD"
       data-gtm-product-code="DP1.10020.001"
-      href="http://v4.portal.boldsystems.org/result?query=BETP"
+      href="http://portal.boldsystems.org/result?query=BETP[recordsetcode]"
       onBlur={[Function]}
       onFocus={[Function]}
       rel="noopener noreferrer"
@@ -3813,7 +3813,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and si
       className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
       data-gtm-external-host="BOLD"
       data-gtm-product-code="DP1.10020.001"
-      href="http://v4.portal.boldsystems.org/result?query=BETN"
+      href="http://portal.boldsystems.org/result?query=BETN[recordsetcode]"
       onBlur={[Function]}
       onFocus={[Function]}
       rel="noopener noreferrer"
@@ -3827,7 +3827,7 @@ exports[`ExternalHostProductSpecificLinks renders with valid product code and si
       className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
       data-gtm-external-host="BOLD"
       data-gtm-product-code="DP1.10020.001"
-      href="http://v4.portal.boldsystems.org/result?query=BETP"
+      href="http://portal.boldsystems.org/result?query=BETP[recordsetcode]"
       onBlur={[Function]}
       onFocus={[Function]}
       rel="noopener noreferrer"
