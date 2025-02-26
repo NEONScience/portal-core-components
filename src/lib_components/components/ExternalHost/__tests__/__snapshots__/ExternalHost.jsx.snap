@@ -204,7 +204,7 @@ exports[`ExternalHost BOLD getProductLinks with a valid productCode 1`] = `
       className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
       data-gtm-external-host="BOLD"
       data-gtm-product-code="DP1.10020.001"
-      href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETN"
+      href="http://v4.boldsystems.org/index.php/Public_SearchTerms?query=BETN"
       onBlur={[Function]}
       onFocus={[Function]}
       rel="noopener noreferrer"
@@ -218,7 +218,7 @@ exports[`ExternalHost BOLD getProductLinks with a valid productCode 1`] = `
       className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
       data-gtm-external-host="BOLD"
       data-gtm-product-code="DP1.10020.001"
-      href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETP"
+      href="http://v4.boldsystems.org/index.php/Public_SearchTerms?query=BETP"
       onBlur={[Function]}
       onFocus={[Function]}
       rel="noopener noreferrer"

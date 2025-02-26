@@ -212,7 +212,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
                 className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
                 data-gtm-external-host="BOLD"
                 data-gtm-product-code="DP1.10020.001"
-                href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETN"
+                href="http://v4.boldsystems.org/index.php/Public_SearchTerms?query=BETN"
                 onBlur={[Function]}
                 onFocus={[Function]}
                 rel="noopener noreferrer"
@@ -226,7 +226,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
                 className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
                 data-gtm-external-host="BOLD"
                 data-gtm-product-code="DP1.10020.001"
-                href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETP"
+                href="http://v4.boldsystems.org/index.php/Public_SearchTerms?query=BETP"
                 onBlur={[Function]}
                 onFocus={[Function]}
                 rel="noopener noreferrer"
@@ -577,7 +577,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
                 className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
                 data-gtm-external-host="BOLD"
                 data-gtm-product-code="DP1.10020.001"
-                href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETN"
+                href="http://v4.boldsystems.org/index.php/Public_SearchTerms?query=BETN"
                 onBlur={[Function]}
                 onFocus={[Function]}
                 rel="noopener noreferrer"
@@ -591,7 +591,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
                 className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
                 data-gtm-external-host="BOLD"
                 data-gtm-product-code="DP1.10020.001"
-                href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETP"
+                href="http://v4.boldsystems.org/index.php/Public_SearchTerms?query=BETP"
                 onBlur={[Function]}
                 onFocus={[Function]}
                 rel="noopener noreferrer"
@@ -1030,7 +1030,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
                 data-gtm-external-host="BOLD"
                 data-gtm-product-code="DP1.10020.001"
-                href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETN"
+                href="http://v4.boldsystems.org/index.php/Public_SearchTerms?query=BETN"
                 onBlur={[Function]}
                 onFocus={[Function]}
                 rel="noopener noreferrer"
@@ -1044,7 +1044,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
                 data-gtm-external-host="BOLD"
                 data-gtm-product-code="DP1.10020.001"
-                href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETP"
+                href="http://v4.boldsystems.org/index.php/Public_SearchTerms?query=BETP"
                 onBlur={[Function]}
                 onFocus={[Function]}
                 rel="noopener noreferrer"
