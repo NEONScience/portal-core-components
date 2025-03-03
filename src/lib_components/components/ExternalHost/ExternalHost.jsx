@@ -259,7 +259,7 @@ const externalHosts = {
       return externalProducts[productCode].searches.map((search) => ({
         key: search.query,
         node: renderExternalHostLink(
-          `http://portal.boldsystems.org/result?query=${search.query}[%5Brecordsetcode%5D]`,
+          `https://portal.boldsystems.org/result?query=${search.query}[%5Brecordsetcode%5D]`,
           search.title,
           'BOLD',
           productCode,
