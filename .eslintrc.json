@@ -41,13 +41,14 @@
     ],
     "import/no-extraneous-dependencies": ["error", {"packageDir": "./"}],
     "import/no-relative-packages": 0,
-    "linebreak-style": ["error", "unix"],
+    "linebreak-style": ["warn", "unix"],
     "react/function-component-definition": 0,
     "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     "react/jsx-props-no-spreading": 0,
     "no-restricted-exports": 0,
     "no-shadow": "off",
-    "no-use-before-define": "off"
+    "no-use-before-define": "off",
+    "max-len": ["warn", { "ignoreComments": true, "code": 100 }]
   },
   "overrides": [
     {

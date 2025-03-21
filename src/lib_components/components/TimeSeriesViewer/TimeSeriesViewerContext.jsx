@@ -166,6 +166,7 @@ export const DEFAULT_STATE = {
     dateRange: [null, null],
     continuousDateRange: [],
     sites: {},
+    pointTotal: 0,
   },
   fetchReleases: { status: FETCH_STATUS.AWAITING_CALL, error: null },
   release: null,
@@ -298,6 +299,38 @@ export const summarizeTimeSteps = (steps, timeStep = null, pluralize = true) => 
   if (value.slice(value.length - 1) === '0') { value = value.slice(0, value.length - 2); }
   const plural = pluralize ? 's' : '';
   return `${value} ${intervals[breakIdx]}${plural}`;
+};
+
+export const calcPredictedPoints = (state, timeStep) => {
+  if (!state.selection.autoTimeStep) return 0;
+
+  // formula: points per hour (seconds in hour / Time Step seconds) x hours (24) x days in month x months x positions
+  // using seconds for points per hour since that is what TIME_STEPS has.
+  const days = 31;
+  const hours = 24;
+  const positions = getPositionCount(state.selection.sites);
+  const pointPerHour = getPointsPerHour(state, timeStep);
+  const monthsSelected = state.selection.continuousDateRange.length;
+
+  // if (timeStep === '2min')
+  // console.log("prediction for " + timeStep, pointPerHour, positions, pointPerHour * hours * days * monthsSelected * positions);
+
+  return pointPerHour * hours * days * monthsSelected * positions;
+};
+
+const getPointsPerHour = (state, currentTimeStep) => {
+  const secondsInHour = 3600;
+  const timeStep = currentTimeStep === 'auto' ? state.selection.autoTimeStep : currentTimeStep;
+  const timeStepSeconds = TIME_STEPS[timeStep].seconds;
+  return secondsInHour / timeStepSeconds;
+};
+
+const getPositionCount = (sitesArray) => {
+  let total = 0;
+  sitesArray.forEach((site) => {
+    total += site.positions.length;
+  });
+  return total;
 };
 
 // Array offsets and validators for use when splitting a data file URL
@@ -1232,6 +1265,18 @@ const reducer = (state, action) => {
         .positions[action.position]
         .data[action.month][action.downloadPkg][action.timeStep][action.table]
         .series = action.series;
+      /*  uncomment for troubleshooting to get number of points downloaded
+      try {
+        if (!newState.product.pointTotal || isNaN(newState.product.pointTotal))
+          newState.product.pointTotal = 0;
+
+        newState.product.pointTotal += action.series.endDateTime.data.length;
+        console.log("fetchDataFileSucceeded - newState.product.pointTotal", newState.product.pointTotal);
+        console.log("newState.selection.continuousDateRange.length", newState.selection.continuousDateRange.length);
+      } catch (error) {
+        console.log("my derpy code crashed", action);
+      }
+      */
       return newState;
 
     // Core Selection Actions
