@@ -304,18 +304,43 @@ export const summarizeTimeSteps = (steps, timeStep = null, pluralize = true) => 
 export const calcPredictedPoints = (state, timeStep) => {
   if (!state.selection.autoTimeStep) return 0;
 
-  // formula: points per hour (seconds in hour / Time Step seconds) x hours (24) x days in month x months x positions
+  // formula: points per hour (seconds in hour / Time Step seconds) x hours (months selected converted to hours) x positions x variables
   // using seconds for points per hour since that is what TIME_STEPS has.
-  const days = 31;
-  const hours = 24;
   const positions = getPositionCount(state.selection.sites);
   const pointPerHour = getPointsPerHour(state, timeStep);
-  const monthsSelected = state.selection.continuousDateRange.length;
+  const variables = state.selection.variables.length === 0 ? 1 : state.selection.variables.length;
+  const totalHours = getTotalHours(state);
 
-  // if (timeStep === '2min')
-  // console.log("prediction for " + timeStep, pointPerHour, positions, pointPerHour * hours * days * monthsSelected * positions);
+  // if (timeStep === '2min') {
+  //   console.log("prediction for " + timeStep, pointPerHour, totalHours, positions, variables, pointPerHour * totalHours * positions * variables);
+  //   console.log("hours", getTotalHours(state));
+  // }
 
-  return pointPerHour * hours * days * monthsSelected * positions;
+  return pointPerHour * totalHours * positions * variables;
+};
+
+const getTotalHours = (state) => {
+  const date1 = new Date(`${state.selection.dateRange[0]}-01T00:00:00Z`);
+  let date2;
+  if (state.selection.continuousDateRange.length === 1) {
+    const lastDay = getLastDayInMonth(state.selection.continuousDateRange[0].substring(5, 7));
+    date2 = new Date(`${state.selection.continuousDateRange[0]}-${lastDay}T23:59:59Z`);
+  }
+  else if (state.selection.dateRange.length === 2) {
+    const lastDay = getLastDayInMonth(state.selection.dateRange[1].substring(5, 7));
+    date2 = new Date(`${state.selection.dateRange[1]}-${lastDay}T23:59:59Z`);
+  }
+  else {
+    console.error('Unknown date range');
+  }
+  return Math.round((date2.getTime() - date1.getTime()) / 1000 / 60 / 60);
+};
+
+// month param is the month number.  This is ONE based not zero based like JS.
+const getLastDayInMonth = (month) => {
+  const monthAsNumber = Number.parseInt(month);
+  const days = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  return days[monthAsNumber];
 };
 
 const getPointsPerHour = (state, currentTimeStep) => {
