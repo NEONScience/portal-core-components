@@ -325,12 +325,10 @@ const getTotalHours = (state) => {
   if (state.selection.continuousDateRange.length === 1) {
     const lastDay = getLastDayInMonth(state.selection.continuousDateRange[0].substring(5, 7));
     date2 = new Date(`${state.selection.continuousDateRange[0]}-${lastDay}T23:59:59Z`);
-  }
-  else if (state.selection.dateRange.length === 2) {
+  } else if (state.selection.dateRange.length === 2) {
     const lastDay = getLastDayInMonth(state.selection.dateRange[1].substring(5, 7));
     date2 = new Date(`${state.selection.dateRange[1]}-${lastDay}T23:59:59Z`);
-  }
-  else {
+  } else {
     console.error('Unknown date range');
   }
   return Math.round((date2.getTime() - date1.getTime()) / 1000 / 60 / 60);

@@ -48,7 +48,8 @@
     "no-restricted-exports": 0,
     "no-shadow": "off",
     "no-use-before-define": "off",
-    "max-len": ["warn", { "ignoreComments": true, "code": 100 }]
+    "max-len": ["warn", { "ignoreComments": true, "code": 100 }],
+    "radix": ["as-needed"]
   },
   "overrides": [
     {
