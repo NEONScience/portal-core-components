@@ -22,6 +22,7 @@ import TimeSeriesViewerContext, {
   Y_AXIS_RANGE_MODE_DETAILS,
   summarizeTimeSteps,
   calcPredictedPoints,
+  POINTS_PERFORMANCE_LIMIT,
 } from './TimeSeriesViewerContext';
 
 const useStyles = makeStyles((theme) => ({
@@ -467,7 +468,6 @@ const TimeStepOption = () => {
   const handleChangeTimeStep = (event, timeStep) => {
     dispatch({ type: 'selectTimeStep', timeStep });
   };
-  const POINTS_PERFORMANCE_LIMIT = 250000;
 
   return (
     <ToggleButtonGroup

@@ -67,6 +67,8 @@ export const TIME_SERIES_VIEWER_STATUS_TITLES = {
   READY: null,
 };
 
+export const POINTS_PERFORMANCE_LIMIT = 250000;
+
 // List of common date-time variable names to verify against
 // The variables file ultimately controls the datetime variable that will
 // be utilized, this allows us to check for informational purposes
@@ -315,6 +317,17 @@ export const calcPredictedPoints = (state, timeStep) => {
   //   console.log("prediction for " + timeStep, pointPerHour, totalHours, positions, variables, pointPerHour * totalHours * positions * variables);
   //   console.log("hours", getTotalHours(state));
   // }
+
+  return pointPerHour * totalHours * positions * variables;
+};
+
+export const calcPredictedPointsForNewPosition = (state) => {
+  if (!state.selection.autoTimeStep) return 0;
+
+  const positions = getPositionCount(state.selection.sites) + 1;
+  const pointPerHour = getPointsPerHour(state, state.selection.timeStep);
+  const variables = state.selection.variables.length === 0 ? 1 : state.selection.variables.length;
+  const totalHours = getTotalHours(state);
 
   return pointPerHour * totalHours * positions * variables;
 };
@@ -1288,18 +1301,21 @@ const reducer = (state, action) => {
         .positions[action.position]
         .data[action.month][action.downloadPkg][action.timeStep][action.table]
         .series = action.series;
-      /*  uncomment for troubleshooting to get number of points downloaded
+      /*  uncomment for troubleshooting to get number of points downloaded */
       try {
-        if (!newState.product.pointTotal || isNaN(newState.product.pointTotal))
+        if (!newState.product.pointTotal || isNaN(newState.product.pointTotal)) {
           newState.product.pointTotal = 0;
+        }
 
         newState.product.pointTotal += action.series.endDateTime.data.length;
-        console.log("fetchDataFileSucceeded - newState.product.pointTotal", newState.product.pointTotal);
-        console.log("newState.selection.continuousDateRange.length", newState.selection.continuousDateRange.length);
+        // console.log("newState", newState);
+        // console.log("action", action);
+        console.log("fetchDataFileSucceeded - pointTotal", newState.product.pointTotal);
+        // console.log("newState.selection.continuousDateRange.length", newState.selection.continuousDateRange.length);
       } catch (error) {
         console.log("my derpy code crashed", action);
       }
-      */
+
       return newState;
 
     // Core Selection Actions
@@ -1852,6 +1868,7 @@ const Provider = (props) => {
       } else {
         const masterFetchToken = `fetchDataFiles.${uniqueId()}`;
         dispatch({ type: 'fetchDataFiles', token: masterFetchToken, fetches: dataActions });
+        console.log("Fetching data", state, dataFetches); // this is the point where we can capture the user fetch criteria
         forkJoinWithProgress(dataFetches).pipe(
           mergeMap(([finalResult, progress]) => merge(
             progress.pipe(

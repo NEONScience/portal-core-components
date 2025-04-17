@@ -61,7 +61,11 @@ import iconCoreAquaticSVG from '../SiteMap/svg/icon-site-core-aquatic.svg';
 import iconGradientTerrestrialSVG from '../SiteMap/svg/icon-site-gradient-terrestrial.svg';
 import iconGradientAquaticSVG from '../SiteMap/svg/icon-site-gradient-aquatic.svg';
 
-import TimeSeriesViewerContext, { TabComponentPropTypes } from './TimeSeriesViewerContext';
+import TimeSeriesViewerContext, {
+  TabComponentPropTypes,
+  calcPredictedPointsForNewPosition,
+  POINTS_PERFORMANCE_LIMIT,
+} from './TimeSeriesViewerContext';
 
 const ucWord = (word) => `${word.slice(0, 1).toUpperCase()}${word.slice(1).toLowerCase()}`;
 
@@ -783,6 +787,9 @@ function SelectPositionsButton(props) {
     setSelectDialogOpen(false);
     dispatch({ type: 'selectSitePositions', siteCode, positions: localSelectedPositions });
   };
+
+  const isDisabled = calcPredictedPointsForNewPosition(state) > POINTS_PERFORMANCE_LIMIT;
+
   return (
     <>
       <Button
@@ -790,6 +797,7 @@ function SelectPositionsButton(props) {
         variant="outlined"
         startIcon={<SelectIcon />}
         style={{ marginLeft: Theme.spacing(4) }}
+        disabled={isDisabled}
         onClick={() => {
           setLocalSelectedPositions(selectedPositions);
           setSelectDialogOpen(true);
@@ -1224,6 +1232,7 @@ const SitesSelect = () => {
 
   const [{ data: neonContextData }] = NeonContext.useNeonContextState();
   const { states: allStates, sites: allSites, domains: allDomains } = neonContextData;
+  let isDisabled = false;
 
   // Build list of selectable sites grouped by US state
   const selectableSiteCodes = Object.keys(state.product.sites);
@@ -1264,6 +1273,8 @@ const SitesSelect = () => {
     .filter((siteCode) => selectableSiteCodes.includes(siteCode));
 
   if (!selectableSitesCount) { return null; }
+  console.log("*** prediction: ", calcPredictedPointsForNewPosition(state));
+  isDisabled = calcPredictedPointsForNewPosition(state) > POINTS_PERFORMANCE_LIMIT;
 
   return (
     <NoSsr>
@@ -1271,6 +1282,7 @@ const SitesSelect = () => {
         <Select
           isMulti
           isSearchable
+          isDisabled={isDisabled}
           clearable={false}
           classes={classes}
           styles={selectStyles}
@@ -1310,6 +1322,8 @@ export default function TimeSeriesViewerSites(props) {
   }
 
   const selectedItems = state.selection.sites.map((site) => site.siteCode);
+  const isDisabled = calcPredictedPointsForNewPosition(state) > POINTS_PERFORMANCE_LIMIT;
+console.log("isDisabled", isDisabled);
   return (
     <div className={classes.root}>
       <div style={{ width: '100%', display: 'flex', alignItems: 'center' }}>
@@ -1319,7 +1333,7 @@ export default function TimeSeriesViewerSites(props) {
           selectionLimit={[1, 5]}
           selectedItems={selectedItems}
           validItems={Object.keys(state.product.sites)}
-          buttonProps={{ style: { size: 'large', marginLeft: Theme.spacing(1.5) } }}
+          buttonProps={{ style: { size: 'large', marginLeft: Theme.spacing(1.5) }, disabled: isDisabled }}
           onSave={(newSites) => { dispatch({ type: 'updateSelectedSites', siteCodes: newSites }); }}
         />
       </div>
