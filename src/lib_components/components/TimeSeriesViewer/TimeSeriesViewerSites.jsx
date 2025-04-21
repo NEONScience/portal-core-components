@@ -796,7 +796,7 @@ function SelectPositionsButton(props) {
       return false;
     }
   };
-  console.log(`*** prediction for ${localSelectedPositions.length} positions: `, calcPredictedPointsForNewPosition(state, localSelectedPositions.length));
+
   const isDisabled = calcPredictedPointsForNewPosition(state) > POINTS_PERFORMANCE_LIMIT;
 
   return (

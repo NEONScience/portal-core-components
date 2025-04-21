@@ -313,27 +313,41 @@ export const calcPredictedPoints = (state, timeStep) => {
   const variables = state.selection.variables.length === 0 ? 1 : state.selection.variables.length;
   const totalHours = getTotalHours(state);
 
-  // if (timeStep === '2min') {
-  //   console.log("prediction for " + timeStep, pointPerHour, totalHours, positions, variables, pointPerHour * totalHours * positions * variables);
-  //   console.log("hours", getTotalHours(state));
-  // }
-
   return pointPerHour * totalHours * positions * variables;
 };
 
-export const calcPredictedPointsForNewPosition = (state, newPositionsParam) => {
+export const calcPredictedPointsForNewPosition = (state, numNewPositions) => {
   if (!state.selection.autoTimeStep) return 0;
 
   let newPositions = 1;
 
-  if (newPositionsParam) {
-    newPositions = newPositionsParam;
+  if (numNewPositions) {
+    newPositions = numNewPositions;
   }
 
   const positions = getPositionCount(state.selection.sites) + newPositions;
   const pointPerHour = getPointsPerHour(state, state.selection.timeStep);
   const variables = state.selection.variables.length === 0 ? 1 : state.selection.variables.length;
   const totalHours = getTotalHours(state);
+
+  return pointPerHour * totalHours * positions * variables;
+};
+
+export const calcPredictedPointsForNewVariable = (state, numNewVariables) => {
+  if (!state.selection.autoTimeStep) return 0;
+
+  let newVariables = 1;
+
+  if (numNewVariables) {
+    newVariables = numNewVariables;
+  }
+
+  const positions = getPositionCount(state.selection.sites);
+  const pointPerHour = getPointsPerHour(state, state.selection.timeStep);
+  const totalHours = getTotalHours(state);
+  const variables = state.selection.variables.length === 0
+    ? 1 + newVariables
+    : state.selection.variables.length + newVariables;
 
   return pointPerHour * totalHours * positions * variables;
 };

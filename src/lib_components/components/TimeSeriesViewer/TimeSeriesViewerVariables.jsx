@@ -26,7 +26,10 @@ import SearchIcon from '@material-ui/icons/Search';
 import SelectAllIcon from '@material-ui/icons/DoneAll';
 
 import Theme from '../Theme/Theme';
-import TimeSeriesViewerContext from './TimeSeriesViewerContext';
+import TimeSeriesViewerContext, {
+  calcPredictedPointsForNewVariable,
+  POINTS_PERFORMANCE_LIMIT,
+} from './TimeSeriesViewerContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -444,12 +447,16 @@ export default function TimeSeriesViewerVariables() {
     );
   }
 
+  console.log("*** prediction: ", calcPredictedPointsForNewVariable(state));
+  const isDisabled = calcPredictedPointsForNewVariable(state) > POINTS_PERFORMANCE_LIMIT;
+
   return (
     <div className={classes.root}>
       <NoSsr>
         <Select
           isMulti
           isSearchable
+          isDisabled={isDisabled}
           clearable={false}
           classes={classes}
           styles={selectStyles}
