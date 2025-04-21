@@ -321,10 +321,16 @@ export const calcPredictedPoints = (state, timeStep) => {
   return pointPerHour * totalHours * positions * variables;
 };
 
-export const calcPredictedPointsForNewPosition = (state) => {
+export const calcPredictedPointsForNewPosition = (state, newPositionsParam) => {
   if (!state.selection.autoTimeStep) return 0;
 
-  const positions = getPositionCount(state.selection.sites) + 1;
+  let newPositions = 1;
+
+  if (newPositionsParam) {
+    newPositions = newPositionsParam;
+  }
+
+  const positions = getPositionCount(state.selection.sites) + newPositions;
   const pointPerHour = getPointsPerHour(state, state.selection.timeStep);
   const variables = state.selection.variables.length === 0 ? 1 : state.selection.variables.length;
   const totalHours = getTotalHours(state);

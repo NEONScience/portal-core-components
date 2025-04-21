@@ -787,7 +787,16 @@ function SelectPositionsButton(props) {
     setSelectDialogOpen(false);
     dispatch({ type: 'selectSitePositions', siteCode, positions: localSelectedPositions });
   };
-
+  const isApplyButtonDisabled = (selectedPositions2) => {
+    if (!selectedPositions2.length) {
+      return true;
+    } else if (calcPredictedPointsForNewPosition(state, selectedPositions2.length) > POINTS_PERFORMANCE_LIMIT) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  console.log(`*** prediction for ${localSelectedPositions.length} positions: `, calcPredictedPointsForNewPosition(state, localSelectedPositions.length));
   const isDisabled = calcPredictedPointsForNewPosition(state) > POINTS_PERFORMANCE_LIMIT;
 
   return (
@@ -827,6 +836,19 @@ function SelectPositionsButton(props) {
               >
                 at least one is required
               </span>
+              <br />
+
+              <span style={{
+                fontWeight: 300,
+                fontStyle: 'italic',
+                visibility: calcPredictedPointsForNewPosition(state, localSelectedPositions.length) > POINTS_PERFORMANCE_LIMIT
+                  ? 'visible'
+                  : 'hidden',
+              }}
+              >
+                Number of positions selected may cause performance issues
+              </span>
+
             </Typography>
           </div>
         </DialogTitle>
@@ -873,7 +895,7 @@ function SelectPositionsButton(props) {
           <Button
             onClick={handleApply}
             variant="contained"
-            disabled={!localSelectedPositions.length}
+            disabled={isApplyButtonDisabled(localSelectedPositions)}
           >
             Apply
           </Button>
@@ -1273,7 +1295,7 @@ const SitesSelect = () => {
     .filter((siteCode) => selectableSiteCodes.includes(siteCode));
 
   if (!selectableSitesCount) { return null; }
-  console.log("*** prediction: ", calcPredictedPointsForNewPosition(state));
+
   isDisabled = calcPredictedPointsForNewPosition(state) > POINTS_PERFORMANCE_LIMIT;
 
   return (
@@ -1323,7 +1345,7 @@ export default function TimeSeriesViewerSites(props) {
 
   const selectedItems = state.selection.sites.map((site) => site.siteCode);
   const isDisabled = calcPredictedPointsForNewPosition(state) > POINTS_PERFORMANCE_LIMIT;
-console.log("isDisabled", isDisabled);
+
   return (
     <div className={classes.root}>
       <div style={{ width: '100%', display: 'flex', alignItems: 'center' }}>

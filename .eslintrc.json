@@ -49,7 +49,8 @@
     "no-shadow": "off",
     "no-use-before-define": "off",
     "max-len": ["warn", { "ignoreComments": true, "code": 100 }],
-    "radix": [0, "as-needed"]
+    "radix": [0, "as-needed"],
+    "no-else-return": 0
   },
   "overrides": [
     {
