@@ -447,7 +447,6 @@ export default function TimeSeriesViewerVariables() {
     );
   }
 
-  console.log("*** prediction: ", calcPredictedPointsForNewVariable(state));
   const isDisabled = calcPredictedPointsForNewVariable(state) > POINTS_PERFORMANCE_LIMIT;
 
   return (

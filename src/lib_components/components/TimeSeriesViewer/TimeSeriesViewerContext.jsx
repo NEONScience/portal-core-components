@@ -313,24 +313,18 @@ export const calcPredictedPoints = (state, timeStep) => {
   const variables = state.selection.variables.length === 0 ? 1 : state.selection.variables.length;
   const totalHours = getTotalHours(state);
 
-  return pointPerHour * totalHours * positions * variables;
+  return pointPerHour * totalHours * (positions + variables);
 };
 
-export const calcPredictedPointsForNewPosition = (state, numNewPositions) => {
+export const calcPredictedPointsForNewPosition = (state, numPositionsOverride) => {
   if (!state.selection.autoTimeStep) return 0;
 
-  let newPositions = 1;
-
-  if (numNewPositions) {
-    newPositions = numNewPositions;
-  }
-
-  const positions = getPositionCount(state.selection.sites) + newPositions;
+  const positions = numPositionsOverride ?? getPositionCount(state.selection.sites) + 1;
   const pointPerHour = getPointsPerHour(state, state.selection.timeStep);
   const variables = state.selection.variables.length === 0 ? 1 : state.selection.variables.length;
   const totalHours = getTotalHours(state);
-
-  return pointPerHour * totalHours * positions * variables;
+  // console.log("newPos", pointPerHour, totalHours, positions, variables, pointPerHour * totalHours * (positions + variables));
+  return pointPerHour * totalHours * (positions + variables);
 };
 
 export const calcPredictedPointsForNewVariable = (state, numNewVariables) => {
@@ -346,10 +340,10 @@ export const calcPredictedPointsForNewVariable = (state, numNewVariables) => {
   const pointPerHour = getPointsPerHour(state, state.selection.timeStep);
   const totalHours = getTotalHours(state);
   const variables = state.selection.variables.length === 0
-    ? 1 + newVariables
+    ? 1
     : state.selection.variables.length + newVariables;
-
-  return pointPerHour * totalHours * positions * variables;
+    // console.log("newVar", pointPerHour, totalHours, positions, variables, pointPerHour * totalHours * (positions + variables));
+  return pointPerHour * totalHours * (positions + variables);
 };
 
 const getTotalHours = (state) => {
