@@ -64,6 +64,7 @@ import iconGradientAquaticSVG from '../SiteMap/svg/icon-site-gradient-aquatic.sv
 import TimeSeriesViewerContext, {
   TabComponentPropTypes,
   calcPredictedPointsForNewPosition,
+  getPositionCount,
   POINTS_PERFORMANCE_LIMIT,
 } from './TimeSeriesViewerContext';
 
@@ -1343,8 +1344,24 @@ export default function TimeSeriesViewerSites(props) {
     );
   }
 
+  const calcUpperSelectionLimit = () => {
+    let upperLimit = 0;
+    const currentPositionCount = getPositionCount(state.selection.sites);
+
+    for (let upperLimitCandidate = 1; upperLimitCandidate <= 5; upperLimitCandidate++) {
+      const numNewPositions = currentPositionCount + upperLimitCandidate;
+
+      if (calcPredictedPointsForNewPosition(state, numNewPositions) < POINTS_PERFORMANCE_LIMIT) {
+        upperLimit = upperLimitCandidate;
+      }
+    }
+
+    return upperLimit;
+  };
+
   const selectedItems = state.selection.sites.map((site) => site.siteCode);
   const isDisabled = calcPredictedPointsForNewPosition(state) > POINTS_PERFORMANCE_LIMIT;
+  const upperLimit = Math.min(calcUpperSelectionLimit() + selectedItems.length, 5);
 
   return (
     <div className={classes.root}>
@@ -1352,7 +1369,7 @@ export default function TimeSeriesViewerSites(props) {
         <SitesSelect />
         <MapSelectionButton
           selection="SITES"
-          selectionLimit={[1, 5]}
+          selectionLimit={[1, upperLimit]}
           selectedItems={selectedItems}
           validItems={Object.keys(state.product.sites)}
           buttonProps={{ style: { size: 'large', marginLeft: Theme.spacing(1.5) }, disabled: isDisabled }}

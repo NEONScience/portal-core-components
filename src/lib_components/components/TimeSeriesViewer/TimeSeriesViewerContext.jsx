@@ -327,23 +327,25 @@ export const calcPredictedPointsForNewPosition = (state, numPositionsOverride) =
   return pointPerHour * totalHours * (positions + variables);
 };
 
-export const calcPredictedPointsForNewVariable = (state, numNewVariables) => {
+export const calcPredictedPointsForNewVariable = (state) => {
   if (!state.selection.autoTimeStep) return 0;
-
-  let newVariables = 1;
-
-  if (numNewVariables) {
-    newVariables = numNewVariables;
-  }
 
   const positions = getPositionCount(state.selection.sites);
   const pointPerHour = getPointsPerHour(state, state.selection.timeStep);
   const totalHours = getTotalHours(state);
   const variables = state.selection.variables.length === 0
     ? 1
-    : state.selection.variables.length + newVariables;
+    : state.selection.variables.length + 1;
     // console.log("newVar", pointPerHour, totalHours, positions, variables, pointPerHour * totalHours * (positions + variables));
   return pointPerHour * totalHours * (positions + variables);
+};
+
+export const getPositionCount = (sitesArray) => {
+  let total = 0;
+  sitesArray.forEach((site) => {
+    total += site.positions.length;
+  });
+  return total;
 };
 
 const getTotalHours = (state) => {
@@ -373,14 +375,6 @@ const getPointsPerHour = (state, currentTimeStep) => {
   const timeStep = currentTimeStep === 'auto' ? state.selection.autoTimeStep : currentTimeStep;
   const timeStepSeconds = TIME_STEPS[timeStep].seconds;
   return secondsInHour / timeStepSeconds;
-};
-
-const getPositionCount = (sitesArray) => {
-  let total = 0;
-  sitesArray.forEach((site) => {
-    total += site.positions.length;
-  });
-  return total;
 };
 
 // Array offsets and validators for use when splitting a data file URL
