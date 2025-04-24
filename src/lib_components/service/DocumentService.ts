@@ -12,6 +12,7 @@ import NeonEnvironment from '../components/NeonEnvironment/NeonEnvironment';
 import { exists, existsNonEmpty, isStringNonEmpty } from '../util/typeUtil';
 import { DataProductSpec, NeonDocument, QuickStartGuideDocument } from '../types/neonApi';
 import { Nullable } from '../types/core';
+import { getUserAgentHeader } from '../util/requestUtil';
 
 export interface DocumentTypeListItemDef {
   match: (type: string) => boolean;
@@ -383,7 +384,10 @@ const DocumentService: IDocumentService = {
         if (!isStringNonEmpty(filename)) {
           filename = document.name;
         }
-        fetch(apiPath)
+        const fetchHeaders: HeadersInit = {
+          'User-Agent': getUserAgentHeader('Documents'),
+        };
+        fetch(apiPath, { method: 'GET', headers: fetchHeaders })
           .then((downloadResponse: Response): Promise<Blob> => {
             if (!downloadResponse.ok || !downloadResponse.body) {
               throw new Error('Invalid download response');

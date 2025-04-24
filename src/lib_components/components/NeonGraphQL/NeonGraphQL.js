@@ -229,10 +229,14 @@ const getObservableWith = (type = null, dimensionality = null, args = null) => {
 };
 
 const NeonGraphQL = {
-  getDataProductByCode: (productCode, release) => getObservableWith(
+  getDataProductByCode: (
+    productCode,
+    release,
+    includeAvailableReleases = false,
+  ) => getObservableWith(
     TYPES.DATA_PRODUCTS,
     DIMENSIONALITIES.ONE,
-    { productCode, release },
+    { productCode, release, includeAvailableReleases },
   ),
   getAllDataProducts: (release, includeAvailableReleases = false) => getObservableWith(
     TYPES.DATA_PRODUCTS,

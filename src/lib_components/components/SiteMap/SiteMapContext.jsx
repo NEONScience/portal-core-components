@@ -6,7 +6,6 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 
-import cloneDeep from 'lodash/cloneDeep';
 import uniqueId from 'lodash/uniqueId';
 
 import { of, map, catchError } from 'rxjs';
@@ -25,7 +24,6 @@ import {
 } from './FetchLocationUtils';
 
 import {
-  DEFAULT_STATE,
   SORT_DIRECTIONS,
   BASE_LAYERS,
   OVERLAYS,
@@ -45,6 +43,7 @@ import {
   MIN_TABLE_MAX_BODY_HEIGHT,
   MANUAL_LOCATION_TYPES,
   GRAPHQL_LOCATIONS_API_CONSTANTS,
+  getDefaultState,
   getZoomedIcons,
   mapIsAtFocusLocation,
   getMapStateForFocusLocation,
@@ -54,6 +53,8 @@ import {
   calculateLocationsInBounds,
   deriveFullObservatoryZoomLevel,
 } from './SiteMapUtils';
+
+import { exists, existsNonEmpty } from '../../util/typeUtil';
 
 // Derive the selected status of a given region (US state or NEON domain). This should run every
 // time the list of selected items changes depending on the selecatble feature type. It regenerates
@@ -153,6 +154,38 @@ const centerIsValid = (center) => (
   && center.every((v) => (typeof v === 'number' && !Number.isNaN(v)))
 );
 
+const calculateSitesInBounds = (state) => {
+  const sites = [];
+  const stateLocations = state.featureData[FEATURE_TYPES.LOCATIONS.KEY];
+  if (!exists(stateLocations)) {
+    return sites;
+  }
+  const featureKeys = Object.keys(stateLocations);
+  if (!existsNonEmpty(featureKeys)) {
+    return sites;
+  }
+  featureKeys.forEach((featureKey) => {
+    if (!exists(stateLocations[featureKey])) {
+      return;
+    }
+    const siteCodeKeys = Object.keys(stateLocations[featureKey]);
+    if (!existsNonEmpty(featureKeys)) {
+      return;
+    }
+    siteCodeKeys.forEach((siteCode) => {
+      const siteLocations = stateLocations[featureKey][siteCode];
+      if (!exists(siteLocations) || !existsNonEmpty(Object.keys(siteLocations))) {
+        return;
+      }
+      const locations = calculateLocationsInBounds(siteLocations, state.map.bounds);
+      if ((locations.length > 0) && !sites.includes(siteCode)) {
+        sites.push(siteCode);
+      }
+    });
+  });
+  return sites;
+};
+
 // Creates fetch objects with an AWAITING_CALL status based on current state.
 // New fetches are created for all fetchable feature data found to be active (the feature is
 // available and visible), within the current bounds of the map, and not already fetched.
@@ -174,6 +207,12 @@ const calculateFeatureDataFetches = (state, requiredSites = []) => {
     });
   }
   const sitesInMap = calculateLocationsInBounds(sitesToConsider, state.map.bounds, true, 0.06);
+  const locationSitesInMap = calculateSitesInBounds(state);
+  if (Array.isArray(locationSitesInMap) && (locationSitesInMap.length > 0)) {
+    locationSitesInMap.forEach((siteCode) => {
+      if (!sitesInMap.includes(siteCode)) { sitesInMap.push(siteCode); }
+    });
+  }
   let requiredSitesArray = [];
   if (requiredSites && requiredSites.length) {
     requiredSitesArray = (
@@ -536,6 +575,7 @@ const setFetchStatusFromAction = (state, action, status) => {
             locNamesToFeatures[locName] = featureKey;
           });
         });
+      const checkSamplingPointGeo = {};
       Object.keys(data).forEach((locName) => {
         const featureKey = locNamesToFeatures[locName];
         if (!FEATURES[featureKey]) { return; }
@@ -560,6 +600,10 @@ const setFetchStatusFromAction = (state, action, status) => {
           if (!parentSiteData[parentLocName]) {
             parentSiteData[parentLocName] = {};
           }
+          // Check for valid location data
+          if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
+            return;
+          }
           // Initialize the geometry.coordinates with as many empty points as expressed by the map
           if (!parentSiteData[parentLocName].geometry) {
             parentSiteData[parentLocName].geometry = { coordinates: [] };
@@ -568,6 +612,14 @@ const setFetchStatusFromAction = (state, action, status) => {
             }
           }
           parentSiteData[parentLocName].geometry.coordinates[coordIdx] = [latitude, longitude];
+          const k = `${parentDataFeatureType}::${parentDataFeatureKey}::${siteCode}::${parentLocName}`;
+          checkSamplingPointGeo[k] = {
+            parentDataFeatureType,
+            parentDataFeatureKey,
+            siteCode,
+            parentLocName,
+            data: parentSiteData[parentLocName],
+          };
           return;
         }
         // This is a "normal" location that is not part of another point-based location
@@ -606,6 +658,29 @@ const setFetchStatusFromAction = (state, action, status) => {
           );
         }
       });
+      // If we could not identify a full set of valid points for
+      // defining the sample point boundary polygon, do not plot, reset coords
+      Object.keys(checkSamplingPointGeo).forEach((k) => {
+        const s = checkSamplingPointGeo[k];
+        let resetCoords = false;
+        let hasIncompleteValidSamplingPoints = false;
+        if (!s.data.geometry) {
+          resetCoords = true;
+        } else {
+          resetCoords = !s.data.geometry.coordinates.every((c) => (
+            Array.isArray(c) && (c.length === 2)
+          ));
+          hasIncompleteValidSamplingPoints = resetCoords;
+        }
+        if (resetCoords) {
+          // eslint-disable-next-line max-len
+          const v = newState.featureData[s.parentDataFeatureType][s.parentDataFeatureKey][s.siteCode][s.parentLocName];
+          v.geometry = { coordinates: [] };
+          if (hasIncompleteValidSamplingPoints) {
+            v.hasIncompleteValidSamplingPoints = true;
+          }
+        }
+      });
     }
     return newState;
   }
@@ -621,7 +696,7 @@ const reducer = (state, action) => {
   let newState = { ...state };
   const { validSet } = state.selection;
 
-  // Shortcuts for deailing with hierarchies
+  // Shortcuts for dealing with hierarchies
   const hierarchiesSource = FEATURE_DATA_SOURCES.REST_LOCATIONS_API;
   const hierarchiesType = FEATURE_TYPES.SITE_LOCATION_HIERARCHIES.KEY;
   switch (action.type) {
@@ -978,11 +1053,11 @@ const reducer = (state, action) => {
 };
 
 /** Context and Hook */
-const Context = createContext(DEFAULT_STATE);
+const Context = createContext(getDefaultState());
 const useSiteMapContext = () => {
   const hookResponse = useContext(Context);
   if (hookResponse.length !== 2) {
-    return [cloneDeep(DEFAULT_STATE), () => { }];
+    return [getDefaultState(), () => { }];
   }
   return hookResponse;
 };
@@ -1027,7 +1102,7 @@ const Provider = (props) => {
   */
   const initialMapZoom = mapZoom === null ? null
     : Math.max(Math.min(mapZoom, MAP_ZOOM_RANGE[1]), MAP_ZOOM_RANGE[0]);
-  let initialState = cloneDeep(DEFAULT_STATE);
+  let initialState = getDefaultState();
   initialState.view.current = (
     Object.keys(VIEWS).includes(view.toUpperCase()) ? view.toUpperCase() : VIEWS.MAP
   );

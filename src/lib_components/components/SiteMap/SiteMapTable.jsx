@@ -99,7 +99,7 @@ const exportCsv = (columns = [], rows = []) => {
               return '';
             }
             if (/["',\s]/.test(value.toString())) {
-              return `"${value.toString().replace('"', '\\"')}"`;
+              return `"${value.toString().replace(/"/g, '""')}"`;
             }
             return value;
           },

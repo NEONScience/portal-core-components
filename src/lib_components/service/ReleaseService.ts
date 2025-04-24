@@ -2,7 +2,7 @@ import NeonContextService from './NeonContextService';
 import { exists, existsNonEmpty, isStringNonEmpty } from '../util/typeUtil';
 import { UserRelease } from '../types/neonContext';
 import { Release as InternalRelease, IReleaseLike, ReleaseProps } from '../types/internal';
-import { DataProductDoiStatus, DataProductRelease } from '../types/neonApi';
+import { DataProductDoiStatus, DataProductRelease, DoiStatusType } from '../types/neonApi';
 import { Nullable } from '../types/core';
 
 export const LATEST_AND_PROVISIONAL = 'LATEST_AND_PROVISIONAL';
@@ -20,6 +20,20 @@ export interface IReleaseService {
    * @return True if the release tag is latest non-provisional like.
    */
   isLatestNonProv: (releaseTag: string) => boolean;
+  /**
+   * Determines if the specified release tag represents a "non" release.
+   * (eg. provisional)
+   * @param releaseTag The release tag to inspect.
+   * @return True if the release tag is a non-release.
+   */
+  isNonRelease: (releaseTag: string) => boolean;
+  /**
+   * Determines if the specified release tag represents a provisional "release".
+   * (eg. provisional)
+   * @param releaseTag The release tag to inspect.
+   * @return True if the release tag is a provisional "release".
+   */
+  isProv: (releaseTag: string) => boolean;
   /**
    * Determines if the IReleaseLike object adheres to an InternalRelease object.
    * @param release The release to check.
@@ -55,6 +69,13 @@ export interface IReleaseService {
    * @return The transformed release like representation
    */
   transformDoiStatusRelease: (doiStatus: Nullable<DataProductDoiStatus>) => Nullable<IReleaseLike>;
+  /**
+   * Determines if the release tag indicates that the data availability
+   * chart should delineate release data
+   * @param releaseTag The tag to check against
+   * @returns True if the release should be delineated
+   */
+  determineDelineateAvaRelease: (releaseTag: Nullable<string>) => boolean;
 }
 
 const ReleaseService: IReleaseService = {
@@ -63,6 +84,28 @@ const ReleaseService: IReleaseService = {
   isLatestNonProv: (releaseTag: string): boolean => {
     const matches: RegExpExecArray|null = ReleaseService.getProvReleaseRegex().exec(releaseTag);
     return exists(matches) && ((matches as RegExpExecArray).length > 0);
+  },
+  isNonRelease: (releaseTag: string): boolean => {
+    // eslint-disable-next-line prefer-regex-literals
+    const regexLatestProv: RegExp = new RegExp(`^${LATEST_AND_PROVISIONAL}$`, 'i');
+    // eslint-disable-next-line prefer-regex-literals
+    const regexProv: RegExp = new RegExp(`^${PROVISIONAL_RELEASE}$`, 'i');
+    const matchesLatestProv: RegExpExecArray|null = regexLatestProv.exec(releaseTag);
+    const matchesProv: RegExpExecArray|null = regexProv.exec(releaseTag);
+    const isLatestProv = exists(matchesLatestProv)
+      && ((matchesLatestProv as RegExpExecArray).length > 0);
+    const isProv = exists(matchesProv)
+      && ((matchesProv as RegExpExecArray).length > 0);
+    return isLatestProv || isProv;
+  },
+  isProv: (releaseTag: string): boolean => {
+    if (!isStringNonEmpty(releaseTag)) {
+      return true;
+    }
+    // eslint-disable-next-line prefer-regex-literals
+    const regexProv: RegExp = new RegExp(`^${PROVISIONAL_RELEASE}$`, 'i');
+    const matchesProv: RegExpExecArray|null = regexProv.exec(releaseTag);
+    return exists(matchesProv) && ((matchesProv as RegExpExecArray).length > 0);
   },
   isInternalReleaseLike: (release: IReleaseLike): boolean => {
     let isLike = true;
@@ -180,10 +223,16 @@ const ReleaseService: IReleaseService = {
       description: appliedDoiStatus.release,
       showCitation: true,
       showDoi: true,
-      showViz: false,
+      showViz: exists(appliedDoiStatus.status)
+        && (appliedDoiStatus.status === DoiStatusType.FINDABLE),
     };
     return transformed as IReleaseLike;
   },
+  determineDelineateAvaRelease: (releaseTag: Nullable<string>): boolean => (
+    !isStringNonEmpty(releaseTag)
+      || (releaseTag === LATEST_AND_PROVISIONAL)
+      || ReleaseService.isLatestNonProv(releaseTag as string)
+  ),
 };
 
 export default ReleaseService;

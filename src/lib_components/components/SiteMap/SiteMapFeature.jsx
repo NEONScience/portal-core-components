@@ -41,6 +41,7 @@ import {
 import SiteMapContext from './SiteMapContext';
 import {
   getHref,
+  isCoord,
   calculateLocationsInBounds,
   FEATURES,
   FEATURE_TYPES,
@@ -193,14 +194,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const positionsArrayIsValid = (positions, checkAllCoords = false) => {
-  if (!Array.isArray(positions) || positions.length === 0) { return false; }
+const checkValidPositions = (positions, checkAllCoords = false) => {
+  if (!Array.isArray(positions) || (positions.length === 0)) { return false; }
   if (!checkAllCoords) { return true; }
-  return positions.every((p) => (
-    Array.isArray(p) && (
-      (p.length === 2 && p.every((c) => Number.isFinite(c))) || positionsArrayIsValid(p)
-    )
-  ));
+  // Identify case where we have a coordinate, and therefore cannot
+  // have something in the positions array that is not an array
+  const hasMultiplePositions = Array.isArray(positions[0]);
+  if (hasMultiplePositions) {
+    return positions.every((p) => {
+      if (!Array.isArray(p)) { return false; }
+      return checkValidPositions(p, true);
+    });
+  }
+  // Identified a non array element, ensure it is a valid coordinate
+  return isCoord(positions);
 };
 
 const SiteMapFeature = (props) => {
@@ -1397,7 +1404,9 @@ const SiteMapFeature = (props) => {
     let interaction = {};
     let shapeProps = {};
     if (shapeData.geometry && shapeData.geometry.coordinates) {
-      positions = shapeData.geometry.coordinates;
+      if (checkValidPositions(shapeData.geometry.coordinates, true)) {
+        positions = shapeData.geometry.coordinates;
+      }
       // Polyline
       if (featureShape === 'Polyline') {
         shapeProps = {
@@ -1525,6 +1534,9 @@ const SiteMapFeature = (props) => {
       position = ['latitude', 'longitude'].every((k) => shapeKeys.includes(k))
         ? [shapeData.latitude, shapeData.longitude]
         : shapeData.geometry.coordinates;
+      if (!checkValidPositions(position, true)) {
+        position = [];
+      }
       if (state.map.zoomedIcons[featureKey] !== null) {
         const baseIcon = state.map.zoomedIcons[featureKey];
         const selection = isSelectable && isSelected
@@ -1605,7 +1617,7 @@ const SiteMapFeature = (props) => {
       case 'Polygon':
         // Only render polygon popups when not in area selection mode. Otherwise area selection
         // could neither start, move, nor end over feature shapes.
-        if (!positionsArrayIsValid(positions, featureType === FEATURE_TYPES.SAMPLING_POINTS.KEY)) {
+        if (!checkValidPositions(positions, featureType === FEATURE_TYPES.SAMPLING_POINTS.KEY)) {
           return null;
         }
         return state.map.mouseMode === MAP_MOUSE_MODES.AREA_SELECT ? (

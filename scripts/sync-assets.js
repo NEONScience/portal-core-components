@@ -16,7 +16,7 @@ import prettier from 'prettier';
 import { Command } from 'commander';
 import { fileURLToPath } from 'url';
 
-import packageJson from '../package.json' assert { type: 'json' };
+import packageJson from '../package.json' with { type: 'json' };
 
 const program = new Command();
 program.usage('Usage: node sync-assets.js [options]')
@@ -86,7 +86,7 @@ const syncCssAssets = () => {
         fs.writeFileSync(createFile, syncFileData, { encoding: 'utf8' });
       }
     });
-    Object.keys(SYNC_CSS_ASSET_INDEX).forEach((assetKey) => {
+    Object.keys(SYNC_CSS_ASSET_INDEX).forEach(async (assetKey) => {
       const assetIndex = SYNC_CSS_ASSET_INDEX[assetKey];
       if (assetFileName.startsWith(assetIndex.prefix)) {
         const indexFilePath = path.join(PUBLIC_OUTPUT_PATH, 'index.html');
@@ -100,13 +100,20 @@ const syncCssAssets = () => {
           }
           let indexFileOutput = dom.serialize();
           if (config.prettifyIndex) {
-            indexFileOutput = prettier.format(indexFileOutput, { parser: 'html', printWidth: 100 });
+            indexFileOutput = await prettier.format(
+              indexFileOutput,
+              {
+                parser: 'html',
+                printWidth: 100,
+              },
+            );
           }
           fs.writeFileSync(indexFilePath, indexFileOutput, { encoding: 'utf8' });
         }
       }
     });
   });
+  console.log('Finished processing assets');
 };
 
 syncCssAssets();

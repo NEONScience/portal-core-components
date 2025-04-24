@@ -58,6 +58,7 @@ describe('Utils - manifestUtil', () => {
       release: { value: 'release-foo', isValid: true },
       sites: { value: ['JERC', 'COMO'], isValid: true },
       dateRange: { value: ['2020-01', '2020-06'], isValid: true },
+      provisionalData: { value: 'exclude', isValid: true },
       documentation: { value: 'exclude', isValid: true },
       packageType: { value: 'basic', isValid: true },
     };
@@ -102,6 +103,7 @@ describe('Utils - manifestUtil', () => {
         release: 'release-foo',
         sites: ['JERC', 'COMO'],
         dateRange: ['2020-01', '2020-06'],
+        provisionalData: false,
         documentation: false,
         packageType: 'basic',
         isError: false,
@@ -131,6 +133,7 @@ describe('Utils - manifestUtil', () => {
       sites: ['JERC', 'COMO'],
       dateRange: ['2020-01', '2020-06'],
       documentation: true,
+      provisionalData: false,
       packageType: 'expanded',
       isError: false,
     };
@@ -143,7 +146,7 @@ describe('Utils - manifestUtil', () => {
     });
     test('returns the built url if useBody is false', () => {
       const url = buildManifestRequestUrl(config, false);
-      const expectedUrl = 'MANIFEST_REQUEST_URL?dpcode=NEON.DOM.SITE.DPx.xxxxx.xxx&startdate=2020-01&enddate=2020-06&pkgtype=expanded&includedocs=true&sitecode=JERC&sitecode=COMO';
+      const expectedUrl = 'MANIFEST_REQUEST_URL?dpcode=NEON.DOM.SITE.DPx.xxxxx.xxx&startdate=2020-01&enddate=2020-06&pkgtype=expanded&includedocs=true&includeProvisional=false&sitecode=JERC&sitecode=COMO';
       expect(url).toBe(expectedUrl);
     });
     test('handles NEON.DOM.SITE already being in config', () => {
@@ -152,7 +155,7 @@ describe('Utils - manifestUtil', () => {
       configA.productCode = 'NEON.DOM.SITE.DP0.00000.000';
 
       const url = buildManifestRequestUrl(configA, false);
-      const expectedUrl = 'MANIFEST_REQUEST_URL?dpcode=NEON.DOM.SITE.DP0.00000.000&startdate=2020-01&enddate=2020-06&pkgtype=expanded&includedocs=false&sitecode=JERC&sitecode=COMO';
+      const expectedUrl = 'MANIFEST_REQUEST_URL?dpcode=NEON.DOM.SITE.DP0.00000.000&startdate=2020-01&enddate=2020-06&pkgtype=expanded&includedocs=false&includeProvisional=false&sitecode=JERC&sitecode=COMO';
       expect(url).toBe(expectedUrl);
     });
   });
@@ -164,6 +167,7 @@ describe('Utils - manifestUtil', () => {
       sites: ['JERC', 'COMO'],
       dateRange: ['2020-01', '2020-06'],
       documentation: true,
+      provisionalData: false,
       packageType: 'expanded',
       isError: false,
     };
@@ -176,6 +180,7 @@ describe('Utils - manifestUtil', () => {
         release: 'release-foo',
         pkgType: 'expanded',
         includeDocs: true,
+        includeProvisional: false,
         presign: true,
       });
     });
@@ -190,6 +195,7 @@ describe('Utils - manifestUtil', () => {
         release: 'release-foo',
         pkgType: 'expanded',
         includeDocs: true,
+        includeProvisional: false,
         presign: true,
       });
     });
@@ -278,6 +284,7 @@ describe('Utils - manifestUtil', () => {
         sites: ['JERC', 'COMO'],
         dateRange: ['2020-01', '2020-06'],
         documentation: true,
+        provisionalData: false,
         packageType: 'expanded',
         isError: false,
       };
@@ -376,6 +383,7 @@ describe('Utils - manifestUtil', () => {
         ],
         siteCodes: ['JERC', 'BONA'],
         includeDocs: true,
+        includeProvisional: false,
       });
     });
   });

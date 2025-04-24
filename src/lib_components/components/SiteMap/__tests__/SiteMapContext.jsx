@@ -3,14 +3,12 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { renderHook } from '@testing-library/react-hooks';
 
-import cloneDeep from 'lodash/cloneDeep';
 import uniqueId from 'lodash/uniqueId';
 
 import SiteMapContext, { getTestableItems } from '../SiteMapContext';
 
 import {
   BASE_LAYERS,
-  DEFAULT_STATE,
   FETCH_STATUS,
   FEATURES,
   FEATURE_TYPES,
@@ -25,6 +23,7 @@ import {
   SITE_TERRAINS,
   SITE_LOCATION_HIERARCHIES_MIN_ZOOM,
   VIEWS,
+  getDefaultState,
   boundsAreValid,
   calculateLocationsInBounds,
   deriveFullObservatoryZoomLevel,
@@ -86,7 +85,7 @@ describe('SiteMap - SiteMapContext', () => {
       expect(Array.isArray(result.current)).toBe(true);
       expect(result.current.length).toBe(2);
       const [state, dispatch] = result.current;
-      expect(state).toStrictEqual(DEFAULT_STATE);
+      expect(state).toStrictEqual(getDefaultState());
       expect(typeof dispatch).toBe('function');
       expect(dispatch()).toBeUndefined();
     });
@@ -95,7 +94,7 @@ describe('SiteMap - SiteMapContext', () => {
   describe('deriveRegionSelections()', () => {
     let state;
     beforeEach(() => {
-      state = cloneDeep(DEFAULT_STATE);
+      state = getDefaultState();
       state.neonContextHydrated = true;
       state.featureData[FEATURE_TYPES.STATES.KEY][FEATURES.STATES.KEY] = {
         S1: { sites: new Set(['SITE_A', 'SITE_B', 'SITE_C']) },
@@ -228,7 +227,7 @@ describe('SiteMap - SiteMapContext', () => {
   describe('validateSelection()', () => {
     let state;
     beforeEach(() => {
-      state = cloneDeep(DEFAULT_STATE);
+      state = getDefaultState();
     });
     describe('no limits', () => {
       test('invalid if selection is empty', () => {
@@ -436,7 +435,7 @@ describe('SiteMap - SiteMapContext', () => {
       },
     } = FEATURES;
     beforeEach(() => {
-      state = cloneDeep(DEFAULT_STATE);
+      state = getDefaultState();
       state.sites = {
         SA: { domainCode: 'D16', terrain: SITE_TERRAINS.TERRESTRIAL },
         SB: { domainCode: 'D01', terrain: SITE_TERRAINS.AQUATIC },
@@ -880,7 +879,7 @@ describe('SiteMap - SiteMapContext', () => {
   describe('updateMapTileWithZoom()', () => {
     let state;
     beforeEach(() => {
-      state = cloneDeep(DEFAULT_STATE);
+      state = getDefaultState();
     });
     test('changes base layer to WORLD_IMAGERY when on NATGEO_WORLD_MAP and zooming to 17 or higher', () => {
       state.map.zoom = 17;
@@ -931,7 +930,7 @@ describe('SiteMap - SiteMapContext', () => {
   describe('completeOverallFetch()', () => {
     let state;
     beforeEach(() => {
-      state = cloneDeep(DEFAULT_STATE);
+      state = getDefaultState();
     });
     test('increments completed overall fetches without zeroing out if more are pending', () => {
       state.overallFetch = {
@@ -964,7 +963,7 @@ describe('SiteMap - SiteMapContext', () => {
   describe('applyFeatureVisibilityToChildren()', () => {
     let state;
     beforeEach(() => {
-      state = cloneDeep(DEFAULT_STATE);
+      state = getDefaultState();
     });
     test('takes no action if argument visiblity matches current feature visiblity', () => {
       Object.keys(state.filters.features.visible).forEach((k) => {
@@ -999,7 +998,7 @@ describe('SiteMap - SiteMapContext', () => {
   describe('applyFeatureVisibilityToParents()', () => {
     let state;
     beforeEach(() => {
-      state = cloneDeep(DEFAULT_STATE);
+      state = getDefaultState();
     });
     test('takes no action if the feature has no parent', () => {
       const newState = applyFeatureVisibilityToParents(state, FEATURES.DOMAINS.KEY);
@@ -1062,7 +1061,7 @@ describe('SiteMap - SiteMapContext', () => {
       },
     } = FEATURES;
     beforeEach(() => {
-      state = cloneDeep(DEFAULT_STATE);
+      state = getDefaultState();
     });
     test('does nothing for actions that do not specify a dataSource', () => {
       expect(
@@ -1417,6 +1416,56 @@ and so this test must be updated.`);
               features: {
                 [TOWER_PHENOLOGY_PLOT_BOUNDARIES]: {
                   fetchId: 'f7',
+                  locations: ['TPP1.phe.NW', 'TPP1.phe.SE', 'TPP1.phe.NE', 'TPP1.phe.SW'],
+                },
+              },
+              fetches: {
+                f7: {
+                  locations: ['TPP1.phe.NW', 'TPP1.phe.SE', 'TPP1.phe.NE', 'TPP1.phe.SW'],
+                  status: FETCH_STATUS.FETCHING,
+                },
+              },
+            },
+          };
+          const action = {
+            dataSource: GRAPHQL_LOCATIONS_API,
+            minZoom: TOWER_PHENOLOGY_PLOT_BOUNDARIES_MINZOOM,
+            siteCode: 'S3',
+            fetchId: 'f7',
+            data: {
+              'TPP1.phe.NW': {
+                name: 'foo', parent: 'TPP1.foo.all', latitude: 10, longitude: 14,
+              },
+              'TPP1.phe.SE': {
+                name: 'bar', parent: 'TPP1.foo.all', latitude: 13, longitude: 17,
+              },
+              'TPP1.phe.NE': {
+                name: 'qux', parent: 'TPP1.foo.all', latitude: 25, longitude: 75,
+              },
+              'TPP1.phe.SW': {
+                name: 'quo', parent: 'TPP1.foo.all', latitude: 38, longitude: 72
+              },
+            },
+          };
+          const newState = setFetchStatusFromAction(state, action, FETCH_STATUS.SUCCESS);
+          expect(
+            newState.featureDataFetches[GRAPHQL_LOCATIONS_API][TOWER_PHENOLOGY_PLOT_BOUNDARIES_MINZOOM].S3.fetches.f7.status,
+          ).toBe(FETCH_STATUS.SUCCESS);
+          expect(newState.featureData[LOCATIONS][TOWER_PHENOLOGY_PLOTS].S3['TPP1.foo.all']).toStrictEqual({
+            geometry: {
+              coordinates: [[10, 14], [25, 75], [13, 17], [38, 72]],
+            },
+          });
+        });
+        test('correctly handles sub-location data being piped up to parent locations, invalid', () => {
+          state.sites = {
+            S3: { stateCode: 'PR', domainCode: 'D09' },
+          };
+          state.featureDataFetches[GRAPHQL_LOCATIONS_API][TOWER_PHENOLOGY_PLOT_BOUNDARIES_MINZOOM] = {
+            S3: {
+              features: {
+                [TOWER_PHENOLOGY_PLOT_BOUNDARIES]: {
+                  fetchId: 'f7',
                   locations: ['TPP1.phe.NW', 'TPP1.phe.SE', 'TPP1.phe.XX', 'TPP1.phe.SW'],
                 },
               },
@@ -1451,8 +1500,9 @@ and so this test must be updated.`);
             newState.featureDataFetches[GRAPHQL_LOCATIONS_API][TOWER_PHENOLOGY_PLOT_BOUNDARIES_MINZOOM].S3.fetches.f7.status,
           ).toBe(FETCH_STATUS.SUCCESS);
           expect(newState.featureData[LOCATIONS][TOWER_PHENOLOGY_PLOTS].S3['TPP1.foo.all']).toStrictEqual({
+            hasIncompleteValidSamplingPoints: true,
             geometry: {
-              coordinates: [[10, 14], [], [13, 17], []],
+              coordinates: [],
             },
           });
         });
@@ -1463,7 +1513,7 @@ and so this test must be updated.`);
   describe('reducer()', () => {
     let state;
     beforeEach(() => {
-      state = cloneDeep(DEFAULT_STATE);
+      state = getDefaultState();
     });
     test('does nothing if passed an unsupported action type', () => {
       expect(reducer(state, { type: 'invalidActionType' })).toStrictEqual(state);

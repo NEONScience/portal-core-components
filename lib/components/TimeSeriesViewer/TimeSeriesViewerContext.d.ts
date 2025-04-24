@@ -112,7 +112,12 @@ export namespace DEFAULT_STATE {
         export const isDefault: boolean;
     }
     export const availableQualityFlags: Set<any>;
-    export const availableTimeSteps: Set<string>;
+    export namespace timeStep_1 {
+        export const availableTimeSteps: Set<string>;
+        const variables_2: {};
+        export { variables_2 as variables };
+    }
+    export { timeStep_1 as timeStep };
 }
 /**
    Time Step Definitions and Functions
@@ -163,6 +168,7 @@ export const TIME_STEPS: {
     '1day': {
         key: string;
         matchFileTableSuffix: string[];
+        matchFileTableIncludes: string[];
         tmi: string;
         seconds: number;
     };
@@ -257,7 +263,10 @@ export function getTestableItems(): {
             isDefault: boolean;
         };
         availableQualityFlags: Set<any>;
-        availableTimeSteps: Set<string>;
+        timeStep: {
+            availableTimeSteps: Set<string>;
+            variables: {};
+        };
     };
     FETCH_STATUS: {
         AWAITING_CALL: string;
@@ -320,7 +329,7 @@ declare namespace TimeSeriesViewerContext {
 /**
    Context Provider
 */
-declare function Provider(props: any): JSX.Element;
+declare function Provider(props: any): import("react/jsx-runtime").JSX.Element;
 declare namespace Provider {
     namespace propTypes {
         export { number as timeSeriesUniqueId };
@@ -417,7 +426,10 @@ declare function useTimeSeriesViewerState(): {
         isDefault: boolean;
     };
     availableQualityFlags: Set<any>;
-    availableTimeSteps: Set<string>;
+    timeStep: {
+        availableTimeSteps: Set<string>;
+        variables: {};
+    };
 } | ({
     mode: string;
     status: string;
@@ -489,7 +501,10 @@ declare function useTimeSeriesViewerState(): {
         isDefault: boolean;
     };
     availableQualityFlags: Set<any>;
-    availableTimeSteps: Set<string>;
+    timeStep: {
+        availableTimeSteps: Set<string>;
+        variables: {};
+    };
 } | (() => void))[];
 declare namespace TimeSeriesViewerPropTypes {
     export function productCode_3(props: any, propName: any, componentName: any): Error | null;

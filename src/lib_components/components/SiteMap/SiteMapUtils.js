@@ -63,8 +63,10 @@ import iconWetDepositionPointSVG from './svg/icon-wet-deposition-point.svg';
 import statesShapesJSON from '../../staticJSON/statesShapes.json';
 import domainsShapesJSON from '../../staticJSON/domainsShapes.json';
 
-const isCoord = (c) => Array.isArray(c) && c.length === 2 && c.every((x) => Number.isFinite(x));
 const round = (x) => Number.parseFloat(x.toFixed(4), 10);
+export const isCoord = (c) => Array.isArray(c)
+  && (c.length === 2)
+  && c.every((x) => Number.isFinite(x));
 
 export const MAP_ZOOM_RANGE = [1, 19];
 export const OBSERVATORY_CENTER = [52.68, -110.75];
@@ -1411,7 +1413,7 @@ const featureIsHiddenByDefault = (key) => {
   if (FEATURES[key].parent && !hidden) { hidden = featureIsHiddenByDefault(FEATURES[key].parent); }
   return hidden;
 };
-export const DEFAULT_STATE = {
+const DEFAULT_STATE = {
   view: {
     current: null,
     initialized: {
@@ -1572,6 +1574,8 @@ if (domainsShapesJSON) {
     };
   });
 }
+
+export const getDefaultState = () => cloneDeep(DEFAULT_STATE);
 
 /**
    PropTypes and defaultProps

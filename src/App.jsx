@@ -9,6 +9,8 @@ import NeonPage from './lib_components/components/NeonPage/NeonPage';
 import NeonRouter from './lib_components/components/NeonRouter/NeonRouter';
 
 import Home from './components/Home';
+import NeonEnvironment from './lib_components/components/NeonEnvironment/NeonEnvironment';
+import { isStringNonEmpty } from './lib_components/util/typeUtil';
 
 const BasicComponents = React.lazy(
   () => import('./components/BasicComponents'),
@@ -333,13 +335,15 @@ const sidebarLinks = [
 
 export default function App() {
   let sidebarSubtitle = null;
-  if (process.env.REACT_APP_VERSION) {
-    sidebarSubtitle = `version ${process.env.REACT_APP_VERSION}`;
+  const appVersion = NeonEnvironment.getReactAppVersion();
+  if (isStringNonEmpty(appVersion)) {
+    sidebarSubtitle = `version ${appVersion}`;
   }
   return (
     <NeonRouter>
       <NeonPage
         title="NEON Data Portal Core Components"
+        outerPageContainerMaxWidth="3000px"
         sidebarSubtitle={sidebarSubtitle}
         sidebarLinks={sidebarLinks}
         sidebarLinksAsStandaloneChildren

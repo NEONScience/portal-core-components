@@ -1,14 +1,12 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import cloneDeep from 'lodash/cloneDeep';
-
 import {
-  DEFAULT_STATE,
   FEATURES,
   FEATURE_TYPES,
   HIGHLIGHT_STATUS,
   SELECTION_STATUS,
+  getDefaultState,
 } from '../SiteMapUtils';
 import SiteMapContext from '../SiteMapContext';
 
@@ -44,7 +42,7 @@ jest.mock('../SiteMapContext', () => ({
 const { useSiteMapContext } = SiteMapContext;
 
 useSiteMapContext.mockReturnValue([{
-  ...cloneDeep(DEFAULT_STATE),
+  ...getDefaultState(),
   neonContextHydrated: true,
   map: {
     zoomedIcons: {

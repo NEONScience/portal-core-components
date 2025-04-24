@@ -20,6 +20,7 @@ export const buildManifestConfig = (
     dateRange: [],
     documentation: false,
     packageType: '',
+    provisionalData: false,
     isError: true,
   };
   let manifestConfigError = null;
@@ -43,6 +44,7 @@ export const buildManifestConfig = (
   config.dateRange = selection.dateRange.value;
   config.documentation = (selection.documentation.value === 'include');
   config.packageType = selection.packageType.value || defaultPackageType;
+  config.provisionalData = (selection.provisionalData.value === 'include');
   return config;
 };
 
@@ -61,6 +63,7 @@ export const buildManifestRequestUrl = (config: ManifestConfig, useBody = true):
     dateRange,
     packageType,
     documentation,
+    provisionalData,
   } = config;
   let url = NeonEnvironment.getFullDownloadApiPath('manifestRollup');
   if (!useBody) {
@@ -74,6 +77,7 @@ export const buildManifestRequestUrl = (config: ManifestConfig, useBody = true):
       `enddate=${dateRange[1]}`,
       `pkgtype=${packageType}`,
       `includedocs=${documentation ? 'true' : 'false'}`,
+      `includeProvisional=${provisionalData ? 'true' : 'false'}`,
       siteCodesParam,
     ];
     url = `${url}?${params.join('&')}`;
@@ -89,6 +93,7 @@ export const buildManifestRequestBody = (config: ManifestConfig): ManifestReques
     dateRange,
     packageType,
     documentation,
+    provisionalData,
   } = config;
   const productCodeParam = productCode.startsWith('NEON.DOM.SITE')
     ? productCode
@@ -101,6 +106,7 @@ export const buildManifestRequestBody = (config: ManifestConfig): ManifestReques
     release,
     pkgType: packageType,
     includeDocs: documentation,
+    includeProvisional: provisionalData,
     presign: true,
   };
 };
@@ -143,6 +149,7 @@ export const downloadAopManifest = (
   config: ManifestConfig,
   s3Files: Record<string, unknown>,
   documentation = 'include',
+  provisionalData = 'exclude',
 ) => {
   const siteCodes: string[] = [];
   const s3FileValues: Record<string, unknown>[] = s3Files.validValues as Record<string, unknown>[];
@@ -169,6 +176,7 @@ export const downloadAopManifest = (
     });
 
   const includeDocs = documentation === 'include';
+  const includeProvisional = provisionalData === 'include';
   const productCodeParam: string = config.productCode.startsWith('NEON.DOM.SITE')
     ? config.productCode
     : `NEON.DOM.SITE.${config.productCode}`;
@@ -182,6 +190,7 @@ export const downloadAopManifest = (
     manifestFiles: manifestS3Files,
     siteCodes,
     includeDocs,
+    includeProvisional,
   };
 
   return downloadManifest(manifestRequest);

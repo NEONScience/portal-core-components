@@ -54,6 +54,7 @@ import ExternalHostInfo from 'portal-core-components/lib/components/ExternalHost
         <ExternalHostInfo productCode="DP1.10108.001" />
         <ExternalHostInfo productCode="DP1.10055.001" />
         <ExternalHostInfo productCode="DP1.00001.001" />
+        <ExternalHostInfo productCode="DP2.00006.001" />
       </ExampleBlock>
       <CodeBlock>
         {`
@@ -61,6 +62,7 @@ import ExternalHostInfo from 'portal-core-components/lib/components/ExternalHost
 <ExternalHostInfo productCode="DP1.10108.001" />
 <ExternalHostInfo productCode="DP1.10055.001" />
 <ExternalHostInfo productCode="DP1.00001.001" />
+<ExternalHostInfo productCode="DP2.00006.001" />
         `}
       </CodeBlock>
 

@@ -37,12 +37,15 @@ import {
 import { forkJoinWithProgress } from '../../util/rxUtil';
 import makeStateStorage from '../../service/StateStorageService';
 import NeonSignInButtonState from '../NeonSignInButton/NeonSignInButtonState';
+import ReleaseService from '../../service/ReleaseService';
 // eslint-disable-next-line import/no-cycle
 import { convertStateForStorage, convertAOPInitialState } from './StateStorageConverter';
+import { exists, existsNonEmpty, isStringNonEmpty } from '../../util/typeUtil';
 
 const ALL_POSSIBLE_VALID_DATE_RANGE = ['2010-01', moment().format('YYYY-MM')];
 const ALL_POSSIBLE_VALID_DOCUMENTATION = ['include', 'exclude'];
 const ALL_POSSIBLE_VALID_PACKAGE_TYPE = ['basic', 'expanded'];
+const ALL_POSSIBLE_VALID_PROVISIONAL_DATA = ['include', 'exclude'];
 const AVAILABILITY_VIEW_MODES = ['summary', 'sites', 'states', 'domains'];
 
 const ALL_STEPS = {
@@ -64,6 +67,11 @@ const ALL_STEPS = {
     requiredStateKeys: ['packageType'],
     label: 'Package Type',
     title: 'Which package type do you want?',
+  },
+  provisionalData: {
+    requiredStateKeys: ['provisionalData'],
+    label: 'Provisional Data',
+    title: 'Do you want to include provisional data?',
   },
   sitesAndDateRange: {
     requiredStateKeys: ['sites', 'dateRange'],
@@ -87,8 +95,9 @@ const ALL_STEPS = {
 // If null will be interpreted as purely informational and completion does not apply.
 const DEFAULT_REQUIRED_STEPS = [
   { key: 'sitesAndDateRange', isComplete: false },
-  { key: 'documentation', isComplete: true },
+  { key: 'provisionalData', isComplete: true },
   { key: 'packageType', isComplete: false },
+  { key: 'documentation', isComplete: true },
   { key: 'policies', isComplete: false },
   { key: 'summary', isComplete: null },
 ];
@@ -114,7 +123,9 @@ const DEFAULT_STATE = {
   s3FileFetches: {}, // Where we keep individual fetch status for each site+yearMonth
   s3FileFetchProgress: 0, // Number to track progress of batch fetches for s3 files
   s3Files: {
+    maxNumFilesSelected: 60_000,
     value: [],
+    valueMap: {},
     cachedValues: [], // Where all fetched file records are cached
     validValues: [], // Subset of cached values in scope of current sites and date range values
     isValid: false,
@@ -163,6 +174,11 @@ const DEFAULT_STATE = {
     validValues: [...ALL_POSSIBLE_VALID_PACKAGE_TYPE],
     isValid: false,
   },
+  provisionalData: {
+    value: 'exclude',
+    validValues: [...ALL_POSSIBLE_VALID_PROVISIONAL_DATA],
+    isValid: true,
+  },
   policies: {
     value: false,
     validValues: null,
@@ -171,7 +187,16 @@ const DEFAULT_STATE = {
 };
 
 // State keys that have a common { value, validValues, isValid } shape and can be validated
-const VALIDATABLE_STATE_KEYS = ['release', 'sites', 'dateRange', 'documentation', 'packageType', 's3Files', 'policies'];
+const VALIDATABLE_STATE_KEYS = [
+  'release',
+  'sites',
+  'dateRange',
+  'documentation',
+  'packageType',
+  'provisionalData',
+  's3Files',
+  'policies',
+];
 
 // State keys that can be transfered between contexts through higher order state
 // (must be a subset of VALIDATABLE_STATE_KEYS)
@@ -179,7 +204,14 @@ const HIGHER_ORDER_TRANSFERABLE_STATE_KEYS = ['release', 'sites', 'dateRange'];
 
 // State keys that should trigger a new manifest (file size estimate) request when updated
 // (must be a subset of VALIDATABLE_STATE_KEYS)
-const MANIFEST_TRIGGERING_STATE_KEYS = ['release', 'sites', 'dateRange', 'documentation', 'packageType'];
+const MANIFEST_TRIGGERING_STATE_KEYS = [
+  'release',
+  'sites',
+  'dateRange',
+  'documentation',
+  'packageType',
+  'provisionalData',
+];
 
 // Regexes and associated capture group names for parse s3 file names and URLs
 const S3_PATTERN = {
@@ -195,11 +227,23 @@ const S3_PATTERN = {
 
 // VALIDATOR FUNCTIONS
 // Naive check, replace with a more robust JSON schema check
-const productDataIsValid = (productData) => (
-  typeof productData === 'object' && productData !== null
-  && typeof productData.productName === 'string'
-  && Array.isArray(productData.siteCodes)
-);
+const productDataIsValid = (productData) => {
+  if ((typeof productData !== 'object')
+      || (productData === null)
+      || (typeof productData.productName !== 'string')) {
+    return false;
+  }
+  const hasSiteCodes = Array.isArray(productData.siteCodes);
+  if (!hasSiteCodes) {
+    const externalHost = ExternalHost.getByProductCode(productData.productCode);
+    if (exists(externalHost)) {
+      const externalHostProduct = ExternalHost.getProductSpecificInfo(productData.productCode);
+      return exists(externalHostProduct)
+        && (externalHostProduct.allowNoAvailability === true);
+    }
+  }
+  return hasSiteCodes;
+};
 
 const yearMonthIsValid = (yearMonth = '') => {
   if (typeof yearMonth !== 'string') { return false; }
@@ -242,6 +286,11 @@ const newStateIsAllowable = (key, value) => {
         ALL_POSSIBLE_VALID_PACKAGE_TYPE.includes(value)
         || value === null
       );
+    case 'provisionalData':
+      return (
+        ALL_POSSIBLE_VALID_PROVISIONAL_DATA.includes(value)
+        || value === null
+      );
     case 's3Files':
       return (
         Array.isArray(value) && value.every((id) => typeof id === 'string')
@@ -257,7 +306,7 @@ const newStateIsAllowable = (key, value) => {
 // to be used in building a download manifest.
 const newStateIsValid = (key, value, validValues = []) => {
   if (!VALIDATABLE_STATE_KEYS.includes(key)) { return false; }
-  let idList = [];
+  const idList = {};
   switch (key) {
     case 'sites':
       return (
@@ -280,11 +329,13 @@ const newStateIsValid = (key, value, validValues = []) => {
           typeof f === 'object' && f !== null && typeof f.url === 'string' && f.url.length
         ))
       ) { return false; }
-      idList = validValues.map((fileObj) => fileObj.url);
+      validValues.forEach((fileObj) => {
+        idList[fileObj.url] = true;
+      });
       return (
         newStateIsAllowable(key, value)
         && value.length > 0
-        && value.every((id) => idList.includes(id))
+        && value.every((id) => idList[id] || false)
       );
     default:
       return (
@@ -349,6 +400,8 @@ const getValidValuesFromProductData = (productData, key) => {
       return [...ALL_POSSIBLE_VALID_DOCUMENTATION];
     case 'packageType':
       return [...ALL_POSSIBLE_VALID_PACKAGE_TYPE];
+    case 'provisionalData':
+      return [...ALL_POSSIBLE_VALID_PROVISIONAL_DATA];
     case 'policies':
       return null;
     default:
@@ -364,6 +417,7 @@ const getInitialStateFromProps = (props) => {
   const {
     productData,
     availabilityView,
+    release,
   } = props;
   if (!productDataIsValid(productData)) {
     return {
@@ -399,24 +453,24 @@ const getInitialStateFromProps = (props) => {
   let fromAOPManifest = false;
   let fromExternalHost = false;
   const externalHost = ExternalHost.getByProductCode(productData.productCode);
+  const externalHostProduct = ExternalHost.getProductSpecificInfo(productData.productCode);
   if (externalHost) {
-    switch (externalHost.hostType) {
-      case 'EXCLUSIVE_DATA':
-        fromManifest = false;
-        fromExternalHost = true;
-        requiredSteps = [
-          { key: 'externalExclusive', isComplete: null },
-        ];
-        break;
-      default:
-        fromExternalHost = true;
-        break;
+    fromExternalHost = true;
+    const allowNoAvailability = (externalHostProduct.allowNoAvailability === true);
+    const useExternalExclusiveData = (externalHost.hostType === ExternalHost.HOST_TYPES.EXCLUSIVE_DATA)
+      || (allowNoAvailability && !existsNonEmpty(productData.siteCodes));
+    if (useExternalExclusiveData) {
+      fromManifest = false;
+      requiredSteps = [
+        { key: 'externalExclusive', isComplete: null },
+      ];
     }
   } else if (isAOPPipeline) {
     fromManifest = false;
     fromAOPManifest = true;
     requiredSteps = [
       { key: 'sitesAndDateRange', isComplete: false },
+      { key: 'provisionalData', isComplete: true },
       { key: 's3Files', isComplete: false },
       { key: 'documentation', isComplete: true },
       { key: 'policies', isComplete: false },
@@ -426,6 +480,26 @@ const getInitialStateFromProps = (props) => {
   // Remove package type step if product does not offer expanded data
   if (productData.productHasExpanded === false && requiredSteps.some((step) => step.key === 'packageType')) {
     requiredSteps.splice(requiredSteps.findIndex((step) => step.key === 'packageType'), 1);
+  }
+  // Remove provisional data step if release specified and is not a non-release
+  const hasRelease = isStringNonEmpty(release);
+  const excludeProvisionalStep = hasRelease && !ReleaseService.isNonRelease(release);
+  const hasProvisionalDataStep = requiredSteps.some((step) => step.key === 'provisionalData');
+  let hasProvisionalData = false;
+  if (exists(productData) && existsNonEmpty(productData.siteCodes)) {
+    hasProvisionalData = productData.siteCodes.some((siteCode) => {
+      if (!existsNonEmpty(siteCode.availableReleases)) {
+        return false;
+      }
+      return siteCode.availableReleases.some((availableRelease) => (
+        ReleaseService.isProv(availableRelease.release)
+          && existsNonEmpty(availableRelease.availableMonths)
+      ));
+    });
+  }
+  if ((hasProvisionalDataStep && excludeProvisionalStep)
+      || (hasProvisionalDataStep && !hasProvisionalData)) {
+    requiredSteps.splice(requiredSteps.findIndex((step) => step.key === 'provisionalData'), 1);
   }
   initialState.requiredSteps = requiredSteps;
   initialState.fromManifest = fromManifest;
@@ -478,14 +552,50 @@ const getInitialStateFromProps = (props) => {
   return initialState;
 };
 
-const getS3FilesFilteredFileCount = (state) => state.s3Files.validValues.filter((row) => (
-  Object.keys(state.s3Files.filters).every((col) => {
+const getS3FilesFilterFunction = (state) => (row) => {
+  let allowValue = true;
+  const hasProvisionalDataStep = state.requiredSteps.some((step) => (
+    (step.key === 'provisionalData')
+  ));
+  const excludeProvisionalData = hasProvisionalDataStep
+    && (state.provisionalData.value === 'exclude');
+  if (excludeProvisionalData) {
+    allowValue = isStringNonEmpty(row.release) && !ReleaseService.isNonRelease(row.release);
+  }
+  const matchesFilters = Object.keys(state.s3Files.filters).every((col) => {
     if (col === 'name') {
       return (!state.s3Files.filters.name.length || row.name.includes(state.s3Files.filters.name));
     }
     return (!state.s3Files.filters[col].length || state.s3Files.filters[col].includes(row[col]));
-  })
-)).length;
+  });
+  return matchesFilters && allowValue;
+};
+
+const getS3FilesFilteredFileCount = (state) => {
+  const filtered = state.s3Files.validValues.filter(getS3FilesFilterFunction(state));
+  return filtered.length;
+};
+
+const calcS3FilesSummaryState = (previousState, action) => {
+  const newState = { ...previousState };
+  const s3FilesIdx = newState.requiredSteps.findIndex((step) => step.key === 's3Files');
+  // If we didn't already update the total size then recalculate it
+  if (action.type !== 'setIndividualS3FileSelected') {
+    newState.s3Files.totalSize = newState.s3Files.value
+      .map((id) => newState.s3Files.bytesByUrl[id])
+      .reduce((a, b) => a + b, 0);
+  }
+  // Step is only complete when there's a selection that's not too big
+  newState.s3Files.estimatedPostSize = estimatePostSize(newState.s3Files, newState.sites);
+  newState.s3Files.isValid = (
+    newState.s3Files.value.length > 0
+    && newState.s3Files.estimatedPostSize < MAX_POST_BODY_SIZE
+  );
+  newState.requiredSteps[s3FilesIdx].isComplete = newState.s3Files.isValid;
+  newState.allStepsComplete = newState.requiredSteps
+    .every((step) => step.isComplete || step.isComplete === null);
+  return newState;
+};
 
 // Generate a new full state object with a new value and isValid boolean for the
 // s3Files key. This is separate from other keys supported by getAndValidateNewState
@@ -504,6 +614,12 @@ const getAndValidateNewS3FilesState = (previousState, action, broadcast = false)
         return newState;
       }
       newState.s3Files.value = action.value;
+      newState.s3Files.valueMap = {};
+      if (existsNonEmpty(newState.s3Files.value)) {
+        newState.s3Files.value.forEach((value) => {
+          newState.s3Files.valueMap[value] = true;
+        });
+      }
       break;
 
     case 'setValidatableValue':
@@ -511,13 +627,25 @@ const getAndValidateNewS3FilesState = (previousState, action, broadcast = false)
         return newState;
       }
       newState.s3Files.value = action.value;
+      newState.s3Files.valueMap = {};
+      if (existsNonEmpty(newState.s3Files.value)) {
+        newState.s3Files.value.forEach((value) => {
+          newState.s3Files.valueMap[value] = true;
+        });
+      }
       newState.s3Files.validValues.forEach((file, idx) => {
-        newState.s3Files.validValues[idx].tableData.checked = newState.s3Files.value.includes(file.url);
+        newState.s3Files.validValues[idx].tableData.checked = newState.s3Files.valueMap[file.url] || false;
       });
       break;
 
     case 'setS3FilesValueSelectAll':
       newState.s3Files.value = newState.s3Files.validValues.map((file) => file.url);
+      newState.s3Files.valueMap = {};
+      if (existsNonEmpty(newState.s3Files.value)) {
+        newState.s3Files.value.forEach((value) => {
+          newState.s3Files.valueMap[value] = true;
+        });
+      }
       newState.s3Files.validValues.forEach((file, idx) => {
         newState.s3Files.validValues[idx].tableData.checked = true;
       });
@@ -525,6 +653,7 @@ const getAndValidateNewS3FilesState = (previousState, action, broadcast = false)
 
     case 'setS3FilesValueSelectNone':
       newState.s3Files.value = [];
+      newState.s3Files.valueMap = {};
       newState.s3Files.validValues.forEach((file, idx) => {
         newState.s3Files.validValues[idx].tableData.checked = false;
       });
@@ -532,15 +661,16 @@ const getAndValidateNewS3FilesState = (previousState, action, broadcast = false)
 
     case 'setS3FilesValueSelectFiltered':
       newState.s3Files.value = newState.s3Files.validValues
-        .filter((row) => Object.keys(newState.s3Files.filters).every((col) => {
-          if (col === 'name') {
-            return (!newState.s3Files.filters.name.length || row.name.includes(newState.s3Files.filters.name)); // eslint-disable-line max-len
-          }
-          return (!newState.s3Files.filters[col].length || newState.s3Files.filters[col].includes(row[col])); // eslint-disable-line max-len
-        }))
+        .filter(getS3FilesFilterFunction(newState))
         .map((file) => file.url);
+      newState.s3Files.valueMap = {};
+      if (existsNonEmpty(newState.s3Files.value)) {
+        newState.s3Files.value.forEach((value) => {
+          newState.s3Files.valueMap[value] = true;
+        });
+      }
       newState.s3Files.validValues.forEach((file, idx) => {
-        newState.s3Files.validValues[idx].tableData.checked = newState.s3Files.value.includes(file.url); // eslint-disable-line max-len
+        newState.s3Files.validValues[idx].tableData.checked = newState.s3Files.valueMap[file.url] || false; // eslint-disable-line max-len
       });
       break;
 
@@ -552,10 +682,12 @@ const getAndValidateNewS3FilesState = (previousState, action, broadcast = false)
       // just add/subtract the size of the file specified
       if (action.selected) {
         newState.s3Files.value.push(action.url);
+        newState.s3Files.valueMap[action.url] = true;
         newState.s3Files.totalSize += newState.s3Files.bytesByUrl[action.url];
       } else {
         if (newState.s3Files.value.indexOf(action.url) === -1) { return newState; }
         newState.s3Files.value.splice(newState.s3Files.value.indexOf(action.url), 1);
+        delete newState.s3Files.valueMap[action.url];
         newState.s3Files.totalSize -= newState.s3Files.bytesByUrl[action.url];
       }
       break;
@@ -563,25 +695,7 @@ const getAndValidateNewS3FilesState = (previousState, action, broadcast = false)
     default:
       return newState;
   }
-
-  // If we didn't already update the total size then recalculate it
-  if (action.type !== 'setIndividualS3FileSelected') {
-    newState.s3Files.totalSize = newState.s3Files.value
-      .map((id) => newState.s3Files.bytesByUrl[id])
-      .reduce((a, b) => a + b, 0);
-  }
-
-  // Step is only complete when there's a selection that's not too big
-  newState.s3Files.estimatedPostSize = estimatePostSize(newState.s3Files, newState.sites);
-  newState.s3Files.isValid = (
-    newState.s3Files.value.length > 0
-    && newState.s3Files.estimatedPostSize < MAX_POST_BODY_SIZE
-  );
-  newState.requiredSteps[s3FilesIdx].isComplete = newState.s3Files.isValid;
-  newState.allStepsComplete = newState.requiredSteps
-    .every((step) => step.isComplete || step.isComplete === null);
-
-  return newState;
+  return calcS3FilesSummaryState(newState, action);
 };
 
 // Generate new s3Files.validValues and s3Files filter values in state.
@@ -626,26 +740,22 @@ const regenerateS3FilesFiltersAndValidValues = (state) => {
     ))
     .map((file) => ({
       ...file,
-      tableData: { checked: updated.s3Files.value.includes(file.url) },
+      tableData: { checked: updated.s3Files.valueMap[file.url] || false },
     }));
-  // If cachedValues and validValues differ in size then rebuild valueLookups for
-  // filters, adjust filter selections to suit, and regenerate filtered file count.
   const filterKeys = Object.keys(updated.s3Files.valueLookups || {});
-  if (updated.s3Files.validValues.length < updated.s3Files.cachedValues.length) {
-    filterKeys.forEach((key) => {
-      updated.s3Files.valueLookups[key] = {};
+  filterKeys.forEach((key) => {
+    updated.s3Files.valueLookups[key] = {};
+  });
+  updated.s3Files.validValues.forEach((file) => {
+    filterKeys.forEach((lookup) => {
+      if (typeof file[lookup] === 'undefined') { return; }
+      updated.s3Files.valueLookups[lookup][file[lookup]] = file[lookup] || '(none)';
     });
-    updated.s3Files.validValues.forEach((file) => {
-      filterKeys.forEach((lookup) => {
-        if (typeof file[lookup] === 'undefined') { return; }
-        updated.s3Files.valueLookups[lookup][file[lookup]] = file[lookup] || '(none)';
-      });
-    });
-    filterKeys.forEach((key) => {
-      updated.s3Files.filters[key] = updated.s3Files.filters[key]
-        .filter((filterVal) => Object.keys(updated.s3Files.valueLookups[key]).includes(filterVal));
-    });
-  }
+  });
+  filterKeys.forEach((key) => {
+    updated.s3Files.filters[key] = updated.s3Files.filters[key]
+      .filter((filterVal) => Object.keys(updated.s3Files.valueLookups[key]).includes(filterVal));
+  });
   updated.s3Files.filteredFileCount = getS3FilesFilteredFileCount(updated);
   // Create an action to send to the reducer helper to set an updated value and revalidate.
   const action = {
@@ -674,7 +784,7 @@ const getAndValidateNewState = (previousState, action, broadcast = false) => {
   if (action.key === 's3Files') {
     return getAndValidateNewS3FilesState(previousState, action, broadcast);
   }
-  const newState = { ...previousState, broadcast };
+  let newState = { ...previousState, broadcast };
   const valueIsValid = newStateIsValid(
     action.key,
     action.value,
@@ -685,6 +795,39 @@ const getAndValidateNewState = (previousState, action, broadcast = false) => {
     value: action.value,
     isValid: valueIsValid,
   };
+  const hasProvDataStep = newState.requiredSteps.some((step) => step.key === 'provisionalData');
+  const hasS3FilesStep = newState.requiredSteps.some((step) => step.key === 's3Files');
+  if (hasProvDataStep
+    && hasS3FilesStep
+    && (action.key === 'provisionalData')
+  ) {
+    if (action.value === 'exclude') {
+      // Go through validValues, uncheck any provisional when set to exclude
+      if (existsNonEmpty(newState.s3Files.validValues)) {
+        newState.s3Files.value = [];
+        newState.s3Files.valueMap = {};
+        newState.s3Files.validValues = newState.s3Files.validValues.map((value) => {
+          const isProv = ReleaseService.isProv(value.release);
+          if (isProv) {
+            return {
+              ...value,
+              tableData: {
+                ...value.tableData,
+                checked: false,
+              },
+            };
+          }
+          if (value.tableData.checked) {
+            newState.s3Files.value.push(value.url);
+            newState.s3Files.valueMap[value.url] = true;
+          }
+          return value;
+        });
+        newState = calcS3FilesSummaryState(newState, action);
+      }
+    }
+    newState.s3Files.filteredFileCount = getS3FilesFilteredFileCount(newState);
+  }
   newState.requiredSteps = previousState.requiredSteps.map((step) => {
     const requiredStateKeys = ALL_STEPS[step.key] ? ALL_STEPS[step.key].requiredStateKeys : [];
     return step.isComplete === null
@@ -1174,6 +1317,12 @@ Provider.propTypes = {
       PropTypes.shape({
         siteCode: PropTypes.string.isRequired,
         availableMonths: PropTypes.arrayOf(PropTypes.string).isRequired,
+        availableReleases: PropTypes.arrayOf(
+          PropTypes.shape({
+            release: PropTypes.string.isRequired,
+            availableMonths: PropTypes.arrayOf(PropTypes.string).isRequired,
+          }),
+        ),
       }),
     ),
   }),
@@ -1184,6 +1333,7 @@ Provider.propTypes = {
   dateRange: PropTypes.arrayOf(PropTypes.string),
   documentation: PropTypes.oneOf(ALL_POSSIBLE_VALID_DOCUMENTATION),
   packageType: PropTypes.oneOf(ALL_POSSIBLE_VALID_PACKAGE_TYPE),
+  provisionalData: PropTypes.oneOf(ALL_POSSIBLE_VALID_PROVISIONAL_DATA),
   /* eslint-enable react/no-unused-prop-types */
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.oneOfType([
@@ -1205,6 +1355,7 @@ Provider.defaultProps = {
   dateRange: DEFAULT_STATE.dateRange.value,
   documentation: DEFAULT_STATE.documentation.value,
   packageType: DEFAULT_STATE.packageType.value,
+  provisionalData: DEFAULT_STATE.provisionalData.value,
 };
 
 const DownloadDataContext = {
@@ -1236,5 +1387,6 @@ export const getTestableItems = () => (
     ALL_POSSIBLE_VALID_DATE_RANGE,
     ALL_POSSIBLE_VALID_DOCUMENTATION,
     ALL_POSSIBLE_VALID_PACKAGE_TYPE,
+    ALL_POSSIBLE_VALID_PROVISIONAL_DATA,
   }
 );

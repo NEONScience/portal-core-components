@@ -7,9 +7,13 @@ module.exports = {
   moduleNameMapper: {
     '@stomp/stompjs': '<rootDir>/src/__mocks__/fileMock.js',
     '@stomp/rx-stomp': '<rootDir>/src/__mocks__/fileMock.js',
-    '(pdfjs-dist/legacy/build/pdf.worker)': '<rootDir>/src/__mocks__/constructorMock.js',
+    '(pdfjs-dist/build/pdf.worker.mjs)': '<rootDir>/src/__mocks__/constructorMock.js',
     '\\.(css|less)$': '<rootDir>/src/__mocks__/styleMock.js',
     '\\.(svg)$': '<rootDir>/src/__mocks__/svgMock.js',
+    'react-markdown': [
+      '<rootDir>/node_modules/react-markdown/react-markdown.min.js',
+      '<rootDir>/../node_modules/react-markdown/react-markdown.min.js',
+    ],
   },
   transform: {
     '\\.(js|jsx|ts|tsx)$': 'babel-jest',
@@ -18,8 +22,9 @@ module.exports = {
   // The dateformat module is in ES6 format and needs to be transformed.
   // Set Jest transform to ignore all node modules that aren't dateformat.
   transformIgnorePatterns: [
-    "node_modules/(?!dateformat|d3-[a-z]+)",
+    "node_modules/(?!(dateformat|remark-gfm|micromark-.+|decode-named-character-reference|character-entities|mdast-.*|escape-string-regexp|unist-util-.*|markdown-.*|ccount|d3-[a-z]+)/)",
   ],
+  globalSetup: '<rootDir>/scripts/jest-global-setup.js',
   setupFiles: [
     'jest-canvas-mock',
   ],

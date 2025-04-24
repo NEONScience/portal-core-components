@@ -24,6 +24,8 @@ export interface INeonEnvironment {
     authDisableWs: boolean;
     enableGlobalSignInState: boolean;
     fetchDrupalAssets: boolean;
+    getReactAppName: () => string;
+    getReactAppVersion: () => string;
     getRootApiPath: () => string;
     getRootGraphqlPath: () => string;
     getRootJsonLdPath: () => string;

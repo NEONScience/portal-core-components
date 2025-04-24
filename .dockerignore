@@ -1,0 +1,7 @@
+.git
+node_modules
+build
+test-coverage
+reference
+
+.DS_Store

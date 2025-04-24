@@ -1,7 +1,7 @@
 /**
    Main Function
 */
-declare function EnhancedAvailabilityKey(props: any): JSX.Element;
+declare function EnhancedAvailabilityKey(props: any): import("react/jsx-runtime").JSX.Element;
 declare namespace EnhancedAvailabilityKey {
     namespace propTypes {
         const selectionEnabled: PropTypes.Requireable<boolean>;

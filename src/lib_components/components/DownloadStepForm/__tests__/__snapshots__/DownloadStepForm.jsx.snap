@@ -21,7 +21,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
         >
           <span
             aria-disabled={false}
-            className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-16 MuiRadio-root MuiRadio-colorSecondary PrivateSwitchBase-checked-17 Mui-checked MuiIconButton-colorSecondary"
+            className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-17 MuiRadio-root MuiRadio-colorSecondary PrivateSwitchBase-checked-18 Mui-checked MuiIconButton-colorSecondary"
             onBlur={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
@@ -40,7 +40,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
             >
               <input
                 checked={true}
-                className="PrivateSwitchBase-input-19"
+                className="PrivateSwitchBase-input-20"
                 disabled={false}
                 name="documentation"
                 onChange={[Function]}
@@ -48,7 +48,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
                 value="include"
               />
               <div
-                className="PrivateRadioButtonIcon-root-20 PrivateRadioButtonIcon-checked-22"
+                className="PrivateRadioButtonIcon-root-21 PrivateRadioButtonIcon-checked-23"
               >
                 <svg
                   aria-hidden={true}
@@ -62,7 +62,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
                 </svg>
                 <svg
                   aria-hidden={true}
-                  className="MuiSvgIcon-root PrivateRadioButtonIcon-layer-21"
+                  className="MuiSvgIcon-root PrivateRadioButtonIcon-layer-22"
                   focusable="false"
                   viewBox="0 0 24 24"
                 >
@@ -97,7 +97,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
         >
           <span
             aria-disabled={false}
-            className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-16 MuiRadio-root MuiRadio-colorSecondary MuiIconButton-colorSecondary"
+            className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-17 MuiRadio-root MuiRadio-colorSecondary MuiIconButton-colorSecondary"
             onBlur={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
@@ -116,7 +116,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
             >
               <input
                 checked={false}
-                className="PrivateSwitchBase-input-19"
+                className="PrivateSwitchBase-input-20"
                 disabled={false}
                 name="documentation"
                 onChange={[Function]}
@@ -124,7 +124,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
                 value="exclude"
               />
               <div
-                className="PrivateRadioButtonIcon-root-20"
+                className="PrivateRadioButtonIcon-root-21"
               >
                 <svg
                   aria-hidden={true}
@@ -138,7 +138,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
                 </svg>
                 <svg
                   aria-hidden={true}
-                  className="MuiSvgIcon-root PrivateRadioButtonIcon-layer-21"
+                  className="MuiSvgIcon-root PrivateRadioButtonIcon-layer-22"
                   focusable="false"
                   viewBox="0 0 24 24"
                 >
@@ -247,7 +247,7 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
     >
       <span
         aria-disabled={false}
-        className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-16 MuiRadio-root MuiRadio-colorSecondary MuiIconButton-colorSecondary"
+        className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-17 MuiRadio-root MuiRadio-colorSecondary MuiIconButton-colorSecondary"
         onBlur={[Function]}
         onDragLeave={[Function]}
         onFocus={[Function]}
@@ -266,7 +266,7 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
         >
           <input
             checked={false}
-            className="PrivateSwitchBase-input-19"
+            className="PrivateSwitchBase-input-20"
             disabled={false}
             name="package-type"
             onChange={[Function]}
@@ -274,7 +274,7 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
             value="basic"
           />
           <div
-            className="PrivateRadioButtonIcon-root-20"
+            className="PrivateRadioButtonIcon-root-21"
           >
             <svg
               aria-hidden={true}
@@ -288,7 +288,7 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
             </svg>
             <svg
               aria-hidden={true}
-              className="MuiSvgIcon-root PrivateRadioButtonIcon-layer-21"
+              className="MuiSvgIcon-root PrivateRadioButtonIcon-layer-22"
               focusable="false"
               viewBox="0 0 24 24"
             >
@@ -310,11 +310,13 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
           >
             Basic
           </h6>
-          <p
-            className="MuiTypography-root MuiTypography-body2"
+          <div
+            className="makeStyles-markdownWrapper-16 MuiTypography-root MuiTypography-body2"
           >
-            Includes the data product, summary statistics, expanded uncertainty, and final quality flag
-          </p>
+            <p>
+              Includes the data product, summary statistics, expanded uncertainty, and final quality flag
+            </p>
+          </div>
         </div>
       </span>
     </label>
@@ -323,7 +325,7 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
     >
       <span
         aria-disabled={false}
-        className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-16 MuiRadio-root MuiRadio-colorSecondary PrivateSwitchBase-checked-17 Mui-checked MuiIconButton-colorSecondary"
+        className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-17 MuiRadio-root MuiRadio-colorSecondary PrivateSwitchBase-checked-18 Mui-checked MuiIconButton-colorSecondary"
         onBlur={[Function]}
         onDragLeave={[Function]}
         onFocus={[Function]}
@@ -342,7 +344,7 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
         >
           <input
             checked={true}
-            className="PrivateSwitchBase-input-19"
+            className="PrivateSwitchBase-input-20"
             disabled={false}
             name="package-type"
             onChange={[Function]}
@@ -350,7 +352,7 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
             value="expanded"
           />
           <div
-            className="PrivateRadioButtonIcon-root-20 PrivateRadioButtonIcon-checked-22"
+            className="PrivateRadioButtonIcon-root-21 PrivateRadioButtonIcon-checked-23"
           >
             <svg
               aria-hidden={true}
@@ -364,7 +366,7 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
             </svg>
             <svg
               aria-hidden={true}
-              className="MuiSvgIcon-root PrivateRadioButtonIcon-layer-21"
+              className="MuiSvgIcon-root PrivateRadioButtonIcon-layer-22"
               focusable="false"
               viewBox="0 0 24 24"
             >
@@ -386,11 +388,13 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
           >
             Expanded
           </h6>
-          <p
-            className="MuiTypography-root MuiTypography-body2"
+          <div
+            className="makeStyles-markdownWrapper-16 MuiTypography-root MuiTypography-body2"
           >
-            Includes the basic package information plus quality metrics for all of the quality assessment and quality control analysis
-          </p>
+            <p>
+              Includes the basic package information plus quality metrics for all of the quality assessment and quality control analysis
+            </p>
+          </div>
         </div>
       </span>
     </label>
@@ -423,7 +427,7 @@ exports[`DownloadStepForm Step policies renders correctly 1`] = `
   >
     <span
       aria-disabled={false}
-      className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-16 MuiCheckbox-root MuiCheckbox-colorPrimary MuiIconButton-colorPrimary"
+      className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-17 MuiCheckbox-root MuiCheckbox-colorPrimary MuiIconButton-colorPrimary"
       onBlur={[Function]}
       onDragLeave={[Function]}
       onFocus={[Function]}
@@ -442,7 +446,7 @@ exports[`DownloadStepForm Step policies renders correctly 1`] = `
       >
         <input
           checked={false}
-          className="PrivateSwitchBase-input-19"
+          className="PrivateSwitchBase-input-20"
           data-indeterminate={false}
           disabled={false}
           onChange={[Function]}
@@ -467,6 +471,233 @@ exports[`DownloadStepForm Step policies renders correctly 1`] = `
       I agree to the NEON Data Usage and Citation Policies.
     </span>
   </label>
+</div>
+`;
+
+exports[`DownloadStepForm Step provisionalData renders correctly 1`] = `
+<div
+  className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-flex-start"
+  data-selenium="download-data-dialog.step-form.provisional-data"
+>
+  <div
+    className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-6"
+  >
+    <fieldset
+      className="MuiFormControl-root"
+    >
+      <div
+        aria-label="Provisional Data"
+        className="MuiFormGroup-root"
+        role="radiogroup"
+      >
+        <label
+          className="MuiFormControlLabel-root makeStyles-radio-6"
+        >
+          <span
+            aria-disabled={false}
+            className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-17 MuiRadio-root MuiRadio-colorSecondary MuiIconButton-colorSecondary"
+            onBlur={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex={null}
+          >
+            <span
+              className="MuiIconButton-label"
+            >
+              <input
+                checked={false}
+                className="PrivateSwitchBase-input-20"
+                disabled={false}
+                name="provisional-data"
+                onChange={[Function]}
+                type="radio"
+                value="include"
+              />
+              <div
+                className="PrivateRadioButtonIcon-root-21"
+              >
+                <svg
+                  aria-hidden={true}
+                  className="MuiSvgIcon-root"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+                  />
+                </svg>
+                <svg
+                  aria-hidden={true}
+                  className="MuiSvgIcon-root PrivateRadioButtonIcon-layer-22"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M8.465 8.465C9.37 7.56 10.62 7 12 7C14.76 7 17 9.24 17 12C17 13.38 16.44 14.63 15.535 15.535C14.63 16.44 13.38 17 12 17C9.24 17 7 14.76 7 12C7 10.62 7.56 9.37 8.465 8.465Z"
+                  />
+                </svg>
+              </div>
+            </span>
+            <span
+              className="MuiTouchRipple-root"
+            />
+          </span>
+          <span
+            className="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+          >
+            <div
+              className="makeStyles-radioLabel-7"
+            >
+              <h6
+                className="MuiTypography-root MuiTypography-h6"
+              >
+                Include
+              </h6>
+              <p
+                className="MuiTypography-root MuiTypography-body2"
+              >
+                Include provisional data in this download package (
+                <b>
+                  Warning:
+                </b>
+                 subject to change and not reproducible)
+              </p>
+            </div>
+          </span>
+        </label>
+        <label
+          className="MuiFormControlLabel-root makeStyles-radio-6"
+        >
+          <span
+            aria-disabled={false}
+            className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-17 MuiRadio-root MuiRadio-colorSecondary PrivateSwitchBase-checked-18 Mui-checked MuiIconButton-colorSecondary"
+            onBlur={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex={null}
+          >
+            <span
+              className="MuiIconButton-label"
+            >
+              <input
+                checked={true}
+                className="PrivateSwitchBase-input-20"
+                disabled={false}
+                name="provisional-data"
+                onChange={[Function]}
+                type="radio"
+                value="exclude"
+              />
+              <div
+                className="PrivateRadioButtonIcon-root-21 PrivateRadioButtonIcon-checked-23"
+              >
+                <svg
+                  aria-hidden={true}
+                  className="MuiSvgIcon-root"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+                  />
+                </svg>
+                <svg
+                  aria-hidden={true}
+                  className="MuiSvgIcon-root PrivateRadioButtonIcon-layer-22"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M8.465 8.465C9.37 7.56 10.62 7 12 7C14.76 7 17 9.24 17 12C17 13.38 16.44 14.63 15.535 15.535C14.63 16.44 13.38 17 12 17C9.24 17 7 14.76 7 12C7 10.62 7.56 9.37 8.465 8.465Z"
+                  />
+                </svg>
+              </div>
+            </span>
+            <span
+              className="MuiTouchRipple-root"
+            />
+          </span>
+          <span
+            className="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+          >
+            <div
+              className="makeStyles-radioLabel-7"
+            >
+              <h6
+                className="MuiTypography-root MuiTypography-h6"
+              >
+                Exclude
+              </h6>
+              <p
+                className="MuiTypography-root MuiTypography-body2"
+              >
+                Release data only, no provisional data included in this download package
+              </p>
+            </div>
+          </span>
+        </label>
+      </div>
+    </fieldset>
+  </div>
+  <div
+    className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-6"
+  >
+    <div
+      className="MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded"
+      style={
+        Object {
+          "marginTop": 12,
+        }
+      }
+    >
+      <div
+        className="MuiCardContent-root makeStyles-startFlex-9"
+      >
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root makeStyles-calloutIcon-5 MuiSvgIcon-fontSizeLarge"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
+          />
+        </svg>
+        <p
+          className="MuiTypography-root MuiTypography-body1"
+        >
+          Learn more about data product revisions, releases and provisional data at 
+          <a
+            className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+            data-gtm="download-data-dialog.neon-data-revisions-releases-link"
+            href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases"
+            onBlur={[Function]}
+            onFocus={[Function]}
+            target="_blank"
+          >
+            NEON Data Revisions and Releases
+          </a>
+          .
+        </p>
+      </div>
+    </div>
+  </div>
 </div>
 `;
 
@@ -543,6 +774,7 @@ exports[`DownloadStepForm Step sitesAndDateRange renders correctly 1`] = `
 <div
   ComponentPath="../../DataProductAvailability/DataProductAvailability"
   prop-data-selenium="download-data-dialog.step-form.sites-and-date-range"
+  prop-delineateRelease={true}
 />
 `;
 
@@ -605,7 +837,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
             }
           >
             <div
-              className="MuiAvatar-root MuiAvatar-circular MuiChip-avatar makeStyles-avatarLarge-23 MuiChip-avatarColorSecondary MuiAvatar-colorDefault"
+              className="MuiAvatar-root MuiAvatar-circular MuiChip-avatar makeStyles-avatarLarge-24 MuiChip-avatarColorSecondary MuiAvatar-colorDefault"
               style={
                 Object {
                   "backgroundColor": "#002c77",
@@ -629,7 +861,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
             <span
               className="MuiChip-label"
             >
-              3 sites — Dec 2019 - Dec 2019
+              3 sites — Jan 2020 - Jan 2020
             </span>
           </div>
         </div>

@@ -30,11 +30,66 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
           y={0}
         />
         <rect
-          fill="#c5c6d9"
+          fill="#e1e3ea"
           height={1.75}
           width={7}
           x={0}
           y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedAvailableProvisionalPattern"
+        patternContentUnits="userSpaceOnUse"
+        patternUnits="objectBoundingBox"
+        width={1}
+        x={0}
+        y={0}
+      >
+        <polygon
+          fill="#e1e3ea"
+          fillOpacity={0.25}
+          points="0,0 0,1 1,1 1,0"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="3.46"
+          x2="7.00"
+          y1="0.00"
+          y2="3.54"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="7.00"
+          y1="0.07"
+          y2="7.07"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="7.00"
+          y1="3.61"
+          y2="10.61"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="4.85"
+          y1="7.15"
+          y2="12.00"
+        />
+        <polygon
+          fill="#002c77"
+          points="0,0 6,0 0,12"
         />
       </pattern>
       <pattern
@@ -573,11 +628,11 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
         className="makeStyles-keyElement-7"
         onClick={[Function]}
         role="button"
-        title="Data have been published and are available for download"
+        title="Data have been published and released. Data are available for download"
       >
         <svg
           height={14}
-          width={87}
+          width={151}
         >
           <rect
             fill="#002c77"
@@ -594,7 +649,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
             x={15}
             y={9}
           >
-            Available
+            Release Available
           </text>
         </svg>
       </div>
@@ -1008,11 +1063,66 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
           y={0}
         />
         <rect
-          fill="#c5c6d9"
+          fill="#e1e3ea"
           height={1.75}
           width={7}
           x={0}
           y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedAvailableProvisionalPattern"
+        patternContentUnits="userSpaceOnUse"
+        patternUnits="objectBoundingBox"
+        width={1}
+        x={0}
+        y={0}
+      >
+        <polygon
+          fill="#e1e3ea"
+          fillOpacity={0.25}
+          points="0,0 0,1 1,1 1,0"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="3.46"
+          x2="7.00"
+          y1="0.00"
+          y2="3.54"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="7.00"
+          y1="0.07"
+          y2="7.07"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="7.00"
+          y1="3.61"
+          y2="10.61"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="4.85"
+          y1="7.15"
+          y2="12.00"
+        />
+        <polygon
+          fill="#002c77"
+          points="0,0 6,0 0,12"
         />
       </pattern>
       <pattern
@@ -1551,11 +1661,11 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
         className="makeStyles-keyElement-7"
         onClick={[Function]}
         role="button"
-        title="Data have been published and are available for download"
+        title="Data have been published and released. Data are available for download"
       >
         <svg
           height={14}
-          width={87}
+          width={151}
         >
           <rect
             fill="#002c77"
@@ -1572,7 +1682,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
             x={15}
             y={9}
           >
-            Available
+            Release Available
           </text>
         </svg>
       </div>
@@ -1986,11 +2096,66 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
           y={0}
         />
         <rect
-          fill="#c5c6d9"
+          fill="#e1e3ea"
           height={1.75}
           width={7}
           x={0}
           y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedAvailableProvisionalPattern"
+        patternContentUnits="userSpaceOnUse"
+        patternUnits="objectBoundingBox"
+        width={1}
+        x={0}
+        y={0}
+      >
+        <polygon
+          fill="#e1e3ea"
+          fillOpacity={0.25}
+          points="0,0 0,1 1,1 1,0"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="3.46"
+          x2="7.00"
+          y1="0.00"
+          y2="3.54"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="7.00"
+          y1="0.07"
+          y2="7.07"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="7.00"
+          y1="3.61"
+          y2="10.61"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="4.85"
+          y1="7.15"
+          y2="12.00"
+        />
+        <polygon
+          fill="#002c77"
+          points="0,0 6,0 0,12"
         />
       </pattern>
       <pattern
@@ -2529,11 +2694,11 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
         className="makeStyles-keyElement-7"
         onClick={[Function]}
         role="button"
-        title="Data have been published and are available for download"
+        title="Data have been published and released. Data are available for download"
       >
         <svg
           height={14}
-          width={87}
+          width={151}
         >
           <rect
             fill="#002c77"
@@ -2550,7 +2715,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
             x={15}
             y={9}
           >
-            Available
+            Release Available
           </text>
         </svg>
       </div>
@@ -2964,11 +3129,66 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
           y={0}
         />
         <rect
-          fill="#c5c6d9"
+          fill="#e1e3ea"
           height={1.75}
           width={7}
           x={0}
           y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedAvailableProvisionalPattern"
+        patternContentUnits="userSpaceOnUse"
+        patternUnits="objectBoundingBox"
+        width={1}
+        x={0}
+        y={0}
+      >
+        <polygon
+          fill="#e1e3ea"
+          fillOpacity={0.25}
+          points="0,0 0,1 1,1 1,0"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="3.46"
+          x2="7.00"
+          y1="0.00"
+          y2="3.54"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="7.00"
+          y1="0.07"
+          y2="7.07"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="7.00"
+          y1="3.61"
+          y2="10.61"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="4.85"
+          y1="7.15"
+          y2="12.00"
+        />
+        <polygon
+          fill="#002c77"
+          points="0,0 6,0 0,12"
         />
       </pattern>
       <pattern
@@ -3534,11 +3754,11 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
         className="makeStyles-keyElement-7"
         onClick={[Function]}
         role="button"
-        title="Data have been published and are available for download"
+        title="Data have been published and released. Data are available for download"
       >
         <svg
           height={14}
-          width={87}
+          width={151}
         >
           <rect
             fill="#002c77"
@@ -3555,7 +3775,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
             x={15}
             y={9}
           >
-            Available
+            Release Available
           </text>
         </svg>
       </div>
@@ -3969,11 +4189,66 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
           y={0}
         />
         <rect
-          fill="#c5c6d9"
+          fill="#e1e3ea"
           height={1.75}
           width={7}
           x={0}
           y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedAvailableProvisionalPattern"
+        patternContentUnits="userSpaceOnUse"
+        patternUnits="objectBoundingBox"
+        width={1}
+        x={0}
+        y={0}
+      >
+        <polygon
+          fill="#e1e3ea"
+          fillOpacity={0.25}
+          points="0,0 0,1 1,1 1,0"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="3.46"
+          x2="7.00"
+          y1="0.00"
+          y2="3.54"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="7.00"
+          y1="0.07"
+          y2="7.07"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="7.00"
+          y1="3.61"
+          y2="10.61"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="4.85"
+          y1="7.15"
+          y2="12.00"
+        />
+        <polygon
+          fill="#002c77"
+          points="0,0 6,0 0,12"
         />
       </pattern>
       <pattern
@@ -4539,11 +4814,11 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
         className="makeStyles-keyElement-7"
         onClick={[Function]}
         role="button"
-        title="Data have been published and are available for download"
+        title="Data have been published and released. Data are available for download"
       >
         <svg
           height={14}
-          width={87}
+          width={151}
         >
           <rect
             fill="#002c77"
@@ -4560,7 +4835,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
             x={15}
             y={9}
           >
-            Available
+            Release Available
           </text>
         </svg>
       </div>

@@ -1,5 +1,5 @@
 export default EnhancedAvailabilityInterface;
-declare function EnhancedAvailabilityInterface(props: any): JSX.Element;
+declare function EnhancedAvailabilityInterface(props: any): import("react/jsx-runtime").JSX.Element;
 declare namespace EnhancedAvailabilityInterface {
     namespace propTypes {
         const sites: PropTypes.Requireable<(PropTypes.InferProps<{

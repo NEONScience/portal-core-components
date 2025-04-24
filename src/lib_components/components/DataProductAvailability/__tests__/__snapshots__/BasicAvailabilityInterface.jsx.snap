@@ -30,11 +30,66 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
           y={0}
         />
         <rect
-          fill="#c5c6d9"
+          fill="#e1e3ea"
           height={1.75}
           width={7}
           x={0}
           y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedAvailableProvisionalPattern"
+        patternContentUnits="userSpaceOnUse"
+        patternUnits="objectBoundingBox"
+        width={1}
+        x={0}
+        y={0}
+      >
+        <polygon
+          fill="#e1e3ea"
+          fillOpacity={0.25}
+          points="0,0 0,1 1,1 1,0"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="3.46"
+          x2="7.00"
+          y1="0.00"
+          y2="3.54"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="7.00"
+          y1="0.07"
+          y2="7.07"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="7.00"
+          y1="3.61"
+          y2="10.61"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="4.85"
+          y1="7.15"
+          y2="12.00"
+        />
+        <polygon
+          fill="#002c77"
+          points="0,0 6,0 0,12"
         />
       </pattern>
       <pattern
@@ -637,125 +692,199 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
         }
       }
     >
-      <h6
-        className="MuiTypography-root makeStyles-h6Small-4 MuiTypography-h6"
-        style={
-          Object {
-            "marginRight": 12,
-          }
-        }
-      >
-        Key:
-      </h6>
       <div
         className="makeStyles-legendContainer-25"
+        style={Object {}}
       >
-        <svg
-          className="makeStyles-legendSvg-26"
-          height={36}
-          width={90}
+        <div
+          className="makeStyles-legendTitleContainer-28"
         >
-          <rect
-            fill="#002c77"
-            height={12}
-            rx={1}
-            width={7}
-            x={0}
-            y={0}
-          />
-          <text
-            className="makeStyles-legendText-27"
-            x={15}
-            y={9}
+          <h6
+            className="MuiTypography-root makeStyles-legendTitle-26 MuiTypography-h6"
           >
-            Available
-          </text>
-          <rect
-            fill="#d7d9d9"
-            height={12}
-            rx={1}
-            width={7}
-            x={0}
-            y={20}
-          />
-          <text
-            className="makeStyles-legendText-27"
-            x={15}
-            y={29}
+            Key:
+          </h6>
+          <button
+            aria-label="Help - Data Availability Chart Key"
+            className="MuiButtonBase-root MuiIconButton-root makeStyles-legendTitleIcon-27 MuiIconButton-colorPrimary MuiIconButton-sizeSmall"
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex={0}
+            title="Help - Data Availability Chart Key"
+            type="button"
           >
-            No data
-          </text>
-        </svg>
-        <svg
-          className="makeStyles-legendSvg-26"
-          height={36}
-          width="210"
-        >
-          <rect
-            fill="#0073cf"
-            height={10}
-            width={45}
-            x={0.5}
-            y={1.5}
-          />
-          <rect
-            fill="#5ca6e3"
-            height={12}
-            stroke="#0073cf"
-            strokeWidth={1.5}
-            width={4}
-            x={0.5}
-            y={0.5}
-          />
-          <rect
-            fill="#5ca6e3"
-            height={12}
-            stroke="#0073cf"
-            strokeWidth={1.5}
-            width={4}
-            x={41}
-            y={0.5}
-          />
-          <text
-            className="makeStyles-legendText-27"
-            x={53}
-            y={9}
+            <span
+              className="MuiIconButton-label"
+            >
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"
+                />
+              </svg>
+            </span>
+            <span
+              className="MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <div>
+          <div
+            className="makeStyles-legendElement-29"
+            title="Data have been published and released. Data are available for download"
           >
-            All sites selected
-          </text>
-          <rect
-            fill="#8abfec"
-            height={10}
-            width={45}
-            x={0.5}
-            y={21.5}
-          />
-          <rect
-            fill="#5ca6e3"
-            height={12}
-            stroke="#0073cf"
-            strokeWidth={1.5}
-            width={4}
-            x={0.5}
-            y={20.5}
-          />
-          <rect
-            fill="#5ca6e3"
-            height={12}
-            stroke="#0073cf"
-            strokeWidth={1.5}
-            width={4}
-            x={41}
-            y={20.5}
-          />
-          <text
-            className="makeStyles-legendText-27"
-            x={53}
-            y={29}
+            <svg
+              height={14}
+              width={151}
+            >
+              <rect
+                fill="#002c77"
+                height="12px"
+                rx="2px"
+                stroke={null}
+                strokeWidth={null}
+                width="7px"
+                x={0}
+                y={0}
+              />
+              <text
+                className="makeStyles-legendElementText-30"
+                x={15}
+                y={10}
+              >
+                Release Available
+              </text>
+            </svg>
+          </div>
+          <div
+            className="makeStyles-legendElement-29"
+            title="Data was neither expected nor collected"
           >
-            Some sites selected
-          </text>
-        </svg>
+            <svg
+              height={14}
+              width={119}
+            >
+              <rect
+                fill="#d7d9d9"
+                height="12px"
+                rx="2px"
+                stroke={null}
+                strokeWidth={null}
+                width="7px"
+                x={0}
+                y={0}
+              />
+              <text
+                className="makeStyles-legendElementText-30"
+                x={15}
+                y={10}
+              >
+                Not Available
+              </text>
+            </svg>
+          </div>
+        </div>
+        <div>
+          <div
+            className="makeStyles-legendElement-29"
+            title="If the chart is presenting a roll-up (e.g. view by state) then all sites rolled into a given row are selected"
+          >
+            <svg
+              height={14}
+              width={186}
+            >
+              <rect
+                fill="#0073cf"
+                height={10}
+                width={30}
+                x={0.5}
+                y={1.5}
+              />
+              <rect
+                fill="#5ca6e3"
+                height={12}
+                stroke="#0073cf"
+                strokeWidth={1.5}
+                width={4}
+                x={0.5}
+                y={0.5}
+              />
+              <rect
+                fill="#5ca6e3"
+                height={12}
+                stroke="#0073cf"
+                strokeWidth={1.5}
+                width={4}
+                x={26}
+                y={0.5}
+              />
+              <text
+                className="makeStyles-legendElementText-30"
+                x={42}
+                y={10}
+              >
+                All sites selected
+              </text>
+            </svg>
+          </div>
+          <div
+            className="makeStyles-legendElement-29"
+            title="If the chart is presenting a roll-up (e.g. view by state) then one or more but not all of the sites rolled into a given row are selected"
+          >
+            <svg
+              height={14}
+              width={194}
+            >
+              <rect
+                fill="#8abfec"
+                height={10}
+                width={30}
+                x={0.5}
+                y={1.5}
+              />
+              <rect
+                fill="#5ca6e3"
+                height={12}
+                stroke="#0073cf"
+                strokeWidth={1.5}
+                width={4}
+                x={0.5}
+                y={0.5}
+              />
+              <rect
+                fill="#5ca6e3"
+                height={12}
+                stroke="#0073cf"
+                strokeWidth={1.5}
+                width={4}
+                x={26}
+                y={0.5}
+              />
+              <text
+                className="makeStyles-legendElementText-30"
+                x={42}
+                y={10}
+              >
+                Some sites selected
+              </text>
+            </svg>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -797,11 +926,66 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
           y={0}
         />
         <rect
-          fill="#c5c6d9"
+          fill="#e1e3ea"
           height={1.75}
           width={7}
           x={0}
           y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedAvailableProvisionalPattern"
+        patternContentUnits="userSpaceOnUse"
+        patternUnits="objectBoundingBox"
+        width={1}
+        x={0}
+        y={0}
+      >
+        <polygon
+          fill="#e1e3ea"
+          fillOpacity={0.25}
+          points="0,0 0,1 1,1 1,0"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="3.46"
+          x2="7.00"
+          y1="0.00"
+          y2="3.54"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="7.00"
+          y1="0.07"
+          y2="7.07"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="7.00"
+          y1="3.61"
+          y2="10.61"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="4.85"
+          y1="7.15"
+          y2="12.00"
+        />
+        <polygon
+          fill="#002c77"
+          points="0,0 6,0 0,12"
         />
       </pattern>
       <pattern
@@ -1404,125 +1588,199 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
         }
       }
     >
-      <h6
-        className="MuiTypography-root makeStyles-h6Small-4 MuiTypography-h6"
-        style={
-          Object {
-            "marginRight": 12,
-          }
-        }
-      >
-        Key:
-      </h6>
       <div
         className="makeStyles-legendContainer-25"
+        style={Object {}}
       >
-        <svg
-          className="makeStyles-legendSvg-26"
-          height={36}
-          width={90}
+        <div
+          className="makeStyles-legendTitleContainer-28"
         >
-          <rect
-            fill="#002c77"
-            height={12}
-            rx={1}
-            width={7}
-            x={0}
-            y={0}
-          />
-          <text
-            className="makeStyles-legendText-27"
-            x={15}
-            y={9}
+          <h6
+            className="MuiTypography-root makeStyles-legendTitle-26 MuiTypography-h6"
           >
-            Available
-          </text>
-          <rect
-            fill="#d7d9d9"
-            height={12}
-            rx={1}
-            width={7}
-            x={0}
-            y={20}
-          />
-          <text
-            className="makeStyles-legendText-27"
-            x={15}
-            y={29}
+            Key:
+          </h6>
+          <button
+            aria-label="Help - Data Availability Chart Key"
+            className="MuiButtonBase-root MuiIconButton-root makeStyles-legendTitleIcon-27 MuiIconButton-colorPrimary MuiIconButton-sizeSmall"
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex={0}
+            title="Help - Data Availability Chart Key"
+            type="button"
           >
-            No data
-          </text>
-        </svg>
-        <svg
-          className="makeStyles-legendSvg-26"
-          height={36}
-          width="210"
-        >
-          <rect
-            fill="#0073cf"
-            height={10}
-            width={45}
-            x={0.5}
-            y={1.5}
-          />
-          <rect
-            fill="#5ca6e3"
-            height={12}
-            stroke="#0073cf"
-            strokeWidth={1.5}
-            width={4}
-            x={0.5}
-            y={0.5}
-          />
-          <rect
-            fill="#5ca6e3"
-            height={12}
-            stroke="#0073cf"
-            strokeWidth={1.5}
-            width={4}
-            x={41}
-            y={0.5}
-          />
-          <text
-            className="makeStyles-legendText-27"
-            x={53}
-            y={9}
+            <span
+              className="MuiIconButton-label"
+            >
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"
+                />
+              </svg>
+            </span>
+            <span
+              className="MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <div>
+          <div
+            className="makeStyles-legendElement-29"
+            title="Data have been published and released. Data are available for download"
           >
-            All sites selected
-          </text>
-          <rect
-            fill="#8abfec"
-            height={10}
-            width={45}
-            x={0.5}
-            y={21.5}
-          />
-          <rect
-            fill="#5ca6e3"
-            height={12}
-            stroke="#0073cf"
-            strokeWidth={1.5}
-            width={4}
-            x={0.5}
-            y={20.5}
-          />
-          <rect
-            fill="#5ca6e3"
-            height={12}
-            stroke="#0073cf"
-            strokeWidth={1.5}
-            width={4}
-            x={41}
-            y={20.5}
-          />
-          <text
-            className="makeStyles-legendText-27"
-            x={53}
-            y={29}
+            <svg
+              height={14}
+              width={151}
+            >
+              <rect
+                fill="#002c77"
+                height="12px"
+                rx="2px"
+                stroke={null}
+                strokeWidth={null}
+                width="7px"
+                x={0}
+                y={0}
+              />
+              <text
+                className="makeStyles-legendElementText-30"
+                x={15}
+                y={10}
+              >
+                Release Available
+              </text>
+            </svg>
+          </div>
+          <div
+            className="makeStyles-legendElement-29"
+            title="Data was neither expected nor collected"
           >
-            Some sites selected
-          </text>
-        </svg>
+            <svg
+              height={14}
+              width={119}
+            >
+              <rect
+                fill="#d7d9d9"
+                height="12px"
+                rx="2px"
+                stroke={null}
+                strokeWidth={null}
+                width="7px"
+                x={0}
+                y={0}
+              />
+              <text
+                className="makeStyles-legendElementText-30"
+                x={15}
+                y={10}
+              >
+                Not Available
+              </text>
+            </svg>
+          </div>
+        </div>
+        <div>
+          <div
+            className="makeStyles-legendElement-29"
+            title="If the chart is presenting a roll-up (e.g. view by state) then all sites rolled into a given row are selected"
+          >
+            <svg
+              height={14}
+              width={186}
+            >
+              <rect
+                fill="#0073cf"
+                height={10}
+                width={30}
+                x={0.5}
+                y={1.5}
+              />
+              <rect
+                fill="#5ca6e3"
+                height={12}
+                stroke="#0073cf"
+                strokeWidth={1.5}
+                width={4}
+                x={0.5}
+                y={0.5}
+              />
+              <rect
+                fill="#5ca6e3"
+                height={12}
+                stroke="#0073cf"
+                strokeWidth={1.5}
+                width={4}
+                x={26}
+                y={0.5}
+              />
+              <text
+                className="makeStyles-legendElementText-30"
+                x={42}
+                y={10}
+              >
+                All sites selected
+              </text>
+            </svg>
+          </div>
+          <div
+            className="makeStyles-legendElement-29"
+            title="If the chart is presenting a roll-up (e.g. view by state) then one or more but not all of the sites rolled into a given row are selected"
+          >
+            <svg
+              height={14}
+              width={194}
+            >
+              <rect
+                fill="#8abfec"
+                height={10}
+                width={30}
+                x={0.5}
+                y={1.5}
+              />
+              <rect
+                fill="#5ca6e3"
+                height={12}
+                stroke="#0073cf"
+                strokeWidth={1.5}
+                width={4}
+                x={0.5}
+                y={0.5}
+              />
+              <rect
+                fill="#5ca6e3"
+                height={12}
+                stroke="#0073cf"
+                strokeWidth={1.5}
+                width={4}
+                x={26}
+                y={0.5}
+              />
+              <text
+                className="makeStyles-legendElementText-30"
+                x={42}
+                y={10}
+              >
+                Some sites selected
+              </text>
+            </svg>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1564,11 +1822,66 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
           y={0}
         />
         <rect
-          fill="#c5c6d9"
+          fill="#e1e3ea"
           height={1.75}
           width={7}
           x={0}
           y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedAvailableProvisionalPattern"
+        patternContentUnits="userSpaceOnUse"
+        patternUnits="objectBoundingBox"
+        width={1}
+        x={0}
+        y={0}
+      >
+        <polygon
+          fill="#e1e3ea"
+          fillOpacity={0.25}
+          points="0,0 0,1 1,1 1,0"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="3.46"
+          x2="7.00"
+          y1="0.00"
+          y2="3.54"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="7.00"
+          y1="0.07"
+          y2="7.07"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="7.00"
+          y1="3.61"
+          y2="10.61"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="4.85"
+          y1="7.15"
+          y2="12.00"
+        />
+        <polygon
+          fill="#002c77"
+          points="0,0 6,0 0,12"
         />
       </pattern>
       <pattern
@@ -1712,55 +2025,115 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
         }
       }
     >
-      <h6
-        className="MuiTypography-root makeStyles-h6Small-4 MuiTypography-h6"
-        style={
-          Object {
-            "marginRight": 12,
-          }
-        }
-      >
-        Key:
-      </h6>
       <div
         className="makeStyles-legendContainer-25"
+        style={Object {}}
       >
-        <svg
-          className="makeStyles-legendSvg-26"
-          height={16}
-          width={230}
+        <div
+          className="makeStyles-legendTitleContainer-28"
         >
-          <rect
-            fill="#002c77"
-            height={12}
-            rx={1}
-            width={7}
-            x={0}
-            y={0}
-          />
-          <text
-            className="makeStyles-legendText-27"
-            x={15}
-            y={9}
+          <h6
+            className="MuiTypography-root makeStyles-legendTitle-26 MuiTypography-h6"
           >
-            Available
-          </text>
-          <rect
-            fill="#d7d9d9"
-            height={12}
-            rx={1}
-            width={7}
-            x={115}
-            y={0}
-          />
-          <text
-            className="makeStyles-legendText-27"
-            x={130}
-            y={9}
+            Key:
+          </h6>
+          <button
+            aria-label="Help - Data Availability Chart Key"
+            className="MuiButtonBase-root MuiIconButton-root makeStyles-legendTitleIcon-27 MuiIconButton-colorPrimary MuiIconButton-sizeSmall"
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex={0}
+            title="Help - Data Availability Chart Key"
+            type="button"
           >
-            No data
-          </text>
-        </svg>
+            <span
+              className="MuiIconButton-label"
+            >
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"
+                />
+              </svg>
+            </span>
+            <span
+              className="MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <div>
+          <div
+            className="makeStyles-legendElement-29"
+            title="Data have been published and released. Data are available for download"
+          >
+            <svg
+              height={14}
+              width={151}
+            >
+              <rect
+                fill="#002c77"
+                height="12px"
+                rx="2px"
+                stroke={null}
+                strokeWidth={null}
+                width="7px"
+                x={0}
+                y={0}
+              />
+              <text
+                className="makeStyles-legendElementText-30"
+                x={15}
+                y={10}
+              >
+                Release Available
+              </text>
+            </svg>
+          </div>
+        </div>
+        <div>
+          <div
+            className="makeStyles-legendElement-29"
+            title="Data was neither expected nor collected"
+          >
+            <svg
+              height={14}
+              width={119}
+            >
+              <rect
+                fill="#d7d9d9"
+                height="12px"
+                rx="2px"
+                stroke={null}
+                strokeWidth={null}
+                width="7px"
+                x={0}
+                y={0}
+              />
+              <text
+                className="makeStyles-legendElementText-30"
+                x={15}
+                y={10}
+              >
+                Not Available
+              </text>
+            </svg>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1802,11 +2175,66 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
           y={0}
         />
         <rect
-          fill="#c5c6d9"
+          fill="#e1e3ea"
           height={1.75}
           width={7}
           x={0}
           y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedAvailableProvisionalPattern"
+        patternContentUnits="userSpaceOnUse"
+        patternUnits="objectBoundingBox"
+        width={1}
+        x={0}
+        y={0}
+      >
+        <polygon
+          fill="#e1e3ea"
+          fillOpacity={0.25}
+          points="0,0 0,1 1,1 1,0"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="3.46"
+          x2="7.00"
+          y1="0.00"
+          y2="3.54"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="7.00"
+          y1="0.07"
+          y2="7.07"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="7.00"
+          y1="3.61"
+          y2="10.61"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="4.85"
+          y1="7.15"
+          y2="12.00"
+        />
+        <polygon
+          fill="#002c77"
+          points="0,0 6,0 0,12"
         />
       </pattern>
       <pattern
@@ -2409,125 +2837,199 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
         }
       }
     >
-      <h6
-        className="MuiTypography-root makeStyles-h6Small-4 MuiTypography-h6"
-        style={
-          Object {
-            "marginRight": 12,
-          }
-        }
-      >
-        Key:
-      </h6>
       <div
         className="makeStyles-legendContainer-25"
+        style={Object {}}
       >
-        <svg
-          className="makeStyles-legendSvg-26"
-          height={36}
-          width={90}
+        <div
+          className="makeStyles-legendTitleContainer-28"
         >
-          <rect
-            fill="#002c77"
-            height={12}
-            rx={1}
-            width={7}
-            x={0}
-            y={0}
-          />
-          <text
-            className="makeStyles-legendText-27"
-            x={15}
-            y={9}
+          <h6
+            className="MuiTypography-root makeStyles-legendTitle-26 MuiTypography-h6"
           >
-            Available
-          </text>
-          <rect
-            fill="#d7d9d9"
-            height={12}
-            rx={1}
-            width={7}
-            x={0}
-            y={20}
-          />
-          <text
-            className="makeStyles-legendText-27"
-            x={15}
-            y={29}
+            Key:
+          </h6>
+          <button
+            aria-label="Help - Data Availability Chart Key"
+            className="MuiButtonBase-root MuiIconButton-root makeStyles-legendTitleIcon-27 MuiIconButton-colorPrimary MuiIconButton-sizeSmall"
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex={0}
+            title="Help - Data Availability Chart Key"
+            type="button"
           >
-            No data
-          </text>
-        </svg>
-        <svg
-          className="makeStyles-legendSvg-26"
-          height={36}
-          width="210"
-        >
-          <rect
-            fill="#0073cf"
-            height={10}
-            width={45}
-            x={0.5}
-            y={1.5}
-          />
-          <rect
-            fill="#5ca6e3"
-            height={12}
-            stroke="#0073cf"
-            strokeWidth={1.5}
-            width={4}
-            x={0.5}
-            y={0.5}
-          />
-          <rect
-            fill="#5ca6e3"
-            height={12}
-            stroke="#0073cf"
-            strokeWidth={1.5}
-            width={4}
-            x={41}
-            y={0.5}
-          />
-          <text
-            className="makeStyles-legendText-27"
-            x={53}
-            y={9}
+            <span
+              className="MuiIconButton-label"
+            >
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"
+                />
+              </svg>
+            </span>
+            <span
+              className="MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <div>
+          <div
+            className="makeStyles-legendElement-29"
+            title="Data have been published and released. Data are available for download"
           >
-            All sites selected
-          </text>
-          <rect
-            fill="#8abfec"
-            height={10}
-            width={45}
-            x={0.5}
-            y={21.5}
-          />
-          <rect
-            fill="#5ca6e3"
-            height={12}
-            stroke="#0073cf"
-            strokeWidth={1.5}
-            width={4}
-            x={0.5}
-            y={20.5}
-          />
-          <rect
-            fill="#5ca6e3"
-            height={12}
-            stroke="#0073cf"
-            strokeWidth={1.5}
-            width={4}
-            x={41}
-            y={20.5}
-          />
-          <text
-            className="makeStyles-legendText-27"
-            x={53}
-            y={29}
+            <svg
+              height={14}
+              width={151}
+            >
+              <rect
+                fill="#002c77"
+                height="12px"
+                rx="2px"
+                stroke={null}
+                strokeWidth={null}
+                width="7px"
+                x={0}
+                y={0}
+              />
+              <text
+                className="makeStyles-legendElementText-30"
+                x={15}
+                y={10}
+              >
+                Release Available
+              </text>
+            </svg>
+          </div>
+          <div
+            className="makeStyles-legendElement-29"
+            title="Data was neither expected nor collected"
           >
-            Some sites selected
-          </text>
-        </svg>
+            <svg
+              height={14}
+              width={119}
+            >
+              <rect
+                fill="#d7d9d9"
+                height="12px"
+                rx="2px"
+                stroke={null}
+                strokeWidth={null}
+                width="7px"
+                x={0}
+                y={0}
+              />
+              <text
+                className="makeStyles-legendElementText-30"
+                x={15}
+                y={10}
+              >
+                Not Available
+              </text>
+            </svg>
+          </div>
+        </div>
+        <div>
+          <div
+            className="makeStyles-legendElement-29"
+            title="If the chart is presenting a roll-up (e.g. view by state) then all sites rolled into a given row are selected"
+          >
+            <svg
+              height={14}
+              width={186}
+            >
+              <rect
+                fill="#0073cf"
+                height={10}
+                width={30}
+                x={0.5}
+                y={1.5}
+              />
+              <rect
+                fill="#5ca6e3"
+                height={12}
+                stroke="#0073cf"
+                strokeWidth={1.5}
+                width={4}
+                x={0.5}
+                y={0.5}
+              />
+              <rect
+                fill="#5ca6e3"
+                height={12}
+                stroke="#0073cf"
+                strokeWidth={1.5}
+                width={4}
+                x={26}
+                y={0.5}
+              />
+              <text
+                className="makeStyles-legendElementText-30"
+                x={42}
+                y={10}
+              >
+                All sites selected
+              </text>
+            </svg>
+          </div>
+          <div
+            className="makeStyles-legendElement-29"
+            title="If the chart is presenting a roll-up (e.g. view by state) then one or more but not all of the sites rolled into a given row are selected"
+          >
+            <svg
+              height={14}
+              width={194}
+            >
+              <rect
+                fill="#8abfec"
+                height={10}
+                width={30}
+                x={0.5}
+                y={1.5}
+              />
+              <rect
+                fill="#5ca6e3"
+                height={12}
+                stroke="#0073cf"
+                strokeWidth={1.5}
+                width={4}
+                x={0.5}
+                y={0.5}
+              />
+              <rect
+                fill="#5ca6e3"
+                height={12}
+                stroke="#0073cf"
+                strokeWidth={1.5}
+                width={4}
+                x={26}
+                y={0.5}
+              />
+              <text
+                className="makeStyles-legendElementText-30"
+                x={42}
+                y={10}
+              >
+                Some sites selected
+              </text>
+            </svg>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -2569,11 +3071,66 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
           y={0}
         />
         <rect
-          fill="#c5c6d9"
+          fill="#e1e3ea"
           height={1.75}
           width={7}
           x={0}
           y={1.25}
+        />
+      </pattern>
+      <pattern
+        height={1}
+        id="mixedAvailableProvisionalPattern"
+        patternContentUnits="userSpaceOnUse"
+        patternUnits="objectBoundingBox"
+        width={1}
+        x={0}
+        y={0}
+      >
+        <polygon
+          fill="#e1e3ea"
+          fillOpacity={0.25}
+          points="0,0 0,1 1,1 1,0"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="3.46"
+          x2="7.00"
+          y1="0.00"
+          y2="3.54"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="7.00"
+          y1="0.07"
+          y2="7.07"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="7.00"
+          y1="3.61"
+          y2="10.61"
+        />
+        <line
+          stroke="#002c77"
+          strokeLinecap="square"
+          strokeWidth="1.00"
+          x1="0.00"
+          x2="4.85"
+          y1="7.15"
+          y2="12.00"
+        />
+        <polygon
+          fill="#002c77"
+          points="0,0 6,0 0,12"
         />
       </pattern>
       <pattern
@@ -3355,125 +3912,199 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
         }
       }
     >
-      <h6
-        className="MuiTypography-root makeStyles-h6Small-4 MuiTypography-h6"
-        style={
-          Object {
-            "marginRight": 12,
-          }
-        }
-      >
-        Key:
-      </h6>
       <div
         className="makeStyles-legendContainer-25"
+        style={Object {}}
       >
-        <svg
-          className="makeStyles-legendSvg-26"
-          height={36}
-          width={90}
+        <div
+          className="makeStyles-legendTitleContainer-28"
         >
-          <rect
-            fill="#002c77"
-            height={12}
-            rx={1}
-            width={7}
-            x={0}
-            y={0}
-          />
-          <text
-            className="makeStyles-legendText-27"
-            x={15}
-            y={9}
+          <h6
+            className="MuiTypography-root makeStyles-legendTitle-26 MuiTypography-h6"
           >
-            Available
-          </text>
-          <rect
-            fill="#d7d9d9"
-            height={12}
-            rx={1}
-            width={7}
-            x={0}
-            y={20}
-          />
-          <text
-            className="makeStyles-legendText-27"
-            x={15}
-            y={29}
+            Key:
+          </h6>
+          <button
+            aria-label="Help - Data Availability Chart Key"
+            className="MuiButtonBase-root MuiIconButton-root makeStyles-legendTitleIcon-27 MuiIconButton-colorPrimary MuiIconButton-sizeSmall"
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex={0}
+            title="Help - Data Availability Chart Key"
+            type="button"
           >
-            No data
-          </text>
-        </svg>
-        <svg
-          className="makeStyles-legendSvg-26"
-          height={36}
-          width="210"
-        >
-          <rect
-            fill="#0073cf"
-            height={10}
-            width={45}
-            x={0.5}
-            y={1.5}
-          />
-          <rect
-            fill="#5ca6e3"
-            height={12}
-            stroke="#0073cf"
-            strokeWidth={1.5}
-            width={4}
-            x={0.5}
-            y={0.5}
-          />
-          <rect
-            fill="#5ca6e3"
-            height={12}
-            stroke="#0073cf"
-            strokeWidth={1.5}
-            width={4}
-            x={41}
-            y={0.5}
-          />
-          <text
-            className="makeStyles-legendText-27"
-            x={53}
-            y={9}
+            <span
+              className="MuiIconButton-label"
+            >
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"
+                />
+              </svg>
+            </span>
+            <span
+              className="MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <div>
+          <div
+            className="makeStyles-legendElement-29"
+            title="Data have been published and released. Data are available for download"
           >
-            All sites selected
-          </text>
-          <rect
-            fill="#8abfec"
-            height={10}
-            width={45}
-            x={0.5}
-            y={21.5}
-          />
-          <rect
-            fill="#5ca6e3"
-            height={12}
-            stroke="#0073cf"
-            strokeWidth={1.5}
-            width={4}
-            x={0.5}
-            y={20.5}
-          />
-          <rect
-            fill="#5ca6e3"
-            height={12}
-            stroke="#0073cf"
-            strokeWidth={1.5}
-            width={4}
-            x={41}
-            y={20.5}
-          />
-          <text
-            className="makeStyles-legendText-27"
-            x={53}
-            y={29}
+            <svg
+              height={14}
+              width={151}
+            >
+              <rect
+                fill="#002c77"
+                height="12px"
+                rx="2px"
+                stroke={null}
+                strokeWidth={null}
+                width="7px"
+                x={0}
+                y={0}
+              />
+              <text
+                className="makeStyles-legendElementText-30"
+                x={15}
+                y={10}
+              >
+                Release Available
+              </text>
+            </svg>
+          </div>
+          <div
+            className="makeStyles-legendElement-29"
+            title="Data was neither expected nor collected"
           >
-            Some sites selected
-          </text>
-        </svg>
+            <svg
+              height={14}
+              width={119}
+            >
+              <rect
+                fill="#d7d9d9"
+                height="12px"
+                rx="2px"
+                stroke={null}
+                strokeWidth={null}
+                width="7px"
+                x={0}
+                y={0}
+              />
+              <text
+                className="makeStyles-legendElementText-30"
+                x={15}
+                y={10}
+              >
+                Not Available
+              </text>
+            </svg>
+          </div>
+        </div>
+        <div>
+          <div
+            className="makeStyles-legendElement-29"
+            title="If the chart is presenting a roll-up (e.g. view by state) then all sites rolled into a given row are selected"
+          >
+            <svg
+              height={14}
+              width={186}
+            >
+              <rect
+                fill="#0073cf"
+                height={10}
+                width={30}
+                x={0.5}
+                y={1.5}
+              />
+              <rect
+                fill="#5ca6e3"
+                height={12}
+                stroke="#0073cf"
+                strokeWidth={1.5}
+                width={4}
+                x={0.5}
+                y={0.5}
+              />
+              <rect
+                fill="#5ca6e3"
+                height={12}
+                stroke="#0073cf"
+                strokeWidth={1.5}
+                width={4}
+                x={26}
+                y={0.5}
+              />
+              <text
+                className="makeStyles-legendElementText-30"
+                x={42}
+                y={10}
+              >
+                All sites selected
+              </text>
+            </svg>
+          </div>
+          <div
+            className="makeStyles-legendElement-29"
+            title="If the chart is presenting a roll-up (e.g. view by state) then one or more but not all of the sites rolled into a given row are selected"
+          >
+            <svg
+              height={14}
+              width={194}
+            >
+              <rect
+                fill="#8abfec"
+                height={10}
+                width={30}
+                x={0.5}
+                y={1.5}
+              />
+              <rect
+                fill="#5ca6e3"
+                height={12}
+                stroke="#0073cf"
+                strokeWidth={1.5}
+                width={4}
+                x={0.5}
+                y={0.5}
+              />
+              <rect
+                fill="#5ca6e3"
+                height={12}
+                stroke="#0073cf"
+                strokeWidth={1.5}
+                width={4}
+                x={26}
+                y={0.5}
+              />
+              <text
+                className="makeStyles-legendElementText-30"
+                x={42}
+                y={10}
+              >
+                Some sites selected
+              </text>
+            </svg>
+          </div>
+        </div>
       </div>
     </div>
   </div>

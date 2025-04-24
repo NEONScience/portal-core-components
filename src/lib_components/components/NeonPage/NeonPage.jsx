@@ -371,6 +371,7 @@ const NeonPage = (props) => {
     progress,
     resetStateAfterRuntimeError,
     sidebarContent,
+    sidebarContentResponsive,
     sidebarContainerClassName: sidebarContainerClassNameProp,
     sidebarLinks,
     sidebarLinksAdditionalContent,
@@ -721,7 +722,7 @@ const NeonPage = (props) => {
       ? `${classes.sidebarContainer} ${sidebarContainerClassNameProp}`
       : classes.sidebarContainer;
     // Arbitrary Content Sidebar (no automatic skeleton)
-    if (hasSidebarContent) {
+    if (hasSidebarContent && !sidebarContentResponsive) {
       return (
         <div ref={sidebarRef} className={sidebarClassName} style={sidebarContainerStyle}>
           {sidebarContent}
@@ -755,6 +756,37 @@ const NeonPage = (props) => {
         </div>
       );
     };
+    // Arbitrary Content Sidebar (no automatic skeleton)
+    if (hasSidebarContent) {
+      return (
+        <div ref={sidebarRef} className={sidebarClassName} style={sidebarContainerStyle}>
+          <div
+            className={!sidebarUnsticky && !belowMd
+              ? `${classes.sidebarInnerStickyContainer} neon__sidebar-sticky`
+              : null}
+          >
+            <div className={classes.sidebarTitleContainer}>
+              {renderSidebarTitle()}
+              {!belowMd ? null : (
+                <IconButton size="small" onClick={() => setSidebarExpanded(!sidebarExpanded)}>
+                  {(
+                    sidebarExpanded
+                      ? <CollapseIcon fontSize="large" />
+                      : <ExpandIcon fontSize="large" />
+                  )}
+                </IconButton>
+              )}
+            </div>
+            {(!belowMd || sidebarExpanded) ? (
+              <>
+                <Divider className={classes.sidebarDivider} style={{ ...dividerStyle }} />
+                {sidebarContent}
+              </>
+            ) : null}
+          </div>
+        </div>
+      );
+    }
     // Render Single Sidebar Link
     const renderLink = (link, standalone = false) => {
       if (!link) { return null; }
@@ -957,6 +989,7 @@ NeonPage.propTypes = {
   progress: PropTypes.number,
   resetStateAfterRuntimeError: PropTypes.func,
   sidebarContent: children,
+  sidebarContentResponsive: PropTypes.bool,
   sidebarContainerClassName: PropTypes.string,
   sidebarLinks: PropTypes.arrayOf(
     PropTypes.shape({
@@ -1006,6 +1039,7 @@ NeonPage.defaultProps = {
   progress: null,
   resetStateAfterRuntimeError: () => { },
   sidebarContent: null,
+  sidebarContentResponsive: false,
   sidebarContainerClassName: null,
   sidebarLinks: null,
   sidebarLinksAdditionalContent: null,

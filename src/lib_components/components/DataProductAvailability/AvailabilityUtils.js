@@ -19,12 +19,16 @@ export const VALID_ENHANCED_STATUSES = {
     description: 'Data have been collected and will be published after processing has completed',
   },
   available: {
-    title: 'Available',
-    description: 'Data have been published and are available for download',
+    title: 'Release Available',
+    description: 'Data have been published and released. Data are available for download',
   },
   'available-provisional': {
-    title: 'Provisional Available',
+    title: 'Provisional',
     description: 'Provisional data have been published and are available for download',
+  },
+  'mixed-available-provisional': {
+    title: 'Mixed',
+    description: 'Data have been published and are available for download. Some data are released and some data are provisional.',
   },
   delayed: {
     title: 'Delayed',
@@ -58,6 +62,20 @@ export const VALID_ENHANCED_STATUSES = {
     title: 'Mixed (No Availability)',
     description: 'More than one status with none "Available" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)',
   },
+};
+
+export const calcBasicRollupStatus = (statuses) => {
+  if (!statuses) {
+    return null;
+  }
+  if (Array.from(statuses).some((s) => !Object.keys(VALID_ENHANCED_STATUSES).includes(s))) {
+    return null;
+  }
+  if (statuses.size === 0) { return null; }
+  if (statuses.size === 1) { return Array.from(statuses)[0]; }
+  const hasTomb = statuses.has('tombstoned');
+  if (hasTomb) { return 'tombstoned'; }
+  return statuses.has('available-provisional') ? 'mixed-available-provisional' : 'available';
 };
 
 export const calcRollupStatus = (statuses = []) => {

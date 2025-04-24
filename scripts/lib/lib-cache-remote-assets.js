@@ -20,7 +20,7 @@ import prettier from 'prettier';
 import { Command } from 'commander';
 import { fileURLToPath } from 'url';
 
-import packageJson from '../../package.json' assert { type: 'json' };
+import packageJson from '../../package.json' with { type: 'json' };
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -149,10 +149,10 @@ const sanitizeContent = (key, content) => {
   switch (key) {
     // DRUPAL_THEME_CSS - comment out all styles with relative path URLs (these will always fail)
     case REMOTE_ASSETS_CACHE.DRUPAL_THEME_CSS.KEY:
-      content.match(/^(.*url\([\"\']((?!data)).*)$/mg).forEach((match) => {
+      (content.match(/^(.*url\(["']((?!data|https)).*)$/mg) || []).forEach((match) => {
         let shouldCommentMatch = true;
         if (config.cssReplaceRelativeUrls) {
-          const relativeUrlRegex = /(?<relative>url\(["']\.\.\/\.\.\/\.\.\/\.\.\/(?<path>images\/.+)["']\))/;
+          const relativeUrlRegex = /(?<relative>url\(["'](?<relativePathSegments>\.\.\/\.\.\/\.\.\/\.\.\/|\.\.\/\.\.\/\.\.\/|\.\.\/\.\.\/|\.\.\/)(?<path>images\/.+)["']\))/;
           const matchesRelative = relativeUrlRegex.exec(match);
           if (matchesRelative
             && (matchesRelative.length > 0)
@@ -179,7 +179,11 @@ const sanitizeContent = (key, content) => {
     // We do this so that apps consuming portal-core-components don't need to configure html-loader
     case REMOTE_ASSETS_CACHE.DRUPAL_HEADER_HTML.KEY:
     case REMOTE_ASSETS_CACHE.DRUPAL_FOOTER_HTML.KEY:
-      content = content.replace(/`/g, '\\`');
+      // Ensure we always produce a valid, backtick quoted JavaScript string
+      // by escaping any backticks, ignore already escaped backticks,
+      // and only matching on even number of backslashes prior to backtick
+      // as those would produce strings that are not properly escaped.
+      content = content.replace(/(?<!\\)(?:\\\\)*`/g, '\\`');
       return `let html;\nexport default html = \`${content}\`;`;
     default:
       return content;
@@ -272,7 +276,13 @@ const writeContent = async (key, content, fileName) => {
         }
         let indexFileOutput = dom.serialize();
         if (config.prettifyIndex) {
-          indexFileOutput = prettier.format(indexFileOutput, { parser: 'html', printWidth: 100 });
+          indexFileOutput = await prettier.format(
+            indexFileOutput,
+            {
+              parser: 'html',
+              printWidth: 100,
+            },
+          );
         }
         fs.writeFileSync(indexFilePath, indexFileOutput, { encoding: 'utf8' });
       }

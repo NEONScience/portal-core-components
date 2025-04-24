@@ -89,7 +89,7 @@ exports[`NeonAuth - UserCard Renders with a lastLogin prop 1`] = `
         <label
           className="label-normal"
         >
-          May 4th, 2018 6:00:00 pm
+          May 5th, 2018 12:00:00 am
         </label>
       </div>
     </div>

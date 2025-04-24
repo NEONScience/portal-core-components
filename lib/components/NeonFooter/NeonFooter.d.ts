@@ -1,5 +1,5 @@
 export default NeonFooter;
-declare function NeonFooter(props: any): JSX.Element;
+declare function NeonFooter(props: any): import("react/jsx-runtime").JSX.Element;
 declare namespace NeonFooter {
     namespace propTypes {
         const drupalCssLoaded: PropTypes.Requireable<boolean>;

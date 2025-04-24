@@ -14,4 +14,4 @@ export function getTestableItems(): {
     getFeatureName: (featureKey: any) => any;
     exportCsv: (columns?: any[], rows?: any[]) => void;
 };
-declare function SiteMapTable(): JSX.Element | null;
+declare function SiteMapTable(): import("react/jsx-runtime").JSX.Element | null;
