@@ -789,9 +789,12 @@ function SelectPositionsButton(props) {
     dispatch({ type: 'selectSitePositions', siteCode, positions: localSelectedPositions });
   };
   const isApplyButtonDisabled = (selectedPositions2) => {
+    // state.selection does not include what was added by users dialog selections so exclude current site
+    // from getPositionCount and use sites from localSelectedPositions
+    const allCurrentPositions = selectedPositions2.length + getPositionCount(state.selection.sites, siteCode);
     if (!selectedPositions2.length) {
       return true;
-    } else if (calcPredictedPointsForNewPosition(state, selectedPositions2.length) > POINTS_PERFORMANCE_LIMIT) {
+    } else if (calcPredictedPointsForNewPosition(state, allCurrentPositions) > POINTS_PERFORMANCE_LIMIT) {
       return true;
     } else {
       return false;
@@ -842,7 +845,7 @@ function SelectPositionsButton(props) {
               <span style={{
                 fontWeight: 300,
                 fontStyle: 'italic',
-                visibility: calcPredictedPointsForNewPosition(state, localSelectedPositions.length) > POINTS_PERFORMANCE_LIMIT
+                visibility: isApplyButtonDisabled(localSelectedPositions)
                   ? 'visible'
                   : 'hidden',
               }}

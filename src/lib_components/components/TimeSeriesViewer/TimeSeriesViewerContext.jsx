@@ -306,7 +306,7 @@ export const summarizeTimeSteps = (steps, timeStep = null, pluralize = true) => 
 export const calcPredictedPoints = (state, timeStep) => {
   if (!state.selection.autoTimeStep) return 0;
 
-  // formula: points per hour (seconds in hour / Time Step seconds) x hours (months selected converted to hours) x positions x variables
+  // formula: points per hour (seconds in hour / Time Step seconds) x hours (months selected converted to hours) x (positions + variables)
   // using seconds for points per hour since that is what TIME_STEPS has.
   const positions = getPositionCount(state.selection.sites);
   const pointPerHour = getPointsPerHour(state, timeStep);
@@ -318,6 +318,9 @@ export const calcPredictedPoints = (state, timeStep) => {
 
 export const calcPredictedPointsForNewPosition = (state, numPositionsOverride) => {
   if (!state.selection.autoTimeStep) return 0;
+
+  // if (numPositionsOverride)
+  //   console.log("state.selection.sites", state.selection.sites);
 
   const positions = numPositionsOverride ?? getPositionCount(state.selection.sites) + 1;
   const pointPerHour = getPointsPerHour(state, state.selection.timeStep);
@@ -340,10 +343,12 @@ export const calcPredictedPointsForNewVariable = (state) => {
   return pointPerHour * totalHours * (positions + variables);
 };
 
-export const getPositionCount = (sitesArray) => {
+export const getPositionCount = (sitesArray, siteCodeToExclude) => {
   let total = 0;
   sitesArray.forEach((site) => {
-    total += site.positions.length;
+    if (site.siteCode !== siteCodeToExclude) {
+      total += site.positions.length;
+    }
   });
   return total;
 };

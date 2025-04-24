@@ -50,7 +50,8 @@
     "no-use-before-define": "off",
     "max-len": ["warn", { "ignoreComments": true, "code": 100 }],
     "radix": [0, "as-needed"],
-    "no-else-return": 0
+    "no-else-return": 0,
+    "no-plusplus": 0
   },
   "overrides": [
     {
