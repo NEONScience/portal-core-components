@@ -319,14 +319,11 @@ export const calcPredictedPoints = (state, timeStep) => {
 export const calcPredictedPointsForNewPosition = (state, numPositionsOverride) => {
   if (!state.selection.autoTimeStep) return 0;
 
-  // if (numPositionsOverride)
-  //   console.log("state.selection.sites", state.selection.sites);
-
   const positions = numPositionsOverride ?? getPositionCount(state.selection.sites) + 1;
   const pointPerHour = getPointsPerHour(state, state.selection.timeStep);
   const variables = state.selection.variables.length === 0 ? 1 : state.selection.variables.length;
   const totalHours = getTotalHours(state);
-  // console.log("newPos", pointPerHour, totalHours, positions, variables, pointPerHour * totalHours * (positions + variables));
+  // ******* summing positions and variables is producing incorrect result
   return pointPerHour * totalHours * (positions + variables);
 };
 
@@ -339,8 +336,22 @@ export const calcPredictedPointsForNewVariable = (state) => {
   const variables = state.selection.variables.length === 0
     ? 1
     : state.selection.variables.length + 1;
-    // console.log("newVar", pointPerHour, totalHours, positions, variables, pointPerHour * totalHours * (positions + variables));
+  // ******* summing positions and variables is producing incorrect result
   return pointPerHour * totalHours * (positions + variables);
+};
+
+// note that the dates are not JS dates but from dateRange and should be
+// in the format of 'yyyy-mm'.
+export const calcPredictedPointsByDateRange = (state, startDate, endDate) => {
+  if (!state.selection.autoTimeStep) return 0;
+
+  const positions = getPositionCount(state.selection.sites);
+  const pointPerHour = getPointsPerHour(state, state.selection.timeStep);
+  const variables = state.selection.variables.length === 0 ? 1 : state.selection.variables.length;
+  const totalHours = getTotalHoursCustom(startDate, endDate);
+  // console.log("pointPerHour * totalHours * positions * variables", pointPerHour , totalHours, positions, variables);
+
+  return pointPerHour * totalHours * positions * variables;
 };
 
 export const getPositionCount = (sitesArray, siteCodeToExclude) => {
@@ -351,6 +362,15 @@ export const getPositionCount = (sitesArray, siteCodeToExclude) => {
     }
   });
   return total;
+};
+
+const getTotalHoursCustom = (startDate, endDate) => {
+  const date1 = new Date(`${startDate}-01T00:00:00Z`);
+  const lastDay = getLastDayInMonth(endDate.substring(5, 7));
+  const date2 = new Date(`${endDate}-${lastDay}T23:59:59Z`);
+  // console.log("date1", date1.toUTCString());
+  // console.log("date2", date2.toUTCString());
+  return Math.round((date2.getTime() - date1.getTime()) / 1000 / 60 / 60);
 };
 
 const getTotalHours = (state) => {
