@@ -308,6 +308,8 @@ export const calcPredictedPoints = (state, timeStep) => {
 
   // formula: points per hour (seconds in hour / Time Step seconds) x hours (months selected converted to hours) x (positions + variables)
   // using seconds for points per hour since that is what TIME_STEPS has.
+  // summing positions and variables to smooth differences (30 x 2208 x 3 x 1 != 30 x 2208 x 2 x 2).
+  // this isn't 100% accurate but is close enough to actual points fetch.
   const positions = getPositionCount(state.selection.sites);
   const pointPerHour = getPointsPerHour(state, timeStep);
   const variables = state.selection.variables.length === 0 ? 1 : state.selection.variables.length;
@@ -323,7 +325,7 @@ export const calcPredictedPointsForNewPosition = (state, numPositionsOverride) =
   const pointPerHour = getPointsPerHour(state, state.selection.timeStep);
   const variables = state.selection.variables.length === 0 ? 1 : state.selection.variables.length;
   const totalHours = getTotalHours(state);
-  // ******* summing positions and variables is producing incorrect result
+
   return pointPerHour * totalHours * (positions + variables);
 };
 
@@ -336,7 +338,7 @@ export const calcPredictedPointsForNewVariable = (state) => {
   const variables = state.selection.variables.length === 0
     ? 1
     : state.selection.variables.length + 1;
-  // ******* summing positions and variables is producing incorrect result
+
   return pointPerHour * totalHours * (positions + variables);
 };
 
@@ -349,9 +351,8 @@ export const calcPredictedPointsByDateRange = (state, startDate, endDate) => {
   const pointPerHour = getPointsPerHour(state, state.selection.timeStep);
   const variables = state.selection.variables.length === 0 ? 1 : state.selection.variables.length;
   const totalHours = getTotalHoursCustom(startDate, endDate);
-  // console.log("pointPerHour * totalHours * positions * variables", pointPerHour , totalHours, positions, variables);
 
-  return pointPerHour * totalHours * positions * variables;
+  return pointPerHour * totalHours * (positions + variables);
 };
 
 export const getPositionCount = (sitesArray, siteCodeToExclude) => {
@@ -1334,7 +1335,7 @@ const reducer = (state, action) => {
         .positions[action.position]
         .data[action.month][action.downloadPkg][action.timeStep][action.table]
         .series = action.series;
-      /*  uncomment for troubleshooting to get number of points downloaded */
+      /*  uncomment for troubleshooting to get number of points downloaded
       try {
         if (!newState.product.pointTotal || isNaN(newState.product.pointTotal)) {
           newState.product.pointTotal = 0;
@@ -1348,6 +1349,7 @@ const reducer = (state, action) => {
       } catch (error) {
         console.log("my derpy code crashed", action);
       }
+      */
 
       return newState;
 
@@ -1901,7 +1903,7 @@ const Provider = (props) => {
       } else {
         const masterFetchToken = `fetchDataFiles.${uniqueId()}`;
         dispatch({ type: 'fetchDataFiles', token: masterFetchToken, fetches: dataActions });
-        console.log("Fetching data", state, dataFetches); // this is the point where we can capture the user fetch criteria
+        console.log('Fetching data', state, dataFetches); // this is the point where we can capture the user fetch criteria
         forkJoinWithProgress(dataFetches).pipe(
           mergeMap(([finalResult, progress]) => merge(
             progress.pipe(
