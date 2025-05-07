@@ -303,10 +303,60 @@ export const summarizeTimeSteps = (steps, timeStep = null, pluralize = true) => 
   return `${value} ${intervals[breakIdx]}${plural}`;
 };
 
+export const getPositionCount = (sitesArray, siteCodeToExclude) => {
+  let total = 0;
+  sitesArray.forEach((site) => {
+    if (site.siteCode !== siteCodeToExclude) {
+      total += site.positions.length;
+    }
+  });
+  return total;
+};
+
+// month param is the month number.  This is ONE based not zero based like JS.
+const getLastDayInMonth = (month) => {
+  const monthAsNumber = Number.parseInt(month, 10);
+  const days = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  return days[monthAsNumber];
+};
+
+const getTotalHoursCustom = (startDate, endDate) => {
+  const date1 = new Date(`${startDate}-01T00:00:00Z`);
+  const lastDay = getLastDayInMonth(endDate.substring(5, 7));
+  const date2 = new Date(`${endDate}-${lastDay}T23:59:59Z`);
+  // console.log("date1", date1.toUTCString());
+  // console.log("date2", date2.toUTCString());
+  return Math.round((date2.getTime() - date1.getTime()) / 1000 / 60 / 60);
+};
+
+const getTotalHours = (state) => {
+  const date1 = new Date(`${state.selection.dateRange[0]}-01T00:00:00Z`);
+  let date2;
+  if (state.selection.continuousDateRange.length === 1) {
+    const lastDay = getLastDayInMonth(state.selection.continuousDateRange[0].substring(5, 7));
+    date2 = new Date(`${state.selection.continuousDateRange[0]}-${lastDay}T23:59:59Z`);
+  } else if (state.selection.dateRange.length === 2) {
+    const lastDay = getLastDayInMonth(state.selection.dateRange[1].substring(5, 7));
+    date2 = new Date(`${state.selection.dateRange[1]}-${lastDay}T23:59:59Z`);
+  } else {
+    // eslint-disable-next-line no-console
+    console.error('Unknown date range');
+  }
+  return Math.round((date2.getTime() - date1.getTime()) / 1000 / 60 / 60);
+};
+
+const getPointsPerHour = (state, currentTimeStep) => {
+  const secondsInHour = 3600;
+  const timeStep = currentTimeStep === 'auto' ? state.selection.autoTimeStep : currentTimeStep;
+  const timeStepSeconds = TIME_STEPS[timeStep].seconds;
+  return secondsInHour / timeStepSeconds;
+};
+
 export const calcPredictedPoints = (state, timeStep) => {
   if (!state.selection.autoTimeStep) return 0;
 
-  // formula: points per hour (seconds in hour / Time Step seconds) x hours (months selected converted to hours) x (positions + variables)
+  // formula: points per hour (seconds in hour / Time Step seconds)
+  // x hours (months selected converted to hours) x (positions + variables)
   // using seconds for points per hour since that is what TIME_STEPS has.
   // summing positions and variables to smooth differences (30 x 2208 x 3 x 1 != 30 x 2208 x 2 x 2).
   // this isn't 100% accurate but is close enough to actual points fetch.
@@ -353,54 +403,6 @@ export const calcPredictedPointsByDateRange = (state, startDate, endDate) => {
   const totalHours = getTotalHoursCustom(startDate, endDate);
 
   return pointPerHour * totalHours * (positions + variables);
-};
-
-export const getPositionCount = (sitesArray, siteCodeToExclude) => {
-  let total = 0;
-  sitesArray.forEach((site) => {
-    if (site.siteCode !== siteCodeToExclude) {
-      total += site.positions.length;
-    }
-  });
-  return total;
-};
-
-const getTotalHoursCustom = (startDate, endDate) => {
-  const date1 = new Date(`${startDate}-01T00:00:00Z`);
-  const lastDay = getLastDayInMonth(endDate.substring(5, 7));
-  const date2 = new Date(`${endDate}-${lastDay}T23:59:59Z`);
-  // console.log("date1", date1.toUTCString());
-  // console.log("date2", date2.toUTCString());
-  return Math.round((date2.getTime() - date1.getTime()) / 1000 / 60 / 60);
-};
-
-const getTotalHours = (state) => {
-  const date1 = new Date(`${state.selection.dateRange[0]}-01T00:00:00Z`);
-  let date2;
-  if (state.selection.continuousDateRange.length === 1) {
-    const lastDay = getLastDayInMonth(state.selection.continuousDateRange[0].substring(5, 7));
-    date2 = new Date(`${state.selection.continuousDateRange[0]}-${lastDay}T23:59:59Z`);
-  } else if (state.selection.dateRange.length === 2) {
-    const lastDay = getLastDayInMonth(state.selection.dateRange[1].substring(5, 7));
-    date2 = new Date(`${state.selection.dateRange[1]}-${lastDay}T23:59:59Z`);
-  } else {
-    console.error('Unknown date range');
-  }
-  return Math.round((date2.getTime() - date1.getTime()) / 1000 / 60 / 60);
-};
-
-// month param is the month number.  This is ONE based not zero based like JS.
-const getLastDayInMonth = (month) => {
-  const monthAsNumber = Number.parseInt(month);
-  const days = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-  return days[monthAsNumber];
-};
-
-const getPointsPerHour = (state, currentTimeStep) => {
-  const secondsInHour = 3600;
-  const timeStep = currentTimeStep === 'auto' ? state.selection.autoTimeStep : currentTimeStep;
-  const timeStepSeconds = TIME_STEPS[timeStep].seconds;
-  return secondsInHour / timeStepSeconds;
 };
 
 // Array offsets and validators for use when splitting a data file URL
@@ -1345,7 +1347,8 @@ const reducer = (state, action) => {
         // console.log("newState", newState);
         // console.log("action", action);
         console.log("fetchDataFileSucceeded - pointTotal", newState.product.pointTotal);
-        // console.log("newState.selection.continuousDateRange.length", newState.selection.continuousDateRange.length);
+        // console.log("newState.selection.continuousDateRange.length",
+        // newState.selection.continuousDateRange.length);
       } catch (error) {
         console.log("my derpy code crashed", action);
       }
@@ -1903,7 +1906,9 @@ const Provider = (props) => {
       } else {
         const masterFetchToken = `fetchDataFiles.${uniqueId()}`;
         dispatch({ type: 'fetchDataFiles', token: masterFetchToken, fetches: dataActions });
-        console.log('Fetching data', state, dataFetches); // this is the point where we can capture the user fetch criteria
+        // this is the point where we can capture the user fetch criteria
+        // eslint-disable-next-line no-console
+        // console.log('Fetching data', state, dataFetches);
         forkJoinWithProgress(dataFetches).pipe(
           mergeMap(([finalResult, progress]) => merge(
             progress.pipe(

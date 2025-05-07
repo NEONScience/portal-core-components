@@ -96,13 +96,20 @@ const TimeSeriesViewerDateRange = (props) => {
   ]);
 
   // check currentRange to make sure values don't exceed points allowed
-  const pointsAvailable = POINTS_PERFORMANCE_LIMIT - calcPredictedPointsByDateRange(state, currentRange[0], currentRange[1]);
+  const pointsAvailable = POINTS_PERFORMANCE_LIMIT
+    - calcPredictedPointsByDateRange(state, currentRange[0], currentRange[1]);
   const pointsPerMonth = calcPredictedPointsByDateRange(state, '2024-01', '2024-01');
   const monthsAvailable = Math.floor(pointsAvailable / pointsPerMonth);
-  // console.log("points avail: ", pointsAvailable, "ppm:" , pointsPerMonth, "months available: ",  monthsAvailable, "displayRange.length", displayRange.length);
+
   if (monthsAvailable < displayRange.length) {
-    sliderMin = Math.max(displayRange.indexOf(selectableRange[0]), displayRange.indexOf(currentRange[0]) - monthsAvailable);
-    sliderMax = Math.min(displayRange.indexOf(selectableRange[1]), displayRange.indexOf(currentRange[1]) + monthsAvailable);
+    sliderMin = Math.max(
+      displayRange.indexOf(selectableRange[0]),
+      displayRange.indexOf(currentRange[0]) - monthsAvailable,
+    );
+    sliderMax = Math.min(
+      displayRange.indexOf(selectableRange[1]),
+      displayRange.indexOf(currentRange[1]) + monthsAvailable,
+    );
     selectableRange = [displayRange[sliderMin], displayRange[sliderMax]];
   }
 

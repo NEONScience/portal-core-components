@@ -788,17 +788,22 @@ function SelectPositionsButton(props) {
     setSelectDialogOpen(false);
     dispatch({ type: 'selectSitePositions', siteCode, positions: localSelectedPositions });
   };
+
   const isApplyButtonDisabled = (selectedPositions2) => {
-    // state.selection does not include what was added by users dialog selections so exclude current site
-    // from getPositionCount and use sites from localSelectedPositions
-    const allCurrentPositions = selectedPositions2.length + getPositionCount(state.selection.sites, siteCode);
+    // state.selection does not include what was added by users dialog selections so exclude
+    // current site from getPositionCount and use sites from localSelectedPositions
+    const allCurrentPositions = selectedPositions2.length
+      + getPositionCount(state.selection.sites, siteCode);
+    let isDisabled = false;
+
     if (!selectedPositions2.length) {
-      return true;
-    } else if (calcPredictedPointsForNewPosition(state, allCurrentPositions) > POINTS_PERFORMANCE_LIMIT) {
-      return true;
-    } else {
-      return false;
+      isDisabled = true;
+    } else if (calcPredictedPointsForNewPosition(state, allCurrentPositions)
+      > POINTS_PERFORMANCE_LIMIT) {
+      isDisabled = true;
     }
+
+    return isDisabled;
   };
 
   const isDisabled = calcPredictedPointsForNewPosition(state) > POINTS_PERFORMANCE_LIMIT;
@@ -1351,7 +1356,7 @@ export default function TimeSeriesViewerSites(props) {
     let upperLimit = 0;
     const currentPositionCount = getPositionCount(state.selection.sites);
 
-    for (let upperLimitCandidate = 1; upperLimitCandidate <= 5; upperLimitCandidate++) {
+    for (let upperLimitCandidate = 1; upperLimitCandidate <= 5; upperLimitCandidate += 1) {
       const numNewPositions = currentPositionCount + upperLimitCandidate;
 
       if (calcPredictedPointsForNewPosition(state, numNewPositions) < POINTS_PERFORMANCE_LIMIT) {
