@@ -29,6 +29,7 @@ import Theme, { COLORS } from '../Theme/Theme';
 import RouteService from '../../service/RouteService';
 
 import TimeSeriesViewerContext, {
+  POINTS_PERFORMANCE_LIMIT,
   summarizeTimeSteps,
   TIME_SERIES_VIEWER_STATUS_TITLES,
   Y_AXIS_RANGE_MODE_DETAILS,
@@ -133,6 +134,12 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'center',
+  },
+  statusBar: {
+    marginLeft: '-4px',
+    marginRight: '-4px',
+    backgroundColor: Theme.palette.grey[200],
+    padding: '6px 4px 4px 12px',
   },
 }));
 
@@ -590,6 +597,44 @@ export default function TimeSeriesViewerContainer() {
     return null;
   };
 
+  // function complements of Battelle ANNI
+  // move to 'helper' file if one exists
+  const addThousandsSeparator = (numStr) => { /* eslint-disable */
+    if (!numStr) {
+      return '0';
+    }
+
+    const numStrString = numStr.toString();
+    let [integer, decimal] = numStrString.split('.');
+
+    let result = '';
+    let count = 0;
+
+    // Process integer part from right to left
+    for (let i = integer.length - 1; i >= 0; i--) {
+      result = integer[i] + result;
+      count += 1;
+      // Add comma after every 3 digits, except at the start
+      if (count % 3 === 0 && i !== 0) {
+        result = ',' + result;
+      }
+    }
+
+    // Reattach decimal part if present
+    return decimal ? `${result}.${decimal}` : result;
+  };
+
+  const renderStatusBar = () => {
+    return (
+      <div className={classes.statusBar}>
+        <span>Data Points:&nbsp;</span>
+        {addThousandsSeparator(state.pointTotal)}
+        <span>&nbsp;of&nbsp;</span>
+        {addThousandsSeparator(POINTS_PERFORMANCE_LIMIT)}
+      </div>
+    );
+  };
+
   return (
     <div style={{ width: '100%' }}>
       <Card className={classes.graphContainer}>
@@ -599,6 +644,7 @@ export default function TimeSeriesViewerContainer() {
           ) : null}
           {renderGraphOverlay()}
         </div>
+        {renderStatusBar()}
         <div className={classes.tabsContainer}>
           {renderTabs()}
           {renderTabPanels()}

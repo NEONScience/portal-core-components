@@ -324,8 +324,6 @@ const getTotalHoursCustom = (startDate, endDate) => {
   const date1 = new Date(`${startDate}-01T00:00:00Z`);
   const lastDay = getLastDayInMonth(endDate.substring(5, 7));
   const date2 = new Date(`${endDate}-${lastDay}T23:59:59Z`);
-  // console.log("date1", date1.toUTCString());
-  // console.log("date2", date2.toUTCString());
   return Math.round((date2.getTime() - date1.getTime()) / 1000 / 60 / 60);
 };
 
@@ -350,6 +348,17 @@ const getPointsPerHour = (state, currentTimeStep) => {
   const timeStep = currentTimeStep === 'auto' ? state.selection.autoTimeStep : currentTimeStep;
   const timeStepSeconds = TIME_STEPS[timeStep].seconds;
   return secondsInHour / timeStepSeconds;
+};
+
+const calcPointTotal = (data) => {
+  let varsAndPositions = 0;
+
+  if (data.length > 0 && data[0].length > 1) {
+    // first array position is dateTime.  Count items after it
+    varsAndPositions = data[0].length - 1;
+  }
+
+  return data.length * varsAndPositions;
 };
 
 export const calcPredictedPoints = (state, timeStep) => {
@@ -1252,6 +1261,7 @@ const reducer = (state, action) => {
         return softFail('Current selection of dates/sites/positions/variables does not have any valid numeric data.');
       }
       newState.graphData = action.graphData;
+      newState.pointTotal = calcPointTotal(action.graphData.data);
       newState.status = TIME_SERIES_VIEWER_STATUS.READY;
       return newState;
 
@@ -1344,7 +1354,7 @@ const reducer = (state, action) => {
         }
 
         newState.product.pointTotal += action.series.endDateTime.data.length;
-        // console.log("newState", newState);
+        console.log("newState", newState);
         // console.log("action", action);
         console.log("fetchDataFileSucceeded - pointTotal", newState.product.pointTotal);
         // console.log("newState.selection.continuousDateRange.length",
@@ -1352,7 +1362,7 @@ const reducer = (state, action) => {
       } catch (error) {
         console.log("my derpy code crashed", action);
       }
-      */
+ */
 
       return newState;
 
