@@ -21,7 +21,7 @@ import TimeSeriesViewerContext, {
   Y_AXIS_RANGE_MODES,
   Y_AXIS_RANGE_MODE_DETAILS,
   summarizeTimeSteps,
-  calcPredictedPoints,
+  calcPredictedPointsByTimeStep,
   POINTS_PERFORMANCE_LIMIT,
 } from './TimeSeriesViewerContext';
 
@@ -485,7 +485,8 @@ const TimeStepOption = () => {
           ? `${classes.optionButton} ${classes.optionButtonSelected}`
           : classes.optionButton;
 
-        const isDisabled = calcPredictedPoints(state, timeStep) > POINTS_PERFORMANCE_LIMIT;
+        const isDisabled = calcPredictedPointsByTimeStep(state, timeStep)
+          > POINTS_PERFORMANCE_LIMIT;
 
         return (
           <ToggleButton

@@ -361,7 +361,7 @@ const calcPointTotal = (data) => {
   return data.length * varsAndPositions;
 };
 
-export const calcPredictedPoints = (state, timeStep) => {
+export const calcPredictedPointsByTimeStep = (state, timeStep) => {
   if (!state.selection.autoTimeStep) return 0;
 
   // formula: points per hour (seconds in hour / Time Step seconds)

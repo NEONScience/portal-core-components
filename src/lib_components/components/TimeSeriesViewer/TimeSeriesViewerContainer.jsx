@@ -22,6 +22,8 @@ import SitesIcon from '@material-ui/icons/Place';
 import DateRangeIcon from '@material-ui/icons/DateRange';
 import VariablesIcon from '@material-ui/icons/Timeline';
 import AxesIcon from '@material-ui/icons/BorderInner';
+import WarnIcon from '@material-ui/icons/Warning';
+import ComputerIcon from '@material-ui/icons/Computer';
 
 import ReleaseChip from '../Chip/ReleaseChip';
 import Theme, { COLORS } from '../Theme/Theme';
@@ -30,6 +32,7 @@ import RouteService from '../../service/RouteService';
 
 import TimeSeriesViewerContext, {
   POINTS_PERFORMANCE_LIMIT,
+  calcPredictedPointsForNewPosition,
   summarizeTimeSteps,
   TIME_SERIES_VIEWER_STATUS_TITLES,
   Y_AXIS_RANGE_MODE_DETAILS,
@@ -139,7 +142,17 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: '-4px',
     marginRight: '-4px',
     backgroundColor: Theme.palette.grey[200],
-    padding: '6px 4px 4px 12px',
+    padding: '4px 4px 4px 12px',
+    '& svg': {
+      verticalAlign: 'bottom',
+      marginRight: '4px',
+    },
+    '& .warningMessage': {
+      marginLeft: '20px',
+      '& svg': {
+        color: Theme.colors.BROWN[300],
+      },
+    },
   },
 }));
 
@@ -625,12 +638,34 @@ export default function TimeSeriesViewerContainer() {
   };
 
   const renderStatusBar = () => {
+    let showWarning = false;
+    const pointTotal = state.status !== TIME_SERIES_VIEWER_STATUS.READY
+      ? '--'
+      : addThousandsSeparator(state.pointTotal);
+
+    if (calcPredictedPointsForNewPosition(state) > POINTS_PERFORMANCE_LIMIT) {
+      showWarning = true;
+    }
+
     return (
       <div className={classes.statusBar}>
-        <span>Data Points:&nbsp;</span>
-        {addThousandsSeparator(state.pointTotal)}
-        <span>&nbsp;of&nbsp;</span>
+        <ComputerIcon fontSize="medium" />
+        <span>
+          <b>Data Points</b>
+          :&nbsp;
+        </span>
+        {pointTotal}
+        <span> of </span>
         {addThousandsSeparator(POINTS_PERFORMANCE_LIMIT)}
+
+        <span
+          className="warningMessage"
+          style={{ visibility: showWarning ? 'visible' : 'hidden' }}
+        >
+
+          <WarnIcon fontSize="medium" />
+          Data point total approaching limit; some options are disabled.
+        </span>
       </div>
     );
   };
