@@ -365,16 +365,14 @@ export const calcPredictedPointsByTimeStep = (state, timeStep) => {
   if (!state.selection.autoTimeStep) return 0;
 
   // formula: points per hour (seconds in hour / Time Step seconds)
-  // x hours (months selected converted to hours) x (positions + variables)
+  // x hours (months selected converted to hours) x positions * variables
   // using seconds for points per hour since that is what TIME_STEPS has.
-  // summing positions and variables to smooth differences (30 x 2208 x 3 x 1 != 30 x 2208 x 2 x 2).
-  // this isn't 100% accurate but is close enough to actual points fetch.
   const positions = getPositionCount(state.selection.sites);
   const pointPerHour = getPointsPerHour(state, timeStep);
   const variables = state.selection.variables.length === 0 ? 1 : state.selection.variables.length;
   const totalHours = getTotalHours(state);
 
-  return pointPerHour * totalHours * (positions + variables);
+  return pointPerHour * totalHours * positions * variables;
 };
 
 export const calcPredictedPointsForNewPosition = (state, numPositionsOverride) => {
@@ -385,7 +383,7 @@ export const calcPredictedPointsForNewPosition = (state, numPositionsOverride) =
   const variables = state.selection.variables.length === 0 ? 1 : state.selection.variables.length;
   const totalHours = getTotalHours(state);
 
-  return pointPerHour * totalHours * (positions + variables);
+  return pointPerHour * totalHours * positions * variables;
 };
 
 export const calcPredictedPointsForNewVariable = (state) => {
@@ -398,7 +396,7 @@ export const calcPredictedPointsForNewVariable = (state) => {
     ? 1
     : state.selection.variables.length + 1;
 
-  return pointPerHour * totalHours * (positions + variables);
+  return pointPerHour * totalHours * positions * variables;
 };
 
 // note that the dates are not JS dates but from dateRange and should be
@@ -411,7 +409,7 @@ export const calcPredictedPointsByDateRange = (state, startDate, endDate) => {
   const variables = state.selection.variables.length === 0 ? 1 : state.selection.variables.length;
   const totalHours = getTotalHoursCustom(startDate, endDate);
 
-  return pointPerHour * totalHours * (positions + variables);
+  return pointPerHour * totalHours * positions * variables;
 };
 
 // Array offsets and validators for use when splitting a data file URL
