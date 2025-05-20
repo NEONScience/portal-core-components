@@ -48,22 +48,22 @@ export default html = `
         
           <ul  class="menu menu--footer" data-depth="0">
           <li  class="menu__item">
-        <a href="https://www.neonscience.org/about" title="About Us" class="menu__link" data-plugin-id="menu_link_content:06cc4ae6-95bb-4346-a0e9-6f27f3c48368" data-drupal-link-system-path="node/8793">About Us</a>
+        <a href="https://www.neonscience.org/about" title="About Us" class="menu__link" data-plugin-id="menu-link-content06cc4ae6-95bb-4346-a0e9-6f27f3c48368" data-drupal-link-system-path="node/8793">About Us</a>
               </li>
           <li  class="menu__item">
-        <a href="https://www.neonscience.org/impact/newsroom" class="menu__link" data-plugin-id="menu_link_content:214a668b-1f79-4871-a8d1-c0c86269b559" data-drupal-link-system-path="node/10890">Newsroom</a>
+        <a href="https://www.neonscience.org/impact/newsroom" class="menu__link" data-plugin-id="menu-link-content214a668b-1f79-4871-a8d1-c0c86269b559" data-drupal-link-system-path="node/10890">Newsroom</a>
               </li>
           <li  class="menu__item">
-        <a href="https://www.neonscience.org/about/contact-us" title="Contact Us" class="menu__link" data-plugin-id="menu_link_content:dd9d8fc1-0e31-4927-a1cc-33171a5e6843" data-drupal-link-system-path="node/24">Contact Us</a>
+        <a href="https://www.neonscience.org/about/contact-us" title="Contact Us" class="menu__link" data-plugin-id="menu-link-contentdd9d8fc1-0e31-4927-a1cc-33171a5e6843" data-drupal-link-system-path="node/24">Contact Us</a>
               </li>
           <li  class="menu__item">
-        <a href="https://www.neonscience.org/terms-use" title="Terms &amp; Conditions" class="menu__link" data-plugin-id="menu_link_content:07159864-5327-46a9-a026-e60fa4cbfa05" data-drupal-link-system-path="node/31">Terms &amp; Conditions</a>
+        <a href="https://www.neonscience.org/terms-use" title="Terms &amp; Conditions" class="menu__link" data-plugin-id="menu-link-content07159864-5327-46a9-a026-e60fa4cbfa05" data-drupal-link-system-path="node/31">Terms &amp; Conditions</a>
               </li>
           <li  class="menu__item">
-        <a href="https://www.neonscience.org/get-involved/work-opportunities/careers" class="menu__link" data-plugin-id="menu_link_content:cbe8afdf-f98d-429d-aa0a-842196d4654e">Careers</a>
+        <a href="https://www.neonscience.org/get-involved/work-opportunities/careers" class="menu__link" data-plugin-id="menu-link-contentcbe8afdf-f98d-429d-aa0a-842196d4654e">Careers</a>
               </li>
           <li  class="menu__item">
-        <a href="https://www.neonscience.org/neon-code-conduct" class="menu__link" data-plugin-id="menu_link_content:4557061a-f1f3-4fc9-a14d-d3a9517d4cfb" data-drupal-link-system-path="node/12759">Code of Conduct</a>
+        <a href="https://www.neonscience.org/neon-code-conduct" class="menu__link" data-plugin-id="menu-link-content4557061a-f1f3-4fc9-a14d-d3a9517d4cfb" data-drupal-link-system-path="node/12759">Code of Conduct</a>
               </li>
         </ul>
   
@@ -75,7 +75,7 @@ export default html = `
 
     </div>
     <div class="footer-bottom__copyright">
-      <p>Copyright &copy; Battelle, 2024</p>
+      <p>Copyright &copy; Battelle, 2025</p>
     </div>
     <div class="footer-bottom__message">
       <p>The National Ecological Observatory Network is a major facility fully funded by the U.S. National Science Foundation.</p><p>Any opinions, findings and conclusions or recommendations expressed in this material do not necessarily reflect the views of the U.S. National Science Foundation.</p>
