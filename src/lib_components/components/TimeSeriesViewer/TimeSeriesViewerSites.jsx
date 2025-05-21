@@ -847,18 +847,25 @@ function SelectPositionsButton(props) {
               </span>
               <br />
 
-              <span style={{
-                fontWeight: 300,
-                fontStyle: 'italic',
-                visibility: isApplyButtonDisabled(localSelectedPositions)
-                  ? 'visible'
-                  : 'hidden',
-              }}
+              <span
+                style={{
+                  fontWeight: 300,
+                  fontStyle: 'italic',
+                  visibility: isApplyButtonDisabled(localSelectedPositions) && localSelectedPositions.length > 0
+                    ? 'visible'
+                    : 'hidden',
+                }}
+                className="MuiTypography-colorError"
               >
                 Number of positions selected may cause performance issues
               </span>
-
             </Typography>
+            {/* <Typography
+              variant="subtitle2"
+              style={{ textAlign: 'right' }}
+            >
+
+            </Typography> */}
           </div>
         </DialogTitle>
         <DialogContent dividers>
