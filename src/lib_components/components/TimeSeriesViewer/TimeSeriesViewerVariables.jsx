@@ -134,10 +134,15 @@ function Control(props) {
     selectProps: { TextFieldProps },
   } = props;
 
+  const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
+  const labelText = calcPredictedPointsForNewVariable(state) > POINTS_PERFORMANCE_LIMIT
+    ? 'Add Variables (disabled)'
+    : 'Add Variables';
+
   return (
     <TextField
       fullWidth
-      label="Add Variables"
+      label={labelText}
       variant="outlined"
       InputProps={{
         inputComponent,
@@ -455,6 +460,7 @@ export default function TimeSeriesViewerVariables() {
         <Select
           isMulti
           isSearchable
+          blurInputOnSelect="true"
           isDisabled={isDisabled}
           clearable={false}
           classes={classes}

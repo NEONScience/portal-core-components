@@ -851,6 +851,7 @@ function SelectPositionsButton(props) {
                 style={{
                   fontWeight: 300,
                   fontStyle: 'italic',
+                  // eslint-disable-next-line max-len
                   visibility: isApplyButtonDisabled(localSelectedPositions) && localSelectedPositions.length > 0
                     ? 'visible'
                     : 'hidden',
@@ -938,10 +939,16 @@ function SitesControl(props) {
     innerRef,
     selectProps: { TextFieldProps },
   } = props;
+
+  const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
+  const labelText = calcPredictedPointsForNewPosition(state) > POINTS_PERFORMANCE_LIMIT
+    ? 'Add Sites (disabled)'
+    : 'Add Sites';
+
   return (
     <TextField
       fullWidth
-      label="Add Sites"
+      label={labelText}
       variant="outlined"
       InputProps={{
         inputComponent,
