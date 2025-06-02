@@ -32,8 +32,6 @@ import RouteService from '../../service/RouteService';
 
 import TimeSeriesViewerContext, {
   POINTS_PERFORMANCE_LIMIT,
-  calcPredictedPointsForNewPosition,
-  calcPredictedPointsForNewVariable,
   summarizeTimeSteps,
   TIME_SERIES_VIEWER_STATUS_TITLES,
   Y_AXIS_RANGE_MODE_DETAILS,
@@ -644,8 +642,9 @@ export default function TimeSeriesViewerContainer() {
       ? '--'
       : addThousandsSeparator(state.pointTotal);
 
-    if (calcPredictedPointsForNewPosition(state) > POINTS_PERFORMANCE_LIMIT ||
-      calcPredictedPointsForNewVariable(state) > POINTS_PERFORMANCE_LIMIT) {
+    if (TimeSeriesViewerContext.calcPredictedPointsForNewPosition(state) > POINTS_PERFORMANCE_LIMIT ||
+    TimeSeriesViewerContext.calcPredictedPointsForNewVariable(state)
+      > POINTS_PERFORMANCE_LIMIT) {
       showWarning = true;
     }
 

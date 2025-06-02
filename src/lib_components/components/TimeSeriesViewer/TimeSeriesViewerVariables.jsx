@@ -27,7 +27,6 @@ import SelectAllIcon from '@material-ui/icons/DoneAll';
 
 import Theme from '../Theme/Theme';
 import TimeSeriesViewerContext, {
-  calcPredictedPointsForNewVariable,
   POINTS_PERFORMANCE_LIMIT,
 } from './TimeSeriesViewerContext';
 
@@ -135,7 +134,8 @@ function Control(props) {
   } = props;
 
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
-  const labelText = calcPredictedPointsForNewVariable(state) > POINTS_PERFORMANCE_LIMIT
+  const labelText = TimeSeriesViewerContext.calcPredictedPointsForNewVariable(state)
+  > POINTS_PERFORMANCE_LIMIT
     ? 'Add Variables (disabled)'
     : 'Add Variables';
 
@@ -452,7 +452,8 @@ export default function TimeSeriesViewerVariables() {
     );
   }
 
-  const isDisabled = calcPredictedPointsForNewVariable(state) > POINTS_PERFORMANCE_LIMIT;
+  const isDisabled = TimeSeriesViewerContext.calcPredictedPointsForNewVariable(state)
+    > POINTS_PERFORMANCE_LIMIT;
 
   return (
     <div className={classes.root}>

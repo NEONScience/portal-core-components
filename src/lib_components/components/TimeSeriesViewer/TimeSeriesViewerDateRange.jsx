@@ -26,7 +26,6 @@ import ReleaseService from '../../service/ReleaseService';
 import Theme from '../Theme/Theme';
 
 import TimeSeriesViewerContext, {
-  calcPredictedPointsByDateRange,
   POINTS_PERFORMANCE_LIMIT,
 } from './TimeSeriesViewerContext';
 
@@ -96,9 +95,10 @@ const TimeSeriesViewerDateRange = (props) => {
   ]);
 
   // check currentRange to make sure values don't exceed points allowed
-  const pointsAvailable = POINTS_PERFORMANCE_LIMIT
-    - calcPredictedPointsByDateRange(state, currentRange[0], currentRange[1]);
-  const pointsPerMonth = calcPredictedPointsByDateRange(state, '2024-01', '2024-01');
+  const pointsAvailable = POINTS_PERFORMANCE_LIMIT - TimeSeriesViewerContext
+    .calcPredictedPointsByDateRange(state, currentRange[0], currentRange[1]);
+  const pointsPerMonth = TimeSeriesViewerContext
+    .calcPredictedPointsByDateRange(state, '2024-01', '2024-01');
   const monthsAvailable = Math.floor(pointsAvailable / pointsPerMonth);
 
   if (monthsAvailable < displayRange.length) {

@@ -160,6 +160,7 @@ export const DEFAULT_STATE = {
   dataFetches: {},
   dataFetchProgress: 0,
   variables: {},
+  pointTotal: 0,
   product: {
     productCode: null,
     productName: null,
@@ -168,7 +169,6 @@ export const DEFAULT_STATE = {
     dateRange: [null, null],
     continuousDateRange: [],
     sites: {},
-    pointTotal: 0,
   },
   fetchReleases: { status: FETCH_STATUS.AWAITING_CALL, error: null },
   release: null,
@@ -303,7 +303,7 @@ export const summarizeTimeSteps = (steps, timeStep = null, pluralize = true) => 
   return `${value} ${intervals[breakIdx]}${plural}`;
 };
 
-export const getPositionCount = (sitesArray, siteCodeToExclude) => {
+const getPositionCount = (sitesArray, siteCodeToExclude) => {
   let total = 0;
   sitesArray.forEach((site) => {
     if (site.siteCode !== siteCodeToExclude) {
@@ -351,6 +351,10 @@ const getPointsPerHour = (state, currentTimeStep) => {
 };
 
 const calcPointTotal = (data) => {
+  if (!data) {
+    return 0;
+  }
+
   let varsAndPositions = 0;
 
   if (data.length > 0 && data[0].length > 1) {
@@ -361,7 +365,7 @@ const calcPointTotal = (data) => {
   return data.length * varsAndPositions;
 };
 
-export const calcPredictedPointsByTimeStep = (state, timeStep) => {
+const calcPredictedPointsByTimeStep = (state, timeStep) => {
   if (!state.selection.autoTimeStep) return 0;
 
   // formula: points per hour (seconds in hour / Time Step seconds)
@@ -375,7 +379,7 @@ export const calcPredictedPointsByTimeStep = (state, timeStep) => {
   return pointPerHour * totalHours * positions * variables;
 };
 
-export const calcPredictedPointsForNewPosition = (state, numPositionsOverride) => {
+const calcPredictedPointsForNewPosition = (state, numPositionsOverride) => {
   if (!state.selection.autoTimeStep) return 0;
 
   const positions = numPositionsOverride ?? getPositionCount(state.selection.sites) + 1;
@@ -386,7 +390,7 @@ export const calcPredictedPointsForNewPosition = (state, numPositionsOverride) =
   return pointPerHour * totalHours * positions * variables;
 };
 
-export const calcPredictedPointsForNewVariable = (state) => {
+const calcPredictedPointsForNewVariable = (state) => {
   if (!state.selection.autoTimeStep) return 0;
 
   const positions = getPositionCount(state.selection.sites);
@@ -401,7 +405,7 @@ export const calcPredictedPointsForNewVariable = (state) => {
 
 // note that the dates are not JS dates but from dateRange and should be
 // in the format of 'yyyy-mm'.
-export const calcPredictedPointsByDateRange = (state, startDate, endDate) => {
+const calcPredictedPointsByDateRange = (state, startDate, endDate) => {
   if (!state.selection.autoTimeStep) return 0;
 
   const positions = getPositionCount(state.selection.sites);
@@ -2024,6 +2028,11 @@ const TimeSeriesViewerContext = {
   Provider,
   useTimeSeriesViewerState,
   TimeSeriesViewerPropTypes,
+  calcPredictedPointsForNewPosition,
+  calcPredictedPointsByTimeStep,
+  calcPredictedPointsForNewVariable,
+  calcPredictedPointsByDateRange,
+  getPositionCount,
 };
 
 export default TimeSeriesViewerContext;

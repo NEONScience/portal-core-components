@@ -63,8 +63,6 @@ import iconGradientAquaticSVG from '../SiteMap/svg/icon-site-gradient-aquatic.sv
 
 import TimeSeriesViewerContext, {
   TabComponentPropTypes,
-  calcPredictedPointsForNewPosition,
-  getPositionCount,
   POINTS_PERFORMANCE_LIMIT,
 } from './TimeSeriesViewerContext';
 
@@ -793,12 +791,12 @@ function SelectPositionsButton(props) {
     // state.selection does not include what was added by users dialog selections so exclude
     // current site from getPositionCount and use sites from localSelectedPositions
     const allCurrentPositions = selectedPositions2.length
-      + getPositionCount(state.selection.sites, siteCode);
+      + TimeSeriesViewerContext.getPositionCount(state.selection.sites, siteCode);
     let isDisabled = false;
 
     if (!selectedPositions2.length) {
       isDisabled = true;
-    } else if (calcPredictedPointsForNewPosition(state, allCurrentPositions)
+    } else if (TimeSeriesViewerContext.calcPredictedPointsForNewPosition(state, allCurrentPositions)
       > POINTS_PERFORMANCE_LIMIT) {
       isDisabled = true;
     }
@@ -806,7 +804,8 @@ function SelectPositionsButton(props) {
     return isDisabled;
   };
 
-  const isDisabled = calcPredictedPointsForNewPosition(state) > POINTS_PERFORMANCE_LIMIT;
+  const isDisabled = TimeSeriesViewerContext.calcPredictedPointsForNewPosition(state)
+    > POINTS_PERFORMANCE_LIMIT;
 
   return (
     <>
@@ -941,7 +940,8 @@ function SitesControl(props) {
   } = props;
 
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
-  const labelText = calcPredictedPointsForNewPosition(state) > POINTS_PERFORMANCE_LIMIT
+  const labelText = TimeSeriesViewerContext.calcPredictedPointsForNewPosition(state)
+    > POINTS_PERFORMANCE_LIMIT
     ? 'Add Sites (disabled)'
     : 'Add Sites';
 
@@ -1319,7 +1319,8 @@ const SitesSelect = () => {
 
   if (!selectableSitesCount) { return null; }
 
-  isDisabled = calcPredictedPointsForNewPosition(state) > POINTS_PERFORMANCE_LIMIT;
+  isDisabled = TimeSeriesViewerContext.calcPredictedPointsForNewPosition(state)
+    > POINTS_PERFORMANCE_LIMIT;
 
   return (
     <NoSsr>
@@ -1368,12 +1369,13 @@ export default function TimeSeriesViewerSites(props) {
 
   const calcUpperSelectionLimit = () => {
     let upperLimit = 0;
-    const currentPositionCount = getPositionCount(state.selection.sites);
+    const currentPositionCount = TimeSeriesViewerContext.getPositionCount(state.selection.sites);
 
     for (let upperLimitCandidate = 1; upperLimitCandidate <= 5; upperLimitCandidate += 1) {
       const numNewPositions = currentPositionCount + upperLimitCandidate;
 
-      if (calcPredictedPointsForNewPosition(state, numNewPositions) < POINTS_PERFORMANCE_LIMIT) {
+      if (TimeSeriesViewerContext.calcPredictedPointsForNewPosition(state, numNewPositions)
+        < POINTS_PERFORMANCE_LIMIT) {
         upperLimit = upperLimitCandidate;
       }
     }
@@ -1382,7 +1384,8 @@ export default function TimeSeriesViewerSites(props) {
   };
 
   const selectedItems = state.selection.sites.map((site) => site.siteCode);
-  const isDisabled = calcPredictedPointsForNewPosition(state) > POINTS_PERFORMANCE_LIMIT;
+  const isDisabled = TimeSeriesViewerContext.calcPredictedPointsForNewPosition(state)
+    > POINTS_PERFORMANCE_LIMIT;
   const upperLimit = Math.min(calcUpperSelectionLimit() + selectedItems.length, 5);
 
   return (
