@@ -319,7 +319,7 @@ const getLastDayInMonth = (yearMonth) => {
   const date = new Date(`${yearMonth}-01T00:00:00Z`);
   date.setUTCMonth(date.getUTCMonth() + 1);
   date.setUTCSeconds(date.getUTCSeconds() - 1);
-  return date.getDate();
+  return date.getUTCDate();
 };
 
 const getTotalHoursCustom = (startDate, endDate) => {
