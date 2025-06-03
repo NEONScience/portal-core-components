@@ -313,16 +313,18 @@ const getPositionCount = (sitesArray, siteCodeToExclude) => {
   return total;
 };
 
-// month param is the month number.  This is ONE based not zero based like JS.
-const getLastDayInMonth = (month) => {
-  const monthAsNumber = Number.parseInt(month, 10);
-  const days = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-  return days[monthAsNumber];
+// yearMonth param is in the format of 'yyyy-mm' which is
+// a typical dateRange item
+const getLastDayInMonth = (yearMonth) => {
+  const date = new Date(`${yearMonth}-01T00:00:00Z`);
+  date.setUTCMonth(date.getUTCMonth() + 1);
+  date.setUTCSeconds(date.getUTCSeconds() - 1);
+  return date.getDate();
 };
 
 const getTotalHoursCustom = (startDate, endDate) => {
   const date1 = new Date(`${startDate}-01T00:00:00Z`);
-  const lastDay = getLastDayInMonth(endDate.substring(5, 7));
+  const lastDay = getLastDayInMonth(endDate);
   const date2 = new Date(`${endDate}-${lastDay}T23:59:59Z`);
   return Math.round((date2.getTime() - date1.getTime()) / 1000 / 60 / 60);
 };
@@ -331,10 +333,10 @@ const getTotalHours = (state) => {
   const date1 = new Date(`${state.selection.dateRange[0]}-01T00:00:00Z`);
   let date2;
   if (state.selection.continuousDateRange.length === 1) {
-    const lastDay = getLastDayInMonth(state.selection.continuousDateRange[0].substring(5, 7));
+    const lastDay = getLastDayInMonth(state.selection.continuousDateRange[0]);
     date2 = new Date(`${state.selection.continuousDateRange[0]}-${lastDay}T23:59:59Z`);
   } else if (state.selection.dateRange.length === 2) {
-    const lastDay = getLastDayInMonth(state.selection.dateRange[1].substring(5, 7));
+    const lastDay = getLastDayInMonth(state.selection.dateRange[1]);
     date2 = new Date(`${state.selection.dateRange[1]}-${lastDay}T23:59:59Z`);
   } else {
     // eslint-disable-next-line no-console
