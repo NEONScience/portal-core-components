@@ -21,6 +21,7 @@ import TimeSeriesViewerContext, {
   Y_AXIS_RANGE_MODES,
   Y_AXIS_RANGE_MODE_DETAILS,
   summarizeTimeSteps,
+  POINTS_PERFORMANCE_LIMIT,
 } from './TimeSeriesViewerContext';
 
 const useStyles = makeStyles((theme) => ({
@@ -466,6 +467,7 @@ const TimeStepOption = () => {
   const handleChangeTimeStep = (event, timeStep) => {
     dispatch({ type: 'selectTimeStep', timeStep });
   };
+
   return (
     <ToggleButtonGroup
       exclusive
@@ -481,8 +483,18 @@ const TimeStepOption = () => {
         const className = timeStep === selectedTimeStep
           ? `${classes.optionButton} ${classes.optionButtonSelected}`
           : classes.optionButton;
+
+        const isDisabled = TimeSeriesViewerContext.calcPredictedPointsByTimeStep(state, timeStep)
+          > POINTS_PERFORMANCE_LIMIT;
+
         return (
-          <ToggleButton key={timeStep} value={timeStep} size="small" className={className}>
+          <ToggleButton
+            key={timeStep}
+            value={timeStep}
+            size="small"
+            className={className}
+            disabled={isDisabled}
+          >
             {timeStep}
           </ToggleButton>
         );

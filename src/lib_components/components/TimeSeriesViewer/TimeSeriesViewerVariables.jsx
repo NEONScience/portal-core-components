@@ -26,7 +26,9 @@ import SearchIcon from '@material-ui/icons/Search';
 import SelectAllIcon from '@material-ui/icons/DoneAll';
 
 import Theme from '../Theme/Theme';
-import TimeSeriesViewerContext from './TimeSeriesViewerContext';
+import TimeSeriesViewerContext, {
+  POINTS_PERFORMANCE_LIMIT,
+} from './TimeSeriesViewerContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -131,10 +133,16 @@ function Control(props) {
     selectProps: { TextFieldProps },
   } = props;
 
+  const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
+  const labelText = TimeSeriesViewerContext.calcPredictedPointsForNewVariable(state)
+  > POINTS_PERFORMANCE_LIMIT
+    ? 'Add Variables (disabled)'
+    : 'Add Variables';
+
   return (
     <TextField
       fullWidth
-      label="Add Variables"
+      label={labelText}
       variant="outlined"
       InputProps={{
         inputComponent,
@@ -444,12 +452,17 @@ export default function TimeSeriesViewerVariables() {
     );
   }
 
+  const isDisabled = TimeSeriesViewerContext.calcPredictedPointsForNewVariable(state)
+    > POINTS_PERFORMANCE_LIMIT;
+
   return (
     <div className={classes.root}>
       <NoSsr>
         <Select
           isMulti
           isSearchable
+          blurInputOnSelect="true"
+          isDisabled={isDisabled}
           clearable={false}
           classes={classes}
           styles={selectStyles}

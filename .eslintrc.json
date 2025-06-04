@@ -46,8 +46,7 @@
     "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     "react/jsx-props-no-spreading": 0,
     "no-restricted-exports": 0,
-    "no-shadow": "off",
-    "no-use-before-define": "off"
+    "no-shadow": "off"
   },
   "overrides": [
     {

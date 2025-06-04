@@ -67,6 +67,8 @@ export const TIME_SERIES_VIEWER_STATUS_TITLES = {
   READY: null,
 };
 
+export const POINTS_PERFORMANCE_LIMIT = 250000;
+
 // List of common date-time variable names to verify against
 // The variables file ultimately controls the datetime variable that will
 // be utilized, this allows us to check for informational purposes
@@ -158,6 +160,7 @@ export const DEFAULT_STATE = {
   dataFetches: {},
   dataFetchProgress: 0,
   variables: {},
+  pointTotal: 0,
   product: {
     productCode: null,
     productName: null,
@@ -298,6 +301,121 @@ export const summarizeTimeSteps = (steps, timeStep = null, pluralize = true) => 
   if (value.slice(value.length - 1) === '0') { value = value.slice(0, value.length - 2); }
   const plural = pluralize ? 's' : '';
   return `${value} ${intervals[breakIdx]}${plural}`;
+};
+
+const getPositionCount = (sitesArray, siteCodeToExclude) => {
+  let total = 0;
+  sitesArray.forEach((site) => {
+    if (site.siteCode !== siteCodeToExclude) {
+      total += site.positions.length;
+    }
+  });
+  return total;
+};
+
+// yearMonth param is in the format of 'yyyy-mm' which is
+// a typical dateRange item
+const getLastDayInMonth = (yearMonth) => {
+  const date = new Date(`${yearMonth}-01T00:00:00Z`);
+  date.setUTCMonth(date.getUTCMonth() + 1);
+  date.setUTCSeconds(date.getUTCSeconds() - 1);
+  return date.getUTCDate();
+};
+
+const getTotalHoursCustom = (startDate, endDate) => {
+  const date1 = new Date(`${startDate}-01T00:00:00Z`);
+  const lastDay = getLastDayInMonth(endDate);
+  const date2 = new Date(`${endDate}-${lastDay}T23:59:59Z`);
+  return Math.round((date2.getTime() - date1.getTime()) / 1000 / 60 / 60);
+};
+
+const getTotalHours = (state) => {
+  const date1 = new Date(`${state.selection.dateRange[0]}-01T00:00:00Z`);
+  let date2;
+  if (state.selection.continuousDateRange.length === 1) {
+    const lastDay = getLastDayInMonth(state.selection.continuousDateRange[0]);
+    date2 = new Date(`${state.selection.continuousDateRange[0]}-${lastDay}T23:59:59Z`);
+  } else if (state.selection.dateRange.length === 2) {
+    const lastDay = getLastDayInMonth(state.selection.dateRange[1]);
+    date2 = new Date(`${state.selection.dateRange[1]}-${lastDay}T23:59:59Z`);
+  } else {
+    // eslint-disable-next-line no-console
+    console.error('Unknown date range');
+  }
+  return Math.round((date2.getTime() - date1.getTime()) / 1000 / 60 / 60);
+};
+
+const getPointsPerHour = (state, currentTimeStep) => {
+  const secondsInHour = 3600;
+  const timeStep = currentTimeStep === 'auto' ? state.selection.autoTimeStep : currentTimeStep;
+  const timeStepSeconds = TIME_STEPS[timeStep].seconds;
+  return secondsInHour / timeStepSeconds;
+};
+
+const calcPointTotal = (data) => {
+  if (!data) {
+    return 0;
+  }
+
+  let varsAndPositions = 0;
+
+  if (data.length > 0 && data[0].length > 1) {
+    // first array position is dateTime.  Count items after it
+    varsAndPositions = data[0].length - 1;
+  }
+
+  return data.length * varsAndPositions;
+};
+
+const calcPredictedPointsByTimeStep = (state, timeStep) => {
+  if (!state.selection.autoTimeStep) return 0;
+
+  // formula: points per hour (seconds in hour / Time Step seconds)
+  // x hours (months selected converted to hours) x positions * variables
+  // using seconds for points per hour since that is what TIME_STEPS has.
+  const positions = getPositionCount(state.selection.sites);
+  const pointPerHour = getPointsPerHour(state, timeStep);
+  const variables = state.selection.variables.length === 0 ? 1 : state.selection.variables.length;
+  const totalHours = getTotalHours(state);
+
+  return pointPerHour * totalHours * positions * variables;
+};
+
+const calcPredictedPointsForNewPosition = (state, numPositionsOverride) => {
+  if (!state.selection.autoTimeStep) return 0;
+
+  const positions = numPositionsOverride ?? getPositionCount(state.selection.sites) + 1;
+  const pointPerHour = getPointsPerHour(state, state.selection.timeStep);
+  const variables = state.selection.variables.length === 0 ? 1 : state.selection.variables.length;
+  const totalHours = getTotalHours(state);
+
+  return pointPerHour * totalHours * positions * variables;
+};
+
+const calcPredictedPointsForNewVariable = (state) => {
+  if (!state.selection.autoTimeStep) return 0;
+
+  const positions = getPositionCount(state.selection.sites);
+  const pointPerHour = getPointsPerHour(state, state.selection.timeStep);
+  const totalHours = getTotalHours(state);
+  const variables = state.selection.variables.length === 0
+    ? 1
+    : state.selection.variables.length + 1;
+
+  return pointPerHour * totalHours * positions * variables;
+};
+
+// note that the dates are not JS dates but from dateRange and should be
+// in the format of 'yyyy-mm'.
+const calcPredictedPointsByDateRange = (state, startDate, endDate) => {
+  if (!state.selection.autoTimeStep) return 0;
+
+  const positions = getPositionCount(state.selection.sites);
+  const pointPerHour = getPointsPerHour(state, state.selection.timeStep);
+  const variables = state.selection.variables.length === 0 ? 1 : state.selection.variables.length;
+  const totalHours = getTotalHoursCustom(startDate, endDate);
+
+  return pointPerHour * totalHours * positions * variables;
 };
 
 // Array offsets and validators for use when splitting a data file URL
@@ -1147,6 +1265,7 @@ const reducer = (state, action) => {
         return softFail('Current selection of dates/sites/positions/variables does not have any valid numeric data.');
       }
       newState.graphData = action.graphData;
+      newState.pointTotal = calcPointTotal(action.graphData.data);
       newState.status = TIME_SERIES_VIEWER_STATUS.READY;
       return newState;
 
@@ -1232,6 +1351,23 @@ const reducer = (state, action) => {
         .positions[action.position]
         .data[action.month][action.downloadPkg][action.timeStep][action.table]
         .series = action.series;
+      /*  uncomment for troubleshooting to get number of points downloaded
+      try {
+        if (!newState.product.pointTotal || isNaN(newState.product.pointTotal)) {
+          newState.product.pointTotal = 0;
+        }
+
+        newState.product.pointTotal += action.series.endDateTime.data.length;
+        console.log("newState", newState);
+        // console.log("action", action);
+        console.log("fetchDataFileSucceeded - pointTotal", newState.product.pointTotal);
+        // console.log("newState.selection.continuousDateRange.length",
+        // newState.selection.continuousDateRange.length);
+      } catch (error) {
+        console.log("my derpy code crashed", action);
+      }
+ */
+
       return newState;
 
     // Core Selection Actions
@@ -1784,6 +1920,9 @@ const Provider = (props) => {
       } else {
         const masterFetchToken = `fetchDataFiles.${uniqueId()}`;
         dispatch({ type: 'fetchDataFiles', token: masterFetchToken, fetches: dataActions });
+        // this is the point where we can capture the user fetch criteria
+        // eslint-disable-next-line no-console
+        // console.log('Fetching data', state, dataFetches);
         forkJoinWithProgress(dataFetches).pipe(
           mergeMap(([finalResult, progress]) => merge(
             progress.pipe(
@@ -1891,6 +2030,11 @@ const TimeSeriesViewerContext = {
   Provider,
   useTimeSeriesViewerState,
   TimeSeriesViewerPropTypes,
+  calcPredictedPointsForNewPosition,
+  calcPredictedPointsByTimeStep,
+  calcPredictedPointsForNewVariable,
+  calcPredictedPointsByDateRange,
+  getPositionCount,
 };
 
 export default TimeSeriesViewerContext;

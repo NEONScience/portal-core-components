@@ -25,7 +25,9 @@ import NeonContext from '../NeonContext/NeonContext';
 import ReleaseService from '../../service/ReleaseService';
 import Theme from '../Theme/Theme';
 
-import TimeSeriesViewerContext from './TimeSeriesViewerContext';
+import TimeSeriesViewerContext, {
+  POINTS_PERFORMANCE_LIMIT,
+} from './TimeSeriesViewerContext';
 
 const getYearMonthMoment = (yearMonth, day = 15) => (
   moment(`${yearMonth}-${day.toString().padStart(2, '0')}`)
@@ -66,12 +68,12 @@ const TimeSeriesViewerDateRange = (props) => {
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
 
   const { dateRange: currentRange } = state.selection;
-  const selectableRange = state.product.dateRange;
+  let selectableRange = state.product.dateRange;
   const displayRange = state.product.continuousDateRange;
   const displayMin = 0;
   const displayMax = displayRange.length - 1;
-  const sliderMin = displayRange.indexOf(selectableRange[0]);
-  const sliderMax = displayRange.indexOf(selectableRange[1]);
+  let sliderMin = displayRange.indexOf(selectableRange[0]);
+  let sliderMax = displayRange.indexOf(selectableRange[1]);
 
   const [activelySelectingDateRange, setActivelySelectingDateRange] = useState([...currentRange]);
   const [activelySelecting, setActivelySelecting] = useState(false);
@@ -91,6 +93,25 @@ const TimeSeriesViewerDateRange = (props) => {
     setActivelySelectingDateRange,
     currentRange,
   ]);
+
+  // check currentRange to make sure values don't exceed points allowed
+  const pointsAvailable = POINTS_PERFORMANCE_LIMIT - TimeSeriesViewerContext
+    .calcPredictedPointsByDateRange(state, currentRange[0], currentRange[1]);
+  const pointsPerMonth = TimeSeriesViewerContext
+    .calcPredictedPointsByDateRange(state, '2024-01', '2024-01');
+  const monthsAvailable = Math.floor(pointsAvailable / pointsPerMonth);
+
+  if (monthsAvailable < displayRange.length) {
+    sliderMin = Math.max(
+      displayRange.indexOf(selectableRange[0]),
+      displayRange.indexOf(currentRange[0]) - monthsAvailable,
+    );
+    sliderMax = Math.min(
+      displayRange.indexOf(selectableRange[1]),
+      displayRange.indexOf(currentRange[1]) + monthsAvailable,
+    );
+    selectableRange = [displayRange[sliderMin], displayRange[sliderMax]];
+  }
 
   // Derive site and availability values for the AvailabilityGrid
   // eslint-disable-next-line react-hooks/exhaustive-deps
