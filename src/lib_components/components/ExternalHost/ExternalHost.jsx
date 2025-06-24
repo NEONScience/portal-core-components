@@ -262,7 +262,7 @@ const externalHosts = {
     id: 'BOLD',
     name: 'BOLD',
     projectTitle: 'BOLD (Barcode of Life Datasystem)',
-    url: 'http://www.barcodinglife.com/',
+    url: 'https://boldsystems.org/',
     hostType: HOST_TYPES.ADDITIONAL_DATA,
     linkType: LINK_TYPES.BY_PRODUCT,
     hostDataVariety: 'Raw sequence data',
@@ -271,7 +271,7 @@ const externalHosts = {
       return externalProducts[productCode].searches.map((search) => ({
         key: search.query,
         node: renderExternalHostLink(
-          `http://www.boldsystems.org/index.php/Public_SearchTerms?query=${search.query}`,
+          `https://portal.boldsystems.org/recordset/${search.query}`,
           search.title,
           'BOLD',
           productCode,

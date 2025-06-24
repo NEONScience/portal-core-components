@@ -178,7 +178,7 @@ const RouteService: IRouteService = {
     `${NeonEnvironment.getWebHost()}/about/user-accounts`
   ),
   getDataPoliciesPath: (): string => (
-    `${NeonEnvironment.getWebHost()}/data/about-data/data-policies`
+    `${NeonEnvironment.getWebHost()}/data-samples/guidelines-policies`
   ),
   getDataPoliciesCitationPath: (): string => (
     `${NeonEnvironment.getWebHost()}/data-samples/data-policies-citation`

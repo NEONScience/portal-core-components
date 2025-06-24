@@ -182,7 +182,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
               className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
               data-gtm-external-host="BOLD"
               data-gtm-product-code="DP1.10020.001"
-              href="http://www.barcodinglife.com/"
+              href="https://boldsystems.org/"
               onBlur={[Function]}
               onFocus={[Function]}
               rel="noopener noreferrer"
@@ -212,7 +212,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
                 className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
                 data-gtm-external-host="BOLD"
                 data-gtm-product-code="DP1.10020.001"
-                href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETN"
+                href="https://portal.boldsystems.org/recordset/BETN"
                 onBlur={[Function]}
                 onFocus={[Function]}
                 rel="noopener noreferrer"
@@ -226,7 +226,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
                 className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
                 data-gtm-external-host="BOLD"
                 data-gtm-product-code="DP1.10020.001"
-                href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETP"
+                href="https://portal.boldsystems.org/recordset/BETP"
                 onBlur={[Function]}
                 onFocus={[Function]}
                 rel="noopener noreferrer"
@@ -547,7 +547,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
               className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
               data-gtm-external-host="BOLD"
               data-gtm-product-code="DP1.10020.001"
-              href="http://www.barcodinglife.com/"
+              href="https://boldsystems.org/"
               onBlur={[Function]}
               onFocus={[Function]}
               rel="noopener noreferrer"
@@ -577,7 +577,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
                 className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
                 data-gtm-external-host="BOLD"
                 data-gtm-product-code="DP1.10020.001"
-                href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETN"
+                href="https://portal.boldsystems.org/recordset/BETN"
                 onBlur={[Function]}
                 onFocus={[Function]}
                 rel="noopener noreferrer"
@@ -591,7 +591,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
                 className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
                 data-gtm-external-host="BOLD"
                 data-gtm-product-code="DP1.10020.001"
-                href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETP"
+                href="https://portal.boldsystems.org/recordset/BETP"
                 onBlur={[Function]}
                 onFocus={[Function]}
                 rel="noopener noreferrer"
@@ -955,7 +955,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
               data-gtm-external-host="BOLD"
               data-gtm-product-code="DP1.10020.001"
-              href="http://www.barcodinglife.com/"
+              href="https://boldsystems.org/"
               onBlur={[Function]}
               onFocus={[Function]}
               rel="noopener noreferrer"
@@ -1030,7 +1030,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
                 data-gtm-external-host="BOLD"
                 data-gtm-product-code="DP1.10020.001"
-                href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETN"
+                href="https://portal.boldsystems.org/recordset/BETN"
                 onBlur={[Function]}
                 onFocus={[Function]}
                 rel="noopener noreferrer"
@@ -1044,7 +1044,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
                 data-gtm-external-host="BOLD"
                 data-gtm-product-code="DP1.10020.001"
-                href="http://www.boldsystems.org/index.php/Public_SearchTerms?query=BETP"
+                href="https://portal.boldsystems.org/recordset/BETP"
                 onBlur={[Function]}
                 onFocus={[Function]}
                 rel="noopener noreferrer"
