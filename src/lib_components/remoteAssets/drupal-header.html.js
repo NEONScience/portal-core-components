@@ -220,6 +220,10 @@ export default html = `<header class="header" role="banner">
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
+          <a href="https://www.neonscience.org/atmosphere-data-theme" class="menu__link" data-plugin-id="menu-link-content98d4ad3b-2680-4625-8b6b-f98e1d535007" data-drupal-link-system-path="node/14258">Atmosphere</a>
+
+                  </li>
+              <li  class="menu__item">
           <a href="https://www.neonscience.org/data-samples/data-themes/biogeochemistry-data-theme" class="menu__link" data-plugin-id="menu-link-content0e8a95c3-8f6b-4858-b5e0-f686f745deeb" data-drupal-link-system-path="node/12902">Biogeochemistry</a>
 
                   </li>
