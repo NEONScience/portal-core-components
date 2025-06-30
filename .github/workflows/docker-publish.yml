@@ -4,7 +4,6 @@ on:
   push:
     branches: [ github-actions ]
     tags: [ 'v*' ]
-
 env:
   GCP_ARTIFACT_HOST: ${{ vars.SHARED_WIF_LOCATON }}-docker.pkg.dev
   GCP_REGISTRY: ${{ vars.SHARED_WIF_LOCATON }}-docker.pkg.dev/${{ vars.SHARED_WIF_PROJECT }}/${{ vars.SHARED_WIF_REPO }}
@@ -60,4 +59,4 @@ jobs:
           files: |
             ./docker-bake.hcl
             ${{ steps.meta.outputs.bake-file }}
-          push: false
+          push: true
