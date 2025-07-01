@@ -56,6 +56,7 @@ const EnvType = {
 
 export interface NeonServerData {
   NeonPublicAPIHost: Undef<string>;
+  NeonPublicAPIHostAllowInternal: Undef<boolean>;
   NeonWebHost: Undef<string>;
   NeonPublicAPITokenHeader: Undef<string>;
   NeonPublicAPIToken: Undef<string>;
@@ -269,10 +270,13 @@ const NeonEnvironment: INeonEnvironment = {
   getNeonServerDataApiHost: (): string|null => {
     const serverData = NeonEnvironment.getNeonServerData();
     if (serverData && (typeof serverData.NeonPublicAPIHost === 'string')) {
+      const allowInternal = (typeof serverData.NeonPublicAPIHostAllowInternal === 'boolean')
+        ? serverData.NeonPublicAPIHostAllowInternal as boolean
+        : false;
       const apiHost = serverData.NeonPublicAPIHost;
       try {
         const { hostname: apiHostname } = new URL(apiHost);
-        if (NeonEnvironment.isApiHostValid(apiHostname)) {
+        if (NeonEnvironment.isApiHostValid(apiHostname) || allowInternal) {
           return apiHost;
         }
       } catch (e) {

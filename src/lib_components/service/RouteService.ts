@@ -178,10 +178,10 @@ const RouteService: IRouteService = {
     `${NeonEnvironment.getWebHost()}/about/user-accounts`
   ),
   getDataPoliciesPath: (): string => (
-    `${NeonEnvironment.getWebHost()}/data/about-data/data-policies`
+    `${NeonEnvironment.getWebHost()}/data-samples/guidelines-policies`
   ),
   getDataPoliciesCitationPath: (): string => (
-    `${NeonEnvironment.getWebHost()}/data-samples/data-policies-citation`
+    `${NeonEnvironment.getWebHost()}/data-samples/guidelines-policies/citing`
   ),
   getDataQualityPath: (): string => (
     `${NeonEnvironment.getWebHost()}/data-samples/data-management/data-quality-program`
@@ -229,7 +229,7 @@ const RouteService: IRouteService = {
     `${NeonEnvironment.getWebHost()}/impact/observatory-blog/observatory-status`
   ),
   getThemeDetailPath: (theme: string): string => (
-    `${NeonEnvironment.getWebHost()}/data/data-themes/${theme}`
+    `${NeonEnvironment.getWebHost()}/data-samples/data-themes/${theme}`
   ),
   getFieldSiteDetailPath: (siteCode: string): string => (
     `${NeonEnvironment.getWebHost()}/field-sites/${siteCode}`
