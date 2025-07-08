@@ -1,0 +1,4 @@
+/* disable the error overlay */
+#webpack-dev-server-client-overlay {
+  display: none;
+}

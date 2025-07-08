@@ -10,6 +10,7 @@ export declare const requiredEnvironmentVars: string[];
 export declare const optionalEnvironmentVars: string[];
 export interface NeonServerData {
     NeonPublicAPIHost: Undef<string>;
+    NeonPublicAPIHostAllowInternal: Undef<boolean>;
     NeonWebHost: Undef<string>;
     NeonPublicAPITokenHeader: Undef<string>;
     NeonPublicAPIToken: Undef<string>;
