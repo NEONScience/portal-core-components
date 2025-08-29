@@ -410,7 +410,7 @@ exports[`DownloadStepForm Step policies renders correctly 1`] = `
     <a
       className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
       data-gtm="download-data-dialog.policies-link"
-      href="https://www.neonscience.org/data/about-data/data-policies"
+      href="https://www.neonscience.org/data-samples/guidelines-policies"
       onBlur={[Function]}
       onFocus={[Function]}
       target="_blank"

@@ -63,7 +63,11 @@ import iconCoreAquaticSVG from '../SiteMap/svg/icon-site-core-aquatic.svg';
 import iconGradientTerrestrialSVG from '../SiteMap/svg/icon-site-gradient-terrestrial.svg';
 import iconGradientAquaticSVG from '../SiteMap/svg/icon-site-gradient-aquatic.svg';
 
-import TimeSeriesViewerContext, { TabComponentPropTypes } from './TimeSeriesViewerContext';
+import TimeSeriesViewerContext, {
+  TabComponentPropTypes,
+  POINTS_PERFORMANCE_LIMIT,
+  MAX_NUM_SITES_SELECTABLE,
+} from './TimeSeriesViewerContext';
 
 const ucWord = (word) => `${word.slice(0, 1).toUpperCase()}${word.slice(1).toLowerCase()}`;
 
@@ -780,6 +784,32 @@ function SelectPositionsButton(props) {
     setSelectDialogOpen(false);
     dispatch({ type: 'selectSitePositions', siteCode, positions: localSelectedPositions });
   };
+  const checkIsApplyButtonDisabled = (checkSelectedPositions) => {
+    // Include positions from currently selected state.selection, exclude current site
+    // from position selection determination as it is currently being modified prior
+    // to committing to state, account for current site by inspecting the state
+    // of the currently selected positions for this site.
+    const currentSelectedPositions = TimeSeriesViewerContext.getPositionCount(
+      state.selection.sites,
+      siteCode,
+    );
+    const allCurrentPositions = checkSelectedPositions.length + currentSelectedPositions;
+    const numPointsAllPositions = TimeSeriesViewerContext.calcPredictedPointsForNewPosition(
+      state,
+      allCurrentPositions,
+    );
+    let isDisabled = false;
+    if (!checkSelectedPositions.length) {
+      isDisabled = true;
+    } else if (numPointsAllPositions > POINTS_PERFORMANCE_LIMIT) {
+      isDisabled = true;
+    }
+    return isDisabled;
+  };
+  const isDisabled = TimeSeriesViewerContext.calcPredictedPointsForNewPosition(state)
+    > POINTS_PERFORMANCE_LIMIT;
+  const isApplyButtonDisabled = checkIsApplyButtonDisabled(localSelectedPositions)
+    && localSelectedPositions.length > 0;
   return (
     <>
       <Button
@@ -787,6 +817,7 @@ function SelectPositionsButton(props) {
         variant="outlined"
         startIcon={<SelectIcon />}
         style={{ marginLeft: Theme.spacing(4) }}
+        disabled={isDisabled}
         onClick={() => {
           setLocalSelectedPositions(selectedPositions);
           setSelectDialogOpen(true);
@@ -815,6 +846,19 @@ function SelectPositionsButton(props) {
                 style={{ fontWeight: 300, color: Theme.palette.grey[500], fontStyle: 'italic' }}
               >
                 at least one is required
+              </span>
+              <br />
+              <span
+                style={{
+                  fontWeight: 300,
+                  fontStyle: 'italic',
+                  visibility: isApplyButtonDisabled
+                    ? 'visible'
+                    : 'hidden',
+                }}
+                className="MuiTypography-colorError"
+              >
+                Number of positions selected may cause performance issues
               </span>
             </Typography>
           </div>
@@ -862,7 +906,7 @@ function SelectPositionsButton(props) {
           <Button
             onClick={handleApply}
             variant="contained"
-            disabled={!localSelectedPositions.length}
+            disabled={checkIsApplyButtonDisabled(localSelectedPositions)}
           >
             Apply
           </Button>
@@ -889,10 +933,15 @@ function SitesControl(props) {
     innerRef,
     selectProps: { TextFieldProps },
   } = props;
+  const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
+  const numPoints = TimeSeriesViewerContext.calcPredictedPointsForNewPosition(state);
+  const labelText = (numPoints > POINTS_PERFORMANCE_LIMIT)
+    ? 'Add Sites (disabled)'
+    : 'Add Sites';
   return (
     <TextField
       fullWidth
-      label="Add Sites"
+      label={labelText}
       variant="outlined"
       InputProps={{
         inputComponent,
@@ -1266,12 +1315,16 @@ const SitesSelect = () => {
 
   if (!selectableSitesCount) { return null; }
 
+  const numPoints = TimeSeriesViewerContext.calcPredictedPointsForNewPosition(state);
+  const isDisabled = numPoints > POINTS_PERFORMANCE_LIMIT;
+
   return (
     <NoSsr>
       <div style={{ flex: 1 }}>
         <Select
           isMulti
           isSearchable
+          isDisabled={isDisabled}
           clearable={false}
           classes={classes}
           styles={selectStyles}
@@ -1308,17 +1361,37 @@ export default function TimeSeriesViewerSites(props) {
     return <Skeleton variant="rectangular" width="100%" height={56} />;
   }
 
+  const calcUpperSelectionLimit = () => {
+    let upperLimit = 0;
+    const currentPositionCount = TimeSeriesViewerContext.getPositionCount(state.selection.sites);
+    for (let numNewPos = 1; numNewPos <= MAX_NUM_SITES_SELECTABLE; numNewPos += 1) {
+      const numNewPositions = currentPositionCount + numNewPos;
+      const numPoints = TimeSeriesViewerContext.calcPredictedPointsForNewPosition(
+        state,
+        numNewPositions,
+      );
+      if (numPoints < POINTS_PERFORMANCE_LIMIT) {
+        upperLimit = numNewPos;
+      }
+    }
+    return upperLimit;
+  };
+
   const selectedItems = state.selection.sites.map((site) => site.siteCode);
+  const numPoints = TimeSeriesViewerContext.calcPredictedPointsForNewPosition(state);
+  const isDisabled = numPoints > POINTS_PERFORMANCE_LIMIT;
+  const upperLimit = Math.min(calcUpperSelectionLimit() + selectedItems.length, MAX_NUM_SITES_SELECTABLE);
+
   return (
     <div className={classes.root}>
       <div style={{ width: '100%', display: 'flex', alignItems: 'center' }}>
         <SitesSelect />
         <MapSelectionButton
           selection="SITES"
-          selectionLimit={[1, 5]}
+          selectionLimit={[1, upperLimit]}
           selectedItems={selectedItems}
           validItems={Object.keys(state.product.sites)}
-          buttonProps={{ style: { size: 'large', marginLeft: Theme.spacing(1.5) } }}
+          buttonProps={{ style: { size: 'large', marginLeft: Theme.spacing(1.5) }, disabled: isDisabled }}
           onSave={(newSites) => { dispatch({ type: 'updateSelectedSites', siteCodes: newSites }); }}
         />
       </div>

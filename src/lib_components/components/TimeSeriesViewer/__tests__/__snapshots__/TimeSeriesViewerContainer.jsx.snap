@@ -192,7 +192,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
 exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined product with sensor / with default selection 1`] = `
 <div>
   <div
-    className="makeStyles-summaryDiv-41"
+    className="makeStyles-summaryDiv-43"
   >
     <div
       style={
@@ -250,7 +250,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
     </div>
   </div>
   <div
-    className="makeStyles-summaryDiv-41"
+    className="makeStyles-summaryDiv-43"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -264,7 +264,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
     </p>
   </div>
   <div
-    className="makeStyles-summaryDiv-41"
+    className="makeStyles-summaryDiv-43"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -284,7 +284,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-41"
+    className="makeStyles-summaryDiv-43"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -304,7 +304,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-41"
+    className="makeStyles-summaryDiv-43"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -324,7 +324,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-41"
+    className="makeStyles-summaryDiv-43"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -345,13 +345,13 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
         >
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisTitle-42 css-ezqyqq-MuiTableCell-root"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisTitle-44 css-ezqyqq-MuiTableCell-root"
           >
             x
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisSettings-43 css-ezqyqq-MuiTableCell-root"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisSettings-45 css-ezqyqq-MuiTableCell-root"
           >
             <div
               style={
@@ -362,7 +362,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
               }
             >
               <span
-                className="makeStyles-axisSettingTitle-44"
+                className="makeStyles-axisSettingTitle-46"
               >
                 Time step:
               </span>
@@ -379,7 +379,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
 exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined product without sensor / with default selection 1`] = `
 <div>
   <div
-    className="makeStyles-summaryDiv-25"
+    className="makeStyles-summaryDiv-26"
   >
     <div
       style={
@@ -421,7 +421,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
     </div>
   </div>
   <div
-    className="makeStyles-summaryDiv-25"
+    className="makeStyles-summaryDiv-26"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -435,7 +435,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
     </p>
   </div>
   <div
-    className="makeStyles-summaryDiv-25"
+    className="makeStyles-summaryDiv-26"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -455,7 +455,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-25"
+    className="makeStyles-summaryDiv-26"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -475,7 +475,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-25"
+    className="makeStyles-summaryDiv-26"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -495,7 +495,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-25"
+    className="makeStyles-summaryDiv-26"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -516,13 +516,13 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
         >
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisTitle-26 css-ezqyqq-MuiTableCell-root"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisTitle-27 css-ezqyqq-MuiTableCell-root"
           >
             x
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisSettings-27 css-ezqyqq-MuiTableCell-root"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisSettings-28 css-ezqyqq-MuiTableCell-root"
           >
             <div
               style={
@@ -533,7 +533,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
               }
             >
               <span
-                className="makeStyles-axisSettingTitle-28"
+                className="makeStyles-axisSettingTitle-29"
               >
                 Time step:
               </span>
@@ -550,7 +550,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
 exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection with axes 1`] = `
 <div>
   <div
-    className="makeStyles-summaryDiv-121"
+    className="makeStyles-summaryDiv-128"
   >
     <div
       style={
@@ -592,7 +592,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     </div>
   </div>
   <div
-    className="makeStyles-summaryDiv-121"
+    className="makeStyles-summaryDiv-128"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -606,7 +606,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     </p>
   </div>
   <div
-    className="makeStyles-summaryDiv-121"
+    className="makeStyles-summaryDiv-128"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -626,7 +626,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-121"
+    className="makeStyles-summaryDiv-128"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -646,7 +646,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-121"
+    className="makeStyles-summaryDiv-128"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -666,7 +666,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-121"
+    className="makeStyles-summaryDiv-128"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -687,13 +687,13 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         >
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisTitle-122 css-ezqyqq-MuiTableCell-root"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisTitle-129 css-ezqyqq-MuiTableCell-root"
           >
             x
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisSettings-123 css-ezqyqq-MuiTableCell-root"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisSettings-130 css-ezqyqq-MuiTableCell-root"
           >
             <div
               style={
@@ -704,7 +704,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
               }
             >
               <span
-                className="makeStyles-axisSettingTitle-124"
+                className="makeStyles-axisSettingTitle-131"
               >
                 Time step:
               </span>
@@ -719,7 +719,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
               }
             >
               <span
-                className="makeStyles-axisSettingTitle-124"
+                className="makeStyles-axisSettingTitle-131"
               >
                 Roll period:
               </span>
@@ -733,13 +733,13 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         >
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisTitle-122 css-ezqyqq-MuiTableCell-root"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisTitle-129 css-ezqyqq-MuiTableCell-root"
           >
             y1
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisSettings-123 css-ezqyqq-MuiTableCell-root"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisSettings-130 css-ezqyqq-MuiTableCell-root"
           >
             <div
               style={
@@ -750,7 +750,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
               }
             >
               <span
-                className="makeStyles-axisSettingTitle-124"
+                className="makeStyles-axisSettingTitle-131"
               >
                 Scale:
               </span>
@@ -765,7 +765,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
               }
             >
               <span
-                className="makeStyles-axisSettingTitle-124"
+                className="makeStyles-axisSettingTitle-131"
               >
                 Units:
               </span>
@@ -780,7 +780,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
               }
             >
               <span
-                className="makeStyles-axisSettingTitle-124"
+                className="makeStyles-axisSettingTitle-131"
               >
                 Range:
               </span>
@@ -794,13 +794,13 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         >
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisTitle-122 css-ezqyqq-MuiTableCell-root"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisTitle-129 css-ezqyqq-MuiTableCell-root"
           >
             y2
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisSettings-123 css-ezqyqq-MuiTableCell-root"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisSettings-130 css-ezqyqq-MuiTableCell-root"
           >
             <div
               style={
@@ -811,7 +811,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
               }
             >
               <span
-                className="makeStyles-axisSettingTitle-124"
+                className="makeStyles-axisSettingTitle-131"
               >
                 Scale:
               </span>
@@ -826,7 +826,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
               }
             >
               <span
-                className="makeStyles-axisSettingTitle-124"
+                className="makeStyles-axisSettingTitle-131"
               >
                 Units:
               </span>
@@ -841,7 +841,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
               }
             >
               <span
-                className="makeStyles-axisSettingTitle-124"
+                className="makeStyles-axisSettingTitle-131"
               >
                 Range:
               </span>
@@ -858,7 +858,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
 exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection with only date range 1`] = `
 <div>
   <div
-    className="makeStyles-summaryDiv-73"
+    className="makeStyles-summaryDiv-77"
   >
     <div
       style={
@@ -900,7 +900,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     </div>
   </div>
   <div
-    className="makeStyles-summaryDiv-73"
+    className="makeStyles-summaryDiv-77"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -914,7 +914,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     </p>
   </div>
   <div
-    className="makeStyles-summaryDiv-73"
+    className="makeStyles-summaryDiv-77"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -934,7 +934,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-73"
+    className="makeStyles-summaryDiv-77"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -948,7 +948,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     </p>
   </div>
   <div
-    className="makeStyles-summaryDiv-73"
+    className="makeStyles-summaryDiv-77"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -968,7 +968,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-73"
+    className="makeStyles-summaryDiv-77"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -989,13 +989,13 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         >
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisTitle-74 css-ezqyqq-MuiTableCell-root"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisTitle-78 css-ezqyqq-MuiTableCell-root"
           >
             x
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisSettings-75 css-ezqyqq-MuiTableCell-root"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisSettings-79 css-ezqyqq-MuiTableCell-root"
           >
             <div
               style={
@@ -1006,7 +1006,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
               }
             >
               <span
-                className="makeStyles-axisSettingTitle-76"
+                className="makeStyles-axisSettingTitle-80"
               >
                 Time step:
               </span>
@@ -1023,7 +1023,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
 exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection with only sites 1`] = `
 <div>
   <div
-    className="makeStyles-summaryDiv-57"
+    className="makeStyles-summaryDiv-60"
   >
     <div
       style={
@@ -1065,7 +1065,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     </div>
   </div>
   <div
-    className="makeStyles-summaryDiv-57"
+    className="makeStyles-summaryDiv-60"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -1079,7 +1079,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     </p>
   </div>
   <div
-    className="makeStyles-summaryDiv-57"
+    className="makeStyles-summaryDiv-60"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -1098,7 +1098,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     </p>
   </div>
   <div
-    className="makeStyles-summaryDiv-57"
+    className="makeStyles-summaryDiv-60"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -1118,7 +1118,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-57"
+    className="makeStyles-summaryDiv-60"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -1138,7 +1138,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-57"
+    className="makeStyles-summaryDiv-60"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -1159,13 +1159,13 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         >
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisTitle-58 css-ezqyqq-MuiTableCell-root"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisTitle-61 css-ezqyqq-MuiTableCell-root"
           >
             x
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisSettings-59 css-ezqyqq-MuiTableCell-root"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisSettings-62 css-ezqyqq-MuiTableCell-root"
           >
             <div
               style={
@@ -1176,7 +1176,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
               }
             >
               <span
-                className="makeStyles-axisSettingTitle-60"
+                className="makeStyles-axisSettingTitle-63"
               >
                 Time step:
               </span>
@@ -1193,7 +1193,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
 exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection with only variables 1`] = `
 <div>
   <div
-    className="makeStyles-summaryDiv-89"
+    className="makeStyles-summaryDiv-94"
   >
     <div
       style={
@@ -1235,7 +1235,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     </div>
   </div>
   <div
-    className="makeStyles-summaryDiv-89"
+    className="makeStyles-summaryDiv-94"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -1249,7 +1249,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     </p>
   </div>
   <div
-    className="makeStyles-summaryDiv-89"
+    className="makeStyles-summaryDiv-94"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -1269,7 +1269,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-89"
+    className="makeStyles-summaryDiv-94"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -1289,7 +1289,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-89"
+    className="makeStyles-summaryDiv-94"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -1303,7 +1303,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     </p>
   </div>
   <div
-    className="makeStyles-summaryDiv-89"
+    className="makeStyles-summaryDiv-94"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -1324,13 +1324,13 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         >
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisTitle-90 css-ezqyqq-MuiTableCell-root"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisTitle-95 css-ezqyqq-MuiTableCell-root"
           >
             x
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisSettings-91 css-ezqyqq-MuiTableCell-root"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisSettings-96 css-ezqyqq-MuiTableCell-root"
           >
             <div
               style={
@@ -1341,7 +1341,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
               }
             >
               <span
-                className="makeStyles-axisSettingTitle-92"
+                className="makeStyles-axisSettingTitle-97"
               >
                 Time step:
               </span>
@@ -1358,7 +1358,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
 exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection with variables and qualityFlags 1`] = `
 <div>
   <div
-    className="makeStyles-summaryDiv-105"
+    className="makeStyles-summaryDiv-111"
   >
     <div
       style={
@@ -1400,7 +1400,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     </div>
   </div>
   <div
-    className="makeStyles-summaryDiv-105"
+    className="makeStyles-summaryDiv-111"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -1414,7 +1414,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     </p>
   </div>
   <div
-    className="makeStyles-summaryDiv-105"
+    className="makeStyles-summaryDiv-111"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -1434,7 +1434,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-105"
+    className="makeStyles-summaryDiv-111"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -1454,7 +1454,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     />
   </div>
   <div
-    className="makeStyles-summaryDiv-105"
+    className="makeStyles-summaryDiv-111"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -1473,7 +1473,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
     </p>
   </div>
   <div
-    className="makeStyles-summaryDiv-105"
+    className="makeStyles-summaryDiv-111"
   >
     <h6
       className="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
@@ -1494,13 +1494,13 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         >
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisTitle-106 css-ezqyqq-MuiTableCell-root"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisTitle-112 css-ezqyqq-MuiTableCell-root"
           >
             x
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisSettings-107 css-ezqyqq-MuiTableCell-root"
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-axisSettings-113 css-ezqyqq-MuiTableCell-root"
           >
             <div
               style={
@@ -1511,7 +1511,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
               }
             >
               <span
-                className="makeStyles-axisSettingTitle-108"
+                className="makeStyles-axisSettingTitle-114"
               >
                 Time step:
               </span>

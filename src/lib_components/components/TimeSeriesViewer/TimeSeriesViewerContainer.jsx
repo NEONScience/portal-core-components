@@ -22,6 +22,8 @@ import SitesIcon from '@mui/icons-material/Place';
 import DateRangeIcon from '@mui/icons-material/DateRange';
 import VariablesIcon from '@mui/icons-material/Timeline';
 import AxesIcon from '@mui/icons-material/BorderInner';
+import WarnIcon from '@mui/icons-material/Warning';
+import ComputerIcon from '@mui/icons-material/Computer';
 
 import ReleaseChip from '../Chip/ReleaseChip';
 import Theme, { COLORS } from '../Theme/Theme';
@@ -32,6 +34,7 @@ import TimeSeriesViewerContext, {
   summarizeTimeSteps,
   TIME_SERIES_VIEWER_STATUS_TITLES,
   Y_AXIS_RANGE_MODE_DETAILS,
+  POINTS_PERFORMANCE_LIMIT,
 } from './TimeSeriesViewerContext';
 import { TIME_SERIES_VIEWER_STATUS } from './constants';
 import TimeSeriesViewerSites from './TimeSeriesViewerSites';
@@ -133,6 +136,22 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'center',
+  },
+  statusBar: {
+    marginLeft: '-4px',
+    marginRight: '-4px',
+    backgroundColor: theme.palette.grey[200],
+    padding: '4px 4px 4px 12px',
+    '& svg': {
+      verticalAlign: 'bottom',
+      marginRight: '4px',
+    },
+    '& .warningMessage': {
+      marginLeft: '20px',
+      '& svg': {
+        color: Theme.colors.BROWN[300],
+      },
+    },
   },
 }));
 
@@ -588,6 +607,66 @@ export default function TimeSeriesViewerContainer() {
     return null;
   };
 
+  /**
+   * Function complements of Battelle ANNI
+   * @param {*} numStr
+   * @returns
+   */
+  const addThousandsSeparator = (numStr) => {
+    if (!numStr) {
+      return '0';
+    }
+    const numStrString = numStr.toString();
+    const [integer, decimal] = numStrString.split('.');
+    let result = '';
+    let count = 0;
+    // Process integer part from right to left
+    // eslint-disable-next-line no-plusplus
+    for (let i = integer.length - 1; i >= 0; i--) {
+      result = integer[i] + result;
+      count += 1;
+      // Add comma after every 3 digits, except at the start
+      if (count % 3 === 0 && i !== 0) {
+        result = `,${result}`;
+      }
+    }
+    // Reattach decimal part if present
+    return decimal ? `${result}.${decimal}` : result;
+  };
+
+  const renderStatusBar = () => {
+    let showWarning = false;
+    const pointTotal = state.status !== TIME_SERIES_VIEWER_STATUS.READY
+      ? '--'
+      : addThousandsSeparator(state.pointTotal);
+
+    const numPointsPos = TimeSeriesViewerContext.calcPredictedPointsForNewPosition(state);
+    const numPointsVar = TimeSeriesViewerContext.calcPredictedPointsForNewVariable(state);
+    if ((numPointsPos > POINTS_PERFORMANCE_LIMIT) || (numPointsVar > POINTS_PERFORMANCE_LIMIT)) {
+      showWarning = true;
+    }
+
+    return (
+      <div className={classes.statusBar}>
+        <ComputerIcon fontSize="medium" />
+        <span>
+          <b>Data Points</b>
+          :&nbsp;
+        </span>
+        {pointTotal}
+        <span> of </span>
+        {addThousandsSeparator(POINTS_PERFORMANCE_LIMIT)}
+        <span
+          className="warningMessage"
+          style={{ visibility: showWarning ? 'visible' : 'hidden' }}
+        >
+          <WarnIcon fontSize="medium" />
+          Data point total approaching limit; some options are disabled.
+        </span>
+      </div>
+    );
+  };
+
   return (
     <div style={{ width: '100%' }}>
       <Card className={classes.graphContainer}>
@@ -597,6 +676,7 @@ export default function TimeSeriesViewerContainer() {
           ) : null}
           {renderGraphOverlay()}
         </div>
+        {renderStatusBar()}
         <div className={classes.tabsContainer}>
           {renderTabs()}
           {renderTabPanels()}

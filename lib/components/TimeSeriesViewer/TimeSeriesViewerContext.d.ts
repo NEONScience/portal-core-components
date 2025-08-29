@@ -7,6 +7,8 @@ export namespace TIME_SERIES_VIEWER_STATUS_TITLES {
     let ERROR: null;
     let READY: null;
 }
+export const POINTS_PERFORMANCE_LIMIT: 250000;
+export const MAX_NUM_SITES_SELECTABLE: 5;
 export namespace Y_AXIS_RANGE_MODES {
     let CENTERED: string;
     let FROM_ZERO: string;
@@ -53,6 +55,7 @@ export namespace DEFAULT_STATE {
     export let dataFetches: {};
     export let dataFetchProgress: number;
     export let variables: {};
+    export let pointTotal: number;
     export namespace product {
         let productCode: null;
         let productName: null;
@@ -214,6 +217,7 @@ export function getTestableItems(): {
         dataFetches: {};
         dataFetchProgress: number;
         variables: {};
+        pointTotal: number;
         product: {
             productCode: null;
             productName: null;
@@ -335,6 +339,11 @@ declare namespace TimeSeriesViewerContext {
     export { Provider };
     export { useTimeSeriesViewerState };
     export { TimeSeriesViewerPropTypes };
+    export { calcPredictedPointsForNewPosition };
+    export { calcPredictedPointsByTimeStep };
+    export { calcPredictedPointsForNewVariable };
+    export { calcPredictedPointsByDateRange };
+    export { getPositionCount };
 }
 /**
    Context Provider
@@ -366,6 +375,7 @@ declare function useTimeSeriesViewerState(): {
     dataFetches: {};
     dataFetchProgress: number;
     variables: {};
+    pointTotal: number;
     product: {
         productCode: null;
         productName: null;
@@ -441,6 +451,7 @@ declare function useTimeSeriesViewerState(): {
     dataFetches: {};
     dataFetchProgress: number;
     variables: {};
+    pointTotal: number;
     product: {
         productCode: null;
         productName: null;
@@ -511,5 +522,10 @@ declare namespace TimeSeriesViewerPropTypes {
     export function productData_2(props: any, propName: any, componentName: any): Error | null;
     export { productData_2 as productData };
 }
+declare function calcPredictedPointsForNewPosition(state: any, numPositionsOverride: any): number;
+declare function calcPredictedPointsByTimeStep(state: any, timeStep: any): number;
+declare function calcPredictedPointsForNewVariable(state: any): number;
+declare function calcPredictedPointsByDateRange(state: any, startDate: any, endDate: any): number;
+declare function getPositionCount(sitesArray: any, siteCodeToExclude: any): number;
 import React from 'react';
 import { number } from 'prop-types';

@@ -7,6 +7,7 @@ import L from 'leaflet';
 import { COLORS } from '../Theme/Theme';
 
 import RouteService from '../../service/RouteService';
+import { exists } from '../../util/typeUtil';
 
 // SVGs for all map icons
 import iconPlaceholderSVG from './svg/icon-placeholder.svg';
@@ -1758,12 +1759,15 @@ export const getZoomedIcon = (
   let { size: shadowSize, anchor: shadowAnchor } = shadow[highlight] || {};
   // Adjust icon, size, and anchor if selected (and a different "selected" icon is available)
   if (featureHasIcon && selection === SELECTION_STATUS.SELECTED && feature.iconSelectedSvg) {
-    iconUrl = feature.iconSelectedSvg;
+    iconUrl = exists(feature.iconSelectedSvg) ? feature.iconSelectedSvg : iconPlaceholderSVG;
     iconSize = iconSize.map((d) => d + SELECTED_ICON_OFFSET);
     iconAnchor = iconAnchor.map((d) => d + (SELECTED_ICON_OFFSET / 2));
     shadowSize = shadowUrl ? shadowSize.map((d) => d + SELECTED_ICON_OFFSET) : null;
     shadowAnchor = shadowUrl ? shadowAnchor.map((d) => d + (SELECTED_ICON_OFFSET / 2)) : null;
     popupAnchor[1] -= (SELECTED_ICON_OFFSET / 2);
+  }
+  if (!exists(iconUrl)) {
+    iconUrl = iconPlaceholderSVG;
   }
   // Determine Icon Scale
   // Normalize the scale to a range of at least 0.2 to 0.5 (but as big as 0.2 to 1) based on

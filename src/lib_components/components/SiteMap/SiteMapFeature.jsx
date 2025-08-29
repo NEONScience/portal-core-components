@@ -1580,7 +1580,10 @@ const SiteMapFeature = (props) => {
       }
       if (state.map.zoomedIcons[featureKey] !== null) {
         const baseIcon = state.map.zoomedIcons[featureKey];
-        const selection = isSelectable && isSelected
+        const selection = (isSelectable
+            && isSelected
+            && exists(baseIcon)
+            && exists(baseIcon[SELECTION_STATUS.SELECTED]))
           ? SELECTION_STATUS.SELECTED
           : SELECTION_STATUS.UNSELECTED;
         const initialHighlight = isHighlighted ? HIGHLIGHT_STATUS.HIGHLIGHT : HIGHLIGHT_STATUS.NONE;
@@ -1625,17 +1628,19 @@ const SiteMapFeature = (props) => {
           };
         }
       }
-      marker = (
-        <Marker
-          key={`${key}-marker`}
-          position={position}
-          title={key}
-          icon={icon}
-          {...interaction}
-        >
-          {renderedPopup}
-        </Marker>
-      );
+      if (exists(icon)) {
+        marker = (
+          <Marker
+            key={`${key}-marker`}
+            position={position}
+            title={key}
+            icon={icon}
+            {...interaction}
+          >
+            {renderedPopup}
+          </Marker>
+        );
+      }
     }
     switch (featureShape) {
       case 'Marker':

@@ -27,7 +27,9 @@ import SelectAllIcon from '@mui/icons-material/DoneAll';
 
 import Theme from '../Theme/Theme';
 import { resolveProps } from '../../util/defaultProps';
-import TimeSeriesViewerContext from './TimeSeriesViewerContext';
+import TimeSeriesViewerContext, {
+  POINTS_PERFORMANCE_LIMIT,
+} from './TimeSeriesViewerContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -123,10 +125,16 @@ function Control(props) {
     selectProps: { TextFieldProps },
   } = props;
 
+  const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
+  const numPoints = TimeSeriesViewerContext.calcPredictedPointsForNewVariable(state);
+  const labelText = numPoints > POINTS_PERFORMANCE_LIMIT
+    ? 'Add Variables (disabled)'
+    : 'Add Variables';
+
   return (
     <TextField
       fullWidth
-      label="Add Variables"
+      label={labelText}
       variant="outlined"
       InputProps={{
         inputComponent,
@@ -436,12 +444,17 @@ export default function TimeSeriesViewerVariables() {
     return <Skeleton variant="rectangular" width="100%" height={56} />;
   }
 
+  const isDisabled = TimeSeriesViewerContext.calcPredictedPointsForNewVariable(state)
+    > POINTS_PERFORMANCE_LIMIT;
+
   return (
     <div className={classes.root}>
       <NoSsr>
         <Select
           isMulti
           isSearchable
+          blurInputOnSelect="true"
+          isDisabled={isDisabled}
           clearable={false}
           classes={classes}
           styles={selectStyles}
