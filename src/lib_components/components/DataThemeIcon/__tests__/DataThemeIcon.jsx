@@ -37,7 +37,7 @@ describe('DataThemeIcon', () => {
   });
   test('renders with a desc', () => {
     const tree = renderer.create(
-      <DataThemeIcon theme="atmosphere" className="foo" data-desc={ThemeDesc['Atmosphere']}/>,
+      <DataThemeIcon theme="atmosphere" className="foo" data-desc={ThemeDesc['Atmosphere'].info}/>,
     ).toJSON();
     expect(tree).toMatchSnapshot();
   });
