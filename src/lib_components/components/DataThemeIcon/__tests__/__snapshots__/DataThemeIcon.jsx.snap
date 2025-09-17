@@ -3,6 +3,12 @@
 exports[`DataThemeIcon renders in avatar mode 1`] = `
 <div
   className="MuiAvatar-root MuiAvatar-circular"
+  data-desc={
+    Object {
+      "desc": "The study of land cover and processes examines land surface characteristics and change. Land cover refers to the vegetation, structures and other features distributed across the landscape. Land processes refer to the causes and effects that result in changes over space and time to land cover and associated ecosystems.",
+      "link": "https://www.neonscience.org/data-samples/data-themes/land-cover-and-processes-data-theme",
+    }
+  }
   data-selenium="data-theme-icon.landuse"
   style={
     Object {
@@ -24,6 +30,12 @@ exports[`DataThemeIcon renders with a custom className 1`] = `
 <img
   alt="Organisms, Populations, and Communities"
   className="foo"
+  data-desc={
+    Object {
+      "desc": "The study of organisms, populations and communities examines how organisms interact with each other and their environment at individual, population and community levels. To characterize these interactions, NEON quantifies and observes interactions among multiple organisms and their environments.",
+      "link": "https://www.neonscience.org/data-samples/data-themes/organismal-data-theme",
+    }
+  }
   data-selenium="data-theme-icon.organisms"
   height={40}
   src="svg-file.svg"
@@ -32,10 +44,34 @@ exports[`DataThemeIcon renders with a custom className 1`] = `
 />
 `;
 
+exports[`DataThemeIcon renders with a desc 1`] = `
+<img
+  alt="Atmosphere"
+  className="foo"
+  data-desc={
+    Object {
+      "desc": "Atmospheric science is the comprehensive study of the physical and chemical dynamics of Earth’s atmosphere. NEON collects a variety of atmospheric measurements at field sites to detect climate change.",
+      "link": "https://www.neonscience.org/atmosphere-data-theme",
+    }
+  }
+  data-selenium="data-theme-icon.atmosphere"
+  height={40}
+  src="svg-file.svg"
+  title="Atmosphere"
+  width={40}
+/>
+`;
+
 exports[`DataThemeIcon renders with custom size 1`] = `
 <img
   alt="Ecohydrology"
   className={null}
+  data-desc={
+    Object {
+      "desc": "Ecohydrology is defined as the study of how physical and biological processes interact with water cycles. Comprehensive study of water cycles requires knowledge of precipitation patterns, soil and groundwater dynamics, interactions with vegetation (i.e., evapotranspiration), and processes such as nutrient cycling and food web dynamics in aquatic ecosystems.",
+      "link": "https://www.neonscience.org/data-samples/data-themes/ecohydrology-data-theme",
+    }
+  }
   data-selenium="data-theme-icon.ecohydrology"
   height={32}
   src="svg-file.svg"
@@ -48,6 +84,12 @@ exports[`DataThemeIcon renders with only a theme prop 1`] = `
 <img
   alt="Atmosphere"
   className={null}
+  data-desc={
+    Object {
+      "desc": "Atmospheric science is the comprehensive study of the physical and chemical dynamics of Earth’s atmosphere. NEON collects a variety of atmospheric measurements at field sites to detect climate change.",
+      "link": "https://www.neonscience.org/atmosphere-data-theme",
+    }
+  }
   data-selenium="data-theme-icon.atmosphere"
   height={40}
   src="svg-file.svg"
@@ -60,6 +102,12 @@ exports[`DataThemeIcon renders with only a theme prop alias 1`] = `
 <img
   alt="Biogeochemistry"
   className={null}
+  data-desc={
+    Object {
+      "desc": "Biogeochemistry is the study of the cycling of the fundamental chemicals that support life, collectively termed nutrients. NEON collects and produces data on nutrients, such as carbon, nitrogen and phosphorus, which move through the atmosphere, water bodies, soil, microbes, plants and animals to support understanding of nutrient cycling in a variety of ecosystems.",
+      "link": "https://www.neonscience.org/data-samples/data-themes/biogeochemistry-data-theme",
+    }
+  }
   data-selenium="data-theme-icon.biogeo"
   height={40}
   src="svg-file.svg"

@@ -2,6 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 
 import DataThemeIcon from '../DataThemeIcon';
+import ThemeDesc from '../../../staticJSON/themeDesc'
 
 describe('DataThemeIcon', () => {
   test('renders with only a theme prop', () => {
@@ -31,6 +32,12 @@ describe('DataThemeIcon', () => {
   test('renders with a custom className', () => {
     const tree = renderer.create(
       <DataThemeIcon theme="organisms" className="foo" />,
+    ).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+  test('renders with a desc', () => {
+    const tree = renderer.create(
+      <DataThemeIcon theme="atmosphere" className="foo" data-desc={ThemeDesc['Atmosphere']}/>,
     ).toJSON();
     expect(tree).toMatchSnapshot();
   });

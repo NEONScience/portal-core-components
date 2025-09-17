@@ -10,32 +10,38 @@ import BiogeochemistrySVG from './svg_optimized/biogeochemistry.svg';
 import EcohydrologySVG from './svg_optimized/ecohydrology.svg';
 import LandCoverSVG from './svg_optimized/landcover.svg';
 import OrganismsSVG from './svg_optimized/organisms.svg';
+import ThemeDesc from '../../staticJSON/themeDesc.json'
 
 const dataThemes = {
   atmosphere: {
     title: 'Atmosphere',
     aliases: ['atmos'],
     src: AtmosphereSVG,
+    desc: ThemeDesc['Atmosphere'],
   },
   biogeochemistry: {
     title: 'Biogeochemistry',
     aliases: ['biogeo'],
     src: BiogeochemistrySVG,
+    desc: ThemeDesc['Biogeochemistry'],
   },
   ecohydrology: {
     title: 'Ecohydrology',
     aliases: ['ecohydro'],
     src: EcohydrologySVG,
+    desc: ThemeDesc['Ecohydrology'],
   },
   landcover: {
     title: 'Land Cover & Processes',
     aliases: ['landuse', 'Land Cover and Processes', 'Land Use, Land Cover, and Land Processes'],
     src: LandCoverSVG,
+    desc: ThemeDesc['Land Cover & Processes'],
   },
   organisms: {
     title: 'Organisms, Populations, and Communities',
     aliases: [],
     src: OrganismsSVG,
+    desc: ThemeDesc['Organisms, Populations, and Communities'],
   },
 };
 
@@ -59,6 +65,7 @@ const DataThemeIcon = (props) => {
     title: dataTheme.title,
     className,
     'data-selenium': `data-theme-icon.${theme}`,
+    'data-desc': dataTheme.desc,
   };
 
   if (avatar) {
