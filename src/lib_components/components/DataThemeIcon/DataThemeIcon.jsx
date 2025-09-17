@@ -65,7 +65,7 @@ const DataThemeIcon = (props) => {
     title: dataTheme.title,
     className,
     'data-selenium': `data-theme-icon.${theme}`,
-    'data-desc': dataTheme.desc,
+    'data-desc': JSON.stringify(dataTheme.desc, null, 0),
   };
 
   if (avatar) {
