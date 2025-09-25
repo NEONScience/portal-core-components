@@ -28,6 +28,11 @@ import SelectedIcon from '@material-ui/icons/DoneOutline';
 import UnselectedIcon from '@material-ui/icons/Remove';
 
 import 'leaflet/dist/leaflet.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faBug,
+} from '@fortawesome/free-solid-svg-icons';
+
 import {
   CircleMarker,
   Map,
@@ -116,7 +121,8 @@ const useStyles = makeStyles((theme) => ({
   },
   popupButtonRow: {
     display: 'flex',
-    justifyContent: 'flex-start',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
     alignItems: 'center',
     marginTop: theme.spacing(2),
     '& > :not(:last-child)': {
@@ -1059,6 +1065,13 @@ const SiteMapFeature = (props) => {
             {...actionButtonProps}
           >
             Explore Data
+          </Button>
+          <Button
+            endIcon={<FontAwesomeIcon icon={faBug} className={classes.faIcon} />}
+            href={getHref('EXPLORE_SAMPLE_PRODUCTS_BY_SITE', site.siteCode)}
+            {...actionButtonProps}
+          >
+            Explore Samples
           </Button>
         </div>
       );
