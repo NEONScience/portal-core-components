@@ -1207,7 +1207,7 @@ export const getHref = (key, arg = null) => {
   if ((arg || '').length === 0) { return '#'; }
   switch (key) {
     case 'EXPLORE_SAMPLE_PRODUCTS_BY_SITE':
-      return `${EXPLORE_SAMPLE_PRODUCTS_BASE}?datasetid=${BIOREPO_DATASET_ARR.find((item) => item.name === arg).datasetID}`;
+      return `${EXPLORE_SAMPLE_PRODUCTS_BASE}?datasetid=${BIOREPO_DATASET_ARR.find((item) => item.name === String(arg)).datasetID}`;
     case 'EXPLORE_DATA_PRODUCTS_BY_SITE':
       return `${EXPLORE_DATA_PRODUCTS_BASE}?site=${arg}`;
     case 'EXPLORE_DATA_PRODUCTS_BY_STATE':
