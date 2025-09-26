@@ -9,6 +9,8 @@ import { COLORS } from '../Theme/Theme';
 import RouteService from '../../service/RouteService';
 import { exists } from '../../util/typeUtil';
 
+import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
+
 // SVGs for all map icons
 import iconPlaceholderSVG from './svg/icon-placeholder.svg';
 
@@ -65,7 +67,9 @@ import statesShapesJSON from '../../staticJSON/statesShapes.json';
 import domainsShapesJSON from '../../staticJSON/domainsShapes.json';
 
 // Static JSON for Biorepository dataset IDs
-import BIOREPO_DATASET_ARR from './../staticJSON/biorepoDatasets.json';
+import BIOREPO_DATASET_ARR from '../../staticJSON/biorepoDatasets.json';
+
+const BIOREPO_HOST = NeonEnvironment.getBioRepoHost();
 
 const round = (x) => Number.parseFloat(x.toFixed(4), 10);
 export const isCoord = (c) => Array.isArray(c)
@@ -1199,8 +1203,7 @@ export const calculateFeatureAvailability = (state) => {
 */
 export const getHref = (key, arg = null) => {
   const EXPLORE_DATA_PRODUCTS_BASE = RouteService.getDataProductExplorePath();
-  const CLIENT_ROOT = 'https://biorepo.neonscience.org/portal';
-  const EXPLORE_SAMPLE_PRODUCTS_BASE = `${CLIENT_ROOT}/collections/list.php`;
+  const EXPLORE_SAMPLE_PRODUCTS_BASE = `${BIOREPO_HOST}/collections/list.php`;
   if ((arg || '').length === 0) { return '#'; }
   switch (key) {
     case 'EXPLORE_SAMPLE_PRODUCTS_BY_SITE':

@@ -4,6 +4,7 @@ import { AuthSilentType, Undef } from '../../types/core';
 // Default hosts
 export const DEFAULT_API_HOST = 'https://data.neonscience.org';
 export const DEFAULT_WEB_HOST = 'https://www.neonscience.org';
+export const DEFAULT_BIOREPO_HOST = 'https://biorepo.neonscience.org/portal';
 
 interface IHostRegexService {
   getApiHostRegex: () => RegExp;
@@ -113,6 +114,7 @@ export interface INeonEnvironment {
   getWebHost: () => string;
   getApiHost: () => string;
   getWebSocketHost: () => string;
+  getBioRepoHost: () => string;
 
   isApiHostValid: (host: string) => boolean;
   isWebHostValid: (host: string) => boolean;
@@ -336,6 +338,8 @@ const NeonEnvironment: INeonEnvironment = {
     }
     return DEFAULT_API_HOST;
   },
+
+  getBioRepoHost: (): string => DEFAULT_BIOREPO_HOST,
 
   getWebSocketHost: (): string => {
     if (NeonEnvironment.isDevEnv && NeonEnvironment.getWsHostOverride()) {
