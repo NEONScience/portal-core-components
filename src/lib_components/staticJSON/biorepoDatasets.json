@@ -1,4 +1,5 @@
-[
+{
+  "datasets": [
     { "datasetID": 1, "name": "D12" },
     { "datasetID": 2, "name": "D01" },
     { "datasetID": 3, "name": "D16" },
@@ -101,3 +102,4 @@
     { "datasetID": 130, "name": "WLOU" },
     { "datasetID": 131, "name": "YELL" }
   ]
+}

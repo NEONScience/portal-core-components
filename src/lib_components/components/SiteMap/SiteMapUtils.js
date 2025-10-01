@@ -67,7 +67,7 @@ import statesShapesJSON from '../../staticJSON/statesShapes.json';
 import domainsShapesJSON from '../../staticJSON/domainsShapes.json';
 
 // Static JSON for Biorepository dataset IDs
-import BIOREPO_DATASET_ARR from '../../staticJSON/biorepoDatasets.json';
+import biorepoDatasetsJSON from '../../staticJSON/biorepoDatasets.json';
 
 const BIOREPO_HOST = NeonEnvironment.getBioRepoHost();
 
@@ -1207,7 +1207,9 @@ export const getHref = (key, arg = null) => {
   if ((arg || '').length === 0) { return '#'; }
   switch (key) {
     case 'EXPLORE_SAMPLE_PRODUCTS_BY_SITE':
-      return `${EXPLORE_SAMPLE_PRODUCTS_BASE}?datasetid=${BIOREPO_DATASET_ARR.find((item) => item.name === String(arg)).datasetID}`;
+      return `${EXPLORE_SAMPLE_PRODUCTS_BASE}?datasetid=${
+        biorepoDatasetsJSON.datasets.find((item) => item.name === String(arg))?.datasetID || ''
+      }`;
     case 'EXPLORE_DATA_PRODUCTS_BY_SITE':
       return `${EXPLORE_DATA_PRODUCTS_BASE}?site=${arg}`;
     case 'EXPLORE_DATA_PRODUCTS_BY_STATE':
