@@ -69,8 +69,6 @@ import domainsShapesJSON from '../../staticJSON/domainsShapes.json';
 // Static JSON for Biorepository dataset IDs
 import biorepoDatasetsJSON from '../../staticJSON/biorepoDatasets.json';
 
-const BIOREPO_HOST = NeonEnvironment.getBioRepoHost();
-
 const round = (x) => Number.parseFloat(x.toFixed(4), 10);
 export const isCoord = (c) => Array.isArray(c)
   && (c.length === 2)
@@ -1203,6 +1201,7 @@ export const calculateFeatureAvailability = (state) => {
 */
 export const getHref = (key, arg = null) => {
   const EXPLORE_DATA_PRODUCTS_BASE = RouteService.getDataProductExplorePath();
+  const BIOREPO_HOST = NeonEnvironment.getBioRepoHost();
   const EXPLORE_SAMPLE_PRODUCTS_BASE = `${BIOREPO_HOST}/collections/list.php`;
   if ((arg || '').length === 0) { return '#'; }
   switch (key) {
