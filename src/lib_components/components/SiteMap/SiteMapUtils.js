@@ -1202,7 +1202,7 @@ export const calculateFeatureAvailability = (state) => {
 export const getHref = (key, arg = null) => {
   const EXPLORE_DATA_PRODUCTS_BASE = RouteService.getDataProductExplorePath();
   const BIOREPO_HOST = NeonEnvironment.getBioRepoHost();
-  const EXPLORE_SAMPLE_PRODUCTS_BASE = `${BIOREPO_HOST}/collections/list.php`;
+  const EXPLORE_SAMPLE_PRODUCTS_BASE = `${BIOREPO_HOST}/portal/collections/list.php`;
   if ((arg || '').length === 0) { return '#'; }
   switch (key) {
     case 'EXPLORE_SAMPLE_PRODUCTS_BY_SITE':
