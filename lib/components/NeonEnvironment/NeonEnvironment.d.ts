@@ -1,7 +1,7 @@
 import { AuthSilentType, Undef } from '../../types/core';
 export declare const DEFAULT_API_HOST = "https://data.neonscience.org";
 export declare const DEFAULT_WEB_HOST = "https://www.neonscience.org";
-export declare const DEFAULT_BIOREPO_HOST = "https://biorepo.neonscience.org/portal";
+export declare const DEFAULT_BIOREPO_HOST = "https://biorepo.neonscience.org";
 interface IHostRegexService {
     getApiHostRegex: () => RegExp;
     getWebHostRegex: () => RegExp;
