@@ -248,7 +248,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'flex-start',
     margin: theme.spacing(1, 0, 0.5, 0),
-    minWidth: '200px',
+    minWidth: '240px',
     textAlign: 'left',
   },
   siteLinksDivider: {
