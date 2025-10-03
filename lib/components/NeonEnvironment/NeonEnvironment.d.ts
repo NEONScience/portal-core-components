@@ -1,9 +1,11 @@
 import { AuthSilentType, Undef } from '../../types/core';
 export declare const DEFAULT_API_HOST = "https://data.neonscience.org";
 export declare const DEFAULT_WEB_HOST = "https://www.neonscience.org";
+export declare const DEFAULT_BIOREPO_HOST = "https://biorepo.neonscience.org";
 interface IHostRegexService {
     getApiHostRegex: () => RegExp;
     getWebHostRegex: () => RegExp;
+    getBioRepoHostRegex: () => RegExp;
 }
 export declare const HostRegexService: IHostRegexService;
 export declare const requiredEnvironmentVars: string[];
@@ -12,6 +14,7 @@ export interface NeonServerData {
     NeonPublicAPIHost: Undef<string>;
     NeonPublicAPIHostAllowInternal: Undef<boolean>;
     NeonWebHost: Undef<string>;
+    NeonBioRepoHost: Undef<string>;
     NeonPublicAPITokenHeader: Undef<string>;
     NeonPublicAPIToken: Undef<string>;
     NeonAuthSilentType: Undef<string>;
@@ -47,16 +50,20 @@ export interface INeonEnvironment {
     getRouterBaseHomePath: () => string;
     getApiHostOverride: () => string;
     getWebHostOverride: () => string;
+    getBioRepoHostOverride: () => string;
     getWsHostOverride: () => string;
     route: Record<string, (p?: string) => string>;
     getNeonServerData: () => NeonServerData | null;
     getNeonServerDataWebHost: () => string | null;
     getNeonServerDataApiHost: () => string | null;
+    getNeonServerDataBioRepoHost: () => string | null;
     getWebHost: () => string;
     getApiHost: () => string;
     getWebSocketHost: () => string;
+    getBioRepoHost: () => string;
     isApiHostValid: (host: string) => boolean;
     isWebHostValid: (host: string) => boolean;
+    isBioRepoHostValid: (host: string) => boolean;
     getApiTokenHeader: () => string;
     getApiToken: () => string;
     getAuthSilentType: () => AuthSilentType;

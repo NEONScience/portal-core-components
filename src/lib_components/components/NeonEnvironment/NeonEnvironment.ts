@@ -4,10 +4,12 @@ import { AuthSilentType, Undef } from '../../types/core';
 // Default hosts
 export const DEFAULT_API_HOST = 'https://data.neonscience.org';
 export const DEFAULT_WEB_HOST = 'https://www.neonscience.org';
+export const DEFAULT_BIOREPO_HOST = 'https://biorepo.neonscience.org';
 
 interface IHostRegexService {
   getApiHostRegex: () => RegExp;
   getWebHostRegex: () => RegExp;
+  getBioRepoHostRegex: () => RegExp;
 }
 export const HostRegexService: IHostRegexService = {
   getApiHostRegex: (): RegExp => (
@@ -15,6 +17,9 @@ export const HostRegexService: IHostRegexService = {
   ),
   getWebHostRegex: (): RegExp => (
     new RegExp(/^(www|cert-www|int-www|local-www)[.](neonscience[.]org|.+[.]us-[0-9]{1}[.]platformsh[.]site)$/)
+  ),
+  getBioRepoHostRegex: (): RegExp => (
+    new RegExp(/^biorepo[.]neonscience[.]org$/)
   ),
 };
 
@@ -44,6 +49,7 @@ export const optionalEnvironmentVars = [
   'REACT_APP_NEON_VISUS_PRODUCTS_BASE_URL',
   'REACT_APP_NEON_VISUS_IFRAME_BASE_URL',
   'REACT_APP_NEON_API_HOST_OVERRIDE',
+  'REACT_APP_BIOREPO_HOST_OVERRIDE',
   'REACT_APP_NEON_WEB_HOST_OVERRIDE',
   'REACT_APP_NEON_WS_HOST_OVERRIDE',
   'REACT_APP_NEON_FETCH_DRUPAL_ASSETS',
@@ -58,6 +64,7 @@ export interface NeonServerData {
   NeonPublicAPIHost: Undef<string>;
   NeonPublicAPIHostAllowInternal: Undef<boolean>;
   NeonWebHost: Undef<string>;
+  NeonBioRepoHost: Undef<string>;
   NeonPublicAPITokenHeader: Undef<string>;
   NeonPublicAPIToken: Undef<string>;
   NeonAuthSilentType: Undef<string>;
@@ -103,6 +110,7 @@ export interface INeonEnvironment {
 
   getApiHostOverride: () => string;
   getWebHostOverride: () => string;
+  getBioRepoHostOverride: () => string;
   getWsHostOverride: () => string;
 
   route: Record<string, (p?: string) => string>;
@@ -110,12 +118,15 @@ export interface INeonEnvironment {
   getNeonServerData: () => NeonServerData|null;
   getNeonServerDataWebHost: () => string|null;
   getNeonServerDataApiHost: () => string|null;
+  getNeonServerDataBioRepoHost: () => string|null;
   getWebHost: () => string;
   getApiHost: () => string;
   getWebSocketHost: () => string;
+  getBioRepoHost: () => string;
 
   isApiHostValid: (host: string) => boolean;
   isWebHostValid: (host: string) => boolean;
+  isBioRepoHostValid: (host: string) => boolean;
 
   getApiTokenHeader: () => string;
   getApiToken: () => string;
@@ -208,6 +219,9 @@ const NeonEnvironment: INeonEnvironment = {
   getApiHostOverride: (): string => (
     process.env.REACT_APP_NEON_API_HOST_OVERRIDE || DEFAULT_API_HOST
   ),
+  getBioRepoHostOverride: (): string => (
+    process.env.REACT_APP_BIOREPO_HOST_OVERRIDE || DEFAULT_BIOREPO_HOST
+  ),
   getWebHostOverride: (): string => (
     process.env.REACT_APP_NEON_WEB_HOST_OVERRIDE || DEFAULT_WEB_HOST
   ),
@@ -287,6 +301,23 @@ const NeonEnvironment: INeonEnvironment = {
     return null;
   },
 
+  getNeonServerDataBioRepoHost: (): string | null => {
+    const serverData = NeonEnvironment.getNeonServerData();
+    if (serverData && (typeof serverData.NeonBioRepoHost === 'string')) {
+      const bioRepoHost = serverData.NeonBioRepoHost;
+      try {
+        const { hostname: bioRepoHostname } = new URL(bioRepoHost);
+        if (NeonEnvironment.isBioRepoHostValid(bioRepoHostname)) {
+          return bioRepoHost;
+        }
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error('Failed to parse Biorepo host as URL', [e]);
+      }
+    }
+    return null;
+  },
+
   getWebHost: (): string => {
     // Check for local override
     if (NeonEnvironment.isDevEnv && NeonEnvironment.getWebHostOverride()) {
@@ -337,6 +368,31 @@ const NeonEnvironment: INeonEnvironment = {
     return DEFAULT_API_HOST;
   },
 
+  getBioRepoHost: (): string => {
+    // Check for local override
+    if (NeonEnvironment.isDevEnv && NeonEnvironment.getBioRepoHostOverride()) {
+      return NeonEnvironment.getBioRepoHostOverride();
+    }
+    // Check for server data env var
+    const bioRepoHost: string | null = NeonEnvironment.getNeonServerDataBioRepoHost();
+    if (bioRepoHost !== null) {
+      return bioRepoHost;
+    }
+    /* eslint-disable */
+    // @ts-ignore
+    if (typeof WorkerGlobalScope === 'function' && typeof self.location === 'object') {
+      if (NeonEnvironment.isBioRepoHostValid(self.location.host)) {
+        return `${self.location.protocol}//${self.location.host}`;
+      }
+      return DEFAULT_BIOREPO_HOST;
+    }
+    /* eslint-enable */
+    if (NeonEnvironment.isBioRepoHostValid(window.location.host)) {
+      return `${window.location.protocol}//${window.location.host}`;
+    }
+    return DEFAULT_BIOREPO_HOST;
+  },
+
   getWebSocketHost: (): string => {
     if (NeonEnvironment.isDevEnv && NeonEnvironment.getWsHostOverride()) {
       return NeonEnvironment.getWsHostOverride();
@@ -359,6 +415,22 @@ const NeonEnvironment: INeonEnvironment = {
       return false;
     }
     const regex = HostRegexService.getApiHostRegex();
+    if (!regex) return false;
+    const matches = regex.exec(host);
+    if (!matches) return false;
+    return (matches.length > 0);
+  },
+
+  /**
+   * Valid host names include localhost and known NEON Biorepo hosts
+   * @param host
+   * @returns
+   */
+  isBioRepoHostValid: (host: string): boolean => {
+    if ((typeof host !== 'string') || (host.length <= 0)) {
+      return false;
+    }
+    const regex = HostRegexService.getBioRepoHostRegex();
     if (!regex) return false;
     const matches = regex.exec(host);
     if (!matches) return false;

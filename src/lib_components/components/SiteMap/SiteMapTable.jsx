@@ -248,7 +248,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'flex-start',
     margin: theme.spacing(1, 0, 0.5, 0),
-    minWidth: '200px',
+    minWidth: '240px',
     textAlign: 'left',
   },
   siteLinksDivider: {
@@ -257,6 +257,7 @@ const useStyles = makeStyles((theme) => ({
   siteDetailsLink: {
     fontSize: '80%',
     fontStyle: 'italic',
+    textAlign: 'center',
   },
   nlcdClassContainer: {
     display: 'flex',
@@ -592,6 +593,13 @@ const SiteMapTable = () => {
                 href={`${getHref('EXPLORE_DATA_PRODUCTS_BY_SITE', siteCode)}`}
               >
                 Explore Data
+              </Link>
+              <span className={classes.siteLinksDivider}>|</span>
+              <Link
+                className={classes.siteDetailsLink}
+                href={`${getHref('EXPLORE_SAMPLE_PRODUCTS_BY_SITE', siteCode)}`}
+              >
+                Explore Samples
               </Link>
             </div>
           </div>
