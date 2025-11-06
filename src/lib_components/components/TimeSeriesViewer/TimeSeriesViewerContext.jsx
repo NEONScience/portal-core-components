@@ -100,6 +100,10 @@ export const Y_AXIS_RANGE_MODE_DETAILS = {
     description: 'Manually define a minimum and maximum axis range',
   },
 };
+export const Y_AXIS_REFRESH_STATUS = {
+  NEEDS_REFRESH: 'NEEDS_REFRESH',
+  UP_TO_DATE: 'UP_TO_DATE',
+};
 const generateYAxisRange = (axis = {}) => {
   const {
     rangeMode,
@@ -161,6 +165,7 @@ export const DEFAULT_STATE = {
   dataFetchProgress: 0,
   variables: {},
   pointTotal: 0,
+  yAxisRefreshStatus: Y_AXIS_REFRESH_STATUS.UP_TO_DATE,
   product: {
     productCode: null,
     productName: null,
@@ -1264,6 +1269,7 @@ const reducer = (state, action) => {
       ) {
         return softFail('Current selection of dates/sites/positions/variables does not have any valid numeric data.');
       }
+      console.log("in regenerateGraphData", action.graphData);
       newState.graphData = action.graphData;
       newState.pointTotal = calcPointTotal(action.graphData.data);
       newState.status = TIME_SERIES_VIEWER_STATUS.READY;
@@ -1351,23 +1357,6 @@ const reducer = (state, action) => {
         .positions[action.position]
         .data[action.month][action.downloadPkg][action.timeStep][action.table]
         .series = action.series;
-      /*  uncomment for troubleshooting to get number of points downloaded
-      try {
-        if (!newState.product.pointTotal || isNaN(newState.product.pointTotal)) {
-          newState.product.pointTotal = 0;
-        }
-
-        newState.product.pointTotal += action.series.endDateTime.data.length;
-        console.log("newState", newState);
-        // console.log("action", action);
-        console.log("fetchDataFileSucceeded - pointTotal", newState.product.pointTotal);
-        // console.log("newState.selection.continuousDateRange.length",
-        // newState.selection.continuousDateRange.length);
-      } catch (error) {
-        console.log("my derpy code crashed", action);
-      }
- */
-
       return newState;
 
     // Core Selection Actions
@@ -1408,6 +1397,7 @@ const reducer = (state, action) => {
       if (
         !state.selection.yAxes[action.axis]
           || !Object.keys(Y_AXIS_RANGE_MODES).includes(action.mode)
+          || state.yAxisRefreshStatus === Y_AXIS_REFRESH_STATUS.UP_TO_DATE
       ) { return state; }
       newState.selection.isDefault = false;
       newState.selection.yAxes[action.axis].rangeMode = action.mode;
@@ -1416,9 +1406,13 @@ const reducer = (state, action) => {
           newState.selection.yAxes[action.axis],
         );
       }
+      newState.yAxisRefreshStatus = Y_AXIS_REFRESH_STATUS.UP_TO_DATE;
       return newState;
     case 'selectYAxisCustomRange':
-      if (!state.selection.yAxes[action.axis]) { return state; }
+      if (
+        !state.selection.yAxes[action.axis]
+          || state.yAxisRefreshStatus === Y_AXIS_REFRESH_STATUS.UP_TO_DATE
+      ) { return state; }
       if (!(
         Array.isArray(action.range) && action.range.length === 2
           && action.range.every((v) => typeof v === 'number')
@@ -1426,6 +1420,7 @@ const reducer = (state, action) => {
       )) { return state; }
       newState.selection.isDefault = false;
       newState.selection.yAxes[action.axis].axisRange = action.range;
+      newState.yAxisRefreshStatus = Y_AXIS_REFRESH_STATUS.UP_TO_DATE;
       return newState;
     /*
     // This action works in state but dygraphs does not currently support per-axis logscale. =(
