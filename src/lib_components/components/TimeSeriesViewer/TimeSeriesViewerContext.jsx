@@ -1269,7 +1269,6 @@ const reducer = (state, action) => {
       ) {
         return softFail('Current selection of dates/sites/positions/variables does not have any valid numeric data.');
       }
-      console.log("in regenerateGraphData", action.graphData);
       newState.graphData = action.graphData;
       newState.pointTotal = calcPointTotal(action.graphData.data);
       newState.status = TIME_SERIES_VIEWER_STATUS.READY;

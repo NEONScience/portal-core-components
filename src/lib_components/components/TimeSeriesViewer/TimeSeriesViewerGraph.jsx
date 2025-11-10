@@ -520,7 +520,6 @@ export default function TimeSeriesViewerGraph() {
         });
       }
       // Store newly generate graphData in primary context state
-      console.log("dispatching regen graph data");
       dispatch({ type: 'regenerateGraphData', graphData });
     });
   });
@@ -537,7 +536,6 @@ export default function TimeSeriesViewerGraph() {
     axisCountRef.current = axes.length;
 
     // Build graphOptions
-    console.log("building graphOptions");
     const { series, labels } = state.graphData;
     graphOptions = {
       ...cloneDeep(BASE_GRAPH_OPTIONS),
@@ -619,7 +617,6 @@ export default function TimeSeriesViewerGraph() {
 
   const filterGraphData = useCallback(() => {
     if (graphState.filterOutFlaggedData && state.selection.qualityFlags.length > 0) {
-      console.log("fitler toggle is true. State: ", state);
       // Copy data since it will be mutated
       const dataCopy = cloneDeep(state.graphData.data);
 
@@ -645,7 +642,7 @@ export default function TimeSeriesViewerGraph() {
           }
           dataReadIteration += 1;
 
-          // Data are grouped in the array by site/position so we only want to advance the
+          // Variable data are grouped in the array by site/position so we only want to advance the
           // positionIndex once we have scanned that site/position's group of data.
           if (dataReadIteration === dataPerPositionCount) {
             positionIndex += 1;
@@ -683,7 +680,6 @@ export default function TimeSeriesViewerGraph() {
           }
 
           maxValue += maxValue * 0.1;
-          console.log("min/max", minValue, maxValue);
           dispatch({ type: 'selectYAxisCustomRange', axis: yAxisProperty, range: [minValue, maxValue] });
         }
         axisNum += 1;
@@ -692,7 +688,6 @@ export default function TimeSeriesViewerGraph() {
       return dataCopy;
     }
 
-    console.log("Filter toggle is FALSE: state", state);
     dispatch({ type: 'selectYAxisRangeMode', axis: 'y1', mode: state.selection.yAxes.y1.rangeMode });
 
     if (state.selection.yAxes.y2.units !== null) {
@@ -709,7 +704,6 @@ export default function TimeSeriesViewerGraph() {
   useEffect(() => {
     if (state.status !== TIME_SERIES_VIEWER_STATUS.READY) { return; }
 
-    console.log("BUILDING new Dygraph");
     const filteredGraphData = filterGraphData();
 
     if (dygraphRef.current === null) {
@@ -748,7 +742,6 @@ export default function TimeSeriesViewerGraph() {
       }
     }
     handleResize();
-    console.log("END BUILDING DYGRAPH");
   }, [
     selectionDigest,
     state.status,
