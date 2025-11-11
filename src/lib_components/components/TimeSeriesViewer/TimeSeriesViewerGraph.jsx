@@ -693,6 +693,7 @@ export default function TimeSeriesViewerGraph() {
     if (state.selection.yAxes.y2.units !== null) {
       dispatch({ type: 'selectYAxisRangeMode', axis: 'y2', mode: state.selection.yAxes.y2.rangeMode });
     }
+
     return state.graphData.data;
   }, [
     graphState.filterOutFlaggedData,
@@ -874,7 +875,10 @@ export default function TimeSeriesViewerGraph() {
 
   // Toggle Hide Flagged Data Button
   const toggleFlaggedDataVisibility = () => {
-    state.yAxisRefreshStatus = Y_AXIS_REFRESH_STATUS.NEEDS_REFRESH;
+    dispatch({
+      type: 'setYAxisRefreshStatus',
+      yAxisRefreshStatus: Y_AXIS_REFRESH_STATUS.NEEDS_REFRESH,
+    });
     graphDispatch({ type: 'toggleFlaggedDataVisibility' });
   };
 

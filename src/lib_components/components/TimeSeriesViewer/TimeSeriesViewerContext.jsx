@@ -1410,7 +1410,7 @@ const reducer = (state, action) => {
     case 'selectYAxisCustomRange':
       if (
         !state.selection.yAxes[action.axis]
-          || state.yAxisRefreshStatus === Y_AXIS_REFRESH_STATUS.UP_TO_DATE
+        || state.yAxisRefreshStatus === Y_AXIS_REFRESH_STATUS.UP_TO_DATE
       ) { return state; }
       if (!(
         Array.isArray(action.range) && action.range.length === 2
@@ -1420,6 +1420,10 @@ const reducer = (state, action) => {
       newState.selection.isDefault = false;
       newState.selection.yAxes[action.axis].axisRange = action.range;
       newState.yAxisRefreshStatus = Y_AXIS_REFRESH_STATUS.UP_TO_DATE;
+      return newState;
+
+    case 'setYAxisRefreshStatus':
+      newState.yAxisRefreshStatus = action.yAxisRefreshStatus;
       return newState;
     /*
     // This action works in state but dygraphs does not currently support per-axis logscale. =(
