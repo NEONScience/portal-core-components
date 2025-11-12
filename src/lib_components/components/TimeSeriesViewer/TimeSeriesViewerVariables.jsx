@@ -28,6 +28,7 @@ import SelectAllIcon from '@material-ui/icons/DoneAll';
 import Theme from '../Theme/Theme';
 import TimeSeriesViewerContext, {
   POINTS_PERFORMANCE_LIMIT,
+  Y_AXIS_REFRESH_STATUS,
 } from './TimeSeriesViewerContext';
 
 const useStyles = makeStyles((theme) => ({
@@ -322,6 +323,10 @@ const QualityFlags = () => {
   const { availableQualityFlags } = state;
   const { qualityFlags: selectedQualityFlags } = state.selection;
   const toggleFlag = (qualityFlag) => (event) => {
+    dispatch({
+      type: 'setYAxisRefreshStatus',
+      yAxisRefreshStatus: Y_AXIS_REFRESH_STATUS.NEEDS_REFRESH,
+    });
     dispatch({ type: 'selectToggleQualityFlag', qualityFlag, selected: event.target.checked });
   };
   if (!availableQualityFlags.size) {
@@ -350,7 +355,13 @@ const QualityFlags = () => {
           <Button
             size="small"
             variant="outlined"
-            onClick={() => { dispatch({ type: 'selectNoneQualityFlags' }); }}
+            onClick={() => {
+              dispatch({
+                type: 'setYAxisRefreshStatus',
+                yAxisRefreshStatus: Y_AXIS_REFRESH_STATUS.NEEDS_REFRESH,
+              });
+              dispatch({ type: 'selectNoneQualityFlags' });
+            }}
             startIcon={<ClearIcon />}
             style={{ marginRight: Theme.spacing(2) }}
           >
@@ -359,7 +370,13 @@ const QualityFlags = () => {
           <Button
             size="small"
             variant="outlined"
-            onClick={() => { dispatch({ type: 'selectAllQualityFlags' }); }}
+            onClick={() => {
+              dispatch({
+                type: 'setYAxisRefreshStatus',
+                yAxisRefreshStatus: Y_AXIS_REFRESH_STATUS.NEEDS_REFRESH,
+              });
+              dispatch({ type: 'selectAllQualityFlags' });
+            }}
             startIcon={<SelectAllIcon />}
           >
             {`Select All (${availableQualityFlags.size})`}

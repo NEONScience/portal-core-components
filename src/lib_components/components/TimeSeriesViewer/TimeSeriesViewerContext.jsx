@@ -1417,6 +1417,7 @@ const reducer = (state, action) => {
           && action.range.every((v) => typeof v === 'number')
           && action.range[0] < action.range[1]
       )) { return state; }
+      console.log(">>> selectYAxisCustomRange");
       newState.selection.isDefault = false;
       newState.selection.yAxes[action.axis].axisRange = action.range;
       newState.yAxisRefreshStatus = Y_AXIS_REFRESH_STATUS.UP_TO_DATE;

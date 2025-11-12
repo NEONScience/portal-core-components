@@ -619,7 +619,7 @@ export default function TimeSeriesViewerGraph() {
     if (graphState.filterOutFlaggedData && state.selection.qualityFlags.length > 0) {
       // Copy data since it will be mutated
       const dataCopy = cloneDeep(state.graphData.data);
-
+      console.log("*** state.graphData", state.graphData);
       // Each data row is an array that consists of its datetime and a data point per site/position.
       // Loop and consult qualityData (which is a parallel array) to see if it is flagged.
       // If so, null the data point.
