@@ -32,7 +32,6 @@ import generateTimeSeriesGraphData from '../../workers/generateTimeSeriesGraphDa
 
 import DataProductCitation from '../Citation/DataProductCitation';
 import TimeSeriesViewerContext, {
-  Y_AXIS_REFRESH_STATUS,
 } from './TimeSeriesViewerContext';
 import Theme, { COLORS } from '../Theme/Theme';
 import { TIME_SERIES_VIEWER_STATUS } from './constants';
@@ -211,6 +210,7 @@ const INITIAL_GRAPH_STATE = {
   hiddenQualityFlags: new Set(),
   pngDimensions: [0, 0],
   filterOutFlaggedData: false,
+  filterOutFlaggedDataPrev: false,
 };
 const graphReducer = (state, action) => {
   const newState = { ...state };
@@ -285,6 +285,7 @@ export default function TimeSeriesViewerGraph() {
   } = state.selection;
 
   // let data = cloneDeep(NULL_DATA);
+  // console.log("* init graphOptions");
   let graphOptions = cloneDeep(BASE_GRAPH_OPTIONS);
 
   // Build the axes option
@@ -619,7 +620,6 @@ export default function TimeSeriesViewerGraph() {
     if (graphState.filterOutFlaggedData && state.selection.qualityFlags.length > 0) {
       // Copy data since it will be mutated
       const dataCopy = cloneDeep(state.graphData.data);
-      console.log("*** state.graphData", state.graphData);
       // Each data row is an array that consists of its datetime and a data point per site/position.
       // Loop and consult qualityData (which is a parallel array) to see if it is flagged.
       // If so, null the data point.
@@ -704,7 +704,6 @@ export default function TimeSeriesViewerGraph() {
   // Effect to apply latest options/data to the graph and force a resize
   useEffect(() => {
     if (state.status !== TIME_SERIES_VIEWER_STATUS.READY) { return; }
-
     const filteredGraphData = filterGraphData();
 
     if (dygraphRef.current === null) {
@@ -875,10 +874,6 @@ export default function TimeSeriesViewerGraph() {
 
   // Toggle Hide Flagged Data Button
   const toggleFlaggedDataVisibility = () => {
-    dispatch({
-      type: 'setYAxisRefreshStatus',
-      yAxisRefreshStatus: Y_AXIS_REFRESH_STATUS.NEEDS_REFRESH,
-    });
     graphDispatch({ type: 'toggleFlaggedDataVisibility' });
   };
 

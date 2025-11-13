@@ -20,7 +20,6 @@ import TimeSeriesViewerContext, {
   TIME_STEPS,
   Y_AXIS_RANGE_MODES,
   Y_AXIS_RANGE_MODE_DETAILS,
-  Y_AXIS_REFRESH_STATUS,
   summarizeTimeSteps,
   POINTS_PERFORMANCE_LIMIT,
 } from './TimeSeriesViewerContext';
@@ -255,18 +254,10 @@ const YAxisRangeOption = (props) => {
   // without immediately being corrected by the main context recuder.
   const setMax = (value) => {
     const range = [axisRange[0], Math.min(value, customMax)];
-    dispatch({
-      type: 'setYAxisRefreshStatus',
-      yAxisRefreshStatus: Y_AXIS_REFRESH_STATUS.NEEDS_REFRESH,
-    });
     dispatch({ type: 'selectYAxisCustomRange', axis, range });
   };
   const setMin = (value) => {
     const range = [Math.max(value, customMin), axisRange[1]];
-    dispatch({
-      type: 'setYAxisRefreshStatus',
-      yAxisRefreshStatus: Y_AXIS_REFRESH_STATUS.NEEDS_REFRESH,
-    });
     dispatch({ type: 'selectYAxisCustomRange', axis, range });
   };
   const debounceSetMax = debounce((value) => { setMax(value); }, 200);
@@ -299,10 +290,6 @@ const YAxisRangeOption = (props) => {
         className={classes.optionButtonGroup}
         value={rangeMode}
         onChange={(event, value) => {
-          dispatch({
-            type: 'setYAxisRefreshStatus',
-            yAxisRefreshStatus: Y_AXIS_REFRESH_STATUS.NEEDS_REFRESH,
-          });
           dispatch({ type: 'selectYAxisRangeMode', axis, mode: value });
         }}
       >
@@ -383,10 +370,6 @@ const YAxisRangeOption = (props) => {
             const range = values.map((v) => (
               parseFloat(Math.min(Math.max(v, customMin), customMax).toFixed(precision), 10)
             ));
-            dispatch({
-              type: 'setYAxisRefreshStatus',
-              yAxisRefreshStatus: Y_AXIS_REFRESH_STATUS.NEEDS_REFRESH,
-            });
             dispatch({ type: 'selectYAxisCustomRange', axis, range });
           }}
         />

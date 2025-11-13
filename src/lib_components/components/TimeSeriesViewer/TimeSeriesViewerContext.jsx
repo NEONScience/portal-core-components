@@ -100,10 +100,6 @@ export const Y_AXIS_RANGE_MODE_DETAILS = {
     description: 'Manually define a minimum and maximum axis range',
   },
 };
-export const Y_AXIS_REFRESH_STATUS = {
-  NEEDS_REFRESH: 'NEEDS_REFRESH',
-  UP_TO_DATE: 'UP_TO_DATE',
-};
 const generateYAxisRange = (axis = {}) => {
   const {
     rangeMode,
@@ -165,7 +161,6 @@ export const DEFAULT_STATE = {
   dataFetchProgress: 0,
   variables: {},
   pointTotal: 0,
-  yAxisRefreshStatus: Y_AXIS_REFRESH_STATUS.UP_TO_DATE,
   product: {
     productCode: null,
     productName: null,
@@ -1391,38 +1386,42 @@ const reducer = (state, action) => {
       calcSelection();
       calcStatus();
       return newState;
-
-    case 'selectYAxisRangeMode':
+    case 'selectYAxisRangeMode': {
       if (
         !state.selection.yAxes[action.axis]
-          || !Object.keys(Y_AXIS_RANGE_MODES).includes(action.mode)
-          || state.yAxisRefreshStatus === Y_AXIS_REFRESH_STATUS.UP_TO_DATE
+        || !Object.keys(Y_AXIS_RANGE_MODES).includes(action.mode)
       ) { return state; }
+      const prevRangeMode = state.selection.yAxes[action.axis].rangeMode;
       newState.selection.isDefault = false;
       newState.selection.yAxes[action.axis].rangeMode = action.mode;
+      // Short-circuit potential infinitie loops
+      if (JSON.stringify(state.selection.yAxes[action.axis].axisRange)
+        === JSON.stringify(generateYAxisRange(newState.selection.yAxes[action.axis]))
+        && action.mode === prevRangeMode
+      ) { return state; }
+
       if (action.mode !== Y_AXIS_RANGE_MODES.CUSTOM) {
         newState.selection.yAxes[action.axis].axisRange = generateYAxisRange(
           newState.selection.yAxes[action.axis],
         );
       }
-      newState.yAxisRefreshStatus = Y_AXIS_REFRESH_STATUS.UP_TO_DATE;
       return newState;
+    }
     case 'selectYAxisCustomRange':
-      if (
-        !state.selection.yAxes[action.axis]
-        || state.yAxisRefreshStatus === Y_AXIS_REFRESH_STATUS.UP_TO_DATE
-      ) { return state; }
+      if (!state.selection.yAxes[action.axis]) { return state; }
       if (!(
         Array.isArray(action.range) && action.range.length === 2
           && action.range.every((v) => typeof v === 'number')
           && action.range[0] < action.range[1]
       )) { return state; }
-      console.log(">>> selectYAxisCustomRange");
+      // Short-circuit potential infinitie loops
+      if (JSON.stringify(action.range)
+        === JSON.stringify(state.selection.yAxes[action.axis].axisRange)) {
+        return state;
+      }
       newState.selection.isDefault = false;
       newState.selection.yAxes[action.axis].axisRange = action.range;
-      newState.yAxisRefreshStatus = Y_AXIS_REFRESH_STATUS.UP_TO_DATE;
       return newState;
-
     case 'setYAxisRefreshStatus':
       newState.yAxisRefreshStatus = action.yAxisRefreshStatus;
       return newState;
