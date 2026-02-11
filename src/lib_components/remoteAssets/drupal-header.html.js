@@ -691,7 +691,7 @@ export default html = `<header class="header" role="banner">
                       <ul  class="menu menu--main" data-depth="1">
 
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/impact/research-highlights" class="menu__link" data-plugin-id="menu-link-content11c453ba-42f9-4e06-b17e-f57eb98caa04" data-drupal-link-system-path="node/10904">Research Highlights</a>
+          <a href="https://www.neonscience.org/impact/research-highlight-blog" class="menu__link" data-plugin-id="menu-link-content11c453ba-42f9-4e06-b17e-f57eb98caa04" data-drupal-link-system-path="node/10904">Research Highlights</a>
 
                   </li>
               <li  class="menu__item">
