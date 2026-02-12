@@ -51,9 +51,6 @@ export default html = `
         <a href="https://www.neonscience.org/about" title="About Us" class="menu__link" data-plugin-id="menu-link-content06cc4ae6-95bb-4346-a0e9-6f27f3c48368" data-drupal-link-system-path="node/8793">About Us</a>
               </li>
           <li  class="menu__item">
-        <a href="https://www.neonscience.org/impact/newsroom" class="menu__link" data-plugin-id="menu-link-content214a668b-1f79-4871-a8d1-c0c86269b559" data-drupal-link-system-path="node/10890">Newsroom</a>
-              </li>
-          <li  class="menu__item">
         <a href="https://www.neonscience.org/about/contact-us" title="Contact Us" class="menu__link" data-plugin-id="menu-link-contentdd9d8fc1-0e31-4927-a1cc-33171a5e6843" data-drupal-link-system-path="node/24">Contact Us</a>
               </li>
           <li  class="menu__item">
@@ -75,7 +72,7 @@ export default html = `
 
     </div>
     <div class="footer-bottom__copyright">
-      <p>Copyright &copy; Battelle, 2025</p>
+      <p>Copyright &copy; Battelle, 2026</p>
     </div>
     <div class="footer-bottom__message">
       <p>The National Ecological Observatory Network is a major facility fully funded by the U.S. National Science Foundation.</p><p>Any opinions, findings and conclusions or recommendations expressed in this material do not necessarily reflect the views of the U.S. National Science Foundation.</p>
