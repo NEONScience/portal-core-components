@@ -350,7 +350,9 @@ const QualityFlags = () => {
           <Button
             size="small"
             variant="outlined"
-            onClick={() => { dispatch({ type: 'selectNoneQualityFlags' }); }}
+            onClick={() => {
+              dispatch({ type: 'selectNoneQualityFlags' });
+            }}
             startIcon={<ClearIcon />}
             style={{ marginRight: Theme.spacing(2) }}
           >
@@ -359,7 +361,9 @@ const QualityFlags = () => {
           <Button
             size="small"
             variant="outlined"
-            onClick={() => { dispatch({ type: 'selectAllQualityFlags' }); }}
+            onClick={() => {
+              dispatch({ type: 'selectAllQualityFlags' });
+            }}
             startIcon={<SelectAllIcon />}
           >
             {`Select All (${availableQualityFlags.size})`}
