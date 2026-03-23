@@ -2,7 +2,6 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    // Set up absolute imports to source code.
     "baseUrl": "src/lib_components/",
     "paths": {
       "@/components/*": ["components/*"],
