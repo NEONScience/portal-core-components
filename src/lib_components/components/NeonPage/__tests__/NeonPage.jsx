@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { act } from 'react';
 import { render } from '@testing-library/react';
 
 import MockTheme from '../../../../__mocks__/MockTheme';
@@ -10,6 +10,25 @@ jest.mock('@mui/material/Snackbar', () => mockReactComponent('@mui/material/Snac
 
 // eslint-disable-next-line import/first
 import NeonPage, { NeonErrorPage } from '../NeonPage';
+
+const customStyles = {
+  width: '100%',
+  height: '100px',
+  fontSize: '3rem',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+};
+const customHeader = (
+  <div style={{ backgroundColor: 'green', ...customStyles }}>
+    <span>Custom Header</span>
+  </div>
+);
+const customFooter = (
+  <div style={{ backgroundColor: 'purple', ...customStyles }}>
+    <span>Custom Footer</span>
+  </div>
+);
 
 describe('NeonPage', () => {
   beforeAll(() => {
@@ -27,20 +46,35 @@ describe('NeonPage', () => {
   afterAll(() => {
     console.error.mockRestore();
   });
-  test('renders a basic functional page with no props', () => {
-    const tree = render(
-      <MockTheme>
-        <NeonPage showHeaderSkeleton showFooterSkeleton>
-          <div>content</div>
-        </NeonPage>
-      </MockTheme>
-    );
+  test('renders a basic functional page with no props', async () => {
+    let tree;
+    await act(async () => {
+      tree = render(
+        <MockTheme>
+          <NeonPage
+            showHeaderSkeleton
+            showFooterSkeleton
+            customHeader={customHeader}
+            customFooter={customFooter}
+          >
+            <div>content</div>
+          </NeonPage>
+        </MockTheme>
+      );
+    });
     expect(tree).toMatchSnapshot();
   });
   test('renders with a title and subtitle', () => {
     const tree = render(
       <MockTheme>
-        <NeonPage title="Title" subtitle="Subtitle" showHeaderSkeleton showFooterSkeleton>
+        <NeonPage
+          title="Title"
+          subtitle="Subtitle"
+          showHeaderSkeleton
+          showFooterSkeleton
+          customHeader={customHeader}
+          customFooter={customFooter}
+        >
           <div>content</div>
         </NeonPage>
       </MockTheme>
@@ -50,7 +84,14 @@ describe('NeonPage', () => {
   test('renders with loading message', () => {
     const tree = render(
       <MockTheme>
-        <NeonPage loading="Loading" outerPageContainerMaxWidth="3333px" showHeaderSkeleton showFooterSkeleton>
+        <NeonPage
+          loading="Loading"
+          outerPageContainerMaxWidth="3333px"
+          showHeaderSkeleton
+          showFooterSkeleton
+          customHeader={customHeader}
+          customFooter={customFooter}
+        >
           <div>content</div>
         </NeonPage>
       </MockTheme>
@@ -60,7 +101,14 @@ describe('NeonPage', () => {
   test('renders with loading message and progress', () => {
     const tree = render(
       <MockTheme>
-        <NeonPage loading="Loading" progress={62} showHeaderSkeleton showFooterSkeleton>
+        <NeonPage
+          loading="Loading"
+          progress={62}
+          showHeaderSkeleton
+          showFooterSkeleton
+          customHeader={customHeader}
+          customFooter={customFooter}
+        >
           <div>content</div>
         </NeonPage>
       </MockTheme>
@@ -70,7 +118,13 @@ describe('NeonPage', () => {
   test('renders with an error', () => {
     const tree = render(
       <MockTheme>
-        <NeonPage error="Fail" showHeaderSkeleton showFooterSkeleton>
+        <NeonPage
+          error="Fail"
+          showHeaderSkeleton
+          showFooterSkeleton
+          customHeader={customHeader}
+          customFooter={customFooter}
+        >
           <div>content</div>
         </NeonPage>
       </MockTheme>
@@ -80,7 +134,13 @@ describe('NeonPage', () => {
   test('renders with a notification', () => {
     const tree = render(
       <MockTheme>
-        <NeonPage notification="Notification" showHeaderSkeleton showFooterSkeleton>
+        <NeonPage
+          notification="Notification"
+          showHeaderSkeleton
+          showFooterSkeleton
+          customHeader={customHeader}
+          customFooter={customFooter}
+        >
           <div>content</div>
         </NeonPage>
       </MockTheme>
@@ -90,7 +150,12 @@ describe('NeonPage', () => {
   test('renders with a custom header/footer', () => {
     const tree = render(
       <MockTheme>
-        <NeonPage customHeader={<div>Header</div>} customFooter={<div>Header</div>} showHeaderSkeleton showFooterSkeleton>
+        <NeonPage
+          customHeader={<div>Header</div>}
+          customFooter={<div>Header</div>}
+          showHeaderSkeleton
+          showFooterSkeleton
+        >
           <div>content</div>
         </NeonPage>,
       </MockTheme>
@@ -100,7 +165,13 @@ describe('NeonPage', () => {
   test('renders with custom sidebar content', () => {
     const tree = render(
       <MockTheme>
-        <NeonPage sidebarContent={<div>Sidebar</div>} showHeaderSkeleton showFooterSkeleton>
+        <NeonPage
+          sidebarContent={<div>Sidebar</div>}
+          showHeaderSkeleton
+          showFooterSkeleton
+          customHeader={customHeader}
+          customFooter={customFooter}
+        >
           <div>content</div>
         </NeonPage>
       </MockTheme>
@@ -110,7 +181,15 @@ describe('NeonPage', () => {
   test('renders sidebar items as skeletons when in appropriate state', () => {
     const tree = render(
       <MockTheme>
-        <NeonPage sidebarContent={<div>Sidebar</div>} sidebarTitle="foo" loading="Loading" showHeaderSkeleton showFooterSkeleton>
+        <NeonPage
+          sidebarContent={<div>Sidebar</div>}
+          sidebarTitle="foo"
+          loading="Loading"
+          showHeaderSkeleton
+          showFooterSkeleton
+          customHeader={customHeader}
+          customFooter={customFooter}
+        >
           <div>content</div>
         </NeonPage>
       </MockTheme>
@@ -135,6 +214,8 @@ describe('NeonPage', () => {
           sidebarLinksAdditionalContent={<div>More</div>}
           showHeaderSkeleton
           showFooterSkeleton
+          customHeader={customHeader}
+          customFooter={customFooter}
         >
           <div>content</div>
         </NeonPage>
@@ -159,6 +240,8 @@ describe('NeonPage', () => {
           sidebarLinksAsStandaloneChildren
           showHeaderSkeleton
           showFooterSkeleton
+          customHeader={customHeader}
+          customFooter={customFooter}
         >
           <div>content</div>
         </NeonPage>
@@ -166,7 +249,7 @@ describe('NeonPage', () => {
     );
     expect(tree).toMatchSnapshot();
   });
-  test('NeonErrorPage', () => {
+  test('NeonErrorPage', async () => {
     const error = {
       message: 'fail',
       stack: 'Disregard; this is console.error() call is expected in the NeonErrorPage test',

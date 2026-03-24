@@ -78,6 +78,8 @@ const jestConfig = {
   setupFiles: [
     'jest-canvas-mock',
   ],
+  // Enable to bubble and report any burried errors
+  // setupFilesAfterEnv: ['<rootDir>/test/jest-setup-after-env.js'],
   testMatch: [
     '<rootDir>/src/**/__tests__/**/*.[jt]s?(x)',
   ],

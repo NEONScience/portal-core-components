@@ -90,21 +90,36 @@ describe('SiteMap - SiteMapTable', () => {
 
   describe('exportCsv()', () => {
     let createElementMock = null;
-    const setAttributeMock = jest.fn();
-    const clickMock = jest.fn();
-    beforeAll(() => {
+    let setAttributeMock;
+    let clickMock;
+    let appendChildMock;
+    let removeChildMock;
+    beforeEach(() => {
+      setAttributeMock = jest.fn();
+      clickMock = jest.fn();
+      appendChildMock = jest.fn();
+      removeChildMock = jest.fn();
       createElementMock = jest.spyOn(document, 'createElement').mockReturnValue({
         href: null,
         setAttribute: setAttributeMock,
         click: clickMock,
       });
-      Object.defineProperty(window.document, 'body', {
-        writeable: false,
-        value: { appendChild: jest.fn(), removeChild: jest.fn() },
+      Object.defineProperty(document, 'body', {
+        configurable: true,
+        value: {
+          appendChild: appendChildMock,
+          removeChild: removeChildMock,
+        },
       });
     });
-    afterEach(() => { jest.clearAllMocks(); });
-    afterAll(() => { jest.resetAllMocks(); });
+    afterEach(() => {
+      jest.restoreAllMocks();
+    });
+    afterAll(() => {
+      jest.resetAllMocks();
+      jest.clearAllMocks();
+      jest.restoreAllMocks();
+    });
     test('does nothing if either columns or rows are empty', () => {
       exportCsv();
       expect(createElementMock).not.toHaveBeenCalled();

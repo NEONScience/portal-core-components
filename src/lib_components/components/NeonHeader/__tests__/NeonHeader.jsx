@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { act } from 'react';
 import { render } from '@testing-library/react';
 
 import '../../../../__mocks__/ajax';
@@ -87,7 +87,7 @@ describe('NeonHeader', () => {
     const tree = render(<MockTheme><NeonHeader drupalCssLoaded unstickyDrupalHeader /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
-  test('renders with drupalCssLoaded prop, success NeonContext state, and core auth', (done) => {
+  test('renders with drupalCssLoaded prop, success NeonContext state, and core auth', async () => {
     NeonContext.useNeonContextState.mockReturnValue([{
       isActive: true,
       fetches: { [DRUPAL_HEADER_HTML]: { status: FETCH_STATUS.SUCCESS } },
@@ -95,10 +95,9 @@ describe('NeonHeader', () => {
       auth: { ...defaultAuth, useCore: true },
     }]);
     let tree;
-    setTimeout(() => {
+    await act(async () => {
       tree = render(<MockTheme><NeonHeader drupalCssLoaded /></MockTheme>);
-      expect(tree).toMatchSnapshot();
-      done();
-    }, 0);
+    });
+    expect(tree).toMatchSnapshot();
   });
 });

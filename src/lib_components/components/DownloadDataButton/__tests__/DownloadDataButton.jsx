@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { act } from 'react';
 import { render } from '@testing-library/react';
 import DownloadDataContext from '../../DownloadDataContext/DownloadDataContext';
 
@@ -37,13 +37,16 @@ describe('DownloadDataButton', () => {
     );
     expect(tree).toMatchSnapshot();
   });
-  test('Renders with the dialog open from context state', () => {
+  test('Renders with the dialog open from context state', async () => {
     useDownloadDataState.mockReset();
     useDownloadDataState.mockReturnValue([{
       ...DEFAULT_STATE,
       dialogOpen: true,
     }]);
-    const tree = render(<MockTheme><DownloadDataButton label="foo" /></MockTheme>);
+    let tree;
+    await act(async () => {
+      tree = render(<MockTheme><DownloadDataButton label="foo" /></MockTheme>);
+    });
     expect(tree).toMatchSnapshot();
   });
   test('Automatically includes data-gtm props from product in context state', () => {
