@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 import DownloadDataContext from '../../DownloadDataContext/DownloadDataContext';
 
 import MockTheme from '../../../../__mocks__/MockTheme';
@@ -20,25 +20,21 @@ describe('DownloadDataButton', () => {
     }]);
   });
   test('Renders correctly with only a label', () => {
-    const tree = renderer
-      .create(<MockTheme><DownloadDataButton label="foo" /></MockTheme>)
-      .toJSON();
+    const tree = render(<MockTheme><DownloadDataButton label="foo" /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
   test('Preserves MUI button props', () => {
-    const tree = renderer
-      .create(
-        <MockTheme>
-          <DownloadDataButton
-            label="foo"
-            size="large"
-            color="primary"
-            variant="outlined"
-            data-selenium="download"
-          />
-        </MockTheme>
-      )
-      .toJSON();
+    const tree = render(
+      <MockTheme>
+        <DownloadDataButton
+          label="foo"
+          size="large"
+          color="primary"
+          variant="outlined"
+          data-selenium="download"
+        />
+      </MockTheme>
+    );
     expect(tree).toMatchSnapshot();
   });
   test('Renders with the dialog open from context state', () => {
@@ -47,9 +43,7 @@ describe('DownloadDataButton', () => {
       ...DEFAULT_STATE,
       dialogOpen: true,
     }]);
-    const tree = renderer
-      .create(<MockTheme><DownloadDataButton label="foo" /></MockTheme>)
-      .toJSON();
+    const tree = render(<MockTheme><DownloadDataButton label="foo" /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
   test('Automatically includes data-gtm props from product in context state', () => {
@@ -60,9 +54,7 @@ describe('DownloadDataButton', () => {
         productCode: 'DPX.XXXXX.XXX',
       },
     }]);
-    const tree = renderer
-      .create(<MockTheme><DownloadDataButton label="foo" /></MockTheme>)
-      .toJSON();
+    const tree = render(<MockTheme><DownloadDataButton label="foo" /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
 });

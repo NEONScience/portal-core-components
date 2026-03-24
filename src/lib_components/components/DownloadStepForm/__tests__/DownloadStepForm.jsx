@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
 import cloneDeep from 'lodash/cloneDeep';
 
@@ -78,9 +78,7 @@ describe('DownloadStepForm', () => {
   Object.keys(ALL_STEPS)
     .forEach((stepKey) => {
       test(`Step ${stepKey} renders correctly`, () => {
-        const tree = renderer
-          .create(<MockTheme><DownloadStepForm stepKey={stepKey} /></MockTheme>)
-          .toJSON();
+        const tree = render(<MockTheme><DownloadStepForm stepKey={stepKey} /></MockTheme>);
         expect(tree).toMatchSnapshot();
       });
     });

@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
 import { mockAjaxResponse } from '../../../../__mocks__/ajax';
 import mockReactComponent from '../../../../__mocks__/mockReactComponent';
@@ -7,7 +7,6 @@ import MockTheme from '../../../../__mocks__/MockTheme';
 import '../../../../__mocks__/NeonContext';
 
 import AopDataViewer from '../AopDataViewer';
-import { sliderClasses } from '@mui/material';
 
 jest.mock('@mui/material/Select', () => mockReactComponent('@mui/material/Select'));
 jest.mock('@mui/material/Slider', () => ({
@@ -56,62 +55,52 @@ mockAjaxResponse({
 describe('AopDataViewer', () => {
   test('renders with only a productCode', (done) => {
     setTimeout(() => {
-      const tree = renderer
-        .create(<MockTheme><AopDataViewer productCode="DP3.30010.001" /></MockTheme>)
-        .toJSON();
+      const tree = render(<MockTheme><AopDataViewer productCode="DP3.30010.001" /></MockTheme>);
       expect(tree).toMatchSnapshot();
       done();
     });
   });
   test('renders with title disabled', (done) => {
     setTimeout(() => {
-      const tree = renderer
-        .create(<MockTheme><AopDataViewer productCode="DP3.30010.001" showTitle={false} /></MockTheme>)
-        .toJSON();
+      const tree = render(<MockTheme><AopDataViewer productCode="DP3.30010.001" showTitle={false} /></MockTheme>);
       expect(tree).toMatchSnapshot();
       done();
     });
   });
   test('renders with a specified initial site', (done) => {
     setTimeout(() => {
-      const tree = renderer
-        .create(<MockTheme><AopDataViewer productCode="DP3.30010.001" initialSite="BONA" /></MockTheme>)
-        .toJSON();
+      const tree = render(<MockTheme><AopDataViewer productCode="DP3.30010.001" initialSite="BONA" /></MockTheme>);
       expect(tree).toMatchSnapshot();
       done();
     });
   });
   test('renders with a specified initial site and year', (done) => {
     setTimeout(() => {
-      const tree = renderer
-        .create((
-          <MockTheme>
-            <AopDataViewer
-              productCode="DP3.30010.001"
-              initialSite="HEAL"
-              initialYear={2017}
-            />
-          </MockTheme>
-        ))
-        .toJSON();
+      const tree = render((
+        <MockTheme>
+          <AopDataViewer
+            productCode="DP3.30010.001"
+            initialSite="HEAL"
+            initialYear={2017}
+          />
+        </MockTheme>
+      ));
       expect(tree).toMatchSnapshot();
       done();
     });
   });
   test('renders with a specified initial site, year, and flight', (done) => {
     setTimeout(() => {
-      const tree = renderer
-        .create((
-          <MockTheme>
-            <AopDataViewer
-              productCode="DP3.30010.001"
-              initialSite="SJER"
-              initialYear={2017}
-              initialFlight={2}
-            />
-          </MockTheme>
-        ))
-        .toJSON();
+      const tree = render((
+        <MockTheme>
+          <AopDataViewer
+            productCode="DP3.30010.001"
+            initialSite="SJER"
+            initialYear={2017}
+            initialFlight={2}
+          />
+        </MockTheme>
+      ));
       expect(tree).toMatchSnapshot();
       done();
     });

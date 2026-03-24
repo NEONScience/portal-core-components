@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
 import MockTheme from '../../../../__mocks__/MockTheme';
 import '../../../../__mocks__/NeonContext';
@@ -8,69 +8,53 @@ import ExternalHostProductSpecificLinks from '../ExternalHostProductSpecificLink
 
 describe('ExternalHostProductSpecificLinks', () => {
   test('renders graceful failure with no valid product code', () => {
-    const tree = renderer
-      .create(<MockTheme><ExternalHostProductSpecificLinks productCode="BAD" /></MockTheme>)
-      .toJSON();
+    const tree = render(<MockTheme><ExternalHostProductSpecificLinks productCode="BAD" /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
   test('renders with valid product code and no sites', () => {
-    const treeAMERIFLUX = renderer
-      .create(<MockTheme><ExternalHostProductSpecificLinks productCode="DP1.00001.001" /></MockTheme>)
-      .toJSON();
+    const treeAMERIFLUX = render(<MockTheme><ExternalHostProductSpecificLinks productCode="DP1.00001.001" /></MockTheme>);
     expect(treeAMERIFLUX).toMatchSnapshot();
-    const treeBOLD = renderer
-      .create(<MockTheme><ExternalHostProductSpecificLinks productCode="DP1.10020.001" /></MockTheme>)
-      .toJSON();
+    const treeBOLD = render(<MockTheme><ExternalHostProductSpecificLinks productCode="DP1.10020.001" /></MockTheme>);
     expect(treeBOLD).toMatchSnapshot();
-    const treePHENOCAM = renderer
-      .create(<MockTheme><ExternalHostProductSpecificLinks productCode="DP1.00033.001" data-selenium="foo" /></MockTheme>)
-      .toJSON();
+    const treePHENOCAM = render(<MockTheme><ExternalHostProductSpecificLinks productCode="DP1.00033.001" data-selenium="foo" /></MockTheme>);
     expect(treePHENOCAM).toMatchSnapshot();
   });
   test('renders with valid product code and sites', () => {
-    const treeAMERIFLUX = renderer
-      .create(
-        <MockTheme>
-          <ExternalHostProductSpecificLinks
-            productCode="DP1.00001.001"
-            sites={['GUAN', 'BLAN', 'PUUM', 'STER', 'RMNP', 'TALL', 'WOOD', 'UKFS']}
-          />
-        </MockTheme>
-      )
-      .toJSON();
+    const treeAMERIFLUX = render(
+      <MockTheme>
+        <ExternalHostProductSpecificLinks
+          productCode="DP1.00001.001"
+          sites={['GUAN', 'BLAN', 'PUUM', 'STER', 'RMNP', 'TALL', 'WOOD', 'UKFS']}
+        />
+      </MockTheme>
+    );
     expect(treeAMERIFLUX).toMatchSnapshot();
-    const treeBOLD = renderer
-      .create(
-        <MockTheme>
-          <ExternalHostProductSpecificLinks
-            productCode="DP1.10020.001"
-            sites={['ABBY', 'BLUE', 'CLBJ', 'DEJU', 'FLNT', 'GUAN', 'HARV', 'JERC']}
-          />
-        </MockTheme>
-      )
-      .toJSON();
+    const treeBOLD = render(
+      <MockTheme>
+        <ExternalHostProductSpecificLinks
+          productCode="DP1.10020.001"
+          sites={['ABBY', 'BLUE', 'CLBJ', 'DEJU', 'FLNT', 'GUAN', 'HARV', 'JERC']}
+        />
+      </MockTheme>
+    );
     expect(treeBOLD).toMatchSnapshot();
-    const treePHENOCAM = renderer
-      .create(
-        <MockTheme>
-          <ExternalHostProductSpecificLinks
-            productCode="DP1.00033.001"
-            sites={['ABBY', 'BLUE', 'CLBJ', 'DEJU', 'FLNT', 'GUAN', 'HARV', 'JERC']}
-          />
-        </MockTheme>
-      )
-      .toJSON();
+    const treePHENOCAM = render(
+      <MockTheme>
+        <ExternalHostProductSpecificLinks
+          productCode="DP1.00033.001"
+          sites={['ABBY', 'BLUE', 'CLBJ', 'DEJU', 'FLNT', 'GUAN', 'HARV', 'JERC']}
+        />
+      </MockTheme>
+    );
     expect(treePHENOCAM).toMatchSnapshot();
-    const treeNPN = renderer
-      .create(
-        <MockTheme>
-          <ExternalHostProductSpecificLinks
-            productCode="DP1.10055.001"
-            sites={['ABBY', 'BLUE', 'CLBJ', 'DEJU', 'FLNT', 'GUAN', 'HARV', 'JERC']}
-          />
-        </MockTheme>
-      )
-      .toJSON();
+    const treeNPN = render(
+      <MockTheme>
+        <ExternalHostProductSpecificLinks
+          productCode="DP1.10055.001"
+          sites={['ABBY', 'BLUE', 'CLBJ', 'DEJU', 'FLNT', 'GUAN', 'HARV', 'JERC']}
+        />
+      </MockTheme>
+    );
     expect(treeNPN).toMatchSnapshot();
   });
 });

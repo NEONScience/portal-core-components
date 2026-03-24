@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
 import cloneDeep from 'lodash/cloneDeep';
 
@@ -24,9 +24,7 @@ describe('TimeSeriesViewerContainer', () => {
       useTimeSeriesViewerState.mockReturnValue([{
         ...cloneDeep(DEFAULT_STATE),
       }]);
-      const tree = renderer
-        .create(<MockTheme><TimeSeriesViewerSummary /></MockTheme>)
-        .toJSON();
+      const tree = render(<MockTheme><TimeSeriesViewerSummary /></MockTheme>);
       expect(tree).toMatchSnapshot();
     });
     test('Renders for defined product without sensor / with default selection', () => {
@@ -38,9 +36,7 @@ describe('TimeSeriesViewerContainer', () => {
           productDescription: 'This is a product that products',
         },
       }]);
-      const tree = renderer
-        .create(<MockTheme><TimeSeriesViewerSummary /></MockTheme>)
-        .toJSON();
+      const tree = render(<MockTheme><TimeSeriesViewerSummary /></MockTheme>);
       expect(tree).toMatchSnapshot();
     });
     test('Renders for defined product with sensor / with default selection', () => {
@@ -53,9 +49,7 @@ describe('TimeSeriesViewerContainer', () => {
           productSensor: 'product sensor 123',
         },
       }]);
-      const tree = renderer
-        .create(<MockTheme><TimeSeriesViewerSummary /></MockTheme>)
-        .toJSON();
+      const tree = render(<MockTheme><TimeSeriesViewerSummary /></MockTheme>);
       expect(tree).toMatchSnapshot();
     });
     test('Renders for selection with only sites', () => {
@@ -74,9 +68,7 @@ describe('TimeSeriesViewerContainer', () => {
           ],
         },
       }]);
-      const tree = renderer
-        .create(<MockTheme><TimeSeriesViewerSummary /></MockTheme>)
-        .toJSON();
+      const tree = render(<MockTheme><TimeSeriesViewerSummary /></MockTheme>);
       expect(tree).toMatchSnapshot();
     });
     test('Renders for selection with only date range', () => {
@@ -92,9 +84,7 @@ describe('TimeSeriesViewerContainer', () => {
           dateRange: ['2018-04', '2020-01'],
         },
       }]);
-      const tree = renderer
-        .create(<MockTheme><TimeSeriesViewerSummary /></MockTheme>)
-        .toJSON();
+      const tree = render(<MockTheme><TimeSeriesViewerSummary /></MockTheme>);
       expect(tree).toMatchSnapshot();
     });
     test('Renders for selection with only variables', () => {
@@ -110,9 +100,7 @@ describe('TimeSeriesViewerContainer', () => {
           variables: ['var1', 'var2'],
         },
       }]);
-      const tree = renderer
-        .create(<MockTheme><TimeSeriesViewerSummary /></MockTheme>)
-        .toJSON();
+      const tree = render(<MockTheme><TimeSeriesViewerSummary /></MockTheme>);
       expect(tree).toMatchSnapshot();
     });
     test('Renders for selection with variables and qualityFlags', () => {
@@ -129,9 +117,7 @@ describe('TimeSeriesViewerContainer', () => {
           qualityFlags: ['qfA', 'qfB', 'qfC'],
         },
       }]);
-      const tree = renderer
-        .create(<MockTheme><TimeSeriesViewerSummary /></MockTheme>)
-        .toJSON();
+      const tree = render(<MockTheme><TimeSeriesViewerSummary /></MockTheme>);
       expect(tree).toMatchSnapshot();
     });
     test('Renders for selection with axes', () => {
@@ -152,9 +138,7 @@ describe('TimeSeriesViewerContainer', () => {
           },
         },
       }]);
-      const tree = renderer
-        .create(<MockTheme><TimeSeriesViewerSummary /></MockTheme>)
-        .toJSON();
+      const tree = render(<MockTheme><TimeSeriesViewerSummary /></MockTheme>);
       expect(tree).toMatchSnapshot();
     });
   });

@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 import { renderHook } from '@testing-library/react';
 
 // import cloneDeep from 'lodash/cloneDeep';
@@ -46,12 +46,11 @@ describe('DownloadDataContext', () => {
         ],
       };
       setTimeout(() => {
-        const tree = renderer
-          .create(
-            <Provider productData={productData}>
-              <div>children</div>
-            </Provider>,
-          ).toJSON();
+        const tree = render(
+          <Provider productData={productData}>
+            <div>children</div>
+          </Provider>,
+        );
         expect(tree).toMatchSnapshot();
         done();
       });

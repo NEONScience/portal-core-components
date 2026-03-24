@@ -31,15 +31,15 @@ export default function mockReactComponent(path) {
       } catch (error) {
         renderableValue = `Non-renderable ${typeof value}`;
       }
-      dataProps[`prop-${prop}`] = renderableValue;
+      dataProps[`data-prop-${prop.toLocaleLowerCase()}`] = renderableValue;
     });
     const { children } = props;
     return children ? (
-      <div ComponentPath={path} {...dataProps}>
+      <div data-component-path={path} {...dataProps}>
         {children}
       </div>
     ) : (
-      <div ComponentPath={path} {...dataProps} />
+      <div data-component-path={path} {...dataProps} />
     );
   };
 }

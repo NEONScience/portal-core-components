@@ -1,6 +1,6 @@
 /* eslint max-len: 0 */
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 import { renderHook } from '@testing-library/react';
 
 import uniqueId from 'lodash/uniqueId';
@@ -68,13 +68,11 @@ const {
 describe('SiteMap - SiteMapContext', () => {
   describe('Provider', () => {
     test('renders with no props', () => {
-      const tree = renderer
-        .create((
-          <Provider>
-            <div>children</div>
-          </Provider>
-        ))
-        .toJSON();
+      const tree = render((
+        <Provider>
+          <div>children</div>
+        </Provider>
+      ));
       expect(tree).toMatchSnapshot();
     });
   });

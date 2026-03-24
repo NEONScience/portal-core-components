@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
 import {
   FEATURES,
@@ -88,9 +88,7 @@ describe.skip('SiteMapFeature', () => {
     .filter((featureKey) => featureKey === 'HUTS')
     .forEach((featureKey) => {
       test(`Renders correctly for feature key: ${featureKey}`, () => {
-        const tree = renderer
-          .create(<SiteMapFeature mapRef={mapRef} featureKey={featureKey} />)
-          .toJSON();
+        const tree = renderer(<SiteMapFeature mapRef={mapRef} featureKey={featureKey} />);
         expect(tree).toMatchSnapshot();
       });
     });

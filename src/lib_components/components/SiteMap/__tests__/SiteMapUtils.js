@@ -65,6 +65,20 @@ const neonContextData = {
   },
 };
 
+function setWindowSize(width, height) {
+  Object.defineProperty(window, 'innerWidth', {
+    writable: true,
+    configurable: true,
+    value: width,
+  });
+  Object.defineProperty(window, 'innerHeight', {
+    writable: true,
+    configurable: true,
+    value: height,
+  });
+  window.dispatchEvent(new Event('resize'));
+}
+
 describe('SiteMap - SiteMapUtils', () => {
   /**
      Functions
@@ -211,13 +225,6 @@ describe('SiteMap - SiteMapUtils', () => {
   });
 
   describe('getDynamicAspectRatio()', () => {
-    let windowSpy;
-    beforeEach(() => {
-      windowSpy = jest.spyOn(global, 'window', 'get');
-    });
-    afterEach(() => {
-      windowSpy.mockRestore();
-    });
     test('gets appropriate aspect ratios for various window sizes without a buffer', () => {
       [
         [800, 1, (1 / 3)],
@@ -236,9 +243,7 @@ describe('SiteMap - SiteMapUtils', () => {
         [100, 1000, (2 / 1)],
         [1, 1000, (2 / 1)],
       ].forEach((test) => {
-        windowSpy.mockImplementation(() => (
-          { innerWidth: test[0], innerHeight: test[1] }
-        ));
+        setWindowSize(test[0], test[1]);
         expect(getDynamicAspectRatio()).toBe(test[2]);
       });
     });
@@ -260,9 +265,7 @@ describe('SiteMap - SiteMapUtils', () => {
         [100, 1300, (2 / 1)],
         [1, 1300, (2 / 1)],
       ].forEach((test) => {
-        windowSpy.mockImplementation(() => (
-          { innerWidth: test[0], innerHeight: test[1] }
-        ));
+        setWindowSize(test[0], test[1]);
         expect(getDynamicAspectRatio(300)).toBe(test[2]);
       });
     });

@@ -1,27 +1,3160 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`ReleaseFilter Renders gracefully with an invalid selection 1`] = `null`;
+exports[`ReleaseFilter Renders gracefully with an invalid selection 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        style="width: 100%;"
+      >
+        <div
+          class="makeStyles-titleContainer-62"
+        >
+          <h3
+            class="MuiTypography-root MuiTypography-h5 makeStyles-title-61 css-1v75lyw-MuiTypography-root"
+            id="release-filter-label-_r_g_"
+          >
+            Release
+          </h3>
+          <button
+            aria-label="[object Object]"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            data-mui-internal-clone-element="true"
+            style="margin-left: 4px;"
+            tabindex="0"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <div
+          aria-labelledby="release-filter-label-_r_g_"
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall makeStyles-selectInput-63 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
+          data-selenium="release-filter"
+          style="width: 100%;"
+        >
+          <div
+            aria-controls="_r_i_"
+            aria-expanded="false"
+            aria-haspopup="listbox"
+            aria-labelledby="mui-component-select-release-filter-input-_r_g_"
+            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-z4chdf-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+            id="mui-component-select-release-filter-input-_r_g_"
+            role="combobox"
+            tabindex="0"
+          >
+            Latest and Provisional
+          </div>
+          <input
+            aria-hidden="true"
+            aria-invalid="false"
+            class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+            id="release-filter-input-_r_g_"
+            name="release-filter-input-_r_g_"
+            tabindex="-1"
+            value="Latest and Provisional"
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+            data-testid="ArrowDropDownIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M7 10l5 5 5-5z"
+            />
+          </svg>
+          <fieldset
+            aria-hidden="true"
+            class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+          >
+            <legend
+              class="css-ihdtdm"
+            >
+              <span
+                class="notranslate"
+              >
+                ​
+              </span>
+            </legend>
+          </fieldset>
+        </div>
+        <div
+          class="makeStyles-descriptionContainer-64"
+        >
+          <span
+            class="MuiTypography-root MuiTypography-caption makeStyles-description-68 css-287k3z-MuiTypography-root"
+          >
+            Data in the latest release in addition to provisional data (not yet in any release)
+          </span>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      style="width: 100%;"
+    >
+      <div
+        class="makeStyles-titleContainer-62"
+      >
+        <h3
+          class="MuiTypography-root MuiTypography-h5 makeStyles-title-61 css-1v75lyw-MuiTypography-root"
+          id="release-filter-label-_r_g_"
+        >
+          Release
+        </h3>
+        <button
+          aria-label="[object Object]"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+          data-mui-internal-clone-element="true"
+          style="margin-left: 4px;"
+          tabindex="0"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+            data-testid="InfoOutlinedIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+            />
+          </svg>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+      <div
+        aria-labelledby="release-filter-label-_r_g_"
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall makeStyles-selectInput-63 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
+        data-selenium="release-filter"
+        style="width: 100%;"
+      >
+        <div
+          aria-controls="_r_i_"
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          aria-labelledby="mui-component-select-release-filter-input-_r_g_"
+          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-z4chdf-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          id="mui-component-select-release-filter-input-_r_g_"
+          role="combobox"
+          tabindex="0"
+        >
+          Latest and Provisional
+        </div>
+        <input
+          aria-hidden="true"
+          aria-invalid="false"
+          class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+          id="release-filter-input-_r_g_"
+          name="release-filter-input-_r_g_"
+          tabindex="-1"
+          value="Latest and Provisional"
+        />
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+          data-testid="ArrowDropDownIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M7 10l5 5 5-5z"
+          />
+        </svg>
+        <fieldset
+          aria-hidden="true"
+          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+        >
+          <legend
+            class="css-ihdtdm"
+          >
+            <span
+              class="notranslate"
+            >
+              ​
+            </span>
+          </legend>
+        </fieldset>
+      </div>
+      <div
+        class="makeStyles-descriptionContainer-64"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption makeStyles-description-68 css-287k3z-MuiTypography-root"
+        >
+          Data in the latest release in addition to provisional data (not yet in any release)
+        </span>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
 
-exports[`ReleaseFilter Renders in skeleton mode 1`] = `null`;
+exports[`ReleaseFilter Renders in skeleton mode 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        style="width: 100%; overflow: hidden;"
+      >
+        <div
+          class="makeStyles-titleContainer-17"
+        >
+          <h3
+            class="MuiTypography-root MuiTypography-h5 makeStyles-title-16 css-1v75lyw-MuiTypography-root"
+            id="release-filter-label-_r_5_"
+          >
+            Release
+          </h3>
+          <button
+            aria-label="[object Object]"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            data-mui-internal-clone-element="true"
+            style="margin-left: 4px;"
+            tabindex="0"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <span
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
+          style="width: 100%; height: 36px; margin-bottom: 8px;"
+        />
+        <span
+          class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse css-18hkvsx-MuiSkeleton-root"
+          style="width: 70%; height: 16px; margin-bottom: 8px;"
+        />
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      style="width: 100%; overflow: hidden;"
+    >
+      <div
+        class="makeStyles-titleContainer-17"
+      >
+        <h3
+          class="MuiTypography-root MuiTypography-h5 makeStyles-title-16 css-1v75lyw-MuiTypography-root"
+          id="release-filter-label-_r_5_"
+        >
+          Release
+        </h3>
+        <button
+          aria-label="[object Object]"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+          data-mui-internal-clone-element="true"
+          style="margin-left: 4px;"
+          tabindex="0"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+            data-testid="InfoOutlinedIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+            />
+          </svg>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+      <span
+        class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-153n0d3-MuiSkeleton-root"
+        style="width: 100%; height: 36px; margin-bottom: 8px;"
+      />
+      <span
+        class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse css-18hkvsx-MuiSkeleton-root"
+        style="width: 70%; height: 16px; margin-bottom: 8px;"
+      />
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
 
-exports[`ReleaseFilter Renders nothing with no releases and an excluded null release 1`] = `null`;
+exports[`ReleaseFilter Renders nothing with no releases and an excluded null release 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div />
+  </body>,
+  "container": <div />,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
 
-exports[`ReleaseFilter Renders product counts without a defined null release count 1`] = `null`;
+exports[`ReleaseFilter Renders product counts without a defined null release count 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        style="width: 100%;"
+      >
+        <div
+          class="makeStyles-titleContainer-167"
+        >
+          <h3
+            class="MuiTypography-root MuiTypography-h5 makeStyles-title-166 css-1v75lyw-MuiTypography-root"
+            id="release-filter-label-_r_1b_"
+          >
+            Release
+          </h3>
+          <button
+            aria-label="[object Object]"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            data-mui-internal-clone-element="true"
+            style="margin-left: 4px;"
+            tabindex="0"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <div
+          aria-labelledby="release-filter-label-_r_1b_"
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall makeStyles-selectInput-168 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
+          data-selenium="release-filter"
+          style="width: 100%;"
+        >
+          <div
+            aria-controls="_r_1d_"
+            aria-expanded="false"
+            aria-haspopup="listbox"
+            aria-labelledby="mui-component-select-release-filter-input-_r_1b_"
+            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-z4chdf-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+            id="mui-component-select-release-filter-input-_r_1b_"
+            role="combobox"
+            tabindex="0"
+          >
+            TEST-TAG-2
+          </div>
+          <input
+            aria-hidden="true"
+            aria-invalid="false"
+            class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+            id="release-filter-input-_r_1b_"
+            name="release-filter-input-_r_1b_"
+            tabindex="-1"
+            value="TEST-TAG-2"
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+            data-testid="ArrowDropDownIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M7 10l5 5 5-5z"
+            />
+          </svg>
+          <fieldset
+            aria-hidden="true"
+            class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+          >
+            <legend
+              class="css-ihdtdm"
+            >
+              <span
+                class="notranslate"
+              >
+                ​
+              </span>
+            </legend>
+          </fieldset>
+        </div>
+        <div
+          class="makeStyles-descriptionContainer-169"
+        >
+          <span
+            class="MuiTypography-root MuiTypography-caption makeStyles-description-173 css-287k3z-MuiTypography-root"
+          >
+            Generated: January 15, 2021
+          </span>
+        </div>
+        <div
+          class="makeStyles-descriptionContainer-169"
+        >
+          <span
+            class="MuiTypography-root MuiTypography-caption makeStyles-description-173 css-287k3z-MuiTypography-root"
+          >
+            2 data products
+          </span>
+        </div>
+        <div
+          class="makeStyles-descriptionContainer-169"
+        >
+          <div
+            class="makeStyles-descriptionFlexInnerContainer-172"
+          >
+            <span
+              class="MuiTypography-root MuiTypography-caption makeStyles-description-173 css-287k3z-MuiTypography-root"
+              style="margin-right: 4px;"
+              title="Digital Object Identifier (DOI) - A citable permanent link to this this data product release"
+            >
+              DOI:
+            </span>
+            <span
+              aria-label="doi"
+              class="MuiTypography-root MuiTypography-caption makeStyles-description-173 css-287k3z-MuiTypography-root"
+              style="overflow-wrap: anywhere;"
+            >
+              http://data.cite/bar
+            </span>
+          </div>
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary makeStyles-copyButton-175 css-j1wr89-MuiButtonBase-root-MuiButton-root"
+            tabindex="0"
+            title="Copy DOI: http://data.cite/bar"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              data-testid="AssignmentIcon"
+              focusable="false"
+              style="margin-right: 8px;"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2m-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1m2 14H7v-2h7zm3-4H7v-2h10zm0-4H7V7h10z"
+              />
+            </svg>
+            Copy DOI
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      style="width: 100%;"
+    >
+      <div
+        class="makeStyles-titleContainer-167"
+      >
+        <h3
+          class="MuiTypography-root MuiTypography-h5 makeStyles-title-166 css-1v75lyw-MuiTypography-root"
+          id="release-filter-label-_r_1b_"
+        >
+          Release
+        </h3>
+        <button
+          aria-label="[object Object]"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+          data-mui-internal-clone-element="true"
+          style="margin-left: 4px;"
+          tabindex="0"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+            data-testid="InfoOutlinedIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+            />
+          </svg>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+      <div
+        aria-labelledby="release-filter-label-_r_1b_"
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall makeStyles-selectInput-168 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
+        data-selenium="release-filter"
+        style="width: 100%;"
+      >
+        <div
+          aria-controls="_r_1d_"
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          aria-labelledby="mui-component-select-release-filter-input-_r_1b_"
+          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-z4chdf-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          id="mui-component-select-release-filter-input-_r_1b_"
+          role="combobox"
+          tabindex="0"
+        >
+          TEST-TAG-2
+        </div>
+        <input
+          aria-hidden="true"
+          aria-invalid="false"
+          class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+          id="release-filter-input-_r_1b_"
+          name="release-filter-input-_r_1b_"
+          tabindex="-1"
+          value="TEST-TAG-2"
+        />
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+          data-testid="ArrowDropDownIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M7 10l5 5 5-5z"
+          />
+        </svg>
+        <fieldset
+          aria-hidden="true"
+          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+        >
+          <legend
+            class="css-ihdtdm"
+          >
+            <span
+              class="notranslate"
+            >
+              ​
+            </span>
+          </legend>
+        </fieldset>
+      </div>
+      <div
+        class="makeStyles-descriptionContainer-169"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption makeStyles-description-173 css-287k3z-MuiTypography-root"
+        >
+          Generated: January 15, 2021
+        </span>
+      </div>
+      <div
+        class="makeStyles-descriptionContainer-169"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption makeStyles-description-173 css-287k3z-MuiTypography-root"
+        >
+          2 data products
+        </span>
+      </div>
+      <div
+        class="makeStyles-descriptionContainer-169"
+      >
+        <div
+          class="makeStyles-descriptionFlexInnerContainer-172"
+        >
+          <span
+            class="MuiTypography-root MuiTypography-caption makeStyles-description-173 css-287k3z-MuiTypography-root"
+            style="margin-right: 4px;"
+            title="Digital Object Identifier (DOI) - A citable permanent link to this this data product release"
+          >
+            DOI:
+          </span>
+          <span
+            aria-label="doi"
+            class="MuiTypography-root MuiTypography-caption makeStyles-description-173 css-287k3z-MuiTypography-root"
+            style="overflow-wrap: anywhere;"
+          >
+            http://data.cite/bar
+          </span>
+        </div>
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary makeStyles-copyButton-175 css-j1wr89-MuiButtonBase-root-MuiButton-root"
+          tabindex="0"
+          title="Copy DOI: http://data.cite/bar"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+            data-testid="AssignmentIcon"
+            focusable="false"
+            style="margin-right: 8px;"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2m-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1m2 14H7v-2h7zm3-4H7v-2h10zm0-4H7V7h10z"
+            />
+          </svg>
+          Copy DOI
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
 
-exports[`ReleaseFilter Renders with a custom title 1`] = `null`;
+exports[`ReleaseFilter Renders with a custom title 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        style="width: 100%;"
+      >
+        <div
+          class="makeStyles-titleContainer-107"
+        >
+          <h3
+            class="MuiTypography-root MuiTypography-h5 makeStyles-title-106 css-1v75lyw-MuiTypography-root"
+            id="release-filter-label-_r_s_"
+          >
+            Foo
+          </h3>
+          <button
+            aria-label="[object Object]"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            data-mui-internal-clone-element="true"
+            style="margin-left: 4px;"
+            tabindex="0"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <div
+          aria-labelledby="release-filter-label-_r_s_"
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall makeStyles-selectInput-108 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
+          data-selenium="release-filter"
+          style="width: 100%;"
+        >
+          <div
+            aria-controls="_r_u_"
+            aria-disabled="true"
+            aria-expanded="false"
+            aria-haspopup="listbox"
+            aria-labelledby="mui-component-select-release-filter-input-_r_s_"
+            class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled MuiInputBase-inputSizeSmall css-z4chdf-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+            id="mui-component-select-release-filter-input-_r_s_"
+            role="combobox"
+          >
+            Latest and Provisional
+          </div>
+          <input
+            aria-hidden="true"
+            aria-invalid="false"
+            class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+            disabled=""
+            id="release-filter-input-_r_s_"
+            name="release-filter-input-_r_s_"
+            tabindex="-1"
+            value="Latest and Provisional"
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined Mui-disabled css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+            data-testid="ArrowDropDownIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M7 10l5 5 5-5z"
+            />
+          </svg>
+          <fieldset
+            aria-hidden="true"
+            class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+          >
+            <legend
+              class="css-ihdtdm"
+            >
+              <span
+                class="notranslate"
+              >
+                ​
+              </span>
+            </legend>
+          </fieldset>
+        </div>
+        <div
+          class="makeStyles-descriptionContainer-109"
+        >
+          <span
+            class="MuiTypography-root MuiTypography-caption makeStyles-description-113 css-287k3z-MuiTypography-root"
+          >
+            Data in the latest release in addition to provisional data (not yet in any release)
+          </span>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      style="width: 100%;"
+    >
+      <div
+        class="makeStyles-titleContainer-107"
+      >
+        <h3
+          class="MuiTypography-root MuiTypography-h5 makeStyles-title-106 css-1v75lyw-MuiTypography-root"
+          id="release-filter-label-_r_s_"
+        >
+          Foo
+        </h3>
+        <button
+          aria-label="[object Object]"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+          data-mui-internal-clone-element="true"
+          style="margin-left: 4px;"
+          tabindex="0"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+            data-testid="InfoOutlinedIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+            />
+          </svg>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+      <div
+        aria-labelledby="release-filter-label-_r_s_"
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall makeStyles-selectInput-108 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
+        data-selenium="release-filter"
+        style="width: 100%;"
+      >
+        <div
+          aria-controls="_r_u_"
+          aria-disabled="true"
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          aria-labelledby="mui-component-select-release-filter-input-_r_s_"
+          class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled MuiInputBase-inputSizeSmall css-z4chdf-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          id="mui-component-select-release-filter-input-_r_s_"
+          role="combobox"
+        >
+          Latest and Provisional
+        </div>
+        <input
+          aria-hidden="true"
+          aria-invalid="false"
+          class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+          disabled=""
+          id="release-filter-input-_r_s_"
+          name="release-filter-input-_r_s_"
+          tabindex="-1"
+          value="Latest and Provisional"
+        />
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined Mui-disabled css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+          data-testid="ArrowDropDownIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M7 10l5 5 5-5z"
+          />
+        </svg>
+        <fieldset
+          aria-hidden="true"
+          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+        >
+          <legend
+            class="css-ihdtdm"
+          >
+            <span
+              class="notranslate"
+            >
+              ​
+            </span>
+          </legend>
+        </fieldset>
+      </div>
+      <div
+        class="makeStyles-descriptionContainer-109"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption makeStyles-description-113 css-287k3z-MuiTypography-root"
+        >
+          Data in the latest release in addition to provisional data (not yet in any release)
+        </span>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
 
-exports[`ReleaseFilter Renders with a selected release 1`] = `null`;
+exports[`ReleaseFilter Renders with a selected release 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        style="width: 100%;"
+      >
+        <div
+          class="makeStyles-titleContainer-47"
+        >
+          <h3
+            class="MuiTypography-root MuiTypography-h5 makeStyles-title-46 css-1v75lyw-MuiTypography-root"
+            id="release-filter-label-_r_c_"
+          >
+            Release
+          </h3>
+          <button
+            aria-label="[object Object]"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            data-mui-internal-clone-element="true"
+            style="margin-left: 4px;"
+            tabindex="0"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <div
+          aria-labelledby="release-filter-label-_r_c_"
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall makeStyles-selectInput-48 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
+          data-selenium="release-filter"
+          style="width: 100%;"
+        >
+          <div
+            aria-controls="_r_e_"
+            aria-expanded="false"
+            aria-haspopup="listbox"
+            aria-labelledby="mui-component-select-release-filter-input-_r_c_"
+            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-z4chdf-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+            id="mui-component-select-release-filter-input-_r_c_"
+            role="combobox"
+            tabindex="0"
+          >
+            TEST-TAG-2
+          </div>
+          <input
+            aria-hidden="true"
+            aria-invalid="false"
+            class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+            id="release-filter-input-_r_c_"
+            name="release-filter-input-_r_c_"
+            tabindex="-1"
+            value="TEST-TAG-2"
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+            data-testid="ArrowDropDownIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M7 10l5 5 5-5z"
+            />
+          </svg>
+          <fieldset
+            aria-hidden="true"
+            class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+          >
+            <legend
+              class="css-ihdtdm"
+            >
+              <span
+                class="notranslate"
+              >
+                ​
+              </span>
+            </legend>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      style="width: 100%;"
+    >
+      <div
+        class="makeStyles-titleContainer-47"
+      >
+        <h3
+          class="MuiTypography-root MuiTypography-h5 makeStyles-title-46 css-1v75lyw-MuiTypography-root"
+          id="release-filter-label-_r_c_"
+        >
+          Release
+        </h3>
+        <button
+          aria-label="[object Object]"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+          data-mui-internal-clone-element="true"
+          style="margin-left: 4px;"
+          tabindex="0"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+            data-testid="InfoOutlinedIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+            />
+          </svg>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+      <div
+        aria-labelledby="release-filter-label-_r_c_"
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall makeStyles-selectInput-48 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
+        data-selenium="release-filter"
+        style="width: 100%;"
+      >
+        <div
+          aria-controls="_r_e_"
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          aria-labelledby="mui-component-select-release-filter-input-_r_c_"
+          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-z4chdf-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          id="mui-component-select-release-filter-input-_r_c_"
+          role="combobox"
+          tabindex="0"
+        >
+          TEST-TAG-2
+        </div>
+        <input
+          aria-hidden="true"
+          aria-invalid="false"
+          class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+          id="release-filter-input-_r_c_"
+          name="release-filter-input-_r_c_"
+          tabindex="-1"
+          value="TEST-TAG-2"
+        />
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+          data-testid="ArrowDropDownIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M7 10l5 5 5-5z"
+          />
+        </svg>
+        <fieldset
+          aria-hidden="true"
+          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+        >
+          <legend
+            class="css-ihdtdm"
+          >
+            <span
+              class="notranslate"
+            >
+              ​
+            </span>
+          </legend>
+        </fieldset>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
 
-exports[`ReleaseFilter Renders with blank title 1`] = `null`;
+exports[`ReleaseFilter Renders with blank title 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        style="width: 100%;"
+      >
+        <div
+          aria-labelledby="release-filter-label-_r_10_"
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall makeStyles-selectInput-123 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
+          data-selenium="release-filter"
+          style="width: 100%;"
+        >
+          <div
+            aria-controls="_r_11_"
+            aria-disabled="true"
+            aria-expanded="false"
+            aria-haspopup="listbox"
+            aria-labelledby="mui-component-select-release-filter-input-_r_10_"
+            class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled MuiInputBase-inputSizeSmall css-z4chdf-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+            id="mui-component-select-release-filter-input-_r_10_"
+            role="combobox"
+          >
+            Latest and Provisional
+          </div>
+          <input
+            aria-hidden="true"
+            aria-invalid="false"
+            class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+            disabled=""
+            id="release-filter-input-_r_10_"
+            name="release-filter-input-_r_10_"
+            tabindex="-1"
+            value="Latest and Provisional"
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined Mui-disabled css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+            data-testid="ArrowDropDownIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M7 10l5 5 5-5z"
+            />
+          </svg>
+          <fieldset
+            aria-hidden="true"
+            class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+          >
+            <legend
+              class="css-ihdtdm"
+            >
+              <span
+                class="notranslate"
+              >
+                ​
+              </span>
+            </legend>
+          </fieldset>
+        </div>
+        <div
+          class="makeStyles-descriptionContainer-124"
+        >
+          <span
+            class="MuiTypography-root MuiTypography-caption makeStyles-description-128 css-287k3z-MuiTypography-root"
+          >
+            Data in the latest release in addition to provisional data (not yet in any release)
+          </span>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      style="width: 100%;"
+    >
+      <div
+        aria-labelledby="release-filter-label-_r_10_"
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall makeStyles-selectInput-123 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
+        data-selenium="release-filter"
+        style="width: 100%;"
+      >
+        <div
+          aria-controls="_r_11_"
+          aria-disabled="true"
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          aria-labelledby="mui-component-select-release-filter-input-_r_10_"
+          class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled MuiInputBase-inputSizeSmall css-z4chdf-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          id="mui-component-select-release-filter-input-_r_10_"
+          role="combobox"
+        >
+          Latest and Provisional
+        </div>
+        <input
+          aria-hidden="true"
+          aria-invalid="false"
+          class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+          disabled=""
+          id="release-filter-input-_r_10_"
+          name="release-filter-input-_r_10_"
+          tabindex="-1"
+          value="Latest and Provisional"
+        />
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined Mui-disabled css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+          data-testid="ArrowDropDownIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M7 10l5 5 5-5z"
+          />
+        </svg>
+        <fieldset
+          aria-hidden="true"
+          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+        >
+          <legend
+            class="css-ihdtdm"
+          >
+            <span
+              class="notranslate"
+            >
+              ​
+            </span>
+          </legend>
+        </fieldset>
+      </div>
+      <div
+        class="makeStyles-descriptionContainer-124"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption makeStyles-description-128 css-287k3z-MuiTypography-root"
+        >
+          Data in the latest release in addition to provisional data (not yet in any release)
+        </span>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
 
-exports[`ReleaseFilter Renders with custom layouts 1`] = `null`;
+exports[`ReleaseFilter Renders with custom layouts 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div>
+        <div>
+          <div
+            class="makeStyles-titleContainer-92"
+          >
+            <h3
+              class="MuiTypography-root MuiTypography-h5 makeStyles-title-91 css-1v75lyw-MuiTypography-root"
+              id="release-filter-label-_r_o_"
+            >
+              Release
+            </h3>
+            <button
+              aria-label="[object Object]"
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+              data-mui-internal-clone-element="true"
+              style="margin-left: 4px;"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+        </div>
+        <div
+          class="makeStyles-horizontalFlex-103"
+        >
+          <div
+            style="width: 300px;"
+          >
+            <div
+              aria-labelledby="release-filter-label-_r_o_"
+              class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall makeStyles-selectInput-93 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
+              data-selenium="release-filter"
+              style="max-width: 300px;"
+            >
+              <div
+                aria-controls="_r_q_"
+                aria-disabled="true"
+                aria-expanded="false"
+                aria-haspopup="listbox"
+                aria-labelledby="mui-component-select-release-filter-input-_r_o_"
+                class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled MuiInputBase-inputSizeSmall css-z4chdf-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+                id="mui-component-select-release-filter-input-_r_o_"
+                role="combobox"
+              >
+                Latest and Provisional
+              </div>
+              <input
+                aria-hidden="true"
+                aria-invalid="false"
+                class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+                disabled=""
+                id="release-filter-input-_r_o_"
+                name="release-filter-input-_r_o_"
+                tabindex="-1"
+                value="Latest and Provisional"
+              />
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined Mui-disabled css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+                data-testid="ArrowDropDownIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M7 10l5 5 5-5z"
+                />
+              </svg>
+              <fieldset
+                aria-hidden="true"
+                class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+              >
+                <legend
+                  class="css-ihdtdm"
+                >
+                  <span
+                    class="notranslate"
+                  >
+                    ​
+                  </span>
+                </legend>
+              </fieldset>
+            </div>
+          </div>
+          <div
+            class="makeStyles-horizontalDescriptions-104"
+          >
+            <div
+              class="makeStyles-descriptionContainer-94"
+            >
+              <span
+                class="MuiTypography-root MuiTypography-caption makeStyles-description-98 css-287k3z-MuiTypography-root"
+              >
+                Data in the latest release in addition to provisional data (not yet in any release)
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div>
+      <div>
+        <div
+          class="makeStyles-titleContainer-92"
+        >
+          <h3
+            class="MuiTypography-root MuiTypography-h5 makeStyles-title-91 css-1v75lyw-MuiTypography-root"
+            id="release-filter-label-_r_o_"
+          >
+            Release
+          </h3>
+          <button
+            aria-label="[object Object]"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            data-mui-internal-clone-element="true"
+            style="margin-left: 4px;"
+            tabindex="0"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+      </div>
+      <div
+        class="makeStyles-horizontalFlex-103"
+      >
+        <div
+          style="width: 300px;"
+        >
+          <div
+            aria-labelledby="release-filter-label-_r_o_"
+            class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall makeStyles-selectInput-93 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
+            data-selenium="release-filter"
+            style="max-width: 300px;"
+          >
+            <div
+              aria-controls="_r_q_"
+              aria-disabled="true"
+              aria-expanded="false"
+              aria-haspopup="listbox"
+              aria-labelledby="mui-component-select-release-filter-input-_r_o_"
+              class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled MuiInputBase-inputSizeSmall css-z4chdf-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+              id="mui-component-select-release-filter-input-_r_o_"
+              role="combobox"
+            >
+              Latest and Provisional
+            </div>
+            <input
+              aria-hidden="true"
+              aria-invalid="false"
+              class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+              disabled=""
+              id="release-filter-input-_r_o_"
+              name="release-filter-input-_r_o_"
+              tabindex="-1"
+              value="Latest and Provisional"
+            />
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined Mui-disabled css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+              data-testid="ArrowDropDownIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M7 10l5 5 5-5z"
+              />
+            </svg>
+            <fieldset
+              aria-hidden="true"
+              class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+            >
+              <legend
+                class="css-ihdtdm"
+              >
+                <span
+                  class="notranslate"
+                >
+                  ​
+                </span>
+              </legend>
+            </fieldset>
+          </div>
+        </div>
+        <div
+          class="makeStyles-horizontalDescriptions-104"
+        >
+          <div
+            class="makeStyles-descriptionContainer-94"
+          >
+            <span
+              class="MuiTypography-root MuiTypography-caption makeStyles-description-98 css-287k3z-MuiTypography-root"
+            >
+              Data in the latest release in addition to provisional data (not yet in any release)
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
 
-exports[`ReleaseFilter Renders with list of releases with DOIs 1`] = `null`;
+exports[`ReleaseFilter Renders with list of releases with DOIs 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        style="width: 100%;"
+      >
+        <div
+          class="makeStyles-titleContainer-77"
+        >
+          <h3
+            class="MuiTypography-root MuiTypography-h5 makeStyles-title-76 css-1v75lyw-MuiTypography-root"
+            id="release-filter-label-_r_k_"
+          >
+            Release
+          </h3>
+          <button
+            aria-label="[object Object]"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            data-mui-internal-clone-element="true"
+            style="margin-left: 4px;"
+            tabindex="0"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <div
+          aria-labelledby="release-filter-label-_r_k_"
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall makeStyles-selectInput-78 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
+          data-selenium="release-filter"
+          style="width: 100%;"
+        >
+          <div
+            aria-controls="_r_m_"
+            aria-expanded="false"
+            aria-haspopup="listbox"
+            aria-labelledby="mui-component-select-release-filter-input-_r_k_"
+            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-z4chdf-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+            id="mui-component-select-release-filter-input-_r_k_"
+            role="combobox"
+            tabindex="0"
+          >
+            Latest and Provisional
+          </div>
+          <input
+            aria-hidden="true"
+            aria-invalid="false"
+            class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+            id="release-filter-input-_r_k_"
+            name="release-filter-input-_r_k_"
+            tabindex="-1"
+            value="Latest and Provisional"
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+            data-testid="ArrowDropDownIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M7 10l5 5 5-5z"
+            />
+          </svg>
+          <fieldset
+            aria-hidden="true"
+            class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+          >
+            <legend
+              class="css-ihdtdm"
+            >
+              <span
+                class="notranslate"
+              >
+                ​
+              </span>
+            </legend>
+          </fieldset>
+        </div>
+        <div
+          class="makeStyles-descriptionContainer-79"
+        >
+          <span
+            class="MuiTypography-root MuiTypography-caption makeStyles-description-83 css-287k3z-MuiTypography-root"
+          >
+            Data in the latest release in addition to provisional data (not yet in any release)
+          </span>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      style="width: 100%;"
+    >
+      <div
+        class="makeStyles-titleContainer-77"
+      >
+        <h3
+          class="MuiTypography-root MuiTypography-h5 makeStyles-title-76 css-1v75lyw-MuiTypography-root"
+          id="release-filter-label-_r_k_"
+        >
+          Release
+        </h3>
+        <button
+          aria-label="[object Object]"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+          data-mui-internal-clone-element="true"
+          style="margin-left: 4px;"
+          tabindex="0"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+            data-testid="InfoOutlinedIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+            />
+          </svg>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+      <div
+        aria-labelledby="release-filter-label-_r_k_"
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall makeStyles-selectInput-78 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
+        data-selenium="release-filter"
+        style="width: 100%;"
+      >
+        <div
+          aria-controls="_r_m_"
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          aria-labelledby="mui-component-select-release-filter-input-_r_k_"
+          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-z4chdf-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          id="mui-component-select-release-filter-input-_r_k_"
+          role="combobox"
+          tabindex="0"
+        >
+          Latest and Provisional
+        </div>
+        <input
+          aria-hidden="true"
+          aria-invalid="false"
+          class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+          id="release-filter-input-_r_k_"
+          name="release-filter-input-_r_k_"
+          tabindex="-1"
+          value="Latest and Provisional"
+        />
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+          data-testid="ArrowDropDownIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M7 10l5 5 5-5z"
+          />
+        </svg>
+        <fieldset
+          aria-hidden="true"
+          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+        >
+          <legend
+            class="css-ihdtdm"
+          >
+            <span
+              class="notranslate"
+            >
+              ​
+            </span>
+          </legend>
+        </fieldset>
+      </div>
+      <div
+        class="makeStyles-descriptionContainer-79"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption makeStyles-description-83 css-287k3z-MuiTypography-root"
+        >
+          Data in the latest release in addition to provisional data (not yet in any release)
+        </span>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
 
-exports[`ReleaseFilter Renders with list of releases without DOIs 1`] = `null`;
+exports[`ReleaseFilter Renders with list of releases without DOIs 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        style="width: 100%;"
+      >
+        <div
+          class="makeStyles-titleContainer-32"
+        >
+          <h3
+            class="MuiTypography-root MuiTypography-h5 makeStyles-title-31 css-1v75lyw-MuiTypography-root"
+            id="release-filter-label-_r_8_"
+          >
+            Release
+          </h3>
+          <button
+            aria-label="[object Object]"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            data-mui-internal-clone-element="true"
+            style="margin-left: 4px;"
+            tabindex="0"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <div
+          aria-labelledby="release-filter-label-_r_8_"
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall makeStyles-selectInput-33 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
+          data-selenium="release-filter"
+          style="width: 100%;"
+        >
+          <div
+            aria-controls="_r_a_"
+            aria-expanded="false"
+            aria-haspopup="listbox"
+            aria-labelledby="mui-component-select-release-filter-input-_r_8_"
+            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-z4chdf-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+            id="mui-component-select-release-filter-input-_r_8_"
+            role="combobox"
+            tabindex="0"
+          >
+            Latest and Provisional
+          </div>
+          <input
+            aria-hidden="true"
+            aria-invalid="false"
+            class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+            id="release-filter-input-_r_8_"
+            name="release-filter-input-_r_8_"
+            tabindex="-1"
+            value="Latest and Provisional"
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+            data-testid="ArrowDropDownIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M7 10l5 5 5-5z"
+            />
+          </svg>
+          <fieldset
+            aria-hidden="true"
+            class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+          >
+            <legend
+              class="css-ihdtdm"
+            >
+              <span
+                class="notranslate"
+              >
+                ​
+              </span>
+            </legend>
+          </fieldset>
+        </div>
+        <div
+          class="makeStyles-descriptionContainer-34"
+        >
+          <span
+            class="MuiTypography-root MuiTypography-caption makeStyles-description-38 css-287k3z-MuiTypography-root"
+          >
+            Data in the latest release in addition to provisional data (not yet in any release)
+          </span>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      style="width: 100%;"
+    >
+      <div
+        class="makeStyles-titleContainer-32"
+      >
+        <h3
+          class="MuiTypography-root MuiTypography-h5 makeStyles-title-31 css-1v75lyw-MuiTypography-root"
+          id="release-filter-label-_r_8_"
+        >
+          Release
+        </h3>
+        <button
+          aria-label="[object Object]"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+          data-mui-internal-clone-element="true"
+          style="margin-left: 4px;"
+          tabindex="0"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+            data-testid="InfoOutlinedIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+            />
+          </svg>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+      <div
+        aria-labelledby="release-filter-label-_r_8_"
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall makeStyles-selectInput-33 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
+        data-selenium="release-filter"
+        style="width: 100%;"
+      >
+        <div
+          aria-controls="_r_a_"
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          aria-labelledby="mui-component-select-release-filter-input-_r_8_"
+          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-z4chdf-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          id="mui-component-select-release-filter-input-_r_8_"
+          role="combobox"
+          tabindex="0"
+        >
+          Latest and Provisional
+        </div>
+        <input
+          aria-hidden="true"
+          aria-invalid="false"
+          class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+          id="release-filter-input-_r_8_"
+          name="release-filter-input-_r_8_"
+          tabindex="-1"
+          value="Latest and Provisional"
+        />
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+          data-testid="ArrowDropDownIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M7 10l5 5 5-5z"
+          />
+        </svg>
+        <fieldset
+          aria-hidden="true"
+          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+        >
+          <legend
+            class="css-ihdtdm"
+          >
+            <span
+              class="notranslate"
+            >
+              ​
+            </span>
+          </legend>
+        </fieldset>
+      </div>
+      <div
+        class="makeStyles-descriptionContainer-34"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption makeStyles-description-38 css-287k3z-MuiTypography-root"
+        >
+          Data in the latest release in addition to provisional data (not yet in any release)
+        </span>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
 
-exports[`ReleaseFilter Renders with no props 1`] = `null`;
+exports[`ReleaseFilter Renders with no props 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        style="width: 100%;"
+      >
+        <div
+          class="makeStyles-titleContainer-2"
+        >
+          <h3
+            class="MuiTypography-root MuiTypography-h5 makeStyles-title-1 css-1v75lyw-MuiTypography-root"
+            id="release-filter-label-_r_1_"
+          >
+            Release
+          </h3>
+          <button
+            aria-label="[object Object]"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            data-mui-internal-clone-element="true"
+            style="margin-left: 4px;"
+            tabindex="0"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <div
+          aria-labelledby="release-filter-label-_r_1_"
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall makeStyles-selectInput-3 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
+          data-selenium="release-filter"
+          style="width: 100%;"
+        >
+          <div
+            aria-controls="_r_3_"
+            aria-disabled="true"
+            aria-expanded="false"
+            aria-haspopup="listbox"
+            aria-labelledby="mui-component-select-release-filter-input-_r_1_"
+            class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled MuiInputBase-inputSizeSmall css-z4chdf-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+            id="mui-component-select-release-filter-input-_r_1_"
+            role="combobox"
+          >
+            Latest and Provisional
+          </div>
+          <input
+            aria-hidden="true"
+            aria-invalid="false"
+            class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+            disabled=""
+            id="release-filter-input-_r_1_"
+            name="release-filter-input-_r_1_"
+            tabindex="-1"
+            value="Latest and Provisional"
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined Mui-disabled css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+            data-testid="ArrowDropDownIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M7 10l5 5 5-5z"
+            />
+          </svg>
+          <fieldset
+            aria-hidden="true"
+            class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+          >
+            <legend
+              class="css-ihdtdm"
+            >
+              <span
+                class="notranslate"
+              >
+                ​
+              </span>
+            </legend>
+          </fieldset>
+        </div>
+        <div
+          class="makeStyles-descriptionContainer-4"
+        >
+          <span
+            class="MuiTypography-root MuiTypography-caption makeStyles-description-8 css-287k3z-MuiTypography-root"
+          >
+            Data in the latest release in addition to provisional data (not yet in any release)
+          </span>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      style="width: 100%;"
+    >
+      <div
+        class="makeStyles-titleContainer-2"
+      >
+        <h3
+          class="MuiTypography-root MuiTypography-h5 makeStyles-title-1 css-1v75lyw-MuiTypography-root"
+          id="release-filter-label-_r_1_"
+        >
+          Release
+        </h3>
+        <button
+          aria-label="[object Object]"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+          data-mui-internal-clone-element="true"
+          style="margin-left: 4px;"
+          tabindex="0"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+            data-testid="InfoOutlinedIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+            />
+          </svg>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+      <div
+        aria-labelledby="release-filter-label-_r_1_"
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall makeStyles-selectInput-3 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
+        data-selenium="release-filter"
+        style="width: 100%;"
+      >
+        <div
+          aria-controls="_r_3_"
+          aria-disabled="true"
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          aria-labelledby="mui-component-select-release-filter-input-_r_1_"
+          class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled MuiInputBase-inputSizeSmall css-z4chdf-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          id="mui-component-select-release-filter-input-_r_1_"
+          role="combobox"
+        >
+          Latest and Provisional
+        </div>
+        <input
+          aria-hidden="true"
+          aria-invalid="false"
+          class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+          disabled=""
+          id="release-filter-input-_r_1_"
+          name="release-filter-input-_r_1_"
+          tabindex="-1"
+          value="Latest and Provisional"
+        />
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined Mui-disabled css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+          data-testid="ArrowDropDownIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M7 10l5 5 5-5z"
+          />
+        </svg>
+        <fieldset
+          aria-hidden="true"
+          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+        >
+          <legend
+            class="css-ihdtdm"
+          >
+            <span
+              class="notranslate"
+            >
+              ​
+            </span>
+          </legend>
+        </fieldset>
+      </div>
+      <div
+        class="makeStyles-descriptionContainer-4"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption makeStyles-description-8 css-287k3z-MuiTypography-root"
+        >
+          Data in the latest release in addition to provisional data (not yet in any release)
+        </span>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
 
-exports[`ReleaseFilter Renders with product counts (using data product codes) 1`] = `null`;
+exports[`ReleaseFilter Renders with product counts (using data product codes) 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        style="width: 100%;"
+      >
+        <div
+          class="makeStyles-titleContainer-152"
+        >
+          <h3
+            class="MuiTypography-root MuiTypography-h5 makeStyles-title-151 css-1v75lyw-MuiTypography-root"
+            id="release-filter-label-_r_17_"
+          >
+            Release
+          </h3>
+          <button
+            aria-label="[object Object]"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            data-mui-internal-clone-element="true"
+            style="margin-left: 4px;"
+            tabindex="0"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <div
+          aria-labelledby="release-filter-label-_r_17_"
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall makeStyles-selectInput-153 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
+          data-selenium="release-filter"
+          style="width: 100%;"
+        >
+          <div
+            aria-controls="_r_19_"
+            aria-expanded="false"
+            aria-haspopup="listbox"
+            aria-labelledby="mui-component-select-release-filter-input-_r_17_"
+            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-z4chdf-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+            id="mui-component-select-release-filter-input-_r_17_"
+            role="combobox"
+            tabindex="0"
+          >
+            TEST-TAG-1
+          </div>
+          <input
+            aria-hidden="true"
+            aria-invalid="false"
+            class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+            id="release-filter-input-_r_17_"
+            name="release-filter-input-_r_17_"
+            tabindex="-1"
+            value="TEST-TAG-1"
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+            data-testid="ArrowDropDownIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M7 10l5 5 5-5z"
+            />
+          </svg>
+          <fieldset
+            aria-hidden="true"
+            class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+          >
+            <legend
+              class="css-ihdtdm"
+            >
+              <span
+                class="notranslate"
+              >
+                ​
+              </span>
+            </legend>
+          </fieldset>
+        </div>
+        <div
+          class="makeStyles-descriptionContainer-154"
+        >
+          <span
+            class="MuiTypography-root MuiTypography-caption makeStyles-description-158 css-287k3z-MuiTypography-root"
+          >
+            3 data products
+          </span>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      style="width: 100%;"
+    >
+      <div
+        class="makeStyles-titleContainer-152"
+      >
+        <h3
+          class="MuiTypography-root MuiTypography-h5 makeStyles-title-151 css-1v75lyw-MuiTypography-root"
+          id="release-filter-label-_r_17_"
+        >
+          Release
+        </h3>
+        <button
+          aria-label="[object Object]"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+          data-mui-internal-clone-element="true"
+          style="margin-left: 4px;"
+          tabindex="0"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+            data-testid="InfoOutlinedIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+            />
+          </svg>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+      <div
+        aria-labelledby="release-filter-label-_r_17_"
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall makeStyles-selectInput-153 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
+        data-selenium="release-filter"
+        style="width: 100%;"
+      >
+        <div
+          aria-controls="_r_19_"
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          aria-labelledby="mui-component-select-release-filter-input-_r_17_"
+          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-z4chdf-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          id="mui-component-select-release-filter-input-_r_17_"
+          role="combobox"
+          tabindex="0"
+        >
+          TEST-TAG-1
+        </div>
+        <input
+          aria-hidden="true"
+          aria-invalid="false"
+          class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+          id="release-filter-input-_r_17_"
+          name="release-filter-input-_r_17_"
+          tabindex="-1"
+          value="TEST-TAG-1"
+        />
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+          data-testid="ArrowDropDownIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M7 10l5 5 5-5z"
+          />
+        </svg>
+        <fieldset
+          aria-hidden="true"
+          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+        >
+          <legend
+            class="css-ihdtdm"
+          >
+            <span
+              class="notranslate"
+            >
+              ​
+            </span>
+          </legend>
+        </fieldset>
+      </div>
+      <div
+        class="makeStyles-descriptionContainer-154"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption makeStyles-description-158 css-287k3z-MuiTypography-root"
+        >
+          3 data products
+        </span>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
 
-exports[`ReleaseFilter Renders with product counts (using data product objects) 1`] = `null`;
+exports[`ReleaseFilter Renders with product counts (using data product objects) 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        style="width: 100%;"
+      >
+        <div
+          class="makeStyles-titleContainer-137"
+        >
+          <h3
+            class="MuiTypography-root MuiTypography-h5 makeStyles-title-136 css-1v75lyw-MuiTypography-root"
+            id="release-filter-label-_r_13_"
+          >
+            Release
+          </h3>
+          <button
+            aria-label="[object Object]"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            data-mui-internal-clone-element="true"
+            style="margin-left: 4px;"
+            tabindex="0"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <div
+          aria-labelledby="release-filter-label-_r_13_"
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall makeStyles-selectInput-138 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
+          data-selenium="release-filter"
+          style="width: 100%;"
+        >
+          <div
+            aria-controls="_r_15_"
+            aria-expanded="false"
+            aria-haspopup="listbox"
+            aria-labelledby="mui-component-select-release-filter-input-_r_13_"
+            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-z4chdf-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+            id="mui-component-select-release-filter-input-_r_13_"
+            role="combobox"
+            tabindex="0"
+          >
+            Latest and Provisional
+          </div>
+          <input
+            aria-hidden="true"
+            aria-invalid="false"
+            class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+            id="release-filter-input-_r_13_"
+            name="release-filter-input-_r_13_"
+            tabindex="-1"
+            value="Latest and Provisional"
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+            data-testid="ArrowDropDownIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M7 10l5 5 5-5z"
+            />
+          </svg>
+          <fieldset
+            aria-hidden="true"
+            class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+          >
+            <legend
+              class="css-ihdtdm"
+            >
+              <span
+                class="notranslate"
+              >
+                ​
+              </span>
+            </legend>
+          </fieldset>
+        </div>
+        <div
+          class="makeStyles-descriptionContainer-139"
+        >
+          <span
+            class="MuiTypography-root MuiTypography-caption makeStyles-description-143 css-287k3z-MuiTypography-root"
+          >
+            Data in the latest release in addition to provisional data (not yet in any release)
+          </span>
+        </div>
+        <div
+          class="makeStyles-descriptionContainer-139"
+        >
+          <span
+            class="MuiTypography-root MuiTypography-caption makeStyles-description-143 css-287k3z-MuiTypography-root"
+          >
+            5 data products
+          </span>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      style="width: 100%;"
+    >
+      <div
+        class="makeStyles-titleContainer-137"
+      >
+        <h3
+          class="MuiTypography-root MuiTypography-h5 makeStyles-title-136 css-1v75lyw-MuiTypography-root"
+          id="release-filter-label-_r_13_"
+        >
+          Release
+        </h3>
+        <button
+          aria-label="[object Object]"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+          data-mui-internal-clone-element="true"
+          style="margin-left: 4px;"
+          tabindex="0"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+            data-testid="InfoOutlinedIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+            />
+          </svg>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+      <div
+        aria-labelledby="release-filter-label-_r_13_"
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall makeStyles-selectInput-138 css-1fogx2r-MuiInputBase-root-MuiOutlinedInput-root"
+        data-selenium="release-filter"
+        style="width: 100%;"
+      >
+        <div
+          aria-controls="_r_15_"
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          aria-labelledby="mui-component-select-release-filter-input-_r_13_"
+          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-z4chdf-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          id="mui-component-select-release-filter-input-_r_13_"
+          role="combobox"
+          tabindex="0"
+        >
+          Latest and Provisional
+        </div>
+        <input
+          aria-hidden="true"
+          aria-invalid="false"
+          class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+          id="release-filter-input-_r_13_"
+          name="release-filter-input-_r_13_"
+          tabindex="-1"
+          value="Latest and Provisional"
+        />
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+          data-testid="ArrowDropDownIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M7 10l5 5 5-5z"
+          />
+        </svg>
+        <fieldset
+          aria-hidden="true"
+          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+        >
+          <legend
+            class="css-ihdtdm"
+          >
+            <span
+              class="notranslate"
+            >
+              ​
+            </span>
+          </legend>
+        </fieldset>
+      </div>
+      <div
+        class="makeStyles-descriptionContainer-139"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption makeStyles-description-143 css-287k3z-MuiTypography-root"
+        >
+          Data in the latest release in addition to provisional data (not yet in any release)
+        </span>
+      </div>
+      <div
+        class="makeStyles-descriptionContainer-139"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption makeStyles-description-143 css-287k3z-MuiTypography-root"
+        >
+          5 data products
+        </span>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

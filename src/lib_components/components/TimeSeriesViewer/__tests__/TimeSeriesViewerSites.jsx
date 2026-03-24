@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
 import cloneDeep from 'lodash/cloneDeep';
 
@@ -77,19 +77,19 @@ describe('TimeSeriesViewerSites', () => {
   // PositionHistoryButton
   describe('PositionHistoryButton', () => {
     test('Renders disabled when history has less than two entries', () => {
-      const tree = renderer.create(
+      const tree = render(
         <MockTheme>
           <PositionHistoryButton siteCode="ABBY" position="000.010" history={[]} />
         </MockTheme>
-      ).toJSON();
+      );
       expect(tree).toMatchSnapshot();
     });
     test('Renders enabled when history has two or more entries', () => {
-      const tree = renderer.create(
+      const tree = render(
         <MockTheme>
           <PositionHistoryButton siteCode="ABBY" position="000.010" history={history010} />
         </MockTheme>
-      ).toJSON();
+      );
       expect(tree).toMatchSnapshot();
     });
   });
@@ -107,11 +107,11 @@ describe('TimeSeriesViewerSites', () => {
           },
         },
       }]);
-      const tree = renderer.create(
+      const tree = render(
         <MockTheme>
           <PositionDetail siteCode="ABBY" position="000.010" />
         </MockTheme>
-      ).toJSON();
+      );
       expect(tree).toMatchSnapshot();
     });
     test('Renders full detail when position history is present', () => {
@@ -127,11 +127,11 @@ describe('TimeSeriesViewerSites', () => {
           },
         },
       }]);
-      const tree = renderer.create(
+      const tree = render(
         <MockTheme>
           <PositionDetail siteCode="ABBY" position="000.010" />
         </MockTheme>
-      ).toJSON();
+      );
       expect(tree).toMatchSnapshot();
     });
     test('Renders full wide detail when position history is present', () => {
@@ -147,11 +147,11 @@ describe('TimeSeriesViewerSites', () => {
           },
         },
       }]);
-      const tree = renderer.create(
+      const tree = render(
         <MockTheme>
           <PositionDetail siteCode="ABBY" position="000.010" wide />
         </MockTheme>
-      ).toJSON();
+      );
       expect(tree).toMatchSnapshot();
     });
   });
@@ -169,11 +169,11 @@ describe('TimeSeriesViewerSites', () => {
           },
         },
       }]);
-      const tree = renderer.create(
+      const tree = render(
         <MockTheme>
           <SelectedPosition siteCode="ABBY" position="000.010" />
         </MockTheme>
-      ).toJSON();
+      );
       expect(tree).toMatchSnapshot();
     });
   });
@@ -194,13 +194,13 @@ describe('TimeSeriesViewerSites', () => {
           },
         },
       }]);
-      const tree = renderer.create(
+      const tree = render(
         <MockTheme>
           <SelectPositionsButton
             selectedSite={{ siteCode: 'ABBY', positions: ['000.020', '000.010'] }}
           />
         </MockTheme>
-      ).toJSON();
+      );
       expect(tree).toMatchSnapshot();
     });
   });
@@ -208,17 +208,17 @@ describe('TimeSeriesViewerSites', () => {
   // SitesControl
   describe('SitesControl', () => {
     test('Renders as expected', () => {
-      const tree = renderer.create(
+      const tree = render(
         <MockTheme>
           <SitesControl
             innerProps={{ 'data-inner': 'foo', onMouseDown: () => {} }}
-            selectProps={{ TextFieldProps: { 'data-textField': 'bar' } }}
+            selectProps={{ TextFieldProps: { 'data-textfield': 'bar' } }}
             innerRef={() => {}}
           >
             <div>children</div>
           </SitesControl>
         </MockTheme>
-      ).toJSON();
+      );
       expect(tree).toMatchSnapshot();
     });
   });
@@ -237,7 +237,7 @@ describe('TimeSeriesViewerSites', () => {
         latitude: 45.762439,
         longitude: -122.330317,
       };
-      const tree = renderer.create(
+      const tree = render(
         <MockTheme>
           <SiteOption
             innerProps={{ tabIndex: 2, id: 'bar', onMouseDown: () => {} }}
@@ -247,7 +247,7 @@ describe('TimeSeriesViewerSites', () => {
             isFocused
           />
         </MockTheme>
-      ).toJSON();
+      );
       expect(tree).toMatchSnapshot();
     });
   });
@@ -258,35 +258,35 @@ describe('TimeSeriesViewerSites', () => {
       useTimeSeriesViewerState.mockReturnValue([cloneDeep(DEFAULT_STATE), () => {}]);
     });
     test('Renders as expected (terrestrial / gradient)', () => {
-      const tree = renderer.create(
+      const tree = render(
         <MockTheme>
           <SelectedSite site={{ siteCode: 'ABBY', positions: ['000.020', '000.010'] }} />
         </MockTheme>
-      ).toJSON();
+      );
       expect(tree).toMatchSnapshot();
     });
     test('Renders as expected (terrestrial / core)', () => {
-      const tree = renderer.create(
+      const tree = render(
         <MockTheme>
           <SelectedSite site={{ siteCode: 'CPER', positions: ['000.050', '000.040'] }} />
         </MockTheme>
-      ).toJSON();
+      );
       expect(tree).toMatchSnapshot();
     });
     test('Renders as expected (aquatic / gradient)', () => {
-      const tree = renderer.create(
+      const tree = render(
         <MockTheme>
           <SelectedSite site={{ siteCode: 'BIGC', positions: ['000.030', '000.010'] }} />
         </MockTheme>
-      ).toJSON();
+      );
       expect(tree).toMatchSnapshot();
     });
     test('Renders as expected (aquatic / core)', () => {
-      const tree = renderer.create(
+      const tree = render(
         <MockTheme>
           <SelectedSite site={{ siteCode: 'CUPE', positions: ['000.010'] }} />
         </MockTheme>
-      ).toJSON();
+      );
       expect(tree).toMatchSnapshot();
     });
   });

@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
 import ExternalHost from '../ExternalHost';
 import sitesJSON from '../../../../sampleData/sites.json';
@@ -19,45 +19,31 @@ describe('ExternalHost', () => {
   */
   describe('AERONET', () => {
     test('getSiteLink with no args', () => {
-      const tree = renderer
-        .create(getByHostId('AERONET').getSiteLink())
-        .toJSON();
+      const tree = render(getByHostId('AERONET').getSiteLink());
       expect(tree).toMatchSnapshot();
     });
     test('getSiteLink without productCode', () => {
-      const tree = renderer
-        .create(getByHostId('AERONET').getSiteLink(sitesJSON, 'ABBY'))
-        .toJSON();
+      const tree = render(getByHostId('AERONET').getSiteLink(sitesJSON, 'ABBY'));
       expect(tree).toMatchSnapshot();
     });
     test('getSiteLink with productCode', () => {
-      const tree = renderer
-        .create(getByHostId('AERONET').getSiteLink(sitesJSON, 'ABBY', 'DP1.00043.001'))
-        .toJSON();
+      const tree = render(getByHostId('AERONET').getSiteLink(sitesJSON, 'ABBY', 'DP1.00043.001'));
       expect(tree).toMatchSnapshot();
     });
     test('renderLink without productCode', () => {
-      const tree = renderer
-        .create(getByHostId('AERONET').renderLink())
-        .toJSON();
+      const tree = render(getByHostId('AERONET').renderLink());
       expect(tree).toMatchSnapshot();
     });
     test('renderLink with productCode', () => {
-      const tree = renderer
-        .create(getByHostId('AERONET').renderLink('DP1.00043.001'))
-        .toJSON();
+      const tree = render(getByHostId('AERONET').renderLink('DP1.00043.001'));
       expect(tree).toMatchSnapshot();
     });
     test('renderShortLink without productCode', () => {
-      const tree = renderer
-        .create(getByHostId('AERONET').renderShortLink())
-        .toJSON();
+      const tree = render(getByHostId('AERONET').renderShortLink());
       expect(tree).toMatchSnapshot();
     });
     test('renderShortLink with productCode', () => {
-      const tree = renderer
-        .create(getByHostId('AERONET').renderShortLink('DP1.00043.001'))
-        .toJSON();
+      const tree = render(getByHostId('AERONET').renderShortLink('DP1.00043.001'));
       expect(tree).toMatchSnapshot();
     });
   });
@@ -67,45 +53,31 @@ describe('ExternalHost', () => {
   */
   describe('AMERIFLUX', () => {
     test('getSiteLink with no args', () => {
-      const tree = renderer
-        .create(getByHostId('AMERIFLUX').getSiteLink())
-        .toJSON();
+      const tree = render(getByHostId('AMERIFLUX').getSiteLink());
       expect(tree).toMatchSnapshot();
     });
     test('getSiteLink without productCode', () => {
-      const tree = renderer
-        .create(getByHostId('AMERIFLUX').getSiteLink(sitesJSON, 'ABBY'))
-        .toJSON();
+      const tree = render(getByHostId('AMERIFLUX').getSiteLink(sitesJSON, 'ABBY'));
       expect(tree).toMatchSnapshot();
     });
     test('getSiteLink with productCode', () => {
-      const tree = renderer
-        .create(getByHostId('AMERIFLUX').getSiteLink(sitesJSON, 'ABBY', 'DP1.00001.001'))
-        .toJSON();
+      const tree = render(getByHostId('AMERIFLUX').getSiteLink(sitesJSON, 'ABBY', 'DP1.00001.001'));
       expect(tree).toMatchSnapshot();
     });
     test('renderLink without productCode', () => {
-      const tree = renderer
-        .create(getByHostId('AMERIFLUX').renderLink())
-        .toJSON();
+      const tree = render(getByHostId('AMERIFLUX').renderLink());
       expect(tree).toMatchSnapshot();
     });
     test('renderLink with productCode', () => {
-      const tree = renderer
-        .create(getByHostId('AMERIFLUX').renderLink('DP1.00001.001'))
-        .toJSON();
+      const tree = render(getByHostId('AMERIFLUX').renderLink('DP1.00001.001'));
       expect(tree).toMatchSnapshot();
     });
     test('renderShortLink without productCode', () => {
-      const tree = renderer
-        .create(getByHostId('AMERIFLUX').renderShortLink())
-        .toJSON();
+      const tree = render(getByHostId('AMERIFLUX').renderShortLink());
       expect(tree).toMatchSnapshot();
     });
     test('renderShortLink with productCode', () => {
-      const tree = renderer
-        .create(getByHostId('AMERIFLUX').renderShortLink('DP1.00001.001'))
-        .toJSON();
+      const tree = render(getByHostId('AMERIFLUX').renderShortLink('DP1.00001.001'));
       expect(tree).toMatchSnapshot();
     });
   });
@@ -115,45 +87,31 @@ describe('ExternalHost', () => {
   */
   describe('PHENOCAM', () => {
     test('getSiteLink with no args', () => {
-      const tree = renderer
-        .create(getByHostId('PHENOCAM').getSiteLink())
-        .toJSON();
+      const tree = render(getByHostId('PHENOCAM').getSiteLink());
       expect(tree).toMatchSnapshot();
     });
     test('getSiteLink without productCode', () => {
-      const tree = renderer
-        .create(getByHostId('PHENOCAM').getSiteLink(sitesJSON, 'ABBY'))
-        .toJSON();
+      const tree = render(getByHostId('PHENOCAM').getSiteLink(sitesJSON, 'ABBY'));
       expect(tree).toMatchSnapshot();
     });
     test('getSiteLink with productCode', () => {
-      const tree = renderer
-        .create(getByHostId('PHENOCAM').getSiteLink(sitesJSON, 'ABBY', 'DP1.00033.001'))
-        .toJSON();
+      const tree = render(getByHostId('PHENOCAM').getSiteLink(sitesJSON, 'ABBY', 'DP1.00033.001'));
       expect(tree).toMatchSnapshot();
     });
     test('renderLink without productCode', () => {
-      const tree = renderer
-        .create(getByHostId('PHENOCAM').renderLink())
-        .toJSON();
+      const tree = render(getByHostId('PHENOCAM').renderLink());
       expect(tree).toMatchSnapshot();
     });
     test('renderLink with productCode', () => {
-      const tree = renderer
-        .create(getByHostId('PHENOCAM').renderLink('DP1.00033.001'))
-        .toJSON();
+      const tree = render(getByHostId('PHENOCAM').renderLink('DP1.00033.001'));
       expect(tree).toMatchSnapshot();
     });
     test('renderShortLink without productCode', () => {
-      const tree = renderer
-        .create(getByHostId('PHENOCAM').renderShortLink())
-        .toJSON();
+      const tree = render(getByHostId('PHENOCAM').renderShortLink());
       expect(tree).toMatchSnapshot();
     });
     test('renderShortLink with productCode', () => {
-      const tree = renderer
-        .create(getByHostId('PHENOCAM').renderShortLink('DP1.00033.001'))
-        .toJSON();
+      const tree = render(getByHostId('PHENOCAM').renderShortLink('DP1.00033.001'));
       expect(tree).toMatchSnapshot();
     });
   });
@@ -163,45 +121,33 @@ describe('ExternalHost', () => {
   */
   describe('BOLD', () => {
     test('getProductLinks with no arg', () => {
-      const tree = renderer
-        .create(getByHostId('BOLD').getProductLinks())
-        .toJSON();
+      const tree = render(getByHostId('BOLD').getProductLinks());
       expect(tree).toMatchSnapshot();
     });
     test('getProductLinks with a valid productCode', () => {
-      const tree = renderer
-        .create((
-          <div>
-            {getByHostId('BOLD').getProductLinks('DP1.10020.001').map((link) => (
-              <div key={link.key}>{link.node}</div>
-            ))}
-          </div>
-        ))
-        .toJSON();
+      const tree = render((
+        <div>
+          {getByHostId('BOLD').getProductLinks('DP1.10020.001').map((link) => (
+            <div key={link.key}>{link.node}</div>
+          ))}
+        </div>
+      ));
       expect(tree).toMatchSnapshot();
     });
     test('renderLink without productCode', () => {
-      const tree = renderer
-        .create(getByHostId('BOLD').renderLink())
-        .toJSON();
+      const tree = render(getByHostId('BOLD').renderLink());
       expect(tree).toMatchSnapshot();
     });
     test('renderLink with productCode', () => {
-      const tree = renderer
-        .create(getByHostId('BOLD').renderLink('DP1.10020.001'))
-        .toJSON();
+      const tree = render(getByHostId('BOLD').renderLink('DP1.10020.001'));
       expect(tree).toMatchSnapshot();
     });
     test('renderShortLink without productCode', () => {
-      const tree = renderer
-        .create(getByHostId('BOLD').renderShortLink())
-        .toJSON();
+      const tree = render(getByHostId('BOLD').renderShortLink());
       expect(tree).toMatchSnapshot();
     });
     test('renderShortLink with productCode', () => {
-      const tree = renderer
-        .create(getByHostId('BOLD').renderShortLink('DP1.10020.001'))
-        .toJSON();
+      const tree = render(getByHostId('BOLD').renderShortLink('DP1.10020.001'));
       expect(tree).toMatchSnapshot();
     });
   });
@@ -211,27 +157,19 @@ describe('ExternalHost', () => {
   */
   describe('NPN', () => {
     test('renderLink without productCode', () => {
-      const tree = renderer
-        .create(getByHostId('NPN').renderLink())
-        .toJSON();
+      const tree = render(getByHostId('NPN').renderLink());
       expect(tree).toMatchSnapshot();
     });
     test('renderLink with productCode', () => {
-      const tree = renderer
-        .create(getByHostId('NPN').renderLink('DP1.10055.001'))
-        .toJSON();
+      const tree = render(getByHostId('NPN').renderLink('DP1.10055.001'));
       expect(tree).toMatchSnapshot();
     });
     test('renderShortLink without productCode', () => {
-      const tree = renderer
-        .create(getByHostId('NPN').renderShortLink())
-        .toJSON();
+      const tree = render(getByHostId('NPN').renderShortLink());
       expect(tree).toMatchSnapshot();
     });
     test('renderShortLink with productCode', () => {
-      const tree = renderer
-        .create(getByHostId('NPN').renderShortLink('DP1.10055.001'))
-        .toJSON();
+      const tree = render(getByHostId('NPN').renderShortLink('DP1.10055.001'));
       expect(tree).toMatchSnapshot();
     });
   });

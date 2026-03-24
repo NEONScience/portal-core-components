@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
 import MockTheme from '../../../../__mocks__/MockTheme';
 import '../../../../__mocks__/NeonContext';
@@ -24,9 +24,7 @@ describe('NeonFooter', () => {
       fetches: { [DRUPAL_FOOTER_HTML]: { status: null } },
       html: { [DRUPAL_FOOTER_HTML]: null },
     }]);
-    const tree = renderer
-      .create(<MockTheme><NeonFooter /></MockTheme>)
-      .toJSON();
+    const tree = render(<MockTheme><NeonFooter /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
   test('renders with no props and active/fetching NeonContext state', () => {
@@ -35,9 +33,7 @@ describe('NeonFooter', () => {
       fetches: { [DRUPAL_FOOTER_HTML]: { status: FETCH_STATUS.FETCHING } },
       html: { [DRUPAL_FOOTER_HTML]: null },
     }]);
-    const tree = renderer
-      .create(<MockTheme><NeonFooter /></MockTheme>)
-      .toJSON();
+    const tree = render(<MockTheme><NeonFooter /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
   test('renders with no props and error NeonContext state', () => {
@@ -46,9 +42,7 @@ describe('NeonFooter', () => {
       fetches: { [DRUPAL_FOOTER_HTML]: { status: FETCH_STATUS.ERROR } },
       html: { [DRUPAL_FOOTER_HTML]: null },
     }]);
-    const tree = renderer
-      .create(<MockTheme><NeonFooter /></MockTheme>)
-      .toJSON();
+    const tree = render(<MockTheme><NeonFooter /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
   test('renders with no props and success NeonContext state', () => {
@@ -57,9 +51,7 @@ describe('NeonFooter', () => {
       fetches: { [DRUPAL_FOOTER_HTML]: { status: FETCH_STATUS.SUCCESS } },
       html: { [DRUPAL_FOOTER_HTML]: '<div>test drupal html</div>' },
     }]);
-    const tree = renderer
-      .create(<MockTheme><NeonFooter /></MockTheme>)
-      .toJSON();
+    const tree = render(<MockTheme><NeonFooter /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
   test('renders fallback with drupalCSSLoaded prop and error NeonContext state', () => {
@@ -68,9 +60,7 @@ describe('NeonFooter', () => {
       fetches: { [DRUPAL_FOOTER_HTML]: { status: FETCH_STATUS.ERROR } },
       html: { [DRUPAL_FOOTER_HTML]: null },
     }]);
-    const tree = renderer
-      .create(<MockTheme><NeonFooter drupalCssLoaded /></MockTheme>)
-      .toJSON();
+    const tree = render(<MockTheme><NeonFooter drupalCssLoaded /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
   test('renders with drupalCssLoaded prop and success NeonContext state', () => {
@@ -79,9 +69,7 @@ describe('NeonFooter', () => {
       fetches: { [DRUPAL_FOOTER_HTML]: { status: FETCH_STATUS.SUCCESS } },
       html: { [DRUPAL_FOOTER_HTML]: '<div>test drupal html</div>' },
     }]);
-    const tree = renderer
-      .create(<MockTheme><NeonFooter drupalCssLoaded /></MockTheme>)
-      .toJSON();
+    const tree = render(<MockTheme><NeonFooter drupalCssLoaded /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
 });

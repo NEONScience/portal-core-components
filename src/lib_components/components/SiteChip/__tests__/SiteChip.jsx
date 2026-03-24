@@ -1,14 +1,12 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
 import MockTheme from '../../../../__mocks__/MockTheme';
 import SiteChip from '../SiteChip';
 
 describe('SiteChip', () => {
   test('Renders correctly with only a label', () => {
-    const tree = renderer
-      .create(<MockTheme><SiteChip label="foo" /></MockTheme>)
-      .toJSON();
+    const tree = render(<MockTheme><SiteChip label="foo" /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
   test('Preserves MUI chip props', () => {
@@ -21,9 +19,7 @@ describe('SiteChip', () => {
         data-selenium="chip"
       />
     );
-    const tree = renderer
-      .create(<MockTheme>{chip}</MockTheme>)
-      .toJSON();
+    const tree = render(<MockTheme>{chip}</MockTheme>);
     expect(tree).toMatchSnapshot();
   });
 });

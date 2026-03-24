@@ -1,84 +1,64 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
 import MockTheme from '../../../../__mocks__/MockTheme';
 import ExternalHostInfo from '../ExternalHostInfo';
 
 describe('ExternalHostInfo', () => {
   test('renders graceful failure with no valid product code', () => {
-    const tree = renderer
-      .create(<MockTheme><ExternalHostInfo productCode="BAD" /></MockTheme>)
-      .toJSON();
+    const tree = render(<MockTheme><ExternalHostInfo productCode="BAD" /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
   test('renders with valid product code and no sites', () => {
-    const treeAMERIFLUX = renderer
-      .create(<MockTheme><ExternalHostInfo productCode="DP1.00001.001" /></MockTheme>)
-      .toJSON();
+    const treeAMERIFLUX = render(<MockTheme><ExternalHostInfo productCode="DP1.00001.001" /></MockTheme>);
     expect(treeAMERIFLUX).toMatchSnapshot();
-    const treeBOLD = renderer
-      .create(<MockTheme><ExternalHostInfo productCode="DP1.10020.001" /></MockTheme>)
-      .toJSON();
+    const treeBOLD = render(<MockTheme><ExternalHostInfo productCode="DP1.10020.001" /></MockTheme>);
     expect(treeBOLD).toMatchSnapshot();
-    const treePHENOCAM = renderer
-      .create(
-        <MockTheme>
-          <ExternalHostInfo productCode="DP1.00033.001" data-selenium="foo" />
-        </MockTheme>
-      )
-      .toJSON();
+    const treePHENOCAM = render(
+      <MockTheme>
+        <ExternalHostInfo productCode="DP1.00033.001" data-selenium="foo" />
+      </MockTheme>
+    );
     expect(treePHENOCAM).toMatchSnapshot();
   });
   test('renders with valid product code and sites', () => {
-    const treeAMERIFLUX = renderer
-      .create(
-        <MockTheme>
-          <ExternalHostInfo productCode="DP1.00001.001" sites={['ABBY', 'CLBJ', 'COMO']} />
-        </MockTheme>
-      )
-      .toJSON();
+    const treeAMERIFLUX = render(
+      <MockTheme>
+        <ExternalHostInfo productCode="DP1.00001.001" sites={['ABBY', 'CLBJ', 'COMO']} />
+      </MockTheme>
+    );
     expect(treeAMERIFLUX).toMatchSnapshot();
-    const treeBOLD = renderer
-      .create(
-        <MockTheme>
-          <ExternalHostInfo productCode="DP1.10020.001" sites={['ABBY', 'CLBJ', 'COMO']} />
-        </MockTheme>
-      )
-      .toJSON();
+    const treeBOLD = render(
+      <MockTheme>
+        <ExternalHostInfo productCode="DP1.10020.001" sites={['ABBY', 'CLBJ', 'COMO']} />
+      </MockTheme>
+    );
     expect(treeBOLD).toMatchSnapshot();
-    const treePHENOCAM = renderer
-      .create(
-        <MockTheme>
-          <ExternalHostInfo productCode="DP1.00033.001" sites={['ABBY', 'CLBJ', 'COMO']} />
-        </MockTheme>
-      )
-      .toJSON();
+    const treePHENOCAM = render(
+      <MockTheme>
+        <ExternalHostInfo productCode="DP1.00033.001" sites={['ABBY', 'CLBJ', 'COMO']} />
+      </MockTheme>
+    );
     expect(treePHENOCAM).toMatchSnapshot();
   });
   test('renders with valid product code, sites, and expandable boolean', () => {
-    const treeAMERIFLUX = renderer
-      .create(
-        <MockTheme>
-          <ExternalHostInfo productCode="DP1.00001.001" sites={['ABBY', 'COMO']} expandable />
-        </MockTheme>
-      )
-      .toJSON();
+    const treeAMERIFLUX = render(
+      <MockTheme>
+        <ExternalHostInfo productCode="DP1.00001.001" sites={['ABBY', 'COMO']} expandable />
+      </MockTheme>
+    );
     expect(treeAMERIFLUX).toMatchSnapshot();
-    const treeBOLD = renderer
-      .create(
-        <MockTheme>
-          <ExternalHostInfo productCode="DP1.10020.001" sites={['ABBY', 'COMO']} expandable />
-        </MockTheme>
-      )
-      .toJSON();
+    const treeBOLD = render(
+      <MockTheme>
+        <ExternalHostInfo productCode="DP1.10020.001" sites={['ABBY', 'COMO']} expandable />
+      </MockTheme>
+    );
     expect(treeBOLD).toMatchSnapshot();
-    const treePHENOCAM = renderer
-      .create(
-        <MockTheme>
-          <ExternalHostInfo productCode="DP1.00033.001" sites={['ABBY', 'COMO']} expandable />
-        </MockTheme>
-      )
-      .toJSON();
+    const treePHENOCAM = render(
+      <MockTheme>
+        <ExternalHostInfo productCode="DP1.00033.001" sites={['ABBY', 'COMO']} expandable />
+      </MockTheme>
+    );
     expect(treePHENOCAM).toMatchSnapshot();
   });
 });

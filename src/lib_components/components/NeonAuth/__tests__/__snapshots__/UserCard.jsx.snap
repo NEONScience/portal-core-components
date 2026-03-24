@@ -1,5 +1,479 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`NeonAuth - UserCard Renders with a lastLogin prop 1`] = `null`;
+exports[`NeonAuth - UserCard Renders with a lastLogin prop 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="makeStyles-profileArea-8"
+      >
+        <div
+          class="makeStyles-card-7"
+        >
+          <div
+            class="makeStyles-cardHeaderContainer-6"
+          >
+            <img
+              alt="Profile"
+              class="profile-image"
+              src="label/baby/jr"
+            />
+          </div>
+          <div>
+            <h4
+              class="MuiTypography-root MuiTypography-h4 css-p7yqh7-MuiTypography-root"
+              style="margin: 10px;"
+            >
+              Slappy White
+            </h4>
+          </div>
+          <div
+            class="makeStyles-emailChipContainer-10"
+          >
+            <div
+              class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary chip-email css-nqomul-MuiChip-root"
+            >
+              <div
+                class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar MuiChip-avatarMedium MuiChip-avatarColorPrimary css-18uepp3-MuiAvatar-root"
+                color="primary"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                  data-testid="EmailIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m0 4-8 5-8-5V6l8 5 8-5z"
+                  />
+                </svg>
+              </div>
+              <span
+                class="MuiChip-label MuiChip-labelMedium css-1dybbl5-MuiChip-label"
+              >
+                separate@knob
+              </span>
+            </div>
+          </div>
+          <div
+            class="makeStyles-profileInfoArea-9"
+          >
+            <hr
+              class="MuiDivider-root MuiDivider-fullWidth css-9mgopn-MuiDivider-root"
+            />
+            <div
+              class="label-info-container"
+            >
+              <label
+                class="control-label label-block"
+              >
+                Identity Provider
+              </label>
+              <label
+                class="label-normal"
+              >
+                monks
+              </label>
+            </div>
+            <div
+              class="label-info-container"
+            >
+              <label
+                class="control-label label-block"
+              >
+                Last Login
+              </label>
+              <label
+                class="label-normal"
+              >
+                May 5th, 2018 12:00:00 am
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="makeStyles-profileArea-8"
+    >
+      <div
+        class="makeStyles-card-7"
+      >
+        <div
+          class="makeStyles-cardHeaderContainer-6"
+        >
+          <img
+            alt="Profile"
+            class="profile-image"
+            src="label/baby/jr"
+          />
+        </div>
+        <div>
+          <h4
+            class="MuiTypography-root MuiTypography-h4 css-p7yqh7-MuiTypography-root"
+            style="margin: 10px;"
+          >
+            Slappy White
+          </h4>
+        </div>
+        <div
+          class="makeStyles-emailChipContainer-10"
+        >
+          <div
+            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary chip-email css-nqomul-MuiChip-root"
+          >
+            <div
+              class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar MuiChip-avatarMedium MuiChip-avatarColorPrimary css-18uepp3-MuiAvatar-root"
+              color="primary"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                data-testid="EmailIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m0 4-8 5-8-5V6l8 5 8-5z"
+                />
+              </svg>
+            </div>
+            <span
+              class="MuiChip-label MuiChip-labelMedium css-1dybbl5-MuiChip-label"
+            >
+              separate@knob
+            </span>
+          </div>
+        </div>
+        <div
+          class="makeStyles-profileInfoArea-9"
+        >
+          <hr
+            class="MuiDivider-root MuiDivider-fullWidth css-9mgopn-MuiDivider-root"
+          />
+          <div
+            class="label-info-container"
+          >
+            <label
+              class="control-label label-block"
+            >
+              Identity Provider
+            </label>
+            <label
+              class="label-normal"
+            >
+              monks
+            </label>
+          </div>
+          <div
+            class="label-info-container"
+          >
+            <label
+              class="control-label label-block"
+            >
+              Last Login
+            </label>
+            <label
+              class="label-normal"
+            >
+              May 5th, 2018 12:00:00 am
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
 
-exports[`NeonAuth - UserCard Renders without a lastLogin prop 1`] = `null`;
+exports[`NeonAuth - UserCard Renders without a lastLogin prop 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="makeStyles-profileArea-3"
+      >
+        <div
+          class="makeStyles-card-2"
+        >
+          <div
+            class="makeStyles-cardHeaderContainer-1"
+          >
+            <img
+              alt="Profile"
+              class="profile-image"
+              src="carhole"
+            />
+          </div>
+          <div>
+            <h4
+              class="MuiTypography-root MuiTypography-h4 css-p7yqh7-MuiTypography-root"
+              style="margin: 10px;"
+            >
+              Guy Incognito
+            </h4>
+          </div>
+          <div
+            class="makeStyles-emailChipContainer-5"
+          >
+            <div
+              class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary chip-email css-nqomul-MuiChip-root"
+            >
+              <div
+                class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar MuiChip-avatarMedium MuiChip-avatarColorPrimary css-18uepp3-MuiAvatar-root"
+                color="primary"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                  data-testid="EmailIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m0 4-8 5-8-5V6l8 5 8-5z"
+                  />
+                </svg>
+              </div>
+              <span
+                class="MuiChip-label MuiChip-labelMedium css-1dybbl5-MuiChip-label"
+              >
+                joeyjojojr@shabadu
+              </span>
+            </div>
+          </div>
+          <div
+            class="makeStyles-profileInfoArea-4"
+          >
+            <hr
+              class="MuiDivider-root MuiDivider-fullWidth css-9mgopn-MuiDivider-root"
+            />
+            <div
+              class="label-info-container"
+            >
+              <label
+                class="control-label label-block"
+              >
+                Identity Provider
+              </label>
+              <label
+                class="label-normal"
+              >
+                momar
+              </label>
+            </div>
+            <div
+              class="label-info-container"
+            >
+              <label
+                class="control-label label-block"
+              >
+                Last Login
+              </label>
+              <label
+                class="label-normal"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="makeStyles-profileArea-3"
+    >
+      <div
+        class="makeStyles-card-2"
+      >
+        <div
+          class="makeStyles-cardHeaderContainer-1"
+        >
+          <img
+            alt="Profile"
+            class="profile-image"
+            src="carhole"
+          />
+        </div>
+        <div>
+          <h4
+            class="MuiTypography-root MuiTypography-h4 css-p7yqh7-MuiTypography-root"
+            style="margin: 10px;"
+          >
+            Guy Incognito
+          </h4>
+        </div>
+        <div
+          class="makeStyles-emailChipContainer-5"
+        >
+          <div
+            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary chip-email css-nqomul-MuiChip-root"
+          >
+            <div
+              class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar MuiChip-avatarMedium MuiChip-avatarColorPrimary css-18uepp3-MuiAvatar-root"
+              color="primary"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                data-testid="EmailIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m0 4-8 5-8-5V6l8 5 8-5z"
+                />
+              </svg>
+            </div>
+            <span
+              class="MuiChip-label MuiChip-labelMedium css-1dybbl5-MuiChip-label"
+            >
+              joeyjojojr@shabadu
+            </span>
+          </div>
+        </div>
+        <div
+          class="makeStyles-profileInfoArea-4"
+        >
+          <hr
+            class="MuiDivider-root MuiDivider-fullWidth css-9mgopn-MuiDivider-root"
+          />
+          <div
+            class="label-info-container"
+          >
+            <label
+              class="control-label label-block"
+            >
+              Identity Provider
+            </label>
+            <label
+              class="label-normal"
+            >
+              momar
+            </label>
+          </div>
+          <div
+            class="label-info-container"
+          >
+            <label
+              class="control-label label-block"
+            >
+              Last Login
+            </label>
+            <label
+              class="label-normal"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
 import MockTheme from '../../../../__mocks__/MockTheme';
 import mockReactComponent from '../../../../__mocks__/mockReactComponent';
@@ -11,11 +11,11 @@ import LiferayNotifications from '../LiferayNotifications';
 
 describe('NeonPage - LiferayNotifications', () => {
   test('renders nothing if passed an empty array', () => {
-    const tree = renderer.create(
+    const tree = render(
       <MockTheme>
         <LiferayNotifications />
       </MockTheme>
-    ).toJSON();
+    );
     expect(tree).toMatchSnapshot();
   });
   test('renders notifications with no actions if onHideNotifications not present', () => {
@@ -23,11 +23,11 @@ describe('NeonPage - LiferayNotifications', () => {
       { id: 'foo', message: 'bar', dismissed: false },
       { id: 'qux', message: '<b>HTML</b>', dismissed: true },
     ];
-    const tree = renderer.create(
+    const tree = render(
       <MockTheme>
         <LiferayNotifications notifications={notifications} />
       </MockTheme>
-    ).toJSON();
+    );
     expect(tree).toMatchSnapshot();
   });
   test('renders notifications with actions if onHideNotifications is present', () => {
@@ -35,11 +35,11 @@ describe('NeonPage - LiferayNotifications', () => {
       { id: 'foo', message: 'bar', dismissed: false },
       { id: 'qux', message: '<b>HTML</b>', dismissed: true },
     ];
-    const tree = renderer.create(
+    const tree = render(
       <MockTheme>
         <LiferayNotifications notifications={notifications} onHideNotifications={() => {}} />
       </MockTheme>
-    ).toJSON();
+    );
     expect(tree).toMatchSnapshot();
   });
 });

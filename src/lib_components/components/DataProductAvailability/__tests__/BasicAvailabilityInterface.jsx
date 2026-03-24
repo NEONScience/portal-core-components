@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
 import cloneDeep from 'lodash/cloneDeep';
 
@@ -47,45 +47,35 @@ const siteCodes = [
 
 describe('DataProductAvailability - BasicAvailabilityInterface', () => {
   test('renders with no props', () => {
-    const tree = renderer
-      .create(<MockTheme><BasicAvailabilityInterface /></MockTheme>)
-      .toJSON();
+    const tree = render(<MockTheme><BasicAvailabilityInterface /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
   test('renders with siteCodes and view', () => {
-    const tree = renderer
-      .create(<MockTheme><BasicAvailabilityInterface siteCodes={siteCodes} view="sites" /></MockTheme>)
-      .toJSON();
+    const tree = render(<MockTheme><BasicAvailabilityInterface siteCodes={siteCodes} view="sites" /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
   test('renders with explicit sort method', () => {
-    const tree = renderer
-      .create(
-        <MockTheme>
-          <BasicAvailabilityInterface siteCodes={siteCodes} view="sites" sortMethod="sites" />
-        </MockTheme>
-      )
-      .toJSON();
+    const tree = render(
+      <MockTheme>
+        <BasicAvailabilityInterface siteCodes={siteCodes} view="sites" sortMethod="sites" />
+      </MockTheme>
+    );
     expect(tree).toMatchSnapshot();
   });
   test('renders with ungrouped view', () => {
-    const tree = renderer
-      .create(
-        <MockTheme>
-          <BasicAvailabilityInterface siteCodes={siteCodes} view="ungrouped" />
-        </MockTheme>
-      )
-      .toJSON();
+    const tree = render(
+      <MockTheme>
+        <BasicAvailabilityInterface siteCodes={siteCodes} view="ungrouped" />
+      </MockTheme>
+    );
     expect(tree).toMatchSnapshot();
   });
   test('renders with selection disabled', () => {
-    const tree = renderer
-      .create(
-        <MockTheme>
-          <BasicAvailabilityInterface siteCodes={siteCodes} view="sites" disableSelection />
-        </MockTheme>
-      )
-      .toJSON();
+    const tree = render(
+      <MockTheme>
+        <BasicAvailabilityInterface siteCodes={siteCodes} view="sites" disableSelection />
+      </MockTheme>
+    );
     expect(tree).toMatchSnapshot();
   });
 });

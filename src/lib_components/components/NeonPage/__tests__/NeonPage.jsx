@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
 import MockTheme from '../../../../__mocks__/MockTheme';
 import '../../../../__mocks__/ajax';
@@ -28,93 +28,93 @@ describe('NeonPage', () => {
     console.error.mockRestore();
   });
   test('renders a basic functional page with no props', () => {
-    const tree = renderer.create(
+    const tree = render(
       <MockTheme>
         <NeonPage showHeaderSkeleton showFooterSkeleton>
           <div>content</div>
         </NeonPage>
       </MockTheme>
-    ).toJSON();
+    );
     expect(tree).toMatchSnapshot();
   });
   test('renders with a title and subtitle', () => {
-    const tree = renderer.create(
+    const tree = render(
       <MockTheme>
         <NeonPage title="Title" subtitle="Subtitle" showHeaderSkeleton showFooterSkeleton>
           <div>content</div>
         </NeonPage>
       </MockTheme>
-    ).toJSON();
+    );
     expect(tree).toMatchSnapshot();
   });
   test('renders with loading message', () => {
-    const tree = renderer.create(
+    const tree = render(
       <MockTheme>
         <NeonPage loading="Loading" outerPageContainerMaxWidth="3333px" showHeaderSkeleton showFooterSkeleton>
           <div>content</div>
         </NeonPage>
       </MockTheme>
-    ).toJSON();
+    );
     expect(tree).toMatchSnapshot();
   });
   test('renders with loading message and progress', () => {
-    const tree = renderer.create(
+    const tree = render(
       <MockTheme>
         <NeonPage loading="Loading" progress={62} showHeaderSkeleton showFooterSkeleton>
           <div>content</div>
         </NeonPage>
       </MockTheme>
-    ).toJSON();
+    );
     expect(tree).toMatchSnapshot();
   });
   test('renders with an error', () => {
-    const tree = renderer.create(
+    const tree = render(
       <MockTheme>
         <NeonPage error="Fail" showHeaderSkeleton showFooterSkeleton>
           <div>content</div>
         </NeonPage>
       </MockTheme>
-    ).toJSON();
+    );
     expect(tree).toMatchSnapshot();
   });
   test('renders with a notification', () => {
-    const tree = renderer.create(
+    const tree = render(
       <MockTheme>
         <NeonPage notification="Notification" showHeaderSkeleton showFooterSkeleton>
           <div>content</div>
         </NeonPage>
       </MockTheme>
-    ).toJSON();
+    );
     expect(tree).toMatchSnapshot();
   });
   test('renders with a custom header/footer', () => {
-    const tree = renderer.create(
+    const tree = render(
       <MockTheme>
         <NeonPage customHeader={<div>Header</div>} customFooter={<div>Header</div>} showHeaderSkeleton showFooterSkeleton>
           <div>content</div>
         </NeonPage>,
       </MockTheme>
-    ).toJSON();
+    );
     expect(tree).toMatchSnapshot();
   });
   test('renders with custom sidebar content', () => {
-    const tree = renderer.create(
+    const tree = render(
       <MockTheme>
         <NeonPage sidebarContent={<div>Sidebar</div>} showHeaderSkeleton showFooterSkeleton>
           <div>content</div>
         </NeonPage>
       </MockTheme>
-    ).toJSON();
+    );
     expect(tree).toMatchSnapshot();
   });
   test('renders sidebar items as skeletons when in appropriate state', () => {
-    const tree = renderer.create(
+    const tree = render(
       <MockTheme>
         <NeonPage sidebarContent={<div>Sidebar</div>} sidebarTitle="foo" loading="Loading" showHeaderSkeleton showFooterSkeleton>
           <div>content</div>
         </NeonPage>
       </MockTheme>
-    ).toJSON();
+    );
     expect(tree).toMatchSnapshot();
   });
   test('renders with sidebar links', () => {
@@ -126,7 +126,7 @@ describe('NeonPage', () => {
       { name: 'Section C', hash: '#sectionC', icon: StubIcon },
       { name: 'Section D', hash: '#sectionD', component: StubComponent },
     ];
-    const tree = renderer.create(
+    const tree = render(
       <MockTheme>
         <NeonPage
           sidebarLinks={sidebarLinks}
@@ -139,7 +139,7 @@ describe('NeonPage', () => {
           <div>content</div>
         </NeonPage>
       </MockTheme>
-    ).toJSON();
+    );
     expect(tree).toMatchSnapshot();
   });
   test('renders with sidebar links as standlone children', () => {
@@ -149,7 +149,7 @@ describe('NeonPage', () => {
       { name: 'Section A', hash: '#sectionA', component: StubComponentA },
       { name: 'Section B', hash: '#sectionA', component: StubComponentB },
     ];
-    const tree = renderer.create(
+    const tree = render(
       <MockTheme>
         <NeonPage
           sidebarLinks={sidebarLinks}
@@ -163,7 +163,7 @@ describe('NeonPage', () => {
           <div>content</div>
         </NeonPage>
       </MockTheme>
-    ).toJSON();
+    );
     expect(tree).toMatchSnapshot();
   });
   test('NeonErrorPage', () => {
@@ -171,11 +171,11 @@ describe('NeonPage', () => {
       message: 'fail',
       stack: 'Disregard; this is console.error() call is expected in the NeonErrorPage test',
     };
-    const tree = renderer.create(
+    const tree = render(
       <MockTheme>
         <NeonErrorPage error={error} resetErrorBoundary={() => {}} />
       </MockTheme>
-    ).toJSON();
+    );
     expect(tree).toMatchSnapshot();
   });
 });

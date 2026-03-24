@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 import { renderHook } from '@testing-library/react';
 
 import cloneDeep from 'lodash/cloneDeep';
@@ -61,24 +61,22 @@ describe('TimeSeriesViewerContext', () => {
         ],
       };
       setTimeout(() => {
-        const tree = renderer
-          .create(
-            <Provider productData={productData}>
-              <div>children</div>
-            </Provider>,
-          ).toJSON();
+        const tree = render(
+          <Provider productData={productData}>
+            <div>children</div>
+          </Provider>,
+        );
         expect(tree).toMatchSnapshot();
         done();
       });
     });
     test('renders with productCode prop', (done) => {
       setTimeout(() => {
-        const tree = renderer
-          .create(
-            <Provider productCode="DP1.23456.789">
-              <div>children</div>
-            </Provider>,
-          ).toJSON();
+        const tree = render(
+          <Provider productCode="DP1.23456.789">
+            <div>children</div>
+          </Provider>,
+        );
         expect(tree).toMatchSnapshot();
         done();
       });

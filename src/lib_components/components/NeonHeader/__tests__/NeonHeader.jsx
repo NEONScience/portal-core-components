@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
 import '../../../../__mocks__/ajax';
 import '../../../../__mocks__/NeonContext';
@@ -34,9 +34,7 @@ describe('NeonHeader', () => {
       html: { [DRUPAL_HEADER_HTML]: null },
       auth: defaultAuth,
     }]);
-    const tree = renderer
-      .create(<MockTheme><NeonHeader /></MockTheme>)
-      .toJSON();
+    const tree = render(<MockTheme><NeonHeader /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
   test('renders with no props and active/fetching NeonContext state', () => {
@@ -46,9 +44,7 @@ describe('NeonHeader', () => {
       html: { [DRUPAL_HEADER_HTML]: null },
       auth: defaultAuth,
     }]);
-    const tree = renderer
-      .create(<MockTheme><NeonHeader /></MockTheme>)
-      .toJSON();
+    const tree = render(<MockTheme><NeonHeader /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
   test('renders with no props and error NeonContext state', () => {
@@ -58,9 +54,7 @@ describe('NeonHeader', () => {
       html: { [DRUPAL_HEADER_HTML]: null },
       auth: defaultAuth,
     }]);
-    const tree = renderer
-      .create(<MockTheme><NeonHeader /></MockTheme>)
-      .toJSON();
+    const tree = render(<MockTheme><NeonHeader /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
   test('renders with no props and success NeonContext state', () => {
@@ -70,9 +64,7 @@ describe('NeonHeader', () => {
       html: { [DRUPAL_HEADER_HTML]: '<div>test drupal html</div>' },
       auth: defaultAuth,
     }]);
-    const tree = renderer
-      .create(<MockTheme><NeonHeader /></MockTheme>)
-      .toJSON();
+    const tree = render(<MockTheme><NeonHeader /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
   test('renders fallback with drupalCSSLoaded prop and error NeonContext state', () => {
@@ -82,9 +74,7 @@ describe('NeonHeader', () => {
       html: { [DRUPAL_HEADER_HTML]: null },
       auth: defaultAuth,
     }]);
-    const tree = renderer
-      .create(<MockTheme><NeonHeader drupalCssLoaded /></MockTheme>)
-      .toJSON();
+    const tree = render(<MockTheme><NeonHeader drupalCssLoaded /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
   test('renders with drupalCssLoaded prop and success NeonContext state', () => {
@@ -94,9 +84,7 @@ describe('NeonHeader', () => {
       html: { [DRUPAL_HEADER_HTML]: '<div>test drupal html</div>' },
       auth: defaultAuth,
     }]);
-    const tree = renderer
-      .create(<MockTheme><NeonHeader drupalCssLoaded unstickyDrupalHeader /></MockTheme>)
-      .toJSON();
+    const tree = render(<MockTheme><NeonHeader drupalCssLoaded unstickyDrupalHeader /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
   test('renders with drupalCssLoaded prop, success NeonContext state, and core auth', (done) => {
@@ -108,10 +96,8 @@ describe('NeonHeader', () => {
     }]);
     let tree;
     setTimeout(() => {
-      renderer.act(() => {
-        tree = renderer.create(<MockTheme><NeonHeader drupalCssLoaded /></MockTheme>);
-      });
-      expect(tree.toJSON()).toMatchSnapshot();
+      tree = render(<MockTheme><NeonHeader drupalCssLoaded /></MockTheme>);
+      expect(tree).toMatchSnapshot();
       done();
     }, 0);
   });

@@ -1,27 +1,3810 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`TimeSeriesViewerSites PositionDetail Renders full detail when position history is present 1`] = `null`;
+exports[`TimeSeriesViewerSites PositionDetail Renders full detail when position history is present 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="makeStyles-startFlex-80"
+        style="align-items: center; justify-content: space-between;"
+      >
+        <div
+          style="display: flex; flex-direction: column;"
+        >
+          <div
+            class="makeStyles-startFlex-80"
+            style="align-items: center;"
+          >
+            <div
+              style="margin-right: 24px;"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+                style="font-weight: 600;"
+              >
+                000.010
+              </p>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+                style="color: rgb(86, 90, 92);"
+              >
+                Elevation:
+              </p>
+              <div
+                style="display: flex; align-items: center;"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+                  data-testid="TerrainIcon"
+                  focusable="false"
+                  style="margin-right: 4px; color: rgb(86, 90, 92);"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="m14 6-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22z"
+                  />
+                </svg>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+                  style="color: rgb(86, 90, 92);"
+                >
+                  991.00m
+                </p>
+              </div>
+            </div>
+            <div
+              style="margin-right: 24px;"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+              >
+                <span
+                  style="margin-right: 8px; font-weight: 600;"
+                >
+                  x:
+                </span>
+                5m
+                <br />
+                <span
+                  style="margin-right: 8px; font-weight: 600;"
+                >
+                  y:
+                </span>
+                6m
+                <br />
+                <span
+                  style="margin-right: 8px; font-weight: 600;"
+                >
+                  z:
+                </span>
+                1m
+              </p>
+            </div>
+          </div>
+          <div
+            style="margin-right: 24px; margin-top: 4px;"
+          >
+            <div>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+                style="font-weight: 600;"
+              >
+                Location:
+              </p>
+            </div>
+            <div
+              style="color: rgb(86, 90, 92);"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+              >
+                N/A (N/A)
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          style="text-align: right;"
+        >
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
+            tabindex="0"
+            title="Click to show all changes to physical locations for this position over time"
+            type="button"
+          >
+            <span
+              class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-x6r74k-MuiButton-startIcon"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                data-testid="HistoryIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9m-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8z"
+                />
+              </svg>
+            </span>
+            History (2)
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="makeStyles-startFlex-80"
+      style="align-items: center; justify-content: space-between;"
+    >
+      <div
+        style="display: flex; flex-direction: column;"
+      >
+        <div
+          class="makeStyles-startFlex-80"
+          style="align-items: center;"
+        >
+          <div
+            style="margin-right: 24px;"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+              style="font-weight: 600;"
+            >
+              000.010
+            </p>
+            <p
+              class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+              style="color: rgb(86, 90, 92);"
+            >
+              Elevation:
+            </p>
+            <div
+              style="display: flex; align-items: center;"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+                data-testid="TerrainIcon"
+                focusable="false"
+                style="margin-right: 4px; color: rgb(86, 90, 92);"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="m14 6-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22z"
+                />
+              </svg>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+                style="color: rgb(86, 90, 92);"
+              >
+                991.00m
+              </p>
+            </div>
+          </div>
+          <div
+            style="margin-right: 24px;"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+            >
+              <span
+                style="margin-right: 8px; font-weight: 600;"
+              >
+                x:
+              </span>
+              5m
+              <br />
+              <span
+                style="margin-right: 8px; font-weight: 600;"
+              >
+                y:
+              </span>
+              6m
+              <br />
+              <span
+                style="margin-right: 8px; font-weight: 600;"
+              >
+                z:
+              </span>
+              1m
+            </p>
+          </div>
+        </div>
+        <div
+          style="margin-right: 24px; margin-top: 4px;"
+        >
+          <div>
+            <p
+              class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+              style="font-weight: 600;"
+            >
+              Location:
+            </p>
+          </div>
+          <div
+            style="color: rgb(86, 90, 92);"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+            >
+              N/A (N/A)
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        style="text-align: right;"
+      >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
+          tabindex="0"
+          title="Click to show all changes to physical locations for this position over time"
+          type="button"
+        >
+          <span
+            class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-x6r74k-MuiButton-startIcon"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+              data-testid="HistoryIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9m-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8z"
+              />
+            </svg>
+          </span>
+          History (2)
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
 
-exports[`TimeSeriesViewerSites PositionDetail Renders full wide detail when position history is present 1`] = `null`;
+exports[`TimeSeriesViewerSites PositionDetail Renders full wide detail when position history is present 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div>
+        <div
+          class="makeStyles-startFlex-100"
+          style="align-items: flex-end;"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+            style="font-weight: 600; margin-right: 24px;"
+          >
+            000.010
+          </p>
+          <div
+            class="makeStyles-startFlex-100"
+            style="align-items: center; color: rgb(86, 90, 92);"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+            >
+              Elevation:
+            </p>
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              data-testid="TerrainIcon"
+              focusable="false"
+              style="margin: 0px 4px 0px 8px;"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="m14 6-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22z"
+              />
+            </svg>
+            <p
+              class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+            >
+              991.00m
+            </p>
+          </div>
+        </div>
+        <div
+          class="makeStyles-startFlex-100"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+          >
+            <span
+              style="margin-right: 8px; font-weight: 600;"
+            >
+              x / y / z:
+            </span>
+            5m / 6m / 1m
+          </p>
+        </div>
+        <div
+          class="makeStyles-startFlex-100"
+          style="color: rgb(86, 90, 92); margin-right: 24px; margin-top: 4px;"
+        >
+          <span
+            class="MuiTypography-root MuiTypography-caption css-287k3z-MuiTypography-root"
+          >
+            <span
+              style="font-weight: 600;"
+            >
+              Location: 
+            </span>
+            N/A (N/A)
+          </span>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div>
+      <div
+        class="makeStyles-startFlex-100"
+        style="align-items: flex-end;"
+      >
+        <p
+          class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+          style="font-weight: 600; margin-right: 24px;"
+        >
+          000.010
+        </p>
+        <div
+          class="makeStyles-startFlex-100"
+          style="align-items: center; color: rgb(86, 90, 92);"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+          >
+            Elevation:
+          </p>
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+            data-testid="TerrainIcon"
+            focusable="false"
+            style="margin: 0px 4px 0px 8px;"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="m14 6-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22z"
+            />
+          </svg>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+          >
+            991.00m
+          </p>
+        </div>
+      </div>
+      <div
+        class="makeStyles-startFlex-100"
+      >
+        <p
+          class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+        >
+          <span
+            style="margin-right: 8px; font-weight: 600;"
+          >
+            x / y / z:
+          </span>
+          5m / 6m / 1m
+        </p>
+      </div>
+      <div
+        class="makeStyles-startFlex-100"
+        style="color: rgb(86, 90, 92); margin-right: 24px; margin-top: 4px;"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption css-287k3z-MuiTypography-root"
+        >
+          <span
+            style="font-weight: 600;"
+          >
+            Location: 
+          </span>
+          N/A (N/A)
+        </span>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
 
-exports[`TimeSeriesViewerSites PositionDetail Renders trimmed down detail when position not present in state 1`] = `null`;
+exports[`TimeSeriesViewerSites PositionDetail Renders trimmed down detail when position not present in state 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <p
+        class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+      >
+        000.010
+      </p>
+    </div>
+  </body>,
+  "container": <div>
+    <p
+      class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+    >
+      000.010
+    </p>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
 
-exports[`TimeSeriesViewerSites PositionHistoryButton Renders disabled when history has less than two entries 1`] = `null`;
+exports[`TimeSeriesViewerSites PositionHistoryButton Renders disabled when history has less than two entries 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary Mui-disabled MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
+        disabled=""
+        tabindex="-1"
+        title="This position has had no changes to physical locations since its creation"
+        type="button"
+      >
+        <span
+          class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-x6r74k-MuiButton-startIcon"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="HistoryIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9m-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8z"
+            />
+          </svg>
+        </span>
+        No History
+      </button>
+    </div>
+  </body>,
+  "container": <div>
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary Mui-disabled MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
+      disabled=""
+      tabindex="-1"
+      title="This position has had no changes to physical locations since its creation"
+      type="button"
+    >
+      <span
+        class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-x6r74k-MuiButton-startIcon"
+      >
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+          data-testid="HistoryIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9m-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8z"
+          />
+        </svg>
+      </span>
+      No History
+    </button>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
 
-exports[`TimeSeriesViewerSites PositionHistoryButton Renders enabled when history has two or more entries 1`] = `null`;
+exports[`TimeSeriesViewerSites PositionHistoryButton Renders enabled when history has two or more entries 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        title="Click to show all changes to physical locations for this position over time"
+        type="button"
+      >
+        <span
+          class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-x6r74k-MuiButton-startIcon"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="HistoryIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9m-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8z"
+            />
+          </svg>
+        </span>
+        History (2)
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+  </body>,
+  "container": <div>
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
+      tabindex="0"
+      title="Click to show all changes to physical locations for this position over time"
+      type="button"
+    >
+      <span
+        class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-x6r74k-MuiButton-startIcon"
+      >
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+          data-testid="HistoryIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9m-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8z"
+          />
+        </svg>
+      </span>
+      History (2)
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </button>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
 
-exports[`TimeSeriesViewerSites SelectPositionsButton Renders as expected 1`] = `null`;
+exports[`TimeSeriesViewerSites SelectPositionsButton Renders as expected 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
+        style="margin-left: 32px;"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-x6r74k-MuiButton-startIcon"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="TouchAppIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74m9.84 4.63-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74c-3.6-.76-3.54-.75-3.67-.75-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2 0-.62-.38-1.16-.91-1.38"
+            />
+          </svg>
+        </span>
+        Select Positions…
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+  </body>,
+  "container": <div>
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
+      style="margin-left: 32px;"
+      tabindex="0"
+      type="button"
+    >
+      <span
+        class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-x6r74k-MuiButton-startIcon"
+      >
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+          data-testid="TouchAppIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74m9.84 4.63-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74c-3.6-.76-3.54-.75-3.67-.75-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2 0-.62-.38-1.16-.91-1.38"
+          />
+        </svg>
+      </span>
+      Select Positions…
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </button>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
 
-exports[`TimeSeriesViewerSites SelectedPosition Renders as expected 1`] = `null`;
+exports[`TimeSeriesViewerSites SelectedPosition Renders as expected 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-positionCard-119 css-s384l0-MuiPaper-root-MuiCard-root"
+      >
+        <button
+          aria-label="remove position 000.010 from ABBY"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1wx42p0-MuiButtonBase-root-MuiIconButton-root"
+          style="margin-left: 8px; margin-right: 8px;"
+          tabindex="0"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+            data-testid="ClearIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+            />
+          </svg>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+        <div
+          style="flex-grow: 1;"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+          >
+            000.010
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-positionCard-119 css-s384l0-MuiPaper-root-MuiCard-root"
+    >
+      <button
+        aria-label="remove position 000.010 from ABBY"
+        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1wx42p0-MuiButtonBase-root-MuiIconButton-root"
+        style="margin-left: 8px; margin-right: 8px;"
+        tabindex="0"
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+          data-testid="ClearIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+          />
+        </svg>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+      <div
+        style="flex-grow: 1;"
+      >
+        <p
+          class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+        >
+          000.010
+        </p>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
 
-exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core) 1`] = `null`;
+exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core) 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-siteCard-210 css-s384l0-MuiPaper-root-MuiCard-root"
+      >
+        <div>
+          <div
+            class="makeStyles-siteTitleContainer-211"
+          >
+            <img
+              alt="Aquatic Core"
+              height="32px"
+              src="svg-file.svg"
+              style="margin-right: 8px; flex-grow: 0;"
+              title="Aquatic Core"
+              width="32px"
+            />
+            <h6
+              class="MuiTypography-root MuiTypography-h6 css-134ad2t-MuiTypography-root"
+              style="line-height: 1.4rem; flex-grow: 1;"
+            >
+              Rio Cupeyes (CUPE)
+            </h6>
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
+              style="min-width: 104px; white-space: nowrap;"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-x6r74k-MuiButton-startIcon"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                  data-testid="ClearIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                  />
+                </svg>
+              </span>
+              Remove Site
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+          <div
+            class="makeStyles-siteDetailsRow-212"
+          >
+            <div
+              class="makeStyles-siteDetailsColumn-213"
+            >
+              <div
+                class="makeStyles-siteDetail-214"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                >
+                  Aquatic Core
+                </h6>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+                  style="font-size: 0.8rem;"
+                >
+                  <i>
+                    water-based; fixed location
+                  </i>
+                </p>
+              </div>
+              <div
+                class="makeStyles-siteDetail-214"
+              >
+                <div
+                  class="makeStyles-startFlex-220"
+                  style="align-items: center;"
+                >
+                  <button
+                    aria-label="Latitude / Longitude (click to copy)"
+                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+                    data-mui-internal-clone-element="true"
+                    style="margin-right: 4px;"
+                    tabindex="0"
+                    type="button"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                      data-testid="MyLocationIcon"
+                      focusable="false"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4m8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V1h-2v2.06C6.83 3.52 3.52 6.83 3.06 11H1v2h2.06c.46 4.17 3.77 7.48 7.94 7.94V23h2v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23v-2zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7"
+                      />
+                    </svg>
+                    <span
+                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                    />
+                  </button>
+                  <span
+                    aria-label="Latitude / Longitude"
+                    class="MuiTypography-root MuiTypography-caption css-287k3z-MuiTypography-root"
+                    style="font-family: monospace; text-align: right; font-size: 0.85rem;"
+                  >
+                    18.11352
+                    <br />
+                    -66.98676
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="makeStyles-siteDetailsColumn-213"
+            >
+              <div
+                class="makeStyles-siteDetail-214"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                >
+                  Territory
+                </h6>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+                >
+                  Puerto Rico
+                </p>
+              </div>
+              <div
+                class="makeStyles-siteDetail-214"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                >
+                  Domain
+                </h6>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+                >
+                  D04 - Atlantic Neotropical
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div
+            class="makeStyles-positionsTitleContainer-217"
+          >
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+            >
+              Position(s)
+            </h6>
+            <button
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+              data-mui-internal-clone-element="true"
+              style="margin-left: 8px;"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
+              style="margin-left: 32px;"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-x6r74k-MuiButton-startIcon"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                  data-testid="TouchAppIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74m9.84 4.63-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74c-3.6-.76-3.54-.75-3.67-.75-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2 0-.62-.38-1.16-.91-1.38"
+                  />
+                </svg>
+              </span>
+              Select Positions…
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+          <div
+            class="makeStyles-positionsCardContainer-218"
+          >
+            <div
+              class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-positionCard-219 css-s384l0-MuiPaper-root-MuiCard-root"
+            >
+              <button
+                aria-label="remove position 000.010 from CUPE"
+                class="MuiButtonBase-root Mui-disabled MuiIconButton-root Mui-disabled MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1wx42p0-MuiButtonBase-root-MuiIconButton-root"
+                disabled=""
+                style="margin-left: 8px; margin-right: 8px;"
+                tabindex="-1"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+                  data-testid="ClearIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                  />
+                </svg>
+              </button>
+              <div
+                style="flex-grow: 1;"
+              >
+                <p
+                  class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+                >
+                  000.010
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-siteCard-210 css-s384l0-MuiPaper-root-MuiCard-root"
+    >
+      <div>
+        <div
+          class="makeStyles-siteTitleContainer-211"
+        >
+          <img
+            alt="Aquatic Core"
+            height="32px"
+            src="svg-file.svg"
+            style="margin-right: 8px; flex-grow: 0;"
+            title="Aquatic Core"
+            width="32px"
+          />
+          <h6
+            class="MuiTypography-root MuiTypography-h6 css-134ad2t-MuiTypography-root"
+            style="line-height: 1.4rem; flex-grow: 1;"
+          >
+            Rio Cupeyes (CUPE)
+          </h6>
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
+            style="min-width: 104px; white-space: nowrap;"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-x6r74k-MuiButton-startIcon"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                data-testid="ClearIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                />
+              </svg>
+            </span>
+            Remove Site
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <div
+          class="makeStyles-siteDetailsRow-212"
+        >
+          <div
+            class="makeStyles-siteDetailsColumn-213"
+          >
+            <div
+              class="makeStyles-siteDetail-214"
+            >
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+              >
+                Aquatic Core
+              </h6>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+                style="font-size: 0.8rem;"
+              >
+                <i>
+                  water-based; fixed location
+                </i>
+              </p>
+            </div>
+            <div
+              class="makeStyles-siteDetail-214"
+            >
+              <div
+                class="makeStyles-startFlex-220"
+                style="align-items: center;"
+              >
+                <button
+                  aria-label="Latitude / Longitude (click to copy)"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+                  data-mui-internal-clone-element="true"
+                  style="margin-right: 4px;"
+                  tabindex="0"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    data-testid="MyLocationIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4m8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V1h-2v2.06C6.83 3.52 3.52 6.83 3.06 11H1v2h2.06c.46 4.17 3.77 7.48 7.94 7.94V23h2v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23v-2zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7"
+                    />
+                  </svg>
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
+                <span
+                  aria-label="Latitude / Longitude"
+                  class="MuiTypography-root MuiTypography-caption css-287k3z-MuiTypography-root"
+                  style="font-family: monospace; text-align: right; font-size: 0.85rem;"
+                >
+                  18.11352
+                  <br />
+                  -66.98676
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="makeStyles-siteDetailsColumn-213"
+          >
+            <div
+              class="makeStyles-siteDetail-214"
+            >
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+              >
+                Territory
+              </h6>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+              >
+                Puerto Rico
+              </p>
+            </div>
+            <div
+              class="makeStyles-siteDetail-214"
+            >
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+              >
+                Domain
+              </h6>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+              >
+                D04 - Atlantic Neotropical
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div
+          class="makeStyles-positionsTitleContainer-217"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+          >
+            Position(s)
+          </h6>
+          <button
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            data-mui-internal-clone-element="true"
+            style="margin-left: 8px;"
+            tabindex="0"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
+            style="margin-left: 32px;"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-x6r74k-MuiButton-startIcon"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                data-testid="TouchAppIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74m9.84 4.63-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74c-3.6-.76-3.54-.75-3.67-.75-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2 0-.62-.38-1.16-.91-1.38"
+                />
+              </svg>
+            </span>
+            Select Positions…
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <div
+          class="makeStyles-positionsCardContainer-218"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-positionCard-219 css-s384l0-MuiPaper-root-MuiCard-root"
+          >
+            <button
+              aria-label="remove position 000.010 from CUPE"
+              class="MuiButtonBase-root Mui-disabled MuiIconButton-root Mui-disabled MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1wx42p0-MuiButtonBase-root-MuiIconButton-root"
+              disabled=""
+              style="margin-left: 8px; margin-right: 8px;"
+              tabindex="-1"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+                data-testid="ClearIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                />
+              </svg>
+            </button>
+            <div
+              style="flex-grow: 1;"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+              >
+                000.010
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
 
-exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradient) 1`] = `null`;
+exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradient) 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-siteCard-190 css-s384l0-MuiPaper-root-MuiCard-root"
+      >
+        <div>
+          <div
+            class="makeStyles-siteTitleContainer-191"
+          >
+            <img
+              alt="Aquatic Gradient"
+              height="32px"
+              src="svg-file.svg"
+              style="margin-right: 8px; flex-grow: 0;"
+              title="Aquatic Gradient"
+              width="32px"
+            />
+            <h6
+              class="MuiTypography-root MuiTypography-h6 css-134ad2t-MuiTypography-root"
+              style="line-height: 1.4rem; flex-grow: 1;"
+            >
+              Upper Big Creek (BIGC)
+            </h6>
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
+              style="min-width: 104px; white-space: nowrap;"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-x6r74k-MuiButton-startIcon"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                  data-testid="ClearIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                  />
+                </svg>
+              </span>
+              Remove Site
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+          <div
+            class="makeStyles-siteDetailsRow-192"
+          >
+            <div
+              class="makeStyles-siteDetailsColumn-193"
+            >
+              <div
+                class="makeStyles-siteDetail-194"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                >
+                  Aquatic Gradient
+                </h6>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+                  style="font-size: 0.8rem;"
+                >
+                  <i>
+                    water-based; gradient location
+                  </i>
+                </p>
+              </div>
+              <div
+                class="makeStyles-siteDetail-194"
+              >
+                <div
+                  class="makeStyles-startFlex-200"
+                  style="align-items: center;"
+                >
+                  <button
+                    aria-label="Latitude / Longitude (click to copy)"
+                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+                    data-mui-internal-clone-element="true"
+                    style="margin-right: 4px;"
+                    tabindex="0"
+                    type="button"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                      data-testid="MyLocationIcon"
+                      focusable="false"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4m8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V1h-2v2.06C6.83 3.52 3.52 6.83 3.06 11H1v2h2.06c.46 4.17 3.77 7.48 7.94 7.94V23h2v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23v-2zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7"
+                      />
+                    </svg>
+                    <span
+                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                    />
+                  </button>
+                  <span
+                    aria-label="Latitude / Longitude"
+                    class="MuiTypography-root MuiTypography-caption css-287k3z-MuiTypography-root"
+                    style="font-family: monospace; text-align: right; font-size: 0.85rem;"
+                  >
+                    37.059719
+                    <br />
+                    -119.257549
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="makeStyles-siteDetailsColumn-193"
+            >
+              <div
+                class="makeStyles-siteDetail-194"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                >
+                  State
+                </h6>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+                >
+                  California
+                </p>
+              </div>
+              <div
+                class="makeStyles-siteDetail-194"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                >
+                  Domain
+                </h6>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+                >
+                  D17 - Pacific Southwest
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div
+            class="makeStyles-positionsTitleContainer-197"
+          >
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+            >
+              Position(s)
+            </h6>
+            <button
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+              data-mui-internal-clone-element="true"
+              style="margin-left: 8px;"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
+              style="margin-left: 32px;"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-x6r74k-MuiButton-startIcon"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                  data-testid="TouchAppIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74m9.84 4.63-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74c-3.6-.76-3.54-.75-3.67-.75-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2 0-.62-.38-1.16-.91-1.38"
+                  />
+                </svg>
+              </span>
+              Select Positions…
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+          <div
+            class="makeStyles-positionsCardContainer-198"
+          >
+            <div
+              class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-positionCard-199 css-s384l0-MuiPaper-root-MuiCard-root"
+            >
+              <button
+                aria-label="remove position 000.030 from BIGC"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1wx42p0-MuiButtonBase-root-MuiIconButton-root"
+                style="margin-left: 8px; margin-right: 8px;"
+                tabindex="0"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+                  data-testid="ClearIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                  />
+                </svg>
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </button>
+              <div
+                style="flex-grow: 1;"
+              >
+                <p
+                  class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+                >
+                  000.030
+                </p>
+              </div>
+            </div>
+            <div
+              class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-positionCard-199 css-s384l0-MuiPaper-root-MuiCard-root"
+            >
+              <button
+                aria-label="remove position 000.010 from BIGC"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1wx42p0-MuiButtonBase-root-MuiIconButton-root"
+                style="margin-left: 8px; margin-right: 8px;"
+                tabindex="0"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+                  data-testid="ClearIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                  />
+                </svg>
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </button>
+              <div
+                style="flex-grow: 1;"
+              >
+                <p
+                  class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+                >
+                  000.010
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-siteCard-190 css-s384l0-MuiPaper-root-MuiCard-root"
+    >
+      <div>
+        <div
+          class="makeStyles-siteTitleContainer-191"
+        >
+          <img
+            alt="Aquatic Gradient"
+            height="32px"
+            src="svg-file.svg"
+            style="margin-right: 8px; flex-grow: 0;"
+            title="Aquatic Gradient"
+            width="32px"
+          />
+          <h6
+            class="MuiTypography-root MuiTypography-h6 css-134ad2t-MuiTypography-root"
+            style="line-height: 1.4rem; flex-grow: 1;"
+          >
+            Upper Big Creek (BIGC)
+          </h6>
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
+            style="min-width: 104px; white-space: nowrap;"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-x6r74k-MuiButton-startIcon"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                data-testid="ClearIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                />
+              </svg>
+            </span>
+            Remove Site
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <div
+          class="makeStyles-siteDetailsRow-192"
+        >
+          <div
+            class="makeStyles-siteDetailsColumn-193"
+          >
+            <div
+              class="makeStyles-siteDetail-194"
+            >
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+              >
+                Aquatic Gradient
+              </h6>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+                style="font-size: 0.8rem;"
+              >
+                <i>
+                  water-based; gradient location
+                </i>
+              </p>
+            </div>
+            <div
+              class="makeStyles-siteDetail-194"
+            >
+              <div
+                class="makeStyles-startFlex-200"
+                style="align-items: center;"
+              >
+                <button
+                  aria-label="Latitude / Longitude (click to copy)"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+                  data-mui-internal-clone-element="true"
+                  style="margin-right: 4px;"
+                  tabindex="0"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    data-testid="MyLocationIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4m8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V1h-2v2.06C6.83 3.52 3.52 6.83 3.06 11H1v2h2.06c.46 4.17 3.77 7.48 7.94 7.94V23h2v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23v-2zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7"
+                    />
+                  </svg>
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
+                <span
+                  aria-label="Latitude / Longitude"
+                  class="MuiTypography-root MuiTypography-caption css-287k3z-MuiTypography-root"
+                  style="font-family: monospace; text-align: right; font-size: 0.85rem;"
+                >
+                  37.059719
+                  <br />
+                  -119.257549
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="makeStyles-siteDetailsColumn-193"
+          >
+            <div
+              class="makeStyles-siteDetail-194"
+            >
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+              >
+                State
+              </h6>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+              >
+                California
+              </p>
+            </div>
+            <div
+              class="makeStyles-siteDetail-194"
+            >
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+              >
+                Domain
+              </h6>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+              >
+                D17 - Pacific Southwest
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div
+          class="makeStyles-positionsTitleContainer-197"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+          >
+            Position(s)
+          </h6>
+          <button
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            data-mui-internal-clone-element="true"
+            style="margin-left: 8px;"
+            tabindex="0"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
+            style="margin-left: 32px;"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-x6r74k-MuiButton-startIcon"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                data-testid="TouchAppIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74m9.84 4.63-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74c-3.6-.76-3.54-.75-3.67-.75-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2 0-.62-.38-1.16-.91-1.38"
+                />
+              </svg>
+            </span>
+            Select Positions…
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <div
+          class="makeStyles-positionsCardContainer-198"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-positionCard-199 css-s384l0-MuiPaper-root-MuiCard-root"
+          >
+            <button
+              aria-label="remove position 000.030 from BIGC"
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1wx42p0-MuiButtonBase-root-MuiIconButton-root"
+              style="margin-left: 8px; margin-right: 8px;"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+                data-testid="ClearIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                />
+              </svg>
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+            <div
+              style="flex-grow: 1;"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+              >
+                000.030
+              </p>
+            </div>
+          </div>
+          <div
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-positionCard-199 css-s384l0-MuiPaper-root-MuiCard-root"
+          >
+            <button
+              aria-label="remove position 000.010 from BIGC"
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1wx42p0-MuiButtonBase-root-MuiIconButton-root"
+              style="margin-left: 8px; margin-right: 8px;"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+                data-testid="ClearIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                />
+              </svg>
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+            <div
+              style="flex-grow: 1;"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+              >
+                000.010
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
 
-exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / core) 1`] = `null`;
+exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / core) 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-siteCard-170 css-s384l0-MuiPaper-root-MuiCard-root"
+      >
+        <div>
+          <div
+            class="makeStyles-siteTitleContainer-171"
+          >
+            <img
+              alt="Terrestrial Core"
+              height="32px"
+              src="svg-file.svg"
+              style="margin-right: 8px; flex-grow: 0;"
+              title="Terrestrial Core"
+              width="32px"
+            />
+            <h6
+              class="MuiTypography-root MuiTypography-h6 css-134ad2t-MuiTypography-root"
+              style="line-height: 1.4rem; flex-grow: 1;"
+            >
+              Central Plains Experimental Range (CPER)
+            </h6>
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
+              style="min-width: 104px; white-space: nowrap;"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-x6r74k-MuiButton-startIcon"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                  data-testid="ClearIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                  />
+                </svg>
+              </span>
+              Remove Site
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+          <div
+            class="makeStyles-siteDetailsRow-172"
+          >
+            <div
+              class="makeStyles-siteDetailsColumn-173"
+            >
+              <div
+                class="makeStyles-siteDetail-174"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                >
+                  Terrestrial Core
+                </h6>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+                  style="font-size: 0.8rem;"
+                >
+                  <i>
+                    land-based; fixed location
+                  </i>
+                </p>
+              </div>
+              <div
+                class="makeStyles-siteDetail-174"
+              >
+                <div
+                  class="makeStyles-startFlex-180"
+                  style="align-items: center;"
+                >
+                  <button
+                    aria-label="Latitude / Longitude (click to copy)"
+                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+                    data-mui-internal-clone-element="true"
+                    style="margin-right: 4px;"
+                    tabindex="0"
+                    type="button"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                      data-testid="MyLocationIcon"
+                      focusable="false"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4m8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V1h-2v2.06C6.83 3.52 3.52 6.83 3.06 11H1v2h2.06c.46 4.17 3.77 7.48 7.94 7.94V23h2v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23v-2zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7"
+                      />
+                    </svg>
+                    <span
+                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                    />
+                  </button>
+                  <span
+                    aria-label="Latitude / Longitude"
+                    class="MuiTypography-root MuiTypography-caption css-287k3z-MuiTypography-root"
+                    style="font-family: monospace; text-align: right; font-size: 0.85rem;"
+                  >
+                    40.815536
+                    <br />
+                    -104.745591
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="makeStyles-siteDetailsColumn-173"
+            >
+              <div
+                class="makeStyles-siteDetail-174"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                >
+                  State
+                </h6>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+                >
+                  Colorado
+                </p>
+              </div>
+              <div
+                class="makeStyles-siteDetail-174"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                >
+                  Domain
+                </h6>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+                >
+                  D10 - Central Plains
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div
+            class="makeStyles-positionsTitleContainer-177"
+          >
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+            >
+              Position(s)
+            </h6>
+            <button
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+              data-mui-internal-clone-element="true"
+              style="margin-left: 8px;"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
+              style="margin-left: 32px;"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-x6r74k-MuiButton-startIcon"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                  data-testid="TouchAppIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74m9.84 4.63-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74c-3.6-.76-3.54-.75-3.67-.75-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2 0-.62-.38-1.16-.91-1.38"
+                  />
+                </svg>
+              </span>
+              Select Positions…
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+          <div
+            class="makeStyles-positionsCardContainer-178"
+          >
+            <div
+              class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-positionCard-179 css-s384l0-MuiPaper-root-MuiCard-root"
+            >
+              <button
+                aria-label="remove position 000.050 from CPER"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1wx42p0-MuiButtonBase-root-MuiIconButton-root"
+                style="margin-left: 8px; margin-right: 8px;"
+                tabindex="0"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+                  data-testid="ClearIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                  />
+                </svg>
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </button>
+              <div
+                style="flex-grow: 1;"
+              >
+                <p
+                  class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+                >
+                  000.050
+                </p>
+              </div>
+            </div>
+            <div
+              class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-positionCard-179 css-s384l0-MuiPaper-root-MuiCard-root"
+            >
+              <button
+                aria-label="remove position 000.040 from CPER"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1wx42p0-MuiButtonBase-root-MuiIconButton-root"
+                style="margin-left: 8px; margin-right: 8px;"
+                tabindex="0"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+                  data-testid="ClearIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                  />
+                </svg>
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </button>
+              <div
+                style="flex-grow: 1;"
+              >
+                <p
+                  class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+                >
+                  000.040
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-siteCard-170 css-s384l0-MuiPaper-root-MuiCard-root"
+    >
+      <div>
+        <div
+          class="makeStyles-siteTitleContainer-171"
+        >
+          <img
+            alt="Terrestrial Core"
+            height="32px"
+            src="svg-file.svg"
+            style="margin-right: 8px; flex-grow: 0;"
+            title="Terrestrial Core"
+            width="32px"
+          />
+          <h6
+            class="MuiTypography-root MuiTypography-h6 css-134ad2t-MuiTypography-root"
+            style="line-height: 1.4rem; flex-grow: 1;"
+          >
+            Central Plains Experimental Range (CPER)
+          </h6>
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
+            style="min-width: 104px; white-space: nowrap;"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-x6r74k-MuiButton-startIcon"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                data-testid="ClearIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                />
+              </svg>
+            </span>
+            Remove Site
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <div
+          class="makeStyles-siteDetailsRow-172"
+        >
+          <div
+            class="makeStyles-siteDetailsColumn-173"
+          >
+            <div
+              class="makeStyles-siteDetail-174"
+            >
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+              >
+                Terrestrial Core
+              </h6>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+                style="font-size: 0.8rem;"
+              >
+                <i>
+                  land-based; fixed location
+                </i>
+              </p>
+            </div>
+            <div
+              class="makeStyles-siteDetail-174"
+            >
+              <div
+                class="makeStyles-startFlex-180"
+                style="align-items: center;"
+              >
+                <button
+                  aria-label="Latitude / Longitude (click to copy)"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+                  data-mui-internal-clone-element="true"
+                  style="margin-right: 4px;"
+                  tabindex="0"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    data-testid="MyLocationIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4m8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V1h-2v2.06C6.83 3.52 3.52 6.83 3.06 11H1v2h2.06c.46 4.17 3.77 7.48 7.94 7.94V23h2v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23v-2zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7"
+                    />
+                  </svg>
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
+                <span
+                  aria-label="Latitude / Longitude"
+                  class="MuiTypography-root MuiTypography-caption css-287k3z-MuiTypography-root"
+                  style="font-family: monospace; text-align: right; font-size: 0.85rem;"
+                >
+                  40.815536
+                  <br />
+                  -104.745591
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="makeStyles-siteDetailsColumn-173"
+          >
+            <div
+              class="makeStyles-siteDetail-174"
+            >
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+              >
+                State
+              </h6>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+              >
+                Colorado
+              </p>
+            </div>
+            <div
+              class="makeStyles-siteDetail-174"
+            >
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+              >
+                Domain
+              </h6>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+              >
+                D10 - Central Plains
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div
+          class="makeStyles-positionsTitleContainer-177"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+          >
+            Position(s)
+          </h6>
+          <button
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            data-mui-internal-clone-element="true"
+            style="margin-left: 8px;"
+            tabindex="0"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
+            style="margin-left: 32px;"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-x6r74k-MuiButton-startIcon"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                data-testid="TouchAppIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74m9.84 4.63-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74c-3.6-.76-3.54-.75-3.67-.75-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2 0-.62-.38-1.16-.91-1.38"
+                />
+              </svg>
+            </span>
+            Select Positions…
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <div
+          class="makeStyles-positionsCardContainer-178"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-positionCard-179 css-s384l0-MuiPaper-root-MuiCard-root"
+          >
+            <button
+              aria-label="remove position 000.050 from CPER"
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1wx42p0-MuiButtonBase-root-MuiIconButton-root"
+              style="margin-left: 8px; margin-right: 8px;"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+                data-testid="ClearIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                />
+              </svg>
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+            <div
+              style="flex-grow: 1;"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+              >
+                000.050
+              </p>
+            </div>
+          </div>
+          <div
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-positionCard-179 css-s384l0-MuiPaper-root-MuiCard-root"
+          >
+            <button
+              aria-label="remove position 000.040 from CPER"
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1wx42p0-MuiButtonBase-root-MuiIconButton-root"
+              style="margin-left: 8px; margin-right: 8px;"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+                data-testid="ClearIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                />
+              </svg>
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+            <div
+              style="flex-grow: 1;"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+              >
+                000.040
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
 
-exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / gradient) 1`] = `null`;
+exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / gradient) 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-siteCard-150 css-s384l0-MuiPaper-root-MuiCard-root"
+      >
+        <div>
+          <div
+            class="makeStyles-siteTitleContainer-151"
+          >
+            <img
+              alt="Terrestrial Gradient"
+              height="32px"
+              src="svg-file.svg"
+              style="margin-right: 8px; flex-grow: 0;"
+              title="Terrestrial Gradient"
+              width="32px"
+            />
+            <h6
+              class="MuiTypography-root MuiTypography-h6 css-134ad2t-MuiTypography-root"
+              style="line-height: 1.4rem; flex-grow: 1;"
+            >
+              Abby Road (ABBY)
+            </h6>
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
+              style="min-width: 104px; white-space: nowrap;"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-x6r74k-MuiButton-startIcon"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                  data-testid="ClearIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                  />
+                </svg>
+              </span>
+              Remove Site
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+          <div
+            class="makeStyles-siteDetailsRow-152"
+          >
+            <div
+              class="makeStyles-siteDetailsColumn-153"
+            >
+              <div
+                class="makeStyles-siteDetail-154"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                >
+                  Terrestrial Gradient
+                </h6>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+                  style="font-size: 0.8rem;"
+                >
+                  <i>
+                    land-based; gradient location
+                  </i>
+                </p>
+              </div>
+              <div
+                class="makeStyles-siteDetail-154"
+              >
+                <div
+                  class="makeStyles-startFlex-160"
+                  style="align-items: center;"
+                >
+                  <button
+                    aria-label="Latitude / Longitude (click to copy)"
+                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+                    data-mui-internal-clone-element="true"
+                    style="margin-right: 4px;"
+                    tabindex="0"
+                    type="button"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                      data-testid="MyLocationIcon"
+                      focusable="false"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4m8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V1h-2v2.06C6.83 3.52 3.52 6.83 3.06 11H1v2h2.06c.46 4.17 3.77 7.48 7.94 7.94V23h2v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23v-2zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7"
+                      />
+                    </svg>
+                    <span
+                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                    />
+                  </button>
+                  <span
+                    aria-label="Latitude / Longitude"
+                    class="MuiTypography-root MuiTypography-caption css-287k3z-MuiTypography-root"
+                    style="font-family: monospace; text-align: right; font-size: 0.85rem;"
+                  >
+                    45.762439
+                    <br />
+                    -122.330317
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="makeStyles-siteDetailsColumn-153"
+            >
+              <div
+                class="makeStyles-siteDetail-154"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                >
+                  State
+                </h6>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+                >
+                  Washington
+                </p>
+              </div>
+              <div
+                class="makeStyles-siteDetail-154"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                >
+                  Domain
+                </h6>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+                >
+                  D16 - Pacific Northwest
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div
+            class="makeStyles-positionsTitleContainer-157"
+          >
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+            >
+              Position(s)
+            </h6>
+            <button
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+              data-mui-internal-clone-element="true"
+              style="margin-left: 8px;"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
+              style="margin-left: 32px;"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-x6r74k-MuiButton-startIcon"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                  data-testid="TouchAppIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74m9.84 4.63-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74c-3.6-.76-3.54-.75-3.67-.75-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2 0-.62-.38-1.16-.91-1.38"
+                  />
+                </svg>
+              </span>
+              Select Positions…
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+          <div
+            class="makeStyles-positionsCardContainer-158"
+          >
+            <div
+              class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-positionCard-159 css-s384l0-MuiPaper-root-MuiCard-root"
+            >
+              <button
+                aria-label="remove position 000.020 from ABBY"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1wx42p0-MuiButtonBase-root-MuiIconButton-root"
+                style="margin-left: 8px; margin-right: 8px;"
+                tabindex="0"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+                  data-testid="ClearIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                  />
+                </svg>
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </button>
+              <div
+                style="flex-grow: 1;"
+              >
+                <p
+                  class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+                >
+                  000.020
+                </p>
+              </div>
+            </div>
+            <div
+              class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-positionCard-159 css-s384l0-MuiPaper-root-MuiCard-root"
+            >
+              <button
+                aria-label="remove position 000.010 from ABBY"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1wx42p0-MuiButtonBase-root-MuiIconButton-root"
+                style="margin-left: 8px; margin-right: 8px;"
+                tabindex="0"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+                  data-testid="ClearIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                  />
+                </svg>
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </button>
+              <div
+                style="flex-grow: 1;"
+              >
+                <p
+                  class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+                >
+                  000.010
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-siteCard-150 css-s384l0-MuiPaper-root-MuiCard-root"
+    >
+      <div>
+        <div
+          class="makeStyles-siteTitleContainer-151"
+        >
+          <img
+            alt="Terrestrial Gradient"
+            height="32px"
+            src="svg-file.svg"
+            style="margin-right: 8px; flex-grow: 0;"
+            title="Terrestrial Gradient"
+            width="32px"
+          />
+          <h6
+            class="MuiTypography-root MuiTypography-h6 css-134ad2t-MuiTypography-root"
+            style="line-height: 1.4rem; flex-grow: 1;"
+          >
+            Abby Road (ABBY)
+          </h6>
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
+            style="min-width: 104px; white-space: nowrap;"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-x6r74k-MuiButton-startIcon"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                data-testid="ClearIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                />
+              </svg>
+            </span>
+            Remove Site
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <div
+          class="makeStyles-siteDetailsRow-152"
+        >
+          <div
+            class="makeStyles-siteDetailsColumn-153"
+          >
+            <div
+              class="makeStyles-siteDetail-154"
+            >
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+              >
+                Terrestrial Gradient
+              </h6>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+                style="font-size: 0.8rem;"
+              >
+                <i>
+                  land-based; gradient location
+                </i>
+              </p>
+            </div>
+            <div
+              class="makeStyles-siteDetail-154"
+            >
+              <div
+                class="makeStyles-startFlex-160"
+                style="align-items: center;"
+              >
+                <button
+                  aria-label="Latitude / Longitude (click to copy)"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+                  data-mui-internal-clone-element="true"
+                  style="margin-right: 4px;"
+                  tabindex="0"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    data-testid="MyLocationIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4m8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V1h-2v2.06C6.83 3.52 3.52 6.83 3.06 11H1v2h2.06c.46 4.17 3.77 7.48 7.94 7.94V23h2v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23v-2zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7"
+                    />
+                  </svg>
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
+                <span
+                  aria-label="Latitude / Longitude"
+                  class="MuiTypography-root MuiTypography-caption css-287k3z-MuiTypography-root"
+                  style="font-family: monospace; text-align: right; font-size: 0.85rem;"
+                >
+                  45.762439
+                  <br />
+                  -122.330317
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="makeStyles-siteDetailsColumn-153"
+          >
+            <div
+              class="makeStyles-siteDetail-154"
+            >
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+              >
+                State
+              </h6>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+              >
+                Washington
+              </p>
+            </div>
+            <div
+              class="makeStyles-siteDetail-154"
+            >
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+              >
+                Domain
+              </h6>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+              >
+                D16 - Pacific Northwest
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div
+          class="makeStyles-positionsTitleContainer-157"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+          >
+            Position(s)
+          </h6>
+          <button
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            data-mui-internal-clone-element="true"
+            style="margin-left: 8px;"
+            tabindex="0"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-j1wr89-MuiButtonBase-root-MuiButton-root"
+            style="margin-left: 32px;"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-x6r74k-MuiButton-startIcon"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                data-testid="TouchAppIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74m9.84 4.63-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74c-3.6-.76-3.54-.75-3.67-.75-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2 0-.62-.38-1.16-.91-1.38"
+                />
+              </svg>
+            </span>
+            Select Positions…
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <div
+          class="makeStyles-positionsCardContainer-158"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-positionCard-159 css-s384l0-MuiPaper-root-MuiCard-root"
+          >
+            <button
+              aria-label="remove position 000.020 from ABBY"
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1wx42p0-MuiButtonBase-root-MuiIconButton-root"
+              style="margin-left: 8px; margin-right: 8px;"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+                data-testid="ClearIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                />
+              </svg>
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+            <div
+              style="flex-grow: 1;"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+              >
+                000.020
+              </p>
+            </div>
+          </div>
+          <div
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-positionCard-159 css-s384l0-MuiPaper-root-MuiCard-root"
+          >
+            <button
+              aria-label="remove position 000.010 from ABBY"
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1wx42p0-MuiButtonBase-root-MuiIconButton-root"
+              style="margin-left: 8px; margin-right: 8px;"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+                data-testid="ClearIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                />
+              </svg>
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+            <div
+              style="flex-grow: 1;"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+              >
+                000.010
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
 
-exports[`TimeSeriesViewerSites SiteOption Renders as expected without stateCode 1`] = `null`;
+exports[`TimeSeriesViewerSites SiteOption Renders as expected without stateCode 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters Mui-selected MuiMenuItem-root MuiMenuItem-gutters Mui-selected css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
+        id="bar"
+        role="menuitem"
+        style="display: flex; flex-direction: column; align-items: flex-start; cursor: pointer;"
+        tabindex="2"
+      >
+        <div
+          class="makeStyles-startFlex-140"
+        >
+          <img
+            alt="Terrestrial Gradient"
+            height="24px"
+            src="svg-file.svg"
+            style="margin-right: 12px; margin-top: 4px; flex-grow: 0;"
+            title="Terrestrial Gradient"
+            width="24px"
+          />
+          <div
+            style="flex-grow: 1;"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+            >
+              ABBY - Abby Road, WA
+            </p>
+            <p
+              class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom makeStyles-optionSubtitle-128 css-14mry96-MuiTypography-root"
+            >
+              Terrestrial Gradient - Domain D16 (D16 Name) - Lat/Lon: 45.762439, -122.330317
+            </p>
+          </div>
+        </div>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters Mui-selected MuiMenuItem-root MuiMenuItem-gutters Mui-selected css-3ct007-MuiButtonBase-root-MuiMenuItem-root"
+      id="bar"
+      role="menuitem"
+      style="display: flex; flex-direction: column; align-items: flex-start; cursor: pointer;"
+      tabindex="2"
+    >
+      <div
+        class="makeStyles-startFlex-140"
+      >
+        <img
+          alt="Terrestrial Gradient"
+          height="24px"
+          src="svg-file.svg"
+          style="margin-right: 12px; margin-top: 4px; flex-grow: 0;"
+          title="Terrestrial Gradient"
+          width="24px"
+        />
+        <div
+          style="flex-grow: 1;"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+          >
+            ABBY - Abby Road, WA
+          </p>
+          <p
+            class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom makeStyles-optionSubtitle-128 css-14mry96-MuiTypography-root"
+          >
+            Terrestrial Gradient - Domain D16 (D16 Name) - Lat/Lon: 45.762439, -122.330317
+          </p>
+        </div>
+      </div>
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
 
-exports[`TimeSeriesViewerSites SitesControl Renders as expected 1`] = `null`;
+exports[`TimeSeriesViewerSites SitesControl Renders as expected 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
+        data-textfield="bar"
+      >
+        <label
+          class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-240dfl-MuiFormLabel-root-MuiInputLabel-root"
+          data-shrink="false"
+          for="_r_b_"
+          id="_r_b_-label"
+        >
+          Add Sites
+        </label>
+        <div
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd css-unbnby-MuiInputBase-root-MuiOutlinedInput-root"
+        >
+          <div
+            aria-invalid="false"
+            class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd css-7053f3-MuiInputBase-input-MuiOutlinedInput-input"
+            data-inner="foo"
+            id="_r_b_"
+            type="text"
+          >
+            <div>
+              children
+            </div>
+          </div>
+          <div
+            class="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeMedium css-1laqsz7-MuiInputAdornment-root"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-colorDisabled MuiSvgIcon-fontSizeMedium css-1db085k-MuiSvgIcon-root"
+              data-testid="SearchIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"
+              />
+            </svg>
+          </div>
+          <fieldset
+            aria-hidden="true"
+            class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+          >
+            <legend
+              class="css-yjsfm1"
+            >
+              <span>
+                Add Sites
+              </span>
+            </legend>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
+      data-textfield="bar"
+    >
+      <label
+        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-240dfl-MuiFormLabel-root-MuiInputLabel-root"
+        data-shrink="false"
+        for="_r_b_"
+        id="_r_b_-label"
+      >
+        Add Sites
+      </label>
+      <div
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd css-unbnby-MuiInputBase-root-MuiOutlinedInput-root"
+      >
+        <div
+          aria-invalid="false"
+          class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd css-7053f3-MuiInputBase-input-MuiOutlinedInput-input"
+          data-inner="foo"
+          id="_r_b_"
+          type="text"
+        >
+          <div>
+            children
+          </div>
+        </div>
+        <div
+          class="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeMedium css-1laqsz7-MuiInputAdornment-root"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-colorDisabled MuiSvgIcon-fontSizeMedium css-1db085k-MuiSvgIcon-root"
+            data-testid="SearchIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"
+            />
+          </svg>
+        </div>
+        <fieldset
+          aria-hidden="true"
+          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+        >
+          <legend
+            class="css-yjsfm1"
+          >
+            <span>
+              Add Sites
+            </span>
+          </legend>
+        </fieldset>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

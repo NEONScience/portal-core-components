@@ -262,11 +262,11 @@ const AopDataViewer = (inProps) => {
   };
   const getCurrentIframeSrc = () => {
     const { site, year, flight } = currentSelection;
-    if (!site || !year || !flight) { return ''; }
+    if (!site || !year || !flight) { return null; }
     const flightIdx = flight - 1;
-    if (!data[site] || !data[site][year] || !data[site][year][flightIdx]) { return ''; }
+    if (!data[site] || !data[site][year] || !data[site][year][flightIdx]) { return null; }
     const yearData = data[site][year];
-    if (!yearData[flightIdx].month) { return ''; }
+    if (!yearData[flightIdx].month) { return null; }
     const yearFlightMonth = yearData[flightIdx].month;
     const currentDataUrl = data[site][year][flightIdx].url;
     const queryParams = `&dataproduct=${productCode}&site=${site}&month=${year}-${yearFlightMonth}`;

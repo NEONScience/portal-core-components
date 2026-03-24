@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
 import Cookies from 'universal-cookie'; // eslint-disable-line no-unused-vars
 
@@ -34,31 +34,31 @@ describe('NeonPage - BrowserWarning', () => {
     global.navigator.appVersion = 'bar';
   });
   test('renders nothing if browser is not IE', () => {
-    const tree = renderer.create(
+    const tree = render(
       <MockTheme>
         <BrowserWarning />
       </MockTheme>
-    ).toJSON();
+    );
     expect(tree).toMatchSnapshot();
   });
   test('renders nothing if browser is found to be IE but ignore cookie is present', () => {
     global.navigator.userAgent = 'foo MSIE qux';
     mockCookieGet.mockReturnValue(true);
-    const tree = renderer.create(
+    const tree = render(
       <MockTheme>
         <BrowserWarning />
       </MockTheme>
-    ).toJSON();
+    );
     expect(tree).toMatchSnapshot();
   });
   test('renders warning if browser is found to be IE and ignore cookie is not set', () => {
     global.navigator.appVersion = 'bar Trident/qux';
     mockCookieGet.mockReturnValue(false);
-    const tree = renderer.create(
+    const tree = render(
       <MockTheme>
         <BrowserWarning />
       </MockTheme>
-    ).toJSON();
+    );
     expect(tree).toMatchSnapshot();
   });
 });
