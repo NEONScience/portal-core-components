@@ -1,31 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NeonHeader renders fallback with drupalCSSLoaded prop and error NeonContext state 1`] = `
-<header
-  className="makeStyles-unstickyHeader-28 makeStyles-headerContainer-30 makeStyles-headerContainerFallback-29"
-  id="header"
->
-  <div>
-    MOCK-FALLBACK-DRUPAL-HEADER-HTML
-  </div>
-</header>
-`;
+exports[`NeonHeader renders fallback with drupalCSSLoaded prop and error NeonContext state 1`] = `null`;
 
-exports[`NeonHeader renders with drupalCssLoaded prop and success NeonContext state 1`] = `
-<header
-  className="makeStyles-unstickyHeader-38 makeStyles-headerContainer-40"
-  id="header"
->
-  <div>
-    test drupal html
-  </div>
-</header>
-`;
+exports[`NeonHeader renders with drupalCssLoaded prop and success NeonContext state 1`] = `null`;
 
 exports[`NeonHeader renders with drupalCssLoaded prop, success NeonContext state, and core auth 1`] = `
 <header
   className="makeStyles-unstickyHeader-48 makeStyles-headerContainer-50"
   id="header"
+  ref={null}
 >
   <div>
     test drupal html
@@ -33,46 +16,10 @@ exports[`NeonHeader renders with drupalCssLoaded prop, success NeonContext state
 </header>
 `;
 
-exports[`NeonHeader renders with no props and active/fetching NeonContext state 1`] = `
-<header
-  className="makeStyles-unstickyHeader-8 makeStyles-headerContainer-10 makeStyles-headerContainerFallback-9"
-  id="header"
->
-  <div>
-    MOCK-FALLBACK-DRUPAL-HEADER-HTML
-  </div>
-</header>
-`;
+exports[`NeonHeader renders with no props and active/fetching NeonContext state 1`] = `null`;
 
-exports[`NeonHeader renders with no props and error NeonContext state 1`] = `
-<header
-  className="makeStyles-unstickyHeader-13 makeStyles-headerContainer-15 makeStyles-headerContainerFallback-14"
-  id="header"
->
-  <div>
-    MOCK-FALLBACK-DRUPAL-HEADER-HTML
-  </div>
-</header>
-`;
+exports[`NeonHeader renders with no props and error NeonContext state 1`] = `null`;
 
-exports[`NeonHeader renders with no props and inactive NeonContext state 1`] = `
-<header
-  className="makeStyles-unstickyHeader-3 makeStyles-headerContainer-5 makeStyles-headerContainerFallback-4"
-  id="header"
->
-  <div>
-    MOCK-FALLBACK-DRUPAL-HEADER-HTML
-  </div>
-</header>
-`;
+exports[`NeonHeader renders with no props and inactive NeonContext state 1`] = `null`;
 
-exports[`NeonHeader renders with no props and success NeonContext state 1`] = `
-<header
-  className="makeStyles-unstickyHeader-18 makeStyles-headerContainer-20 makeStyles-headerContainerFallback-19"
-  id="header"
->
-  <div>
-    MOCK-FALLBACK-DRUPAL-HEADER-HTML
-  </div>
-</header>
-`;
+exports[`NeonHeader renders with no props and success NeonContext state 1`] = `null`;

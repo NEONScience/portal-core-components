@@ -1,66 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NeonFooter renders fallback with drupalCSSLoaded prop and error NeonContext state 1`] = `
-<footer
-  className="makeStyles-footerContainer-5"
-  id="footer"
->
-  <div>
-    MOCK-FALLBACK-DRUPAL-FOOTER-HTML
-  </div>
-</footer>
-`;
+exports[`NeonFooter renders fallback with drupalCSSLoaded prop and error NeonContext state 1`] = `null`;
 
-exports[`NeonFooter renders with drupalCssLoaded prop and success NeonContext state 1`] = `
-<footer
-  id="footer"
->
-  <div>
-    test drupal html
-  </div>
-</footer>
-`;
+exports[`NeonFooter renders with drupalCssLoaded prop and success NeonContext state 1`] = `null`;
 
-exports[`NeonFooter renders with no props and active/fetching NeonContext state 1`] = `
-<footer
-  className="makeStyles-footerContainer-2"
-  id="footer"
->
-  <div>
-    MOCK-FALLBACK-DRUPAL-FOOTER-HTML
-  </div>
-</footer>
-`;
+exports[`NeonFooter renders with no props and active/fetching NeonContext state 1`] = `null`;
 
-exports[`NeonFooter renders with no props and error NeonContext state 1`] = `
-<footer
-  className="makeStyles-footerContainer-3"
-  id="footer"
->
-  <div>
-    MOCK-FALLBACK-DRUPAL-FOOTER-HTML
-  </div>
-</footer>
-`;
+exports[`NeonFooter renders with no props and error NeonContext state 1`] = `null`;
 
-exports[`NeonFooter renders with no props and inactive NeonContext state 1`] = `
-<footer
-  className="makeStyles-footerContainer-1"
-  id="footer"
->
-  <div>
-    MOCK-FALLBACK-DRUPAL-FOOTER-HTML
-  </div>
-</footer>
-`;
+exports[`NeonFooter renders with no props and inactive NeonContext state 1`] = `null`;
 
-exports[`NeonFooter renders with no props and success NeonContext state 1`] = `
-<footer
-  className="makeStyles-footerContainer-4"
-  id="footer"
->
-  <div>
-    MOCK-FALLBACK-DRUPAL-FOOTER-HTML
-  </div>
-</footer>
-`;
+exports[`NeonFooter renders with no props and success NeonContext state 1`] = `null`;

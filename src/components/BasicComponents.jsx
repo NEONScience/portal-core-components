@@ -593,6 +593,7 @@ export default function BasicComponents() {
           </IconButton>
         </Tooltip>
         <Tooltip
+          /* eslint-disable @next/next/no-html-link-for-pages */
           title={(
             <>
               <div>
@@ -612,6 +613,7 @@ export default function BasicComponents() {
               </div>
             </>
           )}
+          /* eslint-enable @next/next/no-html-link-for-pages */
         >
           <IconButton aria-label="tooltip" size="large">
             <InfoIcon />

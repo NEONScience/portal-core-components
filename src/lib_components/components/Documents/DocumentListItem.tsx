@@ -299,7 +299,7 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
   }: DocumentListItemProps = props;
   const classes = useStyles(Theme);
   const listItemSecondaryActionClasses = useListItemSecondaryActionStyles(Theme);
-  const containerRef: React.MutableRefObject<HTMLDivElement|HTMLAnchorElement|undefined> = useRef();
+  const containerRef: React.RefObject<HTMLDivElement|HTMLAnchorElement|undefined> = useRef(undefined);
   const [
     componentWidth,
     setComponentWidth,

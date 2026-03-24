@@ -77,8 +77,8 @@ const DocumentViewer: React.FC<DocumentViewerProps> = (inProps: DocumentViewerPr
   const isPdfViewerSupported: boolean = DocumentService.isPdfViewerSupported(document);
   const isDocSupported: boolean = isViewerDeviceSupported || isPdfViewerSupported;
 
-  const containerRef: React.MutableRefObject<HTMLDivElement|undefined> = useRef();
-  const iframeRef: React.MutableRefObject<HTMLIFrameElement|undefined> = useRef();
+  const containerRef: React.RefObject<HTMLDivElement|undefined> = useRef(undefined);
+  const iframeRef: React.RefObject<HTMLIFrameElement|undefined> = useRef(undefined);
   const [
     viewerWidth,
     setViewerWidth,

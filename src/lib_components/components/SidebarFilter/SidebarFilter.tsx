@@ -129,7 +129,7 @@ const SidebarFilter: React.FC<SidebarFilterProps> = (props: SidebarFilterProps):
   );
 
   /* eslint-disable react/jsx-one-expression-per-line */
-  const tooltip: React.ReactChild = !isStringNonEmpty(tooltipText)
+  const tooltip: React.ReactNode = !isStringNonEmpty(tooltipText)
     ? (<></>)
     : (
       <div>

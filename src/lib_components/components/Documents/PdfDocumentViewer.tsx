@@ -105,9 +105,9 @@ const PdfDocumentViewer: React.FC<PdfDocumentViewerProps> = (
     : NeonEnvironment.getFullApiPath('documents');
   const dataUrl: string = `${appliedUrlPath}/${document.name}?inline=true&fallback=html`;
 
-  const containerRef: React.MutableRefObject<HTMLDivElement|undefined> = useRef();
-  const pdfContainerRef: React.MutableRefObject<HTMLDivElement|undefined> = useRef();
-  const pdfViewerRef: React.MutableRefObject<PDFViewer|undefined> = useRef();
+  const containerRef: React.RefObject<HTMLDivElement|undefined> = useRef(undefined);
+  const pdfContainerRef: React.RefObject<HTMLDivElement|undefined> = useRef(undefined);
+  const pdfViewerRef: React.RefObject<PDFViewer|undefined> = useRef(undefined);
   const [
     viewerWidth,
     setViewerWidth,

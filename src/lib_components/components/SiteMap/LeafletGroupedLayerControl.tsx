@@ -145,7 +145,7 @@ const LeafletGroupedLayerControl: React.FC<LeafletGroupedLayerControlProps> = (
   const [open, setOpen]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(false);
   const theme: NeonTheme = useTheme();
   const classes: Record<string, SerializedStyles> = useStyles(theme, open);
-  const divRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
+  const divRef: RefObject<HTMLDivElement|null> = useRef<HTMLDivElement>(null);
   const map: L.Map = useMap();
   const isPortalMode: boolean = (renderToLeafletControlContainer === true);
   const controlPositionClass: string = getControlClassFromPosition(position);

@@ -476,7 +476,7 @@ function PositionDetail(inProps) {
   const { siteCode, position, wide } = props;
   const classes = useStyles(Theme);
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
-  const containerRef = useRef();
+  const containerRef = useRef(undefined);
   const [componentWidth, setComponentWidth] = useState(0);
   let atComponentXs = false;
   let atComponentMd = false;

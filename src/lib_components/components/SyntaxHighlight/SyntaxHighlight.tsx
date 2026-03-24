@@ -55,7 +55,7 @@ const SyntaxHighlight: React.FC<SyntaxHighlightProps> = (
     language,
     style,
   }: SyntaxHighlightProps = props;
-  const codeRef: React.MutableRefObject<HTMLElement|undefined> = useRef();
+  const codeRef: React.RefObject<HTMLElement|undefined> = useRef(undefined);
 
   useEffect(() => {
     const element = codeRef.current;
@@ -65,7 +65,7 @@ const SyntaxHighlight: React.FC<SyntaxHighlightProps> = (
 
   return (
     <pre className={classes.root} style={style}>
-      <code ref={codeRef as React.MutableRefObject<HTMLElement>} className={language}>
+      <code ref={codeRef as React.RefObject<HTMLElement>} className={language}>
         {children}
       </code>
     </pre>

@@ -282,7 +282,7 @@ const BasicAvailabilityKey = (inProps) => {
   const appliedAvaStatusType = !exists(availabilityStatusType)
     ? 'available'
     : availabilityStatusType;
-  const containerRef = useRef();
+  const containerRef = useRef(null);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [componentWidth, setComponentWidth] = useState(0);
   let atContainerWidthXsFlexCol = false;

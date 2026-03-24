@@ -24,11 +24,11 @@ declare const sensorPositionV1Schema: z.ZodObject<{
     yAzimuth: z.ZodNullable<z.ZodEffects<z.ZodNullable<z.ZodOptional<z.ZodString>>, number | null | undefined, string | null | undefined>>;
 }, "strip", z.ZodTypeAny, {
     'HOR.VER': string;
-    azimuth?: number | null | undefined;
     name?: string | null | undefined;
     description?: string | null | undefined;
     end?: string | null | undefined;
     start?: string | null | undefined;
+    azimuth?: number | null | undefined;
     referenceName?: string | null | undefined;
     referenceDescription?: string | null | undefined;
     referenceStart?: string | null | undefined;
@@ -47,11 +47,11 @@ declare const sensorPositionV1Schema: z.ZodObject<{
     yAzimuth?: number | null | undefined;
 }, {
     'HOR.VER': string;
-    azimuth?: string | null | undefined;
     name?: string | null | undefined;
     description?: string | null | undefined;
     end?: string | null | undefined;
     start?: string | null | undefined;
+    azimuth?: string | null | undefined;
     referenceName?: string | null | undefined;
     referenceDescription?: string | null | undefined;
     referenceStart?: string | null | undefined;

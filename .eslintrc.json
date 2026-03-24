@@ -7,7 +7,6 @@
     "next",
     "next/core-web-vitals",
     "airbnb",
-    "airbnb/hooks",
     "plugin:jsx-a11y/recommended"
   ],
   "plugins": ["@typescript-eslint", "react", "jsx-a11y"],

@@ -1,10 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TimeSeriesViewerContext Provider renders with productCode prop 1`] = `
-<div>
-  children
-</div>
-`;
+exports[`TimeSeriesViewerContext Provider renders with productCode prop 1`] = `null`;
 
 exports[`TimeSeriesViewerContext Provider renders with productData prop 1`] = `
 <div>
