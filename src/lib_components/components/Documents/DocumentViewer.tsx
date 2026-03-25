@@ -143,7 +143,7 @@ const DocumentViewer: React.FC<DocumentViewerProps> = (
     }
     return (
       <iframe
-        ref={iframeRef as React.MutableRefObject<HTMLIFrameElement>}
+        ref={iframeRef as React.RefObject<HTMLIFrameElement>}
         src={dataUrl}
         aria-label={document.description}
         title={document.description}
@@ -156,7 +156,7 @@ const DocumentViewer: React.FC<DocumentViewerProps> = (
 
   return (
     <div
-      ref={containerRef as React.MutableRefObject<HTMLDivElement>}
+      ref={containerRef as React.RefObject<HTMLDivElement>}
       className={classes.container}
     >
       {renderObject()}

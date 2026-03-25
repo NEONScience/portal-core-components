@@ -21,11 +21,13 @@ import debounce from 'lodash/debounce';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
-import { css, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
+import {
+  makeStyles,
+  createStyles,
+} from '@mui/styles';
 
 import ObservatoryIcon from '@mui/icons-material/Public';
-
-import type { SerializedStyles } from '@emotion/react';
 
 import MarkerIcon2xPng from 'leaflet/dist/images/marker-icon-2x.png';
 import MarkerIconPng from 'leaflet/dist/images/marker-icon.png';
@@ -33,6 +35,7 @@ import MarkerIconShadowPng from 'leaflet/dist/images/marker-shadow.png';
 
 import { NeonTheme } from '@/components/Theme/types';
 import { AnyAction, Nullable, Undef } from '@/types/core';
+import { StylesHook } from '@/types/muiTypes';
 import { exists } from '@/util/typeUtil';
 
 import 'leaflet/dist/leaflet.css';
@@ -41,41 +44,41 @@ const LEAFLET_ATTR_PREFIX = `
 <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>
 `;
 
-const useStyles: (theme: NeonTheme) => Record<string, SerializedStyles> = (
-  theme: NeonTheme,
-): Record<string, SerializedStyles> => ({
-  mapContainer: css({
-    width: '100%',
-    height: '600px',
-  }),
-  mapNavButton: css({
-    backgroundColor: '#fff !important',
-    width: '32px',
-    height: '32px',
-    padding: 'unset',
-    borderRadius: '2px 0px 2px 0px',
-    border: `1px solid ${theme.colors.LIGHT_BLUE[500]}`,
-    '&:hover, &:active': {
-      color: theme.colors.LIGHT_BLUE[400],
-      borderColor: theme.colors.LIGHT_BLUE[400],
-      backgroundColor: theme.palette.grey[50],
+const useStyles: StylesHook = makeStyles((theme: NeonTheme) =>
+  // eslint-disable-next-line implicit-arrow-linebreak
+  createStyles({
+    mapContainer: {
+      width: '100%',
+      height: '600px',
     },
-    '& svg': {
-      fontSize: '1.15rem !important',
-      width: '1.2em',
-      height: '1.2em',
+    mapNavButton: {
+      backgroundColor: '#fff !important',
+      width: '32px',
+      height: '32px',
+      padding: 'unset',
+      borderRadius: '2px 0px 2px 0px',
+      border: `1px solid ${theme.colors.LIGHT_BLUE[500]}`,
+      '&:hover, &:active': {
+        color: theme.colors.LIGHT_BLUE[400],
+        borderColor: theme.colors.LIGHT_BLUE[400],
+        backgroundColor: theme.palette.grey[50],
+      },
+      '& svg': {
+        fontSize: '1.15rem !important',
+        width: '1.2em',
+        height: '1.2em',
+      },
     },
-  }),
-  mapNavButtonContainer: css({
-    position: 'absolute',
-    zIndex: 999,
-    margin: '0px',
-    left: '11px',
-  }),
-  observatoryButton: css({
-    top: '82px',
-  }),
-});
+    mapNavButtonContainer: {
+      position: 'absolute',
+      zIndex: 999,
+      margin: '0px',
+      left: '11px',
+    },
+    observatoryButton: {
+      top: '82px',
+    },
+  })) as StylesHook;
 
 interface BasicLeafletMapState {
   initialZoom: number;
@@ -198,7 +201,7 @@ const LeafletMapManager: React.FC = (): React.JSX.Element => {
   const state: BasicLeafletMapState = useContext(StateContext);
   const dispatch: Dispatch<AnyAction> = useContextDispatch();
   const theme: NeonTheme = useTheme();
-  const classes: Record<string, SerializedStyles> = useStyles(theme);
+  const classes = useStyles(theme);
   const { center }: BasicLeafletMapState = state;
   const map: L.Map = useMapEvents({
     zoomend: (event: L.LeafletEvent): void => {
@@ -245,9 +248,9 @@ const LeafletMapManager: React.FC = (): React.JSX.Element => {
   }, [map]);
   return (
     <Tooltip placement="right" title="Reset Map">
-      <div css={[classes.mapNavButtonContainer, classes.observatoryButton]}>
+      <div className={`${classes.mapNavButtonContainer} ${classes.observatoryButton}`}>
         <IconButton
-          css={classes.mapNavButton}
+          className={classes.mapNavButton}
           type="button"
           size="large"
           onClick={() => {
@@ -265,7 +268,7 @@ const BasicLeafletMap: React.FC = (): React.JSX.Element => {
   const state: BasicLeafletMapState = useContext(StateContext);
   const mapInstanceId = useId();
   const theme: NeonTheme = useTheme();
-  const classes: Record<string, SerializedStyles> = useStyles(theme);
+  const classes = useStyles(theme);
   const {
     initialZoom,
     initialCenter,
@@ -273,7 +276,7 @@ const BasicLeafletMap: React.FC = (): React.JSX.Element => {
     center,
   } = state;
   return (
-    <div css={classes.mapContainer}>
+    <div className={classes.mapContainer}>
       <MapContainer
         id={`sitemap-${mapInstanceId}`}
         center={exists(center) ? center as L.LatLngExpression : initialCenter}
@@ -286,7 +289,7 @@ const BasicLeafletMap: React.FC = (): React.JSX.Element => {
         }}
         worldCopyJump
         dragging
-        // tap={false}
+        tapHold={false}
         boxZoom={false}
         data-component="SiteMap"
         data-selenium="sitemap-content-map"
@@ -301,9 +304,9 @@ const BasicLeafletMap: React.FC = (): React.JSX.Element => {
           position={[40.015, -105.271]}
           icon={new L.Icon({
             ...L.Icon.Default.prototype.options,
-            iconRetinaUrl: MarkerIcon2xPng.src,
-            iconUrl: MarkerIconPng.src,
-            shadowUrl: MarkerIconShadowPng.src,
+            iconRetinaUrl: MarkerIcon2xPng as unknown as string,
+            iconUrl: MarkerIconPng as unknown as string,
+            shadowUrl: MarkerIconShadowPng as unknown as string,
           })}
         >
           <Popup>

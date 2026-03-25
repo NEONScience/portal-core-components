@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import React from 'react';
 import { type ControlOptions } from 'leaflet';
 export interface BaseLayer {

@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import React, {
   useRef,
   useState,
@@ -25,57 +24,58 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import Typography from '@mui/material/Typography';
 
-import { css, useTheme } from '@mui/material/styles';
-import type { SerializedStyles } from '@emotion/react';
+import {
+  makeStyles,
+  createStyles,
+} from '@mui/styles';
+import { useTheme } from '@mui/material/styles';
 
 import { exists } from '../../util/typeUtil';
 import { type NeonTheme } from '../Theme/types';
 
-type StylesHookType = (theme: NeonTheme, open: boolean) => Record<string, SerializedStyles>;
-const useStyles: StylesHookType = (
-  theme: NeonTheme,
-  open: boolean,
-): Record<string, SerializedStyles> => ({
-  leafletControlContainer: css({
-    zIndex: 801,
-    boxShadow: 'unset',
-    margin: '0px !important',
-    left: '8px',
-    top: '8px',
-    fontFamily: theme.typography.fontFamily,
-  }),
-  controlContainer: css({
-    backgroundColor: '#ffffff',
-    cursor: 'default',
-    borderRadius: '2px',
-    display: 'flex',
-    zIndex: 802,
-    border: open
-      ? `1px solid ${theme.palette.grey[300]}`
-      : `1px solid ${(theme as NeonTheme).colors.LIGHT_BLUE[500]}`,
-  }),
-  controlIconContainer: css({
-    width: '36px !important',
-    height: '36px !important',
-  }),
-  controlIcon: css({
-    verticalAlign: 'center',
-  }),
-  controls: css({
-    padding: theme.spacing(2),
-    overflowY: 'auto',
-  }),
-  formGroupControl: css({
-    marginTop: '4px',
-    marginBottom: '0px',
-  }),
-  controlGroupDivider: css({
-    margin: '10px 0px',
-  }),
-  groupTitle: css({
-    fontWeight: 600,
-  }),
-});
+const useStyles = (open: boolean) => makeStyles((theme: NeonTheme) =>
+  // eslint-disable-next-line implicit-arrow-linebreak
+  createStyles({
+    leafletControlContainer: {
+      zIndex: 801,
+      boxShadow: 'unset',
+      margin: '0px !important',
+      left: '8px',
+      top: '8px',
+      fontFamily: theme.typography.fontFamily,
+    },
+    controlContainer: {
+      backgroundColor: '#ffffff',
+      cursor: 'default',
+      borderRadius: '2px',
+      display: 'flex',
+      zIndex: 802,
+      border: open
+        ? `1px solid ${theme.palette.grey[300]}`
+        : `1px solid ${(theme as NeonTheme).colors.LIGHT_BLUE[500]}`,
+    },
+    controlIconContainer: {
+      width: '36px !important',
+      height: '36px !important',
+    },
+    controlIcon: {
+      verticalAlign: 'center',
+    },
+    controls: {
+      padding: theme.spacing(2),
+      overflowY: 'auto',
+    },
+    formGroupControl: {
+      marginTop: '4px',
+      marginBottom: '0px',
+    },
+    controlGroupDivider: {
+      margin: '10px 0px',
+    },
+    groupTitle: {
+      fontWeight: 600,
+    },
+  }));
 
 export interface BaseLayer {
   name: string;
@@ -144,7 +144,7 @@ const LeafletGroupedLayerControl: React.FC<LeafletGroupedLayerControlProps> = (
   } = props;
   const [open, setOpen]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(false);
   const theme: NeonTheme = useTheme();
-  const classes: Record<string, SerializedStyles> = useStyles(theme, open);
+  const classes = useStyles(open)(theme);
   const divRef: RefObject<HTMLDivElement|null> = useRef<HTMLDivElement>(null);
   const map: L.Map = useMap();
   const isPortalMode: boolean = (renderToLeafletControlContainer === true);
@@ -220,14 +220,14 @@ const LeafletGroupedLayerControl: React.FC<LeafletGroupedLayerControlProps> = (
 
   const renderBaseLayerGroup = (): React.JSX.Element => ((
     <div key="baselayer">
-      <Typography key="title-baselayer" css={classes.groupTitle} variant="h6">
+      <Typography key="title-baselayer" className={classes.groupTitle} variant="h6">
         Base Layers
       </Typography>
       <FormControl
         fullWidth
         size="small"
         margin="dense"
-        css={classes.formGroupControl}
+        className={classes.formGroupControl}
       >
         <RadioGroup
           name="baselayer"
@@ -299,7 +299,7 @@ const LeafletGroupedLayerControl: React.FC<LeafletGroupedLayerControlProps> = (
         const renderControlGroup = () => {
           if (!isExclusiveGroup) {
             return (
-              <FormGroup css={classes.formGroupControl}>
+              <FormGroup className={classes.formGroupControl}>
                 {groupElements}
               </FormGroup>
             );
@@ -309,7 +309,7 @@ const LeafletGroupedLayerControl: React.FC<LeafletGroupedLayerControlProps> = (
               fullWidth
               size="small"
               margin="dense"
-              css={classes.formGroupControl}
+              className={classes.formGroupControl}
             >
               <RadioGroup
                 name={groupTitle}
@@ -335,7 +335,7 @@ const LeafletGroupedLayerControl: React.FC<LeafletGroupedLayerControlProps> = (
         };
         return (
           <div key={groupTitle}>
-            <Typography css={classes.groupTitle} variant="h6">
+            <Typography className={classes.groupTitle} variant="h6">
               {groupTitle}
             </Typography>
             {renderControlGroup()}
@@ -345,26 +345,26 @@ const LeafletGroupedLayerControl: React.FC<LeafletGroupedLayerControlProps> = (
     );
     return (
       <>
-        <Divider css={classes.controlGroupDivider} />
+        <Divider className={classes.controlGroupDivider} />
         {renderedGroups}
       </>
     );
   };
   const renderContent = (): React.ReactNode => ((
-    <div className="leaflet-control" css={classes.leafletControlContainer}>
+    <div className={`leaflet-control ${classes.leafletControlContainer}`}>
       <div
         ref={divRef}
-        css={classes.controlContainer}
+        className={classes.controlContainer}
         onMouseEnter={handleMainDivMouseEnter}
         onMouseLeave={handleMainDivMouseLeave}
       >
         {!open ? (
           // eslint-disable-next-line jsx-a11y/anchor-is-valid
-          <Link css={classes.controlIconContainer} component="button">
-            <FontAwesomeIcon css={classes.controlIcon} size="2x" icon={faLayerGroup} />
+          <Link className={classes.controlIconContainer} component="button">
+            <FontAwesomeIcon className={classes.controlIcon} size="2x" icon={faLayerGroup} />
           </Link>
         ) : (
-          <div css={classes.controls}>
+          <div className={classes.controls}>
             {renderBaseLayerGroup()}
             {renderOverlayGroups()}
           </div>
