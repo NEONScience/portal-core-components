@@ -449,7 +449,6 @@ const NeonPage = (inProps) => {
   const sidebarLinksAsStandaloneChildren = hasSidebarLinks && sidebarLinksAsStandaloneChildrenProp
     ? sidebarLinks.every((link) => link.component)
     : false;
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const sidebarHashMap = !hasSidebarLinks ? {} : Object.fromEntries(
     sidebarLinks.map((link, idx) => [link.hash || '#', idx]),
   );
@@ -651,7 +650,7 @@ const NeonPage = (inProps) => {
       undefined,
       true,
     );
-  }, [fetchNotificationsStatus]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [fetchNotificationsStatus]);
 
   /**
      Render functions

@@ -48,7 +48,6 @@ export const buildManifestConfig = (
   return config;
 };
 
-// eslint-disable-next-line no-array-constructor
 export const buildSiteCodesParams = (sites = new Array<string>(), camelCase = false): string => {
   const param = camelCase ? 'siteCode' : 'sitecode';
   return sites.reduce((sitesString, siteCode, index) => (

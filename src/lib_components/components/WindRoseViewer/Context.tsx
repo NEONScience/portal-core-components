@@ -349,6 +349,7 @@ const reducer = (
       return newState;
     case ActionTypes.FETCH_PRODUCT_FAILED:
       (newState.fetchState.product as FetchStatusState).status = AsyncStateType.FAILED;
+      // eslint-disable-next-line max-len
       (newState.fetchState.product as FetchStatusState).error = (action as FetchProductFailedAction).error as any;
       return newState;
     case ActionTypes.FETCH_PRODUCT_SUCCEEDED:
@@ -386,9 +387,11 @@ const reducer = (
         (newState.neonContextState?.data as any).sites,
       );
       newState.monthOptions = getMonthOptions(newState.product, wrfAction.query.sites);
+      // eslint-disable-next-line max-len
       newState.positionOptions = (wrfAction.response as UnknownRecord).positionOptions as PositionDisplayOption[];
       newState.data = {
         ...newState.data,
+        // eslint-disable-next-line max-len
         dailyBins: (wrfAction.response as UnknownRecord).windRoseDailyBins as Record<number, unknown>,
         current: (wrfAction.response as UnknownRecord).currentWindRose as [],
       };
@@ -408,7 +411,9 @@ const reducer = (
         error: wrFailedAction.error as Nullable<string | UnknownRecord>,
       };
       newState.dataStateMessage = null;
+      // eslint-disable-next-line max-len
       newState.siteOptions = getSiteOptions(newState.product, (newState.neonContextState?.data as any).sites);
+      // eslint-disable-next-line max-len
       newState.monthOptions = getMonthOptions(newState.product, wrFailedAction.initAction.query.sites);
       newState.data = {
         ...newState.data,
@@ -457,6 +462,7 @@ const buildFetchProductObservable = (
     buildProductQuery(fetchProductAction.productCode, fetchProductAction.release),
   ) as Observable<AjaxResponse<NeonApiResponse<DataProductResponse>>>;
   return productObs.pipe(
+    // eslint-disable-next-line max-len
     mergeMap((response: AjaxResponse<NeonApiResponse<DataProductResponse>>): Observable<unknown> => {
       if (!verifyProductResponse(response)) {
         return of(ActionCreator.fetchProductFailed('Failed to fetch product'));
@@ -533,6 +539,7 @@ const buildFilesAjaxObservable = (
         dataFilesResponseData,
         dataFilesInfo,
       );
+      // eslint-disable-next-line max-len
       return of(ActionCreator.fetchWindRoseFullfilled(windRoseData, (action as FetchWindRoseAction).query));
     }),
     catchError((error) => {
@@ -571,6 +578,7 @@ const buildDataApiObservable = (
     )),
     catchError((error: Record<string, unknown>): ObservableInput<any> => {
       const response = error && error.xhr ? (error.xhr as XMLHttpRequest).response : null;
+      // eslint-disable-next-line max-len
       return of(ActionCreator.fetchWindRoseFailed(error, response, (action as FetchWindRoseAction)));
     }),
     takeUntilOperator,
@@ -608,7 +616,6 @@ const fetchWindRoseDataEpic: Epic = (action$: Observable<AnyAction>): Observable
 interface ProviderProps {
   productCode: Nullable<string>;
   release: Undef<string>;
-  // eslint-disable-next-line react/require-default-props
   children?: React.ReactNode | React.ReactNode[];
 }
 const providerDefaultProps: ProviderProps = {
@@ -649,7 +656,6 @@ const Provider: React.FC<ProviderProps> = (inProps: ProviderProps): React.JSX.El
     query,
   } = state;
   // Dispatch function enhanced to handle both reducer and action streams
-  // eslint-disable-next-line react/jsx-no-constructed-context-values
   const enhancedDispatch: Dispatch<AnyAction> = useMemo(() => (
     action: AnyAction,
   ): void => {
@@ -682,7 +688,6 @@ const Provider: React.FC<ProviderProps> = (inProps: ProviderProps): React.JSX.El
       cancelProduct$.next();
       cancelWindRose$.next();
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
     if (neonContextIsFinal || neonContextHasError) {

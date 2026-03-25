@@ -240,7 +240,6 @@ import WindRoseViewer from 'portal-core-components/lib/components/WindRoseViewer
         `}
       </CodeBlock>
       <DocBlock>
-        {/* eslint-disable-next-line react/jsx-one-expression-per-line */ }
         Initializing a WindRoseViewer requires only a valid <code>productCode</code> prop.
         The example below wraps a TimeSeriesViewer instance with a data
         product selector to demonstrate how different products perform.

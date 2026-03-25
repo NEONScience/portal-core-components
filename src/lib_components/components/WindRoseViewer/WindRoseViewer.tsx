@@ -332,7 +332,6 @@ const WindRose: React.FC = (): React.JSX.Element => {
 
   useEffect(() => {
     renderWindRoseChart(currentChartData as []);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentChartData]);
 
   const loadingContainerStyle = {

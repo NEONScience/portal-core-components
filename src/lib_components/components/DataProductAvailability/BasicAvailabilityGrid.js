@@ -111,13 +111,11 @@ export default function BasicAvailabilityGrid(config) {
   let rowHoverKey = null;
   let draggingCells = false;
 
-  /* eslint-disable no-unused-vars */
   let dateRangeHoverKey = null;
   const draggingDateRange = [
     { dragging: false, centerDragX: 0 },
     { dragging: false, centerDragX: 0 },
   ];
-  /* eslint-enable no-unused-vars */
 
   /**
      Functions to filter TIME.YEAR_MONTHS and TIME.YEARS to only what's in view

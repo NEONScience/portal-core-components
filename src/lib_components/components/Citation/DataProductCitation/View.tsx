@@ -281,7 +281,6 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     citationItems.map((item: DataProductCitationItem, index: number): React.JSX.Element => (
       <div
         className={classes.itemContainer}
-        // eslint-disable-next-line react/no-array-index-key
         key={`DataProductCitationItemKey-${item.doiUrl || index}`}
       >
         <DataProductCitationItemView

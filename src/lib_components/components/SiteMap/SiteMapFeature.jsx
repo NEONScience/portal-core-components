@@ -455,7 +455,15 @@ const SiteMapFeature = (props) => {
   /**
      Render: a numerical value with units and optional label
   */
-  const renderNumericalValue = (value, label = null, unit = '', precision = 0, aria = null, right = false, parens = false) => { // eslint-disable-line max-len
+  const renderNumericalValue = (
+    value,
+    label = null,
+    unit = '',
+    precision = 0,
+    aria = null,
+    right = false,
+    parens = false,
+  ) => {
     let numberString = Number.isFinite(value) ? `${value.toFixed(precision)}${unit}` : '--';
     if (parens) { numberString = `(${numberString})`; }
     const visibleValue = (
@@ -489,7 +497,6 @@ const SiteMapFeature = (props) => {
     const markerStyle = {};
     if (selectionActive && selectionType === FEATURE_TYPES.SITES.KEY) {
       if (validItems && !validItems.has(siteCode)) {
-        // eslint-disable-next-line max-len
         selectedIcon = (
           <UnselectableIcon
             color="disabled"
@@ -947,10 +954,8 @@ const SiteMapFeature = (props) => {
       ? `add ${thisOne}${selectable} site`
       : `add all ${selectableCount}${selectable} sites`;
     let preposition = 'to';
-    /* eslint-disable max-len */
     let snackbarClass = classes[selectableCount ? 'addToSelectionSnackbar' : 'unselectableSnackbar'];
     let snackbarIconClass = classes[selectableCount ? 'addToSelectionSnackbarIcon' : 'unselectableSnackbarIcon'];
-    /* eslint-enable max-len */
     let actionText = `No sites in this ${FEATURES[boundaryFeatureKey].nameSingular} are selectable`;
     if (selectableCount) {
       if (selectionPortion === SELECTION_PORTIONS.PARTIAL) {

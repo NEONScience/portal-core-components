@@ -106,7 +106,6 @@ export const getApiDataQueryParams = (action) => {
     });
     if (availableMonths.indexOf(queryParams.month) < 0) {
       queryParams.month = availableMonths[availableMonths.length - 1];
-      // eslint-disable-next-line no-param-reassign
       query.months[0] = queryParams.month;
     }
     // Add back to the query if defaulting
@@ -138,7 +137,6 @@ export const getApiDataQueryParams = (action) => {
     });
     if (availableMonths.indexOf(queryParams.month) < 0) {
       queryParams.month = availableMonths[availableMonths.length - 1];
-      // eslint-disable-next-line no-param-reassign
       query.months[0] = queryParams.month;
     }
   }
@@ -292,6 +290,7 @@ export const tryFindActiveFiles = (files, query, fileResolutionMatchers) => {
             && ((fileNameInfo.temporalIndex === matcher.tmi)
               || (fileNameInfo.tableName.indexOf(matcher.fileName) > -1))
             && (((query.positions === null) || (query.positions.length <= 0))
+                // eslint-disable-next-line max-len
                 || containsPosition(query.positions, fileNameInfo.horizontalSI, fileNameInfo.verticalSI))) {
           // If no SI were specified, only work from first identified
           if ((query.positions === null) || (query.positions.length <= 0)) {

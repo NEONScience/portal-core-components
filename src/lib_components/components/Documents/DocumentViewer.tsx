@@ -60,7 +60,9 @@ const defaultProps = {
   fullUrlPath: undefined,
 };
 
-const DocumentViewer: React.FC<DocumentViewerProps> = (inProps: DocumentViewerProps): React.JSX.Element => {
+const DocumentViewer: React.FC<DocumentViewerProps> = (
+  inProps: DocumentViewerProps,
+): React.JSX.Element => {
   const props = resolveProps(defaultProps, inProps) as DocumentViewerProps;
   const classes = useStyles(Theme);
   const {

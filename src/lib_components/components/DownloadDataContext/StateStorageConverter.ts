@@ -39,5 +39,4 @@ const convertAOPInitialState = (state: any, propsState: any): any => {
   };
 };
 
-// eslint-disable-next-line import/prefer-default-export
 export { convertStateForStorage, convertAOPInitialState };

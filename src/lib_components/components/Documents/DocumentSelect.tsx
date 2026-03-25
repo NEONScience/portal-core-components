@@ -41,7 +41,9 @@ export interface DocumentSelectProps {
   documents: NeonDocument[];
 }
 
-const DocumentSelect: React.FC<DocumentSelectProps> = (props: DocumentSelectProps): React.JSX.Element => {
+const DocumentSelect: React.FC<DocumentSelectProps> = (
+  props: DocumentSelectProps,
+): React.JSX.Element => {
   const classes = useStyles(Theme);
   const { documents }: DocumentSelectProps = props;
 

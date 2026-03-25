@@ -1,5 +1,4 @@
 /* eslint-disable class-methods-use-this */
-/* eslint-disable arrow-parens */
 
 import { Reducer } from 'redux';
 

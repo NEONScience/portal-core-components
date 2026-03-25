@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid, react/no-unescaped-entities, max-len */
+/* eslint-disable react/no-unescaped-entities */
 
 import React, { useState } from 'react';
 

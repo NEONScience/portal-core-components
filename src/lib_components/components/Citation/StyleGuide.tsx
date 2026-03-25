@@ -235,7 +235,6 @@ const DataProductCitationDemo = (): React.JSX.Element => {
   if (exists(appliedItem)) {
     appliedCitationReleaseObject = (appliedItem as DataProductCitationItem).releaseObject;
   }
-  // eslint-disable-next-line max-len
   const citationDispatch = DataProductCitationContext.useDataProductCitationContextDispatch() as Dispatch<any>;
   const fetchAllProducts$ = (NeonGraphQL.getAllDataProducts() as Observable<AjaxResponse<unknown>>)
     .pipe(

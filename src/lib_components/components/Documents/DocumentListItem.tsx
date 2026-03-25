@@ -299,6 +299,7 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
   }: DocumentListItemProps = props;
   const classes = useStyles(Theme);
   const listItemSecondaryActionClasses = useListItemSecondaryActionStyles(Theme);
+  // eslint-disable-next-line max-len
   const containerRef: React.RefObject<HTMLDivElement|HTMLAnchorElement|undefined> = useRef(undefined);
   const [
     componentWidth,

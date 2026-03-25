@@ -82,12 +82,10 @@ export default function ExternalHostProductSpecificLinks(inProps) {
   const renderLinksBySite = () => {
     if (typeof externalHost.getSiteLink !== 'function') { return null; }
     // What sites are available? If a list was not provided then show them all.
-    // eslint-disable-next-line react/prop-types
     const filterByAvailability = Array.isArray(siteCodes) && siteCodes.length;
     let availableSites = allSites;
     if (filterByAvailability) {
       availableSites = Object.fromEntries(
-        // eslint-disable-next-line react/prop-types
         siteCodes.map((siteCode) => [siteCode, allSites[siteCode]]),
       );
     }
@@ -129,7 +127,6 @@ export default function ExternalHostProductSpecificLinks(inProps) {
           .sort()
           .map((stateName) => {
             const links = sitesByStateName[stateName]
-              // eslint-disable-next-line react/prop-types
               .filter((siteCode) => !filterByAvailability || siteCodes.includes(siteCode))
               .map((siteCode) => (
                 { siteCode, link: externalHost.getSiteLink(allSites, siteCode, productCode) }

@@ -198,7 +198,6 @@ const factory = {
   ): RxStomp => {
     const client: RxStomp = new RxStomp();
     client.configure(config);
-    // eslint-disable-next-line no-unused-vars
     client.connected$.subscribe((state: RxStompState) => {
       dispatch({ type: 'setAuthWsConnected', isAuthWsConnected: true });
       if (onConnectCbs) {

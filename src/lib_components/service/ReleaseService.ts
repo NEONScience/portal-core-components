@@ -86,9 +86,7 @@ const ReleaseService: IReleaseService = {
     return exists(matches) && ((matches as RegExpExecArray).length > 0);
   },
   isNonRelease: (releaseTag: string): boolean => {
-    // eslint-disable-next-line prefer-regex-literals
     const regexLatestProv: RegExp = new RegExp(`^${LATEST_AND_PROVISIONAL}$`, 'i');
-    // eslint-disable-next-line prefer-regex-literals
     const regexProv: RegExp = new RegExp(`^${PROVISIONAL_RELEASE}$`, 'i');
     const matchesLatestProv: RegExpExecArray|null = regexLatestProv.exec(releaseTag);
     const matchesProv: RegExpExecArray|null = regexProv.exec(releaseTag);
@@ -102,7 +100,6 @@ const ReleaseService: IReleaseService = {
     if (!isStringNonEmpty(releaseTag)) {
       return true;
     }
-    // eslint-disable-next-line prefer-regex-literals
     const regexProv: RegExp = new RegExp(`^${PROVISIONAL_RELEASE}$`, 'i');
     const matchesProv: RegExpExecArray|null = regexProv.exec(releaseTag);
     return exists(matchesProv) && ((matchesProv as RegExpExecArray).length > 0);

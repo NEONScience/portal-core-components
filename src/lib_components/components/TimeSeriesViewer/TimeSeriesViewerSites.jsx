@@ -1380,7 +1380,10 @@ export default function TimeSeriesViewerSites(props) {
   const selectedItems = state.selection.sites.map((site) => site.siteCode);
   const numPoints = TimeSeriesViewerContext.calcPredictedPointsForNewPosition(state);
   const isDisabled = numPoints > POINTS_PERFORMANCE_LIMIT;
-  const upperLimit = Math.min(calcUpperSelectionLimit() + selectedItems.length, MAX_NUM_SITES_SELECTABLE);
+  const upperLimit = Math.min(
+    calcUpperSelectionLimit() + selectedItems.length,
+    MAX_NUM_SITES_SELECTABLE,
+  );
 
   return (
     <div className={classes.root}>

@@ -270,12 +270,10 @@ import ReleaseChip from 'portal-core-components/lib/components/Chip/ReleaseChip'
               marginBottom: Theme.spacing(2),
             }}
             tooltipTitle={(
-              /* eslint-disable react/jsx-one-expression-per-line */
               <span>
                 Availability and metadata shown is for
                 the <b>RELEASE-2023</b> release of this product
               </span>
-              /* eslint-enable react/jsx-one-expression-per-line */
             )}
           />
           <ReleaseChip
@@ -285,12 +283,10 @@ import ReleaseChip from 'portal-core-components/lib/components/Chip/ReleaseChip'
               icon: classes.releaseChipIcon,
             }}
             tooltipTitle={(
-              /* eslint-disable react/jsx-one-expression-per-line */
               <span>
                 Availability and metadata shown is for
                 the <b>RELEASE-2023</b> release of this product
               </span>
-              /* eslint-enable react/jsx-one-expression-per-line */
             )}
           />
           <ReleaseChip
@@ -300,12 +296,10 @@ import ReleaseChip from 'portal-core-components/lib/components/Chip/ReleaseChip'
               icon: classes.releaseChipBlueIcon,
             }}
             tooltipTitle={(
-              /* eslint-disable react/jsx-one-expression-per-line */
               <span>
                 Availability and metadata shown is for
                 the <b>RELEASE-2023</b> release of this product
               </span>
-              /* eslint-enable react/jsx-one-expression-per-line */
             )}
           />
           <ReleaseChip
@@ -315,12 +309,10 @@ import ReleaseChip from 'portal-core-components/lib/components/Chip/ReleaseChip'
               icon: classes.releaseChipGreenIcon,
             }}
             tooltipTitle={(
-              /* eslint-disable react/jsx-one-expression-per-line */
               <span>
                 Availability and metadata shown is for
                 the <b>RELEASE-2023</b> release of this product
               </span>
-              /* eslint-enable react/jsx-one-expression-per-line */
             )}
           />
           <ReleaseChip
@@ -330,12 +322,10 @@ import ReleaseChip from 'portal-core-components/lib/components/Chip/ReleaseChip'
               icon: classes.releaseChipGoldIcon,
             }}
             tooltipTitle={(
-              /* eslint-disable react/jsx-one-expression-per-line */
               <span>
                 Availability and metadata shown is for
                 the <b>RELEASE-2023</b> release of this product
               </span>
-              /* eslint-enable react/jsx-one-expression-per-line */
             )}
           />
         </Paper>
@@ -350,12 +340,10 @@ import ReleaseChip from 'portal-core-components/lib/components/Chip/ReleaseChip'
               icon: classes.releaseIconDefaultDark,
             }}
             tooltipTitle={(
-              /* eslint-disable react/jsx-one-expression-per-line */
               <span>
                 Availability and metadata shown is for
                 the <b>RELEASE-2023</b> release of this product
               </span>
-              /* eslint-enable react/jsx-one-expression-per-line */
             )}
           />
           <ReleaseChip
@@ -365,12 +353,10 @@ import ReleaseChip from 'portal-core-components/lib/components/Chip/ReleaseChip'
               icon: classes.releaseChipBrownDarkIcon,
             }}
             tooltipTitle={(
-              /* eslint-disable react/jsx-one-expression-per-line */
               <span>
                 Availability and metadata shown is for
                 the <b>RELEASE-2023</b> release of this product
               </span>
-              /* eslint-enable react/jsx-one-expression-per-line */
             )}
           />
           <ReleaseChip
@@ -380,12 +366,10 @@ import ReleaseChip from 'portal-core-components/lib/components/Chip/ReleaseChip'
               icon: classes.releaseChipBlueDarkIcon,
             }}
             tooltipTitle={(
-              /* eslint-disable react/jsx-one-expression-per-line */
               <span>
                 Availability and metadata shown is for
                 the <b>RELEASE-2023</b> release of this product
               </span>
-              /* eslint-enable react/jsx-one-expression-per-line */
             )}
           />
           <ReleaseChip
@@ -395,12 +379,10 @@ import ReleaseChip from 'portal-core-components/lib/components/Chip/ReleaseChip'
               icon: classes.releaseChipGreenDarkIcon,
             }}
             tooltipTitle={(
-              /* eslint-disable react/jsx-one-expression-per-line */
               <span>
                 Availability and metadata shown is for
                 the <b>RELEASE-2023</b> release of this product
               </span>
-              /* eslint-enable react/jsx-one-expression-per-line */
             )}
           />
           <ReleaseChip
@@ -410,12 +392,10 @@ import ReleaseChip from 'portal-core-components/lib/components/Chip/ReleaseChip'
               icon: classes.releaseChipGoldDarkIcon,
             }}
             tooltipTitle={(
-              /* eslint-disable react/jsx-one-expression-per-line */
               <span>
                 Availability and metadata shown is for
                 the <b>RELEASE-2023</b> release of this product
               </span>
-              /* eslint-enable react/jsx-one-expression-per-line */
             )}
           />
         </Paper>
@@ -430,12 +410,10 @@ import ReleaseChip from 'portal-core-components/lib/components/Chip/ReleaseChip'
               icon: classes.releaseIconDefaultDarkContrast,
             }}
             tooltipTitle={(
-              /* eslint-disable react/jsx-one-expression-per-line */
               <span>
                 Availability and metadata shown is for
                 the <b>RELEASE-2023</b> release of this product
               </span>
-              /* eslint-enable react/jsx-one-expression-per-line */
             )}
           />
           <ReleaseChip
@@ -445,12 +423,10 @@ import ReleaseChip from 'portal-core-components/lib/components/Chip/ReleaseChip'
               icon: classes.releaseChipBrownDarkContrastIcon,
             }}
             tooltipTitle={(
-              /* eslint-disable react/jsx-one-expression-per-line */
               <span>
                 Availability and metadata shown is for
                 the <b>RELEASE-2023</b> release of this product
               </span>
-              /* eslint-enable react/jsx-one-expression-per-line */
             )}
           />
           <ReleaseChip
@@ -460,12 +436,10 @@ import ReleaseChip from 'portal-core-components/lib/components/Chip/ReleaseChip'
               icon: classes.releaseChipBlueDarkContrastIcon,
             }}
             tooltipTitle={(
-              /* eslint-disable react/jsx-one-expression-per-line */
               <span>
                 Availability and metadata shown is for
                 the <b>RELEASE-2023</b> release of this product
               </span>
-              /* eslint-enable react/jsx-one-expression-per-line */
             )}
           />
           <ReleaseChip
@@ -475,12 +449,10 @@ import ReleaseChip from 'portal-core-components/lib/components/Chip/ReleaseChip'
               icon: classes.releaseChipGreenDarkContrastIcon,
             }}
             tooltipTitle={(
-              /* eslint-disable react/jsx-one-expression-per-line */
               <span>
                 Availability and metadata shown is for
                 the <b>RELEASE-2023</b> release of this product
               </span>
-              /* eslint-enable react/jsx-one-expression-per-line */
             )}
           />
           <ReleaseChip
@@ -490,12 +462,10 @@ import ReleaseChip from 'portal-core-components/lib/components/Chip/ReleaseChip'
               icon: classes.releaseChipGoldDarkContrastIcon,
             }}
             tooltipTitle={(
-              /* eslint-disable react/jsx-one-expression-per-line */
               <span>
                 Availability and metadata shown is for
                 the <b>RELEASE-2023</b> release of this product
               </span>
-              /* eslint-enable react/jsx-one-expression-per-line */
             )}
           />
         </Paper>

@@ -13,7 +13,10 @@ export interface IBundleContentBuilder {
 
   getBundledLink: () => React.JSX.Element;
 
-  buildManyParentsMainContent: (dataProducts: IDataProductLike[], release?: string) => React.JSX.Element;
+  buildManyParentsMainContent: (
+    dataProducts: IDataProductLike[],
+    release?: string,
+  ) => React.JSX.Element;
 
   buildDefaultTitleContent: (dataProduct: IDataProductLike, release?: string) => React.JSX.Element;
 
@@ -67,7 +70,10 @@ const BundleContentBuilder: IBundleContentBuilder = {
     </ul>
   )),
 
-  buildDefaultTitleContent: (dataProduct: IDataProductLike, release?: string): React.JSX.Element => {
+  buildDefaultTitleContent: (
+    dataProduct: IDataProductLike,
+    release?: string,
+  ): React.JSX.Element => {
     const isRelease = isStringNonEmpty(release) && (release !== LATEST_AND_PROVISIONAL);
     const bundleParentLink: React.JSX.Element = BundleContentBuilder.getParentProductLink(
       dataProduct,

@@ -1,5 +1,4 @@
 /* eslint-disable react/jsx-no-useless-fragment */
-/* eslint-disable react/require-default-props */
 import React, { useId } from 'react';
 
 import IconButton from '@mui/material/IconButton';
@@ -90,7 +89,9 @@ export interface SidebarFilterProps {
   helperText?: string;
 }
 
-const SidebarFilter: React.FC<SidebarFilterProps> = (props: SidebarFilterProps): React.JSX.Element => {
+const SidebarFilter: React.FC<SidebarFilterProps> = (
+  props: SidebarFilterProps,
+): React.JSX.Element => {
   const classes = useStyles(Theme);
   const {
     title,
@@ -128,7 +129,6 @@ const SidebarFilter: React.FC<SidebarFilterProps> = (props: SidebarFilterProps):
     />
   );
 
-  /* eslint-disable react/jsx-one-expression-per-line */
   const tooltip: React.ReactNode = !isStringNonEmpty(tooltipText)
     ? (<></>)
     : (
@@ -136,7 +136,6 @@ const SidebarFilter: React.FC<SidebarFilterProps> = (props: SidebarFilterProps):
         {tooltipText}
       </div>
     );
-  /* eslint-enable react/jsx-one-expression-per-line */
   const titleNode = !title ? null : (
     <div className={classes.titleContainer}>
       <Typography variant="h5" component="h3" className={classes.title} id={labelId}>

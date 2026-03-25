@@ -105,7 +105,7 @@ const propRows = [
 
 export default function StyleGuide() {
   const classes = useStyles(Theme);
-  /* eslint-disable jsx-a11y/anchor-is-valid, react/jsx-one-expression-per-line */
+  /* eslint-disable jsx-a11y/anchor-is-valid */
   const link = (
     <Link href="#">
       Insert Link Here
@@ -123,7 +123,7 @@ Lorem in proin in nunc in cras et gravida. Urna congue neque risus risus a
 lectus veneatis sed gravida volutpat viverra. Aenean sem tellus at proin dictum
 scelerisque metus. Sit sit tellus risus diam ultrices amet tortor molestie scelerisque.
   `;
-  /* eslint-enable jsx-a11y/anchor-is-valid, react/jsx-one-expression-per-line */
+  /* eslint-enable jsx-a11y/anchor-is-valid */
   return (
     <>
       <DocBlock>

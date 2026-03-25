@@ -368,10 +368,10 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                         </div>
                         <fieldset
                           aria-hidden="true"
-                          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+                          class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
                         >
                           <legend
-                            class="css-14lo706"
+                            class="css-sl37lx-MuiNotchedOutlined-root"
                           >
                             <span>
                               Start
@@ -435,10 +435,10 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                         </div>
                         <fieldset
                           aria-hidden="true"
-                          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+                          class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
                         >
                           <legend
-                            class="css-14lo706"
+                            class="css-sl37lx-MuiNotchedOutlined-root"
                           >
                             <span>
                               End
@@ -1240,10 +1240,10 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                       </div>
                       <fieldset
                         aria-hidden="true"
-                        class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+                        class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
                       >
                         <legend
-                          class="css-14lo706"
+                          class="css-sl37lx-MuiNotchedOutlined-root"
                         >
                           <span>
                             Start
@@ -1307,10 +1307,10 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                       </div>
                       <fieldset
                         aria-hidden="true"
-                        class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+                        class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
                       >
                         <legend
-                          class="css-14lo706"
+                          class="css-sl37lx-MuiNotchedOutlined-root"
                         >
                           <span>
                             End
@@ -2169,10 +2169,10 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                         </div>
                         <fieldset
                           aria-hidden="true"
-                          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+                          class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
                         >
                           <legend
-                            class="css-14lo706"
+                            class="css-sl37lx-MuiNotchedOutlined-root"
                           >
                             <span>
                               Start
@@ -2236,10 +2236,10 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                         </div>
                         <fieldset
                           aria-hidden="true"
-                          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+                          class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
                         >
                           <legend
-                            class="css-14lo706"
+                            class="css-sl37lx-MuiNotchedOutlined-root"
                           >
                             <span>
                               End
@@ -3041,10 +3041,10 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                       </div>
                       <fieldset
                         aria-hidden="true"
-                        class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+                        class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
                       >
                         <legend
-                          class="css-14lo706"
+                          class="css-sl37lx-MuiNotchedOutlined-root"
                         >
                           <span>
                             Start
@@ -3108,10 +3108,10 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                       </div>
                       <fieldset
                         aria-hidden="true"
-                        class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+                        class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
                       >
                         <legend
-                          class="css-14lo706"
+                          class="css-sl37lx-MuiNotchedOutlined-root"
                         >
                           <span>
                             End
@@ -4877,10 +4877,10 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                         </div>
                         <fieldset
                           aria-hidden="true"
-                          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+                          class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
                         >
                           <legend
-                            class="css-14lo706"
+                            class="css-sl37lx-MuiNotchedOutlined-root"
                           >
                             <span>
                               Start
@@ -4944,10 +4944,10 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                         </div>
                         <fieldset
                           aria-hidden="true"
-                          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+                          class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
                         >
                           <legend
-                            class="css-14lo706"
+                            class="css-sl37lx-MuiNotchedOutlined-root"
                           >
                             <span>
                               End
@@ -5749,10 +5749,10 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                       </div>
                       <fieldset
                         aria-hidden="true"
-                        class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+                        class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
                       >
                         <legend
-                          class="css-14lo706"
+                          class="css-sl37lx-MuiNotchedOutlined-root"
                         >
                           <span>
                             Start
@@ -5816,10 +5816,10 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                       </div>
                       <fieldset
                         aria-hidden="true"
-                        class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+                        class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
                       >
                         <legend
-                          class="css-14lo706"
+                          class="css-sl37lx-MuiNotchedOutlined-root"
                         >
                           <span>
                             End
@@ -6678,10 +6678,10 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                         </div>
                         <fieldset
                           aria-hidden="true"
-                          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+                          class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
                         >
                           <legend
-                            class="css-14lo706"
+                            class="css-sl37lx-MuiNotchedOutlined-root"
                           >
                             <span>
                               Start
@@ -6745,10 +6745,10 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                         </div>
                         <fieldset
                           aria-hidden="true"
-                          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+                          class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
                         >
                           <legend
-                            class="css-14lo706"
+                            class="css-sl37lx-MuiNotchedOutlined-root"
                           >
                             <span>
                               End
@@ -7536,10 +7536,10 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                       </div>
                       <fieldset
                         aria-hidden="true"
-                        class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+                        class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
                       >
                         <legend
-                          class="css-14lo706"
+                          class="css-sl37lx-MuiNotchedOutlined-root"
                         >
                           <span>
                             Start
@@ -7603,10 +7603,10 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                       </div>
                       <fieldset
                         aria-hidden="true"
-                        class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+                        class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
                       >
                         <legend
-                          class="css-14lo706"
+                          class="css-sl37lx-MuiNotchedOutlined-root"
                         >
                           <span>
                             End

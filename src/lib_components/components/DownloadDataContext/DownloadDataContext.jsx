@@ -1,5 +1,3 @@
-/* eslint-disable max-len, no-unused-vars */
-
 import React, {
   createContext,
   useContext,
@@ -456,6 +454,7 @@ const getInitialStateFromProps = (props) => {
   if (externalHost) {
     fromExternalHost = true;
     const allowNoAvailability = (externalHostProduct.allowNoAvailability === true);
+    // eslint-disable-next-line max-len
     const useExternalExclusiveData = (externalHost.hostType === ExternalHost.HOST_TYPES.EXCLUSIVE_DATA)
       || (allowNoAvailability && !existsNonEmpty(productData.siteCodes));
     if (useExternalExclusiveData) {
@@ -633,6 +632,7 @@ const getAndValidateNewS3FilesState = (previousState, action, broadcast = false)
         });
       }
       newState.s3Files.validValues.forEach((file, idx) => {
+        // eslint-disable-next-line max-len
         newState.s3Files.validValues[idx].tableData.checked = newState.s3Files.valueMap[file.url] || false;
       });
       break;
@@ -1186,7 +1186,6 @@ const Provider = (inProps) => {
 
   // Create an observable for manifests requests and subscribe to it to execute
   // the manifest fetch and dispatch results when updated.
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const manifestRequest$ = new Subject();
   manifestRequest$.subscribe((request) => (
     getManifestAjaxObservable(request)

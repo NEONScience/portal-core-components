@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid, max-len */
-
 import React, { useEffect, useState } from 'react';
 
 import { makeStyles } from '@mui/styles';

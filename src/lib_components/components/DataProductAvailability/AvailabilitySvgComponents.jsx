@@ -1,5 +1,3 @@
-/* eslint-disable import/prefer-default-export, max-len */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -29,7 +27,13 @@ const DiagLinesPattern = (inProps) => {
       patternTransform="rotate(45)"
     >
       <rect x={0} y={0} width={width} height={(height / 2) - 0.25} fill={color} />
-      <rect x={0} y={(height / 2) - 0.25} width={width} height={(height / 2) + 0.25} fill={secondaryColor} />
+      <rect
+        x={0}
+        y={(height / 2) - 0.25}
+        width={width}
+        height={(height / 2) + 0.25}
+        fill={secondaryColor}
+      />
     </pattern>
   );
 };

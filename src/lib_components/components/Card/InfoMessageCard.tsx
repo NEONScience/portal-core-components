@@ -1,4 +1,3 @@
-/* eslint-disable react/require-default-props */
 import React from 'react';
 
 import {
@@ -41,7 +40,9 @@ export type InfoMessageCardProps = BaseInfoMessageCardProps & {
   classes?: InfoMessageCardClasses;
 };
 
-const InfoCard: React.FC<InfoMessageCardProps> = (props: InfoMessageCardProps): React.JSX.Element => {
+const InfoCard: React.FC<InfoMessageCardProps> = (
+  props: InfoMessageCardProps,
+): React.JSX.Element => {
   const classes = useStyles(Theme);
   const { classes: messageCardClasses }: InfoMessageCardProps = props;
   const injectedCard: string|undefined = messageCardClasses

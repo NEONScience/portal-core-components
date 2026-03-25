@@ -1,4 +1,4 @@
-/* eslint-disable dot-notation, wrap-iife, arrow-body-style, func-names */
+/* eslint-disable dot-notation, wrap-iife, func-names */
 // @ts-nocheck
 
 const isSafariStore: boolean = /constructor/i.test(window.HTMLElement)

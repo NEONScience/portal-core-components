@@ -19,7 +19,6 @@ import Theme from '../Theme/Theme';
 import { StringPropsObject, StylesHook } from '../../types/core';
 import { exists } from '../../util/typeUtil';
 
-// eslint-disable-next-line no-unused-vars
 const useStyles: StylesHook = makeStyles((theme: MuiThemeType) =>
   // eslint-disable-next-line implicit-arrow-linebreak
   createStyles({
@@ -110,7 +109,6 @@ export interface UserCardProps {
   email: string;
   fullName: string;
   providers: string;
-  // eslint-disable-next-line react/require-default-props
   lastLogin?: string;
 }
 

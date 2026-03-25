@@ -210,6 +210,7 @@ const NeonEnvironment: INeonEnvironment = {
   getDataProductTaxonTypesPath: (): string => `${NeonEnvironment.getFullApiPath('taxonomy')}/types`,
   getTaxonTypeDataProductsPath: (): string => `${NeonEnvironment.getFullApiPath('taxonomy')}/products`,
 
+  // eslint-disable-next-line max-len
   getVisusProductsBaseUrl: (): Undef<string> => process.env.NEXT_PUBLIC_NEON_VISUS_PRODUCTS_BASE_URL,
   getVisusIframeBaseUrl: (): Undef<string> => process.env.NEXT_PUBLIC_NEON_VISUS_IFRAME_BASE_URL,
 

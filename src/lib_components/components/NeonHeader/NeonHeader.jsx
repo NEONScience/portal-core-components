@@ -385,7 +385,7 @@ const NeonHeader = forwardRef((inProps, headerRef) => {
   useLayoutEffect(() => {
     if (!NeonEnvironment.fetchDrupalAssets) {
       (async () => {
-        // eslint-disable-next-line no-unused-expressions, import/extensions
+        // eslint-disable-next-line import/extensions
         await import('../../remoteAssets/drupal-header.js');
         setHeaderJsStatus(FETCH_STATUS.SUCCESS);
       })();
@@ -404,7 +404,7 @@ const NeonHeader = forwardRef((inProps, headerRef) => {
     script.onerror = () => {
       (async () => {
         script.remove();
-        // eslint-disable-next-line no-unused-expressions, import/extensions
+        // eslint-disable-next-line import/extensions
         await import('../../remoteAssets/drupal-header.js');
         setHeaderJsStatus(FETCH_STATUS.SUCCESS);
       })();

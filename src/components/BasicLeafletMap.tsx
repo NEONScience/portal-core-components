@@ -167,7 +167,6 @@ const reducer = (
 };
 
 interface ProviderProps {
-  // eslint-disable-next-line react/require-default-props
   children?: React.ReactNode | React.ReactNode[];
 }
 const providerDefaultProps: ProviderProps = {
@@ -287,7 +286,7 @@ const BasicLeafletMap: React.FC = (): React.JSX.Element => {
         }}
         worldCopyJump
         dragging
-        tap={false}
+        // tap={false}
         boxZoom={false}
         data-component="SiteMap"
         data-selenium="sitemap-content-map"

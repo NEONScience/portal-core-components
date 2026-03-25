@@ -373,7 +373,17 @@ export namespace LOCATION_ICON_SVG_SHAPES {
         let iconAnchor: number[];
         let popupAnchor: number[];
         let shadow: {
-            [x: string]: {
+            [HIGHLIGHT_STATUS.NONE]: {
+                svg: any;
+                size: number[];
+                anchor: number[];
+            };
+            [HIGHLIGHT_STATUS.HIGHLIGHT]: {
+                svg: any;
+                size: number[];
+                anchor: number[];
+            };
+            [HIGHLIGHT_STATUS.SELECT]: {
                 svg: any;
                 size: number[];
                 anchor: number[];
@@ -390,7 +400,17 @@ export namespace LOCATION_ICON_SVG_SHAPES {
         let popupAnchor_1: number[];
         export { popupAnchor_1 as popupAnchor };
         let shadow_1: {
-            [x: string]: {
+            [HIGHLIGHT_STATUS.NONE]: {
+                svg: any;
+                size: number[];
+                anchor: number[];
+            };
+            [HIGHLIGHT_STATUS.HIGHLIGHT]: {
+                svg: any;
+                size: number[];
+                anchor: number[];
+            };
+            [HIGHLIGHT_STATUS.SELECT]: {
                 svg: any;
                 size: number[];
                 anchor: number[];
@@ -408,7 +428,17 @@ export namespace LOCATION_ICON_SVG_SHAPES {
         let popupAnchor_2: number[];
         export { popupAnchor_2 as popupAnchor };
         let shadow_2: {
-            [x: string]: {
+            [HIGHLIGHT_STATUS.NONE]: {
+                svg: any;
+                size: number[];
+                anchor: number[];
+            };
+            [HIGHLIGHT_STATUS.HIGHLIGHT]: {
+                svg: any;
+                size: number[];
+                anchor: number[];
+            };
+            [HIGHLIGHT_STATUS.SELECT]: {
                 svg: any;
                 size: number[];
                 anchor: number[];
@@ -426,7 +456,17 @@ export namespace LOCATION_ICON_SVG_SHAPES {
         let popupAnchor_3: number[];
         export { popupAnchor_3 as popupAnchor };
         let shadow_3: {
-            [x: string]: {
+            [HIGHLIGHT_STATUS.NONE]: {
+                svg: any;
+                size: number[];
+                anchor: number[];
+            };
+            [HIGHLIGHT_STATUS.HIGHLIGHT]: {
+                svg: any;
+                size: number[];
+                anchor: number[];
+            };
+            [HIGHLIGHT_STATUS.SELECT]: {
                 svg: any;
                 size: number[];
                 anchor: number[];
@@ -1829,7 +1869,8 @@ export function getDefaultState(): {
     view: {
         current: null;
         initialized: {
-            [x: string]: boolean;
+            [VIEWS.MAP]: boolean;
+            [VIEWS.TABLE]: boolean;
         };
     };
     neonContextHydrated: boolean;
@@ -1859,7 +1900,8 @@ export function getDefaultState(): {
     table: {
         focus: any;
         availableFeatureTypes: {
-            [x: number]: boolean;
+            [FEATURE_TYPES.SITES.KEY]: boolean;
+            [FEATURE_TYPES.LOCATIONS.KEY]: boolean;
         };
         fullHeight: boolean;
         maxBodyHeight: null;
@@ -1890,7 +1932,8 @@ export function getDefaultState(): {
         changed: boolean;
         onChange: () => void;
         derived: {
-            [x: number]: {};
+            [FEATURES.STATES.KEY]: {};
+            [FEATURES.DOMAINS.KEY]: {};
         };
     };
     featureDataFetchesHasAwaiting: boolean;

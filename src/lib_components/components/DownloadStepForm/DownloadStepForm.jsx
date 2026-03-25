@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unstable-nested-components */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
@@ -800,7 +799,6 @@ const DownloadStepForm = (inProps) => {
               <div className={classes.radioLabel}>
                 <Typography variant="h6">Basic</Typography>
                 <ComponentErrorBoundary
-                  // eslint-disable-next-line react/no-unstable-nested-components
                   fallbackComponent={() => ((
                     <MarkdownFallbackComponent content={productBasicDescription} />
                   ))}
@@ -824,7 +822,6 @@ const DownloadStepForm = (inProps) => {
               <div className={classes.radioLabel}>
                 <Typography variant="h6">Expanded</Typography>
                 <ComponentErrorBoundary
-                  // eslint-disable-next-line react/no-unstable-nested-components
                   fallbackComponent={() => ((
                     <MarkdownFallbackComponent content={productExpandedDescription} />
                   ))}

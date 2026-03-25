@@ -67,7 +67,8 @@ declare function useSiteMapContext(): {
     view: {
         current: null;
         initialized: {
-            [x: string]: boolean;
+            [VIEWS.MAP]: boolean;
+            [VIEWS.TABLE]: boolean;
         };
     };
     neonContextHydrated: boolean;
@@ -97,7 +98,8 @@ declare function useSiteMapContext(): {
     table: {
         focus: any;
         availableFeatureTypes: {
-            [x: number]: boolean;
+            [FEATURE_TYPES.SITES.KEY]: boolean;
+            [FEATURE_TYPES.LOCATIONS.KEY]: boolean;
         };
         fullHeight: boolean;
         maxBodyHeight: null;
@@ -128,7 +130,8 @@ declare function useSiteMapContext(): {
         changed: boolean;
         onChange: () => void;
         derived: {
-            [x: number]: {};
+            [FEATURES.STATES.KEY]: {};
+            [FEATURES.DOMAINS.KEY]: {};
         };
     };
     featureDataFetchesHasAwaiting: boolean;
@@ -159,7 +162,8 @@ declare function useSiteMapContext(): {
     view: {
         current: null;
         initialized: {
-            [x: string]: boolean;
+            [VIEWS.MAP]: boolean;
+            [VIEWS.TABLE]: boolean;
         };
     };
     neonContextHydrated: boolean;
@@ -189,7 +193,8 @@ declare function useSiteMapContext(): {
     table: {
         focus: any;
         availableFeatureTypes: {
-            [x: number]: boolean;
+            [FEATURE_TYPES.SITES.KEY]: boolean;
+            [FEATURE_TYPES.LOCATIONS.KEY]: boolean;
         };
         fullHeight: boolean;
         maxBodyHeight: null;
@@ -220,7 +225,8 @@ declare function useSiteMapContext(): {
         changed: boolean;
         onChange: () => void;
         derived: {
-            [x: number]: {};
+            [FEATURES.STATES.KEY]: {};
+            [FEATURES.DOMAINS.KEY]: {};
         };
     };
     featureDataFetchesHasAwaiting: boolean;
@@ -252,3 +258,5 @@ import { SORT_DIRECTIONS } from './SiteMapUtils';
 import { VIEWS } from './SiteMapUtils';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FEATURE_TYPES } from './SiteMapUtils';
+import { FEATURES } from './SiteMapUtils';

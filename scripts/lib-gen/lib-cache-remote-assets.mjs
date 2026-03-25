@@ -240,7 +240,7 @@ const makeMinimizedFilename = (name) => {
 };
 
 const writeContent = async (key, content, fileNameResult) => {
-  const { fileName, hash } = fileNameResult;
+  const { fileName } = fileNameResult;
   const destination = path.join(CACHED_REMOTE_ASSETS_PATH, fileName);
   switch (key) {
     case REMOTE_ASSETS_CACHE.DRUPAL_THEME_CSS.KEY:
@@ -361,6 +361,7 @@ Object.keys(REMOTE_ASSETS_CACHE)
         return res.text();
       })
       .then((res) => (
+        // eslint-disable-next-line no-unused-vars
         new Promise((resolve, reject) => {
           processContent(key, name, res, resolve);
         })

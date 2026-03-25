@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid */
-
 import React, { useEffect, useReducer, useState } from 'react';
 
 import { of, map, catchError } from 'rxjs';

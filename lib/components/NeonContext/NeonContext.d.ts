@@ -437,10 +437,15 @@ declare function useNeonContextState(): ({
         domainSites: {};
     };
     html: {
-        [x: number]: null;
+        [DRUPAL_HEADER_HTML]: null;
+        [DRUPAL_FOOTER_HTML]: null;
     };
     fetches: {
-        [x: number]: {
+        [DRUPAL_HEADER_HTML]: {
+            status: null;
+            error: null;
+        };
+        [DRUPAL_FOOTER_HTML]: {
             status: null;
             error: null;
         };
@@ -870,10 +875,15 @@ declare function useNeonContextState(): ({
         domainSites: {};
     };
     html: {
-        [x: number]: null;
+        [DRUPAL_HEADER_HTML]: null;
+        [DRUPAL_FOOTER_HTML]: null;
     };
     fetches: {
-        [x: number]: {
+        [DRUPAL_HEADER_HTML]: {
+            status: null;
+            error: null;
+        };
+        [DRUPAL_FOOTER_HTML]: {
             status: null;
             error: null;
         };
@@ -920,10 +930,15 @@ declare namespace DEFAULT_STATE {
         export let domainSites: {};
     }
     let html: {
-        [x: number]: null;
+        [DRUPAL_HEADER_HTML]: null;
+        [DRUPAL_FOOTER_HTML]: null;
     };
     let fetches: {
-        [x: number]: {
+        [DRUPAL_HEADER_HTML]: {
+            status: null;
+            error: null;
+        };
+        [DRUPAL_FOOTER_HTML]: {
             status: null;
             error: null;
         };
@@ -963,6 +978,8 @@ declare namespace ProviderPropTypes {
     let whenFinal: PropTypes.Requireable<(...args: any[]) => any>;
 }
 import React from 'react';
+declare const DRUPAL_HEADER_HTML: any;
+declare const DRUPAL_FOOTER_HTML: any;
 import statesJSON from '../../staticJSON/states.json';
 import domainsJSON from '../../staticJSON/domains.json';
 import timeSeriesDataProductsJSON from '../../staticJSON/timeSeriesDataProducts.json';

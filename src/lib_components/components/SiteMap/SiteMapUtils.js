@@ -1639,14 +1639,12 @@ const SelectionLimitPropType = (props, propName) => {
       prop.length !== 2 || !prop.every((x) => Number.isInteger(x) && x > 0) || prop[0] >= prop[1]
     ) {
       return new Error(
-        // eslint-disable-next-line max-len
         `When setting ${propName} as an array it must contain exactly two distinct non-zero positive integers in ascending order (e.g. [2, 5])`,
       );
     }
     return null;
   }
   return new Error(
-    // eslint-disable-next-line max-len
     `${propName} must be null, a positive non-zero integer, or an array of two ascending non-zero positive integers.`,
   );
 };

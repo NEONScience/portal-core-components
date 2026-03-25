@@ -1081,7 +1081,7 @@ const SiteMapLeaflet = () => {
         whenReady={invalidateSize}
         data-component="SiteMap"
         data-selenium="sitemap-content-map"
-        tap={false}
+        // tap={false}
         worldCopyJump
         style={{
           paddingBottom: `${(state.aspectRatio.currentValue || 0.75) * 100}%`,

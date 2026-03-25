@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 /**
  * Determines if the base string starts with the search string
  * @param {*} baseString

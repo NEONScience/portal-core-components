@@ -1270,10 +1270,8 @@ const SiteMapContainer = (inProps) => {
   let legendContainerClassName = classes.legendContainer;
   let viewLegendButtonsContainerClassName = classes.viewLegendButtonsContainer;
   if (fullscreen) {
-    /* eslint-disable max-len */
     legendContainerClassName = `${classes.legendContainer} ${classes.legendContainerFullscreen}`;
     viewLegendButtonsContainerClassName = `${classes.viewLegendButtonsContainer} ${classes.viewLegendButtonsContainerFullscreen}`;
-    /* eslint-enable max-len */
   }
   return (
     <div {...containerProps} aria-describedby={progressId}>

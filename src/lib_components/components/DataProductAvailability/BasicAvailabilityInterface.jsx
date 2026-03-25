@@ -171,7 +171,6 @@ const BasicAvailabilityInterface = (inProps) => {
      Contain and sort the availability data.
      Afford different methods for presenting/grouping data along the y-axis (geospatial)
   */
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const views = {
     summary: {
       view: 'summary',
@@ -346,7 +345,6 @@ const BasicAvailabilityInterface = (inProps) => {
     setCurrentView(newView);
   };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   let sortedSites = [];
   const applySort = () => {
     if (currentView !== 'ungrouped') { return; }
@@ -866,7 +864,6 @@ const BasicAvailabilityInterface = (inProps) => {
 };
 
 BasicAvailabilityInterface.propTypes = {
-  // eslint-disable-line react/no-unused-prop-types
   siteCodes: AvailabilityPropTypes.basicSiteCodes,
   dataProducts: AvailabilityPropTypes.dataProducts,
   view: PropTypes.oneOf(['summary', 'sites', 'states', 'domains', 'ungrouped', 'products']),

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ES2022",
     "lib": [
       "dom",
       "dom.iterable",
@@ -37,11 +37,6 @@
     "./src/**/*",
     "./src/*.d.ts",
     "./next-env.d.ts",
-    "./next.config.mjs",
-    "./scripts/**/*",
-    "./test/**/*",
-    "./jest.config.mjs",
-    "./server.mjs",
     ".next/types/**/*.ts",
     "build/types/**/*.ts"
   ],
@@ -49,6 +44,12 @@
     "./src/lib_components/**/*.d.ts",
     "./node_modules",
     "./lib",
-    "./test-coverage"
+    "./test-coverage",
+    "./eslint.config.mjs",
+    "./next.config.mjs",
+    "./scripts/**/*",
+    "./test/**/*",
+    "./jest.config.mjs",
+    "./server.mjs"
   ]
 }

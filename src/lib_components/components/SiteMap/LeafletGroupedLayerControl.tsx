@@ -150,8 +150,12 @@ const LeafletGroupedLayerControl: React.FC<LeafletGroupedLayerControlProps> = (
   const isPortalMode: boolean = (renderToLeafletControlContainer === true);
   const controlPositionClass: string = getControlClassFromPosition(position);
   const containerNode: HTMLElement = map.getContainer();
-  const portalNodes: HTMLCollectionOf<Element> = containerNode.getElementsByClassName(controlPositionClass);
-  const hasPortalNode: boolean = exists(portalNodes) && (portalNodes.length > 0) && exists(portalNodes[0]);
+  const portalNodes: HTMLCollectionOf<Element> = containerNode.getElementsByClassName(
+    controlPositionClass,
+  );
+  const hasPortalNode: boolean = exists(portalNodes)
+    && (portalNodes.length > 0)
+    && exists(portalNodes[0]);
 
   const handleMainDivMouseEnter = () => {
     if (!open) {

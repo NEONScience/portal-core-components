@@ -309,7 +309,6 @@ const NeonApi = {
     getJsonObservable(`${NeonEnvironment.getFullApiPath('prototype')}/datasets/${uuid}`)
   ),
   getPrototypeManifestRollupObservable: (uuid) => (
-    // eslint-disable-next-line max-len
     getJsonObservable(`${NeonEnvironment.getFullDownloadApiPath('prototypeManifestRollup')}?uuid=${uuid}`)
   ),
   getPrototypeDataFileObservable: (uuid, fileName) => (

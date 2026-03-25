@@ -564,7 +564,7 @@ const determineDateTimeVariable = (variables, timeStep) => {
   }
   if (dateTimeVars.length > 0) {
     dateTimeVars.sort((a, b) => sortDateTimeVariables(variables, a, b));
-    const determinedDateTimeVar = dateTimeVars[0]; // eslint-disable-line prefer-destructuring
+    const determinedDateTimeVar = dateTimeVars[0];
     checkDateTimeVariable(determinedDateTimeVar);
     return determinedDateTimeVar;
   }
@@ -1810,7 +1810,6 @@ const Provider = (inProps) => {
         const { downloadPkg } = state.variables[variable];
         positions.forEach((position) => {
           continuousDateRange.forEach((month) => {
-            // eslint-disable-next-line max-len
             const path = `sites['${siteCode}'].positions['${position}'].data['${month}']['${downloadPkg}']['${timeStep}']`;
             const timeStepTables = lodashGet(state.product, path, {});
             Object.keys(timeStepTables).forEach((tableName) => {

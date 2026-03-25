@@ -1,5 +1,3 @@
-/* eslint-disable max-len, no-unused-vars, prefer-destructuring */
-
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
@@ -77,8 +75,7 @@ export default function EnhancedAvailabilityKey(inProps) {
 
   const statusSvgs = {};
   Object.keys(VALID_ENHANCED_STATUSES).forEach((status) => {
-    const label = VALID_ENHANCED_STATUSES[status].title;
-    const description = VALID_ENHANCED_STATUSES[status].description;
+    const { title: label, description } = VALID_ENHANCED_STATUSES[status];
     const statusSvgWidth = (label.length * labelLetterWidth) + statusLabelX;
     statusSvgs[status] = (
       <div className={classes.keyElement} title={description} {...dialogOpenerProps}>

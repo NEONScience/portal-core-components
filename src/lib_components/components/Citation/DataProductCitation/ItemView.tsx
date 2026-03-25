@@ -219,9 +219,9 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
         );
         latestAvailableReleaseBlurb = (
           <>
-            {/* eslint-disable react/jsx-one-expression-per-line, max-len */}
+            {/* eslint-disable react/jsx-one-expression-per-line */}
             has been replaced by a {dataProductDetailLink} and&nbsp;
-            {/* eslint-enable react/jsx-one-expression-per-line, max-len */}
+            {/* eslint-enable react/jsx-one-expression-per-line */}
           </>
         );
       }
@@ -233,12 +233,12 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
     );
     const tombstoneNote: React.JSX.Element = (
       <>
-        {/* eslint-disable react/jsx-one-expression-per-line, max-len */}
+        {/* eslint-disable react/jsx-one-expression-per-line */}
         <b>{citationRelease.release}</b> of this data product
         {doiDisplay} {latestAvailableReleaseBlurb}is no longer available for download.
         If this specific release is needed for research purposes, please fill out
         the {contactUsLink} form.
-        {/* eslint-enable react/jsx-one-expression-per-line, max-len */}
+        {/* eslint-enable react/jsx-one-expression-per-line */}
       </>
     );
     return (
@@ -418,50 +418,51 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
               </Button>
             </Tooltip>
           </CopyToClipboard>
-          {DataCiteService.getDataProductFormats().map((format: CitationFormat): React.JSX.Element => {
-            const key: string = Service.buildCitationDownloadKey(
-              citationProduct,
-              release,
-              format.shortName,
-              provisional,
-            );
-            const isDownloading: boolean = !exists(citationDownloadsFetchStatus[key])
-              ? false
-              : citationDownloadsFetchStatus[key].status === FetchStatus.FETCHING;
-            return (
-              <Tooltip
-                key={format.shortName}
-                placement="bottom-start"
-                title={(
-                  `Click to download the ${citationProduct.productCode}/${release} citation as a `
-                    + `file in ${format.longName} format`
-                )}
-              >
-                <span>
-                  <Button
-                    size="small"
-                    color="primary"
-                    variant="outlined"
-                    className={classes.cardButton}
-                    disabled={isDownloading || isSectionDownloading}
-                    startIcon={isDownloading
-                      ? <CircularProgress size={18} className={classes.cardButtonIcon} />
-                      : <DownloadIcon fontSize="small" className={classes.cardButtonIcon} />}
-                    onClick={() => {
-                      handleCitationDownloadCb(
-                        citationProduct,
-                        release,
-                        format.shortName,
-                        provisional,
-                      );
-                    }}
-                  >
-                    {`Download (${format.shortName})`}
-                  </Button>
-                </span>
-              </Tooltip>
-            );
-          })}
+          {DataCiteService.getDataProductFormats()
+            .map((format: CitationFormat): React.JSX.Element => {
+              const key: string = Service.buildCitationDownloadKey(
+                citationProduct,
+                release,
+                format.shortName,
+                provisional,
+              );
+              const isDownloading: boolean = !exists(citationDownloadsFetchStatus[key])
+                ? false
+                : citationDownloadsFetchStatus[key].status === FetchStatus.FETCHING;
+              return (
+                <Tooltip
+                  key={format.shortName}
+                  placement="bottom-start"
+                  title={(
+                    `Click to download the ${citationProduct.productCode}/${release} citation as a `
+                      + `file in ${format.longName} format`
+                  )}
+                >
+                  <span>
+                    <Button
+                      size="small"
+                      color="primary"
+                      variant="outlined"
+                      className={classes.cardButton}
+                      disabled={isDownloading || isSectionDownloading}
+                      startIcon={isDownloading
+                        ? <CircularProgress size={18} className={classes.cardButtonIcon} />
+                        : <DownloadIcon fontSize="small" className={classes.cardButtonIcon} />}
+                      onClick={() => {
+                        handleCitationDownloadCb(
+                          citationProduct,
+                          release,
+                          format.shortName,
+                          provisional,
+                        );
+                      }}
+                    >
+                      {`Download (${format.shortName})`}
+                    </Button>
+                  </span>
+                </Tooltip>
+              );
+            })}
         </CardActions>
         {downloadStatus}
       </Card>
