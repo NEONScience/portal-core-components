@@ -573,14 +573,39 @@ const NeonPage = (props) => {
   // Handle a successful response from the notifications endpoint
   const handleFetchNotificationsSuccess = (response) => {
     setFetchNotificationsStatus('success');
+
+    // *** MOCKING LIFERAY MESSAGE TO ENSURE COMPATIBILITY WITH expiringApiToken ***
+    // *** REMOVE AFTER TESTING! ***
+    response.notifications = ['this is a liferay notification test'];
+
     if (!Array.isArray(response.notifications)) { return; }
-    setNotifications(
-      response.notifications.map((message) => {
+    setNotifications((n) => {
+      const allNotifications = n.concat(response.notifications.map((message) => {
         const id = generateNotificationId(message);
         const dismissed = notificationDismissals.includes(id);
         return { id, message, dismissed };
-      }),
-    );
+      }));
+      return allNotifications;
+    });
+  };
+
+  const handleUserInfoFetchNotificationsSuccess = (response) => {
+    setFetchNotificationsStatus('success');
+    // verifies user is logged in
+    if (!response?.data?.user) { return; }
+
+    // *** MOCK expiringApiToken.  REMOVE WHEN IMPLEMENTED ON BACKEND! ***
+    response.data.expiringApiToken = true;
+
+    if (response.data.expiringApiToken) {
+      const message = 'Your token has expired.  Please reach out to NEON to renew.';
+      const id = generateNotificationId(message);
+      const dismissed = notificationDismissals.includes(id);
+      setNotifications((n) => {
+        n.push({ id, message, dismissed });
+        return n;
+      });
+    }
   };
 
   // If the endpoint fails don't bother with any visible error. Just let it go.
@@ -609,6 +634,15 @@ const NeonPage = (props) => {
     getJson(
       getLiferayNotificationsApiPath(),
       handleFetchNotificationsSuccess,
+      handleFetchNotificationsError,
+      cancellationSubject$,
+      undefined,
+      true,
+    );
+
+    getJson(
+      NeonEnvironment.getFullAuthPath('userInfo'),
+      handleUserInfoFetchNotificationsSuccess,
       handleFetchNotificationsError,
       cancellationSubject$,
       undefined,
