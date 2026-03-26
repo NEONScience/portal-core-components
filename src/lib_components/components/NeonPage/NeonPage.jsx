@@ -597,7 +597,7 @@ const NeonPage = (props) => {
     // *** MOCK expiringApiToken.  REMOVE WHEN IMPLEMENTED ON BACKEND! ***
     response.data.expiringApiToken = true;
 
-    if (response.data.expiringApiToken) {
+    if (response.data?.expiringApiToken) {
       const message = 'Your token has expired.  Please reach out to NEON to renew.';
       const id = generateNotificationId(message);
       const dismissed = notificationDismissals.includes(id);
