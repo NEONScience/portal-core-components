@@ -676,8 +676,7 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
         ContainerComponent={containerComponent}
         ContainerProps={{ className: classes.listItemContainer }}
         title={makeDownloadableLink ? `Click to download ${document.name}` : undefined}
-        // @ts-ignore
-        button={makeDownloadableLink}
+        button={makeDownloadableLink as any}
         onClick={!makeDownloadableLink ? undefined : (): void => {
           handleDownloadStarted();
           DocumentService.downloadDocument(
@@ -688,7 +687,6 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
         }}
       >
         <ListItemIcon className={classes.listItemIcon}>
-          {/* @ts-ignore */}
           <TypeIcon />
         </ListItemIcon>
         <ListItemText

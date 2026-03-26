@@ -8,6 +8,7 @@ import {
   catchError,
   delay,
   tap,
+  ObservableInput,
 } from 'rxjs';
 
 import SockJS from 'sockjs-client';
@@ -521,8 +522,7 @@ const AuthService: IAuthService = {
             };
           }
         }),
-        // @ts-ignore
-        catchError((error: any) => {
+        catchError((error: any): ObservableInput<any> => {
           console.error(error); // eslint-disable-line no-console
           try {
             // Clean up iframe
@@ -537,6 +537,7 @@ const AuthService: IAuthService = {
           } catch (e) {
             console.error(e); // eslint-disable-line no-console
           }
+          return of(error);
         }),
       )
       .subscribe();

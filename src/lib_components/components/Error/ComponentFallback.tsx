@@ -6,13 +6,10 @@ import Grid from '@mui/material/Grid';
 
 import ErrorCard from '../Card/ErrorCard';
 
-interface ComponentFallbackProps extends FallbackProps {
-}
-
-const ComponentFallback: React.FC<ComponentFallbackProps> = (
-  props: ComponentFallbackProps,
+const ComponentFallback: React.FC<FallbackProps> = (
+  props: FallbackProps,
 ): React.JSX.Element => {
-  const { error, resetErrorBoundary }: ComponentFallbackProps = props;
+  const { error, resetErrorBoundary }: FallbackProps = props;
   // eslint-disable-next-line no-console
   console.error(error);
   return (

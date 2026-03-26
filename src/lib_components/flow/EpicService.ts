@@ -268,8 +268,7 @@ const EpicService: IEpicService = {
       takeUntilOperator = takeUntil(action$.pipe(ofType(takeUntilTypeFilter)));
     }
     return action$.pipe(
-      // @ts-ignore
-      ofType.apply(ofType, ofTypeFilters),
+      ofType.apply(ofType, ofTypeFilters as any) as any,
       switchMap((action: A) => concat(
         of(workingAction({ action })),
         EpicService.createAjaxObservable(
@@ -309,8 +308,7 @@ const EpicService: IEpicService = {
       takeUntilOperator = takeUntil(action$.pipe(ofType(takeUntilTypeFilter)));
     }
     return action$.pipe(
-      // @ts-ignore
-      ofType.apply(ofType, ofTypeFilters),
+      ofType.apply(ofType, ofTypeFilters as any) as any,
       mergeMap((action: A) => concat(
         of(workingAction({ action })),
         EpicService.createAjaxObservable(

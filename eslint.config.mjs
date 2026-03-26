@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url';
 
 import { defineConfig } from 'eslint/config';
 import { FlatCompat } from '@eslint/eslintrc';
+import eslint from '@eslint/js';
 import globals from 'globals';
 
 import tsParser from '@typescript-eslint/parser';
@@ -47,11 +48,29 @@ const settings = {
   },
 };
 const jsRules = {
+  ...eslint.configs.recommended.rules,
+};
+const rules = {
+  ...jsRules,
+  ...tsPlugin.configs.recommended.rules,
+  ...jsxA11yPlugin.configs.recommended.rules,
+  ...importPlugin.configs.recommended.rules,
+  ...reactPlugin.configs.recommended.rules,
+  // ...reactHooksPlugin.configs.recommended.rules,
   ...nextPlugin.configs.recommended.rules,
   ...nextPlugin.configs['core-web-vitals'].rules,
 
   '@next/next/no-img-element': 'off',
 
+  '@typescript-eslint/no-shadow': 'error',
+  '@typescript-eslint/no-use-before-define': 'warn',
+  '@typescript-eslint/no-unused-vars': 'off',
+  '@typescript-eslint/no-explicit-any': 'off',
+
+  'import/no-extraneous-dependencies': [
+    'error',
+    { packageDir: './' },
+  ],
   'import/extensions': [
     'error',
     'ignorePackages',
@@ -62,35 +81,22 @@ const jsRules = {
       tsx: 'never',
     },
   ],
-  'import/no-relative-packages': 0,
+  'import/no-relative-packages': 'off',
 
-  'react/function-component-definition': 0,
-  'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
-  'react/jsx-props-no-spreading': 0,
-  'react/no-unknown-property': ['error', { ignore: ['css'] }],
+  'react/function-component-definition': 'off',
+  'react/display-name': 'off',
+  'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
+  'react/jsx-props-no-spreading': 'off',
   'react/require-default-props': 'off',
-  'react/jsx-uses-react': 'off',
-  'react/react-in-jsx-scope': 'off',
 
   'linebreak-style': ['error', 'unix'],
-  'no-restricted-exports': 0,
   'no-shadow': 'off',
+  'no-restricted-exports': 'off',
   'no-unused-vars': 'off',
-};
-const tsRules = {
-  ...jsRules,
-
-  '@typescript-eslint/no-shadow': 'error',
-  '@typescript-eslint/no-use-before-define': 'warn',
-
-  'import/no-extraneous-dependencies': [
-    'error',
-    { packageDir: './' },
-  ],
 };
 
 export default defineConfig([
-  ...compat.extends('airbnb', 'plugin:jsx-a11y/recommended'),
+  ...compat.extends('airbnb'),
   {
     ignores: [
       'src/lib_components/**/*.d.ts',
@@ -122,6 +128,7 @@ export default defineConfig([
     plugins: jsPlugins,
     settings,
     rules: {
+      ...jsRules,
       'import/no-extraneous-dependencies': [
         'error',
         { packageDir: './', devDependencies: true },
@@ -149,12 +156,12 @@ export default defineConfig([
     },
     plugins: tsPlugins,
     settings,
-    rules: tsRules,
+    rules,
   },
   {
     files: ['src/lib_components/workers/*.js'],
     rules: {
-      'prefer-object-spread': 0,
+      'prefer-object-spread': 'off',
     },
   },
   {

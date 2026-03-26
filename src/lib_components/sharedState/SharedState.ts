@@ -16,8 +16,7 @@ const useSharedState = <T>(subject: BehaviorSubject<T>): [T, typeof useState] =>
     return () => subscription.unsubscribe();
   }, [subject]);
   const setDistributedState = (state: T) => subject.next(state);
-  // @ts-ignore
-  return [value, setDistributedState];
+  return [value, setDistributedState as any];
 };
 
 export default useSharedState;

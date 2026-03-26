@@ -257,11 +257,11 @@ const NeonEnvironment: INeonEnvironment = {
       // @ts-ignore
       return self.NEON_SERVER_DATA ? self.NEON_SERVER_DATA : null;
     }
-    /* eslint-enable */
     if (typeof window === 'object') {
       // @ts-ignore
       return window.NEON_SERVER_DATA ? window.NEON_SERVER_DATA : null;
     }
+    /* eslint-enable */
     return null;
   },
 

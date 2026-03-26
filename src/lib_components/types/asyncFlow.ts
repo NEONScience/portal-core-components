@@ -4,7 +4,7 @@ import { Nullable } from './core';
 /**
  * State shapes
  */
-export interface AsyncState<T extends any> {
+export interface AsyncState<T> {
   asyncState: AsyncStateType;
   data: T;
   error: Nullable<ErrorState>;
@@ -79,7 +79,7 @@ export type AsyncActionErrorFunction = (
 /**
  * Parser function declaration for parsing the raw response to types result data
  */
-export type ParserFunction<T extends any> = (data: any) => T;
+export type ParserFunction<T> = (data: any) => T;
 
 /**
  * Core set of flow actions
@@ -102,7 +102,7 @@ export interface AsyncFlowActionTypes extends CoreAsyncFlowActionTypes {
 /**
  * Async flow handler declaration
  */
-export interface CoreAsyncFlowHandler<T extends any> {
+export interface CoreAsyncFlowHandler<T> {
   asyncWorkingAction: AsyncActionFunction;
   asyncCompletedAction: AsyncActionCompletedFunction;
   asyncErrorAction: AsyncActionErrorFunction;
@@ -112,7 +112,7 @@ export interface CoreAsyncFlowHandler<T extends any> {
 /**
  * Async flow handler declaration
  */
-export interface AsyncFlowHandler<S, A extends AsyncActionType, T extends any>
+export interface AsyncFlowHandler<S, A extends AsyncActionType, T>
     extends CoreAsyncFlowHandler<T> {
   asyncAction: AsyncActionFunction;
   reducer: Reducer<S, A>;

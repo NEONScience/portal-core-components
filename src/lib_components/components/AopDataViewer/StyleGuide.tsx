@@ -1,4 +1,4 @@
-/* eslint react/jsx-one-expression-per-line: 0 */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 
 import React, { useReducer, useEffect, useState } from 'react';
 

@@ -223,8 +223,7 @@ const WindRose: React.FC = (): React.JSX.Element => {
       .data((d: any) => d)
       .enter()
       .append('path')
-      // @ts-ignore
-      .attr('d', arcPath)
+      .attr('d', arcPath as any)
       .attr('transform', () => `rotate(${angleOffset})`);
 
     const label = g.append('g')
@@ -318,8 +317,7 @@ const WindRose: React.FC = (): React.JSX.Element => {
     legend.append('rect')
       .attr('width', 18)
       .attr('height', 18)
-      // @ts-ignore
-      .attr('fill', z);
+      .attr('fill', z as any);
 
     legend.append('text')
       .attr('x', 24)

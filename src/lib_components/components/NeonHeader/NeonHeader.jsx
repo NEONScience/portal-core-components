@@ -43,6 +43,7 @@ const useStyles = (customize) => {
       '& .header__inner.l--offset-wide': {
         marginRight: '120px !important',
         paddingRight: '0px !important',
+        maxWidth: 'unset !important',
       },
       '& .header__inner.l--offset-wide > .authContainer': {
         display: 'none !important',

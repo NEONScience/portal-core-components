@@ -25,7 +25,7 @@ import {
 } from '../types/asyncFlow';
 
 export interface IAsyncFlowProvider {
-  create: <S extends AnyObject, A extends AsyncActionType, T extends any>(
+  create: <S extends AnyObject, A extends AsyncActionType, T>(
       actionTypes: AsyncFlowActionTypes,
       parserFunction: ParserFunction<T>,
       ignoreWhenDevEnv?: boolean,
@@ -49,7 +49,7 @@ class AsyncFlowProvider implements IAsyncFlowProvider {
    * @param action The current action to apply reduction for
    * @return The updated state
    */
-  protected createCoreReducer = <S extends AnyObject, A extends AsyncActionType, T extends any>(
+  protected createCoreReducer = <S extends AnyObject, A extends AsyncActionType, T>(
     actionTypes: CoreAsyncFlowActionTypes,
     parserFunction: ParserFunction<T>,
     state: S | undefined,
@@ -109,7 +109,7 @@ class AsyncFlowProvider implements IAsyncFlowProvider {
    * @param parserFunction The parser function for the flow
    * @return The decorated core flow reducer
    */
-  protected createAsyncFlowReducer = <S extends object, A extends AsyncActionType, T extends any>(
+  protected createAsyncFlowReducer = <S extends object, A extends AsyncActionType, T>(
     actionTypes: AsyncFlowActionTypes,
     parserFunction: ParserFunction<T>,
   ): Reducer<S, A> => ((
@@ -136,7 +136,7 @@ class AsyncFlowProvider implements IAsyncFlowProvider {
    * @param parserFunction The parser function to apply
    * @return The set of action creators
    */
-  protected createCoreAsyncFlowActions = <T extends any>(
+  protected createCoreAsyncFlowActions = <T>(
     actionTypes: CoreAsyncFlowActionTypes,
     parserFunction: ParserFunction<T>,
   ): CoreAsyncFlowHandler<T> => {
@@ -174,7 +174,7 @@ class AsyncFlowProvider implements IAsyncFlowProvider {
    * @param ignoreWhenDevEnv Optionally execute the flow
    * @returns The decorated async flow handler
    */
-  public create = <S extends object, A extends AsyncActionType, T extends any>(
+  public create = <S extends object, A extends AsyncActionType, T>(
     actionTypes: AsyncFlowActionTypes,
     parserFunction: ParserFunction<T>,
     ignoreWhenDevEnv?: boolean,
