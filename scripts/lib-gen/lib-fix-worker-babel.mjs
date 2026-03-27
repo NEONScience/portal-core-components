@@ -50,7 +50,9 @@ workers.forEach((worker) => {
     // Store lines before entering the worker and note when we do enter it
     if (!workerEntered) {
       preLines.push(line);
-      if (/^\s*return [_a-zA-Z0-9]+\.spawn\((?<funcDef>function \(.*\)|.+ =>) \{$/.test(line)) {
+      const spawnTestBabel = /^\s*return [_a-zA-Z0-9]+\.spawn\((?<funcDef>function \(.*\)|.+ =>) \{$/.test(line);
+      const spawnTestSwc = /^\s*return [_a-zA-Z0-9]+\.spawn\((?<funcDef>function \(.*\)|.+=>)\{$/.test(line);
+      if (spawnTestBabel || spawnTestSwc) {
         workerEntered = true;
       }
       return;

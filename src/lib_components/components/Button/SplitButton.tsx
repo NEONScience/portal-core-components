@@ -43,6 +43,7 @@ const SplitButton: React.FC<SplitButtonProps> = (props: SplitButtonProps): React
   const [open, setOpen] = useState(false);
   const [stateSelectedOption, setStateSelectedOption] = useState(selectedOption);
   const anchorRef = useRef<HTMLDivElement>(null);
+  const [anchorRefEl, setAnchorRefEl] = useState<HTMLElement | null>(null);
   let appliedButtonGroupProps: ButtonGroupProps = {
     variant: 'outlined',
     color: 'primary',
@@ -65,10 +66,9 @@ const SplitButton: React.FC<SplitButtonProps> = (props: SplitButtonProps): React
     appliedButtonMenuProps = buttonMenuProps as ButtonProps;
   }
 
-  useEffect(() => {
-    if (selectedOption === stateSelectedOption) return;
+  if (selectedOption !== stateSelectedOption) {
     setStateSelectedOption(selectedOption);
-  }, [selectedOption, stateSelectedOption]);
+  }
 
   const handleClick = (): void => {
     onClick(stateSelectedOption);
@@ -82,6 +82,7 @@ const SplitButton: React.FC<SplitButtonProps> = (props: SplitButtonProps): React
     setOpen(false);
   };
   const handleToggle = (): void => {
+    setAnchorRefEl(anchorRef.current);
     setOpen((prevOpen) => !prevOpen);
   };
   const handleClose = (event: MouseEvent | TouchEvent): void => {
@@ -126,7 +127,7 @@ const SplitButton: React.FC<SplitButtonProps> = (props: SplitButtonProps): React
         </ButtonGroup>
         <Popper
           transition
-          anchorEl={anchorRef.current}
+          anchorEl={anchorRefEl}
           open={open}
           role={undefined}
         >

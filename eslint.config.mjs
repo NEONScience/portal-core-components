@@ -139,7 +139,7 @@ export default defineConfig([
     files: ['src/**/*.{ts,tsx,js,jsx}'],
     languageOptions: {
       parser: tsParser,
-      ecmaVersion: 2022,
+      ecmaVersion: 'latest',
       sourceType: 'module',
       parserOptions: {
         project: './tsconfig.json',
