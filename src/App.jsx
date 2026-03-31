@@ -18,6 +18,9 @@ const BasicComponents = React.lazy(
 const AopDataViewerStyleGuide = React.lazy(
   () => import('./lib_components/components/AopDataViewer/StyleGuide'),
 );
+const AopGEEDataViewerStyleGuide = React.lazy(
+  () => import('./lib_components/components/AopGEEDataViewer/StyleGuide'),
+);
 const CardStyleGuide = React.lazy(
   () => import('./lib_components/components/Card/StyleGuide'),
 );
@@ -130,6 +133,15 @@ const sidebarLinks = [
     component: () => (
       <Suspense fallback={<SuspenseFallback />}>
         <AopDataViewerStyleGuide />
+      </Suspense>
+    ),
+  },
+  {
+    name: 'AOP Google Earth Engine Data Viewer',
+    hash: '#AopGEEDataViewer',
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
+        <AopGEEDataViewerStyleGuide />
       </Suspense>
     ),
   },
